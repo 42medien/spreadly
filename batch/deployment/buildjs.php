@@ -8,22 +8,18 @@
  */
 
 
-require_once(dirname(__FILE__).'/../config/ProjectConfiguration.class.php');
-require_once(dirname(__FILE__).'/../lib/vendor/jsmin.php');
+//require_once(dirname(__FILE__).'/../config/ProjectConfiguration.class.php');
+require_once(dirname(__FILE__).'/../../lib/vendor/jsmin.php');
+require_once(dirname(__FILE__).'/../../lib/utils/FilesystemHelper.php');
 
-$configuration = ProjectConfiguration::getApplicationConfiguration('frontend', 'prod', true);
-include_once(dirname(__FILE__).'/../config/setIncludePath.php');
-sfContext::createInstance($configuration);
+//$configuration = ProjectConfiguration::getApplicationConfiguration('frontend', 'prod', true);
+//include_once(dirname(__FILE__).'/../config/setIncludePath.php');
+//sfContext::createInstance($configuration);
 
-$logger = sfContext::getInstance()->getLogger();
-
-// Initialize database manager.
-$dbManager = new sfDatabaseManager($configuration);
-$dbManager->loadConfiguration();
-
+//$logger = sfContext::getInstance()->getLogger();
 
 // the path to the directory we want to combine and minify
-$lDir = dirname(__FILE__).'/../web/js';
+$lDir = dirname(__FILE__).'/../../web/js';
 
 //generate the filenames by the current release-entry in the app.yml
 //$lFileName = sfConfig::get('app_release_name').'.js';
@@ -44,19 +40,19 @@ writeWholeFile($lDir,$lFileName,$lFileMinName);
  */
 function writeWholeFile($pDir, $pFileName, $pFileMinName) {
 	
-	$lFiles = FilesystemHelper::retrieveFilesInDir(dirname(__FILE__).'/../web/js/test/', array('.svn'), array(), '.js');
+	$lFiles = FilesystemHelper::retrieveFilesInDir(dirname(__FILE__).'/../../web/js/main/include/', array('.svn'), array(), '.js');
   foreach($lFiles as $lFile) {
   	unlink($lFile);	
   }
 	
   //we get all Files we want to combine
-  $lFiles = FilesystemHelper::retrieveFilesInDir($pDir, array('.svn', 'vendor', 'include'), array($pFileName, $pFileMinName), '.js');
+  $lFiles = FilesystemHelper::retrieveFilesInDir($pDir, array('.svn', 'include'), array(), '.js');
   //writes the current needed consolelog-file to the beginning of all scripts
   //$lFiles = handleConsoleLog($pDir, $lFiles);
   //we combine the Files to one file named by given filenname and save it in the include-folder
   combineFiles($lFiles, $pFileName);
   //we minify the combined file and save it in the include-folder by given fileminname
-  minifyFiles(dirname(__FILE__).'/../web/js/test/');
+  minifyFiles(dirname(__FILE__).'/../../web/js/main/include/');
   //echo "build js-File: ".$pFileMinName;
   //echo "\n\r";
 }
@@ -80,7 +76,7 @@ function combineFiles($pFiles, $pFileName) {
   		
   		if(strpos($lValue, '*@combine') !== false) {
   			$lNewName = str_replace('*@combine', "", $lValue).'-'.$pFileName;
-        $lWholeFile = fopen(dirname(__FILE__).'/../web/js/test/'.$lNewName, 'a+');
+        $lWholeFile = fopen(dirname(__FILE__).'/../../web/js/main/include/'.$lNewName, 'a+');
         $lContent = file_get_contents($lMyFile);
         $lDone = fwrite($lWholeFile, $lContent);  
         echo basename($lMyFile)." combined to ".$lNewName; 
