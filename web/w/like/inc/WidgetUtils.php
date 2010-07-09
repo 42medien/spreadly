@@ -69,7 +69,7 @@ class SocialObjectPeer {
 
     // if no data is available, initialize empty array
     if (!$lSocialObjectArray) {
-      self::delegateSocialObjectParsing($pUrl);
+    //  self::delegateSocialObjectParsing($pUrl);
       $lSocialObjectArray = array();
     }
 
