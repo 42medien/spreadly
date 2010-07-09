@@ -9,6 +9,32 @@
     <?php include_javascripts() ?>
   </head>
   <body>
-    <?php echo $sf_content ?>
+    <div id="wrap">
+      <header>
+        <div class="inside">
+          <nav>
+          </nav>
+        </div>
+      </header>
+      
+      <article>
+        <section>
+          <div class="inside">
+            <?php echo $sf_content ?>
+          </div>
+        </section>  
+      </article>
+      
+      <aside>
+        <div class="inside">
+        </div>
+      </aside>
+    </div>
+    
+    <footer>
+      <div class="inside">
+      </div>
+    </footer>        
+    
   </body>
 </html>
