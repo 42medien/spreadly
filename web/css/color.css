@@ -1,1 +1,31 @@
 @CHARSET "UTF-8";
+
+#container{border: 8px #D7D7D7 solid;}
+
+a, a:link, a:hover, a:visited{color: #4EA734;}
+
+
+/* Header */
+#header{background: transparent url("/img/global/yiid-logo.png") 50px 10px no-repeat;border-bottom: 5px #6A6B6A solid;}
+
+/* Content */
+#content{background: transparent url("/img/sprites/sprite_global.png") 0 0 repeat-x;}
+
+/* Content_sub */
+
+/* Content_main */
+
+
+/* Content_supp */
+
+    
+/* Footer */
+
+
+/**
+ * @section Color
+ * @subsection BackgroundColor
+ */
+.bg_light{background-color: #fff;}
+
+.bd_normal_light{border: 1px #ccc solid;}

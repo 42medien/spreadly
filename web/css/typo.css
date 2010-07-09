@@ -1,1 +1,29 @@
 @CHARSET "UTF-8";
+
+/* Site-wide properties ======================================================== */
+body{font: normal normal 10px/10px Tahoma, Arial, Helvetica, Verdana, sans-serif; }
+    
+/* Fibonacci based heading scale ratio */
+h1{ font-size: 4.4em; font-weight: normal; }
+h2{ font-size: 2.8em; font-weight: bold; }
+h3{ font-size: 1.6em; font-weight: bold; }
+h4{ font-size: 1.2em; font-weight: bold; }
+
+a, a:link, a:hover, a:visited{text-decoration: none;}
+
+/* Header */
+
+
+/* Content */
+
+
+/* Content_sub */
+
+
+/* Content_main */
+
+
+/* Content_supp */
+
+    
+/* Footer */

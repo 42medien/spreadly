@@ -8,33 +8,40 @@
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
   </head>
-  <body>
-    <div id="wrap">
-      <header>
-        <div class="inside">
-          <nav>
-          </nav>
-        </div>
-      </header>
+  <body class="bg_light">
+    <div id="container" class="bd_round clearfix">
       
-      <article>
-        <section>
-          <div class="inside">
-            <?php echo $sf_content ?>
+      <div id="header" class="clearfix">
+
+	    </div>
+      
+      <div id="content" class="separator clearfix">
+        
+        <div id="content_sub">
+          <div id="photo_filter_box" class="bg_light bd_diagonal bd_normal_light">
+            test
           </div>
-        </section>  
-      </article>
+	      </div>
       
-      <aside>
-        <div class="inside">
-        </div>
-      </aside>
+	      <div id="content_main">
+          <div id="stream_left">
+            <div id="stream_left_top"></div>
+            <div id="stream_left_bottom" class="bg_light"></div>
+            <?php // echo $sf_content ?>
+          </div>
+	      </div>
+	      
+	      <div id="content_supp">
+	        
+	      </div>
+      
+	    </div>
+      
     </div>
     
-    <footer>
-      <div class="inside">
-      </div>
-    </footer>        
+    <div id="footer" class="clearfix">
+	    
+	  </div>        
     
   </body>
 </html>
