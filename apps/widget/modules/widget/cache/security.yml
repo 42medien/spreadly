@@ -1,0 +1,11 @@
+all:
+  is_secure: on
+
+default_widget:
+  is_secure: off
+  
+dislike_show:
+  is_secure: off
+
+dislike_save:
+  is_secure: off

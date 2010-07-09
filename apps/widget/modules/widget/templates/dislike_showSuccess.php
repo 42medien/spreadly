@@ -1,0 +1,5 @@
+<?php if($alreadyDisliked === false) { ?>
+<body style="background-color: <?php echo $bgColor; ?>;"><span class="dislike-button"><?php echo link_to(".disl<span style='color: #64BE4B;'>i</span>ike", '@dislike_save', array('class' => 'dislike-link', 'rev' => 'vote-against', 'query_string' => 'url='.urlencode($url), 'title' => 'Dislike: '.$url)); ?></span> <span class="dislike-counter" title="People who disliked this" style="color: <?php echo $fontColor; ?>"><?php if($dislikeCount > 0) { echo $dislikeCount; } ?></span></body>
+<?php } else { ?>
+<body style="background-color: <?php echo $bgColor; ?>;"><span class="dislike-button" title="You already disliked: <?php echo $url;?>"><?php echo ".disl<span style='color: #64BE4B;'>i</span>iked"; ?></span> <span class="dislike-counter" title="People who disliked this" style="color: <?php echo $fontColor; ?>"><?php if($dislikeCount > 0) { echo $dislikeCount; } ?></span></body>
+<?php } ?>

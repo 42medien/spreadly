@@ -1,0 +1,11 @@
+all:
+  is_secure: on
+
+signin:
+  is_secure: off
+
+confirm_signin:
+  is_secure: off
+
+create_account:
+  is_secure: off

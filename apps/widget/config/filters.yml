@@ -1,0 +1,11 @@
+rendering: ~
+security:  ~
+
+# insert your own filters here
+
+ieprivacy:
+  class:   ieprivacyFilter
+  
+cache:     ~
+common:    ~
+execution: ~
