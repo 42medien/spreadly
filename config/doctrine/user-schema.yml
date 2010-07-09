@@ -1,0 +1,53 @@
+options:
+  type: INNODB
+  collate: utf8_unicode_ci
+  charset: utf8
+
+User:
+  columns:
+    username:
+      type:       string(63)
+      unique:     true
+    passwordhash:
+      type:       string(32)
+    salt:
+      type:       string(8)
+    gender:
+      type:       string(1)
+    salutation:
+      type:       string(32)
+    title:
+      type:       string(64)
+    firstname:
+      type:       string(64)
+    lastname:
+      type:       string(64)
+    sortname:
+      type:       string(128)
+      default:    ''
+      notnull:    true
+    birthdate:
+      type:       date
+    description:
+      type:       string
+    culture:
+      type:       string(7)
+    agb:
+      type:       boolean
+      default:    false
+    ip:
+      type:       string(128)
+    active:
+      type:       boolean
+      notnull:    true
+      default:    false
+    default_avatar:
+      type:       string(50)
+    credentials:
+      type:       string(30)
+    credcommunities:
+      type:       string(100)
+    contacts_list:
+      type:       string
+    friends_list:
+      type:       string
