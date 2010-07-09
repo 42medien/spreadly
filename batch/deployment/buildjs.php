@@ -72,12 +72,18 @@ function combineFiles($pFiles, $pFileName) {
   	$lArray = file($lMyFile);
     //var_dump(trim(chop($lArray[0])));die();  
   	foreach($lArray as $lKey => $lValue) {
+  		//remove all spaces
   		$lValue = trim(chop(str_replace(" ", "", $lValue)));
   		
+  		//if there is a @combine in the file
   		if(strpos($lValue, '*@combine') !== false) {
+  			//build the current set filename
   			$lNewName = str_replace('*@combine', "", $lValue).'-'.$pFileName;
+  			//open or build the file with the new name
         $lWholeFile = fopen(dirname(__FILE__).'/../../web/js/main/include/'.$lNewName, 'a+');
+        //get the content
         $lContent = file_get_contents($lMyFile);
+        //and write to the end of the new file
         $lDone = fwrite($lWholeFile, $lContent);  
         echo basename($lMyFile)." combined to ".$lNewName; 
         echo "\n\r"; 
@@ -95,10 +101,12 @@ function combineFiles($pFiles, $pFileName) {
  * @param string $pFileMinName
  */
 function minifyFiles($pDirname) {
-	
+	//take all combined files from the include-folder
   $lFiles = FilesystemHelper::retrieveFilesInDir($pDirname, array('.svn'), array(), '.js');
   foreach($lFiles as $lFile) {
+  	//minify each single combined file
     $lJsMin = JSMin::minify(file_get_contents($lFile));
+    //build the filename with path
     $lFileName = $pDirname.str_replace('.js', '', basename($lFile)).'.min.js';
 	  //build a new minify-file named by given fileminname and open it
 	  $lMinFile = fopen($lFileName, 'a+');
