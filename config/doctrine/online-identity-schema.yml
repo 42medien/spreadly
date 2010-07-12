@@ -35,3 +35,22 @@ OnlineIdentity:
     combined_index:  
       fields: [community_id, identifier, identity_type]
       type:   unique
+      
+      
+OnlineIdentityCon:
+  actAs:
+    Timestampable:  ~     
+  columns:
+    from_id:
+      type:       integer
+      notnull:    true
+    to_id:
+      type:       integer
+      notnull:    true
+  relations:
+    OnlineIdentity: { onDelete: CASCADE, local: from_id, foreign: id, foreignAlias: OnlineIdentitysFrom }
+    OnlineIdentity: { onDelete: CASCADE, local: to_id, foreign: id, foreignAlias: OnlineIdentitysTo }   
+  indexes:
+    combined_index:  
+      fields: [from_id, to_id]
+      type:   unique
