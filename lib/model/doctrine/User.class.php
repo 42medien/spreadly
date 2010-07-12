@@ -11,8 +11,6 @@
  */
 class User extends BaseUser {
 
-  protected $aIsUserNew = false;
-
   /**
    * function to get the full name (first + last-name)
    *
@@ -50,26 +48,17 @@ class User extends BaseUser {
    * @param Doctrine_Event $pEvent
    */
   public function preSave($pEvent) {
-    // if user-object is new
-    if ($pEvent->getInvoker()->isNew()) {
-      // save state
-      $this->aIsUserNew = true;
-    }
-
     $this->setSortname($this->generateSortname());
   }
 
   /**
-   * runs after User->save()
+   * runs after User->insert()
    *
    * @author Matthias Pfefferle
    * @param Doctrine_Event $pEvent
    */
-  public function postSave($pEvent) {
-    // if user-object is new
-    if ($this->aIsUserNew) {
-
-    }
+  public function postInsert($pEvent) {
+    // @todo add yiid online identity
   }
 
   /**

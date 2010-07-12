@@ -33,7 +33,7 @@ class MemcacheBehavior extends Doctrine_Template {
       $lObject = MemcacheManager::getInstance()->getCache()->get($pKey);
       // if available return memcache object
       if ($lObject) {
-        sfContext::getInstance()->getLogger()->info('{yiidMemCache} found User '. $pKey);
+        sfContext::getInstance()->getLogger()->info('{yiidMemCache} found '.get_class($lObject) . " " . $pKey);
         return unserialize($lObject);
       }
       // else return null
@@ -70,6 +70,7 @@ class MemcacheBehavior extends Doctrine_Template {
       return $lObject;
     } else {
       $lObject = $lInvoker->getTable()->find($pPk);
+
       if ($lObject) {
         MemcacheManager::getInstance()->getCache()->set($lMemcacheId, serialize($lObject));
         $GLOBALS['CACHE'][strtoupper($lClassName)][$pPk] = $lObject;
