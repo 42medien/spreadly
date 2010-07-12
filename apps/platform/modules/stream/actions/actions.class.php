@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * stream actions.
+ *
+ * @package    yiid
+ * @subpackage stream
+ * @author     Your name here
+ * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
+ */
+class streamActions extends sfActions
+{
+ /**
+  * Executes index action
+  *
+  * @param sfRequest $request A request object
+  */
+  public function executeIndex(sfWebRequest $request)
+  {
+  	var_dump('fds');
+    //$this->forward('default', 'module');
+  }
+}
