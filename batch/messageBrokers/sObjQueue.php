@@ -1,6 +1,8 @@
 #!/usr/bin/php -q
 <?php
 
+// Include Class
+error_reporting(E_ALL);
 require_once 'System/Daemon.php';
 require_once(dirname(__FILE__).'/../../lib/vendor/sqs.php');
 
@@ -112,10 +114,6 @@ while (!System_Daemon::isDying() && $runningOkay ) {
   // either true on success, or false on failure.
   $runningOkay = true;
   //$runningOkay = parseLog('vsftpd');
-  System_Daemon::info('{appName} running in %s %s',
-  $mode,
-  $cnt
-  );
   // Should your parseLog('vsftpd') return false, then
   // the daemon is automatically shut down.
   // An extra log entry would be nice, we're using level 3,
@@ -126,13 +124,10 @@ while (!System_Daemon::isDying() && $runningOkay ) {
     System_Daemon::err('parseLog() produced an error, '.
             'so this will be my last run');
   }
-    System_Daemon::info('{appName} running in %s %s',
-  $mode,
-  $cnt
-  );
+
   // Relax the system by sleeping for a little bit
   // iterate also clears statcache
- // System_Daemon::iterate(1);
+  System_Daemon::iterate(1);
 
   $cnt++;
 }
