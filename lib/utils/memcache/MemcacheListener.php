@@ -1,9 +1,15 @@
 <?php
-class MemcacheListener extends Doctrine_Record_Listener
-{
+/**
+ * listener vor memcache hooks
+ *
+ * @author Matthias Pfefferle
+ */
+class MemcacheListener extends Doctrine_Record_Listener {
   /**
-   * Enter description here...
+   * adds object to memcache after saving it
    *
+   * @author Matthias Pfefferle
+   * @param Doctrine_Event $pEvent
    */
   public function postSave(Doctrine_Event $pEvent) {
     try {
@@ -14,5 +20,17 @@ class MemcacheListener extends Doctrine_Record_Listener
         sfContext::getInstance()->getLogger()->info('{yiidMemCache} saved User '. $lInvoker->getMemcacheId());
       }
     } catch (Exception $e) {}
+  }
+
+  /**
+   * deletes object from memcache before deleting it from the db
+   *
+   * @author Matthias Pfefferle
+   * @param Doctrine_Event $pEvent
+   */
+  public function preDelete(Doctrine_Event $pEvent) {
+    $lInvoker = $pEvent->getInvoker();
+
+    MemcacheManager::getInstance()->getCache()->remove($lInvoker->getMemcacheId());
   }
 }
