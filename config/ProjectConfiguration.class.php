@@ -9,7 +9,7 @@ class ProjectConfiguration extends sfProjectConfiguration {
   }
 
   public function configureDoctrine(Doctrine_Manager $manager) {
-    $servers = array(
+    /*$servers = array(
       'host' => sfConfig::get('app_memcache_server_ip'),
       'port' => 11211,
       'persistent' => true
@@ -23,7 +23,7 @@ class ProjectConfiguration extends sfProjectConfiguration {
     );
 
     //enable Doctrine cache
-    $manager->setAttribute(Doctrine::ATTR_RESULT_CACHE, $cacheDriver);
+    $manager->setAttribute(Doctrine::ATTR_RESULT_CACHE, $cacheDriver);*/
 
     $manager->setCollate('utf8_unicode_ci');
     $manager->setCharset('utf8');
