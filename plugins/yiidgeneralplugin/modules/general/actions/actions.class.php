@@ -15,4 +15,12 @@ class generalActions extends sfActions {
    */
   public function executeIndex() {
   }
+  
+  /**
+   * Executes index action
+   *
+   */
+  public function executeJs_log(sfWebRequest $pRequest) {
+    $this->getResponse()->setContentType('application/json');  	
+  }  
 }
