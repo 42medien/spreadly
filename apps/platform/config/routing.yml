@@ -4,13 +4,20 @@
 # default rules
 homepage:
   url:   /
-  param: { module: default, action: index }
+  param: { module: stream, action: index }
 
+
+
+
+##
+#
+#  wir wollen keine default routen mehr... also alles brav eintragen ;)
+#
 # generic rules
 # please, remove them by adding more specific rules
-default_index:
-  url:   /:module
-  param: { action: index }
+#default_index:
+#  url:   /:module
+#  param: { action: index }
 
-default:
-  url:   /:module/:action/*
+#default:
+#  url:   /:module/:action/*
