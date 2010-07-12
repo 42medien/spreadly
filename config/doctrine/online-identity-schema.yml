@@ -27,4 +27,11 @@ OnlineIdentity:
       type:       boolean
       default:    false    
   relations:
-    Community: { onDelete: CASCADE, local: community_id, foreign: id, foreignAlias: OnlineIdentitys } 
+    Community: { onDelete: CASCADE, local: community_id, foreign: id, foreignAlias: OnlineIdentitys }   
+  indexes:
+    auth_identifier:
+      fields: [auth_identifier]
+      type:   unique  
+    combined_index:  
+      fields: [community_id, identifier, identity_type]
+      type:   unique

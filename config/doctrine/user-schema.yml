@@ -55,3 +55,23 @@ User:
       type:       string
     friends_list:
       type:       string
+      
+      
+UserIdentityCon:
+  actAs:
+    Timestampable:  ~
+  columns:
+    user_id:
+      type:       integer
+    online_identity_id:
+      type:       integer
+    verified:
+      type:       boolean
+      default:    false
+  relations:
+    User: { onDelete: CASCADE, local: user_id, foreign: id, foreignAlias: UserIdentityCons }
+    OnlineIdentity: { onDelete: CASCADE, local: online_identity_id, foreign: id, foreignAlias: OnlineIdentitys }
+  indexes:
+    combined_index:
+      fields: [user_id, online_identity_id]
+      type: unique
