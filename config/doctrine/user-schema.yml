@@ -6,6 +6,8 @@ options:
 User:
   actAs:
     MemcacheBehavior: ~
+    Timestampable:  ~
+    
   columns:
     username:
       type:       string(63)

@@ -1,0 +1,77 @@
+options:
+  type: INNODB
+  collate: utf8_unicode_ci
+  charset: utf8
+
+Community:
+  actAs:
+    MemcacheBehavior: ~
+    Timestampable:  ~    
+    Sluggable:
+      unique: true
+      fields: [slug]
+      canUpdate: true
+  columns:
+    user_id:
+      type:       integer
+    community:
+      type:       string(255)
+      unique:     true
+    name:
+      type:       string(255)
+    url:
+      type:       string(255)
+    oi_url:
+      type:       string(255)
+    auto_contact_url:
+      type:       string(255)
+      default:    ''
+    im_url:
+      type:       string(255)
+    slug:
+      type:       string(255)
+    costs:
+      type:       boolean
+      default:    false      
+    openid:
+      type:       boolean
+      default:    false
+    openid_login_method:
+      type:       string(5)
+    openid_url:
+      type:       string(255)
+    openid_hidden_fields:
+      type:       string
+    average_rating:
+      type:       float
+      default:    0
+    member_count:
+      type:       integer(8)
+      default:    0
+    oembed:
+      type:       boolean
+      default:    false
+    oembed_scheme:
+      type:       string(64)
+    oembed_endpoint:
+      type:       string(64)
+    apikey:
+      type:       string(50)
+    internal_note:
+      type:       string
+    social_publishing_possible:
+      type:       boolean
+      default:    false
+    feed_identifier:
+      type:       integer
+      default:    0
+    default_icon:  
+      type:       string(128)
+      default:    ''
+    feed_count:
+      type:      integer
+      default:   0
+    community_object_id:  
+      type:      integer
+  relations:
+    User:        { onDelete: SET NULL, local: user_id, foreign: id, foreignAlias: Communitys }
