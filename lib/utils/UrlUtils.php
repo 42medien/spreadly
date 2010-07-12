@@ -470,6 +470,7 @@ class UrlUtils {
 
     $request = "HEAD " . $url_parts['path'] . (isset($url_parts['query']) ? '?'.$url_parts['query'] : '') . " HTTP/1.1\r\n";
     $request .= 'Host: ' . $url_parts['host'] . "\r\n";
+    $request .= 'User-Agent:  YIID/0.2 (Url Parser; http://www.yiid.it/; Allow like Gecko)'. "\r\n";
     $request .= "Connection: Close\r\n\r\n";
     fwrite($sock, $request);
     $response = '';
