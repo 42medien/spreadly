@@ -7,7 +7,6 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <?php //include_stylesheets() ?>
     <script type="text/javascript" src="/js/main/include/platform-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
-    <script type="text/javascript" src="/js/main/global/301_ErrorHandler.js"></script>
     <?php //include_javascripts() ?>
     <?php //echo cdn_javascript_tag('include/'.sfConfig::get('app_release_name').'.min.js'); ?>    
   </head>
