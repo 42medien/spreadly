@@ -10,6 +10,9 @@
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 class User extends BaseUser {
+
+  protected $aIsUserNew = false;
+
   /**
    * function to get the full name (first + last-name)
    *
@@ -38,5 +41,54 @@ class User extends BaseUser {
     else{
       return false;
     }
+  }
+
+  /**
+   * runs before User->save()
+   *
+   * @author Matthias Pfefferle
+   * @param Doctrine_Event $pEvent
+   */
+  public function preSave($pEvent) {
+    // if user-object is new
+    if ($pEvent->getInvoker()->isNew()) {
+      // save state
+      $this->aIsUserNew = true;
+    }
+
+    $this->setSortname($this->generateSortname());
+  }
+
+  /**
+   * runs after User->save()
+   *
+   * @author Matthias Pfefferle
+   * @param Doctrine_Event $pEvent
+   */
+  public function postSave($pEvent) {
+    // if user-object is new
+    if ($this->aIsUserNew) {
+
+    }
+  }
+
+  /**
+   * constructs the sortname of the current user-object
+   *
+   * @author Matthias Pfefferle
+   * @return string
+   */
+  public function generateSortname() {
+    if ($this->getLastname() != '') {
+      $lSortname = $this->getLastname().$this->getFirstname();
+    }
+    else {
+      $lSortname = $this->getUsername();
+    }
+
+    if (preg_match('/^[^a-zA-Z]/',$lSortname)) {
+      $lSortname = '#'.$lSortname;
+    }
+    return $lSortname;
   }
 }
