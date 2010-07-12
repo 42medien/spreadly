@@ -4,6 +4,8 @@ options:
   charset: utf8
 
 User:
+  actAs:
+    MemcacheBehavior: ~
   columns:
     username:
       type:       string(63)
