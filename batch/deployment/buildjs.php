@@ -8,13 +8,12 @@
  */
 
 
-//require_once(dirname(__FILE__).'/../config/ProjectConfiguration.class.php');
+require_once(dirname(__FILE__).'/../../config/ProjectConfiguration.class.php');
 require_once(dirname(__FILE__).'/../../lib/vendor/jsmin.php');
 require_once(dirname(__FILE__).'/../../lib/utils/FilesystemHelper.php');
 
-//$configuration = ProjectConfiguration::getApplicationConfiguration('frontend', 'prod', true);
-//include_once(dirname(__FILE__).'/../config/setIncludePath.php');
-//sfContext::createInstance($configuration);
+$configuration = ProjectConfiguration::getApplicationConfiguration('platform', 'widget', true);
+sfContext::createInstance($configuration);
 
 //$logger = sfContext::getInstance()->getLogger();
 
@@ -22,10 +21,10 @@ require_once(dirname(__FILE__).'/../../lib/utils/FilesystemHelper.php');
 $lDir = dirname(__FILE__).'/../../web/js';
 
 //generate the filenames by the current release-entry in the app.yml
-//$lFileName = sfConfig::get('app_release_name').'.js';
-//$lFileMinName = sfConfig::get('app_release_name').'.min.js';
-$lFileName = 'rogue.js';
-$lFileMinName = 'rogue.min.js';
+$lFileName = sfConfig::get('app_release_name').'.js';
+$lFileMinName = sfConfig::get('app_release_name').'.min.js';
+//$lFileName = 'rogue.js';
+//$lFileMinName = 'rogue.min.js';
 
 
 //initialize the combine and minify-process
@@ -70,11 +69,16 @@ function combineFiles($pFiles, $pFileName) {
   foreach($pFiles as $lMyFile) {
   	//now we get the content of the current-file as an array (every line = one field in the array)
   	$lArray = file($lMyFile);
-    //var_dump(trim(chop($lArray[0])));die();  
+    //var_dump(trim(chop($lArray[0])));die(); 
   	foreach($lArray as $lKey => $lValue) {
   		//remove all spaces
   		$lValue = trim(chop(str_replace(" ", "", $lValue)));
   		
+  		//if(sfConfig::get('app_settings_dev') == false && strpos($lValue, 'console.log') !== false) {
+  		if(strpos($lValue, 'console.log') !== false) {
+  			unset($lArray[$lKey]);
+  		}
+
   		//if there is a @combine in the file
   		if(strpos($lValue, '*@combine') !== false) {
   			//build the current set filename
@@ -83,6 +87,9 @@ function combineFiles($pFiles, $pFileName) {
         $lWholeFile = fopen(dirname(__FILE__).'/../../web/js/main/include/'.$lNewName, 'a+');
         //get the content
         $lContent = file_get_contents($lMyFile);
+        if(sfConfig::get('app_settings_dev') == false) {
+          $lContent = str_replace('console.log', "//console.log", $lContent);
+        }
         //and write to the end of the new file
         $lDone = fwrite($lWholeFile, $lContent);  
         echo basename($lMyFile)." combined to ".$lNewName; 
@@ -118,24 +125,4 @@ function minifyFiles($pDirname) {
     echo "\n\r"; 	  
   }	
 }
-
-
-function handleConsoleLog($pDir, $pFiles) {
-  $lDevKey = array_search($pDir.'/utils/clog_dev.js', $pFiles);
-  $lLiveKey = array_search($pDir.'/utils/clog_live.js', $pFiles);
-	if(sfConfig::get('app_settings_dev') == true) {
-    unset($pFiles[$lLiveKey]);
-    $lDevFile = $pFiles[$lDevKey];
-    unset($pFiles[$lDevKey]);
-    array_unshift($pFiles, $lDevFile);
-  }	else {
-    unset($pFiles[$lDevKey]);
-    $lLiveFile = $pFiles[$lLiveKey];
-    unset($pFiles[$lLiveKey]);
-    array_unshift($pFiles, $lLiveFile);
-  }
-  return $pFiles;
-}
-
-
 ?>
