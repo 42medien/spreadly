@@ -17,6 +17,11 @@ class MemcacheBehavior extends Doctrine_Template {
     return strtolower(get_class($lInvoker)) . "-" . $lInvoker->getId();
   }
 
+  /**
+   * adds listener with memcache hooks
+   *
+   * @author Matthias Pfefferle
+   */
   public function setTableDefinition() {
     $this->addListener(new MemcacheListener());
   }
@@ -43,6 +48,13 @@ class MemcacheBehavior extends Doctrine_Template {
     return null;
   }
 
+  /**
+   * use our memcache instead database when calling method
+   *
+   * @author Matthias Pfefferle
+   * @param int $pPk
+   * @return array of user objects
+   */
   public function retrieveByPkTableProxy($pPk) {
     $lInvoker = $this->getInvoker();
 
@@ -79,6 +91,29 @@ class MemcacheBehavior extends Doctrine_Template {
         return null;
       }
     }
+  }
+
+  /**
+   * use our memcache instead database when calling method
+   *
+   * @author Christian Weyand
+   * @author Matthias Pfefferle
+   * @param array $pPks
+   * @return array of user objects
+   */
+  public function retrieveByPKsTableProxy($pPks) {
+    $lObjects = null;
+    if (empty($pPks)) {
+      $lObjects = array();
+    } else {
+      foreach ($pPks as $lPk) {
+        $lObject = $this->retrieveByPkTableProxy($lPk);
+        if ($lObject) {
+          $lObjects[] = $lObject;
+        }
+      }
+    }
+    return $lObjects;
   }
 }
 ?>
