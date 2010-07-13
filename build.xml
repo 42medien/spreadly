@@ -49,10 +49,7 @@
     <copy todir="./config">
       <fileset refid="local_config" />
     </copy>
-  
-    <copy file="./data/deployment/htaccess/.htaccess_local" tofile="web/.htaccess" overwrite="true">
-    </copy>
-  
+      
     <exec command="rm -rf lib/model/doctrine/base" />
     <exec command="rm -rf lib/filter/doctrine/base" />
     <exec command="rm -rf lib/form/doctrine/base" />
