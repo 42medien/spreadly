@@ -1,0 +1,11 @@
+rendering: ~
+security:  ~
+
+# insert your own filters here
+
+refererFilter:
+  class: RefererFilter
+
+cache:     ~
+common:    ~
+execution: ~
