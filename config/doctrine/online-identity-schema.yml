@@ -13,6 +13,10 @@ OnlineIdentity:
       notnull: true    
     title:
       type:     string(120)
+    name:
+      type:     string(255)
+    photo:
+      type:     string(255)
     identifier:
       type:     string(255)
     identity_type: 

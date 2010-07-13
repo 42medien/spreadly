@@ -22,7 +22,8 @@ class indexActions extends sfActions
     if ($request->isMethod('post')) {
       $this->form->bind($request->getParameter('shorturl'));
       if ($this->form->isValid()) {
-        if ($lShortUrl = ShortUrlPeer::retrieveByUrl($this->form->getValue('url'))) {
+
+        if ($lShortUrl = ShortUrlTable::getByUrl($this->form->getValue('url'))) {
           $this->shortUrl = $lShortUrl->getShortedUrl();
         } else {
           $lShortUrl = $this->form->save();
@@ -51,12 +52,9 @@ class indexActions extends sfActions
       }
     }
 
-    $this->pShortUrls = ShortUrlPeer::getLatestUrls(5);
+    $this->pShortUrls = ShortUrlTable::getLatestUrls(5, true);
   }
 
-  public function executeYiid_bar() {
-
-  }
 
   public function executeShorturl($request) {
     $lIdentifier = $request->getParameter('identifier');
@@ -78,6 +76,7 @@ class indexActions extends sfActions
 
   /**
    * @author Matthias Pfefferle <matthias@pfefferle.org>
+   * @deprecated
    */
   public function executeYiid_auth($request) {
     sfProjectConfiguration::getActive()->loadHelpers("YiidUrl", "Url");

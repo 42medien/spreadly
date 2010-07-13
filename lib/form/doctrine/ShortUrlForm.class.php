@@ -10,7 +10,18 @@
  */
 class ShortUrlForm extends BaseShortUrlForm
 {
-  public function configure()
-  {
+  public function configure() {
+    $this->setWidgets(array(
+      'url'     => new sfWidgetFormInput(array(), array('class' => 'inputtext'))
+    ));
+
+    $this->widgetSchema->setNameFormat('shorturl[%s]');
+    $this->widgetSchema->setLabels(array(
+      'url' => sfContext::getInstance()->getI18N()->__('SHORT_URL_LABEL')
+    ));
+
+    $this->setValidatorSchema(new sfValidatorSchema(array(
+      'url' => new sfValidatorUrl(array(), array('invalid' => sfContext::getInstance()->getI18N()->__('URL_INVALID'), 'required' => sfContext::getInstance()->getI18N()->__('URL_REQUIRED')))
+    )));
   }
 }

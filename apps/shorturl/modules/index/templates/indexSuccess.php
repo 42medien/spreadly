@@ -1,5 +1,5 @@
 <?php
-use_helper('Text', 'Favicon', 'Form');
+//use_helper('Text', 'Favicon', 'Form');
 
 if ($sf_user->isAuthenticated()) {
   $session_user = $sf_user->getUser();
@@ -7,7 +7,7 @@ if ($sf_user->isAuthenticated()) {
   $session_user = null;
 }
 
-echo include_partial("index/vcard", array("pUser" => $session_user));
+#echo include_partial("index/vcard", array("pUser" => $session_user));
 ?>
 
 <h1>YIID.cc</h1>
@@ -28,6 +28,7 @@ echo include_partial("index/vcard", array("pUser" => $session_user));
   <form action="<?php echo url_for('index/index') ?>" method="POST" class="clearfix">
     <div class="clearfix">
 	    <span class="left outerRight"><?php echo $form['url']->renderLabel(); ?></span>
+      <?php echo $form['_csrf_token']->render(); ?>
 	    <?php echo $form['url']->render(array('class'=>'inputtext shorturl-text')); ?>
 	    <div style="line-height:15px;"><input type="submit" value="<?php echo __('SUBMIT_BUTTON'); ?>" class="button green small" /></div>
 	    <?php echo $form['url']->renderError(); ?>

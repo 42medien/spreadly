@@ -14,7 +14,7 @@
   <?php echo cdn_stylesheet_tag('include/'.sfConfig::get('app_release_name').'.min.css'); ?>
   <!-- CSS -->
   <?php echo cdn_stylesheet_tag('print.css', array('media' => 'print')); ?>
-  
+
   <link rel="shortcut icon" href="/favicon.ico" />
 
   <!--[if IE 6]>
@@ -29,9 +29,9 @@
   <![endif]-->
 
 
-  <?php if($sf_user->isAuthenticated() && $sf_user->hasCredential(array('translator'), false) && $sf_user->getAttribute('display_translation_system') == true) {
+  <?php /* if($sf_user->isAuthenticated() && $sf_user->hasCredential(array('translator'), false) && $sf_user->getAttribute('display_translation_system') == true) {
     include_partial('general/translation_utils');
-  } ?>
+  } */ ?>
   <link rel="commands" title="yiid this" href="<?php echo sfConfig::get('app_settings_url'); ?>/js/browser-plugins/ubiquity/shorturl.js" />
 
   <?php include_cdn_javascripts(); ?>
@@ -56,7 +56,7 @@
 	<div id="wrapper">
  		<div id="page">
 	  	<div id="main-infos">
-  	    <div id="header-language-selection">
+  	 <?php /*    <div id="header-language-selection">
           <ul>
             <?php foreach ( LanguagePeer::getSupportedLanguages() as $culture ) { ?>
               <li class="menu-lang<?php if ($sf_user->getCulture() != $culture) { echo ' lang_inactive'; } ?>">
@@ -65,6 +65,7 @@
             <?php } ?>
           </ul>
         </div><!-- end header-language-selection -->
+         */ ?>
       </div><!-- end main-infos -->
 
 <!-- ~~~~~~~~~~~~~~~ CONTENT ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
