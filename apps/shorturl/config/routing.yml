@@ -1,0 +1,24 @@
+tinyurl:
+  # for example cope#User#1
+  url:   /:identifier
+  param: { module: index, action: shorturl }
+
+cms:
+  url:    /static/:category/:page
+  param:  { module: static, action: index }
+
+# default rules
+homepage:
+  url:   /
+  param: { module: index, action: index }
+
+default_symfony:
+  url:   /symfony/:action/*
+  param: { module: default }
+
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*
