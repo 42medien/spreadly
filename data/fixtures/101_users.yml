@@ -1,0 +1,98 @@
+User:
+  user_1:
+    username: hugo
+    passwordhash: b0d736d71ce30c87629a984c814d7f72
+    salt: 7znUOjog
+    culture: de
+    agb: true
+    ip: 127.0.0.1
+    active: true
+    default_avatar: aa4e6c2b2a0644e6e7130de7ffea46df-1.jpg
+    birthdate: 1991-12-15
+
+  user_2:
+    username: hans
+    firstname: hans
+    lastname: dampf
+    passwordhash: b0d736d71ce30c87629a984c814d7f72
+    salt: 7znUOjog
+    culture: de
+    agb: true
+    ip: 127.0.0.1
+    active: true
+    birthdate: 1991-11-15
+
+  user_3:
+    username: karl
+    firstname: karl
+    lastname: napf
+    passwordhash: b0d736d71ce30c87629a984c814d7f72
+    salt: 7znUOjog
+    culture: de
+    agb: true
+    ip: 127.0.0.1
+    active: true
+    credentials: translator
+    birthdate: 1966-01-01
+
+  user_4:
+    username: james
+    lastname: cook
+    passwordhash: b0d736d71ce30c87629a984c814d7f72
+    salt: 7znUOjog
+    culture: de
+    agb: true
+    ip: 127.0.0.1
+    active: true
+    credentials: captain
+    birthdate: 1978-08-15
+
+  user_5:
+    username: snirgelchen
+    firstname: schnecke
+    lastname: snirgel
+    passwordhash: b0d736d71ce30c87629a984c814d7f72
+    salt: 7znUOjog
+    culture: de
+    agb: true
+    ip: 127.0.0.1
+    active: true
+    birthdate: 1991-03-15
+
+  user_6:
+    username: manni
+    firstname: manni
+    lastname: ohne freunde
+    passwordhash: b0d736d71ce30c87629a984c814d7f72
+    salt: 7znUOjog
+    culture: de
+    agb: true
+    ip: 127.0.0.1
+    active: true
+    birthdate: 1991-04-15
+
+
+  user_7:
+    username: affe
+    firstname: affen
+    lastname: popo
+    passwordhash: b0d736d71ce30c87629a984c814d7f72
+    salt: 7znUOjog
+    culture: de
+    agb: true
+    ip: 127.0.0.1
+    active: true
+    birthdate: 1991-05-15
+
+
+  user_99:
+    username: api
+    firstname: api
+    lastname: api
+    passwordhash: b0d736d71ce30c87629a984c814d7f72
+    salt: 7znUOjog
+    culture: de
+    agb: true
+    ip: 127.0.0.1
+    active: true
+    birthdate: 1991-05-15
