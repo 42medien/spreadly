@@ -1,0 +1,30 @@
+options:
+  type: INNODB
+  collate: utf8_unicode_ci
+  charset: utf8
+
+PersistentVariable:
+  actAs:
+    Timestampable:  ~
+    
+  columns:
+    name:
+      type: string
+    value:
+      type: string
+      
+      
+PersistentObject:
+  actAs:
+    Timestampable:  ~
+    
+  columns:
+    user_id:
+      type: integer
+    name:
+      type: string
+    value:
+      type: string
+  relations:
+    User:        { onDelete: CASCADE, local: user_id, foreign: id, foreignAlias: PersistentObject }
+        

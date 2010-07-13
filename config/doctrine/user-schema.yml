@@ -75,3 +75,4 @@ UserIdentityCon:
     combined_index:
       fields: [user_id, online_identity_id]
       type: unique
+            
