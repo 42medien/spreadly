@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<project name="Communipedia" default="info" basedir=".">
+
+  <!-- give some info about this tool -->
+  <target name="info">
+    <echo>Available Tasks:
+    - builddev
+    - buildlocal
+    - buildlive
+    - buildci
+    - buildwidget
+    - buildmodel
+    - enableall
+    - disableall
+    - buildselenium
+    - test
+    - lockdb
+    - I18NSync
+    - buildjs
+    - buildcss
+   </echo>
+  </target>
+  
+  
+  <fileset dir="./data/deployment/frontend_controllers" id="frontend_controllers">
+    <include name="**" />
+  </fileset>
+
+  <fileset dir="./data/deployment/widget_controllers" id="widget_controllers">
+    <include name="**" />
+  </fileset>
+  
+  <fileset dir="./data/deployment/local_config" id="local_config">
+    <include name="**" />
+  </fileset>
+  
+  <fileset dir="./data/deployment/live_config" id="live_config">
+    <include name="**" />
+  </fileset>
+  
+  
+  
+  
+  <target name="buildlocal">
+    <copy todir="./web">
+      <fileset refid="frontend_controllers" />
+    </copy>
+    
+    <copy todir="./config">
+      <fileset refid="local_config" />
+    </copy>
+  
+    <copy file="./data/deployment/htaccess/.htaccess_local" tofile="web/.htaccess" overwrite="true">
+    </copy>
+  
+    <exec command="rm -rf lib/model/doctrine/base" />
+    <exec command="rm -rf lib/filter/doctrine/base" />
+    <exec command="rm -rf lib/form/doctrine/base" />
+    <exec command="rm -rf cache/*" />
+    
+    <exec command="./symfony doctrine:build --all --no-confirmation --and-load" />
+  </target>
+  
+</project>
