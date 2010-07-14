@@ -1,0 +1,43 @@
+User:
+  user_1:
+    username: hugo
+    passwordhash: b0d736d71ce30c87629a984c814d7f72
+    salt: 7znUOjog
+    culture: de
+    agb: true
+    ip: 127.0.0.1
+    active: true
+    default_avatar: aa4e6c2b2a0644e6e7130de7ffea46df-1.jpg
+    birthdate: 1991-12-15
+
+  user_2:
+    username: hans
+    firstname: hans
+    lastname: dampf
+    passwordhash: b0d736d71ce30c87629a984c814d7f72
+    salt: 7znUOjog
+    culture: de
+    agb: true
+    ip: 127.0.0.1
+    active: true
+    birthdate: 1991-11-15
+
+Community:
+  community_1:
+    user_id:     user_1
+    community:   testcommunity
+    name:        testcommunity
+    slug:        testcommunity
+    apikey:      23b74cb3f6f73d93e60ba75d366f5e9f35b77708
+    oi_url:      http://example.com/user/%s
+    im_url:      xmpp:%s
+    url:         http://example.com
+
+  community_2:
+    user_id:     user_2
+    community:   website
+    name:        website
+    slug:        website
+    apikey:      23b74cb3f6f73d93e60ba75d366f5e9f35b77708
+    oi_url:      '%s'
+    url:         http://example.com
