@@ -1,15 +1,4 @@
-<?php
-//use_helper('Text', 'Favicon', 'Form');
-
-if ($sf_user->isAuthenticated()) {
-  $session_user = $sf_user->getUser();
-} else {
-  $session_user = null;
-}
-
-#echo include_partial("index/vcard", array("pUser" => $session_user));
-?>
-
+<?php use_helper('Text', 'Favicon'); ?>
 <h1>YIID.cc</h1>
 
 <p class="shorturl-description"><?php echo __('SHORT_URL_DESCRIPTION', array('%1' => link_to(__('YIID'), sfConfig::get('app_settings_url')))); ?></p>
@@ -25,7 +14,7 @@ if ($sf_user->isAuthenticated()) {
 <?php } ?>
 
 <div class="url-boxerle">
-  <form action="<?php echo url_for('index/index') ?>" method="POST" class="clearfix">
+  <form action="<?php echo url_for('@homepage') ?>" method="POST" class="clearfix">
     <div class="clearfix">
 	    <span class="left outerRight"><?php echo $form['url']->renderLabel(); ?></span>
       <?php echo $form['_csrf_token']->render(); ?>
@@ -33,12 +22,6 @@ if ($sf_user->isAuthenticated()) {
 	    <div style="line-height:15px;"><input type="submit" value="<?php echo __('SUBMIT_BUTTON'); ?>" class="button green small" /></div>
 	    <?php echo $form['url']->renderError(); ?>
 	  </div>
-
-    <?php if ($session_user) { ?>
-      <div class="clearfix send-yiidcc-activity">
-        <input type="checkbox" id="add_activity" name="add_activity" /><?php echo label_for('add_activity', __('ADD_SHORT_AS_ACTIVITY')); ?>
-      </div>
-    <?php } ?>
   </form>
 </div>
 

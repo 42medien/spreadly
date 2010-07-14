@@ -74,6 +74,12 @@ class ShortUrlTable extends Doctrine_Table
     return $lQ->fetchOne();
   }
 
+  /**
+   * retrieves recently shorted Entries
+   *
+   * @param int   $pLimit
+   * @param boolean $pHideYiid
+   */
   public static function getLatestUrls($pLimit = 5, $pHideYiid = true) {
     $lYiidHost = UrlUtils::getHost(sfConfig::get("app_settings_url"));
 
@@ -89,4 +95,48 @@ class ShortUrlTable extends Doctrine_Table
     return $lQ->execute();
   }
 
+  /**
+   * shortens a valid url and returns a short url
+   *
+   * @param   string $pUrl
+   * @return  string
+   * @throws  ModelException
+   */
+  public static function shortenUrl($pUrl) {
+    $lUrl = urldecode($pUrl);
+
+    if (!UrlUtils::isUrlValid($lUrl)) {
+      throw new ModelException("invalid url");
+    }
+
+    if ($lShortUrl = self::getByUrl($lUrl)) {
+      return $lShortUrl->getShortedUrl();
+    } else {
+      $lShortUrl = new ShortUrl();
+      $lShortUrl->setUrl($lUrl);
+      $lShortUrl->save();
+
+      return $lShortUrl->getShortedUrl();
+    }
+  }
+
+
+  /**
+   * prepares the api-response for the short-url jaon output
+   *
+   * @author Matthias Pfefferle
+   * @param string $pUrl
+   * @return string json
+   */
+  public static function prepareApiResponse($pUrl) {
+    try {
+      $lResponse = array ("status" => array("result" => "OK", "code" => "200", "message" => "url was shorted"));
+      $lResponse["url"] = urldecode($pUrl);
+      $lResponse["shorturl"] = self::shortenUrl($pUrl);
+      return json_encode($lResponse);
+    } catch (Exception $e) {
+      $lResponse = array ("status" => array("result" => "ERROR", "code" => "409", "message" => $e->getMessage()));
+      return json_encode($lResponse);
+    }
+  }
 }

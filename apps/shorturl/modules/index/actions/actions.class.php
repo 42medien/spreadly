@@ -43,7 +43,7 @@ class indexActions extends sfActions
     } elseif ($request->getParameter('url')) {
       $this->form->bind(array('url' => $request->getParameter('url')));
       if ($this->form->isValid()) {
-        if ($lShortUrl = ShortUrlPeer::retrieveByUrl($this->form->getValue('url'))) {
+        if ($lShortUrl = ShortUrlTable::getByUrl($this->form->getValue('url'))) {
           $this->shortUrl = $lShortUrl->getShortedUrl();
         } else {
           $lShortUrl = $this->form->save();
@@ -56,18 +56,24 @@ class indexActions extends sfActions
   }
 
 
+  /**
+   * Take a given identifier and lookup the URL it represents
+   *
+   * @author weyandch
+   * @param unknown_type $request
+   */
   public function executeShorturl($request) {
     $lIdentifier = $request->getParameter('identifier');
 
-    $lPk = ShortUrlPeer::uncharize($lIdentifier);
-    $lShortUrl = ShortUrlPeer::retrieveByPK($lPk);
+    $lPk = ShortUrlTable::uncharize($lIdentifier);
+    $lShortUrl = ShortUrlTable::getInstance()->find($lPk);
 
     $this->forward404Unless($lShortUrl);
 
     // also support json output
     if ($request->getParameter('format') == 'json') {
       $this->getResponse()->setContentType('application/json');
-      return $this->renderText(ShortUrlPeer::prepareApiResponse($lShortUrl->getUrl()));
+      return $this->renderText(ShortUrlTable::prepareApiResponse($lShortUrl->getUrl()));
     } else {
       // check if it is a yiid entry
       $this->redirect($lShortUrl->getUrl());
