@@ -6,7 +6,7 @@ options:
 OauthConsumerToken:
   actAs:
     Timestampable:  ~
-    
+
   columns:
     user_id:
       type:      integer
@@ -25,12 +25,12 @@ OauthConsumerToken:
       type:  string(40)
   relations:
     User:        { onDelete: CASCADE, local: user_id, foreign: id, foreignAlias: OauthConsumerTokens }
-      
-      
+
+
 OauthNonce:
   actAs:
     Timestampable:  ~
-    
+
   columns:
     consumer_key:
       type:     string(255)
@@ -43,14 +43,14 @@ OauthNonce:
 OauthServiceToken:
   actAs:
     Timestampable:  ~
-    
+
   columns:
     user_id:
       type:   integer
-      notnull: true   
+      notnull: true
     online_identity_id:
       type:    integer
-      notnull: true   
+      notnull: true
     token_key:
       type:    string(255)
     token_secret:
@@ -66,5 +66,30 @@ OauthServiceToken:
     combined_index:
       fields: [user_id, online_identity_id]
       type: unique
-  
-    
+
+AuthToken:
+  actAs:
+    Timestampable:  ~
+
+  columns:
+    user_id:
+      type:   integer
+      notnull: true
+    online_identity_id:
+      type:    integer
+      notnull: true
+    key:
+      type:    string(255)
+    secret:
+      type:    string(255)
+    type:
+      type:    string(40)
+    additional_params:
+      type:    string
+  relations:
+    User:            { onDelete: CASCADE, local: user_id, foreign: id, foreignAlias: OauthServiceTokens }
+    OnlineIdentity:  { onDelete: CASCADE, local: online_identity_id, foreign: id, foreignAlias: OauthServiceTokens }
+  indexes:
+    combined_index:
+      fields: [user_id, online_identity_id]
+      type: unique
