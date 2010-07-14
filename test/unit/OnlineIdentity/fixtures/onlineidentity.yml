@@ -12,7 +12,7 @@ User:
 
 Community:
   community_1:
-    user_id:     user_1
+    User:       user_1
     community:   testcommunity
     name:        testcommunity
     slug:        testcommunity
@@ -21,8 +21,15 @@ Community:
     im_url:      xmpp:%s
     url:         http://www.google.com/
 
+
 OnlineIdentity:
   oi_1:
-    community_id:  community_1
-    identifier: hugo
+    identifier:     hugo
+    Community:     community_1
     identity_type:        1
+  
+
+UserIdentityCon:
+  uicon_1:
+    User:    user_1
+    OnlineIdentity:      oi_1
