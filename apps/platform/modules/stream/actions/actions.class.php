@@ -17,7 +17,6 @@ class streamActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-  	var_dump('fds');
-    //$this->forward('default', 'module');
+    
   }
 }
