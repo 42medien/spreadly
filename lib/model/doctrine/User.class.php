@@ -12,6 +12,14 @@
 class User extends BaseUser {
 
   /**
+   * (non-PHPdoc)
+   * @see lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/record/sfDoctrineRecord::__toString()
+   */
+  public function __toString() {
+    return $this->getFullName();
+  }
+
+  /**
    * function to get the full name (first + last-name)
    *
    * @author Matthias Pfefferle
@@ -79,5 +87,18 @@ class User extends BaseUser {
       $lSortname = '#'.$lSortname;
     }
     return $lSortname;
+  }
+
+
+  public function getOnlineIdentities() {
+    $this->getUserIdentityCons();
+  }
+
+  public function getOnlineIdentitiesByCommunityId() {
+
+  }
+
+  public function getOnlineIdentitiesByType() {
+
   }
 }
