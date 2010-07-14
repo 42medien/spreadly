@@ -3,8 +3,8 @@ require_once dirname(__file__).'/../../lib/BaseTestCase.php';
 
 class OnlineIdentityTableTest extends BaseTestCase {
 
-  public function setUpBeforeClass() {
-    Doctrine::loadData('/fixtures/onlineidentity.yml');
+  public static function setUpBeforeClass() {
+    Doctrine::loadData(dirname(__file__).'/fixtures');
   }
 
   public function testGetName() {
