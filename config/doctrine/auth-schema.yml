@@ -78,17 +78,20 @@ AuthToken:
     online_identity_id:
       type:    integer
       notnull: true
-    key:
+    token_key:
       type:    string(255)
-    secret:
+    token_secret:
       type:    string(255)
-    type:
+    token_type:
       type:    string(40)
     additional_params:
       type:    string
+    is_publishing_enabled:
+      type:    boolean
+      default: false
   relations:
-    User:            { onDelete: CASCADE, local: user_id, foreign: id, foreignAlias: OauthServiceTokens }
-    OnlineIdentity:  { onDelete: CASCADE, local: online_identity_id, foreign: id, foreignAlias: OauthServiceTokens }
+    User:            { onDelete: CASCADE, local: user_id, foreign: id, foreignAlias: AuthTokens }
+    OnlineIdentity:  { onDelete: CASCADE, local: online_identity_id, foreign: id, foreignAlias: AuthTokens }
   indexes:
     combined_index:
       fields: [user_id, online_identity_id]
