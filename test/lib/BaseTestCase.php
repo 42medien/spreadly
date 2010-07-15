@@ -13,7 +13,6 @@ sfContext::createInstance(ProjectConfiguration::getApplicationConfiguration('pla
  * adds lib folder to code-coverage
  * removes symfony-generated files from code-coverage
  */
-
 PHPUnit_Util_Filter::addDirectoryToWhitelist( SF_ROOT_DIR.DIRECTORY_SEPARATOR.'lib/', '.php');
 PHPUnit_Util_Filter::removeDirectoryFromWhitelist(SF_ROOT_DIR.DIRECTORY_SEPARATOR.'lib/model/doctrine/base/');
 PHPUnit_Util_Filter::removeDirectoryFromWhitelist(SF_ROOT_DIR.DIRECTORY_SEPARATOR.'lib/helper/');
@@ -30,7 +29,7 @@ abstract class BaseTestCase extends PHPUnit_Framework_TestCase{
    * resets the database
    */
   public function resetDB() {
-    Doctrine::loadData(SF_ROOT_DIR.'/data/sql/fixtures');
+    //Doctrine::loadData(SF_ROOT_DIR.'/data/sql/fixtures');
   }
 }
 
