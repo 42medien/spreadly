@@ -61,7 +61,7 @@ AuthToken:
     token_type:             oauth1
     is_publishing_enabled:  1
     
-  at_1:
+  at_2:
     User:                   user_1
     OnlineIdentity:         oi_2
     Community:              community_2

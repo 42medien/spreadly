@@ -7,12 +7,19 @@ class OnlineIdentityTableTest extends BaseTestCase {
     Doctrine::loadData(dirname(__file__).'/fixtures');
   }
 
-  public function testGetName() {
 
+  public function testGetUsersAuthTokens() {
+    $lUserHugo = UserTable::getByIdentifier('hugo');
+    $lTokens = AuthTokenTable::getTokensForUserQuery($lUserHugo->getId());
+
+    $this->assertEquals(2, count($lTokens));
   }
 
 
-  public function testGetOnlineIdentities() {
+  public function testGetUsersAuthTokensWithPubblishing() {
+    $lUserHugo = UserTable::getByIdentifier('hugo');
+    $lTokens = AuthTokenTable::getAllTokensForPublishingByUser($lUserHugo->getId());
 
+    $this->assertEquals(1, count($lTokens));
   }
 }
