@@ -28,9 +28,9 @@ Community:
     name:        website
     slug:        website
     apikey:      23b74cb3f6f73d93e60ba75d366f5e9f35b77708
-    oi_url:      http://www.google.com/profiles/%s
+    oi_url:      http://www.example.com/profiles/%s
     im_url:      xmpp:%s
-    url:         http://www.google.com/
+    url:         http://www.example.com/
 
   community_5:
     community:   google_at
