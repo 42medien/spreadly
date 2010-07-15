@@ -91,7 +91,7 @@ class User extends BaseUser {
 
 
   public function getOnlineIdentities() {
-    $this->getUserIdentityCons();
+    return $this->getUserIdentityCons();
   }
 
   public function getOnlineIdentitiesByCommunityId() {
@@ -100,5 +100,9 @@ class User extends BaseUser {
 
   public function getOnlineIdentitiesByType() {
 
+  }
+
+  public function getTokensForPublishing() {
+    return UserTable::getTokensForPublishingByUserId($this->getId());
   }
 }

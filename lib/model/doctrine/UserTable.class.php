@@ -41,4 +41,13 @@ class UserTable extends Doctrine_Table {
       throw Exception();
     }
   }
+
+
+  /**
+   * wrapper for publishing tokens
+   * @param int $pUserId
+   */
+  public static function getTokensForPublishingByUserId($pUserId) {
+    return AuthTokenTable::getAllTokensForPublishingByUser($pUserId);
+  }
 }
