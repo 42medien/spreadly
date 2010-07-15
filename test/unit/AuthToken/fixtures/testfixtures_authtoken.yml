@@ -1,0 +1,71 @@
+User:
+  user_1:
+    username: hugo
+    passwordhash: b0d736d71ce30c87629a984c814d7f72
+    salt: 7znUOjog
+    culture: de
+    agb: true
+    ip: 127.0.0.1
+    active: true
+    default_avatar: aa4e6c2b2a0644e6e7130de7ffea46df-1.jpg
+    birthdate: 1991-12-15
+
+Community:
+  community_1:
+    User:       user_1
+    community:   testcommunity
+    name:        testcommunity
+    slug:        testcommunity
+    apikey:      23b74cb3f6f73d93e60ba75d366f5e9f35b77708
+    oi_url:      http://www.google.com/profiles/%s
+    im_url:      xmpp:%s
+    url:         http://www.google.com/
+    
+  community_2:
+    User:        user_1
+    community:   anothercommunity
+    name:        anothercommunity
+    slug:        anothercommunity
+    apikey:      fffffffffffffffffffffffd366f5e9f35b77708
+    oi_url:      http://www.facebook.com/%s
+    url:         http://www.facebook.com
+
+
+OnlineIdentity:
+  oi_1:
+    identifier:      hugo
+    Community:       community_1
+    identity_type:   1
+  oi_2:
+    identifier:      hugo_facebook
+    Community:       community_2
+    identity_type:   1
+  
+
+UserIdentityCon:
+  uicon_1:
+    User:             user_1
+    OnlineIdentity:   oi_1
+
+  uicon_2:
+    User:             user_1
+    OnlineIdentity:   oi_2
+
+AuthToken:
+  at_1:
+    User:                   user_1
+    OnlineIdentity:         oi_1
+    Community:              community_1
+    token_key:              key1
+    token_secret:           secret1
+    token_type:             oauth1
+    is_publishing_enabled:  1
+    
+  at_1:
+    User:                   user_1
+    OnlineIdentity:         oi_2
+    Community:              community_2
+    token_key:              key1
+    token_secret:           secret1
+    token_type:             oauth1
+    is_publishing_enabled:  0

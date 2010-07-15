@@ -24,12 +24,12 @@ Community:
 
 OnlineIdentity:
   oi_1:
-    identifier:     hugo
-    Community:     community_1
-    identity_type:        1
+    identifier:      hugo
+    Community:       community_1
+    identity_type:   1
   
 
 UserIdentityCon:
   uicon_1:
-    User:    user_1
-    OnlineIdentity:      oi_1
+    User:             user_1
+    OnlineIdentity:   oi_1
