@@ -12,10 +12,10 @@ User:
 
 Community:
   community_1:
-    User:       user_1
-    community:   testcommunity
-    name:        testcommunity
-    slug:        testcommunity
+    User:        user_1
+    community:   google
+    name:        google
+    slug:        google
     apikey:      23b74cb3f6f73d93e60ba75d366f5e9f35b77708
     oi_url:      http://www.google.com/profiles/%s
     im_url:      xmpp:%s
@@ -27,7 +27,7 @@ OnlineIdentity:
     identifier:      hugo
     Community:       community_1
     identity_type:   1
-  
+
 
 UserIdentityCon:
   uicon_1:
