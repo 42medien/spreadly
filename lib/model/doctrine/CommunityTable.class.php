@@ -35,4 +35,20 @@ class CommunityTable extends Doctrine_Table {
   public static function retrieveByCommunity($pCommunity) {
     return self::getInstance()->findBy("community", $pSlug);
   }
+
+  public static function retrieveByDomain($pDomain = null) {
+    $lQuery = Doctrine_Query::create()->
+      from('Community c')->
+      where('c.oi_url IS NOT NULL AND c.oi_url <> "" AND c.oi_url <> " " AND c.community IS NOT NULL')->
+      andWhere('c.community <> "website"')->
+      orderBy('c.community ASC');
+
+    if ($pDomain) {
+      $lQuery->andWhere('c.oi_url LIKE ?', array("%".$pDomain."%"));
+    }
+
+    $lCommunities = $lQuery->execute();
+
+    return $lCommunities;
+  }
 }

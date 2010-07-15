@@ -83,7 +83,7 @@ class User extends BaseUser {
       $lSortname = $this->getUsername();
     }
 
-    if (preg_match('/^[^a-zA-Z]/',$lSortname)) {
+    if (preg_match('/^[^a-zA-Z]/', $lSortname)) {
       $lSortname = '#'.$lSortname;
     }
     return $lSortname;
