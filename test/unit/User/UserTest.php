@@ -11,6 +11,8 @@ class OnlineIdentityTableTest extends BaseTestCase {
   public function testGetOnlineIdentities() {
     $lUserHugo = UserTable::getByIdentifier('hugo');
     $lIdentities = $lUserHugo->getOnlineIdentities();
-  var_dump($lIdentities->toArray());
-    }
+    $lOis =    UserIdentityConTable::getOnlineIdentitiesForUser($lUserHugo->getId());
+    $this->assertEquals(2, count($lOis));
+    $this->assertTrue(is_array($lOis));
+  }
 }

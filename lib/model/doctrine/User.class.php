@@ -91,6 +91,7 @@ class User extends BaseUser {
 
 
   public function getOnlineIdentities() {
+
     return $this->getUserIdentityCons();
   }
 
