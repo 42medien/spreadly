@@ -5,6 +5,10 @@
 homepage:
   url:   /
   param: { module: stream, action: index }
+  
+stream_show:
+  url: /stream/show
+  param: { module: stream, action: show}
 
 
 

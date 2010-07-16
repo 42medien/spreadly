@@ -19,4 +19,19 @@ class streamActions extends sfActions
   {
     
   }
+  
+  public function executeShow(sfWebRequest $request) {
+    $this->getResponse()->setContentType('application/json');
+    $lCallback = $request->getParameter('callback', 'logerror');
+    //var_dump($lCallback);die();
+    return $this->renderText(
+      $lCallback.'('.
+      json_encode(
+        array(
+          "success"  => true
+        )
+      )
+      .");"
+    );  	
+  }
 }
