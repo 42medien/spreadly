@@ -24,7 +24,8 @@ a:hover{text-decoration: underline;}
 .btn{font-size: 11px;}
 .btn:hover{text-decoration: underline;}
 .user_name{font-weight: bold;}
-.filter_headline, #friends_active_list li, #all_networks_list li{text-align: center;}
+.filter_headline{text-align: center;}
+#all_networks_list li, #friends_active_list li{text-align: left;}
 
 
 /* Content_main */
@@ -41,7 +42,7 @@ a:hover{text-decoration: underline;}
 #stream_right_top div{line-height: 19px;}
 #so_information h3{font-size: 14px;}
 #so_information h5, .url{font-style: italic;}
-.url{font-size: 11px;letter-spacing: -0.5px;}
+.url{font-size: 9px;letter-spacing: -0.3px;}
 .text_action{font-size: 11px;}
 .text_important{font-weight: bold;}
 #stream_right_top div{line-height: 30px;}
