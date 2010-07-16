@@ -10,28 +10,14 @@
   </div>
 
   <div id="stream_right_top" class="clearfix">
-    <div id="stream_right_top7">
-      <div id="stream_right_top1"></div>
-      <div id="stream_right_top1b"><a href="#"	class="thumb_up_down icon_thumbs">&nbsp;</a></div>
-      <div id="stream_right_top2"></div>
-      <div id="stream_right_top3"><a href="#" class="thumb_up icon_thumb">&nbsp;</a></div>
-      <div id="stream_right_top4"></div>
-      <div id="stream_right_top5"><a href="#" class="thumb_down icon_thumb">&nbsp;</a></div>
-      <div id="stream_right_top6"></div>
-    </div>
+    <?php include_partial('nav_shares'); ?>
   </div>
   
   <div id="stream_right_bottom">
-    <ul id="shares">
+    <ul class="shares">
     <?php for($i=0;$i<7;$i++) { ?>
       <li class="clearfix">
-        <div class="so_share_image left"><?php echo image_tag('/img/global/yiid-logo.png', array('width' => 30)); ?></div>
-        <div class="so_share_information left">
-          <span class="icon_small_service icon_small_facebook">&nbsp;</span> 
-          <?php echo link_to('Billy Brown', '@homepage', array('class' => 'text_important')); ?>
-	        <span class="url">via Twitter 2 minutes ago</span>
-	        <p class="so_comment">lorem ipsum pfefferle affenkopf</p>
-        </div>
+        <?php include_partial('item_shares'); ?>    
       </li>
     <?php } ?>
     </ul>
