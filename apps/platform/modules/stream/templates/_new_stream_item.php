@@ -37,7 +37,7 @@
           <a href="#" class="icon_hide icon_small_use text_action">hide</a>
         </div>
         <!-----------  Das vorige div muss auf style="display:none;" gesetzt und nur bei hover angezeigt werden ------------------------------>
-                          
+                 
       </div>
     </div>
                       
