@@ -2,7 +2,7 @@
 
 #container{border: 8px #D7D7D7 solid;}
 
-a, a:link, a:hover, a:visited{color: #4EA734;}
+a:link, a:hover, a:visited{color: #4EA734;}
 p, a.text_action{color: #6a6b6a;}
 a.url, span.url{color: #9c9c9c;}
 
@@ -17,7 +17,7 @@ a.url, span.url{color: #9c9c9c;}
 #content{background: transparent url("/img/sprites/sprite_global.png") 0 0 repeat-x;}
 
 /* Content_sub */
-.dark_rounded_right{background-color: #ebebeb;color: #4EA734;}
+.filter_headline{background-color: #ebebeb;color: #4EA734;}
 .btn{background: #F2F2F2 url("/img/test/btn_bg.png") no-repeat center right;color: #6a6b6a;}
 .icon_facebook{background: transparent url("/img/test/facebook.png") no-repeat;}
 .icon_twitter{background: transparent url("/img/test/twitter.png") no-repeat;}

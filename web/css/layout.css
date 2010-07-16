@@ -39,8 +39,9 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 /* Content_sub */
 #content_sub{width:20%;}
 #photo_filter_box{margin:25px 15px 25px 25px;padding-bottom:10px;}
-#photo_filter_box input[type=submit]{margin-right: 10px;}
-.dark_rounded_right{margin-top: 5px;padding:5px 10px;border-left: none;}
+#photo_filter_box input[type=submit]{}
+.filter_headline{margin-top: 5px;padding:5px 10px;border-left: none;}
+#all_networks_list li{margin-bottom: 10px;}
 .btn{border: 1px solid #CDCDCD;padding: 2px 30px 2px 20px;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;}
 .photo_big{width: 96px;height: 96px;border: 2px #d7d7d7 solid;}
 #stream_photo{margin: 15px auto;}
@@ -50,7 +51,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 .icon_thumbs{padding: 5px 24px;}
 .icon_small_service{padding: 3px 8px;}
 .icon_user{margin: 3px 0 0 2px;}
-.text_user{margin: 6px 0 0 5px;}
+.text_user{margin-left: 10px;}
 .icon_small_use{padding:3px;margin-left: 10px;}
 
 
@@ -84,19 +85,19 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 		    .so_information{width: 87%;}
 		    
 		    .green_top_left{width:18px;height:19px;}
-		    .green_top_middle{height:19px;width: 90%;min-width: 200px;}
+		    .green_top_middle{height:19px;width: 96%;min-width: 200px;}
 		    .green_top_right{width:2px;height:19px;}
         
         .green_middle_left{width:18px;height: 100%;min-height:1px;}
-        .green_middle_middle{width: 90.167%;min-width: 200px;border-right: 1px solid #cbd3c9;}
+        .green_middle_middle{width: 96.167%;min-width: 200px;border-right: 1px solid #cbd3c9;}
         .green_middle_right{width:2px;height: 100%;min-height:1px;}
         
         .green_bottom_left{width:18px;height:19px;}
-        .green_bottom_middle{height:19px;width: 90%;min-width: 200px;}
+        .green_bottom_middle{height:19px;width: 96%;min-width: 200px;}
         .green_bottom_right{width:2px;height:19px;}
         #stream_left_bottom .so_comment{margin:10px;}
         
-        .actions{padding-top: 10px;margin: 2px 5px;}
+        .actions{padding: 10px 10px 5px;width: 96%;}
         .actions a{margin-left: 10px;}
         .info_area{margin: 10px;}
         

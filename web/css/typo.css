@@ -9,7 +9,7 @@ h2{ font-size: 2.8em; font-weight: bold; }
 h3{ font-size: 1.6em; font-weight: bold; }
 h4{ font-size: 1.2em; font-weight: bold; }
 
-a, a:link, a:visited{text-decoration: none;}
+a:link, a:visited{text-decoration: none;}
 a:hover{text-decoration: underline;}
 
 /* Header */
@@ -24,12 +24,14 @@ a:hover{text-decoration: underline;}
 .btn{font-size: 11px;}
 .btn:hover{text-decoration: underline;}
 .user_name{font-weight: bold;}
+.filter_headline, #friends_active_list li, #all_networks_list li{text-align: center;}
 
 
 /* Content_main */
 #stream_left_top p{font-weight: bold;font-size: 13px;}
 #stream_left_top div{line-height: 30px;}
 .so_comment{line-height: 16px;}
+.actions{text-align: right;}
 
 
 /* Content_supp */
@@ -43,7 +45,7 @@ a:hover{text-decoration: underline;}
 .text_action{font-size: 11px;}
 .text_important{font-weight: bold;}
 #stream_right_top div{line-height: 30px;}
-.icon_thumb{line-height: 30px;}
+a.icon_thumb{text-decoration: none;}
 
     
 /* Footer */
