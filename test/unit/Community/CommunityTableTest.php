@@ -11,6 +11,10 @@ class  CommunityTableTest extends BaseTestCase {
   public function testRetrieveByDomain() {
     $result = CommunityTable::retrieveByDomain("google");
 
-    $this->assertTrue(2 <= count($result));
+    $this->assertTrue(3 <= count($result));
+
+    $lastCommunity = $result[count($result)-1];
+
+    $this->assertEquals("website", $lastCommunity->getCommunity());
   }
 }

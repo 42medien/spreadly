@@ -36,6 +36,13 @@ class CommunityTable extends Doctrine_Table {
     return self::getInstance()->findBy("community", $pSlug);
   }
 
+  /**
+   * returns all communities with a specific domain
+   *
+   * @author Matthias Pfefferle
+   * @param string $pDomain
+   * @return array
+   */
   public static function retrieveByDomain($pDomain = null) {
     $lQuery = Doctrine_Query::create()->
       from('Community c')->
@@ -48,6 +55,13 @@ class CommunityTable extends Doctrine_Table {
     }
 
     $lCommunities = $lQuery->execute();
+
+    $lWebsite = Doctrine_Query::create()->
+      from('Community c')->
+      where('c.community = ?', array("website"))->
+      fetchOne();
+
+    $lCommunities[] = $lWebsite;
 
     return $lCommunities;
   }
