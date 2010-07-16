@@ -36,8 +36,8 @@ a:hover{text-decoration: underline;}
 
 /* Content_supp */
 #search input{font-size: 13px;}
-#search2, #stream_left_top1, #stream_left_top2, #stream_left_top3, #stream_left_top4, #stream_left_top6, #stream_left_top7, #stream_left_top8, #stream_left_top9,
-	#stream_right_top1, #stream_right_top2, #stream_right_top3, #stream_right_top4, #stream_right_top5, #stream_right_top6, .btn{cursor: pointer;}
+#search2, #main_nav_inner1, #main_nav_inner2, #main_nav_inner3, #main_nav_inner4, #main_nav_inner5, #main_nav_inner6, #main_nav_inner7, #main_nav_inner8,
+	#nav_shares_inner1, #nav_shares_inner2, #nav_shares_inner3, #nav_shares_inner4, #nav_shares_inner5, #nav_shares_inner6, #nav_shares_inner7, .btn{cursor: pointer;}
 #stream_right_top div{line-height: 19px;}
 #so_information h3{font-size: 14px;}
 #so_information h5, .url{font-style: italic;}
