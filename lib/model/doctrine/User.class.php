@@ -91,8 +91,7 @@ class User extends BaseUser {
 
 
   public function getOnlineIdentities() {
-
-    return $this->getUserIdentityCons();
+    return UserIdentityConTable::getOnlineIdentitiesForUser($this->getId());
   }
 
   public function getOnlineIdentitiesByCommunityId() {

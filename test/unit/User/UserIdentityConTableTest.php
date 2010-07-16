@@ -1,16 +1,15 @@
 <?php
 require_once dirname(__file__).'/../../lib/BaseTestCase.php';
 
-class UserTest extends BaseTestCase {
+class UserIdentityConTableTest extends BaseTestCase {
 
   public static function setUpBeforeClass() {
     Doctrine::loadData(dirname(__file__).'/fixtures');
   }
 
-
   public function testGetOnlineIdentities() {
     $lUserHugo = UserTable::getByIdentifier('hugo');
-    $lIdentities = $lUserHugo->getOnlineIdentities();
+    $lIdentities =    UserIdentityConTable::getOnlineIdentitiesForUser($lUserHugo->getId());
     $this->assertEquals(2, count($lIdentities));
     $this->assertTrue(is_array($lIdentities));
   }

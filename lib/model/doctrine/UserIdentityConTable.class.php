@@ -9,6 +9,11 @@ class UserIdentityConTable extends Doctrine_Table
     return Doctrine_Core::getTable('UserIdentityCon');
   }
 
+  /**
+   * retrieves all OI's for a given User
+   * @author weyandch
+   * @param int $pUserId
+   */
   public static function getOnlineIdentitiesForUser($pUserId) {
     $q = Doctrine_Query::create()
           ->select('uic.online_identity_id')

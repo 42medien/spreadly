@@ -1,0 +1,63 @@
+options:
+  type: INNODB
+  collate: utf8_unicode_ci
+  charset: utf8
+
+SocialObject:
+  columns:
+    id:
+      type:      string(24)
+    url:
+      type: string
+    url_hash:
+      type: string(32)
+    alias:
+      type:  string
+    oiids:     ## onlineIdentitys which participated on this object
+      type: string
+    type:
+      type:  integer(4)
+    title:
+      type:  string(255)
+    desc:    
+      type:  string
+    ecode:    ## embed_code -->  
+      type:  string
+    thumb_url:
+      type:  string
+    l_cnt:
+      type:  integer
+      default: 0
+    d_cnt:
+      type:  integer
+      default: 0
+    c_cnt:
+      type:   integer
+      default:  0
+    u:
+      type:   integer
+    c:
+      type:   integer
+      
+      
+YiidActivity:
+  columns:
+    id:
+      type:      string(24)
+    so_id:
+      type:      string(24)
+    url:
+      type:      string
+    url_hash:
+      type:      string(32)
+    u_id:
+      type:      integer
+    c_id:
+      type:      integer
+    score:
+      type:      integer(4)
+    verb:
+      type:      integer(4)
+    c:
+      type:      integer
+        

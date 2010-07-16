@@ -18,11 +18,7 @@ class UserTable extends Doctrine_Table {
       $pIdentifier = $lMatches[2];
     }
 
-    $lQ = Doctrine_Query::create()
-            ->from('User u')
-            ->where('u.username = ?', array($pIdentifier));
-
-    return $lQ->fetchOne();
+    return self::retrieveByUsername($pIdentifier);
   }
 
   /**
@@ -42,6 +38,20 @@ class UserTable extends Doctrine_Table {
     }
   }
 
+
+  /**
+   * retrieve a User by its username
+   *
+   * @author weyandch
+   * @param $pUsername
+   */
+  public static function retrieveByUsername($pUsername) {
+    $lQ = Doctrine_Query::create()
+    ->from('User u')
+    ->where('u.username = ?', array($pIdentifier));
+
+    return $lQ->fetchOne();
+  }
 
   /**
    * wrapper for publishing tokens
