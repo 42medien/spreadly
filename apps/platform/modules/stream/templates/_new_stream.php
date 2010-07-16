@@ -1,7 +1,45 @@
 <ul id="new_shares">
-<?php for($i=0;$i<15;$i++) { ?>
-  <li class="clearfix">
+  <li class="clearfix" id="stream_item_1">
     <?php include_partial('new_stream_item'); ?>
   </li>
-<?php } ?>
+  <li class="clearfix item_active" id="stream_item_2">
+    <?php include_partial('new_stream_item'); ?>
+  </li>
+  <li class="clearfix" id="stream_item_3">
+    <?php include_partial('new_stream_item'); ?>
+  </li>
+  <li class="clearfix" id="stream_item_4">
+    <?php include_partial('new_stream_item'); ?>
+  </li>
+  <li class="clearfix" id="stream_item_5">
+    <?php include_partial('new_stream_item'); ?>
+  </li>
+  <li class="clearfix" id="stream_item_6">
+    <?php include_partial('new_stream_item'); ?>
+  </li>
+  <li class="clearfix" id="stream_item_7">
+    <?php include_partial('new_stream_item'); ?>
+  </li>
+  <li class="clearfix" id="stream_item_8">
+    <?php include_partial('new_stream_item'); ?>
+  </li>
+  <li class="clearfix" id="stream_item_9">
+    <?php include_partial('new_stream_item'); ?>
+  </li>
+  <li class="clearfix" id="stream_item_10">
+    <?php include_partial('new_stream_item'); ?>
+  </li>
+  <li class="clearfix" id="stream_item_11">
+    <?php include_partial('new_stream_item'); ?>
+  </li>
 </ul>
+
+<!-- 
+<ul id="new_shares">
+<?php foreach($lShares as $lShare) { ?>
+  <li class="clearfix" id="stream_item_<?php echo $lShare->getId(); ?>">
+    <?php include_partial('new_stream_item', array($lShare)); ?>
+  </li>
+<?php } ?>
+</ul> 
+ -->
