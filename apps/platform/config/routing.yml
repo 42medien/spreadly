@@ -13,6 +13,24 @@ stream_show:
 
 
 
+
+
+
+
+
+
+
+
+
+
+##### ROUTES FOR PLUGINS #######
+
+js_log:
+  url:   /general/js_log
+  param: { module: general, action: js_log }
+
+
+
 ##
 #
 #  wir wollen keine default routen mehr... also alles brav eintragen ;)
