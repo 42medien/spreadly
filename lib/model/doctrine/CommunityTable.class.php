@@ -61,7 +61,9 @@ class CommunityTable extends Doctrine_Table {
       where('c.community = ?', array("website"))->
       fetchOne();
 
-    $lCommunities[] = $lWebsite;
+    if ($lWebsite) {
+      $lCommunities[] = $lWebsite;
+    }
 
     return $lCommunities;
   }

@@ -57,9 +57,11 @@ class OnlineIdentityTable extends Doctrine_Table {
       return null;
     }
 
-    if (preg_match("/https?:\/\//i", $pIdentifier)) {
+    if (preg_match("/https?:\/\//i", $pIdentifier) && $pType == self::TYPE_IDENTITY) {
       $lOIdentity = self::fromUrl($pIdentity, $pCommunityId);
-    } else {
+    }
+
+    if ($lOIdentity == null) {
       $lOIdentity = new OnlineIdentity();
       $lOIdentity->setIdentifier($pIdentifier);
       $lOIdentity->setCommunityId($pCommunityId);
@@ -72,8 +74,9 @@ class OnlineIdentityTable extends Doctrine_Table {
   /**
    * function to split the url to get the userid and the used service
    *
-   * @param array $pUrl
-   * @return array
+   * @param string $pUrl
+   * @param int $pCommunityId
+   * @return OnlineIdentity
    */
   public static function extractIdentifierfromUrl($pUrl, $pCommunityId) {
     self::normalizeUrl($pUrl);
@@ -83,17 +86,15 @@ class OnlineIdentityTable extends Doctrine_Table {
     if ($pCommunityId) {
       $lCommunities[] = CommunityTable::getInstance()->find($pCommunityId);
     } else {
-      $lProfileServices = CommunityTable::getProfileServices(UrlUtils::getDomain($pUrl));
+      $lCommunities = CommunityTable::retrieveByDomain(UrlUtils::getDomain($pUrl));
     }
 
-    $lOnlineIdentity = new OnlineIdentity();
-
-    foreach($lProfileServices as $lPs)  {
-      if ($lPs->getOiUrl()) {
-        $lRegex = '/'.str_replace(array('%s', 'www\.'), array('(.*)', '.*'), preg_quote($lPs->getOiUrl(),'/')).'?/i';
+    foreach($lCommunities as $lC)  {
+      if ($lC->getOiUrl()) {
+        $lRegex = '/'.str_replace(array('%s', 'www\.'), array('(.*)', '.*'), preg_quote($lC->getOiUrl(),'/')).'?/i';
         $lMatch = array();
 
-        if (preg_match($lRegex, $lUrl, $lMatch)) {
+        if (preg_match($lRegex, $pUrl, $lMatch)) {
           $lIdentifier = $lMatch[1];
           // check for trailing '/' and remove
           if (substr($lIdentifier, -1, 1) == "/") {
@@ -101,14 +102,16 @@ class OnlineIdentityTable extends Doctrine_Table {
           }
           sfContext::getInstance()->getLogger()->debug(print_r($lMatch, true));
 
-          $lIdent['ident'] = $lIdentifier;
-          $lIdent['community'] = $lPs;
+          $lOnlineIdentity = new OnlineIdentity();
+          $lOnlineIdentity->setIdentifier($lIdentifier);
+          $lOnlineIdentity->setCommunityId($lC->getCommunity());
 
-          break;
+          return $lOnlineIdentity;
         }
       }
     }
-    return $lIdent;
+
+    return null;
   }
 
   /**
@@ -117,8 +120,8 @@ class OnlineIdentityTable extends Doctrine_Table {
    * @param string $pUrl
    * @see: http://openid.net/specs/openid-authentication-2_0.html#normalization_example
    */
-  public static function normalizeUrl($pUrl) {
-    Zend_OpenId::normalizeUrl($pUrl);
+  public static function normalizeUrl(&$pUrl) {
+    //Zend_OpenId::normalizeUrl($pUrl);
 
     $pUrl = str_replace('http://www.', 'http://', $pUrl);
     $pUrl = str_replace('https://www.', 'https://', $pUrl);

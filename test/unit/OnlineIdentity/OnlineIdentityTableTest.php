@@ -34,7 +34,9 @@ class  OnlineIdentityTableTest extends BaseTestCase {
   public function testExtractIdentifierfromUrl() {
     $lOnlineIdentity = OnlineIdentityTable::extractIdentifierfromUrl("http://google.de/profiles/hugo", null);
 
-    $this->assertTrue("OnlineIdentity", get_class($lOnlineIdentity));
+    var_dump($lOnlineIdentity->getIdentifier());
+
+    $this->assertEquals("OnlineIdentity", get_class($lOnlineIdentity));
     $this->assertEquals("hugo", $lOnlineIdentity->getIdentifier());
   }
 }
