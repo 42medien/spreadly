@@ -12,13 +12,16 @@
  */
 class YiidActivity extends BaseYiidActivity
 {
-   /**
-   * runs before YiidActivity->save()
-   */
-  public function save(Doctrine_Connection $conn = null) {
 
+  public function save(Doctrine_Connection $conn = null) {
     $lObjectToSave = $this->toArray(false);
     return $lObjectToSave = YiidActivityTable::saveObjectToMongoDb($lObjectToSave);
   }
+
+
+  public function delete(Doctrine_Connection $con = null) {
+    $this->collection->remove(array("_id" => new MongoId($this->getId()) ));
+  }
+
 
 }
