@@ -1,13 +1,17 @@
 <?php
 require_once dirname(__file__).'/../../lib/BaseTestCase.php';
 
-class  AuthTokenTableTest extends BaseTestCase {
-
-
+/**
+ * @author Matthias Pfefferle
+ */
+class  OnlineIdentityTableTest extends BaseTestCase {
   public static function setUpBeforeClass() {
     Doctrine::loadData(dirname(__file__).'/fixtures');
   }
 
+  /**
+   * @author Matthias Pfefferle
+   */
   public function testRetrieveByIdentifier() {
     /*$c = new Community();
     $c->setCommunity("yiid");
@@ -24,5 +28,13 @@ class  AuthTokenTableTest extends BaseTestCase {
     $this->assertEquals("hugo", $result->getIdentifier());
   }
 
+  /**
+   * @author Matthias Pfefferle
+   */
+  public function testExtractIdentifierfromUrl() {
+    $lOnlineIdentity = OnlineIdentityTable::extractIdentifierfromUrl("http://google.de/profiles/hugo", null);
 
+    $this->assertTrue("OnlineIdentity", get_class($lOnlineIdentity));
+    $this->assertEquals("hugo", $lOnlineIdentity->getIdentifier());
+  }
 }

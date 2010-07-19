@@ -20,7 +20,26 @@ Community:
     oi_url:      http://www.google.com/profiles/%s
     im_url:      xmpp:%s
     url:         http://www.google.com/
-
+  community_2:
+    community:   google_de
+    name:        google_de
+    slug:        google_de
+    apikey:      23b74cb3f6f73d93e60ba75d366f5e9f35b77708
+    oi_url:      http://www.google.de/profiles/%s
+    url:         http://www.google.de/
+  community_3:
+    community:   facebook
+    name:        facebook
+    slug:        facebook
+    apikey:      23b74cb3f6f73d93e60ba75d366f5e9f35b77708
+    url:         http://www.facebook.com/
+  community_3:
+    community:   website
+    name:        website
+    slug:        website
+    apikey:      23b74cb3f6f73d93e60ba75d366f5e9f35b77708
+    oi_url:      %s
+    url:         http://www.example.com/
 
 OnlineIdentity:
   oi_1:
