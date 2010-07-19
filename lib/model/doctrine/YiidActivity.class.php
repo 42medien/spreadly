@@ -18,7 +18,7 @@ class YiidActivity extends BaseYiidActivity
   public function save(Doctrine_Connection $conn = null) {
 
     $lObjectToSave = $this->toArray(false);
-    $lObjectToSave = YiidActivityTable::saveObjectToMongoDb($lObjectToSave);
+    return $lObjectToSave = YiidActivityTable::saveObjectToMongoDb($lObjectToSave);
   }
 
 }

@@ -48,7 +48,7 @@ class UserTable extends Doctrine_Table {
   public static function retrieveByUsername($pUsername) {
     $lQ = Doctrine_Query::create()
     ->from('User u')
-    ->where('u.username = ?', array($pIdentifier));
+    ->where('u.username = ?', $pUsername);
 
     return $lQ->fetchOne();
   }

@@ -3,16 +3,18 @@ require_once dirname(__file__).'/../../lib/BaseTestCase.php';
 
 class YiidActivityTest extends BaseTestCase {
 
+  static public $aUserHugo = null;
+
   public static function setUpBeforeClass() {
     Doctrine::loadData(dirname(__file__).'/fixtures');
-    $this->aUserHugo = UserTable::getByIdentifier('hugp');
+    self::$aUserHugo = UserTable::retrieveByUsername('hugo');
   }
 
-
   public function testSave() {
+    parent::resetMongo();
     $lActivity = new YiidActivity();
     $lActivity->url = 'http://www.affen22.de';
-    $lActivity->setUId(1);
-    $lActivity->save();
+    $lActivity->setUId(self::$aUserHugo->getId());
+    $this->assertTrue(is_array($lActivity->save()));
   }
 }
