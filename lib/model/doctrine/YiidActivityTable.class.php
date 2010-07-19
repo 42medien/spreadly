@@ -24,4 +24,58 @@ class YiidActivityTable extends Doctrine_Table
     $lCollection->save($lObject);
     return $lObject;
   }
+
+
+
+
+
+
+
+
+
+
+
+  public static function storeTemporary($pSessionId,
+                                        $pUrl,
+                                        $pOwnedOnlineIdentitys = array(),
+                                        $pGivenOnlineIdentitys = array(),
+                                        $pScore = self::ACTIVITY_TYPE_LIKE,
+                                        $pVerb = 'like',
+                                        $pTitle = null,
+                                        $pDescription = null,
+                                        $pPhoto = null) {
+
+    $lStorageArray = array();
+    $lStorageArray['url'] = $pUrl;
+    $lStorageArray['score'] = $pScore;
+    $lStorageArray['verb'] = $pVerb;
+    $lStorageArray['title'] = $pTitle;
+    $lStorageArray['description'] = $pDescription;
+    $lStorageArray['photo'] = $pPhoto;
+
+    $lPersist = new PersistentVariable();
+    $lPersist->setName('widgetauth_'.$pSessionId);
+    $lPersist->setValue(serialize($lStorageArray));
+    $lPersist->save();
+    return false;
+  }
+
+
+/**
+   * retrieve data saved with this sess_id
+   *
+   * @author weyandch
+   * @param $pSessionId
+   * @return unknown_type
+   */
+  public static function getTemporaryData($pSessionId) {
+    $lPersist = PersistentVariableTable::retrieveByName('widgetauth_'.$pSessionId);
+    if ($lPersist) {
+      $lReturn = unserialize($lPersist->getValue());
+      $lPersist->delete();
+      return $lReturn;
+    } else {
+      return null;
+    }
+  }
 }

@@ -19,9 +19,9 @@ SocialObject:
       type:  integer(4)
     title:
       type:  string(255)
-    desc:    
+    stmt:    
       type:  string
-    ecode:    ## embed_code -->  
+    ecode: 
       type:  string
     thumb_url:
       type:  string
