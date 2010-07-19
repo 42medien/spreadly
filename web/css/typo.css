@@ -1,7 +1,8 @@
 @CHARSET "UTF-8";
 
 /* Site-wide properties ======================================================== */
-body{font: normal normal 12px/12px Tahoma, Arial, Helvetica, Verdana, sans-serif; }
+/*body{font: normal normal 12px/12px Tahoma, Arial, Helvetica, Verdana, sans-serif; }*/
+body{font: normal normal 0.71em/1em Tahoma, Arial, Helvetica, Verdana, sans-serif; }
     
 /* Fibonacci based heading scale ratio */
 h1{ font-size: 4.4em; font-weight: normal; }
@@ -9,44 +10,29 @@ h2{ font-size: 2.8em; font-weight: bold; }
 h3{ font-size: 1.6em; font-weight: bold; }
 h4{ font-size: 1.2em; font-weight: bold; }
 
-a:link, a:visited{text-decoration: none;}
-a:hover{text-decoration: underline;}
+.url, .like-dislike{font-size: 9px;}
+.btn, .text_action, #so_information h5 a{font-size: 11px;}
+#stream_left_top p, #search input{font-size: 13px;}
+#nav_main, #so_information h3{font-size: 14px;}
 
-/* Header */
-#nav_main{font-size: 14px;}
-#nav_main li a{line-height: 30px;}
+a:hover, .btn:hover{text-decoration: underline;}
+a, a.icon_thumb, li.service_filter_chosen a, a.icon_thumbs, a.icon_thumb, a.icon_small_use, li.user_filter_chosen a{text-decoration: none;}
 
+.user_name, #stream_left_top p, .text_important{font-weight: bold;}
 
-/* Content */
+.url{font-style: italic;}
 
+.so_comment, #so_information h5 a{line-height: 16px;}
+.so_headline_left, .so_headline_right{line-height: 18px;}
+#stream_right_top div{line-height: 19px;}
+#nav_main li a, #stream_left_top div, #stream_right_top div{line-height: 30px;}
 
-/* Content_sub */
-.btn{font-size: 11px;}
-.btn:hover{text-decoration: underline;}
-.user_name{font-weight: bold;}
-.filter_headline{text-align: center;}
 #all_networks_list li, #friends_active_list li{text-align: left;}
-
-
-/* Content_main */
-#stream_left_top p{font-weight: bold;font-size: 13px;}
-#stream_left_top div{line-height: 30px;}
-.so_comment{line-height: 16px;}
+/*.filter_headline{text-align: center;}*/
 .actions{text-align: right;}
 
+.url, .like-dislike{letter-spacing: -0.3px;}
 
-/* Content_supp */
-#search input{font-size: 13px;}
 #search2, #main_nav_inner1, #main_nav_inner2, #main_nav_inner3, #main_nav_inner4, #main_nav_inner5, #main_nav_inner6, #main_nav_inner7, #main_nav_inner8,
-	#nav_shares_inner1, #nav_shares_inner2, #nav_shares_inner3, #nav_shares_inner4, #nav_shares_inner5, #nav_shares_inner6, #nav_shares_inner7, .btn{cursor: pointer;}
-#stream_right_top div{line-height: 19px;}
-#so_information h3{font-size: 14px;}
-#so_information h5, .url{font-style: italic;}
-.url{font-size: 9px;letter-spacing: -0.3px;}
-.text_action{font-size: 11px;}
-.text_important{font-weight: bold;}
-#stream_right_top div{line-height: 30px;}
-a.icon_thumb{text-decoration: none;}
-
-    
-/* Footer */
+  #nav_shares_inner1, #nav_shares_inner2, #nav_shares_inner3, #nav_shares_inner4, #nav_shares_inner5, #nav_shares_inner6, #nav_shares_inner7, .btn{cursor: pointer;}
+li.service_filter_chosen a, li.user_filter_chosen a{cursor: default;}
