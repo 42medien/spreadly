@@ -3,6 +3,9 @@
 
 class YiidActivityTable extends Doctrine_Table
 {
+  const ACTIVITY_VOTE_POSITIVE = 1;
+  const ACTIVITY_VOTE_NEGATIVE = -1;
+
   const MONGO_COLLECTION_NAME = 'yiid_activity';
 
   public static function getInstance()

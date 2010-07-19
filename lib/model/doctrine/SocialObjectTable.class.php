@@ -26,6 +26,20 @@ class SocialObjectTable extends Doctrine_Table
   }
 
   /**
+   * Updates an object in Mongo, respecting MongoDB's Syntax to manipulate stored objects
+   *
+   * @see  http://www.mongodb.org/display/DOCS/Updating
+   *
+   * @param Array() $pIdentifier
+   * @param Array() $pManipualtior
+   */
+  public static function updateObjectInMongoDb($pIdentifier, $pManipualtior) {
+    $lCollection = self::getMongoCollection();
+    $lCollection->update($pIdentifier, $pManipualtior);
+  }
+
+
+  /**
    * create a new social object and fills with basic inforamtion given by the executed widget
    *
    * @author weyandch
@@ -43,13 +57,17 @@ class SocialObjectTable extends Doctrine_Table
     }
     $lSocialObject = new SocialObject();
     $lSocialObject->setUrl($pUrl);
-    $lSocialObject->setAlias(implode(',', $lAliasArray));
+    $lSocialObject->setAlias($lAliasArray);
     $lSocialObject->setTitle(utf8_encode($pTitle));
     $lSocialObject->setDescription(utf8_encode($pDescription));
     $lSocialObject->setThumbnailUrl($pImage);
     $lSocialObject->save();
     return $lSocialObject;
   }
+
+
+
+
 
 
   /**
@@ -125,7 +143,7 @@ class SocialObjectTable extends Doctrine_Table
   public static function initializeObjectFromCollection($pCollection) {
     $lObject = new SocialObject();
     if ($pCollection) {
-      $lObject->fromArray($pCollection, BasePeer::TYPE_FIELDNAME);
+      $lObject->fromArray($pCollection);
       return $lObject;
     }
     return null;

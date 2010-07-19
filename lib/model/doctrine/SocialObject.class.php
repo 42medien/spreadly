@@ -35,7 +35,70 @@ class SocialObject extends BaseSocialObject
 
   }
 
+  /**
+   *
+   * @author weyandch
+   * @param $pVerifiedOnlineIdentitys
+   * @param $pScore
+   * @return unknown_type
+   */
+  public function updateObjectOnLikeActivity($pVerifiedOnlineIdentitys, $pUrl, $pScore) {
+    if ($pScore == YiidActivityTable::ACTIVITY_VOTE_POSITIVE) {
+      $lCounterField = 'l_cnt';
+    }
+    elseif ($pScore == YiidActivityTable::ACTIVITY_VOTE_NEGATIVE) {
+      $lCounterField = 'd_cnt';
+    }
+    else {
+      return false;
+    }
 
+    SocialObjectTable::updateObjectInMongoDb(array("_id" => new MongoId($this->getId())),
+                                              array( '$inc' => array($lCounterField => 1 ),
+                                               '$addToSet' => array('oiids' => array('$each' => $pVerifiedOnlineIdentitys)),
+                                               '$addToSet' => array('alias' => array('$each' => array(md5($pUrl)))))
+                                              );
+  }
+
+
+    /**
+   * update basic information on this social object
+   *
+   * @param $pTitle
+   * @param $pDescription
+   * @param $pImage
+   * @return unknown_type
+   */
+  public function updateObjectMasterData($pTitle = null, $pDescription = null, $pImage = null) {
+    $lUpdateArray = array();
+    if ($pTitle) {
+      $lUpdateArray['title'] = $pTitle;
+    }
+    if ($pDescription) {
+      $lUpdateArray['desc'] = $pDescription;
+    }
+    if ($pImage) {
+      $lUpdateArray['thumb_url'] = $pImage;
+    }
+
+
+    SocialObjectTable::updateObjectInMongoDb(array("_id" => new MongoId($this->getId())),
+                                              array(
+                                               '$set' => $lUpdateArray
+                                              ));
+  }
+
+
+  /**
+   * adds an alias URL-Hash to an already known SocialObject
+   * @param string $pUrl
+   */
+  public function addAlias($pUrl) {
+      SocialObjectTable::updateObjectInMongoDb(array("_id" => new MongoId($this->getId())),
+                                                array(
+                                                 '$addToSet' => array('alias' => array('$each' => array(md5($pUrl)))))
+                                                );
+  }
 
 
 
