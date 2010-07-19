@@ -12,7 +12,11 @@
     <div id="container" class="bd_round clearfix">
       
       <div id="header" class="clearfix">
-        <?php include_partial('global/main_navigation'); ?>
+        <div id="header_sub" class="left"></div>
+        <div id="header_main" class="left"></div>
+        <div id="header_supp" class="left">
+          <?php include_partial('global/main_navigation'); ?>
+        </div>
 	    </div>
       
       <div id="content" class="clearfix">
