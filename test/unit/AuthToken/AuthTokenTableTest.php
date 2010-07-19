@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__file__).'/../../lib/BaseTestCase.php';
 
-class OnlineIdentityTableTest extends BaseTestCase {
+class AuthTokenTableTest extends BaseTestCase {
 
   public static function setUpBeforeClass() {
     Doctrine::loadData(dirname(__file__).'/fixtures');
