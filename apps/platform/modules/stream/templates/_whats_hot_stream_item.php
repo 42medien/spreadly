@@ -11,8 +11,8 @@
             <span class="url left">via Twitter 2 minutes ago</span>
           </div>
           <div class="right so_headline_right">
-            <a href="#" class="icon_like icon_small_use like-dislike">3 like</a>
-            <a href="#" class="icon_dislike icon_small_use like-dislike">3 dislike</a>
+            <a href="#" class="icon_like icon_small_use like-dislike"><?php echo $pObject->getLikeCount(); ?>  like</a>
+            <a href="#" class="icon_dislike icon_small_use like-dislike"><?php echo $pObject->getDislikeCount(); ?> dislike</a>
           </div>
         </div>
         <div class="clearfix whats_hot_info_area">
@@ -25,7 +25,7 @@
       <?php echo image_tag('/img/test/map_preview.png'); ?>
 	  </div>
 	</div>
-	
+
 	<!-----------  Das folgende div muss auf style="display:none;" gesetzt und nur bei hover angezeigt werden ------------------------------>
 	<div class="actions clearfix">
 	  <div class="action_content right">

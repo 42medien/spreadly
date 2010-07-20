@@ -15,8 +15,9 @@ class SocialObject extends BaseSocialObject
 
   public function save(Doctrine_Connection $conn = null) {
     if (!$this->getId()) {
-//      $this->setUrlHash(md5($this->getUrl()));
+      $this->setUrlHash(md5($this->getUrl()));
       $this->setCreatedOn(time());
+      $this->setAlias(array(md5($this->getUrl())));
     }
     $this->setUpdatedOn(time());
 
