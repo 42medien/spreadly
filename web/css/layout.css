@@ -102,6 +102,12 @@ mark, rp, rt, ruby, summary, time{ display: inline }
         .so_headline_left{height: 18px;overflow: hidden;padding: 5px 0 5px 10px;min-width: 215px;}
         .so_headline_right{height: 18px;overflow: hidden;padding: 5px 8px 5px 0;min-width: 88px;}
         
+        .whats_hot_stream_item{-webkit-border-radius: 3px 0 0 3px;-moz-border-radius: 3px 0 0 3px;border-radius: 3px 0 0 3px;}
+        .whats_hot_stream_icon{padding: 8px 2px;}
+        .stream_icon{padding:3px 9px;}
+        .preview_information{margin: 10px;}
+        .whats_hot_info_area p{margin: 4px 10px;}
+        
 	  
 
 /* Content_supp */
