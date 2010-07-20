@@ -9,35 +9,35 @@
   <p class="filter_headline">All Networks</p>
   <ul class="normal_list clearfix" id="all_networks_list">
     <li class="service_filter_chosen">
-      <a href="#" class="icon_service icon_facebook">facebook.com</a>
+      <a href="/" class="icon_service icon_facebook stream_filter" data-obj='{"action":"StreamFilter.getAction", "callback":"Stream.show", "comid":"1"}'>facebook.com</a>
     </li>
     <li>
-      <a href="#" class="icon_service icon_twitter">twitter.com</a>
+      <a href="/" class="icon_service icon_twitter stream_filter" data-obj='{"action":"StreamFilter.getAction", "callback":"Stream.show", "comid":"2"}'>twitter.com</a>
     </li>
   </ul>
               
   <p class="filter_headline">Friends Active</p>
   <ul class="normal_list" id="friends_active_list">
     <li class="clearfix">      
-      <a href="#" class="user_filter">
+      <a href="/" class="stream_filter" data-obj='{"action":"StreamFilter.getAction", "callback":"Stream.show", "userid":"1"}'>
         <?php echo image_tag('/img/global/yiid-logo.png', array('width' => 16, 'height' => 16, 'class' => 'icon_user left')); ?>
         <?php echo truncate_text('Matthias Affenkopf', 18, '...'); ?>
       </a>
     </li>
     <li class="clearfix">    
-      <a href="#" class="user_filter">
+      <a href="/" class="stream_filter" data-obj='{"action":"StreamFilter.getAction", "callback":"Stream.show", "userid":"2"}'>
         <?php echo image_tag('/img/global/yiid-logo.png', array('width' => 16, 'height' => 16, 'class' => 'icon_user left')); ?>
         <?php echo truncate_text('Karina Mies', 18, '...'); ?>
       </a>
     </li>
     <li class="user_filter_chosen clearfix">    
-      <a href="#" class="user_filter">
+      <a href="/" class="stream_filter" data-obj='{"action":"StreamFilter.getAction", "callback":"Stream.show", "userid":"3"}'>
         <?php echo image_tag('/img/global/yiid-logo.png', array('width' => 16, 'height' => 16, 'class' => 'icon_user left')); ?>
         <?php echo truncate_text('Christian Weyand', 18, '...'); ?>
       </a>
     </li>
     <li class="clearfix">    
-      <a href="#" class="user_filter">
+      <a href="/" class="stream_filter" data-obj='{"action":"StreamFilter.getAction", "callback":"Stream.show", "userid":"4"}'>
         <?php echo image_tag('/img/global/yiid-logo.png', array('width' => 16, 'height' => 16, 'class' => 'icon_user left')); ?>
         <?php echo truncate_text('Dirk Müller', 18, '...'); ?>
       </a>
