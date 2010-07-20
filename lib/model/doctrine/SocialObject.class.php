@@ -15,15 +15,15 @@ class SocialObject extends BaseSocialObject
 
   public function save(Doctrine_Connection $conn = null) {
     if (!$this->getId()) {
-      $this->setUrlHash(md5($this->getUrl()));
+//      $this->setUrlHash(md5($this->getUrl()));
       $this->setCreatedOn(time());
     }
     $this->setUpdatedOn(time());
 
-    $lAliasArray = explode(',',$this->getAlias());
+ //   $lAliasArray = explode(',',$this->getAlias());
 
     $lObjectToSave = $this->toArray(false);
-    $lObjectToSave['alias'] = $lAliasArray;
+ //   $lObjectToSave['alias'] = $lAliasArray;
 
     $lObjectToSave = SocialObjectTable::saveObjectToMongoDb($lObjectToSave);
     $this->setId($lObjectToSave['_id']);

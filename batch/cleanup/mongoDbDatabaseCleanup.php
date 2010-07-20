@@ -1,6 +1,11 @@
 <?php
+require_once(dirname(__FILE__).'/../../config/ProjectConfiguration.class.php');
 
-require_once(SF_ROOT_DIR.'/lib/model/doctrine/SocialObjectTable.class.php');
+$configuration = ProjectConfiguration::getApplicationConfiguration('platform', 'batch', false);
+include_once(dirname(__FILE__).'/../../../config/setIncludePath.php');
+sfContext::createInstance($configuration);
+
+
 class BatchSocialObjetTable extends SocialObjectTable {
 
   /**
@@ -64,6 +69,12 @@ class BatchSessionStorage {
     }
     return false;
   }
+
 }
 
+
+BatchSocialObjetTable::doRemoveAll(true);
+BatchYiidActivityTable::doRemoveAll(true);
+BatchSessionStorage::doRemoveAll(true);
+echo "cleaned MongoDb!\r\n"
 ?>

@@ -15,6 +15,8 @@ SocialObject:
       type:  string
     oiids:     ## onlineIdentitys which participated on this object
       type: string
+    cids:      ## CommunityIds where this object was shared in
+      type: string
     type:
       type:  integer(4)
     title:
@@ -52,7 +54,7 @@ YiidActivity:
       type:      string(32)
     u_id:
       type:      integer
-    c_id:
+    c_id:        # community id
       type:      integer
     score:
       type:      integer(4)
@@ -60,4 +62,22 @@ YiidActivity:
       type:      integer(4)
     c:
       type:      integer
+      
+      
+      
+      
+
+### indices mmüssen noch definiert werden
+# db.social_object.ensureIndex({url: 1}, { unique: true });
+# db.social_object.ensureIndex({alias: 1}, { unique: true });
+# db.yiid_activity.ensureIndex({so_id: 1, u_id: 1}, { unique: true });
+# db.session.ensureIndex({sess_id: 1}, { unique: true });
+
+
+### neu
+#
+#  index auf oiids
+#  index auf cids
+# 
+#       
         

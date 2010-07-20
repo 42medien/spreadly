@@ -70,6 +70,34 @@ class SocialObjectTable extends Doctrine_Table
 
 
 
+  public static function retrieveHotObjets($pFriendId = null, $pCommunityId = null, $pRange = 7) {
+    $lCollection = self::getMongoCollection();
+
+    $lResults = $lCollection->find(array('u' => array('$gte' => strtotime('-'.$pRange. ' days'))));
+
+    $lResults->sort(array('l_cnt' => -1));
+
+    while($lResults->hasNext()) {
+      $lObjects[] = self::initializeObjectFromCollection($lResults->getNext());
+    }
+    return $lObjects;
+  }
+
+  public static function retrieveFlopObjects($pFriendId = null, $pCommunityId = null, $pRange = 7) {
+
+  }
+
+
+  private static function initializeBasicFilterQuery($pFriendId = null, $pCommunityId = null, $pRange = 7) {
+    $lQueryArray = array();
+  }
+
+
+
+
+
+
+
   /**
    * retrieve SocialObject from MongoDb by its ID
    *
@@ -140,6 +168,10 @@ class SocialObjectTable extends Doctrine_Table
   }
 
 
+  /**
+   * creates object from a given MongoDb Collection
+   * @param unknown_type $pCollection
+   */
   public static function initializeObjectFromCollection($pCollection) {
     $lObject = new SocialObject();
     if ($pCollection) {

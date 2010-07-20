@@ -56,6 +56,9 @@
     <exec command="rm -rf cache/*" />
     
     <exec command="./symfony doctrine:build --all --no-confirmation --and-load" />
+    <exec command="php batch/cleanup/mongoDbDatabaseCleanup.php" />
+    
+    <exec command="./symfony cc" />
   </target>
   
 </project>

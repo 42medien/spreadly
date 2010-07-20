@@ -43,8 +43,6 @@ class SocialObjectTest extends BaseTestCase {
     $lObject = SocialObjectTable::retrieveByUrl('http://affen.de');
     $lAliases = $lObject->getAlias();
 
-
-
     $this->assertTrue(is_object($lObject));
     $this->assertTrue(in_array(md5('http://www.snirgel.de'), $lObject->getAlias()));
 

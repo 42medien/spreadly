@@ -13,15 +13,17 @@
 class YiidActivity extends BaseYiidActivity
 {
 
+  /**
+   *  saves are handled by the related Table-Class as we save them in MongoDB
+   * (non-PHPdoc)
+   * @see lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/vendor/doctrine/Doctrine/Doctrine_Record::save()
+   */
   public function save(Doctrine_Connection $conn = null) {
     $lObjectToSave = $this->toArray(false);
     return $lObjectToSave = YiidActivityTable::saveObjectToMongoDb($lObjectToSave);
   }
 
-
   public function delete(Doctrine_Connection $con = null) {
     $this->collection->remove(array("_id" => new MongoId($this->getId()) ));
   }
-
-
 }
