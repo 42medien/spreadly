@@ -8,11 +8,11 @@
           
   <p class="filter_headline">All Networks</p>
   <ul class="normal_list clearfix" id="all_networks_list">
-    <li class="service_filter_chosen">
-      <a href="/" class="icon_service icon_facebook stream_filter" data-obj='{"action":"StreamFilter.getAction", "callback":"Stream.show", "comid":"1"}'>facebook.com</a>
+    <li class="filter_chosen" id="com-filter-1">
+      <a href="/" class="icon_service icon_facebook stream_filter" target="_blank" data-obj='{"action":"StreamFilter.getAction", "callback":"Stream.show", "comid":"1", "cssid":"com-filter-1"}'>facebook.com</a>
     </li>
-    <li>
-      <a href="/" class="icon_service icon_twitter stream_filter" data-obj='{"action":"StreamFilter.getAction", "callback":"Stream.show", "comid":"2"}'>twitter.com</a>
+    <li id="com-filter-2">
+      <a href="/" class="icon_service icon_twitter stream_filter" target="_blank" data-obj='{"action":"StreamFilter.getAction", "callback":"Stream.show", "comid":"2", "cssid":"com-filter-2"}'>twitter.com</a>
     </li>
   </ul>
               
@@ -41,6 +41,7 @@
         <?php echo image_tag('/img/global/yiid-logo.png', array('width' => 16, 'height' => 16, 'class' => 'icon_user left')); ?>
         <?php echo truncate_text('Dirk Müller', 18, '...'); ?>
       </a>
+    </li>
   </ul>
 
 </div>
