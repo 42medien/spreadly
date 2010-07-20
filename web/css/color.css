@@ -39,7 +39,7 @@ li.filter_chosen a{color: #6a6b6a;}
 
 /* Content_main */
 #stream_left_top p{color: #fff;}
-.whats_hot_active #main_nav_inner2 p, .whats_not_active #main_nav_inner4 p, .whats_new #main_nav_inner7 p{color: #4EA734;}
+.whats_hot_active #main_nav_inner2 p, .whats_not_active #main_nav_inner4 p, .whats_new_active #main_nav_inner7 p{color: #4EA734;}
 #main_nav_outer{background: transparent url("/img/test/navigation1_bg.png") repeat-x;}
 
 #main_nav_inner1{background: transparent url("/img/test/navigation1_part1_dark.png") no-repeat;}
