@@ -5,31 +5,18 @@
 homepage:
   url:   /
   param: { module: stream, action: index }
-  
+
 stream_new:
   url: /stream/new
   param: { module: stream, action: new}
-  
+
 stream_hot:
   url: /stream/hot
   param: { module: stream, action: hot}
-  
+
 stream_not:
   url: /stream/not
   param: { module: stream, action: not}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ##### ROUTES FOR PLUGINS #######
 
@@ -37,7 +24,11 @@ js_log:
   url:   /general/js_log
   param: { module: general, action: js_log }
 
+##### TEST ROUTES #######
 
+test:
+  url:   /test/index
+  param: { module: test, action: index }
 
 ##
 #
