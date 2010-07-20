@@ -28,9 +28,9 @@ class streamActions extends sfActions
     $lCss = $request->getParameter('css');
     $lString = '';
     if($lUserId) {
-      $lString = '"userid":"'.$lUserId.'"';
+      $lString = ', "userid":"'.$lUserId.'"';    	
     } elseif ($lComId) {
-      $lString = '"comid":"'.$lComId.'"';
+      $lString = ', "comid":"'.$lComId.'"';          	
     }
 
     return $this->renderText(
@@ -39,7 +39,7 @@ class streamActions extends sfActions
         array(
           "stream"  => $this->getPartial('stream/new_stream'),
           "action" => "stream/new",
-          "dataobj" => '{"callback":"'.$lCallback.'", '.$lString.'}',
+          "dataobj" => '{"callback":"'.$lCallback.'"'.$lString.'}',
           "css" => $lCss
         )
       )
@@ -55,9 +55,9 @@ class streamActions extends sfActions
     $lCss = $request->getParameter('css');
     $lString = '';
     if($lUserId) {
-      $lString = '"userid":"'.$lUserId.'",';
+      $lString = ', "userid":"'.$lUserId.'"';     
     } elseif ($lComId) {
-      $lString = '"comid":"'.$lComId.'",';
+      $lString = ', "comid":"'.$lComId.'"';           
     }
 
     $pSocialObjects = SocialObjectTable::retrieveHotObjets();
@@ -68,7 +68,7 @@ class streamActions extends sfActions
         array(
           "stream"  => $this->getPartial('stream/whats_hot_stream', array('pSocialObjects' => $pSocialObjects)),
           "action" => "stream/hot",
-          "dataobj" => '{"callback":"'.$lCallback.'", '.$lString.'}',
+          "dataobj" => '{"callback":"'.$lCallback.'"'.$lString.'}',
           "css" => $lCss
         )
       )
@@ -84,17 +84,18 @@ class streamActions extends sfActions
     $lCss = $request->getParameter('css');
     $lString = '';
     if($lUserId) {
-      $lString = '"userid":"'.$lUserId.'",';
+      $lString = ', "userid":"'.$lUserId.'"';     
     } elseif ($lComId) {
-      $lString = '"comid":"'.$lComId.'",';
+      $lString = ', "comid":"'.$lComId.'"';           
     }
+    
     return $this->renderText(
       $lCallback.'('.
       json_encode(
         array(
           "stream"  => $this->getPartial('stream/whats_not_stream'),
           "action" => "stream/not",
-          "dataobj" => '{"callback":"'.$lCallback.'", '.$lString.'}',
+          "dataobj" => '{"callback":"'.$lCallback.'"'.$lString.'}',
           "css" => $lCss
         )
       )
