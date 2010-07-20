@@ -1,51 +1,38 @@
-<div class="so_image left">
-  <?php echo image_tag('/img/global/yiid-logo.png', array('width' => 50)); ?>
-</div>
-        
-<div class="so_information left">
-  <div class="green_arrow">
-          
-    <div class="clearfix">
-      <div class="green_top_left left"></div>
-      <div class="green_top_middle left">
-        <div class="info_area">
+<div class="whats_hot_stream_item">
+	<div class="clearfix">
+    <div class="whats_hot_stream_icon left">
+      <span class="stream_icon stream_icon_location">&nbsp;</span>
+    </div>
+	  <div class="left">
+      <div class="info_area clearfix">
           <div class="left so_headline_left">
-            <span class="icon_small_service icon_small_facebook">&nbsp;</span>
-            <?php echo link_to('Matthias Affenkopf', '@homepage', array('class' => 'text_important')); ?>
-            <span class="url">via Twitter 2 minutes ago</span>
+            <span class="icon_small_service icon_small_facebook left">&nbsp;</span>
+            <?php echo link_to('Matthias Affenkopf', '@homepage', array('class' => 'text_important left')); ?>
+            <span class="url left">via Twitter 2 minutes ago</span>
           </div>
-          <div class="right">
-            <a href="#" class="icon_like icon_small_use">&nbsp;</a>
-            <span class="url" id="like_so">3 like</span>
-            <a href="#" class="icon_dislike icon_small_use">&nbsp;</a>
-            <span class="url" id="dislike_so">3 dislike</span>
+          <div class="right so_headline_right">
+            <a href="#" class="icon_like icon_small_use like-dislike">3 like</a>
+            <a href="#" class="icon_dislike icon_small_use like-dislike">3 dislike</a>
           </div>
         </div>
-      </div>
-      <div class="green_top_right left"></div>
-    </div>
-                      
-    <div class="clearfix">   
-      <div class="green_middle_left left"></div>
-      <div class="green_middle_middle left">
-        <p class="so_comment">lorem ipsum pfefferle affenkopf lorem ipsum pfefferle affenkopf lorem ipsum pfefferle affenkopf lorem ipsum pfefferle affenkopf lorem ipsum pfefferle affenkopf lorem ipsum pfefferle affenkopf ipsum pfefferle affenkopf lorem ipsum pfefferle affenkopf lorem ipsum pfefferle affenkopf lorem ipsum pfefferle affenkopf lorem ipsum pfefferle affenkopf</p>
-                         
-        <!-----------  Das folgende div muss auf style="display:none;" gesetzt und nur bei hover angezeigt werden ------------------------------>
-        <div class="actions right">
-          <a href="#" class="icon_comment icon_small_use text_action">comment</a>
-          <a href="#" class="icon_favorite icon_small_use text_action">favorite</a>
-          <a href="#" class="icon_hide icon_small_use text_action">hide</a>
-        </div>
-        <!-----------  Das vorige div muss auf style="display:none;" gesetzt und nur bei hover angezeigt werden ------------------------------>
-                 
-      </div>
-    </div>
-                      
-    <div class="clearfix">
-      <div class="green_bottom_left left"></div>
-      <div class="green_bottom_middle left"></div>
-      <div class="green_bottom_right left"></div>
-    </div>    
-          
-  </div>            
+        <div class="clearfix whats_hot_info_area">
+	        <p class="text_important">Berlin, Germany</p>
+	        <p class="url">type / 52° 30' 35.59° N 13° 22' 25.76° E</p>
+	        <p>Intensive trials are under way as the world's largest solar-powered yacht...</p>
+	      </div>
+	  </div>
+	  <div class="right preview_information">
+      <?php echo image_tag('/img/test/map_preview.png'); ?>
+	  </div>
+	</div>
+	
+	<!-----------  Das folgende div muss auf style="display:none;" gesetzt und nur bei hover angezeigt werden ------------------------------>
+	<div class="actions clearfix">
+	  <div class="action_content right">
+	    <a href="#" class="icon_comment icon_small_use text_action">comment</a>
+	    <a href="#" class="icon_favorite icon_small_use text_action">favorite</a>
+	    <a href="#" class="icon_hide icon_small_use text_action">hide</a>
+	  </div>
+	</div>
+	<!-----------  Das vorige div muss auf style="display:none;" gesetzt und nur bei hover angezeigt werden ------------------------------>
 </div>

@@ -16,5 +16,9 @@ class streamComponents extends sfComponents
   public function executeSidebar_right() {}
   
   public function executeNew_stream() {}
+  
+  public function executeWhats_hot_stream() {}
+  
+  public function executeWhats_not_stream() {}
 }
 ?>
