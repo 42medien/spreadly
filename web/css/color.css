@@ -95,13 +95,30 @@ li.filter_chosen a{color: #6a6b6a;}
 
 #stream_right_top p{color: #fff;border-color: #cdcdcd;}
   #nav_shares_outer{background: transparent url("/img/test/navigation2_bg.png") repeat-x;}
+  
 	#nav_shares_inner1{background: #fff url("/img/test/navigation2_part1_left.png") no-repeat;}
+  .thumb_up_active #nav_shares_inner1, .thumb_down_active #nav_shares_inner1{background: #fff url("/img/test/navigation2_part1_left_dark.png") no-repeat;}
+	
 	#nav_shares_inner2{background: #fff url("/img/test/navigation2_part1_content.png") repeat-x;}
+  .thumb_up_active #nav_shares_inner2, .thumb_down_active #nav_shares_inner2{background: #fff url("/img/test/navigation2_part3_content.png") repeat-x;}
+  
+	#nav_shares_inner3{background: transparent url("/img/test/right_between1and2_light_dark.png") no-repeat;}
+	.thumb_up_active #nav_shares_inner3{background: transparent url("/img/test/right_between3and4_dark_light.png") no-repeat;}
 	.thumb_down_active #nav_shares_inner3{background: transparent url("/img/test/right_between2and3_dark_dark.png") no-repeat;}
+	
 	#nav_shares_inner4{background: #acacac url("/img/test/navigation2_part3_content.png") repeat-x;}
+  .thumb_up_active #nav_shares_inner4{background: #acacac url("/img/test/navigation2_part1_content.png") repeat-x;}
+	
 	#nav_shares_inner5{background: transparent url("/img/test/right_between2and3_dark_dark.png") no-repeat;}
+	.thumb_up_active #nav_shares_inner5{background: transparent url("/img/test/right_between1and2_light_dark.png") no-repeat;}
+  .thumb_down_active #nav_shares_inner5{background: transparent url("/img/test/right_between3and4_dark_light.png") no-repeat;}
+	
 	#nav_shares_inner6{background: #6a6b6a url("/img/test/navigation2_part3_content.png") repeat-x;}
+  .thumb_down_active #nav_shares_inner6{background: #acacac url("/img/test/navigation2_part1_content.png") repeat-x;}
+  
 	#nav_shares_inner7{background: transparent url("/img/test/right_between3and4.png") no-repeat;}
+  .thumb_down_active #nav_shares_inner7{background: transparent url("/img/test/right_between3and4_light.png") no-repeat;}
+	
 #stream_right_bottom{background-color: #ecf6e9;}
 .thumb_up_down{background: transparent url("/img/test/thumb_up_down.png") center no-repeat;}
 .thumb_up{background: transparent url("/img/test/thumb_up.png") center no-repeat;}

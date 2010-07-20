@@ -10,7 +10,7 @@
   </div>
 
   <div id="stream_right_top" class="clearfix">
-    <?php include_partial('nav_shares'); ?>
+    <?php include_partial('share_navigation'); ?>
   </div>
   
   <div id="stream_right_bottom">
