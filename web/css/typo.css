@@ -18,7 +18,7 @@ h4{ font-size: 1.2em; font-weight: bold; }
 a:hover, .btn:hover{text-decoration: underline;}
 a, a.icon_thumb, li.service_filter_chosen a, a.icon_thumbs, a.icon_thumb, a.icon_small_use, li.user_filter_chosen a{text-decoration: none;}
 
-.user_name, #stream_left_top p, .text_important{font-weight: bold;}
+.user_name, .text_important, #main_nav_inner2 p:hover, #main_nav_inner4 p:hover, #main_nav_inner7 p:hover, .whats_hot_active #main_nav_inner2 p, .whats_not_active #main_nav_inner4 p, .whats_new #main_nav_inner7 p{font-weight: bold;}
 
 .url{font-style: italic;}
 
