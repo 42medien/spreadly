@@ -17,7 +17,7 @@ class streamActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-
+    $this->pSocialObjects = SocialObjectTable::retrieveHotObjets();
   }
 
   public function executeNew(sfWebRequest $request) {

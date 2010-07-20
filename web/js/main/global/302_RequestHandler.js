@@ -88,12 +88,22 @@ var GlobalRequest = {
     GlobalRequest.aParams = lParams;		
 	},
 	
+	/**
+	 * checks, if the action in data-obj is a real action string like "module/action" or a callback, what will used global like SubFilter.getAction
+	 * if it is a callback, we get the action-string from that
+	 * @author KM
+	 * @param string pString
+	 */
 	parseAction: function(pString) {
     console.log("[GlobalRequest][parseAction]");    		
     var lAction = pString;
+    //if there is a dot in the string, it is a callback-function if not, it is a action-string and we return it
     if(lAction.indexOf('.') != -1) {
+    	//explode the string between the dot
     	var lArray = lAction.split('.');
+    	//if the so called function exists
 	    if(typeof window[lArray[0]][lArray[1]] == 'function') {
+	    	//call it and write the result to local var
 	      lAction = window[lArray[0]][lArray[1]]();  
 	    }     	
     }

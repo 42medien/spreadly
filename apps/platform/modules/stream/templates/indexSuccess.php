@@ -4,6 +4,6 @@
   </div>
 
   <div id="stream_left_bottom" class="bg_light clearfix">
-    <?php include_component('stream', 'whats_hot_stream'); ?>
+    <?php include_partial('stream/whats_hot_stream', array('pSocialObjects' => $pSocialObjects)); ?>
   </div>
 </div>
