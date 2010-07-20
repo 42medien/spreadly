@@ -27,8 +27,8 @@ label{color: #6A6B6A;}
 .icon_small_twitter{background: transparent url("/img/test/twitter_12.png") 0 4px no-repeat;}
 .icon_small_google{background: transparent url("/img/test/google_12.png") 0 4px no-repeat;}
 
-.service_filter_chosen, .user_filter_chosen{background-color: #ecf6e9;}
-li.service_filter_chosen a, li.user_filter_chosen a{color: #6a6b6a;}
+.filter_chosen{background-color: #ecf6e9;}
+li.filter_chosen a{color: #6a6b6a;}
 
 
 .icon_like{background: transparent url("/img/test/like.png") 0 4px no-repeat;}
@@ -97,9 +97,9 @@ li.service_filter_chosen a, li.user_filter_chosen a{color: #6a6b6a;}
   #nav_shares_outer{background: transparent url("/img/test/navigation2_bg.png") repeat-x;}
 	#nav_shares_inner1{background: #fff url("/img/test/navigation2_part1_left.png") no-repeat;}
 	#nav_shares_inner2{background: #fff url("/img/test/navigation2_part1_content.png") repeat-x;}
-	#nav_shares_inner3{background: transparent url("/img/test/right_between1and2.png") no-repeat;}
-	#nav_shares_inner4{background: #acacac url("/img/test/navigation2_part2_content.png") repeat-x;}
-	#nav_shares_inner5{background: transparent url("/img/test/right_between2and3.png") no-repeat;}
+	.thumb_down_active #nav_shares_inner3{background: transparent url("/img/test/right_between2and3_dark_dark.png") no-repeat;}
+	#nav_shares_inner4{background: #acacac url("/img/test/navigation2_part3_content.png") repeat-x;}
+	#nav_shares_inner5{background: transparent url("/img/test/right_between2and3_dark_dark.png") no-repeat;}
 	#nav_shares_inner6{background: #6a6b6a url("/img/test/navigation2_part3_content.png") repeat-x;}
 	#nav_shares_inner7{background: transparent url("/img/test/right_between3and4.png") no-repeat;}
 #stream_right_bottom{background-color: #ecf6e9;}

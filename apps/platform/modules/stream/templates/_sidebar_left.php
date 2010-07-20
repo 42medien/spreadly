@@ -30,7 +30,7 @@
         <?php echo truncate_text('Karina Mies', 18, '...'); ?>
       </a>
     </li>
-    <li class="user_filter_chosen clearfix">    
+    <li class="filter_chosen clearfix">    
       <a href="/" class="user_filter stream_filter" data-obj='{"action":"StreamFilter.getAction", "callback":"Stream.show", "userid":"3"}'>
         <?php echo image_tag('/img/global/yiid-logo.png', array('width' => 16, 'height' => 16, 'class' => 'icon_user left')); ?>
         <?php echo truncate_text('Christian Weyand', 18, '...'); ?>
