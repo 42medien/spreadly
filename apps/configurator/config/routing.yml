@@ -1,0 +1,31 @@
+publishers:
+  url:   /publishers
+  param: { module: likebutton, action: publishers }
+
+shops:
+  url:   /shops
+  param: { module: likebutton, action: shops }
+
+nonprofits:
+  url:   /nonprofits
+  param: { module: likebutton, action: nonprofits }
+
+webmasters:
+  url:   /webmasters
+  param: { module: likebutton, action: webmasters }
+
+# default rules
+homepage:
+  url:   /
+  param: { module: likebutton, action: index }
+
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*
+  
+like_get_code:
+  url:   /likebutton/get_code
+  param: { module: likebutton, action: get_code }
