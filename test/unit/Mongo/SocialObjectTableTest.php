@@ -10,10 +10,6 @@ class SocialObjectTableTest extends BaseTestCase {
     self::$aUserHugo = UserTable::retrieveByUsername('hugo');
   }
 
-  public function testSave() {
-    parent::resetMongo();
-  }
-
 
   public function testGetHot() {
     parent::resetMongo();
@@ -27,9 +23,8 @@ class SocialObjectTableTest extends BaseTestCase {
     $lObject2->updateObjectOnLikeActivity(1, 'http://bim.bo', 1);
 
     $lObject3 = SocialObjectTable::createSocialObject('http://spiegel.de', null, 'spiegel.de title', 'spiegel.de description', null);
-    $lObject3->updateObjectOnLikeActivity(1, 'http://spiegel.de', 1);
-    $lObject3->updateObjectOnLikeActivity(1, 'http://spiegel.de', 1);
-
+    $lObject3->updateObjectOnLikeActivity(2, 'http://spiegel.de', 1);
+    $lObject3->updateObjectOnLikeActivity(3, 'http://spiegel.de', 1);
 
     $lObjects = SocialObjectTable::retrieveHotObjets();
 
