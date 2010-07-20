@@ -42,12 +42,14 @@ var ErrorLogger = {
       //and send the request
       jQuery.ajax({
         type: "POST",
-        url: 'http://www.yiid.local/general/js_log',
+        url: 'general/js_log',
         dataType: "json",
         data: options
       });      
       console.log(ErrorLogger.aErrorMsg);
     }
+    
+    return false;
   },
   
   /**

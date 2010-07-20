@@ -6,9 +6,17 @@ homepage:
   url:   /
   param: { module: stream, action: index }
   
-stream_show:
-  url: /stream/show
-  param: { module: stream, action: show}
+stream_new:
+  url: /stream/new
+  param: { module: stream, action: new}
+  
+stream_hot:
+  url: /stream/hot
+  param: { module: stream, action: hot}
+  
+stream_not:
+  url: /stream/not
+  param: { module: stream, action: not}
 
 
 

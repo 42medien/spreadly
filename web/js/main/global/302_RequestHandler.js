@@ -1,9 +1,10 @@
 /**
  * GlobalRequest: Binds the clicks and sends the request to the specified Action
  * Response will be handled in the specified callback
+ * 
  * @author KM
  * @version 1.0
- * @combine platform
+ * @nocombine platform
  */
 
 var GlobalRequest = {
@@ -19,8 +20,9 @@ var GlobalRequest = {
 	 * @param object pParams
 	 */
 	initGlobals: function(pElement, pParams) {
+		console.log("[GlobalRequest][initGlobals]");
 		//is the given element an link
-    if(jQuery(pElement).is('a')) {
+    if(jQuery(pElement).is('a') && !jQuery(pElement).attr('data-obj') && !jQuery(pElement).attr('onclick')) {
     	//set the global vars in the setGlobalsByUri method
       GlobalRequest.setGlobalsByUri(jQuery(pElement).attr('href'));
     } else if(pParams != undefined) {
@@ -38,6 +40,7 @@ var GlobalRequest = {
 	 * @param string pHref (have to look like that: http://example.com?callback=MYCALLBACK()&param=PARAM)
 	 */
 	setGlobalsByUri: function(pHref) {
+    console.log("[GlobalRequest][setGlobalsByUri]");		
 		//take the callback from the href-uri
     GlobalRequest.aCallback = pHref.match(/([?&]callback[a-zA-Z0-9=\.]+)/)[0].split('=')[1];
     //and delete it from it, because we dont need twice the same param 
@@ -51,6 +54,7 @@ var GlobalRequest = {
 	 * @param object pParams
 	 */
 	setGlobalsByObject: function(pParams) {
+    console.log("[GlobalRequest][setGlobalsByObject]");		
 		//set global action and callback vars
 		GlobalRequest.aAction = pParams.action;
 		GlobalRequest.aCallback = pParams.callback;
@@ -68,18 +72,32 @@ var GlobalRequest = {
    * @param object pElement
    */	
 	setGlobalByData: function(pElement) {
+    console.log("[GlobalRequest][setGlobalByData]");   		
 		//take the data-obj attribute from the given element
 		var lParams = jQuery(pElement).attr('data-obj');
 		//parse it to a object
 		lParams = jQuery.parseJSON(lParams);
+		//lAction = jQuery.parseJSON(lParams.action);
     //set global action and callback vars
-    GlobalRequest.aAction = lParams.action;
+    GlobalRequest.aAction = GlobalRequest.parseAction(lParams.action);        
     GlobalRequest.aCallback = lParams.callback;
     //delete them from the params, because we don't have to send them to the action    
     delete lParams.action;
     delete lParams.callback;
     //and ste the global params var for the doSend    
     GlobalRequest.aParams = lParams;		
+	},
+	
+	parseAction: function(pString) {
+    console.log("[GlobalRequest][parseAction]");    		
+    var lAction = pString;
+    if(lAction.indexOf('.') != -1) {
+    	var lArray = lAction.split('.');
+	    if(typeof window[lArray[0]][lArray[1]] == 'function') {
+	      lAction = window[lArray[0]][lArray[1]]();  
+	    }     	
+    }
+    return lAction;
 	},
 	
 	/**
@@ -91,6 +109,7 @@ var GlobalRequest = {
 	 * @param object pParams
 	 */
 	bindClickById: function(pId, pParams) {
+    console.log("[GlobalRequest][bindClickById]"); 		
 		//get the element identified by the given id
 		var lElement = jQuery('#'+pId);
 		//init the global vars for dosend
@@ -114,6 +133,7 @@ var GlobalRequest = {
    * @param object pParams
    */	
 	bindClickByTag: function(pParentId, pTagName, pParams) {
+    console.log("[GlobalRequest][bindClickByTag]");  		
 		//bind the click to all tags that are childs of the given parentid -> ATTENTION: this is needed for performance. 
 		//Never ever bind events to a tagname global
     jQuery('#'+pParentId+' '+pTagName).live("click", function() {
@@ -136,6 +156,7 @@ var GlobalRequest = {
    * @param object pParams
    */ 	
   bindClickByClass: function(pParentId, pClassName, pParams) {
+    console.log("[GlobalRequest][bindClickByClass]");     	
     //bind the click to all elements that are childs of the given parentid and has the given classname -> ATTENTION: this is needed for performance. 
     //Never ever bind events to a tagname global  	
     jQuery('#'+pParentId+' .'+pClassName).live("click", function() { 
@@ -146,6 +167,17 @@ var GlobalRequest = {
       return false;
     });    	
   },	
+  
+  bindClickByElement: function(pElement, pParams) {
+    console.log("[GlobalRequest][bindClickByElement]");     	
+  	jQuery(pElement).die('click');
+    GlobalRequest.initGlobals(lElement, pParams);
+  	jQuery(pElement).live("click", function() {
+      //and send request on click      
+      GlobalRequest.doSend();
+      return false;  		
+  	});
+  },
 	
 	/**
 	 * method called by the onclick-attribute: 
@@ -157,10 +189,12 @@ var GlobalRequest = {
    * @param object pParams
 	 */
 	initOnClick: function(pElement, pParams) {
+    console.log("[GlobalRequest][initOnClick]");  		
     //init the global vars for dosend 
     GlobalRequest.initGlobals(pElement, pParams);  
     //and send request on click  
     GlobalRequest.doSend();
+    return false;
 	},
 	
 	
@@ -172,6 +206,7 @@ var GlobalRequest = {
 	 * @param string pActionType
 	 */
 	doSend: function(pActionType) {
+    console.log("[GlobalRequest][doSend]");  		
 		var lActionType = 'GET';
 		if(pActionType) {
 			lActionType = pActionType;

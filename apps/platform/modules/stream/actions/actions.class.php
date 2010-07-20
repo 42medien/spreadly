@@ -20,18 +20,82 @@ class streamActions extends sfActions
     
   }
   
-  public function executeShow(sfWebRequest $request) {
+  public function executeNew(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
     $lCallback = $request->getParameter('callback', 'logerror');
-    //var_dump($lCallback);die();
+    $lUserId = $request->getParameter('userid', null);
+    $lComId = $request->getParameter('comid', null);
+    $lCss = $request->getParameter('css');
+    $lString = '';
+    if($lUserId) {
+      $lString = '"userid":"'.$lUserId.'"';    	
+    } elseif ($lComId) {
+      $lString = '"comid":"'.$lComId.'"';          	
+    }
+    
     return $this->renderText(
       $lCallback.'('.
       json_encode(
         array(
-          "success"  => true
+          "stream"  => $this->getPartial('stream/new_stream'),
+          "action" => "stream/new",
+          "dataobj" => '{"callback":"'.$lCallback.'", '.$lString.'}',
+          "css" => $lCss          
         )
       )
       .");"
     );  	
   }
+  
+  public function executeHot(sfWebRequest $request) {
+    $this->getResponse()->setContentType('application/json');
+    $lCallback = $request->getParameter('callback', 'logerror');
+    $lUserId = $request->getParameter('userid', null);
+    $lComId = $request->getParameter('comid', null);
+    $lCss = $request->getParameter('css');    
+    $lString = '';
+    if($lUserId) {
+      $lString = '"userid":"'.$lUserId.'",';      
+    } elseif ($lComId) {
+      $lString = '"comid":"'.$lComId.'",';            
+    }    
+    return $this->renderText(
+      $lCallback.'('.
+      json_encode(
+        array(
+          "stream"  => $this->getPartial('stream/whats_hot_stream'),
+          "action" => "stream/hot",
+          "dataobj" => '{"callback":"'.$lCallback.'", '.$lString.'}',
+          "css" => $lCss  
+        )
+      )
+      .");"
+    );    
+  } 
+
+  public function executeNot(sfWebRequest $request) {
+    $this->getResponse()->setContentType('application/json');
+    $lCallback = $request->getParameter('callback', 'GlobalError.logerror');
+    $lUserId = $request->getParameter('userid', null);
+    $lComId = $request->getParameter('comid', null);
+    $lCss = $request->getParameter('css');     
+    $lString = '';
+    if($lUserId) {
+      $lString = '"userid":"'.$lUserId.'",';      
+    } elseif ($lComId) {
+      $lString = '"comid":"'.$lComId.'",';            
+    }    
+    return $this->renderText(
+      $lCallback.'('.
+      json_encode(
+        array(
+          "stream"  => $this->getPartial('stream/whats_not_stream'),
+          "action" => "stream/not",
+          "dataobj" => '{"callback":"'.$lCallback.'", '.$lString.'}',
+          "css" => $lCss                              
+        )
+      )
+      .");"
+    );    
+  }    
 }
