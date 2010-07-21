@@ -72,7 +72,7 @@ var StreamFilter = {
  */
 var SubFilter = {
 
-  aAction: 'stream/new',
+  aAction: 'stream/hot',
   
   /**
    * set the action for the sub-filter-links global. The Action is defined in the last called action, e.g. new (response.action)

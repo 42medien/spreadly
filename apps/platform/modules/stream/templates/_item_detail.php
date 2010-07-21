@@ -7,19 +7,15 @@
   </div>
 </div>
 
-<div id="stream_right_top" class="clearfix">
-  <?php include_partial('share_navigation'); ?>
-</div>
+  <div id="stream_right_top" class="clearfix">
+    <?php include_partial('share_navigation', array('pObjectId' => '1')); ?>
+  </div>
   
-<div id="stream_right_bottom" class="clearfix">
-  <ul class="shares">
-  <?php for($i=0;$i<7;$i++) { ?>
-    <li class="clearfix">
-      <?php include_partial('item_shares'); ?>    
-    </li>
-  <?php } ?>
-  </ul>
-	
+  <div id="stream_right_bottom">
+    <ul class="shares" id="detail-stream">
+      <?php include_partial('item_shares', array('param' => 'param')); ?>    
+    </ul>
+  </div>
 	<div class="right right_shares_pager">
 	  <a href="/" class="pager_load_more">Load more...</a>
 	</div>

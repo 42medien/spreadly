@@ -118,4 +118,24 @@ class streamActions extends sfActions
       .");"
     );  	
   }
+  
+  public function executeGet_item_detail_stream(sfWebRequest $request) {
+    $this->getResponse()->setContentType('application/json');  
+    $lCallback = $request->getParameter('callback', 'GlobalError.logerror');
+    $lCase = $request->getParameter('case');
+    $lItemId = $request->getParameter('itemid');
+    $lCss = $request->getParameter('css');    
+    return $this->renderText(
+      $lCallback.'('.
+      json_encode(
+        array(
+          "stream"  => $this->getPartial('stream/item_shares'),
+          "css" => $lCss        
+        )
+      )
+      .");"
+    );    	
+  	
+  }
+  
 }
