@@ -32,7 +32,7 @@ abstract class BaseTestCase extends PHPUnit_Framework_TestCase{
     //Doctrine::loadData(SF_ROOT_DIR.'/data/sql/fixtures');
   }
 
-  public function resetMongo() {
+  public static function resetMongo() {
     BatchSocialObjetTable::doRemoveAll(true);
     BatchYiidActivityTable::doRemoveAll(true);
     BatchSessionStorage::doRemoveAll(true);

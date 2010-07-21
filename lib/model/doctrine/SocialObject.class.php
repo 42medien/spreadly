@@ -19,6 +19,7 @@ class SocialObject extends BaseSocialObject
       $this->setCreatedOn(time());
       $this->setAlias(array(md5($this->getUrl())));
     }
+
     $this->setUpdatedOn(time());
 
  //   $lAliasArray = explode(',',$this->getAlias());

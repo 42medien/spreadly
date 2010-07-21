@@ -21,8 +21,6 @@ class SocialObjectTest extends BaseTestCase {
     $this->assertEquals('affen title', $lObject->getTitle());
   }
 
-
-
   public function testUpdateOnActivity() {
     parent::resetMongo();
 

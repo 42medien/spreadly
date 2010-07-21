@@ -73,26 +73,55 @@ class SocialObjectTable extends Doctrine_Table
   public static function retrieveHotObjets($pFriendId = null, $pCommunityId = null, $pRange = 7) {
     $lCollection = self::getMongoCollection();
 
-    $lResults = $lCollection->find(array('u' => array('$gte' => strtotime('-'.$pRange. ' days'))));
-
+    $lQueryArray = self::initializeBasicFilterQuery($pFriendId, $pCommunityId, $pRange);
+    $lResults = $lCollection->find($lQueryArray);
     $lResults->sort(array('l_cnt' => -1));
 
-    while($lResults->hasNext()) {
-      $lObjects[] = self::initializeObjectFromCollection($lResults->getNext());
-    }
-    return $lObjects;
+    return self::hydrateMongoCollectionToObjects($lResults);
   }
+
 
   public static function retrieveFlopObjects($pFriendId = null, $pCommunityId = null, $pRange = 7) {
 
+    $lCollection = self::getMongoCollection();
+    $lQueryArray = self::initializeBasicFilterQuery($pFriendId, $pCommunityId, $pRange);
+
+    $lResults = $lCollection->find();
+    $lResults->sort(array('d_cnt' => -1));
   }
 
 
-  private static function initializeBasicFilterQuery($pFriendId = null, $pCommunityId = null, $pRange = 7) {
+
+  /**
+   * generates common filter elements we need in each query
+   *
+   * @param array() $pOis
+   * @param int $pCommunityId
+   * @param int $pRange
+   * @return array()
+   */
+  private static function initializeBasicFilterQuery($pOis = null, $pCommunityId = null, $pRange = 7) {
     $lQueryArray = array();
+    $lQueryArray['u'] = array('$gte' => strtotime('-'.$pRange. ' days'));
+    if ($pCommunityId) {
+      $lQueryArray['cids'] = array('$in' => array($pCommunityId));
+    }
+    return $lQueryArray;
   }
 
 
+  /**
+   * hydrate social objects from the extracted collection and return an array
+   *
+   * @param unknown_type $pCollection
+   * @return array(SocialObject)
+   */
+  private static function hydrateMongoCollectionToObjects($pCollection) {
+    while($pCollection->hasNext()) {
+      $lObjects[] = self::initializeObjectFromCollection($pCollection->getNext());
+    }
+    return $lObjects;
+  }
 
 
 

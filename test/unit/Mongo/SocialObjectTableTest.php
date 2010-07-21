@@ -6,6 +6,7 @@ class SocialObjectTableTest extends BaseTestCase {
   static public $aUserHugo = null;
 
   public static function setUpBeforeClass() {
+    parent::resetMongo();
     Doctrine::loadData(dirname(__file__).'/fixtures');
     self::$aUserHugo = UserTable::retrieveByUsername('hugo');
   }
@@ -28,6 +29,24 @@ class SocialObjectTableTest extends BaseTestCase {
 
     $lObjects = SocialObjectTable::retrieveHotObjets();
 
+    $this->assertTrue(is_array($lObjects));
+    $this->assertTrue(is_object($lObjects[1]));
+    $this->assertEquals('spiegel.de title', $lObjects[1]->getTitle());
+
+  }
+
+
+public function testGetHotByCommunity() {
+    parent::resetMongo();
+
+    Doctrine::loadData(dirname(__file__).'/fixtures');
+
+
+    $lObjects = SocialObjectTable::retrieveHotObjets(null, 1);
+
+    foreach ($lObjects as $value) {
+      echo $value->getTitle()." - ". $value->getLikeCount() ."\r\n";
+    }
     $this->assertTrue(is_array($lObjects));
     $this->assertTrue(is_object($lObjects[1]));
     $this->assertEquals('spiegel.de title', $lObjects[1]->getTitle());
