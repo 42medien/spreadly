@@ -5,7 +5,4 @@
   </li>
 <?php } ?>
 </ul>
-
-<div class="clearfix main_stream_pager">
-  <a href="/" class="pager_load_more">Load more...</a>
-</div>
+<?php include_partial('stream/stream_pager', array('page' => '1')); ?>

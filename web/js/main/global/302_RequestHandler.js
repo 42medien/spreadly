@@ -156,7 +156,7 @@ var GlobalRequest = {
 	},
 	
   /**
-   * bind a click-event to a all child-objects of parentid with the given class
+   * bind a click-event to all child-objects of parentid with the given class
    * initialized like this: GlobalRequest.bindClickByTag('ul-cssid', 'li-child-with-class',  {"action":"module/action", "callback":"MYCALLBACK()", "param":"param"})
    * if pParams is not set, the element with the pClassName have to be an data-obj attribute:
    * data-obj='{"action":"module/action", "callback":"MYCALLBACK()", "param":"param"}'
@@ -178,11 +178,17 @@ var GlobalRequest = {
     });    	
   },	
   
+  /**
+   * binds a click-event to the given element
+   * @author KM
+   * @param object pElement
+   * @param object pParames
+   */
   bindClickByElement: function(pElement, pParams) {
     console.log("[GlobalRequest][bindClickByElement]");     	
   	jQuery(pElement).die('click');
-    GlobalRequest.initGlobals(lElement, pParams);
   	jQuery(pElement).live("click", function() {
+      GlobalRequest.initGlobals(pElement, pParams);  		
       //and send request on click      
       GlobalRequest.doSend();
       return false;  		

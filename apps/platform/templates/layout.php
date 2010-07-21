@@ -52,7 +52,8 @@
 	  </div>
   <script type="text/javascript" src="/js/main/include/platform-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
   <script type="text/javascript" src="/js/main/global/302_RequestHandler.js"></script> 
-  <script type="text/javascript" src="/js/main/global/303_ElementHandler.js"></script>  
+  <script type="text/javascript" src="/js/main/global/303_ElementHandler.js"></script>
+  <script type="text/javascript" src="/js/main/global/304_Pager.js"></script>
   <script type="text/javascript" src="/js/platform/stream/StreamHandler.js"></script>
   <script type="text/javascript" src="/js/platform/stream/StreamItemHandler.js"></script>  
   <script type="text/javascript" src="/js/platform/stream/ItemDetailHandler.js"></script>    

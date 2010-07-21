@@ -52,6 +52,7 @@ class streamActions extends sfActions
     $lCallback = $request->getParameter('callback', 'logerror');
     $lUserId = $request->getParameter('userid', null);
     $lComId = $request->getParameter('comid', null);
+    $lPage = $request->getParameter('page', 0);    
     $lCss = $request->getParameter('css');
     $lString = '';
     if($lUserId) {
@@ -69,6 +70,7 @@ class streamActions extends sfActions
           "stream"  => $this->getPartial('stream/whats_hot_stream', array('pSocialObjects' => $pSocialObjects)),
           "action" => "stream/hot",
           "dataobj" => '{"callback":"'.$lCallback.'"'.$lString.'}',
+          "page" => $lPage,
           "css" => $lCss
         )
       )
@@ -81,6 +83,7 @@ class streamActions extends sfActions
     $lCallback = $request->getParameter('callback', 'GlobalError.logerror');
     $lUserId = $request->getParameter('userid', null);
     $lComId = $request->getParameter('comid', null);
+    $lPage = $request->getParameter('page', 0);
     $lCss = $request->getParameter('css');
     $lString = '';
     if($lUserId) {
@@ -97,7 +100,8 @@ class streamActions extends sfActions
         array(
           "stream"  => $this->getPartial('stream/whats_not_stream', array('pSocialObjects' => $pSocialObjects)),
           "action" => "stream/not",
-          "dataobj" => '{"callback":"'.$lCallback.'"'.$lString.'}',
+          "dataobj" => '{"callback":"'.$lCallback.'"'.$lString.', "page": "'.$lPage.'"}',
+          "page" => $lPage,        
           "css" => $lCss
         )
       )

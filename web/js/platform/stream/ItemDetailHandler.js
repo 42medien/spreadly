@@ -14,7 +14,7 @@ var ItemDetailStream = {
 		jQuery('#detail-stream').empty();
 		jQuery('#detail-stream').append(pResponse.stream);
 		ItemDetailFilter.updateCss(pResponse.css);
-	},
+	}
 	
 };
 

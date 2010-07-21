@@ -117,7 +117,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
         .whats_hot_info_area p{margin: 4px 10px;}
         
         .pager_load_more{padding: 5px 22px 5px 11px;}
-        .main_stream_pager{margin: 10px 0 15px 15px;}
+        #main_stream_pager{margin: 10px 0 15px 15px;}
         .right_shares_pager{margin-top: 15px;}
         
         .user_hover_area{position: relative;top: -190px;left: -25px; z-index: 400;}

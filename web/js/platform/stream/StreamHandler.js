@@ -18,14 +18,20 @@ var Stream = {
 	 */
 	show: function(pResponse) { 
 		console.log("[Stream][show]");
-		//empty the stream
-		jQuery('#stream_left_bottom').empty();
+		console.log(pResponse.page);
+		if(pResponse.page < 1 || pResponse.page == undefined) {
+			//empty the stream
+			jQuery('#stream_left_bottom').empty();
+		}
+		jQuery('#main_stream_pager').remove();
 		//append the new
 		jQuery('#stream_left_bottom').append(pResponse.stream);
 		//set the action for next requests global 
 		SubFilter.setAction(pResponse.action);
 		//update the data-obj attribute of the filter
-    MainFilter.updateData(pResponse.dataobj);		
+		MainFilter.setAction(pResponse.action);
+    MainFilter.updateData(pResponse.dataobj);
+    DataObjectPager.update('stream_pager_link', pResponse.action, pResponse.page, MainFilter.aDataObj);    
     //do some css-effects
     StreamFilter.updateCss(pResponse.css);
 	}
@@ -44,25 +50,25 @@ var StreamFilter = {
 	 * @param object pCssObj(JSON)
 	 */
 	updateCss: function(pCssObj) {
-		//get the css class and id that you wanna change
-    var lCssObj = jQuery.parseJSON(pCssObj);
-    var lCssId = lCssObj['id'];
-    var lCssClass = lCssObj['class'];
-    //if you wanna update the main-nav
-    if(lCssId == 'main_nav_outer'){
-    	//remove the current highlighting
-      MainFilter.removeCss();
-      //and add the new for highlighting
-      jQuery('#'+lCssId).addClass(lCssClass);
-    } else {
-    	//if u wanna change the subnavi on sidebar
-    	//remove the current highlighting
-      SubFilter.removeCss();
-      
-      //ClassHandler.removeClassesByParent(jQuery('.'+lCssClass), 'filter_chosen');
-      //and highlight the new
-      jQuery('#'+lCssId).addClass('filter_chosen');
-    }
+		if(pCssObj) {
+			//get the css class and id that you wanna change
+	    var lCssObj = jQuery.parseJSON(pCssObj);
+	    var lCssId = lCssObj['id'];
+	    var lCssClass = lCssObj['class'];
+	    //if you wanna update the main-nav
+	    if(lCssId == 'main_nav_outer'){
+	    	//remove the current highlighting
+	      MainFilter.removeCss();
+	      //and add the new for highlighting
+	      jQuery('#'+lCssId).addClass(lCssClass);
+	    } else {
+	    	//if u wanna change the subnavi on sidebar
+	    	//remove the current highlighting
+	      SubFilter.removeCss();
+	      //and highlight the new
+	      jQuery('#'+lCssId).addClass('filter_chosen');
+	    }
+		}
 	}
 };
 
@@ -113,6 +119,7 @@ var SubFilter = {
 var MainFilter = {
 	
 	aDataObj: {},
+	aAction: 'stream/hot',
 	
 	/**
 	 * parse the updated data-obj from the response
@@ -120,12 +127,20 @@ var MainFilter = {
 	 * @param object pDataObj(JSON)
 	 */
   updateData: function(pDataObj) {
-    console.log("[MainFilter][update]");
+    console.log("[MainFilter][updateData]");
     //parse the request-data-obj and write it in global var 	
   	MainFilter.aDataObj = jQuery.parseJSON(pDataObj);
     jQuery.each(jQuery('.main_filter'), function(i, pField) {
       MainFilter.setData(this);
     });
+  },
+  
+  getAction: function() {
+  	return MainFilter.aAction;
+  },
+  
+  setAction: function(pAction) {
+  	MainFilter.aAction = pAction;
   },
   
   /**
@@ -134,31 +149,36 @@ var MainFilter = {
    * @param object pElement(DOM)
    */
   setData:  function(pElement) {
-    console.log("[MainFilter][setData]");     	
+    console.log("[MainFilter][setData]");  
   	var lData = '';
   	//if the element has a data-obj (!!!has to have)
     if(jQuery(pElement).attr('data-obj')){ 
-    	//take the data and parse it to a js-object
+    	//take the data-obj of the element and parse it to a js-object
 		  lData = jQuery.parseJSON(jQuery(pElement).attr('data-obj'));
 		  //loop over the dom-attr-obj
 		  for(var lDataKey in lData) {
 		  	//also loop over the request-data-obj
 		    for(var lMainFilterKey in MainFilter.aDataObj) {
 		    	//look if are set special params (if isset e.g. a comid or a userid, remove this params. This will reset with the params from request)
-	        if(lDataKey == 'comid' || lDataKey == 'userid'){
+	        if(lDataKey == 'comid' || lDataKey == 'userid' ){
 	          delete lData[lDataKey];
-	        }		    
+	        }	
+	        
+	        if(lMainFilterKey=='page') {
+	        	delete MainFilter.aDataObj[lMainFilterKey];
+	        }
 	        //are there some new fields after the request? if so, update the data-attr-object with the elems from request-data-obj	
 		      if(lDataKey != lMainFilterKey) {
 	        	lData[lMainFilterKey] = MainFilter.aDataObj[lMainFilterKey];
 		      }
 		    }
 		  }
-		  //object to json-string
-		  lData = JSON.stringify(lData); 
+      //object to json-string
+      lData = JSON.stringify(lData);     		  
     } else {
     	ErrorLogger.initLog('Missing data attribute','StreamHandler','66');
     }
+
     //write the data-attr-object to the element in dom
     jQuery(pElement).attr('data-obj', lData);
   },
@@ -174,4 +194,10 @@ var MainFilter = {
     jQuery(lOuter).removeClass('whats_not_active');
     jQuery(lOuter).removeClass('whats_new_active');   
   }  
+};
+
+var StreamPager = {
+	update: function(pData) {
+		console.log(pData);
+	}
 };
