@@ -14,9 +14,5 @@ class streamComponents extends sfComponents
   public function executeSearch_field() {}
   
   public function executeSidebar_right() {}
-  
-  public function executeNew_stream() {}
-  
-  public function executeWhats_not_stream() {}
 }
 ?>
