@@ -29,7 +29,7 @@
   <div class="actions clearfix">
     <ul class="sharing_friends left">
       
-      <?php for($i=0;$i<4;$i++) { ?>
+      <?php for($j=0;$j<5;$j++) { ?>
         <li class="sharing_friend left">
           <div class="sharing_friend_outer">&nbsp;</div>
           <div class="sharing_friend_inner">
