@@ -17,14 +17,18 @@ stream_hot:
 stream_not:
   url: /stream/not
   param: { module: stream, action: not}
-  
+
 get_item_detail:
   url: /stream/get_item_detail
   param: { module: stream, action: get_item_detail}
-  
+
 get_item_detail_stream:
   url: /stream/get_item_detail_stream
-  param: { module: stream, action: get_item_detail_stream}     
+  param: { module: stream, action: get_item_detail_stream }
+
+auth_signin:
+  url:   /signin
+  param: { module: auth, action: signin }
 
 ##### ROUTES FOR PLUGINS #######
 
