@@ -9,7 +9,7 @@
   <p class="filter_headline">All Networks</p>
   <ul class="normal_list clearfix" id="all_networks_list">
     <li class="filter_chosen" id="com-filter-1">
-      <a href="/" class="icon_service icon_facebook stream_filter" target="_blank" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "comid":"1", "css": "{\"class\":\"normal_list\", \"id\":\"com-filter-1\"}"}'>facebook.com</a>
+      <a href="/" class="icon_service icon_facebook stream_filter" target="_blank" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "comid":"1", "css":"{\"class\":\"normal_list\", \"id\":\"com-filter-1\"}"}'>facebook.com</a>
     </li>
     <li id="com-filter-2">
       <a href="/" class="icon_service icon_twitter stream_filter" target="_blank" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "comid":"2", "css": "{\"class\":\"normal_list\", \"id\":\"com-filter-2\"}"}'>twitter.com</a>

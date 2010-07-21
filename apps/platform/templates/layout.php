@@ -54,6 +54,8 @@
   <script type="text/javascript" src="/js/main/global/302_RequestHandler.js"></script> 
   <script type="text/javascript" src="/js/main/global/303_ElementHandler.js"></script>  
   <script type="text/javascript" src="/js/platform/stream/StreamHandler.js"></script>
+  <script type="text/javascript" src="/js/platform/stream/StreamItemHandler.js"></script>  
+  <script type="text/javascript" src="/js/platform/stream/ItemDetailHandler.js"></script>    
   <script type="text/javascript">
     jQuery(document).ready( function() {
       <?php include_partial('global/js_init_general.js'); ?>

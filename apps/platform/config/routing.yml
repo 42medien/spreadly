@@ -17,6 +17,10 @@ stream_hot:
 stream_not:
   url: /stream/not
   param: { module: stream, action: not}
+  
+get_item_detail:
+  url: /stream/get_item_detail
+  param: { module: stream, action: get_item_detail}  
 
 ##### ROUTES FOR PLUGINS #######
 
