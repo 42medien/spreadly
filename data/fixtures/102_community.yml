@@ -1,0 +1,10 @@
+Community:
+  community_1:
+    name:      'testcommunity'
+    community:      'testcommunity'
+    url:       'http://www.example.com'
+    
+  community_2:
+    name:      'twitter'
+    community:      'twitter'
+    url:       'http://www.twitter.com'
