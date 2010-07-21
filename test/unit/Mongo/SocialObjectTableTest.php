@@ -38,19 +38,13 @@ class SocialObjectTableTest extends BaseTestCase {
 
 public function testGetHotByCommunity() {
     parent::resetMongo();
-
     Doctrine::loadData(dirname(__file__).'/fixtures');
-
 
     $lObjects = SocialObjectTable::retrieveHotObjets(null, 1);
 
-    foreach ($lObjects as $value) {
-      echo $value->getTitle()." - ". $value->getLikeCount() ."\r\n";
-    }
     $this->assertTrue(is_array($lObjects));
     $this->assertTrue(is_object($lObjects[1]));
-    $this->assertEquals('spiegel.de title', $lObjects[1]->getTitle());
-
+    $this->assertEquals('dem weyand sein blog', $lObjects[1]->getTitle());
   }
 
 }

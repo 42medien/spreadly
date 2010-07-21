@@ -17,7 +17,9 @@ class SocialObject extends BaseSocialObject
     if (!$this->getId()) {
       $this->setUrlHash(md5($this->getUrl()));
       $this->setCreatedOn(time());
-      $this->setAlias(array(md5($this->getUrl())));
+      if (!$this->getAlias()) {
+        $this->setAlias(array(md5($this->getUrl())));
+      }
     }
 
     $this->setUpdatedOn(time());
