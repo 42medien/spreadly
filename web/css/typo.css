@@ -22,17 +22,19 @@ a, a.icon_thumb, li.filter_chosen a, a.icon_thumbs, a.icon_thumb, a.icon_small_u
 
 .url{font-style: italic;}
 
+.sharing_user_info p{line-height: 14px;}
 .so_comment, #so_information h5 a{line-height: 16px;}
 .so_headline_left, .so_headline_right{line-height: 18px;}
 #stream_right_top div{line-height: 19px;}
 #nav_main li a, #stream_left_top div, #stream_right_top div{line-height: 30px;}
+.sharing_user_link{line-height: 50px;}
 
-#all_networks_list li, #friends_active_list li{text-align: left;}
+#all_networks_list li, #friends_active_list li, .user_hover_area_top, user_hover_area_bottom{text-align: left;}
 /*.filter_headline{text-align: center;}*/
 .actions{text-align: right;}
 
 .url, .like-dislike{letter-spacing: -0.3px;}
 
 #search2, #main_nav_inner1, #main_nav_inner2, #main_nav_inner3, #main_nav_inner4, #main_nav_inner5, #main_nav_inner6, #main_nav_inner7, #main_nav_inner8,
-  #nav_shares_inner1, #nav_shares_inner2, #nav_shares_inner3, #nav_shares_inner4, #nav_shares_inner5, #nav_shares_inner6, #nav_shares_inner7, .btn{cursor: pointer;}
+  #nav_shares_inner1, #nav_shares_inner2, #nav_shares_inner3, #nav_shares_inner4, #nav_shares_inner5, #nav_shares_inner6, #nav_shares_inner7, .btn, .sharing_friend{cursor: pointer;}
 li.filter_chosen a{cursor: default;}

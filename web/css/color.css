@@ -94,6 +94,9 @@ li.filter_chosen a{color: #6a6b6a;}
 
 .pager_load_more{background: transparent url("/img/test/pager_down.png") no-repeat scroll 92% 56%;}
 
+.user_hover_area_top{border-top: 1px #d7d7d7 solid;border-right: 1px #d7d7d7 solid;border-left: 1px #d7d7d7 solid;background: #f5f5f5 url('/img/test/share_friend_hover_area_bg.png') left repeat-y;}
+.user_hover_area_bottom{background: transparent url('/img/test/share_friend_hover_area_bottom.png') no-repeat;}
+
 /* Stream Icons */
 .stream_icon_location{background: transparent url("/img/sprites/sprite_stream_icons.png") 0 -150px no-repeat;}
 

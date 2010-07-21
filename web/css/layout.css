@@ -120,6 +120,17 @@ mark, rp, rt, ruby, summary, time{ display: inline }
         .main_stream_pager{margin: 10px 0 15px 15px;}
         .right_shares_pager{margin-top: 15px;}
         
+        .user_hover_area{position: relative;top: -190px;left: -25px; z-index: 400;}
+        .user_hover_area_top{width: 278px; height: 100px;padding: 5px 10px;-webkit-border-radius: 3px 3px 0 0;-moz-border-radius: 3px 3px 0 0;border-radius: 3px 3px 0 0;}
+        .user_hover_area_bottom{width: 300px; height:24px;}
+        .sharing_user_image{width: 50px;margin: 0 5px;}
+        .sharing_user_info{width: 205px;padding: 0 5px;}
+        .sharing_user_info h4{margin: 5px 5px;}
+        .sharing_user_info p{margin-left: 5px;}
+        .sharing_user_friends{height: 35px;margin-top: 5px;}
+        .sharing_friends li{padding: 0 !important;margin: 0 5px !important;}
+        .sharing_user_link{padding-left: 10px;}
+        
 	  
 
 /* Content_supp */
