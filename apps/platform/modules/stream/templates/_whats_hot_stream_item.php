@@ -27,6 +27,19 @@
 
 	<!-----------  Das folgende div muss auf style="display:none;" gesetzt und nur bei hover angezeigt werden ------------------------------>
 	<div class="actions clearfix">
+    <div class="sharing_friends left">
+      
+      <?php for($i = 0; $i < 4; $i++) { ?>
+	      <div class="sharing_friend left">
+		      <div class="sharing_friend_outer">&nbsp;</div>
+		      <div class="sharing_friend_inner">
+		        <?php echo image_tag('/img/test/yiid-logo.png', array('height' => '30px', 'width' => '30px')); ?>
+		      </div>
+		    </div>
+		  <?php } ?>
+	    
+    </div>
+	
 	  <div class="action_content right">
 	    <a href="#" class="icon_comment icon_small_use text_action">comment</a>
 	    <a href="#" class="icon_favorite icon_small_use text_action">favorite</a>

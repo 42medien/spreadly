@@ -95,7 +95,12 @@ mark, rp, rt, ruby, summary, time{ display: inline }
         .green_bottom_middle{width: 98%;height:3px;border-right: 1px solid #cbd3c9;}
         #stream_left_bottom .so_comment{margin: 0px 10px 10px 30px;}
 
-        .action_content{padding: 10px 10px 5px;width: 88%;}
+        .actions{margin-left: 18px;padding-bottom: 5px;}
+        .sharing_friends{padding: 3px 15px;}
+        .sharing_friend{width:32px;height:32px;margin-right: 5px;}
+        .sharing_friend_outer{position:relative;z-index:200;top:0;left:0;width:30px;height:30px;}
+        .sharing_friend_inner{z-index:100;position:relative;top:-31px;left:1px;width:30px;height:30px;}
+        .action_content{padding: 12px 10px;}
         .action_content a{margin-left: 10px;}
         
         .info_area{}
