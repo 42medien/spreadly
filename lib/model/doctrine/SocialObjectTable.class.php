@@ -72,8 +72,8 @@ class SocialObjectTable extends Doctrine_Table
 
   public static function retrieveHotObjets($pFriendId = null, $pCommunityId = null, $pRange = 7) {
     $lCollection = self::getMongoCollection();
-
     $lQueryArray = self::initializeBasicFilterQuery($pFriendId, $pCommunityId, $pRange);
+
     $lResults = $lCollection->find($lQueryArray);
     $lResults->sort(array('l_cnt' => -1));
 
@@ -82,12 +82,13 @@ class SocialObjectTable extends Doctrine_Table
 
 
   public static function retrieveFlopObjects($pFriendId = null, $pCommunityId = null, $pRange = 7) {
-
     $lCollection = self::getMongoCollection();
     $lQueryArray = self::initializeBasicFilterQuery($pFriendId, $pCommunityId, $pRange);
 
     $lResults = $lCollection->find();
     $lResults->sort(array('d_cnt' => -1));
+
+    return self::hydrateMongoCollectionToObjects($lResults);
   }
 
 

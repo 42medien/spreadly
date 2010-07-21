@@ -28,9 +28,9 @@ class streamActions extends sfActions
     $lCss = $request->getParameter('css');
     $lString = '';
     if($lUserId) {
-      $lString = ', "userid":"'.$lUserId.'"';    	
+      $lString = ', "userid":"'.$lUserId.'"';
     } elseif ($lComId) {
-      $lString = ', "comid":"'.$lComId.'"';          	
+      $lString = ', "comid":"'.$lComId.'"';
     }
 
     return $this->renderText(
@@ -55,9 +55,9 @@ class streamActions extends sfActions
     $lCss = $request->getParameter('css');
     $lString = '';
     if($lUserId) {
-      $lString = ', "userid":"'.$lUserId.'"';     
+      $lString = ', "userid":"'.$lUserId.'"';
     } elseif ($lComId) {
-      $lString = ', "comid":"'.$lComId.'"';           
+      $lString = ', "comid":"'.$lComId.'"';
     }
 
     $pSocialObjects = SocialObjectTable::retrieveHotObjets();
@@ -84,16 +84,18 @@ class streamActions extends sfActions
     $lCss = $request->getParameter('css');
     $lString = '';
     if($lUserId) {
-      $lString = ', "userid":"'.$lUserId.'"';     
+      $lString = ', "userid":"'.$lUserId.'"';
     } elseif ($lComId) {
-      $lString = ', "comid":"'.$lComId.'"';           
+      $lString = ', "comid":"'.$lComId.'"';
     }
-    
+
+    $pSocialObjects = SocialObjectTable::retrieveFlopObjects();
+
     return $this->renderText(
       $lCallback.'('.
       json_encode(
         array(
-          "stream"  => $this->getPartial('stream/whats_not_stream'),
+          "stream"  => $this->getPartial('stream/whats_not_stream', array('pSocialObjects' => $pSocialObjects)),
           "action" => "stream/not",
           "dataobj" => '{"callback":"'.$lCallback.'"'.$lString.'}',
           "css" => $lCss
@@ -102,40 +104,40 @@ class streamActions extends sfActions
       .");"
     );
   }
-  
+
   public function executeGet_item_detail(sfWebRequest $request) {
-    $this->getResponse()->setContentType('application/json');  
+    $this->getResponse()->setContentType('application/json');
     $lCallback = $request->getParameter('callback', 'GlobalError.logerror');
-    $lCss = $request->getParameter('css');    
+    $lCss = $request->getParameter('css');
     return $this->renderText(
       $lCallback.'('.
       json_encode(
         array(
           "itemdetail"  => $this->getPartial('stream/item_detail'),
-          "css" => $lCss        
+          "css" => $lCss
         )
       )
       .");"
-    );  	
+    );
   }
-  
+
   public function executeGet_item_detail_stream(sfWebRequest $request) {
-    $this->getResponse()->setContentType('application/json');  
+    $this->getResponse()->setContentType('application/json');
     $lCallback = $request->getParameter('callback', 'GlobalError.logerror');
     $lCase = $request->getParameter('case');
     $lItemId = $request->getParameter('itemid');
-    $lCss = $request->getParameter('css');    
+    $lCss = $request->getParameter('css');
     return $this->renderText(
       $lCallback.'('.
       json_encode(
         array(
           "stream"  => $this->getPartial('stream/item_shares'),
-          "css" => $lCss        
+          "css" => $lCss
         )
       )
       .");"
-    );    	
-  	
+    );
+
   }
-  
+
 }
