@@ -539,6 +539,7 @@ var GlobalRequest = {
 		//delete them from the params, because we don't have to send them to the action
 		delete pParams.action;
 		delete pParams.callback;
+		pParams.eikcuf = new Date().getTime();		
 		//and ste the global params var for the doSend
 		GlobalRequest.aParams = pParams;
 	},
@@ -562,6 +563,7 @@ var GlobalRequest = {
     //delete them from the params, because we don't have to send them to the action    
     delete lParams.action;
     delete lParams.callback;
+    lParams.eikcuf = new Date().getTime();
     //and ste the global params var for the doSend    
     GlobalRequest.aParams = lParams;		
 	},
