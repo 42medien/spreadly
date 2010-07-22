@@ -21,6 +21,15 @@ class authActions extends sfActions
   }
 
   public function executeSignin(sfWebRequest $request) {
+    if ($lService = $request->getParameter("service")) {
+      $lObject = AuthApiFactory::factory($lService);
+      $lObject->doAuthentication();
+    }
 
+    $this->setLayout("plain");
+  }
+
+  public function executeComplete_signin(sfWebRequest $request) {
+    var_dump($request);exit;
   }
 }
