@@ -19,7 +19,6 @@ var DataObjectPager = {
 	init: function(pId, pDataString) {
     console.log("[DataObjectPager][init]");       		
 		var lElement = jQuery('#'+pId);
-		console.log(pDataString);
 		if(pDataString !== undefined){
 		  jQuery(lElement).attr('data-obj', pDataString);
 		}
