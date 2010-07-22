@@ -34,9 +34,16 @@ class  OnlineIdentityTableTest extends BaseTestCase {
   public function testExtractIdentifierfromUrl() {
     $lOnlineIdentity = OnlineIdentityTable::extractIdentifierfromUrl("http://google.de/profiles/hugo", null);
 
-    var_dump($lOnlineIdentity->getIdentifier());
+    $this->assertEquals("OnlineIdentity", get_class($lOnlineIdentity));
+    $this->assertEquals("hugo", $lOnlineIdentity->getIdentifier());
+
+    $lCommunity = CommunityTable::getInstance()->findBy("community", "google_de");
+    $lCommunity = $lCommunity[0];
+
+    $lOnlineIdentity = OnlineIdentityTable::extractIdentifierfromUrl("http://www.google.de/profiles/hugo", $lCommunity->getId());
 
     $this->assertEquals("OnlineIdentity", get_class($lOnlineIdentity));
     $this->assertEquals("hugo", $lOnlineIdentity->getIdentifier());
+    $this->assertEquals("google_de", $lOnlineIdentity->getCommunity()->getCommunity());
   }
 }
