@@ -25,4 +25,57 @@ class UserIdentityConTable extends Doctrine_Table
     return OnlineIdentityTable::getInstance()->retrieveByPks($lUiConIds);
   }
 
+  /**
+   * check and add new user identity con
+   *
+   * @param OnlineIdentity $pOnlineIdentity
+   * @param User $pUser
+   * @param unknown_type $pVerified
+   * @param unknown_type $pAuthIdentifier
+   * @return unknown
+   */
+  public static function addUserIdentityCon(OnlineIdentity $pOnlineIdentity, User $pUser, $pVerified = false, $pAuthIdentifier = null) {
+    // check if there is a connection
+    $lUIConnection = self::getByOnlineIdentityAndUser($pOnlineIdentity, $pUser);
+
+    // if OnlineIdentity was alrady saved
+    if (!$lUIConnection) {
+      if ($pOnlineIdentity->hasVerifiedConnection()) {
+        throw new ModelException('OI_DUPLICATE', ModelException::DUPLICATE);
+        // else create a new connection
+      } elseif ($pOnlineIdentity->getAuthIdentifier() != null && $pAuthIdentifier == null) {
+        throw new ModelException("you can't add this identifier", ModelException::NOT_ALLOWED);
+      } else {
+        $lUIConnection = new UserIdentityCon();
+        $lUIConnection->setOnlineIdentity($pOnlineIdentity);
+        $lUIConnection->setUser($pUser);
+      }
+    } elseif ($pVerified == false) {
+      throw new ModelException('OI_DUPLICATE', ModelException::DUPLICATE);
+    }
+
+    $lUIConnection->setVerified($pVerified);
+    $lUIConnection->save();
+
+    if ($pVerified) {
+      self::deleteUnverifiedConnections($pOnlineIdentity->getId());
+    }
+
+    return $lUIConnection;
+  }
+
+  /**
+   * get an UserIdentityConnection between an OnlineIdentity and an User
+   *
+   * @param OnlineIdentity $pOnlineIdentity;
+   * @param User $pUser
+   * @return UserIdentityCon
+   */
+  public static function getByOnlineIdentityAndUser(OnlineIdentity $pOnlineIdentity, User $pUser) {
+    $lUserIdentityCon = Doctrine_Query::create()
+          ->from('UserIdentityCon uic')
+          ->where('uic.user_id = ? AND uic.online_identity_id = ?', array($pUser->getId(), $pOnlineIdentity->getId()))
+          ->fetchOne();
+    return $lUserIdentityCon;
+  }
 }

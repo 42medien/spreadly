@@ -24,27 +24,30 @@ class OnlineIdentityTable extends Doctrine_Table {
     return Doctrine_Core::getTable('OnlineIdentity');
   }
 
+  public static function retrieveByOnlineIdentity($lOIdentity) {
+    return self::retrieveByIdentifier($lOIdentity->getIdentifier(), $lOIdentity->getCommuityId(), $lOIdentity->getIdentityType());
+  }
+
   /**
    * retrieve an OnlineIdentity by identifier and service
    *
    * @author Matthias Pfefferle
    * @param string $pIdentifier
-   * @param string $pCommunity
+   * @param string $pCommunityId
    * @param int $pType
    * @return OnlineIdentity|null
    */
-  public static function retrieveByIdentifier($pIdentifier, $pCommunity, $pType = self::TYPE_IDENTITY) {
+  public static function retrieveByIdentifier($pIdentifier, $pCommunityId, $pType = self::TYPE_IDENTITY) {
     $lOnlineIdentity = Doctrine_Query::create()->
       from('OnlineIdentity oi')->
-      leftJoin('oi.Community c')->
-      where('oi.identifier = ? AND oi.identity_type = ? AND c.community = ?', array($pIdentifier, $pType, $pCommunity))->
+      where('oi.identifier = ? AND oi.identity_type = ? AND oi.community_id = ?', array($pIdentifier, $pType, $pCommunityId))->
       fetchOne();
 
     return $lOnlineIdentity;
   }
 
   /**
-   * Enter description here...
+   * add a new OnlineIdentity object
    *
    * @author Matthias Pfefferle
    * @param string $pIdentifier
@@ -57,10 +60,12 @@ class OnlineIdentityTable extends Doctrine_Table {
       return null;
     }
 
+    // check if identifier is an url
     if (preg_match("/https?:\/\//i", $pIdentifier) && $pType == self::TYPE_IDENTITY) {
-      $lOIdentity = self::fromUrl($pIdentity, $pCommunityId);
+      $lOIdentity = self::extractIdentifierfromUrl($pIdentifier, $pCommunityId);
     }
 
+    // or create a new object
     if ($lOIdentity == null) {
       $lOIdentity = new OnlineIdentity();
       $lOIdentity->setIdentifier($pIdentifier);
@@ -68,7 +73,14 @@ class OnlineIdentityTable extends Doctrine_Table {
       $lOIdentity->setIdentityType($pType);
     }
 
-    $lOIdentity->save();
+    // check if oi already exists
+    if ($lOi = self::retrieveByOnlineIdentity($lOIdentity)) {
+      $lOIdentity = $lOi;
+    } else {
+      $lOIdentity->save();
+    }
+
+    return $lOIdentity;
   }
 
   /**
@@ -83,13 +95,14 @@ class OnlineIdentityTable extends Doctrine_Table {
 
     $lCommunities = array();
 
+    // check if there is a community defined
     if ($pCommunityId) {
       $lCommunities[] = CommunityTable::getInstance()->find($pCommunityId);
     } else {
       $lCommunities = CommunityTable::retrieveByDomain(UrlUtils::getDomain($pUrl));
     }
 
-    foreach($lCommunities as $lC)  {
+    foreach($lCommunities as $lC) {
       if ($lC->getOiUrl()) {
         $lRegex = '/'.str_replace(array('%s', 'www\.'), array('(.*)', '.*'), preg_quote($lC->getOiUrl(),'/')).'?/i';
         $lMatch = array();
@@ -104,7 +117,7 @@ class OnlineIdentityTable extends Doctrine_Table {
 
           $lOnlineIdentity = new OnlineIdentity();
           $lOnlineIdentity->setIdentifier($lIdentifier);
-          $lOnlineIdentity->setCommunityId($lC->getCommunity());
+          $lOnlineIdentity->setCommunityId($lC->getId());
 
           return $lOnlineIdentity;
         }
