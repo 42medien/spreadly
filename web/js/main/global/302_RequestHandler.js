@@ -72,7 +72,7 @@ var GlobalRequest = {
    * @param object pElement
    */	
 	setGlobalByData: function(pElement) {
-    console.log("[GlobalRequest][setGlobalByData]");   		
+    console.log("[GlobalRequest][setGlobalByData]");   	
 		//take the data-obj attribute from the given element
 		var lParams = jQuery(pElement).attr('data-obj');
 		//parse it to a object

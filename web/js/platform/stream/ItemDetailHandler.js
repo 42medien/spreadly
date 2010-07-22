@@ -10,9 +10,14 @@ var ItemDetail = {
 
 var ItemDetailStream = {
 	show: function(pResponse) {
-    console.log("[ItemDetailStream][show]");  		
-		jQuery('#detail-stream').empty();
+    console.log("[ItemDetailStream][show]");
+    if(pResponse.page < 1 || pResponse.page == undefined){
+      jQuery('#detail-stream').empty();    	
+    }
+    jQuery('#item-stream-pager-link').remove();
 		jQuery('#detail-stream').append(pResponse.stream);
+		var lDataObj = jQuery.parseJSON(pResponse.dataobj);
+    DataObjectPager.update('item-stream-pager-link', null, pResponse.page, lDataObj);        
 		ItemDetailFilter.updateCss(pResponse.css);
 	}
 	

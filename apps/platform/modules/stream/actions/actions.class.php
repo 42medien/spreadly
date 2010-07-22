@@ -130,12 +130,15 @@ class streamActions extends sfActions
     $lCallback = $request->getParameter('callback', 'GlobalError.logerror');
     $lCase = $request->getParameter('case');
     $lItemId = $request->getParameter('itemid');
+    $lPage = $request->getParameter('page', 0);
     $lCss = $request->getParameter('css');
     return $this->renderText(
       $lCallback.'('.
       json_encode(
         array(
           "stream"  => $this->getPartial('stream/item_shares'),
+          "dataobj" => '{"action":"stream/get_item_detail_stream", "callback":"'.$lCallback.'", "case":"'.$lCase.'", "itemid":"'.$lItemId.'"}',
+          "page" => $lPage++,
           "css" => $lCss
         )
       )

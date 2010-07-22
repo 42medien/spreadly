@@ -16,6 +16,3 @@
       <?php include_partial('item_shares', array('param' => 'param')); ?>    
     </ul>
   </div>
-	<div class="right right_shares_pager">
-	  <a href="/" class="pager_load_more">Load more...</a>
-	</div>

@@ -10,5 +10,6 @@ GlobalRequest.bindClickByClass('new_shares', 'stream_item');
 GlobalRequest.bindClickByClass('nav_shares_outer', 'detail_filter');
 
 DataObjectPager.init('stream_pager_link','{"action":"stream/hot", "callback":"Stream.show", "page":"1"}');
+DataObjectPager.init('item-stream-pager-link');
 
 

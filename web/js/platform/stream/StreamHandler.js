@@ -18,7 +18,6 @@ var Stream = {
 	 */
 	show: function(pResponse) { 
 		console.log("[Stream][show]");
-		console.log(pResponse.page);
 		if(pResponse.page < 1 || pResponse.page == undefined) {
 			//empty the stream
 			jQuery('#stream_left_bottom').empty();
@@ -29,7 +28,6 @@ var Stream = {
 		//set the action for next requests global 
 		SubFilter.setAction(pResponse.action);
 		//update the data-obj attribute of the filter
-		MainFilter.setAction(pResponse.action);
     MainFilter.updateData(pResponse.dataobj);
     DataObjectPager.update('stream_pager_link', pResponse.action, pResponse.page, MainFilter.aDataObj);    
     //do some css-effects
@@ -119,7 +117,6 @@ var SubFilter = {
 var MainFilter = {
 	
 	aDataObj: {},
-	aAction: 'stream/hot',
 	
 	/**
 	 * parse the updated data-obj from the response
@@ -133,14 +130,6 @@ var MainFilter = {
     jQuery.each(jQuery('.main_filter'), function(i, pField) {
       MainFilter.setData(this);
     });
-  },
-  
-  getAction: function() {
-  	return MainFilter.aAction;
-  },
-  
-  setAction: function(pAction) {
-  	MainFilter.aAction = pAction;
   },
   
   /**
@@ -163,10 +152,7 @@ var MainFilter = {
 	        if(lDataKey == 'comid' || lDataKey == 'userid' ){
 	          delete lData[lDataKey];
 	        }	
-	        
-	        if(lMainFilterKey=='page') {
-	        	delete MainFilter.aDataObj[lMainFilterKey];
-	        }
+
 	        //are there some new fields after the request? if so, update the data-attr-object with the elems from request-data-obj	
 		      if(lDataKey != lMainFilterKey) {
 	        	lData[lMainFilterKey] = MainFilter.aDataObj[lMainFilterKey];
@@ -194,10 +180,4 @@ var MainFilter = {
     jQuery(lOuter).removeClass('whats_not_active');
     jQuery(lOuter).removeClass('whats_new_active');   
   }  
-};
-
-var StreamPager = {
-	update: function(pData) {
-		console.log(pData);
-	}
 };
