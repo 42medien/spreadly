@@ -4,6 +4,7 @@ require_once dirname(__file__).'/../../lib/BaseTestCase.php';
 class UserIdentityConTableTest extends BaseTestCase {
 
   public static function setUpBeforeClass() {
+    parent::resetMongo();
     Doctrine::loadData(dirname(__file__).'/fixtures');
   }
 

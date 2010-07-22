@@ -6,6 +6,7 @@ class SocialObjectTest extends BaseTestCase {
   static public $aUserHugo = null;
 
   public static function setUpBeforeClass() {
+    parent::resetMongo();
     Doctrine::loadData(dirname(__file__).'/fixtures');
     self::$aUserHugo = UserTable::retrieveByUsername('hugo');
   }

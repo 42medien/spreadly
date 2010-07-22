@@ -27,7 +27,7 @@ class SocialObjectTableTest extends BaseTestCase {
     $lObject3->updateObjectOnLikeActivity(2, 'http://spiegel.de', 1);
     $lObject3->updateObjectOnLikeActivity(3, 'http://spiegel.de', 1);
 
-    $lObjects = SocialObjectTable::retrieveHotObjets();
+    $lObjects = SocialObjectTable::retrieveHotObjets(self::$aUserHugo->getId());
 
     $this->assertTrue(is_array($lObjects));
     $this->assertTrue(is_object($lObjects[1]));
@@ -40,7 +40,7 @@ public function testGetHotByCommunity() {
     parent::resetMongo();
     Doctrine::loadData(dirname(__file__).'/fixtures');
 
-    $lObjects = SocialObjectTable::retrieveHotObjets(null, 1);
+    $lObjects = SocialObjectTable::retrieveHotObjets(self::$aUserHugo->getId(), null, 1);
 
     $this->assertTrue(is_array($lObjects));
     $this->assertTrue(is_object($lObjects[1]));

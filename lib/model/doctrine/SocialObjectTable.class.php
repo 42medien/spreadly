@@ -85,7 +85,7 @@ class SocialObjectTable extends Doctrine_Table
     $lCollection = self::getMongoCollection();
     $lQueryArray = self::initializeBasicFilterQuery($pFriendId, $pCommunityId, $pRange);
 
-    $lResults = $lCollection->find();
+    $lResults = $lCollection->find($lQueryArray);
     $lResults->sort(array('d_cnt' => -1));
 
     return self::hydrateMongoCollectionToObjects($lResults);

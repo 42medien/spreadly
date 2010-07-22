@@ -67,6 +67,11 @@ class User extends BaseUser {
    */
   public function postInsert($pEvent) {
     // @todo add yiid online identity
+
+    // initialize user's relation object stored in MongoDB
+    $lRelation = new UserRelation();
+    $lRelation->setUserId($this->getId());
+    $lRelation->save();
   }
 
   /**
@@ -94,15 +99,25 @@ class User extends BaseUser {
     return UserIdentityConTable::getOnlineIdentitiesForUser($this->getId());
   }
 
-  public function getOnlineIdentitiesByCommunityId() {
-
-  }
-
-  public function getOnlineIdentitiesByType() {
-
-  }
 
   public function getTokensForPublishing() {
     return UserTable::getTokensForPublishingByUserId($this->getId());
+  }
+
+
+  /**
+   * retrieves a users relation object from MongoDB
+   */
+  public function retrieveUserRelations() {
+    return UserRelationTable::retrieveUserRelations($this->getId());
+  }
+
+  /**
+   * adds given OnlineIdentities to a users relation table
+   *
+   * @param array(OnlineIdentity) $pIdentities
+   */
+  public function updateOwnedIdentities($pIdentities) {
+    return UserRelationTable::updateOwnedIdentities($this->getId(), $pIdentities);
   }
 }

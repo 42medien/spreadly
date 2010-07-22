@@ -84,3 +84,6 @@ UserRelation:
       type: string
     contacts_oi:
       type: string
+  relations:
+    User: { onDelete: CASCADE, local: user_id, foreign: id, foreignAlias: UserRelations }
+  
