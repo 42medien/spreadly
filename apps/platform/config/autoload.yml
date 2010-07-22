@@ -1,0 +1,4 @@
+autoload:
+  vendor_oauth:
+    path:      %SF_LIB_DIR%/vendor/oauth
+    recursive: off
