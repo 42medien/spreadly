@@ -1,5 +1,5 @@
 /**
- * @nocombine platform
+ * @combine platform
  */
  
  
@@ -18,7 +18,7 @@ var Stream = {
 	 */
 	show: function(pResponse) { 
 		console.log("[Stream][show]");
-		if(pResponse.page < 1 || pResponse.page == undefined) {
+		if(pResponse.page < 1 || pResponse.page === undefined) {
 			//empty the stream
 			jQuery('#stream_left_bottom').empty();
 		}
@@ -56,15 +56,10 @@ var StreamFilter = {
 	    //if you wanna update the main-nav
 	    if(lCssId == 'main_nav_outer'){
 	    	//remove the current highlighting
-	      MainFilter.removeCss();
-	      //and add the new for highlighting
-	      jQuery('#'+lCssId).addClass(lCssClass);
+	      MainFilter.updateCss(lCssClass);
 	    } else {
 	    	//if u wanna change the subnavi on sidebar
-	    	//remove the current highlighting
-	      SubFilter.removeCss();
-	      //and highlight the new
-	      jQuery('#'+lCssId).addClass('filter_chosen');
+	      SubFilter.updateCss(lCssId);
 	    }
 		}
 	}
@@ -102,11 +97,13 @@ var SubFilter = {
    * remove all highlighs from the filter-list on sidebar
    * @author KM
    */
-  removeCss: function() {
+  updateCss: function(pCssId) {
     console.log("[SubFilter][updateCss]"); 
     //remove all classes named filter-chosen from a parent-list called all_network_list    	
     ClassHandler.removeClassesByParent(jQuery('#all_networks_list'), 'filter_chosen');
-    ClassHandler.removeClassesByParent(jQuery('#friends_active_list'), 'filter_chosen');    
+    ClassHandler.removeClassesByParent(jQuery('#friends_active_list'), 'filter_chosen'); 
+    //and highlight the new
+    jQuery('#'+pCssId).addClass('filter_chosen');    
   }
 };
 
@@ -173,11 +170,12 @@ var MainFilter = {
    * remove the current highlight from the tabs
    * @author KM
    */
-  removeCss: function() {
+  updateCss: function(pCssClass) {
     console.log("[MainFilter][updateCss]");    	
     var lOuter = jQuery('#main_nav_outer');
     jQuery(lOuter).removeClass('whats_hot_active');
     jQuery(lOuter).removeClass('whats_not_active');
-    jQuery(lOuter).removeClass('whats_new_active');   
+    jQuery(lOuter).removeClass('whats_new_active'); 
+    jQuery(lOuter).addClass(pCssClass);
   }  
 };

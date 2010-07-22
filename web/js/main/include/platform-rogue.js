@@ -158,684 +158,6 @@ e&&e.document?e.document.compatMode==="CSS1Compat"&&e.document.documentElement["
 /**
  * @combine platform
  */
-/*!
- * jQuery Form Plugin
- * version: 2.43 (12-MAR-2010)
- * @requires jQuery v1.3.2 or later
- *
- * Examples and documentation at: http://malsup.com/jquery/form/
- * Dual licensed under the MIT and GPL licenses:
- *   http://www.opensource.org/licenses/mit-license.php
- *   http://www.gnu.org/licenses/gpl.html
- */
-;(function($) {
-
-/*
-  Usage Note:
-  -----------
-  Do not use both ajaxSubmit and ajaxForm on the same form.  These
-  functions are intended to be exclusive.  Use ajaxSubmit if you want
-  to bind your own submit handler to the form.  For example,
-
-  $(document).ready(function() {
-    $('#myForm').bind('submit', function() {
-      $(this).ajaxSubmit({
-        target: '#output'
-      });
-      return false; // <-- important!
-    });
-  });
-
-  Use ajaxForm when you want the plugin to manage all the event binding
-  for you.  For example,
-
-  $(document).ready(function() {
-    $('#myForm').ajaxForm({
-      target: '#output'
-    });
-  });
-
-  When using ajaxForm, the ajaxSubmit function will be invoked for you
-  at the appropriate time.
-*/
-
-/**
- * ajaxSubmit() provides a mechanism for immediately submitting
- * an HTML form using AJAX.
- */
-$.fn.ajaxSubmit = function(options) {
-  // fast fail if nothing selected (http://dev.jquery.com/ticket/2752)
-  if (!this.length) {
-    log('ajaxSubmit: skipping submit process - no element selected');
-    return this;
-  }
-
-  if (typeof options == 'function')
-    options = { success: options };
-
-  var url = $.trim(this.attr('action'));
-  if (url) {
-    // clean url (don't include hash vaue)
-    url = (url.match(/^([^#]+)/)||[])[1];
-    }
-    url = url || window.location.href || '';
-
-  options = $.extend({
-    url:  url,
-    type: this.attr('method') || 'GET',
-    iframeSrc: /^https/i.test(window.location.href || '') ? 'javascript:false' : 'about:blank'
-  }, options || {});
-
-  // hook for manipulating the form data before it is extracted;
-  // convenient for use with rich editors like tinyMCE or FCKEditor
-  var veto = {};
-  this.trigger('form-pre-serialize', [this, options, veto]);
-  if (veto.veto) {
-    log('ajaxSubmit: submit vetoed via form-pre-serialize trigger');
-    return this;
-  }
-
-  // provide opportunity to alter form data before it is serialized
-  if (options.beforeSerialize && options.beforeSerialize(this, options) === false) {
-    log('ajaxSubmit: submit aborted via beforeSerialize callback');
-    return this;
-  }
-
-  var a = this.formToArray(options.semantic);
-  if (options.data) {
-    options.extraData = options.data;
-    for (var n in options.data) {
-      if(options.data[n] instanceof Array) {
-      for (var k in options.data[n])
-        a.push( { name: n, value: options.data[n][k] } );
-      }
-      else
-       a.push( { name: n, value: options.data[n] } );
-    }
-  }
-
-  // give pre-submit callback an opportunity to abort the submit
-  if (options.beforeSubmit && options.beforeSubmit(a, this, options) === false) {
-    log('ajaxSubmit: submit aborted via beforeSubmit callback');
-    return this;
-  }
-
-  // fire vetoable 'validate' event
-  this.trigger('form-submit-validate', [a, this, options, veto]);
-  if (veto.veto) {
-    log('ajaxSubmit: submit vetoed via form-submit-validate trigger');
-    return this;
-  }
-
-  var q = $.param(a);
-
-  if (options.type.toUpperCase() == 'GET') {
-    options.url += (options.url.indexOf('?') >= 0 ? '&' : '?') + q;
-    options.data = null;  // data is null for 'get'
-  }
-  else
-    options.data = q; // data is the query string for 'post'
-
-  var $form = this, callbacks = [];
-  if (options.resetForm) callbacks.push(function() { $form.resetForm(); });
-  if (options.clearForm) callbacks.push(function() { $form.clearForm(); });
-
-  // perform a load on the target only if dataType is not provided
-  if (!options.dataType && options.target) {
-    var oldSuccess = options.success || function(){};
-    callbacks.push(function(data) {
-      var fn = options.replaceTarget ? 'replaceWith' : 'html';
-      $(options.target)[fn](data).each(oldSuccess, arguments);
-    });
-  }
-  else if (options.success)
-    callbacks.push(options.success);
-
-  options.success = function(data, status, xhr) { // jQuery 1.4+ passes xhr as 3rd arg
-    for (var i=0, max=callbacks.length; i < max; i++)
-      callbacks[i].apply(options, [data, status, xhr || $form, $form]);
-  };
-
-  // are there files to upload?
-  var files = $('input:file', this).fieldValue();
-  var found = false;
-  for (var j=0; j < files.length; j++)
-    if (files[j])
-      found = true;
-
-  var multipart = false;
-//  var mp = 'multipart/form-data';
-//  multipart = ($form.attr('enctype') == mp || $form.attr('encoding') == mp);
-
-  // options.iframe allows user to force iframe mode
-  // 06-NOV-09: now defaulting to iframe mode if file input is detected
-   if ((files.length && options.iframe !== false) || options.iframe || found || multipart) {
-     // hack to fix Safari hang (thanks to Tim Molendijk for this)
-     // see:  http://groups.google.com/group/jquery-dev/browse_thread/thread/36395b7ab510dd5d
-     if (options.closeKeepAlive)
-       $.get(options.closeKeepAlive, fileUpload);
-     else
-       fileUpload();
-     }
-   else
-     $.ajax(options);
-
-  // fire 'notify' event
-  this.trigger('form-submit-notify', [this, options]);
-  return this;
-
-
-  // private function for handling file uploads (hat tip to YAHOO!)
-  function fileUpload() {
-    var form = $form[0];
-
-    if ($(':input[name=submit]', form).length) {
-      alert('Error: Form elements must not be named "submit".');
-      return;
-    }
-
-    var opts = $.extend({}, $.ajaxSettings, options);
-    var s = $.extend(true, {}, $.extend(true, {}, $.ajaxSettings), opts);
-
-    var id = 'jqFormIO' + (new Date().getTime());
-    var $io = $('<iframe id="' + id + '" name="' + id + '" src="'+ opts.iframeSrc +'" onload="(jQuery(this).data(\'form-plugin-onload\'))()" />');
-    var io = $io[0];
-
-    $io.css({ position: 'absolute', top: '-1000px', left: '-1000px' });
-
-    var xhr = { // mock object
-      aborted: 0,
-      responseText: null,
-      responseXML: null,
-      status: 0,
-      statusText: 'n/a',
-      getAllResponseHeaders: function() {},
-      getResponseHeader: function() {},
-      setRequestHeader: function() {},
-      abort: function() {
-        this.aborted = 1;
-        $io.attr('src', opts.iframeSrc); // abort op in progress
-      }
-    };
-
-    var g = opts.global;
-    // trigger ajax global events so that activity/block indicators work like normal
-    if (g && ! $.active++) $.event.trigger("ajaxStart");
-    if (g) $.event.trigger("ajaxSend", [xhr, opts]);
-
-    if (s.beforeSend && s.beforeSend(xhr, s) === false) {
-      s.global && $.active--;
-      return;
-    }
-    if (xhr.aborted)
-      return;
-
-    var cbInvoked = false;
-    var timedOut = 0;
-
-    // add submitting element to data if we know it
-    var sub = form.clk;
-    if (sub) {
-      var n = sub.name;
-      if (n && !sub.disabled) {
-        opts.extraData = opts.extraData || {};
-        opts.extraData[n] = sub.value;
-        if (sub.type == "image") {
-          opts.extraData[n+'.x'] = form.clk_x;
-          opts.extraData[n+'.y'] = form.clk_y;
-        }
-      }
-    }
-
-    // take a breath so that pending repaints get some cpu time before the upload starts
-    function doSubmit() {
-      // make sure form attrs are set
-      var t = $form.attr('target'), a = $form.attr('action');
-
-      // update form attrs in IE friendly way
-      form.setAttribute('target',id);
-      if (form.getAttribute('method') != 'POST')
-        form.setAttribute('method', 'POST');
-      if (form.getAttribute('action') != opts.url)
-        form.setAttribute('action', opts.url);
-
-      // ie borks in some cases when setting encoding
-      if (! opts.skipEncodingOverride) {
-        $form.attr({
-          encoding: 'multipart/form-data',
-          enctype:  'multipart/form-data'
-        });
-      }
-
-      // support timout
-      if (opts.timeout)
-        setTimeout(function() { timedOut = true; cb(); }, opts.timeout);
-
-      // add "extra" data to form if provided in options
-      var extraInputs = [];
-      try {
-        if (opts.extraData)
-          for (var n in opts.extraData)
-            extraInputs.push(
-              $('<input type="hidden" name="'+n+'" value="'+opts.extraData[n]+'" />')
-                .appendTo(form)[0]);
-
-        // add iframe to doc and submit the form
-        $io.appendTo('body');
-        $io.data('form-plugin-onload', cb);
-        form.submit();
-      }
-      finally {
-        // reset attrs and remove "extra" input elements
-        form.setAttribute('action',a);
-        t ? form.setAttribute('target', t) : $form.removeAttr('target');
-        $(extraInputs).remove();
-      }
-    };
-
-    if (opts.forceSync)
-      doSubmit();
-    else
-      setTimeout(doSubmit, 10); // this lets dom updates render
-  
-    var domCheckCount = 100;
-
-    function cb() {
-      if (cbInvoked) 
-        return;
-
-      var ok = true;
-      try {
-        if (timedOut) throw 'timeout';
-        // extract the server response from the iframe
-        var data, doc;
-
-        doc = io.contentWindow ? io.contentWindow.document : io.contentDocument ? io.contentDocument : io.document;
-        
-        var isXml = opts.dataType == 'xml' || doc.XMLDocument || $.isXMLDoc(doc);
-        log('isXml='+isXml);
-        if (!isXml && (doc.body == null || doc.body.innerHTML == '')) {
-          if (--domCheckCount) {
-            // in some browsers (Opera) the iframe DOM is not always traversable when
-            // the onload callback fires, so we loop a bit to accommodate
-            log('requeing onLoad callback, DOM not available');
-            setTimeout(cb, 250);
-            return;
-          }
-          log('Could not access iframe DOM after 100 tries.');
-          return;
-        }
-
-        log('response detected');
-        cbInvoked = true;
-        xhr.responseText = doc.body ? doc.body.innerHTML : null;
-        xhr.responseXML = doc.XMLDocument ? doc.XMLDocument : doc;
-        xhr.getResponseHeader = function(header){
-          var headers = {'content-type': opts.dataType};
-          return headers[header];
-        };
-
-        if (opts.dataType == 'json' || opts.dataType == 'script') {
-          // see if user embedded response in textarea
-          var ta = doc.getElementsByTagName('textarea')[0];
-          if (ta)
-            xhr.responseText = ta.value;
-          else {
-            // account for browsers injecting pre around json response
-            var pre = doc.getElementsByTagName('pre')[0];
-            if (pre)
-              xhr.responseText = pre.innerHTML;
-          }       
-        }
-        else if (opts.dataType == 'xml' && !xhr.responseXML && xhr.responseText != null) {
-          xhr.responseXML = toXml(xhr.responseText);
-        }
-        data = $.httpData(xhr, opts.dataType);
-      }
-      catch(e){
-        log('error caught:',e);
-        ok = false;
-        xhr.error = e;
-        $.handleError(opts, xhr, 'error', e);
-      }
-
-      // ordering of these callbacks/triggers is odd, but that's how $.ajax does it
-      if (ok) {
-        opts.success(data, 'success');
-        if (g) $.event.trigger("ajaxSuccess", [xhr, opts]);
-      }
-      if (g) $.event.trigger("ajaxComplete", [xhr, opts]);
-      if (g && ! --$.active) $.event.trigger("ajaxStop");
-      if (opts.complete) opts.complete(xhr, ok ? 'success' : 'error');
-
-      // clean up
-      setTimeout(function() {
-        $io.removeData('form-plugin-onload');
-        $io.remove();
-        xhr.responseXML = null;
-      }, 100);
-    };
-
-    function toXml(s, doc) {
-      if (window.ActiveXObject) {
-        doc = new ActiveXObject('Microsoft.XMLDOM');
-        doc.async = 'false';
-        doc.loadXML(s);
-      }
-      else
-        doc = (new DOMParser()).parseFromString(s, 'text/xml');
-      return (doc && doc.documentElement && doc.documentElement.tagName != 'parsererror') ? doc : null;
-    };
-  };
-};
-
-/**
- * ajaxForm() provides a mechanism for fully automating form submission.
- *
- * The advantages of using this method instead of ajaxSubmit() are:
- *
- * 1: This method will include coordinates for <input type="image" /> elements (if the element
- *  is used to submit the form).
- * 2. This method will include the submit element's name/value data (for the element that was
- *  used to submit the form).
- * 3. This method binds the submit() method to the form for you.
- *
- * The options argument for ajaxForm works exactly as it does for ajaxSubmit.  ajaxForm merely
- * passes the options argument along after properly binding events for submit elements and
- * the form itself.
- */
-$.fn.ajaxForm = function(options) {
-  return this.ajaxFormUnbind().bind('submit.form-plugin', function(e) {
-    e.preventDefault();
-    $(this).ajaxSubmit(options);
-  }).bind('click.form-plugin', function(e) {
-    var target = e.target;
-    var $el = $(target);
-    if (!($el.is(":submit,input:image"))) {
-      // is this a child element of the submit el?  (ex: a span within a button)
-      var t = $el.closest(':submit');
-      if (t.length == 0)
-        return;
-      target = t[0];
-    }
-    var form = this;
-    form.clk = target;
-    if (target.type == 'image') {
-      if (e.offsetX != undefined) {
-        form.clk_x = e.offsetX;
-        form.clk_y = e.offsetY;
-      } else if (typeof $.fn.offset == 'function') { // try to use dimensions plugin
-        var offset = $el.offset();
-        form.clk_x = e.pageX - offset.left;
-        form.clk_y = e.pageY - offset.top;
-      } else {
-        form.clk_x = e.pageX - target.offsetLeft;
-        form.clk_y = e.pageY - target.offsetTop;
-      }
-    }
-    // clear form vars
-    setTimeout(function() { form.clk = form.clk_x = form.clk_y = null; }, 100);
-  });
-};
-
-// ajaxFormUnbind unbinds the event handlers that were bound by ajaxForm
-$.fn.ajaxFormUnbind = function() {
-  return this.unbind('submit.form-plugin click.form-plugin');
-};
-
-/**
- * formToArray() gathers form element data into an array of objects that can
- * be passed to any of the following ajax functions: $.get, $.post, or load.
- * Each object in the array has both a 'name' and 'value' property.  An example of
- * an array for a simple login form might be:
- *
- * [ { name: 'username', value: 'jresig' }, { name: 'password', value: 'secret' } ]
- *
- * It is this array that is passed to pre-submit callback functions provided to the
- * ajaxSubmit() and ajaxForm() methods.
- */
-$.fn.formToArray = function(semantic) {
-  var a = [];
-  if (this.length == 0) return a;
-
-  var form = this[0];
-  var els = semantic ? form.getElementsByTagName('*') : form.elements;
-  if (!els) return a;
-  for(var i=0, max=els.length; i < max; i++) {
-    var el = els[i];
-    var n = el.name;
-    if (!n) continue;
-
-    if (semantic && form.clk && el.type == "image") {
-      // handle image inputs on the fly when semantic == true
-      if(!el.disabled && form.clk == el) {
-        a.push({name: n, value: $(el).val()});
-        a.push({name: n+'.x', value: form.clk_x}, {name: n+'.y', value: form.clk_y});
-      }
-      continue;
-    }
-
-    var v = $.fieldValue(el, true);
-    if (v && v.constructor == Array) {
-      for(var j=0, jmax=v.length; j < jmax; j++)
-        a.push({name: n, value: v[j]});
-    }
-    else if (v !== null && typeof v != 'undefined')
-      a.push({name: n, value: v});
-  }
-
-  if (!semantic && form.clk) {
-    // input type=='image' are not found in elements array! handle it here
-    var $input = $(form.clk), input = $input[0], n = input.name;
-    if (n && !input.disabled && input.type == 'image') {
-      a.push({name: n, value: $input.val()});
-      a.push({name: n+'.x', value: form.clk_x}, {name: n+'.y', value: form.clk_y});
-    }
-  }
-  return a;
-};
-
-/**
- * Serializes form data into a 'submittable' string. This method will return a string
- * in the format: name1=value1&amp;name2=value2
- */
-$.fn.formSerialize = function(semantic) {
-  //hand off to jQuery.param for proper encoding
-  return $.param(this.formToArray(semantic));
-};
-
-/**
- * Serializes all field elements in the jQuery object into a query string.
- * This method will return a string in the format: name1=value1&amp;name2=value2
- */
-$.fn.fieldSerialize = function(successful) {
-  var a = [];
-  this.each(function() {
-    var n = this.name;
-    if (!n) return;
-    var v = $.fieldValue(this, successful);
-    if (v && v.constructor == Array) {
-      for (var i=0,max=v.length; i < max; i++)
-        a.push({name: n, value: v[i]});
-    }
-    else if (v !== null && typeof v != 'undefined')
-      a.push({name: this.name, value: v});
-  });
-  //hand off to jQuery.param for proper encoding
-  return $.param(a);
-};
-
-/**
- * Returns the value(s) of the element in the matched set.  For example, consider the following form:
- *
- *  <form><fieldset>
- *    <input name="A" type="text" />
- *    <input name="A" type="text" />
- *    <input name="B" type="checkbox" value="B1" />
- *    <input name="B" type="checkbox" value="B2"/>
- *    <input name="C" type="radio" value="C1" />
- *    <input name="C" type="radio" value="C2" />
- *  </fieldset></form>
- *
- *  var v = $(':text').fieldValue();
- *  // if no values are entered into the text inputs
- *  v == ['','']
- *  // if values entered into the text inputs are 'foo' and 'bar'
- *  v == ['foo','bar']
- *
- *  var v = $(':checkbox').fieldValue();
- *  // if neither checkbox is checked
- *  v === undefined
- *  // if both checkboxes are checked
- *  v == ['B1', 'B2']
- *
- *  var v = $(':radio').fieldValue();
- *  // if neither radio is checked
- *  v === undefined
- *  // if first radio is checked
- *  v == ['C1']
- *
- * The successful argument controls whether or not the field element must be 'successful'
- * (per http://www.w3.org/TR/html4/interact/forms.html#successful-controls).
- * The default value of the successful argument is true.  If this value is false the value(s)
- * for each element is returned.
- *
- * Note: This method *always* returns an array.  If no valid value can be determined the
- *     array will be empty, otherwise it will contain one or more values.
- */
-$.fn.fieldValue = function(successful) {
-  for (var val=[], i=0, max=this.length; i < max; i++) {
-    var el = this[i];
-    var v = $.fieldValue(el, successful);
-    if (v === null || typeof v == 'undefined' || (v.constructor == Array && !v.length))
-      continue;
-    v.constructor == Array ? $.merge(val, v) : val.push(v);
-  }
-  return val;
-};
-
-/**
- * Returns the value of the field element.
- */
-$.fieldValue = function(el, successful) {
-  var n = el.name, t = el.type, tag = el.tagName.toLowerCase();
-  if (typeof successful == 'undefined') successful = true;
-
-  if (successful && (!n || el.disabled || t == 'reset' || t == 'button' ||
-    (t == 'checkbox' || t == 'radio') && !el.checked ||
-    (t == 'submit' || t == 'image') && el.form && el.form.clk != el ||
-    tag == 'select' && el.selectedIndex == -1))
-      return null;
-
-  if (tag == 'select') {
-    var index = el.selectedIndex;
-    if (index < 0) return null;
-    var a = [], ops = el.options;
-    var one = (t == 'select-one');
-    var max = (one ? index+1 : ops.length);
-    for(var i=(one ? index : 0); i < max; i++) {
-      var op = ops[i];
-      if (op.selected) {
-        var v = op.value;
-        if (!v) // extra pain for IE...
-          v = (op.attributes && op.attributes['value'] && !(op.attributes['value'].specified)) ? op.text : op.value;
-        if (one) return v;
-        a.push(v);
-      }
-    }
-    return a;
-  }
-  return el.value;
-};
-
-/**
- * Clears the form data.  Takes the following actions on the form's input fields:
- *  - input text fields will have their 'value' property set to the empty string
- *  - select elements will have their 'selectedIndex' property set to -1
- *  - checkbox and radio inputs will have their 'checked' property set to false
- *  - inputs of type submit, button, reset, and hidden will *not* be effected
- *  - button elements will *not* be effected
- */
-$.fn.clearForm = function() {
-  return this.each(function() {
-    $('input,select,textarea', this).clearFields();
-  });
-};
-
-/**
- * Clears the selected form elements.
- */
-$.fn.clearFields = $.fn.clearInputs = function() {
-  return this.each(function() {
-    var t = this.type, tag = this.tagName.toLowerCase();
-    if (t == 'text' || t == 'password' || tag == 'textarea')
-      this.value = '';
-    else if (t == 'checkbox' || t == 'radio')
-      this.checked = false;
-    else if (tag == 'select')
-      this.selectedIndex = -1;
-  });
-};
-
-/**
- * Resets the form data.  Causes all form elements to be reset to their original value.
- */
-$.fn.resetForm = function() {
-  return this.each(function() {
-    // guard against an input with the name of 'reset'
-    // note that IE reports the reset function as an 'object'
-    if (typeof this.reset == 'function' || (typeof this.reset == 'object' && !this.reset.nodeType))
-      this.reset();
-  });
-};
-
-/**
- * Enables or disables any matching elements.
- */
-$.fn.enable = function(b) {
-  if (b == undefined) b = true;
-  return this.each(function() {
-    this.disabled = !b;
-  });
-};
-
-/**
- * Checks/unchecks any matching checkboxes or radio buttons and
- * selects/deselects and matching option elements.
- */
-$.fn.selected = function(select) {
-  if (select == undefined) select = true;
-  return this.each(function() {
-    var t = this.type;
-    if (t == 'checkbox' || t == 'radio')
-      this.checked = select;
-    else if (this.tagName.toLowerCase() == 'option') {
-      var $sel = $(this).parent('select');
-      if (select && $sel[0] && $sel[0].type == 'select-one') {
-        // deselect all other options
-        $sel.find('option').selected(false);
-      }
-      this.selected = select;
-    }
-  });
-};
-
-// helper fn for console logging
-// set $.fn.ajaxSubmit.debug to true to enable debug logging
-function log() {
-  if ($.fn.ajaxSubmit.debug) {
-    var msg = '[jquery.form] ' + Array.prototype.join.call(arguments,'');
-    if (window.console && window.console.log)
-      window.console.log(msg);
-    else if (window.opera && window.opera.postError)
-      window.opera.postError(msg);
-  }
-};
-
-})(jQuery);
-/**
- * @combine platform
- */
 
 /**
   * General JavaScript-File for Yiid.com
@@ -987,7 +309,47 @@ var Utils = {
 	    return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').
 	                                                                    replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/%20/g, '+');
 	}  
-};/**
+};
+
+
+/**
+ * helper to find e.g. the actual scrollheight
+ * @author karina
+ */
+var PositionHelper = {
+  
+  /**
+   * returns the actual scrollheight
+   * @author KM
+   */
+  getScrollHeight: function() {
+    console.log("[PositionHelper][getScrollHeight]");
+    var lBody = PositionHelper.getBody();
+    var lOffset = 0;
+    if (window.pageYOffset) {
+      lOffset = window.pageYOffset;
+    } else if(typeof lBody.scrollTop == "number") {
+      lOffset = lBody.scrollTop;
+    }
+    return lOffset;
+  },    
+    
+  /**
+   * returns the right body element (this for crossbrowser-comp)
+   * @author KM
+   */  
+  getBody: function() {
+    console.log("[PositionHelper][getBody]");    
+    var lBody = null;
+    if(document.all && !window.opera) {
+      lBody =(window.document.compatMode == "CSS1Compat")? window.document.documentElement : window.document.body || null;
+    } else {
+      lBody = document.documentElement;
+    }
+    return lBody;
+  }    
+};
+/**
  * @combine platform
  */
 
@@ -1001,7 +363,7 @@ var ErrorLogger = {
   aErrorMsg: 'Something went wrong',
   //global var for user-agend send to action
   aBrowserInfo: '',
-  
+    
   /**
    * handles the correct login on dev or live-system
    * @author KM
@@ -1015,7 +377,7 @@ var ErrorLogger = {
     ErrorLogger.aBrowserInfo = ErrorLogger.getBrowserInfo();
     ErrorLogger.doLog();
   },
-  
+	  
   /**
    * sends the error-infos to logging-action and to console
    * @author KM
@@ -1081,7 +443,7 @@ var ErrorHandler = {
 
   	var lMsg = '';
   	//if thrown error is set
-  	if(thrownError != undefined) {
+  	if(thrownError !== undefined) {
   		lMsg = thrownError;
   	} else {
   		lMsg = xhr.statusText;
@@ -1115,357 +477,329 @@ var ErrorHandler = {
   }
 };
 /**
- * @combine Full
- * @combine Like
+ * GlobalRequest: Binds the clicks and sends the request to the specified Action
+ * Response will be handled in the specified callback
+ * 
+ * @author KM
+ * @version 1.0
+ * @combine platform
+ */
+
+var GlobalRequest = {
+	
+	aAction: '',
+	aCallback: '',
+	aParams: {},
+	
+	/**
+	 * check if the element is a link. if so, it calls the setGlobalsByUri, if not, call setGlobalsByObject or the setglobalbydata
+	 * @author KM
+	 * @param object pElement
+	 * @param object pParams
+	 */
+	initGlobals: function(pElement, pParams) {
+		console.log("[GlobalRequest][initGlobals]");
+		//is the given element an link
+    if(jQuery(pElement).is('a') && !jQuery(pElement).attr('data-obj') && !jQuery(pElement).attr('onclick')) {
+    	//set the global vars in the setGlobalsByUri method
+      GlobalRequest.setGlobalsByUri(jQuery(pElement).attr('href'));
+    } else if(pParams !== undefined) {
+    	//if the element is not a link, set the global vars in setGlobalsByObject
+      GlobalRequest.setGlobalsByObject(pParams);
+    }	else {
+    	//if no href and no params, the element has to have an data-obj attribute with the settings and params
+    	GlobalRequest.setGlobalByData(pElement);
+    }
+	},
+	
+	/**
+	 * extract the callback-param from the href-attribute and 
+	 * @author KM
+	 * @param string pHref (have to look like that: http://example.com?callback=MYCALLBACK()&param=PARAM)
+	 */
+	setGlobalsByUri: function(pHref) {
+    console.log("[GlobalRequest][setGlobalsByUri]");		
+		//take the callback from the href-uri
+    GlobalRequest.aCallback = pHref.match(/([?&]callback[a-zA-Z0-9=\.]+)/)[0].split('=')[1];
+    //and delete it from it, because we dont need twice the same param 
+    GlobalRequest.aAction = pHref.replace(/([?&]callback[a-zA-Z0-9=\.]+[&])/, "?");
+	},
+	
+	/**
+	 * extract action, callback and params from the given param-object
+	 * have to look like that: {"action":"module/action", "callback":"MYCALLBACK()", "param":"param"}
+	 * @author KM
+	 * @param object pParams
+	 */
+	setGlobalsByObject: function(pParams) {
+    console.log("[GlobalRequest][setGlobalsByObject]");		
+		//set global action and callback vars
+		GlobalRequest.aAction = pParams.action;
+		GlobalRequest.aCallback = pParams.callback;
+		//delete them from the params, because we don't have to send them to the action
+		delete pParams.action;
+		delete pParams.callback;
+		//and ste the global params var for the doSend
+		GlobalRequest.aParams = pParams;
+	},
+	
+  /**
+   * extract action, callback and params from the data-obj attribute in the given element
+   * have to look like that: data-obj = '{"action":"module/action", "callback":"MYCALLBACK()", "param":"param"}'
+   * @author KM
+   * @param object pElement
+   */	
+	setGlobalByData: function(pElement) {
+    console.log("[GlobalRequest][setGlobalByData]");   	
+		//take the data-obj attribute from the given element
+		var lParams = jQuery(pElement).attr('data-obj');
+		//parse it to a object
+		lParams = jQuery.parseJSON(lParams);
+		//lAction = jQuery.parseJSON(lParams.action);
+    //set global action and callback vars
+    GlobalRequest.aAction = GlobalRequest.parseAction(lParams.action);        
+    GlobalRequest.aCallback = lParams.callback;
+    //delete them from the params, because we don't have to send them to the action    
+    delete lParams.action;
+    delete lParams.callback;
+    //and ste the global params var for the doSend    
+    GlobalRequest.aParams = lParams;		
+	},
+	
+	/**
+	 * checks, if the action in data-obj is a real action string like "module/action" or a callback, what will used global like SubFilter.getAction
+	 * if it is a callback, we get the action-string from that
+	 * @author KM
+	 * @param string pString
+	 */
+	parseAction: function(pString) {
+    console.log("[GlobalRequest][parseAction]");    		
+    var lAction = pString;
+    //if there is a dot in the string, it is a callback-function if not, it is a action-string and we return it
+    if(lAction.indexOf('.') != -1) {
+    	//explode the string between the dot
+    	var lArray = lAction.split('.');
+    	//if the so called function exists
+	    if(typeof window[lArray[0]][lArray[1]] == 'function') {
+	    	//call it and write the result to local var
+	      lAction = window[lArray[0]][lArray[1]]();  
+	    }     	
+    }
+    return lAction;
+	},
+	
+	/**
+	 * bind a click-event to a object identified by css id
+	 * initialized like this: GlobalRequest.bindClickById('mycssid', {"action":"module/action", "callback":"MYCALLBACK()", "param":"param"})
+	 * if pParams is not set, the element with the pId have to be a a-tag with valid href (module/action?callback=MYCALLBACK()&param=PARAM)
+	 * @author KM
+	 * @param string pId
+	 * @param object pParams
+	 */
+	bindClickById: function(pId, pParams) {
+    console.log("[GlobalRequest][bindClickById]"); 		
+		//get the element identified by the given id
+		var lElement = jQuery('#'+pId);
+		//init the global vars for dosend
+		GlobalRequest.initGlobals(lElement, pParams);
+		//bind the click to the element
+    jQuery(lElement).live("click", function() {
+      //and send request on click
+      GlobalRequest.doSend();
+      return false;
+    });
+	},
+	
+  /**
+   * bind a click-event to a all child-objects of parentid with the given tag
+   * initialized like this: GlobalRequest.bindClickByTag('ul-cssid', 'li',  {"action":"module/action", "callback":"MYCALLBACK()", "param":"param"})
+   * if pParams is not set, the element with the pTagName have to be an data-obj attribute:
+   * data-obj='{"action":"module/action", "callback":"MYCALLBACK()", "param":"param"}'
+   * @author KM
+   * @param string pParentId
+   * @param string pTagName
+   * @param object pParams
+   */	
+	bindClickByTag: function(pParentId, pTagName, pParams) {
+    console.log("[GlobalRequest][bindClickByTag]");  		
+		//bind the click to all tags that are childs of the given parentid -> ATTENTION: this is needed for performance. 
+		//Never ever bind events to a tagname global
+    jQuery('#'+pParentId+' '+pTagName).live("click", function() {
+      //init the global vars for dosend    	
+      GlobalRequest.initGlobals(this, pParams);   
+      //and send request on click
+      GlobalRequest.doSend();
+      return false;
+    }); 		
+	},
+	
+  /**
+   * bind a click-event to all child-objects of parentid with the given class
+   * initialized like this: GlobalRequest.bindClickByTag('ul-cssid', 'li-child-with-class',  {"action":"module/action", "callback":"MYCALLBACK()", "param":"param"})
+   * if pParams is not set, the element with the pClassName have to be an data-obj attribute:
+   * data-obj='{"action":"module/action", "callback":"MYCALLBACK()", "param":"param"}'
+   * @author KM
+   * @param string pParentId
+   * @param string pClassName
+   * @param object pParams
+   */ 	
+  bindClickByClass: function(pParentId, pClassName, pParams) {
+    console.log("[GlobalRequest][bindClickByClass]");     	
+    //bind the click to all elements that are childs of the given parentid and has the given classname -> ATTENTION: this is needed for performance. 
+    //Never ever bind events to a tagname global  	
+    jQuery('#'+pParentId+' .'+pClassName).live("click", function() { 
+      //init the global vars for dosend      	
+      GlobalRequest.initGlobals(this, pParams);
+      //and send request on click      
+      GlobalRequest.doSend();
+      return false;
+    });    	
+  },	
+  
+  /**
+   * binds a click-event to the given element
+   * @author KM
+   * @param object pElement
+   * @param object pParames
+   */
+  bindClickByElement: function(pElement, pParams) {
+    console.log("[GlobalRequest][bindClickByElement]");     	
+  	jQuery(pElement).die('click');
+  	jQuery(pElement).live("click", function() {
+      GlobalRequest.initGlobals(pElement, pParams);  		
+      //and send request on click      
+      GlobalRequest.doSend();
+      return false;  		
+  	});
+  },
+	
+	/**
+	 * method called by the onclick-attribute: 
+	 * onclick='GlobalRequet.initOnClick(this, {"action":"module/action", "callback":"MYCALLBACK()", "param":"param"})'
+   * if pParams is not set, the clicked-element have to be an data-obj attribute:
+   * data-obj='{"action":"module/action", "callback":"MYCALLBACK()", "param":"param"}'
+   * @author KM
+   * @param object pElement
+   * @param object pParams
+	 */
+	initOnClick: function(pElement, pParams) {
+    console.log("[GlobalRequest][initOnClick]");  		
+    //init the global vars for dosend 
+    GlobalRequest.initGlobals(pElement, pParams);  
+    //and send request on click  
+    GlobalRequest.doSend();
+    return false;
+	},
+	
+	
+	/**
+	 * sends the request to the global defined action with the global defined params. Default action type is get.
+	 * the callback has also to be defined global. The callback is the method, that is executed after request.
+	 * It is defined in the init of the click element or with an attribute (href, data-obj) of that
+	 * @author KM
+	 * @param string pActionType
+	 */
+	doSend: function(pActionType) {
+    console.log("[GlobalRequest][doSend]");  		
+		var lActionType = 'GET';
+		if(pActionType) {
+			lActionType = pActionType;
+		}
+    jQuery.ajax({
+      type: 'GET',
+      dataType:"jsonp",
+      jsonpCallback: GlobalRequest.aCallback,
+      error: ErrorHandler.catchXhrError,
+      url: GlobalRequest.aAction,
+      data: GlobalRequest.aParams
+    });
+	}
+};/**
  * @combine platform
  */
 
 
-/*
-    http://www.JSON.org/json_parse.js
-    2009-05-31
 
-    Public Domain.
+var ClassHandler = {
+	
+	setClassByElement: function(pElement, pClass) {
+		jQuery(pElement).addClass(pClass);
+	},
+	
+	removeClassByElement: function(pElement, pClass) {
+    jQuery(pElement).removeClass(pClass);		
+	},
+	
+  removeClassesByParent: function(pParent, pClass) {
+    jQuery(pParent).children('.'+pClass).removeClass(pClass);          
+  }	
+};
 
-    NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
 
-    This file creates a json_parse function.
+/**
+  * ListHandler: Helper-Object to handle general list operations
+  * @author KM
+  * @version 1.0
+  */
+var ListHandler = {
+	
+	toggleClassById: function(pItemId, pClass) {
+		var lElement = jQuery('#'+pItemId);
+		jQuery(lElement).siblings('li').removeClass(pClass);
+		jQuery(lElement).addClass(pClass);
+	},
+	
+	toggleClassByElement: function(pElement, pClass) {
+    jQuery(pElement).siblings('li').removeClass(pClass);
+    jQuery(pElement).addClass(pClass);		
+	}
+};/**
+ * @combine platform
+ */
 
-        json_parse(text, reviver)
-            This method parses a JSON text to produce an object or array.
-            It can throw a SyntaxError exception.
-
-            The optional reviver parameter is a function that can filter and
-            transform the results. It receives each of the keys and values,
-            and its return value is used instead of the original value.
-            If it returns what it received, then the structure is not modified.
-            If it returns undefined then the member is deleted.
-
-            Example:
-
-            // Parse the text. Values that look like ISO date strings will
-            // be converted to Date objects.
-
-            myData = json_parse(text, function (key, value) {
-                var a;
-                if (typeof value === 'string') {
-                    a =
-/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z$/.exec(value);
-                    if (a) {
-                        return new Date(Date.UTC(+a[1], +a[2] - 1, +a[3], +a[4],
-                            +a[5], +a[6]));
-                    }
-                }
-                return value;
-            });
-
-    This is a reference implementation. You are free to copy, modify, or
-    redistribute.
-
-    This code should be minified before deployment.
-    See http://javascript.crockford.com/jsmin.html
-
-    USE YOUR OWN COPY. IT IS EXTREMELY UNWISE TO LOAD CODE FROM SERVERS YOU DO
-    NOT CONTROL.
-*/
-
-/*members "", "\"", "\/", "\\", at, b, call, charAt, f, fromCharCode,
-    hasOwnProperty, message, n, name, push, r, t, text
-*/
-
-var json_parse = (function () {
-
-// This is a function that can parse a JSON text, producing a JavaScript
-// data structure. It is a simple, recursive descent parser. It does not use
-// eval or regular expressions, so it can be used as a model for implementing
-// a JSON parser in other languages.
-
-// We are defining the function inside of another function to avoid creating
-// global variables.
-
-    var at,     // The index of the current character
-        ch,     // The current character
-        escapee = {
-            '"':  '"',
-            '\\': '\\',
-            '/':  '/',
-            b:    '\b',
-            f:    '\f',
-            n:    '\n',
-            r:    '\r',
-            t:    '\t'
-        },
-        text,
-
-        error = function (m) {
-
-// Call error when something is wrong.
-
-            throw {
-                name:    'SyntaxError',
-                message: m,
-                at:      at,
-                text:    text
-            };
-        },
-
-        next = function (c) {
-
-// If a c parameter is provided, verify that it matches the current character.
-
-            if (c && c !== ch) {
-                error("Expected '" + c + "' instead of '" + ch + "'");
-            }
-
-// Get the next character. When there are no more characters,
-// return the empty string.
-
-            ch = text.charAt(at);
-            at += 1;
-            return ch;
-        },
-
-        number = function () {
-
-// Parse a number value.
-
-            var number,
-                string = '';
-
-            if (ch === '-') {
-                string = '-';
-                next('-');
-            }
-            while (ch >= '0' && ch <= '9') {
-                string += ch;
-                next();
-            }
-            if (ch === '.') {
-                string += '.';
-                while (next() && ch >= '0' && ch <= '9') {
-                    string += ch;
-                }
-            }
-            if (ch === 'e' || ch === 'E') {
-                string += ch;
-                next();
-                if (ch === '-' || ch === '+') {
-                    string += ch;
-                    next();
-                }
-                while (ch >= '0' && ch <= '9') {
-                    string += ch;
-                    next();
-                }
-            }
-            number = +string;
-            if (isNaN(number)) {
-                error("Bad number");
-            } else {
-                return number;
-            }
-        },
-
-        string = function () {
-
-// Parse a string value.
-
-            var hex,
-                i,
-                string = '',
-                uffff;
-
-// When parsing for string values, we must look for " and \ characters.
-
-            if (ch === '"') {
-                while (next()) {
-                    if (ch === '"') {
-                        next();
-                        return string;
-                    } else if (ch === '\\') {
-                        next();
-                        if (ch === 'u') {
-                            uffff = 0;
-                            for (i = 0; i < 4; i += 1) {
-                                hex = parseInt(next(), 16);
-                                if (!isFinite(hex)) {
-                                    break;
-                                }
-                                uffff = uffff * 16 + hex;
-                            }
-                            string += String.fromCharCode(uffff);
-                        } else if (typeof escapee[ch] === 'string') {
-                            string += escapee[ch];
-                        } else {
-                            break;
-                        }
-                    } else {
-                        string += ch;
-                    }
-                }
-            }
-            error("Bad string");
-        },
-
-        white = function () {
-
-// Skip whitespace.
-
-            while (ch && ch <= ' ') {
-                next();
-            }
-        },
-
-        word = function () {
-
-// true, false, or null.
-
-            switch (ch) {
-            case 't':
-                next('t');
-                next('r');
-                next('u');
-                next('e');
-                return true;
-            case 'f':
-                next('f');
-                next('a');
-                next('l');
-                next('s');
-                next('e');
-                return false;
-            case 'n':
-                next('n');
-                next('u');
-                next('l');
-                next('l');
-                return null;
-            }
-            error("Unexpected '" + ch + "'");
-        },
-
-        value,  // Place holder for the value function.
-
-        array = function () {
-
-// Parse an array value.
-
-            var array = [];
-
-            if (ch === '[') {
-                next('[');
-                white();
-                if (ch === ']') {
-                    next(']');
-                    return array;   // empty array
-                }
-                while (ch) {
-                    array.push(value());
-                    white();
-                    if (ch === ']') {
-                        next(']');
-                        return array;
-                    }
-                    next(',');
-                    white();
-                }
-            }
-            error("Bad array");
-        },
-
-        object = function () {
-
-// Parse an object value.
-
-            var key,
-                object = {};
-
-            if (ch === '{') {
-                next('{');
-                white();
-                if (ch === '}') {
-                    next('}');
-                    return object;   // empty object
-                }
-                while (ch) {
-                    key = string();
-                    white();
-                    next(':');
-                    if (Object.hasOwnProperty.call(object, key)) {
-                        error('Duplicate key "' + key + '"');
-                    }
-                    object[key] = value();
-                    white();
-                    if (ch === '}') {
-                        next('}');
-                        return object;
-                    }
-                    next(',');
-                    white();
-                }
-            }
-            error("Bad object");
-        };
-
-    value = function () {
-
-// Parse a JSON value. It could be an object, an array, a string, a number,
-// or a word.
-
-        white();
-        switch (ch) {
-        case '{':
-            return object();
-        case '[':
-            return array();
-        case '"':
-            return string();
-        case '-':
-            return number();
-        default:
-            return ch >= '0' && ch <= '9' ? number() : word();
-        }
-    };
-
-// Return the json_parse function. It will have access to all of the above
-// functions and variables.
-
-    return function (source, reviver) {
-        var result;
-
-        text = source;
-        at = 0;
-        ch = ' ';
-        result = value();
-        white();
-        if (ch) {
-            error("Syntax error");
-        }
-
-// If there is a reviver function, we recursively walk the new structure,
-// passing each name/value pair to the reviver function for possible
-// transformation, starting with a temporary root object that holds the result
-// in an empty key. If there is not a reviver function, we simply return the
-// result.
-
-        return typeof reviver === 'function' ? (function walk(holder, key) {
-            var k, v, value = holder[key];
-            if (value && typeof value === 'object') {
-                for (k in value) {
-                    if (Object.hasOwnProperty.call(value, k)) {
-                        v = walk(value, k);
-                        if (v !== undefined) {
-                            value[k] = v;
-                        } else {
-                            delete value[k];
-                        }
-                    }
-                }
-            }
-            return reviver.call(holder, key, value);
-        }({'': result}, '')) : result;
-    };
-}());/**
+	
+/**
+ * Pager, that works with data-attribute element
+ * @author KM
+ * @version 0.1
+ */
+var DataObjectPager = {
+		
+	/**
+	 * set the data-attr with the given datastring(JSON-formatted) on the element by pId(CSS)
+	 * @author KM
+	 * @param string pId
+	 * @param string pDataString(JSON)
+	 */	
+	init: function(pId, pDataString) {
+    console.log("[DataObjectPager][init]");  
+		var lElement = jQuery('#'+pId);
+		if(pDataString !== undefined){
+		  jQuery(lElement).attr('data-obj', pDataString);
+		}
+		GlobalRequest.bindClickByElement(lElement);
+	},
+	
+	/**
+	 * updates a pager element by a given id and set the data-attr with new values
+	 * @author KM
+	 * @param string pId(CSS)
+	 * @param string pAction
+	 * @param string pPage
+	 * @param object pDataObj
+	 */
+	update: function(pId, pAction, pPage, pDataObj) {
+    console.log("[DataObjectPager][update]");
+   	var lPage = parseInt(pPage);
+   	lPage++;
+   	pDataObj.page = String(lPage);
+   	if(pAction && pAction !== undefined) {
+   	  pDataObj.action = pAction;
+   	}
+    var lDataString = JSON.stringify(pDataObj);
+    DataObjectPager.init(pId, lDataString);
+	}
+};/**
  * @combine platform
  */
 /*
@@ -1950,3 +1284,319 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
         };
     }
 }());
+/**
+ * @combine platform
+ */
+
+/**
+ * handles the behaviour of the details of a social objects (sidebar-right)
+ * @author karina
+ */
+var ItemDetail = {
+
+  /**
+   * callback after click on a stream-item. shows all details on the right sidebar
+   * @author KM
+   * @param object pResponse(JSON)
+   */
+  show: function(pResponse) {
+    console.log("[StreamItemDetail][show]");
+    //delete the old one
+    jQuery('#stream_right').empty();
+    //check where the user is and set new position for detail-box
+    ItemDetail.setPosition();
+    //and insert the new one
+    jQuery('#stream_right').append(pResponse.itemdetail);
+    //update the css of the clicked stream-item (cssid for it is set in the presponse.css-json-obj)
+    StreamItem.updateCss(pResponse.css);
+  },
+  
+  /**
+   * set the detail-box on the right position
+   * @author KM
+   */
+  setPosition: function() {
+    console.log("[StreamItemDetail][setPosition]");  
+    //find the current scrollheight
+    var lOffsetHeight = PositionHelper.getScrollHeight();
+    //get the stream-box
+    var lStream = jQuery('#stream_right');
+    //and find the right-position for it
+    if(lOffsetHeight > 160) {
+      jQuery(lStream).css('top', lOffsetHeight-120);
+    } else {
+      jQuery(lStream).css('top', 0); 
+    }    
+  }
+};
+
+/**
+ * handles the behaviour of the tab-filters on top of the detail-box
+ * @author KM
+ */
+var ItemDetailFilter = {
+  /**
+   * updates the css of the tabs
+   * @author KM
+   * @param object pCssObj(JSON)
+   */
+  updateCss: function(pCssObj) {
+    console.log("[ItemDetailFilter][updateCss]"); 
+    //make a object from the json
+    var lCssObj = jQuery.parseJSON(pCssObj);
+    //if a class is set in it
+    if(pCssObj && pCssObj['class'] != '') {
+	    var lOuter = jQuery('#nav_shares_outer');
+	    //remove all highlighting of the tabs
+	    jQuery(lOuter).removeClass('thumb_all_active');
+	    jQuery(lOuter).removeClass('thumb_up_active');
+	    jQuery(lOuter).removeClass('thumb_down_active'); 
+	    //and set the clicked one to active (which one was clicked is saved in the css-json at clicked data-obj)
+	    jQuery(lOuter).addClass(lCssObj['class']);
+    }
+  }  
+};
+
+/**
+ * handles the behaviour of the hot/not...stream in the detail-box
+ * @author KM
+ */
+var ItemDetailStream = {
+  /**
+   * callback for request to show the right detail-stream
+   * @author KM
+   * @param object pResponse(JSON) 
+   */
+  show: function(pResponse) {
+    console.log("[ItemDetailStream][show]");
+    //clicked pager or tab?
+    if(pResponse.page < 1 || pResponse.page === undefined){
+      //if clicked tab: empty the old stream
+      jQuery('#detail-stream').empty();     
+    }
+    //remove the current pager
+    jQuery('#item-stream-pager-link').remove();
+    //insert the new stream
+    jQuery('#detail-stream').append(pResponse.stream);
+    //make a object from json-string
+    var lDataObj = jQuery.parseJSON(pResponse.dataobj);
+    //update the pager-settings -> with the append isset a new pager, that needs to be initialized
+    DataObjectPager.update('item-stream-pager-link', null, pResponse.page, lDataObj); 
+    //and update the hightlight of the clicked tab/filter
+    ItemDetailFilter.updateCss(pResponse.css);
+  }
+  
+};/**
+ * @combine platform
+ */
+ 
+ 
+ 
+/**
+ * Class to handle glboal stream effects
+ * @author KM
+ * @version 1.0
+ */
+var Stream = {
+	
+	/**
+	 * Callback-Function for the click to on a filter to load the stream
+	 * @author KM
+	 * @param object pResponse(JSON) 
+	 */
+	show: function(pResponse) { 
+		console.log("[Stream][show]");
+		if(pResponse.page < 1 || pResponse.page === undefined) {
+			//empty the stream
+			jQuery('#stream_left_bottom').empty();
+		}
+		jQuery('#main_stream_pager').remove();
+		//append the new
+		jQuery('#stream_left_bottom').append(pResponse.stream);
+		//set the action for next requests global 
+		SubFilter.setAction(pResponse.action);
+		//update the data-obj attribute of the filter
+    MainFilter.updateData(pResponse.dataobj);
+    DataObjectPager.update('stream_pager_link', pResponse.action, pResponse.page, MainFilter.aDataObj);    
+    //do some css-effects
+    StreamFilter.updateCss(pResponse.css);
+	}
+};
+
+
+/**
+ * Object to handle the global behaviour of the filters
+ * @author KM
+ */
+var StreamFilter = {
+	
+	/**
+	 * handles the update of the css-attributes of the filter
+	 * @author KM
+	 * @param object pCssObj(JSON)
+	 */
+	updateCss: function(pCssObj) {
+		if(pCssObj) {
+			//get the css class and id that you wanna change
+	    var lCssObj = jQuery.parseJSON(pCssObj);
+	    var lCssId = lCssObj['id'];
+	    var lCssClass = lCssObj['class'];
+	    //if you wanna update the main-nav
+	    if(lCssId == 'main_nav_outer'){
+	    	//remove the current highlighting
+	      MainFilter.updateCss(lCssClass);
+	    } else {
+	    	//if u wanna change the subnavi on sidebar
+	      SubFilter.updateCss(lCssId);
+	    }
+		}
+	}
+};
+
+/**
+ * Handles the behaviour of the subfilters on sidebar (user and com-filter)
+ * @author KM
+ */
+var SubFilter = {
+
+  aAction: 'stream/hot',
+  
+  /**
+   * set the action for the sub-filter-links global. The Action is defined in the last called action, e.g. new (response.action)
+   * @author KM
+   * @param string pAction
+   */
+  setAction: function(pAction) {
+    console.log("[SubFilter][setAction]");  	
+    SubFilter.aAction = pAction;
+  },
+  
+  /**
+   * returns the current action-string. is called in GlobalRequest. ATTENTION: this is used as callback-function in the GlobalRequest. 
+   * If is not set, the following requests on click on a filter will not work
+   * @author KM
+   */
+  getAction: function() {
+    console.log("[SubFilter][getAction]");  	
+  	return SubFilter.aAction;
+  },
+  
+  /**
+   * remove all highlighs from the filter-list on sidebar
+   * @author KM
+   */
+  updateCss: function(pCssId) {
+    console.log("[SubFilter][updateCss]"); 
+    //remove all classes named filter-chosen from a parent-list called all_network_list    	
+    ClassHandler.removeClassesByParent(jQuery('#all_networks_list'), 'filter_chosen');
+    ClassHandler.removeClassesByParent(jQuery('#friends_active_list'), 'filter_chosen'); 
+    //and highlight the new
+    jQuery('#'+pCssId).addClass('filter_chosen');    
+  }
+};
+
+/**
+ * Handles the behaviour of the tab-filter/main-navigation hot/not/new
+ * @author KM
+ */
+var MainFilter = {
+	
+	aDataObj: {},
+	
+	/**
+	 * parse the updated data-obj from the response
+	 * @author KM
+	 * @param object pDataObj(JSON)
+	 */
+  updateData: function(pDataObj) {
+    console.log("[MainFilter][updateData]");
+    //parse the request-data-obj and write it in global var 	
+  	MainFilter.aDataObj = jQuery.parseJSON(pDataObj);
+    jQuery.each(jQuery('.main_filter'), function(i, pField) {
+      MainFilter.setData(this);
+    });
+  },
+  
+  /**
+   * merge the current data-obj of the main-navigation with the updated from request and insert it to the element
+   * @author KM
+   * @param object pElement(DOM)
+   */
+  setData:  function(pElement) {
+    console.log("[MainFilter][setData]");  
+  	var lData = '';
+  	//if the element has a data-obj (!!!has to have)
+    if(jQuery(pElement).attr('data-obj')){ 
+    	//take the data-obj of the element and parse it to a js-object
+		  lData = jQuery.parseJSON(jQuery(pElement).attr('data-obj'));
+		  //loop over the dom-attr-obj
+		  for(var lDataKey in lData) {
+		  	//also loop over the request-data-obj
+		    for(var lMainFilterKey in MainFilter.aDataObj) {
+		    	//look if are set special params (if isset e.g. a comid or a userid, remove this params. This will reset with the params from request)
+	        if(lDataKey == 'comid' || lDataKey == 'userid' ){
+	          delete lData[lDataKey];
+	        }	
+
+	        //are there some new fields after the request? if so, update the data-attr-object with the elems from request-data-obj	
+		      if(lDataKey != lMainFilterKey) {
+	        	lData[lMainFilterKey] = MainFilter.aDataObj[lMainFilterKey];
+		      }
+		    }
+		  }
+      //object to json-string
+      lData = JSON.stringify(lData);     		  
+    } else {
+    	ErrorLogger.initLog('Missing data attribute','StreamHandler','66');
+    }
+
+    //write the data-attr-object to the element in dom
+    jQuery(pElement).attr('data-obj', lData);
+  },
+  
+  /**
+   * remove the current highlight from the tabs
+   * @author KM
+   */
+  updateCss: function(pCssClass) {
+    console.log("[MainFilter][updateCss]");    	
+    var lOuter = jQuery('#main_nav_outer');
+    jQuery(lOuter).removeClass('whats_hot_active');
+    jQuery(lOuter).removeClass('whats_not_active');
+    jQuery(lOuter).removeClass('whats_new_active'); 
+    jQuery(lOuter).addClass(pCssClass);
+  }  
+};/**
+ * @combine platform
+ */
+
+/**
+ * handles the behaviour of a single stream-item
+ * @author karina
+ */
+var StreamItem = {
+	
+  aDetailAction: 'stream/get_item_detail',
+  
+  /**
+   * returns the current action-string. is called in GlobalRequest. ATTENTION: this is used as callback-function in the GlobalRequest. 
+   * If is not set, the following requests on click on a stream-item will not work
+   * @author KM
+   */
+  getDetailAction: function() {
+    console.log("[StreamItem][getAction]");    
+    return StreamItem.aDetailAction;
+  },
+  
+  /**
+   * updates the css of the streamitem after clicking it
+   * @author karina
+   * @param object pCssObj(JSON)
+   */
+  updateCss: function(pCssObj) {
+    console.log("[StreamItem][updateCss]");   	
+    var lCssObj = jQuery.parseJSON(pCssObj);
+    ClassHandler.removeClassesByParent(jQuery('#new_shares'), 'item_active');    
+    jQuery('#'+lCssObj["itemid"]).addClass('item_active');
+  }
+};

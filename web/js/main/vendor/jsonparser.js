@@ -1,7 +1,6 @@
 /**
  * @combine Full
  * @combine Like
- * @combine platform
  */
 
 

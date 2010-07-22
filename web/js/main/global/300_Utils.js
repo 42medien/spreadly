@@ -153,3 +153,42 @@ var Utils = {
 	                                                                    replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/%20/g, '+');
 	}  
 };
+
+
+/**
+ * helper to find e.g. the actual scrollheight
+ * @author karina
+ */
+var PositionHelper = {
+  
+  /**
+   * returns the actual scrollheight
+   * @author KM
+   */
+  getScrollHeight: function() {
+    console.log("[PositionHelper][getScrollHeight]");
+    var lBody = PositionHelper.getBody();
+    var lOffset = 0;
+    if (window.pageYOffset) {
+      lOffset = window.pageYOffset;
+    } else if(typeof lBody.scrollTop == "number") {
+      lOffset = lBody.scrollTop;
+    }
+    return lOffset;
+  },    
+    
+  /**
+   * returns the right body element (this for crossbrowser-comp)
+   * @author KM
+   */  
+  getBody: function() {
+    console.log("[PositionHelper][getBody]");    
+    var lBody = null;
+    if(document.all && !window.opera) {
+      lBody =(window.document.compatMode == "CSS1Compat")? window.document.documentElement : window.document.body || null;
+    } else {
+      lBody = document.documentElement;
+    }
+    return lBody;
+  }    
+};

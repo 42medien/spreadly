@@ -4,7 +4,7 @@
  * 
  * @author KM
  * @version 1.0
- * @nocombine platform
+ * @combine platform
  */
 
 var GlobalRequest = {
@@ -25,7 +25,7 @@ var GlobalRequest = {
     if(jQuery(pElement).is('a') && !jQuery(pElement).attr('data-obj') && !jQuery(pElement).attr('onclick')) {
     	//set the global vars in the setGlobalsByUri method
       GlobalRequest.setGlobalsByUri(jQuery(pElement).attr('href'));
-    } else if(pParams != undefined) {
+    } else if(pParams !== undefined) {
     	//if the element is not a link, set the global vars in setGlobalsByObject
       GlobalRequest.setGlobalsByObject(pParams);
     }	else {

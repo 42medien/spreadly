@@ -1,5 +1,5 @@
 /**
- * @nocombine platform
+ * @combine platform
  */
 
 
@@ -17,7 +17,7 @@ var ClassHandler = {
   removeClassesByParent: function(pParent, pClass) {
     jQuery(pParent).children('.'+pClass).removeClass(pClass);          
   }	
-}
+};
 
 
 /**
@@ -37,4 +37,4 @@ var ListHandler = {
     jQuery(pElement).siblings('li').removeClass(pClass);
     jQuery(pElement).addClass(pClass);		
 	}
-}
+};

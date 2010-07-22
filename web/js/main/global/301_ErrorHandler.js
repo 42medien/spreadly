@@ -12,7 +12,7 @@ var ErrorLogger = {
   aErrorMsg: 'Something went wrong',
   //global var for user-agend send to action
   aBrowserInfo: '',
-  
+    
   /**
    * handles the correct login on dev or live-system
    * @author KM
@@ -26,7 +26,7 @@ var ErrorLogger = {
     ErrorLogger.aBrowserInfo = ErrorLogger.getBrowserInfo();
     ErrorLogger.doLog();
   },
-  
+	  
   /**
    * sends the error-infos to logging-action and to console
    * @author KM
@@ -92,7 +92,7 @@ var ErrorHandler = {
 
   	var lMsg = '';
   	//if thrown error is set
-  	if(thrownError != undefined) {
+  	if(thrownError !== undefined) {
   		lMsg = thrownError;
   	} else {
   		lMsg = xhr.statusText;

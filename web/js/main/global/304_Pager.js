@@ -1,15 +1,15 @@
 /**
- * @nocombine platform
+ * @combine platform
  */
 
-
+	
 /**
  * Pager, that works with data-attribute element
  * @author KM
  * @version 0.1
  */
 var DataObjectPager = {
-	
+		
 	/**
 	 * set the data-attr with the given datastring(JSON-formatted) on the element by pId(CSS)
 	 * @author KM
@@ -17,7 +17,7 @@ var DataObjectPager = {
 	 * @param string pDataString(JSON)
 	 */	
 	init: function(pId, pDataString) {
-    console.log("[DataObjectPager][init]");       		
+    console.log("[DataObjectPager][init]");  
 		var lElement = jQuery('#'+pId);
 		if(pDataString !== undefined){
 		  jQuery(lElement).attr('data-obj', pDataString);
