@@ -4,6 +4,10 @@
 class AuthTokenTable extends Doctrine_Table
 {
 
+  const TOKEN_TYPE_ACCESS = 'access';
+  const TOKEN_TYPE_REQUEST = 'request';
+
+
   public static function getInstance()
   {
     return Doctrine_Core::getTable('AuthToken');
@@ -43,7 +47,8 @@ class AuthTokenTable extends Doctrine_Table
   public static function getTokensForUserQuery($pUserId) {
     $lQuery = Doctrine_Query::create()
     ->from('AuthToken at')
-    ->where('at.user_id = ?', $pUserId);
+    ->where('at.user_id = ?', $pUserId)
+    ->andWhere('token_type = ?', self::TOKEN_TYPE_ACCESS);
     return $lQuery;
   }
 }
