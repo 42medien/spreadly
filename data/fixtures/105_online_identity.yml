@@ -1,4 +1,54 @@
 OnlineIdentity:
   oi_1:
+    title:      'hugo_twitter'
+    name:       'hugo_twitter'
     identifier: 'hugo_twitter'
+    Community:  community_2    
+  oi_2:
+    title:      'hugo_fb'
+    name:       'hugo_fb'
+    identifier: 'hugo_fb'
+    Community:  community_3
+  oi_3:
+    title:      'hans_twitter'
+    name:       'hans_twitter'
+    identifier: 'hans_twitter'
     Community:  community_2
+  oi_4:
+    title:      'hans_fb'
+    name:       'hans_fb'
+    identifier: 'hans_fb'
+    Community:  community_3
+  oi_5:
+    title:      'karl_twitter'
+    name:       'karl_twitter'
+    identifier: 'karl_twitter'
+    Community:  community_2
+  oi_6:
+    title:      'james_fb'
+    name:       'james_fb'
+    identifier: 'james_fb'
+    Community:  community_3
+    
+    
+UserIdentityCon:
+  uicon_1:              # hugo  - twitter oi
+    User:               user_1
+    OnlineIdentity:     oi_1
+  uicon_2:             # hugo  - facebook oi
+    User:               user_1
+    OnlineIdentity:     oi_2
+  uicon_3:               # hans  - twitter oi
+    User:               user_2
+    OnlineIdentity:     oi_3
+  uicon_4:               # hans  - facebook oi
+    User:               user_2
+    OnlineIdentity:     oi_4
+  uicon_5:                # karl  - twitter oi
+    User:               user_3
+    OnlineIdentity:     oi_5
+  uicon_6:                # james  - facebook oi
+    User:               user_5
+    OnlineIdentity:     oi_6
+  
+   
