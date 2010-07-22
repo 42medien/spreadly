@@ -51,4 +51,7 @@ UserIdentityCon:
     User:               user_5
     OnlineIdentity:     oi_6
   
-   
+OnlineIdentityCon:
+  oicon_1: 
+    OnlineIdentityFrom:  oi_1
+    OnlineIdentityTo:  oi_3

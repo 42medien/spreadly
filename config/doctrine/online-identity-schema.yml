@@ -52,8 +52,8 @@ OnlineIdentityCon:
       type:       integer
       notnull:    true
   relations:
-    OnlineIdentity: { onDelete: CASCADE, local: from_id, foreign: id, foreignAlias: OnlineIdentitysFrom }
-    OnlineIdentity: { onDelete: CASCADE, local: to_id, foreign: id, foreignAlias: OnlineIdentitysTo }   
+    OnlineIdentityFrom:   { class: OnlineIdentity, onDelete: CASCADE, local: from_id, foreign: id, foreignAlias: OnlineIdentitysFrom }
+    OnlineIdentityTo:     { class: OnlineIdentity, onDelete: CASCADE, local: to_id, foreign: id, foreignAlias: OnlineIdentitysTo }   
   indexes:
     combined_index:  
       fields: [from_id, to_id]

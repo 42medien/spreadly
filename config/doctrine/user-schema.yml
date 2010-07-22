@@ -75,4 +75,12 @@ UserIdentityCon:
     combined_index:
       fields: [user_id, online_identity_id]
       type: unique
-            
+#
+#UserExtensi:
+#  columns:
+#    user_id:
+#      type: integer
+#    owned_oi:
+#      type: string
+#    contacts_oi:
+#      type: string
