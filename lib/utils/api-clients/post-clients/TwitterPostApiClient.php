@@ -28,7 +28,7 @@ class TwitterPostApiClient implements PostApiInterface {
     $lStatusMessage .= $lUrl;
 
     $lPostBody = array("status" => $lStatusMessage);
-    $lOAuthConsumer = new OAuthConsumer("WbIgXrxlAbGfdpO8kLyWQ", "pw4tGKNa8aG4AqidMBaMpsQyDp70WSgnNVSvv9tLU");
+    $lOAuthConsumer = new OAuthConsumer(sfConfig::get("app_twitter_oauth_token"), sfConfig::get("app_twitter_oauth_secret"));
     $lStatus = OAuthClient::post($lOAuthConsumer, $lOAuth->key, $lOAuth->secret, "http://api.twitter.com/1/statuses/update.xml", $lPostBody);
 
     return $lStatus;
