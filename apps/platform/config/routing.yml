@@ -33,6 +33,10 @@ auth_signin:
 auth_complete_signin:
   url:   /auth/complete_signin
   param: { module: auth, action: complete_signin }
+  
+landing:
+  url: /landing
+  param: { module: landing, action: index }
 
 ##### ROUTES FOR PLUGINS #######
 
