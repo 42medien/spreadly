@@ -38,12 +38,12 @@ writeWholeFile($lDir,$lFileName,$lFileMinName);
  * @param string $pFileMinName
  */
 function writeWholeFile($pDir, $pFileName, $pFileMinName) {
-	
-	$lFiles = FilesystemHelper::retrieveFilesInDir(dirname(__FILE__).'/../../web/js/main/include/', array('.svn'), array(), '.js');
+
+	$lFiles = FilesystemHelper::retrieveFilesInDir(dirname(__FILE__).'/../../web/js/100_main/include/', array('.svn'), array(), '.js');
   foreach($lFiles as $lFile) {
-  	unlink($lFile);	
+  	unlink($lFile);
   }
-	
+
   //we get all Files we want to combine
   $lFiles = FilesystemHelper::retrieveFilesInDir($pDir, array('.svn', 'include'), array(), '.js');
   //writes the current needed consolelog-file to the beginning of all scripts
@@ -51,7 +51,7 @@ function writeWholeFile($pDir, $pFileName, $pFileMinName) {
   //we combine the Files to one file named by given filenname and save it in the include-folder
   combineFiles($lFiles, $pFileName);
   //we minify the combined file and save it in the include-folder by given fileminname
-  minifyFiles(dirname(__FILE__).'/../../web/js/main/include/');
+  minifyFiles(dirname(__FILE__).'/../../web/js/100_main/include/');
   //echo "build js-File: ".$pFileMinName;
   //echo "\n\r";
 }
@@ -69,11 +69,11 @@ function combineFiles($pFiles, $pFileName) {
   foreach($pFiles as $lMyFile) {
   	//now we get the content of the current-file as an array (every line = one field in the array)
   	$lArray = file($lMyFile);
-    //var_dump(trim(chop($lArray[0])));die(); 
+    //var_dump(trim(chop($lArray[0])));die();
   	foreach($lArray as $lKey => $lValue) {
   		//remove all spaces
   		$lValue = trim(chop(str_replace(" ", "", $lValue)));
-  		
+
   		//if(sfConfig::get('app_settings_dev') == false && strpos($lValue, 'console.log') !== false) {
   		if(strpos($lValue, 'console.log') !== false) {
   			unset($lArray[$lKey]);
@@ -84,16 +84,16 @@ function combineFiles($pFiles, $pFileName) {
   			//build the current set filename
   			$lNewName = str_replace('*@combine', "", $lValue).'-'.$pFileName;
   			//open or build the file with the new name
-        $lWholeFile = fopen(dirname(__FILE__).'/../../web/js/main/include/'.$lNewName, 'a+');
+        $lWholeFile = fopen(dirname(__FILE__).'/../../web/js/100_main/include/'.$lNewName, 'a+');
         //get the content
         $lContent = file_get_contents($lMyFile);
         if(sfConfig::get('app_settings_dev') == false) {
           $lContent = str_replace('console.log', "//console.log", $lContent);
         }
         //and write to the end of the new file
-        $lDone = fwrite($lWholeFile, $lContent);  
-        echo basename($lMyFile)." combined to ".$lNewName; 
-        echo "\n\r"; 
+        $lDone = fwrite($lWholeFile, $lContent);
+        echo basename($lMyFile)." combined to ".$lNewName;
+        echo "\n\r";
   		}
   	}
   }
@@ -121,8 +121,8 @@ function minifyFiles($pDirname) {
 	  $lDone = fwrite($lMinFile, $lJsMin);
 	  //and close the new minify-file
 	  fclose($lMinFile);
-    echo "Minified: ".$lFileName; 
-    echo "\n\r"; 	  
-  }	
+    echo "Minified: ".$lFileName;
+    echo "\n\r";
+  }
 }
 ?>

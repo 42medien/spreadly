@@ -14,9 +14,4 @@ default:
   
   stylesheets: 
     - configurator.css
-    - colorpicker.css    
-    
-  javascripts: 
-    - vendor/jquery-complete.min.js
-    - vendor/colorpicker.js       
-    - components/Configurator.js       
+    - vendor/colorpicker.css   

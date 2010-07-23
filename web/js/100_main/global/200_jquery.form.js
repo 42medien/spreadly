@@ -1,3 +1,7 @@
+/**
+ * @combine configurator
+ */
+
 /*!
  * jQuery Form Plugin
  * version: 2.43 (12-MAR-2010)

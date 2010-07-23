@@ -5,4 +5,4 @@
   </li>
 <?php } ?>
 </ul>
-<?php include_partial('stream/stream_pager', array('page' => '1')); ?>
+<?php include_partial('stream/stream_pager'); ?>

@@ -50,7 +50,7 @@
     <div id="footer" class="clearfix">
 
 	  </div>
-  <script type="text/javascript" src="/js/main/include/platform-<?php echo sfConfig::get('app_release_name') ?>.min.js"></script>
+  <script type="text/javascript" src="/js/100_main/include/platform-<?php echo sfConfig::get('app_release_name') ?>.min.js"></script>
   <script type="text/javascript">
     jQuery(document).ready( function() {
       <?php include_partial('global/js_init_general.js'); ?>
