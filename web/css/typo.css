@@ -15,10 +15,11 @@ h4{ font-size: 1.2em; font-weight: bold; }
 #stream_left_top p, #search input{font-size: 13px;}
 #nav_main, #so_information h3{font-size: 14px;}
 
-a:hover, .btn:hover{text-decoration: underline;}
+a:hover, .btn:hover, .whats_new_active #main_nav_inner2 p:hover, .whats_not_active #main_nav_inner2 p:hover, .whats_new_active #main_nav_inner4 p:hover, .whats_hot_active #main_nav_inner4 p:hover, 
+	.whats_hot_active #main_nav_inner7 p:hover, .whats_not_active #main_nav_inner7 p:hover{text-decoration: underline;}
 a, a.icon_thumb, li.filter_chosen a, a.icon_thumbs, a.icon_thumb, a.icon_small_use{text-decoration: none;}
 
-.user_name, .text_important, #main_nav_inner2 p:hover, #main_nav_inner4 p:hover, #main_nav_inner7 p:hover, .whats_hot_active #main_nav_inner2 p, .whats_not_active #main_nav_inner4 p, .whats_new #main_nav_inner7 p{font-weight: bold;}
+.user_name, .text_important, .whats_hot_active #main_nav_inner2 p, .whats_not_active #main_nav_inner4 p, .whats_new #main_nav_inner7 p{font-weight: bold;}
 
 .url{font-style: italic;}
 
