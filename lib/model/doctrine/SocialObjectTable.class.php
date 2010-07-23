@@ -68,7 +68,8 @@ class SocialObjectTable extends Doctrine_Table
 
   public static function retrieveHotObjets($pUserId, $pFriendId = null, $pCommunityId = null, $pRange = 7, $pPage = 1, $pLimit = 30)  {
     $lCollection = self::getMongoCollection();
-    $lQueryArray = self::initializeBasicFilterQuery($pFriendId, $pCommunityId, $pRange);
+    $lRelevantOis = self::getRelevantOnlineIdentitysForQuery($pUserId, $pFriendId);
+    $lQueryArray = self::initializeBasicFilterQuery($lRelevantOis, $pCommunityId, $pRange);
 
     $lResults = $lCollection->find($lQueryArray);
     $lResults->sort(array('l_cnt' => -1));
@@ -79,7 +80,8 @@ class SocialObjectTable extends Doctrine_Table
 
   public static function retrieveFlopObjects($pUserId, $pFriendId = null, $pCommunityId = null, $pRange = 7, $pPage = 1, $pLimit = 30) {
     $lCollection = self::getMongoCollection();
-    $lQueryArray = self::initializeBasicFilterQuery($pFriendId, $pCommunityId, $pRange);
+    $lRelevantOis = self::getRelevantOnlineIdentitysForQuery($pUserId, $pFriendId);
+    $lQueryArray = self::initializeBasicFilterQuery($lRelevantOis, $pCommunityId, $pRange);
 
     $lResults = $lCollection->find($lQueryArray);
     $lResults->sort(array('d_cnt' => -1));
@@ -88,6 +90,16 @@ class SocialObjectTable extends Doctrine_Table
   }
 
 
+
+  public static function getRelevantOnlineIdentitysForQuery($pUserId, $pFriendId) {
+    $pOiArray = array();
+    if (is_null($pFriendId)) {
+      $pOiArray = UserRelationTable::retrieveUserRelations($pUserId)->getContactsOi();
+    } else {
+      $pOiArray = UserRelationTable::retrieveUserRelations($pFriendId)->getOwnedOi();
+    }
+    return $pOiArray;
+  }
 
   /**
    * generates common filter elements we need in each query
@@ -100,9 +112,11 @@ class SocialObjectTable extends Doctrine_Table
   private static function initializeBasicFilterQuery($pOis = null, $pCommunityId = null, $pRange = 7) {
     $lQueryArray = array();
     $lQueryArray['u'] = array('$gte' => strtotime('-'.$pRange. ' days'));
+    $lQueryArray['oiids'] = array('$in' => array($pOis));
     if ($pCommunityId) {
       $lQueryArray['cids'] = array('$in' => array($pCommunityId));
     }
+
     return $lQueryArray;
   }
 

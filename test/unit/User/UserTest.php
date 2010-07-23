@@ -22,10 +22,12 @@ class UserTest extends BaseTestCase {
     Doctrine::loadData(dirname(__file__).'/fixtures');
 
     $lUserHugo = UserTable::getByIdentifier('hugo');
-    $lUserHugo->updateOwnedIdentities(array(1,2,34));
+    $lUserHugo->updateOwnedIdentities(array("1", "2", "34"));
 
-    $lRelations = $lUserHugo->retrieveUserRelations();
-    $this->assertEquals(array(1,2,34), $lRelations->getOwnedOi());
+    $lRelation = $lUserHugo->retrieveUserRelations();
+
+    $this->assertTrue(in_array("34", $lRelation->getOwnedOi()));
+
   }
 
 

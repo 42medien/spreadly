@@ -88,7 +88,7 @@ class YiidActivityTable extends Doctrine_Table
       if (in_array($lIdentity, $pOwnedOnlineIdentitys)) {
         $lVerifiedOnlineIdentitys[]= $lIdentity;
         $senderOi = OnlineIdentityPeer::retrieveByPK($lIdentity);
-        $lStatus = $senderOi->sendStatusMessage($pUrl, $pVerb, $pScore, $pTitle);
+        $lStatus = $senderOi->sendStatusMessage($pUrl, $pVerb, $pScore, utf8_decode($pTitle));
         sfContext::getInstance()->getLogger()->debug("{YiidActivityPeer}{saveLikeActivitys} Status Message: " . print_r($lStatus, true));
       }
       else {

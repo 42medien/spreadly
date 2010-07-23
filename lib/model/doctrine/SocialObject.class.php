@@ -24,7 +24,7 @@ class SocialObject extends BaseSocialObject
     $this->setUpdatedOn(time());
     $lObjectToSave = $this->toArray(false);
     $lObjectToSave = SocialObjectTable::saveObjectToMongoDb($lObjectToSave);
-    $this->setId($lObjectToSave['_id']);
+    $this->setId($lObjectToSave['_id'].""); // cast ImongoID to string
     if ($lObjectToSave) {
       return $lObjectToSave;
     }
@@ -52,14 +52,13 @@ class SocialObject extends BaseSocialObject
     }
 
     SocialObjectTable::updateObjectInMongoDb(array("_id" => new MongoId($this->getId())),
-                                              array( '$inc' => array($lCounterField => 1 ),
-                                               '$addToSet' => array('oiids' => array('$each' => $pVerifiedOnlineIdentitys)),
-                                               '$addToSet' => array('alias' => array('$each' => array(md5($pUrl)))))
-                                              );
+                                             array( '$inc' => array($lCounterField => 1 ),
+                                                    '$addToSet' => array('oiids' => array('$each' => $pVerifiedOnlineIdentitys), 'alias' => array('$each' => array(md5($pUrl)))))
+    );
   }
 
 
-    /**
+  /**
    * update basic information on this social object
    *
    * @param $pTitle
@@ -81,9 +80,9 @@ class SocialObject extends BaseSocialObject
 
 
     SocialObjectTable::updateObjectInMongoDb(array("_id" => new MongoId($this->getId())),
-                                              array(
+    array(
                                                '$set' => $lUpdateArray
-                                              ));
+    ));
   }
 
 
@@ -92,10 +91,10 @@ class SocialObject extends BaseSocialObject
    * @param string $pUrl
    */
   public function addAlias($pUrl) {
-      SocialObjectTable::updateObjectInMongoDb(array("_id" => new MongoId($this->getId())),
-                                                array(
+    SocialObjectTable::updateObjectInMongoDb(array("_id" => new MongoId($this->getId())),
+    array(
                                                  '$addToSet' => array('alias' => array('$each' => array(md5($pUrl)))))
-                                                );
+    );
   }
 
 

@@ -71,8 +71,3 @@ AuthToken:
     token_secret:           secret1
     token_type:             oauth1
     is_publishing_enabled:  0
-    
-UserRelation:
-  ur_1:
-    User:                    user_1
-    owned_oi:                []    
