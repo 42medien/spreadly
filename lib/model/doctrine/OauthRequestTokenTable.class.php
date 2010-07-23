@@ -16,13 +16,15 @@ class OauthRequestTokenTable extends Doctrine_Table {
    * saves the request token
    *
    * @author Matthias Pfefferle
-   * @param OAuthToken $lToken
+   * @param OAuthToken $pToken
+   * @param Community $pCommunity
    * @return AuthToken
    */
-  public static function saveToken($pToken) {
+  public static function saveToken($pToken, $pCommunity) {
     $lToken = new OauthRequestToken();
     $lToken->setTokenKey($pToken->key);
     $lToken->setTokenSecret($pToken->secret);
+    $lToken->setCommunityId($pCommunity->getId());
     $lToken->save();
 
     return $lToken;
