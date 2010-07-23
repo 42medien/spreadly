@@ -1,4 +1,3 @@
-<!-- Bei Klick auf Whats Hot wird dem div mit ID main_nav_outer die Klasse .whats_hot_active zugewiesen -->
 <div id="main_nav_outer" class="whats_hot_active">
   <div id="main_nav_inner1" class="left"></div>
   <div id="main_nav_inner2" class="left main_filter" data-obj='{"action":"stream/hot", "callback":"Stream.show", "css":"{\"class\":\"whats_hot_active\", \"id\":\"main_nav_outer\"}"}'>
