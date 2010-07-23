@@ -21,14 +21,8 @@ class SocialObject extends BaseSocialObject
         $this->setAlias(array(md5($this->getUrl())));
       }
     }
-
     $this->setUpdatedOn(time());
-
- //   $lAliasArray = explode(',',$this->getAlias());
-
     $lObjectToSave = $this->toArray(false);
- //   $lObjectToSave['alias'] = $lAliasArray;
-
     $lObjectToSave = SocialObjectTable::saveObjectToMongoDb($lObjectToSave);
     $this->setId($lObjectToSave['_id']);
     if ($lObjectToSave) {

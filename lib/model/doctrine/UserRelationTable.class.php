@@ -40,10 +40,27 @@ class UserRelationTable extends Doctrine_Table
     if (!is_array($pIdentities)) {
       $pIdentities = array($pIdentities);
     }
-
     $lQueryArray = array('$addToSet' => array('owned_oi' => array('$each' => $pIdentities)));
     return $lCollection->update(array('user_id' => $pUserId), $lQueryArray);
   }
+
+
+  /**
+   * add OI's of a users contacts
+   *
+   * @param $pUserId
+   * @param $pIdentities
+   */
+  public static function updateContactIdentities($pUserId, $pIdentities) {
+    $lCollection = self::getMongoCollection();
+
+    if (!is_array($pIdentities)) {
+      $pIdentities = array($pIdentities);
+    }
+    $lQueryArray = array('$addToSet' => array('contacts_oi' => array('$each' => $pIdentities)));
+    return $lCollection->update(array('user_id' => $pUserId), $lQueryArray);
+  }
+
 
 
   /**

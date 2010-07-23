@@ -32,8 +32,75 @@ class YiidActivityTable extends Doctrine_Table
 
 
 
+  public static function saveLikeActivitys($pUserId,
+                                          $pUrl,
+                                          $pOwnedOnlineIdentitys = array(),
+                                          $pGivenOnlineIdentitys = array(),
+                                          $pScore = self::ACTIVITY_TYPE_LIKE,
+                                          $pVerb = 'like',
+                                          $pTitle = null,
+                                          $pDescription = null,
+                                          $pPhoto = null) {
 
 
+    $lVerifiedOnlineIdentitys = array();
+    $pTitle = utf8_encode(urldecode($pTitle));
+    $pDescription = utf8_encode(urldecode($pDescription));
+    $pPhoto = utf8_encode(urldecode($pPhoto));
+
+
+    if (!YiidActivityPeer::isVerbSupported($pVerb)) {
+      return false;
+    }
+
+    $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
+    $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
+    if (!$lSocialObject) {
+      // check redirects for link shortenes
+      $pLongUrl = UrlUtils::shortUrlExpander($pUrl);
+
+      if(!$pLongUrl || !UrlUtils::isUrlValid($pLongUrl)) {
+        return false;
+      }
+      $pLongUrl = UrlUtils::cleanupHostAndUri($pLongUrl);
+
+      if ($pLongUrl != $pUrl) {
+        $lSocialObject = self::retrieveSocialObjectByAliasUrl($pLongUrl);
+        if ($lSocialObject) {  // gibt's schon unter $longUrl -> also $pUrl hinzufügen
+          $lSocialObject->addAlias($pUrl);
+        } else {
+          $lSocialObject =  SocialObjectPeer::createSocialObject($pUrl, $pLongUrl, $pTitle, $pDescription, $pPhoto);
+        }
+      } else {
+        $lSocialObject = SocialObjectPeer::createSocialObject($pUrl, null, $pTitle, $pDescription, $pPhoto);
+      }
+    } else {
+      // unless we got an freaky object parser we check on updates on every action on an object
+      $lSocialObject->updateObjectMasterData($pTitle, $pDescription, $pPhoto);
+
+    }
+
+    if (!self::isActionOnObjectAllowed($lSocialObject->getId(), $pUserId)) {
+      return false;
+    }
+
+    foreach ($pGivenOnlineIdentitys as $lIdentity) {
+      if (in_array($lIdentity, $pOwnedOnlineIdentitys)) {
+        $lVerifiedOnlineIdentitys[]= $lIdentity;
+        $senderOi = OnlineIdentityPeer::retrieveByPK($lIdentity);
+        $lStatus = $senderOi->sendStatusMessage($pUrl, $pVerb, $pScore, $pTitle);
+        sfContext::getInstance()->getLogger()->debug("{YiidActivityPeer}{saveLikeActivitys} Status Message: " . print_r($lStatus, true));
+      }
+      else {
+      }
+    }
+
+    if (!empty($lVerifiedOnlineIdentitys)) {
+      self::saveActivity($lSocialObject, $pUrl, $pUserId, $pScore, $pVerb);
+      $lSocialObject->updateObjectOnLikeActivity($lVerifiedOnlineIdentitys, $pUrl, $pScore);
+    }
+    return true;
+  }
 
 
 

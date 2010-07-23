@@ -66,10 +66,6 @@ class SocialObjectTable extends Doctrine_Table
   }
 
 
-
-
-
-
   public static function retrieveHotObjets($pUserId, $pFriendId = null, $pCommunityId = null, $pRange = 7, $pPage = 1, $pLimit = 30)  {
     $lCollection = self::getMongoCollection();
     $lQueryArray = self::initializeBasicFilterQuery($pFriendId, $pCommunityId, $pRange);

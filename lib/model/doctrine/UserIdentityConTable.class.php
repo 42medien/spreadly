@@ -78,4 +78,20 @@ class UserIdentityConTable extends Doctrine_Table
           ->fetchOne();
     return $lUserIdentityCon;
   }
+
+
+
+  /**
+   * retrieves all yiid users who added a given OI
+   *
+   * @param OnlineIdentity $pOnlineIdentity
+   */
+  public static function getUsersConnectedToOnlineIdentity(OnlineIdentity $pOnlineIdentity) {
+    $lQuery = Doctrine_Query::create()
+          ->from('User u')
+          ->leftJoin('u.UserIdentityCons uic')
+          ->where('uic.online_identity_id = ?', $pOnlineIdentity->getId());
+
+    return $lQuery->execute();
+  }
 }

@@ -13,6 +13,11 @@
 class UserRelation extends BaseUserRelation
 {
 
+  /**
+   * store Data to MongoDb
+   * (non-PHPdoc)
+   * @see lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/vendor/doctrine/Doctrine/Doctrine_Record::save()
+   */
    public function save(Doctrine_Connection $conn = null) {
     $lObjectToSave = $this->toArray(false);
 

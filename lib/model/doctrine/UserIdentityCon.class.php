@@ -13,10 +13,9 @@
 class UserIdentityCon extends BaseUserIdentityCon
 {
 
-
-
-
   public function postInsert($event) {
+    // the user adds a new OI to his account
     $lUser = $this->getUser();
+    $lUser->updateOwnedIdentities(array($this->getId()));
   }
 }
