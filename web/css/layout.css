@@ -161,7 +161,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
     .so_share_image{width: 15%;}
     .so_share_information{width: 85%;}
     .so_share_small_information, .so_share_information, .url{padding-left: 0;}
-    .text_action{padding-left: 18px;}
+    .text_action{padding-left: 17px;}
     #so_right_view .url{padding-left:0;}
     .so_comment{padding-top:5px;}
     #so_information{overflow: hidden;}
