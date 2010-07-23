@@ -6,11 +6,13 @@ options:
 OnlineIdentity:
   actAs:
     MemcacheBehavior: ~
-    Timestampable:  ~     
+    Timestampable:  ~
   columns:
     community_id:
       type: integer
-      notnull: true    
+      notnull: true
+    user_id:
+      type: integer
     title:
       type:     string(120)
     name:
@@ -19,7 +21,7 @@ OnlineIdentity:
       type:     string(255)
     identifier:
       type:     string(255)
-    identity_type: 
+    identity_type:
       type:     integer(4)
     feed_identifier:
       type:     string(120)
@@ -29,21 +31,21 @@ OnlineIdentity:
       type:     integer(4)
     social_publishing_enabled:
       type:       boolean
-      default:    false    
+      default:    false
   relations:
-    Community: { onDelete: CASCADE, local: community_id, foreign: id, foreignAlias: OnlineIdentitys }   
+    Community: { onDelete: CASCADE, local: community_id, foreign: id, foreignAlias: OnlineIdentitys }
   indexes:
     auth_identifier:
       fields: [auth_identifier]
-      type:   unique  
-    combined_index:  
+      type:   unique
+    combined_index:
       fields: [community_id, identifier, identity_type]
       type:   unique
-      
-      
+
+
 OnlineIdentityCon:
   actAs:
-    Timestampable:  ~     
+    Timestampable:  ~
   columns:
     from_id:
       type:       integer
@@ -53,8 +55,8 @@ OnlineIdentityCon:
       notnull:    true
   relations:
     OnlineIdentityFrom:   { class: OnlineIdentity, onDelete: CASCADE, local: from_id, foreign: id, foreignAlias: OnlineIdentitysFrom }
-    OnlineIdentityTo:     { class: OnlineIdentity, onDelete: CASCADE, local: to_id, foreign: id, foreignAlias: OnlineIdentitysTo }   
+    OnlineIdentityTo:     { class: OnlineIdentity, onDelete: CASCADE, local: to_id, foreign: id, foreignAlias: OnlineIdentitysTo }
   indexes:
-    combined_index:  
+    combined_index:
       fields: [from_id, to_id]
       type:   unique

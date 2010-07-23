@@ -107,6 +107,10 @@ OauthRequestToken:
       type:    string(255)
     token_secret:
       type:    string(255)
+    community_id:
+      type:    integer
+  relations:
+    Community:       { onDelete: CASCADE, local: community_id, foreign: id, foreignAlias: OauthRequestTokens }
   indexes:
     token_key:
       fields: [token_key]
