@@ -13,3 +13,5 @@
 <div class="right right_shares_pager">
   <a href="#" id="item-stream-pager-link" class="pager_load_more" data-obj='{"action":"stream/get_item_detail_stream", "callback":"ItemDetailStream.show", "case":"all", "itemid":"1", "page":"1"}'>Load more...</a>
 </div>
+
+<div class="clearfix">&nbsp;</div>
