@@ -10,13 +10,21 @@ class AuthApiFactory {
    * returns the matching PostApiClient
    *
    * @author Matthias Pfefferle
-   * @param int $pCommunity
+   * @param mixed $pCommunity the community name or the community id
    * @param array $pParams
    * @return Object
    */
   static public function factory($pCommunity, $pParams = null) {
+    // check if $pCommunity is the name or the id
+    if (is_numeric($pCommunity)) {
+      $lCommunityObject = CommunityTable::getInstance()->find($pCommunity);
+      $lCommunity = $lCommunityObject->getCommunity();
+    } else {
+      $lCommunity = $pCommunity;
+    }
+
     // return matching object
-    switch ($pCommunity) {
+    switch ($lCommunity) {
       case "facebook":
         return new FacebookAuthApiClient();
         break;
