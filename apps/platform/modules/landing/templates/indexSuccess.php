@@ -41,8 +41,11 @@
 			  <label for="signin_password" class="left">Password</label>
 		    <input type="text" id="signin_user" />
 		  </div>
-	     
-	    <input type="submit" value="login" />
+      
+      <div class="center_area">
+        <label for="signin_password" class="left">&nbsp;</label>
+        <input type="submit" value="login" class="btn" />
+      </div>
 	 
    </form>
 	 

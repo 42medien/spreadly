@@ -78,7 +78,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 .filter_headline{margin-top: 5px;padding:5px 10px;border-left: none;}
 #all_networks_list li{padding: 5px 0;}
 #friends_active_list li{padding: 6px 0 3px 10px;}
-.btn{border: 1px solid #CDCDCD;padding: 2px 30px 2px 20px;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;}
+.btn{width: 150px;border: 1px solid #CDCDCD;padding: 2px 30px 2px 20px;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;}
 .photo_big{width: 96px;height: 96px;border: 2px #d7d7d7 solid;}
 #stream_photo{margin: 15px auto;}
 .normal_list{list-style-type: none;margin: 10px 0 20px;}
@@ -217,8 +217,9 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 h2{margin-bottom: 15px;}
 #what_is_yiid_description p{height: 80px;}
 #signin_via_username_form{margin: 20px 0;}
-#signin_via_username_form div{width: 300px;}
-#signin_via_username_form label{width: 80px;display: block;}
+#signin_via_username_form div{width: 250px;}
+#signin_via_username_form label{width: 70px;display: block;}
+#signin_via_username_form input[type=text]{width: 150px;}
 #signin_via_username_form input[type=submit]{margin-top: 10px;}
     
     
