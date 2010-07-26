@@ -15,9 +15,9 @@
         </div>
       </div>
       <div class="clearfix whats_hot_info_area">
-	      <p class="text_important">Berlin, Germany</p>
-	      <p class="url">type / 52° 30' 35.59° N 13° 22' 25.76° E</p>
-	      <p class="main_text">Intensive trials are under way as the world's largest solar-powered yacht...</p>
+	      <p class="text_important"><?php echo $pObject->getTitle(); ?></p>
+        <p class="url"><?php echo link_to($pObject->getUrl(), url_for($pObject->getUrl(), true)); ?></p>
+        <p class="main_text"><?php echo $pObject->getStmt(); ?></p>
 	    </div>
 	  </div>
 	  <div class="right preview_information">
