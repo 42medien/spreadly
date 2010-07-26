@@ -30,6 +30,17 @@ $lObject2->updateObjectOnLikeActivity(array($lOiHansFb->getId()), 'http://bim.bo
 
 $lObject3 = SocialObjectTable::createSocialObject('http://spiegel.de', null, 'spiegel.de title', 'spiegel.de description', null);
 $lObject3->updateObjectOnLikeActivity(array($lOiKarlTwitter->getId(), $lOiHugoTwitter->getId()), 'http://spiegel.de', 1);
+$lObject3->updateObjectOnLikeActivity(array($lOiHansTwitter->getId()), 'http://nochmehraffen.com', 1);
+
+$lObject4 = SocialObjectTable::createSocialObject('http://snirgel.de', null, 'snirgel.de title', 'snirgel.de description', null);
+$lObject4->updateObjectOnLikeActivity(array($lOiKarlTwitter->getId(), $lOiHugoTwitter->getId()), 'http://snirgel.de', -1);
+$lObject4->updateObjectOnLikeActivity(array($lOiKarlTwitter->getId()), 'http://snirgel.de', 1);
+$lObject4->updateObjectOnLikeActivity(array($lOiHugoFb->getId()), 'http://snirgel.de', -1);
+
+$lObject5 = SocialObjectTable::createSocialObject('http://der-fusssballblogger.de', null, 'fussball title', 'fussball description', null);
+$lObject5->updateObjectOnLikeActivity(array($lOiKarlTwitter->getId(), $lOiHugoTwitter->getId()), 'http://der-fusssballblogger.de', 1);
+$lObject5->updateObjectOnLikeActivity(array($lOiHansTwitter->getId()), 'http://der-fusssballblogger.de', -1);
+
 
 
 ?>
