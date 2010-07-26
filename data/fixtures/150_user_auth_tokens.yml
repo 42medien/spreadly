@@ -1,0 +1,19 @@
+AuthToken:
+  at_1:
+    User:    user_1
+    Community:  community_2
+    OnlineIdentity: oi_1
+    is_publishing_enabled:  1
+    token_type:   access
+  at_2:
+    User:    user_2
+    Community:  community_3
+    OnlineIdentity: oi_4
+    is_publishing_enabled:  1
+    token_type:   access
+  at_3:
+    User:    user_2
+    Community:  community_2
+    OnlineIdentity: oi_3
+    is_publishing_enabled:  1
+    token_type:   access

@@ -6,14 +6,13 @@
     <?php echo image_tag('/img/global/yiid-logo.png', array('width' => 96, 'height' => 96)); ?>
   </div>
 
-  <p class="filter_headline">All Networks</p>
+  <p class="filter_headline"><?php echo __('All Networks'); ?></p>
   <ul class="normal_list clearfix" id="all_networks_list">
-    <li id="com-filter-1">
-      <a href="/" class="icon_service icon_facebook stream_filter" target="_blank" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "comid":"1", "css":"{\"class\":\"normal_list\", \"id\":\"com-filter-1\"}"}'>facebook.com</a>
-    </li>
-    <li id="com-filter-2">
-      <a href="/" class="icon_service icon_twitter stream_filter" target="_blank" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "comid":"2", "css": "{\"class\":\"normal_list\", \"id\":\"com-filter-2\"}"}'>twitter.com</a>
-    </li>
+    <?php foreach ($pServices as $lService) { ?>
+      <li id="com-filter-<?php echo $lService->getId(); ?>">
+        <a href="/" class="icon_service icon_<?php echo strtolower($lService->getSlug()); ?> stream_filter" target="_blank" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "comid":"<?php echo $lService->getId(); ?>", "css":"{\"class\":\"normal_list\", \"id\":\"com-filter-<?php echo $lService->getId(); ?>\"}"}'><?php echo $lService->getName(); ?></a>
+      </li>
+    <?php } ?>
   </ul>
 
   <p class="filter_headline">Friends Active</p>
