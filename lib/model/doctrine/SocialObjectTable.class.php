@@ -99,7 +99,8 @@ class SocialObjectTable extends Doctrine_Table
     } else {
       $pOiArray = UserRelationTable::retrieveUserRelations($pFriendId)->getOwnedOi();
     }
-    return $pOiArray;
+
+    return $pOiArray?$pOiArray:array();
   }
 
   /**
@@ -129,6 +130,7 @@ class SocialObjectTable extends Doctrine_Table
    * @return array(SocialObject)
    */
   private static function hydrateMongoCollectionToObjects($pCollection) {
+    $lObjects = array();
     while($pCollection->hasNext()) {
       $lObjects[] = self::initializeObjectFromCollection($pCollection->getNext());
     }

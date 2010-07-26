@@ -82,9 +82,8 @@ class UserRelationTable extends Doctrine_Table
     $lObject = new UserRelation();
     if ($pCollection) {
       $lObject->fromArray($pCollection);
-      return $lObject;
     }
-    return null;
+    return $lObject;
   }
 
 

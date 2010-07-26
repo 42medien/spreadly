@@ -17,7 +17,7 @@ class streamActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->pSocialObjects = SocialObjectTable::retrieveHotObjets();
+    $this->pSocialObjects = SocialObjectTable::retrieveHotObjets($this->getUser()->getUserId());
   }
 
   public function executeNew(sfWebRequest $request) {
@@ -52,7 +52,7 @@ class streamActions extends sfActions
     $lCallback = $request->getParameter('callback', 'logerror');
     $lUserId = $request->getParameter('userid', null);
     $lComId = $request->getParameter('comid', null);
-    $lPage = $request->getParameter('page', 0);    
+    $lPage = $request->getParameter('page', 0);
     $lCss = $request->getParameter('css');
     $lString = '';
     if($lUserId) {
@@ -61,7 +61,7 @@ class streamActions extends sfActions
       $lString = ', "comid":"'.$lComId.'"';
     }
 
-    $pSocialObjects = SocialObjectTable::retrieveHotObjets();
+    $pSocialObjects = SocialObjectTable::retrieveHotObjets($this->getUser()->getUserId());
 
     return $this->renderText(
       $lCallback.'('.
@@ -92,7 +92,7 @@ class streamActions extends sfActions
       $lString = ', "comid":"'.$lComId.'"';
     }
 
-    $pSocialObjects = SocialObjectTable::retrieveFlopObjects();
+    $pSocialObjects = SocialObjectTable::retrieveFlopObjects($this->getUser()->getUserId());
 
     return $this->renderText(
       $lCallback.'('.
@@ -101,7 +101,7 @@ class streamActions extends sfActions
           "stream"  => $this->getPartial('stream/whats_not_stream', array('pSocialObjects' => $pSocialObjects)),
           "action" => "stream/not",
           "dataobj" => '{"callback":"'.$lCallback.'"'.$lString.', "page": "'.$lPage.'"}',
-          "page" => $lPage,        
+          "page" => $lPage,
           "css" => $lCss
         )
       )

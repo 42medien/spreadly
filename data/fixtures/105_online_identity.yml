@@ -3,32 +3,38 @@ OnlineIdentity:
     title:      'hugo_twitter'
     name:       'hugo_twitter'
     identifier: 'hugo_twitter'
-    Community:  community_2    
+    Community:  community_2   
+    identity_type:       1 
   oi_2:
     title:      'hugo_fb'
     name:       'hugo_fb'
     identifier: 'hugo_fb'
     Community:  community_3
+    identity_type:       1
   oi_3:
     title:      'hans_twitter'
     name:       'hans_twitter'
     identifier: 'hans_twitter'
     Community:  community_2
+    identity_type:       1
   oi_4:
     title:      'hans_fb'
     name:       'hans_fb'
     identifier: 'hans_fb'
     Community:  community_3
+    identity_type:       1
   oi_5:
     title:      'karl_twitter'
     name:       'karl_twitter'
     identifier: 'karl_twitter'
     Community:  community_2
+    identity_type:       1
   oi_6:
     title:      'james_fb'
     name:       'james_fb'
     identifier: 'james_fb'
     Community:  community_3
+    identity_type:       1
     
     
 UserIdentityCon:
