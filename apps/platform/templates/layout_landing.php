@@ -13,16 +13,10 @@
 
       <div id="header" class="clearfix">
         <div id="header_sub" class="left"></div>
-        <div id="header_main" class="left"></div>
-        <div id="header_supp" class="left">
-          <?php include_partial('global/main_navigation'); ?>
-        </div>
 	    </div>
 
       <div id="content" class="clearfix">
-
-        
-
+        <?php echo $sf_content; ?>
 	    </div>
 
       <?php include_partial('global/footer'); ?>

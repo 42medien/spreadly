@@ -1,0 +1,45 @@
+<div id="signin_area">
+  <h3>No registration needed - please use your favourite service to login</h3>
+  <p>(For returning users: please use the same service you've used before or login with user and password <a href="/">here</a>.)</p>
+  
+  <ul class="service_icons_big normal_list clearfix">
+    <li class="left icon_big icon_big_facebook">
+	    <a href="/">Facebook</a>
+    </li>
+    <li class="left icon_big icon_big_twitter">
+      <a href="/">Twitter</a>
+    </li>
+    <li class="left icon_big icon_big_google">
+      <a href="/">Google</a>
+    </li>
+  </ul>
+
+  <p>If you haven't used the Yiid button before, we will automatically create an account for you on Yiid.com, where you can manage your services, 
+  see your and your friends "Likes" and much more. By using Yiid you agree to the <a href="/">Terms and Conditions</a> of Yiid. 
+  If you're a recurring user, simply choose a service that you've used before - we will know you and enable your former settings.</p>
+</div>
+
+<div class="center_area clearfix">
+  <h2>What is Yiid?</h2>
+</div>
+
+<div id="what_is_yiid_description" class="clearfix">
+  <div class="description_with_image left">
+    <p>Find cool new articles, products or people on the web and use the Yiid button to share what you've found with your friends.</p>
+    <div id="yiid_description1" class="center_area"></div>
+  </div>
+  
+  <div class="description_wave left"></div>
+  
+  <div class="description_with_image left">
+    <p>Share to Facebook, Twitter and many more of your profiles simultanously with just one click.</p>
+    <div id="yiid_description2" class="center_area"></div>
+  </div>
+  
+  <div class="description_wave left"></div>
+  
+  <div class="description_with_image left">
+    <p>See all your friends shares on Facebook, Twitter and many other networks combined in your personal dashboard.</p>
+    <div id="yiid_description3" class="center_area"></div>
+  </div>
+</div>

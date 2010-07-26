@@ -1,5 +1,36 @@
 @CHARSET "UTF-8";
 
+/**
+  * @section -reset.css 
+  */
+a, abbr, acronym, address, applet, article, aside, audio,
+b, blockquote, big, body,
+center, canvas, caption, cite, code, command,
+datalist, dd, del, details, dfn, dl, div, dt, 
+em, embed,
+fieldset, figcaption, figure, font, footer, form, 
+h1, h2, h3, h4, h5, h6, header, hgroup, html,
+i, iframe, img, ins,
+kbd, 
+keygen,
+label, legend, li, 
+meter,
+nav,
+object, ol, output,
+p, pre, progress,
+q, 
+s, samp, section, small, span, source, strike, strong, sub, sup,
+table, tbody, tfoot, thead, th, tr, tdvideo, tt,
+u, ul, 
+var{
+    background: transparent;
+    border: 0 none;
+    font-size: 100%;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline; }
+    
+
 /* Getting the new tags to behave */
 article, aside, audio, canvas, command, datalist, details, embed, figcaption, figure, footer, header, hgroup, keygen, meter, nav, output, progress, section, source, video{ display: block; }
 mark, rp, rt, ruby, summary, time{ display: inline }
@@ -10,6 +41,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 /* Left & Right alignment */
 .left{ float: left; }
 .right{ float: right; }
+.center_area{margin: 0 auto;}
 
 /* The fraction classes are useful for column lists */
 .half, .third, .quarter, .fifth, .sixth{ width: 100%; }
@@ -37,11 +69,11 @@ mark, rp, rt, ruby, summary, time{ display: inline }
   li#nav_main_settings{margin-right: 0;}
     
 /* Content */
-#content{}
+#content{padding: 25px 0;}
 
 /* Content_sub */
 #content_sub{/*width:25%;*/ width: 250px;}
-#photo_filter_box{margin:25px 15px 25px 25px;width:200px;padding-bottom:10px;}
+#photo_filter_box{margin:0 15px 0 25px;width:200px;padding-bottom:10px;}
 #photo_filter_box input[type=submit]{}
 .filter_headline{margin-top: 5px;padding:5px 10px;border-left: none;}
 #all_networks_list li{padding: 5px 0;}
@@ -61,7 +93,6 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 
 /* Content_main */
 #content_main{width:45%;}
-	#stream_left{margin-top:25px;}
 	  #main_nav_inner1{width:4px;height:30px;}
 	  #main_nav_inner2{height:30px;}
 	  #main_nav_inner2 p{margin: 0 5px 0 15px;}
@@ -87,12 +118,11 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 		    
 		    .green_top_left{width:18px;height:28px;}
 		    .green_top_middle{width: 98%;border-right: 1px solid #cbd3c9;}
-        
         .green_middle_left{width:18px;height: 100%;min-height:1px;}
         .green_middle_middle{width: 98%;border-right: 1px solid #cbd3c9;}
-        
         .green_bottom_left{height:3px;width:18px}
         .green_bottom_middle{width: 98%;height:3px;border-right: 1px solid #cbd3c9;}
+        
         #stream_left_bottom .so_comment{margin: 0px 10px 10px 30px;}
 
         .actions{margin-left: 18px;padding-bottom: 5px;}
@@ -135,7 +165,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 
 /* Content_supp */
 #content_supp{width: 28%;}
-  #search{margin:25px 0 10px 25px;}
+  #search{margin:0 0 10px 25px;}
   #search1{width: 60%;padding:5px 10px;height: 14px;border: 1px solid #ccc;-webkit-border-radius: 4px 0 0 4px;-moz-border-radius: 4px 0 0 4px;border-radius: 4px 0 0 4px;border-right: none;}
   #search2{width: 33px;height: 26px;padding:4px 0;-webkit-border-radius: 0 4px 4px 0;-moz-border-radius: 0 4px 4px 0;border-radius: 0 4px 4px 0;border-left: none;}
   #search3{width: 27px;padding: 13px 5px;}
@@ -165,49 +195,28 @@ mark, rp, rt, ruby, summary, time{ display: inline }
     #so_right_view .url{padding-left:0;}
     .so_comment{padding-top:5px;}
     #so_information{overflow: hidden;}
-    
-    .thumb_up{}
-    .thumb_up_active{}
-    .thumb_down{}
-    .thumb_down_active{}
         
         
 /* Footer */
 #footer{float: left;width: 100%; }
     
-  
+
+/* Signin */
+#signin_area, #what_is_yiid_description{width: 100%; margin: 0 auto;text-align: center;}
+#signin_area{width: 60%;padding: 10px 20px; -webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;margin-bottom: 30px;-webkit-box-shadow: 0 5px 5px -3px black;-moz-box-shadow: 0 5px 5px -3px black;box-shadow: 0 5px 5px -3px black;}
+.description_with_image{width: 25%;}
+.description_wave{width: 10%;height: 138px;margin:  100px 0 0 0;}
+#yiid_description1{width: 139px;height: 84px;margin-top: 50px;}
+#yiid_description2{width: 188px;height: 184px;}
+#yiid_description3{width: 259px;height: 186px;}
+.service_icons_big{width: 70%;margin: 30px auto 40px;}
+.service_icons_big li{width: 33%;}
+.service_icons_big a{padding: 65px 15px 0;}
+.icon_big_link{padding: 60px 8px 2px;}
+.icon_big{padding-top: 65px; display: block;}
+h2{margin-bottom: 15px;}
+#what_is_yiid_description p{height: 80px;}
     
-    
-    
-/**
-	* @section -reset.css 
-	*/
-a, abbr, acronym, address, applet, article, aside, audio,
-b, blockquote, big, body,
-center, canvas, caption, cite, code, command,
-datalist, dd, del, details, dfn, dl, div, dt, 
-em, embed,
-fieldset, figcaption, figure, font, footer, form, 
-h1, h2, h3, h4, h5, h6, header, hgroup, html,
-i, iframe, img, ins,
-kbd, 
-keygen,
-label, legend, li, 
-meter,
-nav,
-object, ol, output,
-p, pre, progress,
-q, 
-s, samp, section, small, span, source, strike, strong, sub, sup,
-table, tbody, tfoot, thead, th, tr, tdvideo, tt,
-u, ul, 
-var{
-    background: transparent;
-    border: 0 none;
-    font-size: 100%;
-    margin: 0;
-    padding: 0;
-    vertical-align: baseline; }
     
 /**
  * Hacks
