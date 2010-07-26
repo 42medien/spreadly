@@ -15,7 +15,6 @@ h4{ font-size: 1.2em; font-weight: bold; }
 #stream_left_top p, #search input{font-size: 13px;}
 #nav_main, #so_information h3{font-size: 14px;}
 #what_is_yiid_description p{font-size: 16px;}
-.center_area{text-align: center;}
 
 a:hover, .btn:hover, .whats_new_active #main_nav_inner2 p:hover, .whats_not_active #main_nav_inner2 p:hover, .whats_new_active #main_nav_inner4 p:hover, .whats_hot_active #main_nav_inner4 p:hover, 
 	.whats_hot_active #main_nav_inner7 p:hover, .whats_not_active #main_nav_inner7 p:hover{text-decoration: underline;}
@@ -25,16 +24,17 @@ a, a.icon_thumb, li.filter_chosen a, a.icon_thumbs, a.icon_thumb, a.icon_small_u
 
 .url{font-style: italic;}
 
-.sharing_user_info p{line-height: 14px;}
+.sharing_user_info p, #signin_area p{line-height: 14px;}
 .so_comment, #so_information h5 a{line-height: 16px;}
 .so_headline_left, .so_headline_right{line-height: 18px;}
 #stream_right_top div, #what_is_yiid_description p{line-height: 19px;}
+#signin_via_username_form label{line-height: 25px;}
 #nav_main li a, #stream_left_top div, #stream_right_top div, #signin_area h3, h3{line-height: 30px;}
 h2{line-height: 40px;}
 .sharing_user_link, h1{line-height: 50px;}
 
-#all_networks_list li, #friends_active_list li, .user_hover_area_top, user_hover_area_bottom{text-align: left;}
-/*.filter_headline{text-align: center;}*/
+#all_networks_list li, #friends_active_list li, .user_hover_area_top, user_hover_area_bottom, #signin_via_username_form label{text-align: left;}
+.center_area{text-align: center;}
 .actions{text-align: right;}
 
 .url, .like-dislike{letter-spacing: -0.3px;}

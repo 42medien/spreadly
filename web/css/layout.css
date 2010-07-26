@@ -203,7 +203,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 
 /* Signin */
 #signin_area, #what_is_yiid_description{width: 100%; margin: 0 auto;text-align: center;}
-#signin_area{width: 60%;padding: 10px 20px; -webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;margin-bottom: 30px;-webkit-box-shadow: 0 5px 5px -3px black;-moz-box-shadow: 0 5px 5px -3px black;box-shadow: 0 5px 5px -3px black;}
+#signin_area{width: 60%;padding: 15px 20px 20px; -webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;margin-bottom: 30px;-webkit-box-shadow: 0 5px 5px -3px black;-moz-box-shadow: 0 5px 5px -3px black;box-shadow: 0 5px 5px -3px black;}
 .description_with_image{width: 25%;}
 .description_wave{width: 10%;height: 138px;margin:  100px 0 0 0;}
 #yiid_description1{width: 139px;height: 84px;margin-top: 50px;}
@@ -216,6 +216,10 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 .icon_big{padding-top: 65px; display: block;}
 h2{margin-bottom: 15px;}
 #what_is_yiid_description p{height: 80px;}
+#signin_via_username_form{margin: 20px 0;}
+#signin_via_username_form div{width: 300px;}
+#signin_via_username_form label{width: 80px;display: block;}
+#signin_via_username_form input[type=submit]{margin-top: 10px;}
     
     
 /**
