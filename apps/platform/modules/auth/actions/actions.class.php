@@ -32,8 +32,8 @@ class authActions extends sfActions
   public function executeComplete_signin(sfWebRequest $request) {
     $lRequestToken = OauthRequestTokenTable::retrieveByTokenKey($request->getParameter('oauth_token'));
 
-    $lObject = AuthApiFactory::factory($lRequestToken->getCommunityName());
-    $lToken = $lObject->requestAccess();
+    $lObject = AuthApiFactory::factory($lRequestToken->getCommunityId());
+    $lObject->doSignin($this->getUser(), $lRequestToken->toOAuthToken());
 
     var_dump($lToken);exit;
   }
