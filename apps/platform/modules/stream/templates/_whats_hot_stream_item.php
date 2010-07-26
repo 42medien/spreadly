@@ -15,9 +15,9 @@
         </div>
       </div>
       <div class="clearfix whats_hot_info_area">
-	      <p class="text_important">Berlin, Germany</p>
-	      <p class="url">type / 52° 30' 35.59° N 13° 22' 25.76° E</p>
-	      <p>Intensive trials are under way as the world's largest solar-powered yacht...</p>
+	      <p class="text_important"><?php echo $pObject->getTitle(); ?></p>
+	      <p class="url"><?php echo link_to($pObject->getUrl(), url_for($pObject->getUrl(), true)); ?></p>
+	      <p><?php echo $pObject->getStmt(); ?></p>
 	    </div>
 	  </div>
 	  <div class="right preview_information">
@@ -28,15 +28,15 @@
 	<!-----------  Das folgende div muss auf style="display:none;" gesetzt und nur bei hover angezeigt werden ------------------------------>
 	<div class="actions clearfix">
     <ul class="sharing_friends left">
-      
+
       <?php include_partial('sharing_friend', array('lLikeType' => 'like')); ?>
       <?php include_partial('sharing_friend', array('lLikeType' => 'dislike')); ?>
       <?php include_partial('sharing_friend', array('lLikeType' => 'like')); ?>
       <?php include_partial('sharing_friend', array('lLikeType' => 'dislike')); ?>
       <?php include_partial('sharing_friend', array('lLikeType' => 'like')); ?>
-	    
+
     </ul>
-	
+
 	  <div class="action_content right">
 	    <a href="#" class="icon_comment icon_small_use text_action">comment</a>
 	    <a href="#" class="icon_favorite icon_small_use text_action">favorite</a>
