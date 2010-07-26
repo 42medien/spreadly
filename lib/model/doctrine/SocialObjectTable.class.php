@@ -84,6 +84,7 @@ class SocialObjectTable extends Doctrine_Table
     $lQueryArray = self::initializeBasicFilterQuery($lRelevantOis, $pCommunityId, $pRange);
 
     $lResults = $lCollection->find($lQueryArray);
+
     $lResults->sort(array('d_cnt' => -1));
 
     return self::hydrateMongoCollectionToObjects($lResults);
@@ -112,7 +113,7 @@ class SocialObjectTable extends Doctrine_Table
   private static function initializeBasicFilterQuery($pOis = null, $pCommunityId = null, $pRange = 7) {
     $lQueryArray = array();
     $lQueryArray['u'] = array('$gte' => strtotime('-'.$pRange. ' days'));
-    $lQueryArray['oiids'] = array('$in' => array($pOis));
+    $lQueryArray['oiids'] = array('$in' => $pOis);
     if ($pCommunityId) {
       $lQueryArray['cids'] = array('$in' => array($pCommunityId));
     }

@@ -22,7 +22,7 @@ class CommunityTable extends Doctrine_Table {
    * @return Community|null
    */
   public static function retrieveBySlug($pSlug) {
-    return self::getInstance()->findBy("slug", $pSlug);
+    return self::getInstance()->findOneBy("slug", $pSlug);
   }
 
   /**
@@ -33,7 +33,7 @@ class CommunityTable extends Doctrine_Table {
    * @return Community|null
    */
   public static function retrieveByCommunity($pCommunity) {
-    return self::getInstance()->findBy("community", $pSlug);
+    return self::getInstance()->findOneBy("community", $pCommunity);
   }
 
   /**

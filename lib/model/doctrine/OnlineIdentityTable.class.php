@@ -40,9 +40,8 @@ class OnlineIdentityTable extends Doctrine_Table {
   public static function retrieveByIdentifier($pIdentifier, $pCommunityId, $pType = self::TYPE_IDENTITY) {
     $lOnlineIdentity = Doctrine_Query::create()->
       from('OnlineIdentity oi')->
-      where('oi.identifier = ? AND oi.identity_type = ? AND oi.community_id = ?', array($pIdentifier, $pType, $pCommunityId))->
-      fetchOne();
-
+      where('oi.identifier = ? AND oi.identity_type = ? AND oi.community_id = ?', array($pIdentifier, $pType, $pCommunityId))
+      ->fetchOne();
     return $lOnlineIdentity;
   }
 

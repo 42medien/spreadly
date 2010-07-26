@@ -47,21 +47,25 @@ OnlineIdentity:
     name:       'hugo_twitter'
     identifier: 'hugo_twitter'
     Community:  community_2    
+    identity_type:       1
   oi_2:
     title:      'hugo_fb'
     name:       'hugo_fb'
     identifier: 'hugo_fb'
     Community:  community_3
+    identity_type:       1
   oi_3:
     title:      'hans_twitter'
     name:       'hans_twitter'
     identifier: 'hans_twitter'
     Community:  community_2
+    identity_type:       1
   oi_4:
     title:      'hans_fb'
     name:       'hans_fb'
     identifier: 'hans_fb'
     Community:  community_3
+    identity_type:       1
     
     
 UserIdentityCon:
