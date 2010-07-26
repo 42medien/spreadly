@@ -24,4 +24,24 @@
       <?php echo image_tag('/img/test/map_preview.png'); ?>
     </div>
   </div>
+
+  <!-----------  Das folgende div muss auf style="display:none;" gesetzt und nur bei hover angezeigt werden ------------------------------>
+  <div class="actions clearfix">
+    <ul class="sharing_friends left">
+      
+      <?php include_partial('sharing_friend', array('lLikeType' => 'like')); ?>
+      <?php include_partial('sharing_friend', array('lLikeType' => 'dislike')); ?>
+      <?php include_partial('sharing_friend', array('lLikeType' => 'like')); ?>
+      <?php include_partial('sharing_friend', array('lLikeType' => 'dislike')); ?>
+      <?php include_partial('sharing_friend', array('lLikeType' => 'like')); ?>
+      
+    </ul>
+  
+    <div class="action_content right">
+      <a href="#" class="icon_comment icon_small_use text_action">comment</a>
+      <a href="#" class="icon_favorite icon_small_use text_action">favorite</a>
+      <a href="#" class="icon_hide icon_small_use text_action">hide</a>
+    </div>
+  </div>
+  <!-----------  Das vorige div muss auf style="display:none;" gesetzt und nur bei hover angezeigt werden ------------------------------>
 </div>
