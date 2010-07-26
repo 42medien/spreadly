@@ -87,9 +87,9 @@ function combineFiles($pFiles, $pFileName) {
         $lWholeFile = fopen(dirname(__FILE__).'/../../web/js/100_main/include/'.$lNewName, 'a+');
         //get the content
         $lContent = file_get_contents($lMyFile);
-        if(sfConfig::get('app_settings_dev') == false) {
+        //if(sfConfig::get('app_settings_dev') == false) {
           $lContent = str_replace('console.log', "//console.log", $lContent);
-        }
+        //}
         //and write to the end of the new file
         $lDone = fwrite($lWholeFile, $lContent);
         echo basename($lMyFile)." combined to ".$lNewName;
