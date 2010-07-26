@@ -87,11 +87,40 @@ class UserIdentityConTable extends Doctrine_Table
    * @param OnlineIdentity $pOnlineIdentity
    */
   public static function getUsersConnectedToOnlineIdentity(OnlineIdentity $pOnlineIdentity) {
+    $lQuery = self::createConnectedToOnlineIdentityQuery($pOnlineIdentity);
+    return $lQuery->execute();
+  }
+
+
+  /**
+   *
+   * retrieves IDs of yiid users which are connected to a given ID
+   * @param OnlineIdentity $pOnlineIdentity
+   */
+  public static function getUserIdsConnectedToOnlineIdentity(OnlineIdentity $pOnlineIdentity) {
+    $lQuery = self::createConnectedToOnlineIdentityQuery($pOnlineIdentity);
+    $lQuery->select('u.id');
+
+    return $lQuery->fetchArray();
+  }
+
+
+  /**
+   * Create Query for connected users
+   *
+   * @param OnlineIdentity $pOnlineIdentity
+   */
+  private static function createConnectedToOnlineIdentityQuery(OnlineIdentity $pOnlineIdentity) {
     $lQuery = Doctrine_Query::create()
           ->from('User u')
           ->leftJoin('u.UserIdentityCons uic')
           ->where('uic.online_identity_id = ?', $pOnlineIdentity->getId());
 
-    return $lQuery->execute();
+    return $lQuery;
   }
+
+
+
+
+
 }

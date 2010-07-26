@@ -17,6 +17,9 @@ class OnlineIdentityCon extends BaseOnlineIdentityCon
     // the user adds a new OI to his account
     $lUsers = $this->getOnlineIdentityFrom()->getConnectedUsers();
     foreach ($lUsers as $lUser) {
+      $lContacts = $this->getOnlineIdentityTo()->getConnectedUserIds();
+
+      print_r($lContacts);
       $lUser->updateContactIdentities(array($this->getToId()));
     }
 

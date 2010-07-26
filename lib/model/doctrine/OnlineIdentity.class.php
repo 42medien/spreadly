@@ -19,4 +19,13 @@ class OnlineIdentity extends BaseOnlineIdentity
   public function getConnectedUsers() {
     return UserIdentityConTable::getUsersConnectedToOnlineIdentity($this);
   }
+
+  /**
+   * returns IDs of Uyer Objects connected to that OI
+   */
+  public function getConnectedUserIds() {
+    return UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($this);
+  }
+
+
 }

@@ -80,9 +80,11 @@ UserRelation:
   columns:
     user_id:
       type: integer
-    owned_oi:
+    owned_oi:    # list of owned OnlineIdentity ids
       type: string
-    contacts_oi:
+    contacts_oi: # list of contacted OnlineIdentity ids
+      type: string
+    contact_uid: # list of contacted yiid user ids 
       type: string
   relations:
     User: { onDelete: CASCADE, local: user_id, foreign: id, foreignAlias: UserRelations }
