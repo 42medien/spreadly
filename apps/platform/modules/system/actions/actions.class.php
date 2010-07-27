@@ -15,8 +15,26 @@ class systemActions extends sfActions
   *
   * @param sfRequest $request A request object
   */
-  public function executeIndex(sfWebRequest $request)
-  {
-    $this->forward('default', 'module');
+  public function executeIndex(sfWebRequest $request) {
+  	
+  }
+  
+
+  public function executeChangeLanguage(sfWebRequest $request) {
+    
+  	$form = new sfFormLanguage(
+      $this->getUser(),
+      array('languages' => array('en', 'de'))
+    );
+ 
+    $form->process($request);
+ 
+    $referer = $this->getRequest()->getReferer();
+
+    if( preg_match('/yiid/', parse_url($referer, PHP_URL_HOST)) ) {
+      return $this->redirect( $referer );
+    } else {
+      return $this->redirect( 'index/index' );
+    }
   }
 }

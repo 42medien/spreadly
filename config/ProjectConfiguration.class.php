@@ -5,7 +5,11 @@ sfCoreAutoload::register();
 
 class ProjectConfiguration extends sfProjectConfiguration {
   public function setup() {
-    $this->enablePlugins('sfDoctrinePlugin', 'yiidPlugin');
+    $this->enablePlugins(array(
+      'sfDoctrinePlugin', 
+      'yiidPlugin',
+      'sfFormExtraPlugin'
+    ));
   }
 
   public function configureDoctrine(Doctrine_Manager $manager) {

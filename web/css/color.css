@@ -120,6 +120,7 @@ li.filter_chosen a{color: #6a6b6a;}
 
     
 /* Footer */
+#footer{border-top: 5px solid #6A6B6A;}
 
 /* Signin */
 .description_wave{background: transparent url("/img/sprites/sprite_signin.png") -12% -604px no-repeat;}

@@ -45,6 +45,10 @@ auth_basic:
 landing:
   url: /landing
   param: { module: landing, action: index }
+  
+change_language:
+  url:   /change_language
+  param: { module: system, action: changeLanguage }
 
 ##### ROUTES FOR PLUGINS #######
 

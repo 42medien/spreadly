@@ -199,7 +199,8 @@ mark, rp, rt, ruby, summary, time{ display: inline }
         
         
 /* Footer */
-#footer{float: left;width: 100%; }
+#footer{float: left;width: 100%;}
+  #language_switch{margin: 10px 20px;}
     
 
 /* Signin */
