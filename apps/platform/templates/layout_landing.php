@@ -19,21 +19,18 @@
         <?php echo $sf_content; ?>
 	    </div>
 
-      <?php include_partial('global/footer'); ?>
-
     </div>
-
-    <div id="footer" class="clearfix">
-
-	  </div>
-  <script type="text/javascript" src="/js/100_main/include/platform-<?php echo sfConfig::get('app_release_name') ?>.min.js"></script>
-  <script type="text/javascript">
-    jQuery(document).ready( function() {
-      <?php include_partial('global/js_init_general.js'); ?>
-      <?php if (has_slot('js_document_ready')) { ?>
-        <?php include_slot('js_document_ready'); ?>
-      <?php } ?>
-    });
-  </script>
+    
+    <?php include_partial('global/footer'); ?>
+    
+	  <script type="text/javascript" src="/js/100_main/include/platform-<?php echo sfConfig::get('app_release_name') ?>.min.js"></script>
+	  <script type="text/javascript">
+	    jQuery(document).ready( function() {
+	      <?php include_partial('global/js_init_general.js'); ?>
+	      <?php if (has_slot('js_document_ready')) { ?>
+	        <?php include_slot('js_document_ready'); ?>
+	      <?php } ?>
+	    });
+	  </script>
   </body>
 </html>

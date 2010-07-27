@@ -22,7 +22,7 @@ p, a.text_action, h3, h2{color: #6a6b6a;}
 .icon_facebook{background: transparent url("/img/sprites/sprite_icons.png") 8px -374px no-repeat;}
 .icon_twitter{background: transparent url("/img/sprites/sprite_icons.png") 8px -409px no-repeat;}
 .icon_google{background: transparent url("/img/sprites/sprite_icons.png") 8px -444px no-repeat;}
-label{color: #6A6B6A;}
+#container label{color: #6A6B6A;}
 .icon_small_facebook{background: transparent url("/img/sprites/sprite_icons.png") 0 -480px no-repeat;}
 .icon_small_twitter{background: transparent url("/img/sprites/sprite_icons.png") 0 -511px no-repeat;}
 .icon_small_google{background: transparent url("/img/sprites/sprite_icons.png") 0 -542px no-repeat;}
@@ -120,7 +120,7 @@ li.filter_chosen a{color: #6a6b6a;}
 
     
 /* Footer */
-#footer{border-top: 5px solid #6A6B6A;}
+#footer{border-top: 5px solid #6A6B6A;background-color: #68b94f;color: #fff;}
 
 /* Signin */
 .description_wave{background: transparent url("/img/sprites/sprite_signin.png") -12% -604px no-repeat;}
