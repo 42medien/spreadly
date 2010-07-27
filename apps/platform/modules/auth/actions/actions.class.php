@@ -8,15 +8,15 @@
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class authActions extends sfActions
-{
- /**
-  * Executes index action
-  *
-  * @param sfRequest $request A request object
-  */
-  public function executeIndex(sfWebRequest $request) {
-    $this->forward('default', 'module');
+class authActions extends sfActions {
+
+  public function initialize($context, $module, $action) {
+    $parentRet = parent::initialize($context, $module, $action);
+    // if the user is already loged in, redirect to the stream
+    if ($this->getUser()->isAuthenticated()) {
+      $this->redirect("@stream");
+    }
+    return $parentRet;
   }
 
   public function executeSignin(sfWebRequest $request) {
@@ -24,8 +24,6 @@ class authActions extends sfActions
       $lObject = AuthApiFactory::factory($lService);
       $lObject->doAuthentication();
     }
-
-    $this->setLayout("plain");
   }
 
   public function executeBasic(sfWebRequest $request) {
