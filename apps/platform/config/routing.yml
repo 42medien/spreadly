@@ -6,21 +6,25 @@ homepage:
   url:   /
   param: { module: landing, action: index }
 
+stream:
+  url:   /stream
+  param: { module: stream, action: index }
+
 stream_new:
   url: /stream/new
-  param: { module: stream, action: new}
+  param: { module: stream, action: new }
 
 stream_hot:
   url: /stream/hot
-  param: { module: stream, action: hot}
+  param: { module: stream, action: hot }
 
 stream_not:
   url: /stream/not
-  param: { module: stream, action: not}
+  param: { module: stream, action: not }
 
 get_item_detail:
   url: /stream/get_item_detail
-  param: { module: stream, action: get_item_detail}
+  param: { module: stream, action: get_item_detail }
 
 get_item_detail_stream:
   url: /stream/get_item_detail_stream
