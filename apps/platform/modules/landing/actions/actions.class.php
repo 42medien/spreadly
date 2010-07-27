@@ -20,6 +20,7 @@ class landingActions extends sfActions {
     }
 
     $this->pAuthType = $request->getParameter("auth", "delegated");
+    $this->pError = null;
 
     if ($this->getUser()->hasFlash("error")) {
       $this->pError = $this->getUser()->getFlash("error");
