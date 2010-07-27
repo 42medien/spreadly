@@ -42,7 +42,7 @@ all:
       cache_key_use_host_name:    true
   
   i18n:
-    class: yiidI18N
+    class: sfI18N
     param:
       source:          MySQL
       debug:           off
@@ -57,3 +57,4 @@ all:
             default:
               host: 127.0.0.1     #aws
               port: 11211      
+   

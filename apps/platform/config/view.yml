@@ -14,7 +14,7 @@ default:
 
   stylesheets:    [layout.css, color.css, typo.css]
 
-  javascripts:    []
+  javascripts:   []
 
   has_layout:     true
   layout:         layout
