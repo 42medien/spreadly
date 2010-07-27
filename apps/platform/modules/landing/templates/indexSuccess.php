@@ -30,11 +30,11 @@
       <a href="/" onclick="Utils.toggleTwoAreas('signin_via_services', 'signin_via_username');return false;">here</a>.)
     </p>
 
-    <?php if ($pError) { ?>
-      <p class="error"><?php echo $pError; ?></p>
-    <?php } ?>
-
     <form action="<?php echo url_for('auth/basic'); ?>" method="post" id="signin_via_username_form">
+    
+      <?php if ($pError) { ?>
+	      <p class="error"><?php echo $pError; ?></p>
+	    <?php } ?>
 
       <div class="center_area clearfix">
 		    <label for="signin_user" class="left"><?php echo __("USERNAME", null, "platform"); ?></label>
