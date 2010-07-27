@@ -18,5 +18,11 @@ class landingActions extends sfActions {
     if ($this->getUser()->isAuthenticated()) {
       $this->redirect("@stream_hot");
     }
+
+    $this->pAuthType = $request->getParameter("auth", "delegated");
+
+    if ($this->getUser()->hasFlash("error")) {
+      $this->pError = $this->getUser()->getFlash("error");
+    }
   }
 }

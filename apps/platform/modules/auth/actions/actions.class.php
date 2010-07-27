@@ -28,9 +28,20 @@ class authActions extends sfActions {
 
   public function executeBasic(sfWebRequest $request) {
     if ($request->getMethod() == "POST") {
-      $lUser = UserTable::getByIdentifierAndPassword($request->getParameter('signin_user'), $request->getParameter('signin_password'));
-      $this->getUser()->signIn($lUser);
-      $this->redirect("@stream");
+      // try to sign in the user
+      try {
+        // check if there is a matching user
+        $lUser = UserTable::getByIdentifierAndPassword($request->getParameter('signin_user'), $request->getParameter('signin_password'));
+        // try to sign in and redirect him to the stream
+        $this->getUser()->signIn($lUser);
+        $this->redirect("@stream");
+      } catch (Exception $e) {
+        // catch the error and tell the user about it
+        $this->getUser()->setFlash("error", "aaaaaaa");
+        $this->redirect("@homepage?auth=basic");
+      }
+    } else {
+      $this->redirect("@homepage");
     }
   }
 

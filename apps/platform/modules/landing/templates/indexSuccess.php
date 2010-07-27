@@ -1,5 +1,5 @@
 <div id="signin_area">
-  <div id="signin_via_services">
+  <div id="signin_via_services" <?php if ($pAuthType != "delegated") { echo 'style="display: none;"'; } ?>>
 	  <h3>No registration needed - please use your favourite service to login</h3>
 	  <p>
       (For returning users: please use the same service you've used before or login with user and password
@@ -23,28 +23,32 @@
 	  If you're a recurring user, simply choose a service that you've used before - we will know you and enable your former settings.</p>
 	</div>
 
-	<div id="signin_via_username" style="display: none;">
+	<div id="signin_via_username" <?php if ($pAuthType != "basic") { echo 'style="display: none;"'; } ?>>
     <h3>Returning user? Log in here.</h3>
     <p>
       (First time users please go back
       <a href="/" onclick="Utils.toggleTwoAreas('signin_via_services', 'signin_via_username');return false;">here</a>.)
     </p>
 
+    <?php if ($pError) { ?>
+      <p class="error"><?php echo $pError; ?></p>
+    <?php } ?>
+
     <form action="<?php echo url_for('auth/basic'); ?>" method="post" id="signin_via_username_form">
 
       <div class="center_area clearfix">
-		    <label for="signin_user" class="left">User</label>
+		    <label for="signin_user" class="left"><?php echo __("USERNAME", null, "platform"); ?></label>
 			  <input name="signin_user" type="text" id="signin_user" />
 			</div>
 
 		  <div class="center_area clearfix">
-			  <label for="signin_password" class="left">Password</label>
+			  <label for="signin_password" class="left"><?php echo __("PASSWORD", null, "platform"); ?></label>
 		    <input name="signin_password" type="password" id="signin_password" />
 		  </div>
 
       <div class="center_area">
         <label for="login" class="left">&nbsp;</label>
-        <input type="submit" value="login" class="btn" />
+        <input type="submit" value="<?php echo __("LOGIN", null, "platform"); ?>" class="btn" />
       </div>
 
    </form>
