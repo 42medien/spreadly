@@ -3,7 +3,7 @@
 <div id="photo_filter_box" class="bg_light bd_diagonal bd_normal_light clearfix">
 
   <div class="photo_big" id="stream_photo">
-    <?php echo image_tag('/img/global/yiid-logo.png', array('width' => 96, 'height' => 96)); ?>
+    <?php echo image_tag($sf_user->getUser()->getMainAvatar()->getAvatar(), array('width' => 96, 'height' => 96)); ?>
   </div>
 
   <p class="filter_headline"><?php echo __('All Networks'); ?></p>

@@ -131,6 +131,17 @@ class User extends BaseUser {
 
 
   /**
+   *
+   * retrieves main Avatar for User
+   * @author weyandch
+   * @return UserAvatar
+   */
+  public function getMainAvatar() {
+    return UserAvatarTable::getMainAvatarForUserId($this->getId());
+  }
+
+
+  /**
    * retrieves a users relation object from MongoDB
    */
   public function retrieveUserRelations() {

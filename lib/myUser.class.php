@@ -15,7 +15,6 @@ class myUser extends sfBasicSecurityUser {
    * @return int
    */
   public function getUserId() {
-    return UserTable::retrieveByUsername('hugo')->getId();
     return $this->getAttribute('id', null, 'user_session');
   }
 
