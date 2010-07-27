@@ -40,3 +40,20 @@ all:
     param:
       cache_key_use_vary_headers: true
       cache_key_use_host_name:    true
+  
+  i18n:
+    class: yiidI18N
+    param:
+      source:          MySQL
+      debug:           off
+      default_culture: de
+      database:        mysql://yiid_dev:fdsmolds32dfs@localhost/yiid_dev      
+      cache:
+        class: sfMemcacheCache
+        param:
+          lifetime:                  86400
+          prefix:                    yiid_i18n
+          servers:
+            default:
+              host: 127.0.0.1     #aws
+              port: 11211      

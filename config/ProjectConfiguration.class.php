@@ -10,20 +10,20 @@ class ProjectConfiguration extends sfProjectConfiguration {
 
   public function configureDoctrine(Doctrine_Manager $manager) {
     /*$servers = array(
-      'host' => sfConfig::get('app_memcache_server_ip'),
-      'port' => 11211,
-      'persistent' => true
-    );
+     'host' => sfConfig::get('app_memcache_server_ip'),
+     'port' => 11211,
+     'persistent' => true
+     );
 
-    $cacheDriver = new Doctrine_Cache_Memcache(
-      array(
-        'servers' => $servers,
-        'compression' => false
-      )
-    );
+     $cacheDriver = new Doctrine_Cache_Memcache(
+     array(
+     'servers' => $servers,
+     'compression' => false
+     )
+     );
 
-    //enable Doctrine cache
-    $manager->setAttribute(Doctrine::ATTR_RESULT_CACHE, $cacheDriver);*/
+     //enable Doctrine cache
+     $manager->setAttribute(Doctrine::ATTR_RESULT_CACHE, $cacheDriver);*/
 
     $manager->setCollate('utf8_unicode_ci');
     $manager->setCharset('utf8');
