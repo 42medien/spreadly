@@ -31,6 +31,8 @@ class UserTable extends Doctrine_Table {
   public static function getByIdentifierAndPassword($pIdentifier, $pPassword) {
     $lUser = self::getByIdentifier($pIdentifier);
 
+    var_dump($pIdentifier);
+
     if ($lUser->verifyPassword($pPassword)) {
       return $lUser;
     } else {

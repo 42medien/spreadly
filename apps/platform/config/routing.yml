@@ -38,6 +38,10 @@ auth_complete_signin:
   url:   /auth/complete_signin
   param: { module: auth, action: complete_signin }
 
+auth_basic:
+  url:   /auth/basic
+  param: { module: auth, action: basic }
+
 landing:
   url: /landing
   param: { module: landing, action: index }

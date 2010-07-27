@@ -57,7 +57,7 @@ class myUser extends sfBasicSecurityUser {
    * switch the language
    */
   public function switchLanguage($culture){
-    $supported_cultures = LanguagePeer::getSupportedLanguages();
+    /*$supported_cultures = LanguagePeer::getSupportedLanguages();
 
     if (in_array($culture, $supported_cultures)) {
       $this->setCulture($culture);
@@ -65,7 +65,7 @@ class myUser extends sfBasicSecurityUser {
       $this->setCulture(LanguagePeer::getDefaultLanguage());
     }
 
-    $this->setAttribute('culture_set', true);
+    $this->setAttribute('culture_set', true);*/
   }
 
   public function updateCulture() {
@@ -170,7 +170,8 @@ class myUser extends sfBasicSecurityUser {
     $this->setAuthenticated(true);
     $this->switchLanguage($user->getCulture());
 
-    CookieUtils::generateWidgetIdentityCookie($user->getOnlineIdentitiesForLikeWidget());
+    // @todo set cookies
+    //CookieUtils::generateWidgetIdentityCookie($user->getOnlineIdentitiesForLikeWidget());
 
     // if user is translator and wants to translate site, store this in session
     if($this->hasCredential(array('translator'), false)) {
@@ -183,7 +184,7 @@ class myUser extends sfBasicSecurityUser {
     }
 
     // save login time in user_last_login
-    $lTimestamp = time();
+    /*$lTimestamp = time();
     $lUserLastLogin = UserLastLoginPeer::retrieveByUserId($user->getId());
     if(!$lUserLastLogin) {
       $lUserLastLogin = new UserLastLogin();
@@ -194,7 +195,7 @@ class myUser extends sfBasicSecurityUser {
 	    $lUserLastLogin->setLastLogin($lUserLastLogin->getCurrentLogin());
 	    $lUserLastLogin->setCurrentLogin($lTimestamp);
     }
-    $lUserLastLogin->save();
+    $lUserLastLogin->save();*/
   }
 
   /**

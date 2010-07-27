@@ -30,20 +30,20 @@
       <a href="/" onclick="Utils.toggleTwoAreas('signin_via_services', 'signin_via_username');return false;">here</a>.)
     </p>
 
-    <form action="<?php echo url_for('auth/signin'); ?>" method="post" id="signin_via_username_form">
+    <form action="<?php echo url_for('auth/basic'); ?>" method="post" id="signin_via_username_form">
 
       <div class="center_area">
 		    <label for="signin_user" class="left">User</label>
-			  <input type="text" id="signin_user" />
+			  <input name="signin_user" type="text" id="signin_user" />
 			</div>
 
 		  <div class="center_area">
 			  <label for="signin_password" class="left">Password</label>
-		    <input type="text" id="signin_user" />
+		    <input name="signin_password" type="password" id="signin_password" />
 		  </div>
 
       <div class="center_area">
-        <label for="signin_password" class="left">&nbsp;</label>
+        <label for="login" class="left">&nbsp;</label>
         <input type="submit" value="login" class="btn" />
       </div>
 

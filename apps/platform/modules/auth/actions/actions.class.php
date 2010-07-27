@@ -15,8 +15,7 @@ class authActions extends sfActions
   *
   * @param sfRequest $request A request object
   */
-  public function executeIndex(sfWebRequest $request)
-  {
+  public function executeIndex(sfWebRequest $request) {
     $this->forward('default', 'module');
   }
 
@@ -27,6 +26,14 @@ class authActions extends sfActions
     }
 
     $this->setLayout("plain");
+  }
+
+  public function executeBasic(sfWebRequest $request) {
+    if ($request->getMethod() == "POST") {
+      $lUser = UserTable::getByIdentifierAndPassword($request->getParameter('signin_user'), $request->getParameter('signin_password'));
+      $this->getUser()->signIn($lUser);
+      $this->redirect("@stream");
+    }
   }
 
   public function executeComplete_signin(sfWebRequest $request) {
