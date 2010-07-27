@@ -1,5 +1,5 @@
 <?php
-require_once 'Zend/Http/Client.php';
+//require_once 'Zend/Http/Client.php';
 /**
  * likebutton actions.
  *
@@ -30,17 +30,17 @@ class likebuttonActions extends sfActions
     $lLang = $lParams['l'];
     $lType = $lParams['t'];
     $lFontColor = $lParams['fc'];
-    
+
     //if type is not set, default like
     if($lType == '') {
     	$lType = 'like';
     }
-    
+
     //if language is not set, default session lang
     if($lLang == '') {
     	$lLang = sfContext::getInstance()->getUser()->getCulture();
     }
-    
+
     // if no fontcolor, default black
     if(!isset($lParams['fc']) || $lParams['fc'] == ''){
     	$lFontColor = '#000000';
@@ -129,7 +129,7 @@ class likebuttonActions extends sfActions
   public function executeWebmasters(sfWebRequest $request) {
 
   }
-  
+
   /**
    * Action for updating the label for ifram width
    *
@@ -138,15 +138,15 @@ class likebuttonActions extends sfActions
    */
   public function executeUpdate_width_label(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
-  	
+
     $lGlobalType = $request->getParameter('global_type');
   	$lType = $request->getParameter('type');
   	$lLanguage = $request->getParameter('lang');
-  	
+
   	$lWidth = WidgetWidthRegistry::getWidthForLabel($lGlobalType, $lType, $lLanguage);
-  	
+
   	$lReturn['html'] = $lWidth;
-  	
+
   	return $this->renderText(json_encode($lReturn));
   }
 }

@@ -30,8 +30,8 @@ all:
     login_module:           likebutton      # To be called when a non-authenticated user
     login_action:           index    # Tries to access a secure page
 
-    secure_module:          likebutton      # To be called when a user doesn't have
-    secure_action:          index    # The credentials required for an action
+#    secure_module:          likebutton      # To be called when a user doesn't have
+#    secure_action:          index    # The credentials required for an action
 
   .settings:
     # Form security secret (CSRF protection)
