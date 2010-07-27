@@ -10,6 +10,7 @@ class ProjectConfiguration extends sfProjectConfiguration {
       'yiidPlugin',
       'sfFormExtraPlugin'
     ));
+
   }
 
   public function configureDoctrine(Doctrine_Manager $manager) {

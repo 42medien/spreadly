@@ -4,6 +4,8 @@ options:
   charset: utf8
       
 Language:
+  actAs:
+    Timestampable:  ~
   columns:
     lang: 
       type:  string(5)
@@ -16,6 +18,7 @@ Language:
       type: boolean
       notnull: true
       default: false
+
   indexes:
     language_uniq:
       fields:  [lang]
@@ -24,9 +27,9 @@ Language:
       fields:  [is_active]
     
 Catalogue:      
-  actAs:
-    Timestampable:  ~
   columns:
+    cat_id:
+      type:  integer
     name: 
       type: string(100)
       notnull: true
@@ -38,7 +41,10 @@ Catalogue:
       default: ''
     author:       
       type: string(255)
-     
+    date_created:
+      type: integer
+    date_modified: 
+      type: integer
   relations:    
     Language:     { onDelete: CASCADE, local: target_lang, foreign: lang, foreignAlias: Catalogues }
   indexes:
@@ -52,14 +58,10 @@ TransUnit:
     msg_id:
       type: integer
       notnull: true
+      primary:  true
     cat_id: 
       type: integer
       notnull: true
-      default: 1    
-    id:           
-      type: string(255)
-      notnull: true
-      default: '' 
     source:       
       type: string
       notnull: true
@@ -73,5 +75,9 @@ TransUnit:
     translated:   
       type: boolean
       default: false 
+    date_added:
+      type: integer
+    date_modified:
+      type: integer
   relations:    
-    Catalogue:     { onDelete: CASCADE, local: cat_id, foreign: id, foreignAlias: Transaltions }
+    Catalogue:     { onDelete: CASCADE, local: cat_id, foreign: cat_id, foreignAlias: Translations }
