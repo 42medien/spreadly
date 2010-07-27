@@ -5,6 +5,7 @@
 a{color: #4EA734;}
 p, a.text_action, h3, h2{color: #6a6b6a;}
 .url, a.url, span.url, .like-dislike{color: #bebebe;}
+.error{color: #f97759;}
 
 
 /* Header */
