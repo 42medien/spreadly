@@ -50,7 +50,7 @@ $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
   YiidRequest.aDislikeAction = "<?php echo LikeSettings::JS_DISLIKE_PATH; ?>";
   YiidCookie.aDomain = "<?php echo LikeSettings::COOKIE_DOMAIN; ?>";
 </script>
-<link rel="stylesheet" href="/css/widget/YiidWidget.css" type="text/css" media="screen, projection" />
+<link rel="stylesheet" href="/css/YiidWidget.css" type="text/css" media="screen, projection" />
 </head>
 <body>
 <?php if($lIsUsed === false) { ?>
