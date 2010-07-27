@@ -2,7 +2,7 @@
 
 /* Site-wide properties ======================================================== */
 /*body{font: normal normal 12px/12px Tahoma, Arial, Helvetica, Verdana, sans-serif; }*/
-body{font: normal normal 0.71em/1em Tahoma, Arial, Helvetica, Verdana, sans-serif; }
+body{font: normal normal 0.71em/1em arial, helvetica, sans-serif; }
     
 /* Fibonacci based heading scale ratio */
 h1{ font-size: 4.4em; font-weight: normal; }

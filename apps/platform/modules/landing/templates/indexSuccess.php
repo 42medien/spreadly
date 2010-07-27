@@ -32,12 +32,12 @@
 
     <form action="<?php echo url_for('auth/basic'); ?>" method="post" id="signin_via_username_form">
 
-      <div class="center_area">
+      <div class="center_area clearfix">
 		    <label for="signin_user" class="left">User</label>
 			  <input name="signin_user" type="text" id="signin_user" />
 			</div>
 
-		  <div class="center_area">
+		  <div class="center_area clearfix">
 			  <label for="signin_password" class="left">Password</label>
 		    <input name="signin_password" type="password" id="signin_password" />
 		  </div>
