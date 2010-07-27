@@ -221,7 +221,7 @@ h2{margin-bottom: 15px;}
 #signin_via_username_form{margin: 20px 0;}
 #signin_via_username_form div{width: 250px;}
 #signin_via_username_form label{width: 70px;display: block;}
-#signin_via_username_form input[type=text]{width: 150px;}
+#signin_via_username_form input[type=text], #signin_via_username_form input[type=password]{width: 150px;}
 #signin_via_username_form input[type=submit]{margin-top: 10px;}
     
     
