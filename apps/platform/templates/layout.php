@@ -8,7 +8,7 @@
     <?php include_stylesheets() ?>
     <?php //echo cdn_javascript_tag('include/'.sfConfig::get('app_release_name').'.min.js'); ?>
   </head>
-  <body class="bg_light">
+  <body class="bg_light clearfix">
     <div id="container" class="bd_round clearfix">
 
       <div id="header" class="clearfix">
@@ -42,22 +42,19 @@
 	      </div>
 
 	    </div>
-
+	    
       <?php include_partial('global/footer'); ?>
 
     </div>
 
-    <div id="footer" class="clearfix">
-
-	  </div>
-  <script type="text/javascript" src="/js/100_main/include/platform-<?php echo sfConfig::get('app_release_name') ?>.min.js"></script>
-  <script type="text/javascript">
-    jQuery(document).ready( function() {
-      <?php include_partial('global/js_init_general.js'); ?>
-      <?php if (has_slot('js_document_ready')) { ?>
-        <?php include_slot('js_document_ready'); ?>
-      <?php } ?>
-    });
-  </script>
-  </body>
+	  <script type="text/javascript" src="/js/100_main/include/platform-<?php echo sfConfig::get('app_release_name') ?>.min.js"></script>
+	  <script type="text/javascript">
+	    jQuery(document).ready( function() {
+	      <?php include_partial('global/js_init_general.js'); ?>
+	      <?php if (has_slot('js_document_ready')) { ?>
+	        <?php include_slot('js_document_ready'); ?>
+	      <?php } ?>
+	    });
+	  </script>
+	</body>
 </html>

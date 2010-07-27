@@ -8,7 +8,7 @@
     <?php include_stylesheets() ?>
     <?php //echo cdn_javascript_tag('include/'.sfConfig::get('app_release_name').'.min.js'); ?>
   </head>
-  <body class="bg_light">
+  <body class="bg_light clearfix">
     <div id="container" class="bd_round clearfix">
 
       <div id="header" class="clearfix">
@@ -18,10 +18,10 @@
       <div id="content" class="clearfix">
         <?php echo $sf_content; ?>
 	    </div>
+    
+      <?php include_partial('global/footer'); ?>
 
     </div>
-    
-    <?php include_partial('global/footer'); ?>
     
 	  <script type="text/javascript" src="/js/100_main/include/platform-<?php echo sfConfig::get('app_release_name') ?>.min.js"></script>
 	  <script type="text/javascript">
