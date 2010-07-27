@@ -42,3 +42,43 @@ h2{line-height: 40px;}
 #search2, #main_nav_inner1, #main_nav_inner2, #main_nav_inner3, #main_nav_inner4, #main_nav_inner5, #main_nav_inner6, #main_nav_inner7, #main_nav_inner8, .stream_item,
   #nav_shares_inner1, #nav_shares_inner2, #nav_shares_inner3, #nav_shares_inner4, #nav_shares_inner5, #nav_shares_inner6, #nav_shares_inner7, .btn, .sharing_friend{cursor: pointer;}
 li.filter_chosen a{cursor: default;}
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * @section Configurator
+ * @subsection typo
+ */
+a, a:link{text-decoration: none;}
+body{font-size:16px;line-height:24px;font-family: arial, helvetica, sans-serif;}
+#branding, #nav_main{text-align-center;}
+.small_size{font-size: 11px;line-height: 16px;}
+.normal_size{font-size: 12px;}
+.big_size{font-size: 14px;}
+#nav_main li, #nav_supp a{font-size: 11px;line-height:27px;font-weight:normal;}
+#nav_main li, #nav_supp a, #button-likebutton{cursor: pointer;}
+#content li, #content h1, #button_desc, #desc_left, #desc_right{font-size: 14px;}
+.important_text, #nav_main li, .important-text, #conf_head, #button-likebutton{font-weight: bold;}
+.underlined_text, #nav_supp a:hover, #nav_main li:hover, #button-likebutton:hover, a:hover{text-decoration: underline;}
+.slogan{font-size: 22px;line-height: 30px;}
+#content li{line-height: 20px;}
+#button_desc, h3{line-height: 18px;}
+#button-likebutton, #desc_left, #desc_right{line-height: 22px;}
+h3, #likebutton-form-table{font-size: 12px;}
+#likebutton-form-table input{font-size:11px;}
+#likebutton-form-table{font-weight: normal !important;line-height: 14px;}
+#likebutton-form-table td{vertical-align: top;}
+#testimonial h3{margin-bottom: 0;}
+#testimonial p{margin: 0 0 10px 0;}
+blockquote{font-style: italic;}
+blockquote:before, blockquote:after{content:'"'}
+.button_inner{text-align: center;line-height: 22px;}
+.italic_text{font-style: italic;}

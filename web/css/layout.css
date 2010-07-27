@@ -223,7 +223,119 @@ h2{margin-bottom: 15px;}
 #signin_via_username_form label{width: 70px;display: block;}
 #signin_via_username_form input[type=text], #signin_via_username_form input[type=password]{width: 150px;}
 #signin_via_username_form input[type=submit]{margin-top: 10px;}
-    
+
+
+
+/**
+ * @section Configurator
+ * @subsection layout
+ */
+ul{list-style-type:none;margin:0;padding:0;}
+blockquote{margin:0;padding:0}
+
+#branding, #nav_main, #content, #nav_supp{margin:0 auto;width:960px;}
+#branding{height:76px;}
+#nav_main{height:31px;}
+
+#nav_wave_left{width:367px;height:31px;}
+#nav_wave_middle{width:52px;height:31px;}
+#nav_main ul{width:540px;border-right:1px solid #d8d8d8;}
+#nav_wave_left, #nav_wave_middle, #nav_main ul,#nav_main li, #content_main, #content_sub, #desc_left, #desc_right, #desc_left li{float:left;}
+#nav_main li{padding: 0 10px;margin:0 3px;border-left:1px solid #d8d8d8;border-right:1px solid #d8d8d8;height:27px;}
+#nav_main_first{border-left: none !important;}
+#nav_main_last{border-right: none !important;}
+
+#content_main{width: 430px;min-height:300px;padding: 30px 40px 30px 0;}
+#content_sub{width: 490px;min-height:300px;padding: 10px 0 20px 0;}
+
+#nav_supp{height:28px;text-align: center;}
+#nav_supp a{padding:0 15px;}
+
+#content_top{margin:0 auto;width:880px;padding:20px 40px;margin-top:20px;}
+#testimonial{width:300px;padding:10px 20px;}
+#desc_left{width: 380px;margin-right:45px;}
+#desc_right{width: 450px;}
+#desc_left ul{margin:0 auto;width:300px;}
+#desc_left ul li{width:125px;margin:0px 20px 25px 0;}
+
+#content h1{padding: 0 5px;margin:30px 0 0 0;}
+#content ul{padding:10px 0;}
+#content li{margin-left: 40px;margin-bottom:3px;}
+#yiid_slogan p{width:300px;margin-top:0;}
+
+#button_desc{width:347px;padding: 5px 15px;margin-top:10px;}
+#conf_content{width:487px;min-height: 300px;padding:10px 0;}
+#conf_content_supp{width:447px;padding:14px;}
+
+#preview{width: 425px;padding:20px 10px 15px 10px;overflow: hidden;}
+#preview_head{margin:10px 0 5px 5px;}
+#webmasters_advice{padding-left:10px;}
+
+#button_get_code_outer{width:150px;margin:20px 10px;padding:3px;}
+.button_outer{padding:3px;}
+.button_inner{padding: 0 5px;}
+#button-likebutton{width:150px;height:25px;text-align: center;}
+
+#likebutton-form-table{margin-top:12px;padding-top:12px;}
+#likebutton-form-table td{padding:12px 0;}
+#likebutton-form-table input, #likebutton-form-table select{margin-right:10px;}
+#likebutton-form-table select{width:202px;padding:5px 0;}
+#likebutton-form-table input[type=text]{width:180px;padding:10px;}
+#likebutton-form-table .right_side{padding-left: 10px;}
+#dislike_option_lab{padding-top:17px !important;}
+
+.green_head{height: 34px;position:relative;}
+.green_head div{height: 34px;}
+.green_head_part1{width: 6px;position: absolute;left:0;top:0;}
+.green_head_part2{line-height: 34px;position: absolute;left:6px;top:0;text-align: center;}
+.green_head_part3{width: 46px;position: absolute;top:0;}
+.green_head_part4{width: 35px;position: absolute;top:0;right:0;}
+
+.grey_head{height: 26px;position:relative;}
+.grey_head div{height: 26px;}
+.grey_head_part1{width: 6px;position: absolute;left:0;top:0;}
+.grey_head_part2{line-height: 27px;position: absolute;left:6px;top:0;text-align: center;}
+.grey_head_part3{width: 54px;position: absolute;top:0;}
+.grey_head_part4{width: 34px;position: absolute;top:0;right:0;}
+
+.description_box_head{width: 583px;}
+.description_box{width: 580px;}
+.description_box p, .small_box p{margin: 0;padding: 10px;}
+.description_box ul{width: 560px;}
+
+.small_box_head{width: 402px;}
+.small_box{width: 400px;}
+p.small_box{width:360px;}
+.small_box ul{width:350px;}
+p.content_list{margin:0;padding:10px 20px;}
+
+#take_button{margin: 20px auto 0;text-align: center;}
+.right{float:right;}
+.left{float:left;}
+#contact_information{width: 960px; margin: 10px auto 20px;text-align: center;}
+#contact_information_small{width: 400px;margin-top: 30px;text-align: center;}
+#user_information{margin-bottom:10px;}
+#user_information img{margin-right: 10px;}
+
+#language_selection{padding:10px 0;}
+#language_selection li{float:left;padding-right: 7px;}
+#language_selection img{border:1px solid #e6e6e6;}
+#language_selection img:hover{border:1px solid #D3D3D3;}
+
+#spread_image{padding-left: 30px;}
+.service_logo{height:28px;}
+
+.widget_parameters{margin: 20px 0 30px 0;}
+.widget_parameters p{margin:1px 0 3px 0;}
+#widget_choice input{margin: 10px 5px 20px 30px;}
+#widget_choice input:first-child{margin: 10px 5px 20px 0;}
+#generic_code_like, #generic_code_like_dislike{width:420px;height:100px;line-height: 18px;padding:5px 10px;}
+
+.radio_label{padding-top:6px;}
+.show{display: block;}
+.hide{display: none;}
+
+
     
 /**
  * Hacks

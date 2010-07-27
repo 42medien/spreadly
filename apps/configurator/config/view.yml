@@ -12,6 +12,4 @@ default:
   has_layout:     on
   layout:         layout
   
-  stylesheets: 
-    - configurator.css
-    - vendor/colorpicker.css   
+  stylesheets: [layout.css, color.css, typo.css, vendor/colorpicker.css]    
