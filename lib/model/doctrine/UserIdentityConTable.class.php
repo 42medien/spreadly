@@ -96,12 +96,19 @@ class UserIdentityConTable extends Doctrine_Table
    *
    * retrieves IDs of yiid users which are connected to a given ID
    * @param OnlineIdentity $pOnlineIdentity
+   * @author weyandch
+   * @return array(int) UserIds
    */
   public static function getUserIdsConnectedToOnlineIdentity(OnlineIdentity $pOnlineIdentity) {
+    $lIdsToReturn = array();
     $lQuery = self::createConnectedToOnlineIdentityQuery($pOnlineIdentity);
     $lQuery->select('u.id');
 
-    return $lQuery->fetchArray();
+    $lIds = $lQuery->fetchArray();
+    foreach ($lIds as $key => $value) {
+      $lIdsToReturn[] = $value['id'];
+    }
+    return $lIdsToReturn;
   }
 
 

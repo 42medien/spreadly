@@ -16,11 +16,9 @@ class OnlineIdentityCon extends BaseOnlineIdentityCon
   public function postInsert($event) {
     // the user adds a new OI to his account
     $lUsers = $this->getOnlineIdentityFrom()->getConnectedUsers();
+    $lContactUserIds = $this->getOnlineIdentityTo()->getConnectedUserIds();
     foreach ($lUsers as $lUser) {
-      $lContacts = $this->getOnlineIdentityTo()->getConnectedUserIds();
-
-      print_r($lContacts);
-      $lUser->updateContactIdentities(array($this->getToId()));
+      $lUser->updateContacts($lContactUserIds, array($this->getToId()));
     }
 
   }

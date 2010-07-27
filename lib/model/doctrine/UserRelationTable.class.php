@@ -51,13 +51,15 @@ class UserRelationTable extends Doctrine_Table
    * @param $pUserId
    * @param $pIdentities
    */
-  public static function updateContactIdentities($pUserId, $pIdentities) {
+  public static function updateContactIdentities($pUserId, $pIdentities, $pContactIds) {
     $lCollection = self::getMongoCollection();
 
-    if (!is_array($pIdentities)) {
+    if (!is_array($pContactIds)) {
+      $pContactIds = array($pContactIds);
+    }    if (!is_array($pIdentities)) {
       $pIdentities = array($pIdentities);
     }
-    $lQueryArray = array('$addToSet' => array('contacts_oi' => array('$each' => $pIdentities)));
+    $lQueryArray = array('$addToSet' => array('contacts_oi' => array('$each' => $pIdentities), 'contact_uid' => array('$each' => $pContactIds) ));
     return $lCollection->update(array('user_id' => $pUserId), $lQueryArray);
   }
 

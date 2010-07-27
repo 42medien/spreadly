@@ -150,8 +150,8 @@ class User extends BaseUser {
   /**
    * add OI's of a user's contacts
    */
-  public function updateContactIdentities($pIdentities) {
-    return UserRelationTable::updateContactIdentities($this->getId(), $pIdentities);
+  public function updateContacts($pContactIds, $pIdentities) {
+    return UserRelationTable::updateContactIdentities($this->getId(), $pIdentities, $pContactIds);
   }
 
 

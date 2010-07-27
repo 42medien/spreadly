@@ -17,30 +17,14 @@
 
   <p class="filter_headline">Friends Active</p>
   <ul class="normal_list" id="friends_active_list">
-    <li class="clearfix" id="user-filter-1">
-      <a href="/" class="user_filter stream_filter" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "userid":"1", "css": "{\"class\":\"normal_list\", \"id\":\"user-filter-1\"}"}'>
+    <?php foreach ($pFriends as $lFriend) { ?>
+    <li class="clearfix" id="user-filter-<?php echo $lFriend->getId(); ?>">
+      <a href="/" class="user_filter stream_filter" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "userid":"<?php echo $lFriend->getId(); ?>", "css": "{\"class\":\"normal_list\", \"id\":\"user-filter-<?php echo $lFriend->getId(); ?>\"}"}'>
         <?php echo image_tag('/img/global/yiid-logo.png', array('width' => 16, 'height' => 16, 'class' => 'icon_user left')); ?>
-        <?php echo truncate_text('Matthias Affenkopf', 18, '...'); ?>
+        <?php echo truncate_text($lFriend->getFullname(), 18, '...'); ?>
       </a>
     </li>
-    <li class="clearfix" id="user-filter-2">
-      <a href="/" class="user_filter stream_filter" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "userid":"2", "css": "{\"class\":\"normal_list\", \"id\":\"user-filter-2\"}"}'>
-        <?php echo image_tag('/img/global/yiid-logo.png', array('width' => 16, 'height' => 16, 'class' => 'icon_user left')); ?>
-        <?php echo truncate_text('Karina Mies', 18, '...'); ?>
-      </a>
-    </li>
-    <li class="clearfix" id="user-filter-3">
-      <a href="/" class="user_filter stream_filter" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "userid":"3", "css": "{\"class\":\"normal_list\", \"id\":\"user-filter-3\"}"}'>
-        <?php echo image_tag('/img/global/yiid-logo.png', array('width' => 16, 'height' => 16, 'class' => 'icon_user left')); ?>
-        <?php echo truncate_text('Christian Weyand', 18, '...'); ?>
-      </a>
-    </li>
-    <li class="clearfix" id="user-filter-4">
-      <a href="/" class="user_filter stream_filter" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "userid":"4", "css": "{\"class\":\"normal_list\", \"id\":\"user-filter-4\"}"}'>
-        <?php echo image_tag('/img/global/yiid-logo.png', array('width' => 16, 'height' => 16, 'class' => 'icon_user left')); ?>
-        <?php echo truncate_text('Dirk Müller', 18, '...'); ?>
-      </a>
-    </li>
+    <?php } ?>
   </ul>
 
 </div>

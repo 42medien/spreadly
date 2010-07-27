@@ -16,8 +16,11 @@ class streamComponents extends sfComponents
     foreach ($lTokens as $lToken) {
       $lServices[] = CommunityTable::getInstance()->retrieveByPk($lToken->getCommunityId());
     }
-
     $this->pServices = $lServices;
+
+
+    $this->pFriends = UserTable::getFriendsForUser($this->getUser()->getUserId());
+
   }
 
   public function executeSearch_field() {}
