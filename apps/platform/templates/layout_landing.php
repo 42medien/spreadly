@@ -5,8 +5,9 @@
     <?php include_metas() ?>
     <?php include_title() ?>
     <link rel="shortcut icon" href="/favicon.ico" />
-    <?php include_stylesheets() ?>
-    <?php //echo cdn_javascript_tag('include/'.sfConfig::get('app_release_name').'.min.js'); ?>
+    
+    <?php include_includes('global/includes'); ?>
+    
   </head>
   <body class="bg_light clearfix">
     <div id="container" class="bd_round clearfix">
