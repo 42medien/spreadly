@@ -12,10 +12,6 @@ default:
   has_layout:     on
   layout:         layout
   
-  stylesheets: 
-    - screen
-    - shorturl
-    - general
-    - temp
+  stylesheets: [layout.css, color.css, typo.css]
   
   javascripts: [vendor/jquery-complete.min.js, vendor/prototype-complete.min.js]
