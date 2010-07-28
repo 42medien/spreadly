@@ -37,7 +37,7 @@ class apiActions extends sfActions {
     }
 
     $this->lType = $request->getParameter('type');
-    $this->lIdentitysOwnedByUser = UserIdentityConPeer::getOnlineIdentityIdsByUserId($this->getUser()->getId());
+    $this->lIdentitysOwnedByUser = UserIdentityConTable::getOnlineIdentityIdsForUser($this->getUser()->getUserId());
     $this->lIdentitysSent = explode(',',$request->getParameter('serv'));
 
     $this->lTitle = $request->getParameter('title');
@@ -55,9 +55,10 @@ class apiActions extends sfActions {
    * @return unknown_type
    */
   public function executeLike(sfWebRequest $request) {
-    $this->setLayout(false);
-    $this->setTemplate(false);
-    $this->getResponse()->setContentType('application/json');
+
+   // $this->setLayout(false);
+   // $this->setTemplate(false);
+   // $this->getResponse()->setContentType('application/json');
     if ($this->status == 200) {
       $this->success = YiidActivityPeer::saveLikeActivitys($this->getUser()->getId(),
                                                            $this->lUrl,
@@ -82,7 +83,7 @@ class apiActions extends sfActions {
                                                            $this->lDescription,
                                                            $this->lPhoto);
     }
-    return  $this->sendJsonResponse();
+  //  return  $this->sendJsonResponse();
   }
 
   /**

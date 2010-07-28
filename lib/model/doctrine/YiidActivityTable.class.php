@@ -49,7 +49,7 @@ class YiidActivityTable extends Doctrine_Table
     $pPhoto = utf8_encode(urldecode($pPhoto));
 
 
-    if (!YiidActivityPeer::isVerbSupported($pVerb)) {
+    if (!self::isVerbSupported($pVerb)) {
       return false;
     }
 
@@ -69,10 +69,10 @@ class YiidActivityTable extends Doctrine_Table
         if ($lSocialObject) {  // gibt's schon unter $longUrl -> also $pUrl hinzufügen
           $lSocialObject->addAlias($pUrl);
         } else {
-          $lSocialObject =  SocialObjectPeer::createSocialObject($pUrl, $pLongUrl, $pTitle, $pDescription, $pPhoto);
+          $lSocialObject =  SocialObjectTable::createSocialObject($pUrl, $pLongUrl, $pTitle, $pDescription, $pPhoto);
         }
       } else {
-        $lSocialObject = SocialObjectPeer::createSocialObject($pUrl, null, $pTitle, $pDescription, $pPhoto);
+        $lSocialObject = SocialObjectTable::createSocialObject($pUrl, null, $pTitle, $pDescription, $pPhoto);
       }
     } else {
       // unless we got an freaky object parser we check on updates on every action on an object
@@ -84,6 +84,8 @@ class YiidActivityTable extends Doctrine_Table
       return false;
     }
 
+
+    var_dump($lSocialObject->toArray());
     foreach ($pGivenOnlineIdentitys as $lIdentity) {
       if (in_array($lIdentity, $pOwnedOnlineIdentitys)) {
         $lVerifiedOnlineIdentitys[]= $lIdentity;

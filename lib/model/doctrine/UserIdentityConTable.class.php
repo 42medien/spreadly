@@ -15,15 +15,29 @@ class UserIdentityConTable extends Doctrine_Table
    * @param int $pUserId
    */
   public static function getOnlineIdentitiesForUser($pUserId) {
+    $lUiConIds = self::getOnlineIdentityIdsForUser($pUserId);
+    return OnlineIdentityTable::getInstance()->retrieveByPks($lUiConIds);
+  }
+
+  /**
+   * retrieves all OI's for a given User
+   * @author weyandch
+   * @param int $pUserId
+   */
+  public static function getOnlineIdentityIdsForUser($pUserId) {
     $q = Doctrine_Query::create()
           ->select('uic.online_identity_id')
           ->from('UserIdentityCon uic')
           ->where('uic.user_id = ?', $pUserId);
 
     $lUiCons = $q->execute(array(),  Doctrine_Core::HYDRATE_NONE);
-    $lUiConIds = HydrationUtils::flattenArray($lUiCons);
-    return OnlineIdentityTable::getInstance()->retrieveByPks($lUiConIds);
+    return HydrationUtils::flattenArray($lUiCons);
   }
+
+
+
+
+
 
   /**
    * check and add new user identity con

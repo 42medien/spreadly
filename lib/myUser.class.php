@@ -18,6 +18,14 @@ class myUser extends sfBasicSecurityUser {
     return $this->getAttribute('id', null, 'user_session');
   }
 
+  /** wrapper for getUserId()..
+   *
+   * Enter description here ...
+   */
+  public function getId() {
+    return $this->getUserId();
+  }
+
   /**
    * return user by session id
    *
