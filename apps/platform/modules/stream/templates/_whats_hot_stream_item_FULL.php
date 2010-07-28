@@ -38,9 +38,9 @@
     </ul>
 	
 	  <div class="action_content right">
-	    <a href="#" class="icon_comment icon_small_use text_action">comment</a>
-	    <a href="#" class="icon_favorite icon_small_use text_action">favorite</a>
-	    <a href="#" class="icon_hide icon_small_use text_action">hide</a>
+	    <a href="#" class="icon_comment icon_small_use text_action"><?php echo __('comment', null, 'platform'); ?></a>
+      <a href="#" class="icon_favorite icon_small_use text_action"><?php echo __('favorite', null, 'platform'); ?></a>
+      <a href="#" class="icon_hide icon_small_use text_action"><?php echo __('hide', null, 'platform'); ?></a>
 	  </div>
 	</div>
 	<!-----------  Das vorige div muss auf style="display:none;" gesetzt und nur bei hover angezeigt werden ------------------------------>

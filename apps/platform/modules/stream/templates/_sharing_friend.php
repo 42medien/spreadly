@@ -19,7 +19,7 @@
           <li class="left"><?php echo image_tag('/img/global/yiid-logo.png', array('height' => '30px', 'width' => '30px')); ?></li>
         <?php } ?>
       </ul>
-      <a href="/" class="sharing_user_link left">245 Friends</a>
+      <a href="/" class="sharing_user_link left"><?php echo __('%1 Friends', array('%1' => '245'), 'platform'); ?></a>
     </div>
     <div class="user_hover_area_bottom"></div>
   </div>

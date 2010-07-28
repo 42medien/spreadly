@@ -15,7 +15,7 @@
     <?php } ?>
   </ul>
 
-  <p class="filter_headline">Friends Active</p>
+  <p class="filter_headline"><?php echo __('Friends Active', null, 'platform'); ?></p>
   <ul class="normal_list" id="friends_active_list">
     <?php foreach ($pFriends as $lFriend) { ?>
     <li class="clearfix" id="user-filter-<?php echo $lFriend->getId(); ?>">

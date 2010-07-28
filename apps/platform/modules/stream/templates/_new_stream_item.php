@@ -12,11 +12,11 @@
 	        <div class="left so_headline_left">
 	          <span class="icon_small_service icon_small_facebook left">&nbsp;</span>
 	          <?php echo link_to('Matthias Affenkopf', '@homepage', array('class' => 'text_important left')); ?>
-	          <span class="url left">via Twitter 2 minutes ago</span>
+	          <span class="url left"><?php echo __('via %1 %2 minutes ago', array('%1' => 'Twitter', '%2' => '2'), 'platform'); ?></span>
 	        </div>
 	        <div class="right so_headline_right">
-		        <a href="#" class="icon_like icon_small_use like-dislike">3 like</a>
-		        <a href="#" class="icon_dislike icon_small_use like-dislike">3 dislike</a>
+            <a href="#" class="icon_like icon_small_use like-dislike"><?php echo __('%1 like', array('%1' => '3'), 'platform'); ?></a>
+            <a href="#" class="icon_dislike icon_small_use like-dislike"><?php echo __('%1 dislike', array('%1' => '3'), 'platform'); ?></a>
 		      </div>
 	      </div>
 	    </div>

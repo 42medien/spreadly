@@ -15,8 +15,8 @@
 	          <span class="url left">via Twitter 2 minutes ago</span>
 	        </div>
 	        <div class="right so_headline_right">
-		        <a href="#" class="icon_like icon_small_use like-dislike">3 like</a>
-		        <a href="#" class="icon_dislike icon_small_use like-dislike">3 dislike</a>
+		        <a href="#" class="icon_like icon_small_use like-dislike"><?php echo __('%1 like', array('%1' => '3'), 'platform'); ?></a>
+		        <a href="#" class="icon_dislike icon_small_use like-dislike"><?php echo __('%1 dislike', array('%1' => '3'), 'platform'); ?></a>
 		      </div>
 	      </div>
 	    </div>
@@ -29,9 +29,9 @@
         <!-----------  Das folgende div muss auf style="display:none;" gesetzt und nur bei hover angezeigt werden ------------------------------>
         <div class="actions clearfix">
           <div class="action_content right">
-	          <a href="#" class="icon_comment icon_small_use text_action">comment</a>
-	          <a href="#" class="icon_favorite icon_small_use text_action">favorite</a>
-	          <a href="#" class="icon_hide icon_small_use text_action">hide</a>
+	          <a href="#" class="icon_comment icon_small_use text_action"><?php echo __('comment', null, 'platform'); ?></a>
+	          <a href="#" class="icon_favorite icon_small_use text_action"><?php echo __('favorite', null, 'platform'); ?></a>
+	          <a href="#" class="icon_hide icon_small_use text_action"><?php echo __('hide', null, 'platform'); ?></a>
 	        </div>
         </div>
         <!-----------  Das vorige div muss auf style="display:none;" gesetzt und nur bei hover angezeigt werden ------------------------------>
