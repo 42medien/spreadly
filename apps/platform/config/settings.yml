@@ -44,7 +44,7 @@ all:
 
     # Enable the database manager
     use_database:           true
-    i18n:                   on
+    i18n:                   true
 
     ## load common helpers
     standard_helpers:       [Cdn, I18N, Partial]
