@@ -8,9 +8,12 @@ class TwitterAuthApiClient {
 
   const COMMUNITY = "twitter";
 
-  protected $aAccessToken    = null;
-  protected $aOnlineIdentity = null;
-  protected $aIdentifier     = null;
+  protected $aCommunityId    = null;
+
+  public function __construct() {
+    $lCommunity = CommunityTable::retrieveByCommunity("twitter");
+    $this->aCommunityId = $lCommunity->getId();
+  }
 
   /**
    * generates a OAuthConsumer
@@ -51,18 +54,33 @@ class TwitterAuthApiClient {
     // get params
     $lParams = $lAccessToken->params;
     $lParamsArray = arry;
+    // extract params
     parse_str($lParams, $lParamsArray);
 
-    // @todo save access token
-
+    // twitter identifier
+    $lIdentifier = "http://twitter.com/account/profile?user_id=".$lParamsArray['user_id'];
 
     // ask for online identity
-    $lOnlineIdentity = OnlineIdentityTable::retrieveByAuthIdentifier("http://twitter.com/account/profile?user_id=".$lParamsArray['user_id']);
+    $lOnlineIdentity = OnlineIdentityTable::retrieveByAuthIdentifier($lIdentifier);
     // check if user already exists
     if ($lOnlineIdentity) {
-      $this->doSigninTasks();
+      // update auth token
+      AuthTokenTable::saveToken($lOnlineIdentity->getUserId(), $lOnlineIdentity->getId(), $lParams['oauth_token'], $lParams['oauth_token_secret'], true);
+      // returns the user
+      return $lOnlineIdentity->getUser();
     } else {
-      $this->doSignupTasks();
+      // get online identity
+      $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lParamsArray['screen_name'], $this->aCommunityId);
+
+      $lUser = new User();
+      // set username
+      $lUser->setUsername(StringUtils::normalizeUsername($lParamsArray['screen_name']));
+      $lUser->save();
+
+
+
+      // @todo check
+      return $lUser;
     }
   }
 
@@ -105,25 +123,5 @@ class TwitterAuthApiClient {
     $lAccessToken = OAuthClient::getAccessToken($this->getConsumer(), "http://api.twitter.com/oauth/access_token ", $pOAuthToken, "GET");
 
     return $lAccessToken;
-  }
-
-  /**
-   * do the tasks that are needed to login
-   *
-   * @author Matthias Pfefferle
-   */
-  public function doSigninTasks() {
-    // @todo update oauth tokens
-  }
-
-  /**
-   * do the tasts that are nedded to signup a new user
-   *
-   * @author Matthias Pfefferle
-   */
-  public function doSignupTasks() {
-    // @todo new online identity
-
-    // @todo new user
   }
 }

@@ -51,6 +51,6 @@ class authActions extends sfActions {
     $lObject = AuthApiFactory::factory($lRequestToken->getCommunityId());
     $lObject->doSignin($this->getUser(), $lRequestToken->toOAuthToken());
 
-    var_dump($lToken);exit;
+    var_dump($lRequestToken);exit;
   }
 }

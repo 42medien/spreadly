@@ -25,7 +25,7 @@ class OnlineIdentityTable extends Doctrine_Table {
   }
 
   public static function retrieveByOnlineIdentity($lOIdentity) {
-    return self::retrieveByIdentifier($lOIdentity->getIdentifier(), $lOIdentity->getCommuityId(), $lOIdentity->getIdentityType());
+    return self::retrieveByIdentifier($lOIdentity->getIdentifier(), $lOIdentity->getCommunityId(), $lOIdentity->getIdentityType());
   }
 
   /**

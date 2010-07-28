@@ -73,7 +73,4 @@ class UserTable extends Doctrine_Table {
     return UserTable::getInstance()->retrieveByPKs($lFriendIds);
 
   }
-
-
-
 }

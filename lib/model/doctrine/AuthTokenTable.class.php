@@ -82,5 +82,7 @@ class AuthTokenTable extends Doctrine_Table {
     $lToken->setTokenSecret($pTokenSecret);
     $lToken->setUserId($pUserId);
     $lToken->save();
+
+    return $lToken;
   }
 }
