@@ -17,7 +17,7 @@ class CmsForm extends BaseCmsForm
 
     $this->embedI18n($lLanguages);
     foreach ($lLanguages as $lLang) {
-      $this->widgetSchema[$lLang]['title'] =  new sfWidgetFormTextareaTinyMCE();
+       $this->widgetSchema[$lLang]['text'] =  new sfWidgetFormTextareaTinyMCE();
     }
 
   }

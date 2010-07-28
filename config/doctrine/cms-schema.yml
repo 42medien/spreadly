@@ -6,6 +6,7 @@ options:
     
 CmsCategory:
   actAs:
+    Timestampable:  ~
     I18n:
       fields: [title]
   columns:
@@ -20,6 +21,7 @@ CmsCategory:
       
 Cms:
   actAs:
+    Timestampable:  ~
     I18n:
       fields: [headline, text]
   columns:
@@ -37,5 +39,5 @@ Cms:
       type: boolean
       default: false
   relations:
-    CmsCategory:        { onDelete: cascade, local: category_id, foreign: id, foreignAlias: CmsEntries }
+    CmsCategory:     { onDelete: cascade, local: category_id, foreign: id, foreignAlias: Cms }
       
