@@ -37,7 +37,7 @@ class authActions extends sfActions {
         $this->redirect("@stream");
       } catch (Exception $e) {
         // catch the error and tell the user about it
-        $this->getUser()->setFlash("error", "aaaaaaa");
+        $this->getUser()->setFlash("error", $e->getMessage());
         $this->redirect("@homepage?auth=basic");
       }
     } else {
@@ -49,9 +49,11 @@ class authActions extends sfActions {
     $lRequestToken = OauthRequestTokenTable::retrieveByTokenKey($request->getParameter('oauth_token'));
 
     $lObject = AuthApiFactory::factory($lRequestToken->getCommunityId());
-    $lObject->doSignin($this->getUser(), $lRequestToken->toOAuthToken());
+    $lUser = $lObject->doSignin($this->getUser(), $lRequestToken->toOAuthToken());
 
-    var_dump($lRequestToken);exit;
+    $this->getUser()->signIn($lUser);
+
+    $this->redirect('@stream');
   }
   
   public function executeRegistered(sfWebRequest $request) {

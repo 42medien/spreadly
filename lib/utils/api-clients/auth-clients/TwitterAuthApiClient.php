@@ -53,7 +53,7 @@ class TwitterAuthApiClient {
 
     // get params
     $lParams = $lAccessToken->params;
-    $lParamsArray = arry;
+    $lParamsArray = array();
     // extract params
     parse_str($lParams, $lParamsArray);
 
@@ -62,26 +62,42 @@ class TwitterAuthApiClient {
 
     // ask for online identity
     $lOnlineIdentity = OnlineIdentityTable::retrieveByAuthIdentifier($lIdentifier);
+
     // check if user already exists
     if ($lOnlineIdentity) {
-      // update auth token
-      AuthTokenTable::saveToken($lOnlineIdentity->getUserId(), $lOnlineIdentity->getId(), $lParams['oauth_token'], $lParams['oauth_token_secret'], true);
-      // returns the user
-      return $lOnlineIdentity->getUser();
+      $lUser = $lOnlineIdentity->getUser();
     } else {
-      // get online identity
+      // check online identity
       $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lParamsArray['screen_name'], $this->aCommunityId);
-
+      // delete connected user-cons
+      UserIdentityConTable::deleteOtherConnections($lOnlineIdentity->getId());
+      // generate empty user
       $lUser = new User();
-      // set username
-      $lUser->setUsername(StringUtils::normalizeUsername($lParamsArray['screen_name']));
-      $lUser->save();
 
+      // get api informations
+      $lJson = OAuthClient::get($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "http://api.twitter.com/1/users/show.json?user_id=".$lParamsArray['user_id']);
+      $lJsonObject = json_decode($lJson);
 
+      // use api complete informations
+      $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject);
+      $this->completeUser($lUser, $lJsonObject);
 
-      // @todo check
-      return $lUser;
+      // @todo <todo> encapsulating this
+      $lOnlineIdentity->setUserId($lUser->getId());
+      $lOnlineIdentity->setAuthIdentifier($lIdentifier);
+      $lOnlineIdentity->save();
+
+      $lUserIdentityCon = new UserIdentityCon();
+      $lUserIdentityCon->setUserId($lUser->getId());
+      $lUserIdentityCon->setOnlineIdentityId($lOnlineIdentity->getId());
+      $lUserIdentityCon->setVerified(true);
+      $lUserIdentityCon->save();
+      // </todo>
     }
+
+    AuthTokenTable::saveToken($lUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], true);
+
+    return $lUser;
   }
 
   /**
@@ -123,5 +139,50 @@ class TwitterAuthApiClient {
     $lAccessToken = OAuthClient::getAccessToken($this->getConsumer(), "http://api.twitter.com/oauth/access_token ", $pOAuthToken, "GET");
 
     return $lAccessToken;
+  }
+
+  /**
+   * complete the user with the api json
+   *
+   * @param User $pUser
+   * @param Object $pObject
+   */
+  public function completeUser(&$pUser, $pObject) {
+    $pUser->setUsername(UserUtils::getUniqueUsername(StringUtils::normalizeUsername($pObject->screen_name)));
+    $pUser->setDescription($pObject->description);
+
+    // try to split full-name
+    $lName = MicroformatsTools::splitFN($pObject->name);
+    if (array_key_exists("firstname", $lName)) {
+      $pUser->setFirstname($lName['firstname']);
+    }
+    if (array_key_exists("lastname", $lName)) {
+      $pUser->setFirstname($lName['lastname']);
+    }
+
+    // add url as online identity
+    if ($pObject->url) {
+      $pUser->addOnlineIdentity($pObject->url);
+    }
+
+    $pUser->save();
+  }
+
+  /**
+   * complete the online-identity with the api json
+   *
+   * @param OnlineIdentity $pOnlineIdentity
+   * @param Object $pObject
+   */
+  public function completeOnlineIdentity(&$pOnlineIdentity, $pObject) {
+    if ($pObject->name) {
+      $pOnlineIdentity->setName($pObject->name);
+    } else {
+      $pOnlineIdentity->setName($pObject->screen_name);
+    }
+
+    $pOnlineIdentity->setPhoto($pObject->profile_image_url);
+
+    $pOnlineIdentity->save();
   }
 }

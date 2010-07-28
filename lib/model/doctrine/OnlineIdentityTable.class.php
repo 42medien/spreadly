@@ -75,6 +75,8 @@ class OnlineIdentityTable extends Doctrine_Table {
       return null;
     }
 
+    $lOIdentity = null;
+
     // check if identifier is an url
     if (preg_match("/https?:\/\//i", $pIdentifier) && $pType == self::TYPE_IDENTITY) {
       $lOIdentity = self::extractIdentifierfromUrl($pIdentifier, $pCommunityId);

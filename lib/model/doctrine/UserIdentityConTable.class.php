@@ -140,8 +140,15 @@ class UserIdentityConTable extends Doctrine_Table
     return $lQuery;
   }
 
-
-
-
-
+  /**
+   * delete all unverified user cons
+   *
+   * @param int $pOnlineIdentityId
+   */
+  public static function deleteOtherConnections($pOnlineIdentityId) {
+    $lQuery = Doctrine_Query::delete()
+          ->from("UserIdentityCon u")
+          ->where("u.online_identity_id = ?", $pOnlineIdentityId)
+          ->execute();
+  }
 }

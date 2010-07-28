@@ -9,10 +9,11 @@ OnlineIdentity:
     Timestampable:  ~
   columns:
     community_id:
-      type: integer
-      notnull: true
+      type:     integer
+      notnull:  true
     user_id:
-      type: integer
+      type:     integer
+      notnull:  false
     title:
       type:     string(120)
     name:
@@ -34,6 +35,7 @@ OnlineIdentity:
       default:    false
   relations:
     Community: { onDelete: CASCADE, local: community_id, foreign: id, foreignAlias: OnlineIdentitys }
+    User:      { onDelete: SET NULL, local: user_id, foreign: id, foreignAlias: OnlineIdentitys }
   indexes:
     auth_identifier:
       fields: [auth_identifier]

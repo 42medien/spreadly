@@ -55,28 +55,47 @@ class AuthTokenTable extends Doctrine_Table {
   }
 
   /**
-   * Enter description here...
+   * returns a token for a user and online-identity
    *
-   * @param unknown_type $pUserId
-   * @param unknown_type $pOnlineIdentityId
-   * @param unknown_type $pToken
-   * @param unknown_type $pTokenSecret
-   * @param unknown_type $pActive
+   * @author Matthias Pfefferle
+   * @param int $pUserId
+   * @param int $pOnlineIdentityId
+   * @return AuthToken
+   */
+  public static function getByUserAndOnlineIdentity($pUserId, $pOnlineIdentityId) {
+    $lResult = Doctrine_Query::create()
+      ->from('AuthToken at')
+      ->where('at.user_id = ? AND at.online_identity_id = ?', array($pUserId, $pOnlineIdentityId))
+      ->andWhere('token_type = ?', self::TOKEN_TYPE_ACCESS)
+      ->fetchOne();
+
+    return $lResult;
+  }
+
+  /**
+   * updates an auth-token
+   *
+   * @author Matthias Pfefferle
+   * @param int $pUserId
+   * @param int $pOnlineIdentityId
+   * @param string $pToken
+   * @param string $pTokenSecret
+   * @param boolean $pActive
+   * @return AuthToken
    */
   public static function saveToken($pUserId, $pOnlineIdentityId, $pToken, $pTokenSecret, $pActive = false) {
-    if ($lCheck = self::getToken($pUserId, $pOnlineIdentityId)) {
+    if ($lCheck = self::getByUserAndOnlineIdentity($pUserId, $pOnlineIdentityId)) {
       $lToken = $lCheck;
     } else {
       $lToken = new AuthToken();
     }
 
     if ($pActive && $pOnlineIdentityId) {
-      $lIdentity = OnlineIdentityPeer::retrieveByPK($pOnlineIdentityId);
+      $lIdentity = OnlineIdentityTable::getInstance()->retrieveByPK($pOnlineIdentityId);
       $lIdentity->setSocialPublishingEnabled($pActive);
       $lIdentity->save();
     }
 
-    $lToken->setTokenType(self::ACCESS_TOKEN);
     $lToken->setTokenKey($pToken);
     $lToken->setOnlineIdentityId($pOnlineIdentityId);
     $lToken->setTokenSecret($pTokenSecret);

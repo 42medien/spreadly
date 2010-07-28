@@ -30,5 +30,9 @@ class UserTest extends BaseTestCase {
 
   }
 
+  public function testAddOnlineIdentity() {
+    $lUser = UserTable::retrieveByUsername("hugo");
 
+    $lOnlineIdentity = $lUser->addOnlineIdentity();
+  }
 }

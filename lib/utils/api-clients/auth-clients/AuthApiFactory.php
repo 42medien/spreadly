@@ -17,7 +17,7 @@ class AuthApiFactory {
   static public function factory($pCommunity, $pParams = null) {
     // check if $pCommunity is the name or the id
     if (is_numeric($pCommunity)) {
-      $lCommunityObject = CommunityTable::getInstance()->find($pCommunity);
+      $lCommunityObject = CommunityTable::getInstance()->retrieveByPk($pCommunity);
       $lCommunity = $lCommunityObject->getCommunity();
     } else {
       $lCommunity = $pCommunity;
