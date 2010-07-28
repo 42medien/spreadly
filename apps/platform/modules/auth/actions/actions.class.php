@@ -53,4 +53,8 @@ class authActions extends sfActions {
 
     var_dump($lRequestToken);exit;
   }
+  
+  public function executeRegistered(sfWebRequest $request) {
+  	
+  }
 }

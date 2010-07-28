@@ -9,6 +9,7 @@ h1{ font-size: 4.4em; font-weight: normal; }
 h2{ font-size: 2.8em; font-weight: bold; }
 h3{ font-size: 1.6em; font-weight: bold; }
 h4{ font-size: 1.2em; font-weight: bold; }
+h5{ font-size: 1em; font-weight: bold; }
 
 .url, .like-dislike{font-size: 9px;}
 .btn, .text_action, #so_information h5 a{font-size: 11px;}
@@ -24,6 +25,7 @@ a, a.icon_thumb, li.filter_chosen a, a.icon_thumbs, a.icon_thumb, a.icon_small_u
 
 .url{font-style: italic;}
 
+.two_block_area li{line-height: 13px;}
 .sharing_user_info p, #signin_area p{line-height: 14px;}
 .so_comment, #so_information h5 a{line-height: 16px;}
 .so_headline_left, .so_headline_right{line-height: 18px;}
@@ -32,8 +34,9 @@ a, a.icon_thumb, li.filter_chosen a, a.icon_thumbs, a.icon_thumb, a.icon_small_u
 #nav_main li a, #stream_left_top div, #stream_right_top div, #signin_area h3, h3{line-height: 30px;}
 h2{line-height: 40px;}
 .sharing_user_link, h1{line-height: 50px;}
+.right_block li{line-height: 60px;}
 
-#all_networks_list li, #friends_active_list li, .user_hover_area_top, user_hover_area_bottom, #signin_via_username_form label{text-align: left;}
+#all_networks_list li, #friends_active_list li, .user_hover_area_top, user_hover_area_bottom, #signin_via_username_form label, .two_block_area li, .two_block_area h5{text-align: left;}
 .center_area{text-align: center;}
 .actions{text-align: right;}
 

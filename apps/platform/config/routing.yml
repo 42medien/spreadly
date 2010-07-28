@@ -41,6 +41,10 @@ auth_complete_signin:
 auth_basic:
   url:   /auth/basic
   param: { module: auth, action: basic }
+  
+auth_registered:
+  url:  /welcome
+  param: { module: auth, action: registered }
 
 landing:
   url: /landing

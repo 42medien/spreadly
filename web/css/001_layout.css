@@ -224,6 +224,12 @@ h2{margin-bottom: 15px;}
 #signin_via_username_form input[type=text], #signin_via_username_form input[type=password]{width: 150px;}
 #signin_via_username_form input[type=submit]{margin-top: 10px;}
 .error{margin: 5px 0;}
+#services_after_registration{margin: 30px 50px;}
+.two_block_area ul{margin-top: 20px;}
+.two_block_area li{margin: 10px 0;}
+.icon_big_add_service{padding: 0 30px;margin-right: 15px;}
+.left_block, .right_block{padding: 10px 15px;}
+#services_after_registration .left_block, #services_after_registration .right_block{background-color: #f1f1f1;border: 1px solid #CCCCCC;width: 40%;-webkit-border-radius: 0 10px 0 10px;-moz-border-radius: 0 10px 0 10px;border-radius: 0 10px 0 10px;}
 
 
 
