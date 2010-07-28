@@ -6,7 +6,7 @@
     <?php include_title() ?>
     <link rel="shortcut icon" href="/favicon.ico" />
     
-    <?php include_includes('global/includes'); ?>
+    <?php include_partial('global/includes'); ?>
     
   </head>
   <body class="bg_light clearfix">
