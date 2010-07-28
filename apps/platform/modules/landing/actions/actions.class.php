@@ -26,4 +26,8 @@ class landingActions extends sfActions {
       $this->pError = $this->getUser()->getFlash("error");
     }
   }
+  
+  public function executeMagic(sfWebRequest $request) {
+  	
+  }
 }

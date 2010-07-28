@@ -36,7 +36,7 @@ h2{line-height: 40px;}
 .sharing_user_link, h1{line-height: 50px;}
 .right_block li{line-height: 60px;}
 
-#all_networks_list li, #friends_active_list li, .user_hover_area_top, user_hover_area_bottom, #signin_via_username_form label, .two_block_area li, .two_block_area h5{text-align: left;}
+#all_networks_list li, #friends_active_list li, .user_hover_area_top, user_hover_area_bottom, #signin_via_username_form label, .two_block_area li, .two_block_area h5, #magic_after_registration .right_block{text-align: left;}
 .center_area{text-align: center;}
 .actions{text-align: right;}
 
