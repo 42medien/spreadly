@@ -45,7 +45,7 @@ all:
     class: sfI18N
     param:
       source:          MySQL
-      debug:           false
+      debug:           true
       default_culture: de
       database:        mysql://yiid_dev:fdsmolds32dfs@localhost/yiid_dev      
       cache:
