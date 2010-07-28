@@ -45,7 +45,7 @@ function writeWholeFile($pDir, $pFileName, $pFileMinName) {
   }
 
   //we get all Files we want to combine
-  $lFiles = FilesystemHelper::retrieveFilesInDir($pDir, array('.svn', 'include'), array(), '.js');
+  $lFiles = FilesystemHelper::retrieveFilesInDir($pDir, array('.svn', 'include', 'tiny_mce'), array(), '.js');
   //writes the current needed consolelog-file to the beginning of all scripts
   //$lFiles = handleConsoleLog($pDir, $lFiles);
   //we combine the Files to one file named by given filenname and save it in the include-folder
