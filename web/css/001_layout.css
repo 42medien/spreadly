@@ -64,7 +64,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 #header_sub{width: 250px;height:60px;}
 #header_main{width: 37%;height:60px;}
 #header_supp{width: 37%;height:60px;}
-  #nav_main li{list-style-type: none;margin: 30px 40px 0 0;float:left;}
+  #nav_main li{list-style-type: none;margin: 30px 30px 0 0;float:left;}
   #nav_main li a{padding: 4px 25px;}
   li#nav_main_settings{margin-right: 0;}
     

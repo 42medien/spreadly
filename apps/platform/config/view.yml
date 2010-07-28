@@ -12,8 +12,6 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    []
-
   javascripts:   []
 
   has_layout:     true
