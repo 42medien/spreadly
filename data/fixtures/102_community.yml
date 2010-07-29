@@ -3,13 +3,19 @@ Community:
     name:      'testcommunity'
     community: 'testcommunity'
     url:       'http://www.example.com'
-    
+
   community_2:
     name:      'twitter'
     community: 'twitter'
-    url:       'http://www.twitter.com'    
-  
+    url:       'http://www.twitter.com'
+
   community_3:
     name:      'facebook'
     community: 'facebook'
     url:       'http://www.facebook.com'
+
+  community_4:
+    name:      'website'
+    community: 'website'
+    url:       'http://www.example.com'
+    oi_url:    '%s'
