@@ -7,6 +7,11 @@ sfContext::createInstance($configuration);
 
 $lUserHugo = UserTable::retrieveByUsername('hugo');
 $lUserHans = UserTable::retrieveByUsername('hans');
+$lUserKarl = UserTable::retrieveByUsername('karl');
+
+$lHugoOis = $lUserHugo->getOnlineIdentitesAsArray();
+$lUserHansOis = $lUserHans->getOnlineIdentitesAsArray();
+$lUserKarlOis = $lUserKarl->getOnlineIdentitesAsArray();
 
 $lCommunityTwitter = CommunityTable::retrieveByCommunity('twitter');
 $lCommunityFb = CommunityTable::retrieveByCommunity('facebook');
@@ -19,23 +24,22 @@ $lOiHugoFb = OnlineIdentityTable::retrieveByIdentifier('hugo_fb', $lCommunityFb-
 
 $lOiKarlTwitter = OnlineIdentityTable::retrieveByIdentifier('karl_twitter', $lCommunityTwitter->getId());
 
-$lObject = SocialObjectTable::createSocialObject('http://affen.de', null, 'affen title', 'affen description', null);
-$lObject->updateObjectOnLikeActivity(array($lOiHansTwitter->getId()), 'http://nochmehraffen.com', 1);
-$lObject->updateObjectOnLikeActivity(array($lOiKarlTwitter->getId()), 'http://nochmehraffen.com', 1);
-$lObject->updateObjectOnLikeActivity(array($lOiHugoFb->getId()), 'http://nochmehraffen.com', 1);
+//$lObject = SocialObjectTable::createSocialObject('http://affen.de', null, 'affen title', 'affen description', null);
+
+YiidActivityTable::saveLikeActivitys($lUserHugo->getId(), 'http://affen.de', $lHugoOis, array($lOiHugoTwitter->getId()), 1, 'like', 'affen title');
+YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://affen.de', $lUserHansOis, array($lOiHansFb->getId()), 1, 'like', 'affen title');
+YiidActivityTable::saveLikeActivitys($lUserKarl->getId(), 'http://affen.de', $lUserKarlOis, array($lOiKarlTwitter->getId()), 1, 'like', 'affen title');
+
+YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://bim.bo', $lUserHansOis, array($lOiHansTwitter->getId()), 1, 'like', 'bimbo title');
 
 
-$lObject2 = SocialObjectTable::createSocialObject('http://keineaffen.de', 'http://bim.bo', 'bim.bo title', 'bim.bo description', null);
-$lObject2->updateObjectOnLikeActivity(array($lOiHansFb->getId()), 'http://bim.bo', 1);
+YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://spiegel.de', $lUserHansOis, array($lOiHansFb->getId()), 1, 'like', 'spiegel.de title title');
+YiidActivityTable::saveLikeActivitys($lUserKarl->getId(), 'http://spiegel.de', $lUserKarlOis, array($lOiKarlTwitter->getId()), 1, 'like', 'spiegel.de title title');
 
-$lObject3 = SocialObjectTable::createSocialObject('http://spiegel.de', null, 'spiegel.de title', 'spiegel.de description', null);
-$lObject3->updateObjectOnLikeActivity(array($lOiKarlTwitter->getId(), $lOiHugoTwitter->getId()), 'http://spiegel.de', 1);
-$lObject3->updateObjectOnLikeActivity(array($lOiHansTwitter->getId()), 'http://nochmehraffen.com', 1);
+YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://snirgel.de', $lUserHansOis, array($lOiHansTwitter->getId()), -1, 'like', 'snirgel.de title title');
+YiidActivityTable::saveLikeActivitys($lUserKarl->getId(), 'http://snirgel.de', $lUserKarlOis, array($lOiKarlTwitter->getId()), -1, 'like', 'snirgel.de title title');
+YiidActivityTable::saveLikeActivitys($lUserHugo->getId(), 'http://snirgel.de', $lHugoOis, array($lOiHugoTwitter->getId()), -1, 'like', 'snirgel.de title title');
 
-$lObject4 = SocialObjectTable::createSocialObject('http://snirgel.de', null, 'snirgel.de title', 'snirgel.de description', null);
-$lObject4->updateObjectOnLikeActivity(array($lOiKarlTwitter->getId(), $lOiHugoTwitter->getId()), 'http://snirgel.de', -1);
-$lObject4->updateObjectOnLikeActivity(array($lOiKarlTwitter->getId()), 'http://snirgel.de', 1);
-$lObject4->updateObjectOnLikeActivity(array($lOiHugoFb->getId()), 'http://snirgel.de', -1);
 
 $lObject5 = SocialObjectTable::createSocialObject('http://der-fusssballblogger.de', null, 'fussball title', 'fussball description', null);
 $lObject5->updateObjectOnLikeActivity(array($lOiKarlTwitter->getId(), $lOiHugoTwitter->getId()), 'http://der-fusssballblogger.de', 1);

@@ -120,6 +120,15 @@ class User extends BaseUser {
   }
 
 
+  public function getOnlineIdentitesAsArray() {
+    $lIdentityArray = array();
+    $lIdentities = $this->getOnlineIdentities();
+    foreach ($lIdentities as $lIdentity) {
+      $lIdentityArray[] = $lIdentity->getId();
+    }
+    return $lIdentityArray;
+  }
+
   public function getOnlineIdentities() {
     return UserIdentityConTable::getOnlineIdentitiesForUser($this->getId());
   }

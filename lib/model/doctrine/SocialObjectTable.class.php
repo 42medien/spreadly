@@ -148,7 +148,7 @@ class SocialObjectTable extends Doctrine_Table
    * @param $pId
    * @return unknown_type
    */
-  public static function retrieveByPK($pId, PropelPDO $con = null){
+  public static function retrieveByPK($pId){
     $lCollection = self::getMongoCollection();
     return self::initializeObjectFromCollection($lCollection->findOne(array("_id" => new MongoId($pId) )));
   }
@@ -160,7 +160,7 @@ class SocialObjectTable extends Doctrine_Table
    * @param $con
    * @return unknown_type
    */
-  public static function retrieveByPKs($pIds, PropelPDO $con = null){
+  public static function retrieveByPKs($pIds){
     $lCollection = self::getMongoCollection();
     $lObjects = array();
     foreach ($pIds as $pId) {

@@ -113,11 +113,13 @@ class streamActions extends sfActions
     $this->getResponse()->setContentType('application/json');
     $lCallback = $request->getParameter('callback', 'GlobalError.logerror');
     $lCss = $request->getParameter('css');
+    $lItemId = $request->getParameter('itemid');
+    $lSocialObject = SocialObjectTable::retrieveByPK($lItemId);
     return $this->renderText(
       $lCallback.'('.
       json_encode(
         array(
-          "itemdetail"  => $this->getPartial('stream/item_detail'),
+          "itemdetail"  => $this->getPartial('stream/item_detail', array('pObject' => $lSocialObject)),
           "css" => $lCss
         )
       )
@@ -130,13 +132,14 @@ class streamActions extends sfActions
     $lCallback = $request->getParameter('callback', 'GlobalError.logerror');
     $lCase = $request->getParameter('case');
     $lItemId = $request->getParameter('itemid');
+    $lActivities = YiidActivityTable::retrieveByYiidActivityId($lItemId);
     $lPage = $request->getParameter('page', 0);
     $lCss = $request->getParameter('css');
     return $this->renderText(
       $lCallback.'('.
       json_encode(
         array(
-          "stream"  => $this->getPartial('stream/item_shares'),
+          "stream"  => $this->getPartial('stream/item_shares', array('pActivities' => $lActivities, 'pItemId' => $lItemId)),
           "dataobj" => '{"action":"stream/get_item_detail_stream", "callback":"'.$lCallback.'", "case":"'.$lCase.'", "itemid":"'.$lItemId.'"}',
           "page" => $lPage++,
           "css" => $lCss

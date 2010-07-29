@@ -33,14 +33,14 @@ class YiidActivityTable extends Doctrine_Table
 
 
   public static function saveLikeActivitys($pUserId,
-                                          $pUrl,
-                                          $pOwnedOnlineIdentitys = array(),
-                                          $pGivenOnlineIdentitys = array(),
-                                          $pScore = self::ACTIVITY_TYPE_LIKE,
-                                          $pVerb = 'like',
-                                          $pTitle = null,
-                                          $pDescription = null,
-                                          $pPhoto = null) {
+  $pUrl,
+  $pOwnedOnlineIdentitys = array(),
+  $pGivenOnlineIdentitys = array(),
+  $pScore = self::ACTIVITY_TYPE_LIKE,
+  $pVerb = 'like',
+  $pTitle = null,
+  $pDescription = null,
+  $pPhoto = null) {
 
 
     $lVerifiedOnlineIdentitys = array();
@@ -52,7 +52,6 @@ class YiidActivityTable extends Doctrine_Table
     if (!self::isVerbSupported($pVerb)) {
       return false;
     }
-
     $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
     $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
     if (!$lSocialObject) {
@@ -84,13 +83,11 @@ class YiidActivityTable extends Doctrine_Table
       return false;
     }
 
-
-    var_dump($lSocialObject->toArray());
     foreach ($pGivenOnlineIdentitys as $lIdentity) {
       if (in_array($lIdentity, $pOwnedOnlineIdentitys)) {
         $lVerifiedOnlineIdentitys[]= $lIdentity;
-        $senderOi = OnlineIdentityPeer::retrieveByPK($lIdentity);
-        $lStatus = $senderOi->sendStatusMessage($pUrl, $pVerb, $pScore, utf8_decode($pTitle));
+        //  $senderOi = OnlineIdentityPeer::retrieveByPK($lIdentity);
+        //   $lStatus = $senderOi->sendStatusMessage($pUrl, $pVerb, $pScore, utf8_decode($pTitle));
         sfContext::getInstance()->getLogger()->debug("{YiidActivityPeer}{saveLikeActivitys} Status Message: " . print_r($lStatus, true));
       }
       else {
@@ -108,14 +105,14 @@ class YiidActivityTable extends Doctrine_Table
 
 
   public static function storeTemporary($pSessionId,
-                                        $pUrl,
-                                        $pOwnedOnlineIdentitys = array(),
-                                        $pGivenOnlineIdentitys = array(),
-                                        $pScore = self::ACTIVITY_TYPE_LIKE,
-                                        $pVerb = 'like',
-                                        $pTitle = null,
-                                        $pDescription = null,
-                                        $pPhoto = null) {
+  $pUrl,
+  $pOwnedOnlineIdentitys = array(),
+  $pGivenOnlineIdentitys = array(),
+  $pScore = self::ACTIVITY_TYPE_LIKE,
+  $pVerb = 'like',
+  $pTitle = null,
+  $pDescription = null,
+  $pPhoto = null) {
 
     $lStorageArray = array();
     $lStorageArray['url'] = $pUrl;
@@ -133,7 +130,7 @@ class YiidActivityTable extends Doctrine_Table
   }
 
 
-/**
+  /**
    * retrieve data saved with this sess_id
    *
    * @author weyandch
@@ -187,7 +184,7 @@ class YiidActivityTable extends Doctrine_Table
     return $lAlreadyPerformedActivity?false:true;
   }
 
-    /**
+  /**
    *
    * @author Christian Weyand
    * @param $pSocialObjectId
@@ -239,10 +236,32 @@ class YiidActivityTable extends Doctrine_Table
   public static function initializeObjectFromCollection($pCollection) {
     $lObject = new YiidActivity();
     if ($pCollection) {
-      $lObject->fromArray($pCollection, BasePeer::TYPE_FIELDNAME);
+      $lObject->fromArray($pCollection);
       return $lObject;
     }
     return null;
   }
+
+
+
+
+  /**
+   * retrieve YiidActiviesForSocialObejctId from MongoDb by its ID
+   *
+   * @author Christian Weyand
+   * @param $pId
+   * @return unknown_type
+   */
+  public static function retrieveByYiidActivityId($pId){
+    $lResults = array();
+    $lCollection = self::getMongoCollection();
+
+    $lMongoCursor = $lCollection->find(array("so_id" => $pId ));
+    foreach ($lMongoCursor as $lObject) {
+      $lResults[] = self::initializeObjectFromCollection($lObject);
+    }
+    return $lResults;
+  }
+
 
 }
