@@ -1,11 +1,9 @@
 <?php
 
 
-class UserIdentityConTable extends Doctrine_Table
-{
+class UserIdentityConTable extends Doctrine_Table {
 
-  public static function getInstance()
-  {
+  public static function getInstance() {
     return Doctrine_Core::getTable('UserIdentityCon');
   }
 
@@ -33,11 +31,6 @@ class UserIdentityConTable extends Doctrine_Table
     $lUiCons = $q->execute(array(),  Doctrine_Core::HYDRATE_NONE);
     return HydrationUtils::flattenArray($lUiCons);
   }
-
-
-
-
-
 
   /**
    * check and add new user identity con
@@ -105,7 +98,6 @@ class UserIdentityConTable extends Doctrine_Table
     return $lQuery->execute();
   }
 
-
   /**
    *
    * retrieves IDs of yiid users which are connected to a given ID
@@ -124,7 +116,6 @@ class UserIdentityConTable extends Doctrine_Table
     }
     return $lIdsToReturn;
   }
-
 
   /**
    * Create Query for connected users
@@ -145,9 +136,9 @@ class UserIdentityConTable extends Doctrine_Table
    *
    * @param int $pOnlineIdentityId
    */
-  public static function deleteOtherConnections($pOnlineIdentityId) {
-    $lQuery = Doctrine_Query::delete()
-          ->from("UserIdentityCon u")
+  public static function deleteAllConnections($pOnlineIdentityId) {
+    $lQuery = Doctrine_Query::create()
+          ->delete("UserIdentityCon u")
           ->where("u.online_identity_id = ?", $pOnlineIdentityId)
           ->execute();
   }

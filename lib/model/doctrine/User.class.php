@@ -29,14 +29,14 @@ class User extends BaseUser {
    * @throws ModelException
    * @return OnlineIdentity $lOnlineIdentity
    */
-  public function addOnlineIdentity($pIdentifier, $pCommunityId = null, $pType = OnlineIdentityPeer::TYPE_IDENTITY, $pVerified = false, $pAuthIdentifier = null) {
+  public function addOnlineIdentity($pIdentifier, $pCommunityId = null, $pType = OnlineIdentityTable::TYPE_IDENTITY, $pVerified = false, $pAuthIdentifier = null) {
     $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($pIdentifier, $pCommunityId, $pType);
 
     if ($pVerified === false) {
       $pVerified = SocialGraphApi::verifyRelMe($lOnlineIdentity->getUrl(), $this->getYiid(true));
     }
 
-    UserIdentityConTable::addUserIdentityCon($lOnlineIdentity, $this, $pVerified, $pAuthIdentifier);
+    //UserIdentityConTable::addUserIdentityCon($lOnlineIdentity, $this, $pVerified, $pAuthIdentifier);
 
     $lOnlineIdentity->setAuthIdentifier($pAuthIdentifier);
     $lOnlineIdentity->save();
@@ -174,5 +174,18 @@ class User extends BaseUser {
     return UserRelationTable::updateContactIdentities($this->getId(), $pIdentities, $pContactIds);
   }
 
-
+  /**
+   * returns the users yiid
+   *
+   * @param boolean $pShowHttp
+   * @return string
+   */
+  public function getYiid($pShowHttp = false) {
+    if ($pShowHttp) {
+      $lYiid = str_replace('%user%', strtolower($this->getUsername()), sfConfig::get('app_settings_yiid'))."/";
+    } else {
+      $lYiid = str_replace('http://%user%', strtolower($this->getUsername()), sfConfig::get('app_settings_yiid'));
+    }
+    return $lYiid;
+  }
 }

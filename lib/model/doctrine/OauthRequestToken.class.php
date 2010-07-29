@@ -19,10 +19,7 @@ class OauthRequestToken extends BaseOauthRequestToken {
    * @return OAuthToken
    */
   public function toOAuthToken() {
-    $lOAuthToken = new OAuthToken();
-    $lOAuthToken->key = $this->getTokenKey();
-    $lOAuthToken->secret = $this->getTokenSecret();
-
+    $lOAuthToken = new OAuthToken($this->getTokenKey(), $this->getTokenSecret());
     return $lOAuthToken;
   }
 }

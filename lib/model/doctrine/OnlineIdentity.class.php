@@ -27,5 +27,20 @@ class OnlineIdentity extends BaseOnlineIdentity
     return UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($this);
   }
 
-
+  /**
+   * builds the real profile-url using the identifier
+   *
+   * @return string
+   */
+  public function getUrl() {
+    if ($this->getIdentityType() == OnlineIdentityTable::TYPE_IDENTITY) {
+      return str_replace('%s', $this->getIdentifier(), $this->getCommunity()->getOiUrl());
+    } else if ($this->getIdentityType() == OnlineIdentityTable::TYPE_URL) {
+      return $this->getIdentifier();
+    } else if ($this->getIdentityType() == OnlineIdentityTable::TYPE_IM) {
+      return str_replace('%s', $this->getIdentifier(), $this->getCommunity()->getImUrl());
+    } else {
+      return null;
+    }
+  }
 }

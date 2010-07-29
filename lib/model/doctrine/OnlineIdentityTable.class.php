@@ -53,10 +53,10 @@ class OnlineIdentityTable extends Doctrine_Table {
    * @return mixed OnlineIdentity|null
    */
   public static function retrieveByAuthIdentifier($pAuthIdentifier) {
-    $lOnlineIdentity = Doctrine_Query::create()->
-      from('OnlineIdentity oi')->
-      where('oi.auth_identifier = ?', $pAuthIdentifier)->
-      fetchOne();
+    $lOnlineIdentity = Doctrine_Query::create()
+      ->from('OnlineIdentity oi')
+      ->where('oi.auth_identifier = ?', $pAuthIdentifier)
+      ->fetchOne();
 
     return $lOnlineIdentity;
   }
@@ -135,6 +135,12 @@ class OnlineIdentityTable extends Doctrine_Table {
           $lOnlineIdentity = new OnlineIdentity();
           $lOnlineIdentity->setIdentifier($lIdentifier);
           $lOnlineIdentity->setCommunityId($lC->getId());
+
+          if ($lC->getCommunity() == "website") {
+            $lOnlineIdentity->setIdentityType(self::TYPE_URL);
+          } else {
+            $lOnlineIdentity->setIdentityType(self::TYPE_IDENTITY);
+          }
 
           return $lOnlineIdentity;
         }

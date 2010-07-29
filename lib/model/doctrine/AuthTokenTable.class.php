@@ -7,8 +7,8 @@
  */
 class AuthTokenTable extends Doctrine_Table {
 
-  const TOKEN_TYPE_ACCESS = 'access';
-  const TOKEN_TYPE_REQUEST = 'request';
+  const TOKEN_TYPE_BASIC   = 1;
+  const TOKEN_TYPE_OAUTH   = 2;
 
 
   public static function getInstance() {
@@ -50,7 +50,7 @@ class AuthTokenTable extends Doctrine_Table {
     $lQuery = Doctrine_Query::create()
     ->from('AuthToken at')
     ->where('at.user_id = ?', $pUserId)
-    ->andWhere('token_type = ?', self::TOKEN_TYPE_ACCESS);
+    ->andWhere('token_type = ?', self::TOKEN_TYPE_OAUTH);
     return $lQuery;
   }
 
@@ -66,7 +66,6 @@ class AuthTokenTable extends Doctrine_Table {
     $lResult = Doctrine_Query::create()
       ->from('AuthToken at')
       ->where('at.user_id = ? AND at.online_identity_id = ?', array($pUserId, $pOnlineIdentityId))
-      ->andWhere('token_type = ?', self::TOKEN_TYPE_ACCESS)
       ->fetchOne();
 
     return $lResult;
@@ -98,6 +97,10 @@ class AuthTokenTable extends Doctrine_Table {
 
     $lToken->setTokenKey($pToken);
     $lToken->setOnlineIdentityId($pOnlineIdentityId);
+    // get online-identity
+    $lOnlineIdentity = OnlineIdentityTable::getInstance()->find($pOnlineIdentityId);
+    $lToken->setCommunityId($lOnlineIdentity->getCommunityId());
+    $lToken->setTokenType(self::TOKEN_TYPE_OAUTH);
     $lToken->setTokenSecret($pTokenSecret);
     $lToken->setUserId($pUserId);
     $lToken->save();

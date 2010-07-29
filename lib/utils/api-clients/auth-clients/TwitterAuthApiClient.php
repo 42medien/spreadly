@@ -22,9 +22,7 @@ class TwitterAuthApiClient {
    * @return OAuthConsumer
    */
   public function getConsumer() {
-    $lConsumer = new OAuthConsumer();
-    $lConsumer->key = sfConfig::get("app_twitter_oauth_token");
-    $lConsumer->secret = sfConfig::get("app_twitter_oauth_secret");
+    $lConsumer = new OAuthConsumer(sfConfig::get("app_twitter_oauth_token"), sfConfig::get("app_twitter_oauth_secret"));
 
     return $lConsumer;
   }
@@ -70,7 +68,7 @@ class TwitterAuthApiClient {
       // check online identity
       $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lParamsArray['screen_name'], $this->aCommunityId);
       // delete connected user-cons
-      UserIdentityConTable::deleteOtherConnections($lOnlineIdentity->getId());
+      UserIdentityConTable::deleteAllConnections($lOnlineIdentity->getId());
       // generate empty user
       $lUser = new User();
 
@@ -136,8 +134,7 @@ class TwitterAuthApiClient {
    * @param string $pTokenKey
    */
   public function getAccessToken($pOAuthToken) {
-    $lAccessToken = OAuthClient::getAccessToken($this->getConsumer(), "http://api.twitter.com/oauth/access_token ", $pOAuthToken, "GET");
-
+    $lAccessToken = OAuthClient::getAccessToken($this->getConsumer(), "http://api.twitter.com/oauth/access_token", $pOAuthToken, "GET");
     return $lAccessToken;
   }
 
@@ -182,6 +179,7 @@ class TwitterAuthApiClient {
     }
 
     $pOnlineIdentity->setPhoto($pObject->profile_image_url);
+    $pOnlineIdentity->setSocialPublishingEnabled(true);
 
     $pOnlineIdentity->save();
   }

@@ -1,6 +1,4 @@
 <?php
-require_once 'Zend/Http/Client.php';
-
 /**
  * Class to use Googles Social Graph API
  *
@@ -182,7 +180,7 @@ class SocialGraphApi {
 
     return $lAttributes;
   }
-  
+
   /**
    * looks up the informations of a given URL
    *
@@ -191,9 +189,9 @@ class SocialGraphApi {
    */
   public static function verifyRelMe($pUrl, $pYiidIdentity) {
     $lJson = UrlUtils::getUrlContent('http://socialgraph.apis.google.com/lookup?q='.$pUrl.'&fme=1');
-    //var_dump($lJson);die();  
+    //var_dump($lJson);die();
     $lSGObject = json_decode($lJson, true);
-    //var_dump($lSGObject);die();    
+    //var_dump($lSGObject);die();
     $lUrl = $lSGObject["canonical_mapping"][$pUrl];
     //var_dump($lUrl);die();
     $lAttributes = $lSGObject[$lUrl];
@@ -203,5 +201,5 @@ class SocialGraphApi {
     	}
     }
     return false;
-  }  
+  }
 }
