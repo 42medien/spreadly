@@ -34,12 +34,13 @@ all:
     username:       'hugoaffenkopf'
     password:       'affenkopf'
     yiid_user:           'hugo'
+    oauth_token:   "WbIgXrxlAbGfdpO8kLyWQ"
+    oauth_secret:  "pw4tGKNa8aG4AqidMBaMpsQyDp70WSgnNVSvv9tLU"
+
+  facebook:
     oauth_token:   "1de4ec6a73c75e7c00977bc6c9a203c4"
     oauth_secret:  "d789bd46751701a96ca3e80d8b5bff86"
 
-  facebook:
-    oauth_token:   "WbIgXrxlAbGfdpO8kLyWQ"
-    oauth_secret:  "pw4tGKNa8aG4AqidMBaMpsQyDp70WSgnNVSvv9tLU"
   rpx:
     api_key:    '63d0ac8f1f45035695ec377008c3ef232f760b2b'
 
