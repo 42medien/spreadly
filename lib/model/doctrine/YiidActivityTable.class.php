@@ -33,14 +33,14 @@ class YiidActivityTable extends Doctrine_Table
 
 
   public static function saveLikeActivitys($pUserId,
-  $pUrl,
-  $pOwnedOnlineIdentitys = array(),
-  $pGivenOnlineIdentitys = array(),
-  $pScore = self::ACTIVITY_TYPE_LIKE,
-  $pVerb = 'like',
-  $pTitle = null,
-  $pDescription = null,
-  $pPhoto = null) {
+                                                          $pUrl,
+                                                          $pOwnedOnlineIdentitys = array(),
+                                                          $pGivenOnlineIdentitys = array(),
+                                                          $pScore = self::ACTIVITY_TYPE_LIKE,
+                                                          $pVerb = 'like',
+                                                          $pTitle = null,
+                                                          $pDescription = null,
+                                                          $pPhoto = null) {
 
 
     $lVerifiedOnlineIdentitys = array();
@@ -48,6 +48,8 @@ class YiidActivityTable extends Doctrine_Table
     $pDescription = utf8_encode(urldecode($pDescription));
     $pPhoto = utf8_encode(urldecode($pPhoto));
 
+    // array of services we're sharing to
+    $lServices = array();
 
     if (!self::isVerbSupported($pVerb)) {
       return false;
@@ -83,10 +85,12 @@ class YiidActivityTable extends Doctrine_Table
       return false;
     }
 
-    foreach ($pGivenOnlineIdentitys as $lIdentity) {
-      if (in_array($lIdentity, $pOwnedOnlineIdentitys)) {
-        $lVerifiedOnlineIdentitys[]= $lIdentity;
-        //  $senderOi = OnlineIdentityPeer::retrieveByPK($lIdentity);
+    foreach ($pGivenOnlineIdentitys as $lIdentityId) {
+      if (in_array($lIdentityId, $pOwnedOnlineIdentitys)) {
+        $lVerifiedOnlineIdentityIds[]= $lIdentityId;
+
+        $senderOi = OnlineIdentityTable::getInstance()->find($lIdentityId);
+        $lServices[] = $senderOi->getCommunityId();
         //   $lStatus = $senderOi->sendStatusMessage($pUrl, $pVerb, $pScore, utf8_decode($pTitle));
         sfContext::getInstance()->getLogger()->debug("{YiidActivityPeer}{saveLikeActivitys} Status Message: " . print_r($lStatus, true));
       }
@@ -94,9 +98,9 @@ class YiidActivityTable extends Doctrine_Table
       }
     }
 
-    if (!empty($lVerifiedOnlineIdentitys)) {
-      self::saveActivity($lSocialObject, $pUrl, $pUserId, $pScore, $pVerb);
-      $lSocialObject->updateObjectOnLikeActivity($lVerifiedOnlineIdentitys, $pUrl, $pScore);
+    if (!empty($lVerifiedOnlineIdentityIds)) {
+      self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb);
+      $lSocialObject->updateObjectOnLikeActivity($lVerifiedOnlineIdentityIds, $pUrl, $pScore, $lServices);
     }
     return true;
   }
@@ -158,12 +162,14 @@ class YiidActivityTable extends Doctrine_Table
    * @param $pType
    * @return unknown_type
    */
-  public static function saveActivity($pSocialObject, $pUrl, $pUserId, $pScore, $pVerb) {
+  public static function saveActivity($pSocialObject, $pUrl, $pUserId, $pOnlineIdentitys, $pServicesId, $pScore, $pVerb) {
     $lActivity = new YiidActivity();
     $lActivity->setUId($pUserId);
     $lActivity->setSoId($pSocialObject->getId());
     $lActivity->setUrl($pUrl);
     $lActivity->setUrlHash(md5($pUrl));
+    $lActivity->setOiids($pOnlineIdentitys);
+    $lActivity->setCids($pServicesId);
     $lActivity->setScore($pScore);
     $lActivity->setVerb($pVerb);
     $lActivity->setC(time());
@@ -246,7 +252,7 @@ class YiidActivityTable extends Doctrine_Table
 
 
   /**
-   * retrieve YiidActiviesForSocialObejctId from MongoDb by its ID
+   * retrieve YiidActivies for a given SovialObject MongoDbID
    *
    * @author Christian Weyand
    * @param $pId

@@ -54,7 +54,9 @@ YiidActivity:
       type:      string(32)
     u_id:
       type:      integer
-    c_id:        # community id
+    oiids:
+      type:      string
+    cids:        # community id
       type:      integer
     score:
       type:      integer(4)

@@ -133,6 +133,7 @@ class streamActions extends sfActions
     $lCase = $request->getParameter('case');
     $lItemId = $request->getParameter('itemid');
     $lActivities = YiidActivityTable::retrieveByYiidActivityId($lItemId);
+    var_dump($lActivities);die();
     $lPage = $request->getParameter('page', 0);
     $lCss = $request->getParameter('css');
     return $this->renderText(

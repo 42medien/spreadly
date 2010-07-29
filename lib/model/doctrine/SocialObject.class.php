@@ -40,7 +40,7 @@ class SocialObject extends BaseSocialObject
    * @param $pScore
    * @return unknown_type
    */
-  public function updateObjectOnLikeActivity($pVerifiedOnlineIdentitys, $pUrl, $pScore) {
+  public function updateObjectOnLikeActivity($pVerifiedOnlineIdentitys, $pUrl, $pScore, $pServices) {
     if ($pScore == YiidActivityTable::ACTIVITY_VOTE_POSITIVE) {
       $lCounterField = 'l_cnt';
     }
@@ -53,7 +53,9 @@ class SocialObject extends BaseSocialObject
 
     SocialObjectTable::updateObjectInMongoDb(array("_id" => new MongoId($this->getId())),
                                              array( '$inc' => array($lCounterField => 1 ),
-                                                    '$addToSet' => array('oiids' => array('$each' => $pVerifiedOnlineIdentitys), 'alias' => array('$each' => array(md5($pUrl)))))
+                                                    '$addToSet' => array('oiids' => array('$each' => $pVerifiedOnlineIdentitys),
+                                                                         'cids' => array('$each' => $pServices),
+                                                                         'alias' => array('$each' => array(md5($pUrl)))))
     );
   }
 
