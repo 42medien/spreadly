@@ -45,18 +45,27 @@ class authActions extends sfActions {
     }
   }
 
-  public function executeComplete_signin(sfWebRequest $request) {
+  public function executeComplete_twitter_signin(sfWebRequest $request) {
     $lRequestToken = OauthRequestTokenTable::retrieveByTokenKey($request->getParameter('oauth_token'));
 
-    $lObject = AuthApiFactory::factory($lRequestToken->getCommunityId());
+    $lObject = AuthApiFactory::factory("twitter");
     $lUser = $lObject->doSignin($this->getUser(), $lRequestToken->toOAuthToken());
 
     $this->getUser()->signIn($lUser);
 
     $this->redirect('@stream');
   }
-  
+
+  public function executeComplete_facebook_signin(sfWebRequest $request) {
+    $lObject = AuthApiFactory::factory("facebook");
+    $lUser = $lObject->doSignin($this->getUser(), $request->getParameter("code"));
+
+    $this->getUser()->signIn($lUser);
+
+    $this->redirect('@stream');
+  }
+
   public function executeRegistered(sfWebRequest $request) {
-  	
+
   }
 }

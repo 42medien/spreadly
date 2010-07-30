@@ -34,18 +34,22 @@ auth_signin:
   url:   /signin
   param: { module: auth, action: signin }
 
-auth_complete_signin:
-  url:   /auth/complete_signin
-  param: { module: auth, action: complete_signin }
+auth_complete_twitter_signin:
+  url:   /auth/complete_twitter_signin
+  param: { module: auth, action: complete_twitter_signin }
+
+auth_complete_facebook_signin:
+  url:   /auth/complete_facebook_signin
+  param: { module: auth, action: complete_facebook_signin }
 
 auth_basic:
   url:   /auth/basic
   param: { module: auth, action: basic }
-  
+
 auth_registered:
   url:  /welcome
   param: { module: auth, action: registered }
-  
+
 welcome_magic:
   url:  /magic
   param: { module: landing, action: magic }
@@ -53,7 +57,7 @@ welcome_magic:
 landing:
   url: /landing
   param: { module: landing, action: index }
-  
+
 change_language:
   url:   /change_language
   param: { module: system, action: changeLanguage }

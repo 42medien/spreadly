@@ -38,8 +38,8 @@ all:
     oauth_secret:  "pw4tGKNa8aG4AqidMBaMpsQyDp70WSgnNVSvv9tLU"
 
   facebook:
-    oauth_token:   "1de4ec6a73c75e7c00977bc6c9a203c4"
-    oauth_secret:  "d789bd46751701a96ca3e80d8b5bff86"
+    oauth_token:   "4e786c7f089e38a83933c9821990030a"
+    oauth_secret:  "2366aa47d946b7650fe21cf488db5694"
 
   rpx:
     api_key:    '63d0ac8f1f45035695ec377008c3ef232f760b2b'
