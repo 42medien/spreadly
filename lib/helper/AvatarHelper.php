@@ -20,7 +20,7 @@ function avatar_path($pSource, $pSize, $pAbsolute = false) {
 }
 
 /**
- * Enter description here...
+ * Disaply avatar
  *
  * @param string $pSource
  * @param string $pSize

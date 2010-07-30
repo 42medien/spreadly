@@ -146,7 +146,11 @@ class User extends BaseUser {
    * @return UserAvatar
    */
   public function getMainAvatar() {
-    return UserAvatarTable::getMainAvatarForUserId($this->getId());
+    $lAvatar = UserAvatarTable::getMainAvatarForUserId($this->getId());
+    if (!$lAvatar) {
+      return 'affe';
+    }
+    return $lAvatar->getAvatar();
   }
 
 

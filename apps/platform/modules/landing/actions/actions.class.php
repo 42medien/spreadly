@@ -16,7 +16,7 @@ class landingActions extends sfActions {
    */
   public function executeIndex(sfWebRequest $request) {
     if ($this->getUser()->isAuthenticated()) {
-      $this->redirect("@stream_hot");
+      $this->redirect("@stream");
     }
 
     $this->pAuthType = $request->getParameter("auth", "delegated");
@@ -26,8 +26,8 @@ class landingActions extends sfActions {
       $this->pError = $this->getUser()->getFlash("error");
     }
   }
-  
+
   public function executeMagic(sfWebRequest $request) {
-  	
+
   }
 }

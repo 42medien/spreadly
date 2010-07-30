@@ -20,7 +20,13 @@ class YiidActivity extends BaseYiidActivity
    */
   public function save(Doctrine_Connection $conn = null) {
     $lObjectToSave = $this->toArray(false);
-    return $lObjectToSave = YiidActivityTable::saveObjectToMongoDb($lObjectToSave);
+    $lObjectToSave = YiidActivityTable::saveObjectToMongoDb($lObjectToSave);
+
+    $this->setId($lObjectToSave['_id'].""); // cast mongoID to string
+    if ($lObjectToSave) {
+      return $lObjectToSave;
+    }
+    return false;
   }
 
   public function delete(Doctrine_Connection $con = null) {

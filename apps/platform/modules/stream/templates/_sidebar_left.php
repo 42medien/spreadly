@@ -1,9 +1,9 @@
-<?php use_helper('Text'); ?>
+<?php use_helper('Text', 'Avatar'); ?>
 
 <div id="photo_filter_box" class="bg_light bd_diagonal bd_normal_light clearfix">
 
   <div class="photo_big" id="stream_photo">
-    <?php echo image_tag($sf_user->getUser()->getMainAvatar()->getAvatar(), array('width' => 96, 'height' => 96)); ?>
+    <?php echo avatar_tag($sf_user->getUser()->getMainAvatar(), '96x96'); ?>
   </div>
 
   <p class="filter_headline"><?php echo __('All Networks'); ?></p>

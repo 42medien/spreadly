@@ -181,7 +181,7 @@ class myUser extends sfBasicSecurityUser {
     //CookieUtils::generateWidgetIdentityCookie($user->getOnlineIdentitiesForLikeWidget());
 
     // if user is translator and wants to translate site, store this in session
-    if($this->hasCredential(array('translator'), false)) {
+  /*  if($this->hasCredential(array('translator'), false)) {
       $lTranslationSystemStatus = SettingPeer::getSettingForUser($user->getId(), 'setting', SettingPeer::SETTING_TRANSLATION_ENABLED);
 	    if(!$lTranslationSystemStatus || $lTranslationSystemStatus->getValue() == 0) {
 	      $this->setAttribute( "display_translation_system", false);
@@ -189,7 +189,7 @@ class myUser extends sfBasicSecurityUser {
 	      $this->setAttribute( "display_translation_system", true);
 	    }
     }
-
+*/
     // save login time in user_last_login
     /*$lTimestamp = time();
     $lUserLastLogin = UserLastLoginPeer::retrieveByUserId($user->getId());
