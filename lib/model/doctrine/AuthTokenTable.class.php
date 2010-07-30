@@ -1,6 +1,7 @@
 <?php
 /**
- * Enter description here...
+ * auth-tokens for athenticating against for
+ * example twitter or facebook
  *
  * @author Matthias Pfefferle
  * @author Christian Weyand
@@ -10,11 +11,14 @@ class AuthTokenTable extends Doctrine_Table {
   const TOKEN_TYPE_BASIC   = 1;
   const TOKEN_TYPE_OAUTH   = 2;
 
-
+  /**
+   * returns a new instance
+   *
+   * @return AuthTokenTable
+   */
   public static function getInstance() {
     return Doctrine_Core::getTable('AuthToken');
   }
-
 
   /**
    * retrieves all tokens owned by a user
@@ -28,10 +32,9 @@ class AuthTokenTable extends Doctrine_Table {
     return $lResults;
   }
 
-
   /**
-   *
    * retrives tokens with publishing enabled by userid
+   *
    * @author weyandch
    * @param int $pUserId
    */
@@ -44,7 +47,10 @@ class AuthTokenTable extends Doctrine_Table {
 
   /**
    * creates basic query to retrieve tokens for a given user
+   *
+   * @author Matthias Pfefferle
    * @param int $pUserId
+   * @return Doctrine_Query
    */
   public static function getTokensForUserQuery($pUserId) {
     $lQuery = Doctrine_Query::create()
