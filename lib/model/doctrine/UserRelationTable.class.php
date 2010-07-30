@@ -75,6 +75,26 @@ class UserRelationTable extends Doctrine_Table
   }
 
 
+  /**
+   * returns an array of oi's for given friendid // userid
+   *
+   * @param int $pUserId
+   * @param int $pFriendId
+   * @author weyandch
+   */
+  public static function getRelevantOnlineIdentitys($pUserId, $pFriendId) {
+    $pOiArray = array();
+    if (is_null($pFriendId)) {
+      $pOiArray = self::retrieveUserRelations($pUserId)->getContactsOi();
+    } else {
+      $pOiArray = self::retrieveUserRelations($pFriendId)->getOwnedOi();
+    }
+
+    return $pOiArray?$pOiArray:array();
+  }
+
+
+
 
   /**
    * creates object from a given MongoDb Collection

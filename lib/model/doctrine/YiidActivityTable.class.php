@@ -33,14 +33,14 @@ class YiidActivityTable extends Doctrine_Table
 
 
   public static function saveLikeActivitys($pUserId,
-                                                          $pUrl,
-                                                          $pOwnedOnlineIdentitys = array(),
-                                                          $pGivenOnlineIdentitys = array(),
-                                                          $pScore = self::ACTIVITY_TYPE_LIKE,
-                                                          $pVerb = 'like',
-                                                          $pTitle = null,
-                                                          $pDescription = null,
-                                                          $pPhoto = null) {
+  $pUrl,
+  $pOwnedOnlineIdentitys = array(),
+  $pGivenOnlineIdentitys = array(),
+  $pScore = self::ACTIVITY_TYPE_LIKE,
+  $pVerb = 'like',
+  $pTitle = null,
+  $pDescription = null,
+  $pPhoto = null) {
 
 
     $lVerifiedOnlineIdentitys = array();
@@ -203,6 +203,42 @@ class YiidActivityTable extends Doctrine_Table
   }
 
 
+  public static function retrieveLatestActivitiesByContacts($pUserId, $pFriendId = null, $pCommunityId = null) {
+    $lCollection = self::getMongoCollection();
+
+    $lRelevantOis = self::getRelevantOnlineIdentitysForQuery($pUserId, $pFriendId);
+
+    $lQueryArray = array();
+    $lQueryArray['oiids'] = array('$in' => $lRelevantOis);
+    if ($pCommunityId) {
+      $lQueryArray['cids'] = array('$in' => array($pCommunityId));
+    }
+
+    $lResults = $lCollection->find($lQueryArray);
+    $lResults->sort(array('u' => -1));
+
+    return self::hydrateMongoCollectionToObjects($lResults);
+
+
+    return array();
+  }
+
+
+
+  /**
+   * returns a list of OI's we need for the query
+   * @param unknown_type $pUserId
+   * @param unknown_type $pFriendId
+   */
+  public static function getRelevantOnlineIdentitysForQuery($pUserId, $pFriendId) {
+    return UserRelationTable::getRelevantOnlineIdentitys($pUserId, $pFriendId);
+  }
+
+
+
+
+
+
   /**
    * check if the given verb is supported in the current version
    *
@@ -250,6 +286,22 @@ class YiidActivityTable extends Doctrine_Table
 
 
 
+  /**
+   * hydrate yiidactivities objects from the extracted collection and return an array
+   *
+   * @param unknown_type $pCollection
+   * @return array(SocialObject)
+   */
+  private static function hydrateMongoCollectionToObjects($pCollection) {
+    $lObjects = array();
+    while($pCollection->hasNext()) {
+      $lObjects[] = self::initializeObjectFromCollection($pCollection->getNext());
+    }
+    return $lObjects;
+  }
+
+
+
 
   /**
    * retrieve YiidActivies for a given SovialObject MongoDbID
@@ -263,10 +315,8 @@ class YiidActivityTable extends Doctrine_Table
     $lCollection = self::getMongoCollection();
 
     $lMongoCursor = $lCollection->find(array("so_id" => $pId ));
-    foreach ($lMongoCursor as $lObject) {
-      $lResults[] = self::initializeObjectFromCollection($lObject);
-    }
-    return $lResults;
+
+    return self::hydrateMongoCollectionToObjects($lMongoCursor);
   }
 
 

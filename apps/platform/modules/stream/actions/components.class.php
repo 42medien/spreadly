@@ -26,5 +26,9 @@ class streamComponents extends sfComponents
   public function executeSearch_field() {}
 
   public function executeSidebar_right() {}
+
+  public function executeContacts_infobox() {
+
+  }
 }
 ?>

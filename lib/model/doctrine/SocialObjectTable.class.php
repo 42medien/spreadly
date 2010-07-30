@@ -91,16 +91,13 @@ class SocialObjectTable extends Doctrine_Table
   }
 
 
-
+  /**
+   * returns a list of OI's we need for the query
+   * @param unknown_type $pUserId
+   * @param unknown_type $pFriendId
+   */
   public static function getRelevantOnlineIdentitysForQuery($pUserId, $pFriendId) {
-    $pOiArray = array();
-    if (is_null($pFriendId)) {
-      $pOiArray = UserRelationTable::retrieveUserRelations($pUserId)->getContactsOi();
-    } else {
-      $pOiArray = UserRelationTable::retrieveUserRelations($pFriendId)->getOwnedOi();
-    }
-
-    return $pOiArray?$pOiArray:array();
+    return UserRelationTable::getRelevantOnlineIdentitys($pUserId, $pFriendId);
   }
 
   /**

@@ -23,21 +23,24 @@ class streamActions extends sfActions
   public function executeNew(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
     $lCallback = $request->getParameter('callback', 'logerror');
-    $lUserId = $request->getParameter('userid', null);
+    $lContactId = $request->getParameter('userid', null);
     $lComId = $request->getParameter('comid', null);
     $lCss = $request->getParameter('css');
     $lString = '';
-    if($lUserId) {
-      $lString = ', "userid":"'.$lUserId.'"';
+    if($lContactId) {
+      $lString = ', "userid":"'.$lContactId.'"';
     } elseif ($lComId) {
       $lString = ', "comid":"'.$lComId.'"';
     }
+
+
+    $pActivities = YiidActivityTable::retrieveLatestActivitiesByContacts($this->getUser()->getUserId(),$lContactId, $lComId);
 
     return $this->renderText(
       $lCallback.'('.
       json_encode(
         array(
-          "stream"  => $this->getPartial('stream/new_stream'),
+          "stream"  => $this->getPartial('stream/new_stream', array('pActivities' => $pActivities)),
           "action" => "stream/new",
           "dataobj" => '{"callback":"'.$lCallback.'"'.$lString.'}',
           "css" => $lCss
@@ -50,18 +53,18 @@ class streamActions extends sfActions
   public function executeHot(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
     $lCallback = $request->getParameter('callback', 'logerror');
-    $lUserId = $request->getParameter('userid', null);
+    $lContactId = $request->getParameter('userid', null);
     $lComId = $request->getParameter('comid', null);
     $lPage = $request->getParameter('page', 0);
     $lCss = $request->getParameter('css');
     $lString = '';
-    if($lUserId) {
-      $lString = ', "userid":"'.$lUserId.'"';
+    if($lContactId) {
+      $lString = ', "userid":"'.$lContactId.'"';
     } elseif ($lComId) {
       $lString = ', "comid":"'.$lComId.'"';
     }
 
-    $pSocialObjects = SocialObjectTable::retrieveHotObjets($this->getUser()->getUserId());
+    $pSocialObjects = SocialObjectTable::retrieveHotObjets($this->getUser()->getUserId(),$lContactId, $lComId);
 
     return $this->renderText(
       $lCallback.'('.
@@ -81,18 +84,18 @@ class streamActions extends sfActions
   public function executeNot(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
     $lCallback = $request->getParameter('callback', 'GlobalError.logerror');
-    $lUserId = $request->getParameter('userid', null);
+    $lContactId = $request->getParameter('userid', null);
     $lComId = $request->getParameter('comid', null);
     $lPage = $request->getParameter('page', 0);
     $lCss = $request->getParameter('css');
     $lString = '';
-    if($lUserId) {
-      $lString = ', "userid":"'.$lUserId.'"';
+    if($lContactId) {
+      $lString = ', "userid":"'.$lContactId.'"';
     } elseif ($lComId) {
       $lString = ', "comid":"'.$lComId.'"';
     }
 
-    $pSocialObjects = SocialObjectTable::retrieveFlopObjects($this->getUser()->getUserId());
+    $pSocialObjects = SocialObjectTable::retrieveFlopObjects($this->getUser()->getUserId(),$lContactId, $lComId);
 
     return $this->renderText(
       $lCallback.'('.
