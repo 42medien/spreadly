@@ -102,10 +102,10 @@ class FacebookAuthApiClient {
   public function doAuthentication() {
     $lConsumer = $this->getConsumer();
 
-      header("Location: https://graph.facebook.com/oauth/authorize?
-                        client_id=".$lConsumer->key.
-                        "&scope=email,offline_access,publish_stream,read_stream,user_about_me,user_activities,user_likes,read_friendlists,user_website".
-                        "&redirect_uri=http://www.yiid.local/platform_dev.php/auth/complete_facebook_signin");
+    header("Location: https://graph.facebook.com/oauth/authorize?
+                      client_id=".$lConsumer->key.
+                      "&scope=email,offline_access,publish_stream,read_stream,user_about_me,user_activities,user_likes,read_friendlists,user_website".
+                      "&redirect_uri=http://www.yiid.local/platform_dev.php/auth/complete_facebook_signin");
     exit;
   }
 
