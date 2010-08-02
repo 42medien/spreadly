@@ -4,6 +4,7 @@ options:
   charset: utf8
       
 Language:
+  connection:  translation
   actAs:
     Timestampable:  ~
   columns:
@@ -27,6 +28,7 @@ Language:
       fields:  [is_active]
     
 Catalogue:      
+  connection:  translation
   columns:
     cat_id:
       type:  integer
@@ -52,6 +54,7 @@ Catalogue:
       fields:  [name]
       
 TransUnit:      
+  connection:  translation
   actAs:
     Timestampable:  ~
   columns:

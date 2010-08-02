@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="Communipedia" default="info" basedir=".">
+<project name="Yiid.it" default="info" basedir=".">
 
   <!-- give some info about this tool -->
   <target name="info">
@@ -9,10 +9,6 @@
     - buildlive
     - buildci
     - buildwidget
-    - buildmodel
-    - enableall
-    - disableall
-    - buildselenium
     - test
     - lockdb
     - I18NSync
@@ -38,6 +34,15 @@
     <include name="**" />
   </fileset>
 
+  <target name="copy_factory_config">
+    <copy file="data/deployment/factories_${env}.yml" tofile="apps/configurator/config/factories.yml" overwrite="true"></copy>
+    <copy file="data/deployment/factories_${env}.yml" tofile="apps/engineroom/config/factories.yml" overwrite="true"></copy>
+    <copy file="data/deployment/factories_${env}.yml" tofile="apps/platform/config/factories.yml" overwrite="true"></copy>
+    <copy file="data/deployment/factories_${env}.yml" tofile="apps/profile/config/factories.yml" overwrite="true"></copy>
+    <copy file="data/deployment/factories_${env}.yml" tofile="apps/shorturl/config/factories.yml" overwrite="true"></copy>
+    <copy file="data/deployment/factories_${env}.yml" tofile="apps/widget/config/factories.yml" overwrite="true"></copy>
+  </target>
+
 
 
 
@@ -49,6 +54,53 @@
     <copy todir="./config">
       <fileset refid="local_config" />
     </copy>
+     
+    <phingcall target="copy_factory_config">
+      <property name="env" value="local"/>
+    </phingcall>
+
+    <exec command="rm -rf lib/model/doctrine/base" />
+    <exec command="rm -rf lib/filter/doctrine/base" />
+    
+    <exec command="rm -rf lib/form/doctrine/base" />
+    <exec command="rm -rf cache/*" />
+
+    <exec command="php batch/cleanup/mongoDbDatabaseCleanup.php" checkReturn="true" />
+    <exec command="./symfony doctrine:build --all --no-confirmation --and-load" checkReturn="true"/>
+
+    <exec command="php data/fixtures/initializeMongoObjects.php" checkReturn="true"/>
+
+    <phingcall target="buildjs"></phingcall>
+    <phingcall target="buildcss"></phingcall>
+
+  </target>
+  
+  
+  
+  
+  
+  
+  
+  <target name="builddev">    
+    <!-- check for db.lock -->
+    <if>
+      <available file="db.lock" />
+      <then>
+        <fail message="ERROR: db.lock exists. DON'T DO THIS! You are on the production system AFFEKOPP" />
+      </then>
+    </if>
+    
+    <copy todir="./web" overwrite="true">
+      <fileset refid="frontend_controllers" />
+    </copy>
+
+    <copy todir="./config" overwrite="true">
+      <fileset refid="dev_config" />
+    </copy>
+    
+    <phingcall target="copy_factory_config">
+      <property name="env" value="dev"/>
+    </phingcall>
 
     <exec command="rm -rf lib/model/doctrine/base" />
     <exec command="rm -rf lib/filter/doctrine/base" />
@@ -60,13 +112,27 @@
 
     <exec command="php data/fixtures/initializeMongoObjects.php" checkReturn="true"/>
 
-  	<phingcall target="buildjs"></phingcall>
-
+    <phingcall target="buildjs"></phingcall>
+    <phingcall target="buildcss"></phingcall>
+  </target>
+  
+  
+  
+  
+  
+  
+  
+  
+  <target name="buildjs">
+    <exec command="php batch/deployment/buildjs.php" checkReturn="true"/>
     <exec command="./symfony cc" />
   </target>
 
-	<target name="buildjs">
-		<exec command="php batch/deployment/buildjs.php" checkReturn="true"/>
-	  <exec command="./symfony cc" />
-	</target>
+  
+  <target name="buildcss">
+    <exec command="php batch/deployment/buildCombinedCss.php" checkReturn="true"/>
+    <exec command="./symfony cc" />
+  </target>
+
+
 </project>
