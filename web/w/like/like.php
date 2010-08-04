@@ -89,7 +89,7 @@ $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
 <div id="container_like_used" <?php if($lIsUsed === false) { ?>style="display: none;"<?php } ?>>
   <div id="settings_button" class="rounded_corners normal_button_area" target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>');">
     <a class="normal_icon left yiid_logo">&nbsp;</a>
-      <?php if($lIsUsed == 1 ) { ?>
+      <?php if(is_numeric($lIsUsed)) { ?>
         <p id="liked-text" class="left"><?php echo __('POS_BUTTON_ACTION_VALUE', $pType); ?></p>
       <?php } elseif ($lIsUsed == -1) { ?>
         <p id="disliked-text" class="left"><?php echo __('NEG_BUTTON_ACTION_VALUE', $pType); ?></p>
