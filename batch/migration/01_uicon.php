@@ -29,8 +29,7 @@ foreach ($lIds as $key => $value) {
     $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
     foreach ($lOiIds as $lOi) {
       $lOinlinIdentity = OnlineIdentityTable::getInstance()->find($lOi);
-      $lUsersConnected[] = UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($lOinlinIdentity);
-      $lOinlinIdentity->free();
+      $lUsersConnected = array_merge($lUsersConnected,UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($lOinlinIdentity));
       unset($lOinlinIdentity);
     }
     $lUsersConnected = array_values($lUsersConnected);
