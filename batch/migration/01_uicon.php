@@ -33,6 +33,8 @@ foreach ($lIds as $key => $value) {
       $lOinlinIdentity->free();
       unset($lOinlinIdentity);
     }
+    echo "ois connected: " . count($lOiIds);
+    echo "users connected: " . count($lUsersConnected);
     UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
 
   }
