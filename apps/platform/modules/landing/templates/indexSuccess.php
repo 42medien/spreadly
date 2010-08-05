@@ -62,7 +62,7 @@
 <div id="what_is_yiid_description" class="clearfix">
   <div class="description_with_image left">
     <p><?php echo __('Find cool new articles, products or people on the web and use the Yiid button to share what you have found with your friends.', null, 'platform'); ?></p>
-    <div id="yiid_description1" class="center_area"></div>
+    <div id="yiid_description1" class="center_area image_button_full_long_en"></div>
   </div>
 
   <div class="description_wave left"></div>

@@ -126,7 +126,7 @@ li.filter_chosen a{color: #6a6b6a;}
 
 /* Signin */
 .description_wave{background: transparent url("/img/sprites/sprite_signin.png") -12% -604px no-repeat;}
-#yiid_description1{background: transparent url("/img/sprites/sprite_signin.png") 0 -235px no-repeat;}
+.image_button_full_long_en{background: transparent url("/img/sprites/sprite_signin.png") 0 -235px no-repeat;}
 #yiid_description2{background: transparent url("/img/sprites/sprite_signin.png") 0 -370px no-repeat;}
 #yiid_description3{background: transparent url("/img/sprites/sprite_signin.png") 0 0 no-repeat;}
 #signin_area{border: 1px #ccc solid;background-color: #fff;}
