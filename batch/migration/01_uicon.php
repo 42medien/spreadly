@@ -38,20 +38,20 @@ foreach ($lIds as $key => $value) {
     unset($lOnlineIdentity);
     */
 
+    // }
+
+    //  UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
+    unset($lUsersConnected);
+    unset($lOiIds);
   }
 
-  //  UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
-  unset($lUsersConnected);
-  unset($lOiIds);
-}
+  echo "user ".$lUserId. "done";
+  echo "######### \r\n\r\n";
 
-echo "user ".$lUserId. "done";
-echo "######### \r\n\r\n";
-
-unset($lUiCons);
-$lUiCons = null;
-unset($lUserId);
-$lUserId = null;
+  unset($lUiCons);
+  $lUiCons = null;
+  unset($lUserId);
+  $lUserId = null;
 
 }
 
