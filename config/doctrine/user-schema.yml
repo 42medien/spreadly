@@ -103,7 +103,9 @@ UserAvatar:
     User:    { onDelete: CASCADE, local: user_id, foreign: id, foreignAlias: UserAvatars }
     OnlineIdentity: { onDelete: CASCADE, local: online_identity_id, foreign: id, foreignAlias: UserAvatars }
     
-UserRelation:
+    
+#### saved in MongoDB    
+UserRelation:   
   columns:
     user_id:
       type: integer
