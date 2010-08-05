@@ -120,7 +120,7 @@ var YiidUtils = {
   	if(pCase != undefined) {
   		YiidRequest.doSendLike(pCase);
   	}
-    var lPopup = window.open(pUrl, 'popup', 'width=600,height=620,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150');
+    var lPopup = window.open(pUrl, 'popup', 'width=600,height=500,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150');
     if(lPopup) {
       return true;
     } else {
@@ -307,7 +307,7 @@ YiidServices = {
     }
     
     //update the image (the cssid is always servicename-activestate)
-    YiidUtils.setAttr(this, 'id', lObjects[lIndex].name+"-"+lObjects[lIndex].active);    
+    YiidUtils.setAttr(this, 'id', lObjects[lIndex].name+"_"+lObjects[lIndex].active);    
   },
   
   /**
@@ -347,6 +347,9 @@ var YiidSlider = {
 
   //global variables needed in the object-methods
   aClickElement: null,
+  aClickElementToOpen: null,
+  aClickElementToClose: null,
+  aTextAreaElement: null,
   aSlideElement: null,
   aOffsetWidth: '',
   aSlidingArea: null,
@@ -360,42 +363,23 @@ var YiidSlider = {
     if(YiidSlider.aSlideElement === null) {
       YiidSlider.aSlideElement = document.getElementById('slide-box');
     }
-    //the element that inits the slideon/of (arrow)
-    if(YiidSlider.aClickElement === null) {
-      YiidSlider.aClickElement = document.getElementById('slide-arrow');
+    // the element that inits the slideon
+    if(YiidSlider.aClickElementToOpen === null) {
+    	//YiidSlider.aClickElementToOpen = document.getElementById('slide_arrow_closed');
+    	YiidSlider.aClickElementToOpen = document.getElementById('open_settings_icon_area');
+    	
     }
+    // the element that inits the slideof
+    if(YiidSlider.aClickElementToClose === null) {
+      YiidSlider.aClickElementToClose = document.getElementById('slide_arrow_opened');
+    }    
     //the hole sliding area: fix for width:1px-problem
     if(YiidSlider.aSlidingArea === null) {
-      YiidSlider.aSlidingArea = document.getElementById('sliding-area');
+      YiidSlider.aSlidingArea = document.getElementById('sliding_area');
     }    
-  },
-  
-  /**
-   * method called by onclick. Decides if slideon or slide of
-   * @author Karina Mies
-   */
-  slide: function(pEvent) {
-  	//YiidServices.initSettings();
-    //if there is running a slide, stop it
-    YiidSlider.stopInterval();
-    //if slider is currently closed, init to open it
-    if(YiidUtils.hasClass(YiidSlider.aClickElement, 'closed')) {
-    	//set the global var, that we know on other place, that the slider is clicked (needed in toggleclickelement)
-    	YiidSlider.aClickSlideInEvent = pEvent;
-    	//disable the like/dislike button and set it to settings
-      YiidButtons.disable();
-      
-      YiidInfo.disable();
-      
-      //slide the setting in
-      YiidSlider.slideIn();
-    }
-    //if slider is currently opened, init to close it
-    if(YiidUtils.hasClass(YiidSlider.aClickElement, 'opened')) {
-    	//set the global var to null, that we know, the slider is closed (needed in toggleclickelement)
-    	YiidSlider.aClickSlideInEvent = null;
-    	//close the settings slider
-      YiidSlider.slideOut();
+    //the hole sliding area: fix for width:1px-problem
+    if(YiidSlider.aTextAreaElement === null) {
+      YiidSlider.aTextAreaElement = document.getElementById('additional_text_area');
     }
   },
 
@@ -403,11 +387,22 @@ var YiidSlider = {
    * Opens the slider
    * @author Karina Mies
    */
-  slideIn: function() {
+  slideIn: function(pEvent) {
+  	//set the global var, that we know on other place, that the slider is clicked (needed in toggleclickelement)
+  	YiidSlider.aClickSlideInEvent = pEvent;
+  	
+  	//disable the like/dislike button and set it to settings
+    YiidButtons.disable();
+    
+    YiidInfo.disable();
+    
     //counter for the width
     var i = 1;
     //if there is currently an interval running: stop it
     YiidSlider.stopInterval();
+    
+    //show close icon
+    YiidSlider.aClickElementToClose.style.display = 'block';
     
     if(YiidServices.aTimecheck < YiidServices.getActualTimestamp()) {
     	YiidServices.initSettings();
@@ -420,7 +415,7 @@ var YiidSlider = {
     //show the sliding-area
     YiidSlider.aSlidingArea.style.display='block';
     //get the width of all inserted cols(favicon-styles)
-    YiidSlider.aOffsetWidth = document.getElementById('slide-table').offsetWidth+22;
+    YiidSlider.aOffsetWidth = document.getElementById('slide_table').offsetWidth+12;
     //set interval to slide in
     YiidSlider.aSlideElement.timer = window.setInterval( function() {
        if(i >= YiidSlider.aOffsetWidth) {
@@ -442,8 +437,12 @@ var YiidSlider = {
    * @author Karina Mies
    */
   slideOut: function() {
+  	//set the global var to null, that we know, the slider is closed (needed in toggleclickelement)
+  	YiidSlider.aClickSlideInEvent = null;
     //if there is currently an interval running: stop it
     YiidSlider.stopInterval();
+    //hide close icon
+    //YiidSlider.aClickElementToClose.style.display = 'none';
     //set interval to slide out
     YiidSlider.aSlideElement.timer = window.setInterval( function() {
       //check, if the width of the inner slide elements is greater than 0
@@ -459,7 +458,7 @@ var YiidSlider = {
         
         YiidButtons.enable();
         //remove the inserted cols with the favicons
-        YiidSlider.hideClickElement();
+        //YiidSlider.hideClickElement();
         YiidSlider.stopInterval();
         YiidInfo.enable();
       }
@@ -478,7 +477,6 @@ var YiidSlider = {
     var lObjects = YiidServices.aSettings;
     //helper variables to insert the cell
     var lCell, lLink;
-    
     //foreach service in the cookie we need a new cell in the tablerow
     for(var i=0; i<lObjects.length; i++){
       //create new cell for every service with index i
@@ -489,7 +487,7 @@ var YiidSlider = {
       lCell.appendChild(lLink);
       //set the needed attributs for the link
       YiidUtils.setAttr(lLink, 'href', "#"+i);
-      YiidUtils.setAttr(lLink, 'id', lObjects[i].name+"-"+lObjects[i].active);
+      YiidUtils.setAttr(lLink, 'id', lObjects[i].name+"_"+lObjects[i].active);
       YiidUtils.setAttr(lLink, 'class', 'favicon');
       YiidUtils.setAttr(lLink, 'title', lObjects[i].identifier);
       //Bind the click event to the icons      
@@ -510,7 +508,7 @@ var YiidSlider = {
     //take all columns
     var lChilds = lRow.getElementsByTagName('td');
     var lLength = lChilds.length;
-    //�nd remove all childs from the row
+    //and remove all childs from the row
     for(var i=0; i<lLength; i++) {
       if(lChilds[0].id !== 'settings-area') {
         lRow.removeChild(lChilds[0]);
@@ -534,8 +532,9 @@ var YiidSlider = {
    * @author Karina Mies
    */
   showClickElement: function() {
-    YiidSlider.init();  	
-    YiidSlider.aClickElement.style.visibility = 'visible';
+    YiidSlider.init();
+    YiidUtils.toggleClass(YiidSlider.aTextAreaElement, 'big_space_to_left', 'small_space_to_left');
+    YiidSlider.aClickElementToOpen.style.display = 'block';
   },
   
   /**
@@ -544,11 +543,12 @@ var YiidSlider = {
    */
   hideClickElement: function(pEvent) {
     // do not hide, if slider is opened
-  	if(YiidUtils.hasClass(YiidSlider.aClickElement, 'opened') || YiidSlider.aClickSlideInEvent != null) {
+  	if(YiidSlider.aClickSlideInEvent != null) {
       pEvent = null;
   	} else {
   		// hide if slider is closed
-      YiidSlider.aClickElement.style.visibility = 'hidden';  		
+      YiidUtils.toggleClass(YiidSlider.aTextAreaElement, 'small_space_to_left', 'big_space_to_left');
+      YiidSlider.aClickElementToOpen.style.display = 'none';  		
   	}
   },
   
@@ -651,29 +651,27 @@ var YiidWidget = {
     var lPossible = YiidWidget.isLikePossible();
     //inits the slider elements if not set
     YiidSlider.init();
-    if(YiidUtils.hasClass(YiidSlider.aClickElement, 'closed')) {
-      //if user has services and activated one or more services
-      if(lPossible === 1) {
-        YiidRequest.doSendLike(pCase);
-        //update the layout of the button and its content
-        YiidWidget.markAsUsed();
-        if(pCase == 1) {
-          YiidButtons.markLiked();
-          YiidInfo.markLiked();
-        } else {
-          YiidButtons.markDisliked();
-          YiidInfo.markDisliked();
-        }
-      //if user has services but non of them is activated
-      } else if(lPossible === 0) {
-        YiidSlider.slide();
-      //if user has no services, open the settings popup
+    //if user has services and activated one or more services
+    if(lPossible === 1) {
+      YiidRequest.doSendLike(pCase);
+      //update the layout of the button and its content
+      YiidWidget.markAsUsed();
+      if(pCase == 1) {
+        YiidButtons.markLiked();
+        YiidInfo.markLiked();
       } else {
-      	YiidRequest.doSendLike(pCase);
-        YiidUtils.openPopup(YiidWidget.aPopupPath);
+        YiidButtons.markDisliked();
+        YiidInfo.markDisliked();
       }
-      return false;
+    //if user has services but non of them is activated
+    } else if(lPossible === 0) {
+      YiidSlider.slideIn();
+    //if user has no services, open the settings popup
+    } else {
+    	YiidRequest.doSendLike(pCase);
+      YiidUtils.openPopup(YiidWidget.aPopupPath);
     }
+    return false;
   },
   
   /**
@@ -709,7 +707,7 @@ var YiidWidget = {
    * @author Karina Mies
    */
   markAsUsed: function() {
-    var lButton = document.getElementById('container');
+    var lButton = document.getElementById('container_full');
     lButton.style.display = "none";
     var lUsedButton = document.getElementById('container_used');
     lUsedButton.style.display="block";
@@ -722,7 +720,7 @@ var YiidWidget = {
   markAsUnused: function() {
     var lButton = document.getElementById('container_used');
     lButton.style.display = "none";
-    var lUnusedButton = document.getElementById('container');
+    var lUnusedButton = document.getElementById('container_full');
     lUnusedButton.style.display="";   
   }
 

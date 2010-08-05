@@ -1,349 +1,6 @@
-/*NOCOMBINE*/
-/*
-    http://www.JSON.org/json_parse.js
-    2009-05-31
-
-    Public Domain.
-
-    NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
-
-    This file creates a json_parse function.
-
-        json_parse(text, reviver)
-            This method parses a JSON text to produce an object or array.
-            It can throw a SyntaxError exception.
-
-            The optional reviver parameter is a function that can filter and
-            transform the results. It receives each of the keys and values,
-            and its return value is used instead of the original value.
-            If it returns what it received, then the structure is not modified.
-            If it returns undefined then the member is deleted.
-
-            Example:
-
-            // Parse the text. Values that look like ISO date strings will
-            // be converted to Date objects.
-
-            myData = json_parse(text, function (key, value) {
-                var a;
-                if (typeof value === 'string') {
-                    a =
-/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z$/.exec(value);
-                    if (a) {
-                        return new Date(Date.UTC(+a[1], +a[2] - 1, +a[3], +a[4],
-                            +a[5], +a[6]));
-                    }
-                }
-                return value;
-            });
-
-    This is a reference implementation. You are free to copy, modify, or
-    redistribute.
-
-    This code should be minified before deployment.
-    See http://javascript.crockford.com/jsmin.html
-
-    USE YOUR OWN COPY. IT IS EXTREMELY UNWISE TO LOAD CODE FROM SERVERS YOU DO
-    NOT CONTROL.
-*/
-
-/*members "", "\"", "\/", "\\", at, b, call, charAt, f, fromCharCode,
-    hasOwnProperty, message, n, name, push, r, t, text
-*/
-
-var json_parse = (function () {
-
-// This is a function that can parse a JSON text, producing a JavaScript
-// data structure. It is a simple, recursive descent parser. It does not use
-// eval or regular expressions, so it can be used as a model for implementing
-// a JSON parser in other languages.
-
-// We are defining the function inside of another function to avoid creating
-// global variables.
-
-    var at,     // The index of the current character
-        ch,     // The current character
-        escapee = {
-            '"':  '"',
-            '\\': '\\',
-            '/':  '/',
-            b:    '\b',
-            f:    '\f',
-            n:    '\n',
-            r:    '\r',
-            t:    '\t'
-        },
-        text,
-
-        error = function (m) {
-
-// Call error when something is wrong.
-
-            throw {
-                name:    'SyntaxError',
-                message: m,
-                at:      at,
-                text:    text
-            };
-        },
-
-        next = function (c) {
-
-// If a c parameter is provided, verify that it matches the current character.
-
-            if (c && c !== ch) {
-                error("Expected '" + c + "' instead of '" + ch + "'");
-            }
-
-// Get the next character. When there are no more characters,
-// return the empty string.
-
-            ch = text.charAt(at);
-            at += 1;
-            return ch;
-        },
-
-        number = function () {
-
-// Parse a number value.
-
-            var number,
-                string = '';
-
-            if (ch === '-') {
-                string = '-';
-                next('-');
-            }
-            while (ch >= '0' && ch <= '9') {
-                string += ch;
-                next();
-            }
-            if (ch === '.') {
-                string += '.';
-                while (next() && ch >= '0' && ch <= '9') {
-                    string += ch;
-                }
-            }
-            if (ch === 'e' || ch === 'E') {
-                string += ch;
-                next();
-                if (ch === '-' || ch === '+') {
-                    string += ch;
-                    next();
-                }
-                while (ch >= '0' && ch <= '9') {
-                    string += ch;
-                    next();
-                }
-            }
-            number = +string;
-            if (isNaN(number)) {
-                error("Bad number");
-            } else {
-                return number;
-            }
-        },
-
-        string = function () {
-
-// Parse a string value.
-
-            var hex,
-                i,
-                string = '',
-                uffff;
-
-// When parsing for string values, we must look for " and \ characters.
-
-            if (ch === '"') {
-                while (next()) {
-                    if (ch === '"') {
-                        next();
-                        return string;
-                    } else if (ch === '\\') {
-                        next();
-                        if (ch === 'u') {
-                            uffff = 0;
-                            for (i = 0; i < 4; i += 1) {
-                                hex = parseInt(next(), 16);
-                                if (!isFinite(hex)) {
-                                    break;
-                                }
-                                uffff = uffff * 16 + hex;
-                            }
-                            string += String.fromCharCode(uffff);
-                        } else if (typeof escapee[ch] === 'string') {
-                            string += escapee[ch];
-                        } else {
-                            break;
-                        }
-                    } else {
-                        string += ch;
-                    }
-                }
-            }
-            error("Bad string");
-        },
-
-        white = function () {
-
-// Skip whitespace.
-
-            while (ch && ch <= ' ') {
-                next();
-            }
-        },
-
-        word = function () {
-
-// true, false, or null.
-
-            switch (ch) {
-            case 't':
-                next('t');
-                next('r');
-                next('u');
-                next('e');
-                return true;
-            case 'f':
-                next('f');
-                next('a');
-                next('l');
-                next('s');
-                next('e');
-                return false;
-            case 'n':
-                next('n');
-                next('u');
-                next('l');
-                next('l');
-                return null;
-            }
-            error("Unexpected '" + ch + "'");
-        },
-
-        value,  // Place holder for the value function.
-
-        array = function () {
-
-// Parse an array value.
-
-            var array = [];
-
-            if (ch === '[') {
-                next('[');
-                white();
-                if (ch === ']') {
-                    next(']');
-                    return array;   // empty array
-                }
-                while (ch) {
-                    array.push(value());
-                    white();
-                    if (ch === ']') {
-                        next(']');
-                        return array;
-                    }
-                    next(',');
-                    white();
-                }
-            }
-            error("Bad array");
-        },
-
-        object = function () {
-
-// Parse an object value.
-
-            var key,
-                object = {};
-
-            if (ch === '{') {
-                next('{');
-                white();
-                if (ch === '}') {
-                    next('}');
-                    return object;   // empty object
-                }
-                while (ch) {
-                    key = string();
-                    white();
-                    next(':');
-                    if (Object.hasOwnProperty.call(object, key)) {
-                        error('Duplicate key "' + key + '"');
-                    }
-                    object[key] = value();
-                    white();
-                    if (ch === '}') {
-                        next('}');
-                        return object;
-                    }
-                    next(',');
-                    white();
-                }
-            }
-            error("Bad object");
-        };
-
-    value = function () {
-
-// Parse a JSON value. It could be an object, an array, a string, a number,
-// or a word.
-
-        white();
-        switch (ch) {
-        case '{':
-            return object();
-        case '[':
-            return array();
-        case '"':
-            return string();
-        case '-':
-            return number();
-        default:
-            return ch >= '0' && ch <= '9' ? number() : word();
-        }
-    };
-
-// Return the json_parse function. It will have access to all of the above
-// functions and variables.
-
-    return function (source, reviver) {
-        var result;
-
-        text = source;
-        at = 0;
-        ch = ' ';
-        result = value();
-        white();
-        if (ch) {
-            error("Syntax error");
-        }
-
-// If there is a reviver function, we recursively walk the new structure,
-// passing each name/value pair to the reviver function for possible
-// transformation, starting with a temporary root object that holds the result
-// in an empty key. If there is not a reviver function, we simply return the
-// result.
-
-        return typeof reviver === 'function' ? (function walk(holder, key) {
-            var k, v, value = holder[key];
-            if (value && typeof value === 'object') {
-                for (k in value) {
-                    if (Object.hasOwnProperty.call(value, k)) {
-                        v = walk(value, k);
-                        if (v !== undefined) {
-                            value[k] = v;
-                        } else {
-                            delete value[k];
-                        }
-                    }
-                }
-            }
-            return reviver.call(holder, key, value);
-        }({'': result}, '')) : result;
-    };
-}());
+/**
+ * @combine Like
+ */
 
 /**
  * Class YiidUtils: Helper functions for the yiid-widget
@@ -434,7 +91,7 @@ var YiidUtils = {
     } else{
       pElement.textContent = pText;
     }
-  },
+  },  
 
   /**
    * adds the given to a given element
@@ -459,11 +116,11 @@ var YiidUtils = {
    * @param pUrl Path to popup-source
    * @param pCase the case, if the user clicked like(0) or dislike(1)
    */
-  openPopup: function (pUrl, pCase) {
-  	if(pCase != undefined) {
-  		YiidRequest.doSendLike(pCase);
-  	}
-    var lPopup = window.open(pUrl, 'popup', 'width=600,height=500,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150');
+  openPopup: function (pUrl, pSendLike) {
+    if(pSendLike == true) {
+      YiidRequest.doSendLike();
+    }
+    var lPopup = window.open(pUrl, 'popup', 'width=600,height=620,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150');
     if(lPopup) {
       return true;
     } else {
@@ -497,8 +154,8 @@ var YiidUtils = {
   emptyElement: function(pElement) {
     while(pElement.hasChildNodes()){
       pElement.removeChild(pElement.lastChild);
-    }  	
-  },
+    }   
+  },  
   
   /**
    * creates the xmlhttprequest-object for the right browser
@@ -621,7 +278,7 @@ YiidServices = {
     if(lCookie != null) {
       YiidServices.aSettings = json_parse(lCookie);
     }
-    
+        
     var lTimestamp = YiidCookie.getCookie(YiidCookie.aTimecheck);
     if(lTimestamp != null) {
     	YiidServices.aTimecheck = lTimestamp;
@@ -650,7 +307,7 @@ YiidServices = {
     }
     
     //update the image (the cssid is always servicename-activestate)
-    YiidUtils.setAttr(this, 'id', lObjects[lIndex].name+"_"+lObjects[lIndex].active);    
+    YiidUtils.setAttr(this, 'id', lObjects[lIndex].name+"-"+lObjects[lIndex].active);    
   },
   
   /**
@@ -690,9 +347,6 @@ var YiidSlider = {
 
   //global variables needed in the object-methods
   aClickElement: null,
-  aClickElementToOpen: null,
-  aClickElementToClose: null,
-  aTextAreaElement: null,
   aSlideElement: null,
   aOffsetWidth: '',
   aSlidingArea: null,
@@ -706,23 +360,42 @@ var YiidSlider = {
     if(YiidSlider.aSlideElement === null) {
       YiidSlider.aSlideElement = document.getElementById('slide-box');
     }
-    // the element that inits the slideon
-    if(YiidSlider.aClickElementToOpen === null) {
-    	//YiidSlider.aClickElementToOpen = document.getElementById('slide_arrow_closed');
-    	YiidSlider.aClickElementToOpen = document.getElementById('open_settings_icon_area');
-    	
+    //the element that inits the slideon/of (arrow)
+    if(YiidSlider.aClickElement === null) {
+      YiidSlider.aClickElement = document.getElementById('slide-arrow');
     }
-    // the element that inits the slideof
-    if(YiidSlider.aClickElementToClose === null) {
-      YiidSlider.aClickElementToClose = document.getElementById('slide_arrow_opened');
-    }    
     //the hole sliding area: fix for width:1px-problem
     if(YiidSlider.aSlidingArea === null) {
-      YiidSlider.aSlidingArea = document.getElementById('sliding_area');
+      YiidSlider.aSlidingArea = document.getElementById('sliding-area');
     }    
-    //the hole sliding area: fix for width:1px-problem
-    if(YiidSlider.aTextAreaElement === null) {
-      YiidSlider.aTextAreaElement = document.getElementById('additional_text_area');
+  },
+  
+  /**
+   * method called by onclick. Decides if slideon or slide of
+   * @author Karina Mies
+   */
+  slide: function(pEvent) {
+  	//YiidServices.initSettings();
+    //if there is running a slide, stop it
+    YiidSlider.stopInterval();
+    //if slider is currently closed, init to open it
+    if(YiidUtils.hasClass(YiidSlider.aClickElement, 'closed')) {
+    	//set the global var, that we know on other place, that the slider is clicked (needed in toggleclickelement)
+    	YiidSlider.aClickSlideInEvent = pEvent;
+    	//disable the like/dislike button and set it to settings
+      YiidButtons.disable();
+      
+      YiidInfo.disable();
+      
+      //slide the setting in
+      YiidSlider.slideIn();
+    }
+    //if slider is currently opened, init to close it
+    if(YiidUtils.hasClass(YiidSlider.aClickElement, 'opened')) {
+    	//set the global var to null, that we know, the slider is closed (needed in toggleclickelement)
+    	YiidSlider.aClickSlideInEvent = null;
+    	//close the settings slider
+      YiidSlider.slideOut();
     }
   },
 
@@ -730,22 +403,11 @@ var YiidSlider = {
    * Opens the slider
    * @author Karina Mies
    */
-  slideIn: function(pEvent) {
-  	//set the global var, that we know on other place, that the slider is clicked (needed in toggleclickelement)
-  	YiidSlider.aClickSlideInEvent = pEvent;
-  	
-  	//disable the like/dislike button and set it to settings
-    YiidButtons.disable();
-    
-    YiidInfo.disable();
-    
+  slideIn: function() {
     //counter for the width
     var i = 1;
     //if there is currently an interval running: stop it
     YiidSlider.stopInterval();
-    
-    //show close icon
-    YiidSlider.aClickElementToClose.style.display = 'block';
     
     if(YiidServices.aTimecheck < YiidServices.getActualTimestamp()) {
     	YiidServices.initSettings();
@@ -758,7 +420,7 @@ var YiidSlider = {
     //show the sliding-area
     YiidSlider.aSlidingArea.style.display='block';
     //get the width of all inserted cols(favicon-styles)
-    YiidSlider.aOffsetWidth = document.getElementById('slide_table').offsetWidth+12;
+    YiidSlider.aOffsetWidth = document.getElementById('slide-table').offsetWidth+22;
     //set interval to slide in
     YiidSlider.aSlideElement.timer = window.setInterval( function() {
        if(i >= YiidSlider.aOffsetWidth) {
@@ -780,12 +442,8 @@ var YiidSlider = {
    * @author Karina Mies
    */
   slideOut: function() {
-  	//set the global var to null, that we know, the slider is closed (needed in toggleclickelement)
-  	YiidSlider.aClickSlideInEvent = null;
     //if there is currently an interval running: stop it
     YiidSlider.stopInterval();
-    //hide close icon
-    //YiidSlider.aClickElementToClose.style.display = 'none';
     //set interval to slide out
     YiidSlider.aSlideElement.timer = window.setInterval( function() {
       //check, if the width of the inner slide elements is greater than 0
@@ -801,7 +459,7 @@ var YiidSlider = {
         
         YiidButtons.enable();
         //remove the inserted cols with the favicons
-        //YiidSlider.hideClickElement();
+        YiidSlider.hideClickElement();
         YiidSlider.stopInterval();
         YiidInfo.enable();
       }
@@ -820,6 +478,7 @@ var YiidSlider = {
     var lObjects = YiidServices.aSettings;
     //helper variables to insert the cell
     var lCell, lLink;
+    
     //foreach service in the cookie we need a new cell in the tablerow
     for(var i=0; i<lObjects.length; i++){
       //create new cell for every service with index i
@@ -830,7 +489,7 @@ var YiidSlider = {
       lCell.appendChild(lLink);
       //set the needed attributs for the link
       YiidUtils.setAttr(lLink, 'href', "#"+i);
-      YiidUtils.setAttr(lLink, 'id', lObjects[i].name+"_"+lObjects[i].active);
+      YiidUtils.setAttr(lLink, 'id', lObjects[i].name+"-"+lObjects[i].active);
       YiidUtils.setAttr(lLink, 'class', 'favicon');
       YiidUtils.setAttr(lLink, 'title', lObjects[i].identifier);
       //Bind the click event to the icons      
@@ -851,7 +510,7 @@ var YiidSlider = {
     //take all columns
     var lChilds = lRow.getElementsByTagName('td');
     var lLength = lChilds.length;
-    //and remove all childs from the row
+    //�nd remove all childs from the row
     for(var i=0; i<lLength; i++) {
       if(lChilds[0].id !== 'settings-area') {
         lRow.removeChild(lChilds[0]);
@@ -875,9 +534,8 @@ var YiidSlider = {
    * @author Karina Mies
    */
   showClickElement: function() {
-    YiidSlider.init();
-    YiidUtils.toggleClass(YiidSlider.aTextAreaElement, 'big_space_to_left', 'small_space_to_left');
-    YiidSlider.aClickElementToOpen.style.display = 'block';
+    YiidSlider.init();  	
+    YiidSlider.aClickElement.style.visibility = 'visible';
   },
   
   /**
@@ -886,12 +544,11 @@ var YiidSlider = {
    */
   hideClickElement: function(pEvent) {
     // do not hide, if slider is opened
-  	if(YiidSlider.aClickSlideInEvent != null) {
+  	if(YiidUtils.hasClass(YiidSlider.aClickElement, 'opened') || YiidSlider.aClickSlideInEvent != null) {
       pEvent = null;
   	} else {
   		// hide if slider is closed
-      YiidUtils.toggleClass(YiidSlider.aTextAreaElement, 'small_space_to_left', 'big_space_to_left');
-      YiidSlider.aClickElementToOpen.style.display = 'none';  		
+      YiidSlider.aClickElement.style.visibility = 'hidden';  		
   	}
   },
   
@@ -922,12 +579,13 @@ var YiidError = {
     if(pMessage == undefined) {
       pMessage = "Error: Something went wrong. <span id='err-signup'>Login</span> and retry!";
     }  
-    var lAddText = document.getElementById('additional_text_area');
+    var lAddText = document.getElementById('additional_text_area_like');
     YiidUtils.emptyElement(lAddText);
     var lBlock = document.createElement('p');
     YiidUtils.setAttr(lBlock, 'id', 'error-msg')
     lBlock.innerHTML = pMessage;
     lAddText.appendChild(lBlock);
+    
   },
   
   /**
@@ -966,7 +624,7 @@ var YiidWidget = {
   aType: '',
   aTitle: '',
   aDescription: '',
-  aPhoto: '',
+  aPhoto: '',  
   aPopupPath: null,
   aServiceSettings: new Array(),
     
@@ -977,7 +635,7 @@ var YiidWidget = {
   init: function(pUrl, pType, pTitle, pDescription, pPhoto) {
     YiidWidget.aUrl = pUrl;
     YiidWidget.aType = pType;
-    YiidWidget.aTitle = pTitle;
+    YiidWidget.aTitle = pTitle;    
     YiidWidget.aDescription = pDescription;
     YiidWidget.aPhoto = pPhoto;
     YiidServices.initSettings();
@@ -987,34 +645,32 @@ var YiidWidget = {
    * sends the like request if possible, if not slideIn settings or open popup
    * @author Karina Mies
    */
-  doLike: function(pCase) {
+  doLike: function() {
     if(YiidServices.aTimecheck < YiidServices.getActualTimestamp()) {
       YiidServices.initSettings();
     }  	
     var lPossible = YiidWidget.isLikePossible();
     //inits the slider elements if not set
     YiidSlider.init();
-    //if user has services and activated one or more services
-    if(lPossible === 1) {
-      YiidRequest.doSendLike(pCase);
-      //update the layout of the button and its content
-      YiidWidget.markAsUsed();
-      if(pCase == 1) {
+    if(YiidUtils.hasClass(YiidSlider.aClickElement, 'closed')) {
+      //if user has services and activated one or more services
+      if(lPossible === 1) {
+        YiidRequest.doSendLike();
+        //update the layout of the button and its content
+        YiidWidget.markAsUsed();
         YiidButtons.markLiked();
         YiidInfo.markLiked();
+        
+      //if user has services but non of them is activated
+      } else if(lPossible === 0) {
+        YiidSlider.slide();
+      //if user has no services, open the settings popup
       } else {
-        YiidButtons.markDisliked();
-        YiidInfo.markDisliked();
+      	YiidRequest.doSendLike();
+        YiidUtils.openPopup(YiidWidget.aPopupPath);
       }
-    //if user has services but non of them is activated
-    } else if(lPossible === 0) {
-      YiidSlider.slideIn();
-    //if user has no services, open the settings popup
-    } else {
-    	YiidRequest.doSendLike(pCase);
-      YiidUtils.openPopup(YiidWidget.aPopupPath);
+      return false;
     }
-    return false;
   },
   
   /**
@@ -1050,9 +706,9 @@ var YiidWidget = {
    * @author Karina Mies
    */
   markAsUsed: function() {
-    var lButton = document.getElementById('container_full');
+    var lButton = document.getElementById('container_like');
     lButton.style.display = "none";
-    var lUsedButton = document.getElementById('container_used');
+    var lUsedButton = document.getElementById('container_like_used');
     lUsedButton.style.display="block";
   },
   
@@ -1061,9 +717,9 @@ var YiidWidget = {
    * @author Karina Mies
    */  
   markAsUnused: function() {
-    var lButton = document.getElementById('container_used');
+    var lButton = document.getElementById('container_like_used');
     lButton.style.display = "none";
-    var lUnusedButton = document.getElementById('container_full');
+    var lUnusedButton = document.getElementById('container_like');
     lUnusedButton.style.display="";   
   }
 
@@ -1081,32 +737,23 @@ var YiidInfo = {
 	 */
 	markLiked: function() {
     var lLike = document.getElementById('you-like');
-    lLike.style.display = "inline";		
+    lLike.style.display = "inline";
 	},
 	
   /**
-   * mark the text as as disliked (currently only update counter)
+   * hides the info-area (e.g. if slider is on)
    * @author Karina Mies
    */	
-	markDisliked: function() {
-		var lDislike = document.getElementById('you-dislike');
-    lDislike.style.display = "inline"; 		
-	},
-	
-	/**
-	 * hides the info-area (e.g. if slider is on)
-	 * @author Karina Mies
-	 */
 	disable: function() {
-	 document.getElementById('additional_text_area').style.display="none";	
+	 document.getElementById('additional_text_area_like').style.display="none";	
 	},
 	
-	/**
-	 * shows the info-area (e.g. if slider is of)
-	 * @author Karina Mies
-	 */
+  /**
+   * shows the info-area (e.g. if slider is of)
+   * @author Karina Mies
+   */	
 	enable: function() {
-   document.getElementById('additional_text_area').style.display="block";  
+   document.getElementById('additional_text_area_like').style.display="block";  
 	}
 };
 
@@ -1149,16 +796,7 @@ var YiidButtons = {
   markLiked: function() {
     var lLikedText = document.getElementById('liked-text');
     lLikedText.style.display="block";
-  },
-  
-  /**
-   * mark the buttons as disliked (currently only update counter)
-   * @author Karina Mies
-   */  
-  markDisliked: function() {
-    var lDislikedText = document.getElementById('disliked-text');
-    lDislikedText.style.display="block";  
-  }  
+  }
 };
 
 /**
@@ -1168,26 +806,21 @@ var YiidButtons = {
 var YiidRequest = {
   
   //global vars with path to servers
-  aDislikeAction: '',
   aLikeAction: '',
   
   /**
    * sends the like with settings to the defined action
    * @author Karina Mies
    */
-  doSendLike: function(pCase, pOpenPopup) {
+  doSendLike: function(pOpenPopup) {
     //create a new xmlhttprequest object
     var lXhttp = YiidUtils.createXMLHttpRequest();
     if(lXhttp != null) {
       try{
         //to which action should we send the request?
-        var lAction = YiidRequest.aLikeAction;
-        if(pCase === 0) {
-          lAction = YiidRequest.aDislikeAction;
-        }
         //build the param-string
-        var lQuery = encodeURI('url='+YiidWidget.aUrl+'&type='+YiidWidget.aType+'&case='+pCase+'&serv='+YiidServices.encodeSettings()+'&title='+YiidWidget.aTitle+'&description='+YiidWidget.aDescription+'&photo='+YiidWidget.aPhoto);        
-        lXhttp.open("POST", lAction, true); 
+        var lQuery = encodeURI('url='+YiidWidget.aUrl+'&type='+YiidWidget.aType+'&case=1&serv='+YiidServices.encodeSettings()+'&title='+YiidWidget.aTitle+'&description='+YiidWidget.aDescription+'&photo='+YiidWidget.aPhoto);        
+        lXhttp.open("POST", YiidRequest.aLikeAction, true); 
         //Send the proper header information along with the request
         lXhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         lXhttp.setRequestHeader("Content-length", lQuery.length);
@@ -1211,6 +844,31 @@ var YiidRequest = {
       }
     }
   },
+  
+  /**
+   * sends the request if user is logged out
+   * @author Karina Mies
+   * @param pCase (liked or unliked)
+   */
+  doSendLikeLoggedOut: function(pCase) {
+    //create a new xmlhttprequest object
+    var lXhttp = YiidUtils.createXMLHttpRequest();
+    if(lXhttp != null) {
+      try{
+        //to which action should we send the request?
+        //build the param-string
+        var lQuery = encodeURI('url='+YiidWidget.aUrl+'&type='+YiidWidget.aType+'&case='+pCase);        
+        lXhttp.open("POST", "http://www.yiid.com", true); 
+        //Send the proper header information along with the request
+        lXhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        lXhttp.setRequestHeader("Content-length", lQuery.length);
+        lXhttp.setRequestHeader("Connection", "close");
+        lXhttp.send(lQuery);          
+      } catch(lError) {
+        YiidError.undefinedError(lError);
+      }
+    }
+  },   
   
   /**
    * Evaluate the response after clicking like/unlike, shows errors and defines the behaviour of the widget
