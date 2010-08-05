@@ -33,6 +33,11 @@ foreach ($lIds as $key => $value) {
     UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
 
   }
+
+destruct($lOiIds);
+destruct($lOinlinIdentity);
+destruct($lUiCons);
+destruct($lUsersConnected);
   $lUiCons = null;
   $lOiIds = null;
   $lUsersConnected = null;
