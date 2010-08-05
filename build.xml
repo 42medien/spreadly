@@ -108,7 +108,8 @@
     <exec command="rm -rf cache/*" />
 
     <exec command="php batch/cleanup/mongoDbDatabaseCleanup.php" checkReturn="true" />
-    <exec command="./symfony doctrine:build --all --no-confirmation --and-load" checkReturn="true"/>
+    <exec command="./symfony doctrine:build --all-classes" checkReturn="true"/>
+
 
     <exec command="php data/fixtures/initializeMongoObjects.php" checkReturn="true"/>
 
