@@ -30,13 +30,12 @@ foreach ($lIds as $key => $value) {
     foreach ($lOiIds as $lOi) {
       $lOinlinIdentity = OnlineIdentityTable::getInstance()->find($lOi);
       $lUsersConnected[] = UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($lOinlinIdentity);
+      $lOinlinIdentity->free();
+      unset($lOinlinIdentity);
     }
     UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
 
   }
-
-  $lOinlinIdentity->free();
-  unset($lOinlinIdentity);
 
   echo "user ".$lUserId. "done";
   echo "######### \r\n\r\n";
