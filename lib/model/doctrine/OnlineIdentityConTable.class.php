@@ -38,4 +38,24 @@ class OnlineIdentityConTable extends Doctrine_Table {
 
     return $lOICon;
   }
+
+
+
+  /**
+   * retrieves all ID's of connected OI's
+
+   * @param int $pOiId
+   * @author weyandch
+   * @return array(int)
+   */
+  public static function getIdentitysConnectedToOi($pOiId) {
+     $q = Doctrine_Query::create()
+          ->select('oic.to_id')
+          ->from('OnlineIdentityCon oic')
+          ->where('oic.from_id = ?', $pOiId);
+
+    $lUiCons = $q->execute(array(),  Doctrine_Core::HYDRATE_NONE);
+    return HydrationUtils::flattenArray($lUiCons);
+
+  }
 }

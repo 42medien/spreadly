@@ -51,9 +51,9 @@ class  OnlineIdentityTableTest extends BaseTestCase {
     $lCommunityId = $lCommunity->getId();
 
     $lOI = Doctrine_Query::create()->
-      from('OnlineIdentity oi')->
-      where('oi.identifier = ? AND oi.community_id = ?', array("hugo", $lCommunityId))->
-      fetchOne();
+    from('OnlineIdentity oi')->
+    where('oi.identifier = ? AND oi.community_id = ?', array("hugo", $lCommunityId))->
+    fetchOne();
 
     $lOITest = OnlineIdentityTable::addOnlineIdentity('hugo', $lCommunityId, OnlineIdentityTable::TYPE_IDENTITY);
 
@@ -102,30 +102,50 @@ class  OnlineIdentityTableTest extends BaseTestCase {
     $this->assertEquals('google', $lIdentity->getCommunity()->getCommunity());
   }
 
-  /*
-  public function testDetermineIdentifier2() {
-    $pService = 'testcommunity';
-    $pIdentifier = 'affenkopf';
 
-    $lIdentArray = OnlineIdentityPeer::determineIdentifier($pIdentifier, $pService);
-    $pIdentifier = $lIdentArray['identifier'];
-    $pService =  $lIdentArray['service'];
 
-    $this->assertEquals('affenkopf', $pIdentifier);
-    $this->assertEquals('testcommunity', $pService->getCommunity());
+
+  public function testGetIdentitysConnectedToOi() {
+    $lCommunity = CommunityTable::getInstance()->findBy("community", "google");
+    $lCommunity = $lCommunity[0];
+
+    $result = OnlineIdentityTable::retrieveByIdentifier("hugo", $lCommunity->getId(), OnlineIdentityTable::TYPE_IDENTITY);
+
+
+    $this->assertEquals("hugo", $result->getIdentifier());
+
+    $lConnectedIds = OnlineIdentityConTable::getIdentitysConnectedToOi($result->getId());
+
+    $this->assertTrue(is_array($lConnectedIds));
+    $this->assertEquals('OnlineIdentity', get_class(OnlineIdentityTable::getInstance()->find($lConnectedIds[0])));
+
+
   }
 
-  /**
+  /*
+   public function testDetermineIdentifier2() {
+   $pService = 'testcommunity';
+   $pIdentifier = 'affenkopf';
+
+   $lIdentArray = OnlineIdentityPeer::determineIdentifier($pIdentifier, $pService);
+   $pIdentifier = $lIdentArray['identifier'];
+   $pService =  $lIdentArray['service'];
+
+   $this->assertEquals('affenkopf', $pIdentifier);
+   $this->assertEquals('testcommunity', $pService->getCommunity());
+   }
+
+   /**
    * @expectedException HttpException
    *//*
-  public function testAddOnlineIdentity2() {
-    $lOITest = OnlineIdentityTable::addOnlineIdentity('affenkopf', 'testcommunity', OnlineIdentityTable::TYPE_IDENTITY);
-  }*/
+   public function testAddOnlineIdentity2() {
+   $lOITest = OnlineIdentityTable::addOnlineIdentity('affenkopf', 'testcommunity', OnlineIdentityTable::TYPE_IDENTITY);
+   }*/
   /**
    * @expectedException ModelException
    *//*
-  public function testAddOnlineIdentity5() {
-    $identity = 'http://pfefferle.org';
-    $lOITest = OnlineIdentityPeer::addOnlineIdentity($identity, 'account', OnlineIdentityPeer::TYPE_URL);
-  }*/
+   public function testAddOnlineIdentity5() {
+   $identity = 'http://pfefferle.org';
+   $lOITest = OnlineIdentityPeer::addOnlineIdentity($identity, 'account', OnlineIdentityPeer::TYPE_URL);
+   }*/
 }

@@ -30,6 +30,5 @@ $lHostName = $lHostNameArr[1];
 
 system('wget http://www.yiid.local/test.sql');
 system('mysql -u ' . $pTranslatorDbArray['username'] . ' -h ' . $lHostName . ' -p' . $pTranslatorDbArray['password'] . ' ' . $lDBName . ' < test.sql');
-
-
+system('rm ./test.sql');
 ?>
