@@ -55,6 +55,7 @@ class OnlineIdentityConTable extends Doctrine_Table {
           ->where('oic.from_id = ?', $pOiId);
 
     $lUiCons = $q->execute(array(),  Doctrine_Core::HYDRATE_NONE);
+    $q->free();
     return HydrationUtils::flattenArray($lUiCons);
 
   }

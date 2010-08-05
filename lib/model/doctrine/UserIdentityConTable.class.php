@@ -29,6 +29,7 @@ class UserIdentityConTable extends Doctrine_Table {
           ->where('uic.user_id = ?', $pUserId);
 
     $lUiCons = $q->execute(array(),  Doctrine_Core::HYDRATE_NONE);
+    $q->free();
     return HydrationUtils::flattenArray($lUiCons);
   }
 
@@ -114,6 +115,7 @@ class UserIdentityConTable extends Doctrine_Table {
     foreach ($lIds as $key => $value) {
       $lIdsToReturn[] = $value['id'];
     }
+    $lQuery->free();
     return $lIdsToReturn;
   }
 
