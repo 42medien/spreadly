@@ -17,8 +17,9 @@ $dbManager->loadConfiguration();
  *  we need all user id's first
  **/
 $lQuery = Doctrine_Query::create()->from('User u')->select('u.id');
-
 $lIds = $lQuery->fetchArray();
+$lQuery->free();
+
 foreach ($lIds as $key => $value) {
 
   $lUserId = $value['id'];
@@ -31,7 +32,6 @@ foreach ($lIds as $key => $value) {
     foreach ($lOiIds as $lOi) {
       $lOinlinIdentity = OnlineIdentityTable::getInstance()->find($lOi);
       $lUsersConnected[] = UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($lOinlinIdentity);
-      $lOinlinIdentity->free();
       unset($lOinlinIdentity);
     }
 
