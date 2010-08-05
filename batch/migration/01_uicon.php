@@ -35,13 +35,9 @@ foreach ($lIds as $key => $value) {
 
   }
 
-unset($lOiIds);
-unset($lOinlinIdentity);
-unset($lUiCons);
-unset($lUsersConnected);
-  $lUiCons = null;
-  $lOiIds = null;
-  $lUsersConnected = null;
+  $lOinlinIdentity->free();
+  unset($lOinlinIdentity);
+
   echo "user ".$lUserId. "done";
   echo "######### \r\n\r\n";
 
