@@ -30,24 +30,25 @@ class likebuttonActions extends sfActions
     $lLang = $lParams['l'];
     $lType = $lParams['t'];
     $lFontColor = $lParams['fc'];
-
+    $lShortVersion = '';
+    
     //if type is not set, default like
     if($lType == '') {
-    	$lType = 'like';
+      $lType = 'like';
     }
-
+    
     //if language is not set, default session lang
     if($lLang == '') {
-    	$lLang = sfContext::getInstance()->getUser()->getCulture();
+      $lLang = sfContext::getInstance()->getUser()->getCulture();
     }
-
+    
     // if no fontcolor, default black
     if(!isset($lParams['fc']) || $lParams['fc'] == ''){
-    	$lFontColor = '#000000';
+      $lFontColor = '#000000';
     }
 
     if(UrlUtils::isUrlValid($lParams['url'])){
-    	$lUrl = $lParams['url'];
+      $lUrl = $lParams['url'];
     }
 
     //if width ist not set or no number, take default width
@@ -55,12 +56,16 @@ class likebuttonActions extends sfActions
       $lWidth = $lParams['w'];
     }
 
-    if($lParams['bt'] == 'on') {
-      $lWidth = WidgetWidthRegistry::getOptimalFullWidth($lWidth, $lType, $lLang);
-      $lReturn['iframe'] = $this->getPartial('likebutton/widget_full', array('pUrl' => $lUrl, 'pWidth' => $lWidth, 'pLang' => $lLang, 'pType'=>$lType, 'pFontColor' => $lFontColor));
+    if(isset($lParams['sh']) && $lParams['sh'] == 'on') {
+      $lShortVersion = 1;
+    }
+    
+    if(isset($lParams['bt']) && $lParams['bt'] == 'on') {
+      $lWidth = WidgetWidthRegistry::getOptimalFullWidth($lShortVersion, $lWidth, $lType, $lLang);
+      $lReturn['iframe'] = $this->getPartial('likebutton/widget_full', array('pUrl' => $lUrl, 'pWidth' => $lWidth, 'pLang' => $lLang, 'pType'=>$lType, 'pFontColor' => $lFontColor, 'pShort' => $lShortVersion));
     } else {
-      $lWidth = WidgetWidthRegistry::getOptimalLikeWidth($lWidth, $lType, $lLang);
-      $lReturn['iframe'] = $this->getPartial('likebutton/widget_like', array('pUrl' => $lUrl, 'pWidth' => $lWidth, 'pLang' => $lLang, 'pType'=>$lType, 'pFontColor' => $lFontColor));
+      $lWidth = WidgetWidthRegistry::getOptimalLikeWidth($lShortVersion, $lWidth, $lType, $lLang);
+      $lReturn['iframe'] = $this->getPartial('likebutton/widget_like', array('pUrl' => $lUrl, 'pWidth' => $lWidth, 'pLang' => $lLang, 'pType'=>$lType, 'pFontColor' => $lFontColor, 'pShort' => $lShortVersion));
     }
 
     return $this->renderText(json_encode($lReturn));
@@ -137,16 +142,17 @@ class likebuttonActions extends sfActions
    * @param sfWebRequest $request
    */
   public function executeUpdate_width_label(sfWebRequest $request) {
-  	$this->getResponse()->setContentType('application/json');
-
+    $this->getResponse()->setContentType('application/json');
+    
     $lGlobalType = $request->getParameter('global_type');
-  	$lType = $request->getParameter('type');
-  	$lLanguage = $request->getParameter('lang');
-
-  	$lWidth = WidgetWidthRegistry::getWidthForLabel($lGlobalType, $lType, $lLanguage);
-
-  	$lReturn['html'] = $lWidth;
-
-  	return $this->renderText(json_encode($lReturn));
+    $lType = $request->getParameter('type');
+    $lLanguage = $request->getParameter('lang');
+    $lShortVersion = $request->getParameter('short_version');
+    
+    $lWidth = WidgetWidthRegistry::getWidthForLabel($lGlobalType, $lType, $lLanguage, $lShortVersion);
+    
+    $lReturn['html'] = $lWidth;
+    
+    return $this->renderText(json_encode($lReturn));
   }
 }

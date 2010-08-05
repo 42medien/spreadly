@@ -1,7 +1,6 @@
 <?php
 require_once('inc/config.inc.php');
 
-session_name("yiid_widget");
 session_set_cookie_params(time()+17776000, "/", LikeSettings::COOKIE_DOMAIN);
 session_start();
 header('P3P: CP="DSP LAW"');
@@ -42,7 +41,7 @@ $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Yiid it! Button</title>
-<script type="text/javascript" src="/js/widget/Like.js"></script>
+<script type="text/javascript" src="/js/widget/modules/Like.js"></script>
 <script type="text/javascript">
   <?php echo printI18nJSObject($pType); ?>
 
