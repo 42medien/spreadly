@@ -28,6 +28,10 @@
 
   <fileset dir="./data/deployment/local_config" id="local_config">
     <include name="**" />
+  </fileset>  
+  
+  <fileset dir="./data/deployment/dev_config" id="dev_config">
+    <include name="**" />
   </fileset>
 
   <fileset dir="./data/deployment/live_config" id="live_config">
