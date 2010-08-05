@@ -23,7 +23,7 @@ $lQuery->free();
 foreach ($lIds as $key => $value) {
 
   $lUserId = $value['id'];
- // $lUiCons = UserIdentityConTable::getOnlineIdentityIdsForUser($lUserId);
+  $lUiCons = UserIdentityConTable::getOnlineIdentityIdsForUser($lUserId);
 //  UserRelationTable::updateOwnedIdentities($lUserId, $lUiCons);
 
   foreach ($lUiCons as $lOiId) {
@@ -40,6 +40,8 @@ foreach ($lIds as $key => $value) {
     unset($lUsersConnected);
     unset($lOiIds);
   }
+  unset($lUiCons);
+  unset($lUserId);
 
   echo "user ".$lUserId. "done";
   echo "######### \r\n\r\n";
