@@ -23,7 +23,7 @@ $lQuery->free();
 foreach ($lIds as $key => $value) {
 
   $lUserId = $value['id'];
-  $lUiCons = UserIdentityConTable::getOnlineIdentityIdsForUser($lUserId);
+ // $lUiCons = UserIdentityConTable::getOnlineIdentityIdsForUser($lUserId);
 //  UserRelationTable::updateOwnedIdentities($lUserId, $lUiCons);
 
   foreach ($lUiCons as $lOiId) {
