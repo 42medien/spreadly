@@ -25,7 +25,7 @@
   </tr>
   <tr>
     <td><input type="text" name="likebutton[w]" id="likebutton_w" value="<?php echo __('VALUE_WIDTH', null, 'configurator'); ?>" /></td>
-    <td class="right_side"><label id="width_label" for="likebutton_w"><?php echo __('LABEL_WIDTH', array('%1' => '<span id="width_value">420</span>'), 'configurator'); ?></label></td>
+    <td class="right_side"><label id="width_label" for="likebutton_w"><?php echo __('LABEL_WIDTH', array('%1' => '<span id="width_value">325</span>'), 'configurator'); ?></label></td>
   </tr>
   <tr>
     <td><input type="text" name="likebutton[fc]" id="likebutton_fc" value="#000000" /></td>
@@ -33,7 +33,11 @@
   </tr>  
   <tr>
     <td><input type="checkbox" name="likebutton[bt]" id="likebutton_bt" /><label for="likebutton_bt"><?php echo __('HELP_DISLIKE_OPTION', null, 'configurator'); ?></label></td>
-    <td class="right_side" id="dislike_option_lab"><label for="likebutton_bt"><?php echo __('LABEL_DISLIKE_OPTION', null, 'configurator'); ?></label></td>
+    <td class="right_side"><label for="likebutton_bt"><?php echo __('LABEL_DISLIKE_OPTION', null, 'configurator'); ?></label></td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" name="likebutton[sh]" id="likebutton_sh" /><label for="likebutton_sh"><?php echo __('HELP_SHORT_VERSION', null, 'configurator'); ?></label></td>
+    <td class="right_side"><label for="likebutton_sh"><?php echo __('LABEL_SHORT_VERSION', null, 'configurator'); ?></label></td>
   </tr>
   <tr>
     <td><input type="text" name="likebutton[email]" id="likebutton_email" value="<?php echo __('VALUE_EMAIL', null, 'configurator'); ?>" /></td>

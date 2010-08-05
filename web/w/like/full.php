@@ -10,12 +10,8 @@ header('Cache-Control: private, no-store, no-cache, must-revalidate, post-check=
 
 require_once('inc/WidgetUtils.php');
 require_once('inc/i18n.php');
+$pUrl = urlencode(UrlUtils::skipTrailingSlash($_GET['url']));
 
-if (isset($_GET['url']) && !empty($_GET['url'])) {
-  $pUrl = urlencode(UrlUtils::skipTrailingSlash($_GET['url']));
-} else {
-  $pUrl = urlencode(UrlUtils::skipTrailingSlash($_SERVER['HTTP_REFERER']));
-}
 if (isset($_GET['type']) && !empty($_GET['type'])) {
   $pType = $_GET['type'];
 } else {
@@ -26,6 +22,12 @@ if (isset($_GET['color']) && !empty($_GET['color'])) {
 } else {
   $lFontcolor = "#000000";
 }
+if (isset($_GET['short']) && !empty($_GET['short'])) {
+  $pFullShortVersion = true;
+} else {
+  $pFullShortVersion = false;
+}
+
 
 
 
@@ -42,7 +44,7 @@ $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Yiid it! Button</title>
-<script type="text/javascript" src="/js/widget/QuicksilverFull.min.js"></script>
+<script type="text/javascript" src="/js/widget/QuicksilverFullNew.min.js"></script>
 <script type="text/javascript">
   <?php echo printI18nJSObject($pType); ?>
   YiidWidget.init("<?php echo $pUrl; ?>", "<?php echo $pType; ?>", "<?php echo urlencode($_GET['title']); ?>", "<?php echo urlencode($_GET['description']); ?>", "<?php echo urlencode($_GET['photo']); ?>");
@@ -51,69 +53,111 @@ $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
   YiidRequest.aDislikeAction = "<?php echo LikeSettings::JS_DISLIKE_PATH; ?>";
   YiidCookie.aDomain = "<?php echo LikeSettings::COOKIE_DOMAIN; ?>";
 </script>
-<link rel="stylesheet" href="/css/widget/YiidWidget.css" type="text/css" media="screen, projection" />
+<link rel="stylesheet" href="/css/widget/ButtonV2.css" type="text/css" media="screen, projection" />
 </head>
 <body>
-<?php if($lIsUsed === false) { ?>
-<div id="container" <?php if($pUserId) { ?>onmouseover="YiidSlider.showClickElement();" onmouseout="YiidSlider.hideClickElement(event);"<?php } ?>>
-  <!-- Common button area -->
-  <div id="normal_button" class="rounded_corners normal_button_area">
-    <p class="left" id="thumb_up" title="<?php echo __("POS_BUTTON_TITLE", $pType); ?>" <?php if($pUserId) { ?>onclick="YiidWidget.doLike(1);"<?php } else { ?>target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>', 1);"<?php } ?>><?php echo __("POS_BUTTON_VALUE", $pType); ?>
-      <a class="thumb" id="thumb_up_icon">&nbsp;</a>
-    </p>
-    <a class="thumb left" title="<?php echo __("NEG_BUTTON_TITLE", $pType); ?>" id="thumb_down_icon" <?php if($pUserId) { ?>onclick="YiidWidget.doLike(0);"<?php } else { ?>target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>', 0);"<?php } ?>>&nbsp;</a>
-  </div>
 
-  <div id="settings_button" class="rounded_corners normal_button_area" style="display:none;">
-    <p class="left" onclick="YiidSlider.slide(event);" title="<?php echo __("SETTINGS_TITLE"); ?>"><?php echo __("SETTINGS_VALUE"); ?></p>
-  </div>
-  <!-- /Common button area -->
+	<?php if($lIsUsed === false) { ?>
+	<div id="container_full" class="left" <?php if($pUserId) { ?>onmouseover="YiidSlider.showClickElement();" onmouseout="YiidSlider.hideClickElement(event);"<?php } ?>>
 
-  <!-- Area to be slided -->
-  <div class="rounded_corners" id="sliding-area" style="display:none;">
-    <div id="slide-box">
-	    <table id="slide-table" cellpadding="0" cellspacing="0">
-	      <tr id="slide-row">
-	        <td id="settings-area" target="popup" title="Einstellungen" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>');"><a href="#100" class="favicon" id="settings">&nbsp;</a></td>
-	      </tr>
-	    </table>
-	  </div>
-  </div>
-  <!-- Area to be slided -->
+	    <div class="light_bg_118 button_full_outer clearfix" id="normal_button">
+	      <div id="service_area" class="left">
+	        <div id="service_twitter_small_enabled" class="service_icon_small left"></div>
+	        <div id="service_facebook_small_enabled" class="service_icon_small right"></div>
+	        <div id="service_linkedin_small_enabled" class="service_icon_small left"></div>
+	        <div id="service_google_small_enabled" class="service_icon_small right"></div>
+	      </div>
 
-  <!-- Slider Icon -->
+	      <div class="hover_bg left" id="like_area">
+          <?php if($pFullShortVersion) { ?>
+            <a class="like_icon" title="<?php echo __("POS_BUTTON_TITLE", $pType); ?>" <?php if($pUserId) { ?>onclick="YiidWidget.doLike(1);return false;"<?php } else { ?>target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>', 1);return false;"<?php } ?>>&nbsp;</a>
+	        <?php } else { ?>
+            <a class="like_text" title="<?php echo __("POS_BUTTON_TITLE", $pType); ?>" <?php if($pUserId) { ?>onclick="YiidWidget.doLike(1);return false;"<?php } else { ?>target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>', 1);return false;"<?php } ?>>
+              <?php echo __("POS_BUTTON_VALUE", $pType); ?><span class="like_icon">&nbsp;</span>
+            </a>
+	        <?php } ?>
+	      </div>
 
-  <div class="dark_grey rounded_corners slider_area closed" id="slide-arrow" onclick="YiidSlider.slide(event); return false;">
-    <a href="#200">&nbsp;</a>
-  </div>
-  <!-- /Slider Icon -->
+	      <div class="hover_bg left" id="dislike_area">
+	        <a class="dislike_icon" title="<?php echo __("NEG_BUTTON_TITLE", $pType); ?>" <?php if($pUserId) { ?>onclick="YiidWidget.doLike(0);return false;"<?php } else { ?>target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>', 0);return false;"<?php } ?>>&nbsp;</a>
+	      </div>
+
+        <div class="left <?php if($pUserId) { ?>hover_bg<?php } ?>" id="open_settings_icon_area" <?php if($pUserId) { ?>onclick="YiidSlider.slideIn(event); return false;"<?php } ?> style="display: none;">
+          <a id="slide_arrow_closed" class="open_settings_icon" title="<?php echo __("SETTINGS_TITLE"); ?>">&nbsp;</a>
+        </div>
+	    </div>
+
+	    <div id="settings_button" class="normal_button_area" style="display:none;">
+		    <p class="left <?php echo (!$pFullShortVersion ? 'normal_space' : 'small_space') ?>" onclick="YiidSlider.slideOut(event);" title="<?php echo __("SETTINGS_TITLE"); ?>">
+		      <?php if(!$pFullShortVersion) { ?><?php echo __("SETTINGS_VALUE"); ?><?php } ?>
+		    </p>
+		  </div>
+
+	    <!-- Area to be slided -->
+		  <div id="sliding_area" style="display:none;">
+		    <div id="slide-box">
+		      <table id="slide_table" cellpadding="0" cellspacing="0" class="left">
+		        <tr id="slide-row">
+		          <td id="settings-area" target="popup" title="Einstellungen" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>');"><a href="#100" class="settings_icon" id="settings">&nbsp;</a></td>
+		        </tr>
+		      </table>
+		      <div class="hover_bg clearfix right" id="close_settings_icon_area" onclick="YiidSlider.slideOut(event); return false;">
+	          <a id="slide_arrow_opened" class="close_settings_icon" title="<?php echo __("SETTINGS_TITLE"); ?>">&nbsp;</a>
+	        </div>
+		    </div>
+		  </div>
+		  <!-- Area to be slided -->
+
+	<?php } ?>
 
 </div>
-<?php } ?>
-<div id="container_used" <?php if($lIsUsed === false) { ?>style="display: none;"<?php } ?>>
-  <div id="settings_button" class="rounded_corners normal_button_area" target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>');">
-		<?php if(is_numeric($lIsUsed)) { ?>
-      <p id="liked-text" class="left"><?php echo __('POS_BUTTON_ACTION_VALUE', $pType); ?></p>
-		<?php } elseif ($lIsUsed == -1) { ?>
-		  <p id="disliked-text" class="left"><?php echo __('NEG_BUTTON_ACTION_VALUE', $pType); ?></p>
-		<?php } else { ?>
-		  <p id="liked-text" class="left" style="display:none;"><?php echo __('POS_BUTTON_ACTION_VALUE', $pType); ?></p>
-		  <p id="disliked-text" class="left" style="display:none;"><?php echo __('NEG_BUTTON_ACTION_VALUE', $pType); ?></p>
-		<?php } ?>
-  </div>
-</div>
 
-<!-- Text information -->
-<div id="additional_text_area" style="color: <?php echo $lFontcolor; ?>">
-    <p id="info-liked">
-      <span id="you-like" <?php if($lIsUsed != 1) { ?>style="display: none;" <?php } ?>><?php echo __('POS_TEXT_VALUE_1', $pType); ?></span>
-      <span class="counter"><?php echo $lSocialObjectArray['l_cnt']; ?></span><?php echo __('POS_TEXT_VALUE_2', $pType); ?>
-    </p>
-    <p id="info-disliked">
-      <span id="you-dislike" <?php if($lIsUsed != -1) { ?>style="display: none;" <?php } ?>><?php echo __('NEG_TEXT_VALUE_1', $pType); ?></span>
-      <span class="counter"><?php echo $lSocialObjectArray['d_cnt']; ?></span><?php echo __('NEG_TEXT_VALUE_2', $pType); ?>
-    </p>
-</div>
-<!-- /Text information -->
+<div id="container_used" class="left" <?php if($lIsUsed === false) { ?>style="display: none;"<?php } ?>>
+    <div id="used_button" class="normal_button_area <?php echo (!$pFullShortVersion ? 'normal_space' : 'small_space') ?>_used" target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>');">
+
+      <?php if(is_numeric($lIsUsed)) { ?>
+
+        <?php if($pFullShortVersion) { ?>
+          <p class="like_icon" id="liked-text" title="<?php echo __('POS_BUTTON_ACTION_VALUE', $pType); ?>">&nbsp;</p>
+        <?php } else { ?>
+          <p id="liked-text" class="left"><?php echo __('POS_BUTTON_ACTION_VALUE', $pType); ?></p>
+        <?php } ?>
+
+      <?php } elseif ($lIsUsed == -1) { ?>
+
+        <?php if($pFullShortVersion) { ?>
+          <p class="dislike_icon" id="disliked-text" title="<?php echo __('NEG_BUTTON_ACTION_VALUE', $pType); ?>">&nbsp;</p>
+        <?php } else { ?>
+          <p id="disliked-text" class="left"><?php echo __('NEG_BUTTON_ACTION_VALUE', $pType); ?></p>
+        <?php } ?>
+
+
+      <?php } else { ?>
+
+        <?php if($pFullShortVersion) { ?>
+          <p class="like_icon" id="liked-text" title="<?php echo __('POS_BUTTON_ACTION_VALUE', $pType); ?>" style="display:none;">&nbsp;</p>
+          <p class="dislike_icon" id="disliked-text" title="<?php echo __('NEG_BUTTON_ACTION_VALUE', $pType); ?>" style="display:none;">&nbsp;</p>
+        <?php } else { ?>
+	        <p id="liked-text" class="left" style="display:none;"><?php echo __('POS_BUTTON_ACTION_VALUE', $pType); ?></p>
+	        <p id="disliked-text" class="left" style="display:none;"><?php echo __('NEG_BUTTON_ACTION_VALUE', $pType); ?></p>
+	      <?php } ?>
+
+      <?php } ?>
+    </div>
+  </div>
+
+  <!-- Text information -->
+  <div id="additional_text_area" class="left big_space_to_left" style="color: <?php echo $lFontcolor; ?>">
+      <p id="info-liked">
+        <span id="you-like" <?php if($lIsUsed != 1) { ?>style="display: none;" <?php } ?>><?php echo __('POS_TEXT_VALUE_1', $pType); ?></span>
+        <span class="counter"><?php echo $lSocialObjectArray['l_cnt']; ?></span><?php echo __('POS_TEXT_VALUE_2', $pType); ?>
+      </p>
+      <p id="info-disliked">
+        <span id="you-dislike" <?php if($lIsUsed != -1) { ?>style="display: none;" <?php } ?>><?php echo __('NEG_TEXT_VALUE_1', $pType); ?></span>
+        <span class="counter"><?php echo $lSocialObjectArray['d_cnt']; ?></span><?php echo __('NEG_TEXT_VALUE_2', $pType); ?>
+      </p>
+  </div>
+  <!-- /Text information -->
+
 </body>
 </html>

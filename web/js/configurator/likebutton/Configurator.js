@@ -1,7 +1,4 @@
-/**
- * @combine configurator
- */
-
+/*NOCOMBINE*/
 jQuery.fn.toggleValue = function(){
 	var lText = jQuery(this).val();
 	var lNewText = '';
@@ -46,7 +43,9 @@ var Configurator = {
   init: function(pCulture) {
     Configurator.bindClicks();
     Configurator.initFormFields();
-    document.likebuttonform.reset();
+    if (typeof(document.likebuttonform) !=  "undefined"){
+      document.likebuttonform.reset();
+    }
     Configurator.initColorpicker();
     Configurator.initType(pCulture);
   },
@@ -64,6 +63,10 @@ var Configurator = {
     if(jQuery('#likebutton_bt').attr('checked') === false) {
       Configurator.aFormfFields['likebutton[bt]'] = '';
     }
+    // on default checkboxes aren't set, so set the checkbox-key and insert empty string
+    if(jQuery('#likebutton_sh').attr('checked') === false) {
+      Configurator.aFormfFields['likebutton[sh]'] = '';
+    }
   },
 
   /**
@@ -78,6 +81,13 @@ var Configurator = {
       //make a new object for checkbox and push it to the form-fields-array
       var lObject = {};
       lObject.name = 'likebutton[bt]';
+      lObject.value = '';
+      lFormFields.push(lObject);
+    }
+    if(jQuery('#likebutton_sh').attr('checked') === false) {
+      //make a new object for checkbox and push it to the form-fields-array
+      var lObject = {};
+      lObject.name = 'likebutton[sh]';
       lObject.value = '';
       lFormFields.push(lObject);
     }
@@ -102,8 +112,12 @@ var Configurator = {
       var lTarget = pEvent.target;
       var lTargetId = lTarget.id;
       //don't bind the click to the textfields and the generate-button
-      if(lTargetId != "likebutton_url" && lTargetId != "likebutton_w" && lTargetId != 'likebutton_bt' && lTargetId != 'likebutton_email' && lTargetId != 'likebutton_fc') {
-        Configurator.updateWidget();
+      if(lTargetId != "likebutton_url" && lTargetId != "likebutton_w" && lTargetId != 'likebutton_bt' && lTargetId != 'likebutton_sh' && lTargetId != 'likebutton_email' && lTargetId != 'likebutton_fc') {
+      	Configurator.updateWidget();
+      	
+      	if(lTargetId == 'likebutton_l' || lTargetId == 'type-en') {
+        	Configurator.updateWidthLabel(jQuery('.likebutton_t'), jQuery('#likebutton_l'));
+      	}
       }
     });
 
@@ -113,7 +127,7 @@ var Configurator = {
       	Configurator.changeType(this);
       	Configurator.updateWidthLabel(jQuery('.likebutton_t'), this);
       }
-      
+
       if(jQuery(this).hasClass('likebutton_t')) {
       	Configurator.updateWidthLabel(this, jQuery('#likebutton_l'));
       }
@@ -124,6 +138,13 @@ var Configurator = {
     //click for the checkbox: we need this, because if you bind this on the body-click the check don't work
     jQuery('#likebutton_bt').live("click.checkbt", function() {
       Configurator.updateWidget();
+    	Configurator.updateWidthLabel(jQuery('.likebutton_t'), jQuery('#likebutton_l'));
+    });
+
+    //checkbox for short version
+    jQuery('#likebutton_sh').live("click.checkbt", function() {
+      Configurator.updateWidget();
+    	Configurator.updateWidthLabel(jQuery('.likebutton_t'), jQuery('#likebutton_l'));
     });
 
     //click for the generate-button. the updateWidget-func needs a param that we know, that the generate was clicked
@@ -283,10 +304,16 @@ var Configurator = {
   		var lGlobalType = 'full';
   	}
   	
+  	if(jQuery('#likebutton_sh').attr('checked') === false) {
+  		var lShortVersion = '';
+  	} else {
+  		var lShortVersion = 1;
+  	}
+  	
   	jQuery.ajax({
       type: "POST",
       url: '/likebutton/update_width_label',
-      data: { fuck_ie: new Date().getTime(), type: lType, lang: lLanguage, global_type: lGlobalType },
+      data: { fuck_ie: new Date().getTime(), type: lType, lang: lLanguage, global_type: lGlobalType, short_version: lShortVersion },
       dataType: "json",
       success: function (response) {
         jQuery('#width_value').empty();
