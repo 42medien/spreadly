@@ -35,8 +35,6 @@ foreach ($lIds as $key => $value) {
       unset($lOinlinIdentity);
     }
 
-    $lUsersConnected = array_filter($lUsersConnected);
-    $lOiIds = array_filter($lOiIds);
     UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
     unset($lUsersConnected);
     unset($lOiIds);
