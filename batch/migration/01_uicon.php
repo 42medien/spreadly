@@ -27,7 +27,7 @@ foreach ($lIds as $key => $value) {
     $lUsersConnected = array();
     $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
     foreach ($lOiIds as $lOi) {
-      $lOinlinIdentity = OnlineIdentityConTable::getInstance()->find($lOi);
+      $lOinlinIdentity = OnlineIdentityTable::getInstance()->find($lOi);
       $lUsersConnected[] = UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($lOinlinIdentity);
     }
     UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
