@@ -39,6 +39,7 @@ foreach ($lIds as $key => $value) {
   //  UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
     unset($lUsersConnected);
     unset($lOiIds);
+    $lOiId->free();
   }
   unset($lUiCons);
   unset($lUserId);
