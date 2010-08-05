@@ -33,6 +33,7 @@ foreach ($lIds as $key => $value) {
       $lOinlinIdentity->free();
       unset($lOinlinIdentity);
     }
+    array_filter($lUsersConnected);
     UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
 
   }
