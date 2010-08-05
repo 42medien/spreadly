@@ -20,16 +20,18 @@ $lQuery = Doctrine_Query::create()->from('User u')->select('u.id');
 
 $lIds = $lQuery->fetchArray();
 foreach ($lIds as $key => $value) {
-  echo $value['id']."\r\n";
   $lUserId = $value['id'];
   $lUiCons = UserIdentityConTable::getOnlineIdentityIdsForUser($lUserId);
-  echo "owned:";
-  print_r($lUiCons);
-  echo "\r\n";
-  //UserRelationTable::updateOwnedIdentities($lUserId, $lUiCons);
-  echo "contacts: \r\n";
+  UserRelationTable::updateOwnedIdentities($lUserId, $lUiCons);
   foreach ($lUiCons as $lOiId) {
-    print_r(OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId)) ;
+    $lUsersConnected = array();
+    $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
+    foreach ($lOiIds as $lOi) {
+      $lOinlinIdentity = OnlineIdentityConTable::getInstance()->find($lOi);
+      $lUsersConnected[] = UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($lOinlinIdentity);
+    }
+    UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
+
   }
   echo "######### \r\n\r\n";
 }
