@@ -41,11 +41,14 @@ foreach ($lIds as $key => $value) {
     unset($lUsersConnected);
     unset($lOiIds);
   }
-  unset($lUiCons);
-  unset($lUserId);
 
   echo "user ".$lUserId. "done";
   echo "######### \r\n\r\n";
+
+  unset($lUiCons);
+  $lUiCons = null;
+  unset($lUserId);
+  $lUserId = null;
 
 }
 
