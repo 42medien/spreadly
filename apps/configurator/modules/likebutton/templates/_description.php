@@ -9,5 +9,5 @@
 
 <div id="desc_right">
   <p class="important-text"><?php echo __('YIID_IT_DESCRIPTION_2', null, 'configurator'); ?></p>
-  <?php echo cdn_image_tag('/img/configurator/yiid_button_spread_wo_buzz.png', array('alt' => 'yiid', 'id' => 'spread_image')); ?>
+  <?php echo cdn_image_tag('/img/global/yiid_button_spread_wo_buzz.png', array('alt' => 'yiid', 'id' => 'spread_image')); ?>
 </div>

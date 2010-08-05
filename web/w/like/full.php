@@ -44,7 +44,7 @@ $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Yiid it! Button</title>
-<script type="text/javascript" src="/js/widget/QuicksilverFullNew.min.js"></script>
+<script type="text/javascript" src="/js/widget/Full.js"></script>
 <script type="text/javascript">
   <?php echo printI18nJSObject($pType); ?>
   YiidWidget.init("<?php echo $pUrl; ?>", "<?php echo $pType; ?>", "<?php echo urlencode($_GET['title']); ?>", "<?php echo urlencode($_GET['description']); ?>", "<?php echo urlencode($_GET['photo']); ?>");
@@ -53,7 +53,7 @@ $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
   YiidRequest.aDislikeAction = "<?php echo LikeSettings::JS_DISLIKE_PATH; ?>";
   YiidCookie.aDomain = "<?php echo LikeSettings::COOKIE_DOMAIN; ?>";
 </script>
-<link rel="stylesheet" href="/css/widget/ButtonV2.css" type="text/css" media="screen, projection" />
+<link rel="stylesheet" href="/css/widget/Button.css" type="text/css" media="screen, projection" />
 </head>
 <body>
 
