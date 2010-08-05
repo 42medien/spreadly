@@ -34,10 +34,10 @@ foreach ($lIds as $key => $value) {
 
   }
 
-destruct($lOiIds);
-destruct($lOinlinIdentity);
-destruct($lUiCons);
-destruct($lUsersConnected);
+unset($lOiIds);
+unset($lOinlinIdentity);
+unset($lUiCons);
+unset($lUsersConnected);
   $lUiCons = null;
   $lOiIds = null;
   $lUsersConnected = null;
