@@ -24,6 +24,7 @@ foreach ($lIds as $key => $value) {
 
   $lUserId = $value['id'];
   $lUiCons = UserIdentityConTable::getOnlineIdentityIdsForUser($lUserId);
+  echo memory_get_usage() . " - ". count($lUiCons)."\r\n";
 //  UserRelationTable::updateOwnedIdentities($lUserId, $lUiCons);
 
   foreach ($lUiCons as $lOiId) {
@@ -39,7 +40,6 @@ foreach ($lIds as $key => $value) {
   //  UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
     unset($lUsersConnected);
     unset($lOiIds);
-    $lOiId->free();
   }
   unset($lUiCons);
   unset($lUserId);
