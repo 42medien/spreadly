@@ -38,6 +38,8 @@ foreach ($lIds as $key => $value) {
     $lUsersConnected = array_filter($lUsersConnected);
     $lOiIds = array_filter($lOiIds);
     UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
+    unset($lUsersConnected);
+    unset($lOiIds);
   }
 
     echo "user ".$lUserId. "done";
