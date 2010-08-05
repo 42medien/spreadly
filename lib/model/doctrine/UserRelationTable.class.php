@@ -41,7 +41,7 @@ class UserRelationTable extends Doctrine_Table
       $pIdentities = array($pIdentities);
     }
     $lQueryArray = array('$addToSet' => array('owned_oi' => array('$each' => $pIdentities)));
-    return $lCollection->update(array('user_id' => $pUserId), $lQueryArray);
+    return $lCollection->save(array('user_id' => $pUserId), $lQueryArray);
   }
 
 

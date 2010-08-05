@@ -21,7 +21,6 @@ $lQuery = Doctrine_Query::create()->from('User u')->select('u.id');
 $lIds = $lQuery->fetchArray();
 foreach ($lIds as $key => $value) {
 
-  $lUserId = $value['id'];
   $lUiCons = UserIdentityConTable::getOnlineIdentityIdsForUser($lUserId);
   UserRelationTable::updateOwnedIdentities($lUserId, $lUiCons);
 
@@ -35,9 +34,9 @@ foreach ($lIds as $key => $value) {
       unset($lOinlinIdentity);
     }
     UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
-
   }
-  echo "user ".$lUserId. "done";
+
+    echo "user ".$lUserId. "done";
   echo "######### \r\n\r\n";
 
 }
