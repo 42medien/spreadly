@@ -30,7 +30,7 @@ foreach ($lIds as $key => $value) {
     $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
     foreach ($lOiIds as $lOi) {
       $lOinlinIdentity = OnlineIdentityTable::getInstance()->find($lOi);
-      $lUsersConnected = array_merge($lUsersConnected, UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($lOinlinIdentity));
+      $lUsersConnected[] = UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($lOinlinIdentity);
       $lOinlinIdentity->free();
       unset($lOinlinIdentity);
     }
@@ -40,7 +40,7 @@ foreach ($lIds as $key => $value) {
     unset($lOiIds);
   }
 
-    echo "user ".$lUserId. "done";
+  echo "user ".$lUserId. "done";
   echo "######### \r\n\r\n";
 
 }
