@@ -23,7 +23,7 @@ foreach ($lIds as $key => $value) {
 
   $lUserId = $value['id'];
   $lUiCons = UserIdentityConTable::getOnlineIdentityIdsForUser($lUserId);
-  UserRelationTable::updateOwnedIdentities($lUserId, $lUiCons);
+//  UserRelationTable::updateOwnedIdentities($lUserId, $lUiCons);
 
   foreach ($lUiCons as $lOiId) {
     $lUsersConnected = array();
@@ -35,7 +35,7 @@ foreach ($lIds as $key => $value) {
       unset($lOinlinIdentity);
     }
 
-    UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
+  //  UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
     unset($lUsersConnected);
     unset($lOiIds);
   }
