@@ -30,9 +30,9 @@ foreach ($lIds as $key => $value) {
     foreach ($lOiIds as $lOi) {
       $lOinlinIdentity = OnlineIdentityTable::getInstance()->find($lOi);
       $lUsersConnected[] = UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($lOinlinIdentity);
+      $lOinlinIdentity->free();
       unset($lOinlinIdentity);
     }
-   // $lUsersConnected = array_values($lUsersConnected);
     UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
 
   }
