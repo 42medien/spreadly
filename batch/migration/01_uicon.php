@@ -28,7 +28,7 @@ foreach ($lIds as $key => $value) {
 
   foreach ($lUiCons as $lOiId) {
     $lUsersConnected = array();
-    $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
+ //   $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
   /*  foreach ($lOiIds as $lOi) {
       $lOnlineIdentity = OnlineIdentityTable::getInstance()->find($lOi);
       $lUsersConnected[] = UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($lOnlineIdentity);
