@@ -5,8 +5,8 @@ all:
   translation:
     class: sfDoctrineDatabase
     param:
-      dsn:        mysql:host=donkeykong;dbname=yiid_18n 
-      username:   yiid_18n 
+      dsn:        mysql:dbname=yiid_i18n;host=donkeykong 
+      username:   yiid_i18n 
       password:   fdsmolds32dfs
       attributes:
         default_table_collate: utf8_general_ci
