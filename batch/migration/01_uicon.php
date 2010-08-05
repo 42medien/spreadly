@@ -30,10 +30,13 @@ foreach ($lIds as $key => $value) {
     $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
     foreach ($lOiIds as $lOi) {
       $lOinlinIdentity = OnlineIdentityTable::getInstance()->find($lOi);
-      $lUsersConnected[] = UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($lOinlinIdentity);
+      $lUsersConnected = array_merge($lUsersConnected, UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($lOinlinIdentity));
       $lOinlinIdentity->free();
       unset($lOinlinIdentity);
     }
+
+    $lUsersConnected = array_filter($lUsersConnected);
+    $lOiIds = array_filter($lOiIds);
     UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
   }
 
