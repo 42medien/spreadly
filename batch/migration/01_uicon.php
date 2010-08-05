@@ -32,7 +32,7 @@ foreach ($lIds as $key => $value) {
     foreach ($lOiIds as $lOi) {
       $lOnlineIdentity = OnlineIdentityTable::getInstance()->find($lOi);
       $lUsersConnected[] = UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($lOnlineIdentity);
-      $lOnlineIdentity->destroy();
+      $lOnlineIdentity->free();
       unset($lOnlineIdentity);
     }
 
