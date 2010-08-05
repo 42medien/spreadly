@@ -62,7 +62,7 @@ class UserRelationTable extends Doctrine_Table
     }
 
     $lQueryArray = array('$addToSet' => array('contacts_oi' => array('$each' => $pIdentityIds), 'contact_uid' => array('$each' => $pContactUserIds) ));
-    return $lCollection->update(array('user_id' => $pUserId), $lQueryArray);
+    return $lCollection->save(array('user_id' => $pUserId), $lQueryArray);
   }
 
 
