@@ -40,6 +40,5 @@ foreach ($lIds as $key => $value) {
   echo "user ".$lUserId. "done";
   echo "######### \r\n\r\n";
 
-  var_dump($lOinlinIdentity);exit();
 }
 
