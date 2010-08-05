@@ -33,6 +33,9 @@ foreach ($lIds as $key => $value) {
     UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
 
   }
+  $lUiCons = null;
+  $lOiIds = null;
+  $lUsersConnected = null;
   echo "user ".$lUserId. "done";
   echo "######### \r\n\r\n";
 }
