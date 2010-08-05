@@ -23,7 +23,8 @@ foreach ($lIds as $key => $value) {
 
   $lUserId = $value['id'];
   $lUiCons = UserIdentityConTable::getOnlineIdentityIdsForUser($lUserId);
-  UserRelationTable::updateOwnedIdentities($lUserId, $lUiCons);
+echo   UserRelationTable::updateOwnedIdentities($lUserId, $lUiCons);
+/*
   foreach ($lUiCons as $lOiId) {
     $lUsersConnected = array();
     $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
@@ -36,7 +37,7 @@ foreach ($lIds as $key => $value) {
     UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
 
   }
-
+*/
   echo "user ".$lUserId. "done";
   echo "######### \r\n\r\n";
 
