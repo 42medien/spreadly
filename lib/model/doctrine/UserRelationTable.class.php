@@ -61,6 +61,8 @@ class UserRelationTable extends Doctrine_Table
       $pIdentityIds = array($pIdentityIds);
     }
 
+
+
     $lQueryArray = array('$addToSet' => array('contacts_oi' => array('$each' => array_filter($pIdentityIds)), 'contact_uid' => array('$each' => array_filter($pContactUserIds)) ));
     return $lCollection->update(array('user_id' => $pUserId), $lQueryArray, array('upsert' => true));
   }
@@ -123,8 +125,10 @@ class UserRelationTable extends Doctrine_Table
       $lUsersConnected = array();
       $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
       foreach ($lOiIds as $lOi) {
-        $lUsersConnected[] = UserIdentityConTable::getUserIdsConnectedToOnlineIdentityId($lOi);
+        $lUsersConnected = array_merge($lUsersConnected, UserIdentityConTable::getUserIdsConnectedToOnlineIdentityId($lOi));
       }
+
+      var_dump($lUsersConnected);die();exit();
 
       UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
     }
