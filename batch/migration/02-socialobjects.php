@@ -20,12 +20,16 @@ foreach ($lActivities as $lActivity) {
   $lUserId = $lActivity->getUId();
   $pOnlineIdenities = UserIdentityConTable::getOnlineIdentitiesForUser($lUserId);
 
+  $lOiIds = array();
+  $lServices = array();
   foreach ($pOnlineIdenities as $oi) {
     if ($oi->getSocialPublishingEnabled()) {
-      $lDings[] = $oi->getId();
+      $lOiIds[] = $oi->getId();
+      $lServices[] = $oi->getCommunityId();
     }
   }
-  echo $lUserId ."  \r\n";
-  print_r($lDings);
-  echo " ###### \r\n";
+
+  $lSocialObject = SocialObjectTable::retrieveByUrlHash($lActivity->getUrlHash());
+  $lSocialObject->updateObjectActingIdentities($lOiIds, $lServices);
+  echo $lUserId ." - ".count($lOiIds)." \r\n";
 }

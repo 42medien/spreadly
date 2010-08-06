@@ -52,11 +52,18 @@ class SocialObject extends BaseSocialObject
     }
 
     SocialObjectTable::updateObjectInMongoDb(array("_id" => new MongoId($this->getId())),
-                                             array( '$inc' => array($lCounterField => 1 ),
+    array( '$inc' => array($lCounterField => 1 ),
                                                     '$addToSet' => array('oiids' => array('$each' => $pVerifiedOnlineIdentitys),
                                                                          'cids' => array('$each' => $pServices),
                                                                          'alias' => array('$each' => array(md5($pUrl)))))
     );
+  }
+
+
+  public function updateObjectActingIdentities($pVerifiedOnlineIdentitys, $pServices) {
+    SocialObjectTable::updateObjectInMongoDb(array("_id" => new MongoId($this->getId())),
+    array( '$addToSet' => array('oiids' => array('$each' => $pVerifiedOnlineIdentitys),
+                              'cids' => array('$each' => $pServices))));
   }
 
 
