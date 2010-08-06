@@ -37,12 +37,14 @@ class UserRelationTable extends Doctrine_Table
   public static function updateOwnedIdentities($pUserId, $pIdentities) {
     $lCollection = self::getMongoCollection();
 
+    $pUserId = intval($pUserId);
+
     if (!is_array($pIdentities)) {
       $pIdentities = array($pIdentities);
     }
     $lQueryArray = array('$addToSet' => array('owned_oi' => array('$each' => $pIdentities)));
-    print_r($lQueryArray);
-    return $lCollection->save(array('user_id' => $pUserId), $lQueryArray);
+
+    return $lCollection->update(array('user_id' => $pUserId), $lQueryArray, array('upsert' => true));
   }
 
 
@@ -63,7 +65,7 @@ class UserRelationTable extends Doctrine_Table
     }
 
     $lQueryArray = array('$addToSet' => array('contacts_oi' => array('$each' => array_filter($pIdentityIds)), 'contact_uid' => array('$each' => array_filter($pContactUserIds)) ));
-    return $lCollection->save(array('user_id' => $pUserId), $lQueryArray);
+    return $lCollection->update(array('user_id' => $pUserId), $lQueryArray, array('upsert' => true));
   }
 
 

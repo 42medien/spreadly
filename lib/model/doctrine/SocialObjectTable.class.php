@@ -35,7 +35,7 @@ class SocialObjectTable extends Doctrine_Table
    */
   public static function updateObjectInMongoDb($pIdentifier, $pManipualtior) {
     $lCollection = self::getMongoCollection();
-    $lCollection->update($pIdentifier, $pManipualtior);
+    $lCollection->update($pIdentifier, $pManipualtior, array('upsert' => true));
   }
 
 
