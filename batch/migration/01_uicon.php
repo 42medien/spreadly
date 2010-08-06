@@ -35,8 +35,9 @@ foreach ($lIds as $key => $value) {
     $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
     foreach ($lOiIds as $lOi) {
       $lOnlineIdentity = OnlineIdentityTable::retrieveWithFree($lOi);
+//      var_dump($lOnlineIdentity);
   //    $lUsersConnected[] = UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($lOnlineIdentity);
-  //    $lOnlineIdentity->free();
+      $lOnlineIdentity = null;
       unset($lOnlineIdentity);
     }
 
