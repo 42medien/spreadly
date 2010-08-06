@@ -311,13 +311,20 @@ class YiidActivityTable extends Doctrine_Table
    * @return unknown_type
    */
   public static function retrieveByYiidActivityId($pId){
-    $lResults = array();
     $lCollection = self::getMongoCollection();
-
     $lMongoCursor = $lCollection->find(array("so_id" => $pId ));
 
     return self::hydrateMongoCollectionToObjects($lMongoCursor);
   }
 
+
+  public static function retrieveAllObjects($pLimit = 0, $pOffset = 0) {
+    $lCollection = self::getMongoCollection();
+    $lMongoCursor = $lCollection->find();
+    $lMongoCursor->limit($pLimit)->skip($pOffset);
+
+
+    return self::hydrateMongoCollectionToObjects($lMongoCursor);
+  }
 
 }
