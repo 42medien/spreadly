@@ -47,6 +47,7 @@ foreach ($lIds as $key => $value) {
     unset($lUsersConnected);
     $lOiIds = array();
     unset($lOiIds);
+    apc_clear_cache();
   }
 
 
