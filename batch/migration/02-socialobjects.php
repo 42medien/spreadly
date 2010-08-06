@@ -30,6 +30,15 @@ foreach ($lActivities as $lActivity) {
   }
 
   $lSocialObject = SocialObjectTable::retrieveByUrlHash($lActivity->getUrlHash());
-  $lSocialObject->updateObjectActingIdentities($lOiIds, $lServices);
-  echo $lUserId ." - ".count($lOiIds)." \r\n";
+  if (!$lSocialObject) {
+    $lSocialObject = SocialObjectTable::retrieveByUrl($lActivity->getUrl());
+  }
+  if ($lSocialObject) {
+    $lSocialObject->updateObjectActingIdentities($lOiIds, $lServices);
+    echo $lUserId ." - ".count($lOiIds)." \r\n";
+  }
+  else {
+
+    echo "################################################### " .$lActivity->getUrl()."\r\n";
+  }
 }
