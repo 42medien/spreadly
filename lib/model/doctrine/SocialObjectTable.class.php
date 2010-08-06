@@ -66,7 +66,7 @@ class SocialObjectTable extends Doctrine_Table
   }
 
 
-  public static function retrieveHotObjets($pUserId, $pFriendId = null, $pCommunityId = null, $pRange = 7, $pPage = 1, $pLimit = 30)  {
+  public static function retrieveHotObjets($pUserId, $pFriendId = null, $pCommunityId = null, $pRange = 30, $pPage = 1, $pLimit = 30)  {
     $lCollection = self::getMongoCollection();
     $lRelevantOis = self::getRelevantOnlineIdentitysForQuery($pUserId, $pFriendId);
     $lQueryArray = self::initializeBasicFilterQuery($lRelevantOis, $pCommunityId, $pRange);
@@ -78,7 +78,7 @@ class SocialObjectTable extends Doctrine_Table
   }
 
 
-  public static function retrieveFlopObjects($pUserId, $pFriendId = null, $pCommunityId = null, $pRange = 7, $pPage = 1, $pLimit = 30) {
+  public static function retrieveFlopObjects($pUserId, $pFriendId = null, $pCommunityId = null, $pRange = 30, $pPage = 1, $pLimit = 30) {
     $lCollection = self::getMongoCollection();
     $lRelevantOis = self::getRelevantOnlineIdentitysForQuery($pUserId, $pFriendId);
     $lQueryArray = self::initializeBasicFilterQuery($lRelevantOis, $pCommunityId, $pRange);
