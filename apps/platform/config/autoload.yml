@@ -2,3 +2,6 @@ autoload:
   vendor_oauth:
     path:      %SF_LIB_DIR%/vendor/OAuth
     recursive: off
+  vendor_open_graph:
+    path:      %SF_LIB_DIR%/vendor/OpenGraph
+    recursive: off
