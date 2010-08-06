@@ -39,9 +39,9 @@ class OnlineIdentityTable extends Doctrine_Table {
    */
   public static function retrieveByIdentifier($pIdentifier, $pCommunityId, $pType = self::TYPE_IDENTITY) {
     $lOnlineIdentity = Doctrine_Query::create()->
-      from('OnlineIdentity oi')->
-      where('oi.identifier = ? AND oi.identity_type = ? AND oi.community_id = ?', array($pIdentifier, $pType, $pCommunityId))
-      ->fetchOne();
+    from('OnlineIdentity oi')->
+    where('oi.identifier = ? AND oi.identity_type = ? AND oi.community_id = ?', array($pIdentifier, $pType, $pCommunityId))
+    ->fetchOne();
     return $lOnlineIdentity;
   }
 
@@ -54,9 +54,9 @@ class OnlineIdentityTable extends Doctrine_Table {
    */
   public static function retrieveByAuthIdentifier($pAuthIdentifier) {
     $lOnlineIdentity = Doctrine_Query::create()
-      ->from('OnlineIdentity oi')
-      ->where('oi.auth_identifier = ?', $pAuthIdentifier)
-      ->fetchOne();
+    ->from('OnlineIdentity oi')
+    ->where('oi.auth_identifier = ?', $pAuthIdentifier)
+    ->fetchOne();
 
     return $lOnlineIdentity;
   }
@@ -71,11 +71,11 @@ class OnlineIdentityTable extends Doctrine_Table {
    */
   public static function retrieveWithFree($pId) {
     $q = Doctrine_Query::create()
-      ->from('OnlineIdentity oi')
-      ->where('oi.id = ?', $pId)
-      ->limit(1);
+    ->from('OnlineIdentity oi')
+    ->where('oi.id = ?', $pId)
+    ->limit(1);
 
-      $lOnlineIdentity  = $q->execute();
+    $lOnlineIdentity  = $q->execute();
     $q->free();
     return $lOnlineIdentity;
   }

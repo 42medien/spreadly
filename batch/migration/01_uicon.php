@@ -34,28 +34,15 @@ foreach ($lIds as $key => $value) {
     $lUsersConnected = array();
     $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
     foreach ($lOiIds as $lOi) {
-      $lOnlineIdentity = OnlineIdentityTable::retrieveWithFree($lOi);
-//      var_dump($lOnlineIdentity);
-  //    $lUsersConnected[] = UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($lOnlineIdentity);
-      $lOnlineIdentity->free();
-      $lOnlineIdentity = null;
-      unset($lOnlineIdentity);
+      //   $lOnlineIdentity = OnlineIdentityTable::retrieveWithFree($lOi);
+      //      var_dump($lOnlineIdentity);
+      $lUsersConnected[] = UserIdentityConTable::getUserIdsConnectedToOnlineIdentity( OnlineIdentityTable::retrieveWithFree($lOi));
+      //      $lOnlineIdentity->free();
+      //$lOnlineIdentity = null;
+      //  unset($lOnlineIdentity);
     }
 
     //  UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
-    $lUsersConnected = array();
-    unset($lUsersConnected);
-    $lOiIds = array();
-    unset($lOiIds);
-    //apc_clear_cache();
   }
-
-
-
-  unset($lUiCons);
-  $lUiCons = null;
-  unset($lUserId);
-  $lUserId = null;
-
 }
 
