@@ -21,7 +21,7 @@ foreach ($lActivities as $lActivity) {
   $pOnlineIdenities = UserIdentityConTable::getOnlineIdentitiesForUser($lUserId);
 
   foreach ($pOnlineIdenities as $oi) {
-    if ($oi->getSocialPulishingEnabled()) {
+    if ($oi->getSocialPublishingEnabled()) {
       $lDings[] = $oi->getId();
     }
   }
