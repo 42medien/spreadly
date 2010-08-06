@@ -72,7 +72,7 @@ class OnlineIdentityTable extends Doctrine_Table {
   public static function retrieveWithFree($pId) {
     $q = Doctrine_Query::create()
       ->from('OnlineIdentity oi')
-      ->where('oi.id = ?', pId)
+      ->where('oi.id = ?', $pId)
       ->limit(1);
 
       $lOnlineIdentity  = $q->execute();
