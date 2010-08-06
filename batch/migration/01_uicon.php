@@ -25,7 +25,7 @@ foreach ($lIds as $key => $value) {
   $lUserId = $value['id'];
 //  $lUiCons = UserIdentityConTable::getOnlineIdentityIdsForUser($lUserId);
 
-  echo memory_get_usage()/(1024*1024) . " - user ".  $value['id']. " - ". count($lUiCons)."\r\n";
+//  echo memory_get_usage()/(1024*1024) . " - user ".  $value['id']. " - ". count($lUiCons)."\r\n";
   UserRelationTable::updateOwnedIdentities($lUserId, UserIdentityConTable::getOnlineIdentityIdsForUser($lUserId));
   sleep(1);
   //
