@@ -28,13 +28,12 @@ foreach ($lIds as $key => $value) {
   echo memory_get_usage()/(1024*1024) . " - user ".  $value['id']. "\r\n";
   UserRelationTable::updateOwnedIdentities($lUserId, $lUiCons);
 
-  //
-
   foreach ($lUiCons as $lOiId) {
     $lUsersConnected = array();
     $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
     foreach ($lOiIds as $lOi) {
-      $lOnlineIdentity = OnlineIdentityTable::retrieveWithFree($lOi);
+      echo $lOi;
+  //    $lOnlineIdentity = OnlineIdentityTable::retrieveWithFree($lOi);
       //      var_dump($lOnlineIdentity);
       $lUsersConnected[] = UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($lOnlineIdentity);
       //      $lOnlineIdentity->free();
