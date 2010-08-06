@@ -70,7 +70,7 @@ class UserTable extends Doctrine_Table {
   public static function getFriendsForUser($pUserId) {
     $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
 
-    return UserTable::getInstance()->retrieveByPKs($lFriendIds);
+    return UserTable::getInstance()->retrieveByPKs($lFriendIds[0]);
 
   }
 }
