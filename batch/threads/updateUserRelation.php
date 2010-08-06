@@ -2,7 +2,7 @@
 
 require_once(dirname(__FILE__).'/../../config/ProjectConfiguration.class.php');
 
-$configuration = ProjectConfiguration::getApplicationConfiguration('platform', 'batch', false);
+$configuration = ProjectConfiguration::getApplicationConfiguration('platform', 'dev', true);
 
 sfContext::createInstance($configuration);
 
@@ -16,17 +16,18 @@ $dbManager->loadConfiguration();
 ini_set("max_execution_time", "180");
 ini_set('memory_limit','32M');
 
-
-
 $lUserId = $_GET[0];
-
+$logger->debug('XXXXXXXXXXXXXXXXXXXXXXXXXX:' . $lUserId  );
 
 $lUiCons = UserIdentityConTable::getOnlineIdentityIdsForUser($lUserId);
 
-echo memory_get_usage()/(1024*1024) . " - user ".  $value['id']. "\r\n";
-UserRelationTable::updateOwnedIdentities($lUserId, $lUiCons);
+$logger->debug('XXXXXXXXXXXXXXXXXXXXXXXXXX: user '. $lUserId . print_r($lUiCons, true) );
 
+//UserRelationTable::updateOwnedIdentities($lUserId, $lUiCons);
+
+$logger->debug('XXXXXXXXXXXXXXXXXXXXXXXXXX:' . $lUserId  );
 foreach ($lUiCons as $lOiId) {
+
   $lUsersConnected = array();
   $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
   foreach ($lOiIds as $lOi) {

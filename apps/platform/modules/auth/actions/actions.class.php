@@ -34,7 +34,7 @@ class authActions extends sfActions {
         $lUser = UserTable::getByIdentifierAndPassword($request->getParameter('signin_user'), $request->getParameter('signin_password'));
         // try to sign in and redirect him to the stream
         $this->getUser()->signIn($lUser);
-        UpdateUserRelationThread($lUser->getId());
+        UserRelationTable::doShit($lUser->getId());
         $this->redirect("@stream");
       } catch (Exception $e) {
         // catch the error and tell the user about it
@@ -53,7 +53,7 @@ class authActions extends sfActions {
     $lUser = $lObject->doSignin($this->getUser(), $lRequestToken->toOAuthToken());
 
     $this->getUser()->signIn($lUser);
-    UpdateUserRelationThread($lUser->getId());
+    UserRelationTable::doShit($lUser->getId());
 
     $this->redirect('@stream');
   }
@@ -62,8 +62,7 @@ class authActions extends sfActions {
     $lObject = AuthApiFactory::factory("facebook");
     $lUser = $lObject->doSignin($this->getUser(), $request->getParameter("code"));
 
-    $this->getUser()->signIn($lUser);
-    UpdateUserRelationThread($lUser->getId());
+    $this->getUser()->signIn($lUser);UserRelationTable::doShit($lUser->getId());
 
     $this->redirect('@stream');
   }

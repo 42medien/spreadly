@@ -37,13 +37,10 @@ class UserRelationTable extends Doctrine_Table
   public static function updateOwnedIdentities($pUserId, $pIdentities) {
     $lCollection = self::getMongoCollection();
 
-    $pUserId = intval($pUserId);
-
     if (!is_array($pIdentities)) {
       $pIdentities = array($pIdentities);
     }
     $lQueryArray = array('$addToSet' => array('owned_oi' => array('$each' => $pIdentities)));
-
     return $lCollection->update(array('user_id' => $pUserId), $lQueryArray, array('upsert' => true));
   }
 
@@ -113,5 +110,26 @@ class UserRelationTable extends Doctrine_Table
     return $lObject;
   }
 
+
+  public static function doShit($pUserId) {
+    $lUserId = $pUserId;
+
+    $lUiCons = UserIdentityConTable::getOnlineIdentityIdsForUser($lUserId);
+
+    UserRelationTable::updateOwnedIdentities($lUserId, $lUiCons);
+
+    foreach ($lUiCons as $lOiId) {
+
+      $lUsersConnected = array();
+      $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
+      foreach ($lOiIds as $lOi) {
+        $lUsersConnected[] = UserIdentityConTable::getUserIdsConnectedToOnlineIdentityId($lOi);
+      }
+
+      UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
+    }
+
+
+  }
 
 }
