@@ -23,28 +23,28 @@ $lQuery->free();
 foreach ($lIds as $key => $value) {
 
   $lUserId = $value['id'];
-//  $lUiCons = UserIdentityConTable::getOnlineIdentityIdsForUser($lUserId);
+  $lUiCons = UserIdentityConTable::getOnlineIdentityIdsForUser($lUserId);
 
   echo memory_get_usage()/(1024*1024) . " - user ".  $value['id']. "\r\n";
-  UserRelationTable::updateOwnedIdentities($lUserId, UserIdentityConTable::getOnlineIdentityIdsForUser($lUserId));
+  UserRelationTable::updateOwnedIdentities($lUserId, $lUiCons);
 
   //
-/*
+
   foreach ($lUiCons as $lOiId) {
     $lUsersConnected = array();
     //   $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
-      foreach ($lOiIds as $lOi) {
-    $lOnlineIdentity = OnlineIdentityTable::getInstance()->find($lOi);
-    $lUsersConnected[] = UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($lOnlineIdentity);
-    $lOnlineIdentity->free();
-    unset($lOnlineIdentity);
+    foreach ($lOiIds as $lOi) {
+      $lOnlineIdentity = OnlineIdentityTable::getInstance()->find($lOi);
+      $lUsersConnected[] = UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($lOnlineIdentity);
+      $lOnlineIdentity->free();
+      unset($lOnlineIdentity);
 
-    // }
+    }
 
     //  UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
     unset($lUsersConnected);
     unset($lOiIds);
-  }*/
+  }
 
 
 
