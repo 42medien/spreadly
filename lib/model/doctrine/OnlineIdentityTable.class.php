@@ -63,25 +63,6 @@ class OnlineIdentityTable extends Doctrine_Table {
 
 
   /**
-   * gets an OnlineIdentifier by his auth identifier
-   *
-   * @author Matthias Pfefferle
-   * @param string $pAuthIdentifier
-   * @return mixed OnlineIdentity|null
-   */
-  public static function retrieveWithFree($pId) {
-    $q = Doctrine_Query::create()
-    ->from('OnlineIdentity oi')
-    ->where('oi.id = ?', $pId)
-    ->limit(1);
-
-    $lOnlineIdentity  = $q->execute();
-    $q->free();
-    return $lOnlineIdentity;
-  }
-
-
-  /**
    * add a new OnlineIdentity object
    *
    * @author Matthias Pfefferle
