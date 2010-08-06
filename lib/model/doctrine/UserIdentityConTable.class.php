@@ -108,7 +108,7 @@ class UserIdentityConTable extends Doctrine_Table {
    */
   public static function getUserIdsConnectedToOnlineIdentity(OnlineIdentity $pOnlineIdentity) {
     $lIdsToReturn = array();
-    $lQuery = self::createConnectedToOnlineIdentityQuery($pOnlineIdentity);
+    $lQuery = self::createConnectedToOnlineIdentityQuery($pOnlineIdentity->getId());
     $lQuery->select('u.id');
 
     $lIds = $lQuery->fetchArray();
@@ -119,16 +119,30 @@ class UserIdentityConTable extends Doctrine_Table {
     return $lIdsToReturn;
   }
 
+  public static function getUserIdsConnectedToOnlineIdentityId($pOnlineIdentityId) {
+    $lIdsToReturn = array();
+    $lQuery = self::createConnectedToOnlineIdentityQuery($pOnlineIdentityId);
+    $lQuery->select('u.id');
+
+    $lIds = $lQuery->fetchArray();
+    foreach ($lIds as $key => $value) {
+      $lIdsToReturn[] = $value['id'];
+    }
+    $lQuery->free();
+    return $lIdsToReturn;
+  }
+
+
   /**
    * Create Query for connected users
    *
    * @param OnlineIdentity $pOnlineIdentity
    */
-  private static function createConnectedToOnlineIdentityQuery(OnlineIdentity $pOnlineIdentity) {
+  private static function createConnectedToOnlineIdentityQuery($pOnlineIdentityId) {
     $lQuery = Doctrine_Query::create()
           ->from('User u')
           ->leftJoin('u.UserIdentityCons uic')
-          ->where('uic.online_identity_id = ?', $pOnlineIdentity->getId());
+          ->where('uic.online_identity_id = ?', $pOnlineIdentityId);
 
     return $lQuery;
   }

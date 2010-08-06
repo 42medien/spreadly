@@ -32,10 +32,10 @@ foreach ($lIds as $key => $value) {
     $lUsersConnected = array();
     $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
     foreach ($lOiIds as $lOi) {
-      echo $lOi;
+
   //    $lOnlineIdentity = OnlineIdentityTable::retrieveWithFree($lOi);
       //      var_dump($lOnlineIdentity);
-      $lUsersConnected[] = UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($lOnlineIdentity);
+      $lUsersConnected[] = UserIdentityConTable::getUserIdsConnectedToOnlineIdentityId($lOi);
       //      $lOnlineIdentity->free();
       //$lOnlineIdentity = null;
       unset($lOnlineIdentity);
