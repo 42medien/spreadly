@@ -42,7 +42,9 @@ foreach ($lIds as $key => $value) {
     }
 
     //  UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
+    $lUsersConnected = null;
     unset($lUsersConnected);
+    $lOiIds = null;
     unset($lOiIds);
   }
 
