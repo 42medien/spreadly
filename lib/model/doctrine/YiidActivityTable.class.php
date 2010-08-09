@@ -235,9 +235,9 @@ class YiidActivityTable extends Doctrine_Table
     $lQueryArray = array();
     $lQueryArray['oiids'] = array('$in' => $lRelevantOis);
     $lQueryArray['so_id'] = $pId;
-    $lQueryArray['score'] = self::addCaseQuery($pCase);
+    $lQueryArray = array_merge($lQueryArray, self::addCaseQuery($pCase));
 
-
+    print_r($lQueryArray);
     $lResults = $lCollection->find($lQueryArray);
     $lResults->sort(array('u' => -1));
 
@@ -246,12 +246,19 @@ class YiidActivityTable extends Doctrine_Table
 
 
 
+  /**
+   * transforms $pCase from action into score values for MongoDB
+   * @param string $pCase
+   * @author weyandch
+   * @return int
+   */
   public static function addCaseQuery($pCase) {
     if ($pCase == 'hot') {
-      return 1;
+      return array('score' => 1);
     } elseif ($pCase == 'not') {
-      return -1;
+      return array('score' => -1);
     }
+    return array();
   }
 
 

@@ -44,7 +44,6 @@ class UserRelationTable extends Doctrine_Table
     return $lCollection->update(array('user_id' => $pUserId), $lQueryArray, array('upsert' => true));
   }
 
-
   /**
    * add OI's of a users contacts
    *
