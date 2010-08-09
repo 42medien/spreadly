@@ -22,7 +22,6 @@ class YiidActivity extends BaseYiidActivity
     $lObjectToSave = $this->toArray(false);
     $lObjectToSave = YiidActivityTable::saveObjectToMongoDb($lObjectToSave);
 
-    var_dump($lObjectToSave);die();
     $this->setId($lObjectToSave['_id'].""); // cast mongoID to string
     if ($lObjectToSave) {
       return $lObjectToSave;
@@ -34,10 +33,4 @@ class YiidActivity extends BaseYiidActivity
     $this->collection->remove(array("_id" => new MongoId($this->getId()) ));
   }
 
-
-  public function migrateActivityObject($pIdentities, $pServices) {
-    $this->setOiids($pIdentities);
-    $this->setCids($pServices);
-    $this->save();
-  }
 }

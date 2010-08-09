@@ -57,4 +57,10 @@ class YiidActivityTableTest extends BaseTestCase {
   }
 
 
+  public function testAddCaseQuery() {
+    $this->assertEquals(array('score' => 1), YiidActivityTable::addCaseQuery('hot'));
+    $this->assertEquals(array('score' => -1), YiidActivityTable::addCaseQuery('not'));
+  }
+
+
 }
