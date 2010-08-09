@@ -28,6 +28,19 @@ class YiidActivityTable extends Doctrine_Table
     return $lObject;
   }
 
+    /**
+   * Updates an object in Mongo, respecting MongoDB's Syntax to manipulate stored objects
+   *
+   * @see  http://www.mongodb.org/display/DOCS/Updating
+   *
+   * @param Array() $pIdentifier
+   * @param Array() $pManipualtior
+   */
+  public static function updateObjectInMongoDb($pIdentifier, $pManipualtior) {
+    $lCollection = self::getMongoCollection();
+    $lCollection->update($pIdentifier, $pManipualtior, array('upsert' => true));
+  }
+
 
 
 
