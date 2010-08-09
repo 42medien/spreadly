@@ -29,6 +29,7 @@ foreach ($lActivities as $lActivity) {
     }
   }
 
+  $lActivity->migrateActivityObject($lOiIds, $lServices);
   $lSocialObject = SocialObjectTable::retrieveByUrlHash($lActivity->getUrlHash());
   if (!$lSocialObject) {
     $lSocialObject = SocialObjectTable::retrieveByUrl($lActivity->getUrl());
@@ -38,7 +39,6 @@ foreach ($lActivities as $lActivity) {
     echo $lUserId ." - ".count($lOiIds)." \r\n";
   }
   else {
-
     echo "################################################### " .$lActivity->getUrl()."\r\n";
   }
 }

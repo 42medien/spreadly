@@ -32,4 +32,11 @@ class YiidActivity extends BaseYiidActivity
   public function delete(Doctrine_Connection $con = null) {
     $this->collection->remove(array("_id" => new MongoId($this->getId()) ));
   }
+
+
+  public function migrateActivityObject($pIdentities, $pServices) {
+    $this->setOiids($pIdentities);
+    $this->setCids($pServices);
+    $this->save();
+  }
 }

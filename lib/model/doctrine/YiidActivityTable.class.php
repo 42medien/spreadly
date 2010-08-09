@@ -237,7 +237,6 @@ class YiidActivityTable extends Doctrine_Table
     $lQueryArray['so_id'] = $pId;
     $lQueryArray = array_merge($lQueryArray, self::addCaseQuery($pCase));
 
-    print_r($lQueryArray);
     $lResults = $lCollection->find($lQueryArray);
     $lResults->sort(array('u' => -1));
 
