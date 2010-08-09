@@ -14,7 +14,7 @@
 
   <div id="stream_right_bottom">
     <ul class="shares" id="detail-stream">
-      <?php include_partial('item_shares', array('param' => 'param')); ?>
+      <?php include_partial('item_shares', array('pActivities' => $pActivities)); ?>
     </ul>
   </div>
 <?php } ?>

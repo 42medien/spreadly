@@ -118,11 +118,12 @@ class streamActions extends sfActions
     $lCss = $request->getParameter('css');
     $lItemId = $request->getParameter('itemid');
     $lSocialObject = SocialObjectTable::retrieveByPK($lItemId);
+    $lActivities = YiidActivityTable::retrieveByYiidActivityId($lItemId);
     return $this->renderText(
       $lCallback.'('.
       json_encode(
         array(
-          "itemdetail"  => $this->getPartial('stream/item_detail', array('pObject' => $lSocialObject)),
+          "itemdetail"  => $this->getPartial('stream/item_detail', array('pObject' => $lSocialObject, 'pActivities' => $lActivities)),
           "css" => $lCss
         )
       )
