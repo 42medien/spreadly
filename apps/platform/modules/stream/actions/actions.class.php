@@ -118,7 +118,7 @@ class streamActions extends sfActions
     $lCss = $request->getParameter('css');
     $lItemId = $request->getParameter('itemid');
     $lSocialObject = SocialObjectTable::retrieveByPK($lItemId);
-    $lActivities = YiidActivityTable::retrieveByYiidActivityId($lItemId);
+    $lActivities = YiidActivityTable::retrieveByYiidActivityId($this->getUser()->getId(), $lItemId, 'all');
     return $this->renderText(
       $lCallback.'('.
       json_encode(
@@ -134,9 +134,9 @@ class streamActions extends sfActions
   public function executeGet_item_detail_stream(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
     $lCallback = $request->getParameter('callback', 'GlobalError.logerror');
-    $lCase = $request->getParameter('case');
+    $lCase = $request->getParameter('case', 'all');
     $lItemId = $request->getParameter('itemid');
-    $lActivities = YiidActivityTable::retrieveByYiidActivityId($lItemId);
+    $lActivities = YiidActivityTable::retrieveByYiidActivityId($this->getUser()->getId(), $lItemId, $lCase);
     $lPage = $request->getParameter('page', 0);
     $lCss = $request->getParameter('css');
     return $this->renderText(

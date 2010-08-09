@@ -218,11 +218,41 @@ class YiidActivityTable extends Doctrine_Table
     $lResults->sort(array('u' => -1));
 
     return self::hydrateMongoCollectionToObjects($lResults);
-
-
-    return array();
   }
 
+
+  /**
+   * retrieve YiidActivies for a given SovialObject MongoDbID
+   *
+   * @author Christian Weyand
+   * @param $pId
+   * @return unknown_type
+   */
+  public static function retrieveByYiidActivityId($pUserId, $pId, $pCase){
+    $lCollection = self::getMongoCollection();
+    $lRelevantOis = self::getRelevantOnlineIdentitysForQuery($pUserId, null);
+
+    $lQueryArray = array();
+    $lQueryArray['oiids'] = array('$in' => $lRelevantOis);
+    $lQueryArray['so_id'] = $pId;
+    $lQueryArray['score'] = self::addCaseQuery($pCase);
+
+
+    $lResults = $lCollection->find($lQueryArray);
+    $lResults->sort(array('u' => -1));
+
+    return self::hydrateMongoCollectionToObjects($lResults);
+  }
+
+
+
+  public static function addCaseQuery($pCase) {
+    if ($pCase == 'hot') {
+      return 1;
+    } elseif ($pCase == 'not') {
+      return -1;
+    }
+  }
 
 
   /**
@@ -298,23 +328,6 @@ class YiidActivityTable extends Doctrine_Table
       $lObjects[] = self::initializeObjectFromCollection($pCollection->getNext());
     }
     return $lObjects;
-  }
-
-
-
-
-  /**
-   * retrieve YiidActivies for a given SovialObject MongoDbID
-   *
-   * @author Christian Weyand
-   * @param $pId
-   * @return unknown_type
-   */
-  public static function retrieveByYiidActivityId($pId){
-    $lCollection = self::getMongoCollection();
-    $lMongoCursor = $lCollection->find(array("so_id" => $pId ));
-
-    return self::hydrateMongoCollectionToObjects($lMongoCursor);
   }
 
 
