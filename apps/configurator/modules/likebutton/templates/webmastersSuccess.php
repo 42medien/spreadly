@@ -10,7 +10,7 @@
   <li><?php echo __('Drupal', null, 'configurator'); ?> <?php echo __('COMING_SOON', null, 'configurator'); ?></li>
   <li><?php echo __('MediaWiki', null, 'configurator'); ?> <?php echo __('COMING_SOON', null, 'configurator'); ?></li>
   <li><?php echo __('MovableType', null, 'configurator'); ?> <?php echo __('COMING_SOON', null, 'configurator'); ?></li>
-  <li><?php echo __('TextPattern', null, 'configurator'); ?> <?php echo __('COMING_SOON', null, 'configurator'); ?></li>
+  <li><?php echo link_to('TextPattern', 'http://yiid.googlecode.com/svn/textpattern/tags/1.0/yiid_like.txt', array('target' => '_blank')); ?></li>
   <li><?php echo __('Joomla', null, 'configurator'); ?> <?php echo __('COMING_SOON', null, 'configurator'); ?></li>
 </ul>
 
