@@ -109,7 +109,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 	  #stream_left_bottom{padding: 15px 0 5px;border-left:1px solid #ccc;border-bottom:2px solid #ccc;border-right:2px solid #ccc;
 	  -webkit-border-radius: 0 0 4px 4px;-moz-border-radius: 0 0 4px 4px;border-radius: 0 0 4px 4px;}
 		  .so_information_content{margin-left: 18px;padding: 0 15px;border-right: 1px #cbd3c9 solid;}
-		  #new_shares li{list-style-type: none;padding: 10px 5px;margin: 0 8px;}
+		  #new_shares li{list-style-type: none;margin: 5px 10px;-webkit-border-radius: 5px 0 5px 0;-moz-border-radius: 5px 0 5px 0;border-radius: 5px 0 5px 0;}
 		    
 		    .green_arrow{}
 		    
@@ -137,7 +137,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
         .so_headline_left{height: 18px;overflow: hidden;padding: 5px 0 5px 10px;}
         .so_headline_right{height: 18px;overflow: hidden;padding: 5px 8px 5px 0;}
         
-        .whats_hot_stream_item{-webkit-border-radius: 3px 0 0 3px;-moz-border-radius: 3px 0 0 3px;border-radius: 3px 0 0 3px;}
+        .whats_hot_stream_item{-webkit-border-radius: 3px 0 3px 0;-moz-border-radius: 3px 0 3px 0;border-radius: 3px 0 3px 0;}
         .whats_hot_stream_icon{padding: 8px 2px;}
         .stream_icon{padding:3px 9px;}
         
@@ -145,10 +145,10 @@ mark, rp, rt, ruby, summary, time{ display: inline }
         .preview_information{width: 100px;margin: 10px;}
         
         .whats_hot_info_area p{margin: 4px 10px;}
-        .whats_hot_info_area p.main_text{margin: 4px 10px 10px;}
+        .whats_hot_info_area p.main_text{margin: 6px 10px 10px;}
         
         .pager_load_more{padding: 5px 22px 5px 11px;}
-        #main_stream_pager{margin: 10px 0 15px 15px;}
+        #main_stream_pager{margin: 15px 0 5px 0;}
         .right_shares_pager{margin-top: 15px;}
         
         .user_hover_area{position: relative;top: -190px;left: -25px; z-index: 400;}
@@ -171,7 +171,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
   #search2{width: 33px;height: 26px;padding:4px 0;-webkit-border-radius: 0 4px 4px 0;-moz-border-radius: 0 4px 4px 0;border-radius: 0 4px 4px 0;border-left: none;}
   #search3{width: 27px;padding: 13px 5px;}
   
-  #stream_right{width: 100%;border-left:none; position: relative; top:0;}
+
     #stream_right_top div{float:left;}
     #nav_shares_inner1{width:3px;height:30px;}
     #nav_shares_inner2{height:30px;}
@@ -186,7 +186,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
     #so_information{width:75%;padding-left:10px;}
     #so_information h3, #so_information h5{margin-bottom:5px;}
     
-  #stream_right_bottom{padding: 25px 30px;}
+  #stream_right_bottom{padding: 25px 30px 10px;}
     .shares{list-style-type: none;}
     .shares li{margin-bottom: 10px;padding-bottom: 10px;border-bottom: 1px dashed #4EA734;}
     .so_share_image{width: 15%;}

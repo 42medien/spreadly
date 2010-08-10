@@ -10,8 +10,8 @@
           <span class="url left"><?php echo __('via %1 %2 minutes ago', array('%1' => 'Twitter', '%2' => '2'), 'platform'); ?></span>
         </div>
         <div class="right so_headline_right">
-          <a href="#" class="icon_like icon_small_use like-dislike"><?php echo __('%1 like', array('%1' => $pObject->getLikeCount()), 'platform'); ?></a>
-          <a href="#" class="icon_dislike icon_small_use like-dislike"><?php echo __('%1 dislike', array('%1' => $pObject->getDislikeCount()), 'platform'); ?></a>
+          <a href="#" class="icon_like icon_small_use like-dislike"><?php echo __('%1', array('%1' => $pObject->getLikeCount()), 'platform'); ?></a>
+          <a href="#" class="icon_dislike icon_small_use like-dislike"><?php echo __('%1', array('%1' => $pObject->getDislikeCount()), 'platform'); ?></a>
         </div>
       </div>
       <div class="clearfix whats_hot_info_area">

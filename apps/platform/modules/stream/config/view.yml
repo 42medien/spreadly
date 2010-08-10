@@ -1,5 +1,5 @@
 all:
   components:
     sidebar_left_main: [stream, sidebar_left]
-    sidebar_right_top: [stream, search_field]
+    #sidebar_right_top: [stream, search_field]
     sidebar_right_main: [stream, sidebar_right]

@@ -2,29 +2,55 @@
 
 /* Site-wide properties ======================================================== */
 /*body{font: normal normal 12px/12px Tahoma, Arial, Helvetica, Verdana, sans-serif; }*/
-body{font: normal normal 0.71em/1em arial, helvetica, sans-serif; }
+body{font: normal normal 0.85em/1em 'lucida grande', tahoma, verdana, arial, sans-serif;}
     
-/* Fibonacci based heading scale ratio */
+/**
+ *   @section -Headings
+ *   @subsection -Fibonacci based heading scale ratio
+ */
 h1{ font-size: 4.4em; font-weight: normal; }
 h2{ font-size: 2.8em; font-weight: bold; }
 h3{ font-size: 1.6em; font-weight: bold; }
 h4{ font-size: 1.2em; font-weight: bold; }
 h5{ font-size: 1em; font-weight: bold; }
 
-.url, .like-dislike{font-size: 9px;}
+/**
+ *   @section -FontSize
+ */
+.url, .like-dislike, .user_filter, .pager_load_more{font-size: 0.80em;}
 .btn, .text_action, #so_information h5 a{font-size: 11px;}
 #stream_left_top p, #search input{font-size: 13px;}
 #nav_main, #so_information h3{font-size: 14px;}
 #what_is_yiid_description p{font-size: 16px;}
 
+/**
+ *   @section -FontWeight
+ */
+.user_name, .text_important, .whats_hot_active #main_nav_inner2 p, .whats_not_active #main_nav_inner4 p, .whats_new #main_nav_inner7 p, #nav_main li a, .user_filter{font-weight: bold;}
+
+/**
+ *   @section -FontStyle
+ */
+/*.url{font-style: italic;}*/
+
+
+/**
+ *   @section -TextDecoration
+ */
 a:hover, .btn:hover, .whats_new_active #main_nav_inner2 p:hover, .whats_not_active #main_nav_inner2 p:hover, .whats_new_active #main_nav_inner4 p:hover, .whats_hot_active #main_nav_inner4 p:hover, 
 	.whats_hot_active #main_nav_inner7 p:hover, .whats_not_active #main_nav_inner7 p:hover{text-decoration: underline;}
 a, a.icon_thumb, li.filter_chosen a, a.icon_thumbs, a.icon_thumb, a.icon_small_use{text-decoration: none;}
 
-.user_name, .text_important, .whats_hot_active #main_nav_inner2 p, .whats_not_active #main_nav_inner4 p, .whats_new #main_nav_inner7 p{font-weight: bold;}
+/**
+ *   @section -TextAlignment
+ */
+#all_networks_list li, #friends_active_list li, .user_hover_area_top, user_hover_area_bottom, #signin_via_username_form label, .two_block_area li, .two_block_area h5, #magic_after_registration .right_block{text-align: left;}
+.center_area{text-align: center;}
+.actions{text-align: right;}
 
-.url{font-style: italic;}
-
+/**
+ *   @section -LineHeight
+ */
 .two_block_area li{line-height: 13px;}
 .sharing_user_info p, #signin_area p{line-height: 14px;}
 .so_comment, #so_information h5 a{line-height: 16px;}
@@ -36,12 +62,14 @@ h2{line-height: 40px;}
 .sharing_user_link, h1{line-height: 50px;}
 .right_block li{line-height: 60px;}
 
-#all_networks_list li, #friends_active_list li, .user_hover_area_top, user_hover_area_bottom, #signin_via_username_form label, .two_block_area li, .two_block_area h5, #magic_after_registration .right_block{text-align: left;}
-.center_area{text-align: center;}
-.actions{text-align: right;}
+/**
+ *   @section -LetterSpacing
+ */
+/*.url, .like-dislike{letter-spacing: -0.3px;}*/
 
-.url, .like-dislike{letter-spacing: -0.3px;}
-
+/**
+ *   @section -Cursor
+ */
 #search2, #main_nav_inner1, #main_nav_inner2, #main_nav_inner3, #main_nav_inner4, #main_nav_inner5, #main_nav_inner6, #main_nav_inner7, #main_nav_inner8, .stream_item,
   #nav_shares_inner1, #nav_shares_inner2, #nav_shares_inner3, #nav_shares_inner4, #nav_shares_inner5, #nav_shares_inner6, #nav_shares_inner7, .btn, .sharing_friend{cursor: pointer;}
 li.filter_chosen a{cursor: default;}
