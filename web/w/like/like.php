@@ -9,8 +9,11 @@ header('Cache-Control: private, no-store, no-cache, must-revalidate, post-check=
 
 require_once('inc/WidgetUtils.php');
 require_once('inc/i18n.php');
-$pUrl = urlencode(UrlUtils::skipTrailingSlash($_GET['url']));
-
+if (isset($_GET['url']) && !empty($_GET['url'])) {
+  $pUrl = urlencode(UrlUtils::skipTrailingSlash($_GET['url']));
+} else {
+  $pUrl = urlencode(UrlUtils::skipTrailingSlash($_SERVER['HTTP_REFERER']));
+}
 
 if (isset($_GET['type']) && !empty($_GET['type'])) {
   $pType = $_GET['type'];

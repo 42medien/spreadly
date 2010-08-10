@@ -11,7 +11,7 @@
   <li><?php echo __('MediaWiki', null, 'configurator'); ?> <?php echo __('COMING_SOON', null, 'configurator'); ?></li>
   <li><?php echo __('MovableType', null, 'configurator'); ?> <?php echo __('COMING_SOON', null, 'configurator'); ?></li>
   <li><?php echo link_to('TextPattern', 'http://yiid.googlecode.com/svn/textpattern/tags/1.0/yiid_like.txt', array('target' => '_blank')); ?></li>
-  <li><?php echo __('Joomla', null, 'configurator'); ?> <?php echo __('COMING_SOON', null, 'configurator'); ?></li>
+  <li><?php echo link_to('Joomla', 'http://code.google.com/p/yiid/downloads/list?q=label:joomla', array('target' => '_blank')); ?></li>
 </ul>
 
 <div class="small_box_head">
