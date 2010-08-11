@@ -73,4 +73,23 @@ class UserTable extends Doctrine_Table {
     return UserTable::getInstance()->retrieveByPKs($lFriendIds);
 
   }
+
+  /**
+   * returns a users friends filtered by name
+   *
+   * @author Matthias Pfefferle
+   * @param int $pUserId
+   * @param string $pName
+   * @return array
+   */
+  public static function getFriendsByName($pUserId, $pName) {
+    $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
+
+    $lQ = Doctrine_Query::create()
+      ->from('User u')
+      ->where('u.sortname LIKE ?', "%".$pName."%")
+      ->andWhereIn('u.id', $lFriendIds);
+
+    return $lQ->execute();
+  }
 }

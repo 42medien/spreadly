@@ -153,7 +153,9 @@ class streamActions extends sfActions
       )
       .");"
     );
-
   }
 
+  public function executeGet_contacts_by_sortname(sfWebRequest $request) {
+    $lUsers = UserTable::getFriendsByName($this->getUser()->getUserId(), 'hans');
+  }
 }
