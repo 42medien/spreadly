@@ -144,8 +144,8 @@ mark, rp, rt, ruby, summary, time{ display: inline }
         .whats_hot_stream_head_left{width: 60%;}
         .preview_information{width: 100px;margin: 10px;}
         
-        .whats_hot_info_area p{margin: 4px 10px;}
-        .whats_hot_info_area p.main_text{margin: 6px 10px 10px;}
+        .whats_hot_info_area p{margin: 6px 10px;}
+        .whats_hot_info_area p.main_text{margin: 8px 10px 10px;}
         
         .pager_load_more{padding: 5px 22px 5px 11px;}
         #main_stream_pager{margin: 15px 0 5px 0;}
@@ -171,7 +171,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
   #search2{width: 33px;height: 26px;padding:4px 0;-webkit-border-radius: 0 4px 4px 0;-moz-border-radius: 0 4px 4px 0;border-radius: 0 4px 4px 0;border-left: none;}
   #search3{width: 27px;padding: 13px 5px;}
   
-
+    #preview{padding:0 20px 25px;overflow: hidden;}
     #stream_right_top div{float:left;}
     #nav_shares_inner1{width:3px;height:30px;}
     #nav_shares_inner2{height:30px;}

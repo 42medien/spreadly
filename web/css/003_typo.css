@@ -17,7 +17,8 @@ h5{ font-size: 1em; font-weight: bold; }
 /**
  *   @section -FontSize
  */
-.url, .like-dislike, .user_filter, .pager_load_more{font-size: 0.80em;}
+.url, .like-dislike, .user_filter, .pager_load_more, .user_share{font-size: 0.8em;}
+.so_comment{font-size: 0.9em;}
 .btn, .text_action, #so_information h5 a{font-size: 11px;}
 #stream_left_top p, #search input{font-size: 13px;}
 #nav_main, #so_information h3{font-size: 14px;}
@@ -52,8 +53,8 @@ a, a.icon_thumb, li.filter_chosen a, a.icon_thumbs, a.icon_thumb, a.icon_small_u
  *   @section -LineHeight
  */
 .two_block_area li{line-height: 13px;}
-.sharing_user_info p, #signin_area p{line-height: 14px;}
-.so_comment, #so_information h5 a{line-height: 16px;}
+.sharing_user_info p, #signin_area p, .so_comment{line-height: 1.5em;}
+#so_information h5 a{line-height: 1.6em;}
 .so_headline_left, .so_headline_right{line-height: 18px;}
 #stream_right_top div, #what_is_yiid_description p{line-height: 19px;}
 #signin_via_username_form label{line-height: 25px;}
