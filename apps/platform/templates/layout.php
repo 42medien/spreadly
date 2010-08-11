@@ -5,9 +5,9 @@
     <?php include_metas() ?>
     <?php include_title() ?>
     <link rel="shortcut icon" href="/favicon.ico" />
-    
+
     <?php include_partial('global/includes'); ?>
-    
+
   </head>
   <body class="bg_light clearfix">
     <div id="container" class="bd_round clearfix">
@@ -43,7 +43,7 @@
 	      </div>
 
 	    </div>
-	    
+
       <?php include_partial('global/footer'); ?>
 
     </div>

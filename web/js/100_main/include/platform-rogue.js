@@ -181,7 +181,7 @@ var Utils = {
    * @return array lCleanedArray
    */
   explode: function(pDelimiter, pString) {
-  	//console.log('dumdidum');
+  	console.log('dumdidum');
     var lArray = pString.split(pDelimiter);
     var lCleanedArray = new Array();
     var lCounter = 0;
@@ -245,7 +245,7 @@ var Utils = {
   },
   
   getParams: function() {
-   //console.log('[Utils][getParams]');
+   console.log('[Utils][getParams]');
     var vars = [], hash;
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     for(var i = 0; i < hashes.length; i++)
@@ -268,7 +268,7 @@ var Utils = {
    * @description check if an element exists in markup
    */  
   elementExists: function(pElement) {
-    //console.log(pElement);
+    console.log(pElement);
     if(pElement === undefined || pElement == '' || pElement == null || pElement.length == 0) {
       return false;
     } else {
@@ -336,7 +336,7 @@ var PositionHelper = {
    * @author KM
    */
   getScrollHeight: function() {
-    //console.log("[PositionHelper][getScrollHeight]");
+    console.log("[PositionHelper][getScrollHeight]");
     var lBody = PositionHelper.getBody();
     var lOffset = 0;
     if (window.pageYOffset) {
@@ -352,7 +352,7 @@ var PositionHelper = {
    * @author KM
    */  
   getBody: function() {
-    //console.log("[PositionHelper][getBody]");    
+    console.log("[PositionHelper][getBody]");    
     var lBody = null;
     if(document.all && !window.opera) {
       lBody =(window.document.compatMode == "CSS1Compat")? window.document.documentElement : window.document.body || null;
@@ -361,6 +361,59 @@ var PositionHelper = {
     }
     return lBody;
   }    
+};
+
+var OnLoadGrafic = {
+  
+  showGrafic: function() {
+    jQuery('#general-ajax-loader').css({
+        top:  OnLoadGrafic.getPageScroll()[1] + (OnLoadGrafic.getPageHeight() / 4),
+        left: OnLoadGrafic.getPageWidth()/2
+      }).show();
+  },
+  
+  hideGrafic: function() {
+    jQuery('#general-ajax-loader').hide();
+  },
+  
+  // getPageScroll() by quirksmode.com
+  getPageScroll: function() {
+    var xScroll, yScroll;
+    if (window.pageYOffset) {
+      yScroll = window.pageYOffset;
+      xScroll = window.pageXOffset;
+    } else if (document.documentElement && document.documentElement.scrollTop) {   // Explorer 6 Strict
+      yScroll = document.documentElement.scrollTop;
+      xScroll = document.documentElement.scrollLeft;
+    } else if (document.body) {// all other Explorers
+      yScroll = document.body.scrollTop;
+      xScroll = document.body.scrollLeft;   
+    }
+    return new Array(xScroll,yScroll);
+  },
+
+  // Adapted from getPageSize() by quirksmode.com
+  getPageHeight: function() {
+    var windowHeight;
+    if (self.innerHeight) { // all except Explorer
+      windowHeight = self.innerHeight;
+    } else if (document.documentElement && document.documentElement.clientHeight) { // Explorer 6 Strict Mode
+      windowHeight = document.documentElement.clientHeight;
+    } else if (document.body) { // other Explorers
+      windowHeight = document.body.clientHeight;
+    }
+    return windowHeight;
+  },
+  
+  getPageWidth: function() {
+   if (window.innerWidth) {
+      return window.innerWidth;
+    } else if (document.body && document.body.offsetWidth) {
+      return document.body.offsetWidth;
+    } else {
+      return 600;
+    }
+  },
 };
 /**
  * @combine platform
@@ -410,10 +463,7 @@ var ErrorLogger = {
         dataType: "json",
         data: options
       });      
-      //console.log(ErrorLogger.aErrorMsg);
     }
-    
-    return false;
   },
   
   /**
@@ -473,6 +523,7 @@ var ErrorHandler = {
   	}
   	//init the logger with msg, filename and linenumber if is set
     ErrorLogger.initLog(lMessage, pFile, pLineNumber);
+    OnLoadGrafic.hideGrafic();
     return true;
   },
   
@@ -487,7 +538,43 @@ var ErrorHandler = {
       //and return true
       return true;
 		}; 	
-  }
+  },
+  
+  catchConsoleError: function() {
+    if(typeof console == "undefined" || !console) {
+      return C;
+    } else {
+      return console;
+    }
+  }  
+};
+
+/**@author: http://fragged.org/creating-a-wrapper-for-the-firebug-consolelog-function-for-ie-and-other-browsers_218.html**/
+var C = {
+    // console wrapper
+    debug: true, // global debug on|off: set to false if you want disable the logging completely
+    quietDismiss: true, // may want to just drop, or alert instead: set to false, if you want alerts with loggin-infos
+    log: function() {
+        if (!C.debug) return false;
+
+        if (typeof console == 'object' && typeof console.log != "undefined")
+            try {
+                console.log.apply(this, arguments); // safari's console.log can't accept scope...
+            } catch(e) {
+                // so we loop instead.
+                for (var i = 0, l = arguments.length; i < l; i++)
+                    console.log(arguments[i]);
+            }
+        else {
+            if (!C.quietDismiss) {
+                var result = "";
+                for (var i = 0, l = arguments.length; i < l; i++)
+                    result += arguments[i] + " ("+typeof arguments[i]+") ";
+
+                alert(result);
+            }
+        }
+    }
 };
 /**
  * GlobalRequest: Binds the clicks and sends the request to the specified Action
@@ -511,7 +598,7 @@ var GlobalRequest = {
 	 * @param object pParams
 	 */
 	initGlobals: function(pElement, pParams) {
-		//console.log("[GlobalRequest][initGlobals]");
+		console.log("[GlobalRequest][initGlobals]");
 		//is the given element an link
     if(jQuery(pElement).is('a') && !jQuery(pElement).attr('data-obj') && !jQuery(pElement).attr('onclick')) {
     	//set the global vars in the setGlobalsByUri method
@@ -531,7 +618,7 @@ var GlobalRequest = {
 	 * @param string pHref (have to look like that: http://example.com?callback=MYCALLBACK()&param=PARAM)
 	 */
 	setGlobalsByUri: function(pHref) {
-    //console.log("[GlobalRequest][setGlobalsByUri]");		
+    console.log("[GlobalRequest][setGlobalsByUri]");		
 		//take the callback from the href-uri
     GlobalRequest.aCallback = pHref.match(/([?&]callback[a-zA-Z0-9=\.]+)/)[0].split('=')[1];
     //and delete it from it, because we dont need twice the same param 
@@ -545,7 +632,7 @@ var GlobalRequest = {
 	 * @param object pParams
 	 */
 	setGlobalsByObject: function(pParams) {
-    //console.log("[GlobalRequest][setGlobalsByObject]");		
+    console.log("[GlobalRequest][setGlobalsByObject]");		
 		//set global action and callback vars
 		GlobalRequest.aAction = pParams.action;
 		GlobalRequest.aCallback = pParams.callback;
@@ -564,7 +651,7 @@ var GlobalRequest = {
    * @param object pElement
    */	
 	setGlobalByData: function(pElement) {
-    //console.log("[GlobalRequest][setGlobalByData]");   	
+    console.log("[GlobalRequest][setGlobalByData]");   	
 		//take the data-obj attribute from the given element
 		var lParams = jQuery(pElement).attr('data-obj');
 		//parse it to a object
@@ -588,7 +675,7 @@ var GlobalRequest = {
 	 * @param string pString
 	 */
 	parseAction: function(pString) {
-    //console.log("[GlobalRequest][parseAction]");    		
+    console.log("[GlobalRequest][parseAction]");    		
     var lAction = pString;
     //if there is a dot in the string, it is a callback-function if not, it is a action-string and we return it
     if(lAction.indexOf('.') != -1) {
@@ -612,7 +699,7 @@ var GlobalRequest = {
 	 * @param object pParams
 	 */
 	bindClickById: function(pId, pParams) {
-    //console.log("[GlobalRequest][bindClickById]"); 		
+    console.log("[GlobalRequest][bindClickById]"); 		
 		//get the element identified by the given id
 		var lElement = jQuery('#'+pId);
 		//init the global vars for dosend
@@ -636,7 +723,7 @@ var GlobalRequest = {
    * @param object pParams
    */	
 	bindClickByTag: function(pParentId, pTagName, pParams) {
-    //console.log("[GlobalRequest][bindClickByTag]");  		
+    console.log("[GlobalRequest][bindClickByTag]");  		
 		//bind the click to all tags that are childs of the given parentid -> ATTENTION: this is needed for performance. 
 		//Never ever bind events to a tagname global
     jQuery('#'+pParentId+' '+pTagName).live("click", function() {
@@ -659,7 +746,7 @@ var GlobalRequest = {
    * @param object pParams
    */ 	
   bindClickByClass: function(pParentId, pClassName, pParams) {
-    //console.log("[GlobalRequest][bindClickByClass]");     	
+    console.log("[GlobalRequest][bindClickByClass]");     	
     //bind the click to all elements that are childs of the given parentid and has the given classname -> ATTENTION: this is needed for performance. 
     //Never ever bind events to a tagname global  	
     jQuery('#'+pParentId+' .'+pClassName).live("click", function() { 
@@ -678,7 +765,7 @@ var GlobalRequest = {
    * @param object pParames
    */
   bindClickByElement: function(pElement, pParams) {
-    //console.log("[GlobalRequest][bindClickByElement]");     	
+    console.log("[GlobalRequest][bindClickByElement]");     	
   	jQuery(pElement).die('click');
   	jQuery(pElement).live("click", function() {
       GlobalRequest.initGlobals(pElement, pParams);  		
@@ -698,7 +785,7 @@ var GlobalRequest = {
    * @param object pParams
 	 */
 	initOnClick: function(pElement, pParams) {
-    //console.log("[GlobalRequest][initOnClick]");  		
+    console.log("[GlobalRequest][initOnClick]");  		
     //init the global vars for dosend 
     GlobalRequest.initGlobals(pElement, pParams);  
     //and send request on click  
@@ -715,7 +802,8 @@ var GlobalRequest = {
 	 * @param string pActionType
 	 */
 	doSend: function(pActionType) {
-    //console.log("[GlobalRequest][doSend]");  		
+    console.log("[GlobalRequest][doSend]"); 
+    OnLoadGrafic.showGrafic();
 		var lActionType = 'GET';
 		if(pActionType) {
 			lActionType = pActionType;
@@ -787,7 +875,7 @@ var DataObjectPager = {
 	 * @param string pDataString(JSON)
 	 */	
 	init: function(pId, pDataString) {
-    //console.log("[DataObjectPager][init]");  
+    console.log("[DataObjectPager][init]");  
 		var lElement = jQuery('#'+pId);
 		if(pDataString !== undefined){
 		  jQuery(lElement).attr('data-obj', pDataString);
@@ -804,7 +892,7 @@ var DataObjectPager = {
 	 * @param object pDataObj
 	 */
 	update: function(pId, pAction, pPage, pDataObj) {
-    //console.log("[DataObjectPager][update]");
+    console.log("[DataObjectPager][update]");
    	var lPage = parseInt(pPage);
    	lPage++;
    	pDataObj.page = String(lPage);
@@ -1315,7 +1403,7 @@ var ItemDetail = {
    * @param object pResponse(JSON)
    */
   show: function(pResponse) {
-    //console.log("[StreamItemDetail][show]");
+    console.log("[StreamItemDetail][show]");
     //delete the old one
     jQuery('#stream_right').empty();
     //check where the user is and set new position for detail-box
@@ -1324,6 +1412,7 @@ var ItemDetail = {
     jQuery('#stream_right').append(pResponse.itemdetail);
     //update the css of the clicked stream-item (cssid for it is set in the presponse.css-json-obj)
     StreamItem.updateCss(pResponse.css);
+    OnLoadGrafic.hideGrafic();
   },
   
   /**
@@ -1331,7 +1420,7 @@ var ItemDetail = {
    * @author KM
    */
   setPosition: function() {
-    //console.log("[StreamItemDetail][setPosition]");  
+    console.log("[StreamItemDetail][setPosition]");  
     //find the current scrollheight
     var lOffsetHeight = PositionHelper.getScrollHeight();
     //get the stream-box
@@ -1356,7 +1445,7 @@ var ItemDetailFilter = {
    * @param object pCssObj(JSON)
    */
   updateCss: function(pCssObj) {
-    //console.log("[ItemDetailFilter][updateCss]"); 
+    console.log("[ItemDetailFilter][updateCss]"); 
     //make a object from the json
     var lCssObj = jQuery.parseJSON(pCssObj);
     //if a class is set in it
@@ -1383,7 +1472,7 @@ var ItemDetailStream = {
    * @param object pResponse(JSON) 
    */
   show: function(pResponse) {
-    //console.log("[ItemDetailStream][show]");
+    console.log("[ItemDetailStream][show]");
     //clicked pager or tab?
     if(pResponse.page < 1 || pResponse.page === undefined){
       //if clicked tab: empty the old stream
@@ -1399,6 +1488,7 @@ var ItemDetailStream = {
     DataObjectPager.update('item-stream-pager-link', null, pResponse.page, lDataObj); 
     //and update the hightlight of the clicked tab/filter
     ItemDetailFilter.updateCss(pResponse.css);
+    OnLoadGrafic.hideGrafic();    
   }
   
 };/**
@@ -1420,7 +1510,7 @@ var Stream = {
 	 * @param object pResponse(JSON) 
 	 */
 	show: function(pResponse) { 
-		//console.log("[Stream][show]");
+		console.log("[Stream][show]");
 		if(pResponse.page < 1 || pResponse.page === undefined) {
 			//empty the stream
 			jQuery('#stream_left_bottom').empty();
@@ -1435,6 +1525,7 @@ var Stream = {
     DataObjectPager.update('stream_pager_link', pResponse.action, pResponse.page, MainFilter.aDataObj);    
     //do some css-effects
     StreamFilter.updateCss(pResponse.css);
+    OnLoadGrafic.hideGrafic();
 	}
 };
 
@@ -1482,7 +1573,7 @@ var SubFilter = {
    * @param string pAction
    */
   setAction: function(pAction) {
-    //console.log("[SubFilter][setAction]");  	
+    console.log("[SubFilter][setAction]");  	
     SubFilter.aAction = pAction;
   },
   
@@ -1492,7 +1583,7 @@ var SubFilter = {
    * @author KM
    */
   getAction: function() {
-    //console.log("[SubFilter][getAction]");  	
+    console.log("[SubFilter][getAction]");  	
   	return SubFilter.aAction;
   },
   
@@ -1501,7 +1592,7 @@ var SubFilter = {
    * @author KM
    */
   updateCss: function(pCssId) {
-    //console.log("[SubFilter][updateCss]"); 
+    console.log("[SubFilter][updateCss]"); 
     //remove all classes named filter-chosen from a parent-list called all_network_list    	
     ClassHandler.removeClassesByParent(jQuery('#all_networks_list'), 'filter_chosen');
     ClassHandler.removeClassesByParent(jQuery('#friends_active_list'), 'filter_chosen'); 
@@ -1524,7 +1615,7 @@ var MainFilter = {
 	 * @param object pDataObj(JSON)
 	 */
   updateData: function(pDataObj) {
-    //console.log("[MainFilter][updateData]");
+    console.log("[MainFilter][updateData]");
     //parse the request-data-obj and write it in global var 	
   	MainFilter.aDataObj = jQuery.parseJSON(pDataObj);
     jQuery.each(jQuery('.main_filter'), function(i, pField) {
@@ -1538,7 +1629,7 @@ var MainFilter = {
    * @param object pElement(DOM)
    */
   setData:  function(pElement) {
-    //console.log("[MainFilter][setData]");  
+    console.log("[MainFilter][setData]");  
   	var lData = '';
   	//if the element has a data-obj (!!!has to have)
     if(jQuery(pElement).attr('data-obj')){ 
@@ -1574,7 +1665,7 @@ var MainFilter = {
    * @author KM
    */
   updateCss: function(pCssClass) {
-    //console.log("[MainFilter][updateCss]");    	
+    console.log("[MainFilter][updateCss]");    	
     var lOuter = jQuery('#main_nav_outer');
     jQuery(lOuter).removeClass('whats_hot_active');
     jQuery(lOuter).removeClass('whats_not_active');
@@ -1599,7 +1690,7 @@ var StreamItem = {
    * @author KM
    */
   getDetailAction: function() {
-    //console.log("[StreamItem][getAction]");    
+    console.log("[StreamItem][getAction]");    
     return StreamItem.aDetailAction;
   },
   
@@ -1609,9 +1700,9 @@ var StreamItem = {
    * @param object pCssObj(JSON)
    */
   updateCss: function(pCssObj) {
-    //console.log("[StreamItem][updateCss]");   	
+    console.log("[StreamItem][updateCss]");
     var lCssObj = jQuery.parseJSON(pCssObj);
-    ClassHandler.removeClassesByParent(jQuery('#new_shares'), 'item_active');    
+    ClassHandler.removeClassesByParent(jQuery('#new_shares'), 'item_active');
     jQuery('#'+lCssObj["itemid"]).addClass('item_active');
   }
 };

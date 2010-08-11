@@ -46,10 +46,7 @@ var ErrorLogger = {
         dataType: "json",
         data: options
       });      
-      console.log(ErrorLogger.aErrorMsg);
     }
-    
-    return false;
   },
   
   /**
@@ -109,6 +106,7 @@ var ErrorHandler = {
   	}
   	//init the logger with msg, filename and linenumber if is set
     ErrorLogger.initLog(lMessage, pFile, pLineNumber);
+    OnLoadGrafic.hideGrafic();
     return true;
   },
   
@@ -123,5 +121,41 @@ var ErrorHandler = {
       //and return true
       return true;
 		}; 	
-  }
+  },
+  
+  catchConsoleError: function() {
+    if(typeof console == "undefined" || !console) {
+      return C;
+    } else {
+      return console;
+    }
+  }  
+};
+
+/**@author: http://fragged.org/creating-a-wrapper-for-the-firebug-consolelog-function-for-ie-and-other-browsers_218.html**/
+var C = {
+    // console wrapper
+    debug: true, // global debug on|off: set to false if you want disable the logging completely
+    quietDismiss: true, // may want to just drop, or alert instead: set to false, if you want alerts with loggin-infos
+    log: function() {
+        if (!C.debug) return false;
+
+        if (typeof console == 'object' && typeof console.log != "undefined")
+            try {
+                console.log.apply(this, arguments); // safari's console.log can't accept scope...
+            } catch(e) {
+                // so we loop instead.
+                for (var i = 0, l = arguments.length; i < l; i++)
+                    console.log(arguments[i]);
+            }
+        else {
+            if (!C.quietDismiss) {
+                var result = "";
+                for (var i = 0, l = arguments.length; i < l; i++)
+                    result += arguments[i] + " ("+typeof arguments[i]+") ";
+
+                alert(result);
+            }
+        }
+    }
 };

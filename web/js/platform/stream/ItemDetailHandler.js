@@ -23,6 +23,7 @@ var ItemDetail = {
     jQuery('#stream_right').append(pResponse.itemdetail);
     //update the css of the clicked stream-item (cssid for it is set in the presponse.css-json-obj)
     StreamItem.updateCss(pResponse.css);
+    OnLoadGrafic.hideGrafic();
   },
   
   /**
@@ -98,6 +99,7 @@ var ItemDetailStream = {
     DataObjectPager.update('item-stream-pager-link', null, pResponse.page, lDataObj); 
     //and update the hightlight of the clicked tab/filter
     ItemDetailFilter.updateCss(pResponse.css);
+    OnLoadGrafic.hideGrafic();    
   }
   
 };

@@ -26,9 +26,9 @@ var StreamItem = {
    * @param object pCssObj(JSON)
    */
   updateCss: function(pCssObj) {
-    console.log("[StreamItem][updateCss]");   	
+    console.log("[StreamItem][updateCss]");
     var lCssObj = jQuery.parseJSON(pCssObj);
-    ClassHandler.removeClassesByParent(jQuery('#new_shares'), 'item_active');    
+    ClassHandler.removeClassesByParent(jQuery('#new_shares'), 'item_active');
     jQuery('#'+lCssObj["itemid"]).addClass('item_active');
   }
 };

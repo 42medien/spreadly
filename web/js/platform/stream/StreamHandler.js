@@ -32,6 +32,7 @@ var Stream = {
     DataObjectPager.update('stream_pager_link', pResponse.action, pResponse.page, MainFilter.aDataObj);    
     //do some css-effects
     StreamFilter.updateCss(pResponse.css);
+    OnLoadGrafic.hideGrafic();
 	}
 };
 

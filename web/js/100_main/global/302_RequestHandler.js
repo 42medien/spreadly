@@ -224,7 +224,8 @@ var GlobalRequest = {
 	 * @param string pActionType
 	 */
 	doSend: function(pActionType) {
-    console.log("[GlobalRequest][doSend]");  		
+    console.log("[GlobalRequest][doSend]"); 
+    OnLoadGrafic.showGrafic();
 		var lActionType = 'GET';
 		if(pActionType) {
 			lActionType = pActionType;

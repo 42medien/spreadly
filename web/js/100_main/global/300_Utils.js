@@ -203,3 +203,56 @@ var PositionHelper = {
     return lBody;
   }    
 };
+
+var OnLoadGrafic = {
+  
+  showGrafic: function() {
+    jQuery('#general-ajax-loader').css({
+        top:  OnLoadGrafic.getPageScroll()[1] + (OnLoadGrafic.getPageHeight() / 4),
+        left: OnLoadGrafic.getPageWidth()/2
+      }).show();
+  },
+  
+  hideGrafic: function() {
+    jQuery('#general-ajax-loader').hide();
+  },
+  
+  // getPageScroll() by quirksmode.com
+  getPageScroll: function() {
+    var xScroll, yScroll;
+    if (window.pageYOffset) {
+      yScroll = window.pageYOffset;
+      xScroll = window.pageXOffset;
+    } else if (document.documentElement && document.documentElement.scrollTop) {   // Explorer 6 Strict
+      yScroll = document.documentElement.scrollTop;
+      xScroll = document.documentElement.scrollLeft;
+    } else if (document.body) {// all other Explorers
+      yScroll = document.body.scrollTop;
+      xScroll = document.body.scrollLeft;   
+    }
+    return new Array(xScroll,yScroll);
+  },
+
+  // Adapted from getPageSize() by quirksmode.com
+  getPageHeight: function() {
+    var windowHeight;
+    if (self.innerHeight) { // all except Explorer
+      windowHeight = self.innerHeight;
+    } else if (document.documentElement && document.documentElement.clientHeight) { // Explorer 6 Strict Mode
+      windowHeight = document.documentElement.clientHeight;
+    } else if (document.body) { // other Explorers
+      windowHeight = document.body.clientHeight;
+    }
+    return windowHeight;
+  },
+  
+  getPageWidth: function() {
+   if (window.innerWidth) {
+      return window.innerWidth;
+    } else if (document.body && document.body.offsetWidth) {
+      return document.body.offsetWidth;
+    } else {
+      return 600;
+    }
+  },
+};
