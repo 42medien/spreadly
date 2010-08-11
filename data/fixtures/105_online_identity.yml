@@ -72,7 +72,7 @@ UserIdentityCon:
     User:               user_3
     OnlineIdentity:     oi_5
   uicon_6:                # james  - facebook oi
-    User:               user_5
+    User:               user_4
     OnlineIdentity:     oi_6
   uicon_7:               # hans  - twitter oi
     User:               user_3
