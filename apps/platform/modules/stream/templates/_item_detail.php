@@ -10,7 +10,7 @@
 
 <div id="preview">
       <div id="yiid-widget">     
-        <iframe src="http://widgets.<?php echo sfConfig::get("app_settings_host"); ?>/w/like/full.php?<?php echo 'url='.rawurlencode($pObject->getUrl()).'&cult='.$sf_user->getCulture().'&type=like&color=%23000000&short='; ?>" style="overflow:hidden; width:<?php echo $pWidth; ?>px; height: 23px; padding: 3px 0;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowTransparency="true"></iframe>
+        <iframe src="http://widgets.<?php echo sfConfig::get("app_settings_host"); ?>/w/like/full.php?<?php echo 'url='.rawurlencode($pObject->getUrl()).'&cult='.$sf_user->getCulture().'&type=like&color=%23000000&short='; ?>" style="overflow:hidden; width:345px; height: 23px; padding: 3px 0;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowTransparency="true"></iframe>
       </div>
     </div>
 
