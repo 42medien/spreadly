@@ -5,3 +5,6 @@
   </div>
 </div>
 <?php echo cdn_image_tag("/img/global/ajax-loader-bar-circle.gif", array('id' => 'general-ajax-loader')); ?>
+
+
+<?php YiidStatsSingleton::trackVisit('http://www.yiid.local'.$_SERVER['REQUEST_URI'], 'like', 'de', 1); ?>

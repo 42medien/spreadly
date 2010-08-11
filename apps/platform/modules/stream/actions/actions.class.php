@@ -119,6 +119,7 @@ class streamActions extends sfActions
     $lItemId = $request->getParameter('itemid');
     $lSocialObject = SocialObjectTable::retrieveByPK($lItemId);
     $lActivities = YiidActivityTable::retrieveByYiidActivityId($this->getUser()->getId(), $lItemId, 'all');
+
     return $this->renderText(
       $lCallback.'('.
       json_encode(
@@ -139,6 +140,7 @@ class streamActions extends sfActions
     $lActivities = YiidActivityTable::retrieveByYiidActivityId($this->getUser()->getId(), $lItemId, $lCase);
     $lPage = $request->getParameter('page', 0);
     $lCss = $request->getParameter('css');
+
     return $this->renderText(
       $lCallback.'('.
       json_encode(

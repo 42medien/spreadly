@@ -46,14 +46,14 @@ class YiidActivityTable extends Doctrine_Table
 
 
   public static function saveLikeActivitys($pUserId,
-  $pUrl,
-  $pOwnedOnlineIdentitys = array(),
-  $pGivenOnlineIdentitys = array(),
-  $pScore = self::ACTIVITY_TYPE_LIKE,
-  $pVerb = 'like',
-  $pTitle = null,
-  $pDescription = null,
-  $pPhoto = null) {
+                                          $pUrl,
+                                          $pOwnedOnlineIdentitys = array(),
+                                          $pGivenOnlineIdentitys = array(),
+                                          $pScore = self::ACTIVITY_TYPE_LIKE,
+                                          $pVerb = 'like',
+                                          $pTitle = null,
+                                          $pDescription = null,
+                                          $pPhoto = null) {
 
 
     $lVerifiedOnlineIdentitys = array();
@@ -178,7 +178,7 @@ class YiidActivityTable extends Doctrine_Table
   public static function saveActivity($pSocialObject, $pUrl, $pUserId, $pOnlineIdentitys, $pServicesId, $pScore, $pVerb) {
     $lActivity = new YiidActivity();
     $lActivity->setUId($pUserId);
-    $lActivity->setSoId($pSocialObject->getId());
+    $lActivity->setSoId($pSocialObject->getId()."");
     $lActivity->setUrl($pUrl);
     $lActivity->setUrlHash(md5($pUrl));
     $lActivity->setOiids($pOnlineIdentitys);
