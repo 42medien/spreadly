@@ -8,6 +8,7 @@
 
   <p class="filter_headline"><?php echo __('All Networks'); ?></p>
   <ul class="normal_list clearfix" id="all_networks_list">
+    <li><a href="/" class="user_filter" target="_blank" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "comid":"0", "css":"{\"class\":\"normal_list\", \"id\":\"com-filter-0\"}"}'><?php echo __('All'); ?></a></li>
     <?php foreach ($pServices as $lService) { ?>
       <li id="com-filter-<?php echo $lService->getId(); ?>">
         <a href="/" class="icon_service icon_<?php echo strtolower($lService->getSlug()); ?> stream_filter" target="_blank" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "comid":"<?php echo $lService->getId(); ?>", "css":"{\"class\":\"normal_list\", \"id\":\"com-filter-<?php echo $lService->getId(); ?>\"}"}'><?php echo $lService->getName(); ?></a>
@@ -17,6 +18,7 @@
 
   <p class="filter_headline"><?php echo __('Friends Active', null, 'platform'); ?></p>
   <ul class="normal_list" id="friends_active_list">
+    <li><a href="/" class="user_filter" target="_blank" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "comid":"0", "css":"{\"class\":\"normal_list\", \"id\":\"com-filter-0\"}"}'><?php echo __('All'); ?></a></li>
     <?php foreach ($pFriends as $lFriend) { ?>
     <li class="clearfix" id="user-filter-<?php echo $lFriend->getId(); ?>">
       <a href="/" class="user_filter stream_filter" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "userid":"<?php echo $lFriend->getId(); ?>", "css": "{\"class\":\"normal_list\", \"id\":\"user-filter-<?php echo $lFriend->getId(); ?>\"}"}'>

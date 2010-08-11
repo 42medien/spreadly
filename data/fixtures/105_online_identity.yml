@@ -53,6 +53,30 @@ OnlineIdentity:
     identifier: 'affe_fb'
     Community:  community_3
     identity_type:       1
+  oi_10:
+    title:      'james_twitter'
+    name:       'james_twitter'
+    identifier: 'james_twitter'
+    Community:  community_2
+    identity_type:       1
+  oi_11:
+    title:      'snirgelchen_twitter'
+    name:       'snirgelchen_twitter'
+    identifier: 'snirgelchen_twitter'
+    Community:  community_2
+    identity_type:       1
+  oi_12:
+    title:      'manni_twitter'
+    name:       'manni_twitter'
+    identifier: 'manni_twitter'
+    Community:  community_2
+    identity_type:       1
+  oi_13:
+    title:      'affe_twitter'
+    name:       'affe_twitter'
+    identifier: 'affe_twitter'
+    Community:  community_2
+    identity_type:       1
     
     
 UserIdentityCon:
@@ -86,8 +110,44 @@ UserIdentityCon:
   uicon_10:               # affe  - facebook oi
     User:               user_7
     OnlineIdentity:     oi_9
+  uicon_11:               # james  - twitter oi
+    User:               user_4
+    OnlineIdentity:     oi_10
+  uicon_12:               # snirgelchen  - twitter oi
+    User:               user_5
+    OnlineIdentity:     oi_11
+  uicon_13:               # manni  - twitter oi
+    User:               user_6
+    OnlineIdentity:     oi_12
+  uicon_14:               # affe  - twitter oi
+    User:               user_7
+    OnlineIdentity:     oi_13
     
 OnlineIdentityCon:
   oicon_1: 
     OnlineIdentityFrom:  oi_1
-    OnlineIdentityTo:  oi_3  
+    OnlineIdentityTo:  oi_3
+  oicon_2: 
+    OnlineIdentityFrom:  oi_1
+    OnlineIdentityTo:  oi_6
+  oicon_3: 
+    OnlineIdentityFrom:  oi_1
+    OnlineIdentityTo:  oi_7
+  oicon_4: 
+    OnlineIdentityFrom:  oi_1
+    OnlineIdentityTo:  oi_8
+  oicon_5: 
+    OnlineIdentityFrom:  oi_1
+    OnlineIdentityTo:  oi_9  
+  oicon_6: 
+    OnlineIdentityFrom:  oi_1
+    OnlineIdentityTo:  oi_10
+  oicon_7: 
+    OnlineIdentityFrom:  oi_1
+    OnlineIdentityTo:  oi_11
+  oicon_8: 
+    OnlineIdentityFrom:  oi_1
+    OnlineIdentityTo:  oi_12
+  oicon_9: 
+    OnlineIdentityFrom:  oi_1
+    OnlineIdentityTo:  oi_13
