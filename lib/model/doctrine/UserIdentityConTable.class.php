@@ -95,7 +95,7 @@ class UserIdentityConTable extends Doctrine_Table {
    * @param OnlineIdentity $pOnlineIdentity
    */
   public static function getUsersConnectedToOnlineIdentity(OnlineIdentity $pOnlineIdentity) {
-    $lQuery = self::createConnectedToOnlineIdentityQuery($pOnlineIdentity);
+    $lQuery = self::createConnectedToOnlineIdentityQuery($pOnlineIdentity->getId());
     return $lQuery->execute();
   }
 
