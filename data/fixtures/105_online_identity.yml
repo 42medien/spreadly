@@ -35,6 +35,24 @@ OnlineIdentity:
     identifier: 'james_fb'
     Community:  community_3
     identity_type:       1
+  oi_7:
+    title:      'snirgelchen_fb'
+    name:       'snirgelchen_fb'
+    identifier: 'snirgelchen_fb'
+    Community:  community_3
+    identity_type:       1
+  oi_8:
+    title:      'manni_fb'
+    name:       'manni_fb'
+    identifier: 'manni_fb'
+    Community:  community_3
+    identity_type:       1
+  oi_9:
+    title:      'affe_fb'
+    name:       'affe_fb'
+    identifier: 'affe_fb'
+    Community:  community_3
+    identity_type:       1
     
     
 UserIdentityCon:
@@ -59,6 +77,15 @@ UserIdentityCon:
   uicon_7:               # hans  - twitter oi
     User:               user_3
     OnlineIdentity:     oi_3
+  uicon_8:               # snirgelchen  - facebook oi
+    User:               user_5
+    OnlineIdentity:     oi_7
+  uicon_9:               # manni  - facebook oi
+    User:               user_6
+    OnlineIdentity:     oi_8
+  uicon_10:               # affe  - facebook oi
+    User:               user_7
+    OnlineIdentity:     oi_9
     
 OnlineIdentityCon:
   oicon_1: 
