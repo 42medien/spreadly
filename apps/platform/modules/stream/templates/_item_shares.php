@@ -4,12 +4,16 @@
   <li class="clearfix">
     <div class="so_share_image left"><?php echo image_tag('/img/global/yiid-logo.png', array('width' => 30)); ?></div>
     <div class="so_share_information left">
-      <span class="icon_small_service icon_small_facebook">&nbsp;</span>
+      <?php $lActivityCids = $lActivity->getCids(); ?>
+      <?php foreach($lActivityCids as $lCid) { ?>
+        <?php $lCommunityName = CommunityTable::getInstance()->retrieveByPk($lCid)->getSlug(); ?>
+        <span class="icon_small_service icon_small_<?php echo $lCommunityName; ?>">&nbsp;</span>
+      <?php } ?>
       <?php echo link_to_yiid($lUser->getFullname(), $lUser->getUsername(), null, array('class' => 'user_share')); ?>
       <span class="url"><?php echo __('via %1 %2 minutes ago', array('%1' => 'Twitter', '%2' => '2'), 'platform'); ?></span>
     </div>
   </li>
-<?php  }?>
+<?php } ?>
 
 
 <div class="right right_shares_pager">
