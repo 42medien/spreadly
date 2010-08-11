@@ -16,6 +16,10 @@ $lUserAffe = UserTable::retrieveByUsername('affe');
 $lHugoOis = $lUserHugo->getOnlineIdentitesAsArray();
 $lUserHansOis = $lUserHans->getOnlineIdentitesAsArray();
 $lUserKarlOis = $lUserKarl->getOnlineIdentitesAsArray();
+$lUserJamesOis = $lUserJames->getOnlineIdentitesAsArray();
+$lUserSnirgelchenOis = $lUserSnirgelchen->getOnlineIdentitesAsArray();
+$lUserManniOis = $lUserManni->getOnlineIdentitesAsArray();
+$lUserAffeOis = $lUserAffe->getOnlineIdentitesAsArray();
 
 $lCommunityTwitter = CommunityTable::retrieveByCommunity('twitter');
 $lCommunityFb = CommunityTable::retrieveByCommunity('facebook');
@@ -40,10 +44,10 @@ YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://affen.de', $lU
 YiidActivityTable::saveLikeActivitys($lUserKarl->getId(), 'http://affen.de', $lUserKarlOis, array($lOiKarlTwitter->getId()), 1, 'like', 'affen title');
 
 YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://bim.bo', $lUserHansOis, array($lOiHansTwitter->getId()), 1, 'like', 'bimbo title');
-YiidActivityTable::saveLikeActivitys($lUserJames->getId(), 'http://bim.bo', $lUserJames, array($lOiJamesFb->getId()), -1, 'like', 'bimbo title');
-YiidActivityTable::saveLikeActivitys($lUserSnirgelchen->getId(), 'http://bim.bo', $lUserSnirgelchen, array($lOiSnirgelchenFb->getId()), 1, 'like', 'bimbo title');
-YiidActivityTable::saveLikeActivitys($lUserManni->getId(), 'http://bim.bo', $lUserManni, array($lOiManniFb->getId()), -1, 'like', 'bimbo title');
-YiidActivityTable::saveLikeActivitys($lUserAffe->getId(), 'http://bim.bo', $lUserAffe, array($lOiAffeFb->getId()), 1, 'like', 'bimbo title');
+YiidActivityTable::saveLikeActivitys($lUserJames->getId(), 'http://bim.bo', $lUserJamesOis, array($lOiJamesFb->getId()), -1, 'like', 'bimbo title');
+YiidActivityTable::saveLikeActivitys($lUserSnirgelchen->getId(), 'http://bim.bo', $lUserSnirgelchenOis, array($lOiSnirgelchenFb->getId()), 1, 'like', 'bimbo title');
+YiidActivityTable::saveLikeActivitys($lUserManni->getId(), 'http://bim.bo', $lUserManniOis, array($lOiManniFb->getId()), -1, 'like', 'bimbo title');
+YiidActivityTable::saveLikeActivitys($lUserAffe->getId(), 'http://bim.bo', $lUserAffeOis, array($lOiAffeFb->getId()), 1, 'like', 'bimbo title');
 
 YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://spiegel.de', $lUserHansOis, array($lOiHansFb->getId(), $lOiHansTwitter->getId()), 1, 'like', 'spiegel.de title title');
 YiidActivityTable::saveLikeActivitys($lUserKarl->getId(), 'http://spiegel.de', $lUserKarlOis, array($lOiKarlTwitter->getId()), 1, 'like', 'spiegel.de title title');
