@@ -24,7 +24,7 @@ class SocialObject extends BaseSocialObject
     $this->setUpdatedOn(time());
     $lObjectToSave = $this->toArray(false);
     $lObjectToSave = SocialObjectTable::saveObjectToMongoDb($lObjectToSave);
-    $this->setId($lObjectToSave['_id'].""); // cast mongoID to string
+    $this->setId($lObjectToSave['_id']); // cast mongoID to string
     if ($lObjectToSave) {
       return $lObjectToSave;
     }

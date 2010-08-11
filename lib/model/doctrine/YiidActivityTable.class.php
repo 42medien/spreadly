@@ -178,7 +178,7 @@ class YiidActivityTable extends Doctrine_Table
   public static function saveActivity($pSocialObject, $pUrl, $pUserId, $pOnlineIdentitys, $pServicesId, $pScore, $pVerb) {
     $lActivity = new YiidActivity();
     $lActivity->setUId($pUserId);
-    $lActivity->setSoId($pSocialObject->getId()."");
+    $lActivity->setSoId($pSocialObject->getId());
     $lActivity->setUrl($pUrl);
     $lActivity->setUrlHash(md5($pUrl));
     $lActivity->setOiids($pOnlineIdentitys);
@@ -212,7 +212,7 @@ class YiidActivityTable extends Doctrine_Table
    */
   public static function retrieveActionOnObjectById($pSocialObjectId, $pUserId) {
     $lCollection = self::getMongoCollection();
-    return self::initializeObjectFromCollection($lCollection->findOne(array("so_id" => $pSocialObjectId, "u_id" => $pUserId ) ));
+    return self::initializeObjectFromCollection($lCollection->findOne(array("so_id" => MongoId($pSocialObjectId), "u_id" => $pUserId ) ));
   }
 
 
@@ -247,7 +247,7 @@ class YiidActivityTable extends Doctrine_Table
 
     $lQueryArray = array();
     $lQueryArray['oiids'] = array('$in' => $lRelevantOis);
-    $lQueryArray['so_id'] = $pId;
+    $lQueryArray['so_id'] = new MongoId($pId);
     $lQueryArray = array_merge($lQueryArray, self::addCaseQuery($pCase));
 
     $lResults = $lCollection->find($lQueryArray);

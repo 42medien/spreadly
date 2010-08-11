@@ -20,28 +20,15 @@ $lQuery = Doctrine_Query::create()->from('User u')->select('u.id');
 $lIds = $lQuery->fetchArray();
 $lQuery->free();
 
+
 foreach ($lIds as $key => $value) {
+  $lUser = UserTable::getInstance()->retrieveByPk($value['id']);
+  if ($lUser->getDefaultAvatar()) {
+    $lMainAvatar = UserAvatarTable::getMainAvatarForUserId($value['id']);
+    echo $lMainAvatar->getId();
+    $lDefaultAvatar = UserAvatarTable::getInstance()->findOneBy('avatar', $lUser->getDefaultAvatar());
 
-  $lUserId = $value['id'];
-  $lUiCons = UserIdentityConTable::getOnlineIdentityIdsForUser($lUserId);
-
-  echo memory_get_usage()/(1024*1024) . " - user ".  $value['id']. "\r\n";
-  UserRelationTable::updateOwnedIdentities($lUserId, $lUiCons);
-
-  foreach ($lUiCons as $lOiId) {
-    $lUsersConnected = array();
-    $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
-    foreach ($lOiIds as $lOi) {
-
-  //    $lOnlineIdentity = OnlineIdentityTable::retrieveWithFree($lOi);
-      //      var_dump($lOnlineIdentity);
-      $lUsersConnected[] = UserIdentityConTable::getUserIdsConnectedToOnlineIdentityId($lOi);
-      //      $lOnlineIdentity->free();
-      //$lOnlineIdentity = null;
-      //unset($lOnlineIdentity);
-    }
-
-    UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
+      echo $lDefaultAvatar->getId();
   }
-}
 
+}
