@@ -10,6 +10,7 @@ $dbManager->loadConfiguration();
 $lNumberOfUsers = 300;
 
 function getName() {
+  // no umlauts
   $lArray = array("hans", "michael", "mueller", "marion", "karina", "marco", "mies", "ripanti", "herbert",
                 "gudrun", "joachim", "pfefferle", "mausi");
   $lKey = array_rand($lArray,1);
