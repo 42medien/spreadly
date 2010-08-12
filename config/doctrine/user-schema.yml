@@ -10,6 +10,7 @@ User:
   columns:
     username:
       type:       string(63)
+      unique:     true
     passwordhash:
       type:       string(32)
     salt:
