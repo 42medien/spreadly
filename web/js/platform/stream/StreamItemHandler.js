@@ -16,7 +16,7 @@ var StreamItem = {
    * @author KM
    */
   getDetailAction: function() {
-    console.log("[StreamItem][getAction]");    
+    debug.log("[StreamItem][getAction]");    
     return StreamItem.aDetailAction;
   },
   
@@ -26,7 +26,7 @@ var StreamItem = {
    * @param object pCssObj(JSON)
    */
   updateCss: function(pCssObj) {
-    console.log("[StreamItem][updateCss]");
+    debug.log("[StreamItem][updateCss]");
     var lCssObj = jQuery.parseJSON(pCssObj);
     ClassHandler.removeClassesByParent(jQuery('#new_shares'), 'item_active');
     jQuery('#'+lCssObj["itemid"]).addClass('item_active');

@@ -24,7 +24,7 @@
 
 
 <div class="right right_shares_pager">
-  <a href="#" id="item-stream-pager-link" class="pager_load_more" data-obj='{"action":"stream/get_item_detail_stream", "callback":"ItemDetailStream.show", "case":"all", "itemid":"<?php echo $pItemId; ?>", "page":"1"}'><?php echo __('Load more...', null, 'platform'); ?></a>
+  <a href="#" id="item-stream-pager-link" class="pager_load_more" data-obj='{"action":"stream/get_item_detail_stream", "callback":"ItemDetailStream.show", "case":"all", "itemid":"<?php echo $pItemId; ?>", "page":"2"}'><?php echo __('Load more...', null, 'platform'); ?></a>
 </div>
 
 <div class="clearfix">&nbsp;</div>

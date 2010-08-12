@@ -17,7 +17,7 @@ var DataObjectPager = {
 	 * @param string pDataString(JSON)
 	 */	
 	init: function(pId, pDataString) {
-    console.log("[DataObjectPager][init]");  
+    debug.log("[DataObjectPager][init]");  
 		var lElement = jQuery('#'+pId);
 		if(pDataString !== undefined){
 		  jQuery(lElement).attr('data-obj', pDataString);
@@ -34,7 +34,7 @@ var DataObjectPager = {
 	 * @param object pDataObj
 	 */
 	update: function(pId, pAction, pPage, pDataObj) {
-    console.log("[DataObjectPager][update]");
+    debug.log("[DataObjectPager][update]");
    	var lPage = parseInt(pPage);
    	lPage++;
    	pDataObj.page = String(lPage);

@@ -161,6 +161,276 @@ e&&e.document?e.document.compatMode==="CSS1Compat"&&e.document.documentElement["
  * @combine platform
  */
 
+/*!
+ * JavaScript Debug - v0.4 - 6/22/2010
+ * http://benalman.com/projects/javascript-debug-console-log/
+ * 
+ * Copyright (c) 2010 "Cowboy" Ben Alman
+ * Dual licensed under the MIT and GPL licenses.
+ * http://benalman.com/about/license/
+ * 
+ * With lots of help from Paul Irish!
+ * http://paulirish.com/
+ */
+
+// Script: JavaScript Debug: A simple wrapper for console.log
+//
+// *Version: 0.4, Last Updated: 6/22/2010*
+// 
+// Tested with Internet Explorer 6-8, Firefox 3-3.6, Safari 3-4, Chrome 3-5, Opera 9.6-10.5
+// 
+// Home       - http://benalman.com/projects/javascript-debug-console-log/
+// GitHub     - http://github.com/cowboy/javascript-debug/
+// Source     - http://github.com/cowboy/javascript-debug/raw/master/ba-debug.js
+// (Minified) - http://github.com/cowboy/javascript-debug/raw/master/ba-debug.min.js (1.1kb)
+// 
+// About: License
+// 
+// Copyright (c) 2010 "Cowboy" Ben Alman,
+// Dual licensed under the MIT and GPL licenses.
+// http://benalman.com/about/license/
+// 
+// About: Support and Testing
+// 
+// Information about what browsers this code has been tested in.
+// 
+// Browsers Tested - Internet Explorer 6-8, Firefox 3-3.6, Safari 3-4, Chrome
+// 3-5, Opera 9.6-10.5
+// 
+// About: Examples
+// 
+// These working examples, complete with fully commented code, illustrate a few
+// ways in which this plugin can be used.
+// 
+// Examples - http://benalman.com/code/projects/javascript-debug/examples/debug/
+// 
+// About: Revision History
+// 
+// 0.4 - (6/22/2010) Added missing passthrough methods: exception,
+//       groupCollapsed, table
+// 0.3 - (6/8/2009) Initial release
+// 
+// Topic: Pass-through console methods
+// 
+// assert, clear, count, dir, dirxml, exception, group, groupCollapsed,
+// groupEnd, profile, profileEnd, table, time, timeEnd, trace
+// 
+// These console methods are passed through (but only if both the console and
+// the method exists), so use them without fear of reprisal. Note that these
+// methods will not be passed through if the logging level is set to 0 via
+// <debug.setLevel>.
+
+window.debug = (function(){
+  var window = this,
+    
+    // Some convenient shortcuts.
+    aps = Array.prototype.slice,
+    con = window.console,
+    
+    // Public object to be returned.
+    that = {},
+    
+    callback_func,
+    callback_force,
+    
+    // Default logging level, show everything.
+    log_level = 9,
+    
+    // Logging methods, in "priority order". Not all console implementations
+    // will utilize these, but they will be used in the callback passed to
+    // setCallback.
+    log_methods = [ 'error', 'warn', 'info', 'debug', 'log' ],
+    
+    // Pass these methods through to the console if they exist, otherwise just
+    // fail gracefully. These methods are provided for convenience.
+    pass_methods = 'assert clear count dir dirxml exception group groupCollapsed groupEnd profile profileEnd table time timeEnd trace'.split(' '),
+    idx = pass_methods.length,
+    
+    // Logs are stored here so that they can be recalled as necessary.
+    logs = [];
+  
+  while ( --idx >= 0 ) {
+    (function( method ){
+      
+      // Generate pass-through methods. These methods will be called, if they
+      // exist, as long as the logging level is non-zero.
+      that[ method ] = function() {
+        log_level !== 0 && con && con[ method ]
+          && con[ method ].apply( con, arguments );
+      }
+      
+    })( pass_methods[idx] );
+  }
+  
+  idx = log_methods.length;
+  while ( --idx >= 0 ) {
+    (function( idx, level ){
+      
+      // Method: debug.log
+      // 
+      // Call the console.log method if available. Adds an entry into the logs
+      // array for a callback specified via <debug.setCallback>.
+      // 
+      // Usage:
+      // 
+      //  debug.log( object [, object, ...] );                               - -
+      // 
+      // Arguments:
+      // 
+      //  object - (Object) Any valid JavaScript object.
+      
+      // Method: debug.debug
+      // 
+      // Call the console.debug method if available, otherwise call console.log.
+      // Adds an entry into the logs array for a callback specified via
+      // <debug.setCallback>.
+      // 
+      // Usage:
+      // 
+      //  debug.debug( object [, object, ...] );                             - -
+      // 
+      // Arguments:
+      // 
+      //  object - (Object) Any valid JavaScript object.
+      
+      // Method: debug.info
+      // 
+      // Call the console.info method if available, otherwise call console.log.
+      // Adds an entry into the logs array for a callback specified via
+      // <debug.setCallback>.
+      // 
+      // Usage:
+      // 
+      //  debug.info( object [, object, ...] );                              - -
+      // 
+      // Arguments:
+      // 
+      //  object - (Object) Any valid JavaScript object.
+      
+      // Method: debug.warn
+      // 
+      // Call the console.warn method if available, otherwise call console.log.
+      // Adds an entry into the logs array for a callback specified via
+      // <debug.setCallback>.
+      // 
+      // Usage:
+      // 
+      //  debug.warn( object [, object, ...] );                              - -
+      // 
+      // Arguments:
+      // 
+      //  object - (Object) Any valid JavaScript object.
+      
+      // Method: debug.error
+      // 
+      // Call the console.error method if available, otherwise call console.log.
+      // Adds an entry into the logs array for a callback specified via
+      // <debug.setCallback>.
+      // 
+      // Usage:
+      // 
+      //  debug.error( object [, object, ...] );                             - -
+      // 
+      // Arguments:
+      // 
+      //  object - (Object) Any valid JavaScript object.
+      
+      that[ level ] = function() {
+        var args = aps.call( arguments ),
+          log_arr = [ level ].concat( args );
+        
+        logs.push( log_arr );
+        exec_callback( log_arr );
+        
+        if ( !con || !is_level( idx ) ) { return; }
+        
+        con.firebug ? con[ level ].apply( window, args )
+          : con[ level ] ? con[ level ]( args )
+          : con.log( args );
+      };
+      
+    })( idx, log_methods[idx] );
+  }
+  
+  // Execute the callback function if set.
+  function exec_callback( args ) {
+    if ( callback_func && (callback_force || !con || !con.log) ) {
+      callback_func.apply( window, args );
+    }
+  };
+  
+  // Method: debug.setLevel
+  // 
+  // Set a minimum or maximum logging level for the console. Doesn't affect
+  // the <debug.setCallback> callback function, but if set to 0 to disable
+  // logging, <Pass-through console methods> will be disabled as well.
+  // 
+  // Usage:
+  // 
+  //  debug.setLevel( [ level ] )                                            - -
+  // 
+  // Arguments:
+  // 
+  //  level - (Number) If 0, disables logging. If negative, shows N lowest
+  //    priority levels of log messages. If positive, shows N highest priority
+  //    levels of log messages.
+  //
+  // Priority levels:
+  // 
+  //   log (1) < debug (2) < info (3) < warn (4) < error (5)
+  
+  that.setLevel = function( level ) {
+    log_level = typeof level === 'number' ? level : 9;
+  };
+  
+  // Determine if the level is visible given the current log_level.
+  function is_level( level ) {
+    return log_level > 0
+      ? log_level > level
+      : log_methods.length + log_level <= level;
+  };
+  
+  // Method: debug.setCallback
+  // 
+  // Set a callback to be used if logging isn't possible due to console.log
+  // not existing. If unlogged logs exist when callback is set, they will all
+  // be logged immediately unless a limit is specified.
+  // 
+  // Usage:
+  // 
+  //  debug.setCallback( callback [, force ] [, limit ] )
+  // 
+  // Arguments:
+  // 
+  //  callback - (Function) The aforementioned callback function. The first
+  //    argument is the logging level, and all subsequent arguments are those
+  //    passed to the initial debug logging method.
+  //  force - (Boolean) If false, log to console.log if available, otherwise
+  //    callback. If true, log to both console.log and callback.
+  //  limit - (Number) If specified, number of lines to limit initial scrollback
+  //    to.
+  
+  that.setCallback = function() {
+    var args = aps.call( arguments ),
+      max = logs.length,
+      i = max;
+    
+    callback_func = args.shift() || null;
+    callback_force = typeof args[0] === 'boolean' ? args.shift() : false;
+    
+    i -= typeof args[0] === 'number' ? args.shift() : max;
+    
+    while ( i < max ) {
+      exec_callback( logs[i++] );
+    }
+  };
+  
+  return that;
+})();
+/**
+ * @combine platform
+ */
+
 /**
   * General JavaScript-File for Yiid.com
   *
@@ -181,7 +451,7 @@ var Utils = {
    * @return array lCleanedArray
    */
   explode: function(pDelimiter, pString) {
-  	console.log('dumdidum');
+  	debug.log('dumdidum');
     var lArray = pString.split(pDelimiter);
     var lCleanedArray = new Array();
     var lCounter = 0;
@@ -245,7 +515,7 @@ var Utils = {
   },
   
   getParams: function() {
-   console.log('[Utils][getParams]');
+   debug.log('[Utils][getParams]');
     var vars = [], hash;
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     for(var i = 0; i < hashes.length; i++)
@@ -268,7 +538,7 @@ var Utils = {
    * @description check if an element exists in markup
    */  
   elementExists: function(pElement) {
-    console.log(pElement);
+    debug.log(pElement);
     if(pElement === undefined || pElement == '' || pElement == null || pElement.length == 0) {
       return false;
     } else {
@@ -336,7 +606,7 @@ var PositionHelper = {
    * @author KM
    */
   getScrollHeight: function() {
-    console.log("[PositionHelper][getScrollHeight]");
+    debug.log("[PositionHelper][getScrollHeight]");
     var lBody = PositionHelper.getBody();
     var lOffset = 0;
     if (window.pageYOffset) {
@@ -352,7 +622,7 @@ var PositionHelper = {
    * @author KM
    */  
   getBody: function() {
-    console.log("[PositionHelper][getBody]");    
+    debug.log("[PositionHelper][getBody]");    
     var lBody = null;
     if(document.all && !window.opera) {
       lBody =(window.document.compatMode == "CSS1Compat")? window.document.documentElement : window.document.body || null;
@@ -548,34 +818,6 @@ var ErrorHandler = {
     }
   }  
 };
-
-/**@author: http://fragged.org/creating-a-wrapper-for-the-firebug-consolelog-function-for-ie-and-other-browsers_218.html**/
-var C = {
-    // console wrapper
-    debug: true, // global debug on|off: set to false if you want disable the logging completely
-    quietDismiss: true, // may want to just drop, or alert instead: set to false, if you want alerts with loggin-infos
-    log: function() {
-        if (!C.debug) return false;
-
-        if (typeof console == 'object' && typeof console.log != "undefined")
-            try {
-                console.log.apply(this, arguments); // safari's console.log can't accept scope...
-            } catch(e) {
-                // so we loop instead.
-                for (var i = 0, l = arguments.length; i < l; i++)
-                    console.log(arguments[i]);
-            }
-        else {
-            if (!C.quietDismiss) {
-                var result = "";
-                for (var i = 0, l = arguments.length; i < l; i++)
-                    result += arguments[i] + " ("+typeof arguments[i]+") ";
-
-                alert(result);
-            }
-        }
-    }
-};
 /**
  * GlobalRequest: Binds the clicks and sends the request to the specified Action
  * Response will be handled in the specified callback
@@ -598,7 +840,7 @@ var GlobalRequest = {
 	 * @param object pParams
 	 */
 	initGlobals: function(pElement, pParams) {
-		console.log("[GlobalRequest][initGlobals]");
+		debug.log("[GlobalRequest][initGlobals]");
 		//is the given element an link
     if(jQuery(pElement).is('a') && !jQuery(pElement).attr('data-obj') && !jQuery(pElement).attr('onclick')) {
     	//set the global vars in the setGlobalsByUri method
@@ -618,7 +860,7 @@ var GlobalRequest = {
 	 * @param string pHref (have to look like that: http://example.com?callback=MYCALLBACK()&param=PARAM)
 	 */
 	setGlobalsByUri: function(pHref) {
-    console.log("[GlobalRequest][setGlobalsByUri]");		
+    debug.log("[GlobalRequest][setGlobalsByUri]");		
 		//take the callback from the href-uri
     GlobalRequest.aCallback = pHref.match(/([?&]callback[a-zA-Z0-9=\.]+)/)[0].split('=')[1];
     //and delete it from it, because we dont need twice the same param 
@@ -632,7 +874,7 @@ var GlobalRequest = {
 	 * @param object pParams
 	 */
 	setGlobalsByObject: function(pParams) {
-    console.log("[GlobalRequest][setGlobalsByObject]");		
+    debug.log("[GlobalRequest][setGlobalsByObject]");		
 		//set global action and callback vars
 		GlobalRequest.aAction = pParams.action;
 		GlobalRequest.aCallback = pParams.callback;
@@ -651,7 +893,7 @@ var GlobalRequest = {
    * @param object pElement
    */	
 	setGlobalByData: function(pElement) {
-    console.log("[GlobalRequest][setGlobalByData]");   	
+    debug.log("[GlobalRequest][setGlobalByData]");   	
 		//take the data-obj attribute from the given element
 		var lParams = jQuery(pElement).attr('data-obj');
 		//parse it to a object
@@ -675,7 +917,7 @@ var GlobalRequest = {
 	 * @param string pString
 	 */
 	parseAction: function(pString) {
-    console.log("[GlobalRequest][parseAction]");    		
+    debug.log("[GlobalRequest][parseAction]");    		
     var lAction = pString;
     //if there is a dot in the string, it is a callback-function if not, it is a action-string and we return it
     if(lAction.indexOf('.') != -1) {
@@ -699,7 +941,7 @@ var GlobalRequest = {
 	 * @param object pParams
 	 */
 	bindClickById: function(pId, pParams) {
-    console.log("[GlobalRequest][bindClickById]"); 		
+    debug.log("[GlobalRequest][bindClickById]"); 		
 		//get the element identified by the given id
 		var lElement = jQuery('#'+pId);
 		//init the global vars for dosend
@@ -723,7 +965,7 @@ var GlobalRequest = {
    * @param object pParams
    */	
 	bindClickByTag: function(pParentId, pTagName, pParams) {
-    console.log("[GlobalRequest][bindClickByTag]");  		
+    debug.log("[GlobalRequest][bindClickByTag]");  		
 		//bind the click to all tags that are childs of the given parentid -> ATTENTION: this is needed for performance. 
 		//Never ever bind events to a tagname global
     jQuery('#'+pParentId+' '+pTagName).live("click", function() {
@@ -746,7 +988,7 @@ var GlobalRequest = {
    * @param object pParams
    */ 	
   bindClickByClass: function(pParentId, pClassName, pParams) {
-    console.log("[GlobalRequest][bindClickByClass]");     	
+    debug.log("[GlobalRequest][bindClickByClass]");     	
     //bind the click to all elements that are childs of the given parentid and has the given classname -> ATTENTION: this is needed for performance. 
     //Never ever bind events to a tagname global  	
     jQuery('#'+pParentId+' .'+pClassName).live("click", function() { 
@@ -765,7 +1007,7 @@ var GlobalRequest = {
    * @param object pParames
    */
   bindClickByElement: function(pElement, pParams) {
-    console.log("[GlobalRequest][bindClickByElement]");     	
+    debug.log("[GlobalRequest][bindClickByElement]");     	
   	jQuery(pElement).die('click');
   	jQuery(pElement).live("click", function() {
       GlobalRequest.initGlobals(pElement, pParams);  		
@@ -785,7 +1027,7 @@ var GlobalRequest = {
    * @param object pParams
 	 */
 	initOnClick: function(pElement, pParams) {
-    console.log("[GlobalRequest][initOnClick]");  		
+    debug.log("[GlobalRequest][initOnClick]");  		
     //init the global vars for dosend 
     GlobalRequest.initGlobals(pElement, pParams);  
     //and send request on click  
@@ -802,7 +1044,7 @@ var GlobalRequest = {
 	 * @param string pActionType
 	 */
 	doSend: function(pActionType) {
-    console.log("[GlobalRequest][doSend]"); 
+    debug.log("[GlobalRequest][doSend]"); 
     OnLoadGrafic.showGrafic();
 		var lActionType = 'GET';
 		if(pActionType) {
@@ -875,7 +1117,7 @@ var DataObjectPager = {
 	 * @param string pDataString(JSON)
 	 */	
 	init: function(pId, pDataString) {
-    console.log("[DataObjectPager][init]");  
+    debug.log("[DataObjectPager][init]");  
 		var lElement = jQuery('#'+pId);
 		if(pDataString !== undefined){
 		  jQuery(lElement).attr('data-obj', pDataString);
@@ -892,7 +1134,7 @@ var DataObjectPager = {
 	 * @param object pDataObj
 	 */
 	update: function(pId, pAction, pPage, pDataObj) {
-    console.log("[DataObjectPager][update]");
+    debug.log("[DataObjectPager][update]");
    	var lPage = parseInt(pPage);
    	lPage++;
    	pDataObj.page = String(lPage);
@@ -1403,7 +1645,7 @@ var ItemDetail = {
    * @param object pResponse(JSON)
    */
   show: function(pResponse) {
-    console.log("[StreamItemDetail][show]");
+    debug.log("[StreamItemDetail][show]");
     //delete the old one
     jQuery('#stream_right').empty();
     //check where the user is and set new position for detail-box
@@ -1420,7 +1662,7 @@ var ItemDetail = {
    * @author KM
    */
   setPosition: function() {
-    console.log("[StreamItemDetail][setPosition]");  
+    debug.log("[StreamItemDetail][setPosition]");  
     //find the current scrollheight
     var lOffsetHeight = PositionHelper.getScrollHeight();
     //get the stream-box
@@ -1445,7 +1687,7 @@ var ItemDetailFilter = {
    * @param object pCssObj(JSON)
    */
   updateCss: function(pCssObj) {
-    console.log("[ItemDetailFilter][updateCss]"); 
+    debug.log("[ItemDetailFilter][updateCss]"); 
     //make a object from the json
     var lCssObj = jQuery.parseJSON(pCssObj);
     //if a class is set in it
@@ -1472,7 +1714,7 @@ var ItemDetailStream = {
    * @param object pResponse(JSON) 
    */
   show: function(pResponse) {
-    console.log("[ItemDetailStream][show]");
+    debug.log("[ItemDetailStream][show]");
     //clicked pager or tab?
     if(pResponse.page < 1 || pResponse.page === undefined){
       //if clicked tab: empty the old stream
@@ -1510,7 +1752,7 @@ var Stream = {
 	 * @param object pResponse(JSON) 
 	 */
 	show: function(pResponse) { 
-		console.log("[Stream][show]");
+		debug.log("[Stream][show]");
 		if(pResponse.page < 1 || pResponse.page === undefined) {
 			//empty the stream
 			jQuery('#stream_left_bottom').empty();
@@ -1573,7 +1815,7 @@ var SubFilter = {
    * @param string pAction
    */
   setAction: function(pAction) {
-    console.log("[SubFilter][setAction]");  	
+    debug.log("[SubFilter][setAction]");  	
     SubFilter.aAction = pAction;
   },
   
@@ -1583,7 +1825,7 @@ var SubFilter = {
    * @author KM
    */
   getAction: function() {
-    console.log("[SubFilter][getAction]");  	
+    debug.log("[SubFilter][getAction]");  	
   	return SubFilter.aAction;
   },
   
@@ -1592,7 +1834,7 @@ var SubFilter = {
    * @author KM
    */
   updateCss: function(pCssId) {
-    console.log("[SubFilter][updateCss]"); 
+    debug.log("[SubFilter][updateCss]"); 
     //remove all classes named filter-chosen from a parent-list called all_network_list    	
     ClassHandler.removeClassesByParent(jQuery('#all_networks_list'), 'filter_chosen');
     ClassHandler.removeClassesByParent(jQuery('#friends_active_list'), 'filter_chosen'); 
@@ -1615,7 +1857,7 @@ var MainFilter = {
 	 * @param object pDataObj(JSON)
 	 */
   updateData: function(pDataObj) {
-    console.log("[MainFilter][updateData]");
+    debug.log("[MainFilter][updateData]");
     //parse the request-data-obj and write it in global var 	
   	MainFilter.aDataObj = jQuery.parseJSON(pDataObj);
     jQuery.each(jQuery('.main_filter'), function(i, pField) {
@@ -1629,7 +1871,7 @@ var MainFilter = {
    * @param object pElement(DOM)
    */
   setData:  function(pElement) {
-    console.log("[MainFilter][setData]");  
+    debug.log("[MainFilter][setData]");  
   	var lData = '';
   	//if the element has a data-obj (!!!has to have)
     if(jQuery(pElement).attr('data-obj')){ 
@@ -1665,7 +1907,7 @@ var MainFilter = {
    * @author KM
    */
   updateCss: function(pCssClass) {
-    console.log("[MainFilter][updateCss]");    	
+    debug.log("[MainFilter][updateCss]");    	
     var lOuter = jQuery('#main_nav_outer');
     jQuery(lOuter).removeClass('whats_hot_active');
     jQuery(lOuter).removeClass('whats_not_active');
@@ -1690,7 +1932,7 @@ var StreamItem = {
    * @author KM
    */
   getDetailAction: function() {
-    console.log("[StreamItem][getAction]");    
+    debug.log("[StreamItem][getAction]");    
     return StreamItem.aDetailAction;
   },
   
@@ -1700,7 +1942,7 @@ var StreamItem = {
    * @param object pCssObj(JSON)
    */
   updateCss: function(pCssObj) {
-    console.log("[StreamItem][updateCss]");
+    debug.log("[StreamItem][updateCss]");
     var lCssObj = jQuery.parseJSON(pCssObj);
     ClassHandler.removeClassesByParent(jQuery('#new_shares'), 'item_active');
     jQuery('#'+lCssObj["itemid"]).addClass('item_active');

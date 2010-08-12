@@ -22,7 +22,7 @@ var Utils = {
    * @return array lCleanedArray
    */
   explode: function(pDelimiter, pString) {
-  	console.log('dumdidum');
+  	debug.log('dumdidum');
     var lArray = pString.split(pDelimiter);
     var lCleanedArray = new Array();
     var lCounter = 0;
@@ -86,7 +86,7 @@ var Utils = {
   },
   
   getParams: function() {
-   console.log('[Utils][getParams]');
+   debug.log('[Utils][getParams]');
     var vars = [], hash;
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     for(var i = 0; i < hashes.length; i++)
@@ -109,7 +109,7 @@ var Utils = {
    * @description check if an element exists in markup
    */  
   elementExists: function(pElement) {
-    console.log(pElement);
+    debug.log(pElement);
     if(pElement === undefined || pElement == '' || pElement == null || pElement.length == 0) {
       return false;
     } else {
@@ -177,7 +177,7 @@ var PositionHelper = {
    * @author KM
    */
   getScrollHeight: function() {
-    console.log("[PositionHelper][getScrollHeight]");
+    debug.log("[PositionHelper][getScrollHeight]");
     var lBody = PositionHelper.getBody();
     var lOffset = 0;
     if (window.pageYOffset) {
@@ -193,7 +193,7 @@ var PositionHelper = {
    * @author KM
    */  
   getBody: function() {
-    console.log("[PositionHelper][getBody]");    
+    debug.log("[PositionHelper][getBody]");    
     var lBody = null;
     if(document.all && !window.opera) {
       lBody =(window.document.compatMode == "CSS1Compat")? window.document.documentElement : window.document.body || null;

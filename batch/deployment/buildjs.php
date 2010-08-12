@@ -74,8 +74,8 @@ function combineFiles($pFiles, $pFileName) {
   		//remove all spaces
   		$lValue = trim(chop(str_replace(" ", "", $lValue)));
 
-  		//if(sfConfig::get('app_settings_dev') == false && strpos($lValue, 'console.log') !== false) {
-  		if(strpos($lValue, 'console.log') !== false) {
+  		//if(sfConfig::get('app_settings_dev') == false && strpos($lValue, 'debug.log') !== false) {
+  		if(strpos($lValue, 'debug.log') !== false) {
   			unset($lArray[$lKey]);
   		}
 
@@ -88,7 +88,7 @@ function combineFiles($pFiles, $pFileName) {
         //get the content
         $lContent = file_get_contents($lMyFile);
         if(sfConfig::get('app_settings_dev') == false) {
-          $lContent = str_replace('console.log', "//console.log", $lContent);
+          $lContent = str_replace('debug.log', "//debug.log", $lContent);
         }
         //and write to the end of the new file
         $lDone = fwrite($lWholeFile, $lContent);

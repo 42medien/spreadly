@@ -14,7 +14,7 @@ var ItemDetail = {
    * @param object pResponse(JSON)
    */
   show: function(pResponse) {
-    console.log("[StreamItemDetail][show]");
+    debug.log("[StreamItemDetail][show]");
     //delete the old one
     jQuery('#stream_right').empty();
     //check where the user is and set new position for detail-box
@@ -31,7 +31,7 @@ var ItemDetail = {
    * @author KM
    */
   setPosition: function() {
-    console.log("[StreamItemDetail][setPosition]");  
+    debug.log("[StreamItemDetail][setPosition]");  
     //find the current scrollheight
     var lOffsetHeight = PositionHelper.getScrollHeight();
     //get the stream-box
@@ -56,7 +56,7 @@ var ItemDetailFilter = {
    * @param object pCssObj(JSON)
    */
   updateCss: function(pCssObj) {
-    console.log("[ItemDetailFilter][updateCss]"); 
+    debug.log("[ItemDetailFilter][updateCss]"); 
     //make a object from the json
     var lCssObj = jQuery.parseJSON(pCssObj);
     //if a class is set in it
@@ -83,7 +83,7 @@ var ItemDetailStream = {
    * @param object pResponse(JSON) 
    */
   show: function(pResponse) {
-    console.log("[ItemDetailStream][show]");
+    debug.log("[ItemDetailStream][show]");
     //clicked pager or tab?
     if(pResponse.page < 1 || pResponse.page === undefined){
       //if clicked tab: empty the old stream

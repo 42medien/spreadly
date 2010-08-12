@@ -17,7 +17,7 @@ var Stream = {
 	 * @param object pResponse(JSON) 
 	 */
 	show: function(pResponse) { 
-		console.log("[Stream][show]");
+		debug.log("[Stream][show]");
 		if(pResponse.page < 1 || pResponse.page === undefined) {
 			//empty the stream
 			jQuery('#stream_left_bottom').empty();
@@ -80,7 +80,7 @@ var SubFilter = {
    * @param string pAction
    */
   setAction: function(pAction) {
-    console.log("[SubFilter][setAction]");  	
+    debug.log("[SubFilter][setAction]");  	
     SubFilter.aAction = pAction;
   },
   
@@ -90,7 +90,7 @@ var SubFilter = {
    * @author KM
    */
   getAction: function() {
-    console.log("[SubFilter][getAction]");  	
+    debug.log("[SubFilter][getAction]");  	
   	return SubFilter.aAction;
   },
   
@@ -99,7 +99,7 @@ var SubFilter = {
    * @author KM
    */
   updateCss: function(pCssId) {
-    console.log("[SubFilter][updateCss]"); 
+    debug.log("[SubFilter][updateCss]"); 
     //remove all classes named filter-chosen from a parent-list called all_network_list    	
     ClassHandler.removeClassesByParent(jQuery('#all_networks_list'), 'filter_chosen');
     ClassHandler.removeClassesByParent(jQuery('#friends_active_list'), 'filter_chosen'); 
@@ -122,7 +122,7 @@ var MainFilter = {
 	 * @param object pDataObj(JSON)
 	 */
   updateData: function(pDataObj) {
-    console.log("[MainFilter][updateData]");
+    debug.log("[MainFilter][updateData]");
     //parse the request-data-obj and write it in global var 	
   	MainFilter.aDataObj = jQuery.parseJSON(pDataObj);
     jQuery.each(jQuery('.main_filter'), function(i, pField) {
@@ -136,7 +136,7 @@ var MainFilter = {
    * @param object pElement(DOM)
    */
   setData:  function(pElement) {
-    console.log("[MainFilter][setData]");  
+    debug.log("[MainFilter][setData]");  
   	var lData = '';
   	//if the element has a data-obj (!!!has to have)
     if(jQuery(pElement).attr('data-obj')){ 
@@ -172,7 +172,7 @@ var MainFilter = {
    * @author KM
    */
   updateCss: function(pCssClass) {
-    console.log("[MainFilter][updateCss]");    	
+    debug.log("[MainFilter][updateCss]");    	
     var lOuter = jQuery('#main_nav_outer');
     jQuery(lOuter).removeClass('whats_hot_active');
     jQuery(lOuter).removeClass('whats_not_active');

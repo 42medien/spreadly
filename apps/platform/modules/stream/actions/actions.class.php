@@ -17,6 +17,7 @@ class streamActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('stream/js_init_stream.js'));
     $this->pSocialObjects = SocialObjectTable::retrieveHotObjets($this->getUser()->getUserId());
   }
 
@@ -25,6 +26,7 @@ class streamActions extends sfActions
     $lCallback = $request->getParameter('callback', 'logerror');
     $lContactId = $request->getParameter('userid', null);
     $lComId = $request->getParameter('comid', null);
+    $lPage = $request->getParameter('page', 1);
     $lCss = $request->getParameter('css');
     $lString = '';
     if($lContactId) {
@@ -55,7 +57,7 @@ class streamActions extends sfActions
     $lCallback = $request->getParameter('callback', 'logerror');
     $lContactId = $request->getParameter('userid', null);
     $lComId = $request->getParameter('comid', null);
-    $lPage = $request->getParameter('page', 0);
+    $lPage = $request->getParameter('page', 1);
     $lCss = $request->getParameter('css');
     $lString = '';
     if($lContactId) {
@@ -86,7 +88,7 @@ class streamActions extends sfActions
     $lCallback = $request->getParameter('callback', 'GlobalError.logerror');
     $lContactId = $request->getParameter('userid', null);
     $lComId = $request->getParameter('comid', null);
-    $lPage = $request->getParameter('page', 0);
+    $lPage = $request->getParameter('page', 1);
     $lCss = $request->getParameter('css');
     $lString = '';
     if($lContactId) {
@@ -156,6 +158,27 @@ class streamActions extends sfActions
   }
 
   public function executeGet_contacts_by_sortname(sfWebRequest $request) {
-    $lUsers = UserTable::getFriendsByName($this->getUser()->getUserId(), 'hans');
+    $this->getResponse()->setContentType('application/json');
+  	$lChar = $request->getParameter('sortname', '');
+    $lUsers = UserTable::getFriendsByName($this->getUser()->getUserId(), $lChar);
+    $lArray = array();
+    $i=0;
+    foreach($lUsers->getData() as $lUser){
+    	$lArray[$i] = json_encode(
+        array(
+          'id' => $lUser->getId(),
+          'fullname' => $lUser->getFullname(),
+          'username' => $lUser->getUsername()
+        )
+      );
+      $i++;
+    }
+    return $this->renderText(
+      json_encode(
+        array(
+          "results"  => json_encode($lArray)
+        )
+      )
+    );
   }
 }

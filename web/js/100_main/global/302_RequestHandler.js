@@ -20,7 +20,7 @@ var GlobalRequest = {
 	 * @param object pParams
 	 */
 	initGlobals: function(pElement, pParams) {
-		console.log("[GlobalRequest][initGlobals]");
+		debug.log("[GlobalRequest][initGlobals]");
 		//is the given element an link
     if(jQuery(pElement).is('a') && !jQuery(pElement).attr('data-obj') && !jQuery(pElement).attr('onclick')) {
     	//set the global vars in the setGlobalsByUri method
@@ -40,7 +40,7 @@ var GlobalRequest = {
 	 * @param string pHref (have to look like that: http://example.com?callback=MYCALLBACK()&param=PARAM)
 	 */
 	setGlobalsByUri: function(pHref) {
-    console.log("[GlobalRequest][setGlobalsByUri]");		
+    debug.log("[GlobalRequest][setGlobalsByUri]");		
 		//take the callback from the href-uri
     GlobalRequest.aCallback = pHref.match(/([?&]callback[a-zA-Z0-9=\.]+)/)[0].split('=')[1];
     //and delete it from it, because we dont need twice the same param 
@@ -54,7 +54,7 @@ var GlobalRequest = {
 	 * @param object pParams
 	 */
 	setGlobalsByObject: function(pParams) {
-    console.log("[GlobalRequest][setGlobalsByObject]");		
+    debug.log("[GlobalRequest][setGlobalsByObject]");		
 		//set global action and callback vars
 		GlobalRequest.aAction = pParams.action;
 		GlobalRequest.aCallback = pParams.callback;
@@ -73,7 +73,7 @@ var GlobalRequest = {
    * @param object pElement
    */	
 	setGlobalByData: function(pElement) {
-    console.log("[GlobalRequest][setGlobalByData]");   	
+    debug.log("[GlobalRequest][setGlobalByData]");   	
 		//take the data-obj attribute from the given element
 		var lParams = jQuery(pElement).attr('data-obj');
 		//parse it to a object
@@ -97,7 +97,7 @@ var GlobalRequest = {
 	 * @param string pString
 	 */
 	parseAction: function(pString) {
-    console.log("[GlobalRequest][parseAction]");    		
+    debug.log("[GlobalRequest][parseAction]");    		
     var lAction = pString;
     //if there is a dot in the string, it is a callback-function if not, it is a action-string and we return it
     if(lAction.indexOf('.') != -1) {
@@ -121,7 +121,7 @@ var GlobalRequest = {
 	 * @param object pParams
 	 */
 	bindClickById: function(pId, pParams) {
-    console.log("[GlobalRequest][bindClickById]"); 		
+    debug.log("[GlobalRequest][bindClickById]"); 		
 		//get the element identified by the given id
 		var lElement = jQuery('#'+pId);
 		//init the global vars for dosend
@@ -145,7 +145,7 @@ var GlobalRequest = {
    * @param object pParams
    */	
 	bindClickByTag: function(pParentId, pTagName, pParams) {
-    console.log("[GlobalRequest][bindClickByTag]");  		
+    debug.log("[GlobalRequest][bindClickByTag]");  		
 		//bind the click to all tags that are childs of the given parentid -> ATTENTION: this is needed for performance. 
 		//Never ever bind events to a tagname global
     jQuery('#'+pParentId+' '+pTagName).live("click", function() {
@@ -168,7 +168,7 @@ var GlobalRequest = {
    * @param object pParams
    */ 	
   bindClickByClass: function(pParentId, pClassName, pParams) {
-    console.log("[GlobalRequest][bindClickByClass]");     	
+    debug.log("[GlobalRequest][bindClickByClass]");     	
     //bind the click to all elements that are childs of the given parentid and has the given classname -> ATTENTION: this is needed for performance. 
     //Never ever bind events to a tagname global  	
     jQuery('#'+pParentId+' .'+pClassName).live("click", function() { 
@@ -187,7 +187,7 @@ var GlobalRequest = {
    * @param object pParames
    */
   bindClickByElement: function(pElement, pParams) {
-    console.log("[GlobalRequest][bindClickByElement]");     	
+    debug.log("[GlobalRequest][bindClickByElement]");     	
   	jQuery(pElement).die('click');
   	jQuery(pElement).live("click", function() {
       GlobalRequest.initGlobals(pElement, pParams);  		
@@ -207,7 +207,7 @@ var GlobalRequest = {
    * @param object pParams
 	 */
 	initOnClick: function(pElement, pParams) {
-    console.log("[GlobalRequest][initOnClick]");  		
+    debug.log("[GlobalRequest][initOnClick]");  		
     //init the global vars for dosend 
     GlobalRequest.initGlobals(pElement, pParams);  
     //and send request on click  
@@ -224,7 +224,7 @@ var GlobalRequest = {
 	 * @param string pActionType
 	 */
 	doSend: function(pActionType) {
-    console.log("[GlobalRequest][doSend]"); 
+    debug.log("[GlobalRequest][doSend]"); 
     OnLoadGrafic.showGrafic();
 		var lActionType = 'GET';
 		if(pActionType) {

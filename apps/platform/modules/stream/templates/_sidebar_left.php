@@ -17,6 +17,7 @@
   </ul>
 
   <p class="filter_headline"><?php echo __('Friends Active', null, 'platform'); ?></p>
+  <input type="text" id="input-friend-filter"/>
   <ul class="normal_list" id="friends_active_list">
     <li><a href="/" class="user_filter" target="_blank" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "comid":"0", "css":"{\"class\":\"normal_list\", \"id\":\"com-filter-0\"}"}'><?php echo __('All'); ?></a></li>
     <?php foreach ($pFriends as $lFriend) { ?>
