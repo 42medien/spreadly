@@ -7,14 +7,9 @@ User:
   actAs:
     MemcacheBehavior: ~
     Timestampable:  ~
-    Sluggable:
-      unique: true
-      fields: [username]
-      canUpdate: false
   columns:
     username:
       type:       string(63)
-      unique:     true
     passwordhash:
       type:       string(32)
     salt:
