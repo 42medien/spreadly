@@ -2,15 +2,22 @@
 <?php foreach ($pActivities as $lActivity) { ?>
 <?php $lUser = UserTable::getInstance()->retrieveByPK($lActivity->getUId()); ?>
   <li class="clearfix">
-    <div class="so_share_image left"><?php echo image_tag('/img/global/yiid-logo.png', array('width' => 30)); ?></div>
-    <div class="so_share_information left">
+    <div class="so_share_image left">
+      <?php echo image_tag('/img/global/yiid-logo.png', array('width' => 30)); ?>
+    </div>
+    <div class="so_share_spread left">
       <?php $lActivityCids = $lActivity->getCids(); ?>
       <?php foreach($lActivityCids as $lCid) { ?>
         <?php $lCommunityName = CommunityTable::getInstance()->retrieveByPk($lCid)->getSlug(); ?>
-        <span class="icon_small_service icon_small_<?php echo $lCommunityName; ?>">&nbsp;</span>
+        <span class="icon_small_service_right icon_small_<?php echo $lCommunityName; ?>">&nbsp;</span><br/>
       <?php } ?>
-      <?php echo link_to_yiid($lUser->getFullname(), $lUser->getUsername(), null, array('class' => 'user_share')); ?>
+    </div>
+    <div class="so_share_information left">
+      <?php echo link_to_yiid($lUser->getFullname(), $lUser->getUsername(), null, array('class' => 'user_share')); ?><br/>
       <span class="url"><?php echo __('via %1 %2 minutes ago', array('%1' => 'Twitter', '%2' => '2'), 'platform'); ?></span>
+    </div>
+    <div class="right">
+      <span class="thumb_down icon_detail_right">&nbsp;</span>
     </div>
   </li>
 <?php } ?>

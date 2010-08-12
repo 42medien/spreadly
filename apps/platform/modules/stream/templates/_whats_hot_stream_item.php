@@ -16,7 +16,7 @@
       </div>
       <div class="clearfix whats_hot_info_area">
 	      <p class="text_important"><?php echo $pObject->getTitle(); ?></p>
-        <p class="url"><?php echo link_to($pObject->getUrl(), url_for($pObject->getUrl(), true)); ?></p>
+        <p><?php echo link_to($pObject->getUrl(), url_for($pObject->getUrl(), true), array('class' => 'url')); ?></p>
         <p class="main_text"><?php echo $pObject->getStmt(); ?></p>
 	    </div>
 	  </div>

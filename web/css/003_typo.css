@@ -18,7 +18,7 @@ h5{ font-size: 1em; font-weight: bold; }
  *   @section -FontSize
  */
 .url, .like-dislike, .user_filter, .pager_load_more, .user_share{font-size: 0.8em;}
-.so_comment{font-size: 0.9em;}
+.so_comment, #so_right_view p{font-size: 0.9em;}
 .btn, .text_action, #so_information h5 a{font-size: 11px;}
 #stream_left_top p, #search input{font-size: 13px;}
 #nav_main, #so_information h3{font-size: 14px;}
@@ -40,7 +40,7 @@ h5{ font-size: 1em; font-weight: bold; }
  */
 a:hover, .btn:hover, .whats_new_active #main_nav_inner2 p:hover, .whats_not_active #main_nav_inner2 p:hover, .whats_new_active #main_nav_inner4 p:hover, .whats_hot_active #main_nav_inner4 p:hover, 
 	.whats_hot_active #main_nav_inner7 p:hover, .whats_not_active #main_nav_inner7 p:hover{text-decoration: underline;}
-a, a.icon_thumb, li.filter_chosen a, a.icon_thumbs, a.icon_thumb, a.icon_small_use{text-decoration: none;}
+a, a.icon_thumb, li.filter_chosen a, a.icon_thumbs, a.icon_thumb, a.icon_small_use, .whats_hot_info_area .url, .whats_not_info_area .url{text-decoration: none;}
 
 /**
  *   @section -TextAlignment
@@ -53,6 +53,8 @@ a, a.icon_thumb, li.filter_chosen a, a.icon_thumbs, a.icon_thumb, a.icon_small_u
  *   @section -LineHeight
  */
 .two_block_area li{line-height: 13px;}
+#so_right_view p{line-height: 1.3em;}
+#so_right_view h3{line-height: 1.4em;}
 .sharing_user_info p, #signin_area p, .so_comment{line-height: 1.5em;}
 #so_information h5 a{line-height: 1.6em;}
 .so_headline_left, .so_headline_right{line-height: 18px;}
