@@ -9,6 +9,7 @@
 class LikeSettings {
   const MONGO_HOSTNAME = 'localhost';
   const MONGO_DATABASENAME = 'yiid';
+  const MONGO_STATS_DATABASENAME = 'yiid_stats';
 
   const WIDGET_USED_LIKE = 1;
   const WIDGET_USED_DISLIKE = -1;

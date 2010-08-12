@@ -31,10 +31,14 @@ if (isset($_GET['short']) && !empty($_GET['short'])) {
   $pFullShortVersion = false;
 }
 
+
 $pUserId = MongoSessionPeer::extractUserIdFromSession(LikeSettings::SF_SESSION_COOKIE);
 $lSocialObjectArray = SocialObjectPeer::getDataForUrl($pUrl);
 $lIsUsed = YiidActivityObjectPeer::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId);
 $lSocialObjectArray = SocialObjectPeer::recalculateCountsRespectingUser($lSocialObjectArray, $lIsUsed);
+
+// track visit
+YiidStatsSingleton::trackVisit($pUrl, $pUserId, $pType, $_GET['cult'], 'like');
 
 $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
 

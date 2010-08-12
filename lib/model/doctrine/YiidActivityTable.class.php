@@ -114,6 +114,7 @@ class YiidActivityTable extends Doctrine_Table
     if (!empty($lVerifiedOnlineIdentityIds)) {
       self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb);
       $lSocialObject->updateObjectOnLikeActivity($lVerifiedOnlineIdentityIds, $pUrl, $pScore, $lServices);
+      YiidStatsSingleton::trackClick(urldecode($pUrl), $pUserId, $pScore, $pVerb);
     }
     return true;
   }

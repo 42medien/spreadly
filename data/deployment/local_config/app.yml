@@ -60,10 +60,7 @@ all:
   mongodb:
     host:   127.0.0.1
     database_name:  'yiid'
-    
-  mongodb_visits:
-    host:   127.0.0.1
-    database_name:  'yiid_stats'
+    database_name_stats:  'yiid_stats'
 
   amazons3:
     access_key:  'AKIAJ5NSA6ET5RC4AMXQ'

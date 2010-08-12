@@ -59,14 +59,10 @@ all:
     server_ip:      'mario'
 
   mongodb:
-    host:           'donkeykong'
-    database_name:  'yiid_dev'
+    host:                 'donkeykong'
+    database_name:        'yiid_dev'
+    database_name_stats:  'yiid_stats_dev'
   
-  mongodb_visits:
-    host:    'donkeykong'
-    database_name:  'yiid_stats_dev'
-    
-
   amazons3:
     access_key:  'AKIAJ5NSA6ET5RC4AMXQ'
     secret_key:  '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'

@@ -1,6 +1,7 @@
 <?php
 require_once('../../../lib/utils/UrlUtils.php');
 require_once('../../../lib/vendor/sqs.php');
+require_once('../../../lib/utils/YiidStatsSingleton.php');
 
 /**
  *

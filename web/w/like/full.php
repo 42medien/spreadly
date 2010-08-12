@@ -32,16 +32,16 @@ if (isset($_GET['short']) && !empty($_GET['short'])) {
   $pFullShortVersion = false;
 }
 
-
-
-
 $pUserId = MongoSessionPeer::extractUserIdFromSession(LikeSettings::SF_SESSION_COOKIE);
 $lSocialObjectArray = SocialObjectPeer::getDataForUrl($pUrl);
-
 $lIsUsed = YiidActivityObjectPeer::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId);
-
 $lSocialObjectArray = SocialObjectPeer::recalculateCountsRespectingUser($lSocialObjectArray, $lIsUsed);
 $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
+
+
+// track visit
+YiidStatsSingleton::trackVisit($pUrl, $pUserId, $pType, $_GET['cult'], 'full');
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
