@@ -61,6 +61,11 @@ all:
   mongodb:
     host:           'donkeykong'
     database_name:  'yiid_dev'
+  
+  mongodb_visits:
+    host:    'donkeykong'
+    database_name:  'yiid_stats_dev'
+    
 
   amazons3:
     access_key:  'AKIAJ5NSA6ET5RC4AMXQ'

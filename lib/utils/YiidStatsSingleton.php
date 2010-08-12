@@ -5,7 +5,7 @@ class YiidStatsSingleton {
   const MONGO_COLLECTION_NAME_VISITS = 'visits';
 
   public static function getMongoCollection() {
-    return MongoDbConnector::getInstance()->getCollection(sfConfig::get('app_mongodb_database_name'), self::MONGO_COLLECTION_NAME_VISITS);
+    return MongoDbConnector::getInstance()->getCollection(sfConfig::get('app_mongodb_visits_database_name'), self::MONGO_COLLECTION_NAME_VISITS);
   }
 
 
