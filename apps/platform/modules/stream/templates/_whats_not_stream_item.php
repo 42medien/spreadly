@@ -6,7 +6,7 @@
     <div class="left whats_hot_stream_head_left">
       <div class="clearfix">
         <div class="left so_headline_left">
-          <span class="icon_small_service icon_small_facebook left">&nbsp;</span>
+          <?php echo image_tag('http://getfavicon.appspot.com/'.$pObject->getUrl(), array('class' => 'icon_small_service left')); ?>
           <span class="url left"><?php echo __('via %1 %2 minutes ago', array('%1' => 'Twitter', '%2' => '2'), 'platform'); ?></span>
         </div>
         <div class="right so_headline_right">
