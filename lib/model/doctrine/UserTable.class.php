@@ -80,15 +80,17 @@ class UserTable extends Doctrine_Table {
    * @author Matthias Pfefferle
    * @param int $pUserId
    * @param string $pName
+   * @param int $pLimit
    * @return array
    */
-  public static function getFriendsByName($pUserId, $pName) {
+  public static function getFriendsByName($pUserId, $pName, $pLimit = 10) {
     $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
 
     $lQ = Doctrine_Query::create()
       ->from('User u')
       ->where('u.sortname LIKE ?', "%".$pName."%")
-      ->andWhereIn('u.id', $lFriendIds);
+      ->andWhereIn('u.id', $lFriendIds)
+      ->limit($pLimit);
 
     return $lQ->execute();
   }
