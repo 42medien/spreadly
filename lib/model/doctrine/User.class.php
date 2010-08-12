@@ -106,14 +106,10 @@ class User extends BaseUser {
    * @return string
    */
   public function generateSortname() {
-    if ($this->getLastname() != '') {
-      $lSortname = $this->getLastname().$this->getFirstname();
-    }
-    else {
-      $lSortname = $this->getUsername();
-    }
+    $lSortname = $this->getLastname().$this->getFirstname().$this->getUsername();
+    $lSortname = trim($lSortname);
 
-    if (preg_match('/^[^a-zA-Z]/', $lSortname)) {
+    if (preg_match('/^[^a-zA-Z]/',$lSortname)) {
       $lSortname = '#'.$lSortname;
     }
     return $lSortname;
