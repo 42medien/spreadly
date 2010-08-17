@@ -64,7 +64,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 #header_sub{width: 250px;height:60px;}
 #header_main{width: 37%;height:60px;}
 #header_supp{width: 37%;height:60px;}
-  #nav_main li{list-style-type: none;margin: 30px 30px 0 0;float:left;}
+  #nav_main li{list-style-type: none;margin: 30px 28px 0 0;float:left;}
   #nav_main li a{padding: 4px 25px;}
   li#nav_main_settings{margin-right: 0;}
     
@@ -83,10 +83,12 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 #stream_photo{margin: 15px auto;}
 .normal_list{list-style-type: none;margin: 10px 0 20px;}
 .icon_service{padding: 4px 10px 4px 33px;}
+.icon_detail_right{padding: 4px;}
 .user_filter{padding: 4px 10px 4px 10px;}
 .icon_thumb{padding: 5px 14px;}
 .icon_thumbs{padding: 5px 24px;}
 .icon_small_service{padding: 0px 7px;}
+.icon_small_service_right{padding: 0px 7px;margin-left: 3px;}
 .icon_small_use{margin-left: 5px;}
 .icon_small_use{padding: 3px 0 0 12px;}
 
@@ -170,7 +172,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
   #search1{width: 60%;padding:5px 10px;height: 14px;border: 1px solid #ccc;-webkit-border-radius: 4px 0 0 4px;-moz-border-radius: 4px 0 0 4px;border-radius: 4px 0 0 4px;border-right: none;}
   #search2{width: 33px;height: 26px;padding:4px 0;-webkit-border-radius: 0 4px 4px 0;-moz-border-radius: 0 4px 4px 0;border-radius: 0 4px 4px 0;border-left: none;}
   #search3{width: 27px;padding: 13px 5px;}
-  
+    
     #preview{padding:0 20px 25px;overflow: hidden;}
     #stream_right_top div{float:left;}
     #nav_shares_inner1{width:3px;height:30px;}
@@ -184,13 +186,15 @@ mark, rp, rt, ruby, summary, time{ display: inline }
   #so_right_view{padding: 30px 20px 20px 20px;}
     #so_image{width:20%;}
     #so_information{width:75%;padding-left:10px;}
-    #so_information h3, #so_information h5{margin-bottom:5px;}
+    #so_information h3{margin-bottom:5px;} 
+    #so_information h5{margin-bottom:10px;}
     
   #stream_right_bottom{padding: 25px 30px 10px;}
     .shares{list-style-type: none;}
     .shares li{margin-bottom: 10px;padding-bottom: 10px;border-bottom: 1px dashed #4EA734;}
     .so_share_image{width: 15%;}
-    .so_share_information{width: 85%;}
+    .so_share_spread{width: 20px;}
+    .so_share_information{width: 69%;}
     .so_share_small_information, .so_share_information, .url{padding-left: 0;}
     .text_action{padding-left: 17px;}
     #so_right_view .url{padding-left:0;}
@@ -315,8 +319,6 @@ p, a.text_action, h3, h2, h5, .btn, #content label, li.filter_chosen a{color: #6
 #main_nav_inner8{background: transparent url("/img/sprites/sprite_navigation.png") 0 -540px no-repeat;}
 .whats_not_active #main_nav_inner8, .whats_hot_active #main_nav_inner8{background: transparent url("/img/sprites/sprite_navigation.png") 0 -600px no-repeat;}
 
-li.item_active{margin: 3px 5px !important;border: 2px solid #d7d7d7;border-right: 2px solid #68bc4f;border-bottom: 2px solid #68bc4f;background: #ecf6e9 url("/img/global/item_active_bg.png") right bottom no-repeat;/*background-color: #ECF6E9;*/}
-
 /* Stream Item Background */
 .green_arrow{background: #fff url("/img/sprites/sprite_repeat_y.png") 0 0 repeat-y;}
 .green_top_left{background: #fff url("/img/sprites/sprite_stream.png") 0 -149px no-repeat;}
@@ -331,7 +333,10 @@ li.item_active{margin: 3px 5px !important;border: 2px solid #d7d7d7;border-right
 .user_like{border: 1px #68bc4f solid;background: transparent url("/img/sprites/sprite_general.png") 0 -138px no-repeat;}
 .user_dislike{border: 1px #68bc4f solid;background: transparent url("/img/sprites/sprite_general.png") 0 -175px no-repeat;}
 
-.whats_hot_stream_item{border: 1px #d7d7d7 solid;background: transparent url("/img/sprites/sprite_repeat_y.png") -4049px 0 repeat-y;}
+li.item_active{background: #ecf6e9 url("/img/global/item_active_bg.png") right bottom no-repeat;}
+
+.whats_hot_stream_item{border: 2px solid #e6e3e3;border-right: 2px solid #d7d7d7;border-bottom: 2px solid #d7d7d7;background: transparent url("/img/sprites/sprite_repeat_y.png") -4049px 0 repeat-y;}
+li.item_active .whats_hot_stream_item{border: 2px solid #d7d7d7;border-right: 2px solid #68bc4f;border-bottom: 2px solid #68bc4f;}
 .whats_hot_stream_icon{background-color: #c4e3bb}
 
 .pager_load_more{background: transparent url("/img/sprites/sprite_general.png") no-repeat scroll 90px -116px;}
@@ -372,8 +377,10 @@ li.item_active{margin: 3px 5px !important;border: 2px solid #d7d7d7;border-right
 .thumb_all_active .thumb_up_down{background: transparent url("/img/sprites/sprite_icons.png") 10px 4px no-repeat;}
 .thumb_up{background: transparent url("/img/sprites/sprite_icons.png") 9px -571px no-repeat;}
 .thumb_up_active .thumb_up{background: transparent url("/img/sprites/sprite_icons.png") 9px -33px no-repeat;}
+#detail-stream .thumb_up{background: transparent url("/img/sprites/sprite_icons.png") 0 -33px no-repeat;}
 .thumb_down{background: transparent url("/img/sprites/sprite_icons.png") 9px -607px no-repeat;}
 .thumb_down_active .thumb_down{background: transparent url("/img/sprites/sprite_icons.png") 9px -70px no-repeat;}
+#detail-stream .thumb_down{background: transparent url("/img/sprites/sprite_icons.png") 0 -70px no-repeat;}
 
     
 /* Footer */
@@ -419,7 +426,7 @@ h5{ font-size: 1em; font-weight: bold; }
  *   @section -FontSize
  */
 .url, .like-dislike, .user_filter, .pager_load_more, .user_share{font-size: 0.8em;}
-.so_comment{font-size: 0.9em;}
+.so_comment, #so_right_view p{font-size: 0.9em;}
 .btn, .text_action, #so_information h5 a{font-size: 11px;}
 #stream_left_top p, #search input{font-size: 13px;}
 #nav_main, #so_information h3{font-size: 14px;}
@@ -441,7 +448,7 @@ h5{ font-size: 1em; font-weight: bold; }
  */
 a:hover, .btn:hover, .whats_new_active #main_nav_inner2 p:hover, .whats_not_active #main_nav_inner2 p:hover, .whats_new_active #main_nav_inner4 p:hover, .whats_hot_active #main_nav_inner4 p:hover, 
 	.whats_hot_active #main_nav_inner7 p:hover, .whats_not_active #main_nav_inner7 p:hover{text-decoration: underline;}
-a, a.icon_thumb, li.filter_chosen a, a.icon_thumbs, a.icon_thumb, a.icon_small_use{text-decoration: none;}
+a, a.icon_thumb, li.filter_chosen a, a.icon_thumbs, a.icon_thumb, a.icon_small_use, .whats_hot_info_area .url, .whats_not_info_area .url{text-decoration: none;}
 
 /**
  *   @section -TextAlignment
@@ -454,6 +461,8 @@ a, a.icon_thumb, li.filter_chosen a, a.icon_thumbs, a.icon_thumb, a.icon_small_u
  *   @section -LineHeight
  */
 .two_block_area li{line-height: 13px;}
+#so_right_view p{line-height: 1.3em;}
+#so_right_view h3{line-height: 1.4em;}
 .sharing_user_info p, #signin_area p, .so_comment{line-height: 1.5em;}
 #so_information h5 a{line-height: 1.6em;}
 .so_headline_left, .so_headline_right{line-height: 18px;}
