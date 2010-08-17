@@ -27,7 +27,7 @@ h5{ font-size: 1em; font-weight: bold; }
 /**
  *   @section -FontWeight
  */
-.user_name, .text_important, .whats_hot_active #main_nav_inner2 p, .whats_not_active #main_nav_inner4 p, .whats_new #main_nav_inner7 p, #nav_main li a, .user_filter{font-weight: bold;}
+.user_name, .text_important, .whats_hot_active #main_nav_inner2 p, .whats_not_active #main_nav_inner4 p, .whats_new #main_nav_inner7 p{font-weight: bold;}
 
 /**
  *   @section -FontStyle
