@@ -20,14 +20,7 @@
   <input type="text" id="input-friend-filter"/>
   <ul class="normal_list" id="friends_active_list">
     <li><a href="/" class="user_filter" target="_blank" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "comid":"0", "css":"{\"class\":\"normal_list\", \"id\":\"com-filter-0\"}"}'><?php echo __('All'); ?></a></li>
-    <?php foreach ($pFriends as $lFriend) { ?>
-    <li class="clearfix" id="user-filter-<?php echo $lFriend->getId(); ?>">
-      <a href="/" class="user_filter stream_filter" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "userid":"<?php echo $lFriend->getId(); ?>", "css": "{\"class\":\"normal_list\", \"id\":\"user-filter-<?php echo $lFriend->getId(); ?>\"}"}'>
-        <?php echo image_tag('/img/global/yiid-logo.png', array('width' => 16, 'height' => 16, 'class' => 'icon_user left')); ?>
-        <?php echo truncate_text($lFriend->getFullname(), 18, '...'); ?>
-      </a>
-    </li>
-    <?php } ?>
+    <?php include_partial('stream/sidebar_friendlist', array('pFriends'=>$pFriends));?>
   </ul>
-
+  <span id="friend-counter">500</span>
 </div>

@@ -1,30 +1,30 @@
 jQuery.fn.inputfilter = function(pParams) {
   var lParams = pParams;
-  var lAction = lParams['action'];
+  var lUrl = lParams['url'];
   var lCallback = lParams['callback'];
   var lParent = jQuery('#'+lParams['parentid']);
-  var lFilter, lCount=0;
+  var lMinchar = lParams['minchar'];
+  var lFilter;
   
   return this.each(function(){
-    jQuery(this).bind('keyup', function() {
+    jQuery(this).keyup(function() {
       lFilter = jQuery(this).val();
-      
-      jQuery.ajax({
-        type: 'GET',
-        dataType:"json",
-        url: lAction,
-        data: {'sortname': lFilter},
-        success: function(pResponse) {
-          if(lCallback.indexOf('.') != -1) {
-            //explode the string between the dot
-            var lArray = lCallback.split('.');          
-          
-            window[lArray[0]][lArray[1]](pResponse);
-          } else {
-            window[lCallback](pResponse);
+      if(!lParams['minchar'] || lFilter.length > lParams['minchar']) {
+        jQuery.ajax({
+          type: "GET",
+          url: lUrl,
+          dataType: "json",
+          data: {'sortname':lFilter},
+          success: function(pResponse) {
+            jQuery(lParent).empty();
+            jQuery(lParent).append(pResponse.html);
+            if(lCallback!== undefined) {
+              lCallback(pResponse);
+            }
           }
-        }
-      });      
+        });
+      }
     });
   });
 };
+

@@ -161,22 +161,10 @@ class streamActions extends sfActions
     $this->getResponse()->setContentType('application/json');
   	$lChar = $request->getParameter('sortname', '');
     $lUsers = UserTable::getFriendsByName($this->getUser()->getUserId(), $lChar);
-    $lArray = array();
-    $i=0;
-    foreach($lUsers->getData() as $lUser){
-    	$lArray[$i] = json_encode(
-        array(
-          'id' => $lUser->getId(),
-          'fullname' => $lUser->getFullname(),
-          'username' => $lUser->getUsername()
-        )
-      );
-      $i++;
-    }
     return $this->renderText(
       json_encode(
         array(
-          "results"  => json_encode($lArray)
+          "html"  => $this->getPartial('stream/sidebar_friendlist', array('pFriends' => $lUsers->getData()))
         )
       )
     );
