@@ -18,7 +18,9 @@ class streamActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('stream/js_init_stream.js'));
-    $this->pSocialObjects = SocialObjectTable::retrieveHotObjets($this->getUser()->getUserId());
+    $lObjects = $this->pSocialObjects = SocialObjectTable::retrieveHotObjets($this->getUser()->getUserId());
+    
+    $this->getUser()->setAttribute('social_object_id', $lObjects[0]->getId());
   }
 
   public function executeNew(sfWebRequest $request) {
