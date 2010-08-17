@@ -58,7 +58,7 @@ class OpenGraph implements Iterator
    * @return OpenGraph
    */
   static public function parse($HTML) {
-    return self::_parse($URI);
+    return self::_parse($HTML);
   }
 
   /**
@@ -84,9 +84,10 @@ class OpenGraph implements Iterator
     $page = new self();
 
     foreach ($tags AS $tag) {
+      $matches = array();
       if ($tag->hasAttribute('property') &&
-          strpos($tag->getAttribute('property'), 'og:') === 0) {
-        $key = strtr(substr($tag->getAttribute('property'), 3), '-', '_');
+          preg_match('/(\s|^)og:(\S+)(\s|$)/i', $tag->getAttribute('property'), $matches)) {
+        $key = strtr($matches[2], "-", "_");
         $page->_values[$key] = $tag->getAttribute('content');
       }
     }
