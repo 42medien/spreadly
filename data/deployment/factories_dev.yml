@@ -40,7 +40,7 @@ all:
     param:
       cache_key_use_vary_headers: true
       cache_key_use_host_name:    true
-  
+
   i18n:
     class: sfI18N
     param:
@@ -56,5 +56,42 @@ all:
           servers:
             default:
               host: 127.0.0.1     #aws
-              port: 11211      
-   
+              port: 11211
+
+  storage:
+    class: sfMongoSessionStorage
+    param:
+      db_table:        session
+      db_id_col:       sess_id
+      db_time_col:     sess_time
+      db_data_col:     sess_data
+      host:            donkeykong
+      port:            27017
+      db_name:         yiid_dev
+      collection_name:   session
+      session_name:    yiiddev_com
+      session_cookie_domain: .yiiddev.com
+      session_cookie_lifetime: 17776000
+  routing:
+    class: sfPatternRouting
+    param:
+#      load_configuration: true
+#      suffix:             .
+#      default_module:     default
+#      default_action:     index
+#      variable_prefixes:  [':']
+      segment_separators: ['/']
+#      variable_regex:     '[\w\d_]+'
+#      debug:              %SF_DEBUG%
+#      logging:            %SF_LOGGING_ENABLED%
+#      cache:
+#        class: sfFileCache
+#        param:
+#          automatic_cleaning_factor: 0
+#          cache_dir:                 %SF_CONFIG_CACHE_DIR%/routing
+#          lifetime:                  31556926
+#          prefix:                    %SF_APP_DIR%
+  user:
+    class: myUser
+    param:
+      timeout:         17776000
