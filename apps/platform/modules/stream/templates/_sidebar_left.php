@@ -23,4 +23,8 @@
     <?php include_partial('stream/sidebar_friendlist', array('pFriends'=>$pFriends));?>
   </ul>
   <span id="friend-counter">500</span>
+  
+  <div class="center_area">
+    <?php echo link_to(__('Abmelden'), '@auth_signout', array('class' => 'url')); ?>
+  </div>
 </div>

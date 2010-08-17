@@ -38,6 +38,10 @@ auth_signin:
   url:   /signin
   param: { module: auth, action: signin }
 
+auth_signout:
+  url:   /signout
+  param: { module: auth, action: signout }
+
 auth_complete_twitter_signin:
   url:   /auth/complete_twitter_signin
   param: { module: auth, action: complete_twitter_signin }

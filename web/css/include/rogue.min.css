@@ -69,7 +69,7 @@ li{padding:0
 10px;height:14px;border:1px
 solid #ccc;-webkit-border-radius:4px 0 0 4px;-moz-border-radius:4px 0 0 4px;border-radius:4px 0 0 4px;border-right:none}#search2{width:33px;height:26px;padding:4px
 0;-webkit-border-radius:0 4px 4px 0;-moz-border-radius:0 4px 4px 0;border-radius:0 4px 4px 0;border-left:none}#search3{width:27px;padding:13px
-5px}#preview{padding:0
+5px}#stream_right{width:100%;border-left:none;position:relative;top:0}#preview{padding:0
 20px 25px;overflow:hidden}#stream_right_top
 div{float:left}#nav_shares_inner1{width:3px;height:30px}#nav_shares_inner2{height:30px}#nav_shares_inner3{width:50px;height:30px}#nav_shares_inner4{height:30px}#nav_shares_inner5{width:50px;height:30px}#nav_shares_inner6{height:30px}#nav_shares_inner7{width:50px;height:30px}#nav_shares_outer{width:100%;height:30px}#so_right_view{padding:30px
 20px 20px 20px}#so_image{width:20%}#so_information{width:75%;padding-left:10px}#so_information
@@ -130,11 +130,11 @@ p{border-color:#cdcdcd}#nav_shares_outer{background:transparent url("/img/sprite
 #nav_shares_inner5{background:transparent url("/img/sprites/sprite_navigation.png") 0 -660px no-repeat}.thumb_down_active
 #nav_shares_inner5{background:transparent url("/img/sprites/sprite_navigation.png") 0 -840px no-repeat}#nav_shares_inner6{background:#6a6b6a url("/img/sprites/sprite_repeat_x.png") 0 -270px repeat-x}.thumb_down_active
 #nav_shares_inner6{background:#acacac url("/img/sprites/sprite_repeat_x.png") 0 -225px repeat-x}#nav_shares_inner7{background:transparent url("/img/sprites/sprite_navigation.png") 0 -780px no-repeat}.thumb_down_active
-#nav_shares_inner7{background:transparent url("/img/sprites/sprite_navigation.png") 0 -900px no-repeat}#stream_right_bottom{background-color:#ecf6e9}.thumb_up_down{background:transparent url("/img/sprites/sprite_icons.png") 10px -644px no-repeat}.thumb_all_active
-.thumb_up_down{background:transparent url("/img/sprites/sprite_icons.png") 10px 4px no-repeat}.thumb_up{background:transparent url("/img/sprites/sprite_icons.png") 9px -571px no-repeat}.thumb_up_active
-.thumb_up{background:transparent url("/img/sprites/sprite_icons.png") 9px -33px no-repeat}#detail-stream
-.thumb_up{background:transparent url("/img/sprites/sprite_icons.png") 0 -33px no-repeat}.thumb_down{background:transparent url("/img/sprites/sprite_icons.png") 9px -607px no-repeat}.thumb_down_active
-.thumb_down{background:transparent url("/img/sprites/sprite_icons.png") 9px -70px no-repeat}#detail-stream
+#nav_shares_inner7{background:transparent url("/img/sprites/sprite_navigation.png") 0 -900px no-repeat}#stream_right_bottom{background-color:#ecf6e9}.thumb_up_down{background:transparent url("/img/sprites/sprite_icons.png") 18px -642px no-repeat}.thumb_all_active
+.thumb_up_down{background:transparent url("/img/sprites/sprite_icons.png") 18px 6px no-repeat}.thumb_up{background:transparent url("/img/sprites/sprite_icons.png") 11px -569px no-repeat}.thumb_up_active
+.thumb_up{background:transparent url("/img/sprites/sprite_icons.png") 11px -31px no-repeat}#detail-stream
+.thumb_up{background:transparent url("/img/sprites/sprite_icons.png") 0 -33px no-repeat}.thumb_down{background:transparent url("/img/sprites/sprite_icons.png") 11px -608px no-repeat}.thumb_down_active
+.thumb_down{background:transparent url("/img/sprites/sprite_icons.png") 11px -69px no-repeat}#detail-stream
 .thumb_down{background:transparent url("/img/sprites/sprite_icons.png") 0 -70px no-repeat}#footer{border-top:5px solid #6A6B6A;background-color:#68b94f}.description_wave{background:transparent url("/img/sprites/sprite_signin.png") -12% -604px no-repeat}.image_button_full_long_en{background:transparent url("/img/sprites/sprite_signin.png") 0 -235px no-repeat}#yiid_description2{background:transparent url("/img/sprites/sprite_signin.png") 0 -370px no-repeat}#yiid_description3{background:transparent url("/img/sprites/sprite_signin.png") 0 0 no-repeat}#signin_area{border:1px
 #ccc solid;background-color:#fff}.icon_big_facebook{background:transparent url("/img/sprites/sprite_popup.png") 47% -210px no-repeat}.icon_big_twitter{background:transparent url("/img/sprites/sprite_popup.png") 50% -298px no-repeat}.icon_big_google{background:transparent url("/img/sprites/sprite_popup.png") 47% -385px no-repeat}.icon_big_facebook_add_service{background:transparent url("/img/sprites/sprite_popup.png") 47% -210px no-repeat}.icon_big_twitter_add_service{background:transparent url("/img/sprites/sprite_popup.png") 50% -298px no-repeat}.icon_big_google_add_service{background:transparent url("/img/sprites/sprite_popup.png") 47% -385px no-repeat}.bg_light{background-color:#fff}.bd_normal_light{border:1px
 #ccc solid}@CHARSET "UTF-8";body{font:normal normal 0.85em/1em 'lucida grande',tahoma,verdana,arial,sans-serif}h1{font-size:4.4em;font-weight:normal}h2{font-size:2.8em;font-weight:bold}h3{font-size:1.6em;font-weight:bold}h4{font-size:1.2em;font-weight:bold}h5{font-size:1em;font-weight:bold}.url,.like-dislike,.user_filter,.pager_load_more,.user_share{font-size:0.8em}.so_comment, #so_right_view
@@ -142,7 +142,8 @@ p{font-size:0.9em}.btn, .text_action, #so_information h5
 a{font-size:11px}#stream_left_top p, #search
 input{font-size:13px}#nav_main, #so_information
 h3{font-size:14px}#what_is_yiid_description
-p{font-size:16px}.user_name, .text_important, .whats_hot_active #main_nav_inner2 p, .whats_not_active #main_nav_inner4 p, .whats_new #main_nav_inner7 p, #nav_main li a,.user_filter{font-weight:bold}a:hover, .btn:hover, .whats_new_active #main_nav_inner2 p:hover, .whats_not_active #main_nav_inner2 p:hover, .whats_new_active #main_nav_inner4 p:hover, .whats_hot_active #main_nav_inner4 p:hover,
+p{font-size:16px}.user_name, .text_important, .whats_hot_active #main_nav_inner2 p, .whats_not_active #main_nav_inner4 p, .whats_new #main_nav_inner7
+p{font-weight:bold}a:hover, .btn:hover, .whats_new_active #main_nav_inner2 p:hover, .whats_not_active #main_nav_inner2 p:hover, .whats_new_active #main_nav_inner4 p:hover, .whats_hot_active #main_nav_inner4 p:hover,
 .whats_hot_active #main_nav_inner7 p:hover, .whats_not_active #main_nav_inner7 p:hover{text-decoration:underline}a, a.icon_thumb, li.filter_chosen a, a.icon_thumbs, a.icon_thumb, a.icon_small_use, .whats_hot_info_area .url, .whats_not_info_area
 .url{text-decoration:none}#all_networks_list li, #friends_active_list li, .user_hover_area_top, user_hover_area_bottom, #signin_via_username_form label, .two_block_area li, .two_block_area h5, #magic_after_registration
 .right_block{text-align:left}.center_area{text-align:center}.actions{text-align:right}.two_block_area

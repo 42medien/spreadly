@@ -25,6 +25,13 @@ class authActions extends sfActions {
       $lObject->doAuthentication();
     }
   }
+  
+  public function executeSignout(sfWebRequest $request) {
+  	if($this->getUser()->getIsAuthenticated()) {
+      $this->getUser()->signOut();
+  	}
+    $this->redirect('@homepage');
+  }
 
   public function executeBasic(sfWebRequest $request) {
     if ($request->getMethod() == "POST") {

@@ -173,6 +173,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
   #search2{width: 33px;height: 26px;padding:4px 0;-webkit-border-radius: 0 4px 4px 0;-moz-border-radius: 0 4px 4px 0;border-radius: 0 4px 4px 0;border-left: none;}
   #search3{width: 27px;padding: 13px 5px;}
     
+    #stream_right{width: 100%;border-left:none; position: relative; top:0;}
     #preview{padding:0 20px 25px;overflow: hidden;}
     #stream_right_top div{float:left;}
     #nav_shares_inner1{width:3px;height:30px;}
@@ -373,13 +374,13 @@ li.item_active .whats_hot_stream_item{border: 2px solid #d7d7d7;border-right: 2p
   .thumb_down_active #nav_shares_inner7{background: transparent url("/img/sprites/sprite_navigation.png") 0 -900px no-repeat;}
 	
 #stream_right_bottom{background-color: #ecf6e9;}
-.thumb_up_down{background: transparent url("/img/sprites/sprite_icons.png") 10px -644px no-repeat;}
-.thumb_all_active .thumb_up_down{background: transparent url("/img/sprites/sprite_icons.png") 10px 4px no-repeat;}
-.thumb_up{background: transparent url("/img/sprites/sprite_icons.png") 9px -571px no-repeat;}
-.thumb_up_active .thumb_up{background: transparent url("/img/sprites/sprite_icons.png") 9px -33px no-repeat;}
+.thumb_up_down{background: transparent url("/img/sprites/sprite_icons.png") 18px -642px no-repeat;}
+.thumb_all_active .thumb_up_down{background: transparent url("/img/sprites/sprite_icons.png") 18px 6px no-repeat;}
+.thumb_up{background: transparent url("/img/sprites/sprite_icons.png") 11px -569px no-repeat;}
+.thumb_up_active .thumb_up{background: transparent url("/img/sprites/sprite_icons.png") 11px -31px no-repeat;}
 #detail-stream .thumb_up{background: transparent url("/img/sprites/sprite_icons.png") 0 -33px no-repeat;}
-.thumb_down{background: transparent url("/img/sprites/sprite_icons.png") 9px -607px no-repeat;}
-.thumb_down_active .thumb_down{background: transparent url("/img/sprites/sprite_icons.png") 9px -70px no-repeat;}
+.thumb_down{background: transparent url("/img/sprites/sprite_icons.png") 11px -608px no-repeat;}
+.thumb_down_active .thumb_down{background: transparent url("/img/sprites/sprite_icons.png") 11px -69px no-repeat;}
 #detail-stream .thumb_down{background: transparent url("/img/sprites/sprite_icons.png") 0 -70px no-repeat;}
 
     
@@ -435,7 +436,7 @@ h5{ font-size: 1em; font-weight: bold; }
 /**
  *   @section -FontWeight
  */
-.user_name, .text_important, .whats_hot_active #main_nav_inner2 p, .whats_not_active #main_nav_inner4 p, .whats_new #main_nav_inner7 p, #nav_main li a, .user_filter{font-weight: bold;}
+.user_name, .text_important, .whats_hot_active #main_nav_inner2 p, .whats_not_active #main_nav_inner4 p, .whats_new #main_nav_inner7 p{font-weight: bold;}
 
 /**
  *   @section -FontStyle
