@@ -119,7 +119,7 @@ YiidStatsSingleton::trackVisit($pUrl, $pUserId, $pType, $_GET['cult'], 'full');
 <div id="container_used" class="left" <?php if($lIsUsed === false) { ?>style="display: none;"<?php } ?>>
     <div id="used_button" class="normal_button_area <?php echo (!$pFullShortVersion ? 'normal_space' : 'small_space') ?>_used" target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>');">
 
-      <?php if(is_numeric($lIsUsed)) { ?>
+      <?php if(is_numeric($lIsUsed) && $lIsUsed == 1) { ?>
 
         <?php if($pFullShortVersion) { ?>
           <p class="like_icon" id="liked-text" title="<?php echo __('POS_BUTTON_ACTION_VALUE', $pType); ?>">&nbsp;</p>
@@ -127,7 +127,7 @@ YiidStatsSingleton::trackVisit($pUrl, $pUserId, $pType, $_GET['cult'], 'full');
           <p id="liked-text" class="left"><?php echo __('POS_BUTTON_ACTION_VALUE', $pType); ?></p>
         <?php } ?>
 
-      <?php } elseif ($lIsUsed == -1) { ?>
+      <?php } elseif (is_numeric($lIsUsed) && $lIsUsed == -1) { ?>
 
         <?php if($pFullShortVersion) { ?>
           <p class="dislike_icon" id="disliked-text" title="<?php echo __('NEG_BUTTON_ACTION_VALUE', $pType); ?>">&nbsp;</p>
