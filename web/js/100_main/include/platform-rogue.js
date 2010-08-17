@@ -1652,10 +1652,13 @@ var Landing = {
 		toggleLoginAreas: function() {
 			
 			jQuery('.toggle_login_area').live("click", function() {
-				var id = this.id;
-				var area_ids = Utils.explode('-', id);
 				
-				Utils.toggleTwoAreas(area_ids[0], area_ids[1]);
+				var lParams = jQuery(this).attr('data-obj');
+				lParams = jQuery.parseJSON(lParams);
+				
+				Utils.toggleTwoAreas(lParams.from_id, lParams.to_id);
+				
+				return false;
 			});
 		}
 		

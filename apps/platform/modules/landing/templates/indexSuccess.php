@@ -3,7 +3,7 @@
 	  <h3><?php echo __('No registration needed - please use your favourite service to login', null, "platform"); ?></h3>
 	  <p>
       <?php echo __('(For returning users: please use the same service you have used before or login with user and password %1.)',
-        array('%1' => '<a href="/" class="toggle_login_area" id="signin_via_username-signin_via_services">here</a>'), "platform"); ?>
+        array('%1' => '<a href="/" class="toggle_login_area" data-obj=\'{"from_id":"signin_via_username", "to_id":"signin_via_services"}\'>here</a>'), "platform"); ?>
 	  </p>
 
 <?php // Utils.toggleTwoAreas(\'signin_via_username\', \'signin_via_services\');return false; ?>
@@ -27,7 +27,7 @@
 
 	<div id="signin_via_username" <?php if ($pAuthType != "basic") { echo 'style="display: none;"'; } ?>>
     <h3><?php echo __('Returning user? Log in here.', null, "platform"); ?></h3>
-    <p><?php echo __('(First time users please go back %1.)', array('%1' => '<a href="/" class="toggle_login_area" id="signin_via_services-signin_via_username">here</a>'), "platform"); ?></p>
+    <p><?php echo __('(First time users please go back %1.)', array('%1' => '<a href="/" class="toggle_login_area" data-obj=\'{"from_id":"signin_via_services", "to_id":"signin_via_username"}\'>here</a>'), "platform"); ?></p>
 
     <form action="<?php echo url_for('@auth_basic'); ?>" method="post" id="signin_via_username_form">
 
