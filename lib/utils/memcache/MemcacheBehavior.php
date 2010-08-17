@@ -36,10 +36,12 @@ class MemcacheBehavior extends Doctrine_Template {
     // try to get memcahe object
     try {
       $lObject = MemcacheManager::getInstance()->getCache()->get($pKey);
+
       // if available return memcache object
       if ($lObject) {
+        $lObject = unserialize($lObject);
         sfContext::getInstance()->getLogger()->info('{yiidMemCache} found '.get_class($lObject) . " " . $pKey);
-        return unserialize($lObject);
+        return $lObject;
       }
       // else return null
     } catch (Exception $e) {
