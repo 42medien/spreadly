@@ -104,6 +104,7 @@ class ShortUrlTable extends Doctrine_Table
    */
   public static function shortenUrl($pUrl) {
     $lUrl = urldecode($pUrl);
+    $lUrl = str_replace(" ", "+", $lUrl);
 
     if (!UrlUtils::isUrlValid($lUrl)) {
       throw new ModelException("invalid url");

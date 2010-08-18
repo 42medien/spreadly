@@ -625,6 +625,8 @@ class UrlUtils {
    * @return unknown_type
    */
   public static function cleanupHostAndUri($pUrl) {
+    $pUrl = urldecode($pUrl);
+    $pUrl = str_replace(" ", "+", $pUrl);
     $pUrl = self::skipTrailingSlash($pUrl);
     $parameterList = parse_url($pUrl);
     $pQueryString = '';
