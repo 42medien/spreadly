@@ -28,7 +28,7 @@
     <?php include_partial('stream/sidebar_friendlist', array('pFriends'=>$pFriends));?>
   </ul>
   <div class="center_area filter_counter_area">
-    <span id="friend-counter">500</span> <?php echo __('Results', null, 'platform'); ?>
+    <span id="friend-counter"><?php echo $pFriendsCount; ?></span> <?php echo __('Results', null, 'platform'); ?>
     <span><a href="/" id="all-friends-link"><?php echo __('SHOW_ALL_FRIENDS', null, 'platform')?></a></span>
   </div>
   

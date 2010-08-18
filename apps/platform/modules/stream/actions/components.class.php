@@ -22,7 +22,7 @@ class streamComponents extends sfComponents
     $this->pFriends = UserTable::getHottestFriendsForUser($this->getUser()->getUserId(), 1, 10);
     // get friends alphabetically
     // $this->pFriends = UserTable::getAlphabeticalFriendsForUser($this->getUser()->getUserId(), 1, 10);
-
+    $this->pFriendsCount = $this->getUser()->getUser()->countFriends();
   }
 
   public function executeSearch_field() {}
@@ -31,7 +31,7 @@ class streamComponents extends sfComponents
   	// get first object
   	$lObjectId = $this->getUser()->getAttribute('social_object_id');
   	$this->pObject = SocialObjectTable::retrieveByPK($lObjectId);
-    $this->pActivities = YiidActivityTable::retrieveByYiidActivityId($this->getUser()->getId(), $lObjectId, 'all');
+    $this->pActivities = YiidActivityTable::retrieveByYiidActivityId($this->getUser()->getId(), $lObjectId, 'all', 1, 2);
   }
 
   public function executeContacts_infobox() {

@@ -173,6 +173,14 @@ class User extends BaseUser {
   public function updateContacts($pContactUserIds, $pIdentityIds) {
     return UserRelationTable::updateContactIdentities($this->getId(), $pIdentityIds, $pContactUserIds);
   }
+  
+  /**
+   * counts friends of user
+   */
+  public function countFriends() {
+  	$lFriendIds = UserRelationTable::retrieveUserRelations($this->getId())->getContactUid();
+  	return count($lFriendIds);
+  }
 
   /**
    * returns the users yiid
