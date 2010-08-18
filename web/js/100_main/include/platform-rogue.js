@@ -1763,6 +1763,7 @@ var FriendListFilter = {
     if(jQuery('#friends_active_list').css('display') == 'none') {
       ElementHandler.toggleTwoAreas('friends_active_list', 'friends_all_list');
       TextHandler.toggleById('all-friends-link', 'SHOW_ALL_FRIENDS', 'SHOW_HOT_FRIENDS');
+      TextHandler.toggleById('active_friends_headline', 'ACTIVE_FRIENDS', 'ALL_FRIENDS');
     }
   }
 };
@@ -1794,6 +1795,7 @@ var FriendList = {
     jQuery('#all-friends-link').live('click', function() {
       ElementHandler.toggleTwoAreas('friends_active_list', 'friends_all_list');
       TextHandler.toggleById('all-friends-link', 'SHOW_ALL_FRIENDS', 'SHOW_HOT_FRIENDS');
+      TextHandler.toggleById('active_friends_headline', 'ALL_FRIENDS', 'ACTIVE_FRIENDS');
       return false;
     });
   },

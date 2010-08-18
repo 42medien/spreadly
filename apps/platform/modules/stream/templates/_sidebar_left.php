@@ -16,23 +16,23 @@
     <?php } ?>
   </ul>
 
-  <p class="filter_headline"><?php echo __('Friends Active', null, 'platform'); ?></p>
+  <p class="filter_headline" id="active_friends_headline"><?php echo __('ACTIVE_FRIENDS', null, 'platform'); ?></p>
   <div class="center_area search_field_area">
     <input type="text" id="input-friend-filter" value="<?php echo __('Type name to filter...', null, 'platform'); ?>" />
   </div>
   <ul class="normal_list show" id="friends_active_list">
-    <li>active</li>
     <?php include_partial('stream/sidebar_friendlist', array('pFriends'=>$pFriends));?>
   </ul>
 
-  <ul class="normal_list" id="friends_all_list" style="display: none; height: 80px; overflow: scroll;">
-    <li>all</li>
+  <ul class="normal_list" id="friends_all_list">
     <?php include_partial('stream/sidebar_friendlist', array('pFriends'=>$pFriends));?>
   </ul>
-  Counter: <span id="friend-counter">500</span>
-  <span><a href="/" id="all-friends-link"><?php echo __('SHOW_ALL_FRIENDS')?></a></span>
+  <div class="center_area filter_counter_area">
+    <span id="friend-counter">500</span> <?php echo __('Results', null, 'platform'); ?>
+    <span><a href="/" id="all-friends-link"><?php echo __('SHOW_ALL_FRIENDS')?></a></span>
+  </div>
   
-  <div class="center_area">
-    <?php echo link_to(__('Abmelden'), '@auth_signout', array('class' => 'url')); ?>
+  <div class="center_area search_field_area">
+    <?php echo link_to(__('Logout'), '@auth_signout', array('class' => 'url')); ?>
   </div>
 </div>

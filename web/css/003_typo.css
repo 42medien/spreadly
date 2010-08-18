@@ -17,10 +17,10 @@ h5{ font-size: 1em; font-weight: bold; }
 /**
  *   @section -FontSize
  */
-.url, .like-dislike, .user_filter, .pager_load_more, .user_share{font-size: 0.8em;}
-.so_comment, #so_right_view p{font-size: 0.9em;}
+.url, .like-dislike, .user_filter, .pager_load_more, .user_share, .search_field_area input, .filter_counter_area{font-size: 0.8em;}
+.so_comment, #so_right_view p, p.filter_headline{font-size: 0.9em;}
 .btn, .text_action, #so_information h5 a{font-size: 11px;}
-#stream_left_top p, #search input, .search_field_area input{font-size: 13px;}
+#stream_left_top p, #search input{font-size: 13px;}
 #nav_main, #so_information h3{font-size: 14px;}
 #what_is_yiid_description p{font-size: 16px;}
 
@@ -45,9 +45,10 @@ a, a.icon_thumb, li.filter_chosen a, a.icon_thumbs, a.icon_thumb, a.icon_small_u
 /**
  *   @section -TextAlignment
  */
-#all_networks_list li, #friends_active_list li, .user_hover_area_top, user_hover_area_bottom, #signin_via_username_form label, .two_block_area li, .two_block_area h5, #magic_after_registration .right_block{text-align: left;}
+#all_networks_list li, #friends_active_list li, #friends_all_list li, .user_hover_area_top, user_hover_area_bottom, #signin_via_username_form label, .two_block_area li, .two_block_area h5, #magic_after_registration .right_block{text-align: left;}
 .center_area{text-align: center;}
 .actions{text-align: right;}
+.filter_counter_area{text-align: left;}
 
 /**
  *   @section -LineHeight
