@@ -29,7 +29,7 @@
   </ul>
   <div class="center_area filter_counter_area">
     <span id="friend-counter">500</span> <?php echo __('Results', null, 'platform'); ?>
-    <span><a href="/" id="all-friends-link"><?php echo __('SHOW_ALL_FRIENDS')?></a></span>
+    <span><a href="/" id="all-friends-link"><?php echo __('SHOW_ALL_FRIENDS', null, 'platform')?></a></span>
   </div>
   
   <div class="center_area search_field_area">
