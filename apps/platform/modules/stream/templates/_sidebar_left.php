@@ -18,11 +18,17 @@
 
   <p class="filter_headline"><?php echo __('Friends Active', null, 'platform'); ?></p>
   <input type="text" id="input-friend-filter"/>
-  <ul class="normal_list" id="friends_active_list">
-    <li><a href="/" class="user_filter" target="_blank" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "comid":"0", "css":"{\"class\":\"normal_list\", \"id\":\"com-filter-0\"}"}'><?php echo __('All'); ?></a></li>
+  <ul class="normal_list show" id="friends_active_list">
+    <li>active</li>
     <?php include_partial('stream/sidebar_friendlist', array('pFriends'=>$pFriends));?>
   </ul>
-  <span id="friend-counter">500</span>
+
+  <ul class="normal_list" id="friends_all_list" style="display: none; height: 80px; overflow: scroll;">
+    <li>all</li>
+    <?php include_partial('stream/sidebar_friendlist', array('pFriends'=>$pFriends));?>
+  </ul>
+  Counter: <span id="friend-counter">500</span>
+  <span><a href="/" id="all-friends-link"><?php echo __('SHOW_ALL_FRIENDS')?></a></span>
   
   <div class="center_area">
     <?php echo link_to(__('Abmelden'), '@auth_signout', array('class' => 'url')); ?>

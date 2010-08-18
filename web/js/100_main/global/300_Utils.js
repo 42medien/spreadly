@@ -109,7 +109,6 @@ var Utils = {
    * @description check if an element exists in markup
    */  
   elementExists: function(pElement) {
-    debug.log(pElement);
     if(pElement === undefined || pElement == '' || pElement == null || pElement.length == 0) {
       return false;
     } else {
@@ -151,17 +150,6 @@ var Utils = {
 	    // PHP behavior, you would need to add ".replace(/~/g, '%7E');" to the following.
 	    return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').
 	                                                                    replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/%20/g, '+');
-	},
-
-  /**
-   * @description toggles between the two transfered ids
-   */  
-	toggleTwoAreas: function(pArea1, pArea2) {
-		
-		jQuery('#'+pArea2).slideToggle();
-		jQuery('#'+pArea1).slideToggle();
-		
-		return false;
 	}
 };
 
@@ -201,7 +189,7 @@ var PositionHelper = {
       lBody = document.documentElement;
     }
     return lBody;
-  }    
+  }
 };
 
 var OnLoadGrafic = {
@@ -254,5 +242,5 @@ var OnLoadGrafic = {
     } else {
       return 600;
     }
-  },
+  }
 };

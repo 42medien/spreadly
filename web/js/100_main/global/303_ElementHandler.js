@@ -16,7 +16,12 @@ var ClassHandler = {
 	
   removeClassesByParent: function(pParent, pClass) {
     jQuery(pParent).children('.'+pClass).removeClass(pClass);          
-  }	
+  },
+  
+  toggleClassesByElement: function(pElement, pShow, pRemove) {
+    jQuery(pElement).removeClass(pRemove);
+    jQuery(pElement).addClass(pShow);
+  }
 };
 
 
@@ -37,4 +42,17 @@ var ListHandler = {
     jQuery(pElement).siblings('li').removeClass(pClass);
     jQuery(pElement).addClass(pClass);		
 	}
+};
+
+var ElementHandler = {
+  /**
+   * @description toggles between the two transfered ids
+   */  
+  toggleTwoAreas: function(pArea1, pArea2) {
+    
+    jQuery('#'+pArea2).slideToggle();
+    jQuery('#'+pArea1).slideToggle();
+    
+    return false;
+  }    
 };

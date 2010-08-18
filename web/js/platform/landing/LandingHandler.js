@@ -1,5 +1,5 @@
 /**
- * @combine platform
+ * @nocombine platform
  */
  
  
@@ -25,10 +25,10 @@ var Landing = {
 				var lParams = jQuery(this).attr('data-obj');
 				lParams = jQuery.parseJSON(lParams);
 				
-				Utils.toggleTwoAreas(lParams.from_id, lParams.to_id);
+				ElementHandler.toggleTwoAreas(lParams.from_id, lParams.to_id);
 				
 				return false;
 			});
 		}
 		
-}
+};
