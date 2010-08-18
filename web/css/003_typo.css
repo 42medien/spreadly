@@ -20,7 +20,7 @@ h5{ font-size: 1em; font-weight: bold; }
 .url, .like-dislike, .user_filter, .pager_load_more, .user_share{font-size: 0.8em;}
 .so_comment, #so_right_view p{font-size: 0.9em;}
 .btn, .text_action, #so_information h5 a{font-size: 11px;}
-#stream_left_top p, #search input{font-size: 13px;}
+#stream_left_top p, #search input, .search_field_area input{font-size: 13px;}
 #nav_main, #so_information h3{font-size: 14px;}
 #what_is_yiid_description p{font-size: 16px;}
 

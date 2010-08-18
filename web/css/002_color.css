@@ -5,7 +5,7 @@
 /*a, .filter_headline{color: #4EA734;}*/
 a, .filter_headline, .whats_hot_active #main_nav_inner2 p, .whats_not_active #main_nav_inner4 p, .whats_new_active #main_nav_inner7 p, 
   #search1{color: #306f1d;}
-p, a.text_action, h3, h2, h5, .btn, #content label, li.filter_chosen a{color: #6a6b6a;}
+p, a.text_action, h3, h2, h5, .btn, #content label, li.filter_chosen a, .search_field_area input{color: #6a6b6a;}
 /*.url, a.url, span.url, .like-dislike{color: #bebebe;}*/
 .url, a.url, span.url, .like-dislike{color: #a5a4a4;}
 .error{color: #f97759;}

@@ -6,8 +6,6 @@
         array('%1' => '<a href="/" class="toggle_login_area" data-obj=\'{"from_id":"signin_via_username", "to_id":"signin_via_services"}\'>here</a>'), "platform"); ?>
 	  </p>
 
-<?php // Utils.toggleTwoAreas(\'signin_via_username\', \'signin_via_services\');return false; ?>
-
 	  <ul class="service_icons_big normal_list clearfix">
 	    <li class="left icon_big icon_big_facebook">
 		    <?php echo link_to("Facebook", "@auth_signin?service=facebook"); ?>

@@ -17,7 +17,9 @@
   </ul>
 
   <p class="filter_headline"><?php echo __('Friends Active', null, 'platform'); ?></p>
-  <input type="text" id="input-friend-filter"/>
+  <div class="center_area search_field_area">
+    <input type="text" id="input-friend-filter" value="<?php echo __('Type name to filter...', null, 'platform'); ?>" />
+  </div>
   <ul class="normal_list show" id="friends_active_list">
     <li>active</li>
     <?php include_partial('stream/sidebar_friendlist', array('pFriends'=>$pFriends));?>
