@@ -17,7 +17,11 @@
       <span class="url"><?php echo __('via %1 %2 minutes ago', array('%1' => 'Twitter', '%2' => '2'), 'platform'); ?></span>
     </div>
     <div class="right">
-      <span class="thumb_down icon_detail_right">&nbsp;</span>
+      <?php if($lActivity->getScore() == 1) { ?>
+        <span class="thumb_up icon_detail_right">&nbsp;</span>
+      <?php } else {?>
+        <span class="thumb_down icon_detail_right">&nbsp;</span>
+      <?php } ?>
     </div>
   </li>
 <?php } ?>
