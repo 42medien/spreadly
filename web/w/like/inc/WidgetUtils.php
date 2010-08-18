@@ -61,6 +61,8 @@ class SocialObjectPeer {
    */
   public static function getDataForUrl($pUrl, $pIsUsed = false) {
     $pUrl = urldecode($pUrl);
+    $pUrl = str_replace(" ", "+", $pUrl);
+
     $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
     $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, self::MONGO_COLLECTION);
     $pUrlHash = md5($pUrl);
