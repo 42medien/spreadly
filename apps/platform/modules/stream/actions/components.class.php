@@ -19,7 +19,9 @@ class streamComponents extends sfComponents
     $this->pServices = $lServices;
 
 
-    $this->pFriends = UserTable::getFriendsForUser($this->getUser()->getUserId());
+    $this->pFriends = UserTable::getHottestFriendsForUser($this->getUser()->getUserId(), 1, 10);
+    // get friends alphabetically
+    // $this->pFriends = UserTable::getAlphabeticalFriendsForUser($this->getUser()->getUserId(), 1, 10);
 
   }
 
