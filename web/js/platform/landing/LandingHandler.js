@@ -1,5 +1,5 @@
 /**
- * @nocombine platform
+ * @combine platform
  */
  
  
