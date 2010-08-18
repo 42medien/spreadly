@@ -161,6 +161,53 @@ e&&e.document?e.document.compatMode==="CSS1Compat"&&e.document.documentElement["
  * @combine platform
  */
 
+/**
+ * jQuery-Plugin to make a request and append the response-data on a specified box/list/etc
+ * the specified action has to response an json with an html attribute
+ * the specified action gets an sortname-params
+ * e.g: moduel/action?sortname=ha
+ * 
+ * @param object pParams
+ * @param string pParams[url]: required url to action
+ * @param string pParams[callback]: optional callback function that gets the whole response
+ * @param string pParams[parentid]: required cssid for the element where the response has to inserted
+ * @param string pParams[minchar]: optional number of minimum filter-characters
+ * 
+ */
+jQuery.fn.inputfilter = function(pParams) {
+  var lParams = pParams;
+  var lUrl = lParams['url'];
+  var lCallback = lParams['callback'];
+  var lMinchar = lParams['minchar'];
+  var lParent = jQuery('#'+lParams['parentid']);  
+  var lFilter;
+  
+  return this.each(function(){
+    jQuery(this).keyup(function() {
+      lFilter = jQuery(this).val();
+      if(!lParams['minchar'] || lFilter.length > lParams['minchar']) {
+        jQuery.ajax({
+          type: "GET",
+          url: lUrl,
+          dataType: "json",
+          data: {'sortname':lFilter, 'ei_kcuf': new Date().getTime()},
+          success: function(pResponse) {
+            if(lCallback!== undefined) {
+              lCallback(pResponse);
+            }
+            jQuery(lParent).empty();
+            jQuery(lParent).append(pResponse.html);
+          }
+        });
+      }
+    });
+  });
+};
+
+/**
+ * @combine platform
+ */
+
 /*!
  * JavaScript Debug - v0.4 - 6/22/2010
  * http://benalman.com/projects/javascript-debug-console-log/
@@ -538,7 +585,6 @@ var Utils = {
    * @description check if an element exists in markup
    */  
   elementExists: function(pElement) {
-    debug.log(pElement);
     if(pElement === undefined || pElement == '' || pElement == null || pElement.length == 0) {
       return false;
     } else {
@@ -580,17 +626,6 @@ var Utils = {
 	    // PHP behavior, you would need to add ".replace(/~/g, '%7E');" to the following.
 	    return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').
 	                                                                    replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/%20/g, '+');
-	},
-
-  /**
-   * @description toggles between the two transfered ids
-   */  
-	toggleTwoAreas: function(pArea1, pArea2) {
-		
-		jQuery('#'+pArea2).slideToggle();
-		jQuery('#'+pArea1).slideToggle();
-		
-		return false;
 	}
 };
 
@@ -630,7 +665,7 @@ var PositionHelper = {
       lBody = document.documentElement;
     }
     return lBody;
-  }    
+  }
 };
 
 var OnLoadGrafic = {
@@ -683,7 +718,7 @@ var OnLoadGrafic = {
     } else {
       return 600;
     }
-  },
+  }
 };
 /**
  * @combine platform
@@ -1077,7 +1112,12 @@ var ClassHandler = {
 	
   removeClassesByParent: function(pParent, pClass) {
     jQuery(pParent).children('.'+pClass).removeClass(pClass);          
-  }	
+  },
+  
+  toggleClassesByElement: function(pElement, pShow, pRemove) {
+    jQuery(pElement).removeClass(pRemove);
+    jQuery(pElement).addClass(pShow);
+  }
 };
 
 
@@ -1098,6 +1138,19 @@ var ListHandler = {
     jQuery(pElement).siblings('li').removeClass(pClass);
     jQuery(pElement).addClass(pClass);		
 	}
+};
+
+var ElementHandler = {
+  /**
+   * @description toggles between the two transfered ids
+   */  
+  toggleTwoAreas: function(pArea1, pArea2) {
+    
+    jQuery('#'+pArea2).slideToggle();
+    jQuery('#'+pArea1).slideToggle();
+    
+    return false;
+  }    
 };/**
  * @combine platform
  */
@@ -1144,6 +1197,21 @@ var DataObjectPager = {
     var lDataString = JSON.stringify(pDataObj);
     DataObjectPager.init(pId, lDataString);
 	}
+};/**
+ * @combine platform
+ */
+
+var TextHandler = {
+  toggleById: function(pId, pCurrent, pNew) {
+    var lElement = jQuery('#'+pId);
+    lCurrent = jQuery('#'+pId).text();
+    
+    if(lCurrent == pCurrent){
+      jQuery(lElement).text(pNew);
+    } else if(lCurrent == pNew) {
+      jQuery(lElement).text(pCurrent);      
+    }
+  }
 };/**
  * @combine platform
  */
@@ -1656,13 +1724,109 @@ var Landing = {
 				var lParams = jQuery(this).attr('data-obj');
 				lParams = jQuery.parseJSON(lParams);
 				
-				Utils.toggleTwoAreas(lParams.from_id, lParams.to_id);
+				ElementHandler.toggleTwoAreas(lParams.from_id, lParams.to_id);
 				
 				return false;
 			});
 		}
 		
-}/**
+};/**
+ * @combine platform
+ */
+
+
+/**
+ * object to handle filters for the friendlist on the left sidebar
+ * @author KM
+ */
+var FriendListFilter = {
+  
+  /**
+   * inits the inputfilter
+   * @author KM
+   */
+  init: function() {
+    jQuery('#input-friend-filter').inputfilter({
+      'parentid': 'friends_active_list', 
+      'url':'stream/get_contacts_by_sortname',
+      'callback': FriendListFilter.cbFilter
+    });
+  },
+  
+  /**
+   * callback function for the jquery.inputfilter-plugin initialized in FriendListFilter.init
+   * updates the friendcounter
+   * @author KM
+   * @param object pResponse
+   */
+  cbFilter: function(pResponse) {
+    if(jQuery('#friends_active_list').css('display') == 'none') {
+      ElementHandler.toggleTwoAreas('friends_active_list', 'friends_all_list');
+      TextHandler.toggleById('all-friends-link', 'SHOW_ALL_FRIENDS', 'SHOW_HOT_FRIENDS');
+    }
+  }
+};
+
+
+/**
+ * Object to handle the postload and toggle of the all-friend-list
+ * @author KM
+ */
+var FriendList = {
+
+  aPage: 1,    
+    
+  /**
+   * inits the functions
+   * @author KM
+   */
+  init: function() {
+    FriendList.toggleLists();
+    FriendList.loadMore();
+  },
+  
+  /**
+   * toggles between the hot and all-friends-list
+   * @author KM
+   */
+  toggleLists: function() {
+    debug.log("[FriendList][toggleLists]");      
+    jQuery('#all-friends-link').live('click', function() {
+      ElementHandler.toggleTwoAreas('friends_active_list', 'friends_all_list');
+      TextHandler.toggleById('all-friends-link', 'SHOW_ALL_FRIENDS', 'SHOW_HOT_FRIENDS');
+      return false;
+    });
+  },
+  
+  /**
+   * scrollpager for the friendlist
+   * @author KM
+   */
+  loadMore: function() {
+    jQuery('#friends_all_list').bind('scroll', function() {
+      var lElement = jQuery('#friends_all_list');
+      var lPage = 1;
+      
+      var scrolltop = jQuery(lElement).attr('scrollTop');  
+      var scrollheight = jQuery(lElement).attr('scrollHeight');  
+      var windowheight = jQuery(lElement).attr('clientHeight');
+      var scrolloffset = 0;
+      
+      if (scrolltop >= (scrollheight-(windowheight+scrolloffset))) {
+        jQuery.ajax({
+          type: "GET",
+          url: 'stream/get_contacts_by_sortname',
+          dataType: "json",
+          data: {'sortname':'h', 'page': FriendList.aPage},
+          success: function(pResponse) {
+            jQuery(lElement).append(pResponse.html);
+            FriendList.aPage++;
+          }
+        });        
+      }      
+    });
+  }
+};/**
  * @combine platform
  */
 
