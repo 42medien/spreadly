@@ -30,5 +30,17 @@ var StreamItem = {
     var lCssObj = jQuery.parseJSON(pCssObj);
     ClassHandler.removeClassesByParent(jQuery('#new_shares'), 'item_active');
     jQuery('#'+lCssObj["itemid"]).addClass('item_active');
+  },
+  
+  /**
+   * opens all links with class .url in a new tab
+   * @author KM
+   */
+  openWindow: function() {
+    jQuery('#stream_left_bottom a.url').live("click", function(){
+      var newWindow = window.open(this.getAttribute('href'), '_blank');
+      newWindow.focus();
+      return false;
+     });    
   }
 };
