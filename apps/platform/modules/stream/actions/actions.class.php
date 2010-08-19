@@ -163,7 +163,7 @@ class streamActions extends sfActions
     $lCallback = $request->getParameter('callback', 'GlobalError.logerror');
     $lCase = $request->getParameter('case', 'all');
     $lItemId = $request->getParameter('itemid');
-    $lPage = $request->getParameter('page', 0);
+    $lPage = $request->getParameter('page', 1);
     $lActivities = YiidActivityTable::retrieveByYiidActivityId($this->getUser()->getId(), $lItemId, $lCase, $lActivitiesCount, $lPage);
     $lCss = $request->getParameter('css');
     
