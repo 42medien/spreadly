@@ -25,7 +25,7 @@ class streamActions extends sfActions
   }
 
   public function executeNew(sfWebRequest $request) {
-    
+
     $this->getResponse()->setContentType('application/json');
     $lCallback = $request->getParameter('callback', 'logerror');
     $lContactId = $request->getParameter('userid', null);
@@ -57,10 +57,10 @@ class streamActions extends sfActions
   }
 
   public function executeHot(sfWebRequest $request) {
-    
+
     $lObjectsCount = 3;
     $lDoPaginate = true;
-    
+
     $this->getResponse()->setContentType('application/json');
     $lCallback = $request->getParameter('callback', 'logerror');
     $lContactId = $request->getParameter('userid', null);
@@ -75,7 +75,7 @@ class streamActions extends sfActions
     }
 
     $pSocialObjects = SocialObjectTable::retrieveHotObjets($this->getUser()->getUserId(),$lContactId, $lComId, $lObjectsCount, $lPage, $lObjectsCount);
-    
+
     if(count($pSocialObjects) < $lObjectsCount)
       $lDoPaginate = false;
 
@@ -96,10 +96,10 @@ class streamActions extends sfActions
   }
 
   public function executeNot(sfWebRequest $request) {
-    
+
     $lObjectsCount = 6;
     $lDoPaginate = true;
-    
+
     $this->getResponse()->setContentType('application/json');
     $lCallback = $request->getParameter('callback', 'GlobalError.logerror');
     $lContactId = $request->getParameter('userid', null);
@@ -114,7 +114,7 @@ class streamActions extends sfActions
     }
 
     $pSocialObjects = SocialObjectTable::retrieveFlopObjects($this->getUser()->getUserId(),$lContactId, $lComId, $lObjectsCount, $lPage, $lObjectsCount);
-    
+
     if(count($pSocialObjects) < $lObjectsCount)
       $lDoPaginate = false;
 
@@ -155,18 +155,16 @@ class streamActions extends sfActions
   }
 
   public function executeGet_item_detail_stream(sfWebRequest $request) {
-  	
+    $this->getResponse()->setContentType('application/json');
     $lActivitiesCount = 6;
     $lDoPaginate = true;
-    
-    $this->getResponse()->setContentType('application/json');
     $lCallback = $request->getParameter('callback', 'GlobalError.logerror');
     $lCase = $request->getParameter('case', 'all');
     $lItemId = $request->getParameter('itemid');
     $lPage = $request->getParameter('page', 1);
     $lActivities = YiidActivityTable::retrieveByYiidActivityId($this->getUser()->getId(), $lItemId, $lCase, $lActivitiesCount, $lPage);
     $lCss = $request->getParameter('css');
-    
+
     if(count($lActivities) < $lActivitiesCount)
       $lDoPaginate = false;
 
