@@ -182,14 +182,14 @@ class streamActions extends sfActions
     );
   }
 
-  public function executeGet_hottest_friends(sfWebRequest $request) {
+  public function executeGet_friends(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
     
     $lFriendsCount = 10;
     $lDoPaginate = true;
     
     $lPage = $request->getParameter('page');
-    $lUsers = UserTable::getHottestFriendsForUser($this->getUser()->getUserId(), $lPage, $lFriendsCount);
+    $lUsers = UserTable::getAlphabeticalFriendsForUser($this->getUser()->getUserId(), $lPage, $lFriendsCount);
     
     if(count($lUsers) < $lFriendsCount)
       $lDoPaginate = false;
