@@ -95,8 +95,12 @@ var ItemDetailStream = {
     jQuery('#detail-stream').append(pResponse.stream);
     //make a object from json-string
     var lDataObj = jQuery.parseJSON(pResponse.dataobj);
-    //update the pager-settings -> with the append isset a new pager, that needs to be initialized
-    DataObjectPager.update('item-stream-pager-link', null, pResponse.page, lDataObj); 
+    if(pResponse.pDoPaginate == false) {
+      jQuery('#item-stream-pager-link').remove();
+    } else {
+      //update the pager-settings -> with the append isset a new pager, that needs to be initialized
+      DataObjectPager.update('item-stream-pager-link', null, pResponse.page, lDataObj); 
+    }
     //and update the hightlight of the clicked tab/filter
     ItemDetailFilter.updateCss(pResponse.css);
     OnLoadGrafic.hideGrafic();    
