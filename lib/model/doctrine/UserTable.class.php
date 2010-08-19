@@ -156,4 +156,15 @@ class UserTable extends Doctrine_Table {
     
     return $lQ->execute();
   }
+  
+  public static function countFriendsByName($pUserId, $pName = null) {
+    $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
+
+    $lQ = Doctrine_Query::create()
+      ->from('User u')
+      ->where('u.sortname LIKE ?', "%".$pName."%")
+      ->andWhereIn('u.id', $lFriendIds);
+    
+    return $lQ->count();
+  }
 }

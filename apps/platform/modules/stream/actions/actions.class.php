@@ -192,11 +192,13 @@ class streamActions extends sfActions
   	$lChar = $request->getParameter('sortname', '');
   	$lPage = $request->getParameter('page');
     $lUsers = UserTable::getFriendsByName($this->getUser()->getUserId(), $lChar);
+    $lCounter = UserTable::countFriendsByName($this->getUser()->getUserId(), $lChar);
 
     return $this->renderText(
       json_encode(
         array(
-          "html"  => $this->getPartial('stream/sidebar_friendlist', array('pFriends' => $lUsers->getData()))
+          "html"  => $this->getPartial('stream/sidebar_friendlist', array('pFriends' => $lUsers->getData())),
+          "pCounter" => $lCounter
         )
       )
     );
