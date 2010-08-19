@@ -73,6 +73,7 @@ class SocialObjectTable extends Doctrine_Table
 
     $lResults = $lCollection->find($lQueryArray);
     $lResults->sort(array('l_cnt' => -1));
+    $lResults->limit($pLimit)->skip(($pPage - 1) * $pLimit);
 
     return self::hydrateMongoCollectionToObjects($lResults);
   }
@@ -86,6 +87,7 @@ class SocialObjectTable extends Doctrine_Table
     $lResults = $lCollection->find($lQueryArray);
 
     $lResults->sort(array('d_cnt' => -1));
+    $lResults->limit($pLimit)->skip(($pPage - 1) * $pLimit);
 
     return self::hydrateMongoCollectionToObjects($lResults);
   }

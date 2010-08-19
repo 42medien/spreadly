@@ -17,13 +17,15 @@ class streamActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
+    $lObjectsCount = 3;
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('stream/js_init_stream.js'));
-    $lObjects = $this->pSocialObjects = SocialObjectTable::retrieveHotObjets($this->getUser()->getUserId());
+    $lObjects = $this->pSocialObjects = SocialObjectTable::retrieveHotObjets($this->getUser()->getUserId(), null, null, $lObjectsCount, 1, $lObjectsCount);
 
     $this->getUser()->setAttribute('social_object_id', $lObjects[0]->getId());
   }
 
   public function executeNew(sfWebRequest $request) {
+    
     $this->getResponse()->setContentType('application/json');
     $lCallback = $request->getParameter('callback', 'logerror');
     $lContactId = $request->getParameter('userid', null);
@@ -38,7 +40,7 @@ class streamActions extends sfActions
     }
 
 
-    $pActivities = YiidActivityTable::retrieveLatestActivitiesByContacts($this->getUser()->getUserId(),$lContactId, $lComId);
+    $pActivities = YiidActivityTable::retrieveLatestActivitiesByContacts($this->getUser()->getUserId(),$lContactId, $lComId, $lObjectsCount, $lPage, $lObjectsCount);
 
     return $this->renderText(
       $lCallback.'('.
@@ -55,6 +57,10 @@ class streamActions extends sfActions
   }
 
   public function executeHot(sfWebRequest $request) {
+    
+    $lObjectsCount = 3;
+    $lDoPaginate = true;
+    
     $this->getResponse()->setContentType('application/json');
     $lCallback = $request->getParameter('callback', 'logerror');
     $lContactId = $request->getParameter('userid', null);
@@ -68,7 +74,10 @@ class streamActions extends sfActions
       $lString = ', "comid":"'.$lComId.'"';
     }
 
-    $pSocialObjects = SocialObjectTable::retrieveHotObjets($this->getUser()->getUserId(),$lContactId, $lComId);
+    $pSocialObjects = SocialObjectTable::retrieveHotObjets($this->getUser()->getUserId(),$lContactId, $lComId, $lObjectsCount, $lPage, $lObjectsCount);
+    
+    if(count($pSocialObjects) < $lObjectsCount)
+      $lDoPaginate = false;
 
     return $this->renderText(
       $lCallback.'('.
@@ -78,7 +87,8 @@ class streamActions extends sfActions
           "action" => "stream/hot",
           "dataobj" => '{"callback":"'.$lCallback.'"'.$lString.'}',
           "page" => $lPage,
-          "css" => $lCss
+          "css" => $lCss,
+          "pDoPaginate" => $lDoPaginate
         )
       )
       .");"
@@ -86,6 +96,10 @@ class streamActions extends sfActions
   }
 
   public function executeNot(sfWebRequest $request) {
+    
+    $lObjectsCount = 6;
+    $lDoPaginate = true;
+    
     $this->getResponse()->setContentType('application/json');
     $lCallback = $request->getParameter('callback', 'GlobalError.logerror');
     $lContactId = $request->getParameter('userid', null);
@@ -99,7 +113,10 @@ class streamActions extends sfActions
       $lString = ', "comid":"'.$lComId.'"';
     }
 
-    $pSocialObjects = SocialObjectTable::retrieveFlopObjects($this->getUser()->getUserId(),$lContactId, $lComId);
+    $pSocialObjects = SocialObjectTable::retrieveFlopObjects($this->getUser()->getUserId(),$lContactId, $lComId, $lObjectsCount, $lPage, $lObjectsCount);
+    
+    if(count($pSocialObjects) < $lObjectsCount)
+      $lDoPaginate = false;
 
     return $this->renderText(
       $lCallback.'('.
@@ -109,7 +126,8 @@ class streamActions extends sfActions
           "action" => "stream/not",
           "dataobj" => '{"callback":"'.$lCallback.'"'.$lString.'}',
           "page" => $lPage,
-          "css" => $lCss
+          "css" => $lCss,
+          "pDoPaginate" => $lDoPaginate
         )
       )
       .");"
