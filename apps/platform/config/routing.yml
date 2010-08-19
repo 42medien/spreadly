@@ -32,7 +32,11 @@ get_item_detail_stream:
   
 get_contacts_by_sortname:
   url: /stream/get_contacts_by_sortname
-  param: { module: stream, action: get_contacts_by_sortname }  
+  param: { module: stream, action: get_contacts_by_sortname }
+  
+get_hottest_friends:
+  url: /stream/get_hottest_friends
+  param: { module: stream, action: get_hottest_friends }
 
 auth_signin:
   url:   /signin

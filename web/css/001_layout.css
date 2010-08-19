@@ -93,7 +93,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 
 /* FriendsFilter */
 #friends_active_list, #friends_all_list{margin-left: 8%;margin-right: 8%;}
-#friends_all_list{display: none; height: /*120px*/ 60px; overflow: auto;}
+#friends_all_list{display: none; height: 200px; overflow: auto;}
 #friends_active_list li, #friends_all_list li{padding: 2px 0;}
 .search_field_area{width: 84%;margin-top: 10px;}
 .filter_counter_area{width: 84%;}

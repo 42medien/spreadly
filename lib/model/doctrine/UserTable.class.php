@@ -69,10 +69,10 @@ class UserTable extends Doctrine_Table {
    * @param int $pLimit
    * @return Array(User)
    */
-  public static function getHottestFriendsForUser($pUserId, $pPage = 1, $pLimit = null) {
+  public static function getHottestFriendsForUser($pUserId, $pPage = 1, $pLimit = 10) {
     $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
 
-    return UserTable::getInstance()->getHottestUsers($lFriendIds, $pPage, $pLimit);
+    return self::getHottestUsers($lFriendIds, $pPage, $pLimit);
   }
 
   /**
@@ -83,10 +83,10 @@ class UserTable extends Doctrine_Table {
    * @param int $pLimit
    * @return Array(User)
    */
-  public static function getAlphabeticalFriendsForUser($pUserId, $pPage = 1, $pLimit = null) {
+  public static function getAlphabeticalFriendsForUser($pUserId, $pPage = 1, $pLimit = 10) {
     $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
 
-    return UserTable::getInstance()->getUsersAlphabetically($lFriendIds, $pPage, $pLimit);
+    return self::getUsersAlphabetically($lFriendIds, $pPage, $pLimit);
   }
   
   /**

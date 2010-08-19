@@ -85,7 +85,7 @@ var FriendList = {
       if (scrolltop >= (scrollheight-(windowheight+scrolloffset))) {
         jQuery.ajax({
           type: "GET",
-          url: 'stream/get_contacts_by_sortname',
+          url: 'stream/get_hottest_friends',
           dataType: "json",
           data: {'sortname':'', 'page': FriendList.aPage},
           success: function(pResponse) {
