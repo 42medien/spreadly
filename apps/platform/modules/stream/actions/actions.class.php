@@ -161,12 +161,22 @@ class streamActions extends sfActions
 
   public function executeGet_contacts_by_sortname(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
+    
+    $lFriendsCount = 3;
+    $lDoPaginate = true;
+    
   	$lChar = $request->getParameter('sortname', '');
-    $lUsers = UserTable::getFriendsByName($this->getUser()->getUserId(), $lChar);
+  	$lPage = $request->getParameter('page');
+    $lUsers = UserTable::getFriendsByName($this->getUser()->getUserId(), $lChar, $lPage, $lFriendsCount);
+    
+    if(count($lUsers) < $lFriendsCount)
+      $lDoPaginate = false;
+      
     return $this->renderText(
       json_encode(
         array(
-          "html"  => $this->getPartial('stream/sidebar_friendlist', array('pFriends' => $lUsers->getData()))
+          "html"  => $this->getPartial('stream/sidebar_friendlist', array('pFriends' => $lUsers->getData())),
+          "pDoPaginate" => $lDoPaginate
         )
       )
     );

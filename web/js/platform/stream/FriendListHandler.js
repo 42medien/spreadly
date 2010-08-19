@@ -87,8 +87,9 @@ var FriendList = {
           type: "GET",
           url: 'stream/get_contacts_by_sortname',
           dataType: "json",
-          data: {'sortname':'h', 'page': FriendList.aPage},
+          data: {'sortname':'', 'page': FriendList.aPage},
           success: function(pResponse) {
+          	// hier kriegst du pResponse.pDoPaginate true oder false zurück
             jQuery(lElement).append(pResponse.html);
             FriendList.aPage++;
           }

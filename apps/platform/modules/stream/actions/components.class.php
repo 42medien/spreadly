@@ -19,7 +19,8 @@ class streamComponents extends sfComponents
     $this->pServices = $lServices;
 
 
-    $this->pFriends = UserTable::getHottestFriendsForUser($this->getUser()->getUserId(), 1, 10);
+    $this->pFriends = UserTable::getHottestFriendsForUser($this->getUser()->getUserId(), 1, 2);
+    $this->pFriendsAll = UserTable::getHottestFriendsForUser($this->getUser()->getUserId(), 1, 3);
     // get friends alphabetically
     // $this->pFriends = UserTable::getAlphabeticalFriendsForUser($this->getUser()->getUserId(), 1, 10);
     $this->pFriendsCount = $this->getUser()->getUser()->countFriends();
@@ -31,7 +32,7 @@ class streamComponents extends sfComponents
   	// get first object
   	$lObjectId = $this->getUser()->getAttribute('social_object_id');
   	$this->pObject = SocialObjectTable::retrieveByPK($lObjectId);
-    $this->pActivities = YiidActivityTable::retrieveByYiidActivityId($this->getUser()->getId(), $lObjectId, 'all', 1, 2);
+    $this->pActivities = YiidActivityTable::retrieveByYiidActivityId($this->getUser()->getId(), $lObjectId, 'all', 10, 0);
   }
 
   public function executeContacts_infobox() {

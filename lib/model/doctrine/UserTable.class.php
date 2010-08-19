@@ -101,18 +101,16 @@ class UserTable extends Doctrine_Table {
    * 
    * @todo sort by hot
    */
-  public static function getHottestUsers($pFriendIds, $pPage = 1, $pLimit = null) {
+  public static function getHottestUsers($pFriendIds, $pPage = 1, $pLimit = 10) {
     $lQuery = Doctrine_Query::create()
         ->from('User u')
         ->whereIn('u.id', $pFriendIds);
         // now sort by hot
         
-      if($pLimit)
-        $lQuery->limit($pLimit);
-        
-    $lPager = new Doctrine_Pager($lQuery, $pPage, $pLimit);
+    $lQuery->limit($pLimit);
+    $lQuery->offset(($pPage - 1) * $pLimit);
       
-    return $lPager->execute();
+    return $lQuery->execute();
   }
   
   /**
@@ -126,18 +124,16 @@ class UserTable extends Doctrine_Table {
    * @return Doctrine_Collection
    * 
    */
-  public static function getUsersAlphabetically($pFriendIds, $pPage = 1, $pLimit = null) {
+  public static function getUsersAlphabetically($pFriendIds, $pPage = 1, $pLimit = 10) {
   	$lQuery = Doctrine_Query::create()
         ->from('User u')
         ->whereIn('u.id', $pFriendIds)
         ->orderBy('u.sortname');
         
-      if($pLimit)
-        $lQuery->limit($pLimit);
-  	
-  	$lPager = new Doctrine_Pager($lQuery, $pPage, $pLimit);
+    $lQuery->limit($pLimit);  
+    $lQuery->offset(($pPage - 1) * $pLimit);
       
-    return $lPager->execute();
+    return $lQuery->execute();
   }
 
   /**
@@ -149,15 +145,19 @@ class UserTable extends Doctrine_Table {
    * @param int $pLimit
    * @return array
    */
-  public static function getFriendsByName($pUserId, $pName, $pLimit = 10) {
+  public static function getFriendsByName($pUserId, $pName = null, $pPage = 1, $pLimit = 10) {
     $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
 
     $lQ = Doctrine_Query::create()
       ->from('User u')
-      ->where('u.sortname LIKE ?', "%".$pName."%")
-      ->andWhereIn('u.id', $lFriendIds)
-      ->limit($pLimit);
+      ->whereIn('u.id', $lFriendIds);
+      
+    if($pName)
+      $lQ->andWhere('u.sortname LIKE ?', "%".$pName."%");
 
+    $lQ->limit($pLimit);
+    $lQ->offset(($pPage - 1) * $pLimit);
+    
     return $lQ->execute();
   }
 }

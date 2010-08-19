@@ -25,7 +25,7 @@
   </ul>
 
   <ul class="normal_list" id="friends_all_list">
-    <?php include_partial('stream/sidebar_friendlist', array('pFriends'=>$pFriends));?>
+    <?php include_partial('stream/sidebar_friendlist', array('pFriends'=>$pFriendsAll));?>
   </ul>
   <div class="center_area filter_counter_area">
     <span id="friend-counter"><?php echo $pFriendsCount; ?></span> <?php echo __('Results', null, 'platform'); ?>
