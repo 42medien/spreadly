@@ -31,7 +31,7 @@ class streamComponents extends sfComponents
   	// get first object
   	$lObjectId = $this->getUser()->getAttribute('social_object_id');
   	$this->pObject = SocialObjectTable::retrieveByPK($lObjectId);
-    $this->pActivities = YiidActivityTable::retrieveByYiidActivityId($this->getUser()->getId(), $lObjectId, 'all', 10, 0);
+    $this->pActivities = YiidActivityTable::retrieveByYiidActivityId($this->getUser()->getId(), $lObjectId, 'all', 6, 1);
   }
 
   public function executeContacts_infobox() {

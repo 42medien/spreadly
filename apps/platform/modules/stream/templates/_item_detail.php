@@ -9,18 +9,18 @@
 </div>
 
 <div id="preview">
-      <div id="yiid-widget">
-        <iframe src="http://widgets.<?php echo sfConfig::get("app_settings_host"); ?>/w/like/full.php?<?php echo 'url='.rawurlencode($pObject->getUrl()).'&cult='.$sf_user->getCulture().'&type=like&color=%23000000&short='; ?>" style="overflow:hidden; width:345px; height: 23px; padding: 3px 0;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowTransparency="true"></iframe>
-      </div>
-    </div>
-
-  <div id="stream_right_top" class="clearfix">
-    <?php include_partial('share_navigation', array('pObjectId' => $pObject->getId())); ?>
+  <div id="yiid-widget">
+    <iframe src="http://widgets.<?php echo sfConfig::get("app_settings_host"); ?>/w/like/full.php?<?php echo 'url='.rawurlencode($pObject->getUrl()).'&cult='.$sf_user->getCulture().'&type=like&color=%23000000&short='; ?>" style="overflow:hidden; width:345px; height: 23px; padding: 3px 0;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowTransparency="true"></iframe>
   </div>
+</div>
 
-  <div id="stream_right_bottom">
-    <ul class="shares" id="detail-stream">
-      <?php include_partial('item_shares', array('pActivities' => $pActivities)); ?>
-    </ul>
-  </div>
+<div id="stream_right_top" class="clearfix">
+  <?php include_partial('share_navigation', array('pObjectId' => $pObject->getId())); ?>
+</div>
+
+<div id="stream_right_bottom">
+  <ul class="shares clearfix" id="detail-stream">
+    <?php include_partial('item_shares', array('pActivities' => $pActivities, 'pItemId' => $pObject->getId())); ?>
+  </ul>
+</div>
 <?php } ?>

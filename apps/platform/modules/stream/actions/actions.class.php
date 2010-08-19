@@ -137,13 +137,20 @@ class streamActions extends sfActions
   }
 
   public function executeGet_item_detail_stream(sfWebRequest $request) {
+  	
+    $lActivitiesCount = 6;
+    $lDoPaginate = true;
+    
     $this->getResponse()->setContentType('application/json');
     $lCallback = $request->getParameter('callback', 'GlobalError.logerror');
     $lCase = $request->getParameter('case', 'all');
     $lItemId = $request->getParameter('itemid');
-    $lActivities = YiidActivityTable::retrieveByYiidActivityId($this->getUser()->getId(), $lItemId, $lCase);
     $lPage = $request->getParameter('page', 0);
+    $lActivities = YiidActivityTable::retrieveByYiidActivityId($this->getUser()->getId(), $lItemId, $lCase, $lActivitiesCount, $lPage);
     $lCss = $request->getParameter('css');
+    
+    if(count($lActivities) < $lActivitiesCount)
+      $lDoPaginate = false;
 
     return $this->renderText(
       $lCallback.'('.
@@ -152,7 +159,8 @@ class streamActions extends sfActions
           "stream"  => $this->getPartial('stream/item_shares', array('pActivities' => $lActivities, 'pItemId' => $lItemId)),
           "dataobj" => '{"action":"stream/get_item_detail_stream", "callback":"'.$lCallback.'", "case":"'.$lCase.'", "itemid":"'.$lItemId.'"}',
           "page" => $lPage++,
-          "css" => $lCss
+          "css" => $lCss,
+          "pDoPaginate" => $lDoPaginate
         )
       )
       .");"

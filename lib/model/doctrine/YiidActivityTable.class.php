@@ -244,7 +244,7 @@ class YiidActivityTable extends Doctrine_Table
    * @param integer $pPage
    * @return unknown_type
    */
-  public static function retrieveByYiidActivityId($pUserId, $pId, $pCase, $pLimit = 0, $pOffset = 0){
+  public static function retrieveByYiidActivityId($pUserId, $pId, $pCase, $pLimit = 10, $pOffset = 1){
     $lCollection = self::getMongoCollection();
     $lRelevantOis = self::getRelevantOnlineIdentitysForQuery($pUserId, null);
 
@@ -256,7 +256,7 @@ class YiidActivityTable extends Doctrine_Table
     $lResults = $lCollection->find($lQueryArray);
     $lResults->sort(array('u' => -1));
     
-    $lResults->limit($pLimit)->skip($pOffset);
+    $lResults->limit($pLimit)->skip(($pOffset - 1) * $pLimit);
       
     return self::hydrateMongoCollectionToObjects($lResults);
   }
