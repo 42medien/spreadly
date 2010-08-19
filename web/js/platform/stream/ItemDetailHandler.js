@@ -85,7 +85,7 @@ var ItemDetailStream = {
   show: function(pResponse) {
     debug.log("[ItemDetailStream][show]");
     //clicked pager or tab?
-    if(pResponse.page < 1 || pResponse.page === undefined){
+    if(pResponse.page <= 1 || pResponse.page === undefined){
       //if clicked tab: empty the old stream
       jQuery('#detail-stream').empty();     
     }
