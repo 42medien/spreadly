@@ -75,23 +75,26 @@ var FriendList = {
   loadMore: function() {
     jQuery('#friends_all_list').bind('scroll', function() {
       var lElement = jQuery('#friends_all_list');
-      var lPage = 1;
       
       var scrolltop = jQuery(lElement).attr('scrollTop');  
       var scrollheight = jQuery(lElement).attr('scrollHeight');  
       var windowheight = jQuery(lElement).attr('clientHeight');
       var scrolloffset = 0;
       
-      if (scrolltop >= (scrollheight-(windowheight+scrolloffset))) {
+      if (scrolltop >= (scrollheight-(windowheight+scrolloffset)) && FriendList.aPage != undefined) {
         jQuery.ajax({
           type: "GET",
-          url: 'stream/get_hottest_friends',
+          url: 'stream/get_friends',
           dataType: "json",
           data: {'sortname':'', 'page': FriendList.aPage},
           success: function(pResponse) {
           	// hier kriegst du pResponse.pDoPaginate true oder false zurück
             jQuery(lElement).append(pResponse.html);
-            FriendList.aPage++;
+            if(pResponse.pDoPaginate === false) {
+              FriendList.aPage = undefined;
+            } else {
+              FriendList.aPage++;
+            }
           }
         });        
       }      
