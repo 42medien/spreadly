@@ -157,6 +157,15 @@ class UserTable extends Doctrine_Table {
     return $lQ->execute();
   }
   
+
+  /**
+   * returns a users friends filtered by name counted
+   *
+   * @author Christian Schätzle
+   * @param int $pUserId
+   * @param string $pName
+   * @return integer
+   */
   public static function countFriendsByName($pUserId, $pName = null) {
     $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
 
