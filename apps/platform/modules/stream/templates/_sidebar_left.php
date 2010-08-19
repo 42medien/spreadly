@@ -6,9 +6,8 @@
     <?php echo avatar_tag($sf_user->getUser()->getMainAvatar(), '96x96'); ?>
   </div>
 
-  <p class="filter_headline"><?php echo __('All Networks'); ?></p>
+  <p class="filter_headline"><a href="/" class="user_filter stream_filter reset-filter" target="_blank" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "css":"{\"class\":\"normal_list\", \"id\":\"com-filter-0\"}"}'><?php echo __('All Networks'); ?></a></p>
   <ul class="normal_list clearfix" id="all_networks_list">
-    <li><a href="/" class="user_filter" target="_blank" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "comid":"0", "css":"{\"class\":\"normal_list\", \"id\":\"com-filter-0\"}"}'><?php echo __('All'); ?></a></li>
     <?php foreach ($pServices as $lService) { ?>
       <li id="com-filter-<?php echo $lService->getId(); ?>">
         <a href="/" class="icon_service icon_<?php echo strtolower($lService->getSlug()); ?> stream_filter" target="_blank" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "comid":"<?php echo $lService->getId(); ?>", "css":"{\"class\":\"normal_list\", \"id\":\"com-filter-<?php echo $lService->getId(); ?>\"}"}'><?php echo $lService->getName(); ?></a>
@@ -17,6 +16,10 @@
   </ul>
 
   <p class="filter_headline" id="active_friends_headline"><?php echo __('ACTIVE_FRIENDS', null, 'platform'); ?></p>
+      <a href="/" class="user_filter stream_filter reset-filter" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show"}'>
+        <?php echo image_tag('/img/global/yiid-logo.png', array('width' => 16, 'height' => 16, 'class' => 'icon_user left')); ?>
+        <?php echo __('ALL_FRIENDS') ?>
+      </a>
   <div class="center_area search_field_area">
     <input type="text" id="input-friend-filter" value="<?php echo __('Type name to filter...', null, 'platform'); ?>" />
   </div>
@@ -31,7 +34,7 @@
     <span id="friend-counter"><?php echo $pFriendsCount; ?></span> <?php echo __('Results', null, 'platform'); ?>
     <span><a href="/" id="all-friends-link"><?php echo __('SHOW_ALL_FRIENDS', null, 'platform')?></a></span>
   </div>
-  
+
   <div class="center_area search_field_area">
     <?php echo link_to(__('Logout'), '@auth_signout', array('class' => 'url')); ?>
   </div>

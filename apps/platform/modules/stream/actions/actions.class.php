@@ -19,7 +19,7 @@ class streamActions extends sfActions
   {
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('stream/js_init_stream.js'));
     $lObjects = $this->pSocialObjects = SocialObjectTable::retrieveHotObjets($this->getUser()->getUserId());
-    
+
     $this->getUser()->setAttribute('social_object_id', $lObjects[0]->getId());
   }
 
@@ -107,7 +107,7 @@ class streamActions extends sfActions
         array(
           "stream"  => $this->getPartial('stream/whats_not_stream', array('pSocialObjects' => $pSocialObjects)),
           "action" => "stream/not",
-          "dataobj" => '{"callback":"'.$lCallback.'"'.$lString.', "page": "'.$lPage.'"}',
+          "dataobj" => '{"callback":"'.$lCallback.'"'.$lString.'}',
           "page" => $lPage,
           "css" => $lCss
         )
@@ -169,14 +169,14 @@ class streamActions extends sfActions
 
   public function executeGet_contacts_by_sortname(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
-    
+
     $lFriendsCount = 10;
     $lDoPaginate = true;
-    
+
   	$lChar = $request->getParameter('sortname', '');
   	$lPage = $request->getParameter('page');
     $lUsers = UserTable::getFriendsByName($this->getUser()->getUserId(), $lChar);
-      
+
     return $this->renderText(
       json_encode(
         array(
@@ -188,16 +188,16 @@ class streamActions extends sfActions
 
   public function executeGet_friends(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
-    
+
     $lFriendsCount = 10;
     $lDoPaginate = true;
-    
+
     $lPage = $request->getParameter('page');
     $lUsers = UserTable::getAlphabeticalFriendsForUser($this->getUser()->getUserId(), $lPage, $lFriendsCount);
-    
+
     if(count($lUsers) < $lFriendsCount)
       $lDoPaginate = false;
-      
+
     return $this->renderText(
       json_encode(
         array(

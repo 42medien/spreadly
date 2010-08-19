@@ -1,7 +1,4 @@
-
-
-GlobalRequest.bindClickByClass('friends_active_list','stream_filter');
-GlobalRequest.bindClickByClass('friends_all_list','stream_filter');
+GlobalRequest.bindClickByClass('photo_filter_box','stream_filter');
 GlobalRequest.bindClickByClass('all_networks_list','stream_filter');
 GlobalRequest.bindClickByClass('main_nav_outer','main_filter');
 GlobalRequest.bindClickByClass('main_stream_pager','main_filter');

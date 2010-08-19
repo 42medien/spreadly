@@ -18,7 +18,7 @@ var Stream = {
 	 */
 	show: function(pResponse) { 
 		debug.log("[Stream][show]");
-		if(pResponse.page < 1 || pResponse.page === undefined) {
+		if(pResponse.page <= 1 || pResponse.page === undefined) {
 			//empty the stream
 			jQuery('#stream_left_bottom').empty();
 		}
