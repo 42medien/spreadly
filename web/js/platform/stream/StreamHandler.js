@@ -29,7 +29,17 @@ var Stream = {
 		SubFilter.setAction(pResponse.action);
 		//update the data-obj attribute of the filter
     MainFilter.updateData(pResponse.dataobj);
-    DataObjectPager.update('stream_pager_link', pResponse.action, pResponse.page, MainFilter.aDataObj);    
+    
+    if(pResponse.pDoPaginate == false) {
+      jQuery('#stream_pager_link').hide();
+    } else {
+      //update the pager-settings -> with the append isset a new pager, that needs to be initialized
+      if(jQuery('#stream_pager_link').css('display')=='none') {
+        jQuery('#stream_pager_link').show();        
+      }
+      DataObjectPager.update('stream_pager_link', pResponse.action, pResponse.page, MainFilter.aDataObj); 
+    }    
+   
     //do some css-effects
     StreamFilter.updateCss(pResponse.css);
     OnLoadGrafic.hideGrafic();
