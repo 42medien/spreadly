@@ -30,7 +30,7 @@
   <ul class="normal_list" id="friends_all_list">
     <?php include_partial('stream/sidebar_friendlist', array('pFriends'=>$pFriends));?>
   </ul>
-  <div class="center_area filter_counter_area">
+  <div class="center_area filter_counter_area" id="friend-counter-box" style="display:none;">
     <span id="friend-counter"><?php echo $pFriendsCount; ?></span> <?php echo __('Results', null, 'platform'); ?>
     <span><a href="/" id="all-friends-link"><?php echo __('SHOW_ALL_FRIENDS', null, 'platform')?></a></span>
   </div>

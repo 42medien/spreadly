@@ -13,8 +13,6 @@ DataObjectPager.init('item-stream-pager-link');
 FriendListFilter.init();
 FriendList.init();
 
-jQuery('#input-friend-filter').toggleValue();
-
 var SHOW_ALL_FRIENDS = "<?php echo __('SHOW_ALL_FRIENDS')?>";
 var SHOW_HOT_FRIENDS = "<?php echo __('SHOW_HOT_FRIENDS')?>";
 var ACTIVE_FRIENDS = "<?php echo __('ACTIVE_FRIENDS')?>";

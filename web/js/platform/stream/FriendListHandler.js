@@ -14,7 +14,9 @@ var FriendListFilter = {
    * @author KM
    */
   init: function() {
-    jQuery('#input-friend-filter').inputfilter({
+    var lInput = jQuery('#input-friend-filter');
+    jQuery(lInput).toggleValue();
+    jQuery(lInput).inputfilter({
       'parentid': 'friends_active_list', 
       'url':'stream/get_contacts_by_sortname',
       'callback': FriendListFilter.cbFilter
@@ -33,6 +35,15 @@ var FriendListFilter = {
       TextHandler.toggleById('all-friends-link', 'SHOW_ALL_FRIENDS', 'SHOW_HOT_FRIENDS');
       TextHandler.toggleById('active_friends_headline', 'ACTIVE_FRIENDS', 'ALL_FRIENDS');
     }
+    
+    if(jQuery('#friend-counter-box').css('display') == 'none') {
+      jQuery('#friend-counter-box').show();
+    } 
+    /*
+    else if(pResponse.pCounter < 10) {
+      jQuery('#friend-counter-box').hide();      
+    }*/
+    jQuery('#friend-counter').text(pResponse.pCounter);      
   }
 };
 
