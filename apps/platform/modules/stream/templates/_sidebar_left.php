@@ -35,7 +35,4 @@
     <span><a href="/" id="all-friends-link"><?php echo __('SHOW_ALL_FRIENDS', null, 'platform')?></a></span>
   </div>
 
-  <div class="center_area search_field_area">
-    <?php echo link_to(__('Logout'), '@auth_signout', array('class' => 'url')); ?>
-  </div>
 </div>

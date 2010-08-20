@@ -72,7 +72,11 @@ landing:
 
 change_language:
   url:   /change_language
-  param: { module: system, action: changeLanguage }
+  param: { module: system, action: change_language }
+  
+update_language:
+  url:   /updateLanguage/*
+  param: { module: system, action: update_icon_language }
 
 ##### ROUTES FOR PLUGINS #######
 

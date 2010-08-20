@@ -19,6 +19,12 @@ p, a.text_action, h3, h2, h5, .btn, #content label, li.filter_chosen a, .search_
   #nav_home{background: transparent url("/img/sprites/sprite_icons.png") 0 -151px no-repeat;}
   #nav_profile{background: transparent url("/img/sprites/sprite_icons.png") 0 -111px no-repeat;}
   #nav_settings{background: transparent url("/img/sprites/sprite_icons.png") 0 -190px no-repeat;}
+  #language_selecten_icon_de_active{background: transparent url("/img/global/flags/de.gif") 0 3px no-repeat;}
+  #language_selecten_icon_en_active{background: transparent url("/img/global/flags/en.gif") 0 3px no-repeat;}
+  #language_selecten_icon_de_inactive{background: transparent url("/img/global/flags/de_grey.gif") 0 3px no-repeat;}
+  #language_selecten_icon_en_inactive{background: transparent url("/img/global/flags/en_grey.gif") 0 3px no-repeat;}
+  #language_selecten_icon_de_inactive:hover{background: transparent url("/img/global/flags/de.gif") 0 3px no-repeat;}
+  #language_selecten_icon_en_inactive:hover{background: transparent url("/img/global/flags/en.gif") 0 3px no-repeat;}
 
 /* Content */
 #content{background: transparent url("/img/sprites/sprite_repeat_x.png") 0 -367px repeat-x;}

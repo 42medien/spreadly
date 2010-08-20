@@ -64,7 +64,8 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 #header_sub{width: 250px;height:60px;}
 #header_main{width: 37%;height:60px;}
 #header_supp{width: 37%;height:60px;}
-  #nav_main li{list-style-type: none;margin: 30px 28px 0 0;float:left;}
+  #nav_main{padding-top: 7px;}
+  #nav_main li{list-style-type: none;margin: 0 28px 0 0;float:left;}
   #nav_main li a{padding: 4px 25px;}
   li#nav_main_settings{margin-right: 0;}
     
@@ -90,6 +91,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 .icon_small_service_right{padding: 0px 7px;margin-left: 3px;}
 .icon_small_use{margin-left: 5px;}
 .icon_small_use{padding: 3px 0 0 12px;}
+.icon_language_select{padding: 0px 6px;}
 
 /* FriendsFilter */
 #friends_active_list, #friends_all_list{margin-left: 8%;margin-right: 8%;}

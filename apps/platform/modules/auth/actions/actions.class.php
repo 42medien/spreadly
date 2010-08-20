@@ -12,14 +12,15 @@ class authActions extends sfActions {
 
   public function initialize($context, $module, $action) {
     $parentRet = parent::initialize($context, $module, $action);
-    // if the user is already loged in, redirect to the stream
-    if ($this->getUser()->isAuthenticated()) {
-      $this->redirect("@stream");
-    }
     return $parentRet;
   }
 
   public function executeSignin(sfWebRequest $request) {
+    // if the user is already loged in, redirect to the stream
+    if ($this->getUser()->isAuthenticated()) {
+      $this->redirect("@stream");
+    }
+  	
     if ($lService = $request->getParameter("service")) {
       $lObject = AuthApiFactory::factory($lService);
       $lObject->doAuthentication();
@@ -27,7 +28,7 @@ class authActions extends sfActions {
   }
   
   public function executeSignout(sfWebRequest $request) {
-  	if($this->getUser()->getIsAuthenticated()) {
+  	if($this->getUser()->isAuthenticated()) {
       $this->getUser()->signOut();
   	}
     $this->redirect('@homepage');

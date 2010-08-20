@@ -20,7 +20,7 @@ class systemActions extends sfActions
   }
   
 
-  public function executeChangeLanguage(sfWebRequest $request) {
+  public function executeChange_language(sfWebRequest $request) {
     
   	$form = new sfFormLanguage(
       $this->getUser(),
@@ -36,5 +36,9 @@ class systemActions extends sfActions
     } else {
       return $this->redirect( 'index/index' );
     }
+  }
+  
+  public function executeUpdate_icon_language(sfWebRequest $request) {
+  	$lLanguage = $request->getParamter('lang');
   }
 }
