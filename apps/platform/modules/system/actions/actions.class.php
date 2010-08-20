@@ -39,6 +39,16 @@ class systemActions extends sfActions
   }
   
   public function executeUpdate_icon_language(sfWebRequest $request) {
-  	$lLanguage = $request->getParamter('lang');
+  	$lLanguage = $request->getParameter('lang');
+  	
+  	$this->getUser()->setCulture($lLanguage);
+  	
+    $referer = $this->getRequest()->getReferer();
+
+    if( preg_match('/yiid/', parse_url($referer, PHP_URL_HOST)) ) {
+      return $this->redirect( $referer );
+    } else {
+      return $this->redirect( 'index/index' );
+    }
   }
 }
