@@ -29,17 +29,17 @@ get_item_detail:
 get_item_detail_stream:
   url: /stream/get_item_detail_stream
   param: { module: stream, action: get_item_detail_stream }
-  
+
 get_contacts_by_sortname:
   url: /stream/get_contacts_by_sortname
   param: { module: stream, action: get_contacts_by_sortname }
-  
+
 get_friends:
   url: /stream/get_friends
   param: { module: stream, action: get_friends }
 
 auth_signin:
-  url:   /signin
+  url:   /signin/*
   param: { module: auth, action: signin }
 
 auth_signout:
@@ -73,7 +73,7 @@ landing:
 change_language:
   url:   /change_language
   param: { module: system, action: change_language }
-  
+
 update_language:
   url:   /updateLanguage/*
   param: { module: system, action: update_icon_language }
