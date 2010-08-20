@@ -62,7 +62,10 @@
 <div id="what_is_yiid_description" class="clearfix">
   <div class="description_with_image left">
     <p><?php echo __('Find cool new articles, products or people on the web and use the Yiid button to share what you have found with your friends.', null, 'platform'); ?></p>
-    <div id="yiid_description1" class="center_area image_button_full_long_en"></div>
+    <div id="yiid_description1" class="center_area">
+      <iframe src="http://widgets.<?php echo sfConfig::get("app_settings_host"); ?>/w/like/like.php?<?php echo 'url=http%3A%2F%2Fwww.yiid.com&cult='.$sf_user->getCulture().'&type=like&color=%23000000&short='; ?>" 
+        style="overflow:hidden; width: 295px; height: 23px; padding: 3px 0;" frameborder="0" scrolling="no" marginheight="0" allowTransparency="true"></iframe>
+    </div>
   </div>
 
   <div class="description_wave left"></div>
