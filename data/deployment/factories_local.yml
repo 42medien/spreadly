@@ -71,7 +71,7 @@ all:
       collection_name:   session
       session_name:    yiid_local
       session_cookie_domain: .yiid.local
-      session_cookie_lifetime: 3600
+      session_cookie_lifetime: 17200
   routing:
     class: sfPatternRouting
     param:
