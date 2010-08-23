@@ -16,10 +16,11 @@
   </ul>
 
   <p class="filter_headline" id="active_friends_headline"><?php echo __('ACTIVE_FRIENDS', null, 'platform'); ?></p>
-      <a href="/" class="user_filter stream_filter reset-filter" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "css": "{\"class\":\"normal_list\", \"id\":\"user-filter-0\"}"}'>
-        <?php echo image_tag('/img/global/yiid-logo.png', array('width' => 16, 'height' => 16, 'class' => 'icon_user left')); ?>
-        <?php echo __('ALL_FRIENDS') ?>
-      </a>
+  <div class="clearfix" id="reset_filter_friends">
+    <a href="/" class="user_filter stream_filter reset-filter" data-obj='{"action":"SubFilter.getAction", "callback":"Stream.show", "css": "{\"class\":\"normal_list\", \"id\":\"user-filter-0\"}"}'>
+	    <?php echo __('ALL_FRIENDS') ?>
+	  </a>
+  </div>
   <div class="center_area search_field_area">
     <input type="text" id="input-friend-filter" value="<?php echo __('Type name to filter...', null, 'platform'); ?>" />
   </div>
