@@ -40,14 +40,14 @@ h5{ font-size: 1em; font-weight: bold; }
  */
 a:hover, .btn:hover, .whats_new_active #main_nav_inner2 p:hover, .whats_not_active #main_nav_inner2 p:hover, .whats_new_active #main_nav_inner4 p:hover, .whats_hot_active #main_nav_inner4 p:hover, 
 	.whats_hot_active #main_nav_inner7 p:hover, .whats_not_active #main_nav_inner7 p:hover{text-decoration: underline;}
-a, a.icon_thumb, li.filter_chosen a, a.icon_thumbs, a.icon_thumb, a.icon_small_use, .whats_hot_info_area .url, .whats_not_info_area .url{text-decoration: none;}
+a, a.icon_thumb, li.filter_chosen a, a.icon_thumbs, a.icon_thumb, a.icon_small_use, .whats_hot_info_area .url, .whats_not_info_area .url, .icon_language_select:hover{text-decoration: none;}
 
 /**
  *   @section -TextAlignment
  */
 #all_networks_list li, #friends_active_list li, #friends_all_list li, .user_hover_area_top, user_hover_area_bottom, #signin_via_username_form label, .two_block_area li, .two_block_area h5, #magic_after_registration .right_block{text-align: left;}
 .center_area{text-align: center;}
-.actions{text-align: right;}
+.actions, #nav_main_supp{text-align: right;}
 .filter_counter_area{text-align: left;}
 
 /**

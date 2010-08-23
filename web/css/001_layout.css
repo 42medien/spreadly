@@ -64,7 +64,10 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 #header_sub{width: 250px;height:60px;}
 #header_main{width: 37%;height:60px;}
 #header_supp{width: 37%;height:60px;}
-  #nav_main{padding-top: 7px;}
+  #nav_main_area{height: 60px;}
+  #nav_main_supp{height: 20px;padding: 5px 28px 0 0;}
+  #nav_main{padding-top: 7px;height: 25px;}
+  #language_switch_area{margin-right: 20px;}
   #nav_main li{list-style-type: none;margin: 0 28px 0 0;float:left;}
   #nav_main li a{padding: 4px 25px;}
   li#nav_main_settings{margin-right: 0;}
