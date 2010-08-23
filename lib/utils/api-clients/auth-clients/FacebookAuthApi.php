@@ -49,6 +49,8 @@ class FacebookAuthApiClient {
   public function doSignin($pSessionUser, $pCode) {
     $lAccessToken = $this->getAccessToken($pCode);
 
+    var_dump($lAccessToken);
+
     // get params
     $lParamsArray = array();
     // extract params
@@ -104,8 +106,8 @@ class FacebookAuthApiClient {
 
     header("Location: https://graph.facebook.com/oauth/authorize?
                       client_id=".$lConsumer->key.
-                      "&scope=email,offline_access,publish_stream,read_stream,user_about_me,user_activities,user_likes,read_friendlists,user_website".
-                      "&redirect_uri=http://www.yiid.local/platform_dev.php/auth/complete_facebook_signin");
+                      "&scope=email,offline_access,publish_stream,read_stream,user_about_me,user_activities,user_likes,read_friendlists,user_website,user_checkins".
+                      "&redirect_uri=http://www.yiid.local/platform_dev.php/auth/complete_signin/service/facebook");
     exit;
   }
 
@@ -118,7 +120,7 @@ class FacebookAuthApiClient {
   public function getAccessToken($pCode) {
     $lConsumer = $this->getConsumer();
 
-    $lAccessUrl = "https://graph.facebook.com/oauth/access_token?client_id=".$lConsumer->key."&redirect_uri=http://www.yiid.local/platform_dev.php/auth/complete_facebook_signin&client_secret=".$lConsumer->secret."&code=".$pCode;
+    $lAccessUrl = "https://graph.facebook.com/oauth/access_token?client_id=".$lConsumer->key."&redirect_uri=http://www.yiid.local/platform_dev.php/auth/complete_signin/service/facebook&client_secret=".$lConsumer->secret."&code=".$pCode;
     $lAccessToken = UrlUtils::sendGetRequest($lAccessUrl);
 
     return $lAccessToken;

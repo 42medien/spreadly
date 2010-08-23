@@ -20,13 +20,13 @@ class authActions extends sfActions {
     if ($this->getUser()->isAuthenticated()) {
       $this->redirect("@stream");
     }
-  	
+
     if ($lService = $request->getParameter("service")) {
       $lObject = AuthApiFactory::factory($lService);
       $lObject->doAuthentication();
     }
   }
-  
+
   public function executeSignout(sfWebRequest $request) {
   	if($this->getUser()->isAuthenticated()) {
       $this->getUser()->signOut();
@@ -54,25 +54,20 @@ class authActions extends sfActions {
     }
   }
 
-  public function executeComplete_twitter_signin(sfWebRequest $request) {
-    $lRequestToken = OauthRequestTokenTable::retrieveByTokenKey($request->getParameter('oauth_token'));
+  public function executeComplete_signin(sfWebRequest $request) {
+    if ($lToken = $request->getParameter('oauth_token')) {
+      $lToken = OauthRequestTokenTable::retrieveByTokenKey($lToken);
+      $lToken = $lToken->toOAuthToken();
+    } elseif ($lToken = $request->getParameter('code')) {
+      // do nothing
+    }
 
-    $lObject = AuthApiFactory::factory("twitter");
-    $lUser = $lObject->doSignin($this->getUser(), $lRequestToken->toOAuthToken());
-
+    $lObject = AuthApiFactory::factory($request->getParameter('service'));
+    $lUser = $lObject->doSignin($this->getUser(), $lToken);
     $this->getUser()->signIn($lUser);
-    UserRelationTable::doShit($lUser->getId());
+    //UserRelationTable::doShit($lUser->getId());
 
-    $this->redirect('@stream');
-  }
-
-  public function executeComplete_facebook_signin(sfWebRequest $request) {
-    $lObject = AuthApiFactory::factory("facebook");
-    $lUser = $lObject->doSignin($this->getUser(), $request->getParameter("code"));
-
-    $this->getUser()->signIn($lUser);UserRelationTable::doShit($lUser->getId());
-
-    $this->redirect('@stream');
+    $this->redirect('@auth_add_services');
   }
 
   public function executeRegistered(sfWebRequest $request) {
