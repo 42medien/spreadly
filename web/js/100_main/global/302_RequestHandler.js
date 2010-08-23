@@ -22,7 +22,7 @@ var GlobalRequest = {
 	initGlobals: function(pElement, pParams) {
 		debug.log("[GlobalRequest][initGlobals]");
 		//is the given element an link
-    if(jQuery(pElement).is('a') && !jQuery(pElement).attr('data-obj') && !jQuery(pElement).attr('onclick')) {
+    if(pElement !== undefined && jQuery(pElement).is('a') && !jQuery(pElement).attr('data-obj') && !jQuery(pElement).attr('onclick')) {
     	//set the global vars in the setGlobalsByUri method
       GlobalRequest.setGlobalsByUri(jQuery(pElement).attr('href'));
     } else if(pParams !== undefined) {
@@ -220,6 +220,17 @@ var GlobalRequest = {
     GlobalRequest.doSend();
     return false;
 	},
+	
+	/**
+	 * inits a request by a event, that is defined in the call function (aufrufende funktion)
+	 * @author KM
+	 * @param object pElement
+	 */
+	initByElement: function(pElement) {
+    debug.log("[GlobalRequest][initByElement]");    	  
+	  GlobalRequest.initGlobals(pElement);
+    GlobalRequest.doSend();	  
+	},	
 	
 	
 	/**

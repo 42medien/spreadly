@@ -43,6 +43,9 @@ var Stream = {
     //do some css-effects
     StreamFilter.updateCss(pResponse.css);
     OnLoadGrafic.hideGrafic();
+    
+    //load the details of the first element on the right sidebar
+    ItemDetail.loadFirst(); 
 	}
 };
 

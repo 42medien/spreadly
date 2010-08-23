@@ -29,8 +29,6 @@ class streamComponents extends sfComponents
   public function executeSearch_field() {}
 
   public function executeSidebar_right() {
-  	// get first object
-  	$lObjectId = $this->getUser()->getAttribute('social_object_id');
   	$this->pObject = SocialObjectTable::retrieveByPK($lObjectId);
     $this->pActivities = YiidActivityTable::retrieveByYiidActivityId($this->getUser()->getId(), $lObjectId, 'all', 6, 1);
   }

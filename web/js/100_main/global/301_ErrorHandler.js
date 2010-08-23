@@ -22,6 +22,7 @@ var ErrorLogger = {
    * @param string pLineNumber
    */
   initLog: function(pMessage, pFileName, pLineNumber) {
+    OnLoadGrafic.hideGrafic();
     ErrorLogger.aErrorMsg = 'JS-Error: '+pMessage+' in ['+pFileName+'] on line ['+pLineNumber+']';
     ErrorLogger.aBrowserInfo = ErrorLogger.getBrowserInfo();
     ErrorLogger.doLog();

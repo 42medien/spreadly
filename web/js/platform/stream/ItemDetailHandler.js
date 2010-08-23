@@ -42,6 +42,15 @@ var ItemDetail = {
     } else {
       jQuery(lStream).css('top', 0); 
     }    
+  },
+  
+  /**
+   * load the details of the first object in the stream
+   * @author KM
+   */
+  loadFirst: function() {
+    var lElement = jQuery('#stream_left ul li.stream_item:first');
+    GlobalRequest.initByElement(lElement);
   }
 };
 
