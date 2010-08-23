@@ -38,7 +38,6 @@ class streamActions extends sfActions
       $lString = ', "comid":"'.$lComId.'"';
     }
 
-
     $pActivities = YiidActivityTable::retrieveLatestActivitiesByContacts($this->getUser()->getUserId(),$lContactId, $lComId, $lObjectsCount, $lPage, $lObjectsCount);
 
     return $this->renderText(
