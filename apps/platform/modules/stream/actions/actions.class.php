@@ -23,6 +23,7 @@ class streamActions extends sfActions
   }
 
   public function executeNew(sfWebRequest $request) {
+    $lObjectsCount = 3;
 
     $this->getResponse()->setContentType('application/json');
     $lCallback = $request->getParameter('callback', 'logerror');

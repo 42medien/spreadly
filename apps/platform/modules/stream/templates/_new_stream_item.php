@@ -1,5 +1,6 @@
 <?php use_helper('YiidUrl'); ?>
-<?php $pUser = UserTable::getInstance()->retrieveByPK($pObject->getUId()); ?>
+<?php $pUser = UserTable::getInstance()->retrieveByPK($pActivity->getUId()); ?>
+<?php $lObject = YiidActivityTable::retrieveSocialObjectByUrl($pActivity->getUrl()); ?>
 <div class="so_image left">
   <?php echo image_tag('/img/global/yiid-logo.png', array('width' => 50)); ?>
 </div>
@@ -17,8 +18,8 @@
 	          <span class="url left">&nbsp;<?php echo __('via %1 %2 minutes ago', array('%1' => 'Twitter', '%2' => '2'), 'platform'); ?></span>
 	        </div>
 	        <div class="right so_headline_right">
-            <a href="#" class="icon_like icon_small_use like-dislike"><?php echo __('%1', array('%1' => '3'), 'platform'); ?></a>
-            <a href="#" class="icon_dislike icon_small_use like-dislike"><?php echo __('%1', array('%1' => '3'), 'platform'); ?></a>
+            <a href="#" class="icon_like icon_small_use like-dislike"><?php echo __('%1', array('%1' => $lObject->getLikeCount()), 'platform'); ?></a>
+            <a href="#" class="icon_dislike icon_small_use like-dislike"><?php echo __('%1', array('%1' => $lObject->getDislikeCount()), 'platform'); ?></a>
 		      </div>
 	      </div>
 	    </div>
@@ -26,7 +27,10 @@
 
     <div class="clearfix">
       <div class="green_middle_middle">
-        <p class="so_comment">lorem ipsum pfefferle affenkopf lorem ipsum pfefferle affenkopf lorem ipsum pfefferle affenkopf lorem ipsum pfefferle affenkopf lorem ipsum pfefferle affenkopf lorem ipsum pfefferle affenkopf ipsum pfefferle affenkopf lorem ipsum pfefferle affenkopf lorem ipsum pfefferle affenkopf lorem ipsum pfefferle affenkopf lorem ipsum pfefferle affenkopf</p>
+        <p class="so_comment">
+          <?php echo ($pActivity->getScore() == 1 ? __('%1 likes on %2:', array('%1' => $pUser->getUsername(), '%2' => $pActivity->getUrl()), 'platform') : __('%1 dislikes on %2:', array('%1' => $pUser->getUsername(), '%2' => $pActivity->getUrl()), 'platform')); ?>
+          <?php echo ($lObject->getTitle() ? $lObject->getTitle() : '').($lObject->getStmt() ? ' - '.$lObject->getStmt() : ''); ?>
+        </p>
       </div>
     </div>
 
