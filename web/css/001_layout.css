@@ -125,7 +125,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 	  -webkit-border-radius: 0 0 4px 4px;-moz-border-radius: 0 0 4px 4px;border-radius: 0 0 4px 4px;}
 		  .so_information_content{margin-left: 18px;padding: 0 15px;border-right: 1px #cbd3c9 solid;}
 		  #new_shares li{list-style-type: none;margin: 5px 10px;-webkit-border-radius: 5px 0 5px 0;-moz-border-radius: 5px 0 5px 0;border-radius: 5px 0 5px 0;}
-		  .stream_new li.item_active{padding: 10px;border: 1px solid #ccc;}
+		  .stream_new li.item_active{padding: 10px;border-width: 2px;border-style: solid;}
 		    
 		    .green_arrow{}
 		    
