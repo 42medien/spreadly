@@ -80,13 +80,14 @@ p, a.text_action, h3, h2, h5, .btn, #content label, li.filter_chosen a, .search_
 .green_bottom_left{background: #fff url("/img/sprites/sprite_stream.png") 0 -51px no-repeat;}
 .green_bottom_middle{background: #fff url("/img/sprites/sprite_repeat_x.png") 0 -349px repeat-x;}
 .item_active .green_arrow{background: #ecf6e9 url("/img/sprites/sprite_repeat_y.png") repeat-y;}
-.item_active .green_top_left{background: #fff url("/img/sprites/sprite_stream.png") 0 -207px no-repeat;}
-.item_active .green_bottom_left{background: #fff url("/img/sprites/sprite_stream.png") 0 -84px no-repeat;}
+.item_active .green_top_left{background: #ecf6e9 url("/img/sprites/sprite_stream.png") 0 -207px no-repeat;}
+.item_active .green_bottom_left{background: #ecf6e9 url("/img/sprites/sprite_stream.png") 0 -84px no-repeat;}
 
 .user_like{border: 1px #68bc4f solid;background: transparent url("/img/sprites/sprite_general.png") 0 -138px no-repeat;}
 .user_dislike{border: 1px #68bc4f solid;background: transparent url("/img/sprites/sprite_general.png") 0 -175px no-repeat;}
 
 li.item_active{background: #ecf6e9 url("/img/global/item_active_bg.png") right bottom no-repeat;}
+#stream_left_bottom li.item_active .so_comment{background-color: #fff;}
 
 .whats_hot_stream_item{border: 2px solid #e6e3e3;border-right: 2px solid #d7d7d7;border-bottom: 2px solid #d7d7d7;background: transparent url("/img/sprites/sprite_repeat_y.png") -4049px 0 repeat-y;}
 li.item_active .whats_hot_stream_item{border: 2px solid #d7d7d7;border-right: 2px solid #68bc4f;border-bottom: 2px solid #68bc4f;}
