@@ -80,7 +80,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 #photo_filter_box{margin:0 15px 0 25px;width:200px;padding-bottom:10px;}
 #photo_filter_box input[type=submit]{}
 .filter_headline{margin-top: 5px;padding:5px 8%;border-left: none;}
-#all_networks_list li{padding: 5px 0;}
+#all_networks_list li{padding: 2px 0;}
 .btn{width: 150px;border: 1px solid #CDCDCD;padding: 2px 30px 2px 20px;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;}
 .photo_big{width: 140px;height: 140px;border: 2px #d7d7d7 solid;}
 #stream_photo{margin: 15px auto;}
