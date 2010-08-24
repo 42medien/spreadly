@@ -21,9 +21,9 @@ SocialObject:
       type:  integer(4)
     title:
       type:  string(255)
-    stmt:    
+    stmt:      ## description
       type:  string
-    ecode: 
+    ecode:
       type:  string
     thumb_url:
       type:  string
@@ -40,8 +40,8 @@ SocialObject:
       type:   integer
     c:
       type:   integer
-      
-      
+
+
 YiidActivity:
   columns:
     id:
@@ -64,10 +64,10 @@ YiidActivity:
       type:      integer(4)
     c:
       type:      integer
-      
-      
-      
-      
+
+
+
+
 
 ### indices mmüssen noch definiert werden
 # db.social_object.ensureIndex({url: 1}, { unique: true });
@@ -80,6 +80,5 @@ YiidActivity:
 #
 #  index auf oiids
 #  index auf cids
-# 
-#       
-        
+#
+#
