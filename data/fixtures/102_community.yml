@@ -8,11 +8,13 @@ Community:
     name:      'twitter'
     community: 'twitter'
     url:       'http://www.twitter.com'
+    oi_url:    'http://twitter.com/%s'
 
   community_3:
     name:      'facebook'
     community: 'facebook'
     url:       'http://www.facebook.com'
+    oi_url:    '%s'
 
   community_4:
     name:      'website'
