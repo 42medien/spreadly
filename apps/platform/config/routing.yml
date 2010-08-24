@@ -55,8 +55,12 @@ auth_basic:
   param: { module: auth, action: basic }
 
 auth_add_services:
-  url:  /add_services/*
+  url:  /auth/add_services
   param: { module: auth, action: registered }
+
+auth_add_service:
+  url:  /auth/add_service/*
+  param: { module: auth, action: add_service }
 
 welcome_magic:
   url:  /magic
