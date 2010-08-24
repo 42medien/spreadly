@@ -54,8 +54,9 @@ User:
       type:       string
     friends_list:
       type:       string
-      
-      
+    #latest_activity:
+    #  type:       date
+
 UserIdentityCon:
   actAs:
     Timestampable:  ~
@@ -79,32 +80,32 @@ UserAvatar:
   actAs:
     Timestampable:  ~
   columns:
-    user_id:     
-      type:       integer   
-    online_identity_id: 
-      type:       integer 
+    user_id:
+      type:       integer
+    online_identity_id:
+      type:       integer
     avatar:
       type:   string(50)
-    imported_identifier:   
+    imported_identifier:
       type:    string(255)  #gravatar email or url to service
-    imported_community:    
+    imported_community:
       type: string(50)
-      default: '' 
+      default: ''
     imported_type:
       type: integer
       size: 4
-      default: 0 
-    is_main:    
+      default: 0
+    is_main:
       type: boolean
       notnull: true
       default: false
   relations:
     User:    { onDelete: CASCADE, local: user_id, foreign: id, foreignAlias: UserAvatars }
     OnlineIdentity: { onDelete: CASCADE, local: online_identity_id, foreign: id, foreignAlias: UserAvatars }
-    
-    
-#### saved in MongoDB    
-UserRelation:   
+
+
+#### saved in MongoDB
+UserRelation:
   columns:
     user_id:
       type: integer
@@ -112,8 +113,7 @@ UserRelation:
       type: string
     contacts_oi: # list of contacted OnlineIdentity ids
       type: string
-    contact_uid: # list of contacted yiid user ids 
+    contact_uid: # list of contacted yiid user ids
       type: string
   relations:
     User: { onDelete: CASCADE, local: user_id, foreign: id, foreignAlias: UserRelations }
-  

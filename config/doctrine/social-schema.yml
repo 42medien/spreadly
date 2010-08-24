@@ -6,17 +6,17 @@ options:
 SocialObject:
   columns:
     id:
-      type:      string(24)
+      type:  string(24)
     url:
-      type: string
+      type:  string
     url_hash:
-      type: string(32)
+      type:  string(32)
     alias:
       type:  string
     oiids:     ## onlineIdentitys which participated on this object
-      type: string
+      type:  string
     cids:      ## CommunityIds where this object was shared in
-      type: string
+      type:  string
     type:
       type:  integer(4)
     title:
@@ -34,13 +34,12 @@ SocialObject:
       type:  integer
       default: 0
     c_cnt:
-      type:   integer
-      default:  0
+      type:  integer
+      default: 0
     u:
-      type:   integer
+      type:  integer
     c:
-      type:   integer
-
+      type:  integer
 
 YiidActivity:
   columns:
@@ -65,16 +64,11 @@ YiidActivity:
     c:
       type:      integer
 
-
-
-
-
 ### indices mmüssen noch definiert werden
 # db.social_object.ensureIndex({url: 1}, { unique: true });
 # db.social_object.ensureIndex({alias: 1}, { unique: true });
 # db.yiid_activity.ensureIndex({so_id: 1, u_id: 1}, { unique: true });
 # db.session.ensureIndex({sess_id: 1}, { unique: true });
-
 
 ### neu
 #
