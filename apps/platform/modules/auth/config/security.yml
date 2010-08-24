@@ -3,3 +3,6 @@
 
 default:
   is_secure: false
+
+registered:
+  is_secure: true
