@@ -23,9 +23,8 @@ class streamActions extends sfActions
   }
 
   public function executeNew(sfWebRequest $request) {
-    $lObjectsCount = 3;
-
     $this->getResponse()->setContentType('application/json');
+    $lObjectsCount = 3;
     $lCallback = $request->getParameter('callback', 'logerror');
     $lContactId = $request->getParameter('userid', null);
     $lComId = $request->getParameter('comid', null);
@@ -40,6 +39,9 @@ class streamActions extends sfActions
 
     $pActivities = YiidActivityTable::retrieveLatestActivitiesByContacts($this->getUser()->getUserId(),$lContactId, $lComId, $lObjectsCount, $lPage, $lObjectsCount);
 
+    if(count($pActivities) < $lObjectsCount)
+      $lDoPaginate = false;
+
     return $this->renderText(
       $lCallback.'('.
       json_encode(
@@ -47,7 +49,9 @@ class streamActions extends sfActions
           "stream"  => $this->getPartial('stream/new_stream', array('pActivities' => $pActivities)),
           "action" => "stream/new",
           "dataobj" => '{"callback":"'.$lCallback.'"'.$lString.'}',
-          "css" => $lCss
+          "page" => $lPage,
+          "css" => $lCss,
+          "pDoPaginate" => $lDoPaginate
         )
       )
       .");"
