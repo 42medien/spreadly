@@ -76,6 +76,12 @@ class SocialObjectPeer {
       $lSocialObjectArray = array();
     }
 
+    if(!UrlUtils::isUrlValid($pUrl)) {
+	    $lSocialObjectArray = array_merge(array(
+	      'urlerror'   => true,
+	    ), $lSocialObjectArray);
+    }
+
     // set counts for like on 0 if not set
     $lSocialObjectArray = array_merge(array(
       'l_cnt'   => 0,

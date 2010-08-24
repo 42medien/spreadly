@@ -138,10 +138,14 @@ $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
 
   <!-- Text information -->
   <div id="additional_text_area_like" class="left big_space_to_left" style="color: <?php echo $lFontcolor; ?>">
+    <?php if($lSocialObjectArray['urlerror']) { ?>
+      <p id="error-area" style="color: red; font-weight: bold; font-size: 12px;">FALSCHE URL DU AFFE</p>
+    <?php } else { ?>
       <p id="info-liked">
         <span id="you-like" <?php if($lIsUsed != 1) { ?>style="display: none;" <?php } ?>><?php echo __('POS_TEXT_VALUE_1', $pType); ?></span>
         <span class="counter"><?php echo $lSocialObjectArray['l_cnt']; ?></span><?php echo __('POS_TEXT_VALUE_2', $pType); ?>
       </p>
+    <?php } ?>
   </div>
   <!-- /Text information -->
 
