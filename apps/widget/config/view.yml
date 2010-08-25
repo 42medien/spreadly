@@ -9,7 +9,7 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    [widget/YiidWidget.css]
+  stylesheets:    [widget/widget.css]
 
   javascripts:    []
 
