@@ -17,10 +17,6 @@ class authActions extends sfActions {
 
   public function executeSignin(sfWebRequest $request) {
     // if the user is already loged in, redirect to the stream
-    if ($this->getUser()->isAuthenticated()) {
-      $this->redirect("@stream");
-    }
-
     if ($lService = $request->getParameter("service")) {
       $lObject = AuthApiFactory::factory($lService);
       $lObject->doAuthentication();
@@ -63,14 +59,25 @@ class authActions extends sfActions {
     }
 
     $lObject = AuthApiFactory::factory($request->getParameter('service'));
-    $lUser = $lObject->doSignin($this->getUser(), $lToken);
-    $this->getUser()->signIn($lUser);
-    //UserRelationTable::doShit($lUser->getId());
+
+    // check if it is a signin/signup or if the user wants
+    // to add a new online-identity
+    if ($this->getUser()->isAuthenticated() && $this->getUser()->getUserId()) {
+      $lObject->addIdentifier($this->getUser()->getUser(), $lToken);
+    } else {
+      $lUser = $lObject->doSignin($this->getUser(), $lToken);
+      $this->getUser()->signIn($lUser);
+      //UserRelationTable::doShit($lUser->getId());
+    }
 
     $this->redirect('@auth_add_services');
   }
 
   public function executeRegistered(sfWebRequest $request) {
+    $this->pOnlineIdenities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
+  }
+
+  public function executeAdd_service(sfWebRequest $request) {
 
   }
 }

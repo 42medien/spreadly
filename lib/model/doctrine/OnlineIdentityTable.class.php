@@ -163,4 +163,22 @@ class OnlineIdentityTable extends Doctrine_Table {
     $pUrl = str_replace('http://www.', 'http://', $pUrl);
     $pUrl = str_replace('https://www.', 'https://', $pUrl);
   }
+
+  /**
+   * returns a list of social publishing enabled online-identities
+   *
+   * @author Matthias Pfefferle
+   * @param int $pUserId
+   * @return Doctrine_Collection
+   */
+  public static function getPublishingEnabledByUserId($pUserId) {
+    $q = Doctrine_Query::create()
+           ->select('*')
+           ->from('OnlineIdentity oi')
+           ->where('oi.user_id = ?', $pUserId)
+           ->andWhere('oi.social_publishing_enabled = ?', true);
+
+    $lOis = $q->execute();
+    return $lOis;
+  }
 }

@@ -99,6 +99,69 @@ class TwitterAuthApiClient {
   }
 
   /**
+   * add identifier
+   *
+   * @author Matthias Pfefferle
+   * @param User $pUser
+   * @param AuthToken $pAuthToken
+   * @return OnlineIdentity
+   */
+  public function addIdentifier($pUser, $pOAuthToken) {
+    $lAccessToken = $this->getAccessToken($pOAuthToken);
+
+    // get params
+    $lParams = $lAccessToken->params;
+    $lParamsArray = array();
+    // extract params
+    parse_str($lParams, $lParamsArray);
+
+    // twitter identifier
+    $lIdentifier = "http://twitter.com/account/profile?user_id=".$lParamsArray['user_id'];
+
+    // ask for online identity
+    $lOnlineIdentity = OnlineIdentityTable::retrieveByAuthIdentifier($lIdentifier);
+
+    // check if user already exists
+    if ($lOnlineIdentity) {
+      if ($lOnlineIdentity->getUserId() && ($pUser->getId() == $lOnlineIdentity->getUserId())) {
+        throw new sfException("online identity already added", 1);
+      } elseif ($lOnlineIdentity->getUserId() && ($pUser->getId() != $lOnlineIdentity->getUserId())) {
+        throw new sfException("online identity already added by someone else", 2);
+      }
+    } else {
+      // check online identity
+      $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lParamsArray['screen_name'], $this->aCommunityId);
+    }
+
+    // delete connected user-cons
+    UserIdentityConTable::deleteAllConnections($lOnlineIdentity->getId());
+
+    // get api informations
+    $lJson = OAuthClient::get($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "http://api.twitter.com/1/users/show.json?user_id=".$lParamsArray['user_id']);
+    $lJsonObject = json_decode($lJson);
+
+    // use api complete informations
+    $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject);
+    $this->completeUser($pUser, $lJsonObject);
+
+    // @todo <todo> encapsulating this
+    $lOnlineIdentity->setUserId($pUser->getId());
+    $lOnlineIdentity->setAuthIdentifier($lIdentifier);
+    $lOnlineIdentity->save();
+
+    $lUserIdentityCon = new UserIdentityCon();
+    $lUserIdentityCon->setUserId($pUser->getId());
+    $lUserIdentityCon->setOnlineIdentityId($lOnlineIdentity->getId());
+    $lUserIdentityCon->setVerified(true);
+    $lUserIdentityCon->save();
+    // </todo>
+
+    AuthTokenTable::saveToken($pUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], true);
+
+    return $lOnlineIdentity;
+  }
+
+  /**
    * ask twitter for an access-key
    *
    * @author Matthias Pfefferle

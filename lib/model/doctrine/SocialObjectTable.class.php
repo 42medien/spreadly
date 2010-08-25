@@ -136,10 +136,6 @@ class SocialObjectTable extends Doctrine_Table
     return $lObjects;
   }
 
-
-
-
-
   /**
    * retrieve SocialObject from MongoDb by its ID
    *
@@ -156,8 +152,7 @@ class SocialObjectTable extends Doctrine_Table
    *
    * @author weyandch
    * @param $pIds
-   * @param $con
-   * @return unknown_type
+   * @return array
    */
   public static function retrieveByPKs($pIds){
     $lCollection = self::getMongoCollection();

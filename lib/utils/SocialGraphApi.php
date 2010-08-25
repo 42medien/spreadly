@@ -194,7 +194,7 @@ class SocialGraphApi {
     //var_dump($lSGObject);die();
     $lUrl = $lSGObject["canonical_mapping"][$pUrl];
     //var_dump($lUrl);die();
-    $lAttributes = $lSGObject[$lUrl];
+    //$lAttributes = $lSGObject[$lUrl];
     foreach($lSGObject['nodes'][$lUrl]['claimed_nodes'] as $lClaimed) {
     	if(stristr($pYiidIdentity, $lClaimed) != '') {
     		return true;

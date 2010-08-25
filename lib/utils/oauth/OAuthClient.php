@@ -127,7 +127,7 @@ class OAuthClient {
    * @param string $url
    * @param array $parameters
    */
-  public static function prepareRequest($consumer, $token, $httpMethod, $url, $parameters, $signature = null) {
+  public static function prepareRequest($consumer, $token, $httpMethod, $url, $parameters = array(), $signature = null) {
     if ($signature == null) {
       $signature = new OAuthSignatureMethod_HMAC_SHA1();
     }

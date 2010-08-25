@@ -49,7 +49,7 @@ class OnlineIdentityConTable extends Doctrine_Table {
    * @return array(int)
    */
   public static function getIdentitysConnectedToOi($pOiId) {
-     $q = Doctrine_Query::create()
+    $q = Doctrine_Query::create()
           ->select('oic.to_id')
           ->from('OnlineIdentityCon oic')
           ->where('oic.from_id = ?', $pOiId);
@@ -57,6 +57,5 @@ class OnlineIdentityConTable extends Doctrine_Table {
     $lUiCons = $q->execute(array(),  Doctrine_Core::HYDRATE_NONE);
     $q->free();
     return HydrationUtils::flattenArray($lUiCons);
-
   }
 }

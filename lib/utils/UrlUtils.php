@@ -1,12 +1,10 @@
 <?php
-
 /**
  * class to handel url functions
  *
  * @author Matthias Pfefferle
  */
 class UrlUtils {
-
   const HTTP_HEAD = 'HEAD';
   const HTTP_GET  = 'GET';
   const HTTP_POST = 'POST';
@@ -15,10 +13,10 @@ class UrlUtils {
    * Default options for curl.
    */
   public static $CURL_OPTS = array(
-  CURLOPT_CONNECTTIMEOUT => 10,
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_TIMEOUT => 60,
-  CURLOPT_USERAGENT => 'yiid-yak',
+    CURLOPT_CONNECTTIMEOUT => 10,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_TIMEOUT => 60,
+    CURLOPT_USERAGENT => 'yiid-yak',
   );
 
   /**
@@ -77,7 +75,6 @@ class UrlUtils {
     }
   }
 
-
   /**
    * read source code of an external website
    *
@@ -134,7 +131,6 @@ class UrlUtils {
     return "http://www.google.com/s2/favicons?domain_url=".$pUrl;
   }
 
-
   /**
    * Returns domain with top-level-domain
    * use libary: http://tobyinkster.co.uk/blog/2007/07/19/php-domain-class/
@@ -168,7 +164,6 @@ class UrlUtils {
     }
 
     return $lDomain;
-
   }
 
   /**
@@ -269,13 +264,13 @@ class UrlUtils {
   }
 
   /**
-     * attaches an array of get parameters to a url, only attaches the parameters if they havent been set yet.
-    
-     * @param String $pUrl the url to append the parameter to
-     * @param Array $pParam an array with key/value pairs of
-     * @param Boolean not implemented yet, replace old params if already there
-     * @return String the new url
-     */
+   * attaches an array of get parameters to a url, only attaches the parameters if they havent been set yet.
+   *
+   * @param String $pUrl the url to append the parameter to
+   * @param Array $pParam an array with key/value pairs of
+   * @param Boolean not implemented yet, replace old params if already there
+   * @return String the new url
+   */
   public static function addUrlParams($pUrl, $pParams, $pReplace = false){
     $lNewUrl = $pUrl;
     foreach($pParams as $lKey => $lVal){
@@ -540,7 +535,6 @@ class UrlUtils {
 
     return md5($lUrl);
   }
-
 
   /**
    *

@@ -49,8 +49,6 @@ class FacebookAuthApiClient {
   public function doSignin($pSessionUser, $pCode) {
     $lAccessToken = $this->getAccessToken($pCode);
 
-    var_dump($lAccessToken);
-
     // get params
     $lParamsArray = array();
     // extract params
@@ -58,7 +56,7 @@ class FacebookAuthApiClient {
 
     $lJsonObject = json_decode(UrlUtils::sendGetRequest("https://graph.facebook.com/me?access_token=".$lParamsArray['access_token']));
 
-    // twitter identifier
+    // facebook identifier
     $lIdentifier = "http://www.facebook.com/profile.php?id=".$lJsonObject->id;
 
     // ask for online identity
@@ -71,20 +69,20 @@ class FacebookAuthApiClient {
       // check online identity
       $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lJsonObject->link, $this->aCommunityId);
       // delete connected user-cons
-      UserIdentityConTable::deleteAllConnections($lOnlineIdentity->getId());
+      UserIdentityConTable::deleteAllConnections($lOnlineIdentity->getId());  // signup,add new
       // generate empty user
       $lUser = new User();
 
       // use api complete informations
-      $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject);
-      $this->completeUser($lUser, $lJsonObject);
+      $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject); // signup,add new
+      $this->completeUser($lUser, $lJsonObject);                     // signup
 
       // @todo <todo> encapsulating this
-      $lOnlineIdentity->setUserId($lUser->getId());
+      $lOnlineIdentity->setUserId($lUser->getId());                  /* signup,add new */
       $lOnlineIdentity->setAuthIdentifier($lIdentifier);
       $lOnlineIdentity->save();
 
-      $lUserIdentityCon = new UserIdentityCon();
+      $lUserIdentityCon = new UserIdentityCon();                     /* signup,add new */
       $lUserIdentityCon->setUserId($lUser->getId());
       $lUserIdentityCon->setOnlineIdentityId($lOnlineIdentity->getId());
       $lUserIdentityCon->setVerified(true);
@@ -92,9 +90,68 @@ class FacebookAuthApiClient {
       // </todo>
     }
 
-    AuthTokenTable::saveToken($lUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['access_token'], null, true);
+    AuthTokenTable::saveToken($lUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['access_token'], null, true);  // signup,add new
 
     return $lUser;
+  }
+
+  /**
+   * add identifier
+   *
+   * @author Matthias Pfefferle
+   * @param User $pUser
+   * @param AuthToken $pAuthToken
+   * @return OnlineIdentity
+   */
+  public function addIdentifier($pUser, $pCode) {
+    $lAccessToken = $this->getAccessToken($pCode);
+
+    // get params
+    $lParamsArray = array();
+    // extract params
+    parse_str($lAccessToken, $lParamsArray);
+
+    $lJsonObject = json_decode(UrlUtils::sendGetRequest("https://graph.facebook.com/me?access_token=".$lParamsArray['access_token']));
+
+    // facebook identifier
+    $lIdentifier = "http://www.facebook.com/profile.php?id=".$lJsonObject->id;
+
+    // ask for online identity
+    $lOnlineIdentity = OnlineIdentityTable::retrieveByAuthIdentifier($lIdentifier);
+
+    // check if user already exists
+    if ($lOnlineIdentity) {
+      if ($lOnlineIdentity->getUserId() && ($pUser->getId() == $lOnlineIdentity->getUserId())) {
+        throw new sfException("online identity already added", 1);
+      } elseif ($lOnlineIdentity->getUserId() && ($pUser->getId() != $lOnlineIdentity->getUserId())) {
+        throw new sfException("online identity already added by someone else", 2);
+      }
+    } else {
+      // check online identity
+      $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lJsonObject->link, $this->aCommunityId);
+    }
+
+    // delete connected user-cons
+    UserIdentityConTable::deleteAllConnections($lOnlineIdentity->getId());  // signup,add new
+
+    // use api complete informations
+    $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject); // signup,add new
+
+    // @todo <todo> encapsulating this
+    $lOnlineIdentity->setUserId($pUser->getId());                  /* signup,add new */
+    $lOnlineIdentity->setAuthIdentifier($lIdentifier);
+    $lOnlineIdentity->save();
+
+    $lUserIdentityCon = new UserIdentityCon();                     /* signup,add new */
+    $lUserIdentityCon->setUserId($pUser->getId());
+    $lUserIdentityCon->setOnlineIdentityId($lOnlineIdentity->getId());
+    $lUserIdentityCon->setVerified(true);
+    $lUserIdentityCon->save();
+    // </todo>
+
+    AuthTokenTable::saveToken($pUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['access_token'], null, true);  // signup,add new
+
+    return $lOnlineIdentity;
   }
 
   /**
@@ -112,7 +169,7 @@ class FacebookAuthApiClient {
   }
 
   /**
-   * Enter description here...
+   * retrieve the access token
    *
    * @author Matthias Pfefferle
    * @param string $pCode
@@ -129,6 +186,7 @@ class FacebookAuthApiClient {
   /**
    * complete the user with the api json
    *
+   * @author Matthias Pfefferle
    * @param User $pUser
    * @param Object $pObject
    */
@@ -150,6 +208,7 @@ class FacebookAuthApiClient {
   /**
    * complete the online-identity with the api json
    *
+   * @author Matthias Pfefferle
    * @param OnlineIdentity $pOnlineIdentity
    * @param Object $pObject
    */
