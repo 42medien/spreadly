@@ -70,36 +70,36 @@ input.btn[type=submit]{color:#6a6b6a;}
 .container_border{border:2px solid #c1c1c1;}
 .content_main_border{border:1px solid #cdcdcd;}
 .rounded_corners{border-radius: 0.5em;-moz-border-radius: 0.5em;-webkit-border-radius: 0.5em;}
-#branding{background: url("/img/popup/sprite_popup.png") no-repeat 40px -1130px;}
-#nav_main{background: url("/img/popup/sprite_popup.png") no-repeat 0 0;}
-#content{background: transparent url("/img/popup/sprite_popup.png") no-repeat 0 -1303px;}
+#branding{background: url("/img/sprites/sprite_popup.png") no-repeat 40px -1130px;}
+#nav_main{background: url("/img/sprites/sprite_popup.png") no-repeat 0 0;}
+#content{background: transparent url("/img/sprites/sprite_popup.png") no-repeat 0 -1303px;}
 #normal_box{background-color: #F2F2F2;}
 .light_text{color:#fff;}
 .dark_text{color:#6A6B6A;}
 a{color: #68B94F;}
-#buzz_logo{background: url("/img/popup/sprite_popup.png") no-repeat 0 -575px;}
-#facebook_logo{background: url("/img/popup/sprite_popup.png") no-repeat 0 -785px;}
-#twitter_logo{background: url("/img/popup/sprite_popup.png") no-repeat 0 -1003px;}
-#further_logos{background: url("/img/popup/sprite_popup.png") no-repeat 0 -1269px;}
-#buzz_logo_small{background: url("/img/popup/sprite_popup.png") no-repeat 0 -523px;}
-#facebook_logo_small{background: url("/img/popup/sprite_popup.png") no-repeat 12px -734px;}
-#twitter_logo_small{background: url("/img/popup/sprite_popup.png") no-repeat 10px -953px;}
+#buzz_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -575px;}
+#facebook_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -785px;}
+#twitter_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -1003px;}
+#further_logos{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -1269px;}
+#buzz_logo_small{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -523px;}
+#facebook_logo_small{background: url("/img/sprites/sprite_popup.png") no-repeat 12px -734px;}
+#twitter_logo_small{background: url("/img/sprites/sprite_popup.png") no-repeat 10px -953px;}
 #agb_text{border: 1px solid #d7d7d7;}
 a.question_link{color: #FFFFFF !important;}
-#error_box{background: #F2F2F2 url("/img/popup/sprite_popup.png") no-repeat 5px -1223px;}
+#error_box{background: #F2F2F2 url("/img/sprites/sprite_popup.png") no-repeat 5px -1223px;}
 .light_background, #login_box{background: #F2F2F2;}
 #error_box{color:#ea4036;}
 .error_list li{border-bottom: 1px solid #cdcdcd;}
-.btn{background: #F2F2F2 url("/img/popup/sprite_popup.png") no-repeat 110px -1269px;}
-#check_facebook{background: #F2F2F2 url("/img/popup/sprite_popup.png") no-repeat 25px -700px;}
-#choose_facebook{background: #F2F2F2 url("/img/popup/sprite_popup.png") no-repeat 0 -859px;}
-#check_google{background: #F2F2F2 url("/img/popup/sprite_popup.png") no-repeat  25px -490px;}
-#choose_buzz{background: #F2F2F2 url("/img/popup/sprite_popup.png") no-repeat  0 -643px;}
-#check_twitter{background: #F2F2F2 url("/img/popup/sprite_popup.png") no-repeat  25px -918px;}
-#choose_twitter{background: #F2F2F2 url("/img/popup/sprite_popup.png") no-repeat  0 -1080px;}
-#add_facebook{background: #F2F2F2 url("/img/popup/sprite_popup.png") no-repeat 0 -860px;}
-#add_buzz{background: #F2F2F2 url("/img/popup/sprite_popup.png") no-repeat 0 -645px;}
-#add_twitter{background: #F2F2F2 url("/img/popup/sprite_popup.png") no-repeat 0 -1079px;}
+.btn{background: #F2F2F2 url("/img/sprites/sprite_popup.png") no-repeat 110px -1269px;}
+#check_facebook{background: #F2F2F2 url("/img/sprites/sprite_popup.png") no-repeat 25px -700px;}
+#choose_facebook{background: #F2F2F2 url("/img/sprites/sprite_popup.png") no-repeat 0 -859px;}
+#check_google{background: #F2F2F2 url("/img/sprites/sprite_popup.png") no-repeat  25px -490px;}
+#choose_buzz{background: #F2F2F2 url("/img/sprites/sprite_popup.png") no-repeat  0 -643px;}
+#check_twitter{background: #F2F2F2 url("/img/sprites/sprite_popup.png") no-repeat  25px -918px;}
+#choose_twitter{background: #F2F2F2 url("/img/sprites/sprite_popup.png") no-repeat  0 -1080px;}
+#add_facebook{background: #F2F2F2 url("/img/sprites/sprite_popup.png") no-repeat 0 -860px;}
+#add_buzz{background: #F2F2F2 url("/img/sprites/sprite_popup.png") no-repeat 0 -645px;}
+#add_twitter{background: #F2F2F2 url("/img/sprites/sprite_popup.png") no-repeat 0 -1079px;}
 
 
 /**
