@@ -703,7 +703,7 @@ var YiidSlider = {
     //show the sliding-area
     YiidSlider.aSlidingArea.style.display='block';
     //get the width of all inserted cols(favicon-styles)
-    YiidSlider.aOffsetWidth = document.getElementById('slide_table').offsetWidth+12;
+    YiidSlider.aOffsetWidth = document.getElementById('slide_table').offsetWidth+14;
     //set interval to slide in
     YiidSlider.aSlideElement.timer = window.setInterval( function() {
        if(i >= YiidSlider.aOffsetWidth) {
