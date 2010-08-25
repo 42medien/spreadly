@@ -1,8 +1,8 @@
 <div id="normal_box" class="content_main_border rounded_corners clearfix">
 
   <ul id="logos_big" class="normal_list small_size important clearfix">
-    <li><a id="facebook_logo" class="service_icon" href="<?php echo RpxClient::generateApiUrl("facebook", url_for("@confirm_signin", true)); ?>">Facebook</a></li>
-    <li id="twitter_area"><a id="twitter_logo" class="service_icon" href="<?php echo RpxClient::generateApiUrl("twitter", url_for("@confirm_signin", true)); ?>">Twitter</a></li>
+    <li><a id="facebook_logo" class="service_icon" href="<?php //echo RpxClient::generateApiUrl("facebook", url_for("@confirm_signin", true)); ?>">Facebook</a></li>
+    <li id="twitter_area"><a id="twitter_logo" class="service_icon" href="<?php //echo RpxClient::generateApiUrl("twitter", url_for("@confirm_signin", true)); ?>">Twitter</a></li>
     <li id="further_logos">&nbsp;</li>
   </ul>
 
