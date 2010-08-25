@@ -217,7 +217,7 @@ class YiidActivityTable extends Doctrine_Table
   }
 
 
-  public static function retrieveLatestActivitiesByContacts($pUserId, $pFriendId = null, $pCommunityId = null) {
+  public static function retrieveLatestActivitiesByContacts($pUserId, $pFriendId = null, $pCommunityId = null, $pLimit = 10, $pOffset = 1) {
     $lCollection = self::getMongoCollection();
 
     $lRelevantOis = self::getRelevantOnlineIdentitysForQuery($pUserId, $pFriendId);
@@ -230,6 +230,8 @@ class YiidActivityTable extends Doctrine_Table
 
     $lResults = $lCollection->find($lQueryArray);
     $lResults->sort(array('u' => -1));
+    
+    $lResults->limit($pLimit)->skip(($pOffset - 1) * $pLimit);
 
     return self::hydrateMongoCollectionToObjects($lResults);
   }
