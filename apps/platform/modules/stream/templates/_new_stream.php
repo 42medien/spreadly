@@ -1,4 +1,4 @@
-<ul id="new_shares" class="stream_new">
+<!-- <ul id="new_shares" class="stream_new"> -->
 <?php foreach ($pActivities as $lActivity) { ?>
   <?php $lObject = YiidActivityTable::retrieveSocialObjectByUrl($lActivity->getUrl()); ?>
   <li>new-stream</li>
@@ -6,6 +6,6 @@
     <?php include_partial('new_stream_item', array('pActivity' => $lActivity, 'pObject' => $lObject)); ?>
   </li>
   <?php } ?>
-</ul>
+<!-- </ul> -->
 
 <?php include_partial('stream/stream_pager'); ?>
