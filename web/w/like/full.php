@@ -92,6 +92,7 @@ YiidStatsSingleton::trackVisit($pUrl, $pUserId, $pType, $_GET['cult'], 'full');
 	    </div>
 
 	    <div id="settings_button" class="normal_button_area" style="display:none;">
+        <span id="settings_button_icon" class="left">&nbsp;</span>
 		    <p class="left <?php echo (!$pFullShortVersion ? 'normal_space' : 'small_space') ?>" onclick="YiidSlider.slideOut(event);" title="<?php echo __("SETTINGS_TITLE"); ?>">
 		      <?php if(!$pFullShortVersion) { ?><?php echo __("SETTINGS_VALUE"); ?><?php } ?>
 		    </p>

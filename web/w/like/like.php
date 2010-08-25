@@ -88,8 +88,9 @@ $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
         </div>
       </div>
 
-      <div id="settings_button" class="normal_button_area <?php echo (!$pFullShortVersion ? 'normal_space' : 'small_space') ?>" style="display:none;">
-        <p class="left" onclick="YiidSlider.slideOut(event);" title="<?php echo __("SETTINGS_TITLE"); ?>">
+      <div id="settings_button" class="normal_button_area" style="display:none;">
+        <span id="settings_button_icon" class="left">&nbsp;</span>
+        <p class="left <?php echo (!$pFullShortVersion ? 'normal_space' : 'small_space') ?>" onclick="YiidSlider.slideOut(event);" title="<?php echo __("SETTINGS_TITLE"); ?>">
           <?php if(!$pFullShortVersion) { ?><?php echo __("SETTINGS_VALUE"); ?><?php } ?>
         </p>
       </div>
