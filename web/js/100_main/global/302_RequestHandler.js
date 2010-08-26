@@ -22,10 +22,7 @@ var GlobalRequest = {
 	initGlobals: function(pElement, pParams) {
 		debug.log("[GlobalRequest][initGlobals]");
 		//is the given element an link
-    if(pElement !== undefined && jQuery(pElement).is('a') && !jQuery(pElement).attr('data-obj') && !jQuery(pElement).attr('onclick')) {
-    	//set the global vars in the setGlobalsByUri method
-      GlobalRequest.setGlobalsByUri(jQuery(pElement).attr('href'));
-    } else if(pParams !== undefined) {
+    if(pParams !== undefined) {
     	//if the element is not a link, set the global vars in setGlobalsByObject
       GlobalRequest.setGlobalsByObject(pParams);
     }	else {
@@ -37,6 +34,7 @@ var GlobalRequest = {
 	/**
 	 * extract the callback-param from the href-attribute and 
 	 * @author KM
+	 * @depricated currently not in use
 	 * @param string pHref (have to look like that: http://example.com?callback=MYCALLBACK()&param=PARAM)
 	 */
 	setGlobalsByUri: function(pHref) {
@@ -56,7 +54,7 @@ var GlobalRequest = {
 	setGlobalsByObject: function(pParams) {
     debug.log("[GlobalRequest][setGlobalsByObject]");		
 		//set global action and callback vars
-		GlobalRequest.aAction = pParams.action;
+		GlobalRequest.aAction = GlobalRequest.parseAction(pParams.action);
 		GlobalRequest.aCallback = pParams.callback;
 		//delete them from the params, because we don't have to send them to the action
 		delete pParams.action;

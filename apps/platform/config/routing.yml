@@ -37,6 +37,10 @@ get_contacts_by_sortname:
 get_friends:
   url: /stream/get_friends
   param: { module: stream, action: get_friends }
+  
+get_active_friends:
+  url: /stream/get_active_friends
+  param: { module: stream, action: get_active_friends }  
 
 auth_signin:
   url:   /signin/*

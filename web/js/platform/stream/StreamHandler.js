@@ -26,7 +26,7 @@ var Stream = {
 		//append the new
 		jQuery('#stream_left_bottom').append(pResponse.stream);
 		//set the action for next requests global 
-		SubFilter.setAction(pResponse.action);
+		StreamSubFilter.setAction(pResponse.action);
 		//update the data-obj attribute of the filter
     MainFilter.updateData(pResponse.dataobj);
     
@@ -45,7 +45,7 @@ var Stream = {
     OnLoadGrafic.hideGrafic();
     
     //load the details of the first element on the right sidebar
-    ItemDetail.loadFirst(); 
+    ItemDetail.loadFirst();
 	}
 };
 
@@ -73,17 +73,17 @@ var StreamFilter = {
 	      MainFilter.updateCss(lCssClass);
 	    } else {
 	    	//if u wanna change the subnavi on sidebar
-	      SubFilter.updateCss(lCssId);
+	      StreamSubFilter.updateCss(lCssId);
 	    }
 		}
 	}
 };
 
 /**
- * Handles the behaviour of the subfilters on sidebar (user and com-filter)
+ * Handles the behaviour of the StreamSubFilters on sidebar (user and com-filter)
  * @author KM
  */
-var SubFilter = {
+var StreamSubFilter = {
 
   aAction: 'stream/hot',
   
@@ -93,8 +93,8 @@ var SubFilter = {
    * @param string pAction
    */
   setAction: function(pAction) {
-    debug.log("[SubFilter][setAction]");  	
-    SubFilter.aAction = pAction;
+    debug.log("[StreamSubFilter][setAction]");  	
+    StreamSubFilter.aAction = pAction;
   },
   
   /**
@@ -103,8 +103,8 @@ var SubFilter = {
    * @author KM
    */
   getAction: function() {
-    debug.log("[SubFilter][getAction]");  	
-  	return SubFilter.aAction;
+    debug.log("[StreamSubFilter][getAction]");  	
+  	return StreamSubFilter.aAction;
   },
   
   /**
@@ -112,12 +112,21 @@ var SubFilter = {
    * @author KM
    */
   updateCss: function(pCssId) {
-    debug.log("[SubFilter][updateCss]"); 
+    debug.log("[StreamSubFilter][updateCss]"); 
     //remove all classes named filter-chosen from a parent-list called all_network_list    	
     ClassHandler.removeClassesByParent(jQuery('#all_networks_list'), 'filter_chosen');
     ClassHandler.removeClassesByParent(jQuery('#friends_active_list'), 'filter_chosen'); 
+    ClassHandler.removeClassesByParent(jQuery('#friends_all_list'), 'filter_chosen');      
     //and highlight the new
-    jQuery('#'+pCssId).addClass('filter_chosen');    
+    jQuery('#'+pCssId).addClass('filter_chosen');
+  },
+  
+  resetCss: function() {
+    debug.log("[StreamSubFilter][resetCss]"); 
+    //remove all classes named filter-chosen from a parent-list called all_network_list     
+    ClassHandler.removeClassesByParent(jQuery('#all_networks_list'), 'filter_chosen');
+    ClassHandler.removeClassesByParent(jQuery('#friends_active_list'), 'filter_chosen');
+    ClassHandler.removeClassesByParent(jQuery('#friends_all_list'), 'filter_chosen');      
   }
 };
 

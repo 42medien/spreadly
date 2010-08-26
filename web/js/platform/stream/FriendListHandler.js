@@ -1,26 +1,86 @@
-/**
- * @combine platform
- */
-
-
-/**
- * object to handle filters for the friendlist on the left sidebar
- * @author KM
- */
-var FriendListFilter = {
-  
-  /**
-   * inits the inputfilter
-   * @author KM
-   */
+var FriendBox = {
   init: function() {
-    var lInput = jQuery('#input-friend-filter');
-    jQuery(lInput).toggleValue();
-    jQuery(lInput).inputfilter({
-      'parentid': 'friends_active_list', 
-      'url':'stream/get_contacts_by_sortname',
-      'callback': FriendListFilter.cbFilter
-    });
+    debug.log("[FriendBox][init]");          
+    FriendStreamFilter.init();
+    FriendStreamInputFilter.init();
+    FriendStream.init();
+    FriendStreamCounter.init();
+  },
+  
+  reset: function() {
+    FriendStreamFilter.reset();
+    FriendStreamInputFilter.reset();
+    FriendStream.reset();
+    FriendStreamCounter.reset();    
+  }
+};
+
+var FriendStreamFilter = {
+  
+  aAllLink: {},
+  aActiveLink: {},
+  aAllLinkId: '',
+  aActiveLinkId: '',
+  
+  init: function() {
+    debug.log("[FriendStreamFilter][init]");        
+    FriendStreamFilter.aAllLink = jQuery('#friends_all');
+    FriendStreamFilter.aAllLinkId = jQuery(FriendStreamFilter.aAllLink).attr('id');
+    FriendStreamFilter.aActiveLink = jQuery('#friends_active');  
+    FriendStreamFilter.aActiveLinkId = jQuery(FriendStreamFilter.aActiveLink).attr('id');  
+    
+    FriendStreamFilter.bindClick();
+  },
+  
+  bindClick: function() {
+    debug.log("[FriendStreamFilter][bindClick]");          
+    jQuery('#'+FriendStreamFilter.aAllLinkId+', #'+FriendStreamFilter.aActiveLinkId).live('click', function() {
+      //toggle the lists
+      FriendStream.toggle(this.id, true);
+      //reset the stream
+      GlobalRequest.initOnClick(this, {"action":"StreamSubFilter.getAction", "callback":"Stream.show"})
+      //reset the counter
+      FriendStreamCounter.reset();
+      //reset textfield
+      FriendStreamInputFilter.reset();
+      //reset the highlighting of filters
+      StreamSubFilter.resetCss();
+      
+      FriendStreamFilter.updateCss(this.id);
+      
+      return false;
+    });      
+  },
+  
+  updateCss: function(pElemId) {
+    jQuery.each(jQuery('#friend-filter-area .friend-filter-link'), function(i, val) {
+      jQuery(this).css('text-decoration', 'none');
+    });  
+    jQuery('#'+pElemId).css('text-decoration', 'underline');    
+  },
+  
+  reset: function() {
+    jQuery.each(jQuery('#friend-filter-area .friend-filter-link'), function(i, val) {
+      jQuery(this).css('text-decoration', 'none');
+    });  
+    jQuery(FriendStreamFilter.aActiveLink).css('text-decoration', 'underline');
+  }
+};
+
+var FriendStreamInputFilter = {
+  aInput: '',
+  
+  init: function() {
+    if (typeof(document.friendlistfilterform) !=  "undefined"){
+      document.friendlistfilterform.reset();
+    }
+    FriendStreamInputFilter.aInput = jQuery('#input-friend-filter');
+      jQuery(FriendStreamInputFilter.aInput).toggleValue();
+      jQuery(FriendStreamInputFilter.aInput).inputfilter({
+        'parentid': 'friends_search_results', 
+        'url':'stream/get_contacts_by_sortname',
+        'callback': FriendStreamInputFilter.cbInputfilter
+      });   
   },
   
   /**
@@ -29,86 +89,64 @@ var FriendListFilter = {
    * @author KM
    * @param object pResponse
    */
-  cbFilter: function(pResponse) {
-    if(jQuery('#friends_active_list').css('display') == 'none') {
-      ElementHandler.toggleTwoAreas('friends_active_list', 'friends_all_list');
-      TextHandler.toggleById('all-friends-link', 'SHOW_ALL_FRIENDS', 'SHOW_HOT_FRIENDS');
-      TextHandler.toggleById('active_friends_headline', 'ACTIVE_FRIENDS', 'ALL_FRIENDS');
-    }
-    
-    if(jQuery('#friend-counter-box').css('display') == 'none') {
-      jQuery('#friend-counter-box').show();
-    } 
-    /*
-    else if(pResponse.pCounter < 10) {
-      jQuery('#friend-counter-box').hide();      
-    }*/
-    jQuery('#friend-counter').text(pResponse.pCounter);      
+  cbInputfilter: function(pResponse) {
+    FriendStreamFilter.reset();
+    FriendStream.toggle('friends_search_results');
+    FriendStreamCounter.update(pResponse.pCounter);
+  },
+  
+  reset: function() {
+    jQuery('#input-friend-filter').val(i18n.get('TYPE_NAME_TO_FILTER')); 
+    jQuery(FriendStreamInputFilter.aInput).toggleValue();    
   }
 };
 
-
-/**
- * Object to handle the postload and toggle of the all-friend-list
- * @author KM
- */
-var FriendList = {
-
-  aPage: 1,    
-    
-  /**
-   * inits the functions
-   * @author KM
-   */
+var FriendStream = {
+  aAllFriendList: {},
+  aActiveFriendList: {},
+  aSearchFriendList: {},
+  
   init: function() {
-    FriendList.toggleLists();
-    FriendList.loadMore();
+    FriendStream.aAllFriendList = jQuery('#friends_all_list');
+    FriendStream.aActiveFriendList = jQuery('#friends_active_list');
+    FriendStream.aSearchFriendList = jQuery('#friends_search_results'); 
+    jQuery(FriendStream.aAllFriendList).scrollPager({"url":"stream/get_active_friends"});
+    jQuery(FriendStream.aActiveFriendList).scrollPager({"url":"stream/get_friends"});     
+    jQuery(FriendStream.aSearchFriendList).scrollPager({"url":"stream/get_friends"});
   },
   
-  /**
-   * toggles between the hot and all-friends-list
-   * @author KM
-   */
-  toggleLists: function() {
-    debug.log("[FriendList][toggleLists]");      
-    jQuery('#all-friends-link').live('click', function() {
-      ElementHandler.toggleTwoAreas('friends_active_list', 'friends_all_list');
-      TextHandler.toggleById('all-friends-link', 'SHOW_ALL_FRIENDS', 'SHOW_HOT_FRIENDS');
-      TextHandler.toggleById('active_friends_headline', 'ALL_FRIENDS', 'ACTIVE_FRIENDS');
-      return false;
-    });
+  toggle: function(pElemId, pList) {
+    jQuery.each(jQuery('#photo_filter_box .friend-filter-list'), function(i, val) {
+      jQuery(this).hide();
+    }); 
+    if(pList && pList === true) {
+      jQuery('#'+pElemId+'_list').show();
+    } else {
+      jQuery('#'+pElemId).show();      
+    }
   },
   
-  /**
-   * scrollpager for the friendlist
-   * @author KM
-   */
-  loadMore: function() {
-    jQuery('#friends_all_list').bind('scroll', function() {
-      var lElement = jQuery('#friends_all_list');
-      
-      var scrolltop = jQuery(lElement).attr('scrollTop');  
-      var scrollheight = jQuery(lElement).attr('scrollHeight');  
-      var windowheight = jQuery(lElement).attr('clientHeight');
-      var scrolloffset = 0;
-      
-      if (scrolltop >= (scrollheight-(windowheight+scrolloffset)) && FriendList.aPage != undefined) {
-        jQuery.ajax({
-          type: "GET",
-          url: 'stream/get_friends',
-          dataType: "json",
-          data: {'sortname':'', 'page': FriendList.aPage},
-          success: function(pResponse) {
-          	// hier kriegst du pResponse.pDoPaginate true oder false zurück
-            jQuery(lElement).append(pResponse.html);
-            if(pResponse.pDoPaginate === false) {
-              FriendList.aPage = undefined;
-            } else {
-              FriendList.aPage++;
-            }
-          }
-        });        
-      }      
-    });
+  reset: function() {
+    jQuery.each(jQuery('#photo_filter_box .friend-filter-list'), function(i, val) {
+      jQuery(this).hide();
+    });  
+    jQuery(FriendStream.aActiveFriendList).show();    
   }
+    
 };
+
+var FriendStreamCounter = {
+  aCount: 0,
+  
+  init: function() {
+    FriendStreamCounter.aCount = jQuery('#friend-counter').text();
+  },
+  
+  update: function(pCount) {
+    jQuery('#friend-counter').text(pCount);
+  },
+  
+  reset: function() {
+    jQuery('#friend-counter').text(FriendStreamCounter.aCount);
+  }
+}

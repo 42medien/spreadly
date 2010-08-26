@@ -12,10 +12,19 @@ ItemDetail.loadFirst();
 DataObjectPager.init('stream_pager_link','{"action":"stream/hot", "callback":"Stream.show", "page":"2"}');
 DataObjectPager.init('item-stream-pager-link');
 
-FriendListFilter.init();
-FriendList.init();
+//FriendListInputFilter.init();
+//FriendListLinkFilter.init();
+//FriendList.init();
+FriendBox.init();
 
+
+
+var TYPE_NAME_TO_FILTER = "<?php echo __('type name to filter', null, 'platform'); ?>";
 var SHOW_ALL_FRIENDS = "<?php echo __('SHOW_ALL_FRIENDS')?>";
 var SHOW_HOT_FRIENDS = "<?php echo __('SHOW_HOT_FRIENDS')?>";
 var ACTIVE_FRIENDS = "<?php echo __('ACTIVE_FRIENDS')?>";
 var ALL_FRIENDS = "<?php echo __('ALL_FRIENDS')?>";
+
+i18n.init({
+  "TYPE_NAME_TO_FILTER":"<?php echo __('type name to filter', null, 'platform'); ?>",
+});

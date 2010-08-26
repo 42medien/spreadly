@@ -54,5 +54,12 @@ var ElementHandler = {
     jQuery('#'+pArea1).slideToggle();
     
     return false;
-  }    
+  },
+  
+  toggleAreas: function(pToShow, pClassToHide) {
+    jQuery.each(jQuery('.'+pClassToHide), function(i, val) {
+      jQuery(this).hide();
+    });     
+    jQuery('#'+pToShow).slideToggle();    
+  }
 };

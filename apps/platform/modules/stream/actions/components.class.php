@@ -22,7 +22,7 @@ class streamComponents extends sfComponents
 
     $this->pFriends = UserTable::getHottestFriendsForUser($this->getUser()->getUserId(), 1, 10);
     // get friends alphabetically
-    // $this->pFriends = UserTable::getAlphabeticalFriendsForUser($this->getUser()->getUserId(), 1, 10);
+    $this->pAllFriends = UserTable::getAlphabeticalFriendsForUser($this->getUser()->getUserId());
     $this->pFriendsCount = $this->getUser()->getUser()->countFriends();
   }
 

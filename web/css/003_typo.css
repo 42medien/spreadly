@@ -45,7 +45,7 @@ a, a.icon_thumb, li.filter_chosen a, a.icon_thumbs, a.icon_thumb, a.icon_small_u
 /**
  *   @section -TextAlignment
  */
-#all_networks_list li, #friends_active_list li, #friends_all_list li, .user_hover_area_top, user_hover_area_bottom, #signin_via_username_form label, .two_block_area li, .two_block_area h5, #magic_after_registration .right_block{text-align: left;}
+#all_networks_list li, #friends_search_results li, #friends_active_list li, #friends_all_list li, .user_hover_area_top, user_hover_area_bottom, #signin_via_username_form label, .two_block_area li, .two_block_area h5, #magic_after_registration .right_block{text-align: left;}
 .center_area{text-align: center;}
 .actions, #nav_main_supp{text-align: right;}
 .filter_counter_area{text-align: left;}
