@@ -1,11 +1,14 @@
 all:
-  is_secure: on
+  is_secure: true
 
 signin:
-  is_secure: off
+  is_secure: false
+
+signinto:
+  is_secure: false
 
 confirm_signin:
-  is_secure: off
+  is_secure: false
 
 create_account:
-  is_secure: off
+  is_secure: false
