@@ -79,12 +79,12 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 #content_sub{/*width:25%;*/ width: 250px;}
 #photo_filter_box{margin:0 15px 0 25px;width:200px;padding-bottom:10px;}
 #photo_filter_box input[type=submit]{}
-.filter_headline{margin-top: 5px;padding:5px 8%;border-left: none;}
+.filter_headline_communities, .filter_headline_friends, .filter_headline_communities_active, .filter_headline_friends_active{margin-top: 5px;padding: 0 8%;border-left: none;}
 #all_networks_list li{padding: 2px 0;}
 .btn{width: 150px;border: 1px solid #CDCDCD;padding: 2px 30px 2px 20px;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;}
 .photo_big{width: 140px;height: 140px;border: 2px #d7d7d7 solid;}
 #stream_photo{margin: 15px auto;}
-.normal_list{list-style-type: none;margin: 10px 0 20px;}
+.normal_list{list-style-type: none;margin: 10px 0 15px;}
 .icon_service{padding: 4px 10px 4px 33px;}
 .icon_detail_right{padding: 4px;}
 .user_filter{padding: 4px 10px 4px 10px;}
@@ -102,10 +102,12 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 #friends_active_list{height: 100px; overflow: auto;}
 #friends_search_results{display: none; height: 100px; overflow: auto;}
 #friends_all_list{display: none; height: 100px; overflow: auto;}
-#friends_active_list li, #friends_all_list li, #friends_search_results li{padding: 2px 0;}
+#friends_active_list li, #friends_all_list li, #friends_search_results li{padding: 2px 0 2px 3px;}
 .search_field_area, #reset_filter_friends{width: 84%;margin-top: 10px;}
 .filter_counter_area{width: 84%;}
 .search_field_area input{width: 88%;padding:5px 10px;height: 14px;border: 1px solid #d8e1d6;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;}
+#friend-filter-area{margin-top: 10px;padding-left: 3px;}
+/*a.friend_filter_link_active{padding: 3px 5px;}*/
 
 
 /* Content_main */

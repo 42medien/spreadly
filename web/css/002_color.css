@@ -3,13 +3,13 @@
 /*#container{border: 8px #D7D7D7 solid;}*/
 
 /*a, .filter_headline{color: #4EA734;}*/
-a, .filter_headline, .whats_hot_active #main_nav_inner2 p, .whats_not_active #main_nav_inner4 p, .whats_new_active #main_nav_inner7 p, 
+a, .filter_headline_communities, .filter_headline_friends, .whats_hot_active #main_nav_inner2 p, .whats_not_active #main_nav_inner4 p, .whats_new_active #main_nav_inner7 p, 
   #search1{color: #306f1d;}
-p, a.text_action, h3, h2, h5, .btn, #content label, li.filter_chosen a, .search_field_area input{color: #6a6b6a;}
+p, a.text_action, h3, h2, h5, .btn, #content label, .search_field_area input{color: #6a6b6a;}
 /*.url, a.url, span.url, .like-dislike{color: #bebebe;}*/
 .url, a.url, span.url, .like-dislike{color: #a5a4a4;}
 .error{color: #f97759;}
-#stream_left_top p, #stream_right_top p, #footer{color: #fff;}
+#stream_left_top p, #stream_right_top p, #footer, .filter_headline_communities_active a, .filter_headline_friends_active a/*, li.filter_chosen a, a.friend_filter_link_active*/{color: #fff;}
 .actions{background-color: #f5f5f5;}
 
 
@@ -30,7 +30,8 @@ p, a.text_action, h3, h2, h5, .btn, #content label, li.filter_chosen a, .search_
 #content{background: transparent url("/img/sprites/sprite_repeat_x.png") 0 -367px repeat-x;}
 
 /* Content_sub */
-.filter_headline{background-color: #ebebeb;}
+.filter_headline_communities, .filter_headline_friends{background-color: #ebebeb;}
+.filter_headline_communities_active, .filter_headline_friends_active{background-color: #69BD50;}
 .btn{background: #F2F2F2 url("/img/sprites/sprite_general.png") no-repeat 125px -264px;}
 .icon_facebook{background: transparent url("/img/sprites/sprite_icons.png") 8px -374px no-repeat;}
 .icon_twitter{background: transparent url("/img/sprites/sprite_icons.png") 8px -409px no-repeat;}
@@ -42,7 +43,13 @@ p, a.text_action, h3, h2, h5, .btn, #content label, li.filter_chosen a, .search_
 .icon_small_google{background: transparent url("/img/sprites/sprite_icons.png") 0 -542px no-repeat;}
 .so_share_information .icon_small_google{background-position: 0 -540px;}
 
-.filter_chosen{background-color: #ecf6e9;}
+/*.filter_chosen, a.friend_filter_link_active{background-color: #69bd50;}*/
+.filter_chosen_icon{
+  width: 6px;
+  height: 8px;
+  margin: 7px 0 0;
+  background: transparent url("/img/sprites/sprite_general.png") 0 -292px no-repeat;
+}
 
 .icon_like{background: transparent url("/img/sprites/sprite_icons.png") 0 -226px no-repeat;}
 .icon_dislike{background: transparent url("/img/sprites/sprite_icons.png") 0 -252px no-repeat;}
