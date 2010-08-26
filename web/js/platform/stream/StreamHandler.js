@@ -20,11 +20,11 @@ var Stream = {
 		debug.log("[Stream][show]");
 		if(pResponse.page <= 1 || pResponse.page === undefined) {
 			//empty the stream
-			jQuery('#stream_left_bottom').empty();
+			jQuery('#new_shares').empty();
 		}
 		jQuery('#main_stream_pager').remove();
 		//append the new
-		jQuery('#stream_left_bottom').append(pResponse.stream);
+		jQuery('#new_shares').append(pResponse.stream);
 		//set the action for next requests global 
 		StreamSubFilter.setAction(pResponse.action);
 		//update the data-obj attribute of the filter
