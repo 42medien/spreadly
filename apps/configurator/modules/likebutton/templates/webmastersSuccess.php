@@ -7,7 +7,7 @@
   <li><?php echo link_to(__('PLUGIN_WORDPRESS', null, 'configurator'), 'http://wordpress.org/extend/plugins/yiidit/', array('target' => '_blank')); ?></li>
   <li><?php echo link_to('Magento', 'http://www.magentocommerce.com/magento-connect/Watercooling/extension/4063/ekaabo_yiid_it_button', array('target' => '_blank')); ?></li>
   <li><?php echo link_to('Typo3', 'http://typo3.org/extensions/repository/view/yiid_like/current/', array('target' => '_blank')); ?></li>
-  <li><?php echo __('Drupal', null, 'configurator'); ?> <?php echo __('COMING_SOON', null, 'configurator'); ?></li>
+  <li><?php echo link_to('Drupal', 'http://drupal.org/project/yiid', array('target' => '_blank')); ?></li>
   <li><?php echo __('MediaWiki', null, 'configurator'); ?> <?php echo __('COMING_SOON', null, 'configurator'); ?></li>
   <li><?php echo __('MovableType', null, 'configurator'); ?> <?php echo __('COMING_SOON', null, 'configurator'); ?></li>
   <li><?php echo link_to('TextPattern', 'http://yiid.googlecode.com/svn/textpattern/tags/1.0/yiid_like.txt', array('target' => '_blank')); ?></li>
