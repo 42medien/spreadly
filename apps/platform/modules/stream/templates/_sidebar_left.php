@@ -5,8 +5,13 @@
   <div class="photo_big" id="stream_photo">
     <?php echo avatar_tag($sf_user->getUser()->getMainAvatar(), '96x96'); ?>
   </div>
-
-  <p class="filter_headline"><a href="/" class="user_filter stream_filter reset-filter" target="_blank" data-obj='{"action":"StreamSubFilter.getAction", "callback":"Stream.show", "css":"{\"class\":\"normal_list\", \"id\":\"com-filter-0\"}"}'><?php echo __('All Networks'); ?></a></p>
+<!-- filter_headline_communities_active  -->
+  <p class="filter_headline_communities filter_headline_communities_active clearfix">
+    <a href="/" class="left user_filter stream_filter reset-filter" target="_blank" data-obj='{"action":"StreamSubFilter.getAction", "callback":"Stream.show", "css":"{\"class\":\"normal_list\", \"id\":\"com-filter-0\"}"}'>
+      <?php echo __('All Networks'); ?>
+    </a>
+    <span class="right filter_chosen_icon">&nbsp;</span>
+  </p>
   <ul class="normal_list clearfix" id="all_networks_list">
     <?php foreach ($pServices as $lService) { ?>
       <li id="com-filter-<?php echo $lService->getId(); ?>">
@@ -14,15 +19,17 @@
       </li>
     <?php } ?>
   </ul>
-
-  <p class="filter_headline" id="active_friends_headline">
-    <a href="/" class="user_filter stream_filter reset-filter" data-obj='{"action":"StreamSubFilter.getAction", "callback":"Stream.show", "css": "{\"class\":\"normal_list\", \"id\":\"user-filter-0\"}"}'>
+<!-- filter_headline_friends_active  -->
+  <p class="filter_headline_friends clearfix" id="active_friends_headline">
+    <a href="/" class="left user_filter stream_filter reset-filter" data-obj='{"action":"StreamSubFilter.getAction", "callback":"Stream.show", "css": "{\"class\":\"normal_list\", \"id\":\"user-filter-0\"}"}'>
       <?php echo __('ACTIVE_FRIENDS', null, 'platform'); ?>
     </a>
+    <span class="right filter_chosen_icon" style="display:none;">&nbsp;</span>
   </p>
 
-  <div class="center_area search_field_area" id="friend-filter-area">
+  <div class="center_area filter_counter_area" id="friend-filter-area">
     <span><?php echo __('Sort by: ', null, 'platform'); ?></span>
+    <!-- friend_filter_link_active -->
     <span><a href="/" id="friends_active" class="friend-filter-link"><?php echo __('Active', null, 'platform')?></a> | </span>
     <span><a href="/" id="friends_all" class="friend-filter-link"><?php echo __('A-Z', null, 'platform')?></a></span>
   </div>
