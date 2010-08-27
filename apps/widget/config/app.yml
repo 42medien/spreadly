@@ -1,2 +1,7 @@
 # default values
-#all:
+all:
+  twitter:
+    oauth_callback_uri: "/auth/complete_signin/service/twitter"
+
+  facebook:
+    oauth_callback_uri: "/auth/complete_signin/service/facebook"

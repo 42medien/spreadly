@@ -43,6 +43,10 @@ confirm_signin:
   url:    /popup/confirm_signin/*
   param:  { module: popup, action: confirm_signin }
 
+signinto:
+  url:   /popup/signinto/*
+  param: { module: popup, action: signinto }
+
 homepage:
   url:   /
   param: { module: widget, action: index }
