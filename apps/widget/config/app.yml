@@ -6,3 +6,4 @@ all:
   facebook:
     oauth_callback_uri: "/auth/complete_signin/service/facebook"
 
+viel spaß im urlaub du affe :D
