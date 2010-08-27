@@ -3,3 +3,11 @@ UserAvatar:
     User:    user_1
     is_main: true
     avatar:  'aa4e6c2b2a0644e6e7130de7ffea46df-1.jpg'
+  ua_2:
+    User:    user_2
+    is_main: true
+    avatar:  'aa4e6c2b2a0644e6e7130de7ffea46df-1.jpg'
+  ua_3:
+    User:    user_3
+    is_main: true
+    avatar:  'aa4e6c2b2a0644e6e7130de7ffea46df-1.jpg'
