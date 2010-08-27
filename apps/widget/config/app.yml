@@ -1,9 +1,7 @@
 # default values
 all:
   twitter:
-    oauth_callback_uri: "/auth/complete_signin/service/twitter"
+    oauth_callback_uri: "/popup/complete_signin/service/twitter"
 
   facebook:
     oauth_callback_uri: "/auth/complete_signin/service/facebook"
-
-viel spaß im urlaub du affe :D

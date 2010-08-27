@@ -7,7 +7,7 @@ signin:
 signinto:
   is_secure: false
 
-confirm_signin:
+complete_signin:
   is_secure: false
 
 create_account:

@@ -38,100 +38,42 @@ class popupActions extends sfActions {
     $this->redirect('@signin');
   }
 
-  public function executeConfirm_signin(sfWebRequest $request) {
-    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('popup/js_confirm_signin_ready'));
-
-    if ($this->getUser()->isAuthenticated()) {
-      $this->redirect("@settings");
-    }
-
-    $lToken = $request->getParameter('token');
-    $lRpxClient = new RpxClient();
-
-    try {
-      $lProfile = $lRpxClient->authenticate($lToken);
-
-      $this->pIdentifier = $lProfile['profile']['identifier'];
-    } catch (Exception $e) {
-      sfContext::getInstance()->getLogger()->err("{yiidException} ".$e->getMessage());
-      $this->getUser()->setFlash('error', $e->getMessage());
+  public function executeSigninto(sfWebRequest $request) {
+  // if the user is already loged in, redirect to the stream
+    if ($lService = $request->getParameter("service")) {
+      $lObject = AuthApiFactory::factory($lService);
+      $lObject->doAuthentication();
+    } else {
       $this->redirect('@signin');
     }
+  }
 
-    if ($lAuthIdentifier = OnlineIdentityPeer::retrieveByAuthIdentifier($lProfile['profile']['identifier'])) {
-      $lUser = $lAuthIdentifier->getRelatedUser();
-
-      if ($lUser) {
-        // check if user is active
-        if ($lUser->getActive()) {
-          $this->getUser()->signIn($lUser);
-          $lRpxClient->doSigninTasks($lUser);
-
-          if ($request->getParameter('do') == "signin") {
-            $this->redirect("popup/add_service");
-          } else {
-            $this->redirect('@settings');
-          }
-        } else {
-          $this->getUser()->setFlash('error', "EMAIL_NOT_VERIFIED");
-          $this->redirect('@signin');
-        }
-      }
+  public function executeComplete_signin(sfWebRequest $request) {
+    if ($lToken = $request->getParameter('oauth_token')) {
+      $lToken = OauthRequestTokenTable::retrieveByTokenKey($lToken);
+      $lToken = $lToken->toOAuthToken();
+      $lToken->verifier = $request->getParameter('oauth_verifier');
+    } elseif ($lToken = $request->getParameter('code')) {
+      // do nothing
     }
 
-    // if the second auth process isn't working, delete all sessions and
-    // return an error
-    if ($request->getParameter('do') == "signin") {
-      // remove session and persistant variable
-      PersistentVariablePeer::remove($this->getUser()->getAttribute('rpx_client', null, 'auth'));
-      $this->getUser()->setAttribute('rpx_client', null, 'auth');
-      $this->getUser()->setFlash("error", "Dieses ".$lRpxClient->getProvider()." Profil ist uns nicht bekannt.", true);
-      $this->redirect("@signin");
+    $lObject = AuthApiFactory::factory($request->getParameter('service'));
+
+    // check if it is a signin/signup or if the user wants
+    // to add a new online-identity
+    if ($this->getUser()->isAuthenticated() && $this->getUser()->getUserId()) {
+      //$lObject->addIdentifier($this->getUser()->getUser(), $lToken);
+    } else {
+      //$lUser = $lObject->doSignin($this->getUser(), $lToken);
+      //$this->getUser()->signIn($lUser);
+      //UserRelationTable::doShit($lUser->getId());
     }
 
-    $this->getUser()->setFlash('username', $lRpxClient->getUserObject()->getFullname());
-
-    sfProjectConfiguration::getActive()->loadHelpers('I18N');
-    $this->getUser()->setFlash('headline', __('WELCOME', null, 'widget'));
-
-    $lPage = 'agb';
-    $lCategory = 'rechtliches';
-
-    try {
-      $lCms = CmsPeer::getCmsByPageAndCategory($lPage, $lCategory);
-      $this->headline = $lCms->getHeadline();
-      $this->text = $lCms->getText();
-
-    } catch (ModelException $e) {
-      $this->forward404();
-    }
-
-    $lRpxClient->doPersist();
-    $this->getUser()->setAttribute('rpx_client', $lRpxClient->getKey(), 'auth');
+    //$this->redirect('@settings');
   }
 
   public function executeCreate_account(sfWebRequest $request) {
-    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('popup/js_popup_ready'));
 
-    if ($this->getUser()->isAuthenticated()) {
-      $this->redirect("@settings");
-    }
-
-    $lRpxClient = PersistentVariablePeer::get($this->getUser()->getAttribute('rpx_client', null, 'auth'));
-
-    try {
-      $lUser = $lRpxClient->doAutomatedSignupTasks();
-      $this->getUser()->signIn($lUser);
-
-      // remove session and persistant variable
-      PersistentVariablePeer::remove($this->getUser()->getAttribute('rpx_client', null, 'auth'));
-      $this->getUser()->setAttribute('rpx_client', null, 'auth');
-    } catch (Exception $e) {
-      $this->getUser()->setFlash("error", "REDUNDANT_ONLINE_IDENTITY", true);
-      $this->redirect("@signin");
-    }
-
-    $this->redirect("@settings");
   }
 
   public function executeError(sfWebRequest $request) {
