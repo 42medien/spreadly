@@ -23,8 +23,8 @@
 
   <div class="right">
     <ul id="logos_small" class="normal_list">
-      <li><a id="facebook_logo_small" href="<?php echo RpxClient::generateApiUrl("facebook", url_for("@confirm_signin?do=signin", true)); ?>">Facebook</a></li>
-      <li><a id="twitter_logo_small" href="<?php echo RpxClient::generateApiUrl("twitter", url_for("@confirm_signin?do=signin", true)); ?>">Twitter</a></li>
+      <li><a id="facebook_logo_small" href="<?php //echo RpxClient::generateApiUrl("facebook", url_for("@confirm_signin?do=signin", true)); ?>">Facebook</a></li>
+      <li><a id="twitter_logo_small" href="<?php //echo RpxClient::generateApiUrl("twitter", url_for("@confirm_signin?do=signin", true)); ?>">Twitter</a></li>
     </ul>
   </div>
 
