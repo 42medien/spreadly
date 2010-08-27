@@ -88,7 +88,7 @@ class UserTable extends Doctrine_Table {
 
     return self::getUsersAlphabetically($lFriendIds, $pPage, $pLimit);
   }
-  
+
   /**
    * returns $pLimit hottest users, ready for pagination
    *
@@ -98,21 +98,21 @@ class UserTable extends Doctrine_Table {
    * @param integer $pLimit
    * @param integer $pPage
    * @return Doctrine_Collection
-   * 
+   *
    * @todo sort by hot
    */
   public static function getHottestUsers($pFriendIds, $pPage = 1, $pLimit = 10) {
     $lQuery = Doctrine_Query::create()
-        ->from('User u')
-        ->whereIn('u.id', $pFriendIds);
-        // now sort by hot
-        
+    ->from('User u')
+    ->whereIn('u.id', $pFriendIds);
+    // now sort by hot
+
     $lQuery->limit($pLimit);
     $lQuery->offset(($pPage - 1) * $pLimit);
-      
+
     return $lQuery->execute();
   }
-  
+
   /**
    * returns $pLimit users sorted by sortname and ready for pagination
    *
@@ -122,17 +122,17 @@ class UserTable extends Doctrine_Table {
    * @param integer $pLimit
    * @param integer $pPage
    * @return Doctrine_Collection
-   * 
+   *
    */
   public static function getUsersAlphabetically($pFriendIds, $pPage = 1, $pLimit = 10) {
-  	$lQuery = Doctrine_Query::create()
-        ->from('User u')
-        ->whereIn('u.id', $pFriendIds)
-        ->orderBy('u.sortname');
-        
-    $lQuery->limit($pLimit);  
+    $lQuery = Doctrine_Query::create()
+    ->from('User u')
+    ->whereIn('u.id', $pFriendIds)
+    ->orderBy('u.sortname');
+
+    $lQuery->limit($pLimit);
     $lQuery->offset(($pPage - 1) * $pLimit);
-      
+
     return $lQuery->execute();
   }
 
@@ -146,17 +146,13 @@ class UserTable extends Doctrine_Table {
    * @return array
    */
   public static function getFriendsByName($pUserId, $pName = null, $pLimit = 10) {
-    $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
 
-    $lQ = Doctrine_Query::create()
-      ->from('User u')
-      ->where('u.sortname LIKE ?', "%".$pName."%")
-      ->andWhereIn('u.id', $lFriendIds)
-      ->limit($pLimit);
-    
+    $lQ = self::getFriendsFilterQuery($pUserId, $pName);
+    $lQ->limit($pLimit);
+
     return $lQ->execute();
   }
-  
+
 
   /**
    * returns a users friends filtered by name counted
@@ -167,13 +163,31 @@ class UserTable extends Doctrine_Table {
    * @return integer
    */
   public static function countFriendsByName($pUserId, $pName = null) {
+
+    //
+
+    $lQ = self::getFriendsFilterQuery($pUserId, $pName);
+
+    return $lQ->count();
+  }
+
+  /**
+   * generates basic query object to perform search actions on a users friendlist
+   *
+   * @author weyandch
+   * @param unknown_type $pUserId
+   * @param unknown_type $pName
+   */
+  private static function getFriendsFilterQuery($pUserId, $pName = null) {
     $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
+    $lNameParts = explode(' ', $pName);
 
     $lQ = Doctrine_Query::create()
-      ->from('User u')
-      ->where('u.sortname LIKE ?', "%".$pName."%")
-      ->andWhereIn('u.id', $lFriendIds);
-    
-    return $lQ->count();
+    ->from('User u')
+    ->whereIn('u.id', $lFriendIds);
+    foreach ($lNameParts as $lName) {
+      $lQ->andWhere('u.sortname LIKE ?', '%'.trim($lName).'%');
+    }
+    return $lQ;
   }
 }
