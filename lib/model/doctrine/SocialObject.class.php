@@ -13,6 +13,13 @@
 class SocialObject extends BaseSocialObject
 {
 
+  /**
+   * Save an SocialObejct to MongoDB
+   *
+   * (non-PHPdoc)
+   * @author weyandch
+   * @see lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/vendor/doctrine/Doctrine/Doctrine_Record::save()
+   */
   public function save(Doctrine_Connection $conn = null) {
     if (!$this->getId()) {
       $this->setUrlHash(md5($this->getUrl()));
@@ -34,12 +41,15 @@ class SocialObject extends BaseSocialObject
 
   }
 
+
   /**
+   * When an activity is performed on an social object, we need to update it's counters, alias and services
    *
+   * @param unknown_type $pVerifiedOnlineIdentitys
+   * @param unknown_type $pUrl
+   * @param unknown_type $pScore
+   * @param unknown_type $pServices
    * @author weyandch
-   * @param $pVerifiedOnlineIdentitys
-   * @param $pScore
-   * @return unknown_type
    */
   public function updateObjectOnLikeActivity($pVerifiedOnlineIdentitys, $pUrl, $pScore, $pServices) {
     if ($pScore == YiidActivityTable::ACTIVITY_VOTE_POSITIVE) {
@@ -61,10 +71,16 @@ class SocialObject extends BaseSocialObject
   }
 
 
+  /**
+   * Update Services and OnlineIdentites of an socialobject
+   *
+   * @param array() $pVerifiedOnlineIdentitys
+   * @param array() $pServices
+   */
   public function updateObjectActingIdentities($pVerifiedOnlineIdentitys, $pServices) {
     SocialObjectTable::updateObjectInMongoDb(array("_id" => new MongoId($this->getId())),
     array( '$addToSet' => array('oiids' => array('$each' => $pVerifiedOnlineIdentitys),
-                              'cids' => array('$each' => $pServices))));
+                                'cids' => array('$each' => $pServices))));
   }
 
 
