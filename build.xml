@@ -28,7 +28,12 @@
 
   <fileset dir="./data/deployment/local_config" id="local_config">
     <include name="**" />
-  </fileset>  
+  </fileset>
+  
+  <fileset dir="./data/deployment/uploads/avatars" id="uploads_avatars">
+    <include name="**" />
+  </fileset>
+    
   
   <fileset dir="./data/deployment/dev_config" id="dev_config">
     <include name="**" />
@@ -59,6 +64,7 @@
       <fileset refid="local_config" />
     </copy>
      
+    
     <phingcall target="copy_factory_config">
       <property name="env" value="local"/>
     </phingcall>
@@ -68,7 +74,12 @@
     
     <exec command="rm -rf lib/form/doctrine/base" />
     <exec command="rm -rf cache/*" />
+    <exec command="rm -rf web/uploads/*" />
 
+    <copy todir="./web/uploads/avatars">
+      <fileset refid="uploads_avatars" />
+    </copy>
+    
     <exec command="php batch/cleanup/mongoDbDatabaseCleanup.php" checkReturn="true" />
     <exec command="./symfony doctrine:build --all --no-confirmation --and-load" checkReturn="true"/>
 
