@@ -20,6 +20,8 @@ class authActions extends sfActions {
     if ($lService = $request->getParameter("service")) {
       $lObject = AuthApiFactory::factory($lService);
       $lObject->doAuthentication();
+    } else {
+      $this->redirect('@homepage');
     }
   }
 
