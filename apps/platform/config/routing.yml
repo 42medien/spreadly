@@ -37,10 +37,10 @@ get_contacts_by_sortname:
 get_friends:
   url: /stream/get_friends
   param: { module: stream, action: get_friends }
-  
+
 get_active_friends:
   url: /stream/get_active_friends
-  param: { module: stream, action: get_active_friends }  
+  param: { module: stream, action: get_active_friends }
 
 auth_signin:
   url:   /signin/*
@@ -81,6 +81,10 @@ change_language:
 update_language:
   url:   /updateLanguage/*
   param: { module: system, action: update_icon_language }
+
+widget_callback_uri:
+  url:   /popup/*
+  param: { module: auth, action: widget_auth }
 
 ##### ROUTES FOR PLUGINS #######
 

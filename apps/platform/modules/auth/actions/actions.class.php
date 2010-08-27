@@ -15,6 +15,12 @@ class authActions extends sfActions {
     return $parentRet;
   }
 
+  public function executeWidget_auth(sfWebRequest $request) {
+    $lUrl = $request->getUri();
+
+    $this->redirect(str_replace("www", "widgets", $lUrl));
+  }
+
   public function executeSignin(sfWebRequest $request) {
     // if the user is already loged in, redirect to the stream
     if ($lService = $request->getParameter("service")) {
