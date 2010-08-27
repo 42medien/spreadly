@@ -1,7 +1,7 @@
-<?php use_helper('YiidUrl'); ?>
+<?php use_helper('YiidUrl', 'Avatar'); ?>
 <?php $pUser = UserTable::getInstance()->retrieveByPK($pActivity->getUId()); ?>
 <div class="so_image left">
-  <?php echo image_tag('/img/global/yiid-logo.png', array('width' => 50)); ?>
+  <?php  echo avatar_tag($pUser->getDefaultAvatar(), 48, array('alt' => $pUser->getFullname(), 'class' => '', 'rel' => '')); ?>
 </div>
 
 <div class="so_information left">

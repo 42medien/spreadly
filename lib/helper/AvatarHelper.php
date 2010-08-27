@@ -6,7 +6,7 @@
  */
 
 /**
- * Enter description here...
+ * Generates URL Path for a given Avatar
  *
  * @param string $pSource
  * @param string $pSize
@@ -20,7 +20,7 @@ function avatar_path($pSource, $pSize, $pAbsolute = false) {
 }
 
 /**
- * Disaply avatar
+ * Display avatar
  *
  * @param string $pSource
  * @param string $pSize

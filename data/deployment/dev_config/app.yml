@@ -29,7 +29,11 @@ all:
     fcgi_host:      localhost
     fcgi_port:      8002
     fcgi_pathtobatch: '/home/httpd/vhosts/yiiddev.com/httpdocs/batch'
-
+  
+  image_sizes:
+    avatar: ['16x16', '30x30', '48x48', '140x140']  #height x width
+    community_icon: ['50x50']
+    
   twitter:
     username:       'hugoaffenkopf'
     password:       'affenkopf'

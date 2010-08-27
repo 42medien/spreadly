@@ -146,7 +146,6 @@ class UserTable extends Doctrine_Table {
    * @return array
    */
   public static function getFriendsByName($pUserId, $pName = null, $pLimit = 10) {
-
     $lQ = self::getFriendsFilterQuery($pUserId, $pName);
     $lQ->limit($pLimit);
 
@@ -163,9 +162,6 @@ class UserTable extends Doctrine_Table {
    * @return integer
    */
   public static function countFriendsByName($pUserId, $pName = null) {
-
-    //
-
     $lQ = self::getFriendsFilterQuery($pUserId, $pName);
 
     return $lQ->count();

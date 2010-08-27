@@ -5,8 +5,9 @@ sfCoreAutoload::register();
 
 class ProjectConfiguration extends sfProjectConfiguration {
   public function setup() {
+    sfConfig::set( 'sf_upload_dir_name', 'uploads' );
     $this->enablePlugins(array(
-      'sfDoctrinePlugin', 
+      'sfDoctrinePlugin',
       'yiidPlugin',
       'sfFormExtraPlugin'
     ));
