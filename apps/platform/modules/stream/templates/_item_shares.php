@@ -1,9 +1,9 @@
-<?php use_helper('YiidUrl'); ?>
+<?php use_helper('YiidUrl', 'Avatar'); ?>
 <?php foreach ($pActivities as $lActivity) { ?>
 <?php $lUser = UserTable::getInstance()->retrieveByPK($lActivity->getUId()); ?>
   <li class="clearfix">
     <div class="so_share_image left">
-      <?php echo image_tag('/img/global/yiid-logo.png', array('width' => 30)); ?>
+      <?php echo avatar_tag($lUser->getDefaultAvatar(), 30, array('alt' => $lUser->getFullname(), 'class' => '', 'rel' => '')); ?>
     </div>
     <div class="so_share_spread left">
       <?php $lActivityCids = $lActivity->getCids(); ?>

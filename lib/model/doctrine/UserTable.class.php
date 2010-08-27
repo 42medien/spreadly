@@ -180,7 +180,9 @@ class UserTable extends Doctrine_Table {
 
     $lQ = Doctrine_Query::create()
     ->from('User u')
+    ->distinct()
     ->whereIn('u.id', $lFriendIds);
+
     foreach ($lNameParts as $lName) {
       $lQ->andWhere('u.sortname LIKE ?', '%'.trim($lName).'%');
     }
