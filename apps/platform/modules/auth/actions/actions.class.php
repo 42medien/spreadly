@@ -56,6 +56,7 @@ class authActions extends sfActions {
     if ($lToken = $request->getParameter('oauth_token')) {
       $lToken = OauthRequestTokenTable::retrieveByTokenKey($lToken);
       $lToken = $lToken->toOAuthToken();
+      $lToken->verifier = $request->getParameter('oauth_verifier');
     } elseif ($lToken = $request->getParameter('code')) {
       // do nothing
     }

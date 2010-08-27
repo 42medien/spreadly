@@ -2,4 +2,9 @@
 # http://www.symfony-project.org/reference/1_4/en/11-App
 
 # default values
-#all:
+all:
+  twitter:
+    oauth_callback_uri: "/auth/complete_signin/service/twitter"
+
+  facebook:
+    oauth_callback_uri: "/auth/complete_signin/service/facebook"
