@@ -1,19 +1,40 @@
 <?php
 /**
- * PostApi Interface
+ * abstract AuthApi class
  *
  * @author Matthias Pfefferle
  */
-interface PostApiInterface {
+abstract class AuthApi {
+
   /**
-   * defines the post function
-   *
-   * @param OnlineIdentity $pOnlineIdentity
-   * @param string $pUrl if the url is not part of the message
-   * @param string $pType
-   * @param string $pScore
-   * @param string $pTitle
-   * @return int status code
+   * abstract attributes
+   * MUST BE IMPLEMENTED IN THE CHILDS
    */
-  public function doPost(OnlineIdentity $pOnlineIdentity, $pUrl, $pType, $pScore, $pTitle);
+  protected $aCommunity      = null;
+  protected $aRedirectPlatform  = null;
+  protected $aRedirectWidget = null;
+
+  protected $aCommunityId    = null;
+  protected $aRedirectTo     = null;
+
+  public function __construct() {
+    $lCommunity = CommunityTable::retrieveByCommunity($this->aCommunity);
+    $this->aCommunityId = $lCommunity->getId();
+  }
+
+  /**
+   * get matching community-object
+   *
+   * @author Matthias Pfefferle
+   * @return Community
+   */
+  public function getCommunity() {
+    $lCommunity = CommunityTable::getInstance()->retrieveByPk($this->aCommunityId);
+
+    return $lCommunity;
+  }
+
+  /*public function setRedirectTo() {
+    sfContext::getInstance()->get;
+  }*/
 }

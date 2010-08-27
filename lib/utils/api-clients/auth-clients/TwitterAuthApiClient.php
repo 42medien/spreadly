@@ -4,16 +4,9 @@
  *
  * @author Matthias Pfefferle
  */
-class TwitterAuthApiClient {
+class TwitterAuthApiClient extends AuthApi {
 
-  const COMMUNITY = "twitter";
-
-  protected $aCommunityId    = null;
-
-  public function __construct() {
-    $lCommunity = CommunityTable::retrieveByCommunity("twitter");
-    $this->aCommunityId = $lCommunity->getId();
-  }
+  protected $aCommunity = "twitter";
 
   /**
    * generates a OAuthConsumer
@@ -25,18 +18,6 @@ class TwitterAuthApiClient {
     $lConsumer = new OAuthConsumer(sfConfig::get("app_twitter_oauth_token"), sfConfig::get("app_twitter_oauth_secret"));
 
     return $lConsumer;
-  }
-
-  /**
-   * get matching community-object
-   *
-   * @author Matthias Pfefferle
-   * @return Community
-   */
-  public function getCommunity() {
-    $lCommunities = CommunityTable::getInstance()->findBy("community", self::COMMUNITY);
-
-    return $lCommunities[0];
   }
 
   /**
@@ -168,7 +149,8 @@ class TwitterAuthApiClient {
    * @return OAuthToken
    */
   public function getRequestToken() {
-    $lRequestToken = OAuthClient::getRequestToken($this->getConsumer(), "http://api.twitter.com/oauth/request_token", 'GET');
+    $lRequestToken = OAuthClient::getRequestToken($this->getConsumer(), "https://api.twitter.com/oauth/request_token", 'GET', array("oauth_callback" => sfConfig::get("app_twitter_oauth_redirect")));
+
     // save the request token
     OauthRequestTokenTable::saveToken($lRequestToken, $this->getCommunity());
 
@@ -197,7 +179,7 @@ class TwitterAuthApiClient {
    * @param string $pTokenKey
    */
   public function getAccessToken($pOAuthToken) {
-    $lAccessToken = OAuthClient::getAccessToken($this->getConsumer(), "http://api.twitter.com/oauth/access_token", $pOAuthToken, "GET");
+    $lAccessToken = OAuthClient::getAccessToken($this->getConsumer(), "http://api.twitter.com/oauth/access_token", $pOAuthToken, "GET", array("oauth_verifier" => $pOAuthToken->verifier));
     return $lAccessToken;
   }
 

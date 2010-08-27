@@ -4,16 +4,9 @@
  *
  * @author Matthias Pfefferle
  */
-class FacebookAuthApiClient {
+class FacebookAuthApiClient extends AuthApi {
 
-  const COMMUNITY = "facebook";
-
-  protected $aCommunityId    = null;
-
-  public function __construct() {
-    $lCommunity = CommunityTable::retrieveByCommunity( self::COMMUNITY);
-    $this->aCommunityId = $lCommunity->getId();
-  }
+  protected $aCommunity = "facebook";
 
   /**
    * generates a OAuthConsumer
@@ -25,18 +18,6 @@ class FacebookAuthApiClient {
     $lConsumer = new OAuthConsumer(sfConfig::get("app_facebook_oauth_token"), sfConfig::get("app_facebook_oauth_secret"));
 
     return $lConsumer;
-  }
-
-  /**
-   * get matching community-object
-   *
-   * @author Matthias Pfefferle
-   * @return Community
-   */
-  public function getCommunity() {
-    $lCommunities = CommunityTable::getInstance()->findBy("community", self::COMMUNITY);
-
-    return $lCommunities[0];
   }
 
   /**
@@ -164,7 +145,7 @@ class FacebookAuthApiClient {
     header("Location: https://graph.facebook.com/oauth/authorize?
                       client_id=".$lConsumer->key.
                       "&scope=email,offline_access,publish_stream,read_stream,user_about_me,user_activities,user_likes,read_friendlists,user_website,user_checkins".
-                      "&redirect_uri=http://www.yiid.local/platform_dev.php/auth/complete_signin/service/facebook");
+                      "&redirect_uri=".sfConfig::get("app_facebook_oauth_redirect"));
     exit;
   }
 
@@ -177,7 +158,7 @@ class FacebookAuthApiClient {
   public function getAccessToken($pCode) {
     $lConsumer = $this->getConsumer();
 
-    $lAccessUrl = "https://graph.facebook.com/oauth/access_token?client_id=".$lConsumer->key."&redirect_uri=http://www.yiid.local/platform_dev.php/auth/complete_signin/service/facebook&client_secret=".$lConsumer->secret."&code=".$pCode;
+    $lAccessUrl = "https://graph.facebook.com/oauth/access_token?client_id=".$lConsumer->key."&redirect_uri=".sfConfig::get("app_facebook_oauth_redirect")."&client_secret=".$lConsumer->secret."&code=".$pCode;
     $lAccessToken = UrlUtils::sendGetRequest($lAccessUrl);
 
     return $lAccessToken;
