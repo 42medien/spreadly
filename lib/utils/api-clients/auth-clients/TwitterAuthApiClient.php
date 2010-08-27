@@ -149,7 +149,7 @@ class TwitterAuthApiClient extends AuthApi {
    * @return OAuthToken
    */
   public function getRequestToken() {
-    $lRequestToken = OAuthClient::getRequestToken($this->getConsumer(), "https://api.twitter.com/oauth/request_token", 'GET', array("oauth_callback" => sfConfig::get("app_twitter_oauth_redirect")));
+    $lRequestToken = OAuthClient::getRequestToken($this->getConsumer(), "https://api.twitter.com/oauth/request_token", 'GET', array("oauth_callback" => $this->getCallbackUri()));
 
     // save the request token
     OauthRequestTokenTable::saveToken($lRequestToken, $this->getCommunity());

@@ -145,7 +145,7 @@ class FacebookAuthApiClient extends AuthApi {
     header("Location: https://graph.facebook.com/oauth/authorize?
                       client_id=".$lConsumer->key.
                       "&scope=email,offline_access,publish_stream,read_stream,user_about_me,user_activities,user_likes,read_friendlists,user_website,user_checkins".
-                      "&redirect_uri=".sfConfig::get("app_facebook_oauth_redirect"));
+                      "&redirect_uri=".$this->getCallbackUri());
     exit;
   }
 
@@ -158,7 +158,7 @@ class FacebookAuthApiClient extends AuthApi {
   public function getAccessToken($pCode) {
     $lConsumer = $this->getConsumer();
 
-    $lAccessUrl = "https://graph.facebook.com/oauth/access_token?client_id=".$lConsumer->key."&redirect_uri=".sfConfig::get("app_facebook_oauth_redirect")."&client_secret=".$lConsumer->secret."&code=".$pCode;
+    $lAccessUrl = "https://graph.facebook.com/oauth/access_token?client_id=".$lConsumer->key."&redirect_uri=".$this->getCallbackUri()."&client_secret=".$lConsumer->secret."&code=".$pCode;
     $lAccessToken = UrlUtils::sendGetRequest($lAccessUrl);
 
     return $lAccessToken;

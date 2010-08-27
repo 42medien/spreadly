@@ -34,7 +34,7 @@ abstract class AuthApi {
     return $lCommunity;
   }
 
-  /*public function setRedirectTo() {
-    sfContext::getInstance()->get;
-  }*/
+  public function getCallbackUri() {
+    return sfConfig::get("app_settings_url").sfConfig::get("app_".$this->aCommunity."_oauth_callback_uri");
+  }
 }
