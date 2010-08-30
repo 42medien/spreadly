@@ -49,9 +49,6 @@
     </div>
 
 	  <script type="text/javascript" src="/js/100_main/include/platform-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
-	  <script type="text/javascript" src="/js/100_main/global/104_jquery.scrollPager.js"></script>
-    <script type="text/javascript" src="/js/100_main/global/306_i18nHandler.js"></script>
-	  <script type="text/javascript" src="/js/platform/stream/FriendListHandler.js"></script>
 	  <script type="text/javascript">
 	  jQuery(document).ready( function() {
 	      <?php include_partial('global/js_init_general.js'); ?>
