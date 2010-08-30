@@ -25,7 +25,6 @@ class PostApiUtils {
     $i18n = sfContext::getInstance()->getI18N();
     $lWildcard = 'POSTAPI_MESSAGE_'.strtoupper($pType) . ($pScore<0?'_NOT':'');
     if ($pMaxLength) {
-      $lText = $i18n->__($lWildcard, array('%title%' => $pTitle, '%url%' => $pUrl), 'widget');
       $lTitle = truncate_text($pTitle, $pMaxLength, '...');
       $lText = $i18n->__($lWildcard, array('%title%' => $lTitle, '%url%' => $pUrl), 'widget');
     } else {

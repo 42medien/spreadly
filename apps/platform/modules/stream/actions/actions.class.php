@@ -23,10 +23,10 @@ class streamActions extends sfActions
   }
 
   public function executeNew(sfWebRequest $request) {
-    
+
     $lObjectsCount = 3;
     $lDoPaginate = true;
-    
+
     $this->getResponse()->setContentType('application/json');
     $lCallback = $request->getParameter('callback', 'logerror');
     $lContactId = $request->getParameter('userid', null);
@@ -195,8 +195,8 @@ class streamActions extends sfActions
     $lDoPaginate = true;
 
   	$lChar = $request->getParameter('sortname', '');
-  	$lPage = $request->getParameter('page');
-    $lUsers = UserTable::getFriendsByName($this->getUser()->getUserId(), $lChar);
+  	$lPage = $request->getParameter('page', 1);
+    $lUsers = UserTable::getFriendsByName($this->getUser()->getUserId(), $lChar, $lPage);
     $lCounter = UserTable::countFriendsByName($this->getUser()->getUserId(), $lChar);
 
     return $this->renderText(

@@ -145,9 +145,10 @@ class UserTable extends Doctrine_Table {
    * @param int $pLimit
    * @return array
    */
-  public static function getFriendsByName($pUserId, $pName = null, $pLimit = 10) {
+  public static function getFriendsByName($pUserId, $pName = null, $pPage = 1, $pLimit = 10) {
     $lQ = self::getFriendsFilterQuery($pUserId, $pName);
     $lQ->limit($pLimit);
+    $lQ->offset(($pPage - 1) * $pLimit);
 
     return $lQ->execute();
   }
