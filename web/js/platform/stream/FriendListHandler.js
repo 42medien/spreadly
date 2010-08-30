@@ -1,20 +1,43 @@
+/**
+ * @combine platform
+ */
+/**
+ * class to handle the behaviour of the friendbox
+ * @author KM
+ */
+
 var FriendBox = {
+  /**
+   * inits the functionalities of the friend-box beaviour
+   * @author KM
+   */
   init: function() {
     debug.log("[FriendBox][init]");          
     FriendStreamFilter.init();
     FriendStreamInputFilter.init();
     FriendStream.init();
     FriendStreamCounter.init();
+    FilterHeadline.init();
   },
   
+  /**
+   * resets the friendsbox (state: active)
+   * @author KM
+   */
   reset: function() {
-    FriendStreamFilter.reset();
+    debug.log("[FriendBox][reset]");         
+    FriendStreamFilter.resetCss();
     FriendStreamInputFilter.reset();
     FriendStream.reset();
     FriendStreamCounter.reset();    
   }
 };
 
+
+/**
+ * active/a-z filter-behavior
+ * @author KM
+ */
 var FriendStreamFilter = {
   
   aAllLink: {},
@@ -22,6 +45,10 @@ var FriendStreamFilter = {
   aAllLinkId: '',
   aActiveLinkId: '',
   
+  /**
+   * inits the vars and events for clicking the filters
+   * @author KM
+   */
   init: function() {
     debug.log("[FriendStreamFilter][init]");        
     FriendStreamFilter.aAllLink = jQuery('#friends_all');
@@ -32,6 +59,10 @@ var FriendStreamFilter = {
     FriendStreamFilter.bindClick();
   },
   
+  /**
+   * handles the click for filters
+   * @author KM
+   */
   bindClick: function() {
     debug.log("[FriendStreamFilter][bindClick]");          
     jQuery('#'+FriendStreamFilter.aAllLinkId+', #'+FriendStreamFilter.aActiveLinkId).live('click', function() {
@@ -45,32 +76,108 @@ var FriendStreamFilter = {
       FriendStreamInputFilter.reset();
       //reset the highlighting of filters
       StreamSubFilter.resetCss();
-      
+      //reset the headlines
+      FilterHeadline.updateCss('active_friends_headline');
+      //reset the filters
       FriendStreamFilter.updateCss(this.id);
       
       return false;
     });      
   },
   
+  /**
+   * updates the css after a click
+   * @author KM
+   * @param string pElemId
+   */
   updateCss: function(pElemId) {
+    debug.log("[FriendStreamFilter][updateCss]");        
     jQuery.each(jQuery('#friend-filter-area .friend-filter-link'), function(i, val) {
-      jQuery(this).css('text-decoration', 'none');
+      jQuery(this).removeClass('friend_filter_link_active');
     });  
-    jQuery('#'+pElemId).css('text-decoration', 'underline');    
+    
+    jQuery('#'+pElemId).addClass('friend_filter_link_active');    
   },
   
-  reset: function() {
+  /**
+   * resets the css of the filters
+   * @author KM
+   */
+  resetCss: function() {
+    debug.log("[FriendStreamFilter][resetCss]");            
     jQuery.each(jQuery('#friend-filter-area .friend-filter-link'), function(i, val) {
-      jQuery(this).css('text-decoration', 'none');
+      jQuery(this).removeClass('friend_filter_link_active');
     });  
-    jQuery(FriendStreamFilter.aActiveLink).css('text-decoration', 'underline');
+    jQuery(FriendStreamFilter.aActiveLink).addClass('friend_filter_link_active'); 
   }
 };
 
+/**
+ * handles the events and css of the headlines on the top of communities and friends
+ * @author KM
+ */
+var FilterHeadline = {
+
+  /**
+   * init
+   * @author KM
+   */
+  init: function() {
+    debug.log("[FilterHeadline][init]");    
+    FilterHeadline.reset();
+  },
+  
+  /**
+   * resets the boxes and the headlines onclick on box-headlines
+   */
+  reset: function() {
+    debug.log("[FilterHeadline][reset]");     
+    jQuery('#photo_filter_box .reset-filter').live('click', function() {
+      //reset the stream
+      GlobalRequest.initOnClick(this, {"action":"StreamSubFilter.getAction", "callback":"Stream.show"})
+      //reset the counter
+      FriendBox.reset();
+      //reset the highlighting of filters
+      StreamSubFilter.resetCss();
+      var lParentId = jQuery(this).parent('p.filter_headline').attr('id'); 
+      FilterHeadline.updateCss(lParentId);
+      return false;
+    });      
+  },
+  
+  /**
+   * updates the css of the headlines
+   * @author KM
+   * @param string pCssId
+   */
+  updateCss: function(pCssId) {
+    debug.log("[FilterHeadline][updateCss]");         
+    FilterHeadline.resetCss();    
+    jQuery('#'+pCssId).addClass('filter_headline_active');
+    jQuery('#'+pCssId+'.filter_chosen_icon').show();    
+  },
+  
+  /**
+   * updates the css of the headlines
+   * @author KM
+   */
+  resetCss: function() {
+    debug.log("[FilterHeadline][resetCss]");      
+    jQuery('#photo_filter_box .filter_headline').removeClass('filter_headline_active');
+    jQuery('#photo_filter_box .filter_chosen_icon').hide();    
+  }
+};
+
+/**
+ * Handles the functionality of the input-field
+ * @author KM
+ */
 var FriendStreamInputFilter = {
   aInput: '',
   
   init: function() {
+    debug.log("[FriendStreamInputFilter][init]");     
+    FriendStreamInputFilter.resetCss();
     if (typeof(document.friendlistfilterform) !=  "undefined"){
       document.friendlistfilterform.reset();
     }
@@ -90,23 +197,50 @@ var FriendStreamInputFilter = {
    * @param object pResponse
    */
   cbInputfilter: function(pResponse) {
-    FriendStreamFilter.reset();
+    debug.log("[FriendStreamInputFilter][cbInputfilter]");         
+    FriendStreamFilter.resetCss();
     FriendStream.toggle('friends_search_results');
     FriendStreamCounter.update(pResponse.pCounter);
   },
   
+  /**
+   * empty the inputfield
+   * @author KM
+   */
   reset: function() {
+    debug.log("[FriendStreamInputFilter][reset]");      
     jQuery('#input-friend-filter').val(i18n.get('TYPE_NAME_TO_FILTER')); 
     jQuery(FriendStreamInputFilter.aInput).toggleValue();    
+  },
+  
+  /**
+   * resets the css of headlines and filter
+   * @author KM
+   */
+  resetCss: function() {
+    debug.log("[FriendStreamInputFilter][resetCss]");        
+    jQuery('#input-friend-filter').live('click', function() {
+      FilterHeadline.updateCss('active_friends_headline'); 
+      FriendStreamFilter.resetCss();
+      FriendStream.reset();
+      return true;
+    });
   }
 };
 
+/**
+ * the functionality of the friend-lists
+ */
 var FriendStream = {
   aAllFriendList: {},
   aActiveFriendList: {},
   aSearchFriendList: {},
   
+  /**
+   * init
+   */
   init: function() {
+    debug.log("[FriendStream][init]");         
     FriendStream.aAllFriendList = jQuery('#friends_all_list');
     FriendStream.aActiveFriendList = jQuery('#friends_active_list');
     FriendStream.aSearchFriendList = jQuery('#friends_search_results'); 
@@ -115,7 +249,13 @@ var FriendStream = {
     jQuery(FriendStream.aSearchFriendList).scrollPager({"url":"stream/get_friends"});
   },
   
+  /**
+   * toggles the different boxes after clicking some filter
+   * @author KM
+   * @param string pElemId, object pList
+   */
   toggle: function(pElemId, pList) {
+    debug.log("[FriendStream][toggle]");     
     jQuery.each(jQuery('#photo_filter_box .friend-filter-list'), function(i, val) {
       jQuery(this).hide();
     }); 
@@ -126,7 +266,12 @@ var FriendStream = {
     }
   },
   
+  /**
+   * resets the list to state:active
+   * @author KM
+   */
   reset: function() {
+    debug.log("[FriendStream][reset]");     
     jQuery.each(jQuery('#photo_filter_box .friend-filter-list'), function(i, val) {
       jQuery(this).hide();
     });  
@@ -135,18 +280,24 @@ var FriendStream = {
     
 };
 
+/**
+ * functionality of the friend-list-counter
+ */
 var FriendStreamCounter = {
   aCount: 0,
   
   init: function() {
+    debug.log("[FriendStreamCounter][init]");     
     FriendStreamCounter.aCount = jQuery('#friend-counter').text();
   },
   
   update: function(pCount) {
+    debug.log("[FriendStreamCounter][pCount]");         
     jQuery('#friend-counter').text(pCount);
   },
   
   reset: function() {
+    debug.log("[FriendStreamCounter][reset]");             
     jQuery('#friend-counter').text(FriendStreamCounter.aCount);
   }
 }

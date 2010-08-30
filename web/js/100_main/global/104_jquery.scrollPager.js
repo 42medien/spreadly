@@ -1,9 +1,9 @@
 /**
- * @nocombine platform
+ * @combine platform
  */
 jQuery.fn.scrollPager = function(pParams){
   var lAction = pParams['url'];
-  var lPage = 1;
+  var lPage = 2;
   var lElement = this;
   var lCallback = pParams['callback'];  
   debug.log(this);

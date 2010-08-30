@@ -116,7 +116,14 @@ var StreamSubFilter = {
     //remove all classes named filter-chosen from a parent-list called all_network_list    	
     ClassHandler.removeClassesByParent(jQuery('#all_networks_list'), 'filter_chosen');
     ClassHandler.removeClassesByParent(jQuery('#friends_active_list'), 'filter_chosen'); 
-    ClassHandler.removeClassesByParent(jQuery('#friends_all_list'), 'filter_chosen');      
+    ClassHandler.removeClassesByParent(jQuery('#friends_all_list'), 'filter_chosen'); 
+    
+    var lResetElemId = 'active_friends_headline';
+    if(jQuery('#'+pCssId).parent('ul.normal_list').attr('id') == 'all_networks_list') {
+      lResetElemId = 'active_communities_headline';
+    }
+    FilterHeadline.updateCss(lResetElemId);
+    
     //and highlight the new
     jQuery('#'+pCssId).addClass('filter_chosen');
   },
@@ -160,6 +167,7 @@ var MainFilter = {
   setData:  function(pElement) {
     debug.log("[MainFilter][setData]");  
   	var lData = '';
+  	var lIsDeleted = false;
   	//if the element has a data-obj (!!!has to have)
     if(jQuery(pElement).attr('data-obj')){ 
     	//take the data-obj of the element and parse it to a js-object
@@ -169,12 +177,12 @@ var MainFilter = {
 		  	//also loop over the request-data-obj
 		    for(var lMainFilterKey in MainFilter.aDataObj) {
 		    	//look if are set special params (if isset e.g. a comid or a userid, remove this params. This will reset with the params from request)
-	        if(lDataKey == 'comid' || lDataKey == 'userid' ){
+		      if(lDataKey == 'comid' || lDataKey == 'userid' ){
 	          delete lData[lDataKey];
-	        }	
-
+	          lIsDeleted = true;
+	        }
 	        //are there some new fields after the request? if so, update the data-attr-object with the elems from request-data-obj	
-		      if(lDataKey != lMainFilterKey) {
+		      if(lDataKey != lMainFilterKey || lIsDeleted === true) {
 	        	lData[lMainFilterKey] = MainFilter.aDataObj[lMainFilterKey];
 		      }
 		    }

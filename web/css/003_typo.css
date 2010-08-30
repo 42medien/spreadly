@@ -18,7 +18,7 @@ h5{ font-size: 1em; font-weight: bold; }
  *   @section -FontSize
  */
 .url, .like-dislike, .user_filter, .icon_service, .pager_load_more, .user_share, .search_field_area input, .filter_counter_area, #reset_filter_friends a{font-size: 0.8em;}
-.so_comment, #so_right_view p, p.filter_headline_communities, p.filter_headline_friends{font-size: 0.9em;}
+.so_comment, #so_right_view p, p.filter_headline{font-size: 0.9em;}
 .btn, .text_action, #so_information h5 a{font-size: 11px;}
 #stream_left_top p, #search input{font-size: 13px;}
 #nav_main, #so_information h3{font-size: 14px;}
@@ -27,7 +27,7 @@ h5{ font-size: 1em; font-weight: bold; }
 /**
  *   @section -FontWeight
  */
-.user_name, .text_important, .whats_hot_active #main_nav_inner2 p, .whats_not_active #main_nav_inner4 p, .whats_new #main_nav_inner7 p, li.filter_chosen a, .filter_headline_communities_active a, .filter_headline_friends_active a, a.friend_filter_link_active{font-weight: bold;}
+.user_name, .text_important, .whats_hot_active #main_nav_inner2 p, .whats_not_active #main_nav_inner4 p, .whats_new #main_nav_inner7 p, li.filter_chosen a, .filter_headline_active a, a.friend_filter_link_active{font-weight: bold;}
 
 /**
  *   @section -FontStyle
