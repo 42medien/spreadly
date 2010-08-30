@@ -169,7 +169,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
         
         .pager_load_more{padding: 5px 22px 5px 11px;}
         #main_stream_pager{margin: 15px 0 5px 0;}
-        .right_shares_pager{margin-top: 15px;}
+        .right_shares_pager{margin-top: 15px;border-bottom: none !important;}
         
         .user_hover_area{position: relative;top: -190px;left: -25px; z-index: 400;}
         .user_hover_area_top{width: 278px; height: 100px;padding: 5px 10px;-webkit-border-radius: 3px 3px 0 0;-moz-border-radius: 3px 3px 0 0;border-radius: 3px 3px 0 0;}
