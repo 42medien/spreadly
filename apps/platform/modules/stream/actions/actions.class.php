@@ -224,7 +224,7 @@ class streamActions extends sfActions
     return $this->renderText(
       json_encode(
         array(
-          "html"  => $this->getPartial('stream/sidebar_friendlist', array('pFriends' => $lUsers->getData())),
+          "html"  => $this->getPartial('stream/sidebar_all_friendlist', array('pFriends' => $lUsers->getData())),
           "pDoPaginate" => $lDoPaginate
         )
       )
@@ -246,7 +246,7 @@ class streamActions extends sfActions
     return $this->renderText(
       json_encode(
         array(
-          "html"  => $this->getPartial('stream/sidebar_friendlist', array('pFriends' => $lUsers->getData())),
+          "html"  => $this->getPartial('stream/sidebar_active_friendlist', array('pFriends' => $lUsers->getData())),
           "pDoPaginate" => $lDoPaginate
         )
       )

@@ -6,8 +6,8 @@
     <?php echo avatar_tag($lUser->getDefaultAvatar(), 140, array('alt' => $lUser->getFullname(), 'class' => '', 'rel' => '')); ?>
   </div>
 <!-- filter_headline_communities_active  -->
-  <p class="filter_headline_communities filter_headline_communities_active clearfix">
-    <a href="/" class="left user_filter stream_filter reset-filter" target="_blank" data-obj='{"action":"StreamSubFilter.getAction", "callback":"Stream.show", "css":"{\"class\":\"normal_list\", \"id\":\"com-filter-0\"}"}'>
+  <p class="filter_headline filter_headline_active clearfix" id="active_communities_headline">
+    <a href="/" class="left user_filter reset-filter" target="_blank" data-obj='{"action":"StreamSubFilter.getAction", "callback":"Stream.show", "css":"{\"class\":\"normal_list\", \"id\":\"com-filter-0\"}"}'>
       <?php echo __('All Networks'); ?>
     </a>
     <span class="right filter_chosen_icon">&nbsp;</span>
@@ -20,8 +20,8 @@
     <?php } ?>
   </ul>
 <!-- filter_headline_friends_active  -->
-  <p class="filter_headline_friends clearfix" id="active_friends_headline">
-    <a href="/" class="left user_filter stream_filter reset-filter" data-obj='{"action":"StreamSubFilter.getAction", "callback":"Stream.show", "css": "{\"class\":\"normal_list\", \"id\":\"user-filter-0\"}"}'>
+  <p class="filter_headline clearfix" id="active_friends_headline">
+    <a href="/" class="left user_filter reset-filter" data-obj='{"action":"StreamSubFilter.getAction", "callback":"Stream.show", "css": "{\"class\":\"normal_list\", \"id\":\"user-filter-0\"}"}'>
       <?php echo __('ACTIVE_FRIENDS', null, 'platform'); ?>
     </a>
     <span class="right filter_chosen_icon" style="display:none;">&nbsp;</span>
@@ -30,7 +30,7 @@
   <div class="center_area filter_counter_area" id="friend-filter-area">
     <span><?php echo __('Sort by: ', null, 'platform'); ?></span>
     <!-- friend_filter_link_active -->
-    <span><a href="/" id="friends_active" class="friend-filter-link"><?php echo __('Active', null, 'platform')?></a> | </span>
+    <span><a href="/" id="friends_active" class="friend-filter-link friend_filter_link_active"><?php echo __('Active', null, 'platform')?></a> | </span>
     <span><a href="/" id="friends_all" class="friend-filter-link"><?php echo __('A-Z', null, 'platform')?></a></span>
   </div>
   <div class="center_area search_field_area">
@@ -39,11 +39,11 @@
     </form>
   </div>
   <ul class="normal_list show friend-filter-list" id="friends_active_list">
-    <?php include_partial('stream/sidebar_friendlist', array('pFriends'=>$pFriends));?>
+    <?php include_partial('stream/sidebar_active_friendlist', array('pFriends'=>$pFriends));?>
   </ul>
 
   <ul class="normal_list friend-filter-list" id="friends_all_list">
-    <?php include_partial('stream/sidebar_friendlist', array('pFriends'=>$pAllFriends));?>
+    <?php include_partial('stream/sidebar_all_friendlist', array('pFriends'=>$pAllFriends));?>
   </ul>
 
   <ul class="normal_list friend-filter-list" id="friends_search_results">
