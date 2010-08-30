@@ -87,7 +87,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 .normal_list{list-style-type: none;margin: 10px 0 15px;}
 .icon_service{padding: 4px 10px 4px 33px;}
 .icon_detail_right{padding: 4px;}
-.user_filter{padding: 4px 10px 4px 10px;}
+.user_filter{padding: 4px 5px;}
 .icon_thumb{padding: 5px 14px;}
 .icon_thumbs{padding: 5px 24px;}
 .icon_small_service{padding: 0px 7px;}
