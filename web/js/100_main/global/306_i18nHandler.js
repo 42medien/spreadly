@@ -1,3 +1,6 @@
+/**
+ * @combine platform
+ */
 var i18n = {
   aVars: {},    
   
