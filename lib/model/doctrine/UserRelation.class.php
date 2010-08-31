@@ -18,7 +18,7 @@ class UserRelation extends BaseUserRelation
    * (non-PHPdoc)
    * @see lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/vendor/doctrine/Doctrine/Doctrine_Record::save()
    */
-   public function save(Doctrine_Connection $conn = null) {
+  public function save(Doctrine_Connection $conn = null) {
     $lObjectToSave = $this->toArray(false);
 
     $lObjectToSave = UserRelationTable::saveObjectToMongoDb($lObjectToSave);
@@ -28,5 +28,37 @@ class UserRelation extends BaseUserRelation
     }
     return false;
 
-   }
+  }
+
+  /**
+   * wrapper to ensure we get an empty array() instead of NULL
+   *
+   * @author weyandch
+   * @see lib/model/doctrine/base/BaseUserRelation::getContactUid()
+   */
+  public function getContactUid() {
+    return $this->_get('contact_uid')?$this->_get('contact_uid'):array();
+  }
+
+  /**
+   * wrapper to ensure we get an empty array() instead of NULL
+   *
+   * @author weyandch
+   * @see lib/model/doctrine/base/BaseUserRelation::getOwnedOi()
+   */
+  public function getOwnedOi() {
+    return $this->_get('owned_oi')?$this->_get('owned_oi'):array();
+  }
+
+  /**
+   *  wrapper to ensure we get an empty array() instead of NULL
+   *
+   * @author weyandch
+   * @see lib/model/doctrine/base/BaseUserRelation::getContactsOi()
+   */
+  public function getContactsOi() {
+    return $this->_get('contacts_oi')?$this->_get('contacts_oi'):array();
+  }
+
+
 }

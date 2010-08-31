@@ -101,7 +101,7 @@ class UserTable extends Doctrine_Table {
    *
    * @todo sort by hot
    */
-  public static function getHottestUsers($pFriendIds, $pPage = 1, $pLimit = 10) {
+  public static function getHottestUsers($pFriendIds = array(), $pPage = 1, $pLimit = 10) {
     $lQuery = Doctrine_Query::create()
     ->from('User u')
     ->whereIn('u.id', $pFriendIds);

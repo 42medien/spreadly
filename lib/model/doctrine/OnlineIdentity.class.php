@@ -43,4 +43,32 @@ class OnlineIdentity extends BaseOnlineIdentity
       return null;
     }
   }
+
+
+
+
+
+  /**
+   * send status-message (for example like)
+   *
+   * @author Matthias Pfefferle
+   * @param string $pUrl
+   * @param string $pType
+   * @param int $pScore
+   * @param string $pTitle
+   * @return int
+   */
+  public function sendStatusMessage($pUrl, $pType, $pScore, $pTitle, $pDescription, $pPhoto) {
+    $this->aPostApiClient = PostApiFactory::factory($this->getCommunityId());
+
+    if ($this->aPostApiClient) {
+      $lStatus = $this->aPostApiClient->doPost($this, $pUrl, $pType, $pScore, $pTitle, $pDescription, $pPhoto);
+      return $lStatus;
+    } else {
+      try {
+        sfContext::getInstance()->getLogger()->err("{OnlineIdentity} missing PostApiFactory for OnlineIdentity: ".$this->getId()." (Community ID: ".$this->getCommunityId().")");
+      } catch (Exception $e) {}
+    }
+  }
+
 }

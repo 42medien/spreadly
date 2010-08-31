@@ -22,11 +22,12 @@ class PostApiUtils {
     if ($pTitle) {
       $pTitle = '"'.$pTitle.'"';
     }
+
     $i18n = sfContext::getInstance()->getI18N();
     $lWildcard = 'POSTAPI_MESSAGE_'.strtoupper($pType) . ($pScore<0?'_NOT':'');
     if ($pMaxLength) {
-      $lTitle = truncate_text($pTitle, $pMaxLength, '...');
-      $lText = $i18n->__($lWildcard, array('%title%' => $lTitle, '%url%' => $pUrl), 'widget');
+      $lText = $i18n->__($lWildcard, array('%title%' => $pTitle, '%url%' => $pUrl), 'widget');
+      $lText = truncate_text($lText, $pMaxLength , '...');
     } else {
       $lText = $i18n->__($lWildcard, array('%title%' => $pTitle, '%url%' => $pUrl), 'widget');
     }

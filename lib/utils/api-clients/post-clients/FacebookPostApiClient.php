@@ -17,14 +17,21 @@ class FacebookPostApiClient implements PostApiInterface {
    *
    * @return int status code
    */
-  public function doPost(OnlineIdentity $pOnlineIdentity, $pUrl, $pType, $pScore, $pTitle) {
+  public function doPost(OnlineIdentity $pOnlineIdentity, $pUrl, $pType, $pScore, $pTitle, $pDescription, $pPhoto) {
     $lOAuth = $pOnlineIdentity->getOAuthToken();
     $lStatusMessage = PostApiUtils::generateMessage($pType, $pScore, $pTitle);
     $lPostBody = "access_token=".$lOAuth->getTokenKey()."&message=".$lStatusMessage;
 
-    if ($pUrl) {
-      $lPostBody .= "&link=".$pUrl;
+    if ($pDescription && $pDescription != '') {
+      $lPostBody .= "&description=".$pDescription;
     }
+    if ($pPhoto && $pPhoto != '') {
+      $lPostBody .= "&picture=".urlencode($pPhoto);
+    }
+    if ($pUrl) {
+      $lPostBody .= "&link=".urlencode($pUrl);
+    }
+
     $lResponse = UrlUtils::sendPostRequest("https://graph.facebook.com/me/feed", $lPostBody);
 
     return $lResponse;

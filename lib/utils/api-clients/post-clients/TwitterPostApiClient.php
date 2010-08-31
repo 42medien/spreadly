@@ -16,7 +16,7 @@ class TwitterPostApiClient implements PostApiInterface {
    * @param string $pMessage
    * @return int status code
    */
-  public function doPost(OnlineIdentity $pOnlineIdentity, $pUrl, $pType, $pScore, $pTitle) {
+  public function doPost(OnlineIdentity $pOnlineIdentity, $pUrl, $pType, $pScore, $pTitle, $pDescription, $pPhoto) {
     $lMaxChars = 135;
 
     $lOAuth = $pOnlineIdentity->getOAuthToken();

@@ -104,7 +104,7 @@ class YiidActivityTable extends Doctrine_Table
 
         $senderOi = OnlineIdentityTable::getInstance()->find($lIdentityId);
         $lServices[] = $senderOi->getCommunityId();
-        //   $lStatus = $senderOi->sendStatusMessage($pUrl, $pVerb, $pScore, utf8_decode($pTitle));
+        //   $lStatus = $senderOi->sendStatusMessage($pUrl, $pVerb, $pScore, utf8_decode($pTitle), utf8_decode($pDescription), $pPhoto);
         sfContext::getInstance()->getLogger()->debug("{YiidActivityPeer}{saveLikeActivitys} Status Message: " . print_r($lStatus, true));
       }
       else {
@@ -230,7 +230,7 @@ class YiidActivityTable extends Doctrine_Table
 
     $lResults = $lCollection->find($lQueryArray);
     $lResults->sort(array('u' => -1));
-    
+
     $lResults->limit($pLimit)->skip(($pOffset - 1) * $pLimit);
 
     return self::hydrateMongoCollectionToObjects($lResults);
@@ -254,12 +254,12 @@ class YiidActivityTable extends Doctrine_Table
     $lQueryArray['oiids'] = array('$in' => $lRelevantOis);
     $lQueryArray['so_id'] = new MongoId($pId);
     $lQueryArray = array_merge($lQueryArray, self::addCaseQuery($pCase));
-    
+
     $lResults = $lCollection->find($lQueryArray);
     $lResults->sort(array('u' => -1));
-    
+
     $lResults->limit($pLimit)->skip(($pOffset - 1) * $pLimit);
-      
+
     return self::hydrateMongoCollectionToObjects($lResults);
   }
 
