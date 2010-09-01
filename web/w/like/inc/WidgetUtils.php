@@ -76,7 +76,7 @@ class SocialObjectPeer {
       $lSocialObjectArray = array();
     }
 
-    if(!UrlUtils::isUrlValid($pUrl)) {
+    if($pUrl && !UrlUtils::isUrlValid($pUrl)) {
 	    $lSocialObjectArray = array_merge(array(
 	      'urlerror'   => true,
 	    ), $lSocialObjectArray);
