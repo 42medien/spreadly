@@ -54,6 +54,8 @@ User:
       type:       string
     friends_list:
       type:       string
+    community_object_id:  
+      type:      integer
     #latest_activity:
     #  type:       date
 

@@ -20,6 +20,16 @@ $lQuery = Doctrine_Query::create()->from('User u')->select('u.id');
 $lIds = $lQuery->fetchArray();
 $lQuery->free();
 
+/****
+ *
+ *
+ * avatar migration
+ *
+ * email migration
+ *
+ * ..???
+ */
+
 
 foreach ($lIds as $key => $value) {
   $lUser = UserTable::getInstance()->retrieveByPk($value['id']);
