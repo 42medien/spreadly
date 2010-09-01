@@ -104,8 +104,9 @@ class UserTable extends Doctrine_Table {
   public static function getHottestUsers($pFriendIds = array(), $pPage = 1, $pLimit = 10) {
     $lQuery = Doctrine_Query::create()
     ->from('User u')
-    ->whereIn('u.id', $pFriendIds);
+    ->whereIn('u.id', $pFriendIds)
     // now sort by hot
+    ->orderBy('u.sortname');
 
     $lQuery->limit($pLimit);
     $lQuery->offset(($pPage - 1) * $pLimit);

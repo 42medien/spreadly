@@ -9,12 +9,14 @@ Community:
     community: 'twitter'
     url:       'http://www.twitter.com'
     oi_url:    'http://twitter.com/%s'
+    social_publishing_possible:  1
 
   community_3:
     name:      'facebook'
     community: 'facebook'
     url:       'http://www.facebook.com'
     oi_url:    '%s'
+    social_publishing_possible:   1
 
   community_4:
     name:      'website'

@@ -45,10 +45,10 @@ class CommunityTable extends Doctrine_Table {
    */
   public static function retrieveByDomain($pDomain = null) {
     $lQuery = Doctrine_Query::create()->
-      from('Community c')->
-      where('c.oi_url IS NOT NULL AND c.oi_url <> "" AND c.oi_url <> " " AND c.community IS NOT NULL')->
-      andWhere('c.community <> "website"')->
-      orderBy('c.community ASC');
+    from('Community c')->
+    where('c.oi_url IS NOT NULL AND c.oi_url <> "" AND c.oi_url <> " " AND c.community IS NOT NULL')->
+    andWhere('c.community <> "website"')->
+    orderBy('c.community ASC');
 
     if ($pDomain) {
       $lQuery->andWhere('c.oi_url LIKE ?', array("%".$pDomain."%"));
@@ -57,14 +57,28 @@ class CommunityTable extends Doctrine_Table {
     $lCommunities = $lQuery->execute();
 
     $lWebsite = Doctrine_Query::create()->
-      from('Community c')->
-      where('c.community = ?', array("website"))->
-      fetchOne();
+    from('Community c')->
+    where('c.community = ?', array("website"))->
+    fetchOne();
 
     if ($lWebsite) {
       $lCommunities[] = $lWebsite;
     }
 
     return $lCommunities;
+  }
+
+
+  /**
+   * get all communitys which support social publishing
+   *
+   * @author weyandch
+   */
+  public static function retrieveCommunitysForSocialPublishing() {
+    $lQuery = Doctrine_Query::create()
+    ->from('Community c')
+    ->where('c.social_publishing_possible = ?', true);
+
+    return $lQuery->execute();
   }
 }
