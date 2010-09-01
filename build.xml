@@ -56,11 +56,11 @@
 
 
   <target name="buildlocal">
-    <copy todir="./web">
+    <copy todir="./web" overwrite="true">
       <fileset refid="frontend_controllers" />
     </copy>
 
-    <copy todir="./config">
+    <copy todir="./config" overwrite="true">
       <fileset refid="local_config" />
     </copy>
      
