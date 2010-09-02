@@ -49,8 +49,11 @@ var ItemDetail = {
    * @author KM
    */
   loadFirst: function() {
+    debug.log("[ItemDetail][loadFirst]");    
     var lElement = jQuery('#stream_left ul li.stream_item:first');
-    GlobalRequest.initByElement(lElement);
+    if(jQuery(lElement).hasClass('stream_item')) {
+      GlobalRequest.initByElement(lElement);
+    }
   }
 };
 
