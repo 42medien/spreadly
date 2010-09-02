@@ -71,7 +71,7 @@ class UserTable extends Doctrine_Table {
    */
   public static function getHottestFriendsForUser($pUserId, $pPage = 1, $pLimit = 10) {
     $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
-
+    
     return self::getHottestUsers($lFriendIds, $pPage, $pLimit);
   }
 
@@ -102,6 +102,10 @@ class UserTable extends Doctrine_Table {
    * @todo sort by hot
    */
   public static function getHottestUsers($pFriendIds = array(), $pPage = 1, $pLimit = 10) {
+  	$lCountFriends = count($pFriendIds);
+  	if($lCountFriends == 0)
+      return false;
+      
     $lQuery = Doctrine_Query::create()
     ->from('User u')
     ->whereIn('u.id', $pFriendIds)
