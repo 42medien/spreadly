@@ -28,7 +28,7 @@ class YiidActivityTable extends Doctrine_Table
     return $lObject;
   }
 
-    /**
+  /**
    * Updates an object in Mongo, respecting MongoDB's Syntax to manipulate stored objects
    *
    * @see  http://www.mongodb.org/display/DOCS/Updating
@@ -36,9 +36,9 @@ class YiidActivityTable extends Doctrine_Table
    * @param Array() $pIdentifier
    * @param Array() $pManipualtior
    */
-  public static function updateObjectInMongoDb($pIdentifier, $pManipualtior) {
+  public static function updateObjectInMongoDb($pIdentifier, $pManipulator) {
     $lCollection = self::getMongoCollection();
-    $lCollection->update($pIdentifier, $pManipualtior, array('upsert' => true));
+    $lCollection->update($pIdentifier, $pManipulator, array('upsert' => true));
   }
 
 
@@ -46,14 +46,14 @@ class YiidActivityTable extends Doctrine_Table
 
 
   public static function saveLikeActivitys($pUserId,
-                                          $pUrl,
-                                          $pOwnedOnlineIdentitys = array(),
-                                          $pGivenOnlineIdentitys = array(),
-                                          $pScore = self::ACTIVITY_TYPE_LIKE,
-                                          $pVerb = 'like',
-                                          $pTitle = null,
-                                          $pDescription = null,
-                                          $pPhoto = null) {
+                                            $pUrl,
+                                            $pOwnedOnlineIdentitys = array(),
+                                            $pGivenOnlineIdentitys = array(),
+                                            $pScore = self::ACTIVITY_TYPE_LIKE,
+                                            $pVerb = 'like',
+                                            $pTitle = null,
+                                            $pDescription = null,
+                                            $pPhoto = null) {
 
 
     $lVerifiedOnlineIdentitys = array();
@@ -229,9 +229,9 @@ class YiidActivityTable extends Doctrine_Table
     }
 
     $lResults = $lCollection->find($lQueryArray);
-    $lResults->sort(array('u' => -1));
-
+    $lResults->sort(array('c' => -1));
     $lResults->limit($pLimit)->skip(($pOffset - 1) * $pLimit);
+
 
     return self::hydrateMongoCollectionToObjects($lResults);
   }
@@ -335,6 +335,7 @@ class YiidActivityTable extends Doctrine_Table
     $lObject = new YiidActivity();
     if ($pCollection) {
       $lObject->fromArray($pCollection);
+      $lObject->setId($pCollection['_id']."");
       return $lObject;
     }
     return null;
@@ -351,6 +352,7 @@ class YiidActivityTable extends Doctrine_Table
   private static function hydrateMongoCollectionToObjects($pCollection) {
     $lObjects = array();
     while($pCollection->hasNext()) {
+
       $lObjects[] = self::initializeObjectFromCollection($pCollection->getNext());
     }
     return $lObjects;

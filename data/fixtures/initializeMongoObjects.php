@@ -1,9 +1,22 @@
 <?php
 require_once(dirname(__FILE__).'/../../config/ProjectConfiguration.class.php');
 
-$configuration = ProjectConfiguration::getApplicationConfiguration('platform', 'batch', false);
+$configuration = ProjectConfiguration::getApplicationConfiguration('platform', 'batch', true);
 sfContext::createInstance($configuration);
 
+/*
+ *
+ * testdaten anlgegen...
+ *
+ *
+$lUserHugo = UserTable::retrieveByUsername('weyandch');
+
+$lHugoOis = $lUserHugo->getOnlineIdentitesAsArray();
+
+$lCommunityTwitter = CommunityTable::retrieveByCommunity('twitter');
+$lOiHansTwitter = OnlineIdentityTable::retrieveByIdentifier('weyandch', $lCommunityTwitter->getId());
+YiidActivityTable::saveLikeActivitys($lUserHugo->getId(), 'http://blog.ripanti.de/2010/04/27/internetexperten-fur-deutschland', $lHugoOis, array($lOiHansTwitter->getId()), -1, 'like', 'affen title');
+*/
 
 $lUserHugo = UserTable::retrieveByUsername('hugo');
 $lUserHans = UserTable::retrieveByUsername('hans');
@@ -66,6 +79,7 @@ YiidActivityTable::saveLikeActivitys($lUserKarl->getId(), 'http://spiegel.de', $
 YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://snirgel.de', $lUserHansOis, array($lOiHansTwitter->getId()), -1, 'like', 'snirgel.de title title');
 YiidActivityTable::saveLikeActivitys($lUserKarl->getId(), 'http://snirgel.de', $lUserKarlOis, array($lOiKarlTwitter->getId()), -1, 'like', 'snirgel.de title title');
 YiidActivityTable::saveLikeActivitys($lUserHugo->getId(), 'http://snirgel.de', $lHugoOis, array($lOiHugoTwitter->getId()), -1, 'like', 'snirgel.de title title');
+
 
 /*
 $lObject5 = SocialObjectTable::createSocialObject('http://der-fusssballblogger.de', null, 'fussball title', 'fussball description', null);

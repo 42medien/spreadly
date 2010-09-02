@@ -17,9 +17,9 @@ class streamActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $lObjectsCount = 30;
+    $lObjectsCount = 3;
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('stream/js_init_stream.js'));
-    $lObjects = $this->pSocialObjects = SocialObjectTable::retrieveHotObjets($this->getUser()->getUserId(), null, null, $lObjectsCount, 1, $lObjectsCount);
+    $lObjects = $this->pSocialObjects = SocialObjectTable::retrieveHotObjets($this->getUser()->getUserId(), null, null, 30, 1, $lObjectsCount);
   }
 
   public function executeNew(sfWebRequest $request) {
@@ -40,7 +40,7 @@ class streamActions extends sfActions
       $lString = ', "comid":"'.$lComId.'"';
     }
 
-    $pActivities = YiidActivityTable::retrieveLatestActivitiesByContacts($this->getUser()->getUserId(),$lContactId, $lComId, $lObjectsCount, $lPage, $lObjectsCount);
+    $pActivities = YiidActivityTable::retrieveLatestActivitiesByContacts($this->getUser()->getUserId(),$lContactId, $lComId, 30, $lPage, $lObjectsCount);
 
     if(count($pActivities) < $lObjectsCount)
       $lDoPaginate = false;
@@ -79,7 +79,7 @@ class streamActions extends sfActions
       $lString = ', "comid":"'.$lComId.'"';
     }
 
-    $pSocialObjects = SocialObjectTable::retrieveHotObjets($this->getUser()->getUserId(),$lContactId, $lComId, $lObjectsCount, $lPage, $lObjectsCount);
+    $pSocialObjects = SocialObjectTable::retrieveHotObjets($this->getUser()->getUserId(),$lContactId, $lComId, 30, $lPage, $lObjectsCount);
 
     if(count($pSocialObjects) < $lObjectsCount)
       $lDoPaginate = false;
@@ -118,7 +118,7 @@ class streamActions extends sfActions
       $lString = ', "comid":"'.$lComId.'"';
     }
 
-    $pSocialObjects = SocialObjectTable::retrieveFlopObjects($this->getUser()->getUserId(),$lContactId, $lComId, $lObjectsCount, $lPage, $lObjectsCount);
+    $pSocialObjects = SocialObjectTable::retrieveFlopObjects($this->getUser()->getUserId(),$lContactId, $lComId, 30, $lPage, $lObjectsCount);
 
     if(count($pSocialObjects) < $lObjectsCount)
       $lDoPaginate = false;
@@ -161,7 +161,7 @@ class streamActions extends sfActions
 
   public function executeGet_item_detail_stream(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
-    $lActivitiesCount = 6;
+    $lActivitiesCount = 60;
     $lDoPaginate = true;
     $lCallback = $request->getParameter('callback', 'GlobalError.logerror');
     $lCase = $request->getParameter('case', 'all');

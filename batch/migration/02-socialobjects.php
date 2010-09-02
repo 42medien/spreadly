@@ -29,23 +29,24 @@ foreach ($lActivities as $lActivity) {
     }
   }
 
-
   $pManipualtior = array('$addToSet' => array('oiids' => array('$each' => array_filter($lOiIds)),
                                               'cids' => array('$each' => array_filter($lServices))
-                                              )
+                                              ),
                          );
 
+YiidActivityTable::updateObjectInMongoDb(array('u_id' => $lUserId, 'url_hash' => $lActivity->getUrlHash()), $pManipualtior);
 
-  YiidActivityTable::updateObjectInMongoDb(array('u_id' => $lUserId, 'url_hash' => $lActivity->getUrlHash()), $pManipualtior);
   $lSocialObject = SocialObjectTable::retrieveByUrlHash($lActivity->getUrlHash());
   if (!$lSocialObject) {
     $lSocialObject = SocialObjectTable::retrieveByUrl($lActivity->getUrl());
   }
   if ($lSocialObject) {
     $lSocialObject->updateObjectActingIdentities($lOiIds, $lServices);
+
     echo $lUserId ." - ".count($lOiIds)." \r\n";
   }
   else {
     echo "################################################### " .$lActivity->getUrl()."\r\n";
   }
+
 }

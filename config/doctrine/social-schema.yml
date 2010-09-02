@@ -6,7 +6,7 @@ options:
 SocialObject:
   columns:
     id:
-      type:  string(24)
+      type:  string(30)
     url:
       type:  string
     url_hash:
@@ -44,7 +44,7 @@ SocialObject:
 YiidActivity:
   columns:
     id:
-      type:      string(24)
+      type:      string(30)
     so_id:
       type:      string(24)
     url:
