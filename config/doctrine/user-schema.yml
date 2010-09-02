@@ -37,6 +37,7 @@ User:
       type:       string(7)
     email: 
       type:       varchar(120) 
+      notnull:  false      
     agb:
       type:       boolean
       default:    false

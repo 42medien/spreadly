@@ -86,30 +86,35 @@ UserIdentityCon:
   uicon_2:             # hugo  - facebook oi
     User:               user_1
     OnlineIdentity:     oi_2
+    verified:           true    
   uicon_3:               # hans  - twitter oi
     User:               user_2
     OnlineIdentity:     oi_3
   uicon_4:               # hans  - facebook oi
     User:               user_2
     OnlineIdentity:     oi_4
+    verified:           true    
   uicon_5:                # karl  - twitter oi
     User:               user_3
     OnlineIdentity:     oi_5
   uicon_6:                # james  - facebook oi
     User:               user_4
     OnlineIdentity:     oi_6
+    verified:           true    
   uicon_7:               # hans  - twitter oi
     User:               user_3
     OnlineIdentity:     oi_3
   uicon_8:               # snirgelchen  - facebook oi
     User:               user_5
     OnlineIdentity:     oi_7
+    verified:           true      
   uicon_9:               # manni  - facebook oi
     User:               user_6
     OnlineIdentity:     oi_8
   uicon_10:               # affe  - facebook oi
     User:               user_7
     OnlineIdentity:     oi_9
+    verified:           true      
   uicon_11:               # james  - twitter oi
     User:               user_4
     OnlineIdentity:     oi_10

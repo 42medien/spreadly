@@ -158,4 +158,16 @@ class UserIdentityConTable extends Doctrine_Table {
           ->where("u.online_identity_id = ?", $pOnlineIdentityId)
           ->execute();
   }
+
+  /**
+   * returns all verified uicons
+   * @author KM
+   * @return array UserIdentityCon
+   */
+  public static function getVerified(){
+    $lQuery = Doctrine_Query::create()
+          ->from('UserIdentityCon uic')
+          ->where('uic.verified = ?', true);
+    return $lQuery->fetchArray();
+  }
 }
