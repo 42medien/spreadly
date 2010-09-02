@@ -20,25 +20,40 @@ $lQuery = Doctrine_Query::create()->from('User u')->select('u.id');
 $lIds = $lQuery->fetchArray();
 $lQuery->free();
 
+/****
+ *
+ *
+ * avatar migration
+ *
+ * email migration
+ *
+ * ..???
+ */
 echo "######################################### \r\n";
-echo "Start migration: 03_uemail.php \r\n";
+echo "Start migration: 01_useravatar.php \r\n";
 echo "######################################### \r\n";
 foreach ($lIds as $key => $value) {
-	try{
+  try{
 	  $lUser = UserTable::getInstance()->retrieveByPk($value['id']);
-		$lUserEmail = UserEmailAddressTable::getMainAddresses($value['id']);
-		$lUser->setEmail($lUserEmail->getEmail());
-		$lUser->save();
-		echo "Userid: ".$value['id']." got email: ".$lUserEmail->getEmail()." with id: ".$lUserEmail->getId()."\n\r";
+	  //if user has a avatar in general
+	  if ($lUser->getDefaultAvatar()) {
+	    $lMainAvatar = UserAvatarTable::getMainAvatarForUserId($value['id']);
+	    //check if he has an main avatar and if the current default-avatar is the main
+	    if(!$lMainAvatar) {
+	    	//if not: take the default-avatar-name and get the avatar-object
+	      $lNewMain = UserAvatarTable::getAvatarForName($value['id'], $lUser->getDefaultAvatar());
+	      //set the default-avatar to main
+	      $lNewMain->setIsMain(true);
+	      //and save
+	      $lNewMain->save();
+	      echo "--> new main-avatar with id: ".$lNewMain->getId()." for userid: ".$value['id']."\n\r";
+	    }
+    }
   } catch(Exception $e){
     echo $e->getMessage();
     continue;
   }
-
 }
 echo "######################################### \r\n";
-echo "End migration: 03_uemail.php \r\n";
+echo "End migration: 01_useravatar.php \r\n";
 echo "######################################### \r\n";
-echo "\r\n";
-echo "\r\n";
-echo "\r\n";

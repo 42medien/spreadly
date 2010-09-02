@@ -23,5 +23,14 @@ class UserAvatarTable extends Doctrine_Table
     return $lQ->fetchOne();
   }
 
+  public static function getAvatarForName($pUserId, $pName){
+    $lQ = Doctrine_Query::create()
+    ->from('UserAvatar ua')
+    ->where('ua.user_id = ?', $pUserId)
+    ->addWhere('ua.avatar = ?', $pName);
+
+    return $lQ->fetchOne();
+
+  }
 
 }
