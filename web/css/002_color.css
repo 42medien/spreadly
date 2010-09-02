@@ -14,7 +14,7 @@ p, a.text_action, h3, h2, h5, .btn, #content label, .search_field_area input{col
 
 
 /* Header */
-#header{background: transparent url("/img/sprites/sprite_general.png") 50px 10px no-repeat;border-bottom: 5px #6A6B6A solid;}
+#header{background: transparent url("/img/sprites/sprite_general.png") 50px 0 no-repeat;border-bottom: 5px #6A6B6A solid;}
 #header_yiidcc{background: transparent url("/img/global/yiid_cc_logo.png") 50px 10px no-repeat;border-bottom: 5px #6A6B6A solid;}
   #nav_home{background: transparent url("/img/sprites/sprite_icons.png") 0 -151px no-repeat;}
   #nav_profile{background: transparent url("/img/sprites/sprite_icons.png") 0 -111px no-repeat;}

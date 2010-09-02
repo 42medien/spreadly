@@ -13,9 +13,6 @@
 	    <li class="left icon_big icon_big_twitter">
 	      <?php echo link_to("Twitter", "@auth_signin?service=twitter"); ?>
 	    </li>
-	    <li class="left icon_big icon_big_google">
-	      <a href="/">Google</a>
-	    </li>
 	  </ul>
 
 	  <p><?php echo __('If you have not used the Yiid button before, we will automatically create an account for you on Yiid.com, where you can manage your services,
