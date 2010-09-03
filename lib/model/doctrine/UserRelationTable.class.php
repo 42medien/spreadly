@@ -41,7 +41,11 @@ class UserRelationTable extends Doctrine_Table
       $pIdentities = array($pIdentities);
     }
     $lQueryArray = array('$addToSet' => array('owned_oi' => array('$each' => $pIdentities)));
-    return $lCollection->update(array('user_id' => $pUserId), $lQueryArray, array('upsert' => true));
+
+    echo "own identities";
+    print_r($lQueryArray);
+
+    // return $lCollection->update(array('user_id' => $pUserId), $lQueryArray, array('upsert' => true));
   }
 
   /**
@@ -65,7 +69,9 @@ class UserRelationTable extends Doctrine_Table
                                               )
                          );
 
-    return $lCollection->update(array('user_id' => $pUserId), $lQueryArray, array('upsert' => true));
+    echo "contacts identities";
+    print_r($lQueryArray);
+//    return $lCollection->update(array('user_id' => $pUserId), $lQueryArray, array('upsert' => true));
   }
 
 
@@ -115,14 +121,12 @@ class UserRelationTable extends Doctrine_Table
   }
 
 
-  public static function doShit($pUserId) {
-    $lUserId = $pUserId;
+  public static function doIdentityMigration($pUserId) {
+    $lOwnedOiIds = UserIdentityConTable::getOnlineIdentityIdsForUser($pUserId);
 
-    $lUiCons = UserIdentityConTable::getOnlineIdentityIdsForUser($lUserId);
+    UserRelationTable::updateOwnedIdentities($pUserId, $lOwnedOiIds);
 
-    UserRelationTable::updateOwnedIdentities($lUserId, $lUiCons);
-
-    foreach ($lUiCons as $lOiId) {
+    foreach ($lOwnedOiIds as $lOiId) {
 
       $lUsersConnected = array();
       $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
@@ -130,7 +134,7 @@ class UserRelationTable extends Doctrine_Table
         $lUsersConnected = array_merge($lUsersConnected, UserIdentityConTable::getUserIdsConnectedToOnlineIdentityId($lOi));
       }
 
-      UserRelationTable::updateContactIdentities($lUserId, $lOiIds, $lUsersConnected);
+      UserRelationTable::updateContactIdentities($pUserId, $lOiIds, $lUsersConnected);
     }
 
 

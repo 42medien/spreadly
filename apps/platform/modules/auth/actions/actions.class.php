@@ -46,7 +46,7 @@ class authActions extends sfActions {
         $lUser = UserTable::getByIdentifierAndPassword($request->getParameter('signin_user'), $request->getParameter('signin_password'));
         // try to sign in and redirect him to the stream
         $this->getUser()->signIn($lUser);
-        UserRelationTable::doShit($lUser->getId());
+        UserRelationTable::doIdentityMigration($lUser->getId());
         $this->redirect("@stream");
       } catch (Exception $e) {
         // catch the error and tell the user about it
