@@ -90,13 +90,10 @@ class UserRelationTable extends Doctrine_Table
   public static function getRelevantOnlineIdentitys($pUserId, $pFriendId) {
     $pOiArray = array();
     if (is_null($pFriendId)) {
-      echo "meself\r\n";
       $pOiArray = self::retrieveUserRelations($pUserId)->getContactsOi();
     } else {
-      echo "friend\r\n";
       $pOiArray = self::retrieveUserRelations($pFriendId)->getOwnedOi();
     }
-  print_r($pOiArray);die();
   //  $pOiArray = array_merge($pOiArray, self::retrieveUserRelations($pUserId)->getOwnedOi());
 
     return $pOiArray;
