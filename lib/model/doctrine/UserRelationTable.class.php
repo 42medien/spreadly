@@ -69,7 +69,7 @@ class UserRelationTable extends Doctrine_Table
                                               )
                          );
 
-    echo "contacts identities";
+    echo "contacts identities\r\n";
     print_r($lQueryArray);
 //    return $lCollection->update(array('user_id' => $pUserId), $lQueryArray, array('upsert' => true));
   }
@@ -137,7 +137,7 @@ class UserRelationTable extends Doctrine_Table
       UserRelationTable::updateContactIdentities($pUserId, $lOiIds, $lUsersConnected);
     }
 
-
+exit();die();
   }
 
 }
