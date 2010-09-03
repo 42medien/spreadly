@@ -71,7 +71,6 @@ class SocialObjectTable extends Doctrine_Table
     $lRelevantOis = self::getRelevantOnlineIdentitysForQuery($pUserId, $pFriendId);
     $lQueryArray = self::initializeBasicFilterQuery($lRelevantOis, $pCommunityId, $pRange);
 
-    print_r($lQueryArray);die();
     $lResults = $lCollection->find($lQueryArray);
     $lResults->sort(array('l_cnt' => -1));
     $lResults->limit($pLimit)->skip(($pPage - 1) * $pLimit);
