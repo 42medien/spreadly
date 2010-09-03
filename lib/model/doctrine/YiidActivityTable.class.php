@@ -251,7 +251,7 @@ class YiidActivityTable extends Doctrine_Table
     $lRelevantOis = self::getRelevantOnlineIdentitysForQuery($pUserId, null);
 
     $lQueryArray = array();
-    $lQueryArray['oiids'] = array('$in' => $lRelevantOis);
+    //$lQueryArray['oiids'] = array('$in' => $lRelevantOis);
     $lQueryArray['so_id'] = new MongoId($pId);
     $lQueryArray = array_merge($lQueryArray, self::addCaseQuery($pCase));
 
