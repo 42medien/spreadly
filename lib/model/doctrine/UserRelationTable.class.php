@@ -41,11 +41,7 @@ class UserRelationTable extends Doctrine_Table
       $pIdentities = array($pIdentities);
     }
     $lQueryArray = array('$addToSet' => array('owned_oi' => array('$each' => $pIdentities)));
-
-    echo "own identities";
-    print_r($lQueryArray);
-
-    // return $lCollection->update(array('user_id' => $pUserId), $lQueryArray, array('upsert' => true));
+    return $lCollection->update(array('user_id' => $pUserId), $lQueryArray, array('upsert' => true));
   }
 
   /**
@@ -69,9 +65,7 @@ class UserRelationTable extends Doctrine_Table
                                               )
                          );
 
-    echo "contacts identities\r\n";
-    print_r($lQueryArray);
-//    return $lCollection->update(array('user_id' => $pUserId), $lQueryArray, array('upsert' => true));
+    return $lCollection->update(array('user_id' => $pUserId), $lQueryArray, array('upsert' => true));
   }
 
 
@@ -128,8 +122,6 @@ class UserRelationTable extends Doctrine_Table
     UserRelationTable::updateOwnedIdentities($pUserId, $lOwnedOiIds);
 
     foreach ($lOwnedOiIds as $lOiId) {
-
-      echo "xxxx OIID xxxxx\r\n\r\n".$lOiId;
       $lUsersConnected = array();
       $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
 
@@ -138,11 +130,7 @@ class UserRelationTable extends Doctrine_Table
       }
 
       UserRelationTable::updateContactIdentities($pUserId, $lOiIds, $lUsersConnected);
-
-      echo "xxxx EEEENDDEEEEE  OIID xxxxx\r\n\r\n".$lOiId;
     }
-
-exit();die();
   }
 
 }
