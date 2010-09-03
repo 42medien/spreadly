@@ -127,9 +127,10 @@ class UserRelationTable extends Doctrine_Table
     UserRelationTable::updateOwnedIdentities($pUserId, $lOwnedOiIds);
 
     foreach ($lOwnedOiIds as $lOiId) {
-
+echo "xxxx OIID xxxxx\r\n\r\n";
       $lUsersConnected = array();
       $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
+
       foreach ($lOiIds as $lOi) {
         $lUsersConnected = array_merge($lUsersConnected, UserIdentityConTable::getUserIdsConnectedToOnlineIdentityId($lOi));
       }
