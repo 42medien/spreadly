@@ -97,7 +97,7 @@ class UserRelationTable extends Doctrine_Table
   //  print_r($pOiArray);die();
   //  $pOiArray = array_merge($pOiArray, self::retrieveUserRelations($pUserId)->getOwnedOi());
 
-    return $pOiArray?$pOiArray:array();
+    return $pOiArray;
   }
 
 
