@@ -32,7 +32,7 @@ p, a.text_action, h3, h2, h5, .btn, #content label, .search_field_area input{col
 /* Content_sub */
 .filter_headline{background-color: #ebebeb;}
 .filter_headline_active{background-color: #69BD50;}
-.btn{background: #F2F2F2 url("/img/sprites/sprite_general.png") no-repeat 125px -264px;}
+.btn{background: #F2F2F2 url("/img/sprites/sprite_general.png") no-repeat 125px -274px;}
 .icon_facebook{background: transparent url("/img/sprites/sprite_icons.png") 8px -374px no-repeat;}
 .icon_twitter{background: transparent url("/img/sprites/sprite_icons.png") 8px -409px no-repeat;}
 .icon_google{background: transparent url("/img/sprites/sprite_icons.png") 8px -444px no-repeat;}

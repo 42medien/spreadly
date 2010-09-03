@@ -124,8 +124,42 @@ class SocialObject extends BaseSocialObject
     );
   }
 
-
-
+  /**
+   * at the moment this method returns the name of the first community
+   * 
+   * @author Christian Schätzle
+   */
+  public function getCommunityNames() {
+    $lObjectOiIds = $this->getRelatedOnlineIdentityIds();
+    $lNamesArray = array();
+    
+    /*
+    foreach($lObjectOiIds as $lId) {
+    	$lOi = Doctrine::getTable('OnlineIdentity')->find($lId);
+      $lName = Doctrine::getTable('Community')->find($lOi->getCommunityId())->getName();
+      array_push($lNamesArray, $lName);
+    }
+    
+    return $lNamesArray;
+    */
+    
+    $lOi = Doctrine::getTable('OnlineIdentity')->find($lObjectOiIds[0]);
+    return Doctrine::getTable('Community')->find($lOi->getCommunityId())->getName();
+  }
+  
+  /**
+   * This method returns the minuts/hours/day since publishing of this social object
+   * 
+   * @author Christian Schätzle
+   */
+  public function getPublishingTime() {
+  	$lSocialObjectDate = $this->getC();
+  	
+  	sfProjectConfiguration::getActive()->loadHelpers(array('Date'));
+  	$lDate = distance_of_time_in_words($lSocialObjectDate);
+  	
+  	return $lDate;
+  }
 
   /*** wrappers for getter && setters */
 
