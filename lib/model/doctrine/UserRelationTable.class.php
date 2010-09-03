@@ -122,12 +122,14 @@ class UserRelationTable extends Doctrine_Table
 
 
   public static function doIdentityMigration($pUserId) {
+
     $lOwnedOiIds = UserIdentityConTable::getOnlineIdentityIdsForUser($pUserId);
 
     UserRelationTable::updateOwnedIdentities($pUserId, $lOwnedOiIds);
 
     foreach ($lOwnedOiIds as $lOiId) {
-echo "xxxx OIID xxxxx\r\n\r\n";
+
+      echo "xxxx OIID xxxxx\r\n\r\n".$lOiId;
       $lUsersConnected = array();
       $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
 
@@ -136,6 +138,8 @@ echo "xxxx OIID xxxxx\r\n\r\n";
       }
 
       UserRelationTable::updateContactIdentities($pUserId, $lOiIds, $lUsersConnected);
+
+      echo "xxxx EEEENDDEEEEE  OIID xxxxx\r\n\r\n".$lOiId;
     }
 
 exit();die();
