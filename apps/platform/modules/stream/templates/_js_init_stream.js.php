@@ -12,9 +12,6 @@ ItemDetail.loadFirst();
 DataObjectPager.init('stream_pager_link','{"action":"stream/hot", "callback":"Stream.show", "page":"2"}');
 DataObjectPager.init('item-stream-pager-link');
 
-//FriendListInputFilter.init();
-//FriendListLinkFilter.init();
-//FriendList.init();
 FriendBox.init();
 
 

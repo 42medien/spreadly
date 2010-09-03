@@ -44,7 +44,7 @@
 
 	    </div>
 
-      <?php include_partial('global/footer'); ?>
+      <?php include_component('general','footer'); ?>
 
     </div>
 

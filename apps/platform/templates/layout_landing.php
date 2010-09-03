@@ -5,9 +5,9 @@
     <?php include_metas() ?>
     <?php include_title() ?>
     <link rel="shortcut icon" href="/favicon.ico" />
-    
+
     <?php include_partial('global/includes'); ?>
-    
+
   </head>
   <body class="bg_light clearfix">
     <div id="container" class="bd_round clearfix">
@@ -19,11 +19,11 @@
       <div id="content" class="clearfix">
         <?php echo $sf_content; ?>
 	    </div>
-    
-      <?php include_partial('global/footer'); ?>
+
+      <?php include_component('general','footer'); ?>
 
     </div>
-    
+
 	  <script type="text/javascript" src="/js/100_main/include/platform-<?php echo sfConfig::get('app_release_name') ?>.min.js"></script>
 	  <script type="text/javascript">
 	    jQuery(document).ready( function() {

@@ -85,7 +85,11 @@ update_language:
 widget_callback_uri:
   url:   /popup/*
   param: { module: auth, action: widget_auth }
-
+  
+static:
+  url:   /static/*
+  param: { module: static, action: index }  
+  
 ##### ROUTES FOR PLUGINS #######
 
 js_log:

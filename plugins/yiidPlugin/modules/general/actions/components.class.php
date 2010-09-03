@@ -4,16 +4,14 @@ class generalComponents extends sfComponents {
 
 
   public function executeFooter() {
-    $culture = $this->getUser()->getCulture();
-    if ($culture) {
-      $culture = substr($culture, 0, 2);
-    } else {
-      $culture = 'de';
-    }
+    $lCulture = $this->getUser()->getCulture();
+    $lCategories = CmsCategoryTable::getAllFooterCategories();
+    //$c = new Criteria();
+    //$c->add(CmsCategoryPeer::FOOTER, true);
+    //$lCategories = CmsCategoryTable::doSelectWithI18n();
 
-
-    $this->categories = $lcategories = array();
-    $this->culture = $culture;
+    $this->pCategories = $lCategories;
+    $this->pCulture = $lCulture;
 
   }
 
@@ -24,5 +22,6 @@ class generalComponents extends sfComponents {
       array('languages' => array('en', 'de'))
     );
   }
+
 }
 ?>

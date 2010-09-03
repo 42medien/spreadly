@@ -31,7 +31,7 @@
 
       </div>
 
-      <?php include_partial('global/footer'); ?>
+      <?php //include_partial('global/footer'); ?>
 
     </div>
 
