@@ -15,7 +15,7 @@ class YiidStatsSingleton {
    * @param string $pCulture (de|en)
    * @param int    $pVerb
    */
-  public static function trackVisit($pUri, $pUserId = false, $pType, $pCulture, $pVerb) {
+  public static function trackVisit($pUri, $pUserId = false, $pType) {
     $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
     $lCollection = $lMongo->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, self::MONGO_COLLECTION_NAME_VISITS);
     $pUri = urldecode($pUri);
@@ -26,9 +26,7 @@ class YiidStatsSingleton {
       $lVisitArray['uid'] = $pUserId;
     }
     $lVisitArray['host'] = parse_url($pUri, PHP_URL_HOST);
-    $lVisitArray['cult'] = $pCulture;
     $lVisitArray['type'] = $pType;
-    $lVisitArray['verb'] = $pVerb;
     $lVisitArray['c'] = time();
 
     $lCollection->save($lVisitArray);
@@ -44,7 +42,7 @@ class YiidStatsSingleton {
    * @param string $pCulture (de|en)
    * @param int    $pVerb
    */
-  public static function trackClick($pUri, $pUserId, $pScore, $pVerb) {
+  public static function trackClick($pUri, $pUserId, $pScore) {
     $lCollection = MongoDbConnector::getInstance()->getCollection(sfConfig::get('app_mongodb_database_name_stats'), self::MONGO_COLLECTION_NAME_CLICKS);
     $pUri = urldecode($pUri);
 
@@ -53,7 +51,7 @@ class YiidStatsSingleton {
     $lVisitArray['host'] = parse_url($pUri, PHP_URL_HOST);
     $lVisitArray['uid'] = $pUserId;
     $lVisitArray['score'] = $pScore;
-    $lVisitArray['verb'] = $pVerb;
+    $lVisitArray['cult'] = ''; // $user->getCulture();
     $lVisitArray['c'] = time();
 
     $lCollection->save($lVisitArray);
