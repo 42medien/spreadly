@@ -39,7 +39,7 @@ h5{ font-size: 1em; font-weight: bold; }
  *   @section -TextDecoration
  */
 a:hover, .btn:hover, .whats_new_active #main_nav_inner2 p:hover, .whats_not_active #main_nav_inner2 p:hover, .whats_new_active #main_nav_inner4 p:hover, .whats_hot_active #main_nav_inner4 p:hover, 
-	.whats_hot_active #main_nav_inner7 p:hover, .whats_not_active #main_nav_inner7 p:hover, li.filter_chosen a{text-decoration: underline;}
+	.whats_hot_active #main_nav_inner7 p:hover, .whats_not_active #main_nav_inner7 p:hover, li.filter_chosen a, #footer ul li:first-child{text-decoration: underline;}
 a, a.icon_thumb, a.icon_thumbs, a.icon_thumb, a.icon_small_use, .whats_hot_info_area .url, .whats_not_info_area .url, .icon_language_select:hover{text-decoration: none;}
 
 /**
