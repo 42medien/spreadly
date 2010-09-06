@@ -5,12 +5,12 @@ $configuration = ProjectConfiguration::getApplicationConfiguration('platform', '
 sfContext::createInstance($configuration);
 
 
-$lUserHugo = UserTable::retrieveByUsername('weipah');
+$lUserHugo = UserTable::retrieveByUsername('weyandch');
 
 $lHugoOis = $lUserHugo->getOnlineIdentitesAsArray();
 
 $lCommunityTwitter = CommunityTable::retrieveByCommunity('twitter');
-$lOiHansTwitter = OnlineIdentityTable::retrieveByIdentifier('weipah', $lCommunityTwitter->getId());
+$lOiHansTwitter = OnlineIdentityTable::retrieveByIdentifier('weyandch', $lCommunityTwitter->getId());
 YiidActivityTable::saveLikeActivitys($lUserHugo->getId(), 'http://blog.yiid.org/2010/08/31/ist-yiid-com-der-weise-stier-aus-europa/', $lHugoOis, array($lOiHansTwitter->getId()), 1, 'like', "Ist+Yiid.com+der+wei%C3%9Fe+Stier+aus+Europa%3F");
 /*
 $lUserHugo = UserTable::retrieveByUsername('hugo');

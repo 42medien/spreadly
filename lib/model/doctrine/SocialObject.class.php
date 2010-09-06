@@ -97,10 +97,10 @@ class SocialObject extends BaseSocialObject
   public function updateObjectMasterData($pTitle = null, $pDescription = null, $pImage = null) {
     $lUpdateArray = array();
     if ($pTitle) {
-      $lUpdateArray['title'] = htmlspecialchars_decode(strip_tags(urldecode($pTitle)));
+      $lUpdateArray['title'] = htmlspecialchars_decode(strip_tags($pTitle));
     }
     if ($pDescription) {
-      $lUpdateArray['desc'] = htmlspecialchars_decode(strip_tags(urldecode($pDescription)));
+      $lUpdateArray['desc'] = htmlspecialchars_decode(strip_tags($pDescription));
     }
     if ($pImage) {
       $lUpdateArray['thumb_url'] = $pImage;

@@ -60,7 +60,12 @@ class YiidActivityTable extends Doctrine_Table
     // @todo checken
     $pTitle = htmlspecialchars_decode(strip_tags(urldecode($pTitle)));
     $pDescription = htmlspecialchars_decode(strip_tags(urldecode($pDescription)));
-
+    if (mb_detect_encoding($pTitle) != 'UTF-8') {
+      $pTitle = utf8_encode($pTitle);
+    }
+    if (mb_detect_encoding($pDescription) != 'UTF-8') {
+      $pDescription = utf8_encode($pDescription);
+    }
     // array of services we're sharing to
     $lServices = array();
 
