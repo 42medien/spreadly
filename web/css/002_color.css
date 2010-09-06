@@ -20,11 +20,14 @@ h1,
 h3, 
 h2, 
 h5, 
-.btn, 
-#content label, 
-.search_field_area input{color: #6a6b6a;}
-/*.url, a.url, span.url, .like-dislike{color: #bebebe;}*/
-.url, a.url, span.url, .like-dislike{color: #a5a4a4;}
+.btn,
+.user_share,
+#content label,
+.search_field_area input{color: #5A5E5A;}
+.url, 
+a.url, 
+span.url, 
+.like-dislike{color: #8A8484;}
 .error{color: #f97759;}
 
 #stream_left_top p, 

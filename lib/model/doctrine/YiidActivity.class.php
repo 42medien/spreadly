@@ -37,5 +37,19 @@ class YiidActivity extends BaseYiidActivity
   public function delete(Doctrine_Connection $con = null) {
     $this->collection->remove(array("_id" => new MongoId($this->getId()) ));
   }
+  
+  /**
+   * This method returns the minuts/hours/day since publishing of this activity
+   * 
+   * @author Christian Schätzle
+   */
+  public function getPublishingTime() {
+    $lSocialObjectDate = $this->getC();
+    
+    sfProjectConfiguration::getActive()->loadHelpers(array('Date'));
+    $lDate = distance_of_time_in_words($lSocialObjectDate);
+    
+    return $lDate;
+  }
 
 }

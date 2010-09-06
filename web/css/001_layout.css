@@ -91,7 +91,7 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 .icon_thumb{padding: 5px 14px;}
 .icon_thumbs{padding: 5px 24px;}
 .icon_small_service{padding: 0px 7px;}
-.icon_small_service_right{padding: 0px 7px;margin-left: 3px;}
+.icon_small_service_right{padding: 0 3px;}
 .icon_small_use{margin-left: 5px;}
 .icon_small_use{padding: 3px 0 0 12px;}
 .icon_language_select{padding: 0px 6px;}

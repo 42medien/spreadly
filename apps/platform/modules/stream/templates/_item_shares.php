@@ -6,15 +6,18 @@
       <?php echo avatar_tag($lUser->getDefaultAvatar(), 30, array('alt' => $lUser->getFullname(), 'class' => '', 'rel' => '')); ?>
     </div>
     <div class="so_share_spread left">
-      <?php $lActivityCids = $lActivity->getCids(); ?>
-      <?php foreach($lActivityCids as $lCid) { ?>
-        <?php $lCommunityName = CommunityTable::getInstance()->retrieveByPk($lCid)->getSlug(); ?>
-        <span class="icon_small_service_right icon_small_<?php echo $lCommunityName; ?>">&nbsp;</span><br/>
-      <?php } ?>
+      
     </div>
     <div class="so_share_information left">
-      <?php echo link_to_yiid($lUser->getFullname(), $lUser->getUsername(), null, array('class' => 'user_share')); ?><br/>
-      <span class="url"><?php echo __('via %1 %2 minutes ago', array('%1' => 'Twitter', '%2' => '2'), 'platform'); ?></span>
+      <span class="user_share text_important"><?php echo $lUser->getFullname(); ?></span>
+      <span class="url"><?php echo __('%2 ago', array('%2' => $lActivity->getPublishingTime()), 'platform'); ?></span><br/>
+      <span class="url"><?php echo __('Shared with', null, 'platform'); ?></span>
+      <?php $lActivityCids = $lActivity->getCids(); ?>
+      <?php foreach($lActivityCids as $lCid) { ?>
+        <?php $lCommunityName = CommunityTable::getInstance()->retrieveByPk($lCid)->getName(); ?>
+        <?php $lCommunitySlug = CommunityTable::getInstance()->retrieveByPk($lCid)->getSlug(); ?>
+        <span class="icon_small_service_right icon_small_<?php echo $lCommunitySlug; ?>" title="<?php echo __('Shared with %1', array('%1' => $lCommunityName), 'platform'); ?>">&nbsp;</span>
+      <?php } ?>
     </div>
     <div class="right">
       <?php if($lActivity->getScore() == 1) { ?>
