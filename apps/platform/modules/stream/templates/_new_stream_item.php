@@ -14,7 +14,7 @@
 	        <div class="left so_headline_left">
 	          <span class="icon_small_service icon_small_facebook left">&nbsp;</span>
 	          <?php echo link_to_yiid($pUser->getFullname(), $pUser->getUsername(), array(), array('class' => 'user_share left')); ?>
-	          <span class="url left">&nbsp;<?php echo __('via %1 %2 minutes ago', array('%1' => $pObject->getCommunityNames(), '%2' => $pObject->getPublishingTime()), 'platform'); ?></span>
+	          <span class="url left">&nbsp;<?php echo __('via %1 %2 ago', array('%1' => $pObject->getCommunityNames(), '%2' => $pObject->getPublishingTime()), 'platform'); ?></span>
 	        </div>
 	        <div class="right so_headline_right">
             <a href="#" class="icon_like icon_small_use like-dislike"><?php echo __('%1', array('%1' => $pObject->getLikeCount()), 'platform'); ?></a>

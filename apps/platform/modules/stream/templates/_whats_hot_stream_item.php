@@ -7,7 +7,7 @@
       <div class="clearfix">
         <div class="left so_headline_left">
           <?php echo image_tag('http://getfavicon.appspot.com/'.$pObject->getUrl(), array('class' => 'icon_small_service left')); ?>
-          <span class="url left"><?php echo __('via %1 %2 minutes ago', array('%1' => $pObject->getCommunityNames(), '%2' => $pObject->getPublishingTime()), 'platform'); ?></span>
+          <span class="url left"><?php echo __('via %1 %2 ago', array('%1' => $pObject->getCommunityNames(), '%2' => $pObject->getPublishingTime()), 'platform'); ?></span>
         </div>
         <div class="right so_headline_right">
           <a href="#" class="icon_like icon_small_use like-dislike"><?php echo __('%1', array('%1' => $pObject->getLikeCount()), 'platform'); ?></a>
