@@ -221,7 +221,7 @@ class SocialObjectTable extends Doctrine_Table
 
   public static function retrieveAll() {
     $lCollection = self::getMongoCollection();
-    return $lResults = $lCollection->find();
+    return self::hydrateMongoCollectionToObjects($lCollection->find());
   }
 
   public static function doCountAll() {

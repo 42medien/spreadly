@@ -57,9 +57,9 @@ class YiidActivityTable extends Doctrine_Table
 
 
     $lVerifiedOnlineIdentitys = array();
-    $pTitle = utf8_encode(urldecode($pTitle));
-    $pDescription = utf8_encode(urldecode($pDescription));
-    $pPhoto = utf8_encode(urldecode($pPhoto));
+    // @todo checken
+    $pTitle = htmlspecialchars_decode(strip_tags(urldecode($pTitle)));
+    $pDescription = htmlspecialchars_decode(strip_tags(urldecode($pDescription)));
 
     // array of services we're sharing to
     $lServices = array();
@@ -67,6 +67,7 @@ class YiidActivityTable extends Doctrine_Table
     if (!self::isVerbSupported($pVerb)) {
       return false;
     }
+
     $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
     $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
     if (!$lSocialObject) {

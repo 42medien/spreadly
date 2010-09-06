@@ -97,14 +97,15 @@ class SocialObject extends BaseSocialObject
   public function updateObjectMasterData($pTitle = null, $pDescription = null, $pImage = null) {
     $lUpdateArray = array();
     if ($pTitle) {
-      $lUpdateArray['title'] = $pTitle;
+      $lUpdateArray['title'] = htmlspecialchars_decode(strip_tags(urldecode($pTitle)));
     }
     if ($pDescription) {
-      $lUpdateArray['desc'] = $pDescription;
+      $lUpdateArray['desc'] = htmlspecialchars_decode(strip_tags(urldecode($pDescription)));
     }
     if ($pImage) {
       $lUpdateArray['thumb_url'] = $pImage;
     }
+
 
     SocialObjectTable::updateObjectInMongoDb(array("_id" => new MongoId($this->getId())),
     array(
@@ -126,38 +127,38 @@ class SocialObject extends BaseSocialObject
 
   /**
    * at the moment this method returns the name of the first community
-   * 
+   *
    * @author Christian Schätzle
    */
   public function getCommunityNames() {
     $lObjectOiIds = $this->getRelatedOnlineIdentityIds();
     $lNamesArray = array();
-    
+
     /*
     foreach($lObjectOiIds as $lId) {
     	$lOi = Doctrine::getTable('OnlineIdentity')->find($lId);
       $lName = Doctrine::getTable('Community')->find($lOi->getCommunityId())->getName();
       array_push($lNamesArray, $lName);
     }
-    
+
     return $lNamesArray;
     */
-    
+
     $lOi = Doctrine::getTable('OnlineIdentity')->find($lObjectOiIds[0]);
     return Doctrine::getTable('Community')->find($lOi->getCommunityId())->getName();
   }
-  
+
   /**
    * This method returns the minuts/hours/day since publishing of this social object
-   * 
+   *
    * @author Christian Schätzle
    */
   public function getPublishingTime() {
   	$lSocialObjectDate = $this->getC();
-  	
+
   	sfProjectConfiguration::getActive()->loadHelpers(array('Date'));
   	$lDate = distance_of_time_in_words($lSocialObjectDate);
-  	
+
   	return $lDate;
   }
 
