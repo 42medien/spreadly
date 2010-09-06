@@ -23,6 +23,9 @@ h5{ font-size: 1em; font-weight: bold; }
 #stream_left_top p, #search input{font-size: 13px;}
 #nav_main, #so_information h3{font-size: 14px;}
 #what_is_yiid_description p{font-size: 16px;}
+#footer_content_area h1{
+  font-size: 2.8em
+}
 
 /**
  *   @section -FontWeight
@@ -48,7 +51,11 @@ a, a.icon_thumb, a.icon_thumbs, a.icon_thumb, a.icon_small_use, .whats_hot_info_
 #all_networks_list li, #friends_search_results li, #friends_active_list li, #friends_all_list li, .user_hover_area_top, user_hover_area_bottom, #signin_via_username_form label, .two_block_area li, .two_block_area h5, #magic_after_registration .right_block{text-align: left;}
 .center_area{text-align: center;}
 .actions, #nav_main_supp{text-align: right;}
-.filter_counter_area{text-align: left;}
+
+.filter_counter_area,
+#footer_content_area {
+  text-align: left;
+}
 
 /**
  *   @section -LineHeight
@@ -56,14 +63,22 @@ a, a.icon_thumb, a.icon_thumbs, a.icon_thumb, a.icon_small_use, .whats_hot_info_
 .two_block_area li{line-height: 13px;}
 #so_right_view p{line-height: 1.3em;}
 #so_right_view h3{line-height: 1.4em;}
-.sharing_user_info p, #signin_area p, .so_comment{line-height: 1.5em;}
+.sharing_user_info p, 
+#signin_area p, 
+.so_comment, 
+#footer_content_area h1{
+  line-height: 1.5em;
+}
 #so_information h5 a{line-height: 1.6em;}
 .so_headline_left, .so_headline_right{line-height: 18px;}
 #stream_right_top div, #what_is_yiid_description p{line-height: 19px;}
 #signin_via_username_form label{line-height: 25px;}
 #nav_main li a, #stream_left_top div, #stream_right_top div, #signin_area h3, h3{line-height: 30px;}
 h2{line-height: 40px;}
-.sharing_user_link, h1{line-height: 50px;}
+.sharing_user_link, 
+h1{
+  line-height: 50px;
+}
 .right_block li{line-height: 60px;}
 
 /**

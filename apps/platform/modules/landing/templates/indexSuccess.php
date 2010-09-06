@@ -1,4 +1,4 @@
-<div id="signin_area">
+<div id="signin_area" class="single_box_with_shadow">
   <div id="signin_via_services" <?php if ($pAuthType != "delegated") { echo 'style="display: none;"'; } ?>>
 	  <h3><?php echo __('No registration needed - please use your favourite service to login', null, "platform"); ?></h3>
 	  <p>

@@ -1,4 +1,4 @@
-<div id="signin_area">
+<div id="signin_area" class="single_box_with_shadow">
   <div id="signin_via_services">
     <h3><?php echo __('Great, now let\'s do some magic, %1!', array('%1' => 'Thomas'), "platform"); ?></h3>
     <p><?php echo __('We will try to find other profiles of you on the web.', null, 'platform'); ?></p>

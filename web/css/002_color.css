@@ -10,9 +10,19 @@ a,
 .whats_hot_active #main_nav_inner2 p, 
 .whats_not_active #main_nav_inner4 p, 
 .whats_new_active #main_nav_inner7 p, 
-#search1{color: #306f1d;}
+#search1{
+  color: #306f1d;
+}
 
-p, a.text_action, h3, h2, h5, .btn, #content label, .search_field_area input{color: #6a6b6a;}
+p, 
+a.text_action, 
+h1,
+h3, 
+h2, 
+h5, 
+.btn, 
+#content label, 
+.search_field_area input{color: #6a6b6a;}
 /*.url, a.url, span.url, .like-dislike{color: #bebebe;}*/
 .url, a.url, span.url, .like-dislike{color: #a5a4a4;}
 .error{color: #f97759;}
@@ -161,13 +171,15 @@ li.item_active .whats_hot_stream_item{border: 2px solid #d7d7d7;border-right: 2p
     
 /* Footer */
 #footer{border-top: 5px solid #6A6B6A;background-color: #68b94f;}
+.single_box_with_shadow{
+  border: 1px #ccc solid;background-color: #fff;
+}
 
 /* Signin */
 .description_wave{background: transparent url("/img/sprites/sprite_signin.png") -12% -604px no-repeat;}
 .image_button_full_long_en{background: transparent url("/img/sprites/sprite_signin.png") 0 -235px no-repeat;}
 #yiid_description2{background: transparent url("/img/sprites/sprite_signin.png") 0 -370px no-repeat;}
 #yiid_description3{background: transparent url("/img/sprites/sprite_signin.png") 0 0 no-repeat;}
-#signin_area{border: 1px #ccc solid;background-color: #fff;}
 .icon_big_facebook{background: transparent url("/img/sprites/sprite_landing.png") 47% -210px no-repeat;}
 .icon_big_twitter{background: transparent url("/img/sprites/sprite_landing.png") 50% -298px no-repeat;}
 .icon_big_google{background: transparent url("/img/sprites/sprite_landing.png") 47% -385px no-repeat;}
