@@ -187,7 +187,6 @@ var FriendStreamInputFilter = {
         'parentid': 'friends_search_results', 
         'url':'stream/get_contacts_by_sortname',
         'callback': FriendStreamInputFilter.cbInputfilter,
-        'minchar': 3,
         'delay': 750
       });   
   },
