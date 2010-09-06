@@ -1,4 +1,5 @@
 <?php use_helper('YiidUrl', 'Avatar'); ?>
+<?php if(count($pActivities) > 0) { ?>
 <?php foreach ($pActivities as $lActivity) { ?>
 <?php $lUser = UserTable::getInstance()->retrieveByPK($lActivity->getUId()); ?>
   <li class="clearfix">
@@ -28,7 +29,11 @@
     </div>
   </li>
 <?php } ?>
-
+<?php } else { ?>
+  <li class="clearfix">
+    <?php echo __("NO_ENTRIES"); ?>
+  </li>
+<?php } ?>
 
 <li class="right right_shares_pager">
   <a href="#" id="item-stream-pager-link" class="pager_load_more" data-obj='{"action":"stream/get_item_detail_stream", "callback":"ItemDetailStream.show", "case":"all", "itemid":"<?php echo $pItemId; ?>", "page":"2"}'><?php echo __('Load more...', null, 'platform'); ?></a>
