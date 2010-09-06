@@ -65,7 +65,7 @@ span.url,
 .icon_google{background: transparent url("/img/sprites/sprite_icons.png") 8px -444px no-repeat;}
 .icon_small_facebook{background: transparent url("/img/sprites/sprite_icons.png") 0 -480px no-repeat;}
 .so_share_information .icon_small_facebook{background-position: 0 -478px;}
-.icon_small_twitter{background: transparent url("/img/sprites/sprite_icons.png") 0 -511px no-repeat;}
+.icon_small_twitter{background: transparent url("/img/sprites/sprite_icons.png") 0 -510px no-repeat;}
 .so_share_information .icon_small_twitter{background-position: 0 -509px;}
 .icon_small_google{background: transparent url("/img/sprites/sprite_icons.png") 0 -542px no-repeat;}
 .so_share_information .icon_small_google{background-position: 0 -540px;}
@@ -166,10 +166,10 @@ li.item_active .whats_hot_stream_item{border: 2px solid #d7d7d7;border-right: 2p
 .thumb_all_active .thumb_up_down{background: transparent url("/img/sprites/sprite_icons.png") 18px 6px no-repeat;}
 .thumb_up{background: transparent url("/img/sprites/sprite_icons.png") 11px -569px no-repeat;}
 .thumb_up_active .thumb_up{background: transparent url("/img/sprites/sprite_icons.png") 11px -31px no-repeat;}
-#detail-stream .thumb_up{background: transparent url("/img/sprites/sprite_icons.png") 0 -33px no-repeat;}
+#detail-stream .thumb_up, .so_headline_right  .thumb_up{background: transparent url("/img/sprites/sprite_icons.png") 0 -36px no-repeat;}
 .thumb_down{background: transparent url("/img/sprites/sprite_icons.png") 11px -608px no-repeat;}
 .thumb_down_active .thumb_down{background: transparent url("/img/sprites/sprite_icons.png") 11px -69px no-repeat;}
-#detail-stream .thumb_down{background: transparent url("/img/sprites/sprite_icons.png") 0 -70px no-repeat;}
+#detail-stream .thumb_down, .so_headline_right  .thumb_down{background: transparent url("/img/sprites/sprite_icons.png") 0 -72px no-repeat;}
 
     
 /* Footer */

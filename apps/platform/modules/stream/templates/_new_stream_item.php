@@ -12,13 +12,16 @@
         <div class="green_top_left left"></div>
 	      <div class="info_area clearfix">
 	        <div class="left so_headline_left">
-	          <span class="icon_small_service icon_small_facebook left">&nbsp;</span>
-	          <?php echo link_to_yiid($pUser->getFullname(), $pUser->getUsername(), array(), array('class' => 'user_share left')); ?>
-	          <span class="url left">&nbsp;<?php echo __('via %1 %2 ago', array('%1' => $pObject->getCommunityNames(), '%2' => $pObject->getPublishingTime()), 'platform'); ?></span>
+            <?php $lActivityCids = $pActivity->getCids(); ?>
+			      <?php $lCommunityName = CommunityTable::getInstance()->retrieveByPk($lActivityCids[0])->getName(); ?>
+			      <?php $lCommunitySlug = CommunityTable::getInstance()->retrieveByPk($lActivityCids[0])->getSlug(); ?>
+			      <span class="icon_small_service icon_small_<?php echo $lCommunitySlug; ?> left" title="<?php echo __('Shared with %1', array('%1' => $lCommunityName), 'platform'); ?>">&nbsp;</span>
+	          <span class="user_share text_important left"><?php echo $pUser->getFullname(); ?></span>
+	          <span class="url left">&nbsp;<?php echo __('via %1 %2 ago', array('%1' => $lCommunityName, '%2' => $pActivity->getPublishingTime()), 'platform'); ?></span>
 	        </div>
 	        <div class="right so_headline_right">
-            <a href="#" class="icon_like icon_small_use like-dislike"><?php echo __('%1', array('%1' => $pObject->getLikeCount()), 'platform'); ?></a>
-            <a href="#" class="icon_dislike icon_small_use like-dislike"><?php echo __('%1', array('%1' => $pObject->getDislikeCount()), 'platform'); ?></a>
+            <span class="thumb_up icon_small_use like-dislike"><?php echo __('%1', array('%1' => $pObject->getLikeCount()), 'platform'); ?></span>
+            <span class="thumb_down icon_small_use like-dislike"><?php echo __('%1', array('%1' => $pObject->getDislikeCount()), 'platform'); ?></span>
 		      </div>
 	      </div>
 	    </div>

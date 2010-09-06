@@ -39,6 +39,28 @@ class YiidActivity extends BaseYiidActivity
   }
   
   /**
+   * at the moment this method returns the name of the first community
+   * 
+   * @author Christian Schätzle
+   */
+  public function getCommunityNames() {
+    $lObjectOiIds = $this->getCids();
+    $lNamesArray = array();
+    
+    /*
+    foreach($lObjectOiIds as $lId) {
+      $lOi = Doctrine::getTable('OnlineIdentity')->find($lId);
+      $lName = Doctrine::getTable('Community')->find($lOi->getCommunityId())->getName();
+      array_push($lNamesArray, $lName);
+    }
+    
+    return $lNamesArray;
+    */
+    
+    return Doctrine::getTable('Community')->find($lObjectOiIds[0])->getName();
+  }
+  
+  /**
    * This method returns the minuts/hours/day since publishing of this activity
    * 
    * @author Christian Schätzle

@@ -93,7 +93,8 @@ h1{
   #nav_shares_inner1, #nav_shares_inner2, #nav_shares_inner3, #nav_shares_inner4, #nav_shares_inner5, #nav_shares_inner6, #nav_shares_inner7, .btn, .sharing_friend{
     cursor: pointer;
   }
-li.filter_chosen a{
+li.filter_chosen a,
+.filter_chosen_icon{
   cursor: default;
 }
 .icon_small_service_right{
