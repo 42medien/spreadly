@@ -1,12 +1,12 @@
 <div id="footer" class="clearfix">
-
+  <!-- 
   <div id="language_switch">
-    <?php include_component('system', 'language_switch'); ?>
+    <?php // include_component('system', 'language_switch'); ?>
   </div>
-</div>
- <div id = "footer-entries">
+   -->
+  
   <?php foreach($pCategories as $lCategory) { ?>
-  <ul>
+  <ul class="normal_list left">
     <li><h5><?php echo $lCategory->getTitle(); ?></h5></li>
     <?php foreach($lCategory->getCms() as $lCms) { ?>
       <?php if ($lCms->getActive()) { ?>
@@ -20,6 +20,6 @@
     <?php } ?>
   </ul>
   <?php } //end foreach categories ?>
- </div>
+</div>
 
 <?php echo cdn_image_tag("/img/global/ajax-loader-bar-circle.gif", array('id' => 'general-ajax-loader')); ?>
