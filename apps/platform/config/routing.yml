@@ -89,7 +89,7 @@ widget_callback_uri:
 static:
   url:   /static/*
   param: { module: static, action: index }  
-  
+
 ##### ROUTES FOR PLUGINS #######
 
 js_log:

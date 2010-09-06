@@ -429,3 +429,13 @@ INSERT INTO `cms_translation` (`id`, `lang`, `headline`, `text`) VALUES
 (44, 'es', 'YIID-Members', ''),
 (44, 'fr', 'YIID-Members', ''),
 (44, 'tr', 'YIID-Members', '');
+
+UPDATE `cms` SET `active` =  '0' WHERE `cms`.`id` =28;
+UPDATE `cms` SET `active` =  '0' WHERE `cms`.`id` =43;
+UPDATE `cms` SET `active` =  '0' WHERE `cms`.`id` =21;
+
+UPDATE `cms` SET `link` =  '' WHERE `cms`.`id` =3;
+
+UPDATE `cms_translation` SET `text` = 'yiid ist ein Produkt der ekaabo GmbH Grundelbachstrasse 84 69469 Weinheim <a href="mailto:info@yiid.com">Kontakt</a>' WHERE `cms_translation`.`id` =3 AND `cms_translation`.`lang` =  'de';
+
+UPDATE `cms_translation` SET `text` = 'yiid is a product of ekaabo GmbH Grundelbachstrasse 84 69469 Weinheim <a href="mailto:info@yiid.com">Kontakt</a>' WHERE `cms_translation`.`id` =3 AND `cms_translation`.`lang` =  'en';
