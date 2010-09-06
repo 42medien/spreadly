@@ -186,7 +186,9 @@ var FriendStreamInputFilter = {
       jQuery(FriendStreamInputFilter.aInput).inputfilter({
         'parentid': 'friends_search_results', 
         'url':'stream/get_contacts_by_sortname',
-        'callback': FriendStreamInputFilter.cbInputfilter
+        'callback': FriendStreamInputFilter.cbInputfilter,
+        'minchar': 3,
+        'delay': 750
       });   
   },
   

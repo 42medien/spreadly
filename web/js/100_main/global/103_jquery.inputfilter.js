@@ -21,26 +21,32 @@ jQuery.fn.inputfilter = function(pParams) {
   var lCallback = lParams['callback'];
   var lMinchar = lParams['minchar'];
   var lParent = jQuery('#'+lParams['parentid']);  
-  var lFilter;
+  var lFilter, lTimeout;
+  var lDelay = (lParams['delay'] == undefined)?0:lParams['delay'];
+  debug.log(lDelay);
   
   return this.each(function(){
     jQuery(this).keyup(function() {
+      clearTimeout(lTimeout);
       lFilter = jQuery(this).val();
-      if(!lParams['minchar'] || lFilter.length > lParams['minchar']) {
-        jQuery.ajax({
-          type: "GET",
-          url: lUrl,
-          dataType: "json",
-          data: {'sortname':lFilter, 'ei_kcuf': new Date().getTime()},
-          success: function(pResponse) {
-            if(lCallback!== undefined) {
-              lCallback(pResponse);
+      debug.log(lFilter);      
+      lTimeout = setTimeout(function() {
+        if(!lParams['minchar'] || lFilter.length > lParams['minchar']) {
+          jQuery.ajax({
+            type: "GET",
+            url: lUrl,
+            dataType: "json",
+            data: {'sortname':lFilter, 'ei_kcuf': new Date().getTime()},
+            success: function(pResponse) {
+              if(lCallback!== undefined) {
+                lCallback(pResponse);
+              }
+              jQuery(lParent).empty();
+              jQuery(lParent).append(pResponse.html);
             }
-            jQuery(lParent).empty();
-            jQuery(lParent).append(pResponse.html);
-          }
-        });
-      }
+          });
+        }
+      }, lDelay);
     });
   });
 };
