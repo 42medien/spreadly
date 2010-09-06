@@ -97,7 +97,8 @@ class SocialObject extends BaseSocialObject
   public function updateObjectMasterData($pTitle = null, $pDescription = null, $pImage = null) {
     $lUpdateArray = array();
     if ($pTitle) {
-      $pTitle  = htmlspecialchars_decode(strip_tags($pTitle));
+  echo    $pTitle  = htmlspecialchars_decode(strip_tags($pTitle));
+  echo "   -   ". mb_detect_encoding($pTitle). "   -   ";
       if (mb_detect_encoding($pTitle) != 'UTF-8') {
         $pTitle = utf8_encode($pTitle);
       }
@@ -112,10 +113,6 @@ class SocialObject extends BaseSocialObject
     }
     if ($pImage) {
       $lUpdateArray['thumb_url'] = $pImage;
-    }
-
-    if (mb_detect_encoding($pDescription) != 'UTF-8') {
-      $pDescription = utf8_encode($pDescription);
     }
 
     SocialObjectTable::updateObjectInMongoDb(array("_id" => new MongoId($this->getId())),
