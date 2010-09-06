@@ -154,7 +154,7 @@ var FilterHeadline = {
     debug.log("[FilterHeadline][updateCss]");         
     FilterHeadline.resetCss();    
     jQuery('#'+pCssId).addClass('filter_headline_active');
-    jQuery('#'+pCssId+'.filter_chosen_icon').show();    
+    jQuery('#'+pCssId+' .filter_chosen_icon').show();    
   },
   
   /**
