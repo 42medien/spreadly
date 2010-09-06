@@ -133,6 +133,7 @@ var FilterHeadline = {
   reset: function() {
     debug.log("[FilterHeadline][reset]");     
     jQuery('#photo_filter_box .reset-filter').live('click', function() {
+      debug.log('hier');
       //reset the stream
       GlobalRequest.initOnClick(this, {"action":"StreamSubFilter.getAction", "callback":"Stream.show"})
       //reset the counter
@@ -223,7 +224,9 @@ var FriendStreamInputFilter = {
     jQuery('#input-friend-filter').live('click', function() {
       FilterHeadline.updateCss('active_friends_headline'); 
       FriendStreamFilter.resetCss();
-      FriendStream.reset();
+      if(jQuery('#input-friend-filter').val() == i18n.get('TYPE_NAME_TO_FILTER') || jQuery('#input-friend-filter').val() == ''){
+        FriendStream.reset();
+      }
       return true;
     });
   }
