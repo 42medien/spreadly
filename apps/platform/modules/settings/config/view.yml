@@ -1,0 +1,4 @@
+all:
+  components:
+    sidebar_left_main: [settings, sidebar_left]
+    sidebar_right_main: [settings, sidebar_right]
