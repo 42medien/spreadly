@@ -195,10 +195,15 @@ var PositionHelper = {
 var OnLoadGrafic = {
   
   showGrafic: function() {
+    var lTimeout;
     jQuery('#general-ajax-loader').css({
         top:  OnLoadGrafic.getPageScroll()[1] + (OnLoadGrafic.getPageHeight() / 4),
         left: OnLoadGrafic.getPageWidth()/2
       }).show();
+    clearTimeout(lTimeout);
+    lTimeout = setTimeout(function() {
+      OnLoadGrafic.hideGrafic();
+    }, 20000);
   },
   
   hideGrafic: function() {
