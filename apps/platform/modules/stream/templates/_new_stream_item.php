@@ -30,7 +30,9 @@
     <div class="clearfix">
       <div class="green_middle_middle">
         <p class="so_comment">
-          <?php echo ($pActivity->getScore() == 1 ? __('%1 likes on %2:', array('%1' => $pUser->getUsername(), '%2' => $pActivity->getUrl()), 'platform') : __('%1 dislikes on %2:', array('%1' => $pUser->getUsername(), '%2' => $pActivity->getUrl()), 'platform')); ?>
+          <?php echo ($pActivity->getScore() == 1 ? 
+            __('%1 <span class="text_important">likes</span> on<br/> %2<br/>', array('%1' => $pUser->getUsername(), '%2' => link_to($pActivity->getUrl(), $pActivity->getUrl(), array('class' => 'url'))), 'platform') : 
+            __('%1 <span class="text_important">dislikes</span> on<br/> %2<br/>', array('%1' => $pUser->getUsername(), '%2' => link_to($pActivity->getUrl(), $pActivity->getUrl(), array('class' => 'url'))), 'platform')); ?>
           <?php echo ($pObject->getTitle() ? $pObject->getTitle() : '').($pObject->getStmt() ? ' - '.$pObject->getStmt() : ''); ?>
         </p>
       </div>

@@ -123,7 +123,9 @@ span.url,
 li.item_active{background: #ecf6e9 url("/img/global/item_active_bg.png") right bottom no-repeat;}
 #stream_left_bottom li.item_active .so_comment{background-color: #fff;}
 .new_stream li.item_active, .new_stream li:hover, .hot_stream li:hover, .not_stream li:hover{border-color: #D7D7D7 #68BC4F #68BC4F #D7D7D7;}
-
+#new_shares #main_stream_pager:hover{
+  border: none;
+}
 .whats_hot_stream_item{border: 2px solid #e6e3e3;border-right: 2px solid #d7d7d7;border-bottom: 2px solid #d7d7d7;background: transparent url("/img/sprites/sprite_repeat_y.png") -4049px 0 repeat-y;}
 li.item_active .whats_hot_stream_item, 
 .hot_stream li:hover .whats_hot_stream_item, 

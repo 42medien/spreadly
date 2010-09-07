@@ -30,7 +30,16 @@ h5{ font-size: 1em; font-weight: bold; }
 /**
  *   @section -FontWeight
  */
-.user_name, .text_important, .whats_hot_active #main_nav_inner2 p, .whats_not_active #main_nav_inner4 p, .whats_new #main_nav_inner7 p, li.filter_chosen a, .filter_headline_active a, a.friend_filter_link_active{font-weight: bold;}
+.user_name, 
+.text_important, 
+.whats_hot_active #main_nav_inner2 p, 
+.whats_not_active #main_nav_inner4 p, 
+.whats_new_active #main_nav_inner7 p, 
+li.filter_chosen a, 
+.filter_headline_active a, 
+a.friend_filter_link_active{
+  font-weight: bold;
+}
 
 /**
  *   @section -FontStyle
@@ -41,9 +50,23 @@ h5{ font-size: 1em; font-weight: bold; }
 /**
  *   @section -TextDecoration
  */
-a:hover, .btn:hover, .whats_new_active #main_nav_inner2 p:hover, .whats_not_active #main_nav_inner2 p:hover, .whats_new_active #main_nav_inner4 p:hover, .whats_hot_active #main_nav_inner4 p:hover, 
-	.whats_hot_active #main_nav_inner7 p:hover, .whats_not_active #main_nav_inner7 p:hover, li.filter_chosen a, #footer ul li:first-child{text-decoration: underline;}
-a, a.icon_thumb, a.icon_thumbs, a.icon_thumb, a.icon_small_use, .whats_hot_info_area .url, .whats_not_info_area .url, .icon_language_select:hover{text-decoration: none;}
+a:hover, 
+.btn:hover, 
+.whats_new_active #main_nav_inner2 p:hover, 
+.whats_not_active #main_nav_inner2 p:hover, 
+.whats_new_active #main_nav_inner4 p:hover, 
+.whats_hot_active #main_nav_inner4 p:hover, 
+.whats_hot_active #main_nav_inner7 p:hover, 
+.whats_not_active #main_nav_inner7 p:hover,
+.whats_hot_info_area .url, 
+.whats_not_info_area .url,
+.new_stream .url,
+#so_information .url, 
+li.filter_chosen a, 
+#footer ul li:first-child{
+  text-decoration: underline;
+}
+a, a.icon_thumb, a.icon_thumbs, a.icon_thumb, a.icon_small_use, .icon_language_select:hover{text-decoration: none;}
 
 /**
  *   @section -TextAlignment
@@ -62,14 +85,16 @@ a, a.icon_thumb, a.icon_thumbs, a.icon_thumb, a.icon_small_use, .whats_hot_info_
  */
 .two_block_area li{line-height: 13px;}
 #so_right_view p{line-height: 1.3em;}
-#so_right_view h3{line-height: 1.4em;}
+#so_right_view h3, 
+.whats_hot_info_area p.text_important{
+  line-height: 1.4em;
+}
 .sharing_user_info p, 
 #signin_area p, 
 .so_comment, 
 #footer_content_area h1{
   line-height: 1.5em;
 }
-#so_information h5 a{line-height: 1.6em;}
 .so_headline_left, .so_headline_right{line-height: 18px;}
 #stream_right_top div, #what_is_yiid_description p{line-height: 19px;}
 #signin_via_username_form label{line-height: 25px;}
@@ -89,14 +114,27 @@ h1{
 /**
  *   @section -Cursor
  */
-#search2, #main_nav_inner1, #main_nav_inner2, #main_nav_inner3, #main_nav_inner4, #main_nav_inner5, #main_nav_inner6, #main_nav_inner7, #main_nav_inner8, .stream_item,
-  #nav_shares_inner1, #nav_shares_inner2, #nav_shares_inner3, #nav_shares_inner4, #nav_shares_inner5, #nav_shares_inner6, #nav_shares_inner7, .btn, .sharing_friend{
-    cursor: pointer;
-  }
+#search2, 
+#main_nav_inner1, #main_nav_inner2, #main_nav_inner3, #main_nav_inner4, #main_nav_inner5, #main_nav_inner6, #main_nav_inner7, #main_nav_inner8, 
+#nav_shares_inner1, #nav_shares_inner2, #nav_shares_inner3, #nav_shares_inner4, #nav_shares_inner5, #nav_shares_inner6, #nav_shares_inner7, 
+.btn, 
+.sharing_friend{
+  cursor: pointer;
+}
+
 li.filter_chosen a,
+.stream_item,
+h1, h2, h3, h4, h5, p,
 .filter_chosen_icon{
   cursor: default;
 }
+
 .icon_small_service_right{
   cursor: help;
+}
+
+.whats_hot_info_area .url, 
+.whats_not_info_area .url,
+.new_stream .url{
+  cursor: pointer;
 }
