@@ -4,7 +4,7 @@
   </div>
 
   <div id="stream_left_bottom" class="bg_light clearfix">
-    <ul id="new_shares">
+    <ul id="new_shares" class="hot_stream">
       <?php include_partial('stream/whats_hot_stream', array('pSocialObjects' => $pSocialObjects)); ?>
     </ul>
   </div>

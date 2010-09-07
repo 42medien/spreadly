@@ -40,12 +40,28 @@ var Stream = {
       DataObjectPager.update('stream_pager_link', pResponse.action, pResponse.page, MainFilter.aDataObj); 
     }    
    
+    var lCssObj = jQuery.parseJSON(pResponse.css);
     //do some css-effects
-    StreamFilter.updateCss(pResponse.css);
+    StreamFilter.updateCss(lCssObj);
+    Stream.updateCss(lCssObj);
     OnLoadGrafic.hideGrafic();
     
     //load the details of the first element on the right sidebar
     ItemDetail.loadFirst();
+	},
+	
+	updateCss: function(pCssObj) {
+    debug.log("[Stream][updateCss]");	  
+    jQuery('#new_shares').removeClass('not_stream');
+    jQuery('#new_shares').removeClass('new_stream');
+    jQuery('#new_shares').removeClass('hot_stream');
+	  if(pCssObj['class'] == 'whats_hot_active') {
+	    jQuery('#new_shares').addClass('hot_stream');
+	  } else if(pCssObj['class'] == 'whats_not_active') {
+      jQuery('#new_shares').addClass('not_stream');	    
+	  } else if(pCssObj['class'] == 'whats_new_active') {
+      jQuery('#new_shares').addClass('new_stream');	    
+	  }
 	}
 };
 
@@ -62,11 +78,11 @@ var StreamFilter = {
 	 * @param object pCssObj(JSON)
 	 */
 	updateCss: function(pCssObj) {
+    debug.log("[StreamFilter][updateCss]");     
 		if(pCssObj) {
 			//get the css class and id that you wanna change
-	    var lCssObj = jQuery.parseJSON(pCssObj);
-	    var lCssId = lCssObj['id'];
-	    var lCssClass = lCssObj['class'];
+	    var lCssId = pCssObj['id'];
+	    var lCssClass = pCssObj['class'];
 	    //if you wanna update the main-nav
 	    if(lCssId == 'main_nav_outer'){
 	    	//remove the current highlighting
