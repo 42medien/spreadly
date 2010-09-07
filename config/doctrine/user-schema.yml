@@ -94,8 +94,7 @@ UserAvatar:
     imported_identifier:
       type:    string(255)  #gravatar email or url to service
     imported_community:
-      type: string(50)
-      default: ''
+      type:       integer
     imported_type:
       type: integer
       size: 4

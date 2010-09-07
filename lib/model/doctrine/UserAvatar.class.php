@@ -22,7 +22,39 @@ class UserAvatar extends BaseUserAvatar
    */
   public function postSave($pEvent) {
     $this->getUser()->setDefaultAvatar($this->getAvatar());
+    $this->getUser()->save();
   }
 
 
+  /**
+   * @todo phpdoc
+   */
+  public function generateAvatarThumbnails() {
+    $lSizes = sfConfig::get('app_image_sizes_avatar');
+    $lBasepath = sfConfig::get('sf_upload_dir') . DIRECTORY_SEPARATOR . 'avatars';
+
+    foreach ($lSizes as $lSize) {
+      $this->generateThumbnail($lSize, $lBasepath);
+    }
+  }
+
+  /**
+   * generates a thumbnail for a given size and path
+   *
+   * @param string $pSize i.e. 40x40
+   * @param string $pBasepath
+   */
+  public function generateThumbnail($pSize, $pBasepath) {
+    $lOriginalImage = FilesystemHelper::generateSystemPath($this->getAvatar(), $pBasepath . DIRECTORY_SEPARATOR . 'original');
+
+    $lFormat = explode('x',$pSize);
+
+    $lImg = new sfImage($lOriginalImage, 'image/jpg', 'GD');
+    $lImg->getMIMEType();
+    $lImg->setQuality(100);
+    $lImg->resize($lFormat[0],$lFormat[1]);
+
+    $path = FilesystemHelper::generateSystemPath($this->getAvatar(), $pBasepath.DIRECTORY_SEPARATOR.$pSize);
+    $lImg->saveAs($path, 'image/jpeg');
+  }
 }

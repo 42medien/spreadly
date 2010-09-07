@@ -94,6 +94,8 @@ class UrlUtils {
       curl_setopt_array($lCh, $lOpts);
       curl_setopt($lCh, CURLOPT_SSL_VERIFYPEER, false);
       curl_setopt($lCh, CURLOPT_SSL_VERIFYHOST, 2);
+      curl_setopt($lCh, CURLOPT_FOLLOWLOCATION, true);
+
 
       if ($pHttpMethod == self::HTTP_POST) {
         curl_setopt($lCh, CURLOPT_POST, 1);
@@ -107,6 +109,7 @@ class UrlUtils {
 
       $lContent = curl_exec( $lCh );
       $lStatus  = curl_getinfo( $lCh, CURLINFO_HTTP_CODE );
+
       curl_close( $lCh );
 
       if ($lStatus < 400) {

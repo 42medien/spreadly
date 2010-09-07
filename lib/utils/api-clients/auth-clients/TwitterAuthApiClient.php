@@ -192,7 +192,6 @@ class TwitterAuthApiClient extends AuthApi {
   public function completeUser(&$pUser, $pObject) {
     $pUser->setUsername(UserUtils::getUniqueUsername(StringUtils::normalizeUsername($pObject->screen_name)));
     $pUser->setDescription($pObject->description);
-
     // try to split full-name
     $lName = MicroformatsTools::splitFN($pObject->name);
     if (array_key_exists("firstname", $lName)) {
@@ -204,10 +203,13 @@ class TwitterAuthApiClient extends AuthApi {
 
     // add url as online identity
     if ($pObject->url) {
-      $pUser->addOnlineIdentity($pObject->url);
+      $lOnlineIdentity = $pUser->addOnlineIdentity($pObject->url);
     }
 
     $pUser->save();
+
+    $lImgPath = "http://api.twitter.com/1/users/profile_image/".$pObject->screen_name."?size=bigger";
+    ImageImporter::importByUrlAndUserId($lImgPath, $pUser->getId(), $lOnlineIdentity);
   }
 
   /**

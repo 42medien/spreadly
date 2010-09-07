@@ -173,17 +173,20 @@ class FacebookAuthApiClient extends AuthApi {
    */
   public function completeUser(&$pUser, $pObject) {
     $pUser->setUsername(UserUtils::getUniqueUsername(StringUtils::normalizeUsername($pObject->name)));
-    $pUser->setDescription($pObject->about);
+    $pUser->setDescription($pObject->bio);
 
     $pUser->setFirstname($pObject->first_name);
     $pUser->setFirstname($pObject->last_name);
 
     // add url as online identity
     if ($pObject->website) {
-      $pUser->addOnlineIdentity($pObject->website);
+      $lOnlineIdentity = $pUser->addOnlineIdentity($pObject->website);
     }
 
     $pUser->save();
+
+    $lImgPath = "https://graph.facebook.com/".$pObject->id."/picture&type=large";
+    ImageImporter::importByUrlAndUserId($lImgPath, $pUser->getId(), $lOnlineIdentity);
   }
 
   /**

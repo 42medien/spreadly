@@ -9,7 +9,8 @@ class ProjectConfiguration extends sfProjectConfiguration {
     $this->enablePlugins(array(
       'sfDoctrinePlugin',
       'yiidPlugin',
-      'sfFormExtraPlugin'
+      'sfFormExtraPlugin',
+      'sfImageTransformPlugin'
     ));
 
   }
