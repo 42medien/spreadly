@@ -1,4 +1,4 @@
-<div id="signin_area">
+<div id="signin_area" class="single_box_with_shadow">
   <div id="signin_via_services">
     <h3><?php echo __('Thanks, you\'ve successfully registered!', null, "platform"); ?></h3>
     <p>
