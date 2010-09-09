@@ -31,8 +31,8 @@ OnlineIdentity:
     auth_identity_type:
       type:     integer(4)
     social_publishing_enabled:
-      type:       boolean
-      default:    false
+      type:       integer(4)
+      default:    0
   relations:
     Community: { onDelete: CASCADE, local: community_id, foreign: id, foreignAlias: OnlineIdentitys }
     User:      { onDelete: SET NULL, local: user_id, foreign: id, foreignAlias: OnlineIdentitys }

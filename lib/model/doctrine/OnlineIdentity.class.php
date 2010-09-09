@@ -13,6 +13,7 @@
 class OnlineIdentity extends BaseOnlineIdentity
 {
 
+  protected $aPostApiClient = null;
   /**
    * return User Objects who have added this OI
    */
@@ -59,7 +60,7 @@ class OnlineIdentity extends BaseOnlineIdentity
    * @return int
    */
   public function sendStatusMessage($pUrl, $pType, $pScore, $pTitle, $pDescription, $pPhoto) {
-    $this->aPostApiClient = PostApiFactory::factory($this->getCommunityId());
+    $this->aPostApiClient = PostApiFactory::factory($this->getCommunity()->getName());
 
     if ($this->aPostApiClient) {
       $lStatus = $this->aPostApiClient->doPost($this, $pUrl, $pType, $pScore, $pTitle, $pDescription, $pPhoto);
@@ -70,5 +71,12 @@ class OnlineIdentity extends BaseOnlineIdentity
       } catch (Exception $e) {}
     }
   }
+
+  public function getOAuthToken(){
+
+
+  }
+
+
 
 }

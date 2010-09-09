@@ -86,10 +86,11 @@ class popupActions extends sfActions {
 
   public function executeSettings(sfWebRequest $request) {
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('popup/js_popup_ready'));
-
+      //var_dump($request);die();
     $lUser = $this->getUser()->getUser();
     if($request->getMethod() == sfRequest::POST) {
       $checkedOnlineIdentities = $request->getParameter('enabled_services');
+      var_dump($checkedOnlineIdentities);die();
       OnlineIdentityPeer::toggleSocialPublishingStatus(UserIdentityConPeer::getOnlineIdentityIdsByUserId($this->getUser()->getId()), $checkedOnlineIdentities);
 
       $lTempData = YiidActivityPeer::getTemporaryData($_COOKIE["yiid_temp_hash"]);
@@ -111,7 +112,9 @@ class popupActions extends sfActions {
 
      $this->getUser()->setFlash("onload", "window.close();", false);
     }
-    $this->pIdentities = $lUser->getOnlineIdentitiesForLikeWidget();
+    //$this->pOnlineIdenities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
+    $this->pIdentities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
+    //var_dump($this->pIdentities);die();
 
     CookieUtils::generateWidgetIdentityCookie($this->pIdentities);
     sfProjectConfiguration::getActive()->loadHelpers('I18N');

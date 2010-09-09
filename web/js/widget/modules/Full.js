@@ -557,6 +557,9 @@ var YiidCookie = {
   }
 };
 
+/**
+ * handles the servicesettings
+ */
 YiidServices = {
   //global array with the service-settings
   aSettings: [],
@@ -572,6 +575,7 @@ YiidServices = {
     if(lCookie != null) {
       YiidServices.aSettings = json_parse(lCookie);
     }
+    console.log(lCookie);
     
     var lTimestamp = YiidCookie.getCookie(YiidCookie.aTimecheck);
     if(lTimestamp != null) {

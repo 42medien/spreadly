@@ -156,8 +156,7 @@ class YiidActivityObjectPeer {
   public static function actionOnObjectByUser($pSocialObjectId, $pUserId) {
     $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
     $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, self::MONGO_COLLECTION);
-
-    $lObject = $pCollectionObject->findOne(array("so_id" => (string)$pSocialObjectId, "u_id" => $pUserId ));
+    $lObject = $pCollectionObject->findOne(array("so_id" => $pSocialObjectId, "u_id" => $pUserId ));
     return $lObject?$lObject['score']:false;
   }
 }

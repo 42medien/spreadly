@@ -49,7 +49,7 @@ class YiidActivityTable extends Doctrine_Table
                                             $pUrl,
                                             $pOwnedOnlineIdentitys = array(),
                                             $pGivenOnlineIdentitys = array(),
-                                            $pScore = self::ACTIVITY_TYPE_LIKE,
+                                            $pScore = self::ACTIVITY_VOTE_POSITIVE,
                                             $pVerb = 'like',
                                             $pTitle = null,
                                             $pDescription = null,
@@ -110,8 +110,8 @@ class YiidActivityTable extends Doctrine_Table
 
         $senderOi = OnlineIdentityTable::getInstance()->find($lIdentityId);
         $lServices[] = $senderOi->getCommunityId();
-        //   $lStatus = $senderOi->sendStatusMessage($pUrl, $pVerb, $pScore, utf8_decode($pTitle), utf8_decode($pDescription), $pPhoto);
-        sfContext::getInstance()->getLogger()->debug("{YiidActivityPeer}{saveLikeActivitys} Status Message: " . print_r($lStatus, true));
+        //$lStatus = $senderOi->sendStatusMessage($pUrl, $pVerb, $pScore, utf8_decode($pTitle), utf8_decode($pDescription), $pPhoto);
+        sfContext::getInstance()->getLogger()->debug("{YiidActivityPeer}{saveLikeActivitys} Status Message: " . print_r($lVerifiedOnlineIdentityIds, true));
       }
       else {
       }
@@ -132,7 +132,7 @@ class YiidActivityTable extends Doctrine_Table
   $pUrl,
   $pOwnedOnlineIdentitys = array(),
   $pGivenOnlineIdentitys = array(),
-  $pScore = self::ACTIVITY_TYPE_LIKE,
+  $pScore = self::ACTIVITY_VOTE_POSITIVE,
   $pVerb = 'like',
   $pTitle = null,
   $pDescription = null,

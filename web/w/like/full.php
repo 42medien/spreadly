@@ -1,6 +1,5 @@
 <?php
 require_once('inc/config.inc.php');
-
 session_name("yiid_widget");
 session_set_cookie_params(time()+17776000, "/", LikeSettings::COOKIE_DOMAIN);
 session_start();
@@ -36,8 +35,8 @@ $pUserId = MongoSessionPeer::extractUserIdFromSession(LikeSettings::SF_SESSION_C
 $lSocialObjectArray = SocialObjectPeer::getDataForUrl($pUrl);
 $lIsUsed = YiidActivityObjectPeer::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId);
 $lSocialObjectArray = SocialObjectPeer::recalculateCountsRespectingUser($lSocialObjectArray, $lIsUsed);
-$lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
-
+//$lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
+$lPopupUrl = "http://widgets.yiid.local/widget_dev.php/popup/settings?ei_kcuf=1284022601";
 
 // track visit
 YiidStatsSingleton::trackVisit($pUrl, $pUserId, $pType, $_GET['cult'], 'full');

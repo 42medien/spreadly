@@ -73,17 +73,21 @@ class authActions extends sfActions {
     // to add a new online-identity
     if ($this->getUser()->isAuthenticated() && $this->getUser()->getUserId()) {
       $lObject->addIdentifier($this->getUser()->getUser(), $lToken);
+
     } else {
       $lUser = $lObject->doSignin($this->getUser(), $lToken);
       $this->getUser()->signIn($lUser);
       //UserRelationTable::doShit($lUser->getId());
     }
+    $this->pOnlineIdenities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
+    CookieUtils::generateWidgetIdentityCookie($this->pOnlineIdenities);
 
     $this->redirect('@auth_add_services');
   }
 
   public function executeRegistered(sfWebRequest $request) {
     $this->pOnlineIdenities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
+    CookieUtils::generateWidgetIdentityCookie($this->pOnlineIdenities);
   }
 
   public function executeAdd_service(sfWebRequest $request) {

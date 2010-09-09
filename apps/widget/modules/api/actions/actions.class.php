@@ -56,15 +56,15 @@ class apiActions extends sfActions {
    */
   public function executeLike(sfWebRequest $request) {
 
-   // $this->setLayout(false);
-   // $this->setTemplate(false);
-   // $this->getResponse()->setContentType('application/json');
+    $this->setLayout(false);
+    $this->setTemplate(false);
+    $this->getResponse()->setContentType('application/json');
     if ($this->status == 200) {
-      $this->success = YiidActivityPeer::saveLikeActivitys($this->getUser()->getId(),
+      $this->success = YiidActivityTable::saveLikeActivitys($this->getUser()->getId(),
                                                            $this->lUrl,
                                                            $this->lIdentitysOwnedByUser,
                                                            $this->lIdentitysSent,
-                                                           YiidActivityPeer::ACTIVITY_TYPE_LIKE,
+                                                           YiidActivityTable::ACTIVITY_VOTE_POSITIVE,
                                                            $this->lType,
                                                            $this->lTitle,
                                                            $this->lDescription,
@@ -73,17 +73,17 @@ class apiActions extends sfActions {
 
       $lSessId = CookieUtils::getSessionId();
         setcookie("yiid_temp_hash", $lSessId, time()+300, '/', sfConfig::get('app_settings_host'));
-        $this->success = YiidActivityPeer::storeTemporary($lSessId,
+        $this->success = YiidActivityTable::storeTemporary($lSessId,
                                                            $this->lUrl,
                                                            $this->lIdentitysOwnedByUser,
                                                            $this->lIdentitysSent,
-                                                           YiidActivityPeer::ACTIVITY_TYPE_LIKE,
+                                                           YiidActivityTable::ACTIVITY_VOTE_POSITIVE,
                                                            $this->lType,
                                                            $this->lTitle,
                                                            $this->lDescription,
                                                            $this->lPhoto);
     }
-  //  return  $this->sendJsonResponse();
+    return  $this->sendJsonResponse();
   }
 
   /**
@@ -98,11 +98,11 @@ class apiActions extends sfActions {
     $this->setTemplate(false);
     $this->getResponse()->setContentType('application/json');
     if ($this->status == 200) {
-      $this->success = YiidActivityPeer::saveLikeActivitys($this->getUser()->getId(),
+      $this->success = YiidActivityTable::saveLikeActivitys($this->getUser()->getId(),
                                                            $this->lUrl,
                                                            $this->lIdentitysOwnedByUser,
                                                            $this->lIdentitysSent,
-                                                           YiidActivityPeer::ACTIVITY_TYPE_DISLIKE,
+                                                           YiidActivityTable::ACTIVITY_VOTE_NEGATIVE,
                                                            $this->lType,
                                                            $this->lTitle,
                                                            $this->lDescription,
@@ -110,11 +110,11 @@ class apiActions extends sfActions {
     } elseif ($this->status == 401) {
       $lSessId = CookieUtils::getSessionId();
       setcookie("yiid_temp_hash",$lSessId , time()+300, '/', sfConfig::get('app_settings_host'));
-      $this->success = YiidActivityPeer::storeTemporary($lSessId,
+      $this->success = YiidActivityTable::storeTemporary($lSessId,
                                                          $this->lUrl,
                                                          $this->lIdentitysOwnedByUser,
                                                          $this->lIdentitysSent,
-                                                         YiidActivityPeer::ACTIVITY_TYPE_DISLIKE,
+                                                         YiidActivityTable::ACTIVITY_VOTE_NEGATIVE,
                                                          $this->lType,
                                                          $this->lTitle,
                                                          $this->lDescription,

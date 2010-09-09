@@ -30,7 +30,7 @@ class SocialObject extends BaseSocialObject
     }
     $this->setUpdatedOn(time());
     $lObjectToSave = $this->toArray(false);
-    $lObjectToSave = SocialObjectParser::saveToArray($lObjectToSave);
+    //$lObjectToSave = SocialObjectParser::saveToArray($lObjectToSave);
     $lObjectToSave = SocialObjectTable::saveObjectToMongoDb($lObjectToSave);
     $this->setId($lObjectToSave['_id']); // cast mongoID to string
     if ($lObjectToSave) {

@@ -12,24 +12,29 @@ class SocialObjectParser {
    * @param string $pUrl
    */
   public static function fetch($pUrl) {
-  	$lHtml = UrlUtils::getUrlContent($pUrl, 'GET');
 
-    $lOpenGraph = OpenGraph::parse($lHtml);
-    $lToSave = array();
+  	try {
+	  	$lHtml = UrlUtils::getUrlContent($pUrl, 'GET');
 
-    if($lOpenGraph) {
-      $lKeys["title"] = $lOpenGraph->__get('title');
-      $lKeys["image"] = $lOpenGraph->__get('image');
-      $lKeys["description"] = $lOpenGraph->__get('description');
-    } else {
-      $lKeys = MetaTagParser::getKeys($lHtml);
-      $lKeys['image'] = null;
-    }
+	    $lOpenGraph = OpenGraph::parse($lHtml);
+	    $lToSave = array();
 
-    $lToSave['title'] = $lKeys["title"];
-    $lToSave['image'] = $lKeys["image"];
-    $lToSave['description'] = $lKeys["description"];
-    return $lToSave;
+	    if($lOpenGraph) {
+	      $lKeys["title"] = $lOpenGraph->__get('title');
+	      $lKeys["image"] = $lOpenGraph->__get('image');
+	      $lKeys["description"] = $lOpenGraph->__get('description');
+	    } else {
+	      $lKeys = MetaTagParser::getKeys($lHtml);
+	      $lKeys['image'] = null;
+	    }
+
+	    $lToSave['title'] = ($lKeys["title"])?$lKeys["title"]:'';
+	    $lToSave['image'] = $lKeys["image"];
+	    $lToSave['description'] = ($lKeys["description"])?$lKeys["description"]:'';
+	    return $lToSave;
+  	}catch (Exception $e) {
+
+  	}
   }
 
   public static function saveToArray($pArray) {
