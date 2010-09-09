@@ -166,7 +166,6 @@ class ImageImporter {
 	     }
   	} catch (Exception $e) {
       sfContext::getInstance()->getLogger()->err("{ImageImporter} Exception: ".print_r($e, true));
-      return null;
     }
   }
 }

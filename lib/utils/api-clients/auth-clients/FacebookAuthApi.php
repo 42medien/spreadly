@@ -73,6 +73,9 @@ class FacebookAuthApiClient extends AuthApi {
 
     AuthTokenTable::saveToken($lUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['access_token'], null, true);  // signup,add new
 
+    //FacebookImportClient::importContacts($lUser->getId(), $lOnlineIdentity);
+    $lImgPath = "https://graph.facebook.com/".$lJsonObject->id."/picture&type=large";
+    ImageImporter::importByUrlAndUserId($lImgPath, $lUser->getId(), $lOnlineIdentity);
     return $lUser;
   }
 
@@ -184,9 +187,6 @@ class FacebookAuthApiClient extends AuthApi {
     }
 
     $pUser->save();
-
-    $lImgPath = "https://graph.facebook.com/".$pObject->id."/picture&type=large";
-    ImageImporter::importByUrlAndUserId($lImgPath, $pUser->getId(), $lOnlineIdentity);
   }
 
   /**

@@ -76,6 +76,10 @@ class TwitterAuthApiClient extends AuthApi {
 
     AuthTokenTable::saveToken($lUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], true);
 
+    //TwitterImportClient::importContacts($lUser->getId(), $lOnlineIdentity);
+    $lImgPath = "http://api.twitter.com/1/users/profile_image/".$lParamsArray['screen_name']."?size=bigger";
+    ImageImporter::importByUrlAndUserId($lImgPath, $lUser->getId(), $lOnlineIdentity);
+
     return $lUser;
   }
 
@@ -138,7 +142,6 @@ class TwitterAuthApiClient extends AuthApi {
     // </todo>
 
     AuthTokenTable::saveToken($pUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], true);
-
     return $lOnlineIdentity;
   }
 
@@ -207,9 +210,6 @@ class TwitterAuthApiClient extends AuthApi {
     }
 
     $pUser->save();
-
-    $lImgPath = "http://api.twitter.com/1/users/profile_image/".$pObject->screen_name."?size=bigger";
-    ImageImporter::importByUrlAndUserId($lImgPath, $pUser->getId(), $lOnlineIdentity);
   }
 
   /**

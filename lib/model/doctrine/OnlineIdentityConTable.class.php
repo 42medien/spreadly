@@ -20,7 +20,7 @@ class OnlineIdentityConTable extends Doctrine_Table {
    */
   public static function createNew($pFirstIdentityId, $pSecondIdentityId) {
     $lOIFrom = OnlineIdentityTable::getInstance()->retrieveByPK($pFirstIdentityId);
-    $lOITo = OnlineIdentityPeer::getInstance()->retrieveByPK($pSecondIdentityId);
+    $lOITo = OnlineIdentityTable::getInstance()->retrieveByPK($pSecondIdentityId);
 
     // validation
     if (($lOIFrom == null) || ($lOITo == null)) {
@@ -57,5 +57,24 @@ class OnlineIdentityConTable extends Doctrine_Table {
     $lUiCons = $q->execute(array(),  Doctrine_Core::HYDRATE_NONE);
     $q->free();
     return HydrationUtils::flattenArray($lUiCons);
+  }
+
+  /**
+   * checks if a connection between two OIs already exists
+   *
+   * @param int $pFirstIdentityId
+   * @param int $pSecondIdentityId
+   *
+   * @return OnlineIdentityCon|false
+   */
+  public static function isOiCon($pFirstIdentityId, $pSecondIdentityId) {
+    $lQuery = Doctrine_Query::create()
+    ->from('OnlineIdentityCon oicon')
+    ->where('oicon.from_id = ?', $pFirstIdentityId)
+    ->andWhereIn('oicon.to_id', $pSecondIdentityId);
+    $lOiCon = $lQuery->fetchOne();
+
+    return $lOiCon?$lOiCon:false;
+
   }
 }
