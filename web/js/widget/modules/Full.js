@@ -575,8 +575,6 @@ YiidServices = {
     if(lCookie != null) {
       YiidServices.aSettings = json_parse(lCookie);
     }
-    console.log(lCookie);
-    
     var lTimestamp = YiidCookie.getCookie(YiidCookie.aTimecheck);
     if(lTimestamp != null) {
     	YiidServices.aTimecheck = lTimestamp;
