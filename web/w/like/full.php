@@ -39,7 +39,7 @@ $lSocialObjectArray = SocialObjectPeer::recalculateCountsRespectingUser($lSocial
 $lPopupUrl = "http://widgets.yiid.local/widget_dev.php/popup/settings?ei_kcuf=1284022601";
 
 // track visit
-YiidStatsSingleton::trackVisit($pUrl, $pUserId, $pType, $_GET['cult'], 'full');
+YiidStatsSingleton::track($pUrl);
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

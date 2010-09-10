@@ -1,9 +1,38 @@
 <?php
 class YiidStatsSingleton {
 
-
+  // old schema, split into 2 colelctions
   const MONGO_COLLECTION_NAME_VISITS = 'visits';
   const MONGO_COLLECTION_NAME_CLICKS = 'clicks';
+
+  // new schema
+  const MONGO_COLLECTION_NAME_VISIT = 'visit';
+  const TYPE_LIKE = 'likes';
+  const TYPE_DISLIKE = 'dislikes';
+
+
+  public static function track($pUrl, $pLikeType = null) {
+    $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
+    $lCollection = $lMongo->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, self::MONGO_COLLECTION_NAME_VISIT);
+
+    $pUrl = urldecode($pUrl);
+    $lQueryArray = array();
+    $lQueryArray['host'] = parse_url($pUrl, PHP_URL_HOST);
+    $lQueryArray['month'] = date('Y-m');
+
+    $lUpdateArray = array( '$inc' => array('stats.day_'.date('d').'.hits' => 1));
+    if ($pLikeType) {
+      $lUpdateArray = array( '$inc' => array('stats.day_'.date('d').'.hits' => 1, 'stats.day_'.date('d').'.'.$pLikeType => 1));
+    }
+
+    $lCollection->update($lQueryArray, $lUpdateArray, array('upsert' => true));
+  }
+
+
+
+
+
+
 
 
   /**
