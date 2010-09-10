@@ -38,7 +38,7 @@ $lIsUsed = YiidActivityObjectPeer::actionOnObjectByUser($lSocialObjectArray['_id
 $lSocialObjectArray = SocialObjectPeer::recalculateCountsRespectingUser($lSocialObjectArray, $lIsUsed);
 
 // track visit
-YiidStatsSingleton::track($pUrl);
+YiidStatsSingleton::trackVisit($pUrl);
 
 $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
 
