@@ -34,7 +34,7 @@ class YiidStatsSingleton {
 
   /**
    *
-   * tracks a visit on given url, adds a count for $pLikeType
+   * tracks a count for given $pLikeType
    *
    * @param string $pUrl Full Request URI (http://example.com/page)
    * @param string $pLikeType see TYPE_* Constants in this class
@@ -49,8 +49,8 @@ class YiidStatsSingleton {
     $lQueryArray['month'] = date('Y-m');
 
     if ($pLikeType) {
-      // increases the hits counter by 1 & increases likes/dislikes count
-      $lUpdateArray = array( '$inc' => array('stats.day_'.date('d').'.hits' => 1, 'stats.day_'.date('d').'.'.$pLikeType => 1));
+      // increases the likes/dislikes count
+      $lUpdateArray = array( '$inc' => array('stats.day_'.date('d').'.'.$pLikeType => 1));
     }
 
     $lCollection->update($lQueryArray, $lUpdateArray, array('upsert' => true));
