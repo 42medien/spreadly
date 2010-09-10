@@ -18,9 +18,10 @@ class FacebookPostApiClient implements PostApiInterface {
    * @return int status code
    */
   public function doPost(OnlineIdentity $pOnlineIdentity, $pUrl, $pType, $pScore, $pTitle, $pDescription, $pPhoto) {
-    $lOAuth = $pOnlineIdentity->getOAuthToken();
+  	$lToken = AuthTokenTable::getByUserAndOnlineIdentity($pOnlineIdentity->getUserId(), $pOnlineIdentity->getId());
     $lStatusMessage = PostApiUtils::generateMessage($pType, $pScore, $pTitle);
-    $lPostBody = "access_token=".$lOAuth->getTokenKey()."&message=".$lStatusMessage;
+
+    $lPostBody = "access_token=".$lToken->getTokenKey()."&message=".$lStatusMessage;
 
     if ($pDescription && $pDescription != '') {
       $lPostBody .= "&description=".$pDescription;

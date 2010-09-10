@@ -61,7 +61,6 @@ class OnlineIdentity extends BaseOnlineIdentity
    */
   public function sendStatusMessage($pUrl, $pType, $pScore, $pTitle, $pDescription, $pPhoto) {
     $this->aPostApiClient = PostApiFactory::factory($this->getCommunity()->getName());
-
     if ($this->aPostApiClient) {
       $lStatus = $this->aPostApiClient->doPost($this, $pUrl, $pType, $pScore, $pTitle, $pDescription, $pPhoto);
       return $lStatus;

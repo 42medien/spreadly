@@ -12,10 +12,8 @@ class SocialObjectParser {
    * @param string $pUrl
    */
   public static function fetch($pUrl) {
-
   	try {
 	  	$lHtml = UrlUtils::getUrlContent($pUrl, 'GET');
-
 	    $lOpenGraph = OpenGraph::parse($lHtml);
 	    $lToSave = array();
 
@@ -25,12 +23,13 @@ class SocialObjectParser {
 	      $lKeys["description"] = $lOpenGraph->__get('description');
 	    } else {
 	      $lKeys = MetaTagParser::getKeys($lHtml);
+	      $lKeys['title'] = (isset($lKeys['title']))?$lKeys['title']:null;
+	      $lKeys['description'] = (isset($lKeys['description']))?$lKeys['description']:null;
 	      $lKeys['image'] = null;
 	    }
-
 	    $lToSave['title'] = ($lKeys["title"])?$lKeys["title"]:'';
-	    $lToSave['image'] = $lKeys["image"];
-	    $lToSave['description'] = ($lKeys["description"])?$lKeys["description"]:'';
+	    $lToSave['thumb_url'] = $lKeys["image"];
+	    $lToSave['stmt'] = ($lKeys["description"])?$lKeys["description"]:'';
 	    return $lToSave;
   	}catch (Exception $e) {
 
@@ -39,14 +38,14 @@ class SocialObjectParser {
 
   public static function saveToArray($pArray) {
   	$lMeta = self::fetch($pArray['url']);
-  	if(!$pArray['description'] || $pArray['description'] == null) {
-  	 $pArray['description'] = $lMeta['description'];
+  	if(!$pArray['stmt'] || $pArray['stmt'] == null) {
+  	 $pArray['stmt'] = $lMeta['stmt'];
   	}
     if(!$pArray['title'] || $pArray['title'] == null) {
      $pArray['title'] = $lMeta['title'];
     }
-    if(!$pArray['image'] || $pArray['image'] == null) {
-     $pArray['image'] = $lMeta['image'];
+    if(!$pArray['thumb_url'] || $pArray['thumb_url'] == null) {
+     $pArray['thumb_url'] = $lMeta['thumb_url'];
     }
     return $pArray;
   }

@@ -14,8 +14,10 @@ class MetaTagParser {
   public static function parse($pHtml) {
   	try {
 	    $lValues = array();
+	    libxml_use_internal_errors(true);
 	    $lDoc = new DOMDocument();
 	    $lDoc->loadHTML($pHtml);
+
 	    $lTags = $lDoc->getElementsByTagName('meta');
 	    foreach ($lTags as $lTag) {
 	      if ($lTag->hasAttribute('name')) {
@@ -34,7 +36,7 @@ class MetaTagParser {
 	    }
 	    return $lValues;
   	}catch (Exception $e) {
-
+      continue;
   	}
   }
 

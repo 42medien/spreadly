@@ -75,6 +75,8 @@ class YiidActivityTable extends Doctrine_Table
 
     $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
     $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
+
+
     if (!$lSocialObject) {
       // check redirects for link shortenes
       $pLongUrl = UrlUtils::shortUrlExpander($pUrl);
@@ -110,7 +112,7 @@ class YiidActivityTable extends Doctrine_Table
 
         $senderOi = OnlineIdentityTable::getInstance()->find($lIdentityId);
         $lServices[] = $senderOi->getCommunityId();
-        //$lStatus = $senderOi->sendStatusMessage($pUrl, $pVerb, $pScore, utf8_decode($pTitle), utf8_decode($pDescription), $pPhoto);
+        $lStatus = $senderOi->sendStatusMessage($pUrl, $pVerb, $pScore, utf8_decode($pTitle), utf8_decode($pDescription), $pPhoto);
         sfContext::getInstance()->getLogger()->debug("{YiidActivityPeer}{saveLikeActivitys} Status Message: " . print_r($lVerifiedOnlineIdentityIds, true));
       }
       else {
