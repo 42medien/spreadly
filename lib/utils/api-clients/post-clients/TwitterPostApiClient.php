@@ -19,17 +19,20 @@ class TwitterPostApiClient implements PostApiInterface {
   public function doPost(OnlineIdentity $pOnlineIdentity, $pUrl, $pType, $pScore, $pTitle, $pDescription, $pPhoto) {
     $lMaxChars = 135;
 
-    $lOAuth = $pOnlineIdentity->getOAuthToken();
-    $lOAuth = $lOAuth->convert();
-    $lUrl  = ' - '.ShortUrlPeer::shortenUrl($pUrl);
+    //$lOAuth = $pOnlineIdentity->getOAuthToken();
+    //$lOAuth = $lOAuth->convert();
+
+    $lUrl  = ' - '.ShortUrlTable::shortenUrl($pUrl);
     $lengthOfUrl = strlen($lUrl);
 
     $lStatusMessage = PostApiUtils::generateMessage($pType, $pScore, $pTitle, null, $lMaxChars-$lengthOfUrl);
     $lStatusMessage .= $lUrl;
 
     $lPostBody = array("status" => $lStatusMessage);
-    $lOAuthConsumer = new OAuthConsumer(sfConfig::get("app_twitter_oauth_token"), sfConfig::get("app_twitter_oauth_secret"));
-    $lStatus = OAuthClient::post($lOAuthConsumer, $lOAuth->key, $lOAuth->secret, "http://api.twitter.com/1/statuses/update.xml", $lPostBody);
+
+    $lToken = AuthTokenTable::getByUserAndOnlineIdentity($pOnlineIdentity->getUserId(), $pOnlineIdentity->getId());
+    $lConsumer = new OAuthConsumer(sfConfig::get("app_twitter_oauth_token"), sfConfig::get("app_twitter_oauth_secret"));
+    $lStatus = OAuthClient::post($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "http://api.twitter.com/1/statuses/update.xml", $lPostBody);
 
     return $lStatus;
   }
