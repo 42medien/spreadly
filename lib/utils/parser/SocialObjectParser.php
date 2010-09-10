@@ -7,35 +7,43 @@
 class SocialObjectParser {
 
   /**
-   * Enter description here...
+   * handles the parsing of a new social-object
+   * currently parsed: opengraph and metatags
    *
    * @param string $pUrl
+   * @return array $pArray
    */
   public static function fetch($pUrl) {
   	try {
+  		//get the html as string
 	  	$lHtml = UrlUtils::getUrlContent($pUrl, 'GET');
+	  	//get the opengraph-tags
 	    $lOpenGraph = OpenGraph::parse($lHtml);
 	    $lToSave = array();
 
+	    //if there are some og-metas: save it to an array
 	    if($lOpenGraph) {
-	      $lKeys["title"] = $lOpenGraph->__get('title');
-	      $lKeys["image"] = $lOpenGraph->__get('image');
-	      $lKeys["description"] = $lOpenGraph->__get('description');
+	      $lToSave['title'] = $lOpenGraph->__get('title');
+	      $lToSave['thumb_url'] = $lOpenGraph->__get('image');
+	      $lToSave['stmt'] = $lOpenGraph->__get('description');
 	    } else {
+	    	//if there are no og-metas, check if there are some html-metas and get it
 	      $lKeys = MetaTagParser::getKeys($lHtml);
-	      $lKeys['title'] = (isset($lKeys['title']))?$lKeys['title']:null;
-	      $lKeys['description'] = (isset($lKeys['description']))?$lKeys['description']:null;
-	      $lKeys['image'] = null;
+	      $lToSave['title'] = (isset($lKeys['title']))?$lKeys['title']:null;
+	      $lToSave['stmt'] = (isset($lKeys['description']))?$lKeys['description']:null;
+	      $lToSave['thumb_url'] = null;
 	    }
-	    $lToSave['title'] = ($lKeys["title"])?$lKeys["title"]:'';
-	    $lToSave['thumb_url'] = $lKeys["image"];
-	    $lToSave['stmt'] = ($lKeys["description"])?$lKeys["description"]:'';
 	    return $lToSave;
   	}catch (Exception $e) {
 
   	}
   }
 
+  /**
+   * saves the found meta-tags to the array to save
+   * @param array $pArray
+   * @return array $pArray
+   */
   public static function saveToArray($pArray) {
   	$lMeta = self::fetch($pArray['url']);
   	if(!$pArray['stmt'] || $pArray['stmt'] == null) {
