@@ -123,7 +123,7 @@ class YiidActivityTable extends Doctrine_Table
       self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb);
       $lSocialObject->updateObjectOnLikeActivity($lVerifiedOnlineIdentityIds, $pUrl, $pScore, $lServices);
 
-      YiidStatsSingleton::track($pUrl, ($pScore==self::ACTIVITY_VOTE_POSITIVE)?YiidStatsSingleton::TYPE_LIKE:YiidStatsSingleton::TYPE_DISLIKE);
+      YiidStatsSingleton::trackClick($pUrl, ($pScore==self::ACTIVITY_VOTE_POSITIVE)?YiidStatsSingleton::TYPE_LIKE:YiidStatsSingleton::TYPE_DISLIKE);
     }
     return true;
   }
