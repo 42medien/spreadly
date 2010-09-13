@@ -6,6 +6,7 @@ ul li{margin:0;padding:0;list-style: none;float:left;}
 .left{float: left;}
 .right{float: right;}
 
+#container{width: 300px; height: 61px; background-color: red;}
 #container_full, #container_like{height:23px;float:left;height: 23px;background-color: #6c6c6b;padding-right: 1px;
   border-bottom-right-radius: 3px;-moz-border-radius-bottomright: 3px;-webkit-border-bottom-right-radius: 3px;border-top-left-radius: 3px;-moz-border-radius-topleft: 3px;-webkit-border-top-left-radius: 3px;}
 .button_full_outer{margin: 1px 0 0 1px;}
