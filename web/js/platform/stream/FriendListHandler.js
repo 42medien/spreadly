@@ -133,7 +133,6 @@ var FilterHeadline = {
   reset: function() {
     debug.log("[FilterHeadline][reset]");     
     jQuery('#photo_filter_box .reset-filter').live('click', function() {
-      debug.log('hier');
       //reset the stream
       GlobalRequest.initOnClick(this, {"action":"StreamSubFilter.getAction", "callback":"Stream.show"})
       //reset the counter

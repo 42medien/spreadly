@@ -22,7 +22,6 @@ var Utils = {
    * @return array lCleanedArray
    */
   explode: function(pDelimiter, pString) {
-  	debug.log('dumdidum');
     var lArray = pString.split(pDelimiter);
     var lCleanedArray = new Array();
     var lCounter = 0;

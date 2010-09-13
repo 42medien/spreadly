@@ -23,13 +23,11 @@ jQuery.fn.inputfilter = function(pParams) {
   var lParent = jQuery('#'+lParams['parentid']);  
   var lFilter, lTimeout;
   var lDelay = (lParams['delay'] == undefined)?0:lParams['delay'];
-  debug.log(lDelay);
   
   return this.each(function(){
     jQuery(this).keyup(function() {
       clearTimeout(lTimeout);
       lFilter = jQuery(this).val();
-      debug.log(lFilter);      
       lTimeout = setTimeout(function() {
         if(!lParams['minchar'] || lFilter.length > lParams['minchar']) {
           jQuery.ajax({
