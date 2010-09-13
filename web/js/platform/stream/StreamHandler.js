@@ -52,16 +52,19 @@ var Stream = {
 	
 	updateCss: function(pCssObj) {
     debug.log("[Stream][updateCss]");	  
-    jQuery('#new_shares').removeClass('not_stream');
-    jQuery('#new_shares').removeClass('new_stream');
-    jQuery('#new_shares').removeClass('hot_stream');
-	  if(pCssObj['class'] == 'whats_hot_active') {
-	    jQuery('#new_shares').addClass('hot_stream');
-	  } else if(pCssObj['class'] == 'whats_not_active') {
-      jQuery('#new_shares').addClass('not_stream');	    
-	  } else if(pCssObj['class'] == 'whats_new_active') {
-      jQuery('#new_shares').addClass('new_stream');	    
-	  }
+
+    if(pCssObj['class'] != "normal_list") {
+      jQuery('#new_shares').removeClass('not_stream');
+      jQuery('#new_shares').removeClass('new_stream');
+      jQuery('#new_shares').removeClass('hot_stream');
+  	  if(pCssObj['class'] == 'whats_hot_active') {
+  	    jQuery('#new_shares').addClass('hot_stream');
+  	  } else if(pCssObj['class'] == 'whats_not_active') {
+        jQuery('#new_shares').addClass('not_stream');	    
+  	  } else if(pCssObj['class'] == 'whats_new_active') {
+        jQuery('#new_shares').addClass('new_stream');	    
+  	  }
+    }
 	}
 };
 
@@ -223,6 +226,7 @@ var MainFilter = {
     jQuery(lOuter).removeClass('whats_hot_active');
     jQuery(lOuter).removeClass('whats_not_active');
     jQuery(lOuter).removeClass('whats_new_active'); 
+    debug.log(pCssClass);
     jQuery(lOuter).addClass(pCssClass);
   }  
 };
