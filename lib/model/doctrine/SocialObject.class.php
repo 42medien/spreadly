@@ -45,13 +45,14 @@ class SocialObject extends BaseSocialObject
   /**
    * When an activity is performed on an social object, we need to update it's counters, alias and services
    *
-   * @param unknown_type $pVerifiedOnlineIdentitys
-   * @param unknown_type $pUrl
-   * @param unknown_type $pScore
-   * @param unknown_type $pServices
+   * @param int $pUserId
+   * @param array $pVerifiedOnlineIdentitys
+   * @param string $pUrl
+   * @param int $pScore
+   * @param array $pServices
    * @author weyandch
    */
-  public function updateObjectOnLikeActivity($pVerifiedOnlineIdentitys, $pUrl, $pScore, $pServices) {
+  public function updateObjectOnLikeActivity($pUserId, $pVerifiedOnlineIdentitys, $pUrl, $pScore, $pServices) {
     if ($pScore == YiidActivityTable::ACTIVITY_VOTE_POSITIVE) {
       $lCounterField = 'l_cnt';
     }
@@ -64,8 +65,9 @@ class SocialObject extends BaseSocialObject
 
     SocialObjectTable::updateObjectInMongoDb(array("_id" => new MongoId($this->getId())),
                                              array( '$inc' => array($lCounterField => 1 ),
-                                                    '$addToSet' => array('oiids' => array('$each' => $pVerifiedOnlineIdentitys),
-                                                                         'cids' => array('$each' => $pServices),
+                                                    '$addToSet' => array('uids'  => $pUserId,
+                                                                         'oiids' => array('$each' => $pVerifiedOnlineIdentitys),
+                                                                         'cids'  => array('$each' => $pServices),
                                                                          'alias' => array('$each' => array(md5($pUrl)))),
                                                     '$set' => array('u' => time())
                                              )
@@ -79,10 +81,12 @@ class SocialObject extends BaseSocialObject
    * @param array() $pVerifiedOnlineIdentitys
    * @param array() $pServices
    */
-  public function updateObjectActingIdentities($pVerifiedOnlineIdentitys, $pServices) {
+  public function updateObjectActingIdentities($pUserId, $pVerifiedOnlineIdentitys, $pServices) {
     SocialObjectTable::updateObjectInMongoDb(array("_id" => new MongoId($this->getId())),
     array( '$addToSet' => array('oiids' => array('$each' => $pVerifiedOnlineIdentitys),
-                                'cids' => array('$each' => $pServices))));
+                                'cids' => array('$each' => $pServices),
+                                'uids' => $pUserId,
+    )));
   }
 
 

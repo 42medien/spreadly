@@ -44,7 +44,7 @@ class MongoSessionPeer {
 }
 
 /**
- * @todo phpdoc
+ * Wrapper for accessing MongoObject without Sf Context (raw button)
  *
  * @author Christian Weyand
  */
@@ -53,11 +53,11 @@ class SocialObjectPeer {
   const MONGO_COLLECTION = 'social_object';
 
   /**
-   * @todo phpdoc
+   * returns socialobject for a given url
    *
-   * @param unknown_type $pUrl
-   * @param unknown_type $pIsUsed
-   * @return unknown
+   * @param string $pUrl
+   * @param int $pIsUsed
+   * @return array()
    */
   public static function getDataForUrl($pUrl, $pIsUsed = false) {
     $pUrl = urldecode($pUrl);
@@ -67,8 +67,8 @@ class SocialObjectPeer {
     $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, self::MONGO_COLLECTION);
     $pUrlHash = md5($pUrl);
 
+    // check if we know the URL already
     $lSocialObjectArray = $pCollectionObject->findOne(array("alias" => array('$in' => array($pUrlHash)) ));
-    //var_dump($lSocialObejctArray);die();
 
     // if no data is available, initialize empty array
     if (!$lSocialObjectArray) {
@@ -82,29 +82,21 @@ class SocialObjectPeer {
 	    ), $lSocialObjectArray);
     }
 
-    // set counts for like on 0 if not set
+    // set counts for like on 0 if they're not set yet
     $lSocialObjectArray = array_merge(array(
       'l_cnt'   => 0,
       'd_cnt' => 0,
     ), $lSocialObjectArray);
-    /*
-     if ($pIsUsed !== false) {
-     switch ($pIsUsed) {
-     case 1: $lSocialObjectArray['l_cnt'] = $lSocialObjectArray['l_cnt']-1;
-     break;
-     case -1: $lSocialObjectArray['d_cnt'] = $lSocialObjectArray['d_cnt']-1;
-     break;
-     }
-     }*/
+
     return $lSocialObjectArray;
   }
 
   /**
-   * @todo phpdoc
+   * If an user did vote on an social object withdraw his score from displayed result
    *
-   * @param unknown_type $pSocialObjectArray
-   * @param unknown_type $pUserAction
-   * @return unknown
+   * @param array() $pSocialObjectArray
+   * @param boolean $pUserAction
+   * @return array()
    */
   public static function recalculateCountsRespectingUser($pSocialObjectArray, $pUserAction = false) {
 
@@ -122,8 +114,8 @@ class SocialObjectPeer {
 
   /**
    * prototype function to send msgs in a queue
+   * push a note to amazon sqs.. alpha stage!
    *
-   * @todo phpdoc
    * @author Christian Weyand
    */
   public static function delegateSocialObjectParsing($pUrl) {
@@ -140,8 +132,7 @@ class SocialObjectPeer {
 }
 
 /**
- * @todo phpdoc
- *
+ * Wrapper to access activity items within th ebutton
  */
 class YiidActivityObjectPeer {
   const MONGO_COLLECTION = 'yiid_activity';
@@ -159,6 +150,9 @@ class YiidActivityObjectPeer {
     $lObject = $pCollectionObject->findOne(array("so_id" => $pSocialObjectId, "u_id" => $pUserId ));
     return $lObject?$lObject['score']:false;
   }
+
+
+
 }
 
 /**
@@ -180,7 +174,7 @@ class UserRelationPeer {
     $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, self::MONGO_COLLECTION);
     $lResults = $pCollectionObject->find(array("user_id" => $pUserId));
     $lResults->limit($pLimit);
-    
+
     return $lResults;
   }
 }

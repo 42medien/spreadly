@@ -31,6 +31,7 @@ class UserRelation extends BaseUserRelation
   }
 
   /**
+   * retrieves an array with all UserIds of my friends
    * wrapper to ensure we get an empty array() instead of NULL
    *
    * @author weyandch
@@ -41,6 +42,7 @@ class UserRelation extends BaseUserRelation
   }
 
   /**
+   *  retrieves an array with all OI's of myself
    * wrapper to ensure we get an empty array() instead of NULL
    *
    * @author weyandch
@@ -51,6 +53,7 @@ class UserRelation extends BaseUserRelation
   }
 
   /**
+   *  retrieves an array with all OI's of my friends
    *  wrapper to ensure we get an empty array() instead of NULL
    *
    * @author weyandch

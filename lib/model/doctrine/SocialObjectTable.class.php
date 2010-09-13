@@ -123,6 +123,26 @@ class SocialObjectTable extends Doctrine_Table
 
 
   /**
+   *
+   * returns an array with userid's of your friends, who acted on a given social object
+   *
+   * @param string $pSocialObjectId
+   * @param int $pUserId
+   * @return array()
+   * @author weyandch
+   */
+  public static function getFriendIdsForSocialObject($pSocialObjectId, $pUserId) {
+    $lSocialObject = self::retrieveByPK($pSocialObjectId);
+    $lUserRelation = UserRelationTable::retrieveUserRelations($pUserId);
+
+    $lFriendsActive = array();
+    $lFriendsActive = array_intersect($lSocialObject->getUids(), $lUserRelation->getContactUid());
+    return $lFriendsActive;
+
+  }
+
+
+  /**
    * hydrate social objects from the extracted collection and return an array
    *
    * @param unknown_type $pCollection

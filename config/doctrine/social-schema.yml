@@ -17,6 +17,8 @@ SocialObject:
       type:  string
     cids:      ## CommunityIds where this object was shared in
       type:  string
+    uids:      ## all involved user ids
+      type:  string
     type:
       type:  integer(4)
     title:

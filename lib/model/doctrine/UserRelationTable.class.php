@@ -115,6 +115,11 @@ class UserRelationTable extends Doctrine_Table
   }
 
 
+  /**
+   * get all identities & friends for a given user
+   *
+   * @param int $pUserId
+   */
   public static function doIdentityMigration($pUserId) {
 
     $lOwnedOiIds = UserIdentityConTable::getOnlineIdentityIdsForUser($pUserId);

@@ -25,7 +25,7 @@ class YiidStatsSingleton {
     $lQueryArray['host'] = parse_url($pUrl, PHP_URL_HOST);
     $lQueryArray['month'] = date('Y-m');
 
-    $lUpdateArray = array( '$inc' => array('stats.day_'.date('d').'.hits' => 1));
+    $lUpdateArray = array( '$inc' => array('stats.day_'.date('d').'.pis' => 1));
 
     $lCollection->update($lQueryArray, $lUpdateArray, array('upsert' => true));
   }

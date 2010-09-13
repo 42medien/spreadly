@@ -31,17 +31,17 @@ foreach ($lActivities as $lActivity) {
 
   $pManipualtior = array('$addToSet' => array('oiids' => array('$each' => array_filter($lOiIds)),
                                               'cids' => array('$each' => array_filter($lServices))
-                                              ),
-                         );
+  ),
+  );
 
-YiidActivityTable::updateObjectInMongoDb(array('u_id' => $lUserId, 'url_hash' => $lActivity->getUrlHash()), $pManipualtior);
+  YiidActivityTable::updateObjectInMongoDb(array('u_id' => $lUserId, 'url_hash' => $lActivity->getUrlHash()), $pManipualtior);
 
   $lSocialObject = SocialObjectTable::retrieveByUrlHash($lActivity->getUrlHash());
   if (!$lSocialObject) {
     $lSocialObject = SocialObjectTable::retrieveByUrl($lActivity->getUrl());
   }
   if ($lSocialObject) {
-    $lSocialObject->updateObjectActingIdentities($lOiIds, $lServices);
+    $lSocialObject->updateObjectActingIdentities($lUserId, $lOiIds, $lServices);
 
     $lActivity->setSoId(new MongoId($lSocialObject->getId()));
     $lActivity->save();
