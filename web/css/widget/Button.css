@@ -56,9 +56,9 @@ ul li{margin:0;padding:0;list-style: none;float:left;}
   * + html .like_text{padding: 0px 0px 0px 1px;display: inline;}
   .like_icon{padding: 2px 1px 3px 8px;line-height: 21px;background: transparent url('/img/sprites/sprite_button.png') -10px 2px no-repeat;margin: 0 3px 0 2px;}
   #container_used .like_icon, #container_like_used .like_icon{padding: 0 4px;background: transparent url('/img/sprites/sprite_button.png') -10px 4px no-repeat;margin-left: 1px;}
-  * + html .like_icon{padding: 8px 7px 2px;}
-  * + html .like_text .like_icon{padding: 5px 7px 4px;}
-  * + html #container_used .like_icon, #container_like_used .like_icon{padding: 1px 7px 0px;}
+  /** + html .like_icon{padding: 2px 1px 3px 8px;}*/
+  /** + html .like_text .like_icon{padding: 5px 7px 4px;background: transparent url('/img/sprites/sprite_button.png') -10px 2px no-repeat;}*/
+  /** + html #container_used .like_icon, #container_like_used .like_icon{padding: 1px 7px 0px;}*/
 
 /**
  * @section -DislikeArea 
@@ -66,8 +66,8 @@ ul li{margin:0;padding:0;list-style: none;float:left;}
 #dislike_area{width: 18px;height: 21px;cursor: pointer;}
   .dislike_icon{background: transparent url('/img/sprites/sprite_button.png') 0 1px no-repeat;margin: 2px 0 0 4px;display: block;width: 10px;height: 16px;}
   #container_used .dislike_icon, #container_like_used .dislike_icon{background: transparent url('/img/sprites/sprite_button.png') no-repeat;margin: 3px 0 0 3px;width: 10px;height: 15px;}
-  * + html .dislike_icon{padding: 8px 7px 2px;}
-  * + html #container_used .dislike_icon, #container_like_used .dislike_icon{padding: 8px 7px 2px;}
+  /** + html .dislike_icon{padding: 8px 7px 2px;}*/
+  /** + html #container_used .dislike_icon, #container_like_used .dislike_icon{padding: 8px 7px 2px;}*/
  
  /**
  * @section -SettingsArea 
