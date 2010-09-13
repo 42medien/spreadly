@@ -37,7 +37,7 @@ var Stream = {
       if(jQuery('#stream_pager_link').css('display')=='none') {
         jQuery('#stream_pager_link').show();        
       }
-      DataObjectPager.update('stream_pager_link', pResponse.action, pResponse.page, MainFilter.aDataObj); 
+      DataObjectPager.update('stream_pager_link', pResponse.action, pResponse.page, MainFilter.aDataObj, pResponse.css); 
     }    
    
     var lCssObj = jQuery.parseJSON(pResponse.css);

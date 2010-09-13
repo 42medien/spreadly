@@ -13,7 +13,7 @@ $dbManager->loadConfiguration();
 //SocialObjectParser::fetch("http://pfefferle.org");
 
 $lSocialObject = new SocialObject();
-$lSocialObject->setUrl('http://pfefferle.org');
+$lSocialObject->setUrl('http://notizblog.org');
 
 $lObject = $lSocialObject->save();
 

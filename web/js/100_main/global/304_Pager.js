@@ -18,10 +18,12 @@ var DataObjectPager = {
 	 */	
 	init: function(pId, pDataString) {
     debug.log("[DataObjectPager][init]");  
-		var lElement = jQuery('#'+pId);
+    debug.log(pDataString);
+    var lElement = jQuery('#'+pId);
 		if(pDataString !== undefined){
 		  jQuery(lElement).attr('data-obj', pDataString);
 		}
+
 		GlobalRequest.bindClickByElement(lElement);
 	},
 	
@@ -33,13 +35,17 @@ var DataObjectPager = {
 	 * @param string pPage
 	 * @param object pDataObj
 	 */
-	update: function(pId, pAction, pPage, pDataObj) {
+	update: function(pId, pAction, pPage, pDataObj, pCss) {
     debug.log("[DataObjectPager][update]");
    	var lPage = parseInt(pPage);
    	lPage++;
    	pDataObj.page = String(lPage);
    	if(pAction && pAction !== undefined) {
    	  pDataObj.action = pAction;
+   	}
+   	
+   	if(pCss && pCss !== undefined) {
+   	  pDataObj.css = pCss;
    	}
     var lDataString = JSON.stringify(pDataObj);
     DataObjectPager.init(pId, lDataString);
