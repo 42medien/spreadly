@@ -43,10 +43,16 @@ foreach ($lIds as $key => $value) {
 	    	//if not: take the default-avatar-name and get the avatar-object
 	      $lNewMain = UserAvatarTable::getAvatarForName($value['id'], $lUser->getDefaultAvatar());
 	      //set the default-avatar to main
-	      $lNewMain->setIsMain(true);
-	      //and save
-	      $lNewMain->save();
-	      echo "--> new main-avatar with id: ".$lNewMain->getId()." for userid: ".$value['id']."\n\r";
+	      if ($lNewMain) {
+  	      $lNewMain->setIsMain(true);
+  	      //and save
+  	      $lNewMain->save();
+  	      echo "--> new main-avatar with id: ".$lNewMain->getId()." for userid: ".$value['id']."\n\r";
+	      } else {
+	        $lUser->setDefaultAvatar(null);
+	        $lUser->save();
+	        echo "--> reset avatar for userid: ".$value['id']."\n\r";
+	      }
 	    }
     }
   } catch(Exception $e){

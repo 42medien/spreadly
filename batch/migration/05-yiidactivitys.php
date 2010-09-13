@@ -43,6 +43,8 @@ YiidActivityTable::updateObjectInMongoDb(array('u_id' => $lUserId, 'url_hash' =>
   if ($lSocialObject) {
     $lSocialObject->updateObjectActingIdentities($lOiIds, $lServices);
 
+    $lActivity->setSoId(new MongoId($lSocialObject->getId()));
+    $lActivity->save();
     echo $lUserId ." - ".count($lOiIds)." \r\n";
   }
   else {

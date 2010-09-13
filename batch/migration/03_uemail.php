@@ -26,10 +26,11 @@ echo "######################################### \r\n";
 foreach ($lIds as $key => $value) {
 	try{
 	  $lUser = UserTable::getInstance()->retrieveByPk($value['id']);
+	  echo "Userid: ".$value['id'] ;
 		$lUserEmail = UserEmailAddressTable::getMainAddresses($value['id']);
 		$lUser->setEmail($lUserEmail->getEmail());
 		$lUser->save();
-		echo "Userid: ".$value['id']." got email: ".$lUserEmail->getEmail()." with id: ".$lUserEmail->getId()."\n\r";
+		echo " got email: ".$lUserEmail->getEmail()." with id: ".$lUserEmail->getId()."\n\r";
   } catch(Exception $e){
     echo $e->getMessage();
     continue;
