@@ -79,6 +79,7 @@
     <copy todir="./web/uploads/avatars">
       <fileset refid="uploads_avatars" />
     </copy>
+    <exec command="chmod -R 777 ./web/uploads" />
     
     <exec command="php batch/cleanup/mongoDbDatabaseCleanup.php" checkReturn="true" />
     <exec command="./symfony doctrine:build --all --no-confirmation --and-load" checkReturn="true"/>
