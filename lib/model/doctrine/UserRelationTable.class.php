@@ -91,10 +91,10 @@ class UserRelationTable extends Doctrine_Table
     $pOiArray = array();
     if (is_null($pFriendId)) {
       $pOiArray = self::retrieveUserRelations($pUserId)->getContactsOi();
+      $pOiArray = array_merge($pOiArray, self::retrieveUserRelations($pUserId)->getOwnedOi());
     } else {
       $pOiArray = self::retrieveUserRelations($pFriendId)->getOwnedOi();
     }
-  //  $pOiArray = array_merge($pOiArray, self::retrieveUserRelations($pUserId)->getOwnedOi());
 
     return $pOiArray;
   }
