@@ -30,6 +30,11 @@ if (isset($_GET['short']) && !empty($_GET['short'])) {
 } else {
   $pFullShortVersion = false;
 }
+if (isset($_GET['social']) && !empty($_GET['social'])) {
+  $pSocialFeatures = true;
+} else {
+  $pSocialFeatures = false;
+}
 
 $pUserId = MongoSessionPeer::extractUserIdFromSession(LikeSettings::SF_SESSION_COOKIE);
 $lSocialObjectArray = SocialObjectPeer::getDataForUrl($pUrl);
@@ -171,18 +176,19 @@ YiidStatsSingleton::trackVisit($pUrl);
 		<!-- /Text information -->
   </div>
 	
-	<div id="friends" class="clearfix">
-    <?php $lFriends = UserRelationPeer::getFriendsOfUser($pUserId); ?>
-    <?php $lCounter = 1; ?>
-    <?php // foreach($lFriends as $luser) { ?>
-    <?php for($i = 1; $i< 9; $i++) {?>
-      <div class="friends_image left">
-        <?php // echo avatar_tag($lUser->getDefaultAvatar(), 30, array('alt' => $lUser->getFullname(), 'class' => '', 'rel' => '')); ?>
-        <img src="../../uploads/avatars/30x30/default.png" alt="Friend" title="Die Doris<?php echo $i;?>" />
-      </div>
-      <?php $lCounter++; ?>
-    <?php }?>
-	</div>
+	<?php if($pSocialFeatures) { ?>
+		<div id="friends" class="clearfix">
+	    <?php $lLimit = $pFullShortVersion?'6':'8'; ?>
+	    <?php $lFriends = UserRelationPeer::getFriendsOfUser($pUserId, $lLimit); ?>
+	    <?php // foreach($lFriends as $luser) { ?>
+		  <?php for($i = 1; $i< $lLimit+1; $i++) {?>
+		    <div class="friends_image left">
+		      <?php // echo avatar_tag($lUser->getDefaultAvatar(), 30, array('alt' => $lUser->getFullname(), 'class' => '', 'rel' => '')); ?>
+		      <img src="../../uploads/avatars/30x30/default.png" alt="Friend" title="Die Doris<?php echo $i;?>" />
+		    </div>
+		  <?php }?>
+		</div>
+	<?php } ?>
 	
 </div>
 
