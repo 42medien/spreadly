@@ -27,8 +27,8 @@
     <p><?php echo __('CURRENT_NETWORKS', null, 'widget'); ?></p>
 
     <ul class="normal_list" id="services_to_choose">
-      <li><a id="choose_facebook" href="<?php echo RpxClient::generateApiUrl("facebook", url_for("@add_service", true)); ?>">Facebook</a></li>
-      <li><a id="choose_twitter" href="<?php echo RpxClient::generateApiUrl("twitter", url_for("@add_service", true)); ?>">Twitter</a></li>
+      <li><a id="choose_facebook" href="<?php //echo RpxClient::generateApiUrl("facebook", url_for("@add_service", true)); ?>">Facebook</a></li>
+      <li><a id="choose_twitter" href="<?php //echo RpxClient::generateApiUrl("twitter", url_for("@add_service", true)); ?>">Twitter</a></li>
     </ul>
 
     oder <a href="#"  id="cancel-link"><?php echo __('CANCEL', null, 'widget'); ?></a>

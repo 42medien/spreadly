@@ -62,14 +62,16 @@ class popupActions extends sfActions {
     // check if it is a signin/signup or if the user wants
     // to add a new online-identity
     if ($this->getUser()->isAuthenticated() && $this->getUser()->getUserId()) {
-      //$lObject->addIdentifier($this->getUser()->getUser(), $lToken);
+      $lObject->addIdentifier($this->getUser()->getUser(), $lToken);
     } else {
-      //$lUser = $lObject->doSignin($this->getUser(), $lToken);
-      //$this->getUser()->signIn($lUser);
+      $lUser = $lObject->doSignin($this->getUser(), $lToken);
+      $this->getUser()->signIn($lUser);
       //UserRelationTable::doShit($lUser->getId());
     }
+    $this->pOnlineIdenities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
+    CookieUtils::generateWidgetIdentityCookie($this->pOnlineIdenities);
 
-    //$this->redirect('@settings');
+    $this->redirect('@settings');
   }
 
   public function executeCreate_account(sfWebRequest $request) {
@@ -123,7 +125,7 @@ class popupActions extends sfActions {
   }
 
   public function executeAdd_service(sfWebRequest $request) {
-    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('popup/js_popup_ready'));
+    /*$this->getResponse()->setSlot('js_document_ready', $this->getPartial('popup/js_popup_ready'));
     $lUser = $this->getUser()->getUser();
 
     if ($lToken = $request->getParameter('token')) {
@@ -151,6 +153,6 @@ class popupActions extends sfActions {
       }
     }
 
-    $this->redirect("@settings");
+    $this->redirect("@settings");*/
   }
 }
