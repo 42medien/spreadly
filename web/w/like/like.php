@@ -160,7 +160,7 @@ $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
 	  <!-- /Text information -->
 	</div>
   
-  <?php if($pSocialFeatures) { ?>
+  <?php if($pUserId && $pSocialFeatures) { ?>
     <?php $lLimit = $pFullShortVersion?'5':'7'; ?>
     <div id="friends" class="clearfix">
       <?php 

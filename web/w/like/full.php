@@ -176,7 +176,7 @@ YiidStatsSingleton::trackVisit($pUrl);
 		<!-- /Text information -->
   </div>
 	
-	<?php if($pSocialFeatures) { ?>
+	<?php if($pUserId && $pSocialFeatures) { ?>
     <?php $lLimit = $pFullShortVersion?'6':'8'; ?>
 		<div id="friends" class="clearfix">
 	    <?php 
