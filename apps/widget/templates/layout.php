@@ -7,8 +7,7 @@
     <?php include_metas() ?>
 
     <?php include_cdn_stylesheets(); ?>
-    <script type="text/javascript" src="/js/vendor/jquery-complete.min.js"></script>
-    <script type="text/javascript" src="/js/components/LikePopup.js"></script>
+    <script type="text/javascript" src="/js/100_main/include/likepopup-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
     <link rel="shortcut icon" href="/favicon.ico" />
   </head>
   <body onunload="LikePopup.refreshParent();">
