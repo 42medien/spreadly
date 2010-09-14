@@ -128,4 +128,33 @@ class widgetActions extends sfActions
     $this->setLayout(false);
     return sfView::NONE;
   }
+  
+  public function executeLoad_friends(sfWebRequest $request) {
+    $this->getResponse()->setContentType('application/json');
+    
+  	$lSocialObjectId = $request->getParameter('so_id');
+  	$lUserId = $request->getParameter('u_id');
+  	$lLimit = $request->getParameter('limit');
+  	
+  	$lFriends = SocialObjectTable::getFriendIdsForSocialObject($lSocialObjectId, $lUserId);
+  	
+  	return $this->renderText(
+      json_encode(
+        array(
+          'success' => true,
+          'html'  => $this->getPartial('widget/social_object_friends', array('pFriends' => $lFriends, 'pLimit' => $lLimit))
+        )
+      )
+    );
+  }
+  /*
+  public function executeTest(sfWebRequest $request) {
+  	$lSo = SocialObjectTable::getTestSo();
+  	$lUser = UserTable::getInstance()->find(1);
+  	
+  	$this->lFriends = SocialObjectTable::getFriendIdsForSocialObject($lSo[0]->getId(), $lUser->getId());
+ 
+  	$this->pLimit = 3;
+  }
+  */
 }
