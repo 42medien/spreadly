@@ -136,9 +136,10 @@ class SocialObjectTable extends Doctrine_Table
     $lUserRelation = UserRelationTable::retrieveUserRelations($pUserId);
 
     $lFriendsActive = array();
-    $lFriendsActive = array_intersect($lSocialObject->getUids(), $lUserRelation->getContactUid());
+    if ($lSocialObject && $lUserRelation) {
+      $lFriendsActive = array_intersect($lSocialObject->getUids(), $lUserRelation->getContactUid());
+    }
     return $lFriendsActive;
-
   }
 
 
