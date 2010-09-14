@@ -171,7 +171,6 @@ $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
       ?>
       <?php for($i = 1; $i< $lLimit+1; $i++) {?>
         <div class="friends_image left">
-          <?php // echo avatar_tag($lUser->getDefaultAvatar(), 30, array('alt' => $lUser->getFullname(), 'class' => '', 'rel' => '')); ?>
           <img src="../../uploads/avatars/30x30/default.png" alt="Friend" title="Die Doris<?php echo $i;?>" />
         </div>
       <?php }?>
