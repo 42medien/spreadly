@@ -18,8 +18,8 @@ class LikeSettings {
   const SF_SESSION_COOKIE  = 'yiid_local';
 
 
-  const JS_LIKE_PATH =  'http://widgets.yiid.local/widget_dev.php/api/like';
-  const JS_DISLIKE_PATH =  'http://widgets.yiid.local/widget_dev.php/api/dislike';
+  const JS_LIKE_PATH =  'http://widgets.yiid.local/api/like';
+  const JS_DISLIKE_PATH =  'http://widgets.yiid.local/api/dislike';
 
   const JS_POPUP_PATH = 'http://widgets.yiid.local/popup/settings';
 }
