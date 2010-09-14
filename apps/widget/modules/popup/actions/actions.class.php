@@ -88,7 +88,7 @@ class popupActions extends sfActions {
 
   public function executeSettings(sfWebRequest $request) {
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('popup/js_popup_ready'));
-      //var_dump($request);die();
+
     $lUser = $this->getUser()->getUser();
     if($request->getMethod() == sfRequest::POST) {
       $checkedOnlineIdentities = $request->getParameter('enabled_services');
@@ -114,45 +114,12 @@ class popupActions extends sfActions {
 
      $this->getUser()->setFlash("onload", "window.close();", false);
     }
-    //$this->pOnlineIdenities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
+
     $this->pIdentities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
-    //var_dump($this->pIdentities);die();
 
     CookieUtils::generateWidgetIdentityCookie($this->pIdentities);
     sfProjectConfiguration::getActive()->loadHelpers('I18N');
     $this->getUser()->setFlash('headline', __('SETTINGS', null, 'widget'));
     $this->setLayout('layout_twocol');
-  }
-
-  public function executeAdd_service(sfWebRequest $request) {
-    /*$this->getResponse()->setSlot('js_document_ready', $this->getPartial('popup/js_popup_ready'));
-    $lUser = $this->getUser()->getUser();
-
-    if ($lToken = $request->getParameter('token')) {
-      $lRpxClient = new RpxClient();
-      $lRpxClient->authenticate($lToken);
-    } else {
-      $lRpxClient = PersistentVariablePeer::get($this->getUser()->getAttribute('rpx_client', null, 'auth'));
-    }
-
-    if ($lRpxClient) {
-      try {
-        sfContext::getInstance()->getLogger()->debug('{rpxOpenID}: RPX authentication');
-        $lRpxClient->doSigninTasks($lUser, true);
-        sfContext::getInstance()->getLogger()->debug('{rpxOpenID}: RPX signin');
-
-        // remove session and persistant variable
-        PersistentVariablePeer::remove($this->getUser()->getAttribute('rpx_client', null, 'auth'));
-        $this->getUser()->setAttribute('rpx_client', null, 'auth');
-
-        // update cookie
-        CookieUtils::generateWidgetIdentityCookie($lUser->getOnlineIdentitiesForPublishing());
-      } catch (Exception $e) {
-        sfContext::getInstance()->getLogger()->err('{Exception}: '.$e->getMessage());
-        $this->getUser()->setFlash('error', "PROFILE_ALREADY_CREATED");
-      }
-    }
-
-    $this->redirect("@settings");*/
   }
 }

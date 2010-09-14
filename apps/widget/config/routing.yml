@@ -43,13 +43,17 @@ confirm_signin:
   url:    /popup/confirm_signin/*
   param:  { module: popup, action: confirm_signin }
 
+complete_signin:
+  url:    /popup/complete_signin/*
+  param:  { module: popup, action: complete_signin }
+
 signinto:
   url:   /popup/signinto/*
   param: { module: popup, action: signinto }
-  
-like: 
+
+like:
   url:   /api/like/*
-  param: {module: api, action: like }  
+  param: {module: api, action: like }
 
 homepage:
   url:   /
@@ -61,5 +65,5 @@ default_index:
 
 default:
   url:   /:module/:action/*
-  
-    
+
+
