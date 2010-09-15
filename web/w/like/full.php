@@ -40,7 +40,13 @@ $pUserId = MongoSessionPeer::extractUserIdFromSession(LikeSettings::SF_SESSION_C
 $lSocialObjectArray = SocialObjectPeer::getDataForUrl($pUrl);
 $lIsUsed = YiidActivityObjectPeer::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId);
 $lSocialObjectArray = SocialObjectPeer::recalculateCountsRespectingUser($lSocialObjectArray, $lIsUsed);
-$lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
+$lPopupUrl = "http://widgets.yiid.local/popup/settings?ei_kcuf=1284022601";
+$lShowFriends = false;
+$lLimit = 6;
+if($pUserId && $pSocialFeatures && $lSocialObjectArray['_id']) {
+	$lShowFriends = true;
+	$lLimit = $pFullShortVersion?'6':'8';
+}
 
 // track visit
 YiidStatsSingleton::trackVisit($pUrl);
@@ -59,6 +65,9 @@ YiidStatsSingleton::trackVisit($pUrl);
   YiidRequest.aLikeAction = "<?php echo LikeSettings::JS_LIKE_PATH; ?>";
   YiidRequest.aDislikeAction = "<?php echo LikeSettings::JS_DISLIKE_PATH; ?>";
   YiidCookie.aDomain = "<?php echo LikeSettings::COOKIE_DOMAIN; ?>";
+  <?php if ($lShowFriends) { ?>
+    YiidFriends.init("<?php echo $lSocialObjectArray['_id'.""] ?>", "<?php echo $pUserId; ?>", "<?php echo $lLimit; ?>")
+  <?php } ?>
 </script>
 <link rel="stylesheet" href="/css/widget/Button.css" type="text/css" media="screen, projection" />
 </head>
@@ -175,8 +184,7 @@ YiidStatsSingleton::trackVisit($pUrl);
 		<!-- /Text information -->
   </div>
 
-	<?php if($pUserId && $pSocialFeatures) { ?>
-    <?php $lLimit = $pFullShortVersion?'6':'8'; ?>
+	<?php if($lShowFriends) { ?>
 		<div id="friends" class="clearfix">
 	    <?php
 	    /**
@@ -184,11 +192,6 @@ YiidStatsSingleton::trackVisit($pUrl);
 	     * 2. Div mit ID #friends leeren und response.html aus 1. an diese Stelle setzen
 	     */
 	    ?>
-		  <?php for($i = 1; $i< $lLimit+1; $i++) {?>
-		    <div class="friends_image left">
-		      <img src="../../uploads/avatars/30x30/default.png" alt="Friend" title="Die Doris<?php echo $i;?>" />
-		    </div>
-		  <?php }?>
 		</div>
 	<?php } ?>
 

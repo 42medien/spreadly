@@ -65,5 +65,9 @@ default_index:
 
 default:
   url:   /:module/:action/*
+  
+load_friends:
+  url:   /widget/load_friends/*
+  param: {module: widget, action: load_friends }    
 
 
