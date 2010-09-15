@@ -11,7 +11,9 @@
   </head>
   <body class="bg_light clearfix">
     <div id="container" class="bd_round clearfix">
+      <div id="error-msg-box">
 
+      </div>
       <div id="header" class="clearfix">
         <div id="header_sub" class="left"></div>
         <?php if($sf_user->isAuthenticated()) { ?>
@@ -33,10 +35,13 @@
 	  <script type="text/javascript" src="/js/100_main/include/platform-<?php echo sfConfig::get('app_release_name') ?>.min.js"></script>
 	  <script type="text/javascript">
 	    jQuery(document).ready( function() {
-	      <?php include_partial('global/js_init_general.js'); ?>
-	      <?php if (has_slot('js_document_ready')) { ?>
-	        <?php include_slot('js_document_ready'); ?>
-	      <?php } ?>
+	      <?php
+	      include_partial('global/js_init_general.js');
+	      if (has_slot('js_document_ready')) {
+	        include_slot('js_document_ready');
+	      }
+	      include_partial('general/js_init_error');
+	      ?>
 	    });
 	  </script>
   </body>

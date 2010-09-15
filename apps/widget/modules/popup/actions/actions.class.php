@@ -62,7 +62,11 @@ class popupActions extends sfActions {
     // check if it is a signin/signup or if the user wants
     // to add a new online-identity
     if ($this->getUser()->isAuthenticated() && $this->getUser()->getUserId()) {
-      $lObject->addIdentifier($this->getUser()->getUser(), $lToken);
+      try {
+        $lObject->addIdentifier($this->getUser()->getUser(), $lToken);
+      } catch (Exception $e) {
+        $this->getUser()->setFlash("error", $e->getMessage(), true);
+      }
     } else {
       $lUser = $lObject->doSignin($this->getUser(), $lToken);
       $this->getUser()->signIn($lUser);

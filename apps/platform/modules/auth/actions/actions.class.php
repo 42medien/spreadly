@@ -32,9 +32,9 @@ class authActions extends sfActions {
   }
 
   public function executeSignout(sfWebRequest $request) {
-  	if($this->getUser()->isAuthenticated()) {
+    if($this->getUser()->isAuthenticated()) {
       $this->getUser()->signOut();
-  	}
+    }
     $this->redirect('@homepage');
   }
 
@@ -72,7 +72,11 @@ class authActions extends sfActions {
     // check if it is a signin/signup or if the user wants
     // to add a new online-identity
     if ($this->getUser()->isAuthenticated() && $this->getUser()->getUserId()) {
-      $lObject->addIdentifier($this->getUser()->getUser(), $lToken);
+      try {
+        $lObject->addIdentifier($this->getUser()->getUser(), $lToken);
+      } catch (Exception $e) {
+        $this->getUser()->setFlash("error", $e->getMessage(), true);
+      }
 
     } else {
       $lUser = $lObject->doSignin($this->getUser(), $lToken);
