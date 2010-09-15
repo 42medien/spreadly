@@ -227,7 +227,6 @@ li.item_active .whats_hot_stream_item,
 	-webkit-border-bottom-left-radius: 5px;  
 }
 #error-msg-box ul{ 
-	width: 95%;
-  margin: 0 auto; 
+	padding-left: 20px;
   list-style: none;
 }
