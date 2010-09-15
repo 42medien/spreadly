@@ -1,0 +1,45 @@
+<?php
+
+require_once(dirname(__FILE__).'/../../config/ProjectConfiguration.class.php');
+
+$configuration = ProjectConfiguration::getApplicationConfiguration('platform', 'prod', true);
+
+sfContext::createInstance($configuration);
+
+$logger = sfContext::getInstance()->getLogger();
+
+// Initialize database manager.
+$dbManager = new sfDatabaseManager($configuration);
+$dbManager->loadConfiguration();
+
+$lM = new Mongo('192.168.1.190'); // connect
+$lDb = $lM->selectDB("yiid_stats");
+$lMongoCursor = $lDb->selectCollection('visits')->find()->limit(10000)->sort(array('c' => -1));
+$lErros = 0;
+$i=0;
+
+function getResults() {
+  $lM = new Mongo('192.168.1.190'); // connect
+  $lDb = $lM->selectDB("yiid_stats");
+  return $lDb->selectCollection('visits')->find()->limit(1000000);//->sort(array('c' => -1));
+}
+
+//while (1) {
+  $lMongoCursor = getResults();
+
+  foreach ($lMongoCursor as $lVisit) {
+
+    if ($lVisit['host'] != '') {
+      echo $i++;
+      echo"\r\n";
+      $lDb->selectCollection('visits')->remove(array('_id' => new MongoId($lVisit['_id'])), array('$atomic' => 1));
+      YiidStatsSingleton::trackVisitForMigration($lVisit['host'], $lVisit['c']);
+    } else {
+
+      $lDb->selectCollection('visits')->remove(array('_id' => new MongoId($lVisit['_id'])), array('$atomic' => 1));
+      $lErros++;
+    }
+  }
+//}
+
+echo "\r\n\r\n".$lErros." could not be migrate\r\n\r\n";
