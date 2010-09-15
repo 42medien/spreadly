@@ -74,7 +74,7 @@ YiidStatsSingleton::trackVisit($pUrl);
 </head>
 <body>
 
-  <div id="container">
+  <div id="container" style="width: 400px;">
 
     <div class="clearfix">
 
@@ -130,9 +130,9 @@ YiidStatsSingleton::trackVisit($pUrl);
 				  </div>
 				  <!-- Area to be slided -->
 
+        </div>
 			<?php } ?>
 
-		</div>
 
 		<div id="container_used" class="left" <?php if($lIsUsed === false) { ?>style="display: none;"<?php } ?>>
 		  <div id="used_button" class="normal_button_area <?php echo (!$pFullShortVersion ? 'normal_space' : 'small_space') ?>_used" target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>');">
