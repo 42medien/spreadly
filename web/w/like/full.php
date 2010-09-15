@@ -74,7 +74,7 @@ YiidStatsSingleton::trackVisit($pUrl);
 </head>
 <body>
 
-  <div id="container" style="width: 400px;">
+  <div id="container" style="width: 400px;height: 62px;">
 
     <div class="clearfix">
 
