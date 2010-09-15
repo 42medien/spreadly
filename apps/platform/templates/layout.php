@@ -11,7 +11,9 @@
   </head>
   <body class="bg_light clearfix">
     <div id="container" class="bd_round clearfix">
+	    <div id="error-msg-box">
 
+	    </div>
       <div id="header" class="clearfix">
         <div id="header_sub" class="left"></div>
         <div id="header_main" class="left"></div>
@@ -47,14 +49,24 @@
       <?php include_component('general','footer'); ?>
 
     </div>
+        <?php
+          $lGlobalError = array();
+          $lGlobalError[0] = 'my first error';
+          $lGlobalError[1] = 'my second error';
+          $lGlobalError = json_encode($lGlobalError);
+        ?>
 
 	  <script type="text/javascript" src="/js/100_main/include/platform-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
+    <script type="text/javascript" src="/js/100_main/global/107_jquery.topslider.js"></script>
 	  <script type="text/javascript">
 	  jQuery(document).ready( function() {
 	      <?php include_partial('global/js_init_general.js'); ?>
 	      <?php if (has_slot('js_document_ready')) { ?>
 	        <?php include_slot('js_document_ready'); ?>
 	      <?php } ?>
+        <?php if($lGlobalError) { ?>
+          <?php include_partial('global/js_init_error.js', array("pErrors" => $lGlobalError)); ?>
+        <?php } ?>
 	    });
 	  </script>
 	</body>
