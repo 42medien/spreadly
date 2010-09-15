@@ -67,6 +67,10 @@ var Configurator = {
     if(jQuery('#likebutton_sh').attr('checked') === false) {
       Configurator.aFormfFields['likebutton[sh]'] = '';
     }
+    // on default checkboxes aren't set, so set the checkbox-key and insert empty string
+    if(jQuery('#likebutton_so').attr('checked') === false) {
+      Configurator.aFormfFields['likebutton[so]'] = '';
+    }
   },
 
   /**
@@ -91,6 +95,13 @@ var Configurator = {
       lObject.value = '';
       lFormFields.push(lObject);
     }
+    if(jQuery('#likebutton_so').attr('checked') === false) {
+      //make a new object for checkbox and push it to the form-fields-array
+      var lObject = {};
+      lObject.name = 'likebutton[so]';
+      lObject.value = '';
+      lFormFields.push(lObject);
+    }
 
     //check now if there are some differences between the last formfields and the formfield after click
     for(var i=0; i<lFormFields.length; i++) {
@@ -112,7 +123,7 @@ var Configurator = {
       var lTarget = pEvent.target;
       var lTargetId = lTarget.id;
       //don't bind the click to the textfields and the generate-button
-      if(lTargetId != "likebutton_url" && lTargetId != "likebutton_w" && lTargetId != 'likebutton_bt' && lTargetId != 'likebutton_sh' && lTargetId != 'likebutton_email' && lTargetId != 'likebutton_fc') {
+      if(lTargetId != "likebutton_url" && lTargetId != "likebutton_w" && lTargetId != 'likebutton_bt' && lTargetId != 'likebutton_sh' && lTargetId != 'likebutton_so' && lTargetId != 'likebutton_email' && lTargetId != 'likebutton_fc') {
       	Configurator.updateWidget();
       	
       	if(lTargetId == 'likebutton_l' || lTargetId == 'type-en') {
@@ -145,6 +156,11 @@ var Configurator = {
     jQuery('#likebutton_sh').live("click.checkbt", function() {
       Configurator.updateWidget();
     	Configurator.updateWidthLabel(jQuery('.likebutton_t'), jQuery('#likebutton_l'));
+    });
+
+    //checkbox for social version
+    jQuery('#likebutton_so').live("click.checkbt", function() {
+      Configurator.updateWidget();
     });
 
     //click for the generate-button. the updateWidget-func needs a param that we know, that the generate was clicked
@@ -310,10 +326,16 @@ var Configurator = {
   		var lShortVersion = 1;
   	}
   	
+  	if(jQuery('#likebutton_so').attr('checked') === false) {
+  		var lSocialVersion = '';
+  	} else {
+  		var lSocialVersion = 1;
+  	}
+  	
   	jQuery.ajax({
       type: "POST",
       url: '/likebutton/update_width_label',
-      data: { fuck_ie: new Date().getTime(), type: lType, lang: lLanguage, global_type: lGlobalType, short_version: lShortVersion },
+      data: { fuck_ie: new Date().getTime(), type: lType, lang: lLanguage, global_type: lGlobalType, short_version: lShortVersion, social_version: lSocialVersion },
       dataType: "json",
       success: function (response) {
         jQuery('#width_value').empty();
