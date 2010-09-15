@@ -48,10 +48,10 @@ YiidStatsSingleton::trackVisit($pUrl);
 $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
 
 $lShowFriends = false;
-$lLimit = 6;
+$lLimit = 5;
 if($pUserId && $pSocialFeatures && $lSocialObjectArray['_id']) {
   $lShowFriends = true;
-  $lLimit = $pFullShortVersion?'6':'8';
+  $lLimit = $pFullShortVersion?5:7;
 }
 
 
@@ -80,7 +80,7 @@ if($pUserId && $pSocialFeatures && $lSocialObjectArray['_id']) {
 </head>
 <body>
 
-  <div id="container">
+  <div id="container" style="width: 400px;height: 62px;">
 
     <div class="clearfix">
 
@@ -132,9 +132,9 @@ if($pUserId && $pSocialFeatures && $lSocialObjectArray['_id']) {
 	      </div>
 	      <!-- Area to be slided -->
 
-	    <?php } ?>
+      </div>
 
-	  </div>
+	  <?php } ?>
 
 	  <div id="container_like_used" class="left" <?php if($lIsUsed === false) { ?>style="display: none;"<?php } ?>>
 	    <div id="used_button" class="normal_button_area <?php echo (!$pFullShortVersion ? 'normal_space' : 'small_space') ?>_used" target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>');">
@@ -174,8 +174,7 @@ if($pUserId && $pSocialFeatures && $lSocialObjectArray['_id']) {
 	</div>
 
   <?php if($lShowFriends) { ?>
-    <div id="friends" class="clearfix">
-    </div>
+    <div id="friends" class="clearfix"></div>
   <?php } ?>
 
 </div>

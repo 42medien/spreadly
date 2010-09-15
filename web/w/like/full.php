@@ -45,7 +45,7 @@ $lShowFriends = false;
 $lLimit = 6;
 if($pUserId && $pSocialFeatures && $lSocialObjectArray['_id']) {
 	$lShowFriends = true;
-	$lLimit = $pFullShortVersion?'6':'8';
+	$lLimit = $pFullShortVersion?6:8;
 }
 
 // track visit
@@ -186,14 +186,7 @@ YiidStatsSingleton::trackVisit($pUrl);
   </div>
 
 	<?php if($lShowFriends) { ?>
-		<div id="friends" class="clearfix">
-	    <?php
-	    /**
-	     * 1. Per Ajax Freundesbilder aus Action widget/load_friends in app widget holen. Dabei wird benötigt: SocialObjectId "so_id", UserId "u_id" und Limit "limit"
-	     * 2. Div mit ID #friends leeren und response.html aus 1. an diese Stelle setzen
-	     */
-	    ?>
-		</div>
+		<div id="friends" class="clearfix"></div>
 	<?php } ?>
 
 </div>

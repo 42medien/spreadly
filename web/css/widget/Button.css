@@ -15,6 +15,7 @@ ul li{margin:0;padding:0;list-style: none;float:left;}
 #container_like_used .normal_button_area p, #container_full_used .normal_button_area p{padding:  0 7px;}
 #normal_button{border-bottom-right-radius: 2px;-moz-border-radius-bottomright: 2px;-webkit-border-bottom-right-radius: 2px;border-top-left-radius: 2px;-moz-border-radius-topleft: 2px;-webkit-border-top-left-radius: 2px;}
 #settings_button_icon{background: #6c6c6b url('/img/sprites/sprite_button.png') 1px -72px no-repeat;cursor: pointer;width: 21px;height: 20px;margin: 1px 0 0 1px;}
+#settings-area{padding-left: 3px;}
 
   .small_space{padding: 0 15px 0 6px}
 #used_button{background: #6c6c6b url('/img/sprites/sprite_button.png') 1px -72px no-repeat;cursor: pointer;
