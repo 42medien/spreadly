@@ -216,7 +216,8 @@ li.item_active .whats_hot_stream_item,
   font-weight: bold; 
   font-size: 15px; 
   z-index: 500000; 
-  position: fixed;  
+  position: fixed; 
+  display: none; 
   background-color: #FF08D6;
 	background: -moz-linear-gradient(100% 100% 90deg, #FF08D6, #FFC2F7);
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFC2F7), to(#FF08D6));
