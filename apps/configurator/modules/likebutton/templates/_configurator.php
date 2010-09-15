@@ -10,7 +10,7 @@
     <h3 id="preview_head"><?php echo __('CONFIGURATOR_PREVIEW', null, 'configurator'); ?></h3>
     <div id="preview">
       <div id="yiid-widget">     
-		    <?php include_partial('likebutton/widget_like', array('pUrl' => 'http://www.yiid.com', 'pLang' => 'de', 'pWidth'=>'420', 'pType'=>'like', 'pFontColor'=>'#000000', 'pShort'=>'')); ?>
+		    <?php include_partial('likebutton/widget_like', array('pUrl' => 'http://www.yiid.com', 'pLang' => 'de', 'pWidth'=>'420', 'pHeight'=>'25', 'pType'=>'like', 'pFontColor'=>'#000000', 'pShort'=>'', 'pSocial'=>'')); ?>
 		  </div>
     </div>
   

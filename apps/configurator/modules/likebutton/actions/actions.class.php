@@ -26,11 +26,13 @@ class likebuttonActions extends sfActions
     $lReturn = array();
     $lReturn['email'] = $lParams['email'];
     $lUrl='';
-    $lWidth = 0;
+    $lWidth = 420;
+    $lHeight = 25;
     $lLang = $lParams['l'];
     $lType = $lParams['t'];
     $lFontColor = $lParams['fc'];
     $lShortVersion = '';
+    $lSocialVersion = '';
     
     //if type is not set, default like
     if($lType == '') {
@@ -59,13 +61,18 @@ class likebuttonActions extends sfActions
     if(isset($lParams['sh']) && $lParams['sh'] == 'on') {
       $lShortVersion = 1;
     }
+
+    if(isset($lParams['so']) && $lParams['so'] == 'on') {
+      $lSocialVersion = 1;
+      $lHeight = 62;
+    }
     
     if(isset($lParams['bt']) && $lParams['bt'] == 'on') {
       $lWidth = WidgetWidthRegistry::getOptimalFullWidth($lShortVersion, $lWidth, $lType, $lLang);
-      $lReturn['iframe'] = $this->getPartial('likebutton/widget_full', array('pUrl' => $lUrl, 'pWidth' => $lWidth, 'pLang' => $lLang, 'pType'=>$lType, 'pFontColor' => $lFontColor, 'pShort' => $lShortVersion));
+      $lReturn['iframe'] = $this->getPartial('likebutton/widget_full', array('pUrl' => $lUrl, 'pWidth' => $lWidth, 'pLang' => $lLang, 'pType'=>$lType, 'pFontColor' => $lFontColor, 'pShort' => $lShortVersion, 'pSocial' => $lSocialVersion, 'pHeight' => $lHeight));
     } else {
       $lWidth = WidgetWidthRegistry::getOptimalLikeWidth($lShortVersion, $lWidth, $lType, $lLang);
-      $lReturn['iframe'] = $this->getPartial('likebutton/widget_like', array('pUrl' => $lUrl, 'pWidth' => $lWidth, 'pLang' => $lLang, 'pType'=>$lType, 'pFontColor' => $lFontColor, 'pShort' => $lShortVersion));
+      $lReturn['iframe'] = $this->getPartial('likebutton/widget_like', array('pUrl' => $lUrl, 'pWidth' => $lWidth, 'pLang' => $lLang, 'pType'=>$lType, 'pFontColor' => $lFontColor, 'pShort' => $lShortVersion, 'pSocial' => $lSocialVersion, 'pHeight' => $lHeight));
     }
 
     return $this->renderText(json_encode($lReturn));

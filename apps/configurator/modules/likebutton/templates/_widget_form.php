@@ -30,6 +30,10 @@
   <tr>
     <td><input type="text" name="likebutton[fc]" id="likebutton_fc" value="#000000" /></td>
     <td class="right_side"><label for="likebutton_fc"><?php echo __('LABEL_FONTCOLOR', null, 'configurator'); ?></label></td>
+  </tr>
+  <tr>
+    <td><input type="checkbox" name="likebutton[so]" id="likebutton_so" /><label for="likebutton_so"><?php echo __('HELP_SOCIAL_VERSION', null, 'configurator'); ?></label></td>
+    <td class="right_side"><label for="likebutton_so"><?php echo __('LABEL_SOCIAL_VERSION', null, 'configurator'); ?></label></td>
   </tr>  
   <tr>
     <td><input type="checkbox" name="likebutton[bt]" id="likebutton_bt" /><label for="likebutton_bt"><?php echo __('HELP_DISLIKE_OPTION', null, 'configurator'); ?></label></td>
