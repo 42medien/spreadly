@@ -878,7 +878,7 @@ var YiidError = {
     var lAddText = document.getElementById('additional_text_area');
     YiidUtils.emptyElement(lAddText);
     var lBlock = document.createElement('p');
-    YiidUtils.setAttr(lBlock, 'id', 'error-msg')
+    YiidUtils.setAttr(lBlock, 'id', 'error-msg');
     lBlock.innerHTML = pMessage;
     lAddText.appendChild(lBlock);
   },
@@ -1196,13 +1196,24 @@ var YiidRequest = {
 
 var YiidFriends = {
   
-  aGetAction: "http://widgets.yiid.local/widget_dev.php/widget/load_friends",
-  aFriendsContainer: {},
+  aGetAction: "",
     
+  /**
+   * inits the show/getFriens-methods
+   * @param pObjectId
+   * @param pUserId
+   * @param pLimit
+   */
   init: function(pObjectId, pUserId, pLimit) {
     YiidFriends.getFriends(pObjectId, pUserId, pLimit);
   },
   
+  /**
+   * send a request to get the share-friends and handle the request
+   * @param pObjectId
+   * @param pUserId
+   * @param pLimit
+   */
   getFriends: function(pObjectId, pUserId, pLimit) {
     var lXhttp = YiidUtils.createXMLHttpRequest();
     try{
@@ -1221,7 +1232,7 @@ var YiidFriends = {
             //YiidError.showHttpError(lXhttp);
           } else {
             //if all went good, check if there are internal errors
-            YiidFriends.showFriends(lXhttp);
+            YiidFriends.handleRequest(lXhttp);
             //console.log(lXhttp);
           }
         }
@@ -1233,22 +1244,32 @@ var YiidFriends = {
     }
   },
   
-  showFriends: function(pXhttp) {
+  /**
+   * gets the response and delegate it
+   * @param pXhttp
+   */
+  handleRequest: function(pXhttp) {
     //get the json-response as string
     var lResponse = pXhttp.responseText;
     //parse the string to to object
     var lJson = json_parse(lResponse);
     if(lJson.success === true) {
-      YiidFriends.insertElems(lJson.html);
+      YiidFriends.showFriends(lJson.html);
     }
   },
   
-  insertElems: function(pHtml) {
+  /**
+   * rekursiv method, to check, if the friends-elem is loade. if so it inserts the html from response
+   * @param pHtml
+   * @returns boolean
+   */
+  showFriends: function(pHtml) {
     var lContainer = document.getElementById("friends");
     if(lContainer !== undefined) { 
       lContainer.innerHTML = pHtml;
     } else {
-      YiidFriends.insertElems(pHtml);
-    }    
+      YiidFriends.showFriends(pHtml);
+    } 
+    return true;
   }
 };

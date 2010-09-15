@@ -15,4 +15,4 @@ var i18n = {
   set: function(pKey, pValue) {
     i18n.aVars[pKey] = pValue;
   }
-}
+};

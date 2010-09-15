@@ -50,10 +50,14 @@ var Stream = {
     ItemDetail.loadFirst();
 	},
 	
+	/**
+	 * updates the css of the stream
+	 * @param pCssObj
+	 */
 	updateCss: function(pCssObj) {
     debug.log("[Stream][updateCss]");	  
 
-    if(pCssObj['class'] != "normal_list") {
+    if(pCssObj && pCssObj['class'] != "normal_list") {
       jQuery('#new_shares').removeClass('not_stream');
       jQuery('#new_shares').removeClass('new_stream');
       jQuery('#new_shares').removeClass('hot_stream');

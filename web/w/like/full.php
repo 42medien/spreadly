@@ -66,6 +66,7 @@ YiidStatsSingleton::trackVisit($pUrl);
   YiidRequest.aDislikeAction = "<?php echo LikeSettings::JS_DISLIKE_PATH; ?>";
   YiidCookie.aDomain = "<?php echo LikeSettings::COOKIE_DOMAIN; ?>";
   <?php if ($lShowFriends) { ?>
+    YiidFriends.aGetAction = "<?php echo LikeSettings::JS_GETFRIENDS_PATH; ?>";
     YiidFriends.init("<?php echo $lSocialObjectArray['_id'.""] ?>", "<?php echo $pUserId; ?>", "<?php echo $lLimit; ?>")
   <?php } ?>
 </script>

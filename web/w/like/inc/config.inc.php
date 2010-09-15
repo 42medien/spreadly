@@ -22,4 +22,6 @@ class LikeSettings {
   const JS_DISLIKE_PATH =  'http://widgets.yiid.local/api/dislike';
 
   const JS_POPUP_PATH = 'http://widgets.yiid.local/popup/settings';
+
+  const JS_GETFRIENDS_PATH = 'http://widgets.yiid.local/widget_dev.php/widget/load_friends';
 }

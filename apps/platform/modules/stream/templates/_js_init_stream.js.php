@@ -23,5 +23,5 @@ var ACTIVE_FRIENDS = "<?php echo __('ACTIVE_FRIENDS')?>";
 var ALL_FRIENDS = "<?php echo __('ALL_FRIENDS')?>";
 
 i18n.init({
-  "TYPE_NAME_TO_FILTER":"<?php echo __('type name to filter', null, 'platform'); ?>",
+  "TYPE_NAME_TO_FILTER":"<?php echo __('type name to filter', null, 'platform'); ?>"
 });
