@@ -47,13 +47,21 @@ YiidStatsSingleton::trackVisit($pUrl);
 
 $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
 
+$lShowFriends = false;
+$lLimit = 6;
+if($pUserId && $pSocialFeatures && $lSocialObjectArray['_id']) {
+  $lShowFriends = true;
+  $lLimit = $pFullShortVersion?'6':'8';
+}
+
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Yiid it! Button</title>
-<script type="text/javascript" src="/js/widget/modules/Like.js"></script>
+<script type="text/javascript" src="/js/100_main/include/Like-rogue.min.js"></script>
 <script type="text/javascript">
   <?php echo printI18nJSObject($pType); ?>
 
@@ -62,18 +70,23 @@ $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
   YiidRequest.aLikeAction = "<?php echo LikeSettings::JS_LIKE_PATH; ?>";
   YiidRequest.aDislikeAction = "<?php echo LikeSettings::JS_DISLIKE_PATH; ?>";
   YiidCookie.aDomain = "<?php echo LikeSettings::COOKIE_DOMAIN; ?>";
+  <?php if ($lShowFriends) { ?>
+    YiidFriends.aGetAction = "<?php echo LikeSettings::JS_GETFRIENDS_PATH; ?>";
+    YiidFriends.init("<?php echo $lSocialObjectArray['_id'.""] ?>", "<?php echo $pUserId; ?>", "<?php echo $lLimit; ?>")
+  <?php } ?>
+
 </script>
 <link rel="stylesheet" href="/css/widget/Button.css" type="text/css" media="screen, projection" />
 </head>
 <body>
 
   <div id="container">
-  
+
     <div class="clearfix">
 
 		  <?php if($lIsUsed === false) { ?>
 		  <div id="container_like" class="left" <?php if($pUserId) { ?>onmouseover="YiidSlider.showClickElement();" onmouseout="YiidSlider.hideClickElement(event);"<?php } ?>>
-	
+
 	      <div class="light_bg_118 button_full_outer clearfix" id="normal_button">
 	        <div id="service_area" class="left">
 	          <div id="service_twitter_small_enabled" class="service_icon_small left"></div>
@@ -81,7 +94,7 @@ $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
 	          <div id="service_linkedin_small_enabled" class="service_icon_small left"></div>
 	          <div id="service_google_small_enabled" class="service_icon_small right"></div>
 	        </div>
-	
+
 	        <div class="hover_bg left" id="like_area">
 	          <?php if($pFullShortVersion) { ?>
 	            <a class="like_icon" title="<?php echo __("POS_BUTTON_TITLE", $pType); ?>" <?php if($pUserId) { ?>onclick="YiidWidget.doLike(1);return false;"<?php } else { ?>target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>', 1);return false;"<?php } ?>>&nbsp;</a>
@@ -91,19 +104,19 @@ $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
 	            </a>
 	          <?php } ?>
 	        </div>
-	
+
 	        <div class="left <?php if($pUserId) { ?>hover_bg<?php } ?>" id="open_settings_icon_area" <?php if($pUserId) { ?>onclick="YiidSlider.slideIn(event); return false;"<?php } ?> style="display: none;">
 	          <a id="slide_arrow_closed" class="open_settings_icon" title="<?php echo __("SETTINGS_TITLE"); ?>">&nbsp;</a>
 	        </div>
 	      </div>
-	
+
 	      <div id="settings_button" class="normal_button_area" style="display:none;">
 	        <span id="settings_button_icon" class="left">&nbsp;</span>
 	        <p class="left <?php echo (!$pFullShortVersion ? 'normal_space' : 'small_space') ?>" onclick="YiidSlider.slideOut(event);" title="<?php echo __("SETTINGS_TITLE"); ?>">
 	          <?php if(!$pFullShortVersion) { ?><?php echo __("SETTINGS_VALUE"); ?><?php } ?>
 	        </p>
 	      </div>
-	
+
 	      <!-- Area to be slided -->
 	      <div id="sliding_area" style="display:none;">
 	        <div id="slide-box">
@@ -118,34 +131,34 @@ $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
 	        </div>
 	      </div>
 	      <!-- Area to be slided -->
-	
+
 	    <?php } ?>
-	
+
 	  </div>
 
 	  <div id="container_like_used" class="left" <?php if($lIsUsed === false) { ?>style="display: none;"<?php } ?>>
 	    <div id="used_button" class="normal_button_area <?php echo (!$pFullShortVersion ? 'normal_space' : 'small_space') ?>_used" target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>');">
-	
+
 	      <?php if(is_numeric($lIsUsed)) { ?>
-	
+
 	        <?php if($pFullShortVersion) { ?>
 	          <p class="like_icon" id="liked-text" title="<?php echo __('POS_BUTTON_ACTION_VALUE', $pType); ?>">&nbsp;</p>
 	        <?php } else { ?>
 	          <p id="liked-text" class="left"><?php echo __('POS_BUTTON_ACTION_VALUE', $pType); ?></p>
 	        <?php } ?>
-	
+
 	      <?php } else { ?>
-	
+
 	        <?php if($pFullShortVersion) { ?>
 	          <p class="like_icon" id="liked-text" title="<?php echo __('POS_BUTTON_ACTION_VALUE', $pType); ?>" style="display:none;">&nbsp;</p>
 	        <?php } else { ?>
 	          <p id="liked-text" class="left" style="display:none;"><?php echo __('POS_BUTTON_ACTION_VALUE', $pType); ?></p>
 	        <?php } ?>
-	
+
 	      <?php } ?>
 	    </div>
 	  </div>
-	
+
 	  <!-- Text information -->
 	  <div id="additional_text_area_like" class="left big_space_to_left" style="color: <?php echo $lFontcolor; ?>">
 	    <?php if($lSocialObjectArray['urlerror']) { ?>
@@ -159,24 +172,12 @@ $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
 	  </div>
 	  <!-- /Text information -->
 	</div>
-  
-  <?php if($pUserId && $pSocialFeatures) { ?>
-    <?php $lLimit = $pFullShortVersion?'5':'7'; ?>
+
+  <?php if($lShowFriends) { ?>
     <div id="friends" class="clearfix">
-      <?php 
-      /**
-       * 1. Per Ajax Freundesbilder aus Action widget/load_friends in app widget holen. Dabei wird benötigt: SocialObjectId "so_id", UserId "u_id" und Limit "limit"
-       * 2. Div mit ID #friends leeren und response.html aus 1. an diese Stelle setzen
-       */
-      ?>
-      <?php for($i = 1; $i< $lLimit+1; $i++) {?>
-        <div class="friends_image left">
-          <img src="../../uploads/avatars/30x30/default.png" alt="Friend" title="Die Doris<?php echo $i;?>" />
-        </div>
-      <?php }?>
     </div>
   <?php } ?>
-  
+
 </div>
 
 </body>
