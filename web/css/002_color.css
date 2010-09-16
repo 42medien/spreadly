@@ -219,8 +219,8 @@ li.item_active .whats_hot_stream_item,
   position: fixed; 
   display: none; 
   background-color: #FF08D6;
-	background: -moz-linear-gradient(100% 100% 90deg, #FF08D6, #FFC2F7);
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFC2F7), to(#FF08D6));
+	background: -moz-linear-gradient(100% 100% 90deg, #6A6B6A, #E0FFD9);
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E0FFD9), to(#6A6B6A));
 	border-radius: 0px 0px 5px 5px;
 	-moz-border-radius: 0px 0px 5px 5px;
 	-webkit-border-bottom-right-radius: 5px;
@@ -229,4 +229,5 @@ li.item_active .whats_hot_stream_item,
 #error-msg-box ul{ 
 	padding-left: 20px;
   list-style: none;
+  text-align: center;
 }
