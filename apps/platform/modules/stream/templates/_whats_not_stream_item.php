@@ -21,7 +21,6 @@
       </div>
     </div>
     <div class="right preview_information">
-      <?php echo image_tag('/img/test/map_preview.png'); ?>
     </div>
   </div>
 </div>
