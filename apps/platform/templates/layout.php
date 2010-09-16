@@ -57,7 +57,7 @@
 	        if (has_slot('js_document_ready')) {
 	          include_slot('js_document_ready');
 	        }
-          include_partial('general/js_init_error');
+          include_partial('general/js_init_error.js');
         ?>
 	    });
 	  </script>
