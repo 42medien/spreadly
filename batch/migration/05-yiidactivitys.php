@@ -29,12 +29,7 @@ foreach ($lActivities as $lActivity) {
     }
   }
 
-  $pManipualtior = array('$addToSet' => array('oiids' => array('$each' => array_filter($lOiIds)),
-                                              'cids' => array('$each' => array_filter($lServices))
-  ),
-  );
 
-  YiidActivityTable::updateObjectInMongoDb(array('u_id' => $lUserId, 'url_hash' => $lActivity->getUrlHash()), $pManipualtior);
 
   $lSocialObject = SocialObjectTable::retrieveByUrlHash($lActivity->getUrlHash());
   if (!$lSocialObject) {
@@ -43,12 +38,21 @@ foreach ($lActivities as $lActivity) {
   if ($lSocialObject) {
     $lSocialObject->updateObjectActingIdentities($lUserId, $lOiIds, $lServices);
 
-    $lActivity->setSoId(new MongoId($lSocialObject->getId()));
-    $lActivity->save();
+   // $lActivity->setSoId(new MongoId($lSocialObject->getId()));
+   // $lActivity->save();
+
+      $pManipualtior = array('$addToSet' => array('oiids' => array('$each' => array_filter($lOiIds)),
+                                              'cids' => array('$each' => array_filter($lServices))),
+                             '$set' => array('so_id' => new MongoId($lSocialObject->getId()."")),
+                             '$unset' => array('id' => 1),
+  );
+
+  YiidActivityTable::updateObjectInMongoDb(array('_id' => new MongoId($lActivity->getId()."")), $pManipualtior);
+
     echo $lUserId ." - ".count($lOiIds)." \r\n";
   }
   else {
-    echo "################################################### " .$lActivity->getUrl()."\r\n";
+    echo $lActivity->getId()."";
   }
 
 }
