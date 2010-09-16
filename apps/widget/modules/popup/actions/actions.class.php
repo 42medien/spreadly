@@ -96,16 +96,17 @@ class popupActions extends sfActions {
     $lUser = $this->getUser()->getUser();
     if($request->getMethod() == sfRequest::POST) {
       $checkedOnlineIdentities = $request->getParameter('enabled_services');
-      var_dump($checkedOnlineIdentities);die();
-      OnlineIdentityPeer::toggleSocialPublishingStatus(UserIdentityConPeer::getOnlineIdentityIdsByUserId($this->getUser()->getId()), $checkedOnlineIdentities);
+      //@todo define methods in objects
+      OnlineIdentityTable::toggleSocialPublishingStatus(UserIdentityConTable::getOnlineIdentityIdsByUserId($this->getUser()->getId()), $checkedOnlineIdentities);
 
-      $lTempData = YiidActivityPeer::getTemporaryData($_COOKIE["yiid_temp_hash"]);
+      $lTempData = YiidActivityTable::getTemporaryData($_COOKIE["yiid_temp_hash"]);
       setcookie("yiid_temp_hash", '', time()-3600, '/', sfConfig::get('app_settings_host'));
 
       if ($lTempData) {
-        $lStatus = YiidActivityPeer::saveLikeActivitys($this->getUser()->getId(),
+        $lStatus = YiidActivityTable::saveLikeActivitys($this->getUser()->getId(),
                                             $lTempData["url"],
-                                            UserIdentityConPeer::getOnlineIdentityIdsByUserId($this->getUser()->getId()),
+                                            //@todo define methods in objects
+                                            UserIdentityConTable::getOnlineIdentityIdsByUserId($this->getUser()->getId()),
                                             $this->getUser()->getUser()->getOiIdsForLikeWidget(),
                                             $lTempData["score"],
                                             $lTempData["verb"],
