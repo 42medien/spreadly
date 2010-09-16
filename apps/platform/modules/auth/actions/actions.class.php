@@ -83,6 +83,8 @@ class authActions extends sfActions {
       $this->getUser()->signIn($lUser);
       //UserRelationTable::doShit($lUser->getId());
     }
+
+    UserRelationTable::doIdentityMigration($this->getUser()->getUserId());
     $this->pOnlineIdenities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
     CookieUtils::generateWidgetIdentityCookie($this->pOnlineIdenities);
 
