@@ -34,7 +34,7 @@ foreach ($lActivities as $lActivity) {
   ),
   );
 
-  YiidActivityTable::updateObjectInMongoDb(array('u_id' => $lUserId, 'url_hash' => $lActivity->getUrlHash()), $pManipualtior);
+  YiidActivityTable::updateObjectInMongoDb(array('u_id' => $lUserId, 'url_hash' => '"'.$lActivity->getUrlHash().'"'), $pManipualtior);
 
   $lSocialObject = SocialObjectTable::retrieveByUrlHash($lActivity->getUrlHash());
   if (!$lSocialObject) {

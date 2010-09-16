@@ -38,9 +38,6 @@ class YiidActivityTable extends Doctrine_Table
    */
   public static function updateObjectInMongoDb($pIdentifier, $pManipulator) {
     $lCollection = self::getMongoCollection();
-    print_r($pIdentifier);
-    print_r($pManipulator);
-    die();
     $lCollection->update($pIdentifier, $pManipulator, array('upsert' => true));
   }
 
