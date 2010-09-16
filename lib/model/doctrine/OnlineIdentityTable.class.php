@@ -173,7 +173,6 @@ class OnlineIdentityTable extends Doctrine_Table {
    */
   public static function getPublishingEnabledByUserId($pUserId) {
     $q = Doctrine_Query::create()
-           ->select('*')
            ->from('OnlineIdentity oi')
            ->where('oi.user_id = ?', $pUserId)
            ->andWhere('oi.social_publishing_enabled = ?', true);

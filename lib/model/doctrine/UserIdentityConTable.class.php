@@ -23,10 +23,14 @@ class UserIdentityConTable extends Doctrine_Table {
    * @param int $pUserId
    */
   public static function getOnlineIdentityIdsForUser($pUserId) {
+
+    $lComIds = CommunityTable::retrieveCommunityIdsForSocialPublishing();
     $q = Doctrine_Query::create()
           ->select('uic.online_identity_id')
           ->from('UserIdentityCon uic')
-          ->where('uic.user_id = ?', $pUserId);
+          ->leftJoin('uic.OnlineIdentity oi')
+          ->where('uic.user_id = ?', $pUserId)
+          ->andWhereIn('oi.community_id', $lComIds);
 
     $lUiCons = $q->execute(array(),  Doctrine_Core::HYDRATE_NONE);
     $q->free();

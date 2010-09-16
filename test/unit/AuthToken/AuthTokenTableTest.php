@@ -18,7 +18,7 @@ class AuthTokenTableTest extends BaseTestCase {
 
   public function testGetUsersAuthTokensWithPubblishing() {
     $lUserHugo = UserTable::getByIdentifier('hugo');
-    $lTokens = AuthTokenTable::getAllTokensForPublishingByUser($lUserHugo->getId());
+    $lTokens = UserTable::getTokensForPublishingByUserId($lUserHugo->getId());
 
     $this->assertEquals(1, count($lTokens));
   }

@@ -57,7 +57,7 @@ class UserTable extends Doctrine_Table {
    * @param int $pUserId
    */
   public static function getTokensForPublishingByUserId($pUserId) {
-    return AuthTokenTable::getAllTokensForPublishingByUser($pUserId);
+    return OnlineIdentityTable::getPublishingEnabledByUserId($pUserId);
   }
 
 
@@ -71,7 +71,7 @@ class UserTable extends Doctrine_Table {
    */
   public static function getHottestFriendsForUser($pUserId, $pPage = 1, $pLimit = 10) {
     $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
-    
+
     return self::getHottestUsers($lFriendIds, $pPage, $pLimit);
   }
 
@@ -105,7 +105,7 @@ class UserTable extends Doctrine_Table {
   	$lCountFriends = count($pFriendIds);
   	if($lCountFriends == 0)
       return false;
-      
+
     $lQuery = Doctrine_Query::create()
     ->from('User u')
     ->whereIn('u.id', $pFriendIds)
@@ -194,7 +194,7 @@ class UserTable extends Doctrine_Table {
     }
     return $lQ;
   }
-  
+
    /**
    * Deletes unverified User with Cascade after given time in days or from a given date
    * @param $pDays Integer
@@ -203,14 +203,14 @@ class UserTable extends Doctrine_Table {
 
     $lDate = mktime( 0, 0, 0, date("m"), date("d") - $pDays, date("Y"));
     $lDate = date('Y-m-d H:i:s', $lDate);
-    
+
     $lQuery = Doctrine_Query::create()
       ->from('User u')
       ->where('u.active = 0')
       ->andWhere('u.created_at < ?', $lDate);
-            
+
     $lUsers = $lQuery->execute();
-    
+
     foreach ($lUsers as $lUser) {
       $lUser->delete();
     }

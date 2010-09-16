@@ -75,10 +75,24 @@ class CommunityTable extends Doctrine_Table {
    * @author weyandch
    */
   public static function retrieveCommunitysForSocialPublishing() {
+    $lReturn = array();
+    $lCommunityIds = self::retrieveCommunityIdsForSocialPublishing();
+    foreach ($lCommunityIds as $id) {
+      $lReturn[] = CommunityTable::getInstance()->retrieveByPK($id);
+    }
+    return $lReturn;
+  }
+
+
+  public static function retrieveCommunityIdsForSocialPublishing() {
     $lQuery = Doctrine_Query::create()
+    ->select('c.id')
     ->from('Community c')
     ->where('c.social_publishing_possible = ?', true);
 
-    return $lQuery->execute();
+    $lCommunityIds = $lQuery->execute(array(),  Doctrine_Core::HYDRATE_NONE);
+    $lQuery->free();
+    return HydrationUtils::flattenArray($lCommunityIds);
+
   }
 }

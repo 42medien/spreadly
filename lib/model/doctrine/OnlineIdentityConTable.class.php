@@ -59,6 +59,8 @@ class OnlineIdentityConTable extends Doctrine_Table {
     return HydrationUtils::flattenArray($lUiCons);
   }
 
+
+
   /**
    * checks if a connection between two OIs already exists
    *

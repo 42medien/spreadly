@@ -33,19 +33,6 @@ class AuthTokenTable extends Doctrine_Table {
   }
 
   /**
-   * retrives tokens with publishing enabled by userid
-   *
-   * @author weyandch
-   * @param int $pUserId
-   */
-  public static function getAllTokensForPublishingByUser($pUserId) {
-    $lQuery = self::getTokensForUserQuery($pUserId);
-    $lQuery->addWhere('at.is_publishing_enabled = ?', true);
-    $lResults = $lQuery->execute();
-    return $lResults;
-  }
-
-  /**
    * creates basic query to retrieve tokens for a given user
    *
    * @author Matthias Pfefferle

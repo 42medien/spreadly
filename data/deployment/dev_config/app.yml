@@ -2,7 +2,7 @@
 # default values
 all:
   release:
-    name:     'rogue'
+    name:     '20100915'
  #   revision: '20100621/'   ## current revision
     gzip:     0              ## set 1 to force local gz support
 
