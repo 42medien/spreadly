@@ -72,7 +72,7 @@ class SocialObjectPeer {
 
     // if no data is available, initialize empty array
     if (!$lSocialObjectArray) {
-    //  self::delegateSocialObjectParsing($pUrl);
+      self::delegateSocialObjectParsing($pUrl);
       $lSocialObjectArray = array();
     }
 
@@ -120,7 +120,7 @@ class SocialObjectPeer {
    */
   public static function delegateSocialObjectParsing($pUrl) {
     if ($pUrl) {
-      $queue = 'testerle1';
+      $queue = 'ImportContacts';
 
       $service = new SQS('AKIAJ5NSA6ET5RC4AMXQ','bs1YgS4c1zJN/HmwaVA8CkhNfyvcS+EEm1hcEOa0');
       $service->createQueue($queue);
