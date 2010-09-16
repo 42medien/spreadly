@@ -14,6 +14,8 @@ class UserEmailAddressTable extends Doctrine_Table
     ->where('ue.user_id = ?', $pUserId)
     ->addWhere('ue.main = ?', true);
 
-    return $lQ->fetchOne();
+    $lEmail = $lQ->fetchOne();
+    $lQ->free();
+    return $lEmail;
   }
 }
