@@ -1,5 +1,5 @@
 /**
- * @combine Like
+ * @nocombine Like
  */
 
 /**

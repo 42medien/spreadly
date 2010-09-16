@@ -1,5 +1,5 @@
 /**
- * @combine Full
+ * @nocombine Full
  */
 
 /**
