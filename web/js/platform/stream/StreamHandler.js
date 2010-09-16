@@ -137,9 +137,7 @@ var StreamSubFilter = {
   updateCss: function(pCssId) {
     debug.log("[StreamSubFilter][updateCss]"); 
     //remove all classes named filter-chosen from a parent-list called all_network_list    	
-    ClassHandler.removeClassesByParent(jQuery('#all_networks_list'), 'filter_chosen');
-    ClassHandler.removeClassesByParent(jQuery('#friends_active_list'), 'filter_chosen'); 
-    ClassHandler.removeClassesByParent(jQuery('#friends_all_list'), 'filter_chosen'); 
+    StreamSubFilter.resetCss();
     
     var lResetElemId = 'active_friends_headline';
     if(jQuery('#'+pCssId).parent('ul.normal_list').attr('id') == 'all_networks_list') {
@@ -156,7 +154,8 @@ var StreamSubFilter = {
     //remove all classes named filter-chosen from a parent-list called all_network_list     
     ClassHandler.removeClassesByParent(jQuery('#all_networks_list'), 'filter_chosen');
     ClassHandler.removeClassesByParent(jQuery('#friends_active_list'), 'filter_chosen');
-    ClassHandler.removeClassesByParent(jQuery('#friends_all_list'), 'filter_chosen');      
+    ClassHandler.removeClassesByParent(jQuery('#friends_all_list'), 'filter_chosen');   
+    ClassHandler.removeClassesByParent(jQuery('#friends_search_results'), 'filter_chosen');    
   }
 };
 
