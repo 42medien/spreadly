@@ -142,6 +142,10 @@ var StreamSubFilter = {
     var lResetElemId = 'active_friends_headline';
     if(jQuery('#'+pCssId).parent('ul.normal_list').attr('id') == 'all_networks_list') {
       lResetElemId = 'active_communities_headline';
+      FriendStream.reset();
+      FriendStreamCounter.reset();
+      FriendStreamInputFilter.reset();
+      
     }
     FilterHeadline.updateCss(lResetElemId);
     
