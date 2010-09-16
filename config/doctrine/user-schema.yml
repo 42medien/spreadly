@@ -59,6 +59,10 @@ User:
       type:       string
     community_object_id:  
       type:      integer
+    done:
+      type:     integer
+      default:  0
+      notnull:    true
     #latest_activity:
     #  type:       date
 
