@@ -1,6 +1,5 @@
 /**
  * @combine platform
- * @combine widget
  */
 
 /**
