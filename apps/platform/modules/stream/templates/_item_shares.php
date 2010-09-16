@@ -22,9 +22,9 @@
 	    </div>
 	    <div class="right">
 	      <?php if($lActivity->getScore() == 1) { ?>
-	        <span class="thumb_up icon_detail_right">&nbsp;</span>
+	        <span class="thumb_up icon_small_use like-dislike">&nbsp;</span>
 	      <?php } else {?>
-	        <span class="thumb_down icon_detail_right">&nbsp;</span>
+	        <span class="thumb_down icon_small_use like-dislike">&nbsp;</span>
 	      <?php } ?>
 	    </div>
 	  </li>
