@@ -192,7 +192,8 @@ var GlobalRequest = {
    */
   bindClickByElement: function(pElement, pParams) {
     debug.log("[GlobalRequest][bindClickByElement]");     	
-  	jQuery(pElement).die('click');
+    debug.log(pElement);
+    jQuery(pElement).die('click');
   	jQuery(pElement).live("click", function() {
       GlobalRequest.initGlobals(pElement, pParams);  		
       //and send request on click      

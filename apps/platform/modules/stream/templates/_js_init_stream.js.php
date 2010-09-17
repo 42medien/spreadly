@@ -10,7 +10,7 @@ StreamItem.openWindow();
 ItemDetail.loadFirst();
 
 DataObjectPager.init('stream_pager_link','{"action":"stream/hot", "callback":"Stream.show", "page":"2", "css": "{\\"class\\":\\"whats_hot_active\\", \\"id\\":\\"main_nav_outer\\"}"}');
-DataObjectPager.init('item-stream-pager-link');
+//DataObjectPager.init('item-stream-pager-link');
 
 FriendBox.init();
 

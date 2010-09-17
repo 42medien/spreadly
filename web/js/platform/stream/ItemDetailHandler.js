@@ -24,6 +24,11 @@ var ItemDetail = {
     //update the css of the clicked stream-item (cssid for it is set in the presponse.css-json-obj)
     StreamItem.updateCss(pResponse.css);
     OnLoadGrafic.hideGrafic();
+    if(pResponse.pDoPaginate === true) {
+      DataObjectPager.init('item-stream-pager-link');
+    } else {
+      jQuery('#item-stream-pager-link').hide();
+    }
   },
   
   /**

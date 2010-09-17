@@ -22,7 +22,6 @@ var DataObjectPager = {
 		if(pDataString !== undefined){
 		  jQuery(lElement).attr('data-obj', pDataString);
 		}
-
 		GlobalRequest.bindClickByElement(lElement);
 	},
 	
