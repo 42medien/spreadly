@@ -14,7 +14,7 @@ ShortUrl:
       type:    string(25)
   indexes:
     url_prefix:
-      fields: [url(35)]
+      fields: [url(45)]
       
 ShortUrlIntern:
   actAs:

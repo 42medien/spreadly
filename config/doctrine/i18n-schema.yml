@@ -31,6 +31,8 @@ Catalogue:
   connection:  translation
   columns:
     cat_id:
+      autoincrement: true
+      primary:  true
       type:  integer
     name: 
       type: string(100)
@@ -60,7 +62,7 @@ TransUnit:
   columns:
     msg_id:
       type: integer
-      notnull: true
+      autoincrement: true
       primary:  true
     cat_id: 
       type: integer

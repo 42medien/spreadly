@@ -32,7 +32,7 @@ all:
   routing:
     class: sfPatternRouting
     param:
-      generate_shortest_url:            true
+      generate_shortest_url:            false
       extra_parameters_as_query_string: true
 
   view_cache_manager:
