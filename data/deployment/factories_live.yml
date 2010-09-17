@@ -1,0 +1,97 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/05-Factories
+
+prod:
+  logger:
+    class:   sfNoLogger
+    param:
+      level:   err
+      loggers: ~
+
+test:
+  storage:
+    class: sfSessionTestStorage
+    param:
+      session_path: %SF_TEST_CACHE_DIR%/sessions
+
+  response:
+    class: sfWebResponse
+    param:
+      send_http_headers: false
+
+  mailer:
+    param:
+      delivery_strategy: none
+
+dev:
+  mailer:
+    param:
+      delivery_strategy: none
+
+all:
+  routing:
+    class: sfPatternRouting
+    param:
+      generate_shortest_url:            true
+      extra_parameters_as_query_string: true
+
+  view_cache_manager:
+    class: sfViewCacheManager
+    param:
+      cache_key_use_vary_headers: true
+      cache_key_use_host_name:    true
+
+  i18n:
+    class: sfI18N
+    param:
+      source:          MySQL
+      debug:           false
+      default_culture: de
+      database:        mysql://yiidit_i18n:fdsmolds32dfs@donkeykong/yiid_i18n
+      cache:
+        class: sfMemcacheCache
+        param:
+          lifetime:                  86400
+          prefix:                    yiidit_i18n
+          servers:
+            default:
+              host: 127.0.0.1     #aws
+              port: 11211
+
+  storage:
+    class: sfMongoSessionStorage
+    param:
+      db_table:        session
+      db_id_col:       sess_id
+      db_time_col:     sess_time
+      db_data_col:     sess_data
+      host:            donkeykong
+      port:            27017
+      db_name:         yiid_dev
+      collection_name:   session
+      session_name:    yiiddev_com
+      session_cookie_domain: .yiiddev.com
+      session_cookie_lifetime: 17776000
+  routing:
+    class: sfPatternRouting
+    param:
+#      load_configuration: true
+#      suffix:             .
+#      default_module:     default
+#      default_action:     index
+#      variable_prefixes:  [':']
+      segment_separators: ['/']
+#      variable_regex:     '[\w\d_]+'
+#      debug:              %SF_DEBUG%
+#      logging:            %SF_LOGGING_ENABLED%
+#      cache:
+#        class: sfFileCache
+#        param:
+#          automatic_cleaning_factor: 0
+#          cache_dir:                 %SF_CONFIG_CACHE_DIR%/routing
+#          lifetime:                  31556926
+#          prefix:                    %SF_APP_DIR%
+  user:
+    class: myUser
+    param:
+      timeout:         17776000
