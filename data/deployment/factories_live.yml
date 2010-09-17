@@ -47,7 +47,7 @@ all:
       source:          MySQL
       debug:           false
       default_culture: de
-      database:        mysql://yiidit_i18n:fdsmolds32dfs@donkeykong/yiid_i18n
+      database:        mysql://yiidit_i18n:fdsmolds32dfs@donkeykong/yiidit_i18n
       cache:
         class: sfMemcacheCache
         param:
