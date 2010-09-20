@@ -71,6 +71,8 @@ class FacebookAuthApiClient extends AuthApi {
       // </todo>
     }
 
+    $this->importContacts($lOnlineIdentity->getId());
+
     AuthTokenTable::saveToken($lUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['access_token'], null, true);  // signup,add new
 
     //FacebookImportClient::importContacts($lUser->getId(), $lOnlineIdentity);
@@ -132,7 +134,9 @@ class FacebookAuthApiClient extends AuthApi {
     $lUserIdentityCon->setVerified(true);
     $lUserIdentityCon->save();
     // </todo>
+
     $this->importContacts($lOnlineIdentity->getId());
+
     AuthTokenTable::saveToken($pUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['access_token'], null, true);  // signup,add new
 
     return $lOnlineIdentity;

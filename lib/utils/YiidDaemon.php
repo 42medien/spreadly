@@ -120,12 +120,12 @@ class YiidDaemon {
       // Depending on runmode it will either end up:
       //  - In the /var/log/logparser.log
       //  - On screen (in case we're not a daemon yet)
-      //System_Daemon::info('{appName} running in %s %s', $mode, $cnt);
+      System_Daemon::info('{appName} running in %s %s', $mode, $cnt);
 
       $message = $lMessageBroker->receiveMessage($pQueueName, 1);
 
       if (!empty($message)) {
-        //System_Daemon::info('{appName} received message with id %s %s', $message[0]['MessageId'], urldecode($message[0]['Body']));
+        System_Daemon::info('{appName} received message with id %s %s', $message[0]['MessageId'], urldecode($message[0]['Body']));
         $lMessageBroker->deleteMessage($pQueueName, $message[0]['ReceiptHandle']);
 
         // run the importer

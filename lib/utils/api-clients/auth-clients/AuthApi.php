@@ -1,4 +1,5 @@
 <?php
+require_once(dirname(__FILE__).'/../../../vendor/sqs.php');
 /**
  * abstract AuthApi class
  *
@@ -45,9 +46,8 @@ abstract class AuthApi {
    */
   public function importContacts($pOnlineIdentityId) {
     $service = new SQS(YiidDaemon::$aAmazonKey,YiidDaemon::$aAmazonSecret);
-    $service->createQueue('ImportContacts');
+    $service->createQueue("ImportContacts");
 
-    $pUrl = $pOnlineIdentityId;
     $service->sendMessage("ImportContacts", $pOnlineIdentityId);
   }
 }
