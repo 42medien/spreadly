@@ -27,6 +27,7 @@ var DataObjectPager = {
 	
 	/**
 	 * updates a pager element by a given id and set the data-attr with new values
+	 * bisschen inline-comment hät hier auch nix geschadet
 	 * @author KM
 	 * @param string pId(CSS)
 	 * @param string pAction
