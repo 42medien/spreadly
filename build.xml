@@ -86,8 +86,10 @@
 
     <exec command="php data/fixtures/initializeMongoObjects.php" checkReturn="true"/>
 
+    <phingcall target="syncI18n"></phingcall>
     <phingcall target="buildjs"></phingcall>
     <phingcall target="buildcss"></phingcall>
+
 
   </target>
   
