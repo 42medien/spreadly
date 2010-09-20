@@ -27,6 +27,22 @@ class landingActions extends sfActions {
     if ($this->getUser()->hasFlash("error")) {
       $this->pError = $this->getUser()->getFlash("error");
     }
+
+    if($request->isXmlHttpRequest()) {
+      $this->setLayout(false);
+      $this->getResponse()->setContentType('application/json');
+      $this->getUser()->setFlash("error", "Login required", true);
+
+      return $this->renderText(
+        'AuthError.redirect('.
+        json_encode(
+          array(
+            "path"  => sfConfig::get("app_settings_url")
+          )
+        )
+        .");"
+      );
+    }
   }
 
   public function executeMagic(sfWebRequest $request) {

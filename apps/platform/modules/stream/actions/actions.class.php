@@ -24,12 +24,12 @@ class streamActions extends sfActions
   }
 
   public function executeNew(sfWebRequest $request) {
+    $this->getResponse()->setContentType('application/json');
 
     $lObjectsCount = 15;
     $lObjectsTimeLine = 30;
     $lDoPaginate = true;
 
-    $this->getResponse()->setContentType('application/json');
     $lCallback = $request->getParameter('callback', 'logerror');
     $lContactId = $request->getParameter('userid', null);
     $lComId = $request->getParameter('comid', null);

@@ -130,5 +130,11 @@ var ErrorHandler = {
     } else {
       return console;
     }
-  }  
+  }
+};
+
+var AuthError = {
+  redirect: function(pResponse) {
+    window.location.href = pResponse.path;
+  }    
 };
