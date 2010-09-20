@@ -1,4 +1,6 @@
-/*NOCOMBINE*/
+/**
+ * @combine configurator
+ */
 jQuery.fn.toggleValue = function(){
 	var lText = jQuery(this).val();
 	var lNewText = '';

@@ -14,8 +14,4 @@ default:
   
   stylesheets: [configurator/configurator.css, vendor/colorpicker.css]
     
-  javascripts: 
-    - 100_main/global/100_jquery-1.4.2.min.js    
-    - 100_main/global/101_jquery.form.js    
-    - 100_main/vendor/colorpicker.js       
-    - configurator/likebutton/Configurator.js  
+  javascripts: []

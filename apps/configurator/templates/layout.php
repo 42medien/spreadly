@@ -26,7 +26,7 @@
     
     <?php include_partial('global/footer'); ?>
     
-    <?php include_cdn_javascripts(); ?>
+    <script type="text/javascript" src="/js/100_main/include/platform-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
     <script type="text/javascript">
       jQuery(document).ready( function() {
         Configurator.init("<?php echo sfContext::getInstance()->getUser()->getCulture(); ?>");
