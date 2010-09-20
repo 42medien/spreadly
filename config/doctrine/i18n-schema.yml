@@ -43,14 +43,13 @@ Catalogue:
     
 TransUnit:
   connection:  translation
+  actAs:
+    Timestampable:  ~
   columns:
     id: { type: integer, notnull: true, autoincrement: true, primary: true }
     cat_id: { type: integer, notnull: true}
     source: { type: clob(65532), notnull: true }
     target: { type: clob(65532), notnull: true }
-    comments: { type: clob(65532) }
-    date_added: { type: integer, notnull: true }
-    date_modified: { type: integer, notnull: true }
     author: { type: string(255), notnull: true, default: ''}
     translated: { type: boolean, notnull: true, default: false }    
   relations:

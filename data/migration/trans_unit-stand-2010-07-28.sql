@@ -56,7 +56,7 @@ INSERT INTO `catalogue` (`cat_id`, `name`, `source_lang`, `target_lang`, `date_c
 -- Daten für Tabelle `trans_unit`
 --
 
-INSERT INTO `trans_unit` (`msg_id`, `cat_id`, `source`, `target`, `comments`, `date_added`, `date_modified`, `author`, `translated`) VALUES
+INSERT INTO `trans_unit` (`id`, `cat_id`, `source`, `target`, `comments`, `date_added`, `date_modified`, `author`, `translated`) VALUES
 (19097, 98, 'FOR_MAGS_AND_BLOGS', 'Für Magazine &amp; Blogs', NULL, 1277898986, 0, '', 0),
 (19098, 97, 'FOR_MAGS_AND_BLOGS', 'For Magazines &amp; Blogs', NULL, 1277898986, 0, '', 0),
 (19099, 99, 'FOR_MAGS_AND_BLOGS', '', NULL, 1277898986, 0, '', 0),
@@ -676,7 +676,7 @@ INSERT INTO `trans_unit` (`msg_id`, `cat_id`, `source`, `target`, `comments`, `d
 (19734, 98, 'CHOOSE_PLUGINS', '(oder wählen Sie eines unserer zahlreichen Plugins für Blogs oder CMS)', NULL, 1278328468, 0, '', 0),
 (19735, 97, 'CHOOSE_PLUGINS', '(or choose a plugin for your blog or cms here)', NULL, 1278328468, 0, '', 0),
 (19736, 99, 'CHOOSE_PLUGINS', '', NULL, 1278328468, 0, '', 0);
-INSERT INTO `trans_unit` (`msg_id`, `cat_id`, `source`, `target`, `comments`, `date_added`, `date_modified`, `author`, `translated`) VALUES
+INSERT INTO `trans_unit` (`id`, `cat_id`, `source`, `target`, `comments`, `date_added`, `date_modified`, `author`, `translated`) VALUES
 (19737, 100, 'CHOOSE_PLUGINS', '', NULL, 1278328468, 0, '', 0),
 (19738, 101, 'CHOOSE_PLUGINS', '', NULL, 1278328468, 0, '', 0),
 (19739, 102, 'CHOOSE_PLUGINS', '', NULL, 1278328468, 0, '', 0),
