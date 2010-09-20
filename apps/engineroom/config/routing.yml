@@ -1,20 +1,20 @@
-#cms:
-#  class: sfDoctrineRouteCollection
-#  options:
-#    model:                Cms
-#    module:               cms
-#    prefix_path:          /cms
-#    column:               id
-#    with_wildcard_routes: true
+cms:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Cms
+    module:               cms
+    prefix_path:          /cms
+    column:               id
+    with_wildcard_routes: true
 
-#cms_category:
-#  class: sfDoctrineRouteCollection
-#  options:
-#    model:                CmsCategory
-#    module:               cms_category
-#    prefix_path:          /cms_category
-#    column:               id
-#    with_wildcard_routes: true
+cms_category:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                CmsCategory
+    module:               cms_category
+    prefix_path:          /cms_category
+    column:               id
+    with_wildcard_routes: true
 
 trans_unit:
   class: sfDoctrineRouteCollection

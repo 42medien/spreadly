@@ -46,7 +46,6 @@ all:
     param:
       generate_shortest_url:            true
       extra_parameters_as_query_string: true
-      segment_separators:               ['.','/','_']
       
 
   view_cache_manager:
