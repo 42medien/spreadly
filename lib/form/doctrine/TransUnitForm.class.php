@@ -12,5 +12,10 @@ class TransUnitForm extends BaseTransUnitForm
 {
   public function configure()
   {
+    /*$lLanguages = LanguageTable::getAllLanguageCodesAsArray();
+
+    foreach ($lLanguages as $lLang) {
+      $this->widgetSchema[$lLang]['title'] =   new sfWidgetFormInput();
+    } */
   }
 }

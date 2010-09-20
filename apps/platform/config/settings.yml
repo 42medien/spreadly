@@ -45,6 +45,7 @@ all:
     # Enable the database manager
     use_database:           true
     i18n:                   true
+    default_culture:        de_DE
 
     ## load common helpers
     standard_helpers:       [Cdn, I18N, Partial]

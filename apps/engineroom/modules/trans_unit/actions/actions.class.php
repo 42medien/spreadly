@@ -13,4 +13,23 @@ require_once dirname(__FILE__).'/../lib/trans_unitGeneratorHelper.class.php';
  */
 class trans_unitActions extends autoTrans_unitActions
 {
+
+  public function executeNew(sfWebRequest $request)
+  {
+    $this->form = $this->configuration->getForm();
+   // var_dump($this->form);
+    $this->trans_unit = $this->form->getObject();
+  }
+
+  public function executeCreate(sfWebRequest $request)
+  {
+    $this->form = $this->configuration->getForm();
+    $this->trans_unit = $this->form->getObject();
+
+    $this->processForm($request, $this->form);
+
+    $this->setTemplate('new');
+  }
+
+
 }

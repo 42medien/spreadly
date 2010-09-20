@@ -46,7 +46,7 @@ TransUnit:
   actAs:
     Timestampable:  ~
   columns:
-    id: { type: integer, notnull: true, autoincrement: true, primary: true }
+    id:     { type: integer, notnull: true, autoincrement: true, primary: true }
     cat_id: { type: integer, notnull: true}
     source: { type: clob(65532), notnull: true }
     target: { type: clob(65532), notnull: true }

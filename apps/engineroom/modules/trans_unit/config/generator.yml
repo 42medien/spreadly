@@ -12,10 +12,24 @@ generator:
     actions_base_class:    sfActions
 
     config:
-      actions: ~
-      fields:  ~
-      list:    ~
-      filter:  ~
+      actions: 
+        
+      fields:
+        cat_id: { label: 'Katalog' }
+        source: { label: 'Wildcard' }
+        target: { label: 'Übersetzung' }
+      list:    
+   #     actions:
+   #       newWildcard: { label: new Wildcard , action: newWildcard}
+        display: [cat_id, =source, target, author, updated_at]
+      filter:
+        display: [source, target, author, updated_at]
       form:    ~
-      edit:    ~
-      new:     ~
+      edit:    
+        actions:
+          _list:         ~
+          _save:         ~
+      new:
+        actions:
+          _list:         ~
+          _save:         ~      

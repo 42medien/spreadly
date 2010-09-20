@@ -22,7 +22,7 @@ trans_unit:
     model:                TransUnit
     module:               trans_unit
     prefix_path:          /trans_unit
-    column:               msg_id
+    column:               id
     with_wildcard_routes: true
 
 # You can find more information about this file on the symfony website:
