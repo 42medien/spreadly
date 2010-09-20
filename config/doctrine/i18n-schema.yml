@@ -26,63 +26,35 @@ Language:
       type:    unique
     is_active:
       fields:  [is_active]
+
+
+
+
+Catalogue:
+  connection:  translation
+  columns:
+    cat_id: { type: integer, notnull: true, autoincrement: true, primary: true }
+    name: { type: string(100), notnull: true, default: '' }
+    source_lang: { type: string(100), notnull: true, default: '' }
+    target_lang: { type: string(100), notnull: true, default: '' }
+    date_created: { type: integer, notnull: true, default: 0 }
+    date_modified: { type: integer, notnull: true, default: 0 }
+    author: { type: string(255), notnull: true, default: '' }
     
-Catalogue:      
+TransUnit:
   connection:  translation
   columns:
-    cat_id:
-      autoincrement: true
-      primary:  true
-      type:  integer
-    name: 
-      type: string(100)
-      notnull: true
-    source_lang:
-      type: string(10), required: true,  default: '' }
-    target_lang: 
-      type:   string(100)
-      notnull: true,  
-      default: ''
-    author:       
-      type: string(255)
-    date_created:
-      type: integer
-    date_modified: 
-      type: integer
-  relations:    
-    Language:     { onDelete: CASCADE, local: target_lang, foreign: lang, foreignAlias: Catalogues }
-  indexes:
-    name:
-      fields:  [name]
-      
-TransUnit:      
-  connection:  translation
-  actAs:
-    Timestampable:  ~
-  columns:
-    msg_id:
-      type: integer
-      autoincrement: true
-      primary:  true
-    cat_id: 
-      type: integer
-      notnull: true
-    source:       
-      type: string
-      notnull: true
-    target:
-      type: string 
-      notnull: true  
-    comments:   
-      type: string
-    author:       
-      type: string(255)
-    translated:   
-      type: boolean
-      default: false 
-    date_added:
-      type: integer
-    date_modified:
-      type: integer
-  relations:    
-    Catalogue:     { onDelete: CASCADE, local: cat_id, foreign: cat_id, foreignAlias: Translations }
+    id: { type: integer, notnull: true, autoincrement: true, primary: true }
+    cat_id: { type: integer, notnull: true}
+    source: { type: clob(65532), notnull: true }
+    target: { type: clob(65532), notnull: true }
+    comments: { type: clob(65532) }
+    date_added: { type: integer, notnull: true }
+    date_modified: { type: integer, notnull: true }
+    author: { type: string(255), notnull: true, default: ''}
+    translated: { type: boolean, notnull: true, default: false }    
+  relations:
+    Catalogue:
+      local: cat_id
+      foreign: cat_id
+      foreignAlias: Units      
