@@ -47,12 +47,12 @@ all:
       source:          MySQL
       debug:           false
       default_culture: de
-      database:        mysql://yiid_i18n:fdsmolds32dfs@donkeykong/yiid_i18n
+      database:        mysql://yiidit_i18n:fdsmolds32dfs@donkeykong/yiidit_i18n
       cache:
-        class: sfMemcacheCache
+        class:         sfNoCache
         param:
           lifetime:                  86400
-          prefix:                    yiid_i18n
+          prefix:                    yiidit_i18n
           servers:
             default:
               host: 127.0.0.1     #aws
