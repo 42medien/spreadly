@@ -1,10 +1,14 @@
-#!/usr/bin/php -q
 <?php
+require_once(dirname(__FILE__).'/../../lib/utils/YiidDaemon.php');
+require_once(dirname(__FILE__).'/../../lib/utils/api-clients/import-clients/YiidImportContacts.php');
+
+$lAppName = "ImportContacts";
+
 // Setup
-$options = array(
-    'appName' => 'importContacts',
+$lOptions = array(
+    'appName' => $lAppName,
     'appDir' => dirname(__FILE__),
-    'appDescription' => '',
+    'appDescription' => $lAppName,
     'authorName' => 'Matthias Pfefferle',
     'authorEmail' => 'matthias@ekaabo.de',
     'sysMaxExecutionTime' => '0',
@@ -14,4 +18,5 @@ $options = array(
     'appRunAsUID' => 0,
 );
 
+YiidDaemon::run($lAppName, $argv, "YiidImportContacts", "import", $lOptions);
 ?>
