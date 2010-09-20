@@ -37,4 +37,17 @@ abstract class AuthApi {
   public function getCallbackUri() {
     return sfConfig::get("app_settings_url").sfConfig::get("app_".$this->aCommunity."_oauth_callback_uri");
   }
+
+  /**
+   * Enter description here...
+   *
+   * @param int $pOnlineIdentityId
+   */
+  public function importContacts($pOnlineIdentityId) {
+    $service = new SQS(YiidDaemon::$aAmazonKey,YiidDaemon::$aAmazonSecret);
+    $service->createQueue('ImportContacts');
+
+    $pUrl = $pOnlineIdentityId;
+    $service->sendMessage("ImportContacts", $pOnlineIdentityId);
+  }
 }

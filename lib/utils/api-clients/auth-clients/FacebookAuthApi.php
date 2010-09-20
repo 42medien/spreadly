@@ -132,7 +132,7 @@ class FacebookAuthApiClient extends AuthApi {
     $lUserIdentityCon->setVerified(true);
     $lUserIdentityCon->save();
     // </todo>
-
+    $this->importContacts($lOnlineIdentity->getId());
     AuthTokenTable::saveToken($pUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['access_token'], null, true);  // signup,add new
 
     return $lOnlineIdentity;

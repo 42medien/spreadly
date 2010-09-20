@@ -74,6 +74,8 @@ class TwitterAuthApiClient extends AuthApi {
       // </todo>
     }
 
+    $this->importContacts($lOnlineIdentity->getId());
+
     AuthTokenTable::saveToken($lUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], true);
 
     //TwitterImportClient::importContacts($lUser->getId(), $lOnlineIdentity);
