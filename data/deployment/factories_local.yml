@@ -46,6 +46,8 @@ all:
     param:
       generate_shortest_url:            true
       extra_parameters_as_query_string: true
+      segment_separators:               ['.','/','_']
+      
 
   view_cache_manager:
     class: sfViewCacheManager
@@ -84,25 +86,8 @@ all:
       session_name:    yiid_local
       session_cookie_domain: .yiid.local
       session_cookie_lifetime: 17200
-  routing:
-    class: sfPatternRouting
-    param:
-#      load_configuration: true
-#      suffix:             .
-#      default_module:     default
-#      default_action:     index
-#      variable_prefixes:  [':']
-      segment_separators: ['/']
-#      variable_regex:     '[\w\d_]+'
-#      debug:              %SF_DEBUG%
-#      logging:            %SF_LOGGING_ENABLED%
-#      cache:
-#        class: sfFileCache
-#        param:
-#          automatic_cleaning_factor: 0
-#          cache_dir:                 %SF_CONFIG_CACHE_DIR%/routing
-#          lifetime:                  31556926
-#          prefix:                    %SF_APP_DIR%
+
+
   user:
     class: myUser
     param:

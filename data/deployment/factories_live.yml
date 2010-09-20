@@ -72,25 +72,7 @@ all:
       session_name:    yiiddev_com
       session_cookie_domain: .yiiddev.com
       session_cookie_lifetime: 17776000
-  routing:
-    class: sfPatternRouting
-    param:
-#      load_configuration: true
-#      suffix:             .
-#      default_module:     default
-#      default_action:     index
-#      variable_prefixes:  [':']
-      segment_separators: ['/']
-#      variable_regex:     '[\w\d_]+'
-#      debug:              %SF_DEBUG%
-#      logging:            %SF_LOGGING_ENABLED%
-#      cache:
-#        class: sfFileCache
-#        param:
-#          automatic_cleaning_factor: 0
-#          cache_dir:                 %SF_CONFIG_CACHE_DIR%/routing
-#          lifetime:                  31556926
-#          prefix:                    %SF_APP_DIR%
+
   user:
     class: myUser
     param:
