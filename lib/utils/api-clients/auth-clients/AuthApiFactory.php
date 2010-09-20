@@ -31,8 +31,8 @@ class AuthApiFactory {
       case "twitter":
         return new TwitterAuthApiClient();
         break;
-      /*case sfConfig::get('app_likewidget_google'):
-        return new BuzzPostApiClient();
+      /*case "google":
+        return new GooglePostApiClient();
         break;*/
       default:
         return null;
