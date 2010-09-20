@@ -171,6 +171,12 @@
   </target>
   
   
+  <target name="syncI18n">
+    <exec command="wget http://yiid:affen2010@staging.yiiddev.com/service/i18n.sql" checkReturn="true"/>
+    <exec command='mysql -u yiid_i18n -pfdsmolds32dfs yiid_i18n &lt; i18n.sql' checkReturn="true" />
+    <exec command="rm ./i18n.sql" />
+  </target>
+
   
   
   
