@@ -32,16 +32,16 @@
     <td class="right_side"><label for="likebutton_fc"><?php echo __('LABEL_FONTCOLOR', null, 'configurator'); ?></label></td>
   </tr>
   <tr>
-    <td><input type="checkbox" name="likebutton[so]" id="likebutton_so" /><label for="likebutton_so"><?php echo __('HELP_SOCIAL_VERSION', null, 'configurator'); ?></label></td>
-    <td class="right_side"><label for="likebutton_so"><?php echo __('LABEL_SOCIAL_VERSION', null, 'configurator'); ?></label></td>
+    <td><input type="checkbox" name="likebutton[so]" id="likebutton_so" /><label for="likebutton_so"><?php echo __('Add social features', null, 'configurator'); ?></label></td>
+    <td class="right_side"><label for="likebutton_so"><?php echo __('shows small images and names of your friends that share the same website', null, 'configurator'); ?></label></td>
   </tr>  
   <tr>
     <td><input type="checkbox" name="likebutton[bt]" id="likebutton_bt" /><label for="likebutton_bt"><?php echo __('HELP_DISLIKE_OPTION', null, 'configurator'); ?></label></td>
     <td class="right_side"><label for="likebutton_bt"><?php echo __('LABEL_DISLIKE_OPTION', null, 'configurator'); ?></label></td>
   </tr>
   <tr>
-    <td><input type="checkbox" name="likebutton[sh]" id="likebutton_sh" /><label for="likebutton_sh"><?php echo __('HELP_SHORT_VERSION', null, 'configurator'); ?></label></td>
-    <td class="right_side"><label for="likebutton_sh"><?php echo __('LABEL_SHORT_VERSION', null, 'configurator'); ?></label></td>
+    <td><input type="checkbox" name="likebutton[sh]" id="likebutton_sh" /><label for="likebutton_sh"><?php echo __('Short version', null, 'configurator'); ?></label></td>
+    <td class="right_side"><label for="likebutton_sh"><?php echo __('Default: Common big version', null, 'configurator'); ?></label></td>
   </tr>
   <tr>
     <td><input type="text" name="likebutton[email]" id="likebutton_email" value="<?php echo __('VALUE_EMAIL', null, 'configurator'); ?>" /></td>
