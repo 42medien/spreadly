@@ -6,52 +6,64 @@ require_once 'System/Daemon.php';
 require_once(dirname(__FILE__).'/../vendor/sqs.php');
 
 /**
+ * the yiid daemon class
+ *
  * @author Christian Weyand
  * @author Matthias Pfefferle
- * @see http://kevin.vanzonneveld.net/techblog/article/create_daemons_in_php/
+ * @since rogue
+ * @link http://kevin.vanzonneveld.net/techblog/article/create_daemons_in_php/
  */
 class YiidDaemon {
   /**
-   * Enter description here...
-   *
-   * @var unknown_type
+   * the amazon access-key
+   * @var string
    */
-  protected $aAmazonKey    = 'AKIAJ5NSA6ET5RC4AMXQ';
-  protected $aAmazonSecret = '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';
-
-  protected $aOptions = array(
-                'appName' => 'importContacts',
-                'appDir' => '/',
-                'appDescription' => '',
-                'authorName' => 'Matthias Pfefferle',
-                'authorEmail' => 'matthias@ekaabo.de',
-                'sysMaxExecutionTime' => '0',
-                'sysMaxInputTime' => '0',
-                'sysMemoryLimit' => '64M',
-                'appRunAsGID' => 0,
-                'appRunAsUID' => 0,
-            ); // default options
-
-  protected $aQueueName;
-  protected $aArguments;
-
-  public function __construct($pQueueName, $pArguments, $pOptions = null) {
-    $this->aQueueName = $pQueueName;
-    $this->aArguments = $pArguments;
-    if ($pOptions) {
-      $this->aOptions = $pOptions;
+  protected static $aAmazonKey    = 'AKIAJ5NSA6ET5RC4AMXQ';
+  /**
+   * the amazon secret key
+   * @var string
+   */
+  protected static $aAmazonSecret = 'bs1YgS4c1zJN/HmwaVA8CkhNfyvcS+EEm1hcEOa0';
+  /**
+   * the default options
+   * @var array
+   */
+  protected  static $aOptions = array(
+                      'appName' => 'YiidDaemon',
+                      'appDir' => '/',
+                      'appDescription' => 'the default daemon',
+                      'authorName' => 'ekaabo',
+                      'authorEmail' => 'info@ekaabo.de',
+                      'sysMaxExecutionTime' => '0',
+                      'sysMaxInputTime' => '0',
+                      'sysMemoryLimit' => '64M',
+                      'appRunAsGID' => 0,
+                      'appRunAsUID' => 0,
+                    ); // default options
+  /**
+   * run the daemon
+   *
+   * @author Matthias Pfefferle
+   * @param string $pQueueName the name of the Queue
+   * @param array $pArguments the console arguments ($argv)
+   * @param string $pClass the class-name (for the callback)
+   * @param string $pFunction the function-name (for the callback)
+   * @param array $pOptions optional options array
+   */
+  public static function run($pQueueName, $pArguments, $pClass, $pFunction, $pOptions = null) {
+    // if $pOptions is empty take the default params
+    if (!$pOptions) {
+      $pOptions = self::$aOptions;
     }
-  }
 
-  public function run() {
     // Allowed arguments & their defaults
     $runmode = array(
-        'no-daemon' => false,
-        'help' => false,
-        'write-initd' => true,
+      'no-daemon' => false,
+      'help' => false,
+      'write-initd' => true,
     );
 
-    $argv = $this->aArguments;
+    $argv = $pArguments;
 
     // Scan command line attributes for allowed arguments
     foreach ($argv as $k=>$arg) {
@@ -70,7 +82,7 @@ class YiidDaemon {
       die();
     }
 
-    System_Daemon::setOptions($this->aOptions);
+    System_Daemon::setOptions($pOptions);
 
     // This program can also be run in the forground with runmode --no-daemon
     if (!$runmode['no-daemon']) {
@@ -87,10 +99,7 @@ class YiidDaemon {
       if (($initd_location = System_Daemon::writeAutoRun()) === false) {
         System_Daemon::notice('unable to write init.d script');
       } else {
-        System_Daemon::info(
-                'sucessfully written startup script: %s',
-        $initd_location
-        );
+        System_Daemon::info('sucessfully written startup script: %s', $initd_location);
       }
     }
 
@@ -101,24 +110,25 @@ class YiidDaemon {
     // done so far. For example purposes, we're quitting on 3.
     $cnt = 1;
 
-    $lMessageBroker = new SQS($this->aAmazonKey, $this->aAmazonSecret);
+    $lMessageBroker = new SQS(self::$aAmazonKey, self::$aAmazonSecret);
 
     while (!System_Daemon::isDying() && $runningOkay ) {
       // What mode are we in?
-      $mode = '"'.(System_Daemon::isInBackground() ? '' : 'non-' ).
-            'daemon" mode';
+      $mode = '"'.(System_Daemon::isInBackground() ? '' : 'non-' ).'daemon" mode';
 
       // Log something using the Daemon class's logging facility
       // Depending on runmode it will either end up:
       //  - In the /var/log/logparser.log
       //  - On screen (in case we're not a daemon yet)
-      System_Daemon::info('{appName} running in %s %s', $mode, $cnt);
+      //System_Daemon::info('{appName} running in %s %s', $mode, $cnt);
 
-      $message = $lMessageBroker->receiveMessage($this->aQueueName, 1);
+      $message = $lMessageBroker->receiveMessage($pQueueName, 1);
 
       if (!empty($message)) {
-        System_Daemon::info('{appName} received message with id %s %s', $message[0]['MessageId'], urldecode($message[0]['Body']));
-        $lMessageBroker->deleteMessage($this->aQueueName, $message[0]['ReceiptHandle']);
+        //System_Daemon::info('{appName} received message with id %s %s', $message[0]['MessageId'], urldecode($message[0]['Body']));
+        $lMessageBroker->deleteMessage($pQueueName, $message[0]['ReceiptHandle']);
+
+        call_user_func(array("YiidImportContacts", "doIt"), $message);
       }
       // In the actuall logparser program, You could replace 'true'
       // With e.g. a  parseLog('vsftpd') function, and have it return
@@ -132,8 +142,7 @@ class YiidDaemon {
       // Level 4 would be fatal and shuts down the daemon immediately,
       // which in this case is handled by the while condition.
       if (!$runningOkay) {
-        System_Daemon::err('parseLog() produced an error, '.
-                'so this will be my last run');
+        System_Daemon::err('parseLog() produced an error, so this will be my last run');
       }
 
       // Relax the system by sleeping for a little bit
