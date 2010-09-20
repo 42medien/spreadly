@@ -187,7 +187,15 @@ YiidStatsSingleton::trackVisit($pUrl);
 
 	<?php if($lShowFriends) { ?>
 		<div id="friends" class="clearfix"></div>
-	<?php } ?>
+  <?php } else { ?>
+    <?php if($pSocialFeatures) { ?>
+	    <div id="friends_description">
+	      <p title="Wurde die Seite noch von keinem Freund weiter verbreitet, so wird dieser Standardtext angezeigt.">
+	        Hier siehst du Freunde, die die Seite ebenfalls weiter verbreitet haben
+	      </p>
+	    </div>
+	  <?php } ?>
+  <?php } ?>
 
 </div>
 
