@@ -18,17 +18,17 @@ class YiidDaemon {
    * the amazon access-key
    * @var string
    */
-  protected static $aAmazonKey    = 'AKIAJ5NSA6ET5RC4AMXQ';
+  public static $aAmazonKey    = 'AKIAJ5NSA6ET5RC4AMXQ';
   /**
    * the amazon secret key
    * @var string
    */
-  protected static $aAmazonSecret = 'bs1YgS4c1zJN/HmwaVA8CkhNfyvcS+EEm1hcEOa0';
+  public static $aAmazonSecret = 'bs1YgS4c1zJN/HmwaVA8CkhNfyvcS+EEm1hcEOa0';
   /**
    * the default options
    * @var array
    */
-  protected  static $aOptions = array(
+  public  static $aOptions = array(
                       'appName' => 'YiidDaemon',
                       'appDir' => '/',
                       'appDescription' => 'the default daemon',
