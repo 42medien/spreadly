@@ -75,8 +75,7 @@ AuthToken:
       type:   integer
       notnull: true
     online_identity_id:
-      type:    integer
-      notnull: true
+      type:    integer      
     community_id:
       type:    integer
     token_key:
