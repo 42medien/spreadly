@@ -1,6 +1,6 @@
 <?php if (isset($pObject)) {?>
 <div id="so_right_view" class="clearfix">
-  <div id="so_image" class="left"><?php echo image_tag('/img/global/yiid-logo.png', array('width' => 50)); ?></div>
+  <div id="so_image" class="left"><img alt="<?php echo $pObject->getUrl(); ?>" src="http://images.websnapr.com/?url=<?php echo $pObject->getUrl(); ?>&sh=80&sw=100"></div>
   <div id="so_information" class="left">
     <h3><?php echo $pObject->getTitle(); ?></h3>
     <h5><?php echo link_to($pObject->getUrl(), $pObject->getUrl(), array('class' => 'url')); ?></h5>

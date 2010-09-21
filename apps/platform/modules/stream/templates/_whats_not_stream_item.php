@@ -21,6 +21,7 @@
       </div>
     </div>
     <div class="right preview_information">
+      <img alt="<?php echo $pObject->getUrl(); ?>" src="http://images.websnapr.com/?url=<?php echo $pObject->getUrl(); ?>&sh=80&sw=100">
     </div>
   </div>
 </div>

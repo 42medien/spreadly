@@ -1,5 +1,4 @@
-<?php echo "\n"; ?>
-
+<?php echo "\n";?>
 <?php if ($sf_user->hasFlash("error")) { ?>
 jQuery('#error-msg-box').topslider({
   "msg": '["<?php echo $sf_user->getFlash("error"); ?>"]',
