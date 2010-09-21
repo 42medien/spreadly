@@ -227,6 +227,10 @@ mark, rp, rt, ruby, summary, time{ display: inline }
     #so_information h3{margin-bottom:5px;} 
     #so_information h5{margin-bottom:10px;}
     
+  .preview_information img, #so_image img{
+    border: 1px solid #DDD;
+  } 
+    
   #stream_right_bottom{padding: 25px 30px 10px;}
     .shares{list-style-type: none;}
     .shares li{margin-bottom: 10px;padding-bottom: 10px;border-bottom: 1px dashed #4EA734;}
