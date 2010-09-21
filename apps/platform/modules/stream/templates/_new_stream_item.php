@@ -17,7 +17,7 @@
 			      <?php $lCommunitySlug = CommunityTable::getInstance()->retrieveByPk($lActivityCids[0])->getSlug(); ?>
 			      <span class="icon_small_service icon_small_<?php echo $lCommunitySlug; ?> left" title="<?php echo __('Shared with %1', array('%1' => $lCommunityName), 'platform'); ?>">&nbsp;</span>
 	          <span class="user_share text_important left"><?php echo $pUser->getFullname(); ?></span>
-	          <span class="url left">&nbsp;<?php echo __('via %1 %2 ago', array('%1' => $lCommunityName, '%2' => $pActivity->getPublishingTime()), 'platform'); ?></span>
+	          <span class="url left">&nbsp;<?php echo __('%1 ago', array('%1' => $pActivity->getPublishingTime()), 'platform'); ?></span>
 	        </div>
 	        <div class="right so_headline_right">
             <span class="thumb_up icon_small_use like-dislike"><?php echo __('%1', array('%1' => $pObject->getLikeCount()), 'platform'); ?></span>
@@ -31,8 +31,8 @@
       <div class="green_middle_middle">
         <p class="so_comment">
           <?php echo ($pActivity->getScore() == 1 ? 
-            __('%1 <span class="text_important">likes</span> on<br/> %2<br/>', array('%1' => $pUser->getUsername(), '%2' => link_to($pActivity->getUrl(), $pActivity->getUrl(), array('class' => 'url'))), 'platform') : 
-            __('%1 <span class="text_important">dislikes</span> on<br/> %2<br/>', array('%1' => $pUser->getUsername(), '%2' => link_to($pActivity->getUrl(), $pActivity->getUrl(), array('class' => 'url'))), 'platform')); ?>
+            __('%1 <span class="text_important">likes</span> on %2<br/>', array('%1' => $pUser->getUsername(), '%2' => link_to($pActivity->getUrl(), $pActivity->getUrl(), array('class' => 'url'))), 'platform') : 
+            __('%1 <span class="text_important">dislikes</span> on %2<br/>', array('%1' => $pUser->getUsername(), '%2' => link_to($pActivity->getUrl(), $pActivity->getUrl(), array('class' => 'url'))), 'platform')); ?>
           <?php echo ($pObject->getTitle() ? $pObject->getTitle() : '').($pObject->getStmt() ? ' - '.$pObject->getStmt() : ''); ?>
         </p>
       </div>
