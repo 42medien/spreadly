@@ -49,7 +49,7 @@ var Stream = {
     //load the details of the first element on the right sidebar
     ItemDetail.loadFirst();
     jQuery('#new_shares img').lazyload({
-      placeholder: "/img/preview.png"     
+      placeholder: "/img/global/preview.png"     
     });
     
 	},
