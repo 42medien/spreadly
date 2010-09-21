@@ -1,4 +1,3 @@
-#!/usr/bin/php -q
 <?php
 // Include Class
 error_reporting(E_ALL);
@@ -129,7 +128,7 @@ class YiidDaemon {
         $lMessageBroker->deleteMessage($pQueueName, $message[0]['ReceiptHandle']);
 
         // run the importer
-        call_user_func(array($pClass, $pFunction), $message);
+        call_user_func(array($pClass, $pFunction), array($message));
       }
       // In the actuall logparser program, You could replace 'true'
       // With e.g. a  parseLog('vsftpd') function, and have it return
