@@ -1,0 +1,154 @@
+#sf_admin_container #sf_admin_bar{
+  width:320px;
+}
+
+#sf_admin_container .sf_admin_list{
+  width:95%;
+}
+
+
+
+#dashboard{
+  margin-left:20px;  
+}
+
+
+.dashboardtable{
+  font-size:0.9em;
+  background-color:#e6ebff;  
+  border-collapse:collapse;
+}
+
+.dashboardtable tr td, .dashboardtable tr th{  
+  border:1px solid #fff;
+  padding:1px 10px;  
+}
+
+
+/* ERROR MESSAGES
+-------------------------------------------------------------- */
+.errors {	margin: 20px 0;	padding: 10px 10px 10px 38px;	border: 1px solid #b22626;	background: #ffebe8 url('/img/icons/error.png') 13px 12px no-repeat;	width: auto;	font-weight: 400;	font-size: 1.5em;}
+.errors ul {	color: #900;	padding: 10px 0 0 15px;	font-weight: 400;	font-size: 0.8em; }
+.errors ul li {	list-style-type: disc;	color: #900;}
+
+
+/* Dashboard Boxes in CMS Module */
+#help_text{padding-left: 10px;line-height: 25px; float: left;font-size: 0.8em;color:#aaa}
+
+/* BUTTONS */
+a:link.button, a:visited.button {
+color:#fff;
+overflow:hidden;
+text-decoration:none;
+}
+.button, .button:visited {
+  background: #222 url(/img/layout/alert-overlay.png) repeat-x; 
+  display: inline-block; 
+  padding: 6px 8px 7px; 
+  color: #fff; 
+  text-decoration: none;
+  /*-moz-border-radius: 2px; 
+  -webkit-border-radius: 2px;
+  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+  border-bottom: 1px solid rgba(0,0,0,0.25);*/
+  position: relative;
+  cursor: pointer;
+    border:1px solid #9dea88;
+}
+.button:hover                                 { background-color: #111; color: #fff; }
+
+.button:active                              { top: 1px; }
+
+.small.button, .small.button:visited      { font-size: 12px; padding: ; }
+
+.button, .button:visited,
+.medium.button, .medium.button:visited            { font-size: 13px; font-weight: bold; line-height: 1; /*text-shadow: 0 -1px 1px rgba(0,0,0,0.25);*/ }
+
+.large.button, .large.button:visited      { font-size: 18px; padding: 7px 23px 8px; }
+
+.green.button, .green.button:visited            { background-color: #43ae25; }
+.green.button:hover                   { background-color: #197400; }
+.blue.button, .blue.button:visited            { background-color: #2daebf; }
+.blue.button:hover                      { background-color: #007d9a; }
+.red.button, .red.button:visited              { background-color: #e33100; }
+.red.button:hover                     { background-color: #872300; }
+.magenta.button, .magenta.button:visited    { background-color: #a9014b; }
+.magenta.button:hover             { background-color: #630030; }
+.orange.button, .orange.button:visited    { background-color: #ff5c00; }
+.orange.button:hover              { background-color: #d45500; }
+.yellow.button, .yellow.button:visited    { background-color: #ffb515; }
+.yellow.button:hover              { background-color: #fc9200; }
+.thin.button                  { font-weight:normal; }
+
+.letters.button                                                     { padding:1px 3px 3px }
+.letters.button:hover                                           { padding:7px 3px 8px; }
+.button.twoline                                                     { position:relative;top:6px; }
+.letters.button.active                                                     { background-color: #197400; padding:7px 3px 8px; }
+.button.right                                                     { float:right;margin-top:9px; }
+
+
+/** Translation **/
+.translation-list-head{list-style-type:none;margin:10px 0;padding:0;}
+.translation-box{float:left;width:280px;height:360px;border:1px black solid;margin:10px 10px 20px 0;padding:10px;}
+.translation-box ol{ist-style-type:none;margin:10px 0 0 0;padding:0;}
+.translation-box li{padding:2px 0;}
+.translation-list{list-style-type:none;margin:0;padding:0;}
+.translation-list li{padding:20px 10px;}
+.list-bg-grey{background-color:#eee;}
+.list-bg-white{background-color:#fff;}
+.translation-list ul{margin:0;}
+.translation-list label{font-weight:bold;}
+.translation-module p{margin:0;}
+.translation-module h1, .translation-module h2, .translation-module h3, .translation-module h4, .translation-module h5{margin:15px 0 5px 0;}
+.translation-textarea{width:1000px;height:60px;}
+.translation-area{margin-top:10px;}
+.bold{font-weight:bold;}
+.translation-pager{margin:10px 0;}
+.engineroom-translation a:link, .engineroom-translation a:hover, .engineroom-translation a:visited{
+  color: #4EA734;
+  overflow: hidden;
+  text-decoration: none;
+}
+.ac_results{background-color:#eee;border:1px black solid;}
+.ac_results ul{list-style-type:none;margin:0;padding:5px;}
+.ac_results li{margin-bottom:2px;cursor:pointer;}
+.ac_results li:hover{background-color:#43AE25;}
+
+.arrow {
+  padding-left: 11px;
+  background: transparent url('/img/layout/sprites/sprites.png') no-repeat
+    left center;
+  background-position: -13px -628px;
+  font-size: 14px;
+  color: #4ea734;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+
+/* Der Kern von Clearfix */
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+}
+
+/* IE-Patches für Clearfix */
+.clearfix {
+  display: inline-block;
+}
+
+/* Vor IE5/Mac verstecken mit dem Commented Backslash Hack \*/
+* html .clearfix {
+  height: 1px;
+}
+
+.clearfix {
+  display: block;
+}
+
+/** INVITATION **/
