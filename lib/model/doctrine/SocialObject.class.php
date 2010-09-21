@@ -154,7 +154,6 @@ class SocialObject extends BaseSocialObject
 
     return $lNamesArray;
     */
-
     $lOi = Doctrine::getTable('OnlineIdentity')->find($lObjectOiIds[0]);
     return Doctrine::getTable('Community')->find($lOi->getCommunityId())->getName();
   }
