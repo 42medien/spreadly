@@ -125,6 +125,10 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 	  #main_nav_inner7 p{margin: 0 15px 0 5px;}
 	  #main_nav_inner8{width:4px;height:29px;}
 	  
+	  #empty_stream h3{
+	    margin-bottom: 7px;
+	  }
+	  
 	  #stream_left_bottom{padding: 15px 0 5px;border-left:1px solid #ccc;border-bottom:2px solid #ccc;border-right:2px solid #ccc;
 	  -webkit-border-radius: 0 0 4px 4px;-moz-border-radius: 0 0 4px 4px;border-radius: 0 0 4px 4px;}
 		  .so_information_content{margin-left: 18px;padding: 0 15px;border-right: 1px #cbd3c9 solid;}
@@ -218,8 +222,8 @@ mark, rp, rt, ruby, summary, time{ display: inline }
     #nav_shares_inner7{width:50px;height:30px;}
     #nav_shares_outer{width:100%;height:30px;}
   #so_right_view{padding: 30px 20px 20px 20px;}
-    #so_image{width:20%;}
-    #so_information{width:75%;padding-left:10px;}
+    #so_image{/*width:20%;*/width: 110px;}
+    #so_information{/*width:75%*/width: 180px;padding-left:10px;}
     #so_information h3{margin-bottom:5px;} 
     #so_information h5{margin-bottom:10px;}
     
