@@ -37,7 +37,7 @@
       </div>
       <div style="float:left;">
 		    <?php foreach(LanguageTable::getAllLanguages(false) as $lCulture) { ?>
-		      <label style="padding-left:20px;" for="to-translate-<?php echo $lCulture; ?>"><?php echo image_tag('/img/icons/flags/'.$lCulture.'.gif'); ?></label>
+		      <label style="padding-left:20px;" for="to-translate-<?php echo $lCulture; ?>"><?php echo image_tag('/img/icons/flags/'.$lCulture.'.gif'); echo $lCulture; ?></label>
 		      <input type="checkbox" name="to_translate[<?php echo $lCulture; ?>]" id="to-translate-<?php echo $lCulture; ?>" <?php echo ($lCulture != 'de' && $lCulture != 'en' ? 'checked' : ''); ?> />
 		    <?php } ?>
 		  </div>
