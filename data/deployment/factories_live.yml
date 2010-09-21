@@ -67,10 +67,10 @@ all:
       db_data_col:     sess_data
       host:            donkeykong
       port:            27017
-      db_name:         yiid_dev
-      collection_name:   session
-      session_name:    yiiddev_com
-      session_cookie_domain: .yiiddev.com
+      db_name:         yiid
+      collection_name:   session    
+      session_name:       yiid
+      session_cookie_domain: .yiid.com
       session_cookie_lifetime: 17776000
 
   user:
