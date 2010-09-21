@@ -1,0 +1,1 @@
+<?php include_partial('i18n_header'); ?>

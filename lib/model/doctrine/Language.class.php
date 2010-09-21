@@ -19,6 +19,6 @@ class Language extends BaseLanguage
    * @return string
    */
   public function __toString() {
-    return $this->getName();
+    return $this->getLang();
   }
 }
