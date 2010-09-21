@@ -22,11 +22,17 @@ echo "######################################### \r\n";
 echo "Start migration: 07_auth_token.php \r\n";
 echo "######################################### \r\n";
 foreach ($lAuthTokens as $lToken) {
-  echo $lToken->getId() . '  -  '.$lToken->getOnlineIdentity()->getCommunityId()."\r\n";
+  try {
+
   $lToken->setTokenType(AuthTokenTable::TOKEN_TYPE_OAUTH);
   $lToken->setCommunityId($lToken->getOnlineIdentity()->getCommunityId());
   $lToken->save();
+
   echo ".";
+  } catch (Exception $e) {
+    $lToken->delete();
+    echo "deleted - ".$lToken->getId();
+  }
 }
 
 echo "######################################### \r\n";
