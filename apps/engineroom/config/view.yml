@@ -12,7 +12,7 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    [main.css]
+  stylesheets:    [engineroom/engineroom.css]
 
   javascripts:    [/js/100_main/vendor/tiny_mce/tiny_mce.js]
 
