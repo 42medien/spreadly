@@ -1,4 +1,6 @@
 <?php
+require_once(dirname(__FILE__).'/FacebookImportClient.php');
+require_once(dirname(__FILE__).'/TwitterImportClient.php');
 /**
  * PostApi Factory
  *
@@ -26,10 +28,10 @@ class ImportApiFactory {
     // return matching object
     switch ($lCommunity) {
       case "facebook":
-        return new FacebookImportApiClient();
+        return new FacebookImportClient();
         break;
       case "twitter":
-        return new TwitterImportApiClient();
+        return new TwitterImportClient();
         break;
       /*case "google":
         return new GooglePostApiClient();

@@ -128,7 +128,7 @@ class YiidDaemon {
         $lMessageBroker->deleteMessage($pQueueName, $message[0]['ReceiptHandle']);
 
         // run the importer
-        call_user_func(array($pClass, $pFunction), array($message));
+        call_user_func(array($pClass, $pFunction), $message);
       }
       // In the actuall logparser program, You could replace 'true'
       // With e.g. a  parseLog('vsftpd') function, and have it return

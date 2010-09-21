@@ -1,4 +1,9 @@
 <?php
+require_once(dirname(__FILE__).'/../../../../config/ProjectConfiguration.class.php');
+
+$configuration = ProjectConfiguration::getApplicationConfiguration('platform', 'batch', true);
+sfContext::createInstance($configuration);
+
 /**
  * Enter description here...
  *
@@ -6,7 +11,7 @@
  */
 class TwitterImportClient {
 
-	public static function importContacts($pUserId = null, $pOnlineIdentity = null) {
+	public static function importContacts($pUserId, $pOnlineIdentity) {
     $lToken = AuthTokenTable::getByUserAndOnlineIdentity($pUserId, $pOnlineIdentity->getId());
     // get api informations
     $lConsumer = new OAuthConsumer(sfConfig::get("app_twitter_oauth_token"), sfConfig::get("app_twitter_oauth_secret"));
