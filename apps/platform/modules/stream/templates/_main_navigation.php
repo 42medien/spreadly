@@ -1,11 +1,11 @@
 <div id="main_nav_outer" class="whats_hot_active">
   <div id="main_nav_inner1" class="left"></div>
   <div id="main_nav_inner2" class="left main_filter" data-obj='{"action":"stream/hot", "callback":"Stream.show", "css":"{\"class\":\"whats_hot_active\", \"id\":\"main_nav_outer\"}"}'>
-    <p><?php echo __('What\'s Hot'); ?></p>
+    <p><?php echo __("What's Hot"); ?></p>
   </div>
   <div id="main_nav_inner3" class="left"></div>
   <div id="main_nav_inner4" class="left main_filter" data-obj='{"action":"stream/not", "callback":"Stream.show", "css":"{\"class\":\"whats_not_active\", \"id\":\"main_nav_outer\"}"}'>
-    <p><?php echo __('What\'s Not'); ?></p>
+    <p><?php echo __("What's Not"); ?></p>
   </div>
   <div id="main_nav_inner5" class="left"></div>
   <div class="right" id="new-nav">
