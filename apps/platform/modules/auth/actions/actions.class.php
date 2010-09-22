@@ -49,9 +49,14 @@ class authActions extends sfActions {
 
         // migrate if not already done
         if ($lUser->getDone() != 1) {
-            UserRelationTable::doIdentityMigration($lUser->getId());
+          UserRelationTable::doIdentityMigration($lUser->getId());
         }
-        $this->redirect("@stream");
+
+        if ($lUser->hasVerifiedOnlineIdentities()) {
+          $this->redirect("@stream");
+        } else {
+          $this->redirect("@auth_add_services");
+        }
       } catch (Exception $e) {
         // catch the error and tell the user about it
         $this->getUser()->setFlash("error", $e->getMessage());
