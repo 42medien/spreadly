@@ -7,12 +7,12 @@
 	      <?php echo avatar_tag($lUser->getDefaultAvatar(), 30, array('alt' => $lUser->getFullname(), 'class' => '', 'rel' => '')); ?>
 	    </div>
 	    <div class="so_share_spread left">
-	      
+
 	    </div>
 	    <div class="so_share_information left">
 	      <span class="user_share text_important"><?php echo $lUser->getFullname(); ?></span>
-	      <span class="url"><?php echo __('%2 ago', array('%2' => $lActivity->getPublishingTime()), 'platform'); ?></span><br/>
-	      <span class="url"><?php echo __('Shared with', null, 'platform'); ?></span>
+	      <span class="url"><?php echo __('%1 ago', array('%1' => $lActivity->getPublishingTime())); ?></span><br/>
+	      <span class="url"><?php echo __('Shared with'); ?></span>
 	      <?php $lActivityCids = $lActivity->getCids(); ?>
 	      <?php foreach($lActivityCids as $lCid) { ?>
 	        <?php $lCommunityName = CommunityTable::getInstance()->retrieveByPk($lCid)->getName(); ?>
@@ -31,7 +31,7 @@
 	<?php } ?>
 <?php } else { ?>
   <li class="clearfix">
-    <?php echo __("NO_ENTRIES"); ?>
+    <?php echo __('No entries'); ?>
   </li>
 <?php } ?>
 

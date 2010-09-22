@@ -10,8 +10,8 @@
           <span class="url left"><?php echo __('%1 ago', array('%1' => $pObject->getPublishingTime())); ?></span>
         </div>
         <div class="right so_headline_right">
-          <span class="thumb_up icon_small_use like-dislike"><?php echo __('%1', array('%1' => $pObject->getLikeCount())); ?></span>
-          <span class="thumb_down icon_small_use like-dislike"><?php echo __('%1', array('%1' => $pObject->getDislikeCount())); ?></span>
+          <span class="thumb_up icon_small_use like-dislike"><?php echo $pObject->getLikeCount(); ?></span>
+          <span class="thumb_down icon_small_use like-dislike"><?php echo $pObject->getDislikeCount(); ?></span>
         </div>
       </div>
       <div class="clearfix whats_hot_info_area">
