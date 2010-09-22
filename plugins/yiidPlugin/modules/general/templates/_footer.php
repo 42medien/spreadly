@@ -1,10 +1,10 @@
 <div id="footer" class="clearfix">
-  <!-- 
+  <!--
   <div id="language_switch">
     <?php // include_component('system', 'language_switch'); ?>
   </div>
    -->
-  
+
   <?php foreach($pCategories as $lCategory) { ?>
   <ul class="normal_list left">
     <li><h5><?php echo $lCategory->getTitle(); ?></h5></li>
@@ -22,4 +22,4 @@
   <?php } //end foreach categories ?>
 </div>
 
-<?php echo cdn_image_tag("/img/global/ajax-loader-bar-circle.gif", array('id' => 'general-ajax-loader')); ?>
+<?php echo cdn_image_tag("img/global/ajax-loader-bar-circle.gif", array('id' => 'general-ajax-loader')); ?>

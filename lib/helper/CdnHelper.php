@@ -73,7 +73,14 @@ function cdn_stylesheet_tag($pFilename, $pOptions = array()) {
 }
 
 
-
+/**
+ *
+ * generates path to image inside amazon s3 storage
+ * i.e. img/ajax-loader.gif
+ *
+ * @param string $pFilename
+ * @param array $pOptions
+ */
 function cdn_image_tag($pFilename, $pOptions = array()) {
   return image_tag( concatNameForStaticImages($pFilename), $pOptions);
 }
@@ -90,7 +97,7 @@ function cdn_image_tag($pFilename, $pOptions = array()) {
 function concatNameWithRevision($pFilename, $pType) {
   $lHost = '';
   $lHostname = CdnSingleton::getInstance()->getNextHost();
-  $lHost .= $lHostname .'/'. sfConfig::get('app_release_revision') . $pType . '/' . $pFilename . CdnSingleton::getInstance()->isGzipped();
+  $lHost .= $lHostname .'/'. sfConfig::get('app_release_name') .'/'. $pType . '/' . $pFilename . CdnSingleton::getInstance()->isGzipped();
   return $lHost;
 }
 
@@ -105,6 +112,6 @@ function concatNameWithRevision($pFilename, $pType) {
 function concatNameForStaticImages($pFilename) {
   $lHost = '';
   $lHostname = CdnSingleton::getInstance()->getNextHost();
-  $lHost .= $lHostname . $pFilename;
+  $lHost .= $lHostname .'/'. sfConfig::get('app_release_name') .'/'. $pFilename;
   return $lHost;
 }
