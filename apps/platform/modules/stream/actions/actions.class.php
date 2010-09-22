@@ -21,6 +21,9 @@ class streamActions extends sfActions
     $lObjectsTimeLine = 30;
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('stream/js_init_stream.js'));
     $lObjects = $this->pSocialObjects = SocialObjectTable::retrieveHotObjets($this->getUser()->getUserId(), null, null, $lObjectsTimeLine, 1, $lObjectsCount);
+    if(count($lObjects) < 1) {
+    	$this->setTemplate('start');
+    }
   }
 
   public function executeNew(sfWebRequest $request) {
