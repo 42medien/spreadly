@@ -198,6 +198,16 @@
 
   <target name="s3sync">
 
+    <echo>
+    #####################################################################
+    ############ this skript will change image paths in your local css files
+    ############ you must not commit those changes, it'll fuck up pathes!!!
+    #####################################################################
+    ############ best executed on dev/live where nothing gets comittet to svn ;)
+    #####################################################################
+    </echo>
+ 
+ 
     <propertyprompt propertyName="env" defaultValue="dev" promptText="Enter Service you want to sync (live|dev)" />
 
     <propertyprompt propertyName="rev" defaultValue="0123456789" promptText="Enter Release (yyyymmdd)" />
@@ -220,10 +230,11 @@
       </else>
     </if>
 
+
     <exec command="php batch/deployment/replaceCssCdnUrls.php" checkReturn="true"/>
 
 
-    <exec command="s3cmd --bucket-location=EU -P -r --exclude='*.svn*' --add-header 'Expires: Sat, 08 May 2015 15:22:28 GMT' sync web/css/include/ s3://${bucket}/${rev}/css/include/" checkreturn="true" />
+    <exec command="s3cmd --bucket-location=EU -P -r --exclude='*.svn*' --add-header 'Expires: Sat, 08 May 2015 15:22:28 GMT' sync web/css/ s3://${bucket}/${rev}/css/" checkreturn="true" />
     <exec command="s3cmd --bucket-location=EU -P -r --exclude='*.svn*' --add-header 'Expires: Sat, 08 May 2015 15:22:28 GMT' sync web/img/ s3://${bucket}/${rev}/img/" checkreturn="true" />
     <exec command="s3cmd --bucket-location=EU -P -r --exclude='*.svn*' --add-header 'Expires: Sat, 08 May 2015 15:22:28 GMT' sync web/js/100_main/include/ s3://${bucket}/${rev}/js/100_main/include/" checkreturn="true" />
 
@@ -232,9 +243,9 @@
     <exec command="s3cmd --bucket-location=EU -P -r --exclude='*.*' --include '*.gz' --mime-type 'application/javascript' --add-header 'Content-Encoding: gzip' sync web/js/100_main/include/ s3://${bucket}/${rev}/js/100_main/include/" checkreturn="true" />
     <exec command="find ./web/js/100_main/include -name '*.gz' -exec rm {} \;" checkreturn="true" />
 
-    <exec command="find ./web/css/include -type f -exec 7z a -tgzip  -x\!\*.gz {}.gz {} \;" checkreturn="true" />
-    <exec command="s3cmd --bucket-location=EU -P -r --exclude='*.*' --include '*.gz' --mime-type 'text/css' --add-header 'Content-Encoding: gzip' sync web/css/include/ s3://${bucket}/${rev}/css/include/" checkreturn="true" />
-    <exec command="find ./web/css/include -name '*.gz' -exec rm {} \;" checkreturn="true" />
+    <exec command="find ./web/css -type f -exec 7z a -tgzip  -x\!\*.svn -x\!\*.gz  {}.gz {} \;" checkreturn="true" />
+    <exec command="s3cmd --bucket-location=EU -P -r --exclude='*.*' --include '*.gz' --mime-type 'text/css' --add-header 'Content-Encoding: gzip' sync web/css/ s3://${bucket}/${rev}/css/" checkreturn="true" />
+    <exec command="find ./web/css -name '*.gz' -exec rm {} \;" checkreturn="true" />
   </target>
 
 </project>

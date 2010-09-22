@@ -18,7 +18,7 @@ $lRootDir = sfContext::getInstance()->getConfiguration()->getRootDir();
 $lFileName = CdnSingleton::getInstance()->getNextHost() .'/'. sfConfig::get('app_release_name')."/";
 
 
-$lFiles = FilesystemHelper::retrieveFilesInDir($lRootDir.'/web/css', array('.svn'), array(), '.css');
+$lFiles = FilesystemHelper::retrieveFilesInDir($lRootDir.'/web/css/include', array('.svn'), array(), '.css');
 
 echo "\r\n\r\n";
 echo "#####################################################################";
