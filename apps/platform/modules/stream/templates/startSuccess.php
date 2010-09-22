@@ -1,5 +1,5 @@
 <div id="stream_left_empty">
-	<div id="stream_left_top" class="clearfix start_site">
+	<div id="stream_left_top" class="clearfix">
     <div id="main_nav_outer" class="whats_hot_active">
 		  <div id="main_nav_inner1" class="left"></div>
 		  <div id="main_nav_inner2" class="left main_filter">

@@ -99,7 +99,7 @@ a, a.icon_thumb, a.icon_thumbs, a.icon_thumb, a.icon_small_use, .icon_language_s
 .so_headline_left, .so_headline_right{line-height: 18px;}
 #stream_right_top div, #what_is_yiid_description p{line-height: 19px;}
 #signin_via_username_form label{line-height: 25px;}
-#nav_main li a, #stream_left_top div, #stream_right_top div, #signin_area h3, h3{line-height: 30px;}
+#nav_main li a, #stream_left_top div, #stream_left_empty #stream_left_top p, #stream_right_top div, #signin_area h3, h3{line-height: 30px;}
 h2{line-height: 40px;}
 .sharing_user_link, 
 h1{
