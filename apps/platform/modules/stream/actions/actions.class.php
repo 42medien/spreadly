@@ -18,7 +18,7 @@ class streamActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     $lObjectsCount = 15;
-    $lObjectsTimeLine = 30;
+    $lObjectsTimeLine = sfConfig::get('app_stream_days_limit_hot');
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('stream/js_init_stream.js'));
     $lObjects = $this->pSocialObjects = SocialObjectTable::retrieveHotObjets($this->getUser()->getUserId(), null, null, $lObjectsTimeLine, 1, $lObjectsCount);
     if(count($lObjects) < 1) {
@@ -30,7 +30,7 @@ class streamActions extends sfActions
     $this->getResponse()->setContentType('application/json');
 
     $lObjectsCount = 15;
-    $lObjectsTimeLine = 30;
+    $lObjectsTimeLine = sfConfig::get('app_stream_days_limit_new', 0);
     $lDoPaginate = true;
 
     $lCallback = $request->getParameter('callback', 'logerror');
@@ -69,7 +69,7 @@ class streamActions extends sfActions
   public function executeHot(sfWebRequest $request) {
 
     $lObjectsCount = 15;
-    $lObjectsTimeLine = 30;
+    $lObjectsTimeLine = sfConfig::get('app_stream_days_limit_hot');
     $lDoPaginate = true;
 
     $this->getResponse()->setContentType('application/json');
@@ -109,7 +109,7 @@ class streamActions extends sfActions
   public function executeNot(sfWebRequest $request) {
 
     $lObjectsCount = 15;
-    $lObjectsTimeLine = 30;
+    $lObjectsTimeLine = sfConfig::get('app_stream_days_limit_not');
     $lDoPaginate = true;
 
     $this->getResponse()->setContentType('application/json');

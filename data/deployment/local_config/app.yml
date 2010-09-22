@@ -5,6 +5,14 @@ all:
     name:     '20100905'
     gzip:     0              ## set 1 to force local gz support
 
+
+  stream:
+    days_limit_hot:      30    #  days in the past we still consider as active
+    days_limit_not:      30    
+    days_limit_new:      0     # 0 = unlimited
+    days_limit_search:   0
+
+
   emailaddress:
     # TODO: aendern
     report:  statusmails@yiid.com

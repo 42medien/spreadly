@@ -123,7 +123,7 @@ class YiidActivityTable extends Doctrine_Table
     if (!empty($lVerifiedOnlineIdentityIds)) {
       self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb);
       $lSocialObject->updateObjectOnLikeActivity($pUserId, $lVerifiedOnlineIdentityIds, $pUrl, $pScore, $lServices);
-
+      UserTable::updateLatestActivityForUser($pUserId, time());
       YiidStatsSingleton::trackClick($pUrl, ($pScore==self::ACTIVITY_VOTE_POSITIVE)?YiidStatsSingleton::TYPE_LIKE:YiidStatsSingleton::TYPE_DISLIKE);
     }
     return true;
@@ -227,7 +227,7 @@ class YiidActivityTable extends Doctrine_Table
   }
 
 
-  public static function retrieveLatestActivitiesByContacts($pUserId, $pFriendId = null, $pCommunityId = null, $pLimit = 10, $pOffset = 1) {
+  public static function retrieveLatestActivitiesByContacts($pUserId, $pFriendId = null, $pCommunityId = null, $pRangeDays = 30, $pOffset = 10, $pLimit = 1) {
     $lCollection = self::getMongoCollection();
 
     $lRelevantOis = self::getRelevantOnlineIdentitysForQuery($pUserId, $pFriendId);
@@ -236,6 +236,9 @@ class YiidActivityTable extends Doctrine_Table
     $lQueryArray['oiids'] = array('$in' => $lRelevantOis);
     if ($pCommunityId) {
       $lQueryArray['cids'] = array('$in' => array($pCommunityId));
+    }
+    if ($pRangeDays > 0) {
+      $lQueryArray['u'] = array('$gte' => strtotime('-'.$pRangeDays. ' days'));
     }
 
     $lResults = $lCollection->find($lQueryArray);

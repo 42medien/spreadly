@@ -63,8 +63,9 @@ User:
       type:     integer
       default:  0
       notnull:    true
-    #latest_activity:
-    #  type:       date
+    latest_activity:
+      type:       integer
+      default:   0
 
 UserIdentityCon:
   actAs:

@@ -92,6 +92,8 @@ class UserTable extends Doctrine_Table {
   /**
    * returns $pLimit hottest users, ready for pagination
    *
+   * hottest users only, if active within last 30 days
+   *
    * @author Christian Schätzle
    *
    * @param array $pFriendIds
@@ -102,15 +104,20 @@ class UserTable extends Doctrine_Table {
    * @todo sort by hot
    */
   public static function getHottestUsers($pFriendIds = array(), $pPage = 1, $pLimit = 10) {
-  	$lCountFriends = count($pFriendIds);
-  	if($lCountFriends == 0)
+    $lCountFriends = count($pFriendIds);
+    if($lCountFriends == 0) {
       return false;
+    }
+
+    $lTimeLimit = time() - (sfConfig::get('app_stream_days_limit', 30) * 86400);
 
     $lQuery = Doctrine_Query::create()
-    ->from('User u')
-    ->whereIn('u.id', $pFriendIds)
-    // now sort by hot
-    ->orderBy('u.sortname');
+        ->from('User u')
+        ->whereIn('u.id', $pFriendIds)
+        // today minus 30 days
+        ->andWhere('u.latest_activity > ?', $lTimeLimit)
+        // now sort by hot
+        ->orderBy('u.latest_activity');
 
     $lQuery->limit($pLimit);
     $lQuery->offset(($pPage - 1) * $pLimit);
@@ -130,9 +137,15 @@ class UserTable extends Doctrine_Table {
    *
    */
   public static function getUsersAlphabetically($pFriendIds, $pPage = 1, $pLimit = 10) {
+
+
+    $lTimeLimit = time() - (sfConfig::get('app_stream_days_limit', 30) * 86400);
+
+
     $lQuery = Doctrine_Query::create()
     ->from('User u')
     ->whereIn('u.id', $pFriendIds)
+    ->andWhere('u.latest_activity > ?', $lTimeLimit)
     ->orderBy('u.sortname');
 
     $lQuery->limit($pLimit);
@@ -177,25 +190,28 @@ class UserTable extends Doctrine_Table {
    * generates basic query object to perform search actions on a users friendlist
    *
    * @author weyandch
-   * @param unknown_type $pUserId
-   * @param unknown_type $pName
+   * @param int $pUserId
+   * @param string $pName
    */
   private static function getFriendsFilterQuery($pUserId, $pName = null) {
     $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
     $lNameParts = explode(' ', $pName);
+    $lLimitDays = sfConfig::get('app_stream_days_limit_search', 0);
 
     $lQ = Doctrine_Query::create()
     ->from('User u')
     ->distinct()
     ->whereIn('u.id', $lFriendIds);
-
+    if ($lLimitDays > 0) {
+      $lQ->andWhere('u.latest_activity > ?', strtotime('-'.$lLimitDays. ' days'));
+    }
     foreach ($lNameParts as $lName) {
       $lQ->andWhere('u.sortname LIKE ?', '%'.trim($lName).'%');
     }
     return $lQ;
   }
 
-   /**
+  /**
    * Deletes unverified User with Cascade after given time in days or from a given date
    * @param $pDays Integer
    */
@@ -205,14 +221,29 @@ class UserTable extends Doctrine_Table {
     $lDate = date('Y-m-d H:i:s', $lDate);
 
     $lQuery = Doctrine_Query::create()
-      ->from('User u')
-      ->where('u.active = 0')
-      ->andWhere('u.created_at < ?', $lDate);
+    ->from('User u')
+    ->where('u.active = 0')
+    ->andWhere('u.created_at < ?', $lDate);
 
     $lUsers = $lQuery->execute();
 
     foreach ($lUsers as $lUser) {
       $lUser->delete();
     }
+  }
+
+
+
+  /**
+   * Update this timestamp on any like action triggered by a user
+   *
+   * @author weyandch
+   * @param int $pUserId
+   * @param int $pTimestamp
+   */
+  public static function updateLatestActivityForUser($pUserId, $pTimestamp) {
+    $lUser = UserTable::getInstance()->retrieveByPk($pUserId);
+    $lUser->setLatestActivity($pTimestamp);
+    $lUser->save();
   }
 }
