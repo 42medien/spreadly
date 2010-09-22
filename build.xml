@@ -86,7 +86,7 @@
 
     <exec command="php data/fixtures/initializeMongoObjects.php" checkReturn="true"/>
 
-    <phingcall target="syncI18n"></phingcall>
+    <phingcall target="I18NSync"></phingcall>
     <phingcall target="buildjs"></phingcall>
     <phingcall target="buildcss"></phingcall>
 
@@ -173,7 +173,7 @@
   </target>
   
   
-  <target name="syncI18n">
+  <target name="I18NSync">
     <exec command="wget http://yiid:affen2010@staging.yiiddev.com/service/i18n.sql" checkReturn="true"/>
     <exec command='mysql -u yiid_i18n -pfdsmolds32dfs yiid_i18n &lt; i18n.sql' checkReturn="true" />
     <exec command="rm ./i18n.sql" />

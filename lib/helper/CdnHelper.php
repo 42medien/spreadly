@@ -61,7 +61,7 @@ function cdn_javascript_tag($pFilename, $pOptions = array()) {
 
 
 /**
- * Generates a HTML CSS Tag, refering to our amazon bucket
+ * Generates a HTML CSS Tag, refering to our amazon bucketde
  *
  * @author Christian Weyand
  * @param string $pFilename

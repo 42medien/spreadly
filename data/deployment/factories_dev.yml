@@ -44,7 +44,7 @@ all:
   i18n:
     class: sfI18N
     param:
-      source:          MySQL
+      source:          pimpedMySQL
       debug:           false
       default_culture: de
       database:        mysql://yiidit_i18n:fdsmolds32dfs@donkeykong/yiidit_i18n
