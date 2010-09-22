@@ -73,7 +73,10 @@ mark, rp, rt, ruby, summary, time{ display: inline }
   li#nav_main_settings{margin-right: 0;}
     
 /* Content */
-#content{padding: 25px 0;}
+#content{
+  padding: 25px 0;
+  min-height: 450px;
+}
 
 /* Content_sub */
 #content_sub{/*width:25%;*/ width: 250px;}
@@ -139,11 +142,14 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 		  /**
 		   *   New Stream
 		   */
-		  .new_stream li{list-style-type: none;margin: 2px 10px;padding: 7px;-webkit-border-radius: 5px 0 5px 0;-moz-border-radius: 5px 0 5px 0;border-radius: 5px 0 5px 0;}
+		  .new_stream li{list-style-type: none;margin: 2px 3px;padding: 7px;-webkit-border-radius: 5px 0 5px 0;-moz-border-radius: 5px 0 5px 0;border-radius: 5px 0 5px 0;}
 		  .new_stream li.item_active, .new_stream li:hover{padding: 5px;border-width: 2px;border-style: solid;}
 		  
 		  .new_stream #main_stream_pager:hover{
 		    padding: 7px;
+		  }
+		  .new_stream {
+		    padding: 0 7px;
 		  }
 		  .hot_stream #main_stream_pager:hover,
 		  .not_stream #main_stream_pager:hover{
