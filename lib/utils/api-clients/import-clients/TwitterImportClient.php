@@ -5,20 +5,63 @@ $configuration = ProjectConfiguration::getApplicationConfiguration('platform', '
 sfContext::createInstance($configuration);
 
 /**
- * Enter description here...
+ * class to import twitter contacts
  *
  * @author Matthias Pfefferle
+ * @author Karina Mies
  */
 class TwitterImportClient {
-
+  /**
+   * import twitter contacts
+   *
+   * @author Matthias Pfefferle
+   * @author Karina Mies
+   */
 	public static function importContacts($pUserId, $pOnlineIdentity) {
-    $lToken = AuthTokenTable::getByUserAndOnlineIdentity($pUserId, $pOnlineIdentity->getId());
+	  $lToken = AuthTokenTable::getByUserAndOnlineIdentity($pUserId, $pOnlineIdentity->getId());
     // get api informations
     $lConsumer = new OAuthConsumer(sfConfig::get("app_twitter_oauth_token"), sfConfig::get("app_twitter_oauth_secret"));
     $lJson = OAuthClient::get($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "http://api.twitter.com/1/friends/ids/".$pOnlineIdentity->getIdentifier().".json");
     $lJsonObject = json_decode($lJson);
     $lCommunityId = $pOnlineIdentity->getCommunityId();
 
+    // the twitter api allows access to 100 users
+    // check how much rounds the script have to go to
+    // get all
+    $lFriendcount = count($lJsonObject);
+    $lRounds = ceil($lFriendcount/100);
+
+    // iterate through the results
+    for ($i = 0; $i < $lRounds; $i++) {
+      $lOffset = $i;
+      $lIds = array_splice($lJsonObject, $lOffset, 100);
+
+      // generate a string of comma separated twitter-ids
+      $lIdString = implode(",", $lIds);
+      // get matching users
+      $lContacts = OAuthClient::get($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "http://api.twitter.com/1/users/lookup.json?user_id=".$lIdString);
+
+      $lContacts = json_decode($lContacts);
+
+      // save online-identities
+      foreach ($lContacts as $lContact) {
+        $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lContact->screen_name, $lCommunityId);
+
+        if($lOnlineIdentity){
+          $lOnlineIdentity->setPhoto($lContact->profile_image_url);
+          $lOnlineIdentity->setName($lContact->screen_name);
+          $lOnlineIdentity->save();
+
+          sfContext::getInstance()->getLogger()->info("{TwitterImportClient} added online identity: " . $lOnlineIdentity->getId());
+
+          $lOiCon = OnlineIdentityConTable::createNew($pOnlineIdentity->getId(), $lOnlineIdentity->getId());
+        }
+      }
+    }
+
+    sfContext::getInstance()->getLogger()->info("{TwitterImportClient} done!!!!");
+
+    /*
     try {
 	    foreach($lJsonObject as $lKey => $lValue) {
         $lContact = OAuthClient::get($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "http://api.twitter.com/1/users/show.json?user_id=".$lValue);
@@ -33,23 +76,6 @@ class TwitterImportClient {
       }
     } catch (Exception $e) {
       sfContext::getInstance()->getLogger()->debug('[error]'.$e->getMessage());
-    }
+    }*/
 	}
-
-  /**
-   * complete the online-identity with the api json
-   *
-   * @param OnlineIdentity $pOnlineIdentity
-   * @param Object $pObject
-   */
-  public static function completeOnlineIdentity($pOnlineIdentity, $pObject) {
-    if ($pObject->name) {
-      $pOnlineIdentity->setName($pObject->name);
-    } else {
-      $pOnlineIdentity->setName($pObject->screen_name);
-    }
-    $pOnlineIdentity->setPhoto($pObject->profile_image_url);
-    $pOnlineIdentity->save();
-  }
-
 }
