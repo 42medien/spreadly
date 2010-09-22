@@ -83,10 +83,10 @@ a, a.icon_thumb, a.icon_thumbs, a.icon_thumb, a.icon_small_use, .icon_language_s
  *   @section -LineHeight
  */
 .two_block_area li{line-height: 13px;}
-#so_right_view p, #empty_stream p{
+#so_right_view p, #stream_left_empty p{
   line-height: 1.3em;
 }
-#so_right_view h3, 
+#so_right_view h3, h4,
 .whats_hot_info_area p.text_important{
   line-height: 1.4em;
 }

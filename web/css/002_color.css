@@ -16,9 +16,10 @@ a,
 
 p, 
 a.text_action, 
-h1,
+h1, 
+h2,
 h3, 
-h2, 
+h4,
 h5, 
 .btn,
 .user_share,
@@ -99,6 +100,7 @@ span.url,
 .whats_not_active #main_nav_inner4{background: #6a6b6a url("/img/sprites/sprite_repeat_x.png") 0 -45px repeat-x;}
 #main_nav_inner5{background: transparent url("/img/sprites/sprite_navigation.png") 0 -120px no-repeat;}
 .whats_not_active #main_nav_inner5{background: transparent url("/img/sprites/sprite_navigation.png") 0 -180px no-repeat;}
+.start_site #main_nav_inner5{background: transparent url("/img/sprites/sprite_navigation.png") 0 -180px no-repeat;}
 #main_nav_inner6{background: transparent url("/img/sprites/sprite_navigation.png") 0 0 no-repeat;}
 .whats_not_active #main_nav_inner6, .whats_hot_active #main_nav_inner6{background: transparent url("/img/sprites/sprite_navigation.png") 0 -60px no-repeat;}
 #main_nav_inner7{background: #fff url("/img/sprites/sprite_repeat_x.png") 0 -135px repeat-x;}
