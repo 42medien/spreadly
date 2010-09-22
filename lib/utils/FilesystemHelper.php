@@ -96,7 +96,7 @@ function retrieveFilesInDir($pDir, $pExclusionDir = array(), $pExclusionFile = a
       continue;
     } elseif (is_dir($pDir.'/'.$lFile) && !$lInDir) {
       //if the current file is a directory and not excluded to combine call this function again with the current file as param
-      $lArray = self::retrieveFilesInDir($pDir.'/'.$lFile, $pExclusionDir, $pExclusionFile);
+      $lArray = self::retrieveFilesInDir($pDir.'/'.$lFile, $pExclusionDir, $pExclusionFile, $pType);
       //and merge the current files to the previous
       $lFiles = array_merge($lFiles, $lArray);
     } elseif (!$lInDir && !$lInFile && $lIsJs != false) {

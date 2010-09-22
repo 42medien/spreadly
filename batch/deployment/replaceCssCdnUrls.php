@@ -18,7 +18,17 @@ $lRootDir = sfContext::getInstance()->getConfiguration()->getRootDir();
 $lFileName = CdnSingleton::getInstance()->getNextHost() .'/'. sfConfig::get('app_release_name')."/";
 
 
-$lFiles = FilesystemHelper::retrieveFilesInDir($lRootDir.'/web/css/include', array('.svn', 'include'), array(), '.css');
+$lFiles = FilesystemHelper::retrieveFilesInDir($lRootDir.'/web/css', array('.svn'), array(), '.css');
+
+echo "\r\n\r\n";
+echo "#####################################################################";
+echo "############ this skript will change image paths in your local css files";
+echo "############ you must not commit those changes, it'll fuck up pathes!!!";
+echo "#####################################################################";
+echo "############ best executed on dev/live where nothing gets comittet to svn ;)";
+echo "#####################################################################";
+echo "\r\n\r\n";
+
 
 
 

@@ -11,22 +11,21 @@
   </head>
   <body>
     <?php include_partial('global/branding'); ?>
-    
+
     <?php include_partial('global/navigation'); ?>
-    
+
     <?php if ($this->hasComponentSlot('content_top')) { ?>
     <div id="content_top" class="clearfix">
       <?php include_component_slot('content_top'); ?>
     </div>
     <?php } ?>
-    
+
     <div id="content" class="clearfix">
         <?php echo $sf_content; ?>
     </div>
-    
+
     <?php include_partial('global/footer'); ?>
-    
-    <script type="text/javascript" src="/js/100_main/include/platform-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
+    <?php echo cdn_javascript_tag('100_main/include/platform-'.sfConfig::get('app_release_name').'.js'); ?>
     <script type="text/javascript">
       jQuery(document).ready( function() {
         Configurator.init("<?php echo sfContext::getInstance()->getUser()->getCulture(); ?>");

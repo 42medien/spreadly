@@ -36,7 +36,7 @@ all:
   .settings:
     # Form security secret (CSRF protection)
     csrf_secret:            16575218ebe0be6e71b177fe30a9d99711e140e4
-    enabled_modules:        [general]
+    enabled_modules:        [general, yiid]
 
     # Output escaping settings
     escaping_strategy:      true
