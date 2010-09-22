@@ -7,11 +7,11 @@
       <div class="clearfix">
         <div class="left so_headline_left">
           <?php echo image_tag('http://getfavicon.appspot.com/'.$pObject->getUrl(), array('class' => 'icon_small_service left', 'width' => '16px', 'height' => '16px')); ?>
-          <span class="url left"><?php echo __('%1 ago', array('%1' => $pObject->getPublishingTime()), 'platform'); ?></span>
+          <span class="url left"><?php echo __('%1 ago', array('%1' => $pObject->getPublishingTime())); ?></span>
         </div>
         <div class="right so_headline_right">
-          <span class="thumb_up icon_small_use like-dislike"><?php echo __('%1', array('%1' => $pObject->getLikeCount()), 'platform'); ?></span>
-          <span class="thumb_down icon_small_use like-dislike"><?php echo __('%1', array('%1' => $pObject->getDislikeCount()), 'platform'); ?></span>
+          <span class="thumb_up icon_small_use like-dislike"><?php echo __('%1', array('%1' => $pObject->getLikeCount())); ?></span>
+          <span class="thumb_down icon_small_use like-dislike"><?php echo __('%1', array('%1' => $pObject->getDislikeCount())); ?></span>
         </div>
       </div>
       <div class="clearfix whats_hot_info_area">
