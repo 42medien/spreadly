@@ -97,7 +97,11 @@ function cdn_image_tag($pFilename, $pOptions = array()) {
 function concatNameWithRevision($pFilename, $pType) {
   $lHost = '';
   $lHostname = CdnSingleton::getInstance()->getNextHost();
-  $lHost .= $lHostname .'/'. sfConfig::get('app_release_name') .'/'. $pType . '/' . $pFilename . CdnSingleton::getInstance()->isGzipped();
+  if (sfConfig::get('app_settings_dev' == 1)) {
+    $lHostname .= sfConfig::get('app_release_name') .'/';
+  }
+
+  $lHost .= $lHostname .'/'.  $pType . '/' . $pFilename . CdnSingleton::getInstance()->isGzipped();
   return $lHost;
 }
 
