@@ -80,7 +80,7 @@ if($pUserId && $pSocialFeatures && $lSocialObjectArray['_id']) {
 </head>
 <body>
 
-  <div id="container" style="width: 400px;height: 62px;">
+  <div id="container">
 
     <div class="clearfix">
 
