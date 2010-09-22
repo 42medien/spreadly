@@ -2,8 +2,7 @@
 # default values
 all:
   release:
-    name:     '20100905'
- #   revision: '20100621/'   ## current revision
+    name:     '2'
     gzip:     0              ## set 1 to force local gz support
 
   emailaddress:
@@ -71,6 +70,8 @@ all:
     secret_key:  'bs1YgS4c1zJN/HmwaVA8CkhNfyvcS+EEm1hcEOa0'
     bucket:      'http://www.yiid.local/'
     hosts:
+#      - 'https://s3-eu-west-1.amazonaws.com/dev.yiidcdn.com'
+
       - 'http://www.yiid.local'
 
   # mapper for f.e. apis

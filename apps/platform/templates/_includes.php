@@ -5,5 +5,3 @@
 <?php } else { ?>
   <?php echo cdn_stylesheet_tag('include/'.sfConfig::get('app_release_name').'.min.css'); ?>
 <?php } ?>
-    
-<?php //echo cdn_javascript_tag('include/'.sfConfig::get('app_release_name').'.min.js'); ?>
