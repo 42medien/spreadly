@@ -317,9 +317,13 @@ h4{margin: 15px 0 10px 0;}
 .icon_big{padding-top: 65px; display: block;}
 #what_is_yiid_description p{height: 80px;}
 #signin_via_username_form{margin: 20px 0;}
-#signin_via_username_form div{width: 250px;}
-#signin_via_username_form label{width: 90px;display: block;}
-#signin_via_username_form input[type=text], #signin_via_username_form input[type=password]{width: 150px;}
+#signin_via_username_form div{width: 280px;}
+#signin_via_username_form label{width: 110px;display: block;}
+#signin_via_username_form input[type=text], 
+#signin_via_username_form input[type=password]{
+  width: 150px;
+  margin-bottom: 3px;
+}
 #signin_via_username_form input[type=submit]{margin-top: 10px;}
 .error{margin: 5px 0;}
 #services_after_registration{margin: 30px 50px;}
