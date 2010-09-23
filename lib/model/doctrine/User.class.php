@@ -173,7 +173,7 @@ class User extends BaseUser {
   public function updateContacts($pContactUserIds, $pIdentityIds) {
     return UserRelationTable::updateContactIdentities($this->getId(), $pIdentityIds, $pContactUserIds);
   }
-  
+
   /**
    * counts friends of user
    */
@@ -195,5 +195,24 @@ class User extends BaseUser {
       $lYiid = str_replace('http://%user%', strtolower($this->getUsername()), sfConfig::get('app_settings_yiid'));
     }
     return $lYiid;
+  }
+
+  /**
+   * checks if the user has online-identities
+   *
+   * @author Matthias Pfefferle
+   * @return boolean
+   */
+  public function hasVerifiedOnlineIdentities() {
+    $lCount = Doctrine_Query::create()
+      ->from('OnlineIdentity oi')
+      ->where('oi.user_id = ?', $this->getId())
+      ->count();
+
+    if ($lCount > 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
