@@ -13,6 +13,7 @@
       <select name="likebutton[l]" id="likebutton_l">
         <option value="de" selected="selected"><?php echo __('SELECT_LANGUAGE_DE', null, 'configurator'); ?></option>
         <option value="en"><?php echo __('SELECT_LANGUAGE_EN', null, 'configurator'); ?></option>
+        <option value="tr"><?php echo __('Turkish'); ?></option>
       </select>   
     </td>
     <td class="right_side"><label for="likebutton_l"><?php echo __('LABEL_LANGUAGE', null, 'configurator'); ?></label></td>

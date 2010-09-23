@@ -27,7 +27,7 @@
     </div>
 
     <?php include_partial('global/footer'); ?>
-    <?php echo cdn_javascript_tag('100_main/include/platform-'.sfConfig::get('app_release_name').'.js'); ?>
+    <?php echo cdn_javascript_tag('100_main/include/configurator-'.sfConfig::get('app_release_name').'.js'); ?>
     <script type="text/javascript">
       jQuery(document).ready( function() {
         Configurator.init("<?php echo sfContext::getInstance()->getUser()->getCulture(); ?>");
