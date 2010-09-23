@@ -69,7 +69,6 @@ class trans_unitActions extends autoTrans_unitActions
 
   public function executeLook_for_wildcard(sfWebRequest $request)
   {
-
     $lWildcardString = $request->getParameter('wildcard');
 
     if(!$lWildcardString) $this->redirect('trans_unit/new');
