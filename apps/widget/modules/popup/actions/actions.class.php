@@ -106,8 +106,8 @@ class popupActions extends sfActions {
         $lStatus = YiidActivityTable::saveLikeActivitys($this->getUser()->getId(),
                                             $lTempData["url"],
                                             //@todo define methods in objects
-                                            UserIdentityConTable::getOnlineIdentityIdsByUserId($this->getUser()->getId()),
-                                            $this->getUser()->getUser()->getOiIdsForLikeWidget(),
+                                            UserIdentityConTable::getOnlineIdentityIdsForUser($this->getUser()->getId()),
+                                            OnlineIdentityTable::getPublishingEnabledByUserIdOnlyIds($this->getUser()->getId()),
                                             $lTempData["score"],
                                             $lTempData["verb"],
                                             $lTempData["title"],
@@ -116,7 +116,6 @@ class popupActions extends sfActions {
       }
 
       $this->getUser()->setAttribute("yiid_temp_hash", null);
-
       $this->getUser()->setFlash("onload", "window.close();", false);
     }
 

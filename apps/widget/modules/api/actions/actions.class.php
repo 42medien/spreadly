@@ -71,7 +71,7 @@ class apiActions extends sfActions {
                                                            $this->lPhoto);
     } elseif ($this->status == 401) {
 
-      $lSessId = CookieUtils::getSessionId();
+        $lSessId = CookieUtils::getSessionId();
         setcookie("yiid_temp_hash", $lSessId, time()+300, '/', sfConfig::get('app_settings_host'));
         $this->success = YiidActivityTable::storeTemporary($lSessId,
                                                            $this->lUrl,

@@ -56,7 +56,6 @@ class YiidActivityTable extends Doctrine_Table
                                             $pDescription = null,
                                             $pPhoto = null) {
 
-
     $lVerifiedOnlineIdentitys = array();
     // @todo checken
     $pTitle = htmlspecialchars_decode(strip_tags(urldecode($pTitle)));
@@ -102,7 +101,6 @@ class YiidActivityTable extends Doctrine_Table
       $lSocialObject->updateObjectMasterData($pTitle, $pDescription, $pPhoto);
 
     }
-
     if (!self::isActionOnObjectAllowed($lSocialObject->getId(), $pUserId)) {
       return false;
     }
@@ -110,7 +108,6 @@ class YiidActivityTable extends Doctrine_Table
     foreach ($pGivenOnlineIdentitys as $lIdentityId) {
       if (in_array($lIdentityId, $pOwnedOnlineIdentitys)) {
         $lVerifiedOnlineIdentityIds[]= $lIdentityId;
-
         $senderOi = OnlineIdentityTable::getInstance()->find($lIdentityId);
         $lServices[] = $senderOi->getCommunityId();
         //$lStatus = $senderOi->sendStatusMessage($pUrl, $pVerb, $pScore, utf8_decode($pTitle), utf8_decode($pDescription), $pPhoto);

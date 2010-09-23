@@ -185,6 +185,27 @@ class OnlineIdentityTable extends Doctrine_Table {
     return $lOis;
   }
 
+   /**
+   * returns an array of oi id's that have publishing enabled
+   *
+   * @author Christian Weyand
+   * @param int $pUserId
+   * @return Doctrine_Collection
+   */
+  public static function getPublishingEnabledByUserIdOnlyIds($pUserId) {
+
+    $q = Doctrine_Query::create()
+           ->from('OnlineIdentity oi')
+            ->select('oi.id')
+            ->where('oi.user_id = ?', $pUserId)
+            ->andWhere('oi.social_publishing_enabled = ?', true);
+
+    $lOis = $q->execute(array(), Doctrine_Core::HYDRATE_NONE);
+    return HydrationUtils::flattenArray($lOis);
+  }
+
+
+
   public static function toggleSocialPublishingStatus($pIdentitiesOwnedByUser = array(), $pCheckedIdentities = array()) {
     // remove possible injected oi's not belonging to the user
     $checkedOnlineIdentities = array_intersect($pIdentitiesOwnedByUser, $pCheckedIdentities);
@@ -232,7 +253,12 @@ class OnlineIdentityTable extends Doctrine_Table {
   }
 
 
-
+/**
+ * get a set of oi's where we want to renew their friends
+ * @param int $pLimit
+ * @return array(int)
+ * @author weyandch
+ */
   public static function getOnlineIdentityIdsForFriendRenewal($pLimit) {
     $q = Doctrine_Query::create()
            ->from('OnlineIdentity oi')
