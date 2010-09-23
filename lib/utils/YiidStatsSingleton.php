@@ -90,6 +90,7 @@ class YiidStatsSingleton {
    *
    * @param string $pUrl Full Request URI (http://example.com/page)
    * @param string $pLikeType see TYPE_* Constants in this class
+   * @deprecated don't use this at home
    */
   public static function trackClickForMigration($pUrl, $pLikeType, $pTime) {
     $lCollection = MongoDbConnector::getInstance()->getCollection(sfConfig::get('app_mongodb_database_name_stats'), self::MONGO_COLLECTION_NAME_VISIT);

@@ -63,7 +63,7 @@ User:
       type:     integer
       default:  0
       notnull:    true
-    latest_activity:
+    last_activity:
       type:       integer
       default:   0
 

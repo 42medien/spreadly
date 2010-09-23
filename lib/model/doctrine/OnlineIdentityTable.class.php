@@ -180,4 +180,17 @@ class OnlineIdentityTable extends Doctrine_Table {
     $lOis = $q->execute();
     return $lOis;
   }
+
+
+
+  public static function getOnlineIdentityIdsForFriendRenewal($pLimit) {
+    $q = Doctrine_Query::create()
+           ->from('OnlineIdentity oi')
+           ->select('oi.id')
+           ->where('oi.user_id IS NOT NULL')
+           ->orderBy('oi.last_friend_refresh ASC');
+
+    $lOis = $q->execute(array(),  Doctrine_Core::HYDRATE_NONE);
+    return $lOis;
+  }
 }

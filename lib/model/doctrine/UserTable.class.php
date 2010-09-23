@@ -115,9 +115,9 @@ class UserTable extends Doctrine_Table {
         ->from('User u')
         ->whereIn('u.id', $pFriendIds)
         // today minus 30 days
-        ->andWhere('u.latest_activity > ?', $lTimeLimit)
+        ->andWhere('u.last_activity > ?', $lTimeLimit)
         // now sort by hot
-        ->orderBy('u.latest_activity');
+        ->orderBy('u.last_activity');
 
     $lQuery->limit($pLimit);
     $lQuery->offset(($pPage - 1) * $pLimit);
@@ -145,7 +145,7 @@ class UserTable extends Doctrine_Table {
     $lQuery = Doctrine_Query::create()
     ->from('User u')
     ->whereIn('u.id', $pFriendIds)
-    ->andWhere('u.latest_activity > ?', $lTimeLimit)
+    ->andWhere('u.last_activity > ?', $lTimeLimit)
     ->orderBy('u.sortname');
 
     $lQuery->limit($pLimit);
@@ -203,7 +203,7 @@ class UserTable extends Doctrine_Table {
     ->distinct()
     ->whereIn('u.id', $lFriendIds);
     if ($lLimitDays > 0) {
-      $lQ->andWhere('u.latest_activity > ?', strtotime('-'.$lLimitDays. ' days'));
+      $lQ->andWhere('u.last_activity > ?', strtotime('-'.$lLimitDays. ' days'));
     }
     foreach ($lNameParts as $lName) {
       $lQ->andWhere('u.sortname LIKE ?', '%'.trim($lName).'%');
@@ -243,7 +243,7 @@ class UserTable extends Doctrine_Table {
    */
   public static function updateLatestActivityForUser($pUserId, $pTimestamp) {
     $lUser = UserTable::getInstance()->retrieveByPk($pUserId);
-    $lUser->setLatestActivity($pTimestamp);
+    $lUser->setLastActivity($pTimestamp);
     $lUser->save();
   }
 }

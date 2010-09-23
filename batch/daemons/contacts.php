@@ -1,8 +1,10 @@
+#!/usr/bin/php -q
 <?php
 require_once(dirname(__FILE__).'/../../lib/utils/YiidDaemon.php');
 require_once(dirname(__FILE__).'/../../lib/utils/api-clients/import-clients/YiidImportContacts.php');
 
-$lAppName = "ImportContacts";
+$lAppName = "contacts";
+$lQueueName = "ImportContacts";
 
 // Setup
 $lOptions = array(
@@ -18,5 +20,5 @@ $lOptions = array(
     'appRunAsUID' => 0,
 );
 
-YiidDaemon::run($lAppName, $argv, "YiidImportContacts", "import", $lOptions);
+YiidDaemon::run($lQueueName, $argv, "YiidImportContacts", "import", $lOptions);
 ?>

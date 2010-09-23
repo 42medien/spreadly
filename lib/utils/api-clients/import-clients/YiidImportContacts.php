@@ -15,9 +15,11 @@ class YiidImportContacts {
     $lOnlineIdentity = OnlineIdentityTable::getInstance()->find($pMessage[0]['Body']);
 
     if ($lOnlineIdentity) {
+      $lOnlineIdentity->setLastFriendRefresh(now());
+      $lOnlineIdentity->save();
       try {
-        $lObject = @ImportApiFactory::factory($lOnlineIdentity->getCommunityId());
-        @$lObject->importContacts($lOnlineIdentity->getUserId(), $lOnlineIdentity);
+        $lObject = ImportApiFactory::factory($lOnlineIdentity->getCommunityId());
+        $lObject->importContacts($lOnlineIdentity->getUserId(), $lOnlineIdentity);
       } catch (Exception $e) {
         sfContext::getInstance()->getLogger()->err("{Daemon} ImpotContacts: " . $e->getMessage());
       }

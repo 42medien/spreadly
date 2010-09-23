@@ -110,7 +110,8 @@ class YiidDaemon {
     $cnt = 1;
 
     $lMessageBroker = new SQS(self::$aAmazonKey, self::$aAmazonSecret);
-
+    // creates queue if not exists
+    $lMessageBroker->createQueue($pQueueName);
     while (!System_Daemon::isDying() && $runningOkay ) {
       // What mode are we in?
       $mode = '"'.(System_Daemon::isInBackground() ? '' : 'non-' ).'daemon" mode';

@@ -40,14 +40,11 @@ abstract class AuthApi {
   }
 
   /**
-   * Enter description here...
+   * Push OnlineIdentityId to Amazon Quque for asynchronous process
    *
    * @param int $pOnlineIdentityId
    */
   public function importContacts($pOnlineIdentityId) {
-    $service = new SQS(YiidDaemon::$aAmazonKey,YiidDaemon::$aAmazonSecret);
-    $service->createQueue("ImportContacts");
-
-    $service->sendMessage("ImportContacts", $pOnlineIdentityId);
+    AmazonSQSUtils::pushToQuque("ImportContacts", $pOnlineIdentityId);
   }
 }
