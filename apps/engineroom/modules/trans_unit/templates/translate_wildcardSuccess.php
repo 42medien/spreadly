@@ -44,7 +44,5 @@
 
   <a href="#" class="button green small" onclick="document.getElementById('wildcard-translation-form').submit();return false;">Save</a>
   <?php echo link_to('Cancel', $lReferer, array('class' => 'button green small')); ?>
-  <?php if($sf_user->hasCredential('captain', false)) { ?>
-    <?php echo link_to('Delete wildcard', 'i18n_texts/delete_wildcard?w='.$lWildcard->getId().'&c='.$lWildcard->getCatalogueName(), array('class' => 'translate-whole button red small')); ?>
-  <?php } ?>
+
 </form>
