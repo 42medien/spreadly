@@ -15,6 +15,9 @@ class OnlineIdentityTable extends Doctrine_Table {
 
   const TYPE_ACCOUNT       = 21;
 
+  const SOCIAL_PUBLISHING_OFF = 0;
+  const SOCIAL_PUBLISHING_ON  = 1;
+
   /**
    * instanciate OnlineIdentityTable
    *
@@ -174,11 +177,58 @@ class OnlineIdentityTable extends Doctrine_Table {
   public static function getPublishingEnabledByUserId($pUserId) {
     $q = Doctrine_Query::create()
            ->from('OnlineIdentity oi')
+           ->leftJoin('oi.Community c')
            ->where('oi.user_id = ?', $pUserId)
-           ->andWhere('oi.social_publishing_enabled = ?', true);
+           ->andWhere('c.social_publishing_possible = ?', true);
 
     $lOis = $q->execute();
     return $lOis;
+  }
+
+  public static function toggleSocialPublishingStatus($pIdentitiesOwnedByUser = array(), $pCheckedIdentities = array()) {
+    // remove possible injected oi's not belonging to the user
+    $checkedOnlineIdentities = array_intersect($pIdentitiesOwnedByUser, $pCheckedIdentities);
+
+    if (is_array($pIdentitiesOwnedByUser)) {
+      self::removeSocialPublishingItems($pIdentitiesOwnedByUser);
+    }
+
+    if (is_array($checkedOnlineIdentities)  && count($checkedOnlineIdentities) > 0) {
+      self::activateSocialPublishingItems($checkedOnlineIdentities);
+    }
+  }
+
+  /**
+   *
+   * @author Christian Weyand
+   * @author Matthias Pfefferle
+   * @param $pIds
+   * @return unknown_type
+   */
+  public static function removeSocialPublishingItems($pIds) {
+    $q = Doctrine_Query::create()
+           ->update('OnlineIdentity oi')
+           ->set('oi.social_publishing_enabled', self::SOCIAL_PUBLISHING_OFF)
+           ->whereIn('oi.id', $pIds);
+
+    $q->execute();
+  }
+
+
+  /**
+   *
+   * @author Christian Weyand
+   * @author Matthias Pfefferle
+   * @param $pOnlineIdentitys
+   * @return unknown_type
+   */
+  public static function activateSocialPublishingItems($pIds) {
+    $q = Doctrine_Query::create()
+           ->update('OnlineIdentity oi')
+           ->set('oi.social_publishing_enabled', self::SOCIAL_PUBLISHING_ON)
+           ->whereIn('oi.id', $pIds);
+
+    $q->execute();
   }
 
 

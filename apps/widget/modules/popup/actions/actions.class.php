@@ -95,9 +95,9 @@ class popupActions extends sfActions {
 
     $lUser = $this->getUser()->getUser();
     if($request->getMethod() == sfRequest::POST) {
-      $checkedOnlineIdentities = $request->getParameter('enabled_services');
+      $checkedOnlineIdentities = $request->getParameter('enabled_services', array());
       //@todo define methods in objects
-      OnlineIdentityTable::toggleSocialPublishingStatus(UserIdentityConTable::getOnlineIdentityIdsByUserId($this->getUser()->getId()), $checkedOnlineIdentities);
+      OnlineIdentityTable::toggleSocialPublishingStatus(UserIdentityConTable::getOnlineIdentityIdsForUser($this->getUser()->getId()), $checkedOnlineIdentities);
 
       $lTempData = YiidActivityTable::getTemporaryData($_COOKIE["yiid_temp_hash"]);
       setcookie("yiid_temp_hash", '', time()-3600, '/', sfConfig::get('app_settings_host'));
@@ -117,7 +117,7 @@ class popupActions extends sfActions {
 
       $this->getUser()->setAttribute("yiid_temp_hash", null);
 
-     $this->getUser()->setFlash("onload", "window.close();", false);
+      $this->getUser()->setFlash("onload", "window.close();", false);
     }
 
     $this->pIdentities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
