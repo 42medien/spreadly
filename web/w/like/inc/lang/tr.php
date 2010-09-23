@@ -1,17 +1,23 @@
  <?php
-array(
+/**
+ * the german translations
+ *
+ * @author Matthias Pfefferle
+ * @author Thomas Huhn
+ */
+$i18n = array(
   "global" => array(
     "SETTINGS_TITLE" => "Buton ayarini degistir",
     "SETTINGS_VALUE" => "Ayarlar",
   ),
   "like" => array(
     "POS_BUTTON_TITLE" => "Ben beġendim",
-    "NEG_BUTTON_TITLE" => " Beġenmekten vazgeçtim",
+    "NEG_BUTTON_TITLE" => "Beġenmekten vazgeçtim",
     "POS_BUTTON_VALUE" => "Beġendim",
     "POS_BUTTON_ACTION_VALUE" => "Sen bunu beġendin",
     "NEG_BUTTON_ACTION_VALUE" => "Sen bunu beġenmedin",
     "POS_TEXT_VALUE_1" => "Senin ve ",
-    "POS_TEXT_VALUE_2" => "Kişi(ler) bunu beġendi(ler).",
+    "POS_TEXT_VALUE_2" => " Kişi(ler) bunu beġendi(ler).",
     "NEG_TEXT_VALUE_1" => "Senin ve ",
     "NEG_TEXT_VALUE_2" => " Kişi(leri) bunu beġenmedi(ler).",
   ),
