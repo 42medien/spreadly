@@ -98,7 +98,7 @@ h4{margin: 15px 0 10px 0;}
 .icon_thumb{padding: 5px 14px;}
 .icon_thumbs{padding: 5px 24px;}
 .icon_small_service{padding: 0px 7px;}
-.icon_small_service_right{padding: 0 3px;}
+.icon_small_service_right{padding: 0 4px;}
 .icon_small_use{margin-left: 5px;}
 .icon_small_use{padding: 3px 0 0 12px;}
 .icon_language_select{padding: 0px 6px;}
@@ -115,6 +115,13 @@ h4{margin: 15px 0 10px 0;}
 .search_field_area input{width: 88%;padding:5px 10px;height: 14px;border: 1px solid #d8e1d6;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;}
 #friend-filter-area{margin-top: 10px;padding-left: 3px;}
 /*a.friend_filter_link_active{padding: 3px 5px;}*/
+#empty_friends_area{
+  width: 90%;
+  height: 100px; 
+  border: 1px solid #DDD;
+  padding: 40px 5px 0 5px;
+  margin: 5px auto;
+}
 
 
 /* Content_main */
