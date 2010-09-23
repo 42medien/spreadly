@@ -182,7 +182,7 @@ body{font-size:16px;line-height:24px;font-family: arial, helvetica, sans-serif;}
 #content li{line-height: 20px;}
 #button_desc, h3{line-height: 18px;}
 #button-likebutton, #desc_left, #desc_right{line-height: 22px;}
-h3, #likebutton-form-table{font-size: 12px;}
+h3, #likebutton-form-table, .likebutton_t, #likebutton_l{font-size: 12px;}
 #likebutton-form-table input{font-size:11px;}
 #likebutton-form-table{font-weight: normal !important;line-height: 14px;}
 #likebutton-form-table td{vertical-align: top;}
