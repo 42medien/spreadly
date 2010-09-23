@@ -6,9 +6,9 @@ default:
     content-type: text/html
 
   metas:
-    #title:        symfony project
-    #description:  symfony project
-    #keywords:     symfony, project
+    title:        Yiid.it
+    #description:  Yiid helps you sharing your interesting websites
+    #keywords:     yiid, social, network, sharing
     #language:     en
     #robots:       index, follow
 

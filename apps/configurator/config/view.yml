@@ -3,11 +3,11 @@ default:
     content-type: text/html
 
   metas:
-    #title:        symfony project
-    #description:  symfony project
-    #keywords:     symfony, project
-    #language:     en
-    #robots:       index, follow
+    title:        Yiid.it Configurator
+    description:  Yiid helps you sharing your interesting websites
+    keywords:     yiid, social, network, sharing
+    language:     en
+    robots:       index, follow
 
   has_layout:     on
   layout:         layout
