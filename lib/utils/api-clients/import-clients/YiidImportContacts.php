@@ -15,7 +15,7 @@ class YiidImportContacts {
     $lOnlineIdentity = OnlineIdentityTable::getInstance()->find($pMessage[0]['Body']);
 
     if ($lOnlineIdentity) {
-      $lOnlineIdentity->setLastFriendRefresh(now());
+      $lOnlineIdentity->setLastFriendRefresh(timestamp());
       $lOnlineIdentity->save();
       try {
         $lObject = ImportApiFactory::factory($lOnlineIdentity->getCommunityId());
