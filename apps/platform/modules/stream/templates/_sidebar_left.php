@@ -60,7 +60,7 @@
       <?php echo __('No activities of friends'); ?>
     </p>
     
-    <div style="width: 90%;height: 100px; border: 1px solid #DDD;text-align: center;padding: 40px 5px 0 5px;margin: 5px auto;">
+    <div id="empty_friends_area">
       <p><?php echo __('Here you will see WHICH of your friends shared something interesting on the web.'); ?></p>
     </div>
     

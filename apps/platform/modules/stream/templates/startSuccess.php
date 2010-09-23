@@ -22,7 +22,7 @@
 		
 		<div id="step2_description">
 	    <h4><?php echo __('And this is the way you begin:'); ?></h4>
-	    <p><?php echo __('Share interesting websites with your friends within social networks by installing the browser plugin for %1 or %2', array(
+	    <p><?php echo __('Share interesting websites with your friends within social networks by installing the browser plugin for %1 or %2.', array(
 	      '%1' => link_to('Google Chrome', 'https://chrome.google.com/extensions/detail/leclmjclggfnkhdpkgnagcdnhnomapda', array('target' => '_blank')),
 	      '%2' => link_to('Firefox', 'http://sites.google.com/site/yiiddeveloper/plugins/firefox-plugins', array('target' => '_blank'))
 	    )); ?></p>
