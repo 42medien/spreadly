@@ -1,5 +1,5 @@
 /**
- * @combine platform
+ * @nocombine platform
  */
 
 /**
@@ -25,27 +25,31 @@ jQuery.fn.inputfilter = function(pParams) {
   var lDelay = (lParams['delay'] == undefined)?0:lParams['delay'];
   
   return this.each(function(){
-    jQuery(this).keyup(function() {
-      clearTimeout(lTimeout);
-      lFilter = jQuery(this).val();
-      lTimeout = setTimeout(function() {
-        if(!lParams['minchar'] || lFilter.length > lParams['minchar']) {
-          jQuery.ajax({
-            type: "GET",
-            url: lUrl,
-            dataType: "json",
-            data: {'sortname':lFilter, 'ei_kcuf': new Date().getTime()},
-            success: function(pResponse) {
-              if(lCallback!== undefined) {
-                lCallback(pResponse);
-              }
-              jQuery(lParent).empty();
-              jQuery(lParent).append(pResponse.html);
+      jQuery(this).keyup(function(e) {
+        var lKey = e.charCode || e.keyCode || 0;
+        
+        if(lKey != 37 && lKey != 38 && lKey != 39 && lKey != 40 && lKey != 0) {
+          clearTimeout(lTimeout);
+          lFilter = jQuery(this).val();
+          lTimeout = setTimeout(function() {
+            if(!lParams['minchar'] || lFilter.length > lParams['minchar']) {
+              jQuery.ajax({
+                type: "GET",
+                url: lUrl,
+                dataType: "json",
+                data: {'sortname':lFilter, 'ei_kcuf': new Date().getTime()},
+                success: function(pResponse) {
+                  if(lCallback!== undefined) {
+                    lCallback(pResponse);
+                  }
+                  jQuery(lParent).empty();
+                  jQuery(lParent).append(pResponse.html);
+                }
+              });
             }
-          });
+          }, lDelay);
         }
-      }, lDelay);
-    });
+      });
   });
 };
 

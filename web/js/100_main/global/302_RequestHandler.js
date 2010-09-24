@@ -191,7 +191,7 @@ var GlobalRequest = {
    * @param object pParames
    */
   bindClickByElement: function(pElement, pParams) {
-    debug.log("[GlobalRequest][bindClickByElement]");     	
+    debug.log("[GlobalRequest][bindClickByElement]");  
     debug.log(pElement);
     jQuery(pElement).die('click');
   	jQuery(pElement).live("click", function() {
@@ -212,7 +212,7 @@ var GlobalRequest = {
    * @param object pParams
 	 */
 	initOnClick: function(pElement, pParams) {
-    debug.log("[GlobalRequest][initOnClick]");  		
+    debug.log("[GlobalRequest][initOnClick]");  
     //init the global vars for dosend 
     GlobalRequest.initGlobals(pElement, pParams);  
     //and send request on click  

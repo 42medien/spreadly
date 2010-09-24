@@ -107,7 +107,8 @@ h4{margin: 15px 0 10px 0;}
 #reset_filter_friends a{padding: 0;}
 #friends_active_list, #friends_all_list, #friends_search_results, #reset_filter_friends{margin-left: 8%;margin-right: 8%;}
 #friends_active_list{height: 100px; overflow: auto;}
-#friends_search_results{display: none; height: 100px; overflow: auto;}
+#friends_search_results{display: none; height: 100px; overflow: auto; font-size:0.8em; padding-top: 5px;}
+#friends_search_results li a.ui-state-hover{text-decoration: underline; font-weight: bold;}
 #friends_all_list{display: none; height: 100px; overflow: auto;}
 #friends_active_list li, #friends_all_list li, #friends_search_results li{padding: 2px 0 2px 3px;}
 .search_field_area, #reset_filter_friends{width: 84%;margin-top: 10px;}
