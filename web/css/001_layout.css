@@ -198,6 +198,12 @@ h4{margin: 15px 0 10px 0;}
 		  .not_stream #main_stream_pager:hover{
         padding: 0;
       }
+      
+      #stream_breadcrumb{
+        margin: 5px 15px 10px 15px;
+        padding-bottom: 2px;
+        border-bottom: 1px solid#eee
+      }
 		  
 		    .green_arrow{}
 		    
