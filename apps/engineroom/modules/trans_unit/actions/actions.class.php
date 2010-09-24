@@ -37,7 +37,7 @@ class trans_unitActions extends autoTrans_unitActions
       $lToTranslateParams = $request->getParameter('to_translate');
       if($lWildcardSource == '') {
         $this->getUser()->setFlash('error', 'Please insert a wildcard name!');
-        $this->redirect('i18n_texts/create_wildcard');
+        $this->redirect('trans_unit/create_wildcard');
       }
 
       // create wildcard

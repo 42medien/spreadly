@@ -7,7 +7,7 @@
 <h3>Wildcard: <?php echo $lWildcardObjects[0]->getSource(); ?></h3>
 
 
-<form action="<?php echo url_for('i18n_texts/save_translation'); ?>" method="POST" id="wildcard-translation-form">
+<form action="<?php echo url_for('trans_unit/save_translation'); ?>" method="POST" id="wildcard-translation-form">
   <?php foreach($lWildcardObjects as $lWildcard) {    ?>
 	  <div class="clearfix" style="width:1000px;border:1px black solid;margin:0 10px 20px 0;padding:10px;">
       <?php $lCatalogue = $lWildcard->getCatalogue(); ?>
