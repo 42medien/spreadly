@@ -2,7 +2,12 @@
 
 <?php $pUser = UserTable::getInstance()->retrieveByPK($pActivity->getUId()); ?>
 <div class="so_image left">
-  <?php echo avatar_tag($pUser->getDefaultAvatar(), 48, array('alt' => $pUser->getFullname(), 'class' => '', 'rel' => '')); ?>
+  <div class="sharing_friend_outer left">
+    <div class="user_<?php echo $pActivity->getScore() == '-1' ? 'dislike' : 'like'; ?>"></div>
+  </div>
+  <div class="sharing_friend_inner">
+    <?php echo avatar_tag($pUser->getDefaultAvatar(), 48, array('alt' => $pUser->getFullname(), 'class' => '', 'rel' => '')); ?>
+  </div>
 </div>
 
 <div class="so_information left">
@@ -26,25 +31,9 @@
 
     <div class="clearfix">
       <div class="green_middle_middle">
-        <p class="so_comment">
-          <?php if ($pActivity->getScore() == 1) { ?>
-            <?php echo $pUser->getUsername(); ?>
-            <span class="text_important">
-              <?php echo __('likes on'); ?>
-            </span>
-            <?php echo link_to(UrlUtils::getShortUrl($pActivity->getUrl()), $pActivity->getUrl(), array('class' => 'url'));?>
-            <br />
-          <?php } else { ?>
-            <?php echo $pUser->getUsername(); ?>
-            <span class="text_important">
-              <?php echo __('dislikes'); ?>
-            </span>
-            <?php echo __('on'); ?>
-            <?php echo link_to(UrlUtils::getShortUrl($pActivity->getUrl()), $pActivity->getUrl(), array('class' => 'url'));?>
-            <br />
-          <?php } ?>
-          <?php echo ($pObject->getTitle() ? $pObject->getTitle() : '').($pObject->getStmt() ? ' - '.$pObject->getStmt() : ''); ?>
-        </p>
+          <p class="so_comment text_important"><?php echo truncate_text($pObject->getTitle(), 35, '...'); ?></p>
+          <p class="so_comment" title="<?php echo $pActivity->getUrl(); ?>"><?php echo link_to(UrlUtils::getShortUrl($pActivity->getUrl()), url_for($pActivity->getUrl(), true), array('class' => 'url')); ?></p>
+          <p class="so_comment main_text"><?php echo truncate_text($pObject->getStmt(), 100, '...'); ?></p>
       </div>
     </div>
 

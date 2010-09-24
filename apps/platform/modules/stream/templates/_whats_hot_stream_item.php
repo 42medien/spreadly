@@ -18,7 +18,7 @@
       </div>
       <div class="clearfix whats_hot_info_area">
 	      <p class="text_important"><?php echo truncate_text($pObject->getTitle(), 35, '...'); ?></p>
-        <p><?php echo link_to(UrlUtils::getShortUrl($pObject->getUrl()), url_for($pObject->getUrl(), true), array('class' => 'url')); ?></p>
+        <p title="<?php echo $pObject->getUrl(); ?>"><?php echo link_to(UrlUtils::getShortUrl($pObject->getUrl()), url_for($pObject->getUrl(), true), array('class' => 'url')); ?></p>
         <p class="main_text"><?php echo truncate_text($pObject->getStmt(), 100, '...'); ?></p>
 	    </div>
 	  </div>

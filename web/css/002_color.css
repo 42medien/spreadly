@@ -121,8 +121,8 @@ span.url,
 .item_active .green_top_left{background: #ecf6e9 url("/img/sprites/sprite_stream.png") 0 -207px no-repeat;}
 .item_active .green_bottom_left{background: #ecf6e9 url("/img/sprites/sprite_stream.png") 0 -84px no-repeat;}
 
-.user_like{border: 1px #68bc4f solid;background: transparent url("/img/sprites/sprite_general.png") 0 -138px no-repeat;}
-.user_dislike{border: 1px #68bc4f solid;background: transparent url("/img/sprites/sprite_general.png") 0 -175px no-repeat;}
+.user_like{background: transparent url("/img/sprites/sprite_general.png") 0 -171px no-repeat;}
+.user_dislike{background: transparent url("/img/sprites/sprite_general.png") 0 -208px no-repeat;}
 
 li.item_active{background: #ecf6e9 url("/img/global/item_active_bg.png") right bottom no-repeat;}
 #stream_left_bottom li.item_active .so_comment{background-color: #fff;}

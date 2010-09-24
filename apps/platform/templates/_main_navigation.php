@@ -7,7 +7,7 @@
       <?php include_component('system', 'language_switch_icons'); ?>
     </div>
 	</div>
-	<ul id="nav_main" class="clearfix">
+	<ul id="nav_main" class="right clearfix">
 	  <li><?php echo link_to(__('Home'), '@homepage', array('id' => 'nav_home')); ?></li>
 	  <li id="nav_main_settings"><?php echo link_to(__('Settings'), '@auth_add_services', array('id' => 'nav_settings')); ?></li>
 	</ul>

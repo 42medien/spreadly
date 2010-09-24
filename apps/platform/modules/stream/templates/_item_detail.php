@@ -1,9 +1,11 @@
+<?php use_helper('Text'); ?>
+
 <?php if (isset($pObject)) {?>
   <div class="bg_light bd_normal_light">
 		<div id="so_right_view" class="clearfix">
 		  <div>
-		    <h3><?php echo $pObject->getTitle(); ?></h3>
-        <h5><?php echo link_to(UrlUtils::getShortUrl($pObject->getUrl()), $pObject->getUrl(), array('class' => 'url')); ?></h5>
+		    <h3 title="<?php echo $pObject->getTitle(); ?>"><?php echo truncate_text($pObject->getTitle(), 30, '...'); ?></h3>
+        <h5 title="<?php echo $pObject->getUrl(); ?>"><?php echo link_to(UrlUtils::getShortUrl($pObject->getUrl()), $pObject->getUrl(), array('class' => 'url')); ?></h5>
 		  </div>
 		  <div id="so_detail_desc">
 		    <img alt="<?php echo $pObject->getUrl(); ?>" width="100px" height="80px" src="http://communipedia.v2.websnapr.com/?url=<?php echo $pObject->getUrl(); ?>&sh=80&sw=100" class="left">
