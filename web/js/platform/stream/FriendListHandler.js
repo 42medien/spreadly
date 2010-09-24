@@ -185,23 +185,6 @@ var FriendStreamInputFilter = {
     FriendStreamInputFilter.aInput = jQuery('#input-friend-filter');
     FriendStreamInputFilter.initAutocomplete();
     jQuery(FriendStreamInputFilter.aInput).toggleValue();
-    
-    /*
-    jQuery(FriendStreamInputFilter.aInput).blur(function(pEvent) {
-      pEvent.bubbles = false;
-      debug.log(pEvent.fromElement);
-      FriendStreamInputFilter.reset();
-      FriendStream.reset();      
-    });*/
-
-    /*
-    jQuery(FriendStreamInputFilter.aInput).inputfilter({
-      'parentid': 'friends_search_results', 
-      'url':'stream/get_contacts_by_sortname',
-      'callback': FriendStreamInputFilter.cbInputfilter,
-      'delay': 750
-    });   
-    */
   },
   
   initAutocomplete: function() {
@@ -221,7 +204,7 @@ var FriendStreamInputFilter = {
         });      
       },
       dataType: "json",
-      minLength: 1,
+      delay: 500,
       open: function(event, ui) {
         FriendStream.toggle('friends_search_results');
         var lHeight = jQuery('.ui-autocomplete').height();
@@ -230,15 +213,12 @@ var FriendStreamInputFilter = {
       select: function(event, ui) { 
         var item = ui.item;
         GlobalRequest.initOnClick(item, {'action': 'StreamSubFilter.getAction', 'callback': 'Stream.show', 'userid': item.id});
-        FriendStreamFilter.resetCss();
         jQuery('#result-container').height(15);    
-        FriendStream.reset();
-        StreamSubFilter.updateCss("user-active-filter-"+item.id);
       }
     })      
     .data( "autocomplete" )._renderItem = function( ul, item ) {
       //debug.log(item);
-      jQuery(ul).addClass('normal_list friend-filter-list');
+      //jQuery(ul).addClass('normal_list friend-filter-list');
       jQuery(ul).attr('id', 'friends_search_results');
       
       var lLink = jQuery('<a class="user_filter stream_filter">' + item.label +'</a>');
