@@ -204,6 +204,7 @@ var FriendStreamInputFilter = {
         });      
       },
       dataType: "json",
+      minLength: 0,
       delay: 500,
       open: function(event, ui) {
         FriendStream.toggle('friends_search_results');

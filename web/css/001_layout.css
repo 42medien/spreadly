@@ -113,7 +113,7 @@ h4{margin: 15px 0 10px 0;}
   padding: 7px 0;
   margin-bottom: 10px;
 }
-#friends_search_results{display: none; height: 100px; overflow: auto; font-size:0.8em; padding-top: 5px;}
+#friends_search_results{display: none; overflow: auto; font-size:0.8em; padding-top: 5px; width: 170px;}
 #friends_search_results li a.ui-state-hover{text-decoration: underline; font-weight: bold;}
 #friends_all_list{display: none; height: 100px; overflow: auto;}
 #friends_active_list li, #friends_all_list li, #friends_search_results li{padding: 2px 0 2px 3px;}
