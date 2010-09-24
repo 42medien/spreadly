@@ -203,7 +203,7 @@ class streamActions extends sfActions
 
   	$lChar = $request->getParameter('term', '');
   	$lPage = $request->getParameter('page', 1);
-    $lUsers = UserTable::getFriendsByName($this->getUser()->getUserId(), $lChar, $lPage);
+    $lUsers = UserTable::getFriendsByName($this->getUser()->getUserId(), $lChar, $lPage, $lFriendsCount);
     $lCounter = UserTable::countFriendsByName($this->getUser()->getUserId(), $lChar);
 
       $lResults = array();
