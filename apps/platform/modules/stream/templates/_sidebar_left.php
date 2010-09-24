@@ -30,7 +30,7 @@
 
 	  <div class="center_area filter_counter_area" id="friend-filter-area">
 	    <span><?php echo __('Sort by'); ?>: </span>
-	    <!-- friend_filter_link_active -->
+	    <br/>
 	    <span><a href="/" id="friends_active" class="friend-filter-link friend_filter_link_active"><?php echo __('Active')?></a> | </span>
 	    <span><a href="/" id="friends_all" class="friend-filter-link"><?php echo __('A-Z')?></a></span>
 	  </div>
@@ -39,11 +39,11 @@
 	      <input type="text" id="input-friend-filter" value="<?php echo __('Type name to filter...'); ?>" />
 	    </form>
 	  </div>
-	  <ul class="normal_list show friend-filter-list" id="friends_active_list">
+	  <ul class="show friend-filter-list" id="friends_active_list">
 	    <?php include_partial('stream/sidebar_active_friendlist', array('pFriends'=>$pFriends));?>
 	  </ul>
 
-	  <ul class="normal_list friend-filter-list" id="friends_all_list">
+	  <ul class="friend-filter-list" id="friends_all_list">
 	    <?php include_partial('stream/sidebar_all_friendlist', array('pFriends'=>$pAllFriends));?>
 	  </ul>
 
