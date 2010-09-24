@@ -45,11 +45,6 @@ class staticActions extends sfActions
     return;
   }
 
-
-  public function executeTos() {
-    $this->redirect('static/index?category=rechtliches&page=agb');
-  }
-
   public function execute404() {
     Breadcrumb::getInstance()->clearItems();
   }
@@ -150,5 +145,13 @@ class staticActions extends sfActions
     $this->pData = $lData;
 
     $this->setLayout('layout_new');
+  }
+  
+  public function executeImprint(sfWebRequest $request) {
+  	
+  }
+  
+  public function executeTos(sfWebRequest $request) {
+    
   }
 }

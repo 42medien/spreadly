@@ -10,6 +10,18 @@ stream:
   url:   /stream
   param: { module: stream, action: index }
 
+imprint:
+  url:   /imprint
+  param: { module: static, action: imprint }
+
+tos:
+  url:   /tos
+  param: { module: static, action: tos }
+
+contact:
+  url:   /contact
+  param: { module: static, action: contact }
+
 stream_new:
   url: /stream/new
   param: { module: stream, action: new }
