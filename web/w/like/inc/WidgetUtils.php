@@ -70,7 +70,7 @@ class SocialObjectPeer {
     // check if we know the URL already
     $lSocialObjectArray = $pCollectionObject->findOne(array("alias" => array('$in' => array($pUrlHash)) ));
 
-    // if no data is available, initialize empty array
+    // if no data is available, initialize empty array & create social object
     if (!$lSocialObjectArray) {
       self::delegateSocialObjectParsing($pUrl);
       $lSocialObjectArray = array();

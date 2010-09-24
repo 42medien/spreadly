@@ -5,6 +5,9 @@ class SocialObjectTable extends Doctrine_Table
 {
   const MONGO_COLLECTION_NAME = 'social_object';
 
+  const ENRICHED_TYPE_NONE = 0;
+  const ENRICHED_TYPE_OBJECTPARSER = 1;
+
   public static function getInstance()
   {
     return Doctrine_Core::getTable('SocialObject');
@@ -39,6 +42,41 @@ class SocialObjectTable extends Doctrine_Table
   }
 
 
+
+  /**
+   * initializes a basic social object for a given url
+   *
+   * @param string $pUrl
+   * @return SocialObject
+   */
+  public static function initializeObjectFromUrl($pUrl, $pEnriched = 0) {
+    $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
+    // check if this url has some redirects
+    $pLongUrl = UrlUtils::shortUrlExpander($pUrl);
+
+    if(!$pLongUrl || !UrlUtils::isUrlValid($pLongUrl)) {
+      return false;
+    }
+    $pLongUrl = UrlUtils::cleanupHostAndUri($pLongUrl);
+
+    if ($pLongUrl != $pUrl) {
+      $lSocialObject = self::retrieveByAliasUrl($pLongUrl);
+      if ($lSocialObject) {  // gibt's schon unter $longUrl -> also $pUrl hinzufügen
+        $lSocialObject->addAlias($pUrl);
+        return true;
+      }
+    }
+
+    // really not exisitng yet, so let's create a basic version
+    if (!$lSocialObject) {
+      $pUrlHash = md5($pUrl);
+      $lCollection = self::getMongoCollection();
+      $lCollection->update(array('url_hash' => $pUrlHash), array('$set' => array('url' => $pUrl, 'enriched' => $pEnriched), '$addToSet' => array('alias' => $pUrlHash)), array('upsert' => true));
+      $lSocialObject = SocialObjectTable::retrieveByAliasUrl($pUrl);
+    }
+    return $lSocialObject;
+  }
+
   /**
    * create a new social object and fills with basic inforamtion given by the executed widget
    *
@@ -50,7 +88,7 @@ class SocialObjectTable extends Doctrine_Table
    * @return unknown_type
    */
   public static function createSocialObject($pUrl, $pLongUrl = null, $pTitle = null, $pDescription = null, $pImage = null) {
-    if ($pLongUrl) {
+    if ($pLongUrl && $pLongUrl != $pUrl) {
       $lAliasArray = array(md5($pUrl), md5($pLongUrl));
     } else {
       $lAliasArray = array( md5($pUrl));

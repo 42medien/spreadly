@@ -47,14 +47,14 @@ class YiidActivityTable extends Doctrine_Table
 
 
   public static function saveLikeActivitys($pUserId,
-                                            $pUrl,
-                                            $pOwnedOnlineIdentitys = array(),
-                                            $pGivenOnlineIdentitys = array(),
-                                            $pScore = self::ACTIVITY_VOTE_POSITIVE,
-                                            $pVerb = 'like',
-                                            $pTitle = null,
-                                            $pDescription = null,
-                                            $pPhoto = null) {
+  $pUrl,
+  $pOwnedOnlineIdentitys = array(),
+  $pGivenOnlineIdentitys = array(),
+  $pScore = self::ACTIVITY_VOTE_POSITIVE,
+  $pVerb = 'like',
+  $pTitle = null,
+  $pDescription = null,
+  $pPhoto = null) {
 
     $lVerifiedOnlineIdentitys = array();
     // @todo checken
@@ -77,30 +77,12 @@ class YiidActivityTable extends Doctrine_Table
     $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
 
 
+    // object doesn't exist, create it now
     if (!$lSocialObject) {
-      // check redirects for link shortenes
-      $pLongUrl = UrlUtils::shortUrlExpander($pUrl);
-
-      if(!$pLongUrl || !UrlUtils::isUrlValid($pLongUrl)) {
-        return false;
-      }
-      $pLongUrl = UrlUtils::cleanupHostAndUri($pLongUrl);
-
-      if ($pLongUrl != $pUrl) {
-        $lSocialObject = self::retrieveSocialObjectByAliasUrl($pLongUrl);
-        if ($lSocialObject) {  // gibt's schon unter $longUrl -> also $pUrl hinzufügen
-          $lSocialObject->addAlias($pUrl);
-        } else {
-          $lSocialObject =  SocialObjectTable::createSocialObject($pUrl, $pLongUrl, $pTitle, $pDescription, $pPhoto);
-        }
-      } else {
-        $lSocialObject = SocialObjectTable::createSocialObject($pUrl, null, $pTitle, $pDescription, $pPhoto);
-      }
-    } else {
-      // unless we got an freaky object parser we check on updates on every action on an object
-      $lSocialObject->updateObjectMasterData($pTitle, $pDescription, $pPhoto);
-
+      SocialObjectTable::initializeObjectFromUrl($pUrl);
     }
+
+
     if (!self::isActionOnObjectAllowed($lSocialObject->getId(), $pUserId)) {
       return false;
     }

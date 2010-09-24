@@ -15,4 +15,4 @@
 
 <p id="cancel_action"><a href="#2" id="cancel-link"><?php echo __('CANCEL', null, 'widget'); ?></a></p>
 
-<iframe src="http://widgets.<?php echo sfConfig::get("app_settings_host"); ?>/w/like/like.php?visible=false" border="none" width="0px" height="0px" style="border:none;width:0px;height:0px;"></iframe>
+<iframe src="http://widgets.<?php echo sfConfig::get("app_settings_host"); ?>/w/like/like.php?visible=false&url=dummy" border="none" width="0px" height="0px" style="border:none;width:0px;height:0px;"></iframe>
