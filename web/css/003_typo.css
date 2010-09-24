@@ -17,8 +17,8 @@ h5{ font-size: 1em; font-weight: bold; }
 /**
  *   @section -FontSize
  */
-.url, .like-dislike, .user_filter, .icon_service, .pager_load_more, .user_share, .search_field_area input, .filter_counter_area, #reset_filter_friends a{font-size: 0.8em;}
-.so_comment, #so_right_view p, p.filter_headline{font-size: 0.9em;}
+.url, .like-dislike, .user_filter, .icon_service, .pager_load_more, .user_share, .search_field_area input, .filter_counter_area, #reset_filter_friends a, .text_unimportant{font-size: 0.8em;}
+.so_comment, #so_right_view p, p.filter_headline, #footer ul li{font-size: 0.9em;}
 .btn, .text_action, #so_information h5 a{font-size: 11px;}
 #stream_left_top p, #search input{font-size: 13px;}
 #nav_main, #so_information h3{font-size: 14px;}
@@ -44,7 +44,9 @@ a.friend_filter_link_active{
 /**
  *   @section -FontStyle
  */
-/*.url{font-style: italic;}*/
+.text_unimportant{
+  font-style: italic;
+}
 
 
 /**
@@ -61,8 +63,7 @@ a:hover,
 .whats_hot_info_area .url, 
 .whats_not_info_area .url,
 #so_information .url, 
-li.filter_chosen a, 
-#footer ul li:first-child{
+li.filter_chosen a{
   text-decoration: underline;
 }
 a, a.icon_thumb, a.icon_thumbs, a.icon_thumb, a.icon_small_use, .icon_language_select:hover{text-decoration: none;}
@@ -88,7 +89,11 @@ a, a.icon_thumb, a.icon_thumbs, a.icon_thumb, a.icon_small_use, .icon_language_s
 .two_block_area li{line-height: 13px;}
 #so_right_view p, 
 #stream_left_empty p, 
-#empty_friends_area p{
+#empty_friends_area p,
+p.main_text,
+#footer li,
+.normal_text,
+#footer_content_area p{
   line-height: 1.3em;
 }
 #so_right_view h3, h4,

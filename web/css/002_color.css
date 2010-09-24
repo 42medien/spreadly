@@ -24,6 +24,7 @@ h5,
 .btn,
 .user_share,
 #content label,
+.normal_text,
 .search_field_area input{color: #5A5E5A;}
 .url, 
 a.url, 
@@ -33,7 +34,7 @@ span.url,
 
 #stream_left_top p, 
 #stream_right_top p, 
-#footer, 
+#footer,
 .filter_headline_active a,
 #footer a,
 #footer h5{color: #fff;}
