@@ -65,6 +65,35 @@ class trans_unitActions extends autoTrans_unitActions
       $this->redirect('trans_unit/new');
     }
   }
+  
+  public function executeSave_translation(sfWebRequest $request) {
+    $lWildcards = $request->getParameter('wildcard');
+    $lToTranslateParams = $request->getParameter('to_translate');
+    $lReferer = $request->getParameter('referer');
+
+    foreach($lWildcards as $lKey => $lValue) {
+      $lWildcardId = $lKey;
+      $lWildcardTarget = $lValue['target'];
+      //$lWildcardComments = $lWildcard['comment'];
+      $lWildcardObject = Doctrine::getTable('TransUnit')->find($lWildcardId);
+      $lWildcardObject->setTarget($lWildcardTarget);
+
+      $lCulture = $lWildcardObject->getCatalogue()->getTargetLang();
+      if((isset($lToTranslateParams[$lCulture]) && $lToTranslateParams[$lCulture] == 'on') || $lWildcardTarget == '') {
+        $lWildcardObject->setTranslated(false);
+      } else {
+        $lWildcardObject->setTranslated(true);
+      }
+      //$lWildcardObject->setComments($lWildcardComments);
+      $lWildcardObject->setAuthor('hugo');//$lWildcardObject->setAuthor($this->getUser()->getUser()->getFullname());
+      $lWildcardObject->save();
+    }
+
+    $this->getUser()->setFlash('wildcard_edited', $lWildcardObject->getId());
+
+    //$this->redirect($lReferer);
+    $this->redirect('trans_unit/new');
+  }
 
 
   public function executeLook_for_wildcard(sfWebRequest $request)
@@ -95,6 +124,4 @@ class trans_unitActions extends autoTrans_unitActions
     $this->setTemplate('new');
     */
   }
-
-
 }
