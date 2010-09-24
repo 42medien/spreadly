@@ -223,6 +223,19 @@ class UrlUtils {
       }
     }
   }
+  
+  /**
+   * build the short url of an url
+   *
+   * @param string $pUrl
+   * @return string
+   */
+  public static function getShortUrl($pUrl) {
+    $lScheme = parse_url($pUrl, PHP_URL_SCHEME);
+    $lHost = parse_url($pUrl, PHP_URL_HOST);
+    $lValue = $lScheme.'://'.$lHost;
+    return $lValue;
+  }
 
   /**
    * returns full host without www

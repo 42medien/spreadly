@@ -1,3 +1,5 @@
+<?php use_helper('Text'); ?>
+
 <div class="whats_hot_stream_item">
   <div class="clearfix">
     <div class="whats_hot_stream_icon left">
@@ -15,9 +17,9 @@
         </div>
       </div>
       <div class="clearfix whats_hot_info_area">
-        <p class="text_important"><?php echo $pObject->getTitle(); ?></p>
-        <p><?php echo link_to($pObject->getUrl(), url_for($pObject->getUrl(), true), array('class' => 'url')); ?></p>
-        <p class="main_text"><?php echo $pObject->getStmt(); ?></p>
+        <p class="text_important"><?php echo truncate_text($pObject->getTitle(), 35, '...'); ?></p>
+        <p><?php echo link_to(UrlUtils::getShortUrl($pObject->getUrl()), url_for($pObject->getUrl(), true), array('class' => 'url')); ?></p>
+        <p class="main_text"><?php echo truncate_text($pObject->getStmt(), 100, '...'); ?></p>
       </div>
     </div>
     <div class="right preview_information">

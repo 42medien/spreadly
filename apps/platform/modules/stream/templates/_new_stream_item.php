@@ -1,4 +1,5 @@
-<?php use_helper('YiidUrl', 'Avatar'); ?>
+<?php use_helper('YiidUrl', 'Avatar', 'Text'); ?>
+
 <?php $pUser = UserTable::getInstance()->retrieveByPK($pActivity->getUId()); ?>
 <div class="so_image left">
   <?php echo avatar_tag($pUser->getDefaultAvatar(), 48, array('alt' => $pUser->getFullname(), 'class' => '', 'rel' => '')); ?>
@@ -31,14 +32,15 @@
             <span class="text_important">
               <?php echo __('likes on'); ?>
             </span>
-            <?php echo link_to($pActivity->getUrl(), $pActivity->getUrl(), array('class' => 'url'));?>
+            <?php echo link_to(UrlUtils::getShortUrl($pActivity->getUrl()), $pActivity->getUrl(), array('class' => 'url'));?>
             <br />
           <?php } else { ?>
             <?php echo $pUser->getUsername(); ?>
             <span class="text_important">
-              <?php echo __('dislikes on'); ?>
+              <?php echo __('dislikes'); ?>
             </span>
-            <?php echo link_to($pActivity->getUrl(), $pActivity->getUrl(), array('class' => 'url'));?>
+            <?php echo __('on'); ?>
+            <?php echo link_to(UrlUtils::getShortUrl($pActivity->getUrl()), $pActivity->getUrl(), array('class' => 'url'));?>
             <br />
           <?php } ?>
           <?php echo ($pObject->getTitle() ? $pObject->getTitle() : '').($pObject->getStmt() ? ' - '.$pObject->getStmt() : ''); ?>
