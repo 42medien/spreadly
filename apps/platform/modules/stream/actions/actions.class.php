@@ -198,7 +198,7 @@ class streamActions extends sfActions
   public function executeGet_contacts_by_sortname(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
 
-    $lFriendsCount = 10;
+    $lFriendsCount = 25;
     $lDoPaginate = true;
 
   	$lChar = $request->getParameter('term', '');
