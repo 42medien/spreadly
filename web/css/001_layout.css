@@ -208,6 +208,9 @@ h4{margin: 15px 0 10px 0;}
 		    .green_arrow{}
 		    
 		    .so_image{width: 10%;margin: 5px 0 15px 5px;}
+		    #so_detail_desc img{
+		      margin: 10px 15px 8px 0;
+		    }
 		    .so_information{width: 86%;}
 		    
 		    .green_top_left{width:18px;height:28px;}
