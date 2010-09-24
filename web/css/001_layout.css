@@ -111,7 +111,7 @@ h4{margin: 15px 0 10px 0;}
   overflow: auto;
   border: 1px solid #eee;border-top: none;
   padding: 7px 0;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 #friends_search_results{display: none; height: 100px; overflow: auto; font-size:0.8em; padding-top: 5px;}
 #friends_search_results li a.ui-state-hover{text-decoration: underline; font-weight: bold;}
@@ -120,7 +120,7 @@ h4{margin: 15px 0 10px 0;}
 .search_field_area, #reset_filter_friends{width: 84%;margin-top: 10px;}
 .filter_counter_area{
   width: 84%;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 .search_field_area input{width: 88%;padding:5px 10px;height: 14px;border: 1px solid #d8e1d6;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;}
 #friend-filter-area{margin-top: 10px;padding-left: 3px;}
