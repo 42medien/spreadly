@@ -107,7 +107,7 @@ h4{margin: 15px 0 10px 0;}
 #reset_filter_friends a{padding: 0;}
 #friends_active_list, #friends_all_list, #friends_search_results, #reset_filter_friends{margin-left: 8%;margin-right: 8%;}
 #friends_active_list{
-  height: 220px; 
+  height: 230px; 
   overflow: auto;
   border: 1px solid #eee;border-top: none;
   padding: 7px 0;
