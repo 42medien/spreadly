@@ -17,8 +17,8 @@ class TwitterImportClient {
    * @author Matthias Pfefferle
    * @author Karina Mies
    */
-	public static function importContacts($pUserId, $pOnlineIdentity) {
-	  $lToken = AuthTokenTable::getByUserAndOnlineIdentity($pUserId, $pOnlineIdentity->getId());
+  public static function importContacts($pUserId, $pOnlineIdentity) {
+    $lToken = AuthTokenTable::getByUserAndOnlineIdentity($pUserId, $pOnlineIdentity->getId());
     // get api informations
     if (!$lToken) {
       throw new Exception('damn theres no token!', '666');
@@ -57,7 +57,11 @@ class TwitterImportClient {
 
           sfContext::getInstance()->getLogger()->info("{TwitterImportClient} added online identity: " . $lOnlineIdentity->getId());
 
-          $lOiCon = OnlineIdentityConTable::createNew($pOnlineIdentity->getId(), $lOnlineIdentity->getId());
+          try {
+            $lOiCon = OnlineIdentityConTable::createNew($pOnlineIdentity->getId(), $lOnlineIdentity->getId());
+          } catch (ModelException $e) {
+            sfContext::getInstance()->getLogger()->err("{TwitterImportClient} " . $e->getMessage());
+          }
         }
       }
     }
@@ -65,20 +69,20 @@ class TwitterImportClient {
     sfContext::getInstance()->getLogger()->info("{TwitterImportClient} done!!!!");
 
     /*
-    try {
-	    foreach($lJsonObject as $lKey => $lValue) {
-        $lContact = OAuthClient::get($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "http://api.twitter.com/1/users/show.json?user_id=".$lValue);
-			  $lJsonUser = json_decode($lContact);
-			  $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lJsonUser->screen_name, $lCommunityId);
-			  if($lOnlineIdentity){
-				  TwitterImportClient::completeOnlineIdentity($lOnlineIdentity, $lJsonUser);
-				  $lOiCon = OnlineIdentityConTable::createNew($pOnlineIdentity->getId(), $lOnlineIdentity->getId());
-			  }
-			  sfContext::getInstance()->getLogger()->debug("onlineidentity: " . $lOnlineIdentity->getId());
-	      sfContext::getInstance()->getLogger()->debug("oicon: " . $lOiCon->getId());
-      }
-    } catch (Exception $e) {
-      sfContext::getInstance()->getLogger()->debug('[error]'.$e->getMessage());
-    }*/
-	}
+     try {
+     foreach($lJsonObject as $lKey => $lValue) {
+     $lContact = OAuthClient::get($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "http://api.twitter.com/1/users/show.json?user_id=".$lValue);
+     $lJsonUser = json_decode($lContact);
+     $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lJsonUser->screen_name, $lCommunityId);
+     if($lOnlineIdentity){
+     TwitterImportClient::completeOnlineIdentity($lOnlineIdentity, $lJsonUser);
+     $lOiCon = OnlineIdentityConTable::createNew($pOnlineIdentity->getId(), $lOnlineIdentity->getId());
+     }
+     sfContext::getInstance()->getLogger()->debug("onlineidentity: " . $lOnlineIdentity->getId());
+     sfContext::getInstance()->getLogger()->debug("oicon: " . $lOiCon->getId());
+     }
+     } catch (Exception $e) {
+     sfContext::getInstance()->getLogger()->debug('[error]'.$e->getMessage());
+     }*/
+  }
 }

@@ -21,12 +21,16 @@ class FacebookImportClient {
     $lCommunityId = $pOnlineIdentity->getCommunityId();
 
     try {
-	    foreach ($lJsonObject->data as $lObject) {
-	      $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity('http://facebook.com/profile.php?id='.$lObject->id, $lCommunityId);
-	      if($lOnlineIdentity){
-	        $lOiCon = OnlineIdentityConTable::createNew($pOnlineIdentity->getId(), $lOnlineIdentity->getId());
-	      }
-	    }
+      foreach ($lJsonObject->data as $lObject) {
+        $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity('http://facebook.com/profile.php?id='.$lObject->id, $lCommunityId);
+        if($lOnlineIdentity){
+          try {
+            $lOiCon = OnlineIdentityConTable::createNew($pOnlineIdentity->getId(), $lOnlineIdentity->getId());
+          } catch (ModelException $e) {
+            sfContext::getInstance()->getLogger()->err("{FacebookImportClient} " . $e->getMessage());
+          }
+        }
+      }
     } catch (Exception $e) { }
   }
 }

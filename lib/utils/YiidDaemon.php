@@ -38,17 +38,17 @@ class YiidDaemon {
                       'sysMemoryLimit' => '64M',
                       'appRunAsGID' => 0,
                       'appRunAsUID' => 0,
-                    ); // default options
+  ); // default options
   /**
-   * run the daemon
-   *
-   * @author Matthias Pfefferle
-   * @param string $pQueueName the name of the Queue
-   * @param array $pArguments the console arguments ($argv)
-   * @param string $pClass the class-name (for the callback)
-   * @param string $pFunction the function-name (for the callback)
-   * @param array $pOptions optional options array
-   */
+  * run the daemon
+  *
+  * @author Matthias Pfefferle
+  * @param string $pQueueName the name of the Queue
+  * @param array $pArguments the console arguments ($argv)
+  * @param string $pClass the class-name (for the callback)
+  * @param string $pFunction the function-name (for the callback)
+  * @param array $pOptions optional options array
+  */
   public static function run($pQueueName, $pArguments, $pClass, $pFunction, $pOptions = null) {
     // if $pOptions is empty take the default params
     if (!$pOptions) {
@@ -126,7 +126,6 @@ class YiidDaemon {
 
       if (!empty($message)) {
         System_Daemon::info('{appName} received message with id %s %s', $message[0]['MessageId'], urldecode($message[0]['Body']));
-        $lMessageBroker->deleteMessage($pQueueName, $message[0]['ReceiptHandle']);
 
         // run the importer
         call_user_func(array($pClass, $pFunction), $message);
@@ -149,7 +148,9 @@ class YiidDaemon {
       // Relax the system by sleeping for a little bit
       // iterate also clears statcache
       System_Daemon::iterate(1);
-
+      if (!empty($message)) {
+        $lMessageBroker->deleteMessage($pQueueName, $message[0]['ReceiptHandle']);
+      }
       $cnt++;
     }
 
