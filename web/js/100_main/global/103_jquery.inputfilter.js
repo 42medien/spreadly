@@ -1,5 +1,5 @@
 /**
- * @nocombine platform
+ * @combine platform
  */
 
 /**
@@ -28,7 +28,7 @@ jQuery.fn.inputfilter = function(pParams) {
       jQuery(this).keyup(function(e) {
         var lKey = e.charCode || e.keyCode || 0;
         
-        if(lKey != 37 && lKey != 38 && lKey != 39 && lKey != 40 && lKey != 0) {
+        if(lKey != 37 && lKey != 38 && lKey != 39 && lKey != 40 && lKey != 0 && lKey != 13) {
           clearTimeout(lTimeout);
           lFilter = jQuery(this).val();
           lTimeout = setTimeout(function() {

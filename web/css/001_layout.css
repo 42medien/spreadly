@@ -105,7 +105,7 @@ h4{margin: 15px 0 10px 0;}
 
 /* FriendsFilter */
 #reset_filter_friends a{padding: 0;}
-#friends_active_list, #friends_all_list, #friends_search_results, #reset_filter_friends{margin-left: 8%;margin-right: 8%;}
+#friends_active_list, #friends_all_list, #reset_filter_friends{margin-left: 8%;margin-right: 8%;}
 #friends_active_list{
   height: 230px; 
   overflow: auto;
@@ -113,8 +113,8 @@ h4{margin: 15px 0 10px 0;}
   padding: 7px 0;
   margin-bottom: 10px;
 }
-#friends_search_results{display: none; overflow: auto; font-size:0.8em; padding-top: 5px; width: 170px;}
-#friends_search_results li a.ui-state-hover{text-decoration: underline; font-weight: bold;}
+#friends_search_results{overflow: auto; font-size:0.8em; padding-top: 5px; width: 170px;}
+#friends_search_results li.keynav_focusbox a{text-decoration: underline; font-weight: bold;}
 #friends_all_list{
   display: none; 
   height: 230px; 

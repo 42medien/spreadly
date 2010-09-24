@@ -198,28 +198,20 @@ class streamActions extends sfActions
   public function executeGet_contacts_by_sortname(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
 
-    $lFriendsCount = 25;
+    $lFriendsCount = 10;
     $lDoPaginate = true;
 
-  	$lChar = $request->getParameter('term', '');
-  	$lPage = $request->getParameter('page', 1);
-    $lUsers = UserTable::getFriendsByName($this->getUser()->getUserId(), $lChar, $lPage, $lFriendsCount);
+    $lChar = $request->getParameter('sortname', '');
+    $lPage = $request->getParameter('page', 1);
+    $lUsers = UserTable::getFriendsByName($this->getUser()->getUserId(), $lChar, $lPage);
     $lCounter = UserTable::countFriendsByName($this->getUser()->getUserId(), $lChar);
-
-      $lResults = array();
-      $i = 0;
-    foreach ($lUsers->getData() as $lUser) {
-      $lResults[$i]['label'] = $lUser->getFullname();
-      $lResults[$i]['value'] = $lUser->getFullname();
-      $lResults[$i]['img'] = $this->getPartial('stream/sidebar_friendlist', array('lFriend' => $lUser));
-      $lResults[$i]['id'] = $lUser->getId();
-      $i++;
-    }
-    $lResults[$i]['count'] = $lCounter;
 
     return $this->renderText(
       json_encode(
-        $lResults
+        array(
+          "html"  => $this->getPartial('stream/sidebar_friendlist', array('pFriends' => $lUsers->getData())),
+          "pCounter" => $lCounter
+        )
       )
     );
   }

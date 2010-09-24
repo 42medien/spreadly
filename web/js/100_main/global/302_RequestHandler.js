@@ -191,8 +191,7 @@ var GlobalRequest = {
    * @param object pParames
    */
   bindClickByElement: function(pElement, pParams) {
-    debug.log("[GlobalRequest][bindClickByElement]");  
-    debug.log(pElement);
+    debug.log("[GlobalRequest][bindClickByElement]");
     jQuery(pElement).die('click');
   	jQuery(pElement).live("click", function() {
       GlobalRequest.initGlobals(pElement, pParams);  		

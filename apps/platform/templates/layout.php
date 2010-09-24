@@ -49,8 +49,10 @@
       <?php include_component('general','footer'); ?>
 
     </div>
+    <script type="text/javascript" src="/js/100_main/include/platform-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
+    <script type="text/javascript" src="/js/platform/stream/FriendListHandler.js"></script>
 
-    <?php echo cdn_javascript_tag('100_main/include/platform-'.sfConfig::get('app_release_name').'.js'); ?>
+    <?php //echo cdn_javascript_tag('platform/stream/FriendListHandler.js'); ?>
 	  <script type="text/javascript">
 	  jQuery(document).ready( function() {
 	      <?php

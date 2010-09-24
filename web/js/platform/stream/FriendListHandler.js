@@ -1,5 +1,5 @@
 /**
- * @combine platform
+ * @nocombine platform
  */
 /**
  * class to handle the behaviour of the friendbox
@@ -154,7 +154,7 @@ var FilterHeadline = {
     debug.log("[FilterHeadline][updateCss]");         
     FilterHeadline.resetCss();    
     jQuery('#'+pCssId).addClass('filter_headline_active');
-    jQuery('#'+pCssId+' .filter_chosen_icon').show();    
+    jQuery('#'+pCssId+' .filter_chosen_icon').show(); 
   },
   
   /**
@@ -183,54 +183,16 @@ var FriendStreamInputFilter = {
     }
     
     FriendStreamInputFilter.aInput = jQuery('#input-friend-filter');
-    FriendStreamInputFilter.initAutocomplete();
     jQuery(FriendStreamInputFilter.aInput).toggleValue();
+
+    jQuery(FriendStreamInputFilter.aInput).inputfilter({
+      'parentid': 'friends_search_results', 
+      'url':'stream/get_contacts_by_sortname',
+      'callback': FriendStreamInputFilter.cbInputfilter,
+      'delay': 750
+    });   
   },
-  
-  initAutocomplete: function() {
-    jQuery(FriendStreamInputFilter.aInput).autocomplete({
-      source: function(pRequest, pReponse) {
-        jQuery.ajax({
-          url: 'stream/get_contacts_by_sortname',
-          data: pRequest,
-          dataType: "json",
-          type: "POST",
-          success: function(data){
-            var lCount = data.pop();
-            FriendStreamCounter.update(lCount.count);
-            debug.log(lCount.count);
-            pReponse(data);
-          }
-        });      
-      },
-      dataType: "json",
-      minLength: 0,
-      delay: 500,
-      open: function(event, ui) {
-        FriendStream.toggle('friends_search_results');
-        var lHeight = jQuery('.ui-autocomplete').height();
-        jQuery('#result-container').height(lHeight+15);
-      },
-      select: function(event, ui) { 
-        var item = ui.item;
-        GlobalRequest.initOnClick(item, {'action': 'StreamSubFilter.getAction', 'callback': 'Stream.show', 'userid': item.id});
-        jQuery('#result-container').height(15);    
-      }
-    })      
-    .data( "autocomplete" )._renderItem = function( ul, item ) {
-      //debug.log(item);
-      //jQuery(ul).addClass('normal_list friend-filter-list');
-      jQuery(ul).attr('id', 'friends_search_results');
-      
-      var lLink = jQuery('<a class="user_filter stream_filter">' + item.label +'</a>');
-      jQuery(lLink).prepend(item.img);      
-      return jQuery( '<li id="user-filter-'+item.id+'"></li>' )
-        .data( "item.autocomplete", item )
-        .append( lLink )
-        .appendTo( ul );
-    }; 
-  },
-  
+
   /**
    * callback function for the jquery.inputfilter-plugin initialized in FriendListFilter.init
    * updates the friendcounter
@@ -242,6 +204,74 @@ var FriendStreamInputFilter = {
     FriendStreamFilter.resetCss();
     FriendStream.toggle('friends_search_results');
     FriendStreamCounter.update(pResponse.pCounter);
+    //jQuery('#friends_search_results li:first').removeClass('keynav_box').addClass('keynav_focusbox');
+    
+    FriendStreamInputFilter.initKeynav();
+
+  },
+  
+  initKeynav: function() {
+    debug.log("[FriendStreamInputFilter][initKeynav]");  
+    jQuery(document).keydown(function(e){
+      var key = 0;
+      if (e == null) {
+        key = event.keyCode;
+      } else { // mozilla
+        key = e.which;
+      }
+        switch(key) {
+          case 37:
+            
+            FriendStreamInputFilter.goUp();
+            break;
+          case 38: 
+            FriendStreamInputFilter.goUp();
+            break;
+          case 39: 
+            FriendStreamInputFilter.goDown();
+            break;
+          case 40: 
+            FriendStreamInputFilter.goDown();
+            break;
+          case 13: 
+            FriendStreamInputFilter.doShow();
+            break;
+        }      
+    });
+  },
+  
+  doShow: function() {
+    var lElement = jQuery(FriendStreamInputFilter.getCurrent()).children('a');
+    jQuery(lElement).click();
+  },
+  
+  goUp: function() {
+    var lCurrent = FriendStreamInputFilter.getCurrent();
+    var lPrev = jQuery(lCurrent).prev('li'); 
+
+    if(lPrev.length == 0) {
+      lPrev = jQuery('#friends_search_results li').last();
+    }
+    
+    jQuery(lCurrent).removeClass('keynav_focusbox');
+    jQuery(lPrev).addClass('keynav_focusbox');
+  },
+  
+  goDown: function() {
+    var lCurrent = FriendStreamInputFilter.getCurrent();
+    var lNext = jQuery(lCurrent).next('li');
+
+    debug.log(lNext);
+    if(lNext.length == 0) {
+      lNext = jQuery('#friends_search_results li').first();
+    }    
+    jQuery(lCurrent).removeClass('keynav_focusbox');
+    jQuery(lNext).addClass('keynav_focusbox');
+    
+  },  
+  
+  getCurrent: function() {
+    return jQuery('.keynav_focusbox');
   },
   
   /**
