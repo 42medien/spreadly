@@ -179,6 +179,8 @@ var FriendStreamInputFilter = {
     debug.log("[FriendStreamInputFilter][init]");     
     FriendStreamInputFilter.resetCss();
     FriendKeyNav.init();
+    FriendKeyNav.pageByScroll();    
+
     if (typeof(document.friendlistfilterform) !=  "undefined"){
       document.friendlistfilterform.reset();
     }
@@ -206,7 +208,6 @@ var FriendStreamInputFilter = {
     FriendStream.toggle('friends_search_results');
     FriendStreamCounter.update(pResponse.pCounter);
     FriendKeyNav.aPage = 2;
-    FriendKeyNav.pageByScroll();
     //jQuery('#friends_search_results li a').keynav('keynav_focusbox','keynav_box');
     //jQuery('#friends_search_results li:first').removeClass('keynav_box').addClass('keynav_focusbox');
   },
