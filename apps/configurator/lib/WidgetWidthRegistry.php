@@ -138,7 +138,7 @@ class WidgetWidthRegistry
       'visit' => array(
         'de' => 315,
         'en' => 335,
-        'tr' => ),
+        'tr' => 290),
       'nice' => array(
         'de' => 340,
         'en' => 330,

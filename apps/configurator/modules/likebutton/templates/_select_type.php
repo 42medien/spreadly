@@ -23,7 +23,7 @@
   <option value="rsvp"><?php echo __('WORDINGSELECT_RSVP', null, 'configurator'); ?></option>
 </select>
 
-<?php $lSessionUser->setCulture('de'); ?>
+<?php $lSessionUser->setCulture('tr'); ?>
 <select name="likebutton[t]" id="type-tr" <?php if($pCulture == 'tr'){?>class="show likebutton_t" <?php } else { ?>class="hide likebutton_t" <?php } ?>>
   <option value="like" selected="selected">Beġendim / Beġenmekten vazgeçtim</option>
   <option value="pro">Ben varim/ Ben yokum</option>
