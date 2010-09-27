@@ -192,6 +192,17 @@ var PositionHelper = {
 };
 
 var OnLoadGrafic = {
+    
+  showGraficByElement: function(pElement, pTop, pLeft) {
+    var lPosition = jQuery(pElement).position();
+    var pTop = (pTop)?pTop:0;
+    var pLeft = (pLeft)?pLeft:0;
+    jQuery('#general-ajax-loader').css({
+      top:  lPosition.top + 50,
+      left: lPosition.left + 50
+    }).show();
+  },
+
   
   showGrafic: function() {
     var lTimeout;

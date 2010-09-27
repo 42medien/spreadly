@@ -204,6 +204,7 @@ var FriendStreamInputFilter = {
     FriendStream.toggle('friends_search_results');
     FriendStreamCounter.update(pResponse.pCounter);
     FriendKeyNav.aPage = 2;
+    OnLoadGrafic.hideGrafic();
     //jQuery('#friends_search_results li a').keynav('keynav_focusbox','keynav_box');
     //jQuery('#friends_search_results li:first').removeClass('keynav_box').addClass('keynav_focusbox');
   },
@@ -314,6 +315,7 @@ var FriendKeyNav = {
   pageByKey: function() {
     debug.log("[FriendKeyNav][pageByKey]");   
     var lNext;
+    OnLoadGrafic.showGraficByElement(jQuery('#friends_search_results'), 100, 50);
     jQuery.ajax({
       type: "GET",
       url: 'stream/get_contacts_by_sortname',
@@ -331,6 +333,7 @@ var FriendKeyNav = {
         } else {
           FriendKeyNav.aPage++;
         }
+        OnLoadGrafic.hideGrafic();
       }
     });
     return lNext;
