@@ -18,7 +18,7 @@
 	  <p>
 	  <?php
       echo __('If you have not used the Yiid button before, we will automatically create an account for you on Yiid.com, where you can manage your services, see your and your friends "Likes" and much more.');
-      echo __('By using Yiid you agree to the %1 of Yiid.', array('%1' => link_to('Terms and Conditions', '/')));
+      echo __('By using Yiid you agree to the %1 of Yiid.', array('%1' => link_to('Terms and Conditions', '@tos')));
       echo __('If you are a recurring user, simply choose a service that you have used before - we will know you and enable your former settings.');
     ?>
     </p>
