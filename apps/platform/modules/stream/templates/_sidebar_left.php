@@ -45,7 +45,7 @@
 	    <?php include_partial('stream/sidebar_all_friendlist', array('pFriends'=>$pAllFriends));?>
 	  </ul>
 
-    <ul class="normal_list friend-filter-list" id="friends_search_results">
+    <ul class="friend-filter-list" id="friends_search_results" style="display: none;">
       <?php //include_partial('stream/sidebar_friendlist', array('pFriends'=>array()));?>
     </ul>
 

@@ -2,7 +2,7 @@
 <?php $lCount = 0;?>
 
     <?php foreach ($pFriends as $lFriend) { ?>
-    <?php $lClass = ($lCount == 0)? 'keynav_focusbox':'keynav_box'; ?>
+    <?php $lClass = ($lCount == 0 && (!isset($pPage) || $pPage < 2))? 'keynav_focusbox':'keynav_box'; ?>
     <li class="clearfix <?php echo $lClass ?>" id="user-filter-<?php echo $lFriend->getId(); ?>">
       <a href="/" class="user_filter stream_filter" data-obj='{"action":"StreamSubFilter.getAction", "callback":"Stream.show", "userid":"<?php echo $lFriend->getId(); ?>", "css": "{\"class\":\"normal_list\", \"id\":\"user-filter-<?php echo $lFriend->getId(); ?>\"}"}'>
         <?php echo avatar_tag($lFriend->getDefaultAvatar(), 16, array('alt' => $lFriend->getFullname(), 'class' => '', 'rel' => '')); ?>

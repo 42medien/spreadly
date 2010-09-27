@@ -205,12 +205,20 @@ class streamActions extends sfActions
     $lPage = $request->getParameter('page', 1);
     $lUsers = UserTable::getFriendsByName($this->getUser()->getUserId(), $lChar, $lPage);
     $lCounter = UserTable::countFriendsByName($this->getUser()->getUserId(), $lChar);
+    $lHtml = null;
+    if(count($lUsers->getData()) < $lFriendsCount)
+      $lDoPaginate = false;
+
+    if(count($lUsers->getData()) > 0) {
+      $lHtml = $this->getPartial('stream/sidebar_friendlist', array('pFriends' => $lUsers->getData(), 'pPage' => $lPage));
+    }
 
     return $this->renderText(
       json_encode(
         array(
-          "html"  => $this->getPartial('stream/sidebar_friendlist', array('pFriends' => $lUsers->getData())),
-          "pCounter" => $lCounter
+          "html"  => $lHtml,
+          "pCounter" => $lCounter,
+          "pDoPaginate" => $lDoPaginate
         )
       )
     );

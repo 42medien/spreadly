@@ -151,10 +151,16 @@ var StreamSubFilter = {
       FriendStreamInputFilter.reset();
       
     }
+    
+    if(jQuery('#'+pCssId).parent('ul.friend-filter-list').attr('id') == 'friends_search_results') {
+      FriendKeyNav.resetOnClick(pCssId);
+    }
+    
     FilterHeadline.updateCss(lResetElemId);
     
     //and highlight the new
     jQuery('#'+pCssId).addClass('filter_chosen');
+    
   },
   
   resetCss: function() {

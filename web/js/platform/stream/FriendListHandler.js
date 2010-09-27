@@ -1,5 +1,5 @@
 /**
- * @nocombine platform
+ * @combine platform
  */
 /**
  * class to handle the behaviour of the friendbox
@@ -178,6 +178,8 @@ var FriendStreamInputFilter = {
   init: function() {
     debug.log("[FriendStreamInputFilter][init]");     
     FriendStreamInputFilter.resetCss();
+    FriendKeyNav.init();
+
     if (typeof(document.friendlistfilterform) !=  "undefined"){
       document.friendlistfilterform.reset();
     }
@@ -204,75 +206,11 @@ var FriendStreamInputFilter = {
     FriendStreamFilter.resetCss();
     FriendStream.toggle('friends_search_results');
     FriendStreamCounter.update(pResponse.pCounter);
+    //jQuery('#friends_search_results li a').keynav('keynav_focusbox','keynav_box');
     //jQuery('#friends_search_results li:first').removeClass('keynav_box').addClass('keynav_focusbox');
-    
-    FriendStreamInputFilter.initKeynav();
+  },
+  
 
-  },
-  
-  initKeynav: function() {
-    debug.log("[FriendStreamInputFilter][initKeynav]");  
-    jQuery(document).keydown(function(e){
-      var key = 0;
-      if (e == null) {
-        key = event.keyCode;
-      } else { // mozilla
-        key = e.which;
-      }
-        switch(key) {
-          case 37:
-            
-            FriendStreamInputFilter.goUp();
-            break;
-          case 38: 
-            FriendStreamInputFilter.goUp();
-            break;
-          case 39: 
-            FriendStreamInputFilter.goDown();
-            break;
-          case 40: 
-            FriendStreamInputFilter.goDown();
-            break;
-          case 13: 
-            FriendStreamInputFilter.doShow();
-            break;
-        }      
-    });
-  },
-  
-  doShow: function() {
-    var lElement = jQuery(FriendStreamInputFilter.getCurrent()).children('a');
-    jQuery(lElement).click();
-  },
-  
-  goUp: function() {
-    var lCurrent = FriendStreamInputFilter.getCurrent();
-    var lPrev = jQuery(lCurrent).prev('li'); 
-
-    if(lPrev.length == 0) {
-      lPrev = jQuery('#friends_search_results li').last();
-    }
-    
-    jQuery(lCurrent).removeClass('keynav_focusbox');
-    jQuery(lPrev).addClass('keynav_focusbox');
-  },
-  
-  goDown: function() {
-    var lCurrent = FriendStreamInputFilter.getCurrent();
-    var lNext = jQuery(lCurrent).next('li');
-
-    debug.log(lNext);
-    if(lNext.length == 0) {
-      lNext = jQuery('#friends_search_results li').first();
-    }    
-    jQuery(lCurrent).removeClass('keynav_focusbox');
-    jQuery(lNext).addClass('keynav_focusbox');
-    
-  },  
-  
-  getCurrent: function() {
-    return jQuery('.keynav_focusbox');
-  },
   
   /**
    * empty the inputfield
@@ -281,7 +219,8 @@ var FriendStreamInputFilter = {
   reset: function() {
     debug.log("[FriendStreamInputFilter][reset]");      
     jQuery('#input-friend-filter').val(i18n.get('TYPE_NAME_TO_FILTER')); 
-    jQuery(FriendStreamInputFilter.aInput).toggleValue();    
+    jQuery(FriendStreamInputFilter.aInput).toggleValue();  
+    jQuery('.keynav_box').removeClass('keynav_focusbox');    
   },
   
   /**
@@ -293,12 +232,110 @@ var FriendStreamInputFilter = {
     jQuery('#input-friend-filter').live('click', function() {
       FilterHeadline.updateCss('active_friends_headline'); 
       FriendStreamFilter.resetCss();
+      /*
       if(jQuery('#input-friend-filter').val() == i18n.get('TYPE_NAME_TO_FILTER') || jQuery('#input-friend-filter').val() == ''){
         FriendStream.reset();
-      }
+      }*/
       return true;
     });
   }
+};
+
+var FriendKeyNav = {
+  aPage: 1,    
+  init: function() {
+    debug.log("[FriendKeyNav][init]");  
+    jQuery(document).keydown(function(e){
+      var key = 0;
+      if (e == null) {
+        key = event.keyCode;
+      } else { // mozilla
+        key = e.which;
+      }
+        switch(key) {
+          case 37:
+            FriendKeyNav.goUp();
+            break;
+          case 38: 
+            FriendKeyNav.goUp();
+            break;
+          case 39: 
+            FriendKeyNav.goDown();
+            break;
+          case 40: 
+            FriendKeyNav.goDown();
+            break;
+          case 13: 
+            FriendKeyNav.doShow();
+            break;
+        }      
+    });
+  },
+  
+  doShow: function() {
+    debug.log("[FriendKeyNav][doshow]");      
+    var lElement = jQuery(FriendKeyNav.getCurrent()).children('a');
+    jQuery(lElement).click();
+  },
+  
+  goUp: function() {
+    var lCurrent = FriendKeyNav.getCurrent();
+    var lPrev = jQuery(lCurrent).prev('li'); 
+  
+    if(lPrev.length == 0) {
+      lPrev = jQuery('#friends_search_results li').last();
+    }
+    
+    jQuery(lCurrent).removeClass('keynav_focusbox');
+    jQuery(lPrev).addClass('keynav_focusbox');
+  },
+  
+  goDown: function() {
+    var lCurrent = FriendKeyNav.getCurrent();
+    var lNext = jQuery(lCurrent).next('li');
+    var lNextNext = jQuery(lCurrent).next('li').next('li');
+    if(lNextNext.length == 0) {
+      if(FriendKeyNav.aPage != undefined) {
+        jQuery.ajax({
+          type: "GET",
+          url: 'stream/get_contacts_by_sortname',
+          dataType: "json",
+          data: {'page': FriendKeyNav.aPage, 'sortname': jQuery('#input-friend-filter').val()},
+          success: function(pResponse) {
+            if(pResponse.html) {
+              jQuery('#friends_search_results').append(pResponse.html);
+              lNext = jQuery(lCurrent).next('li');
+            } else {
+              lNext = jQuery('#friends_search_results li').first();
+            }
+            if(pResponse.pDoPaginate === false) {
+              FriendKeyNav.aPage = undefined;
+            } else {
+              FriendKeyNav.aPage++;
+            }
+          }
+        });      
+      }
+      
+      if(lNextNext.length == 0 && lNext.length == 0){
+        lNext = jQuery('#friends_search_results li').first();
+      }
+    }    
+    jQuery(lCurrent).removeClass('keynav_focusbox');
+    jQuery(lNext).addClass('keynav_focusbox');
+    
+  },  
+  
+  getCurrent: function() {
+    return jQuery('.keynav_focusbox');
+  },
+  
+  resetOnClick: function(pCssId) {
+    debug.log("[FriendKeyNav][resetOnClick]");      
+    jQuery('#friends_search_results li').removeClass('keynav_focusbox'); 
+    jQuery('#'+pCssId).addClass('keynav_focusbox');
+  }
+    
 };
 
 /**
@@ -319,7 +356,6 @@ var FriendStream = {
     FriendStream.aSearchFriendList = jQuery('#friends_search_results'); 
     jQuery(FriendStream.aAllFriendList).scrollPager({"url":"stream/get_active_friends"});
     jQuery(FriendStream.aActiveFriendList).scrollPager({"url":"stream/get_friends"});     
-    //jQuery(FriendStream.aSearchFriendList).scrollPager({"url":"stream/get_contacts_by_sortname"});
   },
   
   /**
