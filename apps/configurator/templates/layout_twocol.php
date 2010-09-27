@@ -7,9 +7,7 @@
     <?php include_metas() ?>
     <?php include_title() ?>
     <?php include_cdn_stylesheets(); ?>
-    <!--[if IE 7]>
-	    <?php echo cdn_stylesheet_tag('configurator_ie7.css'); ?>
-	  <![endif]-->
+    <?php echo cdn_javascript_tag('100_main/include/configurator-'.sfConfig::get('app_release_name').'.js'); ?>
   </head>
   <body>
     <?php include_partial('global/branding'); ?>
@@ -37,10 +35,9 @@
 
     <?php include_partial('global/footer'); ?>
 
-     <?php echo cdn_javascript_tag('100_main/include/configurator-'.sfConfig::get('app_release_name').'.js'); ?>
     <script type="text/javascript">
       jQuery(document).ready( function() {
-        Configurator.init("<?php echo sfContext::getInstance()->getUser()->getCulture(); ?>");
+        Configurator.init("<?php echo $sf_user->getCulture(); ?>");
       });
       jQuery(window).error(function(pMessage, pFileName, pLineNumber) {
 
