@@ -317,6 +317,7 @@ var FriendKeyNav = {
   },  
   
   pageByKey: function() {
+    debug.log("[FriendKeyNav][pageByKey]");      
     jQuery.ajax({
       type: "GET",
       url: 'stream/get_contacts_by_sortname',
@@ -339,6 +340,7 @@ var FriendKeyNav = {
   },
   
   pageByScroll: function() {
+    debug.log("[FriendKeyNav][pageByScroll]");      
     var lElement = jQuery('#friends_search_results');
     jQuery(this).bind('scroll', function() {
       var scrolltop = jQuery(lElement).attr('scrollTop');  
