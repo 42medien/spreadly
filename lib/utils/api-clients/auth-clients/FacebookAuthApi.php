@@ -184,6 +184,7 @@ class FacebookAuthApiClient extends AuthApi {
 
     $pUser->setFirstname($pObject->first_name);
     $pUser->setFirstname($pObject->last_name);
+    $pUser->setCulture(substr($pObject->locale, 0, 2));
 
     // add url as online identity
     if ($pObject->website) {
