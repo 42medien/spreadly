@@ -10,14 +10,6 @@
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 class User extends BaseUser {
-
-  /**
-   * temp field, no db mapping
-   *
-   * @var boolean
-   */
-  public $aShowOnlineIdentityScreen = true;
-
   /**
    * (non-PHPdoc)
    * @see lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/record/sfDoctrineRecord::__toString()
