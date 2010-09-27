@@ -1,5 +1,5 @@
 /**
- * @nocombine platform
+ * @combine platform
  */
 /**
  * class to handle the behaviour of the friendbox
