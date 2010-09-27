@@ -9,6 +9,8 @@ $i18n = array(
   "global" => array(
     "SETTINGS_TITLE" => "Ändere die Einstellungen des Buttons",
     "SETTINGS_VALUE" => "Einstellungen",
+    "FRIENDS_DESCRIPTION_TITLE" => "Wurde die Seite noch von keinem Freund weiter verbreitet, so wird dieser Standardtext angezeigt.",
+    "FRIENDS_DESCRIPTION_VALUE" => "Hier siehst du Freunde, die die Seite ebenfalls weiter verbreitet haben",
 ),
   "like" => array(
     "POS_BUTTON_TITLE" => "Mir gefällt das",

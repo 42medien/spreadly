@@ -178,8 +178,8 @@ if($pUserId && $pSocialFeatures && $lSocialObjectArray['_id']) {
   <?php } else { ?>
     <?php if($pSocialFeatures) { ?>
       <div id="friends_description">
-        <p title="Wurde die Seite noch von keinem Freund weiter verbreitet, so wird dieser Standardtext angezeigt.">
-          Hier siehst du Freunde, die die Seite ebenfalls weiter verbreitet haben
+        <p title="<?php echo __('FRIENDS_DESCRIPTION_TITLE'); ?>">
+          <?php echo __('FRIENDS_DESCRIPTION_VALUE'); ?>
         </p>
       </div>
     <?php } ?>

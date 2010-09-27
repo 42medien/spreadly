@@ -9,6 +9,8 @@ $i18n = array(
   "global" => array(
     "SETTINGS_TITLE" => "Change your button settings",
     "SETTINGS_VALUE" => "Settings",
+    "FRIENDS_DESCRIPTION_TITLE" => "If nobody of your contacts shared this website this default text is displayed",
+    "FRIENDS_DESCRIPTION_VALUE" => "Here you can see your friends that shared this website, too.",
 ),
   "like" => array(
     "POS_BUTTON_TITLE" => "I like that",
