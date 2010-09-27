@@ -7,7 +7,7 @@ class ExtendedOAuthToken extends OAuthToken {
    * key = the token
    * secret = the token secret
    */
-  function __construct($key, $secret, $params, $verifier =  null) {
+  function __construct($key, $secret, $params = null, $verifier =  null) {
     $this->key = $key;
     $this->secret = $secret;
     $this->verifier = $verifier;
