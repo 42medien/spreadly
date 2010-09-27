@@ -10,12 +10,14 @@ ul li{margin:0;padding:0;list-style: none;float:left;}
 #container_full, #container_like{height:23px;float:left;height: 23px;background-color: #ddd;padding-right: 1px;
   border-bottom-right-radius: 3px;-moz-border-radius-bottomright: 3px;-webkit-border-bottom-right-radius: 3px;border-top-left-radius: 3px;-moz-border-radius-topleft: 3px;-webkit-border-top-left-radius: 3px;}
 .button_full_outer{margin: 1px 0 0 1px;}
+#settings_button{background-color: #6c6c6b;border-top-left-radius: 3px;-moz-border-radius-topleft: 3px;-webkit-border-top-left-radius: 3px;cursor: default;height:23px;line-height: 23px;}
+#settings-area{padding-left: 3px;}
 .normal_button_area{z-index:3;height:21px;position: relative;float:left;}
 .normal_button_area p{margin:0;font-size: 10px;line-height: 21px;color: #fff;}
 #container_like_used .normal_button_area p, #container_full_used .normal_button_area p{padding:  0 7px;}
 #normal_button{border-bottom-right-radius: 2px;-moz-border-radius-bottomright: 2px;-webkit-border-bottom-right-radius: 2px;border-top-left-radius: 2px;-moz-border-radius-topleft: 2px;-webkit-border-top-left-radius: 2px;}
 #settings_button_icon{background: #6c6c6b url('/img/sprites/sprite_button.png') 1px -72px no-repeat;cursor: pointer;width: 21px;height: 20px;margin: 1px 0 0 1px;}
-#settings-area{padding-left: 3px;}
+
 
   .small_space{padding: 0 15px 0 6px}
 #used_button{background: #6c6c6b url('/img/sprites/sprite_button.png') 1px -72px no-repeat;cursor: pointer;
@@ -74,10 +76,11 @@ ul li{margin:0;padding:0;list-style: none;float:left;}
  * @section -SettingsArea 
  */
 #open_settings_icon_area, #close_settings_icon_area{width: 9px;height: 21px;border-bottom-right-radius: 3px;-moz-border-radius-bottomright: 3px;-webkit-border-bottom-right-radius: 3px;cursor: pointer;}
-  #sliding_area{position: relative;left: 1px;z-index:2;height:21px;border:1px solid #6c6c6b;padding-left: 5px;float:left;background-color: #e6e6e6;
+  #sliding_area{position: relative;left: 0px;z-index:2;height:21px;border:1px solid #6c6c6b;padding-left: 5px;float:left;background-color: #e6e6e6;
     border-bottom-right-radius: 3px;-moz-border-radius-bottomright: 3px;-webkit-border-bottom-right-radius: 3px;cursor: pointer;}
-  .open_settings_icon{line-height: 6px;width:3px;background: transparent url('/img/sprites/sprite_button.png') -6px -201px no-repeat;margin: 8px 0 0 3px;display: block;}
-  .close_settings_icon{line-height: 6px;width:3px;background: transparent url('/img/sprites/sprite_button.png') -10px -201px no-repeat;margin: 8px 0 0 3px;display: block;}
+  /*.open_settings_icon{line-height: 6px;width:2px;background: transparent url('/img/sprites/sprite_button.png') -6px -201px no-repeat;margin: 8px 0 0 3px;display: block;}*/
+  .open_settings_icon{height: 6px;width:3px;background: transparent url('/img/sprites/sprite_button.png') 0 -201px no-repeat;margin: 8px 0 0 3px;display: block;}
+  .close_settings_icon{line-height: 6px;width:3px;background: transparent url('/img/sprites/sprite_button.png') -16px -201px no-repeat;margin: 8px 0 0 3px;display: block;}
   * + html .open_settings_icon, * + html .close_settings_icon{padding: 8px 3px 2px 2px;}
   .settings_icon{padding: 2px 7px 2px;line-height: 21px;background: transparent url('/img/sprites/sprite_button.png') 0 -55px no-repeat;}
   /*.favicon{padding:4px 9px 4px 10px;height: 21px;line-height: 21px;}*/
