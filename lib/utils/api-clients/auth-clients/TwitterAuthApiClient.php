@@ -187,6 +187,7 @@ class TwitterAuthApiClient extends AuthApi {
    */
   public function getAccessToken($pOAuthToken) {
     $lAccessToken = OAuthClient::getAccessToken($this->getConsumer(), "http://api.twitter.com/oauth/access_token", $pOAuthToken, "GET", array("oauth_verifier" => $pOAuthToken->verifier));
+
     return $lAccessToken;
   }
 

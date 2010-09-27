@@ -1,5 +1,4 @@
 <?php
-
 /**
  * auth actions.
  *
@@ -77,16 +76,16 @@ class authActions extends sfActions {
     }
 
     $lObject = AuthApiFactory::factory($request->getParameter('service'));
-
+    $lAddedIdentifier = false;
     // check if it is a signin/signup or if the user wants
     // to add a new online-identity
     if ($this->getUser()->isAuthenticated() && $this->getUser()->getUserId()) {
       try {
+        $lAddedIdentifier = true;
         $lObject->addIdentifier($this->getUser()->getUser(), $lToken);
       } catch (Exception $e) {
         $this->getUser()->setFlash("error", $e->getMessage(), true);
       }
-
     } else {
       $lUser = $lObject->doSignin($this->getUser(), $lToken);
       $this->getUser()->signIn($lUser);
@@ -96,18 +95,23 @@ class authActions extends sfActions {
     if ($this->getUser()->getUser()->getDone() != 1) {
       UserRelationTable::doIdentityMigration($this->getUser()->getUserId());
     }
+
     $this->pOnlineIdenities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
     CookieUtils::generateWidgetIdentityCookie($this->pOnlineIdenities);
 
-    $this->redirect('@auth_add_services');
+    if ($lUser->getIsFirstLogin() || $lAddedIdentifier == true) {
+      $this->redirect('@auth_add_services');
+    } else {
+      $this->redirect('@stream');
+    }
   }
 
   public function executeRegistered(sfWebRequest $request) {
+    $lUser = $this->getUser()->getUser();
+    $lUser->setIsFirstLogin(false);
+    $lUser->save();
+
     $this->pOnlineIdenities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
     CookieUtils::generateWidgetIdentityCookie($this->pOnlineIdenities);
-  }
-
-  public function executeAdd_service(sfWebRequest $request) {
-
   }
 }

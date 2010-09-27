@@ -12,6 +12,13 @@
 class User extends BaseUser {
 
   /**
+   * temp field, no db mapping
+   *
+   * @var boolean
+   */
+  public $aShowOnlineIdentityScreen = true;
+
+  /**
    * (non-PHPdoc)
    * @see lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/record/sfDoctrineRecord::__toString()
    */
@@ -66,10 +73,9 @@ class User extends BaseUser {
    */
   public function verifyPassword( $pPassword  ) {
     $lHash = PasswordUtils::salt_password( md5($pPassword), $this->getSalt() );
-    if( $lHash === $this->getPasswordhash() ){
+    if ( $lHash === $this->getPasswordhash() ) {
       return true;
-    }
-    else{
+    } else {
       return false;
     }
   }

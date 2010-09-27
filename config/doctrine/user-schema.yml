@@ -35,9 +35,9 @@ User:
       type:       string
     culture:
       type:       string(7)
-    email: 
-      type:       varchar(120) 
-      notnull:  false      
+    email:
+      type:       varchar(120)
+      notnull:    false
     agb:
       type:       boolean
       default:    false
@@ -57,15 +57,19 @@ User:
       type:       string
     friends_list:
       type:       string
-    community_object_id:  
-      type:      integer
+    community_object_id:
+      type:       integer
     done:
-      type:     integer
-      default:  0
+      type:       integer
+      default:    0
       notnull:    true
     last_activity:
       type:       integer
-      default:   0
+      default:    0
+    # temp fields
+    is_first_login:
+      type:       boolean
+      default:    true
 
 UserIdentityCon:
   actAs:
@@ -120,30 +124,30 @@ UserEmailAddress:
       type:       integer
     online_identity_id:
       type:       integer
-    email_address_type: 
+    email_address_type:
       type:       varchar(32)
     email:
       type:       varchar(120)
-    verified:           
+    verified:
       type:       boolean
       notnull:    true
       default:    false
-    main:               
+    main:
       type:       boolean
       notnull:    true
       default:    false
-    is_modified:        
-      type:       integer(4)
-      default:    0 
-    save_modified:      
+    is_modified:
       type:       integer(4)
       default:    0
-    is_invitable: 
+    save_modified:
+      type:       integer(4)
+      default:    0
+    is_invitable:
       type:       integer(4)
       default:    1
-  relations:       
-    User:        { onDelete: SET NULL, local: user_id, foreign: id, foreignAlias: UserEmailAddress }    
-    OnlineIdentity: { onDelete: SET NULL, local: online_identity_id, foreign: id, foreignAlias: UserEmailAddress }    
+  relations:
+    User:        { onDelete: SET NULL, local: user_id, foreign: id, foreignAlias: UserEmailAddress }
+    OnlineIdentity: { onDelete: SET NULL, local: online_identity_id, foreign: id, foreignAlias: UserEmailAddress }
 
 #### saved in MongoDB
 UserRelation:
