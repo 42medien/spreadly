@@ -180,10 +180,6 @@ var FriendStreamInputFilter = {
     FriendStreamInputFilter.resetCss();
     FriendKeyNav.init();
     FriendKeyNav.pageByScroll();    
-
-    if (typeof(document.friendlistfilterform) !=  "undefined"){
-      document.friendlistfilterform.reset();
-    }
     
     FriendStreamInputFilter.aInput = jQuery('#input-friend-filter');
     jQuery(FriendStreamInputFilter.aInput).toggleValue();
@@ -297,17 +293,13 @@ var FriendKeyNav = {
   goDown: function() {
     var lCurrent = FriendKeyNav.getCurrent();
     var lNext = jQuery(lCurrent).next('li');
-    var lNextNext = jQuery(lCurrent).next('li').next('li');
+    var lNextNext = jQuery(lCurrent).next('li').next('li').next('li');
     if(lNextNext.length == 0) {
       if(FriendKeyNav.aPage != undefined) {
         
-        FriendKeyNav.pageByKey();
+        lNext = FriendKeyNav.pageByKey();
         
      
-      }
-      
-      if(lNextNext.length == 0 && lNext.length == 0){
-        lNext = jQuery('#friends_search_results li').first();
       }
     }    
     
@@ -319,7 +311,8 @@ var FriendKeyNav = {
   },  
   
   pageByKey: function() {
-    debug.log("[FriendKeyNav][pageByKey]");      
+    debug.log("[FriendKeyNav][pageByKey]");   
+    var lNext;
     jQuery.ajax({
       type: "GET",
       url: 'stream/get_contacts_by_sortname',
@@ -338,7 +331,8 @@ var FriendKeyNav = {
           FriendKeyNav.aPage++;
         }
       }
-    });     
+    });
+    return lNext;
   },
   
   pageByScroll: function() {
