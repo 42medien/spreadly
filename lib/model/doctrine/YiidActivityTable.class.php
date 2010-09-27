@@ -47,14 +47,14 @@ class YiidActivityTable extends Doctrine_Table
 
 
   public static function saveLikeActivitys($pUserId,
-  $pUrl,
-  $pOwnedOnlineIdentitys = array(),
-  $pGivenOnlineIdentitys = array(),
-  $pScore = self::ACTIVITY_VOTE_POSITIVE,
-  $pVerb = 'like',
-  $pTitle = null,
-  $pDescription = null,
-  $pPhoto = null) {
+                                            $pUrl,
+                                            $pOwnedOnlineIdentitys = array(),
+                                            $pGivenOnlineIdentitys = array(),
+                                            $pScore = self::ACTIVITY_VOTE_POSITIVE,
+                                            $pVerb = 'like',
+                                            $pTitle = null,
+                                            $pDescription = null,
+                                            $pPhoto = null) {
 
     $lVerifiedOnlineIdentitys = array();
     // @todo checken
@@ -79,11 +79,9 @@ class YiidActivityTable extends Doctrine_Table
 
     // object doesn't exist, create it now
     if (!$lSocialObject) {
-      SocialObjectTable::initializeObjectFromUrl($pUrl);
-    }
-
-
-    if (!self::isActionOnObjectAllowed($lSocialObject->getId(), $pUserId)) {
+      $lSocialObject = SocialObjectTable::initializeObjectFromUrl($pUrl);
+    } // object exists, we need to check if user is allowed to make an action on it
+    elseif (!self::isActionOnObjectAllowed($lSocialObject->getId(), $pUserId)) {
       return false;
     }
 
