@@ -323,7 +323,7 @@ var FriendKeyNav = {
       data: {'page': FriendKeyNav.aPage, 'sortname': jQuery('#input-friend-filter').val()},
       success: function(pResponse) {
         if(pResponse.html) {
-          jQuery('#friends_search_results').append(pResponse.html);
+          jQuery('#input-friend-filter').append(pResponse.html);
           lNext = jQuery(FriendKeyNav.getCurrent()).next('li');
         } else {
           lNext = jQuery('#friends_search_results li').first();
