@@ -207,6 +207,7 @@ var FriendStreamInputFilter = {
     FriendStreamFilter.resetCss();
     FriendStream.toggle('friends_search_results');
     FriendStreamCounter.update(pResponse.pCounter);
+    FriendKeyNav.aPage = 2;
     //jQuery('#friends_search_results li a').keynav('keynav_focusbox','keynav_box');
     //jQuery('#friends_search_results li:first').removeClass('keynav_box').addClass('keynav_focusbox');
   },
@@ -221,7 +222,8 @@ var FriendStreamInputFilter = {
     debug.log("[FriendStreamInputFilter][reset]");      
     jQuery('#input-friend-filter').val(i18n.get('TYPE_NAME_TO_FILTER')); 
     jQuery(FriendStreamInputFilter.aInput).toggleValue();  
-    jQuery('.keynav_box').removeClass('keynav_focusbox');    
+    jQuery('.keynav_box').removeClass('keynav_focusbox'); 
+    FriendKeyNav.aPage = 2;
   },
   
   /**
@@ -342,7 +344,7 @@ var FriendKeyNav = {
   pageByScroll: function() {
     debug.log("[FriendKeyNav][pageByScroll]");      
     var lElement = jQuery('#friends_search_results');
-    jQuery(this).bind('scroll', function() {
+    jQuery(lElement).bind('scroll', function() {
       var scrolltop = jQuery(lElement).attr('scrollTop');  
       var scrollheight = jQuery(lElement).attr('scrollHeight');  
       var windowheight = jQuery(lElement).attr('clientHeight');
