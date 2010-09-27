@@ -222,6 +222,14 @@
     <phingcall target="copy_factory_config">
       <property name="env" value="${env}"/>
     </phingcall>
+    
+    
+    <copy file="data/deployment/widget_${env}_config.inc.php" tofile="web/w/like/inc/config.inc.php" overwrite="true">
+      <filterchain>
+        <expandproperties />
+      </filterchain>
+    </copy>
+    
 
     <exec command="rm -rf lib/model/doctrine/base" />
     <exec command="rm -rf lib/filter/doctrine/base" />
