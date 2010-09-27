@@ -24,6 +24,8 @@ class streamActions extends sfActions
     if(count($lObjects) < 1) {
     	$this->setTemplate('start');
     }
+    $this->pUsername = '';
+    $this->pComName = '';
   }
 
   public function executeNew(sfWebRequest $request) {
