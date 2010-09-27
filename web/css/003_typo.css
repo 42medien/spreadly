@@ -136,7 +136,8 @@ h1{
 li.filter_chosen a,
 .stream_item,
 h1, h2, h3, h4, h5, p,
-.filter_chosen_icon{
+.filter_chosen_icon,
+#stream_breadcrumb{
   cursor: default;
 }
 
