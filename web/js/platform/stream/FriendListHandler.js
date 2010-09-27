@@ -349,7 +349,7 @@ var FriendKeyNav = {
       var scrollheight = jQuery(lElement).attr('scrollHeight');  
       var windowheight = jQuery(lElement).attr('clientHeight');
       var scrolloffset = 0;
-      if (scrolltop >= (scrollheight-(windowheight+scrolloffset)) && lPage != undefined) {
+      if (scrolltop >= (scrollheight-(windowheight+scrolloffset)) && FriendKeyNav.aPage != undefined) {
         jQuery.ajax({
           type: "GET",
           url: 'stream/get_contacts_by_sortname',
