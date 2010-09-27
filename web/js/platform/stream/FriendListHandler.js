@@ -293,13 +293,14 @@ var FriendKeyNav = {
   goDown: function() {
     var lCurrent = FriendKeyNav.getCurrent();
     var lNext = jQuery(lCurrent).next('li');
-    var lNextNext = jQuery(lCurrent).next('li').next('li').next('li');
+    var lNextNext = jQuery(lCurrent).next('li').next('li');
     if(lNextNext.length == 0) {
       if(FriendKeyNav.aPage != undefined) {
-        
         lNext = FriendKeyNav.pageByKey();
-        
-     
+      }
+      
+      if(lNext.length == 0){
+        lNext = jQuery('#friends_search_results li').first();
       }
     }    
     
