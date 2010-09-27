@@ -326,7 +326,7 @@ var FriendKeyNav = {
       success: function(pResponse) {
         if(pResponse.html) {
           jQuery('#friends_search_results').append(pResponse.html);
-          lNext = jQuery(lCurrent).next('li');
+          lNext = jQuery(FriendKeyNav.getCurrent()).next('li');
         } else {
           lNext = jQuery('#friends_search_results li').first();
         }
