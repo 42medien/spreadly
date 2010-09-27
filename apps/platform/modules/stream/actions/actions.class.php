@@ -45,6 +45,9 @@ class streamActions extends sfActions
       $lString = ', "comid":"'.$lComId.'"';
     }
 
+    $lUsername = ($lContactId)?UserTable::getInstance()->retrieveByPk($lContactId)->getUsername(): null;
+    $lComName = ($lComId)? CommunityTable::getInstance()->retrieveByPk($lComId)->getName(): null;
+
     $pActivities = YiidActivityTable::retrieveLatestActivitiesByContacts($this->getUser()->getUserId(),$lContactId, $lComId, $lObjectsTimeLine, $lPage, $lObjectsCount);
 
     if(count($pActivities) < $lObjectsCount)
@@ -55,6 +58,7 @@ class streamActions extends sfActions
       json_encode(
         array(
           "stream"  => $this->getPartial('stream/new_stream', array('pActivities' => $pActivities)),
+          "breadcrumb" => $this->getPartial('stream/breadcrumb', array('pUserName' => $lUsername, 'pComName' => $lComName)),
           "action" => "stream/new",
           "dataobj" => '{"callback":"'.$lCallback.'"'.$lString.'}',
           "page" => $lPage,
@@ -84,7 +88,8 @@ class streamActions extends sfActions
     } elseif ($lComId) {
       $lString = ', "comid":"'.$lComId.'"';
     }
-
+    $lUsername = ($lContactId)?UserTable::getInstance()->retrieveByPk($lContactId)->getUsername(): null;
+    $lComName = ($lComId)? CommunityTable::getInstance()->retrieveByPk($lComId)->getName(): null;
     $pSocialObjects = SocialObjectTable::retrieveHotObjets($this->getUser()->getUserId(),$lContactId, $lComId, $lObjectsTimeLine, $lPage, $lObjectsCount);
 
     if(count($pSocialObjects) < $lObjectsCount)
@@ -95,6 +100,7 @@ class streamActions extends sfActions
       json_encode(
         array(
           "stream"  => $this->getPartial('stream/whats_hot_stream', array('pSocialObjects' => $pSocialObjects)),
+          "breadcrumb" => $this->getPartial('stream/breadcrumb', array('pUserName' => $lUsername, 'pComName' => $lComName)),
           "action" => "stream/hot",
           "dataobj" => '{"callback":"'.$lCallback.'"'.$lString.'}',
           "page" => $lPage,
@@ -124,7 +130,8 @@ class streamActions extends sfActions
     } elseif ($lComId) {
       $lString = ', "comid":"'.$lComId.'"';
     }
-
+    $lUsername = ($lContactId)?UserTable::getInstance()->retrieveByPk($lContactId)->getUsername(): null;
+    $lComName = ($lComId)? CommunityTable::getInstance()->retrieveByPk($lComId)->getName(): null;
     $pSocialObjects = SocialObjectTable::retrieveFlopObjects($this->getUser()->getUserId(),$lContactId, $lComId, $lObjectsTimeLine, $lPage, $lObjectsCount);
 
     if(count($pSocialObjects) < $lObjectsCount)
@@ -135,6 +142,7 @@ class streamActions extends sfActions
       json_encode(
         array(
           "stream"  => $this->getPartial('stream/whats_not_stream', array('pSocialObjects' => $pSocialObjects)),
+          "breadcrumb" => $this->getPartial('stream/breadcrumb', array('pUserName' => $lUsername, 'pComName' => $lComName)),
           "action" => "stream/not",
           "dataobj" => '{"callback":"'.$lCallback.'"'.$lString.'}',
           "page" => $lPage,

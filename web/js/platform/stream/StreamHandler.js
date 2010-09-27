@@ -25,6 +25,7 @@ var Stream = {
 		jQuery('#main_stream_pager').remove();
 		//append the new
 		jQuery('#new_shares').append(pResponse.stream);
+		StreamBreadCrumb.update(pResponse.breadcrumb);
 		//set the action for next requests global 
 		StreamSubFilter.setAction(pResponse.action);
 		//update the data-obj attribute of the filter
@@ -245,5 +246,12 @@ var MainFilter = {
     jQuery(lOuter).removeClass('whats_new_active'); 
     debug.log(pCssClass);
     jQuery(lOuter).addClass(pCssClass);
+  }  
+};
+
+var StreamBreadCrumb = {
+  update: function(pHtml) {
+    jQuery('#stream_breadcrumb').empty();
+    jQuery('#stream_breadcrumb').append(pHtml);
   }  
 };
