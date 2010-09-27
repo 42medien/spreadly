@@ -179,6 +179,7 @@ var FriendStreamInputFilter = {
     debug.log("[FriendStreamInputFilter][init]");     
     FriendStreamInputFilter.resetCss();
     FriendKeyNav.init();
+    FriendKeyNav.pageByScroll();    
 
     if (typeof(document.friendlistfilterform) !=  "undefined"){
       document.friendlistfilterform.reset();
@@ -242,7 +243,7 @@ var FriendStreamInputFilter = {
 };
 
 var FriendKeyNav = {
-  aPage: 1,    
+  aPage: 2,    
   init: function() {
     debug.log("[FriendKeyNav][init]");  
     jQuery(document).keydown(function(e){
@@ -288,6 +289,7 @@ var FriendKeyNav = {
     
     jQuery(lCurrent).removeClass('keynav_focusbox');
     jQuery(lPrev).addClass('keynav_focusbox');
+    jQuery(lPrev).children('a').focus();    
   },
   
   goDown: function() {
@@ -296,35 +298,71 @@ var FriendKeyNav = {
     var lNextNext = jQuery(lCurrent).next('li').next('li');
     if(lNextNext.length == 0) {
       if(FriendKeyNav.aPage != undefined) {
-        jQuery.ajax({
-          type: "GET",
-          url: 'stream/get_contacts_by_sortname',
-          dataType: "json",
-          data: {'page': FriendKeyNav.aPage, 'sortname': jQuery('#input-friend-filter').val()},
-          success: function(pResponse) {
-            if(pResponse.html) {
-              jQuery('#friends_search_results').append(pResponse.html);
-              lNext = jQuery(lCurrent).next('li');
-            } else {
-              lNext = jQuery('#friends_search_results li').first();
-            }
-            if(pResponse.pDoPaginate === false) {
-              FriendKeyNav.aPage = undefined;
-            } else {
-              FriendKeyNav.aPage++;
-            }
-          }
-        });      
+        
+        FriendKeyNav.pageByKey();
+        
+     
       }
       
       if(lNextNext.length == 0 && lNext.length == 0){
         lNext = jQuery('#friends_search_results li').first();
       }
     }    
+    
     jQuery(lCurrent).removeClass('keynav_focusbox');
     jQuery(lNext).addClass('keynav_focusbox');
+    jQuery(lNext).children('a').focus();
+
     
   },  
+  
+  pageByKey: function() {
+    jQuery.ajax({
+      type: "GET",
+      url: 'stream/get_contacts_by_sortname',
+      dataType: "json",
+      data: {'page': FriendKeyNav.aPage, 'sortname': jQuery('#input-friend-filter').val()},
+      success: function(pResponse) {
+        if(pResponse.html) {
+          jQuery('#friends_search_results').append(pResponse.html);
+          lNext = jQuery(lCurrent).next('li');
+        } else {
+          lNext = jQuery('#friends_search_results li').first();
+        }
+        if(pResponse.pDoPaginate === false) {
+          FriendKeyNav.aPage = undefined;
+        } else {
+          FriendKeyNav.aPage++;
+        }
+      }
+    });     
+  },
+  
+  pageByScroll: function() {
+    var lElement = jQuery('#friends_search_results');
+    jQuery(this).bind('scroll', function() {
+      var scrolltop = jQuery(lElement).attr('scrollTop');  
+      var scrollheight = jQuery(lElement).attr('scrollHeight');  
+      var windowheight = jQuery(lElement).attr('clientHeight');
+      var scrolloffset = 0;
+      if (scrolltop >= (scrollheight-(windowheight+scrolloffset)) && lPage != undefined) {
+        jQuery.ajax({
+          type: "GET",
+          url: 'stream/get_contacts_by_sortname',
+          dataType: "json",
+          data: {'page': FriendKeyNav.aPage, 'sortname': jQuery('#input-friend-filter').val()},
+          success: function(pResponse) {
+            jQuery('#friends_search_results').append(pResponse.html);
+            if(pResponse.pDoPaginate === false) {
+              FriendKeyNav.aPage = undefined;
+            } else {
+              FriendKeyNav.aPage++;
+            }
+          }
+        });        
+      }      
+    });    
+  },
   
   getCurrent: function() {
     return jQuery('.keynav_focusbox');
