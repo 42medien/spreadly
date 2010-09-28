@@ -22,5 +22,5 @@ class LikeSettings {
 
   const JS_POPUP_PATH = 'http://widgets.yiid.com/popup/signin';
 
-  const JS_GETFRIENDS_PATH = 'http://widgets.yiid.local/widget/load_friends';
+  const JS_GETFRIENDS_PATH = 'http://widgets.yiid.com/widget/load_friends';
 }
