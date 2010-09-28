@@ -99,20 +99,22 @@ class popupActions extends sfActions {
       //@todo define methods in objects
       OnlineIdentityTable::toggleSocialPublishingStatus(UserIdentityConTable::getOnlineIdentityIdsForUser($this->getUser()->getId()), $checkedOnlineIdentities);
 
-      $lTempData = YiidActivityTable::getTemporaryData($_COOKIE["yiid_temp_hash"]);
-      setcookie("yiid_temp_hash", '', time()-3600, '/', sfConfig::get('app_settings_host'));
+      if (array_key_exists("yiid_temp_hash", $_COOKIE)) {
+        $lTempData = YiidActivityTable::getTemporaryData($_COOKIE["yiid_temp_hash"]);
+        setcookie("yiid_temp_hash", '', time()-3600, '/', sfConfig::get('app_settings_host'));
 
-      if ($lTempData) {
-        $lStatus = YiidActivityTable::saveLikeActivitys($this->getUser()->getId(),
-                                            $lTempData["url"],
-                                            //@todo define methods in objects
-                                            UserIdentityConTable::getOnlineIdentityIdsForUser($this->getUser()->getId()),
-                                            OnlineIdentityTable::getPublishingEnabledByUserIdOnlyIds($this->getUser()->getId()),
-                                            $lTempData["score"],
-                                            $lTempData["verb"],
-                                            $lTempData["title"],
-                                            $lTempData["description"],
-                                            $lTempData["photo"]);
+        if ($lTempData) {
+          $lStatus = YiidActivityTable::saveLikeActivitys($this->getUser()->getId(),
+                                              $lTempData["url"],
+                                              //@todo define methods in objects
+                                              UserIdentityConTable::getOnlineIdentityIdsForUser($this->getUser()->getId()),
+                                              OnlineIdentityTable::getPublishingEnabledByUserIdOnlyIds($this->getUser()->getId()),
+                                              $lTempData["score"],
+                                              $lTempData["verb"],
+                                              $lTempData["title"],
+                                              $lTempData["description"],
+                                              $lTempData["photo"]);
+        }
       }
 
       $this->getUser()->setAttribute("yiid_temp_hash", null);
