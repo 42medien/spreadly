@@ -33,7 +33,7 @@ class UserTable extends Doctrine_Table {
     if ($lUser && $lUser->verifyPassword($pPassword)) {
       return $lUser;
     } else {
-      throw new Exception();
+      throw new Exception("wrong username or password");
     }
   }
 
