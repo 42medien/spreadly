@@ -61,7 +61,7 @@ class YiidDaemon {
     }
 
 
-      System_Daemon::info('parsing queue:' . $pQueueName);
+      echo ('parsing queue:' . $pQueueName);
 
     // if $pOptions is empty take the default params
     if (!$pOptions) {
