@@ -150,8 +150,6 @@ class UserTable extends Doctrine_Table {
     $lQuery->limit($pLimit);
     $lQuery->offset(($pPage - 1) * $pLimit);
 
-    echo($lQuery->getSqlQuery());die();
-
     return $lQuery->execute();
   }
 
