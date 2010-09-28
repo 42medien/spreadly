@@ -10,9 +10,9 @@
     <li>-</li>
     <li><?php echo link_to(__('Tos'), '@tos');  ?></li>
     <li>-</li>
-    <li><?php echo link_to(__('Privacy', null, 'configurator'), '@privacy');  ?></li>
+    <li><?php echo link_to(__('PRIVACY', null, 'configurator'), '@privacy');  ?></li>
     <li>-</li>
-    <li><?php echo __('Contact: %1', array('%1' => mail_to('info@yiid.com')), 'configurator');  ?></li>
+    <li><?php echo __('Contact: %1', array('%1' => mail_to('info@yiid.com')));  ?></li>
   </ul>
 </div>
 

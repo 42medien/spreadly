@@ -37,7 +37,8 @@ h5{ font-size: 1em; font-weight: bold; }
 .whats_new_active #main_nav_inner7 p, 
 li.filter_chosen a, 
 .filter_headline_active a, 
-a.friend_filter_link_active{
+a.friend_filter_link_active,
+a.toggle_login_area{
   font-weight: bold;
 }
 

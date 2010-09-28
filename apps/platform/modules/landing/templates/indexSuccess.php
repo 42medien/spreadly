@@ -2,8 +2,8 @@
   <div id="signin_via_services" <?php if ($pAuthType != "delegated") { echo 'style="display: none;"'; } ?>>
 	  <h3><?php echo __('No registration needed - please use your favourite service to login'); ?></h3>
 	  <p>
-      <?php echo __('(For returning users: please use the same service you have used before or login with user and password %1.)',
-        array('%1' => '<a href="/" class="toggle_login_area" data-obj=\'{"from_id":"signin_via_username", "to_id":"signin_via_services"}\'>here</a>')); ?>
+      <?php echo __('(For returning users: please use the same service you have used before or login with user and password %1)',
+        array('%1' => '<a href="/" class="toggle_login_area" data-obj=\'{"from_id":"signin_via_username", "to_id":"signin_via_services"}\'>'.__('HERE', null, 'widget').'</a>')); ?>
 	  </p>
 
 	  <ul class="service_icons_big normal_list clearfix">
@@ -18,7 +18,7 @@
 	  <p>
 	  <?php
       echo __('If you have not used the Yiid button before, we will automatically create an account for you on Yiid.com, where you can manage your services, see your and your friends "Likes" and much more.');
-      echo __('By using Yiid you agree to the %1 of Yiid.', array('%1' => link_to('Terms and Conditions', '@tos')));
+      echo __('By using Yiid you agree to the %1 of Yiid.', array('%1' => link_to(__('Terms and Conditions'), '@tos')));
       echo __('If you are a recurring user, simply choose a service that you have used before - we will know you and enable your former settings.');
     ?>
     </p>

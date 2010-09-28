@@ -14,8 +14,8 @@
 	</div>
 	<ul id="nav_main" class="right clearfix">
     <?php if($sf_user->isAuthenticated()) { ?>
-      <li><?php echo link_to(__('Home', null, 'configurator'), '@homepage', array('id' => 'nav_home')); ?></li>
-      <li id="nav_main_settings"><?php echo link_to(__('Settings', null, 'widget'), '@auth_add_services', array('id' => 'nav_settings')); ?></li>
+      <li><?php echo link_to(__('HOME', null, 'configurator'), '@homepage', array('id' => 'nav_home')); ?></li>
+      <li id="nav_main_settings"><?php echo link_to(__('SETTINGS', null, 'widget'), '@auth_add_services', array('id' => 'nav_settings')); ?></li>
     <?php } else { ?>
       <li><?php echo link_to(__('Start'), '@homepage', array('id' => 'nav_home')); ?></li>
     <?php } ?>
