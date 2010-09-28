@@ -47,14 +47,14 @@ class YiidActivityTable extends Doctrine_Table
 
 
   public static function saveLikeActivitys($pUserId,
-  $pUrl,
-  $pOwnedOnlineIdentitys = array(),
-  $pGivenOnlineIdentitys = array(),
-  $pScore = self::ACTIVITY_VOTE_POSITIVE,
-  $pVerb = 'like',
-  $pTitle = null,
-  $pDescription = null,
-  $pPhoto = null) {
+                                            $pUrl,
+                                            $pOwnedOnlineIdentitys = array(),
+                                            $pGivenOnlineIdentitys = array(),
+                                            $pScore = self::ACTIVITY_VOTE_POSITIVE,
+                                            $pVerb = 'like',
+                                            $pTitle = null,
+                                            $pDescription = null,
+                                            $pPhoto = null) {
 
     $lVerifiedOnlineIdentitys = array();
     $pTitle = StringUtils::cleanupStringForMongodb($pTitle);
@@ -66,7 +66,6 @@ class YiidActivityTable extends Doctrine_Table
     if (!self::isVerbSupported($pVerb)) {
       return false;
     }
-
 
     $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
     $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
