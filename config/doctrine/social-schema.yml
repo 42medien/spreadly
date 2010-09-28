@@ -38,6 +38,9 @@ SocialObject:
     c_cnt:
       type:  integer
       default: 0
+    enriched:
+      type: integer
+      default: 0
     u:
       type:  integer
     c:

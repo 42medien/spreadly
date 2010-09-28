@@ -75,6 +75,6 @@ class SocialObjectParser {
     }
 
 
-    sfContext::getInstance()->getLogger()->info("{SocialObjectParser} social object: " . print_r($lSocialObject, true) );
+    sfContext::getInstance()->getLogger()->info("{SocialObjectParser} social object: " . print_r($lSocialObject->toArray(), true) );
   }
 }

@@ -67,7 +67,7 @@ class SocialObjectTable extends Doctrine_Table
       } else {
         $pUrlHash = md5($pUrl);
         $pLongUrlHash = md5($pLongUrl);
-        return $lCollection->update(array('url_hash' => $pLongUrlHash), array('$set' => array('url' => $pLongUrl, 'enriched' => $pEnriched), '$addToSet' => array('alias' => array($pUrlHash, $pLongUrlHash))), array('upsert' => true, 'atomic' => true));
+        return $lCollection->update(array('url_hash' => $pUrlHash), array('$set' => array('url' => $pUrl, 'enriched' => $pEnriched), '$addToSet' => array('alias' => array($pUrlHash, $pLongUrlHash))), array('upsert' => true, 'atomic' => true));
       }
     } else {
       $pUrlHash = md5($pUrl);

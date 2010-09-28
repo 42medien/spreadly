@@ -47,14 +47,14 @@ class YiidActivityTable extends Doctrine_Table
 
 
   public static function saveLikeActivitys($pUserId,
-                                            $pUrl,
-                                            $pOwnedOnlineIdentitys = array(),
-                                            $pGivenOnlineIdentitys = array(),
-                                            $pScore = self::ACTIVITY_VOTE_POSITIVE,
-                                            $pVerb = 'like',
-                                            $pTitle = null,
-                                            $pDescription = null,
-                                            $pPhoto = null) {
+  $pUrl,
+  $pOwnedOnlineIdentitys = array(),
+  $pGivenOnlineIdentitys = array(),
+  $pScore = self::ACTIVITY_VOTE_POSITIVE,
+  $pVerb = 'like',
+  $pTitle = null,
+  $pDescription = null,
+  $pPhoto = null) {
 
     $lVerifiedOnlineIdentitys = array();
     // @todo checken
@@ -73,17 +73,23 @@ class YiidActivityTable extends Doctrine_Table
       return false;
     }
 
+
     $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
     $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
 
 
     // object doesn't exist, create it now
     if (!$lSocialObject) {
-      $lSocialObject = SocialObjectTable::initializeObjectFromUrl($pUrl);
+      $lSuccess = SocialObjectTable::initializeObjectFromUrl($pUrl);
     } // object exists, we need to check if user is allowed to make an action on it
     elseif (!self::isActionOnObjectAllowed($lSocialObject->getId(), $pUserId)) {
       return false;
     }
+
+    if (!$lSocialObject) {
+      return false;
+    }
+    sfContext::getInstance()->getLogger()->debug("{YiidActivityPeer}{saveLikeActivitys} Status Message: " . print_r($lSocialObject, true));
 
     foreach ($pGivenOnlineIdentitys as $lIdentityId) {
       if (in_array($lIdentityId, $pOwnedOnlineIdentitys)) {
@@ -94,10 +100,12 @@ class YiidActivityTable extends Doctrine_Table
         sfContext::getInstance()->getLogger()->debug("{YiidActivityPeer}{saveLikeActivitys} Status Message: " . print_r($lVerifiedOnlineIdentityIds, true));
       }
       else {
+
       }
     }
 
     if (!empty($lVerifiedOnlineIdentityIds)) {
+
       self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb);
       $lSocialObject->updateObjectOnLikeActivity($pUserId, $lVerifiedOnlineIdentityIds, $pUrl, $pScore, $lServices);
       UserTable::updateLatestActivityForUser($pUserId, time());
