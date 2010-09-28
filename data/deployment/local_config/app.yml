@@ -8,7 +8,7 @@ all:
 
   stream:
     days_limit_hot:      30    #  days in the past we still consider as active
-    days_limit_not:      30    
+    days_limit_not:      30
     days_limit_new:      0     # 0 = unlimited
     days_limit_search:   0
 
@@ -30,17 +30,18 @@ all:
     yiid:             'http://%user%.yiid.local'
     widgets_url:      'http://www.yiid.local'
     host:             'yiid.local'
+    environment:      'local'
     dev:              1
     pager:            20
 
     fcgi_host:      localhost
     fcgi_port:      8002
     fcgi_pathtobatch: '/home/localadm/yiid_batch'
-  
+
   image_sizes:
     avatar: ['16x16', '30x30', '48x48', '140x140']  #height x width
     community_icon: ['50x50']
-    
+
   twitter:
     username:      'hugoaffenkopf'
     password:      'affenkopf'

@@ -29,6 +29,7 @@ all:
     yiid:             'http://%user%.yiiddev.com'
     widgets_url:      'http://www.yiiddev.com'
     host:             'yiiddev.com'
+    environment:      'dev'
     dev:              1
     pager:            20
 
