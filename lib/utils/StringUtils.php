@@ -9,7 +9,7 @@
  */
 class StringUtils {
 
-	public static function cleanstring($pString, $pTrim = '-') {
+  public static function cleanstring($pString, $pTrim = '-') {
 
     $lUmlauts = array("ä", "ö", "ü", "ß", "Ä", "Ö", "Ü");
     $lReplace = array("ae", "oe", "ue", "ss", "Ae", "Oe", "Ue");
@@ -21,87 +21,102 @@ class StringUtils {
       $pString = str_replace($lUmlauts, $lReplace, $pString);
     }
 
-		$url = str_replace("'", '', $pString);
-		$url = str_replace('%20', ' ', $url);
-		$url = preg_replace('~[^\\pL0-9_]+~u', $pTrim, $url);
-		$url = trim($url, $pTrim);
-		$url = iconv("utf-8", "us-ascii//TRANSLIT", $url);
-		$url = strtolower($url);
-		$url = preg_replace('~[^-a-z0-9_]+~', '', $url);
+    $url = str_replace("'", '', $pString);
+    $url = str_replace('%20', ' ', $url);
+    $url = preg_replace('~[^\\pL0-9_]+~u', $pTrim, $url);
+    $url = trim($url, $pTrim);
+    $url = iconv("utf-8", "us-ascii//TRANSLIT", $url);
+    $url = strtolower($url);
+    $url = preg_replace('~[^-a-z0-9_]+~', '', $url);
 
-		return $url;
-	}
+    return $url;
+  }
 
 
-	public static function getHtmlForLink($pString) {
-		$lString = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]","<a href=\"\\0\">\\0</a>", $pString);
+  public static function getHtmlForLink($pString) {
+    $lString = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]","<a href=\"\\0\">\\0</a>", $pString);
 
-		return $lString;
-	}
+    return $lString;
+  }
 
-	public static function getTinyUrlInString($pHaystack) {
-		$lArr = explode(" ", $pHaystack);
-		foreach ($lArr as $lNeedle) {
-		  $lUrlArr = array();
-		  if (eregi("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]", $lNeedle, $lUrlArr)) {
-		  	try{
-					if (strlen($lNeedle) > 30) {
-			  		$lShortUrl = ShortUrlPeer::shortenUrl(urlencode($lNeedle));
-			  		$pHaystack = str_replace($lNeedle, $lShortUrl, $pHaystack);
-					}
-		  	}catch (Exception $e) {
-		  	}
-		  }
-		}
+  public static function getTinyUrlInString($pHaystack) {
+    $lArr = explode(" ", $pHaystack);
+    foreach ($lArr as $lNeedle) {
+      $lUrlArr = array();
+      if (eregi("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]", $lNeedle, $lUrlArr)) {
+        try{
+          if (strlen($lNeedle) > 30) {
+            $lShortUrl = ShortUrlPeer::shortenUrl(urlencode($lNeedle));
+            $pHaystack = str_replace($lNeedle, $lShortUrl, $pHaystack);
+          }
+        }catch (Exception $e) {
+        }
+      }
+    }
 
-		return $pHaystack;
-	}
+    return $pHaystack;
+  }
 
-	/**
-	 * normalizes a username
-	 *
-	 * @author Matthias Pfefferle
-	 * @param string $pUsername
-	 * @return string
-	 */
-	public static function normalizeUsername($pUsername) {
-	  $lUsername = trim($pUsername);
+  /**
+   * normalizes a username
+   *
+   * @author Matthias Pfefferle
+   * @param string $pUsername
+   * @return string
+   */
+  public static function normalizeUsername($pUsername) {
+    $lUsername = trim($pUsername);
     $lUsername = str_replace(array(".", "-"), "_", $lUsername);
 
     // remove special characters
     $lUsername = preg_replace("/(\W+)/i", "", $lUsername);
 
     return $lUsername;
-	}
-	
-	/**
-	 * Tests, if the given string is a number
-	 *
-	 * @author KM
-	 * @param string $pString
-	 */
-	public static function isNumber($pString){
-		if(is_numeric($pString)) {
-			return true;
-		}
-		return false;
-	}
-	
-	/**
-	 * This method checks if the transfered pattern exists in the string
-	 * 
-	 * @author Christian Schätzle
-	 * 
-	 * @param string $pString
-	 * @param string $pPattern
-	 */
-	public static function pregMatchString($pString, $pPattern) {
-		if(preg_match($pPattern, $pString)) {
-			return true;
-		} else {
-		  return false;  
+  }
+
+  /**
+   * Tests, if the given string is a number
+   *
+   * @author KM
+   * @param string $pString
+   */
+  public static function isNumber($pString){
+    if(is_numeric($pString)) {
+      return true;
     }
-	}
+    return false;
+  }
+
+  /**
+   * This method checks if the transfered pattern exists in the string
+   *
+   * @author Christian Schätzle
+   *
+   * @param string $pString
+   * @param string $pPattern
+   */
+  public static function pregMatchString($pString, $pPattern) {
+    if(preg_match($pPattern, $pString)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
+
+  /**
+   * returns a given string cleaned from any special chars and converted into utf8
+   * @param string $pString
+   * @author weyandch
+   */
+  public static function cleanupStringForMongodb($pString) {
+    $pString = htmlspecialchars_decode(strip_tags(urldecode($pString)));
+    if (mb_detect_encoding($pString) != 'UTF-8') {
+      $pString = utf8_encode($pString);
+    }
+    return $pString;
+  }
 }
 
 
