@@ -59,7 +59,6 @@ class YiidActivityTable extends Doctrine_Table
     $lVerifiedOnlineIdentitys = array();
     $pTitle = StringUtils::cleanupStringForMongodb($pTitle);
     $pDescription = StringUtils::cleanupStringForMongodb($pDescription);
-    $pUserId = intval($pUserId);
 
     // array of services we're sharing to
     $lServices = array();
