@@ -113,7 +113,6 @@ class UserTable extends Doctrine_Table {
 
     $lQuery = Doctrine_Query::create()
         ->from('User u')
-        ->distinct()
         ->whereIn('u.id', $pFriendIds)
         // today minus 30 days
         ->andWhere('u.last_activity > ?', $lTimeLimit)
@@ -142,7 +141,6 @@ class UserTable extends Doctrine_Table {
 
     $lQuery = Doctrine_Query::create()
     ->from('User u')
-    ->distinct()
     ->whereIn('u.id', $pFriendIds)
     ->andWhere('u.last_activity > ?', $lTimeLimit)
     ->orderBy('u.sortname');
