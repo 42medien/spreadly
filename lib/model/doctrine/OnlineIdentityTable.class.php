@@ -176,16 +176,16 @@ class OnlineIdentityTable extends Doctrine_Table {
    */
   public static function getPublishingEnabledByUserId($pUserId) {
     $q = Doctrine_Query::create()
-           ->from('OnlineIdentity oi')
-           ->leftJoin('oi.Community c')
-           ->where('oi.user_id = ?', $pUserId)
-           ->andWhere('c.social_publishing_possible = ?', true);
+    ->from('OnlineIdentity oi')
+    ->leftJoin('oi.Community c')
+    ->where('oi.user_id = ?', $pUserId)
+    ->andWhere('c.social_publishing_possible = ?', true);
 
     $lOis = $q->execute();
     return $lOis;
   }
 
-   /**
+  /**
    * returns an array of oi id's that have publishing enabled
    *
    * @author Christian Weyand
@@ -195,10 +195,10 @@ class OnlineIdentityTable extends Doctrine_Table {
   public static function getPublishingEnabledByUserIdOnlyIds($pUserId) {
 
     $q = Doctrine_Query::create()
-           ->from('OnlineIdentity oi')
-            ->select('oi.id')
-            ->where('oi.user_id = ?', $pUserId)
-            ->andWhere('oi.social_publishing_enabled = ?', true);
+    ->from('OnlineIdentity oi')
+    ->select('oi.id')
+    ->where('oi.user_id = ?', $pUserId)
+    ->andWhere('oi.social_publishing_enabled = ?', true);
 
     $lOis = $q->execute(array(), Doctrine_Core::HYDRATE_NONE);
     return HydrationUtils::flattenArray($lOis);
@@ -227,12 +227,16 @@ class OnlineIdentityTable extends Doctrine_Table {
    * @return unknown_type
    */
   public static function removeSocialPublishingItems($pIds) {
-    $q = Doctrine_Query::create()
-           ->update('OnlineIdentity oi')
-           ->set('oi.social_publishing_enabled', self::SOCIAL_PUBLISHING_OFF)
-           ->whereIn('oi.id', $pIds);
+    if (!empty($pIds)) {
+      $q = Doctrine_Query::create()
+      ->update('OnlineIdentity oi')
+      ->set('oi.social_publishing_enabled', self::SOCIAL_PUBLISHING_OFF)
+      ->whereIn('oi.id', $pIds);
 
-    $q->execute();
+      $q->execute();
+      return true;
+    }
+    return false;
   }
 
 
@@ -244,42 +248,48 @@ class OnlineIdentityTable extends Doctrine_Table {
    * @return unknown_type
    */
   public static function activateSocialPublishingItems($pIds) {
-    $q = Doctrine_Query::create()
-           ->update('OnlineIdentity oi')
-           ->set('oi.social_publishing_enabled', self::SOCIAL_PUBLISHING_ON)
-           ->whereIn('oi.id', $pIds);
+    if (!empty($pIds)) {
+      $q = Doctrine_Query::create()
+      ->update('OnlineIdentity oi')
+      ->set('oi.social_publishing_enabled', self::SOCIAL_PUBLISHING_ON)
+      ->whereIn('oi.id', $pIds);
 
-    $q->execute();
+      $q->execute();
+      return true;
+    }
+    return false;
   }
 
 
-/**
- * get a set of oi's where we want to renew their friends
- * @param int $pLimit
- * @return array(int)
- * @author weyandch
- */
+  /**
+   * get a set of oi's where we want to renew their friends
+   * @param int $pLimit
+   * @return array(int)
+   * @author weyandch
+   */
   public static function getOnlineIdentityIdsForFriendRenewal($pLimit) {
     $q = Doctrine_Query::create()
-           ->from('OnlineIdentity oi')
-           ->select('oi.id')
-           ->where('oi.user_id IS NOT NULL')
-           ->orderBy('oi.last_friend_refresh ASC');
+    ->from('OnlineIdentity oi')
+    ->select('oi.id')
+    ->where('oi.user_id IS NOT NULL')
+    ->orderBy('oi.last_friend_refresh ASC');
 
     $lOis = $q->execute(array(),  Doctrine_Core::HYDRATE_NONE);
     return $lOis;
   }
-  
+
   public static function getOisFromActivityOrderedByCommunity($pActivity) {
-  	$lOiids = $pActivity->getOiids();
-  	
-  	$lQuery = Doctrine_Query::create()
-  	 ->from('OnlineIdentity oi')
-  	 ->whereIn('oi.id', $lOiids)
-  	 ->orderBy('oi.community_id ASC');
-  	 
-    $lOis = $lQuery->execute();
-    
-    return $lOis;
+    $lOiids = $pActivity->getOiids();
+
+    if (!empty($lOiids)) {
+      $lQuery = Doctrine_Query::create()
+      ->from('OnlineIdentity oi')
+      ->whereIn('oi.id', $lOiids)
+      ->orderBy('oi.community_id ASC');
+
+      $lOis = $lQuery->execute();
+      return $lOis;
+    }
+    return false;
   }
 }

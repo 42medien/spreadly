@@ -73,7 +73,7 @@ class OnlineIdentityConTable extends Doctrine_Table {
     $lQuery = Doctrine_Query::create()
     ->from('OnlineIdentityCon oicon')
     ->where('oicon.from_id = ?', $pFirstIdentityId)
-    ->andWhereIn('oicon.to_id', $pSecondIdentityId);
+    ->andWhere('oicon.to_id = ?', $pSecondIdentityId);
     $lOiCon = $lQuery->fetchOne();
 
     return $lOiCon?$lOiCon:false;

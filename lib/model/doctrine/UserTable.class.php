@@ -104,20 +104,19 @@ class UserTable extends Doctrine_Table {
    * @todo sort by hot
    */
   public static function getHottestUsers($pFriendIds = array(), $pPage = 1, $pLimit = 10) {
-    $lCountFriends = count($pFriendIds);
-    if($lCountFriends == 0) {
+    if(empty($pFriendIds)) {
       return false;
     }
 
     $lTimeLimit = time() - (sfConfig::get('app_stream_days_limit', 30) * 86400);
 
     $lQuery = Doctrine_Query::create()
-        ->from('User u')
-        ->whereIn('u.id', $pFriendIds)
-        // today minus 30 days
-        ->andWhere('u.last_activity > ?', $lTimeLimit)
-        // now sort by hot
-        ->orderBy('u.last_activity');
+    ->from('User u')
+    ->whereIn('u.id', $pFriendIds)
+    // today minus 30 days
+    ->andWhere('u.last_activity > ?', $lTimeLimit)
+    // now sort by hot
+    ->orderBy('u.last_activity');
 
     $lQuery->limit($pLimit);
     $lQuery->offset(($pPage - 1) * $pLimit);
@@ -137,6 +136,9 @@ class UserTable extends Doctrine_Table {
    *
    */
   public static function getUsersAlphabetically($pFriendIds, $pPage = 1, $pLimit = 10) {
+    if(empty($pFriendIds)) {
+      return false;
+    }
     $lTimeLimit = time() - (sfConfig::get('app_stream_days_limit', 30) * 86400);
 
     $lQuery = Doctrine_Query::create()
@@ -147,6 +149,8 @@ class UserTable extends Doctrine_Table {
 
     $lQuery->limit($pLimit);
     $lQuery->offset(($pPage - 1) * $pLimit);
+
+    echo($lQuery->getSqlQuery());die();
 
     return $lQuery->execute();
   }
@@ -192,6 +196,9 @@ class UserTable extends Doctrine_Table {
    */
   private static function getFriendsFilterQuery($pUserId, $pName = null) {
     $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
+    if(empty($lFriendIds)) {
+      return false;
+    }
     $lNameParts = explode(' ', $pName);
     $lLimitDays = sfConfig::get('app_stream_days_limit_search', 0);
 
