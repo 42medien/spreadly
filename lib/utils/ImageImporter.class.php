@@ -53,7 +53,7 @@ class ImageImporter {
       // get mime-type
       $lImgData = GetImageSize($path);
 
-      if ($lImgData['mime'] != "image/jpg" && $lImgData['mime'] != 'image/x-ms-bmp') {
+      if ($lImgData['mime'] != 'image/x-ms-bmp' && $lImgData['mime'] != 'image/x-portable-bitmap' && $lImgData['mime'] != 'image/bmp') {
         $lImg = new sfImage($path, $lImgData['mime'], 'GD');
         $lImg->getMIMEType();
         $lImg->setQuality(100);
