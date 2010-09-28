@@ -1,6 +1,6 @@
 <?php use_helper('Text'); ?>
 
-<?php if (isset($pObject)) {?>
+<?php if (isset($pObject) && $pObject != null) {?>
   <div class="bg_light bd_normal_light">
 		<div id="so_right_view" class="clearfix">
 		  <div>
