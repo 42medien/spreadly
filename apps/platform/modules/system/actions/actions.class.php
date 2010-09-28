@@ -40,7 +40,7 @@ class systemActions extends sfActions
   
   public function executeUpdate_icon_language(sfWebRequest $request) {
   	$lLanguage = $request->getParameter('lang');
-  	
+  
   	$this->getUser()->setCulture($lLanguage);
   	
     $referer = $this->getRequest()->getReferer();

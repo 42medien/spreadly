@@ -4,10 +4,13 @@
 	    <div class="right">
 	      <?php echo link_to(__('Logout'), '@auth_signout', array('class' => 'url')); ?>
 	    </div>
-	    <div class="right" id="language_switch_area">
-	      <?php include_component('system', 'language_switch_icons'); ?>
-	    </div>
     <?php } ?>
+    <?php $lAction = $sf_params->get('action'); ?>
+    <?php if($lAction != 'imprint' && $lAction != 'tos') { ?>
+		  <div class="right" id="language_switch_area">
+		    <?php include_component('system', 'language_switch_icons'); ?>
+		  </div>
+		<?php } ?>
 	</div>
 	<ul id="nav_main" class="right clearfix">
     <?php if($sf_user->isAuthenticated()) { ?>
