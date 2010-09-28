@@ -3,6 +3,10 @@
 error_reporting(E_ALL);
 require_once 'System/Daemon.php';
 require_once(dirname(__FILE__).'/../vendor/sqs.php');
+require_once(dirname(__FILE__).'/../../config/ProjectConfiguration.class.php');
+
+$configuration = ProjectConfiguration::getApplicationConfiguration('platform', 'batch', true);
+sfContext::createInstance($configuration);
 
 /**
  * the yiid daemon class
@@ -125,8 +129,9 @@ class YiidDaemon {
       $message = $lMessageBroker->receiveMessage($pQueueName, 1);
 
       if (!empty($message)) {
-        System_Daemon::info('{appName} received message with id %s %s', $message[0]['MessageId'], urldecode($message[0]['Body']));
-
+        if (sfConfig::get('settings_dev')) {
+          System_Daemon::info('{appName} received message with id %s %s', $message[0]['MessageId'], urldecode($message[0]['Body']));
+        }
         // run the importer
         call_user_func(array($pClass, $pFunction), $message);
       }
