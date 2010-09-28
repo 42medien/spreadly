@@ -54,6 +54,10 @@ class YiidDaemon {
   * @param array $pOptions optional options array
   */
   public static function run($pQueueName, $pArguments, $pClass, $pFunction, $pOptions = null) {
+    if (sfConfig::get('app_settings_dev')) {
+      $pQueueName = $pQueueName."-".sfConfig::get('app_settings_environment');
+    }
+
     // if $pOptions is empty take the default params
     if (!$pOptions) {
       $pOptions = self::$aOptions;
@@ -129,7 +133,7 @@ class YiidDaemon {
       $message = $lMessageBroker->receiveMessage($pQueueName, 1);
 
       if (!empty($message)) {
-        if (sfConfig::get('settings_dev')) {
+        if (sfConfig::get('app_settings_dev')) {
           System_Daemon::info('{appName} received message with id %s %s', $message[0]['MessageId'], urldecode($message[0]['Body']));
         }
         // run the importer
