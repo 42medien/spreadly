@@ -29,8 +29,7 @@
 	  </p>
 
 	  <div class="center_area filter_counter_area" id="friend-filter-area">
-	    <span><?php echo __('Sort by'); ?>: </span>
-	    <br/>
+	    <p><?php echo __('Sort by'); ?>: </p>
 	    <span><a href="/" id="friends_active" class="friend-filter-link friend_filter_link_active"><?php echo __('Active')?></a> | </span>
 	    <span><a href="/" id="friends_all" class="friend-filter-link"><?php echo __('A-Z')?></a></span>
 	  </div>

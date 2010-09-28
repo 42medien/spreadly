@@ -107,7 +107,8 @@ p.main_text,
 .sharing_user_info p, 
 #signin_area p, 
 .so_comment, 
-#footer_content_area h1{
+#footer_content_area h1, 
+.filter_counter_area p{
   line-height: 1.5em;
 }
 .so_headline_left, .so_headline_right{line-height: 18px;}
