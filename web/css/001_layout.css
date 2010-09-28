@@ -124,6 +124,9 @@ h4{margin: 15px 0 10px 0;}
   padding: 7px 0;
   margin-bottom: 10px;
 }
+.user_filter img{
+  margin-right: 3px;
+}
 #friends_all_list{
   display: none; 
   height: 230px; 
