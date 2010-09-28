@@ -66,7 +66,10 @@ a:hover,
 li.filter_chosen a{
   text-decoration: underline;
 }
-a, a.icon_thumb, a.icon_thumbs, a.icon_thumb, a.icon_small_use, .icon_language_select:hover{text-decoration: none;}
+a, a.icon_thumb, a.icon_thumbs, a.icon_thumb, a.icon_small_use, .icon_language_select:hover,
+a.no_link_display{
+  text-decoration: none;
+}
 
 /**
  *   @section -TextAlignment
@@ -129,7 +132,8 @@ h1{
 #main_nav_inner1, #main_nav_inner2 p, #main_nav_inner3, #main_nav_inner4 p, #main_nav_inner5, #main_nav_inner6, #main_nav_inner7 p, #main_nav_inner8, 
 #nav_shares_inner1, #nav_shares_inner2, #nav_shares_inner3, #nav_shares_inner4, #nav_shares_inner5, #nav_shares_inner6, #nav_shares_inner7, 
 .btn, 
-.sharing_friend{
+.sharing_friend,
+.icon_small_service_right{
   cursor: pointer;
 }
 
@@ -139,10 +143,6 @@ h1, h2, h3, h4, h5, p,
 .filter_chosen_icon,
 #stream_breadcrumb{
   cursor: default;
-}
-
-.icon_small_service_right{
-  cursor: help;
 }
 
 .whats_hot_info_area .url, 

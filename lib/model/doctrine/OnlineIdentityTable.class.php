@@ -269,4 +269,17 @@ class OnlineIdentityTable extends Doctrine_Table {
     $lOis = $q->execute(array(),  Doctrine_Core::HYDRATE_NONE);
     return $lOis;
   }
+  
+  public static function getOisFromActivityOrderedByCommunity($pActivity) {
+  	$lOiids = $pActivity->getOiids();
+  	
+  	$lQuery = Doctrine_Query::create()
+  	 ->from('OnlineIdentity oi')
+  	 ->whereIn('oi.id', $lOiids)
+  	 ->orderBy('oi.community_id ASC');
+  	 
+    $lOis = $lQuery->execute();
+    
+    return $lOis;
+  }
 }

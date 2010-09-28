@@ -13,11 +13,14 @@
 	      <span class="user_share text_important"><?php echo $lUser->getFullname(); ?></span>
 	      <span class="url"><?php echo __('%1 ago', array('%1' => $lActivity->getPublishingTime())); ?></span><br/>
 	      <span class="url"><?php echo __('Shared with'); ?></span>
-	      <?php $lActivityCids = $lActivity->getCids(); ?>
-	      <?php foreach($lActivityCids as $lCid) { ?>
-	        <?php $lCommunityName = CommunityTable::getInstance()->retrieveByPk($lCid)->getName(); ?>
-	        <?php $lCommunitySlug = CommunityTable::getInstance()->retrieveByPk($lCid)->getSlug(); ?>
-	        <span class="icon_small_service_right icon_small_<?php echo $lCommunitySlug; ?>" title="<?php echo __('Shared with %1', array('%1' => $lCommunityName), 'platform'); ?>">&nbsp;</span>
+	      <?php $lOis = OnlineIdentityTable::getOisFromActivityOrderedByCommunity($lActivity->getRawValue()); ?>
+	      <?php foreach($lOis as $lOi) { ?>
+          <?php $lCommunity = $lOi->getCommunity(); ?>
+	        <?php $lCommunityName = $lCommunity->getName(); ?>
+	        <?php $lCommunitySlug = $lCommunity->getSlug(); ?>
+	        <a href="<?php echo $lOi->getUrl();?>" class="no_link_display" target="_blank">
+            <span class="icon_small_service_right icon_small_<?php echo $lCommunitySlug; ?>" title="<?php echo __('Shared with %1', array('%1' => $lCommunityName)); ?>">&nbsp;</span>
+          </a>
 	      <?php } ?>
 	    </div>
 	    <div class="right">
@@ -36,5 +39,5 @@
 <?php } ?>
 
 <li class="right right_shares_pager">
-  <a href="#" id="item-stream-pager-link" class="pager_load_more" data-obj='{"action":"stream/get_item_detail_stream", "callback":"ItemDetailStream.show", "case":"all", "itemid":"<?php echo $pItemId; ?>", "page":"2"}'><?php echo __('Load more...', null, 'platform'); ?></a>
+  <a href="#" id="item-stream-pager-link" class="pager_load_more" data-obj='{"action":"stream/get_item_detail_stream", "callback":"ItemDetailStream.show", "case":"all", "itemid":"<?php echo $pItemId; ?>", "page":"2"}'><?php echo __('Load more...', null); ?></a>
 </li>
