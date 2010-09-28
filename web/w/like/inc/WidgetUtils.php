@@ -120,7 +120,7 @@ class SocialObjectPeer {
    */
   public static function delegateSocialObjectParsing($pUrl) {
     if ($pUrl) {
-      $queue = 'SocialObjectParser';
+      $queue = 'SocialObjectParser-local';
 
       $service = new SQS('AKIAJ5NSA6ET5RC4AMXQ','bs1YgS4c1zJN/HmwaVA8CkhNfyvcS+EEm1hcEOa0');
       $service->createQueue($queue);

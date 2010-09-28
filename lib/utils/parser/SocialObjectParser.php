@@ -66,15 +66,20 @@ class SocialObjectParser {
 
 
   public static function enrich($pMessage) {
+    $lUpdateArray = array();
     $pUrl = urldecode($pMessage[0]['Body']);
     sfContext::getInstance()->getLogger()->info("{SocialObjectParser} checking url: " . $pUrl );
     $lSocialObject = SocialObjectTable::retrieveByUrl($pUrl);
 
     if (!$lSocialObject) {
-     $lSocialObject = SocialObjectTable::initializeObjectFromUrl($pUrl, SocialObjectTable::ENRICHED_TYPE_OBJECTPARSER);
+      SocialObjectTable::initializeObjectFromUrl($pUrl, SocialObjectTable::ENRICHED_TYPE_OBJECTPARSER);
     }
+    $lSocialObject = SocialObjectTable::retrieveByUrl($pUrl);
+    $lParsedInformation = self::fetch($pUrl);
 
+    $lUpdateArray['title'] = StringUtils::cleanupStringForMongodb($lParsedInformation['title']);
+    $lUpdateArray['stmt'] = StringUtils::cleanupStringForMongodb($lParsedInformation['stmt']);
 
-    sfContext::getInstance()->getLogger()->info("{SocialObjectParser} social object: " . print_r($lSocialObject->toArray(), true) );
+    SocialObjectTable::updateObjectInMongoDb(array("url_hash" => md5($pUrl)), array('$set' => $lUpdateArray ));
   }
 }
