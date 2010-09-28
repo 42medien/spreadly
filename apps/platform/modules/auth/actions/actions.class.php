@@ -43,23 +43,24 @@ class authActions extends sfActions {
       try {
         // check if there is a matching user
         $lUser = UserTable::getByIdentifierAndPassword($request->getParameter('signin_user'), $request->getParameter('signin_password'));
-        // try to sign in and redirect him to the stream
-        $this->getUser()->signIn($lUser);
-
-        // migrate if not already done
-        if ($lUser->getDone() != 1) {
-          UserRelationTable::doIdentityMigration($lUser->getId());
-        }
-
-        if ($lUser->hasVerifiedOnlineIdentities()) {
-          $this->redirect("@stream");
-        } else {
-          $this->redirect("@auth_add_services");
-        }
       } catch (Exception $e) {
         // catch the error and tell the user about it
-        $this->getUser()->setFlash("error", $e->getMessage());
+        $this->getUser()->setFlash("error", $e->getMessage(), true);
         $this->redirect("@homepage?auth=basic");
+      }
+
+      // try to sign in and redirect him to the stream
+      $this->getUser()->signIn($lUser);
+
+      // migrate if not already done
+      if ($lUser->getDone() != 1) {
+        UserRelationTable::doIdentityMigration($lUser->getId());
+      }
+
+      if ($lUser->hasVerifiedOnlineIdentities()) {
+        $this->redirect("@stream");
+      } else {
+        $this->redirect("@auth_add_services");
       }
     } else {
       $this->redirect("@homepage");
