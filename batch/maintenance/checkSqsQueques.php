@@ -16,11 +16,13 @@ $dbManager->loadConfiguration();
 
 
 $service = AmazonSQSUtils::initSqsService();
-$dummy = $service->getQueueAttributes('ImportContacts');
-var_dump($dummy);
-$dummy = $service->getQueueAttributes('SocialObjectParser');
-var_dump($dummy);
-$dummy = $service->getQueueAttributes('SocialObjectParser-dev');
-var_dump($dummy);
-$dummy = $service->getQueueAttributes('SocialObjectParser-local');
-var_dump($dummy);
+// $queues = $service->listQueues();
+
+
+  $dummy = $service->getQueueAttributes('SocialObjectParser-dev');
+  var_dump($dummy);
+  $dummy = $service->getQueueAttributes('SocialObjectParser-dev-local');
+  var_dump($dummy);
+    $dummy = $service->getQueueAttributes('SocialObjectParser-dev-local');
+  var_dump($dummy);
+

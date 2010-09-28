@@ -77,9 +77,19 @@ class SocialObjectParser {
     $lSocialObject = SocialObjectTable::retrieveByUrl($pUrl);
     $lParsedInformation = self::fetch($pUrl);
 
-    $lUpdateArray['title'] = StringUtils::cleanupStringForMongodb($lParsedInformation['title']);
-    $lUpdateArray['stmt'] = StringUtils::cleanupStringForMongodb($lParsedInformation['stmt']);
 
-    SocialObjectTable::updateObjectInMongoDb(array("url_hash" => md5($pUrl)), array('$set' => $lUpdateArray ));
+
+    $lTitle = StringUtils::cleanupStringForMongodb($lParsedInformation['title']);
+    if ($lTitle != "" ) {
+      $lUpdateArray['title'] = $lTitle;
+    }
+    $lStmt = StringUtils::cleanupStringForMongodb($lParsedInformation['stmt']);
+    if ($lStmt != "") {
+      $lUpdateArray['stmt'] = $lStmt;
+    }
+
+    if (!empty($lUpdateArray)) {
+      SocialObjectTable::updateObjectInMongoDb(array("url_hash" => md5($pUrl)), array('$set' => $lUpdateArray ));
+    }
   }
 }

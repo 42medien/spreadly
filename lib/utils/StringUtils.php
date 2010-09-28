@@ -115,7 +115,7 @@ class StringUtils {
     if (mb_detect_encoding($pString) != 'UTF-8') {
       $pString = utf8_encode($pString);
     }
-    return $pString;
+    return trim($pString);
   }
 }
 
