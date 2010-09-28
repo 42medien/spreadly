@@ -50,31 +50,31 @@ class SocialObjectTable extends Doctrine_Table
    * @return SocialObject
    */
   public static function initializeObjectFromUrl($pUrl, $pEnriched = 0) {
+    $lCollection = self::getMongoCollection();
     $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
     // check if this url has some redirects
     $pLongUrl = UrlUtils::shortUrlExpander($pUrl);
-
-    if(!$pLongUrl || !UrlUtils::isUrlValid($pLongUrl)) {
-      return false;
+    if($pLongUrl && UrlUtils::isUrlValid($pLongUrl)) {
+      $pLongUrl = UrlUtils::cleanupHostAndUri($pLongUrl);
     }
-    $pLongUrl = UrlUtils::cleanupHostAndUri($pLongUrl);
 
-    if ($pLongUrl != $pUrl) {
+
+    if ($pLongUrl && ($pLongUrl != $pUrl)) {
       $lSocialObject = self::retrieveByAliasUrl($pLongUrl);
       if ($lSocialObject) {  // gibt's schon unter $longUrl -> also $pUrl hinzufügen
         $lSocialObject->addAlias($pUrl);
         return true;
+      } else {
+        $pUrlHash = md5($pUrl);
+        $pLongUrlHash = md5($pLongUrl);
+        return $lCollection->update(array('url_hash' => $pLongUrlHash), array('$set' => array('url' => $pLongUrl, 'enriched' => $pEnriched), '$addToSet' => array('alias' => array($pUrlHash, $pLongUrlHash))), array('upsert' => true, 'atomic' => true));
       }
+    } else {
+      $pUrlHash = md5($pUrl);
+      return $lCollection->update(array('url_hash' => $pUrlHash), array('$set' => array('url' => $pUrl, 'enriched' => $pEnriched), '$addToSet' => array('alias' => $pUrlHash)), array('upsert' => true, 'atomic' => true));
     }
 
-    // really not exisitng yet, so let's create a basic version
-    if (!$lSocialObject) {
-      $pUrlHash = md5($pUrl);
-      $lCollection = self::getMongoCollection();
-      $lCollection->update(array('url_hash' => $pUrlHash), array('$set' => array('url' => $pUrl, 'enriched' => $pEnriched), '$addToSet' => array('alias' => $pUrlHash)), array('upsert' => true));
-      $lSocialObject = SocialObjectTable::retrieveByAliasUrl($pUrl);
-    }
-    return $lSocialObject;
+    return self::retrieveByUrl($pUrl);
   }
 
   /**
@@ -108,6 +108,7 @@ class SocialObjectTable extends Doctrine_Table
     $lCollection = self::getMongoCollection();
     $lRelevantOis = self::getRelevantOnlineIdentitysForQuery($pUserId, $pFriendId);
     $lQueryArray = self::initializeBasicFilterQuery($lRelevantOis, $pCommunityId, $pRange);
+    $lQueryArray['l_cnt'] = array('$gt' => 0);
 
     $lResults = $lCollection->find($lQueryArray);
     $lResults->sort(array('l_cnt' => -1));
@@ -121,6 +122,7 @@ class SocialObjectTable extends Doctrine_Table
     $lCollection = self::getMongoCollection();
     $lRelevantOis = self::getRelevantOnlineIdentitysForQuery($pUserId, $pFriendId);
     $lQueryArray = self::initializeBasicFilterQuery($lRelevantOis, $pCommunityId, $pRange);
+    $lQueryArray['d_cnt'] = array('$gt' => 0);
 
     $lResults = $lCollection->find($lQueryArray);
 
