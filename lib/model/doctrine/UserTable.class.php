@@ -113,6 +113,7 @@ class UserTable extends Doctrine_Table {
 
     $lQuery = Doctrine_Query::create()
         ->from('User u')
+        ->distinct()
         ->whereIn('u.id', $pFriendIds)
         // today minus 30 days
         ->andWhere('u.last_activity > ?', $lTimeLimit)
@@ -137,13 +138,11 @@ class UserTable extends Doctrine_Table {
    *
    */
   public static function getUsersAlphabetically($pFriendIds, $pPage = 1, $pLimit = 10) {
-
-
     $lTimeLimit = time() - (sfConfig::get('app_stream_days_limit', 30) * 86400);
-
 
     $lQuery = Doctrine_Query::create()
     ->from('User u')
+    ->distinct()
     ->whereIn('u.id', $pFriendIds)
     ->andWhere('u.last_activity > ?', $lTimeLimit)
     ->orderBy('u.sortname');
