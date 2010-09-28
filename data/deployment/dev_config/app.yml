@@ -8,10 +8,10 @@ all:
 
   stream:
     days_limit_hot:      30    #  days in the past we still consider as active
-    days_limit_not:      30    
+    days_limit_not:      30
     days_limit_new:      0     # 0 = unlimited
     days_limit_search:   0
-    
+
   emailaddress:
     # TODO: aendern
     report:  statusmails@yiid.com
@@ -35,17 +35,17 @@ all:
     fcgi_host:      localhost
     fcgi_port:      8002
     fcgi_pathtobatch: '/home/httpd/vhosts/yiiddev.com/httpdocs/batch'
-  
+
   image_sizes:
     avatar: ['16x16', '30x30', '48x48', '140x140']  #height x width
     community_icon: ['50x50']
-    
+
   twitter:
     username:       'hugoaffenkopf'
     password:       'affenkopf'
     yiid_user:           'hugo'
-    oauth_token:   "WbIgXrxlAbGfdpO8kLyWQ"
-    oauth_secret:  "pw4tGKNa8aG4AqidMBaMpsQyDp70WSgnNVSvv9tLU"
+    oauth_token:   "7tHsjwbsp6pE3EnMB8MtAg"
+    oauth_secret:  "xtv653ZaAsrtgVDkiGLmy6n1g061O9KRkXcYSuRpek"
 
   facebook:
     oauth_token:   "4e786c7f089e38a83933c9821990030a"
@@ -72,7 +72,7 @@ all:
     host:                 'donkeykong'
     database_name:        'yiid_dev'
     database_name_stats:  'yiid_stats_dev'
-  
+
   amazons3:
     access_key:  'AKIAJ5NSA6ET5RC4AMXQ'
     secret_key:  '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'
