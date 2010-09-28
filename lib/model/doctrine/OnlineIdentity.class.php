@@ -45,10 +45,6 @@ class OnlineIdentity extends BaseOnlineIdentity
     }
   }
 
-
-
-
-
   /**
    * send status-message (for example like)
    *
