@@ -18,6 +18,10 @@ tos:
   url:   /tos
   param: { module: static, action: tos }
 
+privacy:
+  url:   /privacy
+  param: { module: static, action: privacy }
+
 stream_new:
   url: /stream/new
   param: { module: stream, action: new }

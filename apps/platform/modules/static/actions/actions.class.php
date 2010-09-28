@@ -154,4 +154,8 @@ class staticActions extends sfActions
   public function executeTos(sfWebRequest $request) {
     
   }
+  
+  public function executePrivacy(sfWebRequest $request) {
+  	
+  }
 }
