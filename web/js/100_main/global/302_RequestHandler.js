@@ -165,12 +165,14 @@ var GlobalRequest = {
    * @param string pClassName
    * @param object pParams
    */ 	
-  bindClickByClass: function(pParentId, pClassName, pParams, pBubbling) {
+  bindClickByClass: function(pParentId, pClassName, pParams, pBubbling, pLoadElement) {
     debug.log("[GlobalRequest][bindClickByClass]");     	
     //bind the click to all elements that are childs of the given parentid and has the given classname -> ATTENTION: this is needed for performance. 
     //Never ever bind events to a tagname global  	
     jQuery('#'+pParentId+' .'+pClassName).live("click.bindClickByClass", function(event) { 
-
+      if(pLoadElement !== undefined) {
+        OnLoadGrafic.showGraficByWidth(pLoadElement, 275, 320)
+      }
       //init the global vars for dosend      	
       GlobalRequest.initGlobals(this, pParams);
       //and send request on click      
@@ -240,7 +242,6 @@ var GlobalRequest = {
 	 */
 	doSend: function(pActionType) {
     debug.log("[GlobalRequest][doSend]"); 
-    OnLoadGrafic.showGrafic();
 		var lActionType = 'GET';
 		if(pActionType) {
 			lActionType = pActionType;

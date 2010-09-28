@@ -194,15 +194,27 @@ var PositionHelper = {
 var OnLoadGrafic = {
     
   showGraficByElement: function(pElement, pTop, pLeft) {
+    debug.log("[OnLoadGrafic][showGraficByElement]");
     var lPosition = jQuery(pElement).position();
     var pTop = (pTop)?pTop:0;
     var pLeft = (pLeft)?pLeft:0;
     jQuery('#general-ajax-loader').css({
-      top:  lPosition.top + 50,
-      left: lPosition.left + 50
+      top:  lPosition.top + pTop,
+      left: lPosition.left + pTop
     }).show();
   },
-
+  
+  showGraficByWidth: function(pElement) {
+    debug.log("[OnLoadGrafic][showGraficByElement]");
+    var lPosition = jQuery(pElement).position();
+    var pTop = (pTop)?pTop:0;
+    var pLeft = (pLeft)?pLeft:0;
+    var pWidth = jQuery(pElement).width();
+    jQuery('#general-ajax-loader').css({
+      top:  lPosition.top + OnLoadGrafic.getPageScroll()[1] + (OnLoadGrafic.getPageHeight() / 4),
+      left: lPosition.left + (pWidth/2)
+    }).show();
+  },
   
   showGrafic: function() {
     var lTimeout;

@@ -1,8 +1,8 @@
 GlobalRequest.bindClickByClass('photo_filter_box','stream_filter');
-GlobalRequest.bindClickByClass('all_networks_list','stream_filter');
-GlobalRequest.bindClickByClass('main_nav_outer','main_filter');
+//GlobalRequest.bindClickByClass('all_networks_list','stream_filter');
+GlobalRequest.bindClickByClass('main_nav_outer','main_filter', undefined, undefined, jQuery('#new_shares'));
 GlobalRequest.bindClickByClass('main_stream_pager','main_filter');
-GlobalRequest.bindClickByClass('new_shares', 'stream_item');
+GlobalRequest.bindClickByClass('new_shares', 'stream_item', undefined, undefined, jQuery('#content_supp'));
 GlobalRequest.bindClickByClass('nav_shares_outer', 'detail_filter');
 
 StreamItem.openWindow();
