@@ -158,18 +158,23 @@ class streamActions extends sfActions
 
   public function executeGet_item_detail(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
+    $lActivitiesCount = 10;
+    $lDoPaginate = true;
     $lCallback = $request->getParameter('callback', 'GlobalError.logerror');
     $lCss = $request->getParameter('css');
     $lItemId = $request->getParameter('itemid');
     $lSocialObject = SocialObjectTable::retrieveByPK($lItemId);
     $lActivities = YiidActivityTable::retrieveByYiidActivityId($this->getUser()->getId(), $lItemId, 'all');
+    if(count($lActivities) < $lActivitiesCount)
+      $lDoPaginate = false;
 
     return $this->renderText(
       $lCallback.'('.
       json_encode(
         array(
           "itemdetail"  => $this->getPartial('stream/item_detail', array('pObject' => $lSocialObject, 'pActivities' => $lActivities)),
-          "css" => $lCss
+          "css" => $lCss,
+          "pDoPaginate" => $lDoPaginate
         )
       )
       .");"
@@ -178,7 +183,7 @@ class streamActions extends sfActions
 
   public function executeGet_item_detail_stream(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
-    $lActivitiesCount = 60;
+    $lActivitiesCount = 10;
     $lDoPaginate = true;
     $lCallback = $request->getParameter('callback', 'GlobalError.logerror');
     $lCase = $request->getParameter('case', 'all');

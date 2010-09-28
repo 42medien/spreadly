@@ -112,7 +112,7 @@ var ItemDetailStream = {
     jQuery('#detail-stream').append(pResponse.stream);
     //make a object from json-string
     var lDataObj = jQuery.parseJSON(pResponse.dataobj);
-    if(pResponse.pDoPaginate == false) {
+    if(pResponse.pDoPaginate === false) {
       jQuery('#item-stream-pager-link').hide();
     } else {
       //update the pager-settings -> with the append isset a new pager, that needs to be initialized
