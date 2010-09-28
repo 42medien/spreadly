@@ -30,9 +30,10 @@ foreach ($lActivities as $lActivity) {
   }
 
   $lUser = UserTable::getInstance()->retrieveByPk($lUserId);
-  $lUser->setLastActivity(time());
-  $lUser->save();
-
+  if ($lUser) {
+    $lUser->setLastActivity(time());
+    $lUser->save();
+  }
   $lSocialObject = SocialObjectTable::retrieveByUrlHash($lActivity->getUrlHash());
   if (!$lSocialObject) {
     $lSocialObject = SocialObjectTable::retrieveByUrl($lActivity->getUrl());
