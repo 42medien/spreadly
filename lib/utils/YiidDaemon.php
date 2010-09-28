@@ -135,6 +135,7 @@ class YiidDaemon {
       $message = $lMessageBroker->receiveMessage($pQueueName, 1);
 
       if (!empty($message)) {
+        // log only on dev systems
         if (sfConfig::get('app_settings_dev')) {
           System_Daemon::info('{appName} received message with id %s %s', $message[0]['MessageId'], urldecode($message[0]['Body']));
         }
