@@ -43,7 +43,8 @@ class YiidDaemon {
                       'appRunAsGID' => 0,
                       'appRunAsUID' => 0,
   ); // default options
-  /**
+
+ /**
   * run the daemon
   *
   * @author Matthias Pfefferle
@@ -54,6 +55,7 @@ class YiidDaemon {
   * @param array $pOptions optional options array
   */
   public static function run($pQueueName, $pArguments, $pClass, $pFunction, $pOptions = null) {
+    // add environment for a better cue handling
     if (sfConfig::get('app_settings_dev')) {
       $pQueueName = $pQueueName."-".sfConfig::get('app_settings_environment');
     }
