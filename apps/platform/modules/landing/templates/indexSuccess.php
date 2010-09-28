@@ -26,7 +26,7 @@
 
 	<div id="signin_via_username" <?php if ($pAuthType != "basic") { echo 'style="display: none;"'; } ?>>
     <h3><?php echo __('Returning user? Log in here.'); ?></h3>
-    <p><?php echo __('(First time users please go back %1.)', array('%1' => '<a href="/" class="toggle_login_area" data-obj=\'{"from_id":"signin_via_services", "to_id":"signin_via_username"}\'>here</a>')); ?></p>
+    <p><?php echo __('(First time users please go back %1.)', array('%1' => '<a href="/" class="toggle_login_area" data-obj=\'{"from_id":"signin_via_services", "to_id":"signin_via_username"}\'>'.__('HERE', null, 'widget').'</a>')); ?></p>
 
     <form action="<?php echo url_for('@auth_basic'); ?>" method="post" id="signin_via_username_form">
 
@@ -52,7 +52,7 @@
    </form>
 
    <p><?php echo __('Password forgotten? Then simply login with a service you have used before ... %1.',
-   array('%1' => link_to('here', '/'))); ?></p>
+   array('%1' => link_to(__('HERE', null, 'widget'), '/'))); ?></p>
 	</div>
 </div>
 

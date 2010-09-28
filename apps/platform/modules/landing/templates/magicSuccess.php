@@ -28,7 +28,7 @@
 	    </div>
 	    
 	    <div class="center_area clearfix">
-	      <input type="submit" class="btn" value="<?php echo __('Next', null, 'platform'); ?>" /> <?php echo __('or', null, 'platform'); ?> <?php echo link_to(__('Skip', null, 'platform'), '@homepage'); ?>
+	      <input type="submit" class="btn" value="<?php echo __('NEXT', null, 'platform'); ?>" /> <?php echo __('or', null, 'platform'); ?> <?php echo link_to(__('Skip', null, 'platform'), '@homepage'); ?>
 	    </div>
     </form>
   </div>
