@@ -14,7 +14,6 @@ class LikeSettings {
   const WIDGET_USED_LIKE = 1;
   const WIDGET_USED_DISLIKE = -1;
 
-
   const COOKIE_DOMAIN  = '.yiiddev.com';
   const SF_SESSION_COOKIE  = 'yiiddev_com';
 
@@ -25,4 +24,7 @@ class LikeSettings {
   const JS_POPUP_PATH = 'http://widgets.yiiddev.com/popup/signin';
 
   const JS_GETFRIENDS_PATH = 'http://widgets.yiiddev.com/widget/load_friends';
+
+  const DEV = 1;
+  const ENVIRONMENT = 'dev';
 }
