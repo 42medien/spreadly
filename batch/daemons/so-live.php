@@ -3,7 +3,7 @@
 require_once(dirname(__FILE__).'/../../lib/utils/YiidDaemon.php');
 require_once(dirname(__FILE__).'/../../lib/utils/parser/SocialObjectParser.php');
 
-$lAppName = "sobjects";
+$lAppName = "so-live";
 $lQueueName = "SocialObjectParser";
 
 // Setup
