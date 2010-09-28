@@ -65,6 +65,9 @@ h4{margin: 15px 0 10px 0;}
 /* Header */
 #header{}
 #header_sub{width: 250px;height:60px;}
+#yiid_logo{
+  padding: 40px 60px;
+}
 #header_main{width: 44%;height:60px;}
 #header_supp{width: 30%;height:60px;}
   #nav_main_area{height: 60px;}

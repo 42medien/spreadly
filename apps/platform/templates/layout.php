@@ -15,7 +15,9 @@
 
 	    </div>
       <div id="header" class="clearfix">
-        <div id="header_sub" class="left"></div>
+        <div id="header_sub" class="left">
+          <a href="<?php echo url_for('homepage'); ?>" id="yiid_logo">&nbsp;</a>
+        </div>
         <div id="header_main" class="left"></div>
         <div id="header_supp" class="left">
           <?php include_partial('global/main_navigation'); ?>
