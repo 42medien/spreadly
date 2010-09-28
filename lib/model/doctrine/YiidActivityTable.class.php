@@ -74,15 +74,11 @@ class YiidActivityTable extends Doctrine_Table
     // object doesn't exist, create it now
     if (!$lSocialObject) {
       $lSuccess = SocialObjectTable::initializeObjectFromUrl($pUrl);
+      $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
     } // object exists, we need to check if user is allowed to make an action on it
     elseif (!self::isActionOnObjectAllowed($lSocialObject->getId(), $pUserId)) {
       return false;
     }
-
-    if (!$lSocialObject) {
-      return false;
-    }
-    sfContext::getInstance()->getLogger()->debug("{YiidActivityPeer}{saveLikeActivitys} Status Message: " . print_r($lSocialObject, true));
 
     foreach ($pGivenOnlineIdentitys as $lIdentityId) {
       if (in_array($lIdentityId, $pOwnedOnlineIdentitys)) {

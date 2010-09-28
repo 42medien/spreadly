@@ -73,8 +73,6 @@ class SocialObjectTable extends Doctrine_Table
       $pUrlHash = md5($pUrl);
       return $lCollection->update(array('url_hash' => $pUrlHash), array('$set' => array('url' => $pUrl, 'enriched' => $pEnriched), '$addToSet' => array('alias' => $pUrlHash)), array('upsert' => true, 'atomic' => true));
     }
-
-    return self::retrieveByUrl($pUrl);
   }
 
   /**

@@ -65,7 +65,7 @@ class SocialObject extends BaseSocialObject
 
     SocialObjectTable::updateObjectInMongoDb(array("_id" => new MongoId($this->getId())),
                                              array( '$inc' => array($lCounterField => 1 ),
-                                                    '$addToSet' => array('uids'  => $pUserId,
+                                                    '$addToSet' => array('uids'  => intval($pUserId),
                                                                          'oiids' => array('$each' => $pVerifiedOnlineIdentitys),
                                                                          'cids'  => array('$each' => $pServices),
                                                                          'alias' => array('$each' => array(md5($pUrl)))),
