@@ -69,7 +69,7 @@ YiidActivityTable::saveLikeActivitys($lUserManni->getId(), 'http://bim.bo', $lUs
 YiidActivityTable::saveLikeActivitys($lUserAffe->getId(), 'http://bim.bo', $lUserAffeOis, array($lOiAffeFb->getId()), 1, 'like', 'bimbo title');
 
 YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://www.snirgel.de', $lUserHansOis, array($lOiHansFb->getId(), $lOiHansTwitter->getId()), 1, 'like', 'spiegel.de title title');
-YiidActivityTable::saveLikeActivitys($lUserKarl->getId(), 'http://www.snirgel.de', $lUserKarlOis, array($lOiKarlTwitter->getId()), 1, 'like', 'spiegel.de title title');
+YiidActivityTable::saveLikeActivitys($lUserKarl->getId(), 'http://snirgel.de', $lUserKarlOis, array($lOiKarlTwitter->getId()), 1, 'like', 'spiegel.de title title');
 
 YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://www.snirgel.de', $lUserHansOis, array($lOiHansTwitter->getId()), -1, 'like', 'snirgel.de title title');
 YiidActivityTable::saveLikeActivitys($lUserKarl->getId(), 'http://www.snirgel.de', $lUserKarlOis, array($lOiKarlTwitter->getId()), -1, 'like', 'snirgel.de title title');
