@@ -60,6 +60,9 @@ class YiidDaemon {
       $pQueueName = $pQueueName."-".sfConfig::get('app_settings_environment');
     }
 
+
+      System_Daemon::info('parsing queue:' . $pQueueName);
+
     // if $pOptions is empty take the default params
     if (!$pOptions) {
       $pOptions = self::$aOptions;
