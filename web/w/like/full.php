@@ -40,7 +40,7 @@ $pUserId = MongoSessionPeer::extractUserIdFromSession(LikeSettings::SF_SESSION_C
 $lSocialObjectArray = SocialObjectPeer::getDataForUrl($pUrl);
 $lIsUsed = YiidActivityObjectPeer::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId);
 $lSocialObjectArray = SocialObjectPeer::recalculateCountsRespectingUser($lSocialObjectArray, $lIsUsed);
-$lPopupUrl = "http://widgets.yiid.local/popup/settings?ei_kcuf=1284022601";
+$lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
 $lShowFriends = false;
 $lLimit = 6;
 if($pUserId && $pSocialFeatures && $lSocialObjectArray['_id']) {
