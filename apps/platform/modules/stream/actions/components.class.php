@@ -14,7 +14,7 @@ class streamComponents extends sfComponents
     $this->pFriends = UserTable::getHottestFriendsForUser($this->getUser()->getUserId(), 1, 10);
     // get friends alphabetically
     $this->pAllFriends = UserTable::getAlphabeticalFriendsForUser($this->getUser()->getUserId());
-    $this->pFriendsCount = count($this->pFriends);
+    $this->pFriendsCount = UserTable::countHottestUsers($this->getUser()->getUserId());
   }
 
   public function executeSearch_field() {}

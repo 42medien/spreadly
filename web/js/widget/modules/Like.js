@@ -414,7 +414,7 @@ var YiidUtils = {
     if(pSendLike == true) {
       YiidRequest.doSendLike();
     }
-    var lPopup = window.open(pUrl, 'popup', 'width=600,height=500,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150');
+    var lPopup = window.open(pUrl, 'popup', 'width=830,height=700,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150');
     if(lPopup) {
       return true;
     } else {

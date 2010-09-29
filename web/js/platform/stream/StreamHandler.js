@@ -48,11 +48,12 @@ var Stream = {
     OnLoadGrafic.hideGrafic();
     
     //load the details of the first element on the right sidebar
-    ItemDetail.loadFirst();
+    if(pResponse.page <= 1 || pResponse.page === undefined ) {
+      ItemDetail.loadFirst();
+    }
     jQuery('#new_shares img').lazyload({
       placeholder: "/img/global/preview.png"     
     });
-    
 	},
 	
 	/**
