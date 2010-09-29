@@ -7,7 +7,7 @@
     <?php include_metas() ?>
     <?php include_title() ?>
     <?php include_stylesheets(); ?>
-    <?php echo cdn_javascript_tag('/js/100_main/include/configurator-'.sfConfig::get('app_release_name').'.js'); ?>
+    <?php echo cdn_javascript_tag('100_main/include/configurator-'.sfConfig::get('app_release_name').'.js'); ?>
   </head>
   <body>
     <?php include_partial('global/branding'); ?>
