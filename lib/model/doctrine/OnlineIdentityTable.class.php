@@ -290,6 +290,6 @@ class OnlineIdentityTable extends Doctrine_Table {
       $lOis = $lQuery->execute();
       return $lOis;
     }
-    return false;
+    return array();
   }
 }
