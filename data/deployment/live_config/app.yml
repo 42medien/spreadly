@@ -29,9 +29,9 @@ all:
     yiid:              'http://%user%.yiid.com'
     host:              'yiid.com'
     widgets_url:       'http://widgets.yiid.com'
-    environment:      'live'
-    dev: 0
-    pager:          20
+    environment:       'live'
+    dev:               0
+    pager:             20
 
   image_sizes:
     avatar: ['16x16', '30x30', '48x48', '140x140']  #height x width
