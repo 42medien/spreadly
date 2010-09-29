@@ -75,15 +75,16 @@ class TwitterAuthApiClient extends AuthApi {
       $lUserIdentityCon->setVerified(true);
       $lUserIdentityCon->save();
       // </todo>
+
+      //TwitterImportClient::importContacts($lUser->getId(), $lOnlineIdentity);
+      $lImgPath = "http://api.twitter.com/1/users/profile_image/".$lParamsArray['screen_name']."?size=bigger";
+      ImageImporter::importByUrlAndUserId($lImgPath, $lUser->getId(), $lOnlineIdentity);
     }
 
+    // import contacts
     $this->importContacts($lOnlineIdentity->getId());
 
     AuthTokenTable::saveToken($lUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], true);
-
-    //TwitterImportClient::importContacts($lUser->getId(), $lOnlineIdentity);
-    $lImgPath = "http://api.twitter.com/1/users/profile_image/".$lParamsArray['screen_name']."?size=bigger";
-    ImageImporter::importByUrlAndUserId($lImgPath, $lUser->getId(), $lOnlineIdentity);
 
     return $lUser;
   }

@@ -53,6 +53,7 @@ class FacebookAuthApiClient extends AuthApi {
       $lUser = new User();
     }
 
+    // if there is no user create one
     if (!$lUser || !$lUser->getId()) {
       // @todo <todo> encapsulating this
       // use api complete informations
@@ -72,15 +73,17 @@ class FacebookAuthApiClient extends AuthApi {
       $lUserIdentityCon->setVerified(true);
       $lUserIdentityCon->save();
       // </todo>
+
+      $lImgPath = "https://graph.facebook.com/".$lJsonObject->id."/picture&type=large";
+      ImageImporter::importByUrlAndUserId($lImgPath, $lUser->getId(), $lOnlineIdentity);
     }
 
+    // import contacts
     $this->importContacts($lOnlineIdentity->getId());
 
+    // save new token
     AuthTokenTable::saveToken($lUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['access_token'], null, true);  // signup,add new
 
-    //FacebookImportClient::importContacts($lUser->getId(), $lOnlineIdentity);
-    $lImgPath = "https://graph.facebook.com/".$lJsonObject->id."/picture&type=large";
-    ImageImporter::importByUrlAndUserId($lImgPath, $lUser->getId(), $lOnlineIdentity);
     return $lUser;
   }
 
