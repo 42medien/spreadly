@@ -6,7 +6,7 @@ default:
     content-type: text/html
 
   metas:
-    title:        Yiid.com
+    title:        yiid livestream of likes and dislikes
     description:  Yiid helps you sharing your interesting websites
     keywords:     yiid, social, network, sharing
     language:     en
