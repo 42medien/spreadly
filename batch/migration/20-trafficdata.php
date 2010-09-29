@@ -13,7 +13,7 @@ $dbManager = new sfDatabaseManager($configuration);
 $dbManager->loadConfiguration();
 
 $lM = new Mongo(sfConfig::get('app_mongodb_host')); // connect
-$lDb = $lM->selectDB(sfConfig::get('app_mongo_database_name_stats'));
+$lDb = $lM->selectDB(sfConfig::get('app_mongodb_database_name_stats'));
 
 $lMongoCursor = $lDb->selectCollection('visits')->find()->limit(10000)->sort(array('c' => -1));
 $lErros = 0;

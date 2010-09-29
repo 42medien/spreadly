@@ -13,7 +13,7 @@ $dbManager = new sfDatabaseManager($configuration);
 $dbManager->loadConfiguration();
 
 $lM = new Mongo(sfConfig::get('app_mongodb_host')); // connect
-$lDb = $lM->selectDB(sfConfig::get('app_mongo_database_name_stats'));
+$lDb = $lM->selectDB(sfConfig::get('app_mongodb_database_name_stats'));
 
 $lMongoCursor = $lDb->selectCollection('clicks')->find()->limit(5000000);
 $lErros = 0;
