@@ -30,4 +30,4 @@
 </div>
 <p class="content_list small_box big_size"><?php echo __('API_EXPLANATION', null, 'configurator'); ?></p>
 
-<p class="big_size" id="contact_information_small"><?php echo __('QUESTIONS', array('%1' => mail_to('info@ekaabo.de')), 'configurator'); ?></p>
+<p class="big_size" id="contact_information_small"><?php echo __('QUESTIONS', array('%1' => mail_to('info@yiid.com')), 'configurator'); ?></p>

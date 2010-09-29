@@ -33,4 +33,4 @@
     <?php echo link_to(__('GET_YOUR_BUTTON', null, 'configurator'), '@homepage', array('class' => 'button_inner color_light important_text')); ?>
   </span>
 </div>
-<p class="big_size" id="contact_information"><?php echo __('QUESTIONS', array('%1' => mail_to('info@ekaabo.de')), 'configurator'); ?></p>
+<p class="big_size" id="contact_information"><?php echo __('QUESTIONS', array('%1' => mail_to('info@yiid.com')), 'configurator'); ?></p>
