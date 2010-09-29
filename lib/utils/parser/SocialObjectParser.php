@@ -95,7 +95,6 @@ class SocialObjectParser {
       }
       catch (Exception $e) {
         sfContext::getInstance()->getLogger()->err("{SocialObjectParser} PROBLEM: " . print_r($lUpdateArray, true) );
-        continue;
       }
     }
   }
