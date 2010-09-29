@@ -55,13 +55,13 @@ class FacebookAuthApiClient extends AuthApi {
 
     if (!$lUser || !$lUser->getId()) {
       // @todo <todo> encapsulating this
-      $lOnlineIdentity->setUserId($lUser->getId());                  /* signup,add new */
-      $lOnlineIdentity->setAuthIdentifier($lIdentifier);
-      $lOnlineIdentity->save();
-
       // use api complete informations
       $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject); // signup,add new
       $this->completeUser($lUser, $lJsonObject);                     // signup
+
+      $lOnlineIdentity->setUserId($lUser->getId());                  /* signup,add new */
+      $lOnlineIdentity->setAuthIdentifier($lIdentifier);
+      $lOnlineIdentity->save();
 
       // delete connected user-cons
       UserIdentityConTable::deleteAllConnections($lOnlineIdentity->getId());  // signup,add new
