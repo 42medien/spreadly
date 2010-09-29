@@ -55,7 +55,7 @@ class YiidActivityTable extends Doctrine_Table
                                               $pTitle = null,
                                               $pDescription = null,
                                               $pPhoto = null) {
-    $lSuccess = false;
+    $lSuccess = true;
     $lVerifiedOnlineIdentitys = array();
     $pTitle = StringUtils::cleanupStringForMongodb($pTitle);
     $pDescription = StringUtils::cleanupStringForMongodb($pDescription);
@@ -77,11 +77,10 @@ class YiidActivityTable extends Doctrine_Table
       $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
     } // object exists, we need to check if user is allowed to make an action on it
     elseif (!self::isActionOnObjectAllowed($lSocialObject->getId(), $pUserId)) {
-      $lSuccess = true;
       return false;
     }
 
-    if (!$lSuccess) {
+    if ($lSuccess === false) {
       return  false;
     }
     foreach ($pGivenOnlineIdentitys as $lIdentityId) {
