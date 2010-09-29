@@ -9,7 +9,7 @@
 		  </div>
 		  <div id="so_detail_desc">
 		    <img alt="<?php echo $pObject->getUrl(); ?>" width="100px" height="80px" src="http://communipedia.v2.websnapr.com/?url=<?php echo $pObject->getUrl(); ?>&sh=80&sw=100" class="left">
-			  <span class="normal_text"><?php echo truncate_text($pObject->getStmt(), 100, '...'); ?></span>
+			  <span class="normal_text"><?php echo truncate_text($pObject->getStmt(), 400, '...'); ?></span>
 			</div>
     </div>
 
