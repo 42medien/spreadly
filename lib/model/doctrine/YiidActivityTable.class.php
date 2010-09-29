@@ -47,15 +47,15 @@ class YiidActivityTable extends Doctrine_Table
 
 
   public static function saveLikeActivitys($pUserId,
-                                            $pUrl,
-                                            $pOwnedOnlineIdentitys = array(),
-                                            $pGivenOnlineIdentitys = array(),
-                                            $pScore = self::ACTIVITY_VOTE_POSITIVE,
-                                            $pVerb = 'like',
-                                            $pTitle = null,
-                                            $pDescription = null,
-                                            $pPhoto = null) {
-
+                                              $pUrl,
+                                              $pOwnedOnlineIdentitys = array(),
+                                              $pGivenOnlineIdentitys = array(),
+                                              $pScore = self::ACTIVITY_VOTE_POSITIVE,
+                                              $pVerb = 'like',
+                                              $pTitle = null,
+                                              $pDescription = null,
+                                              $pPhoto = null) {
+    $lSuccess = false;
     $lVerifiedOnlineIdentitys = array();
     $pTitle = StringUtils::cleanupStringForMongodb($pTitle);
     $pDescription = StringUtils::cleanupStringForMongodb($pDescription);
@@ -77,9 +77,13 @@ class YiidActivityTable extends Doctrine_Table
       $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
     } // object exists, we need to check if user is allowed to make an action on it
     elseif (!self::isActionOnObjectAllowed($lSocialObject->getId(), $pUserId)) {
+      $lSuccess = true;
       return false;
     }
 
+    if (!$lSuccess) {
+      return  false;
+    }
     foreach ($pGivenOnlineIdentitys as $lIdentityId) {
       if (in_array($lIdentityId, $pOwnedOnlineIdentitys)) {
         $lVerifiedOnlineIdentityIds[]= $lIdentityId;
