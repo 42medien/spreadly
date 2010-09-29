@@ -225,6 +225,9 @@ h4{margin: 15px 0 10px 0;}
 		      height: 50px;
 		      margin: 5px 0 0 5px;
 		    }
+		    #so_detail_desc{
+		      padding-top: 10px;
+		    }
 		    #so_detail_desc img{
 		      margin: 10px 15px 8px 0;
 		      border: 1px solid #DDDDDD;

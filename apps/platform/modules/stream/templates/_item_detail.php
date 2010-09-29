@@ -7,7 +7,7 @@
 		    <h3 title="<?php echo $pObject->getTitle(); ?>"><?php echo truncate_text($pObject->getTitle(), 30, '...'); ?></h3>
         <h5 title="<?php echo $pObject->getUrl(); ?>"><?php echo link_to(UrlUtils::getShortUrl($pObject->getUrl()), $pObject->getUrl(), array('class' => 'url')); ?></h5>
 		  </div>
-		  <div id="so_detail_desc">
+		  <div id="so_detail_desc" class="clearfix">
 		    <img alt="<?php echo $pObject->getUrl(); ?>" width="100px" height="80px" src="http://communipedia.v2.websnapr.com/?url=<?php echo $pObject->getUrl(); ?>&sh=80&sw=100" class="left">
 			  <span class="normal_text"><?php echo truncate_text($pObject->getStmt(), 400, '...'); ?></span>
 			</div>
