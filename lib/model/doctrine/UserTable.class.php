@@ -123,11 +123,11 @@ class UserTable extends Doctrine_Table {
   public static function countHottestUsers($pUserId) {
     $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
 
-    if(empty($pFriendIds)) {
+    if(empty($lFriendIds)) {
       return 0;
     }
 
-    $lQuery = self::getHottestUsersFitlerQuery($pFriendIds);
+    $lQuery = self::getHottestUsersFitlerQuery($lFriendIds);
     return $lQuery->count();
   }
 
@@ -187,10 +187,10 @@ class UserTable extends Doctrine_Table {
   public static function countUsersAlphabetically($pUserId) {
     $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
 
-    if(empty($pFriendIds)) {
+    if(empty($lFriendIds)) {
       return 0;
     }
-    $lQuery = self::getUsersAlphabeticallyFilterQuery($pFriendIds);
+    $lQuery = self::getUsersAlphabeticallyFilterQuery($lFriendIds);
     return $lQuery->count();
   }
 
