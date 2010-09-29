@@ -6,7 +6,7 @@
     <?php include_http_metas() ?>
     <?php include_metas() ?>
     <?php include_title() ?>
-    <?php include_cdn_stylesheets(); ?>
+    <?php include_stylesheets(); ?>
     <?php echo cdn_javascript_tag('100_main/include/configurator-'.sfConfig::get('app_release_name').'.js'); ?>
   </head>
   <body>
