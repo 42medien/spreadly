@@ -42,33 +42,17 @@ class TwitterAuthApiClient extends AuthApi {
     // ask for online identity
     $lOnlineIdentity = OnlineIdentityTable::retrieveByAuthIdentifier($lIdentifier);
 
+    $lUser = null;
+
     // check if user already exists
     if ($lOnlineIdentity) {
       $lUser = $lOnlineIdentity->getUser();
-
-      if (!$lUser || !$lUser->getId()) {
-        $lUser = new User();
-
-        // @todo <todo> encapsulating this
-        // use api complete informations
-        $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject);
-        $this->completeUser($lUser, $lJsonObject);
-
-        // delete connected user-cons
-        UserIdentityConTable::deleteAllConnections($lOnlineIdentity->getId());  // signup,add new
-
-        $lUserIdentityCon = new UserIdentityCon();                     /* signup,add new */
-        $lUserIdentityCon->setUserId($lUser->getId());
-        $lUserIdentityCon->setOnlineIdentityId($lOnlineIdentity->getId());
-        $lUserIdentityCon->setVerified(true);
-        $lUserIdentityCon->save();
-        // </todo>
-      }
     } else {
       // check online identity
       $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lParamsArray['screen_name'], $this->aCommunityId);
-      // delete connected user-cons
-      UserIdentityConTable::deleteAllConnections($lOnlineIdentity->getId());
+    }
+
+    if (!$lUser || !$lUser->getId()) {
       // generate empty user
       $lUser = new User();
 
@@ -84,6 +68,9 @@ class TwitterAuthApiClient extends AuthApi {
       $lOnlineIdentity->setUserId($lUser->getId());
       $lOnlineIdentity->setAuthIdentifier($lIdentifier);
       $lOnlineIdentity->save();
+
+      // delete connected user-cons
+      UserIdentityConTable::deleteAllConnections($lOnlineIdentity->getId());
 
       $lUserIdentityCon = new UserIdentityCon();
       $lUserIdentityCon->setUserId($lUser->getId());

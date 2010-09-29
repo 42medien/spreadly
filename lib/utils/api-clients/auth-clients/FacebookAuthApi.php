@@ -43,34 +43,17 @@ class FacebookAuthApiClient extends AuthApi {
     // ask for online identity
     $lOnlineIdentity = OnlineIdentityTable::retrieveByAuthIdentifier($lIdentifier);
 
+    $lUser = null;
+
     // check if user already exists
     if ($lOnlineIdentity) {
       $lUser = $lOnlineIdentity->getUser();
-
-      sfContext::getInstance()->getLogger()->debug("{DEBUG} ".print_r($lUser, true));
-
-      if (!$lUser || !$lUser->getId()) {
-        $lUser = new User();
-
-        // @todo <todo> encapsulating this
-        // use api complete informations
-        $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject);
-        $this->completeUser($lUser, $lJsonObject);
-
-        // delete connected user-cons
-        UserIdentityConTable::deleteAllConnections($lOnlineIdentity->getId());  // signup,add new
-
-        $lUserIdentityCon = new UserIdentityCon();                     /* signup,add new */
-        $lUserIdentityCon->setUserId($lUser->getId());
-        $lUserIdentityCon->setOnlineIdentityId($lOnlineIdentity->getId());
-        $lUserIdentityCon->setVerified(true);
-        $lUserIdentityCon->save();
-        // </todo>
-      }
     } else {
       // check online identity
       $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lJsonObject->link, $this->aCommunityId);
+    }
 
+    if (!$lUser || !$lUser->getId()) {
       // generate empty user
       $lUser = new User();
 
