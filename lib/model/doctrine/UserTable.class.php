@@ -210,7 +210,7 @@ class UserTable extends Doctrine_Table {
     ->from('User u')
     ->whereIn('u.id', $pFriendIds)
     ->andWhere('u.last_activity > ?', $lTimeLimit)
-    ->orderBy('u.sortname');
+    ->orderBy('u.sortname ASC');
 
     return $lQuery;
   }
