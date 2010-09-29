@@ -47,6 +47,8 @@ class FacebookAuthApiClient extends AuthApi {
     if ($lOnlineIdentity) {
       $lUser = $lOnlineIdentity->getUser();
 
+      sfContext::getInstance()->getLogger()->debug("{DEBUG} ".print_r($lUser, true));
+
       if (!$lUser) {
         $lUser = new User();
 
