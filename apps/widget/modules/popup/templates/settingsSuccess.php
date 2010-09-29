@@ -3,7 +3,7 @@
 <div class="clearfix">
 	<div id="twocol_left" class="content_main_border rounded_corners light_background left">
     <h3><?php echo __('YOUR_NETWORKS', null, 'widget'); ?></h3>
-	  <form action="http://widgets.yiid.local/widget_dev.php/popup/settings" method="post">
+	  <form action="<?php echo (url_for("popup/settings")); ?>" method="post">
 
       <ul class="normal_list" id="services_chosen">
       <?php foreach ($pIdentities as $lIdentity) { ?>
