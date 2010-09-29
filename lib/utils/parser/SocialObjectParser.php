@@ -94,7 +94,7 @@ class SocialObjectParser {
         SocialObjectTable::updateObjectInMongoDb(array("url_hash" => md5($pUrl)), array('$set' => $lUpdateArray ));
       }
       catch (Exception $e) {
-        sfContext::getInstance()->getLogger()->err("{SocialObjectParser} PROBLEM: " . printr_r($lUpdateArray, true) );
+        sfContext::getInstance()->getLogger()->err("{SocialObjectParser} PROBLEM: " . print_r($lUpdateArray, true) );
         continue;
       }
     }
