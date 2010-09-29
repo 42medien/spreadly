@@ -394,8 +394,8 @@ var FriendStream = {
     FriendStream.aAllFriendList = jQuery('#friends_all_list');
     FriendStream.aActiveFriendList = jQuery('#friends_active_list');
     FriendStream.aSearchFriendList = jQuery('#friends_search_results'); 
-    jQuery(FriendStream.aAllFriendList).scrollPager({"url":"stream/get_active_friends"});
-    jQuery(FriendStream.aActiveFriendList).scrollPager({"url":"stream/get_friends"});     
+    jQuery(FriendStream.aAllFriendList).scrollPager({"url":"stream/get_friends"});
+    jQuery(FriendStream.aActiveFriendList).scrollPager({"url":"stream/get_active_friends"});     
   },
   
   /**
