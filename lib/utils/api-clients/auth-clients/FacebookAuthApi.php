@@ -49,13 +49,11 @@ class FacebookAuthApiClient extends AuthApi {
     } else {
       // check online identity
       $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lJsonObject->link, $this->aCommunityId);
+      // generate empty user
       $lUser = new User();
     }
 
     if (!$lUser || !$lUser->getId()) {
-      // generate empty user
-      $lUser = new User();
-
       // @todo <todo> encapsulating this
       $lOnlineIdentity->setUserId($lUser->getId());                  /* signup,add new */
       $lOnlineIdentity->setAuthIdentifier($lIdentifier);
