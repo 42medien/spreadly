@@ -106,7 +106,7 @@ class UserTable extends Doctrine_Table {
       return false;
     }
 
-    $lQuery = self::getHottestUsersFitlerQuery($pFriendIds, $pPage, $pLimit);
+    $lQuery = self::getHottestUsersFitlerQuery($pFriendIds);
     $lQuery->limit($pLimit);
     $lQuery->offset(($pPage - 1) * $pLimit);
 
@@ -122,12 +122,12 @@ class UserTable extends Doctrine_Table {
    * @param int $pLimit
    * @author weyandch
    */
-  public static function countHottestUsers($pFriendIds = array(), $pPage = 1, $pLimit = 10) {
+  public static function countHottestUsers($pFriendIds = array()) {
     if(empty($pFriendIds)) {
       return 0;
     }
 
-    $lQuery = self::getHottestUsersFitlerQuery($pFriendIds, $pPage, $pLimit);
+    $lQuery = self::getHottestUsersFitlerQuery($pFriendIds);
     return $lQuery->count();
   }
 
@@ -139,7 +139,7 @@ class UserTable extends Doctrine_Table {
    * @param int $pLimit
    * @author weyandch
    */
-  private static function getHottestUsersFitlerQuery($pFriendIds = array(), $pPage = 1, $pLimit = 10) {
+  private static function getHottestUsersFitlerQuery($pFriendIds = array()) {
     $lTimeLimit = time() - (sfConfig::get('app_stream_days_limit', 30) * 86400);
 
     $lQuery = Doctrine_Query::create()
@@ -169,7 +169,7 @@ class UserTable extends Doctrine_Table {
       return false;
     }
 
-    $lQuery = self::getUsersAlphabeticallyFilterQuery($pFriendIds, $pPage, $pLimit);
+    $lQuery = self::getUsersAlphabeticallyFilterQuery($pFriendIds);
     $lQuery->limit($pLimit);
     $lQuery->offset(($pPage - 1) * $pLimit);
 
@@ -186,11 +186,11 @@ class UserTable extends Doctrine_Table {
    * @return Doctrine_Collection
    *
    */
-  public static function countUsersAlphabetically($pFriendIds, $pPage = 1, $pLimit = 10) {
+  public static function countUsersAlphabetically($pFriendIds) {
     if(empty($pFriendIds)) {
       return 0;
     }
-    $lQuery = self::getUsersAlphabeticallyFilterQuery($pFriendIds, $pPage, $pLimit);
+    $lQuery = self::getUsersAlphabeticallyFilterQuery($pFriendIds);
     return $lQuery->count();
   }
 
@@ -203,7 +203,7 @@ class UserTable extends Doctrine_Table {
    * @param int $pLimit
    * @return DoctrineQueryObject
    */
-  private static function getUsersAlphabeticallyFilterQuery($pFriendIds, $pPage = 1, $pLimit = 10) {
+  private static function getUsersAlphabeticallyFilterQuery($pFriendIds) {
     $lTimeLimit = time() - (sfConfig::get('app_stream_days_limit', 30) * 86400);
 
     $lQuery = Doctrine_Query::create()
