@@ -72,7 +72,7 @@ all:
   mongodb:
     host:                 'donkeykong'
     database_name:        'yiid_dev'
-    database_name_stats:  'yiid_stats_dev'
+    database_name_stats:  'yiid_dev_stats'
 
   amazons3:
     access_key:  'AKIAJ5NSA6ET5RC4AMXQ'
