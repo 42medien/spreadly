@@ -56,12 +56,9 @@ class YiidDaemon {
   */
   public static function run($pQueueName, $pArguments, $pClass, $pFunction, $pOptions = null) {
     // add environment for a better cue handling
-    if (sfConfig::get('app_settings_dev')) {
-      $pQueueName = $pQueueName."-".sfConfig::get('app_settings_environment');
-    }
+    $pQueueName = $pQueueName."-".sfConfig::get('app_settings_environment');
 
-
-      echo ('parsing queue:' . $pQueueName);
+    echo ('parsing queue:' . $pQueueName ." \r\n");
 
     // if $pOptions is empty take the default params
     if (!$pOptions) {

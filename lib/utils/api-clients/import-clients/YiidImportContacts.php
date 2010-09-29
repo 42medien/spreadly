@@ -13,7 +13,7 @@ sfContext::createInstance($configuration);
 class YiidImportContacts {
   public static function import($pMessage) {
     $lOnlineIdentity = OnlineIdentityTable::getInstance()->find($pMessage[0]['Body']);
-sfContext::getInstance()->getLogger()->debug("{Daemon} ImpotContacts: ". $pMessage[0]['Body']);
+    sfContext::getInstance()->getLogger()->debug("{Daemon} ImpotContacts: ". $pMessage[0]['Body']);
     if ($lOnlineIdentity) {
       $lOnlineIdentity->setLastFriendRefresh(time());
       $lOnlineIdentity->save();

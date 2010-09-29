@@ -79,7 +79,8 @@ all:
     secret_key:  'bs1YgS4c1zJN/HmwaVA8CkhNfyvcS+EEm1hcEOa0'
     bucket:      'http://www.yiid.local/'
     hosts:
-      - 'http://www.yiiddev.com'
+      - 'https://s3-eu-west-1.amazonaws.com/dev.yiidcdn.com'
+#      - 'http://www.yiiddev.com'
 
   # mapper for f.e. apis
   likewidget:

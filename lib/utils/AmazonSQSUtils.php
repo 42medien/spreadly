@@ -26,9 +26,7 @@ class AmazonSQSUtils {
    */
   public static function pushToQuque($pQueueName, $pPayload) {
     // add environment for a better cue handling
-    if (sfConfig::get('app_settings_dev')) {
-      $pQueueName = $pQueueName."-".sfConfig::get('app_settings_environment');
-    }
+    $pQueueName = $pQueueName."-".sfConfig::get('app_settings_environment');
 
     $service = self::initSqsService();
     if (is_array($pPayload)) {
