@@ -90,7 +90,13 @@ class SocialObjectParser {
     $lUpdateArray['enriched'] = SocialObjectTable::ENRICHED_TYPE_OBJECTPARSER;
 
     if (!empty($lUpdateArray)) {
-      SocialObjectTable::updateObjectInMongoDb(array("url_hash" => md5($pUrl)), array('$set' => $lUpdateArray ));
+      try {
+        SocialObjectTable::updateObjectInMongoDb(array("url_hash" => md5($pUrl)), array('$set' => $lUpdateArray ));
+      }
+      catch (Exception $e) {
+        sfContext::getInstance()->getLogger()->err("{SocialObjectParser} PROBLEM: " . printr_r($lUpdateArray, true) );
+        continue;
+      }
     }
   }
 }
