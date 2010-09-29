@@ -1,3 +1,15 @@
+imprint:
+  url:   /imprint
+  param: { module: static, action: imprint }
+
+tos:
+  url:   /tos
+  param: { module: static, action: tos }
+
+privacy:
+  url:   /privacy
+  param: { module: static, action: privacy }
+
 tinyurl:
   # for example cope#User#1
   url:   /:identifier
