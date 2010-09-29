@@ -12,8 +12,8 @@ $logger = sfContext::getInstance()->getLogger();
 $dbManager = new sfDatabaseManager($configuration);
 $dbManager->loadConfiguration();
 
-$lM = new Mongo('192.168.1.190'); // connect
-$lDb = $lM->selectDB("yiid_stats");
+$lM = new Mongo(sfConfig::get('app_mongodb_host')); // connect
+$lDb = $lM->selectDB(sfConfig::get('app_mongo_database_name_stats'));
 
 $lMongoCursor = $lDb->selectCollection('clicks')->find()->limit(5000000);
 $lErros = 0;
