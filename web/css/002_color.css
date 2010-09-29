@@ -45,7 +45,7 @@ span.url,
 
 /* Header */
 #header{border-bottom: 5px #6A6B6A solid;}
-#yiid_logo{background: transparent url("/img/sprites/sprite_general.png") 30px 0 no-repeat;}
+#yiid_logo{background: transparent url("/img/sprites/sprite_general.png") 30px -315px no-repeat;}
 #header_yiidcc{background: transparent url("/img/global/yiid_cc_logo.png") 50px 10px no-repeat;border-bottom: 5px #6A6B6A solid;}
   #nav_home{background: transparent url("/img/sprites/sprite_icons.png") 0 -151px no-repeat;}
   #nav_profile{background: transparent url("/img/sprites/sprite_icons.png") 0 -111px no-repeat;}
