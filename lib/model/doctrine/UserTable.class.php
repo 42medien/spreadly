@@ -164,7 +164,7 @@ class UserTable extends Doctrine_Table {
    * @return Doctrine_Collection
    *
    */
-  public static function getUsersAlphabetically($pFriendIds, $pPage = 1, $pLimit = 10) {
+  public static function getUsersAlphabetically($pFriendIds, $pPage = 1, $pLimit = 5) {
     if(empty($pFriendIds)) {
       return false;
     }
