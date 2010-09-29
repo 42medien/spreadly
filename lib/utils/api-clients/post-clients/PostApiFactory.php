@@ -15,8 +15,16 @@ class PostApiFactory {
    * @return Object
    */
   static public function factory($pCommunity, $pParams = null) {
+    // check if $pCommunity is the name or the id
+    if (is_numeric($pCommunity)) {
+      $lCommunityObject = CommunityTable::getInstance()->retrieveByPk($pCommunity);
+      $lCommunity = $lCommunityObject->getCommunity();
+    } else {
+      $lCommunity = $pCommunity;
+    }
+
     // return matching object
-    switch ($pCommunity) {
+    switch ($lCommunity) {
       case "facebook":
         return new FacebookPostApiClient();
         break;
