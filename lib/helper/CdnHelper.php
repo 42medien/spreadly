@@ -117,7 +117,7 @@ function concatNameForStaticImages($pFilename) {
   $lHost = '';
   $lHostname = CdnSingleton::getInstance()->getNextHost();
   if (sfConfig::get('app_settings_environment') != 'local') {
-    $lHostname .= '/' . ssfConfig::get('app_release_name');
+    $lHostname .= '/' . sfConfig::get('app_release_name');
   }
   $lHost .= $lHostname . '/'. $pFilename;
   return $lHost;
