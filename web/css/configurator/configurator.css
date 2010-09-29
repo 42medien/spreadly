@@ -16,6 +16,7 @@ blockquote{margin:0;padding:0}
 #language_selecten_icon_en_inactive{background: transparent url("/img/global/flags/en_grey.gif") 0 3px no-repeat;}
 #language_selecten_icon_de_inactive:hover{background: transparent url("/img/global/flags/de.gif") 0 3px no-repeat;}
 #language_selecten_icon_en_inactive:hover{background: transparent url("/img/global/flags/en.gif") 0 3px no-repeat;}
+.icon_language_select:hover{text-decoration: none;}
 
 #nav_wave_left{width:367px;height:31px;}
 #nav_wave_middle{width:52px;height:31px;}
