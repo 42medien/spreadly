@@ -10,11 +10,11 @@
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="commands" title="yiid this" href="<?php echo sfConfig::get('app_settings_url'); ?>/js/browser-plugins/ubiquity/shorturl.js" />
 
-  <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz&subset=latin' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Inconsolata&subset=latin' rel='stylesheet' type='text/css'>
 
   <style type="text/css">
     body {
-      font-family: 'Yanone Kaffeesatz', arial, serif;
+      font-family: 'Inconsolata', arial, serif;
     }
 
     #wrapper {
