@@ -51,7 +51,7 @@
       <?php include_component('general','footer'); ?>
 
     </div>
-    <?php echo cdn_javascript_tag('100_main/include/platform-'.sfConfig::get('app_release_name').'.js'); ?>
+    <?php echo cdn_javascript_tag('100_main/include/platform-'.sfConfig::get('app_release_name').'.min.js'); ?>
 
     <?php //echo cdn_javascript_tag('platform/stream/FriendListHandler.js'); ?>
 	  <script type="text/javascript">
