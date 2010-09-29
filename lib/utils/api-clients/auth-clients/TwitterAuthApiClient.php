@@ -46,7 +46,7 @@ class TwitterAuthApiClient extends AuthApi {
     if ($lOnlineIdentity) {
       $lUser = $lOnlineIdentity->getUser();
 
-      if (!$lUser) {
+      if (!$lUser || !$lUser->getId()) {
         $lUser = new User();
 
         // @todo <todo> encapsulating this

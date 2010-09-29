@@ -49,7 +49,7 @@ class FacebookAuthApiClient extends AuthApi {
 
       sfContext::getInstance()->getLogger()->debug("{DEBUG} ".print_r($lUser, true));
 
-      if (!$lUser) {
+      if (!$lUser || !$lUser->getId()) {
         $lUser = new User();
 
         // @todo <todo> encapsulating this
