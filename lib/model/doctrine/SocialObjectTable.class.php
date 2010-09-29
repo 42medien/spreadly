@@ -52,9 +52,14 @@ class SocialObjectTable extends Doctrine_Table
   public static function initializeObjectFromUrl($pUrl, $pEnriched = 0) {
     $lCollection = self::getMongoCollection();
     $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
+
     // check if this url has some redirects
     $pLongUrl = UrlUtils::shortUrlExpander($pUrl);
-    if($pLongUrl && UrlUtils::isUrlValid($pLongUrl)) {
+
+    if ($pLongUrl === false) {
+      return false;
+    }
+    elseif($pLongUrl && UrlUtils::isUrlValid($pLongUrl)) {
       $pLongUrl = UrlUtils::cleanupHostAndUri($pLongUrl);
     }
 

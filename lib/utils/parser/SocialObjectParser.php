@@ -68,6 +68,11 @@ class SocialObjectParser {
   public static function enrich($pMessage) {
     $lUpdateArray = array();
     $pUrl = urldecode($pMessage[0]['Body']);
+
+    if (!UrlUtils::checkUrlAvailability($pUrl)) {
+      sfContext::getInstance()->getLogger()->info("{SocialObjectParser} invalid url: " . $pUrl );
+      return false;
+    }
     sfContext::getInstance()->getLogger()->info("{SocialObjectParser} checking url: " . $pUrl );
     $lSocialObject = SocialObjectTable::retrieveByUrl($pUrl);
 

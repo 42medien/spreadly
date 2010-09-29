@@ -21,8 +21,6 @@ $service = AmazonSQSUtils::initSqsService();
 
   $dummy = $service->getQueueAttributes('SocialObjectParser-dev');
   var_dump($dummy);
-  $dummy = $service->getQueueAttributes('SocialObjectParser-dev-local');
-  var_dump($dummy);
-    $dummy = $service->getQueueAttributes('SocialObjectParser-dev-local');
+  $dummy = $service->getQueueAttributes('SocialObjectParser-local');
   var_dump($dummy);
 
