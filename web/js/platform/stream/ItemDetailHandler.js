@@ -43,7 +43,7 @@ var ItemDetail = {
     var lStream = jQuery('#stream_right');
     //and find the right-position for it
     if(lOffsetHeight > 160) {
-      jQuery(lStream).css('top', lOffsetHeight-120);
+      jQuery(lStream).css('top', lOffsetHeight-60);
     } else {
       jQuery(lStream).css('top', 0); 
     }    
