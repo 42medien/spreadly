@@ -46,22 +46,41 @@ class FacebookAuthApiClient extends AuthApi {
     // check if user already exists
     if ($lOnlineIdentity) {
       $lUser = $lOnlineIdentity->getUser();
+
+      if (!$lUser) {
+        $lUser = new User();
+
+        // @todo <todo> encapsulating this
+        $this->completeUser($lUser, $lJsonObject);
+
+        // delete connected user-cons
+        UserIdentityConTable::deleteAllConnections($lOnlineIdentity->getId());  // signup,add new
+
+        $lUserIdentityCon = new UserIdentityCon();                     /* signup,add new */
+        $lUserIdentityCon->setUserId($lUser->getId());
+        $lUserIdentityCon->setOnlineIdentityId($lOnlineIdentity->getId());
+        $lUserIdentityCon->setVerified(true);
+        $lUserIdentityCon->save();
+        // </todo>
+      }
     } else {
       // check online identity
       $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lJsonObject->link, $this->aCommunityId);
-      // delete connected user-cons
-      UserIdentityConTable::deleteAllConnections($lOnlineIdentity->getId());  // signup,add new
+
       // generate empty user
       $lUser = new User();
-
-      // use api complete informations
-      $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject); // signup,add new
-      $this->completeUser($lUser, $lJsonObject);                     // signup
 
       // @todo <todo> encapsulating this
       $lOnlineIdentity->setUserId($lUser->getId());                  /* signup,add new */
       $lOnlineIdentity->setAuthIdentifier($lIdentifier);
       $lOnlineIdentity->save();
+
+      // use api complete informations
+      $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject); // signup,add new
+      $this->completeUser($lUser, $lJsonObject);                     // signup
+
+      // delete connected user-cons
+      UserIdentityConTable::deleteAllConnections($lOnlineIdentity->getId());  // signup,add new
 
       $lUserIdentityCon = new UserIdentityCon();                     /* signup,add new */
       $lUserIdentityCon->setUserId($lUser->getId());
