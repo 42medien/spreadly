@@ -19,6 +19,7 @@
       </li>
     <?php } ?>
   </ul>
+  <?php var_dump($pFriendsCount);die();?>
   <?php if($pFriendsCount > 0) { ?>
 	  <p class="filter_headline clearfix" id="active_friends_headline">
 	    <a href="/" class="left user_filter reset-filter" data-obj='{"action":"StreamSubFilter.getAction", "callback":"Stream.show", "css": "{\"class\":\"normal_list\", \"id\":\"user-filter-0\"}"}'>
