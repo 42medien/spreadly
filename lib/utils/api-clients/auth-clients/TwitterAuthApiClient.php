@@ -50,6 +50,8 @@ class TwitterAuthApiClient extends AuthApi {
         $lUser = new User();
 
         // @todo <todo> encapsulating this
+        // use api complete informations
+        $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject);
         $this->completeUser($lUser, $lJsonObject);
 
         // delete connected user-cons
