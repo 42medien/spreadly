@@ -18,7 +18,7 @@ $lObjects = SocialObjectTable::retrieveAll();
 
 foreach ($lObjects as $lObject) {
   $lObject->updateObjectMasterData($lObject->getTitle(), $lObject->getDescription());
-  AmazonSQSUtils::pushToQuque(SocialObjectParser, $lObject->getUrl());
+  AmazonSQSUtils::pushToQuque('SocialObjectParser', $lObject->getUrl());
 
 
   echo $lObject->getUrl()."\r\n";

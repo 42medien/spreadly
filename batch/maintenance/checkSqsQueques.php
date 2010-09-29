@@ -16,8 +16,8 @@ $dbManager->loadConfiguration();
 
 
 $service = AmazonSQSUtils::initSqsService();
-// $queues = $service->listQueues();
-
+//$queues = $service->listQueues();
+//print_r($queues);
 
   $dummy = $service->getQueueAttributes('SocialObjectParser-dev');
   var_dump($dummy);
