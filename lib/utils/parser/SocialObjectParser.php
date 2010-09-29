@@ -87,6 +87,7 @@ class SocialObjectParser {
     if ($lStmt != "") {
       $lUpdateArray['stmt'] = $lStmt;
     }
+    $lUpdateArray['enriched'] = SocialObjectTable::ENRICHED_TYPE_OBJECTPARSER;
 
     if (!empty($lUpdateArray)) {
       SocialObjectTable::updateObjectInMongoDb(array("url_hash" => md5($pUrl)), array('$set' => $lUpdateArray ));
