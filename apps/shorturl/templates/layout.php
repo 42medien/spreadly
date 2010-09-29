@@ -3,68 +3,61 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
 
 <head profile="http://purl.org/uF/2008/03/">
-
   <?php include_http_metas() ?>
   <?php include_metas() ?>
 
-
   <title>YIID.cc - the url shortener</title>
-
-  <?php include_cdn_stylesheets(); ?>
-  <?php echo cdn_stylesheet_tag('include/'.sfConfig::get('app_release_name').'.min.css'); ?>
-  <!-- CSS -->
-  <?php echo cdn_stylesheet_tag('print.css', array('media' => 'print')); ?>
-
   <link rel="shortcut icon" href="/favicon.ico" />
-
-  <?php include_stylesheets() ?>
-
-
   <link rel="commands" title="yiid this" href="<?php echo sfConfig::get('app_settings_url'); ?>/js/browser-plugins/ubiquity/shorturl.js" />
 
-  <?php include_cdn_javascripts(); ?>
-  <?php echo cdn_javascript_tag('include/'.sfConfig::get('app_release_name').'.min.js'); ?>
+  <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz&subset=latin' rel='stylesheet' type='text/css'>
+
+  <style type="text/css">
+    body {
+      font-family: 'Yanone Kaffeesatz', arial, serif;
+    }
+
+    #wrapper {
+      margin: 0 auto;
+      width: 500px;
+    }
+
+    h1, h1 a {
+      color: #333;
+      font-size: 50px;
+    }
+
+    .url-boxerle {
+      border: 1px solid #ccc;
+      padding: 20px;
+      background-color: #eee;
+    }
+
+    table {
+      width: 400px;
+      margin: 5px auto;
+    }
+
+    table th {
+      border-bottom: 1px solid #333;
+      margin: 5px;
+      text-align: left;
+    }
+  </style>
 </head>
 
 <body id="top" class="yiidcc module-<?php echo $sf_context->getModuleName() ?> action-<?php echo $sf_context->getActionName() ?>">
 
+  <div id="wrapper">
+    <h1>
+      <?php echo link_to_frontend('YIID.cc', 'index/index', array('title' => 'YIID - Your Internet ID')); ?>
+		</h1>
 
-	<div id="header-profile">
-		<div id="header-wrapper-profile">
-			<h1 id="profile-logo">
-			  <?php echo link_to_frontend('YIID - Your Internet ID', 'index/index', array('title' => 'YIID - Your Internet ID')); ?>
-			</h1>
-		</div>
-  </div> <!-- #header -->
+    <?php echo $sf_content ?>
 
-<!-- ~~~~~~~~~~~~~~~~~~ CONTENT-MAIN-SETTINGS ~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<div id="wrapper">
- 		<div id="page">
-	  	<div id="main-infos">
-      </div><!-- end main-infos -->
-
-<!-- ~~~~~~~~~~~~~~~ CONTENT ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-        <div id="content">
-          <div class="outer-content clearfix" id="yiid-content-<?php echo $sf_context->getModuleName() ."-". $sf_context->getActionName() ?>">
-            <div class="inner-content-border clearfix">
-              <div class="one-col-content">
-                <?php echo $sf_content ?>
-              </div>
-            </div><!-- #inner-content-border -->
-          </div><!-- #outer-content -->
-        </div><!-- #content -->
-      </div> <!-- #page -->
-    </div><!-- #wrapper -->
-
-    <?php include_component('general','footer'); ?>
-  <script  type="text/javascript">
-    jQuery(document).ready( function() {
-      <?php if (has_slot('js_document_ready')) { ?>
-        <?php include_slot('js_document_ready'); ?>
-      <?php } ?>
-      <?php //include_partial('global/js_general_ready'); ?>
-    });
-  </script>
+    <hr />
+    <p><a href="http://www.yiid.com/imprint">&raquo; Impressum</a> <a href="http://www.yiid.com/tos">&raquo; TOS</a> <a href="http://www.yiid.com/privacy">&raquo; Privacy Policy</a></p>
+  </div>
 
   <?php if (sfConfig::get('app_settings_dev') == 0) { ?>
   <script type="text/javascript">

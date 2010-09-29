@@ -1,7 +1,6 @@
 <?php use_helper('Text', 'Favicon'); ?>
-<h1>YIID.cc</h1>
 
-<p class="shorturl-description"><?php echo __('SHORT_URL_DESCRIPTION', array('%1' => link_to(__('YIID'), sfConfig::get('app_settings_url')))); ?></p>
+<p class="shorturl-description">YIID.cc is a Service of <a href="http://www.yiid.com">YIID</a> (Your Internet ID).</p>
 
 <?php if ($shortUrl) { ?>
   <p id="shorturl"><?php echo ($shortUrl); ?></p>
@@ -16,22 +15,21 @@
 <div class="url-boxerle">
   <form action="<?php echo url_for('@homepage') ?>" method="POST" class="clearfix">
     <div class="clearfix">
-	    <span class="left outerRight"><?php echo $form['url']->renderLabel(); ?></span>
+	    <span class="left outerRight">Shorten a URL</span>
       <?php echo $form['_csrf_token']->render(); ?>
-	    <?php echo $form['url']->render(array('class'=>'inputtext shorturl-text')); ?>
-	    <div style="line-height:15px;"><input type="submit" value="<?php echo __('SUBMIT_BUTTON'); ?>" class="button green small" /></div>
+	    <?php echo $form['url']->render(array('class'=>'inputtext shorturl-text')); ?><input type="submit" value="submit" class="button green small" />
 	    <?php echo $form['url']->renderError(); ?>
 	  </div>
   </form>
 </div>
 
-<p class=""><?php echo __('LAST_SHORT_URLS'); ?></p>
+<p>The latest Short-URLs</p>
 
-<table class="url-list styled">
+<table>
   <thead>
     <tr>
-      <th><?php echo __('URL'); ?></th>
-      <th><?php echo __('SHORT_URL'); ?></th>
+      <th>URL</th>
+      <th>Short URL</th>
     </tr>
   </thead>
   <tbody>
@@ -44,8 +42,8 @@
   </tbody>
 </table>
 
-<p><?php echo __('BOOKMARKLET_DESCRIPTION'); ?>:</p>
+<hr />
 
-<a href="javascript:void(window.open(location.href='<?php echo sfConfig::get('app_settings_short_url'); ?>/?url='+encodeURIComponent(location.href)));" class="bookmarklet" title="Drag this on your browser's bookmark toolbar">yiid this!</a>
+<p>Drag this link to your bookmarks-bar to shorten every link you like: <a href="javascript:void(window.open(location.href='<?php echo sfConfig::get('app_settings_short_url'); ?>/?url='+encodeURIComponent(location.href)));" class="bookmarklet" title="Drag this on your browser's bookmark toolbar">yiid this!</a><p>
 
 <small class="subline">The best friend of <?php echo link_to('brrr.at', 'http://www.brrr.at'); ?></small>

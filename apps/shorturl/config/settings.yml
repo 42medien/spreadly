@@ -3,7 +3,7 @@
 
 prod:
   .settings:
-    no_script_name:         true
+    no_script_name:         false
     logging_enabled:        false
 
 dev:
@@ -26,7 +26,7 @@ all:
   .settings:
     # Form security secret  (CSRF protection)
     csrf_secret:            16575218ebe0be6e71b177fe30a9d99711e140e4
-    enabled_modules:        [general]    
+    enabled_modules:        [general]
 
     standard_helpers:       [Cdn, I18N, Partial]
     # Output escaping settings
@@ -35,7 +35,7 @@ all:
 
     # Enable the database manager
     use_database:           true
-    
+
     charset:                utf-8
-    i18n:                   on  
+    i18n:                   on
     compressed:             on

@@ -29,16 +29,6 @@ class indexActions extends sfActions
           $lShortUrl = $this->form->save();
           $this->shortUrl = $lShortUrl->getShortedUrl();
         }
-
-        // add short_url_con
-        if ($lUser = $this->getUser()->getUser()) {
-          $lShortUrl->addUser($lUser->getId());
-
-          // throw out an activity
-          if ($request->getParameter('add_activity') === "on") {
-            sfContext::getInstance()->getEventDispatcher()->notify(new ActivityEvent($lShortUrl, 'init_save_activity', ActivityObjectBookmark::VERB_SHARE, $lUser->getId()));
-          }
-        }
       }
     } elseif ($request->getParameter('url')) {
       $this->form->bind(array('url' => $request->getParameter('url')));
