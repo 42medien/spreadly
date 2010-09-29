@@ -2,6 +2,7 @@
 <?php if(count($pActivities) > 0) { ?>
 	<?php foreach ($pActivities as $lActivity) { ?>
 	<?php $lUser = UserTable::getInstance()->retrieveByPK($lActivity->getUId()); ?>
+	  <?php if ($lUser) { ?>
 	  <li class="clearfix">
 	    <div class="so_share_image left">
 	      <?php echo avatar_tag($lUser->getDefaultAvatar(), 30, array('alt' => $lUser->getFullname(), 'class' => '', 'rel' => '')); ?>
@@ -34,6 +35,7 @@
 	      <?php } ?>
 	    </div>
 	  </li>
+	  <?php } ?>
 	<?php } ?>
 <?php } else { ?>
   <li class="clearfix">
