@@ -117,12 +117,12 @@ class UserTable extends Doctrine_Table {
   /**
    *
    * count hottest users only, if active within last 30 days
-   * @param array $pFriendIds
-   * @param int $pPage
-   * @param int $pLimit
+   * @param int $pUserId
    * @author weyandch
    */
-  public static function countHottestUsers($pFriendIds = array()) {
+  public static function countHottestUsers($pUserId) {
+    $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
+
     if(empty($pFriendIds)) {
       return 0;
     }
@@ -180,13 +180,13 @@ class UserTable extends Doctrine_Table {
    * returns count of $pLimit
    *
    * @author weyandch
-   * @param array $pFriendIds
-   * @param integer $pLimit
-   * @param integer $pPage
-   * @return Doctrine_Collection
+   * @param int $pUserId
+   * @return int
    *
    */
-  public static function countUsersAlphabetically($pFriendIds) {
+  public static function countUsersAlphabetically($pUserId) {
+    $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
+
     if(empty($pFriendIds)) {
       return 0;
     }
