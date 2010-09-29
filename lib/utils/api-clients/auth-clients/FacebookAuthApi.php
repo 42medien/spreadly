@@ -43,14 +43,13 @@ class FacebookAuthApiClient extends AuthApi {
     // ask for online identity
     $lOnlineIdentity = OnlineIdentityTable::retrieveByAuthIdentifier($lIdentifier);
 
-    $lUser = null;
-
     // check if user already exists
     if ($lOnlineIdentity) {
       $lUser = $lOnlineIdentity->getUser();
     } else {
       // check online identity
       $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lJsonObject->link, $this->aCommunityId);
+      $lUser = new User();
     }
 
     if (!$lUser || !$lUser->getId()) {

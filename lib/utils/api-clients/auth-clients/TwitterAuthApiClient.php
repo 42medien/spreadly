@@ -42,20 +42,17 @@ class TwitterAuthApiClient extends AuthApi {
     // ask for online identity
     $lOnlineIdentity = OnlineIdentityTable::retrieveByAuthIdentifier($lIdentifier);
 
-    $lUser = null;
-
     // check if user already exists
     if ($lOnlineIdentity) {
       $lUser = $lOnlineIdentity->getUser();
     } else {
       // check online identity
       $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lParamsArray['screen_name'], $this->aCommunityId);
+      // generate empty user
+      $lUser = new User();
     }
 
     if (!$lUser || !$lUser->getId()) {
-      // generate empty user
-      $lUser = new User();
-
       // get api informations
       $lJson = OAuthClient::get($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "http://api.twitter.com/1/users/show.json?user_id=".$lParamsArray['user_id']);
       $lJsonObject = json_decode($lJson);
