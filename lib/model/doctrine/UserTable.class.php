@@ -148,7 +148,7 @@ class UserTable extends Doctrine_Table {
     // today minus 30 days
     ->andWhere('u.last_activity > ?', $lTimeLimit)
     // now sort by hot
-    ->orderBy('u.last_activity');
+    ->orderBy('u.last_activity DESC');
 
     return $lQuery;
   }
@@ -164,7 +164,7 @@ class UserTable extends Doctrine_Table {
    * @return Doctrine_Collection
    *
    */
-  public static function getUsersAlphabetically($pFriendIds, $pPage = 1, $pLimit = 5) {
+  public static function getUsersAlphabetically($pFriendIds, $pPage = 1, $pLimit = 10) {
     if(empty($pFriendIds)) {
       return false;
     }
