@@ -274,6 +274,7 @@ class OnlineIdentityTable extends Doctrine_Table {
     ->where('oi.user_id IS NOT NULL')
     ->leftJoin('oi.Community c')
     ->andWhere('c.social_publishing_possible = ?', 1)
+    ->limit($pLimit)
     ->orderBy('oi.last_friend_refresh ASC');
 
     $lOis = $q->execute(array(),  Doctrine_Core::HYDRATE_NONE);
