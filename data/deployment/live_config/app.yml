@@ -2,7 +2,7 @@
 # default values
 all:
   release:
-    name:     '20100915'
+    name:     '20100930'
  #   revision: '20100621/'   ## current revision
     gzip:     0              ## set 1 to force local gz support
 
@@ -67,8 +67,8 @@ all:
 
   mongodb:
     host:                 'donkeykong'
-    database_name:        'yiid_staging'
-    database_name_stats:  'yiid_staging_stats'
+    database_name:        'yiid'
+    database_name_stats:  'yiid_stats'
 
   amazons3:
     access_key:  'AKIAJ5NSA6ET5RC4AMXQ'
