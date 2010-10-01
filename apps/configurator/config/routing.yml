@@ -1,3 +1,15 @@
+register:
+  url: /register
+  param: { module: auth, action: register }
+  
+signin:
+  url: /signin
+  param: { module: auth, action: signin }
+  
+forgot_password:
+  url: /password
+  param: { module: auth, action: forgot_password }
+
 publishers:
   url:   /publishers
   param: { module: likebutton, action: publishers }

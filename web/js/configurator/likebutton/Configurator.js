@@ -43,6 +43,7 @@ var Configurator = {
 	 * @param string pCulture (current user culture)
 	 */
   init: function(pCulture) {
+  	Configurator.toggleAreas();
     Configurator.bindClicks();
     Configurator.initFormFields();
     if (typeof(document.likebuttonform) !=  "undefined"){
@@ -345,5 +346,15 @@ var Configurator = {
       	return false;
       }
     });
+  },
+  
+  toggleAreas: function() {
+  	jQuery('.toggle-benefits').live('click', function() {
+  		var id = this.id;
+  		
+  		jQuery('#benefits_'+id).toggle();
+  		
+  		return false;
+  	});
   }
 };

@@ -5,9 +5,91 @@
 ul{list-style-type:none;margin:0;padding:0;}
 blockquote{margin:0;padding:0}
 
+.normal_list{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.normal_list li{
+  margin: 0;
+  padding: 0;
+}
+.hide{
+  display: none;
+}
+.half{
+  width: 45%;
+}
+
+.headline_text_big{
+  font-size: 18px;
+}
+.headline_text_small{
+  font-size: 14px;
+}
 #branding, #nav_main, #content, #nav_supp{margin:0 auto;width:960px;}
 #branding{height:76px;}
+#branding_left{
+  width: 160px;
+  height: 76px;
+}
+#branding_middle{
+  width: 660px;
+  height: 66px;
+  padding: 10px 20px 0;
+}
+#branding_right{
+  width: 100px;
+  height: 76px;
+  text-align: right;
+}
+#nav_wave_right{
+  background-color: #ebebeb;
+  border-top:2px solid #e0e0e0;
+  border-bottom:2px solid #e0e0e0;
+  border-right:2px solid #e0e0e0;
+  height: 27px;
+  width: 539px;
+  line-height: 27px;
+}
+#signin_form input{
+  width: 120px;
+  height: 13px;
+  line-height: 13px;
+  font-size: 11px;
+}
+#signin_form input[type=submit] {
+  width: 60px;
+  height: 22px;
+}
+.navigation_text{
+  font-size: 12px;
+}
+#nav_register {
+  padding-left: 10px;
+}
+#nav_forgot_pw{
+  padding-left: 20px;
+}
 #nav_main{height:31px;}
+#navigation_benefits{
+  margin-top: 50px;
+}
+#benefits_general_left,
+#benefits_publishers_left,
+#benefits_merchant_left,
+#benefits_nonprofits_left{
+  margin-right: 5%;
+}
+#benefits_general_area,
+#benefits_publishers_area,
+#benefits_merchant_area,
+#benefits_nonprofits_area{
+  display: none;
+}
+.grey_head{
+  margin-top: 0;
+}
 
 .icon_language_select{padding: 0px 6px;}
 #language_selecten_icon_de_active{background: transparent url("/img/global/flags/de.gif") 0 3px no-repeat;}
@@ -21,7 +103,7 @@ blockquote{margin:0;padding:0}
 #nav_wave_left{width:367px;height:31px;}
 #nav_wave_middle{width:52px;height:31px;}
 #nav_main ul{width:540px;border-right:1px solid #d8d8d8;}
-#nav_wave_left, #nav_wave_middle, #nav_main ul,#nav_main li, #content_main, #content_sub, #desc_left, #desc_right, #desc_left li{float:left;}
+#nav_wave_left, #nav_wave_middle, #nav_main ul,#nav_main li, #content_main, #content_sub, #desc_left, #desc_right{float:left;}
 #nav_main li{padding: 0 10px;margin:0 3px;border-left:1px solid #d8d8d8;border-right:1px solid #d8d8d8;height:27px;}
 #nav_main_first{border-left: none !important;}
 #nav_main_last{border-right: none !important;}
@@ -36,12 +118,13 @@ blockquote{margin:0;padding:0}
 #testimonial{width:300px;padding:10px 20px;}
 #desc_left{width: 380px;margin-right:45px;}
 #desc_right{width: 450px;}
-#desc_left ul{margin:0 auto;width:300px;}
-#desc_left ul li{width:125px;margin:0px 20px 25px 0;}
+p.list_headline{
+  margin-bottom: 0;
+}
 
 #content h1{padding: 0 5px;margin:30px 0 0 0;}
-#content ul{padding:10px 0;}
-#content li{margin-left: 40px;margin-bottom:3px;}
+#content ul, .benefits ul{padding:10px 0;}
+#content li, .benefits li{margin-left: 40px;margin-bottom:3px;}
 #yiid_slogan p{width:300px;margin-top:0;}
 
 #button_desc{width:347px;padding: 5px 15px;margin-top:10px;}
@@ -72,17 +155,17 @@ blockquote{margin:0;padding:0}
 .green_head_part3{width: 46px;position: absolute;top:0;}
 .green_head_part4{width: 35px;position: absolute;top:0;right:0;}
 
-.grey_head{height: 26px;position:relative;}
+.grey_head{height: 26px;position:relative;width: 100%;}
 .grey_head div{height: 26px;}
 .grey_head_part1{width: 6px;position: absolute;left:0;top:0;}
 .grey_head_part2{line-height: 27px;position: absolute;left:6px;top:0;text-align: center;}
 .grey_head_part3{width: 54px;position: absolute;top:0;}
 .grey_head_part4{width: 34px;position: absolute;top:0;right:0;}
 
-.description_box_head{width: 583px;}
-.description_box{width: 580px;}
+.description_box_head{}
+.description_box{}
 .description_box p, .small_box p{margin: 0;padding: 10px;}
-.description_box ul{width: 560px;}
+.description_box ul{width: 95%;}
 
 .small_box_head{width: 402px;}
 .small_box{width: 400px;}
@@ -123,17 +206,23 @@ body{background-color: #fff;color:#868686;}
 a, a:link, a:hover{color:#69BC50;}
 #nav_wave_right a{color:#868686;}
 #likebutton-form-table input, #likebutton-form-table select{color:#868686;}
-#branding{background: url("/img/sprites/sprite_configurator.png") 0 0 no-repeat;}
-#nav_wave_left{background: url("/img/sprites/sprite_configurator.png") 0 -107px repeat-x;}
-#nav_wave_middle{background: url("/img/sprites/sprite_configurator.png") 0 -192px no-repeat;}
-#nav_main ul{background-color: #ebebeb;border-top:2px solid #e0e0e0;border-bottom:2px solid #e0e0e0;}
+#branding{
+  background: url("/img/sprites/sprite_configurator.png") 0 0 no-repeat;
+}
+
+#nav_wave_left{
+  background: url("/img/sprites/sprite_configurator.png") 0 -107px repeat-x;
+}
+#nav_wave_middle{
+  background: url("/img/sprites/sprite_configurator.png") 0 -192px no-repeat;
+}
 #nav_supp{background-color: #69bc50;}
 #nav_supp a{background: transparent url("/img/sprites/sprite_configurator.png") 0 -273px no-repeat;}
 #nav_supp_first{background: none !important;}
 #content_top, #testimonial{background-color: #ffffff;border:1px solid #d3d3d3;border-radius: 0.3em;-moz-border-radius: 0.3em;-webkit-border-radius: 0.3em;}
 a.color_light, p.color_light, div.color_light, ul.color_light, .button_inner:hover, #nav_supp a, #content h1, #button-likebutton{color:#fff;}
 .content_list{background-color: #fafafa;border-left: 1px solid #eeeeee;border-right: 1px solid #eeeeee;border-bottom: 1px solid #eeeeee;border-radius: 0 0 0.3em 0.3em;-moz-border-radius:0 0 0.3em 0.3em;-webkit-border-radius:0 0 0.3em 0.3em;}
-#content li{list-style-image: url("/img/global/content_main_list_element.png");}
+#content li, .benefits li{list-style-image: url("/img/global/content_main_list_element.png");}
 #yiid_slogan{background: transparent url("/img/sprites/sprite_configurator.png") 382px -1512px no-repeat;}
 #button_desc{background-color: #ebebeb;border: 1px solid #dedede;}
 #conf_content{background-color: #e6e6e6;border:1px solid #d3d3d3;border-top:none;border-radius: 0 0 0.3em 0.3em;-moz-border-radius: 0 0 0.3em 0.3em;-webkit-border-radius: 0 0 0.3em 0.3em;}
@@ -184,12 +273,12 @@ body{font-size:16px;line-height:24px;font-family: arial, helvetica, sans-serif;}
 .big_size{font-size: 14px;}
 #nav_main li, #nav_supp a{font-size: 11px;line-height:27px;font-weight:normal;}
 #nav_main li, #nav_supp a, #button-likebutton{cursor: pointer;}
-#content li, #content h1, #button_desc, #desc_left, #desc_right{font-size: 14px;}
+#content li, #content h1, #button_desc, #desc_left, #desc_right, .benefits li{font-size: 14px;}
 .important_text, #nav_main li, .important-text, #conf_head, #button-likebutton{font-weight: bold;}
 .underlined_text, #nav_supp a:hover, #nav_main li:hover, #button-likebutton:hover, a:hover{text-decoration: underline;}
 .slogan{font-size: 22px;line-height: 30px;}
-#content li{line-height: 20px;}
 #button_desc, h3{line-height: 18px;}
+#content li, .benefits li{line-height: 20px;}
 #button-likebutton, #desc_left, #desc_right{line-height: 22px;}
 h3, #likebutton-form-table, .likebutton_t, #likebutton_l{font-size: 12px;}
 #likebutton-form-table input{font-size:11px;}
