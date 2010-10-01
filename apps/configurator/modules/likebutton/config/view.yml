@@ -2,7 +2,7 @@ all:
   stylesheets:
   
 indexSuccess:
-  layout: layout_twocol
+  layout: layout
   components:
     content_top: [likebutton, description]
     content_sub: [likebutton, configurator]

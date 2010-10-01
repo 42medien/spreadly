@@ -1,15 +1,55 @@
-<?php use_helper('Headline'); ?>
-
-<div id="yiid_slogan">
-  <p class="slogan"><?php echo __('YIID_IT_SLOGAN', null, 'configurator'); ?></p>
+<div id="main_area" class="clearfix">
+  <div id="main_area_navigation" class="clearfix">
+    <ul>
+      <li><?php echo __('Choose Application'); ?></li>
+      <li><?php echo __('Choose Style'); ?></li>
+      <li><?php echo __('Get Code'); ?></li>
+      <li><?php echo __('Claim Your Site'); ?></li>
+    </ul>
+  </div>
+  
+  <div id="main_area_content" class="clearfix">
+    <div class="one_quarter left">
+      <ul>
+        <li>
+          <a href="#" id="anywebsite_icon"><?php echo __('Any Website'); ?></a>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="three_quarter left">
+      <ul>
+        <li>
+          <a href="#" id="wordpress_icon">Wordpress</a>
+        </li>
+        <li>
+          <a href="#" id="blogger_icon">Blogger.com</a>
+        </li>
+        <li>
+          <a href="#" id="tumblr_icon">Tumblr</a>
+        </li>
+        <li>
+          <a href="#" id="posterous_icon">Posterous</a>
+        </li>
+        <li>
+          <a href="#" id="magento_icon">Magento</a>
+        </li>
+        <li>
+          <a href="#" id="typo3_icon">Typo3</a>
+        </li>
+        <li>
+          <a href="#" id="drupal_icon">Drupal</a>
+        </li>
+        <li>
+          <a href="#" id="joomla_icon">Joomla</a>
+        </li>
+        <li>
+          <a href="#" id="mediawiki_icon">MediaWiki</a>
+        </li>
+        <li>
+          <a href="#" id="textpattern_icon">Textpattern</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
-
-<?php echo grey_headline(__('BENEFITS_OWNERS_HEADLINE', null, 'configurator'), 30, 68); ?>
-<ul class="content_list">
-  <?php echo __('BENEFITS_OWNERS_LIST', null, 'configurator'); ?>
-</ul>
-
-<?php echo grey_headline(__('BENEFITS_VISITORS_HEADLINE', null, 'configurator'), 30, 68); ?>
-<ul class="content_list">
-  <?php echo __('BENEFITS_VISITORS_LIST', null, 'configurator'); ?>
-</ul>

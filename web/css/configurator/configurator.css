@@ -17,9 +17,9 @@ blockquote{margin:0;padding:0}
 .hide{
   display: none;
 }
-.half{
-  width: 45%;
-}
+.half{width: 45%;}
+.one_quarter{width: 20%;}
+.three_quarter{width: 70%;}
 
 .headline_text_big{
   font-size: 18px;
@@ -53,10 +53,11 @@ blockquote{margin:0;padding:0}
   line-height: 27px;
 }
 #signin_form input{
-  width: 120px;
+  width: 114px;
   height: 13px;
   line-height: 13px;
   font-size: 11px;
+  padding: 0 3px;
 }
 #signin_form input[type=submit] {
   width: 60px;
@@ -89,6 +90,14 @@ blockquote{margin:0;padding:0}
 }
 .grey_head{
   margin-top: 0;
+}
+
+#main_area_navigation ul li{
+  float: left;
+}
+
+#main_area{
+  margin: 15px 0 20px;
 }
 
 .icon_language_select{padding: 0px 6px;}
@@ -219,7 +228,7 @@ a, a:link, a:hover{color:#69BC50;}
 #nav_supp{background-color: #69bc50;}
 #nav_supp a{background: transparent url("/img/sprites/sprite_configurator.png") 0 -273px no-repeat;}
 #nav_supp_first{background: none !important;}
-#content_top, #testimonial{background-color: #ffffff;border:1px solid #d3d3d3;border-radius: 0.3em;-moz-border-radius: 0.3em;-webkit-border-radius: 0.3em;}
+#content_top, #testimonial, #main_area{background-color: #ffffff;border:1px solid #d3d3d3;border-radius: 0.3em;-moz-border-radius: 0.3em;-webkit-border-radius: 0.3em;}
 a.color_light, p.color_light, div.color_light, ul.color_light, .button_inner:hover, #nav_supp a, #content h1, #button-likebutton{color:#fff;}
 .content_list{background-color: #fafafa;border-left: 1px solid #eeeeee;border-right: 1px solid #eeeeee;border-bottom: 1px solid #eeeeee;border-radius: 0 0 0.3em 0.3em;-moz-border-radius:0 0 0.3em 0.3em;-webkit-border-radius:0 0 0.3em 0.3em;}
 #content li, .benefits li{list-style-image: url("/img/global/content_main_list_element.png");}

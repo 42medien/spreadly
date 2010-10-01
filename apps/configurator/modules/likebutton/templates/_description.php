@@ -1,3 +1,5 @@
+<?php use_helper('Headline'); ?>
+
 <div id="desc_left">
   <p class="important-text"><?php echo __('YIID_IT_DESCRIPTION_1', null, 'configurator'); ?></p>
   
