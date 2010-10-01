@@ -34,6 +34,15 @@ class TwitterImportClient {
     $lFriendcount = count($lJsonObject);
     $lRounds = ceil($lFriendcount/100);
 
+    /**
+     * dirty hack
+     *
+     * @todo implement better solution
+     */
+    if ($lRounds > 7) {
+      $lRounds = 7;
+    }
+
     // iterate through the results
     for ($i = 0; $i < $lRounds; $i++) {
       $lOffset = $i;

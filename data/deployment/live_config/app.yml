@@ -32,6 +32,8 @@ all:
     environment:       'live'
     dev:               0
     pager:             20
+    
+    filtered_parameters: [zanpid]  #for cleaning up urls
 
   image_sizes:
     avatar: ['16x16', '30x30', '48x48', '140x140']  #height x width

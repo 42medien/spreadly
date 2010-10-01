@@ -32,6 +32,7 @@ all:
     environment:      'dev'
     dev:              1
     pager:            20
+    filtered_parameters: [zanpid]  #for cleaning up urls
 
     fcgi_host:      localhost
     fcgi_port:      8002

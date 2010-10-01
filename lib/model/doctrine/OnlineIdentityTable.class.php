@@ -272,6 +272,7 @@ class OnlineIdentityTable extends Doctrine_Table {
     ->from('OnlineIdentity oi')
     ->select('oi.id')
     ->where('oi.user_id IS NOT NULL')
+    ->andWhere('oi.social_publishing_enabled = ?', 1)
     ->leftJoin('oi.Community c')
     ->andWhere('c.social_publishing_possible = ?', 1)
     ->limit($pLimit)

@@ -52,6 +52,9 @@ class authActions extends sfActions {
       // try to sign in and redirect him to the stream
       $this->getUser()->signIn($lUser);
 
+      $lOnlineIdenities = OnlineIdentityTable::getPublishingEnabledByUserId($lUser->getId());
+      CookieUtils::generateWidgetIdentityCookie($lOnlineIdenities);
+
       // migrate if not already done
       if ($lUser->getDone() != 1) {
         UserRelationTable::doIdentityMigration($lUser->getId());

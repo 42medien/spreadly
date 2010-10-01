@@ -37,6 +37,8 @@ all:
     fcgi_host:      localhost
     fcgi_port:      8002
     fcgi_pathtobatch: '/home/localadm/yiid_batch'
+    
+    filtered_parameters: [zanpid]  #for cleaning up urls
 
   image_sizes:
     avatar: ['16x16', '30x30', '48x48', '140x140']  #height x width

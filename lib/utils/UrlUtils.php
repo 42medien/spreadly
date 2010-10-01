@@ -223,7 +223,7 @@ class UrlUtils {
       }
     }
   }
-  
+
   /**
    * build the short url of an url
    *
@@ -645,6 +645,7 @@ class UrlUtils {
       $pQueryString .= $parameterList['path'];
     }
     if (isset($parameterList['query'])) {
+      $lGetParams = array();
       parse_str($parameterList['query'], $lGetParams);
       $parameterList['params'] = array_diff_key($lGetParams, array_fill_keys($lKeysToRemove, 0));
       $pQueryString .= (!empty($parameterList['params']))?'?'.http_build_query($parameterList['params']):'';
