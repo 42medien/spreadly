@@ -3,10 +3,10 @@
   
   <p class="list_headline important_text" id="navigation_benefits"><?php echo __("What's the benefits for me"); ?></p>
   <ul id="benefits" class="normal_list">
-    <li><?php echo link_to(__(".. in general?"), '/', array('class' => 'toggle-benefits', 'id' => 'general_area')); ?></li>
-    <li><?php echo link_to(__(".. as a publisher?"), '/', array('class' => 'toggle-benefits', 'id' => 'publishers_area')); ?></li>
-    <li><?php echo link_to(__(".. as a merchant?"), '/', array('class' => 'toggle-benefits', 'id' => 'merchant_area')); ?></li>
-    <li><?php echo link_to(__(".. as a non-profit organization?"), '/', array('class' => 'toggle-benefits', 'id' => 'nonprofits_area')); ?></li>
+    <li class="important_text"><?php echo link_to(__(".. in general?"), '/', array('class' => 'toggle-benefits', 'id' => 'general_area')); ?></li>
+    <li class="important_text"><?php echo link_to(__(".. as a publisher?"), '/', array('class' => 'toggle-benefits', 'id' => 'publishers_area')); ?></li>
+    <li class="important_text"><?php echo link_to(__(".. as a merchant?"), '/', array('class' => 'toggle-benefits', 'id' => 'merchant_area')); ?></li>
+    <li class="important_text"><?php echo link_to(__(".. as a non-profit organization?"), '/', array('class' => 'toggle-benefits', 'id' => 'nonprofits_area')); ?></li>
   </ul>
 </div>
 
