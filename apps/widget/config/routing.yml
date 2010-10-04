@@ -27,28 +27,50 @@ settings:
   url:    /popup/settings
   param:  { module: popup, action: settings }
 
-add_service:
+signout:
+  url:    /signout
+  param:  { module: auth, action: signout }
+
+# popup auth
+popup_add_service:
   url:    /popup/add_service
   param:  { module: auth, action: add_service }
 
-signin:
+popup_signin:
   url:    /popup/signin
   param:  { module: auth, action: signin }
 
-signout:
-  url:    /popup/signout
-  param:  { module: auth, action: signout }
-
-confirm_signin:
+popup_confirm_signin:
   url:    /popup/confirm_signin/*
   param:  { module: auth, action: confirm_signin }
 
-complete_signin:
+popup_complete_signin:
   url:    /popup/complete_signin/*
   param:  { module: auth, action: complete_signin }
 
-signinto:
+popup_signinto:
   url:   /popup/signinto/*
+  param: { module: auth, action: signinto }
+
+# static auth
+static_add_service:
+  url:    /static/add_service
+  param:  { module: auth, action: add_service }
+
+static_signin:
+  url:    /static/signin
+  param:  { module: auth, action: signin }
+
+static_confirm_signin:
+  url:    /static/confirm_signin/*
+  param:  { module: auth, action: confirm_signin }
+
+static_complete_signin:
+  url:    /static/complete_signin/*
+  param:  { module: auth, action: complete_signin }
+
+static_signinto:
+  url:   /static/signinto/*
   param: { module: auth, action: signinto }
 
 like:

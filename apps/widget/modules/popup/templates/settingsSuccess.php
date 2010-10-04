@@ -27,8 +27,8 @@
     <p><?php echo __('CURRENT_NETWORKS', null, 'widget'); ?></p>
 
     <ul class="normal_list" id="services_to_choose">
-      <li><a id="choose_facebook" href="<?php echo url_for("@signinto?service=facebook", true); ?>">Facebook</a></li>
-      <li><a id="choose_twitter" href="<?php echo url_for("@signinto?service=twitter", true); ?>">Twitter</a></li>
+      <li><a id="choose_facebook" href="<?php echo url_for("@popup_signinto?service=facebook", true); ?>">Facebook</a></li>
+      <li><a id="choose_twitter" href="<?php echo url_for("@popup_signinto?service=twitter", true); ?>">Twitter</a></li>
     </ul>
 
     oder <a href="#"  id="cancel-link"><?php echo __('CANCEL', null, 'widget'); ?></a>

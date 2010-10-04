@@ -22,18 +22,11 @@ class authActions extends sfActions {
 
     sfProjectConfiguration::getActive()->loadHelpers('I18N');
     $this->getUser()->setFlash('headline', __('SETTINGS', null, 'widget'));
-
-
-    /* Uncomment for displaying error
-     $this->getUser()->setFlash('headline', 'Login');
-     $this->getUser()->setFlash('error', 'You have been logged out.');
-     $this->getUser()->setFlash('error_msg', 'Please choose the same service you have used the last time to log in again.');
-     */
   }
 
   public function executeSignout(sfWebRequest $request) {
     $this->getUser()->signOut();
-    $this->redirect('@signin');
+    $this->redirect('@popup_signin');
   }
 
   public function executeSigninto(sfWebRequest $request) {
@@ -42,7 +35,7 @@ class authActions extends sfActions {
       $lObject = AuthApiFactory::factory($lService);
       $lObject->doAuthentication();
     } else {
-      $this->redirect('@signin');
+      $this->redirect('@popup_signin');
     }
   }
 
