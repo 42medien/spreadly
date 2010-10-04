@@ -9,6 +9,6 @@
   </div>
   
   <div id="main_area_content" class="clearfix">
-    <?php include_partial('likebutton/choose_style'); ?>
+    <?php include_partial('likebutton/choose_app'); ?>
   </div>
 </div>

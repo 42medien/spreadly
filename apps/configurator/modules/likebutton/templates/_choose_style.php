@@ -26,6 +26,7 @@
 	      </div>
 		  </div>
 			
+			<br/>
 			<h3><?php echo __('Small Size'); ?></h3>
 	    
 	    <div class="clearfix">

@@ -50,6 +50,7 @@ var Yiidit = {
         success: function (response) {
   				jQuery('#main_area_content').empty();
   				jQuery('#main_area_content').html(response.html);
+  				jQuery('#nav_choose_style').addClass('active');
         }
       });
   		
