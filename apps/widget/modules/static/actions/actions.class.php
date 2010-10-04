@@ -22,4 +22,7 @@ class staticActions extends sfActions
 
   public function executeSignin(sfWebRequest $request) {
   }
+
+  public function executeLike(sfWebRequest $request){
+  }
 }
