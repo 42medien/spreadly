@@ -29,27 +29,27 @@ settings:
 
 add_service:
   url:    /popup/add_service
-  param:  { module: popup, action: add_service }
+  param:  { module: auth, action: add_service }
 
 signin:
   url:    /popup/signin
-  param:  { module: popup, action: signin }
+  param:  { module: auth, action: signin }
 
 signout:
   url:    /popup/signout
-  param:  { module: popup, action: signout }
+  param:  { module: auth, action: signout }
 
 confirm_signin:
   url:    /popup/confirm_signin/*
-  param:  { module: popup, action: confirm_signin }
+  param:  { module: auth, action: confirm_signin }
 
 complete_signin:
   url:    /popup/complete_signin/*
-  param:  { module: popup, action: complete_signin }
+  param:  { module: auth, action: complete_signin }
 
 signinto:
   url:   /popup/signinto/*
-  param: { module: popup, action: signinto }
+  param: { module: auth, action: signinto }
 
 like:
   url:   /api/like/*
@@ -65,17 +65,15 @@ default_index:
 
 default:
   url:   /:module/:action/*
-  
+
 load_friends:
   url:   /widget/load_friends/*
-  param: {module: widget, action: load_friends }  
-  
+  param: {module: widget, action: load_friends }
+
 static_signin:
   url:    /static/signin
   param:  { module: static, action: signin }
-  
+
 static_like:
   url:    /static/like/*
-  param:  { module: static, action: like }  
-
-
+  param:  { module: static, action: like }
