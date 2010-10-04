@@ -34,44 +34,45 @@ signout:
 # popup auth
 popup_add_service:
   url:    /popup/add_service
-  param:  { module: auth, action: add_service }
+  param:  { module: auth, action: add_service, widgetcontext: popup }
 
 popup_signin:
   url:    /popup/signin
-  param:  { module: auth, action: signin }
+  param:  { module: auth, action: signin, widgetcontext: popup }
 
 popup_confirm_signin:
   url:    /popup/confirm_signin/*
-  param:  { module: auth, action: confirm_signin }
+  param:  { module: auth, action: confirm_signin, widgetcontext: popup }
 
 popup_complete_signin:
   url:    /popup/complete_signin/*
-  param:  { module: auth, action: complete_signin }
+  param:  { module: auth, action: complete_signin, widgetcontext: popup }
 
 popup_signinto:
   url:   /popup/signinto/*
-  param: { module: auth, action: signinto }
+  param: { module: auth, action: signinto, widgetcontext: popup }
 
 # static auth
 static_add_service:
   url:    /static/add_service
-  param:  { module: auth, action: add_service }
+  param:  { module: auth, action: add_service, widgetcontext: static }
 
 static_signin:
   url:    /static/signin
-  param:  { module: auth, action: signin }
+  param:  { module: auth, action: signin, widgetcontext: static }
 
 static_confirm_signin:
   url:    /static/confirm_signin/*
-  param:  { module: auth, action: confirm_signin }
+  param:  { module: auth, action: confirm_signin, widgetcontext: static }
 
 static_complete_signin:
   url:    /static/complete_signin/*
-  param:  { module: auth, action: complete_signin }
+  param:  { module: auth, action: complete_signin, widgetcontext: static }
 
 static_signinto:
   url:   /static/signinto/*
-  param: { module: auth, action: signinto }
+  param: { module: auth, action: signinto, widgetcontext: static }
+# end auth
 
 like:
   url:   /api/like/*
