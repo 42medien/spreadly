@@ -28,7 +28,7 @@
     
     <script type="text/javascript">
       jQuery(document).ready( function() {
-        Configurator.init("<?php echo $sf_user->getCulture(); ?>");
+        Yiidit.init("<?php echo $sf_user->getCulture(); ?>");
       });
     </script>
   </body>
