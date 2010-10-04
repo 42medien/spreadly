@@ -162,4 +162,18 @@ class likebuttonActions extends sfActions
     
     return $this->renderText(json_encode($lReturn));
   }
+  
+  /**
+   * sends the choose_style partial as json
+   * 
+   * @author Christian Schätzle
+   * @param sfWebRequest $request
+   */
+  public function executeGet_choose_style(sfWebRequest $request) {
+    $this->getResponse()->setContentType('application/json');
+    
+    $lReturn['html'] = $this->getPartial('likebutton/choose_style');
+    
+    return $this->renderText(json_encode($lReturn));
+  }
 }
