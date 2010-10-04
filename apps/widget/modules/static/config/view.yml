@@ -1,3 +1,7 @@
 all:
   stylesheets:
   javascripts:
+  
+likeSuccess:
+  components:
+    content_supp: [popup, welcome_user]
