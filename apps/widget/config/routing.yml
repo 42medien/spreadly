@@ -68,6 +68,14 @@ default:
   
 load_friends:
   url:   /widget/load_friends/*
-  param: {module: widget, action: load_friends }    
+  param: {module: widget, action: load_friends }  
+  
+static_signin:
+  url:    /static/signin
+  param:  { module: static, action: signin }
+  
+static_like:
+  url:    /static/like/*
+  param:  { module: static, action: like }  
 
 
