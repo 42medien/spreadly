@@ -37,7 +37,7 @@ class apiActions extends sfActions {
     }
 
     $this->lIdentitysSent = explode(',',$request->getParameter('serv'));
-    if (empty($this->lIdentitysSent)) {
+    if (trim($request->getParameter('serv')) == '' || empty($this->lIdentitysSent)) {
       $this->status = 450;
       $this->success = false;
     }

@@ -1,5 +1,6 @@
 /**
  * @combine configurator
+ * @combine likepopup
  */
 
 /*!

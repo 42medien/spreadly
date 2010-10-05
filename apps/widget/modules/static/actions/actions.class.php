@@ -25,8 +25,11 @@ class staticActions extends sfActions
 
   public function executeLike(sfWebRequest $request){
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('popup/js_popup_ready'));
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('static/js_init_static.js'));
 
-    $lUrl = $request->getParameter('url', 'http://www.stupidedia.org/stupi/Diverses:Tagebuch_einer_Fressmaschine');
+    $lUrl = $request->getParameter('url', 'http://www.affen.de');
+
+
     $lTitle = $request->getParameter('title', 'Tagebuch einer Fressmaschine');
     $lDescription = $request->getParameter('description', 'Eine Fressmaschine, [eng:Eatingmachine] ist eine Person die nur fressen kann. Ihm ist es zu verdanken, dass die Lebensmittelpreise stetig steigen, wegen seinem hohen Verbrauch');
     $lType = $request->getParameter('type', 'like');
@@ -66,7 +69,7 @@ class staticActions extends sfActions
     $this->pType = $lType;
 
     $lSocialObject = SocialObjectTable::retrieveByAliasUrl($lUrl);
-    $this->pIsUsed = 0;
+    $this->pIsUsed = false;
     if($lSocialObject) {
       $this->pIsUsed = YiidACtivityTable::isActionOnObjectAllowed($lSocialObject->getId(), $this->getUser()->getUserId());
     }

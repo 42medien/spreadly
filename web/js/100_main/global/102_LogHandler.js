@@ -1,5 +1,6 @@
 /**
  * @combine platform
+ * @combine likepopup
  */
 
 /*!

@@ -1,5 +1,6 @@
 /**
  * @combine platform
+ * @combine likepopup
  */
 
 /**
@@ -149,7 +150,45 @@ var Utils = {
 	    // PHP behavior, you would need to add ".replace(/~/g, '%7E');" to the following.
 	    return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').
 	                                                                    replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/%20/g, '+');
-	}
+	},
+	
+  /**
+   * returns a string imploded form the pieces array and separated with the given glue
+   * @author http://kevin.vanzonneveld.net
+   * @source http://www.phpjs.org
+   */
+  implode: function(glue, pieces) {
+    // http://kevin.vanzonneveld.net
+    // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+    // +   improved by: Waldo Malqui Silva
+    // +   improved by: Itsacon (http://www.itsacon.net/)
+    // +   bugfixed by: Brett Zamir (http://brett-zamir.me)
+    // *     example 1: implode(' ', ['Kevin', 'van', 'Zonneveld']);
+    // *     returns 1: 'Kevin van Zonneveld'
+    // *     example 2: implode(' ', {first:'Kevin', last: 'van Zonneveld'});
+    // *     returns 2: 'Kevin van Zonneveld'
+    
+    var i = '', retVal='', tGlue='';
+    if (arguments.length === 1) {
+        pieces = glue;
+        glue = '';
+    }
+    if (typeof(pieces) === 'object') {
+        if (pieces instanceof Array) {
+            return pieces.join(glue);
+        }
+        else {
+            for (i in pieces) {
+                retVal += tGlue + pieces[i];
+                tGlue = glue;
+            }
+            return retVal;
+        }
+    }
+    else {
+        return pieces;
+    }
+  }	
 };
 
 

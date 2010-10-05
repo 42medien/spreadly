@@ -1,5 +1,6 @@
 /**
  * @combine platform
+ * @combine likepopup
  */
 var i18n = {
   aVars: {},    
