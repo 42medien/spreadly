@@ -36,9 +36,15 @@ class apiActions extends sfActions {
       $this->success = false;
     }
 
+    $this->lIdentitysSent = explode(',',$request->getParameter('serv'));
+    if (empty($this->lIdentitysSent)) {
+      $this->status = 450;
+      $this->success = false;
+    }
+
     $this->lType = $request->getParameter('type');
     $this->lIdentitysOwnedByUser = UserIdentityConTable::getOnlineIdentityIdsForUser($this->getUser()->getUserId());
-    $this->lIdentitysSent = explode(',',$request->getParameter('serv'));
+
 
     $this->lTitle = $request->getParameter('title');
     $this->lDescription = $request->getParameter('description');
