@@ -19,6 +19,12 @@ class FacebookPostApiClient implements PostApiInterface {
    */
   public function doPost(OnlineIdentity $pOnlineIdentity, $pUrl, $pType, $pScore, $pTitle, $pDescription, $pPhoto) {
   	$lToken = AuthTokenTable::getByUserAndOnlineIdentity($pOnlineIdentity->getUserId(), $pOnlineIdentity->getId());
+  	if (!$lToken) {
+  	  $pOnlineIdentity->setSocialPublishingEnabled(false);
+  	  $pOnlineIdentity->save();
+      return false;
+  	}
+
     $lStatusMessage = PostApiUtils::generateMessage($pType, $pScore, $pTitle);
 
     $lPostBody = "access_token=".$lToken->getTokenKey()."&message=".$lStatusMessage;
@@ -27,7 +33,10 @@ class FacebookPostApiClient implements PostApiInterface {
       $lPostBody .= "&description=".$pDescription;
     }
     if ($pPhoto && $pPhoto != '') {
-      $lPostBody .= "&picture=".urlencode($pPhoto);
+      $pPhoto = UrlUtils::shortUrlExpander($pPhoto);
+      if ($pPhoto !== false) {
+        $lPostBody .= "&picture=".urlencode($pPhoto);
+      }
     }
     if ($pUrl) {
       $lPostBody .= "&link=".urlencode($pUrl);

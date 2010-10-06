@@ -36,6 +36,10 @@ if (isset($_GET['social']) && !empty($_GET['social'])) {
   $pSocialFeatures = false;
 }
 
+$pTitle = urldecode($_GET['title']);
+$pPhoto = urldecode($_GET['photo']);
+$pDescription = urldecode($_GET['description']);
+
 $pUserId = MongoSessionPeer::extractUserIdFromSession(LikeSettings::SF_SESSION_COOKIE);
 $lSocialObjectArray = SocialObjectPeer::getDataForUrl($pUrl);
 $lIsUsed = YiidActivityObjectPeer::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId);
@@ -57,10 +61,10 @@ YiidStatsSingleton::trackVisit($pUrl);
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Yiid it! Button</title>
-<script type="text/javascript" src="/js/100_main/include/Full-20100927.min.js"></script>
+<script type="text/javascript" src="/js/100_main/include/Full-20100930.min.js"></script>
 <script type="text/javascript">
   <?php echo printI18nJSObject($pType); ?>
-  YiidWidget.init("<?php echo $pUrl; ?>", "<?php echo $pType; ?>", "<?php echo urlencode($_GET['title']); ?>", "<?php echo urlencode($_GET['description']); ?>", "<?php echo urlencode($_GET['photo']); ?>");
+  YiidWidget.init("<?php echo urlencode($pUrl); ?>", "<?php echo $pType; ?>", "<?php echo urlencode($pTitle); ?>", "<?php echo urlencode($pDescription); ?>", "<?php echo urlencode($pPhoto); ?>");
   YiidWidget.aPopupPath = "<?php echo $lPopupUrl;  ?>";
   YiidRequest.aLikeAction = "<?php echo LikeSettings::JS_LIKE_PATH; ?>";
   YiidRequest.aDislikeAction = "<?php echo LikeSettings::JS_DISLIKE_PATH; ?>";

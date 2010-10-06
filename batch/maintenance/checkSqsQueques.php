@@ -15,12 +15,19 @@ $dbManager->loadConfiguration();
  **/
 
 
+/*$service = AmazonSQSUtils::initSqsService();
 $service = AmazonSQSUtils::initSqsService();
-//$queues = $service->listQueues();
-//print_r($queues);
+$service = AmazonSQSUtils::initSqsService();
+$service = AmazonSQSUtils::initSqsService();*/
+$service = AmazonSQSUtils::initSqsService();
+$queues = $service->listQueues();
+print_r($queues);
 
-  $dummy = $service->getQueueAttributes('SocialObjectParser-dev');
-  var_dump($dummy);
-  $dummy = $service->getQueueAttributes('SocialObjectParser-local');
+$dummy = $service->getQueueAttributes('SocialObjectParser-local');
   var_dump($dummy);
 
+
+/*  $dummy = $service->getQueueAttributes('SocialObjectParser-dev');
+  var_dump($dummy);
+
+*/

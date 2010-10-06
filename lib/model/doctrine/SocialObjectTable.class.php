@@ -63,6 +63,8 @@ class SocialObjectTable extends Doctrine_Table
       $pLongUrl = UrlUtils::cleanupHostAndUri($pLongUrl);
     }
 
+    // get it parsed baby!
+    AmazonSQSUtils::pushToQuque('SocialObjectParser', $pUrl);
 
     if ($pLongUrl && ($pLongUrl != $pUrl)) {
       $lSocialObject = self::retrieveByAliasUrl($pLongUrl);

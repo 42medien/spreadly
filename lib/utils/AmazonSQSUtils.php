@@ -32,11 +32,14 @@ class AmazonSQSUtils {
     if (is_array($pPayload)) {
       foreach ($pPayload as $value) {
         $service->sendMessage($pQueueName, $value);
+        sfContext::getInstance()->getLogger()->info("{AmazonSQSUtils} ".$pQueueName." sent ". print_r($value, true));
       }
     }
     else {
       $service->sendMessage($pQueueName, $pPayload);
+      sfContext::getInstance()->getLogger()->info("{AmazonSQSUtils} ".$pQueueName." sent ". print_r($pPayload, true));
     }
+
   }
 
 }

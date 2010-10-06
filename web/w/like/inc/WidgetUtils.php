@@ -72,7 +72,8 @@ class SocialObjectPeer {
 
     // if no data is available, initialize empty array & create social object
     if (!$lSocialObjectArray) {
-      self::delegateSocialObjectParsing($pUrl);
+       // don't do that.. too much objects in the queue atm
+      //self::delegateSocialObjectParsing($pUrl);
       $lSocialObjectArray = array();
     }
 

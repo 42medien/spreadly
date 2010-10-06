@@ -1,17 +1,17 @@
 # You can find more information about this file on the symfony website:
 # http://www.symfony-project.org/reference/1_4/en/07-Databases
 
-all:  
+all:
   translation:
     class: sfDoctrineDatabase
     param:
-      dsn:        mysql:host=localhost;dbname=yiid_i18n 
-      username:   yiid_i18n 
+      dsn:        mysql:host=localhost;dbname=yiid_i18n
+      username:   yiid_i18n
       password:   fdsmolds32dfs
       attributes:
         default_table_collate: utf8_general_ci
         default_table_charset: utf8
-        
+
   doctrine:
     class: sfDoctrineDatabase
     param:
@@ -20,4 +20,4 @@ all:
       password:   fdsmolds32dfs
       attributes:
         default_table_collate: utf8_unicode_ci
-        default_table_charset: utf8:
+        default_table_charset: utf8

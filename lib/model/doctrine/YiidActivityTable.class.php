@@ -47,14 +47,14 @@ class YiidActivityTable extends Doctrine_Table
 
 
   public static function saveLikeActivitys($pUserId,
-  $pUrl,
-  $pOwnedOnlineIdentitys = array(),
-  $pGivenOnlineIdentitys = array(),
-  $pScore = self::ACTIVITY_VOTE_POSITIVE,
-  $pVerb = 'like',
-  $pTitle = null,
-  $pDescription = null,
-  $pPhoto = null) {
+                                            $pUrl,
+                                            $pOwnedOnlineIdentitys = array(),
+                                            $pGivenOnlineIdentitys = array(),
+                                            $pScore = self::ACTIVITY_VOTE_POSITIVE,
+                                            $pVerb = 'like',
+                                            $pTitle = null,
+                                            $pDescription = null,
+                                            $pPhoto = null) {
     $lSuccess = false;
     $lVerifiedOnlineIdentitys = array();
     $pTitle = StringUtils::cleanupStringForMongodb($pTitle);
@@ -90,7 +90,7 @@ class YiidActivityTable extends Doctrine_Table
         $senderOi = OnlineIdentityTable::getInstance()->find($lIdentityId);
         $lServices[] = $senderOi->getCommunityId();
         if (sfConfig::get('app_settings_environment') != 'local') {
-          $lStatus = $senderOi->sendStatusMessage($pUrl, $pVerb, $pScore, utf8_decode($pTitle), utf8_decode($pDescription), $pPhoto);
+          $lStatus = $senderOi->sendStatusMessage($pUrl, $pVerb, $pScore, $pTitle, $pDescription, $pPhoto);
         }
         sfContext::getInstance()->getLogger()->debug("{YiidActivityPeer}{saveLikeActivitys} Status Message: " . print_r($lVerifiedOnlineIdentityIds, true));
       }
@@ -100,7 +100,6 @@ class YiidActivityTable extends Doctrine_Table
     }
 
     if (!empty($lVerifiedOnlineIdentityIds)) {
-
       self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb);
       $lSocialObject->updateObjectOnLikeActivity($pUserId, $lVerifiedOnlineIdentityIds, $pUrl, $pScore, $lServices);
       UserTable::updateLatestActivityForUser($pUserId, time());

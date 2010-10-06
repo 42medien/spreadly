@@ -9,6 +9,15 @@
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
 class authActions extends sfActions {
+
+  public function initialize($context, $module, $action) {
+    $parentRet = parent::initialize($context, $module, $action);
+
+    $this->pContext = $context->getRequest()->getParameter("module");
+
+    return $parentRet;
+  }
+
   /**
    * Executes index action
    *
@@ -26,7 +35,7 @@ class authActions extends sfActions {
 
   public function executeSignout(sfWebRequest $request) {
     $this->getUser()->signOut();
-    $this->redirect('@popup_signin');
+    $this->redirect('@'.$this->pContext.'_signin');
   }
 
   public function executeSigninto(sfWebRequest $request) {
@@ -35,7 +44,7 @@ class authActions extends sfActions {
       $lObject = AuthApiFactory::factory($lService);
       $lObject->doAuthentication();
     } else {
-      $this->redirect('@popup_signin');
+      $this->redirect('@'.$this->pContext.'_signin');
     }
   }
 
@@ -66,7 +75,11 @@ class authActions extends sfActions {
     $this->pOnlineIdenities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
     CookieUtils::generateWidgetIdentityCookie($this->pOnlineIdenities);
 
-    $this->redirect('@settings');
+    if ($this->pContext == "popup") {
+      $this->redirect('@settings');
+    } else {
+      $this->redirect('@static_like');
+    }
   }
 
   public function executeCreate_account(sfWebRequest $request) {

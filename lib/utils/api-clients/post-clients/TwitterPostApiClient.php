@@ -17,10 +17,14 @@ class TwitterPostApiClient implements PostApiInterface {
    * @return int status code
    */
   public function doPost(OnlineIdentity $pOnlineIdentity, $pUrl, $pType, $pScore, $pTitle, $pDescription, $pPhoto) {
-    $lMaxChars = 135;
+    $lToken = AuthTokenTable::getByUserAndOnlineIdentity($pOnlineIdentity->getUserId(), $pOnlineIdentity->getId());
+    if (!$lToken) {
+      $pOnlineIdentity->setSocialPublishingEnabled(false);
+      $pOnlineIdentity->save();
+      return false;
+    }
 
-    //$lOAuth = $pOnlineIdentity->getOAuthToken();
-    //$lOAuth = $lOAuth->convert();
+    $lMaxChars = 135;
 
     $lUrl  = ' - '.ShortUrlTable::shortenUrl($pUrl);
     $lengthOfUrl = strlen($lUrl);
@@ -29,8 +33,6 @@ class TwitterPostApiClient implements PostApiInterface {
     $lStatusMessage .= $lUrl;
 
     $lPostBody = array("status" => $lStatusMessage);
-
-    $lToken = AuthTokenTable::getByUserAndOnlineIdentity($pOnlineIdentity->getUserId(), $pOnlineIdentity->getId());
     $lConsumer = new OAuthConsumer(sfConfig::get("app_twitter_oauth_token"), sfConfig::get("app_twitter_oauth_secret"));
     $lStatus = OAuthClient::post($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "http://api.twitter.com/1/statuses/update.xml", $lPostBody);
 

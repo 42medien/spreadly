@@ -2,7 +2,7 @@
 // required because its called like a batch outside of the symfony context
 require_once(dirname(__FILE__).'/../../../../config/ProjectConfiguration.class.php');
 
-$configuration = ProjectConfiguration::getApplicationConfiguration('platform', 'batch', true);
+$configuration = ProjectConfiguration::getApplicationConfiguration('platform', 'batch', false);
 sfContext::createInstance($configuration);
 
 /**

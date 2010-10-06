@@ -1,8 +1,8 @@
 <div id="normal_box" class="content_main_border rounded_corners clearfix">
 
   <ul id="logos_big" class="normal_list small_size important clearfix">
-    <li id="facebook_area"><a id="facebook_logo" class="service_icon" href="<?php echo url_for("@popup_signinto?service=facebook", true); ?>">Facebook</a></li>
-    <li id="twitter_area"><a id="twitter_logo" class="service_icon" href="<?php echo url_for("@popup_signinto?service=twitter", true); ?>">Twitter</a></li>
+    <li id="facebook_area"><a id="facebook_logo" class="service_icon" href="<?php echo url_for("@".$pContext."_signinto?service=facebook", true); ?>">Facebook</a></li>
+    <li id="twitter_area"><a id="twitter_logo" class="service_icon" href="<?php echo url_for("@".$pContext."_signinto?service=twitter", true); ?>">Twitter</a></li>
     <li id="further_logos">&nbsp;</li>
   </ul>
 

@@ -20,4 +20,4 @@ all:
       password:   fdsmolds32dfs
       attributes:
         default_table_collate: utf8_unicode_ci
-        default_table_charset: utf8:
+        default_table_charset: utf8

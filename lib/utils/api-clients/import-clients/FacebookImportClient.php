@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__FILE__).'/../../../../config/ProjectConfiguration.class.php');
 
-$configuration = ProjectConfiguration::getApplicationConfiguration('platform', 'batch', true);
+$configuration = ProjectConfiguration::getApplicationConfiguration('platform', 'batch', false);
 sfContext::createInstance($configuration);
 
 /**
@@ -14,6 +14,8 @@ class FacebookImportClient {
   public static function importContacts($pUserId, $pOnlineIdentity) {
     $lToken = AuthTokenTable::getByUserAndOnlineIdentity($pUserId, $pOnlineIdentity->getId());
     if (!$lToken) {
+      $pOnlineIdentity->setSocialPublishingEnabled(false);
+      $pOnlineIdentity->save();
       throw new Exception('damn theres no token!', '666');
     }
     $lConsumer = new OAuthConsumer(sfConfig::get("app_facebook_oauth_token"), sfConfig::get("app_facebook_oauth_secret"));

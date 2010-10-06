@@ -44,6 +44,9 @@
   </fileset>
 
   <target name="copy_factory_config">
+    
+    <exec command="mkdir cache" />
+    <exec command="mkdir log" />
     <copy file="data/deployment/factories_${env}.yml" tofile="apps/engineroom/config/factories.yml" overwrite="true"></copy>
     <copy file="data/deployment/factories_${env}.yml" tofile="apps/platform/config/factories.yml" overwrite="true"></copy>
     <copy file="data/deployment/factories_${env}.yml" tofile="apps/profile/config/factories.yml" overwrite="true"></copy>
@@ -299,12 +302,14 @@
 
 
   <target name="buildjs">
+    <exec command="mkdir web/js/100_main/include" />
     <exec command="php batch/deployment/buildjs.php" checkReturn="true"/>
     <exec command="./symfony cc" />
   </target>
 
 
   <target name="buildcss">
+    <exec command="mkdir web/css/include" />
     <exec command="php batch/deployment/buildCombinedCss.php" checkReturn="true"/>
     <exec command="./symfony cc" />
   </target>
