@@ -101,6 +101,10 @@ widget_callback_uri:
 static:
   url:   /static/*
   param: { module: static, action: index }  
+  
+wellknown:
+  url:  /.wellknown/host-meta
+  param: { module: discovery, action: hostmeta}  
 
 ##### ROUTES FOR PLUGINS #######
 
