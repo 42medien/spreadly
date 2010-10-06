@@ -19,7 +19,9 @@ class YiidImportContacts {
       $lOnlineIdentity->save();
       try {
         $lObject = ImportApiFactory::factory($lOnlineIdentity->getCommunityId());
-        $lObject->importContacts($lOnlineIdentity->getUserId(), $lOnlineIdentity);
+        if ($lObject) {
+          $lObject->importContacts($lOnlineIdentity->getUserId(), $lOnlineIdentity);
+        }
       } catch (Exception $e) {
         sfContext::getInstance()->getLogger()->err("{Daemon} ImpotContacts: " . $e->getMessage());
       }

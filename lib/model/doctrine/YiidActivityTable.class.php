@@ -249,7 +249,7 @@ class YiidActivityTable extends Doctrine_Table
     $lQueryArray = array_merge($lQueryArray, self::addCaseQuery($pCase));
 
     $lResults = $lCollection->find($lQueryArray);
-    $lResults->sort(array('u' => -1));
+    $lResults->sort(array('c' => -1));
 
     $lResults->limit($pLimit)->skip(($pOffset - 1) * $pLimit);
 
