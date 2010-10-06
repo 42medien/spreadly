@@ -105,6 +105,10 @@ static:
 wellknown:
   url:  /.well-known/host-meta
   param: { module: discovery, action: hostmeta}
+  
+oexchange:
+  url:  /discovery/oexchange 
+  param: { module: discovery, action: oexchange}  
 
 ##### ROUTES FOR PLUGINS #######
 

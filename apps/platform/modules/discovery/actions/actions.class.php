@@ -24,4 +24,8 @@ class discoveryActions extends sfActions
     $this->getResponse()->setContentType('application/xrd+xml');
 
   }
+
+  public function executeOexchange() {
+    $this->getResponse()->setContentType('application/xrd+xml');
+  }
 }
