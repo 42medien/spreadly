@@ -97,14 +97,14 @@ update_language:
 widget_callback_uri:
   url:   /popup/*
   param: { module: auth, action: widget_auth }
-  
+
 static:
   url:   /static/*
-  param: { module: static, action: index }  
-  
+  param: { module: static, action: index }
+
 wellknown:
-  url:  /.wellknown/host-meta
-  param: { module: discovery, action: hostmeta}  
+  url:  /.well-known/host-meta
+  param: { module: discovery, action: hostmeta}
 
 ##### ROUTES FOR PLUGINS #######
 
