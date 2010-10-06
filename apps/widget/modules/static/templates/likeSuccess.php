@@ -2,6 +2,7 @@
 
 <div class="clearfix">
   <div id="twocol_left" class="content_main_border rounded_corners light_background left">
+  <?php if($pIsUrlValid) { ?>
     <div>
       <?php echo $pTitle; ?>
       <?php echo $pUrl;?>
@@ -48,8 +49,12 @@
         </p>
 
       <?php } ?>
+  <?php } else {?>
+    <div>
+      <?php echo __("Sorry but this url is invalid and you can't like."); ?>
+    </div>
+  <?php } ?>
   </div>
-
   <div id="twocol_right_add" class="content_main_border rounded_corners light_background right" >
     <h3><?php echo __('ADD_FURTHER_NETWORKS', null, 'widget'); ?></h3>
     <p><?php echo __('CURRENT_NETWORKS', null, 'widget'); ?></p>

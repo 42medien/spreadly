@@ -27,52 +27,57 @@ class staticActions extends sfActions
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('popup/js_popup_ready'));
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('static/js_init_static.js'));
 
-    $lUrl = $request->getParameter('url', 'http://www.affen.de');
+    $this->pIsUrlValid = true;
+    $lUrl = $request->getParameter('url', 'http://www.spiegel.de');
+    if (!empty($lUrl) && UrlUtils::isUrlValid($lUrl)) {
+      $lUrl = urldecode(UrlUtils::skipTrailingSlash($lUrl));
 
+	    $lTitle = $request->getParameter('title');
+	    $lDescription = $request->getParameter('description');
+	    $lType = $request->getParameter('type', 'like');
 
-    $lTitle = $request->getParameter('title', 'Tagebuch einer Fressmaschine');
-    $lDescription = $request->getParameter('description', 'Eine Fressmaschine, [eng:Eatingmachine] ist eine Person die nur fressen kann. Ihm ist es zu verdanken, dass die Lebensmittelpreise stetig steigen, wegen seinem hohen Verbrauch');
-    $lType = $request->getParameter('type', 'like');
+	    $lUser = $this->getUser()->getUser();
+	    if($request->getMethod() == sfRequest::POST) {
+	      $checkedOnlineIdentities = $request->getParameter('enabled_services', array());
+	      //@todo define methods in objects
+	      OnlineIdentityTable::toggleSocialPublishingStatus(UserIdentityConTable::getOnlineIdentityIdsForUser($this->getUser()->getId()), $checkedOnlineIdentities);
 
-    $lUser = $this->getUser()->getUser();
-    if($request->getMethod() == sfRequest::POST) {
-      $checkedOnlineIdentities = $request->getParameter('enabled_services', array());
-      //@todo define methods in objects
-      OnlineIdentityTable::toggleSocialPublishingStatus(UserIdentityConTable::getOnlineIdentityIdsForUser($this->getUser()->getId()), $checkedOnlineIdentities);
+	      if (array_key_exists("yiid_temp_hash", $_COOKIE)) {
+	        $lTempData = YiidActivityTable::getTemporaryData($_COOKIE["yiid_temp_hash"]);
+	        setcookie("yiid_temp_hash", '', time()-3600, '/', sfConfig::get('app_settings_host'));
 
-      if (array_key_exists("yiid_temp_hash", $_COOKIE)) {
-        $lTempData = YiidActivityTable::getTemporaryData($_COOKIE["yiid_temp_hash"]);
-        setcookie("yiid_temp_hash", '', time()-3600, '/', sfConfig::get('app_settings_host'));
+	        if ($lTempData) {
+	          $lStatus = YiidActivityTable::saveLikeActivitys($this->getUser()->getId(),
+	                                              $lTempData["url"],
+	                                              //@todo define methods in objects
+	                                              UserIdentityConTable::getOnlineIdentityIdsForUser($this->getUser()->getId()),
+	                                              OnlineIdentityTable::getPublishingEnabledByUserIdOnlyIds($this->getUser()->getId()),
+	                                              $lTempData["score"],
+	                                              $lTempData["verb"],
+	                                              $lTempData["title"],
+	                                              $lTempData["description"],
+	                                              $lTempData["photo"]);
+	        }
+	      }
 
-        if ($lTempData) {
-          $lStatus = YiidActivityTable::saveLikeActivitys($this->getUser()->getId(),
-                                              $lTempData["url"],
-                                              //@todo define methods in objects
-                                              UserIdentityConTable::getOnlineIdentityIdsForUser($this->getUser()->getId()),
-                                              OnlineIdentityTable::getPublishingEnabledByUserIdOnlyIds($this->getUser()->getId()),
-                                              $lTempData["score"],
-                                              $lTempData["verb"],
-                                              $lTempData["title"],
-                                              $lTempData["description"],
-                                              $lTempData["photo"]);
-        }
+	      $this->getUser()->setAttribute("yiid_temp_hash", null);
+	      //$this->getUser()->setFlash("onload", "window.close();", false);
+	    }
+
+      $lSocialObject = SocialObjectTable::retrieveByAliasUrl($lUrl);
+      $this->pIsUsed = false;
+      if($lSocialObject) {
+        $this->pIsUsed = YiidACtivityTable::isActionOnObjectAllowed($lSocialObject->getId(), $this->getUser()->getUserId());
       }
 
-      $this->getUser()->setAttribute("yiid_temp_hash", null);
-      $this->getUser()->setFlash("onload", "window.close();", false);
+    } else {
+      $this->pIsUrlValid = false;
     }
-
     $this->pIdentities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
     $this->pUrl = $lUrl;
     $this->pTitle = $lTitle;
     $this->pDescription = $lDescription;
     $this->pType = $lType;
-
-    $lSocialObject = SocialObjectTable::retrieveByAliasUrl($lUrl);
-    $this->pIsUsed = false;
-    if($lSocialObject) {
-      $this->pIsUsed = YiidACtivityTable::isActionOnObjectAllowed($lSocialObject->getId(), $this->getUser()->getUserId());
-    }
 
     CookieUtils::generateWidgetIdentityCookie($this->pIdentities);
     sfProjectConfiguration::getActive()->loadHelpers('I18N');

@@ -1139,7 +1139,7 @@ var YiidRequest = {
           lAction = YiidRequest.aDislikeAction;
         }
         //build the param-string
-        var lQuery = encodeURI('url='+YiidWidget.aUrl+'&type='+YiidWidget.aType+'&case='+pCase+'&serv='+YiidServices.encodeSettings()+'&title='+YiidWidget.aTitle+'&description='+YiidWidget.aDescription+'&photo='+YiidWidget.aPhoto);        
+        var lQuery = encodeURI('url='+YiidWidget.aUrl+'&type='+YiidWidget.aType+'&serv='+YiidServices.encodeSettings()+'&title='+YiidWidget.aTitle+'&description='+YiidWidget.aDescription+'&photo='+YiidWidget.aPhoto);        
         lXhttp.open("POST", lAction, true); 
         //Send the proper header information along with the request
         lXhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
