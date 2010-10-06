@@ -22,10 +22,11 @@ class discoveryActions extends sfActions
 
   public function executeHostmeta() {
     $this->getResponse()->setContentType('application/xrd+xml');
-
+    $this->setLayout(false);
   }
 
   public function executeOexchange() {
     $this->getResponse()->setContentType('application/xrd+xml');
+    $this->setLayout(false);
   }
 }
