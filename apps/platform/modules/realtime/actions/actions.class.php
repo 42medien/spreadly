@@ -35,8 +35,19 @@ class realtimeActions extends sfActions
 
   public function executeSubscribeFacebook(sfWebRequest $request) {
 
-    $lPostBody = 'object=user&fields=name,picture,feed&callback_url=http://www.yiiddev.com/realtime/facebookpush&verify_token=affen12';
+    $lPostBody = 'object=user&fields=home,friends,posts,likes,notes,links,statuses,picture,feed&callback_url=http://www.yiiddev.com/realtime/facebookpush&verify_token=affen12';
     $lJsonObject = json_decode(UrlUtils::sendPostRequest("https://graph.facebook.com/353988911612/subscriptions?access_token=353988911612|NBvv-WPAyMYt4XS-4lkNPzdK8KI", $lPostBody));
+
+    var_dump($lJsonObject);
+    die();
+  }
+
+
+
+  public function executeListFacebook(sfWebRequest $request) {
+
+    $lPostBody = "";
+    $lJsonObject = json_decode(UrlUtils::sendGetRequest("https://graph.facebook.com/353988911612/subscriptions?access_token=353988911612|NBvv-WPAyMYt4XS-4lkNPzdK8KI", $lPostBody));
 
     var_dump($lJsonObject);
     die();

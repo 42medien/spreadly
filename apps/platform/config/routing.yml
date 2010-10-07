@@ -114,6 +114,10 @@ oexchange:
 realtime_fb:
   url:  /realtime/facebooksubscribe
   param: { module: realtime, action: subscribeFacebook }
+  
+listFacebook:
+  url:  /realtime/listFacebook
+  param: { module: realtime, action: listFacebook }
 
 facebookpush:
   url:  /realtime/facebookpush
