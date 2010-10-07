@@ -32,12 +32,11 @@ class FacebookPostApiClient implements PostApiInterface {
     if ($pDescription && $pDescription != '') {
       $lPostBody .= "&description=".$pDescription;
     }
+
     if ($pPhoto && $pPhoto != '') {
-      $pPhoto = UrlUtils::shortUrlExpander($pPhoto);
-      if ($pPhoto !== false) {
-        $lPostBody .= "&picture=".urlencode($pPhoto);
-      }
+        $lPostBody .= "&picture=".$pPhoto;
     }
+
     if ($pUrl) {
       $lPostBody .= "&link=".urlencode($pUrl);
     }
