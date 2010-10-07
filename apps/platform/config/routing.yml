@@ -115,6 +115,10 @@ realtime_fb:
   url:  /realtime/facebooksubscribe
   param: { module: realtime, action: subscribeFacebook }
 
+facebookpush:
+  url:  /realtime/facebookpush
+  param: { module: realtime, action: facebookpush }
+
 ##### ROUTES FOR PLUGINS #######
 
 js_log:
