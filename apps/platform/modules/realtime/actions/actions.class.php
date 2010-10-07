@@ -17,8 +17,9 @@ class realtimeActions extends sfActions
 
   public function executeSubscribeFacebook(sfWebRequest $request) {
 
-   $lJsonObject = json_decode(UrlUtils::sendPostRequest("http://graph.facebook.com/353988911612/subscriptions?access_token=353988911612|fd118fd8fb5da426565eebb7-1336043259|xgFkdHetCbudF2lv0tWi7ockbFY"));
+   $lJsonObject = json_decode(UrlUtils::sendPostRequest("https://graph.facebook.com/353988911612/subscriptions?access_token=353988911612|fd118fd8fb5da426565eebb7-1336043259|xgFkdHetCbudF2lv0tWi7ockbFY", ''));
 
    var_dump($lJsonObject);
+   die();
   }
 }
