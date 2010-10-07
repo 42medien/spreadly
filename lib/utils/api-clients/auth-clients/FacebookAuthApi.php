@@ -37,6 +37,7 @@ class FacebookAuthApiClient extends AuthApi {
 
     $lJsonObject = json_decode(UrlUtils::sendGetRequest("https://graph.facebook.com/me?access_token=".$lParamsArray['access_token']));
 
+    var_dump($lJsonObject);
     // facebook identifier
     $lIdentifier = "http://www.facebook.com/profile.php?id=".$lJsonObject->id;
 
