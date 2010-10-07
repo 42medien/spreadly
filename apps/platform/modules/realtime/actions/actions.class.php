@@ -13,7 +13,7 @@ class realtimeActions extends sfActions
   public function executeFacebookpush(sfWebRequest $request) {
 
     $method = $request->getMethod();
-var_dump($method);
+
       sfContext::getInstance()->getLogger()->info('{Facebookaffen}' . print_r($request->getParameterHolder(), 1));
     if ($method == 'GET' && $request->getParameter('hub_mode') == 'subscribe' &&
     $request->getParameter('hub_verify_token') == 'affen12') {
