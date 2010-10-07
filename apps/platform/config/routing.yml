@@ -110,6 +110,11 @@ oexchange:
   url:  /discovery/oexchange 
   param: { module: discovery, action: oexchange}  
 
+
+realtime_fb:
+  url:  /realtime/facebooksubscribe
+  param: { module: realtime, action: subscribeFacebook }
+
 ##### ROUTES FOR PLUGINS #######
 
 js_log:
