@@ -168,7 +168,7 @@ class FacebookAuthApiClient extends AuthApi {
   public function getAccessToken($pCode) {
     $lConsumer = $this->getConsumer();
 
-    $lAccessUrl = "https://graph.facebook.com/oauth/access_token?client_id=".$lConsumer->key."&redirect_uri=".$this->getCallbackUri()."&client_secret=".$lConsumer->secret."&code=".$pCode;
+    $lAccessUrl = "https://graph.facebook.com/oauth/access_token?client_id=".$lConsumer->key."&redirect_uri=".$this->getCallbackUri()."&client_secret=".$lConsumer->secret."&code=".$pCode."&grant_type=client_credentials";
     $lAccessToken = UrlUtils::sendGetRequest($lAccessUrl);
 
     return $lAccessToken;
