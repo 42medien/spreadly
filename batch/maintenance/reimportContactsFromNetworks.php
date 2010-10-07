@@ -13,6 +13,7 @@ $dbManager->loadConfiguration();
 /**
  *  we need all user id's first
  **/
-$lOis = OnlineIdentityTable::getOnlineIdentityIdsForFriendRenewal(10);
+$lOis = OnlineIdentityTable::getInintialImport(2000);
 $lOis = HydrationUtils::flattenArray($lOis);
-AmazonSQSUtils::pushToQuque("ImportContacts", $lOis);
+print_r($lOis);
+//AmazonSQSUtils::pushToQuque("ImportContacts", $lOis);

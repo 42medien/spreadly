@@ -282,6 +282,17 @@ class OnlineIdentityTable extends Doctrine_Table {
     return $lOis;
   }
 
+    public static function getInintialImport($pLimit) {
+    $q = Doctrine_Query::create()
+    ->from('AuthToken at')
+    ->select('at.online_identity_id');
+
+    $lOis = $q->execute(array(),  Doctrine_Core::HYDRATE_NONE);
+    return $lOis;
+  }
+
+
+
   public static function getOisFromActivityOrderedByCommunity($pActivity) {
     $lOiids = $pActivity->getOiids();
 

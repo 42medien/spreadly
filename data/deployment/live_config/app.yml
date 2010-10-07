@@ -65,7 +65,7 @@ all:
 
 
   memcache:
-    server_ip:      'mario'
+    server_ip:      'bowser'
 
   mongodb:
     host:                 'donkeykong'
