@@ -18,7 +18,7 @@ var_dump($method);
     if ($method == 'GET' && $request->getParameter('hub_mode') == 'subscribe' &&
     $request->getParameter('hub_verify_token') == VERIFY_TOKEN) {
       $return =  $request->getParameter('hub_challenge');
-      return $this->renderText($return);exit();
+      return $this->renderText($return);
     } else if ($method == 'POST') {
       $updates = json_decode(file_get_contents("php://input"), true);
       // Replace with your own code here to handle the update
@@ -30,7 +30,6 @@ var_dump($method);
 
     }
     $this->setLayout(false);
-    exit();
   }
 
 
