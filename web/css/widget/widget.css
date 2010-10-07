@@ -44,7 +44,7 @@ li#further_logos{margin-right: 0;width:10px;margin-top:60px;padding-top:0}
 #help_area{position: absolute;width: 480px;z-index: 1000;padding:20px 30px;min-height:235px;margin: 20px 0 0 20px;}
 #help_area>p{margin-bottom: 30px;}
 #twocol_left, #twocol_right_add, #twocol_right_empty{width: 210px;min-height: 150px;padding:10px 20px;}
-.btn{padding: 2px 30px 2px 20px;width:130px;}
+.btn{padding: 2px 30px 2px 20px;width:130px;display: inline;}
 #services_chosen li{line-height: 25px;margin-bottom:5px;}
 #services_to_choose li{padding-bottom:30px;}
 #services_to_choose a{padding: 15px 0 15px 50px;}
@@ -59,13 +59,21 @@ li#check_google{margin-bottom:15px;}
 #language_selection img{border:1px solid #e6e6e6;}
 #language_selection img:hover{border:1px solid #D3D3D3;}
 
+.so_image{width: 10%;height: 50px;margin: 5px 0 0 5px;}
+#so_detail_desc{padding-top: 2px;}
+#so_detail_desc img{margin: 0 15px 8px 0;border: 1px solid #DDDDDD;}
+h3.small_margin{margin: 5px 0 3px;}
+#services_chosen{margin-bottom: 10px;}
+.popup_button{padding: 5px 10px;display: inline;}
+.sharing_button{padding: 5px;}
+.distance_right{margin-right: 5px;}
 
 
 /**
  * @section Popup
  * @subsection color
  */
-body{background-color: #FFFFFF;color:#6a6b6a;}
+body, .popup_button{background-color: #FFFFFF;color:#6a6b6a;}
 input.btn[type=submit]{color:#6a6b6a;}
 .container_border{border:2px solid #c1c1c1;}
 .content_main_border{border:1px solid #cdcdcd;}
@@ -77,6 +85,9 @@ input.btn[type=submit]{color:#6a6b6a;}
 .light_text{color:#fff;}
 .dark_text{color:#6A6B6A;}
 a{color: #68B94F;}
+.likeit_button{background: #fff url("/img/sprites/sprite_popup.png") no-repeat -569px -875px;}
+.dislikeit_button{background: #fff url("/img/sprites/sprite_popup.png") no-repeat -557px -875px;}
+.popup_button:hover, .popup_button:hover .likeit_button, .popup_button:hover .dislikeit_button{background-color: #f2f2f2;}
 #buzz_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -575px;}
 #facebook_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -785px;}
 #twitter_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -1003px;}
@@ -90,7 +101,8 @@ a.question_link{color: #FFFFFF !important;}
 .light_background, #login_box{background: #F2F2F2;}
 #error_box{color:#ea4036;}
 .error_list li{border-bottom: 1px solid #cdcdcd;}
-.btn{background: #F2F2F2 url("/img/sprites/sprite_popup.png") no-repeat 110px -1269px;}
+.btn{background: #fff url("/img/sprites/sprite_popup.png") no-repeat 110px -1269px;}
+.btn:hover{background-color: #4EA734;color: #fff;}
 #check_facebook{background: #F2F2F2 url("/img/sprites/sprite_popup.png") no-repeat 25px -700px;}
 #choose_facebook{background: #F2F2F2 url("/img/sprites/sprite_popup.png") no-repeat 0 -859px;}
 #check_google{background: #F2F2F2 url("/img/sprites/sprite_popup.png") no-repeat  25px -490px;}
@@ -111,16 +123,17 @@ h1{margin:0;line-height: 22px;}
 p{margin:0 0 5px 0;}
 .small_size{font-size: 11px;line-height: 16px;}
 .normal_size{font-size: 12px;}
-.important_text{font-weight: bold;}
+.important_text, .btn, .popup_button{font-weight: bold;}
 .big_size{font-size: 14px;}
 #cancel_action, #nav_main{text-align: right;}
-#nav_main_box{line-height: 25px;text-align: center;}
+#nav_main_box, .popup_button{text-align: center;}
+#nav_main_box{line-height: 25px;}
 #login_box{line-height: 20px;}
 a.question_link{text-decoration: underline !important;}
 #error_box h1{font-size: 14px;}
 #error_box p{font-size: 12px;}
-#help_area{line-height: 22px;}
-.btn{cursor: pointer;}
+#help_area, .popup_button{line-height: 22px;}
+.btn, .popup_button{cursor: pointer;}
 #agb_text a, #agb_text p{line-height: 16px;}
 #user-line h1{font-size: 16px;}
 

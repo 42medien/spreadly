@@ -3,11 +3,15 @@
 <div class="clearfix">
   <div id="twocol_left" class="content_main_border rounded_corners light_background left">
   <?php if($pIsUrlValid) { ?>
-    <div>
-      <?php echo $pTitle; ?>
-      <?php echo $pUrl;?>
-      <?php echo $pDescription; ?>
-      <img alt="<?php echo $pUrl; ?>" width="100px" height="80px"  src="http://communipedia.v2.websnapr.com/?url=<?php echo $pUrl; ?>&sh=80&sw=100">
+    <div id="so_right_view" class="clearfix">
+      <div>
+        <h3 class="small_margin" title="<?php echo $pTitle; ?>"><?php echo truncate_text($pTitle, 30, '...'); ?></h3>
+        <p title="<?php echo $pUrl; ?>"><?php echo link_to(UrlUtils::getShortUrl($pUrl), $pUrl, array('class' => 'url')); ?></p>
+      </div>
+      <div id="so_detail_desc" class="clearfix">
+        <img alt="<?php echo $pUrl; ?>" width="100px" height="80px" src="http://communipedia.v2.websnapr.com/?url=<?php echo $pUrl; ?>&sh=80&sw=100" class="left">
+        <span class="normal_text"><?php echo truncate_text($pDescription, 400, '...'); ?></span>
+      </div>
     </div>
 
       <?php if ($pIsUsed == 1) { ?>
@@ -20,13 +24,13 @@
         </p>
 	    <?php } else { ?>
 		    <form action="" name="static-like-form" id="static-like-form" method="post">
-		      <h3><?php echo __('YOUR_NETWORKS', null, 'widget'); ?></h3>
+		      <h3 class="small_margin"><?php echo __('YOUR_NETWORKS', null, 'widget'); ?></h3>
 		      <input type="hidden" name="type" value="<?php echo $pType; ?>" />
 		      <input type="hidden" name="url" value="<?php echo $pUrl; ?>" />
 		      <input type="hidden" name="title" value="<?php echo $pTitle; ?>" />
 		      <input type="hidden" name="description" value="<?php echo $pDescription; ?>" />
 		      <input type="hidden" name="photo" value="http://communipedia.v2.websnapr.com/?url=<?php echo $pUrl; ?>&sh=80&sw=100" />
-		      <ul class="normal_list" id="services_chosen">
+		      <ul class="normal_list clearfix" id="services_chosen">
 		      <?php foreach ($pIdentities as $lIdentity) { ?>
 		        <li id="check_<?php echo $lIdentity->getCommunity()->getCommunity(); ?>">
 		          <input type="checkbox" id="like-serv-<?php echo $lIdentity->getId(); ?>"
@@ -38,8 +42,14 @@
 		        </li>
 		      <?php } ?>
 		      </ul>
-          <div class="btn rounded_corners content_main_border" id="static-like-button"><?php echo __('like', null, 'widget'); ?></div>
-          <div class="btn rounded_corners content_main_border" id="static-dislike-button"><?php echo __('dislike', null, 'widget'); ?></div>
+		      <div class="rounded_corners content_main_border popup_button distance_right">
+            <span class="sharing_button likeit_button">&nbsp;</span>
+            <?php echo __('like', null, 'widget'); ?>
+          </div>
+          <div class="rounded_corners content_main_border popup_button">
+            <span class="sharing_button dislikeit_button">&nbsp;</span>
+            <?php echo __('dislike', null, 'widget'); ?>
+          </div>
         </form>
         <p id="static-liked" style="display:none;">
           <?php echo __('you already liked this'); ?>
