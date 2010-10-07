@@ -11,7 +11,7 @@
 <?php } ?>
 
 <?php if ($pUser) { ?>
-  <p class="right light_text"><?php echo __('NOT_YOUR_NAME', array('%1' => truncate_text($pUser->getFullname(), 20, '...'), '%2' => link_to(__('HERE', null, 'widget'), '@signout', array('class' => 'light_text'))), 'widget'); ?></p>
+  <p class="right light_text"><?php echo __('NOT_YOUR_NAME', array('%1' => truncate_text($pUser->getFullname(), 20, '...'), '%2' => link_to(__('HERE', null, 'widget'), '@'.$pContext.'_signout', array('class' => 'light_text'))), 'widget'); ?></p>
 <?php } else { ?>
 	<p class="right"><a class="question_link" id="show_help" href="#"><?php echo __('WHY_YIID_ACCOUNT', null, 'widget'); ?></a></p>
 <?php } ?>

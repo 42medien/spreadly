@@ -27,10 +27,6 @@ settings:
   url:    /popup/settings
   param:  { module: popup, action: settings }
 
-signout:
-  url:    /signout
-  param:  { module: auth, action: signout }
-
 # popup auth
 popup_add_service:
   url:    /popup/add_service
@@ -52,6 +48,10 @@ popup_signinto:
   url:   /popup/signinto/*
   param: { module: auth, action: signinto, widgetcontext: popup }
 
+popup_signout:
+  url:    /popup/signout
+  param:  { module: auth, action: signout, widgetcontext: popup }
+
 # static auth
 static_add_service:
   url:    /static/add_service
@@ -72,6 +72,10 @@ static_complete_signin:
 static_signinto:
   url:   /static/signinto/*
   param: { module: auth, action: signinto, widgetcontext: static }
+
+static_signout:
+  url:    /static/signout
+  param:  { module: auth, action: signout, widgetcontext: static }
 # end auth
 
 load_friends:

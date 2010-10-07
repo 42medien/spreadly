@@ -20,6 +20,7 @@ class popupComponents extends sfComponents
    * @param sfWebRequest $request
    */
   public function executeWelcome_user(sfWebRequest $request) {
+    $this->pContext = $request->getParameter("widgetcontext", $request->getParameter('module'));
     $this->pUser = $this->getUser()->getUser();
   }
 
