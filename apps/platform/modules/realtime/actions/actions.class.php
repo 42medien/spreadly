@@ -11,7 +11,7 @@
 class realtimeActions extends sfActions
 {
   public function executeFacebookpush(sfWebRequest $request) {
-    sfContext::getInstance()->getLogger()->debug('{Facebookaffen}' . print_r($request, 1));
+    sfContext::getInstance()->getLogger()->info('{Facebookaffen}' . print_r($request, 1));
   }
 
 
