@@ -152,3 +152,5 @@ a.question_link{text-decoration: underline !important;}
 * html .clearfix{height: 1px;}
 .clearfix{display: block;}
 /* End: hide for IE5/Mac with commented backslash Hack */ /* basics */
+
+#general-ajax-loader{z-index: 1000000; position: absolute; display:none;}

@@ -1,5 +1,5 @@
 /**
- * @nocombine likepopup
+ * @combine likepopup
  */
 
 var StaticLike = {
@@ -16,6 +16,8 @@ var StaticLike = {
   doSend: function() {
     debug.log('[StaticLike][doSend]');    
     jQuery('#static-like-button, #static-dislike-button').live('click.staticlike', function(pEvent) { 
+      
+      OnLoadGrafic.showGrafic();
       var lTarget = pEvent.target;
       var lTargetId = jQuery(lTarget).attr('id');
       if(lTargetId == 'static-dislike-button') {
@@ -62,6 +64,7 @@ var StaticLike = {
       jQuery('.error').remove();
       jQuery('#static-like-form').prepend('<p class="error">'+i18n.get('NO_SERVICES_ERROR')+'</p>');
     }
+    OnLoadGrafic.hideGrafic();
   },
   
   markLiked: function() {
