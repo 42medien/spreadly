@@ -93,6 +93,7 @@ class authActions extends sfActions {
       $this->redirect('@settings');
     } else {
       $lParams = $this->getUser()->getAttribute("params", null, "static_button");
+      $this->getUser()->setAttribute("params", null, "static_button");
 
       $this->redirect('@static_like?'.$lParams);
     }
