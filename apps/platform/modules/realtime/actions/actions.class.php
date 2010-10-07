@@ -14,6 +14,7 @@ class realtimeActions extends sfActions
 
     $method = $request->getMethod();
 
+      sfContext::getInstance()->getLogger()->info('{Facebookaffen}' . print_r($request->getParameterHolder(), 1));
     if ($method == 'GET' && $request->getParameter('hub_mode') == 'subscribe' &&
     $request->getParameter('hub_verify_token') == VERIFY_TOKEN) {
       echo $request->getParameter('hub_challenge');exit();
