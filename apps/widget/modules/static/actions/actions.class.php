@@ -32,8 +32,8 @@ class staticActions extends sfActions
     if (!empty($lUrl) && UrlUtils::isUrlValid($lUrl)) {
       $lUrl = urldecode(UrlUtils::skipTrailingSlash($lUrl));
 
-	    $lTitle = $request->getParameter('title');
-	    $lDescription = $request->getParameter('description');
+	    $lTitle = $request->getParameter('title', '');
+	    $lDescription = $request->getParameter('description', '');
 	    $lType = $request->getParameter('type', 'like');
 
 	    $lUser = $this->getUser()->getUser();

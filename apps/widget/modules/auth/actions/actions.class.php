@@ -38,9 +38,7 @@ class authActions extends sfActions {
     }
 
     if ($this->pContext == "static") {
-      $lQuery = parse_url($request->getUri(), PHP_URL_QUERY);
-
-      $this->getUser()->setAttribute("params", $lQuery, "static_button");
+      $this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "static_button");
     }
 
     sfProjectConfiguration::getActive()->loadHelpers('I18N');
@@ -92,10 +90,10 @@ class authActions extends sfActions {
     if ($this->pContext == "popup") {
       $this->redirect('@settings');
     } else {
-      $lParams = $this->getUser()->getAttribute("params", null, "static_button");
-      $this->getUser()->setAttribute("params", null, "static_button");
+      $lUrl = $this->getUser()->getAttribute("redirect_after_login", null, "static_button");
+      $this->getUser()->setAttribute("redirect_after_login", null, "static_button");
 
-      $this->redirect('@static_like?'.$lParams);
+      $this->redirect($lUrl);
     }
   }
 
