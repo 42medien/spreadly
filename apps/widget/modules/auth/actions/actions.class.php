@@ -30,7 +30,17 @@ class authActions extends sfActions {
   public function executeSignin(sfWebRequest $request) {
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('popup/js_popup_ready'));
     if ($this->getUser()->isAuthenticated()) {
-      $this->redirect("@settings");
+      if ($this->pContext == "popup") {
+        $this->redirect("@settings");
+      } else {
+        $this->redirect("@static_like");
+      }
+    }
+
+    if ($this->pContext == "static") {
+      $lQuery = parse_url($request->getUri(), PHP_URL_QUERY);
+
+      $this->getUser()->setAttribute("params", $lQuery, "static_button");
     }
 
     sfProjectConfiguration::getActive()->loadHelpers('I18N');
@@ -82,7 +92,9 @@ class authActions extends sfActions {
     if ($this->pContext == "popup") {
       $this->redirect('@settings');
     } else {
-      $this->redirect('@static_like');
+      $lParams = $this->getUser()->getAttribute("params", null, "static_button");
+
+      $this->redirect('@static_like?'.$lParams);
     }
   }
 
