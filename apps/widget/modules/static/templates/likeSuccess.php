@@ -15,13 +15,15 @@
     </div>
 
       <?php if ($pIsUsed == 1) { ?>
-        <p id="static-liked">
+        <div class="already_shared" id="static-liked">
+          <span class="sharing_button likeit_button">&nbsp;</span>
           <?php echo __('you already liked this'); ?>
-        </p>
+        </div>
       <?php } elseif ($pIsUsed == -1) {?>
-        <p id="static-disliked">
-          <?php echo __('you already disliked this'); ?>
-        </p>
+        <div class="already_shared" id="static-disliked">
+          <span class="sharing_button dislikeit_button">&nbsp;</span>
+          <?php echo __('you already liked this'); ?>
+        </div>
 	    <?php } else { ?>
 		    <form action="" name="static-like-form" id="static-like-form" method="post">
 		      <h3 class="small_margin"><?php echo __('YOUR_NETWORKS', null, 'widget'); ?></h3>
@@ -42,21 +44,23 @@
 		        </li>
 		      <?php } ?>
 		      </ul>
-		      <div class="rounded_corners content_main_border popup_button distance_right">
+		      <div class="rounded_corners content_main_border popup_button distance_right" id="static-like-button">
             <span class="sharing_button likeit_button">&nbsp;</span>
             <?php echo __('like', null, 'widget'); ?>
           </div>
-          <div class="rounded_corners content_main_border popup_button">
+          <div class="rounded_corners content_main_border popup_button" id="static-dislike-button">
             <span class="sharing_button dislikeit_button">&nbsp;</span>
             <?php echo __('dislike', null, 'widget'); ?>
           </div>
         </form>
-        <p id="static-liked" style="display:none;">
+        <div class="already_shared" id="static-liked" style="display: none;">
+          <span class="sharing_button likeit_button">&nbsp;</span>
           <?php echo __('you already liked this'); ?>
-        </p>
-        <p id="static-disliked" style="display:none;">
-          <?php echo __('you already disliked this'); ?>
-        </p>
+        </div>
+        <div class="already_shared" id="static-disliked" style="display: none;">
+          <span class="sharing_button dislikeit_button">&nbsp;</span>
+          <?php echo __('you already liked this'); ?>
+        </div>
 
       <?php } ?>
   <?php } else {?>
@@ -74,7 +78,7 @@
       <li><a id="choose_twitter" href="<?php echo url_for("@static_signinto?service=twitter", true); ?>">Twitter</a></li>
     </ul>
 
-    oder <a href="#"  id="cancel-link"><?php echo __('CANCEL', null, 'widget'); ?></a>
+    <?php echo __('or'); ?> <a href="#"  id="cancel-link"><?php echo __('CANCEL', null, 'widget'); ?></a>
 
   </div>
 

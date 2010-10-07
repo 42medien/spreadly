@@ -67,6 +67,7 @@ h3.small_margin{margin: 5px 0 3px;}
 .popup_button{padding: 5px 10px;display: inline;}
 .sharing_button{padding: 5px;}
 .distance_right{margin-right: 5px;}
+.already_shared{color: #4EA734;font-weight: bold;}
 
 
 /**
@@ -86,7 +87,9 @@ input.btn[type=submit]{color:#6a6b6a;}
 .dark_text{color:#6A6B6A;}
 a{color: #68B94F;}
 .likeit_button{background: #fff url("/img/sprites/sprite_popup.png") no-repeat -569px -875px;}
+.already_shared .likeit_button{background-color: transparent;}
 .dislikeit_button{background: #fff url("/img/sprites/sprite_popup.png") no-repeat -557px -875px;}
+.already_shared .dislikeit_button{background-color: transparent;}
 .popup_button:hover, .popup_button:hover .likeit_button, .popup_button:hover .dislikeit_button{background-color: #f2f2f2;}
 #buzz_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -575px;}
 #facebook_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -785px;}
