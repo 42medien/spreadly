@@ -1,7 +1,0 @@
-# default values
-all:
-  twitter:
-    oauth_callback_uri: "/popup/complete_signin/service/twitter"
-
-  facebook:
-    oauth_callback_uri: "/popup/complete_signin/service/facebook"

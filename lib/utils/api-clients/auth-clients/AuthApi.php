@@ -36,7 +36,9 @@ abstract class AuthApi {
   }
 
   public function getCallbackUri() {
-    return sfConfig::get("app_settings_url").sfConfig::get("app_".$this->aCommunity."_oauth_callback_uri");
+    $lFolders = sfConfig::get("app_".$this->aCommunity."_oauth_callback_uri");
+
+    return sfConfig::get("app_settings_url").$lFolders;
   }
 
   /**

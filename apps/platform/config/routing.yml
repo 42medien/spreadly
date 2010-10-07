@@ -95,7 +95,7 @@ update_language:
   param: { module: system, action: update_icon_language }
 
 widget_callback_uri:
-  url:   /popup/*
+  url:   /widgets/*
   param: { module: auth, action: widget_auth }
 
 static:
@@ -105,10 +105,10 @@ static:
 wellknown:
   url:  /.well-known/host-meta
   param: { module: discovery, action: hostmeta}
-  
+
 oexchange:
-  url:  /discovery/oexchange 
-  param: { module: discovery, action: oexchange}  
+  url:  /discovery/oexchange
+  param: { module: discovery, action: oexchange}
 
 
 realtime_fb:

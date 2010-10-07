@@ -13,7 +13,11 @@ class authActions extends sfActions {
   public function initialize($context, $module, $action) {
     $parentRet = parent::initialize($context, $module, $action);
 
-    $this->pContext = $context->getRequest()->getParameter("module");
+    // add context
+    $this->pContext = $context->getRequest()->getParameter("widgetcontext", $context->getRequest()->getParameter('module'));
+
+    sfConfig::set( 'app_twitter_oauth_callback_uri', '/widgets/'.$this->pContext.'/complete_signin/service/twitter' );
+    sfConfig::set( 'app_facebook_oauth_callback_uri', '/widgets/'.$this->pContext.'/complete_signin/service/facebook' );
 
     return $parentRet;
   }
@@ -39,7 +43,7 @@ class authActions extends sfActions {
   }
 
   public function executeSigninto(sfWebRequest $request) {
-  // if the user is already loged in, redirect to the stream
+    // if the user is already loged in, redirect to the stream
     if ($lService = $request->getParameter("service")) {
       $lObject = AuthApiFactory::factory($lService);
       $lObject->doAuthentication();

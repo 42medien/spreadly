@@ -74,6 +74,18 @@ static_signinto:
   param: { module: auth, action: signinto, widgetcontext: static }
 # end auth
 
+load_friends:
+  url:   /widget/load_friends/*
+  param: {module: widget, action: load_friends }
+
+static_signin:
+  url:    /static/signin
+  param:  { module: static, action: signin }
+
+static_like:
+  url:    /static/like/*
+  param:  { module: static, action: like }
+
 like:
   url:   /api/like/*
   param: {module: api, action: like }
@@ -88,15 +100,3 @@ default_index:
 
 default:
   url:   /:module/:action/*
-
-load_friends:
-  url:   /widget/load_friends/*
-  param: {module: widget, action: load_friends }
-
-static_signin:
-  url:    /static/signin
-  param:  { module: static, action: signin }
-
-static_like:
-  url:    /static/like/*
-  param:  { module: static, action: like }

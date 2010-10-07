@@ -17,7 +17,7 @@ class authActions extends sfActions {
   public function executeWidget_auth(sfWebRequest $request) {
     $lUrl = $request->getUri();
 
-    $this->redirect(str_replace("www", "widgets", $lUrl));
+    $this->redirect(str_replace(array("http://www", 'widgets/'), array("http://widgets", ''), $lUrl));
   }
 
   public function executeSignin(sfWebRequest $request) {
