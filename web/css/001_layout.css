@@ -105,12 +105,26 @@ h4{margin: 15px 0 10px 0;}
 .icon_small_use{padding: 3px 0 0 12px;}
 .icon_language_select{padding: 0px 6px;}
 
-#error_box_404{
+#error_box_404,
+#error_box_404_unavailable{
   width: 580px;
   height: 200px;
   padding: 100px 20px 10px;
   margin: 0 auto;
   background-color: #fff;
+}
+#error_box_404_unavailable{
+  height: 300px;
+}
+#error_box_404 h1,
+#error_box_404_unavailable h1{
+  margin-bottom: 10px;
+  line-height: 55px;
+}
+#error_box_404 p,
+error_box_404_unavailable p{
+  margin-bottom: 5px;
+  line-height: 18px;
 }
 .container_border{border:2px solid #c1c1c1;}
 .rounded_corners{border-radius: 0.5em;-moz-border-radius: 0.5em;-webkit-border-radius: 0.5em;}

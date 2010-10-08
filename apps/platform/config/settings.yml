@@ -24,7 +24,7 @@ test:
 
 all:
   .actions:
-    error_404_module:       system    # To be called when a 404 error is raised
+    error_404_module:       static    # To be called when a 404 error is raised
     error_404_action:       404       # Or when the requested URL doesn't match any route
 
     login_module:           landing      # To be called when a non-authenticated user
