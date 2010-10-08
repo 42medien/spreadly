@@ -45,8 +45,8 @@ class staticActions extends sfActions
     return;
   }
 
-  public function execute404() {
-    Breadcrumb::getInstance()->clearItems();
+  public function execute404(sfWebRequest $request) {
+  	
   }
 
   public function execute500() {
