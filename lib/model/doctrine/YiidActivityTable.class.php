@@ -52,6 +52,7 @@ class YiidActivityTable extends Doctrine_Table
                                            $pTitle = null,
                                            $pDescription = null,
                                            $pPhoto = null) {
+
     $lSuccess = false;
     $lVerifiedOnlineIdentitys = array();
     $pTitle = StringUtils::cleanupStringForMongodb($pTitle);
@@ -80,7 +81,6 @@ class YiidActivityTable extends Doctrine_Table
     elseif (!self::isActionOnObjectAllowed($lSocialObject->getId(), $pUserId)) {
       return false;
     }
-
 
     foreach ($pGivenOnlineIdentitys as $lIdentityId) {
       if (in_array($lIdentityId, $pOwnedOnlineIdentitys)) {
@@ -206,7 +206,7 @@ class YiidActivityTable extends Doctrine_Table
    */
   public static function retrieveActionOnObjectById($pSocialObjectId, $pUserId) {
     $lCollection = self::getMongoCollection();
-    return self::initializeObjectFromCollection($lCollection->findOne(array("so_id" => $pSocialObjectId, "u_id" => $pUserId ) ));
+    return self::initializeObjectFromCollection($lCollection->findOne(array("so_id" => new MongoId($pSocialObjectId.""), "u_id" => (int)$pUserId ) ));
   }
 
   public static function retrieveLatestActivitiesByContacts($pUserId, $pFriendId = null, $pCommunityId = null, $pRangeDays = 30, $pOffset = 10, $pLimit = 1) {
