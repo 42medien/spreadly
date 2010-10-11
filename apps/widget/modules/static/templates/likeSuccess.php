@@ -15,12 +15,12 @@
     </div>
 
       <?php if ($pIsUsed == 1) { ?>
-        <div class="already_shared" id="static-liked">
+        <div class="rounded_corners content_main_border popup_button_used distance_right already_shared" id="static-liked">
           <span class="sharing_button likeit_button">&nbsp;</span>
           <?php echo __('you already liked this'); ?>
         </div>
       <?php } elseif ($pIsUsed == -1) {?>
-        <div class="already_shared" id="static-disliked">
+        <div class="rounded_corners content_main_border popup_button_used distance_right already_shared" id="static-disliked">
           <span class="sharing_button dislikeit_button">&nbsp;</span>
           <?php echo __('you already disliked this'); ?>
         </div>
@@ -50,7 +50,6 @@
           </div>
           <div class="rounded_corners content_main_border popup_button" id="static-dislike-button">
             <span class="sharing_button dislikeit_button" id="static-dislike-button">&nbsp;</span>
-            <?php echo __('dis'.$pType); ?>
           </div>
         </form>
         <div class="rounded_corners content_main_border popup_button_used distance_right already_shared" id="static-liked" style="display: none;">
