@@ -63,8 +63,6 @@ class SocialObjectTable extends Doctrine_Table
       $pLongUrl = UrlUtils::cleanupHostAndUri($pLongUrl);
     }
 
-    // get it parsed baby!
-    AmazonSQSUtils::pushToQuque('SocialObjectParser', $pUrl);
 
     if ($pLongUrl && ($pLongUrl != $pUrl)) {
       $lSocialObject = self::retrieveByAliasUrl($pLongUrl);
@@ -74,10 +72,14 @@ class SocialObjectTable extends Doctrine_Table
       } else {
         $pUrlHash = md5($pUrl);
         $pLongUrlHash = md5($pLongUrl);
+        // get it parsed baby!
+        AmazonSQSUtils::pushToQuque('SocialObjectParser', urlencode($pUrl));
         return $lCollection->update(array('url_hash' => $pUrlHash), array('$set' => array('url' => $pUrl, 'c' => time(), 'enriched' => $pEnriched), '$addToSet' => array('alias' => array('$each' => array($pUrlHash, $pLongUrlHash)))), array('upsert' => true, 'atomic' => true));
       }
     } else {
       $pUrlHash = md5($pUrl);
+      // get it parsed baby!
+      AmazonSQSUtils::pushToQuque('SocialObjectParser', urlencode($pUrl));
       return $lCollection->update(array('url_hash' => $pUrlHash), array('$set' => array('url' => $pUrl, 'c' => time(), 'enriched' => $pEnriched), '$addToSet' => array('alias' => $pUrlHash)), array('upsert' => true, 'atomic' => true));
     }
   }

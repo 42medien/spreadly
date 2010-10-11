@@ -78,11 +78,10 @@ class SocialObjectParser {
 
     if (!$lSocialObject) {
       SocialObjectTable::initializeObjectFromUrl($pUrl, SocialObjectTable::ENRICHED_TYPE_OBJECTPARSER);
+      $lSocialObject = SocialObjectTable::retrieveByUrl($pUrl);
     }
-    $lSocialObject = SocialObjectTable::retrieveByUrl($pUrl);
+
     $lParsedInformation = self::fetch($pUrl);
-
-
 
     $lTitle = StringUtils::cleanupStringForMongodb($lParsedInformation['title']);
     if ($lTitle != "" ) {
