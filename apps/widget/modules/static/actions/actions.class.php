@@ -81,7 +81,7 @@ class staticActions extends sfActions
 
     CookieUtils::generateWidgetIdentityCookie($this->pIdentities);
     sfProjectConfiguration::getActive()->loadHelpers('I18N');
-    $this->getUser()->setFlash('headline', __('SETTINGS', null, 'widget'));
+    $this->getUser()->setFlash('headline', __('Like & Dislike', null, 'widget'));
     $this->setLayout('layout_twocol');
   }
 }
