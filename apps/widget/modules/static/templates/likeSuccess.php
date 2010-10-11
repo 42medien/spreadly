@@ -26,7 +26,7 @@
         </div>
 	    <?php } else { ?>
 		    <form action="" name="static-like-form" id="static-like-form" method="post">
-		      <h3 class="small_margin"><?php echo __('YOUR_NETWORKS', null, 'widget'); ?></h3>
+		      <h3 class="small_margin"><?php echo __('YOUR_NETWORKS'); ?></h3>
 		      <input type="hidden" name="type" value="<?php echo $pType; ?>" />
 		      <input type="hidden" name="url" value="<?php echo $pUrl; ?>" />
 		      <input type="hidden" name="title" value="<?php echo $pTitle; ?>" />
@@ -46,11 +46,11 @@
 		      </ul>
 		      <div class="rounded_corners content_main_border popup_button distance_right" id="static-like-button">
             <span class="sharing_button likeit_button">&nbsp;</span>
-            <?php echo __($pType, null, 'widget'); ?>
+            <?php echo __($pType); ?>
           </div>
           <div class="rounded_corners content_main_border popup_button" id="static-dislike-button">
             <span class="sharing_button dislikeit_button" id="static-dislike-button">&nbsp;</span>
-            <?php echo __('dis'.$pType, null, 'widget'); ?>
+            <?php echo __('dis'.$pType); ?>
           </div>
         </form>
         <div class="already_shared" id="static-liked" style="display: none;">
@@ -70,8 +70,8 @@
   <?php } ?>
   </div>
   <div id="twocol_right_add" class="content_main_border rounded_corners light_background right" >
-    <h3><?php echo __('ADD_FURTHER_NETWORKS', null, 'widget'); ?></h3>
-    <p><?php echo __('CURRENT_NETWORKS', null, 'widget'); ?></p>
+    <h3><?php echo __('ADD_FURTHER_NETWORKS'); ?></h3>
+    <p><?php echo __('CURRENT_NETWORKS'); ?></p>
 
     <ul class="normal_list" id="services_to_choose">
       <li><a id="choose_facebook" href="<?php echo url_for("@static_signinto?service=facebook", true); ?>">Facebook</a></li>
@@ -81,13 +81,13 @@
 
 
   <div id="twocol_right_empty" class="content_main_border rounded_corners light_background right" style="display: none;">
-    <?php echo __('NO_FURTHER_NETWORKS', array('%1' => mail_to('neu@yiid.it')), 'widget'); ?>
+    <?php echo __('NO_FURTHER_NETWORKS', array('%1' => mail_to('neu@yiid.it'))); ?>
   </div>
 
 </div>
 
 <div id="see_friends_actions" class="clearfix">
-  <a href="http://www.yiid.com" target="_blank"><?php echo __('YOUR_FRIENDS_LIKES', null, 'widget'); ?></a>
+  <a href="http://www.yiid.com" target="_blank"><?php echo __('YOUR_FRIENDS_LIKES'); ?></a>
 </div>
 
 <iframe src="http://widgets.<?php echo sfConfig::get("app_settings_host"); ?>/w/like/like.php?visible=false&url=dummy" border="none" width="0px" height="0px" style="border:none;width:0px;height:0px;"></iframe>
