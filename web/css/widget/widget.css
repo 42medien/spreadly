@@ -74,7 +74,7 @@ li#check_google{margin-bottom:15px;}
 #so_detail_desc img{margin: 0 15px 8px 0;border: 1px solid #DDDDDD;}
 h3.small_margin{margin: 5px 0 3px;}
 #services_chosen{margin-bottom: 10px;}
-.popup_button, .popup_button_used{padding: 5px 10px;display: inline;}
+.popup_button, .popup_button_used{margin-top: 10px;padding: 5px 10px;display: inline;}
 .sharing_button{padding: 5px;}
 .distance_right{margin-right: 5px;}
 .already_shared{color: #4EA734;font-weight: bold;}
