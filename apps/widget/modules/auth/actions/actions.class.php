@@ -37,7 +37,7 @@ class authActions extends sfActions {
       }
     }
 
-    if ($this->pContext == "static" && parse_url($request->getUri(), PHP_URL_QUERY) != null) {
+    if ($this->pContext == "static") {
       $this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "static_button");
     }
 
