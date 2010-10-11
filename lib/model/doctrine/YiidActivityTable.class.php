@@ -8,8 +8,9 @@ class YiidActivityTable extends Doctrine_Table
 
   const MONGO_COLLECTION_NAME = 'yiid_activity';
 
-  public static function getInstance()
-  {
+  public static $aTypes = array("like","pro","recommend","visit","nice","buy","rsvp");
+
+  public static function getInstance() {
     return Doctrine_Core::getTable('YiidActivity');
   }
 
@@ -42,19 +43,15 @@ class YiidActivityTable extends Doctrine_Table
     $lCollection->update($pIdentifier, $pManipulator, array('upsert' => true));
   }
 
-
-
-
-
   public static function saveLikeActivitys($pUserId,
-  $pUrl,
-  $pOwnedOnlineIdentitys = array(),
-  $pGivenOnlineIdentitys = array(),
-  $pScore = self::ACTIVITY_VOTE_POSITIVE,
-  $pVerb = 'like',
-  $pTitle = null,
-  $pDescription = null,
-  $pPhoto = null) {
+                                           $pUrl,
+                                           $pOwnedOnlineIdentitys = array(),
+                                           $pGivenOnlineIdentitys = array(),
+                                           $pScore = self::ACTIVITY_VOTE_POSITIVE,
+                                           $pVerb = 'like',
+                                           $pTitle = null,
+                                           $pDescription = null,
+                                           $pPhoto = null) {
     $lSuccess = false;
     $lVerifiedOnlineIdentitys = array();
     $pTitle = StringUtils::cleanupStringForMongodb($pTitle);
@@ -110,19 +107,15 @@ class YiidActivityTable extends Doctrine_Table
     return true;
   }
 
-
-
-
   public static function storeTemporary($pSessionId,
-  $pUrl,
-  $pOwnedOnlineIdentitys = array(),
-  $pGivenOnlineIdentitys = array(),
-  $pScore = self::ACTIVITY_VOTE_POSITIVE,
-  $pVerb = 'like',
-  $pTitle = null,
-  $pDescription = null,
-  $pPhoto = null) {
-
+                                        $pUrl,
+                                        $pOwnedOnlineIdentitys = array(),
+                                        $pGivenOnlineIdentitys = array(),
+                                        $pScore = self::ACTIVITY_VOTE_POSITIVE,
+                                        $pVerb = 'like',
+                                        $pTitle = null,
+                                        $pDescription = null,
+                                        $pPhoto = null) {
     $lStorageArray = array();
     $lStorageArray['url'] = $pUrl;
     $lStorageArray['score'] = $pScore;
@@ -137,7 +130,6 @@ class YiidActivityTable extends Doctrine_Table
     $lPersist->save();
     return false;
   }
-
 
   /**
    * retrieve data saved with this sess_id
@@ -156,8 +148,6 @@ class YiidActivityTable extends Doctrine_Table
       return null;
     }
   }
-
-
 
   /**
    *
@@ -181,8 +171,6 @@ class YiidActivityTable extends Doctrine_Table
     $lActivity->save();
   }
 
-
-
   /**
    *
    * @author Christian Weyand
@@ -194,8 +182,6 @@ class YiidActivityTable extends Doctrine_Table
     $lAlreadyPerformedActivity = self::retrieveActionOnObjectById($pSocialObjectId, $pUserId);
     return $lAlreadyPerformedActivity?false:true;
   }
-
-
 
   /**
    * check if a given user already performed an action on a social object
@@ -211,9 +197,6 @@ class YiidActivityTable extends Doctrine_Table
     return $lAction?$lAction->getScore():false;
   }
 
-
-
-
   /**
    *
    * @author Christian Weyand
@@ -225,7 +208,6 @@ class YiidActivityTable extends Doctrine_Table
     $lCollection = self::getMongoCollection();
     return self::initializeObjectFromCollection($lCollection->findOne(array("so_id" => $pSocialObjectId, "u_id" => $pUserId ) ));
   }
-
 
   public static function retrieveLatestActivitiesByContacts($pUserId, $pFriendId = null, $pCommunityId = null, $pRangeDays = 30, $pOffset = 10, $pLimit = 1) {
     $lCollection = self::getMongoCollection();

@@ -46,11 +46,11 @@
 		      </ul>
 		      <div class="rounded_corners content_main_border popup_button distance_right" id="static-like-button">
             <span class="sharing_button likeit_button">&nbsp;</span>
-            <?php echo __('like', null, 'widget'); ?>
+            <?php echo __($pType, null, 'widget'); ?>
           </div>
           <div class="rounded_corners content_main_border popup_button" id="static-dislike-button">
             <span class="sharing_button dislikeit_button" id="static-dislike-button">&nbsp;</span>
-            <?php echo __('dislike', null, 'widget'); ?>
+            <?php echo __('dis'.$pType, null, 'widget'); ?>
           </div>
         </form>
         <div class="already_shared" id="static-liked" style="display: none;">
