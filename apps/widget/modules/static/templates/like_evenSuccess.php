@@ -1,7 +1,7 @@
 <?php use_helper('Text'); ?>
 
 <div class="clearfix">
-  <div id="twocol_wide_left" class="content_main_border rounded_corners light_background left">
+  <div id="twocol_left" class="content_main_border rounded_corners light_background left">
   <?php if($pIsUrlValid) { ?>
     <div id="so_right_view" class="clearfix">
       <div>
@@ -46,11 +46,11 @@
 		      </ul>
 		      <div class="rounded_corners content_main_border popup_button distance_right" id="static-like-button">
             <span class="sharing_button likeit_button">&nbsp;</span>
-            <?php echo __($pType); ?>
+            <?php echo __($pType, null, 'widget'); ?>
           </div>
           <div class="rounded_corners content_main_border popup_button" id="static-dislike-button">
             <span class="sharing_button dislikeit_button" id="static-dislike-button">&nbsp;</span>
-            <?php echo __('dis'.$pType); ?>
+            <?php echo __('dis'.$pType, null, 'widget'); ?>
           </div>
         </form>
         <div class="already_shared" id="static-liked" style="display: none;">
@@ -69,7 +69,7 @@
     </div>
   <?php } ?>
   </div>
-  <div id="twocol_right_short_add" class="content_main_border rounded_corners light_background right" >
+  <div id="twocol_right_add" class="content_main_border rounded_corners light_background right" >
     <h3><?php echo __('ADD_FURTHER_NETWORKS', null, 'widget'); ?></h3>
     <p><?php echo __('CURRENT_NETWORKS', null, 'widget'); ?></p>
 
