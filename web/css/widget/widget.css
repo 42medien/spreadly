@@ -74,7 +74,7 @@ li#check_google{margin-bottom:15px;}
 #so_detail_desc img{margin: 0 15px 8px 0;border: 1px solid #DDDDDD;}
 h3.small_margin{margin: 5px 0 3px;}
 #services_chosen{margin-bottom: 10px;}
-.popup_button{padding: 5px 10px;display: inline;}
+.popup_button, .popup_button_used{padding: 5px 10px;display: inline;}
 .sharing_button{padding: 5px;}
 .distance_right{margin-right: 5px;}
 .already_shared{color: #4EA734;font-weight: bold;}
@@ -85,6 +85,10 @@ h3.small_margin{margin: 5px 0 3px;}
  * @subsection color
  */
 body, .popup_button{background-color: #FFFFFF;color:#6a6b6a;}
+.popup_button_used{
+  background-color: #6a6b6a;
+  color: #fff;
+}
 input.btn[type=submit]{color:#6a6b6a;}
 .container_border{border:2px solid #c1c1c1;}
 .content_main_border{border:1px solid #cdcdcd;}
@@ -97,8 +101,14 @@ input.btn[type=submit]{color:#6a6b6a;}
 .dark_text{color:#6A6B6A;}
 a{color: #68B94F;}
 .likeit_button{background: #fff url("/img/sprites/sprite_popup.png") no-repeat -569px -875px;}
+.popup_button_used .likeit_button{
+  background-color: #6a6b6a;
+}
 .already_shared .likeit_button{background-color: transparent;}
 .dislikeit_button{background: #fff url("/img/sprites/sprite_popup.png") no-repeat -557px -875px;}
+.popup_button_used .dislikeit_button{
+  background-color: #6a6b6a;
+}
 .already_shared .dislikeit_button{background-color: transparent;}
 .popup_button:hover, .popup_button:hover .likeit_button, .popup_button:hover .dislikeit_button{background-color: #f2f2f2;}
 #buzz_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -575px;}
@@ -136,17 +146,20 @@ h1{margin:0;line-height: 22px;}
 p{margin:0 0 5px 0;}
 .small_size{font-size: 11px;line-height: 16px;}
 .normal_size{font-size: 12px;}
-.important_text, .btn, .popup_button{font-weight: bold;}
+.important_text, .btn, .popup_button, .popup_button_used{font-weight: bold;}
 .big_size{font-size: 14px;}
 #cancel_action, #nav_main{text-align: right;}
-#nav_main_box, .popup_button{text-align: center;}
+#nav_main_box, .popup_button, .popup_button_used{text-align: center;}
 #nav_main_box{line-height: 25px;}
 #login_box{line-height: 20px;}
 a.question_link{text-decoration: underline !important;}
 #error_box h1{font-size: 14px;}
 #error_box p{font-size: 12px;}
-#help_area, .popup_button{line-height: 22px;}
+#help_area, .popup_button, .popup_button_used{line-height: 22px;}
 .btn, .popup_button{cursor: pointer;}
+.popup_button_used{
+  cursor: default;
+}
 #agb_text a, #agb_text p{line-height: 16px;}
 #user-line h1{font-size: 16px;}
 

@@ -53,11 +53,11 @@
             <?php echo __('dis'.$pType); ?>
           </div>
         </form>
-        <div class="already_shared" id="static-liked" style="display: none;">
+        <div class="rounded_corners content_main_border popup_button_used distance_right already_shared" id="static-liked" style="display: none;">
           <span class="sharing_button likeit_button">&nbsp;</span>
           <?php echo __('you already liked this'); ?>
         </div>
-        <div class="already_shared" id="static-disliked" style="display: none;">
+        <div class="rounded_corners content_main_border popup_button_used distance_right already_shared" id="static-disliked" style="display: none;">
           <span class="sharing_button dislikeit_button">&nbsp;</span>
           <?php echo __('you already disliked this'); ?>
         </div>
