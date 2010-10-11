@@ -17,12 +17,12 @@
       <?php if ($pIsUsed == 1) { ?>
         <div class="rounded_corners content_main_border popup_button_used distance_right already_shared" id="static-liked">
           <span class="sharing_button likeit_button">&nbsp;</span>
-          <?php echo __('you already liked this'); ?>
+          <?php echo __('done_'.$pType); ?>
         </div>
       <?php } elseif ($pIsUsed == -1) {?>
         <div class="rounded_corners content_main_border popup_button_used distance_right already_shared" id="static-disliked">
           <span class="sharing_button dislikeit_button">&nbsp;</span>
-          <?php echo __('you already disliked this'); ?>
+          <?php echo __('disdone_'.$pType); ?>
         </div>
 	    <?php } else { ?>
 		    <form action="" name="static-like-form" id="static-like-form" method="post">
@@ -54,11 +54,11 @@
         </form>
         <div class="rounded_corners content_main_border popup_button_used distance_right already_shared" id="static-liked" style="display: none;">
           <span class="sharing_button likeit_button">&nbsp;</span>
-          <?php echo __('you already liked this'); ?>
+          <?php echo __('done_'.$pType); ?>
         </div>
         <div class="rounded_corners content_main_border popup_button_used distance_right already_shared" id="static-disliked" style="display: none;">
           <span class="sharing_button dislikeit_button">&nbsp;</span>
-          <?php echo __('you already disliked this'); ?>
+          <?php echo __('disdone_'.$pType); ?>
         </div>
 
       <?php } ?>
