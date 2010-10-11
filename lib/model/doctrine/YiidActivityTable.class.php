@@ -47,14 +47,14 @@ class YiidActivityTable extends Doctrine_Table
 
 
   public static function saveLikeActivitys($pUserId,
-                                            $pUrl,
-                                            $pOwnedOnlineIdentitys = array(),
-                                            $pGivenOnlineIdentitys = array(),
-                                            $pScore = self::ACTIVITY_VOTE_POSITIVE,
-                                            $pVerb = 'like',
-                                            $pTitle = null,
-                                            $pDescription = null,
-                                            $pPhoto = null) {
+  $pUrl,
+  $pOwnedOnlineIdentitys = array(),
+  $pGivenOnlineIdentitys = array(),
+  $pScore = self::ACTIVITY_VOTE_POSITIVE,
+  $pVerb = 'like',
+  $pTitle = null,
+  $pDescription = null,
+  $pPhoto = null) {
     $lSuccess = false;
     $lVerifiedOnlineIdentitys = array();
     $pTitle = StringUtils::cleanupStringForMongodb($pTitle);
@@ -188,12 +188,31 @@ class YiidActivityTable extends Doctrine_Table
    * @author Christian Weyand
    * @param $pSocialObjectId
    * @param $pOnlineIdentitys
-   * @return unknown_type
+   * @return boolean
    */
   public static function isActionOnObjectAllowed($pSocialObjectId, $pUserId) {
     $lAlreadyPerformedActivity = self::retrieveActionOnObjectById($pSocialObjectId, $pUserId);
     return $lAlreadyPerformedActivity?false:true;
   }
+
+
+
+  /**
+   * check if a given user already performed an action on a social object
+   * returns false if not, or it's score (1/-1)
+   *
+   * @author Christian Weyand
+   * @param int $pSocialObjectId
+   * @param int $pUserId
+   * @return false or score of action taken (-1/1)
+   */
+  public static function getActionOnObjectByUser($pSocialObjectId, $pUserId) {
+    $lAction = self::retrieveActionOnObjectById($pSocialObjectId, $pUserId);
+    return $lAction?$lAction->getScore():false;
+  }
+
+
+
 
   /**
    *
