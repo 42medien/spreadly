@@ -77,9 +77,6 @@
       <li><a id="choose_facebook" href="<?php echo url_for("@static_signinto?service=facebook", true); ?>">Facebook</a></li>
       <li><a id="choose_twitter" href="<?php echo url_for("@static_signinto?service=twitter", true); ?>">Twitter</a></li>
     </ul>
-
-    <?php echo __('or'); ?> <a href="#"  id="cancel-link"><?php echo __('CANCEL', null, 'widget'); ?></a>
-
   </div>
 
 
