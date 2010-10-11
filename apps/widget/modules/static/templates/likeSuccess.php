@@ -22,7 +22,7 @@
       <?php } elseif ($pIsUsed == -1) {?>
         <div class="already_shared" id="static-disliked">
           <span class="sharing_button dislikeit_button">&nbsp;</span>
-          <?php echo __('you already liked this'); ?>
+          <?php echo __('you already disliked this'); ?>
         </div>
 	    <?php } else { ?>
 		    <form action="" name="static-like-form" id="static-like-form" method="post">
@@ -49,7 +49,7 @@
             <?php echo __('like', null, 'widget'); ?>
           </div>
           <div class="rounded_corners content_main_border popup_button" id="static-dislike-button">
-            <span class="sharing_button dislikeit_button">&nbsp;</span>
+            <span class="sharing_button dislikeit_button" id="static-dislike-button">&nbsp;</span>
             <?php echo __('dislike', null, 'widget'); ?>
           </div>
         </form>
@@ -59,7 +59,7 @@
         </div>
         <div class="already_shared" id="static-disliked" style="display: none;">
           <span class="sharing_button dislikeit_button">&nbsp;</span>
-          <?php echo __('you already liked this'); ?>
+          <?php echo __('you already disliked this'); ?>
         </div>
 
       <?php } ?>
