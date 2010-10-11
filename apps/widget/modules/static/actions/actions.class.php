@@ -67,7 +67,7 @@ class staticActions extends sfActions
       $lSocialObject = SocialObjectTable::retrieveByAliasUrl($lUrl);
       $this->pIsUsed = false;
       if($lSocialObject) {
-        $this->pIsUsed = YiidACtivityTable::isActionOnObjectAllowed($lSocialObject->getId(), $this->getUser()->getUserId());
+        $this->pIsUsed = YiidACtivityTable::getActionOnObjectByUser($lSocialObject->getId(), $this->getUser()->getUserId());
       }
 
     } else {
