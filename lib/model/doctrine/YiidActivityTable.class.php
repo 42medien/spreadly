@@ -78,6 +78,7 @@ class YiidActivityTable extends Doctrine_Table
         return  false;
       }
       $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
+      $lSocialObject->updateObjectMasterData($pTitle, $pDescription, $pPhoto);
     } // object exists, we need to check if user is allowed to make an action on it
     elseif (!self::isActionOnObjectAllowed($lSocialObject->getId(), $pUserId)) {
       return false;
@@ -100,6 +101,7 @@ class YiidActivityTable extends Doctrine_Table
     }
 
     if (!empty($lVerifiedOnlineIdentityIds)) {
+      $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
       self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb);
       $lSocialObject->updateObjectOnLikeActivity($pUserId, $lVerifiedOnlineIdentityIds, $pUrl, $pScore, $lServices);
       UserTable::updateLatestActivityForUser($pUserId, time());

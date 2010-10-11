@@ -100,21 +100,21 @@ class SocialObject extends BaseSocialObject
    */
   public function updateObjectMasterData($pTitle = null, $pDescription = null, $pImage = null) {
     $lUpdateArray = array();
-    if ($pTitle) {
+    if ($pTitle && $this->getTitle() == '') {
       $pTitle  = htmlspecialchars_decode(strip_tags($pTitle));
       if (mb_detect_encoding($pTitle) != 'UTF-8') {
         $pTitle = utf8_encode($pTitle);
       }
       $lUpdateArray['title'] = $pTitle;
     }
-    if ($pDescription) {
+    if ($pDescription && $this->getDescription() == '') {
       $pDescription  = htmlspecialchars_decode(strip_tags($pDescription));
       if (mb_detect_encoding($pDescription) != 'UTF-8') {
         $pDescription = utf8_encode($pDescription);
       }
       $lUpdateArray['desc'] = $pDescription;
     }
-    if ($pImage) {
+    if ($pImage && $this->getThumbnailUrl() == '') {
       $lUpdateArray['thumb_url'] = $pImage;
     }
 
