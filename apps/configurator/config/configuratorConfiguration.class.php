@@ -10,7 +10,7 @@ class configuratorConfiguration extends sfApplicationConfiguration
  
   public function generatePlatformUrl($name, $parameters = array())
   {
-    return 'http://www.yiid.local'.$this->getPlatformRouting()->generate($name, $parameters);
+    return sfConfig::get('app_settings_url').$this->getPlatformRouting()->generate($name, $parameters);
   }
  
   public function getPlatformRouting()
