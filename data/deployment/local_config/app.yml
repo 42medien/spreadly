@@ -28,7 +28,7 @@ all:
     short_url:        'http://www.yiid.local/shorturl.php'
     short_url_intern: 'http://www.yiid.local/link'
     yiid:             'http://%user%.yiid.local'
-    widgets_url:      'http://www.yiid.local'
+    widgets_url:      'http://widgets.yiid.local'
     host:             'yiid.local'
     environment:      'local'
     dev:              1
