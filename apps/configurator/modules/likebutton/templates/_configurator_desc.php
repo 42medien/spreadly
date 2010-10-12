@@ -28,8 +28,8 @@
 	    <p><span class="italic_text underlined_text">title:</span> <?php echo __('PAGE_TITLE', null, 'configurator'); ?></p>
 	    <p><span class="italic_text underlined_text">description:</span> <?php echo __('CONTENT_SUMMARY', null, 'configurator'); ?></p>
 	    <p><span class="italic_text underlined_text">photo:</span> <?php echo __('PHOTO_URL', null, 'configurator'); ?></p>
-	    <p><span class="italic_text underlined_text">short:</span> <?php echo __('SHORT_VERSION', null, 'configurator'); ?></p>
-      <p><span class="italic_text underlined_text">social:</span> <?php echo __('SOCIAL_VERSION', null, 'configurator'); ?></p>
+	    <p><span class="italic_text underlined_text">short:</span> <?php echo __('display short (short=1) or long version'); ?></p>
+      <p><span class="italic_text underlined_text">social:</span> <?php echo __('display social (social=1) version with images of your friends'); ?></p>
 	  </div>
 
 	  <p><?php echo __('MAXIMUM_LENGHT', null, 'configurator'); ?></p>
