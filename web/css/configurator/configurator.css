@@ -219,6 +219,17 @@ p.content_list{margin:0;padding:10px 20px;}
 #generic_code_like, #generic_code_like_dislike{width:420px;height:100px;line-height: 18px;padding:5px 10px;}
 
 .radio_label{padding-top:6px;}
+
+#static_button_code_img{
+  margin: 0 10px;
+  width: 250px;
+  height: 75px;
+}
+#static_button_code{
+  margin: 0 10px 10px;
+  width: 370px;
+  height: 30px;
+}
  
 /**
  * @section Configurator
