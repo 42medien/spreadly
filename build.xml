@@ -53,6 +53,11 @@
     <copy file="data/deployment/factories_${env}.yml" tofile="apps/shorturl/config/factories.yml" overwrite="true"></copy>
     <copy file="data/deployment/factories_${env}.yml" tofile="apps/widget/config/factories.yml" overwrite="true"></copy>
 
+    <copy file="data/deployment/configurator_factories_${env}.yml" tofile="apps/configurator/config/factories.yml" overwrite="true">
+      <filterchain>
+        <expandproperties />
+      </filterchain>
+    </copy>
   </target>
 
 
@@ -93,9 +98,9 @@
     <phingcall target="buildjs"></phingcall>
     <phingcall target="buildcss"></phingcall>
 
-  	<phingcall target="runwidgettasks">
-  	  <property name="env" value="local"/>
-  	</phingcall>
+    <phingcall target="runwidgettasks">
+      <property name="env" value="local"/>
+    </phingcall>
   </target>
 
 
