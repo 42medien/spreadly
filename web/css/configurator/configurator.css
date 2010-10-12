@@ -20,6 +20,10 @@ blockquote{margin:0;padding:0}
   height: 30px;
 }
 
+#conf-static-button a, #conf-static-button a:hover, #conf-static-button img{
+  border: 0;
+} 
+
 .icon_language_select{padding: 0px 6px;}
 #language_selecten_icon_de_active{background: transparent url("/img/global/flags/de.gif") 0 3px no-repeat;}
 #language_selecten_icon_en_active{background: transparent url("/img/global/flags/en.gif") 0 3px no-repeat;}

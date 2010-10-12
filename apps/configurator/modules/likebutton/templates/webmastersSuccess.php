@@ -31,7 +31,7 @@
 <div class="content_list small_box big_size clearfix">
 	<p><?php echo __("For newsletter and websites that don't support the implementation of iframes, Yiid offers a static button with limited functionality."); ?></p>
 	<p><?php echo __('Please copy the following code and insert your individual parameter settings. The static button supports all standard parameters despite "short", "social", "photo" und "color".'); ?></p>
-	<div class="clearfix">
+	<div class="clearfix" id="conf-static-button">
 		<textarea id="static_button_code_img" class="left"><a href="<?php echo sfConfig::get('app_settings_widgets_url'); ?>/static/like?url=YOURURL" target="_blank"><img src="<?php echo sfConfig::get('app_settings_url').'img/global/yiid-btn-full-'.$sf_user->getCulture(); ?>" alt="Like" /></a></textarea>
 		<a href="<?php echo sfConfig::get('app_settings_widgets_url'); ?>/static/like?url=http://www.yiid.com" target="_blank"><?php echo image_tag('/img/global/yiid-btn-full-'.$sf_user->getCulture()); ?></a>
 	</div>
