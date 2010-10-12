@@ -5,7 +5,7 @@
   
   <div id="conf_content_supp" class="light_border_right_side">
   
-    <?php echo link_to(__('CHOOSE_PLUGINS', null, 'configurator'), '@webmasters', array('class' => 'normal_size')); ?>
+    <?php echo link_to(__('CHOOSE_PLUGINS', null, 'configurator'), '@webmasters', array('class' => 'normal_size important_text')); ?>
   
     <h3 id="preview_head"><?php echo __('CONFIGURATOR_PREVIEW', null, 'configurator'); ?></h3>
     <div id="preview">
@@ -26,7 +26,7 @@
 	   <input type="submit" id="button-likebutton" class="submit-button" value="<?php echo __('BUTTON_GET_CODE', null, 'configurator'); ?>">
 	 </div>
 	 
-	 <?php echo link_to(__('PLEASE_TAKE_CARE', null, 'configurator'), '@webmasters', array('class' => 'normal_size', 'id' => 'webmasters_advice')); ?>
+	 <?php echo link_to(__('PLEASE_TAKE_CARE', null, 'configurator'), '@webmasters', array('class' => 'normal_size important_text', 'id' => 'webmasters_advice')); ?>
 	 
 </div>
 
