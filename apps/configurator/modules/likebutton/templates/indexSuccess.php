@@ -1,7 +1,8 @@
 <?php use_helper('Headline'); ?>
 
-<div id="yiid_slogan">
-  <p class="slogan"><?php echo __('YIID_IT_SLOGAN', null, 'configurator'); ?></p>
+<div id="yiid_slogan" class="clearfix">
+  <p class="slogan left"><?php echo __('YIID_IT_SLOGAN', null, 'configurator'); ?></p>
+  <p class="green_points right">&nbsp;</p>
 </div>
 
 <?php echo grey_headline(__('BENEFITS_OWNERS_HEADLINE', null, 'configurator'), 30, 68); ?>

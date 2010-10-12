@@ -54,6 +54,7 @@ blockquote{margin:0;padding:0}
 #content ul{padding:10px 0;}
 #content li{margin-left: 40px;margin-bottom:3px;}
 #yiid_slogan p{width:300px;margin-top:0;}
+#yiid_slogan p.green_points{width: 48px;height: 55px;}
 
 #button_desc{width:347px;padding: 5px 15px;margin-top:10px;}
 #conf_content{width:487px;min-height: 300px;padding:10px 0;}
@@ -145,7 +146,7 @@ a, a:link, a:hover{color:#69BC50;}
 a.color_light, p.color_light, div.color_light, ul.color_light, .button_inner:hover, #nav_supp a, #content h1, #button-likebutton{color:#fff;}
 .content_list{background-color: #fafafa;border-left: 1px solid #eeeeee;border-right: 1px solid #eeeeee;border-bottom: 1px solid #eeeeee;border-radius: 0 0 0.3em 0.3em;-moz-border-radius:0 0 0.3em 0.3em;-webkit-border-radius:0 0 0.3em 0.3em;}
 #content li{list-style-image: url("/img/global/content_main_list_element.png");}
-#yiid_slogan{background: transparent url("/img/sprites/sprite_configurator.png") 382px -1512px no-repeat;}
+.green_points{background: transparent url("/img/sprites/sprite_configurator.png") 0 -1512px no-repeat;}
 #button_desc{background-color: #ebebeb;border: 1px solid #dedede;}
 #conf_content{background-color: #e6e6e6;border:1px solid #d3d3d3;border-top:none;border-radius: 0 0 0.3em 0.3em;-moz-border-radius: 0 0 0.3em 0.3em;-webkit-border-radius: 0 0 0.3em 0.3em;}
 
