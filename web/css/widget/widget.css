@@ -54,6 +54,9 @@ li#further_logos{margin-right: 0;width:10px;margin-top:60px;padding-top:0}
   min-height: 150px;
   padding:10px 20px;
 }
+#so_right_view{
+  margin-bottom: 20px;
+}
 .btn{padding: 2px 30px 2px 20px;width:130px;display: inline;}
 #services_chosen li{line-height: 25px;margin-bottom:5px;}
 #services_to_choose li{padding-bottom:30px;}
