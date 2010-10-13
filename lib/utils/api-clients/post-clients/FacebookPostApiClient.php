@@ -34,7 +34,7 @@ class FacebookPostApiClient implements PostApiInterface {
     }
 
     if ($pPhoto && $pPhoto != '') {
-        $lPostBody .= "&picture=".$pPhoto;
+      $lPostBody .= "&picture=".$pPhoto;
     }
 
     if ($pUrl) {
