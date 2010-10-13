@@ -15,7 +15,7 @@ h5{ font-size: 1em; font-weight: bold; }
 /**
  *   @section -FontSize
  */
-.url, .like-dislike, .user_filter, .icon_service, .pager_load_more, .user_share, .search_field_area input, .filter_counter_area, #reset_filter_friends a, .text_unimportant, #stream_breadcrumb{font-size: 0.8em;}
+.url, .like-dislike, .so_headline_right, .user_filter, .icon_service, .pager_load_more, .user_share, .search_field_area input, .filter_counter_area, #reset_filter_friends a, .text_unimportant, #stream_breadcrumb{font-size: 0.8em;}
 .so_comment, #so_right_view p, p.filter_headline, #footer ul li,
 p.main_text,
 .normal_text{
@@ -115,7 +115,7 @@ p.main_text,
   line-height: 1.5em;
 }
 .so_headline_left, .so_headline_right{line-height: 18px;}
-#stream_right_top div, #what_is_yiid_description p{line-height: 19px;}
+#stream_right_top div, #what_is_yiid_description p, .like-dislike{line-height: 19px;}
 #signin_via_username_form label{line-height: 25px;}
 #nav_main li a, #stream_left_top div, #stream_left_empty #stream_left_top p, #stream_right_top div, #signin_area h3, h3{line-height: 30px;}
 h2{line-height: 40px;}

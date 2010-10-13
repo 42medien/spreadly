@@ -7,9 +7,6 @@
 	    <div class="so_share_image left">
 	      <?php echo avatar_tag($lUser->getDefaultAvatar(), 30, array('alt' => $lUser->getFullname(), 'class' => '', 'rel' => '')); ?>
 	    </div>
-	    <div class="so_share_spread left">
-
-	    </div>
 	    <div class="so_share_information left">
 	      <span class="user_share text_important"><?php echo $lUser->getFullname(); ?></span>
 	      <span class="url"><?php echo __('%1 ago', array('%1' => $lActivity->getPublishingTime())); ?></span>

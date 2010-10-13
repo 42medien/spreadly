@@ -97,12 +97,20 @@ h4{margin: 15px 0 10px 0;}
 .icon_service{padding: 4px 10px 4px 33px;}
 .icon_detail_right{padding: 4px;}
 .user_filter{padding: 4px 5px;}
-.icon_thumb{padding: 5px 14px;}
+/*.icon_thumb{padding: 5px 14px;}*/
+.icon_thumb{padding: 5px 8px;}
 .icon_thumbs{padding: 5px 24px;}
 .icon_small_service{padding: 0px 7px;}
 .icon_small_service_right{padding: 0 4px;}
-.icon_small_use{margin-left: 5px;}
-.icon_small_use{padding: 3px 0 0 12px;}
+/*.icon_small_use{margin-left: 5px;}
+.icon_small_use{padding: 3px 0 0 12px;}*/
+.icon_small_use{padding: 5px 0 0 14px;}
+#like-thumb{
+  margin: 0 7px 0 3px;
+}
+#dislike-thumb{
+  margin-left: 3px;
+}
 .icon_language_select{padding: 0px 6px;}
 
 #error_box_404,
