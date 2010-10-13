@@ -78,7 +78,8 @@ li#check_google{margin-bottom:15px;}
 h3.small_margin{margin: 5px 0 3px;}
 #services_chosen{margin-bottom: 10px;}
 .popup_button, .popup_button_used{margin-top: 10px;padding: 5px 10px;display: inline;}
-.sharing_button{padding: 5px;}
+/*.sharing_button{padding: 5px;}*/
+.sharing_button{padding: 5px 8px;}
 .distance_right{margin-right: 5px;}
 .already_shared{color: #4EA734;font-weight: bold;}
 
@@ -103,12 +104,14 @@ input.btn[type=submit]{color:#6a6b6a;}
 .light_text{color:#fff;}
 .dark_text{color:#6A6B6A;}
 a{color: #68B94F;}
-.likeit_button{background: #fff url("/img/sprites/sprite_popup.png") no-repeat -569px -875px;}
+/*.likeit_button{background: #fff url("/img/sprites/sprite_popup.png") no-repeat -569px -875px;}*/
+.likeit_button{background: #fff url("/img/sprites/sprite_popup.png") no-repeat -539px -902px;}
 .popup_button_used .likeit_button{
   background-color: #6a6b6a;
 }
 .already_shared .likeit_button{background-color: transparent;}
-.dislikeit_button{background: #fff url("/img/sprites/sprite_popup.png") no-repeat -557px -875px;}
+/*.dislikeit_button{background: #fff url("/img/sprites/sprite_popup.png") no-repeat -557px -875px;}*/
+.dislikeit_button{background: #fff url("/img/sprites/sprite_popup.png") no-repeat -562px -902px;}
 .popup_button_used .dislikeit_button{
   background-color: #6a6b6a;
 }
