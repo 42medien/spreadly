@@ -90,6 +90,7 @@ class authActions extends sfActions {
     if ($this->pContext == "popup") {
       $this->redirect('@settings');
     } else {
+      $lUrl = $this->getUser()->getAttribute("redirect_after_login", null, "static_button");
       $this->redirect($lUrl);
     }
   }
