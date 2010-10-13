@@ -37,7 +37,9 @@ var LikePopup = {
    * @author Karina Mies
    */
 	refreshParent: function() {
-    LikePopup.aOpener.location.reload();		
+    if(LikePopup.aOpener != null) {	  
+      LikePopup.aOpener.location.reload();
+    }
 	}
 };
 
