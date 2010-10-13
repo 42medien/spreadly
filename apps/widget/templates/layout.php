@@ -5,6 +5,7 @@
 
     <?php include_http_metas() ?>
     <?php include_metas() ?>
+    <?php include_title() ?>
 
     <?php include_stylesheets(); ?>
     <script type="text/javascript" src="/js/100_main/include/likepopup-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
