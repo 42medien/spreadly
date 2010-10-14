@@ -138,10 +138,13 @@ class SocialObjectPeer {
 class YiidActivityObjectPeer {
   const MONGO_COLLECTION = 'yiid_activity';
 
+
   /**
-   * @todo phpdoc
+   * check if a given user already performed an action on a social object
+   * returns false if not, or it's score (1/-1)
+   *
    * @author Christian Weyand
-   * @param $string pUrl
+   * @param int $pSocialObjectId
    * @param int $pUserId
    * @return false or score of action taken (-1/1)
    */
