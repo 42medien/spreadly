@@ -61,7 +61,7 @@ YiidStatsSingleton::trackVisit($pUrl);
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Yiid it! Button</title>
-<script type="text/javascript" src="/js/100_main/include/Full-20100930.min.js"></script>
+<script type="text/javascript" src="/js/100_main/include/Full-20101014.min.js"></script>
 <script type="text/javascript">
   <?php echo printI18nJSObject($pType); ?>
   YiidWidget.init("<?php echo urlencode($pUrl); ?>", "<?php echo $pType; ?>", "<?php echo urlencode($pTitle); ?>", "<?php echo urlencode($pDescription); ?>", "<?php echo urlencode($pPhoto); ?>");
