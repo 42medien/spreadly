@@ -33,6 +33,8 @@ OnlineIdentity:
     social_publishing_enabled:
       type:       integer(4)
       default:    0
+    friend_ids:
+      type:     text
     last_friend_refresh:
       type:     integer
       default:  0
