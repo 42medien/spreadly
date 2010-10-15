@@ -40,10 +40,10 @@ class OnlineIdentityTable extends Doctrine_Table {
    * @param int $pType
    * @return OnlineIdentity|null
    */
-  public static function retrieveByIdentifier($pIdentifier, $pCommunityId, $pType = self::TYPE_IDENTITY) {
+  public static function retrieveByIdentifier($pIdentifier, $pCommunityId) {
     $lOnlineIdentity = Doctrine_Query::create()->
     from('OnlineIdentity oi')->
-    where('oi.identifier = ? AND oi.community_id = ?', array($pIdentifier, $pCommunityId))
+    where('oi.community_id = ?', $pCommunityId)
     ->fetchOne();
     return $lOnlineIdentity;
   }
@@ -87,56 +87,6 @@ class OnlineIdentityTable extends Doctrine_Table {
     $lOIdentity->save();
 
     return $lOIdentity;
-  }
-
-  /**
-   * function to split the url to get the userid and the used service
-   *
-   * @param string $pUrl
-   * @param int $pCommunityId
-   * @return OnlineIdentity
-   */
-  public static function extractIdentifierfromUrl($pUrl, $pCommunityId) {
-    self::normalizeUrl($pUrl);
-
-    $lCommunities = array();
-
-    // check if there is a community defined
-    if ($pCommunityId) {
-      $lCommunities[] = CommunityTable::getInstance()->find($pCommunityId);
-    } else {
-      $lCommunities = CommunityTable::retrieveByDomain(UrlUtils::getDomain($pUrl));
-    }
-
-    foreach($lCommunities as $lC) {
-      if ($lC->getOiUrl()) {
-        $lRegex = '/'.str_replace(array('%s', 'www\.'), array('(.*)', '.*'), preg_quote($lC->getOiUrl(),'/')).'?/i';
-        $lMatch = array();
-
-        if (preg_match($lRegex, $pUrl, $lMatch)) {
-          $lIdentifier = $lMatch[1];
-          // check for trailing '/' and remove
-          if (substr($lIdentifier, -1, 1) == "/") {
-            $lIdentifier = substr($lIdentifier,0,-1);
-          }
-          sfContext::getInstance()->getLogger()->debug(print_r($lMatch, true));
-
-          $lOnlineIdentity = new OnlineIdentity();
-          $lOnlineIdentity->setIdentifier($lIdentifier);
-          $lOnlineIdentity->setCommunityId($lC->getId());
-
-          if ($lC->getCommunity() == "website") {
-            $lOnlineIdentity->setIdentityType(self::TYPE_URL);
-          } else {
-            $lOnlineIdentity->setIdentityType(self::TYPE_IDENTITY);
-          }
-
-          return $lOnlineIdentity;
-        }
-      }
-    }
-
-    return null;
   }
 
   /**
