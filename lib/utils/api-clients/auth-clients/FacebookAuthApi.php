@@ -55,7 +55,6 @@ class FacebookAuthApiClient extends AuthApi {
 
     // if there is no user create one
     if (!$lUser || !$lUser->getId()) {
-      // @todo <todo> encapsulating this
       // use api complete informations
       $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject); // signup,add new
       $this->completeUser($lUser, $lJsonObject);                     // signup
@@ -67,12 +66,6 @@ class FacebookAuthApiClient extends AuthApi {
       // delete connected user-cons
       UserIdentityConTable::deleteAllConnections($lOnlineIdentity->getId());  // signup,add new
 
-      $lUserIdentityCon = new UserIdentityCon();                     /* signup,add new */
-      $lUserIdentityCon->setUserId($lUser->getId());
-      $lUserIdentityCon->setOnlineIdentityId($lOnlineIdentity->getId());
-      $lUserIdentityCon->setVerified(true);
-      $lUserIdentityCon->save();
-      // </todo>
 
       $lImgPath = "https://graph.facebook.com/".$lJsonObject->id."/picture&type=large";
       $pPayload = serialize(array('path' => $lImgPath, 'user_id' => $lUser->getId(), 'oi_id' => $lOnlineIdentity->getId()));
@@ -121,7 +114,7 @@ class FacebookAuthApiClient extends AuthApi {
       }
     } else {
       // check online identity
-      $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lJsonObject->link, $this->aCommunityId);
+      $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lJsonObject->link, $lJsonObject->id, $this->aCommunityId);
     }
 
     // delete connected user-cons

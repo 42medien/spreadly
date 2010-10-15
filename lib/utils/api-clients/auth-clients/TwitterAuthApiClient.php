@@ -115,7 +115,7 @@ class TwitterAuthApiClient extends AuthApi {
       }
     } else {
       // check online identity
-      $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lParamsArray['screen_name'], $this->aCommunityId);
+      $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lParamsArray['screen_name'], $lParamsArray['user_id'], $this->aCommunityId);
     }
 
     // delete connected user-cons
@@ -133,13 +133,6 @@ class TwitterAuthApiClient extends AuthApi {
     $lOnlineIdentity->setUserId($pUser->getId());
     $lOnlineIdentity->setAuthIdentifier($lIdentifier);
     $lOnlineIdentity->save();
-
-    $lUserIdentityCon = new UserIdentityCon();
-    $lUserIdentityCon->setUserId($pUser->getId());
-    $lUserIdentityCon->setOnlineIdentityId($lOnlineIdentity->getId());
-    $lUserIdentityCon->setVerified(true);
-    $lUserIdentityCon->save();
-    // </todo>
 
     $this->importContacts($lOnlineIdentity->getId());
 
