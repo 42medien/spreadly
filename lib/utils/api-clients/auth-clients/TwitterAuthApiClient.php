@@ -61,20 +61,12 @@ class TwitterAuthApiClient extends AuthApi {
       $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject);
       $this->completeUser($lUser, $lJsonObject);
 
-      // @todo <todo> encapsulating this
       $lOnlineIdentity->setUserId($lUser->getId());
       $lOnlineIdentity->setAuthIdentifier($lIdentifier);
       $lOnlineIdentity->save();
 
       // delete connected user-cons
       UserIdentityConTable::deleteAllConnections($lOnlineIdentity->getId());
-
-      $lUserIdentityCon = new UserIdentityCon();
-      $lUserIdentityCon->setUserId($lUser->getId());
-      $lUserIdentityCon->setOnlineIdentityId($lOnlineIdentity->getId());
-      $lUserIdentityCon->setVerified(true);
-      $lUserIdentityCon->save();
-      // </todo>
 
       //TwitterImportClient::importContacts($lUser->getId(), $lOnlineIdentity);
       $lImgPath = "http://api.twitter.com/1/users/profile_image/".$lParamsArray['screen_name']."?size=bigger";

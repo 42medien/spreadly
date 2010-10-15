@@ -130,17 +130,9 @@ class FacebookAuthApiClient extends AuthApi {
     // use api complete informations
     $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject); // signup,add new
 
-    // @todo <todo> encapsulating this
     $lOnlineIdentity->setUserId($pUser->getId());                  /* signup,add new */
     $lOnlineIdentity->setAuthIdentifier($lIdentifier);
     $lOnlineIdentity->save();
-
-    $lUserIdentityCon = new UserIdentityCon();                     /* signup,add new */
-    $lUserIdentityCon->setUserId($pUser->getId());
-    $lUserIdentityCon->setOnlineIdentityId($lOnlineIdentity->getId());
-    $lUserIdentityCon->setVerified(true);
-    $lUserIdentityCon->save();
-    // </todo>
 
     $this->importContacts($lOnlineIdentity->getId());
 
