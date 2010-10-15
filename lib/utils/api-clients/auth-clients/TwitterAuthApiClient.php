@@ -208,12 +208,6 @@ class TwitterAuthApiClient extends AuthApi {
     }
 
     $pUser->setCulture(substr($pObject->lang, 0, 2));
-
-    // add url as online identity
-    if ($pObject->url) {
-      $lOnlineIdentity = $pUser->addOnlineIdentity($pObject->url);
-    }
-
     $pUser->save();
   }
 
