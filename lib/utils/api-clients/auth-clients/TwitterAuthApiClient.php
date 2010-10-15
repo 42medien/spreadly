@@ -59,25 +59,9 @@ class TwitterAuthApiClient extends AuthApi {
       $lJsonObject = json_decode($lJson);
 
       // use api complete informations
-      $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject);
       $this->completeUser($lUser, $lJsonObject);
-
-      $lOnlineIdentity->setUserId($lUser->getId());
-      $lOnlineIdentity->setAuthIdentifier($lIdentifier);
-      $lOnlineIdentity->save();
-
-      // delete connected user-cons
-      UserIdentityConTable::deleteAllConnections($lOnlineIdentity->getId());
-
-      //TwitterImportClient::importContacts($lUser->getId(), $lOnlineIdentity);
-      $lImgPath = "http://api.twitter.com/1/users/profile_image/".$lParamsArray['screen_name']."?size=bigger";
-      $pPayload = serialize(array('path' => $lImgPath, 'user_id' => $lUser->getId(), 'oi_id' => $lOnlineIdentity->getId()));
-      AmazonSQSUtils::pushToQuque('ImageImport', $pPayload);
-     // ImageImporter::importByUrlAndUserId($lImgPath, $lUser->getId(), $lOnlineIdentity);
+      $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject, $lUser, $lIdentifier);
     }
-
-    // import contacts
-    $this->importContacts($lOnlineIdentity->getId());
 
     AuthTokenTable::saveToken($lUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], true);
 
@@ -119,25 +103,14 @@ class TwitterAuthApiClient extends AuthApi {
       $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity("http://twitter.com/".$lParamsArray['screen_name'], $lParamsArray['user_id'], $this->aCommunityId);
     }
 
-    // delete connected user-cons
-    UserIdentityConTable::deleteAllConnections($lOnlineIdentity->getId());
-
     // get api informations
     $lJson = OAuthClient::get($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "http://api.twitter.com/1/users/show.json?user_id=".$lParamsArray['user_id']);
     $lJsonObject = json_decode($lJson);
 
-    // use api complete informations
-    $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject);
-    $this->completeUser($pUser, $lJsonObject);
-
-    // @todo <todo> encapsulating this
-    $lOnlineIdentity->setUserId($pUser->getId());
-    $lOnlineIdentity->setAuthIdentifier($lIdentifier);
-    $lOnlineIdentity->save();
-
-    $this->importContacts($lOnlineIdentity->getId());
+    $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject, $pUser, $lIdentifier);
 
     AuthTokenTable::saveToken($pUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], true);
+
     return $lOnlineIdentity;
   }
 
@@ -211,16 +184,25 @@ class TwitterAuthApiClient extends AuthApi {
    * @param OnlineIdentity $pOnlineIdentity
    * @param Object $pObject
    */
-  public function completeOnlineIdentity(&$pOnlineIdentity, $pObject) {
+  public function completeOnlineIdentity(&$pOnlineIdentity, $pObject, $pUser, $pAuthIdentifier) {
     if ($pObject->name) {
       $pOnlineIdentity->setName($pObject->name);
     } else {
       $pOnlineIdentity->setName($pObject->screen_name);
     }
 
+    $lOnlineIdentity->setUserId($pUser->getId());
+    $lOnlineIdentity->setAuthIdentifier($pAuthIdentifier);
     $pOnlineIdentity->setPhoto($pObject->profile_image_url);
     $pOnlineIdentity->setSocialPublishingEnabled(true);
 
     $pOnlineIdentity->save();
+
+    $this->importContacts($pOnlineIdentity->getId());
+
+    //TwitterImportClient::importContacts($lUser->getId(), $lOnlineIdentity);
+    $lImgPath = "http://api.twitter.com/1/users/profile_image/".$pObject->screen_name."?size=bigger";
+    $pPayload = serialize(array('path' => $lImgPath, 'user_id' => $pUser->getId(), 'oi_id' => $pOnlineIdentity->getId()));
+    AmazonSQSUtils::pushToQuque('ImageImport', $pPayload);
   }
 }

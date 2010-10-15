@@ -55,25 +55,10 @@ class FacebookAuthApiClient extends AuthApi {
 
     // if there is no user create one
     if (!$lUser || !$lUser->getId()) {
-      // use api complete informations
-      $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject); // signup,add new
       $this->completeUser($lUser, $lJsonObject);                     // signup
-
-      $lOnlineIdentity->setUserId($lUser->getId());                  /* signup,add new */
-      $lOnlineIdentity->setAuthIdentifier($lIdentifier);
-      $lOnlineIdentity->save();
-
-      // delete connected user-cons
-      UserIdentityConTable::deleteAllConnections($lOnlineIdentity->getId());  // signup,add new
-
-
-      $lImgPath = "https://graph.facebook.com/".$lJsonObject->id."/picture&type=large";
-      $pPayload = serialize(array('path' => $lImgPath, 'user_id' => $lUser->getId(), 'oi_id' => $lOnlineIdentity->getId()));
-      AmazonSQSUtils::pushToQuque('ImageImport', $pPayload);
+      // use api complete informations
+      $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject, $lUser, $lIdentifier); // signup,add new
     }
-
-    // import contacts
-    $this->importContacts($lOnlineIdentity->getId());
 
     // save new token
     AuthTokenTable::saveToken($lUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['access_token'], null, true);  // signup,add new
@@ -117,17 +102,8 @@ class FacebookAuthApiClient extends AuthApi {
       $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lJsonObject->link, $lJsonObject->id, $this->aCommunityId);
     }
 
-    // delete connected user-cons
-    UserIdentityConTable::deleteAllConnections($lOnlineIdentity->getId());  // signup,add new
-
     // use api complete informations
-    $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject); // signup,add new
-
-    $lOnlineIdentity->setUserId($pUser->getId());                  /* signup,add new */
-    $lOnlineIdentity->setAuthIdentifier($lIdentifier);
-    $lOnlineIdentity->save();
-
-    $this->importContacts($lOnlineIdentity->getId());
+    $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject, $pUser, $lIdentifier); // signup,add new
 
     AuthTokenTable::saveToken($pUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['access_token'], null, true);  // signup,add new
 
@@ -185,11 +161,19 @@ class FacebookAuthApiClient extends AuthApi {
    * @param OnlineIdentity $pOnlineIdentity
    * @param Object $pObject
    */
-  public function completeOnlineIdentity(&$pOnlineIdentity, $pObject) {
+  public function completeOnlineIdentity(&$pOnlineIdentity, $pObject, $pUser, $pAuthIdentifier) {
     $pOnlineIdentity->setName($pObject->name);
     //$pOnlineIdentity->setPhoto($pObject->profile_image_url);
     $pOnlineIdentity->setSocialPublishingEnabled(true);
 
+    $pOnlineIdentity->setUserId($pUser->getId());                  /* signup,add new */
+    $pOnlineIdentity->setAuthIdentifier($pAuthIdentifier);
     $pOnlineIdentity->save();
+
+    $this->importContacts($pOnlineIdentity->getId());
+
+    $lImgPath = "https://graph.facebook.com/".$pObject->id."/picture&type=large";
+    $lPayload = serialize(array('path' => $lImgPath, 'user_id' => $lUser->getId(), 'oi_id' => $pOnlineIdentity->getId()));
+    AmazonSQSUtils::pushToQuque('ImageImport', $lPayload);
   }
 }
