@@ -76,15 +76,14 @@ class OnlineIdentityTable extends Doctrine_Table {
    */
   public static function addOnlineIdentity($pProfileUri, $pOriginalId, $pCommunityId = null, $pType = self::TYPE_IDENTITY) {
     // if the identifier is null return null
-    if (!$pIdentifier || !$pOriginalId) {
+    if (!$pProfileUri || !$pOriginalId) {
       return null;
     }
 
     $lOIdentity = new OnlineIdentity();
     $lOIdentity->setOriginalId($pOriginalId);
-    $lOIdentity->setProfileUri($pIdentifier);
+    $lOIdentity->setProfileUri($pProfileUri);
     $lOIdentity->setCommunityId($pCommunityId);
-    $lOIdentity->setIdentityType($pType);
     $lOIdentity->save();
 
     return $lOIdentity;
