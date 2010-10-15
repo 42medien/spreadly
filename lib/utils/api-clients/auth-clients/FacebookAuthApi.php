@@ -173,7 +173,7 @@ class FacebookAuthApiClient extends AuthApi {
     $this->importContacts($pOnlineIdentity->getId());
 
     $lImgPath = "https://graph.facebook.com/".$pObject->id."/picture&type=large";
-    $lPayload = serialize(array('path' => $lImgPath, 'user_id' => $lUser->getId(), 'oi_id' => $pOnlineIdentity->getId()));
+    $lPayload = serialize(array('path' => $lImgPath, 'user_id' => $pUser->getId(), 'oi_id' => $pOnlineIdentity->getId()));
     AmazonSQSUtils::pushToQuque('ImageImport', $lPayload);
   }
 }
