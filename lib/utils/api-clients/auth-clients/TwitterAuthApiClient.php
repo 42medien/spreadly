@@ -115,7 +115,7 @@ class TwitterAuthApiClient extends AuthApi {
       }
     } else {
       // check online identity
-      $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lParamsArray['screen_name'], $lParamsArray['user_id'], $this->aCommunityId);
+      $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity("http://twitter.com/".$lParamsArray['screen_name'], $lParamsArray['user_id'], $this->aCommunityId);
     }
 
     // delete connected user-cons
