@@ -3,80 +3,67 @@ OnlineIdentity:
     title:      'hugo_twitter'
     name:       'hugo_twitter'
     identifier: 'hugo_twitter'
-    Community:  community_2   
-    identity_type:       1 
+    Community:  community_2
   oi_2:
     title:      'hugo_fb'
     name:       'hugo_fb'
     identifier: 'hugo_fb'
     Community:  community_3
-    identity_type:       1
   oi_3:
     title:      'hans_twitter'
     name:       'hans_twitter'
     identifier: 'hans_twitter'
     Community:  community_2
-    identity_type:       1
   oi_4:
     title:      'hans_fb'
     name:       'hans_fb'
     identifier: 'hans_fb'
     Community:  community_3
-    identity_type:       1
   oi_5:
     title:      'karl_twitter'
     name:       'karl_twitter'
     identifier: 'karl_twitter'
     Community:  community_2
-    identity_type:       1
   oi_6:
     title:      'james_fb'
     name:       'james_fb'
     identifier: 'james_fb'
     Community:  community_3
-    identity_type:       1
   oi_7:
     title:      'snirgelchen_fb'
     name:       'snirgelchen_fb'
     identifier: 'snirgelchen_fb'
     Community:  community_3
-    identity_type:       1
   oi_8:
     title:      'manni_fb'
     name:       'manni_fb'
     identifier: 'manni_fb'
     Community:  community_3
-    identity_type:       1
   oi_9:
     title:      'affe_fb'
     name:       'affe_fb'
     identifier: 'affe_fb'
     Community:  community_3
-    identity_type:       1
   oi_10:
     title:      'james_twitter'
     name:       'james_twitter'
     identifier: 'james_twitter'
     Community:  community_2
-    identity_type:       1
   oi_11:
     title:      'snirgelchen_twitter'
     name:       'snirgelchen_twitter'
     identifier: 'snirgelchen_twitter'
     Community:  community_2
-    identity_type:       1
   oi_12:
     title:      'manni_twitter'
     name:       'manni_twitter'
     identifier: 'manni_twitter'
     Community:  community_2
-    identity_type:       1
   oi_13:
     title:      'affe_twitter'
     name:       'affe_twitter'
     identifier: 'affe_twitter'
     Community:  community_2
-    identity_type:       1
     
     
 UserIdentityCon:

@@ -14,6 +14,8 @@ OnlineIdentity:
     user_id:
       type:     integer
       notnull:  false
+    original_id:
+      type:     integer
     title:
       type:     string(120)
     name:
@@ -22,10 +24,8 @@ OnlineIdentity:
       type:     string(255)
     identifier:
       type:     string(255)
-    identity_type:
-      type:     integer(4)
-    feed_identifier:
-      type:     string(120)
+    profile_uri:
+      type:     string(255)
     auth_identifier:
       type:     string(255)
     auth_identity_type:
@@ -43,9 +43,9 @@ OnlineIdentity:
     auth_identifier:
       fields: [auth_identifier]
       type:   unique
-    combined_index:
-      fields: [community_id, identifier, identity_type]
-      type:   unique
+#    combined_index:
+#      fields: [community_id, identifier,]
+#      type:   unique
 
 
 OnlineIdentityCon:

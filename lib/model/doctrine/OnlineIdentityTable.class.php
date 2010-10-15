@@ -43,7 +43,7 @@ class OnlineIdentityTable extends Doctrine_Table {
   public static function retrieveByIdentifier($pIdentifier, $pCommunityId, $pType = self::TYPE_IDENTITY) {
     $lOnlineIdentity = Doctrine_Query::create()->
     from('OnlineIdentity oi')->
-    where('oi.identifier = ? AND oi.identity_type = ? AND oi.community_id = ?', array($pIdentifier, $pType, $pCommunityId))
+    where('oi.identifier = ? AND oi.community_id = ?', array($pIdentifier, $pCommunityId))
     ->fetchOne();
     return $lOnlineIdentity;
   }
@@ -69,37 +69,23 @@ class OnlineIdentityTable extends Doctrine_Table {
    * add a new OnlineIdentity object
    *
    * @author Matthias Pfefferle
-   * @param string $pIdentifier
+   * @param string $pProfileUri
+   * @param int $pOriginalId
    * @param string $pCommunity
    * @param int $pType
    */
-  public static function addOnlineIdentity($pIdentifier, $pCommunityId = null, $pType = self::TYPE_IDENTITY) {
+  public static function addOnlineIdentity($pProfileUri, $pOriginalId, $pCommunityId = null, $pType = self::TYPE_IDENTITY) {
     // if the identifier is null return null
-    if (!$pIdentifier) {
+    if (!$pIdentifier || !$pOriginalId) {
       return null;
     }
 
-    $lOIdentity = null;
-
-    // check if identifier is an url
-    if (preg_match("/https?:\/\//i", $pIdentifier) && $pType == self::TYPE_IDENTITY) {
-      $lOIdentity = self::extractIdentifierfromUrl($pIdentifier, $pCommunityId);
-    }
-
-    // or create a new object
-    if ($lOIdentity == null) {
-      $lOIdentity = new OnlineIdentity();
-      $lOIdentity->setIdentifier($pIdentifier);
-      $lOIdentity->setCommunityId($pCommunityId);
-      $lOIdentity->setIdentityType($pType);
-    }
-
-    // check if oi already exists
-    if ($lOi = self::retrieveByOnlineIdentity($lOIdentity)) {
-      $lOIdentity = $lOi;
-    } else {
-      $lOIdentity->save();
-    }
+    $lOIdentity = new OnlineIdentity();
+    $lOIdentity->setOriginalId($pOriginalId);
+    $lOIdentity->setProfileUri($pIdentifier);
+    $lOIdentity->setCommunityId($pCommunityId);
+    $lOIdentity->setIdentityType($pType);
+    $lOIdentity->save();
 
     return $lOIdentity;
   }
@@ -282,7 +268,7 @@ class OnlineIdentityTable extends Doctrine_Table {
     return $lOis;
   }
 
-    public static function getInintialImport($pLimit) {
+  public static function getInintialImport($pLimit) {
     $q = Doctrine_Query::create()
     ->from('AuthToken at')
     ->select('at.online_identity_id');
