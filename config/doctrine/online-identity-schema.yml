@@ -15,7 +15,7 @@ OnlineIdentity:
       type:     integer
       notnull:  false
     original_id:
-      type:     integer
+      type:     string(16)
     title:
       type:     string(120)
     name:
@@ -45,9 +45,9 @@ OnlineIdentity:
     auth_identifier:
       fields: [auth_identifier]
       type:   unique
-#    combined_index:
-#      fields: [community_id, identifier,]
-#      type:   unique
+    combined_index:
+      fields: [community_id, original_id]
+      type:   unique
 
 
 OnlineIdentityCon:

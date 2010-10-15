@@ -19,31 +19,6 @@ class User extends BaseUser {
   }
 
   /**
-   * function to add a new identity and connects it with the user model
-   *
-   * @param string $pIdentity
-   * @param string $pService
-   * @param integer $pType for example OnlineIdentityPeer::TYPE_URL or OnlineIdentityPeer::TYPE_ACCOUNT
-   * @param boolean $pVerified if it is a verified online identity
-   * @throws ModelException
-   * @return OnlineIdentity $lOnlineIdentity
-   */
-  public function addOnlineIdentity($pIdentifier, $pCommunityId = null, $pType = OnlineIdentityTable::TYPE_IDENTITY, $pVerified = false, $pAuthIdentifier = null) {
-    $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($pIdentifier, $pCommunityId, $pType);
-
-    if ($pVerified === false) {
-      $pVerified = SocialGraphApi::verifyRelMe($lOnlineIdentity->getUrl(), $this->getYiid(true));
-    }
-
-    //UserIdentityConTable::addUserIdentityCon($lOnlineIdentity, $this, $pVerified, $pAuthIdentifier);
-
-    $lOnlineIdentity->setAuthIdentifier($pAuthIdentifier);
-    $lOnlineIdentity->save();
-
-    return $lOnlineIdentity;
-  }
-
-  /**
    * function to get the full name (first + last-name)
    *
    * @author Matthias Pfefferle
@@ -89,8 +64,6 @@ class User extends BaseUser {
    * @param Doctrine_Event $pEvent
    */
   public function postInsert($pEvent) {
-    // @todo add yiid online identity
-
     // initialize user's relation object stored in MongoDB
     $lRelation = new UserRelation();
     $lRelation->setUserId($this->getId());
@@ -124,8 +97,10 @@ class User extends BaseUser {
   }
 
   public function getOnlineIdentities() {
-    return UserIdentityConTable::getOnlineIdentitiesForUser($this->getId());
+    return OnlineIdentityTable::retrieveByUserId($this->getId());
   }
+
+
 
 
   public function getTokensForPublishing() {

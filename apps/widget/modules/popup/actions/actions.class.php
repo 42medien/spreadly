@@ -26,7 +26,7 @@ class popupActions extends sfActions {
     if($request->getMethod() == sfRequest::POST) {
       $checkedOnlineIdentities = $request->getParameter('enabled_services', array());
       //@todo define methods in objects
-      OnlineIdentityTable::toggleSocialPublishingStatus(UserIdentityConTable::getOnlineIdentityIdsForUser($this->getUser()->getId()), $checkedOnlineIdentities);
+      OnlineIdentityTable::toggleSocialPublishingStatus($this->getUser()->getOnlineIdentities(), $checkedOnlineIdentities);
 
       if (array_key_exists("yiid_temp_hash", $_COOKIE)) {
         $lTempData = YiidActivityTable::getTemporaryData($_COOKIE["yiid_temp_hash"]);
@@ -36,7 +36,7 @@ class popupActions extends sfActions {
           $lStatus = YiidActivityTable::saveLikeActivitys($this->getUser()->getId(),
                                               $lTempData["url"],
                                               //@todo define methods in objects
-                                              UserIdentityConTable::getOnlineIdentityIdsForUser($this->getUser()->getId()),
+                                              $this->getUser()->getOnlineIdentities(),
                                               OnlineIdentityTable::getPublishingEnabledByUserIdOnlyIds($this->getUser()->getId()),
                                               $lTempData["score"],
                                               $lTempData["verb"],

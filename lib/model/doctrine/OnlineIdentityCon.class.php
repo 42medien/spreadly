@@ -13,13 +13,23 @@
 class OnlineIdentityCon extends BaseOnlineIdentityCon
 {
 
+  /**
+   * (non-PHPdoc)
+   * @see lib/vendor/symfony/lib/plugins/sfDoctrinePlugin/lib/vendor/doctrine/Doctrine/Doctrine_Record#postInsert()
+   *
+   * @author weyandch
+   * @todo refactoring
+   */
   public function postInsert($event) {
     // the user adds a new OI to his account
+
+    /*
     $lUsers = $this->getOnlineIdentityFrom()->getConnectedUsers();
     $lContactUserIds = $this->getOnlineIdentityTo()->getConnectedUserIds();
     foreach ($lUsers as $lUser) {
       $lUser->updateContacts($lContactUserIds, array($this->getToId()));
     }
 
+*/
   }
 }

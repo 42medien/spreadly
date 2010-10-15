@@ -14,19 +14,6 @@ class OnlineIdentity extends BaseOnlineIdentity
 {
 
   protected $aPostApiClient = null;
-  /**
-   * return User Objects who have added this OI
-   */
-  public function getConnectedUsers() {
-    return UserIdentityConTable::getUsersConnectedToOnlineIdentity($this);
-  }
-
-  /**
-   * returns IDs of Uyer Objects connected to that OI
-   */
-  public function getConnectedUserIds() {
-    return UserIdentityConTable::getUserIdsConnectedToOnlineIdentity($this);
-  }
 
   /**
    * builds the real profile-url using the identifier
@@ -62,10 +49,6 @@ class OnlineIdentity extends BaseOnlineIdentity
   }
 
   public function getOAuthToken(){
-
-
   }
-
-
 
 }

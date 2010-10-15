@@ -115,27 +115,4 @@ class UserRelationTable extends Doctrine_Table
   }
 
 
-  /**
-   * get all identities & friends for a given user
-   *
-   * @param int $pUserId
-   */
-  public static function doIdentityMigration($pUserId) {
-
-    $lOwnedOiIds = UserIdentityConTable::getOnlineIdentityIdsForUser($pUserId);
-
-    UserRelationTable::updateOwnedIdentities($pUserId, $lOwnedOiIds);
-
-    foreach ($lOwnedOiIds as $lOiId) {
-      $lUsersConnected = array();
-      $lOiIds = OnlineIdentityConTable::getIdentitysConnectedToOi($lOiId);
-
-      foreach ($lOiIds as $lOi) {
-        $lUsersConnected = array_merge($lUsersConnected, UserIdentityConTable::getUserIdsConnectedToOnlineIdentityId($lOi));
-      }
-
-      UserRelationTable::updateContactIdentities($pUserId, $lOiIds, $lUsersConnected);
-    }
-  }
-
 }
