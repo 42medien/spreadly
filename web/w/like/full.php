@@ -113,7 +113,12 @@ YiidStatsSingleton::trackVisit($pUrl);
 			    </div>
 
 			    <div id="settings_button" class="normal_button_area" style="display:none;">
-		        <span id="settings_button_icon" class="left">&nbsp;</span>
+		        <div id="service_area" class="left">
+		          <div id="service_twitter_small_enabled" class="service_icon_small left"></div>
+		          <div id="service_facebook_small_enabled" class="service_icon_small right"></div>
+		          <div id="service_linkedin_small_enabled" class="service_icon_small left"></div>
+		          <div id="service_google_small_enabled" class="service_icon_small right"></div>
+		        </div>
 				    <p class="left <?php echo (!$pFullShortVersion ? 'normal_space' : 'small_space') ?>" onclick="YiidSlider.slideOut(event);" title="<?php echo __("SETTINGS_TITLE"); ?>">
 				      <?php if(!$pFullShortVersion) { ?><?php echo __("SETTINGS_VALUE"); ?><?php } ?>
 				    </p>
@@ -139,12 +144,19 @@ YiidStatsSingleton::trackVisit($pUrl);
 
 
 		<div id="container_used" class="left" <?php if($lIsUsed === false) { ?>style="display: none;"<?php } ?>>
-		  <div id="used_button" class="normal_button_area <?php echo (!$pFullShortVersion ? 'normal_space' : 'small_space') ?>_used" target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>');">
+		  <div id="used_button" class="light_bg_118 normal_button_area <?php echo (!$pFullShortVersion ? 'normal_space' : 'small_space') ?>_used" target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>');">
+		  
+		    <div id="service_area" class="left">
+          <div id="service_twitter_small_enabled" class="service_icon_small left"></div>
+          <div id="service_facebook_small_enabled" class="service_icon_small right"></div>
+          <div id="service_linkedin_small_enabled" class="service_icon_small left"></div>
+          <div id="service_google_small_enabled" class="service_icon_small right"></div>
+        </div>
 
 		    <?php if ($lIsUsed == 1) { ?>
 
 	        <?php if($pFullShortVersion) { ?>
-		        <p class="like_icon" id="liked-text" title="<?php echo __('POS_BUTTON_ACTION_VALUE', $pType); ?>">&nbsp;</p>
+		        <p class="like_icon left" id="liked-text" title="<?php echo __('POS_BUTTON_ACTION_VALUE', $pType); ?>">&nbsp;</p>
 		      <?php } else { ?>
 		        <p id="liked-text" class="left"><?php echo __('POS_BUTTON_ACTION_VALUE', $pType); ?></p>
 		      <?php } ?>
@@ -152,16 +164,15 @@ YiidStatsSingleton::trackVisit($pUrl);
 		    <?php } elseif ($lIsUsed == -1) { ?>
 
 		      <?php if($pFullShortVersion) { ?>
-		        <p class="dislike_icon" id="disliked-text" title="<?php echo __('NEG_BUTTON_ACTION_VALUE', $pType); ?>">&nbsp;</p>
+		        <p class="dislike_icon left" id="disliked-text" title="<?php echo __('NEG_BUTTON_ACTION_VALUE', $pType); ?>">&nbsp;</p>
 		      <?php } else { ?>
 		        <p id="disliked-text" class="left"><?php echo __('NEG_BUTTON_ACTION_VALUE', $pType); ?></p>
 		      <?php } ?>
 
 		    <?php } else { ?>
-
 		      <?php if($pFullShortVersion) { ?>
-		        <p class="like_icon" id="liked-text" title="<?php echo __('POS_BUTTON_ACTION_VALUE', $pType); ?>" style="display:none;">&nbsp;</p>
-		        <p class="dislike_icon" id="disliked-text" title="<?php echo __('NEG_BUTTON_ACTION_VALUE', $pType); ?>" style="display:none;">&nbsp;</p>
+		        <p class="like_icon left" id="liked-text" title="<?php echo __('POS_BUTTON_ACTION_VALUE', $pType); ?>" style="display:none;">&nbsp;</p>
+		        <p class="dislike_icon left" id="disliked-text" title="<?php echo __('NEG_BUTTON_ACTION_VALUE', $pType); ?>" style="display:none;">&nbsp;</p>
 		      <?php } else { ?>
 			      <p id="liked-text" class="left" style="display:none;"><?php echo __('POS_BUTTON_ACTION_VALUE', $pType); ?></p>
 		        <p id="disliked-text" class="left" style="display:none;"><?php echo __('NEG_BUTTON_ACTION_VALUE', $pType); ?></p>
