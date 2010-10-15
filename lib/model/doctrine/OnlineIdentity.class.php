@@ -30,19 +30,11 @@ class OnlineIdentity extends BaseOnlineIdentity
 
   /**
    * builds the real profile-url using the identifier
-   *
+   * @deprecated use $this->getProfileUri() now
    * @return string
    */
   public function getUrl() {
-    if ($this->getIdentityType() == OnlineIdentityTable::TYPE_IDENTITY) {
-      return str_replace('%s', $this->getIdentifier(), $this->getCommunity()->getOiUrl());
-    } else if ($this->getIdentityType() == OnlineIdentityTable::TYPE_URL) {
-      return $this->getIdentifier();
-    } else if ($this->getIdentityType() == OnlineIdentityTable::TYPE_IM) {
-      return str_replace('%s', $this->getIdentifier(), $this->getCommunity()->getImUrl());
-    } else {
-      return null;
-    }
+    return $this->getProfileUri();
   }
 
   /**
