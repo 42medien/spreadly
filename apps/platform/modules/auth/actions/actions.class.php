@@ -55,11 +55,6 @@ class authActions extends sfActions {
       $lOnlineIdenities = OnlineIdentityTable::getPublishingEnabledByUserId($lUser->getId());
       CookieUtils::generateWidgetIdentityCookie($lOnlineIdenities);
 
-      // migrate if not already done
-      if ($lUser->getDone() != 1) {
-        UserRelationTable::doIdentityMigration($lUser->getId());
-      }
-
       if ($lUser->hasVerifiedOnlineIdentities()) {
         $this->redirect("@stream");
       } else {
@@ -94,11 +89,6 @@ class authActions extends sfActions {
     } else {
       $lUser = $lObject->doSignin($this->getUser(), $lToken);
       $this->getUser()->signIn($lUser);
-    }
-
-    // migrate if not already done
-    if ($this->getUser()->getUser()->getDone() != 1) {
-      UserRelationTable::doIdentityMigration($this->getUser()->getUserId());
     }
 
     $this->pOnlineIdenities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
