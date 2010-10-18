@@ -26,6 +26,10 @@ OnlineIdentity:
       type:     string(255)
     profile_uri:
       type:     string(255)
+    identity_type:
+      type:  string
+    feed_identifier:
+      type:  string
     auth_identifier:
       type:     string(255)
     auth_identity_type:
