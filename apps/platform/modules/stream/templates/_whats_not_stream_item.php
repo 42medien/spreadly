@@ -8,7 +8,7 @@
     <div class="left whats_hot_stream_head_left">
       <div class="clearfix">
         <div class="left so_headline_left">
-          <?php echo image_tag('http://getfavicon.appspot.com/'.$pObject->getUrl(), array('class' => 'icon_small_service left')); ?>
+          <?php echo image_tag('http://getfavicon.appspot.com/'.$pObject->getUrl(), array('class' => 'icon_small_service left', 'width' => '16px', 'height' => '16px')); ?>
           <span class="url left"><?php echo __('%1 ago', array('%1' => $pObject->getPublishingTime())); ?></span>
         </div>
         <div class="right so_headline_right">
