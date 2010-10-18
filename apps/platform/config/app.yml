@@ -8,3 +8,6 @@ all:
 
   facebook:
     oauth_callback_uri: "/auth/complete_signin/service/facebook"
+    
+  linkedin:
+    oauth_callback_uri: "/auth/complete_signin/service/linkedin"    

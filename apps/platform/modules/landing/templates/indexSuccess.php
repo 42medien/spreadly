@@ -13,6 +13,9 @@
 	    <li class="left icon_big icon_big_twitter">
 	      <?php echo link_to("Twitter", "@auth_signin?service=twitter"); ?>
 	    </li>
+      <li class="left icon_big icon_big_linkedin">
+        <?php echo link_to("LinkedIn", "@auth_signin?service=linkedin"); ?>
+      </li>
 	  </ul>
 
 	  <p>

@@ -28,6 +28,10 @@
             <span class="icon_big_facebook_add_service icon_big_add_service left">&nbsp;</span>
             <?php echo __('Add your %1 account', array('%1' => link_to('Facebook', '@auth_signin?service=facebook'))); ?>
           </li>
+          <li>
+            <span class="icon_big_linkedin_add_service icon_big_add_service left">&nbsp;</span>
+            <?php echo __('Add your %1 account', array('%1' => link_to('LinkedIn', '@auth_signin?service=linkedin'))); ?>
+          </li>
 	      </ul>
 	    </div>
     </div>

@@ -17,3 +17,9 @@ AuthToken:
     OnlineIdentity: oi_3
     is_publishing_enabled:  1
     token_type:   access
+  at_4:
+    User:    user_1
+    Community:  community_5
+    OnlineIdentity: oi_14
+    is_publishing_enabled:  1
+    token_type:   access    

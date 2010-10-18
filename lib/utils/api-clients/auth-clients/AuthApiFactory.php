@@ -23,6 +23,7 @@ class AuthApiFactory {
       $lCommunity = $pCommunity;
     }
 
+
     // return matching object
     switch ($lCommunity) {
       case "facebook":
@@ -30,6 +31,9 @@ class AuthApiFactory {
         break;
       case "twitter":
         return new TwitterAuthApiClient();
+        break;
+      case "linkedin":
+        return new LinkedinAuthApiClient();
         break;
       /*case "google":
         return new GooglePostApiClient();

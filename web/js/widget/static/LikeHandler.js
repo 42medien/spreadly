@@ -18,8 +18,10 @@ var StaticLike = {
     jQuery('#static-like-button, #static-dislike-button').live('click.staticlike', function(pEvent) { 
       
       OnLoadGrafic.showGrafic();
-      var lTarget = pEvent.target;
-      var lTargetId = jQuery(lTarget).attr('id');
+      var lTarget = null;
+      var lTargetId = null;
+      lTarget = pEvent.target;
+      lTargetId = jQuery(lTarget).attr('id');
       if(lTargetId == 'static-dislike-button') {
         StaticLike.aAction = '/api/dislike';
         StaticLike.aCase = 'dislike';

@@ -23,3 +23,10 @@ Community:
     community: 'website'
     url:       'http://www.example.com'
     oi_url:    '%s'
+    
+  community_5:
+    name:      'linkedin'
+    community: 'linkedin'
+    url:       'http://www.linkedin.com'
+    oi_url:    '%s'
+    social_publishing_possible:   1    
