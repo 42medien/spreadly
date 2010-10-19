@@ -122,7 +122,7 @@ class UserTable extends Doctrine_Table {
    */
   public static function countHottestUsers($pUserId) {
     $lFriendIds = IdentityMemcacheLayer::retrieveContactUserIdsByUserId($pUserId);
-return 2;
+
     if(empty($lFriendIds)) {
       return 0;
     }
@@ -294,8 +294,6 @@ $lFriendIds = IdentityMemcacheLayer::retrieveContactUserIdsByUserId($pUserId);
     }
   }
 
-
-
   /**
    * Update this timestamp on any like action triggered by a user
    *
@@ -308,4 +306,13 @@ $lFriendIds = IdentityMemcacheLayer::retrieveContactUserIdsByUserId($pUserId);
     $lUser->setLastActivity($pTimestamp);
     $lUser->save();
   }
+
+
+  public static function updateFriendConnectionsForMemcache($pUserId) {
+
+OnlineIdentityTable::getFriendsForUserId($pUserId);
+
+
+  }
+
 }

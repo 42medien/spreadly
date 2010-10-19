@@ -49,7 +49,7 @@ class OnlineIdentityTable extends Doctrine_Table {
   }
 
 
-   /**
+  /**
    * gets an OnlineIdentity for a given User
    *
    * @author weyandch
@@ -263,4 +263,23 @@ class OnlineIdentityTable extends Doctrine_Table {
     }
     return array();
   }
+
+  public static function getFriendsForUserId($pUserId) {
+    $lOwnedOis = OnlineIdentityTable::retrieveByUserId($pUserId);
+
+      $lQuery = Doctrine_Query::create()
+      ->from('OnlineIdentity oi');
+
+      foreach ($lOwnedOis as $lIdentity) {
+      	$lQuery->orWhere('oi.community_id = ? AND oi.original_id IN (?)', array($lIdentity->getCommunityId(), $lIdentity->getFriendIds()));
+      }
+print_r($lQuery);die();
+      $lOis = $lQuery->execute();
+
+
+
+  }
+
+
+
 }

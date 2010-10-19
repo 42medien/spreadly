@@ -22,8 +22,6 @@ class IdentityMemcacheLayer {
    * @return object|null
    */
   public static function getFromMemcache($pKey) {
-
-
     // try to get memcahe object
     try {
       $lObject = MemcacheManager::getInstance()->getCache()->get($pKey);
@@ -57,7 +55,12 @@ class IdentityMemcacheLayer {
     if ($lObject) {
       return $lObject;
     } else {
+      $lObject = array();
 
+      $lObject['user_ids'] = array();
+      $lObject['oi_ids'] = array();
+
+      UserTable::updateFriendConnectionsForMemcache($pUserId);die();
       // usertable get friends
       // get oi's
 
