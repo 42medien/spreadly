@@ -145,7 +145,7 @@ class FacebookAuthApiClient extends AuthApi {
    */
   public function completeUser(&$pUser, $pObject) {
     $pUser->setUsername(UserUtils::getUniqueUsername(StringUtils::normalizeUsername($pObject->name)));
-    $pUser->setDescription($pObject->bio);
+    $pUser->setDescription(@$pObject->bio);
 
     $pUser->setFirstname($pObject->first_name);
     $pUser->setFirstname($pObject->last_name);

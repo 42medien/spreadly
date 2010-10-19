@@ -26,25 +26,24 @@ class TwitterImportClient {
       throw new Exception('damn theres no token!', '666');
     }
     $lConsumer = new OAuthConsumer(sfConfig::get("app_twitter_oauth_token"), sfConfig::get("app_twitter_oauth_secret"));
-    $lJson = OAuthClient::get($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "http://api.twitter.com/1/friends/ids/".$pOnlineIdentity->getIdentifier().".json");
+    $lJson = OAuthClient::get($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "http://api.twitter.com/1/friends/ids/".$pOnlineIdentity->getOriginalId().".json");
     $lJsonObject = json_decode($lJson);
 
+    $pOnlineIdentity->setFriendIds(implode(",", $lJsonObject));
+    $pOnlineIdentity->save();
+
+    /*
     // the twitter api allows access to 100 users
     // check how much rounds the script have to go to
     // get all
     $lFriendcount = count($lJsonObject);
     $lRounds = ceil($lFriendcount/100);
 
-    /**
-     * dirty hack
-     *
-     * @todo implement better solution
-     */
     if ($lRounds > 7) {
       $lRounds = 7;
     }
 
-    $pOnlineIdentity->setFriendIds(implode(",", $lJsonObject));
+
 
     // iterate through the results
     for ($i = 0; $i < $lRounds; $i++) {
@@ -58,7 +57,7 @@ class TwitterImportClient {
       AmazonSQSUtils::pushToQuque('TwitterContacts', $lQueuePayload);
     }
 
+    */
     sfContext::getInstance()->getLogger()->info("{TwitterImportClient} ID ".$pOnlineIdentity->getId()." loaded and contacts sent to twitter import queue!!!!");
-
   }
 }
