@@ -38,8 +38,8 @@
 		          <input type="checkbox" id="like-serv-<?php echo $lIdentity->getId(); ?>"
 		            name="like-serv-<?php echo $lIdentity->getId(); ?>" <?php echo $lIdentity->getSocialPublishingEnabled()?"checked=checked":''; ?>
 		            value="<?php echo $lIdentity->getId(); ?>" class="serv-check" />
-		          <label for="<?php echo $lIdentity->getCommunity()->getCommunity(); ?>_check" title="<?php echo $lIdentity->getIdentifier(); ?>">
-		            <?php echo truncate_text($lIdentity->getIdentifier(), 25, '...'); ?>
+		          <label for="<?php echo $lIdentity->getCommunity()->getCommunity(); ?>_check" title="<?php echo $lIdentity->getProfileUri(); ?>">
+		            <?php echo truncate_text($lIdentity->getProfileUri(), 25, '...'); ?>
 		          </label>
 		        </li>
 		      <?php } ?>

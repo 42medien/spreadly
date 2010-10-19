@@ -11,8 +11,8 @@
           <input type="checkbox" id="enabled_services[<?php echo $lIdentity->getId(); ?>]"
             name="enabled_services[<?php echo $lIdentity->getId(); ?>]" <?php echo $lIdentity->getSocialPublishingEnabled()?"checked=checked":''; ?>
             value="<?php echo $lIdentity->getId(); ?>" />
-          <label for="<?php echo $lIdentity->getCommunity()->getCommunity(); ?>_check" title="<?php echo $lIdentity->getIdentifier(); ?>">
-            <?php echo truncate_text($lIdentity->getIdentifier(), 25, '...'); ?>
+          <label for="<?php echo $lIdentity->getCommunity()->getCommunity(); ?>_check" title="<?php echo $lIdentity->getProfileUri(); ?>">
+            <?php echo truncate_text($lIdentity->getProfileUri(), 25, '...'); ?>
           </label>
         </li>
       <?php } ?>
