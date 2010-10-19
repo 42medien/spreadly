@@ -32,7 +32,7 @@ class FacebookImportClient {
       } catch (Exception $e) {}
     }
 
-    $pOnlineIdentity->setFriendIds(implode($lFriends));
+    $pOnlineIdentity->setFriendIds(implode(",", $lFriends));
     $pOnlineIdentity->save();
   }
 }

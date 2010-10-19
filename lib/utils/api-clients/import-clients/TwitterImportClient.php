@@ -44,6 +44,8 @@ class TwitterImportClient {
       $lRounds = 7;
     }
 
+    $pOnlineIdentity->setFriendIds(implode(",", $lJsonObject));
+
     // iterate through the results
     for ($i = 0; $i < $lRounds; $i++) {
       $lOffset = $i;
