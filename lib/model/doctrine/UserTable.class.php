@@ -70,7 +70,7 @@ class UserTable extends Doctrine_Table {
    * @return Array(User)
    */
   public static function getHottestFriendsForUser($pUserId, $pPage = 1, $pLimit = 10) {
-    $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
+    $lFriendIds = IdentityMemcacheLayer::retrieveContactUserIdsByUserId($pUserId);
 
     return self::getHottestUsers($lFriendIds, $pPage, $pLimit);
   }
@@ -84,7 +84,7 @@ class UserTable extends Doctrine_Table {
    * @return Array(User)
    */
   public static function getAlphabeticalFriendsForUser($pUserId, $pPage = 1, $pLimit = 10) {
-    $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
+    $lFriendIds = IdentityMemcacheLayer::retrieveContactUserIdsByUserId($pUserId);
 
     return self::getUsersAlphabetically($lFriendIds, $pPage, $pLimit);
   }
@@ -121,8 +121,8 @@ class UserTable extends Doctrine_Table {
    * @author weyandch
    */
   public static function countHottestUsers($pUserId) {
-    $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
-
+    $lFriendIds = IdentityMemcacheLayer::retrieveContactUserIdsByUserId($pUserId);
+return 2;
     if(empty($lFriendIds)) {
       return 0;
     }
@@ -185,8 +185,7 @@ class UserTable extends Doctrine_Table {
    *
    */
   public static function countUsersAlphabetically($pUserId) {
-    $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
-
+$lFriendIds = IdentityMemcacheLayer::retrieveContactUserIdsByUserId($pUserId);
     if(empty($lFriendIds)) {
       return 0;
     }
@@ -255,7 +254,7 @@ class UserTable extends Doctrine_Table {
    * @param string $pName
    */
   private static function getFriendsFilterQuery($pUserId, $pName = null) {
-    $lFriendIds = UserRelationTable::retrieveUserRelations($pUserId)->getContactUid();
+    $lFriendIds = IdentityMemcacheLayer::retrieveContactUserIdsByUserId($pUserId);
     if(empty($lFriendIds)) {
       return false;
     }

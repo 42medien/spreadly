@@ -70,15 +70,16 @@ class MemcacheBehavior extends Doctrine_Template {
       $lObject = $GLOBALS['CACHE'][strtoupper($lClassName)][$pPk];
       if ($lObject) {
         $cache = 'yiidGlobalCache';
-        try {
-          sfContext::getInstance()->getLogger()->info('{yiidGlobalCache} found a '. $lClassName .' with id ' . $pPk . ' in '.$cache);
-        } catch(Exception $e) {}
       }
     } else {// if not found try memcached
       $lObject = self::getFromMemcache($lMemcacheId);
+      $cache = 'yiidMemcache';
     }
 
     if ($lObject) {
+      try {
+        sfContext::getInstance()->getLogger()->info('{yiidGlobalCache} found a '. $lClassName .' with id ' . $pPk . ' in '.$cache);
+      } catch(Exception $e) {}
       // store in GLOBALS cache
       $GLOBALS['CACHE'][strtoupper($lClassName)][$pPk] = $lObject;
       return $lObject;

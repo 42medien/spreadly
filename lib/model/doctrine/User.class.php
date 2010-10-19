@@ -96,6 +96,13 @@ class User extends BaseUser {
     return $lIdentityArray;
   }
 
+
+
+  /**
+   * retrieve OI's which are assigned to the user
+   * @return array(OnlineIdentity)
+   * @author weyandch
+   */
   public function getOnlineIdentities() {
     return OnlineIdentityTable::retrieveByUserId($this->getId());
   }
@@ -120,39 +127,6 @@ class User extends BaseUser {
       return 'affe';
     }
     return $lAvatar->getAvatar();
-  }
-
-
-  /**
-   * retrieves a users relation object from MongoDB
-   */
-  public function retrieveUserRelations() {
-    return UserRelationTable::retrieveUserRelations($this->getId());
-  }
-
-  /**
-   * adds given OnlineIdentities to a users relation table
-   *
-   * @param array(OnlineIdentity) $pIdentities
-   */
-  public function updateOwnedIdentities($pIdentities) {
-    return UserRelationTable::updateOwnedIdentities($this->getId(), $pIdentities);
-  }
-
-
-  /**
-   * add OI's of a user's contacts
-   */
-  public function updateContacts($pContactUserIds, $pIdentityIds) {
-    return UserRelationTable::updateContactIdentities($this->getId(), $pIdentityIds, $pContactUserIds);
-  }
-
-  /**
-   * counts friends of user
-   */
-  public function countFriends() {
-  	$lFriendIds = UserRelationTable::retrieveUserRelations($this->getId())->getContactUid();
-  	return count($lFriendIds);
   }
 
   /**

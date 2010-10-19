@@ -13,6 +13,10 @@ $dbManager = new sfDatabaseManager($configuration);
 $dbManager->loadConfiguration();
 
 
+
+echo "######################################### \r\n";
+echo "Start migration: 01_oi_originalids.php \r\n";
+echo "######################################### \r\n";
 /**
  *  we need all user id's first
  **/
@@ -35,12 +39,10 @@ foreach ($lOis as $lIdentity) {
     $lJsonObject = json_decode(UrlUtils::sendGetRequest("https://graph.facebook.com/".$lIdentity->getOriginalId()));
     $lIdentity->setProfileUri($lJsonObject->link);
     $lIdentity->setName($lJsonObject->name);
+    AmazonSQSUtils::pushToQuque('ImportContacts', $lIdentity->getId());
   }
-
-
   $lIdentity->save();
-
 }
 echo "######################################### \r\n";
-echo "End migration: 01_useravatar.php \r\n";
+echo "End migration: 01_oi_originalids.php \r\n";
 echo "######################################### \r\n";
