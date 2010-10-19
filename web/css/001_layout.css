@@ -443,8 +443,9 @@ error_box_500 p{
 #yiid_description2{width: 188px;height: 184px;}
 #yiid_description3{width: 259px;height: 186px;}
 .service_icons_big{width: 70%;margin: 30px auto 40px;}
-.service_icons_big li{width: 49%;}
+.service_icons_big li{width: 30%;}
 .icon_big_twitter a{padding: 65px 15px 0;}
+.icon_big_linkedin a{padding: 65px 15px 0;}
 .icon_big_facebook a{padding: 65px 15px 0 2px;}
 .icon_big_link{padding: 60px 8px 2px;}
 .icon_big{padding-top: 65px; display: block;}

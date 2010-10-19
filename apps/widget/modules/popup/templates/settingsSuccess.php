@@ -29,6 +29,7 @@
     <ul class="normal_list" id="services_to_choose">
       <li><a id="choose_facebook" href="<?php echo url_for("@popup_signinto?service=facebook", true); ?>">Facebook</a></li>
       <li><a id="choose_twitter" href="<?php echo url_for("@popup_signinto?service=twitter", true); ?>">Twitter</a></li>
+      <li><a id="choose_linkedin" href="<?php echo url_for("@popup_signinto?service=linkedin", true); ?>">Linkedin</a></li>
     </ul>
 
     oder <a href="#"  id="cancel-link"><?php echo __('CANCEL', null, 'widget'); ?></a>
