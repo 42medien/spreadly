@@ -33,6 +33,9 @@ class ImportApiFactory {
       case "twitter":
         return new TwitterImportClient();
         break;
+      case "linkedin":
+        return new LinkedinImportClient();
+        break;
       /*case "google":
         return new GooglePostApiClient();
         break;*/
