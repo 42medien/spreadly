@@ -47,7 +47,7 @@ class TwitterContactsImportClient {
 
     // save online-identities
     foreach ($lContacts as $lContact) {
-      $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lContact->screen_name, $lCommunityId);
+      $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity("http://twitter.com/".$lContact->screen_name, $lContact->id, $lCommunityId);
 
       if($lOnlineIdentity){
         $lOnlineIdentity->setPhoto($lContact->profile_image_url);
@@ -55,33 +55,10 @@ class TwitterContactsImportClient {
         $lOnlineIdentity->save();
 
         sfContext::getInstance()->getLogger()->info("{TwitterImportClient} added online identity: " . $lOnlineIdentity->getId());
-
-        try {
-          OnlineIdentityConTable::createNew($pOnlineIdentity->getId(), $lOnlineIdentity->getId());
-        } catch (ModelException $e) {
-          sfContext::getInstance()->getLogger()->err("{TwitterImportClient} " . $e->getMessage());
-        }
       }
 
     }
 
     sfContext::getInstance()->getLogger()->info("{TwitterImportClient} done!!!!");
-
-    /*
-     try {
-     foreach($lJsonObject as $lKey => $lValue) {
-     $lContact = OAuthClient::get($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "http://api.twitter.com/1/users/show.json?user_id=".$lValue);
-     $lJsonUser = json_decode($lContact);
-     $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lJsonUser->screen_name, $lCommunityId);
-     if($lOnlineIdentity){
-     TwitterImportClient::completeOnlineIdentity($lOnlineIdentity, $lJsonUser);
-     $lOiCon = OnlineIdentityConTable::createNew($pOnlineIdentity->getId(), $lOnlineIdentity->getId());
-     }
-     sfContext::getInstance()->getLogger()->debug("onlineidentity: " . $lOnlineIdentity->getId());
-     sfContext::getInstance()->getLogger()->debug("oicon: " . $lOiCon->getId());
-     }
-     } catch (Exception $e) {
-     sfContext::getInstance()->getLogger()->debug('[error]'.$e->getMessage());
-     }*/
   }
 }

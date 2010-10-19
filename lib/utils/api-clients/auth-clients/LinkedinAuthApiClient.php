@@ -172,7 +172,6 @@ class LinkedinAuthApiClient extends AuthApi {
    * @param Object $pObject
    */
   public function completeUser(&$pUser, $lProfileArray) {
-
     $pUser->setUsername(UserUtils::getUniqueUsername(StringUtils::normalizeUsername($lProfileArray['first-name'].$lProfileArray['last-name'])));
     if(isset($lProfileArray['summary'])) {
       $pUser->setDescription($lProfileArray['summary']);
@@ -193,10 +192,10 @@ class LinkedinAuthApiClient extends AuthApi {
    * @param Object $pObject
    */
   public function completeOnlineIdentity(&$pOnlineIdentity, $pProfileArray, $pUser) {
-    $pOnlineIdentity->setName($pProfileArray['first-name'].$pProfileArray['last-name']);
+    $pOnlineIdentity->setName($pProfileArray['first-name'] . " " . $pProfileArray['last-name']);
     //$pOnlineIdentity->setPhoto($pObject->profile_image_url);
     $pOnlineIdentity->setSocialPublishingEnabled(true);
-    $pOnlineIdentity->setUserId($pUser->getId());                  /* signup,add new */
+    $pOnlineIdentity->setUserId($pUser->getId());
     $pOnlineIdentity->save();
   }
 }

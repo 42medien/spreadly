@@ -27,7 +27,7 @@ class FacebookImportClient {
 
     foreach ($lJsonObject->data as $lObject) {
       try {
-        $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lJsonObject->link, $lObject->id, $lCommunityId);
+        $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lJsonObject->link, $lJsonObject->id, $lCommunityId);
         $lFriends[] = $lOnlineIdentity->getId();
       } catch (Exception $e) {}
     }
