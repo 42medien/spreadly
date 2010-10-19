@@ -102,6 +102,11 @@ ul li{margin:0;padding:0;list-style: none;float:left;}
   #twitter_0:hover{background-color: #ebf6e8;border-radius:3px 0 3px 0;-moz-border-radius:3px 0 3px 0;-webkit-border-radius:3px 0 3px 0;}
   #twitter_1{background: url("/img/sprites/sprite_button.png") 0px -129px no-repeat;}
   #twitter_1:hover{background-color: #ebf6e8;border-radius:3px 0 3px 0;-moz-border-radius:3px 0 3px 0;-webkit-border-radius:3px 0 3px 0;}
+  
+  #linkedin_0{background: url("/img/sprites/sprite_button.png") 0px -258px no-repeat;}
+  #linkedin_0:hover{background-color: #ebf6e8;border-radius:3px 0 3px 0;-moz-border-radius:3px 0 3px 0;-webkit-border-radius:3px 0 3px 0;}
+  #linkedin_1{background: url("/img/sprites/sprite_button.png") 0px  -239px no-repeat;}
+  #linkedin_1:hover{background-color: #ebf6e8;border-radius:3px 0 3px 0;-moz-border-radius:3px 0 3px 0;-webkit-border-radius:3px 0 3px 0;}
 
 
 /**
