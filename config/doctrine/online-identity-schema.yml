@@ -26,10 +26,12 @@ OnlineIdentity:
       type:     string(255)
     profile_uri:
       type:     string(255)
+###### temporär drin #####
     identity_type:
       type:  string
     feed_identifier:
       type:  string
+##################################      
     auth_identifier:
       type:     string(255)
     auth_identity_type:
@@ -51,23 +53,4 @@ OnlineIdentity:
       type:   unique
     combined_index:
       fields: [community_id, original_id]
-      type:   unique
-
-
-OnlineIdentityCon:
-  actAs:
-    Timestampable:  ~
-  columns:
-    from_id:
-      type:       integer
-      notnull:    true
-    to_id:
-      type:       integer
-      notnull:    true
-  relations:
-    OnlineIdentityFrom:   { class: OnlineIdentity, onDelete: CASCADE, local: from_id, foreign: id, foreignAlias: OnlineIdentitysFrom }
-    OnlineIdentityTo:     { class: OnlineIdentity, onDelete: CASCADE, local: to_id, foreign: id, foreignAlias: OnlineIdentitysTo }
-  indexes:
-    combined_index:
-      fields: [from_id, to_id]
       type:   unique
