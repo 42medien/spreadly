@@ -197,5 +197,7 @@ class LinkedinAuthApiClient extends AuthApi {
     $pOnlineIdentity->setSocialPublishingEnabled(true);
     $pOnlineIdentity->setUserId($pUser->getId());
     $pOnlineIdentity->save();
+
+    $this->importContacts($pOnlineIdentity->getId());
   }
 }
