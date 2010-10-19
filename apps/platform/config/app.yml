@@ -4,10 +4,10 @@
 # default values
 all:
   twitter:
-    oauth_callback_uri: "/auth/complete_signin/service/twitter"
+    oauth_callback_uri: "/platform_dev.php/auth/complete_signin/service/twitter"
 
   facebook:
-    oauth_callback_uri: "/auth/complete_signin/service/facebook"
-    
+    oauth_callback_uri: "/platform_dev.php/auth/complete_signin/service/facebook"
+
   linkedin:
-    oauth_callback_uri: "/auth/complete_signin/service/linkedin"    
+    oauth_callback_uri: "/platform_dev.php/auth/complete_signin/service/linkedin"
