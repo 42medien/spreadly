@@ -18,6 +18,7 @@ class authActions extends sfActions {
 
     sfConfig::set( 'app_twitter_oauth_callback_uri', '/widgets/'.$this->pContext.'/complete_signin/service/twitter' );
     sfConfig::set( 'app_facebook_oauth_callback_uri', '/widgets/'.$this->pContext.'/complete_signin/service/facebook' );
+    sfConfig::set( 'app_linkedin_oauth_callback_uri', '/widgets/'.$this->pContext.'/complete_signin/service/linkedin' );
 
     return $parentRet;
   }
