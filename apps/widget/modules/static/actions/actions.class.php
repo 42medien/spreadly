@@ -27,7 +27,7 @@ class staticActions extends sfActions {
     $lUrl = $request->getParameter('url', '');
 
     if (!empty($lUrl) && UrlUtils::isUrlValid($lUrl)) {
-      $lUrl = urldecode(UrlUtils::skipTrailingSlash($lUrl));
+      $lUrl = urldecode($lUrl);
 	    $lUser = $this->getUser()->getUser();
 
 	    $lSocialObject = SocialObjectTable::retrieveByAliasUrl($lUrl);
