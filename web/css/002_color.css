@@ -67,13 +67,13 @@ span.url,
 .icon_twitter{background: transparent url("/img/sprites/sprite_icons.png") 8px -409px no-repeat;}
 .icon_google{background: transparent url("/img/sprites/sprite_icons.png") 8px -444px no-repeat;}
 .icon_linkedin{background: transparent url("/img/sprites/sprite_icons.png") 8px -701px no-repeat;}
-.icon_small_facebook{background: transparent url("/img/sprites/sprite_icons.png") 0 -480px no-repeat;}
+.icon_small_facebook{background: transparent url("/img/sprites/sprite_icons.png") 0 -481px no-repeat;}
 .so_share_information .icon_small_facebook{background-position: 0 -478px;}
 .icon_small_twitter{background: transparent url("/img/sprites/sprite_icons.png") 0 -512px no-repeat;}
 .so_share_information .icon_small_twitter{background-position: 0 -510px;}
 .icon_small_google{background: transparent url("/img/sprites/sprite_icons.png") 0 -542px no-repeat;}
 .so_share_information .icon_small_google{background-position: 0 -540px;}
-.icon_small_linkedin{background: transparent url("/img/sprites/sprite_icons.png") 0 -725px no-repeat;}
+.icon_small_linkedin{background: transparent url("/img/sprites/sprite_icons.png") 0 -730px no-repeat;}
 .so_share_information .icon_small_linkedin{background-position: 0 -723px;}
 
 /*.filter_chosen, a.friend_filter_link_active{background-color: #69bd50;}*/
