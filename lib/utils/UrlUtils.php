@@ -59,7 +59,7 @@ class UrlUtils {
    * @return boolean
    */
   public static function checkUrlWithCurl($pUrl) {
-    $ch = curl_init( $url );
+    $ch = curl_init( $pUrl );
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
     curl_setopt($ch, CURLOPT_HEADER, 0);
     curl_setopt($ch, CURLOPT_NOBODY, 1);
