@@ -454,7 +454,7 @@ class UrlUtils {
    * @return string the expanded url
    */
   public static function shortUrlExpander($pUrl) {
-    if (!self::checkUrlAvailability($pUrl)) {
+    if (!self::checkUrlWithCurl($pUrl)) {
       return false;
     }
     return self::get_final_url($pUrl);
@@ -637,7 +637,6 @@ class UrlUtils {
   public static function cleanupHostAndUri($pUrl) {
     $pUrl = urldecode($pUrl);
     $pUrl = str_replace(" ", "+", $pUrl);
-    $pUrl = self::skipTrailingSlash($pUrl);
     $parameterList = parse_url($pUrl);
     $pQueryString = '';
     $lKeysToRemove = sfConfig::get('app_settings_filtered_parameters');
