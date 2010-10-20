@@ -162,7 +162,7 @@ class YiidActivityTable extends Doctrine_Table
     $lActivity->setUId($pUserId);
     $lActivity->setSoId($pSocialObject->getId());
     $lActivity->setUrl($pUrl);
-    $lActivity->setUrlHash(md5($pUrl));
+    $lActivity->setUrlHash(md5(UrlUtils::skipTrailingSlash($pUrl)));
     $lActivity->setOiids($pOnlineIdentitys);
     $lActivity->setCids($pServicesId);
     $lActivity->setScore($pScore);
