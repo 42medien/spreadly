@@ -10,9 +10,9 @@ header('Cache-Control: private, no-store, no-cache, must-revalidate, post-check=
 require_once('inc/WidgetUtils.php');
 require_once('inc/i18n.php');
 if (isset($_GET['url']) && !empty($_GET['url'])) {
-  $pUrl = urldecode(UrlUtils::skipTrailingSlash($_GET['url']));
+  $pUrl = urldecode($_GET['url']);
 } else {
-  $pUrl = urldecode(UrlUtils::skipTrailingSlash($_SERVER['HTTP_REFERER']));
+  $pUrl = urldecode($_SERVER['HTTP_REFERER']);
 }
 
 if (isset($_GET['type']) && !empty($_GET['type'])) {
@@ -147,14 +147,14 @@ if($pUserId && $pSocialFeatures && $lSocialObjectArray['_id']) {
 
 	  <div id="container_like_used" class="left" <?php if($lIsUsed === false) { ?>style="display: none;"<?php } ?>>
 	    <div id="used_button" class="light_bg_118 normal_button_area <?php echo (!$pFullShortVersion ? 'normal_space' : 'small_space') ?>_used" target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>');">
-	    
+
         <div id="service_area" class="left">
           <div id="service_twitter_small_enabled" class="service_icon_small left"></div>
           <div id="service_facebook_small_enabled" class="service_icon_small right"></div>
           <div id="service_linkedin_small_enabled" class="service_icon_small left"></div>
           <div id="service_google_small_enabled" class="service_icon_small right"></div>
         </div>
-      
+
 	      <?php if(is_numeric($lIsUsed)) { ?>
 
 	        <?php if($pFullShortVersion) { ?>

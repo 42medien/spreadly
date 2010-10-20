@@ -60,12 +60,11 @@ class SocialObjectPeer {
    * @return array()
    */
   public static function getDataForUrl($pUrl, $pIsUsed = false) {
-    $pUrl = urldecode($pUrl);
     $pUrl = str_replace(" ", "+", $pUrl);
 
     $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
     $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, self::MONGO_COLLECTION);
-    $pUrlHash = md5($pUrl);
+    $pUrlHash = md5(UrlUtils::skipTrailingSlash($pUrl));
 
     // check if we know the URL already
     $lSocialObjectArray = $pCollectionObject->findOne(array("alias" => array('$in' => array($pUrlHash)) ));

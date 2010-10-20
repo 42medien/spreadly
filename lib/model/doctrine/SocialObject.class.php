@@ -132,7 +132,7 @@ class SocialObject extends BaseSocialObject
   public function addAlias($pUrl) {
     SocialObjectTable::updateObjectInMongoDb(array("_id" => new MongoId($this->getId())),
     array(
-                                                 '$addToSet' => array('alias' => array('$each' => array(md5($pUrl)))))
+                                                 '$addToSet' => array('alias' => array('$each' => array(md5(UrlUtils::skipTrailingSlash($pUrl))))))
     );
   }
 

@@ -39,7 +39,6 @@ class YiidActivityTable extends Doctrine_Table
    */
   public static function updateObjectInMongoDb($pIdentifier, $pManipulator) {
     $lCollection = self::getMongoCollection();
-    //print_r($pManipulator);
     $lCollection->update($pIdentifier, $pManipulator, array('upsert' => true));
   }
 
@@ -81,6 +80,7 @@ class YiidActivityTable extends Doctrine_Table
     elseif (!self::isActionOnObjectAllowed($lSocialObject->getId(), $pUserId)) {
       return false;
     }
+
 
     foreach ($pGivenOnlineIdentitys as $lIdentityId) {
       if (in_array($lIdentityId, $pOwnedOnlineIdentitys)) {

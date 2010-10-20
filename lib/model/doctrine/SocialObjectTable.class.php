@@ -70,14 +70,14 @@ class SocialObjectTable extends Doctrine_Table
         $lSocialObject->addAlias($pUrl);
         return true;
       } else {
-        $pUrlHash = md5($pUrl);
-        $pLongUrlHash = md5($pLongUrl);
+        $pUrlHash = md5(UrlUtils::skipTrailingSlash($pUrl));
+        $pLongUrlHash = md5(UrlUtils::skipTrailingSlash($pLongUrl));
         // get it parsed baby!
         AmazonSQSUtils::pushToQuque('SocialObjectParser', urlencode($pUrl));
         return $lCollection->update(array('url_hash' => $pUrlHash), array('$set' => array('url' => $pUrl, 'c' => time(), 'enriched' => $pEnriched), '$addToSet' => array('alias' => array('$each' => array($pUrlHash, $pLongUrlHash)))), array('upsert' => true, 'atomic' => true));
       }
     } else {
-      $pUrlHash = md5($pUrl);
+      $pUrlHash = md5(UrlUtils::skipTrailingSlash($pUrl));
       // get it parsed baby!
       AmazonSQSUtils::pushToQuque('SocialObjectParser', urlencode($pUrl));
       return $lCollection->update(array('url_hash' => $pUrlHash), array('$set' => array('url' => $pUrl, 'c' => time(), 'enriched' => $pEnriched), '$addToSet' => array('alias' => $pUrlHash)), array('upsert' => true, 'atomic' => true));
@@ -240,7 +240,7 @@ class SocialObjectTable extends Doctrine_Table
    * @return unknown_type
    */
   public static function retrieveByAliasUrl($pUrl) {
-    return self::retrieveByAliasHash(md5($pUrl));
+    return self::retrieveByAliasHash(md5(UrlUtils::skipTrailingSlash($pUrl)));
   }
 
 
@@ -261,7 +261,7 @@ class SocialObjectTable extends Doctrine_Table
    * @return unknown_type
    */
   public static function retrieveByUrl($pUrl) {
-    return self::retrieveByUrlHash(md5($pUrl));
+    return self::retrieveByUrlHash(md5(UrlUtils::skipTrailingSlash($pUrl)));
   }
 
   /**
