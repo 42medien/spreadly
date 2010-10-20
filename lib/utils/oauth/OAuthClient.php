@@ -66,11 +66,18 @@ class OAuthClient {
    * @param array $header if the site needs for example an accept header
    * @return mixed
    */
-  public static function post(OAuthConsumer $consumer, $accessTokenKey, $accessTokenSecret, $url, $postData = array(), $signature = null, $header = null) {
+  public static function post(OAuthConsumer $consumer, $accessTokenKey, $accessTokenSecret, $url, $postData = array(), $signature = null, $header = null, $realm = null) {
     $accessToken = new OAuthToken($accessTokenKey, $accessTokenSecret);
-    $request = self::prepareRequest($consumer, $accessToken, 'POST', $url, $postData, $signature);
 
-    return self::doPost($url, $request->to_postdata(), $header);
+    if (is_array($postData)) {
+      $request = self::prepareRequest($consumer, $accessToken, 'POST', $url, $postData, $signature);
+      $postData = $request->to_postdata();
+    } else {
+      $request = self::prepareRequest($consumer, $accessToken, 'POST', $url, "", $signature);
+      $header[] = $request->to_header($realm);
+    }
+
+    return self::doPost($request->get_normalized_http_url(), $postData, $header);
   }
 
   /**

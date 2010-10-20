@@ -4,7 +4,7 @@
  *
  * @author Matthias Pfefferle
  */
-class TwitterPostApiClient implements PostApiInterface {
+class LinkedinPostApiClient implements PostApiInterface {
 
   /**
    * defines the post function
@@ -24,17 +24,18 @@ class TwitterPostApiClient implements PostApiInterface {
       return false;
     }
 
-    $lMaxChars = 135;
+    $lMaxChars = 700;
 
     $lUrl  = ' - '.ShortUrlTable::shortenUrl($pUrl);
     $lengthOfUrl = strlen($lUrl);
 
-    $lStatusMessage = PostApiUtils::generateMessage($pType, $pScore, $pTitle, null, $lMaxChars-$lengthOfUrl);
-    $lStatusMessage .= $lUrl;
+    $lStatusMessage = '<activity locale="en_US"><content-type>linkedin-html</content-type><body>';
+    $lStatusMessage .= htmlentities(PostApiUtils::generateMessage($pType, $pScore, $pTitle, null, $lMaxChars-$lengthOfUrl));
+    $lStatusMessage .= '</body></activity>';
 
-    $lPostBody = array("status" => $lStatusMessage);
-    $lConsumer = new OAuthConsumer(sfConfig::get("app_twitter_oauth_token"), sfConfig::get("app_twitter_oauth_secret"));
-    $lStatus = OAuthClient::post($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "http://api.twitter.com/1/statuses/update.xml", $lPostBody, null, null, "http://twitter.com/");
+    $lPostBody = $lStatusMessage;
+    $lConsumer = new OAuthConsumer(sfConfig::get("app_linkedin_oauth_token"), sfConfig::get("app_linkedin_oauth_secret"));
+    $lStatus = OAuthClient::post($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "http://api.linkedin.com/v1/people/~/person-activities", $lPostBody, null, array("Content-Type: application/xml"), "http://api.linkedin.com");
 
     return $lStatus;
   }

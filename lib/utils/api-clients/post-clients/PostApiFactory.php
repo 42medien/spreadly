@@ -31,6 +31,9 @@ class PostApiFactory {
       case "twitter":
         return new TwitterPostApiClient();
         break;
+      case "linkedin":
+        return new LinkedinPostApiClient();
+        break;
       /*case sfConfig::get('app_likewidget_google'):
         return new BuzzPostApiClient();
         break;*/
