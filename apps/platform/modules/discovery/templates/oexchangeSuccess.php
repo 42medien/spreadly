@@ -10,11 +10,17 @@
     <Property
         type="http://www.oexchange.org/spec/0.8/prop/name">yiid</Property>
     <Property
-        type="http://www.oexchange.org/spec/0.8/prop/prompt">Dis/Like in your networks</Property>
+        type="http://www.oexchange.org/spec/0.8/prop/prompt">Dis/Like any kind of content</Property>
 
     <Link
         rel= "icon"
-        href="http://www.example.com/favicon.ico"
+        href="http://www.yiid.com/favicon.ico"
+        type="image/vnd.microsoft.icon"
+        />
+
+    <Link
+        rel= "icon32"
+        href="http://www.yiid.com/img/global/favicon_32x32.png"
         type="image/vnd.microsoft.icon"
         />
 
@@ -32,7 +38,7 @@
 
     <Link
         rel= "http://www.oexchange.org/spec/0.8/rel/offer"
-        href="http://www.yiid.com/static/like"
+        href="http://widgets.yiid.com/static/like"
         type="text/html"
         />
 </XRD>
