@@ -45,6 +45,7 @@ class staticActions extends sfActions {
     $this->pTitle = $request->getParameter('title', '');
     $this->pDescription = $request->getParameter('description', '');
     $this->pType = $request->getParameter('type', 'like');
+    $this->pFull = $request->getParameter('full', 0);
 
     if (!in_array($this->pType, YiidActivityTable::$aTypes)) {
       $this->pType = "like";

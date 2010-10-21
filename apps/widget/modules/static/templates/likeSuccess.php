@@ -48,9 +48,11 @@
             <span class="sharing_button likeit_button">&nbsp;</span>
             <?php echo __($pType); ?>
           </div>
-          <div class="rounded_corners content_main_border popup_button" id="static-dislike-button">
-            <span class="sharing_button dislikeit_button" id="static-dislike-button">&nbsp;</span>
-          </div>
+          <?php if($pFull) {?>
+	          <div class="rounded_corners content_main_border popup_button" id="static-dislike-button">
+	            <span class="sharing_button dislikeit_button" id="static-dislike-button">&nbsp;</span>
+	          </div>
+          <?php } ?>
         </form>
         <div class="rounded_corners content_main_border popup_button_used distance_right already_shared" id="static-liked" style="display: none;">
           <span class="sharing_button likeit_button">&nbsp;</span>
