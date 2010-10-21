@@ -113,7 +113,7 @@ class SocialObjectTable extends Doctrine_Table
 
   public static function retrieveHotObjets($pUserId, $pFriendId = null, $pCommunityId = null, $pRange = 30, $pPage = 1, $pLimit = 30)  {
     $lCollection = self::getMongoCollection();
-    $lRelevantOis = self::getRelevantOnlineIdentitysForQuery($pUserId, $pFriendId);
+    $lRelevantOis = OnlineIdentityTable::getRelevantOnlineIdentityIdsForQuery($pUserId, $pFriendId);
     $lQueryArray = self::initializeBasicFilterQuery($lRelevantOis, $pCommunityId, $pRange);
     $lQueryArray['l_cnt'] = array('$gt' => 0);
 
@@ -127,7 +127,7 @@ class SocialObjectTable extends Doctrine_Table
 
   public static function retrieveFlopObjects($pUserId, $pFriendId = null, $pCommunityId = null, $pRange = 30, $pPage = 1, $pLimit = 30) {
     $lCollection = self::getMongoCollection();
-    $lRelevantOis = self::getRelevantOnlineIdentitysForQuery($pUserId, $pFriendId);
+    $lRelevantOis = OnlineIdentityTable::getRelevantOnlineIdentityIdsForQuery($pUserId, $pFriendId);
     $lQueryArray = self::initializeBasicFilterQuery($lRelevantOis, $pCommunityId, $pRange);
     $lQueryArray['d_cnt'] = array('$gt' => 0);
 
@@ -137,16 +137,6 @@ class SocialObjectTable extends Doctrine_Table
     $lResults->limit($pLimit)->skip(($pPage - 1) * $pLimit);
 
     return self::hydrateMongoCollectionToObjects($lResults);
-  }
-
-
-  /**
-   * returns a list of OI's we need for the query
-   * @param unknown_type $pUserId
-   * @param unknown_type $pFriendId
-   */
-  public static function getRelevantOnlineIdentitysForQuery($pUserId, $pFriendId) {
-    return UserRelationTable::getRelevantOnlineIdentitys($pUserId, $pFriendId);
   }
 
   /**
@@ -182,11 +172,11 @@ class SocialObjectTable extends Doctrine_Table
    */
   public static function getFriendIdsForSocialObject($pSocialObjectId, $pUserId) {
     $lSocialObject = self::retrieveByPK($pSocialObjectId);
-    $lUserRelation = UserRelationTable::retrieveUserRelations($pUserId);
+    $lConnectedUsers = IdentityMemcacheLayer::retrieveContactUserIdsByUserId($pUserId);
 
     $lFriendsActive = array();
-    if ($lSocialObject && $lUserRelation) {
-      $lFriendsActive = array_intersect($lSocialObject->getUids(), $lUserRelation->getContactUid());
+    if ($lSocialObject && $lConnectedUsers) {
+      $lFriendsActive = array_intersect($lSocialObject->getUids(), $lConnectedUsers);
     }
     return $lFriendsActive;
   }

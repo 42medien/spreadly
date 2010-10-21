@@ -65,6 +65,22 @@ class OnlineIdentityTable extends Doctrine_Table {
     return $lOnlineIdentity;
   }
 
+  /**
+   * gets ids of all OI's owned by a given User
+   *
+   * @author weyandch
+   * @param string $pAuthIdentifier
+   * @return mixed OnlineIdentity|null
+   */
+  public static function retrieveIdsByUserId($pUserId) {
+    $lOnlineIdentityIds = Doctrine_Query::create()
+    ->from('OnlineIdentity oi')
+    ->select('oi.id')
+    ->where('oi.user_id = ?', $pUserId)
+    ->execute(array(), Doctrine_Core::HYDRATE_NONE);
+
+    return HydrationUtils::flattenArray($lOnlineIdentityIds);
+  }
 
   /**
    * gets an OnlineIdentifier by his auth identifier
@@ -264,22 +280,47 @@ class OnlineIdentityTable extends Doctrine_Table {
     return array();
   }
 
+
   public static function getFriendsForUserId($pUserId) {
+    $lQueryString = array();
     $lOwnedOis = OnlineIdentityTable::retrieveByUserId($pUserId);
 
-      $lQuery = Doctrine_Query::create()
-      ->from('OnlineIdentity oi');
-
-      foreach ($lOwnedOis as $lIdentity) {
-      	$lQuery->orWhere('oi.community_id = ? AND oi.original_id IN (?)', array($lIdentity->getCommunityId(), $lIdentity->getFriendIds()));
+    foreach ($lOwnedOis as $lIdentity) {
+      if ($lIdentity->getFriendIds() != '') {
+        $lQueryString[] = '(oi.community_id = '.$lIdentity->getCommunityId(). ' AND oi.original_id IN ('.$lIdentity->getFriendIds().'))';
       }
-print_r($lQuery);die();
-      $lOis = $lQuery->execute();
+    }
 
+    $q = new Doctrine_RawSql();
+    $q->select('{oi.user_id}, {oi.id}')
+    ->from('online_identity oi')
+    ->addComponent('oi', 'OnlineIdentity oi');
+    if (!empty($lQueryString)) {
+      $q->where(implode(' OR ', $lQueryString));
+    }
 
+    $lOis = $q->execute();
 
+    return $lOis;
   }
 
+
+  /**
+   * returns a list of OI's we need for the query
+   * @param unknown_type $pUserId
+   * @param unknown_type $pFriendId
+   */
+  public static function getRelevantOnlineIdentityIdsForQuery($pUserId, $pFriendId) {
+    $pOiArray = array();
+    if (is_null($pFriendId)) { // get own items and items of all friends
+      $pOiArray = IdentityMemcacheLayer::retrieveContactOiIdsByUserId($pUserId);
+      $pOiArray = array_merge($pOiArray, OnlineIdentityTable::retrieveIdsByUserId($pUserId));
+    } else {   // get all items from a specific friend
+      $pOiArray = IdentityMemcacheLayer::retrieveContactOiIdsByUserId($pFriendId);
+    }
+
+    return $pOiArray;
+  }
 
 
 }

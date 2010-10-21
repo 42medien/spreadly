@@ -57,18 +57,6 @@ class User extends BaseUser {
     $this->setSortname($this->generateSortname());
   }
 
-  /**
-   * runs after User->insert()
-   *
-   * @author Matthias Pfefferle
-   * @param Doctrine_Event $pEvent
-   */
-  public function postInsert($pEvent) {
-    // initialize user's relation object stored in MongoDB
-    $lRelation = new UserRelation();
-    $lRelation->setUserId($this->getId());
-    $lRelation->save();
-  }
 
   /**
    * constructs the sortname of the current user-object

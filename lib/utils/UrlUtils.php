@@ -559,7 +559,7 @@ class UrlUtils {
    * @return string
    */
   public static function skipTrailingSlash($pUrl) {
-    while ('/' == substr($pUrl, strlen($pUrl)-1)) {
+    if ('/' == substr($pUrl, strlen($pUrl)-1)) {
       $pUrl = substr_replace($pUrl, '', strlen($pUrl)-1);  // strip trailing slash
     }
     return $pUrl;

@@ -212,7 +212,7 @@ class YiidActivityTable extends Doctrine_Table
   public static function retrieveLatestActivitiesByContacts($pUserId, $pFriendId = null, $pCommunityId = null, $pRangeDays = 30, $pOffset = 10, $pLimit = 1) {
     $lCollection = self::getMongoCollection();
 
-    $lRelevantOis = self::getRelevantOnlineIdentitysForQuery($pUserId, $pFriendId);
+    $lRelevantOis = OnlineIdentityTable::getRelevantOnlineIdentityIdsForQuery($pUserId, $pFriendId);
 
     $lQueryArray = array();
     $lQueryArray['oiids'] = array('$in' => $lRelevantOis);
@@ -243,7 +243,7 @@ class YiidActivityTable extends Doctrine_Table
    */
   public static function retrieveByYiidActivityId($pUserId, $pId, $pCase, $pLimit = 10, $pOffset = 1){
     $lCollection = self::getMongoCollection();
-    $lRelevantOis = self::getRelevantOnlineIdentitysForQuery($pUserId, null);
+    $lRelevantOis = OnlineIdentityTable::getRelevantOnlineIdentityIdsForQuery($pUserId, null);
 
     $lQueryArray = array();
     // filters friends
@@ -275,20 +275,6 @@ class YiidActivityTable extends Doctrine_Table
     }
     return array();
   }
-
-
-  /**
-   * returns a list of OI's we need for the query
-   * @param unknown_type $pUserId
-   * @param unknown_type $pFriendId
-   */
-  public static function getRelevantOnlineIdentitysForQuery($pUserId, $pFriendId) {
-    return UserRelationTable::getRelevantOnlineIdentitys($pUserId, $pFriendId);
-  }
-
-
-
-
 
 
   /**

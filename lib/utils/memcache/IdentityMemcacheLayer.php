@@ -60,12 +60,9 @@ class IdentityMemcacheLayer {
       $lObject['user_ids'] = array();
       $lObject['oi_ids'] = array();
 
-      UserTable::updateFriendConnectionsForMemcache($pUserId);die();
-      // usertable get friends
-      // get oi's
-
+      $lObject = UserTable::retrieveFriendConnectionsForMemcache($pUserId);
       MemcacheManager::getInstance()->getCache()->set($lMemcacheId, serialize($lObject), sfConfig::get('app_settings_memcache_userlifetime', 86400));
-
+      return $lObject;
     }
   }
 

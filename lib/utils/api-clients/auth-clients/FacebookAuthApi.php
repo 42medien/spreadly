@@ -60,6 +60,12 @@ class FacebookAuthApiClient extends AuthApi {
       $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject, $lUser, $lIdentifier); // signup,add new
     }
 
+    if ($lUser->getDone() < 5) {
+      $this->importContacts($lOnlineIdentity->getId());
+      $lUser->setDone(5);
+      $lUser->save();
+    }
+
     // save new token
     AuthTokenTable::saveToken($lUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['access_token'], null, true);  // signup,add new
 

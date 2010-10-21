@@ -144,7 +144,7 @@ class UserTable extends Doctrine_Table {
 
     $lQuery = Doctrine_Query::create()
     ->from('User u')
-    ->whereIn('u.id', $pFriendIds)
+    ->andWhereIn('u.id', $pFriendIds)
     // today minus 30 days
     ->andWhere('u.last_activity > ?', $lTimeLimit)
     // now sort by hot
@@ -308,11 +308,15 @@ $lFriendIds = IdentityMemcacheLayer::retrieveContactUserIdsByUserId($pUserId);
   }
 
 
-  public static function updateFriendConnectionsForMemcache($pUserId) {
+  public static function retrieveFriendConnectionsForMemcache($pUserId) {
+    $lConnectionObject = array();
+    $lConnectedOis = OnlineIdentityTable::getFriendsForUserId($pUserId);
 
-OnlineIdentityTable::getFriendsForUserId($pUserId);
-
-
+    foreach ($lConnectedOis as $lIdentity) {
+      $lConnectionObject['user_ids'][] = $lIdentity->getUserId();
+      $lConnectionObject['oi_ids'][] = $lIdentity->getId();
+    }
+    return $lConnectionObject;
   }
 
 }

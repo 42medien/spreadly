@@ -43,7 +43,6 @@ $pDescription = urldecode($_GET['description']);
 
 $pUserId = MongoSessionPeer::extractUserIdFromSession(LikeSettings::SF_SESSION_COOKIE);
 $lSocialObjectArray = SocialObjectPeer::getDataForUrl($pUrl);
-var_dump($lSocialObjectArray);die();
 $lIsUsed = YiidActivityObjectPeer::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId);
 $lSocialObjectArray = SocialObjectPeer::recalculateCountsRespectingUser($lSocialObjectArray, $lIsUsed);
 $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
