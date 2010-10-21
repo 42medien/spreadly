@@ -43,7 +43,7 @@ class apiActions extends sfActions {
     }
 
     $this->lType = $request->getParameter('type');
-    $this->lIdentitysOwnedByUser = $this->getUser()->getUser()->getOnlineIdentities();
+    $this->lIdentitysOwnedByUser = OnlineIdentityTable::retrieveIdsByUserId($this->getUser()->getUserId());
 
 
     $this->lTitle = $request->getParameter('title');
