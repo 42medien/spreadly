@@ -35,7 +35,6 @@ abstract class BaseTestCase extends PHPUnit_Framework_TestCase{
   public static function resetMongo() {
     BatchSocialObjetTable::doRemoveAll(true);
     BatchYiidActivityTable::doRemoveAll(true);
-    BatchUserRelationTable::doRemoveAll(true);
     BatchSessionStorage::doRemoveAll(true);
   }
 }
@@ -60,24 +59,6 @@ class BatchSocialObjetTable extends SocialObjectTable {
 
 }
 
-class BatchUserRelationTable extends UserRelationTable {
-
-  /**
-   * Clears whole Database (buildlocal/dev) - not for production!
-   *
-   * @author Christian Weyand
-   * @param boolean $pAreYouSure
-   * @deprecated don't use this in production!
-   */
-  public static function doRemoveAll($pAreYouSure = false) {
-    if ($pAreYouSure) {
-      $lCollection = self::getMongoCollection();
-      return $lResults = $lCollection->remove();
-    }
-    return false;
-  }
-
-}
 class BatchYiidActivityTable extends YiidActivityTable {
 
   /**

@@ -157,27 +157,3 @@ class YiidActivityObjectPeer {
 
 
 }
-
-/**
- * @todo phpdoc
- *
- */
-class UserRelationPeer {
-  const MONGO_COLLECTION = 'user_relation';
-
-  /**
-   * @todo phpdoc
-   * @author Christian Weyand
-   * @param $string pUrl
-   * @param int $pUserId
-   * @return false or score of action taken (-1/1)
-   */
-  public static function getFriendsOfUser($pUserId, $pLimit = 8) {
-    $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
-    $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, self::MONGO_COLLECTION);
-    $lResults = $pCollectionObject->find(array("user_id" => $pUserId));
-    $lResults->limit($pLimit);
-
-    return $lResults;
-  }
-}

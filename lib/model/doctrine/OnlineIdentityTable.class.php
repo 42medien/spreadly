@@ -307,8 +307,8 @@ class OnlineIdentityTable extends Doctrine_Table {
 
   /**
    * returns a list of OI's we need for the query
-   * @param unknown_type $pUserId
-   * @param unknown_type $pFriendId
+   * @param int $pUserId
+   * @param int $pFriendId
    */
   public static function getRelevantOnlineIdentityIdsForQuery($pUserId, $pFriendId) {
     $pOiArray = array();
