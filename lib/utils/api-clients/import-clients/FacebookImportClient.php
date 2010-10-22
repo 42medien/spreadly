@@ -11,8 +11,8 @@ sfContext::createInstance($configuration);
  */
 class FacebookImportClient {
 
-  public static function importContacts($pUserId, $pOnlineIdentity) {
-    $lToken = AuthTokenTable::getByUserAndOnlineIdentity($pUserId, $pOnlineIdentity->getId());
+  public static function importContacts($pOnlineIdentity) {
+    $lToken = AuthTokenTable::getByUserAndOnlineIdentity($pOnlineIdentity->getUserId(), $pOnlineIdentity->getId());
     if (!$lToken) {
       $pOnlineIdentity->setSocialPublishingEnabled(false);
       $pOnlineIdentity->save();

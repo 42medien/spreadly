@@ -20,7 +20,7 @@ class YiidImportContacts {
       try {
         $lObject = ImportApiFactory::factory($lOnlineIdentity->getCommunityId());
         if ($lObject) {
-          $lObject->importContacts($lOnlineIdentity->getUserId(), $lOnlineIdentity);
+          $lObject->importContacts($lOnlineIdentity);
         }
       } catch (Exception $e) {
         sfContext::getInstance()->getLogger()->err("{Daemon} ImportContacts: " . $e->getMessage());

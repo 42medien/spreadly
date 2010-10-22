@@ -17,8 +17,8 @@ class LinkedinImportClient {
    * @author Matthias Pfefferle
    * @author Karina Mies
    */
-  public static function importContacts($pUserId, $pOnlineIdentity) {
-    $lToken = AuthTokenTable::getByUserAndOnlineIdentity($pUserId, $pOnlineIdentity->getId());
+  public static function importContacts($pOnlineIdentity) {
+    $lToken = AuthTokenTable::getByUserAndOnlineIdentity($pOnlineIdentity->getUserId(), $pOnlineIdentity->getId());
     // get api informations
     if (!$lToken) {
       $pOnlineIdentity->setSocialPublishingEnabled(false);
