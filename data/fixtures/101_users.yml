@@ -9,6 +9,7 @@ User:
     active: true
     default_avatar: aa4e6c2b2a0644e6e7130de7ffea46df-1.jpg
     birthdate: 1991-12-15
+    last_activity:    <?php echo time(); ?>
 
   user_2:
     username: hans
@@ -21,6 +22,8 @@ User:
     ip: 127.0.0.1
     active: true
     birthdate: 1991-11-15  
+    last_activity:    <?php echo time(); ?>
+
 
   user_3:
     username: karl
@@ -33,7 +36,9 @@ User:
     ip: 127.0.0.1
     active: true
     credentials: translator
-    birthdate: 1966-01-01
+    birthdate: 1966-01-01    
+    last_activity:    <?php echo time(); ?>
+    
 
   user_4:
     username: james
@@ -46,6 +51,8 @@ User:
     active: true
     credentials: captain
     birthdate: 1978-08-15
+    last_activity:    <?php echo time(); ?>
+    
 
   user_5:
     username: snirgelchen
