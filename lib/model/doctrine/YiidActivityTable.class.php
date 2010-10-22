@@ -294,7 +294,7 @@ class YiidActivityTable extends Doctrine_Table
    * @return unknown_type
    */
   public static function retrieveSocialObjectByUrl($pUrl) {
-    return SocialObjectTable::retrieveByUrl($pUrl);
+    return SocialObjectTable::retrieveByAliasUrl($pUrl);
   }
 
   /**

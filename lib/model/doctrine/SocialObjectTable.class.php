@@ -64,20 +64,20 @@ class SocialObjectTable extends Doctrine_Table
     }
 
 
+    $pUrlHash = md5(UrlUtils::skipTrailingSlash($pUrl));
+    $pLongUrlHash = md5(UrlUtils::skipTrailingSlash($pLongUrl));
+
     if ($pLongUrl && ($pLongUrl != $pUrl)) {
       $lSocialObject = self::retrieveByAliasUrl($pLongUrl);
       if ($lSocialObject) {  // gibt's schon unter $longUrl -> also $pUrl hinzufügen
-        $lSocialObject->addAlias($pUrl);
+        $lSocialObject->addAlias($pUrlHash);
         return true;
       } else {
-        $pUrlHash = md5(UrlUtils::skipTrailingSlash($pUrl));
-        $pLongUrlHash = md5(UrlUtils::skipTrailingSlash($pLongUrl));
         // get it parsed baby!
         AmazonSQSUtils::pushToQuque('SocialObjectParser', urlencode($pUrl));
         return $lCollection->update(array('url_hash' => $pUrlHash), array('$set' => array('url' => $pUrl, 'c' => time(), 'enriched' => $pEnriched), '$addToSet' => array('alias' => array('$each' => array($pUrlHash, $pLongUrlHash)))), array('upsert' => true, 'atomic' => true));
       }
     } else {
-      $pUrlHash = md5(UrlUtils::skipTrailingSlash($pUrl));
       // get it parsed baby!
       AmazonSQSUtils::pushToQuque('SocialObjectParser', urlencode($pUrl));
       return $lCollection->update(array('url_hash' => $pUrlHash), array('$set' => array('url' => $pUrl, 'c' => time(), 'enriched' => $pEnriched), '$addToSet' => array('alias' => $pUrlHash)), array('upsert' => true, 'atomic' => true));
@@ -243,27 +243,6 @@ class SocialObjectTable extends Doctrine_Table
     $lCollection = self::getMongoCollection();
     return self::initializeObjectFromCollection($lCollection->findOne(array("alias" => array('$in' => array($pUrlHash)) )));
   }
-
-
-  /**
-   * @author weyandch
-   * @param $pUrl
-   * @return unknown_type
-   */
-  public static function retrieveByUrl($pUrl) {
-    return self::retrieveByUrlHash(md5(UrlUtils::skipTrailingSlash($pUrl)));
-  }
-
-  /**
-   * @author weyandch
-   * @param $pUrlHash
-   * @return unknown_type
-   */
-  public static function retrieveByUrlHash($pUrlHash) {
-    $lCollection = self::getMongoCollection();
-    return self::initializeObjectFromCollection($lCollection->findOne(array("url_hash" => $pUrlHash) ));
-  }
-
 
   /**
    * creates object from a given MongoDb Collection

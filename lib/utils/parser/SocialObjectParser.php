@@ -74,11 +74,11 @@ class SocialObjectParser {
       return false;
     }
     sfContext::getInstance()->getLogger()->info("{SocialObjectParser} checking url: " . $pUrl );
-    $lSocialObject = SocialObjectTable::retrieveByUrl($pUrl);
+    $lSocialObject = SocialObjectTable::retrieveByAliasUrl($pUrl);
 
     if (!$lSocialObject) {
       SocialObjectTable::initializeObjectFromUrl($pUrl, SocialObjectTable::ENRICHED_TYPE_OBJECTPARSER);
-      $lSocialObject = SocialObjectTable::retrieveByUrl($pUrl);
+      $lSocialObject = SocialObjectTable::retrieveByAliasUrl($pUrl);
     }
 
     $lParsedInformation = self::fetch($pUrl);

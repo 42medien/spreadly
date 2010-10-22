@@ -129,10 +129,10 @@ class SocialObject extends BaseSocialObject
    * adds an alias URL-Hash to an already known SocialObject
    * @param string $pUrl
    */
-  public function addAlias($pUrl) {
+  public function addAlias($pUrlHash) {
     SocialObjectTable::updateObjectInMongoDb(array("_id" => new MongoId($this->getId())),
     array(
-                                                 '$addToSet' => array('alias' => array('$each' => array(md5(UrlUtils::skipTrailingSlash($pUrl))))))
+                                                 '$addToSet' => array('alias' => array('$each' => array($pUrlHash))))
     );
   }
 
