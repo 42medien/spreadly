@@ -1,28 +1,3 @@
-# default rules
-opendislike_stream:
-  url:   /widget/stream
-  param: { module: widget, action: stream }
-
-index_generate:
-  url:   /widget/generate
-  param: { module: widget, action: generate }
-
-index_index:
-  url:   /widget/index
-  param: { module: widget, action: generate }
-
-index_get_dislikes:
-  url:   /widget/dislikes/:page
-  param: { module: widget, action: get_dislikes, page: 1 }
-
-dislike_show:
-  url:   /widget/dislike/*
-  param: { module: widget, action: dislike_show }
-
-dislike_save:
-  url:   /widget/do_dislike/*
-  param: { module: widget, action: dislike_save }
-
 settings:
   url:    /popup/settings
   param:  { module: popup, action: settings }
@@ -88,7 +63,13 @@ static_like:
 
 like:
   url:   /api/like/*
-  param: {module: api, action: like }
+  param: {module: api, action: save_like, likedis: <?php echo YiidActivityTable::ACTIVITY_VOTE_POSITIVE; ?> }
+
+dislike:
+  url:   /api/dislike/*
+  param: {module: api, action: save_like, likedis: <?php echo YiidActivityTable::ACTIVITY_VOTE_NEGATIVE; ?> }
+
+
 
 homepage:
   url:   /

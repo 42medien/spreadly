@@ -53,12 +53,15 @@ User:
       type:       string(30)
     credcommunities:
       type:       string(100)
+      
+#### to be deleted in near future      
     contacts_list:
       type:       string
     friends_list:
       type:       string
     community_object_id:
       type:       integer
+###################
     done:
       type:       integer
       default:    0

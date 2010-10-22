@@ -43,6 +43,7 @@ class apiActions extends sfActions {
     }
 
     $this->lType = $request->getParameter('type');
+    $this->lLikeDis = $request->getParameter('likedis');
     $this->lIdentitysOwnedByUser = OnlineIdentityTable::retrieveIdsByUserId($this->getUser()->getUserId());
 
 
@@ -60,7 +61,7 @@ class apiActions extends sfActions {
    * @param $request
    * @return unknown_type
    */
-  public function executeLike(sfWebRequest $request) {
+  public function executeSave_like(sfWebRequest $request) {
 
     $this->setLayout(false);
     $this->setTemplate(false);
@@ -70,7 +71,7 @@ class apiActions extends sfActions {
                                                            $this->lUrl,
                                                            $this->lIdentitysOwnedByUser,
                                                            $this->lIdentitysSent,
-                                                           YiidActivityTable::ACTIVITY_VOTE_POSITIVE,
+                                                           $this->lLikeDis,
                                                            $this->lType,
                                                            $this->lTitle,
                                                            $this->lDescription,
@@ -83,7 +84,7 @@ class apiActions extends sfActions {
                                                            $this->lUrl,
                                                            $this->lIdentitysOwnedByUser,
                                                            $this->lIdentitysSent,
-                                                           YiidActivityTable::ACTIVITY_VOTE_POSITIVE,
+                                                           $this->lLikeDis,
                                                            $this->lType,
                                                            $this->lTitle,
                                                            $this->lDescription,
@@ -92,42 +93,6 @@ class apiActions extends sfActions {
     return  $this->sendJsonResponse();
   }
 
-  /**
-   * execute dislikes
-   *
-   * @author Christian Weyand
-   * @param $request
-   * @return unknown_type
-   */
-  public function executeDislike(sfWebRequest $request) {
-    $this->setLayout(false);
-    $this->setTemplate(false);
-    $this->getResponse()->setContentType('application/json');
-    if ($this->status == 200) {
-      $this->success = YiidActivityTable::saveLikeActivitys($this->getUser()->getId(),
-                                                           $this->lUrl,
-                                                           $this->lIdentitysOwnedByUser,
-                                                           $this->lIdentitysSent,
-                                                           YiidActivityTable::ACTIVITY_VOTE_NEGATIVE,
-                                                           $this->lType,
-                                                           $this->lTitle,
-                                                           $this->lDescription,
-                                                           $this->lPhoto);
-    } elseif ($this->status == 401) {
-      $lSessId = CookieUtils::getSessionId();
-      setcookie("yiid_temp_hash",$lSessId , time()+300, '/', sfConfig::get('app_settings_host'));
-      $this->success = YiidActivityTable::storeTemporary($lSessId,
-                                                         $this->lUrl,
-                                                         $this->lIdentitysOwnedByUser,
-                                                         $this->lIdentitysSent,
-                                                         YiidActivityTable::ACTIVITY_VOTE_NEGATIVE,
-                                                         $this->lType,
-                                                         $this->lTitle,
-                                                         $this->lDescription,
-                                                         $this->lPhoto);
-    }
-    return $this->sendJsonResponse();
-  }
 
   private function sendJsonResponse() {
     return $this->renderText(
