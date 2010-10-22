@@ -313,8 +313,8 @@ $lFriendIds = IdentityMemcacheLayer::retrieveContactUserIdsByUserId($pUserId);
     $lConnectedOis = OnlineIdentityTable::getFriendsForUserId($pUserId);
 
     foreach ($lConnectedOis as $lIdentity) {
-      $lConnectionObject['user_ids'][] = $lIdentity->getUserId();
-      $lConnectionObject['oi_ids'][] = $lIdentity->getId();
+      $lConnectionObject['user_ids'][] = $lIdentity->getUserId()."";
+      $lConnectionObject['oi_ids'][] = $lIdentity->getId()."";
     }
     return $lConnectionObject;
   }

@@ -76,8 +76,9 @@ class OnlineIdentityTable extends Doctrine_Table {
     $lOnlineIdentityIds = Doctrine_Query::create()
     ->from('OnlineIdentity oi')
     ->select('oi.id')
-    ->where('oi.user_id = ?', $pUserId)
+    ->andWhere('oi.user_id = ?', $pUserId)
     ->execute(array(), Doctrine_Core::HYDRATE_NONE);
+
 
     return HydrationUtils::flattenArray($lOnlineIdentityIds);
   }
@@ -282,6 +283,7 @@ class OnlineIdentityTable extends Doctrine_Table {
 
 
   public static function getFriendsForUserId($pUserId) {
+    $lOis = array();
     $lQueryString = array();
     $lOwnedOis = OnlineIdentityTable::retrieveByUserId($pUserId);
 
@@ -295,11 +297,13 @@ class OnlineIdentityTable extends Doctrine_Table {
     $q->select('{oi.user_id}, {oi.id}')
     ->from('online_identity oi')
     ->addComponent('oi', 'OnlineIdentity oi');
+
+    // !empty means, ther's at least 1 contact
     if (!empty($lQueryString)) {
       $q->where(implode(' OR ', $lQueryString));
+      $lOis = $q->execute();
     }
 
-    $lOis = $q->execute();
 
     return $lOis;
   }
@@ -312,6 +316,7 @@ class OnlineIdentityTable extends Doctrine_Table {
    */
   public static function getRelevantOnlineIdentityIdsForQuery($pUserId, $pFriendId) {
     $pOiArray = array();
+
     if (is_null($pFriendId)) { // get own items and items of all friends
       $pOiArray = IdentityMemcacheLayer::retrieveContactOiIdsByUserId($pUserId);
       $pOiArray = array_merge($pOiArray, OnlineIdentityTable::retrieveIdsByUserId($pUserId));

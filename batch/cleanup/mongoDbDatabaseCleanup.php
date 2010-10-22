@@ -73,29 +73,8 @@ class BatchSessionStorage {
 
 
 
-class BatchUserRelationTable extends UserRelationTable {
-
-  /**
-   * Clears whole Database (buildlocal/dev) - not for production!
-   *
-   * @author Christian Weyand
-   * @param boolean $pAreYouSure
-   * @deprecated don't use this in production!
-   */
-  public static function doRemoveAll($pAreYouSure = false) {
-    if ($pAreYouSure) {
-      $lCollection = self::getMongoCollection();
-      return $lResults = $lCollection->remove();
-    }
-    return false;
-  }
-
-}
-
-
 BatchSocialObjetTable::doRemoveAll(true);
 BatchYiidActivityTable::doRemoveAll(true);
 BatchSessionStorage::doRemoveAll(true);
-BatchUserRelationTable::doRemoveAll(true);
 echo "cleaned MongoDb!\r\n"
 ?>

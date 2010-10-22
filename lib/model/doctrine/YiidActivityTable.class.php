@@ -214,6 +214,10 @@ class YiidActivityTable extends Doctrine_Table
 
     $lRelevantOis = OnlineIdentityTable::getRelevantOnlineIdentityIdsForQuery($pUserId, $pFriendId);
 
+    // we don't have contacts, so we MUST NOT use an $in Query on mongodb
+ //   if (empty($lRelevantOis)) {
+  //    return array();
+ //   }
     $lQueryArray = array();
     $lQueryArray['oiids'] = array('$in' => $lRelevantOis);
     if ($pCommunityId) {
@@ -226,8 +230,6 @@ class YiidActivityTable extends Doctrine_Table
     $lResults = $lCollection->find($lQueryArray);
     $lResults->sort(array('c' => -1));
     $lResults->limit($pLimit)->skip(($pOffset - 1) * $pLimit);
-
-
     return self::hydrateMongoCollectionToObjects($lResults);
   }
 
@@ -244,7 +246,6 @@ class YiidActivityTable extends Doctrine_Table
   public static function retrieveByYiidActivityId($pUserId, $pId, $pCase, $pLimit = 10, $pOffset = 1){
     $lCollection = self::getMongoCollection();
     $lRelevantOis = OnlineIdentityTable::getRelevantOnlineIdentityIdsForQuery($pUserId, null);
-
     $lQueryArray = array();
     // filters friends
     //$lQueryArray['oiids'] = array('$in' => $lRelevantOis);
