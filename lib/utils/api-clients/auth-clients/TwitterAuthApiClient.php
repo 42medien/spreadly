@@ -9,18 +9,6 @@ class TwitterAuthApiClient extends AuthApi {
   protected $aCommunity = "twitter";
 
   /**
-   * generates a OAuthConsumer
-   *
-   * @author Matthias Pfefferle
-   * @return OAuthConsumer
-   */
-  public function getConsumer() {
-    $lConsumer = new OAuthConsumer(sfConfig::get("app_twitter_oauth_token"), sfConfig::get("app_twitter_oauth_secret"));
-
-    return $lConsumer;
-  }
-
-  /**
    * start the sign in process
    *
    * @author Matthias Pfefferle

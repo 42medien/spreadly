@@ -49,4 +49,16 @@ abstract class AuthApi {
   public function importContacts($pOnlineIdentityId) {
     AmazonSQSUtils::pushToQuque("ImportContacts", $pOnlineIdentityId);
   }
+
+  /**
+   * generates a OAuthConsumer
+   *
+   * @author Matthias Pfefferle
+   * @return OAuthConsumer
+   */
+  public function getConsumer() {
+    $lConsumer = new OAuthConsumer(sfConfig::get("app_".$this->aCommunity."_oauth_token"), sfConfig::get("app_".$this->aCommunity."_oauth_secret"));
+
+    return $lConsumer;
+  }
 }
