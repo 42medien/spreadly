@@ -52,8 +52,9 @@ class streamActions extends sfActions
 
     $pActivities = YiidActivityTable::retrieveLatestActivitiesByContacts($this->getUser()->getUserId(),$lContactId, $lComId, $lObjectsTimeLine, $lPage, $lObjectsCount);
 
-    if(count($pActivities) < $lObjectsCount)
+    if(count($pActivities) < $lObjectsCount) {
       $lDoPaginate = false;
+    }
 
     return $this->renderText(
       $lCallback.'('.
