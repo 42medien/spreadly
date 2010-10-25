@@ -15,18 +15,27 @@ Community:
     name:      'facebook'
     community: 'facebook'
     url:       'http://www.facebook.com'
-    oi_url:    '%s'
     social_publishing_possible:   1
 
   community_4:
     name:      'website'
     community: 'website'
     url:       'http://www.example.com'
-    oi_url:    '%s'
-    
+
   community_5:
     name:      'linkedin'
     community: 'linkedin'
     url:       'http://www.linkedin.com'
-    oi_url:    '%s'
-    social_publishing_possible:   1    
+    social_publishing_possible:   1
+
+  community_6:
+    name:      'google'
+    community: 'google'
+    url:       'http://www.google.com'
+    social_publishing_possible:   1
+
+  community_7:
+    name:      'delicious'
+    community: 'delicious'
+    url:       'http://www.delicious.com'
+    social_publishing_possible:   1
