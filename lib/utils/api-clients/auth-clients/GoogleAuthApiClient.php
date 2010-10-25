@@ -135,7 +135,7 @@ $lAccessToken = $this->getAccessToken($pOAuthToken);
    */
   public function doAuthentication() {
     $lRequestToken = self::getRequestToken();
-    $lRequest = OAuthClient::prepareRequest($this->getConsumer(), $lRequestToken, "GET", "https://www.google.com/accounts/OAuthAuthorizeToken");
+    $lRequest = OAuthClient::prepareRequest($this->getConsumer(), $lRequestToken, "GET", "https://www.google.com/buzz/api/auth/OAuthAuthorizeToken", array("domain" => "www.yiid.com", "scope" => "https://www.googleapis.com/auth/buzz"));
     // redirect
     header("Location: " . $lRequest->to_url());
     // do nothing more
