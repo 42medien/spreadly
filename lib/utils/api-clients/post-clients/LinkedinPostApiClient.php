@@ -76,14 +76,6 @@ class LinkedinPostApiClient extends PostApi {
 
     $lHashtag = self::$aHashtags[$pType][$pScore];
 
-    if ($pTitle) {
-      $lTitle = $pTitle;
-    } else {
-      $lTitle = parse_url ($pUrl, PHP_URL_HOST);
-    }
-
-    $lLink = link_to($lTitle, $pUrl);
-
     $lStatusMessage = '<?xml version="1.0" encoding="UTF-8"?><share>';
     $lStatusMessage .= "<comment>".self::$aHashtags[$pType][$pScore]."</comment>";
     $lStatusMessage .= '<content>';
