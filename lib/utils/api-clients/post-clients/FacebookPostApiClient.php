@@ -4,7 +4,7 @@
  *
  * @author Matthias Pfefferle
  */
-class FacebookPostApiClient implements PostApiInterface {
+class FacebookPostApiClient extends PostApi {
 
   /**
    * defines the post function

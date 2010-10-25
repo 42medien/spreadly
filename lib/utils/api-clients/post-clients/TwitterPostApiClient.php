@@ -24,12 +24,9 @@ class TwitterPostApiClient implements PostApiInterface {
       return false;
     }
 
-    $lMaxChars = 135;
+    $lUrl = ShortUrlTable::shortenUrl();
 
-    $lUrl  = ' - '.ShortUrlTable::shortenUrl($pUrl);
-    $lengthOfUrl = strlen($lUrl);
-
-    $lStatusMessage = PostApiUtils::generateMessage($pType, $pScore, $pTitle, null, $lMaxChars-$lengthOfUrl);
+    $lStatusMessage = $this->generateMessage($pType, $pScore, $pUrl, $pTitle);
     $lStatusMessage .= $lUrl;
 
     $lPostBody = array("status" => $lStatusMessage);
@@ -37,5 +34,31 @@ class TwitterPostApiClient implements PostApiInterface {
     $lStatus = OAuthClient::post($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "http://api.twitter.com/1/statuses/update.xml", $lPostBody, null, null, "http://twitter.com/");
 
     return $lStatus;
+  }
+
+  /**
+   * generate Wildcard.. truncate if necessary, $pUrl is optional
+   *
+   * @param string $pType
+   * @param int $pScore
+   * @param string $pTitle
+   * @param string $pUrl
+   * @return string
+   */
+  public static function generateMessage($pType, $pScore, $pUrl, $pTitle = null) {
+    sfProjectConfiguration::getActive()->loadHelpers('Text');
+
+    $lMaxChars = 135;
+
+    $lHashtag = $this->$aHashtags[$pType][$pScore];
+    $lText = $pUrl . " " . $lHashtag;
+    $lLengthOfText = strlen($lText);
+
+    if ($pTitle) {
+      $lChars = $lMaxChars - $lLengthOfText;
+      $lText = truncate_text($lText, $lChars, '...') . " " . $lText;
+    }
+
+    return $lText;
   }
 }

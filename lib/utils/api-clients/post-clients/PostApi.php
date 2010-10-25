@@ -5,6 +5,14 @@
  * @author Matthias Pfefferle
  */
 abstract class PostApi {
+  public $aHashtags = array("like" => array("1" => "#like", "-1" => "#dislike"),
+                            "pro" => array("1" => "#pro", "-1" => "#contra"),
+                            "recommend" => array("1" => "#recommend", "-1" => "#reject"),
+                            "visit", array("1" => "#visit", "-1" => "#miss"),
+                            "nice", array("1" => "#nice", "-1" => "#ugly"),
+                            "buy", array("1" => "#buy", "-1" => "#dontbuy"),
+                            "rsvp", array("1" => "#attend", "-1" => "#miss"));
+
   /**
    * defines the post function
    *
@@ -16,31 +24,4 @@ abstract class PostApi {
    * @return int status code
    */
   public function doPost(OnlineIdentity $pOnlineIdentity, $pUrl, $pType, $pScore, $pTitle, $pDescription, $pPhoto);
-
-  /**
-   * generate Wildcard.. truncate if necessary, $pUrl is optional
-   *
-   * @param string $pType
-   * @param int $pScore
-   * @param string $pTitle
-   * @param string $pUrl
-   * @param int $pMaxLength
-   * @return string
-   */
-  public static function generateMessage($pType, $pScore, $pTitle = null, $pUrl = null, $pMaxLength = null) {
-    sfProjectConfiguration::getActive()->loadHelpers('Text');
-    if ($pTitle) {
-      $pTitle = '"'.$pTitle.'"';
-    }
-
-    $i18n = sfContext::getInstance()->getI18N();
-    $lWildcard = 'POSTAPI_MESSAGE_'.strtoupper($pType) . ($pScore<0?'_NOT':'');
-    if ($pMaxLength) {
-      $lText = $i18n->__($lWildcard, array('%title%' => $pTitle, '%url%' => $pUrl), 'widget');
-      $lText = truncate_text($lText, $pMaxLength , '...');
-    } else {
-      $lText = $i18n->__($lWildcard, array('%title%' => $pTitle, '%url%' => $pUrl), 'widget');
-    }
-    return $lText;
-  }
 }
