@@ -4,7 +4,7 @@
  *
  * @author Matthias Pfefferle
  */
-class BuzzPostApiClient implements PostApiInterface {
+class BuzzPostApiClient extends PostApi {
 
   /**
    * defines the post function

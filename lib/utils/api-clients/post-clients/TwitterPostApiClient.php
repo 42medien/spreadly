@@ -16,7 +16,7 @@ class TwitterPostApiClient implements PostApiInterface {
    * @param string $pMessage
    * @return int status code
    */
-  public function doPost(OnlineIdentity $pOnlineIdentity, $pUrl, $pType, $pScore, $pTitle, $pDescription, $pPhoto) {
+  public function doPost(OnlineIdentity $pOnlineIdentity, $pUrl, $pType, $pScore, $pTitle = null, $pDescription = null, $pPhoto = null) {
     $lToken = AuthTokenTable::getByUserAndOnlineIdentity($pOnlineIdentity->getUserId(), $pOnlineIdentity->getId());
     if (!$lToken) {
       $pOnlineIdentity->setSocialPublishingEnabled(false);
@@ -50,7 +50,7 @@ class TwitterPostApiClient implements PostApiInterface {
 
     $lMaxChars = 135;
 
-    $lHashtag = $this->$aHashtags[$pType][$pScore];
+    $lHashtag = self::$aHashtags[$pType][$pScore];
     $lText = $pUrl . " " . $lHashtag;
     $lLengthOfText = strlen($lText);
 

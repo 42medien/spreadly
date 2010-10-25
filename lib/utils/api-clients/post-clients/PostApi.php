@@ -5,7 +5,7 @@
  * @author Matthias Pfefferle
  */
 abstract class PostApi {
-  public $aHashtags = array("like" => array("1" => "#like", "-1" => "#dislike"),
+  public static $aHashtags = array("like" => array("1" => "#like", "-1" => "#dislike"),
                             "pro" => array("1" => "#pro", "-1" => "#contra"),
                             "recommend" => array("1" => "#recommend", "-1" => "#reject"),
                             "visit", array("1" => "#visit", "-1" => "#miss"),
@@ -23,5 +23,5 @@ abstract class PostApi {
    * @param string $pTitle
    * @return int status code
    */
-  public function doPost(OnlineIdentity $pOnlineIdentity, $pUrl, $pType, $pScore, $pTitle, $pDescription, $pPhoto);
+  abstract public function doPost(OnlineIdentity $pOnlineIdentity, $pUrl, $pType, $pScore, $pTitle = null, $pDescription = null, $pPhoto = null);
 }
