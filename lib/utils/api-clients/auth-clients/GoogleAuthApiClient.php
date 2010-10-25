@@ -23,8 +23,6 @@ class GoogleAuthApiClient extends AuthApi {
     $lParamsArray = array();
     // extract params
     parse_str($lParams, $lParamsArray);
-    //$lConsumer = new OAuthConsumer(sfConfig::get("app_linkedin_oauth_token"), sfConfig::get("app_linkedin_oauth_secret"));
-
 
     $lJson = OAuthClient::get($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "https://www.googleapis.com/buzz/v1/people/@me/@self?alt=json");
 
@@ -55,9 +53,6 @@ class GoogleAuthApiClient extends AuthApi {
     	$this->completeOnlineIdentity($lOnlineIdentity, $lObject, $lUser, $lAuthIdentifier);
     }
 
-    // import contacts
-    //$this->importContacts($lOnlineIdentity->getId());
-
     AuthTokenTable::saveToken($lUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], true);
 
     return $lUser;
@@ -72,15 +67,12 @@ class GoogleAuthApiClient extends AuthApi {
    * @return OnlineIdentity
    */
   public function addIdentifier($pUser, $pOAuthToken) {
-$lAccessToken = $this->getAccessToken($pOAuthToken);
-    //var_dump($lAccessToken);die();
+    $lAccessToken = $this->getAccessToken($pOAuthToken);
     // get params
     $lParams = $lAccessToken->params;
     $lParamsArray = array();
     // extract params
     parse_str($lParams, $lParamsArray);
-    //$lConsumer = new OAuthConsumer(sfConfig::get("app_linkedin_oauth_token"), sfConfig::get("app_linkedin_oauth_secret"));
-
 
     $lJson = OAuthClient::get($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "https://www.googleapis.com/buzz/v1/people/@me/@self?alt=json");
 
@@ -185,7 +177,6 @@ $lAccessToken = $this->getAccessToken($pOAuthToken);
    */
   public function completeOnlineIdentity(&$pOnlineIdentity, $pObject, $pUser, $pAuthIdentifier) {
     $pOnlineIdentity->setName($pObject->displayName);
-    //$pOnlineIdentity->setPhoto($pObject->profile_image_url);
     $pOnlineIdentity->setSocialPublishingEnabled(true);
 
     $pOnlineIdentity->setUserId($pUser->getId());                  /* signup,add new */
