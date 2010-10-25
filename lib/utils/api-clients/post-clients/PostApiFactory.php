@@ -34,9 +34,9 @@ class PostApiFactory {
       case "linkedin":
         return new LinkedinPostApiClient();
         break;
-      /*case sfConfig::get('app_likewidget_google'):
-        return new BuzzPostApiClient();
-        break;*/
+      case "google":
+        return new GooglePostApiClient();
+        break;
       default:
         return null;
     }
