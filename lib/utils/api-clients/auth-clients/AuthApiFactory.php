@@ -35,9 +35,9 @@ class AuthApiFactory {
       case "linkedin":
         return new LinkedinAuthApiClient();
         break;
-      /*case "google":
-        return new GooglePostApiClient();
-        break;*/
+      case "google":
+        return new GoogleAuthApiClient();
+        break;
       default:
         return null;
     }
