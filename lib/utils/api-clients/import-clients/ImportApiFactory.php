@@ -36,9 +36,9 @@ class ImportApiFactory {
       case "linkedin":
         return new LinkedinImportClient();
         break;
-      /*case "google":
-        return new GooglePostApiClient();
-        break;*/
+      case "google":
+        return new GoogleImportClient();
+        break;
       default:
         return null;
     }
