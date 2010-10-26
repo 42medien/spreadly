@@ -55,7 +55,7 @@ class TwitterPostApiClient extends PostApi {
 
     if ($pTitle) {
       $lChars = $lMaxChars - $lLengthOfText;
-      $lText = truncate_text($lText, $lChars, '...') . " " . $lText;
+      $lText = truncate_text($pTitle, $lChars, '...') . " " . $lText;
     }
 
     return $lText;
