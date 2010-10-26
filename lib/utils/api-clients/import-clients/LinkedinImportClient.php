@@ -37,6 +37,7 @@ class LinkedinImportClient {
     }
 
     $pOnlineIdentity->setFriendIds(implode(",", $lArray));
+    $pOnlineIdentity->setFriendCount(count($lArray));
     $pOnlineIdentity->save();
 
     sfContext::getInstance()->getLogger()->info("{TwitterImportClient} ID ".$pOnlineIdentity->getId()." loaded and contacts sent to twitter import queue!!!!");

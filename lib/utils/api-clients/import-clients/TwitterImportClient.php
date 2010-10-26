@@ -30,6 +30,7 @@ class TwitterImportClient {
     $lJsonObject = json_decode($lJson);
 
     $pOnlineIdentity->setFriendIds(implode(",", $lJsonObject));
+    $pOnlineIdentity->setFriendCount(count($lJsonObject));
     $pOnlineIdentity->save();
 
     /*

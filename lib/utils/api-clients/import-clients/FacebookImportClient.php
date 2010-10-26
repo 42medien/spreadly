@@ -33,6 +33,7 @@ class FacebookImportClient {
     }
 
     $pOnlineIdentity->setFriendIds(implode(",", $lFriends));
+    $pOnlineIdentity->setFriendCount(count($lFriends));
     $pOnlineIdentity->save();
   }
 }
