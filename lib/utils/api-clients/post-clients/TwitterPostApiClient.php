@@ -26,8 +26,7 @@ class TwitterPostApiClient extends PostApi {
 
     $lUrl = ShortUrlTable::shortenUrl($pUrl);
 
-    $lStatusMessage = $this->generateMessage($pType, $pScore, $pUrl, $pTitle);
-    $lStatusMessage .= $lUrl;
+    $lStatusMessage = $this->generateMessage($pType, $pScore, $lUrl, $pTitle);
 
     $lPostBody = array("status" => $lStatusMessage);
     $lConsumer = new OAuthConsumer(sfConfig::get("app_twitter_oauth_token"), sfConfig::get("app_twitter_oauth_secret"));
