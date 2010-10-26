@@ -97,7 +97,7 @@ class GoogleAuthApiClient extends AuthApi {
       $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lProfileUri, $lObject->id, $this->aCommunityId, $lProfileUri);
     }
 
-    $this->completeOnlineIdentity($lOnlineIdentity, $lObject, $lUser, $lAuthIdentifier);
+    $this->completeOnlineIdentity($lOnlineIdentity, $lObject, $pUser, $lAuthIdentifier);
 
     AuthTokenTable::saveToken($pUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], true);
 
