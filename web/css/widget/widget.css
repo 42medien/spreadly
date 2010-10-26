@@ -7,7 +7,7 @@
 #container{width: 580px; /*height: 480px;*/}
 #branding{width: 500px;height: 35px;padding: 0 0 20px 0;}
 #nav_main{width: 580px; height: 25px;}
-#nav_main_box{width: 137px;height:25px;float:right;} 
+#nav_main_box{width: 137px;height:25px;float:right;}
 #content{width:580px;padding-top:10px;}
 #content_main{width:540px;padding:10px 20px;}
 #spread_description{width:500px;}
@@ -15,8 +15,8 @@
 #yiid_help_text{padding:20px 0 5px 0;}
 .big_size{margin-bottom:5px;}
 .service_icon{width:53px;margin-bottom:10px;}
-#normal_box ul{margin: 10px 0 10px 50px;}
-#logos_big li{float:left;width:125px;text-align:center;margin-right:10px;padding-top: 60px;}
+#normal_box ul{margin: 10px 0 10px 30px;}
+#logos_big li{float:left;width:105px;text-align:center;margin-right:5px;padding-top: 60px;}
 #logos_big li a{padding-top: 60px;}
 #buzz_logo{padding-left:14px;padding-right:14px;}
 #facebook_logo{padding-left:1px;padding-right:1px;}
@@ -117,12 +117,12 @@ a{color: #68B94F;}
 }
 .already_shared .dislikeit_button{background-color: transparent;}
 .popup_button:hover, .popup_button:hover .likeit_button, .popup_button:hover .dislikeit_button{background-color: #f2f2f2;}
-#buzz_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -575px;}
+#google_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -575px;}
 #facebook_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -785px;}
 #twitter_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -1003px;}
 #further_logos{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -1269px;}
 #linkedin_logo{background: url("/img/sprites/sprite_popup.png") no-repeat -453px -1195px;}
-#buzz_logo_small{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -523px;}
+#google_logo_small{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -523px;}
 #facebook_logo_small{background: url("/img/sprites/sprite_popup.png") no-repeat 12px -734px;}
 #linkedin_logo_small{background: url("/img/sprites/sprite_popup.png") no-repeat 12px -734px;}
 #twitter_logo_small{background: url("/img/sprites/sprite_popup.png") no-repeat 10px -953px;}

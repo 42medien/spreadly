@@ -1,25 +1,25 @@
 /**
-  * @section -reset.css 
+  * @section -reset.css
   */
 a, abbr, acronym, address, applet, article, aside, audio,
 b, blockquote, big, body,
 center, canvas, caption, cite, code, command,
-datalist, dd, del, details, dfn, dl, div, dt, 
+datalist, dd, del, details, dfn, dl, div, dt,
 em, embed,
-fieldset, figcaption, figure, font, footer, form, 
+fieldset, figcaption, figure, font, footer, form,
 h1, h2, h3, h4, h5, h6, header, hgroup, html,
 i, iframe, img, ins,
-kbd, 
+kbd,
 keygen,
-label, legend, li, 
+label, legend, li,
 meter,
 nav,
 object, ol, output,
 p, pre, progress,
-q, 
+q,
 s, samp, section, small, span, source, strike, strong, sub, sup,
 table, tbody, tfoot, thead, th, tr, tdvideo, tt,
-u, ul, 
+u, ul,
 var{
     background: transparent;
     border: 0 none;
@@ -27,7 +27,7 @@ var{
     margin: 0;
     padding: 0;
     vertical-align: baseline; }
-    
+
 
 /* Getting the new tags to behave */
 article, aside, audio, canvas, command, datalist, details, embed, figcaption, figure, footer, header, hgroup, keygen, meter, nav, output, progress, section, source, video{ display: block; }
@@ -76,7 +76,7 @@ h4{margin: 15px 0 10px 0;}
   #nav_main li{list-style-type: none;margin: 0 28px 0 0;float:left;}
   #nav_main li a{padding: 4px 25px;}
   li#nav_main_settings{margin-right: 0;}
-    
+
 /* Content */
 #content{
   padding: 25px 0;
@@ -150,7 +150,7 @@ error_box_500 p{
 #reset_filter_friends a{padding: 0;}
 #friends_active_list, #friends_all_list, #reset_filter_friends, #friends_search_results{margin-left: 8%;margin-right: 8%;}
 #friends_active_list{
-  height: 220px; 
+  height: 220px;
   overflow: auto;
   border: 1px solid #eee;border-top: none;
   padding: 7px 0;
@@ -158,7 +158,7 @@ error_box_500 p{
 }
 #friends_search_results li.keynav_focusbox a{text-decoration: underline; font-weight: bold;}
 #friends_search_results{
-  height: 230px; 
+  height: 230px;
   overflow: auto;
   border: 1px solid #eee;border-top: none;
   padding: 7px 0;
@@ -168,8 +168,8 @@ error_box_500 p{
   margin-right: 3px;
 }
 #friends_all_list{
-  display: none; 
-  height: 230px; 
+  display: none;
+  height: 230px;
   overflow: auto;
   border: 1px solid #eee;border-top: none;
   padding: 7px 0;
@@ -186,7 +186,7 @@ error_box_500 p{
 /*a.friend_filter_link_active{padding: 3px 5px;}*/
 #empty_friends_area{
   width: 90%;
-  height: 100px; 
+  height: 100px;
   border: 1px solid #DDD;
   padding: 40px 5px 0 5px;
   margin: 5px auto;
@@ -222,11 +222,11 @@ error_box_500 p{
 	  }
 	  #main_nav_inner7 p{margin: 0 15px 0 5px;}
 	  #main_nav_inner8{width:4px;height:29px;}
-	  
+
 	  #empty_stream h3{
 	    margin-bottom: 7px;
 	  }
-	  
+
 	  #stream_left_bottom{padding: 15px 0 5px;border-left:1px solid #ccc;border-bottom:2px solid #ccc;border-right:2px solid #ccc;
 	  -webkit-border-radius: 0 0 4px 4px;-moz-border-radius: 0 0 4px 4px;border-radius: 0 0 4px 4px;}
 		  .so_information_content{margin-left: 18px;padding: 0 15px;border-right: 1px #cbd3c9 solid;}
@@ -239,7 +239,7 @@ error_box_500 p{
 		   */
 		  .new_stream li{list-style-type: none;margin: 2px 3px;padding: 7px;-webkit-border-radius: 5px 0 5px 0;-moz-border-radius: 5px 0 5px 0;border-radius: 5px 0 5px 0;}
 		  .new_stream li.item_active, .new_stream li:hover{padding: 5px;border-width: 2px;border-style: solid;}
-		  
+
 		  .new_stream #main_stream_pager:hover{
 		    padding: 7px;
 		  }
@@ -250,15 +250,15 @@ error_box_500 p{
 		  .not_stream #main_stream_pager:hover{
         padding: 0;
       }
-      
+
       #stream_breadcrumb{
         margin: 5px 15px 10px 15px;
         padding-bottom: 2px;
         border-bottom: 1px solid#eee
       }
-		  
+
 		    .green_arrow{}
-		    
+
 		    .so_image{
 		      width: 10%;
 		      height: 50px;
@@ -272,14 +272,14 @@ error_box_500 p{
 		      border: 1px solid #DDDDDD;
 		    }
 		    .so_information{width: 86%;}
-		    
+
 		    .green_top_left{width:18px;height:28px;}
 		    .green_top_middle{width: 98%;border-right: 1px solid #cbd3c9;}
         .green_middle_left{width:18px;height: 100%;min-height:1px;}
         .green_middle_middle{width: 98%;border-right: 1px solid #cbd3c9;}
         .green_bottom_left{height:3px;width:18px}
         .green_bottom_middle{width: 98%;height:3px;border-right: 1px solid #cbd3c9;}
-        
+
         #stream_left_bottom .so_comment{margin: 0 0 0 18px;padding: 0 0 5px 10px;}
 
         .actions{margin-left: 18px;padding-bottom: 5px;}
@@ -309,28 +309,28 @@ error_box_500 p{
         }
         .action_content{padding: 12px 10px;}
         .action_content a{margin-left: 10px;}
-        
+
         .info_area{}
         .so_headline_left{height: 18px;overflow: hidden;padding: 5px 0 5px 10px;}
         .so_headline_right{height: 18px;overflow: hidden;padding: 5px 8px 5px 0;}
-        
+
         .whats_hot_stream_item{-webkit-border-radius: 3px 0 3px 0;-moz-border-radius: 3px 0 3px 0;border-radius: 3px 0 3px 0;}
         .whats_hot_stream_icon{padding: 8px 2px;}
         .stream_icon{padding:3px 9px;}
-        
+
         .whats_hot_stream_head_left{
           width: 60%;
           min-width: 265px;
         }
         .preview_information{width: 100px;margin: 10px;}
-        
+
         .whats_hot_info_area p{margin: 6px 10px;}
         .whats_hot_info_area p.main_text{margin: 8px 10px 10px;}
-        
+
         .pager_load_more{padding: 5px 22px 5px 11px;}
         #main_stream_pager{margin: 15px 0 5px 0;}
         .right_shares_pager{margin-top: 15px;border-bottom: none !important;}
-        
+
         .user_hover_area{position: relative;top: -190px;left: -25px; z-index: 400;}
         .user_hover_area_top{width: 278px; height: 100px;padding: 5px 10px;-webkit-border-radius: 3px 3px 0 0;-moz-border-radius: 3px 3px 0 0;border-radius: 3px 3px 0 0;}
         .user_hover_area_bottom{width: 300px; height:24px;}
@@ -341,8 +341,8 @@ error_box_500 p{
         .sharing_user_friends{height: 35px;margin-top: 5px;}
         .sharing_friends li{padding: 0 !important;margin: 0 5px !important;}
         .sharing_user_link{padding-left: 10px;}
-        
-	  
+
+
 
 /* Content_supp */
 #content_supp{
@@ -353,7 +353,7 @@ error_box_500 p{
   #search1{width: 60%;padding:5px 10px;height: 14px;border: 1px solid #ccc;-webkit-border-radius: 4px 0 0 4px;-moz-border-radius: 4px 0 0 4px;border-radius: 4px 0 0 4px;border-right: none;}
   #search2{width: 33px;height: 26px;padding:4px 0;-webkit-border-radius: 0 4px 4px 0;-moz-border-radius: 0 4px 4px 0;border-radius: 0 4px 4px 0;border-left: none;}
   #search3{width: 27px;padding: 13px 5px;}
-    
+
     #stream_right{width: 100%;border-left:none; position: relative; top:0;}
     #preview{padding:0 20px 25px;overflow: hidden;}
     #stream_right_top div{float:left;}
@@ -371,13 +371,13 @@ error_box_500 p{
       width: 45%;
       padding-left:10px;
     }
-    #so_information h3{margin-bottom:5px;} 
+    #so_information h3{margin-bottom:5px;}
     #so_information h5{margin-bottom:10px;}
-    
+
   .preview_information img, #so_image img{
     border: 1px solid #DDD;
-  } 
-    
+  }
+
   #stream_right_bottom{padding: 25px 30px 10px;}
     .shares{list-style-type: none;}
     .shares li{margin-bottom: 10px;padding-bottom: 10px;border-bottom: 1px dashed #4EA734;}
@@ -389,8 +389,8 @@ error_box_500 p{
     #so_right_view .url{padding-left:0;}
     .so_comment{padding-top:5px;}
     #so_information{overflow: hidden;}
-        
-        
+
+
 /* Footer */
 #footer{
   float: left;
@@ -443,9 +443,8 @@ error_box_500 p{
 #yiid_description2{width: 188px;height: 184px;}
 #yiid_description3{width: 259px;height: 186px;}
 .service_icons_big{width: 70%;margin: 30px auto 40px;}
-.service_icons_big li{width: 30%;}
-.icon_big_twitter a{padding: 65px 15px 0;}
-.icon_big_linkedin a{padding: 65px 15px 0;}
+.service_icons_big li{width: 25%;}
+.icon_big_twitter a, .icon_big_linkedin a, .icon_big_google a {padding: 65px 15px 0;}
 .icon_big_facebook a{padding: 65px 15px 0 2px;}
 .icon_big_link{padding: 60px 8px 2px;}
 .icon_big{padding-top: 65px; display: block;}
@@ -453,7 +452,7 @@ error_box_500 p{
 #signin_via_username_form{margin: 20px 0;}
 #signin_via_username_form div{width: 280px;}
 #signin_via_username_form label{width: 110px;display: block;}
-#signin_via_username_form input[type=text], 
+#signin_via_username_form input[type=text],
 #signin_via_username_form input[type=password]{
   width: 150px;
   margin-bottom: 3px;
@@ -482,7 +481,7 @@ error_box_500 p{
   text-align: center;
 }
 
-    
+
 /**
  * Hacks
  */
