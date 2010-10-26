@@ -25,8 +25,9 @@ class popupActions extends sfActions {
     $lUser = $this->getUser()->getUser();
     if($request->getMethod() == sfRequest::POST) {
       $checkedOnlineIdentities = $request->getParameter('enabled_services', array());
+
       //@todo define methods in objects
-      OnlineIdentityTable::toggleSocialPublishingStatus($this->getUser()->getUser()->getOnlineIdentities(), $checkedOnlineIdentities);
+      OnlineIdentityTable::toggleSocialPublishingStatus($this->getUser()->getUser()->getOnlineIdentitesAsArray(), $checkedOnlineIdentities);
 
       if (array_key_exists("yiid_temp_hash", $_COOKIE)) {
         $lTempData = YiidActivityTable::getTemporaryData($_COOKIE["yiid_temp_hash"]);
