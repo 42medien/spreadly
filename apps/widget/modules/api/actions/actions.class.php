@@ -62,7 +62,7 @@ class apiActions extends sfActions {
    * @return unknown_type
    */
   public function executeSave_like(sfWebRequest $request) {
-     $this->setLayout(false);
+    $this->setLayout(false);
     $this->setTemplate(false);
     $this->getResponse()->setContentType('application/json');
     if ($this->status == 200) {
