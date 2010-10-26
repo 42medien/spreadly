@@ -16,6 +16,9 @@
       <li class="left icon_big icon_big_linkedin">
         <?php echo link_to("LinkedIn", "@auth_signin?service=linkedin"); ?>
       </li>
+      <li class="left icon_big icon_big_google">
+        <?php echo link_to("Google Buzz", "@auth_signin?service=google"); ?>
+      </li>
 	  </ul>
 
 	  <p>
