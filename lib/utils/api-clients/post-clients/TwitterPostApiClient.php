@@ -4,7 +4,7 @@
  *
  * @author Matthias Pfefferle
  */
-class TwitterPostApiClient implements PostApiInterface {
+class TwitterPostApiClient extends PostApi {
 
   /**
    * defines the post function
