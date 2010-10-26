@@ -25,8 +25,6 @@ class FacebookPostApiClient extends PostApi {
       return false;
   	}
 
-    $lStatusMessage = PostApiUtils::generateMessage($pType, $pScore, $pTitle);
-
     $lPostBody = "access_token=".$lToken->getTokenKey()."&message=".$lStatusMessage;
 
     if ($pDescription && $pDescription != '') {
