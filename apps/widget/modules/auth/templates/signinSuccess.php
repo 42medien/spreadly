@@ -4,6 +4,7 @@
     <li id="facebook_area"><a id="facebook_logo" class="service_icon" href="<?php echo url_for("@".$pContext."_signinto?service=facebook", true); ?>">Facebook</a></li>
     <li id="twitter_area"><a id="twitter_logo" class="service_icon" href="<?php echo url_for("@".$pContext."_signinto?service=twitter", true); ?>">Twitter</a></li>
     <li id="linkedin_area"><a id="linkedin_logo" class="service_icon" href="<?php echo url_for("@".$pContext."_signinto?service=linkedin", true); ?>">Linkedin</a></li>
+    <li id="google_area"><a id="google_logo" class="service_icon" href="<?php echo url_for("@".$pContext."_signinto?service=google", true); ?>">Google Buzz</a></li>
   </ul>
 
 </div>
