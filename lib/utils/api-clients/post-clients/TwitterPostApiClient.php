@@ -24,7 +24,7 @@ class TwitterPostApiClient extends PostApi {
       return false;
     }
 
-    $lUrl = ShortUrlTable::shortenUrl();
+    $lUrl = ShortUrlTable::shortenUrl($pUrl);
 
     $lStatusMessage = $this->generateMessage($pType, $pScore, $pUrl, $pTitle);
     $lStatusMessage .= $lUrl;
