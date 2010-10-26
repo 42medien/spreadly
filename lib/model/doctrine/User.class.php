@@ -75,6 +75,10 @@ class User extends BaseUser {
   }
 
 
+  /**
+   * retrieve an array with all OI Ids of this user
+   * @return array(int)
+   */
   public function getOnlineIdentitesAsArray() {
     $lIdentityArray = array();
     $lIdentities = $this->getOnlineIdentities();

@@ -81,7 +81,6 @@ class YiidActivityTable extends Doctrine_Table
       return false;
     }
 
-
     foreach ($pGivenOnlineIdentitys as $lIdentityId) {
       if (in_array($lIdentityId, $pOwnedOnlineIdentitys)) {
         $lVerifiedOnlineIdentityIds[]= $lIdentityId;
