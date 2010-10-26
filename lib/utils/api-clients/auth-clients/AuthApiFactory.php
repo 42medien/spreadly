@@ -38,6 +38,9 @@ class AuthApiFactory {
       case "google":
         return new GoogleAuthApiClient();
         break;
+      //case "delicious":
+      //  return new DeliciousAuthApiClient();
+      //  break;
       default:
         return null;
     }
