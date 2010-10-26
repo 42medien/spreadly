@@ -32,12 +32,16 @@ class SocialObjectParser {
         $lToSave['title'] = $lOpenGraph->__get('title');
         $lToSave['thumb_url'] = $lOpenGraph->__get('image');
         $lToSave['stmt'] = $lOpenGraph->__get('description');
+
+        sfContext::getInstance()->getLogger()->debug("{SocialObjectParser} lToSave openGraph: " . print_r($lToSave, true) );
       } else {
         //if there are no og-metas, check if there are some html-metas and get it
         $lKeys = MetaTagParser::getKeys($lHtml);
         $lToSave['title'] = (isset($lKeys['title']))?$lKeys['title']:null;
         $lToSave['stmt'] = (isset($lKeys['description']))?$lKeys['description']:null;
         $lToSave['thumb_url'] = null;
+
+        sfContext::getInstance()->getLogger()->debug("{SocialObjectParser} lToSave alternative: " . print_r($lToSave, true) );
       }
       return $lToSave;
     }catch (Exception $e) {
@@ -83,11 +87,11 @@ class SocialObjectParser {
 
     $lParsedInformation = self::fetch($pUrl);
 
-    $lTitle = StringUtils::cleanupStringForMongodb($lParsedInformation['title']);
+    $lTitle = StringUtils::cleanupStringForMongodb($lParsedInformation['title'], false);
     if ($lTitle != "" ) {
       $lUpdateArray['title'] = $lTitle;
     }
-    $lStmt = StringUtils::cleanupStringForMongodb($lParsedInformation['stmt']);
+    $lStmt = StringUtils::cleanupStringForMongodb($lParsedInformation['stmt'], false);
     if ($lStmt != "") {
       $lUpdateArray['stmt'] = $lStmt;
     }
@@ -98,7 +102,7 @@ class SocialObjectParser {
         SocialObjectTable::updateObjectInMongoDb(array("url_hash" => md5($pUrl)), array('$set' => $lUpdateArray ));
       }
       catch (Exception $e) {
-        sfContext::getInstance()->getLogger()->err("{SocialObjectParser} PROBLEM: " . print_r($lUpdateArray, true) );
+        sfContext::getInstance()->getLogger()->err("{SocialObjectParser} PROBLEM on update: " . print_r($lUpdateArray, true) );
       }
     }
   }

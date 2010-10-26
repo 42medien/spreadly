@@ -10,7 +10,7 @@ $lUserHugo = UserTable::retrieveByUsername('weyandch');
 $lHugoOis = $lUserHugo->getOnlineIdentitesAsArray();
 
 $lCommunityTwitter = CommunityTable::retrieveByCommunity('twitter');
-$lOiHansTwitter = OnlineIdentityTable::retrieveByIdentifier('weyandch', $lCommunityTwitter->getId());
+$lOiHansTwitter = OnlineIdentityTable::retrieveByAuthIdentifier('weyandch', $lCommunityTwitter->getId());
 YiidActivityTable::saveLikeActivitys($lUserHugo->getId(), 'http://blog.yiid.org/2010/08/31/ist-yiid-com-der-weise-stier-aus-europa/', $lHugoOis, array($lOiHansTwitter->getId()), 1, 'like', "Ist+Yiid.com+der+wei%C3%9Fe+Stier+aus+Europa%3F");
 */
 $lUserHugo = UserTable::retrieveByUsername('hugo');
@@ -32,25 +32,25 @@ $lUserAffeOis = $lUserAffe->getOnlineIdentitesAsArray();
 $lCommunityTwitter = CommunityTable::retrieveByCommunity('twitter');
 $lCommunityFb = CommunityTable::retrieveByCommunity('facebook');
 
-$lOiHansTwitter = OnlineIdentityTable::retrieveByIdentifier('hans_twitter', $lCommunityTwitter->getId());
-$lOiHansFb = OnlineIdentityTable::retrieveByIdentifier('hans_fb', $lCommunityFb->getId());
+$lOiHansTwitter = OnlineIdentityTable::retrieveByAuthIdentifier('hans_twitter', $lCommunityTwitter->getId());
+$lOiHansFb = OnlineIdentityTable::retrieveByAuthIdentifier('hans_fb', $lCommunityFb->getId());
 
-$lOiHugoTwitter = OnlineIdentityTable::retrieveByIdentifier('hugo_twitter', $lCommunityTwitter->getId());
-$lOiHugoFb = OnlineIdentityTable::retrieveByIdentifier('hugo_fb', $lCommunityFb->getId());
+$lOiHugoTwitter = OnlineIdentityTable::retrieveByAuthIdentifier('hugo_twitter', $lCommunityTwitter->getId());
+$lOiHugoFb = OnlineIdentityTable::retrieveByAuthIdentifier('hugo_fb', $lCommunityFb->getId());
 
-$lOiJamesTwitter = OnlineIdentityTable::retrieveByIdentifier('james_twitter', $lCommunityTwitter->getId());
-$lOiJamesFb = OnlineIdentityTable::retrieveByIdentifier('james_fb', $lCommunityFb->getId());
+$lOiJamesTwitter = OnlineIdentityTable::retrieveByAuthIdentifier('james_twitter', $lCommunityTwitter->getId());
+$lOiJamesFb = OnlineIdentityTable::retrieveByAuthIdentifier('james_fb', $lCommunityFb->getId());
 
-$lOiSnirgelchenTwitter = OnlineIdentityTable::retrieveByIdentifier('snirgelchen_twitter', $lCommunityTwitter->getId());
-$lOiSnirgelchenFb = OnlineIdentityTable::retrieveByIdentifier('snirgelchen_fb', $lCommunityFb->getId());
+$lOiSnirgelchenTwitter = OnlineIdentityTable::retrieveByAuthIdentifier('snirgelchen_twitter', $lCommunityTwitter->getId());
+$lOiSnirgelchenFb = OnlineIdentityTable::retrieveByAuthIdentifier('snirgelchen_fb', $lCommunityFb->getId());
 
-$lOiManniTwitter = OnlineIdentityTable::retrieveByIdentifier('manni_twitter', $lCommunityTwitter->getId());
-$lOiManniFb = OnlineIdentityTable::retrieveByIdentifier('manni_fb', $lCommunityFb->getId());
+$lOiManniTwitter = OnlineIdentityTable::retrieveByAuthIdentifier('manni_twitter', $lCommunityTwitter->getId());
+$lOiManniFb = OnlineIdentityTable::retrieveByAuthIdentifier('manni_fb', $lCommunityFb->getId());
 
-$lOiAffeFb = OnlineIdentityTable::retrieveByIdentifier('affe_fb', $lCommunityFb->getId());
-$lOiAffeTwitter = OnlineIdentityTable::retrieveByIdentifier('affe_twitter', $lCommunityTwitter->getId());
+$lOiAffeFb = OnlineIdentityTable::retrieveByAuthIdentifier('affe_fb', $lCommunityFb->getId());
+$lOiAffeTwitter = OnlineIdentityTable::retrieveByAuthIdentifier('affe_twitter', $lCommunityTwitter->getId());
 
-$lOiKarlTwitter = OnlineIdentityTable::retrieveByIdentifier('karl_twitter', $lCommunityTwitter->getId());
+$lOiKarlTwitter = OnlineIdentityTable::retrieveByAuthIdentifier('karl_twitter', $lCommunityTwitter->getId());
 
 //$lObject = SocialObjectTable::createSocialObject('http://affen.de', null, 'affen title', 'affen description', null);
 

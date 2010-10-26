@@ -27,28 +27,6 @@ class OnlineIdentityTable extends Doctrine_Table {
     return Doctrine_Core::getTable('OnlineIdentity');
   }
 
-  public static function retrieveByOnlineIdentity($lOIdentity) {
-    return self::retrieveByIdentifier($lOIdentity->getIdentifier(), $lOIdentity->getCommunityId(), $lOIdentity->getIdentityType());
-  }
-
-  /**
-   * retrieve an OnlineIdentity by identifier and service
-   *
-   * @author Matthias Pfefferle
-   * @param string $pIdentifier
-   * @param string $pCommunityId
-   * @param int $pType
-   * @return OnlineIdentity|null
-   */
-  public static function retrieveByIdentifier($pIdentifier, $pCommunityId) {
-    $lOnlineIdentity = Doctrine_Query::create()->
-    from('OnlineIdentity oi')->
-    andWhere('oi.identifier = ? AND oi.community_id = ?', array($pIdentifier, $pCommunityId))
-    ->fetchOne();
-    return $lOnlineIdentity;
-  }
-
-
   /**
    * gets an OnlineIdentity for a given User
    *

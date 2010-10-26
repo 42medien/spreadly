@@ -108,10 +108,16 @@ class StringUtils {
   /**
    * returns a given string cleaned from any special chars and converted into utf8
    * @param string $pString
+   * @param boolean $pWithDecode
    * @author weyandch
    */
-  public static function cleanupStringForMongodb($pString) {
-    $pString = htmlspecialchars_decode(strip_tags(urldecode($pString)));
+  public static function cleanupStringForMongodb($pString, $pWithDecode = true) {
+
+    if ($pWithDecode) {
+      $pString = urldecode($pString);
+    }
+
+    $pString = htmlspecialchars_decode(strip_tags($pString));
     if (mb_detect_encoding($pString) != 'UTF-8') {
       $pString = utf8_encode($pString);
     }
