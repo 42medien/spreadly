@@ -157,14 +157,22 @@ class OnlineIdentityTable extends Doctrine_Table {
 
 
 
+  /**
+   * update OI's which are considered for social publishing
+   *
+   * @param $pIdentitiesOwnedByUser
+   * @param $pCheckedIdentities
+   */
   public static function toggleSocialPublishingStatus($pIdentitiesOwnedByUser = array(), $pCheckedIdentities = array()) {
     // remove possible injected oi's not belonging to the user
     $checkedOnlineIdentities = array_intersect($pIdentitiesOwnedByUser, $pCheckedIdentities);
 
+    // remove all old ones
     if (is_array($pIdentitiesOwnedByUser)) {
       self::removeSocialPublishingItems($pIdentitiesOwnedByUser);
     }
 
+    // remove all old ones
     if (is_array($checkedOnlineIdentities)  && count($checkedOnlineIdentities) > 0) {
       self::activateSocialPublishingItems($checkedOnlineIdentities);
     }
