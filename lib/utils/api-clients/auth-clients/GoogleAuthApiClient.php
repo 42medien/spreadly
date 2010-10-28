@@ -29,8 +29,8 @@ class GoogleAuthApiClient extends AuthApi {
     $lObject = json_decode($lJson);
     $lObject = $lObject->data;
 
-    $lProfileUri = "http://www.google.com/profiles/pfefferle";
-    $lAuthIdentifier = "http://www.google.com/profiles/pfefferle";
+    $lProfileUri = $lObject->profileUrl;
+    $lAuthIdentifier = $lProfileUri;
 
     // ask for online identity
     $lOnlineIdentity = OnlineIdentityTable::retrieveByAuthIdentifier($lAuthIdentifier);
@@ -79,8 +79,8 @@ class GoogleAuthApiClient extends AuthApi {
     $lObject = json_decode($lJson);
     $lObject = $lObject->data;
 
-    $lProfileUri = "http://www.google.com/profiles/pfefferle";
-    $lAuthIdentifier = "http://www.google.com/profiles/pfefferle";
+    $lProfileUri = $lObject->profileUrl;
+    $lAuthIdentifier = $lProfileUri;
 
     // ask for online identity
     $lOnlineIdentity = OnlineIdentityTable::retrieveByAuthIdentifier($lAuthIdentifier);
