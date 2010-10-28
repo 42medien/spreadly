@@ -6,30 +6,12 @@ options:
 ShortUrl:
   actAs:
     Timestampable:  ~
-    
+
   columns:
     url:
-      type:    string(512)      
+      type:    string(512)
     ip:
       type:    string(25)
   indexes:
     url_prefix:
       fields: [url(45)]
-      
-ShortUrlIntern:
-  actAs:
-    Timestampable:  ~
-    
-  columns:
-    url:
-      type:    string(512)      
-    ip:
-      type:    string(25)
-    identifier:
-      type:    string(40)
-  indexes:
-    url_prefix:
-      fields:  [url(45)]
-    identifier:
-      fields:  [identifier]
-    
