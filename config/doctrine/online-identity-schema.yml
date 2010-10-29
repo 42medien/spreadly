@@ -42,7 +42,8 @@ OnlineIdentity:
     friend_ids:
       type:     text
     friend_count:
-      type:     integer
+      type:     integer(4)
+      default:  0
     last_friend_refresh:
       type:     integer
       default:  0
