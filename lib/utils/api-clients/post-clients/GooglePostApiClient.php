@@ -25,8 +25,6 @@ class GooglePostApiClient extends PostApi {
 
     $lPostBody = $this->generateMessage($pType, $pScore, $pUrl, $pTitle, $pDescription, $pPhoto);
 
-    print_r($lPostBody);
-
     $lConsumer = new OAuthConsumer(sfConfig::get("app_google_oauth_token"), sfConfig::get("app_google_oauth_secret"));
     $lStatus = OAuthClient::post($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "https://www.googleapis.com/buzz/v1/activities/@me/@self", $lPostBody, null, array("Content-Type: application/atom+xml"));
 

@@ -49,3 +49,4 @@ all:
 
     ## load common helpers
     standard_helpers:       [Cdn, I18N, Partial]
+    check_lock:             on 

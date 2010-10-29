@@ -307,7 +307,7 @@ class OnlineIdentityTable extends Doctrine_Table {
       $pOiArray = IdentityMemcacheLayer::retrieveContactOiIdsByUserId($pUserId);
       $pOiArray = array_merge($pOiArray, OnlineIdentityTable::retrieveIdsByUserId($pUserId));
     } else {   // get all items from a specific friend
-      $pOiArray = IdentityMemcacheLayer::retrieveContactOiIdsByUserId($pFriendId);
+      $pOiArray = OnlineIdentityTable::retrieveIdsByUserId($pFriendId);
     }
 
     return $pOiArray;

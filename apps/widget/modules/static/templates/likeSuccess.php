@@ -9,7 +9,7 @@
         <p title="<?php echo $pUrl; ?>"><?php echo link_to(UrlUtils::getShortUrl($pUrl), $pUrl, array('class' => 'url')); ?></p>
       </div>
       <div id="so_detail_desc" class="clearfix">
-        <img alt="<?php echo $pUrl; ?>" width="100px" height="80px" src="http://communipedia.v2.websnapr.com/?url=<?php echo $pUrl; ?>&sh=80&sw=100" class="left">
+        <img alt="<?php echo $pUrl; ?>" width="100px" height="80px" src="<?php if(!$pImageUrl){ ?>http://communipedia.v2.websnapr.com/?url=<?php echo $pUrl; ?>&sh=80&sw=100<?php } else { echo $pImageUrl; } ?>" class="left">
         <span class="normal_text"><?php echo truncate_text($pDescription, 400, '...'); ?></span>
       </div>
     </div>
@@ -31,7 +31,9 @@
 		      <input type="hidden" name="url" value="<?php echo $pUrl; ?>" />
 		      <input type="hidden" name="title" value="<?php echo $pTitle; ?>" />
 		      <input type="hidden" name="description" value="<?php echo $pDescription; ?>" />
-		      <input type="hidden" name="photo" value="http://communipedia.v2.websnapr.com/?url=<?php echo $pUrl; ?>&sh=80&sw=100" />
+		      <?php if($pImageUrl){ ?>
+		        <input type="hidden" name="photo" value="<?php echo $pImageUrl; ?>" />
+		      <?php } ?>
 		      <ul class="normal_list clearfix" id="services_chosen">
 		      <?php foreach ($pIdentities as $lIdentity) { ?>
 		        <li id="check_<?php echo $lIdentity->getCommunity()->getCommunity(); ?>">
@@ -48,11 +50,11 @@
             <span class="sharing_button likeit_button">&nbsp;</span>
             <?php echo __($pType); ?>
           </div>
-          <?php if($pFull) {?>
+          <?php //if($pFull) {?>
 	          <div class="rounded_corners content_main_border popup_button" id="static-dislike-button">
 	            <span class="sharing_button dislikeit_button" id="static-dislike-button">&nbsp;</span>
 	          </div>
-          <?php } ?>
+          <?php //} ?>
         </form>
         <div class="rounded_corners content_main_border popup_button_used distance_right already_shared" id="static-liked" style="display: none;">
           <span class="sharing_button likeit_button">&nbsp;</span>

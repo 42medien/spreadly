@@ -39,8 +39,9 @@ foreach ($lOis as $lIdentity) {
     $lJsonObject = json_decode(UrlUtils::sendGetRequest("https://graph.facebook.com/".$lIdentity->getOriginalId()));
     $lIdentity->setProfileUri($lJsonObject->link);
     $lIdentity->setName($lJsonObject->name);
-    AmazonSQSUtils::pushToQuque('ImportContacts', $lIdentity->getId());
   }
+
+  AmazonSQSUtils::pushToQuque('ImportContacts', $lIdentity->getId());
   $lIdentity->save();
 }
 echo "######################################### \r\n";

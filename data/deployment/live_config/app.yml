@@ -2,7 +2,7 @@
 # default values
 all:
   release:
-    name:     '20101014'
+    name:     '20101029'
  #   revision: '20100621/'   ## current revision
     gzip:     0              ## set 1 to force local gz support
 
@@ -49,6 +49,10 @@ all:
   facebook:
     oauth_token:   "1de4ec6a73c75e7c00977bc6c9a203c4"
     oauth_secret:  "d789bd46751701a96ca3e80d8b5bff86"
+
+  linkedin:
+    oauth_token:   "tLGEinyEJmEVEzPruN8Q-MH_gLVrzTWJbc1xqbxyvTApbIxetpe89LVMyAc4nBRZ"
+    oauth_secret:  "KzbTzvLkM4Yfb7Jf9_8D7QV6Vy-1IBj-XItzkmHzWFJMXNT2ZyD_KmxqM5eJ8Wnr"
 
   google:
     oauth_token:   "www.yiid.com"

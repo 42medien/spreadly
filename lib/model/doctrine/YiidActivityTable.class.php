@@ -86,7 +86,7 @@ class YiidActivityTable extends Doctrine_Table
         $lVerifiedOnlineIdentityIds[]= $lIdentityId;
         $senderOi = OnlineIdentityTable::getInstance()->find($lIdentityId);
         $lServices[] = $senderOi->getCommunityId();
-        if (sfConfig::get('app_settings_environment') != 'local' || 1) {
+        if (sfConfig::get('app_settings_environment') != 'local') {
           $lStatus = $senderOi->sendStatusMessage($pUrl, $pVerb, $pScore, $pTitle, $pDescription, $pPhoto);
         }
         sfContext::getInstance()->getLogger()->debug("{YiidActivityPeer}{saveLikeActivitys} Status Message: " . print_r($lVerifiedOnlineIdentityIds, true));

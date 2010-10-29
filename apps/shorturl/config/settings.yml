@@ -39,3 +39,4 @@ all:
     charset:                utf-8
     i18n:                   on
     compressed:             on
+    check_lock:             on

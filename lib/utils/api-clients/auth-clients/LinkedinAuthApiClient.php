@@ -44,7 +44,7 @@ class LinkedinAuthApiClient extends AuthApi {
 
       // check online identity
       try {
-        $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lIdentifier, $lLinkedInId, $this->aCommunityId, $lAuthIdentifier);
+        $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lAuthIdentifier, $lLinkedInId, $this->aCommunityId, $lAuthIdentifier);
       } catch (Exception $e) {}
       // generate empty user
       $lUser = new User();
