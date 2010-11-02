@@ -26,7 +26,7 @@ class LinkedinAuthApiClient extends AuthApi {
     //$lConsumer = new OAuthConsumer(sfConfig::get("app_linkedin_oauth_token"), sfConfig::get("app_linkedin_oauth_secret"));
 
 
-    $lXml = OAuthClient::get($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "http://api.linkedin.com/v1/people/~:(id,site-standard-profile-request,summary,picture-url,first-name,last-name,location)");
+    $lXml = OAuthClient::get($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "http://api.linkedin.com/v1/people/~:(id,site-standard-profile-request,summary,picture-url,first-name,last-name,date-of-birth,location)");
     $lProfileArray = XmlUtils::XML2Array($lXml);
     //var_dump($lProfileArray);die();
     // linkedin identifier
@@ -80,7 +80,7 @@ class LinkedinAuthApiClient extends AuthApi {
     // extract params
     parse_str($lParams, $lParamsArray);
 
-    $lXml = OAuthClient::get($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "http://api.linkedin.com/v1/people/~:(id,summary,picture-url,first-name,last-name,location)");
+    $lXml = OAuthClient::get($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "http://api.linkedin.com/v1/people/~:(id,site-standard-profile-request,summary,picture-url,first-name,last-name,date-of-birth,location)");
     $lProfileArray = XmlUtils::XML2Array($lXml);
     //var_dump($lProfileArray);die();
     // identifier
@@ -181,6 +181,11 @@ class LinkedinAuthApiClient extends AuthApi {
     $pOnlineIdentity->setName($pProfileArray['first-name'] . " " . $pProfileArray['last-name']);
     //$pOnlineIdentity->setPhoto($pObject->profile_image_url);
     $pOnlineIdentity->setSocialPublishingEnabled(true);
+
+    if (isset($pProfileArray['date-of-birth']['year'])) {
+      $pOnlineIdentity->setBirthdate($pProfileArray['date-of-birth']['year'].'-'.$pProfileArray['date-of-birth']['month'].'-'.$pProfileArray['date-of-birth']['day']);
+    }
+    $pOnlineIdentity->setLocationRaw($pProfileArray['location']['name']);
     $pOnlineIdentity->setUserId($pUser->getId());
     $pOnlineIdentity->save();
 

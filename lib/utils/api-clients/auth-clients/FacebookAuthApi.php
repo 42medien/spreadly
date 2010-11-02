@@ -153,10 +153,12 @@ class FacebookAuthApiClient extends AuthApi {
 
     // transform facebook format into
     $lBirthday = explode('/', $pObject->birthday);
-    $pOnlineIdentity->setBirthdate($lBirthday[2].'-'.$lBirthday[0].'-'.$lBirthday[1]);
-
+    if (count($lBirthday == 3 && $lBirthday[2] > 0)) { // 3 parts and year is set
+      $pOnlineIdentity->setBirthdate($lBirthday[2].'-'.$lBirthday[0].'-'.$lBirthday[1]);
+    }
     $pOnlineIdentity->setRelationshipState(IdentityHelper::tranformRelationshipStringToClasskey($pObject->relationship_status));
     $pOnlineIdentity->setSocialPublishingEnabled(true);
+    $pOnlineIdentity->setLocationRaw($pObject->location->name);
 
     $pOnlineIdentity->setUserId($pUser->getId());                  /* signup,add new */
     $pOnlineIdentity->setAuthIdentifier($pAuthIdentifier);

@@ -33,6 +33,8 @@ OnlineIdentity:
     relationship_state:
       type:     integer(4)
       default:  0
+    location_raw:
+      type:     string(255)
     auth_identifier:
       type:     string(255)
     auth_identity_type:

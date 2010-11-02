@@ -97,10 +97,6 @@
     <phingcall target="I18NSync"></phingcall>
     <phingcall target="buildjs"></phingcall>
     <phingcall target="buildcss"></phingcall>
-
-    <phingcall target="runwidgettasks">
-      <property name="env" value="local"/>
-    </phingcall>
   </target>
 
 
