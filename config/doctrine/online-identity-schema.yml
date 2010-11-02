@@ -32,6 +32,7 @@ OnlineIdentity:
       type:     date
     relationship_state:
       type:     integer(4)
+      default:  0
     auth_identifier:
       type:     string(255)
     auth_identity_type:

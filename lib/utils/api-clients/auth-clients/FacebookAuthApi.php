@@ -105,7 +105,7 @@ class FacebookAuthApiClient extends AuthApi {
   public function doAuthentication() {
     $lConsumer = $this->getConsumer();
 
-    header("Location: https://graph.facebook.com/oauth/authorize?client_id=".$lConsumer->key."&scope=email,offline_access,publish_stream,read_stream,user_about_me,user_activities,user_likes,read_friendlists,user_checkins,user_birthday&redirect_uri=".$this->getCallbackUri());
+    header("Location: https://graph.facebook.com/oauth/authorize?client_id=".$lConsumer->key."&scope=email,offline_access,publish_stream,read_stream,user_about_me,user_activities,user_likes,read_friendlists,user_checkins,user_birthday,user_relationships&redirect_uri=".$this->getCallbackUri());
     exit;
   }
 
@@ -154,7 +154,8 @@ class FacebookAuthApiClient extends AuthApi {
     // transform facebook format into
     $lBirthday = explode('/', $pObject->birthday);
     $pOnlineIdentity->setBirthdate($lBirthday[2].'-'.$lBirthday[0].'-'.$lBirthday[1]);
-    $pObject->relationship_status
+
+    $pOnlineIdentity->setRelationshipState(IdentityHelper::tranformRelationshipStringToClasskey($pObject->relationship_status));
     $pOnlineIdentity->setSocialPublishingEnabled(true);
 
     $pOnlineIdentity->setUserId($pUser->getId());                  /* signup,add new */

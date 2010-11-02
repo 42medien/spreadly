@@ -31,6 +31,9 @@ User:
       notnull:    true
     birthdate:
       type:       date
+    relationship_state:
+      type:      integer(4)
+      default:   0    
     description:
       type:       string
     culture:
