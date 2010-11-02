@@ -23,7 +23,7 @@ class FacebookAuthApiClient extends AuthApi {
     // extract params
     parse_str($lAccessToken, $lParamsArray);
 
-    $lJsonObject = json_decode(UrlUtils::sendGetRequest("https://graph.facebook.com/me?access_token=".$lParamsArray['access_token']));
+    $lJsonObject = json_decode(UrlUtils::sendGetRequest("https://graph.facebook.com/me?access_token=".$lParamsArray['access_token']."&locale=en_US"));
 
     // facebook identifier
     $lIdentifier = "http://www.facebook.com/profile.php?id=".$lJsonObject->id;
@@ -48,12 +48,6 @@ class FacebookAuthApiClient extends AuthApi {
       $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject, $lUser, $lIdentifier); // signup,add new
     }
 
-    if ($lUser->getDone() < 5) {
-      $this->importContacts($lOnlineIdentity->getId());
-      $lUser->setDone(5);
-      $lUser->save();
-    }
-
     // save new token
     AuthTokenTable::saveToken($lUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['access_token'], null, true);  // signup,add new
 
@@ -76,7 +70,7 @@ class FacebookAuthApiClient extends AuthApi {
     // extract params
     parse_str($lAccessToken, $lParamsArray);
 
-    $lJsonObject = json_decode(UrlUtils::sendGetRequest("https://graph.facebook.com/me?access_token=".$lParamsArray['access_token']));
+    $lJsonObject = json_decode(UrlUtils::sendGetRequest("https://graph.facebook.com/me?access_token=".$lParamsArray['access_token']."&locale=en_US"));
 
     // facebook identifier
     $lIdentifier = "http://www.facebook.com/profile.php?id=".$lJsonObject->id;
@@ -140,11 +134,9 @@ class FacebookAuthApiClient extends AuthApi {
   public function completeUser(&$pUser, $pObject) {
     $pUser->setUsername(UserUtils::getUniqueUsername(StringUtils::normalizeUsername($pObject->name)));
     $pUser->setDescription(@$pObject->bio);
-
     $pUser->setFirstname($pObject->first_name);
     $pUser->setFirstname($pObject->last_name);
     $pUser->setCulture(substr($pObject->locale, 0, 2));
-
     $pUser->save();
   }
 
@@ -157,7 +149,12 @@ class FacebookAuthApiClient extends AuthApi {
    */
   public function completeOnlineIdentity(&$pOnlineIdentity, $pObject, $pUser, $pAuthIdentifier) {
     $pOnlineIdentity->setName($pObject->name);
-    //$pOnlineIdentity->setPhoto($pObject->profile_image_url);
+    $pOnlineIdentity->setGender($pObject->gender);
+
+    // transform facebook format into
+    $lBirthday = explode('/', $pObject->birthday);
+    $pOnlineIdentity->setBirthdate($lBirthday[2].'-'.$lBirthday[0].'-'.$lBirthday[1]);
+    $pObject->relationship_status
     $pOnlineIdentity->setSocialPublishingEnabled(true);
 
     $pOnlineIdentity->setUserId($pUser->getId());                  /* signup,add new */

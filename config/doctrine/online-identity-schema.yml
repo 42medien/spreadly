@@ -26,12 +26,12 @@ OnlineIdentity:
       type:     string(255)
     profile_uri:
       type:     string(255)
-###### temporär drin #####
-    identity_type:
-      type:  string
-    feed_identifier:
-      type:  string
-##################################      
+    gender:
+      type:     string(1)
+    birthdate:
+      type:     date
+    relationship_state:
+      type:     integer(4)
     auth_identifier:
       type:     string(255)
     auth_identity_type:
