@@ -173,13 +173,7 @@ class TwitterAuthApiClient extends AuthApi {
    * @param Object $pObject
    */
   public function completeOnlineIdentity(&$pOnlineIdentity, $pObject, $pUser, $pAuthIdentifier) {
-    if ($pObject->name) {
-      $pOnlineIdentity->setName($pObject->name);
-    } else {
-      $pOnlineIdentity->setName($pObject->screen_name);
-    }
-
-    $pOnlineIdentity->setLocationRaw($pObject->location);
+    TwitterImportClient::updateIdentity($pOnlineIdentity, $pObject);
     $pOnlineIdentity->setUserId($pUser->getId());
     $pOnlineIdentity->setAuthIdentifier($pAuthIdentifier);
     $pOnlineIdentity->setSocialPublishingEnabled(true);

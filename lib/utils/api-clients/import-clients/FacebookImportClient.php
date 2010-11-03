@@ -19,20 +19,25 @@ class FacebookImportClient {
       throw new Exception('damn theres no token!', '666');
     }
 
-    self::importFriends($pOnlineIdentity, $lToken);
-    self::updateIdentity($pOnlineIdentity, $lToken);
+    $lJsonUserObject = json_decode(UrlUtils::sendGetRequest("https://graph.facebook.com/me?access_token=".$lToken->getTokenKey()."&locale=en_US"));
+    $lJsonFriendsObject = json_decode(UrlUtils::sendGetRequest("https://graph.facebook.com/me/friends?access_token=".$lToken->getTokenKey()));
 
+    self::importFriends($pOnlineIdentity, $lJsonFriendsObject);
+    self::updateIdentity($pOnlineIdentity, $lJsonUserObject);
   }
 
 
-  public static function importFriends(&$pOnlineIdentity, $lToken) {
-    $lJsonObject = json_decode(UrlUtils::sendGetRequest("https://graph.facebook.com/me/friends?access_token=".$lToken->getTokenKey()));
-    $lCommunityId = $pOnlineIdentity->getCommunityId();
-
+  /**
+   * gather list of friends from facebook
+   *
+   * @param $pOnlineIdentity
+   * @param $lToken
+   * @return unknown_type
+   */
+  public static function importFriends(&$pOnlineIdentity, $lJsonObject) {
     $lFriends = array();
     foreach ($lJsonObject->data as $lObject) {
       try {
-        //$lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lObject->link, $lObject->id, $lCommunityId);
         $lFriends[] = $lObject->id;
       } catch (Exception $e) {}
     }
@@ -44,8 +49,14 @@ class FacebookImportClient {
   }
 
 
-  public static function updateIdentity(&$pOnlineIdentity, $lToken) {
-    $lJsonUserObject = json_decode(UrlUtils::sendGetRequest("https://graph.facebook.com/me?access_token=".$lToken->getTokenKey()."&locale=en_US"));
+  /**
+   * update the given online identity with latest data from facebook
+   *
+   * @param $pOnlineIdentity
+   * @param $lToken
+   * @return unknown_type
+   */
+  public static function updateIdentity(&$pOnlineIdentity, $lJsonUserObject) {
 
     $pOnlineIdentity->setName($lJsonUserObject->name);
     $pOnlineIdentity->setGender($lJsonUserObject->gender);

@@ -145,23 +145,16 @@ class FacebookAuthApiClient extends AuthApi {
    * complete the online-identity with the api json
    *
    * @author Matthias Pfefferle
+   * @refactored weyandch
    * @param OnlineIdentity $pOnlineIdentity
    * @param Object $pObject
    */
   public function completeOnlineIdentity(&$pOnlineIdentity, $pObject, $pUser, $pAuthIdentifier) {
-    $pOnlineIdentity->setName($pObject->name);
-    $pOnlineIdentity->setGender($pObject->gender);
+    // delegate to ImportClient to avoid duplicate code
+    FacebookImportClient::updateIdentity($pOnlineIdentity, $pObject);
 
-    // transform facebook format into
-    $lBirthday = explode('/', $pObject->birthday);
-    if (count($lBirthday == 3 && $lBirthday[2] > 0)) { // 3 parts and year is set
-      $pOnlineIdentity->setBirthdate($lBirthday[2].'-'.$lBirthday[0].'-'.$lBirthday[1]);
-    }
-    $pOnlineIdentity->setRelationshipState(IdentityHelper::tranformRelationshipStringToClasskey($pObject->relationship_status));
-    $pOnlineIdentity->setSocialPublishingEnabled(true);
-    $pOnlineIdentity->setLocationRaw($pObject->location->name);
-
-    $pOnlineIdentity->setUserId($pUser->getId());                  /* signup,add new */
+    /* signup,add new */
+    $pOnlineIdentity->setUserId($pUser->getId());
     $pOnlineIdentity->setAuthIdentifier($pAuthIdentifier);
     $pOnlineIdentity->save();
 

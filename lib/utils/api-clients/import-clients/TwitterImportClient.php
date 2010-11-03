@@ -27,38 +27,42 @@ class TwitterImportClient {
     }
     $lConsumer = new OAuthConsumer(sfConfig::get("app_twitter_oauth_token"), sfConfig::get("app_twitter_oauth_secret"));
     $lJson = OAuthClient::get($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "http://api.twitter.com/1/friends/ids/".$pOnlineIdentity->getOriginalId().".json");
-    $lJsonObject = json_decode($lJson);
+    $lJsonFriendsObject = json_decode($lJson);
 
+    // get api informations
+    $lJson = OAuthClient::get($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "http://api.twitter.com/1/users/show.json?user_id=".$pOnlineIdentity->getOriginalId());
+    $lJsonUserObject = json_decode($lJson);
+
+    self::importFriends($pOnlineIdentity, $lJsonFriendsObject);
+    self::updateIdentity($pOnlineIdentity, $lJsonUserObject);
+  }
+
+
+
+  public static function importFriends(&$pOnlineIdentity, $lJsonObject) {
     $pOnlineIdentity->setFriendIds(implode(",", $lJsonObject));
     $pOnlineIdentity->setFriendCount(count($lJsonObject));
     $pOnlineIdentity->save();
+  }
 
-    /*
-    // the twitter api allows access to 100 users
-    // check how much rounds the script have to go to
-    // get all
-    $lFriendcount = count($lJsonObject);
-    $lRounds = ceil($lFriendcount/100);
+  /**
+   * update the given online identity with latest data from twitter
+   *
+   * @param $pOnlineIdentity
+   * @param $lToken
+   * @return unknown_type
+   */
+  public static function updateIdentity(&$pOnlineIdentity, $lJsonUserObject) {
+    $lUser = UserTable::getInstance()->retrieveByPk($pOnlineIdentity->getUserId());
 
-    if ($lRounds > 7) {
-      $lRounds = 7;
+    if ($lJsonUserObject->name) {
+      $pOnlineIdentity->setName($lJsonUserObject->name);
+    } else {
+      $pOnlineIdentity->setName($lJsonUserObject->screen_name);
     }
 
-
-
-    // iterate through the results
-    for ($i = 0; $i < $lRounds; $i++) {
-      $lOffset = $i;
-      $lIds = array_splice($lJsonObject, $lOffset, 100);
-
-      // generate a string of comma separated twitter-ids
-      $lIdString = implode(",", $lIds);
-      // get matching users
-      $lQueuePayload = serialize(array('oi' => $pOnlineIdentity->getId(), 'idstring' => $lIdString));
-      AmazonSQSUtils::pushToQuque('TwitterContacts', $lQueuePayload);
-    }
-
-    */
-    sfContext::getInstance()->getLogger()->info("{TwitterImportClient} ID ".$pOnlineIdentity->getId()." loaded and contacts sent to twitter import queue!!!!");
+    // check for aggregating data of gender, birthday etc to complete user record
+    // @todo proper location handling
+    $pOnlineIdentity->setLocationRaw($lJsonUserObject->location);
   }
 }
