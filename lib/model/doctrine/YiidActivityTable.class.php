@@ -98,11 +98,17 @@ class YiidActivityTable extends Doctrine_Table
 
     if (!empty($lVerifiedOnlineIdentityIds)) {
       $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
-      self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb);
+      $lActivity = self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb);
       $lSocialObject->updateObjectOnLikeActivity($pUserId, $lVerifiedOnlineIdentityIds, $pUrl, $pScore, $lServices);
       UserTable::updateLatestActivityForUser($pUserId, time());
       YiidStatsSingleton::trackClick($pUrl, ($pScore==self::ACTIVITY_VOTE_POSITIVE)?YiidStatsSingleton::TYPE_LIKE:YiidStatsSingleton::TYPE_DISLIKE);
     }
+
+    // notification
+    $lUser = UserTable::getInstance()->retrieveByPk($pUserId);
+    $lEvent = new sfEvent($lActivity, "new-yiid-activity", array("socialobject" => $lSocialObject, "user" => $lUser));
+    sfContext::getInstance()->getEventDispatcher()->notify($lEvent);
+
     return true;
   }
 
@@ -149,12 +155,13 @@ class YiidActivityTable extends Doctrine_Table
   }
 
   /**
+   * generates a new yiid-activity
    *
    * @author Christian Weyand
    * @param $pSocialObjectId
    * @param $pOnlineIdentity
    * @param $pType
-   * @return unknown_type
+   * @return YiidActivity
    */
   public static function saveActivity($pSocialObject, $pUrl, $pUserId, $pOnlineIdentitys, $pServicesId, $pScore, $pVerb) {
     $lActivity = new YiidActivity();
@@ -168,6 +175,8 @@ class YiidActivityTable extends Doctrine_Table
     $lActivity->setVerb($pVerb);
     $lActivity->setC(time());
     $lActivity->save();
+
+    return $lActivity;
   }
 
   /**

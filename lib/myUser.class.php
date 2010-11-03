@@ -34,7 +34,7 @@ class myUser extends sfBasicSecurityUser {
   public function getUser() {
     if ($this->isAuthenticated()) {
       if (!$this->aUser) {
-        $this->aUser = UserTable::getInstance()->find($this->getUserId());
+        $this->aUser = UserTable::getInstance()->retrieveByPk($this->getUserId());
       }
       return $this->aUser;
     } else {

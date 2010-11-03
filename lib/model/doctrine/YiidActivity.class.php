@@ -24,7 +24,7 @@ class YiidActivity extends BaseYiidActivity
     unset($lObjectToSave['id']);
     if ($this->getId()) {
       $lObjectToSave = YiidActivityTable::updateObjectInMongoDb(array('_id' => new MongoId($this->getId())), $lObjectToSave);
-     return false;
+      return false;
     } else {
       $lObjectToSave = YiidActivityTable::saveObjectToMongoDb($lObjectToSave);
       $this->setId($lObjectToSave['_id'].""); // cast mongoID to string
@@ -75,4 +75,9 @@ class YiidActivity extends BaseYiidActivity
     return $lDate;
   }
 
+  public function getUser() {
+    $lUser = UserTable::getInstance()->retrieveByPk($this->getUId());
+
+    return $lUser;
+  }
 }
