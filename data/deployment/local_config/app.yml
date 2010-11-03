@@ -2,7 +2,7 @@
 # default values
 all:
   release:
-    name:     '20101014'
+    name:     '20101029'
     gzip:     0              ## set 1 to force local gz support
 
 
