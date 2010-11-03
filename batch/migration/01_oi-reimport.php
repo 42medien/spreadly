@@ -16,7 +16,7 @@ $dbManager->loadConfiguration();
 /**
  *  we need all user id's first
  **/
-$lQuery = Doctrine_Query::create()->from('User u')->select('u.id')->andWhere('u.email IS NULL');
+$lQuery = Doctrine_Query::create()->from('OnlineIdentity oi')->select('oi.id');
 $lIds = $lQuery->fetchArray();
 $lQuery->free();
 
@@ -30,13 +30,15 @@ $lQuery->free();
  * ..???
  */
 echo "######################################### \r\n";
-echo "Start migration: 01_useravatar.php \r\n";
+echo "Start migration: 01_identitys.php \r\n";
 echo "######################################### \r\n";
+
 foreach ($lIds as $key => $value) {
   try{
-	  $lUser = UserTable::getInstance()->retrieveByPk($value['id']);
-	  //if user has a avatar in general
-echo $lUser->getUsername()."\r\n";
+
+    AmazonSQSUtils::pushToQuque("ImportContacts", $value['id']);
+    echo "oi: ".$value['id']."\r\n";
+
   } catch(Exception $e){
     echo $e->getMessage();
     continue;
