@@ -103,36 +103,3 @@ UserAvatar:
   relations:
     User:    { onDelete: CASCADE, local: user_id, foreign: id, foreignAlias: UserAvatars }
     OnlineIdentity: { onDelete: CASCADE, local: online_identity_id, foreign: id, foreignAlias: UserAvatars }
-
-UserEmailAddress:
-  actAs:
-    Timestampable:  ~
-  columns:
-    user_id:
-      type:       integer
-    online_identity_id:
-      type:       integer
-    email_address_type:
-      type:       varchar(32)
-    email:
-      type:       varchar(120)
-    verified:
-      type:       boolean
-      notnull:    true
-      default:    false
-    main:
-      type:       boolean
-      notnull:    true
-      default:    false
-    is_modified:
-      type:       integer(4)
-      default:    0
-    save_modified:
-      type:       integer(4)
-      default:    0
-    is_invitable:
-      type:       integer(4)
-      default:    1
-  relations:
-    User:        { onDelete: SET NULL, local: user_id, foreign: id, foreignAlias: UserEmailAddress }
-    OnlineIdentity: { onDelete: SET NULL, local: online_identity_id, foreign: id, foreignAlias: UserEmailAddress }
