@@ -16,21 +16,8 @@ class ProjectConfiguration extends sfProjectConfiguration {
   }
 
   public function configureDoctrine(Doctrine_Manager $manager) {
-    /*$servers = array(
-     'host' => sfConfig::get('app_memcache_server_ip'),
-     'port' => 11211,
-     'persistent' => true
-     );
-
-     $cacheDriver = new Doctrine_Cache_Memcache(
-     array(
-     'servers' => $servers,
-     'compression' => false
-     )
-     );
-
-     //enable Doctrine cache
-     $manager->setAttribute(Doctrine::ATTR_RESULT_CACHE, $cacheDriver);*/
+    // yiid activity dispatcher
+    $this->dispatcher->connect('new-yiid-activity', array('StatsFeeder', 'track'));
 
     $manager->setCollate('utf8_unicode_ci');
     $manager->setCharset('utf8');
