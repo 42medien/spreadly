@@ -51,4 +51,7 @@ class OnlineIdentity extends BaseOnlineIdentity
   public function getOAuthToken(){
   }
 
+  public function getCommunity() {
+    return CommunityTable::getInstance()->retrieveByPk($this->getCommunityId());
+  }
 }

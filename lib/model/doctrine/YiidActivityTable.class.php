@@ -84,7 +84,7 @@ class YiidActivityTable extends Doctrine_Table
     foreach ($pGivenOnlineIdentitys as $lIdentityId) {
       if (in_array($lIdentityId, $pOwnedOnlineIdentitys)) {
         $lVerifiedOnlineIdentityIds[]= $lIdentityId;
-        $senderOi = OnlineIdentityTable::getInstance()->find($lIdentityId);
+        $senderOi = OnlineIdentityTable::getInstance()->retrieveByPk($lIdentityId);
         $lServices[] = $senderOi->getCommunityId();
         if (sfConfig::get('app_settings_environment') != 'local') {
           $lStatus = $senderOi->sendStatusMessage($pUrl, $pVerb, $pScore, $pTitle, $pDescription, $pPhoto);
@@ -101,13 +101,11 @@ class YiidActivityTable extends Doctrine_Table
       $lActivity = self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb);
       $lSocialObject->updateObjectOnLikeActivity($pUserId, $lVerifiedOnlineIdentityIds, $pUrl, $pScore, $lServices);
       UserTable::updateLatestActivityForUser($pUserId, time());
-      YiidStatsSingleton::trackClick($pUrl, ($pScore==self::ACTIVITY_VOTE_POSITIVE)?YiidStatsSingleton::TYPE_LIKE:YiidStatsSingleton::TYPE_DISLIKE);
     }
 
     // notification
     $lUser = UserTable::getInstance()->retrieveByPk($pUserId);
-    $lEvent = new sfEvent($lActivity, "new-yiid-activity", array("socialobject" => $lSocialObject, "user" => $lUser));
-    sfContext::getInstance()->getEventDispatcher()->notify($lEvent);
+    StatsFeeder::feed($lActivity, $lUser, $lSocialObject);
 
     return true;
   }
