@@ -32,6 +32,18 @@ class User extends BaseUser {
     }
   }
 
+
+  /**
+   * calculate age of the user, (rundet jahre, nicht tagesgenau!)
+   * @return unknown_type
+   */
+  public function getAge() {
+    if ($this->getBirthdate()) {
+      return date('Y-m-D', time()) - $this->getBirthdate();
+    }
+    return 0;
+  }
+
   /**
    * function to verify a password
    *
