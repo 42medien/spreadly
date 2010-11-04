@@ -75,6 +75,8 @@ class FacebookImportClient {
     // update user's email
     $lUser = $pOnlineIdentity->getUser();
     $lUser->setEmail($lJsonUserObject->email);
+    $lUser->setRelationshipState($pOnlineIdentity->getRelationshipState());
+    $lUser->setBirthdate($pOnlineIdentity->getBirthDate());
     $lUser->save();
   }
 }

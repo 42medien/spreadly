@@ -64,7 +64,7 @@ User:
     agb: true
     ip: 127.0.0.1
     active: true
-    birthdate: 1991-03-15
+    birthdate: "1991-03-15"
 
   user_6:
     username: manni
@@ -76,7 +76,7 @@ User:
     agb: true
     ip: 127.0.0.1
     active: true
-    birthdate: 1991-04-15
+    birthdate: "1991-04-15"
 
 
   user_7:
@@ -89,7 +89,6 @@ User:
     agb: true
     ip: 127.0.0.1
     active: true
-    birthdate: 1991-05-15
 
 
   user_99:
@@ -102,4 +101,3 @@ User:
     agb: true
     ip: 127.0.0.1
     active: true
-    birthdate: 1991-05-15    
