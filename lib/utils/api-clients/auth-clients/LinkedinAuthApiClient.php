@@ -179,17 +179,13 @@ class LinkedinAuthApiClient extends AuthApi {
    */
   public function completeOnlineIdentity(&$pOnlineIdentity, $pProfileArray, $pUser) {
     $pOnlineIdentity->setName($pProfileArray['first-name'] . " " . $pProfileArray['last-name']);
-    //$pOnlineIdentity->setPhoto($pObject->profile_image_url);
-
-
-    if (isset($pProfileArray['date-of-birth']['year'])) {
-      $pOnlineIdentity->setBirthdate($pProfileArray['date-of-birth']['year'].'-'.$pProfileArray['date-of-birth']['month'].'-'.$pProfileArray['date-of-birth']['day']);
-    }
-    $pOnlineIdentity->setLocationRaw($pProfileArray['location']['name']);
-
     $pOnlineIdentity->setSocialPublishingEnabled(true);
     $pOnlineIdentity->setUserId($pUser->getId());
     $pOnlineIdentity->save();
+
+    // delegate to ImportClient to avoid duplicate code
+    LinkedinImportClient::updateIdentity($pOnlineIdentity, $pProfileArray);
+
 
     $this->importContacts($pOnlineIdentity->getId());
   }

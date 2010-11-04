@@ -151,12 +151,12 @@ class FacebookAuthApiClient extends AuthApi {
    */
   public function completeOnlineIdentity(&$pOnlineIdentity, $pObject, $pUser, $pAuthIdentifier) {
     // delegate to ImportClient to avoid duplicate code
-    FacebookImportClient::updateIdentity($pOnlineIdentity, $pObject);
-
     /* signup,add new */
     $pOnlineIdentity->setUserId($pUser->getId());
     $pOnlineIdentity->setAuthIdentifier($pAuthIdentifier);
     $pOnlineIdentity->save();
+
+    FacebookImportClient::updateIdentity($pOnlineIdentity, $pObject);
 
     $this->importContacts($pOnlineIdentity->getId());
 
