@@ -46,9 +46,6 @@ $lSocialObjectArray = SocialObjectPeer::getDataForUrl($pUrl);
 $lIsUsed = YiidActivityObjectPeer::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId);
 $lSocialObjectArray = SocialObjectPeer::recalculateCountsRespectingUser($lSocialObjectArray, $lIsUsed);
 
-// track visit
-YiidStatsSingleton::trackVisit($pUrl);
-
 $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
 
 $lShowFriends = false;
