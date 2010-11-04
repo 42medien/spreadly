@@ -7,7 +7,7 @@
 class StatsFeeder {
 
   public static function getMongoCollection($pCollection) {
-    return MongoDbConnector::getInstance()->getCollection(sfConfig::get('app_mongodb_database_name'), $pCollection);
+    return MongoDbConnector::getInstance()->getCollection(sfConfig::get('app_mongodb_database_name_stats'), $pCollection);
   }
 
   /**
@@ -38,13 +38,13 @@ class StatsFeeder {
     $lCollection->insert(array(
       'host' => $lUrlParts['host'],
       'url'  => $pYiidActivity->getUrl(),
-      'date' => new MongoDate(strtotime($pYiidActivity->getPublishingTime())),
+      'date' => new MongoDate($pYiidActivity->getC()),
       'pos' => $pYiidActivity->getScore(),
       'verb' => $pYiidActivity->getVerb(),
       'gender' => $pUser->getGender(),
       'user_id' => $pUser->getId(),
       'ya_id' => $pYiidActivity->getId(),
-      'age' => $pUser->getAge(),
+      //'age' => $pUser->getAge(),
       'rel' => $pUser->getRelationshipState(),
       'oi' => $lOnlineIdentities,
       //'cb' => array(
