@@ -16,8 +16,8 @@ $lOptions = array(
     'sysMaxExecutionTime' => '0',
     'sysMaxInputTime' => '0',
     'sysMemoryLimit' => '64M',
-    'appRunAsGID' => 0,
-    'appRunAsUID' => 0,
+    'appRunAsGID' => 1001,
+    'appRunAsUID' => 1001,
 );
 
 YiidDaemon::run($lQueueName, $argv, "YiidImportImages", "import", $lOptions);
