@@ -8,7 +8,7 @@ User:
     ip: 127.0.0.1
     active: true
     default_avatar: aa4e6c2b2a0644e6e7130de7ffea46df-1.jpg
-    birthdate: 1991-12-15
+    birthdate: "1991-12-15"
     last_activity:    <?php echo time(); ?>
 
   user_2:
@@ -21,7 +21,7 @@ User:
     agb: true
     ip: 127.0.0.1
     active: true
-    birthdate: 1991-11-15  
+    birthdate: "1991-11-15"
     last_activity:    <?php echo time(); ?>
 
 
@@ -36,7 +36,7 @@ User:
     ip: 127.0.0.1
     active: true
     credentials: translator
-    birthdate: 1966-01-01    
+    birthdate: "1966-01-01"   
     last_activity:    <?php echo time(); ?>
     
 
@@ -50,7 +50,7 @@ User:
     ip: 127.0.0.1
     active: true
     credentials: captain
-    birthdate: 1978-08-15
+    birthdate: "1978-08-15"
     last_activity:    <?php echo time(); ?>
     
 
