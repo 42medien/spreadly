@@ -8,7 +8,6 @@ ALTER TABLE `user` ADD `relationship_state` INTEGER( 4 ) NULL DEFAULT 0 ;
 
 ## delete user email adresses
 DROP TABLE user_email_address;
-ALTER TABLE `user` DROP `description`; 
 ALTER TABLE `user` DROP `contacts_list`; 
 ALTER TABLE `user` DROP `friends_list`; 
 ALTER TABLE `user` DROP `community_object_id`; 

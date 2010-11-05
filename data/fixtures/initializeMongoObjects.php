@@ -21,6 +21,7 @@ $lUserSnirgelchen = UserTable::retrieveByUsername('snirgelchen');
 $lUserManni = UserTable::retrieveByUsername('manni');
 $lUserAffe = UserTable::retrieveByUsername('affe');
 
+
 $lHugoOis = $lUserHugo->getOnlineIdentitesAsArray();
 $lUserHansOis = $lUserHans->getOnlineIdentitesAsArray();
 $lUserKarlOis = $lUserKarl->getOnlineIdentitesAsArray();

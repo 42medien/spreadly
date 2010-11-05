@@ -16,7 +16,9 @@ User:
     salt:
       type:       string(8)
     gender:
-      type:       string(1)
+      type:       string(1)    
+    description:
+      type:       string
     salutation:
       type:       string(32)
     title:

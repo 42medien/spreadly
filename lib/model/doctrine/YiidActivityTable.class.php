@@ -85,20 +85,25 @@ class YiidActivityTable extends Doctrine_Table
       if (in_array($lIdentityId, $pOwnedOnlineIdentitys)) {
         $lVerifiedOnlineIdentityIds[]= $lIdentityId;
         $senderOi = OnlineIdentityTable::getInstance()->retrieveByPk($lIdentityId);
+        $lOnlineIdentitys[] = $senderOi;
         $lServices[] = $senderOi->getCommunityId();
-        if (sfConfig::get('app_settings_environment') != 'local') {
-          $lStatus = $senderOi->sendStatusMessage($pUrl, $pVerb, $pScore, $pTitle, $pDescription, $pPhoto);
-        }
-        sfContext::getInstance()->getLogger()->debug("{YiidActivityPeer}{saveLikeActivitys} Status Message: " . print_r($lVerifiedOnlineIdentityIds, true));
-      }
-      else {
-
       }
     }
 
+    // save yiid activity
+    $lActivity = self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb);
+    if (sfConfig::get('app_settings_environment') != 'local' || 1) {
+      // send messages to all services
+      foreach ($lOnlineIdentitys as $lIdentity) {
+        $lStatus = $lIdentity->sendStatusMessage($pUrl.'&yiidit='.$lIdentity->getCommunity()->getCommunity().'.'.$lActivity->getId(), $pVerb, $pScore, $pTitle, $pDescription, $pPhoto);
+      }
+    }
+
+    sfContext::getInstance()->getLogger()->debug("{YiidActivityPeer}{saveLikeActivitys} Status Message: " . print_r($lVerifiedOnlineIdentityIds, true));
+
     if (!empty($lVerifiedOnlineIdentityIds)) {
       $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
-      $lActivity = self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb);
+    //  $lActivity = self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb);
       $lSocialObject->updateObjectOnLikeActivity($pUserId, $lVerifiedOnlineIdentityIds, $pUrl, $pScore, $lServices);
       UserTable::updateLatestActivityForUser($pUserId, time());
     }
