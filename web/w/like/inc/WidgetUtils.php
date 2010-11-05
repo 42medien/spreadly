@@ -71,15 +71,15 @@ class SocialObjectPeer {
 
     // if no data is available, initialize empty array & create social object
     if (!$lSocialObjectArray) {
-       // don't do that.. too much objects in the queue atm
+      // don't do that.. too much objects in the queue atm
       //self::delegateSocialObjectParsing($pUrl);
       $lSocialObjectArray = array();
     }
 
     if($pUrl && !UrlUtils::isUrlValid($pUrl)) {
-	    $lSocialObjectArray = array_merge(array(
+      $lSocialObjectArray = array_merge(array(
 	      'urlerror'   => true,
-	    ), $lSocialObjectArray);
+      ), $lSocialObjectArray);
     }
 
     // set counts for like on 0 if they're not set yet
@@ -153,7 +153,23 @@ class YiidActivityObjectPeer {
     $lObject = $pCollectionObject->findOne(array("so_id" => $pSocialObjectId, "u_id" => intval($pUserId) ));
     return $lObject?$lObject['score']:false;
   }
+}
+
+class ClickBackHelper {
 
 
+  public static function extractClickback($pButtonUri, $pReferrerUri = null) {
+    if (!$pReferrerUri) {
+      return null;
+    }
+    if ($pButtonUri == $pReferrerUri) {
+      return null;
+    }
 
+    $parameterList = parse_url($pReferrerUri);
+    $lGetParams = array();
+    parse_str($parameterList['query'], $lGetParams);
+
+    return $lGetParams['yiidit'];
+  }
 }

@@ -41,6 +41,8 @@ $pTitle = urldecode($_GET['title']);
 $pPhoto = urldecode($_GET['photo']);
 $pDescription = urldecode($_GET['description']);
 
+$lClickback = ClickBackHelper::extractClickback($pUrl, $_SERVER['HTTP_REFERER']);
+
 $pUserId = MongoSessionPeer::extractUserIdFromSession(LikeSettings::SF_SESSION_COOKIE);
 $lSocialObjectArray = SocialObjectPeer::getDataForUrl($pUrl);
 $lIsUsed = YiidActivityObjectPeer::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId);

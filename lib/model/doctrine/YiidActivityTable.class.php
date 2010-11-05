@@ -92,7 +92,7 @@ class YiidActivityTable extends Doctrine_Table
 
     // save yiid activity
     $lActivity = self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb);
-    if (sfConfig::get('app_settings_environment') != 'local' || 1) {
+    if (sfConfig::get('app_settings_environment') != 'local') {
       // send messages to all services
       foreach ($lOnlineIdentitys as $lIdentity) {
         $lStatus = $lIdentity->sendStatusMessage($pUrl.'&yiidit='.$lIdentity->getCommunity()->getCommunity().'.'.$lActivity->getId(), $pVerb, $pScore, $pTitle, $pDescription, $pPhoto);
