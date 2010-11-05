@@ -117,11 +117,11 @@ class StatsFeeder {
     if ($a < 18) {
       $lOptions["d.age.u_18"] = 1;
     } elseif ($a >= 18 && $a  <= 24) {
-      $lOptions["d.age.u_18-24"] = 1;
+      $lOptions["d.age.b_18-24"] = 1;
     } elseif ($a >= 15 && $a  <= 34) {
-      $lOptions["d.age.u_25-34"] = 1;
+      $lOptions["d.age.b_25-34"] = 1;
     } elseif ($a >= 35 && $a  <= 54) {
-      $lOptions["d.age.u_35-54"] = 1;
+      $lOptions["d.age.b_35-54"] = 1;
     } elseif ($a >= 55) {
       $lOptions["d.age.o_55"] = 1;
     } else {
