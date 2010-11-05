@@ -95,7 +95,7 @@ class StatsFeeder {
       case IdentityHelper::USER_RELATIONSHIP_STATUS_IN_OPEN_RELATIONSHIP:
         $lOptions["d.rel.ior"] = 1;
         break;
-      case IdentityHelper::USER_RELATIONSHIP_STATUS_MARRIED:
+      case IdentityHelper::USER_RELATIONSHIP_STATUS_IN_RELATIONSHIP:
         $lOptions["d.rel.rel"] = 1;
         break;
       case IdentityHelper::USER_RELATIONSHIP_STATUS_MARRIED:
