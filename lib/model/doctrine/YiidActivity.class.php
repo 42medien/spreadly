@@ -35,6 +35,15 @@ class YiidActivity extends BaseYiidActivity
     return false;
   }
 
+
+  /**
+   * wrapper for checkeing on clickback
+   * @return boolean
+   */
+  public function isClickback() {
+    return $this->getCbReferer()?true:false;
+  }
+
   public function delete(Doctrine_Connection $con = null) {
     $this->collection->remove(array("_id" => new MongoId($this->getId()) ));
   }
