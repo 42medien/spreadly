@@ -150,10 +150,14 @@ class StatsFeeder {
         $lOptions["s.".$lOi->getCommunity()->getCommunity().".neg"] = 1;
       }
       $lOptions["s.".$lOi->getCommunity()->getCommunity().".cnt"] = $lOi->getFriendCount();
+
+      // clickbacks
+      if ($pYiidActivity->isClickback()) {
+        $lOptions["s.".$pYiidActivity->getCbService()."cb"] =  1;
+      }
     }
 
-    $lUpdate = array('$inc' => $lOptions);
-
-    $lCollection->update($lDoc, $lUpdate, array("upsert" => true));
+    // update analytics
+    $lCollection->update($lDoc, array('$inc' => $lOptions), array("upsert" => true));
   }
 }
