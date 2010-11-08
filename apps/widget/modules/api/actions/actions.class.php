@@ -50,6 +50,7 @@ class apiActions extends sfActions {
     $this->lTitle = $request->getParameter('title');
     $this->lDescription = $request->getParameter('description');
     $this->lPhoto = $request->getParameter('photo');
+    $this->lClickback = $request->getParameter('clickback', null);
 
     return $parentRet;
   }
@@ -72,6 +73,7 @@ class apiActions extends sfActions {
                                                            $this->lIdentitysSent,
                                                            $this->lLikeDis,
                                                            $this->lType,
+                                                           $this->lClickback,
                                                            $this->lTitle,
                                                            $this->lDescription,
                                                            $this->lPhoto);
@@ -85,6 +87,7 @@ class apiActions extends sfActions {
                                                            $this->lIdentitysSent,
                                                            $this->lLikeDis,
                                                            $this->lType,
+                                                           $this->lClickback,
                                                            $this->lTitle,
                                                            $this->lDescription,
                                                            $this->lPhoto);

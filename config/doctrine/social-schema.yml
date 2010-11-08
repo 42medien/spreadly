@@ -66,6 +66,10 @@ YiidActivity:
       type:      integer(4)
     verb:
       type:      integer(4)
+    cb_referer:
+      type:      string(30)
+    cb_service:
+      type:      string(30)
     c:
       type:      integer
 

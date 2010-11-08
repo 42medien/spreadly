@@ -155,9 +155,16 @@ class YiidActivityObjectPeer {
   }
 }
 
+
 class ClickBackHelper {
 
-
+  /**
+   * extracts yiidit Parameter if it's given, returns null if its not set or referal == buttonUro
+   *
+   * @param string $pButtonUri
+   * @param string $pReferrerUri
+   * @return string|null
+   */
   public static function extractClickback($pButtonUri, $pReferrerUri = null) {
     if (!$pReferrerUri) {
       return null;
@@ -170,6 +177,7 @@ class ClickBackHelper {
     $lGetParams = array();
     parse_str($parameterList['query'], $lGetParams);
 
-    return $lGetParams['yiidit'];
+
+    return isset($lGetParams['yiidit'])?$lGetParams['yiidit']:null;
   }
 }
