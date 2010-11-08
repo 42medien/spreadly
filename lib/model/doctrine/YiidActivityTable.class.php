@@ -168,8 +168,8 @@ class YiidActivityTable extends Doctrine_Table
    * @param $pOnlineIdentity
    * @param $pType
    * @return YiidActivity
-  public static function saveActivity($pSocialObject, $pUrl, $pUserId, $pOnlineIdentitys, $pServicesId, $pScore, $pVerb) {
    */
+  public static function saveActivity($pSocialObject, $pUrl, $pUserId, $pOnlineIdentitys, $pServicesId, $pScore, $pVerb) {
     $lActivity = new YiidActivity();
     $lActivity->setUId($pUserId);
     $lActivity->setSoId($pSocialObject->getId());
