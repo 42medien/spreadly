@@ -16,7 +16,7 @@ class StatsFeeder {
    * @author Matthias Pfefferle
    * @param sfEvent $event
    */
-  public static function feed($pYiidActivity, $pUser, $pSocialObject) {
+  public static function feed($pYiidActivity, $pUser, $pSocialObject = null) {
     sfContext::getInstance()->getLogger()->err("{StatsFeeder} " . print_r($pEvent, true));
 
     // full table
