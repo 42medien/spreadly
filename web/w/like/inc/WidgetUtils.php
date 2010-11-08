@@ -177,7 +177,6 @@ class ClickBackHelper {
     $lGetParams = array();
     parse_str($parameterList['query'], $lGetParams);
 
-
-    return isset($lGetParams['yiidit'])?$lGetParams['yiidit']:null;
+    return (isset($lGetParams['yiidit']))?$lGetParams['yiidit']:null;
   }
 }
