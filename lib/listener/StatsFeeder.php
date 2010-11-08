@@ -150,7 +150,6 @@ class StatsFeeder {
       } else {
         $lOptions["s.".$lOi->getCommunity()->getCommunity().".neg"] = 1;
       }
-
       $lOptions["s.".$lOi->getCommunity()->getCommunity().".cnt"] = $lOi->getFriendCount();
     }
 
