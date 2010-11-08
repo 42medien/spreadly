@@ -155,6 +155,31 @@ class YiidActivityObjectPeer {
   }
 }
 
+class StatsHelper {
+  public static function trackPageImpression($pUrl, $pClickback, $pUser) {
+    $lHost = parse_url($pUrl, PHP_URL_HOST);
+
+    $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
+    $lCollection = $lMongo->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, str_replace('.', '_', $lHost).".analytics.pis");
+
+    $lDoc = array(
+      'url' => $pUrl,
+      'date' => new MongoDate(strtotime(date("Y-m-d")))
+    );
+
+    $lOptions = array("total" => 1);
+
+    if ($pUser) {
+      $lOptions["yiid"] = 1;
+    }
+
+    if ($pClickback) {
+      $lOptions["cb"] = 1;
+    }
+
+    $lCollection->update($lDoc, array('$inc' => $lOptions), array("upsert" => true));
+  }
+}
 
 class ClickBackHelper {
 
@@ -173,9 +198,10 @@ class ClickBackHelper {
       return null;
     }
 
-    $parameterList = parse_url($pReferrerUri);
+    $lParameterList = parse_url($pReferrerUri);
+
     $lGetParams = array();
-    parse_str($parameterList['query'], $lGetParams);
+    parse_str($lParameterList['query'], $lGetParams);
 
     return (isset($lGetParams['yiidit']))?$lGetParams['yiidit']:null;
   }
