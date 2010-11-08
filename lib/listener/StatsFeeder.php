@@ -25,6 +25,13 @@ class StatsFeeder {
     //error_log(print_r($pEvent, true) . "\n", 3, dirname(__FILE__).'/event.log');
   }
 
+  /**
+   * save full feed
+   *
+   * @param YiidActivity $pYiidActivity
+   * @param User $pUser
+   * @author Matthias Pfefferle
+   */
   public static function createActivitiesData($pYiidActivity, $pUser) {
     $lCollection = self::getMongoCollection("analytics.activities");
     $lUrlParts = parse_url($pYiidActivity->getUrl());
@@ -55,10 +62,10 @@ class StatsFeeder {
   }
 
   /**
-   * Enter description here...
+   * save aggregated stat-informations
    *
-   * @param unknown_type $pYiidActivity
-   * @param unknown_type $pUser
+   * @param YiidActivity $pYiidActivity
+   * @param User $pUser
    * @author Matthias Pfefferle
    */
   public static function createChartData($pYiidActivity, $pUser) {
@@ -128,6 +135,7 @@ class StatsFeeder {
       $lOptions["d.age.u"] = 1;
     }
 
+    // add online identities
     foreach ($pYiidActivity->getOiids() as $lId) {
       $lOi = OnlineIdentityTable::getInstance()->retrieveByPk($lId);
       $lOnlineIdentities[] = array('name' => $lOi->getCommunity()->getCommunity(), 'cnt' => $lOi->getFriendCount());
@@ -137,6 +145,8 @@ class StatsFeeder {
       } else {
         $lOptions["s.".$lOi->getCommunity()->getCommunity().".neg"] = 1;
       }
+
+      $lOptions["s.".$lOi->getCommunity()->getCommunity().".cnt"] = $lOi->getFriendCount();
     }
 
     $lUpdate = array('$inc' => $lOptions);
