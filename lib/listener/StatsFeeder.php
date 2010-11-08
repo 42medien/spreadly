@@ -22,7 +22,6 @@ class StatsFeeder {
     // full table
     self::createActivitiesData($pYiidActivity, $pUser);
     self::createChartData($pYiidActivity, $pUser);
-    //error_log(print_r($pEvent, true) . "\n", 3, dirname(__FILE__).'/event.log');
   }
 
   /**
