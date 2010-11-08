@@ -43,7 +43,8 @@ class StatsFeeder {
       $lOnlineIdentities[] = array('name' => $lOi->getCommunity()->getCommunity(), 'cnt' => $lOi->getFriendCount());
     }
 
-    $lCollection->insert(array(
+    // basic options
+    $lOptions = array(
       'host' => $lUrlParts['host'],
       'url'  => $pYiidActivity->getUrl(),
       'date' => new MongoDate(strtotime(date("Y-m-d", $pYiidActivity->getC()))),
@@ -55,10 +56,14 @@ class StatsFeeder {
       'age' => $pUser->getAge(),
       'rel' => $pUser->getRelationshipState(),
       'oi' => $lOnlineIdentities,
-      //'cb' => array(
-      //  array('name' => 'facebook', 'ya_id' => '')
-      //)
-    ));
+    );
+
+    // add clickbacks
+    if ($pYiidActivity->isClickback()) {
+      $lOptions['cb'] =  array('name' => $pYiidActivity->getCbService(), 'ya_id' => $pYiidActivity->getCbReferer());
+    }
+
+    $lCollection->insert($lOptions);
   }
 
   /**
