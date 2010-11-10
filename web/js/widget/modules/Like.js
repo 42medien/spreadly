@@ -912,6 +912,7 @@ var YiidWidget = {
   aTitle: '',
   aDescription: '',
   aPhoto: '',  
+  aClickback: '',
   aPopupPath: null,
   aServiceSettings: new Array(),
     
@@ -919,12 +920,13 @@ var YiidWidget = {
    * inits the widget (after loading the widget)
    * @author Karina Mies
    */    
-  init: function(pUrl, pType, pTitle, pDescription, pPhoto) {
+  init: function(pUrl, pType, pTitle, pDescription, pPhoto, pClickback) {
     YiidWidget.aUrl = pUrl;
     YiidWidget.aType = pType;
     YiidWidget.aTitle = pTitle;    
     YiidWidget.aDescription = pDescription;
     YiidWidget.aPhoto = pPhoto;
+    YiidWidget.aClickback = pClickback;
     YiidServices.initSettings();
   },
 
@@ -1104,7 +1106,7 @@ var YiidRequest = {
       try{
         //to which action should we send the request?
         //build the param-string
-        var lQuery = encodeURI('url='+YiidWidget.aUrl+'&type='+YiidWidget.aType+'&case=1&serv='+YiidServices.encodeSettings()+'&title='+YiidWidget.aTitle+'&description='+YiidWidget.aDescription+'&photo='+YiidWidget.aPhoto);        
+        var lQuery = encodeURI('url='+YiidWidget.aUrl+'&type='+YiidWidget.aType+'&case=1&serv='+YiidServices.encodeSettings()+'&title='+YiidWidget.aTitle+'&description='+YiidWidget.aDescription+'&photo='+YiidWidget.aPhoto+'&clickback='+YiidWidget.aClickback);        
         lXhttp.open("POST", YiidRequest.aLikeAction, true); 
         //Send the proper header information along with the request
         lXhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

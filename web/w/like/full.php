@@ -65,7 +65,7 @@ StatsHelper::trackPageImpression($pUrl, $lClickback, $pUserId);
 <script type="text/javascript" src="/js/100_main/include/Full-20101029.min.js"></script>
 <script type="text/javascript">
   <?php echo printI18nJSObject($pType); ?>
-  YiidWidget.init("<?php echo urlencode($pUrl); ?>", "<?php echo $pType; ?>", "<?php echo urlencode($pTitle); ?>", "<?php echo urlencode($pDescription); ?>", "<?php echo urlencode($pPhoto); ?>");
+  YiidWidget.init("<?php echo urlencode($pUrl); ?>", "<?php echo $pType; ?>", "<?php echo urlencode($pTitle); ?>", "<?php echo urlencode($pDescription); ?>", "<?php echo urlencode($pPhoto); ?>","<?php echo urlencode($lClickback); ?>");
   YiidWidget.aPopupPath = "<?php echo $lPopupUrl;  ?>";
   YiidRequest.aLikeAction = "<?php echo LikeSettings::JS_LIKE_PATH; ?>";
   YiidRequest.aDislikeAction = "<?php echo LikeSettings::JS_DISLIKE_PATH; ?>";
