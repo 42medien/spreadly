@@ -43,15 +43,15 @@ class YiidActivityTable extends Doctrine_Table
   }
 
   public static function saveLikeActivitys($pUserId,
-                                            $pUrl,
-                                            $pOwnedOnlineIdentitys = array(),
-                                            $pGivenOnlineIdentitys = array(),
-                                            $pScore = self::ACTIVITY_VOTE_POSITIVE,
-                                            $pVerb = 'like',
-                                            $pClickback = null,
-                                            $pTitle = null,
-                                            $pDescription = null,
-                                            $pPhoto = null) {
+                                      $pUrl,
+                                      $pOwnedOnlineIdentitys = array(),
+                                      $pGivenOnlineIdentitys = array(),
+                                      $pScore = self::ACTIVITY_VOTE_POSITIVE,
+                                      $pVerb = 'like',
+                                      $pClickback = null,
+                                      $pTitle = null,
+                                      $pDescription = null,
+                                      $pPhoto = null) {
 
     $lSuccess = false;
     $lVerifiedOnlineIdentitys = array();
@@ -97,7 +97,14 @@ class YiidActivityTable extends Doctrine_Table
     if (sfConfig::get('app_settings_environment') != 'local') {
       // send messages to all services
       foreach ($lOnlineIdentitys as $lIdentity) {
-        $lStatus = $lIdentity->sendStatusMessage($pUrl.'&yiidit='.$lIdentity->getCommunity()->getCommunity().'.'.$lActivity->getId(), $pVerb, $pScore, $pTitle, $pDescription, $pPhoto);
+        $parameterList = parse_url($pUrl);
+        if (isset($parameterList['query'])) {
+          $pPostUrl = $pUrl.'&yiidit='.$lIdentity->getCommunity()->getCommunity().'.'.$lActivity->getId();
+        }
+        else {
+          $pPostUrl = $pUrl.'?yiidit='.$lIdentity->getCommunity()->getCommunity().'.'.$lActivity->getId();
+        }
+        $lStatus = $lIdentity->sendStatusMessage($pPostUrl, $pVerb, $pScore, $pTitle, $pDescription, $pPhoto);
       }
     }
 
@@ -254,124 +261,124 @@ class YiidActivityTable extends Doctrine_Table
     $lResults->sort(array('c' => -1));
     $lResults->limit($pLimit)->skip(($pOffset - 1) * $pLimit);
     return self::hydrateMongoCollectionToObjects($lResults);
-}
-
-
-/**
- * retrieve YiidActivies for a given SovialObject MongoDbID
- *
- * @author Christian Weyand
- * @param $pId
- * @param integer $pLimit
- * @param integer $pPage
- * @return unknown_type
- */
-public static function retrieveByYiidActivityId($pUserId, $pId, $pCase, $pLimit = 10, $pOffset = 1){
-  $lCollection = self::getMongoCollection();
-  $lRelevantOis = OnlineIdentityTable::getRelevantOnlineIdentityIdsForQuery($pUserId, null);
-  $lQueryArray = array();
-  // filters friends
-  //$lQueryArray['oiids'] = array('$in' => $lRelevantOis);
-  $lQueryArray['so_id'] = new MongoId($pId);
-  $lQueryArray = array_merge($lQueryArray, self::addCaseQuery($pCase));
-
-  $lResults = $lCollection->find($lQueryArray);
-  $lResults->sort(array('c' => -1));
-
-  $lResults->limit($pLimit)->skip(($pOffset - 1) * $pLimit);
-
-  return self::hydrateMongoCollectionToObjects($lResults);
-}
-
-
-
-/**
- * transforms $pCase from action into score values for MongoDB
- * @param string $pCase
- * @author weyandch
- * @return int
- */
-public static function addCaseQuery($pCase) {
-  if ($pCase == 'hot') {
-    return array('score' => 1);
-  } elseif ($pCase == 'not') {
-    return array('score' => -1);
   }
-  return array();
-}
 
 
-/**
- * check if the given verb is supported in the current version
- *
- * @param $pVerb
- * @return boolean
- */
-public static function isVerbSupported($pVerb) {
-  return in_array($pVerb, sfConfig::get('app_likewidget_types'));
-}
+  /**
+   * retrieve YiidActivies for a given SovialObject MongoDbID
+   *
+   * @author Christian Weyand
+   * @param $pId
+   * @param integer $pLimit
+   * @param integer $pPage
+   * @return unknown_type
+   */
+  public static function retrieveByYiidActivityId($pUserId, $pId, $pCase, $pLimit = 10, $pOffset = 1){
+    $lCollection = self::getMongoCollection();
+    $lRelevantOis = OnlineIdentityTable::getRelevantOnlineIdentityIdsForQuery($pUserId, null);
+    $lQueryArray = array();
+    // filters friends
+    //$lQueryArray['oiids'] = array('$in' => $lRelevantOis);
+    $lQueryArray['so_id'] = new MongoId($pId);
+    $lQueryArray = array_merge($lQueryArray, self::addCaseQuery($pCase));
 
-/**
- * @author weyandch
- * @param $pUrl
- * @return unknown_type
- */
-public static function retrieveSocialObjectByUrl($pUrl) {
-  return SocialObjectTable::retrieveByAliasUrl($pUrl);
-}
+    $lResults = $lCollection->find($lQueryArray);
+    $lResults->sort(array('c' => -1));
 
-/**
- * retrieves an social object for a given url
- *
- * @author Christian Weyand
- * @param string $pUrl
- * @return SocialObject
- */
-public static function retrieveSocialObjectByAliasUrl($pUrl) {
-  return SocialObjectTable::retrieveByAliasUrl($pUrl);
-}
+    $lResults->limit($pLimit)->skip(($pOffset - 1) * $pLimit);
 
-/**
- *
- * @author Christian Weyand
- * @param $pCollection
- * @return unknown_type
- */
-public static function initializeObjectFromCollection($pCollection) {
-  $lObject = new YiidActivity();
-  if ($pCollection) {
-    $lObject->fromArray($pCollection);
-    $lObject->setId($pCollection['_id']."");
-    return $lObject;
+    return self::hydrateMongoCollectionToObjects($lResults);
   }
-  return null;
-}
 
 
 
-/**
- * hydrate yiidactivities objects from the extracted collection and return an array
- *
- * @param unknown_type $pCollection
- * @return array(SocialObject)
- */
-private static function hydrateMongoCollectionToObjects($pCollection) {
-  $lObjects = array();
-  while($pCollection->hasNext()) {
-
-    $lObjects[] = self::initializeObjectFromCollection($pCollection->getNext());
+  /**
+   * transforms $pCase from action into score values for MongoDB
+   * @param string $pCase
+   * @author weyandch
+   * @return int
+   */
+  public static function addCaseQuery($pCase) {
+    if ($pCase == 'hot') {
+      return array('score' => 1);
+    } elseif ($pCase == 'not') {
+      return array('score' => -1);
+    }
+    return array();
   }
-  return $lObjects;
-}
 
 
-public static function retrieveAllObjects($pLimit = 0, $pOffset = 0) {
-  $lCollection = self::getMongoCollection();
-  $lMongoCursor = $lCollection->find();
-  $lMongoCursor->limit($pLimit)->skip($pOffset);
+  /**
+   * check if the given verb is supported in the current version
+   *
+   * @param $pVerb
+   * @return boolean
+   */
+  public static function isVerbSupported($pVerb) {
+    return in_array($pVerb, sfConfig::get('app_likewidget_types'));
+  }
+
+  /**
+   * @author weyandch
+   * @param $pUrl
+   * @return unknown_type
+   */
+  public static function retrieveSocialObjectByUrl($pUrl) {
+    return SocialObjectTable::retrieveByAliasUrl($pUrl);
+  }
+
+  /**
+   * retrieves an social object for a given url
+   *
+   * @author Christian Weyand
+   * @param string $pUrl
+   * @return SocialObject
+   */
+  public static function retrieveSocialObjectByAliasUrl($pUrl) {
+    return SocialObjectTable::retrieveByAliasUrl($pUrl);
+  }
+
+  /**
+   *
+   * @author Christian Weyand
+   * @param $pCollection
+   * @return unknown_type
+   */
+  public static function initializeObjectFromCollection($pCollection) {
+    $lObject = new YiidActivity();
+    if ($pCollection) {
+      $lObject->fromArray($pCollection);
+      $lObject->setId($pCollection['_id']."");
+      return $lObject;
+    }
+    return null;
+  }
 
 
-  return self::hydrateMongoCollectionToObjects($lMongoCursor);
-}
+
+  /**
+   * hydrate yiidactivities objects from the extracted collection and return an array
+   *
+   * @param unknown_type $pCollection
+   * @return array(SocialObject)
+   */
+  private static function hydrateMongoCollectionToObjects($pCollection) {
+    $lObjects = array();
+    while($pCollection->hasNext()) {
+
+      $lObjects[] = self::initializeObjectFromCollection($pCollection->getNext());
+    }
+    return $lObjects;
+  }
+
+
+  public static function retrieveAllObjects($pLimit = 0, $pOffset = 0) {
+    $lCollection = self::getMongoCollection();
+    $lMongoCursor = $lCollection->find();
+    $lMongoCursor->limit($pLimit)->skip($pOffset);
+
+
+    return self::hydrateMongoCollectionToObjects($lMongoCursor);
+  }
 
 }

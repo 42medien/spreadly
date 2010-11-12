@@ -19,6 +19,10 @@ class StatsFeeder {
   public static function feed($pYiidActivity, $pUser, $pSocialObject = null) {
     sfContext::getInstance()->getLogger()->err("{StatsFeeder} " . print_r($pEvent, true));
 
+    if (!$pUser) {
+      return false;
+    }
+
     // full table
     self::createActivitiesData($pYiidActivity, $pUser);
     self::createChartData($pYiidActivity, $pUser);
@@ -39,7 +43,13 @@ class StatsFeeder {
 
     foreach ($pYiidActivity->getOiids() as $lId) {
       $lOi = OnlineIdentityTable::getInstance()->retrieveByPk($lId);
-      $lOnlineIdentities[] = array('name' => $lOi->getCommunity()->getCommunity(), 'cnt' => $lOi->getFriendCount());
+      if ($lOi) {
+        $lOnlineIdentities[] = array('name' => $lOi->getCommunity()->getCommunity(), 'cnt' => intval($lOi->getFriendCount()));
+      }
+    }
+
+    if (empty($lOnlineIdentities)) {
+      return false;
     }
 
     // basic options
@@ -47,15 +57,20 @@ class StatsFeeder {
       'host' => $lUrlParts['host'],
       'url'  => $pYiidActivity->getUrl(),
       'date' => new MongoDate(strtotime(date("Y-m-d", $pYiidActivity->getC()))),
-      'pos' => $pYiidActivity->getScore(),
       'verb' => $pYiidActivity->getVerb(),
       'gender' => $pUser->getGender(),
-      'user_id' => $pUser->getId(),
+      'user_id' => intval($pUser->getId()),
       'ya_id' => $pYiidActivity->getId(),
-      'age' => $pUser->getAge(),
+      'age' => intval($pUser->getAge()),
       'rel' => $pUser->getRelationshipState(),
       'oi' => $lOnlineIdentities,
     );
+
+    if ($pYiidActivity->getScore() > 0) {
+      $lOptions["pos"] = true;
+    } else {
+      $lOptions["pos"] = false;
+    }
 
     // add clickbacks
     if ($pYiidActivity->isClickback()) {
@@ -128,36 +143,41 @@ class StatsFeeder {
     if ($a < 18) {
       $lOptions["d.age.u_18"] = 1;
     } elseif ($a >= 18 && $a  <= 24) {
-      $lOptions["d.age.b_18-24"] = 1;
-    } elseif ($a >= 15 && $a  <= 34) {
-      $lOptions["d.age.b_25-34"] = 1;
+      $lOptions["d.age.b_18_24"] = 1;
+    } elseif ($a >= 25 && $a  <= 34) {
+      $lOptions["d.age.b_25_34"] = 1;
     } elseif ($a >= 35 && $a  <= 54) {
-      $lOptions["d.age.b_35-54"] = 1;
+      $lOptions["d.age.b_35_54"] = 1;
     } elseif ($a >= 55) {
       $lOptions["d.age.o_55"] = 1;
     } else {
       $lOptions["d.age.u"] = 1;
     }
 
+    $lUpdate = false;
+
     // add online identities
     foreach ($pYiidActivity->getOiids() as $lId) {
       $lOi = OnlineIdentityTable::getInstance()->retrieveByPk($lId);
-      $lOnlineIdentities[] = array('name' => $lOi->getCommunity()->getCommunity(), 'cnt' => $lOi->getFriendCount());
+      if ($lOi) {
+        $lUpdate = true;
+        if ($pYiidActivity->getScore() > 0) {
+          $lOptions["s.".$lOi->getCommunity()->getCommunity().".pos"] = 1;
+        } else {
+          $lOptions["s.".$lOi->getCommunity()->getCommunity().".neg"] = 1;
+        }
+        $lOptions["s.".$lOi->getCommunity()->getCommunity().".cnt"] = intval($lOi->getFriendCount());
 
-      if ($pYiidActivity->getScore() > 0) {
-        $lOptions["s.".$lOi->getCommunity()->getCommunity().".pos"] = 1;
-      } else {
-        $lOptions["s.".$lOi->getCommunity()->getCommunity().".neg"] = 1;
-      }
-      $lOptions["s.".$lOi->getCommunity()->getCommunity().".cnt"] = $lOi->getFriendCount();
-
-      // clickbacks
-      if ($pYiidActivity->isClickback()) {
-        $lOptions["s.".$pYiidActivity->getCbService()."cb"] =  1;
+        // clickbacks
+        if ($pYiidActivity->isClickback()) {
+          $lOptions["s.".$pYiidActivity->getCbService().".cb"] =  1;
+        }
       }
     }
 
-    // update analytics
-    $lCollection->update($lDoc, array('$inc' => $lOptions), array("upsert" => true));
+    if ($lUpdate) {
+      // update analytics
+      $lCollection->update($lDoc, array('$inc' => $lOptions), array("upsert" => true));
+    }
   }
 }

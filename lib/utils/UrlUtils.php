@@ -184,7 +184,7 @@ class UrlUtils {
           \d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}    # a IP address
         )
         (:[0-9]+)?                              # a port (optional)
-        (/?|/\S+)                               # a /, nothing or a / with something
+        (/?|\?\S+|/\S+)                         # a /, nothing, a "?" with something or a / with something
       $~ix';
 
     return preg_match($lPattern, (string)$pUrl);

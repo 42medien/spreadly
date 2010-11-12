@@ -63,7 +63,7 @@ class FacebookImportClient {
 
     // transform facebook format into
     $lBirthday = explode('/', $lJsonUserObject->birthday);
-    if (count($lBirthday == 3 && $lBirthday[2] > 0)) { // 3 parts and year is set
+    if (count($lBirthday == 3 && $lBirthday[2] > 0 && $lBirthday[0] != '0000')) { // 3 parts and year is set
       $pOnlineIdentity->setBirthdate($lBirthday[2].'-'.$lBirthday[0].'-'.$lBirthday[1]);
     }
     $pOnlineIdentity->setRelationshipState(IdentityHelper::tranformRelationshipStringToClasskey($lJsonUserObject->relationship_status));

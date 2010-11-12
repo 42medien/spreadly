@@ -38,7 +38,7 @@ class User extends BaseUser {
    * @return unknown_type
    */
   public function getAge() {
-    if ($this->getBirthdate()) {
+    if ($this->getBirthdate() && $this->getBirthdate() != '0000-00-00') {
       return date('Y-m-D', time()) - $this->getBirthdate();
     }
     return 0;
