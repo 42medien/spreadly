@@ -54,7 +54,7 @@ if($pUserId && $pSocialFeatures && $lSocialObjectArray['_id']) {
 	$lShowFriends = true;
 	$lLimit = $pFullShortVersion?6:8;
 }
-
+YiidStatsSingleton::trackVisit($pUrl);
 StatsHelper::trackPageImpression($pUrl, $lClickback, $pUserId);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
