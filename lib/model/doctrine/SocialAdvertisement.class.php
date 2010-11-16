@@ -22,14 +22,11 @@ class SocialAdvertisement extends BaseSocialAdvertisement
    */
   public function postInsert($pEvent) {
     $lSocialObject = SocialObjectTable::retrieveByAliasUrl($this->getUrl());
-    SocialObjectTable::createSocialObject($this->getUrl(), null, $this->getTitle(), $this->getDescription());
-/*
+
     if (!$lSocialObject) {
       SocialObjectTable::createSocialObject($this->getUrl(), null, $this->getTitle(), $this->getDescription());
       $lSocialObject = SocialObjectTable::retrieveByAliasUrl($this->getUrl());
     }
-    //print_r($lSocialObject->getId());
     $this->setSoId($lSocialObject->getId());
-*/
   }
 }
