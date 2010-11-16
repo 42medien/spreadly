@@ -1,6 +1,7 @@
 <?php
 // required because its called like a batch outside of the symfony context
 require_once(dirname(__FILE__).'/../../../config/ProjectConfiguration.class.php');
+require_once(dirname(__FILE__).'/../../vendor/OpenGraph/OpenGraph.php');
 
 $configuration = ProjectConfiguration::getApplicationConfiguration('platform', 'batch', true);
 sfContext::createInstance($configuration);

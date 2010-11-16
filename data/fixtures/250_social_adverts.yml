@@ -1,0 +1,21 @@
+SocialAdvertisement:
+  sa1:
+    Translation:
+      en:
+        title:       "Advert 1 Title english"
+        description: "description for advert 1"
+      de:
+        title:       "werbung 1 Title deutsch"
+        description: "beschreibung für werbung 1"
+    is_active:   true
+    url:        "http://www.yiid.com"
+  sa2:
+    Translation:
+      en:
+        title:       "Advert 2 Title english"
+        description: "description for advert 2"
+      de:
+        title:       "werbung 2 Title deutsch"
+        description: "beschreibung für werbung 2"
+    is_active:   true
+    url:        "http://www.bim.bo"            
