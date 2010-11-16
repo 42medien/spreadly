@@ -73,15 +73,22 @@ YiidActivity:
     c:
       type:      integer
 
-### indices mmüssen noch definiert werden
-# db.social_object.ensureIndex({url: 1}, { unique: true });
-# db.social_object.ensureIndex({alias: 1}, { unique: true });
-# db.yiid_activity.ensureIndex({so_id: 1, u_id: 1}, { unique: true });
-# db.session.ensureIndex({sess_id: 1}, { unique: true });
 
-### neu
-#
-#  index auf oiids
-#  index auf cids
-#
-#
+SocialAdvertisement:
+  actAs: 
+    Timestampable: ~
+    I18n:
+      fields: [title, description]
+  columns:
+    title:
+      type: string(40)
+    description:
+      type: string(255)
+    url:
+      type: string(255)
+    so_id:
+      type: string(40)
+    is_active:
+      type: boolean
+      default: false
+    

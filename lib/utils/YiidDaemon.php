@@ -69,7 +69,7 @@ class YiidDaemon {
     $runmode = array(
       'no-daemon' => false,
       'help' => false,
-      'write-initd' => true,
+      'write-initd' => false,
     );
 
     $argv = $pArguments;
