@@ -16,7 +16,8 @@ class indexActions extends sfActions
   * @param sfRequest $request A request object
   */
   public function executeIndex($request) {
-    $this->shortUrl = null;
+    $this->redirect("http://yiid.com");
+    /*$this->shortUrl = null;
     $this->form = new ShortUrlForm();
 
     if ($request->isMethod('post')) {
@@ -42,7 +43,7 @@ class indexActions extends sfActions
       }
     }
 
-    $this->pShortUrls = ShortUrlTable::getLatestUrls(5, true);
+    $this->pShortUrls = ShortUrlTable::getLatestUrls(5, true);*/
   }
 
 
@@ -67,36 +68,6 @@ class indexActions extends sfActions
     } else {
       // check if it is a yiid entry
       $this->redirect($lShortUrl->getUrl());
-    }
-  }
-
-  /**
-   * @author Matthias Pfefferle <matthias@pfefferle.org>
-   * @deprecated
-   */
-  public function executeYiid_auth($request) {
-    sfProjectConfiguration::getActive()->loadHelpers("YiidUrl", "Url");
-
-    $lOAuthConsumer = new OAuthConsumer("cope", "ecfe19a8529c1095aae11c283a9370cdc931f08d", null);
-
-    if ($lOAuthToken = $request->getParameter("oauth_token")) {
-      $lOAuthSecret = PersistentVariablePeer::get("oauth-".$lOAuthToken);
-      $lRequestToken = new OAuthToken($lOAuthToken, $lOAuthSecret);
-      $lAccessToken = OAuthClient::getAccessToken($lOAuthConsumer, url_for_frontend("api/access", true), $lRequestToken, "GET", null, new OAuthSignatureMethod_HMAC_SHA1());
-
-      $lToken = OAuthConsumerTokenPeer::find($lOAuthConsumer, "access", $lAccessToken->key);
-      $lToken->delete();
-      $lUser = UserPeer::retrieveByPK($lToken->getUserId());
-
-      $this->getUser()->signIn($lUser);
-      $this->redirect("index/index");
-    } else {
-      $lRequestToken = OAuthClient::getRequestToken($lOAuthConsumer, url_for_frontend("api/request", true), "GET", null, new OAuthSignatureMethod_HMAC_SHA1());
-
-      PersistentVariablePeer::set("oauth-".$lRequestToken->key, $lRequestToken->secret);
-      $lAuthUrl = url_for_frontend("api/authorize", true) . "?oauth_token=".$lRequestToken->key."&oauth_callback=".urlencode(url_for("index/yiid_auth", true)."?test=test");
-
-      $this->redirect($lAuthUrl);
     }
   }
 
