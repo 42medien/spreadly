@@ -3,9 +3,6 @@
 require_once(dirname(__FILE__).'/../../../config/ProjectConfiguration.class.php');
 require_once(dirname(__FILE__).'/../../vendor/OpenGraph/OpenGraph.php');
 
-$configuration = ProjectConfiguration::getApplicationConfiguration('platform', 'batch', true);
-sfContext::createInstance($configuration);
-
 /**
  * a parser for social objects
  *
@@ -56,7 +53,7 @@ class SocialObjectParser {
    * @return array $pArray
    */
   public static function saveToArray($pArray) {
-    $lMeta = self::fetch($pArray['url']);
+ /*   $lMeta = self::fetch($pArray['url']);
     if(!$pArray['stmt'] || $pArray['stmt'] == null) {
       $pArray['stmt'] = $lMeta['stmt'];
     }
@@ -65,7 +62,7 @@ class SocialObjectParser {
     }
     if(!$pArray['thumb_url'] || $pArray['thumb_url'] == null) {
       $pArray['thumb_url'] = $lMeta['thumb_url'];
-    }
+    }*/
     return $pArray;
   }
 

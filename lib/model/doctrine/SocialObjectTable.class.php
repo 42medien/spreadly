@@ -252,6 +252,7 @@ class SocialObjectTable extends Doctrine_Table
     $lObject = new SocialObject();
     if ($pCollection) {
       $lObject->fromArray($pCollection);
+      $lObject->setId($pCollection['_id']."");
       return $lObject;
     }
     return null;

@@ -20,12 +20,16 @@ class SocialAdvertisement extends BaseSocialAdvertisement
    * @author Christian Weyand
    * @param Doctrine_Event $pEvent
    */
-  public function preSave($pEvent) {
+  public function postInsert($pEvent) {
     $lSocialObject = SocialObjectTable::retrieveByAliasUrl($this->getUrl());
+    SocialObjectTable::createSocialObject($this->getUrl(), null, $this->getTitle(), $this->getDescription());
+/*
     if (!$lSocialObject) {
-      $lSocialObject = SocialObjectTable::createSocialObject($this->getUrl(), null, $this->getTitle(), $this->getDescription());
+      SocialObjectTable::createSocialObject($this->getUrl(), null, $this->getTitle(), $this->getDescription());
+      $lSocialObject = SocialObjectTable::retrieveByAliasUrl($this->getUrl());
     }
+    //print_r($lSocialObject->getId());
     $this->setSoId($lSocialObject->getId());
-
+*/
   }
 }
