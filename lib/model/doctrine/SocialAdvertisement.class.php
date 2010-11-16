@@ -26,7 +26,7 @@ class SocialAdvertisement extends BaseSocialAdvertisement
     if (!$lSocialObject) {
       SocialObjectTable::createSocialObject($this->getUrl(), null, $this->getTitle(), $this->getDescription());
       $lSocialObject = SocialObjectTable::retrieveByAliasUrl($this->getUrl());
+      $this->setSoId($lSocialObject->getId());
     }
-    $this->setSoId($lSocialObject->getId());
   }
 }
