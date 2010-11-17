@@ -138,6 +138,7 @@ li.item_active{background: #ecf6e9 url("/img/global/item_active_bg.png") right b
 .ad_stream_item .whats_hot_stream_item, .ad_stream_item .whats_hot_stream_icon { background: transparent; }
 .ad_stream_item .main_text, .ad_stream_item .text_important, .ad_stream_item .url { color: #fff; }
 .ad_stream_item a { color: #ccc; }
+li.item_active.ad_stream_item { background-color: #6A6B6A; }
 li.item_active .whats_hot_stream_item,
 .hot_stream li:hover .whats_hot_stream_item,
 .not_stream li:hover .whats_hot_stream_item{
