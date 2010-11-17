@@ -27,7 +27,3 @@ use_helper('Text');
     </div>
   </div>
 </li>
-
-<li class="ad_item" style="background-color: red;">
-öalskd höalsdfhkla kjdhsflkja shdlkfjha sldkjfh lkasdj hflksadj
-</li>
