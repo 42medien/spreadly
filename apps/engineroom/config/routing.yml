@@ -1,3 +1,12 @@
+social_advertisement:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                SocialAdvertisement
+    module:               social_advertisement
+    prefix_path:          /social_advertisement
+    column:               id
+    with_wildcard_routes: true
+
 cms:
   class: sfDoctrineRouteCollection
   options:

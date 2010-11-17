@@ -12,5 +12,13 @@ class SocialAdvertisementForm extends BaseSocialAdvertisementForm
 {
   public function configure()
   {
+    $lLanguages = LanguageTable::getAllLanguageCodesAsArray();
+
+    $this->embedI18n($lLanguages);
+    foreach ($lLanguages as $lLang) {
+       $this->widgetSchema[$lLang]['title'] =  new sfWidgetFormTextarea();
+       $this->widgetSchema[$lLang]['description'] =  new sfWidgetFormTextarea();
+    }
+
   }
 }
