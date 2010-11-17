@@ -29,4 +29,8 @@ class SocialAdvertisement extends BaseSocialAdvertisement
     }
     $this->setSoId($lSocialObject->getId());
   }
+
+  public function getSocialObject() {
+    return SocialObjectTable::retrieveByPK($this->getSoId());
+  }
 }

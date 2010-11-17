@@ -27,5 +27,9 @@ class streamComponents extends sfComponents
   public function executeContacts_infobox() {
 
   }
+
+  public function executeInline_ad() {
+    $this->pAd = SocialAdvertisementTable::getRandomAd();
+  }
 }
 ?>
