@@ -24,4 +24,8 @@ class LanguageTable extends Doctrine_Table
     }
     return $lLangArray;
   }
+
+  public static function getDefaultLanguage() {
+    return 'en';
+  }
 }
