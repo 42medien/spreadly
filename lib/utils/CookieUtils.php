@@ -4,8 +4,10 @@ class CookieUtils {
 
   const COOKIENAME = 'yiidservices';
   const SERVICE_TIMESTAMP_COOKIE = 'yiidservices_timecheck';
+
   /**
-   *
+   * generates a cookie with all identities owned by the user.
+   * usually called on signin & adding a new identity
    *
    * @author Christian Weyand
    * @param $pIdentitys

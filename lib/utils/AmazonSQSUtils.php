@@ -6,7 +6,7 @@ $configuration = ProjectConfiguration::getApplicationConfiguration('platform', '
 sfContext::createInstance($configuration);
 
 /**
- * Enter description here...
+ * Wrap some basic methods for SQS
  *
  * @author Christian Weyand
  * @author Matthias Pfefferle

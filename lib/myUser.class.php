@@ -64,15 +64,15 @@ class myUser extends sfBasicSecurityUser {
    * switch the language
    */
   public function switchLanguage($culture){
-    /*$supported_cultures = LanguagePeer::getSupportedLanguages();
+    $supported_cultures = LanguageTable::getAllLanguageCodesAsArray(true);
 
     if (in_array($culture, $supported_cultures)) {
       $this->setCulture($culture);
     } else {
-      $this->setCulture(LanguagePeer::getDefaultLanguage());
+      $this->setCulture(LanguageTable::getDefaultLanguage());
     }
 
-    $this->setAttribute('culture_set', true);*/
+    $this->setAttribute('culture_set', true);
   }
 
   public function updateCulture() {

@@ -6,7 +6,7 @@ class MongoDbConnector {
   private static $aMongoConn = null;
 
   /**
-   * singleton logic
+   * singleton logic, connect to mongodb based on host parameter in app.yml
    *
    * @return self
    */
@@ -19,6 +19,14 @@ class MongoDbConnector {
   }
 
 
+  /**
+   *
+   * conenct to given collection
+   *
+   * @param Mongo $pDatabase
+   * @param string $pCollection
+   * @return MongoCollection
+   */
   static public function getCollection($pDatabase, $pCollection) {
     return self::$aMongoConn->selectCollection($pDatabase, $pCollection);
   }
