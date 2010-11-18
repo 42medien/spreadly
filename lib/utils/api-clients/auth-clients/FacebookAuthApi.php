@@ -105,7 +105,7 @@ class FacebookAuthApiClient extends AuthApi {
   public function doAuthentication() {
     $lConsumer = $this->getConsumer();
 
-    header("Location: https://graph.facebook.com/oauth/authorize?client_id=".$lConsumer->key."&scope=email,offline_access,publish_stream,read_stream,user_about_me,user_activities,user_likes,read_friendlists,user_birthday,user_relationships&redirect_uri=".$this->getCallbackUri());
+    header("Location: https://graph.facebook.com/oauth/authorize?client_id=".$lConsumer->key."&scope=email,offline_access,publish_stream,read_friendlists,user_birthday,user_relationships&redirect_uri=".$this->getCallbackUri());
     exit;
   }
 
@@ -133,7 +133,6 @@ class FacebookAuthApiClient extends AuthApi {
    */
   public function completeUser(&$pUser, $pObject) {
     $pUser->setUsername(UserUtils::getUniqueUsername(StringUtils::normalizeUsername($pObject->name)));
-    $pUser->setDescription(@$pObject->bio);
     $pUser->setFirstname($pObject->first_name);
     $pUser->setEmail($pObject->email);
     $pUser->setLastname($pObject->last_name);
