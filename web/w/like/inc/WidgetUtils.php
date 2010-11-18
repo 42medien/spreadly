@@ -162,6 +162,10 @@ class StatsHelper {
     $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
     $lCollection = $lMongo->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, str_replace('.', '_', $lHost).".analytics.pis");
 
+    if (mb_detect_encoding($pUrl) != 'UTF-8') {
+      $pUrl = utf8_encode($pUrl);
+    }
+
     $lDoc = array(
       'url' => $pUrl,
       'date' => new MongoDate(strtotime(date("Y-m-d")))
