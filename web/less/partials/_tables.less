@@ -1,0 +1,87 @@
+// Reset a table
+.reset-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  vertical-align: middle; }
+
+// Reset a table cell (`th`, `td`)
+.reset-table-cell {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+.alternating-rows(@even-row-color:#dfdfdf, @odd-row-color:#efefef) {
+  tr.odd {
+    td {
+      background-color: @odd-row-color;
+      &.even, &:nth-child(2n) {
+        background-color: @odd-row-color;
+      }
+    }
+  }
+  tr.even {
+    td {
+      background-color: @even-row-color;
+      &.even, &:nth-child(2n) {
+        background-color: @even-row-color;
+      }
+    }
+  }
+}
+
+table {
+  .reset-box-model;
+  .reset-table;
+  .alternating-rows;
+  border: none;
+  margin-bottom: 1.5em;
+  td, th {
+    .reset-table-cell;
+    background: none;
+    border: none;
+    padding: 3px 6px;
+    &.numeric {
+      text-align: right;
+    }
+  }
+  &.sheet {
+    thead th, tfoot td {
+      text-align: center;
+      font-weight: bold;
+      color: @primary-text-color;
+      background-color: @primary-color;
+      a {      
+        &:hover {
+          color: @primary-text-color;
+        }
+        color: @primary-text-color;
+        text-decoration: underline;
+      }
+    }
+    tbody td {
+      border-bottom: 2px solid #fff;
+    }
+    th {
+      &:first-child {
+        .border-top-left-radius;
+      }
+      &:last-child {
+        .border-top-right-radius;
+      }
+    }
+    tfoot td {
+      &:first-child {
+        .border-bottom-left-radius;
+      }
+      &:last-child {
+        .border-bottom-right-radius;
+      }
+    }
+  }
+}
+
+
+table.full {
+  width: 100%;
+}

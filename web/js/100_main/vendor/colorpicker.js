@@ -1,6 +1,6 @@
 
 /**
- * @combine configurator
+ * @combine statistics
  * Color picker
  * Author: Stefan Petre www.eyecon.ro
  * 
@@ -482,4 +482,4 @@
 		ColorPickerShow: ColorPicker.showPicker,
 		ColorPickerSetColor: ColorPicker.setColor
 	});
-})(jQuery)
+})(jQuery);

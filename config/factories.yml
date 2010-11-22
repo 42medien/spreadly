@@ -6,6 +6,9 @@
 # local settings
 #
 dev:
+  mailer:
+    param:
+      delivery_strategy: none
   i18n:
     class: sfI18N
     param:
@@ -38,11 +41,6 @@ dev:
       session_name:    yiid_local
       session_cookie_domain: .yiid.local
       session_cookie_lifetime: 17200
-
-  user:
-    class: myUser
-    param:
-      timeout:         17200
 
 ##
 # Development settings
@@ -79,11 +77,6 @@ staging:
       session_name:            yiiddev_com
       session_cookie_domain:   .yiiddev.com
       session_cookie_lifetime: 17776000
-
-  user:
-    class: myUser
-    param:
-      timeout:                  17776000
 
 ##
 # Productive settings
@@ -134,19 +127,10 @@ prod:
       host:            donkeykong
       port:            27017
       db_name:         yiid
-      collection_name:   session    
+      collection_name:   session
       session_name:       yiid
       session_cookie_domain: .yiid.com
       session_cookie_lifetime: 17776000
-
-
-  user:
-    class: myUser
-    param:
-      timeout:         17776000
-
-
-
 
 test:
   storage:
@@ -191,10 +175,15 @@ all:
     param:
       generate_shortest_url:            true
       extra_parameters_as_query_string: true
-      
+
 
   view_cache_manager:
     class: sfViewCacheManager
     param:
       cache_key_use_vary_headers: true
       cache_key_use_host_name:    true
+
+  user:
+    class: myUser
+    param:
+      timeout:         17776000

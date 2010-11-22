@@ -1,6 +1,7 @@
 /**
  * @combine platform
  * @combine likepopup
+ * @combine statistics
  */
 
 /**
@@ -53,7 +54,7 @@ var Utils = {
     }
     return lIsin;
   },
-  
+
   /**
    * remove all spaces in a given string
    * @author KM
@@ -64,27 +65,27 @@ var Utils = {
     var cleanedString = pString.replace(/^\s+/,'').replace(/\s+$/,'');
     return cleanedString;
   },
-  
+
   ltrim: function(pString) {
     return pString.replace(/^\s+/,"");
   },
-  
+
   rtrim: function(pString) {
     return pString.replace(/\s+$/,"");
-  },  
-  
+  },
+
   lrtrim: function(pString) {
     return pString.replace(/^\s+|\s+$/g,"");
   },
-  
-  checkBrowserName: function (name){  
-    var agent = navigator.userAgent.toLowerCase();  
-    if (agent.indexOf(name.toLowerCase())>-1) {  
-      return true;  
-    }  
-    return false;  
+
+  checkBrowserName: function (name){
+    var agent = navigator.userAgent.toLowerCase();
+    if (agent.indexOf(name.toLowerCase())>-1) {
+      return true;
+    }
+    return false;
   },
-  
+
   getParams: function() {
    debug.log('[Utils][getParams]');
     var vars = [], hash;
@@ -96,18 +97,18 @@ var Utils = {
         vars[hash[0]] = hash[1];
     }
     return vars;
-  }, 
-  
+  },
+
   /**
    * @description returns the current time
    */
   getTimestamp: function() {
     return new Date().getTime();
   },
-  
+
   /**
    * @description check if an element exists in markup
-   */  
+   */
   elementExists: function(pElement) {
     if(pElement === undefined || pElement == '' || pElement == null || pElement.length == 0) {
       return false;
@@ -115,10 +116,10 @@ var Utils = {
       return true;
     }
   },
-  
+
 	urlencode: function (str) {
-	    // URL-encodes string  
-	    // 
+	    // URL-encodes string
+	    //
 	    // version: 1004.2314
 	    // discuss at: http://phpjs.org/functions/urlencode
 	    // +   original by: Philip Peterson
@@ -145,13 +146,13 @@ var Utils = {
 	    // *     example 3: urlencode('http://www.google.nl/search?q=php.js&ie=utf-8&oe=utf-8&aq=t&rls=com.ubuntu:en-US:unofficial&client=firefox-a');
 	    // *     returns 3: 'http%3A%2F%2Fwww.google.nl%2Fsearch%3Fq%3Dphp.js%26ie%3Dutf-8%26oe%3Dutf-8%26aq%3Dt%26rls%3Dcom.ubuntu%3Aen-US%3Aunofficial%26client%3Dfirefox-a'
 	    str = (str+'').toString();
-	    
+
 	    // Tilde should be allowed unescaped in future versions of PHP (as reflected below), but if you want to reflect current
 	    // PHP behavior, you would need to add ".replace(/~/g, '%7E');" to the following.
 	    return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').
 	                                                                    replace(/\)/g, '%29').replace(/\*/g, '%2A').replace(/%20/g, '+');
 	},
-	
+
   /**
    * returns a string imploded form the pieces array and separated with the given glue
    * @author http://kevin.vanzonneveld.net
@@ -167,7 +168,7 @@ var Utils = {
     // *     returns 1: 'Kevin van Zonneveld'
     // *     example 2: implode(' ', {first:'Kevin', last: 'van Zonneveld'});
     // *     returns 2: 'Kevin van Zonneveld'
-    
+
     var i = '', retVal='', tGlue='';
     if (arguments.length === 1) {
         pieces = glue;
@@ -188,7 +189,7 @@ var Utils = {
     else {
         return pieces;
     }
-  }	
+  }
 };
 
 
@@ -197,7 +198,7 @@ var Utils = {
  * @author karina
  */
 var PositionHelper = {
-  
+
   /**
    * returns the actual scrollheight
    * @author KM
@@ -212,14 +213,14 @@ var PositionHelper = {
       lOffset = lBody.scrollTop;
     }
     return lOffset;
-  },    
-    
+  },
+
   /**
    * returns the right body element (this for crossbrowser-comp)
    * @author KM
-   */  
+   */
   getBody: function() {
-    debug.log("[PositionHelper][getBody]");    
+    debug.log("[PositionHelper][getBody]");
     var lBody = null;
     if(document.all && !window.opera) {
       lBody =(window.document.compatMode == "CSS1Compat")? window.document.documentElement : window.document.body || null;
@@ -231,7 +232,7 @@ var PositionHelper = {
 };
 
 var OnLoadGrafic = {
-    
+
   showGraficByElement: function(pElement, pTop, pLeft) {
     debug.log("[OnLoadGrafic][showGraficByElement]");
     var lPosition = jQuery(pElement).position();
@@ -242,7 +243,7 @@ var OnLoadGrafic = {
       left: lPosition.left + pTop
     }).show();
   },
-  
+
   showGraficByWidth: function(pElement) {
     debug.log("[OnLoadGrafic][showGraficByElement]");
     var lPosition = jQuery(pElement).position();
@@ -254,7 +255,7 @@ var OnLoadGrafic = {
       left: lPosition.left + (pWidth/2)
     }).show();
   },
-  
+
   showGrafic: function() {
     var lTimeout;
     jQuery('#general-ajax-loader').css({
@@ -266,11 +267,11 @@ var OnLoadGrafic = {
       OnLoadGrafic.hideGrafic();
     }, 20000);
   },
-  
+
   hideGrafic: function() {
     jQuery('#general-ajax-loader').hide();
   },
-  
+
   // getPageScroll() by quirksmode.com
   getPageScroll: function() {
     var xScroll, yScroll;
@@ -282,7 +283,7 @@ var OnLoadGrafic = {
       xScroll = document.documentElement.scrollLeft;
     } else if (document.body) {// all other Explorers
       yScroll = document.body.scrollTop;
-      xScroll = document.body.scrollLeft;   
+      xScroll = document.body.scrollLeft;
     }
     return new Array(xScroll,yScroll);
   },
@@ -299,7 +300,7 @@ var OnLoadGrafic = {
     }
     return windowHeight;
   },
-  
+
   getPageWidth: function() {
    if (window.innerWidth) {
       return window.innerWidth;

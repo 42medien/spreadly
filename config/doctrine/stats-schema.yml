@@ -1,0 +1,97 @@
+DomainProfile:
+  actAs: [Timestampable]
+  columns:
+    url:
+      type: string(255)
+    protocol:
+      type: enum
+      length: 5
+      default: http
+      values: ['http', 'https']
+    state:
+      type: enum
+      length: 10
+      default: pending
+      values: ['pending', 'verified']
+    verification_token:
+      type: string(255)
+      unique: true
+    verification_count:
+      type: integer
+      default: 0
+    sf_guard_user_id:
+      type: integer
+      notnull: true
+    imprint_url:
+      type: string(512)
+    tos_url:
+      type: string(512)
+    
+  relations:
+    sfGuardUser:
+      foreignAlias: DomainProfiles
+      onDelete:     CASCADE
+
+SupportedServices:
+  actAs: [Timestampable]
+  columns:
+    name:
+      type: string(255)
+    slug:
+      type: string(255)
+    url:
+      type: string(255)
+    tutorial_url:
+      type: string(255)
+    download_url:
+      type: string(255)
+
+
+
+Deal:
+  actAs:
+    [Timestampable]
+  columns:
+    domain_profile_id:
+      type: integer
+      notnull: true
+    deal_status:       # approved, declined.. 
+      type:  integer(4)
+      default: 0
+    deal_type:         # commercial or charity
+      type:  integer(4)
+      default: 0
+    start_date:
+      type: datetime
+    end_date:
+      type: datetime
+    
+    summary:
+      type: string(40)
+    description:
+      type: string(80)
+    button_wording:
+      type: string(35)
+      
+    terms_of_deal: 
+      type: string(512)
+    quantity_limit:
+      type: integer
+    quantity_reached:
+      type: integer
+      default: 0
+    redeem_url:
+      type: string(512)
+    tos_accepted:
+      type: boolean
+      default: false 
+      
+Visit:
+  columns:
+    host:     { type: string(255) }
+    uri:      { type: string  }
+    cult:     { type: string(5) }
+    is_like:     { type: boolean, default: false }
+    is_dislike:  { type: boolean, default: false }
+    c:        { type: integer }
+    

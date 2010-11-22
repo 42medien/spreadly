@@ -1,0 +1,201 @@
+// Just the top right radius
+.border-top-right-radius(@default-radius: 5px) {
+  -moz-border-radius-topright: @default-radius;
+  -webkit-border-top-right-radius: @default-radius;
+  -o-border-top-right-radius: @default-radius @default-radius;
+  -ms-border-top-right-radius: @default-radius @default-radius;
+  -khtml-border-top-right-radius: @default-radius @default-radius;
+  border-top-right-radius: @default-radius;
+}
+// Just the bottom right radius
+.border-bottom-right-radius(@default-radius: 5px) {
+  -moz-border-radius-bottomright: @default-radius;
+  -webkit-border-bottom-right-radius: @default-radius;
+  -o-border-bottom-right-radius: @default-radius @default-radius;
+  -ms-border-bottom-right-radius: @default-radius @default-radius;
+  -khtml-border-bottom-right-radius: @default-radius @default-radius;
+  border-bottom-right-radius: @default-radius;
+}
+// Just the top left radius
+.border-top-left-radius(@default-radius: 5px) {
+  -moz-border-radius-topleft: @default-radius;
+  -webkit-border-top-left-radius: @default-radius;
+  -o-border-top-left-radius: @default-radius @default-radius;
+  -ms-border-top-left-radius: @default-radius @default-radius;
+  -khtml-border-top-left-radius: @default-radius @default-radius;
+  border-top-left-radius: @default-radius;
+}
+// Just the bottom left radius
+.border-bottom-left-radius(@default-radius: 5px) {
+  -moz-border-radius-bottomleft: @default-radius;
+  -webkit-border-bottom-left-radius: @default-radius;
+  -o-border-bottom-left-radius: @default-radius @default-radius;
+  -ms-border-bottom-left-radius: @default-radius @default-radius;
+  -khtml-border-bottom-left-radius: @default-radius @default-radius;
+  border-bottom-left-radius: @default-radius;
+}
+
+// Both right corners
+.border-right-radius(@default-radius: 5px) {
+  .border-top-right-radius(@default-radius);
+  .border-bottom-right-radius(@default-radius);
+}
+
+// Both left corners
+.border-left-radius(@default-radius: 5px) {
+  .border-top-left-radius(@default-radius);
+  .border-bottom-left-radius(@default-radius);
+}
+
+// Both top corners
+.border-top-radius(@default-radius: 5px) {
+  .border-top-left-radius(@default-radius);
+  .border-top-right-radius(@default-radius);
+}
+
+// Both bottom corners
+.border-bottom-radius(@default-radius: 5px) {
+  .border-bottom-left-radius(@default-radius);
+  .border-bottom-right-radius(@default-radius);
+}
+
+// All 4 corners
+.border-radius(@default-radius: 5px) {
+  .border-top-radius(@default-radius);
+  .border-bottom-radius(@default-radius);
+}
+
+// Reset the box model measurements.
+.reset-box-model {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+}
+
+// Clear floats
+.clearfix {
+  overflow: hidden;
+  // TODO: Do IE fixes here
+}
+
+a, a:hover { color: @primary-link-color; }
+
+.content-col-third{
+  width: 33%;
+}
+
+.content-col-twothird{
+  width: 66%;
+}
+
+
+.green-style {
+  .border-right-radius(1em);
+  margin-right: 10px;
+  background-color: #69BC50;
+  padding: 5px 25px 5px 10px;
+  color: #fff;
+  font-weight: bold;
+  cursor: default;
+}
+
+// For backward compatability
+.green_style {
+  .green-style;
+}
+
+.box {
+  .border-radius(1em);
+  border: 2px solid @default-border-color;
+  background-color: #FAFAFA;
+}
+
+.content-box {
+  .box;
+  .clearfix;
+  margin: 10px;
+  padding: 1em;
+  h2 {
+    margin-top: 0;
+  }
+  h3 {
+    margin-bottom: 5px;
+  }
+  .label-box{
+    width: 70px;
+    text-decoration:underline;
+    font-weight: bold;
+  }
+}
+
+.yellow{
+  background-color: #fbff87;
+}
+
+.dotted{
+  border: 1px dotted black;
+}
+  
+.bg-white {
+  background-color: #fff;
+}
+
+.content-header-box {
+  .box;
+  .clearfix;
+  margin: 10px 10px 10px 10px;
+  padding: 2px;
+  background-color: #FAFAFA;
+  .content-box-head{
+    padding: 0.5em 1em 0.5em 1em;
+    h3 {
+      line-height: 25px;   
+      margin: 0;
+      font-size: 14px; 
+    } 
+    .button-green{
+      float: right;
+    } 
+  }
+  .content-box-body{
+    .border-bottom-radius(1em);
+    border-color: #fff;
+    padding: 1em;
+    height:220px;
+    background-color: #fff;
+    p{
+      margin: 0px 0px 5px 0px;
+    }
+  }
+}
+
+#add-domain-profiles .content-box-body{
+  height: auto;
+}
+
+.medium-box{
+  width: 47%;
+  float: left;
+}
+
+.error{
+  color: red;
+}
+
+.verify-table-info{
+  line-height: 25px;
+  margin-left:10px;
+}
+
+
+  p#add-url-error{
+    padding-left: 90px;
+    display: none;
+  }
+
+
+img {
+  border: none;
+  outline: none;
+}

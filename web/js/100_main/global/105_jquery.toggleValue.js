@@ -1,5 +1,6 @@
 /**
  * @combine platform
+ * @combine statistics
  */
 jQuery.fn.toggleValue = function(){
   var lText = jQuery(this).val();

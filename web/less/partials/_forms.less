@@ -1,0 +1,143 @@
+#sf_apply_apply_form .submit_row, #sf_apply_reset_request .submit_row{
+  margin-top: 10px;
+}
+
+
+form table {
+  width: auto;
+  font-size: 12px;
+  a {
+    font-size: 12px;
+    line-height: 18px;
+  }
+  tbody {
+    margin: 1em;
+    th {
+      text-align: right;
+      background: none;
+      font-weight: bold;
+      color: @default-text-color;
+    }
+  }
+  tfoot {
+    td{
+      padding-top: 1em;
+    } 
+  }
+}
+
+form {
+  label {
+    font-weight: bold;
+    color: @default-text-color;
+    display: block;
+    width: 155px;
+  }
+  input {
+    &[type="text"],
+    &[type="password"] {
+      .border-radius(2px);
+      margin-left: 5px;
+      padding: 3px 6px;
+      color: @default-text-color;
+      border: 1px solid @default-border-color;
+    }
+  }  
+}
+
+.formbox {
+  h2 {
+    .green-style;
+  }
+  
+}
+
+#signin_form {
+  input {
+    &[type="text"],
+    &[type="password"] {
+      width: 114px;
+      padding: 1px 3px;
+    }
+  }
+  input[type="submit"] {
+    padding: 1px 6px;
+  }
+}
+
+
+
+#guard_signin_area{
+  .box;
+  .clearfix;
+  width: 400px;
+  padding: 0 10px;
+  margin: 10px auto 20px;
+}
+
+#domain_profile_url, #deal_DomainProfile_id{
+  width: 830px;
+  margin-bottom:5px;
+}
+
+#input-verify-code{
+  width: 855px;
+}
+
+.label-box{
+  float: left;
+}
+
+#deal_form {
+  input {
+    &[type="text"],
+    &[type="password"] {
+      width: 330px;
+      padding: 1px 3px;
+    }
+  }
+  select{
+      margin-top: 10px;
+  }
+  input[type="submit"] {
+    padding: 1px 6px;
+  }
+  .label-box {
+    width: 100px;
+  }
+  #tos_label{
+    float: none;
+  }    
+  #deal_start_date, #deal_end_date{
+    width: 153px;
+  } 
+  
+  .meta-label{
+    font-size: 10px;
+  }
+  
+  ul.error_list{
+    padding-top: 0px;
+  } 
+}
+
+div.form-row{
+  padding: 5px 0px 5px 0px;
+  clear:both;
+}
+
+#terms-of-use{
+  margin-left: 20px;
+}
+
+#save-deal-button{
+  width: 460px;
+  margin-left: 20px;
+}
+
+
+#admin-email{
+  margin-right:10px;
+  width:548px;
+}
+

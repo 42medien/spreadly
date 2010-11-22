@@ -1,0 +1,20 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/13-View
+
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Yiid.it Configurator
+    description:  Yiid helps you sharing your interesting websites
+    keywords:     yiid, social, network, sharing
+    language:     en
+    robots:       index, follow
+
+  stylesheets:    [main.less, configurator.less, vendor/colorpicker.css] #[configurator/configurator.css, vendor/colorpicker.css]
+
+  javascripts:    []
+
+  has_layout:     true
+  layout: layout_configurator

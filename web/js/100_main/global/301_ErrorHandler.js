@@ -1,6 +1,7 @@
 /**
  * @combine platform
  * @combine likepopup
+ * @combine statistics
  */
 
 /**
@@ -13,7 +14,7 @@ var ErrorLogger = {
   aErrorMsg: 'Something went wrong',
   //global var for user-agend send to action
   aBrowserInfo: '',
-    
+
   /**
    * handles the correct login on dev or live-system
    * @author KM
@@ -28,7 +29,7 @@ var ErrorLogger = {
     ErrorLogger.aBrowserInfo = ErrorLogger.getBrowserInfo();
     ErrorLogger.doLog();
   },
-	  
+
   /**
    * sends the error-infos to logging-action and to console
    * @author KM
@@ -36,21 +37,21 @@ var ErrorLogger = {
   doLog: function() {
     //if we are on a dev-system: log
     if(ErrorHandler.aDev == 1) {
-    	//take the messages as post-params   
+    	//take the messages as post-params
     	var options = {
     		'msg':ErrorLogger.aErrorMsg,
     		'useragent': ErrorLogger.aBrowserInfo
-    	}; 
+    	};
       //and send the request
       jQuery.ajax({
         type: "POST",
         url: 'general/js_log',
         dataType: "json",
         data: options
-      });      
+      });
     }
   },
-  
+
   /**
    * returns the BrowserInfo from UserAgent as string
    * @author KM
@@ -61,8 +62,8 @@ var ErrorLogger = {
   	//call the jquery-browser-object and build a msg-string from the info
     jQuery.each(jQuery.browser, function(i, val) {
     	lBrowserInfo = lBrowserInfo+' '+i+' '+val;
-    }); 
-    return lBrowserInfo;	
+    });
+    return lBrowserInfo;
   }
 };
 
@@ -74,9 +75,9 @@ var ErrorLogger = {
   */
 
 var ErrorHandler = {
-	
+
 	aDev: 0,
-  
+
  /**
   * catches the xhr-errors (called as callback in jquery.ajax.error)
   * @author KM
@@ -86,7 +87,7 @@ var ErrorHandler = {
   * @param string pFile
   * @param string pLineNumber
   * @version 1.0
-  */  
+  */
   catchXhrError: function(xhr, ajaxOptions, thrownError, pFile, pLineNumber){
 
   	var lMsg = '';
@@ -96,7 +97,7 @@ var ErrorHandler = {
   	} else {
   		lMsg = xhr.statusText;
   	}
-    //build error message  	
+    //build error message
   	var lMessage = 'Status '+xhr['status']+' - '+lMsg;
   	//if file/method where error thrown isn't set
   	if(pFile === undefined) {
@@ -111,7 +112,7 @@ var ErrorHandler = {
     OnLoadGrafic.hideGrafic();
     return true;
   },
-  
+
   /**
    * catches all window errors
    */
@@ -122,9 +123,9 @@ var ErrorHandler = {
       ErrorLogger.initLog(pMessage, pFileName, pLineNumber);
       //and return true
       return true;
-		}; 	
+		};
   },
-  
+
   catchConsoleError: function() {
     if(typeof console == "undefined" || !console) {
       return C;
@@ -137,5 +138,5 @@ var ErrorHandler = {
 var AuthError = {
   redirect: function(pResponse) {
     window.location.href = pResponse.path;
-  }    
+  }
 };

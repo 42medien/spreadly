@@ -1,0 +1,56 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/05-Factories
+
+# Production Environment
+prod:
+  storage:
+    class: sfSessionStorage
+    param:
+      db_name:                 yiidit
+      collection_name:         session
+      session_name:            yiid_it
+      session_cookie_domain:   .yiid.it
+      session_cookie_lifetime: 17776000
+
+# Staging Environment
+staging:
+  storage:
+    class: sfSessionStorage
+    param:
+      db_name:                 yiid_dev
+      collection_name:         session
+      session_name:            stats_yiiddev_com
+      session_cookie_domain:   stats.yiiddev.com
+      session_cookie_lifetime: 17776000
+
+# Development Environment
+dev:
+  storage:
+    class: sfSessionStorage
+    param:
+      session_name:    stats_yiid_local
+      session_cookie_domain: .yiidstats.local
+      session_cookie_lifetime: 170200
+      session_path: %SF_CACHE_DIR%/sessions
+
+# Test: Testing Environment
+test:
+  storage:
+    class: sfSessionTestStorage
+    param:
+      session_path: %SF_TEST_CACHE_DIR%/sessions
+
+  response:
+    class: sfWebResponse
+    param:
+      send_http_headers: false
+
+  mailer:
+    param:
+      delivery_strategy: none
+
+
+# Default values
+all:
+  user:
+    class: statsUser

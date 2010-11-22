@@ -1,0 +1,28 @@
+.no-bullet {
+  .reset-box-model;  
+  list-style: none;
+}
+.no-bullet-list {
+  .reset-box-model;
+  list-style: none;
+  li {
+    .no-bullet;
+  }
+}
+.inline-list {
+  .no-bullet-list;
+  li {
+    display: inline;
+  }
+}
+
+
+ul.pager {
+  .inline-list;
+  text-align: center;
+  margin-bottom: 1em;
+  li {
+    margin-right: 1em;
+  }
+}
+

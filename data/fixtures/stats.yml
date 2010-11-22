@@ -1,0 +1,59 @@
+SupportedServices:
+  supported_service_1:
+    name: Wordpress
+    slug: wordpress
+    url:  http://wordpress.org
+    download_url: http://wordpress.org/extend/plugins/yiidit/
+    
+  supported_service_2:
+    name: Blogger.com
+    slug: blogger
+    url:  http://www.blogger.com
+    tutorial_url: http://yiidit.blogspot.com/ 
+    
+  supported_service_3:
+    name: Tumblr
+    slug: tumblr
+    url:  http://www.tumblr.com/
+    tutorial_url: http://yiidit.tumblr.com/ 
+    
+  supported_service_4:
+    name: Posterous
+    slug: posterous
+    url:  https://posterous.com/
+    tutorial_url: http://yiidit.posterous.com/
+    
+  supported_service_5:
+    name: Magento
+    slug: magento
+    url:  http://www.magentocommerce.com/
+    download_url: http://www.magentocommerce.com/magento-connect/Watercooling/extension/4063/ekaabo_yiid_it_button
+    
+  supported_service_6:
+    name: Typo3
+    slug: typo
+    url:  http://typo3.org
+    download_url: http://typo3.org/extensions/repository/view/yiid_like/current/
+    
+  supported_service_7:
+    name: Drupal
+    slug: drupal
+    url:  http://drupal.org
+    download_url: http://drupal.org/project/yiid  
+    
+  supported_service_8:
+    name: Joomla!
+    slug: joomla
+    url:  http://www.joomla.org/
+    download_url: http://code.google.com/p/yiid/downloads/list?q=label:joomla 
+    
+  supported_service_9:
+    name: MediaWiki
+    slug: mediawiki
+    url:  http://www.mediawiki.org
+    
+  supported_service_10:
+    name: Textpattern
+    slug: textpattern
+    url:  http://textpattern.com/
+    download_url: http://yiid.googlecode.com/svn/textpattern/tags/1.0/yiid_like.txt     

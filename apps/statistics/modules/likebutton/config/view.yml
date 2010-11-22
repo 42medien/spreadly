@@ -1,0 +1,12 @@
+all:
+  layout: layout_configurator
+  
+indexSuccess:
+  components:
+    content_top: [likebutton, description]
+    content_sub: [likebutton, configurator]
+    
+webmastersSuccess:
+  layout: layout_twocol
+  components:
+    content_sub: [likebutton, configurator_desc]
