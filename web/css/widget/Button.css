@@ -121,6 +121,25 @@ ul li{margin:0;padding:0;list-style: none;float:left;}
 
 
 /**
+ * @section Deal Button
+ */
+.deal_button{
+  border-bottom-right-radius: 3px;
+  -moz-border-radius-bottomright: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  border-top-left-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -webkit-border-top-left-radius: 3px;
+  height:21px;
+  line-height: 21px;
+  padding: 0px 7px;
+  position: relative;
+  float:left;
+  border: 1px solid #ddd;
+}
+
+
+/**
  *   @section Friends
  */
 #friends{margin: 5px 0 0 0;}

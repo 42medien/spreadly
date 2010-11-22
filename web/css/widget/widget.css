@@ -3,13 +3,14 @@
  * @subsection layout
  */
 .normal_list, #normal_box #agb_text ul, #language_selection ul{list-style-type:none;margin:0;padding:0;}
-#container, #content_main, #spread_description, #normal_box, #yiid_help_text, #cancel_action, #login_box, #user-line{margin: 0 auto;}
+#container, #content_main, #spread_description, #normal_box, #yiid_help_text, #cancel_action, #login_box, #user-line, #deal_content_main{margin: 0 auto;}
 #container{width: 580px; /*height: 480px;*/}
 #branding{width: 500px;height: 35px;padding: 0 0 20px 0;}
 #nav_main{width: 580px; height: 25px;}
 #nav_main_box{width: 137px;height:25px;float:right;}
 #content{width:580px;padding-top:10px;}
 #content_main{width:540px;padding:10px 20px;}
+#deal_content_main{width:400px;padding:10px 20px;}
 #spread_description{width:500px;}
 #normal_box, #yiid_help_text{width: 500px;}
 #yiid_help_text{padding:20px 0 5px 0;}
@@ -172,6 +173,63 @@ a.question_link{text-decoration: underline !important;}
 #agb_text a, #agb_text p{line-height: 16px;}
 #user-line h1{font-size: 16px;}
 
+/***************popup******************/
+
+.deal-box {
+text-align:center;
+padding-left:10px;
+text-align:center;
+width:410px;
+}
+
+.deal-box .content-box {
+margin-left:0;
+margin-top:5px;
+}
+.content-box {
+-moz-border-radius:1em 1em 1em 1em;
+background-color:#FAFAFA;
+border:2px solid #CDCDCD;
+display:block;
+margin:10px;
+overflow:hidden;
+padding:1em;
+}
+
+.deal-box .content-box .content-box {
+-moz-border-radius:0 0 0 0;
+border:1px dashed #000000;
+margin-left:10px;
+}
+
+.deal-box .content-box {
+margin-left:0;
+margin-top:5px;
+}
+
+.yellow {
+background-color:#FBFF87;
+}
+
+.meta-label {
+  font-size:10px;
+}
+
+.coupon-summary  {
+	font-weight:bold;
+	margin-bottom:10px;
+}
+
+.coupon-description  {
+  border:1px solid #000000;
+  padding: 5px;
+}
+
+.coupon-foot {
+font-size:10px;
+margin-bottom:5px;
+margin-top:10px;
+}
 
 
 /* The core of clearfix */

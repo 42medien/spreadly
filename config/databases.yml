@@ -1,17 +1,41 @@
-# You can find more information about this file on the symfony website:
-# http://www.symfony-project.org/reference/1_4/en/07-Databases
-
-all:  
+##
+# Prod settings
+#
+prod:
   translation:
     class: sfDoctrineDatabase
     param:
-      dsn:        mysql:host=localhost;dbname=yiid_i18n 
-      username:   yiid_i18n 
+      dsn:        mysql:dbname=yiidit_i18n;host=donkeykong
+      username:   yiidit_i18n
       password:   fdsmolds32dfs
       attributes:
         default_table_collate: utf8_general_ci
         default_table_charset: utf8
-        
+
+  doctrine:
+    class: sfDoctrineDatabase
+    param:
+      dsn:        mysql:dbname=yiidit;host=donkeykong
+      username:   yiidit
+      password:   fdsmolds32dfs
+      attributes:
+        default_table_collate: utf8_general_ci
+        default_table_charset: utf8
+
+##
+# Local settings
+#
+dev:
+  translation:
+    class: sfDoctrineDatabase
+    param:
+      dsn:        mysql:host=localhost;dbname=yiid_i18n
+      username:   yiid_i18n
+      password:   fdsmolds32dfs
+      attributes:
+        default_table_collate: utf8_general_ci
+        default_table_charset: utf8
+
   doctrine:
     class: sfDoctrineDatabase
     param:
@@ -20,4 +44,28 @@ all:
       password:   fdsmolds32dfs
       attributes:
         default_table_collate: utf8_unicode_ci
+        default_table_charset: utf8
+
+##
+# Dev settings
+#
+staging:
+  translation:
+    class: sfDoctrineDatabase
+    param:
+      dsn:        mysql:dbname=yiid_i18n;host=donkeykong
+      username:   yiid_i18n
+      password:   fdsmolds32dfs
+      attributes:
+        default_table_collate: utf8_general_ci
+        default_table_charset: utf8
+
+  doctrine:
+    class: sfDoctrineDatabase
+    param:
+      dsn:        mysql:dbname=communipedia_dev;host=donkeykong
+      username:   communipedia_dev
+      password:   fdsmolds32dfs
+      attributes:
+        default_table_collate: utf8_general_ci
         default_table_charset: utf8

@@ -7,6 +7,7 @@ header('P3P: CP="DSP LAW"');
 header('Pragma: no-cache');
 header('Cache-Control: private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
 
+require_once('inc/DealUtils.php');
 require_once('inc/WidgetUtils.php');
 require_once('inc/i18n.php');
 if (isset($_GET['url']) && !empty($_GET['url'])) {
@@ -41,6 +42,7 @@ $pPhoto = urldecode($_GET['photo']);
 $pDescription = urldecode($_GET['description']);
 
 $lClickback = ClickBackHelper::extractClickback($pUrl, $_SERVER['HTTP_REFERER']);
+$lActiveDeal = DealUtils::dealActive($pUrl);
 
 $pUserId = MongoSessionPeer::extractUserIdFromSession(LikeSettings::SF_SESSION_COOKIE);
 $lSocialObjectArray = SocialObjectPeer::getDataForUrl($pUrl);
@@ -178,7 +180,11 @@ StatsHelper::trackPageImpression($pUrl, $lClickback, $pUserId);
 	  <div id="additional_text_area_like" class="left big_space_to_left" style="color: <?php echo $lFontcolor; ?>">
 	    <?php if($lSocialObjectArray['urlerror']) { ?>
 	      <p id="error-area" style="color: red; font-weight: bold; font-size: 11px;">INVALID URL: URL param must be valid or empty</p>
-	    <?php } else { ?>
+		  <?php } elseif($lActiveDeal) { ?>
+		    <div class="deal_button light_bg_118">
+		      <?php echo $lActiveDeal['button_label'] ?>
+		    </div>
+		  <?php } else { ?>
 	      <p id="info-liked">
 	        <span id="you-like" <?php if($lIsUsed != 1) { ?>style="display: none;" <?php } ?>><?php echo __('POS_TEXT_VALUE_1', $pType); ?></span>
 	        <span class="counter"><?php echo $lSocialObjectArray['l_cnt']; ?></span><?php echo __('POS_TEXT_VALUE_2', $pType); ?>

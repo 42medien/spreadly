@@ -44,7 +44,7 @@
   </fileset>
 
   <target name="copy_factory_config">
-    
+
     <exec command="mkdir cache" />
     <exec command="mkdir log" />
     <copy file="data/deployment/factories_${env}.yml" tofile="apps/engineroom/config/factories.yml" overwrite="true"></copy>
@@ -60,23 +60,12 @@
     </copy>
   </target>
 
-
-
-
   <target name="buildlocal">
     <copy todir="./web" overwrite="true">
       <fileset refid="frontend_controllers" />
     </copy>
 
-    <copy todir="./config" overwrite="true">
-      <fileset refid="local_config" />
-    </copy>
-
-
-    <phingcall target="copy_factory_config">
-      <property name="env" value="local"/>
-    </phingcall>
-
+ 
     <exec command="rm -rf lib/model/doctrine/base" />
     <exec command="rm -rf lib/filter/doctrine/base" />
 
@@ -90,7 +79,7 @@
     <exec command="chmod -R 777 ./web/uploads" />
 
     <exec command="php batch/cleanup/mongoDbDatabaseCleanup.php" checkReturn="true" />
-    <exec command="./symfony doctrine:build --all --no-confirmation --and-load" checkReturn="true"/>
+    <exec command="./symfony doctrine:build --all --env=dev --no-confirmation --and-load" checkReturn="true"/>
 
     <exec command="php data/fixtures/initializeMongoObjects.php" checkReturn="true"/>
 
@@ -98,12 +87,6 @@
     <phingcall target="buildjs"></phingcall>
     <phingcall target="buildcss"></phingcall>
   </target>
-
-
-
-
-
-
 
   <target name="builddev">
     <!-- check for db.lock -->
@@ -118,15 +101,9 @@
       <fileset refid="frontend_controllers" />
     </copy>
 
-    <copy todir="./config" overwrite="true">
-      <fileset refid="dev_config" />
-    </copy>
-
     <phingcall target="copy_factory_config">
       <property name="env" value="dev"/>
     </phingcall>
-
-
 
     <exec command="rm -rf lib/model/doctrine/base" />
     <exec command="rm -rf lib/filter/doctrine/base" />
@@ -143,8 +120,6 @@
     <phingcall target="buildcss"></phingcall>
   </target>
 
-
-
   <target name="buildlive">
     <!-- check for db.lock -->
     <if>
@@ -155,10 +130,6 @@
     </if>
     <exec command="touch db.lock" />
 
-    <copy todir="./web" overwrite="true">
-      <fileset refid="frontend_controllers" />
-    </copy>
-
     <copy todir="./config" overwrite="true">
       <fileset refid="live_config" />
     </copy>
@@ -167,13 +138,12 @@
       <property name="env" value="live"/>
     </phingcall>
 
-
     <exec command="rm -rf lib/model/doctrine/base" />
     <exec command="rm -rf lib/filter/doctrine/base" />
     <exec command="rm -rf lib/form/doctrine/base" />
     <exec command="rm -rf cache/*" />
 
-    <exec command="./symfony doctrine:build --all-classes" checkReturn="true"/>
+    <exec command="./symfony doctrine:build --all-classes --env=prod" checkReturn="true"/>
 
     <phingcall target="buildjs"></phingcall>
     <phingcall target="buildcss"></phingcall>
@@ -206,7 +176,7 @@
     <exec command="rm -rf lib/form/doctrine/base" />
     <exec command="rm -rf cache/*" />
 
-    <exec command="./symfony doctrine:build --all-classes" checkReturn="true"/>
+    <exec command="./symfony doctrine:build --all-classes --env=dev" checkReturn="true"/>
 
     <phingcall target="buildjs"></phingcall>
     <phingcall target="buildcss"></phingcall>
@@ -217,7 +187,7 @@
 
 
   <target name="buildwidget">
-    <input propertyname="env" message="choose the environment (local|dev|live|ci)" promptChar=":" defaultValue="local" />
+    <input propertyname="env" message="choose the environment (dev|staging|prod|ci)" promptChar=":" defaultValue="dev" />
     <phingcall target="runwidgettasks">
       <property name="env" value="${env}"/>
     </phingcall>
@@ -255,15 +225,9 @@
       <fileset refid="widget_controllers" />
     </copy>
 
-    <copy todir="./config" overwrite="true">
-      <fileset refid="${env}_config" />
-    </copy>
+    
 
-    <phingcall target="copy_factory_config">
-      <property name="env" value="${env}"/>
-    </phingcall>
-
-
+  
     <copy file="data/deployment/widget_${env}_config.inc.php" tofile="web/w/like/inc/config.inc.php" overwrite="true">
       <filterchain>
         <expandproperties />

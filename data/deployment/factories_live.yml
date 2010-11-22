@@ -1,24 +1,6 @@
 # You can find more information about this file on the symfony website:
 # http://www.symfony-project.org/reference/1_4/en/05-Factories
 
-prod:
-  logger:
-    class: sfAggregateLogger
-    param:
-      level: err
-      loggers:
-        sf_web_debug:
-          class: sfWebDebugLogger
-          param:
-            level: err
-            condition:       %SF_WEB_DEBUG%
-            xdebug_logging:  false
-            web_debug_class: sfWebDebug
-        sf_file_debug:
-          class: sfFileLogger
-          param:
-            level: err
-            file: %SF_LOG_DIR%/%SF_APP%_%SF_ENVIRONMENT%.log
 
 test:
   storage:
@@ -53,39 +35,7 @@ all:
       cache_key_use_vary_headers: true
       cache_key_use_host_name:    true
 
-  i18n:
-    class: sfI18N
-    param:
-      source:          pimpedMySQL
-      debug:           false
-      default_culture: de
-      database:        mysql://yiidit_i18n:fdsmolds32dfs@donkeykong/yiidit_i18n
-      cache:
-        class: sfMemcacheCache
-        param:
-          lifetime:                  86400
-          prefix:                    yiidit_i18n
-          servers:
-            default:
-              host: 127.0.0.1     #aws
-              port: 11211
 
-  storage:
-    class: sfMongoSessionStorage
-    param:
-      db_table:        session
-      db_id_col:       sess_id
-      db_time_col:     sess_time
-      db_data_col:     sess_data
-      host:            donkeykong
-      port:            27017
-      db_name:         yiid
-      collection_name:   session    
-      session_name:       yiid
-      session_cookie_domain: .yiid.com
-      session_cookie_lifetime: 17776000
 
-  user:
-    class: myUser
-    param:
-      timeout:         17776000
+
+

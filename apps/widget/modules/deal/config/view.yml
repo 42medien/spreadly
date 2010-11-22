@@ -1,0 +1,8 @@
+all:
+  stylesheets:
+  javascripts:
+  layout: layout_deal 
+    
+indexSuccess:
+  components:
+    content_supp: [popup, welcome_user]

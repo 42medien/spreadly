@@ -1,25 +1,5 @@
 # You can find more information about this file on the symfony website:
-# http://www.symfony-project.org/reference/1_4/en/05-Factories
-
-prod:
-  logger:
-    class: sfAggregateLogger
-    param:
-      level: debug
-      loggers:
-        sf_web_debug:
-          class: sfWebDebugLogger
-          param:
-            level: debug
-            condition:       %SF_WEB_DEBUG%
-            xdebug_logging:  false
-            web_debug_class: sfWebDebug
-        sf_file_debug:
-          class: sfFileLogger
-          param:
-            level: debug
-            file: %SF_LOG_DIR%/%SF_APP%_%SF_ENVIRONMENT%.log
-
+# 
 test:
   storage:
     class: sfSessionTestStorage
@@ -54,24 +34,7 @@ all:
       cache_key_use_vary_headers: true
       cache_key_use_host_name:    true
 
-  i18n:
-    class: sfI18N
-    param:
-      source:               pimpedMySQL
-      debug:                true
-      default_culture:      de
-      untranslated_prefix:  "<font color='red'>"
-      untranslated_suffix:  "</font>"
-      database:              mysql://yiid_i18n:fdsmolds32dfs@localhost/yiid_i18n
-      cache:
-        class:               sfNoCache
-        param:
-          lifetime:                  86400
-          prefix:                    yiid_i18n
-          servers:
-            default:
-              host: 127.0.0.1     #aws
-              port: 11211
+ 
 
   storage:
     class: sfMongoSessionStorage

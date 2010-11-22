@@ -3,8 +3,9 @@
 
 prod:
   .settings:
-    no_script_name:         false
+    no_script_name:         true
     logging_enabled:        false
+
 
 dev:
   .settings:
@@ -14,6 +15,11 @@ dev:
     no_script_name:         false
     etag:                   false
 
+staging:
+  .settings:
+    no_script_name:         true
+    logging_enabled:        false
+    
 test:
   .settings:
     error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_NOTICE)."\n" ?>

@@ -6,6 +6,7 @@ prod:
     no_script_name:         true
     logging_enabled:        false
 
+
 dev:
   .settings:
     error_reporting:        <?php echo (E_ALL | E_STRICT)."\n" ?>
@@ -13,6 +14,11 @@ dev:
     cache:                  false
     no_script_name:         false
     etag:                   false
+
+staging:
+  .settings:
+    no_script_name:         true
+    logging_enabled:        false
 
 test:
   .settings:

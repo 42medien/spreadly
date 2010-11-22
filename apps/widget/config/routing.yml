@@ -53,6 +53,34 @@ static_signout:
   param:  { module: auth, action: signout, widgetcontext: static }
 # end auth
 
+
+# deal auth
+deal_add_service:
+  url:    /deal/add_service
+  param:  { module: auth, action: add_service, widgetcontext: deal }
+
+deal_signin:
+  url:    /deal/signin
+  param:  { module: auth, action: signin, widgetcontext: deal }
+
+deal_confirm_signin:
+  url:    /deal/confirm_signin/*
+  param:  { module: auth, action: confirm_signin, widgetcontext: deal }
+
+deal_complete_signin:
+  url:    /deal/complete_signin/*
+  param:  { module: auth, action: complete_signin, widgetcontext: v }
+
+deal_signinto:
+  url:   /deal/signinto/*
+  param: { module: auth, action: signinto, widgetcontext: deal }
+
+deal_signout:
+  url:    /deal/signout
+  param:  { module: auth, action: signout, widgetcontext: deal }
+# end auth
+
+
 load_friends:
   url:   /widget/load_friends/*
   param: {module: widget, action: load_friends }
