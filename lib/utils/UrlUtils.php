@@ -58,11 +58,15 @@ class UrlUtils {
    * @param $pUrl
    * @return boolean
    */
-  public static function checkUrlWithCurl($pUrl) {
+  public static function checkUrlWithCurl($pUrl, $pFollowLocation = false) {
     $ch = curl_init( $pUrl );
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
     curl_setopt($ch, CURLOPT_HEADER, 0);
     curl_setopt($ch, CURLOPT_NOBODY, 1);
+    if ($pFollowLocation) {
+      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    }
+    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.1.2) Gecko/20090803 Ubuntu/9.04 (jaunty) Shiretoko/3.5.2");
     curl_exec($ch);
 
     $lStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -94,8 +98,8 @@ class UrlUtils {
       curl_setopt_array($lCh, $lOpts);
       curl_setopt($lCh, CURLOPT_SSL_VERIFYPEER, false);
       curl_setopt($lCh, CURLOPT_SSL_VERIFYHOST, 2);
-      curl_setopt($lCh, CURLOPT_FOLLOWLOCATION, true);
-
+      curl_setopt($lCh, CURLOPT_FOLLOWLOCATION, 1);
+      curl_setopt($lCh, CURLOPT_USERAGENT, "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.1.2) Gecko/20090803 Ubuntu/9.04 (jaunty) Shiretoko/3.5.2");
 
       if ($pHttpMethod == self::HTTP_POST) {
         curl_setopt($lCh, CURLOPT_POST, 1);
@@ -109,7 +113,6 @@ class UrlUtils {
 
       $lContent = curl_exec( $lCh );
       $lStatus  = curl_getinfo( $lCh, CURLINFO_HTTP_CODE );
-
       curl_close( $lCh );
 
       if ($lStatus < 400) {
@@ -184,7 +187,7 @@ class UrlUtils {
           \d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}    # a IP address
         )
         (:[0-9]+)?                              # a port (optional)
-        (/?|\?\S+|/\S+)                         # a /, nothing, a "?" with something or a / with something
+        (/?|\?\S+|/\S+)                         # a /, nothing or a / with something
       $~ix';
 
     return preg_match($lPattern, (string)$pUrl);
@@ -454,7 +457,7 @@ class UrlUtils {
    * @return string the expanded url
    */
   public static function shortUrlExpander($pUrl) {
-    if (!self::checkUrlWithCurl($pUrl)) {
+    if (!self::checkUrlAvailability($pUrl)) {
       return false;
     }
     return self::get_final_url($pUrl);
@@ -637,6 +640,7 @@ class UrlUtils {
   public static function cleanupHostAndUri($pUrl) {
     $pUrl = urldecode($pUrl);
     $pUrl = str_replace(" ", "+", $pUrl);
+    //$pUrl = self::skipTrailingSlash($pUrl);
     $parameterList = parse_url($pUrl);
     $pQueryString = '';
     $lKeysToRemove = sfConfig::get('app_settings_filtered_parameters');

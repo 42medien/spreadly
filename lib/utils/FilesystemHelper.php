@@ -80,7 +80,7 @@ class FilesystemHelper {
  * @param array $pExclusionFile
  * @return array $lFiles
  */
-function retrieveFilesInDir($pDir, $pExclusionDir = array(), $pExclusionFile = array(), $pType = '.js') {
+public static function retrieveFilesInDir($pDir, $pExclusionDir = array(), $pExclusionFile = array(), $pType = '.js') {
   $lFiles = array();
   //we get an array of files and directories that ar in the given directories
   $lDirs = scandir($pDir);
