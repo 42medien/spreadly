@@ -294,6 +294,13 @@ error_box_500 p{
           height:47px;
           border: 1px #68bc4f solid;
         }
+        .ad_new_stream_item .sharing_friend_outer{
+          width:47px;
+          height:37px;
+        }
+        .ad_new_stream_item .sharing_friend_inner{
+          top: -38px;
+        }
         .user_like, .user_dislike{
           width: 20px;
           height: 7px;

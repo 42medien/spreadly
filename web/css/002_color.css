@@ -130,15 +130,17 @@ span.url,
 li.item_active{background: #ecf6e9 url("/img/global/item_active_bg.png") right bottom no-repeat;}
 #stream_left_bottom li.item_active .so_comment{background-color: #fff;}
 .new_stream li.item_active, .new_stream li:hover, .hot_stream li:hover, .not_stream li:hover{border-color: #D7D7D7 #68BC4F #68BC4F #D7D7D7;}
+
+.new_stream li.ad_new_stream_item {border-color:#D7D7D7 #FFD324 #FFD324 #D7D7D7; border-width: 2px;border-style: solid; background-color: #FFF6BF;}
+.new_stream li.ad_new_stream_item {}
+
 #new_shares #main_stream_pager:hover{
   border: none;
 }
 .whats_hot_stream_item{border: 2px solid #e6e3e3;border-right: 2px solid #d7d7d7;border-bottom: 2px solid #d7d7d7;background: transparent url("/img/sprites/sprite_repeat_y.png") -4049px 0 repeat-y;}
-.ad_stream_item { background: #69BD50; color: #fff; }
+.ad_stream_item { background-color: #FFF6BF; }
 .ad_stream_item .whats_hot_stream_item, .ad_stream_item .whats_hot_stream_icon { background: transparent; }
-.ad_stream_item .main_text, .ad_stream_item .text_important, .ad_stream_item .url { color: #fff; }
-.ad_stream_item a { color: #ccc; }
-li.item_active.ad_stream_item { background-color: #6A6B6A; }
+/*li.item_active.ad_stream_item { background-color: #ffee8c; }*/
 li.item_active .whats_hot_stream_item,
 .hot_stream li:hover .whats_hot_stream_item,
 .not_stream li:hover .whats_hot_stream_item{

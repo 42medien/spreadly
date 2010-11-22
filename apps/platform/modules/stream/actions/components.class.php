@@ -31,5 +31,9 @@ class streamComponents extends sfComponents
   public function executeInline_ad() {
     $this->pAd = SocialAdvertisementTable::getRandomAd();
   }
+
+  public function executeInline_ad_new() {
+    $this->pAd = SocialAdvertisementTable::getRandomAd();
+  }
 }
 ?>
