@@ -305,7 +305,7 @@ var DynStyleWidgets = {
     debug.log("[DynStyleWidgets][updateWidget]");         
     //if there are changes in the form or the user clicked the generate-button: send a request to get the changed widget
     var options = {
-        url:       '/statistics_dev.php/likebutton/get_button',
+        url:       '/likebutton/get_button',
         data: { ei_kcuf: new Date().getTime() },
         type:      'GET',
         dataType:  'json',
