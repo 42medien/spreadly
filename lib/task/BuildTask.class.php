@@ -71,10 +71,10 @@ EOF;
       throw new sfException(sprintf('Module "%s" does not exist.', $env));
     }
 
-    // clean up models folder
-    $this->runTask('doctrine:clean', array("--no-confirmation"));
     // run doctrine build task
     $this->runTask('doctrine:build', $args, array('env' => $opts['env']));
+    // clean up models folder
+    $this->runTask('doctrine:clean', array("--no-confirmation"));
     $this->runTask('cc');
   }
 }
