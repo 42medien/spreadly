@@ -26,6 +26,9 @@ EOF;
   protected function execute($arguments = array(), $options = array())
   {
     $configuration = ProjectConfiguration::getApplicationConfiguration($options['application'], $options['env'], true);
+
+    $this->getFilesystem()->mkdirs('web/css/include');
+
     // the path to the directory we want to combine and minify
     $lDir = dirname(__FILE__).'/../../web/css';
 
@@ -35,7 +38,7 @@ EOF;
     //initialize the combine and minify-process
     $this->writeWholeFile($lDir,$lFileName,$lFileMinName);
   }
-  
+
   /**
    * Initializes the combine and minify-processes
    *

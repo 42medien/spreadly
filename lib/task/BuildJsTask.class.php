@@ -27,6 +27,8 @@ EOF;
   {
     $configuration = ProjectConfiguration::getApplicationConfiguration($options['application'], $options['env'], true);
 
+    $this->getFilesystem()->mkdirs('web/js/100_main/include');
+
     // the path to the directory we want to combine and minify
     $lDir = dirname(__FILE__).'/../../web/js';
 
