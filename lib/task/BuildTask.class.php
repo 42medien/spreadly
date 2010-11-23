@@ -72,7 +72,7 @@ EOF;
     }
 
     // clean up models folder
-    //$this->runTask('doctrine:clean', array("--no-confirmation"));
+    $this->runTask('doctrine:clean', array("--no-confirmation"));
     // run doctrine build task
     $this->runTask('doctrine:build', $args, array('env' => $opts['env']));
     $this->runTask('cc');
