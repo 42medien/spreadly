@@ -10,7 +10,9 @@ class ProjectConfiguration extends sfProjectConfiguration {
       'sfDoctrinePlugin',
       'yiidPlugin',
       'sfFormExtraPlugin',
-      'sfImageTransformPlugin'
+      'sfImageTransformPlugin',
+      'sfDoctrineGuardPlugin',
+      'sfForkedDoctrineApplyPlugin'
     ));
 
   }
