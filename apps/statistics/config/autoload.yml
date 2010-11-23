@@ -1,4 +1,0 @@
-autoload:
-  plugin_libs:
-    path:      %SF_PLUGINS_DIR%/*/lib
-    recursive: on
