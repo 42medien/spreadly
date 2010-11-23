@@ -14,7 +14,6 @@ class ProjectConfiguration extends sfProjectConfiguration {
       'sfDoctrineGuardPlugin',
       'sfForkedDoctrineApplyPlugin'
     ));
-
   }
 
   public function configureDoctrine(Doctrine_Manager $manager) {
