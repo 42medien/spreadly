@@ -7,7 +7,7 @@ prod:
     url_short:         'http://yiid.com'
     host:              'yiid.com'
     widgets_url:       'http://widgets.yiid.com'
-    environment:       'live'
+    environment:       'prod'
     dev:               0
     pager:             20
 
@@ -59,7 +59,7 @@ dev:
     url_short:        'http://yiid.local'
     widgets_url:      'http://widgets.yiid.local'
     host:             'yiid.local'
-    environment:      'local'
+    environment:      'dev'
     dev:              1
     pager:            20
 
@@ -110,7 +110,7 @@ staging:
     url_short:        'http://yiiddev.com'
     widgets_url:      'http://widgets.yiiddev.com'
     host:             'yiiddev.com'
-    environment:      'dev'
+    environment:      'staging'
     dev:              1
     pager:            20
 

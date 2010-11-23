@@ -94,7 +94,7 @@ class YiidActivityTable extends Doctrine_Table
 
     // save yiid activity
     $lActivity = self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb, $pClickback);
-    if (sfConfig::get('app_settings_environment') != 'local') {
+    if (sfConfig::get('app_settings_environment') != 'dev') {
       // send messages to all services
       foreach ($lOnlineIdentitys as $lIdentity) {
         $parameterList = parse_url($pUrl);
