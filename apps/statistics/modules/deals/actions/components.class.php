@@ -42,5 +42,12 @@ class dealsComponents extends sfComponents {
 	    ));
     }
   }
+
+  public function executeGet_code_form($request) {
+    $lDealId = $this->pDealId;
+
+    $lDeal = DealTable::getInstance()->find($lDealId);
+    $this->pForm = new DealForm($lDeal);
+  }
 }
 ?>

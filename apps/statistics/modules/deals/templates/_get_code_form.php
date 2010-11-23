@@ -1,3 +1,6 @@
+<form action="<?php echo url_for('deals/save'); ?>" method="post" id="save_deal_form" name="save_deal_form">
+<?php echo $pForm['id']->render();?>
+<?php echo $pForm['_csrf_token']->render(); ?>
 <div class="content-box bg-white">
 	<div class="clearfix">
 		<div class="left" id="deal-teaser-img">
@@ -11,13 +14,13 @@
 	<div class="content-col-twothird left clearfix">
 		<div class="content-box bg-white">
 		  <div class="form-row">
-				<input type="radio" name="getdealcode" value="nocode"> <?php echo __('Have you already integrated the default yiid button in all the places you wish your deal to show up? You\'re all set!'); ?>
+				<input type="radio" name="getdealcode" id="radio-has-code" value="false" checked="checked"> <?php echo __('Have you already integrated the default yiid button in all the places you wish your deal to show up? You\'re all set!'); ?>
 			</div>
 			<div class="form-row">
-				<input type="radio" name="getdealcode" value="getcode"> <?php echo __('You don\'t have integrated any button codes in your site yet? Please click here and copy & paste the following code to your site:'); ?>
+				<input type="radio" name="getdealcode" id="radio-no-code" value="true"> <?php echo __('You don\'t have integrated any button codes in your site yet? Please click here and copy & paste the following code to your site:'); ?>
 			</div>
 		</div>
-		<div class="content-box bg-white">
+		<div class="content-box bg-white hide" id="no-code-box">
 			<h3><?php echo __('Copy that code!'); ?></h3>
 			<div class="form-row">
 				<textarea id="deal_button_code"><?php include_partial('likebutton/widget_like', array('pUrl' => '', 'pLang' => '', 'pType' => 'like', 'pFontColor' => '#000', 'pShort' => 0, 'pSocial' => 0, 'pWidth' => '420', 'pHeight' => '25')); ?></textarea>
@@ -77,9 +80,6 @@
 		<input type="submit" class="button positive" id="save-deal-button" value="<?php echo __('Save', null, 'widget');?>" />
 	</div>
 
-
-
-
 	<div class="content-col-third left clearfix">
 		<div class="content-box bg-white">
 			  <div class="clearfix preview-deal-box" id="preview-deal-button">
@@ -119,3 +119,4 @@
 
 	</div>
 </div>
+</form>

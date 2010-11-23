@@ -14,7 +14,7 @@
 		<link rel="stylesheet" type="text/css" href="/js/100_main/vendor/jquery_ui_datepicker/smothness/jquery_ui_datepicker.css" />
     <link rel="stylesheet/less" href="<?php echo sfConfig::get("app_settings_url");?>/less/main.less" type="text/css" />
 
-    <script type="text/javascript" src="/js/100_main/include/statistics-<?php echo sfConfig::get('app_release_name') ?>.min.js"></script>
+    <script type="text/javascript" src="/js/100_main/include/statistics-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
     <script type="text/javascript" src="/js/100_main/global/106_jquery.mirrorValue.js"></script>
     <script type="text/javascript" src="/js/100_main/global/jquery.limit-1.2.js"></script>
     <script type="text/javascript" src="/js/statistics/deals/Navigation.js" type="text/javascript"></script>

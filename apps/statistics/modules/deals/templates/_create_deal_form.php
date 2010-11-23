@@ -1,5 +1,5 @@
 <?php //var_dump($pForm->getErrorSchema()->getMessage());die(); ?>
-<form action="<?php echo url_for('deals/create'); ?>" method="post" id="deal_form" name="dealform">
+<form action="<?php echo url_for('deals/proceed'); ?>" method="post" id="deal_form" name="deal_form">
 <?php echo $pForm['id']->render();?>
 <?php //echo $pForm['DomainProfile']['id']->render();?>
 <?php echo $pForm['_csrf_token']->render(); ?>
@@ -121,6 +121,7 @@
         </div>
     </div>
   </div>
-	<input type="submit" class="button positive" id="save-deal-button" value="<?php echo __('Save', null, 'widget');?>" />
+	<?php //echo $pForm['tos_accepted']->renderError();?>
+	<input type="submit" class="button positive" id="proceed-deal-button" value="<?php echo __('Save', null, 'widget');?>" />
 </div>
 </form>

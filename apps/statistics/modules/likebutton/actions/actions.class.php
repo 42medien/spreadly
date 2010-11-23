@@ -165,6 +165,7 @@ class likebuttonActions extends sfActions
     $this->getResponse()->setContentType('application/json');
     $lServiceId = $request->getParameter('service', null);
 
+    $lService = null;
     if($lServiceId) {
       $lService = SupportedServicesTable::getInstance()->find($lServiceId);
     }
