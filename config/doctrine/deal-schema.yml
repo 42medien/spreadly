@@ -1,0 +1,69 @@
+Deal:
+  actAs:
+    [Timestampable]
+  columns:
+    domain_profile_id:
+      type: integer
+      notnull: true
+    state:
+      type: enum
+      length: 10
+      default: submitted
+      values: ['submitted', 'approved', 'denied', 'deleted', 'paused']
+    type:
+      type: enum
+      length: 10
+      default: commercial
+      values: ['commercial', 'charity']
+    coupon_type:
+      type: enum
+      length: 10
+      default: single
+      values: ['single', 'multiple']
+    coupon_quantity:
+      type: integer
+      default: 0
+    start_date:
+      type: datetime
+    end_date:
+      type: datetime
+    
+    summary:
+      type: string(40)
+    description:
+      type: string(80)
+    button_wording:
+      type: string(35)
+      
+    terms_of_deal: 
+      type: string(512)
+    redeem_url:
+      type: string(512)
+    tos_accepted:
+      type: boolean
+      default: false 
+          
+  relations:
+    DomainProfile:
+      type: one
+      local: domain_profile_id
+      foreign: id
+      foreignAlias: Deals
+    Coupons:
+      type: many
+      local: id
+      foreign: deal_id
+      
+Coupon:
+  actAs:
+    [Timestampable]
+  columns:
+    deal_id:
+      type: integer
+      notnull: true
+    code:
+      type: string(255)
+
+  relations:
+    Deal:
+      foreignAlias: Coupons

@@ -22,7 +22,7 @@ class dealsActions extends sfActions
   public function executeProceed(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
     $lParams = $request->getParameter('deal');
-    $lParams['domain_profile_id'] = $lParams['DomainProfile']['id'];
+    //$lParams['domain_profile_id'] = $lParams['DomainProfile']['id'];
     //var_dump($lParams);die();
 
     if($lParams['id']){

@@ -31,6 +31,12 @@ DomainProfile:
     sfGuardUser:
       foreignAlias: DomainProfiles
       onDelete:     CASCADE
+    Deals:
+      class: Deal
+      type: many
+      local: id
+      foreign: domain_profile_id
+      onDelete: CASCADE
 
 SupportedServices:
   actAs: [Timestampable]
@@ -46,45 +52,6 @@ SupportedServices:
     download_url:
       type: string(255)
 
-
-
-Deal:
-  actAs:
-    [Timestampable]
-  columns:
-    domain_profile_id:
-      type: integer
-      notnull: true
-    deal_status:       # approved, declined.. 
-      type:  integer(4)
-      default: 0
-    deal_type:         # commercial or charity
-      type:  integer(4)
-      default: 0
-    start_date:
-      type: datetime
-    end_date:
-      type: datetime
-    
-    summary:
-      type: string(40)
-    description:
-      type: string(80)
-    button_wording:
-      type: string(35)
-      
-    terms_of_deal: 
-      type: string(512)
-    quantity_limit:
-      type: integer
-    quantity_reached:
-      type: integer
-      default: 0
-    redeem_url:
-      type: string(512)
-    tos_accepted:
-      type: boolean
-      default: false 
       
 Visit:
   columns:

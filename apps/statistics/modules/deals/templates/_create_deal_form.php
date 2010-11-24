@@ -5,6 +5,9 @@
 <?php echo $pForm['_csrf_token']->render(); ?>
 
 <div class="content-box bg-white">
+  
+  <?php echo $pForm->renderGlobalErrors();?>
+  
   <div class="left" id="deal-teaser-img">
     <?php echo image_tag('/img/global/42x42/promotion.png'); ?>
   </div>
@@ -94,10 +97,10 @@
     <div class="left">
     	<div class="form-row">
     		<div class="label-box">
-    			<?php echo $pForm['quantity_limit']->renderLabel();?>
-					<?php echo $pForm['quantity_limit']->renderError();?>
+    			<?php echo $pForm['coupon_quantity']->renderLabel();?>
+					<?php echo $pForm['coupon_quantity']->renderError();?>
 				</div>
-				<?php echo $pForm['quantity_limit']->render();?>
+				<?php echo $pForm['coupon_quantity']->render();?>
 			</div>
 			<div class="form-row">
     		<div class="label-box">

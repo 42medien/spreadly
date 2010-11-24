@@ -17,13 +17,12 @@ class DealForm extends BaseDealForm
 
     $this->setWidgets(array(
       'id'                => new sfWidgetFormInputHidden(),
-      'domain_profile_id' => new sfWidgetFormInputHidden(),
       'start_date'        => new sfWidgetFormInputText(),
       'end_date'          => new sfWidgetFormInputText(),
       'summary'           => new sfWidgetFormInputText(),
       'description'       => new sfWidgetFormInputText(),
       'button_wording'    => new sfWidgetFormInputText(),
-      'quantity_limit'    => new sfWidgetFormInputText(),
+      'coupon_quantity'    => new sfWidgetFormInputText(),
       'redeem_url'        => new sfWidgetFormInputText(),
       'tos_accepted'      => new sfWidgetFormInputCheckbox(),
       'terms_of_deal'     => new sfWidgetFormInputText()
@@ -38,13 +37,12 @@ class DealForm extends BaseDealForm
 
     $this->setValidators(array(
       'id'                => new sfValidatorInteger(array('required' => false), array('required' => 'id required')),
-      'domain_profile_id' => new sfValidatorInteger(array('required' => true), array('required' => 'domain-profile-id required')),
       'start_date'        => new sfValidatorPass(array('required' => true), array('required' => 'startdate required')),
       'end_date'          => new sfValidatorPass(array('required' => true), array('required' => 'enddate required')),
       'summary'           => new sfValidatorString(array('max_length' => 40, 'required' => true), array('required' => 'summary required')),
       'description'       => new sfValidatorString(array('max_length' => 80, 'required' => true), array('required' => 'description required')),
       'button_wording'    => new sfValidatorString(array('max_length' => 35, 'required' => true), array('required' => 'button-wording required')),
-      'quantity_limit'    => new sfValidatorInteger(array('required' => false)),
+      'coupon_quantity'    => new sfValidatorInteger(array('required' => false)),
       'redeem_url'        => new sfValidatorString(array('max_length' => 512, 'required' => false)),
       'tos_accepted'      => new sfValidatorBoolean(array('required' => true), array('required' => 'tosaccepted required')),
       'terms_of_deal'     => new sfValidatorString(array('max_length' => 512, 'required' => true), array('required' => 'termsofdeal required'))
