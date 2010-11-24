@@ -68,9 +68,9 @@
 			<h3><?php echo __('Send code and description via email to your webmaster:'); ?></h3>
 			<div class="form-row">
 				<input type="text" id="admin-email" name="admin-email" value="<?php echo __('comma seperated list of emails'); ?>" class="left"/>
+				<input type="submit" class="button positive" value="<?php echo __('Save', null, 'widget');?>" />
 			</div>
 		</div>
-		<input type="submit" class="button positive" id="save-deal-button" value="<?php echo __('Save', null, 'widget');?>" />
 	</div>
 
 	<div class="content-col-third left clearfix">
