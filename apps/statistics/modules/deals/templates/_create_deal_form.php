@@ -121,6 +121,11 @@
         </div>
     </div>
   </div>
+  <div class="form-row" id="terms-of-use">
+		<?php echo $pForm['tos_accepted']->render(array('class' => 'left'));?>
+		<?php echo $pForm['tos_accepted']->renderLabel('tos_accepted', array('id' => 'tos_label'));?>
+		<?php echo $pForm['tos_accepted']->renderError();?>
+	</div>
 	<?php //echo $pForm['tos_accepted']->renderError();?>
 	<input type="submit" class="button positive" id="proceed-deal-button" value="<?php echo __('Save', null, 'widget');?>" />
 </div>

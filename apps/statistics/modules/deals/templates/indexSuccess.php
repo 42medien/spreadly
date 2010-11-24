@@ -6,6 +6,6 @@
     </ul>
   </div>
   <div id="create-deal-content">
-		<?php include_component('deals', 'get_code_form'); ?>
-		<?php //include_component('deals', 'create_deal_form')?>
+		<?php //include_component('deals', 'get_code_form'); ?>
+		<?php include_component('deals', 'create_deal_form')?>
 	</div>

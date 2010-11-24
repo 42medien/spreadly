@@ -1,6 +1,4 @@
 <form action="<?php echo url_for('deals/save'); ?>" method="post" id="save_deal_form" name="save_deal_form">
-<?php echo $pForm['id']->render();?>
-<?php echo $pForm['_csrf_token']->render(); ?>
 <div class="content-box bg-white">
 	<div class="clearfix">
 		<div class="left" id="deal-teaser-img">
@@ -71,11 +69,6 @@
 			<div class="form-row">
 				<input type="text" id="admin-email" name="admin-email" value="<?php echo __('comma seperated list of emails'); ?>" class="left"/>
 			</div>
-		</div>
-	  <div class="form-row" id="terms-of-use">
-			<?php echo $pForm['tos_accepted']->render(array('class' => 'left'));?>
-			<?php echo $pForm['tos_accepted']->renderLabel('tos_accepted', array('id' => 'tos_label'));?>
-			<?php echo $pForm['tos_accepted']->renderError();?>
 		</div>
 		<input type="submit" class="button positive" id="save-deal-button" value="<?php echo __('Save', null, 'widget');?>" />
 	</div>

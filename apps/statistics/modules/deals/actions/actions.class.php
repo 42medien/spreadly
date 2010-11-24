@@ -22,7 +22,6 @@ class dealsActions extends sfActions
   public function executeProceed(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
     $lParams = $request->getParameter('deal');
-    $lParams['tos_accepted'] = false;
     $lParams['domain_profile_id'] = $lParams['DomainProfile']['id'];
     //var_dump($lParams);die();
 
