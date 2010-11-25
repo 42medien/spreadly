@@ -62,7 +62,7 @@ class dealsActions extends sfActions
 
   }
 
-  public function executeProceed(sfWebRequest $request) {
+  public function executeSave(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
   	$lParams = $request->getPostParameters();
 
@@ -86,7 +86,7 @@ class dealsActions extends sfActions
     $this->pForm->bind($lParams);
     if($this->pForm->isValid()) {
 	    $lObject = $this->pForm->save();
-	    $lReturn['html'] = 'affe';
+	    $lReturn['html'] = $this->getPartial('deals/deal_in_process');
     } else {
     	$lReturn['html'] = $this->getPartial('deals/create_deal_form', array('pForm' => $this->pForm));
     }
@@ -94,40 +94,33 @@ class dealsActions extends sfActions
     return $this->renderText(json_encode($lReturn));
   }
 
-  public function executeSave($request){
-    $lParams = $request->getParameter('deal');
-    //$lParams['_csrf_token'] = $request->getParameter('_csrf_token');
-		$lParams['id'] = 6;
+  public function executeGet_create_form(sfWebRequest $request) {
+  	$this->getResponse()->setContentType('application/json');
+  	$lDealId = $request->getParameter('deal_id', null);
+    return $this->renderText(json_encode(
+    	array(
+    		'html' => $this->getComponent('deals', 'create_deal_form', array('pDealId' => $lDealId)),
+    		'initform' => true
+    	)
+    ));
+  }
 
-    if($lParams['id']){
-      $lDeal = DealTable::getInstance()->find($lParams['id']);
-      $this->pForm = new DealForm($lDeal);
-    }
-    $lDealArray = $lDeal->toArray();
-    $lDealArray['id'] = $lParams['id'];
-    $lDealArray['tos_accepted'] = (isset($lParams['tos_accepted']))?$lParams['tos_accepted']: null;
-    $lDealArray['_csrf_token'] = $lParams['_csrf_token'];
+  public function executeGet_create_index(sfWebRequest $request) {
+  	$this->getResponse()->setContentType('application/json');
+    return $this->renderText(json_encode(
+    	array(
+    		'html' => $this->getPartial('deals/create_index')
+    	)
+    ));
+  }
 
-    //array_merge($lDeal->toArray(), $lParams);
-    unset($lDealArray['deal_status']);
-    unset($lDealArray['deal_type']);
-    unset($lDealArray['quantity_reached']);
-    unset($lDealArray['created_at']);
-    unset($lDealArray['updated_at']);
+  public function executeGet_domain_profile(sfWebRequest $request) {
+  	$this->getResponse()->setContentType('application/json');
+  	$lProfileId = $request->getParameter('dpid');
+    $lDp = DomainProfileTable::getInstance()->find($lProfileId);
+    //if u need much more from the object return a ldp->toarray jsonfied to the js
+    $lReturn['imprint_url'] = $lDp->getImprintUrl();
 
-    $this->pForm->bind($lDealArray);
-    if($this->pForm->isValid()) {
-	    $lObject = $this->pForm->save();
-	    $lReturn['html'] = 'yiha..geschafft';
-    } else {
-			/*
-    	$lErrorString='';
-      foreach ($this->pForm->getErrorSchema()->getErrors() as $lError) {
-        $lErrorString = $lError->getMessage().'<br/>';
-      }*/
-      $lReturn['html'] = $this->getPartial('deals/get_code_form', array('pForm' => $this->pForm));
-      $lReturn['getdealcode'] = $request->getParameter('getdealcode');
-    }
     return $this->renderText(json_encode($lReturn));
   }
 }

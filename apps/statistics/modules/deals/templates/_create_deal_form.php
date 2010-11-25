@@ -4,7 +4,12 @@
 <?php //echo $pForm['DomainProfile']['id']->render();?>
 <?php echo $pForm['_csrf_token']->render(); ?>
 
-<div class="content-box bg-white">
+  <div id="create-deal-content">
+		<div class="content-header-box" id="creat-deal-box">
+		  <div class="content-box-head">
+		    <h3><?php echo __('+ Create New Deal')?></h3>
+		  </div>
+		  <div class="content-box-body" id="claiming-profile-content">
 
   <?php echo $pForm->renderGlobalErrors();?>
 
@@ -130,6 +135,10 @@
 		<?php echo $pForm['deal']['tos_accepted']->renderError();?>
 	</div>
 	<?php //echo $pForm['tos_accepted']->renderError();?>
-	<input type="submit" class="button positive" id="proceed-deal-button" value="<?php echo __('Save', null, 'widget');?>" />
-</div>
+	<input type="submit" class="button positive" id="proceed-deal-button" value="<?php echo __('Submit Deal >>', null, 'widget');?>" />
+	<?php echo __('or'); ?>
+	<?php echo link_to('Cancel', 'deals/get_create_index', array('class' => 'link-deal-content')); ?>
+		  </div>
+		</div>
+  </div>
 </form>

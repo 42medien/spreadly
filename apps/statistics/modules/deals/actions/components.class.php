@@ -4,23 +4,18 @@ class dealsComponents extends sfComponents {
 
   public function executeCreate_deal_form(sfWebRequest $request) {
     $lI18n = sfContext::getInstance()->getI18N();
-    $lDealId = $request->getParameter('deal_id', null);
+    $lDealId = $this->pDealId;
     $lDeal = null;
 
     if($lDealId){
       $lDeal = DealTable::getInstance()->find($lDealId);
       $lDealForm = new DealForm($lDeal);
+      $lFirstDomain = DomainProfileTable::getInstance()->find($lDeal->getDomainProfileId());
     } else {
       $lDealForm = new DealForm();
-      //$this->pForm->setDefault('domain_profile_id', $lFirstDomain->getId());
+	    $lVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
+    	$lFirstDomain = $lVerifiedDomains[1];
     }
-
-    /*
-
-    $lVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
-    $lFirstDomain = $lVerifiedDomains[0];*/
-    //$lDomainForm->setDefault('id', $lFirstDomain->getId());
-    //var_dump($this->pForm->getEmbeddedForm('deal'));die();
 
     if($lDeal) {
       $lDealForm->setDefaults(array(
@@ -41,6 +36,11 @@ class dealsComponents extends sfComponents {
 	    ));
     }
     $this->pForm = new DomainProfileDealForm();
+    $this->pForm->setDefaults(array(
+			'imprint_url' => $lFirstDomain->getImprintUrl(),
+			'id' => $lFirstDomain->getId()
+    ));
+
     $this->pForm->embedForm('deal', $lDealForm);
   }
 

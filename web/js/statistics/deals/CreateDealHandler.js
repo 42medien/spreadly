@@ -12,14 +12,14 @@ var DealForm = {
     var lStartDate = jQuery('input#deal_start_date').datetime({userLang  : 'de'});
     jQuery('input#deal_end_date').datetime({userLang  : 'de'}); 
     
-    /*
+    
     if (typeof(document.deal_form) !=  "undefined"){
       document.deal_form.reset();
     }
     
     if (typeof(document.save_deal_form) !=  "undefined"){
       document.save_deal_form.reset();
-    }    */
+    }
     
     jQuery('#deal_button_wording').toggleValue();
     jQuery('#deal_summary').toggleValue();
@@ -28,44 +28,8 @@ var DealForm = {
     jQuery('#deal_summary').limit('40', '#summary_counter');
     jQuery('#deal_description').limit('80', '#description_counter');
     
-    DealForm.proceed();
-    DealForm.toggleCodeBox();
     DealForm.save();
-  },
-  
-  proceed: function() {
-    debug.log('[DealForm][proceed]');    
-    var options = {
-        url:       '/deals/proceed',
-        data: { ei_kcuf: new Date().getTime() },
-        type:      'POST',
-        dataType:  'json',
-        //resetForm: lReset,
-        success:   function(pResponse) {DealForm.showProceed(pResponse);}
-    };
-   
-    jQuery('#deal_form').submit(function() { 
-      jQuery('#deal_form').ajaxSubmit(options);
-      return false; 
-    });
-    
-  },
-  
-  showProceed: function(pResponse) {
-    debug.log('[DealForm][showProceed]');      
-    jQuery('#create-deal-content').empty();
-    jQuery('#create-deal-content').append(pResponse.html);  
-    DealForm.init();
-  },
-  
-  toggleCodeBox: function() {
-    jQuery('#radio-no-code').live('change', function() {
-      jQuery('#no-code-box').show('slow');
-    });
-    
-    jQuery('#radio-has-code').live('change', function() {
-      jQuery('#no-code-box').hide('slow');
-    });    
+    DealForm.selectDomainProfile();
   },
   
   save: function() {
@@ -73,37 +37,76 @@ var DealForm = {
     var options = {
         url:       '/deals/save',
         data: { ei_kcuf: new Date().getTime() },
-        type:      'GET',
+        type:      'POST',
         dataType:  'json',
         //resetForm: lReset,
-        success:   function(pResponse) {DealForm.showSave(pResponse);}
+        success:   function(pResponse) {
+          debug.log('[DealForm][showProceed]');      
+          Deal.showContent(pResponse.html);
+          DealForm.init();          
+        }
     };
    
-    jQuery('#save_deal_form').submit(function() { 
-      jQuery('#save_deal_form').ajaxSubmit(options);
+    jQuery('#deal_form').submit(function() { 
+      jQuery('#deal_form').ajaxSubmit(options);
       return false; 
-    });    
+    });
   },
   
-  showSave: function(pResponse) {
-    debug.log('[DealForm][showSave]');      
-    jQuery('#create-deal-content').empty();
-    jQuery('#create-deal-content').append(pResponse.html);
-    if(pResponse.getdealcode && pResponse.getdealcode=='true') {
-      jQuery('#radio-no-code').attr("checked","checked");
-      jQuery('#radio-has-code').attr("checked",false); 
-      jQuery('#no-code-box').show();
-    } else {
-      jQuery('#radio-no-code').attr("checked", false);
-      jQuery('#radio-has-code').attr("checked", "checked");       
-    }
-    DealForm.save();
-  }
+  selectDomainProfile: function() {
+    jQuery('#deal-domain-select-box #id').live('change', function() {
+      var lDpId = jQuery(this).val();
+      DealForm.changeDomainProfile(lDpId);
+    });
+  },
   
+  changeDomainProfile: function(pDpId) {
+    jQuery.ajax({
+      type: "GET",
+      url: '/deals/get_domain_profile',
+      dataType: "json",
+      data: {
+        'dpid': pDpId,
+        ei_kcuf: new Date().getTime()
+        },        
+      success: function (pResponse) {
+        jQuery('#imprint_url').val(pResponse.imprint_url);
+      }
+    });  
+  }
 };
 
-var DealCoupon = {
+var Deal = {
+    
   init: function() {
-    debug.log('[CreateDealCoupon][init]');  
-  }
+    Deal.bindClicks();
+  },
+  
+  bindClicks: function() {
+    jQuery('.link-deal-content').live('click', function() {
+      var pDealId = (pDealId != undefined)? pDealId: '';
+      var lAction = jQuery(this).attr('href');
+      var lData = {
+          ei_kcuf: new Date().getTime(),
+          deal_id: pDealId
+      };
+
+      jQuery.ajax({
+        type: "GET",
+        url: lAction,
+        dataType: "json",
+        data: lData,        
+        success: function (pResponse) {
+          Deal.showContent(pResponse.html);
+          DealForm.init();          
+        }
+      });
+      return false;      
+    });    
+  },
+    
+  showContent: function(pHtml) {
+    jQuery('#create-deal-content').empty();
+    jQuery('#create-deal-content').append(pHtml);      
+  }  
 };
