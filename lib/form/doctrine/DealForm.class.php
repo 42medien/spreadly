@@ -13,7 +13,7 @@ class DealForm extends BaseDealForm
   public function configure()
   {
 
-    //var_dump($this->getValues());die();
+    $lI18n = sfContext::getInstance()->getI18N();
 
     $this->setWidgets(array(
       'id'                => new sfWidgetFormInputHidden(),
@@ -49,7 +49,8 @@ class DealForm extends BaseDealForm
       'tos_accepted'      => new sfValidatorBoolean(array('required' => true), array('required' => 'tosaccepted required')),
       'terms_of_deal'     => new sfValidatorString(array('max_length' => 512, 'required' => true), array('required' => 'termsofdeal required'))
     ));
-        
+
+
     //$this->widgetSchema->setNameFormat('deal[%s]');
   }
 }

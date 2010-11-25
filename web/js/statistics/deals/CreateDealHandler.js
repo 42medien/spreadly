@@ -12,13 +12,14 @@ var DealForm = {
     var lStartDate = jQuery('input#deal_start_date').datetime({userLang  : 'de'});
     jQuery('input#deal_end_date').datetime({userLang  : 'de'}); 
     
+    /*
     if (typeof(document.deal_form) !=  "undefined"){
       document.deal_form.reset();
     }
     
     if (typeof(document.save_deal_form) !=  "undefined"){
       document.save_deal_form.reset();
-    }    
+    }    */
     
     jQuery('#deal_button_wording').toggleValue();
     jQuery('#deal_summary').toggleValue();
@@ -37,7 +38,7 @@ var DealForm = {
     var options = {
         url:       '/deals/proceed',
         data: { ei_kcuf: new Date().getTime() },
-        type:      'GET',
+        type:      'POST',
         dataType:  'json',
         //resetForm: lReset,
         success:   function(pResponse) {DealForm.showProceed(pResponse);}

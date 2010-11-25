@@ -17,6 +17,15 @@ class dealsActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request) {
   	$this->getResponse()->setSlot('js_document_ready', $this->getPartial('deals/js_init_deals.js'));
+  }
+
+ /**
+  * Executes index action
+  *
+  * @param sfRequest $request A request object
+  */
+  public function executeTesterle(sfWebRequest $request) {
+  	$this->getResponse()->setSlot('js_document_ready', $this->getPartial('deals/js_init_deals.js'));
     //$lDealForm = new DealForm();
     $lDomainForm = new DomainProfileDealForm();
 
@@ -25,13 +34,13 @@ class dealsActions extends sfActions
 
   }
 
-  public function executeTesterle(sfWebRequest $request) {
+  public function executeTesterle_save(sfWebRequest $request) {
     //var_dump($request->getPostParameters());exit;
-    
+
   	$lParams = $request->getPostParameters();
-    
+
     $lParams['new']['domain_profile_id'] = $lParams['id'];
-    
+
     //$lDealForm = new DealForm();
     $lDomainObject = DomainProfileTable::getInstance()->find($lParams['id']);
     $lDomainForm = new DomainProfileDealForm($lDomainObject);
@@ -55,28 +64,31 @@ class dealsActions extends sfActions
 
   public function executeProceed(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
-    $lParams = $request->getParameter('deal');
-    //$lParams['domain_profile_id'] = $lParams['DomainProfile']['id'];
-    //var_dump($lParams);die();
+  	$lParams = $request->getPostParameters();
 
-    if($lParams['id']){
-      $lDeal = DealTable::getInstance()->find($lParams['id']);
-      $this->pForm = new DealForm($lDeal);
+    $lParams['deal']['domain_profile_id'] = $lParams['id'];
+		unset($lParams['ei_kcuf']);
+    //$lDealForm = new DealForm();
+
+
+    if($lDealId = $lParams['deal']['id']){
+      $lDeal = DealTable::getInstance()->find($lDealId);
+      $lDealForm = new DealForm($lDeal);
     } else {
-      $this->pForm = new DealForm();
-      //$this->pForm->setDefault('domain_profile_id', $lFirstDomain->getId());
+      $lDealForm = new DealForm();
+      $lDealForm->setDefault('domain_profile_id', $lParams['id']);
     }
-		//var_dump($lParams);die();
-    $lDomainObject = DomainProfileTable::getInstance()->find($lParams['DomainProfile']['id']);
-    $lDomainForm = new DomainProfileDealForm($lDomainObject);
-    $this->pForm->embedForm('DomainProfile', $lDomainForm);
+
+    $lDomainObject = DomainProfileTable::getInstance()->find($lParams['id']);
+    $this->pForm = new DomainProfileDealForm($lDomainObject);
+    $this->pForm->embedForm('deal', $lDealForm);
 
     $this->pForm->bind($lParams);
     if($this->pForm->isValid()) {
 	    $lObject = $this->pForm->save();
-	    $lReturn['html'] = $this->getComponent('deals', 'get_code_form', array('pDealId' => $lObject->getId()));
+	    $lReturn['html'] = 'affe';
     } else {
-        $lReturn['html'] = $this->getPartial('deals/create_deal_form', array('pForm' => $this->pForm));
+    	$lReturn['html'] = $this->getPartial('deals/create_deal_form', array('pForm' => $this->pForm));
     }
 
     return $this->renderText(json_encode($lReturn));

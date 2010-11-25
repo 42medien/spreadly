@@ -9,6 +9,8 @@
 
     <?php include_stylesheets(); ?>
     <script type="text/javascript" src="/js/100_main/include/likepopup-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
+    <script type="text/javascript" src="/js/widget/deal/DealHandler.js"></script>
+
     <link rel="shortcut icon" href="/img/global/favicon_16x16.ico" />
   </head>
   <body onunload="LikePopup.refreshParent();">
@@ -18,8 +20,8 @@
       <?php include_partial('global/branding'); ?>
 
       <div id="nav_main">
-				<div id="nav_main_box">
-				  <h1 class="light_text big_size"><a href="/"><?php echo __('Gutschein'); ?> | <a href="/"><?php echo __('Settings'); ?></a></h1>
+				<div id="deal_nav_main_box">
+				  <h1 class="light_text big_size"><a href="/deal/get_coupon" id="deal-nav-link" class="deal-nav-elem"><?php echo __('Gutschein'); ?></a> | <a href="/popup/get_settings" id="settings-nav-link" class="deal-nav-elem"><?php echo __('Settings'); ?></a></h1>
 				</div>
       </div>
 

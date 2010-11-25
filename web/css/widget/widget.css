@@ -8,6 +8,8 @@
 #branding{width: 500px;height: 35px;padding: 0 0 20px 0;}
 #nav_main{width: 580px; height: 25px;}
 #nav_main_box{width: 137px;height:25px;float:right;}
+#deal_nav_main_box{width: 160px;height:25px;float:right;, line-height: 25px; text-align: center;}
+#deal_nav_main_box a{color: #fff; text-decoration: none;} 
 #content{width:580px;padding-top:10px;}
 #content_main{width:540px;padding:10px 20px;}
 #deal_content_main{width:400px;padding:10px 20px;}
@@ -198,8 +200,11 @@ padding:1em;
 
 .deal-box .content-box .content-box {
 -moz-border-radius:0 0 0 0;
-border:1px dashed #000000;
 margin-left:10px;
+}
+
+.dashed{
+	border:1px dashed #000000;
 }
 
 .deal-box .content-box {

@@ -69,7 +69,7 @@ deal_confirm_signin:
 
 deal_complete_signin:
   url:    /deal/complete_signin/*
-  param:  { module: auth, action: complete_signin, widgetcontext: v }
+  param:  { module: auth, action: complete_signin, widgetcontext: deal }
 
 deal_signinto:
   url:   /deal/signinto/*

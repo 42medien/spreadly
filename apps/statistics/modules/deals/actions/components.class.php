@@ -5,13 +5,13 @@ class dealsComponents extends sfComponents {
   public function executeCreate_deal_form(sfWebRequest $request) {
     $lI18n = sfContext::getInstance()->getI18N();
     $lDealId = $request->getParameter('deal_id', null);
-    $lDeal = '';
+    $lDeal = null;
 
     if($lDealId){
       $lDeal = DealTable::getInstance()->find($lDealId);
-      $this->pForm = new DealForm($lDeal);
+      $lDealForm = new DealForm($lDeal);
     } else {
-      $this->pForm = new DealForm();
+      $lDealForm = new DealForm();
       //$this->pForm->setDefault('domain_profile_id', $lFirstDomain->getId());
     }
 
@@ -20,11 +20,10 @@ class dealsComponents extends sfComponents {
     $lVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
     $lFirstDomain = $lVerifiedDomains[0];*/
     //$lDomainForm->setDefault('id', $lFirstDomain->getId());
-    $lDomainForm = new DomainProfileDealForm();
-    $this->pForm->embedForm('DomainProfile', $lDomainForm);
+    //var_dump($this->pForm->getEmbeddedForm('deal'));die();
 
     if($lDeal) {
-      $this->pForm->setDefaults(array(
+      $lDealForm->setDefaults(array(
 				'terms_of_deal' => $lDeal->getTermsOfDeal(),
 				'button_wording' => $lDeal->getButtonWording(),
 				'summary' => $lDeal->getSummary(),
@@ -33,7 +32,7 @@ class dealsComponents extends sfComponents {
 	    	'end_date' => $lDeal->getEndDate()
       ));
     } else {
-	    $this->pForm->setDefaults(array(
+	    $lDealForm->setDefaults(array(
 				'button_wording' => $lI18n->__('...und freien Probemonat gewinnen!'),
 				'summary' => $lI18n->__('Kostenloser Probemonat'),
 				'description' => $lI18n->__('Liken und damit einmalig pro Person einen freien Probemonat gewinnen!'),
@@ -41,6 +40,8 @@ class dealsComponents extends sfComponents {
 	    	'end_date' => date('Y-m-d G-i-s')
 	    ));
     }
+    $this->pForm = new DomainProfileDealForm();
+    $this->pForm->embedForm('deal', $lDealForm);
   }
 
   public function executeGet_code_form($request) {

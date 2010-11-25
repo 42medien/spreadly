@@ -1,12 +1,11 @@
 <?php use_helper('Text'); ?>
-
 <div class="deal-box clearfix">
 	<div class="content-box rounded_corners">
 		<div>
 			<img src=""/><h3>Empfehlen Sie "Online mehr kaufen" und erhalten Sie hierfür...</h3>
 
 		</div>
-  	<div class="content-box yellow">
+  	<div class="content-box yellow dashed">
     	<div class="coupon-summary deal_summary-mirror">Kostenloser Probemonat</div>
       <div class="coupon-description deal_description-mirror">
       	Liken und damit einmalig pro Person einen freien Probemonat gewinnen!

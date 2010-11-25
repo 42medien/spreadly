@@ -15,7 +15,8 @@ class dealActions extends sfActions
       $this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "static_button");
 
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('popup/js_popup_ready'));
-    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('static/js_init_static.js'));
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('deal/js_deal_ready'));
+    //$this->getResponse()->setSlot('js_document_ready', $this->getPartial('static/js_init_static.js'));
 
     $this->pIsUrlValid = true;
     $lUrl = $request->getParameter('url', '');
@@ -51,5 +52,21 @@ class dealActions extends sfActions
     sfProjectConfiguration::getActive()->loadHelpers('I18N');
     //$this->getUser()->setFlash('headline', __('Settings', null, 'widget'));
     //$this->setLayout('layout_twocol');
+  }
+
+  public function executeUsed($request){
+
+  }
+
+  public function executeGet_coupon(sfWebRequest $request) {
+    $this->getResponse()->setContentType('application/json');
+    return $this->renderText(
+      json_encode(
+        array(
+          'success' => true,
+          'html'  => $this->getComponent('deal','used_popup'),
+        )
+      )
+    );
   }
 }
