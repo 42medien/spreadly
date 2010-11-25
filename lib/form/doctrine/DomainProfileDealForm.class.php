@@ -29,7 +29,10 @@ class DomainProfileDealForm extends BaseDomainProfileForm
       'id' => new sfValidatorInteger(array('required' => true))
     ));
 
-    $this->widgetSchema->setNameFormat('domainprofile[%s]');
+    $this->embedForm('new', new DealForm());
+    //$this->embedRelation('Deals', 'DealForm');
+
+//    $this->widgetSchema->setNameFormat('domainprofile[%s]');
 
   }
 }

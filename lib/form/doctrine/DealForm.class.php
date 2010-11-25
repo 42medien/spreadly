@@ -17,6 +17,7 @@ class DealForm extends BaseDealForm
 
     $this->setWidgets(array(
       'id'                => new sfWidgetFormInputHidden(),
+      'domain_profile_id' => new sfWidgetFormInputHidden(),
       'start_date'        => new sfWidgetFormInputText(),
       'end_date'          => new sfWidgetFormInputText(),
       'summary'           => new sfWidgetFormInputText(),
@@ -37,6 +38,7 @@ class DealForm extends BaseDealForm
 
     $this->setValidators(array(
       'id'                => new sfValidatorInteger(array('required' => false), array('required' => 'id required')),
+      'domain_profile_id' => new sfValidatorInteger(array('required' => false), array('required' => 'id required')),
       'start_date'        => new sfValidatorPass(array('required' => true), array('required' => 'startdate required')),
       'end_date'          => new sfValidatorPass(array('required' => true), array('required' => 'enddate required')),
       'summary'           => new sfValidatorString(array('max_length' => 40, 'required' => true), array('required' => 'summary required')),
@@ -47,7 +49,7 @@ class DealForm extends BaseDealForm
       'tos_accepted'      => new sfValidatorBoolean(array('required' => true), array('required' => 'tosaccepted required')),
       'terms_of_deal'     => new sfValidatorString(array('max_length' => 512, 'required' => true), array('required' => 'termsofdeal required'))
     ));
-
-    $this->widgetSchema->setNameFormat('deal[%s]');
+        
+    //$this->widgetSchema->setNameFormat('deal[%s]');
   }
 }
