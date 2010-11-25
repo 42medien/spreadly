@@ -28,5 +28,8 @@ class DomainProfileDealForm extends BaseDomainProfileForm
       'imprint_url' => new sfValidatorString(array('max_length' => 512, 'required' => true)),
       'id' => new sfValidatorInteger(array('required' => true))
     ));
+
+    $this->widgetSchema->setNameFormat('domainprofile[%s]');
+
   }
 }

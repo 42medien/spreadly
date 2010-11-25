@@ -17,6 +17,36 @@ class dealsActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request) {
   	$this->getResponse()->setSlot('js_document_ready', $this->getPartial('deals/js_init_deals.js'));
+    $lDealForm = new DealForm();
+    $lDomainForm = new DomainProfileDealForm();
+
+    $lDomainForm->embedForm('deal', $lDealForm);
+    $this->pForm = $lDomainForm;
+
+  }
+
+  public function executeTesterle($request) {
+  	$lParams = $request->getParameter('domainprofile');
+
+    $lDealForm = new DealForm();
+    $lDomainObject = DomainProfileTable::getInstance()->find($lParams['id']);
+    $lDomainForm = new DomainProfileDealForm($lDomainObject);
+
+    $lDomainForm->embedForm('deal', $lDealForm);
+
+  	$lDomainForm->bind($lParams);
+    if($lDomainForm->isValid()) {
+	    $lObject = $lDomainForm->save();
+	    var_dump($lObject);die();
+    } else {
+    	$lErrorString='';
+      foreach ($lDomainForm->getErrorSchema()->getErrors() as $lError) {
+        $lErrorString = $lError->getMessage().'<br/>';
+        var_dump($lError);
+      }die();
+
+    }
+
   }
 
   public function executeProceed(sfWebRequest $request) {
