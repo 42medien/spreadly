@@ -105,7 +105,7 @@ class FacebookAuthApiClient extends AuthApi {
   public function doAuthentication() {
     $lConsumer = $this->getConsumer();
 
-    header("Location: https://graph.facebook.com/oauth/authorize?client_id=".$lConsumer->key."&scope=email,offline_access,publish_stream,read_friendlists,user_birthday,user_relationships&redirect_uri=".$this->getCallbackUri());
+    header("Location: https://graph.facebook.com/oauth/authorize?client_id=".$lConsumer->key."&scope=email,offline_access,publish_stream,user_birthday,user_relationships&redirect_uri=".$this->getCallbackUri());
     exit;
   }
 

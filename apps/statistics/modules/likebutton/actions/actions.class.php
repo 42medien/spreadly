@@ -131,7 +131,7 @@ class likebuttonActions extends sfActions
    * @param $request
    */
   public function executeWebmasters(sfWebRequest $request) {
-
+    $this->redirect('@homepage');
   }
 
   /**
