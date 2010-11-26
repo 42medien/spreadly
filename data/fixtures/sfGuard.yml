@@ -1,17 +1,25 @@
 sfGuardUser:
+  User_admin:
+    first_name:     John
+    last_name:      Doe
+    email_address:  john.doe@gmail.com
+    username:       admin
+    password:       admin
+    is_super_admin: true
+    Groups:         [Group_admin]
+    
+sfGuardUser:
   sfGuardUser_1:
     first_name: John
     last_name: Doe
     email_address: john.doe@gmail.com
     username: admin
-    algorithm: sha1
-    salt: 584d63b5adeb78711427fb19e4a46f14
-    password: 6d461b6cb4f2bcc1a39155d656f3d2f008b828ff
+    password:       admin
     is_active: true
     is_super_admin: true
     last_login: null
     created_at: '2010-11-26 10:29:26'
-    updated_at: '2010-11-26 10:29:26'
+    updated_at: '2010-11-26 10:29:26'    
 
 sfGuardGroup:
   Group_admin:
