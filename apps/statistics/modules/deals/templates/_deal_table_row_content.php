@@ -10,7 +10,7 @@
       <td style="text-align: center;">
 				<?php echo $pDeal->getStartDate(); ?>
       </td>
-      <td style="text-align: center;">
+      <td style="text-align: center;" class="editinplaceclick" id="deal-enddate-col" data-obj='{"action":"/deals/edit_enddate", "type":"text", "callback":"DealTable.editDate",  "params": "{\"id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-enddate-col\"}"}'>
 				<?php echo $pDeal->getEndDate(); ?>
       </td>
       <td style="text-align: center;">

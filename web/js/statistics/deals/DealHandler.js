@@ -149,3 +149,11 @@ var Deal = {
     jQuery('#create-deal-content').append(pHtml);      
   }  
 };
+
+var DealTable = {
+    
+  editDate: function(){
+    debug.log("[DealTable][editDate]");
+    jQuery('input#editinplace-input').datetime({userLang  : 'de'});     
+  }
+};
