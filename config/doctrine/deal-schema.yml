@@ -48,7 +48,7 @@ Deal:
           
   relations:
     sfGuardUser:
-      foreignAlias: DomainProfiles
+      foreignAlias: Deals
       onDelete:     CASCADE  
     DomainProfile:
       type: one
