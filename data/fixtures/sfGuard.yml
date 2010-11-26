@@ -1,14 +1,4 @@
 sfGuardUser:
-  User_admin:
-    first_name:     John
-    last_name:      Doe
-    email_address:  john.doe@gmail.com
-    username:       admin
-    password:       admin
-    is_super_admin: true
-    Groups:         [Group_admin]
-    
-sfGuardUser:
   sfGuardUser_1:
     first_name: John
     last_name: Doe
