@@ -5,6 +5,9 @@ Deal:
     domain_profile_id:
       type: integer
       notnull: true
+    sf_guard_user_id:
+      type: integer
+      notnull: true      
     state:
       type: enum
       length: 10
@@ -44,6 +47,9 @@ Deal:
       default: false 
           
   relations:
+    sfGuardUser:
+      foreignAlias: DomainProfiles
+      onDelete:     CASCADE  
     DomainProfile:
       type: one
       local: domain_profile_id
