@@ -2,20 +2,20 @@ options:
   type: INNODB
   collate: utf8_unicode_ci
   charset: utf8
-      
+
 Language:
   connection:  translation
   actAs:
     Timestampable:  ~
   columns:
-    lang: 
+    lang:
       type:  string(5)
       notnull: true
-    default_lang:   
+    default_lang:
       type: boolean
       notnull: true
-      default: false 
-    is_active:      
+      default: false
+    is_active:
       type: boolean
       notnull: true
       default: false
@@ -27,9 +27,6 @@ Language:
     is_active:
       fields:  [is_active]
 
-
-
-
 Catalogue:
   connection:  translation
   columns:
@@ -40,7 +37,7 @@ Catalogue:
     date_created: { type: integer, notnull: true, default: 0 }
     date_modified: { type: integer, notnull: true, default: 0 }
     author: { type: string(255), notnull: true, default: '' }
-    
+
 TransUnit:
   connection:  translation
   actAs:
@@ -52,9 +49,9 @@ TransUnit:
     target: { type: clob(65532), notnull: true }
     comments: { type: string(100), notnull: true }
     author: { type: string(255), notnull: true, default: ''}
-    translated: { type: boolean, notnull: true, default: false }    
+    translated: { type: boolean, notnull: true, default: false }
   relations:
     Catalogue:
       local: cat_id
       foreign: cat_id
-      foreignAlias: Units      
+      foreignAlias: Units
