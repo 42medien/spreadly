@@ -1,0 +1,52 @@
+Deal:
+  Deal_1:
+    DomainProfile: DomainProfile_2
+    sfGuardUser: sfGuardUser_1
+    state: submitted
+    type: commercial
+    coupon_type: single
+    coupon_quantity: '123456789'
+    start_date: '2010-11-26 10:07:33'
+    end_date: '2010-11-30 10:07:33'
+    summary: 'test summary'
+    description: 'test description'
+    button_wording: 'test button wording'
+    terms_of_deal: demnotizblogseintod
+    redeem_url: 'http://notizblog.org/deal'
+    tos_accepted: true
+    created_at: '2010-11-26 10:10:03'
+    updated_at: '2010-11-26 10:10:03'
+  Deal_2:
+    DomainProfile: DomainProfile_3
+    sfGuardUser: sfGuardUser_1
+    state: submitted
+    type: commercial
+    coupon_type: single
+    coupon_quantity: '123456'
+    start_date: '2010-11-26 10:10:41'
+    end_date: '2010-12-31 10:10:41'
+    summary: 'missmotz summary'
+    description: 'missmotz description'
+    button_wording: 'missmotz button wording'
+    terms_of_deal: missmotztod
+    redeem_url: 'http://www.missmotz.de/deal'
+    tos_accepted: true
+    created_at: '2010-11-26 10:11:34'
+    updated_at: '2010-11-26 10:11:34'
+  Deal_3:
+    DomainProfile: DomainProfile_1
+    sfGuardUser: sfGuardUser_1
+    state: submitted
+    type: commercial
+    coupon_type: single
+    coupon_quantity: '987465'
+    start_date: '2010-11-26 10:11:36'
+    end_date: '2010-11-26 10:11:36'
+    summary: 'snirgel summary'
+    description: 'snirgel description'
+    button_wording: 'snirgel buttonwording'
+    terms_of_deal: 'snirgel tod'
+    redeem_url: 'http://www.snirgel.de'
+    tos_accepted: true
+    created_at: '2010-11-26 10:12:23'
+    updated_at: '2010-11-26 10:12:23'
