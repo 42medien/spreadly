@@ -10,6 +10,15 @@
  * @author     Your name here
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
-class Deal extends BaseDeal
-{
+class Deal extends BaseDeal {
+
+  public function postInsert($event) {
+    if($this->getCouponType()==DealTable::COUPON_TYPE_SINGLE) {
+      if($this->getCouponQuantity()==DealTable::COUPON_QUANTITY_UNLIMITED) {
+        $coupon = new Coupon();
+        $coupon->setDeal($this);
+        $coupon->save();
+      }
+    }
+  }
 }

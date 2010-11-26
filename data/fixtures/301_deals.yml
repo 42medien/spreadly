@@ -39,7 +39,7 @@ Deal:
     state: submitted
     type: commercial
     coupon_type: single
-    coupon_quantity: '987465'
+    coupon_quantity: '0'
     start_date: '2010-11-26 10:11:36'
     end_date: '2010-11-26 10:11:36'
     summary: 'snirgel summary'

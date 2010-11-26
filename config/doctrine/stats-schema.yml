@@ -36,7 +36,6 @@ DomainProfile:
       type: many
       local: id
       foreign: domain_profile_id
-      onDelete: CASCADE
 
 SupportedServices:
   actAs: [Timestampable]
