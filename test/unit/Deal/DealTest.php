@@ -11,12 +11,13 @@ class DealTest extends PHPUnit_Framework_TestCase {
   
   public static function setUpBeforeClass() {
     date_default_timezone_set('Europe/Berlin');
-    sfConfig::set('sf_environment', 'test');
-    Doctrine::loadData(dirname(__file__).'/fixtures');
-    sfConfig::set('sf_environment', 'dev');
   }
   
   public function setUp() {
+    sfConfig::set('sf_environment', 'test');
+    Doctrine::loadData(dirname(__file__).'/fixtures');
+    sfConfig::set('sf_environment', 'dev');
+
     $this->domainProfile = Doctrine_Query::create()
           ->from('DomainProfile d')
           ->fetchOne();
@@ -31,6 +32,11 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $this->denied = Doctrine::getTable('Deal')->findOneBy("state", "denied");
     $this->trashed = Doctrine::getTable('Deal')->findOneBy("state", "trashed");
     $this->paused = Doctrine::getTable('Deal')->findOneBy("state", "paused");
+    
+    sfContext::getInstance()->getEventDispatcher()->connect(
+      $this->submitted->getTable()->getTableName().".transitionTo.".'approved',
+      array($this, 'eventApproveTest'));
+
   }
 
   public function testInitialStates() {
@@ -150,5 +156,19 @@ class DealTest extends PHPUnit_Framework_TestCase {
       $this->assertEquals('trashed', $this->trashed->getState());
       $this->assertEquals('Could not transition to: approved', $e->getMessage());
     }
+  }
+  
+  public function eventApproveTest($event) {
+    $params = $event->getParameters();
+    $this->assertEquals("deal.transitionTo.approved", $event->getName());
+    $this->assertEquals($params['state'], 'approved');
+  }
+  
+  public function testSavedAfterTransition() {
+    $this->assertEquals('submitted', $this->submitted->getState());
+    $this->submitted->approve();
+    $id = $this->submitted->getId();
+    $this->submitted = Doctrine::getTable('Deal')->find($id);
+    $this->assertEquals('approved', $this->submitted->getState());
   }
 }

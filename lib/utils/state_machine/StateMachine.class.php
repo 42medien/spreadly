@@ -22,11 +22,13 @@ class StateMachine extends Doctrine_Template {
     }
   }
   
+  // Transitions to new state, if it is allowed and fires an event
   public function transitionTo($state) {
     if($this->canTransitionTo($state)) {
       $this->getOption('column');
       $this->setState($state);
-      $this->save();
+      $this->getInvoker()->save();
+      sfContext::getInstance()->getEventDispatcher()->notify(new sfEvent($this->getInvoker(), $this->getInvoker()->getTable()->getTableName().".transitionTo.".$state, array("state" => $state)));
       return true;
     }
     throw new sfException("Could not transition to: ".$state);
@@ -53,7 +55,8 @@ class StateMachine extends Doctrine_Template {
   
   public function __call($name, $args) {
     $events = $this->getOption('events');
-    // All events should be callable functions and work the same as transitionTo
+    // All event-names are callable functions and work the same as transitionTo
+    // And all event-names get a can<Eventname> function to check if the transition is allowed
     if(array_key_exists($name, $events)) {
       return $this->transitionTo($events[$name]['to']);
     } elseif(array_key_exists(strtolower(preg_replace('/^can/', '', $name)), $events)) {
