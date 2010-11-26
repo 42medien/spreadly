@@ -17,6 +17,7 @@ class DealForm extends BaseDealForm
 
     $this->setWidgets(array(
       'id'                => new sfWidgetFormInputHidden(),
+			'sf_guard_user_id'  => new sfWidgetFormInputHidden(),
       'domain_profile_id' => new sfWidgetFormInputHidden(),
       'start_date'        => new sfWidgetFormInputText(),
       'end_date'          => new sfWidgetFormInputText(),
@@ -39,6 +40,7 @@ class DealForm extends BaseDealForm
     $this->setValidators(array(
       'id'                => new sfValidatorInteger(array('required' => false), array('required' => 'id required')),
       'domain_profile_id' => new sfValidatorInteger(array('required' => false), array('required' => 'id required')),
+      'sf_guard_user_id' => new sfValidatorInteger(array('required' => false), array('required' => 'user-id required')),
       'start_date'        => new sfValidatorPass(array('required' => true), array('required' => 'startdate required')),
       'end_date'          => new sfValidatorPass(array('required' => true), array('required' => 'enddate required')),
       'summary'           => new sfValidatorString(array('max_length' => 40, 'required' => true), array('required' => 'summary required')),

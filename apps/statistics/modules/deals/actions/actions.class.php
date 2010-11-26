@@ -17,6 +17,7 @@ class dealsActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request) {
   	$this->getResponse()->setSlot('js_document_ready', $this->getPartial('deals/js_init_deals.js'));
+  	$this->pDeals = DealTable::getInstance()->findBy('sf_guard_user_id', $this->getUser()->getUserId());
   }
 
  /**
@@ -67,6 +68,7 @@ class dealsActions extends sfActions
   	$lParams = $request->getPostParameters();
 
     $lParams['deal']['domain_profile_id'] = $lParams['id'];
+    $lParams['deal']['sf_guard_user_id'] = $this->getUser()->getUserId();
 		unset($lParams['ei_kcuf']);
     //$lDealForm = new DealForm();
 

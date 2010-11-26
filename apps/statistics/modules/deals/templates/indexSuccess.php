@@ -8,3 +8,8 @@
   <div id="create-deal-content">
 		<?php include_partial('deals/create_index');?>
   </div>
+	<div class="content-box">
+		<?php if($pDeals) { ?>
+			<?php include_partial('deals/deal_table', array('pDeals' => $pDeals)); ?>
+		<?php } ?>
+	</div>
