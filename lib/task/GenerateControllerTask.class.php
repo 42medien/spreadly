@@ -12,6 +12,7 @@ class GenerateControllerTask extends sfBaseTask {
     $this->addOptions(array(
       new sfCommandOption('application', null, sfCommandOption::PARAMETER_REQUIRED, 'The application name', 'platform'),
       new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev'),
+      new sfCommandOption('all', null, sfCommandOption::PARAMETER_NONE, 'Build all controller')
     ));
 
     $this->namespace        = 'yiid';
@@ -26,8 +27,21 @@ EOF;
   }
 
   protected function execute($arguments = array(), $options = array()) {
-    $app = $options['application'];
-    $env = $options['env'];
+    // generate all controllers
+    if ($options['all']) {
+      $dirs = sfFinder::type('dir')->maxdepth(0)->follow_link()->relative()->in(sfConfig::get('sf_apps_dir'));
+      foreach ($dirs as $dir) {
+        $this->generateController($dir, $options['env']);
+      }
+    // or a specific
+    } else {
+      $this->generateController($options['application'], $options['env']);
+    }
+  }
+
+  protected function generateController($application, $env) {
+    $app = $application;
+    $env = $env;
 
     if ($env == 'dev' || $env == 'staging') {
       $debug = 'true';

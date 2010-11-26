@@ -9,7 +9,8 @@ class BuildTask extends sfBaseTask {
       new sfCommandOption('application', null, sfCommandOption::PARAMETER_REQUIRED, 'platform'),
       new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev'),
       new sfCommandOption('connection', null, sfCommandOption::PARAMETER_REQUIRED, 'The connection name', 'doctrine'),
-      new sfCommandOption('no-confirmation', null, sfCommandOption::PARAMETER_NONE, 'Do not prompt for confirmation')
+      new sfCommandOption('no-confirmation', null, sfCommandOption::PARAMETER_NONE, 'Do not prompt for confirmation'),
+      new sfCommandOption('all', null, sfCommandOption::PARAMETER_NONE, 'Build all controller')
     ));
 
     $this->namespace        = 'yiid';
@@ -32,8 +33,14 @@ EOF;
     $this->getFilesystem()->execute("rm -rf cache/*");
     $this->getFilesystem()->execute("rm -rf log/*");
 
+    if ($options['all']) {
+      $args = array("--all");
+    } else {
+      $args = array();
+    }
+
     // create controllers
-    $this->runTask('yiid:generate-controller', array(), array('application' => $options['application'], 'env' => $options['env']));
+    $this->runTask('yiid:generate-controller', $args, array('application' => $options['application'], 'env' => $options['env']));
     $this->executeDbTasks($arguments, $options);
 
     // add i18n-sync
