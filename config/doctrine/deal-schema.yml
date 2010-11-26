@@ -1,6 +1,30 @@
 Deal:
   actAs:
-    [Timestampable]
+    Timestampable: ~
+    StateMachine:
+      column: state
+      initial: submitted
+      states: ['submitted', 'approved', 'denied', 'trashed', 'paused']
+      events:
+        submit:
+          from: ['denied', 'approved', 'paused']
+          to: submitted
+        approve:
+          from: submitted
+          to: approved
+        deny:
+          from: submitted
+          to: denied
+        pause:
+          from: approved
+          to: paused
+        resume:
+          from: paused
+          to: approved
+        trash:
+          from: ['submitted', 'approved', 'paused', 'denied']
+          to: trashed
+          
   columns:
     domain_profile_id:
       type: integer
