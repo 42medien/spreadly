@@ -33,6 +33,7 @@ EOF;
     $this->getFilesystem()->execute("rm -rf cache/*");
     $this->getFilesystem()->execute("rm -rf log/*");
 
+    // build all?
     if ($options['all']) {
       $args = array("--all");
     } else {
@@ -47,6 +48,11 @@ EOF;
     if ($options['env'] == "dev") {
       $this->runTask('yiid:i18n-sync');
     }
+
+    // build js
+    $this->runTask('yiid:build-js', array(), array('application' => $options['application'], 'env' => $options['env']));
+    // build css
+    $this->runTask('yiid:build-css', array(), array('application' => $options['application'], 'env' => $options['env']));
   }
 
   /**
