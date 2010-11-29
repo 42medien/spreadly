@@ -16,7 +16,7 @@
       </td>
       <td style="text-align: center;" class="editinplaceclick" id="deal-quantity-<?php echo $pDeal->getId(); ?>"
       	<?php if($pDeal->getCouponType() == "single"){ ?>data-obj='{"action":"/deals/save_codes", "type":"text",  "params": "{\"id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-quantity-<?php echo $pDeal->getId(); ?>\"}"}'
-      	<?php } else { ?> data-obj='{"action":"/deals/edit_codes?deal_id=<?php echo $pDeal->getId(); ?>", "type":"layer", "params": "{\"id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-quantity-<?php echo $pDeal->getId(); ?>\"}"}'
+      	<?php } else { ?> data-obj='{"action":"/deals/paste_codes?deal_id=<?php echo $pDeal->getId(); ?>", "type":"layer", "params": "{\"id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-quantity-<?php echo $pDeal->getId(); ?>\"}"}'
       	<?php } ?>>
 				<?php echo $pDeal->getCouponQuantity(); ?>
       </td>

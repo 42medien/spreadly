@@ -146,13 +146,7 @@ class dealsActions extends sfActions
     ));
   }
 
-  public function executeEdit_codes(sfWebRequest $request){
-  	$this->getResponse()->setContentType('application/json');
-    return $this->renderText(json_encode(
-    	array(
-    		'success' => true,
-    	  'content' => 'content'
-    	)
-    ));
+  public function executePaste_codes(sfWebRequest $request){
+		//$this->pForm = CouponCodesForm
   }
 }
