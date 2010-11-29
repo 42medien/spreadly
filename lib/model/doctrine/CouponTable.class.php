@@ -31,5 +31,11 @@ class CouponTable extends Doctrine_Table {
       $c->setDeal($deal);
       $c->save();
     }
+    
+    if(!($deal->getCouponType()==DealTable::COUPON_TYPE_SINGLE &&
+       $deal->getCouponQuantity()==DealTable::COUPON_QUANTITY_UNLIMITED)) {
+      $deal->setCouponQuantity(count($codes));
+      $deal->save();
+    }
   }
 }

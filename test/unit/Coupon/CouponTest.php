@@ -30,16 +30,23 @@ class CouponTest extends PHPUnit_Framework_TestCase {
   public function testSaveSingleUnlimited() {
     $this->table->saveMultipleCoupons(array("single_code" => "xxxyyy"), $this->singleUnlimited);
     $this->assertEquals(1, $this->table->count());
+    $this->singleUnlimited->refresh();
+    $this->assertEquals(DealTable::COUPON_QUANTITY_UNLIMITED, $this->singleUnlimited->getCouponQuantity());
   }
 
   public function testSaveSingle100() {
     $this->table->saveMultipleCoupons(array("single_code" => "xxxyyy"), $this->single100);
     $this->assertEquals(100, $this->table->count());
+    $this->single100->refresh();
+    $this->assertEquals(100, $this->single100->getCouponQuantity());
+    
   }
 
   public function testSaveMultiple() {
     $this->table->saveMultipleCoupons(array("multiple_codes" => "xxxyyy,yyyxxx,xyxyxy"), $this->multiple);
     $this->assertEquals(3, $this->table->count());
+    $this->multiple->refresh();
+    $this->assertEquals(3, $this->multiple->getCouponQuantity());
   }
 
   public function testSaveMultipleWithLinebreaksAndWhitespace() {
