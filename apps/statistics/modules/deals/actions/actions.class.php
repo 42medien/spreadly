@@ -83,11 +83,14 @@ class dealsActions extends sfActions
 
     $lDomainObject = DomainProfileTable::getInstance()->find($lParams['id']);
     $this->pForm = new DomainProfileDealForm($lDomainObject);
+    $lDealForm->embedForm('coupon', new CouponCodesForm());
     $this->pForm->embedForm('deal', $lDealForm);
 
     $this->pForm->bind($lParams);
     if($this->pForm->isValid()) {
 	    $lObject = $this->pForm->save();
+	    $deal = $this->pForm->getEmbeddedForm('deal')->getObject();
+	    $deal->saveCoupons($values['deal']['coupon']);
 	    $lReturn['html'] = $this->getPartial('deals/deal_in_process');
     } else {
     	$lReturn['html'] = $this->getPartial('deals/create_deal_form', array('pForm' => $this->pForm));
@@ -138,10 +141,14 @@ class dealsActions extends sfActions
 
   public function executeSave_codes(sfWebRequest $request){
   	$this->getResponse()->setContentType('application/json');
+  	$params = $request->getPostParameters();
+  	$deal = DealTable::getInstance()->find($params['deal_id']);
+    $deal->addCoupons($params);
+    
     return $this->renderText(json_encode(
     	array(
     		'success' => true,
-    	  'content' => 'content'
+    	  'content' => $deal->getCouponQuantity()
     	)
     ));
   }
