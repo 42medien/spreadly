@@ -80,21 +80,14 @@ class dealsActions extends sfActions
       $lDealForm = new DealForm();
       $lDealForm->setDefault('domain_profile_id', $lParams['id']);
     }
-    
-    
+
     $lDomainObject = DomainProfileTable::getInstance()->find($lParams['id']);
     $this->pForm = new DomainProfileDealForm($lDomainObject);
-
-    $lDealForm->embedForm('coupon', new CouponCodesForm());
     $this->pForm->embedForm('deal', $lDealForm);
-    
-    
+
     $this->pForm->bind($lParams);
     if($this->pForm->isValid()) {
 	    $lObject = $this->pForm->save();
-	    $values = $this->pForm->getValues();
-      $deal = $this->pForm->getEmbeddedForm('deal')->getObject();
-	    CouponTable::saveMultipleCoupons($values['deal']['coupon'], $deal);
 	    $lReturn['html'] = $this->getPartial('deals/deal_in_process');
     } else {
     	$lReturn['html'] = $this->getPartial('deals/create_deal_form', array('pForm' => $this->pForm));
@@ -131,5 +124,35 @@ class dealsActions extends sfActions
     $lReturn['imprint_url'] = $lDp->getImprintUrl();
 
     return $this->renderText(json_encode($lReturn));
+  }
+
+  public function executeEdit_enddate(sfWebRequest $request) {
+  	$this->getResponse()->setContentType('application/json');
+    return $this->renderText(json_encode(
+    	array(
+    		'success' => true,
+    	  'content' => 'content'
+    	)
+    ));
+  }
+
+  public function executeSave_codes(sfWebRequest $request){
+  	$this->getResponse()->setContentType('application/json');
+    return $this->renderText(json_encode(
+    	array(
+    		'success' => true,
+    	  'content' => 'content'
+    	)
+    ));
+  }
+
+  public function executeEdit_codes(sfWebRequest $request){
+  	$this->getResponse()->setContentType('application/json');
+    return $this->renderText(json_encode(
+    	array(
+    		'success' => true,
+    	  'content' => 'content'
+    	)
+    ));
   }
 }

@@ -154,6 +154,6 @@ var DealTable = {
     
   editDate: function(){
     debug.log("[DealTable][editDate]");
-    jQuery('input#editinplace-input').datetime({userLang  : 'de'});     
+    jQuery('input#editinplace_input').datetime({userLang  : 'de'});     
   }
 };

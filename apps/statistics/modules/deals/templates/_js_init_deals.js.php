@@ -3,4 +3,4 @@ jQuery('.mirror-value').mirrorValue();
 //jQuery('.mirror-change-value').mirrorChangeValue();
 Deal.init();
 DealForm.init();
-EditInPlace.byClick();
+EditInPlace.init('click');

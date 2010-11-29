@@ -31,8 +31,8 @@ class dealsComponents extends sfComponents {
 				'button_wording' => $lI18n->__('...und freien Probemonat gewinnen!'),
 				'summary' => $lI18n->__('Kostenloser Probemonat'),
 				'description' => $lI18n->__('Liken und damit einmalig pro Person einen freien Probemonat gewinnen!'),
-	    	'start_date' => date('Y-m-d G-i-s'),
-	    	'end_date' => date('Y-m-d G-i-s')
+	    	'start_date' => date('Y-m-d G:i:s'),
+	    	'end_date' => date('Y-m-d G:i:s')
 	    ));
     }
     $this->pForm = new DomainProfileDealForm();
