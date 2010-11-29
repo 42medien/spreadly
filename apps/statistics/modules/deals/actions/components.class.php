@@ -41,6 +41,7 @@ class dealsComponents extends sfComponents {
 			'id' => $lFirstDomain->getId()
     ));
 
+    $lDealForm->embedForm('coupon', new CouponCodesForm());
     $this->pForm->embedForm('deal', $lDealForm);
   }
 

@@ -102,11 +102,36 @@
     <div class="left">
     	<div class="form-row">
     		<div class="label-box">
+    			<?php echo $pForm['deal']['coupon_type']->renderLabel();?>
+					<?php echo $pForm['deal']['coupon_type']->renderError();?>
+				</div>
+				<?php echo $pForm['deal']['coupon_type']->render();?>
+			</div>
+
+    	<div class="form-row">
+    		<div class="label-box">
+    			<?php echo $pForm['deal']['coupon']['single_code']->renderLabel();?>
+					<?php echo $pForm['deal']['coupon']['single_code']->renderError();?>
+				</div>
+				<?php echo $pForm['deal']['coupon']['single_code']->render();?>
+			</div>
+
+    	<div class="form-row">
+    		<div class="label-box">
+    			<?php echo $pForm['deal']['coupon']['multiple_codes']->renderLabel();?>
+					<?php echo $pForm['deal']['coupon']['multiple_codes']->renderError();?>
+				</div>
+				<?php echo $pForm['deal']['coupon']['multiple_codes']->render();?>
+			</div>
+
+    	<div class="form-row">
+    		<div class="label-box">
     			<?php echo $pForm['deal']['coupon_quantity']->renderLabel();?>
 					<?php echo $pForm['deal']['coupon_quantity']->renderError();?>
 				</div>
 				<?php echo $pForm['deal']['coupon_quantity']->render();?>
 			</div>
+
 			<div class="form-row">
     		<div class="label-box">
 					<?php echo $pForm['deal']['redeem_url']->renderLabel();?>

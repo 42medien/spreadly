@@ -25,6 +25,7 @@ class DealForm extends BaseDealForm
       'description'       => new sfWidgetFormInputText(),
       'button_wording'    => new sfWidgetFormInputText(),
       'coupon_quantity'    => new sfWidgetFormInputText(),
+      'coupon_type'       => new sfWidgetFormChoice(array('choices' => array('single' => 'single', 'multiple' => 'multiple'), 'expanded' => true )),
       'redeem_url'        => new sfWidgetFormInputText(),
       'tos_accepted'      => new sfWidgetFormInputCheckbox(),
       'terms_of_deal'     => new sfWidgetFormInputText()
@@ -47,6 +48,7 @@ class DealForm extends BaseDealForm
       'description'       => new sfValidatorString(array('max_length' => 80, 'required' => true), array('required' => 'description required')),
       'button_wording'    => new sfValidatorString(array('max_length' => 35, 'required' => true), array('required' => 'button-wording required')),
       'coupon_quantity'    => new sfValidatorInteger(array('required' => false)),
+      'coupon_type'       => new sfValidatorChoice(array('choices' => array(0 => 'single', 1 => 'multiple'), 'required' => true)),
       'redeem_url'        => new sfValidatorString(array('max_length' => 512, 'required' => false)),
       'tos_accepted'      => new sfValidatorBoolean(array('required' => true), array('required' => 'tosaccepted required')),
       'terms_of_deal'     => new sfValidatorString(array('max_length' => 512, 'required' => true), array('required' => 'termsofdeal required'))
