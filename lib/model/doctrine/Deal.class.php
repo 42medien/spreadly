@@ -40,11 +40,10 @@ class Deal extends BaseDeal {
   
   private function saveMultipleCoupons($params, $pIsAdding=false) {
     $codes = array();
-    if($this->isUnlimited()) {
+    if(!$pIsAdding && $this->isUnlimited()) {
       $codes[] = $params['single_code'];
-    } elseif($this->getCouponType()==DealTable::COUPON_TYPE_SINGLE &&
-             $this->getCouponQuantity()>0) {
-      for ($i=0; $i < $this->getCouponQuantity(); $i++) { 
+    } elseif(!$pIsAdding && $this->getCouponType()==DealTable::COUPON_TYPE_SINGLE &&
+             $this->getCouponQuantity()>0) {         
         $codes[] = $params['single_code'];
       }
     } elseif($this->getCouponType()==DealTable::COUPON_TYPE_MULTIPLE) {

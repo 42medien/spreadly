@@ -144,10 +144,10 @@ class dealsActions extends sfActions
   	$lParams = $pRequest->getPostParameters();
   	$lDeal = DealTable::getInstance()->find($lParams['deal_id']);
   	$lError = '';
-    if($this->getUser()->isMine($lDeal)) {
+    if($this->getUser()->isMine($lDeal) && !$lDeal->isUnlimited()) {
       $lDeal->addCoupons($lParams);
     } else {
-      $lError = "You are not allowed to do this.";
+      $lError = $lDeal->isUnlimited() ? "You can not add codes to unlimited coupons." : "You are not allowed to do this.";
     }
     
     return $this->renderText(json_encode(
@@ -165,7 +165,7 @@ class dealsActions extends sfActions
   	$lParams['input'] = trim($lParams['input']);
   	$lDeal = DealTable::getInstance()->find($lParams['deal_id']);
     $lError = "";
-    if($this->getUser()->isMine($lDeal)) {
+    if($this->getUser()->isMine($lDeal) && !$lDeal->isUnlimited()) {
       $lNumeric = is_numeric($lParams['input']);
     	$lHigher = $lParams['input'] > $lDeal->getCouponQuantity();
     	if($lNumeric && $lHigher) {
@@ -178,7 +178,7 @@ class dealsActions extends sfActions
     	  $lError = $lError.($lHigher ? '' : 'not more than before');
     	}      
     } else {
-      $lError = 'You are not allowed to do this.';
+      $lError = $lDeal->isUnlimited() ? "You can not change the quantity of unlimited coupons." : "You are not allowed to do this.";
     }
 
     return $this->renderText(json_encode(
