@@ -179,13 +179,15 @@ var EditInPlace = {
     jQuery('#save-editin-place').live('click', function() {
       
       var lValue = jQuery('#editinplace_input').val();
-      
+      var lParams = jQuery.parseJSON(EditInPlace.aData.params);
       //take the data from the data-attr
       var lData = {
           ei_kcuf: new Date().getTime(),
-          params: EditInPlace.aData.params,
-          editinplace_input: lValue
+          input: lValue
       };
+      jQuery.extend(lData, lParams);
+      debug.log(lData);
+
       jQuery.ajax({
         type: "POST",
         url: EditInPlace.aData.action,
