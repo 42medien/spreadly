@@ -27,6 +27,14 @@ Call it with:
 EOF;
   }
 
+  /**
+   *
+   *
+   * @param unknown_type $arguments
+   * @param unknown_type $options
+   * @todo run in build task
+   * @todo add lock file
+   */
   protected function execute($arguments = array(), $options = array()) {
     // run only in staging or dev mode
     if ($options['env'] != "prod" && $options['env'] != "staging") {
