@@ -33,10 +33,14 @@ class Deal extends BaseDeal {
     return $this->getCoupons()->count();
   }
   
+  public function isUnlimited() {
+    return $this->getCouponType()==DealTable::COUPON_TYPE_SINGLE &&
+           $this->getCouponQuantity()==DealTable::COUPON_QUANTITY_UNLIMITED;
+  }
+  
   private function saveMultipleCoupons($params) {
     $codes = array();
-    if($this->getCouponType()==DealTable::COUPON_TYPE_SINGLE &&
-       $this->getCouponQuantity()==DealTable::COUPON_QUANTITY_UNLIMITED) {
+    if($this->isUnlimited()) {
       $codes[] = $params['single_code'];
     } elseif($this->getCouponType()==DealTable::COUPON_TYPE_SINGLE &&
              $this->getCouponQuantity()>0) {
@@ -60,8 +64,7 @@ class Deal extends BaseDeal {
       }
     }
     
-    if(!($this->getCouponType()==DealTable::COUPON_TYPE_SINGLE &&
-       $this->getCouponQuantity()==DealTable::COUPON_QUANTITY_UNLIMITED)) {
+    if(!$this->isUnlimited()) {
       $this->setCouponQuantity(count($codes));
       $this->save();
     }

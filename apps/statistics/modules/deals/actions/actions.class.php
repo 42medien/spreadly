@@ -159,6 +159,7 @@ class dealsActions extends sfActions
   	$deal = DealTable::getInstance()->find($params['deal_id']);
     $error = "";
   	if($numeric=is_numeric($params['quantity']) && $higher=$params['quantity']>$deal->getCouponQuantity()) {
+      $deal->setCouponQuantity($params['quantity']);
       $deal->addCoupons($params);
   	} else {
   	  $error = $numeric ? '' : 'not a number';
