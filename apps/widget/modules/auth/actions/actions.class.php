@@ -32,15 +32,12 @@ class authActions extends sfActions {
   public function executeSignin(sfWebRequest $request) {
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('popup/js_popup_ready'));
     if ($this->getUser()->isAuthenticated()) {
-      if ($this->pContext == "popup") {
-        $this->redirect("@settings");
-      } else {
-        $this->redirect("@static_like");
-      }
+      $lUrl = $this->getUser()->getAttribute("redirect_after_login", "@settings", "popup");
+      $this->redirect($lUrl);
     }
 
-    if ($this->pContext == "static" && $request->getParameter('url') != null) {
-      $this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "static_button");
+    if ($request->getParameter('url') != null) {
+      $this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "popup");
     }
 
     sfProjectConfiguration::getActive()->loadHelpers('I18N');
@@ -88,14 +85,8 @@ class authActions extends sfActions {
     $this->pOnlineIdenities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
     CookieUtils::generateWidgetIdentityCookie($this->pOnlineIdenities);
 
-    if ($this->pContext == "popup") {
-      $this->redirect('@settings');
-    } elseif($this->pContext == 'deal') {
-    	$this->redirect('deal/index');
-    } else {
-      $lUrl = $this->getUser()->getAttribute("redirect_after_login", null, "static_button");
-      $this->redirect($lUrl);
-    }
+    $lUrl = $this->getUser()->getAttribute("redirect_after_login", "@settings", "popup");
+    $this->redirect($lUrl);
   }
 
   public function executeCreate_account(sfWebRequest $request) {
