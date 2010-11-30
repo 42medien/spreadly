@@ -27,25 +27,52 @@ Call it with:
 EOF;
   }
 
-  protected function execute($arguments = array(), $options = array())
-  {
-    // initialize the database connection
-    $databaseManager = new sfDatabaseManager($this->configuration);
-    $connection = $databaseManager->getDatabase($options['connection'])->getConnection();
+  protected function execute($arguments = array(), $options = array()) {
+    // run only in staging or dev mode
+    if ($options['env'] != "prod" && $options['env'] != "staging") {
+      throw new sfException(sprintf("Don't run the s3sync in the '%s' environment.", $options['env']));
+    }
 
-    /*
-    <exec command="s3cmd --bucket-location=EU -P -r --exclude='*.svn*' --add-header 'Expires: Sat, 08 May 2015 15:22:28 GMT' sync web/css/ s3://${bucket}/${rev}/css/" checkreturn="true" />
-    <exec command="s3cmd --bucket-location=EU -P -r --exclude='*.svn*' --add-header 'Expires: Sat, 08 May 2015 15:22:28 GMT' sync web/img/ s3://${bucket}/${rev}/img/" checkreturn="true" />
-    <exec command="s3cmd --bucket-location=EU -P -r --exclude='*.svn*' --add-header 'Expires: Sat, 08 May 2015 15:22:28 GMT' sync web/js/100_main/include/ s3://${bucket}/${rev}/js/100_main/include/" checkreturn="true" />
+    $lReleaseName = sfConfig::get('app_release_name');
+    $lRootDir = sfContext::getInstance()->getConfiguration()->getRootDir();
+    $lFileName = CdnSingleton::getInstance()->getNextHost() .'/'. $lReleaseName."/";
 
+    $lFiles = FilesystemHelper::retrieveFilesInDir($lRootDir.'/web/css/include', array('.svn'), array(), '.css');
 
-    <exec command="find ./web/js/100_main/include -type f -exec 7z a -tgzip -x\!\*.svn -x\!\*.gz  {}.gz {} \;" checkreturn="true" />
-    <exec command="s3cmd --bucket-location=EU -P -r --exclude='*.*' --include '*.gz' --mime-type 'application/javascript' --add-header 'Content-Encoding: gzip' sync web/js/100_main/include/ s3://${bucket}/${rev}/js/100_main/include/" checkreturn="true" />
-    <exec command="find ./web/js/100_main/include -name '*.gz' -exec rm {} \;" checkreturn="true" />
+    $this->logSection('\r\n\r\n');
+    $this->logSection('#####################################################################');
+    $this->logSection('############ this skript will change image paths in your local css files');
+    $this->logSection('############ you must not commit those changes, it\'ll fuck up pathes!!!');
+    $this->logSection('#####################################################################');
+    $this->logSection('############ best executed on dev/live where nothing gets comittet to svn ;)');
+    $this->logSection('#####################################################################');
+    $this->logSection('\r\n\r\n');
 
-    <exec command="find ./web/css -type f -exec 7z a -tgzip  -x\!\*.svn -x\!\*.gz  {}.gz {} \;" checkreturn="true" />
-    <exec command="s3cmd --bucket-location=EU -P -r --exclude='*.*' --include '*.gz' --mime-type 'text/css' --add-header 'Content-Encoding: gzip' sync web/css/ s3://${bucket}/${rev}/css/" checkreturn="true" />
-    <exec command="find ./web/css -name '*.gz' -exec rm {} \;" checkreturn="true" />
-    */
+    foreach ($lFiles as $lFile) {
+      $lContent = file_get_contents($lFile);
+      $lContent = str_replace('url("/img/', 'url("'.$lFileName."img/", $lContent);
+
+      $fp = fopen($lFile, 'w');
+      fwrite($fp, $lContent);
+      fclose($fp);
+    }
+
+    if ($options['env'] == "prod") {
+      $lBucket = "live.yiidcdn.com";
+    } else {
+      $lBucket = "dev.yiidcdn.com";
+    }
+
+    sfFileSystem::execute("s3cmd --bucket-location=EU -P -r --exclude='*.svn*' --add-header 'Expires: Sat, 08 May 2015 15:22:28 GMT' sync web/css/ s3://$lBucket/$lReleaseName/css/");
+    sfFileSystem::execute("s3cmd --bucket-location=EU -P -r --exclude='*.svn*' --add-header 'Expires: Sat, 08 May 2015 15:22:28 GMT' sync web/img/ s3://$lBucket/$lReleaseName/img/");
+    sfFileSystem::execute("s3cmd --bucket-location=EU -P -r --exclude='*.svn*' --add-header 'Expires: Sat, 08 May 2015 15:22:28 GMT' sync web/js/100_main/include/ s3://$lBucket/$lReleaseName/js/100_main/include/");
+
+    sfFileSystem::execute("find ./web/js/100_main/include -type f -exec 7z a -tgzip -x\!\*.svn -x\!\*.gz  {}.gz {} \;");
+    sfFileSystem::execute("s3cmd --bucket-location=EU -P -r --exclude='*.*' --include '*.gz' --mime-type 'application/javascript' --add-header 'Content-Encoding: gzip' sync web/js/100_main/include/ s3://$lBucket/$lReleaseName/js/100_main/include/");
+    sfFileSystem::execute("find ./web/js/100_main/include -name '*.gz' -exec rm {} \;");
+
+    sfFileSystem::execute("find ./web/css -type f -exec 7z a -tgzip  -x\!\*.svn -x\!\*.gz  {}.gz {} \;");
+    sfFileSystem::execute("s3cmd --bucket-location=EU -P -r --exclude='*.*' --include '*.gz' --mime-type 'text/css' --add-header 'Content-Encoding: gzip' sync web/css/ s3://$lBucket/$lReleaseName/css/");
+    sfFileSystem::execute("find ./web/css -name '*.gz' -exec rm {} \;");
   }
 }
