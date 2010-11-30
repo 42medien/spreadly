@@ -33,10 +33,6 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $this->trashed = Doctrine::getTable('Deal')->findOneBy("state", "trashed");
     $this->paused = Doctrine::getTable('Deal')->findOneBy("state", "paused");
     
-    sfContext::getInstance()->getEventDispatcher()->connect(
-      $this->submitted->getTable()->getTableName().".transitionTo.".'approved',
-      array($this, 'eventApproveTest'));
-
   }
 
   public function testInitialStates() {
@@ -76,7 +72,7 @@ class DealTest extends PHPUnit_Framework_TestCase {
       $this->denied->approve();
     } catch(sfException $e) {
       $this->assertEquals('denied', $this->denied->getState());
-      $this->assertEquals('Could not transition to: approved', $e->getMessage());
+      $this->assertEquals('Could not transition for event: approve', $e->getMessage());
     }
   }
   
@@ -122,7 +118,7 @@ class DealTest extends PHPUnit_Framework_TestCase {
       $this->trashed->submit();
     } catch(sfException $e) {
       $this->assertEquals('trashed', $this->trashed->getState());
-      $this->assertEquals('Could not transition to: submitted', $e->getMessage());
+      $this->assertEquals('Could not transition for event: submit', $e->getMessage());
     }
 
     try {
@@ -130,7 +126,7 @@ class DealTest extends PHPUnit_Framework_TestCase {
       $this->trashed->approve();
     } catch(sfException $e) {
       $this->assertEquals('trashed', $this->trashed->getState());
-      $this->assertEquals('Could not transition to: approved', $e->getMessage());
+      $this->assertEquals('Could not transition for event: approve', $e->getMessage());
     }
 
     try {
@@ -138,7 +134,7 @@ class DealTest extends PHPUnit_Framework_TestCase {
       $this->trashed->deny();
     } catch(sfException $e) {
       $this->assertEquals('trashed', $this->trashed->getState());
-      $this->assertEquals('Could not transition to: denied', $e->getMessage());
+      $this->assertEquals('Could not transition for event: deny', $e->getMessage());
     }
 
     try {
@@ -146,7 +142,7 @@ class DealTest extends PHPUnit_Framework_TestCase {
       $this->trashed->pause();
     } catch(sfException $e) {
       $this->assertEquals('trashed', $this->trashed->getState());
-      $this->assertEquals('Could not transition to: paused', $e->getMessage());
+      $this->assertEquals('Could not transition for event: pause', $e->getMessage());
     }
 
     try {
@@ -154,14 +150,28 @@ class DealTest extends PHPUnit_Framework_TestCase {
       $this->trashed->resume();
     } catch(sfException $e) {
       $this->assertEquals('trashed', $this->trashed->getState());
-      $this->assertEquals('Could not transition to: approved', $e->getMessage());
+      $this->assertEquals('Could not transition for event: resume', $e->getMessage());
     }
   }
   
-  public function eventApproveTest($event) {
+  public function testEventApprove() {
+    $dispatcher = sfContext::getInstance()->getEventDispatcher();
+    $eventName = $this->submitted->getTable()->getTableName().".event.".'approve';
+    $dispatcher->connect($eventName,
+      array($this, 'eventApproved'));
+
+    $this->assertTrue($dispatcher->hasListeners($eventName));
+    $this->eventFired = false;
+    $this->submitted->approve();
+    $this->assertTrue($this->eventFired);
+  }
+  
+  public function eventApproved($event) {
+    $this->eventFired = true;
     $params = $event->getParameters();
-    $this->assertEquals("deal.transitionTo.approved", $event->getName());
-    $this->assertEquals($params['state'], 'approved');
+    $this->assertEquals("deal.event.approve", $event->getName());
+    $this->assertEquals($params['event'], 'approve');
+    $this->assertEquals('approved', $event->getSubject()->getState());    
   }
   
   public function testSavedAfterTransition() {

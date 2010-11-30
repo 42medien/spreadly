@@ -23,15 +23,17 @@ class StateMachine extends Doctrine_Template {
   }
   
   // Transitions to new state, if it is allowed and fires an event
-  public function transitionTo($state) {
-    if($this->canTransitionTo($state)) {
-      $this->getOption('column');
-      $this->setState($state);
+  private function transitionTo($event) {
+    if($this->canTransitionTo($event)) {
+      $events = $this->getOption('events');
+      $this->setState($events[$event]['to']);
       $this->getInvoker()->save();
-      sfContext::getInstance()->getEventDispatcher()->notify(new sfEvent($this->getInvoker(), $this->getInvoker()->getTable()->getTableName().".transitionTo.".$state, array("state" => $state)));
+      $prefix = $this->getInvoker()->getTable()->getTableName();
+      $eventName = $prefix.".event.".$event;
+      sfContext::getInstance()->getEventDispatcher()->notify(new sfEvent($this->getInvoker(), $eventName, array("event" => $event)));
       return true;
     }
-    throw new sfException("Could not transition to: ".$state);
+    throw new sfException("Could not transition for event: ".$event);
   }
   
   public function getState() {
@@ -44,11 +46,10 @@ class StateMachine extends Doctrine_Template {
     $this->getInvoker()->$state = $newState;
   }
   
-  public function canTransitionTo($state) {
-    foreach ($this->getOption('events') as $t) {
-      if($t['to']==$state && in_array($this->getState(), $t['from'])) {
-        return true;
-      }
+  private function canTransitionTo($event) {
+    $events = $this->getOption('events');
+    if(in_array($this->getState(), $events[$event]['from'])) {
+      return true;
     }
     return false;
   }
@@ -58,10 +59,10 @@ class StateMachine extends Doctrine_Template {
     // All event-names are callable functions and work the same as transitionTo
     // And all event-names get a can<Eventname> function to check if the transition is allowed
     if(array_key_exists($name, $events)) {
-      return $this->transitionTo($events[$name]['to']);
+      return $this->transitionTo($name);
     } elseif(array_key_exists(strtolower(preg_replace('/^can/', '', $name)), $events)) {
       $name = strtolower(preg_replace('/^can/', '', $name));
-      return $this->canTransitionTo($events[$name]['to']);
+      return $this->canTransitionTo($name);
     }
 
   }
