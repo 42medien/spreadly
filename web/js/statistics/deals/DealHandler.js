@@ -151,9 +151,36 @@ var Deal = {
 };
 
 var DealTable = {
-    
   editDate: function(){
     debug.log("[DealTable][editDate]");
     jQuery('input#editinplace_input').datetime({userLang  : 'de'});     
+  },
+  
+  saveCodes: function(){
+    debug.log('[DealTable][saveCodes]');    
+    var options = {
+        url:       '/deals/save_codes',
+        data: { ei_kcuf: new Date().getTime() },
+        type:      'POST',
+        dataType:  'json',
+        //resetForm: lReset,
+        success:   function(pResponse) {
+          EditInPlace.update(pResponse.content);
+          jQuery(document).trigger('close.facebox');    
+        }
+    };
+   
+    jQuery('#save_codes_form').submit(function() { 
+      debug.log('fdsfsa');
+      jQuery('#save_codes_form').ajaxSubmit(options);
+      return false; 
+    });    
+  },
+  
+  cancelLayer:function() {
+    jQuery('#cancel_layer').bind('click', function() {
+      jQuery(document).trigger('close.facebox');  
+      return false;
+    });
   }
 };

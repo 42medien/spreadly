@@ -144,7 +144,7 @@ class dealsActions extends sfActions
   	$params = $request->getPostParameters();
   	$deal = DealTable::getInstance()->find($params['deal_id']);
     $deal->addCoupons($params);
-    
+
     return $this->renderText(json_encode(
     	array(
     		'success' => true,
@@ -166,7 +166,7 @@ class dealsActions extends sfActions
   	  $error.((!$numeric&&!$higher) ? ' and ' : '');
   	  $error.($higher ? '' : 'not more than before');
   	}
-    
+
     return $this->renderText(json_encode(
     	array(
     		'success' => empty($error),
@@ -177,6 +177,7 @@ class dealsActions extends sfActions
   }
 
   public function executePaste_codes(sfWebRequest $request){
-		//$this->pForm = CouponCodesForm
+		$lDealId = $request->getParameter('deal_id');
+		$this->pDealId = $lDealId;
   }
 }

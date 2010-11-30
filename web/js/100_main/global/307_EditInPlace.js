@@ -148,18 +148,25 @@ var EditInPlace = {
     //check, if there is a edit field opend. if so: close all
     if(jQuery('#editinplace_input').is('*')){
       //emtpy the edit-elem
-      jQuery(EditInPlace.aElement).empty();
+      //jQuery(EditInPlace.aElement).empty();
       //if there is a given param pContent insert it into the edit-elem (this happens if the user saved a new value)
       if (pContent != undefined) {
-        jQuery(EditInPlace.aElement).append(pContent);
+        EditInPlace.update(pContent);
+        //jQuery(EditInPlace.aElement).append(pContent);
       } else {
+        EditInPlace.update(EditInPlace.aContent);
         //if there is no pContent, just close all opened edit-fields
-        jQuery(EditInPlace.aElement).append(EditInPlace.aContent);
+        //jQuery(EditInPlace.aElement).append(EditInPlace.aContent);
       }
     }
     //after closing init the effects and click event to the edit-elem
     EditInPlace.initEffects();
     EditInPlace.initByClick();
+  },
+  
+  update: function(pContent){
+    jQuery(EditInPlace.aElement).empty();
+    jQuery(EditInPlace.aElement).append(pContent);
   },
   
   /**

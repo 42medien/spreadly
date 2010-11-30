@@ -4,3 +4,4 @@ jQuery('.mirror-value').mirrorValue();
 Deal.init();
 DealForm.init();
 EditInPlace.init('click');
+DealTable.saveCodes();
