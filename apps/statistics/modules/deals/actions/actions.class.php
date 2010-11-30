@@ -157,7 +157,7 @@ class dealsActions extends sfActions
   	$this->getResponse()->setContentType('application/json');
   	$lParams = $pRequest->getPostParameters();
   	$lParams['input'] = trim($lParams['input']);
-  	$lDeal = DealTable::getInstance()->find($lParams['id']);
+  	$lDeal = DealTable::getInstance()->find($lParams['deal_id']);
     $lError = "";
     $lNumeric = is_numeric($lParams['input']);
   	$lHigher = $lParams['input'] > $lDeal->getCouponQuantity();
