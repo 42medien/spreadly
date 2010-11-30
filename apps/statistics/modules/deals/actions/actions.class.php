@@ -149,7 +149,7 @@ class dealsActions extends sfActions
     } else {
       $lError = "You can not add codes to coupons of type single.";
     }
-    
+
     return $this->renderText(json_encode(
     	array(
     		'success' => empty($lError),
@@ -175,7 +175,7 @@ class dealsActions extends sfActions
     	  $lError = $lError. ($lNumeric ? '' : 'not a number');
     	  $lError = $lError.((!$lNumeric&&!$lHigher) ? ' and ' : '');
     	  $lError = $lError.($lHigher ? '' : 'not more than before');
-    	}      
+    	}
     } else {
       $lError = $lDeal->isUnlimited() ? "You can not change the quantity of unlimited coupons." : "You are not allowed to do this.";
     }
@@ -192,5 +192,20 @@ class dealsActions extends sfActions
   public function executePaste_codes(sfWebRequest $request){
 		$lDealId = $request->getParameter('deal_id');
 		$this->pDealId = $lDealId;
+  }
+
+  public function executeSet_state(sfWebRequest $request) {
+  	$this->getResponse()->setContentType('application/json');
+  	$lParams = $request->getGetParameters();
+  	$lDeal = DealTable::getInstance()->find($lParams['deal_id']);
+  	$lDeal->setState($lParams['state']);
+  	$lDeal->save();
+  	return $this->renderText(json_encode(
+    	array(
+    		'success' => true,
+    		'html' => $this->getPartial('deals/deal_table_row_content', array('pDeal' => $lDeal)),
+    	  'state' => $lParams['state']
+    	)
+    ));
   }
 }

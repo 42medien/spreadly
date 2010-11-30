@@ -95,7 +95,7 @@ var EditInPlace = {
     jQuery(EditInPlace.aElement).removeClass('edit-img');    
     jQuery('#'+EditInPlace.aCssId).unbind('mouseover.editicon');
     //unbind the edit-click on a the opened edit-field
-    jQuery('#'+EditInPlace.aCssId).unbind('click.editinplaceclick');        
+    jQuery('#'+EditInPlace.aCssId).unbind('click.editinplaceclick');  
   },
   
   /**
@@ -107,8 +107,8 @@ var EditInPlace = {
     //take the current text inside of the elem to edit
     var lText = jQuery(EditInPlace.aElement).text();
     //make a new textfield and append the save-image to it
-    var lHtml = '<input type="text" value="'+lText+'" id="editinplace_input" name="editinplace_input" />';
-    lHtml += '<img src="/img/global/24x24/save.png" id="save-editin-place" />';
+    var lHtml = '<img src="/img/global/24x24/save.png" id="save-editin-place" />';
+    lHtml += '<input type="text" value="'+lText+'" id="editinplace_input" name="editinplace_input" />';
     //empty the edit-elem
     jQuery(EditInPlace.aElement).empty();
     // unbind the edit-effects
@@ -116,7 +116,8 @@ var EditInPlace = {
     //insert the textfield and the save-img into the edit-elem
     jQuery(lHtml).appendTo(EditInPlace.aElement);
     //and bind the save-event to the save-img
-    EditInPlace.save();        
+    EditInPlace.bindSaveClick();        
+    EditInPlace.bindSaveKeypress();
   },
   
   /**
@@ -147,16 +148,13 @@ var EditInPlace = {
     debug.log("[EditInPlace][close]");  
     //check, if there is a edit field opend. if so: close all
     if(jQuery('#editinplace_input').is('*')){
-      //emtpy the edit-elem
-      //jQuery(EditInPlace.aElement).empty();
       //if there is a given param pContent insert it into the edit-elem (this happens if the user saved a new value)
       if (pContent != undefined) {
+        //update given content
         EditInPlace.update(pContent);
-        //jQuery(EditInPlace.aElement).append(pContent);
       } else {
+        //update with initial-content
         EditInPlace.update(EditInPlace.aContent);
-        //if there is no pContent, just close all opened edit-fields
-        //jQuery(EditInPlace.aElement).append(EditInPlace.aContent);
       }
     }
     //after closing init the effects and click event to the edit-elem
@@ -170,40 +168,59 @@ var EditInPlace = {
   },
   
   /**
+   * binds the events to save to the editor-elements
+   * @author KM
+   */   
+  bindSaveClick: function(){
+    debug.log("[EditInPlace][bindSaveClick]"); 
+    //bind the click to the save-img in a opened edit-field
+    jQuery('#save-editin-place').live('click', function() {
+      EditInPlace.doSave();
+      return false;         
+    });
+  },
+  
+  /**
+   * binds the events to save to the editor-elements
+   * @author KM
+   */   
+  bindSaveKeypress: function(){
+    debug.log("[EditInPlace][bindSaveKeypress]"); 
+    jQuery('#editinplace_input').bind('keypress.savekeypress', function(pEvent){
+      if(pEvent.keyCode == 13){
+        EditInPlace.doSave();
+      }
+    });    
+  },  
+  
+  /**
    * sends the request to the action specified in the data-attr of the edit-elem
    * @author KM
    */   
-  save: function(){
-    debug.log("[EditInPlace][save]"); 
-    //bind the click to the save-img in a opened edit-field
-    jQuery('#save-editin-place').live('click', function() {
-      
-      var lValue = jQuery('#editinplace_input').val();
-      var lParams = jQuery.parseJSON(EditInPlace.aData.params);
-      //take the data from the data-attr
-      var lData = {
-          ei_kcuf: new Date().getTime(),
-          input: lValue
-      };
-      jQuery.extend(lData, lParams);
-      debug.log(lData);
+  doSave: function(){
+    var lValue = jQuery('#editinplace_input').val();
+    var lParams = jQuery.parseJSON(EditInPlace.aData.params);
+    //take the data from the data-attr
+    var lData = {
+        ei_kcuf: new Date().getTime(),
+        input: lValue
+    };
+    jQuery.extend(lData, lParams);
 
-      jQuery.ajax({
-        type: "POST",
-        url: EditInPlace.aData.action,
-        dataType: "json",
-        data: lData,        
-        success: function (pResponse) {
-          if(pResponse.success === true) {
-            //if data are saved: insert the new content to the edit-elem and close the edit-field
-            EditInPlace.close(pResponse.content);
-          } else {
-            //alert if there are validation-errors
-            alert(pReponse.error);
-          }
+    jQuery.ajax({
+      type: "POST",
+      url: EditInPlace.aData.action,
+      dataType: "json",
+      data: lData,        
+      success: function (pResponse) {
+        if(pResponse.success == true) {
+          //if data are saved: insert the new content to the edit-elem and close the edit-field
+          EditInPlace.close(pResponse.content);
+        } else {
+          //alert if there are validation-errors
+          alert(pResponse.error);
         }
-      });
-      return false;         
-    });
+      }
+    });    
   }
 };

@@ -182,5 +182,41 @@ var DealTable = {
       jQuery(document).trigger('close.facebox');  
       return false;
     });
+  },
+  
+  setState: function() {
+    debug.log('[DealTable][setState]');    
+    jQuery('.edit-state').live('click', function() {
+      var lAction = jQuery(this).attr('href');
+      var lCssId = jQuery(this).parent('td').parent('tr').attr('id');
+      jQuery.ajax({
+        type: "GET",
+        url: lAction,
+        dataType: "json",  
+        success: function (pResponse) {
+          if(pResponse.success == true) {
+            debug.log(lCssId);
+            DealTable.showRow(lCssId, pResponse.html, pResponse.state);
+          } else {
+            //alert if there are validation-errors
+            alert(pResponse.error);
+          }
+        }
+      });
+      return false;
+    });
+  },
+  
+  showRow: function(pCssId, pRow, pState) {
+    debug.log('[DealTable][showRow]'); 
+    var lId = '#'+pCssId;
+    jQuery(lId).empty();
+    if(jQuery(lId).hasClass('submitted')){jQuery(lId).removeClass('submitted');}
+    if(jQuery(lId).hasClass('approved')){jQuery(lId).removeClass('approved');}
+    if(jQuery(lId).hasClass('denied')){jQuery(lId).removeClass('denied');}  
+    if(jQuery(lId).hasClass('trashed')){jQuery(lId).removeClass('trashed');}      
+    if(jQuery(lId).hasClass('paused')){jQuery(lId).removeClass('paused');}     
+    jQuery(lId).addClass(pState);
+    jQuery(lId).append(pRow);
   }
 };

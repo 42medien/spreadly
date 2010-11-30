@@ -2,6 +2,6 @@
 $i = 0;
 ?>
 
-<tr class="<?php echo $i%2==0 ? 'odd' : 'even' ?>" id="domain-profile-row-<?php echo $pDeal->getId(); ?>" <?php echo (isset($style))?$style:''; ?>>
+<tr class="odd <?php echo $pDeal->getState(); ?>" id="domain-profile-row-<?php echo $pDeal->getId(); ?>" <?php echo (isset($style))?$style:''; ?>>
   <?php include_partial('deals/deal_table_row_content', array('pDeal' => $pDeal));?>
 </tr>
