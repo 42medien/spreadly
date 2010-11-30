@@ -153,6 +153,28 @@ class dealsActions extends sfActions
     ));
   }
 
+  public function executeSave_quantity(sfWebRequest $request){
+  	$this->getResponse()->setContentType('application/json');
+  	$params = $request->getPostParameters();
+  	$deal = DealTable::getInstance()->find($params['deal_id']);
+    $error = "";
+  	if($numeric=is_numeric($params['quantity']) && $higher=$params['quantity']>$deal->getCouponQuantity()) {
+      $deal->addCoupons($params);
+  	} else {
+  	  $error = $numeric ? '' : 'not a number';
+  	  $error.((!$numeric&&!$higher) ? ' and ' : '');
+  	  $error.($higher ? '' : 'not more than before');
+  	}
+    
+    return $this->renderText(json_encode(
+    	array(
+    		'success' => empty($error),
+    		'error' => empty($error) ? '' : $error,
+    	  'content' => $deal->getCouponQuantity()
+    	)
+    ));
+  }
+
   public function executePaste_codes(sfWebRequest $request){
 		//$this->pForm = CouponCodesForm
   }
