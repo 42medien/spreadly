@@ -29,9 +29,14 @@
 
           <div class="hover_bg left" id="like_area">
             <a class="like_text" title="<?php echo __("POS_BUTTON_TITLE", $pType); ?>" target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>');return false;">
-              <?php echo __("DEAL_BUTTON_VALUE", $pType); ?><span class="like_icon">&nbsp;</span>
+              Deal<span class="like_icon">&nbsp;</span>
             </a>
           </div>
+        </div>
+      </div>
+
+      <div id="additional_text_area_like" class="left big_space_to_left">
+        <?php echo $lActiveDeal['desc'] ?>
       </div>
     </div>
   </div>
