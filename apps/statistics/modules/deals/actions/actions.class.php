@@ -144,10 +144,10 @@ class dealsActions extends sfActions
   	$lParams = $pRequest->getPostParameters();
   	$lDeal = DealTable::getInstance()->find($lParams['deal_id']);
   	$lError = '';
-    if($this->getUser()->isMine($lDeal) && !$lDeal->isUnlimited()) {
-      $lDeal->addCoupons($lParams);
+    if($this->getUser()->isMine($lDeal) && $lDeal->getCouponType()==DealTable::COUPON_TYPE_MULTIPLE) {
+      $lDeal->addCoupons(array('multiple_codes' => $lParams['multiple_codes']));
     } else {
-      $lError = $lDeal->isUnlimited() ? "You can not add codes to unlimited coupons." : "You are not allowed to do this.";
+      $lError = "You can not add codes to coupons of type single.";
     }
     
     return $this->renderText(json_encode(
@@ -169,8 +169,7 @@ class dealsActions extends sfActions
       $lNumeric = is_numeric($lParams['input']);
     	$lHigher = $lParams['input'] > $lDeal->getCouponQuantity();
     	if($lNumeric && $lHigher) {
-        $lDeal->setCouponQuantity($lParams['input']);
-        $lDeal->addCoupons($lParams);
+        $lDeal->addCoupons(array('quantity' => $lParams['input']-$lDeal->getCouponQuantity()));
     	} else {
     	  $lError = "";
     	  $lError = $lError. ($lNumeric ? '' : 'not a number');

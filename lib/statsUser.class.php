@@ -32,6 +32,6 @@ class statsUser extends sfGuardSecurityUser
     return DomainProfileTable::retrieveAllForUser($this->getGuardUser());
   }
   public function isMine($object) {
-    return $object->getSfGuardUserId()==$this->getUserId();
+    return empty($object) ? false : $object->getSfGuardUserId()==$this->getUserId();
   }
 }

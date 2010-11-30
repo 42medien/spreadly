@@ -13,24 +13,15 @@
 class Deal extends BaseDeal {
 
   public function addCoupons($params) {
-    if($this->getState()==DealTable::STATE_APPROVED) {
-      return $this->saveMultipleCoupons($params, true);
-    } else {
-      return false;
-    }
+    return $this->saveMultipleCoupons($params, true);
   }
   
   public function saveCoupons($params) {
-    // TODO: Check for not yet saved coupons
-    if($this->getState()==DealTable::STATE_SUBMITTED) {
-      return $this->saveMultipleCoupons($params);
-    } else {
-      return false;
-    }
+    return $this->saveMultipleCoupons($params);
   }
   
   public function getRemainingCouponCount() {
-    return $this->getCoupons()->count();
+    return $this->getCouponType()==DealTable::COUPON_TYPE_MULTIPLE ? $this->getCoupons()->count() : ($this->isUnlimited() ? 'unlimited' : $this->getCouponCurrentQuantity());
   }
   
   public function isUnlimited() {
@@ -40,10 +31,8 @@ class Deal extends BaseDeal {
   
   private function saveMultipleCoupons($params, $pIsAdding=false) {
     $codes = array();
-    if(!$pIsAdding && $this->isUnlimited()) {
-      $codes[] = $params['single_code'];
-    } elseif(!$pIsAdding && $this->getCouponType()==DealTable::COUPON_TYPE_SINGLE &&
-             $this->getCouponQuantity()>0) {         
+    if($this->getCouponType()==DealTable::COUPON_TYPE_SINGLE) {
+      if(!empty($params['single_code'])) {
         $codes[] = $params['single_code'];
       }
     } elseif($this->getCouponType()==DealTable::COUPON_TYPE_MULTIPLE) {
@@ -63,14 +52,21 @@ class Deal extends BaseDeal {
       }
     }
     
-    if(!$this->isUnlimited()) {
-      $count = count($codes);
-      if($pIsAdding) {
-        $count+=$this->getCouponQuantity();
+   
+    $count = $this->getCouponQuantity();
+
+    if($pIsAdding && $this->getCouponType()==DealTable::COUPON_TYPE_SINGLE) {
+      if(!$this->isUnlimited()) {
+        $count += $params['quantity'];
       }
-      $this->setCouponQuantity($count);
-      $this->save();
+    } elseif($this->getCouponType()==DealTable::COUPON_TYPE_MULTIPLE) {
+      $count += count($codes);
     }
+    
+    $this->setCouponQuantity($count);
+    $this->save();
+
+    
     return $this->getCouponQuantity();
   }
 

@@ -45,6 +45,9 @@ Deal:
     coupon_quantity:
       type: integer
       default: 0
+    coupon_current_quantity:
+      type: integer
+      default: 0
     start_date:
       type: datetime
     end_date:
