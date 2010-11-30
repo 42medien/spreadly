@@ -66,6 +66,8 @@ class CouponTest extends PHPUnit_Framework_TestCase {
     $this->multiple->approve();
     $this->assertEquals(3, $this->multiple->addCoupons(array("multiple_codes" => "blah,blubb,hulli")));
     $this->assertEquals(3, $this->multiple->getCouponQuantity());
+    $this->assertEquals(6, $this->multiple->addCoupons(array("multiple_codes" => "har,hur,honk")));
+    $this->assertEquals(6, $this->multiple->getCouponQuantity());
   }
 
 }

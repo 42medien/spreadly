@@ -139,39 +139,43 @@ class dealsActions extends sfActions
     ));
   }
 
-  public function executeSave_codes(sfWebRequest $request){
+  public function executeSave_codes(sfWebRequest $pRequest){
   	$this->getResponse()->setContentType('application/json');
-  	$params = $request->getPostParameters();
-  	$deal = DealTable::getInstance()->find($params['deal_id']);
-    $deal->addCoupons($params);
+  	$lParams = $pRequest->getPostParameters();
+  	$lDeal = DealTable::getInstance()->find($lParams['deal_id']);
+    $lDeal->addCoupons($lParams);
 
     return $this->renderText(json_encode(
     	array(
     		'success' => true,
-    	  'content' => $deal->getCouponQuantity()
+    	  'content' => $lDeal->getCouponQuantity()
     	)
     ));
   }
 
-  public function executeSave_quantity(sfWebRequest $request){
+  public function executeSave_quantity(sfWebRequest $pRequest){
   	$this->getResponse()->setContentType('application/json');
-  	$params = $request->getPostParameters();
-  	$deal = DealTable::getInstance()->find($params['deal_id']);
-    $error = "";
-  	if($numeric=is_numeric($params['input']) && $higher=$params['input']>$deal->getCouponQuantity()) {
-      $deal->setCouponQuantity($params['input']);
-      $deal->addCoupons($params);
+  	$lParams = $pRequest->getPostParameters();
+  	$lParams['input'] = trim($lParams['input']);
+  	$lDeal = DealTable::getInstance()->find($lParams['id']);
+    $lError = "";
+    $lNumeric = is_numeric($lParams['input']);
+  	$lHigher = $lParams['input'] > $lDeal->getCouponQuantity();
+  	if($lNumeric && $lHigher) {
+      $lDeal->setCouponQuantity($lParams['input']);
+      $lDeal->addCoupons($lParams);
   	} else {
-  	  $error = $numeric ? '' : 'not a number';
-  	  $error.((!$numeric&&!$higher) ? ' and ' : '');
-  	  $error.($higher ? '' : 'not more than before');
+  	  $lError = "";
+  	  $lError = $lError. ($lNumeric ? '' : 'not a number');
+  	  $lError = $lError.((!$lNumeric&&!$lHigher) ? ' and ' : '');
+  	  $lError = $lError.($lHigher ? '' : 'not more than before');
   	}
 
     return $this->renderText(json_encode(
     	array(
-    		'success' => empty($error),
-    		'error' => empty($error) ? '' : $error,
-    	  'content' => $deal->getCouponQuantity()
+    		'success' => empty($lError),
+    		'error' => empty($lError) ? '' : $lError,
+    	  'content' => $lDeal->getCouponQuantity()
     	)
     ));
   }

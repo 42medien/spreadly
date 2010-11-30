@@ -14,7 +14,7 @@ class Deal extends BaseDeal {
 
   public function addCoupons($params) {
     if($this->getState()==DealTable::STATE_APPROVED) {
-      return $this->saveMultipleCoupons($params, $this);
+      return $this->saveMultipleCoupons($params, true);
     } else {
       return false;
     }
@@ -23,7 +23,7 @@ class Deal extends BaseDeal {
   public function saveCoupons($params) {
     // TODO: Check for not yet saved coupons
     if($this->getState()==DealTable::STATE_SUBMITTED) {
-      return $this->saveMultipleCoupons($params, $this);
+      return $this->saveMultipleCoupons($params);
     } else {
       return false;
     }
@@ -38,7 +38,7 @@ class Deal extends BaseDeal {
            $this->getCouponQuantity()==DealTable::COUPON_QUANTITY_UNLIMITED;
   }
   
-  private function saveMultipleCoupons($params) {
+  private function saveMultipleCoupons($params, $pIsAdding=false) {
     $codes = array();
     if($this->isUnlimited()) {
       $codes[] = $params['single_code'];
@@ -65,7 +65,11 @@ class Deal extends BaseDeal {
     }
     
     if(!$this->isUnlimited()) {
-      $this->setCouponQuantity(count($codes));
+      $count = count($codes);
+      if($pIsAdding) {
+        $count+=$this->getCouponQuantity();
+      }
+      $this->setCouponQuantity($count);
       $this->save();
     }
     return $this->getCouponQuantity();
