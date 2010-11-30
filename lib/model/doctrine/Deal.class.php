@@ -12,18 +12,18 @@
  */
 class Deal extends BaseDeal {
 
-  public function addCoupons($couponCodes) {
+  public function addCoupons($params) {
     if($this->getState()==DealTable::STATE_APPROVED) {
-      return $this->saveMultipleCoupons($couponCodes, $this);
+      return $this->saveMultipleCoupons($params, $this);
     } else {
       return false;
     }
   }
   
-  public function saveCoupons($couponCodes) {
+  public function saveCoupons($params) {
     // TODO: Check for not yet saved coupons
     if($this->getState()==DealTable::STATE_SUBMITTED) {
-      return $this->saveMultipleCoupons($couponCodes, $this);
+      return $this->saveMultipleCoupons($params, $this);
     } else {
       return false;
     }
