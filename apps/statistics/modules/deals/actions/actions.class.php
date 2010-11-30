@@ -143,11 +143,16 @@ class dealsActions extends sfActions
   	$this->getResponse()->setContentType('application/json');
   	$lParams = $pRequest->getPostParameters();
   	$lDeal = DealTable::getInstance()->find($lParams['deal_id']);
-    $lDeal->addCoupons($lParams);
-
+  	$lError = '';
+    if($this->getUser()->isMine($lDeal)) {
+      $lDeal->addCoupons($lParams);
+    else {
+      $lError = "You are not allowed to do this.";
+    }
     return $this->renderText(json_encode(
     	array(
-    		'success' => true,
+    		'success' => empty($lError),
+    		'error' => empty($lError) '' : $error,
     	  'content' => $lDeal->getCouponQuantity()
     	)
     ));
@@ -159,17 +164,21 @@ class dealsActions extends sfActions
   	$lParams['input'] = trim($lParams['input']);
   	$lDeal = DealTable::getInstance()->find($lParams['deal_id']);
     $lError = "";
-    $lNumeric = is_numeric($lParams['input']);
-  	$lHigher = $lParams['input'] > $lDeal->getCouponQuantity();
-  	if($lNumeric && $lHigher) {
-      $lDeal->setCouponQuantity($lParams['input']);
-      $lDeal->addCoupons($lParams);
-  	} else {
-  	  $lError = "";
-  	  $lError = $lError. ($lNumeric ? '' : 'not a number');
-  	  $lError = $lError.((!$lNumeric&&!$lHigher) ? ' and ' : '');
-  	  $lError = $lError.($lHigher ? '' : 'not more than before');
-  	}
+    if($this->getUser()->isMine($lDeal)) {
+      $lNumeric = is_numeric($lParams['input']);
+    	$lHigher = $lParams['input'] > $lDeal->getCouponQuantity();
+    	if($lNumeric && $lHigher) {
+        $lDeal->setCouponQuantity($lParams['input']);
+        $lDeal->addCoupons($lParams);
+    	} else {
+    	  $lError = "";
+    	  $lError = $lError. ($lNumeric ? '' : 'not a number');
+    	  $lError = $lError.((!$lNumeric&&!$lHigher) ? ' and ' : '');
+    	  $lError = $lError.($lHigher ? '' : 'not more than before');
+    	}      
+    } else {
+      $lError = 'You are not allowed to do this.';
+    }
 
     return $this->renderText(json_encode(
     	array(
