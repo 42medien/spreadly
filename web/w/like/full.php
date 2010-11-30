@@ -1,65 +1,4 @@
-<?php
-require_once('inc/config.inc.php');
-session_name("yiid_widget");
-session_set_cookie_params(time()+17776000, "/", LikeSettings::COOKIE_DOMAIN);
-session_start();
-header('P3P: CP="DSP LAW"');
-header('Pragma: no-cache');
-header('Cache-Control: private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
-
-require_once('inc/DealUtils.php');
-require_once('inc/WidgetUtils.php');
-require_once('inc/i18n.php');
-
-if (isset($_GET['url']) && !empty($_GET['url'])) {
-  $pUrl = urldecode($_GET['url']);
-} else {
-  $pUrl = urldecode($_SERVER['HTTP_REFERER']);
-}
-
-if (isset($_GET['type']) && !empty($_GET['type'])) {
-  $pType = $_GET['type'];
-} else {
-  $pType = "like";
-}
-if (isset($_GET['color']) && !empty($_GET['color'])) {
-  $lFontcolor = urldecode($_GET['color']);
-} else {
-  $lFontcolor = "#000000";
-}
-if (isset($_GET['short']) && !empty($_GET['short'])) {
-  $pFullShortVersion = true;
-} else {
-  $pFullShortVersion = false;
-}
-if (isset($_GET['social']) && !empty($_GET['social'])) {
-  $pSocialFeatures = true;
-} else {
-  $pSocialFeatures = false;
-}
-
-$pTitle = urldecode($_GET['title']);
-$pPhoto = urldecode($_GET['photo']);
-$pDescription = urldecode($_GET['description']);
-
-$lClickback = ClickBackHelper::extractClickback($pUrl, $_SERVER['HTTP_REFERER']);
-$lActiveDeal = DealUtils::dealActive($pUrl);
-
-$pUserId = MongoSessionPeer::extractUserIdFromSession(LikeSettings::SF_SESSION_COOKIE);
-$lSocialObjectArray = SocialObjectPeer::getDataForUrl($pUrl);
-$lIsUsed = YiidActivityObjectPeer::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId);
-$lSocialObjectArray = SocialObjectPeer::recalculateCountsRespectingUser($lSocialObjectArray, $lIsUsed);
-$lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
-$lShowFriends = false;
-$lLimit = 6;
-if($pUserId && $pSocialFeatures && $lSocialObjectArray['_id']) {
-	$lShowFriends = true;
-	$lLimit = $pFullShortVersion?6:8;
-}
-
-YiidStatsSingleton::trackVisit($pUrl);
-StatsHelper::trackPageImpression($pUrl, $lClickback, $pUserId);
-?>
+<?php include("buttonheader.php"); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -99,16 +38,16 @@ StatsHelper::trackPageImpression($pUrl, $lClickback, $pUserId);
 
 			      <div class="hover_bg left" id="like_area">
 		          <?php if($pFullShortVersion) { ?>
-		            <a class="like_icon" title="<?php echo __("POS_BUTTON_TITLE", $pType); ?>" <?php if($pUserId) { ?>onclick="YiidWidget.doLike(1);return false;"<?php } else { ?>target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>', 1);return false;"<?php } ?>>&nbsp;</a>
+		            <a class="like_icon" title="<?php echo __("POS_BUTTON_TITLE", $pType); ?>" <?php if($pUserId) { ?>onclick="YiidWidget.doLike(1);return false;"<?php } else { ?>target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>&case=1', 1);return false;"<?php } ?>>&nbsp;</a>
 			        <?php } else { ?>
-		            <a class="like_text" title="<?php echo __("POS_BUTTON_TITLE", $pType); ?>" <?php if($pUserId) { ?>onclick="YiidWidget.doLike(1);return false;"<?php } else { ?>target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>', 1);return false;"<?php } ?>>
+		            <a class="like_text" title="<?php echo __("POS_BUTTON_TITLE", $pType); ?>" <?php if($pUserId) { ?>onclick="YiidWidget.doLike(1);return false;"<?php } else { ?>target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>&case=1', 1);return false;"<?php } ?>>
 		              <?php echo __("POS_BUTTON_VALUE", $pType); ?><span class="like_icon">&nbsp;</span>
 		            </a>
 			        <?php } ?>
 			      </div>
 
 			      <div class="hover_bg left" id="dislike_area">
-			        <a class="dislike_icon" title="<?php echo __("NEG_BUTTON_TITLE", $pType); ?>" <?php if($pUserId) { ?>onclick="YiidWidget.doLike(0);return false;"<?php } else { ?>target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>', 0);return false;"<?php } ?>>&nbsp;</a>
+			        <a class="dislike_icon" title="<?php echo __("NEG_BUTTON_TITLE", $pType); ?>" <?php if($pUserId) { ?>onclick="YiidWidget.doLike(0);return false;"<?php } else { ?>target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>&case=-1', 0);return false;"<?php } ?>>&nbsp;</a>
 			      </div>
 
 		        <div class="left <?php if($pUserId) { ?>hover_bg<?php } ?>" id="open_settings_icon_area" <?php if($pUserId) { ?>onclick="YiidSlider.slideIn(event); return false;"<?php } ?> style="display: none;">
