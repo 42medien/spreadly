@@ -39,6 +39,7 @@ all:
 
     # Enable the database manager
     use_database:           true
+    i18n:                   true
 
     enabled_modules:        [default, sfGuardAuth, sfGuardGroup, sfGuardUser, sfGuardPermission]
     check_lock:             on
