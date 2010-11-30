@@ -146,13 +146,14 @@ class dealsActions extends sfActions
   	$lError = '';
     if($this->getUser()->isMine($lDeal)) {
       $lDeal->addCoupons($lParams);
-    else {
+    } else {
       $lError = "You are not allowed to do this.";
     }
+    
     return $this->renderText(json_encode(
     	array(
     		'success' => empty($lError),
-    		'error' => empty($lError) '' : $error,
+    		'error' => empty($lError) ? '' : $error,
     	  'content' => $lDeal->getCouponQuantity()
     	)
     ));
