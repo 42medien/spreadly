@@ -1,4 +1,3 @@
-<?php include("buttonheader.php"); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,7 +29,7 @@
 
           <div class="hover_bg left" id="like_area">
             <a class="like_text" title="<?php echo __("POS_BUTTON_TITLE", $pType); ?>" target="popup" onclick="return YiidUtils.openPopup('<?php echo $lPopupUrl; ?>');return false;">
-              <?php echo __("POS_BUTTON_VALUE", $pType); ?><span class="like_icon">&nbsp;</span>
+              <?php echo __("DEAL_BUTTON_VALUE", $pType); ?><span class="like_icon">&nbsp;</span>
             </a>
           </div>
       </div>
