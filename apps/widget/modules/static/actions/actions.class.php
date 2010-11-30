@@ -18,7 +18,7 @@ class staticActions extends sfActions {
   }
 
   public function executeLike(sfWebRequest $request) {
-    $this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "static_button");
+    $this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "popup");
 
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('popup/js_popup_ready'));
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('static/js_init_static.js'));
