@@ -301,7 +301,7 @@ var json_parse = (function () {
  * @author Karina Mies, http://snipplr.com/view.php?codeview&id=3561
  */
 var YiidUtils = {
-    
+
   /**
    * checks, if the class is set in the given element
    * @author http://snipplr.com/view.php?codeview&id=3561
@@ -343,8 +343,8 @@ var YiidUtils = {
       YiidUtils.removeClass(pElement, pRemove);
       YiidUtils.addClass(pElement, pInsert);
     }
-  },  
-  
+  },
+
   /**
    * returns an array of elements with the matched classes
    * @author extern
@@ -361,7 +361,7 @@ var YiidUtils = {
           el[j++] = tags[i];
       }
       return el;
-  },   
+  },
 
   /**
    * returns the text inside the given element
@@ -374,18 +374,18 @@ var YiidUtils = {
       return pElement.textContent;
     }
   },
-  
+
   /**
    * sets the given text inside the given element
    * @author Karina Mies
-   */  
+   */
   setInnerText: function(pElement, pText) {
     if(document.all){
       pElement.innerText = pText;
     } else{
       pElement.textContent = pText;
     }
-  },  
+  },
 
   /**
    * adds the given to a given element
@@ -398,7 +398,7 @@ var YiidUtils = {
       element.attachEvent("on" + eventType, handler);
     }
   },
-  
+
   unbindEvent: function(pElement, pEvent) {
   	pElement.pEventType = null;
   },
@@ -414,7 +414,10 @@ var YiidUtils = {
     if(pSendLike == true) {
       YiidRequest.doSendLike();
     }
-    var lPopup = window.open(pUrl, 'popup', 'width=830,height=700,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150');
+
+    var lQuery = encodeURI('&url='+YiidWidget.aUrl+'&type='+YiidWidget.aType+'&case=1&serv='+YiidServices.encodeSettings()+'&title='+YiidWidget.aTitle+'&description='+YiidWidget.aDescription+'&photo='+YiidWidget.aPhoto+'&clickback='+YiidWidget.aClickback);
+
+    var lPopup = window.open(pUrl+lQuery, 'popup', 'width=830,height=700,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150');
     if(lPopup) {
       return true;
     } else {
@@ -431,55 +434,55 @@ var YiidUtils = {
     lAttr.nodeValue = pValue;
     pElement.setAttributeNode(lAttr);
   },
-  
+
   /**
    * removes the complete given element
    * @author Karina Mies
-   */  
+   */
   deleteElement: function(pElement) {
     var lParent = pElement.parentNode;
     while(pElement.hasChildNodes()){
       pElement.removeChild(pElement.lastChild);
-      
+
     }
-    lParent.removeChild(pElement);  
+    lParent.removeChild(pElement);
   },
-  
+
   emptyElement: function(pElement) {
     while(pElement.hasChildNodes()){
       pElement.removeChild(pElement.lastChild);
-    }   
-  },  
-  
+    }
+  },
+
   /**
    * creates the xmlhttprequest-object for the right browser
    * @author Karina Mies
-   */   
-  createXMLHttpRequest: function() { 
+   */
+  createXMLHttpRequest: function() {
     var lXhttp = null;
-    if (window.ActiveXObject) {  
-      try {  
-        // IE 6 and higher 
-        lXhttp = new ActiveXObject("MSXML2.XMLHTTP"); 
-      } catch (e) { 
-        try { 
-          // IE 5 
-          lXhttp = new ActiveXObject("Microsoft.XMLHTTP"); 
-          } catch (e) { 
-            lXhttp=false; 
-          } 
-      } 
-    } else if (window.XMLHttpRequest) { 
-      try { 
-        // Mozilla, Opera, Safari ... 
-        lXhttp = new XMLHttpRequest(); 
-      } catch (e) { 
-        lXhttp=false; 
-      } 
-    } 
+    if (window.ActiveXObject) {
+      try {
+        // IE 6 and higher
+        lXhttp = new ActiveXObject("MSXML2.XMLHTTP");
+      } catch (e) {
+        try {
+          // IE 5
+          lXhttp = new ActiveXObject("Microsoft.XMLHTTP");
+          } catch (e) {
+            lXhttp=false;
+          }
+      }
+    } else if (window.XMLHttpRequest) {
+      try {
+        // Mozilla, Opera, Safari ...
+        lXhttp = new XMLHttpRequest();
+      } catch (e) {
+        lXhttp=false;
+      }
+    }
     return lXhttp;
   },
-  
+
   /**
    * returns a string imploded form the pieces array and separated with the given glue
    * @author http://kevin.vanzonneveld.net
@@ -495,7 +498,7 @@ var YiidUtils = {
     // *     returns 1: 'Kevin van Zonneveld'
     // *     example 2: implode(' ', {first:'Kevin', last: 'van Zonneveld'});
     // *     returns 2: 'Kevin van Zonneveld'
-    
+
     var i = '', retVal='', tGlue='';
     if (arguments.length === 1) {
         pieces = glue;
@@ -566,19 +569,19 @@ YiidServices = {
   /**
    * read the cookie and write it in a class var
    * @author Karina Mies
-   */  
+   */
   initSettings: function() {
     var lCookie = YiidCookie.getCookie(YiidCookie.aCookieName);
     if(lCookie != null) {
       YiidServices.aSettings = json_parse(lCookie);
     }
-        
+
     var lTimestamp = YiidCookie.getCookie(YiidCookie.aTimecheck);
     if(lTimestamp != null) {
     	YiidServices.aTimecheck = lTimestamp;
     }
   },
-  
+
   /**
    * updates the actual settings for the current button after clicking service-image in slider
    * @author Karina Mies
@@ -586,7 +589,7 @@ YiidServices = {
   updateSettings: function() {
     var lIndex, lHref;
     lHref = this.getAttribute('href');
-    lIndex = lHref.match(/[0-9]+/g); 
+    lIndex = lHref.match(/[0-9]+/g);
 
     //parse the json-string in the cookie
     var lObjects = YiidServices.aSettings;
@@ -599,11 +602,11 @@ YiidServices = {
     //if the clicked service is active, set it to inactive
       lObjects[lIndex].active = "0";
     }
-    
+
     //update the image (the cssid is always servicename-activestate)
-    YiidUtils.setAttr(this, 'id', lObjects[lIndex].name+"_"+lObjects[lIndex].active);    
+    YiidUtils.setAttr(this, 'id', lObjects[lIndex].name+"_"+lObjects[lIndex].active);
   },
-  
+
   /**
    * encodes the settings to a string for the request to action
    */
@@ -618,7 +621,7 @@ YiidServices = {
     var lString = YiidUtils.implode(',', lOis);
     return lString;
   },
-  
+
   /**
    * returns the actual timestamp (checked before slidein)
    * @author Karina Mies
@@ -627,7 +630,7 @@ YiidServices = {
     var lTimestamp = YiidCookie.getCookie(YiidCookie.aTimecheck);
     if(lTimestamp != null) {
       return lTimestamp;
-    }  	
+    }
   }
 };
 
@@ -648,7 +651,7 @@ var YiidSlider = {
   aOffsetWidth: '',
   aSlidingArea: null,
   aClickSlideInEvent: null,
-  
+
   /**
    * inits the class variables for slider
    */
@@ -664,7 +667,7 @@ var YiidSlider = {
     // the element that inits the slideof
     if(YiidSlider.aClickElementToClose === null) {
       YiidSlider.aClickElementToClose = document.getElementById('slide_arrow_opened');
-    }    
+    }
     //the hole sliding area: fix for width:1px-problem
     if(YiidSlider.aSlidingArea === null) {
       YiidSlider.aSlidingArea = document.getElementById('sliding_area');
@@ -684,18 +687,18 @@ var YiidSlider = {
   	YiidSlider.aClickSlideInEvent = pEvent;
   	//disable the like/dislike button and set it to settings
     YiidButtons.disable();
-    
+
     YiidInfo.disable();
-    
+
     //counter for the width
     var i = 1;
     //if there is currently an interval running: stop it
     YiidSlider.stopInterval();
-    
+
     if(YiidServices.aTimecheck < YiidServices.getActualTimestamp()) {
     	YiidServices.initSettings();
     }
-    
+
     //removes the favicons
     YiidSlider.removeCell();
     //insert table-cols with the favicons
@@ -738,10 +741,10 @@ var YiidSlider = {
         YiidSlider.aOffsetWidth = YiidSlider.aOffsetWidth-8;
       } else {
         //if the width of the slideelement has the needed length stop interval and toggle the class from opend to closed
-        YiidSlider.toggleClickElement();        
+        YiidSlider.toggleClickElement();
         //set whole sliding-table to display:none (fix for div. browsers, that has problem with width: 0;)
         YiidSlider.aSlidingArea.style.display='none';
-        
+
         YiidButtons.enable();
         //remove the inserted cols with the favicons
         YiidSlider.hideClickElement();
@@ -763,7 +766,7 @@ var YiidSlider = {
     var lObjects = YiidServices.aSettings;
     //helper variables to insert the cell
     var lCell, lLink;
-    
+
     //foreach service in the cookie we need a new cell in the tablerow
     for(var i=0; i<lObjects.length; i++){
       //create new cell for every service with index i
@@ -777,7 +780,7 @@ var YiidSlider = {
       YiidUtils.setAttr(lLink, 'id', lObjects[i].name+"_"+lObjects[i].active);
       YiidUtils.setAttr(lLink, 'class', 'favicon');
       YiidUtils.setAttr(lLink, 'title', lObjects[i].identifier);
-      //Bind the click event to the icons      
+      //Bind the click event to the icons
       lLink.onclick = YiidServices.updateSettings;
       //for every services we get the markup looking like that: <td><a id="twitter-0" class="favicon" onclick="YiidCookie.updateCookie(0);" href="#100"/></a></td>
       var lText = document.createTextNode('\u00A0');
@@ -819,11 +822,11 @@ var YiidSlider = {
    * @author Karina Mies
    */
   showClickElement: function() {
-    YiidSlider.init();  	
+    YiidSlider.init();
     YiidSlider.aClickElementToOpen.style.display = 'block';
     YiidUtils.toggleClass(YiidSlider.aTextAreaElement, 'big_space_to_left', 'small_space_to_left');
   },
-  
+
   /**
    * hides the open-slider-element, or display it if slider is opened
    * @author Karina Mies
@@ -835,19 +838,19 @@ var YiidSlider = {
   	} else {
   		// hide if slider is closed
       YiidUtils.toggleClass(YiidSlider.aTextAreaElement, 'small_space_to_left', 'big_space_to_left');
-      YiidSlider.aClickElementToOpen.style.display = 'none';  		
+      YiidSlider.aClickElementToOpen.style.display = 'none';
   	}
   },
-  
+
   /**
    * set the click element from open to close and backwards
    * @author Karina Mies
    */
   toggleClickElement: function() {
     if(YiidUtils.hasClass(YiidSlider.aClickElement, 'closed')) {
-      YiidUtils.toggleClass(YiidSlider.aClickElement, 'closed', 'opened');    	
+      YiidUtils.toggleClass(YiidSlider.aClickElement, 'closed', 'opened');
     }	else {
-      YiidUtils.toggleClass(YiidSlider.aClickElement, 'opened', 'closed');    	
+      YiidUtils.toggleClass(YiidSlider.aClickElement, 'opened', 'closed');
     }
   }
 
@@ -865,16 +868,16 @@ var YiidError = {
   showError: function(pMessage) {
     if(pMessage == undefined) {
       pMessage = "Error: Something went wrong. <span id='err-signup'>Login</span> and retry!";
-    }  
+    }
     var lAddText = document.getElementById('additional_text_area_like');
     YiidUtils.emptyElement(lAddText);
     var lBlock = document.createElement('p');
     YiidUtils.setAttr(lBlock, 'id', 'error-msg')
     lBlock.innerHTML = pMessage;
     lAddText.appendChild(lBlock);
-    
+
   },
-  
+
   /**
    * shows http errors in the widget
    * @author Karina Mies
@@ -884,12 +887,12 @@ var YiidError = {
     var lInfoElem = document.getElementById('infelem');
     if(pXhttp.statusText == '') {
       pXhttp.statusText = "Error: Something went wrong";
-    }      
+    }
     lInfoElem.style.display="none";
     //YiidUtils.setInnerText(lErrorElem, 'Error: '+pXhttp.statusText)
-    //lErrorElem.style.display="";    
+    //lErrorElem.style.display="";
   },
-  
+
   /**
    * if an undefined error is thrown (e.g. in a try catch), catch it and do nothing
    * @author Karina Mies
@@ -905,25 +908,25 @@ var YiidError = {
  * @author Karina Mies
  */
 var YiidWidget = {
-  
+
   //global variables needed in the object-methods
   aUrl: '',
   aType: '',
   aTitle: '',
   aDescription: '',
-  aPhoto: '',  
+  aPhoto: '',
   aClickback: '',
   aPopupPath: null,
   aServiceSettings: new Array(),
-    
+
   /**
    * inits the widget (after loading the widget)
    * @author Karina Mies
-   */    
+   */
   init: function(pUrl, pType, pTitle, pDescription, pPhoto, pClickback) {
     YiidWidget.aUrl = pUrl;
     YiidWidget.aType = pType;
-    YiidWidget.aTitle = pTitle;    
+    YiidWidget.aTitle = pTitle;
     YiidWidget.aDescription = pDescription;
     YiidWidget.aPhoto = pPhoto;
     YiidWidget.aClickback = pClickback;
@@ -937,7 +940,7 @@ var YiidWidget = {
   doLike: function() {
     if(YiidServices.aTimecheck < YiidServices.getActualTimestamp()) {
       YiidServices.initSettings();
-    }  	
+    }
     var lPossible = YiidWidget.isLikePossible();
     //inits the slider elements if not set
     YiidSlider.init();
@@ -948,7 +951,7 @@ var YiidWidget = {
       YiidWidget.markAsUsed();
       YiidButtons.markLiked();
       YiidInfo.markLiked();
-        
+
     //if user has services but non of them is activated
     } else if(lPossible === 0) {
       YiidSlider.slideIn();
@@ -959,7 +962,7 @@ var YiidWidget = {
     }
     return false;
   },
-  
+
   /**
    * check if a like is possible. returns 1: if a service is active. returns 0: if no service is active. returns 2: if user has no services
    * @author Karina Mies
@@ -987,7 +990,7 @@ var YiidWidget = {
     // if user has no services
     return 2;
   },
-  
+
   /**
    * display the used button and hide the possibility to like again
    * @author Karina Mies
@@ -998,16 +1001,16 @@ var YiidWidget = {
     var lUsedButton = document.getElementById('container_like_used');
     lUsedButton.style.display="block";
   },
-  
+
   /**
    * display the like/dislike buttons to like again
    * @author Karina Mies
-   */  
+   */
   markAsUnused: function() {
     var lButton = document.getElementById('container_like_used');
     lButton.style.display = "none";
     var lUnusedButton = document.getElementById('container_like');
-    lUnusedButton.style.display="";   
+    lUnusedButton.style.display="";
   }
 
 };
@@ -1017,7 +1020,7 @@ var YiidWidget = {
  * @author Karina Mies
  */
 var YiidInfo = {
-	
+
 	/**
    * mark the text as as liked (currently only update counter)
    * @author Karina Mies
@@ -1026,21 +1029,21 @@ var YiidInfo = {
     var lLike = document.getElementById('you-like');
     lLike.style.display = "inline";
 	},
-	
+
   /**
    * hides the info-area (e.g. if slider is on)
    * @author Karina Mies
-   */	
+   */
 	disable: function() {
-	 document.getElementById('additional_text_area_like').style.display="none";	
+	 document.getElementById('additional_text_area_like').style.display="none";
 	},
-	
+
   /**
    * shows the info-area (e.g. if slider is of)
    * @author Karina Mies
-   */	
+   */
 	enable: function() {
-   document.getElementById('additional_text_area_like').style.display="block";  
+   document.getElementById('additional_text_area_like').style.display="block";
 	}
 };
 
@@ -1049,33 +1052,33 @@ var YiidInfo = {
  * @author Karina Mies
  */
 var YiidButtons = {
-  
+
   /**
    * disable the like/dislike buttons (eg if slider is opened)
    * @author Karina Mies
-   */  
+   */
   disable: function() {
     var lButton = document.getElementById('normal_button');
     var lSettings = document.getElementById('settings_button');
     if(lButton && lSettings) {
     	lButton.style.display="none";
-      lSettings.style.display="block";    	
+      lSettings.style.display="block";
     }
   },
-  
+
   /**
    * enable the like/dislike buttons (eg if slider is closed)
    * @author Karina Mies
-   */  
+   */
   enable: function() {
     var lButton = document.getElementById('normal_button');
     var lSettings = document.getElementById('settings_button');
     if(lButton && lSettings) {
-      lSettings.style.display="none";      
+      lSettings.style.display="none";
       lButton.style.display="block";
     }
   },
-  
+
   /**
    * mark the buttons as liked (currently only update counter)
    * @author Karina Mies
@@ -1091,10 +1094,10 @@ var YiidButtons = {
  * @author Karina Mies
  */
 var YiidRequest = {
-  
+
   //global vars with path to servers
   aLikeAction: '',
-  
+
   /**
    * sends the like with settings to the defined action
    * @author Karina Mies
@@ -1106,8 +1109,8 @@ var YiidRequest = {
       try{
         //to which action should we send the request?
         //build the param-string
-        var lQuery = encodeURI('url='+YiidWidget.aUrl+'&type='+YiidWidget.aType+'&case=1&serv='+YiidServices.encodeSettings()+'&title='+YiidWidget.aTitle+'&description='+YiidWidget.aDescription+'&photo='+YiidWidget.aPhoto+'&clickback='+YiidWidget.aClickback);        
-        lXhttp.open("POST", YiidRequest.aLikeAction, true); 
+        var lQuery = encodeURI('url='+YiidWidget.aUrl+'&type='+YiidWidget.aType+'&case=1&serv='+YiidServices.encodeSettings()+'&title='+YiidWidget.aTitle+'&description='+YiidWidget.aDescription+'&photo='+YiidWidget.aPhoto+'&clickback='+YiidWidget.aClickback);
+        lXhttp.open("POST", YiidRequest.aLikeAction, true);
         //Send the proper header information along with the request
         lXhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         lXhttp.setRequestHeader("Content-length", lQuery.length);
@@ -1125,13 +1128,13 @@ var YiidRequest = {
             }
           }
         };
-        lXhttp.send(lQuery);          
+        lXhttp.send(lQuery);
       } catch(lError) {
         YiidError.undefinedError(lError);
       }
     }
   },
-  
+
   /**
    * sends the request if user is logged out
    * @author Karina Mies
@@ -1144,19 +1147,19 @@ var YiidRequest = {
       try{
         //to which action should we send the request?
         //build the param-string
-        var lQuery = encodeURI('url='+YiidWidget.aUrl+'&type='+YiidWidget.aType+'&case='+pCase);        
-        lXhttp.open("POST", "http://www.yiid.com", true); 
+        var lQuery = encodeURI('url='+YiidWidget.aUrl+'&type='+YiidWidget.aType+'&case='+pCase);
+        lXhttp.open("POST", "http://www.yiid.com", true);
         //Send the proper header information along with the request
         lXhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         lXhttp.setRequestHeader("Content-length", lQuery.length);
         lXhttp.setRequestHeader("Connection", "close");
-        lXhttp.send(lQuery);          
+        lXhttp.send(lQuery);
       } catch(lError) {
         YiidError.undefinedError(lError);
       }
     }
-  },   
-  
+  },
+
   /**
    * Evaluate the response after clicking like/unlike, shows errors and defines the behaviour of the widget
    * @author Karina Mies
@@ -1182,6 +1185,6 @@ var YiidRequest = {
         //currently we only evaluate the 401->no active session error. all other we handle in the same way
         //YiidError.showHttpError(pXhttp);
       }
-    }    
+    }
   }
 };
