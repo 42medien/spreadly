@@ -90,7 +90,7 @@ class dealsActions extends sfActions
     if($this->pForm->isValid()) {
 	    $lObject = $this->pForm->save();
 	    $deal = $this->pForm->getEmbeddedForm('deal')->getObject();
-	    $deal->saveCoupons($values['deal']['coupon']);
+	    $deal->saveInitialCoupons($values['deal']['coupon']);
 	    $lReturn['html'] = $this->getPartial('deals/deal_in_process');
     } else {
     	$lReturn['html'] = $this->getPartial('deals/create_deal_form', array('pForm' => $this->pForm));
@@ -145,7 +145,7 @@ class dealsActions extends sfActions
   	$lDeal = DealTable::getInstance()->find($lParams['deal_id']);
   	$lError = '';
     if($this->getUser()->isMine($lDeal) && $lDeal->getCouponType()==DealTable::COUPON_TYPE_MULTIPLE) {
-      $lDeal->addCoupons(array('multiple_codes' => $lParams['multiple_codes']));
+      $lDeal->addMoreCoupons(array('multiple_codes' => $lParams['multiple_codes']));
     } else {
       $lError = "You can not add codes to coupons of type single.";
     }
@@ -169,7 +169,7 @@ class dealsActions extends sfActions
       $lNumeric = is_numeric($lParams['input']);
     	$lHigher = $lParams['input'] > $lDeal->getCouponQuantity();
     	if($lNumeric && $lHigher) {
-        $lDeal->addCoupons(array('quantity' => $lParams['input']-$lDeal->getCouponQuantity()));
+        $lDeal->addMoreCoupons(array('quantity' => $lParams['input']-$lDeal->getCouponQuantity()));
     	} else {
     	  $lError = "";
     	  $lError = $lError. ($lNumeric ? '' : 'not a number');
@@ -198,11 +198,16 @@ class dealsActions extends sfActions
   	$this->getResponse()->setContentType('application/json');
   	$lParams = $request->getGetParameters();
   	$lDeal = DealTable::getInstance()->find($lParams['deal_id']);
-  	$lDeal->setState($lParams['state']);
-  	$lDeal->save();
+  	$lError = "";
+  	if($lDeal->canTransitionTo($lParams['state'])) {
+    	$lDeal->transitionTo($lParams['state']);  	  
+  	} else {
+  	  $lError = "Cannot transition to: ".$lParams['state'];
+  	}
   	return $this->renderText(json_encode(
     	array(
-    		'success' => true,
+    		'success' => empty($lError),
+    		'error' => $lError,
     		'html' => $this->getPartial('deals/deal_table_row_content', array('pDeal' => $lDeal)),
     	  'state' => $lParams['state']
     	)

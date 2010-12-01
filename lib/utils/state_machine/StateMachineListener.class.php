@@ -7,16 +7,12 @@ class StateMachineListener extends Doctrine_Record_Listener
     $this->_options = $options;
   }
   
-  public function preInsert(Doctrine_Event $event) {
+  public function preInsert(Doctrine_Event $pEvent) {
     // Set initial state
-    $invoker = $event->getInvoker();
-    $state = $this->getOption('column');
+    $lInvoker = $pEvent->getInvoker();
+    $lState = $this->getOption('column');
     if(sfConfig::get('sf_environment')!='test') {
-      $invoker->$state = $this->getOption('initial');      
+      $lInvoker->$lState = $this->getOption('initial');      
     }
-  }
-  
-  public function preUpdate(Doctrine_Event $event) {
-   // Check if a transition is needed and do it if it is possible, throw exception if not
   }
 }

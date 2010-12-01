@@ -22,9 +22,27 @@ class StateMachine extends Doctrine_Template {
     }
   }
   
+  public function transitionTo($pState) {
+    return $this->transitionFor($this->getEventNameForState($pState));
+  }
+  
+  public function canTransitionTo($pState) {
+    return $this->canTransitionFor($this->getEventNameForState($pState));
+  }  
+  
+  private function getEventNameForState($pState) {
+    $lEvents = $this->getOption('events');
+    foreach ($lEvents as $lEventName => $lEventData) {
+      if(in_array($this->getState(), $lEventData['from']) && $lEventData['to']==$pState) {
+        return $lEventName;
+      }
+    }
+    return null;
+  }
+  
   // Transitions to new state, if it is allowed and fires an event
-  private function transitionTo($event) {
-    if($this->canTransitionTo($event)) {
+  private function transitionFor($event) {
+    if($this->canTransitionFor($event)) {
       $events = $this->getOption('events');
       $this->setState($events[$event]['to']);
       $this->getInvoker()->save();
@@ -43,10 +61,10 @@ class StateMachine extends Doctrine_Template {
 
   public function setState($newState) {
     $state = $this->getOption('column');
-    $this->getInvoker()->$state = $newState;
+    $this->getInvoker()->$state = $newState;      
   }
   
-  private function canTransitionTo($event) {
+  private function canTransitionFor($event) {
     $events = $this->getOption('events');
     if(in_array($this->getState(), $events[$event]['from'])) {
       return true;
@@ -56,13 +74,13 @@ class StateMachine extends Doctrine_Template {
   
   public function __call($name, $args) {
     $events = $this->getOption('events');
-    // All event-names are callable functions and work the same as transitionTo
+    // All event-names are callable functions and work the same as transitionFor
     // And all event-names get a can<Eventname> function to check if the transition is allowed
     if(array_key_exists($name, $events)) {
-      return $this->transitionTo($name);
+      return $this->transitionFor($name);
     } elseif(array_key_exists(strtolower(preg_replace('/^can/', '', $name)), $events)) {
       $name = strtolower(preg_replace('/^can/', '', $name));
-      return $this->canTransitionTo($name);
+      return $this->canTransitionFor($name);
     }
 
   }

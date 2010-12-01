@@ -12,16 +12,36 @@
  */
 class Deal extends BaseDeal {
 
-  public function addCoupons($params) {
+  public function addMoreCoupons($params) {
     return $this->saveMultipleCoupons($params, true);
   }
   
-  public function saveCoupons($params) {
+  public function saveInitialCoupons($params) {
     return $this->saveMultipleCoupons($params);
   }
   
   public function getRemainingCouponCount() {
-    return $this->getCouponType()==DealTable::COUPON_TYPE_MULTIPLE ? $this->getCoupons()->count() : ($this->isUnlimited() ? 'unlimited' : $this->getCouponCurrentQuantity());
+    return $this->isUnlimited() ? 'unlimited' : $this->getCouponCurrentQuantity();
+  }
+  
+  public function popCoupon() {
+    $code = null;
+    if($this->isUnlimited()) {
+      $coupons = $this->getCoupons();
+      $code = $coupons[0]->getCode();
+    } elseif($this->getRemainingCouponCount()>0) {
+      $coupons = $this->getCoupons();
+      $code = $coupons[0]->getCode();
+      $newQuantity = $this->getCouponCurrentQuantity();
+      $newQuantity -= 1;
+      $this->setCouponCurrentQuantity($newQuantity);
+      if($this->getCouponType()==DealTable::COUPON_TYPE_MULTIPLE) {
+        $coupons[0]->delete();
+        unset($coupons[0]);
+      }
+    }
+    $this->save();
+    return $code;
   }
   
   public function isUnlimited() {
@@ -47,27 +67,36 @@ class Deal extends BaseDeal {
       if(!empty($code)) {
         $c = new Coupon();
         $c->setCode($code);
-        $c->setDeal($this);
+        $c->setDealId($this->getId());
         $c->save();        
       }
     }
     
-   
-    $count = $this->getCouponQuantity();
+    $this->saveQuantities(count($codes), (empty($params['quantity']) ? 0 : $params['quantity']), $pIsAdding);
 
-    if($pIsAdding && $this->getCouponType()==DealTable::COUPON_TYPE_SINGLE) {
-      if(!$this->isUnlimited()) {
-        $count += $params['quantity'];
-      }
-    } elseif($this->getCouponType()==DealTable::COUPON_TYPE_MULTIPLE) {
-      $count += count($codes);
-    }
-    
-    $this->setCouponQuantity($count);
-    $this->save();
-
-    
     return $this->getCouponQuantity();
   }
+  
+  private function saveQuantities($pNumberOfCodes, $pParamQuantity, $pIsAdding) {
+    $lCouponQuantity = $this->getCouponQuantity();
+    $lCurrentQuantity = $this->getCouponCurrentQuantity();
+    $lNewEntries = 0;
+    
+    if($pIsAdding && $this->getCouponType()==DealTable::COUPON_TYPE_SINGLE) {
+      if(!$this->isUnlimited()) {
+        $lNewEntries += $pParamQuantity;
+      }
+    } elseif($this->getCouponType()==DealTable::COUPON_TYPE_MULTIPLE) {
+      $lNewEntries += $pNumberOfCodes;
+    }
 
+    $this->setCouponQuantity($lCouponQuantity+$lNewEntries);
+    if($pIsAdding) {
+      $this->setCouponCurrentQuantity($lCurrentQuantity+$lNewEntries);      
+    } else {
+      $this->setCouponCurrentQuantity($this->getCouponQuantity());      
+    }
+    
+    $this->save();
+  }
 }

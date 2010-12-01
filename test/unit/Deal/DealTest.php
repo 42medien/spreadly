@@ -65,16 +65,44 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $this->submitted->approve();
     $this->assertEquals('approved', $this->submitted->getState());
   }
+
+  public function testApproveWithTransitionTo() {
+    $this->assertTrue($this->submitted->canTransitionTo('approved'));
+    $this->submitted->transitionTo('approved');
+    $this->assertEquals('approved', $this->submitted->getState());
+  }
+
+  public function testApproveWithSetState() {
+    $this->assertTrue($this->submitted->canApprove());
+    $this->submitted->setState('approved');
+    $this->submitted->save();
+    $this->submitted->refresh();
+    $this->assertEquals('approved', $this->submitted->getState());
+  }
   
   public function testNotApprovable() {
+    $exception = false;
     try {
       $this->assertFalse($this->denied->canApprove());
       $this->denied->approve();
     } catch(sfException $e) {
+      $exception = true;
       $this->assertEquals('denied', $this->denied->getState());
       $this->assertEquals('Could not transition for event: approve', $e->getMessage());
     }
+    $this->assertTrue($exception);
   }
+  
+  // TODO: should it throw an exception in this case too???
+  /*
+  public function testNotApprovableWithSetState() {
+    $this->assertFalse($this->denied->canApprove());
+    $this->denied->setState('approved');
+    $this->denied->save();
+    $this->denied->refresh();
+    $this->assertEquals('denied', $this->denied->getState());
+  }
+  */
   
   public function testDeny() {
     $this->assertTrue($this->submitted->canDeny());
@@ -91,6 +119,12 @@ class DealTest extends PHPUnit_Framework_TestCase {
   public function testResume() {
     $this->assertTrue($this->paused->canResume());
     $this->paused->resume();
+    $this->assertEquals('approved', $this->paused->getState());
+  }
+
+  public function testResumeWithTransitionTo() {
+    $this->assertTrue($this->paused->canTransitionTo('approved'));
+    $this->paused->transitionTo('approved');
     $this->assertEquals('approved', $this->paused->getState());
   }
 
@@ -113,45 +147,60 @@ class DealTest extends PHPUnit_Framework_TestCase {
   }
 
   public function testTrashShouldBeLastState() {
+    $exception = false;
     try {
       $this->assertFalse($this->trashed->canSubmit());
       $this->trashed->submit();
     } catch(sfException $e) {
+      $exception = true;
       $this->assertEquals('trashed', $this->trashed->getState());
       $this->assertEquals('Could not transition for event: submit', $e->getMessage());
     }
+    $this->assertTrue($exception);
 
+    $exception = false;
     try {
       $this->assertFalse($this->trashed->canApprove());
       $this->trashed->approve();
     } catch(sfException $e) {
+      $exception = true;
       $this->assertEquals('trashed', $this->trashed->getState());
       $this->assertEquals('Could not transition for event: approve', $e->getMessage());
     }
+    $this->assertTrue($exception);
 
+    $exception = false;
     try {
       $this->assertFalse($this->trashed->canDeny());
       $this->trashed->deny();
     } catch(sfException $e) {
+      $exception = true;
       $this->assertEquals('trashed', $this->trashed->getState());
       $this->assertEquals('Could not transition for event: deny', $e->getMessage());
     }
+    $this->assertTrue($exception);
 
+    $exception = false;
     try {
       $this->assertFalse($this->trashed->canPause());
       $this->trashed->pause();
     } catch(sfException $e) {
+      $exception = true;
       $this->assertEquals('trashed', $this->trashed->getState());
       $this->assertEquals('Could not transition for event: pause', $e->getMessage());
     }
+    $this->assertTrue($exception);
 
+    $exception = false;
     try {
       $this->assertFalse($this->trashed->canResume());
       $this->trashed->resume();
     } catch(sfException $e) {
+      $exception = true;
       $this->assertEquals('trashed', $this->trashed->getState());
       $this->assertEquals('Could not transition for event: resume', $e->getMessage());
     }
+    $this->assertTrue($exception);
   }
   
   public function testEventApprove() {
@@ -181,4 +230,6 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $this->submitted = Doctrine::getTable('Deal')->find($id);
     $this->assertEquals('approved', $this->submitted->getState());
   }
+  
+  
 }

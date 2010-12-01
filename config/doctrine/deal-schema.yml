@@ -71,13 +71,13 @@ Deal:
   relations:
     sfGuardUser:
       foreignAlias: Deals
-      onDelete: CASCADE  
+      onDelete: CASCADE
     DomainProfile:
       type: one
       local: domain_profile_id
       foreign: id
       foreignAlias: Deals
-      onDelete: CASCADE  
+      onDelete: CASCADE
     Coupons:
       type: many
       local: id
@@ -96,4 +96,4 @@ Coupon:
   relations:
     Deal:
       foreignAlias: Coupons
-      onDelete: CASCADE  
+      onDelete: CASCADE

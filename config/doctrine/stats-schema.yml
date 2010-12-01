@@ -30,7 +30,7 @@ DomainProfile:
   relations:
     sfGuardUser:
       foreignAlias: DomainProfiles
-      onDelete:     CASCADE
+      onDelete: CASCADE
     Deals:
       class: Deal
       type: many
