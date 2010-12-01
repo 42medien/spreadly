@@ -17,8 +17,6 @@ class StatsFeeder {
    * @param sfEvent $event
    */
   public static function feed($pYiidActivity, $pUser, $pSocialObject = null) {
-    sfContext::getInstance()->getLogger()->err("{StatsFeeder} " . print_r($pEvent, true));
-
     if (!$pUser) {
       return false;
     }
