@@ -72,7 +72,9 @@ class dealsActions extends sfActions
 		unset($lParams['ei_kcuf']);
 		unset($lParams['single-quantity']);
     //$lDealForm = new DealForm();
-
+    
+    // Cleaning up the single code/multi code dilemma
+    $lParams['deal']['coupon_type']=='single' ? $lParams['deal']['coupon']['multiple_codes']="" : $lParams['deal']['coupon']['single_code']="";
 
     if($lDealId = $lParams['deal']['id']){
       $lDeal = DealTable::getInstance()->find($lDealId);
@@ -91,7 +93,7 @@ class dealsActions extends sfActions
     if($this->pForm->isValid()) {
 	    $lObject = $this->pForm->save();
 	    $deal = $this->pForm->getEmbeddedForm('deal')->getObject();
-	    $deal->saveInitialCoupons($values['deal']['coupon']);
+	    $deal->saveInitialCoupons($lParams['deal']['coupon']);
 	    $lReturn['html'] = $this->getPartial('deals/deal_in_process');
     } else {
     	$lCouponType = $lParams['deal']['coupon_type'];
