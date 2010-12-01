@@ -15,8 +15,8 @@ class DomainProfileForm extends BaseDomainProfileForm
     $this->setValidators(array(
       'id'                 => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'url'                => new sfValidatorAnd(array(
-          new UrlValidator(array('required' => true), array('required' => 'required')),
-          new sfValidatorString(array('max_length' => 255, 'required' => true), array('max_length' => 'max_length', 'required' => 'required')))),
+          new UrlValidator(array('required' => true, 'trim' => true), array('required' => 'required')),
+          new sfValidatorString(array('max_length' => 255, 'required' => true, 'trim' => true), array('max_length' => 'max_length', 'required' => 'required')))),
       'protocol'              => new sfValidatorChoice(array('choices' => array(0 => 'http', 1 => 'https'), 'required' => true)),
       'state'              => new sfValidatorChoice(array('choices' => array(0 => 'pending', 1 => 'verified'), 'required' => false)),
       'sf_guard_user_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'))),

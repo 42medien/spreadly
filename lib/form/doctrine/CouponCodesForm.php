@@ -19,8 +19,8 @@ class CouponCodesForm extends BaseForm {
     ));
 
     $this->setValidators(array(
-      'single_code'           => new sfValidatorString(array("required" => false)),
-      'multiple_codes'        => new sfValidatorString(array("required" => false))
+      'single_code'           => new sfValidatorString(array("required" => false, 'trim' => true)),
+      'multiple_codes'        => new sfValidatorString(array("required" => false, 'trim' => true))
     ));
     
     $this->getValidatorSchema()->setPostValidator(
