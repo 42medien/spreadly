@@ -57,12 +57,12 @@ $pDeal = DealTable::getInstance()->find(1);
 
 //$lObject = SocialObjectTable::createSocialObject('http://affen.de', null, 'affen title', 'affen description', null);
 
-YiidActivityTable::saveLikeActivitys($lUserHugo->getId(), 'http://affen.de', $lHugoOis, array($lOiHugoTwitter->getId()), 1, 'like', 'affen title');
-YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://affen.de', $lUserHansOis, array($lOiHansFb->getId()), 1, 'like', 'affen title', 'bla', null, null, "akdhgasjkhdgaskjh", $pDeal->getId());
+YiidActivityTable::saveLikeActivitys($lUserHugo->getId(), 'http://affen.de', $lHugoOis, array($lOiHugoTwitter->getId()), 1, 'like', 'affen title', 'bla', null, null, "akdhgasjkhdgaskjh", $pDeal->getId());
+YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://affen.de', $lUserHansOis, array($lOiHansFb->getId()), 1, 'like', 'affen title');
 YiidActivityTable::saveLikeActivitys($lUserKarl->getId(), 'http://affen.de', $lUserKarlOis, array($lOiKarlTwitter->getId()), 1, 'like', 'affen title');
 
-YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://bim.bo', $lUserHansOis, array($lOiHansTwitter->getId()), 1, 'like', 'bimbo title');
-YiidActivityTable::saveLikeActivitys($lUserJames->getId(), 'http://bim.bo', $lUserJamesOis, array($lOiJamesTwitter->getId()), -1, 'like', 'bimbo title', 'bla', null, null, "akdhgasjkhdgaskjh", $pDeal->getId());
+YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://bim.bo', $lUserHansOis, array($lOiHansTwitter->getId()), 1, 'like', 'bimbo title', 'bla', null, null, "akdhgasjkhdgaskjh", $pDeal->getId());
+YiidActivityTable::saveLikeActivitys($lUserJames->getId(), 'http://bim.bo', $lUserJamesOis, array($lOiJamesTwitter->getId()), -1, 'like', 'bimbo title');
 YiidActivityTable::saveLikeActivitys($lUserSnirgelchen->getId(), 'http://bim.bo', $lUserSnirgelchenOis, array($lOiSnirgelchenTwitter->getId()), 1, 'like', 'bimbo title');
 YiidActivityTable::saveLikeActivitys($lUserManni->getId(), 'http://bim.bo', $lUserManniOis, array($lOiManniTwitter->getId()), -1, 'like', 'bimbo title');
 YiidActivityTable::saveLikeActivitys($lUserAffe->getId(), 'http://bim.bo', $lUserAffeOis, array($lOiAffeTwitter->getId()), 1, 'like', 'bimbo title');
@@ -71,10 +71,10 @@ YiidActivityTable::saveLikeActivitys($lUserSnirgelchen->getId(), 'http://blog.ya
 YiidActivityTable::saveLikeActivitys($lUserManni->getId(), 'http://bim.bo', $lUserManniOis, array($lOiManniFb->getId()), -1, 'like', 'bimbo title');
 YiidActivityTable::saveLikeActivitys($lUserAffe->getId(), 'http://bim.bo', $lUserAffeOis, array($lOiAffeFb->getId()), 1, 'like', 'bimbo title');
 
-YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://snirgel.de', $lUserHansOis, array($lOiHansFb->getId(), $lOiHansTwitter->getId()), 1, 'like', 'spiegel.de title title');
+YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://snirgel.de', $lUserHansOis, array($lOiHansFb->getId(), $lOiHansTwitter->getId()), 1, 'like', 'spiegel.de title title', 'bla', null, null, "akdhgasjkhdgaskjh", $pDeal->getId());
 YiidActivityTable::saveLikeActivitys($lUserKarl->getId(), 'http://snirgel.de', $lUserKarlOis, array($lOiKarlTwitter->getId()), 1, 'like', 'spiegel.de title title');
 
-YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://www.snirgel.de', $lUserHansOis, array($lOiHansTwitter->getId()), -1, 'like', 'snirgel.de title title', 'bla', null, null, "akdhgasjkhdgaskjh", $pDeal->getId());
+YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://www.snirgel.de', $lUserHansOis, array($lOiHansTwitter->getId()), -1, 'like', 'snirgel.de title title');
 YiidActivityTable::saveLikeActivitys($lUserKarl->getId(), 'http://www.snirgel.de', $lUserKarlOis, array($lOiKarlTwitter->getId()), -1, 'like', 'snirgel.de title title', 'bla');
 YiidActivityTable::saveLikeActivitys($lUserHugo->getId(), 'http://www.snirgel.de', $lHugoOis, array($lOiHugoTwitter->getId()), -1, 'like', 'snirgel.de title title');
 

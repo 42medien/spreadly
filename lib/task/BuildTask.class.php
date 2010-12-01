@@ -88,6 +88,12 @@ EOF;
     $this->runTask('doctrine:build', $args, array('env' => $opts['env']));
     // clean up models folder
     $this->runTask('doctrine:clean', array("--no-confirmation"));
+
+    // initialize mongo objects
+    if ($env == 'dev' || $env == 'staging') {
+      $this->getFilesystem()->execute("php data/fixtures/initializeMongoObjects.php");
+    }
+
     $this->runTask('cc');
   }
 }
