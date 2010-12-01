@@ -28,6 +28,20 @@ class Deal extends BaseDeal {
     return $this->getCouponClaimedQuantity();
   }
   
+  private function fireQuantityChangedEvent() {
+    $prefix = $this->getTable()->getTableName();
+    $eventName = $prefix.".couponQuantityChanged";
+    
+    sfContext::getInstance()
+      ->getEventDispatcher()
+      ->notify(new sfEvent($this, $eventName, array("quantity" => $this->getCouponQuantity())));
+  }
+  
+  public function setCouponQuantity($pQuantity) {
+    parent::_set('coupon_quantity', $pQuantity);
+    $this->fireQuantityChangedEvent();
+  }
+  
   public function popCoupon() {
     $code = null;
     if($this->isUnlimited()) {
@@ -95,5 +109,14 @@ class Deal extends BaseDeal {
     $this->setCouponQuantity($lCouponQuantity+$lNewEntries);
     
     $this->save();
+  }
+  
+  public function toMongoArray() {
+    $array = $this->toArray();
+    $array['start_date'] = new MongoDate(strtotime($array['start_date']));
+    $array['end_date'] = new MongoDate(strtotime($array['end_date']));
+    $array['created_at'] = new MongoDate(strtotime($array['created_at']));
+    $array['updated_at'] = new MongoDate(strtotime($array['updated_at']));
+    return $array;
   }
 }
