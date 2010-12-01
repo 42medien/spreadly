@@ -36,7 +36,7 @@
       </div>
 
       <div id="additional_text_area_like" class="left big_space_to_left">
-        <?php echo $lActiveDeal['desc'] ?>
+        <?php echo $lActiveDeal['button_wording'] ?>
       </div>
     </div>
   </div>
