@@ -28,7 +28,7 @@
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="9">&nbsp;</td>
+      <td colspan="9"><?php echo __('You can edit "End" (dates must be in the future) and "Max" (e.g. by adding new coupon codes) without a new approval from yiid'); ?></td>
     </tr>
   </tfoot>
 </table>
