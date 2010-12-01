@@ -147,10 +147,22 @@ class YiidActivityObjectPeer {
    * @param int $pUserId
    * @return false or score of action taken (-1/1)
    */
-  public static function actionOnObjectByUser($pSocialObjectId, $pUserId) {
+  public static function actionOnObjectByUser($pSocialObjectId, $pUserId, $pActiveDeal = null) {
     $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
     $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, self::MONGO_COLLECTION);
-    $lObject = $pCollectionObject->findOne(array("so_id" => $pSocialObjectId, "u_id" => intval($pUserId) ));
+
+    // get yiid-activity and factor a deal
+    if ($pActiveDeal) {
+      $lObject = $pCollectionObject->findOne(array("so_id" => $pSocialObjectId,
+                                                   "u_id" => intval($pUserId),
+                                                   "d_id" => $pActiveDeal['id']
+                                                  ));
+    } else {
+      $lObject = $pCollectionObject->findOne(array("so_id" => $pSocialObjectId,
+                                                   "u_id" => intval($pUserId),
+                                                   "d_id" => array('$exists' => false)
+                                                  ));
+    }
     return $lObject?$lObject['score']:false;
   }
 }

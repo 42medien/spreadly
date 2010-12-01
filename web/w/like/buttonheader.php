@@ -47,7 +47,7 @@ $lActiveDeal = DealUtils::dealActive($pUrl);
 
 $pUserId = MongoSessionPeer::extractUserIdFromSession(LikeSettings::SF_SESSION_COOKIE);
 $lSocialObjectArray = SocialObjectPeer::getDataForUrl($pUrl);
-$lIsUsed = YiidActivityObjectPeer::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId);
+$lIsUsed = YiidActivityObjectPeer::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId, $lActiveDeal);
 $lSocialObjectArray = SocialObjectPeer::recalculateCountsRespectingUser($lSocialObjectArray, $lIsUsed);
 $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
 $lShowFriends = false;
