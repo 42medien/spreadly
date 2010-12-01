@@ -127,33 +127,6 @@ class YiidActivityTable extends Doctrine_Table
     return true;
   }
 
-  public static function storeTemporary($pSessionId,
-                                        $pUrl,
-                                        $pOwnedOnlineIdentitys = array(),
-                                        $pGivenOnlineIdentitys = array(),
-                                        $pScore = self::ACTIVITY_VOTE_POSITIVE,
-                                        $pVerb = 'like',
-                                        $pTitle = null,
-                                        $pDescription = null,
-                                        $pPhoto = null,
-                                        $pClickback = null
-                                       ) {
-    $lStorageArray = array();
-    $lStorageArray['url'] = $pUrl;
-    $lStorageArray['score'] = $pScore;
-    $lStorageArray['verb'] = $pVerb;
-    $lStorageArray['clickback'] = $pClickback;
-    $lStorageArray['title'] = $pTitle;
-    $lStorageArray['description'] = $pDescription;
-    $lStorageArray['photo'] = $pPhoto;
-
-    $lPersist = new PersistentVariable();
-    $lPersist->setName('widgetauth_'.$pSessionId);
-    $lPersist->setValue(serialize($lStorageArray));
-    $lPersist->save();
-    return false;
-  }
-
   /**
    * retrieve data saved with this sess_id
    *
