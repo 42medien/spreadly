@@ -46,6 +46,10 @@ class apiActions extends sfActions {
     $this->lLikeDis = $request->getParameter('likedis');
     $this->lIdentitysOwnedByUser = OnlineIdentityTable::retrieveIdsByUserId($this->getUser()->getUserId());
 
+    // <deal>
+    $this->lCouponCode = $request->getParameter('couponcode', null);
+    $this->lDealId = $request->getParameter('dealid', null);
+    // </deal>
 
     $this->lTitle = $request->getParameter('title');
     $this->lDescription = $request->getParameter('description');
@@ -76,24 +80,12 @@ class apiActions extends sfActions {
                                                             $this->lTitle,
                                                             $this->lDescription,
                                                             $this->lPhoto,
-                                                            $this->lClickback
+                                                            $this->lClickback,
+                                                            $this->lCouponCode,
+                                                            $this->lDealId
                                                            );
-    } elseif ($this->status == 401) {
-
-        $lSessId = CookieUtils::getSessionId();
-        setcookie("yiid_temp_hash", $lSessId, time()+300, '/', sfConfig::get('app_settings_host'));
-        $this->success = YiidActivityTable::storeTemporary($lSessId,
-                                                           $this->lUrl,
-                                                           $this->lIdentitysOwnedByUser,
-                                                           $this->lIdentitysSent,
-                                                           $this->lLikeDis,
-                                                           $this->lType,
-                                                           $this->lTitle,
-                                                           $this->lDescription,
-                                                           $this->lPhoto,
-                                                           $this->lClickback
-                                                          );
     }
+
     return  $this->sendJsonResponse();
   }
 
