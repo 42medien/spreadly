@@ -6,10 +6,9 @@
  		</div>
   </div>
 <?php } ?>
-<?php //var_dump($pForm->getEmbeddedForm('deal')->getDefaults());die(); ?>
+
 <form action="<?php echo url_for('deals/proceed'); ?>" method="post" id="deal_form" name="deal_form">
 <?php echo $pForm['deal']['id']->render();?>
-<?php //echo $pForm['DomainProfile']['id']->render();?>
 <?php echo $pForm['_csrf_token']->render(); ?>
 
   <div id="create-deal-content">

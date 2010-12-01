@@ -11,7 +11,7 @@ class likebuttonComponents extends sfComponents
    * @param sfWebRequest $request
    */
   public function executeDescription(sfWebRequest $request) {
-
+		$this->pUser = $this->getUser();
   }
 
 	/**

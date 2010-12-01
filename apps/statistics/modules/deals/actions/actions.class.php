@@ -70,6 +70,7 @@ class dealsActions extends sfActions
     $lParams['deal']['domain_profile_id'] = $lParams['id'];
     $lParams['deal']['sf_guard_user_id'] = $this->getUser()->getUserId();
 		unset($lParams['ei_kcuf']);
+		unset($lParams['single-quantity']);
     //$lDealForm = new DealForm();
 
 
@@ -108,6 +109,42 @@ class dealsActions extends sfActions
     	array(
     		'html' => $this->getComponent('deals', 'create_deal_form', array('pDealId' => $lDealId)),
     		'initform' => true
+    	)
+    ));
+  }
+
+  public function executeGet_form_by_domain(sfWebRequest $request) {
+  	$this->getResponse()->setContentType('application/json');
+    $lI18n = sfContext::getInstance()->getI18N();
+  	$lProfileId = $request->getParameter('dpid');
+    $lDp = DomainProfileTable::getInstance()->find($lProfileId);
+    $lDealForm = new DealForm();
+    $lFirstDomain = DomainProfileTable::getInstance()->find($lProfileId);
+
+  	$lCouponType = 'single';
+  	$lCouponQuantity = '0';
+    $this->pEdited = false;
+    $lDealForm->setDefaults(array(
+				'button_wording' => $lI18n->__('...und freien Probemonat gewinnen!'),
+				'summary' => $lI18n->__('Kostenloser Probemonat'),
+				'description' => $lI18n->__('Liken und damit einmalig pro Person einen freien Probemonat gewinnen!'),
+	    	'start_date' => date('Y-m-d G:i:s'),
+	    	'end_date' => date('Y-m-d G:i:s'),
+	    	'coupon_type' => 'single'
+	  ));
+
+    $this->pForm = new DomainProfileDealForm();
+    $this->pForm->setDefaults(array(
+			'imprint_url' => $lFirstDomain->getImprintUrl(),
+			'id' => $lFirstDomain->getId()
+    ));
+
+    $lDealForm->embedForm('coupon', new CouponCodesForm());
+    $this->pForm->embedForm('deal', $lDealForm);
+
+    return $this->renderText(json_encode(
+    	array(
+    		'html' => $this->getPartial('deals/create_deal_form_content', array('pForm' => $this->pForm, 'pCouponQuantity' => $lCouponQuantity, 'pCouponType' => $lCouponType)),
     	)
     ));
   }

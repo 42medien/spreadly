@@ -12,6 +12,7 @@ class visit_historyActions extends sfActions
 {
 
 	public function executeIndex(sfWebRequest $request) {
+		$this->pUser = $this->getUser();
 
 	}
 

@@ -29,7 +29,8 @@
 
     <?php include_partial('global/navigation'); ?>
 
-    <?php if ($this->hasComponentSlot('content_top')) { ?>
+		<!-- TODO: this has not to be a component slot!!!! -->
+    <?php if ($this->hasComponentSlot('content_top') && !$sf_user->isAuthenticated()) { ?>
     <div id="content_top" class="clearfix">
       <?php include_component_slot('content_top'); ?>
     </div>
