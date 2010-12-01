@@ -170,12 +170,35 @@ class dealsActions extends sfActions
     return $this->renderText(json_encode($lReturn));
   }
 
-  public function executeEdit_enddate(sfWebRequest $request) {
+  public function executeEdit_enddate(sfWebRequest $pRequest) {
   	$this->getResponse()->setContentType('application/json');
+  	$lParams = $pRequest->getPostParameters();
+  	$lDeal = DealTable::getInstance()->find($lParams['id']);
+  	$lError = '';
+    if($this->getUser()->isMine($lDeal)) {
+      $lNewDate = strtotime($lParams['input']);
+      $lCurrentDate = strtotime($lDeal->getEndDate());
+      
+      if($lNewDate > $lCurrentDate) {
+        $lDeal->setEndDate($lNewDate);
+        if(DealTable::isOverlapping($lDeal)) {
+          $lError = "The new end date is overlapping another deal";
+        } else {
+          $lDeal->save();
+        }
+      } else {
+        $lError = "The new end date must be later than the current end date";
+      }
+      
+    } else {
+      $lError = "You can not add codes to coupons of type single.";
+    }
+    
     return $this->renderText(json_encode(
     	array(
-    		'success' => true,
-    	  'content' => 'content'
+    		'success' => empty($lError),
+    		'error' => empty($lError) ? '' : $lError,
+    	  'content' => $lDeal->getEndDate()
     	)
     ));
   }
@@ -194,7 +217,7 @@ class dealsActions extends sfActions
     return $this->renderText(json_encode(
     	array(
     		'success' => empty($lError),
-    		'error' => empty($lError) ? '' : $error,
+    		'error' => empty($lError) ? '' : $lError,
     	  'content' => $lDeal->getCouponQuantity()
     	)
     ));
