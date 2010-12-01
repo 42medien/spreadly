@@ -8,7 +8,7 @@
       <td><?php echo $pDeal->getDomainProfile()->getUrl(); ?></td>
       <td style="text-align: center;"><?php echo $pDeal->getStartDate(); ?></td>
       <td style="text-align: center;" class="editinplaceclick" id="deal-date-<?php echo $pDeal->getId(); ?>" data-obj='{"action":"/deals/edit_enddate", "type":"text", "callback":"DealTable.editDate",  "params": "{\"id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-date-<?php echo $pDeal->getId(); ?>\"}"}'><?php echo $pDeal->getEndDate(); ?></td>
-      <td style="text-align: center;"><?php echo $pDeal->getCouponCurrentQuantity(); ?></td>
+      <td style="text-align: center;"><?php echo $pDeal->getCouponClaimedQuantity(); ?></td>
       <td style="text-align: center;" class="editinplaceclick edit-col" id="deal-quantity-<?php echo $pDeal->getId(); ?>"
       	<?php if($pDeal->getCouponType() == "single"){ ?>data-obj='{"action":"/deals/save_quantity", "type":"text",  "params": "{\"deal_id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-quantity-<?php echo $pDeal->getId(); ?>\"}"}'
       	<?php } else { ?> data-obj='{"action":"/deals/paste_codes?deal_id=<?php echo $pDeal->getId(); ?>", "type":"layer", "params": "{\"deal_id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-quantity-<?php echo $pDeal->getId(); ?>\"}"}'
@@ -28,7 +28,7 @@
       <td><?php echo $pDeal->getSummary(); ?></td>
       <td><?php echo $pDeal->getDomainProfile()->getUrl(); ?></td>
       <td style="text-align: center;" colspan="2"><?php echo __('Not yet approved by yiid ...'); ?></td>
-      <td style="text-align: center;"><?php echo $pDeal->getCouponCurrentQuantity(); ?></td>
+      <td style="text-align: center;"><?php echo $pDeal->getCouponClaimedQuantity(); ?></td>
       <td style="text-align: center;" class="edit-col">
 				<?php echo $pDeal->getCouponQuantity(); ?>
       </td>
@@ -47,7 +47,7 @@
       <td><?php echo $pDeal->getDomainProfile()->getUrl(); ?></td>
       <td style="text-align: center;"><?php echo $pDeal->getStartDate(); ?></td>
       <td style="text-align: center;" class="editinplaceclick edit-col" id="deal-date-<?php echo $pDeal->getId(); ?>" data-obj='{"action":"/deals/edit_enddate", "type":"text", "callback":"DealTable.editDate",  "params": "{\"id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-date-<?php echo $pDeal->getId(); ?>\"}"}'><?php echo $pDeal->getEndDate(); ?></td>
-      <td style="text-align: center;"><?php echo $pDeal->getCouponCurrentQuantity(); ?></td>
+      <td style="text-align: center;"><?php echo $pDeal->getCouponClaimedQuantity(); ?></td>
       <td style="text-align: center;" class="editinplaceclick edit-col" id="deal-quantity-<?php echo $pDeal->getId(); ?>"
       	<?php if($pDeal->getCouponType() == "single"){ ?>data-obj='{"action":"/deals/save_quantity", "type":"text",  "params": "{\"deal_id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-quantity-<?php echo $pDeal->getId(); ?>\"}"}'
       	<?php } else { ?> data-obj='{"action":"/deals/paste_codes?deal_id=<?php echo $pDeal->getId(); ?>", "type":"layer", "params": "{\"deal_id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-quantity-<?php echo $pDeal->getId(); ?>\"}"}'
@@ -68,7 +68,7 @@
       <td><?php echo $pDeal->getDomainProfile()->getUrl(); ?></td>
       <td style="text-align: center;"><?php echo $pDeal->getStartDate(); ?></td>
       <td style="text-align: center;" class="edit-col"><?php echo $pDeal->getEndDate(); ?></td>
-      <td style="text-align: center;"><?php echo $pDeal->getCouponCurrentQuantity(); ?></td>
+      <td style="text-align: center;"><?php echo $pDeal->getCouponClaimedQuantity(); ?></td>
       <td style="text-align: center;" class="edit-col">
 				<?php echo $pDeal->getCouponQuantity(); ?>
       </td>
@@ -86,7 +86,7 @@
       <td><?php echo $pDeal->getDomainProfile()->getUrl(); ?></td>
       <td style="text-align: center;"><?php echo $pDeal->getStartDate(); ?></td>
       <td style="text-align: center;" class="editinplaceclick edit-col" id="deal-date-<?php echo $pDeal->getId(); ?>" data-obj='{"action":"/deals/edit_enddate", "type":"text", "callback":"DealTable.editDate",  "params": "{\"id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-date-<?php echo $pDeal->getId(); ?>\"}"}'><?php echo $pDeal->getEndDate(); ?></td>
-      <td style="text-align: center;"><?php echo $pDeal->getCouponCurrentQuantity(); ?></td>
+      <td style="text-align: center;"><?php echo $pDeal->getCouponClaimedQuantity(); ?></td>
       <td style="text-align: center;" class="editinplaceclick edit-col" id="deal-quantity-<?php echo $pDeal->getId(); ?>"
       	<?php if($pDeal->getCouponType() == "single"){ ?>data-obj='{"action":"/deals/save_quantity", "type":"text",  "params": "{\"deal_id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-quantity-<?php echo $pDeal->getId(); ?>\"}"}'
       	<?php } else { ?> data-obj='{"action":"/deals/paste_codes?deal_id=<?php echo $pDeal->getId(); ?>", "type":"layer", "params": "{\"deal_id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-quantity-<?php echo $pDeal->getId(); ?>\"}"}'

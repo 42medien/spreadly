@@ -45,7 +45,7 @@ Deal:
     coupon_quantity:
       type: integer
       default: 0
-    coupon_current_quantity:
+    coupon_claimed_quantity:
       type: integer
       default: 0
     start_date:

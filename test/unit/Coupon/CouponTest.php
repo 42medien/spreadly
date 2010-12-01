@@ -169,7 +169,6 @@ class CouponTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals(102, $this->single100->getRemainingCouponCount());
 
     $this->assertEquals(5, $this->table->count());
-    $id = $this->multiple->getId();
     
     $this->assertEquals("blahh", $this->multiple->popCoupon());
 
@@ -179,6 +178,60 @@ class CouponTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals(6, $this->table->count());
     
   }
+    
+  public function testClaimedCouponCount() {
+    $this->singleUnlimited->saveInitialCoupons(array("single_code" => "xxyyzz"));
+    $this->single100->saveInitialCoupons(array("single_code" => "aabbcc"));
+    $this->multiple->saveInitialCoupons(array("multiple_codes" => "blahh,blubb,hulli"));
+    
+    $this->assertEquals(0, $this->singleUnlimited->getClaimedCouponCount());
+    $this->assertEquals(0, $this->single100->getClaimedCouponCount());
+    $this->assertEquals(0, $this->multiple->getClaimedCouponCount());
+
+    $this->singleUnlimited->popCoupon();
+    $this->single100->popCoupon();
+    $this->multiple->popCoupon();
+
+    $this->assertEquals(1, $this->singleUnlimited->getClaimedCouponCount());
+    $this->assertEquals(1, $this->single100->getClaimedCouponCount());
+    $this->assertEquals(1, $this->multiple->getClaimedCouponCount());
+
+    $this->singleUnlimited->popCoupon();
+    $this->single100->popCoupon();
+    $this->multiple->popCoupon();
+
+    $this->singleUnlimited->popCoupon();
+    $this->single100->popCoupon();
+    $this->multiple->popCoupon();
+
+    $this->assertEquals(3, $this->singleUnlimited->getClaimedCouponCount());
+    $this->assertEquals(3, $this->single100->getClaimedCouponCount());
+    $this->assertEquals(3, $this->multiple->getClaimedCouponCount());
+
+    $this->single100->addMoreCoupons(array("quantity" => 13));
+    $this->multiple->addMoreCoupons(array("multiple_codes" => "harhar,blabla,blubb,blahh,huhihi"));
+
+    $this->assertEquals(3, $this->singleUnlimited->getClaimedCouponCount());
+    $this->assertEquals(3, $this->single100->getClaimedCouponCount());
+    $this->assertEquals(3, $this->multiple->getClaimedCouponCount());
+    
+    $this->assertEquals('unlimited', $this->singleUnlimited->getRemainingCouponCount());
+    $this->assertEquals(110, $this->single100->getRemainingCouponCount());
+    $this->assertEquals(5, $this->multiple->getRemainingCouponCount());
+
+    $this->multiple->popCoupon();
+    $this->multiple->popCoupon();
+    $this->multiple->popCoupon();
+    $this->multiple->popCoupon();
+    $this->multiple->popCoupon();
+
+    $this->assertEquals(0, $this->multiple->getRemainingCouponCount());
+
+    $this->assertNull($this->multiple->popCoupon());
+    
+    $this->assertEquals(0, $this->multiple->getRemainingCouponCount());
+  }
+
   
   // Must remain last function to setup test data, since we dont have a test db
   public function testSetup() {

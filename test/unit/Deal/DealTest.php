@@ -225,7 +225,6 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $id = $this->submitted->getId();
     $this->submitted = Doctrine::getTable('Deal')->find($id);
     $this->assertEquals('approved', $this->submitted->getState());
-  }
-  
+  }  
   
 }

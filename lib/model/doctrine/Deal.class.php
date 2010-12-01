@@ -21,7 +21,11 @@ class Deal extends BaseDeal {
   }
   
   public function getRemainingCouponCount() {
-    return $this->isUnlimited() ? 'unlimited' : $this->getCouponCurrentQuantity();
+    return $this->isUnlimited() ? 'unlimited' : $this->getCouponQuantity()-$this->getCouponClaimedQuantity();
+  }
+  
+  public function getClaimedCouponCount() {
+    return $this->getCouponClaimedQuantity();
   }
   
   public function popCoupon() {
@@ -29,12 +33,11 @@ class Deal extends BaseDeal {
     if($this->isUnlimited()) {
       $coupons = $this->getCoupons();
       $code = $coupons[0]->getCode();
+      $this->setCouponClaimedQuantity($this->getCouponClaimedQuantity()+1);
     } elseif($this->getRemainingCouponCount()>0) {
       $coupons = $this->getCoupons();
       $code = $coupons[0]->getCode();
-      $newQuantity = $this->getCouponCurrentQuantity();
-      $newQuantity -= 1;
-      $this->setCouponCurrentQuantity($newQuantity);
+      $this->setCouponClaimedQuantity($this->getCouponClaimedQuantity()+1);
       if($this->getCouponType()==DealTable::COUPON_TYPE_MULTIPLE) {
         $coupons[0]->delete();
         unset($coupons[0]);
@@ -79,7 +82,6 @@ class Deal extends BaseDeal {
   
   private function saveQuantities($pNumberOfCodes, $pParamQuantity, $pIsAdding) {
     $lCouponQuantity = $this->getCouponQuantity();
-    $lCurrentQuantity = $this->getCouponCurrentQuantity();
     $lNewEntries = 0;
     
     if($pIsAdding && $this->getCouponType()==DealTable::COUPON_TYPE_SINGLE) {
@@ -91,11 +93,6 @@ class Deal extends BaseDeal {
     }
 
     $this->setCouponQuantity($lCouponQuantity+$lNewEntries);
-    if($pIsAdding) {
-      $this->setCouponCurrentQuantity($lCurrentQuantity+$lNewEntries);      
-    } else {
-      $this->setCouponCurrentQuantity($this->getCouponQuantity());      
-    }
     
     $this->save();
   }
