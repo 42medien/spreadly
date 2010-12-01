@@ -22,7 +22,7 @@ Deal:
           from: paused
           to: approved
         trash:
-          from: ['submitted', 'approved', 'paused', 'denied']
+          from: ['submitted', 'paused', 'denied']
           to: trashed
           
   columns:

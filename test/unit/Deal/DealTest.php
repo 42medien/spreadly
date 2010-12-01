@@ -137,10 +137,6 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $this->denied->trash();
     $this->assertEquals('trashed', $this->denied->getState());
 
-    $this->assertTrue($this->approved->canTrash());
-    $this->approved->trash();
-    $this->assertEquals('trashed', $this->approved->getState());
-
     $this->assertTrue($this->paused->canTrash());
     $this->paused->trash();
     $this->assertEquals('trashed', $this->paused->getState());
