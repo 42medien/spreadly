@@ -1,8 +1,5 @@
 <?php
-
-
-class YiidActivityTable extends Doctrine_Table
-{
+class YiidActivityTable extends Doctrine_Table {
   const ACTIVITY_VOTE_POSITIVE = 1;
   const ACTIVITY_VOTE_NEGATIVE = -1;
 
@@ -53,7 +50,7 @@ class YiidActivityTable extends Doctrine_Table
                                            $pPhoto = null,
                                            $pClickback = null,
                                            $pCouponCode = null,
-                                           $pDeal = null
+                                           $pDealId = null
                                           ) {
 
     $lSuccess = false;
@@ -97,7 +94,7 @@ class YiidActivityTable extends Doctrine_Table
     }
 
     // save yiid activity
-    $lActivity = self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb, $pClickback);
+    $lActivity = self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb, $pClickback, $pCouponCode, $pDealId);
     if (sfConfig::get('app_settings_environment') != 'dev') {
       // send messages to all services
       foreach ($lOnlineIdentitys as $lIdentity) {
@@ -163,8 +160,9 @@ class YiidActivityTable extends Doctrine_Table
                                       $pVerb,
                                       $pClickback = null,
                                       $pCouponCode = null,
-                                      $pDeal = null
+                                      $pDealId = null
                                      ) {
+
     $lActivity = new YiidActivity();
     $lActivity->setUId($pUserId);
     $lActivity->setSoId($pSocialObject->getId());
@@ -175,6 +173,16 @@ class YiidActivityTable extends Doctrine_Table
     $lActivity->setScore($pScore);
     $lActivity->setVerb($pVerb);
     $lActivity->setC(time());
+
+    // sets the coupon code if it's not empty
+    if ($pCouponCode) {
+      $lActivity->setCCode($pCouponCode);
+    }
+
+    // sets the deal-id if it's not empty
+    if ($pDealId) {
+      $lActivity->setDId($pDealId);
+    }
 
     // set clickback if exists
     if ($pClickback) {
@@ -295,7 +303,6 @@ class YiidActivityTable extends Doctrine_Table
     return array();
   }
 
-
   /**
    * check if the given verb is supported in the current version
    *
@@ -342,8 +349,6 @@ class YiidActivityTable extends Doctrine_Table
     return null;
   }
 
-
-
   /**
    * hydrate yiidactivities objects from the extracted collection and return an array
    *
@@ -359,7 +364,6 @@ class YiidActivityTable extends Doctrine_Table
     return $lObjects;
   }
 
-
   public static function retrieveAllObjects($pLimit = 0, $pOffset = 0) {
     $lCollection = self::getMongoCollection();
     $lMongoCursor = $lCollection->find();
@@ -368,5 +372,4 @@ class YiidActivityTable extends Doctrine_Table
 
     return self::hydrateMongoCollectionToObjects($lMongoCursor);
   }
-
 }
