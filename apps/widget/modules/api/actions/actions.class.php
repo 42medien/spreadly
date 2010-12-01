@@ -68,15 +68,16 @@ class apiActions extends sfActions {
     $this->getResponse()->setContentType('application/json');
     if ($this->status == 200) {
       $this->success = YiidActivityTable::saveLikeActivitys($this->getUser()->getId(),
-                                                           $this->lUrl,
-                                                           $this->lIdentitysOwnedByUser,
-                                                           $this->lIdentitysSent,
-                                                           $this->lLikeDis,
-                                                           $this->lType,
-                                                           $this->lClickback,
-                                                           $this->lTitle,
-                                                           $this->lDescription,
-                                                           $this->lPhoto);
+                                                            $this->lUrl,
+                                                            $this->lIdentitysOwnedByUser,
+                                                            $this->lIdentitysSent,
+                                                            $this->lLikeDis,
+                                                            $this->lType,
+                                                            $this->lTitle,
+                                                            $this->lDescription,
+                                                            $this->lPhoto,
+                                                            $this->lClickback
+                                                           );
     } elseif ($this->status == 401) {
 
         $lSessId = CookieUtils::getSessionId();
@@ -87,10 +88,11 @@ class apiActions extends sfActions {
                                                            $this->lIdentitysSent,
                                                            $this->lLikeDis,
                                                            $this->lType,
-                                                           $this->lClickback,
                                                            $this->lTitle,
                                                            $this->lDescription,
-                                                           $this->lPhoto);
+                                                           $this->lPhoto,
+                                                           $this->lClickback
+                                                          );
     }
     return  $this->sendJsonResponse();
   }
