@@ -31,10 +31,7 @@ class Deal extends BaseDeal {
   private function fireQuantityChangedEvent() {
     $prefix = $this->getTable()->getTableName();
     $eventName = $prefix.".couponQuantityChanged";
-    
-    sfContext::getInstance()
-      ->getEventDispatcher()
-      ->notify(new sfEvent($this, $eventName, array("quantity" => $this->getCouponQuantity())));
+    sfProjectConfiguration::getActive()->getEventDispatcher()->notify(new sfEvent($this, $eventName, array("quantity" => $this->getCouponQuantity())));
   }
   
   public function setCouponQuantity($pQuantity) {
