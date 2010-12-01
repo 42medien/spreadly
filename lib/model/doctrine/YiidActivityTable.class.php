@@ -43,15 +43,18 @@ class YiidActivityTable extends Doctrine_Table
   }
 
   public static function saveLikeActivitys($pUserId,
-                                      $pUrl,
-                                      $pOwnedOnlineIdentitys = array(),
-                                      $pGivenOnlineIdentitys = array(),
-                                      $pScore = self::ACTIVITY_VOTE_POSITIVE,
-                                      $pVerb = 'like',
-                                      $pClickback = null,
-                                      $pTitle = null,
-                                      $pDescription = null,
-                                      $pPhoto = null) {
+                                           $pUrl,
+                                           $pOwnedOnlineIdentitys = array(),
+                                           $pGivenOnlineIdentitys = array(),
+                                           $pScore = self::ACTIVITY_VOTE_POSITIVE,
+                                           $pVerb = 'like',
+                                           $pTitle = null,
+                                           $pDescription = null,
+                                           $pPhoto = null,
+                                           $pClickback = null,
+                                           $pCouponCode = null,
+                                           $pDeal = null
+                                          ) {
 
     $lSuccess = false;
     $lVerifiedOnlineIdentitys = array();
@@ -83,6 +86,7 @@ class YiidActivityTable extends Doctrine_Table
       return false;
     }
 
+    // check if all onlineidentity-ids are valid
     foreach ($pGivenOnlineIdentitys as $lIdentityId) {
       if (in_array($lIdentityId, $pOwnedOnlineIdentitys)) {
         $lVerifiedOnlineIdentityIds[]= $lIdentityId;
@@ -124,15 +128,16 @@ class YiidActivityTable extends Doctrine_Table
   }
 
   public static function storeTemporary($pSessionId,
-  $pUrl,
-  $pOwnedOnlineIdentitys = array(),
-  $pGivenOnlineIdentitys = array(),
-  $pScore = self::ACTIVITY_VOTE_POSITIVE,
-  $pVerb = 'like',
-  $pClickback = null,
-  $pTitle = null,
-  $pDescription = null,
-  $pPhoto = null) {
+                                        $pUrl,
+                                        $pOwnedOnlineIdentitys = array(),
+                                        $pGivenOnlineIdentitys = array(),
+                                        $pScore = self::ACTIVITY_VOTE_POSITIVE,
+                                        $pVerb = 'like',
+                                        $pTitle = null,
+                                        $pDescription = null,
+                                        $pPhoto = null,
+                                        $pClickback = null
+                                       ) {
     $lStorageArray = array();
     $lStorageArray['url'] = $pUrl;
     $lStorageArray['score'] = $pScore;
@@ -176,7 +181,17 @@ class YiidActivityTable extends Doctrine_Table
    * @param $pType
    * @return YiidActivity
    */
-  public static function saveActivity($pSocialObject, $pUrl, $pUserId, $pOnlineIdentitys, $pServicesId, $pScore, $pVerb, $pClickback = null) {
+  public static function saveActivity($pSocialObject,
+                                      $pUrl,
+                                      $pUserId,
+                                      $pOnlineIdentitys,
+                                      $pServicesId,
+                                      $pScore,
+                                      $pVerb,
+                                      $pClickback = null,
+                                      $pCouponCode = null,
+                                      $pDeal = null
+                                     ) {
     $lActivity = new YiidActivity();
     $lActivity->setUId($pUserId);
     $lActivity->setSoId($pSocialObject->getId());
