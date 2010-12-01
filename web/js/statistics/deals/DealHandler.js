@@ -69,7 +69,7 @@ var DealForm = {
    * @author KM 
    */
   selectDomainProfile: function() {
-    jQuery('#deal-domain-select-box #id').live('change', function() {
+    jQuery('#deal-domain-select-box #id').change(function() {
       var lDpId = jQuery(this).val();
       DealForm.changeDomainProfile(lDpId);
     });
@@ -116,11 +116,9 @@ var Deal = {
    */
   bindClicks: function() {
     jQuery('.link-deal-content').live('click', function() {
-      var pDealId = (pDealId != undefined)? pDealId: '';
       var lAction = jQuery(this).attr('href');
       var lData = {
           ei_kcuf: new Date().getTime(),
-          deal_id: pDealId
       };
 
       jQuery.ajax({

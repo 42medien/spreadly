@@ -1,3 +1,11 @@
+<?php if(isset($pEdited) && $pEdited == true) { ?>
+  <div class="content-box bg-white">
+ 		<h3><?php echo __('Editing an Ad')?></h3>
+ 		<div>
+ 			<?php echo __('Butoon wording, deal description, scheduling and quantity fields are pre-populated with your existing deal settings. Edits you make here will replace your existing deal. Once you submit your changes, your deal will stop running until it has been approved by our team.'); ?>
+ 		</div>
+  </div>
+<?php } ?>
 <?php //var_dump($pForm->getEmbeddedForm('deal')->getDefaults());die(); ?>
 <form action="<?php echo url_for('deals/proceed'); ?>" method="post" id="deal_form" name="deal_form">
 <?php echo $pForm['deal']['id']->render();?>

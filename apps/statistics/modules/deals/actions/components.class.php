@@ -26,6 +26,7 @@ class dealsComponents extends sfComponents {
 	    	'start_date' => $lDeal->getStartDate(),
 	    	'end_date' => $lDeal->getEndDate()
       ));
+      $this->pEdited = true;
     } else {
 	    $lDealForm->setDefaults(array(
 				'button_wording' => $lI18n->__('...und freien Probemonat gewinnen!'),
@@ -34,6 +35,7 @@ class dealsComponents extends sfComponents {
 	    	'start_date' => date('Y-m-d G:i:s'),
 	    	'end_date' => date('Y-m-d G:i:s')
 	    ));
+      $this->pEdited = false;
     }
     $this->pForm = new DomainProfileDealForm();
     $this->pForm->setDefaults(array(

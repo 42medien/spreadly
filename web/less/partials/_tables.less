@@ -15,6 +15,7 @@
   tr.odd {
     td {
       background-color: @odd-row-color;
+      
       &.even, &:nth-child(2n) {
         background-color: @odd-row-color;
       }
@@ -86,10 +87,15 @@ table.full {
   width: 100%;
 }
 
+#deal_table td.edit-col{
+  padding-right:26px;  
+}
+
 #deal_table td.editinplaceclick{
   cursor: pointer;
   margin-right:0;
   padding-right:26px;  
+
 }
 
 #save-editin-place{
