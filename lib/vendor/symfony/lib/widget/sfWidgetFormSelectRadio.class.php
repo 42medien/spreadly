@@ -40,7 +40,7 @@ class sfWidgetFormSelectRadio extends sfWidgetFormChoiceBase
   {
     parent::configure($options, $attributes);
 
-    $this->addOption('class', 'radio_list');
+    $this->addOption('class', 'radio_list clearfix');
     $this->addOption('label_separator', '&nbsp;');
     $this->addOption('separator', "\n");
     $this->addOption('formatter', array($this, 'formatter'));
