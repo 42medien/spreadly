@@ -25,7 +25,7 @@ class DealForm extends BaseDealForm
       'description'       => new sfWidgetFormInputText(),
       'button_wording'    => new sfWidgetFormInputText(),
       'coupon_quantity'    => new sfWidgetFormInputText(),
-      'coupon_type'       => new sfWidgetFormChoice(array('choices' => array('single' => 'single', 'multiple' => 'multiple'), 'expanded' => true )),
+      'coupon_type'       => new sfWidgetFormChoice(array('choices' => array('single' => 'single', 'multiple' => 'multiple'), 'expanded' => true ), array('class' => 'coupon-type-select')),
       'redeem_url'        => new sfWidgetFormInputText(),
       'tos_accepted'      => new sfWidgetFormInputCheckbox(),
       'terms_of_deal'     => new sfWidgetFormInputText()

@@ -22,7 +22,7 @@ class CouponCodesForm extends BaseForm {
       'single_code'           => new sfValidatorString(),
       'multiple_codes'        => new sfValidatorString()
     ));
-    
+
     $this->widgetSchema->setNameFormat('coupon[%s]');
 
     parent::setup();

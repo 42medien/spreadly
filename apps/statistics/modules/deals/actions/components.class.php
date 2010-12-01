@@ -18,24 +18,31 @@ class dealsComponents extends sfComponents {
     }
 
     if($lDeal) {
-      $lDealForm->setDefaults(array(
+    	$this->pCouponType = $lDeal->getCouponType();
+    	$this->pCouponQuantity = $lDeal->getCouponQuantity();
+      $this->pEdited = true;
+    	$lDealForm->setDefaults(array(
 				'terms_of_deal' => $lDeal->getTermsOfDeal(),
 				'button_wording' => $lDeal->getButtonWording(),
 				'summary' => $lDeal->getSummary(),
 				'description' => $lDeal->getDescription(),
 	    	'start_date' => $lDeal->getStartDate(),
-	    	'end_date' => $lDeal->getEndDate()
+	    	'end_date' => $lDeal->getEndDate(),
+    		'coupon_quantity' => $lDeal->getCouponQuantity(),
+        'coupon_type' => $this->pCouponType
       ));
-      $this->pEdited = true;
     } else {
+    	$this->pCouponType = 'single';
+    	$this->pCouponQuantity = '0';
+      $this->pEdited = false;
 	    $lDealForm->setDefaults(array(
 				'button_wording' => $lI18n->__('...und freien Probemonat gewinnen!'),
 				'summary' => $lI18n->__('Kostenloser Probemonat'),
 				'description' => $lI18n->__('Liken und damit einmalig pro Person einen freien Probemonat gewinnen!'),
 	    	'start_date' => date('Y-m-d G:i:s'),
-	    	'end_date' => date('Y-m-d G:i:s')
+	    	'end_date' => date('Y-m-d G:i:s'),
+	    	'coupon_type' => 'single'
 	    ));
-      $this->pEdited = false;
     }
     $this->pForm = new DomainProfileDealForm();
     $this->pForm->setDefaults(array(

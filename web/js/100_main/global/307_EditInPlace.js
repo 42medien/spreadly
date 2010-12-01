@@ -149,7 +149,7 @@ var EditInPlace = {
     //check, if there is a edit field opend. if so: close all
     if(jQuery('#editinplace_input').is('*')){
       //if there is a given param pContent insert it into the edit-elem (this happens if the user saved a new value)
-      if (pContent != undefined) {
+      if (pContent !== undefined) {
         //update given content
         EditInPlace.update(pContent);
       } else {
@@ -213,7 +213,7 @@ var EditInPlace = {
       dataType: "json",
       data: lData,        
       success: function (pResponse) {
-        if(pResponse.success == true) {
+        if(pResponse.success === true) {
           //if data are saved: insert the new content to the edit-elem and close the edit-field
           EditInPlace.close(pResponse.content);
         } else {

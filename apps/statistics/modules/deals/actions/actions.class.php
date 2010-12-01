@@ -93,7 +93,9 @@ class dealsActions extends sfActions
 	    $deal->saveInitialCoupons($values['deal']['coupon']);
 	    $lReturn['html'] = $this->getPartial('deals/deal_in_process');
     } else {
-    	$lReturn['html'] = $this->getPartial('deals/create_deal_form', array('pForm' => $this->pForm));
+    	$lCouponType = $lParams['deal']['coupon_type'];
+    	$lCouponQuantity = $lParams['deal']['coupon_quantity'];
+    	$lReturn['html'] = $this->getPartial('deals/create_deal_form', array('pForm' => $this->pForm, 'pCouponType' => $lCouponType, 'pCouponQuantity' => $lCouponQuantity));
     }
 
     return $this->renderText(json_encode($lReturn));
@@ -200,7 +202,7 @@ class dealsActions extends sfActions
   	$lDeal = DealTable::getInstance()->find($lParams['deal_id']);
   	$lError = "";
   	if($lDeal->canTransitionTo($lParams['state'])) {
-    	$lDeal->transitionTo($lParams['state']);  	  
+    	$lDeal->transitionTo($lParams['state']);
   	} else {
   	  $lError = "Cannot transition to: ".$lParams['state'];
   	}

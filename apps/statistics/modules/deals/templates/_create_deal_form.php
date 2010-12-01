@@ -116,29 +116,53 @@
 				<?php echo $pForm['deal']['coupon_type']->render();?>
 			</div>
 
-    	<div class="form-row">
-    		<div class="label-box">
-    			<?php echo $pForm['deal']['coupon']['single_code']->renderLabel();?>
-					<?php echo $pForm['deal']['coupon']['single_code']->renderError();?>
+			<div id="single-code-row" <?php echo ($pCouponType=='multiple')? 'style="display:none;"': ''; ?>>
+	    	<div class="form-row" id="single-code-row">
+	    		<div class="label-box">
+	    			<?php echo $pForm['deal']['coupon']['single_code']->renderLabel();?>
+						<?php echo $pForm['deal']['coupon']['single_code']->renderError();?>
+					</div>
+					<?php echo $pForm['deal']['coupon']['single_code']->render();?>
 				</div>
-				<?php echo $pForm['deal']['coupon']['single_code']->render();?>
+	    	<div class="form-row clearfix">
+	    		<div class="label-box">
+	    			<?php echo $pForm['deal']['coupon_quantity']->renderLabel();?>
+						<?php echo $pForm['deal']['coupon_quantity']->renderError();?>
+					</div>
+					<div class="inline-row">
+						<div class="label-box">
+							<input type="radio" name="single-quantity" id="radio-single-quantity" <?php echo ($pCouponQuantity > 0)? 'checked="checked"':''; ?> />
+							<?php echo __('Will end after');?>
+						</div>
+						<?php echo $pForm['deal']['coupon_quantity']->render();?>
+						<?php echo __('likes'); ?>
+					</div>
+					<div class="inline-row" id="single-quantity-unlimited">
+						<input type="radio" name="single-quantity" id="radio-single-quantity-unltd" <?php echo ($pCouponQuantity == 0)? 'checked="checked"':''; ?> />
+						<?php echo __('unlimited'); ?>
+					</div>
+				</div>
 			</div>
 
-    	<div class="form-row">
-    		<div class="label-box">
-    			<?php echo $pForm['deal']['coupon']['multiple_codes']->renderLabel();?>
-					<?php echo $pForm['deal']['coupon']['multiple_codes']->renderError();?>
-				</div>
-				<?php echo $pForm['deal']['coupon']['multiple_codes']->render();?>
-			</div>
+			<div id="multiple-code-row" <?php echo ($pCouponType=='single')? 'style="display:none;"': ''; ?>>
 
-    	<div class="form-row">
-    		<div class="label-box">
-    			<?php echo $pForm['deal']['coupon_quantity']->renderLabel();?>
-					<?php echo $pForm['deal']['coupon_quantity']->renderError();?>
+	    	<div class="form-row">
+	    		<div class="label-box">
+	    			<?php echo $pForm['deal']['coupon']['multiple_codes']->renderLabel();?>
+	    			<div class="meta-label"><?php echo __('Paste codes coma-separated or one code per line'); ?></div>
+						<?php echo $pForm['deal']['coupon']['multiple_codes']->renderError();?>
+					</div>
+					<?php echo $pForm['deal']['coupon']['multiple_codes']->render();?>
 				</div>
-				<?php echo $pForm['deal']['coupon_quantity']->render();?>
-			</div>
+	    	<div class="form-row">
+	    		<div class="label-box">
+	    			<?php echo $pForm['deal']['coupon_quantity']->renderLabel();?>
+					</div>
+					<?php echo __('Will end after 87 likes (quantity of your coupon codes).'); ?>
+				</div>
+		 </div>
+
+
 
 			<div class="form-row">
     		<div class="label-box">
