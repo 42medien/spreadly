@@ -79,7 +79,7 @@ class YiidActivityTable extends Doctrine_Table {
       $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
       $lSocialObject->updateObjectMasterData($pTitle, $pDescription, $pPhoto);
     } // object exists, we need to check if user is allowed to make an action on it
-    elseif (!self::isActionOnObjectAllowed($lSocialObject->getId(), $pUserId)) {
+    elseif (!self::isActionOnObjectAllowed($lSocialObject->getId(), $pUserId, $pDealId)) {
       return false;
     }
 
@@ -204,8 +204,8 @@ class YiidActivityTable extends Doctrine_Table {
    * @param $pOnlineIdentitys
    * @return boolean
    */
-  public static function isActionOnObjectAllowed($pSocialObjectId, $pUserId) {
-    $lAlreadyPerformedActivity = self::retrieveActionOnObjectById($pSocialObjectId, $pUserId);
+  public static function isActionOnObjectAllowed($pSocialObjectId, $pUserId, $pDealId = null) {
+    $lAlreadyPerformedActivity = self::retrieveActionOnObjectById($pSocialObjectId, $pUserId, $pDealId);
     return $lAlreadyPerformedActivity?false:true;
   }
 
@@ -230,9 +230,23 @@ class YiidActivityTable extends Doctrine_Table {
    * @param $pOnlineIdentitys
    * @return unknown_type
    */
-  public static function retrieveActionOnObjectById($pSocialObjectId, $pUserId) {
+  public static function retrieveActionOnObjectById($pSocialObjectId, $pUserId, $pDealId = null) {
     $lCollection = self::getMongoCollection();
-    return self::initializeObjectFromCollection($lCollection->findOne(array("so_id" => new MongoId($pSocialObjectId.""), "u_id" => (int)$pUserId ) ));
+
+    // get yiid-activity and factor a deal
+    if ($pDealId) {
+      $lQuery = $lCollection->findOne(array("so_id" => new MongoId($pSocialObjectId.""),
+                                            "u_id" => (int)$pUserId,
+                                            "d_id" => $pDealId
+                                           ));
+    } else {
+      $lQuery = $lCollection->findOne(array("so_id" => new MongoId($pSocialObjectId.""),
+                                            "u_id" => (int)$pUserId,
+                                            "d_id" => array('$exists' => false)
+                                           ));
+    }
+
+    return self::initializeObjectFromCollection($lQuery);
   }
 
   public static function retrieveLatestActivitiesByContacts($pUserId, $pFriendId = null, $pCommunityId = null, $pRangeDays = 30, $pOffset = 10, $pLimit = 1) {
