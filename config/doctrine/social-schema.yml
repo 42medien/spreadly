@@ -66,16 +66,23 @@ YiidActivity:
       type:      integer(4)
     verb:
       type:      integer(4)
+    # <clickback>
     cb_referer:
       type:      string(30)
     cb_service:
       type:      string(30)
+    # </clickback>
+    # <deal>
+    d_id:        # deal id
+      type:      integer(4)
+    c_code:      # coupon code
+      type:      string(255)
+    # </deal>
     c:
       type:      integer
 
-
 SocialAdvertisement:
-  actAs: 
+  actAs:
     Timestampable: ~
     I18n:
       fields: [title, description]
@@ -91,4 +98,3 @@ SocialAdvertisement:
     is_active:
       type: boolean
       default: false
-    
