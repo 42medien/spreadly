@@ -30,6 +30,15 @@ class StateMachine extends Doctrine_Template {
     return $this->canTransitionFor($this->getEventNameForState($pState));
   }  
   
+  public function getEventNames() {
+    $lEvents = $this->getOption('events');
+    $lRes = array();
+    foreach ($lEvents as $lEventName => $lEventData) {
+      $lRes[] = $lEventName;
+    }
+    return $lRes;
+  }
+  
   private function getEventNameForState($pState) {
     $lEvents = $this->getOption('events');
     foreach ($lEvents as $lEventName => $lEventData) {
@@ -41,7 +50,7 @@ class StateMachine extends Doctrine_Template {
   }
   
   // Transitions to new state, if it is allowed and fires an event
-  private function transitionFor($event) {
+  public function transitionFor($event) {
     if($this->canTransitionFor($event)) {
       $events = $this->getOption('events');
       $this->setState($events[$event]['to']);
@@ -64,7 +73,7 @@ class StateMachine extends Doctrine_Template {
     $this->getInvoker()->$state = $newState;      
   }
   
-  private function canTransitionFor($event) {
+  public function canTransitionFor($event) {
     $events = $this->getOption('events');
     if(in_array($this->getState(), $events[$event]['from'])) {
       return true;

@@ -30,13 +30,17 @@ body
   display: inline;
 }
 
-#content h1
+html body #content h1
 {
   padding: 0;
   background: transparent;
-  margin-bottom: 20px;
+  margin: 5px 0 10px 0;
+  padding: 5px 10px;
   font-size: 140%;
-  color: #000;
+  color: #333;
+  text-shadow: 0 1px 0 #fff;
+  text-align: center;
+  background: #eee;
 }
 
 td, th
@@ -83,6 +87,10 @@ th
 {
   display: inline;
   float: none;
+}
+
+#sf_admin_container input[type=text] {
+  width: 90%;
 }
 
 #header h1

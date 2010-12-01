@@ -10,4 +10,9 @@
  */
 class dealGeneratorConfiguration extends BaseDealGeneratorConfiguration
 {
+  public function getFormClass()
+  {
+    return 'CompleteDealForm';
+  }
+
 }

@@ -1,27 +1,27 @@
-<div class="clearfix center_area" id="filter">
+<div class="clearfix content-header-box" id="filter" style="padding: 5px 10px">
   <form name="visit-history-form" class="left" id="visit-history-form" action="/backend.php/oldstats/monthly">
-    <div class="form-area">
+    <div class="form-area" style="float:left;">
       <label for="month">Month</label>
       <input type="text" name="month" id="month" value="<?php echo $pMonth;?>" class="tooltip" title="Choose date to filter for a special month" />
     </div>
-    <div class="form-area">
+    <div class="form-area" style="float:left;">
       <label for="search">Domain</label>
       <input name="host" type="text" value="<?php echo $pHost; ?>" class="tooltip" title="Enter letters to filter for domains" />
     </div>
-    <div class="form-area">
+    <div class="form-area" style="float:left;margin-top:20px; margin-left:15px;">
       <input type="submit" value="Filter"/>
     </div>
   </form>
 
   <form name="visit-history-form" class="left" id="visit-history-form" action="/backend.php/oldstats/monthly">
-    <div class="form-area">
+    <div class="form-area" style="float:left;margin-top:20px; margin-left:15px;">
       <input type="submit" value="Reset"/>
     </div>
   </form>
 </div>
 
 <?php $lOrder = $pSortOrder=='asc'?'desc':'asc'; ?>
-<table class="normal_table" id="monthly_table">
+<table class="full sheet" id="monthly_table">
   <thead>
     <tr>
       <th>Rank</th>
@@ -52,16 +52,20 @@
         </tr>
       <?php } ?>
   </tbody>
+  
+  <tfoot>
+    <tr>
+      <td colspan="9">
+        <ul class="pager">
+          <li class="tooltip" title="Number of inspected domains for month <?php echo $pMonth; ?>"><?php echo $lHostCount; ?> Results</li>
+          <?php if($pPage > 1) { ?>
+            <li><span><?php echo link_to('First Page', 'oldstats/monthly?page=1'.$pQuery, array('title' => 'Go to First Page', 'class' => 'tooltip')); ?></span></li>
+            <li><span><?php echo link_to('&lt; Previous Page', 'oldstats/monthly?page='.($pPage-1).$pQuery, array('title' => 'Go to Previous Page', 'class' => 'tooltip')); ?></span></li>
+          <?php } ?>
+          <li><span><?php echo link_to('Next Page &gt;', 'oldstats/monthly?page='.($pPage+1).$pQuery, array('title' => 'Go to Next Page', 'class' => 'tooltip')); ?></span></li>
+          <li><span><?php echo link_to('Last Page', 'oldstats/monthly?page='.ceil($lHostCount/20).$pQuery, array('title' => 'Go to Last Page', 'class' => 'tooltip')); ?></span></li>
+        </ul>
+      </td>
+    </tr>
+  </tfoot>
 </table>
-
-<div class="pager clearfix">
-  <ul class="center_area" style="width: <?php echo $pPage == 1?265:465; ?>px">
-    <li class="tooltip" title="Number of inspected domains for month <?php echo $pMonth; ?>"><?php echo $lHostCount; ?> Results</li>
-    <?php if($pPage > 1) { ?>
-      <li><span><?php echo link_to('First Page', 'oldstats/monthly?page=1'.$pQuery, array('title' => 'Go to First Page', 'class' => 'tooltip')); ?></span></li>
-      <li><span><?php echo link_to('&lt; Previous Page', 'oldstats/monthly?page='.($pPage-1).$pQuery, array('title' => 'Go to Previous Page', 'class' => 'tooltip')); ?></span></li>
-    <?php } ?>
-    <li><span><?php echo link_to('Next Page &gt;', 'oldstats/monthly?page='.($pPage+1).$pQuery, array('title' => 'Go to Next Page', 'class' => 'tooltip')); ?></span></li>
-    <li><span><?php echo link_to('Last Page', 'oldstats/monthly?page='.ceil($lHostCount/20).$pQuery, array('title' => 'Go to Last Page', 'class' => 'tooltip')); ?></span></li>
-  </ul>
-</div>

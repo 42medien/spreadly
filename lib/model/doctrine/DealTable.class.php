@@ -12,9 +12,7 @@ class DealTable extends Doctrine_Table
    const STATE_DENIED = 'denied';
    const STATE_TRASHED = 'trashed';
    const STATE_PAUSED = 'paused';
-   
-
-   
+      
     public static function getInstance()
     {
         return Doctrine_Core::getTable('Deal');
