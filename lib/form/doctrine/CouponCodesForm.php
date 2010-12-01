@@ -19,10 +19,17 @@ class CouponCodesForm extends BaseForm {
     ));
 
     $this->setValidators(array(
-      'single_code'           => new sfValidatorString(),
-      'multiple_codes'        => new sfValidatorString()
+      'single_code'           => new sfValidatorString(array("required" => false)),
+      'multiple_codes'        => new sfValidatorString(array("required" => false))
     ));
-
+    
+    $this->getValidatorSchema()->setPostValidator(
+      new sfValidatorOr(array(
+        new sfValidatorSchemaFilter('single_code', new sfValidatorString(array('required' => true))),
+        new sfValidatorSchemaFilter('multiple_codes', new sfValidatorString(array('required' => true)))
+      ))
+    );
+  
     $this->widgetSchema->setNameFormat('coupon[%s]');
 
     parent::setup();
