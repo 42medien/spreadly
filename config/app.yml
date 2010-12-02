@@ -22,7 +22,7 @@ all:
     statistics:         marco@ekaabo.de
 
   settings:
-    filtered_parameters: [yiidit, zanpid]  #for cleaning up urls
+    filtered_parameters: [yiidit, zanpid, utm_source, utm_medium, utm_campaign, utm_content]  #for cleaning up urls
 
   image_sizes:
     avatar: ['16x16', '30x30', '48x48', '140x140']  #height x width
