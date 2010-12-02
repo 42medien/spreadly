@@ -34,17 +34,19 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $this->paused = Doctrine::getTable('Deal')->findOneBy("state", "paused");
     
     $this->past = $this->submitted;
-    $this->past->setStartDate(date(strtotime("-2 weeks")));
-    $this->past->setEndDate(date(strtotime("-1 weeks")));
-
+    $this->past->setStartDate(date("c", strtotime("-2 weeks")));
+    $this->past->setEndDate(date("c", strtotime("-1 weeks")));
+    $this->past->save();
+    
     $this->active = $this->approved;
-    $this->active->setStartDate(date(strtotime("-1 weeks")));
-    $this->active->setEndDate(date(strtotime("1 weeks")));
+    $this->active->setStartDate(date("c", strtotime("-1 weeks")));
+    $this->active->setEndDate(date("c", strtotime("1 weeks")));
+    $this->active->save();
 
     $this->future = $this->paused;
-    $this->future->setStartDate(date(strtotime("1 weeks")));
-    $this->future->setEndDate(date(strtotime("2 weeks")));
-    
+    $this->future->setStartDate(date("c", strtotime("1 weeks")));
+    $this->future->setEndDate(date("c", strtotime("2 weeks")));
+    $this->future->save();
   }
 
   public function testInitialStates() {
@@ -255,6 +257,10 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals('', $this->past->getActiveCssClass());
     $this->assertEquals('deal_active', $this->active->getActiveCssClass());
     $this->assertEquals('', $this->future->getActiveCssClass());
+  }
+  
+  public function testOverlapping() {
+    
   }
   
 }

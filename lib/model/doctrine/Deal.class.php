@@ -37,8 +37,8 @@ class Deal extends BaseDeal {
   }
   
   public function isActive() {
-    $lNow = time();
-    return $this->getState()=='approved' && $this->getStartDate()<= $lNow && $this->getEndDate() >= $lNow;
+    $lNow = time();    
+    return $this->getState()=='approved' && strtotime($this->getStartDate()) <= $lNow && strtotime($this->getEndDate()) >= $lNow;
   }
   
   private function fireQuantityChangedEvent() {

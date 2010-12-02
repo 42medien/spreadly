@@ -27,10 +27,17 @@ class DealTable extends Doctrine_Table
     // !trashed
     $lQuery = Doctrine_Query::create()
                 ->from('Deal d')
-                ->where('d.domain_profile_id = ? AND '.
-                        '(d.start_date <= ? AND d.end_date >= ?)', 
-                  array($lDomainProfile->getId(),
-                        $lE, $lS));
+                ->where(
+                  'd.id != ? AND '.
+                  'd.domain_profile_id = ? AND '.
+                  'd.state != "trashed" AND ('.
+                  '(d.start_date > ? AND d.start_date <= ?) OR '. 
+                  '(d.start_date <= ? AND d.end_date >= ?))', 
+                  
+                  array($pOtherDeal->getId(),
+                        $lDomainProfile->getId(),
+                        $lS, $lE,
+                        $lS, $lE));
 
     return $lQuery->execute();
   }
