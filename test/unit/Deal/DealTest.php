@@ -33,6 +33,18 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $this->trashed = Doctrine::getTable('Deal')->findOneBy("state", "trashed");
     $this->paused = Doctrine::getTable('Deal')->findOneBy("state", "paused");
     
+    $this->past = $this->submitted;
+    $this->past->setStartDate(date(strtotime("-2 weeks")));
+    $this->past->setEndDate(date(strtotime("-1 weeks")));
+
+    $this->active = $this->approved;
+    $this->active->setStartDate(date(strtotime("-1 weeks")));
+    $this->active->setEndDate(date(strtotime("1 weeks")));
+
+    $this->future = $this->paused;
+    $this->future->setStartDate(date(strtotime("1 weeks")));
+    $this->future->setEndDate(date(strtotime("2 weeks")));
+    
   }
 
   public function testInitialStates() {
@@ -225,6 +237,24 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $id = $this->submitted->getId();
     $this->submitted = Doctrine::getTable('Deal')->find($id);
     $this->assertEquals('approved', $this->submitted->getState());
-  }  
+  }
+  
+  public function testIsActive() {
+    $this->past->approve();
+    $this->future->resume();
+
+    $this->assertFalse($this->past->isActive());
+    $this->assertTrue($this->active->isActive());
+    $this->assertFalse($this->future->isActive());
+  }
+
+  public function testGetActiveCssClass() {
+    $this->past->approve();
+    $this->future->resume();
+
+    $this->assertEquals('', $this->past->getActiveCssClass());
+    $this->assertEquals('deal_active', $this->active->getActiveCssClass());
+    $this->assertEquals('', $this->future->getActiveCssClass());
+  }
   
 }

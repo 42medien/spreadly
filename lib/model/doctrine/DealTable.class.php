@@ -24,6 +24,7 @@ class DealTable extends Doctrine_Table
     
     // (r1start == r2start) || (r1start > r2start ? r1start <= r2end : r2start <= r1end);
     // and not me!!!
+    // !trashed
     $lQuery = Doctrine_Query::create()
                 ->from('Deal d')
                 ->where('d.domain_profile_id = ? AND '.

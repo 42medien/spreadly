@@ -90,6 +90,8 @@ class StateMachine extends Doctrine_Template {
     } elseif(array_key_exists(strtolower(preg_replace('/^can/', '', $name)), $events)) {
       $name = strtolower(preg_replace('/^can/', '', $name));
       return $this->canTransitionFor($name);
+    } else {
+      throw new sfException("Method not recognized!");
     }
 
   }

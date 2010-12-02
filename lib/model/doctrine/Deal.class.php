@@ -28,6 +28,19 @@ class Deal extends BaseDeal {
     return $this->getCouponClaimedQuantity();
   }
   
+  public function getHumanCouponQuantity() {
+    return $this->isUnlimited() ? 'unlimited' : $this->getCouponQuantity();
+  }
+  
+  public function getActiveCssClass() {
+    return ($this->isActive() ? 'deal_active' : '');
+  }
+  
+  public function isActive() {
+    $lNow = time();
+    return $this->getState()=='approved' && $this->getStartDate()<= $lNow && $this->getEndDate() >= $lNow;
+  }
+  
   private function fireQuantityChangedEvent() {
     $prefix = $this->getTable()->getTableName();
     $eventName = $prefix.".couponQuantityChanged";
