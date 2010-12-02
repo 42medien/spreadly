@@ -25,7 +25,7 @@ class DealForm extends BaseDealForm
       'description'       => new sfWidgetFormInputText(),
       'button_wording'    => new sfWidgetFormInputText(),
       'coupon_quantity'    => new sfWidgetFormInputText(),
-      'coupon_type'       => new sfWidgetFormChoice(array('choices' => array('single' => 'single', 'multiple' => 'multiple'), 'expanded' => true ), array('class' => 'coupon-type-select')),
+      'coupon_type'       => new sfWidgetFormChoice(array('choices' => array('single' => $lI18n->__('Only one code'), 'multiple' => $lI18n->__('Paste codes')), 'expanded' => true ), array('class' => 'coupon-type-select')),
       'redeem_url'        => new sfWidgetFormInputText(),
       'tos_accepted'      => new sfWidgetFormInputCheckbox(),
       'terms_of_deal'     => new sfWidgetFormInputText()
@@ -38,20 +38,26 @@ class DealForm extends BaseDealForm
     	)
     );
 
+    $this->widgetSchema->setLabels(
+    	array(
+    		'tos_accepted' => 'By submitting a deal you accept the Yiid %terms% Agreement.'
+    	)
+    );
+
     $this->setValidators(array(
-      'id'                => new sfValidatorInteger(array('required' => false), array('required' => 'id required')),
-      'domain_profile_id' => new sfValidatorInteger(array('required' => false), array('required' => 'id required')),
-      'sf_guard_user_id' => new sfValidatorInteger(array('required' => false), array('required' => 'user-id required')),
-      'start_date'        => new sfValidatorPass(array('required' => true, 'trim' => true), array('required' => 'startdate required')),
-      'end_date'          => new sfValidatorPass(array('required' => true, 'trim' => true), array('required' => 'enddate required')),
-      'summary'           => new sfValidatorString(array('max_length' => 40, 'required' => true, 'trim' => true), array('required' => 'summary required')),
-      'description'       => new sfValidatorString(array('max_length' => 80, 'required' => true, 'trim' => true), array('required' => 'description required')),
-      'button_wording'    => new sfValidatorString(array('max_length' => 35, 'required' => true, 'trim' => true), array('required' => 'button-wording required')),
+      'id'                => new sfValidatorInteger(array('required' => false), array('required' => $lI18n->__('Required'))),
+      'domain_profile_id' => new sfValidatorInteger(array('required' => false), array('required' => $lI18n->__('Required'))),
+      'sf_guard_user_id' => new sfValidatorInteger(array('required' => false), array('required' => $lI18n->__('Required'))),
+      'start_date'        => new sfValidatorPass(array('required' => true, 'trim' => true), array('required' => $lI18n->__('Required'))),
+      'end_date'          => new sfValidatorPass(array('required' => true, 'trim' => true), array('required' => $lI18n->__('Required'))),
+      'summary'           => new sfValidatorString(array('max_length' => 40, 'required' => true, 'trim' => true), array('required' => $lI18n->__('Required'))),
+      'description'       => new sfValidatorString(array('max_length' => 80, 'required' => true, 'trim' => true), array('required' => $lI18n->__('Required'))),
+      'button_wording'    => new sfValidatorString(array('max_length' => 35, 'required' => true, 'trim' => true), array('required' => $lI18n->__('Required'))),
       'coupon_quantity'    => new sfValidatorInteger(array('required' => false, 'trim' => true)),
-      'coupon_type'       => new sfValidatorChoice(array('choices' => array(0 => 'single', 1 => 'multiple'), 'required' => true)),
+      'coupon_type'       => new sfValidatorChoice(array('choices' => array(0 => 'single', 1 => 'multiple'), array('required' => $lI18n->__('Required')))),
       'redeem_url'        => new sfValidatorString(array('max_length' => 512, 'required' => false, 'trim' => true)),
-      'tos_accepted'      => new sfValidatorBoolean(array('required' => true, 'trim' => true), array('required' => 'tosaccepted required')),
-      'terms_of_deal'     => new sfValidatorString(array('max_length' => 512, 'required' => true, 'trim' => true), array('required' => 'termsofdeal required'))
+      'tos_accepted'      => new sfValidatorBoolean(array('required' => true, 'trim' => true), array('required' => $lI18n->__('Required'))),
+      'terms_of_deal'     => new sfValidatorString(array('max_length' => 512, 'required' => true, 'trim' => true), array('required' => $lI18n->__('Required')))
     ));
 
     //$this->widgetSchema->setNameFormat('deal[%s]');
