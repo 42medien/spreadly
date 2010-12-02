@@ -232,6 +232,31 @@ class CouponTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals(0, $this->multiple->getRemainingCouponCount());
   }
 
+  public function testAddEmptyMultipleCoupons() {
+    $this->multiple->saveInitialCoupons(array("multiple_codes" => "blah,blubb,hulli"));
+    $this->multiple->approve();
+    
+    $this->assertEquals(6, $this->multiple->addMoreCoupons(array("multiple_codes" => "blah,blubb,hulli")));
+    $this->multiple->refresh();
+    $this->assertEquals(6, $this->table->count());    
+    $this->assertEquals(6, $this->multiple->getCouponQuantity());
+
+    $this->assertEquals(6, $this->multiple->addMoreCoupons(array("multiple_codes" => "")));
+    $this->multiple->refresh();
+    $this->assertEquals(6, $this->table->count());
+    $this->assertEquals(6, $this->multiple->getCouponQuantity());
+
+    $this->assertEquals(6, $this->multiple->addMoreCoupons(array("multiple_codes" => "   ")));
+    $this->multiple->refresh();
+    $this->assertEquals(6, $this->table->count());
+    $this->assertEquals(6, $this->multiple->getCouponQuantity());
+
+    $this->assertEquals(6, $this->multiple->addMoreCoupons(array("multiple_codes" => "   ,   ,   ")));
+    $this->multiple->refresh();
+    $this->assertEquals(6, $this->table->count());
+    $this->assertEquals(6, $this->multiple->getCouponQuantity());
+  }
+
   
   // Must remain last function to setup test data, since we dont have a test db
   public function testSetup() {

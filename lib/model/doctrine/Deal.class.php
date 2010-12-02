@@ -76,6 +76,10 @@ class Deal extends BaseDeal {
            $this->getCouponQuantity()==DealTable::COUPON_QUANTITY_UNLIMITED;
   }
   
+  private static function elementEmpty($pElement) {
+    return empty($pElement);
+  }
+  
   private function saveMultipleCoupons($params, $pIsAdding=false) {
     $codes = array();
     if($this->getCouponType()==DealTable::COUPON_TYPE_SINGLE) {
@@ -90,16 +94,20 @@ class Deal extends BaseDeal {
       $codes = explode(',', $couponString);
     }
     
-    foreach ($codes as $code) {
-      if(!empty($code)) {
-        $c = new Coupon();
-        $c->setCode($code);
-        $c->setDealId($this->getId());
-        $c->save();        
-      }
-    }
+    $lAllEmpty = array_filter($codes, 'Deal::elementEmpty');
     
-    $this->saveQuantities(count($codes), (empty($params['quantity']) ? 0 : $params['quantity']), $pIsAdding);
+    if(!$lAllEmpty) {
+      foreach ($codes as $code) {
+        if(!empty($code)) {
+          $c = new Coupon();
+          $c->setCode($code);
+          $c->setDealId($this->getId());
+          $c->save();        
+        }
+      }
+    
+      $this->saveQuantities(count($codes), (empty($params['quantity']) ? 0 : $params['quantity']), $pIsAdding);      
+    }
 
     return $this->getCouponQuantity();
   }

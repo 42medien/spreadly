@@ -234,6 +234,8 @@ class dealsActions extends sfActions
     	$lHigher = $lParams['input'] > $lDeal->getCouponQuantity();
     	if($lNumeric && $lHigher) {
         $lDeal->addMoreCoupons(array('quantity' => $lParams['input']-$lDeal->getCouponQuantity()));
+    	} elseif($lNumeric && $lParams['input'] == $lDeal->getCouponQuantity()) {
+    	  // Do nothing, cause nothing changed
     	} else {
     	  $lError = "";
     	  $lError = $lError. ($lNumeric ? '' : 'not a number');

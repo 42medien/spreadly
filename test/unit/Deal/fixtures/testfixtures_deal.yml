@@ -135,7 +135,7 @@ Deal:
     coupon_quantity: 100
     start_date: '2010-11-26 10:11:36'
     end_date: '2010-11-26 10:11:36'
-    summary: 'snirgel summary'
+    summary: 'snirgel_past'
     description: 'snirgel description'
     button_wording: 'snirgel buttonwording'
     terms_of_deal: 'snirgel tod'
@@ -153,7 +153,7 @@ Deal:
     coupon_quantity: 0
     start_date: '2010-11-26 10:11:36'
     end_date: '2010-11-26 10:11:36'
-    summary: 'snirgel summary'
+    summary: 'snirgel_active'
     description: 'snirgel description'
     button_wording: 'snirgel buttonwording'
     terms_of_deal: 'snirgel tod'
@@ -168,10 +168,10 @@ Deal:
     state: approved
     type: commercial
     coupon_type: single
-    coupon_quantity: '987465'
+    coupon_quantity: '50'
     start_date: '2010-11-26 10:11:36'
     end_date: '2010-11-26 10:11:36'
-    summary: 'snirgel summary'
+    summary: 'snirgel_future'
     description: 'snirgel description'
     button_wording: 'snirgel buttonwording'
     terms_of_deal: 'snirgel tod'
