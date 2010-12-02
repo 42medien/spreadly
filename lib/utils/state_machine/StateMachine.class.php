@@ -91,7 +91,8 @@ class StateMachine extends Doctrine_Template {
       $name = strtolower(preg_replace('/^can/', '', $name));
       return $this->canTransitionFor($name);
     } else {
-      throw new sfException("Method not recognized!");
+      // HS_TODO: What to do?
+      //throw new sfException("Method not recognized!");
     }
 
   }
