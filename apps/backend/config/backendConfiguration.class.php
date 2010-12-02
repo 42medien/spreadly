@@ -5,6 +5,9 @@ class backendConfiguration extends sfApplicationConfiguration
   {
     // Register listeners for Deal events
     $prefix = "deal.event.";
+    $this->dispatcher->connect($prefix.'approve', array('DealListener', 'eventApprove'));
+    $this->dispatcher->connect($prefix.'deny', array('DealListener', 'eventDeny'));
+
     $this->dispatcher->connect($prefix.'submit', array('DealListener', 'updateMongoDeal'));
     $this->dispatcher->connect($prefix.'approve', array('DealListener', 'updateMongoDeal'));
     $this->dispatcher->connect($prefix.'deny', array('DealListener', 'updateMongoDeal'));

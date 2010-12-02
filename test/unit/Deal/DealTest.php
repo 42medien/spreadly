@@ -93,7 +93,7 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $this->assertTrue($exception);
   }
   
-  // TODO: should it throw an exception in this case too???
+  // HS_TODO: should it throw an exception in this case too???
   /*
   public function testNotApprovableWithSetState() {
     $this->assertFalse($this->denied->canApprove());

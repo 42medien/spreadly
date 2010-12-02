@@ -4,16 +4,19 @@ class DealListener {
   public static function eventSubmit($event) {
     $deal = $event->getSubject();
     $params = $event->getParameters();
+    // HS_TODO: send mail to admin
   }
 
   public static function eventApprove($event) {
     $deal = $event->getSubject();
-    $params = $event->getParameters();
+    $params = $event->getParameters();    
+    // HS_TODO: send mail to owner
   }
 
   public static function eventDeny($event) {
     $deal = $event->getSubject();
     $params = $event->getParameters();
+    // HS_TODO: send mail to owner
   }
 
   public static function eventPause($event) {
