@@ -45,6 +45,14 @@ class YiidActivity extends BaseYiidActivity
     return $this->getCbReferer()?true:false;
   }
 
+  /**
+   * wrapper for checkeing on deal-activity
+   * @return boolean
+   */
+  public function isDealActivity() {
+    return $this->getDId()?true:false;
+  }
+
   public function delete(Doctrine_Connection $con = null) {
     $this->collection->remove(array("_id" => new MongoId($this->getId()) ));
   }
