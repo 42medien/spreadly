@@ -134,6 +134,9 @@ class Deal extends BaseDeal {
     $array['end_date'] = new MongoDate(strtotime($array['end_date']));
     $array['created_at'] = new MongoDate(strtotime($array['created_at']));
     $array['updated_at'] = new MongoDate(strtotime($array['updated_at']));
+    $array['remaining_coupon_quantity'] = $this->getRemainingCouponQuantity();
+    $array['human_coupon_quantity'] = $this->getHumanCouponQuantity();
+    $array['is_unlimited'] = $this->isUnlimited();
     $array['host'] = $this->getDomainProfile()->getUrl();
     return $array;
   }

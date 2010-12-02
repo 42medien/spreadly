@@ -75,7 +75,8 @@ class dealsActions extends sfActions
 
     // Cleaning up the single code/multi code dilemma
     $lParams['deal']['coupon_type']=='single' ? $lParams['deal']['coupon']['multiple_codes']="" : $lParams['deal']['coupon']['single_code']="";
-
+    
+    $lDeal=null;
     if($lDealId = $lParams['deal']['id']){
       $lDeal = DealTable::getInstance()->find($lDealId);
       $lDealForm = new DealForm($lDeal);
@@ -92,8 +93,15 @@ class dealsActions extends sfActions
     $this->pForm->bind($lParams);
     if($this->pForm->isValid()) {
 	    $lObject = $this->pForm->save();
-	    $deal = $this->pForm->getEmbeddedForm('deal')->getObject();
-	    $deal->saveInitialCoupons($lParams['deal']['coupon']);
+	    $lDealFromForm = $this->pForm->getEmbeddedForm('deal')->getObject();
+	    
+	    if($lDeal) {
+  	    $lDealFromForm->addMoreCoupons($lParams['deal']['coupon']);
+	      $lDealFromForm->submit();
+	    } else {
+  	    $lDealFromForm->saveInitialCoupons($lParams['deal']['coupon']);
+	    }
+	    
 	    $lReturn['html'] = $this->getPartial('deals/deal_in_process');
     } else {
     	$lCouponType = $lParams['deal']['coupon_type'];
@@ -229,6 +237,7 @@ class dealsActions extends sfActions
   	$lParams['input'] = trim($lParams['input']);
   	$lDeal = DealTable::getInstance()->find($lParams['deal_id']);
     $lError = "";
+
     if($this->getUser()->isMine($lDeal) && !$lDeal->isUnlimited()) {
       $lNumeric = is_numeric($lParams['input']);
     	$lHigher = $lParams['input'] > $lDeal->getCouponQuantity();
