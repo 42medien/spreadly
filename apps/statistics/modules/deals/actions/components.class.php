@@ -29,7 +29,9 @@ class dealsComponents extends sfComponents {
 	    	'start_date' => $lDeal->getStartDate(),
 	    	'end_date' => $lDeal->getEndDate(),
     		'coupon_quantity' => $lDeal->getCouponQuantity(),
-        'coupon_type' => $this->pCouponType
+        'coupon_type' => $this->pCouponType,
+    	  'redeem_url' => $lDeal->getRedeemUrl(),
+    	  'tos_accepted' => $lDeal->getTosAccepted()
       ));
     } else {
     	$this->pCouponType = 'single';
@@ -51,6 +53,7 @@ class dealsComponents extends sfComponents {
     ));
 
     $lDealForm->embedForm('coupon', new CouponCodesForm());
+    //if single: getcode, if multiple: getcodes
     $this->pForm->embedForm('deal', $lDealForm);
   }
 

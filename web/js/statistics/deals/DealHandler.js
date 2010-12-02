@@ -145,14 +145,15 @@ var DealForm = {
     debug.log('[DealForm][changeDomainProfile]');       
     jQuery.ajax({
       type: "GET",
-      url: '/deals/get_domain_profile',
+      url: '/deals/get_form_by_domain',
       dataType: "json",
       data: {
         'dpid': pDpId,
         ei_kcuf: new Date().getTime()
         },        
       success: function (pResponse) {
-        jQuery('#imprint_url').val(pResponse.imprint_url);
+        Deal.showContent(pResponse.html);
+        DealForm.init();        
       }
     });  
   },

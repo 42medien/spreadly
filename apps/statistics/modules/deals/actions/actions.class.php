@@ -146,7 +146,7 @@ class dealsActions extends sfActions
 
     return $this->renderText(json_encode(
     	array(
-    		'html' => $this->getPartial('deals/create_deal_form_content', array('pForm' => $this->pForm, 'pCouponQuantity' => $lCouponQuantity, 'pCouponType' => $lCouponType)),
+    		'html' => $this->getPartial('deals/create_deal_form', array('pForm' => $this->pForm, 'pCouponQuantity' => $lCouponQuantity, 'pCouponType' => $lCouponType)),
     	)
     ));
   }
