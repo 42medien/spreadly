@@ -186,7 +186,7 @@ class dealsActions extends sfActions
         } else {
           $lDeal->save();
         }
-      } else {
+      } elseif($lNewDate < $lCurrentDate) {
         $lError = "The new end date must be later than the current end date";
       }
 
