@@ -54,7 +54,7 @@ class DealForm extends BaseDealForm
       'description'       => new sfValidatorString(array('max_length' => 80, 'required' => true, 'trim' => true), array('required' => $lI18n->__('Required'))),
       'button_wording'    => new sfValidatorString(array('max_length' => 35, 'required' => true, 'trim' => true), array('required' => $lI18n->__('Required'))),
       'coupon_quantity'    => new sfValidatorInteger(array('required' => false, 'trim' => true)),
-      'coupon_type'       => new sfValidatorChoice(array('choices' => array(0 => 'single', 1 => 'multiple'), array('required' => $lI18n->__('Required')))),
+      'coupon_type'       => new sfValidatorChoice(array('choices' => array(0 => 'single', 1 => 'multiple'))),
       'redeem_url'        => new sfValidatorString(array('max_length' => 512, 'required' => false, 'trim' => true)),
       'tos_accepted'      => new sfValidatorBoolean(array('required' => true, 'trim' => true), array('required' => $lI18n->__('Required'))),
       'terms_of_deal'     => new sfValidatorString(array('max_length' => 512, 'required' => true, 'trim' => true), array('required' => $lI18n->__('Required')))

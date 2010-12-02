@@ -62,6 +62,8 @@ var EditInPlace = {
     EditInPlace.initFormField();
     //init a callback, if needed (specified in the data-attr of the clicked element)
     EditInPlace.initCallback();
+    
+    //EditInPlace.bindBodyClick();
   },
   
   initData: function(){
@@ -162,6 +164,16 @@ var EditInPlace = {
     EditInPlace.initByClick();
   },
   
+  bindBodyClick: function() {
+    debug.log("[EditInPlace][close]");  
+    jQuery('body').bind('click', function(pEvent) {
+        EditInPlace.close(EditInPlace.aContent);
+      return false;
+    });
+  },
+  
+  
+  
   update: function(pContent){
     jQuery(EditInPlace.aElement).empty();
     jQuery(EditInPlace.aElement).append(pContent);
@@ -174,7 +186,7 @@ var EditInPlace = {
   bindSaveClick: function(){
     debug.log("[EditInPlace][bindSaveClick]"); 
     //bind the click to the save-img in a opened edit-field
-    jQuery('#save-editin-place').live('click', function() {
+    jQuery('#save-editin-place').live('click', function(pEvent) {
       EditInPlace.doSave();
       return false;         
     });

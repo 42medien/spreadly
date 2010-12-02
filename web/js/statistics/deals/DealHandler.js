@@ -87,13 +87,14 @@ var DealForm = {
     jQuery('#deal_button_wording').limit('35', '#button_wording_counter');
     jQuery('#deal_summary').limit('40', '#summary_counter');
     jQuery('#deal_description').limit('80', '#description_counter');
-    
+    jQuery('.mirror-value').mirrorValue();
     //inits the form-save
     DealForm.save();
     
     //inits the filling of the fields after selecting a domain-profile
     DealForm.selectDomainProfile();
     DealForm.toggleCouponType();
+    DealForm.setRadioButtons();
   },
   
   /**
@@ -111,6 +112,7 @@ var DealForm = {
         success:   function(pResponse) {
           debug.log('[DealForm][showProceed]');      
           Deal.showContent(pResponse.html);
+          DealTable.update();
           DealForm.init();          
         }
     };
@@ -157,7 +159,6 @@ var DealForm = {
   
   /**
    * toggles the code-form-fields after select a coupon-type
-   * 
    * @author KM
    */  
   toggleCouponType: function(){
@@ -172,6 +173,24 @@ var DealForm = {
         jQuery('#multiple-code-row').show();
       }
     });
+  },
+  
+  /**
+   * set the radiobuttons if user click on the label-field
+   * @author KM
+   */    
+  setRadioButtons: function() {
+    debug.log('[DealForm][setRadioButtons]');       
+    jQuery('#edit-quantity').bind('click', function() {
+      jQuery('#radio-single-quantity').attr('checked', true);
+      return true;
+    });
+    
+    jQuery('#single-quantity-unlimited').bind('click', function() {
+      jQuery('#radio-single-quantity-unltd').attr('checked', true);
+      return true;
+    });    
+    
   }
 };
 
@@ -237,7 +256,6 @@ var DealTable = {
         dataType: "json",  
         success: function (pResponse) {
           if(pResponse.success === true) {
-            debug.log(lCssId);
             DealTable.showRow(lCssId, pResponse.html, pResponse.state);
           } else {
             //alert if there are validation-errors
@@ -264,5 +282,20 @@ var DealTable = {
     if(jQuery(lId).hasClass('paused')){jQuery(lId).removeClass('paused');}     
     jQuery(lId).addClass(pState);
     jQuery(lId).append(pRow);
+  },
+  
+  update: function() {
+    jQuery.ajax({
+      type: "GET",
+      url: 'deals/get_deal_table',
+      dataType: "json",  
+      success: function (pResponse) {
+        if(pResponse.success === true) {
+          jQuery('#deal-table-box').empty();
+          jQuery('#deal-table-box').append(pResponse.html);
+          //EditInPlace.initByClick();
+        }
+      }
+    });
   }
 };

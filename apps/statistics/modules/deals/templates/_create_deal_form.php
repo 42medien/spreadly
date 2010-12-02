@@ -32,7 +32,7 @@
 	  <div class="left form-row">
 	  	<div class="label-box">
 		    <?php echo $pForm['deal']['button_wording']->renderLabel();?>
-		    <div class="meta-label"><?php echo __('Max. <span id="button_wording_counter">35</span> characters'); ?></div>
+		    <div class="meta-label"><?php echo __('<span id="button_wording_counter">35</span> characters left'); ?></div>
 	    	<?php echo $pForm['deal']['button_wording']->renderError();?>
 		  </div>
 	    <?php echo $pForm['deal']['button_wording']->render(array('class' => 'mirror-value'));?>
@@ -49,7 +49,7 @@
     	<div class="form-row">
 	  		<div class="label-box">
 					<?php echo $pForm['deal']['summary']->renderLabel();?>
-					<div class="meta-label"><?php echo __('Max. <span id="summary_counter">40</span> characters'); ?></div>
+					<div class="meta-label"><?php echo __('<span id="summary_counter">40</span> characters left'); ?></div>
 					<?php echo $pForm['deal']['summary']->renderError();?>
 				</div>
 				<?php echo $pForm['deal']['summary']->render(array('class' => 'mirror-value'));?>
@@ -57,7 +57,7 @@
 			<div class="form-row">
 				<div class="label-box">
 					<?php echo $pForm['deal']['description']->renderLabel();?>
-					<div class="meta-label"><?php echo __('Max. <span id="description_counter">80</span> characters'); ?></div>
+					<div class="meta-label"><?php echo __('<span id="description_counter">80</span> characters left'); ?></div>
 					<?php echo $pForm['deal']['description']->renderError();?>
 				</div>
 				<?php echo $pForm['deal']['description']->render(array('class' => 'mirror-value'));?>
@@ -121,14 +121,14 @@
 	    			<?php echo $pForm['deal']['coupon']['single_code']->renderLabel();?>
 						<?php echo $pForm['deal']['coupon']['single_code']->renderError();?>
 					</div>
-					<?php echo $pForm['deal']['coupon']['single_code']->render();?>
+					<?php echo $pForm['deal']['coupon']['single_code']->render(array('class' => 'mirror-value'));?>
 				</div>
 	    	<div class="form-row clearfix">
 	    		<div class="label-box">
 	    			<?php echo $pForm['deal']['coupon_quantity']->renderLabel();?>
 						<?php echo $pForm['deal']['coupon_quantity']->renderError();?>
 					</div>
-					<div class="inline-row">
+					<div class="inline-row" id="edit-quantity">
 						<div class="label-box">
 							<input type="radio" name="single-quantity" id="radio-single-quantity" <?php echo ($pCouponQuantity > 0)? 'checked="checked"':''; ?> />
 							<?php echo __('Will end after');?>
@@ -177,7 +177,7 @@
           	<div class="coupon-summary deal_summary-mirror">Kostenloser Probemonat</div>
           	<div class="coupon-description">
           		<p><?php echo __('Ihr Gutschein-Code:'); ?></p>
-          		<p><strong>JFJKALEJJ191949</strong></p>
+          		<p><strong class="deal_coupon_single_code-mirror">JFJKALEJJ191949</strong></p>
           	</div>
           	<div class="coupon-foot">Expires at 2010/12/31 23:59 GMT  |  87/100 left</div>
           	<a href="/" class="deal_redeem_url-mirror">http://www.marketingboerse.de/coupons</a>
@@ -187,7 +187,7 @@
   </div>
   <div class="form-row" id="terms-of-use">
 		<?php echo $pForm['deal']['tos_accepted']->render(array('class' => 'left'));?>
-		<?php echo $pForm['deal']['tos_accepted']->renderLabel('tos_accepted', array('id' => 'tos_label'));?>
+		<?php echo __($pForm['deal']['tos_accepted']->renderLabel(), array('%terms%' => link_to('Terms of Deals', '/', array('target' => '_blank'))));?>
 		<?php echo $pForm['deal']['tos_accepted']->renderError();?>
 	</div>
 	<?php //echo $pForm['tos_accepted']->renderError();?>

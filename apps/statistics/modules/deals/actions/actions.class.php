@@ -72,7 +72,7 @@ class dealsActions extends sfActions
 		unset($lParams['ei_kcuf']);
 		unset($lParams['single-quantity']);
     //$lDealForm = new DealForm();
-    
+
     // Cleaning up the single code/multi code dilemma
     $lParams['deal']['coupon_type']=='single' ? $lParams['deal']['coupon']['multiple_codes']="" : $lParams['deal']['coupon']['single_code']="";
 
@@ -178,7 +178,7 @@ class dealsActions extends sfActions
     if($this->getUser()->isMine($lDeal)) {
       $lNewDate = strtotime($lParams['input']);
       $lCurrentDate = strtotime($lDeal->getEndDate());
-      
+
       if($lNewDate > $lCurrentDate) {
         $lDeal->setEndDate($lNewDate);
         if(DealTable::isOverlapping($lDeal)) {
@@ -189,11 +189,11 @@ class dealsActions extends sfActions
       } else {
         $lError = "The new end date must be later than the current end date";
       }
-      
+
     } else {
       $lError = "You can not add codes to coupons of type single.";
     }
-    
+
     return $this->renderText(json_encode(
     	array(
     		'success' => empty($lError),
@@ -276,6 +276,18 @@ class dealsActions extends sfActions
     		'error' => $lError,
     		'html' => $this->getPartial('deals/deal_table_row_content', array('pDeal' => $lDeal)),
     	  'state' => $lParams['state']
+    	)
+    ));
+  }
+
+  public function executeGet_deal_table(sfWebRequest $request){
+  	$this->getResponse()->setContentType('application/json');
+  	$lDeals = DealTable::getInstance()->findBy('sf_guard_user_id', $this->getUser()->getUserId());
+
+  	return $this->renderText(json_encode(
+    	array(
+    		'success' => empty($lError),
+    		'html' => $this->getPartial('deals/deal_table', array('pDeals' => $lDeals)),
     	)
     ));
   }
