@@ -75,7 +75,7 @@ class dealsActions extends sfActions
 
     // Cleaning up the single code/multi code dilemma
     $lParams['deal']['coupon_type']=='single' ? $lParams['deal']['coupon']['multiple_codes']="" : $lParams['deal']['coupon']['single_code']="";
-    
+
     $lDeal=null;
     if($lDealId = $lParams['deal']['id']){
       $lDeal = DealTable::getInstance()->find($lDealId);
@@ -94,19 +94,19 @@ class dealsActions extends sfActions
     if($this->pForm->isValid()) {
 	    $lObject = $this->pForm->save();
 	    $lDealFromForm = $this->pForm->getEmbeddedForm('deal')->getObject();
-	    
+
 	    if($lDeal) {
   	    $lDealFromForm->addMoreCoupons($lParams['deal']['coupon']);
 	      $lDealFromForm->submit();
 	    } else {
   	    $lDealFromForm->saveInitialCoupons($lParams['deal']['coupon']);
 	    }
-	    
+
 	    $lReturn['html'] = $this->getPartial('deals/deal_in_process');
     } else {
     	$lCouponType = $lParams['deal']['coupon_type'];
     	$lCouponQuantity = $lParams['deal']['coupon_quantity'];
-    	$lReturn['html'] = $this->getPartial('deals/create_deal_form', array('pForm' => $this->pForm, 'pCouponType' => $lCouponType, 'pCouponQuantity' => $lCouponQuantity));
+    	$lReturn['html'] = $this->getPartial('deals/create_deal_form', array('pForm' => $this->pForm, 'pCouponType' => $lCouponType, 'pCouponQuantity' => $lCouponQuantity, 'pDefaultCode' => ''));
     }
 
     return $this->renderText(json_encode($lReturn));
@@ -154,7 +154,7 @@ class dealsActions extends sfActions
 
     return $this->renderText(json_encode(
     	array(
-    		'html' => $this->getPartial('deals/create_deal_form', array('pForm' => $this->pForm, 'pCouponQuantity' => $lCouponQuantity, 'pCouponType' => $lCouponType)),
+    		'html' => $this->getPartial('deals/create_deal_form', array('pForm' => $this->pForm, 'pCouponQuantity' => $lCouponQuantity, 'pCouponType' => $lCouponType, 	'pDefaultCode' => 'JSFDJKAREWRKOP')),
     	)
     ));
   }

@@ -63,7 +63,6 @@ class dealsComponents extends sfComponents {
     ));
 
 
-
     $lCouponForm = new CouponCodesForm();
     $lCouponForm->setDefaults(array(
     		'single_code' => $this->pDefaultCode

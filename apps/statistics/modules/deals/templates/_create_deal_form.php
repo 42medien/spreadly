@@ -140,6 +140,9 @@
 			    		<div class="form-row clearfix">
 			    			<div class="label-box">
 			    				<?php echo $pForm['deal']['coupon_quantity']->renderLabel();?>
+          				<div class="meta-label">
+          					<?php echo __('Empty or 0 is same as unlimeted');?>
+          				</div>
 									<?php echo $pForm['deal']['coupon_quantity']->renderError();?>
 								</div>
 								<div class="inline-row" id="edit-quantity">
