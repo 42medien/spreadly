@@ -132,7 +132,7 @@ Deal:
     state: approved
     type: commercial
     coupon_type: single
-    coupon_quantity: 100
+    coupon_quantity: 0
     start_date: '2010-11-26 10:11:36'
     end_date: '2010-11-26 10:11:36'
     summary: 'snirgel_past'
@@ -150,7 +150,7 @@ Deal:
     state: approved
     type: commercial
     coupon_type: single
-    coupon_quantity: 0
+    coupon_quantity: 2
     start_date: '2010-11-26 10:11:36'
     end_date: '2010-11-26 10:11:36'
     summary: 'snirgel_active'
@@ -168,7 +168,7 @@ Deal:
     state: approved
     type: commercial
     coupon_type: single
-    coupon_quantity: '50'
+    coupon_quantity: 3
     start_date: '2010-11-26 10:11:36'
     end_date: '2010-11-26 10:11:36'
     summary: 'snirgel_future'

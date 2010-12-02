@@ -2,7 +2,7 @@ Deal:
   actAs:
     Timestampable: ~
     StateMachine:
-      column: state
+      column: deal_state
       initial: submitted
       states: ['submitted', 'approved', 'denied', 'trashed', 'paused']
       events:

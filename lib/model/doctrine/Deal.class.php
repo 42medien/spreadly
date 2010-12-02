@@ -20,12 +20,8 @@ class Deal extends BaseDeal {
     return $this->saveMultipleCoupons($params);
   }
 
-  public function getRemainingCouponCount() {
+  public function getRemainingCouponQuantity() {
     return $this->isUnlimited() ? 'unlimited' : $this->getCouponQuantity()-$this->getCouponClaimedQuantity();
-  }
-
-  public function getClaimedCouponCount() {
-    return $this->getCouponClaimedQuantity();
   }
 
   public function getHumanCouponQuantity() {
@@ -38,7 +34,10 @@ class Deal extends BaseDeal {
 
   public function isActive() {
     $lNow = time();
-    return $this->getState()=='approved' && strtotime($this->getStartDate()) <= $lNow && strtotime($this->getEndDate()) >= $lNow;
+    return $this->getState()=='approved' && 
+           strtotime($this->getStartDate()) <= $lNow && 
+           strtotime($this->getEndDate()) >= $lNow &&
+           $this->getRemainingCouponQuantity()>0;
   }
 
   private function fireQuantityChangedEvent() {
@@ -58,7 +57,7 @@ class Deal extends BaseDeal {
       $coupons = $this->getCoupons();
       $code = $coupons[0]->getCode();
       $this->setCouponClaimedQuantity($this->getCouponClaimedQuantity()+1);
-    } elseif($this->getRemainingCouponCount()>0) {
+    } elseif($this->getRemainingCouponQuantity()>0) {
       $coupons = $this->getCoupons();
       $code = $coupons[0]->getCode();
       $this->setCouponClaimedQuantity($this->getCouponClaimedQuantity()+1);
@@ -105,8 +104,8 @@ class Deal extends BaseDeal {
           $c->save();
         }
       }
-
-      $this->saveQuantities(count($codes), (empty($params['quantity']) ? 0 : $params['quantity']), $pIsAdding);
+      
+      $this->saveQuantities(count($codes), (empty($params['quantity']) ? 0 : intval($params['quantity'])), $pIsAdding);
     }
 
     return $this->getCouponQuantity();

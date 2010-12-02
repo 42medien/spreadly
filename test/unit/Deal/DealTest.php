@@ -27,26 +27,29 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $this->new = new Deal();
     $this->new->setDomainProfile($this->domainProfile);
     $this->new->setSfGuardUser($this->user);
-    $this->submitted = Doctrine::getTable('Deal')->findOneBy("state", "submitted");
-    $this->approved = Doctrine::getTable('Deal')->findOneBy("state", "approved");
-    $this->denied = Doctrine::getTable('Deal')->findOneBy("state", "denied");
-    $this->trashed = Doctrine::getTable('Deal')->findOneBy("state", "trashed");
-    $this->paused = Doctrine::getTable('Deal')->findOneBy("state", "paused");
+    $this->submitted = Doctrine::getTable('Deal')->findOneBy("deal_state", "submitted");
+    $this->approved = Doctrine::getTable('Deal')->findOneBy("deal_state", "approved");
+    $this->denied = Doctrine::getTable('Deal')->findOneBy("deal_state", "denied");
+    $this->trashed = Doctrine::getTable('Deal')->findOneBy("deal_state", "trashed");
+    $this->paused = Doctrine::getTable('Deal')->findOneBy("deal_state", "paused");
     
     $this->past = Doctrine::getTable('Deal')->findOneBy("summary", "snirgel_past");
-    $this->past->setStartDate(date("c", strtotime("-2 weeks")));
-    $this->past->setEndDate(date("c", strtotime("-1 weeks")));
-    $this->past->save();
+    $this->past->setStartDate(date("c", strtotime("-2 days")));
+    $this->past->setEndDate(date("c", strtotime("-1 day")));
+    $this->past->save();    
+    $this->past->saveInitialCoupons(array("single_code" => "xxyyzz"));
     
     $this->active = Doctrine::getTable('Deal')->findOneBy("summary", "snirgel_active");
-    $this->active->setStartDate(date("c", strtotime("-1 weeks")));
-    $this->active->setEndDate(date("c", strtotime("1 weeks")));
+    $this->active->setStartDate(date("c", strtotime("-23 hours")));
+    $this->active->setEndDate(date("c", strtotime("23 hours")));
     $this->active->save();
+    $this->active->saveInitialCoupons(array("single_code" => "aabbcc"));
 
     $this->future = Doctrine::getTable('Deal')->findOneBy("summary", "snirgel_future");
-    $this->future->setStartDate(date("c", strtotime("1 weeks")));
-    $this->future->setEndDate(date("c", strtotime("2 weeks")));
+    $this->future->setStartDate(date("c", strtotime("1 day")));
+    $this->future->setEndDate(date("c", strtotime("2 days")));
     $this->future->save();
+    $this->future->saveInitialCoupons(array("single_code" => "ddeeff"));
   }
 
   public function testInitialStates() {
@@ -245,6 +248,16 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $this->assertFalse($this->past->isActive());
     $this->assertTrue($this->active->isActive());
     $this->assertFalse($this->future->isActive());
+
+    $this->active->pause();
+    $this->assertFalse($this->active->isActive());
+    
+    $this->active->resume();
+    $this->assertTrue($this->active->isActive());
+
+    $this->active->setCouponClaimedQuantity($this->active->getCouponQuantity());
+    $this->assertFalse($this->active->isActive());
+    
   }
 
   public function testGetActiveCssClass() {
@@ -254,7 +267,63 @@ class DealTest extends PHPUnit_Framework_TestCase {
   }
   
   public function testOverlapping() {
+    $this->assertFalse(DealTable::isOverlapping($this->past));
+    $this->assertFalse(DealTable::isOverlapping($this->active));
+    $this->assertFalse(DealTable::isOverlapping($this->future));
+
+    $this->active->setStartDate(date("c", strtotime("-1 day")));
+    $this->active->setEndDate(date("c", strtotime("1 day")));
+    $this->active->save();
+    
+    $this->assertTrue(DealTable::isOverlapping($this->past));
+    $this->assertTrue(DealTable::isOverlapping($this->active));
+    $this->assertTrue(DealTable::isOverlapping($this->future));
+
+    $this->active->setStartDate(date("c", strtotime("1 day")));
+    $this->active->setEndDate(date("c", strtotime("2 days")));
+    $this->active->save();
+
+    $this->assertFalse(DealTable::isOverlapping($this->past));
+    $this->assertTrue(DealTable::isOverlapping($this->active));
+    $this->assertTrue(DealTable::isOverlapping($this->future));
+
+    $this->active->setStartDate(date("c", strtotime("2 days")));
+    $this->active->setEndDate(date("c", strtotime("3 days")));
+    $this->active->save();
+
+    $this->assertFalse(DealTable::isOverlapping($this->past));
+    $this->assertTrue(DealTable::isOverlapping($this->active));
+    $this->assertTrue(DealTable::isOverlapping($this->future));
+
+    $this->active->setStartDate(date("c", strtotime("49 hours")));
+    $this->active->setEndDate(date("c", strtotime("3 days")));
+    $this->active->save();
+
+    $this->assertFalse(DealTable::isOverlapping($this->past));
+    $this->assertFalse(DealTable::isOverlapping($this->active));
+    $this->assertFalse(DealTable::isOverlapping($this->future));
+
+    $this->active->setStartDate(date("c", strtotime("-3 days")));
+    $this->active->setEndDate(date("c", strtotime("-36 hours")));
+    $this->active->save();
+
+    $this->assertTrue(DealTable::isOverlapping($this->past));
+    $this->assertTrue(DealTable::isOverlapping($this->active));
     $this->assertFalse(DealTable::isOverlapping($this->future));
   }
+
+  public function testOverlappingTrash() {
+    $this->past->pause();
+    $this->past->trash();
+    $this->future->pause();
+    $this->future->trash();
+    
+    $deals = DealTable::getOverlappingDeals($this->past);
+    
+    $this->assertFalse(DealTable::isOverlapping($this->past));
+    $this->assertFalse(DealTable::isOverlapping($this->active));
+    $this->assertFalse(DealTable::isOverlapping($this->future));
+  }
+
   
 }
