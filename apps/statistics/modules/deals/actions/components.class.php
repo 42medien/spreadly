@@ -20,8 +20,9 @@ class dealsComponents extends sfComponents {
     if($lDeal) {
     	$this->pCouponType = $lDeal->getCouponType();
     	$this->pCouponQuantity = $lDeal->getCouponQuantity();
-      $this->pEdited = true;
+      $this->pDeal = $lDeal;
     	$lDealForm->setDefaults(array(
+    	  'id' => $lDeal->getId(),
 				'terms_of_deal' => $lDeal->getTermsOfDeal(),
 				'button_wording' => $lDeal->getButtonWording(),
 				'summary' => $lDeal->getSummary(),
@@ -33,6 +34,14 @@ class dealsComponents extends sfComponents {
     	  'redeem_url' => $lDeal->getRedeemUrl(),
     	  'tos_accepted' => $lDeal->getTosAccepted()
       ));
+
+      $lCoupons = $lDeal->getCoupons();
+      if(count($lCoupons) > 0){
+ 				$this->pDefaultCode = $lCoupons[0];
+      } else {
+      	$this->pDefaultCode = $lI18n->__('Insert new code');
+      }
+
     } else {
     	$this->pCouponType = 'single';
     	$this->pCouponQuantity = '0';
@@ -45,6 +54,7 @@ class dealsComponents extends sfComponents {
 	    	'end_date' => date('Y-m-d G:i:s'),
 	    	'coupon_type' => 'single'
 	    ));
+	    $this->pDefaultCode = 'JSFDJKAREWRKOP';
     }
     $this->pForm = new DomainProfileDealForm();
     $this->pForm->setDefaults(array(
@@ -52,7 +62,15 @@ class dealsComponents extends sfComponents {
 			'id' => $lFirstDomain->getId()
     ));
 
-    $lDealForm->embedForm('coupon', new CouponCodesForm());
+
+
+    $lCouponForm = new CouponCodesForm();
+    $lCouponForm->setDefaults(array(
+    		'single_code' => $this->pDefaultCode
+	    )
+    );
+
+    $lDealForm->embedForm('coupon', $lCouponForm);
     //if single: getcode, if multiple: getcodes
     $this->pForm->embedForm('deal', $lDealForm);
   }

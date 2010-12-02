@@ -21,7 +21,7 @@
       <tr id="no-claim">
         <td>&nbsp;</td>
         <td colspan="5">
-          <h3><?php echo __('No websites claimed');?></h3>
+          <h3><?php echo __('No Deals');?></h3>
         </td>
       </tr>
     <?php } ?>

@@ -53,7 +53,7 @@ var Deal = {
   showContent: function(pHtml) {
     debug.log('[Deal][showContent]');          
     jQuery('#create-deal-content').empty();
-    jQuery('#create-deal-content').append(pHtml);      
+    jQuery('#create-deal-content').append(pHtml);
   }  
 };
 
@@ -110,7 +110,6 @@ var DealForm = {
         dataType:  'json',
         //resetForm: lReset,
         success:   function(pResponse) {
-          debug.log('[DealForm][showProceed]');      
           Deal.showContent(pResponse.html);
           DealTable.update();
           DealForm.init();          
@@ -197,6 +196,12 @@ var DealForm = {
 
 var DealTable = {
     
+  init: function() {
+    debug.log("[DealTable][init]");    
+    EditInPlace.init('click');
+    DealTable.updateRow();
+  },
+    
   /**
    * inits the datepicker on edit-date-field
    * @author KM
@@ -246,8 +251,8 @@ var DealTable = {
    * set the new states after clicking an action-icon
    * @author KM
    */      
-  setState: function() {
-    debug.log('[DealTable][setState]');    
+  updateRow: function() {
+    debug.log('[DealTable][udateRow]');    
     jQuery('.edit-state').live('click', function() {
       var lAction = jQuery(this).attr('href');
       var lCssId = jQuery(this).parent('td').parent('tr').attr('id');
@@ -285,7 +290,12 @@ var DealTable = {
     jQuery(lId).append(pRow);
   },
   
+  /**
+   * updates the hole table
+   * @author KM
+   */  
   update: function() {
+    debug.log('[DealTable][update]');     
     jQuery.ajax({
       type: "GET",
       url: 'deals/get_deal_table',
@@ -294,7 +304,7 @@ var DealTable = {
         if(pResponse.success === true) {
           jQuery('#deal-table-box').empty();
           jQuery('#deal-table-box').append(pResponse.html);
-          //EditInPlace.initByClick();
+          DealTable.init();
         }
       }
     });
