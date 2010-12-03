@@ -37,7 +37,7 @@ class Deal extends BaseDeal {
     return $this->getState()=='approved' &&
            strtotime($this->getStartDate()) <= $lNow &&
            strtotime($this->getEndDate()) >= $lNow &&
-           $this->getRemainingCouponQuantity()>0;
+           ($this->isUnlimited() || $this->getRemainingCouponQuantity()>0);
   }
 
   private function fireQuantityChangedEvent() {
@@ -87,7 +87,7 @@ class Deal extends BaseDeal {
       }
     } elseif($this->getCouponType()==DealTable::COUPON_TYPE_MULTIPLE) {
       // Convert line breaks to commas
-      $couponString = preg_replace('/\n/', ',', $params['multiple_codes']);
+      $couponString = preg_replace('/[\r\n]+/', ',', $params['multiple_codes']);
       // Remove all remaining white space
       $couponString = preg_replace('/\s/', '', $couponString);
       $codes = explode(',', $couponString);
