@@ -18,6 +18,14 @@ class MongoDbConnector {
     return self::$aInstance;
   }
 
+  public function getConnection() {
+    return self::$aMongoConn;
+  }
+
+  public function getDatabase($pDatabase) {
+    return self::$aMongoConn->selectDB($pDatabase);
+  }
+
 
   /**
    * conenct to given collection
