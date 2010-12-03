@@ -31,7 +31,18 @@ class popupActions extends sfActions {
       // @todo define methods in objects
       OnlineIdentityTable::toggleSocialPublishingStatus($this->getUser()->getUser()->getOnlineIdentitesAsArray(), $checkedOnlineIdentities);
 
-      // @todo adding autolike
+      // autolike
+      YiidActivityTable::saveLikeActivitys($this->getUser()->getId(),
+                                           $request->getParameter('url', null),
+                                           UserIdentityConTable::getOnlineIdentityIdsForUser($this->getUser()->getId()),
+                                           OnlineIdentityTable::getPublishingEnabledByUserIdOnlyIds($this->getUser()->getId()),
+                                           $request->getParameter('likedis', null),
+                                           $request->getParameter('type', null),
+                                           $request->getParameter('title', null),
+                                           $request->getParameter('description', null),
+                                           $request->getParameter('photo', null),
+                                           $request->getParameter('clickback', null)
+                                          );
 
       $this->getUser()->setFlash("onload", "window.close();", false);
     }
