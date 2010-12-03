@@ -25,15 +25,19 @@ class staticActions extends sfActions {
 
     $this->pIsUrlValid = true;
     $lUrl = $request->getParameter('url', '');
+    $lUrl = urldecode($lUrl);
 
     if (!empty($lUrl) && UrlUtils::isUrlValid($lUrl)) {
       $lUrl = urldecode($lUrl);
 	    $lUser = $this->getUser()->getUser();
 
 	    $lSocialObject = SocialObjectTable::retrieveByAliasUrl($lUrl);
+	    $lDeal = DealTable::getActiveDealByUrl($lUrl);
+
       $this->pIsUsed = false;
       if($lSocialObject) {
-        $this->pIsUsed = YiidACtivityTable::getActionOnObjectByUser($lSocialObject->getId(), $this->getUser()->getUserId());
+        $this->pIsUsed = YiidACtivityTable::getActionOnObjectByUser($lSocialObject->getId(), $this->getUser()->getUserId(), $lDeal);
+        $this->pYiidActivity = YiidActivityTable::retrieveActionOnObjectById($lSocialObject->getId(), $this->getUser()->getUserId(), $lDeal);
       }
 
     } else {
@@ -56,6 +60,11 @@ class staticActions extends sfActions {
     CookieUtils::generateWidgetIdentityCookie($this->pIdentities);
     sfProjectConfiguration::getActive()->loadHelpers('I18N');
     $this->getUser()->setFlash('headline', __('Like & Dislike', null, 'widget'));
-    $this->setLayout('layout_twocol');
+    $this->pDeal = $lDeal;
+    $this->setLayout('layout_deal');
+  }
+
+  public function executeSettings(sfWebRequest $request) {
+
   }
 }

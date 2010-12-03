@@ -1,7 +1,6 @@
 <?php use_helper('Text'); ?>
 
-<div class="clearfix">
-  <div id="twocol_wide_left" class="content_main_border rounded_corners light_background left">
+<div class="content-box rounded_corners">
   <?php if($pIsUrlValid) { ?>
     <div id="so_right_view" class="clearfix">
       <div>
@@ -14,6 +13,8 @@
       </div>
     </div>
 
+    <?php if ($pIsUsed) { ?>
+      <?php include_partial("deal_info", array("pYiidActivity" => $pYiidActivity, "pDeal" => $pDeal)); ?>
       <?php if ($pIsUsed == 1) { ?>
         <div class="rounded_corners content_main_border popup_button_used distance_right already_shared" id="static-liked">
           <span class="sharing_button likeit_button">&nbsp;</span>
@@ -24,7 +25,9 @@
           <span class="sharing_button dislikeit_button">&nbsp;</span>
           <?php echo __('disdone_'.$pType); ?>
         </div>
+      <?php } ?>
 	    <?php } else { ?>
+	      <?php include_partial("deal_offer", array("pDeal" => $pDeal)); ?>
 		    <form action="" name="static-like-form" id="static-like-form" method="post">
 		      <h3 class="small_margin"><?php echo __('YOUR_NETWORKS', null, 'widget'); ?></h3>
 		      <input type="hidden" name="type" value="<?php echo $pType; ?>" />
@@ -72,24 +75,6 @@
     </div>
   <?php } ?>
   </div>
-  <div id="twocol_right_short_add" class="content_main_border rounded_corners light_background right" >
-    <h3><?php echo __('ADD_FURTHER_NETWORKS', null, 'widget'); ?></h3>
-    <p><?php echo __('CURRENT_NETWORKS', null, 'widget'); ?></p>
-
-    <ul class="normal_list" id="services_to_choose">
-      <li><a id="choose_facebook" href="<?php echo url_for("@static_signinto?service=facebook", true); ?>">Facebook</a></li>
-      <li><a id="choose_twitter" href="<?php echo url_for("@static_signinto?service=twitter", true); ?>">Twitter</a></li>
-      <li><a id="choose_linkedin" href="<?php echo url_for("@static_signinto?service=linkedin", true); ?>">LinkedIn</a></li>
-      <li><a id="choose_google" href="<?php echo url_for("@static_signinto?service=google", true); ?>">Google</a></li>
-    </ul>
-  </div>
-
-
-  <div id="twocol_right_empty" class="content_main_border rounded_corners light_background right" style="display: none;">
-    <?php echo __('NO_FURTHER_NETWORKS', array('%1' => mail_to('neu@yiid.it')), 'widget'); ?>
-  </div>
-
-</div>
 
 <div id="see_friends_actions" class="clearfix">
   <a href="http://www.yiid.com" target="_blank"><?php echo __('YOUR_FRIENDS_LIKES', null, 'widget'); ?></a>
