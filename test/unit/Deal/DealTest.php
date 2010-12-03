@@ -1,15 +1,10 @@
 <?php
+require_once dirname(__file__).'/../../lib/BaseTestCase.php';
 
-define('SF_ROOT_DIR', realpath(dirname(__FILE__).'/../../..'));
-
-require_once(SF_ROOT_DIR.'/config/ProjectConfiguration.class.php');
-
-new sfDatabaseManager(ProjectConfiguration::getApplicationConfiguration('statistics', 'dev', true));
-sfContext::createInstance(ProjectConfiguration::getApplicationConfiguration('statistics', 'dev', true));
-
-class DealTest extends PHPUnit_Framework_TestCase {
+class DealTest extends BaseTestCase {
 
   public static function setUpBeforeClass() {
+    parent::resetMongo();
     date_default_timezone_set('Europe/Berlin');
   }
 
