@@ -28,7 +28,7 @@
           </div>
 
           <div class="hover_bg left" id="like_area">
-            <a class="like_text" title="<?php echo __("POS_BUTTON_TITLE", $pType); ?>" target="popup" onclick="return YiidUtils.openPopup('<?php echo LikeSettings::JS_STATIC_PATH; ?>');return false;">
+            <a class="like_text" title="<?php echo __("POS_BUTTON_TITLE", $pType); ?>" target="popup" onclick="return YiidUtils.openPopup('<?php echo $lStaticUrl; ?>');return false;">
               Deal<span class="like_icon">&nbsp;</span>
             </a>
           </div>
