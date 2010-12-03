@@ -148,10 +148,8 @@ class Deal extends BaseDeal {
     if($pUser->isMine($this) && !$this->isUnlimited()) {
       $lNumeric = is_numeric($pParams['input']);
     	$lHigher = $pParams['input'] > $this->getCouponQuantity();
-    	if($lNumeric && $lHigher) {
-        
-    	} elseif($lNumeric && $pParams['input'] == $this->getCouponQuantity()) {
-    	  // Do nothing, cause nothing changed
+    	if(($lNumeric && $lHigher) || ($lNumeric && $pParams['input'] == $this->getCouponQuantity())) {
+    	  // The new quantity is either numeric and higher or nothing was changed, so nothing should be done
     	} else {
     	  $lError = "";
     	  $lError = $lError. ($lNumeric ? '' : 'not a number');
