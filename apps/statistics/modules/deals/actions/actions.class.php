@@ -190,30 +190,17 @@ class dealsActions extends sfActions
   	$this->getResponse()->setContentType('application/json');
   	$lParams = $pRequest->getPostParameters();
   	$lDeal = DealTable::getInstance()->find($lParams['id']);
-  	$lError = '';
-    if($this->getUser()->isMine($lDeal)) {
-      $lNewDate = strtotime($lParams['input']);
-      $lCurrentDate = strtotime($lDeal->getEndDate());
-
-      if($lNewDate > $lCurrentDate) {
-        $lDeal->setEndDate($lNewDate);
-        if(DealTable::isOverlapping($lDeal)) {
-          $lError = "The new end date is overlapping another deal";
-        } else {
-          $lDeal->save();
-        }
-      } elseif($lNewDate < $lCurrentDate) {
-        $lError = "The new end date must be later than the current end date";
-      }
-
-    } else {
-      $lError = "You can not add codes to coupons of type single.";
+  	
+  	$lValid = $lDeal->validateNewEndDate($this->getUser(), $lParams['input']);
+  	
+    if($lValid===true) {
+      $lDeal->save();
     }
 
     return $this->renderText(json_encode(
     	array(
-    		'success' => empty($lError),
-    		'error' => empty($lError) ? '' : $lError,
+    		'success' => $lValid===true,
+    		'error' => $lValid===true ? '' : $lValid,
     	  'content' => $lDeal->getEndDate()
     	)
     ));
@@ -244,29 +231,17 @@ class dealsActions extends sfActions
   	$lParams = $pRequest->getPostParameters();
   	$lParams['input'] = trim($lParams['input']);
   	$lDeal = DealTable::getInstance()->find($lParams['deal_id']);
-    $lError = "";
-
-    if($this->getUser()->isMine($lDeal) && !$lDeal->isUnlimited()) {
-      $lNumeric = is_numeric($lParams['input']);
-    	$lHigher = $lParams['input'] > $lDeal->getCouponQuantity();
-    	if($lNumeric && $lHigher) {
-        $lDeal->addMoreCoupons(array('quantity' => $lParams['input']-$lDeal->getCouponQuantity()));
-    	} elseif($lNumeric && $lParams['input'] == $lDeal->getCouponQuantity()) {
-    	  // Do nothing, cause nothing changed
-    	} else {
-    	  $lError = "";
-    	  $lError = $lError. ($lNumeric ? '' : 'not a number');
-    	  $lError = $lError.((!$lNumeric&&!$lHigher) ? ' and ' : '');
-    	  $lError = $lError.($lHigher ? '' : 'not more than before');
-    	}
-    } else {
-      $lError = $lDeal->isUnlimited() ? "You can not change the quantity of unlimited coupons." : "You are not allowed to do this.";
+  	
+    $lValid = $lDeal->validateNewQuantity($this->getUser(), $lParams);
+    
+    if($lValid===true) {
+      $lDeal->addMoreCoupons(array('quantity' => $lParams['input']-$lDeal->getCouponQuantity()));      
     }
-
+    
     return $this->renderText(json_encode(
     	array(
-    		'success' => empty($lError),
-    		'error' => empty($lError) ? '' : $lError,
+    		'success' => $lValid===true,
+    		'error' => $lValid===true ? '' : $lValid,
     	  'content' => $lDeal->getCouponQuantity()
     	)
     ));

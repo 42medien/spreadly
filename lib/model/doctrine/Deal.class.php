@@ -142,4 +142,50 @@ class Deal extends BaseDeal {
     $array['host'] = $this->getDomainProfile()->getUrl();
     return $array;
   }
+  
+  public function validateNewQuantity($pUser, $pParams) {
+    $lError = "";
+    if($pUser->isMine($this) && !$this->isUnlimited()) {
+      $lNumeric = is_numeric($pParams['input']);
+    	$lHigher = $pParams['input'] > $this->getCouponQuantity();
+    	if($lNumeric && $lHigher) {
+        
+    	} elseif($lNumeric && $pParams['input'] == $this->getCouponQuantity()) {
+    	  // Do nothing, cause nothing changed
+    	} else {
+    	  $lError = "";
+    	  $lError = $lError. ($lNumeric ? '' : 'not a number');
+    	  $lError = $lError.((!$lNumeric&&!$lHigher) ? ' and ' : '');
+    	  $lError = $lError.($lHigher ? '' : 'not more than before');
+    	}
+    } else {
+      $lError = $this->isUnlimited() ? "You can not change the quantity of unlimited coupons." : "You are not allowed to do this.";
+    }
+    
+    return empty($lError) ? true : $lError;
+  }
+  
+  public function validateNewEndDate($pUser, $pDateString) {
+    $lError = '';
+    if($pUser->isMine($this)) {
+      $lNewDate = strtotime($pDateString);
+      $lCurrentDate = strtotime($this->getEndDate());
+      $lNow = time();
+
+      if($lNewDate > $lCurrentDate) {
+        $this->setEndDate($lNewDate);
+        
+        if(DealTable::isOverlapping($this)) {
+          $lError = "The new end date is overlapping another deal";
+          $this->setEndDate($lCurrentDate);
+        }
+      } elseif($lNewDate <= $lNow) {
+        $lError = "The new end date must be in the future";
+      }
+
+    } else {
+      $lError = "You are not allowed to do this.";
+    }
+    return empty($lError) ? true : $lError;
+  }  
 }
