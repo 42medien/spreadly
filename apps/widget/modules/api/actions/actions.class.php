@@ -46,11 +46,6 @@ class apiActions extends sfActions {
     $this->lLikeDis = $request->getParameter('likedis');
     $this->lIdentitysOwnedByUser = OnlineIdentityTable::retrieveIdsByUserId($this->getUser()->getUserId());
 
-    // <deal>
-    $this->lCouponCode = $request->getParameter('couponcode', null);
-    $this->lDealId = $request->getParameter('dealid', null);
-    // </deal>
-
     $this->lTitle = $request->getParameter('title');
     $this->lDescription = $request->getParameter('description');
     $this->lPhoto = $request->getParameter('photo');
@@ -80,9 +75,7 @@ class apiActions extends sfActions {
                                                             $this->lTitle,
                                                             $this->lDescription,
                                                             $this->lPhoto,
-                                                            $this->lClickback,
-                                                            $this->lCouponCode,
-                                                            $this->lDealId
+                                                            $this->lClickback
                                                            );
     }
 
