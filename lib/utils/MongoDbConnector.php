@@ -20,14 +20,13 @@ class MongoDbConnector {
 
 
   /**
-   *
    * conenct to given collection
    *
    * @param Mongo $pDatabase
    * @param string $pCollection
    * @return MongoCollection
    */
-  static public function getCollection($pDatabase, $pCollection) {
+  public function getCollection($pDatabase, $pCollection) {
     return self::$aMongoConn->selectCollection($pDatabase, $pCollection);
   }
 }
