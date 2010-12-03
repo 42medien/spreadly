@@ -201,15 +201,12 @@ var DealForm = {
   countCodes: function(){
     debug.log('[DealForm][countCodes]');        
     var lString, lCount, lNewCount;
+    lCount = parseInt(jQuery('#code-counter').text());
     jQuery('#deal_coupon_multiple_codes').keyup(function() {
       lString = jQuery(this).val();
-      lCount = parseInt(jQuery('#code-counter').text());
       lNewCount = Utils.getCountByCommaNl(lString);
-      if(lNewCount > lCount) {
-        jQuery('#code-counter').empty();
-        jQuery('#code-counter').text(lNewCount);
-        lCount = lNewCount;
-      }
+      jQuery('#code-counter').empty();
+      jQuery('#code-counter').text(parseInt(lNewCount)+parseInt(lCount));
     });
   }
 };

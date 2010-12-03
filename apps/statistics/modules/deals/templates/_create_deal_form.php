@@ -1,4 +1,20 @@
-<?php if(isset($pDeal)) { ?>
+<?php
+	$lIsEdit = false;
+	$lDeal = null;
+	if($pForm->getEmbeddedForm('deal')->getObject()->getId()){
+		$lIsEdit = true;
+		$lDeal = $pForm->getEmbeddedForm('deal')->getObject();
+	}
+
+	if($pForm->isBound()){
+		$lDealValues = $pForm->getTaintedValues();
+		$lDefaultDeal = $lDealValues['deal'];
+	} else {
+		$lDefaultDeal =  $pForm->getEmbeddedForm('deal')->getDefaults();
+	}
+?>
+
+<?php if($lIsEdit) { ?>
 	<div class="content-header-box">
 		<div class="content-box-head">
 			<h3><?php echo __('+ Editing an Ad')?></h3>
@@ -8,15 +24,6 @@
 	  </div>
 	</div>
 <?php } ?>
-<?php
-	if($pForm->isBound()){
-		$lDealValues = $pForm->getTaintedValues();
-		$lDefaultDeal = $lDealValues['deal'];
-	} else {
-		$lDefaultDeal =  $pForm->getEmbeddedForm('deal')->getDefaults();
-	}
-	//var_dump($lDefaultDeal);die();
-?>
 
 <form action="<?php echo url_for('deals/proceed'); ?>" method="post" id="deal_form" name="deal_form">
 	<?php echo $pForm['deal']['id']->render();?>
@@ -26,7 +33,7 @@
 <!-- ********** Form head ********** -->
 		<div class="content-header-box" id="creat-deal-box">
 		  <div class="content-box-head">
-		  	<?php if(isset($pDeal)) { ?>
+		  	<?php if($lIsEdit) { ?>
 		    	<h3><?php echo __('+ Edit Deal')?></h3>
 		    <?php } else { ?>
 		    	<h3><?php echo __('+ Create New Deal')?></h3>
@@ -116,8 +123,8 @@
           			<div class="coupon-description deal_description-mirror"><?php echo $lDefaultDeal['description']; ?></div>
           			<div class="coupon-foot"><?php echo __('Expires at'); ?> <span id="deal_end_date-mirror"><?php echo $lDefaultDeal['end_date']; ?></span>  |  87/100 left</div>
           		</div>
-          		<div class="meta-label">
-          			<input type="checkbox" name="coupon-accept-tod" id="coupon-accept-tod" /><span><?php echo __('I accept the %terms%', array('%terms%' => link_to(__('Terms of Deal'), '/'))); ?></span>
+          		<div class="meta-label" id="accept-tod">
+          			<input type="checkbox" name="coupon-accept-tod" /><?php echo __('I accept the %terms%', array('%terms%' => link_to(__('Terms of Deal'), '/'))); ?>
           		</div>
           		<img src="/img/global/yiid-btn-like-en.png"/>
           		<div style="text-align: right;"><?php echo __('Imprint'); ?></div>
@@ -130,43 +137,79 @@
 	    		<h2><?php echo __('Step 3: Configure your Coupon after a Like')?></h2>
 	    		<div class="left">
 	    			<div class="form-row">
-	    				<div class="label-box">
-	    					<?php echo $pForm['deal']['coupon_type']->renderLabel();?>
-								<?php echo $pForm['deal']['coupon_type']->renderError();?>
-							</div>
-							<?php echo $pForm['deal']['coupon_type']->render();?>
+	    				<?php if($lIsEdit) { ?>
+	    					<div class="label-box">
+		    					<?php echo __('Coupon-Codes');?>
+								</div>
+								<?php echo __('You have chosen %codetype% for all deals:', array('%codetype%' => $pCouponType)); ?> <strong><?php echo $pDefaultCode; ?></strong>
+								<input type="hidden" name="deal[coupon_type]" value="<?php echo $pCouponType;?>" />
+							<?php } else {?>
+		    				<div class="label-box">
+		    					<?php echo $pForm['deal']['coupon_type']->renderLabel();?>
+									<?php echo $pForm['deal']['coupon_type']->renderError();?>
+								</div>
+								<?php echo $pForm['deal']['coupon_type']->render();?>
+							<?php } ?>
 						</div>
 
 						<!-- ********** Configure single code ********** -->
 						<div id="single-code-row" <?php echo ($pCouponType == 'multiple')? 'style="display:none;"': ''; ?>>
-			    		<div class="form-row" id="single-code-row">
-			    			<div class="label-box">
-			    				<?php echo $pForm['deal']['coupon']['single_code']->renderLabel();?>
-									<?php echo $pForm['deal']['coupon']['single_code']->renderError();?>
-								</div>
-								<?php echo $pForm['deal']['coupon']['single_code']->render(array('class' => 'mirror-value'));?>
-							</div>
-			    		<div class="form-row clearfix">
-			    			<div class="label-box">
-			    				<?php echo $pForm['deal']['coupon_quantity']->renderLabel();?>
-          				<div class="meta-label">
-          					<?php echo __('Empty or 0 is same as unlimeted');?>
-          				</div>
-									<?php echo $pForm['deal']['coupon_quantity']->renderError();?>
-								</div>
-								<div class="inline-row" id="edit-quantity">
-									<div class="label-box">
-										<input type="radio" name="single-quantity" id="radio-single-quantity" <?php echo ($pCouponQuantity > 0)? 'checked="checked"':''; ?> />
-										<?php echo __('Will end after');?>
+							<?php if($lIsEdit) { ?>
+								<input type="hidden" name="deal[coupon][single_code]" value="<?php echo $pDefaultCode; ?>" />
+				    		<div class="form-row clearfix">
+				    			<div class="label-box">
+				    				<?php echo $pForm['deal']['coupon_quantity']->renderLabel();?>
+				    				<?php if(!$lDeal->isUnlimited()) {?>
+		          				<div class="meta-label">
+		          					<?php echo __('Empty or 0 is same as unlimeted');?>
+		          				</div>
+		          			<?php } ?>
+										<?php echo $pForm['deal']['coupon_quantity']->renderError();?>
 									</div>
-									<?php echo $pForm['deal']['coupon_quantity']->render();?>
-									<?php echo __('likes'); ?>
+									<?php if($lDeal->isUnlimited()) {?>
+										<div class="inline-row" id="edit-quantity">
+											<?php echo __('Your coupon quantity is unlimited'); ?>
+										</div>
+									<?php } else { ?>
+										<div class="inline-row" id="edit-quantity">
+											<div class="label-box">
+												<?php echo __('Will end after');?>
+											</div>
+											<?php echo $pForm['deal']['coupon_quantity']->render();?>
+											<?php echo __('likes'); ?>
+										</div>
+									<?php } ?>
 								</div>
-								<div class="inline-row" id="single-quantity-unlimited">
-									<input type="radio" name="single-quantity" id="radio-single-quantity-unltd" <?php echo ($pCouponQuantity == 0)? 'checked="checked"':''; ?> />
-									<?php echo __('unlimited'); ?>
+							<?php } else {?>
+				    		<div class="form-row" id="single-code-row">
+				    			<div class="label-box">
+				    				<?php echo $pForm['deal']['coupon']['single_code']->renderLabel();?>
+										<?php echo $pForm['deal']['coupon']['single_code']->renderError();?>
+									</div>
+									<?php echo $pForm['deal']['coupon']['single_code']->render(array('class' => 'mirror-value'));?>
 								</div>
-							</div>
+				    		<div class="form-row clearfix">
+				    			<div class="label-box">
+				    				<?php echo $pForm['deal']['coupon_quantity']->renderLabel();?>
+	          				<div class="meta-label">
+	          					<?php echo __('Empty or 0 is same as unlimeted');?>
+	          				</div>
+										<?php echo $pForm['deal']['coupon_quantity']->renderError();?>
+									</div>
+									<div class="inline-row" id="edit-quantity">
+										<div class="label-box">
+											<input type="radio" name="single-quantity" id="radio-single-quantity" <?php echo ($pCouponQuantity > 0)? 'checked="checked"':''; ?> />
+											<?php echo __('Will end after');?>
+										</div>
+										<?php echo $pForm['deal']['coupon_quantity']->render();?>
+										<?php echo __('likes'); ?>
+									</div>
+									<div class="inline-row" id="single-quantity-unlimited">
+										<input type="radio" name="single-quantity" id="radio-single-quantity-unltd" <?php echo ($pCouponQuantity == 0)? 'checked="checked"':''; ?> />
+										<?php echo __('unlimited'); ?>
+									</div>
+								</div>
+							<?php } ?>
 						</div>
 
 						<!-- ********** Configure multiple codes ********** -->
@@ -183,7 +226,12 @@
 		    				<div class="label-box">
 		    					<?php echo $pForm['deal']['coupon_quantity']->renderLabel();?>
 								</div>
-								<?php echo __('Will end after <span id="code-counter">0</span> likes (quantity of your coupon codes).'); ?>
+								<?php if($lIsEdit) { ?>
+									<?php echo __('Will end after <span id="code-counter">%codecounter%</span> likes.', array('%codecounter%' => $lDeal->getCouponQuantity())); ?>
+									<?php echo __('%oldcodes% remaining old coupon codes', array('%oldcodes%' => $lDeal->getCouponQuantity()-$lDeal->getClaimedQuantity())); ?>
+								<?php } else { ?>
+									<?php echo __('Will end after <span id="code-counter">%codecounter%</span> likes.', array('%codecounter%' => 0)); ?>
+								<?php } ?>
 							</div>
 			 			</div>
 

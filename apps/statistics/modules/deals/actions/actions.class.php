@@ -74,7 +74,7 @@ class dealsActions extends sfActions
     $lParams['deal']['coupon_type']=='single' ? $lParams['deal']['coupon']['multiple_codes']="" : $lParams['deal']['coupon']['single_code']="";
     return $lParams;
   }
-  
+
   private function getFormWithEmbeddedForms($pDomainProfileId, $lDealForm) {
     $lDomainObject = DomainProfileTable::getInstance()->find($pDomainProfileId);
     $lForm = new DomainProfileDealForm($lDomainObject);
@@ -82,11 +82,11 @@ class dealsActions extends sfActions
     $lForm->embedForm('deal', $lDealForm);
     return $lForm;
   }
-  
+
   public function executeSave(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
   	$lParams = $this->getCleanedParams($request);
-  	
+
     $lDeal=null;
     if($lDealId = $lParams['deal']['id']){
       $lDeal = DealTable::getInstance()->find($lDealId);
@@ -95,7 +95,7 @@ class dealsActions extends sfActions
       $lDealForm = new DealForm();
       $lDealForm->setDefault('domain_profile_id', $lParams['id']);
     }
-    
+
     $this->pForm = $this->getFormWithEmbeddedForms($lParams['id'], $lDealForm);
 
     $this->pForm->bind($lParams);
@@ -198,9 +198,9 @@ class dealsActions extends sfActions
   	$this->getResponse()->setContentType('application/json');
   	$lParams = $pRequest->getPostParameters();
   	$lDeal = DealTable::getInstance()->find($lParams['id']);
-  	
+
   	$lValid = $lDeal->validateNewEndDate($this->getUser(), $lParams['input']);
-  	
+
     if($lValid===true) {
       $lDeal->save();
     }
@@ -239,13 +239,13 @@ class dealsActions extends sfActions
   	$lParams = $pRequest->getPostParameters();
   	$lParams['input'] = trim($lParams['input']);
   	$lDeal = DealTable::getInstance()->find($lParams['deal_id']);
-  	
+
     $lValid = $lDeal->validateNewQuantity($this->getUser(), $lParams);
-    
+
     if($lValid===true) {
-      $lDeal->addMoreCoupons(array('quantity' => $lParams['input']-$lDeal->getCouponQuantity()));      
+      $lDeal->addMoreCoupons(array('quantity' => $lParams['input']-$lDeal->getCouponQuantity()));
     }
-    
+
     return $this->renderText(json_encode(
     	array(
     		'success' => $lValid===true,

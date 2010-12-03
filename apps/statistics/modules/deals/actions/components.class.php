@@ -53,7 +53,7 @@ class dealsComponents extends sfComponents {
 	    	'start_date' => date('Y-m-d G:i:s'),
 	    	'end_date' => date('Y-m-d G:i:s'),
 	    	'coupon_type' => 'single',
-    	  'redeem_url' => ''
+    	  'redeem_url' => $lI18n->__('Your redeem url')
 	    ));
 	    $this->pDefaultCode = 'Coupon Code';
     }

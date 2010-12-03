@@ -6,8 +6,8 @@
 	</ul>
 </div -->
   <div id="create-deal-content">
-		<?php //include_partial('deals/create_index');?>
-		<?php include_component('deals', 'create_deal_form');?>
+		<?php include_partial('deals/create_index');?>
+		<?php //include_component('deals', 'create_deal_form');?>
   </div>
 	<div class="content-box" id="deal-table-box">
 		<?php if($pDeals) { ?>
