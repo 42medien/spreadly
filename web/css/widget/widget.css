@@ -9,7 +9,7 @@
 #nav_main{width: 580px; height: 25px;}
 #nav_main_box{width: 137px;height:25px;float:right;}
 #deal_nav_main_box{width: 160px;height:25px;float:right;, line-height: 25px; text-align: center;}
-#deal_nav_main_box a{color: #fff; text-decoration: none;} 
+#deal_nav_main_box a{color: #fff; text-decoration: none;}
 #content{width:580px;padding-top:10px;}
 #content_main{width:540px;padding:10px 20px;}
 #deal_content_main{width:400px;padding:10px 20px;}
@@ -214,6 +214,7 @@ margin-top:5px;
 
 .yellow {
 background-color:#FBFF87;
+text-align: center;
 }
 
 .meta-label {
