@@ -131,6 +131,7 @@ class Deal extends BaseDeal {
 
   public function toMongoArray() {
     $array = $this->toArray();
+    $array['id'] = intval($this->getId());
     $array['start_date'] = new MongoDate(intval(strtotime($array['start_date'])));
     $array['end_date'] = new MongoDate(intval(strtotime($array['end_date'])));
     $array['created_at'] = new MongoDate(intval(strtotime($array['created_at'])));

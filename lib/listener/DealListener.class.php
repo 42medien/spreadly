@@ -40,11 +40,11 @@ class DealListener {
 
     $db = new Mongo(sfConfig::get('app_mongodb_host'));
     $col = $db->selectCollection(sfConfig::get('app_mongodb_database_name'), "deals");
-    
+
     if($deal->getState()=='approved') {
-      $col->update(array("id" => $deal->getId()), $deal->toMongoArray(), array("upsert" => true));
+      $col->update(array("id" => intval($deal->getId())), $deal->toMongoArray(), array("upsert" => true));
     } else {
-      $col->remove(array("id" => $deal->getId()));
+      $col->remove(array("id" => intval($deal->getId())));
     }
   }
 }

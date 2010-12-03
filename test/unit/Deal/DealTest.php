@@ -4,14 +4,17 @@ require_once dirname(__file__).'/../../lib/BaseTestCase.php';
 class DealTest extends BaseTestCase {
 
   public static function setUpBeforeClass() {
-    parent::resetMongo();
     date_default_timezone_set('Europe/Berlin');
   }
 
   public function setUp() {
+    parent::resetMongo();
     sfConfig::set('sf_environment', 'test');
     Doctrine::loadData(dirname(__file__).'/fixtures');
     sfConfig::set('sf_environment', 'dev');
+    
+    $this->dispatcher = sfContext::getInstance()->getEventDispatcher();
+    $this->col = MongoDbConnector::getInstance()->getCollection(sfConfig::get('app_mongodb_database_name'), "deals");
 
     $this->domainProfile = Doctrine_Query::create()
           ->from('DomainProfile d')
@@ -45,6 +48,66 @@ class DealTest extends BaseTestCase {
     $this->future->setEndDate(date("c", strtotime("2 days")));
     $this->future->save();
     $this->future->saveInitialCoupons(array("single_code" => "ddeeff"));
+    
+    $this->singleUnlimited = Doctrine::getTable('Deal')->findOneBy("summary", "single_unlimited");
+    $this->single100 = Doctrine::getTable('Deal')->findOneBy("summary", "single_100");
+    $this->multiple = Doctrine::getTable('Deal')->findOneBy("summary", "multiple");
+
+  }
+  
+  public function testMongoDealEntriesForApprove() {
+    $this->dispatcher->connect("deal.event.approve", array('DealListener', 'updateMongoDeal'));
+    $this->assertFalse($this->col->find(array("id" => intval($this->submitted->getId())))->hasNext());
+    $this->submitted->approve();
+    $this->assertTrue($this->col->find(array("id" => intval($this->submitted->getId())))->hasNext());    
+  }
+
+  public function testMongoDealEntriesForResume() {
+    $this->dispatcher->connect("deal.event.resume", array('DealListener', 'updateMongoDeal'));
+    $this->assertFalse($this->col->find(array("id" => intval($this->paused->getId())))->hasNext());
+    $this->paused->resume();
+    $this->assertTrue($this->col->find(array("id" => intval($this->paused->getId())))->hasNext());    
+  }
+
+  public function testMongoDealEntriesDeleted() {
+    $this->dispatcher->connect("deal.event.approve", array('DealListener', 'updateMongoDeal'));
+    $this->dispatcher->connect("deal.event.submit", array('DealListener', 'updateMongoDeal'));
+    $this->submitted->approve();
+    $this->submitted->submit();
+    $this->assertFalse($this->col->find(array("id" => intval($this->submitted->getId())))->hasNext());    
+
+    $this->dispatcher->connect("deal.event.deny", array('DealListener', 'updateMongoDeal'));
+    $this->submitted->deny();
+    $this->assertFalse($this->col->find(array("id" => intval($this->submitted->getId())))->hasNext());    
+
+    $this->submitted->submit();
+    $this->submitted->approve();
+    $this->submitted->refresh();
+    $this->assertEquals($this->submitted->getState(), 'approved');
+    $this->assertTrue($this->col->find(array("id" => intval($this->submitted->getId())))->hasNext());
+
+    $this->dispatcher->connect("deal.event.pause", array('DealListener', 'updateMongoDeal'));
+    $this->submitted->pause();
+    $this->assertFalse($this->col->find(array("id" => intval($this->submitted->getId())))->hasNext());    
+    
+    $this->dispatcher->connect("deal.event.resume", array('DealListener', 'updateMongoDeal'));
+    $this->submitted->resume();    
+    $this->assertTrue($this->col->find(array("id" => intval($this->submitted->getId())))->hasNext());    
+    
+    $this->dispatcher->connect("deal.event.trash", array('DealListener', 'updateMongoDeal'));
+    $this->submitted->pause();
+    $this->submitted->trash();    
+    $this->assertFalse($this->col->find(array("id" => intval($this->submitted->getId())))->hasNext());
+  }
+  
+  public function testMongoDealEntriesHasCorrectData() {
+    $this->dispatcher->connect("deal.event.approve", array('DealListener', 'updateMongoDeal'));
+    $this->submitted->approve();
+  
+    $mongoData = $this->col->find(array("id" => intval($this->submitted->getId())))->getNext();
+    $dealData = $this->submitted->getMongoArray();
+    
+    $this->assertEquals($dealData, $mongoData);    
   }
 
   public function testInitialStates() {
@@ -252,6 +315,18 @@ class DealTest extends BaseTestCase {
 
     $this->active->setCouponClaimedQuantity($this->active->getCouponQuantity());
     $this->assertFalse($this->active->isActive());
+    
+    $this->assertFalse($this->singleUnlimited->isActive());
+    
+    $this->singleUnlimited->setStartDate(date("c", strtotime("-49 hours")));
+    $this->singleUnlimited->setEndDate(date("c", strtotime("3 days")));
+    $this->singleUnlimited->save();
+    
+    $this->assertFalse($this->singleUnlimited->isActive());
+
+    $this->singleUnlimited->approve();
+
+    $this->assertFalse($this->singleUnlimited->isActive());
 
   }
 

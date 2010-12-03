@@ -179,4 +179,59 @@ Deal:
     tos_accepted: true
     created_at: '2010-11-26 10:12:23'
     updated_at: '2010-11-26 10:12:23'
+    
+  Deal_12_single_unlimited:
+    DomainProfile: DomainProfile_1
+    sfGuardUser: sfGuardUser_1
+    state: submitted
+    type: commercial
+    coupon_type: single
+    coupon_quantity: 0
+    start_date: '2010-11-26 10:11:36'
+    end_date: '2010-11-26 10:11:36'
+    summary: 'single_unlimited'
+    description: 'snirgel description'
+    button_wording: 'snirgel buttonwording'
+    terms_of_deal: 'snirgel tod'
+    redeem_url: 'http://www.snirgel-single_unlimited.de'
+    tos_accepted: true
+    created_at: '2010-11-26 10:12:23'
+    updated_at: '2010-11-26 10:12:23'
+
+  Deal_13_single_100:
+    DomainProfile: DomainProfile_1
+    sfGuardUser: sfGuardUser_1
+    state: submitted
+    type: commercial
+    coupon_type: single
+    coupon_quantity: 100
+    start_date: '2010-11-26 10:11:36'
+    end_date: '2010-11-26 10:11:36'
+    summary: 'single_100'
+    description: 'snirgel description'
+    button_wording: 'snirgel buttonwording'
+    terms_of_deal: 'snirgel tod'
+    redeem_url: 'http://www.snirgel-single_100.de'
+    tos_accepted: true
+    created_at: '2010-11-26 10:12:23'
+    updated_at: '2010-11-26 10:12:23'
+    
+  Deal_14_multiple:
+    DomainProfile: DomainProfile_1
+    sfGuardUser: sfGuardUser_1
+    state: submitted
+    type: commercial
+    coupon_type: multiple
+    coupon_quantity: 0
+    start_date: '2010-11-26 10:11:36'
+    end_date: '2010-11-26 10:11:36'
+    summary: 'multiple'
+    description: 'snirgel description'
+    button_wording: 'snirgel buttonwording'
+    terms_of_deal: 'snirgel tod'
+    redeem_url: 'http://www.snirgel-multiple.de'
+    tos_accepted: true
+    created_at: '2010-11-26 10:12:23'
+    updated_at: '2010-11-26 10:12:23'
+
 
