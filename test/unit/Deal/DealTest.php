@@ -8,11 +8,11 @@ new sfDatabaseManager(ProjectConfiguration::getApplicationConfiguration('statist
 sfContext::createInstance(ProjectConfiguration::getApplicationConfiguration('statistics', 'dev', true));
 
 class DealTest extends PHPUnit_Framework_TestCase {
-  
+
   public static function setUpBeforeClass() {
     date_default_timezone_set('Europe/Berlin');
   }
-  
+
   public function setUp() {
     sfConfig::set('sf_environment', 'test');
     Doctrine::loadData(dirname(__file__).'/fixtures');
@@ -32,13 +32,13 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $this->denied = Doctrine::getTable('Deal')->findOneBy("deal_state", "denied");
     $this->trashed = Doctrine::getTable('Deal')->findOneBy("deal_state", "trashed");
     $this->paused = Doctrine::getTable('Deal')->findOneBy("deal_state", "paused");
-    
+
     $this->past = Doctrine::getTable('Deal')->findOneBy("summary", "snirgel_past");
     $this->past->setStartDate(date("c", strtotime("-2 days")));
     $this->past->setEndDate(date("c", strtotime("-1 day")));
-    $this->past->save();    
+    $this->past->save();
     $this->past->saveInitialCoupons(array("single_code" => "xxyyzz"));
-    
+
     $this->active = Doctrine::getTable('Deal')->findOneBy("summary", "snirgel_active");
     $this->active->setStartDate(date("c", strtotime("-23 hours")));
     $this->active->setEndDate(date("c", strtotime("23 hours")));
@@ -55,7 +55,7 @@ class DealTest extends PHPUnit_Framework_TestCase {
   public function testInitialStates() {
     $this->assertEquals('submitted', $this->new->getState());
     $this->new->save();
-    $this->assertEquals('submitted', $this->new->getState());    
+    $this->assertEquals('submitted', $this->new->getState());
     $this->assertEquals('submitted', $this->submitted->getState());
     $this->assertEquals('approved', $this->approved->getState());
     $this->assertEquals('denied', $this->denied->getState());
@@ -75,7 +75,7 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $this->assertTrue($this->paused->canSubmit());
     $this->paused->submit();
     $this->assertEquals('submitted', $this->paused->getState());
-  }  
+  }
 
   public function testApprove() {
     $this->assertTrue($this->submitted->canApprove());
@@ -96,7 +96,7 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $this->submitted->refresh();
     $this->assertEquals('approved', $this->submitted->getState());
   }
-  
+
   public function testNotApprovable() {
     $exception = false;
     try {
@@ -109,7 +109,7 @@ class DealTest extends PHPUnit_Framework_TestCase {
     }
     $this->assertTrue($exception);
   }
-  
+
   // HS_TODO: should it throw an exception in this case too???
   /*
   public function testNotApprovableWithSetState() {
@@ -120,7 +120,7 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals('denied', $this->denied->getState());
   }
   */
-  
+
   public function testDeny() {
     $this->assertTrue($this->submitted->canDeny());
     $this->submitted->deny();
@@ -215,7 +215,7 @@ class DealTest extends PHPUnit_Framework_TestCase {
     }
     $this->assertTrue($exception);
   }
-  
+
   public function testEventApprove() {
     $dispatcher = sfContext::getInstance()->getEventDispatcher();
     $eventName = $this->submitted->getTable()->getTableName().".event.".'approve';
@@ -227,15 +227,15 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $this->submitted->approve();
     $this->assertTrue($this->eventFired);
   }
-  
+
   public function eventApproved($event) {
     $this->eventFired = true;
     $params = $event->getParameters();
     $this->assertEquals("deal.event.approve", $event->getName());
     $this->assertEquals($params['event'], 'approve');
-    $this->assertEquals('approved', $event->getSubject()->getState());    
+    $this->assertEquals('approved', $event->getSubject()->getState());
   }
-  
+
   public function testSavedAfterTransition() {
     $this->assertEquals('submitted', $this->submitted->getState());
     $this->submitted->approve();
@@ -243,7 +243,7 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $this->submitted = Doctrine::getTable('Deal')->find($id);
     $this->assertEquals('approved', $this->submitted->getState());
   }
-  
+
   public function testIsActive() {
     $this->assertFalse($this->past->isActive());
     $this->assertTrue($this->active->isActive());
@@ -251,13 +251,13 @@ class DealTest extends PHPUnit_Framework_TestCase {
 
     $this->active->pause();
     $this->assertFalse($this->active->isActive());
-    
+
     $this->active->resume();
     $this->assertTrue($this->active->isActive());
 
     $this->active->setCouponClaimedQuantity($this->active->getCouponQuantity());
     $this->assertFalse($this->active->isActive());
-    
+
   }
 
   public function testGetActiveCssClass() {
@@ -265,7 +265,7 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals('deal_active', $this->active->getActiveCssClass());
     $this->assertEquals('', $this->future->getActiveCssClass());
   }
-  
+
   public function testOverlapping() {
     $this->assertFalse(DealTable::isOverlapping($this->past));
     $this->assertFalse(DealTable::isOverlapping($this->active));
@@ -274,7 +274,7 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $this->active->setStartDate(date("c", strtotime("-1 day")));
     $this->active->setEndDate(date("c", strtotime("1 day")));
     $this->active->save();
-    
+
     $this->assertTrue(DealTable::isOverlapping($this->past));
     $this->assertTrue(DealTable::isOverlapping($this->active));
     $this->assertTrue(DealTable::isOverlapping($this->future));
@@ -317,13 +317,24 @@ class DealTest extends PHPUnit_Framework_TestCase {
     $this->past->trash();
     $this->future->pause();
     $this->future->trash();
-    
+
     $deals = DealTable::getOverlappingDeals($this->past);
-    
+
     $this->assertFalse(DealTable::isOverlapping($this->past));
     $this->assertFalse(DealTable::isOverlapping($this->active));
     $this->assertFalse(DealTable::isOverlapping($this->future));
   }
 
-  
+  public function testGetActiveDealByUrl() {
+    $dispatcher = sfContext::getInstance()->getEventDispatcher();
+    $dispatcher->connect("deal.event.resume", array('DealListener', 'updateMongoDeal'));
+
+    $this->active->pause();
+    $this->active->resume();
+
+    $url = $this->active->getDomainProfile()->getDomain();
+    $deal = DealTable::getActiveDealByUrl($url);
+
+    $this->assertEquals($this->active->getId(), $deal->getId());
+  }
 }
