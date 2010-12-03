@@ -93,6 +93,7 @@ class Deal extends BaseDeal {
       $codes = explode(',', $couponString);
     }
 
+    //wenn alle elemente in dem array leer sind
     $lAllEmpty = array_filter($codes, 'Deal::elementEmpty');
 
     if(!$lAllEmpty) {

@@ -95,6 +95,7 @@ var DealForm = {
     DealForm.selectDomainProfile();
     DealForm.toggleCouponType();
     DealForm.setRadioButtons();
+    DealForm.countCodes();
   },
   
   /**
@@ -191,6 +192,25 @@ var DealForm = {
       return true;
     });    
     
+  },
+  
+  /**
+   * update the count of pasted codes
+   * @author KM
+   */
+  countCodes: function(){
+    debug.log('[DealForm][countCodes]');        
+    var lString, lCount, lNewCount;
+    jQuery('#deal_coupon_multiple_codes').keyup(function() {
+      lString = jQuery(this).val();
+      lCount = parseInt(jQuery('#code-counter').text());
+      lNewCount = Utils.getCountByCommaNl(lString);
+      if(lNewCount > lCount) {
+        jQuery('#code-counter').empty();
+        jQuery('#code-counter').text(lNewCount);
+        lCount = lNewCount;
+      }
+    });
   }
 };
 

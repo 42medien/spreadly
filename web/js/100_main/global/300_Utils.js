@@ -189,6 +189,30 @@ var Utils = {
     else {
         return pieces;
     }
+  },
+  
+  /**
+   * returns number of strings separated by comma OR string
+   */
+  getCountByCommaNl: function(pString){
+    var lString='', lArray = new Array(), lCleaned = new Array();
+    // Convert line breaks to commas
+    lString = pString.replace(/[\r\n]+/g, ',');
+    // Remove all remaining white space
+    lString = lString.replace(/\s/, '');
+    lArray = lString.split(',');
+    
+    for (var i in lArray) {
+      if(lArray[i]){
+        lCleaned.push(lArray[i]);
+      }
+    }
+
+    return lCleaned.length;
+  },
+  
+  empty: function(element, index, array) {
+    return (element != '');
   }
 };
 
@@ -309,5 +333,7 @@ var OnLoadGrafic = {
     } else {
       return 600;
     }
-  }
+  },
+  
+  
 };

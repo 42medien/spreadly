@@ -174,7 +174,7 @@
 		    				<div class="label-box">
 		    					<?php echo $pForm['deal']['coupon_quantity']->renderLabel();?>
 								</div>
-								<?php echo __('Will end after 87 likes (quantity of your coupon codes).'); ?>
+								<?php echo __('Will end after <span id="code-counter">0</span> likes (quantity of your coupon codes).'); ?>
 							</div>
 			 			</div>
 
