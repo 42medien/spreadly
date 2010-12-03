@@ -214,8 +214,8 @@ class YiidActivityTable extends Doctrine_Table {
    * @param int $pUserId
    * @return false or score of action taken (-1/1)
    */
-  public static function getActionOnObjectByUser($pSocialObjectId, $pUserId) {
-    $lAction = self::retrieveActionOnObjectById($pSocialObjectId, $pUserId);
+  public static function getActionOnObjectByUser($pSocialObjectId, $pUserId, $pDeal = null) {
+    $lAction = self::retrieveActionOnObjectById($pSocialObjectId, $pUserId, $pDeal);
     return $lAction?$lAction->getScore():false;
   }
 
