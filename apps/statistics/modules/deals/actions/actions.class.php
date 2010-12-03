@@ -63,19 +63,30 @@ class dealsActions extends sfActions
 
   }
 
-  public function executeSave(sfWebRequest $request) {
-  	$this->getResponse()->setContentType('application/json');
-  	$lParams = $request->getPostParameters();
-
+  private function getCleanedParams($pRequest) {
+    $lParams = $pRequest->getPostParameters();
     $lParams['deal']['domain_profile_id'] = $lParams['id'];
     $lParams['deal']['sf_guard_user_id'] = $this->getUser()->getUserId();
 		unset($lParams['ei_kcuf']);
 		unset($lParams['single-quantity']);
-    //$lDealForm = new DealForm();
 
     // Cleaning up the single code/multi code dilemma
     $lParams['deal']['coupon_type']=='single' ? $lParams['deal']['coupon']['multiple_codes']="" : $lParams['deal']['coupon']['single_code']="";
-
+    return $lParams;
+  }
+  
+  private function getFormWithEmbeddedForms($pDomainProfileId, $lDealForm) {
+    $lDomainObject = DomainProfileTable::getInstance()->find($pDomainProfileId);
+    $lForm = new DomainProfileDealForm($lDomainObject);
+    $lDealForm->embedForm('coupon', new CouponCodesForm());
+    $lForm->embedForm('deal', $lDealForm);
+    return $lForm;
+  }
+  
+  public function executeSave(sfWebRequest $request) {
+  	$this->getResponse()->setContentType('application/json');
+  	$lParams = $this->getCleanedParams($request);
+  	
     $lDeal=null;
     if($lDealId = $lParams['deal']['id']){
       $lDeal = DealTable::getInstance()->find($lDealId);
@@ -84,11 +95,8 @@ class dealsActions extends sfActions
       $lDealForm = new DealForm();
       $lDealForm->setDefault('domain_profile_id', $lParams['id']);
     }
-
-    $lDomainObject = DomainProfileTable::getInstance()->find($lParams['id']);
-    $this->pForm = new DomainProfileDealForm($lDomainObject);
-    $lDealForm->embedForm('coupon', new CouponCodesForm());
-    $this->pForm->embedForm('deal', $lDealForm);
+    
+    $this->pForm = $this->getFormWithEmbeddedForms($lParams['id'], $lDealForm);
 
     $this->pForm->bind($lParams);
     if($this->pForm->isValid()) {
