@@ -11,26 +11,26 @@ class DealTable extends Doctrine_Table
   const STATE_DENIED = 'denied';
   const STATE_TRASHED = 'trashed';
   const STATE_PAUSED = 'paused';
-      
+
   public static function getInstance()
   {
     return Doctrine_Core::getTable('Deal');
   }
-  
+
   public static function getOverlappingDeals($pOtherDeal) {
     $lDomainProfile = $pOtherDeal->getDomainProfile();
     $lS = $pOtherDeal->getStartDate();
     $lE = $pOtherDeal->getEndDate();
-    
+
     $lQuery = Doctrine_Query::create()
                 ->from('Deal d')
                 ->where(
                   'd.id != ? AND '.
                   'd.domain_profile_id = ? AND '.
                   'd.deal_state != "trashed" AND ('.
-                  '(d.start_date > ? AND d.start_date <= ?) OR '. 
-                  '(d.start_date <= ? AND d.end_date >= ?))', 
-                  
+                  '(d.start_date > ? AND d.start_date <= ?) OR '.
+                  '(d.start_date <= ? AND d.end_date >= ?))',
+
                   array($pOtherDeal->getId(),
                         $lDomainProfile->getId(),
                         $lS, $lE,
@@ -42,6 +42,33 @@ class DealTable extends Doctrine_Table
   public static function isOverlapping($pOtherDeal) {
     $lDeals = self::getOverlappingDeals($pOtherDeal);
     return count($lDeals)!=0;
+  }
+
+  /**
+   * returns an active deal-object if available
+   *
+   * @author Matthias Pfefferle
+   * @param string $pUrl
+   * @return Deal|false
+   */
+  public static function getActiveDealByUrl($pUrl) {
+    $host = parse_url($pUrl, PHP_URL_HOST);
+    $col = MongoDbConnector::getInstance()->getCollection(sfConfig::get('app_mongodb_database_name'), "deals");
+    $today = new MongoDate(strtotime("today"));
+    $cond = array(
+      "host" => $host,
+      "start_date" => array('$lte' => $today),
+      "end_date" => array('$gte' => $today)
+    );
+    $result = $col->find($cond)->limit(1)->sort(array("start_date" => -1));
+
+    $deal = $result->getNext();
+
+    if ($deal && ($deal["is_unlimited"] == true || $deal['remaining_coupon_quantity'] > 0)) {
+      return self::getInstance()->find($deal['id']);
+    }
+
+    return false;
   }
 }
 
