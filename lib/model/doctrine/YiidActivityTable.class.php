@@ -48,9 +48,7 @@ class YiidActivityTable extends Doctrine_Table {
                                            $pTitle = null,
                                            $pDescription = null,
                                            $pPhoto = null,
-                                           $pClickback = null,
-                                           $pCouponCode = null,
-                                           $pDealId = null
+                                           $pClickback = null
                                           ) {
 
     $lSuccess = false;
@@ -66,9 +64,10 @@ class YiidActivityTable extends Doctrine_Table {
       return false;
     }
 
+    $lDeal = DealTable::getActiveDealByUrl($pUrl);
+
     $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
     $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
-
 
     // object doesn't exist, create it now
     if (!$lSocialObject) {
@@ -79,7 +78,7 @@ class YiidActivityTable extends Doctrine_Table {
       $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
       $lSocialObject->updateObjectMasterData($pTitle, $pDescription, $pPhoto);
     } // object exists, we need to check if user is allowed to make an action on it
-    elseif (!self::isActionOnObjectAllowed($lSocialObject->getId(), $pUserId, $pDealId)) {
+    elseif (!self::isActionOnObjectAllowed($lSocialObject->getId(), $pUserId, $lDeal)) {
       return false;
     }
 
@@ -94,7 +93,7 @@ class YiidActivityTable extends Doctrine_Table {
     }
 
     // save yiid activity
-    $lActivity = self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb, $pClickback, $pCouponCode, $pDealId);
+    $lActivity = self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb, $pClickback, $lDeal);
     if (sfConfig::get('app_settings_environment') != 'dev') {
       // send messages to all services
       foreach ($lOnlineIdentitys as $lIdentity) {
@@ -159,8 +158,7 @@ class YiidActivityTable extends Doctrine_Table {
                                       $pScore,
                                       $pVerb,
                                       $pClickback = null,
-                                      $pCouponCode = null,
-                                      $pDealId = null
+                                      $pDeal = null
                                      ) {
 
     $lActivity = new YiidActivity();
@@ -174,14 +172,12 @@ class YiidActivityTable extends Doctrine_Table {
     $lActivity->setVerb($pVerb);
     $lActivity->setC(time());
 
-    // sets the coupon code if it's not empty
-    if ($pCouponCode) {
-      $lActivity->setCCode($pCouponCode);
-    }
-
     // sets the deal-id if it's not empty
-    if ($pDealId) {
-      $lActivity->setDId($pDealId);
+    if ($pDeal && $pDeal->isActive()) {
+      if ($lCoupon = $pDeal->popCoupon()) {
+        $lActivity->setDId($pDeal->getId());
+        $lActivity->setCCode($lCoupon);
+      }
     }
 
     // set clickback if exists
@@ -204,8 +200,8 @@ class YiidActivityTable extends Doctrine_Table {
    * @param $pOnlineIdentitys
    * @return boolean
    */
-  public static function isActionOnObjectAllowed($pSocialObjectId, $pUserId, $pDealId = null) {
-    $lAlreadyPerformedActivity = self::retrieveActionOnObjectById($pSocialObjectId, $pUserId, $pDealId);
+  public static function isActionOnObjectAllowed($pSocialObjectId, $pUserId, $pDeal = null) {
+    $lAlreadyPerformedActivity = self::retrieveActionOnObjectById($pSocialObjectId, $pUserId, $pDeal);
     return $lAlreadyPerformedActivity?false:true;
   }
 
@@ -230,14 +226,14 @@ class YiidActivityTable extends Doctrine_Table {
    * @param $pOnlineIdentitys
    * @return unknown_type
    */
-  public static function retrieveActionOnObjectById($pSocialObjectId, $pUserId, $pDealId = null) {
+  public static function retrieveActionOnObjectById($pSocialObjectId, $pUserId, $pDeal = null) {
     $lCollection = self::getMongoCollection();
 
     // get yiid-activity and factor a deal
-    if ($pDealId) {
+    if ($pDeal) {
       $lQuery = $lCollection->findOne(array("so_id" => new MongoId($pSocialObjectId.""),
                                             "u_id" => (int)$pUserId,
-                                            "d_id" => $pDealId
+                                            "d_id" => $pDeal->getId()
                                            ));
     } else {
       $lQuery = $lCollection->findOne(array("so_id" => new MongoId($pSocialObjectId.""),
