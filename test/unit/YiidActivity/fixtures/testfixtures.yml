@@ -1,0 +1,101 @@
+User:
+  user_1:
+    username: hugo
+    passwordhash: b0d736d71ce30c87629a984c814d7f72
+    salt: 7znUOjog
+    culture: en
+    agb: true
+    ip: 127.0.0.1
+    active: true
+    default_avatar: aa4e6c2b2a0644e6e7130de7ffea46df-1.jpg
+    birthdate: "1991-12-15"
+    last_activity:    <?php echo time(); ?>
+
+sfGuardUser:
+  sfGuardUser_1:
+    first_name: John
+    last_name: Doe
+    email_address: john.doe@gmail.com
+    username: admin
+    password:       admin
+    is_active: true
+    is_super_admin: true
+    last_login: null
+    created_at: '2010-11-26 10:29:26'
+    updated_at: '2010-11-26 10:29:26'
+
+sfGuardGroup:
+  Group_admin:
+    name:           admin
+    description:    Administrator group
+    Permissions:    [Permission_admin]
+
+sfGuardPermission:
+  Permission_admin:
+    name:           admin
+    description:    Administrator permission
+
+Community:
+  community_1:
+    name:      'testcommunity'
+    community: 'testcommunity'
+    url:       'http://www.example.com'
+
+OnlineIdentity:
+  oi_1:
+    title:      'hugo_twitter'
+    name:       'hugo_twitter'
+    auth_identifier: 'hugo_twitter'
+    User:       user_1
+    original_id: 123123
+    Community:  community_1
+    friend_ids: "456789,555555,444444,457810,9898"
+
+DomainProfile:
+  DomainProfile_1:
+    url: notizblog.org
+    protocol: http
+    state: verified
+    verification_token: 'mailto+http:sha1:a0745eb5e590bfab355db156548daab5a3c7e73e'
+    verification_count: '0'
+    sfGuardUser: sfGuardUser_1
+    imprint_url: demnotizblogseinimprint
+    tos_url: null
+    created_at: '2010-11-26 10:02:44'
+    updated_at: '2010-11-26 10:10:03'
+
+Deal:
+  Deal_1:
+    DomainProfile: DomainProfile_1
+    sfGuardUser: sfGuardUser_1
+    state: submitted
+    type: commercial
+    coupon_type: single
+    coupon_quantity: '0'
+    start_date: '2010-11-26 10:07:33'
+    end_date: '2010-11-30 10:07:33'
+    summary: 'notizblog 1'
+    description: 'test description'
+    button_wording: 'test button wording'
+    terms_of_deal: demnotizblogseintod
+    redeem_url: 'http://notizblog.org/deal'
+    tos_accepted: true
+    created_at: '2010-11-26 10:10:03'
+    updated_at: '2010-11-26 10:10:03'
+  Deal_2:
+    DomainProfile: DomainProfile_1
+    sfGuardUser: sfGuardUser_1
+    state: submitted
+    type: commercial
+    coupon_type: single
+    coupon_quantity: '0'
+    start_date: '2010-11-26 10:11:36'
+    end_date: '2010-11-26 10:11:36'
+    summary: 'notizblog 2'
+    description: 'snirgel description'
+    button_wording: 'snirgel buttonwording'
+    terms_of_deal: 'snirgel tod'
+    redeem_url: 'http://notizblog.org/deal2'
+    tos_accepted: true
+    created_at: '2010-11-26 10:12:23'
+    updated_at: '2010-11-26 10:12:23'
