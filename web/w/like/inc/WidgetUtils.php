@@ -222,3 +222,37 @@ class ClickBackHelper {
     return (isset($lGetParams['yiidit']))?$lGetParams['yiidit']:null;
   }
 }
+
+/**
+ *
+ *
+ * @author hannes
+ */
+class DealUtils {
+  const MONGO_COLLECTION = 'deals';
+
+  public static function dealActive($pUrl) {
+    $host = parse_url($pUrl, PHP_URL_HOST);
+    $col = DealUtils::getCollection();
+    $today = new MongoDate(strtotime("today"));
+    $cond = array(
+      "host" => $host,
+      "start_date" => array('$lte' => $today),
+      "end_date" => array('$gte' => $today)
+    );
+    $result = $col->find($cond)->limit(1)->sort(array("start_date" => -1));
+
+    $deal = $result->getNext();
+
+    if ($deal && ($deal["is_unlimited"] == true || $deal['remaining_coupon_quantity'] > 0)) {
+      return $deal;
+    }
+
+    return false;
+  }
+
+  private static function getCollection() {
+    $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
+    return $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, self::MONGO_COLLECTION);
+  }
+}
