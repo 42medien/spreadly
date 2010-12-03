@@ -106,7 +106,14 @@ class dealsActions extends sfActions
     } else {
     	$lCouponType = $lParams['deal']['coupon_type'];
     	$lCouponQuantity = $lParams['deal']['coupon_quantity'];
-    	$lReturn['html'] = $this->getPartial('deals/create_deal_form', array('pForm' => $this->pForm, 'pCouponType' => $lCouponType, 'pCouponQuantity' => $lCouponQuantity, 'pDefaultCode' => ''));
+
+    	$lTaintedValues = $this->pForm->getTaintedValues();
+    	$lDefaultCode = 'Coupon Code';
+    	if($lParams['deal']['coupon_type'] == 'single'){
+    		$lDefaultCode = $lTaintedValues['deal']['coupon']['single_code'];
+    	}
+
+    	$lReturn['html'] = $this->getPartial('deals/create_deal_form', array('pForm' => $this->pForm, 'pCouponType' => $lCouponType, 'pCouponQuantity' => $lCouponQuantity, 'pDefaultCode' => $lDefaultCode));
     }
 
     return $this->renderText(json_encode($lReturn));
@@ -140,7 +147,8 @@ class dealsActions extends sfActions
 				'description' => $lI18n->__('Liken und damit einmalig pro Person einen freien Probemonat gewinnen!'),
 	    	'start_date' => date('Y-m-d G:i:s'),
 	    	'end_date' => date('Y-m-d G:i:s'),
-	    	'coupon_type' => 'single'
+	    	'coupon_type' => 'single',
+    	  'redeem_url' => ''
 	  ));
 
     $this->pForm = new DomainProfileDealForm();

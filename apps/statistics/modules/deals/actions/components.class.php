@@ -52,9 +52,10 @@ class dealsComponents extends sfComponents {
 				'description' => $lI18n->__('Liken und damit einmalig pro Person einen freien Probemonat gewinnen!'),
 	    	'start_date' => date('Y-m-d G:i:s'),
 	    	'end_date' => date('Y-m-d G:i:s'),
-	    	'coupon_type' => 'single'
+	    	'coupon_type' => 'single',
+    	  'redeem_url' => ''
 	    ));
-	    $this->pDefaultCode = 'JSFDJKAREWRKOP';
+	    $this->pDefaultCode = 'Coupon Code';
     }
     $this->pForm = new DomainProfileDealForm();
     $this->pForm->setDefaults(array(

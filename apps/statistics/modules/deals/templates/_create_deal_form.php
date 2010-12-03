@@ -4,10 +4,19 @@
 			<h3><?php echo __('+ Editing an Ad')?></h3>
 	  </div>
 	  <div class="content-box-body">
-	  	<?php echo __('Butoon wording, deal description, scheduling and quantity fields are pre-populated with your existing deal settings. Edits you make here will replace your existing deal. Once you submit your changes, your deal will stop running until it has been approved by our team.'); ?>
+	  	<?php echo __('Button wording, deal description, scheduling and quantity fields are pre-populated with your existing deal settings. Edits you make here will replace your existing deal. Once you submit your changes, your deal will stop running until it has been approved by our team.'); ?>
 	  </div>
 	</div>
 <?php } ?>
+<?php
+	if($pForm->isBound()){
+		$lDealValues = $pForm->getTaintedValues();
+		$lDefaultDeal = $lDealValues['deal'];
+	} else {
+		$lDefaultDeal =  $pForm->getEmbeddedForm('deal')->getDefaults();
+	}
+	//var_dump($lDefaultDeal);die();
+?>
 
 <form action="<?php echo url_for('deals/proceed'); ?>" method="post" id="deal_form" name="deal_form">
 	<?php echo $pForm['deal']['id']->render();?>
@@ -103,9 +112,9 @@
     			<div class="clearfix preview-deal-box">
         		<div class="content-box">
         			<div class="content-box yellow">
-          			<div class="coupon-summary deal_summary-mirror"><?php echo $pForm->getEmbeddedForm('deal')->getDefault('summary'); ?></div>
-          			<div class="coupon-description deal_description-mirror"><?php echo $pForm->getEmbeddedForm('deal')->getDefault('description'); ?></div>
-          			<div class="coupon-foot"><?php echo __('Expires at'); ?> <span id="deal_end_date-mirror"><?php echo $pForm->getEmbeddedForm('deal')->getDefault('end_date'); ?></span>  |  87/100 left</div>
+          			<div class="coupon-summary deal_summary-mirror"><?php echo $lDefaultDeal['summary']; ?></div>
+          			<div class="coupon-description deal_description-mirror"><?php echo $lDefaultDeal['description']; ?></div>
+          			<div class="coupon-foot"><?php echo __('Expires at'); ?> <span id="deal_end_date-mirror"><?php echo $lDefaultDeal['end_date']; ?></span>  |  87/100 left</div>
           		</div>
           		<div class="meta-label">
           			<input type="checkbox" name="coupon-accept-tod" id="coupon-accept-tod" /><span><?php echo __('I accept the %terms%', array('%terms%' => link_to(__('Terms of Deal'), '/'))); ?></span>
@@ -192,13 +201,13 @@
 	    		<div class="clearfix preview-deal-box">
 	        	<div class="content-box">
 	        		<div class="content-box yellow">
-	          		<div class="coupon-summary deal_summary-mirror"><?php echo $pForm->getEmbeddedForm('deal')->getDefault('summary'); ?></div>
+	          		<div class="coupon-summary deal_summary-mirror"><?php echo $lDefaultDeal['summary']; ?></div>
 	          		<div class="coupon-description">
 	          			<p><?php echo __('Ihr Gutschein-Code:'); ?></p>
 	          			<p><strong class="deal_coupon_single_code-mirror"><?php echo $pDefaultCode; ?></strong></p>
 	          		</div>
-	          		<div class="coupon-foot">Expires at <?php echo $pForm->getEmbeddedForm('deal')->getDefault('end_date'); ?></div>
-	          		<a href="/" class="deal_redeem_url-mirror"><?php echo $pForm->getEmbeddedForm('deal')->getDefault('reedem_url'); ?></a>
+	          		<div class="coupon-foot">Expires at <?php echo $lDefaultDeal['end_date']; ?></div>
+	          		<a href="/" class="deal_redeem_url-mirror"><?php echo $lDefaultDeal['redeem_url']; ?></a>
 	          	</div>
 	        	</div>
 	    		</div>
