@@ -21,7 +21,9 @@
 
       <div id="nav_main">
 				<div id="deal_nav_main_box">
-				  <h1 class="light_text big_size"><a href="/deal/get_coupon" id="deal-nav-link" class="deal-nav-elem"><?php echo __('Gutschein'); ?></a> | <a href="/popup/get_settings" id="settings-nav-link" class="deal-nav-elem"><?php echo __('Settings'); ?></a></h1>
+				  <h1 class="light_text big_size">
+				    <a href="<?php echo url_for("@static_like"); ?>" id="deal-nav-link" class="deal-nav-elem"><?php echo __('Gutschein'); ?></a> |
+				    <a href="<?php echo url_for("@static_settings"); ?>" id="settings-nav-link" class="deal-nav-elem"><?php echo __('Settings'); ?></a></h1>
 				</div>
       </div>
 
