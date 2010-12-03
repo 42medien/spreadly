@@ -405,10 +405,9 @@ class DealTest extends BaseTestCase {
   }
 
   public function testGetActiveDealByUrl() {
-    $dispatcher = sfContext::getInstance()->getEventDispatcher();
-    $dispatcher->connect("deal.event.resume", array('DealListener', 'updateMongoDeal'));
-
+    sfContext::getInstance()->getEventDispatcher()->connect("deal.event.pause", array('DealListener', 'updateMongoDeal'));
     $this->active->pause();
+    sfContext::getInstance()->getEventDispatcher()->connect("deal.event.resume", array('DealListener', 'updateMongoDeal'));
     $this->active->resume();
 
     $url = $this->active->getDomainProfile()->getDomain();
