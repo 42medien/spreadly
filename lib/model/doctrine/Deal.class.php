@@ -34,8 +34,8 @@ class Deal extends BaseDeal {
 
   public function isActive() {
     $lNow = time();
-    return $this->getState()=='approved' && 
-           strtotime($this->getStartDate()) <= $lNow && 
+    return $this->getState()=='approved' &&
+           strtotime($this->getStartDate()) <= $lNow &&
            strtotime($this->getEndDate()) >= $lNow &&
            $this->getRemainingCouponQuantity()>0;
   }
@@ -104,7 +104,7 @@ class Deal extends BaseDeal {
           $c->save();
         }
       }
-      
+
       $this->saveQuantities(count($codes), (empty($params['quantity']) ? 0 : intval($params['quantity'])), $pIsAdding);
     }
 
@@ -130,10 +130,10 @@ class Deal extends BaseDeal {
 
   public function toMongoArray() {
     $array = $this->toArray();
-    $array['start_date'] = new MongoDate(strtotime($array['start_date']));
-    $array['end_date'] = new MongoDate(strtotime($array['end_date']));
-    $array['created_at'] = new MongoDate(strtotime($array['created_at']));
-    $array['updated_at'] = new MongoDate(strtotime($array['updated_at']));
+    $array['start_date'] = new MongoDate(intval(strtotime($array['start_date'])));
+    $array['end_date'] = new MongoDate(intval(strtotime($array['end_date'])));
+    $array['created_at'] = new MongoDate(intval(strtotime($array['created_at'])));
+    $array['updated_at'] = new MongoDate(intval(strtotime($array['updated_at'])));
     $array['remaining_coupon_quantity'] = $this->getRemainingCouponQuantity();
     $array['human_coupon_quantity'] = $this->getHumanCouponQuantity();
     $array['is_unlimited'] = $this->isUnlimited();
