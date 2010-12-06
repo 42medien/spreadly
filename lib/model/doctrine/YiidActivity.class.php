@@ -10,9 +10,7 @@
  * @author     Your name here
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
-class YiidActivity extends BaseYiidActivity
-{
-
+class YiidActivity extends BaseYiidActivity {
   /**
    *  saves are handled by the related Table-Class as we save them in MongoDB
    * (non-PHPdoc)
@@ -35,7 +33,6 @@ class YiidActivity extends BaseYiidActivity
     }
     return false;
   }
-
 
   /**
    * wrapper for checkeing on clickback
@@ -97,5 +94,31 @@ class YiidActivity extends BaseYiidActivity
     $lUser = UserTable::getInstance()->retrieveByPk($this->getUId());
 
     return $lUser;
+  }
+
+  /**
+   * checks if it is a deal activity or not
+   *
+   * @return boolean
+   */
+  public function isDeal() {
+    if ($this->getDId()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * returns the matching deal infos
+   *
+   * @return Object|null
+   */
+  public function getDeal() {
+    if ($this->getDId()) {
+      return DealTable::getInstance()->find($this->getDId());
+    } else {
+      return null;
+    }
   }
 }
