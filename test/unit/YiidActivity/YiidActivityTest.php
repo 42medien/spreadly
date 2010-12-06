@@ -24,10 +24,10 @@ class YiidActivityTest extends BaseTestCase {
 
     $this->assertTrue($deal1->isActive());
 
-    $lState = YiidActivityTable::saveLikeActivitys($user->getId(), "http://notizblog.org/about/", array(), array(),
+    $lObject = YiidActivityTable::saveLikeActivitys($user->getId(), "http://notizblog.org/about/", array(), array(),
                                          YiidActivityTable::ACTIVITY_VOTE_POSITIVE, "like");
 
-    $this->assertTrue($lState);
+    $this->assertType("YiidActivity", $lObject);
 
     $lState = YiidActivityTable::saveLikeActivitys($user->getId(), "http://notizblog.org/about/", array(), array(),
                                          YiidActivityTable::ACTIVITY_VOTE_POSITIVE, "like");
@@ -39,10 +39,10 @@ class YiidActivityTest extends BaseTestCase {
     $deal1->pause();
     $this->assertFalse($deal1->isActive());
 
-    $lState = YiidActivityTable::saveLikeActivitys($user->getId(), "http://notizblog.org/about/", array(), array(),
+    $lObject = YiidActivityTable::saveLikeActivitys($user->getId(), "http://notizblog.org/about/", array(), array(),
                                          YiidActivityTable::ACTIVITY_VOTE_POSITIVE, "like");
 
-    $this->assertTrue($lState);
+    $this->assertType("YiidActivity", $lObject);
 
     $lState = YiidActivityTable::saveLikeActivitys($user->getId(), "http://notizblog.org/about/", array(), array(),
                                          YiidActivityTable::ACTIVITY_VOTE_POSITIVE, "like");
