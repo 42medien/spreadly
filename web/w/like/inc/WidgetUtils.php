@@ -149,21 +149,44 @@ class YiidActivityObjectPeer {
    */
   public static function actionOnObjectByUser($pSocialObjectId, $pUserId, $pActiveDeal = null) {
     $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
-    $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, self::MONGO_COLLECTION);
+    $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
 
     // get yiid-activity and factor a deal
     if ($pActiveDeal) {
       $lObject = $pCollectionObject->findOne(array("so_id" => $pSocialObjectId,
                                                    "u_id" => intval($pUserId),
-                                                   "d_id" => $pActiveDeal['id']
+                                                   "d_id" => intval($pActiveDeal['id'])
                                                   ));
+
     } else {
       $lObject = $pCollectionObject->findOne(array("so_id" => $pSocialObjectId,
                                                    "u_id" => intval($pUserId),
                                                    "d_id" => array('$exists' => false)
                                                   ));
     }
-    return $lObject?$lObject['score']:false;
+    //return $lObject?$lObject['score']:false;
+
+    return $lObject;
+  }
+
+  /**
+   * check if a given user already performed an action on a social object
+   * returns false if not, or it's score (1/-1)
+   *
+   * @author Christian Weyand
+   * @param int $pSocialObjectId
+   * @param int $pUserId
+   * @return false or score of action taken (-1/1)
+   */
+  public static function actionOnHostByUser($pUserId, $pActiveDeal) {
+    $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
+    $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
+
+    // get yiid-activity and factor a deal
+    $lObject = $pCollectionObject->findOne(array("u_id" => intval($pUserId),
+                                                 "d_id" => intval($pActiveDeal['id'])
+                                                  ));
+    return $lObject;
   }
 }
 
@@ -232,6 +255,9 @@ class DealUtils {
   const MONGO_COLLECTION = 'deals';
 
   public static function dealActive($pUrl) {
+    $pUrl = str_replace(" ", "+", $pUrl);
+    $pUrl = UrlUtils::skipTrailingSlash($pUrl);
+
     $host = parse_url($pUrl, PHP_URL_HOST);
     $col = DealUtils::getCollection();
     $today = new MongoDate(strtotime("today"));
@@ -245,6 +271,35 @@ class DealUtils {
     $deal = $result->getNext();
 
     if ($deal && ($deal["is_unlimited"] == true || $deal['remaining_coupon_quantity'] > 0)) {
+      return $deal;
+    }
+
+    return false;
+  }
+
+  public static function checkHostActive($pUrl, $pUserId, $pDealId) {
+    $pUrl = str_replace(" ", "+", $pUrl);
+    $pUrl = UrlUtils::skipTrailingSlash($pUrl);
+
+    $host = parse_url($pUrl, PHP_URL_HOST);
+
+    $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
+    $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, YiidActivityObjectPeer::MONGO_COLLECTION);
+
+    $cond = array(
+      "host" => $host,
+      "start_date" => array('$lte' => $today),
+      "end_date" => array('$gte' => $today)
+    );
+    $result = $col->find($cond)->limit(1)->sort(array("start_date" => -1));
+
+    $deal = $result->getNext();
+
+    if ($deal && ($deal["is_unlimited"] == true || $deal['remaining_coupon_quantity'] > 0)) {
+      // check if activity already liked
+
+      // check if domain already liked
+
       return $deal;
     }
 

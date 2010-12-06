@@ -19,6 +19,7 @@ class YiidActivity extends BaseYiidActivity {
   public function save(Doctrine_Connection $conn = null) {
     $lObjectToSave = $this->toArray(false);
     $lObjectToSave['u_id'] = intval($lObjectToSave['u_id']);
+    $lObjectToSave['d_id'] = intval($lObjectToSave['d_id']);
     $lObjectToSave['so_id'] = new MongoId($lObjectToSave['so_id']);
     unset($lObjectToSave['id']);
     if ($this->getId()) {

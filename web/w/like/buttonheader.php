@@ -47,10 +47,26 @@ $lActiveDeal = DealUtils::dealActive($pUrl);
 
 $pUserId = MongoSessionPeer::extractUserIdFromSession(LikeSettings::SF_SESSION_COOKIE);
 $lSocialObjectArray = SocialObjectPeer::getDataForUrl($pUrl);
-$lIsUsed = YiidActivityObjectPeer::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId, $lActiveDeal);
-$lSocialObjectArray = SocialObjectPeer::recalculateCountsRespectingUser($lSocialObjectArray, $lIsUsed);
+$lActivityObject = YiidActivityObjectPeer::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId, $lActiveDeal);
+
 $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
 $lStaticUrl = LikeSettings::JS_STATIC_PATH."?ei_kcuf=".time();
+
+$lIsDeal = false;
+if (($lActiveDeal && $lActivityObject) || ($lActiveDeal && !YiidActivityObjectPeer::actionOnHostByUser($pUserId, $lActiveDeal))) {
+  $lIsDeal = true;
+} else {
+  $lActivityObject = YiidActivityObjectPeer::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId);
+}
+
+if ($lActivityObject) {
+  $lIsUsed = $lActivityObject['score'];
+} else {
+  $lIsUsed = false;
+}
+
+$lSocialObjectArray = SocialObjectPeer::recalculateCountsRespectingUser($lSocialObjectArray, $lIsUsed);
+
 $lShowFriends = false;
 $lLimit = 6;
 if($pUserId && $pSocialFeatures && $lSocialObjectArray['_id']) {
@@ -58,6 +74,11 @@ if($pUserId && $pSocialFeatures && $lSocialObjectArray['_id']) {
   $lLimit = $pFullShortVersion?6:8;
 }
 
+
 YiidStatsSingleton::trackVisit($pUrl);
 StatsHelper::trackPageImpression($pUrl, $lClickback, $pUserId);
-?>
+
+if ($lIsDeal) {
+  include("deal.php");
+  exit;
+}

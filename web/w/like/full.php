@@ -1,12 +1,4 @@
-<?php
-include("buttonheader.php");
-
-if ($lActiveDeal) {
-  include("deal.php");
-  exit;
-}
-?>
-
+<?php include("buttonheader.php"); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -137,10 +129,6 @@ if ($lActiveDeal) {
 		<div id="additional_text_area" class="left big_space_to_left" style="color: <?php echo $lFontcolor; ?>">
 		  <?php if($lSocialObjectArray['urlerror']) { ?>
 		    <p id="error-area" style="color: red; font-weight: bold; font-size: 11px;">INVALID URL: URL param must be valid or empty</p>
-		  <?php } elseif($lActiveDeal) { ?>
-		    <div class="deal_button light_bg_118">
-		      <?php echo $lActiveDeal['button_label'] ?>
-		    </div>
 		  <?php } else { ?>
 		    <p id="info-liked">
 		      <span id="you-like" <?php if($lIsUsed != 1) { ?>style="display: none;" <?php } ?>><?php echo __('POS_TEXT_VALUE_1', $pType); ?></span>

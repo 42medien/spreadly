@@ -234,7 +234,7 @@ class YiidActivityTable extends Doctrine_Table {
     if ($pDeal) {
       $lQuery = $lCollection->findOne(array("so_id" => new MongoId($pSocialObjectId.""),
                                             "u_id" => (int)$pUserId,
-                                            "d_id" => $pDeal->getId()
+                                            "d_id" => (int)$pDeal->getId()
                                            ));
     } else {
       $lQuery = $lCollection->findOne(array("so_id" => new MongoId($pSocialObjectId.""),
@@ -387,7 +387,7 @@ class YiidActivityTable extends Doctrine_Table {
     $lCollection = self::getMongoCollection();
 
     $lQuery = $lCollection->findOne(array("u_id" => (int)$pUserId,
-                                          "d_id" => $pDealId
+                                          "d_id" => (int)$pDealId
                                           ));
 
     return self::initializeObjectFromCollection($lQuery);
@@ -401,7 +401,7 @@ class YiidActivityTable extends Doctrine_Table {
 
     if ($lSocialObject) {
       $lQuery = $lCollection->findOne(array("u_id" => (int)$pUserId,
-                                            "d_id" => $pDealId,
+                                            "d_id" => (int)$pDealId,
                                             "so_id" => new MongoId($lSocialObject->getId()."")
                                            ));
 
