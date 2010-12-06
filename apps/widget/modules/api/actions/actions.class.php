@@ -42,6 +42,8 @@ class apiActions extends sfActions {
       $this->success = false;
     }
 
+    $this->lDeal = DealTable::getActiveDealByUrl($this->lUrl);
+
     $this->lType = $request->getParameter('type');
     $this->lLikeDis = $request->getParameter('likedis');
     $this->lIdentitysOwnedByUser = OnlineIdentityTable::retrieveIdsByUserId($this->getUser()->getUserId());
@@ -65,8 +67,14 @@ class apiActions extends sfActions {
     $this->setLayout(false);
     $this->setTemplate(false);
     $this->getResponse()->setContentType('application/json');
+
+    if ($this->lDeal) {
+      // @todo validate agbs
+      // @todo set "status != 200" if it is not set
+    }
+
     if ($this->status == 200) {
-      $this->success = YiidActivityTable::saveLikeActivitys($this->getUser()->getId(),
+      $lActivity = YiidActivityTable::saveLikeActivitys($this->getUser()->getId(),
                                                             $this->lUrl,
                                                             $this->lIdentitysOwnedByUser,
                                                             $this->lIdentitysSent,
@@ -77,6 +85,12 @@ class apiActions extends sfActions {
                                                             $this->lPhoto,
                                                             $this->lClickback
                                                            );
+      // write success-state
+      if ($lActivity) {
+        $this->success = true;
+      } else {
+        $this->success = false;
+      }
     }
 
     return  $this->sendJsonResponse();
