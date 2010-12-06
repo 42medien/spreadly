@@ -1,6 +1,6 @@
 <?php use_helper("Date"); ?>
 <?php if ($pDeal) { ?>
-<div class="content-box yellow dashed">
+<div class="yellow dashed">
   <div class="coupon-summary deal_summary-mirror"><?php echo $pDeal->getSummary() ?></div>
   <div class="coupon-description deal_description-mirror">
     <?php echo $pDeal->getDescription() ?>

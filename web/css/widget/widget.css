@@ -213,8 +213,9 @@ margin-top:5px;
 }
 
 .yellow {
-background-color:#FBFF87;
+background-color:#FEFECC;
 text-align: center;
+padding: 10px;
 }
 
 .meta-label {
@@ -227,8 +228,9 @@ text-align: center;
 }
 
 .coupon-description  {
-  border:1px solid #000000;
-  padding: 5px;
+  border: 1px solid #666566;
+  padding: 8px;
+  font-size: 15px;
 }
 
 .coupon-foot {
