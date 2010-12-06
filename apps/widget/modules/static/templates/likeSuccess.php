@@ -13,7 +13,7 @@
     </div>
 
     <?php if ($pIsUsed) { ?>
-      <?php include_partial("deal_info", array("pYiidActivity" => $pYiidActivity, "pDeal" => $pDeal)); ?>
+      <?php include_partial("deal_info", array("pYiidActivity" => $pYiidActivity)); ?>
       <?php if ($pIsUsed == 1) { ?>
         <div class="rounded_corners content_main_border popup_button_used distance_right already_shared" id="static-liked">
           <span class="sharing_button likeit_button">&nbsp;</span>
