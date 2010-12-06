@@ -1,5 +1,5 @@
 /**
- * @combine statistics
+ * @nocombine statistics
  */
 
 // ==ClosureCompiler==

@@ -20,7 +20,7 @@
     <script type="text/javascript" src="/js/statistics/deals/DealHandler.js" type="text/javascript"></script>
     <script type="text/javascript" src="/js/100_main/global/307_EditInPlace.js" type="text/javascript"></script>
     <script src="/js/100_main/vendor/less-1.0.36.min.js" type="text/javascript"></script>
-
+		<?php include_javascripts();?>
   </head>
   <body>
     <div class="less-error-message"></div>
