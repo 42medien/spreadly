@@ -1,1 +1,0 @@
-DealNav.init();
