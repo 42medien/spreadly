@@ -143,12 +143,12 @@ class Deal extends BaseDeal {
     return $array;
   }
   
-  public function validateNewQuantity($pUser, $pParams) {
+  public function validateNewQuantity($newQuantity) {
     $lError = "";
-    if($pUser->isMine($this) && !$this->isUnlimited()) {
-      $lNumeric = is_numeric($pParams['input']);
-    	$lHigher = $pParams['input'] > $this->getCouponQuantity();
-    	if(($lNumeric && $lHigher) || ($lNumeric && $pParams['input'] == $this->getCouponQuantity())) {
+    if(!$this->isUnlimited()) {
+      $lNumeric = is_numeric($newQuantity);
+    	$lHigher = $newQuantity > $this->getCouponQuantity();
+    	if(($lNumeric && $lHigher) || ($lNumeric && $newQuantity == $this->getCouponQuantity())) {
     	  // The new quantity is either numeric and higher or nothing was changed, so nothing should be done
     	} else {
     	  $lError = "";
@@ -157,7 +157,7 @@ class Deal extends BaseDeal {
     	  $lError = $lError.($lHigher ? '' : 'not more than before');
     	}
     } else {
-      $lError = $this->isUnlimited() ? "You can not change the quantity of unlimited coupons." : "You are not allowed to do this.";
+      $lError = "You can not change the quantity of unlimited coupons.";
     }
     
     return empty($lError) ? true : $lError;

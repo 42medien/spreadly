@@ -102,7 +102,7 @@ class dealsActions extends sfActions
     if($this->pForm->isValid()) {
 	    $lObject = $this->pForm->save();
 	    $lDealFromForm = $this->pForm->getEmbeddedForm('deal')->getObject();
-
+      
 	    if($lDeal) {
   	    $lDealFromForm->addMoreCoupons($lParams['deal']['coupon']);
 	      $lDealFromForm->submit();
@@ -111,7 +111,7 @@ class dealsActions extends sfActions
   	    $lDealFromForm->saveInitialCoupons($lParams['deal']['coupon']);
   	    $lIsNew = true;
 	    }
-
+      
 	    $lReturn['html'] = $this->getPartial('deals/deal_in_process', array('pIsNew' => $lIsNew));
     } else {
     	$lCouponType = $lParams['deal']['coupon_type'];
@@ -241,12 +241,17 @@ class dealsActions extends sfActions
   	$lParams = $pRequest->getPostParameters();
   	$lParams['input'] = trim($lParams['input']);
   	$lDeal = DealTable::getInstance()->find($lParams['deal_id']);
-
-    $lValid = $lDeal->validateNewQuantity($this->getUser(), $lParams);
-
-    if($lValid===true) {
-      $lDeal->addMoreCoupons(array('quantity' => $lParams['input']-$lDeal->getCouponQuantity()));
+    
+    if($this->getUser()->isMine($lDeal)) {
+      $lValid = $lDeal->validateNewQuantity($lParams['input']);
+    
+      if($lValid===true) {
+        $lDeal->addMoreCoupons(array('quantity' => $lParams['input']-$lDeal->getCouponQuantity()));
+      }      
+    } else {
+      $lValid = "You are not allowed to do this.";
     }
+    
 
     return $this->renderText(json_encode(
     	array(
