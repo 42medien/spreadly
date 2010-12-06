@@ -18,7 +18,11 @@ class staticActions extends sfActions {
   }
 
   public function executeLike(sfWebRequest $request) {
-    $this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "popup");
+    if ($request->getParameter("url", null)) {
+      $this->getUser()->setAttribute("static_like_with_params", $request->getUri(), "popup");
+    } elseif ($lUrl = $this->getUser()->getAttribute("static_like_with_params", null, "popup")) {
+      $this->redirect($lUrl);
+    }
 
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('popup/js_popup_ready'));
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('static/js_init_static.js'));
@@ -65,6 +69,24 @@ class staticActions extends sfActions {
   }
 
   public function executeSettings(sfWebRequest $request) {
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('popup/js_popup_ready'));
+    $this->getUser()->setFlash('headline', __('SETTINGS', null, 'widget'));
 
+    $this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "popup");
+
+    $lUser = $this->getUser()->getUser();
+    if($request->getMethod() == sfRequest::POST) {
+      $checkedOnlineIdentities = $request->getParameter('enabled_services', array());
+
+      // @todo define methods in objects
+      OnlineIdentityTable::toggleSocialPublishingStatus($this->getUser()->getUser()->getOnlineIdentitesAsArray(), $checkedOnlineIdentities);
+    }
+
+    $this->pIdentities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
+
+    CookieUtils::generateWidgetIdentityCookie($this->pIdentities);
+    sfProjectConfiguration::getActive()->loadHelpers('I18N');
+
+    $this->setLayout('layout_twocol');
   }
 }
