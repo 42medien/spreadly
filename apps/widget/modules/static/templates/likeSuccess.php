@@ -43,7 +43,7 @@
 		            name="like-serv-<?php echo $lIdentity->getId(); ?>" <?php echo $lIdentity->getSocialPublishingEnabled()?"checked=checked":''; ?>
 		            value="<?php echo $lIdentity->getId(); ?>" class="serv-check" />
 		          <label for="<?php echo $lIdentity->getCommunity()->getCommunity(); ?>_check" title="<?php echo $lIdentity->getProfileUri(); ?>">
-		            <?php echo truncate_text($lIdentity->getProfileUri(), 25, '...'); ?>
+		            <?php echo truncate_text($lIdentity->getName(), 25, '...'); ?>
 		          </label>
 		        </li>
 		      <?php } ?>
