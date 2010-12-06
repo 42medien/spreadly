@@ -91,6 +91,7 @@ EOF;
 
     // initialize mongo objects
     if ($env == 'dev' || $env == 'staging') {
+      MongoDbConnector::getInstance()->getDatabase("yiid")->drop();
       $this->getFilesystem()->execute("php data/fixtures/initializeMongoObjects.php");
     }
 
