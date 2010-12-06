@@ -57,7 +57,7 @@ class DealForm extends BaseDealForm
       'coupon_type'       => new sfValidatorChoice(array('choices' => array(0 => 'single', 1 => 'multiple'))),
       'redeem_url'        => new sfValidatorString(array('max_length' => 512, 'required' => false, 'trim' => true)),
       'tos_accepted'      => new sfValidatorBoolean(array('required' => true, 'trim' => true), array('required' => $lI18n->__('Required'))),
-      'terms_of_deal'     => new sfValidatorString(array('max_length' => 512, 'required' => true, 'trim' => true), array('required' => $lI18n->__('Required')))
+      'terms_of_deal'     => new sfValidatorUrl(array('max_length' => 512, 'required' => true, 'trim' => true), array('required' => $lI18n->__('Required'), 'invalid' => $lI18n->__('Invalid Url')))
     ));
 
     //$this->widgetSchema->setNameFormat('deal[%s]');

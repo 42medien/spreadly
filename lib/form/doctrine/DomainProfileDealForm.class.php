@@ -13,6 +13,8 @@ class DomainProfileDealForm extends BaseDomainProfileForm
   public function configure()
   {
 
+  	$lI18n = sfContext::getInstance()->getI18N();
+
     $lVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser(sfContext::getInstance()->getUser()->getGuardUser());
     $lUrls = array();
     foreach($lVerifiedDomains as $lDomain) {
@@ -25,7 +27,7 @@ class DomainProfileDealForm extends BaseDomainProfileForm
     ));
 
     $this->setValidators(array(
-      'imprint_url' => new sfValidatorString(array('max_length' => 512, 'required' => true)),
+      'imprint_url' => new sfValidatorUrl(array('max_length' => 512, 'required' => true), array('invalid' => $lI18n->__('Invalid Url'))),
       'id' => new sfValidatorInteger(array('required' => true))
     ));
 
