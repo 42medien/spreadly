@@ -8,11 +8,11 @@
 #branding{width: 500px;height: 35px;padding: 0 0 20px 0;}
 #nav_main{width: 580px; height: 25px;}
 #nav_main_box{width: 137px;height:25px;float:right;}
-#deal_nav_main_box{width: 160px;height:25px;float:right;, line-height: 25px; text-align: center;}
-#deal_nav_main_box a{color: #fff; text-decoration: none;}
+#static_nav_main_box{width: 160px;height:25px;float:right;, line-height: 25px; text-align: center;}
+#static_nav_main_box a{color: #fff; text-decoration: none;}
 #content{width:580px;padding-top:10px;}
 #content_main{width:540px;padding:10px 20px;}
-#deal_content_main{width:400px;padding:10px 20px;}
+#static_content_main{width:400px;padding:10px 20px; margin: 0px auto;}
 #spread_description{width:500px;}
 #normal_box, #yiid_help_text{width: 500px;}
 #yiid_help_text{padding:20px 0 5px 0;}

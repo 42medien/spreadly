@@ -61,7 +61,7 @@ class staticActions extends sfActions {
     sfProjectConfiguration::getActive()->loadHelpers('I18N');
     $this->getUser()->setFlash('headline', __('Like & Dislike', null, 'widget'));
     $this->pDeal = $lDeal;
-    $this->setLayout('layout_deal');
+    $this->setLayout('layout_onecol');
   }
 
   public function executeSettings(sfWebRequest $request) {
