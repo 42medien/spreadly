@@ -87,8 +87,7 @@ class YiidActivityTable extends Doctrine_Table {
     foreach ($pGivenOnlineIdentitys as $lIdentityId) {
       if (in_array($lIdentityId, $pOwnedOnlineIdentitys)) {
         $lVerifiedOnlineIdentityIds[]= $lIdentityId;
-        $senderOi = OnlineIdentityTable::getInstance()->retrieveByPk($lIdentityId);
-        $lOnlineIdentitys[] = $senderOi;
+        $lOnlineIdentitys[] = OnlineIdentityTable::getInstance()->retrieveByPk($lIdentityId);
         $lServices[] = $senderOi->getCommunityId();
       }
     }
@@ -98,13 +97,8 @@ class YiidActivityTable extends Doctrine_Table {
     if (sfConfig::get('app_settings_environment') != 'dev') {
       // send messages to all services
       foreach ($lOnlineIdentitys as $lIdentity) {
-        $parameterList = parse_url($pUrl);
-        if (isset($parameterList['query'])) {
-          $pPostUrl = $pUrl.'&yiidit='.$lIdentity->getCommunity()->getCommunity().'.'.$lActivity->getId();
-        }
-        else {
-          $pPostUrl = $pUrl.'?yiidit='.$lIdentity->getCommunity()->getCommunity().'.'.$lActivity->getId();
-        }
+        $lQueryChar = parse_url($pUrl, PHP_URL_QUERY) ? '&' : '?';
+        $pPostUrl = $pUrl.$lQueryChar.'yiidit='.$lIdentity->getCommunity()->getCommunity().'.'.$lActivity->getId();
         $lStatus = $lIdentity->sendStatusMessage($pPostUrl, $pVerb, $pScore, $pTitle, $pDescription, $pPhoto);
       }
     }
