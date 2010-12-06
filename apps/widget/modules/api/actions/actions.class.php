@@ -19,6 +19,7 @@ class apiActions extends sfActions {
     $parentRet = parent::initialize($context, $module, $action);
     $request = $context->getRequest();
 
+    $this->html = false;
     $this->status = 200;
     $this->success = true;
     $this->message = 'success';
@@ -75,18 +76,22 @@ class apiActions extends sfActions {
 
     if ($this->status == 200) {
       $lActivity = YiidActivityTable::saveLikeActivitys($this->getUser()->getId(),
-                                                            $this->lUrl,
-                                                            $this->lIdentitysOwnedByUser,
-                                                            $this->lIdentitysSent,
-                                                            $this->lLikeDis,
-                                                            $this->lType,
-                                                            $this->lTitle,
-                                                            $this->lDescription,
-                                                            $this->lPhoto,
-                                                            $this->lClickback
-                                                           );
+                                                        $this->lUrl,
+                                                        $this->lIdentitysOwnedByUser,
+                                                        $this->lIdentitysSent,
+                                                        $this->lLikeDis,
+                                                        $this->lType,
+                                                        $this->lTitle,
+                                                        $this->lDescription,
+                                                        $this->lPhoto,
+                                                        $this->lClickback
+                                                       );
       // write success-state
       if ($lActivity) {
+        // set deal partial
+        if ($this->lDeal) {
+          // @todo set html (partial: _del_info.php mit param YiidActivity)
+        }
         $this->success = true;
       } else {
         $this->success = false;
@@ -103,7 +108,8 @@ class apiActions extends sfActions {
     array(
       'success' => $this->success,
       'status' => $this->status,
-      'message' => $this->message
+      'message' => $this->message,
+      'html' => $this->html
     )));
   }
 }
