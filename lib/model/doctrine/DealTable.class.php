@@ -63,12 +63,13 @@ class DealTable extends Doctrine_Table
   public static function getActiveDealByHost($pUrl) {
     $host = parse_url($pUrl, PHP_URL_HOST);
     $col = MongoDbConnector::getInstance()->getCollection(sfConfig::get('app_mongodb_database_name'), "deals");
-    $today = new MongoDate(strtotime("today"));
+    $today = new MongoDate(time());
     $cond = array(
       "host" => $host,
       "start_date" => array('$lte' => $today),
       "end_date" => array('$gte' => $today)
     );
+
     $result = $col->find($cond)->limit(1)->sort(array("start_date" => -1));
 
     $deal = $result->getNext();

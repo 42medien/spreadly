@@ -169,15 +169,15 @@ class Deal extends BaseDeal {
     $lCurrentDate = strtotime($this->getEndDate());
     $lNow = time();
 
-    if($lNewDate > $lCurrentDate) {
-      $this->setEndDate($lNewDate);
+    if($lNewDate <= $lNow) {
+      $lError = "The new end date must be in the future";
+    } else {
+      $this->setEndDate(date("Y-m-d H:i:s", $lNewDate));
       
       if(DealTable::isOverlapping($this)) {
         $lError = "The new end date is overlapping another deal";
-        $this->setEndDate($lCurrentDate);
+        $this->setEndDate(date("Y-m-d H:i:s", $lCurrentDate));
       }
-    } elseif($lNewDate <= $lNow) {
-      $lError = "The new end date must be in the future";
     }
     return empty($lError) ? true : $lError;
   }  
