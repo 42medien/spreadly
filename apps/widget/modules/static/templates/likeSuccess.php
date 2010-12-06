@@ -3,12 +3,11 @@
 <div class="content-box rounded_corners">
   <?php if($pIsUrlValid) { ?>
     <div id="so_right_view" class="clearfix">
-      <div>
-        <h3 class="small_margin" title="<?php echo $pTitle; ?>"><?php echo truncate_text($pTitle, 30, '...'); ?></h3>
-        <p title="<?php echo $pUrl; ?>"><?php echo link_to(UrlUtils::getShortUrl($pUrl), $pUrl, array('class' => 'url')); ?></p>
-      </div>
       <div id="so_detail_desc" class="clearfix">
         <img alt="<?php echo $pUrl; ?>" width="100px" height="80px" src="<?php if(!$pImageUrl){ ?>http://communipedia.v2.websnapr.com/?url=<?php echo $pUrl; ?>&sh=80&sw=100<?php } else { echo $pImageUrl; } ?>" class="left">
+
+        <h3 class="small_margin" title="<?php echo $pTitle; ?>"><?php echo truncate_text($pTitle, 30, '...'); ?></h3>
+        <p title="<?php echo $pUrl; ?>"><?php echo link_to(UrlUtils::getShortUrl($pUrl), $pUrl, array('class' => 'url')); ?></p>
         <span class="normal_text"><?php echo truncate_text($pDescription, 400, '...'); ?></span>
       </div>
     </div>
