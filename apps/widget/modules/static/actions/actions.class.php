@@ -36,7 +36,7 @@ class staticActions extends sfActions {
 	    $lUser = $this->getUser()->getUser();
 
 	    $lSocialObject = SocialObjectTable::retrieveByAliasUrl($lUrl);
-	    $lDeal = DealTable::getActiveDealByUrl($lUrl);
+	    $lDeal = DealTable::getActiveDealByUrlAndUserId($lUrl, $this->getUser()->getUserId());
 
       $this->pIsUsed = false;
       if($lSocialObject) {

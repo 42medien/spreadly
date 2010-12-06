@@ -51,7 +51,7 @@ class DealTable extends Doctrine_Table
    * @param string $pUrl
    * @return Deal|false
    */
-  public static function getActiveDealByUrl($pUrl) {
+  public static function getActiveDealByHost($pUrl) {
     $host = parse_url($pUrl, PHP_URL_HOST);
     $col = MongoDbConnector::getInstance()->getCollection(sfConfig::get('app_mongodb_database_name'), "deals");
     $today = new MongoDate(strtotime("today"));
@@ -66,6 +66,52 @@ class DealTable extends Doctrine_Table
 
     if ($deal && ($deal["is_unlimited"] == true || $deal['remaining_coupon_quantity'] > 0)) {
       return self::getInstance()->find($deal['id']);
+    }
+
+    return false;
+  }
+
+  /**
+   * returns a deal if there is no deal-activity on the host
+   *
+   * @author Matthias Pfefferle
+   * @param string $pUrl
+   * @param int $pUserId
+   * @return Deal|boolean
+   */
+  public static function getActiveDealByHostAndUserId($pUrl, $pUserId) {
+    $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
+
+    $lDeal = self::getActiveDealByHost($pUrl);
+
+    if ($lDeal) {
+      $lYiidActivity = YiidActivityTable::getByDealIdAndUserId($lDeal->getId(), $pUserId);
+
+      if (!$lYiidActivity) {
+        return $lDeal;
+      }
+    }
+
+    return false;
+  }
+
+  /**
+   * returns a deal if there is a matching deal-activity or
+   * if there is no deal on the whole domain
+   *
+   * @author Matthias Pfefferle
+   * @param string $pUrl
+   * @param int $pUserId
+   * @return Deal|boolean
+   */
+  public static function getActiveDealByUrlAndUserId($pUrl, $pUserId) {
+    $lDeal = self::getActiveDealByHost($pUrl);
+
+    if ($lDeal) {
+      if (YiidActivityTable::getByDealIdAndUserIdAndUrl($lDeal->getId(), $pUserId, $pUrl) ||
+          !YiidActivityTable::getByDealIdAndUserId($lDeal->getId(), $pUserId)) {
+        return $lDeal;
+      }
     }
 
     return false;

@@ -64,9 +64,10 @@ class YiidActivityTable extends Doctrine_Table {
       return false;
     }
 
-    $lDeal = DealTable::getActiveDealByUrl($pUrl);
-
     $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
+
+    $lDeal = DealTable::getActiveDealByHostAndUserId($pUrl, $pUserId);
+
     $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
 
     // object doesn't exist, create it now
@@ -379,7 +380,34 @@ class YiidActivityTable extends Doctrine_Table {
     $lMongoCursor = $lCollection->find();
     $lMongoCursor->limit($pLimit)->skip($pOffset);
 
-
     return self::hydrateMongoCollectionToObjects($lMongoCursor);
+  }
+
+  public static function getByDealIdAndUserId($pDealId, $pUserId) {
+    $lCollection = self::getMongoCollection();
+
+    $lQuery = $lCollection->findOne(array("u_id" => (int)$pUserId,
+                                          "d_id" => $pDealId
+                                          ));
+
+    return self::initializeObjectFromCollection($lQuery);
+  }
+
+  public static function getByDealIdAndUserIdAndUrl($pDealId, $pUserId, $pUrl) {
+    $lCollection = self::getMongoCollection();
+
+    $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
+    $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
+
+    if ($lSocialObject) {
+      $lQuery = $lCollection->findOne(array("u_id" => (int)$pUserId,
+                                            "d_id" => $pDealId,
+                                            "so_id" => new MongoId($lSocialObject->getId()."")
+                                           ));
+
+      return self::initializeObjectFromCollection($lQuery);
+    } else {
+      return null;
+    }
   }
 }

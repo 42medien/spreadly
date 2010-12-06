@@ -43,7 +43,7 @@ class apiActions extends sfActions {
       $this->success = false;
     }
 
-    $this->lDeal = DealTable::getActiveDealByUrl($this->lUrl);
+    $this->lDeal = DealTable::getActiveDealByUrlAndUserId($this->lUrl, $this->getUser()->getUserId());
 
     $this->lType = $request->getParameter('type');
     $this->lLikeDis = $request->getParameter('likedis');
@@ -87,11 +87,7 @@ class apiActions extends sfActions {
                                                         $this->lClickback
                                                        );
       // write success-state
-      if ($lActivity) {
-        // set deal partial
-        if ($this->lDeal) {
-          // @todo set html (partial: _del_info.php mit param YiidActivity)
-        }
+      if ($lActivity != false) {
         $this->success = true;
       } else {
         $this->success = false;
