@@ -14,15 +14,16 @@ class CouponQuantityValidator extends sfValidatorBase {
 
   protected function doClean($values) {
     $lDealId = isset($values[$this->getOption('id')]) ? $values[$this->getOption('id')] : '';
-    $lCouponQuantity = isset($values[$this->getOption('coupon_quantity')]) ? $values[$this->getOption('coupon_quantity')] : '';
     $lDeal = DealTable::getInstance()->find($lDealId);
     if($lDeal && !$lDeal->isUnlimited() &&
-       $lDeal->getCouponType()!=DealTable::COUPON_TYPE_MULTIPLE &&
-       $lDeal->getCouponQuantity() > $lCouponQuantity) {
-      throw new sfValidatorErrorSchema($this, array($this->getOption('coupon_quantity') => new sfValidatorError($this, 'invalid')));      
-    } else {
-      return $values;
+       $lDeal->getCouponType()!=DealTable::COUPON_TYPE_MULTIPLE) {
+
+      $lCouponQuantity = isset($values[$this->getOption('coupon_quantity')]) ? $values[$this->getOption('coupon_quantity')] : '';
+      if($lDeal->getCouponQuantity() > $lCouponQuantity) {
+        throw new sfValidatorErrorSchema($this, array($this->getOption('coupon_quantity') => new sfValidatorError($this, 'invalid')));        
+      }
     }
+    return $values;
   }
 
 }

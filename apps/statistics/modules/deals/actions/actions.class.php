@@ -75,11 +75,23 @@ class dealsActions extends sfActions
     return $lParams;
   }
 
-  private function getFormWithEmbeddedForms($pDomainProfileId, $lDealForm) {
+  private function getFormWithEmbeddedForms($pDomainProfileId, $pDealForm, $pDeal) {
     $lDomainObject = DomainProfileTable::getInstance()->find($pDomainProfileId);
     $lForm = new DomainProfileDealForm($lDomainObject);
-    $lDealForm->embedForm('coupon', new CouponCodesForm());
-    $lForm->embedForm('deal', $lDealForm);
+    $lCouponForm = new CouponCodesForm();
+    $lI18n = sfContext::getInstance()->getI18N();
+    
+    if($pDeal==null || $pDeal->isNew()) {
+      $lCouponForm->getValidatorSchema()->setPostValidator(
+        new sfValidatorOr(array(
+          new sfValidatorSchemaFilter('single_code', new sfValidatorString(array('required' => true), array('required' => $lI18n->__('Required')))),
+          new sfValidatorSchemaFilter('multiple_codes', new sfValidatorString(array('required' => true), array('required' => $lI18n->__('Required'))))
+        ))
+      );      
+    }
+    
+    $pDealForm->embedForm('coupon', $lCouponForm);
+    $lForm->embedForm('deal', $pDealForm);
     return $lForm;
   }
 
@@ -96,7 +108,7 @@ class dealsActions extends sfActions
       $lDealForm->setDefault('domain_profile_id', $lParams['id']);
     }
 
-    $this->pForm = $this->getFormWithEmbeddedForms($lParams['id'], $lDealForm);
+    $this->pForm = $this->getFormWithEmbeddedForms($lParams['id'], $lDealForm, $lDeal);
 
     $this->pForm->bind($lParams);
     if($this->pForm->isValid()) {
@@ -115,7 +127,7 @@ class dealsActions extends sfActions
 	    $lReturn['html'] = $this->getPartial('deals/deal_in_process', array('pIsNew' => $lIsNew));
     } else {
     	$lCouponType = $lParams['deal']['coupon_type'];
-    	$lCouponQuantity = $lParams['deal']['coupon_quantity'];
+    	$lCouponQuantity = isset($lParams['deal']['coupon_quantity']) ? $lParams['deal']['coupon_quantity'] : 0;
 
     	$lTaintedValues = $this->pForm->getTaintedValues();
     	$lDefaultCode = 'Coupon Code';
@@ -201,12 +213,15 @@ class dealsActions extends sfActions
   	$lParams = $pRequest->getPostParameters();
   	$lDeal = DealTable::getInstance()->find($lParams['id']);
 
-  	$lValid = $lDeal->validateNewEndDate($this->getUser(), $lParams['input']);
-
-    if($lValid===true) {
-      $lDeal->save();
+    if($this->getUser()->isMine($lDeal)) {
+  	  $lValid = $lDeal->validateNewEndDate($lParams['input']);
+    
+      if($lValid===true) {
+        $lDeal->save();
+      }
+    } else {
+      $lValid = "You are not allowed to do this.";
     }
-
     return $this->renderText(json_encode(
     	array(
     		'success' => $lValid===true,

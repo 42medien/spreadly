@@ -60,7 +60,12 @@ class DealForm extends BaseDealForm
       'terms_of_deal'     => new sfValidatorUrl(array('max_length' => 512, 'required' => true, 'trim' => true), array('required' => $lI18n->__('Required'), 'invalid' => $lI18n->__('Invalid Url')))
     ));
     
-    $this->validatorSchema->setPostValidator(new CouponQuantityValidator());
+    $this->validatorSchema->setPostValidator(new sfValidatorAnd(
+      array(
+        new CouponQuantityValidator(),
+        new EndDateValidator()
+      ))
+    );
     
     //$this->widgetSchema->setNameFormat('deal[%s]');
   }

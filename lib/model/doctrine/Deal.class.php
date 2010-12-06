@@ -163,26 +163,21 @@ class Deal extends BaseDeal {
     return empty($lError) ? true : $lError;
   }
   
-  public function validateNewEndDate($pUser, $pDateString) {
+  public function validateNewEndDate($pDateString) {
     $lError = '';
-    if($pUser->isMine($this)) {
-      $lNewDate = strtotime($pDateString);
-      $lCurrentDate = strtotime($this->getEndDate());
-      $lNow = time();
+    $lNewDate = strtotime($pDateString);
+    $lCurrentDate = strtotime($this->getEndDate());
+    $lNow = time();
 
-      if($lNewDate > $lCurrentDate) {
-        $this->setEndDate($lNewDate);
-        
-        if(DealTable::isOverlapping($this)) {
-          $lError = "The new end date is overlapping another deal";
-          $this->setEndDate($lCurrentDate);
-        }
-      } elseif($lNewDate <= $lNow) {
-        $lError = "The new end date must be in the future";
+    if($lNewDate > $lCurrentDate) {
+      $this->setEndDate($lNewDate);
+      
+      if(DealTable::isOverlapping($this)) {
+        $lError = "The new end date is overlapping another deal";
+        $this->setEndDate($lCurrentDate);
       }
-
-    } else {
-      $lError = "You are not allowed to do this.";
+    } elseif($lNewDate <= $lNow) {
+      $lError = "The new end date must be in the future";
     }
     return empty($lError) ? true : $lError;
   }  

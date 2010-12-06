@@ -22,13 +22,7 @@ class CouponCodesForm extends BaseForm {
       'single_code'           => new sfValidatorString(array("required" => false, 'trim' => true)),
       'multiple_codes'        => new sfValidatorString(array("required" => false, 'trim' => true))
     ));
-
-    $this->getValidatorSchema()->setPostValidator(
-      new sfValidatorOr(array(
-        new sfValidatorSchemaFilter('single_code', new sfValidatorString(array('required' => true), array('required' => $lI18n->__('Required')))),
-        new sfValidatorSchemaFilter('multiple_codes', new sfValidatorString(array('required' => true), array('required' => $lI18n->__('Required'))))
-      ))
-    );
+    
 
     $this->widgetSchema->setNameFormat('coupon[%s]');
 
