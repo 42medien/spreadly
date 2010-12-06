@@ -25,7 +25,7 @@
 	</div>
 <?php } ?>
 
-<form action="<?php echo url_for('deals/proceed'); ?>" method="post" id="deal_form" name="deal_form">
+<form action="<?php echo url_for('deals/save'); ?>" method="post" id="deal_form" name="deal_form">
 	<?php echo $pForm['deal']['id']->render();?>
 	<?php echo $pForm['_csrf_token']->render(); ?>
   <div id="create-deal-content">
@@ -121,7 +121,7 @@
         			<div class="content-box yellow">
           			<div class="coupon-summary deal_summary-mirror"><?php echo $lDefaultDeal['summary']; ?></div>
           			<div class="coupon-description deal_description-mirror"><?php echo $lDefaultDeal['description']; ?></div>
-          			<div class="coupon-foot"><?php echo __('Expires at'); ?> <span id="deal_end_date-mirror"><?php echo $lDefaultDeal['end_date']; ?></span>  |  87/100 left</div>
+          			<div class="coupon-foot"><?php echo __('Expires at'); ?> <span id="deal_end_date-mirror"><?php echo $lDefaultDeal['end_date']; ?></span></div>
           		</div>
           		<div class="meta-label" id="accept-tod">
           			<input type="checkbox" name="coupon-accept-tod" /><?php echo __('I accept the %terms%', array('%terms%' => link_to(__('Terms of Deal'), '/'))); ?>
@@ -230,7 +230,7 @@
 									<?php echo __('Will end after <span id="code-counter">%codecounter%</span> likes.', array('%codecounter%' => $lDeal->getCouponQuantity())); ?>
 									<?php echo __('%oldcodes% remaining old coupon codes', array('%oldcodes%' => $lDeal->getCouponQuantity()-$lDeal->getClaimedQuantity())); ?>
 								<?php } else { ?>
-									<?php echo __('Will end after <span id="code-counter">%codecounter%</span> likes.', array('%codecounter%' => 0)); ?>
+									<?php echo __('Will end after <span id="code-counter">%codecounter%</span> likes.', array('%codecounter%' => '0')); ?>
 								<?php } ?>
 							</div>
 			 			</div>

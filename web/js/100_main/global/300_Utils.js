@@ -333,7 +333,7 @@ var OnLoadGrafic = {
     } else {
       return 600;
     }
-  },
+  }
   
   
 };

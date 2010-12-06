@@ -106,11 +106,13 @@ class dealsActions extends sfActions
 	    if($lDeal) {
   	    $lDealFromForm->addMoreCoupons($lParams['deal']['coupon']);
 	      $lDealFromForm->submit();
+	      $lIsNew = false;
 	    } else {
   	    $lDealFromForm->saveInitialCoupons($lParams['deal']['coupon']);
+  	    $lIsNew = true;
 	    }
 
-	    $lReturn['html'] = $this->getPartial('deals/deal_in_process');
+	    $lReturn['html'] = $this->getPartial('deals/deal_in_process', array('pIsNew' => $lIsNew));
     } else {
     	$lCouponType = $lParams['deal']['coupon_type'];
     	$lCouponQuantity = $lParams['deal']['coupon_quantity'];
