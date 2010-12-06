@@ -120,7 +120,7 @@ class YiidActivityTable extends Doctrine_Table {
     $lUser = UserTable::getInstance()->retrieveByPk($pUserId);
     StatsFeeder::feed($lActivity, $lUser, $lSocialObject);
 
-    return true;
+    return $lActivity;
   }
 
   /**
