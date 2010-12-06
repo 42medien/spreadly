@@ -63,7 +63,8 @@ class DealForm extends BaseDealForm
     $this->validatorSchema->setPostValidator(new sfValidatorAnd(
       array(
         new CouponQuantityValidator(),
-        new EndDateValidator()
+        new EndDateValidator(),
+        new OverlappingDealValidator()
       ))
     );
     

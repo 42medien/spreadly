@@ -16,31 +16,40 @@ class DealTable extends Doctrine_Table
   {
     return Doctrine_Core::getTable('Deal');
   }
-
-  public static function getOverlappingDeals($pOtherDeal) {
-    $lDomainProfile = $pOtherDeal->getDomainProfile();
-    $lS = $pOtherDeal->getStartDate();
-    $lE = $pOtherDeal->getEndDate();
-
+  
+  public static function getOverlappingDealsByParams($pDealId, $pDomainProfileId, $pStart, $pEnd) {
     $lQuery = Doctrine_Query::create()
                 ->from('Deal d')
                 ->where(
-                  'd.id != ? AND '.
                   'd.domain_profile_id = ? AND '.
                   'd.deal_state != "trashed" AND ('.
                   '(d.start_date > ? AND d.start_date <= ?) OR '.
                   '(d.start_date <= ? AND d.end_date >= ?))',
 
-                  array($pOtherDeal->getId(),
-                        $lDomainProfile->getId(),
-                        $lS, $lE,
-                        $lS, $lS));
-
+                  array($pDomainProfileId,
+                        $pStart."", $pEnd."",
+                        $pStart."", $pStart.""));
+    
+    if(!empty($pDealId)) {
+      $lQuery->andWhere('d.id != ?', array($pDealId));
+    }
     return $lQuery->execute();
+  }
+  
+  public static function getOverlappingDeals($pOtherDeal) {
+    return self::getOverlappingDealsByParams($pOtherDeal->getId(), 
+      $pOtherDeal->getDomainProfile()->getId(),
+      $pOtherDeal->getStartDate(),
+      $pOtherDeal->getEndDate());
   }
 
   public static function isOverlapping($pOtherDeal) {
     $lDeals = self::getOverlappingDeals($pOtherDeal);
+    return count($lDeals)!=0;
+  }
+  
+  public static function isOverlappingByParams($pDealId, $pDomainProfileId, $pStart, $pEnd) {
+    $lDeals = self::getOverlappingDealsByParams($pDealId, $pDomainProfileId, $pStart, $pEnd);
     return count($lDeals)!=0;
   }
 
