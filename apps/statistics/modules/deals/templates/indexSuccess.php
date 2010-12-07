@@ -10,7 +10,7 @@
 		<?php //include_partial('deals/deal_in_process', array('pIsNew' => false));?>
   </div>
 	<div class="content-box" id="deal-table-box">
-		<?php if($pDeals) { ?>
+		<?php if(count($pDeals) > 0) { ?>
 			<?php include_partial('deals/deal_table', array('pDeals' => $pDeals)); ?>
 		<?php } ?>
 	</div>
