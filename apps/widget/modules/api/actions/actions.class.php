@@ -41,9 +41,22 @@ class apiActions extends sfActions {
     if (trim($request->getParameter('serv')) == '' || empty($this->lIdentitysSent)) {
       $this->status = 450;
       $this->success = false;
+      $this->message = "NO_SERVICES_ERROR";
     }
 
     $this->lDeal = DealTable::getActiveDealByUrlAndUserId($this->lUrl, $this->getUser()->getUserId());
+
+    if ($this->lDeal && $this->success == true) {
+      if($request->getParameter('coupon-accept-tod', null)){
+      	$this->status = 200;
+      	$this->success = true;
+      } else {
+      	$this->status = 700;
+      	$this->message = 'ACCEPT_TERMS_OF_DEAL_ERROR';
+      	$this->success = false;
+      }
+    }
+
 
     $this->lType = $request->getParameter('type');
     $this->lLikeDis = $request->getParameter('likedis');
@@ -69,14 +82,6 @@ class apiActions extends sfActions {
     $this->setLayout(false);
     $this->setTemplate(false);
     $this->getResponse()->setContentType('application/json');
-
-    if ($this->lDeal) {
-      if($request->getParameter('coupon-accept-tod', null)){
-      	$this->status = 200;
-      } else {
-      	$this->status = 700;
-      }
-    }
 
     if ($this->status == 200) {
       $lActivity = YiidActivityTable::saveLikeActivitys($this->getUser()->getId(),

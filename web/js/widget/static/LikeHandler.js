@@ -70,7 +70,7 @@ var StaticLike = {
       }
     } else {
       jQuery('.error').remove();
-      jQuery('#static-like-form').prepend('<p class="error">'+i18n.get('NO_SERVICES_ERROR')+'</p>');
+      jQuery('#static-like-form').prepend('<p class="error">'+i18n.get(pResponse.message)+'</p>');
     }
     OnLoadGrafic.hideGrafic();
   },

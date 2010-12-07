@@ -181,6 +181,8 @@ a.question_link{text-decoration: underline !important;}
 #agb_text a, #agb_text p{line-height: 16px;}
 #user-line h1{font-size: 16px;}
 
+.error{ color: red;}
+
 /***************popup******************/
 
 .deal-box {
