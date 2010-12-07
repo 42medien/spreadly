@@ -37,7 +37,7 @@ class dealsComponents extends sfComponents {
 
       $lCoupons = $lDeal->getCoupons();
       if(count($lCoupons) > 0){
- 				$this->pDefaultCode = $lCoupons[0];
+ 				$this->pDefaultCode = $lCoupons[0]->getCode();
       } else {
       	$this->pDefaultCode = $lI18n->__('Coupon Code');
       }
