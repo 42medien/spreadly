@@ -1,6 +1,5 @@
 <?php
 include('inc/config.inc.php');
-include('inc/DealUtils.php');
 include('inc/WidgetUtils.php');
 include('inc/i18n.php');
 
