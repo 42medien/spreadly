@@ -1,0 +1,3 @@
+all:
+  components:
+    navbar:  [auth, navbar]
