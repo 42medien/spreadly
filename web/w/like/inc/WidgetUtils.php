@@ -277,35 +277,6 @@ class DealUtils {
     return false;
   }
 
-  public static function checkHostActive($pUrl, $pUserId, $pDealId) {
-    $pUrl = str_replace(" ", "+", $pUrl);
-    $pUrl = UrlUtils::skipTrailingSlash($pUrl);
-
-    $host = parse_url($pUrl, PHP_URL_HOST);
-
-    $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
-    $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, YiidActivityObjectPeer::MONGO_COLLECTION);
-
-    $cond = array(
-      "host" => $host,
-      "start_date" => array('$lte' => $today),
-      "end_date" => array('$gte' => $today)
-    );
-    $result = $col->find($cond)->limit(1)->sort(array("start_date" => -1));
-
-    $deal = $result->getNext();
-
-    if ($deal && ($deal["is_unlimited"] == true || $deal['remaining_coupon_quantity'] > 0)) {
-      // check if activity already liked
-
-      // check if domain already liked
-
-      return $deal;
-    }
-
-    return false;
-  }
-
   private static function getCollection() {
     $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
     return $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, self::MONGO_COLLECTION);
