@@ -54,7 +54,11 @@ class Deal extends BaseDeal {
     parent::_set('coupon_quantity', $pQuantity);
     $this->fireQuantityChangedEvent();
   }
-  
+
+  public function setCouponClaimedQuantity($pQuantity) {
+    parent::_set('coupon_claimed_quantity', $pQuantity);
+    $this->fireQuantityChangedEvent();
+  }
 
   public function popCoupon() {
     $code = null;
@@ -132,10 +136,7 @@ class Deal extends BaseDeal {
       $lNewEntries += $pNumberOfCodes;
     }
 
-
-
     $this->setCouponQuantity($lCouponQuantity+$lNewEntries);
-    
 
     $this->save();
   }
