@@ -50,16 +50,16 @@ class DealForm extends BaseDealForm
       'sf_guard_user_id' => new sfValidatorInteger(array('required' => false), array('required' => $lI18n->__('Required'))),
       'start_date'        => new sfValidatorPass(array('required' => true, 'trim' => true), array('required' => $lI18n->__('Required'))),
       'end_date'          => new sfValidatorPass(array('required' => true, 'trim' => true), array('required' => $lI18n->__('Required'))),
-      'summary'           => new sfValidatorString(array('max_length' => 40, 'required' => true, 'trim' => true), array('required' => $lI18n->__('Required'))),
-      'description'       => new sfValidatorString(array('max_length' => 80, 'required' => true, 'trim' => true), array('required' => $lI18n->__('Required'))),
-      'button_wording'    => new sfValidatorString(array('max_length' => 35, 'required' => true, 'trim' => true), array('required' => $lI18n->__('Required'))),
+      'summary'           => new sfValidatorString(array('max_length' => 40, 'required' => true, 'trim' => true), array('required' => $lI18n->__('Required'), 'max_length' => $lI18n->__('To long'))),
+      'description'       => new sfValidatorString(array('max_length' => 80, 'required' => true, 'trim' => true), array('required' => $lI18n->__('Required'), 'max_length' => $lI18n->__('To long'))),
+      'button_wording'    => new sfValidatorString(array('max_length' => 35, 'required' => true, 'trim' => true), array('required' => $lI18n->__('Required'), 'max_length' => $lI18n->__('To long'))),
       'coupon_quantity'    => new sfValidatorInteger(array('required' => false, 'trim' => true)),
       'coupon_type'       => new sfValidatorChoice(array('choices' => array(0 => 'single', 1 => 'multiple'))),
       'redeem_url'        => new sfValidatorString(array('max_length' => 512, 'required' => false, 'trim' => true)),
       'tos_accepted'      => new sfValidatorBoolean(array('required' => true, 'trim' => true), array('required' => $lI18n->__('Required'))),
       'terms_of_deal'     => new sfValidatorUrl(array('max_length' => 512, 'required' => true, 'trim' => true), array('required' => $lI18n->__('Required'), 'invalid' => $lI18n->__('Invalid Url')))
     ));
-    
+
     $this->validatorSchema->setPostValidator(new sfValidatorAnd(
       array(
         new CouponQuantityValidator(),
@@ -67,7 +67,7 @@ class DealForm extends BaseDealForm
         new OverlappingDealValidator()
       ))
     );
-    
+
     //$this->widgetSchema->setNameFormat('deal[%s]');
   }
 }

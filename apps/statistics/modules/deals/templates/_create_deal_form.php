@@ -93,11 +93,14 @@
 						<div class="form-row">
 							<div class="label-box">
 								<?php echo $pForm['deal']['start_date']->renderLabel();?>
-								<?php echo $pForm['deal']['end_date']->renderError();?>
-								<?php echo $pForm['deal']['start_date']->renderError();?>
+
 							</div>
 							<?php echo $pForm['deal']['start_date']->render();?> -
 							<?php echo $pForm['deal']['end_date']->render();?>
+							<div style="padding-left: 106px;">
+								<?php echo $pForm['deal']['end_date']->renderError();?>
+								<?php echo $pForm['deal']['start_date']->renderError();?>
+							</div>
 						</div>
 						<div class="form-row">
 							<div class="label-box">
