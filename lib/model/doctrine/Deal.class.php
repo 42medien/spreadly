@@ -54,6 +54,7 @@ class Deal extends BaseDeal {
     parent::_set('coupon_quantity', $pQuantity);
     $this->fireQuantityChangedEvent();
   }
+  
 
   public function popCoupon() {
     $code = null;
@@ -79,8 +80,18 @@ class Deal extends BaseDeal {
            $this->getCouponQuantity()==DealTable::COUPON_QUANTITY_UNLIMITED;
   }
 
-  private static function elementEmpty($pElement) {
-    return empty($pElement);
+  private function allElementsEmpty($array) {
+    $lAllEmpty = true;
+    foreach ($array as $element) {
+      if(!empty($element)) {
+        $lAllEmpty = false;
+      }
+    }
+    return $lAllEmpty;
+  }
+  
+  private static function compactArray($element) {
+    return !empty($element);
   }
 
   private function saveMultipleCoupons($params, $pIsAdding=false) {
@@ -96,22 +107,18 @@ class Deal extends BaseDeal {
       $couponString = preg_replace('/\s/', '', $couponString);
       $codes = explode(',', $couponString);
     }
-
-    //wenn alle elemente in dem array leer sind
-    $lAllEmpty = array_filter($codes, 'Deal::elementEmpty');
-
-    if(!$lAllEmpty) {
-      foreach ($codes as $code) {
-        if(!empty($code)) {
-          $c = new Coupon();
-          $c->setCode($code);
-          $c->setDealId($this->getId());
-          $c->save();
-        }
+    
+    $codes = array_filter($codes, 'Deal::compactArray');
+    
+    foreach ($codes as $code) {
+      if(!empty($code)) {
+        $c = new Coupon();
+        $c->setCode($code);
+        $c->setDealId($this->getId());
+        $c->save();
       }
-
-      $this->saveQuantities(count($codes), (empty($params['quantity']) ? 0 : intval($params['quantity'])), $pIsAdding);
     }
+    $this->saveQuantities(count($codes), (empty($params['quantity']) ? 0 : intval($params['quantity'])), $pIsAdding);
 
     return $this->getCouponQuantity();
   }

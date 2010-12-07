@@ -60,6 +60,32 @@ class CouponTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals(6, $this->table->count());
     $this->assertEquals(6, $this->multiple->getCouponQuantity());
   }
+
+  public function testSaveMultipleEndingWithCommasOrLinebreaks() {
+    $codes = "xxxyyy, yyyxxx,";
+    $this->assertEquals(0, $this->multiple->getCouponQuantity());
+    $this->multiple->saveInitialCoupons(array("multiple_codes" => $codes));
+    $this->assertEquals(2, $this->multiple->getCouponQuantity());
+    $this->assertEquals(2, $this->table->count());
+    $this->assertNotNull($this->table->findOneBy('code', 'yyyxxx'));
+    $this->multiple->refresh();
+    $this->assertEquals(2, $this->table->count());
+    $this->assertEquals(2, $this->multiple->getCouponQuantity());
+    
+    $codes = "aaabbb
+    cccddd
+    
+    eeefff
+    
+    ";
+
+    $this->multiple->addMoreCoupons(array("multiple_codes" => $codes));
+    $this->assertEquals(5, $this->table->count());
+    $this->assertNotNull($this->table->findOneBy('code', 'eeefff'));
+    $this->multiple->refresh();
+    $this->assertEquals(5, $this->table->count());
+    $this->assertEquals(5, $this->multiple->getCouponQuantity());
+  }
   
   public function testAddMultipleCoupons() {
     $this->assertEquals(0, $this->multiple->getCouponQuantity());

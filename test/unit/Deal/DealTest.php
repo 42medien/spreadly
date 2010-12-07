@@ -340,9 +340,9 @@ class DealTest extends BaseTestCase {
   }
 
   public function testGetActiveCssClass() {
-    $this->assertEquals('', $this->past->getActiveCssClass());
+    $this->assertEquals('deal_inactive', $this->past->getActiveCssClass());
     $this->assertEquals('deal_active', $this->active->getActiveCssClass());
-    $this->assertEquals('', $this->future->getActiveCssClass());
+    $this->assertEquals('deal_inactive', $this->future->getActiveCssClass());
   }
 
   public function testOverlapping() {
@@ -404,14 +404,14 @@ class DealTest extends BaseTestCase {
     $this->assertFalse(DealTable::isOverlapping($this->future));
   }
 
-  public function testGetActiveDealByUrl() {
+  public function testGetActiveDealByHost() {
     sfContext::getInstance()->getEventDispatcher()->connect("deal.event.pause", array('DealListener', 'updateMongoDeal'));
     $this->active->pause();
     sfContext::getInstance()->getEventDispatcher()->connect("deal.event.resume", array('DealListener', 'updateMongoDeal'));
     $this->active->resume();
 
     $url = $this->active->getDomainProfile()->getDomain();
-    $deal = DealTable::getActiveDealByUrl($url);
+    $deal = DealTable::getActiveDealByHost($url);
 
     $this->assertEquals($this->active->getId(), $deal->getId());
   }
