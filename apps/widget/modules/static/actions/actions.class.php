@@ -20,6 +20,7 @@ class staticActions extends sfActions {
   public function executeLike(sfWebRequest $request) {
     if ($request->getParameter("url", null)) {
       $this->getUser()->setAttribute("static_like_with_params", $request->getUri(), "popup");
+      $this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "popup");
     } elseif ($lUrl = $this->getUser()->getAttribute("static_like_with_params", null, "popup")) {
       $this->redirect($lUrl);
     }

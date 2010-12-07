@@ -23,5 +23,7 @@ class popupComponents extends sfComponents
     $this->pContext = $request->getParameter("widgetcontext", $request->getParameter('module'));
     $this->pUser = $this->getUser()->getUser();
   }
+
+  public function executeNavbar(sfWebRequest $request) {}
 }
 ?>

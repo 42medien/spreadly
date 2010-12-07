@@ -17,11 +17,11 @@
 
       <?php include_partial('global/branding'); ?>
 
-      <div id="nav_main">
-        <?php if ($sf_user->hasFlash('headline')) { ?>
-          <?php include_partial('global/headline'); ?>
-        <?php } ?>
-      </div>
+      <?php
+      if ($this->hasComponentSlot('navbar')) {
+        include_component_slot('navbar');
+      }
+      ?>
 
       <div id="content">
 

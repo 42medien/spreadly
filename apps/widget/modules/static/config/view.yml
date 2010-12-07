@@ -1,7 +1,10 @@
 all:
   stylesheets:
   javascripts:
-  
+
+  components:
+    navbar:  [static, navbar]
+
 likeSuccess:
   components:
     content_supp: [popup, welcome_user]

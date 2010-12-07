@@ -2,6 +2,9 @@ all:
   stylesheets:
   javascripts:
 
+  components:
+    navbar:  [popup, navbar]
+
 signinSuccess:
   components:
     content_supp: [popup, spread_description]
