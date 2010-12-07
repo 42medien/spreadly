@@ -32,10 +32,14 @@ EOF;
    * import it in own db
    */
   protected function execute($arguments = array(), $options = array()) {
-    $this->logSection('yiid', 'import i18n db');
-    $this->getFilesystem()->execute("wget http://yiid:affen2010@staging.yiiddev.com/service/i18n.sql");
-    $this->getFilesystem()->execute("mysql -u yiid_i18n -pfdsmolds32dfs yiid_i18n < i18n.sql");
-    $this->getFilesystem()->execute("rm ./i18n.sql");
-    // add your code here
+    // run only in dev mode
+    if ($options['env'] == "dev") {
+      $this->logSection('yiid', 'import i18n db');
+      $this->getFilesystem()->execute("wget http://yiid:affen2010@staging.yiiddev.com/service/i18n.sql");
+      $this->getFilesystem()->execute("mysql -u yiid_i18n -pfdsmolds32dfs yiid_i18n < i18n.sql");
+      $this->getFilesystem()->execute("rm ./i18n.sql");
+    } else {
+      throw new sfException(sprintf('Please run the I18nSyncTask only in the dev environment'));
+    }
   }
 }
