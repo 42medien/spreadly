@@ -181,10 +181,38 @@ class CouponTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals(4, $this->table->count());
   }
 
+  public function testPopUnlimitedCoupons() {
+    $this->singleUnlimited->saveInitialCoupons(array("single_code" => "xxyyzz"));
+    $this->assertEquals("xxyyzz", $this->singleUnlimited->popCoupon());
+    $this->assertEquals("xxyyzz", $this->singleUnlimited->popCoupon());
+    $this->assertEquals("xxyyzz", $this->singleUnlimited->popCoupon());
+    $this->assertEquals("xxyyzz", $this->singleUnlimited->popCoupon());
+    $this->assertEquals("xxyyzz", $this->singleUnlimited->popCoupon());
+    $this->assertEquals("xxyyzz", $this->singleUnlimited->popCoupon());
+  }
+
+  public function testPopSingle100Coupons() {
+    $this->single100->saveInitialCoupons(array("single_code" => "xxyyzz"));
+    $this->assertEquals("xxyyzz", $this->single100->popCoupon());
+    $this->assertEquals("xxyyzz", $this->single100->popCoupon());
+    $this->assertEquals("xxyyzz", $this->single100->popCoupon());
+    $this->assertEquals("xxyyzz", $this->single100->popCoupon());
+    $this->assertEquals("xxyyzz", $this->single100->popCoupon());
+    $this->assertEquals("xxyyzz", $this->single100->popCoupon());
+  }
+  
+  public function testPopMultipleCoupons() {
+    $this->multiple->saveInitialCoupons(array("multiple_codes" => "blahh,blubb,hulli"));
+    $this->assertEquals("blahh", $this->multiple->popCoupon());
+    $this->assertEquals("blubb", $this->multiple->popCoupon());
+    $this->assertEquals("hulli", $this->multiple->popCoupon());
+  }
+  
   public function testRemainingCouponCountAfterAddingMore() {
     $this->assertEquals(0, $this->singleUnlimited->saveInitialCoupons(array("single_code" => "xxyyzz")));
     $this->assertEquals(100, $this->single100->saveInitialCoupons(array("single_code" => "aabbcc")));
     $this->assertEquals(3, $this->multiple->saveInitialCoupons(array("multiple_codes" => "blahh,blubb,hulli")));
+    $this->assertEquals(3, $this->multiple->getCouponQuantity());
     
     $this->assertEquals("xxyyzz", $this->singleUnlimited->popCoupon());
     $this->assertEquals(0, $this->singleUnlimited->addMoreCoupons(array("quantity" => 3)));
@@ -199,10 +227,38 @@ class CouponTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals("blahh", $this->multiple->popCoupon());
 
     $this->assertEquals(5, $this->multiple->addMoreCoupons(array("multiple_codes" => "harhar,blabla")));
+    $this->assertEquals(5, $this->multiple->getCouponQuantity());
+
     $this->assertEquals(4, $this->multiple->getRemainingCouponQuantity());
 
     $this->assertEquals(6, $this->table->count());
+
+    $this->assertEquals(5, $this->multiple->getCouponQuantity());
+
+    $this->assertEquals(7, $this->multiple->addMoreCoupons(array("multiple_codes" => "harhar,blabla,   ,  ,")));    
+    $this->assertEquals(9, $this->multiple->addMoreCoupons(array("multiple_codes" => "harhar
+    blabla
+
+    ")));
+
+    $this->assertEquals(9, $this->multiple->getCouponQuantity());
+    $this->assertEquals(8, $this->multiple->getRemainingCouponQuantity());
+
+    $this->assertEquals(10, $this->table->count());
     
+    $this->multiple->popCoupon();
+    $this->assertEquals(9, $this->table->count());
+    $this->multiple->popCoupon();
+    $this->multiple->popCoupon();
+    $this->multiple->popCoupon();
+    $this->multiple->popCoupon();
+    $this->multiple->popCoupon();
+    $this->multiple->popCoupon();
+    $this->multiple->popCoupon();
+    
+    $this->assertEquals(0, $this->multiple->getRemainingCouponQuantity());
+    
+    $this->assertEquals(2, $this->table->count());
   }
     
   public function testClaimedCouponCount() {
@@ -281,6 +337,18 @@ class CouponTest extends PHPUnit_Framework_TestCase {
     $this->multiple->refresh();
     $this->assertEquals(6, $this->table->count());
     $this->assertEquals(6, $this->multiple->getCouponQuantity());
+    
+    $this->assertEquals(8, $this->multiple->addMoreCoupons(array("multiple_codes" => "harhar
+    blabla
+    
+    ")));
+    $this->assertEquals(8, $this->table->count());
+    $this->assertEquals(8, $this->multiple->getCouponQuantity());
+
+    $this->assertEquals(10, $this->multiple->addMoreCoupons(array("multiple_codes" => "soso, sisi, ")));
+    $this->assertEquals(10, $this->table->count());
+    $this->assertEquals(10, $this->multiple->getCouponQuantity());
+    
   }
 
   

@@ -58,20 +58,17 @@ class Deal extends BaseDeal {
 
   public function popCoupon() {
     $code = null;
-    if($this->isUnlimited()) {
-      $coupons = $this->getCoupons();
-      $code = $coupons[0]->getCode();
-      $this->setCouponClaimedQuantity($this->getCouponClaimedQuantity()+1);
-    } elseif($this->getRemainingCouponQuantity()>0) {
-      $coupons = $this->getCoupons();
-      $code = $coupons[0]->getCode();
-      $this->setCouponClaimedQuantity($this->getCouponClaimedQuantity()+1);
+    $coupon = CouponTable::getInstance()->findOneByDealId($this->getId());
+
+    if($coupon) {
+      $code = $coupon->getCode();      
       if($this->getCouponType()==DealTable::COUPON_TYPE_MULTIPLE) {
-        $coupons[0]->delete();
-        unset($coupons[0]);
+        $coupon->delete();
       }
+      $this->setCouponClaimedQuantity($this->getCouponClaimedQuantity()+1);
+      $this->save();
     }
-    $this->save();
+    
     return $code;
   }
 
@@ -108,7 +105,7 @@ class Deal extends BaseDeal {
       $codes = explode(',', $couponString);
     }
     
-    $codes = array_filter($codes, 'Deal::compactArray');
+    $codes = array_filter($codes, array('Deal', 'compactArray'));
     
     foreach ($codes as $code) {
       if(!empty($code)) {
@@ -135,7 +132,10 @@ class Deal extends BaseDeal {
       $lNewEntries += $pNumberOfCodes;
     }
 
+
+
     $this->setCouponQuantity($lCouponQuantity+$lNewEntries);
+    
 
     $this->save();
   }
