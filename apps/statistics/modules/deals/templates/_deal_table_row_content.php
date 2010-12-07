@@ -5,10 +5,10 @@
       	<?php if($pDeal->isActive()) { ?>
       		<?php echo image_tag('/img/global/24x24/shopping_cart_accept.png', array('title' => __('Active Deal')))?>
       	<?php } else { ?>
-      		<?php echo image_tag('/img/global/24x24/accept.png', array('title' => __('Deal approved')))?>
+      		<?php echo image_tag('/img/global/24x24/remove_from_shopping_cart.png', array('title' => __('Deal approved')))?>
       	<?php } ?>
       </td>
-      <td>
+      <td class="deal-summary-col">
       	<a href="<?php echo url_for('/') ?>"><?php echo $pDeal->getSummary(); ?></a>
       	</td>
       <td><?php echo $pDeal->getDomainProfile()->getUrl(); ?></td>
