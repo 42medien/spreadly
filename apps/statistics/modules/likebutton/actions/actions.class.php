@@ -231,7 +231,7 @@ class likebuttonActions extends sfActions
     }
 
     //if width ist not set or no number, take default width
-    if(StringUtils::isNumber($lParams['w'])){
+    if(isset($lParams['w']) && StringUtils::isNumber($lParams['w'])){
       $lWidth = $lParams['w'];
     }
 

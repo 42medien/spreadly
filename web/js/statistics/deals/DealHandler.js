@@ -76,6 +76,15 @@ var DealForm = {
   init : function() {
     debug.log('[CreateDealForm][init]');
     
+    // inits the form-save
+    DealForm.save();
+    
+    // inits the filling of the fields after selecting a domain-profile
+    DealForm.selectDomainProfile();
+    DealForm.toggleCouponType();
+    DealForm.setRadioButtons();
+    DealForm.countCodes();    
+    
     // init datetime-picker for start and enddate
     jQuery('input#deal_start_date').datetime({
       userLang : 'de'
@@ -93,20 +102,12 @@ var DealForm = {
     jQuery('#deal_button_wording').toggleValue();
     jQuery('#deal_summary').toggleValue();
     jQuery('#deal_description').toggleValue();
-    
+
+    jQuery('.mirror-value').mirrorValue();    
     // limits the text-values
-    //jQuery('#deal_button_wording').limit('35', '#button_wording_counter');
-    //jQuery('#deal_summary').limit('40', '#summary_counter');
-    //jQuery('#deal_description').limit('80', '#description_counter');
-    jQuery('.mirror-value').mirrorValue();
-    // inits the form-save
-    DealForm.save();
-    
-    // inits the filling of the fields after selecting a domain-profile
-    DealForm.selectDomainProfile();
-    DealForm.toggleCouponType();
-    DealForm.setRadioButtons();
-    DealForm.countCodes();
+    jQuery('#deal_button_wording').limit(35, '#button_wording_counter');
+    jQuery('#deal_summary').limit(40, '#summary_counter');
+    jQuery('#deal_description').limit(80, '#description_counter');
   },
   
   /**
@@ -116,26 +117,28 @@ var DealForm = {
    */
   save: function() {
     debug.log('[DealForm][save]');
-    var options = {
-      beforeSubmit : OnLoadGrafic.showGrafic,
-      url : '/deals/save',
-      data : {
-        ei_kcuf : new Date().getTime()
-      },
-      type : 'POST',
-      dataType : 'json',
-      // resetForm: lReset,
-      success : function(pResponse) {
-        Deal.showContent(pResponse.html);
-        DealTable.update();
-        DealForm.init();
-        OnLoadGrafic.hideGrafic();
-      }
-    };
     
-    jQuery('#deal_form').submit(function() {
-      jQuery('#deal_form').ajaxSubmit(options);
-      return false;
+    jQuery('#proceed-deal-button').bind('click', function() {
+      var options = {
+        //beforeSubmit : OnLoadGrafic.showGrafic,
+        url : '/deals/save',
+        data : {
+          ei_kcuf : new Date().getTime()
+        },
+        type : 'POST',
+        dataType : 'json',
+        // resetForm: lReset,
+        success : function(pResponse) {
+          debug.log('response');
+          Deal.showContent(pResponse.html);
+          DealTable.update();
+          DealForm.init();
+          OnLoadGrafic.hideGrafic();
+        }
+      };
+      
+       jQuery('#deal_form').ajaxSubmit(options);
+       return false;
     });
   },
   

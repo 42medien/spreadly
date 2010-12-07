@@ -4,15 +4,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <link rel="shortcut icon" href="/img/global/favicon_16x16.ico" />
-    <?php include_http_metas() ?>
-    <?php include_metas() ?>
-    <?php include_title() ?>
+
     <link rel="stylesheet" href="/js/100_main/vendor/jquery_ui_datepicker/smothness/jquery_ui_datepicker.css" type="text/css" />
     <link rel="stylesheet" href="/css/vendor/tipTip.css" type="text/css" />
     <link rel="stylesheet" href="/css/vendor/colorpicker.css" type="text/css" />
+    <link rel="stylesheet" href="/css/widget/Button.css" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="/js/100_main/vendor/jquery_ui_datepicker/timepicker_plug/css/style.css" />
 		<link rel="stylesheet" type="text/css" href="/js/100_main/vendor/jquery_ui_datepicker/smothness/jquery_ui_datepicker.css" />
     <link rel="stylesheet/less" href="<?php echo sfConfig::get("app_settings_url");?>/less/main.less" type="text/css" />
+
 
     <script type="text/javascript" src="/js/100_main/include/statistics-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
     <script type="text/javascript" src="/js/100_main/global/106_jquery.mirrorValue.js"></script>

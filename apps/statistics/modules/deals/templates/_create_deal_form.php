@@ -62,11 +62,33 @@
 		  			</div>
 	    			<?php echo $pForm['deal']['button_wording']->render(array('class' => 'mirror-value'));?>
 	  			</div>
+
+<!-- ********** button-preview ********** -->
 	  			<div class="clearfix preview-deal-box" id="preview-deal-button">
-      			<img src="/img/global/yiid-btn-like-en.png" class="left"/>
-      			<div class="deal_button_wording-mirror">
-      				dat wat im button zu stehn hat
-      			</div>
+					  <div id="container">
+					    <div class="clearfix">
+					      <div id="container_like" class="left">
+					        <div class="light_bg_118 button_full_outer clearfix" id="normal_button">
+					          <div id="service_area" class="left">
+					            <div id="service_twitter_small_enabled" class="service_icon_small left"></div>
+					            <div id="service_facebook_small_enabled" class="service_icon_small right"></div>
+					            <div id="service_linkedin_small_enabled" class="service_icon_small left"></div>
+					            <div id="service_google_small_enabled" class="service_icon_small right"></div>
+					          </div>
+
+					          <div class="hover_bg left" id="like_area">
+					            <a class="like_text" title="<?php echo __("Deal"); ?>">
+					              Deal<span class="like_icon">&nbsp;</span>
+					            </a>
+					          </div>
+					        </div>
+					      </div>
+
+					      <div id="additional_text_area_like" class="left big_space_to_left deal_button_wording-mirror">
+					        <?php echo __('...und freien Probemonat gewinnen'); ?>
+					      </div>
+					    </div>
+					  </div>
 	  			</div>
   			</div>
 
