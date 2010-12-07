@@ -14,7 +14,7 @@
   </div>
 </div>
 <div class="meta-label" id="accept-tod">
-  <p><?php echo __("This is a coupon of %company% (%link%)", array("%company%" => $pDeal->getDomainProfile()->getUrl(), "%link%" => link_to('Imprint', $pDeal->getDomainProfile()->getImprintUrl(), array("target" => "_blank")))); ?></p>
+  <p><?php echo __("This is a coupon of %company% (%link%)", array("%company%" => $pDeal->getDomainProfile()->getUrl(), "%link%" => link_to(__('Legal'), $pDeal->getDomainProfile()->getImprintUrl(), array("target" => "_blank")))); ?></p>
 	<input type="checkbox" name="coupon-accept-tod" /><?php echo __('I accept the %terms%', array('%terms%' => link_to(__('Terms of Deal'), $pDeal->getTermsOfDeal(), array("target" => "_blank")))); ?>
 </div>
 <?php } ?>

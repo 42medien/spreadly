@@ -7,7 +7,7 @@
     <p><strong><?php echo $pYiidActivity->getCCode(); ?></strong></p>
   </div>
   <div class="coupon-foot">
-    <p><?php echo __("Be sure to use it until %date. Visit us here:", array("%date" =>format_date($lDeal->getEndDate()))); ?></p>
+    <p><?php echo __("Please go to the following url and redeem your coupon latest until %date%:", array("%date%" =>format_date($lDeal->getEndDate()))); ?></p>
     <p><?php echo link_to($lDeal->getRedeemUrl(), $lDeal->getRedeemUrl(), array("target" => "_blank")); ?></p>
   </div>
 </div>

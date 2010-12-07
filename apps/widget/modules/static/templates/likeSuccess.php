@@ -56,7 +56,7 @@
             <span class="sharing_button likeit_button">&nbsp;</span>
             <?php echo __($pType); ?>
           </div>
-          <?php if($pFull) {?>
+          <?php if($pFull && !$pDeal) {?>
 	          <div class="rounded_corners content_main_border popup_button" id="static-dislike-button">
 	            <span class="sharing_button dislikeit_button" id="static-dislike-button">&nbsp;</span>
 	          </div>
