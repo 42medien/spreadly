@@ -313,6 +313,7 @@ var DealTable = {
         success : function(pResponse) {
           if (pResponse.success === true) {
             DealTable.showRow(lCssId, pResponse.html, pResponse.state, pResponse.classes);
+            DealTable.init();
           } else {
             // alert if there are validation-errors
             alert(pResponse.error);
