@@ -33,7 +33,7 @@ class Deal extends BaseDeal {
   }
   
   public function getCssClasses() {
-    return $this->getState().' '.$this->getActiveCssClass();
+    return $this->getState().' '.($this->getState()=='approved' ? $this->getActiveCssClass() : '');
   }
   
   public function isActive() {
