@@ -16,7 +16,7 @@
         <?php echo link_to('Permissions', url_for('sf_guard_permission')) ?> |
       </span>
       <span class="navigation_text">
-        <?php echo link_to('Deals', url_for('deal')) ?> |
+        <?php echo link_to('Deals', url_for('deal', array("sort" => "updated_at", "sort_type" => "desc"))) ?> |
       </span>
       <span class="navigation_text">
         <?php echo link_to(__('Logout'), '@sf_guard_signout'); ?>

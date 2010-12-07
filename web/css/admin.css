@@ -101,3 +101,6 @@ th
 {
   width: auto;
 }
+.sf_admin_filter {
+  display: none;
+}
