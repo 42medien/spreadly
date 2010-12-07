@@ -6,10 +6,9 @@ prod:
     no_script_name:         true
     logging_enabled:        false
 
-
 dev:
   .settings:
-    error_reporting:        <?php echo (E_ALL | E_STRICT)."\n" ?>
+    error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_NOTICE)."\n" ?>
     web_debug:              true
     cache:                  false
     no_script_name:         false
@@ -55,4 +54,4 @@ all:
 
     ## load common helpers
     standard_helpers:       [Cdn, I18N, Partial]
-    check_lock:             on 
+    check_lock:             on
