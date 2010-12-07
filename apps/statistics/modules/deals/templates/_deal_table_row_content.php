@@ -62,20 +62,6 @@
       </td>
 <?php } ?>
 
-<?php if($pDeal->getState() == 'trashed') { ?>
-      <td style="width: 20px;"><?php echo image_tag('/img/global/24x24/remove.png', array('title' => __('Deal deleted')))?></td>
-      <td><?php echo $pDeal->getSummary(); ?></td>
-      <td><?php echo $pDeal->getDomainProfile()->getUrl(); ?></td>
-      <td style="text-align: center;"><?php echo $pDeal->getStartDate(); ?></td>
-      <td style="text-align: center;" class="edit-col"><?php echo $pDeal->getEndDate(); ?></td>
-      <td style="text-align: center;"><?php echo $pDeal->getCouponClaimedQuantity(); ?></td>
-      <td style="text-align: center;" class="edit-col"><?php echo __($pDeal->getHumanCouponQuantity()); ?></td>
-      <td style="text-align: center;">
-      </td>
-      <td style="text-align: center;">
-      </td>
-<?php } ?>
-
 <?php if($pDeal->getState() == 'paused') { ?>
       <td style="width: 20px;"><?php echo image_tag('/img/global/24x24/clock.png', array('title' => __('Deal stopped')))?></td>
       <td>

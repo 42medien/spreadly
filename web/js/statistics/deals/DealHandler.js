@@ -312,7 +312,7 @@ var DealTable = {
         dataType : "json",
         success : function(pResponse) {
           if (pResponse.success === true) {
-            DealTable.showRow(lCssId, pResponse.html, pResponse.state);
+            DealTable.showRow(lCssId, pResponse.html, pResponse.state, pResponse.classes);
           } else {
             // alert if there are validation-errors
             alert(pResponse.error);
@@ -328,26 +328,14 @@ var DealTable = {
    * 
    * @author KM
    */
-  showRow : function(pCssId, pRow, pState) {
+  showRow : function(pCssId, pRow, pState, pClasses) {
     debug.log('[DealTable][showRow]');
     var lId = '#' + pCssId;
     jQuery(lId).empty();
-    if (jQuery(lId).hasClass('submitted')) {
-      jQuery(lId).removeClass('submitted');
-    }
-    if (jQuery(lId).hasClass('approved')) {
-      jQuery(lId).removeClass('approved');
-    }
-    if (jQuery(lId).hasClass('denied')) {
-      jQuery(lId).removeClass('denied');
-    }
-    if (jQuery(lId).hasClass('trashed')) {
-      jQuery(lId).removeClass('trashed');
-    }
-    if (jQuery(lId).hasClass('paused')) {
-      jQuery(lId).removeClass('paused');
-    }
-    jQuery(lId).addClass(pState);
+    jQuery(lId).removeClass(pState);
+    jQuery(lId).removeClass('deal_active');
+    jQuery(lId).removeClass('deal_inactive');
+    jQuery(lId).addClass(pClasses);
     jQuery(lId).append(pRow);
   },
   

@@ -286,6 +286,7 @@ class dealsActions extends sfActions
   	$this->getResponse()->setContentType('application/json');
   	$lParams = $request->getGetParameters();
   	$lDeal = DealTable::getInstance()->find($lParams['deal_id']);
+  	$lPrevState = $lDeal->getState();
   	$lError = "";
   	if($lDeal->canTransitionTo($lParams['state'])) {
     	$lDeal->transitionTo($lParams['state']);
@@ -297,7 +298,8 @@ class dealsActions extends sfActions
     		'success' => empty($lError),
     		'error' => $lError,
     		'html' => $this->getPartial('deals/deal_table_row_content', array('pDeal' => $lDeal)),
-    	  'state' => $lParams['state']
+    	  'state' => $lPrevState,
+    	  'classes' => $lDeal->getCssClasses()
     	)
     ));
   }
