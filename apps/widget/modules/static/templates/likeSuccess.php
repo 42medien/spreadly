@@ -1,6 +1,6 @@
 <?php use_helper('Text'); ?>
 
-<div class="content-box rounded_corners">
+<div class="content-box rounded_corners" id="static-popup-container">
   <?php if($pIsUrlValid) { ?>
     <div id="so_right_view" class="clearfix">
       <div id="so_detail_desc" class="clearfix">
@@ -26,28 +26,32 @@
         </div>
       <?php } ?>
 	    <?php } else { ?>
-	      <?php include_partial("deal_offer", array("pDeal" => $pDeal)); ?>
-		    <form action="" name="static-like-form" id="static-like-form" method="post">
-		      <h3 class="small_margin"><?php echo __('YOUR_NETWORKS', null, 'widget'); ?></h3>
-		      <input type="hidden" name="type" value="<?php echo $pType; ?>" />
-		      <input type="hidden" name="url" value="<?php echo $pUrl; ?>" />
-		      <input type="hidden" name="title" value="<?php echo $pTitle; ?>" />
-		      <input type="hidden" name="description" value="<?php echo $pDescription; ?>" />
-		      <?php if($pImageUrl){ ?>
-		        <input type="hidden" name="photo" value="<?php echo $pImageUrl; ?>" />
-		      <?php } ?>
-		      <ul class="normal_list clearfix" id="services_chosen">
-		      <?php foreach ($pIdentities as $lIdentity) { ?>
-		        <li id="check_<?php echo $lIdentity->getCommunity()->getCommunity(); ?>">
-		          <input type="checkbox" id="like-serv-<?php echo $lIdentity->getId(); ?>"
-		            name="like-serv-<?php echo $lIdentity->getId(); ?>" <?php echo $lIdentity->getSocialPublishingEnabled()?"checked=checked":''; ?>
-		            value="<?php echo $lIdentity->getId(); ?>" class="serv-check" />
-		          <label for="<?php echo $lIdentity->getCommunity()->getCommunity(); ?>_check" title="<?php echo $lIdentity->getProfileUri(); ?>">
-		            <?php echo truncate_text($lIdentity->getName(), 25, '...'); ?>
-		          </label>
-		        </li>
-		      <?php } ?>
-		      </ul>
+		    <form action="/api/like" name="static-like-form" id="static-like-form" method="post">
+		    	<div id="coupon-box">
+	      		<?php include_partial("deal_offer", array("pDeal" => $pDeal)); ?>
+	      	</div>
+	      	<div id="static-like-area">
+			      <h3 class="small_margin"><?php echo __('YOUR_NETWORKS', null, 'widget'); ?></h3>
+			      <input type="hidden" name="type" value="<?php echo $pType; ?>" />
+			      <input type="hidden" name="url" value="<?php echo $pUrl; ?>" />
+			      <input type="hidden" name="title" value="<?php echo $pTitle; ?>" />
+			      <input type="hidden" name="description" value="<?php echo $pDescription; ?>" />
+			      <?php if($pImageUrl){ ?>
+			        <input type="hidden" name="photo" value="<?php echo $pImageUrl; ?>" />
+			      <?php } ?>
+			      <ul class="normal_list clearfix" id="services_chosen">
+			      <?php foreach ($pIdentities as $lIdentity) { ?>
+			        <li id="check_<?php echo $lIdentity->getCommunity()->getCommunity(); ?>">
+			          <input type="checkbox" id="like-serv-<?php echo $lIdentity->getId(); ?>"
+			            name="like-serv-<?php echo $lIdentity->getId(); ?>" <?php echo $lIdentity->getSocialPublishingEnabled()?"checked=checked":''; ?>
+			            value="<?php echo $lIdentity->getId(); ?>" class="serv-check" />
+			          <label for="<?php echo $lIdentity->getCommunity()->getCommunity(); ?>_check" title="<?php echo $lIdentity->getProfileUri(); ?>">
+			            <?php echo $lIdentity->getProfileUri(); ?>
+			          </label>
+			        </li>
+			      <?php } ?>
+			      </ul>
+		      </div>
 		      <div class="rounded_corners content_main_border popup_button distance_right" id="static-like-button">
             <span class="sharing_button likeit_button">&nbsp;</span>
             <?php echo __($pType); ?>

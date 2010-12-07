@@ -19,7 +19,7 @@ class apiActions extends sfActions {
     $parentRet = parent::initialize($context, $module, $action);
     $request = $context->getRequest();
 
-    $this->html = false;
+    $this->statictype = false;
     $this->status = 200;
     $this->success = true;
     $this->message = 'success';
@@ -65,13 +65,17 @@ class apiActions extends sfActions {
    * @return unknown_type
    */
   public function executeSave_like(sfWebRequest $request) {
+  	$this->html = false;
     $this->setLayout(false);
     $this->setTemplate(false);
     $this->getResponse()->setContentType('application/json');
 
     if ($this->lDeal) {
-      // @todo validate agbs
-      // @todo set "status != 200" if it is not set
+      if($request->getParameter('coupon-accept-tod', null)){
+      	$this->status = 200;
+      } else {
+      	$this->status = 700;
+      }
     }
 
     if ($this->status == 200) {
@@ -87,13 +91,17 @@ class apiActions extends sfActions {
                                                         $this->lClickback
                                                        );
       // write success-state
-      if ($lActivity != false) {
+  		if ($lActivity) {
+        // set deal partial
+        if ($lActivity->isDeal()) {
+          $this->html = $this->getPartial('static/deal_info', array('pYiidActivity' => $lActivity));
+          $this->statictype = 'deal';
+        }
         $this->success = true;
-      } else {
-        $this->success = false;
-      }
+  		} else {
+  			$this->success = false;
+  		}
     }
-
     return  $this->sendJsonResponse();
   }
 
@@ -105,7 +113,8 @@ class apiActions extends sfActions {
       'success' => $this->success,
       'status' => $this->status,
       'message' => $this->message,
-      'html' => $this->html
+      'html' => $this->html,
+      'statictype' => $this->statictype
     )));
   }
 }

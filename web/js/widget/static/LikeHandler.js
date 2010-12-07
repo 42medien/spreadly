@@ -57,10 +57,16 @@ var StaticLike = {
   showSuccess: function(pResponse) {
     debug.log('[StaticLike][showSuccess]');
     if(pResponse.success == true) {
-      if(StaticLike.aCase == 'like') {
+      if(pResponse.statictype == 'deal') {
         StaticLike.markLiked();
+        DealCoupon.markLiked(pResponse.html);
       } else {
-        StaticLike.markDisliked();
+        if(StaticLike.aCase == 'like') {
+          StaticLike.markLiked();
+          DealCoupon.markLiked();
+        } else {
+          StaticLike.markDisliked();
+        }
       }
     } else {
       jQuery('.error').remove();
@@ -78,5 +84,11 @@ var StaticLike = {
     jQuery('#static-like-form').remove();
     jQuery('#static-disliked').show();    
   }
+};
+
+var DealCoupon = {
+  markLiked: function(pHtml) {
+    jQuery('#so_right_view').after(pHtml);
+  }    
     
 };

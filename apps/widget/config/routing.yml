@@ -76,10 +76,3 @@ dislike:
 homepage:
   url:   /
   param: { module: widget, action: index }
-
-default_index:
-  url:   /:module
-  param: { action: index }
-
-default:
-  url:   /:module/:action/*
