@@ -7,7 +7,7 @@
         <img alt="<?php echo $pUrl; ?>" width="100px" height="80px" src="<?php if(!$pImageUrl){ ?>http://communipedia.v2.websnapr.com/?url=<?php echo $pUrl; ?>&sh=80&sw=100<?php } else { echo $pImageUrl; } ?>" class="left">
 
         <h3 class="small_margin" title="<?php echo $pTitle; ?>"><?php echo truncate_text($pTitle, 30, '...'); ?></h3>
-        <p title="<?php echo $pUrl; ?>"><?php echo link_to(UrlUtils::getShortUrl($pUrl), $pUrl, array('class' => 'url')); ?></p>
+        <p title="<?php echo $pUrl; ?>"><?php echo link_to(UrlUtils::getShortUrl($pUrl), $pUrl, array('class' => 'url', 'target' => '_blank')); ?></p>
         <span class="normal_text"><?php echo truncate_text($pDescription, 400, '...'); ?></span>
       </div>
     </div>
@@ -78,9 +78,5 @@
     </div>
   <?php } ?>
   </div>
-
-<div id="see_friends_actions" class="clearfix">
-  <a href="http://www.yiid.com" target="_blank"><?php echo __('YOUR_FRIENDS_LIKES', null, 'widget'); ?></a>
-</div>
 
 <iframe src="http://widgets.<?php echo sfConfig::get("app_settings_host"); ?>/w/like/like.php?visible=false&url=dummy" border="none" width="0px" height="0px" style="border:none;width:0px;height:0px;"></iframe>

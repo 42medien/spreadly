@@ -8,7 +8,7 @@
   </div>
   <div class="coupon-foot">
     <p><?php echo __("Be sure to use it until %date. Visit us here:", array("%date" =>format_date($lDeal->getEndDate()))); ?></p>
-    <p><?php echo link_to($lDeal->getRedeemUrl(), $lDeal->getRedeemUrl()); ?></p>
+    <p><?php echo link_to($lDeal->getRedeemUrl(), $lDeal->getRedeemUrl(), array("target" => "_blank")); ?></p>
   </div>
 </div>
 <?php } ?>

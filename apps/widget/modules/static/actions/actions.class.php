@@ -14,7 +14,7 @@ class staticActions extends sfActions {
   * @param sfRequest $request A request object
   */
   public function executeIndex(sfWebRequest $request) {
-    $this->forward('default', 'module');
+    $this->redirect('@static_like');
   }
 
   public function executeLike(sfWebRequest $request) {
