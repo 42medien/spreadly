@@ -42,6 +42,7 @@ EOF;
 
     // create controllers
     $this->runTask('yiid:generate-controller', $args, array('application' => $options['application'], 'env' => $options['env']));
+    $this->runTask('yiid:generate-widget-config', array(), array('application' => $options['application'], 'env' => $options['env']));
     $this->executeDbTasks($arguments, $options);
 
     // add i18n-sync
