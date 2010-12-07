@@ -6,7 +6,7 @@ DomainProfile:
     verification_token: 'mailto+http:sha1:8f6a2b4011cf2411fdd74d08cf779848e05cdada'
     verification_count: '1'
     sfGuardUser: sfGuardUser_1
-    imprint_url: 'snirgel imprint'
+    imprint_url: 'http://www.snirgel.de/imprint'
     tos_url: null
     created_at: '2010-11-26 10:02:37'
     updated_at: '2010-11-26 10:12:23'
@@ -17,7 +17,7 @@ DomainProfile:
     verification_token: 'mailto+http:sha1:a0745eb5e590bfab355db156548daab5a3c7e73e'
     verification_count: '0'
     sfGuardUser: sfGuardUser_1
-    imprint_url: demnotizblogseinimprint
+    imprint_url: 'http://notizblog.org/imprint'
     tos_url: null
     created_at: '2010-11-26 10:02:44'
     updated_at: '2010-11-26 10:10:03'
@@ -28,7 +28,7 @@ DomainProfile:
     verification_token: 'mailto+http:sha1:2e5bca54ad50254c0ebd176aa73b521b04db34de'
     verification_count: '0'
     sfGuardUser: sfGuardUser_1
-    imprint_url: missmotzimprint
+    imprint_url: http://missmotz.de/imprint'
     tos_url: null
     created_at: '2010-11-26 10:03:00'
     updated_at: '2010-11-26 10:11:34'
