@@ -29,9 +29,13 @@ class Deal extends BaseDeal {
   }
 
   public function getActiveCssClass() {
-    return ($this->isActive() ? 'deal_active' : '');
+    return ($this->isActive() ? 'deal_active' : 'deal_inactive');
   }
-
+  
+  public function getCssClasses() {
+    return $this->getState().' '.$this->getActiveCssClass();
+  }
+  
   public function isActive() {
     $lNow = time();
     return $this->getState()=='approved' &&
