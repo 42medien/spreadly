@@ -87,7 +87,8 @@ class YiidActivityTable extends Doctrine_Table {
     foreach ($pGivenOnlineIdentitys as $lIdentityId) {
       if (in_array($lIdentityId, $pOwnedOnlineIdentitys)) {
         $lVerifiedOnlineIdentityIds[]= $lIdentityId;
-        $lOnlineIdentitys[] = OnlineIdentityTable::getInstance()->retrieveByPk($lIdentityId);
+        $senderOi = OnlineIdentityTable::getInstance()->retrieveByPk($lIdentityId);
+        $lOnlineIdentitys[] = $senderOi;
         $lServices[] = $senderOi->getCommunityId();
       }
     }
