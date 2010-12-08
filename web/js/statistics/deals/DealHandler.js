@@ -102,6 +102,7 @@ var DealForm = {
     jQuery('#deal_button_wording').toggleValue();
     jQuery('#deal_summary').toggleValue();
     jQuery('#deal_description').toggleValue();
+    jQuery('#deal_redeem_url').toggleValue();
 
     jQuery('.mirror-value').mirrorValue();    
     // limits the text-values
