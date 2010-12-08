@@ -38,7 +38,7 @@ dev:
       port:            27017
       db_name:         yiid
       collection_name:   session
-      session_name:    yiid_local
+      session_name:    yiid_dev
       session_cookie_domain: .yiid.local
       session_cookie_lifetime: 17200
 
@@ -74,7 +74,7 @@ staging:
       port:            27017
       db_name:                 yiid_dev
       collection_name:         session
-      session_name:            yiiddev_com
+      session_name:            yiid_staging
       session_cookie_domain:   .yiiddev.com
       session_cookie_lifetime: 17776000
 
