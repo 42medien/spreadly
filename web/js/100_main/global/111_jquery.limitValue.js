@@ -1,5 +1,4 @@
 /**
- * @combine platform
  * @combine statistics
  */
 jQuery.fn.limitValue = function(pLimit, pElement){
