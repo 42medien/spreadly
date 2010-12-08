@@ -170,11 +170,10 @@ class myUser extends sfBasicSecurityUser {
   public function signIn( User $user ) {
     // set the usersession
     $this->setAttribute('id', $user->getId(), 'user_session');
+    $this->setAuthenticated(true);
+    $this->clearCredentials();
     $lCredentials = explode( ',', $user->getCredentials() );
     if( count($lCredentials) != 0 ) $this->addCredentials( $lCredentials );
-    $lCredcommunities = explode( ',', $user->getCredcommunities() );
-    $this->setAttribute( "Credcommunities", $lCredcommunities );
-    $this->setAuthenticated(true);
     $this->switchLanguage($user->getCulture());
   }
 
