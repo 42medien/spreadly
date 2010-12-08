@@ -7,7 +7,7 @@ class ProjectConfiguration extends sfProjectConfiguration {
   public function setup() {
     // Register listeners for Deal events
     $prefix = "deal.event.";
-    
+
     $this->dispatcher->connect($prefix.'submit', array('DealListener', 'eventSubmit'));
     $this->dispatcher->connect($prefix.'approve', array('DealListener', 'eventApprove'));
     $this->dispatcher->connect($prefix.'deny', array('DealListener', 'eventDeny'));
@@ -22,6 +22,7 @@ class ProjectConfiguration extends sfProjectConfiguration {
     $this->dispatcher->connect('deal.couponQuantityChanged', array('DealListener', 'updateMongoDeal'));
 
     sfConfig::set( 'sf_upload_dir_name', 'uploads' );
+
     $this->enablePlugins(array(
       'sfDoctrinePlugin',
       'yiidPlugin',
@@ -30,10 +31,8 @@ class ProjectConfiguration extends sfProjectConfiguration {
       'sfDoctrineGuardPlugin',
       'sfForkedDoctrineApplyPlugin'
     ));
-         var_dump($this->dispatcher);exit;
-
   }
-  
+
   public function configureDoctrine(Doctrine_Manager $manager) {
     // yiid activity dispatcher
     $this->dispatcher->connect('new-yiid-activity', array('StatsFeeder', 'track'));

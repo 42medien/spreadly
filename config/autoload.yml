@@ -2,4 +2,6 @@ autoload:
   plugin_libs:
     path:      %SF_PLUGINS_DIR%/*/lib
     recursive: true
-    
+  listener:
+    path:      %SF_LIB_DIR%/listener
+    recursive: true

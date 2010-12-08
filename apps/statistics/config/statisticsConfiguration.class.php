@@ -3,7 +3,7 @@
 class statisticsConfiguration extends sfApplicationConfiguration
 {
   protected $aStatisticsRouting = null;
-  
+
   public function configure() {
     $prefix = "deal.event.";
     //$this->dispatcher->connect($prefix.'resume', array('DealListener', 'updateMongoDeal'));
@@ -29,12 +29,13 @@ class statisticsConfiguration extends sfApplicationConfiguration
     return $this->aStatisticsRouting;
   }
 
-  public function setup()
-  {
+  public function setup() {
     $this->enablePlugins(array(
       'sfDoctrinePlugin',
       'sfDoctrineGuardPlugin',
       'sfForkedDoctrineApplyPlugin'
     ));
+
+    parent::setup();
   }
 }
