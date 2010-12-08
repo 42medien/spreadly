@@ -106,9 +106,9 @@ var DealForm = {
 
     jQuery('.mirror-value').mirrorValue();    
     // limits the text-values
-    jQuery('#deal_button_wording').limit(35, '#button_wording_counter');
-    jQuery('#deal_summary').limit(40, '#summary_counter');
-    jQuery('#deal_description').limit(80, '#description_counter');
+    jQuery('#deal_button_wording').limitValue('35', '#button_wording_counter');
+    jQuery('#deal_summary').limitValue(40, '#summary_counter');
+    jQuery('#deal_description').limitValue(80, '#description_counter');
   },
   
   /**
