@@ -1,4 +1,8 @@
-/** @author http://www.unwrongest.com/projects/limit/ **/
+/** 
+ * @author http://www.unwrongest.com/projects/limit/ 
+ * ATTENTION: don't update. did some fixes for ie in it (KM)
+ * 
+ **/
 (function($){ 
      $.fn.extend({  
          limit: function(limit,element) {
@@ -15,9 +19,9 @@
         substring();
       });
       
-      substringFunction = "function substring(){ var val = $(self).val(); var mylength = val.length;if(mylength > limit){$(self).val($(self).val().substring(0,limit));}";
+      substringFunction = "function substring(){ var myval = $(self).val(); var mylength = myval.length; if(mylength > limit){$(self).val($(self).val().substring(0,limit));}";
       if(typeof element != 'undefined') {
-        substringFunction += "if($(element).html() != limit-mylength){$(element).html((limit-mylength<=0)?'0':limit-mylength);};"
+        substringFunction += "if($(element).html() != limit-mylength){$(element).html((limit-mylength<=0)?'0':limit-mylength);}"
       }
       substringFunction += "}";
       
