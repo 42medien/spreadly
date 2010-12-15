@@ -48,7 +48,7 @@ EOF;
    */
   private function writeWholeFile($pDir, $pFileName, $pFileMinName) {
     //we get all Files we want to combine
-    $lFiles = FilesystemHelper::retrieveFilesInDir($pDir, array('.svn', 'include', 'tiny_mce'), array($pFileName, $pFileMinName), '.css');
+    $lFiles = FilesystemHelper::retrieveFilesInDir($pDir, array('.svn', 'include', 'tiny_mce', 'widget', 'engineroom'), array($pFileName, $pFileMinName), '.css');
 
     //we combine the Files to one file named by given filename and save it in the include-folder
     $this->combineFiles($lFiles, $pFileName);

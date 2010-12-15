@@ -1,6 +1,6 @@
 <?php
 class DealListener {
-  
+
   public static function eventSubmit($event) {
     $deal = $event->getSubject();
 
@@ -24,7 +24,7 @@ class DealListener {
 
   public static function eventTrash($event) {
   }
-  
+
   public static function updateMongoDeal($event) {
     $deal = $event->getSubject();
     $params = $event->getParameters();

@@ -1,6 +1,4 @@
 <?php
-require_once(dirname(__FILE__).'/FacebookImportClient.php');
-require_once(dirname(__FILE__).'/TwitterImportClient.php');
 /**
  * PostApi Factory
  *

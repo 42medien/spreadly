@@ -43,12 +43,11 @@ EOF;
     // create controllers
     $this->runTask('yiid:generate-controller', $args, array('application' => $options['application'], 'env' => $options['env']));
     $this->runTask('yiid:generate-widget-config', array(), array('application' => $options['application'], 'env' => $options['env']));
+    $this->runTask('yiid:generate-batch-config', array(), array('application' => $options['application'], 'env' => $options['env']));
     $this->executeDbTasks($arguments, $options);
 
     // add i18n-sync
-    if ($options['env'] == "dev") {
-      $this->runTask('yiid:i18n-sync');
-    }
+    $this->runTask('yiid:i18n-sync', array(), array('env' => $options['env']));
 
     // build js
     $this->runTask('yiid:build-js', array(), array('application' => $options['application'], 'env' => $options['env']));
@@ -92,8 +91,11 @@ EOF;
 
     // initialize mongo objects
     if ($env == 'dev' || $env == 'staging') {
-      MongoDbConnector::getInstance()->getDatabase("yiid")->drop();
-      $this->getFilesystem()->execute("php data/fixtures/initializeMongoObjects.php");
+      if ("y" == $this->ask("Mongo auf dem ".$env.'-System plattmachen? (host: '.sfConfig::get('app_mongodb_host').' collection: '.sfConfig::get('app_mongodb_database_name').") (y/N)")) {
+        $this->logSection('mongo tasks', 'i am the mongo killer!');
+        MongoDbConnector::getInstance()->getDatabase(sfConfig::get('app_mongodb_database_name'))->drop();
+        //$this->getFilesystem()->execute("php data/fixtures/initializeMongoObjects.php");
+      }
     }
 
     $this->runTask('cc');

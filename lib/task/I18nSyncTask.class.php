@@ -13,7 +13,7 @@ class I18nSyncTask extends sfBaseTask {
     $this->addOptions(array(
       new sfCommandOption('application', null, sfCommandOption::PARAMETER_REQUIRED, 'The application name'),
       new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev'),
-      new sfCommandOption('connection', null, sfCommandOption::PARAMETER_REQUIRED, 'The connection name', 'doctrine'),
+      new sfCommandOption('connection', null, sfCommandOption::PARAMETER_REQUIRED, 'The connection name', 'translation'),
     ));
 
     $this->namespace        = 'yiid';
@@ -33,13 +33,32 @@ EOF;
    */
   protected function execute($arguments = array(), $options = array()) {
     // run only in dev mode
-    if ($options['env'] == "dev") {
-      $this->logSection('yiid', 'import i18n db');
-      $this->getFilesystem()->execute("wget http://yiid:affen2010@staging.yiiddev.com/service/i18n.sql");
-      $this->getFilesystem()->execute("mysql -u yiid_i18n -pfdsmolds32dfs yiid_i18n < i18n.sql");
-      $this->getFilesystem()->execute("rm ./i18n.sql");
+    if ($options['env'] == "dev" || $options['env'] == "staging") {
+      $databaseManager = new sfDatabaseManager($this->configuration);
+      $database = $databaseManager->getDatabase($options['connection']);
+
+      $u = $database->getParameter('username');
+      $p = $database->getParameter('password');
+      $dsn = $database->getParameter('dsn');
+
+      $results = array();
+      preg_match("~host=(\w+)~i", $dsn, $results);
+      $h = $results[1];
+
+      $results = array();
+      preg_match("~dbname=(\w+)~i", $dsn, $results);
+      $d = $results[1];
+
+      $query = "mysql --host=".$h." -u ".$u." -p".$p." ".$d." < i18n.sql";
+
+      if ("y" == $this->ask("run: '".$query."'?")) {
+        $this->logSection('yiid', 'import i18n db');
+        $this->getFilesystem()->execute("wget http://yiid:affen2010@staging.yiiddev.com/service/i18n.sql");
+        $this->getFilesystem()->execute($query);
+        $this->getFilesystem()->execute("rm ./i18n.sql");
+      }
     } else {
-      throw new sfException(sprintf('Please run the I18nSyncTask only in the dev environment'));
+      $this->logSection('yiid', 'ignore i18n import');
     }
   }
 }

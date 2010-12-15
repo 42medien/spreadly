@@ -1,12 +1,14 @@
 <?php
-// Include Class
-error_reporting(E_ALL);
 require_once 'System/Daemon.php';
-require_once(dirname(__FILE__).'/../vendor/sqs.php');
+require_once(dirname(__FILE__).'/aws/sqs.php');
+require_once(dirname(__FILE__).'/../../config/BatchConfiguration.class.php');
 require_once(dirname(__FILE__).'/../../config/ProjectConfiguration.class.php');
 
-$configuration = ProjectConfiguration::getApplicationConfiguration('platform', 'batch', true);
+$configuration = ProjectConfiguration::getApplicationConfiguration('platform', BatchConfiguration::ENV, true);
 sfContext::createInstance($configuration);
+
+// Include Class
+error_reporting(E_ALL);
 
 /**
  * the yiid daemon class
@@ -17,16 +19,6 @@ sfContext::createInstance($configuration);
  * @link http://kevin.vanzonneveld.net/techblog/article/create_daemons_in_php/
  */
 class YiidDaemon {
-  /**
-   * the amazon access-key
-   * @var string
-   */
-  public static $aAmazonKey    = 'AKIAJ5NSA6ET5RC4AMXQ';
-  /**
-   * the amazon secret key
-   * @var string
-   */
-  public static $aAmazonSecret = 'bs1YgS4c1zJN/HmwaVA8CkhNfyvcS+EEm1hcEOa0';
   /**
    * the default options
    * @var array
@@ -56,7 +48,7 @@ class YiidDaemon {
   */
   public static function run($pQueueName, $pArguments, $pClass, $pFunction, $pOptions = null) {
     // add environment for a better cue handling
-    $pQueueName = $pQueueName."-".sfConfig::get('app_settings_environment');
+    $pQueueName = $pQueueName."-".sfConfig::get('sf_environment');
 
     echo ('parsing queue:' . $pQueueName ." \r\n");
 
@@ -119,7 +111,7 @@ class YiidDaemon {
     // done so far. For example purposes, we're quitting on 3.
     $cnt = 1;
 
-    $lMessageBroker = new SQS(self::$aAmazonKey, self::$aAmazonSecret);
+    $lMessageBroker = new SQS(sfConfig::get('app_amazons3_access_key'), sfConfig::get('app_amazons3_secret_key'));
     // creates queue if not exists
     $lMessageBroker->createQueue($pQueueName);
     while (!System_Daemon::isDying() && $runningOkay ) {
@@ -139,6 +131,9 @@ class YiidDaemon {
         if (sfConfig::get('app_settings_dev')) {
           System_Daemon::info('{appName} received message with id %s %s', $message[0]['MessageId'], urldecode($message[0]['Body']));
         }
+
+        $lMessageBroker->deleteMessage($pQueueName, $message[0]['ReceiptHandle']);
+
         // run the importer
         call_user_func(array($pClass, $pFunction), $message);
       }
@@ -160,9 +155,7 @@ class YiidDaemon {
       // Relax the system by sleeping for a little bit
       // iterate also clears statcache
       System_Daemon::iterate(1);
-      if (!empty($message)) {
-        $lMessageBroker->deleteMessage($pQueueName, $message[0]['ReceiptHandle']);
-      }
+
       $cnt++;
     }
 

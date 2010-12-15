@@ -27,4 +27,5 @@ class LikeSettings {
 
   const DEV = ##IS_DEV##;
   const ENVIRONMENT = '##ENVIRONMENT##';
+  const RELEASE_NAME = '##RELEASE_NAME##';
 }

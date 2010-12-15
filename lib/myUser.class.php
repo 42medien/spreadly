@@ -167,14 +167,14 @@ class myUser extends sfBasicSecurityUser {
    *
    * @param User $user
    */
-  public function signIn( User $user ) {
+  public function signIn( $user ) {
+    $this->clearCredentials();
     // set the usersession
     $this->setAttribute('id', $user->getId(), 'user_session');
     $this->setAuthenticated(true);
-    $this->clearCredentials();
     $lCredentials = explode( ',', $user->getCredentials() );
     if( count($lCredentials) != 0 ) $this->addCredentials( $lCredentials );
-    $this->switchLanguage($user->getCulture());
+    //$this->switchLanguage($user->getCulture());
   }
 
   /**

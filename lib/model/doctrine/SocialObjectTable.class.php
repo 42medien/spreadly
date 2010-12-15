@@ -1,6 +1,4 @@
 <?php
-
-
 class SocialObjectTable extends Doctrine_Table
 {
   const MONGO_COLLECTION_NAME = 'social_object';

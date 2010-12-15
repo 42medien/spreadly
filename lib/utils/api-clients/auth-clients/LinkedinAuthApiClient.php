@@ -162,6 +162,8 @@ class LinkedinAuthApiClient extends AuthApi {
     if(isset($lProfileArray['summary'])) {
       $pUser->setDescription($lProfileArray['summary']);
     }
+    $pUser->setActive(true);
+    $pUser->setAgb(true);
     $pUser->setFirstname($lProfileArray['first-name']);
     $pUser->setLastname($lProfileArray['last-name']);
 
@@ -181,11 +183,18 @@ class LinkedinAuthApiClient extends AuthApi {
     $pOnlineIdentity->setName($pProfileArray['first-name'] . " " . $pProfileArray['last-name']);
     $pOnlineIdentity->setSocialPublishingEnabled(true);
     $pOnlineIdentity->setUserId($pUser->getId());
+
+    if (isset($pProfileArray['date-of-birth']['year'])) {
+      $pOnlineIdentity->setBirthdate($pProfileArray['date-of-birth']['year'].'-'.$pProfileArray['date-of-birth']['month'].'-'.$pProfileArray['date-of-birth']['day']);
+    }
+    $pOnlineIdentity->setLocationRaw($pProfileArray['location']['name']);
     $pOnlineIdentity->save();
 
-    // delegate to ImportClient to avoid duplicate code
-    LinkedinImportClient::updateIdentity($pOnlineIdentity, $pProfileArray);
-
+    // update user's birthdate if it's not set yet and provided by this identity
+    if (is_null($pUser->getBirthdate()) && $pOnlineIdentity->getBirthdate()) {
+      $pUser->setBirthdate($pOnlineIdentity->getBirthdate());
+      $pUser->save();
+    }
 
     $this->importContacts($pOnlineIdentity->getId());
   }

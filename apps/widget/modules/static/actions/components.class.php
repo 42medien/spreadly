@@ -23,7 +23,7 @@ class staticComponents extends sfComponents {
     // if there is an url, check if there is a matching deal
     if ($lUrl) {
       $lUrl = urldecode($lUrl);
-      $this->pDeal = DealTable::getActiveDealByUrlAndUserId($lUrl, $this->getUser()->getUserId());
+      $this->pDeal = DealTable::getActiveDealByHostAndUserId($lUrl, $this->getUser()->getUserId());
     }
   }
 }

@@ -6,10 +6,10 @@
       <th><?php echo __('Website');?></th>
       <th><?php echo __('Start');?></th>
       <th><?php echo __('End');?></th>
-      <th><?php echo __('Claimed');?></th>
+      <th><?php echo __('Redeemed');?></th>
       <th><?php echo __('Max');?></th>
       <th><?php echo __('Edit');?></th>
-      <th><?php echo __('Active');?></th>
+      <th><?php echo __('Action');?></th>
     </tr>
   </thead>
   <tbody>

@@ -3,8 +3,8 @@ verify:
   param: { module: domain_profiles, action: verify }
 
 domain_profiles:
-  url: /domain_profiles/index  
-  param: { module: domain_profiles, action: index }  
+  url: /domain_profiles/index
+  param: { module: domain_profiles, action: index }
 
 dashboard:
   url: /visit_history/index
@@ -17,7 +17,7 @@ update_language:
 webmasters:
   url:   /webmasters
   param: { module: likebutton, action: webmasters }
-  
+
 like_get_code:
   url:   /likebutton/get_code
   param: { module: likebutton, action: get_code }
@@ -45,19 +45,63 @@ sf_guard_forgot_password:
 sf_guard_register:
   url:   /user/new
   param: { module: sfApply, action: apply }
-  
+
 get_buttoncode:
   url:  /likebutton/get_buttoncode/*
-  param: { module: likebutton, action: get_buttoncode}  
-  
+  param: { module: likebutton, action: get_buttoncode}
+
 configurator:
   url:  /likebutton/index
-  param: { module: likebutton, action: index}  
-  
+  param: { module: likebutton, action: index}
+
 analytics:
   url:   visit_history/analytics
-  param: { module: visit_history, action: analytics } 
-  
+  param: { module: visit_history, action: analytics }
+
+deals:
+  url:   deals/index
+  param: { module: deals, action: index }
+
+get_create_index:
+  url:   deals/get_create_index
+  param: { module: deals, action: get_create_index }
+
+get_deal_table:
+  url:   deals/get_deal_table
+  param: { module: deals, action: get_deal_table }
+
+get_form_by_domain:
+  url:   deals/get_form_by_domain
+  param: { module: deals, action: get_form_by_domain }
+
+deal_save:
+  url:   deals/save
+  param: { module: deals, action: save }
+
+set_state:
+  url:   deals/set_state
+  param: { module: deals, action: set_state }
+
+edit_enddate:
+  url:   deals/edit_enddate
+  param: { module: deals, action: edit_enddate }
+
+get_create_form:
+  url:  /deals/get_create_form
+  param: { module: deals, action: get_create_form }
+
+paste_codes:
+  url:  /deals/paste_codes
+  param: { module: deals, action: paste_codes }
+
+save_codes:
+  url:  /deals/save_codes
+  param: { module: deals, action: save_codes }
+
+save_quantity:
+  url:  /deals/save_quantity
+  param: { module: deals, action: save_quantity }
+
 # You can find more information about this file on the symfony website:
 # http://www.symfony-project.org/reference/1_4/en/10-Routing
 
@@ -66,16 +110,5 @@ homepage:
   url:   /
   param: { module: likebutton, action: index }
 
-# generic rules
-# please, remove them by adding more specific rules
-default_index:
-  url:   /:module
-  param: { action: index }
-
 default:
   url:   /:module/:action/*
-   
-  
-
-
-  

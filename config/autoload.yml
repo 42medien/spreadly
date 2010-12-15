@@ -5,3 +5,6 @@ autoload:
   listener:
     path:      %SF_LIB_DIR%/listener
     recursive: true
+  aws:
+    path:      %SF_LIB_DIR%/utils/aws
+    recursive: true

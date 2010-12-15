@@ -1,0 +1,36 @@
+Coupon:
+  Coupon_1:
+    Deal: Deal_1
+    code: xxyyzz
+    created_at: '2010-11-26 10:10:03'
+    updated_at: '2010-11-26 10:10:03'
+  Coupon_2:
+    Deal: Deal_2
+    code: aaaaaa
+    created_at: '2010-11-26 10:10:03'
+    updated_at: '2010-11-26 10:10:03'
+  Coupon_3:
+    Deal: Deal_2
+    code: bbbbbb
+    created_at: '2010-11-26 10:10:03'
+    updated_at: '2010-11-26 10:10:03'
+  Coupon_4:
+    Deal: Deal_2
+    code: cccccc
+    created_at: '2010-11-26 10:10:03'
+    updated_at: '2010-11-26 10:10:03'
+  Coupon_5:
+    Deal: Deal_2
+    code: dddddd
+    created_at: '2010-11-26 10:10:03'
+    updated_at: '2010-11-26 10:10:03'
+  Coupon_6:
+    Deal: Deal_2
+    code: eeeeee
+    created_at: '2010-11-26 10:10:03'
+    updated_at: '2010-11-26 10:10:03'
+  Coupon_7:
+    Deal: Deal_3
+    code: zzyyxx
+    created_at: '2010-11-26 10:10:03'
+    updated_at: '2010-11-26 10:10:03'

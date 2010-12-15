@@ -251,7 +251,7 @@ class VisitTable extends Doctrine_Table
    */
   public static function getHostListOld() {
     $lM = new Mongo('127.0.0.1'); // connect
-    $lDb = $lM->selectDB("yiid_stats");
+    $lDb = $lM->selectDB(sfConfig::get("app_mongodb_database_name_stats"));
     $lCollection = $lDb->selectCollection('visit');
 
     $keys = array('host' => 1);

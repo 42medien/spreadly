@@ -1,4 +1,4 @@
-<?php if(sfConfig::get('app_settings_dev') == 1) { ?>
+<?php if(sfConfig::get('sf_environment') == "dev") { ?>
   <?php echo cdn_stylesheet_tag('001_layout.css'); ?>
   <?php echo cdn_stylesheet_tag('002_color.css'); ?>
   <?php echo cdn_stylesheet_tag('003_typo.css'); ?>

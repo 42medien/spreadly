@@ -44,22 +44,6 @@ class Deal extends BaseDeal {
            ($this->isUnlimited() || $this->getRemainingCouponQuantity()>0);
   }
 
-  private function fireQuantityChangedEvent() {
-    $prefix = $this->getTable()->getTableName();
-    $eventName = $prefix.".couponQuantityChanged";
-    sfProjectConfiguration::getActive()->getEventDispatcher()->notify(new sfEvent($this, $eventName, array("quantity" => $this->getCouponQuantity())));
-  }
-
-  public function setCouponQuantity($pQuantity) {
-    parent::_set('coupon_quantity', $pQuantity);
-    $this->fireQuantityChangedEvent();
-  }
-
-  public function setCouponClaimedQuantity($pQuantity) {
-    parent::_set('coupon_claimed_quantity', $pQuantity);
-    $this->fireQuantityChangedEvent();
-  }
-
   public function popCoupon() {
     $code = null;
     $coupon = CouponTable::getInstance()->findOneByDealId($this->getId());
@@ -192,5 +176,10 @@ class Deal extends BaseDeal {
       }
     }
     return empty($lError) ? true : $lError;
-  }  
+  }
+  
+  public function postSave($event) {
+    $eventName = $this->getTable()->getTableName().".changed";
+    sfProjectConfiguration::getActive()->getEventDispatcher()->notify(new sfEvent($this, $eventName));
+  }
 }

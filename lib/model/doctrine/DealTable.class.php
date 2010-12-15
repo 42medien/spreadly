@@ -16,7 +16,7 @@ class DealTable extends Doctrine_Table
   {
     return Doctrine_Core::getTable('Deal');
   }
-  
+
   public static function getOverlappingDealsByParams($pDealId, $pDomainProfileId, $pStart, $pEnd) {
     $lQuery = Doctrine_Query::create()
                 ->from('Deal d')
@@ -29,15 +29,15 @@ class DealTable extends Doctrine_Table
                   array($pDomainProfileId,
                         $pStart."", $pEnd."",
                         $pStart."", $pStart.""));
-    
+
     if(!empty($pDealId)) {
       $lQuery->andWhere('d.id != ?', array($pDealId));
     }
     return $lQuery->execute();
   }
-  
+
   public static function getOverlappingDeals($pOtherDeal) {
-    return self::getOverlappingDealsByParams($pOtherDeal->getId(), 
+    return self::getOverlappingDealsByParams($pOtherDeal->getId(),
       $pOtherDeal->getDomainProfile()->getId(),
       $pOtherDeal->getStartDate(),
       $pOtherDeal->getEndDate());
@@ -47,20 +47,20 @@ class DealTable extends Doctrine_Table
     $lDeals = self::getOverlappingDeals($pOtherDeal);
     return count($lDeals)!=0;
   }
-  
+
   public static function isOverlappingByParams($pDealId, $pDomainProfileId, $pStart, $pEnd) {
     $lDeals = self::getOverlappingDealsByParams($pDealId, $pDomainProfileId, $pStart, $pEnd);
     return count($lDeals)!=0;
   }
 
   /**
-   * returns an active deal-object if available
+   * returns arunning deal-object if available
    *
    * @author Matthias Pfefferle
    * @param string $pUrl
    * @return Deal|false
    */
-  public static function getActiveDealByHost($pUrl) {
+  public static function getRunningByHost($pUrl) {
     $host = parse_url($pUrl, PHP_URL_HOST);
     $col = MongoDbConnector::getInstance()->getCollection(sfConfig::get('app_mongodb_database_name'), "deals");
     $today = new MongoDate(time());
@@ -74,12 +74,29 @@ class DealTable extends Doctrine_Table
 
     $deal = $result->getNext();
 
-    if ($deal && ($deal["is_unlimited"] == true || $deal['remaining_coupon_quantity'] > 0)) {
+    if ($deal) {
       return self::getInstance()->find($deal['id']);
     }
 
     return false;
   }
+
+  /**
+   * returns an active deal (running and quantity > 0)
+   *
+   * @author Matthias Pfefferle
+   * @param string $pUrl
+   * @return Deal|null
+   */
+  public static function getActiveByHost($pUrl) {
+    $lDeal = self::getRunningByHost($pUrl);
+    if ($lDeal && $lDeal->isActive()) {
+      return $lDeal;
+    }
+
+    return null;
+  }
+
 
   /**
    * returns a deal if there is no deal-activity on the host
@@ -91,41 +108,12 @@ class DealTable extends Doctrine_Table
    */
   public static function getActiveDealByHostAndUserId($pUrl, $pUserId) {
     $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
+    $lDeal = self::getActiveByHost($pUrl);
 
-    $lDeal = self::getActiveDealByHost($pUrl);
-
-    if ($lDeal) {
-      $lYiidActivity = YiidActivityTable::getByDealIdAndUserId($lDeal->getId(), $pUserId);
-
-      if (!$lYiidActivity) {
-        return $lDeal;
-      }
-    }
-
-    return false;
-  }
-
-  /**
-   * returns a deal if there is a matching deal-activity or
-   * if there is no deal on the whole domain
-   *
-   * @author Matthias Pfefferle
-   * @param string $pUrl
-   * @param int $pUserId
-   * @return Deal|boolean
-   */
-  public static function getActiveDealByUrlAndUserId($pUrl, $pUserId) {
-    $lDeal = self::getActiveDealByHost($pUrl);
-
-    if ($lDeal) {
-      if (YiidActivityTable::getByDealIdAndUserIdAndUrl($lDeal->getId(), $pUserId, $pUrl) ||
-          !YiidActivityTable::getByDealIdAndUserId($lDeal->getId(), $pUserId)) {
-        return $lDeal;
-      }
+    if ($lDeal && !YiidActivityTable::getByDealIdAndUserId($lDeal->getId(), $pUserId)) {
+      return $lDeal;
     }
 
     return false;
   }
 }
-
-

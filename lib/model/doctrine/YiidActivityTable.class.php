@@ -65,7 +65,6 @@ class YiidActivityTable extends Doctrine_Table {
     }
 
     $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
-
     $lDeal = DealTable::getActiveDealByHostAndUserId($pUrl, $pUserId);
 
     $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
@@ -74,7 +73,7 @@ class YiidActivityTable extends Doctrine_Table {
     if (!$lSocialObject) {
       $lSuccess = SocialObjectTable::initializeObjectFromUrl($pUrl);
       if ($lSuccess === false) {
-        return  false;
+        return false;
       }
       $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
       $lSocialObject->updateObjectMasterData($pTitle, $pDescription, $pPhoto);
@@ -95,7 +94,7 @@ class YiidActivityTable extends Doctrine_Table {
 
     // save yiid activity
     $lActivity = self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb, $pClickback, $lDeal);
-    if (sfConfig::get('app_settings_environment') != 'dev') {
+    if (sfConfig::get('sf_environment') != 'dev') {
       // send messages to all services
       foreach ($lOnlineIdentitys as $lIdentity) {
         $lQueryChar = parse_url($pUrl, PHP_URL_QUERY) ? '&' : '?';
@@ -228,15 +227,17 @@ class YiidActivityTable extends Doctrine_Table {
     // get yiid-activity and factor a deal
     if ($pDeal) {
       $lQuery = $lCollection->findOne(array("so_id" => new MongoId($pSocialObjectId.""),
-                                            "u_id" => (int)$pUserId,
-                                            "d_id" => (int)$pDeal->getId()
+                                            "u_id" => intval($pUserId),
+                                            "d_id" => intval($pDeal->getId())
                                            ));
     } else {
       $lQuery = $lCollection->findOne(array("so_id" => new MongoId($pSocialObjectId.""),
-                                            "u_id" => (int)$pUserId,
+                                            "u_id" => intval($pUserId),
                                             "d_id" => array('$exists' => false)
                                            ));
     }
+
+
 
     return self::initializeObjectFromCollection($lQuery);
   }

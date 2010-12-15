@@ -12,20 +12,20 @@
       </div>
     </div>
 
-    <?php if ($pIsUsed) { ?>
+    <?php if ($pYiidActivity) { ?>
       <?php include_partial("deal_info", array("pYiidActivity" => $pYiidActivity)); ?>
-      <?php if ($pIsUsed == 1) { ?>
+      <?php if ($pYiidActivity->getScore() == 1) { ?>
         <div class="rounded_corners content_main_border popup_button_used distance_right already_shared" id="static-liked">
           <span class="sharing_button likeit_button">&nbsp;</span>
           <?php echo __('done_'.$pType); ?>
         </div>
-      <?php } elseif ($pIsUsed == -1) {?>
+      <?php } elseif ($pYiidActivity->getScore() == -1) {?>
         <div class="rounded_corners content_main_border popup_button_used distance_right already_shared" id="static-disliked">
           <span class="sharing_button dislikeit_button">&nbsp;</span>
           <?php echo __('disdone_'.$pType); ?>
         </div>
       <?php } ?>
-	    <?php } else { ?>
+	  <?php } else { ?>
 		    <form action="/api/like" name="static-like-form" id="static-like-form" method="post">
 		    	<div id="coupon-box">
 	      		<?php include_partial("deal_offer", array("pDeal" => $pDeal)); ?>
@@ -46,7 +46,7 @@
 			            name="like-serv-<?php echo $lIdentity->getId(); ?>" <?php echo $lIdentity->getSocialPublishingEnabled()?"checked=checked":''; ?>
 			            value="<?php echo $lIdentity->getId(); ?>" class="serv-check" />
 			          <label for="<?php echo $lIdentity->getCommunity()->getCommunity(); ?>_check" title="<?php echo $lIdentity->getProfileUri(); ?>">
-			            <?php echo $lIdentity->getProfileUri(); ?>
+			             <?php echo truncate_text($lIdentity->getProfileUri(), 25, '...'); ?>
 			          </label>
 			        </li>
 			      <?php } ?>

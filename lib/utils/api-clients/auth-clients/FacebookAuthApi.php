@@ -133,6 +133,8 @@ class FacebookAuthApiClient extends AuthApi {
    */
   public function completeUser(&$pUser, $pObject) {
     $pUser->setUsername(UserUtils::getUniqueUsername(StringUtils::normalizeUsername($pObject->name)));
+    $pUser->setActive(true);
+    $pUser->setAgb(true);
     $pUser->setFirstname($pObject->first_name);
     $pUser->setEmail($pObject->email);
     $pUser->setLastname($pObject->last_name);
@@ -153,9 +155,23 @@ class FacebookAuthApiClient extends AuthApi {
     /* signup,add new */
     $pOnlineIdentity->setUserId($pUser->getId());
     $pOnlineIdentity->setAuthIdentifier($pAuthIdentifier);
+    $pOnlineIdentity->setName($lJsonUserObject->name);
+    $pOnlineIdentity->setGender($lJsonUserObject->gender);
+
+    // transform facebook format into
+    $lBirthday = explode('/', $lJsonUserObject->birthday);
+    if (count($lBirthday == 3 && $lBirthday[2] > 0 && $lBirthday[0] != '0000')) { // 3 parts and year is set
+      $pOnlineIdentity->setBirthdate($lBirthday[2].'-'.$lBirthday[0].'-'.$lBirthday[1]);
+    }
+    $pOnlineIdentity->setRelationshipState(IdentityHelper::tranformRelationshipStringToClasskey($lJsonUserObject->relationship_status));
+    $pOnlineIdentity->setSocialPublishingEnabled(true);
+    $pOnlineIdentity->setLocationRaw($lJsonUserObject->location->name);
+
     $pOnlineIdentity->save();
 
-    FacebookImportClient::updateIdentity($pOnlineIdentity, $pObject);
+    $pUser->setRelationshipState($pOnlineIdentity->getRelationshipState());
+    $pUser->setBirthdate($pOnlineIdentity->getBirthDate());
+    $pUser->save();
 
     $this->importContacts($pOnlineIdentity->getId());
 

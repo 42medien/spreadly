@@ -8,9 +8,7 @@
       		<?php echo image_tag('/img/global/24x24/remove_from_shopping_cart.png', array('title' => __('Deal approved')))?>
       	<?php } ?>
       </td>
-      <td class="deal-summary-col">
-      	<a href="<?php echo url_for('/') ?>"><?php echo $pDeal->getSummary(); ?></a>
-      	</td>
+      <td class="deal-summary-col"><?php echo $pDeal->getSummary(); ?></td>
       <td><?php echo $pDeal->getDomainProfile()->getUrl(); ?></td>
       <td style="text-align: center;"><?php echo $pDeal->getStartDate(); ?></td>
       <td style="text-align: center;" title="<?php echo __('Edit end date of deal'); ?>" class="editinplaceclick" id="deal-date-<?php echo $pDeal->getId(); ?>" data-obj='{"action":"/deals/edit_enddate", "type":"text", "callback":"DealTable.editDate",  "params": "{\"id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-date-<?php echo $pDeal->getId(); ?>\"}"}'><?php echo $pDeal->getEndDate(); ?></td>
@@ -43,9 +41,7 @@
 
 <?php if($pDeal->getState() == 'denied') { ?>
       <td style="width: 20px;"><?php echo image_tag('/img/global/24x24/warning.png', array('title' => __('Deal denied')))?></td>
-      <td>
-      	<a href="<?php echo url_for('/') ?>"><?php echo $pDeal->getSummary(); ?></a>
-      </td>
+      <td><?php echo $pDeal->getSummary(); ?></td>
       <td><?php echo $pDeal->getDomainProfile()->getUrl(); ?></td>
       <td style="text-align: center;"><?php echo $pDeal->getStartDate(); ?></td>
       <td style="text-align: center;" title="<?php echo __('Edit end date of deal'); ?>" class="editinplaceclickc" id="deal-date-<?php echo $pDeal->getId(); ?>" data-obj='{"action":"/deals/edit_enddate", "type":"text", "callback":"DealTable.editDate",  "params": "{\"id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-date-<?php echo $pDeal->getId(); ?>\"}"}'><?php echo $pDeal->getEndDate(); ?></td>
@@ -64,9 +60,7 @@
 
 <?php if($pDeal->getState() == 'paused') { ?>
       <td style="width: 20px;"><?php echo image_tag('/img/global/24x24/clock.png', array('title' => __('Deal stopped')))?></td>
-      <td>
-      	<a href="<?php echo url_for('/') ?>"><?php echo $pDeal->getSummary(); ?></a>
-      	</td>
+			<td><?php echo $pDeal->getSummary(); ?></td>
       <td><?php echo $pDeal->getDomainProfile()->getUrl(); ?></td>
       <td style="text-align: center;"><?php echo $pDeal->getStartDate(); ?></td>
       <td style="text-align: center;" title="<?php echo __('Edit end date of deal'); ?>" class="editinplaceclick edit-col" id="deal-date-<?php echo $pDeal->getId(); ?>" data-obj='{"action":"/deals/edit_enddate", "type":"text", "callback":"DealTable.editDate",  "params": "{\"id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-date-<?php echo $pDeal->getId(); ?>\"}"}'><?php echo $pDeal->getEndDate(); ?></td>

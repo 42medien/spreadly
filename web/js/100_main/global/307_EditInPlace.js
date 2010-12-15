@@ -1,3 +1,7 @@
+/**
+ * @combine statistics
+ */
+
 var EditInPlace = {
   
   aData:{},
@@ -153,10 +157,13 @@ var EditInPlace = {
       //if there is a given param pContent insert it into the edit-elem (this happens if the user saved a new value)
       if (pContent !== undefined) {
         //update given content
-        EditInPlace.update(pContent);
+        jQuery(EditInPlace.aElement).empty();
+        jQuery(EditInPlace.aElement).append(pContent);
       } else {
         //update with initial-content
-        EditInPlace.update(EditInPlace.aContent);
+        //update given content
+        jQuery(EditInPlace.aElement).empty();
+        jQuery(EditInPlace.aElement).append(EditInPlace.aContent);        
       }
     }
     //after closing init the effects and click event to the edit-elem
@@ -170,13 +177,6 @@ var EditInPlace = {
         EditInPlace.close(EditInPlace.aContent);
       return false;
     });
-  },
-  
-  
-  
-  update: function(pContent){
-    jQuery(EditInPlace.aElement).empty();
-    jQuery(EditInPlace.aElement).append(pContent);
   },
   
   /**
@@ -210,6 +210,7 @@ var EditInPlace = {
    * @author KM
    */   
   doSave: function(){
+    debug.log("[EditInPlace][doSave]");     
     var lValue = jQuery('#editinplace_input').val();
     var lParams = jQuery.parseJSON(EditInPlace.aData.params);
     //take the data from the data-attr
@@ -226,13 +227,26 @@ var EditInPlace = {
       data: lData,        
       success: function (pResponse) {
         if(pResponse.success === true) {
+          debug.log("[EditInPlace][successtrue]");  
           //if data are saved: insert the new content to the edit-elem and close the edit-field
-          EditInPlace.close(pResponse.content);
+          //EditInPlace.close(pResponse.content);
+          EditInPlace.update(pResponse.cssid, pResponse.html);
+          
         } else {
           //alert if there are validation-errors
           alert(pResponse.error);
+          EditInPlace.close();
         }
       }
     });    
+  },
+  
+  update: function(pCssId, pHtml) {
+    debug.log('[editinplace][update]');
+    //jQuery('#'+pCssId).empty();
+    jQuery('#'+pCssId).replaceWith(pHtml);
+    //after closing init the effects and click event to the edit-elem
+    EditInPlace.initEffects();
+    EditInPlace.initByClick();    
   }
 };

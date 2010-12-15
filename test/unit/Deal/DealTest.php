@@ -404,6 +404,7 @@ class DealTest extends BaseTestCase {
     $this->assertFalse(DealTable::isOverlapping($this->future));
   }
 
+  /*
   public function testGetActiveDealByHost() {
     sfContext::getInstance()->getEventDispatcher()->connect("deal.event.pause", array('DealListener', 'updateMongoDeal'));
     $this->active->pause();
@@ -415,4 +416,5 @@ class DealTest extends BaseTestCase {
 
     $this->assertEquals($this->active->getId(), $deal->getId());
   }
+  */
 }

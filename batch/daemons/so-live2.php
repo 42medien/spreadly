@@ -1,7 +1,6 @@
 #!/usr/bin/php -q
 <?php
 require_once(dirname(__FILE__).'/../../lib/utils/YiidDaemon.php');
-require_once(dirname(__FILE__).'/../../lib/utils/parser/SocialObjectParser.php');
 
 $lAppName = "so-live2";
 $lQueueName = "SocialObjectParser";

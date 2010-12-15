@@ -15,9 +15,8 @@ class apiActions extends sfActions {
    * @author Christian Weyand
    * @see cache/frontend/prod/config/sfAction#initialize()
    */
-  public function initialize($context, $module, $action) {
-    $parentRet = parent::initialize($context, $module, $action);
-    $request = $context->getRequest();
+  public function preExecute() {
+    $request = $this->getRequest();
 
     $this->statictype = false;
     $this->status = 200;
@@ -44,7 +43,7 @@ class apiActions extends sfActions {
       $this->message = "NO_SERVICES_ERROR";
     }
 
-    $this->lDeal = DealTable::getActiveDealByUrlAndUserId($this->lUrl, $this->getUser()->getUserId());
+    $this->lDeal = DealTable::getActiveDealByHostAndUserId($this->lUrl, $this->getUser()->getUserId());
 
     if ($this->lDeal && $this->success == true) {
       if($request->getParameter('coupon-accept-tod', null)){
@@ -66,8 +65,6 @@ class apiActions extends sfActions {
     $this->lDescription = $request->getParameter('description');
     $this->lPhoto = $request->getParameter('photo');
     $this->lClickback = $request->getParameter('clickback', null);
-
-    return $parentRet;
   }
 
   /**

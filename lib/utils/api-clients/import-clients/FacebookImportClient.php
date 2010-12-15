@@ -1,9 +1,4 @@
 <?php
-require_once(dirname(__FILE__).'/../../../../config/ProjectConfiguration.class.php');
-
-$configuration = ProjectConfiguration::getApplicationConfiguration('platform', 'batch', false);
-sfContext::createInstance($configuration);
-
 /**
  * Enter description here...
  *
@@ -26,7 +21,6 @@ class FacebookImportClient {
     self::updateIdentity($pOnlineIdentity, $lJsonUserObject);
   }
 
-
   /**
    * gather list of friends from facebook
    *
@@ -48,7 +42,6 @@ class FacebookImportClient {
     $pOnlineIdentity->save();
   }
 
-
   /**
    * update the given online identity with latest data from facebook
    *
@@ -57,7 +50,6 @@ class FacebookImportClient {
    * @return unknown_type
    */
   public static function updateIdentity(&$pOnlineIdentity, $lJsonUserObject) {
-
     $pOnlineIdentity->setName($lJsonUserObject->name);
     $pOnlineIdentity->setGender($lJsonUserObject->gender);
 

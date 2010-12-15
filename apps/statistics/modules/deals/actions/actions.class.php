@@ -165,9 +165,10 @@ class dealsActions extends sfActions
   	$lCouponQuantity = '0';
     $this->pEdited = false;
     $lDealForm->setDefaults(array(
-				'button_wording' => $lI18n->__('...und freien Probemonat gewinnen!'),
-				'summary' => $lI18n->__('Kostenloser Probemonat'),
-				'description' => $lI18n->__('Liken und damit einmalig pro Person einen freien Probemonat gewinnen!'),
+				'button_wording' => $lI18n->__('...and win a free trial membership!'),
+				'summary' => $lI18n->__('Free trial membership'),
+				'description' => $lI18n->__('Like and win a free one month trial membership'),
+	    	'terms_of_deal' => 'Url to Conditions of Participation',
 	    	'start_date' => date('Y-m-d G:i:s'),
 	    	'end_date' => date('Y-m-d G:i:s'),
 	    	'coupon_type' => 'single',
@@ -176,7 +177,6 @@ class dealsActions extends sfActions
 
     $this->pForm = new DomainProfileDealForm();
     $this->pForm->setDefaults(array(
-			'imprint_url' => $lFirstDomain->getImprintUrl(),
 			'id' => $lFirstDomain->getId()
     ));
 
@@ -204,7 +204,6 @@ class dealsActions extends sfActions
   	$lProfileId = $request->getParameter('dpid');
     $lDp = DomainProfileTable::getInstance()->find($lProfileId);
     //if u need much more from the object return a ldp->toarray jsonfied to the js
-    $lReturn['imprint_url'] = $lDp->getImprintUrl();
 
     return $this->renderText(json_encode($lReturn));
   }
@@ -227,7 +226,8 @@ class dealsActions extends sfActions
     	array(
     		'success' => $lValid===true,
     		'error' => $lValid===true ? '' : $lValid,
-    	  'content' => $lDeal->getEndDate()
+    	  'html' => $this->getPartial('deals/deal_table_row', array('pDeal' => $lDeal)),
+    	  'cssid' => 'deal-table-row-'.$lDeal->getId()
     	)
     ));
   }
@@ -247,7 +247,8 @@ class dealsActions extends sfActions
     	array(
     		'success' => empty($lError),
     		'error' => empty($lError) ? '' : $lError,
-    	  'content' => $lDeal->getCouponQuantity()
+    	  'html' => $this->getPartial('deals/deal_table_row', array('pDeal' => $lDeal)),
+    	  'cssid' => 'deal-table-row-'.$lDeal->getId()
     	)
     ));
   }
@@ -273,7 +274,8 @@ class dealsActions extends sfActions
     	array(
     		'success' => $lValid===true,
     		'error' => $lValid===true ? '' : $lValid,
-    	  'content' => $lDeal->getCouponQuantity()
+    	  'html' => $this->getPartial('deals/deal_table_row', array('pDeal' => $lDeal)),
+    	  'cssid' => 'deal-table-row-'.$lDeal->getId()
     	)
     ));
   }

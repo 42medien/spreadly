@@ -16,8 +16,8 @@ class S3SyncTask extends sfBaseTask
       // add your own options here
     ));
 
-    $this->namespace        = '';
-    $this->name             = 'S3Sync';
+    $this->namespace        = 'yiid';
+    $this->name             = 's3-sync';
     $this->briefDescription = '';
     $this->detailedDescription = <<<EOF
 The [S3Sync|INFO] task does things.
@@ -42,7 +42,7 @@ EOF;
     }
 
     $lReleaseName = sfConfig::get('app_release_name');
-    $lRootDir = sfContext::getInstance()->getConfiguration()->getRootDir();
+    $lRootDir = ProjectConfiguration::getActive()->getRootDir();
     $lFileName = CdnSingleton::getInstance()->getNextHost() .'/'. $lReleaseName."/";
 
     $lFiles = FilesystemHelper::retrieveFilesInDir($lRootDir.'/web/css/include', array('.svn'), array(), '.css');

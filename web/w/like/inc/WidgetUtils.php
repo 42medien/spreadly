@@ -1,7 +1,6 @@
 <?php
 require_once('../../../lib/utils/UrlUtils.php');
-require_once('../../../lib/vendor/sqs.php');
-require_once('../../../lib/utils/YiidStatsSingleton.php');
+require_once('../../../lib/utils/aws/sqs.php');
 
 /**
  *
@@ -260,7 +259,7 @@ class DealUtils {
 
     $host = parse_url($pUrl, PHP_URL_HOST);
     $col = DealUtils::getCollection();
-    $today = new MongoDate(strtotime("today"));
+    $today = new MongoDate(time());
     $cond = array(
       "host" => $host,
       "start_date" => array('$lte' => $today),
@@ -270,7 +269,7 @@ class DealUtils {
 
     $deal = $result->getNext();
 
-    if ($deal && ($deal["is_unlimited"] == true || $deal['remaining_coupon_quantity'] > 0)) {
+    if ($deal) {
       return $deal;
     }
 
@@ -280,5 +279,38 @@ class DealUtils {
   private static function getCollection() {
     $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
     return $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, self::MONGO_COLLECTION);
+  }
+}
+
+class YiidStatsSingleton {
+
+  // new schema
+  const MONGO_COLLECTION_NAME_VISIT = 'visit';
+  const TYPE_LIKE = 'likes';
+  const TYPE_DISLIKE = 'dislikes';
+
+
+  /**
+   * tracks a visit on given url, if the $pLikeType variable is passed an activity is tracked too
+   *
+   * @param string $pUrl
+   * @param string $pLikeType see TYPE_* Constants in this class
+   * @author weyandch
+   */
+  public static function trackVisit($pUrl) {
+    $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
+    $lCollection = $lMongo->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, self::MONGO_COLLECTION_NAME_VISIT);
+
+    $pUrl = urldecode($pUrl);
+
+    // data is stored as a tupel of host && month (host => example.com, month => 2010-10)
+    $lQueryArray = array();
+    $lQueryArray['host'] = parse_url($pUrl, PHP_URL_HOST);
+    $lQueryArray['month'] = date('Y-m');
+
+    if ($lQueryArray['host'] != '') {
+      $lUpdateArray = array( '$inc' => array('stats.day_'.date('d').'.pis' => 1, 'pis_total' => 1));
+      $lCollection->update($lQueryArray, $lUpdateArray, array('upsert' => true));
+    }
   }
 }

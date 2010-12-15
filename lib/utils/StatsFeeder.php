@@ -24,6 +24,7 @@ class StatsFeeder {
     // full table
     self::createActivitiesData($pYiidActivity, $pUser);
     self::createChartData($pYiidActivity, $pUser);
+    self::createGlobalStats($pYiidActivity);
   }
 
   /**
@@ -177,5 +178,34 @@ class StatsFeeder {
       // update analytics
       $lCollection->update($lDoc, array('$inc' => $lOptions), array("upsert" => true));
     }
+  }
+
+  /**
+   *
+   * tracks a count for given $pLikeType
+   *
+   * @param string $pUrl Full Request URI (http://example.com/page)
+   * @param string $pLikeType see TYPE_* Constants in this class
+   */
+  public static function createGlobalStats($pYiidActivity) {
+    $lCollection = self::getMongoCollection("visit");
+
+    // data is stored as a tupel of host && month (host => example.com, month => 2010-10)
+    $lQueryArray = array();
+    $lQueryArray['host'] = parse_url($pYiidActivity->getUrl(), PHP_URL_HOST);
+    $lQueryArray['month'] = date('Y-m');
+
+    if ($pYiidActivity->getScore() > 0) {
+      $lType = "likes";
+    } else {
+      $lType = "dislikes";
+    }
+
+    if ($lType) {
+      // increases the likes/dislikes count
+      $lUpdateArray = array( '$inc' => array('stats.day_'.date('d').'.'.$lType => 1, $lType.'_total' => 1, 'act_total' => 1));
+    }
+
+    $lCollection->update($lQueryArray, $lUpdateArray, array('upsert' => true));
   }
 }

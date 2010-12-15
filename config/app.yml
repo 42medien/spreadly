@@ -3,7 +3,7 @@
 #
 all:
   release:
-    name:     '20101125'
+    name:     '20101214-2'
     gzip:     0              ## set 1 to force local gz support
 
   stream:
@@ -23,6 +23,7 @@ all:
 
   settings:
     filtered_parameters: [yiidit, zanpid, utm_source, utm_medium, utm_campaign, utm_content]  #for cleaning up urls
+    short_url: 'http://yiid.cc'
 
   image_sizes:
     avatar: ['16x16', '30x30', '48x48', '140x140']  #height x width
@@ -31,6 +32,10 @@ all:
   # mapper for f.e. apis
   likewidget:
     types:    ['like', 'pro', 'recommend', 'buy', 'visit', 'nice', 'rsvp']
+
+  amazons3:
+    access_key:  'AKIAJ5NSA6ET5RC4AMXQ'
+    secret_key:  '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'
 
 ##
 # Prod settings
@@ -77,8 +82,6 @@ prod:
     database_name_stats:  'yiid_stats'
 
   amazons3:
-    access_key:  'AKIAJ5NSA6ET5RC4AMXQ'
-    secret_key:  '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'
     bucket:      'http://www.yiid.local/'
     hosts:
       - 'http://yiidstatic1.publicclubs.de'
@@ -125,12 +128,10 @@ dev:
 
   mongodb:
     host:   127.0.0.1
-    database_name:  'yiid'
-    database_name_stats:  'yiid_stats'
+    database_name:  'yiid_dev'
+    database_name_stats:  'yiid_stats_dev'
 
   amazons3:
-    access_key:  'AKIAJ5NSA6ET5RC4AMXQ'
-    secret_key:  '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'
     bucket:      'http://www.yiid.local/'
     hosts:
       - 'http://www.yiid.local'
@@ -173,12 +174,10 @@ staging:
 
   mongodb:
     host:                 'donkeykong'
-    database_name:        'yiid_dev'
-    database_name_stats:  'yiid_dev_stats'
+    database_name:        'yiid_staging'
+    database_name_stats:  'yiid_stats_staging'
 
   amazons3:
-    access_key:    'AKIAJ5NSA6ET5RC4AMXQ'
-    secret_key:    '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'
     bucket:        'http://www.yiid.local/'
     hosts:
-      - 'http://www.yiiddev.com'
+      - 'https://s3-eu-west-1.amazonaws.com/dev.yiidcdn.com'

@@ -40,7 +40,8 @@ class DealForm extends BaseDealForm
 
     $this->widgetSchema->setLabels(
     	array(
-    		'tos_accepted' => 'By submitting a deal you accept the Yiid %terms% Agreement.'
+    		'tos_accepted' => $lI18n->__('The "Deal" creates an agreement between the website owner and the user who claims a deal. ekaabo GmbH only provides the technical solution for handling this deal. By submitting this deal the website owner releases ekaabo GmbH from any kind of accountability. Claims can only be asserted between the user who claims a deal and the website owner.'),
+    	  'terms_of_deal' => $lI18n->__('DEAL_FORM_TOS')
     	)
     );
 
@@ -55,7 +56,7 @@ class DealForm extends BaseDealForm
       'button_wording'    => new sfValidatorString(array('max_length' => 35, 'required' => true, 'trim' => true), array('required' => $lI18n->__('Required'), 'max_length' => $lI18n->__('To long'))),
       'coupon_quantity'    => new sfValidatorInteger(array('required' => false, 'trim' => true)),
       'coupon_type'       => new sfValidatorChoice(array('choices' => array(0 => 'single', 1 => 'multiple'))),
-      'redeem_url'        => new sfValidatorString(array('max_length' => 512, 'required' => false, 'trim' => true)),
+      'redeem_url'        => new sfValidatorUrl(array('max_length' => 512, 'required' => true, 'trim' => true)),
       'tos_accepted'      => new sfValidatorBoolean(array('required' => true, 'trim' => true), array('required' => $lI18n->__('Required'))),
       'terms_of_deal'     => new sfValidatorUrl(array('max_length' => 512, 'required' => true, 'trim' => true), array('required' => $lI18n->__('Required'), 'invalid' => $lI18n->__('Invalid Url')))
     ));

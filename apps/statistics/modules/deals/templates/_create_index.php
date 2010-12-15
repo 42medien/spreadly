@@ -5,7 +5,7 @@
 		  </div>
 		  <div class="content-box-body" id="claiming-profile-content">
 		    <p>
-		      <?php echo __('Deals gives you the power to acquire and retain customers, as well as market your business'); ?>
+		      <?php echo __('Deals give you the power to acquire and retain customers, as well as market your business.'); ?>
 		    </p>
 		  </div>
 		</div>

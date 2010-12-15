@@ -8,15 +8,6 @@
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
 class staticActions extends sfActions {
- /**
-  * Executes index action
-  *
-  * @param sfRequest $request A request object
-  */
-  public function executeIndex(sfWebRequest $request) {
-    $this->redirect('@static_like');
-  }
-
   public function executeLike(sfWebRequest $request) {
     if ($request->getParameter("url", null)) {
       $this->getUser()->setAttribute("static_like_with_params", $request->getUri(), "popup");
@@ -33,18 +24,23 @@ class staticActions extends sfActions {
     $lUrl = urldecode($lUrl);
 
     if (!empty($lUrl) && UrlUtils::isUrlValid($lUrl)) {
-      $lUrl = urldecode($lUrl);
 	    $lUser = $this->getUser()->getUser();
 
 	    $lSocialObject = SocialObjectTable::retrieveByAliasUrl($lUrl);
-	    $lDeal = DealTable::getActiveDealByUrlAndUserId($lUrl, $this->getUser()->getUserId());
+      $lDeal = DealTable::getRunningByHost($lUrl);
 
-      $this->pIsUsed = false;
       if($lSocialObject) {
-        $this->pIsUsed = YiidACtivityTable::getActionOnObjectByUser($lSocialObject->getId(), $this->getUser()->getUserId(), $lDeal);
-        $this->pYiidActivity = YiidActivityTable::retrieveActionOnObjectById($lSocialObject->getId(), $this->getUser()->getUserId(), $lDeal);
-      }
+        $lYiidActivity = YiidActivityTable::retrieveActionOnObjectById($lSocialObject->getId(), $lUser->getId(), $lDeal);
 
+        if ($lDeal && $lYiidActivity) {
+          $this->pYiidActivity = $lYiidActivity;
+        } elseif ($lDeal && $lDeal->isActive() && !YiidActivityTable::getByDealIdAndUserId($lUser->getId(), $lDeal)) {
+          $this->pYiidActivity = null;
+        } else {
+          $lDeal = null;
+          $this->pYiidActivity = YiidActivityTable::retrieveActionOnObjectById($lSocialObject->getId(), $this->getUser()->getUserId());
+        }
+      }
     } else {
       $this->pIsUrlValid = false;
     }

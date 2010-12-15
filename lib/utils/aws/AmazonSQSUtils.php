@@ -1,10 +1,4 @@
 <?php
-require_once(dirname(__FILE__).'/../vendor/sqs.php');
-require_once(dirname(__FILE__).'/../../config/ProjectConfiguration.class.php');
-
-$configuration = ProjectConfiguration::getApplicationConfiguration('platform', 'batch', true);
-sfContext::createInstance($configuration);
-
 /**
  * Wrap some basic methods for SQS
  *
@@ -13,7 +7,7 @@ sfContext::createInstance($configuration);
  */
 class AmazonSQSUtils {
   public static function initSqsService() {
-    return new SQS(YiidDaemon::$aAmazonKey,YiidDaemon::$aAmazonSecret);
+    return new SQS(sfConfig::get('app_amazons3_access_key'), sfConfig::get('app_amazons3_secret_key'));
   }
 
   /**
@@ -26,9 +20,10 @@ class AmazonSQSUtils {
    */
   public static function pushToQuque($pQueueName, $pPayload) {
     // add environment for a better cue handling
-    $pQueueName = $pQueueName."-".sfConfig::get('app_settings_environment');
+    $pQueueName = $pQueueName."-".sfConfig::get('sf_environment');
 
     $service = self::initSqsService();
+
     if (is_array($pPayload)) {
       foreach ($pPayload as $value) {
         $service->sendMessage($pQueueName, $value);
@@ -39,8 +34,5 @@ class AmazonSQSUtils {
       $service->sendMessage($pQueueName, $pPayload);
       sfContext::getInstance()->getLogger()->info("{AmazonSQSUtils} ".$pQueueName." sent ". print_r($pPayload, true));
     }
-
   }
-
 }
-?>

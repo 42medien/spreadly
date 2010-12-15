@@ -52,7 +52,12 @@ $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
 $lStaticUrl = LikeSettings::JS_STATIC_PATH."?ei_kcuf=".time();
 
 $lIsDeal = false;
-if (($lActiveDeal && $lActivityObject) || ($lActiveDeal && !YiidActivityObjectPeer::actionOnHostByUser($pUserId, $lActiveDeal))) {
+// check if user has an active deal
+if ($lActiveDeal && $lActivityObject) {
+  $lIsDeal = true;
+// check if user has an active code
+} elseif (($lActiveDeal && !YiidActivityObjectPeer::actionOnHostByUser($pUserId, $lActiveDeal)) &&
+          ($lActiveDeal["is_unlimited"] == true || $lActiveDeal['remaining_coupon_quantity'] > 0)) {
   $lIsDeal = true;
 } else {
   $lActivityObject = YiidActivityObjectPeer::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId);

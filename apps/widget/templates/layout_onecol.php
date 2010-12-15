@@ -9,7 +9,6 @@
 
     <?php include_stylesheets(); ?>
     <script type="text/javascript" src="/js/100_main/include/likepopup-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
-    <script type="text/javascript" src="/js/widget/deal/DealHandler.js"></script>
 
     <link rel="shortcut icon" href="/img/global/favicon_16x16.ico" />
   </head>

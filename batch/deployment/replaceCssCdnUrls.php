@@ -8,7 +8,7 @@
 require_once(dirname(__FILE__).'/../../config/ProjectConfiguration.class.php');
 require_once(dirname(__FILE__).'/../../lib/utils/FilesystemHelper.php');
 
-$configuration = ProjectConfiguration::getApplicationConfiguration('platform', 'widget', true);
+$configuration = ProjectConfiguration::getApplicationConfiguration('platform', 'staging', true);
 sfContext::createInstance($configuration);
 
 

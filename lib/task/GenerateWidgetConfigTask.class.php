@@ -37,7 +37,8 @@ EOF;
       'YIID_HOST' => sfConfig::get('app_settings_host'),
       'IS_DEV' => sfConfig::get('app_settings_dev'),
       'COOKIE_NAME' => $options['env'] == 'prod' ? 'yiid' : 'yiid_'.$options['env'],
-      'ENVIRONMENT' => $options['env']
+      'ENVIRONMENT' => $options['env'],
+      'RELEASE_NAME' => sfConfig::get('app_release_name')
     ));
   }
 }

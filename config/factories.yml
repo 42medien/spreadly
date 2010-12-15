@@ -9,6 +9,8 @@ dev:
   mailer:
     param:
       delivery_strategy: none
+      transport:
+        class: Swift_NullTransport
   i18n:
     class: sfI18N
     param:
@@ -36,7 +38,7 @@ dev:
       db_data_col:     sess_data
       host:            localhost
       port:            27017
-      db_name:         yiid
+      db_name:         yiid_dev
       collection_name:   session
       session_name:    yiid_dev
       session_cookie_domain: .yiid.local
@@ -72,7 +74,7 @@ staging:
       db_data_col:     sess_data
       host:            donkeykong
       port:            27017
-      db_name:                 yiid_dev
+      db_name:                 yiid_staging
       collection_name:         session
       session_name:            yiid_staging
       session_cookie_domain:   .yiiddev.com
@@ -146,7 +148,8 @@ test:
   mailer:
     param:
       delivery_strategy: none
-
+      transport:
+        class: Swift_NullTransport
 
 all:
   logger:
@@ -166,9 +169,6 @@ all:
           param:
             level: debug
             file: %SF_LOG_DIR%/%SF_APP%_%SF_ENVIRONMENT%.log
-  mailer:
-    param:
-      delivery_strategy: none
 
   routing:
     class: sfPatternRouting

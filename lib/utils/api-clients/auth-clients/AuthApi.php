@@ -1,5 +1,4 @@
 <?php
-require_once(dirname(__FILE__).'/../../../vendor/sqs.php');
 /**
  * abstract AuthApi class
  *

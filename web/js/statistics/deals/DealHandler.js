@@ -1,5 +1,5 @@
 /**
- * @nocombine statistics
+ * @combine statistics
  */
 
 /**
@@ -102,6 +102,7 @@ var DealForm = {
     jQuery('#deal_button_wording').toggleValue();
     jQuery('#deal_summary').toggleValue();
     jQuery('#deal_description').toggleValue();
+    jQuery('#deal_terms_of_deal').toggleValue();    
     jQuery('#deal_redeem_url').toggleValue();
 
     jQuery('.mirror-value').mirrorValue();    
@@ -276,7 +277,7 @@ var DealTable = {
       dataType : 'json',
       // resetForm: lReset,
       success : function(pResponse) {
-        EditInPlace.update(pResponse.content);
+        EditInPlace.update(pResponse.cssid, pResponse.html);
         jQuery(document).trigger('close.facebox');
       }
     };
@@ -353,7 +354,7 @@ var DealTable = {
     debug.log('[DealTable][update]');
     jQuery.ajax({
       type : "GET",
-      url : 'deals/get_deal_table',
+      url : '/deals/get_deal_table',
       dataType : "json",
       success : function(pResponse) {
         if (pResponse.success === true) {

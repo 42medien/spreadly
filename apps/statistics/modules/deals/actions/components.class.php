@@ -27,6 +27,7 @@ class dealsComponents extends sfComponents {
 				'button_wording' => $lDeal->getButtonWording(),
 				'summary' => $lDeal->getSummary(),
 				'description' => $lDeal->getDescription(),
+    	  'terms_of_deal' => $lDeal->getTermsOfDeal(),
 	    	'start_date' => $lDeal->getStartDate(),
 	    	'end_date' => $lDeal->getEndDate(),
     		'coupon_quantity' => $lDeal->getCouponQuantity(),
@@ -47,9 +48,10 @@ class dealsComponents extends sfComponents {
     	$this->pCouponQuantity = '0';
       $this->pEdited = false;
 	    $lDealForm->setDefaults(array(
-				'button_wording' => $lI18n->__('...und freien Probemonat gewinnen!'),
-				'summary' => $lI18n->__('Kostenloser Probemonat'),
-				'description' => $lI18n->__('Liken und damit einmalig pro Person einen freien Probemonat gewinnen!'),
+				'button_wording' => $lI18n->__('...and win a free trial membership!'),
+				'summary' => $lI18n->__('Free trial membership'),
+				'description' => $lI18n->__('Like and win a free one month trial membership'),
+	    	'terms_of_deal' => $lI18n->__('Url to Conditions of Participation'),
 	    	'start_date' => date('Y-m-d G:i:s'),
 	    	'end_date' => date('Y-m-d G:i:s'),
 	    	'coupon_type' => 'single',
@@ -59,7 +61,6 @@ class dealsComponents extends sfComponents {
     }
     $this->pForm = new DomainProfileDealForm();
     $this->pForm->setDefaults(array(
-			'imprint_url' => $lFirstDomain->getImprintUrl(),
 			'id' => $lFirstDomain->getId()
     ));
 

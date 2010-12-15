@@ -153,6 +153,9 @@ class TwitterAuthApiClient extends AuthApi {
   public function completeUser(&$pUser, $pObject) {
     $pUser->setUsername(UserUtils::getUniqueUsername(StringUtils::normalizeUsername($pObject->screen_name)));
     $pUser->setDescription($pObject->description);
+    $pUser->setActive(true);
+    $pUser->setAgb(true);
+
     // try to split full-name
     $lName = MicroformatsTools::splitFN($pObject->name);
     if (array_key_exists("firstname", $lName)) {
@@ -176,9 +179,15 @@ class TwitterAuthApiClient extends AuthApi {
     $pOnlineIdentity->setUserId($pUser->getId());
     $pOnlineIdentity->setAuthIdentifier($pAuthIdentifier);
     $pOnlineIdentity->setSocialPublishingEnabled(true);
-    $pOnlineIdentity->save();
 
-    TwitterImportClient::updateIdentity($pOnlineIdentity, $pObject);
+    if ($pObject->name) {
+      $pOnlineIdentity->setName($pObject->name);
+    } else {
+      $pOnlineIdentity->setName($pObject->screen_name);
+    }
+
+    $pOnlineIdentity->setLocationRaw($pObject->location);
+    $pOnlineIdentity->save();
 
     $this->importContacts($pOnlineIdentity->getId());
 

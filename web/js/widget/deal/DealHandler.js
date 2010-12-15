@@ -1,5 +1,5 @@
 /**
- * @nocombine likepopup
+ * @combine likepopup
  */
 
 var DealNav = {

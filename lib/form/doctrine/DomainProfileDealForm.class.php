@@ -22,15 +22,13 @@ class DomainProfileDealForm extends BaseDomainProfileForm
     }
 
     $this->setWidgets(array(
-      'imprint_url' => new sfWidgetFormInputText(),
       'id' => new sfWidgetFormSelect(array('choices' => $lUrls)),
     ));
 
     $this->setValidators(array(
-      'imprint_url' => new sfValidatorUrl(array('max_length' => 512, 'required' => true), array('invalid' => $lI18n->__('Invalid Url'))),
       'id' => new sfValidatorInteger(array('required' => true))
     ));
-    
+
     //$this->embedRelation('Deals', 'DealForm');
 
 //    $this->widgetSchema->setNameFormat('domainprofile[%s]');

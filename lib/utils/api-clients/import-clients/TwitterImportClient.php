@@ -1,9 +1,4 @@
 <?php
-require_once(dirname(__FILE__).'/../../../../config/ProjectConfiguration.class.php');
-
-$configuration = ProjectConfiguration::getApplicationConfiguration('platform', 'batch', true);
-sfContext::createInstance($configuration);
-
 /**
  * class to import twitter contacts
  *
@@ -36,8 +31,6 @@ class TwitterImportClient {
     self::importFriends($pOnlineIdentity, $lJsonFriendsObject);
     self::updateIdentity($pOnlineIdentity, $lJsonUserObject);
   }
-
-
 
   public static function importFriends(&$pOnlineIdentity, $lJsonObject) {
     $pOnlineIdentity->setFriendIds(implode(",", $lJsonObject));

@@ -141,7 +141,7 @@ a.question_link{color: #FFFFFF !important;}
 .error_list li{border-bottom: 1px solid #cdcdcd;}
 .btn{background: #fff url("/img/sprites/sprite_popup.png") no-repeat 110px -1269px;}
 .btn:hover{background-color: #4EA734;color: #fff;}
-#check_facebook{background: #F2F2F2 url("/img/sprites/sprite_popup.png") no-repeat 25px -700px;}
+#check_facebook{background: #FAFAFA url("/img/sprites/sprite_popup.png") no-repeat 25px -700px;}
 #choose_facebook{background: #F2F2F2 url("/img/sprites/sprite_popup.png") no-repeat 0 -859px;}
 #check_google{background: #FAFAFA url("/img/sprites/sprite_popup.png") no-repeat  25px -490px;}
 #choose_google{background: #F2F2F2 url("/img/sprites/sprite_popup.png") no-repeat  0 -643px;}

@@ -25,7 +25,7 @@
 	</div>
 <?php } ?>
 
-<form action="<?php echo url_for('deals/save'); ?>" method="post" id="deal_form" name="deal_form">
+<form action="" method="post" id="deal_form" name="deal_form">
 	<?php echo $pForm['deal']['id']->render();?>
 	<?php echo $pForm['_csrf_token']->render(); ?>
   <div id="create-deal-content">
@@ -48,7 +48,7 @@
   			</div>
   			<div class="clearfix" id="deal-domain-select-box">
 					<?php echo $pForm['id']->render();?><br />
-					<?php echo __('Push your content into social networks through recommendations. Only one deal per domain at a time. Please allow 24 hours for reviewing new or changed deals. '); ?>
+					<?php echo __('Push your content into social networks through recommendations. Only one deal per domain at a time. Please allow 24 hours for reviewing new or changed deals.'); ?>
   			</div>
 
 <!-- ********** Create button area ********** -->
@@ -85,7 +85,7 @@
 					      </div>
 
 					      <div id="additional_text_area_like" class="left big_space_to_left deal_button_wording-mirror">
-					        <?php echo __('...und freien Probemonat gewinnen'); ?>
+					        <?php echo __('...and win a free trial membership for one month!'); ?>
 					      </div>
 					    </div>
 					  </div>
@@ -119,7 +119,7 @@
 							</div>
 							<?php echo $pForm['deal']['start_date']->render();?> -
 							<?php echo $pForm['deal']['end_date']->render();?>
-							<div style="padding-left: 106px;">
+							<div style="padding-left: 115px;">
 								<?php echo $pForm['deal']['end_date']->renderError();?>
 								<?php echo $pForm['deal']['start_date']->renderError();?>
 							</div>
@@ -130,13 +130,6 @@
       					<?php echo $pForm['deal']['terms_of_deal']->renderError();?>
       				</div>
       				<?php echo $pForm['deal']['terms_of_deal']->render();?>
-      			</div>
-						<div class="form-row">
-							<div class="label-box">
-      					<?php echo $pForm['imprint_url']->renderLabel();?>
-      					<?php echo $pForm['imprint_url']->renderError();?>
-							</div>
-      				<?php echo $pForm['imprint_url']->render();?><br />
       			</div>
     			</div>
 
@@ -149,10 +142,9 @@
           			<div class="coupon-foot"><?php echo __('Expires at'); ?> <span id="deal_end_date-mirror"><?php echo $lDefaultDeal['end_date']; ?></span></div>
           		</div>
           		<div class="meta-label" id="accept-tod">
-          			<input type="checkbox" name="coupon-accept-tod" /><?php echo __('I accept the %terms%', array('%terms%' => link_to(__('Terms of Deal'), '/'))); ?>
+          			<input type="checkbox" name="coupon-accept-tod" /><?php echo __('I accept the %terms%', array('%terms%' => link_to(__('OFFER_TERMS_OF_DEAL'), '/'))); ?>
           		</div>
           		<img src="/img/global/yiid-btn-like-en.png"/>
-          		<div style="text-align: right;"><?php echo __('Imprint'); ?></div>
         		</div>
     			</div>
   			</div>
@@ -193,7 +185,7 @@
 									</div>
 									<?php if($lDeal->isUnlimited()) {?>
 										<div class="inline-row" id="edit-quantity">
-											<?php echo __('Your coupon quantity is unlimited'); ?>
+											<?php echo __('Your coupon quantity is unlimited.'); ?>
 										</div>
 									<?php } else { ?>
 										<div class="inline-row" id="edit-quantity">
@@ -276,10 +268,10 @@
 	        		<div class="content-box yellow">
 	          		<div class="coupon-summary deal_summary-mirror"><?php echo $lDefaultDeal['summary']; ?></div>
 	          		<div class="coupon-description">
-	          			<p><?php echo __('Ihr Gutschein-Code:'); ?></p>
+	          			<p><?php echo __('Your Code:'); ?></p>
 	          			<p><strong class="deal_coupon_single_code-mirror"><?php echo $pDefaultCode; ?></strong></p>
 	          		</div>
-	          		<div class="coupon-foot">Expires at <?php echo $lDefaultDeal['end_date']; ?></div>
+	          		<div class="coupon-foot"><?php echo __('Expires at'); ?> <?php echo $lDefaultDeal['end_date']; ?></div>
 	          		<a href="/" class="deal_redeem_url-mirror"><?php echo $lDefaultDeal['redeem_url']; ?></a>
 	          	</div>
 	        	</div>
@@ -287,14 +279,14 @@
 	  		</div>
 
 <!-- ********** form-foot: accept terms of use ********** -->
-	  		<div class="form-row" id="terms-of-use">
+	  		<div class="form-row clearfix" id="terms-of-use">
 					<?php echo $pForm['deal']['tos_accepted']->render(array('class' => 'left'));?>
-					<?php echo __($pForm['deal']['tos_accepted']->renderLabel(), array('%terms%' => link_to('Terms of Deals', '/', array('target' => '_blank'))));?>
+					<?php echo __($pForm['deal']['tos_accepted']->renderLabel(), array('%terms%' => link_to(__('Terms of Deals'), '/', array('target' => '_blank'))));?>
 					<?php echo $pForm['deal']['tos_accepted']->renderError();?>
 				</div>
-				<input type="submit" class="button positive" id="proceed-deal-button" value="<?php echo __('Submit Deal >>', null, 'widget');?>" />
+				<input type="submit" class="button positive" id="proceed-deal-button" value="<?php echo __('Submit Deal');?>" />
 				<?php echo __('or'); ?>
-				<?php echo link_to('Cancel', 'deals/get_create_index', array('class' => 'link-deal-content')); ?>
+				<?php echo link_to(__('Cancel Deal'), 'deals/get_create_index', array('class' => 'link-deal-content')); ?>
 			</div>
 		</div>
 	</div>
