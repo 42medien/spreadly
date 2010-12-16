@@ -7,7 +7,7 @@ set :scm,         :subversion
 set :scm_username, "christian.weyand"
 set :scm_password, "c211-w656*1983"
 
-set :deploy_directory, "/tmp/capistrano"
+set :deploy_directory, "/home/httpd/vhosts"
 set :current_dir, "httpdocs"
 
 role :web,    "mario.obaake.com"                         # Your HTTP server, Apache/etc
