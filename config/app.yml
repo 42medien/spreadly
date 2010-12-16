@@ -2,7 +2,7 @@
 # Global settings
 #
 all:
-  release_name: 'local'
+  release_name: 'dev'
 
   stream:
     days_limit_hot:      30    #  days in the past we still consider as active
