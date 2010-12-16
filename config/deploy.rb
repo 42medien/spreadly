@@ -8,6 +8,7 @@ set :scm_username, "christian.weyand"
 set :scm_password, "c211-w656*1983"
 
 set :deploy_directory, "/tmp/capistrano"
+set :current_dir, "httpdocs"
 
 role :web,    "mario.obaake.com"                         # Your HTTP server, Apache/etc
 #role :db,     "donkeykong.obaake.com", :primary => true  # This is where Rails migrations will run
@@ -46,10 +47,8 @@ namespace :deploy do
   desc "Overwrite the stop task because symfony doesn't need it."
   task :stop do ; end
 
-  desc "Customize migrate task to work with symfony."
-  task :migrate do
-    run "php #{latest_release}/symfony doctrine:migrate --env=#{sf_env}"
-  end
+  desc "Overwrite the migrate task because symfony doesn't need it."
+  task :migrate do ; end
 
   desc "We do not need to restart anything, so it was taken out."
   task :default do

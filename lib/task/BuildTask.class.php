@@ -86,6 +86,7 @@ EOF;
     } elseif($env == 'prod') {
       // add arguments for the "prod" environment
       $args[] = '--all-classes';
+      $args[] = '--and-migrate';
     } else {
       throw new sfException(sprintf('Module "%s" does not exist.', $env));
     }
