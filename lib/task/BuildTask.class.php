@@ -46,8 +46,14 @@ EOF;
     $this->runTask('yiid:generate-batch-config', array(), array('application' => $options['application'], 'env' => $options['env']));
     $this->executeDbTasks($arguments, $options);
 
+    // new arguments array
+    $args = array();
+    if ($options['no-confirmation']) {
+      $args[] = '--no-confirmation';
+    }
+
     // add i18n-sync
-    $this->runTask('yiid:i18n-sync', array(), array('env' => $options['env']));
+    $this->runTask('yiid:i18n-sync', $args, array('env' => $options['env']));
 
     // build js
     $this->runTask('yiid:build-js', array(), array('application' => $options['application'], 'env' => $options['env']));
@@ -67,15 +73,15 @@ EOF;
 
     // new arguments array
     $args = array();
+    if ($options['no-confirmation']) {
+      $args[] = '--no-confirmation';
+    }
 
     // generate arguments array
     if ($env == 'dev' || $env == 'staging') {
       // add arguments for the "dev" or "staging" environment
       $args[] = '--all';
       // check if "confirmation" is enabled
-      if ($options['no-confirmation']) {
-        $args[] = '--no-confirmation';
-      }
       $args[] = '--and-load';
     } elseif($env == 'prod') {
       // add arguments for the "prod" environment
@@ -91,7 +97,7 @@ EOF;
 
     // initialize mongo objects
     if ($env == 'dev' || $env == 'staging') {
-      if ("y" == $this->ask("Mongo auf dem ".$env.'-System plattmachen? (host: '.sfConfig::get('app_mongodb_host').' collection: '.sfConfig::get('app_mongodb_database_name').") (y/N)")) {
+      if ($options['no-confirmation'] || "y" == $this->ask("Mongo auf dem ".$env.'-System plattmachen? (host: '.sfConfig::get('app_mongodb_host').' collection: '.sfConfig::get('app_mongodb_database_name').") (y/N)")) {
         $this->logSection('mongo tasks', 'i am the mongo killer!');
         MongoDbConnector::getInstance()->getDatabase(sfConfig::get('app_mongodb_database_name'))->drop();
         //$this->getFilesystem()->execute("php data/fixtures/initializeMongoObjects.php");

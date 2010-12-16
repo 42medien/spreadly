@@ -14,6 +14,7 @@ class I18nSyncTask extends sfBaseTask {
       new sfCommandOption('application', null, sfCommandOption::PARAMETER_REQUIRED, 'The application name'),
       new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev'),
       new sfCommandOption('connection', null, sfCommandOption::PARAMETER_REQUIRED, 'The connection name', 'translation'),
+      new sfCommandOption('no-confirmation', null, sfCommandOption::PARAMETER_NONE, 'Do not prompt for confirmation')
     ));
 
     $this->namespace        = 'yiid';
@@ -51,7 +52,7 @@ EOF;
 
       $query = "mysql --host=".$h." -u ".$u." -p".$p." ".$d." < i18n.sql";
 
-      if ("y" == $this->ask("run: '".$query."'?")) {
+      if ($options['no-confirmation'] || "y" == $this->ask("run: '".$query."'?")) {
         $this->logSection('yiid', 'import i18n db');
         $this->getFilesystem()->execute("wget http://yiid:affen2010@staging.yiiddev.com/service/i18n.sql");
         $this->getFilesystem()->execute($query);
