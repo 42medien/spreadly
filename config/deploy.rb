@@ -12,7 +12,7 @@ set :deploy_directory, "/tmp/capistrano"
 role :web,    "mario.obaake.com"                         # Your HTTP server, Apache/etc
 #role :db,     "donkeykong.obaake.com", :primary => true  # This is where Rails migrations will run
 
-set  :keep_releases,  5 
+set  :keep_releases,  5
 
 task :prod do
   set :sf_env, "prod"
@@ -47,28 +47,30 @@ namespace :deploy do
   task :migrate do
     run "php #{latest_release}/symfony doctrine:migrate --env=#{sf_env}"
   end
-  
+
   desc "We do not need to restart anything, so it was taken out."
   task :default do
     update
   end
-  
+
   desc "This task is the main task of a deployment."
   task :update do
     transaction do
+      #symfony.disable
       update_code
+      symfony.yiid.build
+      #symfony.migrate
       symlink
-      symfony.cc
     end
   end
-  
+
   desc "We do not need to restart anything, so it was taken out."
   task :migrations do
     update_code
     migrate
     symlink
   end
-  
+
   desc "Symlink static directories and static files that need to remain between deployments."
   task :share_childs do
     if shared_children
@@ -84,7 +86,7 @@ namespace :deploy do
   task :finalize_update, :except => { :no_release => true } do
     run "mkdir -p #{latest_release}/cache"
     #run "chown -R httpd:httpd #{latest_release}"
-    
+
     # Share common files & folders
     share_childs
   end
@@ -94,12 +96,12 @@ namespace :deploy do
 end
 
 namespace :symfony do
-  
+
   desc "Clear the cache."
   task :cc do
     run "php #{latest_release}/symfony cc --env=#{sf_env}"
   end
-  
+
   namespace :yiid do
 
     desc "Build it."
