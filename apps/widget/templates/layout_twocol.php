@@ -49,7 +49,7 @@
       <div id="site_info"></div>
 
     </div>
-    <img id="general-ajax-loader" style="display:none;" src="http://www.yiid.local/img/global/ajax-loader-bar-circle.gif" />
+    <img id="general-ajax-loader" style="display:none;" src="/img/global/ajax-loader-bar-circle.gif" />
     <script  type="text/javascript">
       jQuery(document).ready( function() {
         <?php

@@ -9,7 +9,6 @@
 
     <?php include_stylesheets(); ?>
     <script type="text/javascript" src="/js/100_main/include/likepopup-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
-
     <link rel="shortcut icon" href="/img/global/favicon_16x16.ico" />
   </head>
   <body onunload="LikePopup.refreshParent();">
@@ -42,6 +41,7 @@
         </div>
       </div>
     </div>
+    <img id="general-ajax-loader" style="display:none;" src="/img/global/ajax-loader-bar-circle.gif" />
 	  <script  type="text/javascript">
 	    jQuery(document).ready( function() {
 	      <?php

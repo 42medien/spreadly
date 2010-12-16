@@ -27,6 +27,8 @@ var StaticLike = {
         StaticLike.aCase = 'dislike';
       }
       
+      jQuery('.popup_button').hide();
+      
       var lServs = StaticLike.getServices();
 
       //var lNew = Utils.implode(',', lServs);
@@ -35,7 +37,10 @@ var StaticLike = {
           data: { ei_kcuf: new Date().getTime(), serv: Utils.implode(',', lServs) },
           type:      'GET',
           dataType:  'json',
-          success:   StaticLike.showSuccess
+          success:   function(pResponse) {
+            jQuery('.popup_button').show();
+            StaticLike.showSuccess(pResponse); 
+          }
       };
       jQuery('#static-like-form').ajaxSubmit(options);    
     });
