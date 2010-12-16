@@ -1,37 +1,27 @@
 # You can find more information about this file on the symfony website:
 # http://www.symfony-project.org/reference/1_4/en/04-Settings
-
 prod:
-  .settings:
-    no_script_name:         true
-    logging_enabled:        false
-
+  # nothing yet
 
 dev:
   .settings:
-    error_reporting:        <?php echo (E_ALL | E_STRICT)."\n" ?>
+    error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_NOTICE)."\n" ?>
     web_debug:              true
     cache:                  false
-    no_script_name:         false
     etag:                   false
 
 staging:
   .settings:
-    no_script_name:         true
-    logging_enabled:        false
-    
-test:
-  .settings:
-    error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_NOTICE)."\n" ?>
+    error_reporting:        <?php echo (E_ALL | E_STRICT)."\n" ?>
+    web_debug:              true
     cache:                  false
-    web_debug:              false
-    no_script_name:         false
     etag:                   false
 
 all:
   .settings:
+    no_script_name:         false
     # Form security secret (CSRF protection)
-    csrf_secret:            4367dd6b6e6f0165a68fd0fb6286b8e28f985ce6
+    csrf_secret:            false
 
     # Output escaping settings
     escaping_strategy:      true
@@ -40,4 +30,4 @@ all:
     # Enable the database manager
     use_database:           true
     i18n:                   true
-    check_lock:             on    
+    check_lock:             on

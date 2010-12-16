@@ -1,30 +1,20 @@
 prod:
   .settings:
-    no_script_name:         true
     logging_enabled:        false
-
 
 dev:
   .settings:
     error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_NOTICE)."\n" ?>
     web_debug:              true
     cache:                  false
-    no_script_name:         false
     etag:                   false
 
 staging:
   .settings:
-    no_script_name:         true
-    logging_enabled:        false
-    
-
-test:
-  .settings:
     error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_NOTICE)."\n" ?>
-    cache:                  off
-    web_debug:              off
-    no_script_name:         off
-    etag:                   off
+    web_debug:              true
+    cache:                  false
+    etag:                   false
 
 all:
   .actions:
@@ -41,6 +31,7 @@ all:
 #    module_disabled_action: disabled  # A module disabled in the module.yml
 
   .settings:
+    no_script_name:         true
     # Form security secret (CSRF protection)
     csrf_secret:       false     # Unique secret to enable CSRF protection or false to disable
 

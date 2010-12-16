@@ -2,29 +2,20 @@
 # http://www.symfony-project.org/reference/1_4/en/04-Settings
 
 prod:
-  .settings:
-    no_script_name:         true
-    logging_enabled:        false
+  # nothing yet
 
 dev:
   .settings:
     error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_NOTICE)."\n" ?>
     web_debug:              true
     cache:                  false
-    no_script_name:         false
     etag:                   false
 
 staging:
   .settings:
-    no_script_name:         true
-    logging_enabled:        false
-
-test:
-  .settings:
     error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_NOTICE)."\n" ?>
+    web_debug:              true
     cache:                  false
-    web_debug:              false
-    no_script_name:         false
     etag:                   false
 
 all:
@@ -39,6 +30,8 @@ all:
     secure_action:          index    # The credentials required for an action
 
   .settings:
+    no_script_name:         true
+
     # Form security secret (CSRF protection)
     csrf_secret:            16575218ebe0be6e71b177fe30a9d99711e140e4
     enabled_modules:        [general]

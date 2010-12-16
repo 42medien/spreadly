@@ -31,7 +31,7 @@ all:
     no_script_name:         false
 
     # Form security secret (CSRF protection)
-    csrf_secret:            f95ebd349a06cbdcb77d128fe72f26f56ad7a78d
+    csrf_secret:            false
 
     # Output escaping settings
     escaping_strategy:      false
@@ -40,11 +40,11 @@ all:
     # Enable the database manager
     use_database:           true
     i18n:                   true
-    
+
     enabled_modules: [default, sfGuardAuth, sfApply]
     login_module:           sfGuardAuth
     login_action:           signin
-    
+
     enabled_modules:        [default, sfGuardAuth, sfGuardGroup, sfGuardUser, sfGuardPermission]
     check_lock:             on
     standard_helpers:       [I18N, Partial]

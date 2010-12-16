@@ -2,12 +2,11 @@
 # http://www.symfony-project.org/reference/1_4/en/04-Settings
 
 prod:
-  .settings:
-    logging_enabled:        false
+  # nothing yet
 
 staging:
   .settings:
-    error_reporting:        <?php echo (E_ALL | E_STRICT)."\n" ?>
+    error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_NOTICE)."\n" ?>
     web_debug:              true
     cache:                  false
     etag:                   false
@@ -19,16 +18,10 @@ dev:
     cache:                  false
     etag:                   false
 
-test:
-  .settings:
-    error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_NOTICE)."\n" ?>
-    cache:                  false
-    web_debug:              false
-    etag:                   false
-
 all:
   .settings:
     no_script_name:         true
+    logging_enabled:        true
 
     # Form security secret (CSRF protection)
     csrf_secret:            ad0f91cc10d6bbb4e965bdca954e452929653404
