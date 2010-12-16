@@ -30,7 +30,7 @@ EOF;
     if ($options['env'] != "dev") {
       $file = sfConfig::get('sf_config_dir')."/app.yml";
       $content = file_get_contents($file);
-      $content = preg_replace("/release_name:.+'.+'/i", "release_name: '".$options['release-name']."'", $content);
+      $content = preg_replace("/release_name:\s+'.+'/i", "release_name: '".$options['release-name']."'", $content);
       $this->logSection('set:release-name', $file);
       file_put_contents($file, $content);
     } else {
