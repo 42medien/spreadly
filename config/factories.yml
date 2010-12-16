@@ -6,6 +6,10 @@
 # local settings
 #
 dev:
+  logger:
+    param:
+      level: debug
+
   mailer:
     param:
       delivery_strategy: none
@@ -48,6 +52,10 @@ dev:
 # Development settings
 #
 staging:
+  logger:
+    param:
+      level: debug
+
   i18n:
     class: sfI18N
     param:
@@ -84,6 +92,10 @@ staging:
 # Productive settings
 #
 prod:
+  logger:
+    param:
+      level: warning
+
   i18n:
     class: sfI18N
     param:
@@ -155,7 +167,6 @@ all:
   logger:
     class: sfAggregateLogger
     param:
-      level: debug
       loggers:
         sf_web_debug:
           class: sfWebDebugLogger
