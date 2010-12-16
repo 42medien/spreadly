@@ -2,7 +2,7 @@ set :application, "yiid"
 set :user, 'localadm'
 set :use_sudo, false
 
-set :repository,  "https://svn.ekaabo.com/yiid/trunk"
+set :repository,  "https://svn.ekaabo.com/yiid/"
 set :scm,         :subversion
 set :scm_username, "christian.weyand"
 set :scm_password, "c211-w656*1983"
@@ -19,6 +19,7 @@ task :prod do
   set :domain,      "yiid.com"
   set :deploy_to,   "#{deploy_directory}/#{domain}"
   set :deploy_via, :export
+  ask_for_repository
 end
 
 task :staging do
@@ -26,6 +27,8 @@ task :staging do
   set :domain,      "yiiddev.com"
   set :deploy_to,   "#{deploy_directory}/#{domain}"
   set :deploy_via, :checkout
+  puts "Deploying #{application} to #{domain} for env=#{sf_env} …"
+  ask_for_repository
 end
 
 # Symfony stuff
@@ -56,10 +59,9 @@ namespace :deploy do
   desc "This task is the main task of a deployment."
   task :update do
     transaction do
-      #symfony.disable
       update_code
+      symfony.yiid.set
       symfony.yiid.build
-      #symfony.migrate
       symlink
     end
   end
@@ -101,12 +103,54 @@ namespace :symfony do
   task :cc do
     run "php #{latest_release}/symfony cc --env=#{sf_env}"
   end
+  
+  desc "Disable the app."
+  task :disable do
+    run "php #{latest_release}/symfony project:disable #{sf_env}"
+  end
 
+  desc "Enable the app."
+  task :enable do
+    run "php #{latest_release}/symfony project:enable #{sf_env}"
+  end
+  
   namespace :yiid do
-
+    desc "Set the release name and other stuff."
+    task :set do
+      run "php #{current_release}/symfony yiid:set --release-name=#{release_name} --env=#{sf_env}"
+    end
+    
     desc "Build it."
     task :build do
-      run "php #{latest_release}/symfony yiid:build --all --env=#{sf_env}"
+      command = "php #{latest_release}/symfony yiid:build --all --env=#{sf_env} --no-confirmation"
+
+      do_it = Capistrano::CLI.ui.ask("Do you really want to do this:\n#{command}\nAnswer with (y|n)[n]: ")
+
+      if do_it=='y'
+        run command
+      else
+        puts "Skipping it"
+      end
     end
   end
 end
+
+def ask_for_repository
+  type = Capistrano::CLI.ui.ask("Checkout Trunk, Branch or Tag (trunk|branch|tag)[trunk]: ")
+
+  if type == 'branch'
+    set :repository, repository + 'branches/releases/'      
+  elsif type == 'tag'
+    set :repository, repository + 'tags/'      
+  else
+    set :repository, repository + 'trunk'
+  end
+  
+  if ['branch', 'tag'].include? type
+    name = Capistrano::CLI.ui.ask("Which name for #{repository}: ")
+    set :repository, "#{repository}" + (name.strip.empty? ? default : name)
+  end
+  
+  puts "Using repository: " + repository
+end
+
