@@ -2,9 +2,7 @@
 # Global settings
 #
 all:
-  release:
-    name:     '20101214-2'
-    gzip:     0              ## set 1 to force local gz support
+  release_name: 'local'
 
   stream:
     days_limit_hot:      30    #  days in the past we still consider as active
@@ -49,6 +47,7 @@ prod:
     environment:       'prod'
     dev:               0
     pager:             20
+    gzip:              1              ## set 1 to force local gz support
 
   twitter:
     oauth_token:   "WbIgXrxlAbGfdpO8kLyWQ"
@@ -99,6 +98,7 @@ dev:
     environment:      'dev'
     dev:              1
     pager:            20
+    gzip:             1              ## set 1 to force local gz support
 
   twitter:
     oauth_token:   "RAhMdOPsmXkm0EccGeu9w"
@@ -148,6 +148,7 @@ staging:
     environment:      'staging'
     dev:              1
     pager:            20
+    gzip:             0              ## set 1 to force local gz support
 
   twitter:
     oauth_token:   "7tHsjwbsp6pE3EnMB8MtAg"

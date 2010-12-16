@@ -20,7 +20,7 @@ class CdnSingleton {
       self::$aHostCount = count(self::$aHosts);
 
       $encodings=array_key_exists('HTTP_ACCEPT_ENCODING', $_SERVER) ? $_SERVER['HTTP_ACCEPT_ENCODING'] : false;
-      if (preg_match('/(gzip|deflate)/i',$encodings) && sfConfig::get('app_release_gzip', 1) && !(preg_match('/safari/i',$_SERVER["HTTP_USER_AGENT"])) ) {
+      if (preg_match('/(gzip|deflate)/i',$encodings) && sfConfig::get('app_settings_gzip', 1) && !(preg_match('/safari/i',$_SERVER["HTTP_USER_AGENT"])) ) {
         self::$gZip = true;
       }
 
