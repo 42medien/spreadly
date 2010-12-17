@@ -73,8 +73,8 @@ EOF;
     $this->getFilesystem()->execute("s3cmd --bucket-location=EU -P -r --exclude='*.*' --include '*.gz' --mime-type 'application/javascript' --add-header 'Content-Encoding: gzip' sync web/js/100_main/include/ s3://$lBucket/$lReleaseName/js/100_main/include/");
     $this->getFilesystem()->execute("find ./web/js/100_main/include -name '*.gz' -exec rm {} \;");
 
-    $this->getFilesystem()->execute("find ./web/css -type f -exec 7z a -tgzip  -x\!\*.svn -x\!\*.gz  {}.gz {} \;");
-    $this->getFilesystem()->execute("s3cmd --bucket-location=EU -P -r --exclude='*.*' --include '*.gz' --mime-type 'text/css' --add-header 'Content-Encoding: gzip' sync web/css/ s3://$lBucket/$lReleaseName/css/");
-    $this->getFilesystem()->execute("find ./web/css -name '*.gz' -exec rm {} \;");
+    $this->getFilesystem()->execute("find ./web/s3sync/css -type f -exec 7z a -tgzip  -x\!\*.svn -x\!\*.gz  {}.gz {} \;");
+    $this->getFilesystem()->execute("s3cmd --bucket-location=EU -P -r --exclude='*.*' --include '*.gz' --mime-type 'text/css' --add-header 'Content-Encoding: gzip' sync web/s3sync/css/ s3://$lBucket/$lReleaseName/css/");
+    $this->getFilesystem()->execute("find ./web/s3sync/css -name '*.gz' -exec rm {} \;");
   }
 }
