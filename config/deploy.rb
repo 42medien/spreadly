@@ -1,5 +1,5 @@
 set :application, "yiid"
-set :user, 'localadm'
+set :user, 'httpd'
 set :use_sudo, false
 
 set :repository,  "https://svn.ekaabo.com/yiid/"
@@ -102,7 +102,7 @@ namespace :symfony do
   task :cc do
     run "php #{latest_release}/symfony cc --env=#{sf_env}"
   end
-  
+
   desc "Disable the app."
   task :disable do
     run "php #{latest_release}/symfony project:disable #{sf_env}"
@@ -112,13 +112,13 @@ namespace :symfony do
   task :enable do
     run "php #{latest_release}/symfony project:enable #{sf_env}"
   end
-  
+
   namespace :yiid do
     desc "Set the release name and other stuff."
     task :set do
       run "php #{current_release}/symfony yiid:set --release-name=#{release_name} --env=#{sf_env}"
     end
-    
+
     desc "Build it."
     task :build do
       command = "php #{latest_release}/symfony yiid:build --all --env=#{sf_env} --no-confirmation"
@@ -138,18 +138,18 @@ def ask_for_repository
   type = Capistrano::CLI.ui.ask("Checkout Trunk, Branch or Tag (trunk|branch|tag)[trunk]: ")
 
   if type == 'branch'
-    set :repository, repository + 'branches/releases/'      
+    set :repository, repository + 'branches/releases/'
   elsif type == 'tag'
-    set :repository, repository + 'tags/'      
+    set :repository, repository + 'tags/'
   else
     set :repository, repository + 'trunk'
   end
-  
+
   if ['branch', 'tag'].include? type
     name = Capistrano::CLI.ui.ask("Which name for #{repository}: ")
     set :repository, "#{repository}" + (name.strip.empty? ? default : name)
   end
-  
+
   puts "Using repository: " + repository
 end
 
