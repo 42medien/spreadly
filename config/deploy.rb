@@ -4,8 +4,8 @@ set :use_sudo, false
 
 set :repository,  "https://svn.ekaabo.com/yiid/"
 set :scm,         :subversion
-set :scm_username, "christian.weyand"
-set :scm_password, "c211-w656*1983"
+set :scm_username, "yiid"
+set :scm_password, "yiidyiidyiid"
 
 set :deploy_directory, "/home/httpd/vhosts"
 set :current_dir, "httpdocs"
