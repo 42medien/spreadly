@@ -53,8 +53,8 @@ staging:
   translation:
     class: sfDoctrineDatabase
     param:
-      dsn:        mysql:dbname=yiid_i18n;host=donkeykong
-      username:   yiid_i18n
+      dsn:        mysql:dbname=yiid_i18n_staging;host=donkeykong
+      username:   yiid_staging
       password:   fdsmolds32dfs
       attributes:
         default_table_collate: utf8_general_ci
@@ -63,8 +63,8 @@ staging:
   doctrine:
     class: sfDoctrineDatabase
     param:
-      dsn:        mysql:dbname=communipedia_dev;host=donkeykong
-      username:   communipedia_dev
+      dsn:        mysql:dbname=yiid_staging;host=donkeykong
+      username:   yiid_staging
       password:   fdsmolds32dfs
       attributes:
         default_table_collate: utf8_general_ci
