@@ -61,7 +61,7 @@ EOF;
     $this->runTask('yiid:build-css', array(), array('application' => $options['application'], 'env' => $options['env']));
 
     if ($options['env'] != "dev") {
-      //$this->runTask('yiid:s3-sync', array(), array('env' => $options['env']));
+      $this->runTask('yiid:s3-sync', array(), array('env' => $options['env']));
     }
   }
 
