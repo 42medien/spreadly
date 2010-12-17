@@ -43,7 +43,7 @@ class CdnSingleton {
     if (self::$aHostNumber >= self::$aHostCount) {
       self::$aHostNumber = 0;
     }
-    return self::$aHosts[self::$aHostNumber++];
+    return self::$aHosts[self::$aHostNumber++]."/".sfConfig::get('app_amazons3_bucket');
   }
 
   public function isGzipped() {
