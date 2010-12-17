@@ -81,7 +81,7 @@ prod:
     database_name_stats:  'yiid_stats'
 
   amazons3:
-    bucket:      'http://www.yiid.local/'
+    bucket:      'live.yiidcdn.com'
     hosts:
       - 'http://yiidstatic1.publicclubs.de'
       - 'http://yiidstatic2.publicclubs.de'
@@ -98,7 +98,7 @@ dev:
     environment:      'dev'
     dev:              1
     pager:            20
-    gzip:             1              ## set 1 to force local gz support
+    gzip:             0              ## set 1 to force local gz support
 
   twitter:
     oauth_token:   "RAhMdOPsmXkm0EccGeu9w"
@@ -132,7 +132,7 @@ dev:
     database_name_stats:  'yiid_stats_dev'
 
   amazons3:
-    bucket:      'http://www.yiid.local/'
+    bucket:      'www.yiid.local'
     hosts:
       - 'http://www.yiid.local'
 
@@ -148,7 +148,7 @@ staging:
     environment:      'staging'
     dev:              1
     pager:            20
-    gzip:             0              ## set 1 to force local gz support
+    gzip:             1              ## set 1 to force local gz support
 
   twitter:
     oauth_token:   "7tHsjwbsp6pE3EnMB8MtAg"
@@ -179,6 +179,6 @@ staging:
     database_name_stats:  'yiid_stats_staging'
 
   amazons3:
-    bucket:        'http://www.yiid.local/'
+    bucket:        'dev.yiidcdn.com'
     hosts:
-      - 'https://s3-eu-west-1.amazonaws.com/dev.yiidcdn.com'
+      - 'https://s3-eu-west-1.amazonaws.com'
