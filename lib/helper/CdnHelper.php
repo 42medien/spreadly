@@ -97,9 +97,7 @@ function cdn_image_tag($pFilename, $pOptions = array()) {
 function concatNameWithRevision($pFilename, $pType) {
   $lHost = '';
   $lHostname = CdnSingleton::getInstance()->getNextHost();
-  if (sfConfig::get('sf_environment') != 'dev') {
-    $lHostname .= '/' . sfConfig::get('app_release_name') ;
-  }
+  $lHostname .= '/' . sfConfig::get('app_release_name') ;
 
   $lHost .= $lHostname .'/'.  $pType . '/' . $pFilename . CdnSingleton::getInstance()->isGzipped();
   return $lHost;
@@ -116,9 +114,8 @@ function concatNameWithRevision($pFilename, $pType) {
 function concatNameForStaticImages($pFilename) {
   $lHost = '';
   $lHostname = CdnSingleton::getInstance()->getNextHost();
-  if (sfConfig::get('sf_environment') != 'dev') {
-    $lHostname .= '/' . sfConfig::get('app_release_name');
-  }
+  $lHostname .= '/' . sfConfig::get('app_release_name');
+
   $lHost .= $lHostname . '/'. $pFilename;
   return $lHost;
 }
