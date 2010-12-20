@@ -10,8 +10,8 @@ set :scm_password, "yiidyiidyiid"
 set :deploy_directory, "/home/httpd/vhosts"
 set :current_dir, "httpdocs"
 
-role :web,    "mario.obaake.com"                         # Your HTTP server, Apache/etc
-#role :db,     "donkeykong.obaake.com", :primary => true  # This is where Rails migrations will run
+role :web,    "mario.obaake.com"                        # Your HTTP server, Apache/etc
+role :button, "mario.obaake.com"                 # List of Button Instances, comma separated
 
 set  :keep_releases,  5
 
@@ -29,6 +29,7 @@ task :staging do
   set :deploy_to,   "#{deploy_directory}/#{domain}"
   set :deploy_via, :checkout
   puts "Deploying #{application} to #{domain} for env=#{sf_env} …"
+  set :deploy_button, true
   ask_for_repository
 end
 
@@ -53,10 +54,11 @@ namespace :deploy do
   desc "We do not need to restart anything, so it was taken out."
   task :default do
     update
+    update_button if sf_env=='prod' || deploy_button
   end
 
   desc "This task is the main task of a deployment."
-  task :update do
+  task :update, :roles => :web do
     transaction do
       update_code
       symfony.yiid.set
@@ -64,6 +66,16 @@ namespace :deploy do
       symlink
     end
   end
+
+  desc "This task is the main task of a deployment."
+  task :update_button, :roles => :button do
+    transaction do
+      update_code
+      symfony.yiid.set
+      symfony.yiid.build_button
+      symlink
+    end
+  end  
 
   desc "We do not need to restart anything, so it was taken out."
   task :migrations do
@@ -119,6 +131,11 @@ namespace :symfony do
       run "php #{current_release}/symfony yiid:set --release-name=#{release_name} --env=#{sf_env}"
     end
 
+    desc "Build the button."
+    task :build_button do
+      run "php #{current_release}/symfony yiid:build-button --env=#{sf_env}"
+    end
+    
     desc "Build it."
     task :build do
       command = "php #{latest_release}/symfony yiid:build --all --env=#{sf_env} --no-confirmation"
