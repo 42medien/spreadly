@@ -10,12 +10,11 @@ set :scm_password, "yiidyiidyiid"
 set :deploy_directory, "/home/httpd/vhosts"
 set :current_dir, "httpdocs"
 
-role :web,    "mario.obaake.com"                        # Your HTTP server, Apache/etc
-role :button, "mario.obaake.com"                 # List of Button Instances, comma separated
-
 set  :keep_releases,  5
 
 task :prod do
+  role :web,    "mario.obaake.com"                        # Your HTTP server, Apache/etc
+  
   set :sf_env, "prod"
   set :domain,      "yiid.com"
   set :deploy_to,   "#{deploy_directory}/#{domain}"
@@ -24,12 +23,29 @@ task :prod do
 end
 
 task :staging do
+  role :web,    "mario.obaake.com"                        # Your HTTP server, Apache/etc
+  
   set :sf_env, "staging"
   set :domain,      "yiiddev.com"
   set :deploy_to,   "#{deploy_directory}/#{domain}"
   set :deploy_via, :checkout
   puts "Deploying #{application} to #{domain} for env=#{sf_env} …"
-  set :deploy_button, true
+  ask_for_repository
+end
+
+task :button do
+  set :button_deployment, true
+  
+  set :user, 'www-data'
+  role :button, "ec2-46-137-9-10.eu-west-1.compute.amazonaws.com"
+  
+  set :deploy_directory, "/var/www"
+  set :current_dir, "yiid"
+  
+  set :sf_env, "prod"
+  set :domain,      "widgets.yiid.com"
+  set :deploy_to,   "#{deploy_directory}"
+  set :deploy_via, :export
   ask_for_repository
 end
 
@@ -53,12 +69,15 @@ namespace :deploy do
 
   desc "We do not need to restart anything, so it was taken out."
   task :default do
-    update
-    update_button if sf_env=='prod' || deploy_button
+    if button_deployment
+      update_button
+    else
+      update
+    end
   end
-
+  
   desc "This task is the main task of a deployment."
-  task :update, :roles => :web do
+  task :update do
     transaction do
       update_code
       symfony.yiid.set
@@ -68,14 +87,14 @@ namespace :deploy do
   end
 
   desc "This task is the main task of a deployment."
-  task :update_button, :roles => :button do
+  task :update_button do
     transaction do
       update_code
       symfony.yiid.set
       symfony.yiid.build_button
       symlink
     end
-  end  
+  end
 
   desc "We do not need to restart anything, so it was taken out."
   task :migrations do
@@ -132,12 +151,12 @@ namespace :symfony do
     end
 
     desc "Build the button."
-    task :build_button do
+    task :build_button, :roles => :button do
       run "php #{current_release}/symfony yiid:build-button --env=#{sf_env}"
     end
     
     desc "Build it."
-    task :build do
+    task :build, :roles => :web do
       command = "php #{latest_release}/symfony yiid:build --all --env=#{sf_env} --no-confirmation"
 
       do_it = Capistrano::CLI.ui.ask("Do you really want to do this:\n#{command}\nAnswer with (y|n)[n]: ")
