@@ -56,7 +56,11 @@ function include_cdn_javascripts() {
  * @return unknown_type
  */
 function cdn_javascript_tag($pFilename, $pOptions = array()) {
-  return javascript_include_tag(concatNameWithRevision($pFilename, 'js'), $pOptions);
+  if (sfConfig::get("sf_environment") != "dev") {
+    $pFilename = concatNameWithRevision($pFilename, 'css');
+  }
+
+  return javascript_include_tag($pFilename, $pOptions);
 }
 
 
@@ -69,7 +73,11 @@ function cdn_javascript_tag($pFilename, $pOptions = array()) {
  * @return unknown_type
  */
 function cdn_stylesheet_tag($pFilename, $pOptions = array()) {
-  return stylesheet_tag( concatNameWithRevision($pFilename, 'css'), $pOptions);
+  if (sfConfig::get("sf_environment") != "dev") {
+    $pFilename = concatNameWithRevision($pFilename, 'css');
+  }
+
+  return stylesheet_tag( $pFilename, $pOptions);
 }
 
 
