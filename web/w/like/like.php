@@ -8,7 +8,7 @@
 <script type="text/javascript">
   <?php echo printI18nJSObject($pType); ?>
 
-  YiidWidget.init("<?php echo urlencode($pUrl); ?>", "<?php echo $pType; ?>", "<?php echo urlencode($pTitle); ?>", "<?php echo urlencode($pDescription); ?>", "<?php echo urlencode($pPhoto); ?>", "<?php echo urlencode($lClickback); ?>");
+  YiidWidget.init("<?php echo urlencode($pUrl); ?>", "<?php echo $pType; ?>", "<?php echo urlencode($pTitle); ?>", "<?php echo urlencode($pDescription); ?>", "<?php echo urlencode($pPhoto); ?>", "<?php echo urlencode($lClickback); ?>", "<?php echo urlencode($lTags); ?>");
   YiidWidget.aPopupPath = "<?php echo $lPopupUrl;  ?>";
   YiidRequest.aLikeAction = "<?php echo LikeSettings::JS_LIKE_PATH; ?>";
   YiidRequest.aDislikeAction = "<?php echo LikeSettings::JS_DISLIKE_PATH; ?>";

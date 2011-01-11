@@ -40,6 +40,7 @@ if (isset($_GET['social']) && !empty($_GET['social'])) {
 $pTitle = urldecode($_GET['title']);
 $pPhoto = urldecode($_GET['photo']);
 $pDescription = urldecode($_GET['description']);
+$pTags = urldecode($_GET['tags']);
 
 $lClickback = ClickBackHelper::extractClickback($pUrl, $_SERVER['HTTP_REFERER']);
 $lActiveDeal = DealUtils::dealActive($pUrl);
