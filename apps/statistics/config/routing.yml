@@ -54,9 +54,13 @@ configurator:
   url:  /likebutton/index
   param: { module: likebutton, action: index}
 
-analytics:
+visit_analytics:
   url:   visit_history/analytics
   param: { module: visit_history, action: analytics }
+  
+analytics:
+  url:   analytics/index
+  param: { module: analytics, action: index }  
 
 deals:
   url:   deals/index

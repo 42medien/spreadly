@@ -5,7 +5,7 @@
         <?php if($domain_profile->getState() == DomainProfileTable::STATE_PENDING || (isset($pHasError) && $pHasError != false)) { ?>
           <span class="error"><?php echo $domain_profile->getDomain(); ?></span>
         <?php } elseif($domain_profile->getState() == DomainProfileTable::STATE_VERIFIED) { ?>
-          <a href="<?php echo url_for('visit_history/analytics?host_id='.$domain_profile->getId()) ?>"><?php echo $domain_profile->getDomain() ?></a>
+          <a href="<?php echo url_for('@visit_analytics?host_id='.$domain_profile->getId()) ?>"><?php echo $domain_profile->getDomain() ?></a>
         <?php } ?>
       </td>
       <td>

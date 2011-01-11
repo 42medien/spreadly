@@ -1,0 +1,1 @@
+<?php echo include_partial('analytics/filter', array('pVerifiedDomains' => $pVerifiedDomains, 'pHostId' => $pHostId, 'pAggregation' => $pAggregation, 'pDateFrom' => $pDateFrom, 'pDateTo' => $pDateTo)) ?>

@@ -19,7 +19,7 @@
       <?php echo link_to(__('Domains'), 'domain_profiles/index'); ?> |
     </span>
     <span class="<?php if($sf_context->getModuleName()=='visit_history' && $sf_context->getActionName()=='analytics') { echo 'active';} ?> navigation_text">
-      <?php echo link_to(__('Analytics'), '@analytics'); ?> |
+      <?php echo link_to(__('Analytics'), '@visit_analytics'); ?> |
     </span>
     <span class="navigation_text">
       <?php echo link_to(__('Logout'), '@sf_guard_signout'); ?>
