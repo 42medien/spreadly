@@ -60,7 +60,15 @@ visit_analytics:
   
 analytics:
   url:   analytics/index
-  param: { module: analytics, action: index }  
+  param: { module: analytics, action: index } 
+  
+get_filtered_content:
+  url:   analytics/get_filtered_content
+  param: { module: analytics, action: get_filtered_content } 
+  
+get_analytics_activities:
+  url:   analytics/get_analytics_activities
+  param: { module: analytics, action: get_analytics_activities }   
 
 deals:
   url:   deals/index

@@ -23,4 +23,21 @@ class analyticsComponents extends sfComponents
 
     return $parentRet;
 	}
+
+	public function executeFilter_nav(sfWebRequest $request){
+    $this->pFrom = $request->getParameter('date-from', date('Y-m-d', strtotime("6 days ago")));
+    $this->pTo = $request->getParameter('date-to', date('Y-m-d'));
+
+    $this->pVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
+    if(count($this->pVerifiedDomains) > 0) {
+	    $this->pHostId = $this->pVerifiedDomains[0]->getId();
+    }
+	}
+
+	public function executeChart_line_activities(sfWebRequest $request){
+
+	}
+
+
+
 }

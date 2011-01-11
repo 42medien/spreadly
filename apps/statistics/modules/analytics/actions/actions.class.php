@@ -17,6 +17,7 @@ class analyticsActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
     $this->pVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
     if(count($this->pVerifiedDomains) > 0) {
       $this->pHostId = $request->getParameter('host_id', $this->pVerifiedDomains[0]->getId());
@@ -26,5 +27,32 @@ class analyticsActions extends sfActions
     $this->pAggregation = $request->getParameter('aggregation', 'daily');
     $this->pDateFrom = $request->getParameter('date-from', date('Y-m-d', strtotime("6 days ago")));
     $this->pDateTo = $request->getParameter('date-to', date('Y-m-d'));
+  }
+
+  public function executeGet_filtered_content(sfWebRequest $request){
+  	$this->getResponse()->setContentType('application/json');
+    //$lDomainProfile = DomainProfileTable::getInstance()->find($request->getParameter('host_id'));
+    $lHostId = $request->getParameter('host_id');
+    $lDateFrom = $request->getParameter('date-from', date('Y-m-d', strtotime("6 days ago")));
+    $lDateTo = $request->getParameter('date-to', date('Y-m-d'));
+
+		$lReturn['nav'] = $this->getPartial('analytics/filter_nav', array('pHostId' => $lHostId, 'pFrom' => $lDateFrom, 'pTo' => $lDateTo));
+    $lReturn['content'] =  $this->getPartial('analytics/activities_content', array('pCom' => 'all', 'pHostId' => $lHostId, 'pFrom' => $lDateFrom, 'pTo' => $lDateTo));
+
+		return $this->renderText(json_encode($lReturn));
+  }
+
+  public function executeGet_analytics_activities(sfWebRequest $request){
+  	$this->getResponse()->setContentType('application/json');
+  	$this->getResponse()->setContentType('application/json');
+    //$lDomainProfile = DomainProfileTable::getInstance()->find($request->getParameter('host_id'));
+    $lHostId = $request->getParameter('host_id');
+    $lDateFrom = $request->getParameter('date-from', date('Y-m-d', strtotime("6 days ago")));
+    $lDateTo = $request->getParameter('date-to', date('Y-m-d'));
+    $lCommunity = $request->getParameter('com', 'all');
+
+    $lReturn['content'] =  $this->getPartial('analytics/activities_content', array('pCom' => $lCommunity, 'pHostId' => $lHostId, 'pFrom' => $lDateFrom, 'pTo' => $lDateTo));
+
+		return $this->renderText(json_encode($lReturn));
   }
 }

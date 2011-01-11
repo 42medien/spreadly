@@ -1,5 +1,5 @@
 <div class="filter">
-	<form name="visit-history-form" id="visit-history-form" action="<?php echo url_for('@visit_analytics'); ?>">
+	<form name="visit-history-form" id="visit-history-form" action="<?php echo url_for('@get_filtered_content'); ?>">
   	<div class="clearfix">
   	  <div class="filter-item">
         <label for="host_id">Website</label>
@@ -25,7 +25,7 @@
       <div class="filter-item">
         <label for="submit">&nbsp;</label>
         <input type="submit" class="button positive" value="Filter"/>
-        <?php echo link_to('Reset', '@visit_analytics', array('class' => 'button')) ?>
+        <?php echo link_to('Reset', '@analytics', array('class' => 'button')) ?>
       </div>
 
     </div>
