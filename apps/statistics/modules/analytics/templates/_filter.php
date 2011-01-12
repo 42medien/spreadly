@@ -30,8 +30,22 @@
     </div>
     <div>
     	<?php echo link_to(__('Advanced options'), '/', array('id' => 'advanced-options-link')); ?><br/>
-    	<div class="hide" id="advanced-options-box">
-				fdsfsa
+    	<div class="show clearfix" id="advanced-options-box">
+				<strong><?php echo __('Category');?></strong> <?php echo link_to('All', '/', array('id' => 'check-cats-link'));?> | <?php echo link_to('None', '/', array('id' => 'uncheck-cats-link'));?>
+				<ul id="filter-category-list">
+					<li>
+						<input type="checkbox" name="category" value="<?php echo __('Marketing');?>" class="left" id="cat-<?php echo __('Marketing'); ?>" checked="checked" />
+						<label  class="left" for="cat-<?php echo __('Marketing'); ?>"><?php echo __('Marketing');?></label>
+					</li>
+					<li>
+						<input class="left" type="checkbox" name="category" value="<?php echo __('Research');?>" id="cat-<?php echo __('Research'); ?>" checked="checked" />
+						<label class="left" for="cat-<?php echo __('Research'); ?>"><?php echo __('Research');?></label>
+					</li>
+					<li>
+						<input class="left" type="checkbox" name="category" value="<?php echo __('Accounting');?>" id="cat-<?php echo __('Accounting'); ?>" checked="checked" />
+						<label class="left" for="cat-<?php echo __('Research'); ?>"><?php echo __('Accounting');?></label>
+					</li>
+				</ul>
     	</div>
     </div>
 	</form>

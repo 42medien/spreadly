@@ -18,6 +18,7 @@ var StaticLike = {
     jQuery('#static-like-button, #static-dislike-button').live('click.staticlike', function(pEvent) { 
       
       OnLoadGrafic.showGrafic();
+      jQuery('.popup_button').hide();
       var lTarget = null;
       var lTargetId = null;
       lTarget = pEvent.target;
@@ -26,8 +27,6 @@ var StaticLike = {
         StaticLike.aAction = '/api/dislike';
         StaticLike.aCase = 'dislike';
       }
-      
-      jQuery('.popup_button').hide();
       
       var lServs = StaticLike.getServices();
 

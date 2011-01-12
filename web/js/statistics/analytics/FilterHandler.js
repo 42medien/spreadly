@@ -1,3 +1,29 @@
+var AnalyticsFilter = {
+    init: function() {
+      AnalyticsFilter.toggleCheckboxes();
+      jQuery('#advanced-options-link').toggleboxes({
+        "id":"advanced-options-box"
+      });
+    },
+    
+    toggleCheckboxes: function() {
+      jQuery('#check-cats-link').live('click', function() {
+        jQuery('#filter-category-list [type="checkbox"]').each(function() {
+          jQuery(this).attr('checked', true);
+        });
+        return false;
+      });
+      
+      jQuery('#uncheck-cats-link').live('click', function() {
+        jQuery('#filter-category-list [type="checkbox"]').each(function() {
+          jQuery(this).attr('checked', false);
+        });
+        return false;
+      });      
+      
+    }    
+};
+
 var FilterNav = {
     init: function(){
       debug.log('[FilterNav][init]');
