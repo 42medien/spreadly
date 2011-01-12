@@ -2,7 +2,17 @@ var FilterNav = {
     init: function(){
       debug.log('[FilterNav][init]');
       FilterNav.bindClick();
+      FilterNav.initDatepicker();
       
+    },
+    
+    initDatepicker: function(){
+      jQuery('input#date-from').datepicker({
+        dateFormat: 'yy-mm-dd'       
+      });
+      jQuery('input#date-to').datepicker({
+        dateFormat: 'yy-mm-dd'       
+      });
     },
     
     bindClick: function() {

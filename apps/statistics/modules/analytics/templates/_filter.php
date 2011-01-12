@@ -25,9 +25,14 @@
       <div class="filter-item">
         <label for="submit">&nbsp;</label>
         <input type="submit" class="button positive" value="Filter"/>
-        <?php echo link_to('Reset', 'visit_history/analytics', array('class' => 'button')) ?>
+        <?php echo link_to('Reset', 'analytics/index', array('class' => 'button')) ?>
       </div>
-
+    </div>
+    <div>
+    	<?php echo link_to(__('Advanced options'), '/', array('id' => 'advanced-options-link')); ?><br/>
+    	<div class="hide" id="advanced-options-box">
+				fdsfsa
+    	</div>
     </div>
 	</form>
 </div>
