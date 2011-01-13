@@ -73,6 +73,14 @@ get_analytics_activities:
 get_analytics_range:
   url:   analytics/get_analytics_range
   param: { module: analytics, action: get_analytics_range } 
+  
+get_analytics_age:
+  url:   analytics/get_analytics_age
+  param: { module: analytics, action: get_analytics_age }
+  
+get_analytics_gender:
+  url:   analytics/get_analytics_gender
+  param: { module: analytics, action: get_analytics_gender } 
 
 deals:
   url:   deals/index

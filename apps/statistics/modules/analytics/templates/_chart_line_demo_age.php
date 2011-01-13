@@ -1,22 +1,34 @@
-<div id="chart_line_range_view" class="area-chart"></div>
+<div id="chart_line_demo_age" class="area-chart left"></div>
 <script type="text/javascript">
 var ViewRangeChart = {
-	init: function() {
+	init: function(pChartsettings) {
 		//var Highcharts = new Highcharts;
 	  Highcharts.theme = { colors: [] };// prevent errors in default theme
 		var lOptions = {
 		    chart: {
-		      renderTo: 'chart_line_range_view',
+		      renderTo: 'chart_line_demo_age',
 		      zoomType: 'x',
-		      spacingRight: 20,
-	        margin: [50, 50, 50, 50],
-	        height: 350,
+		      spacingRight: pChartsettings.spacingRight,
+	        margin: pChartsettings.margin,
+	        height: parseInt(pChartsettings.height),
+		      width: parseInt(pChartsettings.width),
           backgroundColor: '#fff',
           plotBackgroundColor: '#fff'
 		   },
 		    title: {
 		      text: false
 		   },
+       exporting: {
+         buttons: {
+           exportButton: {
+             enabled: false
+           },
+           printButton: {
+             enabled: false
+           }
+
+         }
+       },
 		   xAxis: {
 		      type: 'datetime',
 		      maxZoom: 14 * 24 * 3600000, // fourteen days
@@ -190,5 +202,5 @@ var ViewRangeChart = {
 		new Highcharts.Chart(lOptions);
 	}//end init
 };//end object
-ViewRangeChart.init();
+ViewRangeChart.init(<?php echo $pChartsettings; ?>);
 </script>

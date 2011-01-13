@@ -1,27 +1,29 @@
 <?php use_helper('ChartData') ?>
-<div id="chart_pie_gender_activities" class="pie-chart-medium"></div>
+<div id="chart_pie_relationship" class="pie-chart-medium"></div>
+
+<?php //var_dump(getGenderChartData($pData));die();?>
 <script type="text/javascript">
 
-var ChartPieGenderActivities = {
+var ChartPieRelationship = {
 
   init: function() {
     var lData = <?php echo getGenderChartData($pData); ?>;
 		var lOptions = {
 		    chart: {
-		      renderTo: 'chart_pie_gender_activities',
+		      renderTo: 'chart_pie_relationship',
 		      defaultSeriesType: 'pie',
-	        margin: [30, 0, 10, 0],
-	        height: 230,
-		      width: 450,
-          backgroundColor: '#FAFAFA',
-          plotBackgroundColor: '#FAFAFA',
+	        margin: [-10, 0, 10, 0],
+	        height: 160,
+		      width: 300,
+          backgroundColor: '#fff',
+          plotBackgroundColor: '#fff',
           zoomType: 'xy'
 		    },
 		    credits: {
 		      enabled: false
         },
 		    title: {
-		      text: '<?php echo __('Gender distribution');?>'
+		      text: false
 		    },
 		    tooltip: {
 		      formatter: function() {
@@ -34,7 +36,7 @@ var ChartPieGenderActivities = {
               enabled: false
             },
             printButton: {
-              enabled: true,
+              enabled: false,
               x: -15
             }
 
@@ -43,7 +45,7 @@ var ChartPieGenderActivities = {
 		    plotOptions: {
            series: {
              allowPointSelect: true,
-             size: "65%"
+             size: "40%"
           }
 		  },
 		  legend: {
@@ -60,17 +62,25 @@ var ChartPieGenderActivities = {
 		      name: 'Gender',
 		      data: [
 		             {
-		               name: '<?php echo __("Female"); ?>',
+		               name: '<?php echo __("open"); ?>',
 		               color: '#3300cc',
-		               y: lData.gender.f
+		               y: 0
 		             },{
-		               name: '<?php echo __("Unknown"); ?>',
+		               name: '<?php echo __("engaged"); ?>',
 		               color: '#ff0000',
-		               y: lData.gender.u
+		               y: 16
 		             },{
-		               name: '<?php echo __("Male"); ?>',
-		               color: '#ffcc00',
-		               y: lData.gender.m
+		               name: '<?php echo __("married"); ?>',
+		               color: '#e300e3',
+		               y: 27
+		             },{
+		               name: '<?php echo __("complicated"); ?>',
+		               color: '#edad17',
+		               y: 11
+		             },{
+		               name: '<?php echo __("widowed"); ?>',
+		               color: '#2ae309',
+		               y: 3
 		             }
 		         ]
           }]
@@ -78,5 +88,5 @@ var ChartPieGenderActivities = {
     new Highcharts.Chart(lOptions);
   }//end init
 };//end object
-ChartPieGenderActivities.init();
+ChartPieRelationship.init();
 </script>
