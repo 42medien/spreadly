@@ -61,5 +61,12 @@
 			</ul>
 		</li>
 	</ul>
-	<?php include_component('analytics','chart_pie_relationship'); ?>
+	<?php include_component('analytics','chart_pie_relationship', array('pChartsettings' =>
+		'{
+				"width": 300,
+				"height": 130,
+				"margin": [ 0, 0, 10, 0],
+				"plotsize": "40%"
+			}'
+		)); ?>
 </div>

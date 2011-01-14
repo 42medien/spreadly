@@ -84,7 +84,15 @@ get_analytics_gender:
   
 get_analytics_relations:
   url:   analytics/get_analytics_relations
-  param: { module: analytics, action: get_analytics_relations }   
+  param: { module: analytics, action: get_analytics_relations }
+  
+get_analytics_urls:
+  url:   analytics/get_analytics_urls
+  param: { module: analytics, action: get_analytics_urls }  
+  
+get_analytics_url_details:
+  url:   analytics/get_analytics_url_details
+  param: { module: analytics, action: get_analytics_url_details }    
 
 deals:
   url:   deals/index

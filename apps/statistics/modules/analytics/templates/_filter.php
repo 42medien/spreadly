@@ -30,7 +30,7 @@
     </div>
     <div>
     	<?php echo link_to(__('Advanced options'), '/', array('id' => 'advanced-options-link')); ?><br/>
-    	<div class="show clearfix" id="advanced-options-box">
+    	<div class="hide clearfix" id="advanced-options-box">
 				<strong><?php echo __('Category');?></strong> <?php echo link_to('All', '/', array('id' => 'check-cats-link'));?> | <?php echo link_to('None', '/', array('id' => 'uncheck-cats-link'));?>
 				<ul id="filter-category-list">
 					<li>
