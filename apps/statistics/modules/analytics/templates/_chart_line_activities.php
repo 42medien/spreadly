@@ -10,7 +10,7 @@ var ActivityChart = {
 		      spacingRight: 20
 		   },
 		    title: {
-		      text: 'USD to EUR exchange rate from 2006 through 2008'
+		      text: false
 		   },
 		    subtitle: {
 		      text: document.ontouchstart === undefined ?

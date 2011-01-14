@@ -5,5 +5,5 @@
 </div>
 
 <div class="content-box left" id="analytix-content-box" style="width: 720px;">
-	<?php include_partial('analytics/demo_relations_content', array('pCom' => 'all', 'pFrom' => $pDateFrom, 'pTo' => $pDateTo, 'pChart' => null)); ?>
+	<?php include_partial('analytics/activities_content', array('pCom' => 'all', 'pFrom' => $pDateFrom, 'pTo' => $pDateTo, 'pChart' => null)); ?>
 </div>
