@@ -1,5 +1,5 @@
 <div class="filter">
-	<form name="visit-history-form" id="visit-history-form" action="<?php echo url_for('visit_history/analytics'); ?>">
+	<form name="visit-history-form" id="visit-history-form" action="<?php echo url_for('@get_filtered_content'); ?>">
   	<div class="clearfix">
   	  <div class="filter-item">
         <label for="host_id">Website</label>
@@ -24,7 +24,7 @@
       </div>
       <div class="filter-item">
         <label for="submit">&nbsp;</label>
-        <input type="submit" class="button positive" value="Filter"/>
+        <input type="submit" class="button positive" id="analytics-filter-button" value="Filter"/>
         <?php echo link_to('Reset', 'analytics/index', array('class' => 'button')) ?>
       </div>
     </div>
@@ -34,15 +34,15 @@
 				<strong><?php echo __('Category');?></strong> <?php echo link_to('All', '/', array('id' => 'check-cats-link'));?> | <?php echo link_to('None', '/', array('id' => 'uncheck-cats-link'));?>
 				<ul id="filter-category-list">
 					<li>
-						<input type="checkbox" name="category" value="<?php echo __('Marketing');?>" class="left" id="cat-<?php echo __('Marketing'); ?>" checked="checked" />
+						<input type="checkbox" name="category[<?php echo __('marketing');?>]" value="<?php echo __('Marketing');?>" class="left" id="cat-<?php echo __('Marketing'); ?>" checked="checked" />
 						<label  class="left" for="cat-<?php echo __('Marketing'); ?>"><?php echo __('Marketing');?></label>
 					</li>
 					<li>
-						<input class="left" type="checkbox" name="category" value="<?php echo __('Research');?>" id="cat-<?php echo __('Research'); ?>" checked="checked" />
+						<input class="left" type="checkbox" name="category[<?php echo __('research');?>]" value="<?php echo __('Research');?>" id="cat-<?php echo __('Research'); ?>" checked="checked" />
 						<label class="left" for="cat-<?php echo __('Research'); ?>"><?php echo __('Research');?></label>
 					</li>
 					<li>
-						<input class="left" type="checkbox" name="category" value="<?php echo __('Accounting');?>" id="cat-<?php echo __('Accounting'); ?>" checked="checked" />
+						<input class="left" type="checkbox" name="category[<?php echo __('accounting');?>]" value="<?php echo __('Accounting');?>" id="cat-<?php echo __('Accounting'); ?>" checked="checked" />
 						<label class="left" for="cat-<?php echo __('Research'); ?>"><?php echo __('Accounting');?></label>
 					</li>
 				</ul>

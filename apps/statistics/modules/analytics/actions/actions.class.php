@@ -35,7 +35,6 @@ class analyticsActions extends sfActions
     $lHostId = $request->getParameter('host_id');
     $lDateFrom = $request->getParameter('date-from', date('Y-m-d', strtotime("6 days ago")));
     $lDateTo = $request->getParameter('date-to', date('Y-m-d'));
-
 		$lReturn['nav'] = $this->getPartial('analytics/filter_nav', array('pHostId' => $lHostId, 'pFrom' => $lDateFrom, 'pTo' => $lDateTo));
     $lReturn['content'] =  $this->getPartial('analytics/activities_content', array('pCom' => 'all', 'pHostId' => $lHostId, 'pFrom' => $lDateFrom, 'pTo' => $lDateTo));
 

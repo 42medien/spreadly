@@ -4,6 +4,7 @@ var AnalyticsFilter = {
       jQuery('#advanced-options-link').toggleboxes({
         "id":"advanced-options-box"
       });
+      AnalyticsFilter.sendForm();
     },
     
     toggleCheckboxes: function() {
@@ -21,7 +22,31 @@ var AnalyticsFilter = {
         return false;
       });      
       
-    }    
+    },
+    
+    sendForm: function() {
+      jQuery('#analytics-filter-button').bind('click', function() {
+        OnLoadGrafic.showGrafic();
+        var options = {
+            //beforeSubmit : OnLoadGrafic.showGrafic,
+            //url : '/deals/save',
+            data : {
+              ei_kcuf : new Date().getTime()
+            },
+            type : 'POST',
+            dataType : 'json',
+            // resetForm: lReset,
+            success : function(pResponse) {
+              FilterNav.show(pResponse.nav);
+              FilterContent.show(pResponse.content);
+              OnLoadGrafic.hideGrafic();
+            }
+          };
+          
+           jQuery('#visit-history-form').ajaxSubmit(options); 
+           return false;
+      });
+    }
 };
 
 var FilterNav = {
@@ -44,6 +69,7 @@ var FilterNav = {
     bindClick: function() {
       debug.log('[FilterNav][bindClick]');      
       jQuery('.analytix-filter-link').live('click', function() {
+        OnLoadGrafic.showGrafic();        
         FilterNav.getContent(this);
         return false;  
       });
