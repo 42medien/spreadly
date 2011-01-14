@@ -6,15 +6,15 @@
 
 var ChartPieRelationship = {
 
-  init: function() {
+  init: function(pChartsettings) {
     var lData = <?php echo getGenderChartData($pData); ?>;
 		var lOptions = {
 		    chart: {
 		      renderTo: 'chart_pie_relationship',
 		      defaultSeriesType: 'pie',
-	        margin: [-10, 0, 10, 0],
-	        height: 160,
-		      width: 300,
+	        margin: pChartsettings.margin,
+	        height: parseInt(pChartsettings.height),
+		      width: parseInt(pChartsettings.width),
           backgroundColor: '#fff',
           plotBackgroundColor: '#fff',
           zoomType: 'xy'
@@ -45,7 +45,7 @@ var ChartPieRelationship = {
 		    plotOptions: {
            series: {
              allowPointSelect: true,
-             size: "40%"
+             size: pChartsettings.plotsize
           }
 		  },
 		  legend: {
@@ -88,5 +88,5 @@ var ChartPieRelationship = {
     new Highcharts.Chart(lOptions);
   }//end init
 };//end object
-ChartPieRelationship.init();
+ChartPieRelationship.init(<?php echo $pChartsettings; ?>);
 </script>
