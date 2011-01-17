@@ -21,6 +21,9 @@ class YiidActivity extends BaseYiidActivity {
     $lObjectToSave['u_id'] = intval($lObjectToSave['u_id']);
     $lObjectToSave['d_id'] = intval($lObjectToSave['d_id']);
     $lObjectToSave['so_id'] = new MongoId($lObjectToSave['so_id']."");
+
+    $lObjectToSave['tags'] = $this->normalizeTags($lObjectToSave['tags']);
+
     unset($lObjectToSave['id']);
     if ($this->getId()) {
       $lObjectToSave = YiidActivityTable::updateObjectInMongoDb(array('_id' => new MongoId($this->getId())), $lObjectToSave);
@@ -120,6 +123,21 @@ class YiidActivity extends BaseYiidActivity {
       return DealTable::getInstance()->find($this->getDId());
     } else {
       return null;
+    }
+  }
+
+  /**
+   * normalize the tag-string
+   *
+   * @param string $tags
+   * @return array
+   */
+  public function normalizeTags($pTags) {
+    $lTags = urldecode($pTags);
+    $lTags = explode(",", $lTags);
+
+    foreach ($lTags as $key => $value) {
+      $lTags[$key] = trim($value);
     }
   }
 }
