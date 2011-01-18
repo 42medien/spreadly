@@ -415,7 +415,7 @@ var YiidUtils = {
   		YiidRequest.doSendLike(pCase);
   	}
 
-  	var lQuery = encodeURI('&url='+YiidWidget.aUrl+'&type='+YiidWidget.aType+'&case=1&serv='+YiidServices.encodeSettings()+'&title='+YiidWidget.aTitle+'&description='+YiidWidget.aDescription+'&photo='+YiidWidget.aPhoto+'&clickback='+YiidWidget.aClickback);
+  	var lQuery = encodeURI('&url='+YiidWidget.aUrl+'&type='+YiidWidget.aType+'&case=1&serv='+YiidServices.encodeSettings()+'&title='+YiidWidget.aTitle+'&description='+YiidWidget.aDescription+'&photo='+YiidWidget.aPhoto+'&clickback='+YiidWidget.aClickback+'&tags='+YiidWidget.aTags);
 
     var lPopup = window.open(pUrl+lQuery, 'popup', 'width=830,height=700,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150');
     if(lPopup) {
@@ -924,6 +924,7 @@ var YiidWidget = {
   aDescription: '',
   aPhoto: '',
   aClickback: '',
+  aTags: '',
   aPopupPath: null,
   aServiceSettings: new Array(),
 
@@ -931,13 +932,14 @@ var YiidWidget = {
    * inits the widget (after loading the widget)
    * @author Karina Mies
    */
-  init: function(pUrl, pType, pTitle, pDescription, pPhoto, pClickback) {
+  init: function(pUrl, pType, pTitle, pDescription, pPhoto, pClickback, pTags) {
     YiidWidget.aUrl = pUrl;
     YiidWidget.aType = pType;
     YiidWidget.aTitle = pTitle;
     YiidWidget.aDescription = pDescription;
     YiidWidget.aPhoto = pPhoto;
-    YiidWidget.aClickback = pClickback
+    YiidWidget.aClickback = pClickback;
+    YiidWidget.aTags = pTags;
     YiidServices.initSettings();
   },
 
@@ -1144,7 +1146,7 @@ var YiidRequest = {
           lAction = YiidRequest.aDislikeAction;
         }
         //build the param-string
-        var lQuery = encodeURI('url='+YiidWidget.aUrl+'&type='+YiidWidget.aType+'&serv='+YiidServices.encodeSettings()+'&title='+YiidWidget.aTitle+'&description='+YiidWidget.aDescription+'&photo='+YiidWidget.aPhoto+'&clickback='+YiidWidget.aClickback);
+        var lQuery = encodeURI('url='+YiidWidget.aUrl+'&type='+YiidWidget.aType+'&serv='+YiidServices.encodeSettings()+'&title='+YiidWidget.aTitle+'&description='+YiidWidget.aDescription+'&photo='+YiidWidget.aPhoto+'&clickback='+YiidWidget.aClickback+'&tags='+YiidWidget.aTags);
         lXhttp.open("POST", lAction, true);
         //Send the proper header information along with the request
         lXhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
