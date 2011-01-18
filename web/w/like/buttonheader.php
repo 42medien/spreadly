@@ -36,6 +36,9 @@ if (isset($_GET['social']) && !empty($_GET['social'])) {
 } else {
   $pSocialFeatures = false;
 }
+if (isset($_GET['tags']) && !empty($_GET['tags'])) {
+  $pTags = $_GET['tags'];
+}
 
 $pTitle = urldecode($_GET['title']);
 $pPhoto = urldecode($_GET['photo']);
