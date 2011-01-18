@@ -47,6 +47,7 @@ class StatsFeeder {
       }
     }
 
+    // online-identities required
     if (empty($lOnlineIdentities)) {
       return false;
     }
@@ -76,6 +77,16 @@ class StatsFeeder {
       $lOptions['cb'] =  array('name' => $pYiidActivity->getCbService(), 'ya_id' => $pYiidActivity->getCbReferer());
     }
 
+    // add tags
+    if ($lTags = $pYiidActivity->getTags()) {
+      $lOptions['tags'] = $lTags;
+    }
+
+    // add deal id
+    if ($lDealId = $pYiidActivity->getDId()) {
+      $lOptions['d_id'] = $lDealId;
+    }
+
     $lCollection->insert($lOptions);
   }
 
@@ -88,8 +99,6 @@ class StatsFeeder {
    */
   public static function createChartData($pYiidActivity, $pUser) {
     $lHost = parse_url($pYiidActivity->getUrl(), PHP_URL_HOST);
-    $lCollection = self::getMongoCollection(str_replace('.', '_', $lHost).".analytics.charts");
-
     $lDoc = array(
               'url' => $pYiidActivity->getUrl(),
               'date' => new MongoDate(strtotime(date("Y-m-d", $pYiidActivity->getC())))
@@ -153,6 +162,20 @@ class StatsFeeder {
       $lOptions["d.age.u"] = 1;
     }
 
+    // set tags
+    if ($lTags = $this->getTags()) {
+      // add each tag with counts
+      foreach ($lTags as $lTag) {
+        $lOptions["t.".$lTag.".cnt"] = 1;
+        // set score
+        if ($pYiidActivity->getScore() > 0) {
+          $lOptions["t.".$lTag.".pos"] = 1;
+        } else {
+          $lOptions["t.".$lTag.".neg"] = 1;
+        }
+      }
+    }
+
     $lUpdate = false;
 
     // add online identities
@@ -175,6 +198,16 @@ class StatsFeeder {
     }
 
     if ($lUpdate) {
+      // check if activity is a deal
+      if ($lDealId = $pYiidActivity->getDId()) {
+        // add deal id
+        $lOptions['d_id'] = $lDealId;
+        $lChart = 'deals';
+      } else {
+        $lChart = 'charts';
+      }
+      // mongo collection
+      $lCollection = self::getMongoCollection(str_replace('.', '_', $lHost).".analytics.".$lChart);
       // update analytics
       $lCollection->update($lDoc, array('$inc' => $lOptions), array("upsert" => true));
     }
