@@ -20,6 +20,7 @@ class YiidActivity extends BaseYiidActivity {
     $lObjectToSave = $this->toArray(false);
     $lObjectToSave['u_id'] = intval($lObjectToSave['u_id']);
     $lObjectToSave['d_id'] = intval($lObjectToSave['d_id']);
+    $lObjectToSave['score'] = intval($lObjectToSave['score']);
     $lObjectToSave['so_id'] = new MongoId($lObjectToSave['so_id']."");
 
     $lObjectToSave['tags'] = $this->normalizeTags($lObjectToSave['tags']);
