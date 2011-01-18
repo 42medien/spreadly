@@ -45,9 +45,13 @@ class Deal extends BaseDeal {
   }
 
   public function popCoupon() {
-    $code = null;
-    $coupon = CouponTable::getInstance()->findOneByDealId($this->getId());
-
+    $code = null;    
+    $coupon = CouponTable::getInstance()->createQuery()
+      ->where("deal_id = ?", $this->getId())
+      ->limit(1)
+      ->orderBy("id")
+      ->fetchOne();
+    
     if($coupon) {
       $code = $coupon->getCode();      
       if($this->getCouponType()==DealTable::COUPON_TYPE_MULTIPLE) {
