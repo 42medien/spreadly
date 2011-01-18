@@ -48,7 +48,8 @@ class YiidActivityTable extends Doctrine_Table {
                                            $pTitle = null,
                                            $pDescription = null,
                                            $pPhoto = null,
-                                           $pClickback = null
+                                           $pClickback = null,
+                                           $pTags = null
                                           ) {
 
     $lSuccess = false;
@@ -93,7 +94,7 @@ class YiidActivityTable extends Doctrine_Table {
     }
 
     // save yiid activity
-    $lActivity = self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb, $pClickback, $lDeal);
+    $lActivity = self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb, $pClickback, $lDeal, $pTags);
     if (sfConfig::get('sf_environment') != 'dev') {
       // send messages to all services
       foreach ($lOnlineIdentitys as $lIdentity) {
@@ -153,7 +154,8 @@ class YiidActivityTable extends Doctrine_Table {
                                       $pScore,
                                       $pVerb,
                                       $pClickback = null,
-                                      $pDeal = null
+                                      $pDeal = null,
+                                      $pTags = null
                                      ) {
 
     $lActivity = new YiidActivity();
@@ -166,6 +168,10 @@ class YiidActivityTable extends Doctrine_Table {
     $lActivity->setScore($pScore);
     $lActivity->setVerb($pVerb);
     $lActivity->setC(time());
+
+    if ($pTags) {
+      $lActivity->setTags($pTags);
+    }
 
     // sets the deal-id if it's not empty
     if ($pDeal && $pDeal->isActive()) {
