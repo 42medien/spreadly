@@ -1,6 +1,6 @@
 <h2><?php echo __('Number of URLs shared via %community%', array('%community%' => $pCom)); ?></h2>
 <div class="content-box bg-white">
-	<?php include_component('analytics', 'chart_line_activities')?>
+	<?php include_component('analytics', 'chart_line_urls')?>
 </div>
 
 <h2><?php echo __('%community% key data', array('%community%' => $pCom)); ?><?php echo __('from %datefrom% - %dateto%', array('%datefrom%' => $pFrom, '%dateto%' => $pTo)); ?></h2>

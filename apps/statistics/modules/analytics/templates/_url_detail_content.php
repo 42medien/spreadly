@@ -1,6 +1,6 @@
 <h2><?php echo __('Likes and Dislikes for %url%', array('%url%' => $pUrl)); ?></h2>
 <div class="content-box bg-white">
-	<?php include_component('analytics', 'chart_line_activities')?>
+	<?php include_component('analytics', 'chart_line_url_details')?>
 </div>
 
 <div class="content-box bg-white third-box left">

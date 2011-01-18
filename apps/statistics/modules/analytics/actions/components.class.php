@@ -38,6 +38,14 @@ class analyticsComponents extends sfComponents
 
 	}
 
+	public function executeChart_line_urls(sfWebRequest $request){
+
+	}
+
+	public function executeChart_line_url_details(sfWebRequest $request){
+
+	}
+
 	public function executeChart_line_range_views(sfWebRequest $request){
 
 	}

@@ -1,11 +1,11 @@
-<div id="chart_line_range_unique" class="area-chart"></div>
+<div id="chart_line_url_detail" class="area-chart"></div>
 <script type="text/javascript">
-var UniqueRangeChart = {
+var ActivityChart = {
 	init: function() {
 	  Highcharts.theme = { colors: [] };// prevent errors in default theme
 		var lOptions = {
 		    chart: {
-		      renderTo: 'chart_line_range_unique',
+		      renderTo: 'chart_line_url_detail',
 		      zoomType: 'xy',
 		      spacingRight: 20
 		   },
@@ -19,7 +19,7 @@ var UniqueRangeChart = {
 		   },
 		   xAxis: {
 		      type: 'datetime',
-		      maxZoom: 14 * 24 * 3600000, // fourteen days
+		      maxZoom: 7 * 24 * 3600000, // fourteen days
 		      title: {
 		         text: null
 		      }
@@ -28,7 +28,8 @@ var UniqueRangeChart = {
 		      title: {
 		         text: false
 		      },
-		      min: 0.6,
+		      min: 0,
+		      maxZoom: 10, // fourteen days
 		      startOnTick: false,
 		      showFirstLabel: false
 		   },
@@ -68,16 +69,23 @@ var UniqueRangeChart = {
 
 		   series: [{
 		      type: 'area',
-		      name: 'Unique User',
+		      name: 'Likes',
 		      pointInterval: 7 * 3600 * 1000,
 		      pointStart: Date.UTC(2006, 5, 01),
-		      data: [20,500,12,4545,47,8775,565,555,632,23,255,8487,5555,41,500,12,4545,47,8775,565,555,632,23,255,8487,5555,41]
-		   }]
-		}
+		      data: [20,500,12,4545,477,775,1565,505,32,230,25,487,1111,141,700,128,455,47,8775,565,555,632,23,255,8487,5555,41]
+		   },{
+		      type: 'area',
+		      name: 'Dislikes',
+		      pointInterval: 7 * 3600 * 1000,
+		      pointStart: Date.UTC(2006, 5, 01),
+		      data: [2,0,51,4,44,0,505,55,62,37,25,87,55,0,50,1,445,4,75,55,155,602,333,25,887,55,10]
+		   }
+		   ]
+		};
 
 		var highchartsOptions = Highcharts.getOptions();
 		new Highcharts.Chart(lOptions);
 	}//end init
 };//end object
-UniqueRangeChart.init();
+ActivityChart.init();
 </script>
