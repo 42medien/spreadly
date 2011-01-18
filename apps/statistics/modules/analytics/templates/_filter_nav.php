@@ -1,8 +1,8 @@
 <ul class="analytics-filter-list clearfix">
 	<li>
-		<?php echo __('Social Objects (URLs)'); ?>
+		<?php echo __('URLs'); ?>
 		<ul class="clearfix">
-			<li><?php echo link_to(__('All'), '@get_analytics_urls', array('query_string' => 'com=all&tags=dumdidum,lalala&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
+			<li><?php echo link_to(__('All'), '@get_analytics_urls', array('query_string' => 'com=all&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
 			<li><?php echo link_to(__('Facebook'), '@get_analytics_urls', array('query_string' => 'com=facebook&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
 			<li><?php echo link_to(__('Twitter'), '/'); ?></li>
 			<li><?php echo link_to(__('LinkedIn'), '/'); ?></li>
