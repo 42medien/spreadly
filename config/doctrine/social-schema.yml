@@ -80,6 +80,8 @@ YiidActivity:
     # </deal>
     c:
       type:      integer
+    tags:        # array with used tags
+      type:      string
 
 SocialAdvertisement:
   actAs:
