@@ -163,7 +163,7 @@ class StatsFeeder {
     }
 
     // set tags
-    if ($lTags = $this->getTags()) {
+    if ($lTags = $pYiidActivity->getTags()) {
       // add each tag with counts
       foreach ($lTags as $lTag) {
         $lOptions["t.".$lTag.".cnt"] = 1;
@@ -172,6 +172,11 @@ class StatsFeeder {
           $lOptions["t.".$lTag.".pos"] = 1;
         } else {
           $lOptions["t.".$lTag.".neg"] = 1;
+        }
+
+        // clickbacks
+        if ($pYiidActivity->isClickback()) {
+          $lOptions["s.".$lTag.".cb"] =  1;
         }
       }
     }

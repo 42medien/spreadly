@@ -65,6 +65,7 @@ class apiActions extends sfActions {
     $this->lDescription = $request->getParameter('description');
     $this->lPhoto = $request->getParameter('photo');
     $this->lClickback = $request->getParameter('clickback', null);
+    $this->lTags = $request->getParameter('tags', null);
   }
 
   /**
@@ -90,7 +91,8 @@ class apiActions extends sfActions {
                                                         $this->lTitle,
                                                         $this->lDescription,
                                                         $this->lPhoto,
-                                                        $this->lClickback
+                                                        $this->lClickback,
+                                                        $this->lTags
                                                        );
       // write success-state
   		if ($lActivity) {

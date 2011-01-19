@@ -169,8 +169,12 @@ class YiidActivityTable extends Doctrine_Table {
     $lActivity->setVerb($pVerb);
     $lActivity->setC(time());
 
+    // set tags
     if ($pTags) {
-      $lActivity->setTags($pTags);
+      $pTags = self::normalizeTags($pTags);
+      if (is_array($pTags) && !empty($pTags)) {
+        $lActivity->setTags($pTags);
+      }
     }
 
     // sets the deal-id if it's not empty
@@ -411,5 +415,23 @@ class YiidActivityTable extends Doctrine_Table {
     } else {
       return null;
     }
+  }
+
+  /**
+   * normalize the tag-string
+   *
+   * @param string $tags
+   * @return array
+   */
+  public static function normalizeTags($pTags) {
+    $lTags = urldecode($pTags);
+    $lTags = explode(",", $lTags);
+
+    $lTagArray = array();
+    foreach ($lTags as $key => $value) {
+      $lTagArray[$key] = trim($value);
+    }
+
+    return $lTagArray;
   }
 }
