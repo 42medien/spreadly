@@ -3,11 +3,6 @@
 	<?php include_component('analytics', 'chart_line_range_views'); ?>
 </div>
 
-<h2><?php echo __('Unique user on %community%', array('%community%' => $pCom)); ?></h2>
-<div class="content-box bg-white">
-	<?php include_component('analytics', 'chart_line_range_unique'); ?>
-</div>
-
 <h2><?php echo __('%community% range key data', array('%community%' => $pCom)); ?><?php echo __('from %datefrom% - %dateto%', array('%datefrom%' => $pFrom, '%dateto%' => $pTo)); ?></h2>
 <div class="content-box bg-white third-box left">
 	<ul class="analytics-stats-list">

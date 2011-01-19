@@ -50,10 +50,6 @@ class analyticsComponents extends sfComponents
 
 	}
 
-	public function executeChart_line_range_unique(sfWebRequest $request){
-
-	}
-
   public function executeChart_pie_gender_activities(sfWebRequest $request) {
     $lDomainProfile = DomainProfileTable::getInstance()->find($this->pHostId);
     $this->pData = MongoUtils::getGenderData($lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
