@@ -427,11 +427,17 @@ class YiidActivityTable extends Doctrine_Table {
     $lTags = urldecode($pTags);
     $lTags = explode(",", $lTags);
 
-    $lTagArray = array();
-    foreach ($lTags as $key => $value) {
-      $lTagArray[$key] = trim($value);
-    }
+    if (is_array($lTags)) {
+      $lTagArray = array();
+      foreach ($lTags as $key => $value) {
+        $lTagArray[$key] = trim($value);
+      }
 
-    return $lTagArray;
+      $lTagArray = array_unique($lTagArray);
+
+      return $lTagArray;
+    } else {
+      return null;
+    }
   }
 }
