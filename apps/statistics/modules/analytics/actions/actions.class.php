@@ -27,6 +27,7 @@ class analyticsActions extends sfActions
     $this->pAggregation = $request->getParameter('aggregation', 'daily');
     $this->pDateFrom = $request->getParameter('date-from', date('Y-m-d', strtotime("6 days ago")));
     $this->pDateTo = $request->getParameter('date-to', date('Y-m-d'));
+    $this->pUrl = $request->getParameter('url', "http://example.com");
   }
 
   public function executeGet_filtered_content(sfWebRequest $request){
@@ -35,8 +36,9 @@ class analyticsActions extends sfActions
     $lHostId = $request->getParameter('host_id');
     $lDateFrom = $request->getParameter('date-from', date('Y-m-d', strtotime("6 days ago")));
     $lDateTo = $request->getParameter('date-to', date('Y-m-d'));
+    $lUrl = $request->getParameter('url', "http://example.com");
 		$lReturn['nav'] = $this->getPartial('analytics/filter_nav', array('pHostId' => $lHostId, 'pFrom' => $lDateFrom, 'pTo' => $lDateTo));
-    $lReturn['content'] =  $this->getPartial('analytics/url_content', array('pCom' => 'all', 'pHostId' => $lHostId, 'pFrom' => $lDateFrom, 'pTo' => $lDateTo));
+    $lReturn['content'] =  $this->getPartial('analytics/url_content', array('pCom' => 'all', 'pHostId' => $lHostId, 'pFrom' => $lDateFrom, 'pTo' => $lDateTo, 'pUrl' => $lUrl));
 
 		return $this->renderText(json_encode($lReturn));
   }
@@ -114,22 +116,9 @@ class analyticsActions extends sfActions
     $lDateFrom = $request->getParameter('date-from', date('Y-m-d', strtotime("6 days ago")));
     $lDateTo = $request->getParameter('date-to', date('Y-m-d'));
     $lCommunity = $request->getParameter('com', 'all');
+    $lUrl = $request->getParameter('url', "http://example.com");
 
-    $lReturn['content'] =  $this->getPartial('analytics/url_content', array('pCom' => $lCommunity, 'pHostId' => $lHostId, 'pFrom' => $lDateFrom, 'pTo' => $lDateTo));
-
-		return $this->renderText(json_encode($lReturn));
-  }
-
-  public function executeGet_analytics_url_details(sfWebRequest $request){
-  	$this->getResponse()->setContentType('application/json');
-    //$lDomainProfile = DomainProfileTable::getInstance()->find($request->getParameter('host_id'));
-    $lHostId = $request->getParameter('host_id');
-    $lDateFrom = $request->getParameter('date-from', date('Y-m-d', strtotime("6 days ago")));
-    $lDateTo = $request->getParameter('date-to', date('Y-m-d'));
-    $lUrl = $request->getParameter('url', '');
-    $lCommunity = $request->getParameter('com', 'all');
-
-    $lReturn['content'] =  $this->getPartial('analytics/url_detail_content', array('pUrl' => $lUrl, 'pCom' => $lCommunity, 'pHostId' => $lHostId, 'pFrom' => $lDateFrom, 'pTo' => $lDateTo));
+    $lReturn['content'] =  $this->getPartial('analytics/url_content', array('pCom' => $lCommunity, 'pHostId' => $lHostId, 'pFrom' => $lDateFrom, 'pTo' => $lDateTo, 'pUrl'=> $lUrl));
 
 		return $this->renderText(json_encode($lReturn));
   }

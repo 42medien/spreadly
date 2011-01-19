@@ -1,4 +1,4 @@
-<h2><?php echo __('Number of URLs shared via %community%', array('%community%' => $pCom)); ?></h2>
+<h2><?php echo __('Number of URLs shared via %community% for %url%', array('%community%' => $pCom, '%url%' => $pUrl)); ?></h2>
 <div class="content-box bg-white">
 	<?php include_component('analytics', 'chart_line_urls')?>
 </div>
@@ -26,4 +26,4 @@
 		</li>
 	</ul>
 </div>
-<?php include_component('analytics','url_table', array('pCom' => $pCom, 'pFrom' => $pFrom, 'pTo' => $pTo, 'pChart' => null)); ?>
+<?php include_component('analytics','url_table', array('pCom' => $pCom, 'pFrom' => $pFrom, 'pTo' => $pTo, 'pChart' => null, 'pUrl' => $pUrl)); ?>
