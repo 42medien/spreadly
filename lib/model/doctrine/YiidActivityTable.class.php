@@ -39,6 +39,24 @@ class YiidActivityTable extends Doctrine_Table {
     $lCollection->update($pIdentifier, $pManipulator, array('upsert' => true));
   }
 
+  /**
+   * save the like/dislike
+   *
+   * @author Matthias Pfefferle
+   *
+   * @param int $pUserId
+   * @param string $pUrl
+   * @param array $pOwnedOnlineIdentitys
+   * @param array $pGivenOnlineIdentitys
+   * @param int $pScore
+   * @param string $pVerb
+   * @param string $pTitle
+   * @param string $pDescription
+   * @param string $pPhoto
+   * @param string $pClickback
+   * @param string $pTags
+   * @return YiidActivity
+   */
   public static function saveLikeActivitys($pUserId,
                                            $pUrl,
                                            $pOwnedOnlineIdentitys = array(),
