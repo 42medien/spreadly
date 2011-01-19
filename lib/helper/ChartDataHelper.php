@@ -46,7 +46,49 @@ function getActivityChartData($rawData) {
   return json_encode($res);
 }
 
+function getChartLineActivitiesData($rawData, $community='all') {
+  $res = array();
+  $services = array('facebook', 'twitter', 'linkedin', 'google');
+  
+  $res['likes'] = array();
+  $res['dislikes'] = array();
+  
+  $temp = ChartUtils::getActivitiesForAllServices($rawData, $services);
+  
+  for ($i=0; $i < count($temp['facebook_likes']); $i++) {
+    
+    $res['likes'][$i] = 0;
+    if($community=='all') {
+      $res['likes'][$i] += $temp['facebook_likes'][$i] + 
+                           $temp['twitter_likes'][$i] + 
+                           $temp['linkedin_likes'][$i] + 
+                           $temp['google_likes'][$i];      
+    } else {
+      $res['likes'][$i] += $temp[$community.'_likes'][$i];
+    }
 
+    $res['dislikes'][$i] = 0;
+    if($community=='all') {
+      $res['dislikes'][$i] += $temp['facebook_dislikes'][$i] + 
+                              $temp['twitter_dislikes'][$i] + 
+                              $temp['linkedin_dislikes'][$i] + 
+                              $temp['google_dislikes'][$i];      
+    } else {
+      $res['dislikes'][$i] += $temp[$community.'_dislikes'][$i];
+    }
+  }
+  
+  // Get pi data by date
+  // $temp['pis'] = ChartUtils::getPiData($rawData['pis']);
+  
+  // Addding some metadata from the filter like categories, range, etc.
+  $metadata = ChartUtils::addFilterData($res, $rawData['filter']);
+  
+  $res['startdate'] = $metadata['startdate'];
+  $res['pointinterval'] = $metadata['pointinterval'];
+  
+  return json_encode($res);
+}
 
 /**
  * Helper that gets raw mongo data and converts it to a format suitable for the chart

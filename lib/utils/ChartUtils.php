@@ -94,7 +94,41 @@ class ChartUtils {
     $res['raw_filter'] = $filter;
     $res['categories'] = ChartUtils::getCategories($filter);
     $res['range'] = $filter['fromDate']." - ".$filter['toDate'];
+    
+    $res['startdate'] = array();
+    $res['startdate']['year'] = intval(date('Y', strtotime($filter['fromDate'])));
+    $res['startdate']['month'] = intval(date('m', strtotime($filter['fromDate'])))-1;
+    $res['startdate']['day'] = intval(date('d', strtotime($filter['fromDate'])));
+    
+    $res['pointinterval'] = strtotime($filter['toDate'])-strtotime($filter['fromDate']);
+
     return $res;
+  }
+  
+  public static function getActivitiesForAllServices($rawData, $services) {
+    $temp = array();
+    // Initializing the Data arrays for the chart
+    foreach ($services as $service) {
+      $temp[$service.'_likes'] = array();
+      $temp[$service.'_dislikes'] = array();
+    }
+    
+    // Sort data by date
+    $rawData['data'] = ChartUtils::sortArrayByDate($rawData['data']);
+  
+    // Converting data into a chart usable format
+    foreach ($rawData['data'] as $data) {
+      foreach ($services as $service) {
+        if(array_key_exists($service, $data)) {
+          array_push($temp[$service.'_likes'], $data[$service]['likes']);
+          array_push($temp[$service.'_dislikes'], $data[$service]['dislikes']);
+        } else {
+          array_push($temp[$service.'_likes'], 0);
+          array_push($temp[$service.'_dislikes'], 0);
+        }
+      }
+    }
+    return $temp;
   }
 }
 

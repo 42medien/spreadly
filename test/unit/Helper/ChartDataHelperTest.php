@@ -1,8 +1,10 @@
 <?php
 require_once dirname(__file__).'/../../lib/BaseTestCase.php';
 
-class ChartDataHelperTest extends BaseTestCase {
+include dirname(__file__).'/../../../lib/helper/ChartDataHelper.php';
 
+class ChartDataHelperTest extends BaseTestCase {
+  
   public static function setUpBeforeClass() {
     date_default_timezone_set('Europe/Berlin');
   }
@@ -12,12 +14,12 @@ class ChartDataHelperTest extends BaseTestCase {
     sfConfig::set('sf_environment', 'test');
     Doctrine::loadData(dirname(__file__).'/fixtures');
     sfConfig::set('sf_environment', 'dev');
+    $this->from = date('Y-m-d', strtotime("today"));
+    $this->to = date('Y-m-d', strtotime("tomorrow"));
   }
   
   public function testGetActivityData() {
-    $from = date('Y-m-d', strtotime("today"));
-    $to = date('Y-m-d', strtotime("tomorrow"));
-    $data = MongoUtils::getActivityData("www.missmotz.de", $from, $to, 'daily');
+    $data = MongoUtils::getActivityData("www.missmotz.de", $this->from, $this->to, 'daily');
 
     $this->assertEquals(5000, $data['data'][0]['facebook']['likes']);
     $this->assertEquals(0, $data['data'][0]['facebook']['dislikes']);
@@ -28,15 +30,21 @@ class ChartDataHelperTest extends BaseTestCase {
     $this->assertEquals(1000, $data['pis'][0]['yiid']);
 
     $this->assertEquals('www.missmotz.de', $data['filter']['domain']);
-    $this->assertEquals($from, $data['filter']['fromDate']);
-    $this->assertEquals($to, $data['filter']['toDate']);
+    $this->assertEquals($this->from, $data['filter']['fromDate']);
+    $this->assertEquals($this->to, $data['filter']['toDate']);
     $this->assertEquals('daily', $data['filter']['aggregation']);
   }
 
+  public function testGetChartLineActivitiesData() {
+    $data = json_decode(getChartLineActivitiesData(MongoUtils::getActivityData("www.missmotz.de", $this->from, $this->to, 'daily')));
+    $this->assertEquals(9000, $data->likes[0]);
+
+    $data = json_decode(getChartLineActivitiesData(MongoUtils::getActivityData("www.missmotz.de", $this->from, $this->to, 'daily'), 'facebook'));
+    $this->assertEquals(5000, $data->likes[0]);
+  }
+  
   public function testGetAgeData() {
-    $from = date('Y-m-d', strtotime("today"));
-    $to = date('Y-m-d', strtotime("tomorrow"));
-    $data = MongoUtils::getAgeData("www.missmotz.de", $from, $to, 'daily');
+    $data = MongoUtils::getAgeData("www.missmotz.de", $this->from, $this->to, 'daily');
 
     $this->assertEquals(0, $data['data'][0]['u_18']);
     $this->assertEquals(0, $data['data'][0]['b_18_24']);
@@ -45,8 +53,8 @@ class ChartDataHelperTest extends BaseTestCase {
     $this->assertEquals(1000, $data['data'][0]['o_55']);
 
     $this->assertEquals('www.missmotz.de', $data['filter']['domain']);
-    $this->assertEquals($from, $data['filter']['fromDate']);
-    $this->assertEquals($to, $data['filter']['toDate']);
+    $this->assertEquals($this->from, $data['filter']['fromDate']);
+    $this->assertEquals($this->to, $data['filter']['toDate']);
     $this->assertEquals('daily', $data['filter']['aggregation']);
   }
 }
