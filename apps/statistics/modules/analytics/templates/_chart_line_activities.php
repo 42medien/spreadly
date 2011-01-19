@@ -1,14 +1,21 @@
 <?php use_helper('ChartData') ?>
 <div id="chart_line_activities" class="area-chart"></div>
+<?php //var_dump(getChartLineActivitiesData($pData, $pCommunity));die();?>
 <script type="text/javascript">
 var ActivityChart = {
 	init: function() {
 	  Highcharts.theme = { colors: [] };// prevent errors in default theme
 	  var lData = <?php echo getChartLineActivitiesData($pData, $pCommunity); ?>;
+	  debug.log(lData.likes);
+	  debug.log(lData.pointinterval);
+	  debug.log(lData.startdate.year);
+	  debug.log(lData.startdate.day);
+	  debug.log(lData.startdate.month);
+
 		var lOptions = {
 		    chart: {
 		      renderTo: 'chart_line_activities',
-		      zoomType: 'xy',
+		      zoomType: 'x',
 		      spacingRight: 20
 		   },
 		    title: {
@@ -21,7 +28,7 @@ var ActivityChart = {
 		   },
 		   xAxis: {
 		      type: 'datetime',
-		      maxZoom: 7 * 24 * 3600000, // fourteen days
+		      maxZoom: 7 * 24 * 3600000,
 		      title: {
 		         text: null
 		      }
@@ -52,7 +59,7 @@ var ActivityChart = {
 		         },
 		         lineWidth: 1,
 		         marker: {
-		            enabled: false,
+		            enabled: true,
 		            states: {
 		               hover: {
 		                  enabled: true,
@@ -72,15 +79,15 @@ var ActivityChart = {
 		   series: [{
 		      type: 'area',
 		      name: 'Likes',
-		      pointInterval: 7 * 3600 * 1000,
-		      pointStart: Date.UTC(2006, 5, 01),
-		      data: [20,500,12,4545,47,8775,565,555,632,23,255,8487,5555,41,500,12,4545,47,8775,565,555,632,23,255,8487,5555,41]
+		      pointInterval: 1*24*60*60*1000,
+		      pointStart: Date.UTC(lData.startdate.year, lData.startdate.month, lData.startdate.day),
+		      data: lData.likes
 		   },{
 		      type: 'area',
 		      name: 'Dislikes',
-		      pointInterval: 7 * 3600 * 1000,
-		      pointStart: Date.UTC(2006, 5, 01),
-		      data: [2,50,1,445,4,0,55,55,62,3,25,887,55,0,50,1,445,4,875,55,55,62,3,25,887,55,0]
+		      pointInterval: 1*24*60*60*1000,
+		      pointStart: Date.UTC(lData.startdate.year, lData.startdate.month, lData.startdate.day),
+		      data: lData.dislikes
 		   }
 		   ]
 		};
