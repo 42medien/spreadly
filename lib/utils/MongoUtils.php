@@ -62,13 +62,15 @@ class MongoUtils {
       $cond['url'] = $item['url'];
       
       $pis = $pi_col->group($keys, $initial, $reduce, array("condition" => $cond));
-      $data['data'][$key]['pis']['total'] += $pis['retval'][0]['total'];
-      $data['data'][$key]['pis']['cb'] += $pis['retval'][0]['cb'];
-      $data['data'][$key]['pis']['yiid'] += $pis['retval'][0]['yiid'];
+      if(!empty($pis['retval'][0])) {
+        $data['data'][$key]['pis']['total'] += $pis['retval'][0]['total'];
+        $data['data'][$key]['pis']['cb'] += $pis['retval'][0]['cb'];
+        $data['data'][$key]['pis']['yiid'] += $pis['retval'][0]['yiid'];        
+      }
     }
     
     $data['filter'] = MongoUtils::getFilter($domain, $fromDate, $toDate);
-
+    
     return $data;
   }
 
