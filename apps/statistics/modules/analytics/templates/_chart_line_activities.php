@@ -1,8 +1,10 @@
+<?php use_helper('ChartData') ?>
 <div id="chart_line_activities" class="area-chart"></div>
 <script type="text/javascript">
 var ActivityChart = {
 	init: function() {
 	  Highcharts.theme = { colors: [] };// prevent errors in default theme
+	  var lData = <?php echo getChartLineActivitiesData($pData, $pCommunity); ?>;
 		var lOptions = {
 		    chart: {
 		      renderTo: 'chart_line_activities',
