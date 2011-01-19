@@ -70,6 +70,7 @@ class analyticsComponents extends sfComponents
 
   public function executeUrl_table(sfWebRequest $request) {
     $lDomainProfile = DomainProfileTable::getInstance()->find($this->pHostId);
+    //var_dump($this->pHostId);die();
     $this->pData = MongoUtils::getTopActivitiesData($lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
   }
 }

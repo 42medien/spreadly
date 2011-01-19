@@ -26,7 +26,7 @@
 
 <ul class="analytics-filter-list clearfix">
 	<li>
-		<?php echo __('Range'); ?>
+		<?php echo __('Reach'); ?>
 		<ul class="clearfix">
 			<li><?php echo link_to(__('All'), '@get_analytics_range', array('query_string' => 'com=all&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
 			<li><?php echo link_to(__('Facebook'), '@get_analytics_range', array('query_string' => 'com=facebook&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
