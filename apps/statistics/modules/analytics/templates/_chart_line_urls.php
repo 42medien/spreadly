@@ -6,7 +6,7 @@ var ActivityChart = {
 		var lOptions = {
 		    chart: {
 		      renderTo: 'chart_line_urls',
-		      zoomType: 'xy',
+		      zoomType: 'x',
 		      spacingRight: 20
 		   },
 		    title: {
@@ -41,16 +41,9 @@ var ActivityChart = {
 		   },
 		   plotOptions: {
 		      area: {
-		         fillColor: {
-		            linearGradient: [0, 0, 0, 300],
-		            stops: [
-		               [0, Highcharts.theme.colors[0]],
-		               [1, 'rgba(2,0,0,0)']
-		            ]
-		         },
 		         lineWidth: 1,
 		         marker: {
-		            enabled: false,
+		            enabled: true,
 		            states: {
 		               hover: {
 		                  enabled: true,
@@ -69,17 +62,36 @@ var ActivityChart = {
 
 		   series: [{
 		      type: 'area',
-		      name: 'URLs with Likes',
-		      pointInterval: 7 * 3600 * 1000,
+		      name: 'Likes',
+		      pointInterval: 1*24*60*60*1000,
 		      pointStart: Date.UTC(2006, 5, 01),
-		      data: [20,500,12,4545,477,775,1565,505,32,230,25,487,1111,141,700,128,455,47,8775,565,555,632,23,255,8487,5555,41]
+		      data: [20,500,12,4545,477,775,1565,505,32,230,25,487,1111,141,700,128,455,47,8775,565,555,632,23,255,8487,5555,41],
+		      color: '#1231e3',
+	        fillOpacity: 0.1,
+	        fillColor: {
+            linearGradient: [0, 0, 0, 300],
+            stops: [
+               [0, Highcharts.theme.colors[0]],
+               [1, 'rgba(61,160,242,0)']
+            ]
+         }
+
 		   },{
 		      type: 'area',
-		      name: 'URLs with Dislikes',
-		      pointInterval: 7 * 3600 * 1000,
+		      name: 'Dislikes',
+		      pointInterval: 1*24*60*60*1000,
 		      pointStart: Date.UTC(2006, 5, 01),
-		      data: [2,0,51,4,44,0,505,55,62,37,25,87,55,0,50,1,445,4,75,55,155,602,333,25,887,55,10]
-		   }
+		      data: [2,0,51,4,44,0,505,55,62,37,25,87,55,0,50,1,445,4,75,55,155,602,333,25,887,55,10],
+		      color: '#7f79fc',
+	        fillOpacity: 0.7,
+	        fillColor: {
+	            linearGradient: [0, 0, 0, 300],
+	            stops: [
+	               [0, Highcharts.theme.colors[0]],
+	               [1, 'rgba(61,160,242,0)']
+	            ]
+	         }
+		   	}
 		   ]
 		};
 

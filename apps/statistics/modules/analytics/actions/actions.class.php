@@ -24,10 +24,21 @@ class analyticsActions extends sfActions
       $lDomainProfile = DomainProfileTable::getInstance()->find($this->pHostId);
       $this->forward404Unless($lDomainProfile && $lDomainProfile->getSfGuardUserId()==$this->getUser()->getUserId());
     }
+  }
+
+  public function executeStatistics(sfWebRequest $request)
+  {
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
+    $this->pVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
+    if(count($this->pVerifiedDomains) > 0) {
+      $this->pHostId = $request->getParameter('host_id', $this->pVerifiedDomains[0]->getId());
+      $lDomainProfile = DomainProfileTable::getInstance()->find($this->pHostId);
+      $this->forward404Unless($lDomainProfile && $lDomainProfile->getSfGuardUserId()==$this->getUser()->getUserId());
+    }
     $this->pAggregation = $request->getParameter('aggregation', 'daily');
     $this->pDateFrom = $request->getParameter('date-from', date('Y-m-d', strtotime("6 days ago")));
     $this->pDateTo = $request->getParameter('date-to', date('Y-m-d'));
-    $this->pUrl = $request->getParameter('url', "http://example.com");
+    $this->pUrl = $request->getParameter('url', null);
   }
 
   public function executeGet_filtered_content(sfWebRequest $request){
@@ -36,8 +47,8 @@ class analyticsActions extends sfActions
     $lHostId = $request->getParameter('host_id');
     $lDateFrom = $request->getParameter('date-from', date('Y-m-d', strtotime("6 days ago")));
     $lDateTo = $request->getParameter('date-to', date('Y-m-d'));
-    $lUrl = $request->getParameter('url', "http://example.com");
-		$lReturn['nav'] = $this->getPartial('analytics/filter_nav', array('pHostId' => $lHostId, 'pFrom' => $lDateFrom, 'pTo' => $lDateTo));
+    $lUrl = $request->getParameter('url', null);
+		$lReturn['nav'] = $this->getPartial('analytics/filter_nav', array('pHostId' => $lHostId, 'pFrom' => $lDateFrom, 'pTo' => $lDateTo, 'pUrl' => $lUrl));
     $lReturn['content'] =  $this->getPartial('analytics/url_content', array('pCom' => 'all', 'pHostId' => $lHostId, 'pFrom' => $lDateFrom, 'pTo' => $lDateTo, 'pUrl' => $lUrl));
 
 		return $this->renderText(json_encode($lReturn));
@@ -116,8 +127,8 @@ class analyticsActions extends sfActions
     $lDateFrom = $request->getParameter('date-from', date('Y-m-d', strtotime("6 days ago")));
     $lDateTo = $request->getParameter('date-to', date('Y-m-d'));
     $lCommunity = $request->getParameter('com', 'all');
-    $lUrl = $request->getParameter('url', "http://example.com");
-
+    $lUrl = $request->getParameter('url', null);
+		$lReturn['nav'] = $this->getPartial('analytics/filter_nav', array('pHostId' => $lHostId, 'pFrom' => $lDateFrom, 'pTo' => $lDateTo, 'pUrl' => $lUrl));
     $lReturn['content'] =  $this->getPartial('analytics/url_content', array('pCom' => $lCommunity, 'pHostId' => $lHostId, 'pFrom' => $lDateFrom, 'pTo' => $lDateTo, 'pUrl'=> $lUrl));
 
 		return $this->renderText(json_encode($lReturn));

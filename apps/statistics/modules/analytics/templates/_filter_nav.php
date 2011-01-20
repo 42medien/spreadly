@@ -2,11 +2,11 @@
 	<li>
 		<?php echo __('URLs'); ?>
 		<ul class="clearfix">
-			<li><?php echo link_to(__('All'), '@get_analytics_urls', array('query_string' => 'com=all&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
-			<li><?php echo link_to(__('Facebook'), '@get_analytics_urls', array('query_string' => 'com=facebook&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
-			<li><?php echo link_to(__('Twitter'), '@get_analytics_urls', array('query_string' => 'com=twitter&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
-			<li><?php echo link_to(__('LinkedIn'), '@get_analytics_urls', array('query_string' => 'com=linkedin&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
-			<li><?php echo link_to(__('Buzz'), '@get_analytics_urls', array('query_string' => 'com=google&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
+			<li><?php echo link_to(__('All'), '@get_analytics_urls', array('query_string' => 'com=all&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo.'&url='.$pUrl, 'class' => 'analytix-filter-link')); ?></li>
+			<li><?php echo link_to(__('Facebook'), '@get_analytics_urls', array('query_string' => 'com=facebook&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo.'&url='.$pUrl, 'class' => 'analytix-filter-link')); ?></li>
+			<li><?php echo link_to(__('Twitter'), '@get_analytics_urls', array('query_string' => 'com=twitter&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo.'&url='.$pUrl, 'class' => 'analytix-filter-link')); ?></li>
+			<li><?php echo link_to(__('LinkedIn'), '@get_analytics_urls', array('query_string' => 'com=linkedin&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo.'&url='.$pUrl, 'class' => 'analytix-filter-link')); ?></li>
+			<li><?php echo link_to(__('Buzz'), '@get_analytics_urls', array('query_string' => 'com=google&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo.'&url='.$pUrl, 'class' => 'analytix-filter-link')); ?></li>
 		</ul>
 	</li>
 </ul>
@@ -30,9 +30,9 @@
 		<ul class="clearfix">
 			<li><?php echo link_to(__('All'), '@get_analytics_range', array('query_string' => 'com=all&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
 			<li><?php echo link_to(__('Facebook'), '@get_analytics_range', array('query_string' => 'com=facebook&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
-			<li><?php echo link_to(__('Twitter'), '/'); ?></li>
-			<li><?php echo link_to(__('LinkedIn'), '/'); ?></li>
-			<li><?php echo link_to(__('Buzz'), '/'); ?></li>
+			<li><?php echo link_to(__('Twitter'), '@get_analytics_range', array('query_string' => 'com=twitter&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
+			<li><?php echo link_to(__('LinkedIn'), '@get_analytics_range', array('query_string' => 'com=linkedin&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
+			<li><?php echo link_to(__('Buzz'), '@get_analytics_range', array('query_string' => 'com=google&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
 		</ul>
 	</li>
 </ul>

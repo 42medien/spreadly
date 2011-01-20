@@ -90,8 +90,6 @@ var FilterNav = {
         dataType : "json",
         data : lData,
         success : function(pResponse) {
-          debug.log(pResponse);
-          //FilterNav.show(pResponse.nav);
           FilterContent.show(pResponse.content);
           OnLoadGrafic.hideGrafic();
         }
@@ -109,4 +107,43 @@ var FilterContent = {
     jQuery('#analytix-content-box').empty();
     jQuery('#analytix-content-box').append(pContent);    
   }
+};
+
+var AnalyticsUrlFilter = {
+    
+    init: function(){
+      debug.log('[AnalyticsUrlFilter][init]');         
+      AnalyticsUrlFilter.bindClick();
+    },
+    
+    bindClick: function() {
+      debug.log('[AnalyticsUrlFilter][bindClick]');      
+      jQuery('.analytix-url-filter-link').live('click', function() {
+        OnLoadGrafic.showGrafic();        
+        AnalyticsUrlFilter.getContent(this);
+        return false;  
+      });
+    },
+    
+    getContent: function(pElem){
+      debug.log('[FilterNav][getContent]');       
+      var lAction, lData;
+      lAction = jQuery(pElem).attr('href');
+      lData = {
+          ei_kcuf : new Date().getTime()
+      };
+      
+      jQuery.ajax({
+        beforeSubmit : OnLoadGrafic.showGrafic,
+        type : "GET",
+        url : lAction,
+        dataType : "json",
+        data : lData,
+        success : function(pResponse) {
+          FilterContent.show(pResponse.content);
+          FilterNav.show(pResponse.nav);
+          OnLoadGrafic.hideGrafic();
+        }
+      });
+    }
 };

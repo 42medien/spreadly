@@ -1,4 +1,9 @@
-<h2><?php echo __('Number of URLs shared via %community% for %url%', array('%community%' => $pCom, '%url%' => $pUrl)); ?></h2>
+<?php if($pUrl) { ?>
+	<h2><?php echo __('Number of URLs shared via %community% for %url%', array('%community%' => $pCom, '%url%' => $pUrl)); ?></h2>
+<?php } else { ?>
+	<h2><?php echo __('Number of URLs shared via all networks for %url%', array('%community%' => $pCom, '%url%' => $pUrl)); ?></h2>
+<?php } ?>
+
 <div class="content-box bg-white">
 	<?php include_component('analytics', 'chart_line_urls')?>
 </div>

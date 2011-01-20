@@ -1,3 +1,4 @@
+<?php use_helper('ChartData') ?>
 <div id="chart_line_range_view" class="area-chart"></div>
 <script type="text/javascript">
 var ViewRangeChart = {
@@ -5,10 +6,11 @@ var ViewRangeChart = {
 		//var Highcharts = new Highcharts;
 	  Highcharts.theme = { colors: [] };// prevent errors in default theme
 	  var lData = <?php echo getChartLineRangeViewsData($pData, $pCommunity); ?>;
+	  debug.log(lData);
 		var lOptions = {
 		    chart: {
 		      renderTo: 'chart_line_range_view',
-		      zoomType: 'xy',
+		      zoomType: 'x',
 		      spacingRight: 20,
 	        margin: [50, 50, 50, 50],
 	        height: 350,
@@ -25,7 +27,7 @@ var ViewRangeChart = {
 		   },
 		   xAxis: {
 		      type: 'datetime',
-		      maxZoom: 14 * 24 * 3600000, // fourteen days
+		      maxZoom: 7 * 24 * 3600000, // fourteen days
 		      title: {
 		         text: null
 		      }
@@ -47,16 +49,9 @@ var ViewRangeChart = {
 		   },
 		   plotOptions: {
 		      area: {
-		         fillColor: {
-		            linearGradient: [0, 0, 0, 300],
-		            stops: [
-		               [0, Highcharts.theme.colors[0]],
-		               [1, 'rgba(2,0,0,0)']
-		            ]
-		         },
 		         lineWidth: 1,
 		         marker: {
-		            enabled: false,
+		            enabled: true,
 		            states: {
 		               hover: {
 		                  enabled: true,
@@ -76,9 +71,18 @@ var ViewRangeChart = {
 		   series: [{
 		      type: 'area',
 		      name: 'Views',
-		      pointInterval: 7 * 3600 * 1000,
-		      pointStart: Date.UTC(2006, 5, 01),
-		      data: [20,500,12,4545,47,8775,565,555,632,23,255,8487,5555,41,500,12,4545,47,8775,565,555,632,23,255,8487,5555,41]
+		      pointInterval: 1*24*60*60*1000,
+		      pointStart: Date.UTC(lData.startdate.year, lData.startdate.month, lData.startdate.day),
+		      data: lData.views,
+		      color: '#1231e3',
+	        fillOpacity: 0.1,
+	        fillColor: {
+	          linearGradient: [0, 0, 0, 300],
+	          stops: [
+	             [0, Highcharts.theme.colors[0]],
+	             [1, 'rgba(61,160,242,0)']
+	          ]
+	       }
 		   }]
 		};
 

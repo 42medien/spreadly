@@ -58,9 +58,13 @@ visit_analytics:
   url:   visit_history/analytics
   param: { module: visit_history, action: analytics }
   
-analytics:
+analytics_overview:
   url:   analytics/index
-  param: { module: analytics, action: index } 
+  param: { module: analytics, action: index }   
+  
+analytics:
+  url:   analytics/statistics
+  param: { module: analytics, action: statistics } 
   
 get_filtered_content:
   url:   analytics/get_filtered_content
@@ -89,10 +93,6 @@ get_analytics_relations:
 get_analytics_urls:
   url:   analytics/get_analytics_urls
   param: { module: analytics, action: get_analytics_urls }  
-  
-get_analytics_url_details:
-  url:   analytics/get_analytics_url_details
-  param: { module: analytics, action: get_analytics_url_details }    
 
 deals:
   url:   deals/index
