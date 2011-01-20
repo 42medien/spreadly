@@ -34,7 +34,6 @@ class popupActions extends sfActions {
       // autolike
       YiidActivityTable::saveLikeActivitys($this->getUser()->getId(),
                                            $request->getParameter('url', null),
-                                           $this->getUser()->getUser()->getOnlineIdentities(),
                                            OnlineIdentityTable::getPublishingEnabledByUserIdOnlyIds($this->getUser()->getId()),
                                            $request->getParameter('likedis', null),
                                            $request->getParameter('type', null),
