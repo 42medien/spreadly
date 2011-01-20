@@ -1,7 +1,4 @@
 <?php
-
-
-
 /**
  * class to handel url functions
  *
@@ -106,18 +103,24 @@ class StringUtils {
 
 
   /**
-   * returns a given string cleaned from any special chars and converted into utf8
-   * @param string $pString
-   * @param boolean $pWithDecode
-   * @author weyandch
+   * @deprecated
    */
   public static function cleanupStringForMongodb($pString, $pWithDecode = true) {
+    return self::cleanupString($pString);
+  }
 
-    if ($pWithDecode) {
-      $pString = urldecode($pString);
-    }
-
-    $pString = htmlspecialchars_decode(strip_tags($pString));
+  /**
+   * returns a given string cleaned from any special chars and converted into utf8
+   *
+   * @param string $pString
+   * @return string
+   *
+   * @author weyandch
+   * @author Matthias Pfefferle
+   */
+  public static function cleanupString($pString) {
+    $pString = urldecode($pString);
+    $pString = stripslashes(htmlspecialchars_decode(strip_tags($pString)));
     if (mb_detect_encoding($pString) != 'UTF-8') {
       $pString = utf8_encode($pString);
     }

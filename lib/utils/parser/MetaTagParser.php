@@ -13,6 +13,10 @@ class MetaTagParser {
    * @return array $lValues
    */
   public static function parse($pHtml) {
+    $pHtml = preg_replace('/<head[^>]*>/i','<head>
+                           <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+                          ',$pHtml);
+
   	try {
 	    $lValues = array();
 	    //supress html-validation-warnings

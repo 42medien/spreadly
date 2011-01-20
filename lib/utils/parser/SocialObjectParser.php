@@ -21,8 +21,10 @@ class SocialObjectParser {
     try {
       //get the html as string
       $lHtml = UrlUtils::getUrlContent($pUrl, 'GET');
+
       //get the opengraph-tags
       $lOpenGraph = OpenGraph::parse($lHtml);
+
       $lToSave = array();
 
       //if there are some og-metas: save it to an array
@@ -35,6 +37,7 @@ class SocialObjectParser {
       } else {
         //if there are no og-metas, check if there are some html-metas and get it
         $lKeys = MetaTagParser::getKeys($lHtml);
+
         $lToSave['title'] = (isset($lKeys['title']))?$lKeys['title']:null;
         $lToSave['stmt'] = (isset($lKeys['description']))?$lKeys['description']:null;
         $lToSave['thumb_url'] = null;
@@ -85,11 +88,11 @@ class SocialObjectParser {
 
     $lParsedInformation = self::fetch($pUrl);
 
-    $lTitle = StringUtils::cleanupStringForMongodb($lParsedInformation['title'], false);
+    $lTitle = StringUtils::cleanupString($lParsedInformation['title'], false);
     if ($lTitle != "" ) {
       $lUpdateArray['title'] = $lTitle;
     }
-    $lStmt = StringUtils::cleanupStringForMongodb($lParsedInformation['stmt'], false);
+    $lStmt = StringUtils::cleanupString($lParsedInformation['stmt'], false);
     if ($lStmt != "") {
       $lUpdateArray['stmt'] = $lStmt;
     }
