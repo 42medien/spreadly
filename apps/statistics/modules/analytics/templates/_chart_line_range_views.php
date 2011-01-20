@@ -4,6 +4,7 @@ var ViewRangeChart = {
 	init: function() {
 		//var Highcharts = new Highcharts;
 	  Highcharts.theme = { colors: [] };// prevent errors in default theme
+	  var lData = <?php echo getChartLineRangeViewsData($pData, $pCommunity); ?>;
 		var lOptions = {
 		    chart: {
 		      renderTo: 'chart_line_range_view',

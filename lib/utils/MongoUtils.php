@@ -22,7 +22,7 @@ class MongoUtils {
     return MongoUtils::getDataForRange('media_penetration_with_clickbacks', $domain, $fromDate, $toDate, $aggregation);
   }
 
-  public static function getTopActivitiesData($domain, $fromDate, $toDate, $limit=10) {
+  public static function getTopActivitiesData($domain, $fromDate, $toDate, $aggregation, $limit=10) {
     $col = MongoUtils::getCollection('analytics.activities');
     $keys = array("url" => 1);
     $cond = array("host" => $domain, "date" => array('$gte' => new MongoDate(strtotime($fromDate)), '$lte' => new MongoDate(strtotime($toDate))));
@@ -50,7 +50,7 @@ class MongoUtils {
     $g = $col->group($keys, $initial, $reduce, array("condition" => $cond));
     
     $data = array();
-    $data['data'] = ChartUtils::sortArrayByTotals($g['retval']);
+    $data['data'] = ChartUtils::sortArrayByTotals($g['retval'], $limit);
     
     $pi_col = MongoUtils::getCollection('pis', $domain);
     $initial = MongoUtils::getInitial('pis');

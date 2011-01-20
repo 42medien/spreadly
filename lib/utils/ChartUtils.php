@@ -99,8 +99,6 @@ class ChartUtils {
     $res['startdate']['year'] = intval(date('Y', strtotime($filter['fromDate'])));
     $res['startdate']['month'] = intval(date('m', strtotime($filter['fromDate'])))-1;
     $res['startdate']['day'] = intval(date('d', strtotime($filter['fromDate'])));
-    
-    $res['pointinterval'] = strtotime($filter['toDate'])-strtotime($filter['fromDate']);
 
     return $res;
   }
