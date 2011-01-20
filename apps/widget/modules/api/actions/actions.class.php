@@ -59,8 +59,6 @@ class apiActions extends sfActions {
 
     $this->lType = $request->getParameter('type');
     $this->lLikeDis = $request->getParameter('likedis');
-    $this->lIdentitysOwnedByUser = OnlineIdentityTable::retrieveIdsByUserId($this->getUser()->getUserId());
-
     $this->lTitle = $request->getParameter('title');
     $this->lDescription = $request->getParameter('description');
     $this->lPhoto = $request->getParameter('photo');
@@ -84,7 +82,7 @@ class apiActions extends sfActions {
     if ($this->status == 200) {
       $lActivity = YiidActivityTable::saveLikeActivitys($this->getUser()->getId(),
                                                         $this->lUrl,
-                                                        $this->lIdentitysOwnedByUser,
+                                                        //$this->lIdentitysOwnedByUser,
                                                         $this->lIdentitysSent,
                                                         $this->lLikeDis,
                                                         $this->lType,
