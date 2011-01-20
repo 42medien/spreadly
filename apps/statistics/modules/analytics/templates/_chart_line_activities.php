@@ -99,13 +99,6 @@ var ActivityChart = {
 		   ]
 		};
 		var lChart = new Highcharts.Chart(lOptions);
-		var myoptions = Highcharts.getOptions();
-		var myseries = lChart.series;
-		debug.log(lChart);
-		for(var i=0; i<myseries.length; i++){
-			debug.log(myseries[i].area);
-		}
-
 	}//end init
 };//end object
 ActivityChart.init();
