@@ -6,12 +6,6 @@ var ActivityChart = {
 	init: function() {
 	  Highcharts.theme = { colors: [] };// prevent errors in default theme
 	  var lData = <?php echo getChartLineActivitiesData($pData, $pCommunity); ?>;
-	  debug.log(lData.likes);
-	  debug.log(lData.pointinterval);
-	  debug.log(lData.startdate.year);
-	  debug.log(lData.startdate.day);
-	  debug.log(lData.startdate.month);
-
 		var lOptions = {
 		    chart: {
 		      renderTo: 'chart_line_activities',
@@ -50,13 +44,6 @@ var ActivityChart = {
 		   },
 		   plotOptions: {
 		      area: {
-		         fillColor: {
-		            linearGradient: [0, 0, 0, 300],
-		            stops: [
-		               [0, Highcharts.theme.colors[0]],
-		               [1, 'rgba(2,0,0,0)']
-		            ]
-		         },
 		         lineWidth: 1,
 		         marker: {
 		            enabled: true,
@@ -81,19 +68,44 @@ var ActivityChart = {
 		      name: 'Likes',
 		      pointInterval: 1*24*60*60*1000,
 		      pointStart: Date.UTC(lData.startdate.year, lData.startdate.month, lData.startdate.day),
-		      data: lData.likes
+		      data: lData.likes,
+		      color: '#1231e3',
+	        fillOpacity: 0.1,
+	        fillColor: {
+            linearGradient: [0, 0, 0, 200],
+            stops: [
+               [0, Highcharts.theme.colors[0]],
+               [1, 'rgba(61,160,242,0)']
+            ]
+         }
+
 		   },{
 		      type: 'area',
 		      name: 'Dislikes',
 		      pointInterval: 1*24*60*60*1000,
 		      pointStart: Date.UTC(lData.startdate.year, lData.startdate.month, lData.startdate.day),
-		      data: lData.dislikes
-		   }
+		      data: lData.dislikes,
+		      color: '#7f79fc',
+	        fillOpacity: 0.7,
+	        fillColor: {
+	            linearGradient: [0, 0, 0, 300],
+	            stops: [
+	               [0, Highcharts.theme.colors[0]],
+	               [1, 'rgba(61,160,242,0)']
+	            ]
+	         }
+
+		   	}
 		   ]
 		};
+		var lChart = new Highcharts.Chart(lOptions);
+		var myoptions = Highcharts.getOptions();
+		var myseries = lChart.series;
+		debug.log(lChart);
+		for(var i=0; i<myseries.length; i++){
+			debug.log(myseries[i].area);
+		}
 
-		var highchartsOptions = Highcharts.getOptions();
-		new Highcharts.Chart(lOptions);
 	}//end init
 };//end object
 ActivityChart.init();
