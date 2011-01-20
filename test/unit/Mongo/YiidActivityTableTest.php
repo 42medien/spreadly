@@ -13,10 +13,6 @@ class YiidActivityTableTest extends BaseTestCase {
     $lUserHans = UserTable::retrieveByUsername('hans');
     $lUserKarl = UserTable::retrieveByUsername('karl');
 
-    $lHugoOis = $lUserHugo->getOnlineIdentitesAsArray();
-    $lUserHansOis = $lUserHans->getOnlineIdentitesAsArray();
-    //$lUserKarlOis = $lUserKarl->getOnlineIdentitesAsArray();
-
     $lCommunityTwitter = CommunityTable::retrieveByCommunity('twitter');
     $lCommunityFb = CommunityTable::retrieveByCommunity('facebook');
 
@@ -30,19 +26,19 @@ class YiidActivityTableTest extends BaseTestCase {
 
     //$lObject = SocialObjectTable::createSocialObject('http://affen.de', null, 'affen title', 'affen description', null);
 
-    YiidActivityTable::saveLikeActivitys($lUserHugo->getId(), 'http://affen.de', $lHugoOis, array($lOiHugoTwitter->getId()), 1, 'like', 'affen title');
-    YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://affen.de', $lUserHansOis, array($lOiHansFb->getId()), 1, 'like', 'affen title');
+    YiidActivityTable::saveLikeActivitys($lUserHugo->getId(), 'http://affen.de', array($lOiHugoTwitter->getId()), 1, 'like', 'affen title');
+    YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://affen.de', array($lOiHansFb->getId()), 1, 'like', 'affen title');
     //YiidActivityTable::saveLikeActivitys($lUserKarl->getId(), 'http://affen.de', $lUserKarlOis, array($lOiKarlTwitter->getId()), 1, 'like', 'affen title');
 
-    YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://bim.bo', $lUserHansOis, array($lOiHansTwitter->getId()), 1, 'like', 'bimbo title');
+    YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://bim.bo', array($lOiHansTwitter->getId()), 1, 'like', 'bimbo title');
 
 
-    YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://spiegel.de', $lUserHansOis, array($lOiHansFb->getId(), $lOiHansTwitter->getId()), 1, 'like', 'spiegel.de title title');
-//    YiidActivityTable::saveLikeActivitys($lUserKarl->getId(), 'http://spiegel.de', $lUserKarlOis, array($lOiKarlTwitter->getId()), 1, 'like', 'spiegel.de title title');
+    YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://spiegel.de', array($lOiHansFb->getId(), $lOiHansTwitter->getId()), 1, 'like', 'spiegel.de title title');
+//    YiidActivityTable::saveLikeActivitys($lUserKarl->getId(), 'http://spiegel.de', array($lOiKarlTwitter->getId()), 1, 'like', 'spiegel.de title title');
 
-    YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://snirgel.de', $lUserHansOis, array($lOiHansTwitter->getId()), -1, 'like', 'snirgel.de title title');
-  //  YiidActivityTable::saveLikeActivitys($lUserKarl->getId(), 'http://snirgel.de', $lUserKarlOis, array($lOiKarlTwitter->getId()), -1, 'like', 'snirgel.de title title');
-    YiidActivityTable::saveLikeActivitys($lUserHugo->getId(), 'http://snirgel.de', $lHugoOis, array($lOiHugoTwitter->getId()), -1, 'like', 'snirgel.de title title');
+    YiidActivityTable::saveLikeActivitys($lUserHans->getId(), 'http://snirgel.de', array($lOiHansTwitter->getId()), -1, 'like', 'snirgel.de title title');
+  //  YiidActivityTable::saveLikeActivitys($lUserKarl->getId(), 'http://snirgel.de', array($lOiKarlTwitter->getId()), -1, 'like', 'snirgel.de title title');
+    YiidActivityTable::saveLikeActivitys($lUserHugo->getId(), 'http://snirgel.de', array($lOiHugoTwitter->getId()), -1, 'like', 'snirgel.de title title');
 
 
   }
