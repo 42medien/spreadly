@@ -7,7 +7,7 @@
 var ChartPieRelationship = {
 
   init: function(pChartsettings) {
-    var lData = <?php echo getGenderChartData($pData); ?>;
+    var lData = <?php echo getRelationshipChartData($pData); ?>;
 		var lOptions = {
 		    chart: {
 		      renderTo: 'chart_pie_relationship',
@@ -59,28 +59,40 @@ var ChartPieRelationship = {
         symbolPadding: 2
 		  },
 		  series: [{
-		      name: 'Gender',
+		      name: 'Relationship',
 		      data: [
 		             {
-		               name: '<?php echo __("open"); ?>',
+		               name: '<?php echo __('Single');?>',
 		               color: '#3300cc',
-		               y: 0
+		               y: lData.rel.singl
 		             },{
-		               name: '<?php echo __("engaged"); ?>',
+		               name: '<?php echo __('Unknown');?>',
 		               color: '#ff0000',
-		               y: 16
+		               y: lData.rel.u
 		             },{
-		               name: '<?php echo __("married"); ?>',
-		               color: '#e300e3',
-		               y: 27
+		               name: '<?php echo __('Relationship');?>',
+		               color: '#6666ff',
+		               y: lData.rel.rel
 		             },{
-		               name: '<?php echo __("complicated"); ?>',
-		               color: '#edad17',
-		               y: 11
+		               name: '<?php echo __('Open relationship');?>',
+		               color: '#00cc33',
+		               y: lData.rel.ior
 		             },{
-		               name: '<?php echo __("widowed"); ?>',
-		               color: '#2ae309',
-		               y: 3
+		               name: '<?php echo __('Engaged');?>',
+		               color: '#ffcc00',
+		               y: lData.rel.eng
+		             },{
+		               name: '<?php echo __('Married');?>',
+		               color: '#ffcc66',
+		               y: lData.rel.mar
+		             },{
+		               name: '<?php echo __('Complicated');?>',
+		               color: '#66ff66',
+		               y: lData.rel.compl
+		             },{
+		               name: '<?php echo __('Widowed');?>',
+		               color: '#ff6666',
+		               y: lData.rel.wid
 		             }
 		         ]
           }]

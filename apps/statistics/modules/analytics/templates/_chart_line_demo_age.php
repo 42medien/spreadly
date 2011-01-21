@@ -1,8 +1,10 @@
+<?php use_helper('ChartData') ?>
 <div id="chart_line_demo_age" class="area-chart left"></div>
 <script type="text/javascript">
 var ViewRangeChart = {
 	init: function(pChartsettings) {
 		//var Highcharts = new Highcharts;
+    var lData = <?php echo getAgeChartData($pData); ?>;
 	  Highcharts.theme = { colors: [] };// prevent errors in default theme
 		var lOptions = {
 		    chart: {
@@ -73,10 +75,10 @@ var ViewRangeChart = {
 
 		   series: [{
 		      type: 'area',
-		      name: 'Likes',
+		      name: 'Age',
 		      pointInterval: 1,
 		      pointStart: 15,
-		      data: [5,15,20,12,54,54,87, 33,44, 32,12, 10, 35],
+		      data: lData.age,
 		      color: '#1231e3',
 	        fillOpacity: 0.1,
 	        fillColor: {
@@ -87,21 +89,6 @@ var ViewRangeChart = {
             ]
          }
 
-		   }, {
-		      type: 'area',
-		      name: 'Dislikes',
-		      pointInterval: 1,
-		      pointStart: 15,
-		      data: [9,5,7,1,4,3,6,4,9,9,9,7,6,5,3],
-		      color: '#7f79fc',
-	        fillOpacity: 0.7,
-	        fillColor: {
-	            linearGradient: [0, 0, 0, 300],
-	            stops: [
-	               [0, Highcharts.theme.colors[0]],
-	               [1, 'rgba(61,160,242,0)']
-	            ]
-	         }
 		   }
 		   ]
 		};

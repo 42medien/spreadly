@@ -64,15 +64,15 @@ var ChartPieGenderActivities = {
 		             {
 		               name: '<?php echo __("Female"); ?>',
 		               color: '#3300cc',
-		               y: 35
+		               y: lData.gender.f
 		             },{
 		               name: '<?php echo __("Unknown"); ?>',
 		               color: '#ff0000',
-		               y: 20
+		               y: lData.gender.u
 		             },{
 		               name: '<?php echo __("Male"); ?>',
 		               color: '#ffcc00',
-		               y: 42
+		               y: lData.gender.m
 		             }
 		         ]
           }]
