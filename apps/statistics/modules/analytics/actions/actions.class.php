@@ -62,7 +62,11 @@ class analyticsActions extends sfActions
     $lDateTo = $request->getParameter('date-to', date('Y-m-d'));
     $lCommunity = $request->getParameter('com', 'all');
 
-    $lReturn['content'] =  $this->getPartial('analytics/activities_content', array('pCom' => $lCommunity, 'pHostId' => $lHostId, 'pFrom' => $lDateFrom, 'pTo' => $lDateTo));
+    $lDomainProfile = DomainProfileTable::getInstance()->find($lHostId);
+    $lData = MongoUtils::getActivityData($lDomainProfile->getUrl(), $lDateFrom, $lDateTo, 'daily');
+    //$this->pData = MongoUtils::getActivityData($lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
+
+    $lReturn['content'] =  $this->getPartial('analytics/activities_content', array('pCom' => $lCommunity, 'pHostId' => $lHostId, 'pFrom' => $lDateFrom, 'pTo' => $lDateTo, 'pData' => $lData));
 
 		return $this->renderText(json_encode($lReturn));
   }
