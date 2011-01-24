@@ -124,7 +124,6 @@ class MongoUtils {
     $data['filter'] = MongoUtils::getFilter($domain, $fromDate, $toDate, $aggregation);
     
     $data['statistics'] = MongoUtils::getAdditionalStatistics($g['retval'], $fromDate, $toDate);
-    var_dump($data);exit;
     return $data;
   }
 
