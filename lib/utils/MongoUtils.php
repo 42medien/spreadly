@@ -3,9 +3,7 @@
 class MongoUtils {
 
   public static function getActivityData($domain, $fromDate, $toDate, $aggregation) {
-    $data = MongoUtils::getDataForRange('activities_with_clickbacks', $domain, $fromDate, $toDate, $aggregation);
-    $data['statistics'] = MongoUtils::getAdditionalStatistics($data['data'], $fromDate, $toDate);
-    return $data;
+    return MongoUtils::getDataForRange('activities_with_clickbacks', $domain, $fromDate, $toDate, $aggregation);
   }
 
   public static function getAgeData($domain, $fromDate, $toDate, $aggregation) {
@@ -125,7 +123,9 @@ class MongoUtils {
     
     $data['filter'] = MongoUtils::getFilter($domain, $fromDate, $toDate, $aggregation);
     
-    //$data['statistics'] = MongoUtils::getAdditionalStatistics($g['retval'], $fromDate, $toDate);
+    if($type=='activities_with_clickbacks') {
+      $data['statistics'] = MongoUtils::getAdditionalStatistics($g['retval'], $fromDate, $toDate);      
+    }
     return $data;
   }
 
