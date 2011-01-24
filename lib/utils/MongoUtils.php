@@ -4,7 +4,7 @@ class MongoUtils {
 
   public static function getActivityData($domain, $fromDate, $toDate, $aggregation) {
     $data = MongoUtils::getDataForRange('activities_with_clickbacks', $domain, $fromDate, $toDate, $aggregation);
-    $data['statistics'] = MongoUtils::getAdditionalStatistics($g['retval'], $fromDate, $toDate);
+    $data['statistics'] = MongoUtils::getAdditionalStatistics($data['data'], $fromDate, $toDate);
     return $data;
   }
 
