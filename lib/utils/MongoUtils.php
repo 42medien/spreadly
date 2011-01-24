@@ -97,12 +97,16 @@ class MongoUtils {
    * @param aggregation: The aggregation type (daily, weekly, monthly)
    * @return The raw data as it comes from the mongo db
    */
-  private static function getDataForRange($type, $domain, $fromDate, $toDate, $aggregation) {
+  private static function getDataForRange($type, $domain, $fromDate, $toDate, $aggregation, $url=null) {
     $col = MongoUtils::getCollection('charts', $domain);
-    //var_dump($col);die();
+
     $keys = array("date" => 1);
     $cond = array("date" => array('$gte' => new MongoDate(strtotime($fromDate)), '$lte' => new MongoDate(strtotime($toDate))));
-
+    
+    if($url) {
+      $cond['url'] = $url;
+    }
+    
     $initial = MongoUtils::getInitial($type);
     $reduce = MongoUtils::getReduce($type);
 
@@ -116,8 +120,11 @@ class MongoUtils {
       $pis = $pi_col->group($keys, $initial, $reduce, array("condition" => $cond));
       $data['pis'] = MongoUtils::getDataWithEmptyDayPadding($pis['retval'], $fromDate, $toDate);
     }
-
+    
     $data['filter'] = MongoUtils::getFilter($domain, $fromDate, $toDate, $aggregation);
+    
+    $data['statistics'] = MongoUtils::getAdditionalStatistics($g['retval'], $fromDate, $toDate);
+    var_dump($data);exit;
     return $data;
   }
 
@@ -138,7 +145,75 @@ class MongoUtils {
     $res = array_merge($mongoData, $emptyDays);
     return $res;
   }
+  
+  private static function getAdditionalStatistics($mongoData, $fromDate, $toDate) {
+    $res = array();
+    $res['total'] = array();
+    $res['average'] = array();
+    $res['ratio'] = array();
+  
+    $days = (strtotime($toDate) - strtotime($fromDate))/(60*60*24);
+    
+    $services = array('facebook', 'twitter', 'linkedin', 'google');
 
+    // Initializing the Data arrays for the chart
+    foreach ($services as $service) {
+      $res['total'][$service] = array();
+      $res['total'][$service]['likes'] = 0;
+      $res['total'][$service]['dislikes'] = 0; 
+      $res['total'][$service]['clickbacks'] = 0;
+      $res['average'][$service] = array();
+      $res['average'][$service]['likes'] = 0;
+      $res['average'][$service]['dislikes'] = 0; 
+      $res['average'][$service]['clickbacks'] = 0;
+      $res['ratio'][$service] = array();
+      $res['ratio'][$service]['dislike_like'] = 0;
+      $res['ratio'][$service]['clickback_like'] = 0;      
+    }
+    $res['total']['all'] = array();
+    $res['total']['all']['likes'] = 0;
+    $res['total']['all']['dislikes'] = 0; 
+    $res['total']['all']['clickbacks'] = 0;
+    $res['average']['all'] = array();
+    $res['average']['all']['likes'] = 0;
+    $res['average']['all']['dislikes'] = 0; 
+    $res['average']['all']['clickbacks'] = 0;
+    $res['ratio']['all'] = array();
+    $res['ratio']['all']['dislike_like'] = 0;
+    $res['ratio']['all']['clickback_like'] = 0;
+
+  
+    for ($i=0; $i < count($mongoData); $i++) { 
+      foreach ($services as $service) {
+        $res['total'][$service]['likes'] += $mongoData[$i][$service]['likes'];
+        $res['total'][$service]['dislikes'] += $mongoData[$i][$service]['dislikes'];
+        $res['total'][$service]['clickbacks'] += $mongoData[$i][$service]['clickbacks'];
+
+        $res['total']['all']['likes'] += $mongoData[$i][$service]['likes'];
+        $res['total']['all']['dislikes'] += $mongoData[$i][$service]['dislikes'];
+        $res['total']['all']['clickbacks'] += $mongoData[$i][$service]['clickbacks'];
+      }
+    }
+    
+    foreach ($services as $service) {
+      $res['average'][$service]['likes'] = round($res['total'][$service]['likes']/$days, 2);
+      $res['average'][$service]['dislikes'] = round($res['total'][$service]['dislikes']/$days, 2);
+      $res['average'][$service]['clickbacks'] = round($res['total'][$service]['clickbacks']/$days, 2);
+      
+      $res['ratio'][$service]['dislike_like'] = round($res['total'][$service]['dislikes']/$res['total'][$service]['likes']*100);
+      $res['ratio'][$service]['clickback_like'] = round($res['total'][$service]['clickbacks']/$res['total'][$service]['likes']*100);
+    }
+    
+    $res['average']['all']['likes'] = round($res['total']['all']['likes']/$days, 2);
+    $res['average']['all']['dislikes'] = round($res['total']['all']['dislikes']/$days, 2);
+    $res['average']['all']['clickbacks'] = round($res['total']['all']['clickbacks']/$days, 2);
+
+    $res['ratio']['all']['dislike_like'] = round($res['total']['all']['dislikes']/$res['total']['all']['likes']*100);
+    $res['ratio']['all']['clickback_like'] = round($res['total']['all']['clickbacks']/$res['total']['all']['likes']*100);
+    
+    return $res;
+  }
+  
   private static function getMongoDateRange($start, $end) {
     $range = array();
     $start = strtotime($start);
