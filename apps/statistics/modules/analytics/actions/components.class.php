@@ -22,6 +22,7 @@ class analyticsComponents extends sfComponents
     $this->pDateTo = $request->getParameter('date-to', date('Y-m-d'));
     $this->pCommunity = $request->getParameter('com', 'all');
     $this->pUrl = $request->getParameter('url', null);
+    $this->pDealId = $request->getParameter('dealid', null);
 
     return $parentRet;
 	}
