@@ -48,29 +48,29 @@ class MongoUtils {
               "}";
 
     $g = $col->group($keys, $initial, $reduce, array("condition" => $cond));
-    
+
     $data = array();
     $data['data'] = ChartUtils::sortArrayByTotals($g['retval'], $limit);
-    
+
     $pi_col = MongoUtils::getCollection('pis', $domain);
     $initial = MongoUtils::getInitial('pis');
     $reduce = MongoUtils::getReduce('pis');
     unset($cond['host']);
-    
+
     foreach ($data['data'] as $key => $item) {
       $data['data'][$key]['pis'] = array('total' => 0,'cb' => 0,'yiid' => 0);
       $cond['url'] = $item['url'];
-      
+
       $pis = $pi_col->group($keys, $initial, $reduce, array("condition" => $cond));
       if(!empty($pis['retval'][0])) {
         $data['data'][$key]['pis']['total'] += $pis['retval'][0]['total'];
         $data['data'][$key]['pis']['cb'] += $pis['retval'][0]['cb'];
-        $data['data'][$key]['pis']['yiid'] += $pis['retval'][0]['yiid'];        
+        $data['data'][$key]['pis']['yiid'] += $pis['retval'][0]['yiid'];
       }
     }
-    
+
     $data['filter'] = MongoUtils::getFilter($domain, $fromDate, $toDate);
-    
+
     return $data;
   }
 
@@ -99,6 +99,7 @@ class MongoUtils {
    */
   private static function getDataForRange($type, $domain, $fromDate, $toDate, $aggregation) {
     $col = MongoUtils::getCollection('charts', $domain);
+    //var_dump($col);die();
     $keys = array("date" => 1);
     $cond = array("date" => array('$gte' => new MongoDate(strtotime($fromDate)), '$lte' => new MongoDate(strtotime($toDate))));
 
@@ -108,7 +109,6 @@ class MongoUtils {
     $g = $col->group($keys, $initial, $reduce, array("condition" => $cond));
 
     $data['data'] = MongoUtils::getDataWithEmptyDayPadding($g['retval'], $fromDate, $toDate);
-
     if(strstr($type, 'with_clickbacks')) {
       $pi_col =  MongoUtils::getCollection('pis', $domain);
       $initial = MongoUtils::getInitial('pis');
@@ -116,9 +116,8 @@ class MongoUtils {
       $pis = $pi_col->group($keys, $initial, $reduce, array("condition" => $cond));
       $data['pis'] = MongoUtils::getDataWithEmptyDayPadding($pis['retval'], $fromDate, $toDate);
     }
-    
-    $data['filter'] = MongoUtils::getFilter($domain, $fromDate, $toDate, $aggregation);
 
+    $data['filter'] = MongoUtils::getFilter($domain, $fromDate, $toDate, $aggregation);
     return $data;
   }
 
@@ -320,8 +319,3 @@ class MongoUtils {
     }
   }
 }
-
-
-?>
-
-
