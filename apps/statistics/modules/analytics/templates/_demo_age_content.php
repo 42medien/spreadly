@@ -1,11 +1,11 @@
 	<h2><?php echo __('Age distribution'); ?></h2>
 	<div class="content-box bg-white">
-		<?php include_component('analytics', 'chart_line_demo_age', array('pChartsettings' =>
+		<?php include_component('analytics', 'chart_pie_age_activities', array('pChartsettings' =>
 			'{
-					"width": 680,
-					"height": 350,
-					"margin": [50, 50, 50, 50],
-					"spacingRight": 0
+				"width": 450,
+				"height": 230,
+				"margin": [20, 0, 30, 160],
+				"plotsize": "80%"
 				}'
 			)); ?>
 	</div>

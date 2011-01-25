@@ -56,7 +56,7 @@ class analyticsActions extends sfActions
   public function executeGet_filtered_content(sfWebRequest $request){
   	$this->getResponse()->setContentType('application/json');
 
-		$lReturn['nav'] = $this->getPartial('analytics/filter_nav', array('pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl' => $this->pUrl));
+		$lReturn['nav'] = $this->getPartial('analytics/filter_nav', array('pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl' => $this->pUrl, 'pDealId' => $this->pDealId));
     $lReturn['content'] =  $this->getPartial('analytics/url_content', array('pCom' => 'all', 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl' => $this->pUrl));
 
 		return $this->renderText(json_encode($lReturn));
@@ -104,7 +104,7 @@ class analyticsActions extends sfActions
 
   public function executeGet_analytics_urls(sfWebRequest $request){
   	$this->getResponse()->setContentType('application/json');
-		$lReturn['nav'] = $this->getPartial('analytics/filter_nav', array('pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl' => $this->pUrl));
+		$lReturn['nav'] = $this->getPartial('analytics/filter_nav', array('pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl' => $this->pUrl, 'pDealId' => $this->pDealId));
     $lReturn['content'] =  $this->getPartial('analytics/url_content', array('pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl'=> $this->pUrl));
 
 		return $this->renderText(json_encode($lReturn));

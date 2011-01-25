@@ -3,3 +3,7 @@ ErrorHandler.catchGlobalError();
 Deal.init();
 DealTable.init();
 DealForm.init();
+Deal.showStats();
+AnalyticsFilter.init();
+FilterNav.init();
+AnalyticsUrlFilter.init();

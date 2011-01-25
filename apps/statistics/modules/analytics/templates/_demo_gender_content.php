@@ -61,12 +61,12 @@
 			</ul>
 		</li>
 	</ul>
-	<?php include_component('analytics', 'chart_line_demo_age', array('pChartsettings' =>
+	<?php include_component('analytics', 'chart_pie_relationship', array('pChartsettings' =>
 		'{
-				"width": 330,
+				"width": 300,
 				"height": 130,
-				"margin": [20, 0, 30, 30],
-				"spacingRight": 0
+				"margin": [ 0, 0, 10, 0],
+				"plotsize": "40%"
 			}'
 		)); ?>
 </div>

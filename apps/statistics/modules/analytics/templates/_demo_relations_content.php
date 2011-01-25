@@ -15,9 +15,11 @@
 	<ul class="analytics-stats-list">
 		<li><h3><?php echo __('Gender distribution'); ?></h3>
 			<ul>
-				<li><?php echo __('%percent%% male', array('%percent%' => 64)); ?></li>
-				<li><?php echo __('%percent%% female', array('%percent%' => 35)); ?></li>
-				<li><?php echo __('%percent%% unknown', array('%percent%' => 1)); ?></li>
+				<li><?php echo __('%percent%% open', array('%percent%' => 11)); ?></li>
+				<li><?php echo __('%percent%% engaged', array('%percent%' => 43)); ?></li>
+				<li><?php echo __('%percent%% married', array('%percent%' => 27)); ?></li>
+				<li><?php echo __('%percent%% complicated', array('%percent%' => 12)); ?></li>
+				<li><?php echo __('%percent%% widowed', array('%percent%' => 7)); ?></li>
 			</ul>
 		</li>
 		<li><h3><?php echo __('Average age'); ?></h3>
