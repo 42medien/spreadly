@@ -15,7 +15,6 @@ class MongoUtils {
     
     $data = MongoUtils::getDataForRange('activities_with_clickbacks', $domain, $fromDate, $toDate, $aggregation, $url);
     
-    var_dump($data);die();
     return $data;  
   }
 
