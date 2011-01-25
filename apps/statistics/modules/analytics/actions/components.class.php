@@ -44,7 +44,8 @@ class analyticsComponents extends sfComponents
 	}
 
 	public function executeChart_line_urls(sfWebRequest $request){
-
+    $lDomainProfile = DomainProfileTable::getInstance()->find($this->pHostId);
+    $this->pData = MongoUtils::getUrlData($lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pUrl);
 	}
 
 	public function executeChart_line_range_views(sfWebRequest $request){

@@ -2,8 +2,21 @@
 
 class MongoUtils {
 
-  public static function getActivityData($domain, $fromDate, $toDate, $aggregation) {
-    return MongoUtils::getDataForRange('activities_with_clickbacks', $domain, $fromDate, $toDate, $aggregation);
+  public static function getActivityData($domain, $fromDate, $toDate, $aggregation, $url=null) {
+    return MongoUtils::getDataForRange('activities_with_clickbacks', $domain, $fromDate, $toDate, $aggregation, $url);  
+  }
+  
+  public static function getUrlData($domain, $fromDate, $toDate, $aggregation, $url=null) {
+    $data['top_activities'] = MongoUtils::getTopActivitiesData($domain, $fromDate, $toDate, $aggregation);
+    
+    if($url==null) {
+      $url = $data['top_activities']['data'][0]['url'];
+    }
+    
+    $data = MongoUtils::getDataForRange('activities_with_clickbacks', $domain, $fromDate, $toDate, $aggregation, $url);
+    
+    var_dump($data);die();
+    return $data;  
   }
 
   public static function getAgeData($domain, $fromDate, $toDate, $aggregation) {
@@ -19,7 +32,7 @@ class MongoUtils {
   }
 
   public static function getMediaPenetrationData($domain, $fromDate, $toDate, $aggregation) {
-    return MongoUtils::getDataForRange('media_penetration_with_clickbacks', $domain, $fromDate, $toDate, $aggregation);
+    return MongoUtils::getDataForRange('activities_with_clickbacks', $domain, $fromDate, $toDate, $aggregation);
   }
 
   public static function getTopActivitiesData($domain, $fromDate, $toDate, $aggregation, $limit=10) {
@@ -126,6 +139,7 @@ class MongoUtils {
     if($type=='activities_with_clickbacks') {
       $data['statistics'] = MongoUtils::getAdditionalStatistics($g['retval'], $fromDate, $toDate);      
     }
+
     return $data;
   }
 
@@ -147,43 +161,43 @@ class MongoUtils {
     return $res;
   }
   
-  private static function getAdditionalStatistics($mongoData, $fromDate, $toDate) {
+  private static function initArray() {
+    $res = array();
+    $res['likes'] = 0;
+    $res['dislikes'] = 0; 
+    $res['clickbacks'] = 0;
+    $res['contacts'] = 0;
+    return $res;
+  }
+  
+  private static function initStats($days, $services) {
     $res = array();
     $res['total'] = array();
     $res['average'] = array();
     $res['ratio'] = array();
-  
-    $days = (strtotime($toDate) - strtotime($fromDate))/(60*60*24);
     
-    $services = array('facebook', 'twitter', 'linkedin', 'google');
-
     // Initializing the Data arrays for the chart
     foreach ($services as $service) {
-      $res['total'][$service] = array();
-      $res['total'][$service]['likes'] = 0;
-      $res['total'][$service]['dislikes'] = 0; 
-      $res['total'][$service]['clickbacks'] = 0;
-      $res['average'][$service] = array();
-      $res['average'][$service]['likes'] = 0;
-      $res['average'][$service]['dislikes'] = 0; 
-      $res['average'][$service]['clickbacks'] = 0;
+      $res['total'][$service] = MongoUtils::initArray();
+      $res['average'][$service] = MongoUtils::initArray();
       $res['ratio'][$service] = array();
       $res['ratio'][$service]['dislike_like'] = 0;
       $res['ratio'][$service]['clickback_like'] = 0;      
     }
-    $res['total']['all'] = array();
-    $res['total']['all']['likes'] = 0;
-    $res['total']['all']['dislikes'] = 0; 
-    $res['total']['all']['clickbacks'] = 0;
-    $res['average']['all'] = array();
-    $res['average']['all']['likes'] = 0;
-    $res['average']['all']['dislikes'] = 0; 
-    $res['average']['all']['clickbacks'] = 0;
+    $res['total']['all'] = MongoUtils::initArray();
+    $res['average']['all'] = MongoUtils::initArray();
     $res['ratio']['all'] = array();
     $res['ratio']['all']['dislike_like'] = 0;
     $res['ratio']['all']['clickback_like'] = 0;
-
+    
+    return $res;
+  }
   
+  private static function getAdditionalStatistics($mongoData, $fromDate, $toDate) {
+    $services = array('facebook', 'twitter', 'linkedin', 'google');  
+    $days = ((strtotime($toDate) - strtotime($fromDate))/(60*60*24))+1;
+    $res = MongoUtils::initStats($days, $services);
+
     for ($i=0; $i < count($mongoData); $i++) { 
       foreach ($services as $service) {
         $res['total'][$service]['likes'] += $mongoData[$i][$service]['likes'];
@@ -197,20 +211,39 @@ class MongoUtils {
     }
     
     foreach ($services as $service) {
-      $res['average'][$service]['likes'] = round($res['total'][$service]['likes']/$days, 2);
-      $res['average'][$service]['dislikes'] = round($res['total'][$service]['dislikes']/$days, 2);
-      $res['average'][$service]['clickbacks'] = round($res['total'][$service]['clickbacks']/$days, 2);
+      $res['average'][$service]['likes'] = round($res['total'][$service]['likes']/($days==0 ? 1 : $days), 2);
+      $res['average'][$service]['dislikes'] = round($res['total'][$service]['dislikes']/($days==0 ? 1 : $days), 2);
+      $res['average'][$service]['clickbacks'] = round($res['total'][$service]['clickbacks']/($days==0 ? 1 : $days), 2);
       
-      $res['ratio'][$service]['dislike_like'] = round($res['total'][$service]['dislikes']/$res['total'][$service]['likes']*100);
-      $res['ratio'][$service]['clickback_like'] = round($res['total'][$service]['clickbacks']/$res['total'][$service]['likes']*100);
+      $res['ratio'][$service]['dislike_like'] =
+        $res['total'][$service]['likes'] == 0 ? 0 :  round($res['total'][$service]['dislikes']/$res['total'][$service]['likes']*100);
+      
+      $res['ratio'][$service]['clickback_like'] =
+        $res['total'][$service]['likes'] == 0 ? 0 :  round($res['total'][$service]['clickbacks']/$res['total'][$service]['likes']*100);
+        
+      $res['ratio'][$service]['like_percentage'] = 
+      ($res['total'][$service]['likes']+$res['total'][$service]['dislikes']) == 0 ? 0 :  round($res['total'][$service]['likes']/($res['total'][$service]['likes']+$res['total'][$service]['dislikes'])*100);
+
+    $res['ratio'][$service]['dislike_percentage'] = 
+      ($res['total'][$service]['likes']+$res['total'][$service]['dislikes']) == 0 ? 0 :  round($res['total'][$service]['dislikes']/($res['total'][$service]['likes']+$res['total'][$service]['dislikes'])*100);
+
     }
     
-    $res['average']['all']['likes'] = round($res['total']['all']['likes']/$days, 2);
-    $res['average']['all']['dislikes'] = round($res['total']['all']['dislikes']/$days, 2);
-    $res['average']['all']['clickbacks'] = round($res['total']['all']['clickbacks']/$days, 2);
+    $res['average']['all']['likes'] = round($res['total']['all']['likes']/($days==0 ? 1 : $days), 2);
+    $res['average']['all']['dislikes'] = round($res['total']['all']['dislikes']/($days==0 ? 1 : $days), 2);
+    $res['average']['all']['clickbacks'] = round($res['total']['all']['clickbacks']/($days==0 ? 1 : $days), 2);
 
-    $res['ratio']['all']['dislike_like'] = round($res['total']['all']['dislikes']/$res['total']['all']['likes']*100);
-    $res['ratio']['all']['clickback_like'] = round($res['total']['all']['clickbacks']/$res['total']['all']['likes']*100);
+    $res['ratio']['all']['dislike_like'] =
+      $res['total']['all']['likes'] == 0 ? 0 :  round($res['total']['all']['dislikes']/$res['total']['all']['likes']*100);
+    
+    $res['ratio']['all']['clickback_like'] = 
+      $res['total']['all']['likes'] == 0 ? 0 :  round($res['total']['all']['clickbacks']/$res['total']['all']['likes']*100);
+    
+    $res['ratio']['all']['like_percentage'] = 
+      ($res['total']['all']['likes']+$res['total']['all']['dislikes']) == 0 ? 0 :  round($res['total']['all']['likes']/($res['total']['all']['likes']+$res['total']['all']['dislikes'])*100);
+
+    $res['ratio']['all']['dislike_percentage'] = 
+      ($res['total']['all']['likes']+$res['total']['all']['dislikes']) == 0 ? 0 :  round($res['total']['all']['dislikes']/($res['total']['all']['likes']+$res['total']['all']['dislikes'])*100);
     
     return $res;
   }
@@ -241,10 +274,10 @@ class MongoUtils {
     switch ($type) {
       case 'activities_with_clickbacks':
         return array(
-          "facebook" => array("likes" => 0, "dislikes" => 0, "clickbacks" => 0),
-          "twitter" => array("likes" => 0, "dislikes" => 0, "clickbacks" => 0),
-          "linkedin" => array("likes" => 0, "dislikes" => 0, "clickbacks" => 0),
-          "google" => array("likes" => 0, "dislikes" => 0, "clickbacks" => 0)
+          "facebook" => array("likes" => 0, "dislikes" => 0, "clickbacks" => 0, "contacts" => 0),
+          "twitter" => array("likes" => 0, "dislikes" => 0, "clickbacks" => 0, "contacts" => 0),
+          "linkedin" => array("likes" => 0, "dislikes" => 0, "clickbacks" => 0, "contacts" => 0),
+          "google" => array("likes" => 0, "dislikes" => 0, "clickbacks" => 0, "contacts" => 0)
         );
         break;
       case 'age_distribution':
@@ -304,21 +337,25 @@ class MongoUtils {
                "out.facebook['likes']+=isNaN(doc.s.facebook.pos) ? 0 : doc.s.facebook.pos;".
                "out.facebook['dislikes']+=isNaN(doc.s.facebook.neg) ? 0 : doc.s.facebook.neg;".
                "out.facebook['clickbacks']+=isNaN(doc.s.facebook.cb) ? 0 : doc.s.facebook.cb;".
+               "out.facebook['contacts']+=isNaN(doc.s.facebook.cnt) ? 0 : doc.s.facebook.cnt;".
              "}".
              "if(doc.s.twitter) {".
                "out.twitter['likes']+=isNaN(doc.s.twitter.pos) ? 0 : doc.s.twitter.pos;".
                "out.twitter['dislikes']+=isNaN(doc.s.twitter.neg) ? 0 : doc.s.twitter.neg;".
                "out.twitter['clickbacks']+=isNaN(doc.s.twitter.cb) ? 0 : doc.s.twitter.cb;".
+               "out.twitter['contacts']+=isNaN(doc.s.twitter.cnt) ? 0 : doc.s.twitter.cnt;".
              "}".
              "if(doc.s.linkedin) {".
                "out.linkedin['likes']+=isNaN(doc.s.linkedin.pos) ? 0 : doc.s.linkedin.pos;".
                "out.linkedin['dislikes']+=isNaN(doc.s.linkedin.neg) ? 0 : doc.s.linkedin.neg;".
                "out.linkedin['clickbacks']+=isNaN(doc.s.linkedin.cb) ? 0 : doc.s.linkedin.cb;".
+               "out.linkedin['contacts']+=isNaN(doc.s.linkedin.cnt) ? 0 : doc.s.linkedin.cnt;".
              "}".
              "if(doc.s.google) {".
                "out.google['likes']+=isNaN(doc.s.google.pos) ? 0 : doc.s.google.pos;".
                "out.google['dislikes']+=isNaN(doc.s.google.neg) ? 0 : doc.s.google.neg;".
                "out.google['clickbacks']+=isNaN(doc.s.google.cb) ? 0 : doc.s.google.cb;".
+               "out.google['contacts']+=isNaN(doc.s.google.cnt) ? 0 : doc.s.google.cnt;".
              "}".
            "}";
         break;
