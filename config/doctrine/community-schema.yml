@@ -5,8 +5,8 @@ options:
 
 Community:
   actAs:
-    MemcacheBehavior: ~
-    Timestampable:  ~    
+    NoMemcacheBehavior: ~
+    Timestampable:  ~
     Sluggable:
       unique: true
       fields: [slug]
@@ -32,7 +32,7 @@ Community:
       type:       string(255)
     costs:
       type:       boolean
-      default:    false      
+      default:    false
     openid:
       type:       boolean
       default:    false
@@ -65,13 +65,13 @@ Community:
     feed_identifier:
       type:       integer
       default:    0
-    default_icon:  
+    default_icon:
       type:       string(128)
       default:    ''
     feed_count:
       type:      integer
       default:   0
-    community_object_id:  
+    community_object_id:
       type:      integer
   relations:
     User:        { onDelete: SET NULL, local: user_id, foreign: id, foreignAlias: Communitys }

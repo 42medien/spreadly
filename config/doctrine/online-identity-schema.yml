@@ -5,7 +5,7 @@ options:
 
 OnlineIdentity:
   actAs:
-    MemcacheBehavior: ~
+    NoMemcacheBehavior: ~
     Timestampable:  ~
   columns:
     community_id:
