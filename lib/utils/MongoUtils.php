@@ -19,6 +19,10 @@ class MongoUtils {
     return $data;  
   }
 
+  public static function getDemograficData($domain, $fromDate, $toDate, $aggregation) {
+    return MongoUtils::getDataForRange('demografics', $domain, $fromDate, $toDate, $aggregation);
+  }
+  
   public static function getAgeData($domain, $fromDate, $toDate, $aggregation) {
     return MongoUtils::getDataForRange('age_distribution', $domain, $fromDate, $toDate, $aggregation);
   }
@@ -138,6 +142,8 @@ class MongoUtils {
     
     if($type=='activities_with_clickbacks') {
       $data['statistics'] = MongoUtils::getAdditionalStatistics($g['retval'], $fromDate, $toDate);      
+    } elseif($type=='demografics') {
+      $data['statistics'] = MongoUtils::getAdditionalDemograficStatistics($data['data'], $fromDate, $toDate);
     }
 
     return $data;
@@ -170,7 +176,7 @@ class MongoUtils {
     return $res;
   }
   
-  private static function initStats($days, $services) {
+  private static function initStats($services) {
     $res = array();
     $res['total'] = array();
     $res['average'] = array();
@@ -188,15 +194,145 @@ class MongoUtils {
     $res['average']['all'] = MongoUtils::initArray();
     $res['ratio']['all'] = array();
     $res['ratio']['all']['dislike_like'] = 0;
-    $res['ratio']['all']['clickback_like'] = 0;
+    $res['ratio']['all']['clickback_like'] = 0; 
     
+    return $res;
+  }
+
+  private static function initDemograficStats() {
+    $res = array();
+    $res['total'] = array();
+    $res['ratio'] = array();
+    
+    $res['total']['age'] = array(
+              "u_18" => 0,
+              "b_18_24" => 0,
+              "b_25_34" => 0,
+              "b_35_54" => 0,
+              "o_55" => 0
+          );
+          
+    $res['total']['gender'] = array(
+              "m" => 0,
+              "f" => 0,
+              "u" => 0
+          );
+    $res['total']['relationship'] = array(
+              "singl" => 0,
+              "eng" => 0,
+              "compl" => 0,
+              "mar" => 0,
+              "rel" => 0,
+              "ior" => 0,
+              "wid" => 0,
+              "u" => 0
+          );
+
+    $res['ratio']['age'] = array(
+              "u_18" => 0,
+              "b_18_24" => 0,
+              "b_25_34" => 0,
+              "b_35_54" => 0,
+              "o_55" => 0
+          );
+          
+    $res['ratio']['gender'] = array(
+              "m" => 0,
+              "f" => 0,
+              "u" => 0
+          );
+    $res['ratio']['relationship'] = array(
+              "singl" => 0,
+              "eng" => 0,
+              "compl" => 0,
+              "mar" => 0,
+              "rel" => 0,
+              "ior" => 0,
+              "wid" => 0,
+              "u" => 0
+          );
+        
+    return $res;
+  }
+  
+  private static function getAdditionalDemograficStatistics($mongoData, $fromDate, $toDate) {
+    $days = ((strtotime($toDate) - strtotime($fromDate))/(60*60*24))+1;
+    $res = MongoUtils::initDemograficStats();
+
+    for ($i=0; $i < count($mongoData); $i++) { 
+      if(isset($mongoData[$i]['age'])) {
+        $res['total']['age']['u_18']    += $mongoData[$i]['age']['u_18']   ;
+        $res['total']['age']['b_18_24'] += $mongoData[$i]['age']['b_18_24'];
+        $res['total']['age']['b_25_34'] += $mongoData[$i]['age']['b_25_34'];
+        $res['total']['age']['b_35_54'] += $mongoData[$i]['age']['b_35_54'];
+        $res['total']['age']['o_55']    += $mongoData[$i]['age']['o_55']   ;        
+      }
+
+      if(isset($mongoData[$i]['gender'])) {
+        $res['total']['gender']['m'] += $mongoData[$i]['gender']['m'];
+        $res['total']['gender']['f'] += $mongoData[$i]['gender']['f'];
+        $res['total']['gender']['u'] += $mongoData[$i]['gender']['u'];
+      }
+      
+      if(isset($mongoData[$i]['relationship'])) {
+        $res['total']['relationship']['singl']  += $mongoData[$i]['relationship']['singl'];
+        $res['total']['relationship']['eng']    += $mongoData[$i]['relationship']['eng']  ;
+        $res['total']['relationship']['compl']  += $mongoData[$i]['relationship']['compl'];
+        $res['total']['relationship']['mar']    += $mongoData[$i]['relationship']['mar']  ;
+        $res['total']['relationship']['rel']    += $mongoData[$i]['relationship']['rel']  ;
+        $res['total']['relationship']['ior']    += $mongoData[$i]['relationship']['ior']  ;
+        $res['total']['relationship']['wid']    += $mongoData[$i]['relationship']['wid']  ;
+        $res['total']['relationship']['u']      += $mongoData[$i]['relationship']['u']    ;
+      }
+    }
+    
+      $res['total']['age']['all']    =  $res['total']['age']['u_18'];
+      $res['total']['age']['all']    += $res['total']['age']['b_18_24'];
+      $res['total']['age']['all']    += $res['total']['age']['b_25_34'];
+      $res['total']['age']['all']    += $res['total']['age']['b_35_54'];
+      $res['total']['age']['all']    += $res['total']['age']['b_35_54'];
+      $res['total']['age']['all']    += $res['total']['age']['o_55'];
+
+      $res['total']['gender']['all'] =  $res['total']['gender']['m'];
+      $res['total']['gender']['all'] += $res['total']['gender']['f'];
+      $res['total']['gender']['all'] += $res['total']['gender']['u'];
+
+      $res['total']['relationship']['all'] =  $res['total']['relationship']['singl'];
+      $res['total']['relationship']['all'] += $res['total']['relationship']['eng']  ;
+      $res['total']['relationship']['all'] += $res['total']['relationship']['compl'];
+      $res['total']['relationship']['all'] += $res['total']['relationship']['mar']  ;
+      $res['total']['relationship']['all'] += $res['total']['relationship']['rel']  ;
+      $res['total']['relationship']['all'] += $res['total']['relationship']['ior']  ;
+      $res['total']['relationship']['all'] += $res['total']['relationship']['wid']  ;
+      $res['total']['relationship']['all'] += $res['total']['relationship']['u']    ;
+
+
+      $res['ratio']['age']['u_18']    = round($res['total']['age']['u_18']   /($res['total']['age']['all']==0 ? 1 : $res['total']['age']['all'])*100);
+      $res['ratio']['age']['b_18_24'] = round($res['total']['age']['b_18_24']/($res['total']['age']['all']==0 ? 1 : $res['total']['age']['all'])*100);
+      $res['ratio']['age']['b_25_34'] = round($res['total']['age']['b_25_34']/($res['total']['age']['all']==0 ? 1 : $res['total']['age']['all'])*100);
+      $res['ratio']['age']['b_35_54'] = round($res['total']['age']['b_35_54']/($res['total']['age']['all']==0 ? 1 : $res['total']['age']['all'])*100);
+      $res['ratio']['age']['o_55']    = round($res['total']['age']['o_55']   /($res['total']['age']['all']==0 ? 1 : $res['total']['age']['all'])*100);
+
+      $res['ratio']['gender']['m'] = round($res['total']['gender']['m']/($res['total']['gender']['all']==0 ? 1 : $res['total']['gender']['all'])*100);
+      $res['ratio']['gender']['f'] = round($res['total']['gender']['f']/($res['total']['gender']['all']==0 ? 1 : $res['total']['gender']['all'])*100);
+      $res['ratio']['gender']['u'] = round($res['total']['gender']['u']/($res['total']['gender']['all']==0 ? 1 : $res['total']['gender']['all'])*100);
+
+      $res['ratio']['relationship']['singl']  = round($res['total']['relationship']['singl']/($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
+      $res['ratio']['relationship']['eng']    = round($res['total']['relationship']['eng']  /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
+      $res['ratio']['relationship']['compl']  = round($res['total']['relationship']['compl']/($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
+      $res['ratio']['relationship']['mar']    = round($res['total']['relationship']['mar']  /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
+      $res['ratio']['relationship']['rel']    = round($res['total']['relationship']['rel']  /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
+      $res['ratio']['relationship']['ior']    = round($res['total']['relationship']['ior']  /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
+      $res['ratio']['relationship']['wid']    = round($res['total']['relationship']['wid']  /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
+      $res['ratio']['relationship']['u']      = round($res['total']['relationship']['u']    /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
+      
     return $res;
   }
   
   private static function getAdditionalStatistics($mongoData, $fromDate, $toDate) {
     $services = array('facebook', 'twitter', 'linkedin', 'google');  
     $days = ((strtotime($toDate) - strtotime($fromDate))/(60*60*24))+1;
-    $res = MongoUtils::initStats($days, $services);
+    $res = MongoUtils::initStats($services);
 
     for ($i=0; $i < count($mongoData); $i++) { 
       foreach ($services as $service) {
@@ -280,6 +416,32 @@ class MongoUtils {
           "google" => array("likes" => 0, "dislikes" => 0, "clickbacks" => 0, "contacts" => 0)
         );
         break;
+      case 'demografics':
+        return array(
+          "age" => array(
+              "u_18" => 0,
+              "b_18_24" => 0,
+              "b_25_34" => 0,
+              "b_35_54" => 0,
+              "o_55" => 0
+          ),
+          "gender" => array(
+              "m" => 0,
+              "f" => 0,
+              "u" => 0
+          ),
+          "relationship" => array(
+              "singl" => 0,
+              "eng" => 0,
+              "compl" => 0,
+              "mar" => 0,
+              "rel" => 0,
+              "ior" => 0,
+              "wid" => 0,
+              "u" => 0
+          )          
+        );
+        break;
       case 'age_distribution':
         return array(
           "u_18" => 0,
@@ -356,6 +518,32 @@ class MongoUtils {
                "out.google['dislikes']+=isNaN(doc.s.google.neg) ? 0 : doc.s.google.neg;".
                "out.google['clickbacks']+=isNaN(doc.s.google.cb) ? 0 : doc.s.google.cb;".
                "out.google['contacts']+=isNaN(doc.s.google.cnt) ? 0 : doc.s.google.cnt;".
+             "}".
+           "}";
+        break;
+      case 'demografics':
+        return "function(doc, out){ ".
+             "if(doc.d.age) {".
+               "out.age.u_18+=isNaN(doc.d.age.u_18) ? 0 : doc.d.age.u_18;".
+               "out.age.b_18_24+=isNaN(doc.d.age.b_18_24) ? 0 : doc.d.age.b_18_24;".
+               "out.age.b_25_34+=isNaN(doc.d.age.b_25_34) ? 0 : doc.d.age.b_25_34;".
+               "out.age.b_35_54+=isNaN(doc.d.age.b_35_54) ? 0 : doc.d.age.b_35_54;".
+               "out.age.o_55+=isNaN(doc.d.age.o_55) ? 0 : doc.d.age.o_55;".
+             "}".
+             "if(doc.d.sex) {".
+               "out.gender.m+=isNaN(doc.d.sex.m) ? 0 : doc.d.sex.m;".
+               "out.gender.f+=isNaN(doc.d.sex.f) ? 0 : doc.d.sex.f;".
+               "out.gender.u+=isNaN(doc.d.sex.u) ? 0 : doc.d.sex.u;".
+             "}".
+             "if(doc.d.rel) {".
+               "out.relationship.singl+=isNaN(doc.d.rel.singl) ? 0 : doc.d.rel.singl;".
+               "out.relationship.eng+=isNaN(doc.d.rel.eng) ? 0 : doc.d.rel.eng;".
+               "out.relationship.compl+=isNaN(doc.d.rel.compl) ? 0 : doc.d.rel.compl;".
+               "out.relationship.mar+=isNaN(doc.d.rel.mar) ? 0 : doc.d.rel.mar;".
+               "out.relationship.rel+=isNaN(doc.d.rel.rel) ? 0 : doc.d.rel.rel;".
+               "out.relationship.ior+=isNaN(doc.d.rel.ior) ? 0 : doc.d.rel.ior;".
+               "out.relationship.wid+=isNaN(doc.d.rel.wid) ? 0 : doc.d.rel.wid;".
+               "out.relationship.u+=isNaN(doc.d.rel.u) ? 0 : doc.d.rel.u;".
              "}".
            "}";
         break;
