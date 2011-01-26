@@ -354,6 +354,8 @@ class MongoUtils {
       $res['average'][$service]['likes'] = round($res['total'][$service]['likes']/($days==0 ? 1 : $days), 2);
       $res['average'][$service]['dislikes'] = round($res['total'][$service]['dislikes']/($days==0 ? 1 : $days), 2);
       $res['average'][$service]['clickbacks'] = round($res['total'][$service]['clickbacks']/($days==0 ? 1 : $days), 2);
+
+      $res['average'][$service]['contacts'] = round($res['total'][$service]['contacts']/($days==0 ? 1 : $days), 2);
       
       $res['ratio'][$service]['dislike_like'] =
         $res['total'][$service]['likes'] == 0 ? 0 :  round($res['total'][$service]['dislikes']/$res['total'][$service]['likes']*100);
