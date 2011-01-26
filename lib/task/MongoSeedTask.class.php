@@ -65,7 +65,7 @@ EOF;
     $i = 0;
     while ($i < $this->entries) {
       $host = $this->hosts[$this->sometimesRand(0,2)];
-      $path = $this->sometimesRand(1000,9999);
+      $path = $this->sometimesRand(10,15);
       $activitiesCol->insert(array(
           'host' => $host,
           'url' => "http://".$host."/my/url/".$path,
@@ -96,7 +96,7 @@ EOF;
     $i = 0;
     while ($i < $this->entries) {
       $host = $this->hosts[$this->sometimesRand(0,2)];
-      $path = $this->sometimesRand(1000,9999);
+      $path = $this->sometimesRand(10,15);
       $activitiesCol->insert(array(
           'host' => $host,
           'url' => "http://".$host."/my/url/".$path,
