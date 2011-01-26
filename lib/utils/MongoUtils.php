@@ -170,6 +170,7 @@ class MongoUtils {
     $res = array();
     $res['likes'] = 0;
     $res['dislikes'] = 0; 
+    $res['activities'] = 0; 
     $res['clickbacks'] = 0;
     $res['contacts'] = 0;
     return $res;
@@ -337,11 +338,13 @@ class MongoUtils {
       foreach ($services as $service) {
         $res['total'][$service]['likes'] += $mongoData[$i][$service]['likes'];
         $res['total'][$service]['dislikes'] += $mongoData[$i][$service]['dislikes'];
+        $res['total'][$service]['activities'] += $mongoData[$i][$service]['likes']+$mongoData[$i][$service]['dislikes'];
         $res['total'][$service]['clickbacks'] += $mongoData[$i][$service]['clickbacks'];
         $res['total'][$service]['contacts'] += $mongoData[$i][$service]['contacts'];
 
         $res['total']['all']['likes'] += $mongoData[$i][$service]['likes'];
         $res['total']['all']['dislikes'] += $mongoData[$i][$service]['dislikes'];
+        $res['total']['all']['activities'] += $mongoData[$i][$service]['likes']+$mongoData[$i][$service]['dislikes'];
         $res['total']['all']['clickbacks'] += $mongoData[$i][$service]['clickbacks'];
         $res['total']['all']['contacts'] += $mongoData[$i][$service]['contacts'];
       }
@@ -355,14 +358,14 @@ class MongoUtils {
       $res['ratio'][$service]['dislike_like'] =
         $res['total'][$service]['likes'] == 0 ? 0 :  round($res['total'][$service]['dislikes']/$res['total'][$service]['likes']*100);
       
-      $res['ratio'][$service]['clickback_like'] =
-        $res['total'][$service]['likes'] == 0 ? 0 :  round($res['total'][$service]['clickbacks']/$res['total'][$service]['likes']*100);
+      $res['ratio'][$service]['clickback_activity'] =
+        $res['total'][$service]['activities'] == 0 ? 0 :  round($res['total'][$service]['clickbacks']/$res['total'][$service]['activities']*100);
         
       $res['ratio'][$service]['like_percentage'] = 
-      ($res['total'][$service]['likes']+$res['total'][$service]['dislikes']) == 0 ? 0 :  round($res['total'][$service]['likes']/($res['total'][$service]['likes']+$res['total'][$service]['dislikes'])*100);
+      ($res['total'][$service]['activities']) == 0 ? 0 :  round($res['total'][$service]['likes']/($res['total'][$service]['activities'])*100);
 
     $res['ratio'][$service]['dislike_percentage'] = 
-      ($res['total'][$service]['likes']+$res['total'][$service]['dislikes']) == 0 ? 0 :  round($res['total'][$service]['dislikes']/($res['total'][$service]['likes']+$res['total'][$service]['dislikes'])*100);
+      ($res['total'][$service]['activities']) == 0 ? 0 :  round($res['total'][$service]['dislikes']/($res['total'][$service]['activities'])*100);
 
     }
     
@@ -373,14 +376,17 @@ class MongoUtils {
     $res['ratio']['all']['dislike_like'] =
       $res['total']['all']['likes'] == 0 ? 0 :  round($res['total']['all']['dislikes']/$res['total']['all']['likes']*100);
     
-    $res['ratio']['all']['clickback_like'] = 
-      $res['total']['all']['likes'] == 0 ? 0 :  round($res['total']['all']['clickbacks']/$res['total']['all']['likes']*100);
+    $res['ratio']['all']['clickback_activities'] = 
+      $res['total']['all']['activities'] == 0 ? 0 :  round($res['total']['all']['clickbacks']/$res['total']['all']['activities']*100);
+
+    $res['ratio']['all']['contacts_activities'] = 
+      $res['total']['all']['activities'] == 0 ? 0 :  round($res['total']['all']['contacts']/$res['total']['all']['activities']*100);
     
     $res['ratio']['all']['like_percentage'] = 
-      ($res['total']['all']['likes']+$res['total']['all']['dislikes']) == 0 ? 0 :  round($res['total']['all']['likes']/($res['total']['all']['likes']+$res['total']['all']['dislikes'])*100);
+      ($res['total']['all']['activities']) == 0 ? 0 :  round($res['total']['all']['likes']/($res['total']['all']['activities'])*100);
 
     $res['ratio']['all']['dislike_percentage'] = 
-      ($res['total']['all']['likes']+$res['total']['all']['dislikes']) == 0 ? 0 :  round($res['total']['all']['dislikes']/($res['total']['all']['likes']+$res['total']['all']['dislikes'])*100);
+      ($res['total']['all']['activities']) == 0 ? 0 :  round($res['total']['all']['dislikes']/($res['total']['all']['activities'])*100);
     
     return $res;
   }
