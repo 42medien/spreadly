@@ -139,6 +139,10 @@ class MongoUtils {
     
     $data['filter'] = MongoUtils::getFilter($domain, $fromDate, $toDate, $aggregation);
     
+    if($url) {
+      $data['filter']['url'] = $url;
+    }
+    
     if($type=='activities_with_clickbacks') {
       $data['statistics'] = MongoUtils::getAdditionalStatistics($g['retval'], $fromDate, $toDate);      
     } elseif($type=='demografics') {
