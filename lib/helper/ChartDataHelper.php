@@ -54,7 +54,6 @@ function getActivityChartData($rawData) {
  */
 function getAgeChartData($rawData) {
   $res = array();
-  //$res['age'] = ChartUtils::convertDataForKeys(array('u_18', 'b_18_24', 'b_25_34', 'b_35_54', 'o_55'), $rawData['data'], true);
   $res['age'] = $rawData['statistics']['total']['age'];
   $res['metadata'] = ChartUtils::addFilterData($res, $rawData['filter']);
   return json_encode($res);
@@ -68,7 +67,7 @@ function getAgeChartData($rawData) {
  */
 function getGenderChartData($rawData) {
   $res = array();
-  $res['gender'] = ChartUtils::convertDataForKeys(array('m', 'f', 'u'), $rawData['data']);
+  $res['gender'] = $rawData['statistics']['total']['gender'];
   $res['metadata'] = ChartUtils::addFilterData($res, $rawData['filter']);
   return json_encode($res);
 }
@@ -81,7 +80,7 @@ function getGenderChartData($rawData) {
  */
 function getRelationshipChartData($rawData) {
   $res = array();
-  $res['rel'] = ChartUtils::convertDataForKeys(array('singl', 'eng', 'compl', 'mar', 'rel', 'ior', 'wid', 'u'), $rawData['data']);
+  $res['relationship'] = $rawData['statistics']['total']['relationship'];
   $res['metadata'] = ChartUtils::addFilterData($res, $rawData['filter']);
   return json_encode($res);
 }
