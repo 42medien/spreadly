@@ -32,7 +32,6 @@ class User extends BaseUser {
     }
   }
 
-
   /**
    * calculate age of the user, (rundet jahre, nicht tagesgenau!)
    * @return unknown_type
@@ -86,7 +85,6 @@ class User extends BaseUser {
     return $lSortname;
   }
 
-
   /**
    * retrieve an array with all OI Ids of this user
    * @return array(int)
@@ -100,8 +98,6 @@ class User extends BaseUser {
     return $lIdentityArray;
   }
 
-
-
   /**
    * retrieve OI's which are assigned to the user
    * @return array(OnlineIdentity)
@@ -111,13 +107,9 @@ class User extends BaseUser {
     return OnlineIdentityTable::retrieveByUserId($this->getId());
   }
 
-
-
-
   public function getTokensForPublishing() {
     return UserTable::getTokensForPublishingByUserId($this->getId());
   }
-
 
   /**
    *
@@ -131,21 +123,6 @@ class User extends BaseUser {
       return 'affe';
     }
     return $lAvatar->getAvatar();
-  }
-
-  /**
-   * returns the users yiid
-   *
-   * @param boolean $pShowHttp
-   * @return string
-   */
-  public function getYiid($pShowHttp = false) {
-    if ($pShowHttp) {
-      $lYiid = str_replace('%user%', strtolower($this->getUsername()), sfConfig::get('app_settings_yiid'))."/";
-    } else {
-      $lYiid = str_replace('http://%user%', strtolower($this->getUsername()), sfConfig::get('app_settings_yiid'));
-    }
-    return $lYiid;
   }
 
   /**
@@ -165,5 +142,19 @@ class User extends BaseUser {
     } else {
       return false;
     }
+  }
+
+  public function getFriends() {
+    $lIds = $this->getIdsOfFriends();
+
+    $q = Doctrine_Query::create()
+      ->from('User u')
+      ->where('u.id IN ?', $lIds);
+
+    return $q->execute();
+  }
+
+  public function getIdsOfFriends() {
+    return OnlineIdentityTable::getUserIdsOfFriendsByUserId($this->getId());
   }
 }

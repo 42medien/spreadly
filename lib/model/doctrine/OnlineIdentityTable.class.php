@@ -18,7 +18,6 @@ class OnlineIdentityTable extends Doctrine_Table {
   const SOCIAL_PUBLISHING_OFF = 0;
   const SOCIAL_PUBLISHING_ON  = 1;
 
-
   /**
    * instanciate OnlineIdentityTable
    *
@@ -37,9 +36,9 @@ class OnlineIdentityTable extends Doctrine_Table {
    */
   public static function retrieveByUserId($pUserId) {
     $lOnlineIdentity = Doctrine_Query::create()
-    ->from('OnlineIdentity oi')
-    ->where('oi.user_id = ?', $pUserId)
-    ->execute();
+      ->from('OnlineIdentity oi')
+      ->where('oi.user_id = ?', $pUserId)
+      ->execute();
 
     return $lOnlineIdentity;
   }
@@ -53,11 +52,10 @@ class OnlineIdentityTable extends Doctrine_Table {
    */
   public static function retrieveIdsByUserId($pUserId) {
     $lOnlineIdentityIds = Doctrine_Query::create()
-    ->from('OnlineIdentity oi')
-    ->select('oi.id')
-    ->andWhere('oi.user_id = ?', $pUserId)
-    ->execute(array(), Doctrine_Core::HYDRATE_NONE);
-
+      ->from('OnlineIdentity oi')
+      ->select('oi.id')
+      ->andWhere('oi.user_id = ?', $pUserId)
+      ->execute(array(), Doctrine_Core::HYDRATE_NONE);
 
     return HydrationUtils::flattenArray($lOnlineIdentityIds);
   }
@@ -71,13 +69,12 @@ class OnlineIdentityTable extends Doctrine_Table {
    */
   public static function retrieveByAuthIdentifier($pAuthIdentifier) {
     $lOnlineIdentity = Doctrine_Query::create()
-    ->from('OnlineIdentity oi')
-    ->where('oi.auth_identifier = ?', $pAuthIdentifier)
-    ->fetchOne();
+      ->from('OnlineIdentity oi')
+      ->where('oi.auth_identifier = ?', $pAuthIdentifier)
+      ->fetchOne();
 
     return $lOnlineIdentity;
   }
-
 
   /**
    * add a new OnlineIdentity object
@@ -128,10 +125,10 @@ class OnlineIdentityTable extends Doctrine_Table {
    */
   public static function getPublishingEnabledByUserId($pUserId) {
     $q = Doctrine_Query::create()
-    ->from('OnlineIdentity oi')
-    ->leftJoin('oi.Community c')
-    ->where('oi.user_id = ?', $pUserId)
-    ->andWhere('c.social_publishing_possible = ?', true);
+      ->from('OnlineIdentity oi')
+      ->leftJoin('oi.Community c')
+      ->where('oi.user_id = ?', $pUserId)
+      ->andWhere('c.social_publishing_possible = ?', true);
 
     $lOis = $q->execute();
     return $lOis;
@@ -145,18 +142,16 @@ class OnlineIdentityTable extends Doctrine_Table {
    * @return Doctrine_Collection
    */
   public static function getPublishingEnabledByUserIdOnlyIds($pUserId) {
-
     $q = Doctrine_Query::create()
-    ->from('OnlineIdentity oi')
-    ->select('oi.id')
-    ->where('oi.user_id = ?', $pUserId)
-    ->andWhere('oi.social_publishing_enabled = ?', true);
+      ->from('OnlineIdentity oi')
+      ->select('oi.id')
+      ->where('oi.user_id = ?', $pUserId)
+      ->andWhere('oi.social_publishing_enabled = ?', true);
 
-    $lOis = $q->execute(array(), Doctrine_Core::HYDRATE_NONE);
-    return HydrationUtils::flattenArray($lOis);
+    $lOis = $q->execute(array(), Doctrine_Core::HYDRATE_SINGLE_SCALAR);
+
+    return $lOis;
   }
-
-
 
   /**
    * update OI's which are considered for social publishing
@@ -189,16 +184,15 @@ class OnlineIdentityTable extends Doctrine_Table {
   public static function removeSocialPublishingItems($pIds) {
     if (!empty($pIds)) {
       $q = Doctrine_Query::create()
-      ->update('OnlineIdentity oi')
-      ->set('oi.social_publishing_enabled', self::SOCIAL_PUBLISHING_OFF)
-      ->whereIn('oi.id', $pIds);
+        ->update('OnlineIdentity oi')
+        ->set('oi.social_publishing_enabled', self::SOCIAL_PUBLISHING_OFF)
+        ->whereIn('oi.id', $pIds);
 
       $q->execute();
       return true;
     }
     return false;
   }
-
 
   /**
    *
@@ -210,9 +204,9 @@ class OnlineIdentityTable extends Doctrine_Table {
   public static function activateSocialPublishingItems($pIds) {
     if (!empty($pIds)) {
       $q = Doctrine_Query::create()
-      ->update('OnlineIdentity oi')
-      ->set('oi.social_publishing_enabled', self::SOCIAL_PUBLISHING_ON)
-      ->whereIn('oi.id', $pIds);
+        ->update('OnlineIdentity oi')
+        ->set('oi.social_publishing_enabled', self::SOCIAL_PUBLISHING_ON)
+        ->whereIn('oi.id', $pIds);
 
       $q->execute();
       return true;
@@ -229,14 +223,14 @@ class OnlineIdentityTable extends Doctrine_Table {
    */
   public static function getOnlineIdentityIdsForFriendRenewal($pLimit) {
     $q = Doctrine_Query::create()
-    ->from('OnlineIdentity oi')
-    ->select('oi.id')
-    ->where('oi.user_id IS NOT NULL')
-    ->andWhere('oi.social_publishing_enabled = ?', 1)
-    ->leftJoin('oi.Community c')
-    ->andWhere('c.social_publishing_possible = ?', 1)
-    ->limit($pLimit)
-    ->orderBy('oi.last_friend_refresh ASC');
+      ->from('OnlineIdentity oi')
+      ->select('oi.id')
+      ->where('oi.user_id IS NOT NULL')
+      ->andWhere('oi.social_publishing_enabled = ?', 1)
+      ->leftJoin('oi.Community c')
+      ->andWhere('c.social_publishing_possible = ?', 1)
+      ->limit($pLimit)
+      ->orderBy('oi.last_friend_refresh ASC');
 
     $lOis = $q->execute(array(),  Doctrine_Core::HYDRATE_NONE);
     return $lOis;
@@ -244,23 +238,21 @@ class OnlineIdentityTable extends Doctrine_Table {
 
   public static function getInintialImport($pLimit) {
     $q = Doctrine_Query::create()
-    ->from('AuthToken at')
-    ->select('at.online_identity_id');
+      ->from('AuthToken at')
+      ->select('at.online_identity_id');
 
     $lOis = $q->execute(array(),  Doctrine_Core::HYDRATE_NONE);
     return $lOis;
   }
-
-
 
   public static function getOisFromActivityOrderedByCommunity($pActivity) {
     $lOiids = $pActivity->getOiids();
 
     if (!empty($lOiids)) {
       $lQuery = Doctrine_Query::create()
-      ->from('OnlineIdentity oi')
-      ->whereIn('oi.id', $lOiids)
-      ->orderBy('oi.community_id ASC');
+        ->from('OnlineIdentity oi')
+        ->whereIn('oi.id', $lOiids)
+        ->orderBy('oi.community_id ASC');
 
       $lOis = $lQuery->execute();
       return $lOis;
@@ -268,10 +260,17 @@ class OnlineIdentityTable extends Doctrine_Table {
     return array();
   }
 
-
-  public static function getFriendsForUserId($pUserId) {
+  /**
+   * returns a list of user-ids connected with a user
+   *
+   * @author Matthias Pfefferle
+   * @param unknown_type $pUserId
+   * @return unknown
+   */
+  public static function getUserIdsOfFriendsByUserId($pUserId) {
     $lOis = array();
     $lQueryString = array();
+    // @todo refactor this to query only the ids
     $lOwnedOis = OnlineIdentityTable::retrieveByUserId($pUserId);
 
     foreach ($lOwnedOis as $lIdentity) {
@@ -281,20 +280,54 @@ class OnlineIdentityTable extends Doctrine_Table {
     }
 
     $q = new Doctrine_RawSql();
-    $q->select('{oi.user_id}, {oi.id}')
-    ->from('online_identity oi')
-    ->addComponent('oi', 'OnlineIdentity oi');
+    $q->select('{oi.user_id}')
+      ->from('online_identity oi')
+      ->distinct()
+      ->addComponent('oi', 'OnlineIdentity');
 
     // !empty means, ther's at least 1 contact
     if (!empty($lQueryString)) {
       $q->where(implode(' OR ', $lQueryString));
-      $lOis = $q->execute();
+      $lOis = $q->execute(array(), Doctrine_Core::HYDRATE_NONE);
     }
 
-
-    return $lOis;
+    return HydrationUtils::flattenArray($lOis);
   }
 
+  /**
+   * returns a list of ids from online-identities connected to
+   * the user
+   *
+   * @author Matthias Pfefferle
+   * @param int $pUserId
+   * @return array
+   */
+  public static function getIdsOfFriendsByUserId($pUserId) {
+    $lOis = array();
+    $lQueryString = array();
+    // @todo refactor this to query only the ids
+    $lOwnedOis = OnlineIdentityTable::retrieveByUserId($pUserId);
+
+    foreach ($lOwnedOis as $lIdentity) {
+      if ($lIdentity->getFriendIds() != '') {
+        $lQueryString[] = '(oi.community_id = '.$lIdentity->getCommunityId(). ' AND oi.original_id IN ('.$lIdentity->getFriendIds().'))';
+      }
+    }
+
+    $q = new Doctrine_RawSql();
+    $q->select('{oi.id}')
+      ->from('online_identity oi')
+      ->distinct()
+      ->addComponent('oi', 'OnlineIdentity');
+
+    // !empty means, ther's at least 1 contact
+    if (!empty($lQueryString)) {
+      $q->where(implode(' OR ', $lQueryString));
+      $lOis = $q->execute(array(), Doctrine_Core::HYDRATE_NONE);
+    }
+
+    return HydrationUtils::flattenArray($lOis);
+  }
 
   /**
    * returns a list of OI's we need for the query
@@ -305,7 +338,7 @@ class OnlineIdentityTable extends Doctrine_Table {
     $pOiArray = array();
 
     if (is_null($pFriendId)) { // get own items and items of all friends
-      $pOiArray = IdentityMemcacheLayer::retrieveContactOiIdsByUserId($pUserId);
+      $pOiArray = self::getIdsOfFriendsByUserId($pUserId);
       $pOiArray = array_merge($pOiArray, OnlineIdentityTable::retrieveIdsByUserId($pUserId));
     } else {   // get all items from a specific friend
       $pOiArray = OnlineIdentityTable::retrieveIdsByUserId($pFriendId);
@@ -313,6 +346,4 @@ class OnlineIdentityTable extends Doctrine_Table {
 
     return $pOiArray;
   }
-
-
 }

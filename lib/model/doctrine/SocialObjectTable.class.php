@@ -1,13 +1,11 @@
 <?php
-class SocialObjectTable extends Doctrine_Table
-{
-  const MONGO_COLLECTION_NAME = 'social_object';
+class SocialObjectTable extends Doctrine_Table {
 
+  const MONGO_COLLECTION_NAME = 'social_object';
   const ENRICHED_TYPE_NONE = 0;
   const ENRICHED_TYPE_OBJECTPARSER = 1;
 
-  public static function getInstance()
-  {
+  public static function getInstance() {
     return Doctrine_Core::getTable('SocialObject');
   }
 
@@ -39,8 +37,6 @@ class SocialObjectTable extends Doctrine_Table
     $lCollection->update($pIdentifier, $pManipualtior, array('upsert' => true));
   }
 
-
-
   /**
    * initializes a basic social object for a given url
    *
@@ -60,7 +56,6 @@ class SocialObjectTable extends Doctrine_Table
     elseif($pLongUrl && UrlUtils::isUrlValid($pLongUrl)) {
       $pLongUrl = UrlUtils::cleanupHostAndUri($pLongUrl);
     }
-
 
     $pUrlHash = md5(UrlUtils::skipTrailingSlash($pUrl));
     $pLongUrlHash = md5(UrlUtils::skipTrailingSlash($pLongUrl));
@@ -101,16 +96,16 @@ class SocialObjectTable extends Doctrine_Table
     $lSocialObject = new SocialObject();
     $lSocialObject->setUrl($pUrl);
     $lSocialObject->setAlias($lAliasArray);
-    $lSocialObject->setTitle(utf8_encode($pTitle));
-    $lSocialObject->setDescription(utf8_encode($pDescription));
+    $lSocialObject->setTitle($pTitle);
+    $lSocialObject->setDescription($pDescription);
     $lSocialObject->setThumbnailUrl($pImage);
     $lSocialObject->save();
     return $lSocialObject;
   }
 
-
   public static function retrieveHotObjets($pUserId, $pFriendId = null, $pCommunityId = null, $pRange = 30, $pPage = 1, $pLimit = 30)  {
     $lCollection = self::getMongoCollection();
+    // @todo ändern
     $lRelevantOis = OnlineIdentityTable::getRelevantOnlineIdentityIdsForQuery($pUserId, $pFriendId);
     $lQueryArray = self::initializeBasicFilterQuery($lRelevantOis, $pCommunityId, $pRange);
     $lQueryArray['l_cnt'] = array('$gt' => 0);
@@ -122,9 +117,9 @@ class SocialObjectTable extends Doctrine_Table
     return self::hydrateMongoCollectionToObjects($lResults);
   }
 
-
   public static function retrieveFlopObjects($pUserId, $pFriendId = null, $pCommunityId = null, $pRange = 30, $pPage = 1, $pLimit = 30) {
     $lCollection = self::getMongoCollection();
+    // @todo ändern
     $lRelevantOis = OnlineIdentityTable::getRelevantOnlineIdentityIdsForQuery($pUserId, $pFriendId);
     $lQueryArray = self::initializeBasicFilterQuery($lRelevantOis, $pCommunityId, $pRange);
     $lQueryArray['d_cnt'] = array('$gt' => 0);
@@ -158,7 +153,6 @@ class SocialObjectTable extends Doctrine_Table
     return $lQueryArray;
   }
 
-
   /**
    *
    * returns an array with userid's of your friends, who acted on a given social object
@@ -170,7 +164,9 @@ class SocialObjectTable extends Doctrine_Table
    */
   public static function getFriendIdsForSocialObject($pSocialObjectId, $pUserId) {
     $lSocialObject = self::retrieveByPK($pSocialObjectId);
-    $lConnectedUsers = IdentityMemcacheLayer::retrieveContactUserIdsByUserId($pUserId);
+
+    $lUser = UserTable::getInstance()->find($pUserId);
+    $lConnectedUsers = $lUser->getIdsOfFriends();
 
     $lFriendsActive = array();
     if ($lSocialObject && $lConnectedUsers) {
@@ -178,7 +174,6 @@ class SocialObjectTable extends Doctrine_Table
     }
     return $lFriendsActive;
   }
-
 
   /**
    * hydrate social objects from the extracted collection and return an array
@@ -231,7 +226,6 @@ class SocialObjectTable extends Doctrine_Table
     return self::retrieveByAliasHash(md5(UrlUtils::skipTrailingSlash($pUrl)));
   }
 
-
   /**
    * @author weyandch
    * @param $pUrlHash
@@ -255,7 +249,6 @@ class SocialObjectTable extends Doctrine_Table
     }
     return null;
   }
-
 
   public static function retrieveAll() {
     $lCollection = self::getMongoCollection();

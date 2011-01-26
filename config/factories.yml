@@ -104,14 +104,15 @@ prod:
       default_culture: de
       database:        mysql://yiidit_i18n:fdsmolds32dfs@donkeykong/yiidit_i18n
       cache:
-        class: sfMemcacheCache
-        param:
-          lifetime:                  86400
-          prefix:                    yiidit_i18n
-          servers:
-            default:
-              host: 127.0.0.1     #aws
-              port: 11211
+        class: sfFileCache
+        #class: sfMemcacheCache
+        #param:
+        #  lifetime:                  86400
+        #  prefix:                    yiidit_i18n
+        #  servers:
+        #    default:
+        #      host: 127.0.0.1     #aws
+        #      port: 11211
 
   logger:
     class: sfAggregateLogger

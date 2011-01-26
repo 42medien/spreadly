@@ -59,7 +59,7 @@ class YiidActivityTable extends Doctrine_Table {
    */
   public static function saveLikeActivitys($pUserId,
                                            $pUrl,
-                                           $pOwnedOnlineIdentitys = array(),
+                                           //$pOwnedOnlineIdentitys = array(),
                                            $pGivenOnlineIdentitys = array(),
                                            $pScore = self::ACTIVITY_VOTE_POSITIVE,
                                            $pVerb = 'like',
@@ -73,8 +73,8 @@ class YiidActivityTable extends Doctrine_Table {
     $lSuccess = false;
     $lVerifiedOnlineIdentitys = array();
     $pClickback = urldecode($pClickback);
-    $pTitle = StringUtils::cleanupStringForMongodb($pTitle);
-    $pDescription = StringUtils::cleanupStringForMongodb($pDescription);
+    $pTitle = StringUtils::cleanupString($pTitle);
+    $pDescription = StringUtils::cleanupString($pDescription);
 
     // array of services we're sharing to
     $lServices = array();
@@ -100,6 +100,8 @@ class YiidActivityTable extends Doctrine_Table {
     elseif (!self::isActionOnObjectAllowed($lSocialObject->getId(), $pUserId, $lDeal)) {
       return false;
     }
+
+    $pOwnedOnlineIdentitys = OnlineIdentityTable::retrieveIdsByUserId($pUserId);
 
     // check if all onlineidentity-ids are valid
     foreach ($pGivenOnlineIdentitys as $lIdentityId) {
@@ -158,10 +160,18 @@ class YiidActivityTable extends Doctrine_Table {
   /**
    * generates a new yiid-activity
    *
-   * @author Christian Weyand
-   * @param $pSocialObjectId
-   * @param $pOnlineIdentity
-   * @param $pType
+   * @author Matthias Pfefferle
+   *
+   * @param SocialObject $pSocialObject
+   * @param string $pUrl
+   * @param int $pUserId
+   * @param array $pOnlineIdentitys
+   * @param int $pServicesId
+   * @param int $pScore
+   * @param string $pVerb
+   * @param mixed $pClickback
+   * @param Deal $pDeal
+   * @param string $pTags comma separated
    * @return YiidActivity
    */
   public static function saveActivity($pSocialObject,
@@ -245,9 +255,9 @@ class YiidActivityTable extends Doctrine_Table {
   /**
    *
    * @author Christian Weyand
-   * @param $pSocialObjectId
-   * @param $pOnlineIdentitys
-   * @return unknown_type
+   * @param int $pSocialObjectId
+   * @param array $pOnlineIdentitys
+   * @return array
    */
   public static function retrieveActionOnObjectById($pSocialObjectId, $pUserId, $pDeal = null) {
     $lCollection = self::getMongoCollection();
@@ -294,15 +304,16 @@ class YiidActivityTable extends Doctrine_Table {
     return self::hydrateMongoCollectionToObjects($lResults);
   }
 
-
   /**
    * retrieve YiidActivies for a given SovialObject MongoDbID
    *
    * @author Christian Weyand
-   * @param $pId
-   * @param integer $pLimit
-   * @param integer $pPage
-   * @return unknown_type
+   * @param int $pUserId
+   * @param int $pId
+   * @param string $pCase
+   * @param int $pLimit
+   * @param int $pPage
+   * @return array
    */
   public static function retrieveByYiidActivityId($pUserId, $pId, $pCase, $pLimit = 10, $pOffset = 1){
     $lCollection = self::getMongoCollection();
@@ -325,8 +336,10 @@ class YiidActivityTable extends Doctrine_Table {
 
   /**
    * transforms $pCase from action into score values for MongoDB
+   *
+   * @author Christian Weyandch
+   *
    * @param string $pCase
-   * @author weyandch
    * @return int
    */
   public static function addCaseQuery($pCase) {
@@ -341,7 +354,7 @@ class YiidActivityTable extends Doctrine_Table {
   /**
    * check if the given verb is supported in the current version
    *
-   * @param $pVerb
+   * @param string $pVerb
    * @return boolean
    */
   public static function isVerbSupported($pVerb) {
@@ -350,8 +363,8 @@ class YiidActivityTable extends Doctrine_Table {
 
   /**
    * @author weyandch
-   * @param $pUrl
-   * @return unknown_type
+   * @param string $pUrl
+   * @return SocialObject
    */
   public static function retrieveSocialObjectByUrl($pUrl) {
     return SocialObjectTable::retrieveByAliasUrl($pUrl);
@@ -388,7 +401,7 @@ class YiidActivityTable extends Doctrine_Table {
    * hydrate yiidactivities objects from the extracted collection and return an array
    *
    * @param unknown_type $pCollection
-   * @return array(SocialObject)
+   * @return array <SocialObject>
    */
   private static function hydrateMongoCollectionToObjects($pCollection) {
     $lObjects = array();
@@ -417,6 +430,14 @@ class YiidActivityTable extends Doctrine_Table {
     return self::initializeObjectFromCollection($lQuery);
   }
 
+  /**
+   * returns an array of deals by deal-id, user-id and url
+   *
+   * @param int $pDealId
+   * @param int $pUserId
+   * @param string $pUrl
+   * @return mixed
+   */
   public static function getByDealIdAndUserIdAndUrl($pDealId, $pUserId, $pUrl) {
     $lCollection = self::getMongoCollection();
 

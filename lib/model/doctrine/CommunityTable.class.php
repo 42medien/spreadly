@@ -68,7 +68,6 @@ class CommunityTable extends Doctrine_Table {
     return $lCommunities;
   }
 
-
   /**
    * get all communitys which support social publishing
    *
@@ -83,14 +82,13 @@ class CommunityTable extends Doctrine_Table {
     return $lReturn;
   }
 
-
   public static function retrieveCommunityIdsForSocialPublishing() {
     $lQuery = Doctrine_Query::create()
     ->select('c.id')
     ->from('Community c')
     ->where('c.social_publishing_possible = ?', true);
 
-    $lCommunityIds = $lQuery->execute(array(),  Doctrine_Core::HYDRATE_NONE);
+    $lCommunityIds = $lQuery->execute(array(), Doctrine_Core::HYDRATE_NONE);
     $lQuery->free();
     return HydrationUtils::flattenArray($lCommunityIds);
 

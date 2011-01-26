@@ -70,7 +70,8 @@ class UserTable extends Doctrine_Table {
    * @return Array(User)
    */
   public static function getHottestFriendsForUser($pUserId, $pPage = 1, $pLimit = 10) {
-    $lFriendIds = IdentityMemcacheLayer::retrieveContactUserIdsByUserId($pUserId);
+    $lUser = UserTable::getInstance()->find($pUserId);
+    $lFriendIds = $lUser->getIdsOfFriends();
 
     return self::getHottestUsers($lFriendIds, $pPage, $pLimit);
   }
@@ -84,7 +85,8 @@ class UserTable extends Doctrine_Table {
    * @return Array(User)
    */
   public static function getAlphabeticalFriendsForUser($pUserId, $pPage = 1, $pLimit = 10) {
-    $lFriendIds = IdentityMemcacheLayer::retrieveContactUserIdsByUserId($pUserId);
+    $lUser = UserTable::getInstance()->find($pUserId);
+    $lFriendIds = $lUser->getIdsOfFriends();
 
     return self::getUsersAlphabetically($lFriendIds, $pPage, $pLimit);
   }
@@ -121,7 +123,8 @@ class UserTable extends Doctrine_Table {
    * @author weyandch
    */
   public static function countHottestUsers($pUserId) {
-    $lFriendIds = IdentityMemcacheLayer::retrieveContactUserIdsByUserId($pUserId);
+    $lUser = UserTable::getInstance()->find($pUserId);
+    $lFriendIds = $lUser->getIdsOfFriends();
 
     if(empty($lFriendIds)) {
       return 0;
@@ -143,12 +146,12 @@ class UserTable extends Doctrine_Table {
     $lTimeLimit = time() - (sfConfig::get('app_stream_days_limit', 30) * 86400);
 
     $lQuery = Doctrine_Query::create()
-    ->from('User u')
-    ->andWhereIn('u.id', $pFriendIds)
-    // today minus 30 days
-    ->andWhere('u.last_activity > ?', $lTimeLimit)
-    // now sort by hot
-    ->orderBy('u.last_activity DESC');
+      ->from('User u')
+      ->andWhereIn('u.id', $pFriendIds)
+      // today minus 30 days
+      ->andWhere('u.last_activity > ?', $lTimeLimit)
+      // now sort by hot
+      ->orderBy('u.last_activity DESC');
 
     return $lQuery;
   }
@@ -185,7 +188,8 @@ class UserTable extends Doctrine_Table {
    *
    */
   public static function countUsersAlphabetically($pUserId) {
-$lFriendIds = IdentityMemcacheLayer::retrieveContactUserIdsByUserId($pUserId);
+    $lUser = UserTable::getInstance()->find($pUserId);
+    $lFriendIds = $lUser->getIdsOfFriends();
     if(empty($lFriendIds)) {
       return 0;
     }
@@ -254,7 +258,9 @@ $lFriendIds = IdentityMemcacheLayer::retrieveContactUserIdsByUserId($pUserId);
    * @param string $pName
    */
   private static function getFriendsFilterQuery($pUserId, $pName = null) {
-    $lFriendIds = IdentityMemcacheLayer::retrieveContactUserIdsByUserId($pUserId);
+    $lUser = UserTable::getInstance()->find($pUserId);
+    $lFriendIds = $lUser->getIdsOfFriends();
+
     if(empty($lFriendIds)) {
       return false;
     }
@@ -262,9 +268,9 @@ $lFriendIds = IdentityMemcacheLayer::retrieveContactUserIdsByUserId($pUserId);
     $lLimitDays = sfConfig::get('app_stream_days_limit_search', 0);
 
     $lQ = Doctrine_Query::create()
-    ->from('User u')
-    ->distinct()
-    ->whereIn('u.id', $lFriendIds);
+      ->from('User u')
+      ->distinct()
+      ->whereIn('u.id', $lFriendIds);
     if ($lLimitDays > 0) {
       $lQ->andWhere('u.last_activity > ?', strtotime('-'.$lLimitDays. ' days'));
     }
@@ -283,9 +289,9 @@ $lFriendIds = IdentityMemcacheLayer::retrieveContactUserIdsByUserId($pUserId);
     $lDate = date('Y-m-d H:i:s', $lDate);
 
     $lQuery = Doctrine_Query::create()
-    ->from('User u')
-    ->where('u.active = 0')
-    ->andWhere('u.created_at < ?', $lDate);
+      ->from('User u')
+      ->where('u.active = 0')
+      ->andWhere('u.created_at < ?', $lDate);
 
     $lUsers = $lQuery->execute();
 
@@ -306,17 +312,4 @@ $lFriendIds = IdentityMemcacheLayer::retrieveContactUserIdsByUserId($pUserId);
     $lUser->setLastActivity($pTimestamp);
     $lUser->save();
   }
-
-
-  public static function retrieveFriendConnectionsForMemcache($pUserId) {
-    $lConnectionObject = array();
-    $lConnectedOis = OnlineIdentityTable::getFriendsForUserId($pUserId);
-
-    foreach ($lConnectedOis as $lIdentity) {
-      $lConnectionObject['user_ids'][] = $lIdentity->getUserId()."";
-      $lConnectionObject['oi_ids'][] = $lIdentity->getId()."";
-    }
-    return $lConnectionObject;
-  }
-
 }
