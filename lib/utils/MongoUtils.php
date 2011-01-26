@@ -48,7 +48,8 @@ class MongoUtils {
       "pos" => 0,
       "neg" => 0,
       "contacts" => 0,
-      "clickbacks" => 0
+      "clickbacks" => 0,
+      "distribution" => 0
     );
 
     $reduce = "function(doc, out){ ".
@@ -64,7 +65,15 @@ class MongoUtils {
               "}";
 
     $g = $col->group($keys, $initial, $reduce, array("condition" => $cond));
-
+    
+    $totalTotals = 0;
+    for ($i=0; $i < count($g['retval']); $i++) { 
+      $totalTotals += $g['retval'][$i]['total'];
+    }
+    for ($i=0; $i < count($g['retval']); $i++) { 
+      $g['retval'][$i]['distribution'] = round($totalTotals==0 ? 0 : ($g['retval'][$i]['total']/$totalTotals)*100,2);
+    }
+    
     $data = array();
     $data['data'] = ChartUtils::sortArrayByTotals($g['retval'], $limit);
 
