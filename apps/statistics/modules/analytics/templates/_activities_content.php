@@ -33,7 +33,7 @@
 		<li><h3><?php echo __('Percentage'); ?></h3>
 			<ul>
 				<li><?php echo __('%likes%% Dislike / Like Ratio', array('%likes%' => $pData['statistics']['ratio'][$pCom]['dislike_like'])); ?></li>
-				<li><?php echo __('%dislikes%% Clickback / Like Ratio', array('%dislikes%' => $pData['statistics']['ratio'][$pCom]['clickback_like'])); ?></li>
+				<li><?php echo __('%dislikes%% Clickback / Activity Ratio', array('%dislikes%' => $pData['statistics']['ratio'][$pCom]['clickback_activities'])); ?></li>
 			</ul>
 		</li>
 	</ul>

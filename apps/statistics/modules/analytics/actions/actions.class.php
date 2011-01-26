@@ -72,8 +72,8 @@ class analyticsActions extends sfActions
 
   public function executeGet_analytics_range(sfWebRequest $request){
   	$this->getResponse()->setContentType('application/json');
-
-    $lReturn['content'] =  $this->getPartial('analytics/range_content', array('pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo));
+		$lData = MongoUtils::getMediaPenetrationData($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
+    $lReturn['content'] =  $this->getPartial('analytics/range_content', array('pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pData' => $lData));
 
 		return $this->renderText(json_encode($lReturn));
   }
