@@ -64,35 +64,35 @@ var ChartPieRelationship = {
 		             {
 		               name: '<?php echo __('Single');?>',
 		               color: '#3300cc',
-		               y: lData.rel.singl
+		               y: lData.relationship.singl
 		             },{
 		               name: '<?php echo __('Unknown');?>',
 		               color: '#ff0000',
-		               y: lData.rel.u
+		               y: lData.relationship.u
 		             },{
 		               name: '<?php echo __('Relationship');?>',
 		               color: '#6666ff',
-		               y: lData.rel.rel
+		               y: lData.relationship.rel
 		             },{
 		               name: '<?php echo __('Open relationship');?>',
 		               color: '#00cc33',
-		               y: lData.rel.ior
+		               y: lData.relationship.ior
 		             },{
 		               name: '<?php echo __('Engaged');?>',
 		               color: '#ffcc00',
-		               y: lData.rel.eng
+		               y: lData.relationship.eng
 		             },{
 		               name: '<?php echo __('Married');?>',
 		               color: '#ffcc66',
-		               y: lData.rel.mar
+		               y: lData.relationship.mar
 		             },{
 		               name: '<?php echo __('Complicated');?>',
 		               color: '#66ff66',
-		               y: lData.rel.compl
+		               y: lData.relationship.compl
 		             },{
 		               name: '<?php echo __('Widowed');?>',
 		               color: '#ff6666',
-		               y: lData.rel.wid
+		               y: lData.relationship.wid
 		             }
 		         ]
           }]

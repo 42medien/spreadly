@@ -58,6 +58,30 @@ var Deal = {
     debug.log('[Deal][showContent]');
     jQuery('#create-deal-content').empty();
     jQuery('#create-deal-content').append(pHtml);
+  },
+  
+  showStats: function(){
+    jQuery('.deal-stats-link').live('click', function() {
+      var lAction = jQuery(this).attr('href');
+      var lData = {
+        ei_kcuf : new Date().getTime()
+      };
+      
+      jQuery.ajax({
+        beforeSubmit : OnLoadGrafic.showGrafic,
+        type : "GET",
+        url : lAction,
+        dataType : "json",
+        data : lData,
+        success : function(pResponse) {
+          jQuery('#analytix-filter-nav-box, #analytix-content-box').show();
+          FilterNav.show(pResponse.nav);
+          FilterContent.show(pResponse.content);
+          OnLoadGrafic.hideGrafic();
+        }
+      });
+      return false;      
+    });
   }
 };
 

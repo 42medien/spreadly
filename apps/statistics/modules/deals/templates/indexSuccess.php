@@ -16,10 +16,10 @@
 		<?php } ?>
 	</div>
 
-<div class="content-box small-box" id="analytix-filter-nav-box">
+<div class="content-box small-box" id="analytix-filter-nav-box" style="display:none;">
 	<?php //include_component('analytics', 'filter_nav'); ?>
 </div>
 
-<div class="content-box left" id="analytix-content-box" style="width: 720px;">
+<div class="content-box left" id="analytix-content-box" style="width: 720px; display:none;">
 	<?php //include_partial('analytics/activities_content', array('pCom' => 'all', 'pFrom' => $pDateFrom, 'pTo' => $pDateTo, 'pChart' => null, 'pUrl' => $pUrl, 'pData' => $pData)); ?>
 </div>

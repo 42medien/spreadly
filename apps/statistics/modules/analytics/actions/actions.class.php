@@ -80,23 +80,24 @@ class analyticsActions extends sfActions
 
   public function executeGet_analytics_age(sfWebRequest $request){
   	$this->getResponse()->setContentType('application/json');
-    $lReturn['content'] =  $this->getPartial('analytics/demo_age_content', array('pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo));
+  	$lData = MongoUtils::getDemograficData($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
+    $lReturn['content'] =  $this->getPartial('analytics/demo_age_content', array('pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pData' => $lData));
 
 		return $this->renderText(json_encode($lReturn));
   }
 
   public function executeGet_analytics_gender(sfWebRequest $request){
   	$this->getResponse()->setContentType('application/json');
-
-    $lReturn['content'] =  $this->getPartial('analytics/demo_gender_content', array('pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo));
+  	$lData = MongoUtils::getDemograficData($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
+    $lReturn['content'] =  $this->getPartial('analytics/demo_gender_content', array('pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pData' => $lData));
 
 		return $this->renderText(json_encode($lReturn));
   }
 
   public function executeGet_analytics_relations(sfWebRequest $request){
   	$this->getResponse()->setContentType('application/json');
-
-    $lReturn['content'] =  $this->getPartial('analytics/demo_relations_content', array('pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo));
+  	$lData = MongoUtils::getDemograficData($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
+    $lReturn['content'] =  $this->getPartial('analytics/demo_relations_content', array('pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pData' => $lData));
 
 		return $this->renderText(json_encode($lReturn));
   }

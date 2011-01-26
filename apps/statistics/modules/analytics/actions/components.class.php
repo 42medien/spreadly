@@ -54,13 +54,13 @@ class analyticsComponents extends sfComponents
 	}
 
   public function executeChart_pie_gender_activities(sfWebRequest $request) {
-    $lDomainProfile = DomainProfileTable::getInstance()->find($this->pHostId);
-    $this->pData = MongoUtils::getGenderData($lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
+    //$lDomainProfile = DomainProfileTable::getInstance()->find($this->pHostId);
+    //$this->pData = MongoUtils::getGenderData($lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
   }
 
   public function executeChart_pie_relationship(sfWebRequest $request) {
-    $lDomainProfile = DomainProfileTable::getInstance()->find($this->pHostId);
-    $this->pData = MongoUtils::getRelationshipData($lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
+    //$lDomainProfile = DomainProfileTable::getInstance()->find($this->pHostId);
+    //$this->pData = MongoUtils::getRelationshipData($lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
   }
 
 	public function executeChart_line_demo_age(sfWebRequest $request){
@@ -69,8 +69,8 @@ class analyticsComponents extends sfComponents
 	}
 
 	public function executeChart_pie_age_activities(sfWebRequest $request){
-    $lDomainProfile = DomainProfileTable::getInstance()->find($this->pHostId);
-    $this->pData = MongoUtils::getAgeData($lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
+    //$lDomainProfile = DomainProfileTable::getInstance()->find($this->pHostId);
+    //$this->pData = MongoUtils::getDemograficData($lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
 	}
 
   public function executeUrl_table(sfWebRequest $request) {

@@ -6,7 +6,7 @@
 				"height": 230,
 				"margin": [20, 0, 30, 160],
 				"plotsize": "80%"
-			}'
+			}', 'pData' => $pData
 		)); ?>
 	</div>
 
@@ -22,32 +22,27 @@
 				<li><?php echo __('%percent%% widowed', array('%percent%' => 7)); ?></li>
 			</ul>
 		</li>
-		<li><h3><?php echo __('Average age'); ?></h3>
-			<ul>
-				<li><?php echo __('%age% years', array('%age%' => 23)); ?></li>
-			</ul>
-		</li>
 	</ul>
 </div>
 <div class="content-box bg-white two-third-box left">
 	<ul class="analytics-stats-list left">
 		<li><h3><?php echo __('Age distribution'); ?></h3>
 			<ul>
-				<li><?php echo __('%percent%% under 18', array('%percent%' => 11)); ?></li>
-				<li><?php echo __('%percent%% 18 to 24', array('%percent%' => 43)); ?></li>
-				<li><?php echo __('%percent%% 25 to 34', array('%percent%' => 27)); ?></li>
-				<li><?php echo __('%percent%% 35 to 54', array('%percent%' => 12)); ?></li>
-				<li><?php echo __('%percent%% over 55', array('%percent%' => 7)); ?></li>
+				<li><?php echo __('%percent%% under 18', array('%percent%' => $pData["statistics"]["ratio"]["age"]["u_18"])); ?></li>
+				<li><?php echo __('%percent%% 18 to 24', array('%percent%' => $pData["statistics"]["ratio"]["age"]["b_18_24"])); ?></li>
+				<li><?php echo __('%percent%% 25 to 34', array('%percent%' => $pData["statistics"]["ratio"]["age"]["b_25_34"])); ?></li>
+				<li><?php echo __('%percent%% 35 to 54', array('%percent%' => $pData["statistics"]["ratio"]["age"]["b_35_54"])); ?></li>
+				<li><?php echo __('%percent%% over 55', array('%percent%' => $pData["statistics"]["ratio"]["age"]["o_55"])); ?></li>
 			</ul>
 		</li>
 	</ul>
-	<?php include_component('analytics', 'chart_line_demo_age', array('pChartsettings' =>
+	<?php include_component('analytics', 'chart_pie_age_activities', array('pChartsettings' =>
 		'{
 				"width": 330,
 				"height": 130,
-				"margin": [20, 0, 30, 30],
+				"margin": [25, 0, 30, 30],
 				"spacingRight": 0
-			}'
+			}', 'pData' => $pData
 		)); ?>
 </div>
 
@@ -67,7 +62,7 @@
 				"height": 130,
 				"margin": [-40, 0, 10, 0],
 				"plotsize": "40%"
-			}'
+			}', 'pData' => $pData
 		)); ?>
 </div>
 
