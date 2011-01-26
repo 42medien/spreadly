@@ -360,8 +360,11 @@ class MongoUtils {
       $res['ratio'][$service]['dislike_like'] =
         $res['total'][$service]['likes'] == 0 ? 0 :  round($res['total'][$service]['dislikes']/$res['total'][$service]['likes']*100);
       
-      $res['ratio'][$service]['clickback_activity'] =
+      $res['ratio'][$service]['clickback_activities'] =
         $res['total'][$service]['activities'] == 0 ? 0 :  round($res['total'][$service]['clickbacks']/$res['total'][$service]['activities']*100);
+
+      $res['ratio'][$service]['contacts_activities'] =
+        $res['total'][$service]['activities'] == 0 ? 0 :  round($res['total'][$service]['contacts']/$res['total'][$service]['activities']*100);
         
       $res['ratio'][$service]['like_percentage'] = 
       ($res['total'][$service]['activities']) == 0 ? 0 :  round($res['total'][$service]['likes']/($res['total'][$service]['activities'])*100);
