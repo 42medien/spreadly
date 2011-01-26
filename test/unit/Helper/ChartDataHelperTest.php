@@ -49,6 +49,10 @@ class ChartDataHelperTest extends BaseTestCase {
     $data = MongoUtils::getMediaPenetrationData("www.missmotz.de", $this->from, $this->to, 'daily');
   }
 
+  public function testGetUrlData() {
+    $data = MongoUtils::getUrlData("www.missmotz.de", $this->from, $this->to, 'daily', 'http://www.missmotz.de/my/url/15');
+  }
+
   public function testGetMediaPenetrationChartData() {
     $data = json_decode(getChartLineRangeViewsData(MongoUtils::getMediaPenetrationData("www.missmotz.de", $this->from, $this->to, 'daily')));
     $this->assertEquals(292000, $data->views[0]);

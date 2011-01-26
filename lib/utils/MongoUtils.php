@@ -7,15 +7,15 @@ class MongoUtils {
   }
   
   public static function getUrlData($domain, $fromDate, $toDate, $aggregation, $url=null) {
-    $data['top_activities'] = MongoUtils::getTopActivitiesData($domain, $fromDate, $toDate, $aggregation);
+    $topActivities = MongoUtils::getTopActivitiesData($domain, $fromDate, $toDate, $aggregation);
     
     if($url==null) {
-      $url = $data['top_activities']['data'][0]['url'];
+      $url = $topActivities['data'][0]['url'];
     }
     
     $data = MongoUtils::getDataForRange('activities_with_clickbacks', $domain, $fromDate, $toDate, $aggregation, $url);
     
-    return $data;  
+    return $data;
   }
 
   public static function getDemograficData($domain, $fromDate, $toDate, $aggregation) {
