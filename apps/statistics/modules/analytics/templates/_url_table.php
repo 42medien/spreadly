@@ -5,11 +5,11 @@
       <th>&nbsp;</th>
       <th>&nbsp;</th>
       <th><?php echo __('Clickbacks');?></th>
-      <th><?php echo __('Spreading');?></th>
+      <th><?php echo __('Distribution');?></th>
       <th><?php echo __('Activities');?></th>
       <th><?php echo __('Likes');?></th>
       <th><?php echo __('Dislikes');?></th>
-      <th><?php echo __('Range');?></th>
+      <th><?php echo __('Reach');?></th>
     </tr>
   </thead>
   <tbody>
@@ -18,7 +18,7 @@
       	<td><?php echo ++$i;?>.</td>
         <td><?php echo link_to($data['url'], '@get_analytics_urls', array('query_string' => 'com=all&url='.$data['url'].'&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-url-filter-link'));  ?></td>
         <td class="numeric"><?php echo $data['pis']['cb'] ?></td>
-        <td class="numeric"><?php echo $data['contacts'] ?></td>
+        <td class="numeric"><?php echo $data['distribution'] ?>%</td>
         <td class="numeric"><?php echo $data['neg']+$data['pos'] ?></td>
         <td class="numeric"><?php echo $data['pos'] ?></td>
         <td class="numeric"><?php echo $data['neg'] ?></td>

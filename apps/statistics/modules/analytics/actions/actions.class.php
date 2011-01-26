@@ -50,14 +50,14 @@ class analyticsActions extends sfActions
   public function executeStatistics(sfWebRequest $request)
   {
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
-    $this->pData = MongoUtils::getActivityData($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
+    $this->pData = MongoUtils::getUrlData($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pUrl);
   }
 
   public function executeGet_filtered_content(sfWebRequest $request){
   	$this->getResponse()->setContentType('application/json');
-
+    $lData = MongoUtils::getUrlData($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pUrl);
 		$lReturn['nav'] = $this->getPartial('analytics/filter_nav', array('pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl' => $this->pUrl, 'pDealId' => $this->pDealId));
-    $lReturn['content'] =  $this->getPartial('analytics/url_content', array('pCom' => 'all', 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl' => $this->pUrl));
+    $lReturn['content'] =  $this->getPartial('analytics/url_content', array('pCom' => 'all', 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl' => $this->pUrl, 'pData' => $lData));
 
 		return $this->renderText(json_encode($lReturn));
   }
@@ -105,8 +105,9 @@ class analyticsActions extends sfActions
 
   public function executeGet_analytics_urls(sfWebRequest $request){
   	$this->getResponse()->setContentType('application/json');
+    $lData = MongoUtils::getUrlData($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pUrl);
 		$lReturn['nav'] = $this->getPartial('analytics/filter_nav', array('pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl' => $this->pUrl, 'pDealId' => $this->pDealId));
-    $lReturn['content'] =  $this->getPartial('analytics/url_content', array('pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl'=> $this->pUrl));
+    $lReturn['content'] =  $this->getPartial('analytics/url_content', array('pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl'=> $this->pUrl, 'pData' => $lData));
 
 		return $this->renderText(json_encode($lReturn));
   }
