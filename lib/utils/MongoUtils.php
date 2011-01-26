@@ -338,10 +338,12 @@ class MongoUtils {
         $res['total'][$service]['likes'] += $mongoData[$i][$service]['likes'];
         $res['total'][$service]['dislikes'] += $mongoData[$i][$service]['dislikes'];
         $res['total'][$service]['clickbacks'] += $mongoData[$i][$service]['clickbacks'];
+        $res['total'][$service]['contacts'] += $mongoData[$i][$service]['contacts'];
 
         $res['total']['all']['likes'] += $mongoData[$i][$service]['likes'];
         $res['total']['all']['dislikes'] += $mongoData[$i][$service]['dislikes'];
         $res['total']['all']['clickbacks'] += $mongoData[$i][$service]['clickbacks'];
+        $res['total']['all']['contacts'] += $mongoData[$i][$service]['contacts'];
       }
     }
     
