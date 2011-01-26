@@ -55,7 +55,7 @@ function getActivityChartData($rawData) {
 function getAgeChartData($rawData) {
   $res = array();
   //$res['age'] = ChartUtils::convertDataForKeys(array('u_18', 'b_18_24', 'b_25_34', 'b_35_54', 'o_55'), $rawData['data'], true);
-  $res['age'] = $rawData['age'];
+  $res['age'] = $rawData['total']['age'];
   $res['metadata'] = ChartUtils::addFilterData($res, $rawData['filter']);
   return json_encode($res);
 }
