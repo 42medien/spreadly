@@ -3,25 +3,25 @@
 class MongoUtils {
 
   public static function getActivityData($domain, $fromDate, $toDate, $aggregation, $url=null) {
-    return MongoUtils::getDataForRange('activities_with_clickbacks', $domain, $fromDate, $toDate, $aggregation, $url);  
+    return MongoUtils::getDataForRange('activities_with_clickbacks', $domain, $fromDate, $toDate, $aggregation, $url);
   }
-  
+
   public static function getUrlData($domain, $fromDate, $toDate, $aggregation, $url=null) {
     $topActivities = MongoUtils::getTopActivitiesData($domain, $fromDate, $toDate, $aggregation);
-    
+
     if($url==null) {
       $url = $topActivities['data'][0]['url'];
     }
-    
+
     $data = MongoUtils::getDataForRange('activities_with_clickbacks', $domain, $fromDate, $toDate, $aggregation, $url);
-    
+
     return $data;
   }
 
   public static function getDemograficData($domain, $fromDate, $toDate, $aggregation) {
     return MongoUtils::getDataForRange('demografics', $domain, $fromDate, $toDate, $aggregation);
   }
-  
+
   public static function getAgeData($domain, $fromDate, $toDate, $aggregation) {
     return MongoUtils::getDataForRange('age_distribution', $domain, $fromDate, $toDate, $aggregation);
   }
@@ -65,15 +65,15 @@ class MongoUtils {
               "}";
 
     $g = $col->group($keys, $initial, $reduce, array("condition" => $cond));
-    
+
     $totalTotals = 0;
-    for ($i=0; $i < count($g['retval']); $i++) { 
+    for ($i=0; $i < count($g['retval']); $i++) {
       $totalTotals += $g['retval'][$i]['total'];
     }
-    for ($i=0; $i < count($g['retval']); $i++) { 
+    for ($i=0; $i < count($g['retval']); $i++) {
       $g['retval'][$i]['distribution'] = round($totalTotals==0 ? 0 : ($g['retval'][$i]['total']/$totalTotals)*100,2);
     }
-    
+
     $data = array();
     $data['data'] = ChartUtils::sortArrayByTotals($g['retval'], $limit);
 
@@ -127,11 +127,11 @@ class MongoUtils {
 
     $keys = array("date" => 1);
     $cond = array("date" => array('$gte' => new MongoDate(strtotime($fromDate)), '$lte' => new MongoDate(strtotime($toDate))));
-    
+
     if($url) {
       $cond['url'] = $url;
     }
-    
+
     $initial = MongoUtils::getInitial($type);
     $reduce = MongoUtils::getReduce($type);
 
@@ -145,15 +145,15 @@ class MongoUtils {
       $pis = $pi_col->group($keys, $initial, $reduce, array("condition" => $cond));
       $data['pis'] = MongoUtils::getDataWithEmptyDayPadding($pis['retval'], $fromDate, $toDate);
     }
-    
+
     $data['filter'] = MongoUtils::getFilter($domain, $fromDate, $toDate, $aggregation);
-    
+
     if($url) {
       $data['filter']['url'] = $url;
     }
-    
+
     if($type=='activities_with_clickbacks') {
-      $data['statistics'] = MongoUtils::getAdditionalStatistics($g['retval'], $fromDate, $toDate);      
+      $data['statistics'] = MongoUtils::getAdditionalStatistics($g['retval'], $fromDate, $toDate);
     } elseif($type=='demografics') {
       $data['statistics'] = MongoUtils::getAdditionalDemograficStatistics($data['data'], $fromDate, $toDate);
     }
@@ -178,37 +178,37 @@ class MongoUtils {
     $res = array_merge($mongoData, $emptyDays);
     return $res;
   }
-  
+
   private static function initArray() {
     $res = array();
     $res['likes'] = 0;
-    $res['dislikes'] = 0; 
-    $res['activities'] = 0; 
+    $res['dislikes'] = 0;
+    $res['activities'] = 0;
     $res['clickbacks'] = 0;
     $res['contacts'] = 0;
     return $res;
   }
-  
+
   private static function initStats($services) {
     $res = array();
     $res['total'] = array();
     $res['average'] = array();
     $res['ratio'] = array();
-    
+
     // Initializing the Data arrays for the chart
     foreach ($services as $service) {
       $res['total'][$service] = MongoUtils::initArray();
       $res['average'][$service] = MongoUtils::initArray();
       $res['ratio'][$service] = array();
       $res['ratio'][$service]['dislike_like'] = 0;
-      $res['ratio'][$service]['clickback_like'] = 0;      
+      $res['ratio'][$service]['clickback_like'] = 0;
     }
     $res['total']['all'] = MongoUtils::initArray();
     $res['average']['all'] = MongoUtils::initArray();
     $res['ratio']['all'] = array();
     $res['ratio']['all']['dislike_like'] = 0;
-    $res['ratio']['all']['clickback_like'] = 0; 
-    
+    $res['ratio']['all']['clickback_like'] = 0;
+
     return $res;
   }
 
@@ -216,7 +216,7 @@ class MongoUtils {
     $res = array();
     $res['total'] = array();
     $res['ratio'] = array();
-    
+
     $res['total']['age'] = array(
               "u_18" => 0,
               "b_18_24" => 0,
@@ -224,7 +224,7 @@ class MongoUtils {
               "b_35_54" => 0,
               "o_55" => 0
           );
-          
+
     $res['total']['gender'] = array(
               "m" => 0,
               "f" => 0,
@@ -248,7 +248,7 @@ class MongoUtils {
               "b_35_54" => 0,
               "o_55" => 0
           );
-          
+
     $res['ratio']['gender'] = array(
               "m" => 0,
               "f" => 0,
@@ -264,21 +264,21 @@ class MongoUtils {
               "wid" => 0,
               "u" => 0
           );
-        
+
     return $res;
   }
-  
+
   private static function getAdditionalDemograficStatistics($mongoData, $fromDate, $toDate) {
     $days = ((strtotime($toDate) - strtotime($fromDate))/(60*60*24))+1;
     $res = MongoUtils::initDemograficStats();
 
-    for ($i=0; $i < count($mongoData); $i++) { 
+    for ($i=0; $i < count($mongoData); $i++) {
       if(isset($mongoData[$i]['age'])) {
         $res['total']['age']['u_18']    += $mongoData[$i]['age']['u_18']   ;
         $res['total']['age']['b_18_24'] += $mongoData[$i]['age']['b_18_24'];
         $res['total']['age']['b_25_34'] += $mongoData[$i]['age']['b_25_34'];
         $res['total']['age']['b_35_54'] += $mongoData[$i]['age']['b_35_54'];
-        $res['total']['age']['o_55']    += $mongoData[$i]['age']['o_55']   ;        
+        $res['total']['age']['o_55']    += $mongoData[$i]['age']['o_55']   ;
       }
 
       if(isset($mongoData[$i]['gender'])) {
@@ -286,7 +286,7 @@ class MongoUtils {
         $res['total']['gender']['f'] += $mongoData[$i]['gender']['f'];
         $res['total']['gender']['u'] += $mongoData[$i]['gender']['u'];
       }
-      
+
       if(isset($mongoData[$i]['relationship'])) {
         $res['total']['relationship']['singl']  += $mongoData[$i]['relationship']['singl'];
         $res['total']['relationship']['eng']    += $mongoData[$i]['relationship']['eng']  ;
@@ -298,56 +298,39 @@ class MongoUtils {
         $res['total']['relationship']['u']      += $mongoData[$i]['relationship']['u']    ;
       }
     }
-    
-      $res['total']['age']['all']    =  $res['total']['age']['u_18'];
-      $res['total']['age']['all']    += $res['total']['age']['b_18_24'];
-      $res['total']['age']['all']    += $res['total']['age']['b_25_34'];
-      $res['total']['age']['all']    += $res['total']['age']['b_35_54'];
-      $res['total']['age']['all']    += $res['total']['age']['b_35_54'];
-      $res['total']['age']['all']    += $res['total']['age']['o_55'];
 
-      $res['total']['gender']['all'] =  $res['total']['gender']['m'];
-      $res['total']['gender']['all'] += $res['total']['gender']['f'];
-      $res['total']['gender']['all'] += $res['total']['gender']['u'];
+    $res['total']['age']['all']    =  array_sum($res['total']['age']);
+    $res['total']['gender']['all'] =  array_sum($res['total']['gender']);
+    $res['total']['relationship']['all'] =  array_sum($res['total']['relationship']);
 
-      $res['total']['relationship']['all'] =  $res['total']['relationship']['singl'];
-      $res['total']['relationship']['all'] += $res['total']['relationship']['eng']  ;
-      $res['total']['relationship']['all'] += $res['total']['relationship']['compl'];
-      $res['total']['relationship']['all'] += $res['total']['relationship']['mar']  ;
-      $res['total']['relationship']['all'] += $res['total']['relationship']['rel']  ;
-      $res['total']['relationship']['all'] += $res['total']['relationship']['ior']  ;
-      $res['total']['relationship']['all'] += $res['total']['relationship']['wid']  ;
-      $res['total']['relationship']['all'] += $res['total']['relationship']['u']    ;
+    $res['ratio']['age']['u_18']    = round($res['total']['age']['u_18']   /($res['total']['age']['all']==0 ? 1 : $res['total']['age']['all'])*100);
+    $res['ratio']['age']['b_18_24'] = round($res['total']['age']['b_18_24']/($res['total']['age']['all']==0 ? 1 : $res['total']['age']['all'])*100);
+    $res['ratio']['age']['b_25_34'] = round($res['total']['age']['b_25_34']/($res['total']['age']['all']==0 ? 1 : $res['total']['age']['all'])*100);
+    $res['ratio']['age']['b_35_54'] = round($res['total']['age']['b_35_54']/($res['total']['age']['all']==0 ? 1 : $res['total']['age']['all'])*100);
+    $res['ratio']['age']['o_55']    = round($res['total']['age']['o_55']   /($res['total']['age']['all']==0 ? 1 : $res['total']['age']['all'])*100);
 
+    $res['ratio']['gender']['m'] = round($res['total']['gender']['m']/($res['total']['gender']['all']==0 ? 1 : $res['total']['gender']['all'])*100);
+    $res['ratio']['gender']['f'] = round($res['total']['gender']['f']/($res['total']['gender']['all']==0 ? 1 : $res['total']['gender']['all'])*100);
+    $res['ratio']['gender']['u'] = round($res['total']['gender']['u']/($res['total']['gender']['all']==0 ? 1 : $res['total']['gender']['all'])*100);
 
-      $res['ratio']['age']['u_18']    = round($res['total']['age']['u_18']   /($res['total']['age']['all']==0 ? 1 : $res['total']['age']['all'])*100);
-      $res['ratio']['age']['b_18_24'] = round($res['total']['age']['b_18_24']/($res['total']['age']['all']==0 ? 1 : $res['total']['age']['all'])*100);
-      $res['ratio']['age']['b_25_34'] = round($res['total']['age']['b_25_34']/($res['total']['age']['all']==0 ? 1 : $res['total']['age']['all'])*100);
-      $res['ratio']['age']['b_35_54'] = round($res['total']['age']['b_35_54']/($res['total']['age']['all']==0 ? 1 : $res['total']['age']['all'])*100);
-      $res['ratio']['age']['o_55']    = round($res['total']['age']['o_55']   /($res['total']['age']['all']==0 ? 1 : $res['total']['age']['all'])*100);
+    $res['ratio']['relationship']['singl']  = round($res['total']['relationship']['singl']/($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
+    $res['ratio']['relationship']['eng']    = round($res['total']['relationship']['eng']  /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
+    $res['ratio']['relationship']['compl']  = round($res['total']['relationship']['compl']/($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
+    $res['ratio']['relationship']['mar']    = round($res['total']['relationship']['mar']  /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
+    $res['ratio']['relationship']['rel']    = round($res['total']['relationship']['rel']  /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
+    $res['ratio']['relationship']['ior']    = round($res['total']['relationship']['ior']  /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
+    $res['ratio']['relationship']['wid']    = round($res['total']['relationship']['wid']  /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
+    $res['ratio']['relationship']['u']      = round($res['total']['relationship']['u']    /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
 
-      $res['ratio']['gender']['m'] = round($res['total']['gender']['m']/($res['total']['gender']['all']==0 ? 1 : $res['total']['gender']['all'])*100);
-      $res['ratio']['gender']['f'] = round($res['total']['gender']['f']/($res['total']['gender']['all']==0 ? 1 : $res['total']['gender']['all'])*100);
-      $res['ratio']['gender']['u'] = round($res['total']['gender']['u']/($res['total']['gender']['all']==0 ? 1 : $res['total']['gender']['all'])*100);
-
-      $res['ratio']['relationship']['singl']  = round($res['total']['relationship']['singl']/($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
-      $res['ratio']['relationship']['eng']    = round($res['total']['relationship']['eng']  /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
-      $res['ratio']['relationship']['compl']  = round($res['total']['relationship']['compl']/($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
-      $res['ratio']['relationship']['mar']    = round($res['total']['relationship']['mar']  /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
-      $res['ratio']['relationship']['rel']    = round($res['total']['relationship']['rel']  /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
-      $res['ratio']['relationship']['ior']    = round($res['total']['relationship']['ior']  /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
-      $res['ratio']['relationship']['wid']    = round($res['total']['relationship']['wid']  /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
-      $res['ratio']['relationship']['u']      = round($res['total']['relationship']['u']    /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
-      
     return $res;
   }
-  
+
   private static function getAdditionalStatistics($mongoData, $fromDate, $toDate) {
-    $services = array('facebook', 'twitter', 'linkedin', 'google');  
+    $services = array('facebook', 'twitter', 'linkedin', 'google');
     $days = ((strtotime($toDate) - strtotime($fromDate))/(60*60*24))+1;
     $res = MongoUtils::initStats($services);
 
-    for ($i=0; $i < count($mongoData); $i++) { 
+    for ($i=0; $i < count($mongoData); $i++) {
       foreach ($services as $service) {
         $res['total'][$service]['likes'] += $mongoData[$i][$service]['likes'];
         $res['total'][$service]['dislikes'] += $mongoData[$i][$service]['dislikes'];
@@ -362,53 +345,53 @@ class MongoUtils {
         $res['total']['all']['contacts'] += $mongoData[$i][$service]['contacts'];
       }
     }
-    
+
     foreach ($services as $service) {
       $res['average'][$service]['likes'] = round($res['total'][$service]['likes']/($days==0 ? 1 : $days), 2);
       $res['average'][$service]['dislikes'] = round($res['total'][$service]['dislikes']/($days==0 ? 1 : $days), 2);
       $res['average'][$service]['clickbacks'] = round($res['total'][$service]['clickbacks']/($days==0 ? 1 : $days), 2);
 
       $res['average'][$service]['contacts'] = round($res['total'][$service]['contacts']/($days==0 ? 1 : $days), 2);
-      
+
       $res['ratio'][$service]['dislike_like'] =
         $res['total'][$service]['likes'] == 0 ? 0 :  round($res['total'][$service]['dislikes']/$res['total'][$service]['likes']*100);
-      
+
       $res['ratio'][$service]['clickback_activities'] =
         $res['total'][$service]['activities'] == 0 ? 0 :  round($res['total'][$service]['clickbacks']/$res['total'][$service]['activities']*100);
 
       $res['ratio'][$service]['contacts_activities'] =
         $res['total'][$service]['activities'] == 0 ? 0 :  round($res['total'][$service]['contacts']/$res['total'][$service]['activities']*100);
-        
-      $res['ratio'][$service]['like_percentage'] = 
-      ($res['total'][$service]['activities']) == 0 ? 0 :  round($res['total'][$service]['likes']/($res['total'][$service]['activities'])*100);
 
-    $res['ratio'][$service]['dislike_percentage'] = 
-      ($res['total'][$service]['activities']) == 0 ? 0 :  round($res['total'][$service]['dislikes']/($res['total'][$service]['activities'])*100);
+      $res['ratio'][$service]['like_percentage'] =
+        ($res['total'][$service]['activities']) == 0 ? 0 :  round($res['total'][$service]['likes']/($res['total'][$service]['activities'])*100);
+
+      $res['ratio'][$service]['dislike_percentage'] =
+        ($res['total'][$service]['activities']) == 0 ? 0 :  round($res['total'][$service]['dislikes']/($res['total'][$service]['activities'])*100);
 
     }
-    
+
     $res['average']['all']['likes'] = round($res['total']['all']['likes']/($days==0 ? 1 : $days), 2);
     $res['average']['all']['dislikes'] = round($res['total']['all']['dislikes']/($days==0 ? 1 : $days), 2);
     $res['average']['all']['clickbacks'] = round($res['total']['all']['clickbacks']/($days==0 ? 1 : $days), 2);
 
     $res['ratio']['all']['dislike_like'] =
       $res['total']['all']['likes'] == 0 ? 0 :  round($res['total']['all']['dislikes']/$res['total']['all']['likes']*100);
-    
-    $res['ratio']['all']['clickback_activities'] = 
+
+    $res['ratio']['all']['clickback_activities'] =
       $res['total']['all']['activities'] == 0 ? 0 :  round($res['total']['all']['clickbacks']/$res['total']['all']['activities']*100);
 
-    $res['ratio']['all']['contacts_activities'] = 
+    $res['ratio']['all']['contacts_activities'] =
       $res['total']['all']['activities'] == 0 ? 0 :  round($res['total']['all']['contacts']/$res['total']['all']['activities']*100);
-    
-    $res['ratio']['all']['like_percentage'] = 
+
+    $res['ratio']['all']['like_percentage'] =
       ($res['total']['all']['activities']) == 0 ? 0 :  round($res['total']['all']['likes']/($res['total']['all']['activities'])*100);
 
-    $res['ratio']['all']['dislike_percentage'] = 
+    $res['ratio']['all']['dislike_percentage'] =
       ($res['total']['all']['activities']) == 0 ? 0 :  round($res['total']['all']['dislikes']/($res['total']['all']['activities'])*100);
-    
+
     return $res;
   }
-  
+
   private static function getMongoDateRange($start, $end) {
     $range = array();
     $start = strtotime($start);
@@ -464,7 +447,7 @@ class MongoUtils {
               "ior" => 0,
               "wid" => 0,
               "u" => 0
-          )          
+          )
         );
         break;
       case 'age_distribution':
