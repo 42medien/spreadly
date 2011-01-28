@@ -2,20 +2,13 @@
 
 class MongoUtils {
   
-  public static function getUrlData($domain, $fromDate, $toDate, $aggregation, $url=null) {
-    $topActivities = MongoUtils::getTopActivitiesData($domain, $fromDate, $toDate, $aggregation);
-
-    if($url==null) {
-      $url = $topActivities['data'][0]['url'];
-    }
-
-    $data = MongoUtils::getDataForRange('activities_with_clickbacks', $domain, $fromDate, $toDate, $aggregation, $url);
-
-    return $data;
+  public static function getTopActivityUrl($domain, $fromDate, $toDate, $aggregation) {
+    $topActivities = MongoUtils::getTopActivtiesData($domain, $fromDate, $toDate, $aggregation, 1);
+    return $topActivities['data'][0]['url'];
   }
   
   public static function getTopActivityUrlData($domain, $fromDate, $toDate, $aggregation) {
-   return MongoUtils::getTopActivtiesData($domain, $fromDate, $toDate, $aggregation, 1); 
+    return MongoUtils::getTopActivtiesData($domain, $fromDate, $toDate, $aggregation, 1); 
   }
   
   public static function getTopActivitiesData($domain, $fromDate, $toDate, $aggregation, $limit=10) {

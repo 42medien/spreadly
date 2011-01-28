@@ -56,7 +56,13 @@ class analyticsActions extends sfActions
 
   public function executeGet_analytics_urls(sfWebRequest $request){
   	$this->getResponse()->setContentType('application/json');
-    $lData = MongoUtils::getUrlData($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pUrl);
+  	
+  	 if($this->pType == 'url_activities' && !$this->pUrl) {
+  	   $this->pUrl = MongoUtils::getTopActivityUrl($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);  	  
+  	}
+  	
+    $lData = MongoUtils::getDataForRange($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pUrl);
+    
 		$lReturn['nav'] = $this->getPartial('analytics/filter_nav', array('pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl' => $this->pUrl, 'pDealId' => $this->pDealId));
     $lReturn['content'] =  $this->getPartial('analytics/url_activities_content', array('pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl'=> $this->pUrl, 'pData' => $lData));
 
@@ -65,7 +71,11 @@ class analyticsActions extends sfActions
 
   public function executeGet_analytics_content(sfWebRequest $request){
   	$this->getResponse()->setContentType('application/json');
-  	//$lData = MongoUtils::getDemograficData($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
+
+  	if($this->pType == 'url_activities' && !$this->pUrl) {
+  	  $this->pUrl = MongoUtils::getTopActivityUrl($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);  	  
+  	}
+
   	$lData = MongoUtils::getDataForRange($this->pType, $this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pUrl);
     $lReturn['content'] =  $this->getPartial('analytics/'.$this->pType.'_content', array('pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pData' => $lData));
 
