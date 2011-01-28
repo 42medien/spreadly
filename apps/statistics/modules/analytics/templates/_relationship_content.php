@@ -1,6 +1,6 @@
 	<h2><?php echo __('Relationship status'); ?></h2>
 	<div class="content-box bg-white">
-		<?php include_component('analytics','chart_pie_relationship', array('pChartsettings' =>
+		<?php include_partial('analytics/chart_pie_relationship', array('pChartsettings' =>
 		'{
 				"width": 450,
 				"height": 230,
@@ -36,7 +36,7 @@
 			</ul>
 		</li>
 	</ul>
-	<?php include_component('analytics', 'chart_pie_age_activities', array('pChartsettings' =>
+	<?php include_partial('analytics/chart_pie_age_activities', array('pChartsettings' =>
 		'{
 				"width": 330,
 				"height": 130,
@@ -56,7 +56,7 @@
 			</ul>
 		</li>
 	</ul>
-		<?php include_component('analytics','chart_pie_gender_activities', array('pChartsettings' =>
+		<?php include_partial('analytics/chart_pie_gender_activities', array('pChartsettings' =>
 		'{
 				"width": 300,
 				"height": 130,

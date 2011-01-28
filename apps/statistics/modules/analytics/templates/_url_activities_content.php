@@ -5,7 +5,7 @@
 <?php } ?>
 
 <div class="content-box bg-white">
-	<?php include_component('analytics', 'chart_line_urls', array('pData' => $pData))?>
+	<?php include_partial('analytics/chart_line_urls', array('pData' => $pData, 'pCommunity' => $pCom))?>
 </div>
 
 <h2><?php echo __('%community% key data', array('%community%' => $pCom)); ?><?php echo __('from %datefrom% - %dateto%', array('%datefrom%' => $pFrom, '%dateto%' => $pTo)); ?></h2>

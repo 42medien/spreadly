@@ -1,7 +1,7 @@
 <?php use_helper('ChartData') ?>
 <h2><?php echo __('%community% likes (and dislikes)', array('%community%' => $pCom)); ?></h2>
 <div class="content-box bg-white">
-	<?php include_component('analytics', 'chart_line_activities', array('pData' => $pData))?>
+	<?php include_partial('analytics/chart_line_activities', array('pData' => $pData, 'pCommunity' => $pCom))?>
 </div>
 
 

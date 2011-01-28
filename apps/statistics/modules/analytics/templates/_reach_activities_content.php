@@ -1,7 +1,7 @@
 <h2><?php echo __('Views on %community%', array('%community%' => $pCom)); ?></h2>
 <?php //var_dump($pData['statistics']['ratio']);die();?>
 <div class="content-box bg-white">
-	<?php include_component('analytics', 'chart_line_range_views', array('pData' => $pData)); ?>
+	<?php include_partial('analytics/chart_line_range_views', array('pData' => $pData, 'pCommunity' => $pCom)); ?>
 	<?php //var_dump($pData['statistics']);die();?>
 </div>
 
