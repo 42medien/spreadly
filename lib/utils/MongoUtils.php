@@ -2,10 +2,6 @@
 
 class MongoUtils {
   
-  public static function getActivityData($domain, $fromDate, $toDate, $aggregation, $url=null) {
-    return MongoUtils::getDataForRange('activities_with_clickbacks', $domain, $fromDate, $toDate, $aggregation, $url);
-  }
-
   public static function getUrlData($domain, $fromDate, $toDate, $aggregation, $url=null) {
     $topActivities = MongoUtils::getTopActivitiesData($domain, $fromDate, $toDate, $aggregation);
 
@@ -16,26 +12,6 @@ class MongoUtils {
     $data = MongoUtils::getDataForRange('activities_with_clickbacks', $domain, $fromDate, $toDate, $aggregation, $url);
 
     return $data;
-  }
-
-  public static function getDemograficData($domain, $fromDate, $toDate, $aggregation) {
-    return MongoUtils::getDataForRange('demografics', $domain, $fromDate, $toDate, $aggregation);
-  }
-
-  public static function getAgeData($domain, $fromDate, $toDate, $aggregation) {
-    return MongoUtils::getDataForRange('age_distribution', $domain, $fromDate, $toDate, $aggregation);
-  }
-
-  public static function getGenderData($domain, $fromDate, $toDate, $aggregation) {
-    return MongoUtils::getDataForRange('gender_distribution', $domain, $fromDate, $toDate, $aggregation);
-  }
-
-  public static function getRelationshipData($domain, $fromDate, $toDate, $aggregation) {
-    return MongoUtils::getDataForRange('relationship_status', $domain, $fromDate, $toDate, $aggregation);
-  }
-
-  public static function getMediaPenetrationData($domain, $fromDate, $toDate, $aggregation) {
-    return MongoUtils::getDataForRange('activities_with_clickbacks', $domain, $fromDate, $toDate, $aggregation);
   }
   
   public static function getTopActivityUrlData($domain, $fromDate, $toDate, $aggregation) {
