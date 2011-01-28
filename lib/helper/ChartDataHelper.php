@@ -20,6 +20,7 @@ function getActivityChartData($rawData) {
   foreach ($services as $service) {
     $res[$service.'_likes'] = array();
     $res[$service.'_dislikes'] = array();
+    $res[$service.'_contacts'] = array();
   }
 
   // Sort data by date
@@ -27,15 +28,20 @@ function getActivityChartData($rawData) {
 
   // Converting data into a chart usable format
   foreach ($rawData['data'] as $data) {
+    $cb = 0;
     foreach ($services as $service) {
       if(array_key_exists($service, $data)) {
         array_push($res[$service.'_likes'], $data[$service]['likes']);
         array_push($res[$service.'_dislikes'], $data[$service]['dislikes']);
+        array_push($res[$service.'_contacts'], $data[$service]['contacts']);
+        $cb += $data[$service]['clickbacks'];
       } else {
         array_push($res[$service.'_likes'], 0);
         array_push($res[$service.'_dislikes'], 0);
+        array_push($res[$service.'_contacts'], 0);
       }
     }
+    array_push($res['clickbacks'], $cb);
   }
 
   // Get pi data by date
@@ -44,6 +50,16 @@ function getActivityChartData($rawData) {
   // Addding some metadata from the filter like categories, range, etc.
   $res['metadata'] = ChartUtils::addFilterData($res, $rawData['filter']);
   return json_encode($res);
+}
+
+/**
+ * helper that gets raw mongo data and converts it to a format suitable for the chart
+ *
+ * @param raw_data
+ * @return converted data
+ */
+function getMediaPenetrationChartData($rawData) {
+  return getActivityChartData($rawData);
 }
 
 /**
@@ -84,47 +100,6 @@ function getRelationshipChartData($rawData) {
   $res['metadata'] = ChartUtils::addFilterData($res, $rawData['filter']);
   return json_encode($res);
 }
-
-/**
- * helper that gets raw mongo data and converts it to a format suitable for the chart
- *
- * @param raw_data
- * @return converted data
- */
-function getMediaPenetrationChartData($rawData) {
-  $res = array();
-  $services = array('facebook', 'twitter', 'linkedin', 'google');
-  $res['clickbacks'] = array();
-
-  // Initializing the Data arrays for the chart
-  foreach ($services as $service) {
-    $res[$service.'_contacts'] = array();
-  }
-
-  // Sort data by date
-  $rawData['data'] = ChartUtils::sortArrayByDate($rawData['data']);
-
-  // Converting data into a chart usable format
-  foreach ($rawData['data'] as $data) {
-    $cb = 0;
-    foreach ($services as $service) {
-      if(array_key_exists($service, $data)) {
-        array_push($res[$service.'_contacts'], $data[$service]['contacts']);
-        $cb += $data[$service]['clickbacks'];
-      } else {
-        array_push($res[$service.'_contacts'], 0);
-      }
-    }
-    array_push($res['clickbacks'], $cb);
-  }
-
-  // Get pi data by date
-  $res['pis'] = ChartUtils::getPiData($rawData['pis']);
-
-  $res['metadata'] = ChartUtils::addFilterData($res, $rawData['filter']);
-  return json_encode($res);
-}
-
 
 function getChartLineActivitiesData($rawData, $community='all') {
   $res = array();
