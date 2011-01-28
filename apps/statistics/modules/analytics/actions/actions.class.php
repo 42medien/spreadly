@@ -33,7 +33,7 @@ class analyticsActions extends sfActions
     $this->pCommunity = $request->getParameter('com', 'all');
     $this->pUrl = $request->getParameter('url', null);
     $this->pDealId = $request->getParameter('dealid', null);
-    $this->pType = $request->getParameter('type', null);
+    $this->pType = $request->getParameter('type', 'url_activities');
 
   }
 
@@ -67,7 +67,7 @@ class analyticsActions extends sfActions
   	$this->getResponse()->setContentType('application/json');
   	//$lData = MongoUtils::getDemograficData($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
   	$lData = MongoUtils::getDataForRange($this->pType, $this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pUrl);
-    $lReturn['content'] =  $this->getPartial('analytics/demo_relations_content', array('pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pData' => $lData));
+    $lReturn['content'] =  $this->getPartial('analytics/'.$this->pType.'_content', array('pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pData' => $lData));
 
 		return $this->renderText(json_encode($lReturn));
   }

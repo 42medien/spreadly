@@ -41,4 +41,4 @@
 		</li>
 	</ul>
 </div>
-<?php include_component('analytics','url_table', array('pCom' => $pCom, 'pFrom' => $pFrom, 'pTo' => $pTo, 'pChart' => null, 'pUrl' => $pUrl)); ?>
+<?php include_component('analytics','url_table', array('pCom' => $pCom, 'pFrom' => $pFrom, 'pTo' => $pTo, 'pUrl' => $pUrl)); ?>
