@@ -28,11 +28,11 @@
 	<li>
 		<?php echo __('Reach'); ?>
 		<ul class="clearfix">
-			<li><?php echo link_to(__('All'), '@get_analytics_content', array('query_string' => 'com=all&type=reach&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
-			<li><?php echo link_to(__('Facebook'), '@get_analytics_content', array('query_string' => 'com=facebook&type=reach&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
-			<li><?php echo link_to(__('Twitter'), '@get_analytics_content', array('query_string' => 'com=twitter&type=reach&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
-			<li><?php echo link_to(__('LinkedIn'), '@get_analytics_content', array('query_string' => 'com=linkedin&type=reach&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
-			<li><?php echo link_to(__('Buzz'), '@get_analytics_content', array('query_string' => 'com=google&type=reach&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
+			<li><?php echo link_to(__('All'), '@get_analytics_content', array('query_string' => 'com=all&type=reach_activities&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
+			<li><?php echo link_to(__('Facebook'), '@get_analytics_content', array('query_string' => 'com=facebook&type=reach_activities&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
+			<li><?php echo link_to(__('Twitter'), '@get_analytics_content', array('query_string' => 'com=twitter&type=reach_activities&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
+			<li><?php echo link_to(__('LinkedIn'), '@get_analytics_content', array('query_string' => 'com=linkedin&type=reach_activities&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
+			<li><?php echo link_to(__('Buzz'), '@get_analytics_content', array('query_string' => 'com=google&type=reach_activities&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-filter-link')); ?></li>
 		</ul>
 	</li>
 </ul>
