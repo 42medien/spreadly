@@ -15,7 +15,7 @@ class PseudoStatsModel {
    * @param array $array
    * @return array
    */
-  public static function preFillArray($array) {
+  public static function prefillArray($array) {
     $result = array();
     foreach ($array as $value) {
       $result[$value] = 0;
@@ -28,8 +28,8 @@ class PseudoStatsModel {
    *
    * @return array
    */
-  public static function getDefaultAgeArray() {
-    return self::preFillArray(self::$age);
+  public static function getPrefilledAgeArray() {
+    return self::prefillArray(self::$age);
   }
 
   /**
@@ -37,8 +37,8 @@ class PseudoStatsModel {
    *
    * @return array
    */
-  public static function getDefaultGenderArray() {
-    return self::preFillArray(self::$gender);
+  public static function getPrefilledGenderArray() {
+    return self::prefillArray(self::$gender);
   }
 
   /**
@@ -46,7 +46,7 @@ class PseudoStatsModel {
    *
    * @return array
    */
-  public static function getDefaultRelationshipArray() {
-    return self::preFillArray(self::$relationship);
+  public static function getPrefilledRelationshipArray() {
+    return self::prefillArray(self::$relationship);
   }
 }
