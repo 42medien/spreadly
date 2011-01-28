@@ -58,7 +58,7 @@ class analyticsActions extends sfActions
   	$this->getResponse()->setContentType('application/json');
     $lData = MongoUtils::getUrlData($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pUrl);
 		$lReturn['nav'] = $this->getPartial('analytics/filter_nav', array('pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl' => $this->pUrl, 'pDealId' => $this->pDealId));
-    $lReturn['content'] =  $this->getPartial('analytics/url_content', array('pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl'=> $this->pUrl, 'pData' => $lData));
+    $lReturn['content'] =  $this->getPartial('analytics/url_activities_content', array('pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl'=> $this->pUrl, 'pData' => $lData));
 
 		return $this->renderText(json_encode($lReturn));
   }
