@@ -6,11 +6,11 @@ class MongoUtils {
     $topActivities = MongoUtils::getTopActivityUrlData($domain, $fromDate, $toDate, $aggregation);
     return $topActivities['data'][0]['url'];
   }
-  
+
   public static function getTopActivityUrlData($domain, $fromDate, $toDate, $aggregation) {
-    return MongoUtils::getTopActivitiesData($domain, $fromDate, $toDate, $aggregation, 1); 
+    return MongoUtils::getTopActivitiesData($domain, $fromDate, $toDate, $aggregation, 1);
   }
-  
+
   public static function getTopActivitiesData($domain, $fromDate, $toDate, $aggregation, $limit=10) {
     $col = MongoUtils::getCollection('analytics.activities');
     $keys = array("url" => 1);
@@ -190,53 +190,9 @@ class MongoUtils {
     $res['total'] = array();
     $res['ratio'] = array();
 
-    $res['total']['age'] = array(
-              "u_18" => 0,
-              "b_18_24" => 0,
-              "b_25_34" => 0,
-              "b_35_54" => 0,
-              "o_55" => 0
-          );
-
-    $res['total']['gender'] = array(
-              "m" => 0,
-              "f" => 0,
-              "u" => 0
-          );
-    $res['total']['relationship'] = array(
-              "singl" => 0,
-              "eng" => 0,
-              "compl" => 0,
-              "mar" => 0,
-              "rel" => 0,
-              "ior" => 0,
-              "wid" => 0,
-              "u" => 0
-          );
-
-    $res['ratio']['age'] = array(
-              "u_18" => 0,
-              "b_18_24" => 0,
-              "b_25_34" => 0,
-              "b_35_54" => 0,
-              "o_55" => 0
-          );
-
-    $res['ratio']['gender'] = array(
-              "m" => 0,
-              "f" => 0,
-              "u" => 0
-          );
-    $res['ratio']['relationship'] = array(
-              "singl" => 0,
-              "eng" => 0,
-              "compl" => 0,
-              "mar" => 0,
-              "rel" => 0,
-              "ior" => 0,
-              "wid" => 0,
-              "u" => 0
-          );
+    $res['total']['age'] = $res['ratio']['age'] = PseudoStatsModel::getPrefilledAgeArray();
+    $res['total']['gender'] = $res['ratio']['gender'] = PseudoStatsModel::getPrefilledGenderArray();
+    $res['total']['relationship'] = $res['ratio']['relationship'] = PseudoStatsModel::getPrefilledRelationshipArray();
 
     return $res;
   }
@@ -388,7 +344,7 @@ class MongoUtils {
   }
 
   private static function getInitial($type) {
-    switch ($type) {
+      switch ($type) {
       case 'activities':
         return array(
           "facebook" => array("likes" => 0, "dislikes" => 0, "clickbacks" => 0, "contacts" => 0),
@@ -399,28 +355,9 @@ class MongoUtils {
         break;
       case 'demografics':
         return array(
-          "age" => array(
-              "u_18" => 0,
-              "b_18_24" => 0,
-              "b_25_34" => 0,
-              "b_35_54" => 0,
-              "o_55" => 0
-          ),
-          "gender" => array(
-              "m" => 0,
-              "f" => 0,
-              "u" => 0
-          ),
-          "relationship" => array(
-              "singl" => 0,
-              "eng" => 0,
-              "compl" => 0,
-              "mar" => 0,
-              "rel" => 0,
-              "ior" => 0,
-              "wid" => 0,
-              "u" => 0
-          )
+          "age" => PseudoStatsModel::getPrefilledAgeArray(),
+          "gender" => PseudoStatsModel::getPrefilledGenderArray(),
+          "relationship" => PseudoStatsModel::getPrefilledRelationshipArray()
         );
         break;
       case 'pis':
