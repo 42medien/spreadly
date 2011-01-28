@@ -8,7 +8,7 @@ class MongoUtils {
   }
   
   public static function getTopActivityUrlData($domain, $fromDate, $toDate, $aggregation) {
-    return MongoUtils::getTopActivtiesData($domain, $fromDate, $toDate, $aggregation, 1); 
+    return MongoUtils::getTopActivitiesData($domain, $fromDate, $toDate, $aggregation, 1); 
   }
   
   public static function getTopActivitiesData($domain, $fromDate, $toDate, $aggregation, $limit=10) {
