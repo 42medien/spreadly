@@ -16,7 +16,7 @@
     <?php foreach($pData['data'] as $i => $data): ?>
       <tr class="<?php echo $i%2==0 ? 'odd' : 'even' ?>">
       	<td><?php echo ++$i;?>.</td>
-        <td><?php echo link_to($data['url'], '@get_analytics_urls', array('query_string' => 'com=all&url='.$data['url'].'&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo, 'class' => 'analytix-url-filter-link'));  ?></td>
+        <td><?php echo link_to($data['url'], '@get_analytics_content', array('query_string' => 'com=all&url='.$data['url'].'&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo.'&type=url_activities', 'class' => 'analytix-filter-link'));  ?></td>
         <td class="numeric"><?php echo $data['pis']['cb'] ?></td>
         <td class="numeric"><?php echo $data['distribution'] ?>%</td>
         <td class="numeric"><?php echo $data['neg']+$data['pos'] ?></td>
