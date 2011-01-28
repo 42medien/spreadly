@@ -1,5 +1,5 @@
 <div class="filter">
-	<form name="visit-history-form" id="visit-history-form" action="<?php echo url_for('@get_filtered_content'); ?>">
+	<form name="visit-history-form" id="visit-history-form" action="<?php echo url_for('@get_analytics_urls'); ?>">
   	<div class="clearfix">
   	  <div class="filter-item">
         <label for="host_id">Website</label>

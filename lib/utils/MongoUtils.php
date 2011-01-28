@@ -122,7 +122,7 @@ class MongoUtils {
    * @param aggregation: The aggregation type (daily, weekly, monthly)
    * @return The raw data as it comes from the mongo db
    */
-  private static function getDataForRange($type, $domain, $fromDate, $toDate, $aggregation, $url=null) {
+  public static function getDataForRange($type, $domain, $fromDate, $toDate, $aggregation, $url=null) {
     $col = MongoUtils::getCollection('charts', $domain);
 
     $keys = array("date" => 1);

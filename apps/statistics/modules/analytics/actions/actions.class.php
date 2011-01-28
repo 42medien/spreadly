@@ -33,6 +33,7 @@ class analyticsActions extends sfActions
     $this->pCommunity = $request->getParameter('com', 'all');
     $this->pUrl = $request->getParameter('url', null);
     $this->pDealId = $request->getParameter('dealid', null);
+    $this->pType = $request->getParameter('type', null);
 
   }
 
@@ -53,15 +54,25 @@ class analyticsActions extends sfActions
     $this->pData = MongoUtils::getUrlData($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pUrl);
   }
 
-  public function executeGet_filtered_content(sfWebRequest $request){
+  public function executeGet_analytics_urls(sfWebRequest $request){
   	$this->getResponse()->setContentType('application/json');
     $lData = MongoUtils::getUrlData($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pUrl);
 		$lReturn['nav'] = $this->getPartial('analytics/filter_nav', array('pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl' => $this->pUrl, 'pDealId' => $this->pDealId));
-    $lReturn['content'] =  $this->getPartial('analytics/url_content', array('pCom' => 'all', 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl' => $this->pUrl, 'pData' => $lData));
+    $lReturn['content'] =  $this->getPartial('analytics/url_content', array('pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl'=> $this->pUrl, 'pData' => $lData));
 
 		return $this->renderText(json_encode($lReturn));
   }
 
+  public function executeGet_analytics_content(sfWebRequest $request){
+  	$this->getResponse()->setContentType('application/json');
+  	//$lData = MongoUtils::getDemograficData($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
+  	$lData = MongoUtils::getDataForRange($this->pType, $this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pUrl);
+    $lReturn['content'] =  $this->getPartial('analytics/demo_relations_content', array('pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pData' => $lData));
+
+		return $this->renderText(json_encode($lReturn));
+  }
+
+/*
   public function executeGet_analytics_activities(sfWebRequest $request){
   	$this->getResponse()->setContentType('application/json');
     $lData = MongoUtils::getActivityData($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
@@ -69,6 +80,7 @@ class analyticsActions extends sfActions
 
 		return $this->renderText(json_encode($lReturn));
   }
+
 
   public function executeGet_analytics_range(sfWebRequest $request){
   	$this->getResponse()->setContentType('application/json');
@@ -100,16 +112,6 @@ class analyticsActions extends sfActions
     $lReturn['content'] =  $this->getPartial('analytics/demo_relations_content', array('pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pData' => $lData));
 
 		return $this->renderText(json_encode($lReturn));
-  }
-
-
-  public function executeGet_analytics_urls(sfWebRequest $request){
-  	$this->getResponse()->setContentType('application/json');
-    $lData = MongoUtils::getUrlData($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pUrl);
-		$lReturn['nav'] = $this->getPartial('analytics/filter_nav', array('pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl' => $this->pUrl, 'pDealId' => $this->pDealId));
-    $lReturn['content'] =  $this->getPartial('analytics/url_content', array('pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pUrl'=> $this->pUrl, 'pData' => $lData));
-
-		return $this->renderText(json_encode($lReturn));
-  }
+  }*/
 
 }

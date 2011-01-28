@@ -93,6 +93,10 @@ get_analytics_relations:
 get_analytics_urls:
   url:   analytics/get_analytics_urls
   param: { module: analytics, action: get_analytics_urls }  
+  
+get_analytics_content:
+  url: analytics/get_analytics_content
+  param: { module: analytics, action: get_analytics_content }
 
 deals:
   url:   deals/index
