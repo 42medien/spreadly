@@ -20,7 +20,6 @@ class analyticsComponents extends sfComponents
     $this->pAggregation = $request->getParameter('aggregation', 'daily');
     $this->pDateFrom = $request->getParameter('date-from', date('Y-m-d', strtotime("6 days ago")));
     $this->pDateTo = $request->getParameter('date-to', date('Y-m-d'));
-    $this->pCommunity = $request->getParameter('com', 'all');
     $this->pUrl = $request->getParameter('url', null);
     $this->pDealId = $request->getParameter('dealid', null);
 
@@ -28,19 +27,13 @@ class analyticsComponents extends sfComponents
 	}
 
 	public function executeFilter_nav(sfWebRequest $request){
-    $this->pFrom = $request->getParameter('date-from', date('Y-m-d', strtotime("6 days ago")));
-    $this->pTo = $request->getParameter('date-to', date('Y-m-d'));
-
-    $this->pVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
     if(count($this->pVerifiedDomains) > 0 && !$this->pHostId) {
 	    $this->pHostId = $this->pVerifiedDomains[0]->getId();
     }
-
 	}
 
   public function executeUrl_table(sfWebRequest $request) {
     $lDomainProfile = DomainProfileTable::getInstance()->find($this->pHostId);
-    //var_dump($this->pHostId);die();
     $this->pData = MongoUtils::getTopActivitiesData($lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
   }
 }
