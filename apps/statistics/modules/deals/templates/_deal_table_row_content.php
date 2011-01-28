@@ -8,7 +8,7 @@
       		<?php echo image_tag('/img/global/24x24/remove_from_shopping_cart.png', array('title' => __('Deal approved')))?>
       	<?php } ?>
       </td>
-      <td class="deal-summary-col"><?php echo link_to($pDeal->getSummary(), '@get_filtered_content', array('query_string' => 'com=all&host_id='.$pDeal->getDomainProfileId().'&date-from='.$pDeal->getStartDate().'&date-to='.$pDeal->getEndDate().'&url=&dealid='.$pDeal->getId(), 'class' => 'deal-stats-link')); ?></td>
+      <td class="deal-summary-col"><?php echo link_to($pDeal->getSummary(), '@get_analytics_content', array('query_string' => 'com=all&host_id='.$pDeal->getDomainProfileId().'&date-from='.$pDeal->getStartDate().'&date-to='.$pDeal->getEndDate().'&url=&dealid='.$pDeal->getId(), 'class' => 'deal-stats-link')); ?></td>
       <td><?php echo $pDeal->getDomainProfile()->getUrl(); ?></td>
       <td style="text-align: center;"><?php echo $pDeal->getStartDate(); ?></td>
       <td style="text-align: center;" title="<?php echo __('Edit end date of deal'); ?>" class="editinplaceclick" id="deal-date-<?php echo $pDeal->getId(); ?>" data-obj='{"action":"/deals/edit_enddate", "type":"text", "callback":"DealTable.editDate",  "params": "{\"id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-date-<?php echo $pDeal->getId(); ?>\"}"}'><?php echo $pDeal->getEndDate(); ?></td>

@@ -24,7 +24,7 @@
 </div>
 <div class="content-header-box medium-box">
   <div class="content-box-head">
-    <a class="button-green" href="@visit_analytics"><?php echo __('GO!');?></a>
+    <a class="button-green" href="/analytics/index"><?php echo __('GO!');?></a>
     <h3><?php echo __('Get Your Analytics')?></h3>
   </div>
   <div class="content-box-body">

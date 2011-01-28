@@ -6,7 +6,7 @@
     <span class="navigation_text">
       <?php echo __('Hello').' '.$sf_user->getUsername(); ?> |
     </span>
-    <span class="<?php if($sf_context->getModuleName()=='visit_history' && $sf_context->getActionName()=='index') { echo 'active';} ?> navigation_text">
+    <span class="<?php if($sf_context->getModuleName()=='likebutton' && $sf_context->getActionName()=='dashboard') { echo 'active';} ?> navigation_text">
       <?php echo link_to(__('Dashboard'), '@dashboard'); ?> |
     </span>
     <span class="<?php if($sf_context->getModuleName()=='likebutton') { echo 'active';} ?> navigation_text">

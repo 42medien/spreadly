@@ -1,1 +1,0 @@
-VisitHistoryHandler.init();

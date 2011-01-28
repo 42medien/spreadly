@@ -7,8 +7,8 @@ domain_profiles:
   param: { module: domain_profiles, action: index }
 
 dashboard:
-  url: /visit_history/index
-  param: { module: visit_history, action: index }
+  url: /likebutton/dashboard
+  param: { module: likebutton, action: dashboard }
 
 update_language:
   url:   /updateLanguage/*
@@ -54,10 +54,6 @@ configurator:
   url:  /likebutton/index
   param: { module: likebutton, action: index}
 
-visit_analytics:
-  url:   visit_history/analytics
-  param: { module: visit_history, action: analytics }
-  
 analytics_overview:
   url:   analytics/index
   param: { module: analytics, action: index }   

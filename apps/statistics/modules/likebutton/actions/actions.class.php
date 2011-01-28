@@ -296,4 +296,8 @@ class likebuttonActions extends sfActions
 
     return $this->renderText(json_encode($lReturn));
   }
+
+  public function executeDashboard(sfWebRequest $request){
+  	$this->pUser = $this->getUser();
+  }
 }
