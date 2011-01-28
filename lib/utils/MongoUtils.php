@@ -1,7 +1,7 @@
 <?php
 
 class MongoUtils {
-
+  
   public static function getActivityData($domain, $fromDate, $toDate, $aggregation, $url=null) {
     return MongoUtils::getDataForRange('activities_with_clickbacks', $domain, $fromDate, $toDate, $aggregation, $url);
   }
@@ -37,7 +37,11 @@ class MongoUtils {
   public static function getMediaPenetrationData($domain, $fromDate, $toDate, $aggregation) {
     return MongoUtils::getDataForRange('activities_with_clickbacks', $domain, $fromDate, $toDate, $aggregation);
   }
-
+  
+  public static function getTopActivityUrlData($domain, $fromDate, $toDate, $aggregation) {
+   return MongoUtils::getTopActivtiesData($domain, $fromDate, $toDate, $aggregation, 1); 
+  }
+  
   public static function getTopActivitiesData($domain, $fromDate, $toDate, $aggregation, $limit=10) {
     $col = MongoUtils::getCollection('analytics.activities');
     $keys = array("url" => 1);
@@ -123,6 +127,7 @@ class MongoUtils {
    * @return The raw data as it comes from the mongo db
    */
   public static function getDataForRange($type, $domain, $fromDate, $toDate, $aggregation, $url=null) {
+    $type = strstr($type, 'activities') ? 'activities' : 'demografics'; // Merging types
     $col = MongoUtils::getCollection('charts', $domain);
 
     $keys = array("date" => 1);
@@ -138,13 +143,6 @@ class MongoUtils {
     $g = $col->group($keys, $initial, $reduce, array("condition" => $cond));
 
     $data['data'] = MongoUtils::getDataWithEmptyDayPadding($g['retval'], $fromDate, $toDate);
-    if(strstr($type, 'with_clickbacks')) {
-      $pi_col =  MongoUtils::getCollection('pis', $domain);
-      $initial = MongoUtils::getInitial('pis');
-      $reduce = MongoUtils::getReduce('pis');
-      $pis = $pi_col->group($keys, $initial, $reduce, array("condition" => $cond));
-      $data['pis'] = MongoUtils::getDataWithEmptyDayPadding($pis['retval'], $fromDate, $toDate);
-    }
 
     $data['filter'] = MongoUtils::getFilter($domain, $fromDate, $toDate, $aggregation);
 
@@ -152,9 +150,15 @@ class MongoUtils {
       $data['filter']['url'] = $url;
     }
 
-    if($type=='activities_with_clickbacks') {
+    if($type == 'activities') {
+      $pi_col =  MongoUtils::getCollection('pis', $domain);
+      $initial = MongoUtils::getInitial('pis');
+      $reduce = MongoUtils::getReduce('pis');
+      $pis = $pi_col->group($keys, $initial, $reduce, array("condition" => $cond));
+      $data['pis'] = MongoUtils::getDataWithEmptyDayPadding($pis['retval'], $fromDate, $toDate);
+
       $data['statistics'] = MongoUtils::getAdditionalStatistics($g['retval'], $fromDate, $toDate);
-    } elseif($type=='demografics') {
+    } elseif($type == 'demografics') {
       $data['statistics'] = MongoUtils::getAdditionalDemograficStatistics($data['data'], $fromDate, $toDate);
     }
 
@@ -416,7 +420,7 @@ class MongoUtils {
 
   private static function getInitial($type) {
     switch ($type) {
-      case 'activities_with_clickbacks':
+      case 'activities':
         return array(
           "facebook" => array("likes" => 0, "dislikes" => 0, "clickbacks" => 0, "contacts" => 0),
           "twitter" => array("likes" => 0, "dislikes" => 0, "clickbacks" => 0, "contacts" => 0),
@@ -450,42 +454,6 @@ class MongoUtils {
           )
         );
         break;
-      case 'age_distribution':
-        return array(
-          "u_18" => 0,
-          "b_18_24" => 0,
-          "b_25_34" => 0,
-          "b_35_54" => 0,
-          "o_55" => 0
-        );
-        break;
-      case 'gender_distribution':
-        return array(
-          "m" => 0,
-          "f" => 0,
-          "u" => 0
-        );
-        break;
-      case 'relationship_status':
-        return array(
-          "singl" => 0,
-          "eng" => 0,
-          "compl" => 0,
-          "mar" => 0,
-          "rel" => 0,
-          "ior" => 0,
-          "wid" => 0,
-          "u" => 0
-        );
-        break;
-      case 'media_penetration_with_clickbacks':
-        return array(
-          "facebook" => array("contacts" => 0, "clickbacks" => 0),
-          "twitter" => array("contacts" => 0, "clickbacks" => 0),
-          "linkedin" => array("contacts" => 0, "clickbacks" => 0),
-          "google" => array("contacts" => 0, "clickbacks" => 0)
-        );
-        break;
       case 'pis':
         return array(
           "total" => 0,
@@ -501,7 +469,7 @@ class MongoUtils {
 
   private static function getReduce($type) {
     switch ($type) {
-      case 'activities_with_clickbacks':
+      case 'activities':
         return "function(doc, out){ ".
              "if(doc.s.facebook) {".
                "out.facebook['likes']+=isNaN(doc.s.facebook.pos) ? 0 : doc.s.facebook.pos;".
@@ -552,60 +520,6 @@ class MongoUtils {
                "out.relationship.ior+=isNaN(doc.d.rel.ior) ? 0 : doc.d.rel.ior;".
                "out.relationship.wid+=isNaN(doc.d.rel.wid) ? 0 : doc.d.rel.wid;".
                "out.relationship.u+=isNaN(doc.d.rel.u) ? 0 : doc.d.rel.u;".
-             "}".
-           "}";
-        break;
-      case 'age_distribution':
-        return "function(doc, out){ ".
-             "if(doc.d.age) {".
-               "out.u_18+=isNaN(doc.d.age.u_18) ? 0 : doc.d.age.u_18;".
-               "out.b_18_24+=isNaN(doc.d.age.b_18_24) ? 0 : doc.d.age.b_18_24;".
-               "out.b_25_34+=isNaN(doc.d.age.b_25_34) ? 0 : doc.d.age.b_25_34;".
-               "out.b_35_54+=isNaN(doc.d.age.b_35_54) ? 0 : doc.d.age.b_35_54;".
-               "out.o_55+=isNaN(doc.d.age.o_55) ? 0 : doc.d.age.o_55;".
-             "}".
-           "}";
-        break;
-      case 'gender_distribution':
-        return "function(doc, out){ ".
-             "if(doc.d.sex) {".
-               "out.m+=isNaN(doc.d.sex.m) ? 0 : doc.d.sex.m;".
-               "out.f+=isNaN(doc.d.sex.f) ? 0 : doc.d.sex.f;".
-               "out.u+=isNaN(doc.d.sex.u) ? 0 : doc.d.sex.u;".
-             "}".
-           "}";
-        break;
-      case 'relationship_status':
-        return "function(doc, out){ ".
-             "if(doc.d.rel) {".
-               "out.singl+=isNaN(doc.d.rel.singl) ? 0 : doc.d.rel.singl;".
-               "out.eng+=isNaN(doc.d.rel.eng) ? 0 : doc.d.rel.eng;".
-               "out.compl+=isNaN(doc.d.rel.compl) ? 0 : doc.d.rel.compl;".
-               "out.mar+=isNaN(doc.d.rel.mar) ? 0 : doc.d.rel.mar;".
-               "out.rel+=isNaN(doc.d.rel.rel) ? 0 : doc.d.rel.rel;".
-               "out.ior+=isNaN(doc.d.rel.ior) ? 0 : doc.d.rel.ior;".
-               "out.wid+=isNaN(doc.d.rel.wid) ? 0 : doc.d.rel.wid;".
-               "out.u+=isNaN(doc.d.rel.u) ? 0 : doc.d.rel.u;".
-             "}".
-           "}";
-        break;
-      case 'media_penetration_with_clickbacks':
-        return "function(doc, out){ ".
-             "if(doc.s.facebook) {".
-               "out.facebook['contacts']+=isNaN(doc.s.facebook.cnt) ? 0 : doc.s.facebook.cnt;".
-               "out.facebook['clickbacks']+=isNaN(doc.s.facebook.cb) ? 0 : doc.s.facebook.cb;".
-             "}".
-             "if(doc.s.twitter) {".
-               "out.twitter['contacts']+=isNaN(doc.s.twitter.cnt) ? 0 : doc.s.twitter.cnt;".
-               "out.twitter['clickbacks']+=isNaN(doc.s.twitter.cb) ? 0 : doc.s.twitter.cb;".
-             "}".
-             "if(doc.s.linkedin) {".
-               "out.linkedin['contacts']+=isNaN(doc.s.linkedin.cnt) ? 0 : doc.s.linkedin.cnt;".
-               "out.linkedin['clickbacks']+=isNaN(doc.s.linkedin.cb) ? 0 : doc.s.linkedin.cb;".
-             "}".
-             "if(doc.s.google) {".
-               "out.google['contacts']+=isNaN(doc.s.google.cnt) ? 0 : doc.s.google.cnt;".
-               "out.google['likes']+=isNaN(doc.s.google.cb) ? 0 : doc.s.google.cb;".
              "}".
            "}";
         break;
