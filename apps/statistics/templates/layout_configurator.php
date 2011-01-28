@@ -13,13 +13,10 @@
     <link rel="stylesheet" type="text/css" href="/js/100_main/vendor/jquery_ui_datepicker/smothness/jquery_ui_datepicker.css" />
     <link rel="stylesheet/less" href="<?php echo sfConfig::get("app_settings_url");?>/less/main.less" type="text/css" />
 
-
     <script type="text/javascript" src="/js/100_main/include/statistics-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
-    <script type="text/javascript" src="/js/statistics/analytics/FilterHandler.js"></script>
-    <script type="text/javascript" src="/js/100_main/global/109_jquery.toggle-boxes.js"></script>
-
     <script src="/js/100_main/vendor/less-1.0.36.min.js" type="text/javascript"></script>
     <?php include_javascripts();?>
+
   </head>
   <body>
     <div class="less-error-message"></div>
