@@ -106,6 +106,7 @@ var DealForm = {
     // inits the filling of the fields after selecting a domain-profile
     DealForm.selectDomainProfile();
     DealForm.toggleCouponType();
+    DealForm.toggleTagBoxes();    
     DealForm.setRadioButtons();
     DealForm.countCodes();    
     
@@ -229,6 +230,24 @@ var DealForm = {
   },
   
   /**
+   * toggles the categories after choosing insert categories
+   * 
+   * @author KM
+   */
+  toggleTagBoxes : function() {
+    debug.log('[DealForm][toggleTagBoxes]');
+    jQuery('ul.radio_list li.tags-select input:radio').live('click',
+        function() {
+          var lId = jQuery(this).attr('id');
+          if (lId == 'no_insert_categories') {
+            jQuery('#deal_tag_row').hide();
+          } else {
+            jQuery('#deal_tag_row').show();
+          }
+        });
+  },  
+  
+  /**
    * set the radiobuttons if user click on the label-field
    * 
    * @author KM
@@ -244,7 +263,6 @@ var DealForm = {
       jQuery('#radio-single-quantity-unltd').attr('checked', true);
       return true;
     });
-    
   },
   
   /**
