@@ -7,19 +7,24 @@
  */
 class MongoUtils {
 
-  public static function getTopActivityUrl($domain, $fromDate, $toDate, $aggregation) {
-    $topActivities = MongoUtils::getTopActivityUrlData($domain, $fromDate, $toDate, $aggregation);
+  public static function getTopActivityUrl($domain, $fromDate, $toDate, $aggregation, $dealId=null) {
+    $topActivities = MongoUtils::getTopActivityUrlData($domain, $fromDate, $toDate, $aggregation, $dealId);
     return $topActivities['data'][0]['url'];
   }
 
-  public static function getTopActivityUrlData($domain, $fromDate, $toDate, $aggregation) {
-    return MongoUtils::getTopActivitiesData($domain, $fromDate, $toDate, $aggregation, 1);
+  public static function getTopActivityUrlData($domain, $fromDate, $toDate, $aggregation, $dealId=null) {
+    return MongoUtils::getTopActivitiesData($domain, $fromDate, $toDate, $aggregation, 1, $dealId);
   }
 
-  public static function getTopActivitiesData($domain, $fromDate, $toDate, $aggregation, $limit=10) {
+  public static function getTopActivitiesData($domain, $fromDate, $toDate, $aggregation, $limit=10, $dealId=null) {
     $col = MongoUtils::getCollection('analytics.activities');
     $keys = array("url" => 1);
     $cond = array("host" => $domain, "date" => array('$gte' => new MongoDate(strtotime($fromDate)), '$lte' => new MongoDate(strtotime($toDate))));
+
+    if($dealId) {
+      $dealId = intval($dealId);
+      $cond['d_id'] = $dealId;
+    }
 
     $initial = array(
       "total" => 0,
@@ -100,15 +105,20 @@ class MongoUtils {
    * @param string $aggregation: The aggregation type (daily, weekly, monthly)
    * @return array The raw data as it comes from the mongo db
    */
-  public static function getDataForRange($type, $domain, $fromDate, $toDate, $aggregation, $url=null) {
+  public static function getDataForRange($type, $domain, $fromDate, $toDate, $aggregation, $url=null, $dealId=null) {
     $type = strstr($type, 'activities') ? 'activities' : 'demografics'; // Merging types
-    $col = MongoUtils::getCollection('charts', $domain);
-
+    $col = MongoUtils::getCollection($dealId ? 'deals' : 'charts', $domain);
+    
     $keys = array("date" => 1);
     $cond = array("date" => array('$gte' => new MongoDate(strtotime($fromDate)), '$lte' => new MongoDate(strtotime($toDate))));
 
     if($url) {
-      $cond['url'] = $url;
+      //$cond['url'] = $url;
+    }
+    
+    if($dealId) {
+      $dealId = intval($dealId);
+      $cond['d_id'] = $dealId;
     }
 
     $initial = MongoUtils::getInitial($type);
@@ -116,11 +126,15 @@ class MongoUtils {
 
     $g = $col->group($keys, $initial, $reduce, array("condition" => $cond));
     $data['data'] = MongoUtils::getDataWithEmptyDayPadding($g['retval'], $fromDate, $toDate);
-
+    
     $data['filter'] = MongoUtils::getFilter($domain, $fromDate, $toDate, $aggregation);
 
     if($url) {
       $data['filter']['url'] = $url;
+    }
+
+    if($dealId) {
+      $data['filter']['deal_id'] = $dealId;
     }
 
     if($type == 'activities') {
