@@ -22,8 +22,8 @@ var ViewRangeChart = {
 		   },
 		    subtitle: {
 		      text: document.ontouchstart === undefined ?
-			         <?php echo __('Click and drag in the plot area to zoom in'); ?> :
-				         <?php echo __('Drag your finger over the plot to zoom in'); ?>
+			         "<?php echo __('Click and drag in the plot area to zoom in'); ?>" :
+				       "<?php echo __('Drag your finger over the plot to zoom in'); ?>"
 		   },
 		   xAxis: {
 		      type: 'datetime',
