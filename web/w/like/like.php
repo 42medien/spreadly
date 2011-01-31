@@ -115,7 +115,7 @@
 	  </div>
 
 	  <!-- Text information -->
-	  <div id="additional_text_area_like" class="left big_space_to_left" style="color: <?php echo $lFontcolor; ?>">
+	  <div id="additional_text_area" class="left big_space_to_left additional_text_area_like" style="color: <?php echo $lFontcolor; ?>">
 	    <?php if($lSocialObjectArray['urlerror']) { ?>
 	      <p id="error-area" style="color: red; font-weight: bold; font-size: 11px;">INVALID URL: URL param must be valid or empty</p>
 		  <?php } else { ?>

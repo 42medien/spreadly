@@ -114,8 +114,7 @@ ul li{margin:0;padding:0;list-style: none;float:left;}
  */
 #additional_text_area{height:23px;overflow:hidden;line-height: 11px;float: left;padding: 0;}
 #additional_text_area p{margin:0;font-size: 11px;}
-#additional_text_area_like{height:23px;overflow:hidden;line-height: 23px;float: left;padding: 0;}
-#additional_text_area_like p{font-size: 11px;margin:0;}
+#additional_text_area.additional_text_area_like{line-height: 23px;}
 .big_space_to_left{margin-left: 12px;}
 .small_space_to_left{margin-left: 3px;}
 
