@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * handles all stats-mongo-requests
+ *
+ * @author Hannes Schippmann
+ * @author Matthias Pfefferle
+ */
 class MongoUtils {
 
   public static function getTopActivityUrl($domain, $fromDate, $toDate, $aggregation) {
@@ -181,11 +186,11 @@ class MongoUtils {
     $res = array();
     $res['total'] = array();
     $res['ratio'] = array();
-    
+
     foreach (PseudoStatsModel::$demografics as $demo) {
       $res['total'][$demo] = $res['ratio'][$demo] = PseudoStatsModel::getPrefilledDemograficsArray($demo);
     }
-    
+
     return $res;
   }
 
@@ -206,7 +211,7 @@ class MongoUtils {
     foreach (PseudoStatsModel::$demografics as $demo) {
       $res['total'][$demo]['all'] = array_sum($res['total'][$demo]);
     }
-    
+
     // generate age, gender and relationship ratios
     foreach (PseudoStatsModel::$demografics as $demo) {
       foreach (PseudoStatsModel::getDemograficsKeys($demo) as $key) {
