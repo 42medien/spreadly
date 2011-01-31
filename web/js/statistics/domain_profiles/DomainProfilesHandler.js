@@ -12,6 +12,7 @@ var DomainProfilesHandler = {
    * @author hannes
    */
   init: function() {
+    debug.log('[DomainProfilesHandler][init]');
     DomainProfilesHandler.addNew();
     DomainProfilesHandler.getCode();
     DomainProfilesHandler.deleteDomain();
@@ -22,23 +23,32 @@ var DomainProfilesHandler = {
     jQuery.fx.off = false;
   },
   
+  /**
+   * adds a new domain-profile
+   * @author KM
+   */
   addNew: function() {
-    var lAddErrorTimeout = '', lAddDomainTimeout = '';
+    debug.log('[DomainProfilesHandler][addNew]');    
+    var lAddErrorTimeout = '', lAddDomainTimeout = '', lCssId='';
+    
     jQuery('#new_domain_profile_form').ajaxForm({
       beforeSubmit: OnLoadGrafic.showGrafic,
       success: function(pResponse) {
+        //if the domain-profile is successfully created
         if(pResponse.success == true) {
           if(jQuery('table#domain_profiles_table tbody tr:first').attr('id') == 'no-claim') {
             jQuery('table#domain_profiles_table tbody tr:first').remove();
           }
           jQuery('#domain_profiles_table tbody').prepend(pResponse.domain_profiles_table);
-          var lCssId = jQuery(pResponse.domain_profiles_table).attr('id');
+          lCssId = jQuery(pResponse.domain_profiles_table).attr('id');
           jQuery('#'+lCssId).fadeIn('slow');
           DomainProfilesHandler.showCode('/domain_profiles/get_verify_code?host_id='+pResponse.host_id);
         } else if(pResponse.success == false) {
+          //if there is thrown an error on creating an domain-profile
           jQuery('#add-url-error').empty();
           jQuery('#add-url-error').append(pResponse.formerror);
           jQuery('#add-url-error').show('slow');
+          //hides errors after 5 seconds
           clearTimeout(lAddErrorTimeout);
           lAddErrorTimeout = setTimeout(function() {
             jQuery('#add-url-error').hide('slow');
@@ -50,7 +60,12 @@ var DomainProfilesHandler = {
     });    
   },
   
+  /**
+   * binds click to show the microid-code
+   * @author KM
+   */
   getCode: function() {
+    debug.log('[DomainProfilesHandler][getCode]');       
     jQuery('.get-verify-code').live('click', function() {
       OnLoadGrafic.showGrafic();
       var lAction = jQuery(this).attr('href');
@@ -59,6 +74,11 @@ var DomainProfilesHandler = {
     });
   },
   
+  /**
+   * shows the code after a request to the action given in pAction-param
+   * @author KM
+   * @param pAction
+   */
   showCode: function(pAction) {
     debug.log('[DomainProfilesHandler][showCode]');
     jQuery.ajax({
@@ -75,7 +95,12 @@ var DomainProfilesHandler = {
     });       
   },
   
+  /**
+   * close the show code box and shows the add-profile-form
+   * @author KM
+   */
   closeCode: function() {
+    debug.log('[DomainProfilesHandler][closeCode]');    
     jQuery('#close-verify-code').live('click', function() {
       jQuery('#add-domain-profiles').empty();
       jQuery('#add-domain-profiles').append(DomainProfilesHandler.aClaimHtml);  
@@ -84,7 +109,11 @@ var DomainProfilesHandler = {
     });
   },
   
+  /**
+   * 
+   */
   deleteDomain: function() {
+    debug.log('[DomainProfilesHandler][deleteDomain]');      
     jQuery('.delete-verify-code').live('click', function() {
       var lConfirm = confirm(i18n.get('DELETE_DOMAIN'));
       OnLoadGrafic.showGrafic();
