@@ -108,7 +108,7 @@ class MongoUtils {
 
     $initial = MongoUtils::getInitial($type);
     $reduce = MongoUtils::getReduce($type);
-    
+
     $g = $col->group($keys, $initial, $reduce, array("condition" => $cond));
 
     $data['data'] = MongoUtils::getDataWithEmptyDayPadding($g['retval'], $fromDate, $toDate);
@@ -266,11 +266,9 @@ class MongoUtils {
     }
 
     foreach ($services as $service) {
-      $res['average'][$service]['likes'] = round($res['total'][$service]['likes']/($days==0 ? 1 : $days), 2);
-      $res['average'][$service]['dislikes'] = round($res['total'][$service]['dislikes']/($days==0 ? 1 : $days), 2);
-      $res['average'][$service]['clickbacks'] = round($res['total'][$service]['clickbacks']/($days==0 ? 1 : $days), 2);
-
-      $res['average'][$service]['contacts'] = round($res['total'][$service]['contacts']/($days==0 ? 1 : $days), 2);
+      foreach (PseudoStatsModel::$activities as $key => $value) {
+        $res['average'][$service][$key] = round($res['total'][$service][$key]/($days==0 ? 1 : $days), 2);
+      }
 
       $res['ratio'][$service]['dislike_like'] = self::getPercentage($res['total'][$service]['likes'], $res['total'][$service]['dislikes']);
       $res['ratio'][$service]['clickback_activities'] = self::getPercentage($res['total'][$service]['activities'], $res['total'][$service]['clickbacks']);
@@ -279,9 +277,9 @@ class MongoUtils {
       $res['ratio'][$service]['dislike_percentage'] = self::getPercentage($res['total'][$service]['activities'], $res['total'][$service]['dislikes']);
     }
 
-    $res['average']['all']['likes'] = round($res['total']['all']['likes']/($days==0 ? 1 : $days), 2);
-    $res['average']['all']['dislikes'] = round($res['total']['all']['dislikes']/($days==0 ? 1 : $days), 2);
-    $res['average']['all']['clickbacks'] = round($res['total']['all']['clickbacks']/($days==0 ? 1 : $days), 2);
+    foreach (PseudoStatsModel::$activities as $key => $value) {
+      $res['average']['all'][$key] = round($res['total']['all'][$key]/($days==0 ? 1 : $days), 2);
+    }
 
     $res['ratio']['all']['dislike_like'] = self::getPercentage($res['total']['all']['likes'], $res['total']['all']['dislikes']);
     $res['ratio']['all']['clickback_activities'] = self::getPercentage($res['total']['all']['activities'], $res['total']['all']['clickbacks']);
