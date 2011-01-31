@@ -153,12 +153,8 @@ class MongoUtils {
   }
 
   private static function initArray() {
-    $res = array();
-    $res['likes'] = 0;
-    $res['dislikes'] = 0;
+    $res = PseudoStatsModel::getPrefilledActivitiesArray();
     $res['activities'] = 0;
-    $res['clickbacks'] = 0;
-    $res['contacts'] = 0;
     return $res;
   }
 
@@ -185,11 +181,11 @@ class MongoUtils {
     $res = array();
     $res['total'] = array();
     $res['ratio'] = array();
-
-    $res['total']['age'] = $res['ratio']['age'] = PseudoStatsModel::getPrefilledAgeArray();
-    $res['total']['gender'] = $res['ratio']['gender'] = PseudoStatsModel::getPrefilledGenderArray();
-    $res['total']['relationship'] = $res['ratio']['relationship'] = PseudoStatsModel::getPrefilledRelationshipArray();
-
+    
+    foreach (PseudoStatsModel::$demografics as $demo) {
+      $res['total'][$demo] = $res['ratio'][$demo] = PseudoStatsModel::getPrefilledDemograficsArray($demo);
+    }
+    
     return $res;
   }
 
@@ -198,50 +194,26 @@ class MongoUtils {
     $res = MongoUtils::initDemograficStats();
 
     for ($i=0; $i < count($mongoData); $i++) {
-      if(isset($mongoData[$i]['age'])) {
-        foreach (PseudoStatsModel::$age as $age) {
-          $res['total']['age'][$age]    += $mongoData[$i]['age'][$age]   ;
-        }
-      }
-
-      if(isset($mongoData[$i]['gender'])) {
-        foreach (PseudoStatsModel::$gender as $gender) {
-          $res['total']['gender'][$gender] += $mongoData[$i]['gender'][$gender];
-        }
-      }
-
-      if(isset($mongoData[$i]['relationship'])) {
-        foreach (PseudoStatsModel::$relationship as $rel) {
-          $res['total']['relationship'][$rel]  += $mongoData[$i]['relationship'][$rel];
+      foreach (PseudoStatsModel::$demografics as $demo) {
+        if(isset($mongoData[$i][$demo])) {
+          foreach (PseudoStatsModel::getDemograficsKeys($demo) as $key) {
+            $res['total'][$demo][$key] += $mongoData[$i][$demo][$key];
+          }
         }
       }
     }
 
-    $res['total']['age']['all']    =  array_sum($res['total']['age']);
-    $res['total']['gender']['all'] =  array_sum($res['total']['gender']);
-    $res['total']['relationship']['all'] =  array_sum($res['total']['relationship']);
-
-    // generate age ratio
-    foreach (PseudoStatsModel::$age as $age) {
-      $res['ratio']['age'][$age] = 0;
-      if ($res['total']['age']['all']!=0) {
-        $res['ratio']['age'][$age]    = round($res['total']['age'][$age]/$res['total']['age']['all']*100);
-      }
+    foreach (PseudoStatsModel::$demografics as $demo) {
+      $res['total'][$demo]['all'] = array_sum($res['total'][$demo]);
     }
-
-    // generate gender ratio
-    foreach (PseudoStatsModel::$gender as $gender) {
-      $res['ratio']['gender'][$gender] = 0;
-      if ($res['total']['gender']['all'] != 0) {
-        $res['ratio']['gender'][$gender] = round($res['total']['gender'][$gender]/$res['total']['gender']['all']*100);
-      }
-    }
-
-    // generate relationship ratio
-    foreach (PseudoStatsModel::$relationship as $rel) {
-      $res['ratio']['relationship'][$rel] = 0;
-      if ($res['total']['relationship']['all'] != 0) {
-        $res['ratio']['relationship'][$rel] = round($res['total']['relationship'][$rel]/$res['total']['relationship']['all']*100);
+    
+    // generate age, gender and relationship ratios
+    foreach (PseudoStatsModel::$demografics as $demo) {
+      foreach (PseudoStatsModel::getDemograficsKeys($demo) as $key) {
+        $res['ratio'][$demo][$key] = 0;
+        if ($res['total'][$demo]['all']!=0) {
+          $res['ratio'][$demo][$key] = round($res['total'][$demo][$key]/$res['total'][$demo]['all']*100);
+        }
       }
     }
 
