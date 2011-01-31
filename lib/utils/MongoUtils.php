@@ -88,12 +88,12 @@ class MongoUtils {
   /**
    * Querys the MongoDB and retrieves the raw data through map/reduce
    *
-   * @param type: The type of data to get. Selects the correct map/reduce functions
-   * @param domain: The domain used to find the correct collection
-   * @param fromDate: The fromDate of the range
-   * @param toDate: The toDate of the range
-   * @param aggregation: The aggregation type (daily, weekly, monthly)
-   * @return The raw data as it comes from the mongo db
+   * @param string $type: The type of data to get. Selects the correct map/reduce functions
+   * @param string $domain: The domain used to find the correct collection
+   * @param string $fromDate: The fromDate of the range
+   * @param string $toDate: The toDate of the range
+   * @param string $aggregation: The aggregation type (daily, weekly, monthly)
+   * @return array The raw data as it comes from the mongo db
    */
   public static function getDataForRange($type, $domain, $fromDate, $toDate, $aggregation, $url=null) {
     $type = strstr($type, 'activities') ? 'activities' : 'demografics'; // Merging types
@@ -172,15 +172,11 @@ class MongoUtils {
     foreach ($services as $service) {
       $res['total'][$service] = MongoUtils::initArray();
       $res['average'][$service] = MongoUtils::initArray();
-      $res['ratio'][$service] = array();
-      $res['ratio'][$service]['dislike_like'] = 0;
-      $res['ratio'][$service]['clickback_like'] = 0;
+      $res['ratio'][$service] = array('dislike_like' => 0, 'clickback_like' => 0);
     }
     $res['total']['all'] = MongoUtils::initArray();
     $res['average']['all'] = MongoUtils::initArray();
-    $res['ratio']['all'] = array();
-    $res['ratio']['all']['dislike_like'] = 0;
-    $res['ratio']['all']['clickback_like'] = 0;
+    $res['ratio']['all'] = array('dislike_like' => 0, 'clickback_like' => 0);
 
     return $res;
   }
@@ -203,28 +199,21 @@ class MongoUtils {
 
     for ($i=0; $i < count($mongoData); $i++) {
       if(isset($mongoData[$i]['age'])) {
-        $res['total']['age']['u_18']    += $mongoData[$i]['age']['u_18']   ;
-        $res['total']['age']['b_18_24'] += $mongoData[$i]['age']['b_18_24'];
-        $res['total']['age']['b_25_34'] += $mongoData[$i]['age']['b_25_34'];
-        $res['total']['age']['b_35_54'] += $mongoData[$i]['age']['b_35_54'];
-        $res['total']['age']['o_55']    += $mongoData[$i]['age']['o_55']   ;
+        foreach (PseudoStatsModel::$age as $age) {
+          $res['total']['age'][$age]    += $mongoData[$i]['age'][$age]   ;
+        }
       }
 
       if(isset($mongoData[$i]['gender'])) {
-        $res['total']['gender']['m'] += $mongoData[$i]['gender']['m'];
-        $res['total']['gender']['f'] += $mongoData[$i]['gender']['f'];
-        $res['total']['gender']['u'] += $mongoData[$i]['gender']['u'];
+        foreach (PseudoStatsModel::$gender as $gender) {
+          $res['total']['gender'][$gender] += $mongoData[$i]['gender'][$gender];
+        }
       }
 
       if(isset($mongoData[$i]['relationship'])) {
-        $res['total']['relationship']['singl']  += $mongoData[$i]['relationship']['singl'];
-        $res['total']['relationship']['eng']    += $mongoData[$i]['relationship']['eng']  ;
-        $res['total']['relationship']['compl']  += $mongoData[$i]['relationship']['compl'];
-        $res['total']['relationship']['mar']    += $mongoData[$i]['relationship']['mar']  ;
-        $res['total']['relationship']['rel']    += $mongoData[$i]['relationship']['rel']  ;
-        $res['total']['relationship']['ior']    += $mongoData[$i]['relationship']['ior']  ;
-        $res['total']['relationship']['wid']    += $mongoData[$i]['relationship']['wid']  ;
-        $res['total']['relationship']['u']      += $mongoData[$i]['relationship']['u']    ;
+        foreach (PseudoStatsModel::$relationship as $rel) {
+          $res['total']['relationship'][$rel]  += $mongoData[$i]['relationship'][$rel];
+        }
       }
     }
 
@@ -232,24 +221,29 @@ class MongoUtils {
     $res['total']['gender']['all'] =  array_sum($res['total']['gender']);
     $res['total']['relationship']['all'] =  array_sum($res['total']['relationship']);
 
-    $res['ratio']['age']['u_18']    = round($res['total']['age']['u_18']   /($res['total']['age']['all']==0 ? 1 : $res['total']['age']['all'])*100);
-    $res['ratio']['age']['b_18_24'] = round($res['total']['age']['b_18_24']/($res['total']['age']['all']==0 ? 1 : $res['total']['age']['all'])*100);
-    $res['ratio']['age']['b_25_34'] = round($res['total']['age']['b_25_34']/($res['total']['age']['all']==0 ? 1 : $res['total']['age']['all'])*100);
-    $res['ratio']['age']['b_35_54'] = round($res['total']['age']['b_35_54']/($res['total']['age']['all']==0 ? 1 : $res['total']['age']['all'])*100);
-    $res['ratio']['age']['o_55']    = round($res['total']['age']['o_55']   /($res['total']['age']['all']==0 ? 1 : $res['total']['age']['all'])*100);
+    // generate age ratio
+    foreach (PseudoStatsModel::$age as $age) {
+      $res['ratio']['age'][$age] = 0;
+      if ($res['total']['age']['all']!=0) {
+        $res['ratio']['age'][$age]    = round($res['total']['age'][$age]/$res['total']['age']['all']*100);
+      }
+    }
 
-    $res['ratio']['gender']['m'] = round($res['total']['gender']['m']/($res['total']['gender']['all']==0 ? 1 : $res['total']['gender']['all'])*100);
-    $res['ratio']['gender']['f'] = round($res['total']['gender']['f']/($res['total']['gender']['all']==0 ? 1 : $res['total']['gender']['all'])*100);
-    $res['ratio']['gender']['u'] = round($res['total']['gender']['u']/($res['total']['gender']['all']==0 ? 1 : $res['total']['gender']['all'])*100);
+    // generate gender ratio
+    foreach (PseudoStatsModel::$gender as $gender) {
+      $res['ratio']['gender'][$gender] = 0;
+      if ($res['total']['gender']['all'] != 0) {
+        $res['ratio']['gender'][$gender] = round($res['total']['gender'][$gender]/$res['total']['gender']['all']*100);
+      }
+    }
 
-    $res['ratio']['relationship']['singl']  = round($res['total']['relationship']['singl']/($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
-    $res['ratio']['relationship']['eng']    = round($res['total']['relationship']['eng']  /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
-    $res['ratio']['relationship']['compl']  = round($res['total']['relationship']['compl']/($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
-    $res['ratio']['relationship']['mar']    = round($res['total']['relationship']['mar']  /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
-    $res['ratio']['relationship']['rel']    = round($res['total']['relationship']['rel']  /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
-    $res['ratio']['relationship']['ior']    = round($res['total']['relationship']['ior']  /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
-    $res['ratio']['relationship']['wid']    = round($res['total']['relationship']['wid']  /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
-    $res['ratio']['relationship']['u']      = round($res['total']['relationship']['u']    /($res['total']['relationship']['all']==0 ? 1 : $res['total']['relationship']['all'])*100);
+    // generate relationship ratio
+    foreach (PseudoStatsModel::$relationship as $rel) {
+      $res['ratio']['relationship'][$rel] = 0;
+      if ($res['total']['relationship']['all'] != 0) {
+        $res['ratio']['relationship'][$rel] = round($res['total']['relationship'][$rel]/$res['total']['relationship']['all']*100);
+      }
+    }
 
     return $res;
   }
@@ -261,17 +255,13 @@ class MongoUtils {
 
     for ($i=0; $i < count($mongoData); $i++) {
       foreach ($services as $service) {
-        $res['total'][$service]['likes'] += $mongoData[$i][$service]['likes'];
-        $res['total'][$service]['dislikes'] += $mongoData[$i][$service]['dislikes'];
-        $res['total'][$service]['activities'] += $mongoData[$i][$service]['likes']+$mongoData[$i][$service]['dislikes'];
-        $res['total'][$service]['clickbacks'] += $mongoData[$i][$service]['clickbacks'];
-        $res['total'][$service]['contacts'] += $mongoData[$i][$service]['contacts'];
+        foreach (PseudoStatsModel::$activities as $key => $value) {
+          $res['total'][$service][$key] += $mongoData[$i][$service][$key];
+          $res['total']['all'][$key] += $mongoData[$i][$service][$key];
+        }
 
-        $res['total']['all']['likes'] += $mongoData[$i][$service]['likes'];
-        $res['total']['all']['dislikes'] += $mongoData[$i][$service]['dislikes'];
+        $res['total'][$service]['activities'] += $mongoData[$i][$service]['likes']+$mongoData[$i][$service]['dislikes'];
         $res['total']['all']['activities'] += $mongoData[$i][$service]['likes']+$mongoData[$i][$service]['dislikes'];
-        $res['total']['all']['clickbacks'] += $mongoData[$i][$service]['clickbacks'];
-        $res['total']['all']['contacts'] += $mongoData[$i][$service]['contacts'];
       }
     }
 
@@ -282,41 +272,22 @@ class MongoUtils {
 
       $res['average'][$service]['contacts'] = round($res['total'][$service]['contacts']/($days==0 ? 1 : $days), 2);
 
-      $res['ratio'][$service]['dislike_like'] =
-        $res['total'][$service]['likes'] == 0 ? 0 :  round($res['total'][$service]['dislikes']/$res['total'][$service]['likes']*100);
-
-      $res['ratio'][$service]['clickback_activities'] =
-        $res['total'][$service]['activities'] == 0 ? 0 :  round($res['total'][$service]['clickbacks']/$res['total'][$service]['activities']*100);
-
-      $res['ratio'][$service]['contacts_activities'] =
-        $res['total'][$service]['activities'] == 0 ? 0 :  round($res['total'][$service]['contacts']/$res['total'][$service]['activities']*100);
-
-      $res['ratio'][$service]['like_percentage'] =
-        ($res['total'][$service]['activities']) == 0 ? 0 :  round($res['total'][$service]['likes']/($res['total'][$service]['activities'])*100);
-
-      $res['ratio'][$service]['dislike_percentage'] =
-        ($res['total'][$service]['activities']) == 0 ? 0 :  round($res['total'][$service]['dislikes']/($res['total'][$service]['activities'])*100);
-
+      $res['ratio'][$service]['dislike_like'] = self::getPercentage($res['total'][$service]['likes'], $res['total'][$service]['dislikes']);
+      $res['ratio'][$service]['clickback_activities'] = self::getPercentage($res['total'][$service]['activities'], $res['total'][$service]['clickbacks']);
+      $res['ratio'][$service]['contacts_activities'] = self::getPercentage($res['total'][$service]['activities'], $res['total'][$service]['contacts']);
+      $res['ratio'][$service]['like_percentage'] = self::getPercentage($res['total'][$service]['activities'], $res['total'][$service]['likes']);
+      $res['ratio'][$service]['dislike_percentage'] = self::getPercentage($res['total'][$service]['activities'], $res['total'][$service]['dislikes']);
     }
 
     $res['average']['all']['likes'] = round($res['total']['all']['likes']/($days==0 ? 1 : $days), 2);
     $res['average']['all']['dislikes'] = round($res['total']['all']['dislikes']/($days==0 ? 1 : $days), 2);
     $res['average']['all']['clickbacks'] = round($res['total']['all']['clickbacks']/($days==0 ? 1 : $days), 2);
 
-    $res['ratio']['all']['dislike_like'] =
-      $res['total']['all']['likes'] == 0 ? 0 :  round($res['total']['all']['dislikes']/$res['total']['all']['likes']*100);
-
-    $res['ratio']['all']['clickback_activities'] =
-      $res['total']['all']['activities'] == 0 ? 0 :  round($res['total']['all']['clickbacks']/$res['total']['all']['activities']*100);
-
-    $res['ratio']['all']['contacts_activities'] =
-      $res['total']['all']['activities'] == 0 ? 0 :  round($res['total']['all']['contacts']/$res['total']['all']['activities']*100);
-
-    $res['ratio']['all']['like_percentage'] =
-      ($res['total']['all']['activities']) == 0 ? 0 :  round($res['total']['all']['likes']/($res['total']['all']['activities'])*100);
-
-    $res['ratio']['all']['dislike_percentage'] =
-      ($res['total']['all']['activities']) == 0 ? 0 :  round($res['total']['all']['dislikes']/($res['total']['all']['activities'])*100);
+    $res['ratio']['all']['dislike_like'] = self::getPercentage($res['total']['all']['likes'], $res['total']['all']['dislikes']);
+    $res['ratio']['all']['clickback_activities'] = self::getPercentage($res['total']['all']['activities'], $res['total']['all']['clickbacks']);
+    $res['ratio']['all']['contacts_activities'] = self::getPercentage($res['total']['all']['activities'], $res['total']['all']['contacts']);
+    $res['ratio']['all']['like_percentage'] = self::getPercentage($res['total']['all']['activities'], $res['total']['all']['likes']);
+    $res['ratio']['all']['dislike_percentage'] = self::getPercentage($res['total']['all']['activities'], $res['total']['all']['dislikes']);
 
     return $res;
   }
@@ -445,6 +416,23 @@ class MongoUtils {
       default:
         return null;
         break;
+    }
+  }
+
+  /**
+   * creates a percentage value
+   *
+   * @author Matthias Pfefferle
+   * @param int $total
+   * @param int $part
+   * @return int
+   */
+  private static function getPercentage($total, $part) {
+    if ($total = 0) {
+      return 0;
+    } else {
+      $percent = round($part/$total*100);
+      return $percent;
     }
   }
 }
