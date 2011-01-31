@@ -31,11 +31,11 @@ class Deal extends BaseDeal {
   public function getActiveCssClass() {
     return ($this->isActive() ? 'deal_active' : 'deal_inactive');
   }
-  
+
   public function getCssClasses() {
     return $this->getState().' '.($this->getState()=='approved' ? $this->getActiveCssClass() : '');
   }
-  
+
   public function isActive() {
     $lNow = time();
     return $this->getState()=='approved' &&
@@ -45,22 +45,22 @@ class Deal extends BaseDeal {
   }
 
   public function popCoupon() {
-    $code = null;    
+    $code = null;
     $coupon = CouponTable::getInstance()->createQuery()
       ->where("deal_id = ?", $this->getId())
       ->limit(1)
       ->orderBy("id")
       ->fetchOne();
-    
+
     if($coupon) {
-      $code = $coupon->getCode();      
+      $code = $coupon->getCode();
       if($this->getCouponType()==DealTable::COUPON_TYPE_MULTIPLE) {
         $coupon->delete();
       }
       $this->setCouponClaimedQuantity($this->getCouponClaimedQuantity()+1);
       $this->save();
     }
-    
+
     return $code;
   }
 
@@ -78,7 +78,7 @@ class Deal extends BaseDeal {
     }
     return $lAllEmpty;
   }
-  
+
   private static function compactArray($element) {
     return !empty($element);
   }
@@ -96,9 +96,9 @@ class Deal extends BaseDeal {
       $couponString = preg_replace('/\s/', '', $couponString);
       $codes = explode(',', $couponString);
     }
-    
+
     $codes = array_filter($codes, array('Deal', 'compactArray'));
-    
+
     foreach ($codes as $code) {
       if(!empty($code)) {
         $c = new Coupon();
@@ -140,9 +140,12 @@ class Deal extends BaseDeal {
     $array['human_coupon_quantity'] = $this->getHumanCouponQuantity();
     $array['is_unlimited'] = $this->isUnlimited();
     $array['host'] = $this->getDomainProfile()->getUrl();
+    if ($this->getTags()) {
+      $array['tags'] = $this->getTagsAsArray();
+    }
     return $array;
   }
-  
+
   public function validateNewQuantity($newQuantity) {
     $lError = "";
     if(!$this->isUnlimited()) {
@@ -159,10 +162,10 @@ class Deal extends BaseDeal {
     } else {
       $lError = "You can not change the quantity of unlimited coupons.";
     }
-    
+
     return empty($lError) ? true : $lError;
   }
-  
+
   public function validateNewEndDate($pDateString) {
     $lError = '';
     $lNewDate = strtotime($pDateString);
@@ -173,7 +176,7 @@ class Deal extends BaseDeal {
       $lError = "The new end date must be in the future";
     } else {
       $this->setEndDate(date("Y-m-d H:i:s", $lNewDate));
-      
+
       if(DealTable::isOverlapping($this)) {
         $lError = "The new end date is overlapping another deal";
         $this->setEndDate(date("Y-m-d H:i:s", $lCurrentDate));
@@ -181,9 +184,28 @@ class Deal extends BaseDeal {
     }
     return empty($lError) ? true : $lError;
   }
-  
+
   public function postSave($event) {
     $eventName = $this->getTable()->getTableName().".changed";
     sfProjectConfiguration::getActive()->getEventDispatcher()->notify(new sfEvent($this, $eventName));
+  }
+
+  /**
+   * Enter description here...
+   *
+   * @return array|null
+   */
+  public function getTagsAsArray() {
+    $lTags = $this->getTags();
+
+    if (!$lTags) {
+      return null;
+    }
+
+    $lResult = array();
+    foreach (explode(",",$lTags) as $lTag) {
+      $lResult[] = trim($lTag);
+    }
+    return $lResult;
   }
 }
