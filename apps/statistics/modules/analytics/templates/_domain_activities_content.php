@@ -1,11 +1,11 @@
 <?php use_helper('ChartData') ?>
-<h2><?php echo __('%community% likes (and dislikes)', array('%community%' => $pCom)); ?></h2>
+<h2><?php echo __('%community% Likes/Dislikes', array('%community%' => ucfirst($pCom))); ?></h2>
 <div class="content-box bg-white">
 	<?php include_partial('analytics/chart_line_activities', array('pData' => $pData, 'pCommunity' => $pCom))?>
 </div>
 
 
-<h2><?php echo __('%community% key data', array('%community%' => $pCom)); ?><?php echo __('from %datefrom% - %dateto%', array('%datefrom%' => $pFrom, '%dateto%' => $pTo)); ?></h2>
+<h2><?php echo __('%community% Key Data', array('%community%' => ucfirst($pCom))); ?> <?php echo __('from %datefrom% - %dateto%', array('%datefrom%' => $pFrom, '%dateto%' => $pTo)); ?></h2>
 <div class="content-box bg-white third-box left">
 	<ul class="analytics-stats-list">
 		<li><h3><?php echo __('Total values'); ?></h3>
@@ -33,7 +33,7 @@
 		<li><h3><?php echo __('Percentage'); ?></h3>
 			<ul>
 				<li><?php echo __('%likes%% Dislike / Like Ratio', array('%likes%' => $pData['statistics']['ratio'][$pCom]['dislike_like'])); ?></li>
-				<li><?php echo __('%dislikes%% Clickback / Activity Ratio', array('%dislikes%' => $pData['statistics']['ratio'][$pCom]['clickback_activities'])); ?></li>
+				<li><?php echo __('%clickbacks%% Clickback / Activity Ratio', array('%clickbacks%' => $pData['statistics']['ratio'][$pCom]['clickback_activities'])); ?></li>
 			</ul>
 		</li>
 	</ul>

@@ -2,7 +2,7 @@
 	<li>
 		<?php echo __('URLs'); ?>
 		<ul class="clearfix">
-			<li><?php echo link_to(__('All'), '@get_analytics_content', array('query_string' => 'com=all&type=url_activities&host_id='.$pHostId.'&date-from='.$pDateFrom.'&date-to='.$pDateTo.'&url='.$pUrl.'&dealid='.$pDealId, 'class' => 'analytix-filter-link')); ?></li>
+			<li><?php echo link_to(__('All networks'), '@get_analytics_content', array('query_string' => 'com=all&type=url_activities&host_id='.$pHostId.'&date-from='.$pDateFrom.'&date-to='.$pDateTo.'&url='.$pUrl.'&dealid='.$pDealId, 'class' => 'analytix-filter-link')); ?></li>
 			<li><?php echo link_to(__('Facebook'), '@get_analytics_content', array('query_string' => 'com=facebook&type=url_activities&host_id='.$pHostId.'&date-from='.$pDateFrom.'&date-to='.$pDateTo.'&url='.$pUrl, 'class' => 'analytix-filter-link')); ?></li>
 			<li><?php echo link_to(__('Twitter'), '@get_analytics_content', array('query_string' => 'com=twitter&type=url_activities&host_id='.$pHostId.'&date-from='.$pDateFrom.'&date-to='.$pDateTo.'&url='.$pUrl, 'class' => 'analytix-filter-link')); ?></li>
 			<li><?php echo link_to(__('LinkedIn'), '@get_analytics_content', array('query_string' => 'com=linkedin&type=url_activities&host_id='.$pHostId.'&date-from='.$pDateFrom.'&date-to='.$pDateTo.'&url='.$pUrl, 'class' => 'analytix-filter-link')); ?></li>
@@ -15,7 +15,7 @@
 	<li>
 		<?php echo __('Activities'); ?>
 		<ul class="clearfix">
-			<li><?php echo link_to(__('All'), '@get_analytics_content', array('query_string' => 'com=all&type=domain_activities&host_id='.$pHostId.'&date-from='.$pDateFrom.'&date-to='.$pDateTo, 'class' => 'analytix-filter-link')); ?></li>
+			<li><?php echo link_to(__('All networks'), '@get_analytics_content', array('query_string' => 'com=all&type=domain_activities&host_id='.$pHostId.'&date-from='.$pDateFrom.'&date-to='.$pDateTo, 'class' => 'analytix-filter-link')); ?></li>
 			<li><?php echo link_to(__('Facebook'), '@get_analytics_content', array('query_string' => 'com=facebook&type=domain_activities&host_id='.$pHostId.'&date-from='.$pDateFrom.'&date-to='.$pDateTo, 'class' => 'analytix-filter-link')); ?></li>
 			<li><?php echo link_to(__('Twitter'), '@get_analytics_content', array('query_string' => 'com=twitter&type=domain_activities&host_id='.$pHostId.'&date-from='.$pDateFrom.'&date-to='.$pDateTo, 'class' => 'analytix-filter-link')); ?></li>
 			<li><?php echo link_to(__('LinkedIn'), '@get_analytics_content', array('query_string' => 'com=linkedin&type=domain_activities&host_id='.$pHostId.'&date-from='.$pDateFrom.'&date-to='.$pDateTo, 'class' => 'analytix-filter-link')); ?></li>
@@ -28,7 +28,7 @@
 	<li>
 		<?php echo __('Reach'); ?>
 		<ul class="clearfix">
-			<li><?php echo link_to(__('All'), '@get_analytics_content', array('query_string' => 'com=all&type=reach_activities&host_id='.$pHostId.'&date-from='.$pDateFrom.'&date-to='.$pDateTo, 'class' => 'analytix-filter-link')); ?></li>
+			<li><?php echo link_to(__('All networks'), '@get_analytics_content', array('query_string' => 'com=all&type=reach_activities&host_id='.$pHostId.'&date-from='.$pDateFrom.'&date-to='.$pDateTo, 'class' => 'analytix-filter-link')); ?></li>
 			<li><?php echo link_to(__('Facebook'), '@get_analytics_content', array('query_string' => 'com=facebook&type=reach_activities&host_id='.$pHostId.'&date-from='.$pDateFrom.'&date-to='.$pDateTo, 'class' => 'analytix-filter-link')); ?></li>
 			<li><?php echo link_to(__('Twitter'), '@get_analytics_content', array('query_string' => 'com=twitter&type=reach_activities&host_id='.$pHostId.'&date-from='.$pDateFrom.'&date-to='.$pDateTo, 'class' => 'analytix-filter-link')); ?></li>
 			<li><?php echo link_to(__('LinkedIn'), '@get_analytics_content', array('query_string' => 'com=linkedin&type=reach_activities&host_id='.$pHostId.'&date-from='.$pDateFrom.'&date-to='.$pDateTo, 'class' => 'analytix-filter-link')); ?></li>
