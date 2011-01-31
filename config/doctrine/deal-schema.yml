@@ -24,14 +24,14 @@ Deal:
         trash:
           from: ['submitted', 'paused', 'denied']
           to: trashed
-          
+
   columns:
     domain_profile_id:
       type: integer
       notnull: true
     sf_guard_user_id:
       type: integer
-      notnull: true      
+      notnull: true
     type:
       type: enum
       length: 10
@@ -48,26 +48,29 @@ Deal:
     coupon_claimed_quantity:
       type: integer
       default: 0
+    tags:
+      type: string(512)
+      default: null
     start_date:
       type: datetime
     end_date:
       type: datetime
-    
+
     summary:
       type: string(40)
     description:
       type: string(80)
     button_wording:
       type: string(35)
-      
-    terms_of_deal: 
+
+    terms_of_deal:
       type: string(512)
     redeem_url:
       type: string(512)
     tos_accepted:
       type: boolean
-      default: false 
-          
+      default: false
+
   relations:
     sfGuardUser:
       foreignAlias: Deals
@@ -82,7 +85,7 @@ Deal:
       type: many
       local: id
       foreign: deal_id
-      
+
 Coupon:
   actAs:
     [Timestampable]
