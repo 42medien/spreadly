@@ -115,7 +115,6 @@ class MongoUtils {
     $reduce = MongoUtils::getReduce($type);
 
     $g = $col->group($keys, $initial, $reduce, array("condition" => $cond));
-
     $data['data'] = MongoUtils::getDataWithEmptyDayPadding($g['retval'], $fromDate, $toDate);
 
     $data['filter'] = MongoUtils::getFilter($domain, $fromDate, $toDate, $aggregation);
@@ -187,7 +186,7 @@ class MongoUtils {
     $res['total'] = array();
     $res['ratio'] = array();
 
-    foreach (PseudoStatsModel::$demografics as $demo) {
+    foreach (PseudoStatsModel::$demografics as $demo => $mongoDemoKey) {
       $res['total'][$demo] = $res['ratio'][$demo] = PseudoStatsModel::getPrefilledDemograficsArray($demo);
     }
 
@@ -199,7 +198,7 @@ class MongoUtils {
     $res = MongoUtils::initDemograficStats();
 
     for ($i=0; $i < count($mongoData); $i++) {
-      foreach (PseudoStatsModel::$demografics as $demo) {
+      foreach (PseudoStatsModel::$demografics as $demo => $mongoDemoKey) {
         if(isset($mongoData[$i][$demo])) {
           foreach (PseudoStatsModel::getDemograficsKeys($demo) as $key) {
             $res['total'][$demo][$key] += $mongoData[$i][$demo][$key];
@@ -208,12 +207,12 @@ class MongoUtils {
       }
     }
 
-    foreach (PseudoStatsModel::$demografics as $demo) {
+    foreach (PseudoStatsModel::$demografics as $demo => $mongoDemoKey) {
       $res['total'][$demo]['all'] = array_sum($res['total'][$demo]);
     }
 
     // generate age, gender and relationship ratios
-    foreach (PseudoStatsModel::$demografics as $demo) {
+    foreach (PseudoStatsModel::$demografics as $demo => $mongoDemoKey) {
       foreach (PseudoStatsModel::getDemograficsKeys($demo) as $key) {
         $res['ratio'][$demo][$key] = 0;
         if ($res['total'][$demo]['all']!=0) {
@@ -300,7 +299,7 @@ class MongoUtils {
         break;
       case 'demografics':
         $res = array();
-        foreach (PseudoStatsModel::$demografics as $demo) {
+        foreach (PseudoStatsModel::$demografics as $demo => $mongoDemoKey) {
           $res[$demo] = PseudoStatsModel::getPrefilledDemograficsArray($demo);
         }
         return $res;
@@ -321,28 +320,26 @@ class MongoUtils {
   private static function getReduce($type) {
     switch ($type) {
       case 'activities':
-        $res = "function(doc, out){ ";
+        $res = "function(doc, out) { ";
           foreach (PseudoStatsModel::$services as $service) {
+            $res = $res."if(doc.s.".$service.") {";
             foreach (PseudoStatsModel::$activities as $key => $mongoKey) {
-              $res = $res.
-              "if(doc.s.".$service.") {".
-                "out.".$service."['".$key."']+=".
-                "isNaN(doc.s.".$service.".".$mongoKey.") ? 0 : doc.s.".$service.".".$mongoKey.";".
-              "}";
+              $res = $res."out.".$service."['".$key."'] += ".
+                          "isNaN(doc.s.".$service.".".$mongoKey.") ? 0 : doc.s.".$service.".".$mongoKey.";";
             }
+            $res = $res."}";
           }
         return $res."}";
         break;
       case 'demografics':
-        $res = "function(doc, out){ ";
-        foreach (PseudoStatsModel::$demografics as $demo) {
+        $res = "function(doc, out) { ";
+        foreach (PseudoStatsModel::$demografics as $demo => $mongoDemoKey) {
+          $res = $res."if(doc.d.".$mongoDemoKey.") {";
           foreach (PseudoStatsModel::getDemograficsKeys($demo) as $key) {
-            $res = $res.
-            "if(doc.d.".$demo.") {".
-              "out.".$demo."['".$key."']+=".
-              "isNaN(doc.d.".$demo.".".$key.") ? 0 : doc.d.".$demo.".".$key.";".
-            "}";
+            $res = $res."out.".$demo."['".$key."'] += ".
+                        "isNaN(doc.d.".$mongoDemoKey.".".$key.") ? 0 : doc.d.".$mongoDemoKey.".".$key.";";
           }
+          $res = $res."}";
         }
         return $res."}";
         break;

@@ -11,7 +11,7 @@ class PseudoStatsModel {
   public static $activities   = array("likes" => "pos", "dislikes" => "neg", "clickbacks" => "cb", "contacts" => "cnt");
   
   public static $services     = array("facebook", "twitter", "linkedin", "google");
-  public static $demografics  = array("age", "gender", "relationship");
+  public static $demografics  = array("age" => "age", "gender" => "sex", "relationship" => "rel");
   
   /**
    * prefilles an array with "0"s
