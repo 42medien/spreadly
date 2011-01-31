@@ -399,7 +399,7 @@ class MongoUtils {
    * @return int
    */
   private static function getPercentage($total, $part) {
-    if ($total = 0) {
+    if ($total == 0) {
       return 0;
     } else {
       $percent = round($part/$total*100);
