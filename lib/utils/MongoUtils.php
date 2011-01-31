@@ -1,7 +1,7 @@
 <?php
 
 class MongoUtils {
-  // Hi
+
   public static function getTopActivityUrl($domain, $fromDate, $toDate, $aggregation) {
     $topActivities = MongoUtils::getTopActivityUrlData($domain, $fromDate, $toDate, $aggregation);
     return $topActivities['data'][0]['url'];
@@ -108,7 +108,7 @@ class MongoUtils {
 
     $initial = MongoUtils::getInitial($type);
     $reduce = MongoUtils::getReduce($type);
-
+    
     $g = $col->group($keys, $initial, $reduce, array("condition" => $cond));
 
     $data['data'] = MongoUtils::getDataWithEmptyDayPadding($g['retval'], $fromDate, $toDate);
@@ -317,19 +317,18 @@ class MongoUtils {
   private static function getInitial($type) {
       switch ($type) {
       case 'activities':
-        return array(
-          "facebook" => array("likes" => 0, "dislikes" => 0, "clickbacks" => 0, "contacts" => 0),
-          "twitter" => array("likes" => 0, "dislikes" => 0, "clickbacks" => 0, "contacts" => 0),
-          "linkedin" => array("likes" => 0, "dislikes" => 0, "clickbacks" => 0, "contacts" => 0),
-          "google" => array("likes" => 0, "dislikes" => 0, "clickbacks" => 0, "contacts" => 0)
-        );
+        $res = array();
+        foreach (PseudoStatsModel::$services as $service) {
+          $res[$service] = PseudoStatsModel::getPrefilledActivitiesArray();
+        }
+        return $res;
         break;
       case 'demografics':
-        return array(
-          "age" => PseudoStatsModel::getPrefilledAgeArray(),
-          "gender" => PseudoStatsModel::getPrefilledGenderArray(),
-          "relationship" => PseudoStatsModel::getPrefilledRelationshipArray()
-        );
+        $res = array();
+        foreach (PseudoStatsModel::$demografics as $demo) {
+          $res[$demo] = PseudoStatsModel::getPrefilledDemograficsArray($demo);
+        }
+        return $res;
         break;
       case 'pis':
         return array(
@@ -347,72 +346,44 @@ class MongoUtils {
   private static function getReduce($type) {
     switch ($type) {
       case 'activities':
-        return "function(doc, out){ ".
-             "if(doc.s.facebook) {".
-               "out.facebook['likes']+=isNaN(doc.s.facebook.pos) ? 0 : doc.s.facebook.pos;".
-               "out.facebook['dislikes']+=isNaN(doc.s.facebook.neg) ? 0 : doc.s.facebook.neg;".
-               "out.facebook['clickbacks']+=isNaN(doc.s.facebook.cb) ? 0 : doc.s.facebook.cb;".
-               "out.facebook['contacts']+=isNaN(doc.s.facebook.cnt) ? 0 : doc.s.facebook.cnt;".
-             "}".
-             "if(doc.s.twitter) {".
-               "out.twitter['likes']+=isNaN(doc.s.twitter.pos) ? 0 : doc.s.twitter.pos;".
-               "out.twitter['dislikes']+=isNaN(doc.s.twitter.neg) ? 0 : doc.s.twitter.neg;".
-               "out.twitter['clickbacks']+=isNaN(doc.s.twitter.cb) ? 0 : doc.s.twitter.cb;".
-               "out.twitter['contacts']+=isNaN(doc.s.twitter.cnt) ? 0 : doc.s.twitter.cnt;".
-             "}".
-             "if(doc.s.linkedin) {".
-               "out.linkedin['likes']+=isNaN(doc.s.linkedin.pos) ? 0 : doc.s.linkedin.pos;".
-               "out.linkedin['dislikes']+=isNaN(doc.s.linkedin.neg) ? 0 : doc.s.linkedin.neg;".
-               "out.linkedin['clickbacks']+=isNaN(doc.s.linkedin.cb) ? 0 : doc.s.linkedin.cb;".
-               "out.linkedin['contacts']+=isNaN(doc.s.linkedin.cnt) ? 0 : doc.s.linkedin.cnt;".
-             "}".
-             "if(doc.s.google) {".
-               "out.google['likes']+=isNaN(doc.s.google.pos) ? 0 : doc.s.google.pos;".
-               "out.google['dislikes']+=isNaN(doc.s.google.neg) ? 0 : doc.s.google.neg;".
-               "out.google['clickbacks']+=isNaN(doc.s.google.cb) ? 0 : doc.s.google.cb;".
-               "out.google['contacts']+=isNaN(doc.s.google.cnt) ? 0 : doc.s.google.cnt;".
-             "}".
-           "}";
+        $res = "function(doc, out){ ";
+          foreach (PseudoStatsModel::$services as $service) {
+            foreach (PseudoStatsModel::$activities as $key => $mongoKey) {
+              $res = $res.
+              "if(doc.s.".$service.") {".
+                "out.".$service."['".$key."']+=".
+                "isNaN(doc.s.".$service.".".$mongoKey.") ? 0 : doc.s.".$service.".".$mongoKey.";".
+              "}";
+            }
+          }
+        return $res."}";
         break;
       case 'demografics':
+        $res = "function(doc, out){ ";
+        foreach (PseudoStatsModel::$demografics as $demo) {
+          foreach (PseudoStatsModel::getDemograficsKeys($demo) as $key) {
+            $res = $res.
+            "if(doc.d.".$demo.") {".
+              "out.".$demo."['".$key."']+=".
+              "isNaN(doc.d.".$demo.".".$key.") ? 0 : doc.d.".$demo.".".$key.";".
+            "}";
+          }
+        }
+        return $res."}";
+        break;
+      case 'pis':
         return "function(doc, out){ ".
-             "if(doc.d.age) {".
-               "out.age.u_18+=isNaN(doc.d.age.u_18) ? 0 : doc.d.age.u_18;".
-               "out.age.b_18_24+=isNaN(doc.d.age.b_18_24) ? 0 : doc.d.age.b_18_24;".
-               "out.age.b_25_34+=isNaN(doc.d.age.b_25_34) ? 0 : doc.d.age.b_25_34;".
-               "out.age.b_35_54+=isNaN(doc.d.age.b_35_54) ? 0 : doc.d.age.b_35_54;".
-               "out.age.o_55+=isNaN(doc.d.age.o_55) ? 0 : doc.d.age.o_55;".
+             "if(doc.total) {".
+               "out.total+=isNaN(doc.total) ? 0 : doc.total;".
              "}".
-             "if(doc.d.sex) {".
-               "out.gender.m+=isNaN(doc.d.sex.m) ? 0 : doc.d.sex.m;".
-               "out.gender.f+=isNaN(doc.d.sex.f) ? 0 : doc.d.sex.f;".
-               "out.gender.u+=isNaN(doc.d.sex.u) ? 0 : doc.d.sex.u;".
+             "if(doc.cb) {".
+               "out.cb+=isNaN(doc.cb) ? 0 : doc.cb;".
              "}".
-             "if(doc.d.rel) {".
-               "out.relationship.singl+=isNaN(doc.d.rel.singl) ? 0 : doc.d.rel.singl;".
-               "out.relationship.eng+=isNaN(doc.d.rel.eng) ? 0 : doc.d.rel.eng;".
-               "out.relationship.compl+=isNaN(doc.d.rel.compl) ? 0 : doc.d.rel.compl;".
-               "out.relationship.mar+=isNaN(doc.d.rel.mar) ? 0 : doc.d.rel.mar;".
-               "out.relationship.rel+=isNaN(doc.d.rel.rel) ? 0 : doc.d.rel.rel;".
-               "out.relationship.ior+=isNaN(doc.d.rel.ior) ? 0 : doc.d.rel.ior;".
-               "out.relationship.wid+=isNaN(doc.d.rel.wid) ? 0 : doc.d.rel.wid;".
-               "out.relationship.u+=isNaN(doc.d.rel.u) ? 0 : doc.d.rel.u;".
+             "if(doc.yiid) {".
+               "out.yiid+=isNaN(doc.yiid) ? 0 : doc.yiid;".
              "}".
            "}";
         break;
-        case 'pis':
-          return "function(doc, out){ ".
-               "if(doc.total) {".
-                 "out.total+=isNaN(doc.total) ? 0 : doc.total;".
-               "}".
-               "if(doc.cb) {".
-                 "out.cb+=isNaN(doc.cb) ? 0 : doc.cb;".
-               "}".
-               "if(doc.yiid) {".
-                 "out.yiid+=isNaN(doc.yiid) ? 0 : doc.yiid;".
-               "}".
-             "}";
-          break;
       default:
         return null;
         break;

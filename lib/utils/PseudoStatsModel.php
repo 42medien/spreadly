@@ -11,6 +11,7 @@ class PseudoStatsModel {
   public static $activities   = array("likes" => "pos", "dislikes" => "neg", "clickbacks" => "cb", "contacts" => "cnt");
   
   public static $services     = array("facebook", "twitter", "linkedin", "google");
+  public static $demografics  = array("age", "gender", "relationship");
   
   /**
    * prefilles an array with "0"s
@@ -61,4 +62,32 @@ class PseudoStatsModel {
   public static function getPrefilledActivitiesArray() {
     return self::prefillArray(array_keys(self::$activities));
   }
+
+  /**
+   * returns a nulled array with all possible date fields
+   *
+   * @return array
+   */
+  public static function getDemograficsKeys($demo) {
+    switch ($demo) {
+      case 'age': return self::$age; break;
+      case 'gender': return self::$gender; break;
+      case 'relationship': return self::$relationship; break;
+      default: return null; break;
+    }
+  }  
+
+  /**
+   * returns a nulled array with all possible date fields
+   *
+   * @return array
+   */
+  public static function getPrefilledDemograficsArray($demo) {
+    switch ($demo) {
+      case 'age': return self::getPrefilledAgeArray(); break;
+      case 'gender': return self::getPrefilledGenderArray(); break;
+      case 'relationship': return self::getPrefilledRelationshipArray(); break;
+      default: return null; break;
+    }
+  }  
 }
