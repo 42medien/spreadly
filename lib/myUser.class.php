@@ -80,88 +80,6 @@ class myUser extends sfBasicSecurityUser {
     $this->setCulture($user->getCulture());
   }
 
-
-  /**
-   * Sign in the user, and redirect afterwards to index or
-   * OpenId Trust Screen
-   *
-   * @param User $pUser
-   * @param sfActions $pCaller The calling action
-   */
-  public function signInAndRedirect( User $pUser, sfActions $pCaller, $openIdReferer = null ){
-  	$this->signIn( $pUser );
-
-  	$lRemReq = $this->getAttribute('RedirectToReferer');
-    $this->setAttribute('RedirectToReferer', null );
-
-  	$lRemReq = $this->getAttribute('TargetAfterLogin', $lRemReq);
-    $this->setAttribute('TargetAfterLogin', null );
-
-    // check auth completion
-  	$lPersistent = PersistentObjectPeer::get($pUser->getId(), 'auth_completion');
-  	if ($lPersistent && $lPersistent == "show") {
-  	  $lRemReq = 'dashboard/magic';
-  	}
-
-    if( $lRemReq ){
-    	$this->setFlash('redirectfromlogin', true);
-      $pCaller->redirect( $lRemReq );
-    } else {
-	    if(!$openIdReferer)
-	    	$referer = sfContext::getInstance()->getRequest()->getReferer();
-	    else
-	    	$referer = $openIdReferer;
-
-	    $yiidDomain = preg_match('/yiid/', parse_url($referer, PHP_URL_HOST));
-	    $communipediaDomain = preg_match('/communipedia/', parse_url($referer, PHP_URL_HOST));
-
-	    if($yiidDomain == 1 || $communipediaDomain == 1)
-	     	$domainIsValid = true;
-	    else
-	      $domainIsValid = false;
-
-	    $auth = preg_match('/auth/', $referer);
-
-	    // for security reasons remove complete loginstatus namespace
-	    $this->setAttribute('referer', null, 'login');
-      sfContext::getInstance()->getUser()->getAttributeHolder()->removeNamespace('login');
-
-      if(!$auth && $domainIsValid) {
-	    	$pCaller->redirect($referer);
-	    } else {
-	    	$pCaller->redirect('dashboard/index');
-	    }
-    }
-  }
-
-  /**
-   * This method sets the redirection url after login into the session
-   *
-   */
-  public function setRedirectUrl( $request ) {
-  	if ($request->getParameter('module') == "auth") {
-      $uri = $request->getReferer();
-      $domain = UrlUtils::getDomain($uri);
-  	} else {
-  	  $uri = $request->getUri();
-      // get refered URL
-      $domain = $_SERVER['SERVER_NAME'];
-  	}
-
-    $yiidDomain = preg_match('/yiid/', $domain);
-    $communipediaDomain = preg_match('/communipedia/', $domain);
-    if($yiidDomain == 1 || $communipediaDomain == 1)
-    	$domainIsValid = true;
-    else
-    	$domainIsValid = false;
-
-    $lPregMatch = "~".preg_quote(sfConfig::get("app_settings_url")."/auth")."~";
-
-    if(!preg_match($lPregMatch, $uri) && $domainIsValid) {
-    	$this->setAttribute('RedirectToReferer', $uri);
-    }
-  }
-
   /**
    * sign in a user (from Model) in as session user
    *
@@ -175,15 +93,6 @@ class myUser extends sfBasicSecurityUser {
     $lCredentials = explode( ',', $user->getCredentials() );
     if( count($lCredentials) != 0 ) $this->addCredentials( $lCredentials );
     //$this->switchLanguage($user->getCulture());
-  }
-
-  /**
-   * remember a target ot redirect the user after the next
-   * successful login
-   * @param  sfWebRequest $pRequest
-   */
-  public function setRedirectAfterNextLogin( $pRedirect ){
-  	$this->setAttribute( 'TargetAfterLogin', $pRedirect );
   }
 
   /**
