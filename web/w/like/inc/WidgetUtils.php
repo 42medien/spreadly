@@ -222,21 +222,23 @@ class WidgetUtils {
       foreach ($pTags as $lTag) {
         $lTags[] = trim($lTag);
       }
-      $cond['$or'] = array('tags' => array('$exists' => false), 'tags' => array('$in' => $lTags));
+      $cond['$or'] = array(array('tags' => array('$exists' => false)), array('tags' => array('$in' => $lTags)));
     } else {
       $cond["tags"] = array('$exists' => false);
     }
 
-    var_dump($cond);
-
     $result = $col->find($cond)->limit(1)->sort(array("start_date" => -1));
-
-    $deal = $result->getNext();
-
+    
+    $deal = null;
+    
+    if($result->hasNext()) {
+      $deal = $result->getNext();
+    }
+    
     if ($deal && ($deal["is_unlimited"] == true || $deal['remaining_coupon_quantity'] > 0)) {
       return $deal;
     }
-
+    
     return false;
   }
 
