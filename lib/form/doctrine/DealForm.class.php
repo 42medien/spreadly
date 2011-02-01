@@ -27,7 +27,7 @@ class DealForm extends BaseDealForm
       'coupon_quantity'   => new sfWidgetFormInputText(),
       'tags'              => new sfWidgetFormTextarea(),
       'coupon_type'       => new sfWidgetFormChoice(array('choices' => array('single' => $lI18n->__('Only one code'), 'multiple' => $lI18n->__('Paste codes')), 'expanded' => true ), array('class' => 'coupon-type-select')),
-			'addtags'           => new sfWidgetFormChoice(array('choices' => array('addtags' => $lI18n->__('Insert Categories'), 'addnotags' => $lI18n->__('No categories')), 'expanded' => true ), array('class' => 'tags-select')),
+			'addtags'           => new sfWidgetFormChoice(array('choices' => array('addnotags' => $lI18n->__('No categories'), 'addtags' => $lI18n->__('Insert Categories')), 'expanded' => true ), array('class' => 'tags-select')),
       'redeem_url'        => new sfWidgetFormInputText(),
       'tos_accepted'      => new sfWidgetFormInputCheckbox(),
       'terms_of_deal'     => new sfWidgetFormInputText()
