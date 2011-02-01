@@ -22,10 +22,9 @@ class dealsComponents extends sfComponents {
     	$this->pCouponType = $lDeal->getCouponType();
     	$this->pCouponQuantity = $lDeal->getCouponQuantity();
 
-    	$this->pTags = null;
-    	if($lTags = $lDeal->getTags() != null && $lDeal->getTags() != ''){
+    	$this->pTags = $lDeal->getTags();
+    	if($this->pTags != null && $this->pTags != ''){
     		$this->pAddtags = 'addtags';
-    		$this->pTags = $lTags;
     	}
 
       $this->pDeal = $lDeal;

@@ -27,7 +27,7 @@
 
 <?php if($pDeal->getState() == 'submitted') { ?>
       <td style="width: 20px;"><?php echo image_tag('/img/global/24x24/process.png', array('title' => __('Deal submitted')))?></td>
-      <td><?php echo link_to($pDeal->getSummary(), '/', array('class' => 'deal-stats-link')); ?></td>
+      <td><?php echo $pDeal->getSummary(); ?></td>
       <td><?php echo $pDeal->getDomainProfile()->getUrl(); ?></td>
       <td style="text-align: center;" colspan="2"><?php echo __('Not yet approved by yiid ...'); ?></td>
       <td style="text-align: center;"><?php echo $pDeal->getCouponClaimedQuantity(); ?></td>
@@ -60,7 +60,7 @@
 
 <?php if($pDeal->getState() == 'paused') { ?>
       <td style="width: 20px;"><?php echo image_tag('/img/global/24x24/clock.png', array('title' => __('Deal stopped')))?></td>
-			<td><?php echo link_to($pDeal->getSummary(), '/', array('class' => 'deal-stats-link')); ?></td>
+			<td><?php echo link_to($pDeal->getSummary(), '@get_analytics_content', array('class' => 'deal-stats-link')); ?></td>
       <td><?php echo $pDeal->getDomainProfile()->getUrl(); ?></td>
       <td style="text-align: center;"><?php echo $pDeal->getStartDate(); ?></td>
       <td style="text-align: center;" title="<?php echo __('Edit end date of deal'); ?>" class="editinplaceclick edit-col" id="deal-date-<?php echo $pDeal->getId(); ?>" data-obj='{"action":"/deals/edit_enddate", "type":"text", "callback":"DealTable.editDate",  "params": "{\"id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-date-<?php echo $pDeal->getId(); ?>\"}"}'><?php echo $pDeal->getEndDate(); ?></td>
