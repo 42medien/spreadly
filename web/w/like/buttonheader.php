@@ -10,6 +10,7 @@ header('P3P: CP="DSP LAW"');
 header('Pragma: no-cache');
 header('Cache-Control: private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
 
+// <Check Params>
 if (isset($_GET['url']) && !empty($_GET['url'])) {
   $pUrl = urldecode($_GET['url']);
 } else {
@@ -40,29 +41,21 @@ if (isset($_GET['social']) && !empty($_GET['social'])) {
 $pTitle = urldecode($_GET['title']);
 $pPhoto = urldecode($_GET['photo']);
 $pDescription = urldecode($_GET['description']);
-$pTags = urldecode($_GET['tags']);
+$pTags = trim(urldecode($_GET['tags']));
+// </Check Params>
 
 $lClickback = WidgetUtils::extractClickback($pUrl, $_SERVER['HTTP_REFERER']);
-$lActiveDeal = WidgetUtils::dealActive($pUrl);
-
 $pUserId = WidgetUtils::extractUserIdFromSession(LikeSettings::SF_SESSION_COOKIE);
 $lSocialObjectArray = WidgetUtils::getDataForUrl($pUrl);
-$lActivityObject = WidgetUtils::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId, $lActiveDeal);
 
-$lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
-$lStaticUrl = LikeSettings::JS_STATIC_PATH."?ei_kcuf=".time();
-
-$lIsDeal = false;
-// check if user has an active deal
-if ($lActiveDeal && $lActivityObject) {
-  $lIsDeal = true;
-// check if user has an active code
-} elseif (($lActiveDeal && !WidgetUtils::actionOnHostByUser($pUserId, $lActiveDeal)) &&
-          ($lActiveDeal["is_unlimited"] == true || $lActiveDeal['remaining_coupon_quantity'] > 0)) {
-  $lIsDeal = true;
-} else {
-  $lActivityObject = WidgetUtils::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId);
+// <Deal>
+$lActiveDeal = WidgetUtils::getActiveDeal($pUrl, $pTags);
+if (!$lActiveDeal || WidgetUtils::actionOnHostByUser($pUserId, $lActiveDeal)) {
+  $lActiveDeal = null;
 }
+
+$lActivityObject = WidgetUtils::getYiidActivity($lSocialObjectArray['_id'], $pUserId, $lActiveDeal);
+// </Deal>
 
 if ($lActivityObject) {
   $lIsUsed = $lActivityObject['score'];
@@ -79,11 +72,12 @@ if($pUserId && $pSocialFeatures && $lSocialObjectArray['_id']) {
   $lLimit = $pFullShortVersion?6:8;
 }
 
+WidgetUtils::trackUser($pUrl, $lClickback, $pUserId);
 
-WidgetUtils::trackVisit($pUrl);
-WidgetUtils::trackPageImpression($pUrl, $lClickback, $pUserId);
+$lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
+$lStaticUrl = LikeSettings::JS_STATIC_PATH."?ei_kcuf=".time();
 
-if ($lIsDeal) {
+if ($lActiveDeal) {
   include("deal.php");
   exit;
 }

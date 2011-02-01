@@ -70,7 +70,7 @@ class WidgetUtils {
 
     // set counts for like on 0 if they're not set yet
     $lSocialObjectArray = array_merge(array(
-      'l_cnt'   => 0,
+      'l_cnt' => 0,
       'd_cnt' => 0,
     ), $lSocialObjectArray);
 
@@ -125,7 +125,7 @@ class WidgetUtils {
    * @param int $pUserId
    * @return false or score of action taken (-1/1)
    */
-  public static function actionOnObjectByUser($pSocialObjectId, $pUserId, $pActiveDeal = null) {
+  public static function getYiidActivity($pSocialObjectId, $pUserId, $pActiveDeal = null) {
     $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
     $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
 
@@ -167,6 +167,114 @@ class WidgetUtils {
     return $lObject;
   }
 
+  /**
+   * extracts yiidit Parameter if it's given, returns null if its not set or referal == buttonUro
+   *
+   * @param string $pButtonUri
+   * @param string $pReferrerUri
+   * @return string|null
+   */
+  public static function extractClickback($pButtonUri, $pReferrerUri = null) {
+    if (!$pReferrerUri) {
+      return null;
+    }
+    if ($pButtonUri == $pReferrerUri) {
+      return null;
+    }
+
+    $lParameterList = parse_url($pReferrerUri);
+
+    $lGetParams = array();
+    parse_str($lParameterList['query'], $lGetParams);
+
+    return (isset($lGetParams['yiidit']))?$lGetParams['yiidit']:null;
+  }
+
+  /**
+   * searches the mongo for an active deal
+   *
+   * @author Matthias Pfefferle
+   * @param string $pUrl
+   * @param string $pTags comma separated
+   * @return array|boolean
+   */
+  public static function getActiveDeal($pUrl, $pTags = null) {
+    $pUrl = str_replace(" ", "+", $pUrl);
+    $pUrl = UrlUtils::skipTrailingSlash($pUrl);
+
+    $host = parse_url($pUrl, PHP_URL_HOST);
+
+    $mongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
+    $col = $mongo->selectCollection(LikeSettings::MONGO_DATABASENAME, 'deals');
+
+    $today = new MongoDate(time());
+    $cond = array(
+      "host" => $host,
+      "start_date" => array('$lte' => $today),
+      "end_date" => array('$gte' => $today)
+    );
+
+    // added tags to the conditions
+    if ($pTags) {
+      // trim tags
+      $pTags = explode(",", $pTags);
+      $lTags = array();
+      foreach ($pTags as $lTag) {
+        $lTags[] = trim($lTag);
+      }
+      $cond['$or'] = array('tags' => array('$exists' => false), 'tags' => array('$in' => $lTags));
+    } else {
+      $cond["tags"] = array('$exists' => false);
+    }
+
+    var_dump($cond);
+
+    $result = $col->find($cond)->limit(1)->sort(array("start_date" => -1));
+
+    $deal = $result->getNext();
+
+    if ($deal && ($deal["is_unlimited"] == true || $deal['remaining_coupon_quantity'] > 0)) {
+      return $deal;
+    }
+
+    return false;
+  }
+
+  /**
+   * encapsulates all trackings
+   *
+   * @param string $pUrl
+   * @param string $pClickback
+   * @param int $pUser
+   */
+  public static function trackUser($pUrl, $pClickback, $pUser) {
+    self::trackPageImpression($pUrl, $pClickback, $pUser);
+    self::trackVisit($pUrl);
+  }
+
+  /**
+   * tracks a visit on given url
+   *
+   * @param string $pUrl
+   * @author weyandch
+   */
+  public static function trackVisit($pUrl) {
+    $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
+    $lCollection = $lMongo->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, 'visit');
+
+    $pUrl = urldecode($pUrl);
+
+    // data is stored as a tupel of host && month (host => example.com, month => 2010-10)
+    $lQueryArray = array();
+    $lQueryArray['host'] = parse_url($pUrl, PHP_URL_HOST);
+    $lQueryArray['month'] = date('Y-m');
+
+    if ($lQueryArray['host'] != '') {
+      $lUpdateArray = array( '$inc' => array('stats.day_'.date('d').'.pis' => 1, 'pis_total' => 1));
+      $lCollection->update($lQueryArray, $lUpdateArray, array('upsert' => true));
+    }
+  }
+
   public static function trackPageImpression($pUrl, $pClickback, $pUser) {
     $lHost = parse_url($pUrl, PHP_URL_HOST);
 
@@ -193,78 +301,5 @@ class WidgetUtils {
     }
 
     $lCollection->update($lDoc, array('$inc' => $lOptions), array("upsert" => true));
-  }
-
-  /**
-   * extracts yiidit Parameter if it's given, returns null if its not set or referal == buttonUro
-   *
-   * @param string $pButtonUri
-   * @param string $pReferrerUri
-   * @return string|null
-   */
-  public static function extractClickback($pButtonUri, $pReferrerUri = null) {
-    if (!$pReferrerUri) {
-      return null;
-    }
-    if ($pButtonUri == $pReferrerUri) {
-      return null;
-    }
-
-    $lParameterList = parse_url($pReferrerUri);
-
-    $lGetParams = array();
-    parse_str($lParameterList['query'], $lGetParams);
-
-    return (isset($lGetParams['yiidit']))?$lGetParams['yiidit']:null;
-  }
-
-  public static function dealActive($pUrl) {
-    $pUrl = str_replace(" ", "+", $pUrl);
-    $pUrl = UrlUtils::skipTrailingSlash($pUrl);
-
-    $host = parse_url($pUrl, PHP_URL_HOST);
-
-    $mongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
-    $col = $mongo->selectCollection(LikeSettings::MONGO_DATABASENAME, 'deals');
-
-    $today = new MongoDate(time());
-    $cond = array(
-      "host" => $host,
-      "start_date" => array('$lte' => $today),
-      "end_date" => array('$gte' => $today)
-    );
-    $result = $col->find($cond)->limit(1)->sort(array("start_date" => -1));
-
-    $deal = $result->getNext();
-
-    if ($deal) {
-      return $deal;
-    }
-
-    return false;
-  }
-
-  /**
-   * tracks a visit on given url, if the $pLikeType variable is passed an activity is tracked too
-   *
-   * @param string $pUrl
-   * @param string $pLikeType see TYPE_* Constants in this class
-   * @author weyandch
-   */
-  public static function trackVisit($pUrl) {
-    $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
-    $lCollection = $lMongo->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, 'visit');
-
-    $pUrl = urldecode($pUrl);
-
-    // data is stored as a tupel of host && month (host => example.com, month => 2010-10)
-    $lQueryArray = array();
-    $lQueryArray['host'] = parse_url($pUrl, PHP_URL_HOST);
-    $lQueryArray['month'] = date('Y-m');
-
-    if ($lQueryArray['host'] != '') {
-      $lUpdateArray = array( '$inc' => array('stats.day_'.date('d').'.pis' => 1, 'pis_total' => 1));
-      $lCollection->update($lQueryArray, $lUpdateArray, array('upsert' => true));
-    }
   }
 }
