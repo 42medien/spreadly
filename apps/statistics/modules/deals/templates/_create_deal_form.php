@@ -284,12 +284,12 @@
     			<h2><?php echo __('Step 4: Choose categories')?></h2>
 	    			<div class="form-row">
 		    				<div class="label-box">
-		    					<?php echo $pForm['deal']['coupon_type']->renderLabel();?>
-									<?php echo $pForm['deal']['coupon_type']->renderError();?>
+		    					<?php echo $pForm['deal']['addtags']->renderLabel();?>
+									<?php echo $pForm['deal']['addtags']->renderError();?>
 								</div>
 								<?php echo $pForm['deal']['addtags']->render();?>
 						</div>
-	    			<div class="form-row" id="deal_tag_row" style="display:none;">
+	    			<div class="form-row" id="deal_tag_row" <?php echo ($pAddtags=='addnotags')? 'style="display:none;"': ''; ?>>
 	    				<div class="label-box">
 	    					<?php echo $pForm['deal']['tags']->renderLabel();?>
 	    					<div class="meta-label"><?php echo __('Paste categories coma-separated'); ?></div>

@@ -73,6 +73,8 @@ class dealsActions extends sfActions
 
     // Cleaning up the single code/multi code dilemma
     $lParams['deal']['coupon_type']=='single' ? $lParams['deal']['coupon']['multiple_codes']="" : $lParams['deal']['coupon']['single_code']="";
+    $lParams['deal']['tags'] = ($lParams['deal']['addtags'] == 'addnotags')? $lParams['deal']['tags'] = NULL: $lParams['deal']['tags'];
+
     return $lParams;
   }
 
@@ -99,6 +101,8 @@ class dealsActions extends sfActions
   public function executeSave(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
   	$lParams = $this->getCleanedParams($request);
+
+    $lAddTags = $lParams['deal']['addtags'];
 
     $lDeal=null;
     if($lDealId = $lParams['deal']['id']){
@@ -136,7 +140,7 @@ class dealsActions extends sfActions
     		$lDefaultCode = $lTaintedValues['deal']['coupon']['single_code'];
     	}
 
-    	$lReturn['html'] = $this->getPartial('deals/create_deal_form', array('pForm' => $this->pForm, 'pCouponType' => $lCouponType, 'pCouponQuantity' => $lCouponQuantity, 'pDefaultCode' => $lDefaultCode));
+    	$lReturn['html'] = $this->getPartial('deals/create_deal_form', array('pForm' => $this->pForm, 'pCouponType' => $lCouponType, 'pCouponQuantity' => $lCouponQuantity, 'pDefaultCode' => $lDefaultCode, 'pAddtags' => $lAddTags));
     }
 
     return $this->renderText(json_encode($lReturn));
@@ -160,7 +164,7 @@ class dealsActions extends sfActions
     $lDp = DomainProfileTable::getInstance()->find($lProfileId);
     $lDealForm = new DealForm();
     $lFirstDomain = DomainProfileTable::getInstance()->find($lProfileId);
-
+    $lAddtags = 'addnotags';
   	$lCouponType = 'single';
   	$lCouponQuantity = '0';
     $this->pEdited = false;
@@ -172,7 +176,8 @@ class dealsActions extends sfActions
 	    	'start_date' => date('Y-m-d G:i:s'),
 	    	'end_date' => date('Y-m-d G:i:s'),
 	    	'coupon_type' => 'single',
-    	  'redeem_url' => ''
+    	  'redeem_url' => '',
+	      'addtags' => $lAddtags,
 	  ));
 
     $this->pForm = new DomainProfileDealForm();
@@ -185,7 +190,7 @@ class dealsActions extends sfActions
 
     return $this->renderText(json_encode(
     	array(
-    		'html' => $this->getPartial('deals/create_deal_form', array('pForm' => $this->pForm, 'pCouponQuantity' => $lCouponQuantity, 'pCouponType' => $lCouponType, 	'pDefaultCode' => 'JSFDJKAREWRKOP')),
+    		'html' => $this->getPartial('deals/create_deal_form', array('pForm' => $this->pForm, 'pCouponQuantity' => $lCouponQuantity, 'pCouponType' => $lCouponType, 	'pDefaultCode' => 'JSFDJKAREWRKOP', 'pAddtags' => $lAddtags)),
     	)
     ));
   }

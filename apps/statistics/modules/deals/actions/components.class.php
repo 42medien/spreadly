@@ -16,10 +16,18 @@ class dealsComponents extends sfComponents {
 	    $lVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
     	$lFirstDomain = $lVerifiedDomains[1];
     }
+    $this->pAddtags = 'addnotags';
 
     if($lDeal) {
     	$this->pCouponType = $lDeal->getCouponType();
     	$this->pCouponQuantity = $lDeal->getCouponQuantity();
+
+    	$this->pTags = null;
+    	if($lTags = $lDeal->getTags() != null && $lDeal->getTags() != ''){
+    		$this->pAddtags = 'addtags';
+    		$this->pTags = $lTags;
+    	}
+
       $this->pDeal = $lDeal;
     	$lDealForm->setDefaults(array(
     	  'id' => $lDeal->getId(),
@@ -33,7 +41,9 @@ class dealsComponents extends sfComponents {
     		'coupon_quantity' => $lDeal->getCouponQuantity(),
         'coupon_type' => $this->pCouponType,
     	  'redeem_url' => $lDeal->getRedeemUrl(),
-    	  'tos_accepted' => $lDeal->getTosAccepted()
+    	  'tos_accepted' => $lDeal->getTosAccepted(),
+	      'addtags' => $this->pAddtags,
+    		'tags' => $this->pTags
       ));
 
       $lCoupons = $lDeal->getCoupons();
@@ -55,6 +65,7 @@ class dealsComponents extends sfComponents {
 	    	'start_date' => date('Y-m-d G:i:s'),
 	    	'end_date' => date('Y-m-d G:i:s'),
 	    	'coupon_type' => 'single',
+	      'addtags' => 'addnotags',
     	  'redeem_url' => $lI18n->__('Your redeem url')
 	    ));
 	    $this->pDefaultCode = 'Coupon Code';
