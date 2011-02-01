@@ -42,12 +42,12 @@ $pPhoto = urldecode($_GET['photo']);
 $pDescription = urldecode($_GET['description']);
 $pTags = urldecode($_GET['tags']);
 
-$lClickback = ClickBackHelper::extractClickback($pUrl, $_SERVER['HTTP_REFERER']);
-$lActiveDeal = DealUtils::dealActive($pUrl);
+$lClickback = WidgetUtils::extractClickback($pUrl, $_SERVER['HTTP_REFERER']);
+$lActiveDeal = WidgetUtils::dealActive($pUrl);
 
-$pUserId = MongoSessionPeer::extractUserIdFromSession(LikeSettings::SF_SESSION_COOKIE);
-$lSocialObjectArray = SocialObjectPeer::getDataForUrl($pUrl);
-$lActivityObject = YiidActivityObjectPeer::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId, $lActiveDeal);
+$pUserId = WidgetUtils::extractUserIdFromSession(LikeSettings::SF_SESSION_COOKIE);
+$lSocialObjectArray = WidgetUtils::getDataForUrl($pUrl);
+$lActivityObject = WidgetUtils::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId, $lActiveDeal);
 
 $lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
 $lStaticUrl = LikeSettings::JS_STATIC_PATH."?ei_kcuf=".time();
@@ -57,11 +57,11 @@ $lIsDeal = false;
 if ($lActiveDeal && $lActivityObject) {
   $lIsDeal = true;
 // check if user has an active code
-} elseif (($lActiveDeal && !YiidActivityObjectPeer::actionOnHostByUser($pUserId, $lActiveDeal)) &&
+} elseif (($lActiveDeal && !WidgetUtils::actionOnHostByUser($pUserId, $lActiveDeal)) &&
           ($lActiveDeal["is_unlimited"] == true || $lActiveDeal['remaining_coupon_quantity'] > 0)) {
   $lIsDeal = true;
 } else {
-  $lActivityObject = YiidActivityObjectPeer::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId);
+  $lActivityObject = WidgetUtils::actionOnObjectByUser($lSocialObjectArray['_id'], $pUserId);
 }
 
 if ($lActivityObject) {
@@ -70,7 +70,7 @@ if ($lActivityObject) {
   $lIsUsed = false;
 }
 
-$lSocialObjectArray = SocialObjectPeer::recalculateCountsRespectingUser($lSocialObjectArray, $lIsUsed);
+$lSocialObjectArray = WidgetUtils::recalculateCountsRespectingUser($lSocialObjectArray, $lIsUsed);
 
 $lShowFriends = false;
 $lLimit = 6;
@@ -80,8 +80,8 @@ if($pUserId && $pSocialFeatures && $lSocialObjectArray['_id']) {
 }
 
 
-YiidStatsSingleton::trackVisit($pUrl);
-StatsHelper::trackPageImpression($pUrl, $lClickback, $pUserId);
+WidgetUtils::trackVisit($pUrl);
+WidgetUtils::trackPageImpression($pUrl, $lClickback, $pUserId);
 
 if ($lIsDeal) {
   include("deal.php");

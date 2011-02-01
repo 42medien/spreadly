@@ -3,14 +3,11 @@ require_once('../../../lib/utils/UrlUtils.php');
 require_once('../../../lib/utils/aws/sqs.php');
 
 /**
+ * Enter description here...
  *
- *
- * @author Christian Weyand
+ * @author Matthias Pfefferle
  */
-class MongoSessionPeer {
-
-  const MONGO_COLLECTION = 'session';
-
+class WidgetUtils {
   /**
    * extracts the userid from the current session
    *
@@ -36,20 +33,10 @@ class MongoSessionPeer {
    */
   public static function getSessionData($pId) {
     $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
-    $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, self::MONGO_COLLECTION);
+    $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, "session");
 
     return $pCollectionObject->findOne(array("sess_id" => $pId) );
   }
-}
-
-/**
- * Wrapper for accessing MongoObject without Sf Context (raw button)
- *
- * @author Christian Weyand
- */
-class SocialObjectPeer {
-
-  const MONGO_COLLECTION = 'social_object';
 
   /**
    * returns socialobject for a given url
@@ -62,7 +49,7 @@ class SocialObjectPeer {
     $pUrl = str_replace(" ", "+", $pUrl);
 
     $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
-    $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, self::MONGO_COLLECTION);
+    $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, 'social_object');
     $pUrlHash = md5(UrlUtils::skipTrailingSlash($pUrl));
 
     // check if we know the URL already
@@ -77,7 +64,7 @@ class SocialObjectPeer {
 
     if($pUrl && !UrlUtils::isUrlValid($pUrl)) {
       $lSocialObjectArray = array_merge(array(
-	      'urlerror'   => true,
+        'urlerror'   => true,
       ), $lSocialObjectArray);
     }
 
@@ -128,14 +115,6 @@ class SocialObjectPeer {
       $service->sendMessage($queue, $pUrl);
     }
   }
-}
-
-/**
- * Wrapper to access activity items within th ebutton
- */
-class YiidActivityObjectPeer {
-  const MONGO_COLLECTION = 'yiid_activity';
-
 
   /**
    * check if a given user already performed an action on a social object
@@ -187,9 +166,7 @@ class YiidActivityObjectPeer {
                                                   ));
     return $lObject;
   }
-}
 
-class StatsHelper {
   public static function trackPageImpression($pUrl, $pClickback, $pUser) {
     $lHost = parse_url($pUrl, PHP_URL_HOST);
 
@@ -217,9 +194,6 @@ class StatsHelper {
 
     $lCollection->update($lDoc, array('$inc' => $lOptions), array("upsert" => true));
   }
-}
-
-class ClickBackHelper {
 
   /**
    * extracts yiidit Parameter if it's given, returns null if its not set or referal == buttonUro
@@ -243,22 +217,16 @@ class ClickBackHelper {
 
     return (isset($lGetParams['yiidit']))?$lGetParams['yiidit']:null;
   }
-}
-
-/**
- *
- *
- * @author hannes
- */
-class DealUtils {
-  const MONGO_COLLECTION = 'deals';
 
   public static function dealActive($pUrl) {
     $pUrl = str_replace(" ", "+", $pUrl);
     $pUrl = UrlUtils::skipTrailingSlash($pUrl);
 
     $host = parse_url($pUrl, PHP_URL_HOST);
-    $col = DealUtils::getCollection();
+
+    $mongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
+    $col = $mongo->selectCollection(LikeSettings::MONGO_DATABASENAME, 'deals');
+
     $today = new MongoDate(time());
     $cond = array(
       "host" => $host,
@@ -276,20 +244,6 @@ class DealUtils {
     return false;
   }
 
-  private static function getCollection() {
-    $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
-    return $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, self::MONGO_COLLECTION);
-  }
-}
-
-class YiidStatsSingleton {
-
-  // new schema
-  const MONGO_COLLECTION_NAME_VISIT = 'visit';
-  const TYPE_LIKE = 'likes';
-  const TYPE_DISLIKE = 'dislikes';
-
-
   /**
    * tracks a visit on given url, if the $pLikeType variable is passed an activity is tracked too
    *
@@ -299,7 +253,7 @@ class YiidStatsSingleton {
    */
   public static function trackVisit($pUrl) {
     $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
-    $lCollection = $lMongo->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, self::MONGO_COLLECTION_NAME_VISIT);
+    $lCollection = $lMongo->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, 'visit');
 
     $pUrl = urldecode($pUrl);
 
