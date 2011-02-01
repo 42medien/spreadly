@@ -1,6 +1,6 @@
 <?php if (!$pUrl || $pUrl == '' || $pUrl == null) {?>
 <div class="content-box bg-white">
-	<?php echo __('No statistics available'); ?>
+	<?php echo __('No url statistics available'); ?>
 </div>
 <?php } else { ?>
 

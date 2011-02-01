@@ -25,6 +25,7 @@ var Deal = {
   bindClicks : function() {
     debug.log('[Deal][bindClicks]');
     jQuery('.link-deal-content').live('click', function() {
+
       var lAction = jQuery(this).attr('href');
       var lData = {
         ei_kcuf : new Date().getTime()
@@ -44,6 +45,7 @@ var Deal = {
           OnLoadGrafic.hideGrafic();
         }
       });
+      Deal.hideStats();      
       return false;
     });
   },
@@ -82,6 +84,10 @@ var Deal = {
       });
       return false;      
     });
+  },
+  
+  hideStats: function() {
+    jQuery('#analytix-filter-nav-box, #analytix-content-box').hide();    
   }
 };
 

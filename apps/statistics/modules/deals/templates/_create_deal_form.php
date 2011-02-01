@@ -279,29 +279,15 @@
 	  		</div>
 
 
-	  		<!-- ********** Configure success coupon area ********** -->
+	  		<!-- ********** Configure choose categories ********** -->
   			<div class="content-box bg-white">
     			<h2><?php echo __('Step 4: Choose categories')?></h2>
 	    			<div class="form-row">
-	    				<?php if($lIsEdit) { ?>
-	    					<div class="label-box">
-		    					<?php echo __('Choose categories');?>
-								</div>
-								<?php echo __('You have chosen %codetype% for all deals:', array('%codetype%' => $pCouponType)); ?> <strong><?php echo $pDefaultCode; ?></strong>
-								<input type="hidden" name="deal[coupon_type]" value="<?php echo $pCouponType;?>" />
-							<?php } else {?>
 		    				<div class="label-box">
-									<?php echo __('Categories'); ?>:
+		    					<?php echo $pForm['deal']['coupon_type']->renderLabel();?>
+									<?php echo $pForm['deal']['coupon_type']->renderError();?>
 								</div>
-								<ul class="radio_list clearfix">
-									<li class="tags-select">
-										<input type="radio" checked="checked" id="no_insert_categories" value="notags" name="tags[insert_categories]" class="tags-select">&nbsp;<label for="no_insert_categories" class="tags-select"><?php echo __('No categories'); ?></label>
-									</li>
-									<li class="tags-select">
-										<input type="radio" id="insert_categories" value="tags" name="tags[insert_categories]" class="tags-select">&nbsp;<label for="insert_categories" class="tags-select"><?php echo __('Insert Categories'); ?></label>
-									</li>
-								</ul>
-							<?php } ?>
+								<?php echo $pForm['deal']['addtags']->render();?>
 						</div>
 	    			<div class="form-row" id="deal_tag_row" style="display:none;">
 	    				<div class="label-box">

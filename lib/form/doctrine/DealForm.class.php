@@ -27,6 +27,7 @@ class DealForm extends BaseDealForm
       'coupon_quantity'   => new sfWidgetFormInputText(),
       'tags'              => new sfWidgetFormTextarea(),
       'coupon_type'       => new sfWidgetFormChoice(array('choices' => array('single' => $lI18n->__('Only one code'), 'multiple' => $lI18n->__('Paste codes')), 'expanded' => true ), array('class' => 'coupon-type-select')),
+			'addtags'           => new sfWidgetFormChoice(array('choices' => array('addtags' => $lI18n->__('Insert Categories'), 'addnotags' => $lI18n->__('No categories')), 'expanded' => true ), array('class' => 'tags-select')),
       'redeem_url'        => new sfWidgetFormInputText(),
       'tos_accepted'      => new sfWidgetFormInputCheckbox(),
       'terms_of_deal'     => new sfWidgetFormInputText()
@@ -43,7 +44,7 @@ class DealForm extends BaseDealForm
     	array(
     		'tos_accepted' => $lI18n->__('The "Deal" creates an agreement between the website owner and the user who claims a deal. ekaabo GmbH only provides the technical solution for handling this deal. By submitting this deal the website owner releases ekaabo GmbH from any kind of accountability. Claims can only be asserted between the user who claims a deal and the website owner.'),
     	  'terms_of_deal' => $lI18n->__('DEAL_FORM_TOS'),
-    	  'tags'         => $lI18n->__('DEAL_CATEGORIES'),
+    	  'tags'         => $lI18n->__('DEAL_CATEGORIES')
     	)
     );
 
@@ -59,6 +60,7 @@ class DealForm extends BaseDealForm
       'coupon_quantity'   => new sfValidatorInteger(array('required' => false, 'trim' => true)),
     	'tags'              => new sfValidatorString(array('max_length' => 512, 'required' => false)),
       'coupon_type'       => new sfValidatorChoice(array('choices' => array(0 => 'single', 1 => 'multiple'))),
+			'addtags'           => new sfValidatorChoice(array('choices' => array(0 => 'addtags', 1 => 'addnotags'), 'min' => 0)),
       'redeem_url'        => new sfValidatorUrl(array('max_length' => 512, 'required' => true, 'trim' => true)),
       'tos_accepted'      => new sfValidatorBoolean(array('required' => true, 'trim' => true), array('required' => $lI18n->__('Required'))),
       'terms_of_deal'     => new sfValidatorUrl(array('max_length' => 512, 'required' => true, 'trim' => true), array('required' => $lI18n->__('Required'), 'invalid' => $lI18n->__('Invalid Url')))
