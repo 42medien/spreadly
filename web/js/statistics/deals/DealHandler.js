@@ -75,8 +75,8 @@ var Deal = {
         data : lData,
         success : function(pResponse) {
           jQuery('#analytix-filter-nav-box, #analytix-content-box').show();
-          FilterNav.show(pResponse.nav);
-          FilterContent.show(pResponse.content);
+          AnalyticsFilterNav.show(pResponse.nav);
+          AnalyticsFilterContent.show(pResponse.content);
           OnLoadGrafic.hideGrafic();
         }
       });
@@ -239,7 +239,7 @@ var DealForm = {
     jQuery('ul.radio_list li.tags-select input:radio').live('click',
         function() {
           var lId = jQuery(this).attr('id');
-          if (lId == 'no_insert_categories') {
+          if (lId == 'deal_addtags_addnotags') {
             jQuery('#deal_tag_row').hide();
           } else {
             jQuery('#deal_tag_row').show();

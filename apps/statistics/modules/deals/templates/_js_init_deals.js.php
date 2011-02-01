@@ -5,5 +5,5 @@ DealTable.init();
 DealForm.init();
 Deal.showStats();
 AnalyticsFilter.init();
-FilterNav.init();
+AnalyticsFilterNav.init();
 AnalyticsUrlFilter.init();

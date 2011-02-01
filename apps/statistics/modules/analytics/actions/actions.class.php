@@ -57,7 +57,6 @@ class analyticsActions extends sfActions
 
   public function executeGet_analytics_content(sfWebRequest $request){
   	$this->getResponse()->setContentType('application/json');
-
   	if($this->pType == 'url_activities') {
   		if(!$this->pUrl) {
   	  	$this->pUrl = MongoUtils::getTopActivityUrl($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pDealId);

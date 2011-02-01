@@ -1,3 +1,9 @@
+<?php if (!$pUrl || $pUrl == '' || $pUrl == null) {?>
+<div class="content-box bg-white">
+	<?php echo __('No statistics available'); ?>
+</div>
+<?php } else { ?>
+
 <?php if($pCom == 'all') { ?>
 	<h2><?php echo __('Likes/Dislikes shared via all networks for %url%', array('%community%' => ucfirst($pCom), '%url%' => $pData['filter']['url'])); ?></h2>
 <?php } else { ?>
@@ -42,3 +48,4 @@
 	</ul>
 </div>
 <?php include_component('analytics','url_table', array('pCom' => $pCom, 'pFrom' => $pFrom, 'pTo' => $pTo, 'pUrl' => $pUrl)); ?>
+<?php } ?>
