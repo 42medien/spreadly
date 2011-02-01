@@ -9,7 +9,11 @@ class MongoUtils {
 
   public static function getTopActivityUrl($domain, $fromDate, $toDate, $aggregation, $dealId=null) {
     $topActivities = MongoUtils::getTopActivityUrlData($domain, $fromDate, $toDate, $aggregation, $dealId);
-    return $topActivities['data'][0]['url'];
+    if($topActivities['data'] && count($topActivities['data']) > 0) {
+      return $topActivities['data'][0]['url'];
+    } else {
+      return null;
+    }
   }
 
   public static function getTopActivityUrlData($domain, $fromDate, $toDate, $aggregation, $dealId=null) {
