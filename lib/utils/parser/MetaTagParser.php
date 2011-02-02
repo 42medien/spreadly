@@ -12,7 +12,7 @@ class MetaTagParser {
    * @param string $pUrl
    * @return array $lValues
    */
-  public static function parse($pHtml) {
+  public static function parse($pHtml, $pUrl) {
     $pHtml = preg_replace('/<head[^>]*>/i','<head>
                            <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
                           ',$pHtml);
@@ -30,8 +30,8 @@ class MetaTagParser {
 	    foreach ($lTags as $lTag) {
 	    	//if attribute name isset make a new entry in an array with key=name and value=content
 	      if ($lTag->hasAttribute('name')) {
-	        $lName = $lTag->getAttribute('name');
-	        $lValues[$lName] = $lTag->getAttribute('content');
+	        $lName = strtolower($lTag->getAttribute('name'));
+	        $lValues['meta'][$lName] = $lTag->getAttribute('content');
 	      }
 	    }
 
@@ -46,6 +46,18 @@ class MetaTagParser {
 	        continue;
 	      }
 	    }
+
+	    //get all meta-elements
+      $lLinks = $lDoc->getElementsByTagName('link');
+      //loop the metas
+      foreach ($lLinks as $lLink) {
+        //if attribute name isset make a new entry in an array with key=name and value=content
+        if ($lLink->hasAttribute('rel')) {
+          $lName = $lLink->getAttribute('rel');
+          $lValues['links'][$lName] = UrlUtils::abslink($lLink->getAttribute('href'), $pUrl);
+        }
+      }
+
 	    return $lValues;
   	}catch (Exception $e) {
       continue;
@@ -56,7 +68,7 @@ class MetaTagParser {
    * returns the meta/title-elements found on a parsed html
    * @param string $pHtml
    */
-  public static function getKeys($pHtml) {
-    return self::parse($pHtml);
+  public static function getKeys($pHtml, $pUrl) {
+    return self::parse($pHtml, $pUrl);
   }
 }
