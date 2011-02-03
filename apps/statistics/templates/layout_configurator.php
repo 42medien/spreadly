@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/css/widget/Button.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="/js/100_main/vendor/jquery_ui_datepicker/timepicker_plug/css/style.css" />
     <link rel="stylesheet" type="text/css" href="/js/100_main/vendor/jquery_ui_datepicker/smothness/jquery_ui_datepicker.css" />
-		<link rel="stylesheet" href="/css/vendor/jquery-ui.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/themes/base/jquery-ui.css" type="text/css" media="all" />
     <link rel="stylesheet/less" href="<?php echo sfConfig::get("app_settings_url");?>/less/main.less" type="text/css" />
 
     <script type="text/javascript" src="/js/100_main/include/statistics-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
