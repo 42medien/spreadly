@@ -53,6 +53,10 @@ static_signout:
   param:  { module: auth, action: signout, widgetcontext: static }
 # end auth
 
+static_index:
+  url:    /static/index
+  param:  { module: static, action: index }
+
 load_friends:
   url:   /widget/load_friends/*
   param: {module: widget, action: load_friends }

@@ -1,1 +1,1 @@
-LikePopup.init();
+/*LikePopup.init();*/

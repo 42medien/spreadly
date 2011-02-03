@@ -1,0 +1,13 @@
+/* =Bug
+--------------------------------------------------------------------------------------------------------*/
+*+html .checkbox{ top:-2px;}
+*+html .checkbox, *+html .ch-size li .radio-btn input{  width:13px; height:13px; }
+
+/*New popup css start on 01FEB2010*/
+*+html .azchecklist li a span{ bottom:-2px;  bottom:2px \0/; }
+.azchecklist li a span{ _bottom:-2px; }
+.popwidecol{ _width:356px; }
+
+
+/* End Bug
+--------------------------------------------------------------------------------------------------------*/

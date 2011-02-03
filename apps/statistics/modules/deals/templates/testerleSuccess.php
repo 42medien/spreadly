@@ -1,61 +1,45 @@
-<!-- form action="/deals/testerle_save" method="post" name="deal_form">
+<!-- "previous page" action -->
+<!-- root element for scrollable -->
 
-<?php //echo $pForm->render();?>
-  <?php //echo $pForm['_csrf_token']->render(); ?>
-	<input type="submit" class="button positive" value="<?php //echo __('Save', null, 'widget');?>" />
-</form -->
-<input type="text" name="q" id="query" />
-<div class="ui-widget">
-	<label for="taglist">Birds: </label>
-	<input type="text" id="taglist" size="50" />
+<div class="scrollable-content clearfix">
+	<div class="scrollable" id="myscroll">
+	   <!-- root element for the items -->
+	   <div class="items">
+	   		<div>
+	         <img id="img-1" src="http://farm4.static.flickr.com/3629/3323896446_3b87a8bf75_t.jpg" />
+	   		</div>
+	   		<div>
+	        <img id="img-2" src="http://farm4.static.flickr.com/3629/3323896446_3b87a8bf75_t.jpg" />
+	   		</div>
+	   		<div>
+	         <img id="img-3" src="http://farm4.static.flickr.com/3023/3323897466_e61624f6de_t.jpg" />
+	   		</div>
+	   		<div>
+	         <img id="img-1" src="http://farm4.static.flickr.com/3650/3323058611_d35c894fab_t.jpg" />
+	   		</div>
+	   		<div>
+	         <img id="img-1" src="http://farm4.static.flickr.com/3635/3323893254_3183671257_t.jpg" />
+	   		</div>
+	   		<div>
+	         <img id="img-1" src="http://farm4.static.flickr.com/3624/3323893148_8318838fbd_t.jpg" />
+	   		</div>
+	   </div>
+	</div>
+	<!-- "next page" action -->
+	<a class="prev browse left slide-back-link" id="slide-back-link"></a>
+	<a class="next browse left slide-next-link" id="slide-next-link"></a>
+	<span class="img-counter">1</span><span>/5</span>
 </div>
 
 
-	<script>
-	$(function() {
-		function split( val ) {
-			return val.split( /,\s*/ );
-		}
-		function extractLast( term ) {
-			return split( term ).pop();
-		}
 
-		$( "#taglist" )
-			// don't navigate away from the field on tab when selecting an item
-			.bind( "keydown", function( event ) {
-				if ( event.keyCode === $.ui.keyCode.TAB &&
-						$( this ).data( "autocomplete" ).menu.active ) {
-					event.preventDefault();
-				}
-			})
-			.autocomplete({
-				source: function( request, response ) {
-					$.getJSON( "/deals/get_search_results", {
-						term: extractLast( request.term )
-					}, response );
-				},
-				search: function() {
-					// custom minLength
-					var term = extractLast( this.value );
-					if ( term.length < 2 ) {
-						return false;
-					}
-				},
-				focus: function() {
-					// prevent value inserted on focus
-					return false;
-				},
-				select: function( event, ui ) {
-					var terms = split( this.value );
-					// remove the current input
-					terms.pop();
-					// add the selected item
-					terms.push( ui.item.value );
-					// add placeholder to get the comma-and-space at the end
-					terms.push( "" );
-					this.value = terms.join( ", " );
-					return false;
-				}
-			});
+<script type="text/javascript">
+	jQuery("#myscroll").scrollable({
+	  circular: true
 	});
-	</script>
+
+	jQuery('#slide-next-link').bind('click', function() {
+		var lChildren = jQuery('.scrollables .items > div').size();
+		debug.log(lChildren);
+	});
+</script>

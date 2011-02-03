@@ -250,3 +250,53 @@ ul#comboinput-list li{
   float: none;
 }
 
+/*
+  root element for the scrollable.
+  when scrolling occurs this element stays still.
+*/
+.scrollable {
+
+  /* required settings */
+    height: 75px;
+    overflow: hidden;
+    position: relative;
+    width: 99px;
+}
+
+/*
+  root element for scrollable items. Must be absolutely positioned
+  and it should have a extremely large width to accommodate scrollable items.
+  it's enough that you set width and height for the root element and
+  not for this element.
+*/
+.scrollable .items {
+  /* this cannot be too large */
+  width:20000em;
+  position:absolute;
+}
+
+/*
+  a single item. must be floated in horizontal scrolling.
+  typically, this element is the one that *you* will style
+  the most.
+*/
+.scrollable .items div {
+  float:left;
+}
+
+
+.scrollable-content{
+  width: 100px;
+  text-align: center;
+}
+.slide-back-link{
+  background: transparent url("/img/global/24x24/back.png") no-repeat;
+  width: 24px;
+  height: 24px;
+}
+
+.slide-next-link{
+  background: transparent url("/img/global/24x24/next.png") no-repeat;
+  width: 24px;
+  height: 24px;  
+}

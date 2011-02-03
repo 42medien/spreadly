@@ -86,4 +86,9 @@ class staticActions extends sfActions {
 
     $this->setLayout('layout_twocol');
   }
+
+  public function executeIndex(sfWebRequest $request){
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('static/js_init_static.js'));
+    $this->setLayout('layout');
+  }
 }

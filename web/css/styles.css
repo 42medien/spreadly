@@ -1,0 +1,419 @@
+@charset "utf-8";
+/*--------------------------------------------------------------------------------------------------------
+CSS Styles for <Yiid>.
+
+version:   1.0
+author:    Codingpeople GmbH
+email:     support@codingpeople.com
+website:   http://www.codingpeople.com/
+--------------------------------------------------------------------------------------------------------*/
+/*ebeaea*/
+/* =General
+--------------------------------------------------------------------------------------------------------*/
+
+/* Removing margin/padding */
+*{margin: 0;  padding: 0;}
+ul, li{ list-style:none;}
+
+.clearfix:after {  content: "."; display:block; height:0; clear:both; visibility:hidden; }/* ----- clear fix for floats ----- */
+.clearfix { display:inline-block; }		
+* html .clearfix { height:1%; }/* hides clearfix from IE-mac */
+.clearfix { display:block; }/* end hide from IE-mac */
+
+
+/* class for float  */
+.alignleft { float:left; }
+.alignright { float:right; }
+.alignnone { clear:both; font-size:0px; line-height:0px; height:0px;  }
+
+.spacer{ height:10px; font-size:0px; line-height:0px; clear:both;}
+.spacer5{height:5px; font-size:0px; line-height:0px; clear:both;}
+img{ vertical-align:top;}
+/* Removing border on linked images */
+a img {border: 0;}
+:focus{ outline:0px;}
+
+
+/* End General
+--------------------------------------------------------------------------------------------------------*/
+
+
+
+
+/* =Headings
+--------------------------------------------------------------------------------------------------------*/
+h1 { font-weight:normal;} 
+
+/* End Headings
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Links
+--------------------------------------------------------------------------------------------------------*/
+a { text-decoration:none;  color:#000 }
+a:hover { text-decoration:underline;  }
+
+/* End Links
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Branding
+--------------------------------------------------------------------------------------------------------*/
+p { padding:0px 0 10px 0}
+
+body{ font-size:12px; font-family:Arial, Helvetica, sans-serif; color:#000; background:url(/img/main-bg.jpg) center top no-repeat; }
+body.innerpage{ background:url(/img/inner-main-bg.jpg) center top no-repeat;}
+#wrapper { width:974px; margin:0 auto;}
+#header { }
+
+h1#logo { padding-left:103px;}
+h1#logo a { display:block; width:244px; height:173px; text-indent:-9999px; text-decoration:none; background:url(/img/logo-yiid.png) no-repeat 0 0;  } 
+
+.innerpage h1#logo { padding-left:116px;}
+.innerpage h1#logo a { display:block; width:251px; height:157px; text-indent:-9999px; text-decoration:none; background:url(/img/yiid-logo-inner.png) no-repeat 0 0;  } 
+
+/* End Branding
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Main Nav
+--------------------------------------------------------------------------------------------------------*/
+
+
+#mainNavigation { list-style:none; padding-right:14px;}
+#mainNavigation li { float:left; } 
+#mainNavigation li a{  text-indent:-9999em; display:block; height:59px; background-image:url(/img/navigation-sprites.png);  }
+#mainNavigation li a.home{ width:86px; background-position: 0px 0px;}
+#mainNavigation li a.home:hover, #mainNavigation li.active a.home{background-position: 0px -59px; }
+#mainNavigation li a.about{ width:91px; background-position: -87px 0px;}
+#mainNavigation li a.about:hover, #mainNavigation li.active a.about{background-position: -87px -59px; }
+#mainNavigation li a.support{ width:103px; background-position: -178px 0px;}
+#mainNavigation li a.support:hover, #mainNavigation li.active a.support{background-position: -178px -59px; }
+#mainNavigation li a.contact{ width:99px; background-position: -281px 0px;}
+#mainNavigation li a.contact:hover, #mainNavigation li.active a.contact{background-position: -281px -59px; }
+
+/* End Main Nav
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Main Content
+--------------------------------------------------------------------------------------------------------*/
+
+#content { } 
+.widecolumn { } 
+.narrowcolumn {} 
+
+.social-welcometext{ padding:39px 68px 0 83px;}
+.addthe-yiid{ margin-top:-65px; padding-bottom:32px;}
+.feedback{ position:absolute; right:0px; top:0px;}
+
+
+.grboxmid{ padding-left:9px; background:url(/img/grayboxl.png) left top repeat-y;}
+.grboxmid-content{  background:url(/img/grayboxr.png) right top repeat-y; padding-right:7px;}
+.graybox{ background:#ebeaea url(/img/graybox-bg.gif) left top repeat-x; padding:4px 7px 5px 8px;}
+
+.yiidbtnbox{ width:512px;}
+.yiidicon{ width:192px; padding:63px 0 35px 24px;  }
+.thebuttionbox{ height:150px; padding:17px 0 0 0; width:273px; background:url(/img/gray-arrow-bg.png) left 17px no-repeat;}
+.thebuttionbox ul{ padding:16px 0 0 79px; }
+.thebuttionbox li{ padding:0 12px 12px 0; width:51px; height:51px; float:left; }
+.getnowbox{ width:394px; padding-left:28px; background:url(/img/gr-bor.gif) left top repeat-y;}
+
+.textright{ text-align:right;}
+.yiidboxpad{ padding:15px 10px 17px 8px; }
+.getnowbox p{ padding-bottom:13px;}
+.getnowbox p.removebtmspace{ padding-bottom:0px;}
+
+.getnow{display:block; margin-top:-7px;}
+.getnow a{ font-size:18px; text-decoration:underline; font-weight:normal; color:#000; }
+.getnow a:hover{ text-decoration:none;}
+
+.the-buttonbox{ position:relative; padding-bottom:2px;}
+.thebutton{ position:absolute; left:2px; top:0px;}
+
+.loginbox{ padding:4px 0 0px 2px;}
+.loginbox label{ margin-right:5px; }
+.loginbox label.password{margin-right:3px; }
+.lgboxmargin{ margin:3px 0 4px 0;}
+
+.textfield{ float:left; background:url(/img/submit-bg.png) -3px -91px no-repeat; padding-left:14px;}
+.textfield span{ float:left; background:url(/img/submit-bg.png) right -60px no-repeat;  padding:5px 14px 4px 0; height:22px; }
+.textfield span input{ border:0px; background:none; line-height:19px; color:#ececec; height:20px; font-size:11px; padding-bottom:2px; }
+
+.submit-align{ margin-top:-3px;}
+
+.submit{ float:left; background:url(/img/submit-bg.png) 0px -159px no-repeat; padding-left:17px; cursor:pointer;}
+.submit span{ float:left; background:url(/img/submit-bg.png) right -122px no-repeat;  padding:4px 14px 6px 0px; height:27px;  cursor:pointer;}
+.submit span input{ border:0px; background:none; line-height:19px;  height:27px; font-size:11px; width:auto; overflow:visible; color:#000; font-weight:bold;  cursor:pointer; }
+
+.wd188{ width:190px;}
+.register{ line-height:30px; padding-left:3px; }
+.register a{margin:0 10px; color:#000;}
+.register a:hover{color:#EB2374; text-decoration:none; color:#EB2374;}
+.register a.first{ margin-left:0px;}
+.languagebox{ padding:6px 5px 0 0 ;} 
+.languagebox a{ margin:0 3px;}
+
+.choosebtn-object dd{ float:left;}
+
+.allweb-btn{ width:565px; background:url(/img/gr-borline.gif) right 1px no-repeat; padding-left:10px; } 
+.allweb-btn li{ float:left; padding:0 29px 0px 0; text-align:center; width:51px;}
+.allweb-btn li.removerpad{ padding-right:0px;}
+.allweb-btn li span{ display:block; padding:7px 0;}
+.allweb-btn li span a, .otherweb-box ul li span a{ color:#000; text-decoration:none;}
+.allweb-btn li span a:hover, .otherweb-box ul li span a:hover{color:#EB2374; text-decoration:none;} 
+
+.choose-title{ font-size:18px; font-weight:normal; padding:3px 0 13px 10px;}
+.otherweb-box{ width:180px; text-align:center; background:url(/img/gr-borline.gif) right 1px no-repeat;} 
+.otherweb-box ul li{ width:100%;}
+.otherweb-box ul li span{display:block; padding:7px 0;}
+.siteof-typecol{ width:174px;}
+.choosetype{ font-size:18px; font-weight:normal;  padding:39px 2px 0 30px;}
+.choosetype a{ background:url(/img/choose-arrow.png) right center no-repeat; padding-right:44px; display:inline-block; text-align:center;}
+.choosetype a:hover{ text-decoration:none; color:#EB2374; }
+
+.inner-socialtext{ padding:0 0 0 66px; margin-top:-12px;}
+.innerpageittext{ padding:0 0 10px 68px; margin-top:-143px;}
+
+.innerloginbox{ background:url(/img/gr-borh.gif) left bottom  repeat-x;  padding:0 0 12px 0;}
+.innerloginbox .loginbox{ padding-left:0px; padding-top:5px;}
+.innerloginbox .textfield{ background:url(/img/gray-textbg.png) -2px -30px no-repeat; padding-left:10px; }
+.innerloginbox .textfield span{  background:url(/img/gray-textbg.png) right 0px no-repeat; padding-right:11px; }
+.innerloginbox .textfield span input{ color:#000;}
+.innerloginbox .languagebox {    padding: 6px 3px 0 0;}
+.innerloginbox .loginbox label{ margin-right:12px;}
+.stepbtn{ font-size:18px; color:#555555; font-weight:normal; padding:10px 0 12px 2px;}
+.stepbtn span{ float:left; margin-right:12px; padding-right:15px; background:url(/img/gr-bor.gif) right top repeat-y; line-height:20px;  }
+.txtblack{ color:#000;}
+.nobg{ background:none !important;}
+.innerloginbox .loginbox label.submit-align{ margin-top:-4px; margin-left:-4px;}
+
+.grboxin{ padding: 5px 12px 5px 12px;}
+.choosewebblock span{ float:left; }
+.conf-text{ padding:0 0 0 12px; line-height:50px;}
+
+.textfield-wht{ float:left; background:url(/img/gray-textbg.png) -2px -30px no-repeat;  padding-left:10px;}
+.textfield-wht span{ float:left; background:url(/img/gray-textbg.png) right 0px no-repeat;  padding:5px 10px 4px 0; height:22px; }
+.textfield-wht span input{ border:0px; background:none; line-height:19px; color:#000; height:20px; font-size:11px; padding-bottom:2px; }
+.wd910{ width:909px;} 
+
+.siteurl{ padding:15px 0 8px 0;}
+
+.choose-size dd{ float:left}
+.std-sizeblock{background:url(/img/gr-bor.gif) right top repeat-y; width:352px; padding-right:2px;}
+
+.ch-size li{ position:relative; padding-left:22px; padding-bottom:8px; font-size:11px; line-height:18px; width:100%;}
+.ch-size li.removepad{ padding-bottom:0px;}
+.ch-size li.std-last{ padding-bottom:4px;}
+.ch-size li .radio-btn{ position:absolute; left:0px; top:2px;}
+.likebtn{ margin-right:6px;  }
+.likebox{ line-height:22px; font-size:11px; padding-bottom:6px;}
+.userfirst{ margin-right:5px;}
+.size-title{ font-size:12px; font-weight:bold; padding-bottom:8px;}
+.optionalbox{ width:190px; background:url(/img/gr-bor.gif) right top repeat-y; min-height:310px; height:auto !important; height:310px;  }
+.opt-peralist, .optionalbox .size-title{ padding-left:18px; padding-right:18px;}
+.opt-peralist li{ padding-bottom:11px; width:100%;} 
+.opt-peralist li span{ display:block; padding-bottom:2px;}
+.opt-peralist li select{ width:150px; border:solid 1px #cdcdcf; padding:2px;}
+.wd74{ width:64px;}
+.opt-peralist li input{ text-align:center;}
+.colorbox img{ margin-top:-2px; margin-left:3px; display:inline-block;}
+/*.checkbox{ position:relative; top:2px; margin-right:4px;}*/
+.codebox{ width:348px; padding-left:35px;} 
+
+.textareablock { width:329px; padding:12px 10px; background:url(/img/txt-boxbg.png) left top no-repeat; display:block; }
+.textareablock textarea{ overflow:auto; font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:16px; color:#000; height:106px; background:none; border:0px;width:100%;}
+.copycodebox{ padding-top:10px;}
+.copycodebox a.graybtn{ margin-right:3px; margin-left:-3px;}
+a.graybtn{background:url(/img/copycode-bg.png) 0px -36px no-repeat; display:inline-block; padding-left:15px; }
+a.graybtn span{  background:url(/img/copycode-bg.png) right 0px no-repeat;  padding:4px 15px 6px 0px; height:27px;  cursor:pointer; line-height:26px; display:inline-block;}
+a.graybtn:hover { text-decoration:none; color:#EB2374;}
+.optionltext{ display:inline-block; line-height:34px; padding-left:2px;}
+
+/* =End Main Content
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Footer
+--------------------------------------------------------------------------------------------------------*/
+
+#footer { background:url(/img/footer-shed.png) center top no-repeat; padding:40px 0 20px 0; text-align:center; margin-top:-8px;	}
+#footer a, #footer span{ margin:0 4px;}
+#footer a:hover{ text-decoration:none; color:#EB2374; }
+/* End Footer
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Forms
+--------------------------------------------------------------------------------------------------------*/
+
+fieldset { border: 0px solid transparent;  }
+
+/* End Forms
+--------------------------------------------------------------------------------------------------------*/
+
+
+
+/*New popup css start on 01FEB2010*/
+.popupblock{ width:541px; height:435px; background:url(/img/pop-upbg.gif) center top no-repeat; margin:0 auto; position:relative; padding: 0 20px 0 19px;}
+.pop-header { padding-bottom:6px;}
+.rempvepad{ padding-bottom:0px !important;}
+.spreadlogo{ margin-left:5px; margin-top:9px;}
+.slogantext{ margin-top:36px; margin-left:-2px;}
+.sharepic{ position:absolute; right:0px; top:0px;} 
+.popnav{ background:url(/img/top-navbgl.png) left top no-repeat; padding-left:14px; margin-bottom:-2px;}
+.popnavbg{ background:url(/img/top-navbgr.png) right top no-repeat; height:30px; padding:4px 14px 6px 0;}
+
+.grboxtop{ background:url(/img/topcorl.png) left 0px no-repeat; padding-left:15px; }
+.grboxtop span{ font-size:0px; line-height:0px;  background:url(/img/topcorr.png) right 0px no-repeat; height:11px; display:block; }
+.grboxbot{ background:url(/img/botcorlb.png) left 0px no-repeat; padding-left:15px; }
+.grboxbot span{ font-size:0px; line-height:0px;  background:url(/img/botcorrb.png) right 0px no-repeat; height:13px; display:block; }
+.popnavigation{ padding-left:2px;}
+.popnavigation li{ background:url(/img/popnav-sap.gif) right center no-repeat; float:left; padding:0 5px 0 4px; line-height:30px; position:relative; }  
+.popnavigation li.last{ background:none;}
+.popnavigation li a{ color:#252525; text-decoration:none;}
+.popnavigation li span{ display:none;}
+.popnavigation li.active span{ background:url(/img/nav-arrow.png) left top no-repeat; position:absolute; width:28px; height:15px; left:50%; margin-left:-16px; top:29px; z-index:10; display:block; } 
+.popnavigation li a:hover{ text-decoration:none;}
+.popnavigation li.active a{ font-weight:bold;}
+.profile-info { line-height:28px; padding-top:2px; color:#363636; padding-right:3px; position:relative; z-index:220;}
+.profile-info span{ display:inline-block;}
+.profile-info span.like{ background:url(/img/like.gif) left 6px no-repeat; padding:0 5px 0 15px; margin-left:6px;}
+.profile-info span.dislike{ background:url(/img/dislike.gif) left 9px no-repeat; padding:0 0px 0 16px;}
+.profile-info a{ color:#363636; text-decoration:none;}
+.mic-pic{ float:left; margin-right:4px; margin-top:1px;}
+.deal-title{ font-size:14px; font-weight:normal; color:#000; padding-left:4px; }
+.deal-title em{ font-size:11px;}
+
+.whtboxtop{ background:url(/img/gray-title-bg.gif) left 0px no-repeat; padding-left:8px; }
+.whtboxtop .rcor{  background:url(/img/gray-title-bg.gif) right -34px no-repeat;  display:block; line-height:33px;}
+.whtboxbot{ background:url(/img/whtboxbot.gif) left 0px no-repeat; padding-left:9px; }
+.whtboxbot span{ font-size:0px; line-height:0px;  background:url(/img/whtboxbot.gif) right -9px no-repeat; height:9px; display:block; font-size:0px; line-height:0px;}
+
+.whtboxtopwide{ background:url(/img/profile-boxbg.gif) left 0px no-repeat; padding-left:8px; }
+.whtboxtopwide .rcor{  background:url(/img/profile-boxbg.gif) right -82px no-repeat;  display:block; height:82px; padding-right:8px;}
+.wht-contentbox{ background:#fff; border:solid 1px #c5c4c4; border-bottom:0px; border-top:0px;}
+.picnavbox{ width:128px; padding:16px 0 0 15px; }
+.picnavbox ul.prnav li{padding-bottom:24px; font-size:11px;}
+.picnavbox ul.prnav li img{ float:left; margin-right:2px; }
+.picnavbox ul.prnav li a{ line-height:16px; color:#252525;}
+.picnavbox ul.prnav li a:hover, .picnavbox ul.prnav li a.active{ background:url(/img/bl-arrow.jpg) right 3px no-repeat; padding-right:10px; text-decoration:none; color:#375d81;}
+.popwidecol{ width:352px; padding-right:8px; padding-top:5px; margin-bottom:-4px; }
+.spacatspic{ margin:0 10px 0px 12px; float:left;}
+.txt-blue{color:#375d81;}
+.dotborbox{ background:url(/img/dot-box.gif) left top no-repeat; height:82px; width:288px; margin-top:7px; padding:10px 17px 10px 16px;}
+.dotborboxsmall{ background:url(/img/dot-box-small.gif) left top no-repeat; height:82px; width:288px; margin-top:7px; padding:10px 17px 15px 16px;}
+div.dotborboxmore{ margin-top:11px;}
+
+.whtrow{ background:url(/img/wht-row.gif) left 0px no-repeat; padding-left:8px; }
+.whtrow .rcor{ background:url(/img/wht-row.gif) right -40px no-repeat;  display:block;  height:36px; text-align:center; line-height:16px; padding-right:8px; padding-top:4px;}
+.dieblock{ padding-top:5px;}
+.graytitle{ color:#362f2d; font-size:13px; padding-bottom:5px; padding-left:2px; }
+.exprebox{ text-align:center; font-size:11px; color:#362f2d; padding:9px 0 2px 0;}
+.pleasemeicon{  background:url(/img/like.gif) right 6px no-repeat; padding:0 18px 0 0px; display:block; font-style:normal; margin-left:-5px; }
+.dieblock a.graybtn{ margin-bottom:-6px;}
+.dieblock a.graybtn span{ padding-right:8px; width:70px;}
+.ekrenne{ width:232px; float:left; font-size:11px; padding-top:7px;}
+
+.gefalt{ margin-right:-1px; margin-top:1px;}
+.poweredrow{color:#000; padding:5px 0 2px 177px; margin-bottom:-8px; font-size:10px; line-height:16px;}
+.poweredrow a{ color:#000;}
+.poweredrow a:hover{ color:#000; text-decoration:underline;}
+.poweredrow img{ margin-left:2px;}
+.picmultiline{  line-height:30px;}
+.spactsbox{ margin-left:52px; margin-top:-1px;}
+.txtcenter{ text-align:center;}
+.codebox{ width:156px; margin:1px auto 0 auto;}
+.code{ font-size:15px; }
+.htplinks{ text-align:center; font-size:11px; padding:7px 0 1px 0; }
+.htplinks a{ color:#375d81; text-decoration:none;}
+.htplinks a:hover{ text-decoration:underline;}
+.deallist { padding:9px 11px 34px 11px;} 
+.deallist .picblock{ margin-left:-3px;}
+.deallist dd{ background:url(/img/claim-bg.gif) left top no-repeat; padding-left:7px; margin-bottom:9px;  }
+.deallist dd .rcor{  background:url(/img/claim-bg.gif) right -31px no-repeat; height:31px; line-height:31px;}
+.deallist dd.claimbg{ background:url(/img/claim-bg.gif) left -62px no-repeat;}
+.deallist dd.claimbg .rcor{ background:url(/img/claim-bg.gif) right -93px no-repeat;}
+.lampicon{ float:left;  margin-top:8px;  margin-right:3px;}
+.like-arrow{ background:url(/img/gray-arrow.gif) left 3px no-repeat; padding-left:11px; margin-left:8px;}
+.picblock{ display:inline-block; width:132px;}
+.claimit{ background:url(/img/rightmark.gif) center 3px no-repeat; width:40px; height:25px; text-align:center; color:#000; font-size:10px; margin-right:6px; margin-top:1px;}  
+.claimit:hover{ text-decoration:none;}
+.profileinfo { padding-top:9px;} 
+.profileinfo li{ float:left;}
+.prothumb{ padding-right:8px; padding-left:3px;}
+.pronameblock { width:268px; padding-right:10px;}
+.pronameblock h1{ font-size:28px; font-weight:bold; line-height:22px; padding-bottom:5px; margin-top:-1px;}
+.scicon { padding-top:6px;}
+.scicon a{ margin-right:9px; }
+.friends-box{ width:57px; font-size:11px; text-align:center; padding-left:3px; margin-top:-1px;}
+.totalfriend{ background:url(/img/friends-bg.png) left top no-repeat; width:57px; height:43px; color:#555555; padding-top:7px; margin-top:-1px; }
+.totalfriend span{ font-size:14px; font-weight:bold; text-shadow:#ffffff 1px 1px 0px;}
+.commentlist{  padding:7px 5px 0px 7px;}
+.commentlist dd{ background:url(/img/comment-bg.png) left top no-repeat; width:491px; height:66px; margin-bottom:2px;}
+.commentbox{ padding:9px 23px 8px 24px; font-size:13px;}
+.timeago{ font-size:11px; color:#464646;}
+.commentbox p{ padding-bottom:0px;}
+.commentbox p a{ color:#375d81; text-decoration:none;}
+.commentbox p a:hover, .likeinfo a:hover, .showmore a:hover, .show:hover{ text-decoration:none;}
+.likeinfo { padding-top:16px;}
+.likeinfo a{ display:inline-block; padding-left:17px; color:#375d81; text-decoration:none; margin-left:14px; font-size:11px; line-height:16px;}
+.likeinfo a.like{ background:url(/img/like.gif) left top no-repeat;}
+.likeinfo a.dislike{ background:url(/img/dislike.gif) left 2px no-repeat;}
+.showmore{ text-align:right; padding:0 18px 0 0; margin-bottom:-2px;}
+.showmore a, .show{ background:url(/img/show-arrow.gif) left 4px no-repeat; padding-left:12px; color:#375d81; text-decoration:none; font-size:11px;}
+.whtboxpad{ padding:8px 6px 0px 10px }
+.azlist{ display:inline-block; padding:0 8px;}
+.fs13{ font-size:13px;}
+.azchecklist{ width:185px; margin-bottom:-2px;}
+.azchecklist li { padding-bottom:5px;}
+.azchecklist li a{ color:#375d81; text-decoration:none; line-height:18px;}
+.azchecklist li a span{ width:24px; display:inline-block; margin-left:2px; position:relative; bottom:-3px; height:18px;	 }
+
+.azchecklist li a span img{ vertical-align:inherit; }
+.azchecklist li a:hover{ text-decoration:none; }
+.abonnementsbox{ padding:8px 0 0 0;}
+.close{ background:url(/img/bluearrow-left.gif) left 3px no-repeat; padding-left:11px; color:#375d81; text-decoration:none; font-size:11px; margin-right:6px; margin-top:2px;}   
+.close:hover{ text-decoration:none;}
+.karrierbox{ width:269px; font-size:11px; line-height:13px; margin-top:-6px; margin-right:-2px; }
+.karrierbox .graybox{ padding-bottom:1px;}
+.karrierbox p{ padding-bottom:0px;}
+.midtumblist{ margin-top:-5px; padding-left:3px;}
+.midtumblist li{ float:left; padding-right:2px;}
+.alllikelist{ font-size:11px; padding:2px 8px 1px 0;}
+.loggedbox{ color:#fff; font-size:11px; color:#fff; text-decoration:none; padding-top:88px; position:relative; z-index:150; margin-bottom:-2px; }
+.loggedbox a{ text-decoration:underline; color:#fff;}
+.loggedbox a:hover{ text-decoration:none;}
+.fs11{ font-size:11px;}
+.friendactbox{ width:232px;}
+.trendingbox{ width:253px;}
+.profilelink { padding-top:1px; padding-bottom:10px;}
+.profilelink dt{ font-size:13px; color:#000; font-weight:bold; padding-bottom:10px;}
+.profilelink dd{ padding-bottom:15px;}
+dl.trendingbox dd{ padding-bottom:11px;}
+.profilelink dd.last{ padding-bottom:0px;}
+.profilelink a{ color:#375d81; text-decoration:none; background:url(/img/bl-arrow.jpg) left 2px no-repeat; padding-left:11px; display:block; line-height:13px;}
+.likethumb{background:url(/img/like.gif) left top no-repeat; padding-left:17px; color:#375d81; text-decoration:none; margin-left:2px; font-size:11px; line-height:16px;}
+.postedrow{ display:block; padding:6px 0 0px 0px;}
+.morecomments{ width:215px; color:#375d81; padding-top:78px;}
+.morecomments a{  margin-left:5px; }
+
+div.add{width:219px;  }
+div.add a{ position:relative; top:-4px; margin-left:2px;}
+.spactsrow{ margin-top:-3px;}
+
+.cust_checkbox {  cursor: default; width:13px; height:13px !important; background:url(/img/checkbox.gif) no-repeat 0 0px; display:inline-block; margin-right:5px; margin-top:3px;}
+.cust_checkbox_on { background:url(/img/checkbox.gif) no-repeat 0 -24px;  }
+ul.settingicon{ margin-bottom:-1px;}
+ul.settingicon li{ padding-bottom:4px;}
+
+/* =Bug start
+--------------------------------------------------------------------------------------------------------*/
+.ekrenne{   _padding-top:2px;}
+.gefalt{ _margin-right:-4px; }
+.popupblock{ _width:540px; _padding: 0 20px 0 18px;}
+
+/* End Bug 
+--------------------------------------------------------------------------------------------------------*/
+
+
