@@ -46,7 +46,6 @@ class YiidActivityTable extends Doctrine_Table {
    *
    * @param int $pUserId
    * @param string $pUrl
-   * @param array $pOwnedOnlineIdentitys
    * @param array $pGivenOnlineIdentitys
    * @param int $pScore
    * @param string $pVerb
@@ -59,7 +58,6 @@ class YiidActivityTable extends Doctrine_Table {
    */
   public static function saveLikeActivitys($pUserId,
                                            $pUrl,
-                                           //$pOwnedOnlineIdentitys = array(),
                                            $pGivenOnlineIdentitys = array(),
                                            $pScore = self::ACTIVITY_VOTE_POSITIVE,
                                            $pVerb = 'like',
@@ -70,7 +68,10 @@ class YiidActivityTable extends Doctrine_Table {
                                            $pTags = null
                                           ) {
 
-    $lSuccess = false;
+    if (!self::isVerbSupported($pVerb)) {
+      return false;
+    }
+
     $lVerifiedOnlineIdentitys = array();
     $pClickback = urldecode($pClickback);
     $pTitle = StringUtils::cleanupString($pTitle);
@@ -79,42 +80,19 @@ class YiidActivityTable extends Doctrine_Table {
     // array of services we're sharing to
     $lServices = array();
 
-    if (!self::isVerbSupported($pVerb)) {
-      return false;
-    }
-
     $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
     $lDeal = DealTable::getActiveDealByHostAndUserId($pUrl, $pUserId);
 
-    $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
-
-    // object doesn't exist, create it now
-    if (!$lSocialObject) {
-      $lSuccess = SocialObjectTable::initializeObjectFromUrl($pUrl);
-      if ($lSuccess === false) {
-        return false;
-      }
-      $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
-      $lSocialObject->updateObjectMasterData($pTitle, $pDescription, $pPhoto);
-    } // object exists, we need to check if user is allowed to make an action on it
-    elseif (!self::isActionOnObjectAllowed($lSocialObject->getId(), $pUserId, $lDeal)) {
+    $lSocialObject = SocialObjectTable::retrieveOrCreate($pUrl, $pTitle, $pDescription, $pPhoto);
+    
+    if (!$lSocialObject || self::retrieveActionOnObjectById($lSocialObject->getId(), $pUserId, $lDeal)) {
       return false;
     }
-
-    $pOwnedOnlineIdentitys = OnlineIdentityTable::retrieveIdsByUserId($pUserId);
-
-    // check if all onlineidentity-ids are valid
-    foreach ($pGivenOnlineIdentitys as $lIdentityId) {
-      if (in_array($lIdentityId, $pOwnedOnlineIdentitys)) {
-        $lVerifiedOnlineIdentityIds[]= $lIdentityId;
-        $senderOi = OnlineIdentityTable::getInstance()->retrieveByPk($lIdentityId);
-        $lOnlineIdentitys[] = $senderOi;
-        $lServices[] = $senderOi->getCommunityId();
-      }
-    }
-
+    
+    $lVerifiedOIs = OnlineIdentityTable::retrieveVerified($pUserId, $pGivenOnlineIdentitys);
+    
     // save yiid activity
-    $lActivity = self::saveActivity($lSocialObject, $pUrl, $pUserId, $lVerifiedOnlineIdentityIds, $lServices, $pScore, $pVerb, $pClickback, $lDeal, $pTags);
+    $lActivity = self::saveActivity($lSocialObject, $pUserId, $lVerifiedOIs, $pScore, $pVerb, $pClickback, $lDeal, $pTags);
     if (sfConfig::get('sf_environment') != 'dev') {
       // send messages to all services
       foreach ($lOnlineIdentitys as $lIdentity) {
@@ -123,12 +101,10 @@ class YiidActivityTable extends Doctrine_Table {
         $lStatus = $lIdentity->sendStatusMessage($pPostUrl, $pVerb, $pScore, $pTitle, $pDescription, $pPhoto);
       }
     }
-
-    sfContext::getInstance()->getLogger()->debug("{YiidActivityPeer}{saveLikeActivitys} Status Message: " . print_r($lVerifiedOnlineIdentityIds, true));
-
-    if (!empty($lVerifiedOnlineIdentityIds)) {
-      $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
-      $lSocialObject->updateObjectOnLikeActivity($pUserId, $lVerifiedOnlineIdentityIds, $pUrl, $pScore, $lServices);
+    
+    if ($lActivity->getOiids()) {
+      $lSocialObject = SocialObjectTable::retrieveByAliasUrl($pUrl);
+      $lSocialObject->updateObjectOnLikeActivity($pUserId, $lActivity->getOiids(), $pUrl, $pScore, $lServices);
       UserTable::updateLatestActivityForUser($pUserId, time());
     }
 
@@ -174,11 +150,9 @@ class YiidActivityTable extends Doctrine_Table {
    * @param string $pTags comma separated
    * @return YiidActivity
    */
-  public static function saveActivity($pSocialObject,
-                                      $pUrl,
+  private static function saveActivity($pSocialObject,
                                       $pUserId,
                                       $pOnlineIdentitys,
-                                      $pServicesId,
                                       $pScore,
                                       $pVerb,
                                       $pClickback = null,
@@ -189,13 +163,22 @@ class YiidActivityTable extends Doctrine_Table {
     $lActivity = new YiidActivity();
     $lActivity->setUId($pUserId);
     $lActivity->setSoId($pSocialObject->getId());
-    $lActivity->setUrl($pUrl);
-    $lActivity->setUrlHash(md5(UrlUtils::skipTrailingSlash($pUrl)));
-    $lActivity->setOiids($pOnlineIdentitys);
-    $lActivity->setCids($pServicesId);
+    $lActivity->setUrl($pSocialObject->getUrl());
+    $lActivity->setUrlHash(md5(UrlUtils::skipTrailingSlash($pSocialObject->getUrl())));
     $lActivity->setScore($pScore);
     $lActivity->setVerb($pVerb);
     $lActivity->setC(time());
+
+    
+    $lOIIds = array();
+    $lCIds = array();
+    foreach ($pOnlineIdentitys as $lOI) {
+      $lOIIds[] = $lOI->getId();
+      $lCIds[] = $lOI->getCommunityId();
+    }
+    
+    $lActivity->setOiids($lOIIds);
+    $lActivity->setCids($lCIds);
 
     // set tags
     if ($pTags) {
@@ -229,53 +212,19 @@ class YiidActivityTable extends Doctrine_Table {
   /**
    *
    * @author Christian Weyand
-   * @param $pSocialObjectId
-   * @param $pOnlineIdentitys
-   * @return boolean
-   */
-  public static function isActionOnObjectAllowed($pSocialObjectId, $pUserId, $pDeal = null) {
-    $lAlreadyPerformedActivity = self::retrieveActionOnObjectById($pSocialObjectId, $pUserId, $pDeal);
-    return $lAlreadyPerformedActivity?false:true;
-  }
-
-  /**
-   * check if a given user already performed an action on a social object
-   * returns false if not, or it's score (1/-1)
-   *
-   * @author Christian Weyand
-   * @param int $pSocialObjectId
-   * @param int $pUserId
-   * @return false or score of action taken (-1/1)
-   */
-  public static function getActionOnObjectByUser($pSocialObjectId, $pUserId, $pDeal = null) {
-    $lAction = self::retrieveActionOnObjectById($pSocialObjectId, $pUserId, $pDeal);
-    return $lAction?$lAction->getScore():false;
-  }
-
-  /**
-   *
-   * @author Christian Weyand
    * @param int $pSocialObjectId
    * @param array $pOnlineIdentitys
    * @return array
    */
   public static function retrieveActionOnObjectById($pSocialObjectId, $pUserId, $pDeal = null) {
     $lCollection = self::getMongoCollection();
-
+    
     // get yiid-activity and factor a deal
-    if ($pDeal) {
-      $lQuery = $lCollection->findOne(array("so_id" => new MongoId($pSocialObjectId.""),
-                                            "u_id" => intval($pUserId),
-                                            "d_id" => intval($pDeal->getId())
-                                           ));
-    } else {
-      $lQuery = $lCollection->findOne(array("so_id" => new MongoId($pSocialObjectId.""),
-                                            "u_id" => intval($pUserId),
-                                            "d_id" => array('$exists' => false)
-                                           ));
-    }
-
-
+      $lQuery = $lCollection->findOne(array(
+        "so_id" => new MongoId($pSocialObjectId.""),
+        "u_id" => intval($pUserId),
+        "d_id" => ($pDeal ? intval($pDeal->getId()) : array('$exists' => false))
+      ));
 
     return self::initializeObjectFromCollection($lQuery);
   }
@@ -362,26 +311,6 @@ class YiidActivityTable extends Doctrine_Table {
   }
 
   /**
-   * @author weyandch
-   * @param string $pUrl
-   * @return SocialObject
-   */
-  public static function retrieveSocialObjectByUrl($pUrl) {
-    return SocialObjectTable::retrieveByAliasUrl($pUrl);
-  }
-
-  /**
-   * retrieves an social object for a given url
-   *
-   * @author Christian Weyand
-   * @param string $pUrl
-   * @return SocialObject
-   */
-  public static function retrieveSocialObjectByAliasUrl($pUrl) {
-    return SocialObjectTable::retrieveByAliasUrl($pUrl);
-  }
-
-  /**
    *
    * @author Christian Weyand
    * @param $pCollection
@@ -442,7 +371,7 @@ class YiidActivityTable extends Doctrine_Table {
     $lCollection = self::getMongoCollection();
 
     $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
-    $lSocialObject = self::retrieveSocialObjectByAliasUrl($pUrl);
+    $lSocialObject = SocialObjectTable::retrieveByAliasUrl($pUrl);
 
     if ($lSocialObject) {
       $lQuery = $lCollection->findOne(array("u_id" => (int)$pUserId,

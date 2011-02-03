@@ -82,7 +82,6 @@ class apiActions extends sfActions {
     if ($this->status == 200) {
       $lActivity = YiidActivityTable::saveLikeActivitys($this->getUser()->getId(),
                                                         $this->lUrl,
-                                                        //$this->lIdentitysOwnedByUser,
                                                         $this->lIdentitysSent,
                                                         $this->lLikeDis,
                                                         $this->lType,

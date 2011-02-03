@@ -36,6 +36,18 @@ class SocialObjectTable extends Doctrine_Table {
     $lCollection = self::getMongoCollection();
     $lCollection->update($pIdentifier, $pManipualtior, array('upsert' => true));
   }
+  
+  public static function retrieveOrCreate($pUrl, $pTitle, $pDescription, $pPhoto) {
+    $lSocialObject = SocialObjectTable::retrieveByAliasUrl($pUrl);
+    if (!$lSocialObject) {
+      if (SocialObjectTable::initializeObjectFromUrl($pUrl) === false) {
+        return false;
+      }
+      $lSocialObject = SocialObjectTable::retrieveByAliasUrl($pUrl);
+      $lSocialObject->updateObjectMasterData($pTitle, $pDescription, $pPhoto);
+    }
+    return $lSocialObject;
+  }
 
   /**
    * initializes a basic social object for a given url
