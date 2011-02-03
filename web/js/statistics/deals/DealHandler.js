@@ -114,7 +114,7 @@ var DealForm = {
     DealForm.toggleCouponType();
     DealForm.toggleTagBoxes();    
     DealForm.setRadioButtons();
-    DealForm.countCodes();    
+    DealForm.countCodes(); 
     
     // init datetime-picker for start and enddate
     jQuery('input#deal_start_date').datetime({
@@ -141,6 +141,48 @@ var DealForm = {
     jQuery('#deal_button_wording').limitValue('35', '#button_wording_counter');
     jQuery('#deal_summary').limitValue(40, '#summary_counter');
     jQuery('#deal_description').limitValue(80, '#description_counter');
+  },
+  
+  
+  initAutocomplete: function() {
+    debug.log('[CreateDealForm][initAutocomplete]'); 
+    jQuery( "#deal_tags" ).bind( "keydown", function( event ) {
+      if ( event.keyCode === $.ui.keyCode.TAB &&
+          $( this ).data( "autocomplete" ).menu.active ) {
+        event.preventDefault();
+      }
+      debug.log('keydown');
+    })
+    .autocomplete({
+      source: function( request, response ) {
+        jQuery.getJSON( "/deals/get_tags", {
+          term: extractLast( request.term ),
+          value: encodeURI(jQuery('#deal_tags').val())
+        }, response );
+      },
+      search: function() {
+        // custom minLength
+        var term = extractLast( this.value );
+        if ( term.length < 2 ) {
+          return false;
+        }
+      },
+      focus: function() {
+        // prevent value inserted on focus
+        return false;
+      },
+      select: function( event, ui ) {
+        var terms = split( this.value );
+        // remove the current input
+        terms.pop();
+        // add the selected item
+        terms.push( ui.item.value );
+        // add placeholder to get the comma-and-space at the end
+        terms.push( "" );
+        this.value = terms.join( ", " );
+        return false;
+      }
+    }); 
   },
   
   /**
@@ -249,6 +291,7 @@ var DealForm = {
             jQuery('#deal_tag_row').hide();
           } else {
             jQuery('#deal_tag_row').show();
+            DealForm.initAutocomplete();
           }
         });
   },  
@@ -414,3 +457,10 @@ var DealTable = {
     });
   }
 };
+
+function split( val ) {
+  return val.split( /,\s*/ );
+}
+function extractLast( term ) {
+  return split( term ).pop();
+}

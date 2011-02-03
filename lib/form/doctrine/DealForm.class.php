@@ -25,7 +25,7 @@ class DealForm extends BaseDealForm
       'description'       => new sfWidgetFormInputText(),
       'button_wording'    => new sfWidgetFormInputText(),
       'coupon_quantity'   => new sfWidgetFormInputText(),
-      'tags'              => new sfWidgetFormTextarea(),
+      'tags'              => new sfWidgetFormInputText(),
       'coupon_type'       => new sfWidgetFormChoice(array('choices' => array('single' => $lI18n->__('Only one code'), 'multiple' => $lI18n->__('Paste codes')), 'expanded' => true ), array('class' => 'coupon-type-select')),
 			'addtags'           => new sfWidgetFormChoice(array('choices' => array('addnotags' => $lI18n->__('No categories'), 'addtags' => $lI18n->__('Insert Categories')), 'expanded' => true ), array('class' => 'tags-select')),
       'redeem_url'        => new sfWidgetFormInputText(),
@@ -44,7 +44,7 @@ class DealForm extends BaseDealForm
     	array(
     		'tos_accepted' => $lI18n->__('The "Deal" creates an agreement between the website owner and the user who claims a deal. ekaabo GmbH only provides the technical solution for handling this deal. By submitting this deal the website owner releases ekaabo GmbH from any kind of accountability. Claims can only be asserted between the user who claims a deal and the website owner.'),
     	  'terms_of_deal' => $lI18n->__('DEAL_FORM_TOS'),
-    	  'tags'         => $lI18n->__('DEAL_CATEGORIES')
+    	  'tags'         => $lI18n->__('Insert categories')
     	)
     );
 

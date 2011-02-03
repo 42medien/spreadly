@@ -1,4 +1,9 @@
 <?php
+
+	/**
+	 * To check, if we are in the edit-mode
+	 * if so, set edit to true (need for checks inside of the form) and get the deal bound to the form
+	 */
 	$lIsEdit = false;
 	$lDeal = null;
 	if($pForm->getEmbeddedForm('deal')->getObject()->getId()){
@@ -6,6 +11,10 @@
 		$lDeal = $pForm->getEmbeddedForm('deal')->getObject();
 	}
 
+	/**
+	 * if the form is bound means: if it is validated. if it is, we get the default values from the validated form object to display
+	 * if not, we display the "normal" defaults
+	 */
 	if($pForm->isBound()){
 		$lDealValues = $pForm->getTaintedValues();
 		$lDefaultDeal = $lDealValues['deal'];
@@ -178,7 +187,7 @@
 				    				<?php echo $pForm['deal']['coupon_quantity']->renderLabel();?>
 				    				<?php if(!$lDeal->isUnlimited()) {?>
 		          				<div class="meta-label">
-		          					<?php echo __('Empty or 0 is same as unlimeted');?>
+		          					<?php echo __('Empty or 0 is same as unlimited');?>
 		          				</div>
 		          			<?php } ?>
 										<?php echo $pForm['deal']['coupon_quantity']->renderError();?>

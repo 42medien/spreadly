@@ -64,6 +64,12 @@ class dealsActions extends sfActions
 
   }
 
+  public function executeGet_tags(sfWebRequest $request) {
+  	$this->getResponse()->setContentType('application/json');
+  	$lArray =  array("Affe", "Pferd", "Pinguin");
+    return $this->renderText(json_encode($lArray));
+  }
+
   private function getCleanedParams($pRequest) {
     $lParams = $pRequest->getPostParameters();
     $lParams['deal']['domain_profile_id'] = $lParams['id'];
