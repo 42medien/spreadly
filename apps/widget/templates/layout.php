@@ -5,9 +5,10 @@
     <?php include_title() ?>
     <?php include_http_metas() ?>
     <?php include_metas() ?>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 		<link rel="stylesheet" type="text/css" href="/css/styles.css" media="screen" />
-		<!-- link rel="stylesheet" type="text/css" href="css/print.css" media="print" / -->
+		<link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />
 		<!--[if IE]>
 		<link rel="stylesheet" type="text/css" href="/css/ie.css" />
 		<![endif]-->
@@ -70,12 +71,7 @@
                 		</li>
                   	<li class="pronameblock">
                   		<h1>Marco Ripanti</h1>Entrepreneur and founder of yiid.com
-                  		<div class="scicon">
-												<a href="#"><img src="/img/tweet-profilleicon.gif" width="17" height="17" alt="Twitter" title="Twitter" /></a>
-												<a href="#"><img src="/img/facebookprofileicon.gif" width="17" height="17" alt="Facebook" title="Facebook" /></a>
-												<a href="#"><img src="/img/in-profileicon.gif" width="17" height="17" alt="Linked in" title="Linked in" /></a>
-												<a href="#"><img src="/img/googlechat-icon.gif" width="19" height="17" alt="Buzz" title="Buzz" /></a>
-											</div>
+                  		<div class="scicon"><a href="#"><img src="/img/tweet-profilleicon.gif" width="17" height="17" alt="Twitter" title="Twitter" /></a><a href="#"><img src="/img/facebookprofileicon.gif" width="17" height="17" alt="Facebook" title="Facebook" /></a><a href="#"><img src="/img/in-profileicon.gif" width="17" height="17" alt="Linked in" title="Linked in" /></a><a href="#"><img src="/img/googlechat-icon.gif" width="19" height="17" alt="Buzz" title="Buzz" /></a></div>
 										</li>
 										<li class="friends-box">
 											<div class="totalfriend">
