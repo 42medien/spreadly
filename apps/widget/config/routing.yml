@@ -1,93 +1,22 @@
-settings:
-  url:    /settings/index
+widget_like:
+  url:    /like
+  param:  { module: like, action: index }
+
+widget_settings:
+  url:    /settings
   param:  { module: settings, action: index }
 
-# popup auth
-popup_add_service:
-  url:    /popup/add_service
-  param:  { module: auth, action: add_service, widgetcontext: popup }
-
-popup_signin:
-  url:    /popup/signin
-  param:  { module: auth, action: signin, widgetcontext: popup }
-
-popup_confirm_signin:
-  url:    /popup/confirm_signin/*
-  param:  { module: auth, action: confirm_signin, widgetcontext: popup }
-
-popup_complete_signin:
-  url:    /popup/complete_signin/*
-  param:  { module: auth, action: complete_signin, widgetcontext: popup }
-
-popup_signinto:
-  url:   /popup/signinto/*
-  param: { module: auth, action: signinto, widgetcontext: popup }
-
-popup_signout:
-  url:    /popup/signout
-  param:  { module: auth, action: signout, widgetcontext: popup }
-
-# static auth
-static_add_service:
-  url:    /static/add_service
-  param:  { module: auth, action: add_service, widgetcontext: static }
-
-static_signin:
-  url:    /static/signin
-  param:  { module: auth, action: signin, widgetcontext: static }
-
-static_confirm_signin:
-  url:    /static/confirm_signin/*
-  param:  { module: auth, action: confirm_signin, widgetcontext: static }
-
-static_complete_signin:
-  url:    /static/complete_signin/*
-  param:  { module: auth, action: complete_signin, widgetcontext: static }
-
-static_signinto:
-  url:   /static/signinto/*
-  param: { module: auth, action: signinto, widgetcontext: static }
-
-static_signout:
-  url:    /static/signout
-  param:  { module: auth, action: signout, widgetcontext: static }
-# end auth
-
-static_index:
-  url:    /static/index
-  param:  { module: static, action: index }
-
-load_friends:
-  url:   /widget/load_friends/*
-  param: {module: widget, action: load_friends }
-
-static_like:
-  url:    /static/like/*
-  param:  { module: static, action: like }
-
-static_settings:
-  url:    /static/settings/*
-  param:  { module: static, action: settings }
-  
-popup_settings: 
-  url:    /settings/index
-  param:  { module: settings, action: index }
-
-popup_deals:
-  url:    /deals/index
+widget_deals:
+  url:    /deals
   param:  { module: deals, action: index }
-  
-popup_profile:
-  url:    /profile/index 
+
+widget_profile:
+  url:    /profile/index
   param:  { module: profile, action: index }
-  
-profile_signinto:
-  url:   /profile/signinto/*
-  param: { module: auth, action: signinto, widgetcontext: profile }  
-  
-profile_complete_signin:
-  url:    /profile/complete_signin/*
-  param:  { module: auth, action: complete_signin, widgetcontext: static }  
+
+signinto:
+  url:   /auth/signinto
+  param: { module: auth, action: signinto }
 
 like:
   url:   /api/like/*

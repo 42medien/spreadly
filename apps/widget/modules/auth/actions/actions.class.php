@@ -9,21 +9,6 @@
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
 class authActions extends sfActions {
-
-  public function initialize($context, $module, $action) {
-    $parentRet = parent::initialize($context, $module, $action);
-
-    // add context
-    $this->pContext = $context->getRequest()->getParameter("widgetcontext", $context->getRequest()->getParameter('module'));
-
-    sfConfig::set( 'app_twitter_oauth_callback_uri', '/widgets/'.$this->pContext.'/complete_signin/service/twitter' );
-    sfConfig::set( 'app_facebook_oauth_callback_uri', '/widgets/'.$this->pContext.'/complete_signin/service/facebook' );
-    sfConfig::set( 'app_linkedin_oauth_callback_uri', '/widgets/'.$this->pContext.'/complete_signin/service/linkedin' );
-    sfConfig::set( 'app_google_oauth_callback_uri', '/widgets/'.$this->pContext.'/complete_signin/service/google' );
-
-    return $parentRet;
-  }
-
   /**
    * Executes index action
    *
@@ -32,12 +17,12 @@ class authActions extends sfActions {
   public function executeSignin(sfWebRequest $request) {
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('popup/js_popup_ready'));
     if ($this->getUser()->isAuthenticated()) {
-      $lUrl = $this->getUser()->getAttribute("redirect_after_login", "@settings", "popup");
+      $lUrl = $this->getUser()->getAttribute("redirect_after_login", "@widget_like", "widget");
       $this->redirect($lUrl);
     }
 
     if ($request->getParameter('url') != null) {
-      $this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "popup");
+      $this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "widget");
     }
 
     sfProjectConfiguration::getActive()->loadHelpers('I18N');
@@ -46,7 +31,7 @@ class authActions extends sfActions {
 
   public function executeSignout(sfWebRequest $request) {
     $this->getUser()->signOut();
-    $this->redirect('@'.$this->pContext.'_signin');
+    $this->redirect('@signin');
   }
 
   public function executeSigninto(sfWebRequest $request) {
@@ -55,7 +40,7 @@ class authActions extends sfActions {
       $lObject = AuthApiFactory::factory($lService);
       $lObject->doAuthentication();
     } else {
-      $this->redirect('@'.$this->pContext.'_signin');
+      $this->redirect('@signin');
     }
   }
 
@@ -85,7 +70,7 @@ class authActions extends sfActions {
     $this->pOnlineIdenities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
     CookieUtils::generateWidgetIdentityCookie($this->pOnlineIdenities);
 
-    $lUrl = $this->getUser()->getAttribute("redirect_after_login", "@settings", "popup");
+    $lUrl = $this->getUser()->getAttribute("redirect_after_login", "@widget_like", "widget");
     $this->redirect($lUrl);
   }
 
