@@ -228,6 +228,24 @@ class YiidActivityTable extends Doctrine_Table {
 
     return self::initializeObjectFromCollection($lQuery);
   }
+  
+  /**
+   *
+   * @author hannes
+   * @param int $pUserId the user id
+   * @param boolean $pIsLike whether you want likes or dislikes
+   * @return count of activity
+   */
+  public static function retrieveActivityCountByUserId($pUserId, $pIsLike=true) {
+    $lCollection = self::getMongoCollection();
+    
+    $lQuery = $lCollection->count(array(
+      "u_id" => intval($pUserId),
+      "score" => $pIsLike ? 1 : -1
+    ));
+
+    return $lQuery;
+  }
 
   public static function retrieveLatestActivitiesByContacts($pUserId, $pFriendId = null, $pCommunityId = null, $pRangeDays = 30, $pOffset = 10, $pLimit = 1) {
     $lCollection = self::getMongoCollection();

@@ -157,4 +157,20 @@ class User extends BaseUser {
   public function getIdsOfFriends() {
     return OnlineIdentityTable::getUserIdsOfFriendsByUserId($this->getId());
   }
+  
+  public function getLikeCount() {
+    return YiidActivityTable::retrieveActivityCountByUserId($this->getId());
+  }
+
+  public function getDislikeCount() {
+    return YiidActivityTable::retrieveActivityCountByUserId($this->getId(), false);
+  }
+  
+  public function getFriendCount() {
+    $lCount = 0;
+    foreach ($this->getOnlineIdentities() as $oi) {
+      $lCount += $oi->getFriendCount();
+    }
+    return $lCount;
+  }
 }
