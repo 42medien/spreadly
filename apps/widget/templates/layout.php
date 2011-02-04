@@ -20,7 +20,7 @@
 		<![endif]-->
     <script type="text/javascript" src="/js/100_main/include/widget-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
     <script type="text/javascript" src="/js/widget/static/SettingsHandler.js"></script>
-    <link rel="shortcut icon" href="/img/global/favicon_16x16.ico" />
+    <link rel="shortcut icon" href="/img/favicon.ico" />
   </head>
   <body class="nobg">
 		<div class="popupblock">

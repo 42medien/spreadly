@@ -1,3 +1,7 @@
+/**
+ * @nocombine widget
+ */
+
 var ShareDefaultSettings = {
 
     toggleService: function() {
