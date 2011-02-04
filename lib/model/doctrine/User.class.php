@@ -176,17 +176,13 @@ class User extends BaseUser {
   
   public function getInfluencerRank() {
     $fc = $this->getFriendCount();
-    $rank = "influencer";
-    if($fc < 100) {
+    $rank = "dominator";
+    if($fc < 130) {
       $rank = "rookie";
-    } elseif($fc < 200) {
-      $rank = "coolguy";
-    } elseif($fc < 300) {
-      $rank = "cheffe";
-    } elseif($fc < 400) {
-      $rank = "bigboy";
-    } elseif($fc < 500) {
-      $rank = "partyguy";
+    } elseif($fc < 260) {
+      $rank = "establishment";
+    } elseif($fc < 520) {
+      $rank = "influencer";
     }
     return  __('influencer_rank_'.$rank);
   }
