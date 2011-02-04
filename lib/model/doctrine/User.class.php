@@ -173,4 +173,21 @@ class User extends BaseUser {
     }
     return $lCount;
   }
+  
+  public function getInfluencerRank() {
+    $fc = $this->getFriendCount();
+    $rank = "influencer";
+    if($fc < 100) {
+      $rank = "rookie";
+    } elseif($fc < 200) {
+      $rank = "coolguy";
+    } elseif($fc < 300) {
+      $rank = "cheffe";
+    } elseif($fc < 400) {
+      $rank = "bigboy";
+    } elseif($fc < 500) {
+      $rank = "partyguy";
+    }
+    return  __('influencer_rank_'.$rank);
+  }
 }
