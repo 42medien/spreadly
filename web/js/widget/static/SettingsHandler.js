@@ -2,6 +2,7 @@ var ShareDefaultSettings = {
 
     toggleService: function() {
       debug.log('[ShareDefaultSettings][addService]'); 
+      OnLoadGrafic.showGrafic();
         var lState = 'on', lOiId;
         lOiId = jQuery(this).siblings('.checkbox').attr('value');
         
@@ -16,7 +17,7 @@ var ShareDefaultSettings = {
         };
         
         jQuery.ajax({
-          beforeSubmit : OnLoadGrafic.showGrafic,
+          //beforeSubmit : OnLoadGrafic.showGrafic,
           type : "GET",
           url : lAction,
           dataType : "json",
