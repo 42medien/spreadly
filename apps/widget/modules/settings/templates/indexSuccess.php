@@ -6,12 +6,12 @@
                 			<img src="/img/macrco-thumb.jpg" width="64" height="64" alt="Marco Ripanti" title="Marco Ripanti" />
                 		</li>
                   	<li class="pronameblock">
-                  		<h1>Marco Ripanti</h1>Entrepreneur and founder of yiid.com
+                  		<h1><?php echo $pUser->getUsername(); ?></h1>Entrepreneur and founder of yiid.com
                   		<div class="scicon"><a href="#"><img src="/img/tweet-profilleicon.gif" width="17" height="17" alt="Twitter" title="Twitter" /></a><a href="#"><img src="/img/facebookprofileicon.gif" width="17" height="17" alt="Facebook" title="Facebook" /></a><a href="#"><img src="/img/in-profileicon.gif" width="17" height="17" alt="Linked in" title="Linked in" /></a><a href="#"><img src="/img/googlechat-icon.gif" width="19" height="17" alt="Buzz" title="Buzz" /></a></div>
 										</li>
 										<li class="friends-box">
 											<div class="totalfriend">
-												<span>9847</span><br />friends
+												<span>12415</span><br />friends
 											</div>
 											Influencer
 										</li>
@@ -22,11 +22,25 @@
               <div class="wht-contentbox clearfix">
               	<div class="whtboxpad">
                 	<div class="fs13 clearfix">
-                		<strong> Social Networks</strong>
-                    <span class="postedrow">Likes will be posted immediately to the networks you have checked:</span>
+                		<strong><?php echo __('Social Networks'); ?></strong>
+                    <span class="postedrow"><?php echo __('Likes will be posted immediately to the networks you have checked:'); ?></span>
                   </div>
                   <div class="abonnementsbox clearfix">
                   	<ul class="azchecklist settingicon alignleft">
+											<?php foreach ($pIdentities as $lIdentity) { ?>
+	                    	<li>
+	                    		<label class="radio-btn">
+	                    			<input type="checkbox" class="checkbox" name="" />
+	                    		</label>
+	                    		<a href="#">
+	                    			<span>
+	                    				<img src="/img/tweet-profilleicon.gif" width="17" height="17" alt="pics.nase-bohren.de" title="pics.nase-bohren.de" />
+	                    			</span>twitter.com/ripanti
+	                    		</a>
+	                    	</li>
+											<?php } ?>
+
+
                     	<li>
                     		<label class="radio-btn">
                     			<input type="checkbox" class="checkbox" name="" />

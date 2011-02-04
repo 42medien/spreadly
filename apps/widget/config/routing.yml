@@ -1,6 +1,6 @@
 settings:
-  url:    /popup/settings
-  param:  { module: popup, action: settings }
+  url:    /settings/index
+  param:  { module: settings, action: index }
 
 # popup auth
 popup_add_service:
@@ -68,6 +68,26 @@ static_like:
 static_settings:
   url:    /static/settings/*
   param:  { module: static, action: settings }
+  
+popup_settings: 
+  url:    /settings/index
+  param:  { module: settings, action: index }
+
+popup_deals:
+  url:    /deals/index
+  param:  { module: deals, action: index }
+  
+popup_profile:
+  url:    /profile/index 
+  param:  { module: profile, action: index }
+  
+profile_signinto:
+  url:   /profile/signinto/*
+  param: { module: auth, action: signinto, widgetcontext: profile }  
+  
+profile_complete_signin:
+  url:    /profile/complete_signin/*
+  param:  { module: auth, action: complete_signin, widgetcontext: static }  
 
 like:
   url:   /api/like/*

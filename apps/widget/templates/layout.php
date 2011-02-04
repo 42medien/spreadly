@@ -21,8 +21,6 @@
     <script type="text/javascript" src="/js/100_main/include/widget-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
     <link rel="shortcut icon" href="/img/global/favicon_16x16.ico" />
   </head>
-
-
   <body class="nobg">
 		<div class="popupblock">
 			<div class="sharepic">
@@ -38,111 +36,30 @@
   		</div>
 
       <!--Pop Navigation start -->
+      <?php if ($sf_user->isAuthenticated() ) {?>
       <div class="popnav">
       	<div class="popnavbg clearfix">
         	<div class="profile-info alignright">
-          	<img src="/img/marco.jpg" width="25" height="26" alt="Marco" title="Marco" class="mic-pic" />Hi Marco,<span class="like">134</span><span class="dislike">8</span> | <a href="#">Logout</a>
+          	<img src="/img/marco.jpg" width="25" height="26" alt="<?php echo $sf_user->getUser()->getUsername(); ?>" title="<?php echo $sf_user->getUser()->getUsername(); ?>" class="mic-pic" />Hi <?php echo $sf_user->getUser()->getUsername(); ?>,<span class="like">134</span><span class="dislike">8</span> | <?php echo link_to(__('Logout'), '/static/signout');?>
           </div>
           <ul class="popnavigation">
-          	<li><a href="#" title="Profile">Profile</a> <span></span></li>
-            <li><a href="#" title="Likes">Likes </a> <span></span></li>
-            <li class="active"><a href="#" title="Settings">Settings</a> <span></span></li>
-            <li><a href="#" title="News">News</a> <span></span></li>
-            <li class="last"><a href="#" title="Deals">Deals</a> <span></span></li>
+          	<li <?php if($sf_context->getModuleName()=='profile') { echo 'class="active"';} ?>><?php echo link_to(__('Profile'), '@popup_profile'); ?> <span></span></li>
+            <li <?php if($sf_context->getModuleName()=='likes') { echo 'class="active"';} ?>><?php echo link_to(__('Likes'), 'settings/index'); ?><span></span></li>
+            <li <?php if($sf_context->getModuleName()=='settings') { echo 'class="active"';} ?>><?php echo link_to(__('Settings'), '@popup_settings'); ?> <span></span></li>
+            <li class="last <?php if($sf_context->getModuleName()=='deals') { echo 'active';} ?>"><?php echo link_to(__('Deals'), '@popup_deals'); ?> <span></span></li>
           </ul>
         </div>
       </div>
+      <?php } ?>
+      <!-- Pop Navigation end -->
       <div>
       	<div class="grboxtop">
       		<span></span>
       	</div>
         <div class="grboxmid">
         	<div class="grboxmid-content">
-
-
-
-           	<!-- start content -->
-          	<div class="graybox clearfix">
-            	<div class="whtboxtopwide">
-            		<div class="rcor">
-              		<ul class="clearfix profileinfo">
-                		<li class="prothumb">
-                			<img src="/img/macrco-thumb.jpg" width="64" height="64" alt="Marco Ripanti" title="Marco Ripanti" />
-                		</li>
-                  	<li class="pronameblock">
-                  		<h1>Marco Ripanti</h1>Entrepreneur and founder of yiid.com
-                  		<div class="scicon"><a href="#"><img src="/img/tweet-profilleicon.gif" width="17" height="17" alt="Twitter" title="Twitter" /></a><a href="#"><img src="/img/facebookprofileicon.gif" width="17" height="17" alt="Facebook" title="Facebook" /></a><a href="#"><img src="/img/in-profileicon.gif" width="17" height="17" alt="Linked in" title="Linked in" /></a><a href="#"><img src="/img/googlechat-icon.gif" width="19" height="17" alt="Buzz" title="Buzz" /></a></div>
-										</li>
-										<li class="friends-box">
-											<div class="totalfriend">
-												<span>9847</span><br />friends
-											</div>
-											Influencer
-										</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="wht-contentbox clearfix">
-              	<div class="whtboxpad">
-                	<div class="fs13 clearfix">
-                		<strong> Social Networks</strong>
-                    <span class="postedrow">Likes will be posted immediately to the networks you have checked:</span>
-                  </div>
-                  <div class="abonnementsbox clearfix">
-                  	<ul class="azchecklist settingicon alignleft">
-                    	<li>
-                    		<label class="radio-btn">
-                    			<input type="checkbox" class="checkbox" name="" />
-                    		</label>
-                    		<a href="#">
-                    			<span>
-                    				<img src="/img/tweet-profilleicon.gif" width="17" height="17" alt="pics.nase-bohren.de" title="pics.nase-bohren.de" />
-                    			</span>twitter.com/ripanti
-                    		</a>
-                    	</li>
-                      <li>
-                      	<label class="radio-btn">
-                      		<input type="checkbox" class="checkbox" name="" />
-                      	</label>
-                      	<a href="#">
-                      		<span>
-                      			<img src="/img/facebookprofileicon.gif" width="17" height="17" alt="pics.nase-bohren.de" title="pics.nase-bohren.de" />
-                      		</span>facebook.com/ripanti
-                      	</a>
-                      </li>
-                      <li>
-                      	<label class="radio-btn">
-                      		<input type="checkbox" class="checkbox" name="" />
-                      	</label>
-                      	<a href="#">
-                      		<span>
-                      			<img src="/img/in-profileicon.gif" width="17" height="17" alt="pics.nase-bohren.de" title="pics.nase-bohren.de" />
-                      		</span>inkedin.com/ripanti
-                      	</a>
-                      </li>
-                      <li>
-                      	<label class="radio-btn">
-                      		<input type="checkbox" class="checkbox" name="" />
-                      	</label>
-                      	<a href="#">
-                      		<span>
-                      			<img src="/img/googlechat-icon.gif" width="19" height="17" alt="pics.nase-bohren.de" title="pics.nase-bohren.de" />
-                      		</span>google.com/p/ripanti
-                      	</a>
-                      </li>
-                    </ul>
-                    <div class="morecomments alignright">
-                    	Add more accounts: <a href="#"><img src="/img/facebookprofileicon.gif" width="17" height="17" alt="Facebook" title="Facebook" /></a><a href="#"><img src="/img/tweet-profilleicon.gif" width="17" height="17" alt="Twitter" title="Twitter" /></a><a href="#"><img src="/img/in-profileicon.gif" width="17" height="17" alt="Linked in" title="Linked in" /></a><a href="#"><img src="/img/googlechat-icon.gif" width="19" height="17" alt="Buzz" title="Buzz" /></a> </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="whtboxbot">
-                	<span></span>
-                </div>
-								<!-- end content -->
-
-
+						<!-- start content -->
+	          <?php echo $sf_content; ?>
                 <!-- footer -->
                 <div class="poweredrow">
                 	<a href="#" title="Impressum">Impressum</a> | Powered by <img src="/img/spread-logosmall.jpg" width="16" height="16" alt="Spread" title="Spread" /></div>
