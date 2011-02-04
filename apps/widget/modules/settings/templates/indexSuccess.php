@@ -64,8 +64,8 @@
                       	</a>
                       </li>
                     </ul>
-                    <div class="morecomments alignright">
-                    	Add more accounts: <?php echo link_to(image_tag("/img/facebookprofileicon.gif"), "@signinto?service=facebook&r=s"); ?><?php echo link_to(image_tag("/img/tweet-profilleicon.gif"), "@signinto?service=twitter&r=s"); ?><?php echo link_to(image_tag("/img/in-profileicon.gif"), "@signinto?service=linkedin&r=s"); ?><?php echo link_to(image_tag("/img/googlechat-icon.gif"), "@signinto?service=google&r=s"); ?></div>
+                    <div class="morecomments add alignright">
+                    	Add more accounts: <?php echo link_to(image_tag("/img/facebook-add.gif"), "@signinto?service=facebook&r=s"); ?><?php echo link_to(image_tag("/img/twiiter-add.gif"), "@signinto?service=twitter&r=s"); ?><?php echo link_to(image_tag("/img/in-add.gif"), "@signinto?service=linkedin&r=s"); ?><?php echo link_to(image_tag("/img/buzz-add.gif"), "@signinto?service=google&r=s"); ?></div>
                     </div>
                   </div>
                 </div>
