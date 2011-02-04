@@ -7,11 +7,7 @@
                   	<li class="pronameblock">
                   		<h1><?php echo $pUser->getUsername(); ?></h1><?php echo $pUser->getDescription(); ?>
                   		<div class="scicon">
-                  		<?php foreach ($pIdentities as $lIdentity) { ?>
-                  			<a href="<?php echo url_for($lIdentity->getProfileUri()) ?>" target="_blank">
-                  				<img src="/img/<?php echo $lIdentity->getCommunity()->getCommunity(); ?>-favicon.gif" width="17" height="17" alt="<?php echo $lIdentity->getCommunity()->getCommunity(); ?>" title="<?php echo $lIdentity->getCommunity()->getCommunity(); ?>" />
-                  			</a>
-                  		<?php } ?>
+                  		<?php foreach ($pIdentities as $lIdentity) { ?><a href="<?php echo url_for($lIdentity->getProfileUri()) ?>" target="_blank"><img src="/img/<?php echo $lIdentity->getCommunity()->getCommunity(); ?>-favicon.gif" width="17" height="17" alt="<?php echo $lIdentity->getCommunity()->getCommunity(); ?>" title="<?php echo $lIdentity->getCommunity()->getCommunity(); ?>" /></a><?php } ?>
                   		</div>
 										</li>
 										<li class="friends-box">
