@@ -1,3 +1,4 @@
+<?php use_helper('Text'); ?>
           	<div class="graybox clearfix">
             	<div class="whtboxtopwide">
             		<div class="rcor">
@@ -30,12 +31,12 @@
 											<?php foreach ($pIdentities as $lIdentity) { ?>
 	                    	<li>
 	                    		<label class="radio-btn">
-	                    			<input type="checkbox" class="checkbox" name="" />
+	                    			<input type="checkbox" class="checkbox" name="" <?php echo $lIdentity->getSocialPublishingEnabled()?"checked=checked":''; ?>/>
 	                    		</label>
-	                    		<a href="#">
+	                    		<a href="<?php echo url_for($lIdentity->getProfileUri()) ?>" target="_blank">
 	                    			<span>
-	                    				<img src="/img/tweet-profilleicon.gif" width="17" height="17" alt="pics.nase-bohren.de" title="pics.nase-bohren.de" />
-	                    			</span>twitter.com/ripanti
+	                    				<img src="/img/<?php echo $lIdentity->getCommunity()->getCommunity(); ?>-favicon.gif" width="17" height="17" alt="<?php echo $lIdentity->getCommunity()->getCommunity(); ?>" title="<?php echo $lIdentity->getCommunity()->getCommunity(); ?>" />
+	                    			</span><?php echo $lIdentity->getName(); ?>
 	                    		</a>
 	                    	</li>
 											<?php } ?>
