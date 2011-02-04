@@ -1,2 +1,0 @@
-LikePopup.init();
-PopupInfo.initHover();
