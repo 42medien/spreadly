@@ -53,6 +53,16 @@ class OnlineIdentityTable extends Doctrine_Table {
     return $lOnlineIdentities;
   }
 
+  public static function retrieveVerifiedById($pUserId, $pOIId) {
+    $lOnlineIdentity = Doctrine_Query::create()
+      ->from('OnlineIdentity oi')
+      ->where('oi.id = ?', $pOIId)
+      ->andWhere('oi.user_id = ?', $pUserId)
+      ->fetchOne();
+
+    return $lOnlineIdentity;
+  }
+
   
   /**
    * gets ids of all OI's owned by a given User
