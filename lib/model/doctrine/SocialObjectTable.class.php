@@ -78,15 +78,12 @@ class SocialObjectTable extends Doctrine_Table {
         $lSocialObject->addAlias($pUrlHash);
         return true;
       } else {
-        // get it parsed baby!
-        AmazonSQSUtils::pushToQuque('SocialObjectParser', urlencode($pUrl));
-        return $lCollection->update(array('url_hash' => $pUrlHash), array('$set' => array('url' => $pUrl, 'c' => time(), 'enriched' => $pEnriched), '$addToSet' => array('alias' => array('$each' => array($pUrlHash, $pLongUrlHash)))), array('upsert' => true, 'atomic' => true));
+        $alias = array('$each' => array($pUrlHash, $pLongUrlHash));
       }
     } else {
-      // get it parsed baby!
-      AmazonSQSUtils::pushToQuque('SocialObjectParser', urlencode($pUrl));
-      return $lCollection->update(array('url_hash' => $pUrlHash), array('$set' => array('url' => $pUrl, 'c' => time(), 'enriched' => $pEnriched), '$addToSet' => array('alias' => $pUrlHash)), array('upsert' => true, 'atomic' => true));
+      $alias = $pUrlHash;
     }
+    return $lCollection->update(array('url_hash' => $pUrlHash), array('$set' => array('url' => $pUrl, 'c' => time()), '$addToSet' => array('alias' => $alias)), array('upsert' => true, 'atomic' => true));
   }
 
   /**

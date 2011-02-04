@@ -82,7 +82,6 @@ class SocialObjectParser {
     if ($lStmt != "") {
       $lUpdateArray['stmt'] = $lStmt;
     }
-    $lUpdateArray['enriched'] = SocialObjectTable::ENRICHED_TYPE_OBJECTPARSER;
 
     if (!empty($lUpdateArray)) {
       try {
