@@ -8,6 +8,15 @@
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
 class staticActions extends sfActions {
+  /**
+   * please do not delete!
+   *
+   * @param sfWebRequest $request
+   */
+  public function executeImprint(sfWebRequest $request) {
+
+  }
+
   public function executeLike(sfWebRequest $request) {
     if ($request->getParameter("url", null)) {
       $this->getUser()->setAttribute("static_like_with_params", $request->getUri(), "popup");
