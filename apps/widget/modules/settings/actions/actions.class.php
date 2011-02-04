@@ -15,12 +15,8 @@ class settingsActions extends sfActions
   *
   * @param sfRequest $request A request object
   */
-  public function executeIndex(sfWebRequest $request)
-  {
-    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('popup/js_popup_ready'));
-    $this->getUser()->setFlash('headline', __('SETTINGS', null, 'widget'));
-
-    //$this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "popup");
+  public function executeIndex(sfWebRequest $request) {
+    $this->getUser()->setAttribute("redirect_after_login", null, "widget");
 
     $lUser = $this->getUser()->getUser();
     if($request->getMethod() == sfRequest::POST) {

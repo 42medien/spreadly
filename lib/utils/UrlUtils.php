@@ -655,4 +655,33 @@ class UrlUtils {
     }
     return $parameterList['scheme'].'://'.$parameterList['host'].$pQueryString;
   }
+
+  /**
+   * generates an absolute url out of url-parts
+   *
+   * @author Matthias Pfefferle
+   *
+   * @param string $part
+   * @param string $url
+   * @return string
+   */
+  public static function abslink($part, $url) {
+    // check if url is still absolute
+    if (preg_match('~^https?:\/\/~i', $part)) {
+      return $part;
+    }
+
+    // check if url removed protocol for better https support
+    if (preg_match('~^\/\/~i', $part)) {
+      return parse_url($url,PHP_URL_SCHEME).":".$part;
+    }
+
+    // generate absolute url
+    $url = parse_url($url,PHP_URL_SCHEME)."://".parse_url($url,PHP_URL_HOST);
+
+    $file_path = parse_url($part,PHP_URL_PATH);
+    $file_path = substr($file_path,0,1) == '/' ? $file_path : '/' . $file_path;
+
+    return $url . $file_path;
+  }
 }

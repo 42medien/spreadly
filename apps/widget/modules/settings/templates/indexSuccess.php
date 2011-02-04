@@ -84,7 +84,7 @@
                       </li>
                     </ul>
                     <div class="morecomments alignright">
-                    	Add more accounts: <a href="#"><img src="/img/facebookprofileicon.gif" width="17" height="17" alt="Facebook" title="Facebook" /></a><a href="#"><img src="/img/tweet-profilleicon.gif" width="17" height="17" alt="Twitter" title="Twitter" /></a><a href="#"><img src="/img/in-profileicon.gif" width="17" height="17" alt="Linked in" title="Linked in" /></a><a href="#"><img src="/img/googlechat-icon.gif" width="19" height="17" alt="Buzz" title="Buzz" /></a> </div>
+                    	Add more accounts: <?php echo link_to(image_tag("/img/facebookprofileicon.gif"), "@signinto?service=facebook&r=s"); ?><?php echo link_to(image_tag("/img/tweet-profilleicon.gif"), "@signinto?service=twitter&r=s"); ?><?php echo link_to(image_tag("/img/in-profileicon.gif"), "@signinto?service=linkedin&r=s"); ?><?php echo link_to(image_tag("/img/googlechat-icon.gif"), "@signinto?service=google&r=s"); ?></div>
                     </div>
                   </div>
                 </div>

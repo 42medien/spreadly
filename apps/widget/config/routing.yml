@@ -18,6 +18,14 @@ signinto:
   url:   /auth/signinto
   param: { module: auth, action: signinto }
 
+signin:
+  url:   /signin
+  param: { module: auth, action: signinto }
+
+signout:
+  url:   /signout
+  param: { module: auth, action: signinto }
+
 like:
   url:   /api/like/*
   param: {module: api, action: save_like, likedis: <?php echo YiidActivityTable::ACTIVITY_VOTE_POSITIVE; ?> }

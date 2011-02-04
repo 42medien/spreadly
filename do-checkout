@@ -1,0 +1,35 @@
+#!/bin/bash
+
+if [ `id -u` -ne 0 ]
+then
+        echo "Please run as root"
+        exit 1
+fi
+
+export HOME=/root
+
+/etc/init.d/lighttpd stop
+
+if [ -d /var/www/ ]
+then
+        echo "Verzeichnis existiert schon. Wird geloescht."
+        rm -rf /var/www
+fi
+
+if [ -d /var/log/lighttpd ]
+then
+        chown -R www-data:www-data /var/log/lighttpd
+else
+        mkdir /var/log/lighttpd
+        chown -R www-data:www-data /var/log/lighttpd
+fi
+
+svn export https://svn.ekaabo.com/yiid/branches/stable/ /var/www/yiid
+
+cd /var/www/yiid
+#phing buildwidget_development
+phing buildwidget_production
+
+chown -R www-data:www-data /var/www
+
+/etc/init.d/lighttpd start

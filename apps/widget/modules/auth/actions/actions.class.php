@@ -15,7 +15,6 @@ class authActions extends sfActions {
    * @param sfRequest $request A request object
    */
   public function executeSignin(sfWebRequest $request) {
-    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('popup/js_popup_ready'));
     if ($this->getUser()->isAuthenticated()) {
       $lUrl = $this->getUser()->getAttribute("redirect_after_login", "@widget_like", "widget");
       $this->redirect($lUrl);
@@ -37,6 +36,10 @@ class authActions extends sfActions {
   public function executeSigninto(sfWebRequest $request) {
     // if the user is already loged in, redirect to the stream
     if ($lService = $request->getParameter("service")) {
+      if ($request->hasParameter('r') && $request->getParameter('r') == "s") {
+        $this->getUser()->setAttribute("redirect_after_login", "@widget_settings", "widget");
+      }
+
       $lObject = AuthApiFactory::factory($lService);
       $lObject->doAuthentication();
     } else {
@@ -71,6 +74,7 @@ class authActions extends sfActions {
     CookieUtils::generateWidgetIdentityCookie($this->pOnlineIdenities);
 
     $lUrl = $this->getUser()->getAttribute("redirect_after_login", "@widget_like", "widget");
+
     $this->redirect($lUrl);
   }
 

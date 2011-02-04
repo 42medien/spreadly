@@ -41,7 +41,10 @@ class ImageParser {
       $size = @getimagesize($image);
       $size = $size[0] + $size[1];
 
-      $result[] = array('size' => $size, 'image' => $image);
+      // ignore all (stats)images smaller than 5x5
+      if ($size >= 10) {
+        $result[] = array('size' => $size, 'image' => $image);
+      }
     }
 
     usort($result, array("ImageParser", "sort"));
