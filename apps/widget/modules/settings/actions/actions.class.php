@@ -15,8 +15,12 @@ class settingsActions extends sfActions
   *
   * @param sfRequest $request A request object
   */
-  public function executeIndex(sfWebRequest $request) {
-    $this->getUser()->setAttribute("redirect_after_login", null, "widget");
+  public function executeIndex(sfWebRequest $request)
+  {
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('settings/js_init_settings.js'));
+    $this->getUser()->setFlash('headline', __('SETTINGS', null, 'widget'));
+
+    //$this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "popup");
 
     $lUser = $this->getUser()->getUser();
     if($request->getMethod() == sfRequest::POST) {
@@ -32,5 +36,11 @@ class settingsActions extends sfActions
     CookieUtils::generateWidgetIdentityCookie($this->pIdentities);
     sfProjectConfiguration::getActive()->loadHelpers('I18N');
     $this->setLayout('layout');
+  }
+
+  public function executeUpdate(sfWebRequest $request) {
+  	$this->getResponse()->setContentType('application/json');
+
+  	return true;
   }
 }

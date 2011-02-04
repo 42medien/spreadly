@@ -1,4 +1,3 @@
-                   	  <div class="graybox clearfix">
                        		<div class="whtboxtopwide"><div class="rcor">
                             	<ul class="clearfix profileinfo">
                                 	<li class="prothumb"><img src="/img/macrco-thumb.jpg" width="64" height="64" alt="Marco Ripanti" title="Marco Ripanti" /></li>

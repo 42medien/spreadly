@@ -5,6 +5,10 @@ widget_like:
 widget_settings:
   url:    /settings
   param:  { module: settings, action: index }
+  
+widget_update_settings:
+  url:    /settings/update
+  param:  { module: settings, action: update }
 
 widget_deals:
   url:    /deals

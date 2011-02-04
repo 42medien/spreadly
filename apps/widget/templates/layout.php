@@ -19,6 +19,7 @@
 		</script>
 		<![endif]-->
     <script type="text/javascript" src="/js/100_main/include/widget-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
+    <script type="text/javascript" src="/js/widget/static/SettingsHandler.js"></script>
     <link rel="shortcut icon" href="/img/global/favicon_16x16.ico" />
   </head>
   <body class="nobg">
@@ -59,6 +60,7 @@
         <div class="grboxmid">
         	<div class="grboxmid-content">
 						<!-- start content -->
+								<div class="graybox clearfix">
 	          <?php echo $sf_content; ?>
                 <!-- footer -->
                 <div class="poweredrow">
@@ -73,7 +75,6 @@
 
 	  <script  type="text/javascript">
 	    jQuery(document).ready( function() {
-	      jQuery("input[type='radio'],input[type='checkbox']").custCheckBox();
 	      <?php
 	        if (has_slot('js_document_ready')) {
 	          include_slot('js_document_ready');

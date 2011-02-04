@@ -1,24 +1,5 @@
 <?php use_helper('Text'); ?>
-          	<div class="graybox clearfix">
-            	<div class="whtboxtopwide">
-            		<div class="rcor">
-              		<ul class="clearfix profileinfo">
-                		<li class="prothumb">
-                			<img src="/img/macrco-thumb.jpg" width="64" height="64" alt="Marco Ripanti" title="Marco Ripanti" />
-                		</li>
-                  	<li class="pronameblock">
-                  		<h1><?php echo $pUser->getUsername(); ?></h1>Entrepreneur and founder of yiid.com
-                  		<div class="scicon"><a href="#"><img src="/img/tweet-profilleicon.gif" width="17" height="17" alt="Twitter" title="Twitter" /></a><a href="#"><img src="/img/facebookprofileicon.gif" width="17" height="17" alt="Facebook" title="Facebook" /></a><a href="#"><img src="/img/in-profileicon.gif" width="17" height="17" alt="Linked in" title="Linked in" /></a><a href="#"><img src="/img/googlechat-icon.gif" width="19" height="17" alt="Buzz" title="Buzz" /></a></div>
-										</li>
-										<li class="friends-box">
-											<div class="totalfriend">
-												<span>12415</span><br />friends
-											</div>
-											Influencer
-										</li>
-                  </ul>
-                </div>
-              </div>
+							<?php include_component('profile', 'profile_info'); ?>
 
               <div class="wht-contentbox clearfix">
               	<div class="whtboxpad">
@@ -30,8 +11,8 @@
                   	<ul class="azchecklist settingicon alignleft">
 											<?php foreach ($pIdentities as $lIdentity) { ?>
 	                    	<li>
-	                    		<label class="radio-btn">
-	                    			<input type="checkbox" class="checkbox" name="" <?php echo $lIdentity->getSocialPublishingEnabled()?"checked=checked":''; ?>/>
+	                    		<label class="radio-btn check-service">
+	                    			<input type="checkbox" value="<?php echo $lIdentity->getId(); ?>" class="checkbox" name="" <?php echo $lIdentity->getSocialPublishingEnabled()?"checked=checked":''; ?>/>
 	                    		</label>
 	                    		<a href="<?php echo url_for($lIdentity->getProfileUri()) ?>" target="_blank">
 	                    			<span>

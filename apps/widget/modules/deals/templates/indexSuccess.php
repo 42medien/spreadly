@@ -1,4 +1,3 @@
-                   	  <div class="graybox clearfix">
                        		<div class="whtboxtop"><div class="rcor"><h1 class="deal-title">Recent Deals <em>(Coupons that have run out, are deleted from this list automatically)</em></h1></div></div>
                           	<div class="wht-contentbox clearfix">
                             	<div class="popwidecol alignright">
