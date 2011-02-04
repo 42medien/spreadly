@@ -41,7 +41,7 @@
       <div class="popnav">
       	<div class="popnavbg clearfix">
         	<div class="profile-info alignright">
-          	<img src="/img/marco.jpg" width="25" height="26" alt="<?php echo $sf_user->getUser()->getUsername(); ?>" title="<?php echo $sf_user->getUser()->getUsername(); ?>" class="mic-pic" />Hi <?php echo $sf_user->getUser()->getUsername(); ?>,<span class="like">134</span><span class="dislike">8</span> | <?php echo link_to(__('Logout'), '@signout');?>
+          	<img src="/img/marco.jpg" width="25" height="26" alt="<?php echo $sf_user->getUser()->getUsername(); ?>" title="<?php echo $sf_user->getUser()->getUsername(); ?>" class="mic-pic" />Hi <?php echo $sf_user->getUser()->getUsername(); ?>,<span class="like"><?php echo $sf_user->getUser()->getLikeCount(); ?></span><span class="dislike"><?php echo $sf_user->getUser()->getLikeCount(); ?></span> | <?php echo link_to(__('Logout'), '@signout');?>
           </div>
           <ul class="popnavigation">
           	<li <?php if($sf_context->getModuleName()=='profile') { echo 'class="active"';} ?>><?php echo link_to(__('Profile'), '@widget_profile'); ?> <span></span></li>

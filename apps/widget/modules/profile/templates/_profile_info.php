@@ -16,9 +16,9 @@
 										</li>
 										<li class="friends-box">
 											<div class="totalfriend">
-												<span>12415</span><br /><?php echo __('friends'); ?>
+												<span><?php echo $pUser->getFriendCount(); ?></span><br /><?php echo __('friends'); ?>
 											</div>
-											<?php echo __('Influencer'); ?>
+											<?php echo $pUser->getInfluencerRank(); ?>
 										</li>
                   </ul>
                 </div>
