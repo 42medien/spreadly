@@ -18,7 +18,7 @@ var ShareDefaultSettings = {
         
         jQuery.ajax({
           //beforeSubmit : OnLoadGrafic.showGrafic,
-          type : "GET",
+          type : "POST",
           url : lAction,
           dataType : "json",
           data : lData,
