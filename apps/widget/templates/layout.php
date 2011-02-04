@@ -62,7 +62,7 @@
 	          <?php echo $sf_content; ?>
                 <!-- footer -->
                 <div class="poweredrow">
-                	<a href="#" title="Impressum">Impressum</a> | Powered by <img src="/img/spread-logosmall.jpg" width="16" height="16" alt="Spread" title="Spread" /></div>
+                	<?php echo link_to(__("Imprint"), "@imprint"); ?> | <?php echo link_to("Powered by ".image_tag("/img/spread-logosmall.jpg", array("alt" => "spread.ly icon")), sfConfig::get("app_settings_url"), array("title" => "spread.ly")) ?></div>
                 </div>
               </div>
             </div>

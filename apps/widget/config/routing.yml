@@ -26,6 +26,10 @@ signout:
   url:   /signout
   param: { module: auth, action: signinto }
 
+imprint:
+  url:   /imprint
+  param: { module: static, action: imprint }
+
 like:
   url:   /api/like/*
   param: {module: api, action: save_like, likedis: <?php echo YiidActivityTable::ACTIVITY_VOTE_POSITIVE; ?> }
