@@ -56,12 +56,12 @@ configurator:
 
 analytics_overview:
   url:   analytics/index
-  param: { module: analytics, action: index }   
-  
+  param: { module: analytics, action: index }
+
 analytics:
   url:   analytics/statistics
-  param: { module: analytics, action: statistics } 
-  
+  param: { module: analytics, action: statistics }
+
 get_analytics_content:
   url: analytics/get_analytics_content
   param: { module: analytics, action: get_analytics_content }
@@ -109,6 +109,14 @@ save_codes:
 save_quantity:
   url:  /deals/save_quantity
   param: { module: deals, action: save_quantity }
+
+wellknown:
+  url:  /.well-known/host-meta
+  param: { module: discovery, action: hostmeta}
+
+oexchange:
+  url:  /discovery/oexchange
+  param: { module: discovery, action: oexchange}
 
 # You can find more information about this file on the symfony website:
 # http://www.symfony-project.org/reference/1_4/en/10-Routing
