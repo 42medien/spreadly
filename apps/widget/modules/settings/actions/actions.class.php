@@ -40,16 +40,19 @@ class settingsActions extends sfActions
 
   public function executeUpdate(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
-  	
+
+  	$lSaved = false;
+
   	if($request->getMethod() == sfRequest::POST) {
     	$lOI = OnlineIdentityTable::retrieveVerifiedById($this->getUser()->getId(), $request->getParameter('oiid',   null));
     	$lState = $request->getParameter('state', null);
     	if($lOI && $lState!=null) {
-      	$lOI->setSocialPublishingEnabled($lState=='on');   
-      	$lOI->save(); 	  
+      	$lOI->setSocialPublishingEnabled($lState=='on');
+      	$lOI->save();
+      	$lSaved = true;
     	}
     }
-  	
-  	return true;
+
+    return $this->renderText(json_encode(array('success' => $lSaved)));
   }
 }
