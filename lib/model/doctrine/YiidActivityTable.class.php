@@ -230,7 +230,7 @@ class YiidActivityTable extends Doctrine_Table {
   }
   
   /**
-   *
+   * Counts the Likes or dislikes per User
    * @author hannes
    * @param int $pUserId the user id
    * @param boolean $pIsLike whether you want likes or dislikes
@@ -245,6 +245,49 @@ class YiidActivityTable extends Doctrine_Table {
     ));
 
     return $lQuery;
+  }
+
+  /**
+   * Gets the activties that were deal participations for a User
+   * @author hannes
+   * @param int $pUserId the user id
+   * @return activties that were deal participations
+   */
+  public static function retrieveActivitiesOfActiveDealsByUserId($pUserId) {
+    $lCollection = self::getMongoCollection();
+    
+    $lResults = $lCollection->find(array(
+      "u_id" => intval($pUserId),
+      "d_id" => array('$exists' => true)
+    ));
+    
+    $dealIds = array();
+    while($lResults->hasNext()) {
+      $ya = $lResults->getNext();
+      $dealIds[] = $ya['d_id'];
+    }
+    $now = date ("Y-m-d H:i:s", strtotime("now"));
+    $deals = DealTable::getInstance()->createQuery()
+              ->whereIn("id", $dealIds)
+              ->andWhere("end_date > ? ", $now)
+              ->execute(); 
+    
+    $activeDealIds = array();
+    foreach ($deals as $deal) {
+      $activeDealIds[] = $deal->getId();
+    }
+    
+    $lResults->reset();
+    $activeActivities = array();
+    
+    while($lResults->hasNext()) {
+      $ya = $lResults->getNext();
+      if(in_array($ya['d_id'], $activeDealIds)) {
+        $activeActivities[] = self::initializeObjectFromCollection($ya);
+      }
+    }
+    
+    return $activeActivities;
   }
 
   public static function retrieveLatestActivitiesByContacts($pUserId, $pFriendId = null, $pCommunityId = null, $pRangeDays = 30, $pOffset = 10, $pLimit = 1) {
