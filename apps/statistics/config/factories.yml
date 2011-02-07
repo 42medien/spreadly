@@ -8,8 +8,8 @@ prod:
     param:
       db_name:                 yiidit
       collection_name:         session
-      session_name:            yiid_it
-      session_cookie_domain:   .yiid.it
+      session_name:            spreadly
+      session_cookie_domain:   spread.ly
       session_cookie_lifetime: 17776000
 
 # Staging Environment

@@ -134,8 +134,8 @@ prod:
       port:            27017
       db_name:         yiid
       collection_name:   session
-      session_name:       yiid
-      session_cookie_domain: .yiid.com
+      session_name:       spreadly_things
+      session_cookie_domain: things.spread.ly
       session_cookie_lifetime: 17776000
 
 test:
