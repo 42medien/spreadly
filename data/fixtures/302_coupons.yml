@@ -34,3 +34,8 @@ Coupon:
     code: zzyyxx
     created_at: '2010-11-26 10:10:03'
     updated_at: '2010-11-26 10:10:03'
+  Coupon_8:
+    Deal: Deal_4
+    code: gnarf
+    created_at: '2010-11-26 10:10:03'
+    updated_at: '2010-11-26 10:10:03'

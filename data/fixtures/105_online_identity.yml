@@ -1,10 +1,13 @@
 OnlineIdentity:
   oi_1:
     title:      'hugo_twitter'
-    name:       'hugo_twitter'
+    name:       'hugo affenkopf'
     auth_identifier: 'hugo_twitter'
     User:       user_1
-    original_id: 123123
+    social_publishing_enabled: 1
+    original_id: 21092406
+    auth_identifier: 'http://twitter.com/account/profile?user_id=21092406'
+    profile_uri: http://twitter.com/hugoaffenkopf
     Community:  community_2
     friend_ids: "456789,555555,444444,457810,9898" 
   oi_2:

@@ -3,8 +3,10 @@ AuthToken:
     User:    user_1
     Community:  community_2
     OnlineIdentity: oi_1
-    is_publishing_enabled:  1
-    token_type:   access
+    is_publishing_enabled:  0
+    token_type: 2
+    token_key: 21092406-NNNhz6AXV2qzW8Kfbel8WZcGVzSZExQczPJ34PtZ9
+    token_secret: A9523PQu2bGIPMapahHKgN7H9mV1oiImUjmQpnqkq4
   at_2:
     User:    user_2
     Community:  community_3
