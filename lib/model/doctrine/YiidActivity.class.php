@@ -113,9 +113,9 @@ class YiidActivity extends BaseYiidActivity {
   }
 
   /**
-   * returns the matching deal infos
+   * Returns the associated Deal
    *
-   * @return Object|null
+   * @return Deal|null
    */
   public function getDeal() {
     if ($this->getDId()) {
@@ -124,4 +124,18 @@ class YiidActivity extends BaseYiidActivity {
       return null;
     }
   }
+
+  /**
+   * Returns the associated SocialObject
+   *
+   * @return SocialObject|null
+   */
+  public function getSocialObject() {
+    if ($this->getSoId()) {
+      return SocialObjectTable::getInstance()->retrieveByPK($this->getSoId());
+    } else {
+      return null;
+    }
+  }
+  
 }

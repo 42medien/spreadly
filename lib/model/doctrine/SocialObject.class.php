@@ -12,6 +12,9 @@
  */
 class SocialObject extends BaseSocialObject
 {
+  public function __toString() {
+    return $this->getUrl();
+  }
 
   /**
    * Save an SocialObejct to MongoDB
