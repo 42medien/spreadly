@@ -469,4 +469,13 @@ class YiidActivityTable extends Doctrine_Table {
       return null;
     }
   }
+  
+  public static function retrieveById($pId) {
+    $lCollection = self::getMongoCollection();
+    $lQuery = $lCollection->findOne(array(
+      "_id" => new MongoId($pId."")
+    ));
+    return self::initializeObjectFromCollection($lQuery);
+  }
+
 }
