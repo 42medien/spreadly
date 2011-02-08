@@ -17,6 +17,10 @@ widget_deals:
 widget_profile:
   url:    /profile/index
   param:  { module: profile, action: index }
+  
+get_coupon_used:
+  url:    /deals/get_coupon_used
+  param:  { module: deals, action: get_coupon_used }
 
 signinto:
   url:   /auth/signinto

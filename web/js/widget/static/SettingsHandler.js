@@ -3,6 +3,13 @@
  */
 
 var ShareDefaultSettings = {
+    
+    resetForm: function() {
+      // reset the form after side-reload (fix for ff)
+      if (typeof (document.like_settings_form) != "undefined") {
+        document.like_settings_form.reset();
+      }  
+    },
 
     toggleService: function() {
       debug.log('[ShareDefaultSettings][addService]'); 
