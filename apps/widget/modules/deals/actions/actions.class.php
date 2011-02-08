@@ -26,8 +26,8 @@ class dealsActions extends sfActions
 
   public function executeGet_coupon_used(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
-		$lDealId = $request->getParameter('dealid');
-		$lReturn['html'] = $this->getComponent('deals', 'coupon_used', array('pDealId' => $lDealId));
+		$lActivityId = $request->getParameter('activityid');
+		$lReturn['html'] = $this->getComponent('deals', 'coupon_used', array('pActivityId' => $lActivityId));
     return $this->renderText(json_encode($lReturn));
   }
 }
