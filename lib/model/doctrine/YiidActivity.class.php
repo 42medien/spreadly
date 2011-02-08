@@ -274,7 +274,9 @@ class YiidActivity extends BaseYiidActivity {
     if (is_array($lTags)) {
       $lTagArray = array();
       foreach ($lTags as $key => $value) {
-        $lTagArray[$key] = trim($value);
+        if ($value = trim($value)) {
+          $lTagArray[$key] = $value;
+        }
       }
 
       $lTagArray = array_unique($lTagArray);
