@@ -64,7 +64,7 @@ class YiidActivity extends BaseYiidActivity {
   }
 
   public function setTags($tags)      {
-    if (!is_array($tags)) {
+    if ($tags && !is_array($tags)) {
       $tags = $this->normalizeTags($tags);
     }
 
