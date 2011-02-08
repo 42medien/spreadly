@@ -67,3 +67,40 @@ Deal:
     tos_accepted: true
     created_at: '2010-11-26 10:12:23'
     updated_at: '2010-11-26 10:12:23'
+  Deal_5:
+    DomainProfile: DomainProfile_2
+    sfGuardUser: sfGuardUser_1
+    state: submitted
+    type: commercial
+    coupon_type: single
+    coupon_quantity: '0'
+    start_date: '<?php echo date("Y-m-d H:i:s", strtotime("3 days ago")) ?>'
+    end_date: '<?php echo date("Y-m-d H:i:s", strtotime("now + 3 days")) ?>'
+    summary: 'notizblog approved summary'
+    description: 'notizblog approved description'
+    button_wording: 'notizblog approved buttonwording'
+    terms_of_deal: 'http://www.notizblog.de/tod'
+    redeem_url: 'http://www.notizblog.de'
+    tos_accepted: true
+    tags: "geekstuff, otherthings"
+    created_at: '2010-11-26 10:12:23'
+    updated_at: '2010-11-26 10:12:23'
+  Deal_6:
+    DomainProfile: DomainProfile_3
+    sfGuardUser: sfGuardUser_1
+    state: submitted
+    type: commercial
+    coupon_type: single
+    coupon_quantity: '0'
+    start_date: '<?php echo date("Y-m-d H:i:s", strtotime("3 days ago")) ?>'
+    end_date: '<?php echo date("Y-m-d H:i:s", strtotime("now + 3 days")) ?>'
+    summary: 'missmotz approved summary'
+    description: 'missmotz approved description'
+    button_wording: 'missmotz approved buttonwording'
+    terms_of_deal: 'http://www.missmotz.de/tod'
+    redeem_url: 'http://www.missmotz.de'
+    tos_accepted: true
+    tags: "schuhe"
+    created_at: '2010-11-26 10:12:23'
+    updated_at: '2010-11-26 10:12:23'
+

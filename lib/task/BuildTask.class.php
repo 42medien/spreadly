@@ -71,14 +71,6 @@ EOF;
   protected function executeDbTasks($arguments = array(), $options = array()) {
     $this->logSection('yiid', 'run db tasks');
 
-    // initialize the database connection
-    $configuration = ProjectConfiguration::getApplicationConfiguration($options['application'], $options['env'], true);
-    sfContext::createInstance($configuration);
-    $databaseManager = new sfDatabaseManager($configuration);
-    $databaseManager->loadConfiguration();
-    $connection = $databaseManager->getDatabase('doctrine');
-
-
     // new options array
     $opts = array();
     $env = $opts['env'] = $options['env'];
@@ -113,11 +105,6 @@ EOF;
       if ($options['no-confirmation'] || "y" == $this->ask("Mongo auf dem ".$env.'-System plattmachen? (host: '.sfConfig::get('app_mongodb_host').' collection: '.sfConfig::get('app_mongodb_database_name').") (y/N)")) {
         $this->logSection('mongo tasks', 'i am the mongo killer!');
         MongoDbConnector::getInstance()->getDatabase(sfConfig::get('app_mongodb_database_name'))->drop();
-        
-        $this->dispatcher->connect('deal.changed', array('DealListener', 'updateMongoDeal'));
-        $deal = DealTable::getInstance()->findByDescription('snirgel approved description');
-        $deal[0]->approve();
-
         $this->runTask('yiid:activity-testdata', array(), array('env' => $opts['env']));
         //$this->getFilesystem()->execute("php data/fixtures/initializeMongoObjects.php");
       }
