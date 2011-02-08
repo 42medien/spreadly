@@ -28,11 +28,11 @@ signinto:
 
 signin:
   url:   /signin
-  param: { module: auth, action: signinto }
+  param: { module: auth, action: signin }
 
 signout:
   url:   /signout
-  param: { module: auth, action: signinto }
+  param: { module: auth, action: signout }
 
 imprint:
   url:   /imprint
@@ -48,7 +48,7 @@ dislike:
 
 homepage:
   url:   /
-  param: { module: widget, action: like }
+  param: { module: like, action: index }
 
 default:
   url:   /:module/:action/*

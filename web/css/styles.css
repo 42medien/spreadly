@@ -407,8 +407,6 @@ div.add a{ position:relative; top:-4px; margin-left:2px;}
 ul.settingicon{ margin-bottom:-1px;}
 ul.settingicon li{ padding-bottom:4px;}
 
-#general-ajax-loader{z-index: 1000000; position: absolute; display:none;}
-
 /* =Bug start
 --------------------------------------------------------------------------------------------------------*/
 .ekrenne{   _padding-top:2px;}

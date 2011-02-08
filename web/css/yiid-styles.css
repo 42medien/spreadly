@@ -1,0 +1,15 @@
+#general-ajax-loader{z-index: 1000000; position: absolute; display:none;}
+
+ul#logos_big { margin: 10px 0 10px 30px; }
+#logos_big li{float:left;width:105px;text-align:center;margin-right:5px;padding-top: 60px;}
+#logos_big li a{padding-top: 60px;}
+#buzz_logo{padding-left:14px;padding-right:14px;}
+#facebook_logo{padding-left:1px;padding-right:1px;}
+#twitter_logo{padding-left:8px;padding-right:9px;}
+#linkedin_logo{padding-left:8px;padding-right:8px;}
+
+#google_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -575px;}
+#facebook_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -785px;}
+#twitter_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -1003px;}
+#further_logos{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -1269px;}
+#linkedin_logo{background: url("/img/sprites/sprite_popup.png") no-repeat -453px -1195px;}

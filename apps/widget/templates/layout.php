@@ -1,4 +1,4 @@
-<?php use_helper('YiidUrl') ?>
+<?php use_helper('YiidUrl', 'Avatar') ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
@@ -8,6 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 		<link rel="stylesheet" type="text/css" href="/css/styles.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="/css/yiid-styles.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />
 		<!--[if IE]>
 		<link rel="stylesheet" type="text/css" href="/css/ie.css" />
@@ -38,11 +39,12 @@
   		</div>
 
       <!--Pop Navigation start -->
-      <?php if ($sf_user->isAuthenticated() ) {?>
+      <?php if ($sf_user->isAuthenticated() ) { ?>
       <div class="popnav">
       	<div class="popnavbg clearfix">
         	<div class="profile-info alignright">
-          	<img src="/img/marco.jpg" width="25" height="26" alt="<?php echo $sf_user->getUser()->getUsername(); ?>" title="<?php echo $sf_user->getUser()->getUsername(); ?>" class="mic-pic" />Hi <?php echo $sf_user->getUser()->getUsername(); ?>,<span class="like"><?php echo $sf_user->getUser()->getLikeCount(); ?></span><span class="dislike"><?php echo $sf_user->getUser()->getLikeCount(); ?></span> | <?php echo link_to(__('Logout'), '@signout');?>
+
+          	<img src="<?php echo avatar_path($sf_user->getUser()->getDefaultAvatar(), '30x30')?>" width="25" height="26" alt="<?php echo $sf_user->getUser()->getUsername(); ?>" title="<?php echo $sf_user->getUser()->getUsername(); ?>" class="mic-pic" />Hi <?php echo $sf_user->getUser()->getUsername(); ?>,<span class="like"><?php echo $sf_user->getUser()->getLikeCount(); ?></span><span class="dislike"><?php echo $sf_user->getUser()->getLikeCount(); ?></span> | <?php echo link_to(__('Logout'), '@signout');?>
           </div>
           <ul class="popnavigation">
           	<li <?php if($sf_context->getModuleName()=='profile') { echo 'class="active"';} ?>><?php echo link_to(__('Profile'), '@widget_profile'); ?> <span></span></li>
