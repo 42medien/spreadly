@@ -16,14 +16,10 @@ class StatsFeeder {
    * @author Matthias Pfefferle
    * @param sfEvent $event
    */
-  public static function feed($pYiidActivity, $pUser, $pSocialObject = null) {
-    if (!$pUser) {
-      return false;
-    }
-
+  public static function feed($pYiidActivity) {
     // full table
-    self::createActivitiesData($pYiidActivity, $pUser);
-    self::createChartData($pYiidActivity, $pUser);
+    self::createActivitiesData($pYiidActivity);
+    self::createChartData($pYiidActivity);
     self::createGlobalStats($pYiidActivity);
   }
 
@@ -34,7 +30,7 @@ class StatsFeeder {
    * @param User $pUser
    * @author Matthias Pfefferle
    */
-  public static function createActivitiesData($pYiidActivity, $pUser) {
+  public static function createActivitiesData($pYiidActivity) {
     $lCollection = self::getMongoCollection("analytics.activities");
     $lUrlParts = parse_url($pYiidActivity->getUrl());
 
@@ -51,6 +47,8 @@ class StatsFeeder {
     if (empty($lOnlineIdentities)) {
       return false;
     }
+
+    $pUser = $pYiidActivity->getUser();
 
     // basic options
     $lOptions = array(
@@ -97,13 +95,14 @@ class StatsFeeder {
    * @param User $pUser
    * @author Matthias Pfefferle
    */
-  public static function createChartData($pYiidActivity, $pUser) {
+  public static function createChartData($pYiidActivity) {
     $lHost = parse_url($pYiidActivity->getUrl(), PHP_URL_HOST);
     $lDoc = array(
               'url' => $pYiidActivity->getUrl(),
               'date' => new MongoDate(strtotime(date("Y-m-d", $pYiidActivity->getC())))
             );
 
+    $pUser = $pYiidActivity->getUser();
     $lOptions = array();
     // set gender
     switch ($pUser->getGender()) {

@@ -71,6 +71,8 @@ YiidActivity:
       type:      string(30)
     cb_service:
       type:      string(30)
+    clickback:
+      type:      string(255)
     # </clickback>
     # <deal>
     d_id:        # deal id
@@ -82,6 +84,12 @@ YiidActivity:
       type:      integer
     tags:        # array with used tags
       type:      string
+    title:
+      type:      string(255)
+    descr:
+      type:      string(255)
+    thumb:
+      type:      string(255)
 
 SocialAdvertisement:
   actAs:

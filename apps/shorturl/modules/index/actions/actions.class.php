@@ -17,33 +17,6 @@ class indexActions extends sfActions
   */
   public function executeIndex($request) {
     $this->redirect("http://yiid.com");
-    /*$this->shortUrl = null;
-    $this->form = new ShortUrlForm();
-
-    if ($request->isMethod('post')) {
-      $this->form->bind($request->getParameter('shorturl'));
-      if ($this->form->isValid()) {
-
-        if ($lShortUrl = ShortUrlTable::getByUrl($this->form->getValue('url'))) {
-          $this->shortUrl = $lShortUrl->getShortedUrl();
-        } else {
-          $lShortUrl = $this->form->save();
-          $this->shortUrl = $lShortUrl->getShortedUrl();
-        }
-      }
-    } elseif ($request->getParameter('url')) {
-      $this->form->bind(array('url' => $request->getParameter('url')));
-      if ($this->form->isValid()) {
-        if ($lShortUrl = ShortUrlTable::getByUrl($this->form->getValue('url'))) {
-          $this->shortUrl = $lShortUrl->getShortedUrl();
-        } else {
-          $lShortUrl = $this->form->save();
-          $this->shortUrl = $lShortUrl->getShortedUrl();
-        }
-      }
-    }
-
-    $this->pShortUrls = ShortUrlTable::getLatestUrls(5, true);*/
   }
 
 

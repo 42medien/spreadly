@@ -68,49 +68,26 @@ class YiidActivityTable extends Doctrine_Table {
                                            $pTags = null
                                           ) {
 
-    if (!self::isVerbSupported($pVerb)) {
-      return false;
-    }
+    $lActivity = new YiidActivity();
 
-    $lVerifiedOnlineIdentitys = array();
-    $pClickback = urldecode($pClickback);
-    $pTitle = StringUtils::cleanupString($pTitle);
-    $pDescription = StringUtils::cleanupString($pDescription);
+    $array = array(
+      'url' => $pUrl,
+      'oiids' => $pGivenOnlineIdentitys,
+      'score' => $pScore,
+      'title' => $pTitle,
+      'descr' => $pDescription,
+      'thumb' => $pPhoto,
+      'clickback' => $pClickback,
+      'tags' => $pTags,
+      'u_id' => $pUserId
+    );
 
-    // array of services we're sharing to
-    $lServices = array();
+    $lActivity->fromArray($array);
+    $lActivity->save();
 
-    $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
-    $lDeal = DealTable::getActiveDealByHostAndUserId($pUrl, $pUserId);
-
-    $lSocialObject = SocialObjectTable::retrieveOrCreate($pUrl, $pTitle, $pDescription, $pPhoto);
-    
-    if (!$lSocialObject || self::retrieveActionOnObjectById($lSocialObject->getId(), $pUserId, $lDeal)) {
-      return false;
-    }
-    
-    $lVerifiedOIs = OnlineIdentityTable::retrieveVerified($pUserId, $pGivenOnlineIdentitys);
-    
-    // save yiid activity
-    $lActivity = self::saveActivity($lSocialObject, $pUserId, $lVerifiedOIs, $pScore, $pVerb, $pClickback, $lDeal, $pTags);
-    if (sfConfig::get('sf_environment') != 'dev') {
-      // send messages to all services
-      foreach ($lOnlineIdentitys as $lIdentity) {
-        $lQueryChar = parse_url($pUrl, PHP_URL_QUERY) ? '&' : '?';
-        $pPostUrl = $pUrl.$lQueryChar.'yiidit='.$lIdentity->getCommunity()->getCommunity().'.'.$lActivity->getId();
-        $lStatus = $lIdentity->sendStatusMessage($pPostUrl, $pVerb, $pScore, $pTitle, $pDescription, $pPhoto);
-      }
-    }
-    
-    if ($lActivity->getOiids()) {
-      $lSocialObject = SocialObjectTable::retrieveByAliasUrl($pUrl);
-      $lSocialObject->updateObjectOnLikeActivity($pUserId, $lActivity->getOiids(), $pUrl, $pScore, $lServices);
-      UserTable::updateLatestActivityForUser($pUserId, time());
-    }
-
-    // notification
-    $lUser = UserTable::getInstance()->retrieveByPk($pUserId);
-    StatsFeeder::feed($lActivity, $lUser, $lSocialObject);
+    //if (!self::isVerbSupported($pVerb)) {
+    //  return false;
+    //}
 
     return $lActivity;
   }
@@ -149,7 +126,7 @@ class YiidActivityTable extends Doctrine_Table {
    * @param Deal $pDeal
    * @param string $pTags comma separated
    * @return YiidActivity
-   */
+   *
   private static function saveActivity($pSocialObject,
                                       $pUserId,
                                       $pOnlineIdentitys,
@@ -169,14 +146,14 @@ class YiidActivityTable extends Doctrine_Table {
     $lActivity->setVerb($pVerb);
     $lActivity->setC(time());
 
-    
+
     $lOIIds = array();
     $lCIds = array();
     foreach ($pOnlineIdentitys as $lOI) {
       $lOIIds[] = $lOI->getId();
       $lCIds[] = $lOI->getCommunityId();
     }
-    
+
     $lActivity->setOiids($lOIIds);
     $lActivity->setCids($lCIds);
 
@@ -207,7 +184,7 @@ class YiidActivityTable extends Doctrine_Table {
     $lActivity->save();
 
     return $lActivity;
-  }
+  }*/
 
   /**
    *
@@ -218,7 +195,7 @@ class YiidActivityTable extends Doctrine_Table {
    */
   public static function retrieveActionOnObjectById($pSocialObjectId, $pUserId, $pDeal = null) {
     $lCollection = self::getMongoCollection();
-    
+
     // get yiid-activity and factor a deal
       $lQuery = $lCollection->findOne(array(
         "so_id" => new MongoId($pSocialObjectId.""),
@@ -228,7 +205,7 @@ class YiidActivityTable extends Doctrine_Table {
 
     return self::initializeObjectFromCollection($lQuery);
   }
-  
+
   /**
    * Counts the Likes or dislikes per User
    * @author hannes
@@ -238,7 +215,7 @@ class YiidActivityTable extends Doctrine_Table {
    */
   public static function retrieveActivityCountByUserId($pUserId, $pIsLike=true) {
     $lCollection = self::getMongoCollection();
-    
+
     $lQuery = $lCollection->count(array(
       "u_id" => intval($pUserId),
       "score" => $pIsLike ? 1 : -1
@@ -255,12 +232,12 @@ class YiidActivityTable extends Doctrine_Table {
    */
   public static function retrieveActivitiesOfActiveDealsByUserId($pUserId) {
     $lCollection = self::getMongoCollection();
-    
+
     $lResults = $lCollection->find(array(
       "u_id" => intval($pUserId),
       "d_id" => array('$exists' => true)
     ));
-    
+
     $dealIds = array();
     while($lResults->hasNext()) {
       $ya = $lResults->getNext();
@@ -270,23 +247,23 @@ class YiidActivityTable extends Doctrine_Table {
     $deals = DealTable::getInstance()->createQuery()
               ->whereIn("id", $dealIds)
               ->andWhere("end_date > ? ", $now)
-              ->execute(); 
-    
+              ->execute();
+
     $activeDealIds = array();
     foreach ($deals as $deal) {
       $activeDealIds[] = $deal->getId();
     }
-    
+
     $lResults->reset();
     $activeActivities = array();
-    
+
     while($lResults->hasNext()) {
       $ya = $lResults->getNext();
       if(in_array($ya['d_id'], $activeDealIds)) {
         $activeActivities[] = self::initializeObjectFromCollection($ya);
       }
     }
-    
+
     return $activeActivities;
   }
 
@@ -469,7 +446,7 @@ class YiidActivityTable extends Doctrine_Table {
       return null;
     }
   }
-  
+
   public static function retrieveById($pId) {
     $lCollection = self::getMongoCollection();
     $lQuery = $lCollection->findOne(array(

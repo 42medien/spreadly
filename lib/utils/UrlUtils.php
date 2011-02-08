@@ -117,8 +117,7 @@ class UrlUtils {
 
       if ($lStatus < 400) {
         return $lContent;
-      }
-      else {
+      } else {
         throw new HttpException("Error while parsing the website", 401);
       }
 

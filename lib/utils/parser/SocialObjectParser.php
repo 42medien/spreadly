@@ -51,45 +51,6 @@ class SocialObjectParser {
       }
 
       return $lYiidMeta;
-    } catch (Exception $e) {
-
-    }
-  }
-
-  public static function enrich($pMessage) {
-    $lUpdateArray = array();
-    $pUrl = urldecode($pMessage[0]['Body']);
-
-    if (!UrlUtils::checkUrlAvailability($pUrl)) {
-      sfContext::getInstance()->getLogger()->info("{SocialObjectParser} invalid url: " . $pUrl );
-      return false;
-    }
-    sfContext::getInstance()->getLogger()->info("{SocialObjectParser} checking url: " . $pUrl );
-    $lSocialObject = SocialObjectTable::retrieveByAliasUrl($pUrl);
-
-    if (!$lSocialObject) {
-      SocialObjectTable::initializeObjectFromUrl($pUrl, SocialObjectTable::ENRICHED_TYPE_OBJECTPARSER);
-      $lSocialObject = SocialObjectTable::retrieveByAliasUrl($pUrl);
-    }
-
-    $lParsedInformation = self::fetch($pUrl);
-
-    $lTitle = StringUtils::cleanupString($lParsedInformation['title'], false);
-    if ($lTitle != "" ) {
-      $lUpdateArray['title'] = $lTitle;
-    }
-    $lStmt = StringUtils::cleanupString($lParsedInformation['stmt'], false);
-    if ($lStmt != "") {
-      $lUpdateArray['stmt'] = $lStmt;
-    }
-
-    if (!empty($lUpdateArray)) {
-      try {
-        SocialObjectTable::updateObjectInMongoDb(array("url_hash" => md5($pUrl)), array('$set' => $lUpdateArray ));
-      }
-      catch (Exception $e) {
-        sfContext::getInstance()->getLogger()->err("{SocialObjectParser} PROBLEM on update: " . print_r($lUpdateArray, true) );
-      }
-    }
+    } catch (Exception $e) {}
   }
 }

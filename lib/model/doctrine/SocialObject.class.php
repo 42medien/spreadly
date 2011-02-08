@@ -54,7 +54,13 @@ class SocialObject extends BaseSocialObject
    * @param array $pServices
    * @author weyandch
    */
-  public function updateObjectOnLikeActivity($pUserId, $pVerifiedOnlineIdentitys, $pUrl, $pScore, $pServices) {
+  public function updateObjectOnLikeActivity($pActivity) {
+    $pUserId = $pActivity->getUId();
+    $pVerifiedOnlineIdentitys = $pActivity->getOiids();
+    $pUrl = $pActivity->getUrl();
+    $pScore = $pActivity->getScore();
+    $pServices = $pActivity->getCids();
+
     if ($pScore == YiidActivityTable::ACTIVITY_VOTE_POSITIVE) {
       $lCounterField = 'l_cnt';
     }
