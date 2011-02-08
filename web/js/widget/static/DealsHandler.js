@@ -7,6 +7,7 @@ var DealsFilterList = {
     getCoupon: function() {
       jQuery('#show-deal-list .show-deal-link').live('click', function() {
         OnLoadGrafic.showGrafic();
+        var lThis = this;
         var lAction = jQuery(this).attr('href');
         var lData = {
           ei_kcuf : new Date().getTime(),
@@ -20,6 +21,7 @@ var DealsFilterList = {
           data : lData,
           success : function(pResponse) {
             DealsFilterList.showCoupon(pResponse.html);
+            DealsFilterList.setCss(lThis);
           }
         });
         
@@ -31,7 +33,12 @@ var DealsFilterList = {
       jQuery('#coupon-used-box').hide();
       jQuery('#coupon-used-box').empty();
       jQuery('#coupon-used-box').append(pHtml);
-      jQuery('#coupon-used-box').show('slow');
+      jQuery('#coupon-used-box').slideDown();
       OnLoadGrafic.hideGrafic();
+    },
+    
+    setCss: function(pThis) {
+      jQuery('.show-deal-link').removeClass('active');
+      jQuery(pThis).addClass('active');
     }
 };
