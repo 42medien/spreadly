@@ -57,14 +57,14 @@ class FacebookPostApiClient extends PostApi {
   private function generateMessage($pActivity) {
     $pTitle = $pActivity->getTitle();
     $pUrl = $pActivity->getUrlWithClickbackParam($this->onlineIdentity);
-    
+
     sfProjectConfiguration::getActive()->loadHelpers('Text');
     if ($pTitle) {
       $pTitle = '"'.$pTitle.'"';
     }
 
     $i18n = sfContext::getInstance()->getI18N();
-    $lWildcard = 'POSTAPI_MESSAGE_'.strtoupper($pActivity->getType()) . ($pActivity->getScore()e<0?'_NOT':'');
+    $lWildcard = 'POSTAPI_MESSAGE_'.strtoupper($pActivity->getType()) . ($pActivity->getScore()<0?'_NOT':'');
     $lText = $i18n->__($lWildcard, array('%title%' => $pTitle, '%url%' => $pUrl), 'widget');
 
     return $lText;
