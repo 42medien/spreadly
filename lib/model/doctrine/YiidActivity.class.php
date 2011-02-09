@@ -7,10 +7,16 @@
  *
  * @package    yiid
  * @subpackage model
- * @author     Your name here
+ * @author     Matthias Pfefferle
+ * @author     Hannes Schippmann
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 class YiidActivity extends BaseYiidActivity {
+  /**
+   * setter
+   *
+   * @param mixed
+   */
   public function setTitle($title) {
     $title = StringUtils::cleanupString($title);
     $this->_set("title", $title);
@@ -21,8 +27,8 @@ class YiidActivity extends BaseYiidActivity {
     $this->_set("descr", $desc);
   }
 
-  public function setSoId($soId)      {
-    $soId = new MongoId($soId."");
+  public function setSoId($soId) {
+    $soId = new MongoId(urldecode($soId)."");
     $this->_set("so_id", $soId);
   }
 
@@ -32,16 +38,11 @@ class YiidActivity extends BaseYiidActivity {
     $this->_set("url_hash", md5(UrlUtils::skipTrailingSlash($url)));
   }
 
-  public function setUId($userId)       {
+  public function setUId($userId) {
     $this->_set("u_id", intval($userId));
   }
 
-  /**
-   * Enter description here...
-   * @todo think about verification
-   * @param unknown_type $oIIds
-   */
-  public function setOiids($oIIds)     {
+  public function setOiids($oIIds) {
     if (!is_array($oIIds)) {
       $oIIds = explode(',', urldecode($oIIds));
     }
@@ -49,7 +50,7 @@ class YiidActivity extends BaseYiidActivity {
     $this->_set("oiids", $oIIds);
   }
 
-  public function setScore($score)     {
+  public function setScore($score) {
     $this->_set("score", intval($score));
   }
 
@@ -73,6 +74,13 @@ class YiidActivity extends BaseYiidActivity {
     }
   }
 
+  /**
+   * pre-save hook
+   *
+   * @author Matthias Pfefferle
+   * @author Hannes Schippmann
+   * @param unknown_type $event
+   */
   public function preSave($event) {
     $this->updateDealInfo();
     $this->upsertSocialObject();
@@ -111,40 +119,45 @@ class YiidActivity extends BaseYiidActivity {
     return false;
   }
 
+  /**
+   * post-save hook
+   *
+   * @param unknown_type $event
+   */
   public function postSave($event) {
     UserTable::updateLatestActivityForUser($this->getUId(), time());
     $this->updateSocialObjectInfo();
-
+    $this->postIt();
     StatsFeeder::feed($this);
   }
 
-  public function a() {
+  /**
+   * sends the like to the connected communities like twitter, facebook, ...
+   */
+  public function postIt() {
     if (sfConfig::get('sf_environment') != 'dev') {
       // send messages to all services
       foreach (PostApiFactory::fromOnlineIdentityIdArray($this->getOiids()) as $client) {
         $client->doPost($this);
-
-        /*    sfContext::getInstance()->getLogger()->err("{OnlineIdentity} trying to send with: ".$this->getId()." (Community ID: ".$this->getCommunityId().") msg: ". $pTitle);
-
-    $this->aPostApiClient = PostApiFactory::factory($this->getCommunity()->getCommunity());
-    if ($this->aPostApiClient) {
-      $lStatus = $this->aPostApiClient->doPost($this, $pUrl, $pType, $pScore, $pTitle, $pDescription, $pPhoto);
-      return $lStatus;
-    } else {
-      try {
-        sfContext::getInstance()->getLogger()->err("{OnlineIdentity} missing PostApiFactory for OnlineIdentity: ".$this->getId()." (Community ID: ".$this->getCommunityId().")");
-      } catch (Exception $e) {}
-    }*/
       }
     }
   }
-  
-  
+
+  /**
+   * returns the tracking link
+   *
+   * @author Hannes Schippmann
+   * @param OnlineIdentity $pOnlineIdentity
+   * @return string
+   */
   public function getUrlWithClickbackParam($pOnlineIdentity) {
     $lQueryChar = parse_url($this->getUrl(), PHP_URL_QUERY) ? '&' : '?';
     return $this->getUrl().$lQueryChar.'yiidit='.$pOnlineIdentity->getCommunity()->getCommunity().'.'.$this->getId();
   }
 
+  /**
+   * verifys all online-identity-ids
+   */
   private function verifyAndSaveOnlineIdentities() {
     $lVerifiedOIs = OnlineIdentityTable::retrieveVerified($this->getUId(), $this->getOiids());
 
@@ -161,6 +174,9 @@ class YiidActivity extends BaseYiidActivity {
     $this->setCids(array_unique($lCIds));
   }
 
+  /**
+   * updates the deal informations of the yiid activity
+   */
   private function updateDealInfo() {
     $deal = DealTable::getActiveDealByHostAndUserId($this->getUrl(), $this->getUId());
     // sets the deal-id if it's not empty
@@ -172,16 +188,25 @@ class YiidActivity extends BaseYiidActivity {
     }
   }
 
+  /**
+   * updates the social object informations
+   */
   private function updateSocialObjectInfo() {
     $lSocialObject = SocialObjectTable::retrieveByPk($this->getSoId());
     $lSocialObject->updateObjectOnLikeActivity($this);
   }
 
+  /**
+   * checks if the social-object exists or creates a new, if not
+   */
   private function upsertSocialObject() {
     $so = SocialObjectTable::retrieveOrCreate($this);
     $this->setSoId($so->getId());
   }
 
+  /**
+   * checks if user is allowed to like this entry
+   */
   private function isAllowedToLike() {
     $activity = YiidActivityTable::retrieveActionOnObjectById($this->getSoId(), $this->getUId(), $this->getDeal());
 
@@ -206,6 +231,11 @@ class YiidActivity extends BaseYiidActivity {
     return $this->getDId()?true:false;
   }
 
+  /**
+   * overrides the delete methode
+   *
+   * @param Doctrine_Connection $con
+   */
   public function delete(Doctrine_Connection $con = null) {
     $this->collection->remove(array("_id" => new MongoId($this->getId()) ));
   }
@@ -218,16 +248,6 @@ class YiidActivity extends BaseYiidActivity {
   public function getCommunityNames() {
     $lObjectOiIds = $this->getCids();
     $lNamesArray = array();
-
-    /*
-    foreach($lObjectOiIds as $lId) {
-      $lOi = Doctrine::getTable('OnlineIdentity')->find($lId);
-      $lName = Doctrine::getTable('Community')->find($lOi->getCommunityId())->getName();
-      array_push($lNamesArray, $lName);
-    }
-
-    return $lNamesArray;
-    */
 
     return Doctrine::getTable('Community')->find($lObjectOiIds[0])->getName();
   }
@@ -246,6 +266,11 @@ class YiidActivity extends BaseYiidActivity {
     return $lDate;
   }
 
+  /**
+   * lazy loads the user connected to this activity
+   *
+   * @return User
+   */
   public function getUser() {
     $lUser = UserTable::getInstance()->retrieveByPk($this->getUId());
 
