@@ -1,6 +1,6 @@
 #general-ajax-loader{z-index: 1000000; position: absolute; display:none;}
 
-ul#logos_big { margin: 10px 0 10px 30px; }
+ul#logos_big {  margin: 30px 0 40px 30px; }
 #logos_big li{float:left;width:105px;text-align:center;margin-right:5px;padding-top: 60px;}
 #logos_big li a{padding-top: 60px;}
 #buzz_logo{padding-left:14px;padding-right:14px;}
@@ -13,3 +13,9 @@ ul#logos_big { margin: 10px 0 10px 30px; }
 #twitter_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -1003px;}
 #further_logos{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -1269px;}
 #linkedin_logo{background: url("/img/sprites/sprite_popup.png") no-repeat -453px -1195px;}
+
+#signin-head{ line-height: 21px; text-align: center;}
+#signin-head .signin-title{ font-size:21px; font-weight:normal; color:#000; padding-left:4px; padding-top: 20px;}
+#signin-head .signin-title em{ font-size:12px; font-style: normal}
+
+.slogantext{margin-left: 47px; margin-top: 30px;}
