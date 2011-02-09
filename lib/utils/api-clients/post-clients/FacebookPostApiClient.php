@@ -17,29 +17,28 @@ class FacebookPostApiClient extends PostApi {
    *
    * @return int status code
    */
-  public function doPost(OnlineIdentity $pOnlineIdentity, $pUrl, $pType, $pScore, $pTitle = null, $pDescription = null, $pPhoto = null) {
-  	$lToken = AuthTokenTable::getByUserAndOnlineIdentity($pOnlineIdentity->getUserId(), $pOnlineIdentity->getId());
+  public function doPost($pActivity) {
+  	$lToken = AuthTokenTable::getByUserAndOnlineIdentity($this->onlineIdentity->getUserId(), $this->onlineIdentity->getId());
+
   	if (!$lToken) {
-  	  $pOnlineIdentity->setSocialPublishingEnabled(false);
-  	  $pOnlineIdentity->save();
+  	  $this->onlineIdentity->setSocialPublishingEnabled(false);
+  	  $this->onlineIdentity->save();
       return false;
   	}
 
-    $lStatusMessage = $this->generateMessage($pType, $pScore, $pTitle);
+    $lStatusMessage = $this->generateMessage($pActivity);
 
     $lPostBody = "access_token=".$lToken->getTokenKey()."&message=".$lStatusMessage;
 
-    if ($pDescription && $pDescription != '') {
-      $lPostBody .= "&description=".$pDescription;
+    if ($pActivity->getDescr() && $pActivity->getDescr() != '') {
+      $lPostBody .= "&description=".$pActivity->getDescr();
     }
 
-    if ($pPhoto && $pPhoto != '') {
-      $lPostBody .= "&picture=".$pPhoto;
+    if ($pActivity->getThumb() && $pActivity->getThumb() != '') {
+      $lPostBody .= "&picture=".$pActivity->getThumb();
     }
 
-    if ($pUrl) {
-      $lPostBody .= "&link=".urlencode($pUrl);
-    }
+    $lPostBody .= "&link=".urlencode($pActivity->getUrlWithClickbackParam($this->onlineIdentity));
 
     $lPostBody .= '&privacy={"value": "EVERYONE"}';
 
@@ -52,26 +51,22 @@ class FacebookPostApiClient extends PostApi {
   /**
    * generate Wildcard.. truncate if necessary, $pUrl is optional
    *
-   * @param string $pType
-   * @param int $pScore
-   * @param string $pTitle
-   * @param string $pUrl
+   * @param YiidActivity $pActivity
    * @return string
    */
-  public function generateMessage($pType, $pScore, $pTitle = null, $pUrl = null, $pMaxLength = null) {
+  private function generateMessage($pActivity) {
+    $pTitle = $pActivity->getTitle();
+    $pUrl = $pActivity->getUrlWithClickbackParam($this->onlineIdentity);
+    
     sfProjectConfiguration::getActive()->loadHelpers('Text');
     if ($pTitle) {
       $pTitle = '"'.$pTitle.'"';
     }
 
     $i18n = sfContext::getInstance()->getI18N();
-    $lWildcard = 'POSTAPI_MESSAGE_'.strtoupper($pType) . ($pScore<0?'_NOT':'');
-    if ($pMaxLength) {
-      $lText = $i18n->__($lWildcard, array('%title%' => $pTitle, '%url%' => $pUrl), 'widget');
-      $lText = truncate_text($lText, $pMaxLength , '...');
-    } else {
-      $lText = $i18n->__($lWildcard, array('%title%' => $pTitle, '%url%' => $pUrl), 'widget');
-    }
+    $lWildcard = 'POSTAPI_MESSAGE_'.strtoupper($pActivity->getType()) . ($pActivity->getScore()e<0?'_NOT':'');
+    $lText = $i18n->__($lWildcard, array('%title%' => $pTitle, '%url%' => $pUrl), 'widget');
+
     return $lText;
   }
 

@@ -13,7 +13,7 @@ abstract class PostApi {
                             "buy", array("1" => "#buy", "-1" => "#dontbuy"),
                             "rsvp", array("1" => "#attend", "-1" => "#miss"));
 
-  private $onlineIdentity = null;
+  protected $onlineIdentity = null;
 
   /**
    * defines the post function
@@ -34,4 +34,5 @@ abstract class PostApi {
   public function getOnlineIdentity() {
     return $this->onlineIdentity;
   }
+  
 }

@@ -122,10 +122,6 @@ class YiidActivity extends BaseYiidActivity {
     if (sfConfig::get('sf_environment') != 'dev') {
       // send messages to all services
       foreach (PostApiFactory::fromOnlineIdentityIdArray($this->getOiids()) as $client) {
-        //$lQueryChar = parse_url($this->getUrl(), PHP_URL_QUERY) ? '&' : '?';
-        //$pPostUrl = $this->getUrl().$lQueryChar.'yiidit='.$lIdentity->getCommunity()->getCommunity().'.'.$this->getId();
-        //$lStatus = $lIdentity->sendStatusMessage($pPostUrl, $pVerb, $pScore, $pTitle, $pDescription, $pPhoto);
-
         $client->doPost($this);
 
         /*    sfContext::getInstance()->getLogger()->err("{OnlineIdentity} trying to send with: ".$this->getId()." (Community ID: ".$this->getCommunityId().") msg: ". $pTitle);
@@ -141,6 +137,12 @@ class YiidActivity extends BaseYiidActivity {
     }*/
       }
     }
+  }
+  
+  
+  public function getUrlWithClickbackParam($pOnlineIdentity) {
+    $lQueryChar = parse_url($this->getUrl(), PHP_URL_QUERY) ? '&' : '?';
+    return $this->getUrl().$lQueryChar.'yiidit='.$pOnlineIdentity->getCommunity()->getCommunity().'.'.$this->getId();
   }
 
   private function verifyAndSaveOnlineIdentities() {
