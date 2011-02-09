@@ -27,15 +27,13 @@
   <body class="nobg">
 		<div class="popupblock">
 			<div class="sharepic">
-				<a href="#">
-					<img src="/img/share-pic.png" width="118" height="135" alt="Share" title="Share" />
-				</a>
+        <?php echo image_tag("/img/share-pic.png", array("alt"=>"Share", "title"=>"Share", "width"=>"118", "height"=>"135")); ?>
 			</div>
     	<div class="pop-header clearfix">
     		<a href="#" class="alignleft spreadlogo">
-    			<img src="/img/spread-logo.png" width="211" height="88" alt="Spread.ly" title="Spread.ly" />
+    		  <?php echo image_tag("/img/spread-logo.png", array("alt"=>"Spread.ly", "title"=>"Spread.ly", "width"=>"211", "height"=>"88")); ?>
     		</a>
-    		<img src="/img/like-slogan.png" class="alignleft slogantext" width="166" height="53" alt="Spread.ly" title="Spread.ly" />
+    		<?php echo image_tag("/img/like-slogan.png", array("alt"=>"Spread.ly", "title"=>"Spread.ly", "width"=>"166", "height"=>"53", "class"=>"alignleft slogantext")); ?>
   		</div>
 
       <!--Pop Navigation start -->
