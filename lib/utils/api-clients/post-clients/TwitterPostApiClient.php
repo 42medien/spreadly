@@ -16,17 +16,13 @@ class TwitterPostApiClient extends PostApi {
    * @param string $pMessage
    * @return int status code
    */
-  public function doPost(OnlineIdentity $pOnlineIdentity, $pUrl, $pType, $pScore, $pTitle = null, $pDescription = null, $pPhoto = null) {
-    $lToken = AuthTokenTable::getByUserAndOnlineIdentity($pOnlineIdentity->getUserId(), $pOnlineIdentity->getId());
-    if (!$lToken) {
-      $pOnlineIdentity->setSocialPublishingEnabled(false);
-      $pOnlineIdentity->save();
+  public function doPost($pActivity) {
+  	$lToken = $this->getAuthToken();
+  	if (!$lToken) {
       return false;
-    }
+  	}
 
-    $lUrl = ShortUrlTable::shortenUrl($pUrl);
-
-    $lStatusMessage = $this->generateMessage($pType, $pScore, $lUrl, $pTitle);
+    $lStatusMessage = $this->generateMessage($pActivity);
 
     $lPostBody = array("status" => $lStatusMessage);
     $lConsumer = new OAuthConsumer(sfConfig::get("app_twitter_oauth_token"), sfConfig::get("app_twitter_oauth_secret"));
@@ -38,24 +34,23 @@ class TwitterPostApiClient extends PostApi {
   /**
    * generate Wildcard.. truncate if necessary, $pUrl is optional
    *
-   * @param string $pType
-   * @param int $pScore
-   * @param string $pTitle
-   * @param string $pUrl
+   * @param YiidActivity $pActivity
    * @return string
    */
-  public static function generateMessage($pType, $pScore, $pUrl, $pTitle = null) {
+  public static function generateMessage($pActivity) {
     sfProjectConfiguration::getActive()->loadHelpers('Text');
+    
+    $lUrl = ShortUrlTable::shortenUrl($pActivity->getUrlWithClickbackParam($this->onlineIdentity));
 
     $lMaxChars = 135;
 
-    $lHashtag = self::$aHashtags[$pType][$pScore];
-    $lText = $pUrl . " " . $lHashtag;
+    $lHashtag = self::$aHashtags[$pActivity->getType()][$pActivity->getScore()];
+    $lText = $lUrl . " " . $lHashtag;
     $lLengthOfText = strlen($lText);
 
-    if ($pTitle) {
+    if ($pActivity->getTitle()) {
       $lChars = $lMaxChars - $lLengthOfText;
-      $lText = truncate_text($pTitle, $lChars, '...') . " " . $lText;
+      $lText = truncate_text($pActivity->getTitle(), $lChars, '...') . " " . $lText;
     }
 
     return $lText;

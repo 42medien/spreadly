@@ -18,11 +18,8 @@ class FacebookPostApiClient extends PostApi {
    * @return int status code
    */
   public function doPost($pActivity) {
-  	$lToken = AuthTokenTable::getByUserAndOnlineIdentity($this->onlineIdentity->getUserId(), $this->onlineIdentity->getId());
-
+  	$lToken = $this->getAuthToken();
   	if (!$lToken) {
-  	  $this->onlineIdentity->setSocialPublishingEnabled(false);
-  	  $this->onlineIdentity->save();
       return false;
   	}
 

@@ -35,4 +35,13 @@ abstract class PostApi {
     return $this->onlineIdentity;
   }
   
+  protected function getAuthToken() {
+    $lToken = AuthTokenTable::getByUserAndOnlineIdentity($this->onlineIdentity->getUserId(), $this->onlineIdentity->getId());
+    if (!$lToken) {
+      $this->onlineIdentity->setSocialPublishingEnabled(false);
+      $this->onlineIdentity->save();
+    }
+    return $lToken;
+  }
+  
 }

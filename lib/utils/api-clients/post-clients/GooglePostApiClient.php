@@ -15,15 +15,13 @@ class GooglePostApiClient extends PostApi {
    * @param string $pScore
    * @return int status code
    */
-  public function doPost(OnlineIdentity $pOnlineIdentity, $pUrl, $pType, $pScore, $pTitle = null, $pDescription = null, $pPhoto = null) {
-    $lToken = AuthTokenTable::getByUserAndOnlineIdentity($pOnlineIdentity->getUserId(), $pOnlineIdentity->getId());
-    if (!$lToken) {
-      $pOnlineIdentity->setSocialPublishingEnabled(false);
-      $pOnlineIdentity->save();
+  public function doPost($pActivity) {
+  	$lToken = $this->getAuthToken();
+  	if (!$lToken) {
       return false;
-    }
+  	}
 
-    $lPostBody = $this->generateMessage($pType, $pScore, $pUrl, $pTitle, $pDescription, $pPhoto);
+    $lPostBody = $this->generateMessage($pActivity);
 
     $lConsumer = new OAuthConsumer(sfConfig::get("app_google_oauth_token"), sfConfig::get("app_google_oauth_secret"));
     $lStatus = OAuthClient::post($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "https://www.googleapis.com/buzz/v1/activities/@me/@self", $lPostBody, null, array("Content-Type: application/atom+xml"));
@@ -31,31 +29,29 @@ class GooglePostApiClient extends PostApi {
     return $lStatus;
   }
 
-
-  public function generateMessage($pType, $pScore, $pUrl, $pTitle, $pDescription, $pPhoto) {
-    $lHashtag = self::$aHashtags[$pType][$pScore];
+  public function generateMessage($pActivity) {
+    $lHashtag = self::$aHashtags[$pActivity->getType()][$pActivity->getScore()];
 
     $lTag = substr($lHashtag, 1);
-
+    $lUrl = $pActivity->getUrlWithClickbackParams($this->onlineIdentity);
+    $lTitle = $pActivity->getTitle();
+    $lPhoto = $pActivity->getThumb();
+    $lScore = $pActivity->getScore();
+    
     $lPostBody = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0" xmlns:buzz="http://schemas.google.com/buzz/2010">';
-    $lPostBody .= "<content type='html'>$pTitle $pUrl $lHashtag</content>";
+    $lPostBody .= "<content type='html'>$lTitle $lUrl $lHashtag</content>";
     $lPostBody .= '<activity:object><activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>';
 
-    if ($pScore > 0) {
-      $lPostBody .= "<activity:verb>http://activitystrea.ms/schema/1.0/like</activity:verb>";
-      $lPostBody .= "<activity:verb>http://www.yiid.org/activity/schema/$lTag</activity:verb>";
-    } else {
-      $lPostBody .= "<activity:verb>http://activitystrea.ms/schema/1.0/dislike</activity:verb>";
-      $lPostBody .= "<activity:verb>http://www.yiid.org/activity/schema/$lTag</activity:verb>";
-    }
+    $lPostBody .= "<activity:verb>http://activitystrea.ms/schema/1.0/".($lScore > 0 ? 'like' : 'dislike')."</activity:verb>";
+    $lPostBody .= "<activity:verb>http://www.yiid.org/activity/schema/$lTag</activity:verb>";
 
-    if ($pPhoto) {
+    if ($lPhoto) {
       $lPostBody .= "<buzz:attachment><activity:object-type>http://activitystrea.ms/schema/1.0/photo</activity:object-type>";
-      $lPostBody .= "<title>$pTitle</title>";
-      $lPostBody .= "<content>$pTitle</content>";
-      $lPostBody .= "<link rel='enclosure' type='image/jpeg' href='$pPhoto' />";
-      $lPostBody .= "<link rel='preview' type='image/jpeg' href='$pPhoto' />";
-      $lPostBody .= "<link rel='alternate' type='text/html' href='$pUrl' />";
+      $lPostBody .= "<title>$lTitle</title>";
+      $lPostBody .= "<content>$lTitle</content>";
+      $lPostBody .= "<link rel='enclosure' type='image/jpeg' href='$lPhoto' />";
+      $lPostBody .= "<link rel='preview' type='image/jpeg' href='$lPhoto' />";
+      $lPostBody .= "<link rel='alternate' type='text/html' href='$lUrl' />";
       $lPostBody .= "</buzz:attachment>";
     }
 

@@ -16,15 +16,13 @@ class LinkedinPostApiClient extends PostApi {
    * @param string $pMessage
    * @return int status code
    */
-  public function doPost(OnlineIdentity $pOnlineIdentity, $pUrl, $pType, $pScore, $pTitle = null, $pDescription = null, $pPhoto = null) {
-    $lToken = AuthTokenTable::getByUserAndOnlineIdentity($pOnlineIdentity->getUserId(), $pOnlineIdentity->getId());
-    if (!$lToken) {
-      $pOnlineIdentity->setSocialPublishingEnabled(false);
-      $pOnlineIdentity->save();
+  public function doPost($pActivity) {
+  	$lToken = $this->getAuthToken();
+  	if (!$lToken) {
       return false;
-    }
+  	}
 
-    $lStatusMessage = $this->generateShareMessage($pType, $pScore, $pUrl, $pTitle, $pDescription, $pPhoto);
+    $lStatusMessage = $this->generateShareMessage($pActivity);
 
     $lPostBody = $lStatusMessage;
     $lConsumer = new OAuthConsumer(sfConfig::get("app_linkedin_oauth_token"), sfConfig::get("app_linkedin_oauth_secret"));
@@ -42,18 +40,18 @@ class LinkedinPostApiClient extends PostApi {
    * @param string $pUrl
    * @return string
    */
-  public static function generatePostMessage($pType, $pScore, $pUrl, $pTitle = null, $pDescription = null, $pPhoto = null) {
+  public static function generatePostMessage($pActivity) {
     sfProjectConfiguration::getActive()->loadHelpers(array('Text', 'Url', 'Tag'));
 
-    $lHashtag = self::$aHashtags[$pType][$pScore];
+    $lHashtag = self::$aHashtags[$pActivity->getType()][$pActivity->getScore()];
 
-    if ($pTitle) {
-      $lTitle = $pTitle;
+    if ($pActivity->getTitle()) {
+      $lTitle = $pActivity->getTitle();
     } else {
-      $lTitle = parse_url ($pUrl, PHP_URL_HOST);
+      $lTitle = parse_url ($pActivity->getUrl(), PHP_URL_HOST);
     }
 
-    $lLink = link_to($lTitle, $pUrl);
+    $lLink = link_to($lTitle, $pActivity->getUrlWithClickbackParam($this->onlineIdentity));
 
     $lStatusMessage = '<activity locale="en_US"><content-type>linkedin-html</content-type><body>';
     $lStatusMessage .= htmlentities($lLink) . " " . $lHashtag;
@@ -71,26 +69,27 @@ class LinkedinPostApiClient extends PostApi {
    * @param string $pUrl
    * @return string
    */
-  public static function generateShareMessage($pType, $pScore, $pUrl, $pTitle = null, $pDescription = null, $pPhoto = null) {
+  public static function generateShareMessage($pActivity) {
     sfProjectConfiguration::getActive()->loadHelpers(array('Text', 'Url', 'Tag'));
 
-    $lHashtag = self::$aHashtags[$pType][$pScore];
-
+    $lHashtag = self::$aHashtags[$pActivity->getType()][$pActivity->getScore()];
+    $lUrl = $pActivity->getUrlWithClickbackParam($this->onlineIdentity);
+    
     $lStatusMessage = '<?xml version="1.0" encoding="UTF-8"?><share>';
-    $lStatusMessage .= "<comment>".self::$aHashtags[$pType][$pScore]."</comment>";
+    $lStatusMessage .= "<comment>".$lHashtag."</comment>";
     $lStatusMessage .= '<content>';
-    $lStatusMessage .= "<submitted-url>$pUrl</submitted-url>";
+    $lStatusMessage .= "<submitted-url>$lUrl</submitted-url>";
 
-    if ($pTitle) {
-      $lStatusMessage .= "<title>$pTitle</title>";
+    if ($pActivity->getTitle()) {
+      $lStatusMessage .= "<title>".$pActivity->getTitle()."</title>";
     }
 
-    if ($pDescription) {
-      $lStatusMessage .= "<description>$pDescription</description>";
+    if ($pActivity->getDescr()) {
+      $lStatusMessage .= "<description>".$pActivity->getDescr()."</description>";
     }
 
-    if ($pPhoto) {
-      $lStatusMessage .= "<submitted-image-url>$pPhoto</submitted-image-url>";
+    if ($pActivity->getThumb()) {
+      $lStatusMessage .= "<submitted-image-url>".$pActivity->getThumb()."</submitted-image-url>";
     }
 
     $lStatusMessage .= '</content>';
