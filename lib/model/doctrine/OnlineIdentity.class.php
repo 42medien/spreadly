@@ -24,30 +24,6 @@ class OnlineIdentity extends BaseOnlineIdentity
     return $this->getProfileUri();
   }
 
-  /**
-   * send status-message (for example like)
-   *
-   * @author Matthias Pfefferle
-   * @param string $pUrl
-   * @param string $pType
-   * @param int $pScore
-   * @param string $pTitle
-   * @return int
-   */
-  public function sendStatusMessage($pUrl, $pType, $pScore, $pTitle, $pDescription, $pPhoto) {
-    sfContext::getInstance()->getLogger()->err("{OnlineIdentity} trying to send with: ".$this->getId()." (Community ID: ".$this->getCommunityId().") msg: ". $pTitle);
-
-    $this->aPostApiClient = PostApiFactory::factory($this->getCommunity()->getCommunity());
-    if ($this->aPostApiClient) {
-      $lStatus = $this->aPostApiClient->doPost($this, $pUrl, $pType, $pScore, $pTitle, $pDescription, $pPhoto);
-      return $lStatus;
-    } else {
-      try {
-        sfContext::getInstance()->getLogger()->err("{OnlineIdentity} missing PostApiFactory for OnlineIdentity: ".$this->getId()." (Community ID: ".$this->getCommunityId().")");
-      } catch (Exception $e) {}
-    }
-  }
-
   public function getOAuthToken(){
   }
 

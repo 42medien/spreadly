@@ -13,6 +13,8 @@ abstract class PostApi {
                             "buy", array("1" => "#buy", "-1" => "#dontbuy"),
                             "rsvp", array("1" => "#attend", "-1" => "#miss"));
 
+  private $onlineIdentity = null;
+
   /**
    * defines the post function
    *
@@ -23,5 +25,13 @@ abstract class PostApi {
    * @param string $pTitle
    * @return int status code
    */
-  abstract public function doPost(OnlineIdentity $pOnlineIdentity, $pUrl, $pType, $pScore, $pTitle = null, $pDescription = null, $pPhoto = null);
+  abstract public function doPost($activity);
+
+  public function setOnlineIdentity($oi) {
+    $this->onlineIdentity = $oi;
+  }
+
+  public function getOnlineIdentity() {
+    return $this->onlineIdentity;
+  }
 }

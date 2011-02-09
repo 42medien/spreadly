@@ -112,20 +112,35 @@ class YiidActivity extends BaseYiidActivity {
   }
 
   public function postSave($event) {
-    /* raus schicken
-    if (sfConfig::get('sf_environment') != 'dev') {
-      // send messages to all services
-      foreach ($lOnlineIdentitys as $lIdentity) {
-        $lQueryChar = parse_url($pUrl, PHP_URL_QUERY) ? '&' : '?';
-        $pPostUrl = $pUrl.$lQueryChar.'yiidit='.$lIdentity->getCommunity()->getCommunity().'.'.$lActivity->getId();
-        $lStatus = $lIdentity->sendStatusMessage($pPostUrl, $pVerb, $pScore, $pTitle, $pDescription, $pPhoto);
-      }
-    }*/
-
     UserTable::updateLatestActivityForUser($this->getUId(), time());
     $this->updateSocialObjectInfo();
 
     StatsFeeder::feed($this);
+  }
+
+  public function a() {
+    if (sfConfig::get('sf_environment') != 'dev') {
+      // send messages to all services
+      foreach (PostApiFactory::fromOnlineIdentityIdArray($this->getOiids()) as $client) {
+        //$lQueryChar = parse_url($this->getUrl(), PHP_URL_QUERY) ? '&' : '?';
+        //$pPostUrl = $this->getUrl().$lQueryChar.'yiidit='.$lIdentity->getCommunity()->getCommunity().'.'.$this->getId();
+        //$lStatus = $lIdentity->sendStatusMessage($pPostUrl, $pVerb, $pScore, $pTitle, $pDescription, $pPhoto);
+
+        $client->doPost($this);
+
+        /*    sfContext::getInstance()->getLogger()->err("{OnlineIdentity} trying to send with: ".$this->getId()." (Community ID: ".$this->getCommunityId().") msg: ". $pTitle);
+
+    $this->aPostApiClient = PostApiFactory::factory($this->getCommunity()->getCommunity());
+    if ($this->aPostApiClient) {
+      $lStatus = $this->aPostApiClient->doPost($this, $pUrl, $pType, $pScore, $pTitle, $pDescription, $pPhoto);
+      return $lStatus;
+    } else {
+      try {
+        sfContext::getInstance()->getLogger()->err("{OnlineIdentity} missing PostApiFactory for OnlineIdentity: ".$this->getId()." (Community ID: ".$this->getCommunityId().")");
+      } catch (Exception $e) {}
+    }*/
+      }
+    }
   }
 
   private function verifyAndSaveOnlineIdentities() {
@@ -140,8 +155,8 @@ class YiidActivity extends BaseYiidActivity {
       $lCIds[] = $lOI->getCommunityId();
     }
 
-    $this->setOiids($lOIIds);
-    $this->setCids($lCIds);
+    $this->setOiids(array_unique($lOIIds));
+    $this->setCids(array_unique($lCIds));
   }
 
   private function updateDealInfo() {
