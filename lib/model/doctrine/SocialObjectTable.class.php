@@ -37,14 +37,15 @@ class SocialObjectTable extends Doctrine_Table {
     $lCollection->update($pIdentifier, $pManipualtior, array('upsert' => true));
   }
   
-  public static function retrieveOrCreate($pUrl, $pTitle, $pDescription, $pPhoto) {
-    $lSocialObject = SocialObjectTable::retrieveByAliasUrl($pUrl);
+  public static function retrieveOrCreate($pActivity) {    
+    $lSocialObject = $pActivity->getSocialObject();
     if (!$lSocialObject) {
-      if (SocialObjectTable::initializeObjectFromUrl($pUrl) === false) {
+      if (SocialObjectTable::initializeObjectFromUrl($pActivity->getUrl()) === false) {
         return false;
       }
-      $lSocialObject = SocialObjectTable::retrieveByAliasUrl($pUrl);
-      $lSocialObject->updateObjectMasterData($pTitle, $pDescription, $pPhoto);
+      
+      $lSocialObject = SocialObjectTable::retrieveByAliasUrl($pActivity->getUrl());
+      $lSocialObject->updateObjectMasterData($pActivity->getTitle(), $pActivity->getDescr(), $pActivity->getThumb());
     }
     return $lSocialObject;
   }

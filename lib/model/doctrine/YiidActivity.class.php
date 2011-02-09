@@ -161,7 +161,7 @@ class YiidActivity extends BaseYiidActivity {
   }
 
   private function upsertSocialObject() {
-    $so = SocialObjectTable::retrieveOrCreate($this->getUrl(), $this->getTitle(), $this->getDescr(), $this->getThumb());
+    $so = SocialObjectTable::retrieveOrCreate($this);
     $this->setSoId($so->getId());
   }
 
