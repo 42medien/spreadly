@@ -97,9 +97,9 @@ class YiidActivity extends BaseYiidActivity {
    */
   public function save(Doctrine_Connection $conn = null) {
     $this->invokeSaveHooks('pre', 'save');
-
     $lObjectToSave = $this->toArray(false);
 
+    // unset help params
     unset($lObjectToSave['id']);
     unset($lObjectToSave['clickback']);
 
