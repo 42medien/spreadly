@@ -18,6 +18,10 @@ class likeActions extends sfActions
   public function executeIndex(sfWebRequest $request) {
 		$this->setLayout('layout');
     $this->pIdentities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
+
+    $lYiidMeta = new YiidMeta();
+    $lYiidMeta->fromParams($request->getParameterHolder());
+    $this->pYiidMeta = SocialObjectParser::fetch($request->getParameter("url"), $lYiidMeta);
   }
 
   public function executeSave(sfWebRequest $request) {

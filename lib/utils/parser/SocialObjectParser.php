@@ -17,7 +17,9 @@ class SocialObjectParser {
    * @param string $pUrl
    * @return array $pArray
    */
-  public static function fetch($pUrl) {
+  public static function fetch($pUrl, $pYiidActivity = null) {
+    $pUrl = urldecode($pUrl);
+
     try {
       //get the html as string
       $lHtml = UrlUtils::getUrlContent($pUrl, 'GET');
@@ -25,29 +27,33 @@ class SocialObjectParser {
       // boost performance and use alreade the header
       $lHeader = substr( $lHtml, 0, stripos( $lHtml, '</head>' ) );
 
-      $lYiidMeta = new YiidMeta();
+      if (!$pYiidActivity) {
+        $pYiidActivity = new YiidMeta();
+      }
 
-      if (preg_match('~http://opengraphprotocol.org/schema/~i', $lHeader)) {
+      if (preg_match('~http://opengraphprotocol.org/schema/~i', $lHeader)  && !$pYiidActivity->isComplete()) {
         //get the opengraph-tags
         $lOpenGraph = OpenGraph::parse($lHeader);
-        $lYiidMeta->fromOpenGraph($lOpenGraph);
+        $pYiidActivity->fromOpenGraph($lOpenGraph);
       }
 
-      if ((preg_match('~application/(xml|json)\+oembed"~i', $lHeader)) && !$lYiidMeta->isComplete()) {
+      if ((preg_match('~application/(xml|json)\+oembed"~i', $lHeader)) && !$pYiidActivity->isComplete()) {
         $lOEmbed = OEmbedParser::fetchByCode($lHeader);
-        $lYiidMeta->fromOembed($lOEmbed);
+        $pYiidActivity->fromOembed($lOEmbed);
       }
 
-      if (!$lYiidMeta->isComplete()) {
+      if (!$pYiidActivity->isComplete()) {
         $lMeta = MetaTagParser::getKeys($lHtml, $pUrl);
-        $lYiidMeta->fromMeta($lMeta);
-
+        $pYiidActivity->fromMeta($lMeta);
+        /*
         if (!$lYiidMeta->getImages()) {
           foreach (ImageParser::fetch($lHtml, $pUrl) as $images) {
             $imgs[] = $images['image'];
           }
+
           $lYiidMeta->setImages($imgs);
         }
+        */
       }
 
       return $lYiidMeta;

@@ -7,13 +7,13 @@ class YiidMeta {
 
   public function setTitle($title) {
     if (!$this->title && $title) {
-      $this->title = $title;
+      $this->title = urldecode($title);
     }
   }
 
   public function setDescription($description) {
     if (!$this->description && $description) {
-      $this->description = $description;
+      $this->description = urldecode($description);
     }
   }
 
@@ -22,7 +22,7 @@ class YiidMeta {
       if (is_array($images)) {
         $this->images = $images;
       } else {
-        $this->images = array($images);
+        $this->images = array(urldecode($images));
       }
     }
   }
@@ -91,6 +91,12 @@ class YiidMeta {
     }
 
     $this->setTitle($meta['title']);
+  }
+
+  public function fromParams($params) {
+    $this->setTitle($params->get("title"));
+    $this->setDescription($params->get("description"));
+    $this->setImages($params->get("photo"));
   }
 }
 ?>
