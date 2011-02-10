@@ -232,7 +232,7 @@ class YiidActivity extends BaseYiidActivity {
    * @return boolean
    */
   public function isClickback() {
-    return $this->getCbReferer()?true:false;
+    return $this->getCbReferer() ? true : false;
   }
 
   /**
@@ -240,7 +240,7 @@ class YiidActivity extends BaseYiidActivity {
    * @return boolean
    */
   public function isDealActivity() {
-    return $this->getDId()?true:false;
+    return $this->getDId() ? true : false;
   }
 
   /**
@@ -288,18 +288,14 @@ class YiidActivity extends BaseYiidActivity {
 
     return $lUser;
   }
-
+    
   /**
    * checks if it is a deal activity or not
    *
    * @return boolean
    */
   public function isDeal() {
-    if ($this->getDId()) {
-      return true;
-    } else {
-      return false;
-    }
+    return $this->getDId() ? true : false;
   }
 
   /**
