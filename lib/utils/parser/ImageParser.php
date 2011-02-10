@@ -32,7 +32,7 @@ class ImageParser {
    * @param string $url
    * @return array
    */
-  public static function fetch($url, $flat = true, $limit = 5) {
+  public static function fetch($url, $limit = 5, $flat = true) {
     //get the html as string
     $html = UrlUtils::getUrlContent($url, 'GET');
 
