@@ -32,4 +32,13 @@ class likeActions extends sfActions
 
   	return true;
   }
+
+  public function executeGet_images(sfWebRequest $request) {
+    $url = $request->getParameter("url");
+
+    // the photos array looks like
+    // $photos[]['size']
+    // $photos[]['image']
+    $this->photos = ImageParser::fetch($url);
+  }
 }

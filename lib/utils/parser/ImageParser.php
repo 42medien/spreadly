@@ -29,10 +29,13 @@ class ImageParser {
   /**
    * fetches all embeded images
    *
-   * @param string $html
+   * @param string $url
    * @return array
    */
-  public static function fetch($html, $url) {
+  public static function fetch($url) {
+    //get the html as string
+    $html = UrlUtils::getUrlContent($url, 'GET');
+
     $images = self::detect($html);
     $result = array();
 
