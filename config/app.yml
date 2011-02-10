@@ -35,6 +35,22 @@ all:
     access_key:  'AKIAJ5NSA6ET5RC4AMXQ'
     secret_key:  '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'
 
+  twitter:
+    post_api:    'http://api.twitter.com/1/statuses/update.xml'
+    post_realm:  'http://twitter.com/'
+
+  facebook:
+    post_api:    'https://graph.facebook.com/me/feed'
+
+  linkedin:
+    post_api:    'http://api.twitter.com/1/statuses/update.xml'
+    post_type:   'Content-Type: application/xml'
+    post_realm:  'http://api.linkedin.com'
+
+  google:
+    post_api:    'https://www.googleapis.com/buzz/v1/activities/@me/@self'
+    post_type:   'Content-Type: application/atom+xml'
+
 ##
 # Prod settings
 #
