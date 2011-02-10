@@ -34,6 +34,20 @@ dev:
               host: 127.0.0.1     #aws
               port: 11211
 
+  storage:
+    class: sfMongoSessionStorage
+    param:
+      db_table:        session
+      db_id_col:       sess_id
+      db_time_col:     sess_time
+      db_data_col:     sess_data
+      host:            localhost
+      port:            27017
+      db_name:                 yiid_dev
+      collection_name:         session
+      session_name:            yiid_dev
+      session_cookie_domain:   .yiid.local
+      session_cookie_lifetime: 17776000
 ##
 # Development settings
 #
@@ -134,8 +148,8 @@ prod:
       port:            27017
       db_name:         yiid
       collection_name:   session
-      session_name:       spreadly_things
-      session_cookie_domain: things.spread.ly
+      session_name:       spread.ly
+      session_cookie_domain: .spread.ly
       session_cookie_lifetime: 17776000
 
 test:
