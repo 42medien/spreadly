@@ -34,7 +34,7 @@ class ImageParser {
    */
   public static function fetch($url, $limit = 5, $flat = true) {
     //get the html as string
-    $html = UrlUtils::getUrlContent($url, 'GET');
+    $html = UrlUtils::getUrlContent(urldecode($url), 'GET');
 
     $images = self::detect($html);
     $result = array();
