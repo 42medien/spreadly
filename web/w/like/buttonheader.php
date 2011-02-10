@@ -74,10 +74,4 @@ if($pUserId && $pSocialFeatures && $lSocialObjectArray['_id']) {
 
 WidgetUtils::trackUser($pUrl, $lClickback, $pUserId);
 
-$lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time();
-$lStaticUrl = LikeSettings::JS_STATIC_PATH."?ei_kcuf=".time();
-
-if ($lActiveDeal) {
-  include("deal.php");
-  exit;
-}
+$lPopupUrl = LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time()."&title=".urlencode($pTitle)."&description=".urlencode($pDescription)."&photo=".urlencode($pPhoto)."&tags=".urlencode($pTags)."&url=".urlencode($pUrl);
