@@ -47,47 +47,67 @@ EOF;
     $this->dispatcher->connect('deal.changed', array('DealListener', 'updateMongoDeal'));
     $deal = DealTable::getInstance()->findByDescription('snirgel approved description');
     $deal[0]->approve();
+    
+    
+    
+    $url = 'www.snirgel.de';
+    $array = array(
+      'url' => "http://$url",
+      'oiids' => array($lOiHugoTwitter->getId()),
+      'title' => "$url deal title",
+      'descr' => "$url description",
+      'comment' => "$url comment",
+      'thumb' => null,
+      'clickback' => null,
+      'tags' => null,
+      'u_id' => $lUserHugo->getId()
+    );
 
-    YiidActivityTable::saveLikeActivitys($lUserHugo->getId(),
-                                         'http://www.snirgel.de',
-                                         array($lOiHugoTwitter->getId()),
-                                         1,
-                                         'like',
-                                         'www.snirgel.de deal title',
-                                         'www.snirgel.de description',
-                                         null,
-                                         null,
-                                         null);
+    $lActivity = new YiidActivity();
+    $lActivity->fromArray($array);
+    $lActivity->save();
 
     $this->dispatcher->connect('deal.changed', array('DealListener', 'updateMongoDeal'));
     $deal = DealTable::getInstance()->findByDescription('notizblog approved description');
     $deal[0]->approve();
 
-    YiidActivityTable::saveLikeActivitys($lUserHugo->getId(),
-                                         'http://notizblog.org',
-                                         array($lOiHugoTwitter->getId()),
-                                         1,
-                                         'like',
-                                         'notizblog.org deal title',
-                                         'notizblog.org description',
-                                         null,
-                                         null,
-                                         ",,,");
+    
+    $url = 'notizblog.org';
+    $array = array(
+      'url' => "http://$url",
+      'oiids' => array($lOiHugoTwitter->getId()),
+      'title' => "$url deal title",
+      'descr' => "$url description",
+      'comment' => "$url comment",
+      'thumb' => null,
+      'clickback' => null,
+      'tags' => null,
+      'u_id' => $lUserHugo->getId()
+    );
+
+    $lActivity = new YiidActivity();
+    $lActivity->fromArray($array);
+    $lActivity->save();
 
     $this->dispatcher->connect('deal.changed', array('DealListener', 'updateMongoDeal'));
     $deal = DealTable::getInstance()->findByDescription('missmotz approved description');
     $deal[0]->approve();
 
-    YiidActivityTable::saveLikeActivitys($lUserHugo->getId(),
-                                         'http://www.missmotz.de',
-                                         array($lOiHugoTwitter->getId()),
-                                         1,
-                                         'like',
-                                         'www.missmotz.de deal title',
-                                         'www.missmotz.de description',
-                                         null,
-                                         null,
-                                         "schuhe,hemden");
+    $url = 'www.missmotz.de';
+    $array = array(
+      'url' => "http://$url",
+      'oiids' => array($lOiHugoTwitter->getId()),
+      'title' => "$url deal title",
+      'descr' => "$url description",
+      'comment' => "$url comment",
+      'thumb' => null,
+      'clickback' => null,
+      'tags' => "Schuhe, Hemden",
+      'u_id' => $lUserHugo->getId()
+    );
 
+    $lActivity = new YiidActivity();
+    $lActivity->fromArray($array);
+    $lActivity->save();
   }
 }

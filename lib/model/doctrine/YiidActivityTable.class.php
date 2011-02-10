@@ -40,59 +40,6 @@ class YiidActivityTable extends Doctrine_Table {
   }
 
   /**
-   * save the like/dislike
-   *
-   * @author Matthias Pfefferle
-   *
-   * @param int $pUserId
-   * @param string $pUrl
-   * @param array $pGivenOnlineIdentitys
-   * @param int $pScore
-   * @param string $pVerb
-   * @param string $pTitle
-   * @param string $pDescription
-   * @param string $pPhoto
-   * @param string $pClickback
-   * @param string $pTags
-   * @return YiidActivity
-   */
-  public static function saveLikeActivitys($pUserId,
-                                           $pUrl,
-                                           $pGivenOnlineIdentitys = array(),
-                                           $pScore = self::ACTIVITY_VOTE_POSITIVE,
-                                           $pVerb = 'like',
-                                           $pTitle = null,
-                                           $pDescription = null,
-                                           $pPhoto = null,
-                                           $pClickback = null,
-                                           $pTags = null
-                                          ) {
-
-    $lActivity = new YiidActivity();
-
-    $array = array(
-      'url' => $pUrl,
-      'oiids' => $pGivenOnlineIdentitys,
-      'score' => $pScore,
-      'title' => $pTitle,
-      'descr' => $pDescription,
-      'thumb' => $pPhoto,
-      'clickback' => $pClickback,
-      'tags' => $pTags,
-      'u_id' => $pUserId
-    );
-
-    $lActivity->fromArray($array);
-    $lActivity->save();
-
-    //if (!self::isVerbSupported($pVerb)) {
-    //  return false;
-    //}
-
-    return $lActivity;
-  }
-
-  /**
    * retrieve data saved with this sess_id
    *
    * @author weyandch

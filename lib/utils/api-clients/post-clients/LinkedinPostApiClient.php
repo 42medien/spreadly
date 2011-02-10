@@ -15,11 +15,10 @@ class LinkedinPostApiClient extends PostApi {
   public function generateMessage($pActivity) {
     sfProjectConfiguration::getActive()->loadHelpers(array('Text', 'Url', 'Tag'));
 
-    $lHashtag = self::$aHashtags[$pActivity->getType()][$pActivity->getScore()];
     $lUrl = $pActivity->getUrlWithClickbackParam($this->onlineIdentity);
     
     $lStatusMessage = '<?xml version="1.0" encoding="UTF-8"?><share>';
-    $lStatusMessage .= "<comment>".$lHashtag."</comment>";
+    $lStatusMessage .= "<comment>#like</comment>";
     $lStatusMessage .= '<content>';
     $lStatusMessage .= "<submitted-url>$lUrl</submitted-url>";
 

@@ -27,6 +27,11 @@ class YiidActivity extends BaseYiidActivity {
     $this->_set("descr", $desc);
   }
 
+  public function setComment($comment) {
+    $comment = StringUtils::cleanupString($comment);
+    $this->_set("comment", $comment);
+  }
+
   public function setSoId($soId) {
     $soId = new MongoId(urldecode($soId)."");
     $this->_set("so_id", $soId);

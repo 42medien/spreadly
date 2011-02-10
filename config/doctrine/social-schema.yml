@@ -61,7 +61,7 @@ YiidActivity:
     oiids:
       type:      string
     cids:        # community id
-      type:      integer
+      type:      string
     score:
       type:      integer(4)
     verb:
@@ -90,6 +90,8 @@ YiidActivity:
       type:      string(255)
     thumb:
       type:      string(255)
+    comment:
+      type:      string
 
 SocialAdvertisement:
   actAs:

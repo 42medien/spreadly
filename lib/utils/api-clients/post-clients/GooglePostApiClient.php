@@ -7,20 +7,16 @@
 class GooglePostApiClient extends PostApi {
 
   public function generateMessage($pActivity) {
-    $lHashtag = self::$aHashtags[$pActivity->getType()][$pActivity->getScore()];
-
-    $lTag = substr($lHashtag, 1);
     $lUrl = $pActivity->getUrlWithClickbackParams($this->onlineIdentity);
     $lTitle = $pActivity->getTitle();
     $lPhoto = $pActivity->getThumb();
     $lScore = $pActivity->getScore();
 
     $lPostBody = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0" xmlns:buzz="http://schemas.google.com/buzz/2010">';
-    $lPostBody .= "<content type='html'>$lTitle $lUrl $lHashtag</content>";
+    $lPostBody .= "<content type='html'>$lTitle $lUrl</content>";
     $lPostBody .= '<activity:object><activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>';
 
-    $lPostBody .= "<activity:verb>http://activitystrea.ms/schema/1.0/".($lScore > 0 ? 'like' : 'dislike')."</activity:verb>";
-    $lPostBody .= "<activity:verb>http://www.yiid.org/activity/schema/$lTag</activity:verb>";
+    $lPostBody .= "<activity:verb>http://activitystrea.ms/schema/1.0/like</activity:verb>";
 
     if ($lPhoto) {
       $lPostBody .= "<buzz:attachment><activity:object-type>http://activitystrea.ms/schema/1.0/photo</activity:object-type>";

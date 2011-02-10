@@ -19,8 +19,7 @@ class TwitterPostApiClient extends PostApi {
 
     $lMaxChars = 135;
 
-    $lHashtag = self::$aHashtags[$pActivity->getType()][$pActivity->getScore()];
-    $lText = $lUrl . " " . $lHashtag;
+    $lText = $lUrl . " #like";
     $lLengthOfText = strlen($lText);
 
     if ($pActivity->getTitle()) {

@@ -80,17 +80,22 @@ class apiActions extends sfActions {
     $this->getResponse()->setContentType('application/json');
 
     if ($this->status == 200) {
-      $lActivity = YiidActivityTable::saveLikeActivitys($this->getUser()->getId(),
-                                                        $this->lUrl,
-                                                        $this->lIdentitysSent,
-                                                        $this->lLikeDis,
-                                                        $this->lType,
-                                                        $this->lTitle,
-                                                        $this->lDescription,
-                                                        $this->lPhoto,
-                                                        $this->lClickback,
-                                                        $this->lTags
-                                                       );
+
+      $lAttributes = array(
+        'u_id' => $this->getUser()->getId(),
+        'url' => $this->lUrl,
+        'oiids' => $this->lIdentitysSent,
+        'title' => $this->lTitle,
+        'descr' => $this->lDescription,
+        'thumb' => $this->lPhoto,
+        'clickback' => $this->lClickback,
+        'tags' => $this->lTags
+      );
+      
+      $lActivity = new YiidActivity();
+      $lActivity->fromArray($lAttributes);
+      $lActivity->save();
+
       // write success-state
   		if ($lActivity) {
         // set deal partial
