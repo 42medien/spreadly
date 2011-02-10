@@ -50,6 +50,9 @@ class YiidActivity extends BaseYiidActivity {
     $this->_set("oiids", $oIIds);
   }
 
+  /**
+   * @deprecated
+   */
   public function setScore($score) {
     $this->_set("score", intval($score));
   }
@@ -82,6 +85,10 @@ class YiidActivity extends BaseYiidActivity {
    * @param unknown_type $event
    */
   public function preSave($event) {
+    // @todo remove in future versions
+    $this->setVerb("like");
+    $this->setScore(YiidActivityTable::ACTIVITY_VOTE_POSITIVE);
+
     $this->updateDealInfo();
     $this->upsertSocialObject();
     $this->setC(time());
