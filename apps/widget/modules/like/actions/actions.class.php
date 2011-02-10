@@ -22,6 +22,9 @@ class likeActions extends sfActions
     $lYiidMeta = new YiidMeta();
     $lYiidMeta->fromParams($request->getParameterHolder());
     $this->pYiidMeta = SocialObjectParser::fetch($request->getParameter("url"), $lYiidMeta);
+
+
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('like/js_init_like.js', array('pImgCount' => count($this->pYiidMeta->getImages()))));
   }
 
   public function executeSave(sfWebRequest $request) {
