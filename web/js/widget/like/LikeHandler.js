@@ -7,12 +7,11 @@ var WidgetLikeHandler = {
     
     initSlider: function(){
       jQuery("#myscroll").scrollable({
-        circular: true
+        circular: false
       });
 
       jQuery('#slide-next-link').bind('click', function() {
-        var lChildren = jQuery('.scrollables .items > img').size();
-        debug.log(lChildren);
+        var lChildren = jQuery('.scrollables .items > div').size();
       });
     },
     
@@ -21,8 +20,25 @@ var WidgetLikeHandler = {
       
     },
     
-    getImages: function() {
+    getImages: function(pUrl) {
+      var lAction = '/like/get_images';
+      var lData = {
+        ei_kcuf : new Date().getTime(),
+        url: pUrl
+      };
       
+      jQuery.ajax({
+        //beforeSubmit : OnLoadGrafic.showGrafic,
+        type : "GET",
+        url : lAction,
+        dataType : "json",
+        data : lData,
+        success : function(pResponse) {
+          jQuery('#scroll-meta-images').empty();
+          jQuery('#scroll-meta-images').append(pResponse.html);
+          WidgetLikeHandler.initSlider();
+        }
+      });        
     }
     
 };

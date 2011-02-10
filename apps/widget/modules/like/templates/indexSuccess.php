@@ -1,4 +1,5 @@
 <form action="like/save" name="widget-like-form" method="POST">
+<input type="hidden" name="like[img]" value="" />
 <div class="whtboxtop">
 	<div class="rcor">
 		<?php foreach($pIdentities as $lIdentity) {?>

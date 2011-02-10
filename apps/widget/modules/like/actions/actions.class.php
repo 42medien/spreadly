@@ -24,7 +24,7 @@ class likeActions extends sfActions
     $this->pYiidMeta = SocialObjectParser::fetch($request->getParameter("url"), $lYiidMeta);
 
 
-    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('like/js_init_like.js', array('pImgCount' => count($this->pYiidMeta->getImages()))));
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('like/js_init_like.js', array('pImgCount' => count($this->pYiidMeta->getImages()), 'pUrl' => $request->getParameter("url"))));
   }
 
   public function executeSave(sfWebRequest $request) {
@@ -34,11 +34,11 @@ class likeActions extends sfActions
   }
 
   public function executeGet_images(sfWebRequest $request) {
-    $url = $request->getParameter("url");
+  	$this->getResponse()->setContentType('application/json');
+    $lUrl = $request->getParameter("url");
+    $lImages = ImageParser::fetch($lUrl);
+    $lReturn['html'] = $this->getPartial('like/meta_images_list', array('pImages' => $lImages));
+    return $this->renderText(json_encode($lReturn));
 
-    // the photos array looks like
-    // $photos[]['size']
-    // $photos[]['image']
-    $this->photos = ImageParser::fetch($url);
   }
 }
