@@ -32,7 +32,7 @@ class ImageParser {
    * @param string $url
    * @return array
    */
-  public static function fetch($url) {
+  public static function fetch($url, $flat = true, $limit = 5) {
     //get the html as string
     $html = UrlUtils::getUrlContent($url, 'GET');
 
@@ -51,8 +51,20 @@ class ImageParser {
     }
 
     usort($result, array("ImageParser", "sort"));
+    $result = array_unique($result);
+    $result = array_slice($result, 0, $limit-1);
 
-    return array_unique($result);
+    // return only the images and crop the size
+    if ($flat) {
+      $flat = array();
+      foreach ($result as $image) {
+        $flat[] = $image['image'];
+      }
+
+      $result = $flat;
+    }
+
+    return $result;
   }
 
   /**
