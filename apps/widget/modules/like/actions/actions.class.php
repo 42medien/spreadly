@@ -16,6 +16,13 @@ class likeActions extends sfActions
   * @param sfRequest $request A request object
   */
   public function executeIndex(sfWebRequest $request) {
+		$this->setLayout('layout');
+    $this->pIdentities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
+  }
 
+  public function executeSave(sfWebRequest $request) {
+  	$this->getResponse()->setContentType('application/json');
+
+  	return true;
   }
 }

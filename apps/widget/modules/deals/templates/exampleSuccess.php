@@ -1,0 +1,1 @@
+<?php include_component('deals', 'coupon_unused', array('pActivityId' => $pActiveFormerlyKnownAsYiidActivitiesOfActiveDealForUser[0]->getId())); ?>

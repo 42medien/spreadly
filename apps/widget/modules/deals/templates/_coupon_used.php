@@ -4,9 +4,9 @@
 <div class="grboxmid">
 	<div class="grboxmid-content">
 		<div class="graybox clearfix">
-    	<div class="clearfix spactsbox">
-      	<img src="/img/spacts.jpg" width="93" height="30" alt="Empfehlen Sie" title="Empfehlen Sie" class="spacatspic" /><span class="picmultiline"><?php echo $lDeal->getDomainProfile(); ?></span>
-      </div>
+    	<div class="clearfix spactsbox" id="coupon-head-summary">
+      	<span><?php echo __('Empfehlen Sie "%link%" und erhalten Sie ...', array('%link%' => link_to($lDeal->getSummary(), '/'))); ?></span>
+     	</div>
     <div class="dotborboxsmall dotborboxmore">
     	<h2 class="graytitle txtcenter"><?php echo $lDeal->getDescription(); ?></h2>
       <div class="whtrow codebox">

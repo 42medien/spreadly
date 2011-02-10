@@ -11,8 +11,12 @@ widget_update_settings:
   param:  { module: settings, action: update }
 
 widget_deals:
-  url:    /deals
+  url:    /deals/index
   param:  { module: deals, action: index }
+  
+widget_deals_example:
+  url:    /deals/example
+  param:  { module: deals, action: example }  
 
 widget_profile:
   url:    /profile/index
@@ -37,6 +41,10 @@ signout:
 imprint:
   url:   /imprint
   param: { module: static, action: imprint }
+  
+save_like:
+  url:    /like/save
+  param:  { module: like, action: save }
 
 like:
   url:   /api/like/*

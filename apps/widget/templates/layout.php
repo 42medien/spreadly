@@ -20,6 +20,8 @@
 		</script>
 		<![endif]-->
     <script type="text/javascript" src="/js/100_main/include/widget-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
+    <script type="text/javascript" src="/js/100_main/vendor/111_jquery.autoscroll.js"></script>
+
     <script type="text/javascript" src="/js/widget/static/SettingsHandler.js"></script>
     <script type="text/javascript" src="/js/widget/static/DealsHandler.js"></script>
     <link rel="shortcut icon" href="/img/favicon.ico" />
