@@ -14,18 +14,24 @@ abstract class PostApi {
                             "rsvp", array("1" => "#attend", "-1" => "#miss"));
 
   protected $onlineIdentity = null;
-
-  /**
-   * defines the post function
+  
+   /**
+   * This method generates the message, that is suitable for posting to the actual network.
    *
-   * @param OnlineIdentity $pOnlineIdentity
-   * @param string $pUrl if the url is not part of the message
-   * @param string $pType
-   * @param string $pScore
-   * @param string $pTitle
+   * @param YiidActivity $pActivity
+   * @return string The message
+   */
+  abstract protected function generateMessage($pActivity);
+  
+  /**
+   * Calls the generateMessage and send methods
+   *
+   * @param YiidActivity $pActivity
    * @return int status code
    */
-  abstract public function doPost($activity);
+  public function doPost($activity) {
+    return $this->send($this->generateMessage($pActivity));
+  }
 
   public function setOnlineIdentity($oi) {
     $this->onlineIdentity = $oi;
@@ -51,7 +57,7 @@ abstract class PostApi {
   }
 
   /**
-   * Enter description here...
+   * Sends the message to the configured network
    *
    * @param string $pPostBody
    * @return mixed

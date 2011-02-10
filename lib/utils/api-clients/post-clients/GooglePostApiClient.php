@@ -6,29 +6,6 @@
  */
 class GooglePostApiClient extends PostApi {
 
-  /**
-   * defines the post function
-   *
-   * @param OnlineIdentity $pOnlineIdentity
-   * @param string $pUrl if the url is not part of the message
-   * @param string $pType
-   * @param string $pScore
-   * @return int status code
-   */
-  public function doPost($pActivity) {
-  	$lToken = $this->getAuthToken();
-  	if (!$lToken) {
-      return false;
-  	}
-
-    $lPostBody = $this->generateMessage($pActivity);
-
-    $lConsumer = new OAuthConsumer(sfConfig::get("app_google_oauth_token"), sfConfig::get("app_google_oauth_secret"));
-    $lStatus = OAuthClient::post($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "https://www.googleapis.com/buzz/v1/activities/@me/@self", $lPostBody, null, array("Content-Type: application/atom+xml"));
-
-    return $lStatus;
-  }
-
   public function generateMessage($pActivity) {
     $lHashtag = self::$aHashtags[$pActivity->getType()][$pActivity->getScore()];
 
@@ -60,7 +37,6 @@ class GooglePostApiClient extends PostApi {
     //$lPostBody .= "  <title>Google Buzz buttons</title>";
     $lPostBody .= "  <link href='$pUrl' rel='alternate' type='text/html' />";
     $lPostBody .= "</buzz:attachment>";*/
-
 
     $lPostBody .= "</activity:object></entry>";
 

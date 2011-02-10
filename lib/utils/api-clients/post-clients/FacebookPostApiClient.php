@@ -7,43 +7,14 @@
 class FacebookPostApiClient extends PostApi {
 
   /**
-   * defines the post function
+   * Need to override this method for facebook, since they use oauth2
    *
-   * @param OnlineIdentity $pOnlineIdentity
-   * @param string $pUrl if the url is not part of the message
-   * @param string $pType
-   * @param string $pScore
-   * @param string $pMessage
-   *
-   * @return int status code
    */
-  public function doPost($pActivity) {
-  	$lToken = $this->getAuthToken();
-  	if (!$lToken) {
-      return false;
-  	}
-
-    $lStatusMessage = $this->generateMessage($pActivity);
-
-    $lPostBody = "access_token=".$lToken->getTokenKey()."&message=".$lStatusMessage;
-
-    if ($pActivity->getDescr() && $pActivity->getDescr() != '') {
-      $lPostBody .= "&description=".$pActivity->getDescr();
-    }
-
-    if ($pActivity->getThumb() && $pActivity->getThumb() != '') {
-      $lPostBody .= "&picture=".$pActivity->getThumb();
-    }
-
-    $lPostBody .= "&link=".urlencode($pActivity->getUrlWithClickbackParam($this->onlineIdentity));
-
-    $lPostBody .= '&privacy={"value": "EVERYONE"}';
-
-    $lResponse = UrlUtils::sendPostRequest(sfConfig::get("app_".$this->classToIdentifier()."_post_api"), $lPostBody);
-
-    return $lResponse;
+  protected function send($pPostBody) {
+    $lToken = $this->getAuthToken();
+    $pPostBody .= "&access_token=".$lToken->getTokenKey();
+    return UrlUtils::sendPostRequest(sfConfig::get("app_".$this->classToIdentifier()."_post_api"), $pPostBody);
   }
-
 
   /**
    * generate Wildcard.. truncate if necessary, $pUrl is optional
@@ -64,7 +35,21 @@ class FacebookPostApiClient extends PostApi {
     $lWildcard = 'POSTAPI_MESSAGE_'.strtoupper($pActivity->getType()) . ($pActivity->getScore()<0?'_NOT':'');
     $lText = $i18n->__($lWildcard, array('%title%' => $pTitle, '%url%' => $pUrl), 'widget');
 
-    return $lText;
+    $lPostBody .= "message=".$lText;
+
+    if ($pActivity->getDescr() && $pActivity->getDescr() != '') {
+      $lPostBody .= "&description=".$pActivity->getDescr();
+    }
+
+    if ($pActivity->getThumb() && $pActivity->getThumb() != '') {
+      $lPostBody .= "&picture=".$pActivity->getThumb();
+    }
+
+    $lPostBody .= "&link=".urlencode($pActivity->getUrlWithClickbackParam($this->onlineIdentity));
+
+    $lPostBody .= '&privacy={"value": "EVERYONE"}';
+    
+    return $lPostBody;
   }
 
 }
