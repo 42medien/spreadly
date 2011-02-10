@@ -37,7 +37,7 @@ class GooglePostApiClient extends PostApi {
     $lTitle = $pActivity->getTitle();
     $lPhoto = $pActivity->getThumb();
     $lScore = $pActivity->getScore();
-    
+
     $lPostBody = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0" xmlns:buzz="http://schemas.google.com/buzz/2010">';
     $lPostBody .= "<content type='html'>$lTitle $lUrl $lHashtag</content>";
     $lPostBody .= '<activity:object><activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>';

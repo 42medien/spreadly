@@ -39,7 +39,7 @@ class FacebookPostApiClient extends PostApi {
 
     $lPostBody .= '&privacy={"value": "EVERYONE"}';
 
-    $lResponse = UrlUtils::sendPostRequest("https://graph.facebook.com/me/feed", $lPostBody);
+    $lResponse = UrlUtils::sendPostRequest(sfConfig::get("app_".$this->classToIdentifier()."_post_api"), $lPostBody);
 
     return $lResponse;
   }

@@ -34,7 +34,7 @@ abstract class PostApi {
   public function getOnlineIdentity() {
     return $this->onlineIdentity;
   }
-  
+
   protected function getAuthToken() {
     $lToken = AuthTokenTable::getByUserAndOnlineIdentity($this->onlineIdentity->getUserId(), $this->onlineIdentity->getId());
     if (!$lToken) {
@@ -43,5 +43,28 @@ abstract class PostApi {
     }
     return $lToken;
   }
-  
+
+  protected function classToIdentifier() {
+    $class = get_class($this);
+    $id = strstr($class, 'PostApiClient', true);
+    return strtolower($id);
+  }
+
+  /**
+   * Enter description here...
+   *
+   * @param string $pPostBody
+   * @return mixed
+   */
+  protected function send($pPostBody) {
+    $lToken = $this->getAuthToken();
+    $lKey = sfConfig::get("app_".$this->classToIdentifier()."_oauth_token");
+    $lSecret = sfConfig::get("app_".$this->classToIdentifier()."_oauth_secret");
+    $lPostApi = sfConfig::get("app_".$this->classToIdentifier()."_post_api");
+    $lPostRealm = sfConfig::get("app_".$this->classToIdentifier()."_post_realm");
+    $lPostType = ($pt = sfConfig::get("app_".$this->classToIdentifier()."_post_type")) ? array($pt) : null;
+
+    $lConsumer = new OAuthConsumer($lKey, $lSecret);
+    return OAuthClient::post($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), $lPostApi, $pPostBody, null, $lPostType, $lPostRealm);
+  }
 }
