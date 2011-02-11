@@ -149,7 +149,7 @@ class YiidActivity extends BaseYiidActivity {
     if (sfConfig::get('sf_environment') == 'dev') {
       // send messages to all services
       foreach (PostApiFactory::fromOnlineIdentityIdArray($this->getOiids()) as $client) {
-        var_dump($client->doPost($this));
+        $client->doPost($this);
       }
     }
   }
