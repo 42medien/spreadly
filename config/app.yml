@@ -49,7 +49,7 @@ all:
 
   google:
     post_api:    'https://www.googleapis.com/buzz/v1/activities/@me/@self'
-    post_type:   'Content-Type: application/atom+xml'
+    post_type:   'Content-Type: application/json'
 
 ##
 # Prod settings
