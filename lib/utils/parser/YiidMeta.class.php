@@ -34,7 +34,7 @@ class YiidMeta {
     }
   }
 
-  public function getUrl($url) {
+  public function getUrl() {
     return $this->url;
   }
 
