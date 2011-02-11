@@ -50,7 +50,7 @@ var LikeImage = {
      * @param string pUrl
      */
     get: function(pUrl) {
-      var lAction = '/like/get_images', lCircular=false;
+      var lAction = '/like/get_images';
       var lData = {
         ei_kcuf : new Date().getTime(),
         url: pUrl
@@ -79,7 +79,7 @@ var LikeImage = {
       //fill the hidden-img-value with the path of the first image
       WidgetLikeForm.setImageValue(LikeImage.getImgPath(0));
       //if there is no or 1 image, hide the slide-arrows and the counter
-      if(pResponse.count == 0 || pResponse.count == 1){
+      if(pResponse.count === 0 || pResponse.count === 1){
         LikeImageCounter.hide();
       } else {
         // if there are more than 1 images: 
