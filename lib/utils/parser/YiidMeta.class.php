@@ -4,6 +4,13 @@ class YiidMeta {
   private $title = null;
   private $description = null;
   private $images = null;
+  private $url = null;
+
+  public function setUrl($url) {
+    if (!$this->url && $url) {
+      $this->url = urldecode($url);
+    }
+  }
 
   public function setTitle($title) {
     if (!$this->title && $title) {
@@ -25,6 +32,10 @@ class YiidMeta {
         $this->images = array(urldecode($images));
       }
     }
+  }
+
+  public function getUrl($url) {
+    return $this->url;
   }
 
   public function getTitle() {

@@ -31,6 +31,8 @@ class SocialObjectParser {
         $pYiidMeta = new YiidMeta();
       }
 
+      $pYiidMeta->setUrl($pUrl);
+
       if (preg_match('~http://opengraphprotocol.org/schema/~i', $lHeader)  && !$pYiidMeta->isComplete()) {
         //get the opengraph-tags
         $lOpenGraph = OpenGraph::parse($lHeader);
