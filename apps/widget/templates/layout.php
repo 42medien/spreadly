@@ -19,6 +19,11 @@
 		  DD_belatedPNG.fix('*');
 		</script>
 		<![endif]-->
+		<?php if ($sf_params->get('resize') == true) { ?>
+		<script>
+      window.resizeTo(580,500);
+    </script>
+    <?php } ?>
     <script type="text/javascript" src="/js/100_main/include/widget-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
     <script type="text/javascript" src="/js/100_main/vendor/111_jquery.autoscroll.js"></script>
 
