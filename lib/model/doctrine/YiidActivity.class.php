@@ -31,6 +31,8 @@ class YiidActivity extends BaseYiidActivity {
     $comment = StringUtils::cleanupString($comment);
     $this->_set("comment", $comment);
   }
+  
+
 
   public function setSoId($soId) {
     $soId = new MongoId(urldecode($soId)."");
@@ -149,7 +151,7 @@ class YiidActivity extends BaseYiidActivity {
     if (sfConfig::get('sf_environment') == 'dev') {
       // send messages to all services
       foreach (PostApiFactory::fromOnlineIdentityIdArray($this->getOiids()) as $client) {
-        $client->doPost($this);
+        var_dump($client->doPost($this));
       }
     }
   }

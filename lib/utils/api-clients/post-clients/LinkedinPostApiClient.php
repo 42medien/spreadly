@@ -16,9 +16,10 @@ class LinkedinPostApiClient extends PostApi {
     sfProjectConfiguration::getActive()->loadHelpers(array('Text', 'Url', 'Tag'));
 
     $lUrl = $pActivity->generateUrlWithClickbackParam($this->onlineIdentity);
+    $lComment =  $pActivity->getComment();
     
     $lStatusMessage = '<?xml version="1.0" encoding="UTF-8"?><share>';
-    $lStatusMessage .= "<comment>#like</comment>";
+    $lStatusMessage .= "<comment>$lComment #like</comment>";
     $lStatusMessage .= '<content>';
     $lStatusMessage .= "<submitted-url>$lUrl</submitted-url>";
 
