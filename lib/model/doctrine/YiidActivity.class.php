@@ -32,7 +32,24 @@ class YiidActivity extends BaseYiidActivity {
     $this->_set("comment", $comment);
   }
   
+  public function getComment() {
+    if($this->isDeal()) {
+      // TODO: i18nify
+      $lDealComment = "hat sich auf ";
+      $lDealComment .= $this->getUrl();
+      $lDealComment .= " den Gutschein „";
+      $lDealComment .= $this->getDeal()->getSummary();
+      $lDealComment .= "“ gesichert und empfiehlt …";
+      return $lDealComment;
+    } else {
+      // TODO: default 'likes' ???
+      return $this->_get("comment");
+    }    
+  }
 
+  public function generateHashtag() {
+    return $this->isDeal() ? '#deal' : '#like';
+  }
 
   public function setSoId($soId) {
     $soId = new MongoId(urldecode($soId)."");

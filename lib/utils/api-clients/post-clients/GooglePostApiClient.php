@@ -9,16 +9,17 @@ class GooglePostApiClient extends PostApi {
   public function generateMessage($pActivity) {
     $lUrl = $pActivity->generateUrlWithClickbackParam($this->onlineIdentity);
     $lTitle = $pActivity->getTitle();
+    $lComment = $pActivity->getComment();
+    $lHashtag = $pActivity->generateHashtag();
     $lPhoto = $pActivity->getThumb();
     $lScore = $pActivity->getScore();
 
     $lPostBody = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0" xmlns:buzz="http://schemas.google.com/buzz/2010">';
-    
-    if($pActivity->isDeal()) {
-$lPostBody .= "<content type='html'>$lTitle $lUrl</content>";      
-    } else {
-      $lPostBody .= "<content type='html'>$lTitle $lUrl</content>";      
-    }
+
+    $lPostBody .= "<content type='html'>";
+    //$lPostBody .= "<h3>$lTitle</h3><p>$lComment</p><p>$lUrl</p>";
+    $lPostBody .= "$lTitle $lComment $lHashtag $lUrl";
+    $lPostBody .= "</content>";
     
     $lPostBody .= '<activity:object><activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>';
 

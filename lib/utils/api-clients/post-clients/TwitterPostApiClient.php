@@ -19,12 +19,12 @@ class TwitterPostApiClient extends PostApi {
 
     $lMaxChars = 135;
 
-    $lText = $lUrl . " #like";
+    $lText = $lUrl . " ". $pActivity->generateHashtag();
     $lLengthOfText = strlen($lText);
 
-    if ($pActivity->getTitle()) {
+    if ($pActivity->getComment()) {
       $lChars = $lMaxChars - $lLengthOfText;
-      $lText = truncate_text($pActivity->getTitle(), $lChars, '...') . " " . $lText;
+      $lText = truncate_text($pActivity->getComment(), $lChars, '...') . " " . $lText;
     }
 
     return array("status" => $lText);
