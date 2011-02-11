@@ -121,12 +121,11 @@ class YiidActivity extends BaseYiidActivity {
     } else {
       $lObjectToSave = YiidActivityTable::saveObjectToMongoDb($lObjectToSave);
       $this->setId($lObjectToSave['_id'].""); // cast mongoID to string
+      $this->invokeSaveHooks('post', 'save');
     }
     if ($lObjectToSave) {
       return $lObjectToSave;
     }
-
-    $this->invokeSaveHooks('post', 'save');
 
     return false;
   }
@@ -147,10 +146,10 @@ class YiidActivity extends BaseYiidActivity {
    * sends the like to the connected communities like twitter, facebook, ...
    */
   public function postIt() {
-    if (sfConfig::get('sf_environment') != 'dev') {
+    if (sfConfig::get('sf_environment') == 'dev') {
       // send messages to all services
       foreach (PostApiFactory::fromOnlineIdentityIdArray($this->getOiids()) as $client) {
-        $client->doPost($this);
+        var_dump($client->doPost($this));
       }
     }
   }
@@ -162,7 +161,7 @@ class YiidActivity extends BaseYiidActivity {
    * @param OnlineIdentity $pOnlineIdentity
    * @return string
    */
-  public function getUrlWithClickbackParam($pOnlineIdentity) {
+  public function generateUrlWithClickbackParam($pOnlineIdentity) {
     $lQueryChar = parse_url($this->getUrl(), PHP_URL_QUERY) ? '&' : '?';
     return $this->getUrl().$lQueryChar.'yiidit='.$pOnlineIdentity->getCommunity()->getCommunity().'.'.$this->getId();
   }

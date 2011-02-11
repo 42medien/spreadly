@@ -24,7 +24,7 @@ class FacebookPostApiClient extends PostApi {
    */
   private function generateMessage($pActivity) {
     $pTitle = $pActivity->getTitle();
-    $pUrl = $pActivity->getUrlWithClickbackParam($this->onlineIdentity);
+    $pUrl = $pActivity->generateUrlWithClickbackParam($this->onlineIdentity);
 
     sfProjectConfiguration::getActive()->loadHelpers('Text');
     if ($pTitle) {
@@ -45,7 +45,7 @@ class FacebookPostApiClient extends PostApi {
       $lPostBody .= "&picture=".$pActivity->getThumb();
     }
 
-    $lPostBody .= "&link=".urlencode($pActivity->getUrlWithClickbackParam($this->onlineIdentity));
+    $lPostBody .= "&link=".urlencode($pActivity->generateUrlWithClickbackParam($this->onlineIdentity));
 
     $lPostBody .= '&privacy={"value": "EVERYONE"}';
     

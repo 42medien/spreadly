@@ -43,7 +43,7 @@ all:
     post_api:    'https://graph.facebook.com/me/feed'
 
   linkedin:
-    post_api:    'http://api.twitter.com/1/statuses/update.xml'
+    post_api:    'http://api.linkedin.com/v1/people/~/shares'
     post_type:   'Content-Type: application/xml'
     post_realm:  'http://api.linkedin.com'
 

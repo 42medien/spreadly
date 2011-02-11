@@ -7,7 +7,7 @@
 class GooglePostApiClient extends PostApi {
 
   public function generateMessage($pActivity) {
-    $lUrl = $pActivity->getUrlWithClickbackParams($this->onlineIdentity);
+    $lUrl = $pActivity->generateUrlWithClickbackParam($this->onlineIdentity);
     $lTitle = $pActivity->getTitle();
     $lPhoto = $pActivity->getThumb();
     $lScore = $pActivity->getScore();

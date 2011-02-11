@@ -12,10 +12,10 @@ class TwitterPostApiClient extends PostApi {
    * @param YiidActivity $pActivity
    * @return string
    */
-  public static function generateMessage($pActivity) {
+  public function generateMessage($pActivity) {
     sfProjectConfiguration::getActive()->loadHelpers('Text');
     
-    $lUrl = ShortUrlTable::shortenUrl($pActivity->getUrlWithClickbackParam($this->onlineIdentity));
+    $lUrl = ShortUrlTable::shortenUrl($pActivity->generateUrlWithClickbackParam($this->onlineIdentity));
 
     $lMaxChars = 135;
 
