@@ -10,39 +10,27 @@ class GooglePostApiClient extends PostApi {
     $lUrl = $pActivity->generateUrlWithClickbackParam($this->onlineIdentity);
     $lTitle = $pActivity->getTitle();
     $lComment = $pActivity->getComment();
-    $lHashtag = $pActivity->generateHashtag();
     $lPhoto = $pActivity->getThumb();
-    $lScore = $pActivity->getScore();
 
-    $lPostBody = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:activity="http://activitystrea.ms/spec/1.0" xmlns:buzz="http://schemas.google.com/buzz/2010">';
+    $lPostBody = array();
 
-    $lPostBody .= "<content type='html'>";
-    //$lPostBody .= "<h3>$lTitle</h3><p>$lComment</p><p>$lUrl</p>";
-    $lPostBody .= "$lTitle $lComment $lHashtag $lUrl";
-    $lPostBody .= "</content>";
-    
-    $lPostBody .= '<activity:object><activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>';
+    $lPostBody["data"] = array("object" =>
+      array("type" => "note",
+            "content" => $lComment,
+            "links" => array("alternate" => array(array("href" => $lUrl))),
+            "attachments" => array(
+              array("type" => "photo",
+                    "links" => array("enclosure" => array(array("href" => $lPhoto)),
+                                     "alternate" => array(array("href" => $lUrl)))
+              ),
+              array("type" => "article",
+                    "title" => $lTitle,
+                    "links" => array("alternate" => array(array("href" => $lUrl)))
+              )
+            )
+      )
+    );
 
-    $lPostBody .= "<activity:verb>http://activitystrea.ms/schema/1.0/like</activity:verb>";
-
-    if ($lPhoto) {
-      $lPostBody .= "<buzz:attachment><activity:object-type>http://activitystrea.ms/schema/1.0/photo</activity:object-type>";
-      $lPostBody .= "<title>$lTitle</title>";
-      $lPostBody .= "<content>$lTitle</content>";
-      $lPostBody .= "<link rel='enclosure' type='image/jpeg' href='$lPhoto' />";
-      $lPostBody .= "<link rel='preview' type='image/jpeg' href='$lPhoto' />";
-      $lPostBody .= "<link rel='alternate' type='text/html' href='$lUrl' />";
-      $lPostBody .= "</buzz:attachment>";
-    }
-
-    /*$lPostBody .= "<buzz:attachment>";
-    $lPostBody .= "  <activity:object-type>http://activitystrea.ms/schema/1.0/article</activity:object-type>";
-    //$lPostBody .= "  <title>Google Buzz buttons</title>";
-    $lPostBody .= "  <link href='$pUrl' rel='alternate' type='text/html' />";
-    $lPostBody .= "</buzz:attachment>";*/
-
-    $lPostBody .= "</activity:object></entry>";
-
-    return $lPostBody;
+    return json_encode($lPostBody);
   }
 }

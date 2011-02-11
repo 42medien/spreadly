@@ -7,7 +7,7 @@
 abstract class PostApi {
 
   protected $onlineIdentity = null;
-  
+
    /**
    * This method generates the message, that is suitable for posting to the actual network.
    *
@@ -15,7 +15,7 @@ abstract class PostApi {
    * @return string The message
    */
   abstract protected function generateMessage($pActivity);
-  
+
   /**
    * Calls the generateMessage and send methods
    *
@@ -45,7 +45,7 @@ abstract class PostApi {
 
   protected function classToIdentifier() {
     $class = get_class($this);
-    $id = strstr($class, 'PostApiClient', true);
+    $id = str_replace('PostApiClient', '', $class);
     return strtolower($id);
   }
 
