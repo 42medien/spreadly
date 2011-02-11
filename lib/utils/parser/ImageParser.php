@@ -45,6 +45,7 @@ class ImageParser {
     $images = self::detect($html);
     $result = array();
 
+
     foreach ($images as $image) {
       $image = UrlUtils::abslink($image, $url);
       $size = @getimagesize($image);
@@ -57,7 +58,7 @@ class ImageParser {
     }
 
     usort($result, array("ImageParser", "sort"));
-    $result = array_unique($result);
+    //$result = array_unique($result);
     $result = array_slice($result, 0, $limit-1);
 
     // return only the images and crop the size

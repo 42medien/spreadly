@@ -1,5 +1,10 @@
 <form action="like/save" name="widget-like-form" method="POST">
-<input type="hidden" name="like[img]" value="" />
+<?php $lImages = $pYiidMeta->getImages();?>
+
+<input type="hidden" name="like[img]" id="like-img-value" value="<?php echo $lImages[0]; ?>" />
+<input type="hidden" name="like[title]" value="<?php echo $pYiidMeta->getTitle(); ?>" />
+<input type="hidden" name="like[description]" value="<?php echo $pYiidMeta->getDescription(); ?>" />
+
 <div class="whtboxtop">
 	<div class="rcor">
 		<?php foreach($pIdentities as $lIdentity) {?>
@@ -16,14 +21,14 @@
 	<div class="scrollable" id="myscroll">
 	   <!-- root element for the items -->
 	   <div class="items" id="scroll-meta-images">
-	   	<?php include_partial('like/meta_images_list', array('pImages' => $pYiidMeta->getImages())); ?>
+	   	<?php include_partial('like/meta_images_list', array('pImages' => $lImages)); ?>
 	   </div>
 	</div>
 	<!-- "next page" action -->
-	<div <?php echo (count($pYiidMeta->getImages()) <= 1)? "style='display:none;'":"";?>>
+	<div id="scroll-button-area" <?php echo (count($pYiidMeta->getImages()) <= 1)? "style='display:none;'":"";?>>
 		<a class="prev browse left slide-back-link" id="slide-back-link"></a>
 		<a class="next browse left slide-next-link" id="slide-next-link"></a>
-		<span class="img-counter"><?php echo count($pYiidMeta->getImages()); ?></span><span>/5</span>
+		<span id="img-counter">1</span>/<span id="img-number"><?php echo count($pYiidMeta->getImages()); ?></span>
 	</div>
 </div>
 <div>

@@ -29,6 +29,8 @@ class likeActions extends sfActions
 
   public function executeSave(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
+  	$lParams = $request->getParameter('like');
+  	var_dump($lParams);die();
 
   	return true;
   }
@@ -37,6 +39,7 @@ class likeActions extends sfActions
   	$this->getResponse()->setContentType('application/json');
     $lUrl = $request->getParameter("url");
     $lImages = ImageParser::fetch($lUrl);
+    $lReturn['count'] = count($lImages);
     $lReturn['html'] = $this->getPartial('like/meta_images_list', array('pImages' => $lImages));
     return $this->renderText(json_encode($lReturn));
 
