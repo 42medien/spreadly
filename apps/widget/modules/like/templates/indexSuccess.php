@@ -1,14 +1,15 @@
 <form action="like/save" name="widget-like-form" method="POST">
 <?php $lImages = $pYiidMeta->getImages();?>
 
-<input type="hidden" name="like[img]" id="like-img-value" value="<?php echo $lImages[0]; ?>" />
+<input type="hidden" name="like[thumb]" id="like-img-value" value="<?php echo $lImages[0]; ?>" />
 <input type="hidden" name="like[title]" value="<?php echo $pYiidMeta->getTitle(); ?>" />
-<input type="hidden" name="like[description]" value="<?php echo $pYiidMeta->getDescription(); ?>" />
+<input type="hidden" name="like[descr]" value="<?php echo $pYiidMeta->getDescription(); ?>" />
+<input type="hidden" name="like[url]" value="<?php //echo $pYiidMeta->getUrl(); ?>" />
 
 <div class="whtboxtop">
 	<div class="rcor">
 		<?php foreach($pIdentities as $lIdentity) {?>
-			<input type="checkbox" name="like[oi][<?php echo $lIdentity->getCommunity()->getName(); ?>]" value="<?php echo $lIdentity->getId(); ?>" /><label><?php echo $lIdentity->getCommunity()->getName(); ?></label>
+			<input type="checkbox" name="like[oiids][]" value="<?php echo $lIdentity->getId(); ?>" /><label><?php echo $lIdentity->getCommunity()->getName(); ?></label>
 		<?php } ?>
 	</div>
 </div>
@@ -39,7 +40,7 @@
 </div>
 
 
-<textarea rows="2" cols="2" name="like[text]"></textarea>
+<textarea rows="2" cols="2" name="like[comment]"></textarea>
 <input type="submit" value="Spread It" />
 
 </div>
