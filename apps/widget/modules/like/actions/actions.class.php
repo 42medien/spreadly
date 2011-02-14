@@ -16,13 +16,18 @@ class likeActions extends sfActions
   * @param sfRequest $request A request object
   */
   public function executeIndex(sfWebRequest $request) {
+    if ($request->getParameter("url", null)) {
+      $this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "widget");
+    } elseif ($lUrl = $this->getUser()->getAttribute("redirect_after_login", null, "widget")) {
+      $this->redirect($lUrl);
+    }
+
 		$this->setLayout('layout');
     $this->pIdentities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
 
     $lYiidMeta = new YiidMeta();
     $lYiidMeta->fromParams($request->getParameterHolder());
     $this->pYiidMeta = SocialObjectParser::fetch($request->getParameter("url"), $lYiidMeta);
-
 
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('like/js_init_like.js', array('pImgCount' => count($this->pYiidMeta->getImages()), 'pUrl' => $request->getParameter("url"))));
   }
