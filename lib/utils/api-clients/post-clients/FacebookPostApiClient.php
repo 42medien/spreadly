@@ -32,7 +32,7 @@ class FacebookPostApiClient extends PostApi {
     }
 
     $i18n = sfContext::getInstance()->getI18N();
-    $lWildcard = 'POSTAPI_MESSAGE_'.strtoupper($pActivity->getType()) . ($pActivity->getScore()<0?'_NOT':'');
+    $lWildcard = 'POSTAPI_MESSAGE_LIKE';
     $lText = $i18n->__($lWildcard, array('%title%' => $pTitle, '%url%' => $pUrl), 'widget');
 
     $lPostBody .= "message=".$lText;
@@ -48,7 +48,7 @@ class FacebookPostApiClient extends PostApi {
     $lPostBody .= "&link=".urlencode($pActivity->generateUrlWithClickbackParam($this->onlineIdentity));
 
     $lPostBody .= '&privacy={"value": "EVERYONE"}';
-    
+
     return $lPostBody;
   }
 
