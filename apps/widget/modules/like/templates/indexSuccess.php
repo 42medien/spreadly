@@ -1,10 +1,10 @@
-<form action="like/save" name="widget-like-form" method="POST">
+<form action="<?php echo url_for('@save_like'); ?> " name="popup-like-form" id="popup-like-form" method="POST">
 <?php $lImages = $pYiidMeta->getImages();?>
 
 <input type="hidden" name="like[thumb]" id="like-img-value" value="<?php echo $lImages[0]; ?>" />
 <input type="hidden" name="like[title]" value="<?php echo $pYiidMeta->getTitle(); ?>" />
 <input type="hidden" name="like[descr]" value="<?php echo $pYiidMeta->getDescription(); ?>" />
-<input type="hidden" name="like[url]" value="<?php //echo $pYiidMeta->getUrl(); ?>" />
+<input type="hidden" name="like[url]" value="<?php echo $pYiidMeta->getUrl(); ?>" />
 
 <div class="whtboxtop">
 	<div class="rcor">
@@ -40,8 +40,8 @@
 </div>
 
 
-<textarea rows="2" cols="2" name="like[comment]"></textarea>
-<input type="submit" value="Spread It" />
+<textarea rows="2" cols="2" id="area-like-comment" name="like[comment]"></textarea>
+<input type="submit" id="popup-send-like-button" value="Spread It" />
 
 </div>
 <div class="whtboxbot"><span></span></div>

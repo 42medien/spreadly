@@ -30,9 +30,10 @@ class likeActions extends sfActions
   public function executeSave(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
   	$lParams = $request->getParameter('like');
-  	var_dump($lParams);die();
+		$lSuccess = ($lParams['oiids'] != null)?true:false;
 
-  	return true;
+  	$lReturn['success'] = $lSuccess;
+    return $this->renderText(json_encode($lReturn));
   }
 
   public function executeGet_images(sfWebRequest $request) {

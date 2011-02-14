@@ -9,3 +9,5 @@
   LikeImageCounter.show();
   LikeImageScroller.onScroll();
 <?php } ?>
+
+WidgetLikeForm.init();

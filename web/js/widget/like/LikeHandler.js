@@ -12,6 +12,7 @@ var WidgetLikeForm = {
      * inits the form-functions
      */
     init: function() {
+      debug.log('[WidgetLikeForm][init]');
       WidgetLikeForm.doSend();
     },
     
@@ -20,7 +21,37 @@ var WidgetLikeForm = {
      * @author KM
      */
     doSend: function() {
+      debug.log('[WidgetLikeForm][doSend]');      
       
+      jQuery('#popup-send-like-button').bind('click', function() {
+        var lAction = jQuery('#popup-like-form').attr('action');         
+        OnLoadGrafic.showGrafic();
+        WidgetLikeForm.hideButton();
+        WidgetLikeForm.hideTextarea();
+        var options = {
+          //beforeSubmit : OnLoadGrafic.showGrafic,
+          url : lAction,
+          data : {
+            ei_kcuf : new Date().getTime()
+          },
+          type : 'POST',
+          dataType : 'json',
+          success : function(pResponse) {
+            if(pResponse.success == true) {
+              WidgetLikeForm.removeButton(); 
+              WidgetLikeForm.removeTextarea();                 
+            } else {
+              WidgetLikeForm.showButton(); 
+              WidgetLikeForm.showTextarea();      
+            }
+            
+            OnLoadGrafic.hideGrafic();
+          }
+        };
+        
+         jQuery('#popup-like-form').ajaxSubmit(options);
+         return false;
+      });      
     },
     
     /**
@@ -30,6 +61,30 @@ var WidgetLikeForm = {
      */
     setImageValue: function(pPath){
       jQuery('#like-img-value').val(pPath);
+    },
+    
+    hideButton: function() {
+      jQuery('#popup-send-like-button').hide();
+    },
+    
+    removeButton: function() {
+      jQuery('#popup-send-like-button').remove();      
+    },
+    
+    showButton: function(){
+      jQuery('#popup-send-like-button').show();      
+    },
+    
+    hideTextarea: function() {
+      jQuery('#area-like-comment').hide();
+    },
+    
+    removeTextarea: function() {
+      jQuery('#area-like-comment').remove();      
+    },
+    
+    showTextarea: function() {
+      jQuery('#area-like-comment').show();            
     }
 };
 
@@ -50,6 +105,7 @@ var LikeImage = {
      * @param string pUrl
      */
     get: function(pUrl) {
+      OnLoadGrafic.showGraficByElement(jQuery('#myscroll'), 20, 500);
       var lAction = '/like/get_images';
       var lData = {
         ei_kcuf : new Date().getTime(),
@@ -92,6 +148,7 @@ var LikeImage = {
         //and init the onscroll-functionalities (e.g. update counter & update hidden-img-value onscroll)
         LikeImageScroller.onScroll();          
       }
+      OnLoadGrafic.hideGrafic();
     },
     
     /**

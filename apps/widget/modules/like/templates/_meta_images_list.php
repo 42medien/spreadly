@@ -6,7 +6,7 @@
 	</div>
 <?php $i++; } ?>
 <?php } else { ?>
-	<div>
+	<div id="no-meta-img" style="width:200px; height: 100px; border: 1px solid red;">
 		<?php echo __('NO IMAGE'); ?>
 	</div>
 <?php } ?>
