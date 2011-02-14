@@ -91,3 +91,28 @@ ul#logos_big {  margin: 30px 0 40px 30px; }
   cursor: hand; /* for IE 5.x */
 	
 }
+
+.figuresbox dd.figuresmid-box{
+    width: 220px;
+    margin-right: 16px;
+}
+
+.figuresbox dd.no-margin{
+  margin: 0px;
+}
+
+.figuresbox dd.figuresthird-box{
+    width: 457px;
+}
+
+#age-distribution-table{
+  min-height: 350px;
+}
+
+.small-chart{
+  margin-top: 20px;
+}
+
+.beshbox{
+  padding: 0px 0px 15px 0px;
+}

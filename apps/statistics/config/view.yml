@@ -17,4 +17,4 @@ default:
   javascripts:    []
 
   has_layout:     true
-  layout: layout_configurator
+  layout: layout

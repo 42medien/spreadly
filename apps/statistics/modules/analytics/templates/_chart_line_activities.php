@@ -10,7 +10,8 @@ var ActivityChart = {
 		    chart: {
 		      renderTo: 'chart_line_activities',
 		      zoomType: 'x',
-		      spacingRight: 20
+		      spacingRight: 20,
+		      backgroundColor: "#f6f6f6"
 		   },
 		    title: {
 		      text: false
@@ -72,30 +73,14 @@ var ActivityChart = {
 		      color: '#1231e3',
 	        fillOpacity: 0.1,
 	        fillColor: {
-            linearGradient: [0, 0, 0, 200],
+            linearGradient: [0, 0, 0, 300],
             stops: [
                [0, Highcharts.theme.colors[0]],
                [1, 'rgba(61,160,242,0)']
             ]
          }
 
-		   },{
-		      type: 'area',
-		      name: 'Dislikes',
-		      pointInterval: 1*24*60*60*1000,
-		      pointStart: Date.UTC(lData.startdate.year, lData.startdate.month, lData.startdate.day),
-		      data: lData.dislikes,
-		      color: '#7f79fc',
-	        fillOpacity: 0.7,
-	        fillColor: {
-	            linearGradient: [0, 0, 0, 300],
-	            stops: [
-	               [0, Highcharts.theme.colors[0]],
-	               [1, 'rgba(61,160,242,0)']
-	            ]
-	         }
-
-		   	}
+		   }
 		   ]
 		};
 		var lChart = new Highcharts.Chart(lOptions);

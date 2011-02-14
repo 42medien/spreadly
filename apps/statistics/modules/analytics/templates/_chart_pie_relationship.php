@@ -15,8 +15,7 @@ var ChartPieRelationship = {
 	        margin: pChartsettings.margin,
 	        height: parseInt(pChartsettings.height),
 		      width: parseInt(pChartsettings.width),
-          backgroundColor: '#fff',
-          plotBackgroundColor: '#fff',
+          backgroundColor: pChartsettings.bgcolor,
           zoomType: 'xy'
 		    },
 		    credits: {

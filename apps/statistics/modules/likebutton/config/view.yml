@@ -1,5 +1,5 @@
 all:
-  layout: layout_configurator
+  layout: layout
   
 indexSuccess:
   components:

@@ -9,5 +9,19 @@
 .popwidecol{ _width:356px; }
 
 
-/* End Bug
+.ekrenne{   _padding-top:2px;}
+.gefalt{ _margin-right:-4px; }
+.popupblock{ _width:540px; _padding: 0 20px 0 18px;}
+
+#topnavigation li a{  _background:url(../img/ipblack-bg.gif) -3px 150px no-repeat;  }
+#topnavigation li a:hover, #topnavigation a.active { _background:url(../img/ipblack-bg.gif) -3px 0px no-repeat; } 
+#topnavigation li a span{ _background:url(../img/submit-bg.gif) right 250px no-repeat; }
+#topnavigation li a:hover span, #topnavigation a.active span{ _background:url(../img/submit-bg.gif) right 0px no-repeat; }
+
+#paging-sel .jgd-dropdown dd ul a{_height:16px; }
+
+
+.resetblock a:hover span, .resetblock a.active span{ _background:url(../img/saver-hov.gif) right 0px no-repeat !important; }
+
+/* End Forms
 --------------------------------------------------------------------------------------------------------*/

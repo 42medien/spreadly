@@ -14,8 +14,7 @@ var ViewRangeChart = {
 		      spacingRight: 20,
 	        margin: [50, 50, 50, 50],
 	        height: 350,
-          backgroundColor: '#fff',
-          plotBackgroundColor: '#fff'
+          backgroundColor: '#f6f6f6'
 		   },
 		    title: {
 		      text: false
