@@ -31,7 +31,6 @@ class YiidActivity extends BaseYiidActivity {
     $comment = StringUtils::cleanupString($comment);
     $this->_set("comment", $comment);
   }
-  
   public function getComment() {
     if($this->isDeal()) {
       // TODO: i18nify
@@ -44,12 +43,13 @@ class YiidActivity extends BaseYiidActivity {
     } else {
       // TODO: default 'likes' ???
       return $this->_get("comment");
-    }    
+    }
   }
 
   public function generateHashtag() {
     return $this->isDeal() ? '#deal' : '#like';
   }
+
 
   public function setSoId($soId) {
     $soId = new MongoId(urldecode($soId)."");
@@ -165,10 +165,10 @@ class YiidActivity extends BaseYiidActivity {
    * sends the like to the connected communities like twitter, facebook, ...
    */
   public function postIt() {
-    if (sfConfig::get('sf_environment') == 'dev') {
+    if (sfConfig::get('sf_environment') != 'dev') {
       // send messages to all services
       foreach (PostApiFactory::fromOnlineIdentityIdArray($this->getOiids()) as $client) {
-        var_dump($client->doPost($this));
+        print_r($client->doPost($this));
       }
     }
   }
@@ -306,7 +306,7 @@ class YiidActivity extends BaseYiidActivity {
 
     return $lUser;
   }
-    
+
   /**
    * checks if it is a deal activity or not
    *
