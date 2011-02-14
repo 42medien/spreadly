@@ -41,7 +41,8 @@ class FacebookPostApiClient extends PostApi {
     $lPostBody .= '&privacy={"value": "EVERYONE"}';
 
     if ($lDeal = $pActivity->getDeal()) {
-      $lPostBody .= '&actions={"name": "Deal", "link": "'.$lDeal->getDomainProfile()->getDomain().'"}';
+      $i18n = sfContext::getInstance()->getI18N();
+      $lPostBody .= '&actions={"name": "'.$i18n->__("Get the Deal").'", "link": "'.$lDeal->getDomainProfile()->getDomain().'"}';
     }
 
     return $lPostBody;

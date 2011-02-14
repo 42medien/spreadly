@@ -31,14 +31,12 @@ class YiidActivity extends BaseYiidActivity {
     $comment = StringUtils::cleanupString($comment);
     $this->_set("comment", $comment);
   }
+
   public function getComment() {
     if($this->isDeal()) {
-      // TODO: i18nify
-      $lDealComment = "hat sich auf ";
-      $lDealComment .= $this->getUrl();
-      $lDealComment .= " den Gutschein „";
-      $lDealComment .= $this->getDeal()->getSummary();
-      $lDealComment .= "“ gesichert und empfiehlt …";
+      $i18n = sfContext::getInstance()->getI18N();
+      $lDealComment = $i18n->__('grabbed the sponsored deal "%title%" on %url% for recommending...', array('%title%' => $this->getDeal()->getSummary(), '%url%' => $this->getUrl()));
+
       return $lDealComment;
     } else {
       // TODO: default 'likes' ???
@@ -49,7 +47,6 @@ class YiidActivity extends BaseYiidActivity {
   public function generateHashtag() {
     return $this->isDeal() ? '#deal' : '#like';
   }
-
 
   public function setSoId($soId) {
     $soId = new MongoId(urldecode($soId)."");
@@ -168,7 +165,7 @@ class YiidActivity extends BaseYiidActivity {
     if (sfConfig::get('sf_environment') != 'dev') {
       // send messages to all services
       foreach (PostApiFactory::fromOnlineIdentityIdArray($this->getOiids()) as $client) {
-        print_r($client->doPost($this));
+        $client->doPost($this);
       }
     }
   }

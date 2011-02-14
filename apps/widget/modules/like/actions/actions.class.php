@@ -32,6 +32,13 @@ class likeActions extends sfActions
   	$lParams = $request->getParameter('like');
 		$lSuccess = ($lParams['oiids'] != null)?true:false;
 
+		$lParams['u_id'] = $this->getUser()->getUserId();
+    $lParams['tags'] = $request->getParameter("tags");
+
+		$lActivity = new YiidActivity();
+    $lActivity->fromArray($lParams);
+    $lActivity->save();
+
   	$lReturn['success'] = $lSuccess;
     return $this->renderText(json_encode($lReturn));
   }
