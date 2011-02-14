@@ -22,23 +22,15 @@ class FacebookPostApiClient extends PostApi {
    * @param YiidActivity $pActivity
    * @return string
    */
-  private function generateMessage($pActivity) {
-    $pTitle = $pActivity->getTitle();
-    $pUrl = $pActivity->generateUrlWithClickbackParam($this->onlineIdentity);
-
-    sfProjectConfiguration::getActive()->loadHelpers('Text');
-    if ($pTitle) {
-      $pTitle = '"'.$pTitle.'"';
-    }
-
-    $i18n = sfContext::getInstance()->getI18N();
-    $lWildcard = 'POSTAPI_MESSAGE_LIKE';
-    $lText = $i18n->__($lWildcard, array('%title%' => $pTitle, '%url%' => $pUrl), 'widget');
-
-    $lPostBody .= "message=".$lText;
+  protected function generateMessage($pActivity) {
+    $lPostBody .= "message=".$pActivity->getComment();
 
     if ($pActivity->getDescr() && $pActivity->getDescr() != '') {
       $lPostBody .= "&description=".$pActivity->getDescr();
+    }
+
+    if ($pActivity->getTitle() && $pActivity->getTitle() != '') {
+      $lPostBody .= "&name=".$pActivity->getTitle();
     }
 
     if ($pActivity->getThumb() && $pActivity->getThumb() != '') {
@@ -46,8 +38,11 @@ class FacebookPostApiClient extends PostApi {
     }
 
     $lPostBody .= "&link=".urlencode($pActivity->generateUrlWithClickbackParam($this->onlineIdentity));
-
     $lPostBody .= '&privacy={"value": "EVERYONE"}';
+
+    if ($lDeal = $pActivity->getDeal()) {
+      $lPostBody .= '&actions={"name": "Deal", "link": "'.$lDeal->getDomainProfile()->getDomain().'"}';
+    }
 
     return $lPostBody;
   }

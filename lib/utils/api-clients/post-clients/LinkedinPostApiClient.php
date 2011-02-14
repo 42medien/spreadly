@@ -13,27 +13,25 @@ class LinkedinPostApiClient extends PostApi {
    * @return string
    */
   public function generateMessage($pActivity) {
-    sfProjectConfiguration::getActive()->loadHelpers(array('Text', 'Url', 'Tag'));
-
     $lUrl = $pActivity->generateUrlWithClickbackParam($this->onlineIdentity);
     $lComment =  $pActivity->getComment();
     $lHashtag =  $pActivity->generateHashtag();
-    
+
     $lStatusMessage = '<?xml version="1.0" encoding="UTF-8"?><share>';
-    $lStatusMessage .= "<comment>$lComment $lHashtag</comment>";
+    $lStatusMessage .= "<comment><![CDATA[$lComment $lHashtag]]></comment>";
     $lStatusMessage .= '<content>';
-    $lStatusMessage .= "<submitted-url>$lUrl</submitted-url>";
+    $lStatusMessage .= "<submitted-url><![CDATA[$lUrl]]></submitted-url>";
 
     if ($pActivity->getTitle()) {
-      $lStatusMessage .= "<title>".$pActivity->getTitle()."</title>";
+      $lStatusMessage .= "<title><![CDATA[".$pActivity->getTitle()."]]></title>";
     }
 
     if ($pActivity->getDescr()) {
-      $lStatusMessage .= "<description>".$pActivity->getDescr()."</description>";
+      $lStatusMessage .= "<description><![CDATA[".$pActivity->getDescr()."]]></description>";
     }
 
     if ($pActivity->getThumb()) {
-      $lStatusMessage .= "<submitted-image-url>".$pActivity->getThumb()."</submitted-image-url>";
+      $lStatusMessage .= "<submitted-image-url><![CDATA[".$pActivity->getThumb()."]]></submitted-image-url>";
     }
 
     $lStatusMessage .= '</content>';
