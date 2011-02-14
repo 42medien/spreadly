@@ -15,10 +15,10 @@
 		        	<label class="radio-btn check-service">
 		          	<input type="checkbox" value="<?php echo $lIdentity->getId(); ?>" class="checkbox" name="" <?php echo $lIdentity->getSocialPublishingEnabled()?"checked=checked":''; ?>/>
 		          </label>
-		          <a href="<?php echo url_for($lIdentity->getProfileUri()) ?>" target="_blank">
+		          <a href="<?php echo url_for($lIdentity->getProfileUri()) ?>" target="_blank" title="<?php echo $lIdentity->getName(); ?>">
 			          <span>
-			          	<img src="/img/<?php echo $lIdentity->getCommunity()->getCommunity(); ?>-favicon.gif" width="17" height="17" alt="<?php echo $lIdentity->getCommunity()->getCommunity(); ?>" title="<?php echo $lIdentity->getCommunity()->getCommunity(); ?>" />
-			          </span><?php echo $lIdentity->getName(); ?>
+			          	<img src="/img/<?php echo $lIdentity->getCommunity()->getCommunity(); ?>-favicon.gif" width="17" height="17" alt="<?php echo $lIdentity->getName(); ?>" />
+			          </span><?php echo truncate_text($lIdentity->getName(), 25); ?>
 		          </a>
 		        </li>
 					<?php } ?>

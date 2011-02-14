@@ -30,4 +30,12 @@ class OnlineIdentity extends BaseOnlineIdentity
   public function getCommunity() {
     return CommunityTable::getInstance()->retrieveByPk($this->getCommunityId());
   }
+
+  public function getName() {
+    if ($this->_get("name")) {
+      return $this->_get("name");
+    } else {
+      return $this->getUrl();
+    }
+  }
 }
