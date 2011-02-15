@@ -16,7 +16,7 @@ class domain_profilesActions extends sfActions
 
     $this->domain_profiles = $this->getUser()->getDomainProfiles();
   }
-    
+
   public function executeCreate(sfWebRequest $request)
   {
   	$this->getResponse()->setContentType('application/json');
@@ -24,7 +24,7 @@ class domain_profilesActions extends sfActions
     $i18n = sfContext::getInstance()->getI18N();
     $form = new DomainProfileForm();
     $params = $request->getParameter($form->getName());
-    $params['url'] = isset($params['url']) ? $this->cleanUrl($params['protocol'].'://'.$params['url']) : '';
+    $params['url'] = (isset($params['url']) && $params['url']!='') ? $this->cleanUrl($params['protocol'].'://'.$params['url']) : '';
     $params['sf_guard_user_id'] = $this->getUser()->getUserId();
     $form->bind($params, $request->getFiles($form->getName()));
 
@@ -130,7 +130,7 @@ class domain_profilesActions extends sfActions
     }
     return $domain_profile;
   }
-  
+
   private function cleanUrl($url) {
     $url = strtolower($url);
     return parse_url($url, PHP_URL_HOST);

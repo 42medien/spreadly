@@ -88,7 +88,7 @@ var DomainProfilesHandler = {
       data: { ei_kcuf: new Date().getTime() },        
       success: function (pResponse) {
         jQuery('#add-domain-profiles').empty();
-        jQuery('#add-domain-profiles').append(pResponse.code); 
+        jQuery('#add-domain-profiles').append(pResponse.code);
         DomainProfilesHandler.closeCode(); 
         OnLoadGrafic.hideGrafic();
       }
@@ -104,6 +104,7 @@ var DomainProfilesHandler = {
     jQuery('#close-verify-code').live('click', function() {
       jQuery('#add-domain-profiles').empty();
       jQuery('#add-domain-profiles').append(DomainProfilesHandler.aClaimHtml);  
+      jQuery("select.custom-select").jgdDropdown();      
       DomainProfilesHandler.addNew();      
       return false;
     });

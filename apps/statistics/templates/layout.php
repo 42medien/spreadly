@@ -48,15 +48,17 @@
           	<div class="grboxmid-content">
             	<div class="graybox clearfix">
               	<div class="languagebox alignright">
-              		<a href="#" class="alignleft logout"> Logout</a>  <a href="#" class="alignleft"><img src="/img/uk-flag-icon.png" width="25" height="26" alt="UK" title="UK" /></a><a href="#" class="alignleft"><img src="/img/germany-flag.png" width="25" height="26" alt="Dutch" title="Dutch" /></a>
+              		<a href="<?php url_for('@sf_guard_signout'); ?>" class="alignleft logout"><?php echo __('Logout'); ?></a>  <a href="<?php echo url_for('@update_language?lang=en'); ?>" class="alignleft"><img src="/img/uk-flag-icon.png" width="25" height="26" alt="UK" title="UK" /></a><a href="<?php echo url_for('@update_language?lang=de'); ?>" class="alignleft"><img src="/img/germany-flag.png" width="25" height="26" alt="Deutsch" title="Deutsch" /></a>
 								</div>
 								<ul id="topnavigation" class="alignleft">
-                	<li><a href="#" class="welcome_user">Hello Marco </a></li>
-                  <li><a href="#" title="Dashboard"><span>Dashboard</span></a></li>
-                  <li><a href="#" title="Buttons"><span>Buttons</span></a></li>
-                  <li><a href="#" title="Domains"><span>Domains</span></a></li>
-                  <li><a href="#" title="Analytics" class="active"><span>Analytics</span></a></li>
-                  <li class="last"><a href="#" title="Deals"><span>Deals</span></a></li>
+    							<?php if($sf_user->isAuthenticated()){ ?>
+                		<li><a href="#" class="welcome_user"><?php echo __('Hello').' '.$sf_user->getUsername(); ?></a></li>
+                  <?php } ?>
+                  <li><a href="<?php echo url_for('@dashboard'); ?>" title="Dashboard" <?php if($sf_context->getModuleName()=='likebutton' && $sf_context->getActionName()=='dashboard') { echo 'class="active"';} ?>><span><?php echo __('Dashboard'); ?></span></a></li>
+                  <li><a href="<?php echo url_for('@configurator'); ?>" title="Buttons" <?php if($sf_context->getModuleName()=='likebutton' && $sf_context->getActionName()=='index') { echo 'class="active"';} ?>><span><?php echo __('Buttons'); ?></span></a></li>
+                  <li><a href="<?php echo url_for('domain_profiles/index'); ?>" title="Domains" <?php if($sf_context->getModuleName()=='domain_profiles') { echo 'class="active"';} ?>><span><?php echo __('Domains'); ?></span></a></li>
+                  <li><a href="<?php echo url_for('@analytics_overview'); ?>" title="Analytics" <?php if($sf_context->getModuleName()=='analytics' && ($sf_context->getActionName()=='index' || $sf_context->getActionName()=='statistics')) { echo 'class="active"';} ?>><span><?php echo __('Analytics'); ?></span></a></li>
+                  <li class="last"><a href="<?php echo url_for('@deals'); ?>" title="Deals"<?php if($sf_context->getModuleName()=='deals') { echo 'class="active"';} ?>><span><?php echo __('Deals'); ?></span></a></li>
                 </ul>
             	</div>
             </div>
@@ -72,7 +74,6 @@
    			<span>Copyright Yidd 2010</span>  |  <a href="#" title="Imprint">Imprint</a> |  <a href="#" title="TOS">TOS</a> |   <a href="#" title="Privacy Policy">Privacy Policy</a> |   <a href="mailto:info@yiid.com ">info@yiid.com </a></div>
 			</div>
 		<script type="text/javascript">
-    	jQuery("select.custom-select").jgdDropdown();
 			// Custom Checkbox Function
 	    jQuery(document).ready( function() {
 	      <?php include_partial('global/js_init_general.js'); ?>
@@ -81,5 +82,6 @@
 	      <?php } ?>
 	    });
 		</script>
+		<img id="general-ajax-loader" style="display:none;" src="/img/global/ajax-loader-bar-circle.gif" />
 	</body>
 </html>

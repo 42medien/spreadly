@@ -116,3 +116,15 @@ ul#logos_big {  margin: 30px 0 40px 30px; }
 .beshbox{
   padding: 0px 0px 15px 0px;
 }
+
+.error{
+  color: red;
+}
+
+#add-url-error{
+  margin-left: 90px;
+}
+
+.textfield-wht span  {
+    padding-right: 5px;
+}

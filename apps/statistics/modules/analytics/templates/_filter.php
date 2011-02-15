@@ -6,10 +6,10 @@
     	<div class="grboxmid-content">
 				<div class="graybox clearfix">
         	<div class="resetblock alignright">
-          	<a href="#" class="active" id="analytics-filter-button"><span>Filter</span></a><a href="<?php echo url_for('analytics/statistics');?>"><span>Reset</span></a>
+          	<a href="#" id="analytics-filter-button"><span><?php echo __('Filter'); ?></span></a><a href="<?php echo url_for('analytics/statistics');?>"><span><?php echo __('Reset'); ?></span></a>
           </div>
           <div class="alignleft webblock">
-          	<h2 class="webtitle">Website</h2>
+          	<h2 class="webtitle"><?php echo __('Website'); ?></h2>
             <label id="websel" for="host_id">
             	<select class="custom-select" id="host_id" name="host_id">
 						  	<?php foreach($pVerifiedDomains as $d): ?>
@@ -19,7 +19,7 @@
             </label>
           </div>
          	<div class="alignleft zeitraumblock">
-          	<h2 class="webtitle">Zeitraum</h2>
+          	<h2 class="webtitle"><?php echo __('Zeitraum'); ?></h2>
             <label class="textfield-whtmid"><span><input type="text" id="date-from" class="wd172" name="date-from" value="<?php echo $pDateFrom ?>" /></span></label><span class="alignleft deshline"> - </span><label class="textfield-whtmid"><span><input type="text" class="wd172" id="date-to" name="date-to" value="<?php echo $pDateTo ?>" /></span></label>
           </div>
         </div>
