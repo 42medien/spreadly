@@ -128,3 +128,21 @@ ul#logos_big {  margin: 30px 0 40px 30px; }
 .textfield-wht span  {
     padding-right: 5px;
 }
+
+#deal-domain-select-box{
+    margin-bottom: 2px;
+}
+
+#button_wording_counter, #summary_counter, #description_counter{display: inline;}
+
+.dieblock {
+    text-align: center;
+}
+
+.ekrenne {
+  width: 320px;
+}
+
+.dealwidebox .ekrenne  {
+    margin-left: 0px;
+}
