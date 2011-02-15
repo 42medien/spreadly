@@ -57,6 +57,6 @@
   </style>
 </head>
 <body>
-  <a href="<?php echo $lPopupUrl ?>" rel="like" onclick="window.open(this.href, 'popup', 'width=580,height=435,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" class="button<?php echo " ".$pButtonClass; ?>"><span class="like">&nbsp;</span><span class="count"><?php echo intval($pSocialObjectArray['l_cnt']) ?></span></a>
+  <a href="<?php echo $lPopupUrl ?>" rel="like" onclick="window.open(this.href, 'popup', 'width=580,height=435,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" class="button <?php echo $pButtonClass; ?>"><span class="like">&nbsp;</span><span class="count"><?php echo intval($pSocialObjectArray['l_cnt']) ?></span></a>
 </body>
 </html>
