@@ -64,12 +64,39 @@
     left: 110px;
     white-space: nowrap;
   }
+  ul.icons {
+    list-style-type: none;
+    margin-top: 3px;
+    height: 30px;
+    width: 100px;
+    overflow: hidden;
+  }
+  ul.icons li {
+    float: left;
+    height: 30px;
+    width: 30px;
+    margin-right: 3px;    
+  }
+  ul.icons li.last {
+    margin-right: 0px;
+  }
+  ul.icons a img {
+    height: 30px;
+    width: 30px;
+  }
   </style>
 </head>
 <body>
   <a href="<?php echo $lPopupUrl ?>" rel="like" onclick="window.open(this.href, 'popup', 'width=580,height=435,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" class="button <?php echo $pButtonClass; ?>"><span class="like">&nbsp;</span><span class="count"><?php echo intval($pSocialObjectArray['l_cnt']) ?></span></a>
   <?php if($lActiveDeal): ?>
     <div class="text"><?php echo $lActiveDeal['button_wording']; ?></div>
+  <?php endif; ?>
+  <?php if ($pSocialFeatures): ?>
+  <ul class="icons">
+    <li><a><img src="http://a3.twimg.com/profile_images/1170987730/final_197_normal.jpg" /></a></li>
+    <li><a><img src="http://a3.twimg.com/profile_images/1170987730/final_197_normal.jpg" /></a></li>
+    <li class="last"><a><img src="http://a3.twimg.com/profile_images/1170987730/final_197_normal.jpg" /></a></li>
+  </ul>
   <?php endif; ?>
 </body>
 </html>

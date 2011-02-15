@@ -113,7 +113,7 @@ class YiidActivity extends BaseYiidActivity {
     $this->updateDealInfo();
     $this->upsertSocialObject();
     $this->setC(time());
-    $this->isAllowedToLike();
+    $this->validate();
 
     $this->verifyAndSaveOnlineIdentities();
   }
@@ -234,7 +234,11 @@ class YiidActivity extends BaseYiidActivity {
   /**
    * checks if user is allowed to like this entry
    */
-  private function isAllowedToLike() {
+  private function validate() {
+    if (!$this->getUId() || !$this->getUrl()) {
+      throw new sfException("UserId or Url not present", 0);
+    }
+    
     $activity = YiidActivityTable::retrieveActionOnObjectById($this->getSoId(), $this->getUId(), $this->getDeal());
 
     if ($activity) {
