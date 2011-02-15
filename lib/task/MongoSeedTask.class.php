@@ -69,6 +69,7 @@ EOF;
       $activitiesCol->insert(array(
           'host' => $host,
           'url' => "http://".$host."/my/url/".$path,
+          'title' => "$host and $path Title",
           'date' => $this->randomDate(),
           'pos' => $this->sometimesRandBoolean(),
           'verb' => $this->sometimesRandBoolean() ? 'like' : 'dislike',

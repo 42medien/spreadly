@@ -54,6 +54,7 @@ class StatsFeeder {
     $lOptions = array(
       'host' => $lUrlParts['host'],
       'url'  => $pYiidActivity->getUrl(),
+      'title'  => $pYiidActivity->getSocialObject()->getTitle(),
       'date' => new MongoDate(strtotime(date("Y-m-d", $pYiidActivity->getC()))),
       'verb' => $pYiidActivity->getVerb(),
       'gender' => $pUser->getGender(),

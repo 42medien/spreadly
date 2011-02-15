@@ -36,7 +36,8 @@ class MongoUtils {
       "neg" => 0,
       "contacts" => 0,
       "clickbacks" => 0,
-      "distribution" => 0
+      "distribution" => 0,
+      "title" => ''
     );
 
     $reduce = "function(doc, out){ ".
@@ -48,6 +49,9 @@ class MongoUtils {
                 "}".
                 "if(doc.cb!=undefined && doc.cb!=null) {".
                   "out.clickbacks+=1;".
+                "}".
+                "if(doc.title!=undefined && doc.title!=null) {".
+                  "out.title = doc.title;".
                 "}".
               "}";
 
