@@ -185,7 +185,7 @@ h1#logo a { display:block; width:244px; height:173px; text-indent:-9999px; text-
 .stepbtn{ font-size:18px; color:#555555; font-weight:normal; padding:10px 0 12px 2px;}
 .stepbtn span{ float:left; margin-right:12px; padding-right:15px; background:url(/img/gr-bor.gif) right top repeat-y; line-height:20px;  }
 .txtblack{ color:#000;}
-.nobg{ background:none !important; min-width: 0;}
+.nobg{ background:none !important; }
 .innerloginbox .loginbox label.submit-align{ margin-top:-4px; margin-left:-4px;}
 
 .grboxin{ padding: 5px 12px 5px 12px;}
