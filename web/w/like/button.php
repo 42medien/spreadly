@@ -12,41 +12,48 @@
   <![endif]-->
   <style type="text/css">
   * { margin: 0; padding: 0; }
+  
   a.button {
     display: block;
-    position: relative;
     width: 101px;
     height: 22px;
-    clear: right;
-    text-decoration: none;
+    line-height: 22px;
+    position: relative;
+    overflow: hidden;
     color: #782a4f;
-    font-family: Tahoma, Verdana, sans-serif;
     font-size: 10px;
-    background: transparent url('/img/sprites/spreadly_button_sprite.png') no-repeat scroll 0 0;
+    text-decoration: none;
   }
   a.button span {
-    display: block;
-    width: 41px;
-    height: 22px;
     position: absolute;
-    right: 0;
-    padding-top: 3px;
-    text-align: center;
-    background: transparent url('/img/sprites/spreadly_button_sprite.png') no-repeat scroll 0 -600px;
+    display: block;
+    height: 22px;
+    background: transparent url('/img/sprites/spreadly_button_sprite.png') no-repeat scroll 0 0;
+    font-family: Tahoma, Verdana, Arial, sans-serif;
   }
-  a.button:hover {
+  a.button span.like {
+    width: 60px;
+    left: 0;
+  }
+  a.button span.count {
+    width: 41px;
+    left: 60px;
+    text-align: center;
+    background-position: 0 -600px;
+  }
+  a.button span.like:hover {
    background-position: 0 -100px;
   }
-  a.button.disabled {
+  a.button.disabled span.like {
    background-position: 0 -200px;
   }
-  a.deal {
+  a.deal span.like {
    background-position: 0 -300px;
   }
-  a.deal:hover {
+  a.deal span.like:hover {
    background-position: 0 -400px;
   }
-  a.deal.disabled {
+  a.deal.disabled span.like {
    background-position: 0 -500px;
   }
   body { padding: 50px 100px; }
@@ -54,13 +61,14 @@
 </head>
 <body>
   <br/><br/><br/>
-  <a href="<?php echo $lPopupUrl ?>" rel="like" onclick="window.open(this.href, 'popup', 'width=580,height=435,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" class="button"><span>53<?php echo intval($pSocialObjectArray['l_cnt']) ?></span></a>
+  <a href="<?php echo $lPopupUrl ?>" rel="like" onclick="window.open(this.href, 'popup', 'width=580,height=435,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" class="button"><span class="like">&nbsp;</span><span class="count">53<?php echo intval($pSocialObjectArray['l_cnt']) ?></span></a>
 <br/><br/><br/>
-  <a href="<?php echo $lPopupUrl ?>" rel="like" onclick="window.open(this.href, 'popup', 'width=580,height=435,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" class="button deal"><span>73<?php echo intval($pSocialObjectArray['l_cnt']) ?></span></a>
+  <a href="<?php echo $lPopupUrl ?>" rel="like" onclick="window.open(this.href, 'popup', 'width=580,height=435,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" class="button disabled"><span class="like">&nbsp;</span><span class="count">53<?php echo intval($pSocialObjectArray['l_cnt']) ?></span></a>
 <br/><br/><br/>
-  <a href="<?php echo $lPopupUrl ?>" rel="like" onclick="window.open(this.href, 'popup', 'width=580,height=435,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" class="button disabled"><span>834<?php echo intval($pSocialObjectArray['l_cnt']) ?></span></a>
+  <a href="<?php echo $lPopupUrl ?>" rel="like" onclick="window.open(this.href, 'popup', 'width=580,height=435,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" class="button deal"><span class="like">&nbsp;</span><span class="count">53<?php echo intval($pSocialObjectArray['l_cnt']) ?></span></a>
 <br/><br/><br/>
-  <a href="<?php echo $lPopupUrl ?>" rel="like" onclick="window.open(this.href, 'popup', 'width=580,height=435,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" class="button deal disabled"><span>283<?php echo intval($pSocialObjectArray['l_cnt']) ?></span></a>
+  <a href="<?php echo $lPopupUrl ?>" rel="like" onclick="window.open(this.href, 'popup', 'width=580,height=435,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" class="button deal disabled"><span class="like">&nbsp;</span><span class="count">53<?php echo intval($pSocialObjectArray['l_cnt']) ?></span></a>
+<br/><br/><br/>
 
 
 </body>
