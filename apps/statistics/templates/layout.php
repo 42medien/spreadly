@@ -6,11 +6,13 @@
     <?php include_metas() ?>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+
+    <link rel="stylesheet" type="text/css" href="/js/100_main/vendor/jquery_ui_datepicker/timepicker_plug/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/js/100_main/vendor/jquery_ui_datepicker/smothness/jquery_ui_datepicker.css" />
 		<link rel="stylesheet" type="text/css" href="/css/styles.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="/css/yiid-styles.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />
-    <link rel="stylesheet" type="text/css" href="/js/100_main/vendor/jquery_ui_datepicker/timepicker_plug/css/style.css" />
-    <link rel="stylesheet" type="text/css" href="/js/100_main/vendor/jquery_ui_datepicker/smothness/jquery_ui_datepicker.css" />
+
 		<!--[if IE]>
 		<link rel="stylesheet" type="text/css" href="/css/ie.css" />
 		<![endif]-->
@@ -26,6 +28,7 @@
     </script>
     <?php } ?>
     <script type="text/javascript" src="/js/100_main/include/statistics-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
+    <script type="text/javascript" src="/js/statistics/deals/DealHandler.js"></script>
     <?php include_javascripts();?>
     <link rel="shortcut icon" href="/img/favicon.ico" />
   </head>

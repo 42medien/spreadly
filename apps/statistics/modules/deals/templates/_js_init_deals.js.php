@@ -1,4 +1,5 @@
 ErrorHandler.catchGlobalError();
+jQuery("input[type='radio'],input[type='checkbox']").custCheckBox();
 //jQuery('.mirror-change-value').mirrorChangeValue();
 Deal.init();
 DealTable.init();

@@ -2,6 +2,10 @@
  * @combine statistics
  */
 
+
+/**
+ * @source http://www.dev4press.com/jquery/jgd-dropdown/
+ */
 ;(function($){
     $.fn.jgdDropdown = function(options) {
         var settings =  $.extend({}, $.fn.jgdDropdown.defaults, options);

@@ -1,5 +1,5 @@
 /**
- * @combine statistics
+ * @nocombine statistics
  */
 
 /**
@@ -15,6 +15,16 @@ var Deal = {
   init : function() {
     debug.log('[Deal][init]');
     Deal.bindClicks();
+    Deal.initDropdown();
+  },
+  
+  /**
+   * inits the bg-dropdown-magic
+   */
+  initDropdown: function() {
+    jQuery("select.custom-select").jgdDropdown({callback: function(obj, val) {
+      DealForm.changeDomainProfile(val);
+    }});    
   },
   
   /**
@@ -221,10 +231,12 @@ var DealForm = {
    * change the form after selecting a domain-profile
    * 
    * @author KM
+   * @depricated wird jetzt in deal.init innerhalb der callback vom dropdown ausgeführt
    */
   selectDomainProfile : function() {
     debug.log('[DealForm][selectDomainProfile]');
-    jQuery('#deal-domain-select-box #id').change(function() {
+    jQuery('#websellist #id').change(function() {
+      debug.log(this);
       var lDpId = jQuery(this).val();
       DealForm.changeDomainProfile(lDpId);
     });
@@ -252,6 +264,7 @@ var DealForm = {
       success : function(pResponse) {
         Deal.showContent(pResponse.html);
         DealForm.init();
+        Deal.initDropdown();
         OnLoadGrafic.hideGrafic();
       }
     });
