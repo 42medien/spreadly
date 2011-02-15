@@ -57,10 +57,11 @@ if (!$lActiveDeal || WidgetUtils::actionOnHostByUser($pUserId, $lActiveDeal)) {
 $lActivityObject = WidgetUtils::getYiidActivity($lSocialObjectArray['_id'], $pUserId, $lActiveDeal);
 // </Deal>
 
+$pButtonClass = "";
 if ($lActivityObject) {
-  $lIsUsed = $lActivityObject['score'];
-} else {
-  $lIsUsed = false;
+  $pButtonClass = "disabled";
+} elseif ($lActiveDeal) {
+  $pButtonClass = "deal";
 }
 
 $lSocialObjectArray = WidgetUtils::recalculateCountsRespectingUser($lSocialObjectArray, $lIsUsed);
