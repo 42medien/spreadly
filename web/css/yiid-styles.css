@@ -148,3 +148,18 @@ ul#logos_big {  margin: 30px 0 40px 30px; }
 }
 
 .nobg{ min-width: 0; }
+
+.graybox-wrapper.two-col {
+  width: 50%;
+  float: left;
+}
+.dashboard .graybox {
+  height: 200px;
+}
+
+a.button { float:left; background:url(/img/savel.png) 0px 0px no-repeat; padding-left:13px; cursor:pointer;  font-weight:bold; margin:0 1px; text-decoration: none;}
+a.button span{ float:left; background:url(/img/saver.png) right 0px no-repeat;  padding:4px 18px 6px 5px; line-height:26px;  cursor:pointer; font-size:16px; color:#000;  text-decoration: none;}
+a.button:hover, a.button.active{background:url(/img/savel-hov.png) -0px 0px no-repeat; color:#fff; text-decoration:none;}
+a.button:hover span, a.button.active span{  background:url(/img/saver-hov.png) right 0px no-repeat; color:#fff;}
+
+a.button.header { float:right; }
