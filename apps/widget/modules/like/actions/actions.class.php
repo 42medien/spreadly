@@ -45,7 +45,6 @@ class likeActions extends sfActions
     // try to save activity
     try {
       $lActivity->save();
-
       $lSuccess = true;
 		} catch (Exception $e) { // send error on exception
       $lSuccess = false;
