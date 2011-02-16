@@ -35,14 +35,21 @@ class likeActions extends sfActions
   public function executeSave(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
   	$lParams = $request->getParameter('like');
-		$lSuccess = ($lParams['oiids'] != null)?true:false;
 
 		$lParams['u_id'] = $this->getUser()->getUserId();
     $lParams['tags'] = $request->getParameter("tags");
 
-		$lActivity = new YiidActivity();
+  	$lActivity = new YiidActivity();
     $lActivity->fromArray($lParams);
-    $lActivity->save();
+
+    // try to save activity
+    try {
+      $lActivity->save();
+
+      $lSuccess = true;
+		} catch (Exception $e) { // send error on exception
+      $lSuccess = false;
+		}
 
   	$lReturn['success'] = $lSuccess;
     return $this->renderText(json_encode($lReturn));
