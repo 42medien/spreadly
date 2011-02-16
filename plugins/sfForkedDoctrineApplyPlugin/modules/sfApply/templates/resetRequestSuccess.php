@@ -2,6 +2,7 @@
 <?php use_stylesheets_for_form( $form ) ?>
 <?php slot('sf_apply_login') ?>
 <?php end_slot() ?>
+<?php slot('content') ?>
 <div class="sf_apply sf_apply_reset_request">
 
 <h2 class="green_style"><?php echo __("&raquo; Reset Password", array(), 'sfForkedApply') ?></h2>
@@ -18,11 +19,13 @@ a link permitting you to change your password if you wish.', array(), 'sfForkedA
   <tfoot>
     <tr>
       <td colspan="2">
-        <input type="submit" class="button positive" value="<?php echo __("Reset My Password", array(), 'sfForkedApply') ?>" />
-        <?php echo link_to(__("Cancel", array(), 'sfForkedApply'), sfConfig::get('app_sfApplyPlugin_after', '@homepage'), array('class' => 'button')) ?>
+        <button class="button" type="submit"><span><?php echo __("Reset My Password", array(), 'sfForkedApply') ?></span></button>
+        <?php echo link_to('<span>'.__("Cancel", array(), 'sfForkedApply').'</span>', sfConfig::get('app_sfApplyPlugin_after', '@homepage'), array('class' => 'button')) ?>
       </td>
     </tr>
   </tfoot>
 </table>
 </form>
 </div>
+<?php end_slot(); ?>
+<?php include_partial('global/graybox'); ?>

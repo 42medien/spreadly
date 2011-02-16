@@ -1,5 +1,6 @@
 <?php use_stylesheets_for_form( $form ) ?>
 <?php use_helper("I18N") ?>
+<?php slot('content') ?>
 <div class="sf_apply sf_apply_settings">
 <h2><?php echo __("Edit Email", array(), 'sfForkedApply') ?></h2>
 <form method="post" action="<?php echo url_for("sfApply/editEmail") ?>" name="sf_apply_email_edit_form" id="sf_apply_email_edit_form">
@@ -12,3 +13,5 @@
 </ul>
 </form>
 </div>
+<?php end_slot(); ?>
+<?php include_partial('global/graybox'); ?>

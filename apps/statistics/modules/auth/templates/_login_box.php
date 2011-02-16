@@ -18,13 +18,13 @@
     <?php $routes = $sf_context->getRouting()->getRoutes() ?>
     <?php if (isset($routes['sf_guard_register'])): ?>
       <span class="navigation_text" id="nav_register">
-        <?php echo __('or'); ?> <?php echo link_to(__('Register'), '@sf_guard_register', array('rel' => 'facebox')); ?>
+        <?php echo __('or'); ?> <?php echo link_to(__('Register'), '@sf_guard_register'); ?>
       </span>
     <?php endif; ?>
     <?php if (isset($routes['sf_guard_forgot_password'])): ?>
       <span class="navigation_text" id="nav_forgot_pw">
         |
-        <?php echo link_to(__('Password forgotten?'), '@sf_guard_forgot_password', array('rel' => 'facebox')); ?>
+        <?php echo link_to(__('Password forgotten?'), '@sf_guard_forgot_password'); ?>
       </span>
     <?php endif; ?>
   </form>

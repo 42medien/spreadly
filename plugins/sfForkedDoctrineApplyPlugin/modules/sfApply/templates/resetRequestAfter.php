@@ -1,6 +1,7 @@
 <?php use_helper('I18N') ?>
 <?php slot('sf_apply_login') ?>
 <?php end_slot() ?>
+<?php slot('content') ?>
 <div class="sf_apply_notice">
 <?php echo __('<p>
 For security reasons, a confirmation message has been sent to
@@ -14,3 +15,5 @@ We apologize for the inconvenience.
 </p>', array(), 'sfForkedApply') ?>
 <?php include_partial('sfApply/continue') ?>
 </div>
+<?php end_slot(); ?>
+<?php include_partial('global/graybox'); ?>

@@ -2,6 +2,7 @@
 <?php use_stylesheets_for_form( $form ) ?>
 <?php slot('sf_apply_login') ?>
 <?php end_slot() ?>
+<?php slot('content') ?>
 <div class="sf_apply sf_apply_reset">
 <p>
 <?php echo __('You may change your password using the form below.', array(), 'sfForkedApply') ?>
@@ -17,3 +18,5 @@
 </ul>
 </form>
 </div>
+<?php end_slot(); ?>
+<?php include_partial('global/graybox'); ?>

@@ -2,6 +2,7 @@
 <?php use_stylesheets_for_form( $form ) ?>
 <?php end_slot() ?>
 <?php use_helper("I18N") ?>
+<?php slot('content') ?>
 <div class="sf_apply sf_apply_settings">
 <h2><?php echo __("Account Settings", array(), 'sfForkedApply') ?></h2>
 <form method="post" action="<?php echo url_for("sfApply/settings") ?>" name="sf_apply_settings_form" id="sf_apply_settings_form">
@@ -23,6 +24,8 @@ if( $confirmation['reset_logged'] ): ?>
 will receive a confirmation email containing a link allowing you to complete the password change.', array(), 'sfForkedApply') ?>
 <?php endif; ?>
 </p>
-<input type="submit" value="<?php echo __("Reset Password", array(), 'sfForkedApply') ?>" />
+<button type="submit"><span><?php echo __("Reset Password", array(), 'sfForkedApply') ?></span></button>
 </form>
 </div>
+<?php end_slot(); ?>
+<?php include_partial('global/graybox'); ?>

@@ -1,4 +1,6 @@
 <?php use_helper('I18N') ?>
+
+<?php slot('content') ?>
 <div class="sf_apply_notice">
 <p>
 <?php echo __("Your password has been successfully reset. You are now logged
@@ -6,3 +8,5 @@ in to this site. In the future, be sure to log in with your new password.", arra
 </p>
 <?php include_partial('sfApply/continue') ?>
 </div>
+<?php end_slot(); ?>
+<?php include_partial('global/graybox'); ?>
