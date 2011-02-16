@@ -22,7 +22,6 @@ class likeActions extends sfActions
       $this->redirect($lUrl);
     }
 
-		$this->setLayout('layout');
     $this->pIdentities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
 
     $lYiidMeta = new YiidMeta();
