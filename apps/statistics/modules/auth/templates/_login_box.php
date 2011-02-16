@@ -2,9 +2,19 @@
 
   <?php echo $form->renderFormTag(url_for('@sf_guard_signin'), array('id'=>'signin_form')); ?>
     <?php echo $form[$form->getCSRFFieldName()]->render(); ?>
-    <?php echo $form['username']->render(array('value'=>__('Username or email'))); ?>
-    <?php echo $form['password']->render(array('value'=>__('Password'))); ?>
-    <input type="submit" id="signin_submit" class="button positive inline" value="<?php echo __('Login'); ?>" />
+    
+    <label class="textfield-whtmid">
+      <span>
+        <input type="text" class="wd172" id="signin_username" value="<?php echo __('Username or email'); ?>" name="signin[username]">
+      </span>
+    </label>
+    <label class="textfield-whtmid" style="margin-left:10px">
+      <span>
+        <input type="password" class="wd172" id="signin_password" value="<?php echo __('Password'); ?>" name="signin[password]">
+      </span>
+    </label>
+    
+    <button type="submit" id="signin_submit" class="button"><span><?php echo __('Login'); ?></span></button>
     <?php $routes = $sf_context->getRouting()->getRoutes() ?>
     <?php if (isset($routes['sf_guard_register'])): ?>
       <span class="navigation_text" id="nav_register">
@@ -13,6 +23,7 @@
     <?php endif; ?>
     <?php if (isset($routes['sf_guard_forgot_password'])): ?>
       <span class="navigation_text" id="nav_forgot_pw">
+        |
         <?php echo link_to(__('Password forgotten?'), '@sf_guard_forgot_password', array('rel' => 'facebox')); ?>
       </span>
     <?php endif; ?>

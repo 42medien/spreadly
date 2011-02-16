@@ -157,9 +157,64 @@ ul#logos_big {  margin: 30px 0 40px 30px; }
   height: 200px;
 }
 
-a.button { float:left; background:url(/img/savel.png) 0px 0px no-repeat; padding-left:13px; cursor:pointer;  font-weight:bold; margin:0 1px; text-decoration: none;}
-a.button span{ float:left; background:url(/img/saver.png) right 0px no-repeat;  padding:4px 18px 6px 5px; line-height:26px;  cursor:pointer; font-size:16px; color:#000;  text-decoration: none;}
-a.button:hover, a.button.active{background:url(/img/savel-hov.png) -0px 0px no-repeat; color:#fff; text-decoration:none;}
-a.button:hover span, a.button.active span{  background:url(/img/saver-hov.png) right 0px no-repeat; color:#fff;}
+
+a.button,
+button.button {
+  float:left; 
+  background:url(/img/savel.png) 0px 0px no-repeat; 
+  padding-left:13px; 
+  cursor:pointer;
+  font-weight:bold; 
+  margin:0 1px; 
+  text-decoration: none;
+}
+a.button span,
+button.button span { 
+  float:left; 
+  background:url(/img/saver.png) right 0px no-repeat;
+  padding:4px 18px 6px 5px; 
+  line-height:26px;  
+  cursor:pointer; 
+  font-size:16px; 
+  color:#000;  
+  text-decoration: none;
+}
+a.button:hover, a.button.active,
+button.button:hover, button.button.active {
+  background:url(/img/savel-hov.png) -0px 0px no-repeat; 
+  color:#fff; 
+  text-decoration:none;
+}
+a.button:hover span, a.button.active span,
+button.button:hover span, button.button.active span {
+  background:url(/img/saver-hov.png) right 0px no-repeat;
+  color:#fff;
+}
+
+button.button, button.button span {
+  border: none;
+  height: 36px;
+  line-height: 36px;
+}
+button.button {
+  position: relative;
+  padding-left: 10px;
+}
+button.button span {
+  position: relative;
+  top: -1px;
+  padding: 0 18px 0 6px;
+}
+
+#signin_form label {
+  margin-top: 5px;
+}
+#signin_form button {
+  margin-left: 5px;
+}
+#signin_form .navigation_text {
+  position: relative;
+  top: 11px;
+}
 
 a.button.header { float:right; }
