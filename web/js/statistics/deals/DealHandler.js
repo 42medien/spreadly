@@ -218,6 +218,8 @@ var DealForm = {
           Deal.showContent(pResponse.html);
           DealTable.update();
           DealForm.init();
+          Deal.initDropdown();
+          jQuery("input[type='checkbox']").custCheckBox();
           OnLoadGrafic.hideGrafic();
         }
       };
@@ -280,6 +282,7 @@ var DealForm = {
     jQuery('ul.radio_list li.coupon-type-select input:radio').live('click',
         function() {
           var lId = jQuery(this).attr('id');
+          debug.log(lId);
           if (lId == 'deal_coupon_type_single') {
             jQuery('#multiple-code-row').hide();
             jQuery('#single-code-row').show();
@@ -304,7 +307,7 @@ var DealForm = {
             jQuery('#deal_tag_row').hide();
           } else {
             jQuery('#deal_tag_row').show();
-            DealForm.initAutocomplete();
+            //DealForm.initAutocomplete();
           }
         });
   },  

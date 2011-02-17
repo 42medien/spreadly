@@ -35,6 +35,8 @@
 <?php } ?>
 
 <form action="" method="post" id="deal_form" name="deal_form">
+	<?php echo $pForm['deal']['id']->render();?>
+	<?php echo $pForm['_csrf_token']->render(); ?>
 <div class="grboxtop"><span></span></div>
 <div class="grboxmid">
 	<div class="grboxmid-content">
@@ -74,6 +76,7 @@
                     	<li class="clearfix last" >
                       	<div class="btnwording alignleft"><strong><?php echo $pForm['deal']['button_wording']->renderLabel();?></strong> <span><?php echo __('<span id="button_wording_counter">35</span> characters left'); ?></span></div>
                       	<label class="textfield-wht"><span><?php echo $pForm['deal']['button_wording']->render(array('class' => 'mirror-value wd390'));?></span></label>
+                      	<div class="content-error-box clearfix"><?php echo $pForm['deal']['button_wording']->renderError();?></div>
                       </li>
                     </ul>
                   </div>
@@ -124,6 +127,7 @@
                       			<?php echo $pForm['deal']['summary']->render(array('class' => 'mirror-value wd390'));?>
                       		</span>
                       	</label>
+                      	<div class="content-error-box clearfix"><?php echo $pForm['deal']['summary']->renderError();?></div>
                       </li>
                       <li class="clearfix">
                       	<div class="btnwording alignleft">
@@ -134,6 +138,7 @@
                       			<?php echo $pForm['deal']['description']->render(array('class' => 'mirror-value wd390'));?>
                       		</span>
                       	</label>
+                      	<div class="content-error-box clearfix"><?php echo $pForm['deal']['description']->renderError();?></div>
                       </li>
                       <li class="clearfix">
                       	<div class="btnwording alignleft">
@@ -150,6 +155,7 @@
                       		</span>
                       	</label>
                       	<span class="requirrow alignleft"><?php echo __('(One active deal per domain at a time!)'); ?></span>
+                      	<div class="content-error-box clearfix"><?php echo $pForm['deal']['end_date']->renderError();?><?php echo $pForm['deal']['start_date']->renderError();?></div>
                       </li>
                       <li class="clearfix">
                       	<div class="btnwording alignleft">
@@ -160,6 +166,7 @@
                       			<?php echo $pForm['deal']['terms_of_deal']->render(array('class' => 'wd320'));?>
                       		</span>
                       	</label><span class="requirrow alignleft"><?php echo __('(required)'); ?></span>
+                      	<div class="content-error-box clearfix"><?php echo $pForm['deal']['terms_of_deal']->renderError();?></div>
                       </li>
                     </ul>
                   </div>
@@ -197,40 +204,119 @@
                   	<h2 class="btntitle"><span>3</span><?php echo __('Configure your Coupon after a Like')?></h2>
                     <ul class="btnformlist">
 
+	    								<?php if($lIsEdit) { ?>
+	                    	<li class="clearfix">
+	                      	<div class="btnwording alignleft">
+	                      		<strong><?php echo __('Coupon-Codes');?></strong>
+	                      	</div>
+	                      	<label>
+	                      		<span>
+	                      			<?php echo __('You have chosen %codetype% for all deals:', array('%codetype%' => $pCouponType)); ?> <strong><?php echo $pDefaultCode; ?></strong>
+	                      			<input type="hidden" name="deal[coupon_type]" value="<?php echo $pCouponType;?>" />
+	                      		</span>
+	                      	</label>
+	                      </li>
+	                    <?php } else { ?>
+	                      <li class="clearfix">
+	                      	<div class="btnwording alignleft">
+	                      		<strong><?php echo $pForm['deal']['coupon_type']->renderLabel();?></strong><span><?php echo $pForm['deal']['coupon_type']->renderError();?></span>
+	                      	</div>
+	                      		<span>
+	                      			<?php echo $pForm['deal']['coupon_type']->render();?>
+	                      		</span>
+	                      </li>
+	                    <?php } ?>
 
-                    	<li class="clearfix">
-                      	<div class="btnwording alignleft"><strong>URL to redeem Coupon-Codes:</strong> </div>
-                        <div class="alignleft onlycheckbox">
-                        	<div class="chcodepad">
-                        		<span class="checkboxwht">
-                        			<label class="radio-btn"> <input type="checkbox" name="" /></label>
-                        		</span>Only one code
-                        	</div>
-                          <span class="checkboxwht"><label class="radio-btn"> <input type="checkbox" name="" /></label></span>Only one code
-                        </div>
-                        <label class="textfield-wht"><span><input type="text" class="wd278" value="enter your code here ..." /></span></label>
-                      </li>
 
+											<!-- ********** Configure single code ********** -->
+											<li id="single-code-row" <?php echo ($pCouponType == 'multiple')? 'style="display:none;"': ''; ?>>
+											<ul>
+											<?php if($lIsEdit) { ?>
+												<li class="clearfix" <?php echo ($pCouponType == 'multiple')? 'style="display:none;"': ''; ?>>
+													<input type="hidden" name="deal[coupon][single_code]" value="<?php echo $pDefaultCode; ?>" />
+	                      	<div class="btnwording alignleft">
+	                      		<strong><?php echo $pForm['deal']['coupon_quantity']->renderLabel();?></strong><span><?php echo $pForm['deal']['coupon_quantity']->renderError();?></span>
+	                      	</div>
+														<?php if($lDeal->isUnlimited()) {?>
+	                      			<label>
+																<span>
+																	<?php echo __('Your coupon quantity is unlimited.'); ?>
+																</span>
+															</label>
+														<?php } else { ?>
+															<label class="textfield-wht">
+																<span><?php echo __('Will end after');?> <?php echo $pForm['deal']['coupon_quantity']->render(array('class' => "wd15"));?></span>
+															</label> <span class="requirrow alignleft"><?php echo __('likes'); ?></span>
+														<?php } ?>
+													</li>
+											<?php } else { ?>
+	                      <li class="clearfix">
+	                      	<div class="btnwording alignleft">
+	                      		<strong><?php echo $pForm['deal']['coupon']['single_code']->renderLabel();?></strong>
+	                      	</div>
+	                      	<label class="textfield-wht">
+	                      		<span>
+	                      			<?php echo $pForm['deal']['coupon']['single_code']->render(array('class' => 'wd320 mirror-value'));?>
+	                      		</span>
+	                      	</label><span class="requirrow alignleft"><?php echo __('(required)'); ?></span>
+	                      	<div class="content-error-box clearfix"><?php echo $pForm['deal']['coupon']['single_code']->renderError();?></div>
+	                      </li>
 
+	                      <li class="clearfix">
+	                      	<div class="btnwording alignleft">
+	                      		<strong><?php echo $pForm['deal']['coupon_quantity']->renderLabel();?></strong><span><?php echo $pForm['deal']['coupon_quantity']->renderError();?></span>
+	                      	</div>
+													<span class="onlyone alignleft"><input type="radio" name="single-quantity" id="radio-single-quantity" <?php echo ($pCouponQuantity > 0)? 'checked="checked"':''; ?> /><label><?php echo __('Will end after');?></label></span><label class="textfield-wht"><span><?php echo $pForm['deal']['coupon_quantity']->render(array('class' => "wd15"));?></span></label> <span class="requirrow alignleft"><?php echo __('likes'); ?></span>
 
+													<label class="alignleft">
+														<input type="radio" name="single-quantity" id="radio-single-quantity-unltd" <?php echo ($pCouponQuantity == 0)? 'checked="checked"':''; ?> /> <?php echo __('unlimited'); ?>
+													</label>
+	                      </li>
+											<?php } ?>
+											</ul>
+											</li>
 
-                      <li class="clearfix">
-												<div class="btnwording alignleft">
-													<strong class="singleline">Quantity:</strong>
-												</div>
-												<span class="onlyone alignleft">Only one code</span>
-												<label class="textfield-wht">
-													<span><input type="text" class="wd15" value="100" /></span>
-												</label>
-												<span class="requirrow alignleft">likes</span>
-                      </li>
+											<li id="multiple-code-row" class="clearfix" <?php echo ($pCouponType=='single')? 'style="display:none;"': ''; ?>>
+											<ul class="clearfix">
+												<!-- ********** Configure multiple codes ********** -->
+												<li class="clearfix">
+		                      	<div class="btnwording alignleft">
+		                      		<strong><?php echo $pForm['deal']['coupon']['multiple_codes']->renderLabel();?></strong>
+		                      	</div>
+		                      	<label>
+		                      		<span>
+		                      			<?php echo $pForm['deal']['coupon']['multiple_codes']->render();?>
+		                      		</span>
+		                      	</label>
+		                      	<div class="content-error-box clearfix"><?php echo $pForm['deal']['coupon']['multiple_codes']->renderError();?></div>
+												</li>
+												<li class="clearfix">
+		                      	<div class="btnwording alignleft">
+		                      		<strong><?php echo $pForm['deal']['coupon_quantity']->renderLabel();?></strong><span><?php echo $pForm['deal']['coupon_quantity']->renderError();?></span>
+		                      	</div>
+		                      	<label>
+		                      		<span>
+																<?php if($lIsEdit) { ?>
+																	<?php echo __('Will end after <span id="code-counter">%codecounter%</span> likes.', array('%codecounter%' => $lDeal->getCouponQuantity())); ?>
+																	<?php echo __('%oldcodes% remaining old coupon codes', array('%oldcodes%' => $lDeal->getCouponQuantity()-$lDeal->getClaimedQuantity())); ?>
+																<?php } else { ?>
+																	<?php echo __('Will end after <span id="code-counter">%codecounter%</span> likes.', array('%codecounter%' => '0')); ?>
+																<?php } ?>
+		                      		</span>
+		                      	</label>
+												</li>
+												</ul>
+											</li>
                       <li class="clearfix">
                       	<div class="btnwording alignleft">
-                      		<strong class="singleline">Coupon-Codes:</strong>
+                      		<strong><?php echo $pForm['deal']['redeem_url']->renderLabel();?></strong>
                       	</div>
                       	<label class="textfield-wht">
-                      		<span><input type="text" class="wd320" value="http://www.marketingboerse.de/coupons" /></span>
-                      	</label>
+                      		<span>
+                      			<?php echo $pForm['deal']['redeem_url']->render(array('class' => 'mirror-value wd320'));?>
+                      		</span>
+                      	</label><span class="requirrow alignleft"><?php echo __('(required)'); ?></span>
+                      	<div class="content-error-box clearfix"><?php echo $pForm['deal']['redeem_url']->renderError();?></div>
                       </li>
                     </ul>
                   </div>
@@ -241,33 +327,55 @@
           </div>
 
 
+        <!-- ********** Configure choose categories ********** -->
+
+       	<div class="popoboxpad">
+        	<div class="grboxtop"><span></span></div>
+          <div class="grboxmid">
+          	<div class="grboxmid-content">
+            	<div class="graybox clearfix">
+              	<h2 class="btntitle"><span>4</span><?php echo __('Choose categories')?></h2>
+                <ul class="btnformlist">
+                	<li class="clearfix">
+                  	<div class="btnwording alignleft">
+                  		<strong><?php echo $pForm['deal']['addtags']->renderLabel();?></strong><span><?php echo $pForm['deal']['addtags']->renderError();?></span>
+                  	</div>
+                    <span><?php echo $pForm['deal']['addtags']->render();?></span>
+                  </li>
+                  <li class="clearfix" id="deal_tag_row" <?php echo ($pAddtags=='addnotags')? 'style="display:none;"': ''; ?>>
+                  	<div class="btnwording alignleft">&nbsp;</div>
+                    <label class="textfield-wht">
+                    	<span><?php echo $pForm['deal']['tags']->render(array('class' => 'wd320'));?></span>
+                    </label>
+										<div class="content-error-box clearfix"><?php echo $pForm['deal']['addtags']->renderError();?></div>
+                  </li>
 
 
-
-
-
-
-
-
-                                   <div class="clearfix">
-                                   		 <span class="alignright cancelbox">  <a href="#">or Cancel</a></span>
-                                   		<div class="alignleft bysubmit">
-                                      	<span>By submitting a deal you accept the Yiid Terms Of Deals Agreement.</span><br />
-
-                                    	<a class="graybtnwide alignleft" title="Copy code" href="#"><span>Submit a deal</span></a></div>
-                                   </div>
-                                </div>
-
-
-
-                          </div>
-
-                        </div>
-                  </div>
-                </div>
-                <div class="grboxbot"><span></span></div>
+                </ul>
+              </div>
             </div>
-            <!--veryfied box end -->
+          </div>
+	        <div class="grboxbot"><span></span></div>
 
 
+          <div class="clearfix">
+          	<div id="accept-tos">
+            	<?php echo $pForm['deal']['tos_accepted']->render(array('class' => 'left'));?>
+            	<span><?php echo __($pForm['deal']['tos_accepted']->renderLabel(), array('%terms%' => link_to(__('Terms of Deals'), '/', array('target' => '_blank'))));?></span><br />
+            	<?php echo $pForm['deal']['tos_accepted']->renderError();?>
+						</div>
+          	<span class="alignright cancelbox">  <a href="#">or Cancel</a></span>
+            <div class="alignleft bysubmit">
+              <a class="graybtnwide alignleft" id="proceed-deal-button" title="Copy code" href="#"><span>Submit a deal</span></a>
+              <!-- input type="submit" value="Deal anlegen" id="proceed-deal-button" class="graybtnwide alignleft" -->
+            </div>
+          </div>
+        </div>
+			</div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="grboxbot"><span></span></div>
+<!--veryfied box end -->
 </form>
