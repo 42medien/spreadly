@@ -364,7 +364,7 @@
             	<span><?php echo __($pForm['deal']['tos_accepted']->renderLabel(), array('%terms%' => link_to(__('Terms of Deals'), '/', array('target' => '_blank'))));?></span><br />
             	<?php echo $pForm['deal']['tos_accepted']->renderError();?>
 						</div>
-          	<span class="alignright cancelbox">  <a href="#">or Cancel</a></span>
+          	<span class="alignright cancelbox"><?php echo link_to('or Cancel', 'deals/index');  ?></span>
             <div class="alignleft bysubmit">
               <a class="graybtnwide alignleft" id="proceed-deal-button" title="Copy code" href="#"><span>Submit a deal</span></a>
               <!-- input type="submit" value="Deal anlegen" id="proceed-deal-button" class="graybtnwide alignleft" -->
