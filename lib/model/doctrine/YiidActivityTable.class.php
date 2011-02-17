@@ -15,6 +15,20 @@ class YiidActivityTable extends Doctrine_Table {
     return MongoDbConnector::getInstance()->getCollection(sfConfig::get('app_mongodb_database_name'), self::MONGO_COLLECTION_NAME);
   }
 
+  public static function retrieveLatestByUserId($pUserId, $pLimit = 10) {
+    $lCollection = self::getMongoCollection();
+
+    $lResults = $lCollection->find(array(
+      "u_id" => intval($pUserId),
+      "d_id" => array('$exists' => false)
+    ));
+
+    $lResults->sort(array('c' => -1));
+    $lResults->limit($pLimit);
+
+    return self::hydrateMongoCollectionToObjects($lResults);
+  }
+
   /**
    * Save a given object to our MongoDb
    * @param unknown_type $lObject
@@ -68,11 +82,11 @@ class YiidActivityTable extends Doctrine_Table {
     $lCollection = self::getMongoCollection();
 
     // get yiid-activity and factor a deal
-      $lQuery = $lCollection->findOne(array(
-        "so_id" => new MongoId($pSocialObjectId.""),
-        "u_id" => intval($pUserId),
-        "d_id" => ($pDeal ? intval($pDeal->getId()) : array('$exists' => false))
-      ));
+    $lQuery = $lCollection->findOne(array(
+      "so_id" => new MongoId($pSocialObjectId.""),
+      "u_id" => intval($pUserId),
+      "d_id" => ($pDeal ? intval($pDeal->getId()) : array('$exists' => false))
+    ));
 
     return self::initializeObjectFromCollection($lQuery);
   }

@@ -16,6 +16,8 @@ class likesActions extends sfActions
   * @param sfRequest $request A request object
   */
   public function executeIndex(sfWebRequest $request) {
+    $lUserId = $this->getUser()->getUserId();
 
+    $this->pActivities = YiidActivityTable::retrieveLatestByUserId($lUserId);
   }
 }
