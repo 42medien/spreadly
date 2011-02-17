@@ -15,6 +15,14 @@ class YiidActivityTable extends Doctrine_Table {
     return MongoDbConnector::getInstance()->getCollection(sfConfig::get('app_mongodb_database_name'), self::MONGO_COLLECTION_NAME);
   }
 
+  /**
+   * returns the latest activities of a user (desc order by date)
+   *
+   * @author Matthias Pfefferle
+   * @param int $pUserId
+   * @param int $pLimit default = 10
+   * @return array
+   */
   public static function retrieveLatestByUserId($pUserId, $pLimit = 10) {
     $lCollection = self::getMongoCollection();
 
