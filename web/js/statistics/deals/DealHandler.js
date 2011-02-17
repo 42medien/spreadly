@@ -127,12 +127,17 @@ var DealForm = {
     DealForm.countCodes(); 
     
     // init datetime-picker for start and enddate
-    jQuery('input#deal_start_date').datetime({
-      userLang : 'de'
+    jQuery('#deal_start_date').datetimepicker({
+      showSecond: true,
+      timeFormat: 'hh:mm:ss',
+      dateFormat: 'yy-mm-dd'      
     });
-    jQuery('input#deal_end_date').datetime({
-      userLang : 'de'
-    });
+    
+    jQuery('#deal_end_date').datetimepicker({
+      showSecond: true,
+      timeFormat: 'hh:mm:ss',
+      dateFormat: 'yy-mm-dd'            
+    });    
     
     // reset the form after side-reload (fix for ff)
     if (typeof (document.deal_form) != "undefined") {

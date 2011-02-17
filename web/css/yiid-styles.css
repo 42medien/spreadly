@@ -267,3 +267,41 @@ a.button.header { float:right; }
     font-weight: bold;
     line-height: 12px;    
 }
+
+#radio-single-quantity, #radio-single-quantity-unltd{
+  display:block;
+  float: left;
+  margin-right: 2px;
+}
+
+#quantitiy-unlimited{
+  margin-right: 93px;
+}
+
+#deal-quantity-label{
+  line-height: 28px;
+}
+
+#radio-single-quantity-label, #radio-single-quantity-unltd-label{
+ display: block;
+ float: left;
+ line-height: 14px;
+}
+
+.onlyone {
+  padding-top: 8px;
+}
+
+.wd120{
+  width: 120px;
+}
+
+/* css for timepicker */
+#ui-datepicker-div{ padding: 15px;}
+.ui-timepicker-div .ui-widget-header{ margin-bottom: 8px; }
+.ui-timepicker-div dl{ text-align: left; }
+.ui-timepicker-div dl dt{ height: 25px; }
+.ui-timepicker-div dl dd{ margin: -25px 0 10px 65px; }
+.ui-timepicker-div td { font-size: 90%; }
+
+

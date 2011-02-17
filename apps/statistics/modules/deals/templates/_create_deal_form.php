@@ -146,12 +146,12 @@
                       	</div>
                       	<label class="textfield-wht">
                       		<span>
-                      			<?php echo $pForm['deal']['start_date']->render(array("class" => "wd60"));?>
+                      			<?php echo $pForm['deal']['start_date']->render(array("class" => "wd120"));?>
                       		</span>
                       	</label> <span class="deshline alignleft">-</span>
                       	<label class="textfield-wht">
                       		<span>
-														<?php echo $pForm['deal']['end_date']->render(array("class" => "wd60"));?>
+														<?php echo $pForm['deal']['end_date']->render(array("class" => "wd120"));?>
                       		</span>
                       	</label>
                       	<span class="requirrow alignleft"><?php echo __('(One active deal per domain at a time!)'); ?></span>
@@ -263,14 +263,14 @@
 	                      </li>
 
 	                      <li class="clearfix">
-	                      	<div class="btnwording alignleft">
+	                      	<div class="btnwording alignleft" id="deal-quantity-label">
 	                      		<strong><?php echo $pForm['deal']['coupon_quantity']->renderLabel();?></strong><span><?php echo $pForm['deal']['coupon_quantity']->renderError();?></span>
 	                      	</div>
-													<span class="onlyone alignleft"><input type="radio" name="single-quantity" id="radio-single-quantity" <?php echo ($pCouponQuantity > 0)? 'checked="checked"':''; ?> /><label><?php echo __('Will end after');?></label></span><label class="textfield-wht"><span><?php echo $pForm['deal']['coupon_quantity']->render(array('class' => "wd15"));?></span></label> <span class="requirrow alignleft"><?php echo __('likes'); ?></span>
+													<span class="onlyone alignleft"><input type="radio" name="single-quantity" id="radio-single-quantity" <?php echo ($pCouponQuantity > 0)? 'checked="checked"':''; ?> /><label id="radio-single-quantity-label"><?php echo __('Will end after');?></label></span><label class="textfield-wht"><span><?php echo $pForm['deal']['coupon_quantity']->render(array('class' => "wd15"));?></span></label> <span class="requirrow alignleft"><?php echo __('likes'); ?></span>
 
-													<label class="alignleft">
-														<input type="radio" name="single-quantity" id="radio-single-quantity-unltd" <?php echo ($pCouponQuantity == 0)? 'checked="checked"':''; ?> /> <?php echo __('unlimited'); ?>
-													</label>
+													<span class="onlyone alignright" id="quantitiy-unlimited">
+														<input type="radio" name="single-quantity" id="radio-single-quantity-unltd" <?php echo ($pCouponQuantity == 0)? 'checked="checked"':''; ?> /> <span id="radio-single-quantity-unltd-label"><?php echo __('unlimited'); ?></span>
+													</span>
 	                      </li>
 											<?php } ?>
 											</ul>
