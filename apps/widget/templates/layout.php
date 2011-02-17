@@ -53,10 +53,10 @@
           	<img src="<?php echo avatar_path($sf_user->getUser()->getDefaultAvatar(), '30x30')?>" width="25" height="26" alt="<?php echo $sf_user->getUser()->getUsername(); ?>" title="<?php echo $sf_user->getUser()->getUsername(); ?>" class="mic-pic" />Hi <?php echo $sf_user->getUser()->getUsername(); ?><!--span class="like"><?php echo $sf_user->getUser()->getLikeCount(); ?></span><span class="dislike"><?php echo $sf_user->getUser()->getLikeCount(); ?></span--> | <?php echo link_to(__('Logout'), '@signout');?>
           </div>
           <ul class="popnavigation">
-          	<li <?php if($sf_context->getModuleName()=='profile') { echo 'class="active"';} ?>><?php echo link_to(__('Profile'), '@widget_profile'); ?> <span></span></li>
-            <li <?php if($sf_context->getModuleName()=='likes') { echo 'class="active"';} ?>><?php echo link_to(__('Likes'), '@widget_like'); ?><span></span></li>
-            <li <?php if($sf_context->getModuleName()=='settings') { echo 'class="active"';} ?>><?php echo link_to(__('Settings'), '@widget_settings'); ?> <span></span></li>
-            <li class="last <?php if($sf_context->getModuleName()=='deals') { echo 'active';} ?>"><?php echo link_to(__('Deals'), '@widget_deals'); ?> <span></span></li>
+          	<!-- li <?php if($sf_context->getModuleName()=='profile') { echo 'class="active"';} ?>><?php echo link_to(__('Profile'), '@widget_profile'); ?> <span></span></li -->
+            <li <?php if ($sf_context->getModuleName()=='likes') { echo 'class="active"'; } ?>><?php echo link_to(__('Likes'), '@widget_likes'); ?><span></span></li>
+            <li <?php if ($sf_context->getModuleName()=='deals') { echo 'class="active"'; } ?>"><?php echo link_to(__('Deals'), '@widget_deals'); ?><span></span></li>
+            <li class="last <?php if ($sf_context->getModuleName()=='settings') { echo 'active'; } ?>"><?php echo link_to(__('Settings'), '@widget_settings'); ?><span></span></li>
           </ul>
         </div>
       </div>
