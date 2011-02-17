@@ -19,12 +19,42 @@ class MongoUtils {
   public static function getTopActivityUrlData($domain, $fromDate, $toDate, $aggregation, $dealId=null) {
     return MongoUtils::getTopActivitiesData($domain, $fromDate, $toDate, $aggregation, 1, $dealId);
   }
-
+/*
+array(9) { ["url"]=> string(32) "http://www.missmotz.de/my/url/14" ["total"]=> float(50) ["pos"]=> float(19) ["neg"]=> float(31) ["contacts"]=> float(20556) ["clickbacks"]=> float(50) ["distribution"]=> float(16.84) ["title"]=> string(28) "www.missmotz.de and 14 Title" ["pis"]=> array(3) { ["total"]=> float(76) ["cb"]=> float(22) ["yiid"]=> float(33) } } 
+*/
+  public static function getActivityCount($domain, $fromDate, $toDate, $aggregation, $dealId=null) {
+    $allActivities = MongoUtils::getTopActivitiesData($domain, $fromDate, $toDate, $aggregation, null, $dealId);
+    $count = 0;
+    foreach ($allActivities['data'] as $data) {
+      $count += $data['total'];
+    }
+    return $count;
+  }
+  
+  public static function getTodaysActivityCountForDomainProfiles($pDomains) {  
+    $lActivityCount = array();
+    foreach ($pDomains as $domain) {
+      $lActivityCount[$domain->getId()] = MongoUtils::getActivityCount($domain->getUrl(), date('Y-m-d', strtotime("1 day ago")), date('Y-m-d'), 'daily');
+    }
+    arsort($lActivityCount);
+    return $lActivityCount;
+  }
+  
+  public static function getTodaysTopActivitiesData($domains) {
+    return MongoUtils::getTopActivitiesData($domains, date('Y-m-d', strtotime("1 day ago")), date('Y-m-d'), 'daily', 5);
+  }
+  
   public static function getTopActivitiesData($domain, $fromDate, $toDate, $aggregation, $limit=10, $dealId=null) {
     $col = MongoUtils::getCollection('analytics.activities');
     $keys = array("url" => 1);
-    $cond = array("host" => $domain, "date" => array('$gte' => new MongoDate(strtotime($fromDate)), '$lte' => new MongoDate(strtotime($toDate))));
-
+    $cond = array("date" => array('$gte' => new MongoDate(strtotime($fromDate)), '$lte' => new MongoDate(strtotime($toDate))));
+    
+    if(is_array($domain)) {
+      $cond['host'] = array('$in' => $domain);
+    } else {
+      $cond['host'] = $domain;
+    }
+    
     if($dealId) {
       $dealId = intval($dealId);
       $cond['d_id'] = $dealId;

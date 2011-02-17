@@ -10,8 +10,16 @@
   	</tr>
     <?php foreach($pData['data'] as $i => $data){ ?>
 			<tr>
-				<td height="44" align="left" class="first"><div class="martext"><strong><?php echo $data['title'] ?></strong><br />
-				<?php echo link_to($data['url'], '@get_analytics_content', array('query_string' => 'com=all&url='.$data['url'].'&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo.'&type=url_activities', 'class' => 'analytix-filter-link'));  ?></div></td>
+				<td height="44" align="left" class="first">
+				  <div class="martext">
+				    <strong><?php echo $data['title'] ?></strong><br />
+    				<?php if($pHostId && $pFrom && $pTo): ?>
+      				<?php echo link_to($data['url'], '@get_analytics_content', array('query_string' => 'com=all&url='.$data['url'].'&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo.'&type=url_activities', 'class' => 'analytix-filter-link'));  ?>
+      			<?php else: ?>
+      			  <?php echo $data['url'] ?>
+      			<?php endif; ?>
+  			  </div>
+  			</td>
 		    <td align="center"><?php echo $data['distribution'] ?>%</td>
 		    <td align="center" valign="middle"><?php echo $data['pos'] ?></td>
 		    <td align="center" valign="middle"><?php echo $data['contacts'] ?></td>

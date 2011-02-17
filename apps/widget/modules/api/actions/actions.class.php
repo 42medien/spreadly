@@ -17,6 +17,14 @@ class apiActions extends sfActions {
    */
   public function preExecute() {
     $request = $this->getRequest();
+    
+    $this->lType = $request->getParameter('type');
+    $this->lLikeDis = $request->getParameter('likedis');
+    $this->lTitle = $request->getParameter('title');
+    $this->lDescription = $request->getParameter('description');
+    $this->lPhoto = $request->getParameter('photo');
+    $this->lClickback = $request->getParameter('clickback', null);
+    $this->lTags = $request->getParameter('tags', null);
 
     $this->statictype = false;
     $this->status = 200;
@@ -43,7 +51,7 @@ class apiActions extends sfActions {
       $this->message = "NO_SERVICES_ERROR";
     }
 
-    $this->lDeal = DealTable::getActiveDealByHostAndUserId($this->lUrl, $this->getUser()->getUserId());
+    $this->lDeal = DealTable::getActiveDealByHostAndTagsAndUserId($this->lUrl, $this->lTags, $this->getUser()->getUserId());
 
     if ($this->lDeal && $this->success == true) {
       if($request->getParameter('coupon-accept-tod', null)){
@@ -55,15 +63,6 @@ class apiActions extends sfActions {
       	$this->success = false;
       }
     }
-
-
-    $this->lType = $request->getParameter('type');
-    $this->lLikeDis = $request->getParameter('likedis');
-    $this->lTitle = $request->getParameter('title');
-    $this->lDescription = $request->getParameter('description');
-    $this->lPhoto = $request->getParameter('photo');
-    $this->lClickback = $request->getParameter('clickback', null);
-    $this->lTags = $request->getParameter('tags', null);
   }
 
   /**

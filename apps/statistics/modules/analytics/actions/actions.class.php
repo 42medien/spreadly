@@ -45,8 +45,15 @@ class analyticsActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
+    $this->pActivityCount = MongoUtils::getTodaysActivityCountForDomainProfiles($this->pVerifiedDomains);
+    $this->pVerifiedDomains = $this->sortDomainProfilesByCount($this->pVerifiedDomains, $this->pActivityCount);
+    $domainUrls = array();
+    foreach ($this->pVerifiedDomains as $domain) {
+      $domainUrls[] = $domain->getUrl();
+    }
+    $this->pTopActivitiesData = MongoUtils::getTodaysTopActivitiesData($domainUrls);
   }
-
+  
 
   public function executeStatistics(sfWebRequest $request)
   {
@@ -69,6 +76,19 @@ class analyticsActions extends sfActions
     $lReturn['content'] =  $this->getPartial('analytics/'.$this->pType.'_content', array('pUrl'=> $this->pUrl ,'pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pData' => $lData));
 
 		return $this->renderText(json_encode($lReturn));
+  }
+  
+  private function sortDomainProfilesByCount($pDomainProfiles, $pCount) {
+    $lUnsorted = array();
+    foreach ($pDomainProfiles as $domain) {
+      $lUnsorted[$domain->getId()] = $domain;
+    }
+    
+    $lSorted = array();
+    foreach ($pCount as $id => $count) {
+      $lSorted[] = $lUnsorted[$id];
+    }
+    return $lSorted;
   }
 
 }

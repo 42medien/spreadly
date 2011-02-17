@@ -259,6 +259,10 @@ button.button span {
 
 a.button.header { float:right; }
 
+.data-tablebox th div {
+  font-weight: bold;
+}
+
 .content-error-box{clear:both; padding-left: 110px;}
 
 .error_list li {

@@ -61,7 +61,9 @@ class ChartUtils {
   // Sorting the data array by date
   public static function sortArrayByTotals($array, $limit=10) {
     uasort($array, "ChartUtils::sortByTotals");
-    $array = array_slice($array, 0, $limit);
+    if($limit) {
+      $array = array_slice($array, 0, $limit);      
+    }
     return $array;
   }
   

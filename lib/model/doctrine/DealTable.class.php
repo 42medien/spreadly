@@ -60,7 +60,7 @@ class DealTable extends Doctrine_Table
    * @param string $pUrl
    * @return Deal|false
    */
-  public static function getRunningByHost($pUrl) {
+  public static function getRunningByHost($pUrl, $pTags=null) {
     $host = parse_url($pUrl, PHP_URL_HOST);
     $col = MongoDbConnector::getInstance()->getCollection(sfConfig::get('app_mongodb_database_name'), "deals");
     $today = new MongoDate(time());
@@ -69,6 +69,13 @@ class DealTable extends Doctrine_Table
       "start_date" => array('$lte' => $today),
       "end_date" => array('$gte' => $today)
     );
+    
+    // added tags to the conditions
+    if ($pTags) {
+      $cond['$or'] = array(array('tags' => array('$exists' => false)), array('tags' => array('$in' => $pTags)));
+    } else {
+      $cond["tags"] = array('$exists' => false);
+    }
 
     $result = $col->find($cond)->limit(1)->sort(array("start_date" => -1));
 
@@ -88,15 +95,14 @@ class DealTable extends Doctrine_Table
    * @param string $pUrl
    * @return Deal|null
    */
-  public static function getActiveByHost($pUrl) {
-    $lDeal = self::getRunningByHost($pUrl);
+  public static function getActiveByHost($pUrl, $pTags=null) {
+    $lDeal = self::getRunningByHost($pUrl, $pTags);
     if ($lDeal && $lDeal->isActive()) {
       return $lDeal;
     }
 
     return null;
   }
-
 
   /**
    * returns a deal if there is no deal-activity on the host
@@ -109,6 +115,17 @@ class DealTable extends Doctrine_Table
   public static function getActiveDealByHostAndUserId($pUrl, $pUserId) {
     $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
     $lDeal = self::getActiveByHost($pUrl);
+
+    if ($lDeal && !YiidActivityTable::getByDealIdAndUserId($lDeal->getId(), $pUserId)) {
+      return $lDeal;
+    }
+
+    return false;
+  }
+
+  public static function getActiveDealByHostAndTagsAndUserId($pUrl, $pTags, $pUserId) {
+    $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
+    $lDeal = self::getActiveByHost($pUrl, $pTags);
 
     if ($lDeal && !YiidActivityTable::getByDealIdAndUserId($lDeal->getId(), $pUserId)) {
       return $lDeal;
