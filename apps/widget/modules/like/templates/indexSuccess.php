@@ -1,10 +1,18 @@
 <form action="<?php echo url_for('@save_like'); ?> " name="popup-like-form" id="popup-like-form" method="POST">
-<?php $lImages = $pYiidMeta->getImages();?>
+<?php
+$lImages = $pYiidMeta->getImages();
+if ($lImages && count($lImages) > 0) {
+  $lImage = $lImages[0];
+} else {
+  $lImage = "";
+}
+?>
 
-<input type="hidden" name="like[thumb]" id="like-img-value" value="<?php echo $lImages[0]; ?>" />
+<input type="hidden" name="like[thumb]" id="like-img-value" value="<?php echo $lImage; ?>" />
 <input type="hidden" name="like[title]" value="<?php echo $pYiidMeta->getTitle(); ?>" />
 <input type="hidden" name="like[descr]" value="<?php echo $pYiidMeta->getDescription(); ?>" />
 <input type="hidden" name="like[url]" value="<?php echo $pYiidMeta->getUrl(); ?>" />
+<input type="hidden" name="like[tags]" value="<?php echo $sf_request->getParameter('tags'); ?>" />
 
 <div class="whtboxtop">
 	<div class="rcor">
@@ -22,7 +30,7 @@
 	<div class="scrollable" id="myscroll">
 	   <!-- root element for the items -->
 	   <div class="items" id="scroll-meta-images">
-	   	<?php include_partial('like/meta_images_list', array('pImages' => $lImages)); ?>
+	   	 <?php include_partial('like/meta_images_list', array('pImages' => $lImages)); ?>
 	   </div>
 	</div>
 	<!-- "next page" action -->
@@ -38,7 +46,6 @@
 <div>
 	DESCRIPTION: <?php echo $pYiidMeta->getDescription(); ?>
 </div>
-
 
 <textarea rows="2" cols="2" id="area-like-comment" name="like[comment]"></textarea>
 <input type="submit" id="popup-send-like-button" value="Spread It" />

@@ -8,8 +8,7 @@
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class likeActions extends sfActions
-{
+class likeActions extends sfActions {
  /**
   * Executes index action
   *
@@ -60,6 +59,5 @@ class likeActions extends sfActions
     $lReturn['count'] = count($lImages);
     $lReturn['html'] = $this->getPartial('like/meta_images_list', array('pImages' => $lImages));
     return $this->renderText(json_encode($lReturn));
-
   }
 }
