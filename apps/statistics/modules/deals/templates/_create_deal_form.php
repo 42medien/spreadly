@@ -23,16 +23,6 @@
 	}
 ?>
 
-<?php if($lIsEdit) { ?>
-	<div class="content-header-box">
-		<div class="content-box-head">
-			<h3><?php echo __('+ Editing an Ad')?></h3>
-	  </div>
-	  <div class="content-box-body">
-	  	<?php echo __('Button wording, deal description, scheduling and quantity fields are pre-populated with your existing deal settings. Edits you make here will replace your existing deal. Once you submit your changes, your deal will stop running until it has been approved by our team.'); ?>
-	  </div>
-	</div>
-<?php } ?>
 
 <form action="" method="post" id="deal_form" name="deal_form">
 	<?php echo $pForm['deal']['id']->render();?>
@@ -51,10 +41,18 @@
 						<div class="newdeal clearfix">
             	<span class="alignleft deal-titlebc"><?php if($lIsEdit) { ?><?php echo __('Edit Deal')?><?php } else { ?><?php echo __('Create New Deal')?><?php } ?></span>
               <label id="websellist" class="alignleft">
+              <?php if($lIsEdit) { ?>
+              	<?php echo $lDefaultDeal['summary']; ?>
+              <?php } else { ?>
               	<?php echo $pForm['id']->render(array('class' => "custom-select"));?>
+              <?php } ?>
               </label>
             </div>
-            <p><?php echo __('Push your content into social networks through recommendations. Only one deal per domain at a time. Please allow 24 hours for reviewing new or changed deals.'); ?></p>
+            <?php if($lIsEdit) { ?>
+							<p><?php echo __('Button wording, deal description, scheduling and quantity fields are pre-populated with your existing deal settings. Edits you make here will replace your existing deal. Once you submit your changes, your deal will stop running until it has been approved by our team.'); ?></p>
+            <?php } else { ?>
+            	<p><?php echo __('Push your content into social networks through recommendations. Only one deal per domain at a time. Please allow 24 hours for reviewing new or changed deals.'); ?></p>
+            <?php }?>
           </div>
         </div>
 

@@ -70,6 +70,8 @@ var Deal = {
     debug.log('[Deal][showContent]');
     jQuery('#create-deal-content').empty();
     jQuery('#create-deal-content').append(pHtml);
+    Deal.initDropdown();
+    jQuery("input[type='checkbox']").custCheckBox();    
   },
   
   showStats: function(){
@@ -158,7 +160,10 @@ var DealForm = {
     jQuery('#deal_description').limitValue(80, '#description_counter');
   },
   
-  
+  /**
+   * binds the autocomplete to the categories field and inits the plugin
+   * @deprecated Wird vorerst rausgenommen, da tag-vorschlagsliste problematisch im Backend
+   */
   initAutocomplete: function() {
     debug.log('[CreateDealForm][initAutocomplete]'); 
     jQuery( "#deal_tags" ).bind( "keydown", function( event ) {
