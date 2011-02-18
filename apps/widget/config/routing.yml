@@ -1,5 +1,5 @@
 widget_like:
-  url:    /like
+  url:    /
   param:  { module: like, action: index }
 
 widget_likes:
