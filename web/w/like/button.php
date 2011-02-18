@@ -9,7 +9,6 @@
   <![endif]-->
   <style type="text/css">
   * { margin: 0; padding: 0; }
-
   a.button {
     cursor: pointer;
     display: block;
@@ -55,12 +54,12 @@
     background-position: 0 -500px;
   }
   div.text {
-    position: absolute; 
-    top: 0; 
+    position: absolute;
+    top: 0;
     font-family: Tahoma, Verdana, Arial, sans-serif;
-    line-height: 22px; 
+    line-height: 22px;
     color: #444;
-    font-size: 10px; 
+    font-size: 10px;
     left: 110px;
     white-space: nowrap;
   }
@@ -73,9 +72,7 @@
   }
   ul.icons li {
     float: left;
-    height: 30px;
-    width: 30px;
-    margin-right: 3px;    
+    margin-right: 3px;
   }
   ul.icons li.last {
     margin-right: 0px;
