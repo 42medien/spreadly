@@ -21,6 +21,7 @@
 	} else {
 		$lDefaultDeal =  $pForm->getEmbeddedForm('deal')->getDefaults();
 	}
+
 ?>
 
 
@@ -42,7 +43,9 @@
             	<span class="alignleft deal-titlebc"><?php if($lIsEdit) { ?><?php echo __('Edit Deal')?><?php } else { ?><?php echo __('Create New Deal')?><?php } ?></span>
               <label id="websellist" class="alignleft">
               <?php if($lIsEdit) { ?>
-              	<?php echo $lDefaultDeal['summary']; ?>
+								<select id="id" class="custom-select" name="id" style="display: none;">
+									<option value="<?php echo $pFirstDomain->getId(); ?>"><?php echo $pFirstDomain->getUrl(); ?></option>
+								</select>
               <?php } else { ?>
               	<?php echo $pForm['id']->render(array('class' => "custom-select"));?>
               <?php } ?>

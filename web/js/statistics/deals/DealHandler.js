@@ -70,8 +70,7 @@ var Deal = {
     debug.log('[Deal][showContent]');
     jQuery('#create-deal-content').empty();
     jQuery('#create-deal-content').append(pHtml);
-    Deal.initDropdown();
-    jQuery("input[type='checkbox']").custCheckBox();    
+    Deal.initDropdown();    
   },
   
   showStats: function(){
@@ -228,7 +227,6 @@ var DealForm = {
           Deal.showContent(pResponse.html);
           DealTable.update();
           DealForm.init();
-          Deal.initDropdown();
           jQuery("input[type='checkbox']").custCheckBox();
           OnLoadGrafic.hideGrafic();
         }
@@ -276,7 +274,6 @@ var DealForm = {
       success : function(pResponse) {
         Deal.showContent(pResponse.html);
         DealForm.init();
-        Deal.initDropdown();
         OnLoadGrafic.hideGrafic();
       }
     });

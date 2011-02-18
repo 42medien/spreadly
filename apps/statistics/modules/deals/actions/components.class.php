@@ -11,6 +11,7 @@ class dealsComponents extends sfComponents {
       $lDeal = DealTable::getInstance()->find($lDealId);
       $lDealForm = new DealForm($lDeal);
       $lFirstDomain = DomainProfileTable::getInstance()->find($lDeal->getDomainProfileId());
+      $this->pFirstDomain = $lFirstDomain;
     } else {
       $lDealForm = new DealForm();
 	    $lVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
