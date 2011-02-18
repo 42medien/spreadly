@@ -46,4 +46,4 @@ all:
       email: "noreply@yiid.com"
       fullname: "the yiid staff"
   sf_guard_plugin_success_signout_url: '@configurator'
-  sf_guard_plugin_success_signin_url:  '@dashboard'
+  sf_guard_plugin_success_signin_url:  '@analytics'
