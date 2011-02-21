@@ -143,7 +143,7 @@
                       </li>
                       <li class="clearfix">
                       	<div class="btnwording alignleft">
-                      		<strong class="singleline"><?php echo $pForm['deal']['start_date']->renderLabel();?></strong>
+                      		<strong><?php echo $pForm['deal']['start_date']->renderLabel();?></strong><span><?php echo __('One active deal per domain at a time!'); ?></span>
                       	</div>
                       	<label class="textfield-wht">
                       		<span>
@@ -155,7 +155,6 @@
 														<?php echo $pForm['deal']['end_date']->render(array("class" => "wd120"));?>
                       		</span>
                       	</label>
-                      	<span class="requirrow alignleft"><?php echo __('(One active deal per domain at a time!)'); ?></span>
                       	<div class="content-error-box clearfix"><?php echo $pForm['deal']['end_date']->renderError();?><?php echo $pForm['deal']['start_date']->renderError();?></div>
                       </li>
                       <li class="clearfix">
