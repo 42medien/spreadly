@@ -16,22 +16,6 @@ if (isset($_GET['url']) && !empty($_GET['url'])) {
 } else {
   $pUrl = urldecode($_SERVER['HTTP_REFERER']);
 }
-
-if (isset($_GET['type']) && !empty($_GET['type'])) {
-  $pType = $_GET['type'];
-} else {
-  $pType = "like";
-}
-if (isset($_GET['color']) && !empty($_GET['color'])) {
-  $lFontcolor = urldecode($_GET['color']);
-} else {
-  $lFontcolor = "#000000";
-}
-if (isset($_GET['short']) && !empty($_GET['short'])) {
-  $pFullShortVersion = true;
-} else {
-  $pFullShortVersion = false;
-}
 if (isset($_GET['social']) && !empty($_GET['social'])) {
   $pSocialFeatures = true;
 } else {
