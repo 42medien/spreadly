@@ -31,6 +31,7 @@
     <script type="text/javascript" src="/js/100_main/include/statistics-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
     <script type="text/javascript" src="/js/statistics/deals/DealHandler.js"></script>
     <script type="text/javascript" src="/js/100_main/global/307_EditInPlace.js"></script>
+    <script type="text/javascript" src="/js/statistics/configurator/ConfiguratorHandler.js"></script>
 
     <?php include_javascripts();?>
     <link rel="shortcut icon" href="/img/favicon.ico" />
@@ -57,7 +58,7 @@
 
       <!--Content end here -->
 			<div id="footer" class="nobg">
-   			<span>Copyright Yidd 2010</span>  |  <a href="#" title="Imprint">Imprint</a> |  <a href="#" title="TOS">TOS</a> |   <a href="#" title="Privacy Policy">Privacy Policy</a> |   <a href="mailto:info@yiid.com ">info@yiid.com </a></div>
+   			<span>Copyright Yiid 2010</span>  |  <a href="#" title="Imprint">Imprint</a> |  <a href="#" title="TOS">TOS</a> |   <a href="#" title="Privacy Policy">Privacy Policy</a> |   <a href="mailto:info@yiid.com ">info@yiid.com </a></div>
 			</div>
 		<script type="text/javascript">
 			// Custom Checkbox Function

@@ -74,7 +74,7 @@
 
       <div class="clearfix">
 		    <textarea id="your_code" class="left">
-		      <?php //include_partial('likebutton/widget_full') ?>
+		      <?php include_partial('configurator/widget_like') ?>
 		    </textarea>
 
         <div id="button_get_code_outer" class="left my_clip_button">

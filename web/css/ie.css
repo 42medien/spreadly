@@ -34,3 +34,6 @@
 *:first-child+html .stylestatus_box .ch-size li .radio-btn {top:0px;} 
 
 .spreadsel_box .checklist input {margin:-2px 4px 3px -3px; position:relative;}
+
+.grboxbot span{ font-size:0px; line-height:0px;  background:url(../img/botcorrb.png) right 0px no-repeat;}
+#footer { background:url(../img/footer-shed.png) center top no-repeat;}

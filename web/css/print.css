@@ -593,6 +593,22 @@ dealwidebox .graytitle { padding-bottom: 8px;}
 
 
 
+.contentbox {position:relative; z-index:1500055250;}
+.midcontent {position:relative; z-index:99898899998999;}
+.grboxbot {position:relative; z-index:55555;}
+
+
+.stylechoose_box {padding-top:32px;}
+.stylechoose_box .radiobtn_list {width:20px;}
+.stylechoose_box .radiobtn_list span {margin-bottom:18px;}
+.stylechoose_box .radiobtn_list label {display:block;}
+
+
+.stylechoose_box .status_list {width:120px; padding-bottom:12px;}
+.stylechoose_box .status_list li {padding-bottom:10px;}
+.stylechoose_box .status_list li.last {padding-bottom:0px;}
+.stylechoose_box .status_list .likeimg {padding:6px 0px 0px 3px;}
+.stylechoose_box .status_list .likeimg img {vertical-align:top;}
 
 
 

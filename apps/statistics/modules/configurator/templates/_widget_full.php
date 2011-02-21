@@ -1,0 +1,1 @@
+<iframe src="<?php echo sfConfig::get("app_settings_widget_host"); ?>/w/like/button.php?<?php echo 'url='.urlencode($pUrl).'&cult='.$pLang.'&social=1' ?>" style="overflow:hidden; width: <?php //echo $pWidth; ?>px; height: <?php //echo $pHeight; ?>px; padding: 3px 0;" frameborder="0" scrolling="no" marginheight="0" allowTransparency="true"></iframe>

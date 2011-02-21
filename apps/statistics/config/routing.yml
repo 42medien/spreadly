@@ -51,9 +51,9 @@ get_buttoncode:
   param: { module: likebutton, action: get_buttoncode}
 
 configurator:
-  url:  /likebutton/index
-  param: { module: likebutton, action: index}
-
+  url:  /configurator/index
+  param: { module: configurator, action: index}
+  
 analytics_overview:
   url:   analytics/index
   param: { module: analytics, action: index }
