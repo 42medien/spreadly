@@ -1,5 +1,5 @@
 /**
- * @combine statistics
+ * @nocombine statistics
  */
 
 var EditInPlace = {
@@ -113,8 +113,8 @@ var EditInPlace = {
     //take the current text inside of the elem to edit
     var lText = jQuery(EditInPlace.aElement).text();
     //make a new textfield and append the save-image to it
-    var lHtml = '<img src="/img/global/24x24/save.png" id="save-editin-place" />';
-    lHtml += '<input type="text" value="'+lText+'" id="editinplace_input" name="editinplace_input" />';
+    //var lHtml = '<img src="/img/global/24x24/save.png" id="save-editin-place" />';
+    var lHtml = '<label class="textfield-wht" id="editinplace-box"><span><input type="text" value="'+Utils.trim(lText)+'" id="editinplace_input" name="editinplace_input" class="wd100" /></span><img src="/img/global/24x24/save.png" id="save-editin-place" /></label>';
     //empty the edit-elem
     jQuery(EditInPlace.aElement).empty();
     // unbind the edit-effects

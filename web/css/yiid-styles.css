@@ -300,6 +300,10 @@ a.button.header { float:right; }
   width: 120px;
 }
 
+.wd100{
+  width: 100px;
+}
+
 /* css for timepicker */
 #ui-datepicker-div{ padding: 15px;}
 .ui-timepicker-div .ui-widget-header{ margin-bottom: 8px; }
@@ -315,3 +319,45 @@ a.button.header { float:right; }
 .commentlist dd { background:url(/img/comment-small-bg.png) left top no-repeat; width:481px; height:66px; margin-bottom:2px;}
 .commentlist dl { overflow: scroll; overflow-y: auto; overflow-x: hidden; height: 150px; }
 
+
+/*.edit-img{
+  background: url("/img/global/24x24/edit.png") no-repeat !important;
+  background-position: right;
+  display: block;
+}*/
+
+.data-tablebox #deal-table td{
+  font-weight: normal;
+  font-size: 12px;
+}
+
+td.editinplaceclick {
+    cursor: pointer;
+    margin-right: 0;
+    padding-right: 26px;
+}
+
+#editinplace-box{
+  margin-left: 20px;
+  width: 130px;
+}
+
+.datatablewide .data-tablebox #deal-table tr.approved td,.datatablewide .data-tablebox #deal-table tr.approved td.approved a{
+  color: #000;
+  text-decoration: none;
+}
+
+.datatablewide .data-tablebox #deal-table tr.submitted td,.datatablewide .data-tablebox #deal-table tr.submitted td.submitted a{
+  color: #eb9f07;
+  text-decoration: none;  
+}
+
+.datatablewide .data-tablebox #deal-table tr.denied td,.datatablewide .data-tablebox #deal-table tr.denied td a{
+  color: #fa0814;
+  text-decoration: none;  
+}
+
+.datatablewide .data-tablebox #deal-table tr.paused td,.datatablewide .data-tablebox #deal-table tr.paused td.paused a{
+  color: #868686;
+  text-decoration: none;
+}

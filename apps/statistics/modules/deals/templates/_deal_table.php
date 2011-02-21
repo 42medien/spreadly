@@ -1,7 +1,7 @@
 <div class="container_12">
 	<div class="datatablewide">
   	<div class="data-tablebox">
-    	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="deal-table">
   		<thead>
 				  <tr>
 				    <th width="66" height="32" align="left" valign="middle" class="first"><div><?php echo __('Status'); ?></div></th>
