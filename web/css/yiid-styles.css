@@ -34,7 +34,7 @@ ul#logos_big {  margin: 30px 0 40px 30px; }
     height: 75px;
     overflow: hidden;
     position: relative;
-    width: 99px;
+    width: 80px;
 }
 
 /*
@@ -58,21 +58,24 @@ ul#logos_big {  margin: 30px 0 40px 30px; }
   float:left;
 }
 
-
 .scrollable-content{
   width: 100px;
   text-align: center;
 }
 .slide-back-link{
-  background: transparent url("/img/global/24x24/back.png") no-repeat;
-  width: 24px;
-  height: 24px;
+  background: transparent url("/img/aerrow-left.gif") no-repeat;
+  width: 10px;
+  height: 10px;
+  cursor: pointer; /* hand-shaped cursor */
+  cursor: hand; /* for IE 5.x */
 }
 
 .slide-next-link{
-  background: transparent url("/img/global/24x24/next.png") no-repeat;
-  width: 24px;
-  height: 24px;
+  background: transparent url("/img/aerrow-right.gif") no-repeat;
+  width: 10px;
+  height: 10px;
+  cursor: pointer; /* hand-shaped cursor */
+  cursor: hand; /* for IE 5.x */
 }
 
 .left{
@@ -80,16 +83,15 @@ ul#logos_big {  margin: 30px 0 40px 30px; }
 }
 
 #popup-send-like-button{
-  width: 100px;
-  height: 71px;
+  width: 74px;
+  height: 26px;
   margin: 0;
   padding: 0;
   border: 0;
-  background: transparent url(/img/batman-submit.jpg) no-repeat center top;
+  background: transparent url(/img/like-button.jpg) no-repeat center top;
   text-indent: -1000em;
   cursor: pointer; /* hand-shaped cursor */
   cursor: hand; /* for IE 5.x */
-
 }
 
 .figuresbox dd.figuresmid-box{
@@ -190,29 +192,29 @@ input.graybtnwide {
 
 a.button,
 button.button {
-  float:left; 
-  background:url(/img/savel.png) 0px 0px no-repeat; 
-  padding-left:13px; 
+  float:left;
+  background:url(/img/savel.png) 0px 0px no-repeat;
+  padding-left:13px;
   cursor:pointer;
-  font-weight:bold; 
-  margin:0 1px; 
+  font-weight:bold;
+  margin:0 1px;
   text-decoration: none;
 }
 a.button span,
-button.button span { 
-  float:left; 
+button.button span {
+  float:left;
   background:url(/img/saver.png) right 0px no-repeat;
-  padding: 4px 18px 6px 5px; 
-  line-height:26px;  
-  cursor:pointer; 
-  font-size:16px; 
-  color:#000;  
+  padding: 4px 18px 6px 5px;
+  line-height:26px;
+  cursor:pointer;
+  font-size:16px;
+  color:#000;
   text-decoration: none;
 }
 a.button:hover, a.button.active,
 button.button:hover, button.button.active {
-  background:url(/img/savel-hov.png) -0px 0px no-repeat; 
-  color:#fff; 
+  background:url(/img/savel-hov.png) -0px 0px no-repeat;
+  color:#fff;
   text-decoration:none;
 }
 a.button:hover span, a.button.active span,
@@ -248,11 +250,11 @@ button.button span {
   top: 11px;
 }
 
-#topnavigation li div.welcome_user{ 
-  color:#588199; 
-  background:none; 
-  margin-right:10px; 
-  margin-left:0px; 
+#topnavigation li div.welcome_user{
+  color:#588199;
+  background:none;
+  margin-right:10px;
+  margin-left:0px;
   line-height:26px;
   padding: 2px 6px 2px 2px;
 }
@@ -269,7 +271,7 @@ a.button.header { float:right; }
     color: #D60000;
  font-size: 10px;
     font-weight: bold;
-    line-height: 12px;    
+    line-height: 12px;
 }
 
 #radio-single-quantity, #radio-single-quantity-unltd{
@@ -349,15 +351,19 @@ td.editinplaceclick {
 
 .datatablewide .data-tablebox #deal-table tr.submitted td,.datatablewide .data-tablebox #deal-table tr.submitted td.submitted a{
   color: #eb9f07;
-  text-decoration: none;  
+  text-decoration: none;
 }
 
 .datatablewide .data-tablebox #deal-table tr.denied td,.datatablewide .data-tablebox #deal-table tr.denied td a{
   color: #fa0814;
-  text-decoration: none;  
+  text-decoration: none;
 }
 
 .datatablewide .data-tablebox #deal-table tr.paused td,.datatablewide .data-tablebox #deal-table tr.paused td.paused a{
   color: #868686;
   text-decoration: none;
+}
+
+.profilebox .subdetail_img, .subdetail_img .gallery_cantrol {
+  text-align: left;
 }
