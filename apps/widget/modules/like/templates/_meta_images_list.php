@@ -4,14 +4,14 @@ if (count($pImages) > 0) {
   foreach($pImages as $lImage) {
 ?>
 	<div>
-		<img id="meta-img-<?php echo $i;?>" src="<?php echo $lImage; ?>" width="200" height="100"/>
+		<img id="meta-img-<?php echo $i;?>" src="<?php echo $lImage; ?>" width="80" />
 	</div>
 <?php
     $i++;
   }
 } else {
 ?>
-	<div id="no-meta-img" style="width:200px; height: 100px; border: 1px solid red;">
-		<?php echo __('NO IMAGE'); ?>
+	<div id="no-meta-img" style="width:80px;">
+		<?php echo __('No Image'); ?>
 	</div>
 <?php } ?>
