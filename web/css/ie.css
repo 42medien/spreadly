@@ -20,8 +20,17 @@
 
 #paging-sel .jgd-dropdown dd ul a{_height:16px; }
 
+*+html .btnformlist li { padding-bottom:1px;}
+
 
 .resetblock a:hover span, .resetblock a.active span{ _background:url(../img/saver-hov.gif) right 0px no-repeat !important; }
 
 /* End Forms
 --------------------------------------------------------------------------------------------------------*/
+
+
+
+.stylestatus_box .ch-size li .radio-btn {_top:0px;}
+*:first-child+html .stylestatus_box .ch-size li .radio-btn {top:0px;} 
+
+.spreadsel_box .checklist input {margin:-2px 4px 3px -3px; position:relative;}

@@ -24,6 +24,8 @@ a img {border: 0;}
 :focus{ outline:0px;}
 
 
+
+#wrapper { width:974px; margin:0 auto;}
 /* End General
 --------------------------------------------------------------------------------------------------------*/
 
@@ -175,6 +177,20 @@ dl.trendingbox dd{ padding-bottom:11px;}
 div.add{width:224px;}
 div.add a{ position:relative; top:-4px;}
 .spactsrow{ margin-top:-3px;}
+
+
+#mainNavigation { list-style:none; padding-right:14px;}
+#mainNavigation li { float:left; } 
+#mainNavigation li a{  text-indent:-9999em; display:block; height:59px; }
+#mainNavigation li a.home{ width:86px; background-position: 0px 0px;}
+
+
+.buttoncode_list {margin-left:8px; padding:4px 0px 0px 0px; width:580px;}
+.buttoncode_list dl {padding-top:13px;}
+.buttoncode_list .allweb-btn {width:418px;}
+.buttoncode_list .allweb-btn li {text-align:center; width:60px; padding-right:22px;}
+.buttoncode_list .allweb-btn li.removerpad {padding-right:0px;}
+.buttoncode_list .otherweb-box {width:152px; float:right; background:none;}
 
 
 
@@ -461,6 +477,140 @@ a.graybtnwide:hover { text-decoration:none; color:#000;}
 dealwidebox .graytitle { padding-bottom: 8px;}
 .onlyone{ line-height:28px; padding-right:6px;}
 
-#footer{ text-align:center; padding:15px; border-bottom:1px #000 solid; margin-top:10px;}
+#footer{display:none;}
 .feedback{ display:none;}  
 #header{ padding-bottom:10px; margin-bottom:10px; border-bottom:solid 1px #000;}
+
+
+
+/* Spread Page Print Css
+--------------------------------------------------------------------------------------------------------*/
+
+
+
+.sub_title {font-size:16px; color:#588199; line-height:16px;}
+
+.help_content {width:281px; padding:6px 0px 20px 50px; }
+.help_content .title {font-size:14px; line-height:14px;  margin-bottom:12px;} 
+.help_content p { padding-bottom:0px; margin-bottom:-2px;}
+
+.allweb-btn{ width:565px;  padding-left:10px; } 
+.allweb-btn li{ float:left; padding:0 29px 0px 0; text-align:center; width:51px;}
+.allweb-btn li.removerpad{ padding-right:0px;}
+.allweb-btn li span{ display:block; padding:7px 0;}
+.allweb-btn li span a, .otherweb-box ul li span a{ color:#000; text-decoration:none;}
+.allweb-btn li span a:hover, .otherweb-box ul li span a:hover{color:#EB2374; text-decoration:none;} 
+
+.grboxmid{ padding-left:9px; }
+.grboxmid-content{   padding-right:7px;}
+.graybox{ padding:4px 7px 5px 8px;}
+
+.textareablock { width:329px; padding:12px 10px;  display:block; }
+.textareablock textarea{ overflow:auto; font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:16px; color:#000; height:106px;  border:0px;width:100%;}
+.copycodebox{ padding-top:10px;}
+.copycodebox a.graybtn{ margin-right:3px; margin-left:-3px;}
+.optionltext{ display:inline-block; line-height:34px; padding-left:2px;}
+
+
+.stylestatus_box {padding:8px 0px 0px 8px; width:252px;}
+.stylestatus_box .innerloginbox {padding-bottom:0px;}
+.stylestatus_box .sub_title {margin-bottom:15px;}
+.stylestatus_box .ch-size li {width:80%;}
+.stylestatus_box .wd183 {width:183px;}
+
+.stylestatus_box .like_btn { display:block; padding-left:5px;}
+.stylestatus_box .like_btn span { float:left; display:block; height:22px; line-height:22px; color:#782a4f; width:50px; padding-left:6px;}
+.stylestatus_box .innerloginbox {background:none;}
+.stylestatus_box .ch-size {padding:32px 0px 8px 0px;}
+.stylestatus_box .ch-size li {padding-bottom:11px;}
+.stylestatus_box .ch-size li.last {padding-bottom:5px;}
+.stylestatus_box .ch-size li .radio-btn {top:4px;}
+
+
+.spread_profile {padding-left:4px;}
+.spread_profile .spread {padding-top:3px; position:relative; padding-right:22px;}
+.spread_profile .spread span {  left:24px; top:28px; position:absolute; width:28px; height:15px;}
+.spread_profile .likebtn {padding-top:4px; margin-right:3px; margin-left:7px;}
+.spread_profile .comment_label {margin-top:3px; margin-right:6px;}
+
+.comment_label {text-align:center;  width:37px; height:22px; line-height:22px; display:block; float:left; padding-left:3px; font-size:10px;}
+
+.grabcode_box {width:350px; padding:8px 0px 0px 0px;}
+.grabcode_box .sub_title {padding:0px 0px 0px 0px; margin-bottom:15px;}
+.grabcode_box .codebox {padding-left:0px; width:auto; }
+.grabcode_box .textareablock { width:326px; padding:8px 12px 8px;}
+.grabcode_box .textareablock  textarea {height:146px;}
+
+.step2_content {padding-top:10px; }
+.step2_content h3.title {padding-bottom:6px;}
+
+.botspace {margin-bottom:3px;}
+
+.ch-size li.select_label {padding-left:0px; padding-bottom:0px;}
+.ch-size li.select_label .tag {font-size:12px; line-height:12px; color:#000; padding-left:2px;}
+.select_label #http-sel .jgd-dropdown dt a { height:26px; line-height:26px; text-align:center; width:115px;}
+.select_label #http-sel .jgd-dropdown dd ul {width:120px;}
+.select_label #http-sel .jgd-dropdown dd ul li {padding-left:0px; width:auto;}
+
+.spreadbox {padding:12px 11px 0px 11px;}
+.spreadsel_box .rcor {height:40px;}
+
+.comment_box {padding-bottom:4px;}
+.comment_box .btn {padding:9px 0px 8px 27px; float:left;}
+.comment_box .comment_post textarea { padding:5px; font-size:11px; height:36px; font-family:Arial, Helvetica, sans-serif; width:357px;}
+
+.spreadsel_box .checklist {width:60%;}
+.spreadsel_box .checklist {padding:0px 0px 0px 6px;}
+.spreadsel_box .checklist label {width:19px; vertical-align:middle; display:inline-block; position:relative; top:-2px;}
+.spreadsel_box .checklist li {float:left; padding-top:10px; margin-right:16px;}
+.spreadsel_box .comment {text-align:right; font-size:11px; line-height:12px; padding:8px 4px 0px 0px;}
+
+.profilebox .proimg {width:96px; text-align:right;}
+.profilebox .prodetail {width:382px; padding-bottom:6px;}
+.profilebox .prodetail h3 {font-size:11px; line-height:12px;  font-weight:bold;}
+.profilebox .prodetail p {line-height:12px; font-size:11px; padding-bottom:8px;}
+
+.profilebox .subdetail_img {width:86px; text-align:center;}
+.profilebox .subdetail_img img {vertical-align:top;}
+.subdetail_img .gallery_cantrol {text-align:center; padding-top:1px; line-height:10px; font-size:11px;}
+.subdetail_img .gallery_cantrol a {margin-right:4px;}
+.subdetail_img .gallery_cantrol a img {vertical-align:middle;}
+
+.profilebox .sub_detail {width:70%;}
+.profilebox .sub_detail h4 {font-size:11px; line-height:12px; color:#375d81; font-weight:normal;}
+.profilebox .sub_detail p {padding-bottom:6px;}
+.profilebox .sub_detail p.last {padding:0px;}
+.profilebox .status_detail {font-size:10px; padding-top:2px; line-height:12px; padding-left:12px;}
+.profilebox .status_detail img {position:relative; vertical-align:middle;}
+.profilebox .status_detail a {margin:0px 0px; font-size:11px;}
+.profilebox .status_detail a:hover {text-decoration:none;}
+
+
+
+.easy-tagline{ padding:61px 0 0 128px; }
+.easy-tagline img{ vertical-align:top;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
