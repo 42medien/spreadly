@@ -73,7 +73,6 @@ var DynStyleCode = {
     debug.log("[DynStyleCode][init]");     
     DynStyleCode.aClipFlashPath = Configurator.aClipFlashPath;
     ZeroClipboard.setMoviePath(DynStyleCode.aClipFlashPath);
-    debug.log(DynStyleCode.aClipFlashPath);    
     DynStyleCode.initClipboard();  
   },    
     
@@ -118,16 +117,10 @@ var DynStyleCode = {
     //if the version is greater than 10, show the button and add the ctc-functionality
     if(lPlayerVersion.major >= 10) {
       var lClip = new ZeroClipboard.Client();
-      debug.log(lClip);
       lClip.addEventListener('mouseOver', function(client){
         debug.log('hmpf');
         lClip.setText(jQuery('#your_code').val());      
       });
-      /*
-      lClip.addEventListener('complete', function(client, text) {
-        jQuery('#button_get_code_outer').animate({"background-color": "#aaa"}, 2000);
-        //alert('done');
-      });*/
       lClip.setHandCursor( true );
       lClip.setCSSEffects( true );
       lClip.glue( 'd_clip_button', 'd_clip_container');
@@ -136,7 +129,6 @@ var DynStyleCode = {
       jQuery('#button_get_code_outer').hide();
     }
     jQuery('#d_clip_container').live('click', function() {
-      //DynStyleCode.initClipboard();
       return false;
     });    
   }  
