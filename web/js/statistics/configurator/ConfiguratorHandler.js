@@ -46,6 +46,10 @@ var Configurator = {
           DynStyleForm.init();
           Configurator.initFormFx();  
           DynStyleCode.init();
+          jQuery('#likebutton_url').toggleValue();  
+          if (typeof(document.likebuttonform) !=  "undefined"){
+            document.likebuttonform.reset();
+          }          
         }
       });
       return false;
@@ -218,7 +222,7 @@ var DynStyleForm = {
       lTimeout = setTimeout(function() {
         DynStyleCode.get();
         DynStyleWidgets.update();
-      }, 500);
+      }, 300);
     });    
   } 
 };

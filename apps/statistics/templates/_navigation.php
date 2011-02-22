@@ -18,7 +18,7 @@
       <li><a href="<?php echo url_for('@deals'); ?>" title="Deals"<?php if($module=='deals') { echo 'class="active"';} ?>><span><?php echo __('Deals'); ?></span></a></li>
       <li><a href="<?php echo url_for('domain_profiles/index'); ?>" title="Domains" <?php if($module=='domain_profiles') { echo 'class="active"';} ?>><span><?php echo __('Domains'); ?></span></a></li>
     <?php } ?>
-    <li class="last"><a href="<?php echo url_for('@configurator'); ?>" title="Buttons" <?php if($module=='likebutton' && $action=='index') { echo 'class="active"';} ?>><span><?php echo __('Buttons'); ?></span></a></li>
+    <li class="last"><a href="<?php echo url_for('@configurator'); ?>" title="Buttons" <?php if($module=='configurator' && $action=='index') { echo 'class="active"';} ?>><span><?php echo __('Buttons'); ?></span></a></li>
   </ul>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
