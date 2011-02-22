@@ -1,3 +1,4 @@
+<?php if(count($pDeals) > 0) { ?>
 <div class="container_12">
 	<div class="datatablewide">
   	<div class="data-tablebox">
@@ -23,7 +24,7 @@
 			    <?php } else { ?>
 			      <tr id="no-claim">
 			        <td>&nbsp;</td>
-			        <td colspan="5">
+			        <td colspan="8">
 			          <h3><?php echo __('No Deals');?></h3>
 			        </td>
 			      </tr>
@@ -33,3 +34,4 @@
 		</div>
 	</div>
 </div>
+<?php } ?>

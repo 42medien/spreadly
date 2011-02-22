@@ -5,7 +5,7 @@
 				<div class="grboxmid-content">
 					<div class="graybox clearfix">
 						<div class="alignleft buttoncode_list">
-							<h3 class="sub_title">Step 1: Choose Type of Site</h3>
+							<h3 class="sub_title"><?php echo __("Step 1: Choose Type of Site"); ?></h3>
 							<dl>
 								<dd class="allweb-btn alignleft">
 									<ul>

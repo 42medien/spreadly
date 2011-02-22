@@ -16,7 +16,7 @@
     <?php $action = $sf_context->getActionName(); ?>
 
 
-    <li><a href="<?php echo url_for('landing/index'); ?>" title="Landing" <?php if($module=='configurator' && $action=='index') { echo 'class="active"';} ?>><span><?php echo __('Home'); ?></span></a></li>
+    <li><a href="<?php echo url_for('landing/index'); ?>" title="Landing" <?php if($module=='landing' && $action=='index') { echo 'class="active"';} ?>><span><?php echo __('Home'); ?></span></a></li>
     <li><a href="<?php echo url_for('@configurator'); ?>" title="Buttons" <?php if($module=='configurator' && $action=='index') { echo 'class="active"';} ?>><span><?php echo __('Buttons'); ?></span></a></li>
     <!-- li><a href="<?php echo url_for('@dashboard'); ?>" title="Dashboard" <?php if($module=='likebutton' && $action=='dashboard') { echo 'class="active"';} ?>><span><?php echo __('Dashboard'); ?></span></a></li-->
     <li><a href="<?php echo url_for('@analytics_overview'); ?>" title="Analytics" <?php if($module=='analytics' && ($action=='index' || $action=='statistics')) { echo 'class="active"';} ?>><span><?php echo __('Analytics'); ?></span></a></li>

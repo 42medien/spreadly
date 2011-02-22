@@ -18,10 +18,6 @@ webmasters:
   url:   /webmasters
   param: { module: likebutton, action: webmasters }
 
-like_get_code:
-  url:   /likebutton/get_code
-  param: { module: likebutton, action: get_code }
-
 register:
   url: /register
   param: { module: auth, action: register }
@@ -47,8 +43,8 @@ sf_guard_register:
   param: { module: sfApply, action: apply }
 
 get_buttoncode:
-  url:  /likebutton/get_buttoncode/*
-  param: { module: likebutton, action: get_buttoncode}
+  url:  /configurator/get_buttoncode/*
+  param: { module: configurator, action: get_buttoncode}
 
 configurator:
   url:  /configurator
@@ -124,7 +120,7 @@ oexchange:
 # default rules
 homepage:
   url:   /
-  param: { module: likebutton, action: index }
+  param: { module: landing, action: index }
 
 default:
   url:   /:module/:action/*

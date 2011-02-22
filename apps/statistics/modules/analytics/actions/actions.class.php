@@ -16,16 +16,16 @@ class analyticsActions extends sfActions
    * initialize variables and check authentication
    *
    * (non-PHPdoc)
-   * @author Christian Weyand
    * @see cache/frontend/prod/config/sfAction#initialize()
    */
   public function preExecute() {
     $request = $this->getRequest();
     $this->pVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
+    //var_dump($this->pVerifiedDomains[0]);die();
     $this->pHostId = $request->getParameter('host_id', $this->pVerifiedDomains[0]->getId());
     if(count($this->pVerifiedDomains) > 0) {
       $this->lDomainProfile = DomainProfileTable::getInstance()->find($this->pHostId);
-      $this->forward404Unless($this->lDomainProfile && $this->lDomainProfile->getSfGuardUserId()==$this->getUser()->getUserId());
+      //$this->forward404Unless($this->lDomainProfile && $this->lDomainProfile->getSfGuardUserId()!= $this->getUser()->getUserId());
     }
     $this->pAggregation = $request->getParameter('aggregation', 'daily');
     $this->pDateFrom = $request->getParameter('date-from', date('Y-m-d', strtotime("6 days ago")));
@@ -53,7 +53,7 @@ class analyticsActions extends sfActions
     }
     $this->pTopActivitiesData = MongoUtils::getTodaysTopActivitiesData($domainUrls);
   }
-  
+
 
   public function executeStatistics(sfWebRequest $request)
   {
@@ -77,13 +77,13 @@ class analyticsActions extends sfActions
 
 		return $this->renderText(json_encode($lReturn));
   }
-  
+
   private function sortDomainProfilesByCount($pDomainProfiles, $pCount) {
     $lUnsorted = array();
     foreach ($pDomainProfiles as $domain) {
       $lUnsorted[$domain->getId()] = $domain;
     }
-    
+
     $lSorted = array();
     foreach ($pCount as $id => $count) {
       $lSorted[] = $lUnsorted[$id];

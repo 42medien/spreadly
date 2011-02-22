@@ -46,7 +46,7 @@
 											</div>
 										</div>
 										<div class="select_label">
-											<span class="tag">Choose Language (for PopUp):</span>
+											<span class="tag"><?php echo __("Choose Language (for PopUp):"); ?></span>
 											<label id="http-sel">
 									      <select name="likebutton[l]" id="likebutton_l" class="custom-select">
 									        <option value="de" selected="selected"><?php echo __('SELECT_LANGUAGE_DE', null, 'configurator'); ?></option>
@@ -59,7 +59,7 @@
 								</div>
 							</div>
 							<div class="alignleft grabcode_box">
-								<h3 class="sub_title">Step 3: Grab Your Code</h3>
+								<h3 class="sub_title"><?php echo __('Step 3: Grab Your Code'); ?></h3>
 								<div class="textariabox">
 									<div class="textaria_top"><span>&nbsp;</span></div>
 									<div class="textaria_middle">
@@ -70,7 +70,7 @@
 										</div>
 									</div>
 									<div class="textaria_bot"><span>&nbsp;</span></div>
-									<div class="copycodebox clearfix"> <a href="#" title="Copy code" class="graybtn alignleft" id="d_clip_container" style="position: relative;"><span id="d_clip_button">Copy code</span></a><span class="optionltext">Optional: register to get your statistics, it's free!</span> </div>
+									<div class="copycodebox clearfix"> <a href="#" title="Copy code" class="graybtn alignleft" id="d_clip_container" style="position: relative;"><span id="d_clip_button">Copy code</span></a><?php if(!$sf_user->isAuthenticated()){?><span class="optionltext"><?php echo link_to(__("Optional: register  to get your statistics, it's free!"), '@sf_guard_signin'); ?></span><?php } ?> </div>
 								</div>
 							</div>
 						</div>
