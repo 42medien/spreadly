@@ -26,7 +26,11 @@ class configuratorActions extends sfActions
     $lServiceId = $request->getParameter('service', null);
 
     $lService = null;
-    if($lServiceId) {
+    if($lServiceId == 'static') {
+    	$lService = new SupportedServices();
+    	$lService->setName('static');
+    	$lService->setSlug('static');
+    } else if($lServiceId && $lServiceId != 'static') {
       $lService = SupportedServicesTable::getInstance()->find($lServiceId);
     }
 
@@ -86,9 +90,9 @@ class configuratorActions extends sfActions
     if(isset($lParams['wt']) && $lParams['wt'] == 'stand_social'){
     	$lSocial = 1;
     }
+  	$lService = (isset($lParams['service']))?$lParams['service']:null;
 
-
-   	$lReturn['iframe'] = $this->getPartial('configurator/preview_widgets', array('pUrl' => $lUrl, 'pLang' => $lParams['l'], 'pSocial' => $lSocial));
+   	$lReturn['iframe'] = $this->getPartial('configurator/preview_widgets', array('pUrl' => $lUrl, 'pLang' => $lParams['l'], 'pSocial' => $lSocial, 'pService' => $lService));
     return $this->renderText(json_encode($lReturn));
   }
 }

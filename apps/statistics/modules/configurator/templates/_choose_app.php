@@ -27,7 +27,7 @@
 										<li>
 											<a href="/configurator/get_choose_style" class="config-app-link"><img src="/img/otherwebsite-icon.png" width="51" height="51" alt="Other websites" title="Other websites" /></a> <span><a href="/configurator/get_choose_style" title="Other websites" class="config-app-link">Other websites</a></span>
 										</li>
-										<li><a href="/configurator/get_choose_email_signatures" class="config-app-link"><img src="/img/email-msgicon.png" width="51" height="51" alt="Email &amp; Signatures" title="Email &amp; Signatures" /></a> <span><a href="/likebutton/get_choose_email_signatures" title="Email &amp; Signatures">Email &amp; Signatures</a></span></li>
+										<li><a href="/configurator/get_choose_style?service=static" class="config-app-link"><img src="/img/email-msgicon.png" width="51" height="51" alt="Email &amp; Signatures" title="Email &amp; Signatures" /></a> <span><a href="/configurator/get_choose_style?service=static" class="config-app-link" title="Email &amp; Signatures">Email &amp; Signatures</a></span></li>
 									</ul>
 								</dd>
 							</dl>
