@@ -118,7 +118,6 @@ var DynStyleCode = {
     if(lPlayerVersion.major >= 10) {
       var lClip = new ZeroClipboard.Client();
       lClip.addEventListener('mouseOver', function(client){
-        debug.log('hmpf');
         lClip.setText(jQuery('#your_code').val());      
       });
       lClip.setHandCursor( true );
@@ -126,7 +125,7 @@ var DynStyleCode = {
       lClip.glue( 'd_clip_button', 'd_clip_container');
     } else {
       //if not right flash version: hide the button
-      jQuery('#button_get_code_outer').hide();
+      jQuery('#d_clip_container').hide();
     }
     jQuery('#d_clip_container').live('click', function() {
       return false;
