@@ -7,13 +7,12 @@ var Configurator = {
   aCulture: "",  
   aClipFlashPath: "",    
   
-  init: function(pCulture, pClipFlashPath) {
+  init: function(pClipFlashPath) {
     debug.log('[Configurator][init]');
-    Configurator.aCulture = pCulture;
     Configurator.aClipFlashPath = pClipFlashPath;    
     Configurator.chooseApp();
-    DynStyleCode.init();  
-    DynStyleWidgets.init();    
+    //DynStyleCode.init();  
+    //DynStyleWidgets.init();    
   },
   
   initFormFx: function() {
@@ -46,6 +45,7 @@ var Configurator = {
           DynStyleWidgets.init();
           DynStyleForm.init();
           Configurator.initFormFx();  
+          DynStyleCode.init();
         }
       });
       return false;
@@ -111,13 +111,16 @@ var DynStyleCode = {
    */
   initClipboard: function() {
     debug.log("[DynStyleCode][initClipboard]");   
+    
     //get the users flash-version
     var lPlayerVersion = swfobject.getFlashPlayerVersion();
     //jQuery.fx.off = true;
     //if the version is greater than 10, show the button and add the ctc-functionality
     if(lPlayerVersion.major >= 10) {
       var lClip = new ZeroClipboard.Client();
+      debug.log(lClip);
       lClip.addEventListener('mouseOver', function(client){
+        debug.log('hmpf');
         lClip.setText(jQuery('#your_code').val());      
       });
       /*
@@ -125,13 +128,17 @@ var DynStyleCode = {
         jQuery('#button_get_code_outer').animate({"background-color": "#aaa"}, 2000);
         //alert('done');
       });*/
-      //lClip.setCSSEffects( true )
-      //lClip.setHandCursor( true );
-      lClip.glue('button_get_code_outer');
+      lClip.setHandCursor( true );
+      lClip.setCSSEffects( true );
+      lClip.glue( 'd_clip_button', 'd_clip_container');
     } else {
       //if not right flash version: hide the button
       jQuery('#button_get_code_outer').hide();
     }
+    jQuery('#d_clip_container').live('click', function() {
+      //DynStyleCode.initClipboard();
+      return false;
+    });    
   }  
 };
 

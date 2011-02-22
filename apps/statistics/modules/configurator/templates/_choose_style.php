@@ -68,7 +68,7 @@
 										</div>
 									</div>
 									<div class="textaria_bot"><span>&nbsp;</span></div>
-									<div class="copycodebox clearfix"> <a href="#" title="Copy code" class="graybtn alignleft"><span>Copy code</span></a><span class="optionltext">Optional: register to get your statistics, it's free!</span> </div>
+									<div class="copycodebox clearfix"> <a href="#" title="Copy code" class="graybtn alignleft" id="d_clip_container" style="position: relative;"><span id="d_clip_button">Copy code</span></a><span class="optionltext">Optional: register to get your statistics, it's free!</span> </div>
 								</div>
 							</div>
 						</div>

@@ -375,3 +375,9 @@ td.editinplaceclick {
 #service_no_url{
   color: #bbbbbb;
 }
+
+#d_clip_button.active { color: #000; }
+
+#d_clip_button {
+  cursor: default;
+}
