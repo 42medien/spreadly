@@ -4,6 +4,9 @@
 index:
   is_secure: false
   
+configurator:
+  is_secure: false
+  
 get_choose_style:
   is_secure: false
   
