@@ -7,8 +7,8 @@ domain_profiles:
   param: { module: domain_profiles, action: index }
 
 dashboard:
-  url: /likebutton/dashboard
-  param: { module: likebutton, action: dashboard }
+  url: /dashboard
+  param: { module: dashboard, action: index }
 
 update_language:
   url:   /updateLanguage/*
