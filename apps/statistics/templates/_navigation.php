@@ -4,8 +4,8 @@
   	  <div class="welcome_user alignleft"><?php echo __('Hello').' '.$sf_user->getUsername(); ?></div>
   	  <?php echo link_to(__('Logout'), '@sf_guard_signout', array("class" => "alignleft logout")); ?>
   	<?php else: ?>
-  	  <?php echo link_to(__('Login'), '@sf_guard_signin'); ?>
-      <?php echo __('or'); ?> <?php echo link_to(__('Register'), '@sf_guard_register'); ?>
+  	  <?php echo link_to(__('Login'), '@sf_guard_signin', array("rel" => "facebox")); ?>
+      <?php echo __('or'); ?> <?php echo link_to(__('Register'), '@sf_guard_register', array("rel" => "facebox")); ?>
   	<?php endif; ?>
     <a href="<?php echo url_for('@update_language?lang=en'); ?>" class="alignright"><img src="/img/uk-flag-icon.png" width="25" height="26" alt="UK" title="UK" /></a>
     <a href="<?php echo url_for('@update_language?lang=de'); ?>" class="alignright"><img src="/img/germany-flag.png" width="25" height="26" alt="Deutsch" title="Deutsch" /></a>
