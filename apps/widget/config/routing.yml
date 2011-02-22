@@ -2,6 +2,11 @@ widget_like:
   url:    /
   param:  { module: like, action: index }
 
+
+widget_like_full:
+  url:    /like
+  param:  { module: likes, action: index }
+
 widget_likes:
   url:    /likes
   param:  { module: likes, action: index }
