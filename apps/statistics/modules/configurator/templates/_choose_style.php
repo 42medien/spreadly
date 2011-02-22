@@ -19,14 +19,29 @@
         					<?php } ?>
 
 										<fieldset class="group">
+										<?php if (!$pService) {?>
 											<div class="clearfix">
-											<label class="textfield"><span>
-												<input type="text" class="wd183" name="likebutton[url]" id="likebutton_url" value="" />
-												</span>
-											</label>
-										</div>
-										<div class="stylechoose_box clearfix" id="preview_widgets">
-											<?php //include_partial('configurator/preview_widgets'); ?>
+												<label class="textfield"><span>
+													<input type="text" class="wd183" name="likebutton[url]" id="likebutton_url" value="" />
+													</span>
+												</label>
+											</div>
+										<?php } else { ?>
+											<div class="clearfix">
+												<label class="textfield"><span>
+													<input type="text" class="wd183" name="service_no_url" id="service_no_url" value="<?php echo __('Your '.$pService->getName().' Permalink'); ?>" readonly/>
+													</span>
+												</label>
+											</div>
+										<?php } ?>
+										<div class="stylechoose_box clearfix">
+											<div class="group radiobtn_list alignleft">
+												<label for="radio1">&nbsp;</label><input id="radio1" type="radio" name="likebutton[wt]" value="short" class="widget-radio" <?php if(!isset($pSocial) || $pSocial == 0){ ?>checked="checked"<?php } ?>/>
+												<label for="radio2">&nbsp;</label><input id="radio2" type="radio" name="likebutton[wt]" value="stand_social" class="widget-radio" <?php if(isset($pSocial) && $pSocial == 1){ ?>checked="checked"<?php } ?>/>
+											</div>
+											<div class="status_list alignleft" id="preview_widgets">
+												<?php //include_partial('configurator/preview_widgets'); ?>
+											</div>
 										</div>
 										<div class="select_label">
 											<span class="tag">Choose Language (for PopUp):</span>

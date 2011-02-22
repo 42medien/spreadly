@@ -160,14 +160,6 @@ var DynStyleWidgets = {
     jQuery('#preview_widgets').empty();
     //and append the new one
     jQuery('#preview_widgets').append(pResponse.iframe);  
-    
-    //Configurator.initFormFx();
-    jQuery("input[type='radio']").custCheckBox({
-      callback: function() {
-        DynStyleCode.get();
-        DynStyleWidgets.update();
-      }
-    });
   },
   
   /**

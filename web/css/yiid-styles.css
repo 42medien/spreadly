@@ -367,3 +367,11 @@ td.editinplaceclick {
 .profilebox .subdetail_img, .subdetail_img .gallery_cantrol {
   text-align: left;
 }
+
+#preview_widgets .stylechoose_box .status_list li {
+  padding-bottom: 0px;
+}
+
+#service_no_url{
+  color: #bbbbbb;
+}
