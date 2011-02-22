@@ -58,9 +58,5 @@ dislike:
   url:   /api/dislike/*
   param: {module: api, action: save_like, likedis: <?php echo YiidActivityTable::ACTIVITY_VOTE_NEGATIVE; ?> }
 
-homepage:
-  url:   /
-  param: { module: like, action: index }
-
 default:
   url:   /:module/:action/*
