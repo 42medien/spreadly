@@ -12,11 +12,11 @@
 									<?php foreach($pServices as $lService) { ?>
 									  <?php if($lService->getDownloadUrl()) { ?>
 											<li>
-												<a href="<?php echo $lService->getDownloadUrl(); ?>" target="_blank"><img src="/img/<?php echo $lService->getSlug(); ?>-icon.png" width="51" height="51" alt="<?php echo $lService->getName(); ?>" title="<?php echo $lService->getName(); ?>" /></a><span><a href="<?php echo $lService->getDownloadUrl(); ?>" target="_blank" title="<?php echo $lService->getName(); ?>"><?php echo $lService->getName(); ?></a></span>
+												<a href="<?php echo $lService->getDownloadUrl(); ?>" target="_blank" class="service-img-link" id="service-img-<?php echo $lService->getSlug(); ?>"></a><span><a href="<?php echo $lService->getDownloadUrl(); ?>" target="_blank" title="<?php echo $lService->getName(); ?>"><?php echo $lService->getName(); ?></a></span>
 											</li>
 		    						<?php } elseif ($lService->getTutorialUrl()) { ?>
 											<li>
-												<a href="/configurator/get_choose_style?service=<?php echo $lService->getId();?>" class="config-app-link"><img src="/img/<?php echo $lService->getSlug(); ?>-icon.png" width="51" height="51" alt="<?php echo $lService->getName(); ?>" title="<?php echo $lService->getName(); ?>" /></a><span><a href="/configurator/get_choose_style?service=<?php echo $lService->getId();?>" title="<?php echo $lService->getName(); ?>"  class="config-app-link"><?php echo $lService->getName(); ?></a></span>
+												<a href="/configurator/get_choose_style?service=<?php echo $lService->getId();?>" class="config-app-link service-img-link" id="service-img-<?php echo $lService->getSlug(); ?>"></a><span><a href="/configurator/get_choose_style?service=<?php echo $lService->getId();?>" title="<?php echo $lService->getName(); ?>"  class="config-app-link"><?php echo $lService->getName(); ?></a></span>
 											</li>
 										<?php } ?>
 									<?php } ?>
@@ -25,9 +25,9 @@
 								<dd class="otherweb-box alignright">
 									<ul>
 										<li>
-											<a href="/configurator/get_choose_style" class="config-app-link"><img src="/img/otherwebsite-icon.png" width="51" height="51" alt="Other websites" title="Other websites" /></a> <span><a href="/configurator/get_choose_style" title="Other websites" class="config-app-link">Other websites</a></span>
+											<a href="/configurator/get_choose_style" class="config-app-link service-img-link" id="service-img-other"></a> <span><a href="/configurator/get_choose_style" title="Other websites" class="config-app-link">Other websites</a></span>
 										</li>
-										<li><a href="/configurator/get_choose_style?service=static" class="config-app-link"><img src="/img/email-msgicon.png" width="51" height="51" alt="Email &amp; Signatures" title="Email &amp; Signatures" /></a> <span><a href="/configurator/get_choose_style?service=static" class="config-app-link" title="Email &amp; Signatures">Email &amp; Signatures</a></span></li>
+										<li><a href="/configurator/get_choose_style?service=static" class="config-app-link service-img-link" id="service-img-email"></a> <span><a href="/configurator/get_choose_style?service=static" class="config-app-link" title="Email &amp; Signatures">Email &amp; Signatures</a></span></li>
 									</ul>
 								</dd>
 							</dl>

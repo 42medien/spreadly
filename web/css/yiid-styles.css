@@ -386,3 +386,56 @@ td.editinplaceclick {
 
 .languagebox .welcome_user { color:#588199; background:url(../img/top-nav-devider.gif) right 3px no-repeat; padding-right:10px; margin-right:10px; margin-left:0px; line-height:15px; font-size: 15px; }
 .languagebox a.logout{ background:none; padding-right:10px; margin-right:4px; font-size:15px; color:#252525; display:inline-block; line-height:15px; margin-top: 0px;}
+
+.service-img-link{
+  display:block;
+  width: 50px;
+  height: 50px;
+  margin-left: 5px;  
+  
+}
+
+
+#service-img-wordpress{ background: url("/img/social_button_sprite.png") no-repeat 0px 0px; }
+#service-img-wordpress:hover{ background: url("/img/social_button_sprite.png") no-repeat 0px -100px; }
+#service-img-wordpress.active{ background: url("/img/social_button_sprite.png") no-repeat 0px -200px; }
+
+#service-img-tumblr{ background: url("/img/social_button_sprite.png") no-repeat -200px 0px; }
+#service-img-tumblr:hover{ background: url("/img/social_button_sprite.png") no-repeat -200px -100px; }
+#service-img-tumblr.active{ background: url("/img/social_button_sprite.png") no-repeat -200px -200px; }
+
+#service-img-blogger{ background: url("/img/social_button_sprite.png") no-repeat -100px 0px; }
+#service-img-blogger:hover{ background: url("/img/social_button_sprite.png") no-repeat -100px -100px; }
+#service-img-blogger.active{ background: url("/img/social_button_sprite.png") no-repeat -100px -200px; }
+
+#service-img-posterous{ background: url("/img/social_button_sprite.png") no-repeat -300px 0px; }
+#service-img-posterous:hover{ background: url("/img/social_button_sprite.png") no-repeat -300px -100px; }
+#service-img-posterous.active{ background: url("/img/social_button_sprite.png") no-repeat -300px -200px; }
+
+#service-img-magento{ background: url("/img/social_button_sprite.png") no-repeat -400px 0px; }
+#service-img-magento:hover{ background: url("/img/social_button_sprite.png") no-repeat -400px -100px; }
+#service-img-magento.active{ background: url("/img/social_button_sprite.png") no-repeat -400px -200px; }
+
+#service-img-typo{ background: url("/img/social_button_sprite.png") no-repeat -700px 0px; }
+#service-img-typo:hover{ background: url("/img/social_button_sprite.png") no-repeat -700px -100px; }
+#service-img-typo.active{ background: url("/img/social_button_sprite.png") no-repeat -700px -200px; }
+
+#service-img-drupal{ background: url("/img/social_button_sprite.png") no-repeat -900px 0px; }
+#service-img-drupal:hover{ background: url("/img/social_button_sprite.png") no-repeat -900px -100px; }
+#service-img-drupal.active{ background: url("/img/social_button_sprite.png") no-repeat -900px -200px; }
+
+#service-img-joomla{ background: url("/img/social_button_sprite.png") no-repeat -600px 0px; }
+#service-img-joomla:hover{ background: url("/img/social_button_sprite.png") no-repeat -600px -100px; }
+#service-img-joomla.active{ background: url("/img/social_button_sprite.png") no-repeat -600px -200px; }
+
+#service-img-textpattern{ background: url("/img/social_button_sprite.png") no-repeat -1000px 0px; }
+#service-img-textpattern:hover{ background: url("/img/social_button_sprite.png") no-repeat -1000px -100px; }
+#service-img-textpattern.active{ background: url("/img/social_button_sprite.png") no-repeat -1000px -200px; }
+
+#service-img-other{ background: url("/img/social_button_sprite.png") no-repeat -500px 0px; margin-left: 48px;  }
+#service-img-other:hover{ background: url("/img/social_button_sprite.png") no-repeat -500px -100px; }
+#service-img-other.active{ background: url("/img/social_button_sprite.png") no-repeat -500px -200px; }
+
+#service-img-email{ background: url("/img/social_button_sprite.png") no-repeat -1100px 0px; margin-left: 48px;}
+#service-img-email:hover{ background: url("/img/social_button_sprite.png") no-repeat -1100px -100px; }
+#service-img-email.active{ background: url("/img/social_button_sprite.png") no-repeat -1100px -200px; }

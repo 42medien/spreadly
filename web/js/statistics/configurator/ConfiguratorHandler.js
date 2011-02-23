@@ -34,6 +34,7 @@ var Configurator = {
     debug.log("[Configurator][chooseApp]");      
     jQuery('.config-app-link').live('click', function() {
       var lAction = jQuery(this).attr('href');
+      var lThis = this;
       jQuery.ajax({
         type: "GET",
         url: lAction,
@@ -46,6 +47,12 @@ var Configurator = {
           DynStyleForm.init();
           Configurator.initFormFx();  
           DynStyleCode.init();
+
+          if(jQuery(lThis).hasClass('service-img-link')){
+            jQuery('.service-img-link').removeClass('active');
+            jQuery(lThis).addClass('active');
+          }
+          
           jQuery('#likebutton_url').toggleValue();  
           if (typeof(document.likebuttonform) !=  "undefined"){
             document.likebuttonform.reset();
