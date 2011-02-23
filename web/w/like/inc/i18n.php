@@ -5,7 +5,6 @@
  * @author Matthias Pfefferle
  */
 $lSupportetLanguages = array('de', 'en', 'tr');
-$lLang = $_GET['cult'];
 
 if ((isset($_GET['cult']) && !empty($_GET['cult'])) && in_array($lLang, $lSupportetLanguages)) {
   $lLang = $_GET['cult'];
