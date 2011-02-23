@@ -78,6 +78,8 @@ var AnalyticsFilterNav = {
       jQuery('.analytix-filter-link').live('click', function() {
         OnLoadGrafic.showGrafic();        
         AnalyticsFilterNav.getContent(this);
+        //jQuery('.analytix-filter-link').removeClass('active');
+        //jQuery(this).addClass('active');
         return false;  
       });
     },

@@ -60,7 +60,9 @@ class configuratorActions extends sfActions
 
   	$lService = (isset($lParams['service']))?$lParams['service']:null;
   	if($lService) {
-	  	$lReturn['iframe'] = $this->getPartial('configurator/widget_'.$lService, array('pUrl' => $lUrl, 'pLang' => $lLang, 'pSocial' => $lSocial));
+  		$lHeight = ($lSocial == 1)?"60": "24";
+
+	  	$lReturn['iframe'] = $this->getPartial('configurator/widget_'.$lService, array('pUrl' => $lUrl, 'pLang' => $lLang, 'pSocial' => $lSocial, 'pHeight' => $lHeight));
   	} else {
 
   		if($lSocial == 0) {

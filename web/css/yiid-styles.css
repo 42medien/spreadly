@@ -318,6 +318,8 @@ a.button.header { float:right; }
   margin-top: 15px;
 }
 
+#subnavigation ul li a.active{ background:url(../img/navtabbg-hov.png) left top no-repeat; line-height:24px; text-decoration:none; color:#fff;  }
+
 .commentlist dd { background:url(/img/comment-small-bg.png) left top no-repeat; width:481px; height:66px; margin-bottom:2px;}
 .commentlist dl { overflow: scroll; overflow-y: auto; overflow-x: hidden; height: 150px; }
 
