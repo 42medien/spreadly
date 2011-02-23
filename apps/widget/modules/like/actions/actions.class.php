@@ -15,6 +15,9 @@ class likeActions extends sfActions {
   * @param sfRequest $request A request object
   */
   public function executeIndex(sfWebRequest $request) {
+    // check if already liked and redirect
+
+
     if ($request->getParameter("url", null)) {
       $this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "widget");
     } elseif ($lUrl = $this->getUser()->getAttribute("redirect_after_login", null, "widget")) {
