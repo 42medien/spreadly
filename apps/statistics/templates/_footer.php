@@ -1,9 +1,9 @@
 <div id="nav_supp" class="clearfix">
   <?php echo link_to(__('Imprint'), "http://www.yiid.com/imprint"); ?>
-  <?php echo link_to(__('TOS_FOOTER'), "http://www.yiid.com/tos"); ?>
+  <?php echo link_to(__('Terms of Services'), "http://www.yiid.com/tos"); ?>
   <?php echo link_to(__('Privacy Policy'), "http://www.yiid.com/privacy"); ?>
 
-  <?php echo mail_to('info@yiid.com'); ?>
+  <?php echo mail_to('info@spreadly.com'); ?>
 </div>
 
 <script type="text/javascript" charset="utf-8">
