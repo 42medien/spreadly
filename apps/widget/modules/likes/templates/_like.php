@@ -1,6 +1,7 @@
+<?php use_helper("Date"); ?>
 <dd>
   <div class="commentbox clearfix">
-    <strong>Marco Ripanti</strong> <span class="timeago">41 minutes ago</span>
+    <strong><?php echo $pActivity->getUser()->getFullname() ?></strong> <span class="timeago"><?php echo time_ago_in_words($pActivity->getC()); ?> ago</span>
     <p>
       <strong title="<?php echo $pActivity->getTitle(); ?>"><?php echo truncate_text($pActivity->getTitle(), 45); ?></strong>
       <?php
