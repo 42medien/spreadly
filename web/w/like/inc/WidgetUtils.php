@@ -1,15 +1,12 @@
 <?php
-require_once('../../../lib/utils/UrlUtils.php');
-require_once('../../../lib/utils/aws/sqs.php');
-
 /**
  * Enter description here...
  *
  * @author Matthias Pfefferle
+ * @author Hannes Schippmann
  */
 class WidgetUtils {
   private $aMongoConn = null;
-
   private $aUrl = null;
   private $aTitle = null;
   private $aDescription = null;
@@ -18,18 +15,36 @@ class WidgetUtils {
   private $aUserId = null;
   private $aSocialObject = null;
   private $aDeal = null;
+  private $aShowFriends = false;
 
-  public function __construct($pUrl, $pTitle = null, $pDescription = null, $pPhoto = null, $pTags = null) {
+  public function __construct() {
     $this->aMongoConn = new Mongo(LikeSettings::MONGO_HOSTNAME);
 
-    $this->aUrl = urldecode($pUrl);
-    $this->aTitle = $pTitle;
-    $this->aDescription = $pDescription;
-    $this->aPhoto = $pPhoto;
-    $this->aTags = $pTags;
+    if (isset($_GET['url']) && !empty($_GET['url'])) {
+      $this->aUrl = urldecode($_GET['url']);
+    } else {
+      $this->aUrl = urldecode($_SERVER['HTTP_REFERER']);
+    }
+
+    if (isset($_GET['social']) && !empty($_GET['social'])) {
+      $this->aShowFriends = true;
+    }
+
+    $this->aTitle = urldecode(@$_GET['title']);
+    $this->aDescription = urldecode(@$_GET['description']);
+    $this->aPhoto = urldecode(@$_GET['photo']);
+    $this->aTags = trim(urldecode(@$_GET['tags']));
     $this->aUserId = $this->extractUserIdFromSession();
     $this->aSocialObject = $this->getSocialObjectByUrl();
     $this->aDeal = $this->getActiveDeal();
+  }
+
+  public function getPopupUrl() {
+    return LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time()."&title=".urlencode($this->aTitle)."&description=".urlencode($this->aDescription)."&photo=".urlencode($this->aPhoto)."&tags=".urlencode($this->aTags)."&url=".urlencode($this->aUrl);
+  }
+
+  public function showFriends() {
+    return $this->getUserId() && $this->aShowFriends && $this->aSocialObject;
   }
 
   public function getUserId() {
@@ -42,6 +57,18 @@ class WidgetUtils {
 
   public function getDeal() {
     return $this->aDeal;
+  }
+
+  public function getActivityCount() {
+    return $this->aSocialObject['l_cnt'];
+  }
+
+  public function getButtonClass() {
+    if ($this->getYiidActivity()) {
+      return "disabled";
+    } elseif ($this->getDeal()) {
+      return "deal";
+    }
   }
 
   /**
@@ -75,7 +102,7 @@ class WidgetUtils {
     $pUrl = str_replace(" ", "+", $this->aUrl);
 
     $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, 'social_object');
-    $pUrlHash = md5(UrlUtils::skipTrailingSlash($pUrl));
+    $pUrlHash = md5($this->skipTrailingSlash($pUrl));
 
     // check if we know the URL already
     $lSocialObjectArray = $pCollectionObject->findOne(array("alias" => array('$in' => array($pUrlHash)) ));
@@ -86,7 +113,7 @@ class WidgetUtils {
       $lSocialObjectArray = array();
     }
 
-    if($pUrl && !UrlUtils::isUrlValid($pUrl)) {
+    if($pUrl && !$this->isUrlValid($pUrl)) {
       $lSocialObjectArray = array_merge(array(
         'urlerror'   => true,
       ), $lSocialObjectArray);
@@ -193,10 +220,10 @@ class WidgetUtils {
    * @param string $pTags comma separated
    * @return array|boolean
    */
-  public function getActiveDeal() {
+  private function getActiveDeal() {
     $pTags = $this->aTags;
     $pUrl = str_replace(" ", "+", $this->aUrl);
-    $pUrl = UrlUtils::skipTrailingSlash($pUrl);
+    $pUrl = $this->skipTrailingSlash($pUrl);
 
     $host = parse_url($pUrl, PHP_URL_HOST);
     $col = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, 'deals');
@@ -252,7 +279,7 @@ class WidgetUtils {
    * @param string $pUrl
    * @author weyandch
    */
-  public function trackVisit($pUrl) {
+  private function trackVisit($pUrl) {
     $lCollection = $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, 'visit');
 
     $pUrl = urldecode($pUrl);
@@ -275,7 +302,7 @@ class WidgetUtils {
    * @param string $pClickback
    * @param int $pUser
    */
-  public function trackPageImpression($pUrl, $pClickback, $pUser) {
+  private function trackPageImpression($pUrl, $pClickback, $pUser) {
     $lHost = parse_url($pUrl, PHP_URL_HOST);
     $lCollection = $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, str_replace('.', '_', $lHost).".analytics.pis");
 
@@ -306,5 +333,39 @@ class WidgetUtils {
    */
   public function __destruct() {
     $this->aMongoConn->close();
+  }
+
+  /**
+   * url validator
+   *
+   * @param string $pUrl
+   * @return boolean
+   */
+  private function isUrlValid($pUrl) {
+    $lPattern = '~^
+        (https?|ftps?)://                       # http or ftp (+SSL)
+        (
+          ([a-z0-9-]+\.)+[a-z]{2,6}             # a domain name
+            |                                   #  or
+          \d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}    # a IP address
+        )
+        (:[0-9]+)?                              # a port (optional)
+        (/?|\?\S+|/\S+)                         # a /, nothing or a / with something
+      $~ix';
+
+    return preg_match($lPattern, (string)$pUrl);
+  }
+
+  /**
+   * transforms http://weyands.net/ to http://weyands.net
+   *
+   * @param string $pUrl
+   * @return string
+   */
+  private function skipTrailingSlash($pUrl) {
+    if ('/' == substr($pUrl, strlen($pUrl)-1)) {
+      $pUrl = substr_replace($pUrl, '', strlen($pUrl)-1);  // strip trailing slash
+    }
+    return $pUrl;
   }
 }

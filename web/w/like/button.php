@@ -1,4 +1,18 @@
-<?php include("buttonheader.php"); ?>
+<?php
+include('inc/config.inc.php');
+include('inc/WidgetUtils.php');
+include('inc/i18n.php');
+
+session_name("yiid_widget");
+session_set_cookie_params(time()+17776000, "/", LikeSettings::COOKIE_DOMAIN);
+session_start();
+header('P3P: CP="DSP LAW"');
+header('Pragma: no-cache');
+header('Cache-Control: private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+
+$wu = new WidgetUtils();
+$wu->trackUser();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,11 +98,11 @@
   </style>
 </head>
 <body>
-  <a href="<?php echo $lPopupUrl ?>" rel="like" onclick="window.open(this.href, 'popup', 'width=580,height=435,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" target="_blank" class="button <?php echo $pButtonClass; ?>"><span class="like">&nbsp;</span><span class="count"><?php echo intval($lSocialObject['l_cnt']) ?></span></a>
-  <?php if($lActiveDeal): ?>
+  <a href="<?php echo $wu->getPopupUrl() ?>" rel="like" onclick="window.open(this.href, 'popup', 'width=580,height=435,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" target="_blank" class="button <?php echo $wu->getButtonClass(); ?>"><span class="like">&nbsp;</span><span class="count"><?php echo intval($wu->getActivityCount()) ?></span></a>
+  <?php if ($wu->getDeal()): ?>
     <div class="text"><?php echo $lActiveDeal['button_wording']; ?></div>
   <?php endif; ?>
-  <?php if ($pSocialFeatures): ?>
+  <?php if ($wu->showFriends()): ?>
   <ul class="icons">
     <li><a><img src="http://a3.twimg.com/profile_images/1170987730/final_197_normal.jpg" /></a></li>
     <li><a><img src="http://a3.twimg.com/profile_images/1170987730/final_197_normal.jpg" /></a></li>
