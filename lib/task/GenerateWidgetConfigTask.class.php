@@ -35,6 +35,8 @@ EOF;
       'MONGO_DB' => sfConfig::get('app_mongodb_database_name'),
       'MONGO_STATS_DB'    => sfConfig::get('app_mongodb_database_name_stats'),
       'YIID_HOST' => sfConfig::get('app_settings_host'),
+      'YIID_URL' => sfConfig::get('app_settings_url'),
+      'YIID_WIDGET_URL' => sfConfig::get('app_settings_widgets_url'),
       'IS_DEV' => sfConfig::get('app_settings_dev'),
       'COOKIE_NAME' => $options['env'] == 'prod' ? 'yiid' : 'yiid_'.$options['env'],
       'ENVIRONMENT' => $options['env'],

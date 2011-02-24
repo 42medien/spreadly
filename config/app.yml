@@ -56,10 +56,9 @@ all:
 #
 prod:
   settings:
-    url:               'http://www.yiid.com'
-    url_short:         'http://yiid.com'
-    host:              'yiid.com'
-    widgets_url:       'http://widgets.yiid.com'
+    url:               'http://spreadly.com'
+    host:              'spreadly.com'
+    widgets_url:       'http://spread.ly'
     environment:       'prod'
     dev:               0
     pager:             20
@@ -108,7 +107,6 @@ prod:
 dev:
   settings:
     url:              'http://www.yiid.local'
-    url_short:        'http://yiid.local'
     widgets_url:      'http://widgets.yiid.local'
     host:             'yiid.local'
     environment:      'dev'
@@ -158,7 +156,6 @@ dev:
 staging:
   settings:
     url:              'http://www.yiiddev.com'
-    url_short:        'http://yiiddev.com'
     widgets_url:      'http://widgets.yiiddev.com'
     host:             'yiiddev.com'
     environment:      'staging'
