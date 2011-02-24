@@ -113,6 +113,10 @@ wellknown:
 oexchange:
   url:  /discovery/oexchange
   param: { module: discovery, action: oexchange}
+  
+nodomain:
+  url:  /system/nodomain
+  param: { module: system, action: nodomain}
 
 # You can find more information about this file on the symfony website:
 # http://www.symfony-project.org/reference/1_4/en/10-Routing

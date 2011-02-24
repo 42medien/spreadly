@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="/css/styles.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="/css/yiid-styles.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />
+		<link rel="stylesheet" type="text/css" href="/css/colorbox/colorbox.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="/css/facebox.css" media="screen" />
 		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 
@@ -64,6 +65,9 @@
 		<script type="text/javascript">
 			// Custom Checkbox Function
 	    jQuery(document).ready( function() {
+	      <?php if(has_component_slot('no_domain_user')) {?>
+    		<?php include_component_slot('no_domain_user'); ?>
+    	<?php } ?>
 	      <?php include_partial('global/js_init_general.js'); ?>
 	      <?php if (has_slot('js_document_ready')) { ?>
 	        <?php include_slot('js_document_ready'); ?>

@@ -306,6 +306,11 @@ a.button.header { float:right; }
   width: 100px;
 }
 
+#nodomain-content p,
+#nodomain-content h1{
+  margin: 10px 10px;
+}
+
 /* css for timepicker */
 #ui-datepicker-div{ padding: 15px;}
 .ui-timepicker-div .ui-widget-header{ margin-bottom: 8px; }
