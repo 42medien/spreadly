@@ -52,7 +52,7 @@ EOF;
     }
 
     // generate filename
-    if ($app == 'platform') {
+    if ($app == 'statistics') {
       $indexName = 'index';
     } else {
       $indexName = $app;
