@@ -8,6 +8,42 @@ require_once('../../../lib/utils/aws/sqs.php');
  * @author Matthias Pfefferle
  */
 class WidgetUtils {
+  private $aMongoConn = null;
+
+  private $aUrl = null;
+  private $aTitle = null;
+  private $aDescription = null;
+  private $aPhoto = null;
+  private $aTags = null;
+  private $aUserId = null;
+  private $aSocialObject = null;
+  private $aDeal = null;
+
+  public function __construct($pUrl, $pTitle = null, $pDescription = null, $pPhoto = null, $pTags = null) {
+    $this->aMongoConn = new Mongo(LikeSettings::MONGO_HOSTNAME);
+
+    $this->aUrl = urldecode($pUrl);
+    $this->aTitle = $pTitle;
+    $this->aDescription = $pDescription;
+    $this->aPhoto = $pPhoto;
+    $this->aTags = $pTags;
+    $this->aUserId = $this->extractUserIdFromSession();
+    $this->aSocialObject = $this->getSocialObjectByUrl();
+    $this->aDeal = $this->getActiveDeal();
+  }
+
+  public function getUserId() {
+    return $this->aUserId;
+  }
+
+  public function getSocialObject() {
+    return $this->aSocialObject;
+  }
+
+  public function getDeal() {
+    return $this->aDeal;
+  }
+
   /**
    * extracts the userid from the current session
    *
@@ -15,41 +51,30 @@ class WidgetUtils {
    * @param $pSessionId
    * @return int|boolean
    */
-  public static function extractUserIdFromSession($pSessionId) {
-    $lSession = self::getSessionData($_COOKIE[$pSessionId]);
+  public function extractUserIdFromSession() {
+    if (!array_key_exists(LikeSettings::SF_SESSION_COOKIE, $_COOKIE)) {
+      return false;
+    }
+
+    $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, "session");
+    $lSession = $pCollectionObject->findOne(array("sess_id" => $_COOKIE[LikeSettings::SF_SESSION_COOKIE]) );
 
     $lEncodedData = $lSession['sess_data'];
     session_decode($lEncodedData);
     $pUserId = $_SESSION['symfony/user/sfUser/attributes']['user_session']['id'];
+
     return $pUserId?$pUserId:false;
-  }
-
-  /**
-   * returns the complete session-data
-   *
-   * @author Christian Weyand
-   * @param $pId
-   * @return unknown_type
-   */
-  public static function getSessionData($pId) {
-    $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
-    $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, "session");
-
-    return $pCollectionObject->findOne(array("sess_id" => $pId) );
   }
 
   /**
    * returns socialobject for a given url
    *
-   * @param string $pUrl
-   * @param int $pIsUsed
    * @return array()
    */
-  public static function getDataForUrl($pUrl, $pIsUsed = false) {
-    $pUrl = str_replace(" ", "+", $pUrl);
+  public function getSocialObjectByUrl() {
+    $pUrl = str_replace(" ", "+", $this->aUrl);
 
-    $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
-    $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, 'social_object');
+    $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, 'social_object');
     $pUrlHash = md5(UrlUtils::skipTrailingSlash($pUrl));
 
     // check if we know the URL already
@@ -58,7 +83,6 @@ class WidgetUtils {
     // if no data is available, initialize empty array & create social object
     if (!$lSocialObjectArray) {
       // don't do that.. too much objects in the queue atm
-      //self::delegateSocialObjectParsing($pUrl);
       $lSocialObjectArray = array();
     }
 
@@ -78,45 +102,6 @@ class WidgetUtils {
   }
 
   /**
-   * If an user did vote on an social object withdraw his score from displayed result
-   *
-   * @param array() $pSocialObjectArray
-   * @param boolean $pUserAction
-   * @return array()
-   */
-  public static function recalculateCountsRespectingUser($pSocialObjectArray, $pUserAction = false) {
-
-    if ($pUserAction !== false) {
-      switch ($pUserAction) {
-        case 1: $pSocialObjectArray['l_cnt'] = $pSocialObjectArray['l_cnt']-1;
-        break;
-        case -1: $pSocialObjectArray['d_cnt'] = $pSocialObjectArray['d_cnt']-1;
-        break;
-      }
-    }
-    return $pSocialObjectArray;
-  }
-
-
-  /**
-   * prototype function to send msgs in a queue
-   * push a note to amazon sqs.. alpha stage!
-   *
-   * @author Christian Weyand
-   */
-  public static function delegateSocialObjectParsing($pUrl) {
-    if ($pUrl) {
-      $queue = 'SocialObjectParser'.'-'.LikeSettings::ENVIRONMENT;
-
-      $service = new SQS('AKIAJ5NSA6ET5RC4AMXQ','bs1YgS4c1zJN/HmwaVA8CkhNfyvcS+EEm1hcEOa0');
-      $service->createQueue($queue);
-
-      $pUrl = urlencode($pUrl);
-      $service->sendMessage($queue, $pUrl);
-    }
-  }
-
-  /**
    * check if a given user already performed an action on a social object
    * returns false if not, or it's score (1/-1)
    *
@@ -125,24 +110,31 @@ class WidgetUtils {
    * @param int $pUserId
    * @return false or score of action taken (-1/1)
    */
-  public static function getYiidActivity($pSocialObjectId, $pUserId, $pActiveDeal = null) {
-    $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
-    $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
+  public function getYiidActivity() {
+    $lSocialObject = $this->getSocialObject();
+
+    if (!array_key_exists('_id', $lSocialObject)) {
+      return null;
+    }
+
+    $lUserId = $this->aUserId;
+    $lActiveDeal = $this->aDeal;
+
+    $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
 
     // get yiid-activity and factor a deal
-    if ($pActiveDeal) {
-      $lObject = $pCollectionObject->findOne(array("so_id" => $pSocialObjectId,
-                                                   "u_id" => intval($pUserId),
-                                                   "d_id" => intval($pActiveDeal['id'])
+    if ($lActiveDeal) {
+      $lObject = $pCollectionObject->findOne(array("so_id" => $lSocialObject['_id'],
+                                                   "u_id" => intval($lUserId),
+                                                   "d_id" => intval($lActiveDeal['id'])
                                                   ));
 
     } else {
-      $lObject = $pCollectionObject->findOne(array("so_id" => $pSocialObjectId,
-                                                   "u_id" => intval($pUserId),
+      $lObject = $pCollectionObject->findOne(array("so_id" => $lSocialObject['_id'],
+                                                   "u_id" => intval($lUserId),
                                                    "d_id" => array('$exists' => false)
                                                   ));
     }
-    //return $lObject?$lObject['score']:false;
 
     return $lObject;
   }
@@ -156,9 +148,9 @@ class WidgetUtils {
    * @param int $pUserId
    * @return false or score of action taken (-1/1)
    */
-  public static function actionOnHostByUser($pUserId, $pActiveDeal) {
-    $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
-    $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
+  public function actionOnHostByUser($pUserId, $pActiveDeal) {
+
+    $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
 
     // get yiid-activity and factor a deal
     $lObject = $pCollectionObject->findOne(array("u_id" => intval($pUserId),
@@ -174,7 +166,10 @@ class WidgetUtils {
    * @param string $pReferrerUri
    * @return string|null
    */
-  public static function extractClickback($pButtonUri, $pReferrerUri = null) {
+  public function extractClickback() {
+    $pUrl = $this->aUrl;
+    $pReferrerUri = @$_SERVER['HTTP_REFERER'];
+
     if (!$pReferrerUri) {
       return null;
     }
@@ -198,14 +193,13 @@ class WidgetUtils {
    * @param string $pTags comma separated
    * @return array|boolean
    */
-  public static function getActiveDeal($pUrl, $pTags = null) {
-    $pUrl = str_replace(" ", "+", $pUrl);
+  public function getActiveDeal() {
+    $pTags = $this->aTags;
+    $pUrl = str_replace(" ", "+", $this->aUrl);
     $pUrl = UrlUtils::skipTrailingSlash($pUrl);
 
     $host = parse_url($pUrl, PHP_URL_HOST);
-
-    $mongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
-    $col = $mongo->selectCollection(LikeSettings::MONGO_DATABASENAME, 'deals');
+    $col = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, 'deals');
 
     $today = new MongoDate(time());
     $cond = array(
@@ -228,30 +222,28 @@ class WidgetUtils {
     }
 
     $result = $col->find($cond)->limit(1)->sort(array("start_date" => -1));
-    
     $deal = null;
-    
+
     if($result->hasNext()) {
       $deal = $result->getNext();
     }
-    
+
     if ($deal && ($deal["is_unlimited"] == true || $deal['remaining_coupon_quantity'] > 0)) {
+      if (!$deal || $this->actionOnHostByUser($this->aUserId, $deal)) {
+        return null;
+      }
       return $deal;
     }
-    
-    return false;
+
+    return null;
   }
 
   /**
    * encapsulates all trackings
-   *
-   * @param string $pUrl
-   * @param string $pClickback
-   * @param int $pUser
    */
-  public static function trackUser($pUrl, $pClickback, $pUser) {
-    self::trackPageImpression($pUrl, $pClickback, $pUser);
-    self::trackVisit($pUrl);
+  public function trackUser() {
+    $this->trackPageImpression($this->aUrl, $this->extractClickback(), $this->aUserId);
+    $this->trackVisit($this->aUrl);
   }
 
   /**
@@ -260,9 +252,8 @@ class WidgetUtils {
    * @param string $pUrl
    * @author weyandch
    */
-  public static function trackVisit($pUrl) {
-    $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
-    $lCollection = $lMongo->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, 'visit');
+  public function trackVisit($pUrl) {
+    $lCollection = $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, 'visit');
 
     $pUrl = urldecode($pUrl);
 
@@ -277,11 +268,16 @@ class WidgetUtils {
     }
   }
 
-  public static function trackPageImpression($pUrl, $pClickback, $pUser) {
+  /**
+   * Enter description here...
+   *
+   * @param string $pUrl
+   * @param string $pClickback
+   * @param int $pUser
+   */
+  public function trackPageImpression($pUrl, $pClickback, $pUser) {
     $lHost = parse_url($pUrl, PHP_URL_HOST);
-
-    $lMongo = new Mongo(LikeSettings::MONGO_HOSTNAME);
-    $lCollection = $lMongo->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, str_replace('.', '_', $lHost).".analytics.pis");
+    $lCollection = $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, str_replace('.', '_', $lHost).".analytics.pis");
 
     if (mb_detect_encoding($pUrl) != 'UTF-8') {
       $pUrl = utf8_encode($pUrl);
@@ -303,5 +299,12 @@ class WidgetUtils {
     }
 
     $lCollection->update($lDoc, array('$inc' => $lOptions), array("upsert" => true));
+  }
+
+  /**
+   * destructor to close mongo-connection
+   */
+  public function __destruct() {
+    $this->aMongoConn->close();
   }
 }
