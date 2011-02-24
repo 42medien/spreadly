@@ -13,7 +13,8 @@ class DomainProfileTable extends Doctrine_Table
   
   public static function retrieveVerifiedForUser($pUser) {
     $lQ = DomainProfileTable::getInstance()->createQuery()
-    ->where('state = ? AND sf_guard_user_id = ?', array(DomainProfileTable::STATE_VERIFIED, $pUser->getId()))
+    ->where('state = ?', DomainProfileTable::STATE_VERIFIED)
+    ->andWhere('sf_guard_user_id = ?', $pUser->getId())
     ->orderBy('created_at DESC');
     return $lQ->execute();
   }

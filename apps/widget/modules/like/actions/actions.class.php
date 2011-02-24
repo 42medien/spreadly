@@ -15,21 +15,44 @@ class likeActions extends sfActions {
   * @param sfRequest $request A request object
   */
   public function executeIndex(sfWebRequest $request) {
-    // check if already liked and redirect
-
-
-    if ($request->getParameter("url", null)) {
+    // check if already liked and redirect    
+    $lUrl = $request->getParameter("url", null);
+    
+    if ($lUrl) {
       $this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "widget");
+            
+      $this->pIdentities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
+      $this->pActiveDeal = DealTable::getActiveByHost($lUrl, $request->getParameter("tags", null));
+      $this->pActivity = null;
+      
+      if($this->pActiveDeal) {
+        $this->pActivity = YiidActivityTable::getByDealIdAndUserIdAndUrl($this->pActiveDeal->getId(), $this->getUser()->getId(), $lUrl);
+
+        if(!$this->pActivity) {
+          return $this->setTemplate('deal');
+        } else {
+          $this->pActivity = YiidActivityTable::retrieveByUserIdAndUrl($this->getUser()->getId(), $lUrl);
+
+          if($this->pActivity) {
+            return $this->redirect('@widget_deals');
+          }
+        }
+      }
+
+      $this->pActivity = YiidActivityTable::retrieveByUserIdAndUrl($this->getUser()->getId(), $lUrl);
+
+      if($this->pActivity) {
+        $this->redirect('@widget_likes');
+      }
+      
     } elseif ($lUrl = $this->getUser()->getAttribute("redirect_after_login", null, "widget")) {
       $this->redirect($lUrl);
     }
 
-    $this->pIdentities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
-
     $lYiidMeta = new YiidMeta();
     $lYiidMeta->fromParams($request->getParameterHolder());
     $this->pYiidMeta = SocialObjectParser::fetch($request->getParameter("url"), $lYiidMeta);
-
+    
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('like/js_init_like.js', array('pImgCount' => count($this->pYiidMeta->getImages()), 'pUrl' => $request->getParameter("url"))));
   }
 
@@ -44,8 +67,8 @@ class likeActions extends sfActions {
     $lActivity->fromArray($lParams);
 
     // try to save activity
-    try {
       $lActivity->save();
+    try {
       $lSuccess = true;
 		} catch (Exception $e) { // send error on exception
       $lSuccess = false;

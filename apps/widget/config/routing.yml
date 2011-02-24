@@ -20,7 +20,7 @@ widget_update_settings:
   param:  { module: settings, action: update }
 
 widget_deals:
-  url:    /deals/index
+  url:    /deals
   param:  { module: deals, action: index }
 
 widget_deals_example:
@@ -28,7 +28,7 @@ widget_deals_example:
   param:  { module: deals, action: example }
 
 widget_profile:
-  url:    /profile/index
+  url:    /profile
   param:  { module: profile, action: index }
 
 get_coupon_used:

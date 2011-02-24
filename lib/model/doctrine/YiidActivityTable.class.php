@@ -316,6 +316,23 @@ class YiidActivityTable extends Doctrine_Table {
     }
   }
 
+
+  public static function retrieveByUserIdAndUrl($pUserId, $pUrl) {
+    $lCollection = self::getMongoCollection();
+
+    $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
+    $lSocialObject = SocialObjectTable::retrieveByAliasUrl($pUrl);
+
+    if ($lSocialObject) {
+      $lQuery = $lCollection->findOne(array("u_id" => (int)$pUserId,
+                                            "so_id" => new MongoId($lSocialObject->getId()."")
+                                           ));
+
+      return self::initializeObjectFromCollection($lQuery);
+    } else {
+      return null;
+    }
+  }
   /**
    * normalize the tag-string
    *

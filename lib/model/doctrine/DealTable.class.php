@@ -63,7 +63,8 @@ class DealTable extends Doctrine_Table
   public static function getRunningByHost($pUrl, $pTags=null) {
     $host = parse_url($pUrl, PHP_URL_HOST);
     $col = MongoDbConnector::getInstance()->getCollection(sfConfig::get('app_mongodb_database_name'), "deals");
-    $today = new MongoDate(time());
+    $today = new MongoDate(time());    
+    
     $cond = array(
       "host" => $host,
       "start_date" => array('$lte' => $today),
@@ -72,14 +73,23 @@ class DealTable extends Doctrine_Table
     
     // added tags to the conditions
     if ($pTags) {
-      $cond['$or'] = array(array('tags' => array('$exists' => false)), array('tags' => array('$in' => $pTags)));
+      // trim tags
+      $pTags = explode(",", $pTags);
+      $lTags = array();
+      foreach ($pTags as $lTag) {
+        $lTags[] = trim($lTag);
+      }
+      $cond['$or'] = array(array('tags' => array('$exists' => false)), array('tags' => array('$in' => $lTags)));
     } else {
       $cond["tags"] = array('$exists' => false);
     }
 
     $result = $col->find($cond)->limit(1)->sort(array("start_date" => -1));
-
-    $deal = $result->getNext();
+    $deal = null;
+    
+    if($result->hasNext()) {
+      $deal = $result->getNext();
+    }
 
     if ($deal) {
       return self::getInstance()->find($deal['id']);
