@@ -61,14 +61,17 @@ class likeActions extends sfActions {
   	$lParams = $request->getParameter('like');
 
 		$lParams['u_id'] = $this->getUser()->getUserId();
-    $lParams['tags'] = $request->getParameter("tags");
+		$lActiveDeal = DealTable::getActiveByHost($lParams['url'], $lParams['tags']);
+		if($lActiveDeal) {
+  		$lParams['d_id'] = $lActiveDeal->getId();		  
+		}
 
   	$lActivity = new YiidActivity();
     $lActivity->fromArray($lParams);
 
     // try to save activity
-      $lActivity->save();
     try {
+      $lActivity->save();
       $lSuccess = true;
 		} catch (Exception $e) { // send error on exception
       $lSuccess = false;
