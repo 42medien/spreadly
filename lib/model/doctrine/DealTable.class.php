@@ -74,7 +74,9 @@ class DealTable extends Doctrine_Table
     // added tags to the conditions
     if ($pTags) {
       // trim tags
-      $pTags = explode(",", $pTags);
+      if(!is_array($pTags)) {
+        $pTags = explode(",", $pTags);        
+      }
       $lTags = array();
       foreach ($pTags as $lTag) {
         $lTags[] = trim($lTag);
