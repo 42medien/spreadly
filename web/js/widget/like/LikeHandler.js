@@ -66,13 +66,32 @@ var WidgetDealForm = {
 
 var WidgetLikeForm = {
     
+    aComment: '',
+    
     /**
      * inits the form-functions
      */
     init: function() {
       debug.log('[WidgetLikeForm][init]');
       WidgetLikeForm.doSend();
-      jQuery('#area-like-comment').toggleValue();      
+      jQuery('#area-like-comment').toggleValue();
+      jQuery('.mirror-value').mirrorValue();
+      WidgetLikeForm.aComment = jQuery('#area-like-comment').val();
+      
+      /* reset the form after side-reload (fix for ff)
+      if (typeof (document.popup-like-form) != "undefined") {
+        document.popup-like-form.reset();
+      } */     
+      
+    },
+    
+    
+    checkComment: function(arr, form, options) {
+      var lComment = jQuery(form[0]["like[comment]"]).val();
+      if(lComment == WidgetLikeForm.aComment){
+        jQuery(form[0]["like[comment]"]).val('');
+      }
+      return form;   
     },
     
     /**
@@ -87,8 +106,9 @@ var WidgetLikeForm = {
         OnLoadGrafic.showGrafic();
         WidgetLikeForm.hideButton();
         WidgetLikeForm.hideTextarea();
+        
         var options = {
-          //beforeSubmit : OnLoadGrafic.showGrafic,
+          beforeSubmit : WidgetLikeForm.checkComment,
           url : lAction,
           data : {
             ei_kcuf : new Date().getTime()

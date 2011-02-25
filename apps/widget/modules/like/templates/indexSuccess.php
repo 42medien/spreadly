@@ -41,7 +41,7 @@ if ($lImages && count($lImages) > 0) {
             <h3>
               <?php echo $sf_user->getUser()->getFullname(); ?> via Spread.ly
             </h3>
-            <p>
+            <p class="area-like-comment-mirror">
 
             </p>
             <div class="clearfix">
@@ -77,7 +77,7 @@ if ($lImages && count($lImages) > 0) {
         </div>
         <div class="comment_box clearfix">
           <label class="alignleft comment_post">
-          <textarea rows="2" cols="2" id="area-like-comment" name="like[comment]"><?php echo __("add your comment (optional) ..."); ?></textarea>
+          <textarea rows="2" cols="2" id="area-like-comment" class="mirror-value" name="like[comment]"><?php echo __("add your comment (optional) ..."); ?></textarea>
           </label> <span class="alignleft btn"><input type="submit" id="popup-send-like-button" value="Spread It" /></span>
         </div>
       </div>
