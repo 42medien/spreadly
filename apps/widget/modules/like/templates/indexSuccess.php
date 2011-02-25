@@ -56,7 +56,7 @@ if ($lImages && count($lImages) > 0) {
                   <div id="scroll-button-area" <?php echo (count($pYiidMeta->getImages()) <= 1)? "style='display:none;'":"";?>>
                     <a class="prev browse left slide-back-link" id="slide-back-link"></a>
                     <a class="next browse left slide-next-link" id="slide-next-link"></a>
-                    <span id="img-counter">1</span>/<span id="img-number"><?php echo count($pYiidMeta->getImages()); ?></span>
+                    <span id="img-counter">1</span> <?php echo __('of'); ?> <span id="img-number"><?php echo count($pYiidMeta->getImages()); ?></span><br />
                     <?php echo __('Choose image'); ?>
                   </div>
                 </div>

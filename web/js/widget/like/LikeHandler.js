@@ -72,6 +72,7 @@ var WidgetLikeForm = {
     init: function() {
       debug.log('[WidgetLikeForm][init]');
       WidgetLikeForm.doSend();
+      jQuery('#area-like-comment').toggleValue();      
     },
     
     /**
