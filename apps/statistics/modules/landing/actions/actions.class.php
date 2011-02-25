@@ -17,6 +17,7 @@ class landingActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
+  	$this->getResponse()->setSlot('js_document_ready', $this->getPartial('landing/js_init_landing.js'));
     //$this->forward('default', 'module');
   }
 }

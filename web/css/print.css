@@ -592,10 +592,9 @@ dealwidebox .graytitle { padding-bottom: 8px;}
 
 
 
-
-.contentbox {position:relative; z-index:1500055250;}
-.midcontent {position:relative; z-index:99898899998999;}
-.grboxbot {position:relative; z-index:55555;}
+.contentbox {position:relative; z-index:999999;}
+.midcontent {position:relative; z-index:999999999;}
+.grboxbot {position:relative; z-index:99999;}
 
 
 .stylechoose_box {padding-top:32px;}

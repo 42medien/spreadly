@@ -1,0 +1,1 @@
+jQuery('#slider-code').tinycarousel({ display: 1 });
