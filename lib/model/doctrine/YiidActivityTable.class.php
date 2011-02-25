@@ -123,7 +123,7 @@ class YiidActivityTable extends Doctrine_Table {
    * @param int $pUserId the user id
    * @return activties that were deal participations
    */
-  public static function retrieveActivitiesOfActiveDealsByUserId($pUserId) {
+  public static function retrieveDealActivitiesByUserId($pUserId) {
     $lCollection = self::getMongoCollection();
 
     $lResults = $lCollection->find(array(
@@ -133,33 +133,7 @@ class YiidActivityTable extends Doctrine_Table {
 
     $lResults->sort(array('c' => -1));
 
-    $dealIds = array();
-    while($lResults->hasNext()) {
-      $ya = $lResults->getNext();
-      $dealIds[] = $ya['d_id'];
-    }
-    $now = date ("Y-m-d H:i:s", strtotime("now"));
-    $deals = DealTable::getInstance()->createQuery()
-              ->whereIn("id", $dealIds)
-              ->andWhere("end_date > ? ", $now)
-              ->execute();
-
-    $activeDealIds = array();
-    foreach ($deals as $deal) {
-      $activeDealIds[] = $deal->getId();
-    }
-
-    $lResults->reset();
-    $activeActivities = array();
-
-    while($lResults->hasNext()) {
-      $ya = $lResults->getNext();
-      if(in_array($ya['d_id'], $activeDealIds)) {
-        $activeActivities[] = self::initializeObjectFromCollection($ya);
-      }
-    }
-
-    return $activeActivities;
+    return self::hydrateMongoCollectionToObjects($lResults);
   }
 
   public static function retrieveLatestActivitiesByContacts($pUserId, $pFriendId = null, $pCommunityId = null, $pRangeDays = 30, $pOffset = 10, $pLimit = 1) {
@@ -327,7 +301,7 @@ class YiidActivityTable extends Doctrine_Table {
     $lCond = array("u_id" => (int)$pUserId, "so_id" => new MongoId($lSocialObject->getId().""));
 
     if($pIgnoreDeals) {
-      $lCond["d_id"] = array('$exists' => false);      
+      $lCond["d_id"] = array('$exists' => false);
     }
 
     if ($lSocialObject) {
