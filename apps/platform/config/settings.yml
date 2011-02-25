@@ -30,7 +30,7 @@ all:
     secure_action:          index    # The credentials required for an action
 
   .settings:
-    no_script_name:         true
+    no_script_name:         false
 
     # Form security secret (CSRF protection)
     csrf_secret:            16575218ebe0be6e71b177fe30a9d99711e140e4
