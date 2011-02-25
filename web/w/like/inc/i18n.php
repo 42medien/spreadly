@@ -28,38 +28,4 @@ function __($pWildcard, $pType = "global") {
 
   return $i18n[$pType][$pWildcard];
 }
-
-/**
- * prints an i18n javascript object
- *
- * @author Matthias Pfefferle
- * @param string $pType
- * @return string
- */
-function printI18nJSObject($pType) {
-  global $i18n;
-
-  $lJS = 'var i18n = {'."\n";
-
-  // the general translations
-  foreach ($i18n['global'] as $key => $value ) {
-    $lJS .= '  "'.$key.'":"'.$value.'",'."\n";
-  }
-
-  $i = 1;
-  // the type-specific translations
-  foreach ($i18n[$pType] as $key => $value ) {
-    $lJS .= '  "'.$key.'":"'.$value.'"';
-
-    if ($i < count($i18n[$pType])) {
-      $lJS .= ',';
-    }
-    $lJS .= "\n";
-    $i++;
-  }
-
-  $lJS .= '};';
-
-  return $lJS;
-}
 ?>
