@@ -34,7 +34,7 @@
 		            <div class="whtrow">
 		            	<div class="rcor"><?php echo $pActiveDeal->getDescription(); ?></div>
 		            </div>
-		            <p class="exprebox"><?php echo __('Expires at %expire%', array('%expire%' => format_datetime($pActiveDeal->getEndDate()))); ?>  | 87/100 left</p>
+		            <p class="exprebox">87/100 Deals left</p>
 		          </div>
 		          <div class="dieblock">
 		<!--<a class="graybtn alignright" title="Copy code" href="#"><span><em class="pleasemeicon">Gefallt mir</em></span></a> -->

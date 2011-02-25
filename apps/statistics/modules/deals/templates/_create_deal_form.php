@@ -100,7 +100,7 @@
                         <div class="whtrow">
                         	<div class="rcor deal_description-mirror"><?php echo $lDefaultDeal['description']; ?></div>
                         </div>
-                        <p class="exprebox"><?php echo __('Expires at'); ?> <span id="deal_end_date-mirror"><?php echo $lDefaultDeal['end_date']; ?></span>  | 87/100 left</p>
+                        <p class="exprebox">87/100 Deals left</p>
                       </div>
                       <div class="dieblock clearfix">
                       	<span class="alignleft ekrenne">
@@ -191,7 +191,6 @@
                         		<span class="fs13"><?php echo __('Your Code:'); ?></span><br /><span class="code deal_coupon_single_code-mirror"><?php echo $pDefaultCode; ?></span>
                         	</div>
                         </div>
-                        <p class="exprebox"><?php echo __('Expires at'); ?> <?php echo $lDefaultDeal['end_date']; ?></p>
                       </div>
                       <div class="htplinks"><a href="/" class="deal_redeem_url-mirror"><?php echo $lDefaultDeal['redeem_url']; ?></a></div>
                     </div>
