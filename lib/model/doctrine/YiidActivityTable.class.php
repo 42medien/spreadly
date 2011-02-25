@@ -131,6 +131,8 @@ class YiidActivityTable extends Doctrine_Table {
       "d_id" => array('$exists' => true)
     ));
 
+    $lResults->sort(array('c' => -1));
+
     $dealIds = array();
     while($lResults->hasNext()) {
       $ya = $lResults->getNext();
