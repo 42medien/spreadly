@@ -19,7 +19,7 @@ class dealsActions extends sfActions
   {
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('deals/js_init_deals.js'));
     //$this->forward('default', 'module');
-    $this->pActiveFormerlyKnownAsYiidActivitiesOfActiveDealForUser = YiidActivityTable::retrieveActivitiesOfActiveDealsByUserId($this->getUser()->getId());
+    $this->pActiveFormerlyKnownAsYiidActivitiesOfActiveDealForUser = YiidActivityTable::retrieveDealActivitiesByUserId($this->getUser()->getId());
 
     $this->setLayout('layout');
   }
@@ -28,7 +28,7 @@ class dealsActions extends sfActions
   {
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('deals/js_init_deals.js'));
     //$this->forward('default', 'module');
-    $this->pActiveFormerlyKnownAsYiidActivitiesOfActiveDealForUser = YiidActivityTable::retrieveActivitiesOfActiveDealsByUserId($this->getUser()->getId());
+    $this->pActiveFormerlyKnownAsYiidActivitiesOfActiveDealForUser = YiidActivityTable::retrieveDealActivitiesByUserId($this->getUser()->getId());
 
     $this->setLayout('layout');
   }
