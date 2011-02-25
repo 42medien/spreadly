@@ -1,7 +1,6 @@
 <?php
 include('inc/config.inc.php');
 include('inc/WidgetUtils.php');
-include('inc/i18n.php');
 
 session_name("yiid_widget");
 session_set_cookie_params(time()+17776000, "/", LikeSettings::COOKIE_DOMAIN);
