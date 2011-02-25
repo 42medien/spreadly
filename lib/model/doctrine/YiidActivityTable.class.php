@@ -327,7 +327,8 @@ class YiidActivityTable extends Doctrine_Table {
 
     if ($lSocialObject) {
       $lQuery = $lCollection->findOne(array("u_id" => (int)$pUserId,
-                                            "so_id" => new MongoId($lSocialObject->getId()."")
+                                            "so_id" => new MongoId($lSocialObject->getId().""),
+                                            "so_id" => array('$exists' => false)
                                            ));
 
       return self::initializeObjectFromCollection($lQuery);
