@@ -298,13 +298,13 @@ class YiidActivityTable extends Doctrine_Table {
 
     $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
     $lSocialObject = SocialObjectTable::retrieveByAliasUrl($pUrl);
-    $lCond = array("u_id" => (int)$pUserId, "so_id" => new MongoId($lSocialObject->getId().""));
-
-    if($pIgnoreDeals) {
-      $lCond["d_id"] = array('$exists' => false);
-    }
 
     if ($lSocialObject) {
+      $lCond = array("u_id" => (int)$pUserId, "so_id" => new MongoId($lSocialObject->getId().""));
+
+      if($pIgnoreDeals) {
+        $lCond["d_id"] = array('$exists' => false);
+      }
       $lQuery = $lCollection->findOne($lCond);
 
       return self::initializeObjectFromCollection($lQuery);
