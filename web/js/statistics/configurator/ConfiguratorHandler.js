@@ -16,12 +16,6 @@ var Configurator = {
   },
   
   initFormFx: function() {
-    jQuery("select.custom-select").jgdDropdown({
-      callback: function() {
-        DynStyleCode.get();
-        DynStyleWidgets.update();
-      }
-    });
     jQuery("input[type='radio']").custCheckBox({
       callback: function() {
         DynStyleCode.get();

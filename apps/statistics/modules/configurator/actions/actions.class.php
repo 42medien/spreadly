@@ -44,14 +44,10 @@ class configuratorActions extends sfActions
   	$this->getResponse()->setContentType('application/json');
 		$lParams = $request->getParameter('likebutton');
     $lUrl = "http://www.spreadly.com";
-    $lLang = "en";
     $lSocial = 0;
 
 		if(isset($lParams['url']) && UrlUtils::isUrlValid($lParams['url'])){
       $lUrl = $lParams['url'];
-    }
-  	if(isset($lParams['l'])){
-      $lLang = $lParams['l'];
     }
 
     if(isset($lParams['wt']) && $lParams['wt'] == 'stand_social'){
@@ -62,13 +58,13 @@ class configuratorActions extends sfActions
   	if($lService) {
   		$lHeight = ($lSocial == 1)?"60": "24";
 
-	  	$lReturn['iframe'] = $this->getPartial('configurator/widget_'.$lService, array('pUrl' => $lUrl, 'pLang' => $lLang, 'pSocial' => $lSocial, 'pHeight' => $lHeight));
+	  	$lReturn['iframe'] = $this->getPartial('configurator/widget_'.$lService, array('pUrl' => $lUrl, 'pSocial' => $lSocial, 'pHeight' => $lHeight));
   	} else {
 
   		if($lSocial == 0) {
-	  		$lReturn['iframe'] = $this->getPartial('configurator/widget_like', array('pUrl' => $lUrl, 'pLang' => $lLang));
+	  		$lReturn['iframe'] = $this->getPartial('configurator/widget_like', array('pUrl' => $lUrl));
   		} else {
-	  		$lReturn['iframe'] = $this->getPartial('configurator/widget_full', array('pUrl' => $lUrl, 'pLang' => $lLang));
+	  		$lReturn['iframe'] = $this->getPartial('configurator/widget_full', array('pUrl' => $lUrl));
   		}
   	}
 
@@ -81,20 +77,16 @@ class configuratorActions extends sfActions
     $this->getResponse()->setContentType('application/json');
     $lParams = $request->getParameter('likebutton');
     $lUrl = "http://www.spreadly.com";
-    $lLang = "en";
     $lSocial = 0;
 		if(isset($lParams['url']) && UrlUtils::isUrlValid($lParams['url'])){
       $lUrl = $lParams['url'];
-    }
-  	if(isset($lParams['l'])){
-      $lLang = $lParams['l'];
     }
     if(isset($lParams['wt']) && $lParams['wt'] == 'stand_social'){
     	$lSocial = 1;
     }
   	$lService = (isset($lParams['service']))?$lParams['service']:null;
 
-   	$lReturn['iframe'] = $this->getPartial('configurator/preview_widgets', array('pUrl' => $lUrl, 'pLang' => $lParams['l'], 'pSocial' => $lSocial, 'pService' => $lService));
+   	$lReturn['iframe'] = $this->getPartial('configurator/preview_widgets', array('pUrl' => $lUrl, 'pSocial' => $lSocial, 'pService' => $lService));
     return $this->renderText(json_encode($lReturn));
   }
 }

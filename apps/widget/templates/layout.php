@@ -86,6 +86,7 @@
 		<img id="general-ajax-loader" style="display:none;" src="/img/global/ajax-loader-bar-circle.gif" />
 	  <script  type="text/javascript">
 	    jQuery(document).ready( function() {
+	      $("input[type='checkbox']").custCheckBox();
 	      <?php
 	        if (has_slot('js_document_ready')) {
 	          include_slot('js_document_ready');

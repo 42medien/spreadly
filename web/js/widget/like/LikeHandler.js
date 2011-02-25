@@ -6,6 +6,64 @@
  * Handles the sending of the like
  * @author KM
  */
+
+
+var WidgetDealForm = {
+    /**
+     * inits the form-functions
+     */
+    init: function() {
+      debug.log('[WidgetDealForm][init]');
+      WidgetDealForm.doSend();
+    },
+    
+    /**
+     * sends the like to the backend
+     * @author KM
+     */
+    doSend: function() {
+      debug.log('[WidgetDealForm][doSend]');      
+      
+      jQuery('#popup-send-deal-button').live('click', function() {
+        var lAction = jQuery('#popup-deal-form').attr('action');         
+        OnLoadGrafic.showGrafic();
+        WidgetDealForm.hideButton();
+        var options = {
+          url : lAction,
+          data : {
+            ei_kcuf : new Date().getTime()
+          },
+          type : 'POST',
+          dataType : 'json',
+          success : function(pResponse) {
+            if(pResponse.success == true) {
+              debug.log(pResponse.html);
+              jQuery('#coupon-unused-container').empty();
+              jQuery('#coupon-unused-container').append(pResponse.html);
+              
+            } else {
+              WidgetDealForm.showButton(); 
+            }
+            
+            OnLoadGrafic.hideGrafic();
+          }
+        };
+        
+         jQuery('#popup-deal-form').ajaxSubmit(options);
+         return false;
+      });      
+    },
+    
+    hideButton: function() {
+      jQuery('#popup-send-deal-box').hide();
+    },
+    
+    showButton: function(){
+      jQuery('#popup-send-deal-box').show();      
+    }
+};
+
+
 var WidgetLikeForm = {
     
     /**
@@ -23,7 +81,7 @@ var WidgetLikeForm = {
     doSend: function() {
       debug.log('[WidgetLikeForm][doSend]');      
       
-      jQuery('#popup-send-like-button').bind('click', function() {
+      jQuery('#popup-send-like-button').live('click', function() {
         var lAction = jQuery('#popup-like-form').attr('action');         
         OnLoadGrafic.showGrafic();
         WidgetLikeForm.hideButton();
@@ -137,6 +195,7 @@ var LikeImage = {
       //if there is no or 1 image, hide the slide-arrows and the counter
       if(pResponse.count === 0 || pResponse.count === 1){
         LikeImageCounter.hide();
+        LikeImageScroller.hideContainer();
       } else {
         // if there are more than 1 images: 
         // init the scroller
@@ -215,7 +274,13 @@ var LikeImageScroller = {
       //update the hidden image value into the form with the path of the current selected image
       WidgetLikeForm.setImageValue(LikeImage.getImgPath(this.getIndex()));
     });
+  },
+  
+  hideContainer: function() {
+    jQuery('.subdetail_img').hide();
   }
+  
+  
 };
 
 

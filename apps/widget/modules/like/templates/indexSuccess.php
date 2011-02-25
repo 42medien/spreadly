@@ -57,8 +57,8 @@ if ($lImages && count($lImages) > 0) {
                     <a class="prev browse left slide-back-link" id="slide-back-link"></a>
                     <a class="next browse left slide-next-link" id="slide-next-link"></a>
                     <span id="img-counter">1</span>/<span id="img-number"><?php echo count($pYiidMeta->getImages()); ?></span>
+                    <?php echo __('Choose image'); ?>
                   </div>
-                  Chose image
                 </div>
               </div>
               <div class="alignleft sub_detail">

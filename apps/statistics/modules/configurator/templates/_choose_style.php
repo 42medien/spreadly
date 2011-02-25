@@ -45,15 +45,6 @@
 												<?php //include_partial('configurator/preview_widgets'); ?>
 											</div>
 										</div>
-										<div class="select_label">
-											<span class="tag"><?php echo __("Choose Language (for PopUp):"); ?></span>
-											<label id="http-sel">
-									      <select name="likebutton[l]" id="likebutton_l" class="custom-select">
-									        <option value="de" selected="selected"><?php echo __('SELECT_LANGUAGE_DE', null, 'configurator'); ?></option>
-									        <option value="en"><?php echo __('SELECT_LANGUAGE_EN', null, 'configurator'); ?></option>
-									      </select>
-											</label>
-										</div>
 										</fieldset>
 									</form>
 								</div>

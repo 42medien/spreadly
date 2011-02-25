@@ -1,0 +1,1 @@
+WidgetDealForm.init();
