@@ -59,6 +59,10 @@ prod:
     url:               'http://spreadly.com'
     host:              'spreadly.com'
     widgets_url:       'http://spread.ly'
+    widgets_host:      'spread.ly'
+    blog_host:         'blog.spreadly.com'
+    old_platform_host: 'yiid.com'
+    old_stats_host:    'yiid.it'
     environment:       'prod'
     dev:               0
     pager:             20
@@ -106,9 +110,14 @@ prod:
 #
 dev:
   settings:
-    url:              'http://www.yiid.local'
-    widgets_url:      'http://widgets.yiid.local'
-    host:             'yiid.local'
+    url:              'http://spreadly.local'
+    host:             'spreadly.local'
+    widgets_url:      'http://spread.local'
+    widgets_host:     'spread.local'
+    blog_host:         'blog.spreadly.local'
+    old_platform_host: 'yiid.local'
+    old_stats_host:    'yiidstats.local'
+
     environment:      'dev'
     dev:              1
     pager:            20
@@ -155,9 +164,13 @@ dev:
 #
 staging:
   settings:
-    url:              'http://www.yiiddev.com'
-    widgets_url:      'http://widgets.yiiddev.com'
-    host:             'yiiddev.com'
+    url:              'http://ispread.it'
+    host:             'ispread.it'
+    widgets_url:      'http://yiiddev.com'
+    widgets_host:     'yiiddev.com'
+    blog_host:         'blog.yiiddev.com'
+    old_platform_host: 'yiiddev.com'
+    old_stats_host:    'stats.yiiddev.com'
     environment:      'staging'
     dev:              1
     pager:            20

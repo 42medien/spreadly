@@ -1,0 +1,84 @@
+# ##PLATFORM_HOST## = 'spreadly.com'
+# ##PLATFORM_HOST_REGEX## = 'spreadly\.com' 
+# ##WIDGET_HOST## = 'spread.ly'
+# ##WIDGET_HOST_REGEX## = 'spread\.ly'
+# ##BLOG_HOST## = 'blog.spreadly.com'
+
+# ##OLD_PLATFORM_HOST## = 'yiid.com'
+# ##OLD_PLATFORM_HOST_REGEX## = 'yiid\.com'
+# ##OLD_STATS_HOST## = 'yiid.it'
+# ##OLD_STATS_HOST_REGEX## = 'yiid\.it'
+
+# Spreadly Virtual Hosts
+<VirtualHost *:80>
+  ServerName button.##WIDGET_HOST##
+  DirectoryIndex /w/like/button.php
+</VirtualHost>
+
+<VirtualHost *:80>
+  ServerName ##WIDGET_HOST##
+  ServerAlias *.##WIDGET_HOST##
+
+  RewriteEngine On
+  RewriteLog /var/log/apache2/rewrite-##WIDGET_HOST##.log
+  RewriteLogLevel 9
+
+  RewriteCond %{HTTP_HOST} ^(.+)\.##WIDGET_HOST_REGEX##$ [NC]
+  RewriteRule ^(.*)$ http://##PLATFORM_HOST## [R=301,L]
+
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(.*)$ widget.php [QSA,L]
+
+</VirtualHost>
+
+<VirtualHost *:80>
+  ServerName ##BLOG_HOST##
+</VirtualHost>
+
+<VirtualHost *:80>
+  ServerName ##PLATFORM_HOST##
+  ServerAlias *.##PLATFORM_HOST##
+    
+  RewriteEngine On
+  RewriteLog /var/log/apache2/rewrite-##PLATFORM_HOST##.log
+  RewriteLogLevel 9
+  RewriteCond %{HTTP_HOST} ^(.+)\.##PLATFORM_HOST_REGEX##$ [NC]
+  RewriteRule ^(.*)$ http://##PLATFORM_HOST## [R=301,L]
+
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(.*)$ statistics.php [QSA,L]
+</VirtualHost>
+
+# Rewriting of pre-spreadly urls
+<VirtualHost *:80>
+  ServerName ##OLD_PLATFORM_HOST##
+  ServerAlias *.##OLD_PLATFORM_HOST##
+
+  RewriteEngine On
+  RewriteLog /var/log/apache2/rewrite-##OLD_PLATFORM_HOST##.log
+  RewriteLogLevel 9
+
+  RewriteCond %{HTTP_HOST} ^widgets\.##OLD_PLATFORM_HOST_REGEX##\/w/like/(.*).php$ [NC]
+  RewriteRule ^(.*)$ http://button.##WIDGET_HOST##/$1 [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^widgets\.##OLD_PLATFORM_HOST_REGEX##\/static/like$ [NC]
+  RewriteRule ^(.*)$ http://##WIDGET_HOST##/$1 [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^widgets\.##OLD_PLATFORM_HOST_REGEX##\/static$ [NC]
+  RewriteRule ^(.*)$ http://##WIDGET_HOST##$1 [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ##OLD_PLATFORM_HOST_REGEX## [NC]
+  RewriteRule ^(.*)$ http://##PLATFORM_HOST## [R=301,L]
+
+</VirtualHost>
+
+<VirtualHost *:80>
+  ServerName ##OLD_STATS_HOST##
+  ServerAlias *.##OLD_STATS_HOST##
+
+  RewriteEngine On
+  RewriteLog /var/log/apache2/rewrite-##OLD_STATS_HOST##.log
+  RewriteLogLevel 9
+  RewriteCond %{HTTP_HOST} ##OLD_STATS_HOST_REGEX## [NC]
+  RewriteRule ^(.*)$ http://##PLATFORM_HOST## [R=301,L]
+</VirtualHost>
