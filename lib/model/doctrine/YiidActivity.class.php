@@ -207,12 +207,12 @@ class YiidActivity extends BaseYiidActivity {
   private function updateDealInfo() {
     $deal = DealTable::getActiveDealByHostAndTagsAndUserId($this->getUrl(), $this->getTags(), $this->getUId());
     // sets the deal-id if it's not empty
-    if ($deal && $deal->isActive() && YiidActivityTable::getByDealIdAndUserId($deal->getId(), $this->getUId())) {
+    if ($deal && $deal->isActive() && !YiidActivityTable::getByDealIdAndUserId($deal->getId(), $this->getUId())) {
       if ($coupon = $deal->popCoupon()) {
         $this->setDId(intval($deal->getId()));
         $this->setCCode($coupon);
       }
-    }      
+    }
   }
 
   /**
