@@ -9,8 +9,13 @@ header('P3P: CP="DSP LAW"');
 header('Pragma: no-cache');
 header('Cache-Control: private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
 
-$wu = new WidgetUtils();
-$wu->trackUser();
+try {
+  $wu = new WidgetUtils();
+  $wu->trackUser();
+} catch (Exception $e) {
+  echo "ups, our server has a problem, if you get this message once again, please let us know";
+  exit;
+}
 ?>
 <!DOCTYPE html>
 <html>

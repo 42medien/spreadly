@@ -40,7 +40,7 @@ class WidgetUtils {
   }
 
   public function getPopupUrl() {
-    return LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time()."&title=".urlencode($this->aTitle)."&description=".urlencode($this->aDescription)."&photo=".urlencode($this->aPhoto)."&tags=".urlencode($this->aTags)."&url=".urlencode($this->aUrl);
+    return LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time()."&title=".urlencode($this->aTitle)."&description=".urlencode($this->aDescription)."&photo=".urlencode($this->aPhoto)."&tags=".urlencode($this->aTags)."&url=".urlencode($this->aUrl)."&clickback=".urlencode($this->extractClickback());
   }
 
   public function showFriends() {
@@ -209,7 +209,13 @@ class WidgetUtils {
     $lGetParams = array();
     parse_str($lParameterList['query'], $lGetParams);
 
-    return (isset($lGetParams['spreadly']))?$lGetParams['spreadly']:null;
+    if (isset($lGetParams['spreadly'])) {
+      return $lGetParams['spreadly'];
+    } elseif (isset($lGetParams['yiidit'])) {
+      return $lGetParams['yiidit'];
+    } else {
+      return null;
+    }
   }
 
   /**

@@ -32,6 +32,7 @@ class likeActions extends sfActions {
     			$this->getResponse()->setSlot('js_document_ready', $this->getPartial('like/js_init_deal.js'));
     			$this->pUrl = $request->getParameter('url');
     			$this->pTags = $request->getParameter('tags');
+    			$this->pClickback = $request->getParameter('clickback');
           return $this->setTemplate('deal');
         } else {
           $this->pActivity = YiidActivityTable::retrieveByUserIdAndUrl($this->getUser()->getId(), $lUrl);
