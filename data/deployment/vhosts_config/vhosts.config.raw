@@ -13,6 +13,16 @@
 <VirtualHost *:80>
   ServerName button.##WIDGET_HOST##
   DirectoryIndex /w/like/button.php
+  
+  DocumentRoot "/home/httpd/vhosts/yiid.com/httpdocs"
+
+  <Directory "/home/httpd/vhosts/yiid.com/httpdocs">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+  </Directory>
+  
   ErrorLog /var/log/apache2/button.##WIDGET_HOST##-error.log
   CustomLog /var/log/apache2/button.##WIDGET_HOST##-access.log common
 </VirtualHost>
@@ -21,16 +31,25 @@
   ServerName ##WIDGET_HOST##
   ServerAlias *.##WIDGET_HOST##
 
-  RewriteEngine On
-  RewriteLog /var/log/apache2/##WIDGET_HOST##-rewrite.log
+  DocumentRoot "/home/httpd/vhosts/yiid.com/httpdocs"
+
+  <Directory "/home/httpd/vhosts/yiid.com/httpdocs">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+       
+    RewriteEngine On
+       
+    RewriteCond %{HTTP_HOST} ^(.+)\.##WIDGET_HOST_REGEX##$ [NC]
+    RewriteRule ^(.*)$ http://##PLATFORM_HOST## [R=301,L]
+       
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ widget.php [QSA,L]
+  </Directory>
+  
   RewriteLogLevel 9
-
-  RewriteCond %{HTTP_HOST} ^(.+)\.##WIDGET_HOST_REGEX##$ [NC]
-  RewriteRule ^(.*)$ http://##PLATFORM_HOST## [R=301,L]
-
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteRule ^(.*)$ widget.php [QSA,L]
-
+  RewriteLog /var/log/apache2/##WIDGET_HOST##-rewrite.log
   ErrorLog /var/log/apache2/##WIDGET_HOST##-error.log
   CustomLog /var/log/apache2/##WIDGET_HOST##-access.log common
 </VirtualHost>
@@ -44,15 +63,26 @@
 <VirtualHost *:80>
   ServerName ##PLATFORM_HOST##
   ServerAlias *.##PLATFORM_HOST##
-    
-  RewriteEngine On
-  RewriteLog /var/log/apache2/##PLATFORM_HOST##-rewrite.log
-  RewriteLogLevel 9
-  RewriteCond %{HTTP_HOST} ^(.+)\.##PLATFORM_HOST_REGEX##$ [NC]
-  RewriteRule ^(.*)$ http://##PLATFORM_HOST## [R=301,L]
 
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteRule ^(.*)$ statistics.php [QSA,L]
+  DocumentRoot "/home/httpd/vhosts/yiid.com/httpdocs"
+
+  <Directory "/home/httpd/vhosts/yiid.com/httpdocs">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+
+    RewriteEngine On
+
+    RewriteCond %{HTTP_HOST} ^(.+)\.##PLATFORM_HOST_REGEX##$ [NC]
+    RewriteRule ^(.*)$ http://##PLATFORM_HOST## [R=301,L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ statistics.php [QSA,L]
+ </Directory>
+
+  RewriteLogLevel 9
+  RewriteLog /var/log/apache2/##PLATFORM_HOST##-rewrite.log
   ErrorLog /var/log/apache2/##PLATFORM_HOST##-error.log
   CustomLog /var/log/apache2/##PLATFORM_HOST##-access.log common
 </VirtualHost>
@@ -63,21 +93,21 @@
   ServerAlias *.##OLD_PLATFORM_HOST##
 
   RewriteEngine On
-  RewriteLog /var/log/apache2/##OLD_PLATFORM_HOST##-rewrite.log
-  RewriteLogLevel 9
 
-  RewriteCond %{HTTP_HOST} ^widgets\.##OLD_PLATFORM_HOST_REGEX##\/w/like/(.*).php$ [NC]
-  RewriteRule ^(.*)$ http://button.##WIDGET_HOST##/$1 [R=301,L]
+  RewriteCond %{HTTP_HOST} ^widgets\.##OLD_PLATFORM_HOST_REGEX##$ [NC]
+  RewriteRule ^\/w\/like\/(.*)\.php(.*)$ http://button.##WIDGET_HOST##/$2 [R=301,L]
 
-  RewriteCond %{HTTP_HOST} ^widgets\.##OLD_PLATFORM_HOST_REGEX##\/static/like$ [NC]
-  RewriteRule ^(.*)$ http://##WIDGET_HOST##/$1 [R=301,L]
+  RewriteCond %{HTTP_HOST} ^widgets\.##OLD_PLATFORM_HOST_REGEX##$ [NC]
+  RewriteRule ^\/static\/like(.*)$ http://##WIDGET_HOST##/$1 [R=301,L]
 
-  RewriteCond %{HTTP_HOST} ^widgets\.##OLD_PLATFORM_HOST_REGEX##\/static$ [NC]
-  RewriteRule ^(.*)$ http://##WIDGET_HOST##$1 [R=301,L]
+  RewriteCond %{HTTP_HOST} ^widgets\.##OLD_PLATFORM_HOST_REGEX##$ [NC]
+  RewriteRule ^\/static\/(.*)$ http://##WIDGET_HOST##/$1 [R=301,L]
 
   RewriteCond %{HTTP_HOST} ##OLD_PLATFORM_HOST_REGEX## [NC]
   RewriteRule ^(.*)$ http://##PLATFORM_HOST## [R=301,L]
 
+  RewriteLogLevel 9
+  RewriteLog /var/log/apache2/##OLD_PLATFORM_HOST##-rewrite.log
   ErrorLog /var/log/apache2/##OLD_PLATFORM_HOST##-error.log
   CustomLog /var/log/apache2/##OLD_PLATFORM_HOST##-access.log common
 </VirtualHost>
@@ -87,11 +117,11 @@
   ServerAlias *.##OLD_STATS_HOST##
 
   RewriteEngine On
-  RewriteLog /var/log/apache2/##OLD_STATS_HOST##-rewrite.log
-  RewriteLogLevel 9
   RewriteCond %{HTTP_HOST} ##OLD_STATS_HOST_REGEX## [NC]
   RewriteRule ^(.*)$ http://##PLATFORM_HOST## [R=301,L]
 
+  RewriteLogLevel 9
+  RewriteLog /var/log/apache2/##OLD_STATS_HOST##-rewrite.log
   ErrorLog /var/log/apache2/##OLD_STATS_HOST##-error.log
   CustomLog /var/log/apache2/##OLD_STATS_HOST##-access.log common
 </VirtualHost>
