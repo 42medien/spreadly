@@ -45,8 +45,8 @@ dev:
       port:            27017
       db_name:                 yiid_dev
       collection_name:         session
-      session_name:            spread_dev
-      session_cookie_domain:   .spread.local
+      session_name:            spreadly_dev
+      session_cookie_domain:   .spreadly.local
       session_cookie_lifetime: 17776000
 ##
 # Development settings
@@ -148,8 +148,8 @@ prod:
       port:            27017
       db_name:         yiid
       collection_name:   session
-      session_name:       spread.ly
-      session_cookie_domain: .spread.ly
+      session_name:       spreadly.com
+      session_cookie_domain: .spreadly.com
       session_cookie_lifetime: 17776000
 
 test:
@@ -201,6 +201,6 @@ all:
       cache_key_use_host_name:    true
 
   user:
-    class: myUser
+    class: statsUser
     param:
       timeout:         17776000
