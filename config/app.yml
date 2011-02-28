@@ -20,7 +20,7 @@ all:
     statistics:         marco@ekaabo.de
 
   settings:
-    filtered_parameters: [spreadly, yiidit, zanpid, utm_source, utm_medium, utm_campaign, utm_content]  #for cleaning up urls
+    filtered_parameters: [spreadly, yiidit, zanpid, utm_source, utm_medium, utm_campaign, utm_content, at_xt, sms_ss]  #for cleaning up urls
     short_url: 'http://yiid.cc'
 
   image_sizes:
