@@ -70,8 +70,6 @@ class authActions extends sfActions {
       $lUser = $lObject->doSignin($this->getUser(), $lToken);
       $this->getUser()->signIn($lUser);
     }
-    $this->pOnlineIdenities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
-    CookieUtils::generateWidgetIdentityCookie($this->pOnlineIdenities);
 
     $lUrl = $this->getUser()->getAttribute("redirect_after_login", "@widget_like", "widget");
 
