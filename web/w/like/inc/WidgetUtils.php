@@ -209,7 +209,7 @@ class WidgetUtils {
     $lGetParams = array();
     parse_str($lParameterList['query'], $lGetParams);
 
-    return (isset($lGetParams['yiidit']))?$lGetParams['yiidit']:null;
+    return (isset($lGetParams['spreadly']))?$lGetParams['spreadly']:null;
   }
 
   /**
