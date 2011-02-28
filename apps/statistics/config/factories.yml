@@ -28,8 +28,8 @@ dev:
   storage:
     class: sfSessionStorage
     param:
-      session_name:    stats_yiid_local
-      session_cookie_domain: .yiidstats.local
+      session_name:    spreadly_dev
+      session_cookie_domain: .spreadly.local
       session_cookie_lifetime: 170200
       session_path: %SF_CACHE_DIR%/sessions
 

@@ -45,8 +45,8 @@ dev:
       port:            27017
       db_name:                 yiid_dev
       collection_name:         session
-      session_name:            yiid_dev
-      session_cookie_domain:   .yiid.local
+      session_name:            spread_dev
+      session_cookie_domain:   .spread.local
       session_cookie_lifetime: 17776000
 ##
 # Development settings
