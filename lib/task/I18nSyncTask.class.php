@@ -34,6 +34,7 @@ EOF;
    */
   protected function execute($arguments = array(), $options = array()) {
     // run only in dev mode
+    $this->logSection('yiid', 'Syncing the i18n db for env='.$options['env']);
     if ($options['env'] == "dev" || $options['env'] == "staging") {
       $databaseManager = new sfDatabaseManager($this->configuration);
       $database = $databaseManager->getDatabase($options['connection']);
