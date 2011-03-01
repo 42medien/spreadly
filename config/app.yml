@@ -63,6 +63,7 @@ prod:
     blog_host:         'blog.spreadly.com'
     old_platform_host: 'yiid.com'
     old_stats_host:    'yiid.it'
+    document_root:     '/home/httpd/vhosts/yiid.com/httpdocs/web'
     environment:       'prod'
     dev:               0
     pager:             20
@@ -117,7 +118,7 @@ dev:
     blog_host:         'blog.spreadly.local'
     old_platform_host: 'yiid.local'
     old_stats_host:    'yiidstats.local'
-
+    document_root:    '/Users/hschippmann/Work/symfony/yiid/web'
     environment:      'dev'
     dev:              1
     pager:            20
@@ -171,6 +172,7 @@ staging:
     blog_host:         'blog.yiiddev.com'
     old_platform_host: 'yiiddev.com'
     old_stats_host:    'stats.yiiddev.com'
+    document_root:     '/home/httpd/vhosts/yiiddev.com/httpdocs/web'
     environment:      'staging'
     dev:              1
     pager:            20

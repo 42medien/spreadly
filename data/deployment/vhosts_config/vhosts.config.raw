@@ -9,14 +9,16 @@
 # ##OLD_STATS_HOST##          = 'yiid.it'
 # ##OLD_STATS_HOST_REGEX##    = 'yiid\.it'
 
+# ##DOCUMENT_ROOT##           = '/home/httpd/vhosts/yiid.com/httpdocs/web'
+
 # Spreadly Virtual Hosts
 <VirtualHost *:80>
   ServerName button.##WIDGET_HOST##
   DirectoryIndex /w/like/button.php
   
-  DocumentRoot "/home/httpd/vhosts/yiid.com/httpdocs"
+  DocumentRoot "##DOCUMENT_ROOT##"
 
-  <Directory "/home/httpd/vhosts/yiid.com/httpdocs">
+  <Directory "##DOCUMENT_ROOT##">
     Options Indexes FollowSymLinks
     AllowOverride All
     Order allow,deny
@@ -31,9 +33,9 @@
   ServerName ##WIDGET_HOST##
   ServerAlias *.##WIDGET_HOST##
 
-  DocumentRoot "/home/httpd/vhosts/yiid.com/httpdocs"
+  DocumentRoot "##DOCUMENT_ROOT##"
 
-  <Directory "/home/httpd/vhosts/yiid.com/httpdocs">
+  <Directory "##DOCUMENT_ROOT##">
     Options Indexes FollowSymLinks
     AllowOverride All
     Order allow,deny
@@ -64,9 +66,9 @@
   ServerName ##PLATFORM_HOST##
   ServerAlias *.##PLATFORM_HOST##
 
-  DocumentRoot "/home/httpd/vhosts/yiid.com/httpdocs"
+  DocumentRoot "##DOCUMENT_ROOT##"
 
-  <Directory "/home/httpd/vhosts/yiid.com/httpdocs">
+  <Directory "##DOCUMENT_ROOT##">
     Options Indexes FollowSymLinks
     AllowOverride All
     Order allow,deny

@@ -14,6 +14,7 @@ set  :keep_releases,  5
 
 task :prod do
   role :web,    "mario.obaake.com"                        # Your HTTP server, Apache/etc
+  set :button_deployment, false
   
   set :sf_env, "prod"
   set :domain,      "yiid.com"
@@ -24,6 +25,7 @@ end
 
 task :staging do
   role :web,    "mario.obaake.com"                        # Your HTTP server, Apache/etc
+  set :button_deployment, false
   
   set :sf_env, "staging"
   set :domain,      "yiiddev.com"

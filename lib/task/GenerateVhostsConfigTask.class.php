@@ -35,6 +35,7 @@ EOF;
 
     // replace wildcards
     $this->getFilesystem()->replaceTokens($generatedFile, '##', '##', array(
+      'DOCUMENT_ROOT'           => sfConfig::get('app_settings_document_root'),
       'PLATFORM_HOST'           => sfConfig::get('app_settings_host'),
       'PLATFORM_HOST_REGEX'     => str_replace('.', '\.', sfConfig::get('app_settings_host')),
       'WIDGET_HOST'             => sfConfig::get('app_settings_widgets_host'),
