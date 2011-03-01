@@ -53,7 +53,7 @@ EOF;
     $url = 'www.snirgel.de';
     $array = array(
       'url' => "http://$url",
-      //'oiids' => array($lOiHugoTwitter->getId()),
+      'oiids' => array($lOiHugoTwitter->getId()),
       'title' => "$url deal title",
       'descr' => "$url description",
       'comment' => "$url comment",
@@ -75,7 +75,7 @@ EOF;
     $url = 'notizblog.org';
     $array = array(
       'url' => "http://$url",
-      //'oiids' => array($lOiHugoTwitter->getId()),
+      'oiids' => array($lOiHugoTwitter->getId()),
       'title' => "$url deal title",
       'descr' => "$url description",
       'comment' => "$url comment",
@@ -96,7 +96,7 @@ EOF;
     $url = 'www.missmotz.de';
     $array = array(
       'url' => "http://$url",
-      //'oiids' => array($lOiHugoTwitter->getId()),
+      'oiids' => array($lOiHugoTwitter->getId()),
       'title' => "$url deal title",
       'descr' => "$url description",
       'comment' => "$url comment",
