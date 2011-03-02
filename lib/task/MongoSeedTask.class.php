@@ -29,6 +29,7 @@ EOF;
   {
     // add your code here
     $configuration = ProjectConfiguration::getApplicationConfiguration($options['application'], $options['env'], true);
+    sfContext::createInstance($configuration);
     date_default_timezone_set('Europe/Berlin');
     $db = new Mongo(sfConfig::get('app_mongodb_host'));
     $this->hosts = explode(',', $options['hosts']);
@@ -42,7 +43,7 @@ EOF;
     $this->createChartData($db);
     $this->createDealData($db);
   }
-  
+
   private function sometimesRand($from, $to) {
     if($this->rand==true) {
       return mt_rand($from, $to);
@@ -58,7 +59,7 @@ EOF;
       return true;
     }
   }
-  
+
   private function createActivitiesData($db) {
     $this->log("analytics.activities in collection: ".sfConfig::get('app_mongodb_database_name_stats'));
 
@@ -95,7 +96,7 @@ EOF;
       ));
       $i++;
     }
-    
+
     // Deals
     $i = 0;
     while ($i < $this->entries) {
@@ -233,12 +234,12 @@ EOF;
           "t.Schuhe.neg" => (!$schuhe_pos ? 1 : 0)*1,
           "t.Schuhe.cb" => $schuhe_cb ? 1 : 0,
           "t.Schuhe.cnt" => ($schuhe_cnt ? 1 : 0)*110,
-           
+
           "t.Hosen.pos" => ($hosen_pos ? 1 : 0)*4,
           "t.Hosen.neg" => (!$hosen_pos ? 1 : 0)*2,
           "t.Hosen.cb" => $hosen_cb ? 1 : 0,
           "t.Hosen.cnt" => ($hosen_cnt ? 1 : 0)*90,
-           
+
           "t.Jacken.pos" => ($jacken_pos ? 1 : 0)*3,
           "t.Jacken.neg" => (!$jacken_pos ? 1 : 0)*1,
           "t.Jacken.cb" => $jacken_cb ? 1 : 0,
@@ -348,12 +349,12 @@ EOF;
           "t.Schuhe.neg" => (!$schuhe_pos ? 1 : 0)*1,
           "t.Schuhe.cb" => $schuhe_cb ? 1 : 0,
           "t.Schuhe.cnt" => ($schuhe_cnt ? 1 : 0)*110,
-           
+
           "t.Hosen.pos" => ($hosen_pos ? 1 : 0)*4,
           "t.Hosen.neg" => (!$hosen_pos ? 1 : 0)*2,
           "t.Hosen.cb" => $hosen_cb ? 1 : 0,
           "t.Hosen.cnt" => ($hosen_cnt ? 1 : 0)*90,
-           
+
           "t.Jacken.pos" => ($jacken_pos ? 1 : 0)*3,
           "t.Jacken.neg" => (!$jacken_pos ? 1 : 0)*1,
           "t.Jacken.cb" => $jacken_cb ? 1 : 0,
