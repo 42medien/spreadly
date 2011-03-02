@@ -1,3 +1,4 @@
+<?php use_helper('Avatar'); ?>
 <form action="<?php echo url_for('@save_like'); ?> " name="popup-like-form" id="popup-like-form" method="post">
 <?php
 $lImages = $pYiidMeta->getImages();
@@ -28,7 +29,7 @@ if ($lImages && count($lImages) > 0) {
       <div class="commentlist spreadbox">
         <div class="clearfix profilebox">
           <div class="alignleft proimg">
-            <img src="img/spread-proimg.jpg" alt="Profile" title="Profile">
+            <img src="<?php echo avatar_path($sf_user->getUser()->getDefaultAvatar(), '48x48'); ?>" alt="<?php echo $sf_user->getUser()->getFullname() ?>" title="<?php echo $sf_user->getUser()->getFullname() ?>">
           </div>
           <div class="alignright prodetail">
             <h3>
