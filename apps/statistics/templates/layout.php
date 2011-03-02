@@ -60,7 +60,7 @@
 
       <!--Content end here -->
 			<div id="footer" class="nobg">
-   			<span>Copyright Yiid 2010</span>  |  <a href="#" title="Imprint">Imprint</a> |  <a href="#" title="TOS">TOS</a> |   <a href="#" title="Privacy Policy">Privacy Policy</a> |   <a href="mailto:info@yiid.com ">info@yiid.com </a></div>
+   			<span>Copyright Spread.ly 2011</span> | <?php echo link_to(__("Imprint"), "system/imprint") ?> |  <?php echo link_to(__("TOS"), "system/tos") ?> | <?php echo link_to(__("Privacy Policy"), "system/privacy") ?> | <a href="mailto:info@spreadly.com">info@spreadly.com</a></div>
 			</div>
 		<script type="text/javascript">
 			// Custom Checkbox Function
