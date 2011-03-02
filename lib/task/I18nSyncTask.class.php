@@ -35,6 +35,7 @@ EOF;
   protected function execute($arguments = array(), $options = array()) {
     // run only in dev mode
     $this->logSection('yiid', 'Syncing the i18n db for env='.$options['env']);
+    $this->logSection('yiid', print_r($this->configuration, true));
     if ($options['env'] == "dev" || $options['env'] == "staging") {
       $databaseManager = new sfDatabaseManager($this->configuration);
       $database = $databaseManager->getDatabase($options['connection']);
@@ -42,7 +43,10 @@ EOF;
       $u = $database->getParameter('username');
       $p = $database->getParameter('password');
       $dsn = $database->getParameter('dsn');
-
+      
+      $this->logSection('yiid', print_r($dsn, true));
+      
+      
       $results = array();
       preg_match("~host=(\w+)~i", $dsn, $results);
       $h = $results[1];
