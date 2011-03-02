@@ -84,6 +84,7 @@ namespace :deploy do
       update_code
       symfony.yiid.set
       symfony.yiid.build
+      symfony.yiid.i18n_sync
       symlink
     end
   end
@@ -155,6 +156,11 @@ namespace :symfony do
     desc "Build the button."
     task :build_button, :roles => :button do
       run "php #{current_release}/symfony yiid:build-button --env=#{sf_env}"
+    end
+
+    desc "Build the button."
+    task :i18n_sync do
+      run "php #{current_release}/symfony yiid:i18n-sync --env=#{sf_env}"
     end
     
     desc "Build it."

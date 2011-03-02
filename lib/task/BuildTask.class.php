@@ -53,7 +53,7 @@ EOF;
     }
 
     // add i18n-sync
-    $this->runTask('yiid:i18n-sync', $args, array('application' => $options['application'], 'env' => $options['env']));
+    //$this->runTask('yiid:i18n-sync', $args, array('application' => $options['application'], 'env' => $options['env']));
 
     // build js
     $this->runTask('yiid:build-js', array(), array('application' => $options['application'], 'env' => $options['env']));
