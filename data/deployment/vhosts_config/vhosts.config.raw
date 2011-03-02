@@ -80,7 +80,7 @@
     RewriteRule ^(.*)$ http://##PLATFORM_HOST## [R=301,L]
 
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^(.*)$ statistics.php [QSA,L]
+    RewriteRule ^(.*)$ index.php [QSA,L]
  </Directory>
 
   RewriteLogLevel 9
