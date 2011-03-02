@@ -71,8 +71,8 @@ EOF;
   protected function executeDbTasks($arguments = array(), $options = array()) {
     $this->logSection('yiid', 'run db tasks');
     $originalPostToServicesValue = sfConfig::get('app_settings_post_to_services');
-    sfConfig::set('app_settings_post_to_services', 'false');
-    
+    sfConfig::set('app_settings_post_to_services', 0);
+
     // new options array
     $opts = array();
     $env = $opts['env'] = $options['env'];
