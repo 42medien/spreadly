@@ -39,6 +39,7 @@ EOF;
     $originalPostToServicesValue = sfConfig::get('app_settings_post_to_services');
     sfConfig::set('app_settings_post_to_services', 0);
 
+    $this->log("Using mongo host: ".sfConfig::get('app_mongodb_host'));
     
     $lUserHugo = UserTable::retrieveByUsername('hugo');
     $lHugoOis = $lUserHugo->getOnlineIdentitesAsArray();
