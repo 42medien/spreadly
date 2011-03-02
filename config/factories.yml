@@ -84,7 +84,7 @@ staging:
       port:            27017
       db_name:                 yiid_staging
       collection_name:         session
-      session_name:            ispreadit
+      session_name:            spreadly_staging
       session_cookie_domain:   .ispread.it
       session_cookie_lifetime: 17776000
 

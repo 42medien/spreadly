@@ -6,7 +6,6 @@ prod:
   storage:
     class: sfSessionStorage
     param:
-      collection_name:         session
       session_name:            spread
       session_cookie_domain:   .spread.ly
       session_cookie_lifetime: 17776000
@@ -16,8 +15,7 @@ staging:
   storage:
     class: sfSessionStorage
     param:
-      collection_name:         session
-      session_name:            yiiddev
+      session_name:            spread_staging
       session_cookie_domain:   .yiiddev.com
       session_cookie_lifetime: 17776000
 
@@ -29,7 +27,6 @@ dev:
       session_name:    spread_dev
       session_cookie_domain: .spread.local
       session_cookie_lifetime: 170200
-      session_path: %SF_CACHE_DIR%/sessions
 
 # Default values
 all:
