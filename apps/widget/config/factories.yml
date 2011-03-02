@@ -6,7 +6,6 @@ prod:
   storage:
     class: sfSessionStorage
     param:
-      db_name:                 yiidit
       collection_name:         session
       session_name:            spread
       session_cookie_domain:   .spread.ly
@@ -17,7 +16,6 @@ staging:
   storage:
     class: sfSessionStorage
     param:
-      db_name:                 yiid_dev
       collection_name:         session
       session_name:            yiiddev
       session_cookie_domain:   .yiiddev.com
@@ -32,19 +30,6 @@ dev:
       session_cookie_domain: .spread.local
       session_cookie_lifetime: 170200
       session_path: %SF_CACHE_DIR%/sessions
-
-# Test: Testing Environment
-test:
-  storage:
-    class: sfSessionTestStorage
-    param:
-      session_path: %SF_TEST_CACHE_DIR%/sessions
-
-  response:
-    class: sfWebResponse
-    param:
-      send_http_headers: false
-
 
 # Default values
 all:
