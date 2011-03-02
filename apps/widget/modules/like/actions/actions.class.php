@@ -51,6 +51,8 @@ class likeActions extends sfActions {
 
     } elseif ($lUrl = $this->getUser()->getAttribute("redirect_after_login", null, "widget")) {
       $this->redirect($lUrl);
+    } else {
+      $this->redirect("@widget_likes");
     }
 
     $lYiidMeta = new YiidMeta();
@@ -79,7 +81,7 @@ class likeActions extends sfActions {
     $lActivity->fromArray($lParams);
 
 
-    
+
     // try to save activity
     try {
       $lActivity->save();
