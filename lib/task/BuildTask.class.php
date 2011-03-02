@@ -70,7 +70,9 @@ EOF;
    */
   protected function executeDbTasks($arguments = array(), $options = array()) {
     $this->logSection('yiid', 'run db tasks');
-
+    $originalPostToServicesValue = sfConfig::get('app_settings_post_to_services');
+    sfConfig::set('app_settings_post_to_services', false);
+    
     // new options array
     $opts = array();
     $env = $opts['env'] = $options['env'];
@@ -114,6 +116,8 @@ EOF;
         $this->runTask('yiid:mongo-testdata');
       }
     }
+    
+    sfConfig::set('app_settings_post_to_services', $originalPostToServicesValue);
 
     $this->runTask('cc');
   }

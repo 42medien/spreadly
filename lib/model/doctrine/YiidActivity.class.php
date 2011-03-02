@@ -162,7 +162,7 @@ class YiidActivity extends BaseYiidActivity {
    * sends the like to the connected communities like twitter, facebook, ...
    */
   public function postIt() {
-    if (sfConfig::get('app_settings_post_to_services') && sfConfig::get('sf_environment') != 'dev') {
+    if (sfConfig::get('app_settings_post_to_services')) {
       // send messages to all services
       foreach (PostApiFactory::fromOnlineIdentityIdArray($this->getOiids()) as $client) {
         $client->doPost($this);

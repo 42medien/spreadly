@@ -160,7 +160,7 @@ namespace :symfony do
 
     desc "Build the button."
     task :i18n_sync do
-      run "php #{current_release}/symfony yiid:i18n-sync --env=#{sf_env}"
+      run "php #{current_release}/symfony yiid:i18n-sync --env=#{sf_env} --no-confirmation"
     end
     
     desc "Build it."

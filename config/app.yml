@@ -175,7 +175,7 @@ staging:
     old_platform_host: 'yiiddev.com'
     old_stats_host:    'stats.yiiddev.com'
     document_root:     '/home/httpd/vhosts/yiiddev.com/httpdocs/web'
-    post_to_services:  false
+    post_to_services:  true
     environment:      'staging'
     dev:              1
     pager:            20
