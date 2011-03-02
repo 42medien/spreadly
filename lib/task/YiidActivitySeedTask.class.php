@@ -35,7 +35,11 @@ EOF;
     $databaseManager = new sfDatabaseManager($this->configuration);
     $databaseManager->loadConfiguration();
     $connection = $databaseManager->getDatabase($options['connection'])->getConnection();
+    
+    $originalPostToServicesValue = sfConfig::get('app_settings_post_to_services');
+    sfConfig::set('app_settings_post_to_services', 0);
 
+    
     $lUserHugo = UserTable::retrieveByUsername('hugo');
     $lHugoOis = $lUserHugo->getOnlineIdentitesAsArray();
 
@@ -109,5 +113,7 @@ EOF;
     $lActivity = new YiidActivity();
     $lActivity->fromArray($array);
     $lActivity->save();
+    
+    sfConfig::set('app_settings_post_to_services', $originalPostToServicesValue);
   }
 }
