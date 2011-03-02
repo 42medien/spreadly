@@ -58,4 +58,16 @@ class systemActions extends sfActions
   public function executeNodomain(sfWebRequest $request) {
 
   }
+
+  public function executeImprint(sfWebRequest $request) {
+
+  }
+
+  public function executeTos(sfWebRequest $request) {
+
+  }
+
+  public function executePrivacy(sfWebRequest $request) {
+
+  }
 }
