@@ -13,7 +13,11 @@ try {
   $wu = new WidgetUtils();
   $wu->trackUser();
 } catch (Exception $e) {
-  echo "ups, our server has a problem, if you get this message once again, please let us know";
+  if(LikeSettings::ENVIRONMENT=='dev') {
+    echo $e;
+  } else {
+    echo "ups, our server has a problem, if you get this message once again, please let us know";    
+  }
   exit;
 }
 ?>

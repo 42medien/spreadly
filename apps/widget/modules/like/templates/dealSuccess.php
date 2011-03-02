@@ -38,7 +38,7 @@
 		          </div>
 		          <div class="dieblock">
 		<!--<a class="graybtn alignright" title="Copy code" href="#"><span><em class="pleasemeicon">Gefallt mir</em></span></a> -->
-		          	<span class="alignleft ekrenne"><label class="radio-btn"> <input type="checkbox" name="" /></label>Ich erkenne die <span class="txt-blue">Teilnahmebedingungen</span> an.</span>
+		          	<span class="alignleft ekrenne"><label class="radio-btn"> <input type="checkbox" name="like[tos]" /></label>Ich erkenne die <span class="txt-blue">Teilnahmebedingungen</span> an.</span>
 		          	<span class="alignmiddle btn" id="popup-send-deal-box"><input type="submit" id="popup-send-deal-button" value="Spread It" /></span>
 		          </div>
 						</div>

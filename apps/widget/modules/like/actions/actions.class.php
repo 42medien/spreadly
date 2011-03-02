@@ -68,13 +68,18 @@ class likeActions extends sfActions {
 		$lActiveDeal = DealTable::getActiveByHost($lParams['url'], $lParams['tags']);
 		if($lActiveDeal) {
   		$lParams['d_id'] = $lActiveDeal->getId();
+  		if($lParams['tos']!='on') {
+  		  $lReturn['success'] = false;
+  		  $lReturn['message'] = "Terms of Service not checked.";
+  		  return $this->renderText(json_encode($lReturn));
+  		}
 		}
 
   	$lActivity = new YiidActivity();
     $lActivity->fromArray($lParams);
 
 
-
+    
     // try to save activity
     try {
       $lActivity->save();
