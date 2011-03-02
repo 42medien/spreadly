@@ -35,6 +35,7 @@ EOF;
     $this->entries = $options['count'];
     $this->drop = $options['drop'];
     $this->rand = $options['rand'];
+    $this->log("Using host: ".sfConfig::get('app_mongodb_host'));
     $this->log("Creating ".$this->entries." entries in MongoDB ...");
     $this->createActivitiesData($db);
     $this->createPiData($db);
@@ -59,6 +60,8 @@ EOF;
   }
   
   private function createActivitiesData($db) {
+    $this->log("analytics.activities in collection: ".sfConfig::get('app_mongodb_database_name_stats'));
+
     $activitiesCol = $db->selectCollection(sfConfig::get('app_mongodb_database_name_stats'), "analytics.activities");
     if($this->drop) $activitiesCol->drop();
     $tags = array('Schuhe', 'Hosen', 'Jacken');
