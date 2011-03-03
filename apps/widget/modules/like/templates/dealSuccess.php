@@ -27,7 +27,7 @@
 		    	<div class="grboxmid-content">
 						<div class="graybox clearfix rempvepad">
 		    			<div class="clearfix spactsbox" id="coupon-head-summary">
-		      			<span><?php echo __('Empfehlen Sie "%link%" und erhalten Sie ...', array('%link%' => link_to($pActiveDeal->getSummary(), '/'))); ?></span>
+		      			<span><?php echo __('Click "Like" and get ...'); ?></span>
 		      		</div>
 		          <div class="dotborbox">
 		          	<h2 class="graytitle"><?php echo $pActiveDeal->getSummary(); ?></h2>
@@ -42,7 +42,7 @@
 		          </div>
 		          <div class="dieblock">
 		<!--<a class="graybtn alignright" title="Copy code" href="#"><span><em class="pleasemeicon">Gefallt mir</em></span></a> -->
-		          	<span class="alignleft ekrenne"><input type="checkbox" id="liketos" class="checkbox dealcheckbox" name="like[tos]" />Ich erkenne die <span class="txt-blue">Teilnahmebedingungen</span> an.</span>
+		          	<span class="alignleft ekrenne"><input type="checkbox" id="liketos" class="checkbox dealcheckbox" name="like[tos]" /><?php echo __("I accept the %1.", array("%1" => link_to(__("Terms of Services"), $pActiveDeal->getTermsOfDeal(), array("target" => "_blank")))); ?></span>
 		          	<span class="alignmiddle btn" id="popup-send-deal-box"><input type="submit" id="popup-send-deal-button" value="Spread It" /></span>
 		          </div>
 						</div>

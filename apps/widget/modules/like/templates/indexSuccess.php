@@ -21,7 +21,7 @@ if ($lImages && count($lImages) > 0) {
         </div>
         <div class="alignright comment">
           <span><?php echo __("Preview for Facebook"); ?></span><br>
-          <?php echo __("(other services may look different)"); ?>
+          <?php echo __("(Your entry may look different in other services)"); ?>
         </div>
       </div>
     </div>

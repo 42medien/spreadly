@@ -5,13 +5,13 @@
 	<div class="grboxmid-content">
 		<div class="graybox clearfix">
     	<div class="clearfix spactsbox" id="coupon-head-summary">
-      	<span><?php echo __('Empfehlen Sie "%link%" und erhalten Sie ...', array('%link%' => link_to($lDeal->getSummary(), '/'))); ?></span>
+      	<span><?php echo __('Click "Like" and get ...'); ?></span>
      	</div>
     <div class="dotborboxsmall dotborboxmore">
     	<h2 class="graytitle txtcenter"><?php echo $lDeal->getDescription(); ?></h2>
       <div class="whtrow codebox">
     		<div class="rcor">
-        	<span class="fs13"><?php echo __('Ihr Gutschein-Code:'); ?></span><br /><span class="code"><?php echo $pActivity->getCCode();?></span>
+        	<span class="fs13"><?php echo __('Your Coupon Code:'); ?></span><br /><span class="code"><?php echo $pActivity->getCCode();?></span>
         </div>
       </div>
     </div>

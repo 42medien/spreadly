@@ -1,7 +1,7 @@
 <?php use_helper("Date"); ?>
 <div class="whtboxtop">
 	<div class="rcor">
-		<h1 class="deal-title">Recent Deal <em>(Coupons that have run out, are deleted from this list automatically)</em></h1>
+		<h1 class="deal-title"><?php echo __("Recent Deal"); ?></h1>
 	</div>
 </div>
 <div class="wht-contentbox clearfix">
@@ -29,7 +29,7 @@
           </div>
           <div class="dieblock">
 <!--<a class="graybtn alignright" title="Copy code" href="#"><span><em class="pleasemeicon">Gefallt mir</em></span></a> -->
-          	<span class="alignleft ekrenne"><label class="radio-btn"> <input type="checkbox" name="" /></label>Ich erkenne die <span class="txt-blue">Teilnahmebedingungen</span> an.</span>
+          	<span class="alignleft ekrenne"><label class="radio-btn"> <input type="checkbox" name="" /></label><?php echo __("I accept the %1.", array("%1" => link_to(__("Terms of Services"), $pActiveDeal->getTermsOfDeal(), array("target" => "_blank")))); ?></span>
           	<span class="alignmiddle btn"><input type="submit" id="popup-send-deal-button" value="Spread It" /></span>
           </div>
           </form>

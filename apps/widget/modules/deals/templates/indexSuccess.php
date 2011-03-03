@@ -1,7 +1,6 @@
-<?php //var_dump($pActiveFormerlyKnownAsYiidActivitiesOfActiveDealForUser[0]->getDeal()->getId());die();?>
 <div class="whtboxtop">
 	<div class="rcor">
-		<h1 class="deal-title"><?php echo __('Recent Deals'); ?> <em><?php echo __('(Coupons that have run out, are deleted from this list automatically)'); ?></em></h1>
+		<h1 class="deal-title"><?php echo __('Recent Deals'); ?></h1>
 	</div>
 </div>
 <div class="wht-contentbox clearfix">
