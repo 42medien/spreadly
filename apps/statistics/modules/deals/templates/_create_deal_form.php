@@ -69,7 +69,7 @@
             	<div class="grboxmid-content">
               	<div class="graybox clearfix">
                 	<div class="likenbox alignright">
-                  	<span class="gefelink"><a href="#"><img src="/img/gefeatmir.png" width="89" height="32" alt="Gefallt mir" title="Gefallt mir" /></a><span class="deal_button_wording-mirror"><?php echo __('...and win a free trial membership for one month!'); ?></span></span>
+                  	<span class="gefelink"><a href="#"><img src="/img/spreadly_deal_button.png" width="60" height="22" alt="Gefallt mir" title="Gefallt mir" /></a><span class="deal_button_wording-mirror"><?php echo __('...and win a free trial membership for one month!'); ?></span></span>
                   </div>
                   <div class="createbtnbox alignleft">
                   	<h2 class="btntitle"><span>1</span><?php echo __('Create your Button')?></h2>
@@ -110,7 +110,7 @@
                       	</span>
                       </div>
                       <div class="txtcenter implink">
-                      	<a href="#"><img src="/img/gefeatmir.png" width="89" height="32" alt="Gefallt mir" title="Gefallt mir" /></a>
+                      	<a href="#"><img src="/img/spreadly_deal_button.png" width="60" height="22" alt="Gefallt mir" title="Gefallt mir" /></a>
                       </div>
                     </div>
                   </div>

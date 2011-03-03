@@ -71,6 +71,7 @@ var Deal = {
     jQuery('#create-deal-content').empty();
     jQuery('#create-deal-content').append(pHtml);
     Deal.initDropdown();    
+    jQuery("input[type='checkbox']").custCheckBox();
   },
   
   showStats: function(){
@@ -227,7 +228,7 @@ var DealForm = {
           Deal.showContent(pResponse.html);
           DealTable.update();
           DealForm.init();
-          jQuery("input[type='checkbox']").custCheckBox();
+          //jQuery("input[type='checkbox']").custCheckBox();
           OnLoadGrafic.hideGrafic();
         }
       };
