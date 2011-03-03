@@ -11,7 +11,6 @@
 		<link rel="stylesheet" type="text/css" href="/css/yiid-styles.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />
 		<link rel="stylesheet" type="text/css" href="/css/colorbox/colorbox.css" media="screen" />
-		<link rel="stylesheet" type="text/css" href="/css/facebox.css" media="screen" />
 		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 
 

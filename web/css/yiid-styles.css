@@ -305,6 +305,9 @@ a.button.header { float:right; }
 .wd100{
   width: 100px;
 }
+.grboxbot {
+    z-index: 9999;
+}
 
 #nodomain-content p,
 #nodomain-content h1{
@@ -444,3 +447,16 @@ td.editinplaceclick {
 #service-img-email{ background: url("/img/social_button_sprite.png") no-repeat -1100px 0px; margin-left: 48px;}
 #service-img-email:hover{ background: url("/img/social_button_sprite.png") no-repeat -1100px -100px; }
 #service-img-email.active{ background: url("/img/social_button_sprite.png") no-repeat -1100px -200px; }
+
+#sf_apply_apply_form table th{
+  width: 130px;
+  text-align: left;
+}
+
+#sf_apply_apply_form table tr{
+  height: 27px;
+}
+
+.right{
+  float: right;
+}
