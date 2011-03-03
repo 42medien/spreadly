@@ -399,8 +399,8 @@ td.editinplaceclick {
   display:block;
   width: 50px;
   height: 50px;
-  margin-left: 5px;  
-  
+  margin-left: 5px;
+
 }
 
 
@@ -459,4 +459,8 @@ td.editinplaceclick {
 
 .right{
   float: right;
+}
+
+.spreadsel_box .checklist {
+    width: 40%;
 }
