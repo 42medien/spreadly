@@ -27,9 +27,10 @@ EOF;
 
   protected function execute($arguments = array(), $options = array())
   {
+    
     // add your code here
-    $configuration = ProjectConfiguration::getApplicationConfiguration($options['application'], $options['env'], true);
-    sfContext::createInstance($configuration);
+    //$configuration = ProjectConfiguration::getApplicationConfiguration($options['application'], $options['env'], true);
+    //sfContext::createInstance($configuration);
     date_default_timezone_set('Europe/Berlin');
     $db = new Mongo(sfConfig::get('app_mongodb_host'));
     $this->hosts = explode(',', $options['hosts']);
