@@ -1,1 +1,4 @@
-jQuery('#slider-code').tinycarousel({ display: 1 });
+    jQuery('#mycarousel').jcarousel({
+        wrap: 'circular',
+        initCallback: mycarousel_initCallback
+    });

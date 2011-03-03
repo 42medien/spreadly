@@ -1,4 +1,3 @@
-		<!--veryfied box start -->
 		<div>
 			<div class="grboxtop"><span></span></div>
 			<div class="grboxmid">
@@ -74,27 +73,15 @@
 				<div class="grboxmid-content">
 					<div class="panel_width">
 						<div class="graybox gallery_list">
-						<h3 class="sub_title">Referenzen</h3>
-						<div id="slider-code">
-							<a class="buttons prev" href="#">left</a>
-							<div class="viewport">
-								<ul class="overview clearfix">
-									<li><a href="#" title="Image"><img src="/img/refrance-img1.jpg" alt="Image" title="Image"/></a></li>
-									<li><a href="#" title="Image"><img src="/img/refrance-img2.jpg" alt="Image" title="Image"/></a></li>
-									<li><a href="#" title="Image"><img src="/img/refrance-img3.jpg" alt="Image" title="Image"/></a></li>
-									<li><a href="#" title="Image"><img src="/img/refrance-img4.jpg" alt="Image" title="Image"/></a></li>
-									<li><a href="#" title="Image"><img src="/img/refrance-img5.jpg" alt="Image" title="Image"/></a></li>
-									<li><a href="#" title="Image"><img src="/img/refrance-img1.jpg" alt="Image" title="Image"/></a></li>
-									<li><a href="#" title="Image"><img src="/img/refrance-img2.jpg" alt="Image" title="Image"/></a></li>
-									<li><a href="#" title="Image"><img src="/img/refrance-img3.jpg" alt="Image" title="Image"/></a></li>
-									<li><a href="#" title="Image"><img src="/img/refrance-img4.jpg" alt="Image" title="Image"/></a></li>
-									<li><a href="#" title="Image"><img src="/img/refrance-img5.jpg" alt="Image" title="Image"/></a></li>
-								</ul>
-							</div>
-							<a class="buttons next" href="#">right</a>
+							<h3 class="sub_title">Referenzen</h3>
+							<ul id="mycarousel" class="jcarousel-skin-tango">
+								<li><a href="#" title="Image"><img src="/img/refrance-img1.jpg" alt="Image" title="Image"/></a></li>
+								<li><a href="#" title="Image"><img src="/img/refrance-img2.jpg" alt="Image" title="Image"/></a></li>
+								<li><a href="#" title="Image"><img src="/img/refrance-img3.jpg" alt="Image" title="Image"/></a></li>
+								<li><a href="#" title="Image"><img src="/img/refrance-img4.jpg" alt="Image" title="Image"/></a></li>
+								<li><a href="#" title="Image"><img src="/img/refrance-img5.jpg" alt="Image" title="Image"/></a></li>
+							</ul>
 						</div>
-
-					</div>
 					</div>
 					<div class="alignnone"></div>
 				</div>
