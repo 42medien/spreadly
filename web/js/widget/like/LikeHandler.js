@@ -14,6 +14,12 @@ var WidgetDealForm = {
      */
     init: function() {
       debug.log('[WidgetDealForm][init]');
+      // reset the form after side-reload (fix for ff)
+      if (typeof (document.popupdealform) != "undefined") {
+        debug.log('reset');
+        document.popupdealform.reset();
+      }         
+      
       WidgetDealForm.doSend();
     },
     
@@ -24,12 +30,12 @@ var WidgetDealForm = {
     doSend: function() {
       debug.log('[WidgetDealForm][doSend]');      
       
-      jQuery('#popup-send-deal-button').live('click', function() {
-        var lAction = jQuery('#popup-deal-form').attr('action');         
+      jQuery('#popup-send-deal-button').bind('click', function() {
+        var lAction = jQuery('#popupdealform').attr('action');         
         OnLoadGrafic.showGrafic();
         WidgetDealForm.hideButton();
         var options = {
-          url : lAction,
+          url : lAction,    
           data : {
             ei_kcuf : new Date().getTime()
           },
@@ -44,12 +50,11 @@ var WidgetDealForm = {
             } else {
               WidgetDealForm.showButton(); 
             }
-            
             OnLoadGrafic.hideGrafic();
           }
         };
         
-         jQuery('#popup-deal-form').ajaxSubmit(options);
+         jQuery('#popupdealform').ajaxSubmit(options);
          return false;
       });      
     },

@@ -1,5 +1,5 @@
 /**
- * @combine likepopup
+ * @nocombine likepopup
  */
 
 var StaticLike = {
