@@ -11,3 +11,6 @@ ieprivacy:
   
 cache:     ~
 execution: ~
+
+mySwitchLanguageFilter:
+  class: SwitchLanguageFilter
