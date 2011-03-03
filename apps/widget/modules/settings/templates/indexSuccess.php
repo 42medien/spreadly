@@ -5,7 +5,7 @@
 	<div class="whtboxpad">
   	<div class="fs13 clearfix">
     	<strong><?php echo __('Social Networks'); ?></strong>
-      <span class="postedrow"><?php echo __('Likes will be posted immediately to the networks you have checked:'); ?></span>
+      <span class="postedrow"><?php echo __('Likes will be posted immediately to the networks you have selected below.'); ?></span>
     </div>
     <div class="abonnementsbox clearfix">
     	<form id="like_settings_form" name="like_settings_form">

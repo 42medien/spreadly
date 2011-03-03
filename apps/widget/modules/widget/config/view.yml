@@ -1,6 +1,0 @@
-default_widgetSuccess:
-  components:
-    content_navbar:  [dashboard, content_navbar]
-
-dislike_showSuccess:  
-  stylesheets: [-*]

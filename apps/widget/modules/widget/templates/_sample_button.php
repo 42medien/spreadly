@@ -1,2 +1,0 @@
-<?php use_helper('YiidUrl') ?>
-<iframe src="<?php echo url_for_widgets('widget/dislike?f='.urlencode($pFontColor).'&bg='.urlencode($pBgColor).'&url='.urlencode($pUrl)); ?>" style="border:none; overflow:hidden; width:100px; height: 22px;" frameborder="0" scrolling="no" marginheight="0"></iframe>
