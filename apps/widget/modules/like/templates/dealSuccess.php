@@ -34,7 +34,11 @@
 		            <div class="whtrow">
 		            	<div class="rcor"><?php echo $pActiveDeal->getDescription(); ?></div>
 		            </div>
-		            <p class="exprebox">87/100 Deals left</p>
+		            <p class="exprebox"><?php if ($pActiveDeal->isUnlimited()) {
+                    echo __("%1 Claimed Deals", array("%1" => $pActiveDeal->getCouponClaimedQuantity()));
+                  } else {
+                    echo __("%1/%2 Deals left", array("%1" => $pActiveDeal->getCouponClaimedQuantity(), "%2" => $pActiveDeal->getCouponQuantity()));
+                  } ?></p>
 		          </div>
 		          <div class="dieblock">
 		<!--<a class="graybtn alignright" title="Copy code" href="#"><span><em class="pleasemeicon">Gefallt mir</em></span></a> -->
