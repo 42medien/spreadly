@@ -67,7 +67,7 @@ var ActivityChart = {
 		      type: 'area',
 		      name: 'Likes',
 		      pointInterval: 1*24*60*60*1000,
-		      pointStart: Date.UTC(2006, 5, 01),
+		      pointStart: Date.UTC(lData.startdate.year, lData.startdate.month, lData.startdate.day),
 		      data: lData.likes,
 		      color: '#1231e3',
 	        fillOpacity: 0.1,
