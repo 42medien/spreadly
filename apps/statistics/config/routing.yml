@@ -49,7 +49,7 @@ get_buttoncode:
 configurator:
   url:  /configurator
   param: { module: configurator, action: index}
-  
+
 analytics_overview:
   url:   analytics/index
   param: { module: analytics, action: index }
@@ -113,10 +113,14 @@ wellknown:
 oexchange:
   url:  /discovery/oexchange
   param: { module: discovery, action: oexchange}
-  
+
 nodomain:
   url:  /system/nodomain
   param: { module: system, action: nodomain}
+
+imprint:
+  url:  /imprint
+  param: { module: system, action: imprint}
 
 # You can find more information about this file on the symfony website:
 # http://www.symfony-project.org/reference/1_4/en/10-Routing
