@@ -165,7 +165,7 @@ namespace :symfony do
 
     desc "Test the tasks."
     task :test_base do
-      run "php #{current_release}/symfony yiid:test-base --env=#{sf_env} --no-confirmation"
+      run "php #{current_release}/symfony yiid:test-base --env=#{sf_env}"
     end
     
     desc "Build it."

@@ -36,8 +36,8 @@ EOF;
     $databaseManager->loadConfiguration();
     $connection = $databaseManager->getDatabase($options['connection'])->getConnection();
     
-    $originalPostToServicesValue = sfConfig::get('app_settings_post_to_services');
-    sfConfig::set('app_settings_post_to_services', 0);
+    //$originalPostToServicesValue = sfConfig::get('app_settings_post_to_services');
+    //sfConfig::set('app_settings_post_to_services', 0);
 
     $this->log("Using mongo host: ".sfConfig::get('app_mongodb_host'));
     
@@ -115,6 +115,6 @@ EOF;
     $lActivity->fromArray($array);
     $lActivity->save();
     
-    sfConfig::set('app_settings_post_to_services', $originalPostToServicesValue);
+    //sfConfig::set('app_settings_post_to_services', $originalPostToServicesValue);
   }
 }

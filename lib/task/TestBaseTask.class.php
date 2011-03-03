@@ -29,6 +29,10 @@ EOF;
 
   protected function execute($arguments = array(), $options = array())
   {
+    $this->executeDbTasks($arguments, $options);
+  }
+  
+  protected function executeDbTasks($arguments = array(), $options = array()) {
     $this->log("I'm the BaseTask …");
 
     // initialize the database connection
@@ -38,5 +42,6 @@ EOF;
 
     // add your code here
     $this->runTask('yiid:test-child', array(), array('application' => $options['application'], 'env' => $options['env']));
+    
   }
 }
