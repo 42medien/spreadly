@@ -6,6 +6,7 @@
     	<div class="grboxmid-content">
 				<div class="graybox clearfix">
         	<dl id="subnavigation">
+        		<?php if(!$pDealId) {?>
           	<dd>
             	<h3><?php echo __('URLs'); ?></h3>
               <ul>
@@ -16,6 +17,7 @@
                 <li class="last"><?php echo link_to(image_tag('/img/buzz-nav.png', array('width' => '18', 'height'=>'18', 'alt'=>'Google Buzz', 'title'=>'Google Buzz')).__('Buzz'), '@get_analytics_content', array('query_string' => 'com=google&type=url_activities&host_id='.$pHostId.'&date-from='.$pDateFrom.'&date-to='.$pDateTo.'&url='.$pUrl.'&dealid='.$pDealId, 'class' => 'analytix-filter-link')); ?></li>
               </ul>
             </dd>
+            <?php } ?>
             <dd>
             	<h3><?php echo __('Activities'); ?></h3>
             	<ul>
