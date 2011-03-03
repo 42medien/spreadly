@@ -2,6 +2,9 @@
 # Global settings
 #
 all:
+  accepted:
+    languages: [en, de]
+
   release_name: 'dev'
 
   stream:

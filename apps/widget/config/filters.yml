@@ -8,9 +8,9 @@ security:  ~
 
 ieprivacy:
   class:   ieprivacyFilter
-  
+
+language_filter:
+  class: SwitchLanguageFilter
+
 cache:     ~
 execution: ~
-
-mySwitchLanguageFilter:
-  class: SwitchLanguageFilter

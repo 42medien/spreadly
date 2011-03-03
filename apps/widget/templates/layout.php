@@ -33,7 +33,6 @@
     <link rel="shortcut icon" href="/img/favicon.ico" />
   </head>
   <body class="nobg">
-  <?php var_dump($sf_user->getCulture()); ?>
 		<div class="popupblock">
 			<div class="sharepic">
         <?php echo image_tag("/img/share-pic.png", array("alt"=>"Share", "title"=>"Share", "width"=>"118", "height"=>"135")); ?>

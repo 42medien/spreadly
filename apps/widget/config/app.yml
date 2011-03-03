@@ -17,6 +17,3 @@ all:
 
 #  delicious:
 #    oauth_callback_uri: "/platform_dev.php/auth/complete_signin/service/delicious"
-
-  accepted:
-    languages: [en, de]
