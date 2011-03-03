@@ -154,7 +154,7 @@ class YiidActivity extends BaseYiidActivity {
   public function postSave($event) {
     UserTable::updateLatestActivityForUser($this->getUId(), time());
     $this->updateSocialObjectInfo();
-    //$this->postIt();
+    $this->postIt();
     StatsFeeder::feed($this);
   }
 
