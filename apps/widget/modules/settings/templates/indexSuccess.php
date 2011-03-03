@@ -13,7 +13,7 @@
 					<?php foreach ($pIdentities as $lIdentity) { ?>
 		      	<li>
 		        	<label class="radio-btn check-service">
-		          	<input type="checkbox" value="<?php echo $lIdentity->getId(); ?>" class="checkbox" name="" <?php echo $lIdentity->getSocialPublishingEnabled()?"checked='checked'":''; ?>/>
+		          	<input type="checkbox" value="<?php echo $lIdentity->getId(); ?>" class="checkbox settingscheckbox" name="" <?php echo $lIdentity->getSocialPublishingEnabled()?"checked='checked'":''; ?>/>
 		          </label>
 		          <a href="<?php echo url_for($lIdentity->getProfileUri()) ?>" target="_blank" title="<?php echo $lIdentity->getName(); ?>">
 			          <span>

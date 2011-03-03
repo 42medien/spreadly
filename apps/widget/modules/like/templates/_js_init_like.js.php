@@ -11,3 +11,4 @@
 <?php } ?>
 
 WidgetLikeForm.init();
+jQuery(".likecheckbox").custCheckBox();

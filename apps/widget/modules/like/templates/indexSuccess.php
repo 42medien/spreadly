@@ -14,7 +14,7 @@ if ($lImages && count($lImages) > 0) {
           <ul class="clearfix">
             <?php foreach($pIdentities as $lIdentity) {?>
             <li>
-              <label><input type="checkbox" name="like[oiids][]" value="<?php echo $lIdentity->getId(); ?>" <?php if ($lIdentity->getSocialPublishingEnabled()) { echo "checked='checked'"; }  ?> /></label><?php echo image_tag("/img/".$lIdentity->getCommunity()->getCommunity()."-favicon.gif", array("alt" => $lIdentity->getCommunity()->getName(), "title" => $lIdentity->getCommunity()->getName())); ?>
+              <input type="checkbox" name="like[oiids][]" class="likecheckbox" value="<?php echo $lIdentity->getId(); ?>" <?php if ($lIdentity->getSocialPublishingEnabled()) { echo 'checked="checked"'; }  ?> /><?php echo image_tag("/img/".$lIdentity->getCommunity()->getCommunity()."-favicon.gif", array("alt" => $lIdentity->getCommunity()->getName(), "title" => $lIdentity->getCommunity()->getName())); ?>
             </li>
             <?php } ?>
           </ul>

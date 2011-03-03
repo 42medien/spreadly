@@ -2,7 +2,7 @@
 
 <?php //include_partial('like/coupon_unused', array('pDeal' => $pActiveDeal, 'pUrl' => $pUrl, 'pTags' => $pTags)); ?>
 
-<form action="<?php echo url_for('@save_like'); ?> " name="popup-deal-form" id="popup-deal-form" method="post">
+<form action="<?php echo url_for('@save_like'); ?> " name="popupdealform" id="popupdealform" method="post">
 
     <input type="hidden" name="like[url]" value="<?php echo $pUrl; ?>" />
     <input type="hidden" name="like[tags]" value="<?php echo $pTags; ?>" />
@@ -13,7 +13,7 @@
           <ul class="clearfix">
             <?php foreach($pIdentities as $lIdentity) {?>
             <li>
-              <label><input type="checkbox" name="like[oiids][]" value="<?php echo $lIdentity->getId(); ?>" <?php if ($lIdentity->getSocialPublishingEnabled()) { echo "checked='checked'"; }  ?> /></label><?php echo image_tag("/img/".$lIdentity->getCommunity()->getCommunity()."-favicon.gif", array("alt" => $lIdentity->getCommunity()->getName(), "title" => $lIdentity->getCommunity()->getName())); ?>
+              <input type="checkbox" class="checkbox dealcheckbox" name="like[oiids][]" value="<?php echo $lIdentity->getId(); ?>" <?php if ($lIdentity->getSocialPublishingEnabled()) { echo "checked='checked'"; }  ?> /><?php echo image_tag("/img/".$lIdentity->getCommunity()->getCommunity()."-favicon.gif", array("alt" => $lIdentity->getCommunity()->getName(), "title" => $lIdentity->getCommunity()->getName())); ?>
             </li>
             <?php } ?>
           </ul>
@@ -38,7 +38,7 @@
 		          </div>
 		          <div class="dieblock">
 		<!--<a class="graybtn alignright" title="Copy code" href="#"><span><em class="pleasemeicon">Gefallt mir</em></span></a> -->
-		          	<span class="alignleft ekrenne"><label class="radio-btn"> <input type="checkbox" name="like[tos]" /></label>Ich erkenne die <span class="txt-blue">Teilnahmebedingungen</span> an.</span>
+		          	<span class="alignleft ekrenne"><input type="checkbox" id="liketos" class="checkbox dealcheckbox" name="like[tos]" />Ich erkenne die <span class="txt-blue">Teilnahmebedingungen</span> an.</span>
 		          	<span class="alignmiddle btn" id="popup-send-deal-box"><input type="submit" id="popup-send-deal-button" value="Spread It" /></span>
 		          </div>
 						</div>

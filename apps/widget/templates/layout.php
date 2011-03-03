@@ -27,8 +27,8 @@
     <script type="text/javascript" src="/js/100_main/include/widget-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
     <script type="text/javascript" src="/js/100_main/vendor/111_jquery.autoscroll.js"></script>
 
-    <script type="text/javascript" src="/js/widget/static/SettingsHandler.js"></script>
-    <script type="text/javascript" src="/js/widget/static/DealsHandler.js"></script>
+    <script type="text/javascript" src="/js/widget/settings/SettingsHandler.js"></script>
+    <script type="text/javascript" src="/js/widget/deals/DealsHandler.js"></script>
     <script type="text/javascript" src="/js/widget/like/LikeHandler.js"></script>
     <link rel="shortcut icon" href="/img/favicon.ico" />
   </head>
@@ -86,7 +86,6 @@
 		<img id="general-ajax-loader" style="display:none;" src="/img/global/ajax-loader-bar-circle.gif" />
 	  <script  type="text/javascript">
 	    jQuery(document).ready( function() {
-	      $("input[type='checkbox']").custCheckBox();
 	      <?php
 	        if (has_slot('js_document_ready')) {
 	          include_slot('js_document_ready');
