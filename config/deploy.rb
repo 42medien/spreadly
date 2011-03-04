@@ -162,11 +162,6 @@ namespace :symfony do
     task :i18n_sync do
       run "php #{current_release}/symfony yiid:i18n-sync --env=#{sf_env} --no-confirmation"
     end
-
-    desc "Test the tasks."
-    task :test_base do
-      run "php #{current_release}/symfony yiid:test-base --env=#{sf_env}"
-    end
     
     desc "Build it."
     task :build, :roles => :web do
