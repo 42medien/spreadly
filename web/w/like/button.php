@@ -2,7 +2,7 @@
 include('inc/config.inc.php');
 include('inc/WidgetUtils.php');
 
-session_name("yiid_widget");
+session_name("spread_button");
 session_set_cookie_params(time()+17776000, "/", LikeSettings::COOKIE_DOMAIN);
 session_start();
 header('P3P: CP="DSP LAW"');
@@ -16,7 +16,7 @@ try {
   if(LikeSettings::ENVIRONMENT=='dev') {
     echo $e;
   } else {
-    echo "ups, our server has a problem, if you get this message once again, please let us know";    
+    echo "ups, our server has a problem, if you get this message once again, please let us know";
   }
   exit;
 }
