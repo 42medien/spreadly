@@ -17,7 +17,7 @@ class apiActions extends sfActions {
    */
   public function preExecute() {
     $request = $this->getRequest();
-    
+
     $this->lType = $request->getParameter('type');
     $this->lLikeDis = $request->getParameter('likedis');
     $this->lTitle = $request->getParameter('title');
@@ -90,7 +90,7 @@ class apiActions extends sfActions {
         'clickback' => $this->lClickback,
         'tags' => $this->lTags
       );
-      
+
       $lActivity = new YiidActivity();
       $lActivity->fromArray($lAttributes);
       $lActivity->save();
@@ -121,5 +121,24 @@ class apiActions extends sfActions {
       'html' => $this->html,
       'statictype' => $this->statictype
     )));
+  }
+
+  public function executeLoad_friends(sfWebRequest $request) {
+    $this->getResponse()->setContentType('application/json');
+
+    $lSocialObjectId = $request->getParameter('so_id');
+    $lUserId = $request->getParameter('u_id');
+    $lLimit = $request->getParameter('limit');
+
+    $lFriends = SocialObjectTable::getFriendIdsForSocialObject($lSocialObjectId, $lUserId);
+
+    return $this->renderText(
+      json_encode(
+        array(
+          'success' => true,
+          'html'  => $this->getPartial('widget/social_object_friends', array('pFriends' => $lFriends, 'pLimit' => $lLimit))
+        )
+      )
+    );
   }
 }
