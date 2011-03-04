@@ -33,10 +33,9 @@
 							</dl>
 						</div>
 						<div class="alignright help_content">
-							<h3 class="title">Lorem Help</h3>
-							<p>Lorem ipsum at virtute delenit intellegam vim, eos no alii pertinax ocurreret. An affert regione civibus per, et atqui sonet ceteros sit, magna nemore constituam ex nec. </p>
-							<p>Eu ius aliquid impeditrepudiandae, mei illum aliquam et, sea ne putant feugait. Verear alterum fabellas eam ea, nam deleniti offendit similique ut. Mea at ornatus nominati.</p>
-							<p>Lusto lucilius vituperatoribus eam ut. Sint nemore eam ei, efficiendi neglegentur voluptatibus.</p>
+							<h3 class="title"><?php echo __("Help"); ?></h3>
+							<p><?php echo __("Please chose the type of website you run or click “other websites” if it is missing. Select „Email & Signatures“ to put the button in your newsletter or mailing."); ?></p><br />
+              <p><?php echo __("As extensions are offered for all common blog systems, implementing the button is made easy. Even when updates are made you do not have to bother as it adjusts automatically."); ?></p>
 						</div>
 					</div>
 				</div>

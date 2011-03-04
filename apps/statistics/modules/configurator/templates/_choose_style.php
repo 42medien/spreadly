@@ -5,10 +5,9 @@
 					<div class="graybox clearfix">
 						<div>
 							<div class="alignright help_content step2_content">
-								<h3 class="title">Lorem Help</h3>
-								<p>Lorem ipsum at virtute delenit intellegam vim, eos no alii pertinax ocurreret. An affert regione civibus per, et atqui sonet ceteros sit, magna nemore constituam ex nec. </p>
-								<p>Eu ius aliquid impeditrepudiandae, mei illum aliquam et, sea ne putant feugait. Verear alterum fabellas eam ea, nam deleniti offendit similique ut. Mea at ornatus nominati.</p>
-								<p>Lusto lucilius vituperatoribus eam ut. Sint nemore eam ei, efficiendi neglegentur voluptatibus.</p>
+								<h3 class="title"><?php echo __("Help"); ?></h3>
+								<p><?php echo __("Please provide the exact web address. This URL should point to the location wanted for your Spread.ly button. Then chose your style and decide whether you like the button with pictures or not."); ?></p><br />
+                <p><?php echo __("Your individual code will now appear in the box. Click “Copy code” to insert your Spread.ly button."); ?></p>
 							</div>
 							<div class="alignleft stylestatus_box">
 								<h3 class="sub_title"><?php echo __('Step 2: Choose Site & Style'); ?></h3>
@@ -61,7 +60,7 @@
 										</div>
 									</div>
 									<div class="textaria_bot"><span>&nbsp;</span></div>
-									<div class="copycodebox clearfix"> <a href="#" title="Copy code" class="graybtn alignleft" id="d_clip_container" style="position: relative;"><span id="d_clip_button">Copy code</span></a><?php if(!$sf_user->isAuthenticated()){?><span class="optionltext"><?php echo link_to(__("Optional: register  to get your statistics, it's free!"), '@sf_guard_signin'); ?></span><?php } ?> </div>
+									<div class="copycodebox clearfix"> <a href="#" title="<?php echo __("Copy code"); ?>" class="graybtn alignleft" id="d_clip_container" style="position: relative;"><span id="d_clip_button"><?php echo __("Copy code"); ?></span></a><?php if(!$sf_user->isAuthenticated()){?><span class="optionltext"><?php echo link_to(__("Optional: register  to get your statistics, it's free!"), '@sf_guard_signin'); ?></span><?php } ?> </div>
 								</div>
 							</div>
 						</div>
