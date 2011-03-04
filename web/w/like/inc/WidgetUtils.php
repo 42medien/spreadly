@@ -55,6 +55,10 @@ class WidgetUtils {
     return $this->aSocialObject;
   }
 
+  public function getSocialObjectId() {
+    return strval($this->aSocialObject['_id']);
+  }
+
   public function getDeal() {
     return $this->aDeal;
   }
