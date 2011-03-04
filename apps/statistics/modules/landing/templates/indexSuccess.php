@@ -4,9 +4,9 @@
 				<div class="grboxmid-content">
 					<div class="panel_width">
 						<div class="graybox buttonbox">
-							<h2>Get your button NOW, in three easy steps ...</h2>
-							<h3>Mit einem Klick in alle Netzwerke: Facebook, Twitter, LinkedIn, Google Buzz!</h3>
-							<div class="bannerimg"><img src="/img/button-banner.png" alt="" title="" class="banner"/><a href="#" class="goimg" title="Get Your Own Button Now"><img src="/img/get-yourown-img.png" alt="Get Your Own Button Now" title="Get Your Own Button Now"/></a></div>
+							<h2><?php echo __("Get your button NOW!"); ?></h2>
+							<h3><?php echo __("Three easy steps to get your content shared on all important social networks:"); ?></h3>
+							<div class="bannerimg"><?php echo image_tag("/img/button-banner.png", array("class"=>"banner")); ?><a href="<?php echo url_for("@configurator"); ?>" class="goimg" title="Get Your Own Button Now"><img src="/img/get-yourown-img.png" alt="Get Your Own Button Now" title="Get Your Own Button Now"/></a></div>
 						</div>
 					</div>
 					<div class="alignnone"></div>
@@ -20,13 +20,8 @@
 				<div class="grboxmid">
 					<div class="grboxmid-content">
 						<div class="graybox service_content">
-							<h3 class="header">Spreadly f&uuml;r <span class="bluetxt">Online-Shops</span><span>Ums&auml;tze steigern durch Social Marketing Aktionen</span></h3>
-							<p>Bewerben sie ihre Produkte im Freundeskreis ihrer Kunden und machen Sie Rabattaktionen, Sonderangebote, Gratisproben und Gewinnspiele zu viralen Selbstl&auml;ufern.</p>
-							<ul class="service_point">
-								<li><a href="#">Mehr Umsatz</a></li>
-								<li><a href="#">Neue Zielgruppen</a></li>
-								<li><a href="#">Hochwertige Empfehlungen</a></li>
-							</ul>
+							<h3 class="header"><?php echo __("Share"); ?><span><?php echo __("Benefit from huge scope"); ?></span></h3>
+							<p><?php echo __("Users of your site comment on your contents and products. They share their feedback with a click on the Spread.ly-button on different social networks. Their contacts can react by clicking and commenting."); ?></p>
 						</div>
 					</div>
 				</div>
@@ -37,13 +32,8 @@
 				<div class="grboxmid">
 					<div class="grboxmid-content">
 						<div class="graybox service_content">
-							<h3 class="header">Spreadly f&uuml;r <span class="bluetxt">Publisher</span><span>Neukunden generieren &uuml;ber Word-of-Mouth</span></h3>
-							<p>Lassen sie sich Probeabos, Gratisausgaben und digitale Publikationen, die bislang kostenlos abgegeben werden, mit einer Empfehlung bezahlen.</p>
-							<ul class="service_point">
-								<li><a href="#">Aktionen auf der eigenen Seite</a></li>
-								<li><a href="#">Hohe Response-Quote</a></li>
-								<li><a href="#">Transparente Auswertung</a></li>
-							</ul>
+							<h3 class="header"><?php echo __("Deal"); ?><span><?php echo __("recommendation marketing"); ?></span></h3>
+							<p><?php echo __("Create your deal for a defined period of time. Thank your visitors and customers for their recommendations with individual vouchers. Deals ensure additional recommendations easily."); ?></p>
 						</div>
 					</div>
 				</div>
@@ -54,13 +44,8 @@
 				<div class="grboxmid">
 					<div class="grboxmid-content">
 						<div class="graybox service_content">
-							<h3 class="header">Spreadly f&uuml;r <span class="bluetxt">Spendenorganisationen</span><span>Freunde von Spendern mobilisieren</span></h3>
-							<p>Bewerben sie ihre Produkte im Freundeskreis ihrer Kunden und machen Sie Rabattaktionen, Sonderangebote, Gratisproben und Gewinnspiele zu viralen Selbstl&auml;ufern.</p>
-							<ul class="service_point">
-								<li><a href="#">Mehr Umsatz</a></li>
-								<li><a href="#">Neue Zielgruppen</a></li>
-								<li><a href="#">Hochwertige Empfehlungen</a></li>
-							</ul>
+							<h3 class="header"><?php echo __("Analytics"); ?><span><?php echo __("Get to know your fans"); ?></span></h3>
+							<p><?php echo __("Spread.ly offers an analytic tool that measures effectiveness of recommendations. You get demographics analyzed in anonymized form and come to know the value of each recommendation."); ?></p>
 						</div>
 					</div>
 				</div>
@@ -73,7 +58,7 @@
 				<div class="grboxmid-content">
 					<div class="panel_width">
 						<div class="graybox gallery_list">
-							<h3 class="sub_title">Referenzen</h3>
+							<h3 class="sub_title"><?php echo __("References"); ?></h3>
 							<ul id="mycarousel" class="jcarousel-skin-tango">
 								<li><a href="#" title="Image"><img src="/img/refrance-img1.jpg" alt="Image" title="Image"/></a></li>
 								<li><a href="#" title="Image"><img src="/img/refrance-img2.jpg" alt="Image" title="Image"/></a></li>
