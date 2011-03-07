@@ -19,7 +19,7 @@
             </label>
           </div>
          	<div class="alignleft zeitraumblock">
-          	<h2 class="webtitle"><?php echo __('Zeitraum'); ?></h2>
+          	<h2 class="webtitle"><?php echo __('Period'); ?></h2>
             <label class="textfield-whtmid"><span><input type="text" id="date-from" class="wd172" name="date-from" value="<?php echo $pDateFrom ?>" /></span></label><span class="alignleft deshline"> - </span><label class="textfield-whtmid"><span><input type="text" class="wd172" id="date-to" name="date-to" value="<?php echo $pDateTo ?>" /></span></label>
           </div>
         </div>

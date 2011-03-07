@@ -10,8 +10,7 @@
 	      	<div class="graybox clearfix analyticsbox">
 	        	<h2 class="analytics-title"><?php echo __('%community% Likes for %url%', array('%community%' => ucfirst($pCom), '%url%' => $pData['filter']['url']) ); ?></h2>
 	          <div class="beshbox">
-	          	<?php echo __('In diesem Chart werden die stattgefunden Klicks (Likes und Dislikes) auf den Spread. Spreadly Button im gew&auml;hlten
-	Zeitraum f&uuml;r die gesamte Webseite dargestellt.');?>
+	          	<?php echo __('The chart shows all clicks on the Spread.ly button implemented on the indicated website during the above mentioned period of time.');?>
 	          </div>
 	         	<div class="textcenter analyticschart">
 	          	<?php include_partial('analytics/chart_line_urls', array('pData' => $pData, 'pCommunity' => $pCom))?>
@@ -23,7 +22,7 @@
 	              <div class="grayboxmidl">
 	              	<div class="grayboxmid">
 	                	<div class="gesamtwertebox">
-	                  	<h3><?php echo __('Total values'); ?></h3>
+	                  	<h3><?php echo __('Total value'); ?></h3>
 	                    <ul>
 	                    	<li>› <?php echo __('%likes% Likes', array('%likes%' => $pData['statistics']['total'][$pCom]['likes'])); ?></li>
 	                      <li>› <?php echo __('%clickbacks% Clickbacks', array('%clickbacks%' => $pData['statistics']['total'][$pCom]['clickbacks'])); ?></li>
@@ -38,7 +37,7 @@
 	              <div class="grayboxmidl">
 	              	<div class="grayboxmid">
 	                	<div class="gesamtwertebox">
-	                  	<h3><?php echo __('Mean values'); ?></h3>
+	                  	<h3><?php echo __('Mean value'); ?></h3>
 	                    <ul>
 	                    	<li>› <?php echo __('%likes% Likes / Day', array('%likes%' => $pData['statistics']['average'][$pCom]['likes'])); ?></li>
 	                      <li>› <?php echo __('%clickbacks% Clickbacks / Day', array('%clickbacks%' => $pData['statistics']['average'][$pCom]['clickbacks'])); ?></li>
