@@ -16,7 +16,7 @@
   ServerName button.##WIDGET_HOST##
   DocumentRoot "##DOCUMENT_ROOT##"
 
-  <Directory "/Users/pfefferle/Sites/yiid/web">
+  <Directory "##DOCUMENT_ROOT##">
     Options Indexes FollowSymLinks
     AllowOverride All
     Order allow,deny
