@@ -19,7 +19,7 @@ class WidgetUtils {
 
   public function __construct() {
     try {
-      $this->aMongoConn = new Mongo(LikeSettings::MONGO_HOSTNAME);
+      $this->aMongoConn = new Mongo(LikeSettings::MONGO_HOSTNAME, array("timeout" => 5000));
     } catch (Exception $e) {
       // do nothing
     }
