@@ -9,17 +9,8 @@ header('P3P: CP="DSP LAW"');
 header('Pragma: no-cache');
 header('Cache-Control: private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
 
-try {
-  $wu = new WidgetUtils();
-  $wu->trackUser();
-} catch (Exception $e) {
-  if(LikeSettings::ENVIRONMENT=='dev') {
-    echo $e;
-  } else {
-    echo "ups, our server has a problem, if you get this message once again, please let us know";
-  }
-  exit;
-}
+$wu = new WidgetUtils();
+$wu->trackUser();
 ?>
 <!DOCTYPE html>
 <html>
@@ -106,7 +97,7 @@ try {
   </style>
 </head>
 <body>
-  <a href="<?php echo $wu->getPopupUrl() ?>" rel="like" onclick="window.open(this.href, 'popup', 'width=580,height=435,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" target="_blank" class="button <?php echo $wu->getButtonClass(); ?>"><span class="like">&nbsp;</span><span class="count"><?php echo intval($wu->getActivityCount()) ?></span></a>
+  <a href="<?php echo $wu->getPopupUrl() ?>" rel="like" onclick="window.open(this.href, 'popup', 'width=580,height=435,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" target="_blank" class="button <?php echo $wu->getButtonClass(); ?>"><span class="like">&nbsp;</span><span class="count"><?php echo $wu->getActivityCount() ?></span></a>
   <?php if ($wu->getDeal()): ?>
     <div class="text"><?php echo $lActiveDeal['button_wording']; ?></div>
   <?php endif; ?>

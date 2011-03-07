@@ -1,6 +1,6 @@
 <?php
 /**
- * Enter description here...
+ * the buttons swiss-knife
  *
  * @author Matthias Pfefferle
  * @author Hannes Schippmann
@@ -18,7 +18,11 @@ class WidgetUtils {
   private $aShowFriends = false;
 
   public function __construct() {
-    $this->aMongoConn = new Mongo(LikeSettings::MONGO_HOSTNAME);
+    try {
+      $this->aMongoConn = new Mongo(LikeSettings::MONGO_HOSTNAME);
+    } catch (Exception $e) {
+      // do nothing
+    }
 
     if (isset($_GET['url']) && !empty($_GET['url'])) {
       $this->aUrl = urldecode($_GET['url']);
@@ -44,6 +48,10 @@ class WidgetUtils {
   }
 
   public function showFriends() {
+    if (!$this->aMongoConn) {
+      return false;
+    }
+
     return $this->getUserId() && $this->aShowFriends && $this->aSocialObject;
   }
 
@@ -64,7 +72,11 @@ class WidgetUtils {
   }
 
   public function getActivityCount() {
-    return $this->aSocialObject['l_cnt'];
+    if (!$this->aMongoConn) {
+      return "?";
+    }
+
+    return intval($this->aSocialObject['l_cnt']);
   }
 
   public function getButtonClass() {
@@ -72,6 +84,8 @@ class WidgetUtils {
       return "disabled";
     } elseif ($this->getDeal()) {
       return "deal";
+    } else {
+      return "";
     }
   }
 
@@ -84,6 +98,11 @@ class WidgetUtils {
    */
   public function extractUserIdFromSession() {
     if (!array_key_exists(LikeSettings::SF_SESSION_COOKIE, $_COOKIE)) {
+      return false;
+    }
+
+    // check if mongo is active
+    if (!$this->aMongoConn) {
       return false;
     }
 
@@ -103,6 +122,11 @@ class WidgetUtils {
    * @return array()
    */
   public function getSocialObjectByUrl() {
+    // check if mongo is active
+    if (!$this->aMongoConn) {
+      return false;
+    }
+
     $pUrl = str_replace(" ", "+", $this->aUrl);
 
     $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, 'social_object');
@@ -142,6 +166,11 @@ class WidgetUtils {
    * @return false or score of action taken (-1/1)
    */
   public function getYiidActivity() {
+    // check if mongo is active
+    if (!$this->aMongoConn) {
+      return false;
+    }
+
     $lSocialObject = $this->getSocialObject();
 
     if (!array_key_exists('_id', $lSocialObject)) {
@@ -180,6 +209,10 @@ class WidgetUtils {
    * @return false or score of action taken (-1/1)
    */
   public function actionOnHostByUser($pUserId, $pActiveDeal) {
+    // check if mongo is active
+    if (!$this->aMongoConn) {
+      return false;
+    }
 
     $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
 
@@ -231,6 +264,11 @@ class WidgetUtils {
    * @return array|boolean
    */
   private function getActiveDeal() {
+    // check if mongo is active
+    if (!$this->aMongoConn) {
+      return false;
+    }
+
     $pTags = $this->aTags;
     $pUrl = str_replace(" ", "+", $this->aUrl);
     $pUrl = $this->skipTrailingSlash($pUrl);
@@ -279,6 +317,11 @@ class WidgetUtils {
    * encapsulates all trackings
    */
   public function trackUser() {
+    // check if mongo is active
+    if (!$this->aMongoConn) {
+      return false;
+    }
+
     $this->trackPageImpression($this->aUrl, $this->extractClickback(), $this->aUserId);
     $this->trackVisit($this->aUrl);
   }
