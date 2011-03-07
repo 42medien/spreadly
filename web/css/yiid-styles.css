@@ -305,7 +305,7 @@ a.button.header { float:right; }
   width: 100px;
 }
 .grboxbot {
-    z-index: 9999;
+    z-index: 0;
 }
 
 #nodomain-content p,
@@ -345,7 +345,7 @@ a.button.header { float:right; }
 td.editinplaceclick {
     cursor: pointer;
     margin-right: 0;
-    padding-right: 26px;
+    padding-right: 4px;
 }
 
 #editinplace-box{
