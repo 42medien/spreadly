@@ -1,39 +1,3 @@
-# Production Environment
-prod:
-  settings:
-    url:              'http://yiid.it'
-    host:             'yiid.it'
-    widget_host:      'http://widgets.yiid.com'
-    static:           'http://widgets.yiid.com'
-    dev:              0
-
-# Staging Environment
-staging:
-  settings:
-    url:              'http://stats.yiiddev.com'
-    host:             'stats.yiiddev.com'
-    widget_host:      'http://widgets.yiiddev.com'
-    static:           'http://widgets.yiiddev.com'
-    dev:              1
-
-# Development Environment
-dev:
-  settings:
-    url:              'http://yiidstats.local'
-    host:             'yiid.local'
-    widget_host:      'http://widgets.yiid.local'
-    static:           'http://widgets.yiid.local'
-    dev:              1
-
-# Test: Testing Environment
-test:
-  settings:
-    url:              'http://yiidstats.local'
-    host:             'yiid.local'
-    widget_host:      'http://widgets.yiid.local'
-    static:           'http://widgets.yiid.local'
-    dev:              0
-
 # default values
 all:
   sfForkedApply:
