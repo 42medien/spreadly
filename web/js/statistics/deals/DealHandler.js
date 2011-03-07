@@ -127,7 +127,7 @@ var DealForm = {
     DealForm.toggleTagBoxes();    
     DealForm.setRadioButtons();
     DealForm.countCodes(); 
-    
+        
     // init datetime-picker for start and enddate
     jQuery('#deal_start_date').datetimepicker({
       showSecond: true,
@@ -371,9 +371,13 @@ var DealTable = {
    */
   editDate : function() {
     debug.log("[DealTable][editDate]");
-    jQuery('input#editinplace_input').datetime({
-      userLang : 'de'
-    });
+    
+    // init datetime-picker for start and enddate
+    jQuery('input#editinplace_input').datetimepicker({
+      showSecond: true,
+      timeFormat: 'hh:mm:ss',
+      dateFormat: 'yy-mm-dd'      
+    });    
   },
   
   /**

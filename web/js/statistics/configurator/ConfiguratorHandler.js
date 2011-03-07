@@ -118,6 +118,7 @@ var DynStyleCode = {
     
     //get the users flash-version
     var lPlayerVersion = swfobject.getFlashPlayerVersion();
+    debug.log('playerversion: '+lPlayerVersion.major);
     //jQuery.fx.off = true;
     //if the version is greater than 10, show the button and add the ctc-functionality
     if(lPlayerVersion.major >= 10) {
