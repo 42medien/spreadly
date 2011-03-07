@@ -39,7 +39,7 @@ task :button do
   set :button_deployment, true
   
   set :user, 'www-data'
-  role :button, "ec2-46-137-9-10.eu-west-1.compute.amazonaws.com"
+  role :button, "ec2-46-51-137-77.eu-west-1.compute.amazonaws.com" # Staging
   
   set :deploy_directory, "/var/www"
   set :current_dir, "yiid"
@@ -48,6 +48,22 @@ task :button do
   set :domain,      "widgets.yiid.com"
   set :deploy_to,   "#{deploy_directory}"
   set :deploy_via, :export
+  ask_for_repository
+end
+
+task :staging_button do
+  set :button_deployment, true
+  
+  set :user, 'www-data'
+  role :button, "ec2-46-51-137-77.eu-west-1.compute.amazonaws.com" # Staging
+  
+  set :deploy_directory, "/var/www"
+  set :current_dir, "yiid"
+  
+  set :sf_env, "staging"
+  set :domain,      "widgets.yiiddev.com"
+  set :deploy_to,   "#{deploy_directory}"
+  set :deploy_via, :checkout
   ask_for_repository
 end
 
