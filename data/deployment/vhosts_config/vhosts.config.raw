@@ -1,5 +1,5 @@
 # ##PLATFORM_HOST##           = 'spreadly.com'
-# ##PLATFORM_HOST_REGEX##     = 'spreadly\.com' 
+# ##PLATFORM_HOST_REGEX##     = 'spreadly\.com'
 # ##WIDGET_HOST##             = 'spread.ly'
 # ##WIDGET_HOST_REGEX##       = 'spread\.ly'
 # ##BLOG_HOST##               = 'blog.spreadly.com'
@@ -14,17 +14,23 @@
 # Spreadly Virtual Hosts
 <VirtualHost *:80>
   ServerName button.##WIDGET_HOST##
-  DirectoryIndex /w/like/button.php
-  
   DocumentRoot "##DOCUMENT_ROOT##"
 
-  <Directory "##DOCUMENT_ROOT##">
+  <Directory "/Users/pfefferle/Sites/yiid/web">
     Options Indexes FollowSymLinks
     AllowOverride All
     Order allow,deny
     Allow from all
+
+    RewriteEngine On
+
+    RewriteCond %{REQUEST_FILENAME} !-f [NC]
+    RewriteRule api\/(.*)$ widget.php/api/$1 [QSA,L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ w/like/button.php [QSA,L]
   </Directory>
-  
+
   ErrorLog /var/log/apache2/button.##WIDGET_HOST##-error.log
   CustomLog /var/log/apache2/button.##WIDGET_HOST##-access.log common
 </VirtualHost>
@@ -40,16 +46,16 @@
     AllowOverride All
     Order allow,deny
     Allow from all
-       
+
     RewriteEngine On
-       
+
     RewriteCond %{HTTP_HOST} ^(.+)\.##WIDGET_HOST_REGEX##$ [NC]
     RewriteRule ^(.*)$ http://##PLATFORM_HOST## [R=301,L]
-       
+
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ widget.php [QSA,L]
   </Directory>
-  
+
   RewriteLogLevel 9
   RewriteLog /var/log/apache2/##WIDGET_HOST##-rewrite.log
   ErrorLog /var/log/apache2/##WIDGET_HOST##-error.log
