@@ -59,6 +59,9 @@ var AnalyticsFilter = {
  */
 var AnalyticsFilterNav = {
     
+    aSelectedId: null,
+    aSelectedElem: null,
+    
     /**
      * inits the functions
      * @author KM
@@ -77,9 +80,13 @@ var AnalyticsFilterNav = {
       debug.log('[AnalyticsFilterNav][bindClick]');      
       jQuery('.analytix-filter-link').live('click', function() {
         OnLoadGrafic.showGrafic();        
+        if(jQuery(this).hasClass('url-filter-link')) {
+          AnalyticsFilterNav.aSelectedId = jQuery(this).attr('id');
+        } else {
+          AnalyticsFilterNav.aSelectedElem = this;
+        }
         AnalyticsFilterNav.getContent(this);
-        //jQuery('.analytix-filter-link').removeClass('active');
-        //jQuery(this).addClass('active');
+        
         return false;  
       });
     },
@@ -108,9 +115,23 @@ var AnalyticsFilterNav = {
           if(pResponse.nav != undefined){
             AnalyticsFilterNav.show(pResponse.nav);            
           }
+          AnalyticsFilterNav.highlight();
+      
           OnLoadGrafic.hideGrafic();
         }
       });
+    },
+    
+    highlight: function() {
+      debug.log('[AnalyticsFilterNav][getContent]');
+      jQuery('.analytix-filter-link').removeClass('active');
+      if(AnalyticsFilterNav.aSelectedElem != null) {
+        jQuery(AnalyticsFilterNav.aSelectedElem).addClass('active');  
+        AnalyticsFilterNav.aSelectedElem = null;
+      } else {
+       jQuery('#'+AnalyticsFilterNav.aSelectedId).addClass('active');
+      }
+                
     },
     
     /**

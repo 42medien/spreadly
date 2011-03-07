@@ -462,3 +462,7 @@ td.editinplaceclick {
 .spreadsel_box .checklist {
     width: 40%;
 }
+
+#subnavigation ul li a.active{ background:url(../img/navtabbg-hov.png) left top no-repeat; line-height:24px; text-decoration:none; color:#fff;  }
+#subnavigation ul li.first a.active{ background:url(../img/navltophov.png) left top no-repeat;}
+#subnavigation ul li.last a.active{ background:url(../img/navlbothov.png) left top no-repeat; }
