@@ -16,7 +16,7 @@ class LikeSettings {
 
   const JS_POPUP_PATH = '##YIID_WIDGET_URL##/';
 
-  const JS_GETFRIENDS_PATH = '##YIID_WIDGET_URL##/load_friends';
+  const JS_GETFRIENDS_PATH = '/api/load_friends';
 
   const DEV = ##IS_DEV##;
   const ENVIRONMENT = '##ENVIRONMENT##';
