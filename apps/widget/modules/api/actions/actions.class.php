@@ -24,10 +24,7 @@ class apiActions extends sfActions {
 
     return $this->renderText(
       json_encode(
-        array(
-          'success' => true,
-          'html'  => $this->getPartial('widget/social_object_friends', array('pFriends' => $lFriends, 'pLimit' => $lLimit))
-        )
+        array('success' => true, 'html'  => $this->getPartial('widget/social_object_friends', array('pFriends' => $lFriends, 'pLimit' => $lLimit)))
       )
     );
   }
