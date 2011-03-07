@@ -72,7 +72,7 @@ if ($lImages && count($lImages) > 0) {
         <div class="comment_box clearfix">
           <label class="alignleft comment_post">
           <textarea rows="2" cols="2" id="area-like-comment" class="mirror-value" name="like[comment]"><?php echo __("add your comment (optional) ..."); ?></textarea>
-          </label> <span class="alignleft btn"><input type="submit" id="popup-send-like-button" value="Spread It" /></span>
+          </label> <span class="alignleft btn"><input type="submit" id="popup-send-like-button" class="alignleft" value="" /></span>
         </div>
       </div>
     </div>

@@ -51,7 +51,7 @@
           <ul class="popnavigation alignleft">
           	<!-- li <?php if($sf_context->getModuleName()=='profile') { echo 'class="active"';} ?>><?php echo link_to(__('Profile'), '@widget_profile'); ?> <span></span></li -->
             <li <?php if ($sf_context->getModuleName()=='likes') { echo 'class="active"'; } ?>><?php echo link_to(__('Likes'), '@widget_likes'); ?><span></span></li>
-            <li <?php if ($sf_context->getModuleName()=='deals') { echo 'class="active"'; } ?>"><?php echo link_to(__('Deals'), '@widget_deals'); ?><span></span></li>
+            <li <?php if ($sf_context->getModuleName()=='deals') { echo 'class="active"'; } ?>><?php echo link_to(__('Deals'), '@widget_deals'); ?><span></span></li>
             <li class="last <?php if ($sf_context->getModuleName()=='settings') { echo 'active'; } ?>"><?php echo link_to(__('Settings'), '@widget_settings'); ?><span></span></li>
           </ul>
           <div class="profile-info spread_profile alignright" >

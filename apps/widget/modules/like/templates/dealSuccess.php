@@ -43,7 +43,7 @@
 		          <div class="dieblock">
 		<!--<a class="graybtn alignright" title="Copy code" href="#"><span><em class="pleasemeicon">Gefallt mir</em></span></a> -->
 		          	<span class="alignleft ekrenne"><input type="checkbox" id="liketos" class="checkbox dealcheckbox" name="like[tos]" /><?php echo __("I accept the %1.", array("%1" => link_to(__("Terms of Services"), $pActiveDeal->getTermsOfDeal(), array("target" => "_blank")))); ?></span>
-		          	<span class="alignmiddle btn" id="popup-send-deal-box"><input type="submit" id="popup-send-deal-button" value="Spread It" /></span>
+		          	<span class="alignmiddle btn" id="popup-send-deal-box"><input type="submit" id="popup-send-deal-button" value="" /></span>
 		          </div>
 						</div>
 		      </div>
