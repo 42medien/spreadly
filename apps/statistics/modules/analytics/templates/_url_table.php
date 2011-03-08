@@ -12,7 +12,12 @@
 			<tr>
 				<td height="44" align="left" class="first">
 				  <div class="martext">
-				    <strong><?php echo $data['title'] ?></strong><br />
+				  	<?php if($data['title'] && $data['title']!='') { ?>
+				    	<strong><?php echo $data['title'] ?></strong>
+				    <?php } else {?>
+				    	<strong><?php echo __('No title'); ?></strong>
+				    <?php } ?>
+				    	<br />
     				<?php if($pHostId && $pFrom && $pTo): ?>
       				<?php echo link_to($data['url'], '@get_analytics_content', array('query_string' => 'com=all&url='.$data['url'].'&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo.'&type=url_activities', 'class' => 'analytix-filter-link'));  ?>
       			<?php else: ?>

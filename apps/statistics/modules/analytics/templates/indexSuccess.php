@@ -11,7 +11,7 @@
   		<?php foreach($pVerifiedDomains as $lDomain) { ?>
   			<tr>
   				<td height="44" align="center" class="first"><?php echo $i; ?></td>
-  		    <td align="center" valign="middle"><?php echo link_to($lDomain->getUrl(), '@analytics?host_id='.$lDomain->getId()); ?></td>
+  		    <td align="left" valign="middle" id="domain-table-website"  class="martext"><strong><?php echo link_to($lDomain->getUrl(), '@analytics?host_id='.$lDomain->getId()); ?></strong></td>
   				<td height="44" align="center" class="last"><?php echo $pActivityCount[$lDomain->getId()]; ?></td>
   			</tr>
       <?php $i++; } ?>
