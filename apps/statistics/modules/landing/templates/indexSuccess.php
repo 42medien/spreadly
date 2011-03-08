@@ -6,7 +6,7 @@
 						<div class="graybox buttonbox">
 							<h2><?php echo __("Get your button NOW!"); ?></h2>
 							<h3><?php echo __("Three easy steps to get your content shared on all important social networks:"); ?></h3>
-							<div class="bannerimg"><?php echo image_tag("/img/button-banner.png", array("class"=>"banner")); ?><a href="<?php echo url_for("@configurator"); ?>" class="goimg" title="Get Your Own Button Now"><img src="/img/get-yourown-img.png" alt="Get Your Own Button Now" title="Get Your Own Button Now"/></a></div>
+							<div class="bannerimg"><?php echo image_tag("/img/button-banner-".$sf_user->getCulture().".png", array("class"=>"banner")); ?><a href="<?php echo url_for("@configurator"); ?>" class="goimg" title="Get Your Own Button Now"><img src="/img/get-yourown-img.png" alt="Get Your Own Button Now" title="Get Your Own Button Now"/></a></div>
 						</div>
 					</div>
 					<div class="alignnone"></div>
