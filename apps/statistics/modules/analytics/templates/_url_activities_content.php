@@ -5,7 +5,9 @@
     <div class="grboxmid">
     	<div class="grboxmid-content">
 			<?php if (!$pUrl || $pUrl == '' || $pUrl == null) {?>
-				<?php echo __('No url statistics available'); ?>
+				<div class="graybox">
+					<?php echo __('No url statistics available'); ?>
+				</div>
 			<?php } else { ?>
 	      	<div class="graybox clearfix analyticsbox">
 	        	<h2 class="analytics-title"><?php echo __('%community% Likes for %url%', array('%community%' => ucfirst($pCom), '%url%' => $pData['filter']['url']) ); ?></h2>
