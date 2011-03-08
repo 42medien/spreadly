@@ -51,43 +51,43 @@ configurator:
   param: { module: configurator, action: index}
 
 analytics_overview:
-  url:   analytics/index
+  url:   /analytics
   param: { module: analytics, action: index }
 
 analytics:
-  url:   analytics/statistics
+  url:   /analytics/statistics
   param: { module: analytics, action: statistics }
 
 get_analytics_content:
-  url: analytics/get_analytics_content
+  url: /analytics/get_analytics_content
   param: { module: analytics, action: get_analytics_content }
 
 deals:
-  url:   deals/index
+  url:   /deals/index
   param: { module: deals, action: index }
 
 get_create_index:
-  url:   deals/get_create_index
+  url:   /deals/get_create_index
   param: { module: deals, action: get_create_index }
 
 get_deal_table:
-  url:   deals/get_deal_table
+  url:   /deals/get_deal_table
   param: { module: deals, action: get_deal_table }
 
 get_form_by_domain:
-  url:   deals/get_form_by_domain
+  url:   /deals/get_form_by_domain
   param: { module: deals, action: get_form_by_domain }
 
 deal_save:
-  url:   deals/save
+  url:   /deals/save
   param: { module: deals, action: save }
 
 set_state:
-  url:   deals/set_state
+  url:   /deals/set_state
   param: { module: deals, action: set_state }
 
 edit_enddate:
-  url:   deals/edit_enddate
+  url:   /deals/edit_enddate
   param: { module: deals, action: edit_enddate }
 
 get_create_form:
