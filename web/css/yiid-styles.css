@@ -391,8 +391,9 @@ td.editinplaceclick {
   cursor: default;
 }
 
+.languagebox {width: 250px;}
 .languagebox .welcome_user { color:#588199; background:url(../img/top-nav-devider.gif) right 3px no-repeat; padding-right:10px; margin-right:10px; margin-left:0px; line-height:15px; font-size: 15px; }
-.languagebox a.logout{ background:none; padding-right:10px; margin-right:4px; font-size:15px; color:#252525; display:inline-block; line-height:15px; margin-top: 0px;}
+.languagebox a.logout{ background:none; padding-right:10px; margin-right:4px; font-size:15px; color:#252525; display:inline-block; line-height:17px; margin-top: 0px;}
 
 .service-img-link{
   display:block;
