@@ -11,9 +11,7 @@ header('Cache-Control: private, no-store, no-cache, must-revalidate, post-check=
 
 $wu = new WidgetUtils();
 $wu->trackUser();
-?>
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">

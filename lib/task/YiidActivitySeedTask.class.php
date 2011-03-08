@@ -35,26 +35,30 @@ EOF;
     $databaseManager = new sfDatabaseManager($this->configuration);
     $databaseManager->loadConfiguration();
     $connection = $databaseManager->getDatabase($options['connection'])->getConnection();
-    
+
     $originalPostToServicesValue = sfConfig::get('app_settings_post_to_services');
     sfConfig::set('app_settings_post_to_services', 0);
 
     $this->log("Using mongo host: ".sfConfig::get('app_mongodb_host'));
-    
+
     $lUserHugo = UserTable::retrieveByUsername('hugo');
     $lHugoOis = $lUserHugo->getOnlineIdentitesAsArray();
+
+    $lUserJames = UserTable::retrieveByUsername('james');
+    $lJamesOis = $lUserHugo->getOnlineIdentitesAsArray();
 
     $lCommunityTwitter = CommunityTable::retrieveByCommunity('twitter');
     $lCommunityFb = CommunityTable::retrieveByCommunity('facebook');
 
     $lOiHugoTwitter = OnlineIdentityTable::retrieveByAuthIdentifier('http://twitter.com/account/profile?user_id=21092406', $lCommunityTwitter->getId());
+    $lOiJamesFacebook = OnlineIdentityTable::retrieveByAuthIdentifier('james_fb', $lCommunityFb->getId());
 
     $this->dispatcher->connect('deal.changed', array('DealListener', 'updateMongoDeal'));
     $deal = DealTable::getInstance()->findByDescription('snirgel approved description');
     $deal[0]->approve();
-    
-    
-    
+
+
+
     $url = 'www.snirgel.de';
     $array = array(
       'url' => "http://$url",
@@ -72,11 +76,27 @@ EOF;
     $lActivity->fromArray($array);
     $lActivity->save();
 
+    $array = array(
+      'url' => "http://$url",
+      'oiids' => array($lOiJamesFacebook->getId()),
+      'title' => "$url deal title",
+      'descr' => "$url description",
+      'comment' => "$url comment",
+      'thumb' => null,
+      'clickback' => null,
+      'tags' => null,
+      'u_id' => $lUserJames->getId()
+    );
+
+    $lActivity = new YiidActivity();
+    $lActivity->fromArray($array);
+    $lActivity->save();
+
     $this->dispatcher->connect('deal.changed', array('DealListener', 'updateMongoDeal'));
     $deal = DealTable::getInstance()->findByDescription('notizblog approved description');
     $deal[0]->approve();
 
-    
+
     $url = 'notizblog.org';
     $array = array(
       'url' => "http://$url",
@@ -114,7 +134,7 @@ EOF;
     $lActivity = new YiidActivity();
     $lActivity->fromArray($array);
     $lActivity->save();
-    
+
     sfConfig::set('app_settings_post_to_services', $originalPostToServicesValue);
   }
 }

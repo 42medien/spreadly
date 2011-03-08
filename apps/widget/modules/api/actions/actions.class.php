@@ -18,9 +18,10 @@ class apiActions extends sfActions {
 
     if($lUserId && $lSocialObjectId) {
     	$lFriends = SocialObjectTable::getFriendIdsForSocialObject($lSocialObjectId, $lUserId);
+
     	if($lFriends) {
     		$lReturn['success'] = true;
-    		$lReturn['html'] =  $this->getPartial('widget/social_object_friends', array('pFriends' => $lFriends));
+    		$lReturn['html'] =  $this->getPartial('profile/social_object_friends', array('pFriends' => array_slice($lFriends, 0, 3)));
     	}
 
     }
