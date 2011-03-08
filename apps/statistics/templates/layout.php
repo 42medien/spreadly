@@ -45,7 +45,7 @@
     <div id="header">
     	<div class="clearfix">
       	<div id="logo-spread" class="alignleft"><a href="<?php echo url_for("@homepage"); ?>"><img src="/img/spread-logo-domain.png" width="306" height="128" alt="" /></a></div>
-        <span class="alignleft easy-tagline"><img src="/img/easy-tagline.png" width="237" height="63" alt="It's as easy as cut, copy and paste" title="It's as easy as cut, copy and paste" /></span></div>
+        <span class="alignleft easy-tagline">"The Better Button"</span></div>
 			</div>
 			<!--Content start here -->
 			<div id="content" class="clearfix">

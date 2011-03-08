@@ -468,3 +468,19 @@ td.editinplaceclick {
 #subnavigation ul li.last a.active{ background:url(../img/navlbothov.png) left top no-repeat; }
 
 .help_content { height: 165px; }
+
+.easy-tagline {
+  font-size: 30px;
+  line-height: 30px;
+  font-style: italic;
+  text-shadow: #b3b3b3 1px 1px 2px;
+}
+
+.popup-tagline {
+	color: #fff;
+  font-size: 18px;
+  line-height: 20px;
+  text-shadow: #b3b3b3 1px 1px 1px;
+  margin: 45px 100px 0 0;
+  float: right;
+}

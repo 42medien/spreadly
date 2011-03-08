@@ -41,7 +41,7 @@
     		<a href="#" class="alignleft spreadlogo">
     		  <?php echo image_tag("/img/spread-logo.png", array("alt"=>"Spread.ly", "title"=>"Spread.ly", "width"=>"211", "height"=>"88")); ?>
     		</a>
-    		<?php echo image_tag("/img/like-slogan.png", array("alt"=>"Spread.ly", "title"=>"Spread.ly", "width"=>"166", "height"=>"53", "class"=>"alignleft slogantext")); ?>
+    		<div class="popup-tagline">"The Better Button"</div>
   		</div>
 
       <!--Pop Navigation start -->
