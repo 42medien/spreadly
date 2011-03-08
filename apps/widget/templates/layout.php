@@ -30,7 +30,7 @@
     <script type="text/javascript" src="/js/widget/settings/SettingsHandler.js"></script>
     <script type="text/javascript" src="/js/widget/deals/DealsHandler.js"></script>
     <script type="text/javascript" src="/js/widget/like/LikeHandler.js"></script>
-    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link rel="shortcut icon" href="/favicon.ico" />
   </head>
   <body class="nobg">
 		<div class="popupblock">
