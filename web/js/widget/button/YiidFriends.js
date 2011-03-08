@@ -1,6 +1,5 @@
 /**
- * @combine Full
- * @combine Like
+ * @combine button
  */
 
 var YiidFriends = {

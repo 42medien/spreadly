@@ -102,9 +102,8 @@ $wu->trackUser();
   <?php if ($wu->getDeal()): ?>
     <div class="text"><?php echo $lActiveDeal['button_wording']; ?></div>
   <?php endif; ?>
-  <?php //if ($wu->showFriends()): ?>
-  <script type="text/javascript" src="/js/widget/button/100_YiidUtils.js"></script>
- 	<script type="text/javascript" src="/js/widget/button/YiidFriends.js"></script>
+  <?php if ($wu->showFriends()): ?>
+ 	<script type="text/javascript" src="/js/100_main/include/button-<?php echo LikeSettings::RELEASE_NAME; ?>.js"></script>
   <script type="text/javascript">
 		YiidFriends.aGetAction = "/api/load_friends";
 		YiidFriends.init("<?php echo $wu->getSocialObjectId(); ?>");
@@ -113,6 +112,6 @@ $wu->trackUser();
   <div id="friends">
 
 	</div>
-  <?php //endif; ?>
+  <?php endif; ?>
 </body>
 </html>

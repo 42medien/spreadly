@@ -1,3 +1,7 @@
+/**
+ * @combine button
+ */
+
 var json_parse = (function () {
 
 // This is a function that can parse a JSON text, producing a JavaScript
