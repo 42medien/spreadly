@@ -1,19 +1,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <?php include_title() ?>
-    <?php include_http_metas() ?>
+    <title><?php echo __('Spread.ly - "The Better Button"'); ?></title>
     <?php include_metas() ?>
+    <?php include_http_metas() ?>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-
 		<link rel="stylesheet" type="text/css" href="/css/styles.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="/css/yiid-styles.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />
 		<link rel="stylesheet" type="text/css" href="/css/colorbox/colorbox.css" media="screen" />
 		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-
-
 
 		<!--[if IE]>
 		<link rel="stylesheet" type="text/css" href="/css/ie.css" />
