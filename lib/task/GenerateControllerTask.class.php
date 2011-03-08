@@ -10,7 +10,7 @@ class GenerateControllerTask extends sfBaseTask {
    */
   protected function configure() {
     $this->addOptions(array(
-      new sfCommandOption('application', null, sfCommandOption::PARAMETER_REQUIRED, 'The application name', 'platform'),
+      new sfCommandOption('application', null, sfCommandOption::PARAMETER_REQUIRED, 'The application name', 'statistics'),
       new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev'),
       new sfCommandOption('all', null, sfCommandOption::PARAMETER_NONE, 'Build all controller')
     ));
