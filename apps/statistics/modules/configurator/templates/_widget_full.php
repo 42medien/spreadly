@@ -1,1 +1,1 @@
-<iframe src="<?php echo sfConfig::get("app_settings_button_url"); ?>/?url=<?php echo urlencode($pUrl); ?>&social=1" style="overflow:hidden; width: 420px; height: 60px; padding: 0px 0;" frameborder="0" scrolling="no" marginheight="0" allowTransparency="true"></iframe>
+<a href="<?php echo sfConfig::get('app_settings_widget_url'); ?>?url=<?php echo rawurlencode($pUrl); ?>" target="_blank"><img src="<?php echo sfConfig::get('app_settings_url'); ?>/img/like_button_friends.png" alt="Like" /></a>

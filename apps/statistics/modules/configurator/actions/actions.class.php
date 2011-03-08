@@ -62,9 +62,9 @@ class configuratorActions extends sfActions
   	} else {
 
   		if($lSocial == 0) {
-	  		$lReturn['iframe'] = $this->getPartial('configurator/widget_like', array('pUrl' => $lUrl));
+	  		$lReturn['iframe'] = $this->getPartial('configurator/widget_like_code', array('pUrl' => $lUrl));
   		} else {
-	  		$lReturn['iframe'] = $this->getPartial('configurator/widget_full', array('pUrl' => $lUrl));
+	  		$lReturn['iframe'] = $this->getPartial('configurator/widget_full_code', array('pUrl' => $lUrl));
   		}
   	}
 
