@@ -1,9 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#">
   <head>
     <title><?php echo __('Spread.ly - "The Better Button"'); ?></title>
     <?php include_metas() ?>
     <?php include_http_metas() ?>
+
+    <meta property="og:site_name" content="Spread.ly" />
+    <meta property="og:image" content="<?php echo image_path("/img/spreadlyicon.jpg", true); ?>" />
+    <meta property="og:url" content="http://spreadly.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:email" content="info@spreadly.com" />
+    <meta property="og:phone_number" content="+49-6201-845200" />
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" type="text/css" href="/css/styles.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="/css/yiid-styles.css" media="screen" />
