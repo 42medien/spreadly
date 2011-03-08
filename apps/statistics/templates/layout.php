@@ -35,7 +35,7 @@
     <script type="text/javascript" src="/js/statistics/configurator/ConfiguratorHandler.js"></script>
 
     <?php include_javascripts();?>
-    <link rel="shortcut icon" href="/img/favicon.ico" />
+    <link rel="shortcut icon" href="/favicon.ico" />
   </head>
 <body class="innerpage">
 	<div id="wrapper">
