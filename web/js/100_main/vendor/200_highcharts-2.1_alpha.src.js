@@ -923,8 +923,8 @@ defaultOptions = {
 	
 	credits: {
 		enabled: true,
-		text: 'yiid.com',
-		href: 'http://www.yiid.com',
+		text: 'spread.ly',
+		href: 'http://www.spread.ly',
 		position: {
 			align: 'right',
 			x: -10,
@@ -7283,7 +7283,7 @@ function Chart (options, callback) {
 		
 		// beta mark
 		credits.enabled = true;
-		credits.text = '@powered by yiid.com';
+		credits.text = '@powered by spread.ly';
 		if (credits.enabled && !chart.credits) {
 			renderer.text(
 				credits.text,
