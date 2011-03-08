@@ -1,1 +1,0 @@
-<?php $lFull = 'like'; if(isset($pWidgetSize) && $pWidgetSize == 1) { $lFull = 'full'; } ?><a href="<?php echo sfConfig::get('app_settings_static'); ?>/static/like?url=<?php echo rawurlencode($pUrl); ?>&full=<?php echo $pWidgetSize; ?>" target="_blank"><?php echo $pText; ?></a>
