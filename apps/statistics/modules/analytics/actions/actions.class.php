@@ -34,6 +34,7 @@ class analyticsActions extends sfActions
     $this->pUrl = $request->getParameter('url', null);
     $this->pDealId = $request->getParameter('dealid', null);
     $this->pType = $request->getParameter('type', 'url_activities');
+    //first for first click on a deal
     $this->pIsDeal = $request->getParameter('isdeal', false);
 
   }
@@ -70,7 +71,7 @@ class analyticsActions extends sfActions
   		if(!$this->pUrl) {
   	  	$this->pUrl = MongoUtils::getTopActivityUrl($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pDealId);
   		}
-			$lReturn['nav'] = $this->getPartial('analytics/filter_nav', array('pHostId' => $this->pHostId, 'pDateFrom' => $this->pDateFrom, 'pDateTo' => $this->pDateTo, 'pUrl' => $this->pUrl, 'pDealId' => $this->pDealId));
+			$lReturn['nav'] = $this->getPartial('analytics/filter_nav', array('pHostId' => $this->pHostId, 'pDateFrom' => $this->pDateFrom, 'pDateTo' => $this->pDateTo, 'pUrl' => $this->pUrl, 'pDealId' => $this->pDealId, 'pIsDeal' => $this->pIsDeal));
   	}
 
 
