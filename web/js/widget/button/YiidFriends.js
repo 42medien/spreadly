@@ -13,8 +13,8 @@ var YiidFriends = {
    * @param pUserId
    * @param pLimit
    */
-  init: function(pObjectId, pUserId, pLimit) {
-    YiidFriends.getFriends(pObjectId, pUserId, pLimit);
+  init: function(pObjectId) {
+    YiidFriends.getFriends(pObjectId);
   },
   
   /**
@@ -23,17 +23,19 @@ var YiidFriends = {
    * @param pUserId
    * @param pLimit
    */
-  getFriends: function(pObjectId, pUserId, pLimit) {
+  getFriends: function(pObjectId) {
     var lXhttp = YiidUtils.createXMLHttpRequest();
     try{
-      var lQuery = encodeURI('so_id='+pObjectId+'&u_id='+pUserId+'&limit='+pLimit);        
+      var lQuery = encodeURI('so_id='+pObjectId);        
       lXhttp.open("POST", YiidFriends.aGetAction, true); 
+      //console.log(lQuery);
       //Send the proper header information along with the request
       lXhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       lXhttp.setRequestHeader("Content-length", lQuery.length);
       lXhttp.setRequestHeader("Connection", "close");
       lXhttp.onreadystatechange = function() {
         //if request is complete
+        console.log(lXhttp);
         if(lXhttp.readyState == 4) {
           //and something went wrong
           if(lXhttp.status != 200) {
@@ -49,7 +51,8 @@ var YiidFriends = {
       lXhttp.send(lQuery);            
       
     }catch(lError) {
-      YiidError.undefinedError(lError);      
+      console.log(lError);
+      //YiidError.undefinedError(lError);      
     }
   },
   

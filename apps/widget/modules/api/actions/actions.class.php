@@ -12,20 +12,18 @@ class apiActions extends sfActions {
     $this->getResponse()->setContentType('application/json');
 
     $lUserId = $this->getUser()->getUserId();
-
-    if (!$lUserId) {
-      return $this->renderText(json_encode(array('success' => false, 'html'  => "gnarf")));
-    }
-
     $lSocialObjectId = $request->getParameter('so_id');
-    $lLimit = $request->getParameter('limit');
 
-    $lFriends = SocialObjectTable::getFriendIdsForSocialObject($lSocialObjectId, $lUserId);
+    $lReturn['success'] = false;
 
-    return $this->renderText(
-      json_encode(
-        array('success' => true, 'html'  => $this->getPartial('widget/social_object_friends', array('pFriends' => $lFriends, 'pLimit' => $lLimit)))
-      )
-    );
+    if($lUserId && $lSocialObjectId) {
+    	$lFriends = SocialObjectTable::getFriendIdsForSocialObject($lSocialObjectId, $lUserId);
+    	if($lFriends) {
+    		$lReturn['success'] = true;
+    		$lReturn['html'] =  $this->getPartial('widget/social_object_friends', array('pFriends' => $lFriends));
+    	}
+
+    }
+    return $this->renderText(json_encode($lReturn));
   }
 }

@@ -12,6 +12,7 @@ header('Cache-Control: private, no-store, no-cache, must-revalidate, post-check=
 $wu = new WidgetUtils();
 $wu->trackUser();
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +21,7 @@ $wu->trackUser();
   <!--[if lte IE 6]>
     <style type="text/css">a { behavior: url(./../js/widget/iepngfix.htc); }</style>
   <![endif]-->
+
   <style type="text/css">
   * { margin: 0; padding: 0; }
   a.button {
@@ -97,16 +99,22 @@ $wu->trackUser();
   </style>
 </head>
 <body>
+	<?php //var_dump($wu->showFriends());die();?>
   <a href="<?php echo $wu->getPopupUrl() ?>" rel="like" onclick="window.open(this.href, 'popup', 'width=580,height=435,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" target="_blank" class="button <?php echo $wu->getButtonClass(); ?>"><span class="like">&nbsp;</span><span class="count"><?php echo $wu->getActivityCount() ?></span></a>
   <?php if ($wu->getDeal()): ?>
     <div class="text"><?php echo $lActiveDeal['button_wording']; ?></div>
   <?php endif; ?>
-  <?php if ($wu->showFriends()): ?>
-  <ul class="icons">
-    <li><a><img src="http://a3.twimg.com/profile_images/1170987730/final_197_normal.jpg" /></a></li>
-    <li><a><img src="http://a3.twimg.com/profile_images/1170987730/final_197_normal.jpg" /></a></li>
-    <li class="last"><a><img src="http://a3.twimg.com/profile_images/1170987730/final_197_normal.jpg" /></a></li>
-  </ul>
-  <?php endif; ?>
+  <?php //if ($wu->showFriends()): ?>
+  <script type="text/javascript" src="/js/widget/button/100_YiidUtils.js"></script>
+ 	<script type="text/javascript" src="/js/widget/button/YiidFriends.js"></script>
+  <script type="text/javascript">
+		YiidFriends.aGetAction = "/api/load_friends";
+		YiidFriends.init("<?php echo $wu->getSocialObjectId(); ?>");
+	</script>
+
+  <div id="friends">
+
+	</div>
+  <?php //endif; ?>
 </body>
 </html>
