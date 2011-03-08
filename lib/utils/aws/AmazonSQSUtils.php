@@ -23,6 +23,7 @@ class AmazonSQSUtils {
     $pQueueName = $pQueueName."-".sfConfig::get('sf_environment');
 
     $service = self::initSqsService();
+    $service->createQueue($pQueueName);
 
     if (is_array($pPayload)) {
       foreach ($pPayload as $value) {
