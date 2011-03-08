@@ -7,4 +7,3 @@ DealForm.init();
 Deal.showStats();
 AnalyticsFilter.init();
 AnalyticsFilterNav.init();
-AnalyticsUrlFilter.init();
