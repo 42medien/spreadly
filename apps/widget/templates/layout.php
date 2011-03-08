@@ -75,7 +75,7 @@
 	          <?php echo $sf_content; ?>
                 <!-- footer -->
                 <div class="poweredrow">
-                	<?php echo link_to(__("Imprint"), "http://spreadly.com/imprint", array("target" => "_blank")); ?> | <?php echo link_to("Powered by ".image_tag("/img/spread-logosmall.jpg", array("alt" => "spread.ly icon")), sfConfig::get("app_settings_url"), array("title" => "spread.ly", "target" => "_blank")) ?></div>
+                	<?php echo link_to(__("Imprint"), "http://spreadly.com/imprint", array("target" => "_blank")); ?> | <?php echo link_to("Powered by ".image_tag("/img/spread-logosmall.png", array("alt" => "spread.ly icon")), sfConfig::get("app_settings_url"), array("title" => "spread.ly", "target" => "_blank")) ?></div>
                 </div>
               </div>
             </div>
