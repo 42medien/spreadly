@@ -13,10 +13,7 @@ class LikeSettings {
 
   const COOKIE_DOMAIN  = '.##YIID_HOST##';
   const SF_SESSION_COOKIE  = '##COOKIE_NAME##';
-
   const JS_POPUP_PATH = '##YIID_WIDGET_URL##/';
-
-  const JS_GETFRIENDS_PATH = '/api/load_friends';
 
   const DEV = ##IS_DEV##;
   const ENVIRONMENT = '##ENVIRONMENT##';
