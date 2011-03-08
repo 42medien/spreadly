@@ -1,1 +1,1 @@
-<iframe scrolling="no" frameborder="0" marginwidth="0" marginheight="0" style="overflow:hidden; width:420px; height:<?php echo $pHeight; ?>px;" src="http://widgets.yiid.com/w/like/button.php?social=<?php echo $pSocial; ?>&url={Permalink}" allowtransparency="true"></iframe>
+<iframe scrolling="no" frameborder="0" marginwidth="0" marginheight="0" style="overflow:hidden; width:420px; height:<?php echo $pHeight; ?>px;" src="<?php echo sfConfig::get("app_settings_button_url"); ?>/?social=<?php echo $pSocial; ?>&url={Permalink}" allowtransparency="true"></iframe>

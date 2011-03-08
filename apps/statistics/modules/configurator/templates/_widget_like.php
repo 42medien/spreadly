@@ -1,1 +1,1 @@
-<iframe src="<?php echo sfConfig::get("app_settings_widget_host"); ?>/w/like/button.php?<?php echo 'url='.urlencode($pUrl).'&social=0' ?>" style="overflow:hidden; width: 420px; height: 24px; padding: 0px 0;" frameborder="0" scrolling="no" marginheight="0" allowTransparency="true"></iframe>
+<iframe src="<?php echo sfConfig::get("app_settings_button_url"); ?>/?url=<?php echo urlencode($pUrl); ?>&social=0" style="overflow:hidden; width: 420px; height: 24px; padding: 0px 0;" frameborder="0" scrolling="no" marginheight="0" allowTransparency="true"></iframe>
