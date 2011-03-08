@@ -22,7 +22,7 @@
 	  </div>
 	<?php } else { ?>
 		<div class="whtboxpad">
-			<?php echo __('No active deals!'); ?>
+			<?php echo __('No deals!'); ?>
 		</div>
 	<?php } ?>
 </div>
