@@ -40,7 +40,7 @@
 <body class="innerpage">
 	<div id="wrapper">
 		<!--feedback box start-->
-		<div class="feedback"><a href="#"><img src="/img/feedback.png" alt="Feedback" title="Feedback" width="155" height="137" /></a></div>
+		<div class="feedback"><a href="http://getsatisfaction.com/spreadly" target="_blank"><img src="/img/feedback.png" alt="Feedback" title="Feedback" width="155" height="137" /></a></div>
     <!--feedback box end-->
     <div id="header">
     	<div class="clearfix">
