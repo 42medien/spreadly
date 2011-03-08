@@ -152,7 +152,7 @@ class TwitterAuthApiClient extends AuthApi {
    */
   public function completeUser(&$pUser, $pObject) {
     $pUser->setUsername(UserUtils::getUniqueUsername(StringUtils::normalizeUsername($pObject->screen_name)));
-    $pUser->setDescription($pObject->description);
+    $pUser->setDescription(strip_tags($pObject->description));
     $pUser->setActive(true);
     $pUser->setAgb(true);
 

@@ -154,7 +154,7 @@ class GoogleAuthApiClient extends AuthApi {
    */
   public function completeUser(&$pUser, $pObject) {
     $pUser->setUsername(UserUtils::getUniqueUsername(StringUtils::normalizeUsername($pObject->displayName)));
-    $pUser->setDescription(@$pObject->aboutMe);
+    $pUser->setDescription(strip_tags(@$pObject->aboutMe));
     $pUser->setActive(true);
     $pUser->setAgb(true);
     // try to split full-name

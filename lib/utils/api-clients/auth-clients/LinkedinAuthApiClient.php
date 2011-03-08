@@ -160,7 +160,7 @@ class LinkedinAuthApiClient extends AuthApi {
   public function completeUser(&$pUser, $lProfileArray) {
     $pUser->setUsername(UserUtils::getUniqueUsername(StringUtils::normalizeUsername($lProfileArray['first-name'].$lProfileArray['last-name'])));
     if(isset($lProfileArray['summary'])) {
-      $pUser->setDescription($lProfileArray['summary']);
+      $pUser->setDescription(strip_tags($lProfileArray['summary']));
     }
     $pUser->setActive(true);
     $pUser->setAgb(true);
