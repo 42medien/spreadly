@@ -34,6 +34,7 @@ class analyticsActions extends sfActions
     $this->pUrl = $request->getParameter('url', null);
     $this->pDealId = $request->getParameter('dealid', null);
     $this->pType = $request->getParameter('type', 'url_activities');
+    $this->pIsDeal = $request->getParameter('isdeal', false);
 
   }
 
@@ -64,6 +65,7 @@ class analyticsActions extends sfActions
 
   public function executeGet_analytics_content(sfWebRequest $request){
   	$this->getResponse()->setContentType('application/json');
+
   	if($this->pType == 'url_activities') {
   		if(!$this->pUrl) {
   	  	$this->pUrl = MongoUtils::getTopActivityUrl($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pDealId);
@@ -74,7 +76,7 @@ class analyticsActions extends sfActions
 
   	$lData = MongoUtils::getDataForRange($this->pType, $this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pUrl, $this->pDealId);
 
-  	if($this->pDealId) {
+  	if($this->pIsDeal) {
   		$lReturn['content'] =  $this->getPartial('analytics/domain_activities_content', array('pUrl'=> $this->pUrl ,'pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pData' => $lData));
   	} else {
   		$lReturn['content'] =  $this->getPartial('analytics/'.$this->pType.'_content', array('pUrl'=> $this->pUrl ,'pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pData' => $lData));
