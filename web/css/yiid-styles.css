@@ -492,7 +492,14 @@ td.editinplaceclick {
 #domain-table-website{padding-left: 20px;}
 .table-title th { white-space: nowrap; }
 
-tr.important-bg{background-color: #000 !important;}
+.deal-stats-link:hover{
+  font-weight: bold;
+}
+
+.deal-stats-link.active{
+  font-weight: bold;
+  text-decoration: none;
+}
 
 .popupblock {
     background: url("../img/pop-upbg.jpg") no-repeat scroll center top transparent;
