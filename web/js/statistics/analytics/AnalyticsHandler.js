@@ -123,7 +123,7 @@ var AnalyticsFilterNav = {
     },
     
     highlight: function() {
-      debug.log('[AnalyticsFilterNav][getContent]');
+      debug.log('[AnalyticsFilterNav][highlight]');
       jQuery('.analytix-filter-link').removeClass('active');
       if(AnalyticsFilterNav.aSelectedElem != null) {
         jQuery(AnalyticsFilterNav.aSelectedElem).addClass('active');  

@@ -8,9 +8,9 @@
       		<?php echo image_tag('/img/global/24x24/remove_from_shopping_cart.png', array('title' => __('Deal approved')))?>
       	<?php } ?>
 			</td>
-			<td align="left" class="second">
+			<td align="left">
 				<div class="marketbox">
-					<?php echo link_to($pDeal->getSummary(), '@get_analytics_content', array('query_string' => 'isdeal=1com=all&host_id='.$pDeal->getDomainProfileId().'&date-from='.$pDeal->getStartDate().'&date-to='.$pDeal->getEndDate().'&url=&dealid='.$pDeal->getId(), 'class' => 'deal-stats-link')); ?>
+					<?php echo link_to($pDeal->getSummary(), '@get_analytics_content', array('query_string' => 'isdeal=1com=all&host_id='.$pDeal->getDomainProfileId().'&date-from='.$pDeal->getStartDate().'&date-to='.$pDeal->getEndDate().'&url=&dealid='.$pDeal->getId(), 'class' => 'deal-stats-link', 'title' => __('Show analytics'))); ?>
 				</div>
 			</td>
 			<td align="left" valign="middle">
@@ -38,7 +38,7 @@
 
 <?php if($pDeal->getState() == 'submitted') { ?>
       <td height="43" align="center" class="first"><?php echo image_tag('/img/global/24x24/process.png', array('title' => __('Deal submitted')))?></td>
-      <td align="left" class="second"><div class="marketbox"><?php echo $pDeal->getSummary(); ?></div></td>
+      <td align="left"><div class="marketbox"><?php echo $pDeal->getSummary(); ?></div></td>
       <td align="left" valign="middle"><div class="marketbox"><?php echo $pDeal->getDomainProfile()->getUrl(); ?></div></td>
       <td align="left" valign="middle" colspan="2"><div class="marketbox"><?php echo __('Not yet approved by yiid ...'); ?></div></td>
       <td align="center" valign="middle"><?php echo $pDeal->getCouponClaimedQuantity(); ?></td>
@@ -52,7 +52,7 @@
 
 <?php if($pDeal->getState() == 'denied') { ?>
       <td height="43" align="center" class="first"><?php echo image_tag('/img/global/24x24/warning.png', array('title' => __('Deal denied')))?></td>
-      <td align="left" class="second"><div  class="marketbox"><?php echo $pDeal->getSummary(); ?></div></td>
+      <td align="left"><div  class="marketbox"><?php echo $pDeal->getSummary(); ?></div></td>
       <td align="left" valign="middle"><div class="marketbox"><?php echo $pDeal->getDomainProfile()->getUrl(); ?></div></td>
       <td align="left" valign="middle"><div class="marketbox"><?php echo $pDeal->getStartDate(); ?></div></td>
 			<td align="left" valign="middle" title="<?php echo __('Edit end date of deal'); ?>" class="editinplaceclickc" id="deal-date-<?php echo $pDeal->getId(); ?>" data-obj='{"action":"/deals/edit_enddate", "type":"text", "callback":"DealTable.editDate",  "params": "{\"id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-date-<?php echo $pDeal->getId(); ?>\"}"}'>
@@ -76,7 +76,7 @@
 
 <?php if($pDeal->getState() == 'paused') { ?>
 			<td height="43" align="center" class="first"><?php echo image_tag('/img/global/24x24/clock.png', array('title' => __('Deal stopped')))?></td>
-		  <td align="left" class="second"><div class="marketbox"><?php echo link_to($pDeal->getSummary(), '@get_analytics_content', array('class' => 'deal-stats-link')); ?></div></td>
+		  <td align="left"><div class="marketbox"><?php echo link_to($pDeal->getSummary(), '@get_analytics_content', array('class' => 'deal-stats-link')); ?></div></td>
 		  <td align="left" valign="middle"><div class="marketbox"><?php echo $pDeal->getDomainProfile()->getUrl(); ?></div></td>
 		  <td align="left" valign="middle"><div class="marketbox"><?php echo $pDeal->getStartDate(); ?></div></td>
 		  <td align="left" valign="middle" title="<?php echo __('Edit end date of deal'); ?>" class="editinplaceclick edit-col" id="deal-date-<?php echo $pDeal->getId(); ?>" data-obj='{"action":"/deals/edit_enddate", "type":"text", "callback":"DealTable.editDate",  "params": "{\"id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-date-<?php echo $pDeal->getId(); ?>\"}"}'><div  class="marketbox"><?php echo $pDeal->getEndDate(); ?></div></td>

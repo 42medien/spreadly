@@ -1,5 +1,5 @@
 /**
- * @nocombine statistics
+ * @combine statistics
  */
 
 /**
@@ -16,6 +16,7 @@ var Deal = {
     debug.log('[Deal][init]');
     Deal.bindClicks();
     Deal.initDropdown();
+    DealTable.tableHover();
   },
   
   /**
@@ -77,6 +78,7 @@ var Deal = {
   showStats: function(){
     jQuery('.deal-stats-link').live('click', function() {
       var lAction = jQuery(this).attr('href');
+      var lThis = this;
       var lData = {
         ei_kcuf : new Date().getTime()
       };
@@ -91,6 +93,7 @@ var Deal = {
           jQuery('#analytix-filter-nav-box, #analytix-content-box').show();
           AnalyticsFilterNav.show(pResponse.nav);
           AnalyticsFilterContent.show(pResponse.content);
+          DealTable.selectFx(lThis);
           OnLoadGrafic.hideGrafic();
         }
       });
@@ -356,6 +359,7 @@ var DealForm = {
   }
 };
 
+
 var DealTable = {
   
   init : function() {
@@ -483,7 +487,22 @@ var DealTable = {
         }
       }
     });
-  }
+  },
+  
+  tableHover: function() {
+    debug.log("[DealTable][tableHover]");    
+    jQuery('.deal-stats-link').live('mouseover', function() {
+      DealTable.selectFx(this);
+    });
+  },
+  
+  selectFx: function(pElem) {
+    debug.log("[DealTable][selectFx]");        
+    var lParent = jQuery(pElem).parent('div').parent('td').parent('tr');
+    jQuery(lParent).siblings('tr').children('td').css('background', 'none repeat scroll 0 0 #ededed'); 
+    jQuery(lParent).children('td').css('background', 'none repeat scroll 0 0 #e1e1e1');    
+    
+  }      
 };
 
 function split( val ) {
