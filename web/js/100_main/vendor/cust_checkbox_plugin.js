@@ -45,9 +45,9 @@
 		var opts = $.extend(defaults, options);
 		
 		return this.each(function() { 
-	 		 var obj = $(this);
-	 		 
-		$.fn.buildbox = function(thisElm){
+      var obj = $(this);
+
+      $.fn.buildbox = function(thisElm){
 			
 			$(thisElm).css({display:"none"}).before("<span class=\"cust_checkbox\">&nbsp;&nbsp;&nbsp;&nbsp;</span>");
 			

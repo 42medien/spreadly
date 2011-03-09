@@ -1,3 +1,7 @@
+/**
+ * @combine widget
+ */
+
 var DealsFilterList = {
     
     init: function() {

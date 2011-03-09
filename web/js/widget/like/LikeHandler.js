@@ -1,5 +1,5 @@
 /**
- * @nocombine widgets
+ * @combine widget
  */
 
 /**

@@ -28,7 +28,6 @@
       
       removeItem: function(pItem) {
         var lVal = jQuery(ComboInput.aInputObject).val();
-        console.log(pItem);
         
         //lVal.replace(pItem, '');
         jQuery(ComboInput.aInputObject).val(lVal.replace(new RegExp(pItem+',?',"gi"), ''));
@@ -40,8 +39,7 @@
     aListObject: {},
     aListId: '',
     
-    init: function(pListItems) {
-      console.log('[ComboList][init]');        
+    init: function(pListItems) {  
       ComboList.aListObject = jQuery('#'+ComboInput.aInputId+'-list'); 
       ComboList.aListId = jQuery(ComboList.aListObject).attr('id');
       if(pListItems !== undefined) {

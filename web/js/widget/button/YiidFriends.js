@@ -34,7 +34,6 @@ var YiidFriends = {
       lXhttp.setRequestHeader("Connection", "close");
       lXhttp.onreadystatechange = function() {
         //if request is complete
-        console.log(lXhttp);
         if(lXhttp.readyState == 4) {
           //and something went wrong
           if(lXhttp.status != 200) {
@@ -50,7 +49,7 @@ var YiidFriends = {
       lXhttp.send(lQuery);            
       
     }catch(lError) {
-      console.log(lError);
+      //console.log(lError);
       //YiidError.undefinedError(lError);      
     }
   },
