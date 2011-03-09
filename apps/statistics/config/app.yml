@@ -7,7 +7,7 @@ all:
     signinForm: NavigationLoginForm
   sfApplyPlugin:
     from:
-      email: "noreply@yiid.com"
-      fullname: "the yiid staff"
+      email: "noreply@spreadly.com"
+      fullname: "the Spread.ly staff"
   sf_guard_plugin_success_signout_url: '@configurator'
   sf_guard_plugin_success_signin_url:  '@analytics_overview'
