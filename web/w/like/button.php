@@ -98,7 +98,7 @@ $wu->trackUser();
 </head>
 <body>
 	<?php //var_dump($wu->showFriends());die();?>
-  <a href="<?php echo $wu->getPopupUrl() ?>" rel="like" onclick="window.open(this.href, 'popup', 'width=580,height=435,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" target="_blank" class="button <?php echo $wu->getButtonClass(); ?>"><span class="like">&nbsp;</span><span class="count"><?php echo $wu->getActivityCount() ?></span></a>
+  <a href="<?php echo $wu->getPopupUrl() ?>" rel="like" onclick="window.open(this.href, 'popup', 'width=580,height=450,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" target="_blank" class="button <?php echo $wu->getButtonClass(); ?>"><span class="like">&nbsp;</span><span class="count"><?php echo $wu->getActivityCount() ?></span></a>
   <?php if ($wu->getDeal()): ?>
     <div class="text"><?php echo $lActiveDeal['button_wording']; ?></div>
   <?php endif; ?>

@@ -493,3 +493,8 @@ td.editinplaceclick {
 .table-title th { white-space: nowrap; }
 
 tr.important-bg{background-color: #000 !important;}
+
+.popupblock {
+    background: url("../img/pop-upbg.jpg") no-repeat scroll center top transparent;
+    height: 450px;
+}
