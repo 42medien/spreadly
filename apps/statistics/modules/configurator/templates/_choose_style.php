@@ -21,7 +21,7 @@
 										<?php if (!$pService || $pService->getSlug() == 'static') {?>
 											<div class="clearfix">
 												<label class="textfield"><span>
-													<input type="text" class="wd183" name="likebutton[url]" id="likebutton_url" value="<?php echo __('Url of your site'); ?>" />
+													<input type="text" class="wd183" name="likebutton[url]" id="likebutton_url" value="<?php echo __('Url of your site e.g. http://www.domain.com"'); ?>" />
 													</span>
 												</label>
 											</div>
