@@ -93,8 +93,10 @@ var WidgetLikeForm = {
     
     checkComment: function(arr, form, options) {
       var lComment = jQuery(form[0]["like[comment]"]).val();
+
       if(lComment == WidgetLikeForm.aComment){
         jQuery(form[0]["like[comment]"]).val('');
+        form[0]["like[comment]"].defaultValue = '';
       }
       return form;   
     },
