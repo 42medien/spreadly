@@ -66,6 +66,8 @@
 								<li><a href="http://www.daf.fm/" title="Deutsches Anleger Fernsehen" target="_blank"><img src="/img/refrance-img4.jpg" alt="Image"/></a></li>
 								<li><a href="http://www.brille24.de/" title="Brille24" target="_blank"><img src="/img/refrance-img5.jpg" alt="Image"/></a></li>
 								<li><a href="http://www.business-on.de/" title="Business-on.de" target="_blank"><img src="/img/refrance-img6.jpg" alt="Image"/></a></li>
+								<li><a href="http://www.yasni.de/" title="Yasni.de" target="_blank"><img src="/img/refrance-img7.jpg" alt="Image"/></a></li>
+								<li><a href="http://www.ednetz.de/" title="ednetz.de" target="_blank"><img src="/img/refrance-img8.jpg" alt="Image"/></a></li>
 							</ul>
 						</div>
 					</div>
