@@ -47,18 +47,11 @@ class SocialObjectParser {
       if (!$pYiidMeta->isComplete()) {
         $lMeta = MetaTagParser::getKeys($lHtml, $pUrl);
         $pYiidMeta->fromMeta($lMeta);
-        /*
-        if (!$lYiidMeta->getImages()) {
-          foreach (ImageParser::fetch($lHtml, $pUrl) as $images) {
-            $imgs[] = $images['image'];
-          }
-
-          $lYiidMeta->setImages($imgs);
-        }
-        */
       }
 
       return $pYiidMeta;
-    } catch (Exception $e) {}
+    } catch (Exception $e) {
+      return false;
+    }
   }
 }
