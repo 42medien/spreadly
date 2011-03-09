@@ -22,7 +22,7 @@
       <tr id="no-claim">
         <td>&nbsp;</td>
         <td colspan="7">
-          <h3><?php echo __('No websites claimed');?></h3>
+          <h3><?php echo __("No websites claimed");?></h3>
         </td>
       </tr>
 	  <?php } ?>
