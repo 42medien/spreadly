@@ -91,14 +91,14 @@ var WidgetLikeForm = {
     },
     
     
-    checkComment: function(arr, form, options) {
+    checkComment: function(form, options) {
       var lComment = jQuery(form[0]["like[comment]"]).val();
-
-      if(lComment == WidgetLikeForm.aComment){
-        jQuery(form[0]["like[comment]"]).val('');
-        form[0]["like[comment]"].defaultValue = '';
+      if(Utils.trim(lComment) == Utils.trim(WidgetLikeForm.aComment)){
+        jQuery(form[0]["like[comment]"]).val("");
+        form[0]["like[comment]"] = "";
+        form[0]["like[comment]"].defaultValue = "";
       }
-      return form;   
+    return true;
     },
     
     /**
@@ -115,7 +115,7 @@ var WidgetLikeForm = {
         WidgetLikeForm.hideTextarea();
         
         var options = {
-          beforeSubmit : WidgetLikeForm.checkComment,
+          beforeSerialize : WidgetLikeForm.checkComment,
           url : lAction,
           data : {
             ei_kcuf : new Date().getTime()
