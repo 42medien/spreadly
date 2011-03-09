@@ -46,7 +46,7 @@
 					<div class="grboxmid-content">
 						<div class="graybox service_content">
 							<h3 class="header"><span class="bluetxt"><?php echo __("Analytics"); ?></span><span><?php echo __("Get to know your fans"); ?></span></h3>
-							<p><?php echo __("Spread.ly offers an analytic tool that measures effectiveness of recommendations. You get demographics analyzed in anonymized form and come to know the value of each recommendation."); ?></p>
+							<p><?php echo __("Spread.ly offers an analytic tool that measures effectiveness of recommendations. You get demographics analyzed in anonymized form and come to know the value of each recommendation."); ?></p>
 						</div>
 					</div>
 				</div>
