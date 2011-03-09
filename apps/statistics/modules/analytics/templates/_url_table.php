@@ -19,7 +19,7 @@
 				    <?php } ?>
 				    	<br />
     				<?php if($pHostId && $pFrom && $pTo): ?>
-      				<?php echo link_to($data['url'], '@get_analytics_content', array('query_string' => 'com=all&url='.$data['url'].'&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo.'&type=url_activities', 'class' => 'analytix-filter-link'));  ?>
+      				<?php echo link_to($data['url'], '@get_analytics_content', array('query_string' => 'com=all&url='.$data['url'].'&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo.'&type=url_activities', 'class' => 'analytix-filter-link table-filter-link'));  ?>
       			<?php else: ?>
       			  <?php echo $data['url'] ?>
       			<?php endif; ?>

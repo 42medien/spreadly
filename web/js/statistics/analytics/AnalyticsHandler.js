@@ -82,6 +82,8 @@ var AnalyticsFilterNav = {
         OnLoadGrafic.showGrafic();        
         if(jQuery(this).hasClass('url-filter-link')) {
           AnalyticsFilterNav.aSelectedId = jQuery(this).attr('id');
+        } else if(jQuery(this).hasClass('table-filter-link')) {
+          AnalyticsFilterNav.aSelectedId = 'url-filter-link-1';
         } else {
           AnalyticsFilterNav.aSelectedElem = this;
         }
@@ -124,6 +126,8 @@ var AnalyticsFilterNav = {
     
     highlight: function() {
       debug.log('[AnalyticsFilterNav][highlight]');
+      debug.log('elem '+AnalyticsFilterNav.aSelectedElem);
+      debug.log('id '+AnalyticsFilterNav.aSelectedId);
       jQuery('.analytix-filter-link').removeClass('active');
       if(AnalyticsFilterNav.aSelectedElem != null) {
         jQuery(AnalyticsFilterNav.aSelectedElem).addClass('active');  
