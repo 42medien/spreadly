@@ -3,7 +3,7 @@
   	<div class="grboxmid-content">
 			<div class="graybox clearfix veryficationbox">
       	<h3 class="verifytitle"><?php echo __('Claim your sites')?></h3>
-        <p><?php echo __('Start claiming your sites to enable statistics tracking an other features to come. Please understand, that we can only offer access to this data after successfully verifying your ownership of a site. If you have problems with this process, please contact'); ?> <a href="mailto: info@yiid.com">info@yiid.com</a></p>
+        <p><?php echo __('Start claiming your sites to enable statistics tracking an other features to come. Please understand, that we can only offer access to this data after successfully verifying your ownership of a site. If you have problems with this process, please contact'); ?> <a href="mailto:info@spreadly.com">info@spreadly.com</a></p>
 				<div class="httpblock">
 					<form action="<?php echo url_for('domain_profiles/create'); ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?> id="new_domain_profile_form">
 						<?php echo $form->renderHiddenFields(false); ?>
