@@ -483,7 +483,8 @@ td.editinplaceclick {
   font-size: 18px;
   line-height: 20px;
   text-shadow: #b3b3b3 1px 1px 1px;
-  margin: 45px 100px 0 0;
+  margin: 30px 85px 0 0;
+  width: 150px;
   float: right;
 }
 
