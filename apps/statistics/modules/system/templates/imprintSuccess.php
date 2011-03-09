@@ -13,6 +13,8 @@
     Eingetragen am Amtsgericht Mannheim unter HRB 701542
   </p>
 
+  <p>Zum Pressebereich: <a href="http://blog.spreadly.com/de-presse-en-press/">blog.spreadly.com/de-presse-en-press/</a></p>
+
 	<h2>Haftungsausschluss</h2>
 
 	<ul class="normal_list">
