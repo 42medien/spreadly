@@ -34,7 +34,7 @@
 						</div>
 						<div class="alignright help_content">
 							<h3 class="title"><?php echo __("Help"); ?></h3>
-							<p><?php echo __("Please chose the type of website you run or click “other websites” if it is missing. Select „Email & Signatures“ to put the button in your newsletter or mailing."); ?></p><br />
+							<p><?php echo __("Please choose the type of website you run or click “other websites” if it is missing. Select „Email & Signatures“ to put the button in your newsletter or mailing."); ?></p><br />
               <p><?php echo __("As extensions are offered for all common blog systems, implementing the button is made easy. Even when updates are made you do not have to bother as it adjusts automatically."); ?></p>
 						</div>
 					</div>
