@@ -216,8 +216,6 @@ var LikeImage = {
     handleResponse: function(pResponse) {
       //insert the image into slider-container
       LikeImage.insert(pResponse.html);
-      //fill the hidden-img-value with the path of the first image
-      WidgetLikeForm.setImageValue(LikeImage.getImgPath(0));
       //if there is no or 1 image, hide the slide-arrows and the counter
       if(pResponse.count === 0 || pResponse.count === 1){
         LikeImageCounter.hide();
@@ -233,6 +231,9 @@ var LikeImage = {
         //and init the onscroll-functionalities (e.g. update counter & update hidden-img-value onscroll)
         LikeImageScroller.onScroll();          
       }
+      
+      //fill the hidden-img-value with the path of the first image
+      WidgetLikeForm.setImageValue(LikeImage.getImgPath(0));      
       OnLoadGrafic.hideGrafic();
     },
     
@@ -280,7 +281,7 @@ var LikeImageScroller = {
     
     //init the plugin
     jQuery("#myscroll").scrollable({
-      circular: lCircular
+      //circular: lCircular
     });
    
     //init the global apiobject with the plugins-api-object
