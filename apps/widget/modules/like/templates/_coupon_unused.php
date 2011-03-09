@@ -14,7 +14,7 @@
     			<input type="hidden" name="like[url]" value="<?php echo $pUrl; ?>" />
     			<input type="hidden" name="like[tags]" value="<?php echo $pTags; ?>" />
     			<div class="clearfix spactsbox" id="coupon-head-summary">
-      			<span><?php echo __('Empfehlen Sie "%link%" und erhalten Sie ...', array('%link%' => link_to($pDeal->getSummary(), '/'))); ?></span>
+      			<span><?php echo __('Click "Like" and get ...', array('%link%' => link_to($pDeal->getSummary(), '/'))); ?></span>
       		</div>
           <div class="dotborbox">
           	<h2 class="graytitle"><?php echo $pDeal->getSummary(); ?></h2>
