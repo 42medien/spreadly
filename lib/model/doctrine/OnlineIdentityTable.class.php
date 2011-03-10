@@ -63,7 +63,7 @@ class OnlineIdentityTable extends Doctrine_Table {
     return $lOnlineIdentity;
   }
 
-  
+
   /**
    * gets ids of all OI's owned by a given User
    *
@@ -92,6 +92,22 @@ class OnlineIdentityTable extends Doctrine_Table {
     $lOnlineIdentity = Doctrine_Query::create()
       ->from('OnlineIdentity oi')
       ->where('oi.auth_identifier = ?', $pAuthIdentifier)
+      ->fetchOne();
+
+    return $lOnlineIdentity;
+  }
+
+  /**
+   * gets an OnlineIdentifier by his auth identifier
+   *
+   * @author Matthias Pfefferle
+   * @param string $pId
+   * @return mixed OnlineIdentity|null
+   */
+  public static function retrieveByOriginalId($pId) {
+    $lOnlineIdentity = Doctrine_Query::create()
+      ->from('OnlineIdentity oi')
+      ->where('oi.original_id  = ?', $pId)
       ->fetchOne();
 
     return $lOnlineIdentity;
