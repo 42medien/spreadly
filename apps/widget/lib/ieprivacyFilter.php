@@ -9,7 +9,6 @@ class ieprivacyFilter extends sfFilter {
     // check if it is the first call
     if ($this->isFirstCall()) {
       $this->getContext()->getResponse()->setHttpHeader("P3P", 'CP="DSP LAW"', true);
-      $this->getContext()->getResponse()->setHttpHeader("X-Men", 'Wer das liest ist doof', true);
     }
     // execute next filter
     $filterChain->execute();
