@@ -206,8 +206,8 @@ class StatsFeeder {
       // check if activity is a deal
       if ($lDealId = $pYiidActivity->getDId()) {
         // add deal id
-        $lOptions['d_id'] = $lDealId;
         $lChart = 'deals';
+        $lDoc['d_id'] = intval($lDealId);
       } else {
         $lChart = 'charts';
       }
