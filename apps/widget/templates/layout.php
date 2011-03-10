@@ -1,4 +1,4 @@
-<?php use_helper('YiidUrl', 'Avatar') ?>
+<?php use_helper('YiidUrl', 'Avatar', 'Text') ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
@@ -56,7 +56,7 @@
           </ul>
           <div class="profile-info spread_profile alignright" >
             <div class="alignleft spread <?php if ($sf_context->getModuleName()=='like') { echo 'active'; } ?>"><?php echo link_to(image_tag("/img/spread-it-label.png"), '@widget_like'); ?><?php if ($sf_context->getModuleName()=='like') { echo '<span></span>'; } ?></div>
-            <span class="alignleft"><img src="<?php echo avatar_path($sf_user->getUser()->getDefaultAvatar(), '30'); ?>" width="25" height="26" alt="<?php echo $sf_user->getUser()->getUsername(); ?>" title="<?php echo $sf_user->getUser()->getUsername(); ?>" class="mic-pic" />Hi <?php echo $sf_user->getUser()->getUsername(); ?>,</span>
+            <span class="alignleft"><img src="<?php echo avatar_path($sf_user->getUser()->getDefaultAvatar(), '30'); ?>" width="25" height="26" alt="<?php echo $sf_user->getUser()->getUsername(); ?>" title="<?php echo $sf_user->getUser()->getUsername(); ?>" class="mic-pic" />Hi <?php echo truncate_text($sf_user->getUser()->getUsername(), 10); ?>,</span>
             <span class="alignleft likebtn"><?php echo image_tag("/img/like-icon.png", array("alt"=>"Like", "title"=>"Like")) ?></span>
             <span class="comment_label alignleft"><?php echo $sf_user->getUser()->getLikeCount(); ?></span><?php echo link_to(__('Logout'), '@signout');?>
           </div>
