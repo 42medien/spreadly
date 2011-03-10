@@ -1,58 +1,102 @@
 <?php slot('content') ?>
   <h1>Datenschutz</h1>
 
-  <h3>Spread.ly basiert auf zwei Grundprinzipien:</h3>
+  <p>Spread.ly basiert auf dem Grundprinzip</p>
 
-  <ul class="normal_text">
-    <li>
-    1. Du solltest Kontrolle über deine persönlichen Informationen haben.<br/>
-    Spread.ly hilft dir dabei, Informationen mit deinen Freunden und Personen in deinem Umfeld zu teilen. Du bestimmst, welche Informationen du in deinem Profil veröffentlichst - einschließlich Kontaktinformationen, persönlicher Angaben,  Interessen und Aktivitäten. Zudem kontrollierst du mithilfe der Privatsphäre-Einstellungen auf der Privatsphäre-Seite, mit welchen Benutzern du diese Informationen teilst.
-    </li>
+  <p><strong>Du solltest Kontrolle über deine persönlichen Empfehlungen haben.</strong></p>
 
-    <li>
-	    <p>2. Du sollst Zugriff auf die Informationen haben, die andere mit dir teilen möchten.</p>
-	    <p>Es gibt immer mehr Informationen da draußen und du möchtest wahrscheinlich wissen, welche davon mit dir, deinen Freunden und den Personen in deinem Umfeld in Beziehung stehen. Wir möchten dir dabei helfen, diese Informationen leicht zu erhalten.</p>
-	    <p>Es sollte einfach sein, Informationen zu teilen. Wir möchten dich mit den notwendigen Privatsphäre-Werkzeugen ausstatten, damit du kontrollieren kannst, wie und mit wem du diese Informationen teilst.</p>
-	    <p>Spread.lys Datenschutzrichtlinien wurden so konzipiert, dass nachvollziehbar ist, wie wir persönliche Daten sammeln und verwenden, die du auf Spread.ly teilst. Zudem sollen sie dir dabei helfen, sachkundige Entscheidungen fällen zu können, wenn du Spread.ly unter www.spreadly.com und den damit unmittelbar verbundenen Domains (kollektiv: "Spread.ly" oder "Webseite") verwendest.</p>
-	    <p>Durch die Nutzung oder den Zugriff auf Spread.ly stimmst du den, in diesen Datenschutzrichtlinien genannten, Bedingungen zu.</p>
-    </li>
-  </ul>
+  <p>Es gibt immer mehr Informationen da draußen und du möchtest wahrscheinlich wissen, welche davon mit dir, deinen Freunden und den Personen in deinem Umfeld in Beziehung stehen.
+  Wir möchten dir dabei helfen, diese Informationen leicht zu erhalten.<br />
+  Es sollte einfach sein, Informationen zu teilen. Wir möchten dich mit den notwendigen Privatsphäre-Werkzeugen ausstatten, damit du kontrollieren kannst, wie und mit
+  wem du diese Informationen teilst.</p>
 
-  <p class="text_unimportant">Die Informationen, die wir sammeln</p>
-  <p>Wenn du Spread.ly verwendest, stellst du uns zwei Arten von Informationen zur Verfügung: Persönliche Angaben, die du bewusst auf der Seite veröffentlichst, werden ebenso von uns gesammelt wie Nutzungsdaten während du mit der Webseite interagierst.</p>
-  <p>Wenn du dich bei Spread.ly registrierst, stellst du uns bestimmte persönliche Informationen zur Verfügung, wie z.B. deinen Namen, deine E-Mail-Adresse, deine Telefonnummer, deine Adresse, dein Geschlecht, die Schulen, die du besucht hast, sowie weitere persönliche Informationen und Angaben über deine Vorzüge, die du uns zur Verfügung stellst.</p>
-  <p>Wenn du dich bei Spread.ly anmeldest, speichern wir deinen Browsertyp und deine IP-Adresse. Diese Informationen werden über alle Spread.ly-Besucher gesammelt. Zudem speichern wir mithilfe von „Cookies“ bestimmte Informationen über deinen Browser. Ein Cookie ist eine Dateneinheit, die auf dem Computer des Nutzers gespeichert wird und mit Informationen über den Nutzer verbunden ist. Wir verwenden Sitzungs-ID-Cookies, um zu bestätigen, dass Nutzer angemeldet sind. Diese Cookies werden gelöscht, sobald der Nutzer den Browser schließt. Wir verwenden standardmäßig ein beständiges Cookie, das deine Anmelde-ID speichert (jedoch nicht dein Passwort), um dir die erneute Anmeldung bei Spread.ly zu erleichtern. Du kannst dieses Cookie mithilfe der Einstellungen deines Browsers entfernen oder blockieren, falls du diese praktische Funktion sperren möchtest.</p>
-  <p>Wenn du Spread.ly verwendest, kannst du dein persönliches Profil erstellen, Beziehungen eingehen, Nachrichten senden, nach Inhalten suchen,  Anwendungen hinzufügen und Informationen durch verschiedene Kanäle übermitteln. Wir sammeln diese Informationen, damit wir dir diese Dienste und personalisierte Funktionen anbieten können. In den meisten Fällen speichern wir dies so, dass du zum Beispiel den Nachricht zurückkehren kannst, die du zuvor gesendet hast, oder deine Freundesliste einfach sehen kannst. Wenn du Informationen aktualisierst, bewahren wir normalerweise eine Sicherungskopie der vorherigen Version für einen angemessenen Zeitraum auf, um die Rückkehr zur vorherigen Version dieser Informationen zu ermöglichen.</p>
-  <p>Du postest Nutzerinhalt (wie er in den Spread.ly-Nutzungsbedingungen definiert wurde) auf der Seite auf dein eigenes Risiko. Obwohl wir dir erlauben, den Zugriff auf deine Seiten mithilfe der Privatsphäre-Einstellungen zu beschränken, sei dir bitte bewusst, dass keine Sicherheitsmaßnahmen perfekt oder undurchdringlich sind. Wir können die Aktionen anderer Nutzer, mit denen du deine Seiten und Informationen teilst, nicht kontrollieren. Daher können und werden wir nicht garantieren, dass Nutzerinhalt, den du auf der Seite postest, nicht von unbefugten Personen angesehen wird. Für die Umgehung jeglicher Privatsphäre-Einstellungen oder Sicherheitsmaßnahmen der Seite sind wir nicht verantwortlich. Du verstehst und erkennst an, dass auch nachdem du Nutzerinhalt von der Webseite entfernt hast, Kopien von diesem auf gecachten und archivierten Seiten oder falls andere Nutzer deine Inhalte kopiert oder gespeichert haben, sichtbar bleiben könnten.</p>
-  <p>Jegliches unzulässige Sammeln oder jeglicher Missbrauch von Informationen, die auf Spread.ly zu finden sind, stellen eine Verletzung von Spread.lys Nutzungsbedingungen dar und sollten uns gemeldet werden.</p>
+  <p>Spread.lys Datenschutzrichtlinien wurden so konzipiert, dass nachvollziehbar ist, wie wir persönliche Daten sammeln und verwenden, die du auf Spread.ly teilst.
+  Zudem sollen sie dir dabei helfen, sachkundige Entscheidungen fällen zu können, wenn du Spread.ly unter www.Spreadly.com und den damit unmittelbar verbundenen
+  Domains (kollektiv: "Spread.ly" oder "Webseite") verwendest.</p>
 
-  <p>Falls du dich entscheidest, unseren Einladungsdienst zu nutzen, um eine/n FreundIn über unsere Seite zu informieren, werden wir dich nach Informationen fragen, die benötigt werden, um die Einladung zu versenden, zum Beispiel der E-Mail-Adresse deines/deiner Freundes/Freundin. Wir werden deinem/deiner FreundIn eine E-Mail oder Instant Message in deinem Namen senden, um ihn oder sie einzuladen, unsere Seite zu besuchen. Spread.ly speichert diese Informationen, um Einladungen oder Erinnerungen zu versenden, um eine Freundschafts-Verbindung aufzuzeichnen, falls deine Einladung angenommen wird, und um den Erfolg unseres Empfehlungssystems zu verfolgen. Dein/e FreundIn kann uns mithilfe des Formulars auf unserer Hilfeseite kontaktieren, um die Entfernung dieser Informationen von unserer Datenbank zu beantragen.</p>
-  <p>Spread.ly kann ferner Informationen über dich aus anderen Quellen, wie Zeitungen, Blogs, Instant Messaging-Diensten und der Verwendung der Spread.ly-Dienste durch andere Nutzer (z.B. Foto-Markierungen), sammeln, um dir nützlichere Informationen und ein personalisierteres Erlebnis bieten zu können.</p>
-  <p>Grundsätzlich kannst du E-Mails auf der Benachrichtigungen-Seite abstellen. Allerdings behält sich Spread.ly das Recht vor, dir weiterhin Informationen bezüglich deines Kontos zuzusenden auch wenn du alle freiwilligen E-Mail-Benachrichtigungen abstellst.</p>
-  <p>Spread.ly kann Informationen in deinem Profil verwenden, ohne dich als Person Dritten zu offenbaren. Wir tun dies, um herauszufinden, wie viele Personen in einem Netzwerk eine Band oder einen Film mögen sowie um Werbeanzeigen und Reklame zu personalisieren, damit wir dir Spread.ly zur Verfügung stellen können. Wir glauben, dass du davon profitieren kannst. Du kannst mehr über die Welt um dich herum erfahren und vorhandene Werbeanzeigen sind mit großer Wahrscheinlichkeit interessanter für dich. Wenn du beispielsweise einen Lieblingsfilm zu deinem Profil hinzufügst, werden wir dir wahrscheinlich eine Werbeanzeige zeigen, welche die Vorführung eines ähnlichen Films in deiner Stadt hervorhebt. Wir teilen dem Filmverleih allerdings nicht mit, wer du bist.</p>
-  <p>Wir können Informationen über dich, welche wir aus anderen Quellen sammeln, zusätzlich zu denen in deinem Profil verwenden. Diese beinhalten unter anderem Zeitungen und Internetquellen wie Blogs, Instant Messaging-Dienste, Spread.ly-Plattformentwickler und andere Spread.ly-Nutzer. Wo auch immer diese Informationen verwendet werden, gestatten wir dir normalerweise mithilfe deiner Privatsphäre-Einstellungen anzugeben, ob du dieser Verwendung zustimmst oder ob du die Verbindung dieser Informationen mit deinem Profil einschränken möchtest (z.B. durch das Entfernen von Links für Foto-Markierungen).</p>
+  <p>Durch die Nutzung oder den Zugriff auf Spread.ly stimmst du den, in diesen Datenschutzrichtlinien genannten, Bedingungen zu.</p>
 
-  <h3>Weitergabe deiner Informationen an Dritte</h3>
-  <p>Bei Spread.ly geht es um den Informationsaustausch mit anderen - mit Freunden und Personen in deinen Netzwerken - während du mithilfe von Privatsphäre-Einstellungen zugleich andere Nutzer davon abhalten kannst, auf deine Informationen zuzugreifen. Wir ermöglichen dir, selber zu entscheiden, welche Informationen du mit deinen Freunden und Netzwerken durch Spread.ly teilen möchtest. Unser Netzwerkaufbau und deine Privatsphäre-Einstellungen erlauben dir, selber eine sachkundige Entscheidung darüber zu fällen, wer Zugang zu deinen Informationen hat. Wir geben ohne deine Einwilligung keine Kontaktinformationen an Dritte weiter. Deine Informationen werden nur unter besonderen Umständen an Dritte weitergegeben, nämlich wenn wir glauben, dass 1) es notwendig ist, um dir einen Dienst zur Verfügung zu stellen, 2) es rechtlich erforderlich ist oder 3) du deine Erlaubnis hierfür erteilt hast.</p>
-  <ul class="normal_text">
-    <li>Wie die meisten anderen Webseiten begrenzt Spread.ly den Zugriff auf Informationen für Suchmaschinen (z.B. Google, Yahoo, MSN, Ask) nicht.</li>
-    <li>Wir könnten aufgrund rechtlicher Anfragen, wie Vorladungen und Gerichtsbeschlüssen, oder gemäß anwendbarer Gesetze dazu verpflichtet sein, Informationen über Nutzer bekanntzugeben. Wir offenbaren keine Informationen bevor wir nicht sicher sind, dass solche Anfragen durch Vollzugsbehörden oder private Prozessführer angebrachten legalen Standards entsprechen. Zudem können wir Konto- oder andere Informationen teilen, wenn wir glauben, dass es nötig ist dem Gesetz nachzukommen, um unsere Interessen oder unser Eigentum zu schützen, um Betrug oder anderen illegalen Tätigkeiten, die mithilfe des Spread.ly-Dienstes begangen werden, oder der Verwendung des Namens Spread.ly sowie drohender Körperverletzung vorzubeugen. Dies könnte auch das Teilen von Informationen mit anderen Unternehmen, Anwälten, Beauftragten oder Regierungsbehörden einschließen.</li>
-    <li>Wir lassen dich entscheiden, ob du Informationen mit Marketing- oder eCommerce-Anbietern über Angebote innerhalb der Webseite teilen möchtest.</li>
-    <li>Wir können Geschäfte oder Dienstleistungen in Zusammenarbeit mit anderen Unternehmen auf Spread.ly anbieten. Es ist für dich ersichtlich, wenn ein anderes Unternehmen in Geschäften oder Dienstleistungen, welche auf Spread.ly angeboten werden, involviert ist. Wir können zudem Kundeninformationen, welche in Zusammenhang mit deiner Verwendung dieses Geschäfts oder der Dienstleistung stehen, mit dem Unternehmen teilen.</li>
-    <li>Falls sich die Eigentumsverhältnisse am gesamten oder nahezu gesamten Spread.ly-Unternehmen oder an einzelnen Unternehmenseinheiten der ekaabo GmbH ändern sollten, können deine Nutzerdaten auf den neuen Eigentümer übertragen werden, damit der Betrieb der Seite fortgesetzt werden kann. Im Falle einer solchen Übertragung von Nutzerdaten unterliegen diese weiterhin dem Schutz jeder zuvor bestehenden Datenschutzrichtlinien.</li>
-  </ul>
+  <h2>Die Informationen, die wir sammeln</h2>
 
-  <p>Wenn du Spread.ly verwendest, können bestimmte Informationen, die du postest oder mit Dritten (z.B. Freunde oder Personen in deinem Netzwerk) teilst - beispielsweise persönliche Informationen, Kommentare, Nachrichten  - mit anderen Nutzern in Übereinstimmung mit deinen Privatsphäre-Einstellungen geteilt werden. Du trägst dabei das volle Risiko für ein solches Teilen dieser Informationen. Bitte beachte, dass persönliche Informationen, die du in deinem Profil veröffentlichst, sowie Kommentare, Nachrichten, oder andere gepostete Beiträge, öffentlich verfügbar gemacht werden können.</p>
-  <p>Spread.ly kann Links zu anderen Internetseiten beinhalten. Wir sind natürlich nicht für die Privatsphärepraktiken der anderen Internetseiten verantwortlich. Wir ermutigen unsere Nutzer dazu die Privatsphäreeinstellungen jeder Internetseite, die persönlich identifizierbare Informationen sammelt, individuell durchzulesen. Diese Privatsphärerichtlinien gelten nur für die von Spread.ly gesammelten Informationen.</p>
-  <p>Werbung, die auf Spread.ly erscheint, wird den Nutzern manchmal direkt von den Drittanbietern zugestellt. Diese erhalten dann automatisch deine IP-Adresse. Diese Drittwerber können zudem Cookies oder andere Technologien wie JavaScipt auf deinem Computer installieren, um die Wirksamkeit ihrer Werbeanzeigen zu messen und die Werbeinhalte zu personalisieren. Dadurch kann das werbende Netzwerk deinen Computer zu diesem Zweck jedesmal erkennen, wenn es dir eine Werbeanzeige sendet. Auf diese Weise können diese Informationen darüber sammeln, wo Personen, die deinen Computer oder Browser verwenden, deren Werbeanzeigen gesehen haben und auf welche Werbeanzeigen diese geklickt haben. Spread.ly hat weder Zugriff auf noch Kontrolle über die Cookies, die von Drittwerbern platziert werden können. Drittwerber haben keinen Zugang zu deinen Kontaktinformationen, die du auf Spread.ly gespeichert hast, es sei denn du möchtest diese mit ihnen teilen.</p>
-  <p>Diese Datenschutzrichtlinien gelten für die Verwendung von Cookies durch Spread.ly und nicht für die Verwendung von Cookies oder anderen Protokollierungstechnologien durch dessen Werbeträger.</p>
-  <p>Zugriff auf fast alle persönlichen Informationen auf Spread.ly und die Kontrolle dieser ist mithilfe der Profilbearbeitungs-Werkzeuge möglich. Spread.ly-Nutzer können jederzeit ihre Profilinformationen ändern oder löschen, indem sie sich für ihr Konto anmelden. Die geänderten Informationen werden umgehend aktualisiert. Personen, die ihr Spread.ly-Konto deaktivieren möchten, können dies auf der Mein Konto-Seite tun. Entfernte Informationen können als Sicherheitskopien für einen angemessenen Zeitraum erhalten bleiben, stehen aber im Allgemeinen keinen anderen Spread.ly-Mitgliedern zur Verfügung.</p>
-  <p>Wenn du allerdings die Kommunikationsfunktionen des Dienstes verwendest, um Informationen mit anderen Spread.ly-Nutzern zu teilen, (z.B. eine persönliche Nachricht an einen anderen Spread.ly-Nutzer sendest) kannst du solche Unterhaltungen generell nicht entfernen.</p>
-  <p>Spread.ly ergreift entsprechende Sicherheitsmaßnahmen, um die Daten seiner Nutzer zu schützen. Deine Kontoinformationen befinden sich auf einem von einer Firewall geschützten Server. Wenn du vertrauliche Daten (z.B. Kreditkartennummern oder Passwörter) angibst, verschlüsseln wir diese mithilfe der sicheren SSL-Technologie. (Um mehr über SSL zu erfahren, besuche die folgende Seite: http://en.wikipedia.org/wiki/Secure_Sockets_Layer.) Da E-Mail nicht als sichere Unterhaltungen anerkannt werden, bitten wir dich uns keine privaten Informationen auf diesem Wege zukommen zu lassen. Solltest du Fragen zu der Sicherheit auf Spread.ly haben, kontaktiere uns bitte.</p>
+  <p>Wenn du Spread.ly verwendest, stellst du uns zwei Arten von Informationen zur Verfügung: Persönliche Angaben, die du bewusst auf Seiten Dritter (Facebook, Twitter, GoogleBuzz, LinkedIn)
+  veröffentlichst.</p>
 
-  <h3>Nutzungsbedingungen, Bekanntmachungen und Revisionen</h3>
-  <p>Deine Verwendung von Spread.ly und jegliche daraus entstehenden Streitigkeiten unterliegen dieser Datenschutzrichtlinien sowie unserer Nutzungsbedingungen und deren Regelungen zur Beilegung von Streitigkeiten. Dies schließt Schlichtungsverfahren, Schadensersatzbeschränkungen und die Rechtswahl mit ein. Wir behalten uns das Recht vor unsere Datenschutzrichtlinien und Nutzungsbedingungen jederzeit zu ändern. Änderungen, welche nicht wesentlich sind, treten umgehend in Kraft. Wesentliche Änderungen treten hingegen innerhalb von 30 Tagen nach ihrer Veröffentlichung auf dieser Seite in Kraft. Falls wir Änderungen vornehmen sollten, werden wir diese veröffentlichen und das Datum an dem diese in Kraft treten am oberen Ende der Seite kenntlich machen. Falls wir wesentliche Änderungen an diesen Richtlinien vornehmen, werden wir dich hier, per E-Mail oder durch einen Hinweis auf deiner Startseite darauf aufmerksam machen. Wir raten dir, regelmäßig zu diesen Richtlinien zurückzukehren, damit du unsere aktuellen Datenschutzrichtlinien verstehst. Unsere aktuellen Datenschutzrichtlinien gelten für alle Informationen, die wir über dich und dein Konto besitzen.</p>
-  <p>Falls du Fragen zu diesen Datenschutzrichtlinien hast, kontaktiere uns  unter info@spreadly.com</p>
+  <p>Wenn du dich bei Spread.ly registrierst, stellst du uns bestimmte persönliche Informationen zur Verfügung, wie z.B. deinen Namen, deine E-Mail-Adresse, deine Telefonnummer,
+  deine Adresse, dein Geschlecht, die Schulen, die du besucht hast, sowie weitere persönliche Informationen und Angaben über deine Vorzüge, die du uns zur Verfügung stellst.</p>
+
+  <p>Diese Informationen werden über alle Spread.ly-Besucher gesammelt. Zudem speichern wir mithilfe von „Cookies“ bestimmte Informationen über deinen Browser. Ein Cookie ist eine
+  Dateneinheit, die auf dem Computer des Nutzers gespeichert wird und mit Informationen über den Nutzer verbunden ist. Wir verwenden Sitzungs-ID-Cookies, um zu bestätigen, dass Nutzer
+  angemeldet sind. Wir verwenden standardmäßig ein beständiges Cookie, das deine Anmelde-ID speichert (jedoch
+  nicht dein Passwort), um dir die erneute Anmeldung bei Spread.ly zu erleichtern. Du kannst dieses Cookie mithilfe der Einstellungen deines Browsers entfernen oder blockieren,
+  falls du diese praktische Funktion sperren möchtest.</p>
+
+  <p>Wenn du Spread.ly verwendest, wird ein persönliches Profil erstellt. Du kannst Informationen durch verschiedene Kanäle übermitteln. Wir sammeln diese Informationen,
+  damit wir dir diese Dienste und personalisierte Funktionen anbieten können.</p>
+
+  <p>Du postest Nutzerinhalt (wie er in den Spread.ly-Nutzungsbedingungen definiert wurde) in Deinen sozialen Netzwerken auf dein eigenes Risiko. Wir können die Aktionen anderer
+  Nutzer, mit denen du deine Informationen teilst, nicht kontrollieren. Daher können und werden wir nicht garantieren, dass Nutzerinhalt, den du in deinen sozialen Netzwerken postest,
+  nicht von unbefugten Personen angesehen wird. Für die Umgehung jeglicher Privatsphäre-Einstellungen oder Sicherheitsmaßnahmen der Seite sind wir nicht verantwortlich. Du verstehst
+  und erkennst an, dass auch nachdem du Nutzerinhalt von der Webseite entfernt hast, Kopien von diesem auf gecachten und archivierten Seiten oder falls andere Nutzer deine Inhalte
+  kopiert oder gespeichert haben, sichtbar bleiben könnten.<br />
+  Jegliches unzulässige Sammeln oder jeglicher Missbrauch von Informationen, die auf Spread.ly zu finden sind, stellen eine Verletzung von Spread.lys Nutzungsbedingungen dar und
+  sollten uns gemeldet werden.</p>
+
+  <p>Spread.ly kann Informationen in deinem Profil verwenden, ohne dich als Person Dritten zu offenbaren. Wir tun dies, um herauszufinden, wie viele Personen in einem Netzwerk
+  eine Band oder einen Film mögen sowie um Werbeanzeigen und Reklame zu personalisieren, damit wir dir Spread.ly zur Verfügung stellen können. Wir glauben, dass du davon profitieren
+  kannst. Du kannst mehr über die Welt um dich herum erfahren und vorhandene Werbeanzeigen sind mit großer Wahrscheinlichkeit interessanter für dich. Wenn du beispielsweise einen
+  Lieblingsfilm zu deinem Profil hinzufügst, werden wir dir wahrscheinlich eine Werbeanzeige zeigen, welche die Vorführung eines ähnlichen Films in deiner Stadt hervorhebt. Wir
+  teilen dem Filmverleih allerdings nicht mit, wer du bist.</p>
+
+  <h2>Weitergabe deiner Informationen an Dritte</h2>
+
+  <p>Bei Spread.ly geht es um den Informationsaustausch mit anderen - mit Freunden und Personen in deinen Netzwerken. Wir geben ohne deine Einwilligung keine Kontaktinformationen an
+  Dritte weiter. Deine Informationen werden nur unter besonderen Umständen an Dritte weitergegeben, nämlich wenn wir glauben, dass 1) es notwendig ist, um dir einen Dienst zur
+  Verfügung zu stellen, 2) es rechtlich erforderlich ist oder 3) du deine Erlaubnis hierfür erteilt hast.</p>
+
+  <p>Wie die meisten anderen Webseiten begrenzt Spread.ly den Zugriff auf Informationen für Suchmaschinen (z.B. Google, Yahoo, MSN, Ask) nicht.</p>
+
+  <p>Wir könnten aufgrund rechtlicher Anfragen, wie Vorladungen und Gerichtsbeschlüssen, oder gemäß anwendbarer Gesetze dazu verpflichtet sein, Informationen über
+  Nutzer bekanntzugeben. Wir offenbaren keine Informationen bevor wir nicht sicher sind, dass solche Anfragen durch Vollzugsbehörden oder private Prozessführer
+  angebrachten legalen Standards entsprechen. Zudem können wir Konto- oder andere Informationen teilen, wenn wir glauben, dass es nötig ist dem Gesetz nachzukommen,
+  um unsere Interessen oder unser Eigentum zu schützen, um Betrug oder anderen illegalen Tätigkeiten, die mithilfe des Spread.lydienstes begangen werden, oder der
+  Verwendung des Namens Spread.ly sowie drohender Körperverletzung vorzubeugen. Dies könnte auch das Teilen von Informationen mit anderen Unternehmen, Anwälten,
+  Beauftragten oder Regierungsbehörden einschließen.</p>
+
+  <p>Wir lassen dich entscheiden, ob du Informationen mit Marketing- oder eCommerce-Anbietern über Angebote innerhalb der Webseite teilen möchtest.</p>
+
+  <p>Wir können Geschäfte oder Dienstleistungen in Zusammenarbeit mit anderen Unternehmen auf Spread.ly anbieten. Es ist für dich ersichtlich, wenn ein anderes
+  Unternehmen in Geschäften oder Dienstleistungen, welche auf Spread.ly angeboten werden, involviert ist. Wir können zudem Kundeninformationen, welche in
+  Zusammenhang mit deiner Verwendung dieses Geschäfts oder der Dienstleistung stehen, mit dem Unternehmen teilen.</p>
+
+  <p>Falls sich die Eigentumsverhältnisse am gesamten oder nahezu gesamten Spread.ly-Unternehmen oder an einzelnen Unternehmenseinheiten der Spread.ly Inc. ändern sollten,
+  können deine Nutzerdaten auf den neuen Eigentümer übertragen werden, damit der Betrieb der Seite fortgesetzt werden kann. Im Falle einer solchen Übertragung von Nutzerdaten
+  unterliegen diese weiterhin dem Schutz jeder zuvor bestehenden Datenschutzrichtlinien.</p>
+
+  <p>Wenn du Spread.ly verwendest, können bestimmte Informationen, die du postest oder mit Dritten (z.B. Freunde oder Personen in deinem Netzwerk) teilst - beispielsweise
+  persönliche Informationen, Kommentare, Nachrichten - mit anderen Nutzern in Übereinstimmung mit deinen Privatsphäre-Einstellungen geteilt werden. Du trägst dabei das volle
+  Risiko für ein solches Teilen dieser Informationen. Bitte beachte, dass persönliche Informationen, die du  veröffentlichst, der andere gepostete Beiträge, öffentlich verfügbar sind.</p>
+
+  <p>Spread.ly kann Links zu anderen Internetseiten beinhalten. Wir sind natürlich nicht für die Privatsphärepraktiken der anderen Internetseiten verantwortlich. Wir ermutigen unsere
+  Nutzer dazu die Privatsphäreeinstellungen jeder Internetseite, die persönlich identifizierbare Informationen sammelt, individuell durchzulesen. Diese Privatsphärerichtlinien gelten
+  nur für die von Spread.ly gesammelten Informationen.</p>
+
+  <p>Spread.ly ergreift entsprechende Sicherheitsmaßnahmen, um die Daten seiner Nutzer zu schützen. Deine Kontoinformationen befinden sich auf einem von einer Firewall geschützten Server.
+  Da E-Mail nicht als sichere Unterhaltungen anerkannt werden, bitten wir dich uns keine
+  privaten Informationen auf diesem Wege zukommen zu lassen. Solltest du Fragen zu der Sicherheit auf Spread.ly haben, kontaktiere uns bitte.</p>
+
+  <h2>Nutzungsbedingungen, Bekanntmachungen und Revisionen</h2>
+
+  <p>Deine Verwendung von Spread.ly und jegliche daraus entstehenden Streitigkeiten unterliegen dieser Datenschutzrichtlinien sowie unserer Nutzungsbedingungen und deren Regelungen
+  zur Beilegung von Streitigkeiten. Dies schließt Schlichtungsverfahren, Schadensersatzbeschränkungen und die Rechtswahl mit ein. Wir behalten uns das Recht vor unsere
+  Datenschutzrichtlinien und Nutzungsbedingungen jederzeit zu ändern. Änderungen, welche nicht wesentlich sind, treten umgehend in Kraft. Wesentliche Änderungen treten hingegen
+  innerhalb von 30 Tagen nach ihrer Veröffentlichung auf dieser Seite in Kraft. Falls wir Änderungen vornehmen sollten, werden wir diese veröffentlichen und das Datum an dem
+  diese in Kraft treten am oberen Ende der Seite kenntlich machen. Falls wir wesentliche Änderungen an diesen Richtlinien vornehmen, werden wir dich hier, per E-Mail oder durch
+  einen Hinweis auf deiner Startseite darauf aufmerksam machen. Wir raten dir, regelmäßig zu diesen Richtlinien zurückzukehren, damit du unsere aktuellen Datenschutzrichtlinien
+  verstehst. Unsere aktuellen Datenschutzrichtlinien gelten für alle Informationen, die wir über dich und dein Konto besitzen.</p>
+
+  <p>Ist ein DEAL für einen Spread.ly Button aktiv, gelten die vom Seitenbetreiber hinterlegten AGB und Datenschutzrichtlinien.</p>
+
+  <p>Falls du Fragen zu diesen Datenschutzrichtlinien hast, kontaktiere uns unter <a href="mailto:info@spreadly.com">info@spreadly.com</a></p>
   <p>Spread.ly © 2011</p>
 <?php end_slot(); ?>
 
