@@ -505,3 +505,11 @@ td.editinplaceclick {
     background: url("../img/pop-upbg.jpg") no-repeat scroll center top transparent;
     height: 450px;
 }
+
+.service_content h3 span {
+    font-weight: bold;
+}
+
+.service_content {
+    height: 150px;
+}
