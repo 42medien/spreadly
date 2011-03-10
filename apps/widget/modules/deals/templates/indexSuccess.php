@@ -15,7 +15,7 @@
 	  		<?php $i = 0; ?>
 	  		<?php foreach($pActiveFormerlyKnownAsYiidActivitiesOfActiveDealForUser as $lActivity) { ?>
 		  		<?php $lUrl = $lActivity->getDeal()->getDomainProfile()->getUrl(); ?>
-		     	<li><img src="http://www.google.com/s2/u/0/favicons?domain=<?php echo $lUrl; ?>" width="12" height="14" alt="<?php echo $lUrl; ?>" title="<?php echo $lUrl; ?>" /><a href="<?php echo url_for('@get_coupon_used?activityid='.$lActivity->getId()); ?>" class="<?php echo ($i == 0)? "active": ""; ?> show-deal-link"><?php echo $lUrl; ?></a></li>
+		     	<li><a href="<?php echo url_for('@get_coupon_used?activityid='.$lActivity->getId()); ?>" class="<?php echo ($i == 0)? "active": ""; ?> show-deal-link"><?php echo $lUrl; ?></a></li>
 	    		<?php $i++; ?>
 	  		<?php } ?>
 	    </ul>
