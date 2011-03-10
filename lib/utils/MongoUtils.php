@@ -58,6 +58,8 @@ array(9) { ["url"]=> string(32) "http://www.missmotz.de/my/url/14" ["total"]=> f
     if($dealId) {
       $dealId = intval($dealId);
       $cond['d_id'] = $dealId;
+    } else {
+      $cond['d_id'] = array('$exists' => false);
     }
 
     $initial = array(
