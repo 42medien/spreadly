@@ -41,7 +41,7 @@
     		<a href="#" class="alignleft spreadlogo">
     		  <?php echo image_tag("/img/spread-logo.png", array("alt"=>"Spread.ly", "title"=>"Spread.ly", "width"=>"211", "height"=>"88")); ?>
     		</a>
-    		<div class="popup-tagline">first choice for social sharing</div>
+    		<div class="popup-tagline"><?php echo __("first choice for social sharing"); ?></div>
   		</div>
 
       <!--Pop Navigation start -->
