@@ -4,7 +4,7 @@ require_once(dirname(__FILE__).'/aws/sqs.php');
 require_once(dirname(__FILE__).'/../../config/BatchConfiguration.class.php');
 require_once(dirname(__FILE__).'/../../config/ProjectConfiguration.class.php');
 
-$configuration = ProjectConfiguration::getApplicationConfiguration('platform', BatchConfiguration::ENV, true);
+$configuration = ProjectConfiguration::getApplicationConfiguration('statistics', BatchConfiguration::ENV, true);
 sfContext::createInstance($configuration);
 
 // Include Class
