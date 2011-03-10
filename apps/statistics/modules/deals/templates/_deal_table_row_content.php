@@ -10,7 +10,7 @@
 			</td>
 			<td align="left">
 				<div class="marketbox">
-					<?php echo link_to($pDeal->getSummary(), '@get_analytics_content', array('query_string' => 'isdeal=1com=all&host_id='.$pDeal->getDomainProfileId().'&date-from='.$pDeal->getStartDate().'&date-to='.$pDeal->getEndDate().'&url=&dealid='.$pDeal->getId(), 'class' => 'deal-stats-link', 'title' => __('Show analytics'))); ?>
+					<?php echo link_to($pDeal->getSummary(), '@get_analytics_content', array('query_string' => 'isdeal=1&com=all&host_id='.$pDeal->getDomainProfileId().'&date-from='.$pDeal->getStartDate().'&date-to='.$pDeal->getEndDate().'&url=&dealid='.$pDeal->getId(), 'class' => 'deal-stats-link', 'title' => __('Show analytics'))); ?>
 				</div>
 			</td>
 			<td align="left" valign="middle">
