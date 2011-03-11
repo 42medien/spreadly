@@ -107,7 +107,7 @@ class OnlineIdentityTable extends Doctrine_Table {
   public static function retrieveByOriginalId($pId) {
     $lOnlineIdentity = Doctrine_Query::create()
       ->from('OnlineIdentity oi')
-      ->where('oi.original_id  = ?', $pId)
+      ->where('oi.original_id = ?', $pId)
       ->fetchOne();
 
     return $lOnlineIdentity;
