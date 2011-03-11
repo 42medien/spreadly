@@ -179,7 +179,7 @@ class YiidActivity extends BaseYiidActivity {
    */
   public function generateUrlWithClickbackParam($pOnlineIdentity) {
     $lQueryChar = parse_url($this->getUrl(), PHP_URL_QUERY) ? '&' : '?';
-    return $this->getUrl().$lQueryChar.'yiidit='.$pOnlineIdentity->getCommunity()->getCommunity().'.'.$this->getId();
+    return $this->getUrl().$lQueryChar.'spreadly='.$pOnlineIdentity->getCommunity()->getCommunity().'.'.$this->getId();
   }
 
   /**
