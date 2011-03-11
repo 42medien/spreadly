@@ -1,4 +1,4 @@
-<?php use_helper('Avatar'); ?>
+<?php use_helper('Avatar', 'Text'); ?>
 <form action="<?php echo url_for('@save_like'); ?> " name="popup-like-form" id="popup-like-form" method="post">
 <?php
 $lImages = $pYiidMeta->getImages();
@@ -56,14 +56,14 @@ if ($lImages && count($lImages) > 0) {
                 </div>
               </div>
               <div class="alignleft sub_detail">
-                <h4>
-                  <?php echo $pYiidMeta->getTitle(); ?>
+                <h4 title="<?php echo $pYiidMeta->getTitle(); ?>">
+                  <?php echo truncate_text($pYiidMeta->getTitle(), 50); ?>
                 </h4>
-                <p>
-                  <?php echo $pYiidMeta->getUrl(); ?>
+                <p title="<?php echo $pYiidMeta->getUrl(); ?>">
+                  <?php echo truncate_text($pYiidMeta->getUrl(), 50); ?>
                 </p>
                 <p class="last">
-                  <?php echo $pYiidMeta->getDescription(); ?>
+                  <?php echo truncate_text($pYiidMeta->getDescription(), 150); ?>
                 </p>
               </div>
             </div>
