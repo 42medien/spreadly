@@ -37,7 +37,7 @@
 		            <p class="exprebox"><?php if ($pActiveDeal->isUnlimited()) {
                     echo __("%1 Claimed Deals", array("%1" => $pActiveDeal->getCouponClaimedQuantity()));
                   } else {
-                    echo __("%1/%2 Deals left", array("%1" => $pActiveDeal->getCouponClaimedQuantity(), "%2" => $pActiveDeal->getCouponQuantity()));
+                    echo __("%1/%2 Deals left", array("%1" => $pDeal->getCouponQuantity()-$pDeal->getCouponClaimedQuantity(), "%2" => $pActiveDeal->getCouponQuantity()));
                   } ?></p>
 		          </div>
 		          <div class="dieblock">
