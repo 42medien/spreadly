@@ -34,7 +34,7 @@ class systemActions extends sfActions
 
     $referer = $this->getRequest()->getReferer();
 
-    if( preg_match('/yiid/', parse_url($referer, PHP_URL_HOST)) ) {
+    if( preg_match('/spreadly/', parse_url($referer, PHP_URL_HOST)) ) {
       return $this->redirect( $referer );
     } else {
       return $this->redirect( 'index/index' );
@@ -48,7 +48,7 @@ class systemActions extends sfActions
 
     $referer = $this->getRequest()->getReferer();
 
-    if( preg_match('/yiid/', parse_url($referer, PHP_URL_HOST)) ) {
+    if( preg_match('/spreadly/', parse_url($referer, PHP_URL_HOST)) ) {
       return $this->redirect( $referer );
     } else {
       return $this->redirect( '@homepage' );
