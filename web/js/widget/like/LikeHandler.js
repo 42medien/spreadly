@@ -125,10 +125,12 @@ var WidgetLikeForm = {
           success : function(pResponse) {
             if(pResponse.success == true) {
               WidgetLikeForm.removeButton(); 
-              WidgetLikeForm.removeTextarea();                 
+              WidgetLikeForm.removeTextarea(); 
+              WidgetLikeForm.showSuccessMsg();
             } else {
               WidgetLikeForm.showButton(); 
-              WidgetLikeForm.showTextarea();      
+              WidgetLikeForm.showTextarea();
+              WidgetLikeForm.showErrorMsg();
             }
             
             OnLoadGrafic.hideGrafic();
@@ -171,6 +173,26 @@ var WidgetLikeForm = {
     
     showTextarea: function() {
       jQuery('#area-like-comment').show();            
+    },
+    
+    showErrorMsg: function() {
+      jQuery('.comment_box').prepend("<div class='error'>"+i18n.get('like_error_message')+"</div>");      
+      var lTimeout;
+        lTimeout = setTimeout(function() {
+          jQuery('.error').hide('slow');
+          jQuery('.error').remove();
+        }, 5000);      
+    },
+    
+    showSuccessMsg: function() {
+      debug.log('[showSuccessMsg]');
+      
+      jQuery('.comment_box').empty();
+      jQuery('.comment_box').append("<div class='success'>"+i18n.get('like_success_message')+"</div>");      
+      var lTimeout;
+        lTimeout = setTimeout(function() {
+          jQuery('.comment_box').hide('slow');
+        }, 5000);
     }
 };
 

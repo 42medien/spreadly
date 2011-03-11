@@ -2,6 +2,7 @@
  * @combine platform
  * @combine likepopup
  * @combine statistics
+ * @combine widget
  */
 var i18n = {
   aVars: {},
