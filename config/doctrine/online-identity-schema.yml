@@ -15,7 +15,7 @@ OnlineIdentity:
       type:     integer
       notnull:  false
     original_id:
-      type:     string(16)
+      type:     string(255)
     title:
       type:     string(120)
     name:
