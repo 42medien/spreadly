@@ -33,7 +33,7 @@ class GoogleAuthApiClient extends AuthApi {
     $lAuthIdentifier = $lProfileUri;
 
     // ask for online identity
-    $lOnlineIdentity = OnlineIdentityTable::retrieveByOriginalId($lObject->id);
+    $lOnlineIdentity = OnlineIdentityTable::retrieveByAuthIdentifier($lAuthIdentifier);
 
     // check if user already exists
     if ($lOnlineIdentity) {
@@ -83,7 +83,7 @@ class GoogleAuthApiClient extends AuthApi {
     $lAuthIdentifier = $lProfileUri;
 
     // ask for online identity
-    $lOnlineIdentity = OnlineIdentityTable::retrieveByOriginalId($lObject->id);
+    $lOnlineIdentity = OnlineIdentityTable::retrieveByAuthIdentifier($lAuthIdentifier);
 
     // check if user already exists
     if ($lOnlineIdentity) {
@@ -177,6 +177,7 @@ class GoogleAuthApiClient extends AuthApi {
    * @param Object $pObject
    */
   public function completeOnlineIdentity(&$pOnlineIdentity, $pObject, $pUser, $pAuthIdentifier) {
+    $pOnlineIdentity->setOriginalId($pObject->id);
     $pOnlineIdentity->setName($pObject->displayName);
     $pOnlineIdentity->setSocialPublishingEnabled(true);
 
