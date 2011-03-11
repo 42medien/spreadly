@@ -60,7 +60,7 @@
 
       <!--Content end here -->
 			<div id="footer" class="nobg">
-   			<span>Copyright Spread.ly 2011</span> | <?php echo link_to(__("Imprint"), "@imprint") ?> |  <?php echo link_to(__("TOS"), "system/tos") ?> | <?php echo link_to(__("Privacy Policy"), "system/privacy") ?> | <a href="mailto:info@spreadly.com">info@spreadly.com</a></div>
+   			<span>Copyright Spread.ly 2011</span> | <?php echo link_to(__("Imprint"), "@imprint") ?> |  <?php echo link_to(__("TOS"), "system/tos") ?> | <?php echo link_to(__("Privacy Policy"), "system/privacy") ?> | <?php echo link_to(__("Blog"), "http://blog.spreadly.com/", array("target" => "_blank")) ?> | <a href="mailto:info@spreadly.com">info@spreadly.com</a></div>
 			</div>
 		<script type="text/javascript">
 			// Custom Checkbox Function
