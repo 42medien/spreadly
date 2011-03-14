@@ -16,7 +16,7 @@
 			<div class="grboxbot"><span></span></div>
 		</div>
 		<div class="clearfix services_list">
-			<div class="alignleft item">
+			<div class="alignleft item selectionnone">
 				<div class="grboxtop"><span></span></div>
 				<div class="grboxmid">
 					<div class="grboxmid-content">
@@ -53,7 +53,7 @@
 				<div class="grboxbot"><span></span></div>
 			</div>
 		</div>
-		<div>
+		<div class="selectionnone">
 			<div class="grboxtop"><span></span></div>
 			<div class="grboxmid">
 				<div class="grboxmid-content">
