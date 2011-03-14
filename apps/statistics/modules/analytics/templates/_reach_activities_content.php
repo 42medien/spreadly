@@ -23,11 +23,11 @@
 	                  	<h3><?php echo __('Your likes had...'); ?></h3>
 	                    <ul>
 	                    	<li>› <?php echo __('%views% Views', array('%views%' => $pData['statistics']['total'][$pCom]['contacts'])); ?></li>
-	                      <li>› <?php echo __('%likes% Likes', array('%likes%' => $pData['statistics']['total'][$pCom]['likes'])); ?></li>
+	                      <li>› <?php echo __('%likes% Likes', array('%likes%' => $pData['statistics']['total'][$pCom]['clickbacks'])); ?></li>
 	                    </ul>
 	                  	<h3><?php echo __('The response on these views was...'); ?></h3>
 	                    <ul>
-	                    	<li>› <?php echo __('%clickbacks% Clickbacks', array('%clickbacks%' => $pData['statistics']['total'][$pCom]['clickbacks'])); ?></li>
+	                    	<li>› <?php echo __('%clickbacks% Clickbacks', array('%clickbacks%' => $pData['pis']['services'][$pCom]['cb'])); ?></li>
 	                    </ul>
 	                  </div>
 	                </div>

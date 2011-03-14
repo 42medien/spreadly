@@ -99,27 +99,80 @@ array(9) { ["url"]=> string(32) "http://www.missmotz.de/my/url/14" ["total"]=> f
 
     $data = array();
     $data['data'] = ChartUtils::sortArrayByTotals($g['retval'], $limit);
-
-    $pi_col = MongoUtils::getCollection('pis', $domain);
-    $initial = MongoUtils::getInitial('pis');
-    $reduce = MongoUtils::getReduce('pis');
-    unset($cond['host']);
-
+    
     foreach ($data['data'] as $key => $item) {
       $data['data'][$key]['pis'] = array('total' => 0,'cb' => 0,'yiid' => 0);
-      $cond['url'] = $item['url'];
+      
+      $pis = MongoUtils::getPisDataForUrl($item['url'], $fromDate, $toDate);
 
-      $pis = $pi_col->group($keys, $initial, $reduce, array("condition" => $cond));
-      if(!empty($pis['retval'][0])) {
-        $data['data'][$key]['pis']['total'] += $pis['retval'][0]['total'];
-        $data['data'][$key]['pis']['cb'] += $pis['retval'][0]['cb'];
-        $data['data'][$key]['pis']['yiid'] += $pis['retval'][0]['yiid'];
+      if(!empty($pis)) {
+        $data['data'][$key]['pis']['total'] += $pis['total'];
+        $data['data'][$key]['pis']['cb'] += $pis['cb'];
+        $data['data'][$key]['pis']['yiid'] += $pis['yiid'];
       }
     }
-
+    
     $data['filter'] = MongoUtils::getFilter($domain, $fromDate, $toDate);
-
+    
     return $data;
+  }
+  
+  private static function getPisDataForUrl($url, $fromDate, $toDate) {
+    $host = parse_url($url, PHP_URL_HOST);
+    $keys = array("url" => 1);
+    $cond = array(
+      "url" => $url,
+      "date" => array('$gte' => new MongoDate(strtotime($fromDate)), '$lte' => new MongoDate(strtotime($toDate)))
+    );
+    $pi_col = MongoUtils::getCollection('pis', $host);
+    $initial = MongoUtils::getInitial('pis');
+    $reduce = MongoUtils::getReduce('pis');
+    $g = $pi_col->group($keys, $initial, $reduce, array("condition" => $cond));
+    
+    $res = $g['retval'][0];
+    $res['services']['all'] = array("cb" => 0, "yiid" => 0);
+
+    foreach (PseudoStatsModel::$services as $service) {
+      $res['services'][$service] = array("cb" => 0, "yiid" => 0);
+      $res['services'][$service]['cb'] += $g['retval'][0]['services'][$service]['cb'];
+      $res['services'][$service]['yiid'] += $g['retval'][0]['services'][$service]['yiid'];
+
+      $res['services']['all']['cb'] += $g['retval'][0]['services'][$service]['cb'];
+      $res['services']['all']['yiid'] += $g['retval'][0]['services'][$service]['yiid'];
+    }
+
+    return $res;
+  }
+
+  private static function getPisDataForHost($host, $fromDate, $toDate) {
+    $keys = array("url" => 1);
+    $cond = array(
+      "date" => array('$gte' => new MongoDate(strtotime($fromDate)), '$lte' => new MongoDate(strtotime($toDate)))
+    );
+    $pi_col = MongoUtils::getCollection('pis', $host);
+    $initial = MongoUtils::getInitial('pis');
+    $reduce = MongoUtils::getReduce('pis');
+    $g = $pi_col->group($keys, $initial, $reduce, array("condition" => $cond));
+    
+    $res = array('total' => 0 , 'cb' => 0, 'yiid' => 0);
+    
+    foreach ($g['retval'] as $result) {
+      $res['total'] += $result['total'];
+      $res['cb'] += $result['cb'];
+      $res['yiid'] += $result['yiid'];
+
+      $res['services']['all'] = array("cb" => 0, "yiid" => 0);
+
+      foreach (PseudoStatsModel::$services as $service) {
+        $res['services'][$service] = array("cb" => 0, "yiid" => 0);
+        $res['services'][$service]['cb'] += $g['retval'][0]['services'][$service]['cb'];
+        $res['services'][$service]['yiid'] += $g['retval'][0]['services'][$service]['yiid'];
+
+        $res['services']['all']['cb'] += $g['retval'][0]['services'][$service]['cb'];
+        $res['services']['all']['yiid'] += $g['retval'][0]['services'][$service]['yiid'];
+      }
+    }
+    return $res;
   }
 
   private static function getCollectionNameForHost($host, $col) {
@@ -153,11 +206,11 @@ array(9) { ["url"]=> string(32) "http://www.missmotz.de/my/url/14" ["total"]=> f
     $cond = array("date" => array('$gte' => new MongoDate(strtotime($fromDate)), '$lte' => new MongoDate(strtotime($toDate))));
 
     if($url) {
-      //$cond['url'] = $url;
+      $cond['url'] = $url;
     }
     
     if($dealId) {
-      $dealId = intval($dealId);
+      $dealId = intval($dealId);  
       $cond['d_id'] = $dealId;
     }
 
@@ -182,9 +235,15 @@ array(9) { ["url"]=> string(32) "http://www.missmotz.de/my/url/14" ["total"]=> f
       $initial = MongoUtils::getInitial('pis');
       $reduce = MongoUtils::getReduce('pis');
       $pis = $pi_col->group($keys, $initial, $reduce, array("condition" => $cond));
-      $data['pis'] = MongoUtils::getDataWithEmptyDayPadding($pis['retval'], $fromDate, $toDate);
+      #$data['pis'] = MongoUtils::getDataWithEmptyDayPadding($pis['retval'], $fromDate, $toDate);
 
-      $data['statistics'] = MongoUtils::getAdditionalStatistics($g['retval'], $fromDate, $toDate);
+      if($url) {
+        $data['pis'] = MongoUtils::getPisDataForUrl($url, $fromDate, $toDate);
+      } else {
+        $data['pis'] = MongoUtils::getPisDataForHost($domain, $fromDate, $toDate);
+      }
+      
+      $data['statistics'] = MongoUtils::getAdditionalStatistics($g['retval'], $data['pis'], $fromDate, $toDate);
     } elseif($type == 'demografics') {
       $data['statistics'] = MongoUtils::getAdditionalDemograficStatistics($data['data'], $fromDate, $toDate);
     }
@@ -278,7 +337,7 @@ array(9) { ["url"]=> string(32) "http://www.missmotz.de/my/url/14" ["total"]=> f
     return $res;
   }
 
-  private static function getAdditionalStatistics($mongoData, $fromDate, $toDate) {
+  private static function getAdditionalStatistics($mongoData, $piData,  $fromDate, $toDate) {
     $services = array('facebook', 'twitter', 'linkedin', 'google');
     $days = ((strtotime($toDate) - strtotime($fromDate))/(60*60*24))+1;
     $res = MongoUtils::initStats($services);
@@ -362,7 +421,13 @@ array(9) { ["url"]=> string(32) "http://www.missmotz.de/my/url/14" ["total"]=> f
         return array(
           "total" => 0,
           "cb" => 0,
-          "yiid" => 0
+          "yiid" => 0,
+          "services" => array(
+            "facebook" => array("cb" => 0, "yiid" => 0),
+            "twitter" => array("cb" => 0, "yiid" => 0),
+            "linkedin" => array("cb" => 0, "yiid" => 0),
+            "google" => array("cb" => 0, "yiid" => 0)
+          )
         );
         break;
       default:
@@ -398,17 +463,25 @@ array(9) { ["url"]=> string(32) "http://www.missmotz.de/my/url/14" ["total"]=> f
         return $res."}";
         break;
       case 'pis':
-        return "function(doc, out){ ".
-             "if(doc.total) {".
-               "out.total+=isNaN(doc.total) ? 0 : doc.total;".
-             "}".
-             "if(doc.cb) {".
-               "out.cb+=isNaN(doc.cb) ? 0 : doc.cb;".
-             "}".
-             "if(doc.yiid) {".
-               "out.yiid+=isNaN(doc.yiid) ? 0 : doc.yiid;".
-             "}".
-           "}";
+        $res = "function(doc, out){ ".
+         "if(doc.total) {".
+           "out.total+=isNaN(doc.total) ? 0 : doc.total;".
+         "}".
+         "if(doc.cb) {".
+           "out.cb+=isNaN(doc.cb) ? 0 : doc.cb;".
+         "}".
+         "if(doc.yiid) {".
+           "out.yiid+=isNaN(doc.yiid) ? 0 : doc.yiid;".
+         "}";
+          foreach (PseudoStatsModel::$services as $service) {
+            $res = $res."if(doc.s && doc.s.".$service.") {".
+              "out.services.".$service.".cb+=".
+                "isNaN(doc.s.".$service.".cb) ? 0 : doc.s.".$service.".cb;".
+              "out.services.".$service.".yiid+=".
+                "isNaN(doc.s.".$service.".yiid) ? 0 : doc.s.".$service.".yiid;".
+            "}";
+          }
+        return $res."}";
         break;
       default:
         return null;

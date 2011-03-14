@@ -27,7 +27,7 @@
 	                  	<h3><?php echo __('Total value'); ?></h3>
 	                    <ul>
 	                    	<li>› <?php echo __('%likes% Likes', array('%likes%' => $pData['statistics']['total'][$pCom]['likes'])); ?></li>
-	                      <li>› <?php echo __('%clickbacks% Clickbacks', array('%clickbacks%' => $pData['statistics']['total'][$pCom]['clickbacks'])); ?></li>
+	                      <li>› <?php echo __('%clickbacks% Clickbacks', array('%clickbacks%' => $pData['pis']['services'][$pCom]['cb'])); ?></li>
 	                    </ul>
 	                  </div>
 	                </div>
