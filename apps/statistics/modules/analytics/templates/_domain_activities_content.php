@@ -7,8 +7,7 @@
 	      	<div class="graybox clearfix analyticsbox">
 	        	<h2 class="analytics-title"><?php echo __('%community% Likes', array('%community%' => ucfirst($pCom))); ?></h2>
 	          <div class="beshbox">
-	          	<?php echo __('In diesem Chart werden die stattgefunden Klicks (Likes und Dislikes) auf den Spread. Spreadly Button im gew&auml;hlten
-	Zeitraum f&uuml;r die gesamte Webseite dargestellt.');?>
+	          	<?php echo __('The chart shows all clicks on the Spread.ly button implemented on the indicated site during the above mentioned period of time.');?>
 	          </div>
 	         	<div class="textcenter analyticschart">
 	          	<?php include_partial('analytics/chart_line_activities', array('pData' => $pData, 'pCommunity' => $pCom))?>
