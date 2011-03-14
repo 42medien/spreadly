@@ -37,7 +37,7 @@
 	                  	<h3><?php echo __('Mean values'); ?></h3>
 	                    <ul>
 	                    	<li>› <?php echo __('%likes% Likes / Day', array('%likes%' => $pData['statistics']['average'][$pCom]['likes'])); ?></li>
-	                      <li>› <?php echo __('%clickbacks% Clickbacks / Day', array('%clickbacks%' => $pData['statistics']['average'][$pCom]['clickbacks'])); ?></li>
+	                      <li>› <?php echo __('%clickbacks% Clickbacks / Day', array('%clickbacks%' => $pData['pis']['statistics']['average'][$pCom]['cb'])); ?></li>
 	                    </ul>
 	                  </div>
 	                </div>
