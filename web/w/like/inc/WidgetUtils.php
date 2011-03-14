@@ -378,10 +378,12 @@ class WidgetUtils {
       $lOptions["cb"] = 1;
 
       $lClickback = explode('.', urldecode($pClickback));
+      $lClickback = $lClickback[0];
 
-      $lOptions["s"] = array($lClickback[0] => array("cb" => 1));
+      $lOptions['s.'.$lClickback.'.cb'] = 1;
+
       if ($pUser) {
-        $lOptions["s"] = array($lClickback[0] => array("yiid" => 1));
+        $lOptions['s.'.$lClickback.'.yiid'] = 1;
       }
     }
 
