@@ -513,3 +513,7 @@ td.editinplaceclick {
 .service_content {
     height: 150px;
 }
+
+.contentbox {
+  z-index: 5;
+}
