@@ -514,6 +514,14 @@ td.editinplaceclick {
     height: 150px;
 }
 
+.success{
+  color: green;
+}
+
+.comment_box .success{
+  padding-left: 105px;
+}
+
 .contentbox {
   z-index: 5;
 }

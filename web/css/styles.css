@@ -897,4 +897,5 @@ dealwidebox .graytitle { padding-bottom: 8px;}
 /* jcarousel Page Css
 --------------------------------------------------------------------------------------------------------*/
 
-
+.selectionnone::selection { background-color:transparent}
+.selectionnone *::selection { background-color:transparent} 
