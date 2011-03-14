@@ -71,7 +71,7 @@ var WidgetDealForm = {
 
 var WidgetLikeForm = {
     
-    aComment: '',
+    aComment: " ",
     
     /**
      * inits the form-functions
@@ -90,16 +90,6 @@ var WidgetLikeForm = {
       
     },
     
-    
-    checkComment: function(form, options) {
-      var lComment = jQuery(form[0]["like[comment]"]).val();
-      if(Utils.trim(lComment) == Utils.trim(WidgetLikeForm.aComment)){
-        jQuery(form[0]["like[comment]"]).val("");
-        form[0]["like[comment]"] = "";
-        form[0]["like[comment]"].defaultValue = "";
-      }
-    return true;
-    },
     
     /**
      * sends the like to the backend
@@ -141,6 +131,17 @@ var WidgetLikeForm = {
          return false;
       });      
     },
+    
+    checkComment: function(form, options) {
+      var lComment = jQuery(form[0]["like[comment]"]).val();
+      if(Utils.trim(lComment) == Utils.trim(WidgetLikeForm.aComment)){
+        jQuery(form[0]["like[comment]"]).val(" ");
+        //debug.log(form[0]["like[comment]"]);
+        //form[0]["like[comment]"] = " ";
+        form[0]["like[comment]"].defaultValue = " ";
+      }
+      return true;
+    },    
     
     /**
      * sets the hidden img-value
