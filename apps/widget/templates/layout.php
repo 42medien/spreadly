@@ -21,7 +21,7 @@
 		<![endif]-->
 		<?php if ($sf_params->get('resize') == true) { ?>
 		<script>
-      window.resizeTo(580,500);
+      window.resizeTo(580,550);
     </script>
     <?php } ?>
     <script type="text/javascript" src="/js/100_main/include/widget-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
