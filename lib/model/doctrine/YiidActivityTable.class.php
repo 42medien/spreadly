@@ -281,8 +281,8 @@ class YiidActivityTable extends Doctrine_Table {
     $lSocialObject = SocialObjectTable::retrieveByAliasUrl($pUrl);
 
     if ($lSocialObject) {
-      $lQuery = $lCollection->findOne(array("u_id" => (int)$pUserId,
-                                            "d_id" => (int)$pDealId,
+      $lQuery = $lCollection->findOne(array("u_id" => intval($pUserId),
+                                            "d_id" => intval($pDealId),
                                             "so_id" => new MongoId($lSocialObject->getId()."")
                                            ));
 

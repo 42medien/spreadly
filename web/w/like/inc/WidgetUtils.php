@@ -376,6 +376,13 @@ class WidgetUtils {
 
     if ($pClickback) {
       $lOptions["cb"] = 1;
+
+      $lClickback = explode('.', urldecode($pClickback));
+
+      $lOptions["s"] = array($lClickback[0] => array("cb" => 1));
+      if ($pUser) {
+        $lOptions["s"] = array($lClickback[0] => array("yiid" => 1));
+      }
     }
 
     $lCollection->update($lDoc, array('$inc' => $lOptions), array("upsert" => true));
