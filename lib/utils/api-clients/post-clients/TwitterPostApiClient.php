@@ -14,7 +14,7 @@ class TwitterPostApiClient extends PostApi {
    */
   public function generateMessage($pActivity) {
     sfProjectConfiguration::getActive()->loadHelpers('Text');
-    
+
     $lUrl = ShortUrlTable::shortenUrl($pActivity->generateUrlWithClickbackParam($this->onlineIdentity));
 
     $lMaxChars = 135;
@@ -25,6 +25,9 @@ class TwitterPostApiClient extends PostApi {
     if ($pActivity->getComment()) {
       $lChars = $lMaxChars - $lLengthOfText;
       $lText = truncate_text($pActivity->getComment(), $lChars, '...') . " " . $lText;
+    } elseif ($pActivity->getTitle()) {
+      $lChars = $lMaxChars - $lLengthOfText;
+      $lText = truncate_text($pActivity->getTitle(), $lChars, '...') . " " . $lText;
     }
 
     return array("status" => $lText);
