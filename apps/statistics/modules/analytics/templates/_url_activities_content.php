@@ -10,7 +10,7 @@
 				</div>
 			<?php } else { ?>
 	      	<div class="graybox clearfix analyticsbox">
-	        	<h2 class="analytics-title"><?php echo __('%community% Likes for %url%', array('%community%' => ucfirst($pCom), '%url%' => $pData['filter']['url']) ); ?></h2>
+	        	<h2 class="analytics-title"><?php echo __('Clicks on Spread.ly for %url%', array('%url%' => $pData['filter']['url']) ); ?></h2>
 	          <div class="beshbox">
 	          	<?php echo __('The chart shows all clicks on the Spread.ly button implemented on the indicated website during the above mentioned period of time.');?>
 	          </div>
