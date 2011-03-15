@@ -106,12 +106,11 @@ class YiidActivityTable extends Doctrine_Table {
    * @param boolean $pIsLike whether you want likes or dislikes
    * @return count of activity
    */
-  public static function retrieveActivityCountByUserId($pUserId, $pIsLike=true) {
+  public static function retrieveActivityCountByUserId($pUserId, $deprecated=true) {
     $lCollection = self::getMongoCollection();
 
     $lQuery = $lCollection->count(array(
-      "u_id" => intval($pUserId),
-      "score" => $pIsLike ? 1 : -1
+      "u_id" => intval($pUserId)
     ));
 
     return $lQuery;
