@@ -1,7 +1,8 @@
 <?php slot('content') ?>
   <div class="languagebox alignright">
-    <a href="<?php echo url_for('@update_language?lang=en'); ?>" class="alignright"><img src="/img/uk-flag-icon.png" width="25" height="26" alt="UK" title="UK" /></a>
-    <a href="<?php echo url_for('@update_language?lang=de'); ?>" class="alignright"><img src="/img/germany-flag.png" width="25" height="26" alt="Deutsch" title="Deutsch" /></a>
+  	<?php $lCult = $sf_user->getCulture(); ?>
+    <a href="<?php echo url_for('@update_language?lang=en'); ?>" class="alignright"><img src="/img/uk-flag-icon.png" width="25" height="26" alt="UK" title="UK" <?php echo ($lCult == 'de')? 'class="inactive-cult"':""; ?> /></a>
+    <a href="<?php echo url_for('@update_language?lang=de'); ?>" class="alignright"><img src="/img/germany-flag.png" width="25" height="26" alt="Deutsch" title="Deutsch" <?php echo ($lCult == 'en')? 'class="inactive-cult"':""; ?>  /></a>
   	<?php if($sf_user->isAuthenticated()){ ?>
   		<div class="alignright">
 	  	  <div class="welcome_user alignleft"><?php echo __('Hello').' '.$sf_user->getUsername(); ?></div>

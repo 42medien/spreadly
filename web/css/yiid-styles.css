@@ -525,3 +525,7 @@ td.editinplaceclick {
 .contentbox {
   z-index: 5;
 }
+
+.languagebox img.inactive-cult{
+ opacity: 0.5;
+}
