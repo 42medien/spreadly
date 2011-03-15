@@ -40,7 +40,7 @@
       <td height="43" align="center" class="first"><?php echo image_tag('/img/global/24x24/process.png', array('title' => __('Deal submitted')))?></td>
       <td align="left"><div class="marketbox"><?php echo $pDeal->getSummary(); ?></div></td>
       <td align="left" valign="middle"><div class="marketbox"><?php echo $pDeal->getDomainProfile()->getUrl(); ?></div></td>
-      <td align="left" valign="middle" colspan="2"><div class="marketbox"><?php echo __('Not yet approved by yiid ...'); ?></div></td>
+      <td align="left" valign="middle" colspan="2"><div class="marketbox"><?php echo __('Not yet approved by spreadly ...'); ?></div></td>
       <td align="center" valign="middle"><?php echo $pDeal->getCouponClaimedQuantity(); ?></td>
       <td align="center" class="edit-col"><?php echo __($pDeal->getHumanCouponQuantity()); ?></td>
       <td style="text-align: center;">
