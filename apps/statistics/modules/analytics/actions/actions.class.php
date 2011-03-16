@@ -47,13 +47,13 @@ class analyticsActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
-    $this->pActivityCount = MongoUtils::getTodaysActivityCountForDomainProfiles($this->pVerifiedDomains);
+    $this->pActivityCount = MongoUtils::getYesterdaysActivityCountForDomainProfiles($this->pVerifiedDomains);
     $this->pVerifiedDomains = $this->sortDomainProfilesByCount($this->pVerifiedDomains, $this->pActivityCount);
     $domainUrls = array();
     foreach ($this->pVerifiedDomains as $domain) {
       $domainUrls[] = $domain->getUrl();
     }
-    $this->pTopActivitiesData = MongoUtils::getTodaysTopActivitiesData($domainUrls);
+    $this->pTopActivitiesData = MongoUtils::getYesterdaysTopActivitiesData($domainUrls);
   }
 
 

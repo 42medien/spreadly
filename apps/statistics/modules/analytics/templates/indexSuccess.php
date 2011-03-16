@@ -4,7 +4,7 @@
     	<tr>
   			<th width="70" height="32" align="center" valign="middle" class="first"><div><?php echo __('Rank'); ?></div></th>
   	    <th align="center" valign="middle"><div><?php echo __('Website');?></div></th>
-  			<th width="120" height="32" align="center" valign="middle" class="last"><div><?php echo __('Todays Activities'); ?></div></th>
+  			<th width="120" height="32" align="center" valign="middle" class="last"><div><?php echo __('Yesterdays Activities'); ?></div></th>
     	</tr>
     	<?php if(count($pVerifiedDomains) > 0) { ?>
   		<?php $i = 1;?>

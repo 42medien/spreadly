@@ -31,7 +31,7 @@ array(9) { ["url"]=> string(32) "http://www.missmotz.de/my/url/14" ["total"]=> f
     return $count;
   }
   
-  public static function getTodaysActivityCountForDomainProfiles($pDomains) {  
+  public static function getYesterdaysActivityCountForDomainProfiles($pDomains) {  
     $lActivityCount = array();
     foreach ($pDomains as $domain) {
       $lActivityCount[$domain->getId()] = MongoUtils::getActivityCount($domain->getUrl(), date('Y-m-d', strtotime("1 day ago")), date('Y-m-d'), 'daily');
@@ -40,7 +40,7 @@ array(9) { ["url"]=> string(32) "http://www.missmotz.de/my/url/14" ["total"]=> f
     return $lActivityCount;
   }
   
-  public static function getTodaysTopActivitiesData($domains) {
+  public static function getYesterdaysTopActivitiesData($domains) {
     return MongoUtils::getTopActivitiesData($domains, date('Y-m-d', strtotime("1 day ago")), date('Y-m-d'), 'daily', 5);
   }
   
