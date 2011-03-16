@@ -30,7 +30,7 @@ class likeActions extends sfActions {
 
       // if there is an active deal
       if($this->pActiveDeal) {
-        $this->pActivity = YiidActivityTable::getByDealIdAndUserIdAndUrl($this->pActiveDeal->getId(), $this->getUser()->getId(), $lUrl);
+        $this->pActivity = YiidActivityTable::getByDealIdAndUserId($this->pActiveDeal->getId(), $this->getUser()->getId());
 
         // check if user has already dealt
         if(!$this->pActivity) {
