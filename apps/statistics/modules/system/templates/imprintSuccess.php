@@ -10,7 +10,8 @@
     Telefax: +49 - 6201 - 845 20 29<br/>
     info { at } ekaabo { punkt } de<br/>
     Geschäftsführer: Marco Ripanti<br/>
-    Eingetragen am Amtsgericht Mannheim unter HRB 701542
+    Eingetragen am Amtsgericht Mannheim unter HRB 701542<br />
+    USt-Id-Nr. DE 2527 326 06
   </p>
 
   <p>Zum Pressebereich: <a href="http://blog.spreadly.com/de-presse-en-press/">blog.spreadly.com/de-presse-en-press/</a></p>
