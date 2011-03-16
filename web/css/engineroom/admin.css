@@ -1,4 +1,4 @@
-body
+#body
 {
   background: none;
 }
@@ -11,8 +11,8 @@ body
 
 #content
 {
-  padding: 25px;
-  padding-top: 0;
+  padding: 25px 0;
+  
 }
 
 #menu
@@ -37,7 +37,7 @@ html body #content h1
   margin: 5px 0 10px 0;
   padding: 5px 10px;
   font-size: 140%;
-  color: #333;
+  color: #782a4f;
   text-shadow: 0 1px 0 #fff;
   text-align: center;
   background: #eee;
@@ -104,3 +104,82 @@ th
 .sf_admin_filter {
   display: none;
 }
+/* Der Kern von Clearfix */
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+}
+
+/* IE-Patches für Clearfix */
+.clearfix {
+  display: inline-block;
+}
+
+/* Vor IE5/Mac verstecken mit dem Commented Backslash Hack \*/
+* html .clearfix {
+  height: 1px;
+}
+
+.clearfix {
+  display: block;
+}
+
+#nav_wave_left {
+  float:left;
+}
+#nav_wave_right {
+  float:right;
+}
+
+#nav_wave_right {
+  margin-top: 20px;
+  padding: 5px 10px;
+  background: white;
+  font-weight: bold;
+  color: #777;
+  
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+  -moz-box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+}
+#nav_wave_right a, #nav_wave_right a:visited {
+  color: #782a4f;
+  padding: 0 3px;
+  text-decoration: none;
+}
+#nav_wave_right a:hover {
+  color: #ab3c70;
+  text-decoration: none;
+}
+
+#nav_wave_right span.active a, #nav_wave_right span.active a:hover {
+  color: white;
+  background-color: #782a4f;
+}
+
+
+#filter {
+  background: white;
+  margin-bottom: 20px;
+  padding: 15px;
+  
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+  -moz-box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+}
+
+.pager {padding: 0px 0px 4px 4px; margin:0 auto; width: 400px; }
+.pager ol {display: block; text-align: center; margin:0; padding:0;}
+.pager li {display: block; float: left; margin-right: 3px;}
+.pager li.current {}
+.pager li span {display: block; float: left; height: 16px; padding:0 2px;}
+.pager li.current span {font-weight: bold;}
+.page-navigation-top .pager li.current span {}
+.pager li span a {display: block; float: left; height: 14px; width: auto; color: #585A5D}
+.pager li span a:hover { color: #585A5D}
+
