@@ -4,7 +4,7 @@
 	  <thead>
 	  <tr class="table-title">
 	    <th width="40" height="34"><img src="/img/table-thl.jpg" width="5" height="34" alt="" class="alignleft" /></th>
-	    <th width="180" align="center" valign="middle"><?php echo __('Website');?></th>
+	    <th width="520" align="center" valign="middle"><?php echo __('Website');?></th>
 	    <th width="46" align="center" valign="middle">&nbsp;</th>
 	    <th width="488" align="center" valign="middle"><?php echo __('Status');?></th>
 	    <th width="65" align="center" valign="middle"><?php echo __('Get Code');?></th>
