@@ -17,10 +17,10 @@
 				<div class="marketbox"><?php echo $pDeal->getDomainProfile()->getUrl(); ?></div>
 			</td>
 			<td align="left" valign="middle">
-				<div  class="marketbox"><?php echo $pDeal->getStartDate(); ?></div>
+				<div  class="marketbox"><?php echo format_date($pDeal->getStartDate(), 'g'); ?></div>
 			</td>
   		<td align="left" valign="middle" title="<?php echo __('Edit end date of deal'); ?>" class="editinplaceclick" id="deal-date-<?php echo $pDeal->getId(); ?>" data-obj='{"action":"/deals/edit_enddate", "type":"text", "callback":"DealTable.editDate",  "params": "{\"id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-date-<?php echo $pDeal->getId(); ?>\"}"}'>
-  			<div  class="marketbox"><?php echo $pDeal->getEndDate(); ?></div>
+  			<div  class="marketbox"><?php echo format_date($pDeal->getEndDate(), 'g'); ?></div>
   		</td>
   		<td align="center" valign="middle"><?php echo $pDeal->getCouponClaimedQuantity(); ?></td>
   		<td align="center" title="<?php echo __('Edit Coupon Quantity'); ?>" class="<?php if(!$pDeal->isUnlimited()) { ?>editinplaceclick <?php } ?> edit-col" id="deal-quantity-<?php echo $pDeal->getId(); ?>"
