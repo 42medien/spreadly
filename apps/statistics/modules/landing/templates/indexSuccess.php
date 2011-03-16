@@ -53,28 +53,5 @@
 				<div class="grboxbot"><span></span></div>
 			</div>
 		</div>
-		<div class="selectionnone">
-			<div class="grboxtop"><span></span></div>
-			<div class="grboxmid">
-				<div class="grboxmid-content">
-					<div class="panel_width">
-						<div class="graybox gallery_list">
-							<h3 class="sub_title"><?php echo __("References"); ?></h3>
-							<ul id="mycarousel" class="jcarousel-skin-tango">
-							  <li><a href="http://www.business-on.de/" title="Business-on.de" target="_blank"><img src="/img/refrance-img6.jpg" alt="Image"/></a></li>
-                <li><a href="http://www.yasni.de/" title="Yasni.de" target="_blank"><img src="/img/refrance-img7.jpg" alt="Image"/></a></li>
-                <li><a href="http://www.ednetz.de/" title="ednetz.de" target="_blank"><img src="/img/refrance-img8.jpg" alt="Image"/></a></li>
-								<li><a href="http://www.familienfreund.de/" title="familienfreund.de" target="_blank"><img src="/img/refrance-img1.jpg" alt="Image"/></a></li>
-								<li><a href="http://www.deraktionaer.de/" title="Der Aktionär" target="_blank"><img src="/img/refrance-img2.jpg" alt="Image"/></a></li>
-								<li><a href="http://www.marketing-boerse.de/" title="Marketing Börse" target="_blank"><img src="/img/refrance-img3.jpg" alt="Image"/></a></li>
-								<li><a href="http://www.daf.fm/" title="Deutsches Anleger Fernsehen" target="_blank"><img src="/img/refrance-img4.jpg" alt="Image"/></a></li>
-								<li><a href="http://www.brille24.de/" title="Brille24" target="_blank"><img src="/img/refrance-img5.jpg" alt="Image"/></a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="alignnone"></div>
-				</div>
-			</div>
-			<div class="grboxbot"><span></span></div>
 		</div>
 		<!--veryfied box end -->
