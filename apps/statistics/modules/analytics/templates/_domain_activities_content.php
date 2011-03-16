@@ -12,7 +12,7 @@
 	         	<div class="textcenter analyticschart">
 	          	<?php include_partial('analytics/chart_line_activities', array('pData' => $pData, 'pCommunity' => $pCom))?>
 	          </div>
-	          <h2 class="analytics-title kehntitle"><?php echo __('%community% Key Data', array('%community%' => ucfirst($pCom))); ?> <?php echo __('from %datefrom% - %dateto%', array('%datefrom%' => $pFrom, '%dateto%' => $pTo)); ?></h2>
+	          <h2 class="analytics-title kehntitle"><?php echo __('%community% Key Data', array('%community%' => ucfirst($pCom))); ?> <?php echo __('from %datefrom% - %dateto%', array('%datefrom%' => format_date($pFrom, 'D'), '%dateto%' => format_date($pTo, 'D'))); ?></h2>
 	          <dl class="figuresbox clearfix">
 	          	<dd class="alignleft figuresmid-box">
 	            	<div class="grayboxtop"><span></span></div>

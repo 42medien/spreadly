@@ -43,5 +43,5 @@ all:
     error_404_action:       404
 
     ## load common helpers
-    standard_helpers:       [I18N, Partial]
+    standard_helpers:       [I18N, Partial, Date]
     check_lock:             on

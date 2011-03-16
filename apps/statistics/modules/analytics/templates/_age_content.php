@@ -21,7 +21,7 @@
 									}',
 									'pData' => $pData)); ?>
 	          </div>
-	          <h2 class="analytics-title kehntitle"><?php echo __('Demograhic key data', array('%community%' => $pCom)); ?> <?php echo __('from %datefrom% - %dateto%', array('%datefrom%' => $pFrom, '%dateto%' => $pTo)); ?></h2>
+	          <h2 class="analytics-title kehntitle"><?php echo __('Demograhic key data', array('%community%' => $pCom)); ?> <?php echo __('from %datefrom% - %dateto%', array('%datefrom%' => format_date($pFrom, 'D'), '%dateto%' => format_date($pTo, 'D'))); ?></h2>
 	          <dl class="figuresbox clearfix">
 	          	<dd class="alignleft figuresmid-box">
 	            	<div class="grayboxtop"><span></span></div>
