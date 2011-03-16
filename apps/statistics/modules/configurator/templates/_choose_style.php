@@ -38,7 +38,9 @@
 												<?php if(!$pService || ($pService && !($pService->getSlug() == 'static'))) { ?>
 													<label for="radio1">&nbsp;</label><input id="radio1" type="radio" name="likebutton[wt]" value="short" class="widget-radio" <?php if(!isset($pSocial) || $pSocial == 0){ ?>checked="checked"<?php } ?>/>
 												<?php } ?>
-												<label for="radio2">&nbsp;</label><input id="radio2" type="radio" name="likebutton[wt]" value="stand_social" class="widget-radio" <?php if((isset($pSocial) && $pSocial == 1) || ($pService && $pService->getSlug() == 'static')){ ?>checked="checked"<?php } ?>/>
+												<?php if(!$pService || ($pService && ($pService->getSlug() != 'static'))) { ?>
+													<label for="radio2">&nbsp;</label><input id="radio2" type="radio" name="likebutton[wt]" value="stand_social" class="widget-radio" <?php if((isset($pSocial) && $pSocial == 1) || ($pService && $pService->getSlug() == 'static')){ ?>checked="checked"<?php } ?>/>
+												<?php } ?>
 											</div>
 											<div class="status_list alignleft" id="preview_widgets">
 												<?php //include_partial('configurator/preview_widgets'); ?>
