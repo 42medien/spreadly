@@ -11,7 +11,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:email" content="info@spreadly.com" />
     <meta property="og:phone_number" content="+49-6201-845200" />
-
+    <meta name="google-site-verification" content="0nH-7N_-Vix-3dGyWtqvJUn9IESoCtdi9wLN_Wp5MQs" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" type="text/css" href="/css/styles.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="/css/yiid-styles.css" media="screen" />
