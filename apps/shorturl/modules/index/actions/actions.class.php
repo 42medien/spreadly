@@ -16,7 +16,7 @@ class indexActions extends sfActions
   * @param sfRequest $request A request object
   */
   public function executeIndex($request) {
-    $this->redirect("http://spreadly.com");
+    $this->redirect(sfConfig::get("app_settings_url"));
   }
 
 
@@ -32,7 +32,7 @@ class indexActions extends sfActions
     $lPk = ShortUrlTable::uncharize($lIdentifier);
     $lShortUrl = ShortUrlTable::getInstance()->find($lPk);
 
-    $this->forward404Unless($lShortUrl);
+    $this->redirectUnless($lShortUrl, sfConfig::get("app_settings_url"));
 
     // also support json output
     if ($request->getParameter('format') == 'json') {
@@ -42,10 +42,5 @@ class indexActions extends sfActions
       // check if it is a yiid entry
       $this->redirect($lShortUrl->getUrl());
     }
-  }
-
-  // redirect the 404 to the frontend
-  public function executeError404($request) {
-    $this->redirect(sfConfig::get('app_settings_url').'/static/404');
   }
 }

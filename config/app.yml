@@ -24,7 +24,6 @@ all:
 
   settings:
     filtered_parameters: [spreadly, yiidit, zanpid, utm_source, utm_medium, utm_campaign, utm_content, at_xt, sms_ss]  #for cleaning up urls
-    short_url: 'http://yiid.cc'
 
   image_sizes:
     avatar: ['16x16', '30x30', '48x48', '140x140']  #height x width
@@ -73,6 +72,7 @@ prod:
     dev:               0
     pager:             20
     gzip:              1              ## set 1 to force local gz support
+    short_url:         'http://sprd.to'
 
   twitter:
     oauth_token:   "WbIgXrxlAbGfdpO8kLyWQ"
@@ -130,6 +130,7 @@ dev:
     dev:              1
     pager:            20
     gzip:             0              ## set 1 to force local gz support
+    short_url: 'http://sprd.local'
 
   twitter:
     oauth_token:   "RAhMdOPsmXkm0EccGeu9w"
@@ -186,6 +187,7 @@ staging:
     dev:              1
     pager:            20
     gzip:             1              ## set 1 to force local gz support
+    short_url: 'http://sprd.ispread.it'
 
   twitter:
     oauth_token:   "7tHsjwbsp6pE3EnMB8MtAg"
