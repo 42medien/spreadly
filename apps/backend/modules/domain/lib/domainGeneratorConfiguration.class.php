@@ -10,4 +10,8 @@
  */
 class domainGeneratorConfiguration extends BaseDomainGeneratorConfiguration
 {
+  public function getFormClass()
+  {
+    return 'CompleteDomainProfileForm';
+  }
 }
