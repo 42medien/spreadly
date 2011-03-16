@@ -488,7 +488,6 @@ td.editinplaceclick {
   float: right;
 }
 
-.sf_apply_reset_request { width: 600px; }
 #domain-table-website{padding-left: 20px;}
 .table-title th { white-space: nowrap; }
 
@@ -528,4 +527,9 @@ td.editinplaceclick {
 
 .languagebox img.inactive-cult{
  opacity: 0.5;
+}
+
+.register-box{
+  margin: auto;
+  width: 400px;
 }

@@ -20,14 +20,38 @@
   <ul id="topnavigation" class="alignleft">
     <?php $module = $sf_context->getModuleName(); ?>
     <?php $action = $sf_context->getActionName(); ?>
+  	<?php
+  		$lColorbox = '';
+  		if(!$sf_user->isAuthenticated()) {
+  			$lColorbox = "colorbox";
+  		}
+  	?>
 
-
-    <li><a href="<?php echo url_for('landing/index'); ?>" title="Landing" <?php if($module=='landing' && $action=='index') { echo 'class="active"';} ?>><span><?php echo __('Home'); ?></span></a></li>
-    <li><a href="<?php echo url_for('@configurator'); ?>" title="Buttons" <?php if($module=='configurator' && $action=='index') { echo 'class="active"';} ?>><span><?php echo __('Buttons'); ?></span></a></li>
-    <!-- li><a href="<?php echo url_for('@dashboard'); ?>" title="Dashboard" <?php if($module=='likebutton' && $action=='dashboard') { echo 'class="active"';} ?>><span><?php echo __('Dashboard'); ?></span></a></li-->
-    <li><a href="<?php echo url_for('@analytics_overview'); ?>" title="Analytics" <?php if($module=='analytics' && ($action=='index' || $action=='statistics')) { echo 'class="active"';} ?>><span><?php echo __('Analytics'); ?></span></a></li>
-    <li><a href="<?php echo url_for('@deals'); ?>" title="Deals"<?php if($module=='deals') { echo 'class="active"';} ?>><span><?php echo __('Deals'); ?></span></a></li>
-    <li class="last"><a href="<?php echo url_for('domain_profiles/index'); ?>" title="Domains" <?php if($module=='domain_profiles') { echo 'class="active"';} ?>><span><?php echo __('Domains'); ?></span></a></li>
+    <li>
+    	<a href="<?php echo url_for('landing/index'); ?>" title="Landing" <?php if($module=='landing' && $action=='index') { echo 'class="active"';} ?>>
+    		<span><?php echo __('Home'); ?></span>
+    	</a>
+    </li>
+    <li>
+    	<a href="<?php echo url_for('@configurator'); ?>" title="Buttons" <?php if($module=='configurator' && $action=='index') { echo 'class="active"';} ?>>
+    		<span><?php echo __('Buttons'); ?></span>
+    	</a>
+    </li>
+    <li>
+    	<a href="<?php echo url_for('@analytics_overview'); ?>" title="Analytics" class="<?php if($module=='analytics' && ($action=='index' || $action=='statistics')) { echo "active";} echo $lColorbox; ?>">
+    		<span><?php echo __('Analytics'); ?></span>
+    	</a>
+    </li>
+    <li>
+    	<a href="<?php echo url_for('@deals'); ?>" title="Deals" class="<?php if($module=='deals') { echo "active";} echo $lColorbox; ?>">
+    		<span><?php echo __('Deals'); ?></span>
+    	</a>
+    </li>
+    <li class="last">
+    	<a href="<?php echo url_for('domain_profiles/index'); ?>" title="Domains" class="<?php if($module=='domain_profiles') { echo "active";} echo $lColorbox; ?>">
+    		<span><?php echo __('Domains'); ?></span>
+    	</a>
+    </li>
   </ul>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>

@@ -1,7 +1,8 @@
 ErrorHandler.catchGlobalError();
 //jQuery('a[rel*=facebox]').facebox();
 jQuery('.colorbox').colorbox({
-		opacity: '0.8'
+		opacity: '0.8',
+		title: true
 });
 
 jQuery('#mycarousel').jcarousel({

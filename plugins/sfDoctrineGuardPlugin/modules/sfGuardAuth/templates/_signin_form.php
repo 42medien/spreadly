@@ -31,3 +31,9 @@
     </tfoot>
   </table>
 </form>
+<script type="text/javascript">
+jQuery('.colorbox').colorbox({
+	opacity: '0.8',
+	title: true
+});
+</script>

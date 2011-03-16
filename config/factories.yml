@@ -10,11 +10,6 @@ dev:
     param:
       level: debug
 
-  mailer:
-    param:
-      delivery_strategy: none
-      transport:
-        class: Swift_NullTransport
   i18n:
     class: sfI18N
     param:

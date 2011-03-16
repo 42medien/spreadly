@@ -1,4 +1,4 @@
-<div class="graybox-wrapper<?php if (isset($twoCol)) { echo ' two-col'; } ?>">
+<div class="graybox-wrapper<?php if (isset($pClass)) { echo ' '.$pClass; } ?>">
   <div class="grboxtop"><span></span></div>
   <div class="grboxmid">
   	<div class="grboxmid-content">

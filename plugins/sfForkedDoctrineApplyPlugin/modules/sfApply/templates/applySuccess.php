@@ -19,7 +19,7 @@
     <tfoot>
       <tr>
         <td colspan="2">
-          <div class="clearfix">  
+          <div class="clearfix">
             <button type="submit" class="button"><span><?php echo __("Create My Account", array(), 'sfForkedApply') ?></span></button>
             <?php echo link_to('<span>'.__("Cancel", array(), 'sfForkedApply').'</span>', sfConfig::get('app_sfApplyPlugin_after', '@homepage'), array('class' => 'button')) ?>
           </div>
@@ -31,4 +31,4 @@
   </form>
 </div>
 <?php end_slot(); ?>
-<?php include_partial('global/graybox'); ?>
+<?php include_partial('global/graybox', array('pClass' => 'register-box')); ?>

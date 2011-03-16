@@ -6,4 +6,4 @@
 	<?php echo get_partial('sfGuardAuth/signin_form', array('form' => $form)) ?>
 </div>
 <?php end_slot(); ?>
-<?php include_partial('global/graybox'); ?>
+<?php include_partial('global/graybox', array('pClass' => 'register-box')); ?>
