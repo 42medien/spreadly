@@ -1,0 +1,184 @@
+# ispread.it           = 'spreadly.com'
+# ispread\.it     = 'spreadly\.com' 
+# yiiddev.com             = 'spread.ly'
+# yiiddev\.com       = 'spread\.ly'
+# blog.yiiddev.com               = 'blog.spreadly.com'
+
+# yiiddev.com       = 'yiid.com'
+# yiiddev\.com = 'yiid\.com'
+# stats.yiiddev.com          = 'yiid.it'
+# stats\.yiiddev\.com    = 'yiid\.it'
+
+# /home/httpd/vhosts/yiiddev.com/httpdocs/web           = '/home/httpd/vhosts/yiid.com/httpdocs/web'
+
+# Spreadly Virtual Hosts
+<VirtualHost *:80>
+  ServerName staging.yiiddev.com
+
+  DocumentRoot "/home/httpd/vhosts/staging.yiiddev.com/httpdocs/web"
+
+  <Directory "/home/httpd/vhosts/staging.yiiddev.com/httpdocs/web">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+  ErrorLog /var/log/apache2/staging.yiiddev.com-error.log
+  CustomLog /var/log/apache2/staging.yiiddev.com-access.log common
+</VirtualHost>
+
+<VirtualHost *:80>
+  ServerName button.yiiddev.com
+  DocumentRoot "/home/httpd/vhosts/yiiddev.com/httpdocs/web"
+
+  <Directory "/home/httpd/vhosts/yiiddev.com/httpdocs/web">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+    
+    AuthType Basic
+    AuthName "Hier gibt es nix"
+    AuthUserFile /home/httpd/vhosts/yiiddev.com/.htpasswd
+    require user yiid
+
+    RewriteEngine On
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule api\/(.*)$ widget.php/api/$1 [QSA,L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ w/like/button.php [QSA,L]
+  </Directory>
+
+  ErrorLog /var/log/apache2/button.yiiddev.com-error.log
+  CustomLog /var/log/apache2/button.yiiddev.com-access.log common
+</VirtualHost>
+
+<VirtualHost *:80>
+  ServerName yiiddev.com
+  ServerAlias *.yiiddev.com
+
+  DocumentRoot "/home/httpd/vhosts/yiiddev.com/httpdocs/web"
+
+  <Directory "/home/httpd/vhosts/yiiddev.com/httpdocs/web">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+    
+    AuthType Basic
+    AuthName "Hier gibt es nix"
+    AuthUserFile /home/httpd/vhosts/yiiddev.com/.htpasswd
+    require user yiid    
+
+    RewriteEngine On
+
+    RewriteCond %{HTTP_HOST} ^(.+)\.yiiddev\.com$ [NC]
+    RewriteRule ^(.*)$ http://ispread.it [R=301,L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ widget.php [QSA,L]
+  </Directory>
+
+  RewriteLogLevel 9
+  RewriteLog /var/log/apache2/yiiddev.com-rewrite.log
+  ErrorLog /var/log/apache2/yiiddev.com-error.log
+  CustomLog /var/log/apache2/yiiddev.com-access.log common
+</VirtualHost>
+
+<VirtualHost *:80>
+  ServerName sprd.ispread.it
+
+  DocumentRoot "/home/httpd/vhosts/yiiddev.com/httpdocs/web"
+
+  <Directory "/home/httpd/vhosts/yiiddev.com/httpdocs/web">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+
+    RewriteEngine On
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ shorturl.php [QSA,L]
+ </Directory>
+
+  RewriteLogLevel 9
+  RewriteLog /var/log/apache2/sprd.ispread.it-rewrite.log
+  ErrorLog /var/log/apache2/sprd.ispread.id-error.log
+  CustomLog /var/log/apache2/sprd.ispread.it-access.log common
+</VirtualHost>
+
+<VirtualHost *:80>
+  ServerName ispread.it
+  ServerAlias *.ispread.it
+
+  DocumentRoot "/home/httpd/vhosts/yiiddev.com/httpdocs/web"
+
+  <Directory "/home/httpd/vhosts/yiiddev.com/httpdocs/web">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+
+    AuthType Basic
+    AuthName "Hier gibt es nix"
+    AuthUserFile /home/httpd/vhosts/yiiddev.com/.htpasswd
+    require user yiid    
+
+    RewriteEngine On
+
+    RewriteCond %{HTTP_HOST} ^(.+)\.ispread\.it$ [NC]
+    RewriteRule ^(.*)$ http://ispread.it [R=301,L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ index.php [QSA,L]
+ </Directory>
+
+  RewriteLogLevel 9
+  RewriteLog /var/log/apache2/ispread.it-rewrite.log
+  ErrorLog /var/log/apache2/ispread.it-error.log
+  CustomLog /var/log/apache2/ispread.it-access.log common
+</VirtualHost>
+
+# Rewriting of pre-spreadly urls
+<VirtualHost *:80>
+  ServerName yiiddev.com
+  ServerAlias *.yiiddev.com
+
+  RewriteEngine On
+
+  RewriteCond %{HTTP_HOST} ^widgets\.yiiddev\.com$ [NC]
+  RewriteRule ^\/w\/like\/(.*)\.php(.*)$ http://button.yiiddev.com/$2 [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^widgets\.yiiddev\.com$ [NC]
+  RewriteRule ^\/static\/like(.*)$ http://yiiddev.com/$1 [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^widgets\.yiiddev\.com$ [NC]
+  RewriteRule ^\/static\/(.*)$ http://yiiddev.com/$1 [R=301,L]
+
+  RewriteCond %{HTTP_HOST} yiiddev\.com [NC]
+  RewriteRule ^(.*)$ http://ispread.it [R=301,L]
+
+  RewriteLogLevel 9
+  RewriteLog /var/log/apache2/yiiddev.com-rewrite.log
+  ErrorLog /var/log/apache2/yiiddev.com-error.log
+  CustomLog /var/log/apache2/yiiddev.com-access.log common
+</VirtualHost>
+
+<VirtualHost *:80>
+  ServerName stats.yiiddev.com
+  ServerAlias *.stats.yiiddev.com
+
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} stats\.yiiddev\.com [NC]
+  RewriteRule ^(.*)$ http://ispread.it [R=301,L]
+
+  RewriteLogLevel 9
+  RewriteLog /var/log/apache2/stats.yiiddev.com-rewrite.log
+  ErrorLog /var/log/apache2/stats.yiiddev.com-error.log
+  CustomLog /var/log/apache2/stats.yiiddev.com-access.log common
+</VirtualHost>
+

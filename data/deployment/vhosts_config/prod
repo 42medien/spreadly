@@ -1,0 +1,120 @@
+<VirtualHost *:80>
+  ServerName spread.ly
+  ServerAlias *.spread.ly
+
+  DocumentRoot "/home/httpd/vhosts/yiid.com/httpdocs/web"
+
+  <Directory "/home/httpd/vhosts/yiid.com/httpdocs/web">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+
+    RewriteEngine On
+
+    RewriteCond %{HTTP_HOST} ^(.+)\.spread\.ly$ [NC]
+    RewriteRule ^(.*)$ http://spreadly.com [R=301,L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ widget.php [QSA,L]
+  </Directory>
+
+  RewriteLogLevel 9
+  RewriteLog /var/log/apache2/spread.ly-rewrite.log
+  ErrorLog /var/log/apache2/spread.ly-error.log
+  CustomLog /var/log/apache2/spread.ly-access.log common
+</VirtualHost>
+
+<VirtualHost *:80>
+  ServerName spreadly.com
+  ServerAlias *.spreadly.com
+
+  DocumentRoot "/home/httpd/vhosts/yiid.com/httpdocs/web"
+
+  <Directory "/home/httpd/vhosts/yiid.com/httpdocs/web">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+
+    RewriteEngine On
+
+    RewriteCond %{HTTP_HOST} ^(.+)\.spreadly\.com$ [NC]
+    RewriteRule ^(.*)$ http://spreadly.com [R=301,L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ index.php [QSA,L]
+ </Directory>
+
+  RewriteLogLevel 9
+  RewriteLog /var/log/apache2/spreadly.com-rewrite.log
+  ErrorLog /var/log/apache2/spreadly.com-error.log
+  CustomLog /var/log/apache2/spreadly.com-access.log common
+</VirtualHost>
+
+# Rewriting of pre-spreadly urls
+<VirtualHost *:80>
+  ServerName yiid.com
+  ServerAlias *.yiid.com
+
+  RewriteEngine On
+
+  RewriteCond %{HTTP_HOST} ^widgets\.yiid\.com$ [NC]
+  RewriteRule ^\/w\/like\/(.*)\.php(.*)$ http://button.spread.ly/$2 [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^widgets\.yiid\.com$ [NC]
+  RewriteRule ^\/static\/like(.*)$ http://spread.ly/$1 [R=301,L]
+
+  RewriteCond %{HTTP_HOST} ^widgets\.yiid\.com$ [NC]
+  RewriteRule ^\/static\/(.*)$ http://spread.ly/$1 [R=301,L]
+
+  RewriteCond %{HTTP_HOST} yiid\.com [NC]
+  RewriteRule ^(.*)$ http://spreadly.com [R=301,L]
+
+  RewriteLogLevel 9
+  RewriteLog /var/log/apache2/yiid.com-rewrite.log
+  ErrorLog /var/log/apache2/yiid.com-error.log
+  CustomLog /var/log/apache2/yiid.com-access.log common
+</VirtualHost>
+
+<VirtualHost *:80>
+  ServerName yiid.it
+  ServerAlias *.yiid.it
+
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} yiid\.it [NC]
+  RewriteRule ^(.*)$ http://spreadly.com [R=301,L]
+
+  RewriteLogLevel 9
+  RewriteLog /var/log/apache2/yiid.it-rewrite.log
+  ErrorLog /var/log/apache2/yiid.it-error.log
+  CustomLog /var/log/apache2/yiid.it-access.log common
+</VirtualHost>
+
+<VirtualHost *:80>
+  ServerName yiid.cc
+  ServerAlias *.yiid.cc sprd.to *.sprd.to
+
+  DocumentRoot "/home/httpd/vhosts/yiid.com/httpdocs/web"
+
+  <Directory "/home/httpd/vhosts/yiid.com/httpdocs/web">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+
+    RewriteEngine On
+
+    RewriteCond %{HTTP_HOST} ^(.+)\.yiid\.cc$ [NC]
+    RewriteRule ^(.*)$ http://yiid.cc$1 [R=301,L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ shorturl.php [QSA,L]
+ </Directory>
+
+  RewriteLogLevel 9
+  RewriteLog /var/log/apache2/sprd.to-rewrite.log
+  ErrorLog /var/log/apache2/sprd.to-error.log
+  CustomLog /var/log/apache2/sprd.to-access.log common
+</VirtualHost>
+
