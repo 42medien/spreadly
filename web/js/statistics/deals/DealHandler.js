@@ -35,14 +35,14 @@ var Deal = {
   bindClicks : function() {
     debug.log('[Deal][bindClicks]');
     jQuery('.link-deal-content').live('click', function() {
-
+      OnLoadGrafic.showGrafic();
       var lAction = jQuery(this).attr('href');
       var lData = {
         ei_kcuf : new Date().getTime()
       };
       
       jQuery.ajax({
-        beforeSubmit : OnLoadGrafic.showGrafic,
+        //beforeSubmit : OnLoadGrafic.showGrafic,
         type : "GET",
         url : lAction,
         dataType : "json",
@@ -76,6 +76,7 @@ var Deal = {
   
   showStats: function(){
     jQuery('.deal-stats-link').live('click', function() {
+      OnLoadGrafic.showGrafic();
       var lAction = jQuery(this).attr('href');
       var lThis = this;
       var lData = {
@@ -83,7 +84,7 @@ var Deal = {
       };
       
       jQuery.ajax({
-        beforeSubmit : OnLoadGrafic.showGrafic,
+        //beforeSubmit : OnLoadGrafic.showGrafic,
         type : "GET",
         url : lAction,
         dataType : "json",
