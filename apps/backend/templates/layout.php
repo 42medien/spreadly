@@ -14,19 +14,6 @@
     <?php use_stylesheet('engineroom/admin.css') ?>
     <?php include_javascripts() ?>
     <?php include_stylesheets() ?>
-
-    <link rel="stylesheet" href="/js/100_main/vendor/jquery_ui_datepicker/smothness/jquery_ui_datepicker.css" type="text/css" />
-    <link rel="stylesheet" href="/css/vendor/tipTip.css" type="text/css" />
-    <link rel="stylesheet" href="/css/vendor/colorpicker.css" type="text/css" />
-		<link rel="stylesheet" type="text/css" href="/js/100_main/vendor/jquery_ui_datepicker/timepicker_plug/css/style.css" />
-		<link rel="stylesheet" type="text/css" href="/js/100_main/vendor/jquery_ui_datepicker/smothness/jquery_ui_datepicker.css" />
-    <link rel="stylesheet" href="/css/admin.css" type="text/css" />
-
-    <script type="text/javascript" src="/js/100_main/include/statistics-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
-    <script type="text/javascript" src="/js/100_main/global/106_jquery.mirrorValue.js"></script>
-    <script type="text/javascript" src="/js/100_main/global/jquery.limit-1.2.js"></script>
-    <script type="text/javascript" src="/js/statistics/deals/DealHandler.js" type="text/javascript"></script>
-    <script type="text/javascript" src="/js/100_main/global/307_EditInPlace.js" type="text/javascript"></script>
   </head>
   <body>
     <div class="less-error-message"></div>

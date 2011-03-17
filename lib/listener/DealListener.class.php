@@ -8,7 +8,11 @@ class DealListener {
     $admins = sfGuardUserTable::getInstance()->findByIsSuperAdmin(true);
     foreach ($admins as $admin) {
       sfContext::getInstance()->getLogger()->notice("{DealListener} Sending email to ".$admin->getEmailAddress());
-      sfContext::getInstance()->getMailer()->composeAndSend('deals@ekaabo.com', $admin->getEmailAddress(), '[Deal submitted]: '.preg_replace('/\n/', '', $deal->getSummary()), sfConfig::get("app_settings_url").'/backend.php/deal/'.$deal->getId().'/edit' );
+      try {
+        sfContext::getInstance()->getMailer()->composeAndSend('deals@ekaabo.com', $admin->getEmailAddress(), '[Deal submitted]: '.preg_replace('/\n/', '', $deal->getSummary()), sfConfig::get("app_settings_url").'/backend.php/deal/'.$deal->getId().'/edit' );        
+      } catch (Exception $e) {
+        sfContext::getInstance()->getLogger()->err("{DealListener} Failed to send email.\n".$e->getMessage());        
+      }
     }
   }
 
