@@ -27,11 +27,15 @@ Call it with:
 EOF;
   }
 
-  protected function execute($arguments = array(), $options = array())
-  {
-    // aize the database connection
-    $configuration = ProjectConfiguration::getApplicationConfiguration($options['application'], $options['env'], true);
-    sfContext::createInstance($configuration);
+  protected function execute($arguments = array(), $options = array()) {
+    try {
+      sfContext::getInstance();
+    } catch (Exception $e) {
+      // aize the database connection
+      $configuration = ProjectConfiguration::getApplicationConfiguration($options['application'], $options['env'], true);
+      sfContext::createInstance($configuration);
+    }
+
     $databaseManager = new sfDatabaseManager($this->configuration);
     $databaseManager->loadConfiguration();
     $connection = $databaseManager->getDatabase($options['connection'])->getConnection();
@@ -52,12 +56,12 @@ EOF;
 
     $lOiHugoTwitter = OnlineIdentityTable::retrieveByAuthIdentifier('http://twitter.com/account/profile?user_id=21092406', $lCommunityTwitter->getId());
     $lOiJamesFacebook = OnlineIdentityTable::retrieveByAuthIdentifier('james_fb', $lCommunityFb->getId());
-    
+
     $allDeals = DealTable::getInstance()->findAll();
     foreach ($allDeals as $deal) {
       $deal->submit();
     }
-    
+
     $this->dispatcher->connect('deal.changed', array('DealListener', 'updateMongoDeal'));
     $deal = DealTable::getInstance()->findByDescription('snirgel approved description');
     $deal[0]->approve();
