@@ -25,6 +25,8 @@ EOF;
   }
 
   protected function execute($arguments = array(), $options = array()) {
+    sfContext::createInstance($this->configuration);
+
     // create "cache" and "log" folders
     $this->getFilesystem()->mkdirs("cache");
     $this->getFilesystem()->mkdirs("log");
@@ -101,9 +103,9 @@ EOF;
     $this->runTask('doctrine:clean', array("--no-confirmation"));
 
     // initialize mongo objects
-    if ($env == 'dev' || $env == 'staging') {      
+    if ($env == 'dev' || $env == 'staging') {
       if ($options['no-confirmation'] || "y" == $this->ask("Mongo auf dem ".$env.'-System plattmachen? (host: '.sfConfig::get('app_mongodb_host').' collection: '.sfConfig::get('app_mongodb_database_name').") (y/N)")) {
-        $this->logSection('mongo tasks', 'i am the mongo killer! now killing:'); 
+        $this->logSection('mongo tasks', 'i am the mongo killer! now killing:');
         $this->logSection('mongo tasks', '(host: '.sfConfig::get('app_mongodb_host').' collection: '.sfConfig::get('app_mongodb_database_name').')');
         MongoDbConnector::getInstance()->getDatabase(sfConfig::get('app_mongodb_database_name'))->drop();
         $this->runTask('yiid:activity-testdata', array(), array('env' => $opts['env']));
