@@ -163,4 +163,4 @@ all:
     param:
       delivery_strategy: none
       transport:
-        class: Swift_NullTransport
+        class: Swift_MailTransport
