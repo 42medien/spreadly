@@ -214,7 +214,7 @@ var LikeImage = {
      * @param string pUrl
      */
     get: function(pUrl) {
-      OnLoadGrafic.showGraficByElement(jQuery('#myscroll'), 20, 500);
+      OnLoadGrafic.insertGraficToElem(jQuery('#myscroll'));
       var lAction = '/like/get_images';
       var lData = {
         ei_kcuf : new Date().getTime(),
@@ -259,7 +259,7 @@ var LikeImage = {
       
       //fill the hidden-img-value with the path of the first image
       WidgetLikeForm.setImageValue(LikeImage.getImgPath(0));      
-      OnLoadGrafic.hideGrafic();
+      OnLoadGrafic.removeGraficFromElem(jQuery('#myscroll'));
     },
     
     /**

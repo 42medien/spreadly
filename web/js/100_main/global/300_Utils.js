@@ -268,6 +268,31 @@ var OnLoadGrafic = {
       left: lPosition.left + pTop
     }).show();
   },
+  
+  insertGraficToElem: function(pElement, pTop, pLeft) {
+    debug.log("[OnLoadGrafic][insertGraficToElem]");
+    
+    if(pTop === undefined){
+      pTop = 0;
+    }
+    
+    if(pLeft === undefined){
+      pLeft = 0;
+    }    
+    
+    var lGrafic = jQuery('#general-ajax-loader').clone();
+    jQuery(lGrafic).css({
+      'margin-top':pTop,
+      'margin-left':pLeft
+    });
+    jQuery(pElement).append(lGrafic);
+    jQuery(pElement).children('#general-ajax-loader').show();    
+  },
+  
+  removeGraficFromElem: function(pElement) {
+    debug.log("[OnLoadGrafic][removeGraficFromElem]");    
+    jQuery(pElement).children('#general-ajax-loader').remove();
+  },
 
   showGraficByWidth: function(pElement) {
     debug.log("[OnLoadGrafic][showGraficByElement]");

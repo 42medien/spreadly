@@ -9,9 +9,4 @@ if (count($pImages) > 0) {
 <?php
     $i++;
   }
-} else {
-?>
-	<div id="no-meta-img" style="width:80px;">
-		<?php echo __('No Image'); ?>
-	</div>
-<?php } ?>
+} ?>
