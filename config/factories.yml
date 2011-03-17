@@ -61,8 +61,8 @@ staging:
       cache:
         class:         sfNoCache
         param:
-          lifetime:                  86400
-          prefix:                    yiidit_i18n
+          lifetime:    86400
+          prefix:      yiidit_i18n
           servers:
             default:
               host: 127.0.0.1     #aws
@@ -105,11 +105,6 @@ prod:
           cache_dir:                 %SF_I18N_CACHE_DIR%
           lifetime:                  86400
           prefix:                    %SF_APP_DIR%/i18n
-
-  logger:
-    class: sfAggregateLogger
-    param:
-      level: warning
 
   storage:
     class: sfMongoSessionStorage
