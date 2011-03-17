@@ -5,7 +5,9 @@
     <a href="<?php echo url_for('@update_language?lang=de'); ?>" class="alignright"><img src="/img/germany-flag.png" width="25" height="26" alt="Deutsch" title="Deutsch" <?php echo ($lCult == 'en')? 'class="inactive-cult"':""; ?>  /></a>
   	<?php if($sf_user->isAuthenticated()){ ?>
   		<div class="alignright">
-	  	  <div class="welcome_user alignleft"><?php echo __('Hello').' '.$sf_user->getUsername(); ?></div>
+	  	  <div class="welcome_user alignleft">
+	  	    <?php echo __('Hello').' '.$sf_user->getUsername(); ?>
+	  	  </div>
 	  	  <?php echo link_to(__('Logout'), '@sf_guard_signout', array("class" => "alignleft logout")); ?>
   	  </div>
   	<?php } ?>
@@ -47,11 +49,19 @@
     		<span><?php echo __('Deals'); ?></span>
     	</a>
     </li>
-    <li class="last">
+    <li class="<?php if(!$sf_user->isSuperAdmin()) { echo 'last'; } ?>">
     	<a href="<?php echo url_for('domain_profiles/index'); ?>" title="Domains" class="<?php if($module=='domain_profiles') { echo "active";} echo $lColorbox; ?>">
     		<span><?php echo __('Domains'); ?></span>
     	</a>
     </li>
+
+    <?php if($sf_user->isSuperAdmin()) { ?>
+      <li class="last">
+      	<a href="/backend.php" title="Backend">
+      		<span>Backend</span>
+      	</a>
+      </li>
+    <?php } ?>
   </ul>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
