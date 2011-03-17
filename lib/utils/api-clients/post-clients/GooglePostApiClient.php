@@ -9,14 +9,22 @@ class GooglePostApiClient extends PostApi {
   public function generateMessage($pActivity) {
     $lUrl = $pActivity->generateUrlWithClickbackParam($this->onlineIdentity);
     $lTitle = $pActivity->getTitle();
-    $lComment = $pActivity->getComment();
+
+    if ($pActivity->getComment()) {
+      $lDescription = $pActivity->getComment();
+    } elseif ($pActivity->getDescr()) {
+      $lDescription = $pActivity->getDescr();
+    } else {
+      $lDescription = $lUrl;
+    }
+
     $lPhoto = $pActivity->getThumb();
 
     $lPostBody = array();
 
     $lPostBody["data"] = array("object" =>
       array("type" => "note",
-            "content" => $lComment,
+            "content" => $lDescription,
             "links" => array("alternate" => array(array("href" => $lUrl))),
             "attachments" => array(
               array("type" => "photo",
