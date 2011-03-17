@@ -14,7 +14,7 @@ dev:
     class: sfI18N
     param:
       source:               pimpedMySQL
-      debug:                true
+      debug:                false
       default_culture:      de
       untranslated_prefix:  "<font color='red'>"
       untranslated_suffix:  "</font>"
@@ -153,9 +153,3 @@ all:
     class: statsUser
     param:
       timeout:         17776000
-
-  mailer:
-    param:
-      delivery_strategy: none
-      transport:
-        class: Swift_NullTransport
