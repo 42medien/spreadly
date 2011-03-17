@@ -15,7 +15,7 @@
         </div>
       </div>
     </div>
-    <div class="htplinks"><a href="<?php echo url_for($lDeal->getRedeemUrl()); ?>"><?php echo $lDeal->getRedeemUrl(); ?></a></div>
+    <div class="htplinks"><a target="_blank" href="<?php echo url_for($lDeal->getRedeemUrl()); ?>"><?php echo $lDeal->getRedeemUrl(); ?></a></div>
 		</div>
 	</div>
 </div>
