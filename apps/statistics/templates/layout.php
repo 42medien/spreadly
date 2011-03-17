@@ -65,6 +65,7 @@
               <div class="graybox gallery_list">
                 <h3 class="sub_title"><?php echo __("References"); ?></h3>
                 <ul id="mycarousel" class="jcarousel-skin-tango">
+                  <li><a href="http://www.abacho.de/" title="Abacho" target="_blank"><img src="/img/refrance-img9.jpg" alt="Image"/></a></li>
                   <li><a href="http://www.business-on.de/" title="Business-on.de" target="_blank"><img src="/img/refrance-img6.jpg" alt="Image"/></a></li>
                   <li><a href="http://www.yasni.de/" title="Yasni.de" target="_blank"><img src="/img/refrance-img7.jpg" alt="Image"/></a></li>
                   <li><a href="http://www.ednetz.de/" title="ednetz.de" target="_blank"><img src="/img/refrance-img8.jpg" alt="Image"/></a></li>
