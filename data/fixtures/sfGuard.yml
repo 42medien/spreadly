@@ -2,7 +2,7 @@ sfGuardUser:
   sfGuardUser_1:
     first_name: John
     last_name: Doe
-    email_address: john.doe@gmail.com
+    email_address: johndoe@ekaabo.com
     username: admin
     password:       admin
     is_active: true

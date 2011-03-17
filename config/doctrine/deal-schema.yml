@@ -3,14 +3,14 @@ Deal:
     Timestampable: ~
     StateMachine:
       column: deal_state
-      initial: submitted
-      states: ['submitted', 'approved', 'denied', 'trashed', 'paused']
+      initial: initial
+      states: ['initial', 'submitted', 'approved', 'denied', 'trashed', 'paused']
       events:
         submit:
-          from: ['denied', 'approved', 'paused']
+          from: ['initial', 'denied', 'approved', 'paused']
           to: submitted
         approve:
-          from: submitted
+          from: ['initial', 'submitted']
           to: approved
         deny:
           from: submitted
