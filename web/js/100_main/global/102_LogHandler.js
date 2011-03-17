@@ -1,6 +1,4 @@
 /**
- * @combine platform
- * @combine likepopup
  * @combine statistics
  * @combine widget
  */

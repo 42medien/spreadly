@@ -1,5 +1,5 @@
 /**
- * @combine platform
+ * @nocombine platform
  * @combine statistics
  * @combine widget
  */

@@ -4,7 +4,7 @@
  * 
  * @author KM
  * @version 1.0
- * @combine platform
+ * @nocombine platform
  */
 
 var GlobalRequest = {

@@ -1,5 +1,5 @@
 /**
- * @combine platform
+ * @nocombine platform
  */
 /*
  * jQuery Keyboard Navigation Plugin - Current

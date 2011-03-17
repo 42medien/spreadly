@@ -1,5 +1,5 @@
 /**
- * @combine platform
+ * @nocombine platform
  */
 /*
     http://www.JSON.org/json2.js

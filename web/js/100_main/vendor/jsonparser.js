@@ -1,6 +1,6 @@
 /**
- * @combine Full
- * @combine Like
+ * @nocombine Full
+ * @nocombine Like
  */
 
 

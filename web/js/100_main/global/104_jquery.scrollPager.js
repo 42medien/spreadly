@@ -1,6 +1,6 @@
 /**
- * @combine platform
- * @combine statistics
+ * @nocombine platform
+ * @nocombine statistics
  */
 jQuery.fn.scrollPager = function(pParams){
   var lAction = pParams['url'];
