@@ -8,13 +8,13 @@
 dev:
   logger:
     param:
-      level: debug
+      level: notice
 
   i18n:
     class: sfI18N
     param:
       source:               pimpedMySQL
-      debug:                false
+      debug:                true
       default_culture:      de
       untranslated_prefix:  "<font color='red'>"
       untranslated_suffix:  "</font>"
@@ -22,8 +22,8 @@ dev:
       cache:
         class:               sfNoCache
         param:
-          lifetime:                  86400
-          prefix:                    yiid_i18n
+          lifetime:          86400
+          prefix:            yiid_i18n
           servers:
             default:
               host: 127.0.0.1     #aws
@@ -49,7 +49,7 @@ dev:
 staging:
   logger:
     param:
-      level: debug
+      level: notice
 
   i18n:
     class: sfI18N
@@ -105,32 +105,11 @@ prod:
           cache_dir:                 %SF_I18N_CACHE_DIR%
           lifetime:                  86400
           prefix:                    %SF_APP_DIR%/i18n
-        #class: sfMemcacheCache
-        #param:
-        #  lifetime:                  86400
-        #  prefix:                    yiidit_i18n
-        #  servers:
-        #    default:
-        #      host: 127.0.0.1     #aws
-        #      port: 11211
 
   logger:
     class: sfAggregateLogger
     param:
-      level: err
-      loggers:
-        sf_web_debug:
-          class: sfWebDebugLogger
-          param:
-            level: debug
-            condition:       %SF_WEB_DEBUG%
-            xdebug_logging:  false
-            web_debug_class: sfWebDebug
-        sf_file_debug:
-          class: sfFileLogger
-          param:
-            level: debug
-            file: %SF_LOG_DIR%/%SF_APP%_%SF_ENVIRONMENT%.log
+      level: warning
 
   storage:
     class: sfMongoSessionStorage
@@ -147,47 +126,27 @@ prod:
       session_cookie_domain: .spreadly.com
       session_cookie_lifetime: 17776000
 
-test:
-  storage:
-    class: sfSessionTestStorage
-    param:
-      session_path: %SF_TEST_CACHE_DIR%/sessions
-
-  response:
-    class: sfWebResponse
-    param:
-      send_http_headers: false
-
-  mailer:
-    param:
-      delivery_strategy: none
-      transport:
-        class: Swift_NullTransport
-
 all:
   logger:
     class: sfAggregateLogger
     param:
       loggers:
         sf_web_debug:
-          class: sfWebDebugLogger
+          class:             sfWebDebugLogger
           param:
-            level: debug
             condition:       %SF_WEB_DEBUG%
             xdebug_logging:  false
             web_debug_class: sfWebDebug
         sf_file_debug:
-          class: sfFileLogger
+          class:             sfFileLogger
           param:
-            level: debug
-            file: %SF_LOG_DIR%/%SF_APP%_%SF_ENVIRONMENT%.log
+            file:            %SF_LOG_DIR%/statistics_%SF_ENVIRONMENT%.log
 
   routing:
-    class: sfPatternRouting
+    class:                   sfPatternRouting
     param:
       generate_shortest_url:            true
       extra_parameters_as_query_string: true
-
 
   view_cache_manager:
     class: sfViewCacheManager
@@ -199,3 +158,9 @@ all:
     class: statsUser
     param:
       timeout:         17776000
+
+  mailer:
+    param:
+      delivery_strategy: none
+      transport:
+        class: Swift_NullTransport

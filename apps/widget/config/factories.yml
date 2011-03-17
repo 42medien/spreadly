@@ -29,3 +29,10 @@ dev:
 all:
   user:
     class: myUser
+
+  logger:
+    param:
+      loggers:
+        sf_file_debug:
+          param:
+            file:            %SF_LOG_DIR%/widget_%SF_ENVIRONMENT%.log
