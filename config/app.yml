@@ -13,6 +13,10 @@ all:
     days_limit_new:      0     # 0 = unlimited
     days_limit_search:   30
 
+  sfApplyPlugin:
+    from:
+      email:            "noreply@spreadly.com"
+      fullname:         "the Spread.ly staff"
   email:
     sender:             "the Spread.ly staff"
     address:            "noreply@spreadly.com"

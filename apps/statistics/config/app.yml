@@ -5,9 +5,6 @@ all:
 
   sfGuardPlugin:
     signinForm: NavigationLoginForm
-  sfApplyPlugin:
-    from:
-      email: <?php echo sfConfig::get("app_email_address"); ?>
-      fullname: <?php echo sfConfig::get("app_email_sender"); ?>
+
   sf_guard_plugin_success_signout_url: '@configurator'
   sf_guard_plugin_success_signin_url:  '@analytics_overview'
