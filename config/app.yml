@@ -13,14 +13,9 @@ all:
     days_limit_new:      0     # 0 = unlimited
     days_limit_search:   30
 
-  emailaddress:
-    # TODO: aendern
-    report:             projekt_yiid_status@ekaabo.de
-    members_invitation: projekt_yiid_status@ekaabo.de
-    info:               info@yiid.com
-    status:             projekt_yiid_status@ekaabo.de
-    noreply:            noreply@yiid.com
-    statistics:         marco@ekaabo.de
+  email:
+    sender:             "the Spread.ly staff"
+    address:            "noreply@spreadly.com"
 
   settings:
     filtered_parameters: [spreadly, yiidit, zanpid, utm_source, utm_medium, utm_campaign, utm_content, at_xt, sms_ss]  #for cleaning up urls
