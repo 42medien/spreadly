@@ -11,40 +11,30 @@
 <?php include_slot('sf_admin.current_header') ?><?php slot('sf_admin.current_header') ?>
 <th class="sf_admin_foreignkey sf_admin_list_th_domain_profile_id">
   <?php if ('domain_profile_id' == $sort[0]): ?>
-    <?php echo link_to(__('Domain profile', array(), 'messages'), '@deal', array('query_string' => 'sort=domain_profile_id&sort_type='.($sort[1] == 'asc' ? 'desc' : 'asc'))) ?>
+    <?php echo link_to('Domain', '@deal', array('query_string' => 'sort=domain_profile_id&sort_type='.($sort[1] == 'asc' ? 'desc' : 'asc'))) ?>
     <?php echo image_tag(sfConfig::get('sf_admin_module_web_dir').'/images/'.$sort[1].'.png', array('alt' => __($sort[1], array(), 'sf_admin'), 'title' => __($sort[1], array(), 'sf_admin'))) ?>
   <?php else: ?>
-    <?php echo link_to(__('Domain profile', array(), 'messages'), '@deal', array('query_string' => 'sort=domain_profile_id&sort_type=asc')) ?>
+    <?php echo link_to('Domain', '@deal', array('query_string' => 'sort=domain_profile_id&sort_type=asc')) ?>
   <?php endif; ?>
 </th>
 <?php end_slot(); ?>
 <?php include_slot('sf_admin.current_header') ?><?php slot('sf_admin.current_header') ?>
 <th class="sf_admin_foreignkey sf_admin_list_th_sf_guard_user_id">
   <?php if ('sf_guard_user_id' == $sort[0]): ?>
-    <?php echo link_to(__('Sf guard user', array(), 'messages'), '@deal', array('query_string' => 'sort=sf_guard_user_id&sort_type='.($sort[1] == 'asc' ? 'desc' : 'asc'))) ?>
+    <?php echo link_to('User', '@deal', array('query_string' => 'sort=sf_guard_user_id&sort_type='.($sort[1] == 'asc' ? 'desc' : 'asc'))) ?>
     <?php echo image_tag(sfConfig::get('sf_admin_module_web_dir').'/images/'.$sort[1].'.png', array('alt' => __($sort[1], array(), 'sf_admin'), 'title' => __($sort[1], array(), 'sf_admin'))) ?>
   <?php else: ?>
-    <?php echo link_to(__('Sf guard user', array(), 'messages'), '@deal', array('query_string' => 'sort=sf_guard_user_id&sort_type=asc')) ?>
+    <?php echo link_to('User', '@deal', array('query_string' => 'sort=sf_guard_user_id&sort_type=asc')) ?>
   <?php endif; ?>
 </th>
 <?php end_slot(); ?>
 <?php include_slot('sf_admin.current_header') ?><?php slot('sf_admin.current_header') ?>
-<th class="sf_admin_enum sf_admin_list_th_type">
-  <?php if ('type' == $sort[0]): ?>
-    <?php echo link_to(__('Type', array(), 'messages'), '@deal', array('query_string' => 'sort=type&sort_type='.($sort[1] == 'asc' ? 'desc' : 'asc'))) ?>
+<th class="sf_admin_enum sf_admin_list_th_coupon_summary">
+  <?php if ('summary' == $sort[0]): ?>
+    <?php echo link_to('Summary', '@deal', array('query_string' => 'sort=summary&sort_type='.($sort[1] == 'asc' ? 'desc' : 'asc'))) ?>
     <?php echo image_tag(sfConfig::get('sf_admin_module_web_dir').'/images/'.$sort[1].'.png', array('alt' => __($sort[1], array(), 'sf_admin'), 'title' => __($sort[1], array(), 'sf_admin'))) ?>
   <?php else: ?>
-    <?php echo link_to(__('Type', array(), 'messages'), '@deal', array('query_string' => 'sort=type&sort_type=asc')) ?>
-  <?php endif; ?>
-</th>
-<?php end_slot(); ?>
-<?php include_slot('sf_admin.current_header') ?><?php slot('sf_admin.current_header') ?>
-<th class="sf_admin_enum sf_admin_list_th_coupon_type">
-  <?php if ('coupon_type' == $sort[0]): ?>
-    <?php echo link_to(__('Coupon type', array(), 'messages'), '@deal', array('query_string' => 'sort=coupon_type&sort_type='.($sort[1] == 'asc' ? 'desc' : 'asc'))) ?>
-    <?php echo image_tag(sfConfig::get('sf_admin_module_web_dir').'/images/'.$sort[1].'.png', array('alt' => __($sort[1], array(), 'sf_admin'), 'title' => __($sort[1], array(), 'sf_admin'))) ?>
-  <?php else: ?>
-    <?php echo link_to(__('Coupon type', array(), 'messages'), '@deal', array('query_string' => 'sort=coupon_type&sort_type=asc')) ?>
+    <?php echo link_to('Summary', '@deal', array('query_string' => 'sort=summary&sort_type=asc')) ?>
   <?php endif; ?>
 </th>
 <?php end_slot(); ?>

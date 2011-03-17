@@ -3,7 +3,7 @@ generator:
   param:
     model_class:           Deal
     theme:                 admin
-    non_verbose_templates: fals
+    non_verbose_templates: false
     with_show:             false
     singular:              ~
     plural:                ~

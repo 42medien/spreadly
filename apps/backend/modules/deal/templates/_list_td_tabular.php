@@ -2,16 +2,13 @@
   <?php echo link_to($deal->getId(), 'deal_edit', $deal) ?>
 </td>
 <td class="sf_admin_foreignkey sf_admin_list_td_domain_profile_id">
-  <?php echo $deal->getDomainProfile()->getUrl() ?>
+  <?php echo link_to($deal->getDomainProfile()->getUrl(), $deal->getDomainProfile()->getDomain()) ?>
 </td>
 <td class="sf_admin_foreignkey sf_admin_list_td_sf_guard_user_id">
-  <?php echo mail_to($deal->getSfGuardUser()->getEmailAddress()) ?>
+  <?php echo mail_to($deal->getSfGuardUser()->getEmailAddress()."?subject=".$deal->getSummary(), 'Id: '.$deal->getSfGuardUserId().' - '. $deal->getSfGuardUser()->getEmailAddress()) ?>
 </td>
-<td class="sf_admin_enum sf_admin_list_td_type">
-  <?php echo $deal->getType() ?>
-</td>
-<td class="sf_admin_enum sf_admin_list_td_coupon_type">
-  <?php echo $deal->getCouponType() ?>
+<td class="sf_admin_enum sf_admin_list_td_coupon_summary">
+  <?php echo $deal->getSummary() ?>
 </td>
 <td class="sf_admin_text sf_admin_list_td_coupon_quantity">
   <?php echo $deal->isUnlimited() ? 'unlimited' : $deal->getCouponQuantity() ?>
