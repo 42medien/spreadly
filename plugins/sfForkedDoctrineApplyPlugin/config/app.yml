@@ -20,4 +20,3 @@ all:
       resetRequest: /user/reset-request
       resetCancel: /user/reset-cancel
       validate: /user/confirm/:validate
-      settings: /user/settings

@@ -37,8 +37,6 @@ class sfForkedDoctrineApplyPluginConfiguration extends sfPluginConfiguration
         new sfRoute($routesUri['resetCancel'], array('module' => 'sfApply', 'action' => 'resetCancel')));
     $r->prependRoute('validate',
         new sfRoute($routesUri['validate'], array('module' => 'sfApply', 'action' => 'confirm')));
-    $r->prependRoute('settings',
-        new sfRoute($routesUri['settings'], array('module' => 'sfApply', 'action' => 'settings')));
     //we're adding email route, if defined
     if( sfConfig::get( 'app_sfForkedApply_mail_editable' ))
     {
