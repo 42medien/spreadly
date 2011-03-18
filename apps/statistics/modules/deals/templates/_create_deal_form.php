@@ -333,24 +333,27 @@
           <div class="grboxmid">
           	<div class="grboxmid-content">
             	<div class="graybox clearfix">
-              	<h2 class="btntitle"><span>4</span><?php echo __('Choose categories')?></h2>
-                <ul class="btnformlist">
-                	<li class="clearfix">
-                  	<div class="btnwording alignleft">
-                  		<strong><?php echo $pForm['deal']['addtags']->renderLabel();?></strong><span><?php echo $pForm['deal']['addtags']->renderError();?></span>
-                  	</div>
-                    <span><?php echo $pForm['deal']['addtags']->render();?></span>
-                  </li>
-                  <li class="clearfix" id="deal_tag_row" <?php echo ($pAddtags=='addnotags')? 'style="display:none;"': ''; ?>>
-                  	<div class="btnwording alignleft">&nbsp;</div>
-                    <label class="textfield-wht">
-                    	<span><?php echo $pForm['deal']['tags']->render(array('class' => 'wd320'));?></span>
-                    </label>
-										<div class="content-error-box clearfix"><?php echo $pForm['deal']['addtags']->renderError();?></div>
-                  </li>
-
-
-                </ul>
+              	<div class="alignright likenbox" id="deal-form-cat-text">
+              		<?php echo __("Using tags enables restricting deals to one or more sections (e.g. product categories) of your site. To enable this feature your Spreadly buttons must be prepared with tags accordingly. Please follow the documentation %dokulink%", array('%dokulink%' => link_to(__('DEV_DOKU_LINK'), 'http://code.google.com/p/spreadly/wiki/developerdocumentation?wl=en#Optional_Parameters'))); ?>
+              	</div>
+              	<div class="alignleft createbtnbox">
+              		<h2 class="btntitle"><span>4</span><?php echo __('Choose categories')?></h2>
+	                <ul class="btnformlist" id="deal-form-cat-list">
+	                	<li class="clearfix">
+	                  	<div class="btnwording alignleft">
+	                  		<strong><?php echo $pForm['deal']['addtags']->renderLabel();?></strong><span><?php echo $pForm['deal']['addtags']->renderError();?></span>
+	                  	</div>
+	                    <span><?php echo $pForm['deal']['addtags']->render();?></span>
+	                  </li>
+	                  <li class="clearfix" id="deal_tag_row" <?php echo ($pAddtags=='addnotags')? 'style="display:none;"': ''; ?>>
+	                  	<div class="btnwording alignleft">&nbsp;</div>
+	                    <label class="textfield-wht">
+	                    	<span><?php echo $pForm['deal']['tags']->render(array('class' => 'wd320'));?></span>
+	                    </label>
+											<div class="content-error-box clearfix"><?php echo $pForm['deal']['addtags']->renderError();?></div>
+	                  </li>
+	                </ul>
+	              </div>
               </div>
             </div>
           </div>
