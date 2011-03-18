@@ -36,8 +36,8 @@ var DomainProfilesHandler = {
       success: function(pResponse) {
         //if the domain-profile is successfully created
         if(pResponse.success == true) {
-          if(jQuery('table#domain_profiles_table tbody tr:first').attr('id') == 'no-claim') {
-            jQuery('table#domain_profiles_table tbody tr:first').remove();
+          if(jQuery('#domain_profiles_table table tbody tr:first').attr('id') == 'no-claim') {
+            jQuery('#domain_profiles_table table tbody tr:first').remove();
           }
           jQuery('#domain_profiles_table tbody').prepend(pResponse.domain_profiles_table);
           lCssId = jQuery(pResponse.domain_profiles_table).attr('id');
