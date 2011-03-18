@@ -69,6 +69,12 @@ class OpenGraph implements Iterator
    * @return OpenGraph
    */
   static private function _parse($HTML) {
+    if (!preg_match("~^<meta.*http-equiv\s*=\s*(\"|\')\s*Content-Type\s*(\"|\').*\/?>$~i", $HTML)) {
+      $HTML = preg_replace('/<head[^>]*>/i','<head>
+                           <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+                           ',$HTML);
+    }
+
     $old_libxml_error = libxml_use_internal_errors(true);
 
     $doc = new DOMDocument();
