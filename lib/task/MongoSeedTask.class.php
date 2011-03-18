@@ -109,7 +109,7 @@ EOF;
           'user_id' => $this->sometimesRand(1,1000000),
           'ya_id' => $this->sometimesRand(1,1000000),
           'age' => $this->sometimesRand(14,65),
-          'd_id' => $this->sometimesRand(1,3),
+          #'d_id' => $this->sometimesRand(1,3),
           'zip' => "".$this->sometimesRand(10000,99999),
           'rel' => $this->sometimesRandBoolean() ? 'single' : 'married',
           'tags' => $tags[$this->sometimesRand(0,2)],
@@ -286,7 +286,7 @@ EOF;
         $path = $this->sometimesRand(10,15);
         $doc = array(
           'url' => "http://".$host."/my/url/".$path,
-          'd_id' => $this->sometimesRand(1,3),
+          #'d_id' => $this->sometimesRand(1,3),
           'date' => $this->randomDate()
         );
         $fb_pos = $this->sometimesRandBoolean();

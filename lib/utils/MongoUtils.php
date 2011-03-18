@@ -106,9 +106,9 @@ array(9) { ["url"]=> string(32) "http://www.missmotz.de/my/url/14" ["total"]=> f
       $pis = MongoUtils::getPisDataForUrl($item['url'], $fromDate, $toDate);
 
       if(!empty($pis)) {
-        $data['data'][$key]['pis']['total'] += $pis['total'];
-        $data['data'][$key]['pis']['cb'] += $pis['cb'];
-        $data['data'][$key]['pis']['yiid'] += $pis['yiid'];
+        $data['data'][$key]['pis']['total'] += array_key_exists('total', $pis) ? $pis['total'] : 0;
+        $data['data'][$key]['pis']['cb'] += array_key_exists('cb', $pis) ? $pis['cb'] : 0;
+        $data['data'][$key]['pis']['yiid'] += array_key_exists('yiid', $pis) ? $pis['yiid'] : 0;
       }
     }
     
@@ -129,17 +129,17 @@ array(9) { ["url"]=> string(32) "http://www.missmotz.de/my/url/14" ["total"]=> f
     $reduce = MongoUtils::getReduce('pis');
     $g = $pi_col->group($keys, $initial, $reduce, array("condition" => $cond));
     
-    $res = $g['retval'][0];
+    $res = count($g['retval']) > 0 ? $g['retval'][0] : array();
     $res['services']['all'] = array("cb" => 0, "yiid" => 0);
-
+    
     foreach (PseudoStatsModel::$services as $service) {
       $res['services'][$service] = array("cb" => 0, "yiid" => 0);
-      $res['services'][$service]['cb'] += $g['retval'][0]['services'][$service]['cb'];
-      $res['services'][$service]['yiid'] += $g['retval'][0]['services'][$service]['yiid'];
+      $res['services'][$service]['cb'] += count($g['retval']) > 0 ? $g['retval'][0]['services'][$service]['cb'] : 0;
+      $res['services'][$service]['yiid'] += count($g['retval']) > 0 ?  $g['retval'][0]['services'][$service]['yiid'] : 0;
 
-      $res['services']['all']['cb'] += $g['retval'][0]['services'][$service]['cb'];
-      $res['services']['all']['yiid'] += $g['retval'][0]['services'][$service]['yiid'];
-    }
+      $res['services']['all']['cb'] += count($g['retval']) > 0 ? $g['retval'][0]['services'][$service]['cb'] : 0;
+      $res['services']['all']['yiid'] += count($g['retval']) > 0 ? $g['retval'][0]['services'][$service]['yiid'] : 0;
+    }      
     
     $res['statistics'] = MongoUtils::addPiStatistics($res, $fromDate, $toDate);
     
@@ -149,9 +149,12 @@ array(9) { ["url"]=> string(32) "http://www.missmotz.de/my/url/14" ["total"]=> f
   private static function addPiStatistics($data, $fromDate, $toDate) {
     $days = MongoUtils::getNumberOfDays($fromDate, $toDate);
     $res = array();
+    
     $res['average']['all']['cb'] = round($data['services']['all']['cb']/$days, 2);
     foreach (PseudoStatsModel::$services as $service) {
-      $res['average'][$service]['cb'] = round($data['services'][$service]['cb']/$days, 2);
+      if(array_key_exists($service, $data['services'])) {
+        $res['average'][$service]['cb'] = round($data['services'][$service]['cb']/$days, 2);        
+      }
     }
     return $res;
   }
@@ -167,16 +170,16 @@ array(9) { ["url"]=> string(32) "http://www.missmotz.de/my/url/14" ["total"]=> f
     $g = $pi_col->group($keys, $initial, $reduce, array("condition" => $cond));
     
     $res = array('total' => 0 , 'cb' => 0, 'yiid' => 0);
+    $res['services']['all'] = array("cb" => 0, "yiid" => 0);
+    
     foreach (PseudoStatsModel::$services as $service) {
       $res['services'][$service] = array("cb" => 0, "yiid" => 0);
     }
-        
+      
     foreach ($g['retval'] as $result) {
       $res['total'] += $result['total'];
       $res['cb'] += $result['cb'];
       $res['yiid'] += $result['yiid'];
-
-      $res['services']['all'] = array("cb" => 0, "yiid" => 0);
 
       foreach (PseudoStatsModel::$services as $service) {
         $res['services'][$service]['cb'] += $g['retval'][0]['services'][$service]['cb'];
@@ -380,7 +383,7 @@ array(9) { ["url"]=> string(32) "http://www.missmotz.de/my/url/14" ["total"]=> f
       foreach (PseudoStatsModel::$activities as $key => $value) {
         $res['average'][$service][$key] = round($res['total'][$service][$key]/($days==0 ? 1 : $days), 2);
       }
-
+      
       $res['ratio'][$service]['dislike_like'] = self::getPercentage($res['total'][$service]['likes'], $res['total'][$service]['dislikes']);
       $res['ratio'][$service]['clickback_activities'] = self::getPercentage($res['total'][$service]['activities'], $piData['services'][$service]['cb']);
       $res['ratio'][$service]['contacts_activities'] = self::getPercentage($res['total'][$service]['activities'], $res['total'][$service]['contacts']);

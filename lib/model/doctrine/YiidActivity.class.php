@@ -106,16 +106,17 @@ class YiidActivity extends BaseYiidActivity {
    * @param unknown_type $event
    */
   public function preSave($event) {
+    $this->verifyAndSaveOnlineIdentities();
+
     // @todo remove in future versions
     $this->setVerb("like");
     $this->setScore(YiidActivityTable::ACTIVITY_VOTE_POSITIVE);
 
-    $this->updateDealInfo();
     $this->upsertSocialObject();
     $this->setC(time());
     $this->doValidate();
-
-    $this->verifyAndSaveOnlineIdentities();
+    
+    $this->updateDealInfo();
   }
 
   /**

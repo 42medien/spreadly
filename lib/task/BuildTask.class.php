@@ -27,14 +27,16 @@ EOF;
   protected function execute($arguments = array(), $options = array()) {
     sfContext::createInstance($this->configuration);
 
-    // create "cache" and "log" folders
+    // create "cache" folder
     $this->getFilesystem()->mkdirs("cache");
-    $this->getFilesystem()->mkdirs("log");
-
-    // clean "cache" and "log" folders
     $this->getFilesystem()->execute("rm -rf cache/*");
-    $this->getFilesystem()->execute("rm -rf log/*");
-
+    
+    // clean "log" folder
+    if ($options['env'] != "dev") {    
+      $this->getFilesystem()->mkdirs("log");
+      $this->getFilesystem()->execute("rm -rf log/*");
+    }
+    
     // build all?
     if ($options['all']) {
       $args = array("--all");

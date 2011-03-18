@@ -45,6 +45,8 @@ class Deal extends BaseDeal {
   }
 
   public function popCoupon() {
+    sfContext::getInstance()->getLogger()->notice("{Deal} popCoupon for Deal: ".$this->getId());
+    
     $code = null;
     $coupon = CouponTable::getInstance()->createQuery()
       ->where("deal_id = ?", $this->getId())
