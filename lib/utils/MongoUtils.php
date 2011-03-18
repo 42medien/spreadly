@@ -19,9 +19,7 @@ class MongoUtils {
   public static function getTopActivityUrlData($domain, $fromDate, $toDate, $aggregation, $dealId=null) {
     return MongoUtils::getTopActivitiesData($domain, $fromDate, $toDate, $aggregation, 1, $dealId);
   }
-/*
-array(9) { ["url"]=> string(32) "http://www.missmotz.de/my/url/14" ["total"]=> float(50) ["pos"]=> float(19) ["neg"]=> float(31) ["contacts"]=> float(20556) ["clickbacks"]=> float(50) ["distribution"]=> float(16.84) ["title"]=> string(28) "www.missmotz.de and 14 Title" ["pis"]=> array(3) { ["total"]=> float(76) ["cb"]=> float(22) ["yiid"]=> float(33) } } 
-*/
+
   public static function getActivityCount($domain, $fromDate, $toDate, $aggregation, $dealId=null) {
     $allActivities = MongoUtils::getTopActivitiesData($domain, $fromDate, $toDate, $aggregation, null, $dealId);
     $count = 0;
