@@ -11,7 +11,7 @@
          - <span title="<?php echo $pActivity->getDescr() ?>"><?php echo truncate_text($pActivity->getDescr(), $lDescrCount) ?></span>
       <?php } ?>
       <br />
-      <a href="<?php echo $pActivity->getUrl(); ?>" target="_blank"><?php echo $pActivity->getUrl(); ?></a>
+      <a href="<?php echo $pActivity->getUrl(); ?>" target="_blank" title="<?php echo $pActivity->getUrl(); ?>"><?php echo truncate_text($pActivity->getUrl(), 70); ?></a>
     </p>
   </div>
 </dd>
