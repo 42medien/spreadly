@@ -221,7 +221,7 @@ class MongoUtils {
     $col = MongoUtils::getCollection($dealId ? 'deals' : 'charts', $domain);
     
     $keys = array("date" => 1);
-    $cond = array("date" => array('$gte' => new MongoDate(strtotime($fromDate)), '$lte' => new MongoDate(strtotime($toDate))));
+    $cond = array();
 
     if($url) {
       $cond['url'] = $url;
@@ -230,6 +230,8 @@ class MongoUtils {
     if($dealId) {
       $dealId = intval($dealId);  
       $cond['d_id'] = $dealId;
+    } else {
+      $cond['date'] = array('$gte' => new MongoDate(strtotime($fromDate)), '$lte' => new MongoDate(strtotime($toDate)));
     }
 
     $initial = MongoUtils::getInitial($type);
