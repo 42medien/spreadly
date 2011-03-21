@@ -123,7 +123,7 @@ class YiidDaemon {
       // Depending on runmode it will either end up:
       //  - In the /var/log/logparser.log
       //  - On screen (in case we're not a daemon yet)
-      System_Daemon::info('{appName} running in %s %s', $mode, $cnt);
+      //System_Daemon::info('{appName} running in %s %s', $mode, $cnt);
 
       $message = $lMessageBroker->receiveMessage($pQueueName, 1);
 
