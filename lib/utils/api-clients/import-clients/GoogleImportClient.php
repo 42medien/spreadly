@@ -27,7 +27,7 @@ class GoogleImportClient {
     }
 
     $pOnlineIdentity->setFriendIds(implode(",", $lFriends));
-    $pOnlineIdentity->setFriendCount(count($lFriends));
+    $pOnlineIdentity->setFriendCount($lJsonObject->data->totalResults);
     $pOnlineIdentity->save();
   }
 }
