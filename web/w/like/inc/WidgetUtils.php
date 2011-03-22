@@ -198,6 +198,12 @@ class WidgetUtils {
 
     return $lObject;
   }
+  
+  private function findYiidActivityById($pId) {
+    $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
+
+    return $pCollectionObject->findOne(array("_id" => new MongoId($pId)));
+  }
 
   /**
    * check if a given user already performed an action on a social object
@@ -358,7 +364,18 @@ class WidgetUtils {
   private function trackPageImpression($pUrl, $pClickback, $pUser) {
     $lHost = parse_url($pUrl, PHP_URL_HOST);
     $lCollection = $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, str_replace('.', '_', $lHost).".analytics.pis");
+    
+    $lClickback = explode('.', $pClickback);
+    $lCbCommunity = $lClickback[0];
+    $lCbActivityId = $lClickback[1];
+    $lOriginYiidActivity = $this->findYiidActivityById($lCbActivityId);
+    $lOriginalActivityWasDealParticipation = $lOriginYiidActivity ? array_key_exists('d_id', $lOriginYiidActivity) : false;
 
+    if($lOriginYiidActivity) {
+      $lActivityCollection = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, "yiid_activity");
+      $lActivityCollection->update($lOriginYiidActivity, array('$inc' => array('cb' => 1)), array("upsert" => true));      
+    }
+    
     if (mb_detect_encoding($pUrl) != 'UTF-8') {
       $pUrl = utf8_encode($pUrl);
     }
@@ -387,6 +404,13 @@ class WidgetUtils {
       }
     }
 
+    if($lOriginalActivityWasDealParticipation) {      
+      $tmp = array();
+      foreach ($lOptions as $key => $value) {
+        $tmp['deal.'.$key] = $value;
+      }
+      $lOptions = $tmp;
+    }
     $lCollection->update($lDoc, array('$inc' => $lOptions), array("upsert" => true));
   }
 

@@ -99,15 +99,9 @@ class MongoUtils {
     $data['data'] = ChartUtils::sortArrayByTotals($g['retval'], $limit);
     
     foreach ($data['data'] as $key => $item) {
-      $data['data'][$key]['pis'] = array('total' => 0,'cb' => 0,'yiid' => 0);
-      
-      $pis = MongoUtils::getPisDataForUrl($item['url'], $fromDate, $toDate);
-
-      if(!empty($pis)) {
-        $data['data'][$key]['pis']['total'] += array_key_exists('total', $pis) ? $pis['total'] : 0;
-        $data['data'][$key]['pis']['cb'] += array_key_exists('cb', $pis) ? $pis['cb'] : 0;
-        $data['data'][$key]['pis']['yiid'] += array_key_exists('yiid', $pis) ? $pis['yiid'] : 0;
-      }
+      $data['data'][$key]['pis'] = array('total' => 0,'cb' => 123,'yiid' => 0);
+      $pis = MongoUtils::getPisDataForUrl($item['url'], $fromDate, $toDate, $dealId);
+      $data['data'][$key]['pis'] = $pis;
     }
     
     $data['filter'] = MongoUtils::getFilter($domain, $fromDate, $toDate);
@@ -115,19 +109,26 @@ class MongoUtils {
     return $data;
   }
   
-  private static function getPisDataForUrl($url, $fromDate, $toDate) {
+  private static function getPisDataForUrl($url, $fromDate, $toDate, $dealId=false) {
     $host = parse_url($url, PHP_URL_HOST);
     $keys = array("url" => 1);
     $cond = array(
       "url" => $url,
       "date" => array('$gte' => new MongoDate(strtotime($fromDate)), '$lte' => new MongoDate(strtotime($toDate)))
     );
+    
     $pi_col = MongoUtils::getCollection('pis', $host);
     $initial = MongoUtils::getInitial('pis');
     $reduce = MongoUtils::getReduce('pis');
     $g = $pi_col->group($keys, $initial, $reduce, array("condition" => $cond));
     
     $res = count($g['retval']) > 0 ? $g['retval'][0] : array();
+    
+    // If we want to see the deal pis and clickbacks, we scope to the child section
+    if($dealId) {
+      $g['retval'][0] = $g['retval'][0]['deal'];
+    }
+
     $res['services']['all'] = array("cb" => 0, "yiid" => 0);
     
     foreach (PseudoStatsModel::$services as $service) {
@@ -157,7 +158,7 @@ class MongoUtils {
     return $res;
   }
   
-  private static function getPisDataForHost($host, $fromDate, $toDate) {
+  private static function getPisDataForHost($host, $fromDate, $toDate, $dealId=false) {
     $keys = array("url" => 1);
     $cond = array(
       "date" => array('$gte' => new MongoDate(strtotime($fromDate)), '$lte' => new MongoDate(strtotime($toDate)))
@@ -175,6 +176,12 @@ class MongoUtils {
     }
       
     foreach ($g['retval'] as $result) {
+      // If we want to see the deal pis and clickbacks, we scope to the child section
+      if($dealId) {
+        $result = $result['deal'];
+        $g['retval'][0] = $g['retval'][0]['deal'];
+      }
+
       $res['total'] += $result['total'];
       $res['cb'] += $result['cb'];
       $res['yiid'] += $result['yiid'];
@@ -251,16 +258,16 @@ class MongoUtils {
     }
 
     if($type == 'activities') {
-      $pi_col =  MongoUtils::getCollection('pis', $domain);
-      $initial = MongoUtils::getInitial('pis');
-      $reduce = MongoUtils::getReduce('pis');
-      $pis = $pi_col->group($keys, $initial, $reduce, array("condition" => $cond));
+      #$pi_col =  MongoUtils::getCollection('pis', $domain);
+      #$initial = MongoUtils::getInitial('pis');
+      #$reduce = MongoUtils::getReduce('pis');
+      #$pis = $pi_col->group($keys, $initial, $reduce, array("condition" => $cond));
       #$data['pis'] = MongoUtils::getDataWithEmptyDayPadding($pis['retval'], $fromDate, $toDate);
 
       if($url) {
-        $data['pis'] = MongoUtils::getPisDataForUrl($url, $fromDate, $toDate);
+        $data['pis'] = MongoUtils::getPisDataForUrl($url, $fromDate, $toDate, $dealId);
       } else {
-        $data['pis'] = MongoUtils::getPisDataForHost($domain, $fromDate, $toDate);
+        $data['pis'] = MongoUtils::getPisDataForHost($domain, $fromDate, $toDate, $dealId);
       }
       
       $data['statistics'] = MongoUtils::getAdditionalStatistics($g['retval'], $data['pis'], $fromDate, $toDate);
@@ -452,6 +459,17 @@ class MongoUtils {
             "twitter" => array("cb" => 0, "yiid" => 0),
             "linkedin" => array("cb" => 0, "yiid" => 0),
             "google" => array("cb" => 0, "yiid" => 0)
+          ),
+          "deal" => array(
+            "total" => 0,
+            "cb" => 0,
+            "yiid" => 0,
+            "services" => array(
+              "facebook" => array("cb" => 0, "yiid" => 0),
+              "twitter" => array("cb" => 0, "yiid" => 0),
+              "linkedin" => array("cb" => 0, "yiid" => 0),
+              "google" => array("cb" => 0, "yiid" => 0)
+            )            
           )
         );
         break;
@@ -504,6 +522,23 @@ class MongoUtils {
                 "isNaN(doc.s.".$service.".cb) ? 0 : doc.s.".$service.".cb;".
               "out.services.".$service.".yiid+=".
                 "isNaN(doc.s.".$service.".yiid) ? 0 : doc.s.".$service.".yiid;".
+            "}";
+          }
+         "if(doc.deal.total) {".
+           "out.deal.total+=isNaN(doc.deal.total) ? 0 : doc.deal.total;".
+         "}".
+         "if(doc.deal.cb) {".
+           "out.deal.cb+=isNaN(doc.deal.cb) ? 0 : doc.deal.cb;".
+         "}".
+         "if(doc.deal.yiid) {".
+           "out.deal.yiid+=isNaN(doc.deal.yiid) ? 0 : doc.deal.yiid;".
+         "}";
+          foreach (PseudoStatsModel::$services as $service) {
+            $res = $res."if(doc.deal.s && doc.deal.s.".$service.") {".
+              "out.deal.services.".$service.".cb+=".
+                "isNaN(doc.deal.s.".$service.".cb) ? 0 : doc.deal.s.".$service.".cb;".
+              "out.deal.services.".$service.".yiid+=".
+                "isNaN(doc.deal.s.".$service.".yiid) ? 0 : doc.deal.s.".$service.".yiid;".
             "}";
           }
         return $res."}";
