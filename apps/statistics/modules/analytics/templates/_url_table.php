@@ -1,4 +1,4 @@
-<?php use_helper('Date', 'DomainProfiles') ?>
+<?php use_helper('Date', 'DomainProfiles', 'Text') ?>
 <div class="data-tablebox">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
   	<tr>
@@ -13,7 +13,7 @@
 				<td height="44" align="left" class="first">
 				  <div class="martext">
 				  	<?php if($data['title'] && $data['title']!='') { ?>
-				    	<strong><?php echo $data['title'] ?></strong>
+				    	<strong><?php echo truncate_text($data['title'], 60); ?></strong>
 				    <?php } else {?>
 				    	<strong><?php echo __('No title'); ?></strong>
 				    <?php } ?>
