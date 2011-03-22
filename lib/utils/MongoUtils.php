@@ -178,8 +178,12 @@ class MongoUtils {
     foreach ($g['retval'] as $result) {
       // If we want to see the deal pis and clickbacks, we scope to the child section
       if($dealId) {
-        $result = $result['deal'];
-        $g['retval'][0] = $g['retval'][0]['deal'];
+        if(isset($result['deal'])) {
+          $result = $result['deal'];          
+        }
+        if(isset($g['retval'][0]['deal'])) {
+          $g['retval'][0] = $g['retval'][0]['deal'];
+        }
       }
 
       $res['total'] += $result['total'];
@@ -258,12 +262,6 @@ class MongoUtils {
     }
 
     if($type == 'activities') {
-      #$pi_col =  MongoUtils::getCollection('pis', $domain);
-      #$initial = MongoUtils::getInitial('pis');
-      #$reduce = MongoUtils::getReduce('pis');
-      #$pis = $pi_col->group($keys, $initial, $reduce, array("condition" => $cond));
-      #$data['pis'] = MongoUtils::getDataWithEmptyDayPadding($pis['retval'], $fromDate, $toDate);
-
       if($url) {
         $data['pis'] = MongoUtils::getPisDataForUrl($url, $fromDate, $toDate, $dealId);
       } else {
@@ -524,23 +522,27 @@ class MongoUtils {
                 "isNaN(doc.s.".$service.".yiid) ? 0 : doc.s.".$service.".yiid;".
             "}";
           }
-         "if(doc.deal.total) {".
-           "out.deal.total+=isNaN(doc.deal.total) ? 0 : doc.deal.total;".
-         "}".
-         "if(doc.deal.cb) {".
-           "out.deal.cb+=isNaN(doc.deal.cb) ? 0 : doc.deal.cb;".
-         "}".
-         "if(doc.deal.yiid) {".
-           "out.deal.yiid+=isNaN(doc.deal.yiid) ? 0 : doc.deal.yiid;".
-         "}";
-          foreach (PseudoStatsModel::$services as $service) {
-            $res = $res."if(doc.deal.s && doc.deal.s.".$service.") {".
-              "out.deal.services.".$service.".cb+=".
-                "isNaN(doc.deal.s.".$service.".cb) ? 0 : doc.deal.s.".$service.".cb;".
-              "out.deal.services.".$service.".yiid+=".
-                "isNaN(doc.deal.s.".$service.".yiid) ? 0 : doc.deal.s.".$service.".yiid;".
-            "}";
-          }
+          
+         $res = $res."if(doc.deal) {".
+           "if(doc.deal.total) {".
+             "out.deal.total+=isNaN(doc.deal.total) ? 0 : doc.deal.total;".
+           "}".
+           "if(doc.deal.cb) {".
+             "out.deal.cb+=isNaN(doc.deal.cb) ? 0 : doc.deal.cb;".
+           "}".
+           "if(doc.deal.yiid) {".
+             "out.deal.yiid+=isNaN(doc.deal.yiid) ? 0 : doc.deal.yiid;".
+           "}";
+            foreach (PseudoStatsModel::$services as $service) {
+              $res = $res."if(doc.deal.s && doc.deal.s.".$service.") {".
+                "out.deal.services.".$service.".cb+=".
+                  "isNaN(doc.deal.s.".$service.".cb) ? 0 : doc.deal.s.".$service.".cb;".
+                "out.deal.services.".$service.".yiid+=".
+                  "isNaN(doc.deal.s.".$service.".yiid) ? 0 : doc.deal.s.".$service.".yiid;".
+              "}";
+            }
+            
+        $res = $res."}";
         return $res."}";
         break;
       default:
