@@ -12,4 +12,7 @@
  */
 class sfGuardUser extends PluginsfGuardUser
 {
+  function __toString() {
+    return $this->getId().': '. $this->getEmailAddress();
+  }
 }
