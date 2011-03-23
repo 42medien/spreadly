@@ -35,7 +35,8 @@ var ActivityChart = {
 		      min: 0,
 		      maxZoom: 10, // fourteen days
 		      startOnTick: false,
-		      showFirstLabel: false
+		      showFirstLabel: false,
+		      allowDecimals:false
 		   },
 		   tooltip: {
 		      shared: true

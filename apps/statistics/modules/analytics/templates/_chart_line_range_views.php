@@ -38,7 +38,8 @@ var ViewRangeChart = {
 		      min: 0,
 		      maxZoom: 10,
 		      startOnTick: false,
-		      showFirstLabel: false
+		      showFirstLabel: false,
+		      allowDecimals:false
 		   },
 		   tooltip: {
 		      shared: true
