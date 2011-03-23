@@ -198,7 +198,7 @@ class WidgetUtils {
 
     return $lObject;
   }
-  
+
   private function findYiidActivityById($pId) {
     $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
 
@@ -364,8 +364,8 @@ class WidgetUtils {
   private function trackPageImpression($pUrl, $pClickback, $pUser) {
     $lHost = parse_url($pUrl, PHP_URL_HOST);
     $lCollection = $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, str_replace('.', '_', $lHost).".analytics.pis");
-    
-    $lClickback = explode('.', $pClickback);
+
+    $lClickback = explode('.', urldecode($pClickback));
     $lCbCommunity = $lClickback[0];
     $lCbActivityId = $lClickback[1];
     $lOriginYiidActivity = $this->findYiidActivityById($lCbActivityId);
@@ -373,9 +373,9 @@ class WidgetUtils {
 
     if($lOriginYiidActivity) {
       $lActivityCollection = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, "yiid_activity");
-      $lActivityCollection->update($lOriginYiidActivity, array('$inc' => array('cb' => 1)), array("upsert" => true));      
+      $lActivityCollection->update($lOriginYiidActivity, array('$inc' => array('cb' => 1)), array("upsert" => true));
     }
-    
+
     if (mb_detect_encoding($pUrl) != 'UTF-8') {
       $pUrl = utf8_encode($pUrl);
     }
@@ -394,17 +394,16 @@ class WidgetUtils {
     if ($pClickback) {
       $lOptions["cb"] = 1;
 
-      $lClickback = explode('.', urldecode($pClickback));
-      $lClickback = $lClickback[0];
+      $lLabel = $lClickback[0];
 
-      $lOptions['s.'.$lClickback.'.cb'] = 1;
+      $lOptions['s.'.$lLabel.'.cb'] = 1;
 
       if ($pUser) {
-        $lOptions['s.'.$lClickback.'.yiid'] = 1;
+        $lOptions['s.'.$lLabel.'.yiid'] = 1;
       }
     }
 
-    if($lOriginalActivityWasDealParticipation) {      
+    if($lOriginalActivityWasDealParticipation) {
       $tmp = array();
       foreach ($lOptions as $key => $value) {
         $tmp['deal.'.$key] = $value;
