@@ -13,7 +13,7 @@ class MetaTagParser {
    * @return array $lValues
    */
   public static function parse($pHtml, $pUrl) {
-    if (!preg_match("~^<meta.*http-equiv\s*=\s*(\"|\')\s*Content-Type\s*(\"|\').*\/?>$~i", $pHtml)) {
+    if (!preg_match("~<meta.*http-equiv\s*=\s*(\"|\')\s*Content-Type\s*(\"|\').*\/?>~i", $pHtml)) {
       $pHtml = preg_replace('/<head[^>]*>/i','<head>
                              <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
                             ',$pHtml);
