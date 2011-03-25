@@ -2,6 +2,7 @@
 require_once dirname(__FILE__).'/../lib/vendor/symfony/lib/autoload/sfCoreAutoload.class.php';
 sfCoreAutoload::register();
 
+// doctrine 2 class loader
 require_once dirname(__FILE__).'/../lib/vendor/Doctrine/Common/ClassLoader.php';
 
 class ProjectConfiguration extends sfProjectConfiguration {
@@ -19,18 +20,23 @@ class ProjectConfiguration extends sfProjectConfiguration {
       'sfForkedDoctrineApplyPlugin'
     ));
 
+    // load common doctrine 2 files
     $classLoader = new Doctrine\Common\ClassLoader('Doctrine\Common', dirname(__FILE__).'/../lib/vendor');
     $classLoader->register();
 
+    // load mongo odm mapper
     $classLoader = new Doctrine\Common\ClassLoader('Doctrine\ODM\MongoDB', dirname(__FILE__).'/../lib/vendor');
     $classLoader->register();
 
+    // load mongodb libs
     $classLoader = new Doctrine\Common\ClassLoader('Doctrine\MongoDB', dirname(__FILE__).'/../lib/vendor');
     $classLoader->register();
 
+    // load some symfony 2 files
     $classLoader = new Doctrine\Common\ClassLoader('Symfony', dirname(__FILE__).'/../lib/vendor');
     $classLoader->register();
 
+    // load mongo-documents
     $classLoader = new Doctrine\Common\ClassLoader('Documents', dirname(__FILE__).'/../lib/mongo');
     $classLoader->register();
   }
