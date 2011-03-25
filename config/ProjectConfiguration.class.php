@@ -1,12 +1,13 @@
 <?php
-
 require_once dirname(__FILE__).'/../lib/vendor/symfony/lib/autoload/sfCoreAutoload.class.php';
 sfCoreAutoload::register();
+
+require_once dirname(__FILE__).'/../lib/vendor/Doctrine/Common/ClassLoader.php';
 
 class ProjectConfiguration extends sfProjectConfiguration {
   public function setup() {
     $this->connectEventListeners();
-    
+
     sfConfig::set( 'sf_upload_dir_name', 'uploads' );
 
     $this->enablePlugins(array(
@@ -17,8 +18,23 @@ class ProjectConfiguration extends sfProjectConfiguration {
       'sfDoctrineGuardPlugin',
       'sfForkedDoctrineApplyPlugin'
     ));
+
+    $classLoader = new Doctrine\Common\ClassLoader('Doctrine\Common', dirname(__FILE__).'/../lib/vendor');
+    $classLoader->register();
+
+    $classLoader = new Doctrine\Common\ClassLoader('Doctrine\ODM\MongoDB', dirname(__FILE__).'/../lib/vendor');
+    $classLoader->register();
+
+    $classLoader = new Doctrine\Common\ClassLoader('Doctrine\MongoDB', dirname(__FILE__).'/../lib/vendor');
+    $classLoader->register();
+
+    $classLoader = new Doctrine\Common\ClassLoader('Symfony', dirname(__FILE__).'/../lib/vendor');
+    $classLoader->register();
+
+    $classLoader = new Doctrine\Common\ClassLoader('Documents', dirname(__FILE__).'/../lib/mongo');
+    $classLoader->register();
   }
-  
+
   public function configureDoctrine(Doctrine_Manager $manager) {
     // yiid activity dispatcher
     $this->dispatcher->connect('new-yiid-activity', array('StatsFeeder', 'track'));
@@ -42,6 +58,6 @@ class ProjectConfiguration extends sfProjectConfiguration {
 
     $this->dispatcher->connect($prefix.'submit', array('DealListener', 'eventSubmit'));
     $this->dispatcher->connect($prefix.'approve', array('DealListener', 'eventApprove'));
-    $this->dispatcher->connect($prefix.'deny', array('DealListener', 'eventDeny'));    
+    $this->dispatcher->connect($prefix.'deny', array('DealListener', 'eventDeny'));
   }
 }
