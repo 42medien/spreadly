@@ -89,7 +89,7 @@ staging:
 prod:
   logger:
     param:
-      level: warning
+      level: notice
 
   i18n:
     class: sfI18N
