@@ -4,8 +4,10 @@ namespace Documents;
 /**
  * @author Matthias Pfefferle
  * @author Hannes Schippmann
+ *
+ * @MappedSuperclass
  */
-class Stats {
+abstract class Stats {
   /** @Id */
   private $id;
 
@@ -19,7 +21,7 @@ class Stats {
   private $likes;
 
   /**
-   * @Field(type="hash" name="s")
+   * @Field(type="hash", name="s")
    *
    * for example:
    *
@@ -36,7 +38,7 @@ class Stats {
   private $services;
 
   /**
-   * @Field(type="hash" name="t")
+   * @Field(type="hash", name="t")
    *
    * for example
    *
@@ -53,7 +55,7 @@ class Stats {
   private $tags;
 
   /**
-   * @Field(type="hash" name="d")
+   * @Field(type="hash", name="d")
    *
    * for example:
    *
@@ -91,7 +93,7 @@ class Stats {
   private $demographics;
 
   /**
-   * @Field(type="collection" name="h")
+   * @Field(type="collection", name="h")
    *
    * [h] => Array
    *     (
@@ -105,4 +107,20 @@ class Stats {
    *    )
    */
   private $likes_by_hour;
+
+  public function setId($id) {
+    $this->id = $id;
+  }
+
+  public function getId() {
+    return $this->id;
+  }
+
+  public function setHost($host) {
+    $this->host = $host;
+  }
+
+  public function getHost() {
+    return $this->host;
+  }
 }
