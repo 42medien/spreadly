@@ -7,6 +7,11 @@ use Doctrine\Common\ClassLoader,
     Doctrine\ODM\MongoDB\DocumentManager,
     \sfConfig;
 
+/**
+ * Enter description here...
+ *
+ * @author Matthias Pfefferle
+ */
 class MongoManager {
   static private $document_manager = null;
   static private $stats_document_manager = null;
@@ -14,6 +19,11 @@ class MongoManager {
   private function __construct(){}
   private function __clone(){}
 
+  /**
+   * returns the document manager for the stats db
+   *
+   * @return Doctrine\ODM\MongoDB\DocumentManager
+   */
   public static function getStatsDM() {
     if (null === self::$document_manager) {
       self::$stats_document_manager = self::instantiateDocumentManager("stats");
@@ -22,6 +32,11 @@ class MongoManager {
     return self::$stats_document_manager;
   }
 
+  /**
+   * returns the document manager for the main db
+   *
+   * @return Doctrine\ODM\MongoDB\DocumentManager
+   */
   public static function getDM() {
     if (null === self::$document_manager) {
       self::$document_manager = self::instantiateDocumentManager();
@@ -30,6 +45,12 @@ class MongoManager {
     return self::$document_manager;
   }
 
+  /**
+   * generates the needed document manager
+   *
+   * @param string $db
+   * @return Doctrine\ODM\MongoDB\DocumentManager
+   */
   private function instantiateDocumentManager($db = null) {
     if ($db = "stats") {
       $db = sfConfig::get("database_name_stats");
