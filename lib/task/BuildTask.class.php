@@ -30,13 +30,16 @@ EOF;
     // create "cache" folder
     $this->getFilesystem()->mkdirs("cache");
     $this->getFilesystem()->execute("rm -rf cache/*");
-    
+
     // clean "log" folder
-    if ($options['env'] != "dev") {    
+    if ($options['env'] != "dev") {
       $this->getFilesystem()->mkdirs("log");
       $this->getFilesystem()->execute("rm -rf log/*");
     }
-    
+
+    $this->getFilesystem()->mkdirs("cache/Hydrators");
+    $this->getFilesystem()->mkdirs("cache/Proxies");
+
     // build all?
     if ($options['all']) {
       $args = array("--all");
