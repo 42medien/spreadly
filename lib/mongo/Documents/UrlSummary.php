@@ -1,17 +1,18 @@
 <?php
 namespace Documents;
 
-use Documents\Stats;
+use Documents\Summary;
 
 /**
  * @author Matthias Pfefferle
  * @author Hannes Schippmann
  *
- * @Document(collection="deal_stats.url", repositoryClass="Repositories\DealUrlStatsRepository")
+ * @Document(collection="summary.url", repositoryClass="Repositories\UrlSummaryRepository")
  * @HasLifecycleCallbacks
  * @InheritanceType("COLLECTION_PER_CLASS")
  */
-class DealUrlStats extends DealStats {
+class UrlSummary extends Summary {
+
   /** @String */
   private $url;
   

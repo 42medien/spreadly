@@ -115,12 +115,60 @@ abstract class Stats {
   public function getId() {
     return $this->id;
   }
+  
+  public function setDay($day) {
+    $this->day = $day;
+  }
 
+  public function getDay() {
+    return $this->day;
+  }
+  
   public function setHost($host) {
     $this->host = $host;
   }
 
   public function getHost() {
     return $this->host;
+  }
+
+  public function setLikes($likes) {
+    $this->likes = $likes;
+  }
+
+  public function getLikes() {
+    return $this->likes;
+  }
+
+  public function setServices($services) {
+    $this->services = $services;
+  }
+
+  public function getServices() {
+    return $this->services;
+  }
+
+  public function setTags($tags) {
+    $this->tags = $tags;
+  }
+
+  public function getTags() {
+    return $this->tags;
+  }
+
+  public function setDemographics($demographics) {
+    $this->demographics = $demographics;
+  }
+
+  public function getDemographics() {
+    return $this->demographics;
+  }
+ 
+  public function setLikesByHour($likes_by_hour) {
+    $this->likes_by_hour = $likes_by_hour;
+  }
+
+  public function getLikesByHour() {
+    return $this->likes_by_hour;
   }
 }
