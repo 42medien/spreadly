@@ -31,6 +31,12 @@ class MongoManager {
   }
 
   private function instantiateDocumentManager($db = null) {
+    if ($db = "stats") {
+      $db = sfConfig::get("database_name_stats");
+    } else {
+      $db = sfConfig::get("database_name");
+    }
+
     $config = new Configuration();
 
     $config->setProxyDir(sfConfig::get('sf_cache_dir').'/Proxies');
@@ -45,13 +51,7 @@ class MongoManager {
     $reader->setDefaultAnnotationNamespace('Doctrine\ODM\MongoDB\Mapping\\');
     $config->setMetadataDriverImpl(new AnnotationDriver($reader, __DIR__ . '/Documents'));
 
-    if ($db = "stats") {
-      $db = sfConfig::get("database_name_stats");
-    } else {
-      $db = sfConfig::get("database_name");
-    }
-
-    return DocumentManager::create(new Connection(), $this->config);
+    return DocumentManager::create(new Connection(), $config);
   }
 
 }
