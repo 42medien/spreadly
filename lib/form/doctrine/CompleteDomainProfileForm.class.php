@@ -8,9 +8,9 @@
  * @author     Your name here
  * @version    SVN: $Id: sfDoctrineFormTemplate.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class CompleteDomainProfileForm extends BaseDomainProfileForm
+class CompleteDomainProfileForm extends BaseFormDoctrine
 {
-    public function setup()
+  public function configure()
   {
     $this->setWidgets(array(
       'id'                 => new sfWidgetFormInputHidden(),
@@ -23,7 +23,39 @@ class CompleteDomainProfileForm extends BaseDomainProfileForm
       'imprint_url'        => new sfWidgetFormTextarea(),
       'tos_url'            => new sfWidgetFormTextarea(),
       'created_at'         => new sfWidgetFormDateTime(array('default' => 'now')),
-      'updated_at'         => new sfWidgetFormDateTime(array('default' => 'now')),
+      'updated_at'         => new sfWidgetFormDateTime(array('default' => 'now'))
     ));
+    
+    $this->setValidators(array(
+      'id'                 => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'url'                => new sfValidatorString(array('max_length' => 255, 'required' => true)),
+      'protocol'           => new sfValidatorChoice(array('choices' => array(0 => 'http', 1 => 'https'), 'required' => false)),
+      'state'              => new sfValidatorChoice(array('choices' => array(0 => 'pending', 1 => 'verified'), 'required' => false)),
+      'verification_token' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'verification_count' => new sfValidatorInteger(array('required' => false)),
+      'sf_guard_user_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'))),
+      'imprint_url'        => new sfValidatorString(array('max_length' => 512, 'required' => false)),
+      'tos_url'            => new sfValidatorString(array('max_length' => 512, 'required' => false)),
+      'created_at'         => new sfValidatorDateTime(),
+      'updated_at'         => new sfValidatorDateTime(),
+    ));
+
+    $this->validatorSchema->setPostValidator(
+      new sfValidatorDoctrineUnique(array('model' => 'DomainProfile', 'column' => array('verification_token')))
+    );
+
+    $this->widgetSchema->setNameFormat('domain_profile[%s]');
+    
+    $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
+
+    $this->setupInheritance();
+
+    parent::setup();
   }
+
+  public function getModelName()
+  {
+    return 'DomainProfile';
+  }
+
 }
