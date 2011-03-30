@@ -100,7 +100,7 @@ class analyticsActions extends sfActions
   }
   
   public function executeTest(sfWebRequest $request) {
-    $ya = YiidActivityTable::retrieveById("4d9044608ead0e43d8030000");
+    $ya = YiidActivityTable::retrieveById("4d931ef28ead0ea53b060000");
 
     StatsFeeder::feed($ya);
 

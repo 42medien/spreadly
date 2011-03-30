@@ -23,6 +23,9 @@ class AnalyticsActivity extends Stats {
   private $yiid_activity_id;
 
   /** @String */
+  private $title;
+  
+  /** @String */
   private $gender;
   
   /** @String */
