@@ -17,9 +17,15 @@ abstract class Stats {
   /** @String */
   private $host;
 
-  /** @Int */
+  /** @Field(type="int", name="l") */
   private $likes;
 
+  /** @Field(type="int", name="mp") */
+  private $media_penetration;
+  
+ /** @Field(type="int", name="cb") */
+  private $clickbacks;
+  
   /**
    * @Field(type="hash", name="s")
    *

@@ -7,22 +7,27 @@ use Documents\Stats;
  * @author Matthias Pfefferle
  * @author Hannes Schippmann
  *
- * @Document(collection="activity_stats.host", repositoryClass="Repositories\ActivityStatsRepository")
+ * @Document(collection="analytics_activity", repositoryClass="Repositories\AnalyticsActivityRepository")
  * @HasLifecycleCallbacks
  * @InheritanceType("COLLECTION_PER_CLASS")
  */
 class AnalyticsActivity extends Stats {
 
-  /** @String */
+  /** @Field(type="string", name="rel") */
   private $relationship;
 
-  /** @Int */
+  /** @Field(type="int", name="u_id") */
   private $user_id;
 
-  /** @Int */
+  /** @Field(type="int", name="ya_id") */
   private $yiid_activity_id;
 
   /** @String */
   private $gender;
   
+  /** @String */
+  private $zip;
+
+  /** @String */
+  private $url;
 }
