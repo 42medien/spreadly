@@ -7,7 +7,12 @@ var AnalyticsTables = {
   
     init: function() {
       debug.log('[AnalyticsTables][init]');
-
+      AnalyticsTables.initTablesorter("dash-website-table");
+      AnalyticsTables.initTablesorter("dash-deal-table");
+      AnalyticsTables.initTablesorter("dash-url-table");
+      jQuery('#dash-deal-table').tableScroll({height: 200, flush: true});
+      jQuery('#dash-website-table').tableScroll({height: 200, flush: true});
+      jQuery('#dash-url-table').tableScroll({height: 200, flush: true});      
     },
     
     initTablesorter: function(pTableId) {
