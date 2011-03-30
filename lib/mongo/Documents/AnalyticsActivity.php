@@ -22,6 +22,12 @@ class AnalyticsActivity extends Stats {
   /** @Field(type="int", name="ya_id") */
   protected $yiid_activity_id;
 
+  /** @Field(type="int", name="d_id") */
+  protected $deal_id;
+  
+  /** @Date */
+  protected $date;
+
   /** @String */
   protected $title;
 
@@ -33,4 +39,10 @@ class AnalyticsActivity extends Stats {
 
   /** @String */
   protected $url;
+  
+  /** @String */
+  protected $age;
+
+  /** @Int */
+  protected $hour_of_day;
 }

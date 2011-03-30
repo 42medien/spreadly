@@ -12,6 +12,6 @@ use Documents\Stats;
  * @InheritanceType("COLLECTION_PER_CLASS")
  */
 class DealStats extends Stats {
-  /** @Field(type="int" name="d_id") */
+  /** @Field(type="int", name="d_id") */
   protected $deal_id;
 }

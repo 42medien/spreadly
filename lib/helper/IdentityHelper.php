@@ -42,4 +42,59 @@ class IdentityHelper {
     }
   }
 
+  public static function toHumanName($key) {
+     switch ($key) {
+      case self::USER_RELATIONSHIP_STATUS_SINGLE:
+        return 'single';
+        break;
+      case self::USER_RELATIONSHIP_STATUS_IN_RELATIONSHIP:
+        return 'in a relationship';
+        break;
+      case self::USER_RELATIONSHIP_STATUS_IN_OPEN_RELATIONSHIP:
+        return 'in an open relationship';
+        break;
+      case self::USER_RELATIONSHIP_STATUS_ENGAGED:
+        return 'engaged';
+        break;
+      case self::USER_RELATIONSHIP_STATUS_MARRIED:
+        return 'married';
+        break;
+      case self::USER_RELATIONSHIP_STATUS_COMPLICATED:
+        return "it's complicated";
+        break;
+      case self::USER_RELATIONSHIP_STATUS_WIDOWED:
+        return "widowed";
+        break;
+      default:
+        return "unknown";
+    }   
+  }
+
+  public static function toMongoKey($key) {
+     switch ($key) {
+      case self::USER_RELATIONSHIP_STATUS_SINGLE:
+        return 'singl';
+        break;
+      case self::USER_RELATIONSHIP_STATUS_IN_RELATIONSHIP:
+        return 'rel';
+        break;
+      case self::USER_RELATIONSHIP_STATUS_IN_OPEN_RELATIONSHIP:
+        return 'ior';
+        break;
+      case self::USER_RELATIONSHIP_STATUS_ENGAGED:
+        return 'eng';
+        break;
+      case self::USER_RELATIONSHIP_STATUS_MARRIED:
+        return 'mar';
+        break;
+      case self::USER_RELATIONSHIP_STATUS_COMPLICATED:
+        return "comp";
+        break;
+      case self::USER_RELATIONSHIP_STATUS_WIDOWED:
+        return "wid";
+        break;
+      default:
+        return "u";
+    }   
+  }
 }

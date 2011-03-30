@@ -18,13 +18,18 @@ use Documents\YiidActivity,
 class StatsFeeder {
 
   /**
-   * track full stats
+   * Track all the statistics
    *
    * @author Matthias Pfefferle
+   * @author Hannes Schippmann
    * @param YiidActivty $pYiidActivtiy
    */
   public static function feed($pYiidActivity) {
-    self::createAnalyticsActivity($pYiidActivity);
+    $activity = self::createAnalyticsActivity($pYiidActivity);
+    self::feedActivityStats($activity);
+    self::feedActivityUrlStats($activity);
+    self::feedDealStats($activity);
+    self::feedDealUrlStats($activity);
   }
   
   /**
@@ -37,139 +42,181 @@ class StatsFeeder {
   public static function createAnalyticsActivity($pYiidActivity) {
     $dm = MongoManager::getStatsDM();
     $url = strtolower($pYiidActivity->getUrl());
-    $host = parse_url($url, PHP_URL_HOST);
-    $day = new MongoDate(strtotime(date("Y-m-d", $pYiidActivity->getC())));
-    $hourOfDay = date("G", strtotime("now"));
 
     $activity = new AnalyticsActivity();
-    $services = array();
 
-    foreach($pYiidActivity->getOiids() as $lId) {
-      $lOi = OnlineIdentityTable::getInstance()->retrieveByPk($lId);
-      if($lOi) {
-        $service = array($lOi->getCommunity()->getCommunity() => array(
-          'l' => 1, 
-          'mp' => intval($lOi->getFriendCount())
-        ));
-        if ($pYiidActivity->isClickback()) {
-          $service[$pYiidActivity->getCbService().'.cb'] = 1;
-          $service[$pYiidActivity->getCbService().'.cb_ya_id'] = $pYiidActivity->getCbReferer();
-        }
-        $services[] = $service;
-      }
-    }
+    // The params
+    $lParams = self::fillParams($pYiidActivity);
 
-    // online-identities required
-    if(empty($services)) {
+    // At least one online-identity is required. Return if not present.
+    if(empty($lParams['services'])) {
       return false;
     }
+    
+    $activity->fromArray($lParams);
 
+    $dm->persist($activity);
+    $dm->flush();
+    return $activity;
+  }
+  
+  private static function fillParams($pYiidActivity) {
     $pUser = $pYiidActivity->getUser();
+    $url = strtolower($pYiidActivity->getUrl());
+    $host = parse_url($url, PHP_URL_HOST);
+    $day = new MongoDate(strtotime(date("Y-m-d", $pYiidActivity->getC())));
+    $hourOfDay = date("G", strtotime($pYiidActivity->getC()));
 
-    // basic options
-    $lOptions = array(
+    $lParams = array(
       'host' => $host,
       'url'  => $url,
       'title'  => $pYiidActivity->getTitle(),
-      'date' => new MongoDate(strtotime(date("Y-m-d", $pYiidActivity->getC()))),
-      'gender' => $pUser->getGender(),
+      'day' => new MongoDate(strtotime(date("Y-m-d", $pYiidActivity->getC()))),
+      'date' => new MongoDate($pYiidActivity->getC()),
+      'gender' => $pUser->getGender()==false ? 'u' : $pUser->getGender(),
       'user_id' => intval($pUser->getId()),
       'yiid_activity_id' => intval($pYiidActivity->getId()),
-      'age' => intval($pUser->getAge()),
-      'relationship' => $pUser->getRelationshipState(),
-      'services' => $services,
-      'likes_by_hour.'.$hourOfDay => 1
+      'age' => $pUser->getAge()==false ? "u" : intval($pUser->getAge()),
+      'relationship' => IdentityHelper::toMongoKey($pUser->getRelationshipState()),
+      'demographics' => self::fillDemographics($pYiidActivity),
+      'services' => self::fillServices($pYiidActivity),
+      'likes_by_hour' => array($hourOfDay => 1),
+      'hour_of_day' => $hourOfDay
     );
-
+    
     // add clickbacks
     if ($pYiidActivity->isClickback()) {
-      $lOptions['cb'] =  1;
-      $lOptions['cb_ya_id'] = $pYiidActivity->getCbReferer();
+      $lParams['cb'] =  1;
+      $lParams['cb_ya_id'] = $pYiidActivity->getCbReferer();
     }
 
     // add tags
-    foreach($pYiidActivity->getTags() as $tag) {
-      $lOptions['t'][$tag] = array("l" => 1);
+    if($pYiidActivity->getTags()) {
+      foreach($pYiidActivity->getTags() as $tag) {
+        $lParams['t'][$tag] = array("l" => 1);
+      }      
     }
 
     // add deal id
     if ($lDealId = $pYiidActivity->getDId()) {
-      $lOptions['d_id'] = $lDealId;
+      $lParams['deal_id'] = $lDealId;
     }
-    
-    $activity->fromArray($lOptions);
-    
-    $dm->persist($activity);
+
+    return $lParams;
   }
   
-  public static function feedActivityStats($pYiidActivity) {
-    $dm = MongoManager::getStatsDM();
-    $url = strtolower($pYiidActivity->getUrl());
-    $host = parse_url($url, PHP_URL_HOST);
-    $day = new MongoDate(strtotime(date("Y-m-d", $pYiidActivity->getC())));
-    $hourOfDay = date("G", strtotime("now"));
-    
-    #$ass = new ActivityStats();
-    #$ass->setDay($day);
-    #$ass->setHost($host);
-       
-    #$dm->persist($ass);
-    #$dm->flush();
-    
-    $query = $dm->createQueryBuilder('Documents\ActivityStats')
-       ->findAndUpdate()
-       ->upsert()
-       // Select by these
-       ->field('day')->equals($day)
-       ->field('host')->equals($host)
-       // Update these
-       
-       // Likes
-       ->field('likes')->inc(1)
-       
-       ->field('services.facebook.l')->inc(1)
-       
-       ->field('services.twitter.l')->inc(1)
-       ->field('services.google.l')->inc(1)
-       ->field('services.linkedin.l')->inc(1)
-       
-       // Clickbacks
-       ->field('clickbacks')->inc(1)
-       ->field('services.facebook.cb')->inc(1)
-       ->field('services.twitter.cb')->inc(1)
-       ->field('services.google.cb')->inc(1)
-       ->field('services.linkedin.cb')->inc(1)
-       
-       // Media Penetration
-       ->field('media_penetration')->inc(1)
-       ->field('services.facebook.mp')->inc(1)
-       ->field('services.twitter.mp')->inc(1)
-       ->field('services.google.mp')->inc(1)
-       ->field('services.linkedin.mp')->inc(1)
-       
-       ->field('h.'.$hourOfDay)->inc(1)
-       
-       // Fire
-       ->getQuery()
-       ->execute();
+  private static function fillServices($pYiidActivity) {
+    $services = array();
 
-    #var_dump($o->hasNext());
-    /*
-    $dm->createQueryBuilder('Documents\ActivityStats')
-       ->field('day')->equals($day)
-       ->field('host')->equals($host)
-       ->field('likes')->inc(1)
-       ->getQuery()
-       ->execute();
-    */
-    /*
-    $stats = $dm->getRepository('ActivityStats')->findOneBy(
-      array(
-        'day' => $day,
-        'host' => $host
-    ));
-    */
+    foreach($pYiidActivity->getOiids() as $lId) {
+      $lOi = OnlineIdentityTable::getInstance()->retrieveByPk($lId);
+      
+      if($lOi) {
+        $service = self::fillService($pYiidActivity, $lOi);
+        $services[$lOi->getCommunity()->getName()] = $service;
+      }
+    }
     
+    return $services;
+  }
+  
+  private static function fillService($pYiidActivity, $pOi) {
+    $service = array('l' => 1);
+  
+    if($pOi->getFriendCount()==true) {
+      $service['mp'] = intval($pOi->getFriendCount());
+    }
+  
+    if ($pYiidActivity->isClickback()) {
+      $service[$pYiidActivity->getCbService()]['cb'] = 1;
+      $service[$pYiidActivity->getCbService()]['cb_ya_id'] = $pYiidActivity->getCbReferer();
+    }
+    return $service;
+  }
+  
+  private static function fillDemographics($pYiidActivity) {
+    $pUser = $pYiidActivity->getUser();
+    $demografics = array();
+    $demografics['rel'][IdentityHelper::toMongoKey($pUser->getRelationshipState())] = 1;
+    $demografics['sex'][$pUser->getGender()==false ? 'u' : $pUser->getGender()] = 1;    
+    // set age
+    $a = $pUser->getAge();
+    if ($a < 18) {
+      $demografics['age']["u_18"] = 1;
+    } elseif ($a >= 18 && $a <= 24) {
+      $demografics['age']["b_18_24"] = 1;
+    } elseif ($a >= 25 && $a <= 34) {
+      $demografics['age']["b_25_34"] = 1;
+    } elseif ($a >= 35 && $a <= 54) {
+      $demografics['age']["b_35_54"] = 1;
+    } elseif ($a >= 55) {
+      $demografics['age']["o_55"] = 1;
+    } else {
+      $demografics['age']["u"] = 1;
+    }
+    return $demografics;
+  }
+  
+  
+  private static function feedActivityStats($pAnalyticsActivity) {
+    if(!$pAnalyticsActivity->getDeal_id()) {
+      $lQuery = self::createUpsertForDayAndHost($pAnalyticsActivity, 'Documents\ActivityStats');
+      $lQuery->getQuery()->execute();
+    }
   }
 
+  private static function feedActivityUrlStats($pAnalyticsActivity) {
+    if(!$pAnalyticsActivity->getDeal_id()) {
+      $lQuery = self::createUpsertForDayAndHost($pAnalyticsActivity, 'Documents\ActivityUrlStats');
+      $lQuery->field('url')->equals($pAnalyticsActivity->getUrl());
+      $lQuery->getQuery()->execute();
+    }
+  }
+
+  private static function feedDealStats($pAnalyticsActivity) {
+    if($pAnalyticsActivity->getDeal_id()) {
+      $lQuery = self::createUpsertForDayAndHost($pAnalyticsActivity, 'Documents\DealStats');
+      $lQuery->field('d_id')->equals($pAnalyticsActivity->getDeal_id());
+      $lQuery->getQuery()->execute();      
+    }
+  }
+
+  private static function feedDealUrlStats($pAnalyticsActivity) {
+    if($pAnalyticsActivity->getDeal_id()) {
+      $lQuery = self::createUpsertForDayAndHost($pAnalyticsActivity, 'Documents\DealUrlStats');
+      $lQuery->field('url')->equals($pAnalyticsActivity->getUrl())    
+             ->field('d_id')->equals($pAnalyticsActivity->getDeal_id());
+      $lQuery->getQuery()->execute();
+    }
+  }
+  
+  private static function createUpsertForDayAndHost($pAnalyticsActivity, $pDocumentString) {
+    $dm = MongoManager::getStatsDM();
+    $lQuery = $dm->createQueryBuilder($pDocumentString)
+                 ->findAndUpdate()
+                 ->upsert()
+                 ->field('day')->equals($pAnalyticsActivity->getDay())
+                 ->field('host')->equals($pAnalyticsActivity->getHost());
+    self::addServicesIncToQuery($lQuery, $pAnalyticsActivity);
+    self::addDemographicsIncToQuery($lQuery, $pAnalyticsActivity);
+    return $lQuery;
+  }
+
+  private static function addServicesIncToQuery($pQuery, $pAnalyticsActivity) {
+    foreach ($pAnalyticsActivity->getServices() as $service => $data) {
+      foreach ($data as $type => $value) {
+        $pQuery->field('s.'.$service.'.'.$type)->inc($value);
+      }
+    }
+    return $pQuery;
+  }
+
+  private static function addDemographicsIncToQuery($pQuery, $pAnalyticsActivity) {
+    foreach ($pAnalyticsActivity->getDemographics() as $service => $data) {
+      foreach ($data as $type => $value) {
+        $pQuery->field('d.'.$service.'.'.$type)->inc($value);
+      }
+    }
+    return $pQuery;
+  }
 }

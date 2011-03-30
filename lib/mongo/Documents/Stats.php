@@ -99,7 +99,7 @@ abstract class Stats extends BaseDocument {
   protected $demographics;
 
   /**
-   * @Field(type="collection", name="h")
+   * @Field(type="hash", name="h")
    *
    * [h] => Array
    *     (
