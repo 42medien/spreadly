@@ -1,6 +1,30 @@
 /**
- * @combine statistics
+ * @nocombine statistics
  */
+
+
+var AnalyticsTables = {
+  
+    init: function() {
+      debug.log('[AnalyticsTables][init]');
+
+    },
+    
+    initTablesorter: function(pTableId) {
+      debug.log('[AnalyticsTables][initTablesorter]');
+      var lTableId = pTableId;
+      var lObject = jQuery('#'+pTableId);
+      jQuery(lObject).tablesorter({
+        debug: false    
+      });
+      
+      jQuery(lObject).bind("sortStart",function() { 
+        OnLoadGrafic.showGrafic();
+      }).bind("sortEnd",function() { 
+        OnLoadGrafic.hideGrafic();
+      });      
+    }    
+};
 
 /**
  * Handles the main-filter form in top of analytics
@@ -25,7 +49,7 @@ var AnalyticsFilter = {
       jQuery('input#date-to').datepicker({
         dateFormat: 'yy-mm-dd'       
       });
-    },    
+    },  
     
     /**
      * binds the click to the form and sends the values to the specified action
