@@ -14,13 +14,5 @@ use Documents\Summary;
 class UrlSummary extends Summary {
 
   /** @String */
-  private $url;
-  
-  public function setUrl($url) {
-    $this->url = $url;
-  }
-
-  public function getUrl() {
-    return $this->url;
-  }
+  protected $url;
 }

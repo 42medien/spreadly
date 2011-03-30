@@ -10,7 +10,11 @@ use \sfException,
     \DealTable,
     \sfConfig,
     \StatsFeeder,
-    \PostApiFactory;
+    \PostApiFactory,
+    \SocialObjectTable,
+    \YiidActivityTable,
+    \Doctrine,
+    \MongoId;
 
 /**
  * @Document(collection="yiid_activity")
@@ -141,7 +145,7 @@ class YiidActivity {
   }
 
   public function setSoId($soId) {
-    //$soId = new \MongoId(urldecode($soId)."");
+    $soId = new MongoId(urldecode($soId)."");
     $this->so_id = $soId;
   }
 
@@ -353,7 +357,7 @@ class YiidActivity {
    * updates the social object informations
    */
   private function updateSocialObjectInfo() {
-    $lSocialObject = \SocialObjectTable::retrieveByPk($this->getSoId());
+    $lSocialObject = SocialObjectTable::retrieveByPk($this->getSoId());
     $lSocialObject->updateObjectOnLikeActivity($this);
   }
 
@@ -361,7 +365,7 @@ class YiidActivity {
    * checks if the social-object exists or creates a new, if not
    */
   private function upsertSocialObject() {
-    $so = \SocialObjectTable::retrieveOrCreate($this);
+    $so = SocialObjectTable::retrieveOrCreate($this);
     $this->setSoId($so->getId());
   }
 
@@ -373,7 +377,7 @@ class YiidActivity {
       throw new sfException("UserId or Url not present", 0);
     }
 
-    $activity = \YiidActivityTable::retrieveActionOnObjectById($this->getSoId(), $this->getUId(), $this->getDeal());
+    $activity = YiidActivityTable::retrieveActionOnObjectById($this->getSoId(), $this->getUId(), $this->getDeal());
 
     if ($activity) {
       throw new sfException("user has already liked this url", 0);
@@ -414,7 +418,7 @@ class YiidActivity {
     $lObjectOiIds = $this->getCids();
     $lNamesArray = array();
 
-    return \Doctrine::getTable('Community')->find($lObjectOiIds[0])->getName();
+    return Doctrine::getTable('Community')->find($lObjectOiIds[0])->getName();
   }
 
   /**
@@ -437,7 +441,7 @@ class YiidActivity {
    * @return User
    */
   public function getUser() {
-    $lUser = \UserTable::getInstance()->retrieveByPk($this->getUId());
+    $lUser = UserTable::getInstance()->retrieveByPk($this->getUId());
 
     return $lUser;
   }
@@ -458,7 +462,7 @@ class YiidActivity {
    */
   public function getDeal() {
     if ($this->getDId()) {
-      return \DealTable::getInstance()->find($this->getDId());
+      return DealTable::getInstance()->find($this->getDId());
     } else {
       return null;
     }
@@ -497,9 +501,51 @@ class YiidActivity {
    */
   public function getSocialObject() {
     if ($this->getSoId()) {
-      return \SocialObjectTable::getInstance()->retrieveByPK($this->getSoId());
+      return SocialObjectTable::getInstance()->retrieveByPK($this->getSoId());
     } else {
       return null;
     }
+  }
+
+  /**
+   * ninja fromArray method
+   *
+   * @param array $array
+   */
+  public function fromArray($array = array()) {
+    foreach ($array as $key => $value) {
+      $function = "set".$this->toCamelCase($key);
+
+      if (method_exists($this, $function)) {
+        call_user_func(array($this, $function), $value);
+      }
+    }
+  }
+
+  /**
+   * Translates a string with underscores into camel case (e.g. first_name -> firstName)
+   *
+   * @param string $str String in underscore format
+   * @param bool $capitalise_first_char If true, capitalise the first char in $str
+   * @return string $str translated into camel caps
+   */
+  public function toCamelCase($str, $capitalise_first_char = true) {
+    if($capitalise_first_char) {
+      $str[0] = strtoupper($str[0]);
+    }
+    $func = create_function('$c', 'return strtoupper($c[1]);');
+    return preg_replace_callback('/_([a-z])/', $func, $str);
+  }
+
+  /**
+   * Translates a camel case string into a string with underscores (e.g. firstName -> first_name)
+   *
+   * @param string $str String in camel case format
+   * @return string $str Translated into underscore format
+   */
+  public function fromCamelCase($str) {
+    $str[0] = strtolower($str[0]);
+    $func = create_function('$c', 'return "_" . strtolower($c[1]);');
+    return preg_replace_callback('/([A-Z])/', $func, $str);
   }
 }

@@ -14,23 +14,23 @@ use Documents\Stats;
 class AnalyticsActivity extends Stats {
 
   /** @Field(type="string", name="rel") */
-  private $relationship;
+  protected $relationship;
 
   /** @Field(type="int", name="u_id") */
-  private $user_id;
+  protected $user_id;
 
   /** @Field(type="int", name="ya_id") */
-  private $yiid_activity_id;
+  protected $yiid_activity_id;
 
   /** @String */
-  private $title;
-  
-  /** @String */
-  private $gender;
-  
-  /** @String */
-  private $zip;
+  protected $title;
 
   /** @String */
-  private $url;
+  protected $gender;
+
+  /** @String */
+  protected $zip;
+
+  /** @String */
+  protected $url;
 }

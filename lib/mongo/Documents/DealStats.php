@@ -13,14 +13,5 @@ use Documents\Stats;
  */
 class DealStats extends Stats {
   /** @Field(type="int" name="d_id") */
-  private $deal_id;
-  
-  public function setDealId($deal_id) {
-    $this->deal_id = $deal_id;
-  }
-
-  public function getDealId() {
-    return $this->deal_id;
-  }
-
+  protected $deal_id;
 }

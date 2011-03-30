@@ -7,25 +7,25 @@ namespace Documents;
  *
  * @MappedSuperclass
  */
-abstract class Stats {
+abstract class Stats extends BaseDocument {
   /** @Id */
-  private $id;
+  protected $id;
 
   /** @Date */
-  private $day;
+  protected $day;
 
   /** @String */
-  private $host;
+  protected $host;
 
   /** @Field(type="int", name="l") */
-  private $likes;
+  protected $likes;
 
   /** @Field(type="int", name="mp") */
-  private $media_penetration;
-  
+  protected $media_penetration;
+
  /** @Field(type="int", name="cb") */
-  private $clickbacks;
-  
+  protected $clickbacks;
+
   /**
    * @Field(type="hash", name="s")
    *
@@ -41,7 +41,7 @@ abstract class Stats {
    *            )
    *    )
    */
-  private $services;
+  protected $services;
 
   /**
    * @Field(type="hash", name="t")
@@ -58,7 +58,7 @@ abstract class Stats {
    *            )
    *    )
    */
-  private $tags;
+  protected $tags;
 
   /**
    * @Field(type="hash", name="d")
@@ -96,7 +96,7 @@ abstract class Stats {
    *            )
    *    )
    */
-  private $demographics;
+  protected $demographics;
 
   /**
    * @Field(type="collection", name="h")
@@ -112,69 +112,5 @@ abstract class Stats {
    *         [24] => 14
    *    )
    */
-  private $likes_by_hour;
-
-  public function setId($id) {
-    $this->id = $id;
-  }
-
-  public function getId() {
-    return $this->id;
-  }
-  
-  public function setDay($day) {
-    $this->day = $day;
-  }
-
-  public function getDay() {
-    return $this->day;
-  }
-  
-  public function setHost($host) {
-    $this->host = $host;
-  }
-
-  public function getHost() {
-    return $this->host;
-  }
-
-  public function setLikes($likes) {
-    $this->likes = $likes;
-  }
-
-  public function getLikes() {
-    return $this->likes;
-  }
-
-  public function setServices($services) {
-    $this->services = $services;
-  }
-
-  public function getServices() {
-    return $this->services;
-  }
-
-  public function setTags($tags) {
-    $this->tags = $tags;
-  }
-
-  public function getTags() {
-    return $this->tags;
-  }
-
-  public function setDemographics($demographics) {
-    $this->demographics = $demographics;
-  }
-
-  public function getDemographics() {
-    return $this->demographics;
-  }
- 
-  public function setLikesByHour($likes_by_hour) {
-    $this->likes_by_hour = $likes_by_hour;
-  }
-
-  public function getLikesByHour() {
-    return $this->likes_by_hour;
-  }
+  protected $likes_by_hour;
 }

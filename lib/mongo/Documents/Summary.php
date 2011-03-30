@@ -7,48 +7,16 @@ namespace Documents;
  *
  * @MappedSuperclass
  */
-abstract class Summary {
+abstract class Summary extends BaseDocument {
   /** @Id */
-  private $id;
+  protected $id;
 
   /** @Field(type="int", name="cb") */
-  private $clickbacks;
+  protected $clickbacks;
 
   /** @Int */
-  private $likes;
+  protected $likes;
 
   /** @String */
-  private $host;
-
-  public function setId($id) {
-    $this->id = $id;
-  }
-
-  public function getId() {
-    return $this->id;
-  }
-    
-  public function setHost($host) {
-    $this->host = $host;
-  }
-
-  public function getHost() {
-    return $this->host;
-  }
-
-  public function setLikes($likes) {
-    $this->likes = $likes;
-  }
-
-  public function getLikes() {
-    return $this->likes;
-  }
-  
-  public function setClickbacks($clickbacks) {
-    $this->clickbacks = $clickbacks;
-  }
-
-  public function getClickbacks() {
-    return $this->clickbacks;
-  }
+  protected $host;
 }

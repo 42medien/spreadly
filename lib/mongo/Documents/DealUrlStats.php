@@ -13,13 +13,5 @@ use Documents\Stats;
  */
 class DealUrlStats extends DealStats {
   /** @String */
-  private $url;
-  
-  public function setUrl($url) {
-    $this->url = $url;
-  }
-
-  public function getUrl() {
-    return $this->url;
-  }
+  protected $url;
 }
