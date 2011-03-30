@@ -1,6 +1,11 @@
 <?php
 namespace Documents;
 
+/**
+ * the missing mongo BaseDocument
+ *
+ * @author Matthias Pfefferle
+ */
 class BaseDocument {
   /**
    * magic getter/setter
@@ -42,7 +47,7 @@ class BaseDocument {
     foreach ($array as $key => $value) {
       $function = "set".$this->toCamelCase($key);
 
-      if (method_exists($this, $function)) {
+      if (property_exists($this, $key)) {
         call_user_func(array($this, $function), $value);
       }
     }
