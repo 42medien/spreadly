@@ -4,7 +4,7 @@
  *
  * @author Matthias Pfefferle
  */
-class StatsFeeder {
+class Stats2Feeder {
 
   public static function getMongoCollection($pCollection) {
     return MongoDbConnector::getInstance()->getCollection(sfConfig::get('app_mongodb_database_name_stats'), $pCollection);
