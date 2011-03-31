@@ -52,7 +52,7 @@ class MongoManager {
    * @return Doctrine\ODM\MongoDB\DocumentManager
    */
   private static function instantiateDocumentManager($db = null) {
-    if ($db = "stats") {
+    if ($db == "stats") {
       $db = sfConfig::get("app_mongodb_database_name_stats");
     } else {
       $db = sfConfig::get("app_mongodb_database_name");
