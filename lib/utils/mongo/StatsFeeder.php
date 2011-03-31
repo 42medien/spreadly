@@ -26,10 +26,17 @@ class StatsFeeder {
    */
   public static function feed($pYiidActivity) {
     $activity = self::createAnalyticsActivity($pYiidActivity);
-    self::feedActivityStats($activity);
-    self::feedActivityUrlStats($activity);
-    self::feedDealStats($activity);
-    self::feedDealUrlStats($activity);
+
+    if($activity) {
+      self::feedActivityStats($activity);
+      self::feedActivityUrlStats($activity);
+      self::feedDealStats($activity);
+      self::feedDealUrlStats($activity);
+      self::feedHostSummary($activity);
+      self::feedUrlSummary($activity);
+      self::feedDealSummary($activity);
+      self::feedDealUrlSummary($activity);
+    }
   }
   
   /**
@@ -57,6 +64,7 @@ class StatsFeeder {
 
     $dm->persist($activity);
     $dm->flush();
+    
     return $activity;
   }
   
@@ -73,12 +81,18 @@ class StatsFeeder {
       'title'  => $pYiidActivity->getTitle(),
       'day' => new MongoDate(strtotime(date("Y-m-d", $pYiidActivity->getC()))),
       'date' => new MongoDate($pYiidActivity->getC()),
-      'gender' => $pUser->getGender()==false ? 'u' : $pUser->getGender(),
-      'user_id' => intval($pUser->getId()),
+
       'yiid_activity_id' => intval($pYiidActivity->getId()),
-      'age' => $pUser->getAge()==false ? "u" : intval($pUser->getAge()),
-      'relationship' => IdentityHelper::toMongoKey($pUser->getRelationshipState()),
+      'likes' => 1,
+      "media_penetration" => self::calcMediaPenetration($pYiidActivity),
+      'clickbacks' => 123,//TODO: intval($pYiidActivity->getCb()),
+
       'demographics' => self::fillDemographics($pYiidActivity),
+      'user_id' => intval($pUser->getId()),
+      'age' => $pUser->getAge()==false ? "u" : intval($pUser->getAge()),
+      'gender' => $pUser->getGender()==false ? 'u' : $pUser->getGender(),
+      'relationship' => IdentityHelper::toMongoKey($pUser->getRelationshipState()),
+
       'services' => self::fillServices($pYiidActivity),
       'likes_by_hour' => array($hourOfDay => 1),
       'hour_of_day' => $hourOfDay
@@ -86,15 +100,21 @@ class StatsFeeder {
     
     // add clickbacks
     if ($pYiidActivity->isClickback()) {
-      $lParams['cb'] =  1;
-      $lParams['cb_ya_id'] = $pYiidActivity->getCbReferer();
+      $lParams['clickback_likes'] =  1;
+      $lParams['clickback_like_yiid_activity_id'] = $pYiidActivity->getCbReferer();
     }
 
     // add tags
     if($pYiidActivity->getTags()) {
       foreach($pYiidActivity->getTags() as $tag) {
-        $lParams['t'][$tag] = array("l" => 1);
-      }      
+        $lParams['tags'][$tag] = array(
+          "l" => 1,
+          "mp" => self::calcMediaPenetration($pYiidActivity),
+          "cb" => 0);
+        if ($pYiidActivity->isClickback()) {
+          $lParams['tags'][$tag]["cbl"] = 1;
+        }
+      }
     }
 
     // add deal id
@@ -103,6 +123,18 @@ class StatsFeeder {
     }
 
     return $lParams;
+  }
+  
+  private static function calcMediaPenetration($pYiidActivity) {
+    $count = 0;
+    foreach($pYiidActivity->getOiids() as $lId) {
+      $lOi = OnlineIdentityTable::getInstance()->retrieveByPk($lId);
+      
+      if($lOi && $lOi->getFriendCount()==true) {
+        $count += intval($lOi->getFriendCount());
+      }
+    }
+    return $count;
   }
   
   private static function fillServices($pYiidActivity) {
@@ -121,15 +153,10 @@ class StatsFeeder {
   }
   
   private static function fillService($pYiidActivity, $pOi) {
-    $service = array('l' => 1);
-  
-    if($pOi->getFriendCount()==true) {
-      $service['mp'] = intval($pOi->getFriendCount());
-    }
+    $service = array('l' => 1, 'mp' => intval($pOi->getFriendCount()), 'cb' => 0);
   
     if ($pYiidActivity->isClickback()) {
-      $service[$pYiidActivity->getCbService()]['cb'] = 1;
-      $service[$pYiidActivity->getCbService()]['cb_ya_id'] = $pYiidActivity->getCbReferer();
+      $service['cbl'] = 1;
     }
     return $service;
   }
@@ -184,21 +211,68 @@ class StatsFeeder {
   private static function feedDealUrlStats($pAnalyticsActivity) {
     if($pAnalyticsActivity->getDeal_id()) {
       $lQuery = self::createUpsertForDayAndHost($pAnalyticsActivity, 'Documents\DealUrlStats');
-      $lQuery->field('url')->equals($pAnalyticsActivity->getUrl())    
+      $lQuery->field('url')->equals($pAnalyticsActivity->getUrl())
              ->field('d_id')->equals($pAnalyticsActivity->getDeal_id());
+      $lQuery->getQuery()->execute();
+    }
+  }
+
+  private static function feedHostSummary($pAnalyticsActivity) {
+    if(!$pAnalyticsActivity->getDeal_id()) {
+      $lQuery = self::createUpsertForHost($pAnalyticsActivity, 'Documents\HostSummary');
+      self::addSummaryIncToQuery($lQuery, $pAnalyticsActivity);
+      $lQuery->getQuery()->execute();
+    }
+  }
+  
+  private static function feedUrlSummary($pAnalyticsActivity) {
+    if(!$pAnalyticsActivity->getDeal_id()) {
+      $lQuery = self::createUpsertForHost($pAnalyticsActivity, 'Documents\UrlSummary');
+      $lQuery->field('url')->equals($pAnalyticsActivity->getUrl());
+      self::addSummaryIncToQuery($lQuery, $pAnalyticsActivity);
+      $lQuery->getQuery()->execute();
+    }
+  }
+
+  private static function feedDealSummary($pAnalyticsActivity) {
+    if($pAnalyticsActivity->getDeal_id()) {
+      $lQuery = self::createUpsertForHost($pAnalyticsActivity, 'Documents\DealSummary');
+      $lQuery->field('d_id')->equals($pAnalyticsActivity->getDeal_id());
+      self::addSummaryIncToQuery($lQuery, $pAnalyticsActivity);
+      $lQuery->getQuery()->execute();
+    }
+  }
+  
+  private static function feedDealUrlSummary($pAnalyticsActivity) {
+    if($pAnalyticsActivity->getDeal_id()) {
+      $lQuery = self::createUpsertForHost($pAnalyticsActivity, 'Documents\DealUrlSummary');
+      $lQuery->field('url')->equals($pAnalyticsActivity->getUrl())
+             ->field('d_id')->equals($pAnalyticsActivity->getDeal_id());
+      self::addSummaryIncToQuery($lQuery, $pAnalyticsActivity);
       $lQuery->getQuery()->execute();
     }
   }
   
   private static function createUpsertForDayAndHost($pAnalyticsActivity, $pDocumentString) {
     $dm = MongoManager::getStatsDM();
+    $lQuery = self::createUpsertForHost($pAnalyticsActivity, $pDocumentString);
+    
+    $lQuery->field('day')->equals($pAnalyticsActivity->getDay())
+           ->field('cb')->inc(intval($pAnalyticsActivity->getClickbacks()))
+           ->field('cbl')->inc(intval($pAnalyticsActivity->getClickback_likes()));
+    
+    self::addServicesIncToQuery($lQuery, $pAnalyticsActivity);
+    self::addTagsIncToQuery($lQuery, $pAnalyticsActivity);
+    self::addDemographicsIncToQuery($lQuery, $pAnalyticsActivity);
+    return $lQuery;
+  }
+
+  private static function createUpsertForHost($pAnalyticsActivity, $pDocumentString) {
+    $dm = MongoManager::getStatsDM();
     $lQuery = $dm->createQueryBuilder($pDocumentString)
                  ->findAndUpdate()
                  ->upsert()
-                 ->field('day')->equals($pAnalyticsActivity->getDay())
                  ->field('host')->equals($pAnalyticsActivity->getHost());
-    self::addServicesIncToQuery($lQuery, $pAnalyticsActivity);
-    self::addDemographicsIncToQuery($lQuery, $pAnalyticsActivity);
     return $lQuery;
   }
 
@@ -211,12 +285,29 @@ class StatsFeeder {
     return $pQuery;
   }
 
+  private static function addTagsIncToQuery($pQuery, $pAnalyticsActivity) {
+    foreach ($pAnalyticsActivity->getTags() as $service => $data) {
+      foreach ($data as $type => $value) {
+        $pQuery->field('t.'.$service.'.'.$type)->inc($value);
+      }
+    }
+    return $pQuery;
+  }
+  
   private static function addDemographicsIncToQuery($pQuery, $pAnalyticsActivity) {
     foreach ($pAnalyticsActivity->getDemographics() as $service => $data) {
       foreach ($data as $type => $value) {
         $pQuery->field('d.'.$service.'.'.$type)->inc($value);
       }
     }
+    return $pQuery;
+  }
+  
+  private static function addSummaryIncToQuery($pQuery, $pAnalyticsActivity) {
+    $pQuery->field('l')->inc(intval($pAnalyticsActivity->getLikes()));
+    $pQuery->field('mp')->inc(intval($pAnalyticsActivity->getMedia_penetration()));
+    $pQuery->field('cb')->inc(intval($pAnalyticsActivity->getClickbacks()));
+    $pQuery->field('cbl')->inc(intval($pAnalyticsActivity->getClickbacks_likes()));
     return $pQuery;
   }
 }

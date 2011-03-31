@@ -22,6 +22,9 @@ class AnalyticsActivity extends Stats {
   /** @Field(type="int", name="ya_id") */
   protected $yiid_activity_id;
 
+  /** @Field(type="int", name="cbl_ya_id") */
+  protected $clickback_like_yiid_activity_id;
+
   /** @Field(type="int", name="d_id") */
   protected $deal_id;
   

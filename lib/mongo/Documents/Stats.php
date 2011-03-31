@@ -23,8 +23,11 @@ abstract class Stats extends BaseDocument {
   /** @Field(type="int", name="mp") */
   protected $media_penetration;
 
- /** @Field(type="int", name="cb") */
+  /** @Field(type="int", name="cb") */
   protected $clickbacks;
+
+  /** @Field(type="int", name="cbl") */
+  protected $clickback_likes;
 
   /**
    * @Field(type="hash", name="s")
@@ -35,9 +38,10 @@ abstract class Stats extends BaseDocument {
    *    (
    *        [twitter] => Array
    *            (
-   *                [cb] => 4
-   *                [mp] => 1040
    *                [l] => 16
+   *                [mp] => 1040
+   *                [cb] => 123
+   *                [cbl] => 2
    *            )
    *    )
    */
@@ -52,9 +56,10 @@ abstract class Stats extends BaseDocument {
    *    (
    *        [affen] => Array
    *            (
-   *                [cb] => 9
-   *                [mp] => 810
-   *                [l] => 14
+   *                [l] => 16
+   *                [mp] => 1040
+   *                [cb] => 123
+   *                [cbl] => 2
    *            )
    *    )
    */

@@ -98,7 +98,7 @@ class analyticsActions extends sfActions
     }
     return $lSorted;
   }
-  /*
+
   public function executeTest(sfWebRequest $request) {
     $ya = YiidActivityTable::retrieveById("4d931ef28ead0ea53b060000");
 
@@ -106,5 +106,5 @@ class analyticsActions extends sfActions
 
     return $this->renderText("hi");
   }
-  */
+  
 }

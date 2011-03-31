@@ -1,8 +1,6 @@
 <?php
 namespace Repositories;
 
-use Doctrine\ODM\MongoDB\DocumentRepository;
-
-class DealUrlStatsRepository extends DocumentRepository
+class DealUrlStatsRepository extends StatsRepository
 {
 }
