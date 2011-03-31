@@ -25,7 +25,7 @@ class MongoManager {
    * @return Doctrine\ODM\MongoDB\DocumentManager
    */
   public static function getStatsDM() {
-    if (null === self::$document_manager) {
+    if (null === self::$stats_document_manager) {
       self::$stats_document_manager = self::instantiateDocumentManager("stats");
     }
 
