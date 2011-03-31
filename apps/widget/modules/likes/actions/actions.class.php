@@ -18,6 +18,7 @@ class likesActions extends sfActions
   public function executeIndex(sfWebRequest $request) {
     $lUserId = $this->getUser()->getUserId();
 
-    $this->pActivities = YiidActivityTable::retrieveLatestByUserId($lUserId);
+    $dm = MongoManager::getDM();
+    $this->pActivities = $dm->getRepository('Documents\YiidActivity')->findLatestByUserId($lUserId);
   }
 }
