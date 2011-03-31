@@ -14,79 +14,88 @@ use \sfException,
     \SocialObjectTable,
     \YiidActivityTable,
     \Doctrine,
-    \MongoId;
+    \MongoId,
+    \MongoManager,
+    \sfProjectConfiguration;
 
 /**
- * @Document(collection="yiid_activity")
+ * @Document(collection="yiid_activity", repositoryClass="Repositories\YiidActivityRepository")
  * @HasLifecycleCallbacks
+ * @InheritanceType("COLLECTION_PER_CLASS")
  *
+ * @author Matthias Pfefferle
+ * @author Hannes Schippmann
  */
-class YiidActivity {
+class YiidActivity extends BaseDocument {
   /** @Id */
-  private $id;
+  protected $id;
 
   /** @String */
-  private $url;
+  protected $url;
 
   /** @String */
-  private $url_hash;
+  protected $url_hash;
 
-  /** @Float */
-  private $u_id;
-
-  /** @Collection */
-  private $oiids;
+  /** @Int */
+  protected $u_id;
 
   /** @Collection */
-  private $cids;
+  protected $oiids;
 
   /** @Collection */
-  private $tags;
+  protected $cids;
+
+  /** @Collection */
+  protected $tags;
 
   /**
    * @String
    */
-  private $so_id;
+  protected $so_id;
 
-  /** @Float */
-  private $score;
-
-  /** @String */
-  private $like;
-
-  /** @Float */
-  private $d_id;
+  /** @Int */
+  protected $score;
 
   /** @String */
-  private $c_code;
+  protected $like;
+
+  /** @Int */
+  protected $d_id;
 
   /** @String */
-  private $title;
+  protected $c_code;
 
   /** @String */
-  private $descr;
+  protected $title;
 
   /** @String */
-  private $comment;
+  protected $descr;
+
+  /** @String */
+  protected $comment;
 
   /** @Date */
-  private $c;
+  protected $c;
 
   /** @String */
-  private $thumb;
+  protected $thumb;
 
   /** @String */
-  private $cb_referer;
+  protected $cb_referer;
 
   /** @String */
-  private $cb_service;
+  protected $cb_service;
 
-  public function setId($id) {
-    $this->id = $id;
-  }
+  /** @NotSaved */
+  protected $clickback;
 
-  public function getId() {
-    return $this->id;
+  /**
+   * save this shit!
+   */
+  public function save() {
+    $dm = MongoManager::getDM();
+    $dm->persist($this);
+    $dm->flush();
   }
 
   public function setTitle($title) {
@@ -94,17 +103,9 @@ class YiidActivity {
     $this->title = $title;
   }
 
-  public function getTitle() {
-    return $this->title;
-  }
-
   public function setDescr($desc) {
     $desc = StringUtils::cleanupString($desc);
     $this->descr = $desc;
-  }
-
-  public function getDescr() {
-    return $this->descr;
   }
 
   public function setComment($comment) {
@@ -124,22 +125,6 @@ class YiidActivity {
     }
   }
 
-  public function setCbReferer($cbreferer) {
-    $this->cb_referer = $cbreferer;
-  }
-
-  public function getCbReferer() {
-    return $this->cb_referer;
-  }
-
-  public function setCbService($cbservice) {
-    $this->cb_service = $cbservice;
-  }
-
-  public function getCbService() {
-    return $this->cb_service;
-  }
-
   public function generateHashtag() {
     return $this->isDeal() ? '#deal' : '#like';
   }
@@ -156,60 +141,12 @@ class YiidActivity {
     $this->url_hash = md5($tomd5);
   }
 
-  public function getUrl() {
-    return $this->url;
-  }
-
-  public function setUId($userId) {
-    $this->u_id = $userId;
-  }
-
-  public function getUId() {
-    return $this->u_id;
-  }
-
   public function setOiids($oiids) {
     if (!is_array($oiids)) {
       $oiids = explode(',', urldecode($oiids));
     }
 
     $this->oiids = $oiids;
-  }
-
-  public function getOiids() {
-    return $this->oiids;
-  }
-
-  public function getThumb() {
-    return $this->thumb;
-  }
-
-  public function setVerb($verb) {
-    $this->verb = $verb;
-  }
-
-  public function getVerb() {
-    return $this->verb;
-  }
-
-  public function getSoId() {
-    return $this->so_id;
-  }
-
-  public function setCids($cids) {
-    $this->cids = $cids;
-  }
-
-  public function getCids() {
-    return $this->cids;
-  }
-
-  public function setC($c) {
-    $this->c = $c;
-  }
-
-  public function getC() {
-    return $this->c;
   }
 
   /**
@@ -241,18 +178,6 @@ class YiidActivity {
     if ($tags) {
       $this->tags = $tags;
     }
-  }
-
-  public function getTags() {
-    return $this->tags;
-  }
-
-  public function setDId($did) {
-    $this->d_id = $did;
-  }
-
-  public function getDId() {
-    return $this->d_id;
   }
 
   /**
@@ -505,47 +430,5 @@ class YiidActivity {
     } else {
       return null;
     }
-  }
-
-  /**
-   * ninja fromArray method
-   *
-   * @param array $array
-   */
-  public function fromArray($array = array()) {
-    foreach ($array as $key => $value) {
-      $function = "set".$this->toCamelCase($key);
-
-      if (method_exists($this, $function)) {
-        call_user_func(array($this, $function), $value);
-      }
-    }
-  }
-
-  /**
-   * Translates a string with underscores into camel case (e.g. first_name -> firstName)
-   *
-   * @param string $str String in underscore format
-   * @param bool $capitalise_first_char If true, capitalise the first char in $str
-   * @return string $str translated into camel caps
-   */
-  public function toCamelCase($str, $capitalise_first_char = true) {
-    if($capitalise_first_char) {
-      $str[0] = strtoupper($str[0]);
-    }
-    $func = create_function('$c', 'return strtoupper($c[1]);');
-    return preg_replace_callback('/_([a-z])/', $func, $str);
-  }
-
-  /**
-   * Translates a camel case string into a string with underscores (e.g. firstName -> first_name)
-   *
-   * @param string $str String in camel case format
-   * @return string $str Translated into underscore format
-   */
-  public function fromCamelCase($str) {
-    $str[0] = strtolower($str[0]);
-    $func = create_function('$c', 'return "_" . strtolower($c[1]);');
-    return preg_replace_callback('/([A-Z])/', $func, $str);
   }
 }
