@@ -16,7 +16,7 @@
   		<?php $i = 1;?>
   		<?php foreach($pDeals as $lDeal) { ?>
   			<tr>
-  				<td height="44" align="center" class="first"><div><?php echo $lDeal->getSummary(); ?></div></td>
+  				<td height="44" align="left" class="first"><div class="padleft"><?php echo $lDeal->getSummary(); ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $i; ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $i+10; ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $i+50; ?></div></td>
@@ -48,7 +48,7 @@
 	  		<?php $i = 1;?>
 	  		<?php foreach($pVerifiedDomains as $lDomain) { ?>
 	  			<tr class="scrollrow">
-	  				<td height="44" align="center" class="first"><div><?php echo link_to($lDomain->getUrl(), '@analytics?host_id='.$lDomain->getId()); ?></div></td>
+	  				<td height="44" align="left" class="first"><div class="padleft"><?php echo link_to($lDomain->getUrl(), '@analytics?host_id='.$lDomain->getId()); ?></div></td>
 	  		    <td align="center" valign="middle"><div><?php echo $pActivityCount[$lDomain->getId()]; ?></div></td>
 	  		    <td align="center" valign="middle" ><div><?php echo 1603-$i; ?></div></td>
 	  				<td height="44" align="center" class="last"><div><?php echo $i+674; ?></div></td>
@@ -83,7 +83,7 @@
 	  		<?php $i = 1;?>
 	  		<?php foreach($pVerifiedDomains as $lDomain) { ?>
 	  			<tr class="scrollrow">
-	  				<td height="44" align="center" class="first"><div><?php echo link_to($lDomain->getUrl(), '@analytics?host_id='.$lDomain->getId()); ?></div></td>
+	  				<td height="44" align="left" class="first"><div class="padleft"><?php echo link_to($lDomain->getUrl(), '@analytics?host_id='.$lDomain->getId()); ?></div></td>
 	  		    <td align="center" valign="middle"><div><?php echo $pActivityCount[$lDomain->getId()]; ?></div></td>
 	  		    <td align="center" valign="middle" ><div><?php echo 1603-$i; ?></div></td>
 	  				<td height="44" align="center" class="last"><div><?php echo $i+674; ?></div></td>

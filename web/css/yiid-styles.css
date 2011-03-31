@@ -576,7 +576,11 @@ div.sortlink{
 }
 
 .data-tablebox td div{
-  border-right: 1px solid #777575;
+  border-right: 1px solid #777575;  
+}
+
+.data-tablebox td div.padleft{
+  padding-left: 10px;
 }
 
 
