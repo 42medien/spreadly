@@ -277,27 +277,33 @@ class StatsFeeder {
   }
 
   private static function addServicesIncToQuery($pQuery, $pAnalyticsActivity) {
-    foreach ($pAnalyticsActivity->getServices() as $service => $data) {
-      foreach ($data as $type => $value) {
-        $pQuery->field('s.'.$service.'.'.$type)->inc($value);
+    if($pAnalyticsActivity->getServices()) {
+      foreach ($pAnalyticsActivity->getServices() as $service => $data) {
+        foreach ($data as $type => $value) {
+          $pQuery->field('s.'.$service.'.'.$type)->inc($value);
+        }
       }
     }
     return $pQuery;
   }
 
   private static function addTagsIncToQuery($pQuery, $pAnalyticsActivity) {
-    foreach ($pAnalyticsActivity->getTags() as $service => $data) {
-      foreach ($data as $type => $value) {
-        $pQuery->field('t.'.$service.'.'.$type)->inc($value);
-      }
+    if($pAnalyticsActivity->getTags()) {
+      foreach ($pAnalyticsActivity->getTags() as $service => $data) {
+        foreach ($data as $type => $value) {
+          $pQuery->field('t.'.$service.'.'.$type)->inc($value);
+        }
+      }      
     }
     return $pQuery;
   }
   
   private static function addDemographicsIncToQuery($pQuery, $pAnalyticsActivity) {
-    foreach ($pAnalyticsActivity->getDemographics() as $service => $data) {
-      foreach ($data as $type => $value) {
-        $pQuery->field('d.'.$service.'.'.$type)->inc($value);
+    if($pAnalyticsActivity->getDemographics()) {
+      foreach ($pAnalyticsActivity->getDemographics() as $service => $data) {
+        foreach ($data as $type => $value) {
+          $pQuery->field('d.'.$service.'.'.$type)->inc($value);
+        }
       }
     }
     return $pQuery;
