@@ -74,7 +74,7 @@ class YiidActivity extends BaseDocument {
   /** @String */
   protected $comment;
 
-  /** @Date */
+  /** @Int */
   protected $c;
 
   /** @String */
@@ -213,7 +213,6 @@ class YiidActivity extends BaseDocument {
    */
   public function postPersist() {
     UserTable::updateLatestActivityForUser($this->getUId(), time());
-    $this->updateSocialObjectInfo();
     $this->postIt();
     StatsFeeder::feed($this);
   }
@@ -247,8 +246,9 @@ class YiidActivity extends BaseDocument {
    */
   private function verifyAndSaveOnlineIdentities() {
     $lVerifiedOIs = OnlineIdentityTable::retrieveVerified($this->getUId(), $this->getOiids());
+    $lCheck = $lVerifiedOIs->toArray();
 
-    if (!$lVerifiedOIs) {
+    if (!$lCheck || empty($lCheck)) {
       throw new sfException("no valid online identities available", 0);
     }
 
@@ -269,8 +269,9 @@ class YiidActivity extends BaseDocument {
    */
   private function updateDealInfo() {
     $deal = DealTable::getActiveDealByHostAndTagsAndUserId($this->getUrl(), $this->getTags(), $this->getUId());
+    $dm = MongoManager::getDM();
     // sets the deal-id if it's not empty
-    if ($deal && $deal->isActive() && !\YiidActivityTable::getByDealIdAndUserId($deal->getId(), $this->getUId())) {
+    if ($deal && $deal->isActive() && !$dm->getRepository('Documents\YiidActivity')->findOneBy(array("d_id" => $deal->getId(), "u_id" => $this->getUId()))) {
       if ($coupon = $deal->popCoupon()) {
         $this->setDId(intval($deal->getId()));
         $this->setCCode($coupon);
@@ -279,18 +280,12 @@ class YiidActivity extends BaseDocument {
   }
 
   /**
-   * updates the social object informations
-   */
-  private function updateSocialObjectInfo() {
-    $lSocialObject = SocialObjectTable::retrieveByPk($this->getSoId());
-    $lSocialObject->updateObjectOnLikeActivity($this);
-  }
-
-  /**
    * checks if the social-object exists or creates a new, if not
    */
   private function upsertSocialObject() {
-    $so = SocialObjectTable::retrieveOrCreate($this);
+    $dm = MongoManager::getDM();
+    $so = $dm->getRepository('Documents\SocialObject')->fromYiidActivity($this);
+
     $this->setSoId($so->getId());
   }
 
@@ -426,7 +421,8 @@ class YiidActivity extends BaseDocument {
    */
   public function getSocialObject() {
     if ($this->getSoId()) {
-      return SocialObjectTable::getInstance()->retrieveByPK($this->getSoId());
+      $dm = MongoManager::getDM();
+      return $dm->getRepository('Documents\YiidActivity')->findOneBy(array("id" => $this->getSoId()));
     } else {
       return null;
     }

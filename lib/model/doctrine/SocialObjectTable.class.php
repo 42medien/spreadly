@@ -16,6 +16,8 @@ class SocialObjectTable extends Doctrine_Table {
   /**
    * Save a given object to our MongoDb
    * @param unknown_type $lObject
+   *
+   * @deprecated
    */
   public static function saveObjectToMongoDb($lObject) {
     $lCollection = self::getMongoCollection();
@@ -31,19 +33,21 @@ class SocialObjectTable extends Doctrine_Table {
    *
    * @param Array() $pIdentifier
    * @param Array() $pManipualtior
+   *
+   * @deprecated
    */
   public static function updateObjectInMongoDb($pIdentifier, $pManipualtior) {
     $lCollection = self::getMongoCollection();
     $lCollection->update($pIdentifier, $pManipualtior, array('upsert' => true));
   }
-  
-  public static function retrieveOrCreate($pActivity) {    
+
+  public static function retrieveOrCreate($pActivity) {
     $lSocialObject = $pActivity->getSocialObject();
     if (!$lSocialObject) {
       if (SocialObjectTable::initializeObjectFromUrl($pActivity->getUrl()) === false) {
         return false;
       }
-      
+
       $lSocialObject = SocialObjectTable::retrieveByAliasUrl($pActivity->getUrl());
       $lSocialObject->updateObjectMasterData($pActivity->getTitle(), $pActivity->getDescr(), $pActivity->getThumb());
     }
@@ -164,7 +168,6 @@ class SocialObjectTable extends Doctrine_Table {
   }
 
   /**
-   *
    * returns an array with userid's of your friends, who acted on a given social object
    *
    * @param string $pSocialObjectId

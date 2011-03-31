@@ -14,11 +14,11 @@ class YiidActivityRepository extends DocumentRepository
    * @param int $pLimit default = 10
    * @return array
    */
-  public function findLatestByUserId($pUserId, $pLimit = 10) {
+  public function findLatestByUserId($u_id, $limit = 10) {
     $results = $this->createQueryBuilder()
                     ->hydrate(true)
-                    ->limit($pLimit)
-                    ->field("u_id")->equals(intval($pUserId))
+                    ->limit($limit)
+                    ->field("u_id")->equals(intval($u_id))
                     ->field("d_id")->exists(false)
                     ->sort("c", "desc")
                     ->getQuery()->execute();
