@@ -60,10 +60,10 @@ class MongoManager {
 
     $config = new Configuration();
 
-    $config->setProxyDir(sfConfig::get('sf_cache_dir').'/Proxies');
+    $config->setProxyDir(sfConfig::get('sf_lib_dir').'/mongo/Proxies');
     $config->setProxyNamespace('Proxies');
 
-    $config->setHydratorDir(sfConfig::get('sf_cache_dir').'/Hydrators');
+    $config->setHydratorDir(sfConfig::get('sf_lib_dir').'/mongo/Hydrators');
     $config->setHydratorNamespace('Hydrators');
 
     $config->setDefaultDB($db);
