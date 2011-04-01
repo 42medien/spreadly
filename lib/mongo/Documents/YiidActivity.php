@@ -296,7 +296,7 @@ class YiidActivity extends BaseDocument {
       throw new sfException("UserId or Url not present", 0);
     }
 
-    $activity = $dm->getRepository('Documents\YiidActivity')->findOneBy(array("social_object.id" => $this->getSocialObject()->getId(), "u_id" => $this->getUId(), "deal_id" => $this->getDeal()));
+    $activity = $dm->getRepository('Documents\YiidActivity')->findOneBy(array("social_object.id" => $this->getSocialObject()->getId(), "u_id" => intval($this->getUId()), "deal_id" => $this->getDeal()));
 
     if ($activity) {
       throw new sfException("user has already liked this url", 0);

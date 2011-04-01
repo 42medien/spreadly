@@ -15,6 +15,7 @@ class likeActions extends sfActions {
    * @param sfRequest $request A request object
    */
   public function executeIndex(sfWebRequest $request) {
+    $dm = MongoManager::getDM();
     // check if already liked and redirect
     $lUrl = $request->getParameter("url", null);
 
@@ -30,7 +31,7 @@ class likeActions extends sfActions {
 
       // if there is an active deal
       if($this->pActiveDeal) {
-        $this->pActivity = YiidActivityTable::getByDealIdAndUserId($this->pActiveDeal->getId(), $this->getUser()->getId());
+        $this->pActivity = $dm->getRepository("Documents\YiidActivity")->findOneBy(array("d_id" => intval($this->pActiveDeal->getId()), "u_id" => intval($this->getUser()->getId())));
 
         // check if user has already dealt
         if(!$this->pActivity) {
@@ -41,7 +42,7 @@ class likeActions extends sfActions {
           $this->setTemplate('deal');
           return sfView::SUCCESS;
         } else {
-          $this->pActivity = YiidActivityTable::retrieveByUserIdAndUrl($this->getUser()->getId(), $lUrl);
+          $this->pActivity = $dm->getRepository("Documents\YiidActivity")->findOneBy(array("url" => $lUrl, "u_id" => intval($this->getUser()->getId())));
 
           // if user has already liked
           if($this->pActivity) {
@@ -50,7 +51,7 @@ class likeActions extends sfActions {
         }
       }
 
-      $this->pActivity = YiidActivityTable::retrieveByUserIdAndUrl($this->getUser()->getId(), $lUrl);
+      $this->pActivity = $dm->getRepository("Documents\YiidActivity")->findOneBy(array("url" => $lUrl, "u_id" => intval($this->getUser()->getId())));
 
       if($this->pActivity) {
         $this->redirect('@widget_likes');
@@ -88,7 +89,7 @@ class likeActions extends sfActions {
   		}
 		}
 
-  	$lActivity = new YiidActivity();
+  	$lActivity = new Documents\YiidActivity();
     $lActivity->fromArray($lParams);
 
     // try to save activity
