@@ -17,7 +17,7 @@ class apiActions extends sfActions {
     $lReturn['success'] = false;
 
     if($lUserId && $lSocialObjectId) {
-    	$lFriends = SocialObjectTable::getFriendIdsForSocialObject($lSocialObjectId, $lUserId);
+    	$lFriends = UserTable::getFriendIdsBySocialObjectId($lSocialObjectId, $lUserId);
 
     	if($lFriends) {
     		$lReturn['success'] = true;
