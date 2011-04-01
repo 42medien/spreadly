@@ -312,4 +312,26 @@ class UserTable extends Doctrine_Table {
     $lUser->setLastActivity($pTimestamp);
     $lUser->save();
   }
+
+  /**
+   * returns an array with userid's of your friends, who acted on a given social object
+   *
+   * @param string $pSocialObjectId
+   * @param int $pUserId
+   * @return array()
+   * @author weyandch
+   */
+  public static function getFriendIdsBySocialObjectId($pSocialObjectId, $pUserId) {
+    $dm = MongoManager::getDM();
+    $lSocialObject = $dm->getRepository('Documents\SocialObject')->findOne($pSocialObjectId);
+
+    $lUser = UserTable::getInstance()->find($pUserId);
+    $lConnectedUsers = $lUser->getIdsOfFriends();
+
+    $lFriendsActive = array();
+    if ($lSocialObject && $lConnectedUsers) {
+      $lFriendsActive = array_intersect($lSocialObject->getUids(), $lConnectedUsers);
+    }
+    return $lFriendsActive;
+  }
 }

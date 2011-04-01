@@ -24,8 +24,6 @@ class SocialObjectRepository extends DocumentRepository
     $normalized_url = UrlUtils::skipTrailingSlash($original_url);
     $aliases = array_values(array_unique(array(md5($shared_url), md5($original_url), md5($normalized_url))));
 
-    var_dump($aliases);
-
     $result = $this->createQueryBuilder()
                    ->findAndUpdate()
                    ->field('url_hash')->equals(md5($normalized_url))
