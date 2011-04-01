@@ -48,10 +48,8 @@ class YiidActivity extends BaseDocument {
   /** @Collection */
   protected $tags;
 
-  /**
-   * @String
-   */
-  protected $so_id;
+  /** @ReferenceOne(targetDocument="Documents\SocialObject", cascade="all") */
+  protected $social_object;
 
   /** @Int */
   protected $score;
@@ -286,18 +284,19 @@ class YiidActivity extends BaseDocument {
     $dm = MongoManager::getDM();
     $so = $dm->getRepository('Documents\SocialObject')->fromYiidActivity($this);
 
-    $this->setSoId($so->getId());
+    $this->setSocialObject($so);
   }
 
   /**
    * checks if user is allowed to like this entry
    */
   private function doValidate() {
+    $dm = MongoManager::getDM();
     if (!$this->getUId() || !$this->getUrl()) {
       throw new sfException("UserId or Url not present", 0);
     }
 
-    $activity = YiidActivityTable::retrieveActionOnObjectById($this->getSoId(), $this->getUId(), $this->getDeal());
+    $activity = $dm->getRepository('Documents\YiidActivity')->findOneBy(array("social_object.id" => $this->getSocialObject()->getId(), "u_id" => $this->getUId(), "deal_id" => $this->getDeal()));
 
     if ($activity) {
       throw new sfException("user has already liked this url", 0);
@@ -409,20 +408,6 @@ class YiidActivity extends BaseDocument {
       $lTagArray = array_unique($lTagArray);
 
       return $lTagArray;
-    } else {
-      return null;
-    }
-  }
-
-  /**
-   * Returns the associated SocialObject
-   *
-   * @return SocialObject|null
-   */
-  public function getSocialObject() {
-    if ($this->getSoId()) {
-      $dm = MongoManager::getDM();
-      return $dm->getRepository('Documents\YiidActivity')->findOneBy(array("id" => $this->getSoId()));
     } else {
       return null;
     }
