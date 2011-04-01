@@ -18,6 +18,8 @@ class staticActions extends sfActions {
   }
 
   public function executeLike(sfWebRequest $request) {
+    $dm = MongoManager::getDM();
+
     if ($request->getParameter("url", null)) {
       $this->getUser()->setAttribute("static_like_with_params", $request->getUri(), "popup");
       $this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "popup");
@@ -35,7 +37,7 @@ class staticActions extends sfActions {
     if (!empty($lUrl) && UrlUtils::isUrlValid($lUrl)) {
 	    $lUser = $this->getUser()->getUser();
 
-	    $lSocialObject = SocialObjectTable::retrieveByAliasUrl($lUrl);
+	    $lSocialObject = $dm->getRepository('Documents\SocialObject')->findOneBy(array('alias' => md5($lUrl)));
       $lDeal = DealTable::getRunningByHost($lUrl);
 
       if($lSocialObject) {

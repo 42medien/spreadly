@@ -92,21 +92,3 @@ YiidActivity:
       type:      string(255)
     comment:
       type:      string
-
-SocialAdvertisement:
-  actAs:
-    Timestampable: ~
-    I18n:
-      fields: [title, description]
-  columns:
-    title:
-      type: string(40)
-    description:
-      type: string(255)
-    url:
-      type: string(255)
-    so_id:
-      type: string(40)
-    is_active:
-      type: boolean
-      default: false
