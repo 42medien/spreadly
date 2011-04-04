@@ -113,14 +113,10 @@ EOF;
         $this->logSection('mongo tasks', 'i am the mongo killer! now killing:');
         $this->logSection('mongo tasks', '(host: '.sfConfig::get('app_mongodb_host').' collection: '.sfConfig::get('app_mongodb_database_name').')');
         MongoDbConnector::getInstance()->getDatabase(sfConfig::get('app_mongodb_database_name'))->drop();
-        $this->runTask('yiid:activity-testdata', array(), array('env' => $opts['env']));
-        //$this->getFilesystem()->execute("php data/fixtures/initializeMongoObjects.php");
-      }
-      if ($options['no-confirmation'] || "y" == $this->ask("Stats Mongo auf dem ".$env.'-System plattmachen? (host: '.sfConfig::get('app_mongodb_host').' collection: '.sfConfig::get('app_mongodb_database_name_stats').") (y/N)")) {
-        $this->logSection('mongo tasks', 'i am the mongo killer! now killing:');
         $this->logSection('mongo tasks', ' (host: '.sfConfig::get('app_mongodb_host').' collection: '.sfConfig::get('app_mongodb_database_name_stats').')');
         MongoDbConnector::getInstance()->getDatabase(sfConfig::get('app_mongodb_database_name_stats'))->drop();
-        //$this->runTask('yiid:mongo-testdata');
+        $this->runTask('yiid:activity-testdata', array(), array('env' => $opts['env']));
+        //$this->getFilesystem()->execute("php data/fixtures/initializeMongoObjects.php");
       }
     }
 
