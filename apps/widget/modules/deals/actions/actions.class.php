@@ -24,15 +24,6 @@ class dealsActions extends sfActions
     $this->setLayout('layout');
   }
 
-  public function executeExample(sfWebRequest $request)
-  {
-    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('deals/js_init_deals.js'));
-    //$this->forward('default', 'module');
-    $this->pActiveFormerlyKnownAsYiidActivitiesOfActiveDealForUser = YiidActivityTable::retrieveDealActivitiesByUserId($this->getUser()->getId());
-
-    $this->setLayout('layout');
-  }
-
   public function executeGet_coupon_used(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
 		$lActivityId = $request->getParameter('activityid');
