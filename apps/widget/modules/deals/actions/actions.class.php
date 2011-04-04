@@ -15,11 +15,11 @@ class dealsActions extends sfActions
   *
   * @param sfRequest $request A request object
   */
-  public function executeIndex(sfWebRequest $request)
-  {
+  public function executeIndex(sfWebRequest $request) {
+    $dm = MongoManager::getDM();
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('deals/js_init_deals.js'));
     //$this->forward('default', 'module');
-    $this->pActiveFormerlyKnownAsYiidActivitiesOfActiveDealForUser = YiidActivityTable::retrieveDealActivitiesByUserId($this->getUser()->getId());
+    $this->pActiveFormerlyKnownAsYiidActivitiesOfActiveDealForUser = $dm->getRepository('Documents\YiidActivity')->findBy(array("u_id" => intval($this->getUser()->getId()), 'd_id' => array('$exists' => true)), array('hydrate' => true));
 
     $this->setLayout('layout');
   }

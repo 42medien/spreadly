@@ -4,9 +4,12 @@
 	</div>
 </div>
 <div class="wht-contentbox clearfix">
-	<?php if(count($pActiveFormerlyKnownAsYiidActivitiesOfActiveDealForUser) > 0) { ?>
+	<?php if($pActiveFormerlyKnownAsYiidActivitiesOfActiveDealForUser->hasNext()) { ?>
 		<div class="popwidecol alignright" id="coupon-used-box">
-			<?php include_component('deals', 'coupon_used', array('pActivityId' => $pActiveFormerlyKnownAsYiidActivitiesOfActiveDealForUser[0]->getId())); ?>
+			<?php
+			  $pActivityId = $pActiveFormerlyKnownAsYiidActivitiesOfActiveDealForUser->getNext();
+			  include_component('deals', 'coupon_used', array('pActivityId' => strval($pActivityId["_id"])));
+			?>
 
 	  </div>
 
