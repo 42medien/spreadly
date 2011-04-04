@@ -88,25 +88,18 @@ EOF;
       $url = $this->oneOfThese($urls);
       $tag = $this->oneOfThese($tags);
       $user = $this->oneOfThese($users);
-      $ra = $this->random(10000);
+      $ra = $this->random(1000);
       $array = array(
         'url' => "http://$url/$ra",
         'url_hash' => "hash.$ra",
         'u_id' => $user->getId(),
         'oiids' => $user->getOnlineIdentitesAsArray(),
-        'cids' => '',
-        'tags' => '',
-        'social_object' => '',
-        'score' => '',
-        'like' => '',
-        'd_id' => '',
-        'c_code' => '',
         'tags' => $tag,
         'title' => "$url title",
         'descr' => "$url description",
         'comment' => "$url comment",
         'c' => strtotime($this->random(10)." days ago"),
-        'thumb' => '',
+        'cb' => $this->randBoolean() ? $this->random(30) : 0,
         'cb_referer' => $this->oneOfThese(array('', '', '', '', '', '', '', '', '', 'http://tierscheisse.de')),
         'cb_service' => $this->oneOfThese($services)
       );
@@ -199,8 +192,8 @@ EOF;
   private function random($range) {
     return mt_rand(0,$range);
   }
-  private function randBoolean($probability=0.5) {
-    return mt_rand(0,1000)%200==0 ? true : false;
+  private function randBoolean() {
+    return mt_rand(0,1)%2==0 ? true : false;
   }
   private function oneOfThese($these) {
     return $these[mt_rand(0, count($these)-1)];

@@ -84,6 +84,9 @@ class YiidActivity extends BaseDocument {
   /** @String */
   protected $cb_service;
 
+  /** @Int */
+  protected $cb;
+  
   /** @NotSaved */
   protected $clickback;
 

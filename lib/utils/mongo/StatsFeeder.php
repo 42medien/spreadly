@@ -85,8 +85,8 @@ class StatsFeeder {
       'yiid_activity_id' => intval($pYiidActivity->getId()),
       'likes' => 1,
       "media_penetration" => self::calcMediaPenetration($pYiidActivity),
-      'clickbacks' => 123,//TODO: intval($pYiidActivity->getCb()),
-
+      #'clickbacks' => intval($pYiidActivity->getCb()),
+      
       'demographics' => self::fillDemographics($pYiidActivity),
       'user_id' => intval($pUser->getId()),
       'age' => $pUser->getAge()==false ? "u" : intval($pUser->getAge()),

@@ -9,7 +9,8 @@ OnlineIdentity:
     auth_identifier: 'http://twitter.com/account/profile?user_id=21092406'
     profile_uri: http://twitter.com/hugoaffenkopf
     Community:  community_2
-    friend_ids: "456789,555555,444444,457810,9898" 
+    friend_ids: "456789,555555,444444,457810,9898"
+    friend_count: 5
   oi_2:
     title:      'hugo_fb'
     name:       'hugo_fb'
@@ -17,6 +18,7 @@ OnlineIdentity:
     User:       user_1
     original_id: 5555555
     friend_ids:  "7777"
+    friend_count: 130
     Community:  community_3
   oi_3:
     title:      'hans_twitter'
@@ -73,6 +75,7 @@ OnlineIdentity:
     auth_identifier: 'james_twitter'
     User:       user_4
     original_id: 457810
+    friend_count: 56
     Community:  community_2
   oi_11:
     title:      'snirgelchen_twitter'
