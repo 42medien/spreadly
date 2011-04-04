@@ -17,7 +17,5 @@ class profileActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-		$this->pLatestActivities = YiidActivityTable::retrieveLatestActivitiesByContacts($this->getUser()->getUserId(), null, null, 30, 10, 4);
-		$this->setLayout('layout');
   }
 }
