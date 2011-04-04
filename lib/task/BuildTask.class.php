@@ -120,7 +120,7 @@ EOF;
         $this->logSection('mongo tasks', 'i am the mongo killer! now killing:');
         $this->logSection('mongo tasks', ' (host: '.sfConfig::get('app_mongodb_host').' collection: '.sfConfig::get('app_mongodb_database_name_stats').')');
         MongoDbConnector::getInstance()->getDatabase(sfConfig::get('app_mongodb_database_name_stats'))->drop();
-        $this->runTask('yiid:mongo-testdata');
+        //$this->runTask('yiid:mongo-testdata');
       }
     }
 

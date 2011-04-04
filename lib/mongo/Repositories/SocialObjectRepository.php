@@ -13,14 +13,14 @@ class SocialObjectRepository extends DocumentRepository
    * @param YiidActivity
    * @author Matthias Pfefferle
    */
-  public function fromYiidActivity($activity) {
+  public function fromYiidActivity($activity, $skipUrlExpanding=false) {
     $user_id = $activity->getUId();
 
     $ois = $activity->getOiids();
     $cids = $activity->getCids();
 
     $shared_url = $activity->getUrl();
-    $original_url = UrlUtils::shortUrlExpander($shared_url);
+    $original_url = $skipUrlExpanding ? $shared_url : UrlUtils::shortUrlExpander($shared_url);
     $normalized_url = UrlUtils::skipTrailingSlash($original_url);
     $aliases = array_values(array_unique(array(md5($shared_url), md5($original_url), md5($normalized_url))));
 

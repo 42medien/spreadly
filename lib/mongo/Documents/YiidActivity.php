@@ -282,7 +282,7 @@ class YiidActivity extends BaseDocument {
    */
   private function upsertSocialObject() {
     $dm = MongoManager::getDM();
-    $so = $dm->getRepository('Documents\SocialObject')->fromYiidActivity($this);
+    $so = $dm->getRepository('Documents\SocialObject')->fromYiidActivity($this, isset($this->skipUrlCheck)&&$this->skipUrlCheck);
 
     $this->setSocialObject($so);
   }

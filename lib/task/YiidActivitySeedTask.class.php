@@ -49,7 +49,7 @@ EOF;
     $lHugoOis = $lUserHugo->getOnlineIdentitesAsArray();
 
     $lUserJames = UserTable::retrieveByUsername('james');
-    $lJamesOis = $lUserHugo->getOnlineIdentitesAsArray();
+    $lJamesOis = $lUserJames->getOnlineIdentitesAsArray();
 
     $lCommunityTwitter = CommunityTable::retrieveByCommunity('twitter');
     $lCommunityFb = CommunityTable::retrieveByCommunity('facebook');
@@ -59,29 +59,74 @@ EOF;
 
     $allDeals = DealTable::getInstance()->findAll();
     foreach ($allDeals as $deal) {
-      $deal->submit();
+      if($deal->canSubmit()) {
+        $deal->submit();        
+      }
     }
 
     $this->dispatcher->connect('deal.changed', array('DealListener', 'updateMongoDeal'));
     $deal = DealTable::getInstance()->findByDescription('snirgel approved description');
-    $deal[0]->approve();
+    if($deal[0]->canApprove()) {
+      $deal[0]->approve();      
+    }
+    $deal = DealTable::getInstance()->findByDescription('notizblog approved description');
+    if($deal[0]->canApprove()) {
+      $deal[0]->approve();      
+    }
+    $deal = DealTable::getInstance()->findByDescription('missmotz approved description');
+    if($deal[0]->canApprove()) {
+      $deal[0]->approve();      
+    }
+    
+    $urls = array('www.snirgel.de', 'notizblog.org', 'www.missmotz.de');
+    $tags = array('geekstuff', 'otherthings', 'schuhe');
+    $users = array($lUserHugo, $lUserJames);
+    $services = array('facebook', 'twitter', 'linkedin', 'google');
+    $dm = MongoManager::getDM();
+
+    for ($i=0; $i < 30; $i++) { 
+      $url = $this->oneOfThese($urls);
+      $tag = $this->oneOfThese($tags);
+      $user = $this->oneOfThese($users);
+      $ra = $this->random(10000);
+      $array = array(
+        'url' => "http://$url/$ra",
+        'url_hash' => "hash.$ra",
+        'u_id' => $user->getId(),
+        'oiids' => $user->getOnlineIdentitesAsArray(),
+        'cids' => '',
+        'tags' => '',
+        'social_object' => '',
+        'score' => '',
+        'like' => '',
+        'd_id' => '',
+        'c_code' => '',
+        'tags' => $tag,
+        'title' => "$url title",
+        'descr' => "$url description",
+        'comment' => "$url comment",
+        'c' => strtotime($this->random(10)." days ago"),
+        'thumb' => '',
+        'cb_referer' => $this->oneOfThese(array('', '', '', '', '', '', '', '', '', 'http://tierscheisse.de')),
+        'cb_service' => $this->oneOfThese($services)
+      );
+      
+      $lActivity = new Documents\YiidActivity();
+      $lActivity->fromArray($array);
+            
+      try {
+        $lActivity->skipUrlCheck=true;
+        $dm->save();
+      } catch(Exception $e) {
+        $this->log($e->getMessage());
+      }
+      
+    }
 
 
+    /*
 
-    $url = 'www.snirgel.de';
-    $array = array(
-      'url' => "http://$url",
-      'oiids' => array($lOiHugoTwitter->getId()),
-      'title' => "$url deal title",
-      'descr' => "$url description",
-      'comment' => "$url comment",
-      'thumb' => null,
-      'clickback' => null,
-      'tags' => null,
-      'u_id' => $lUserHugo->getId()
-    );
-
-    $lActivity = new YiidActivity();
+    $lActivity = new Documents\YiidActivity();
     $lActivity->fromArray($array);
     $lActivity->save();
 
@@ -97,13 +142,15 @@ EOF;
       'u_id' => $lUserJames->getId()
     );
 
-    $lActivity = new YiidActivity();
+    $lActivity = new Documents\YiidActivity();
     $lActivity->fromArray($array);
     $lActivity->save();
 
     $this->dispatcher->connect('deal.changed', array('DealListener', 'updateMongoDeal'));
     $deal = DealTable::getInstance()->findByDescription('notizblog approved description');
-    $deal[0]->approve();
+    if($deal[0]->canApprove()) {
+      $deal[0]->approve();      
+    }
 
 
     $url = 'notizblog.org';
@@ -119,13 +166,15 @@ EOF;
       'u_id' => $lUserHugo->getId()
     );
 
-    $lActivity = new YiidActivity();
+    $lActivity = new Documents\YiidActivity();
     $lActivity->fromArray($array);
     $lActivity->save();
 
     $this->dispatcher->connect('deal.changed', array('DealListener', 'updateMongoDeal'));
     $deal = DealTable::getInstance()->findByDescription('missmotz approved description');
-    $deal[0]->approve();
+    if($deal[0]->canApprove()) {
+      $deal[0]->approve();      
+    }
 
     $url = 'www.missmotz.de';
     $array = array(
@@ -140,10 +189,20 @@ EOF;
       'u_id' => $lUserHugo->getId()
     );
 
-    $lActivity = new YiidActivity();
+    $lActivity = new Documents\YiidActivity();
     $lActivity->fromArray($array);
     $lActivity->save();
-
+    */
+    
     sfConfig::set('app_settings_post_to_services', $originalPostToServicesValue);
+  }
+  private function random($range) {
+    return mt_rand(0,$range);
+  }
+  private function randBoolean($probability=0.5) {
+    return mt_rand(0,1000)%200==0 ? true : false;
+  }
+  private function oneOfThese($these) {
+    return $these[mt_rand(0, count($these)-1)];
   }
 }
