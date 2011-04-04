@@ -116,11 +116,4 @@ class likeActions extends sfActions {
     $lReturn['html'] = $this->getPartial('like/meta_images_list', array('pImages' => $lImages));
     return $this->renderText(json_encode($lReturn));
   }
-
-  public function executeDeal() {
-    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('deals/js_init_deals.js'));
-    //$this->forward('default', 'module');
-    $this->pActiveFormerlyKnownAsYiidActivitiesOfActiveDealForUser = YiidActivityTable::retrieveActivitiesOfActiveDealsByUserId($this->getUser()->getId());
-    $this->setLayout('layout');
-  }
 }
