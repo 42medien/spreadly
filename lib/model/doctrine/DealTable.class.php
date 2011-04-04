@@ -63,19 +63,19 @@ class DealTable extends Doctrine_Table
   public static function getRunningByHost($pUrl, $pTags=null) {
     $host = parse_url($pUrl, PHP_URL_HOST);
     $col = MongoDbConnector::getInstance()->getCollection(sfConfig::get('app_mongodb_database_name'), "deals");
-    $today = new MongoDate(time());    
-    
+    $today = new MongoDate(time());
+
     $cond = array(
       "host" => $host,
       "start_date" => array('$lte' => $today),
       "end_date" => array('$gte' => $today)
     );
-    
+
     // added tags to the conditions
     if ($pTags) {
       // trim tags
       if(!is_array($pTags)) {
-        $pTags = explode(",", $pTags);        
+        $pTags = explode(",", $pTags);
       }
       $lTags = array();
       foreach ($pTags as $lTag) {
@@ -88,7 +88,7 @@ class DealTable extends Doctrine_Table
 
     $result = $col->find($cond)->limit(1)->sort(array("start_date" => -1));
     $deal = null;
-    
+
     if($result->hasNext()) {
       $deal = $result->getNext();
     }
@@ -125,10 +125,12 @@ class DealTable extends Doctrine_Table
    * @return Deal|boolean
    */
   public static function getActiveDealByHostAndUserId($pUrl, $pUserId) {
+    $dm = MongoManager::getDM();
+
     $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
     $lDeal = self::getActiveByHost($pUrl);
 
-    if ($lDeal && !YiidActivityTable::getByDealIdAndUserId($lDeal->getId(), $pUserId)) {
+    if ($lDeal && !$dm->getRepository("Documents\YiidActivity")->findOneBy(array("d_id" => intval($lDeal->getId()), "u_id" => intval($pUserId)))) {
       return $lDeal;
     }
 
@@ -136,10 +138,12 @@ class DealTable extends Doctrine_Table
   }
 
   public static function getActiveDealByHostAndTagsAndUserId($pUrl, $pTags, $pUserId) {
+    $dm = MongoManager::getDM();
+
     $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
     $lDeal = self::getActiveByHost($pUrl, $pTags);
 
-    if ($lDeal && !YiidActivityTable::getByDealIdAndUserId($lDeal->getId(), $pUserId)) {
+    if ($lDeal && !$dm->getRepository("Documents\YiidActivity")->findOneBy(array("d_id" => intval($lDeal->getId()), "u_id" => intval($pUserId)))) {
       return $lDeal;
     }
 
