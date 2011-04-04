@@ -42,7 +42,7 @@ class likeActions extends sfActions {
           $this->setTemplate('deal');
           return sfView::SUCCESS;
         } else {
-          $this->pActivity = $dm->getRepository("Documents\YiidActivity")->findOneBy(array("url" => $lUrl, "u_id" => intval($this->getUser()->getId())));
+          $this->pActivity = $dm->getRepository("Documents\YiidActivity")->findOneBy(array("url" => $lUrl, "u_id" => intval($this->getUser()->getId()), "d_id" => array('$exists' => false)));
 
           // if user has already liked
           if($this->pActivity) {
@@ -51,7 +51,7 @@ class likeActions extends sfActions {
         }
       }
 
-      $this->pActivity = $dm->getRepository("Documents\YiidActivity")->findOneBy(array("url" => $lUrl, "u_id" => intval($this->getUser()->getId())));
+      $this->pActivity = $dm->getRepository("Documents\YiidActivity")->findOneBy(array("url" => $lUrl, "u_id" => intval($this->getUser()->getId()), "d_id" => array('$exists' => false)));
 
       if($this->pActivity) {
         $this->redirect('@widget_likes');
@@ -100,6 +100,7 @@ class likeActions extends sfActions {
       	$lReturn['html'] = $this->getPartial('like/coupon_used', array('pActivity' => $lActivity));
       }
 		} catch (Exception $e) { // send error on exception
+		  $this->getLogger()->err($e->getMessage());
       $lSuccess = false;
 		}
 
