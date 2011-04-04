@@ -116,7 +116,7 @@ EOF;
             
       try {
         $lActivity->skipUrlCheck=true;
-        $dm->save();
+        $lActivity->save();
       } catch(Exception $e) {
         $this->log($e->getMessage());
       }
