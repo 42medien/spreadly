@@ -269,7 +269,7 @@ class YiidActivity extends BaseDocument {
     $deal = DealTable::getActiveDealByHostAndTagsAndUserId($this->getUrl(), $this->getTags(), $this->getUId());
     $dm = MongoManager::getDM();
     // sets the deal-id if it's not empty
-    if ($deal && $deal->isActive() && !$dm->getRepository('Documents\YiidActivity')->findOneBy(array("d_id" => $deal->getId(), "u_id" => $this->getUId()))) {
+    if ($deal && $deal->isActive() && !$dm->getRepository('Documents\YiidActivity')->findOneBy(array("d_id" => intval($deal->getId()), "u_id" => intval($this->getUId())))) {
       if ($coupon = $deal->popCoupon()) {
         $this->setDId(intval($deal->getId()));
         $this->setCCode($coupon);
@@ -296,7 +296,15 @@ class YiidActivity extends BaseDocument {
       throw new sfException("UserId or Url not present", 0);
     }
 
-    $activity = $dm->getRepository('Documents\YiidActivity')->findOneBy(array("social_object.id" => $this->getSocialObject()->getId(), "u_id" => intval($this->getUId()), "deal_id" => $this->getDeal()));
+    $criteria = array("social_object.id" => $this->getSocialObject()->getId(), "u_id" => intval($this->getUId()));
+
+    if ($this->getDId()) {
+      $criteria["deal_id"] = intval($this->getDId());
+    } else {
+      $criteria["deal_id"] = array('$exists' => false);
+    }
+
+    $activity = $dm->getRepository('Documents\YiidActivity')->findOneBy($criteria);
 
     if ($activity) {
       throw new sfException("user has already liked this url", 0);
