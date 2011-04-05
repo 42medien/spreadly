@@ -17,6 +17,9 @@ abstract class Summary extends BaseDocument {
   /** @Field(type="int", name="mp") */
   protected $media_penetration;
 
+  /** @Field(type="int", name="sh") */
+  protected $shares;
+
   /** @Field(type="int", name="cb") */
   protected $clickbacks;
 

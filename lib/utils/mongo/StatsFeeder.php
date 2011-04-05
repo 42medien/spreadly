@@ -98,6 +98,11 @@ class StatsFeeder {
       'hour_of_day' => $hourOfDay
     );
 
+    // add shares
+    if(!empty($lParams['services'])) {
+      $lParams['shares'] = count($lParams['services']);
+    }
+    
     // add clickbacks
     if ($pYiidActivity->isClickback()) {
       $lParams['clickback_likes'] =  1;
@@ -262,8 +267,11 @@ class StatsFeeder {
     $lQuery = self::createUpsertForHost($pAnalyticsActivity, $pDocumentString);
 
     $lQuery->field('day')->equals($pAnalyticsActivity->getDay())
+           ->field('l')->inc(intval($pAnalyticsActivity->getLikes()))
+           ->field('sh')->inc(intval($pAnalyticsActivity->getShares()))
+           ->field('mp')->inc(intval($pAnalyticsActivity->getMediaPenetration()))
            ->field('cb')->inc(intval($pAnalyticsActivity->getClickbacks()))
-           ->field('cbl')->inc(intval($pAnalyticsActivity->getClickback_likes()));
+           ->field('cbl')->inc(intval($pAnalyticsActivity->getClickbackLikes()));
 
     self::addServicesIncToQuery($lQuery, $pAnalyticsActivity);
     self::addTagsIncToQuery($lQuery, $pAnalyticsActivity);
@@ -315,9 +323,10 @@ class StatsFeeder {
 
   private static function addSummaryIncToQuery($pQuery, $pAnalyticsActivity) {
     $pQuery->field('l')->inc(intval($pAnalyticsActivity->getLikes()));
+    $pQuery->field('sh')->inc(intval($pAnalyticsActivity->getShares()));
     $pQuery->field('mp')->inc(intval($pAnalyticsActivity->getMediaPenetration()));
     $pQuery->field('cb')->inc(intval($pAnalyticsActivity->getClickbacks()));
-    $pQuery->field('cbl')->inc(intval($pAnalyticsActivity->getClickbacksLikes()));
+    $pQuery->field('cbl')->inc(intval($pAnalyticsActivity->getClickbackLikes()));
     return $pQuery;
   }
 }

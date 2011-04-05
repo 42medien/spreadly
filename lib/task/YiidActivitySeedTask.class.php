@@ -88,7 +88,9 @@ EOF;
       $url = $this->oneOfThese($urls);
       $tag = $this->oneOfThese($tags);
       $user = $this->oneOfThese($users);
+      $cb_ref = $this->oneOfThese(array('', '', '', '', '', '', 'http://tierscheisse.de'));
       $ra = $this->random(1000);
+      
       $array = array(
         'url' => "http://$url/$ra",
         'url_hash' => "hash.$ra",
@@ -98,10 +100,10 @@ EOF;
         'title' => "$url title",
         'descr' => "$url description",
         'comment' => "$url comment",
-        'c' => strtotime($this->random(10)." days ago"),
+        'c' => strtotime("1 day ago"),
         'cb' => $this->randBoolean() ? $this->random(30) : 0,
-        'cb_referer' => $this->oneOfThese(array('', '', '', '', '', '', '', '', '', 'http://tierscheisse.de')),
-        'cb_service' => $this->oneOfThese($services)
+        'cb_referer' => $cb_ref!='' ? $cb_ref : null,
+        'cb_service' => $cb_ref!='' ? $this->oneOfThese($services) : null
       );
       
       $lActivity = new Documents\YiidActivity();
