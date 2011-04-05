@@ -11,8 +11,6 @@ use \sfException,
     \sfConfig,
     \StatsFeeder,
     \PostApiFactory,
-    \SocialObjectTable,
-    \YiidActivityTable,
     \Doctrine,
     \MongoId,
     \MongoManager,
@@ -86,7 +84,7 @@ class YiidActivity extends BaseDocument {
 
   /** @Int */
   protected $cb;
-  
+
   /** @NotSaved */
   protected $clickback;
 
