@@ -10,7 +10,7 @@
   	</tr>
     <?php foreach($pData['data'] as $i => $data){ ?>
 			<tr>
-				<td height="44" align="left" class="first">
+				<td height="44" align="left" class="first" style="line-height: 21px;">
 				  <div class="martext">
 				  	<?php if($data['title'] && $data['title']!='') { ?>
 				    	<strong><?php echo truncate_text($data['title'], 60); ?></strong>
@@ -18,17 +18,14 @@
 				    	<strong><?php echo __('No title'); ?></strong>
 				    <?php } ?>
 				    	<br />
-    				<?php if($pHostId && $pFrom && $pTo): ?>
-      				<?php echo link_to($data['url'], '@get_analytics_content', array('query_string' => 'com=all&url='.$data['url'].'&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo.'&type=url_activities', 'class' => 'analytix-filter-link table-filter-link'));  ?>
-      			<?php else: ?>
-      			  <?php echo $data['url'] ?>
-      			<?php endif; ?>
+				    	<?php echo link_to($data['url'], 'analytics/url_statistics', array('query_string' => 'url='.$data['url'].'&domainid='.$pHostId, 'class' => 'analytix-filter-link table-filter-link'));  ?>
+      				<?php //echo link_to($data['url'], 'analytics/url_statistics', array('query_string' => 'com=all&url='.$data['url'].'&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo.'&type=url_activities', 'class' => 'analytix-filter-link table-filter-link'));  ?>
   			  </div>
   			</td>
-		    <td align="center"><?php echo $data['distribution'] ?>%</td>
-		    <td align="center" valign="middle"><?php echo $data['pos'] ?></td>
-		    <td align="center" valign="middle"><?php echo $data['contacts'] ?></td>
-		    <td align="center" class="last"><?php echo $data['pis']['cb'] ?></td>
+		    <td align="center"><div><?php echo $data['distribution'] ?>%</div></td>
+		    <td align="center" valign="middle"><div><?php echo $data['pos'] ?></div></td>
+		    <td align="center" valign="middle"><div><?php echo $data['contacts'] ?></div></td>
+		    <td align="center" class="last"><div><?php echo $data['pis']['cb'] ?></div></td>
 			</tr>
     <?php } ?>
 	</table>

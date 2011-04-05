@@ -35,6 +35,16 @@ class analyticsComponents extends sfComponents
   public function executeUrl_table(sfWebRequest $request) {
     $lDomainProfile = DomainProfileTable::getInstance()->find($this->pHostId);
     $this->pData = MongoUtils::getTopActivitiesData($lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
+  }
 
+  public function executeDeal_filter(sfWebRequest $request){
+		$lDealId = $request->getParameter('dealid');
+		$this->pDeal = DealTable::getInstance()->find($lDealId);
+  }
+
+  public function executeUrl_filter(sfWebRequest $request){}
+
+  public function executeDeal_content(sfWebRequest $request){
+		$lDealId = $request->getParameter('dealid');
   }
 }

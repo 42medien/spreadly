@@ -57,6 +57,14 @@ analytics_overview:
 analytics:
   url:   /analytics/statistics
   param: { module: analytics, action: statistics }
+  
+domain_statistics:
+  url:  /analytics/domain_statistics
+  param:  { module: analytics, action: domain_statistics}  
+  
+domain_detail:
+  url:  /analytics/domain_detail
+  param:  { module: analytics, action: domain_detail}    
 
 get_analytics_content:
   url: /analytics/get_analytics_content
@@ -121,6 +129,7 @@ nodomain:
 imprint:
   url:  /imprint
   param: { module: system, action: imprint}
+
 
 # You can find more information about this file on the symfony website:
 # http://www.symfony-project.org/reference/1_4/en/10-Routing
