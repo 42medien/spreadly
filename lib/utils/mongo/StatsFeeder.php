@@ -38,7 +38,7 @@ class StatsFeeder {
       self::feedDealUrlSummary($activity);
     }
   }
-  
+
   /**
    * Save Analytics Activity Data
    *
@@ -59,15 +59,15 @@ class StatsFeeder {
     if(empty($lParams['services'])) {
       return false;
     }
-    
+
     $activity->fromArray($lParams);
 
     $dm->persist($activity);
     $dm->flush();
-    
+
     return $activity;
   }
-  
+
   private static function fillParams($pYiidActivity) {
     $pUser = $pYiidActivity->getUser();
     $url = strtolower($pYiidActivity->getUrl());
@@ -86,7 +86,7 @@ class StatsFeeder {
       'likes' => 1,
       "media_penetration" => self::calcMediaPenetration($pYiidActivity),
       #'clickbacks' => intval($pYiidActivity->getCb()),
-      
+
       'demographics' => self::fillDemographics($pYiidActivity),
       'user_id' => intval($pUser->getId()),
       'age' => $pUser->getAge()==false ? "u" : intval($pUser->getAge()),
@@ -97,7 +97,7 @@ class StatsFeeder {
       'likes_by_hour' => array($hourOfDay => 1),
       'hour_of_day' => $hourOfDay
     );
-    
+
     // add clickbacks
     if ($pYiidActivity->isClickback()) {
       $lParams['clickback_likes'] =  1;
@@ -124,48 +124,48 @@ class StatsFeeder {
 
     return $lParams;
   }
-  
+
   private static function calcMediaPenetration($pYiidActivity) {
     $count = 0;
     foreach($pYiidActivity->getOiids() as $lId) {
       $lOi = OnlineIdentityTable::getInstance()->retrieveByPk($lId);
-      
+
       if($lOi && $lOi->getFriendCount()==true) {
         $count += intval($lOi->getFriendCount());
       }
     }
     return $count;
   }
-  
+
   private static function fillServices($pYiidActivity) {
     $services = array();
 
     foreach($pYiidActivity->getOiids() as $lId) {
       $lOi = OnlineIdentityTable::getInstance()->retrieveByPk($lId);
-      
+
       if($lOi) {
         $service = self::fillService($pYiidActivity, $lOi);
         $services[$lOi->getCommunity()->getName()] = $service;
       }
     }
-    
+
     return $services;
   }
-  
+
   private static function fillService($pYiidActivity, $pOi) {
     $service = array('l' => 1, 'mp' => intval($pOi->getFriendCount()), 'cb' => 0);
-  
+
     if ($pYiidActivity->isClickback()) {
       $service['cbl'] = 1;
     }
     return $service;
   }
-  
+
   private static function fillDemographics($pYiidActivity) {
     $pUser = $pYiidActivity->getUser();
     $demografics = array();
     $demografics['rel'][IdentityHelper::toMongoKey($pUser->getRelationshipState())] = 1;
-    $demografics['sex'][$pUser->getGender()==false ? 'u' : $pUser->getGender()] = 1;    
+    $demografics['sex'][$pUser->getGender()==false ? 'u' : $pUser->getGender()] = 1;
     // set age
     $a = $pUser->getAge();
     if ($a < 18) {
@@ -183,8 +183,8 @@ class StatsFeeder {
     }
     return $demografics;
   }
-  
-  
+
+
   private static function feedActivityStats($pAnalyticsActivity) {
     if(!$pAnalyticsActivity->getDeal_id()) {
       $lQuery = self::createUpsertForDayAndHost($pAnalyticsActivity, 'Documents\ActivityStats');
@@ -204,7 +204,7 @@ class StatsFeeder {
     if($pAnalyticsActivity->getDeal_id()) {
       $lQuery = self::createUpsertForDayAndHost($pAnalyticsActivity, 'Documents\DealStats');
       $lQuery->field('d_id')->equals($pAnalyticsActivity->getDeal_id());
-      $lQuery->getQuery()->execute();      
+      $lQuery->getQuery()->execute();
     }
   }
 
@@ -221,15 +221,17 @@ class StatsFeeder {
     if(!$pAnalyticsActivity->getDeal_id()) {
       $lQuery = self::createUpsertForHost($pAnalyticsActivity, 'Documents\HostSummary');
       self::addSummaryIncToQuery($lQuery, $pAnalyticsActivity);
+      self::addDemographicsIncToQuery($lQuery, $pAnalyticsActivity);
       $lQuery->getQuery()->execute();
     }
   }
-  
+
   private static function feedUrlSummary($pAnalyticsActivity) {
     if(!$pAnalyticsActivity->getDeal_id()) {
       $lQuery = self::createUpsertForHost($pAnalyticsActivity, 'Documents\UrlSummary');
       $lQuery->field('url')->equals($pAnalyticsActivity->getUrl());
       self::addSummaryIncToQuery($lQuery, $pAnalyticsActivity);
+      self::addDemographicsIncToQuery($lQuery, $pAnalyticsActivity);
       $lQuery->getQuery()->execute();
     }
   }
@@ -239,28 +241,30 @@ class StatsFeeder {
       $lQuery = self::createUpsertForHost($pAnalyticsActivity, 'Documents\DealSummary');
       $lQuery->field('d_id')->equals($pAnalyticsActivity->getDeal_id());
       self::addSummaryIncToQuery($lQuery, $pAnalyticsActivity);
+      self::addDemographicsIncToQuery($lQuery, $pAnalyticsActivity);
       $lQuery->getQuery()->execute();
     }
   }
-  
+
   private static function feedDealUrlSummary($pAnalyticsActivity) {
     if($pAnalyticsActivity->getDeal_id()) {
       $lQuery = self::createUpsertForHost($pAnalyticsActivity, 'Documents\DealUrlSummary');
       $lQuery->field('url')->equals($pAnalyticsActivity->getUrl())
              ->field('d_id')->equals($pAnalyticsActivity->getDeal_id());
       self::addSummaryIncToQuery($lQuery, $pAnalyticsActivity);
+      self::addDemographicsIncToQuery($lQuery, $pAnalyticsActivity);
       $lQuery->getQuery()->execute();
     }
   }
-  
+
   private static function createUpsertForDayAndHost($pAnalyticsActivity, $pDocumentString) {
     $dm = MongoManager::getStatsDM();
     $lQuery = self::createUpsertForHost($pAnalyticsActivity, $pDocumentString);
-    
+
     $lQuery->field('day')->equals($pAnalyticsActivity->getDay())
            ->field('cb')->inc(intval($pAnalyticsActivity->getClickbacks()))
            ->field('cbl')->inc(intval($pAnalyticsActivity->getClickback_likes()));
-    
+
     self::addServicesIncToQuery($lQuery, $pAnalyticsActivity);
     self::addTagsIncToQuery($lQuery, $pAnalyticsActivity);
     self::addDemographicsIncToQuery($lQuery, $pAnalyticsActivity);
@@ -293,11 +297,11 @@ class StatsFeeder {
         foreach ($data as $type => $value) {
           $pQuery->field('t.'.$service.'.'.$type)->inc($value);
         }
-      }      
+      }
     }
     return $pQuery;
   }
-  
+
   private static function addDemographicsIncToQuery($pQuery, $pAnalyticsActivity) {
     if($pAnalyticsActivity->getDemographics()) {
       foreach ($pAnalyticsActivity->getDemographics() as $service => $data) {
@@ -308,12 +312,12 @@ class StatsFeeder {
     }
     return $pQuery;
   }
-  
+
   private static function addSummaryIncToQuery($pQuery, $pAnalyticsActivity) {
     $pQuery->field('l')->inc(intval($pAnalyticsActivity->getLikes()));
-    $pQuery->field('mp')->inc(intval($pAnalyticsActivity->getMedia_penetration()));
+    $pQuery->field('mp')->inc(intval($pAnalyticsActivity->getMediaPenetration()));
     $pQuery->field('cb')->inc(intval($pAnalyticsActivity->getClickbacks()));
-    $pQuery->field('cbl')->inc(intval($pAnalyticsActivity->getClickbacks_likes()));
+    $pQuery->field('cbl')->inc(intval($pAnalyticsActivity->getClickbacksLikes()));
     return $pQuery;
   }
 }
