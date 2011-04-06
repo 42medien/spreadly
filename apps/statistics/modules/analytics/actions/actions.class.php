@@ -90,6 +90,7 @@ class analyticsActions extends sfActions
   }
 
   public function executeDomain_statistics(sfWebRequest $request) {
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
 		$lDomainId = $request->getParameter('domainid');
 		$this->pDomain = DomainProfileTable::getInstance()->find($lDomainId);
   	$lQuery = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC");

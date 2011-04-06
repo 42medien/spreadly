@@ -80,9 +80,7 @@ var ActivityChart = {
                [1, 'rgba(61,160,242,0)']
             ]
          }
-
-		   }
-		   ]
+		   }]
 		};
 		var lChart = new Highcharts.Chart(lOptions);
 	}//end init

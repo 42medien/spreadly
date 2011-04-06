@@ -560,14 +560,12 @@ div.sortlink{
 .headerSortDown div{
   background: url("/img/asc-arrow.gif") no-repeat scroll right transparent;
   color: #58819A;
-  font-size: 14px;
   font-weight: bold;  
 }
 
 .headerSortUp div{
   background: url("/img/desc-arrow.gif") no-repeat scroll right transparent;
   color: #58819A;
-  font-size: 14px;
   font-weight: bold;  
 }
 
@@ -578,7 +576,7 @@ th.headerSortUp {
 
 th.headerSortDown.first,
 th.headerSortUp.first {
-  background: url("/img/tbtop-hov.png") repeat-x scroll left top #D2D2D2;
+  background: url("/img/tbtop-hov.png") no-repeat scroll left top transparent;
 }
 
 .data-tablebox td.first{

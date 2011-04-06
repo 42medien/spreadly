@@ -2,12 +2,12 @@
   	<table border="0" cellspacing="0" cellpadding="0" id="dash-deal-table" class="tablesorter scrolltable" style="width: 930px;">
   	<thead>
     	<tr>
-  			<th height="32" align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('Deals Yesterday'); ?></div></th>
-  			<th align="center" valign="middle"><div class="sortlink no-sort"><?php echo __('Deals left');?></div></th>
-  			<th align="center" valign="middle"><div class="sortlink no-sort"><?php echo __('Days left');?></div></th>
-  	    <th align="center" valign="middle"><div class="sortlink no-sort"><?php echo __('Likes');?></div></th>
-  	    <th align="center" valign="middle"><div class="sortlink no-sort"><?php echo __('Shares');?></div></th>
-  			<th height="32" align="center" valign="middle" class="last" style="white-space: nowrap;"><div class="sortlink no-sort"><?php echo __('Media Penetration'); ?></div></th>
+  			<th height="32" align="center" valign="middle" class="first"><div class="sortlink"><?php echo __('Deals Yesterday'); ?></div></th>
+  			<th align="center" valign="middle"><div class="sortlink"><?php echo __('Deals left');?></div></th>
+  			<th align="center" valign="middle"><div class="sortlink"><?php echo __('Days left');?></div></th>
+  	    <th align="center" valign="middle"><div class="sortlink"><?php echo __('Likes');?></div></th>
+  	    <th align="center" valign="middle"><div class="sortlink"><?php echo __('Shares');?></div></th>
+  			<th height="32" align="center" valign="middle" class="last" style="white-space: nowrap;"><div class="sortlink"><?php echo __('Media Penetration'); ?></div></th>
     	</tr>
     </thead>
     <tbody>
