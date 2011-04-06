@@ -100,7 +100,7 @@ EOF;
         'title' => "$url title",
         'descr' => "$url description",
         'comment' => "$url comment",
-        'c' => strtotime("1 day ago"),
+        'c' => strtotime($this->random(10)." day ago"),
         'cb' => $this->randBoolean() ? $this->random(30) : 0,
         'cb_referer' => $cb_ref!='' ? $cb_ref : null,
         'cb_service' => $cb_ref!='' ? $this->oneOfThese($services) : null

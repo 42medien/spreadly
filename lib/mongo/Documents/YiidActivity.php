@@ -197,7 +197,9 @@ class YiidActivity extends BaseDocument {
     $this->setScore(1);
 
     $this->upsertSocialObject();
-    $this->setC(time());
+    if(!$this->getC()) {
+      $this->setC(time());      
+    }
     $this->doValidate();
 
     $this->updateDealInfo();
