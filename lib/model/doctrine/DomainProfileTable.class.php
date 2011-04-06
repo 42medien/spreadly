@@ -5,12 +5,12 @@ class DomainProfileTable extends Doctrine_Table
 {
   const STATE_PENDING = 'pending';
   const STATE_VERIFIED = 'verified';
-  
+
   public static function getInstance()
   {
       return Doctrine_Core::getTable('DomainProfile');
   }
-  
+
   public static function retrieveVerifiedForUser($pUser) {
     $lQ = DomainProfileTable::getInstance()->createQuery()
     ->where('state = ?', DomainProfileTable::STATE_VERIFIED)

@@ -11,7 +11,6 @@
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 class Deal extends BaseDeal {
-
   public function addMoreCoupons($params) {
     return $this->saveMultipleCoupons($params, true);
   }
@@ -46,7 +45,7 @@ class Deal extends BaseDeal {
 
   public function popCoupon() {
     sfContext::getInstance()->getLogger()->notice("{Deal} popCoupon for Deal: ".$this->getId());
-    
+
     $code = null;
     $coupon = CouponTable::getInstance()->createQuery()
       ->where("deal_id = ?", $this->getId())
@@ -64,6 +63,13 @@ class Deal extends BaseDeal {
     }
 
     return $code;
+  }
+
+  public function getDealSummary() {
+    $dm = MongoManager::getStatsDM();
+    $stats = $dm->getRepository("Documents\DealSummary")->findOneBy(array("d_id" => intval($this->getId())));
+
+    return $stats;
   }
 
   public function isUnlimited() {

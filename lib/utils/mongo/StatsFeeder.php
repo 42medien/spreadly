@@ -227,6 +227,7 @@ class StatsFeeder {
       $lQuery = self::createUpsertForHost($pAnalyticsActivity, 'Documents\HostSummary');
       self::addSummaryIncToQuery($lQuery, $pAnalyticsActivity);
       self::addDemographicsIncToQuery($lQuery, $pAnalyticsActivity);
+      self::addServicesIncToQuery($lQuery, $pAnalyticsActivity);
       $lQuery->getQuery()->execute();
     }
   }
@@ -237,6 +238,7 @@ class StatsFeeder {
       $lQuery->field('url')->equals($pAnalyticsActivity->getUrl());
       self::addSummaryIncToQuery($lQuery, $pAnalyticsActivity);
       self::addDemographicsIncToQuery($lQuery, $pAnalyticsActivity);
+      self::addServicesIncToQuery($lQuery, $pAnalyticsActivity);
       $lQuery->getQuery()->execute();
     }
   }
@@ -247,6 +249,7 @@ class StatsFeeder {
       $lQuery->field('d_id')->equals($pAnalyticsActivity->getDeal_id());
       self::addSummaryIncToQuery($lQuery, $pAnalyticsActivity);
       self::addDemographicsIncToQuery($lQuery, $pAnalyticsActivity);
+      self::addServicesIncToQuery($lQuery, $pAnalyticsActivity);
       $lQuery->getQuery()->execute();
     }
   }
@@ -258,6 +261,7 @@ class StatsFeeder {
              ->field('d_id')->equals($pAnalyticsActivity->getDeal_id());
       self::addSummaryIncToQuery($lQuery, $pAnalyticsActivity);
       self::addDemographicsIncToQuery($lQuery, $pAnalyticsActivity);
+      self::addServicesIncToQuery($lQuery, $pAnalyticsActivity);
       $lQuery->getQuery()->execute();
     }
   }
