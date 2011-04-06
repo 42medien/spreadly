@@ -26,6 +26,16 @@ class analyticsComponents extends sfComponents
     return $parentRet;
 	}
 
+  public function executeTop_url_overall_table(sfWebRequest $request) {
+    $dm = MongoManager::getStatsDM();
+    $this->urls = $dm->getRepository("Documents\UrlSummary")->findBy(array("host" => $this->host))->limit(10)->sort(array("l" => "DESC"));
+  }
+
+  public function executeActive_deal_table(sfWebRequest $request) {
+    $domain_profile = DomainProfileTable::getInstance()->findOneBy("url", $this->host);
+    $this->deals = DealTable::getInstance()->findBy("domain_profile_id", $domain_profile->getId());
+  }
+
 	public function executeFilter_nav(sfWebRequest $request){
     if(count($this->pVerifiedDomains) > 0 && !$this->pHostId) {
 	    $this->pHostId = $this->pVerifiedDomains[0]->getId();
