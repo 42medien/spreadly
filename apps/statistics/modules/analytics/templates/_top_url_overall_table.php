@@ -7,7 +7,7 @@
 	    <th width="73" align="center" valign="middle"><div><?php echo __('Spreads');?></div></th>
 	    <th width="78" align="center" valign="middle"><div><?php echo __('Reach');?></div></th>
 	    <th width="79" align="center" valign="middle"><div><?php echo __('Clickbacks');?></div></th>
-	    <th width="79" align="center" valign="middle" class="last"><div><?php echo __('Clickback Likes');?></div></th>
+	    <th width="79" align="center" valign="middle" class="last"><div><?php echo __('Clickback-Likes');?></div></th>
   	</tr>
     <?php foreach($urls as $url){ ?>
 			<tr>
