@@ -1,5 +1,5 @@
 AnalyticsFilter.init();
-AnalyticsFilterNav.init();
+//AnalyticsFilterNav.init();
 AnalyticsTables.init();
 
 

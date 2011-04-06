@@ -559,10 +559,26 @@ div.sortlink{
 
 .headerSortDown div{
   background: url("/img/asc-arrow.gif") no-repeat scroll right transparent;
+  color: #58819A;
+  font-size: 14px;
+  font-weight: bold;  
 }
 
 .headerSortUp div{
   background: url("/img/desc-arrow.gif") no-repeat scroll right transparent;
+  color: #58819A;
+  font-size: 14px;
+  font-weight: bold;  
+}
+
+th.headerSortDown,
+th.headerSortUp {
+  background: url("/img/tbltopx-hov.gif") repeat-x scroll left top #D2D2D2;
+}
+
+th.headerSortDown.first,
+th.headerSortUp.first {
+  background: url("/img/tbtop-hov.png") repeat-x scroll left top #D2D2D2;
 }
 
 .data-tablebox td.first{
@@ -581,52 +597,4 @@ div.sortlink{
 
 .data-tablebox td div.padleft{
   padding-left: 10px;
-}
-
-
-
-
-
-#dash-deal-table,
-#dash-website-table{
-  width: 100%;
-}
-
-
-.data-table-outer{
-    margin: 0 auto 3em;
-    padding: 4em 0 3em;
-    position: relative;
-}
-
-.data-table-inner{
-   height: 12.6em;
-    overflow: auto;
-}
-
-.data-table-inner thead tr{
-    left: 0;
-    position: absolute;
-    top: 1.2em;
-}
-
-.data-table-inner tfoot tr{
-    left: 0;
-    position: absolute;
-    bottom: 1.4em;
-
-}
-
-.data-table-inner tfoot tr td{
-    background: url("../img/tbltopx.gif") repeat-x scroll left top #D2D2D2;
-    color: #000000;
-    font-weight: normal;
-    border: 1px solid #ccc;  	
-    border-top: 1px solid #777575;
-    
-}
-
-.data-table-inner tfoot tr td div{
-    line-height: 18px;
-    padding: 0 4px;	
 }
