@@ -334,9 +334,6 @@ a.button.header { float:right; }
   margin-top: 15px;
 }
 
-.data-tablebox th{
-
-}
 
 #subnavigation ul li a.active{ background:url(../img/navtabbg-hov.png) left top no-repeat; line-height:24px; text-decoration:none; color:#fff;  }
 
@@ -600,4 +597,43 @@ th.headerSortUp.last {
 
 .data-tablebox td div.padleft{
   padding-left: 10px;
+}
+
+#analytics-bread {
+  padding: 5px 0px 5px 0px;
+}
+
+.stat-info-box{
+  padding: 15px; 
+  border: 1px solid #588199; 
+  margin: 0px 0px;
+  width: auto;
+}
+
+.stat-info-left{
+  text-align: center;
+}
+
+.stat-info-number{
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.stat-info-right{
+  padding-top: 18px;
+  width: 99px;
+  padding-left: 10px;
+}
+
+.css-arrow-big {
+    border-bottom: 41px solid transparent;
+    border-left: 28px solid #588199;
+    border-top: 41px solid transparent;
+    height: 0;
+    width: 0;
+    margin-right: 82px;
+}
+
+#stat-infos{
+  margin: 10px 0px 25px 0px;
 }

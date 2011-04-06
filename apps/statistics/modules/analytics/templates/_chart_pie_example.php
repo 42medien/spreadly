@@ -1,6 +1,4 @@
 <?php use_helper('ChartData') ?>
-<div id="chart_pie_example" class="pie-chart-medium"></div>
-
 <?php //var_dump($pChartsettings);die();?>
 <script type="text/javascript">
 
@@ -9,7 +7,7 @@ var ChartPieGenderActivities = {
   init: function(pChartsettings) {
 		var lOptions = {
 		    chart: {
-		      renderTo: 'chart_pie_example',
+		      renderTo: pChartsettings.renderto,
 		      defaultSeriesType: 'pie',
 	        margin: pChartsettings.margin,
 	        height: parseInt(pChartsettings.height),
