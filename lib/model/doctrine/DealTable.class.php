@@ -54,6 +54,33 @@ class DealTable extends Doctrine_Table
   }
 
   /**
+   * returns a running deal-object if available
+   *
+   * @author Matthias Pfefferle
+   * @param string $pUrl
+   * @return Deal|false
+   */
+  public static function getApprovedAndRunning($pUrl) {
+    $host = parse_url($pUrl, PHP_URL_HOST);
+    $col = MongoDbConnector::getInstance()->getCollection(sfConfig::get('app_mongodb_database_name'), "deals");
+    $today = new MongoDate(time());
+
+    $cond = array(
+      "host" => $host,
+      "start_date" => array('$lte' => $today),
+      "end_date" => array('$gte' => $today)
+    );
+
+    $result = $col->find($cond)->limit(1)->sort(array("start_date" => -1));
+
+    if($deal = $result->getNext()) {
+      return self::getInstance()->find($deal['id']);
+    }
+
+    return false;
+  }
+
+  /**
    * returns arunning deal-object if available
    *
    * @author Matthias Pfefferle

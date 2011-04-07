@@ -12,7 +12,7 @@
     	</tr>
     </thead>
     <tbody>
-  		<?php foreach($deals as $deal) { ?>
+  		<?php if ($deal) { ?>
   			<tr>
   				<td height="44" align="left" class="first"><div class="padleft"><?php echo link_to($deal->getSummary(), 'analytics/statistics?dealid='.$deal->getId().'&type=deal'); ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $deal->getRemainingCouponQuantity(); ?></div></td>
@@ -21,6 +21,10 @@
   				<td align="center" valign="middle"><div><?php echo $deal->getDealSummary() ? $deal->getDealSummary()->getClickbacks() : 0; ?></div></td>
   				<td align="center" valign="middle" class="last"><div><?php echo $deal->getDealSummary() ? $deal->getDealSummary()->getClickbackLikes() : 0; ?></div></td>
   			</tr>
+      <?php } else { ?>
+        <tr>
+          <td height="44" align="center" class="first" colspan="6"><div><?php echo __("No Deals"); ?></div></td>
+        </tr>
       <?php } ?>
     	</tbody>
   	</table>

@@ -34,7 +34,7 @@ class analyticsComponents extends sfComponents
 
   public function executeActive_deal_table(sfWebRequest $request) {
     $domain_profile = DomainProfileTable::getInstance()->findOneBy("url", $this->host);
-    $this->deals = DealTable::getInstance()->findBy("domain_profile_id", $domain_profile->getId());
+    $this->deal = DealTable::getApprovedAndRunning($domain_profile->getDomain());
   }
 
 	public function executeFilter_nav(sfWebRequest $request){
