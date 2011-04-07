@@ -29,7 +29,7 @@ class analyticsComponents extends sfComponents
 
   public function executeTop_url_overall_table(sfWebRequest $request) {
     $dm = MongoManager::getStatsDM();
-    $this->urls = $dm->getRepository("Documents\UrlSummary")->findBy(array("host" => $this->host))->limit(10)->sort(array("l" => "DESC"));
+    $this->urls = $dm->getRepository("Documents\UrlSummary")->findBy(array("host" => $this->host))->limit(10)->sort(array("l" => "DESC", "c" => "DESC"));
   }
 
   public function executeActive_deal_table(sfWebRequest $request) {
