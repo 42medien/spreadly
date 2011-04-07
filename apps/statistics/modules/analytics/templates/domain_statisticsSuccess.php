@@ -1,7 +1,7 @@
 <?php slot('content') ?>
 <div id="analytics-bread">
 	<?php echo link_to(__('Dashboard'), 'analytics/index'); ?>&nbsp;&gt;&nbsp;
-	<?php echo link_to($host->getHost(), 'analytics/domain_statistics?domainid='.$pDomainProfileId); ?>&nbsp;&gt;&nbsp;
+	<?php echo link_to($pHost->getHost(), 'analytics/domain_statistics?domainid='.$pDomainProfileId); ?>&nbsp;&gt;&nbsp;
 	<?php echo __('Overview'); ?>
 </div>
 

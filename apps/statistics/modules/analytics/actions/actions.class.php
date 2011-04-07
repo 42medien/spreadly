@@ -92,7 +92,7 @@ class analyticsActions extends sfActions
 
   public function executeDomain_statistics(sfWebRequest $request) {
     $dm = MongoManager::getStatsDM();
-  	$this->host = $dm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $this->pDomainProfile->getUrl()));
+  	$this->pHost = $dm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $this->pDomainProfile->getUrl()));
   }
 
   public function executeDomain_detail(sfWebRequest $request){
