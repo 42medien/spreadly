@@ -7,7 +7,7 @@
 var ChartPieRelationship = {
 
   init: function(pChartsettings) {
-    var lData = <?php echo getRelationshipChartData($pData); ?>;
+    var lData = <?php echo json_encode($pData); ?>;
 		var lOptions = {
 		    chart: {
 		      renderTo: 'chart_pie_relationship',
@@ -63,35 +63,35 @@ var ChartPieRelationship = {
 		             {
 		               name: '<?php echo __('Single');?>',
 		               color: '#3300cc',
-		               y: lData.relationship.singl
+		               y: (lData.rel.singl == undefined)?0:lData.rel.singl
 		             },{
 		               name: '<?php echo __('Unknown');?>',
 		               color: '#ff0000',
-		               y: lData.relationship.u
+		               y: (lData.rel.u == undefined)?0:lData.rel.u
 		             },{
 		               name: '<?php echo __('Relationship');?>',
 		               color: '#6666ff',
-		               y: lData.relationship.rel
+		               y: (lData.rel.rel == undefined)?0:lData.rel.rel
 		             },{
 		               name: '<?php echo __('Open relationship');?>',
 		               color: '#00cc33',
-		               y: lData.relationship.ior
+		               y: (lData.rel.ior == undefined)?0:lData.rel.ior
 		             },{
 		               name: '<?php echo __('Engaged');?>',
 		               color: '#ffcc00',
-		               y: lData.relationship.eng
+		               y: (lData.rel.eng == undefined)?0:lData.rel.eng
 		             },{
 		               name: '<?php echo __('Married');?>',
 		               color: '#ffcc66',
-		               y: lData.relationship.mar
+		               y: (lData.rel.mar == undefined)?0:lData.rel.mar
 		             },{
 		               name: '<?php echo __('Complicated');?>',
 		               color: '#66ff66',
-		               y: lData.relationship.compl
+		               y: (lData.rel.compl == undefined)?0:lData.rel.compl
 		             },{
 		               name: '<?php echo __('Widowed');?>',
 		               color: '#ff6666',
-		               y: lData.relationship.wid
+		               y: (lData.rel.wid == undefined)?0:lData.rel.wid
 		             }
 		         ]
           }]

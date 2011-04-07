@@ -1,5 +1,5 @@
 <?php use_helper('ChartData') ?>
-<div id="chart_pie_age_activities" class="pie-chart-medium"></div>
+<div id="chart_pie_gender_activities" class="pie-chart-medium"></div>
 
 <?php //var_dump($pChartsettings);die();?>
 <script type="text/javascript">
@@ -7,11 +7,10 @@
 var ChartPieGenderActivities = {
 
   init: function(pChartsettings) {
-    var lData = <?php echo getAgeChartData($pData); ?>;
-    debug.log(lData);
+    var lData = <?php echo json_encode($pData); ?>;
 		var lOptions = {
 		    chart: {
-		      renderTo: 'chart_pie_age_activities',
+		      renderTo: 'chart_pie_gender_activities',
 		      defaultSeriesType: 'pie',
 	        margin: pChartsettings.margin,
 	        height: parseInt(pChartsettings.height),
@@ -62,25 +61,17 @@ var ChartPieGenderActivities = {
 		      name: 'Gender',
 		      data: [
 		             {
-		               name: '<?php echo __("under 18 years"); ?>',
+		               name: '<?php echo __("Female"); ?>',
 		               color: '#3300cc',
-		               y: lData.age.u_18
+		               y: (lData.sex.f == undefined)?0:lData.sex.f
 		             },{
-		               name: '<?php echo __("18 to 24 years"); ?>',
+		               name: '<?php echo __("Unknown"); ?>',
 		               color: '#ff0000',
-		               y: lData.age.b_18_24
+		               y: (lData.sex.u == undefined)?0:lData.sex.u
 		             },{
-		               name: '<?php echo __("25 to 34 years"); ?>',
+		               name: '<?php echo __("Male"); ?>',
 		               color: '#ffcc00',
-		               y: lData.age.b_25_34
-		             },{
-		               name: '<?php echo __("35 to 54 years"); ?>',
-		               color: '#ffcc66',
-		               y: lData.age.b_35_54
-		             },{
-		               name: '<?php echo __("over 55 years"); ?>',
-		               color: '#66ff66',
-		               y: lData.age.o_55
+		               y: (lData.sex.m == undefined)?0:lData.sex.m
 		             }
 		         ]
           }]

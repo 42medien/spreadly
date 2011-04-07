@@ -1,5 +1,5 @@
 <?php use_helper('ChartData') ?>
-<div id="chart_pie_gender_activities" class="pie-chart-medium"></div>
+<div id="chart_pie_age_activities" class="pie-chart-medium"></div>
 
 <?php //var_dump($pChartsettings);die();?>
 <script type="text/javascript">
@@ -7,10 +7,11 @@
 var ChartPieGenderActivities = {
 
   init: function(pChartsettings) {
-    var lData = <?php echo getGenderChartData($pData); ?>;
+    var lData = <?php echo json_encode($pData); ?>;
+    debug.log(lData);
 		var lOptions = {
 		    chart: {
-		      renderTo: 'chart_pie_gender_activities',
+		      renderTo: 'chart_pie_age_activities',
 		      defaultSeriesType: 'pie',
 	        margin: pChartsettings.margin,
 	        height: parseInt(pChartsettings.height),
@@ -61,17 +62,25 @@ var ChartPieGenderActivities = {
 		      name: 'Gender',
 		      data: [
 		             {
-		               name: '<?php echo __("Female"); ?>',
+		               name: '<?php echo __("under 18 years"); ?>',
 		               color: '#3300cc',
-		               y: lData.gender.f
+		               y: (lData.age.u_18 == undefined)?0:lData.age.u_18
 		             },{
-		               name: '<?php echo __("Unknown"); ?>',
+		               name: '<?php echo __("18 to 24 years"); ?>',
 		               color: '#ff0000',
-		               y: lData.gender.u
+		               y: (lData.age.b_18_24 == undefined)?0:lData.age.b_18_24
 		             },{
-		               name: '<?php echo __("Male"); ?>',
+		               name: '<?php echo __("25 to 34 years"); ?>',
 		               color: '#ffcc00',
-		               y: lData.gender.m
+		               y: (lData.age.b_25_34 == undefined)?0:lData.age.b_25_34
+		             },{
+		               name: '<?php echo __("35 to 54 years"); ?>',
+		               color: '#ffcc66',
+		               y: (lData.age.b_35_54 == undefined)?0:lData.age.b_35_54
+		             },{
+		               name: '<?php echo __("over 55 years"); ?>',
+		               color: '#66ff66',
+		               y: (lData.age.o_55 == undefined)?0:lData.age.o_55
 		             }
 		         ]
           }]

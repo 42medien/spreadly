@@ -32,7 +32,7 @@
 </div>
 <div id="demo-pie-charts" class="clearfix">
 	<div class="alignleft" id="gender-chart">
-		<?php include_partial('analytics/chart_pie_example', array('pChartsettings' =>
+		<?php include_partial('analytics/chart_pie_gender', array('pChartsettings' =>
 					'{
 								"width": 300,
 								"height": 130,
@@ -40,11 +40,11 @@
 								"plotsize": "50%",
 								"bgcolor" : "#EBEAEA",
 								"renderto":"gender-chart"
-						}'
+						}', 'pData' => $pHost->getDemographics()
 		)); ?>
 	</div>
 	<div class="alignleft" id="age-chart">
-		<?php include_partial('analytics/chart_pie_example', array('pChartsettings' =>
+		<?php include_partial('analytics/chart_pie_age', array('pChartsettings' =>
 					'{
 								"width": 300,
 								"height": 130,
@@ -52,11 +52,11 @@
 								"plotsize": "50%",
 								"bgcolor" : "#EBEAEA",
 								"renderto":"age-chart"
-						}'
+						}', 'pData' => $pHost->getDemographics()
 		)); ?>
 	</div>
 	<div class="alignleft" id="relation-chart">
-		<?php include_partial('analytics/chart_pie_example', array('pChartsettings' =>
+		<?php include_partial('analytics/chart_pie_relationship', array('pChartsettings' =>
 					'{
 								"width": 300,
 								"height": 130,
@@ -64,7 +64,7 @@
 								"plotsize": "50%",
 								"bgcolor" : "#EBEAEA",
 								"renderto":"relation-chart"
-						}'
+						}', 'pData' => $pHost->getDemographics()
 		)); ?>
 	</div>
 </div>
