@@ -20,12 +20,12 @@ class analyticsActions extends sfActions
    */
   public function preExecute() {
     $request = $this->getRequest();
-    $this->pVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
 
-    if(count($this->pVerifiedDomains) > 0) {
-      $this->pHostId = $request->getParameter('host_id', $this->pVerifiedDomains[0]->getId());
-      $this->lDomainProfile = DomainProfileTable::getInstance()->find($this->pHostId);
-      //$this->forward404Unless($this->lDomainProfile && $this->lDomainProfile->getSfGuardUserId()!= $this->getUser()->getUserId());
+    $this->pDomainProfileId = $request->getParameter('domainid', null);
+
+    if($this->pDomainProfileId) {
+      $this->pDomainProfile = DomainProfileTable::getInstance()->find($this->pDomainProfileId);
+      $this->forward404Unless($this->pDomainProfile && $this->lDomainProfile->getSfGuardUserId() != $this->getUser()->getUserId());
     }
     $this->pAggregation = $request->getParameter('aggregation', 'daily');
     $this->pDateFrom = $request->getParameter('date-from', date('Y-m-d', strtotime("6 days ago")));
