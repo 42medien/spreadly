@@ -1,9 +1,9 @@
 <?php use_helper('Date', 'DomainProfiles', 'Text') ?>
-<div class="data-tablebox">
+<div class="data-tablebox two-line-table">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tablesorter scrolltable" id="analytics-url-table" style="width: 930px;">
 	<thead>
   	<tr>
-			<th height="32" align="center" valign="middle" class="first"><div class="sortlink"><?php echo __('Top-URLs Overall'); ?></div></th>
+			<th align="center" valign="middle" class="first"><div class="sortlink"><?php echo __('Top-URLs Overall'); ?></div></th>
 	    <th align="center" valign="middle"><div class="sortlink"><?php echo __('Distribution');?></div></th>
 	    <th align="center" valign="middle"><div class="sortlink"><?php echo __('Likes');?></div> </th>
 	    <th align="center" valign="middle"><div class="sortlink"><?php echo __('Reach');?></div></th>
@@ -13,7 +13,7 @@
   <tbody>
     <?php foreach($pData['data'] as $i => $data){ ?>
 			<tr>
-				<td height="44" align="left" class="first" style="line-height: 21px;">
+				<td align="left" class="first" style="line-height: 21px;">
 				  <div class="padleft">
 				  	<?php if($data['title'] && $data['title']!='') { ?>
 				    	<strong><?php echo truncate_text($data['title'], 60); ?></strong>

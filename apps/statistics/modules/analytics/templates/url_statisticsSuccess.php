@@ -51,7 +51,7 @@
 
 
 <?php slot('content') ?>
-  <?php include_partial('url_table', array("pHostId" => null, "pFrom" => null, "pTo" => null, "pData" => $pTopActivitiesData)) ?>
+  <?php include_partial('top_url_overall_table', array("pHostId" => null, "pFrom" => null, "pTo" => null, "pData" => $pTopActivitiesData)) ?>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
 

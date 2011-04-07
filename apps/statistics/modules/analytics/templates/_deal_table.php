@@ -14,12 +14,12 @@
   		<?php $i = 1;?>
   		<?php foreach($pDeals as $lDeal) { ?>
   			<tr>
-  				<td height="44" align="left" class="first"><div class="padleft"><?php echo link_to($lDeal->getSummary(), 'analytics/statistics?dealid='.$lDeal->getId().'&type=deal'); ?></div></td>
+  				<td align="left" class="first"><div class="padleft"><?php echo link_to($lDeal->getSummary(), 'analytics/statistics?dealid='.$lDeal->getId().'&type=deal'); ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $i; ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $i+10; ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $i+50; ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $i+100; ?></div></td>
-  				<td height="44" align="center" class="last"><div><?php echo 200-$i; ?></div></td>
+  				<td align="center" class="last"><div><?php echo 200-$i; ?></div></td>
   			</tr>
       <?php $i++; } ?>
     	</tbody>

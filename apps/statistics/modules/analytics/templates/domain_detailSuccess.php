@@ -4,7 +4,8 @@
 	<?php echo link_to($pDomainProfile->getUrl(), 'analytics/domain_statistics?domainid='.$pDomainProfile->getId()); ?>&nbsp;
 	<?php echo __('Overview'); ?>
 </div>
-
+<form action="/analytics/get_domain_detail" name="analytics-filter-form" id="analytics-filter-form">
+<input type="hidden" name="domainid" value="<?php echo $pDomainProfile->getId(); ?>" />
 <div>
 	<label id="websel" for="host_id">
 		<select class="custom-select" id="filter_period" name="filter_period">
@@ -17,42 +18,10 @@
 	</label>
 	<?php echo link_to('Other period', '/', array('id' => 'select-period-link')); ?>
 </div>
+</form>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
 
-<?php slot('content') ?>
-<div id="line-chart-example">
-<?php include_partial('analytics/chart_line_example'); ?>
+<div id="domain-detail-content">
+<?php include_partial('analytics/domain_detail_content', array('pHost' => $pHost, "pDeals" => $pDeals)); ?>
 </div>
-<?php end_slot(); ?>
-<?php include_partial('global/graybox'); ?>
-
-<?php slot('content') ?>
-  <?php include_partial('url_table', array("pHostId" => null, "pFrom" => null, "pTo" => null, "pData" => $pTopActivitiesData)) ?>
-<?php end_slot(); ?>
-<?php include_partial('global/graybox'); ?>
-
-
-<?php slot('content') ?>
-<div id="demo-pie-charts" class="clearfix">
-	<div class="alignleft">
-		<?php include_partial('analytics/chart_pie_example', array('pChartsettings' =>
-					'{
-								"width": 300,
-								"height": 130,
-								"margin": [ 0, 0, 10, 40],
-								"plotsize": "40%",
-								"bgcolor" : "#e1e1e1"
-						}'
-		)); ?>
-	</div>
-</div>
-<?php end_slot(); ?>
-<?php include_partial('global/graybox'); ?>
-
-<?php if(count($pDeals) > 0) { ?>
-<?php slot('content') ?>
-	<?php include_partial('analytics/deal_table', array('pDeals' => $pDeals)); ?>
-<?php end_slot(); ?>
-<?php include_partial('global/graybox'); ?>
-<?php } ?>
