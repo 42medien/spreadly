@@ -1,7 +1,7 @@
 <?php slot('content') ?>
 <div id="analytics-bread">
 	<?php echo link_to(__('Dashboard'), 'analytics/index'); ?>&nbsp;&gt;&nbsp;
-	<?php echo link_to($pHost->getHost(), 'analytics/domain_statistics?domainid='.$pHost->getId()); ?>&nbsp;&gt;&nbsp;
+	<?php echo link_to($host->getHost(), 'analytics/domain_statistics?domainid='.$pDomainProfileId); ?>&nbsp;&gt;&nbsp;
 	<?php echo __('Overview'); ?>
 </div>
 
@@ -69,7 +69,8 @@
 	</div>
 </div>
 
-<?php echo link_to('Show Details', 'analytics/domain_detail?host='.$pHost->getHost(), array('class' => 'alignright'));?>
+<?php echo link_to('Show Details', 'analytics/domain_detail?domainid='.$pDomainProfileId, array('class' => 'alignright'));?>
+
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
 

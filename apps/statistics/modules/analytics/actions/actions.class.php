@@ -96,19 +96,10 @@ class analyticsActions extends sfActions
   }
 
   public function executeDomain_detail(sfWebRequest $request){
-		$lDomainId = $request->getParameter('domainid');
-		$this->pDomain = DomainProfileTable::getInstance()->find($lDomainId);
-
   	$lQuery = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC");
   	$this->pDeals = $lQuery->execute();
 
-    $this->pActivityCount = MongoUtils::getYesterdaysActivityCountForDomainProfiles($this->pVerifiedDomains);
-    $this->pVerifiedDomains = $this->sortDomainProfilesByCount($this->pVerifiedDomains, $this->pActivityCount);
-    $domainUrls = array();
-    foreach ($this->pVerifiedDomains as $domain) {
-      $domainUrls[] = $domain->getUrl();
-    }
-    $this->pTopActivitiesData = MongoUtils::getYesterdaysTopActivitiesData($domainUrls);
+    $this->pTopActivitiesData = MongoUtils::getYesterdaysTopActivitiesData(array());
   }
 
   public function executeUrl_statistics(sfWebRequest $request){
