@@ -22,6 +22,7 @@ class analyticsActions extends sfActions
     $request = $this->getRequest();
 
     $this->pDomainProfileId = $request->getParameter('domainid', null);
+
     // check if user is allowed to see the statistics page
     if($this->pDomainProfileId) {
       $this->pDomainProfile = DomainProfileTable::getInstance()->find($this->pDomainProfileId);
@@ -37,7 +38,6 @@ class analyticsActions extends sfActions
     $this->pType = $request->getParameter('type', 'url_activities');
     //first for first click on a deal
     $this->pIsDeal = $request->getParameter('isdeal', false);
-
   }
 
  /**

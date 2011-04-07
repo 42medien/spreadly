@@ -5,7 +5,7 @@
 	<?php echo __('Overview'); ?>
 </div>
 
-<?php echo link_to('Show Details', 'analytics/domain_detail?domainid='.$pHost->getId(), array('class' => 'alignright'));?>
+<?php echo link_to('Show Details', 'analytics/domain_detail?domainid='.$pDomainProfileId, array('class' => 'alignright'));?>
 <h2><?php echo __('Overview for domain %domain%', array('%domain%' => $pHost->getHost()));?></h2>
 <div class="clearfix" id="stat-infos">
 	<div class="alignleft stat-info-box">
