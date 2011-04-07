@@ -22,7 +22,7 @@ class analyticsActions extends sfActions
     $request = $this->getRequest();
 
     $this->pDomainProfileId = $request->getParameter('domainid', null);
-
+    // check if user is allowed to see the statistics page
     if($this->pDomainProfileId) {
       $this->pDomainProfile = DomainProfileTable::getInstance()->find($this->pDomainProfileId);
       $this->forward404Unless($this->pDomainProfile && ($this->pDomainProfile->getSfGuardUserId() == $this->getUser()->getUserId()));
