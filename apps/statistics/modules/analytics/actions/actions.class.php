@@ -25,8 +25,9 @@ class analyticsActions extends sfActions
 
     if($this->pDomainProfileId) {
       $this->pDomainProfile = DomainProfileTable::getInstance()->find($this->pDomainProfileId);
-      $this->forward404Unless($this->pDomainProfile && $this->lDomainProfile->getSfGuardUserId() != $this->getUser()->getUserId());
+      $this->forward404Unless($this->pDomainProfile && ($this->pDomainProfile->getSfGuardUserId() == $this->getUser()->getUserId()));
     }
+
     $this->pAggregation = $request->getParameter('aggregation', 'daily');
     $this->pDateFrom = $request->getParameter('date-from', date('Y-m-d', strtotime("6 days ago")));
     $this->pDateTo = $request->getParameter('date-to', date('Y-m-d'));
@@ -91,8 +92,7 @@ class analyticsActions extends sfActions
 
   public function executeDomain_statistics(sfWebRequest $request) {
     $dm = MongoManager::getStatsDM();
-		$domain = DomainProfileTable::getInstance()->find($request->getParameter('domainid'));
-  	$this->host = $dm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $domain->getUrl()));
+  	$this->host = $dm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $this->pDomainProfile->getUrl()));
   }
 
   public function executeDomain_detail(sfWebRequest $request){
