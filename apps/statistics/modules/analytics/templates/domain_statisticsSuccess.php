@@ -36,7 +36,7 @@
 					'{
 								"width": 300,
 								"height": 130,
-								"margin": [ 0, 0, 10, 10],
+								"margin": [ 10, 0, 10, 10],
 								"plotsize": "50%",
 								"bgcolor" : "#EBEAEA",
 								"renderto":"gender-chart"
@@ -48,7 +48,7 @@
 					'{
 								"width": 300,
 								"height": 130,
-								"margin": [ 0, 0, 10, 10],
+								"margin": [ 10, 0, 10, 10],
 								"plotsize": "50%",
 								"bgcolor" : "#EBEAEA",
 								"renderto":"age-chart"
@@ -60,7 +60,7 @@
 					'{
 								"width": 300,
 								"height": 130,
-								"margin": [ 0, 0, 10, 10],
+								"margin": [ 10, 0, 10, 10],
 								"plotsize": "50%",
 								"bgcolor" : "#EBEAEA",
 								"renderto":"relation-chart"
