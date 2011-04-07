@@ -27,7 +27,7 @@
 		<div class="alignleft stat-info-right"><?php echo __('%count% coming from ClickBacks', array('%count%' => $host->getClickbacks())); ?></div>
 	</div>
 	<div class="alignleft css-arrow-big">
-	</div>
+</div>
 
 </div>
 <div id="demo-pie-charts" class="clearfix">

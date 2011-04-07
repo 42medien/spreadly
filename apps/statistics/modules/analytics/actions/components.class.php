@@ -15,6 +15,7 @@ class analyticsComponents extends sfComponents
 	public function initialize($context, $module, $action){
     $parentRet = parent::initialize($context, $module, $action);
 		$request = $context->getRequest();
+		$this->pDomainProfileId = $request->getParameter('domainid', null);
     $this->pVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
     $this->pHostId = $request->getParameter('host_id', $this->pVerifiedDomains[0]->getId());
     $this->pAggregation = $request->getParameter('aggregation', 'daily');
