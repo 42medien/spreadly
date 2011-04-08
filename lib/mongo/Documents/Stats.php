@@ -25,7 +25,7 @@ abstract class Stats extends BaseDocument {
         $res[$key] = ($includePath ? " ".$initial."['$key']" : $initial);
       }
       
-      $res['likes_by_hour'] =  $includePath ? $initial."['likes_by_hour']" : array();
+      $res['h'] =  $includePath ? $initial."['h']" : array();
       return $res;
   }
   
@@ -68,8 +68,8 @@ abstract class Stats extends BaseDocument {
     $res = "\n";
     foreach (self::toBaseMap() as $key => $value) {
       $res .= "if(".$valueVar."['$key']) {\n";
-      if(is_array($key)) {
-        foreach ($key as $index => $childValue) {
+      if(is_array($value)) {
+        foreach ($value as $index => $childValue) {
           $res .= "  ".$sumVar."['$key']['$index'] += ".$valueVar."['$key']['$index'];\n";
         }
       } else {
