@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Deal
  *
@@ -217,5 +216,9 @@ class Deal extends BaseDeal {
       $lResult[] = trim($lTag);
     }
     return $lResult;
+  }
+
+  public function getRemainingDays() {
+    return (strtotime(date('Y-m-d', strtotime($this->getEndDate()))) - strtotime(date('Y-m-d', strtotime('now')))) / 60 / 60 / 24;
   }
 }
