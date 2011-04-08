@@ -546,7 +546,7 @@ td.editinplaceclick {
 
 div.sortlink{
   cursor: pointer;
-  width: auto;    
+  width: auto;
   display: block;
 }
 
@@ -557,13 +557,13 @@ div.sortlink{
 .headerSortDown div{
   background: url("/img/asc-arrow.gif") no-repeat scroll right transparent;
   color: #58819A;
-  font-weight: bold;  
+  font-weight: bold;
 }
 
 .headerSortUp div{
   background: url("/img/desc-arrow.gif") no-repeat scroll right transparent;
   color: #58819A;
-  font-weight: bold;  
+  font-weight: bold;
 }
 
 th.headerSortDown,
@@ -600,7 +600,7 @@ th.headerSortUp.last {
 }
 
 .data-tablebox td div{
-  border-right: 1px solid #777575;  
+  border-right: 1px solid #777575;
 }
 
 .data-tablebox td div.padleft{
@@ -612,8 +612,8 @@ th.headerSortUp.last {
 }
 
 .stat-info-box{
-  padding: 15px; 
-  border: 1px solid #588199; 
+  padding: 15px;
+  border: 1px solid #588199;
   margin: 0px 0px;
   width: auto;
 }
@@ -668,7 +668,7 @@ th.headerSortUp.last {
 .twitter_width span{ min-width:30px; text-align:center; background:url(/img/twitter_icon.png) center 0px no-repeat;}
 .facebook span{ background: url(/img/facebook_icon.png) left 0px no-repeat; min-width:20px; height:17px;}
 .linkedin span{ background: url(/img/in_icon.png) left 0px no-repeat; min-width:17px; height:17px;}
-.gtalk span{ background: url(/img/gtalk_icon.png) left 0px no-repeat; min-width:19px; height:17px;}
+.gtalk span, .google span{ background: url(/img/gtalk_icon.png) left 0px no-repeat; min-width:19px; height:17px;}
 
 .mediaPartner .box{width:145px; padding-right:0px;}
 
@@ -684,10 +684,10 @@ th.headerSortUp.last {
 
 #navi ul p span{ padding:0}
 
-#navi .shares_box ul{ padding-left:12px;} 
+#navi .shares_box ul{ padding-left:12px;}
 #navi .shares_box ul li { padding-right:6px }
 #navi .shares_box ul li.facebook span { width:auto; min-width:18px}
- 
+
 .shares_box{ width:292px;}
 
 

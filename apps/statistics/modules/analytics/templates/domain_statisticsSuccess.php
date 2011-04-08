@@ -29,10 +29,9 @@
           <strong class="shares"><?php echo $pHost->getShares(); ?></strong></div>
       </div>
       <ul>
-        <li class="twitter"><span>4</span> </li>
-        <li class="facebook"><span>1</span></li>
-        <li class="linkedin"><span>1</span></li>
-        <li class="gtalk"><span>2</span></li>
+      <?php foreach ($pHost->getServices() as $key => $value) { ?>
+        <li class="<?php echo $key ?>"><span><?php echo $value['l']; ?></span></li>
+      <?php } ?>
       </ul>
     </div>
     <div class="stepBox mediaPartner alignleft">
@@ -42,10 +41,9 @@
           <strong class="media"><?php echo $pHost->getMediaPenetration(); ?></strong></div>
       </div>
       <ul>
-        <li class="twitter"><span>4</span> </li>
-        <li class="facebook"><span>1</span></li>
-        <li class="linkedin"><span>1</span></li>
-        <li class="gtalk"><span>2</span></li>
+      <?php foreach ($pHost->getServices() as $key => $value) { ?>
+        <li class="<?php echo $key ?>"><span><?php echo $value['mp']; ?></span></li>
+      <?php } ?>
       </ul>
     </div>
   </div>
