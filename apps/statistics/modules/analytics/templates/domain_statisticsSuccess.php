@@ -6,37 +6,58 @@
 </div>
 
 <?php echo link_to('Show Details', 'analytics/domain_detail?domainid='.$pDomainProfileId, array('class' => 'alignright'));?>
+
 <h2><?php echo __('Overview for domain %domain%', array('%domain%' => $pHost->getHost()));?></h2>
-<div class="clearfix" id="stat-infos">
-	<div class="alignleft stat-info-box">
-		<div class="alignleft stat-info-left"><strong><?php echo __("Likes"); ?></strong><br /><span class="stat-info-number"><?php echo $pHost->getLikes(); ?></span></div>
-		<div class="alignleft stat-info-right"><?php echo __('%count% coming from ClickBacks', array('%count%' => $pHost->getClickbackLikes())); ?></div>
-	</div>
-	<div class="alignleft css-arrow-big">
-	</div>
 
-	<div class="alignleft stat-info-box">
-		<div class="alignleft stat-info-left"><strong><?php echo __("Spreads"); ?></strong><br /><span class="stat-info-number"><?php echo $pHost->getShares(); ?></span></div>
-		<div class="alignleft stat-info-right"><?php echo __('%count% coming from ClickBacks', array('%count%' => '200')); ?></div>
-	</div>
-	<div class="alignleft css-arrow-big">
-	</div>
+  <div id="navi" class="clearfix">
+    <div class="stepBox alignleft">
+      <div class="box_container alignleft">
+        <div class="box">
+          <p><?php echo __("Likes"); ?><a href="#" ><img src="/img/qus_icon.png" title="Deals" alt="Deals" class="deals_ques" /></a></p>
+          <strong><?php echo $pHost->getLikes(); ?></strong></div>
+      </div>
+      <ul>
+        <li>
+          <p><span class="stepBox-text"><?php echo __('%count% coming from ClickBacks', array('%count%' => $pHost->getClickbackLikes())); ?></span></p>
+        </li>
+      </ul>
+    </div>
+    <div class="stepBox shares_box alignleft">
+      <div class="box_container alignleft">
+        <div class="box">
+          <p><?php echo __("Spreads"); ?><a href="#"><img src="/img/qus_icon.png" title="Shares" class="share_ques"  alt="Shares"/></a></p>
+          <strong class="shares"><?php echo $pHost->getShares(); ?></strong></div>
+      </div>
+      <ul>
+        <li class="twitter"><span>4</span> </li>
+        <li class="facebook"><span>1</span></li>
+        <li class="linkedin"><span>1</span></li>
+        <li class="gtalk"><span>2</span></li>
+      </ul>
+    </div>
+    <div class="stepBox mediaPartner alignleft">
+      <div class="box_container alignleft">
+        <div class="box">
+          <p class="media_text_space"><?php echo __("Media Penetration"); ?><a href="#"><img src="/img/qus_icon.png" title="Media Penetration" alt="Media Penetration" class="media_ques" /></a></p>
+          <strong class="media"><?php echo $pHost->getMediaPenetration(); ?></strong></div>
+      </div>
+      <ul>
+        <li class="twitter"><span>4</span> </li>
+        <li class="facebook"><span>1</span></li>
+        <li class="linkedin"><span>1</span></li>
+        <li class="gtalk"><span>2</span></li>
+      </ul>
+    </div>
+  </div>
 
-	<div class="alignleft stat-info-box">
-		<div class="alignleft stat-info-left"><strong><?php echo __("Media Penetration"); ?></strong><br /><span class="stat-info-number"><?php echo $pHost->getMediaPenetration(); ?></span></div>
-		<div class="alignleft stat-info-right"><?php echo __('%count% coming from ClickBacks', array('%count%' => $pHost->getClickbacks())); ?></div>
-	</div>
-	<div class="alignleft css-arrow-big">
-</div>
 
-</div>
 <div id="demo-pie-charts" class="clearfix">
 	<div class="alignleft" id="gender-chart">
 		<?php include_partial('analytics/chart_pie_gender', array('pChartsettings' =>
 					'{
-								"width": 300,
-								"height": 130,
-								"margin": [ 10, 0, 10, 10],
+								"width": 290,
+								"height": 170,
+								"margin": [ 30, 0, 10, 10],
 								"plotsize": "50%",
 								"bgcolor" : "#EBEAEA",
 								"renderto":"gender-chart"
@@ -46,9 +67,9 @@
 	<div class="alignleft" id="age-chart">
 		<?php include_partial('analytics/chart_pie_age', array('pChartsettings' =>
 					'{
-								"width": 300,
-								"height": 130,
-								"margin": [ 10, 0, 10, 10],
+								"width": 290,
+								"height": 170,
+								"margin": [ 30, 0, 10, 10],
 								"plotsize": "50%",
 								"bgcolor" : "#EBEAEA",
 								"renderto":"age-chart"
@@ -58,9 +79,9 @@
 	<div class="alignleft" id="relation-chart">
 		<?php include_partial('analytics/chart_pie_relationship', array('pChartsettings' =>
 					'{
-								"width": 300,
-								"height": 130,
-								"margin": [ 10, 0, 10, 10],
+								"width": 290,
+								"height": 170,
+								"margin": [ 30, 0, 10, 10],
 								"plotsize": "50%",
 								"bgcolor" : "#EBEAEA",
 								"renderto":"relation-chart"

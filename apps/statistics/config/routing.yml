@@ -64,7 +64,11 @@ domain_statistics:
   
 domain_detail:
   url:  /analytics/domain_detail
-  param:  { module: analytics, action: domain_detail}    
+  param:  { module: analytics, action: domain_detail}   
+  
+select_period:
+  url:  /analytics/select_period
+  param:  { module: analytics, action: select_period}  
 
 get_analytics_content:
   url: /analytics/get_analytics_content

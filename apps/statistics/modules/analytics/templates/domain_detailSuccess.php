@@ -5,7 +5,7 @@
 	<?php echo __('Overview'); ?>
 </div>
 <form action="/analytics/get_domain_detail" name="analytics-filter-form" id="analytics-filter-form">
-<input type="hidden" name="domainid" value="<?php echo $pDomainProfile->getId(); ?>" />
+	<input type="hidden" name="domainid" value="<?php echo $pDomainProfile->getId(); ?>" />
 <div>
 	<label id="websel" for="host_id">
 		<select class="custom-select" id="filter_period" name="filter_period">
@@ -16,7 +16,7 @@
 			<option value="all"><?php echo __('All'); ?></option>
 	  </select>
 	</label>
-	<?php echo link_to('Other period', '/', array('id' => 'select-period-link')); ?>
+	<?php echo link_to('Other period', 'analytics/select_period?domainid='.$pDomainProfile->getId(), array('id' => 'select-period-link', 'class' => 'colorbox')); ?>
 </div>
 </form>
 <?php end_slot(); ?>

@@ -10,7 +10,8 @@ var AnalyticsTables = {
       AnalyticsTables.initTablesorter("dash-website-table");
       AnalyticsTables.initTablesorter("dash-deal-table");
       AnalyticsTables.initTablesorter("dash-url-table");
-      AnalyticsTables.initTablesorter("analytics-url-table");      
+      AnalyticsTables.initTablesorter("analytics-url-table");
+      AnalyticsTables.initTablesorter("top-url-table");
       jQuery('#dash-deal-table').tableScroll({height: 200, flush: true});
       jQuery('#dash-website-table').tableScroll({height: 200, flush: true});
       jQuery('#dash-url-table').tableScroll({height: 200, flush: true});      
@@ -74,20 +75,25 @@ var AnalyticsFilter = {
     },
     
     showContent: function(pHtml) {
-      jQuery('#analytics-content-box').empty();
-      jQuery('#analytics-content-box').append(pHtml);
+      jQuery('#domain-detail-content').empty();
+      jQuery('#domain-detail-content').append(pHtml);
     },
     
     initDatepicker: function(){
-      jQuery('input#date-from').datepicker({
+      jQuery('#datefrombox').datepicker({
         dateFormat: 'yy-mm-dd',
-        rangeSelect: true
+        onSelect: function(dateText, inst) {
+          jQuery('input#date-filter-from').val(dateText);
+        }
+
       });
-      
-      /*
-      jQuery('input#date-to').datepicker({
-        dateFormat: 'yy-mm-dd'       
-      });*/
+
+      jQuery('#datetobox').datepicker({
+        dateFormat: 'yy-mm-dd',
+        onSelect: function(dateText, inst) {
+          jQuery('input#date-filter-to').val(dateText);
+        }
+      });
     },  
     
     /**
