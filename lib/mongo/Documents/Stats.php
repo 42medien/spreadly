@@ -22,10 +22,10 @@ abstract class Stats extends BaseDocument {
   public static function toBaseMap($initial=0, $includePath=false) {
       $res = array();
       foreach (self::$SERVICE_DATA_KEYS as $key) {
-        $res[$key] = ($includePath ? $initial."['$key']" : $initial);
+        $res[$key] = ($includePath ? " ".$initial."['$key']" : $initial);
       }
       
-      #$res['likes_by_hour'] = array();
+      $res['likes_by_hour'] = array();
       return $res;
   }
   
@@ -33,7 +33,7 @@ abstract class Stats extends BaseDocument {
     $res = array();
     foreach (self::$SERVICE_KEYS as $baseKey) {
       foreach (self::$SERVICE_DATA_KEYS as $key) {
-        $res[self::$SERVICE_BASE][$baseKey][$key] = ($includePath ? $initial.".".self::$SERVICE_BASE.".$baseKey.$key" : $initial);
+        $res[self::$SERVICE_BASE][$baseKey][$key] = ($includePath ? " ".$initial.".".self::$SERVICE_BASE.".$baseKey.$key" : $initial);
       }
     }
     return $res;
@@ -43,15 +43,15 @@ abstract class Stats extends BaseDocument {
     $res = array();
     foreach (self::$GENDER_KEYS as $key) {
       $res[self::$DEMOGRAPHIC_BASE][self::$DEMOGRAPHIC_KEYS[0]][$key] = 
-        ($includePath ? $initial."['".self::$DEMOGRAPHIC_BASE."']['".self::$DEMOGRAPHIC_KEYS[0]."']['$key']" : $initial);
+        ($includePath ? " ".$initial.".".self::$DEMOGRAPHIC_BASE.".".self::$DEMOGRAPHIC_KEYS[0].".$key" : $initial);
     }
     foreach (self::$AGE_KEYS as $key) {
       $res[self::$DEMOGRAPHIC_BASE][self::$DEMOGRAPHIC_KEYS[1]][$key] = 
-        ($includePath ? $initial."['".self::$DEMOGRAPHIC_BASE."']['".self::$DEMOGRAPHIC_KEYS[1]."']['$key']" : $initial);
+        ($includePath ? " ".$initial.".".self::$DEMOGRAPHIC_BASE.".".self::$DEMOGRAPHIC_KEYS[1].".$key" : $initial);
     }
     foreach (self::$RELATIONSHIP_KEYS as $key) {
       $res[self::$DEMOGRAPHIC_BASE][self::$DEMOGRAPHIC_KEYS[2]][$key] = 
-        ($includePath ? $initial."['".self::$DEMOGRAPHIC_BASE."']['".self::$DEMOGRAPHIC_KEYS[2]."']['$key']" : $initial);
+        ($includePath ? " ".$initial.".".self::$DEMOGRAPHIC_BASE.".".self::$DEMOGRAPHIC_KEYS[2].".$key" : $initial);
     }    
     return $res;
   }
