@@ -646,10 +646,6 @@ th.headerSortUp.last {
   margin: 10px 0px 25px 0px;
 }
 
-
-
-#wrapper { width:927px; margin:20px auto 0px auto; }
-
 /*********stat-infos with arrows********/
 #navi{  width:916px; height:89px;}
 .stepBox{ background:url(/img/arrow_icon.png) right 0px no-repeat; height:71px; width:282px; margin-top:10px; margin-right:14px;}
@@ -689,9 +685,6 @@ th.headerSortUp.last {
 #navi .shares_box ul li.facebook span { width:auto; min-width:18px}
 
 .shares_box{ width:292px;}
-
-
-
 
 /* End Main Nav
 --------------------------------------------------------------------------------------------------------*/
