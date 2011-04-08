@@ -25,7 +25,7 @@ abstract class Stats extends BaseDocument {
         $res[$key] = ($includePath ? " ".$initial."['$key']" : $initial);
       }
       
-      $res['likes_by_hour'] = array();
+      $res['likes_by_hour'] =  $includePath ? $initial."['likes_by_hour']" : array();
       return $res;
   }
   
@@ -33,7 +33,7 @@ abstract class Stats extends BaseDocument {
     $res = array();
     foreach (self::$SERVICE_KEYS as $baseKey) {
       foreach (self::$SERVICE_DATA_KEYS as $key) {
-        $res[self::$SERVICE_BASE][$baseKey][$key] = ($includePath ? " ".$initial.".".self::$SERVICE_BASE.".$baseKey.$key" : $initial);
+        $res[self::$SERVICE_BASE][$baseKey][$key] = ($includePath ? "(".$initial."['".self::$SERVICE_BASE."']['$baseKey']) ? ". $initial."['".self::$SERVICE_BASE."']['$baseKey']['$key'] : 0" : $initial);
       }
     }
     return $res;
@@ -68,8 +68,14 @@ abstract class Stats extends BaseDocument {
     $res = "\n";
     foreach (self::toBaseMap() as $key => $value) {
       $res .= "if(".$valueVar."['$key']) {\n";
-      $res .= "  ".$sumVar."['$key'] += ".$valueVar."['$key'];\n";
-      $res .= "}\n";
+      if(is_array($key)) {
+        foreach ($key as $index => $childValue) {
+          $res .= "  ".$sumVar."['$key']['$index'] += ".$valueVar."['$key']['$index'];\n";
+        }
+      } else {
+        $res .= "  ".$sumVar."['$key'] += ".$valueVar."['$key'];\n";        
+      }
+      $res .= "}\n";      
     }
     return $res;
   }
