@@ -19,4 +19,6 @@ abstract class StatsRepository extends DocumentRepository
                     ->sort("day", "desc")
                     ->getQuery();
   }
+  
+  
 }

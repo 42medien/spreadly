@@ -47,6 +47,14 @@ class analyticsActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
+    echo '<pre>';
+    #var_dump(Documents\ActivityStats::toJsonMap('this', true)); exit;
+  	$repo = MongoManager::getStatsDM()->getRepository('Documents\ActivityStats');
+    $this->last30_by_host = $repo->findLast30()->toArray();
+    
+    var_dump($this->last30_by_host); exit;
+    #var_dump(Documents\ActivityStats::toJsonMap()); exit;
+    
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
     $this->pActivityCount = MongoUtils::getYesterdaysActivityCountForDomainProfiles($this->pVerifiedDomains);
     $this->pVerifiedDomains = $this->sortDomainProfilesByCount($this->pVerifiedDomains, $this->pActivityCount);
@@ -58,6 +66,9 @@ class analyticsActions extends sfActions
 
   	$lQuery = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC");
   	$this->pDeals = $lQuery->execute();
+  	
+
+    
   }
 
 
@@ -148,6 +159,12 @@ class analyticsActions extends sfActions
       $lSorted[] = $lUnsorted[$id];
     }
     return $lSorted;
+  }
+  
+  public function executeTesty(sfWebRequest $request) {
+    $repo = MongoManager::getStatsDM()->getRepository('Documents\ActivityStats');
+    $repo->findLast30();
+    
   }
 
 }

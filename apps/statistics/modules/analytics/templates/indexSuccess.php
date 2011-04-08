@@ -15,9 +15,9 @@
 	  		<?php foreach($pVerifiedDomains as $lDomain) { ?>
 	  			<tr class="scrollrow">
 	  				<td height="44" align="left" class="first"><div class="padleft"><?php echo link_to($lDomain->getUrl(), 'analytics/domain_statistics?domainid='.$lDomain->getId()); ?></div></td>
-	  		    <td align="center" valign="middle"><div><?php echo $pActivityCount[$lDomain->getId()]; ?></div></td>
-	  		    <td align="center" valign="middle" ><div><?php echo 1603-$i; ?></div></td>
-	  				<td height="44" align="center" class="last"><div><?php echo $i+674; ?></div></td>
+	  		    <td align="center" valign="middle"><div><?php echo $last30_by_host[$lDomain->getUrl()]['value']['l']; ?></div></td>
+	  		    <td align="center" valign="middle" ><div><?php echo $last30_by_host[$lDomain->getUrl()]['value']['sh']; ?></div></td>
+	  				<td height="44" align="center" class="last"><div><?php echo $last30_by_host[$lDomain->getUrl()]['value']['mp']; ?></div></td>
 	  			</tr>
 	      <?php $i++; } ?>
 	    </tbody>
