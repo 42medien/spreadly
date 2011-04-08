@@ -22,7 +22,7 @@ var ChartPieRelationship = {
 		      enabled: false
         },
 		    title: {
-		      text: false
+		      text: "<?php echo __('Relationship'); ?>"
 		    },
 		    tooltip: {
 		      formatter: function() {

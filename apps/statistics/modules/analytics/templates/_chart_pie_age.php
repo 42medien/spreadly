@@ -23,7 +23,7 @@ var ChartPieGenderActivities = {
 		      enabled: false
         },
 		    title: {
-		      text: false
+		      text: "<?php echo __('Age'); ?>"
 		    },
 		    tooltip: {
 		      formatter: function() {

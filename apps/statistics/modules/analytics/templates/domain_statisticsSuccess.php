@@ -57,8 +57,8 @@
 		<?php include_partial('analytics/chart_pie_gender', array('pChartsettings' =>
 					'{
 								"width": 305,
-								"height": 170,
-								"margin": [ 30, 0, 10, 10],
+								"height": 180,
+								"margin": [ 40, 0, 10, 10],
 								"plotsize": "50%",
 								"bgcolor" : "#e1e1e1",
 								"renderto":"gender-chart"
@@ -69,8 +69,8 @@
 		<?php include_partial('analytics/chart_pie_age', array('pChartsettings' =>
 					'{
 								"width": 305,
-								"height": 170,
-								"margin": [ 30, 20, 10, 20],
+								"height": 180,
+								"margin": [ 40, 20, 10, 20],
 								"plotsize": "50%",
 								"bgcolor" : "#e1e1e1",
 								"renderto":"age-chart"
@@ -81,8 +81,8 @@
 		<?php include_partial('analytics/chart_pie_relationship', array('pChartsettings' =>
 					'{
 								"width": 305,
-								"height": 170,
-								"margin": [ 30, 0, 10, 10],
+								"height": 180,
+								"margin": [ 40, 0, 10, 10],
 								"plotsize": "50%",
 								"bgcolor" : "#e1e1e1",
 								"renderto":"relation-chart"
