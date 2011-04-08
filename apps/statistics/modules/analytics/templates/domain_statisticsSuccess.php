@@ -47,8 +47,10 @@
       </ul>
     </div>
   </div>
+<?php end_slot(); ?>
+<?php include_partial('global/graybox'); ?>
 
-
+<?php slot('content') ?>
 <div id="demo-pie-charts" class="clearfix">
 	<div class="alignleft" id="gender-chart">
 		<?php include_partial('analytics/chart_pie_gender', array('pChartsettings' =>
