@@ -66,4 +66,22 @@ abstract class Summary extends BaseDocument {
    *    )
    */
   protected $demographics;
+
+  /**
+   * @Field(type="hash", name="s")
+   *
+   * for example:
+   *
+   * [s] => Array
+   *    (
+   *        [twitter] => Array
+   *            (
+   *                [l] => 16
+   *                [mp] => 1040
+   *                [cb] => 123
+   *                [cbl] => 2
+   *            )
+   *    )
+   */
+  protected $services;
 }
