@@ -58,17 +58,17 @@ class analyticsActions extends sfActions
 
   	$urlRepo = MongoManager::getStatsDM()->getRepository('Documents\ActivityUrlStats');
     $this->last30ByUrl = $urlRepo->findLast30($domainUrls)->toArray();
-    
+
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
 
 
-    $lQuery = DealTable::getInstance()->createQuery('SELECT d from Deal d WHERE (d.sf_guard_user_id = :user_id AND (d.start_date >= :30_days_ago OR d.end_date >= :30_days_ago))', array(
-        'user_id' =>  $this->getUser()->getUserId(),
-        '30_days_ago' => date("c", strtotime("30 days ago"))
-    ));
-    
-  	
+    $lQuery = Doctrine_Query::create()
+                        ->select('*')
+                        ->from('Deal d')
+                        ->where('d.sf_guard_user_id = ? AND (d.start_date = ? OR d.end_date >= ?)', array($this->getUser()->getUserId(), date("c", strtotime("30 days ago")), date("c", strtotime("30 days ago"))));
+
   	$this->pDeals = $lQuery->execute();
+
   	#var_dump(count($this->pDeals));exit;
     #var_dump($lQuery->getSqlQuery());exit;
 
@@ -78,7 +78,7 @@ class analyticsActions extends sfActions
     }
 
     $urlRepo = MongoManager::getStatsDM()->getRepository('Documents\DealStats');
-    $this->last30ByDeal = $urlRepo->findByDealIds($dealIds)->toArray();    
+    $this->last30ByDeal = $urlRepo->findByDealIds($dealIds)->toArray();
   }
 
 
@@ -170,11 +170,11 @@ class analyticsActions extends sfActions
     }
     return $lSorted;
   }
-  
+
   public function executeTesty(sfWebRequest $request) {
     $repo = MongoManager::getStatsDM()->getRepository('Documents\ActivityStats');
     $repo->findLast30();
-    
+
   }
 
   public function executeSelect_period(sfWebRequest $request) {
