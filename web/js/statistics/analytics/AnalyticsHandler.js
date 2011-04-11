@@ -80,21 +80,56 @@ var AnalyticsFilter = {
     },
     
     initDatepicker: function(){
-      jQuery('#datefrombox').datepicker({
-        dateFormat: 'yy-mm-dd',
-        onSelect: function(dateText, inst) {
-          jQuery('input#date-filter-from').val(dateText);
-        }
-
-      });
-
       jQuery('#datetobox').datepicker({
         dateFormat: 'yy-mm-dd',
         onSelect: function(dateText, inst) {
           jQuery('input#date-filter-to').val(dateText);
         }
       });
+      
+      var lToInstance = jQuery("#datetobox").data('datepicker');
+      debug.log(lToInstance);
+
+      jQuery('#datefrombox').datepicker({
+        dateFormat: 'yy-mm-dd',
+        onSelect: function(dateText, inst) {
+          jQuery('input#date-filter-from').val(dateText);
+          //dates.not( this ).datepicker( "option", "minDate", dateText );
+          var instance = jQuery(this).data('datepicker');
+          lToInstance.settings.minDate = new Date(dateText);
+          jQuery("#datetobox").datepicker("refresh");
+          debug.log(lToInstance.settings.minDate);
+        }
+      });      
+      
     },  
+    
+    closeLayer: function() {
+      debug.log('[AnalyticsFilter][closeLayer]');         
+      jQuery(document).bind('cbox_cleanup', function(){
+        debug.log('close');
+        AnalyticsFilter.sendDateForm();
+      });      
+    },
+    
+    sendDateForm: function() {
+      debug.log('[AnalyticsFilter][sendDateForm]');
+      var options = {
+          data : {
+            ei_kcuf : new Date().getTime()
+          },
+          type : 'POST',
+          dataType : 'json',
+          success : function(pResponse) {
+            AnalyticsFilterNav.show(pResponse.nav);
+            AnalyticsFilterContent.show(pResponse.content);
+            OnLoadGrafic.hideGrafic();
+          }
+        };
+         jQuery('#analytics-datefilter-form').ajaxSubmit(options); 
+         return false;      
+      
+    },
     
     /**
      * binds the click to the form and sends the values to the specified action

@@ -620,6 +620,51 @@ th.headerSortUp.last {
   margin: 0px 10px;
 }
 
+
+#filter-period-label{
+    position: relative;
+    width: 100px;
+    z-index: 50;
+    padding-top: 5px;    
+}
+
+#filter-period-or{
+    line-height: 31px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#select-period-link.button,
+#select-period-link.button span{
+  font-weight: normal;
+  font-size: 12px;
+}
+
+#analytics-datefilter-form{
+    height: 270px;
+    width: 500px;
+    padding: 10px;
+}
+
+#analytics-datefilter-form .textfield  {
+    background: url("../img/gray-textbg.png") no-repeat scroll -2px -30px transparent;
+    padding-left: 10px;
+}
+
+#analytics-datefilter-form .textfield span {
+    background: url("../img/gray-textbg.png") no-repeat scroll right 0 transparent;
+    padding-right: 11px;
+}
+
+#analytics-datefilter-form input {
+	color: #000;
+}
+
+.textfield-label{
+    padding-right: 5px;
+    padding-top: 7px;
+}
+
 /*********stat-infos with arrows********/
 #navi{  width:916px; height:89px;}
 .stepBox{ background:url(/img/arrow_icon.png) right 0px no-repeat; height:71px; width:282px; margin-top:10px; margin-right:14px;}

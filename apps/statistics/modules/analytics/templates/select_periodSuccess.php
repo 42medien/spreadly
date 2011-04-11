@@ -1,28 +1,30 @@
-<form action="/analytics/get_domain_detail" name="analytics-filter-form" id="analytics-datefilter-form">
+<h2><?php echo __('Select period'); ?></h2>
+<form action="/analytics/get_domain_detail" name="analytics-datefilter-form" id="analytics-datefilter-form">
 <input type="hidden" name="domainid" value="<?php echo $pDomainId; ?>" />
-<div class="alignleft zeitraumblock clearfix" style="height: 200px;">
-	<h2 class="webtitle"><?php echo __('Period'); ?></h2>
-	<div class="alignleft clearfix" style="width: 300px;">
-  <label class="textfield-whtmid">
-  	<span>
-  		<input type="text" id="date-filter-from" class="wd172" name="date-from" value="<?php echo $pDateFrom ?>" />
-  		<div id="datefrombox" style="width: 300px">&nbsp;</div>
-  	</span>
-  </label>
-  </div>
-  <span class="alignleft deshline"> - </span>
-  <div class="alignleft clearfix">
-  <label class="textfield-whtmid">
-  	<span>
-  		<input type="text" class="wd172" id="date-filter-to" name="date-to" value="<?php echo $pDateTo ?>" />
-  		<div id="datetobox" style="width: 300px">&nbsp;</div>
-  	</span>
-  </label>
-  </div>
+
+<div class="alignleft clearfix">
+	<div class="clearfix">
+		<span class="alignleft textfield-label"><?php echo __('Date from'); ?></span>
+		<label class="textfield">
+			<span><input type="text" id="date-filter-from" name="date-from" value="<?php echo $pDateFrom ?>" /></span>
+		</label>
+	</div>
+	<div id="datefrombox" class="datepickerbox">&nbsp;</div>
+</div>
+
+<div class="alignright clearfix">
+	<div class="clearfix">
+		<span class="alignleft textfield-label"><?php echo __('Date to'); ?></span>
+		<label class="textfield">
+			<span><input type="text" id="date-filter-to" name="date-to" value="<?php echo $pDateTo ?>" /></span>
+		</label>
+	</div>
+	<div id="datetobox" class="datepickerbox">&nbsp;</div>
 </div>
 </form>
+
+
 <script type="text/javascript">
-	AnalyticsFilter.initDatepicker({
-	  direction: 'down'
-	});
+	AnalyticsFilter.initDatepicker();
+	AnalyticsFilter.closeLayer();
 </script>

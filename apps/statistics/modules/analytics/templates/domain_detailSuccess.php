@@ -6,8 +6,8 @@
 </div>
 <form action="/analytics/get_domain_detail" name="analytics-filter-form" id="analytics-filter-form">
 	<input type="hidden" name="domainid" value="<?php echo $pDomainProfile->getId(); ?>" />
-<div>
-	<label id="websel" for="host_id">
+<div class="clearfix">
+	<label for="host_id" id="filter-period-label" class="alignleft">
 		<select class="custom-select" id="filter_period" name="filter_period">
 			<option value="today"><?php echo __('Today'); ?></option>
 			<option value="yesterday" selected="selected"><?php echo __('Yesterday'); ?></option>
@@ -16,7 +16,8 @@
 			<option value="all"><?php echo __('All'); ?></option>
 	  </select>
 	</label>
-	<?php echo link_to('Other period', 'analytics/select_period?domainid='.$pDomainProfile->getId(), array('id' => 'select-period-link', 'class' => 'colorbox')); ?>
+		<span class="alignleft" id="filter-period-or"><?php echo __('or'); ?></span>
+		<?php echo link_to('<span>'.__('Other period').'</span>', 'analytics/select_period?domainid='.$pDomainProfile->getId(), array('id' => 'select-period-link', 'class' => 'colorbox button')); ?>
 </div>
 </form>
 <?php end_slot(); ?>
