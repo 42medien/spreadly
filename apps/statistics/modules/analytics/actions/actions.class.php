@@ -47,28 +47,38 @@ class analyticsActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    echo '<pre>';
-    #var_dump(Documents\ActivityStats::toJsonMap('this', true)); exit;
-  	$repo = MongoManager::getStatsDM()->getRepository('Documents\ActivityStats');
-    $this->last30_by_host = $repo->findLast30()->toArray();
-    
-    var_dump($this->last30_by_host); exit;
-    #var_dump(Documents\ActivityStats::toJsonMap()); exit;
-    
-    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
-    $this->pActivityCount = MongoUtils::getYesterdaysActivityCountForDomainProfiles($this->pVerifiedDomains);
-    $this->pVerifiedDomains = $this->sortDomainProfilesByCount($this->pVerifiedDomains, $this->pActivityCount);
+    $this->pVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
     $domainUrls = array();
     foreach ($this->pVerifiedDomains as $domain) {
       $domainUrls[] = $domain->getUrl();
     }
-    $this->pTopActivitiesData = MongoUtils::getYesterdaysTopActivitiesData($domainUrls);
 
-  	$lQuery = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC");
-  	$this->pDeals = $lQuery->execute();
-  	
+  	$hostRepo = MongoManager::getStatsDM()->getRepository('Documents\ActivityStats');
+    $this->last30ByHost = $hostRepo->findLast30($domainUrls)->toArray();
 
+  	$urlRepo = MongoManager::getStatsDM()->getRepository('Documents\ActivityUrlStats');
+    $this->last30ByUrl = $urlRepo->findLast30($domainUrls)->toArray();
     
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
+
+
+    $lQuery = DealTable::getInstance()->createQuery('SELECT d from Deal d WHERE (d.sf_guard_user_id = :user_id AND (d.start_date >= :30_days_ago OR d.end_date >= :30_days_ago))', array(
+        'user_id' =>  $this->getUser()->getUserId(),
+        '30_days_ago' => date("c", strtotime("30 days ago"))
+    ));
+    
+  	
+  	$this->pDeals = $lQuery->execute();
+  	#var_dump(count($this->pDeals));exit;
+    #var_dump($lQuery->getSqlQuery());exit;
+
+  	$dealIds = array();
+    foreach ($this->pDeals as $deal) {
+      $dealIds[] = intval($deal->getId());
+    }
+
+    $urlRepo = MongoManager::getStatsDM()->getRepository('Documents\DealStats');
+    $this->last30ByDeal = $urlRepo->findByDealIds($dealIds)->toArray();    
   }
 
 
