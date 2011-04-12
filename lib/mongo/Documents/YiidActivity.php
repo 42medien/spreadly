@@ -88,6 +88,9 @@ class YiidActivity extends BaseDocument {
   /** @NotSaved */
   protected $clickback;
 
+  /** @NotSaved */
+  protected $new_checksum;
+
   /**
    * save this shit!
    */
@@ -126,11 +129,6 @@ class YiidActivity extends BaseDocument {
 
   public function generateHashtag() {
     return $this->isDeal() ? '#deal' : '#like';
-  }
-
-  public function setSoId($soId) {
-    $soId = new MongoId(urldecode($soId)."");
-    $this->so_id = $soId;
   }
 
   public function setUrl($url)       {
@@ -186,7 +184,6 @@ class YiidActivity extends BaseDocument {
    *
    * @author Matthias Pfefferle
    * @author Hannes Schippmann
-   * @param unknown_type $event
    */
   public function prePersist() {
     // @todo merge to mongo code
@@ -198,7 +195,7 @@ class YiidActivity extends BaseDocument {
 
     $this->upsertSocialObject();
     if(!$this->getC()) {
-      $this->setC(time());      
+      $this->setC(time());
     }
     $this->doValidate();
 
@@ -206,16 +203,35 @@ class YiidActivity extends BaseDocument {
   }
 
   /**
+   * pre-update hook
+   *
+   * @PreUpdate
+   *
+   * @author Matthias Pfefferle
+   * @author Hannes Schippmann
+   */
+  public function preUpdate() {
+    $this->prePersist();
+  }
+
+  /**
    * post-save hook
    *
    * @PostPersist
-   *
-   * @param unknown_type $event
    */
   public function postPersist() {
     UserTable::updateLatestActivityForUser($this->getUId(), time());
     $this->postIt();
     StatsFeeder::feed($this);
+  }
+
+  /**
+   * post-update hook
+   *
+   * @PostUpdate
+   */
+  public function postUpdate() {
+    $this->postPersist();
   }
 
   /**
@@ -283,7 +299,7 @@ class YiidActivity extends BaseDocument {
   /**
    * checks if the social-object exists or creates a new, if not
    */
-  private function upsertSocialObject() {
+  public function upsertSocialObject() {
     $dm = MongoManager::getDM();
     $so = $dm->getRepository('Documents\SocialObject')->fromYiidActivity($this, isset($this->skipUrlCheck)&&$this->skipUrlCheck);
 

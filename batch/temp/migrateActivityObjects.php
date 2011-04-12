@@ -6,16 +6,12 @@ sfContext::createInstance($configuration);
 
 $logger = sfContext::getInstance()->getLogger();
 
-// Initialize database manager.
-$dbManager = new sfDatabaseManager($configuration);
-$dbManager->loadConfiguration();
-
 $dm = MongoManager::getDM();
 
-$yas = $dm->getRepository('Documents\YiidActivity')->findBy(array("so_id" => array('$exists' => false)));
+$yas = $dm->getRepository('Documents\YiidActivity')->findBy(array("social_object" => array('$exists' => false)))->limit(200);
 
 foreach ($yas as $ya) {
-  $ya->upsertSocialObject();
+  $ya->setNewChecksum(time());
   $ya->save();
 }
 ?>
