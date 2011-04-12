@@ -22,8 +22,8 @@
 				    	<strong><?php echo __('No title'); ?></strong>
 				    <?php } ?>
 				    	<br />
-				    	<?php echo link_to($url->getUrl(), 'analytics/url_statistics', array('query_string' => 'url='.urlencode($url->getUrl()).'&amp;domainid='.$pDomainProfileId, 'class' => 'analytix-filter-link table-filter-link'));  ?>
-      				<?php //echo link_to($data['url'], 'analytics/url_statistics', array('query_string' => 'com=all&url='.$data['url'].'&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo.'&type=url_activities', 'class' => 'analytix-filter-link table-filter-link'));  ?>
+				    	<?php echo $url->getUrl(); ?>
+				    	<?php //echo link_to($url->getUrl(), 'analytics/url_statistics', array('query_string' => 'url='.urlencode($url->getUrl()).'&amp;domainid='.$pDomainProfileId, 'class' => 'analytix-filter-link table-filter-link'));  ?>
   			  </div>
   			</td>
 		    <td align="center"><div><?php echo $url->getLikes() ?></div></td>
