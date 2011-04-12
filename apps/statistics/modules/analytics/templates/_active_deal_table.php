@@ -14,7 +14,7 @@
     <tbody>
   		<?php if ($deal) { ?>
   			<tr>
-  				<td align="left" class="first"><div class="padleft"><?php echo link_to($deal->getSummary(), 'analytics/statistics?dealid='.$deal->getId().'&type=deal'); ?></div></td>
+  				<td align="left" class="first"><div class="padleft"><?php echo $deal->getSummary(); ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $deal->getRemainingCouponQuantity(); ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $deal->getRemainingDays(); ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $deal->getDealSummary() ? $deal->getDealSummary()->getMediaPenetration() : 0; ?></div></td>
