@@ -45,7 +45,7 @@
   		<?php $i = 1;?>
   		<?php foreach($pDeals as $lDeal) { ?>
   			<tr>
-  				<td height="44" align="left" class="first"><div class="padleft"><?php echo link_to($lDeal->getSummary(), 'analytics/statistics?dealid='.$lDeal->getId().'&type=deal'); ?></div></td>
+  				<td height="44" align="left" class="first"><div class="padleft"><?php echo $lDeal->getSummary(); ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $lDeal->getRemainingCouponQuantity(); ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $lDeal->getRemainingDays(); ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $last30ByDeal[$lDeal->getId()]['value']['l']; ?></div></td>
@@ -78,7 +78,7 @@
 	  		<?php foreach($last30ByUrl as $lUrl) { ?>
 	  		  <?php $lUrlValue = $lUrl['value'] ?>
 	  			<tr class="scrollrow">
-	  				<td height="44" align="left" class="first"><div class="padleft"><?php echo link_to($lUrl['_id'], '@analytics?host_id='.$lUrl['_id']); ?></div></td>
+	  				<td height="44" align="left" class="first"><div class="padleft"><?php echo $lUrl['_id']; ?></div></td>
 	  		    <td align="center" valign="middle"><div><?php echo $lUrlValue['l'] ?></div></td>
 	  		    <td align="center" valign="middle" ><div><?php echo $lUrlValue['sh'] ?></div></td>
 	  				<td height="44" align="center" class="last"><div><?php echo $lUrlValue['mp'] ?></div></td>
