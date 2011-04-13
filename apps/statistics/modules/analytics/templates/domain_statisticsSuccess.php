@@ -1,16 +1,15 @@
 <?php slot('content') ?>
 <?php echo link_to('Show Details', 'analytics/domain_detail?domainid='.$pDomainProfileId, array('class' => 'alignright'));?>
 <div id="analytics-bread">
-	<?php echo link_to(__('Dashboard'), 'analytics/index'); ?>&nbsp;&gt;&nbsp;
-	<?php echo link_to($pHost->getHost(), 'analytics/domain_statistics?domainid='.$pDomainProfileId); ?>&nbsp;&gt;&nbsp;
-	<?php echo __('Overview'); ?>
+	<?php echo link_to(__('Dashboard'), 'analytics/index'); ?>&nbsp;&nbsp;&gt;&nbsp;
+	<?php echo link_to($pHost->getHost(), 'analytics/domain_statistics?domainid='.$pDomainProfileId); ?>
 </div>
 <h2><?php echo __('Overview for domain %domain%', array('%domain%' => $pHost->getHost()));?></h2>
   <div id="navi" class="clearfix">
     <div class="stepBox alignleft">
       <div class="box_container alignleft">
         <div class="box">
-          <p><?php echo __("Likes"); ?><a href="#" ><img src="/img/qus_icon.png" title="Deals" alt="Deals" class="deals_ques" /></a></p>
+          <p><?php echo __("Likes"); ?><a href="#" ><img src="/img/qus_icon.png" title="<?php echo __("Likes"); ?>" alt="<?php echo __("Likes"); ?>" class="deals_ques" /></a></p>
           <strong><?php echo $pHost->getLikes(); ?></strong></div>
       </div>
       <ul>
@@ -22,7 +21,7 @@
     <div class="stepBox shares_box alignleft">
       <div class="box_container alignleft">
         <div class="box">
-          <p><?php echo __("Spreads"); ?><a href="#"><img src="/img/qus_icon.png" title="Shares" class="share_ques"  alt="Shares"/></a></p>
+          <p><?php echo __("Spreads"); ?><a href="#"><img src="/img/qus_icon.png" title="<?php echo __("Spreads"); ?>" class="share_ques"  alt="<?php echo __("Spreads"); ?>"/></a></p>
           <strong class="shares"><?php echo $pHost->getShares(); ?></strong></div>
       </div>
       <ul>
@@ -34,7 +33,7 @@
     <div class="stepBox mediaPartner alignleft">
       <div class="box_container alignleft">
         <div class="box">
-          <p class="media_text_space"><?php echo __("Media Penetration"); ?><a href="#"><img src="/img/qus_icon.png" title="Media Penetration" alt="Media Penetration" class="media_ques" /></a></p>
+          <p class="media_text_space"><?php echo __("Media Penetration"); ?><a href="#"><img src="/img/qus_icon.png" title="<?php echo __("Media Penetration"); ?>" alt="<?php echo __("Media Penetration"); ?>" class="media_ques" /></a></p>
           <strong class="media"><?php echo $pHost->getMediaPenetration(); ?></strong></div>
       </div>
       <ul>
