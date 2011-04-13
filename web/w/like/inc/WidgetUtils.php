@@ -328,8 +328,8 @@ class WidgetUtils {
       return false;
     }
 
-    $this->trackPageImpression($this->aUrl, $this->extractClickback(), $this->aUserId);
-    $this->trackVisit($this->aUrl);
+    $this->trackClickback();
+    $this->trackVisit();
   }
 
   /**
@@ -338,14 +338,15 @@ class WidgetUtils {
    * @param string $pUrl
    * @author weyandch
    */
-  private function trackVisit($pUrl) {
+  private function trackVisit() {
+    $lUrl = $this->aUrl;
     $lCollection = $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, 'visit');
 
-    $pUrl = urldecode($pUrl);
+    $lUrl = urldecode($lUrl);
 
     // data is stored as a tupel of host && month (host => example.com, month => 2010-10)
     $lQueryArray = array();
-    $lQueryArray['host'] = parse_url($pUrl, PHP_URL_HOST);
+    $lQueryArray['host'] = parse_url($lUrl, PHP_URL_HOST);
     $lQueryArray['month'] = date('Y-m');
 
     if ($lQueryArray['host'] != '') {
@@ -361,56 +362,15 @@ class WidgetUtils {
    * @param string $pClickback
    * @param int $pUser
    */
-  private function trackPageImpression($pUrl, $pClickback, $pUser) {
-    $lHost = parse_url($pUrl, PHP_URL_HOST);
-    $lCollection = $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, str_replace('.', '_', $lHost).".analytics.pis");
-
-    $lClickback = explode('.', urldecode($pClickback));
-    $lCbCommunity = $lClickback[0];
-    $lCbActivityId = $lClickback[1];
-    $lOriginYiidActivity = $this->findYiidActivityById($lCbActivityId);
-    $lOriginalActivityWasDealParticipation = $lOriginYiidActivity ? array_key_exists('d_id', $lOriginYiidActivity) : false;
+  private function trackClickback() {
+    $lClickback = $this->extractClickback();
+    $lClickback = explode('.', urldecode($lClickback));
+    $lOriginYiidActivity = $this->findYiidActivityById($lClickback[1]);
 
     if($lOriginYiidActivity) {
       $lActivityCollection = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, "yiid_activity");
       $lActivityCollection->update($lOriginYiidActivity, array('$inc' => array('cb' => 1)), array("upsert" => true));
     }
-
-    if (mb_detect_encoding($pUrl) != 'UTF-8') {
-      $pUrl = utf8_encode($pUrl);
-    }
-
-    $lDoc = array(
-      'url' => $pUrl,
-      'date' => new MongoDate(strtotime(date("Y-m-d")))
-    );
-
-    $lOptions = array("total" => 1);
-
-    if ($pUser) {
-      $lOptions["yiid"] = 1;
-    }
-
-    if ($pClickback) {
-      $lOptions["cb"] = 1;
-
-      $lLabel = $lClickback[0];
-
-      $lOptions['s.'.$lLabel.'.cb'] = 1;
-
-      if ($pUser) {
-        $lOptions['s.'.$lLabel.'.yiid'] = 1;
-      }
-    }
-
-    if($lOriginalActivityWasDealParticipation) {
-      $tmp = array();
-      foreach ($lOptions as $key => $value) {
-        $tmp['deal.'.$key] = $value;
-      }
-      $lOptions = $tmp;
-    }
-    $lCollection->update($lDoc, array('$inc' => $lOptions), array("upsert" => true));
   }
 
   /**
