@@ -24,7 +24,7 @@ task :prod do
 end
 
 task :staging do
-  role :web,    "mario.obaake.com"                        # Your HTTP server, Apache/etc
+  role :web,    "ec2-46-137-38-183.eu-west-1.compute.amazonaws.com"                        # Your HTTP server, Apache/etc
   set :button_deployment, false
   
   set :sf_env, "staging"
