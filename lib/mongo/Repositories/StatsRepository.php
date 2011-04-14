@@ -24,10 +24,7 @@ abstract class StatsRepository extends DocumentRepository
                     ->getQuery();
   }
   
-  public function findLast30($hosts) {
-    $fromDay = date('Y-m-d', strtotime("30 days ago"));
-    $toDay = date('Y-m-d', strtotime("today"));
-    
+  public function findByRange($hosts, $fromDay, $toDay) {
     $query = $this->createQueryBuilder()
                   ->field('host')->in($hosts)
                   ->field("day")->range(new MongoDate(strtotime($fromDay)), new MongoDate(strtotime($toDay)))
@@ -51,9 +48,15 @@ abstract class StatsRepository extends DocumentRepository
                     return sum;
                   }");
                   
-      $cursor = $query->getQuery(array("out" => "last30days.".$this->GROUP_BY))
-                      ->execute();
-      return $cursor;
+    $cursor = $query->getQuery(array("out" => "last30days.".$this->GROUP_BY))
+                    ->execute();
+    return $cursor;    
+  }
+  
+  public function findLast30($hosts) {
+    $fromDay = date('Y-m-d', strtotime("30 days ago"));
+    $toDay = date('Y-m-d', strtotime("today"));
+    return $this->findByRange($hosts, $fromDay, $toDay);
   }
   
 }
