@@ -1,3 +1,5 @@
+ h2{ line-height: 42px;}
+
 #general-ajax-loader{z-index: 1000000; position: absolute; display:none;}
 
 ul#logos_big {  margin: 30px 0 40px 30px; }
@@ -671,8 +673,8 @@ th.headerSortUp.last {
 
 .mediaPartner{ background:none;}
 .box_container{ background:url(/img/bg_image.png) left -68px no-repeat; height:68px; padding-left:11px; margin-top:1px;}
-.box{ background:url(/img/bg_image.png) right top no-repeat; height:68px; display:block; position:relative; width:122px; padding-right:10px; }
-.box_container .box p{ font-size:14px; font-weight:bold; color:#588199; text-align:center; line-height:15px; margin:0px; padding:7px 20px 0 0px;}
+.box{ background:url(/img/bg_image.png) right top no-repeat; height:68px; display:block; width:122px; padding-right:10px; }
+.box_container .box p{ font-size:14px; font-weight:bold; color:#588199; text-align:center; line-height:15px; margin:0px; padding:7px 0px 0 0px;}
 .box strong{ font-size:38px; line-height:28px; color:#588199; text-align:center; display:block; padding:5px 5px 0 0px;}
 .box_container{ margin-top:2px;}
 .box .media_text_space{ margin-left:-7px!important;}
@@ -685,11 +687,9 @@ th.headerSortUp.last {
 .linkedin span{ background: url(/img/in_icon.png) left 0px no-repeat; min-width:17px; height:17px;}
 .gtalk span, .google span{ background: url(/img/gtalk_icon.png) left 0px no-repeat; min-width:19px; height:17px;}
 
-.mediaPartner .box{width:145px; padding-right:0px;}
+.mediaPartner .box{width:auto; padding-right:0px;}
 
-.deals_ques{ position:absolute; right:42px; top:6px; }
-.share_ques{ position:absolute; right:30px; top:7px; }
-.media_ques{position:absolute; right:4px; top:7px;}
+.box .tooltip-icon{padding: 0px 5px 0px 5px;}
 
 #navi ul { padding-left:10px; float:left}
 #navi ul li{ padding-right:7px; list-style:none;  text-align:center; padding-top:19px;  float:left; font-size:12px;  }
@@ -704,6 +704,22 @@ th.headerSortUp.last {
 #navi .shares_box ul li.facebook span { width:auto; min-width:18px}
 
 .shares_box{ width:292px;}
+
+
+.tooltip {
+    background: url("/img/tooltip/black_arrow.png") repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    display: none;
+    font-size: 12px;
+    height: 70px;
+    padding: 25px;
+    width: 160px;
+}
+#dyna img {
+    border: 0 none;
+    cursor: pointer;
+    margin: 0 8px;
+}
 
 /* End Main Nav
 --------------------------------------------------------------------------------------------------------*/

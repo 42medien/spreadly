@@ -158,4 +158,4 @@ var DomainProfilesHandler = {
       return false;
     });      
   }
-}
+};

@@ -1,3 +1,7 @@
+/**
+ * @combine statistics
+ */
+
 /*
 
 Copyright (c) 2009 Dimas Begunoff, http://www.farinspace.com

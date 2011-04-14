@@ -14,7 +14,7 @@ var AnalyticsTables = {
       AnalyticsTables.initTablesorter("top-url-table");
       jQuery('#dash-deal-table').tableScroll({height: 200, flush: true});
       jQuery('#dash-website-table').tableScroll({height: 200, flush: true});
-      jQuery('#dash-url-table').tableScroll({height: 200, flush: true});      
+      jQuery('#dash-url-table').tableScroll({height: 200, flush: true}); 
       jQuery('#analytics-url-table').tableScroll({height: 200, flush: true});
     },
     
@@ -47,7 +47,6 @@ var AnalyticsFilter = {
     init: function() {
       debug.log('[AnalyticsFilter][init]');      
       //AnalyticsFilter.sendForm();
-      AnalyticsFilter.initDatepicker();
       AnalyticsFilter.initDropdown();
     },
     
@@ -66,7 +65,6 @@ var AnalyticsFilter = {
         type : 'POST',
         dataType : 'json',
         success : function(pResponse) {
-          debug.log(pResponse);
           AnalyticsFilter.showContent(pResponse.content);
           OnLoadGrafic.hideGrafic();
         }
@@ -77,28 +75,32 @@ var AnalyticsFilter = {
     showContent: function(pHtml) {
       jQuery('#domain-detail-content').empty();
       jQuery('#domain-detail-content').append(pHtml);
-    },
+    }
+};
+
+var AnalyticsDateFilter = {
     
     initDatepicker: function(){
       jQuery('#datetobox').datepicker({
         dateFormat: 'yy-mm-dd',
+        defaultDate: jQuery('input#date-filter-to').val(), 
+        minDate: jQuery('input#date-filter-from').val(),
         onSelect: function(dateText, inst) {
           jQuery('input#date-filter-to').val(dateText);
         }
       });
       
       var lToInstance = jQuery("#datetobox").data('datepicker');
-      debug.log(lToInstance);
 
       jQuery('#datefrombox').datepicker({
         dateFormat: 'yy-mm-dd',
+        defaultDate: jQuery('input#date-filter-from').val(),
         onSelect: function(dateText, inst) {
           jQuery('input#date-filter-from').val(dateText);
           //dates.not( this ).datepicker( "option", "minDate", dateText );
           var instance = jQuery(this).data('datepicker');
           lToInstance.settings.minDate = new Date(dateText);
           jQuery("#datetobox").datepicker("refresh");
-          debug.log(lToInstance.settings.minDate);
         }
       });      
       
@@ -107,13 +109,13 @@ var AnalyticsFilter = {
     closeLayer: function() {
       debug.log('[AnalyticsFilter][closeLayer]');         
       jQuery(document).bind('cbox_cleanup', function(){
-        debug.log('close');
-        AnalyticsFilter.sendDateForm();
+        AnalyticsDateFilter.sendForm();
       });      
     },
     
-    sendDateForm: function() {
+    sendForm: function() {
       debug.log('[AnalyticsFilter][sendDateForm]');
+      OnLoadGrafic.showGrafic();      
       var options = {
           data : {
             ei_kcuf : new Date().getTime()
@@ -121,41 +123,17 @@ var AnalyticsFilter = {
           type : 'POST',
           dataType : 'json',
           success : function(pResponse) {
-            AnalyticsFilterNav.show(pResponse.nav);
-            AnalyticsFilterContent.show(pResponse.content);
+            debug.log(pResponse);
+            AnalyticsFilter.showContent(pResponse.content);
             OnLoadGrafic.hideGrafic();
           }
         };
          jQuery('#analytics-datefilter-form').ajaxSubmit(options); 
          return false;      
-      
-    },
-    
-    /**
-     * binds the click to the form and sends the values to the specified action
-     * @author KM
-     */
-    sendForm: function() {
-      debug.log('[AnalyticsFilter][sendForm]');        
-      jQuery('#analytics-filter-button').bind('click', function() {
-        OnLoadGrafic.showGrafic();
-        var options = {
-            data : {
-              ei_kcuf : new Date().getTime()
-            },
-            type : 'POST',
-            dataType : 'json',
-            success : function(pResponse) {
-              AnalyticsFilterNav.show(pResponse.nav);
-              AnalyticsFilterContent.show(pResponse.content);
-              OnLoadGrafic.hideGrafic();
-            }
-          };
-           jQuery('#analytics-filter-form').ajaxSubmit(options); 
-           return false;
-      });
     }
+    
 };
+
 
 /**
  * handles the behaviour of the content (charts...)

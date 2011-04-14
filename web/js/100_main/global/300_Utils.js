@@ -359,6 +359,4 @@ var OnLoadGrafic = {
       return 600;
     }
   }
-  
-  
 };

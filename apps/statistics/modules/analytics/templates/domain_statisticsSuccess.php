@@ -9,8 +9,15 @@
     <div class="stepBox alignleft">
       <div class="box_container alignleft">
         <div class="box">
-          <p><?php echo __("Likes"); ?><a href="#" ><img src="/img/qus_icon.png" title="<?php echo __("Likes"); ?>" alt="<?php echo __("Likes"); ?>" class="deals_ques" /></a></p>
-          <strong><?php echo $pHost->getLikes(); ?></strong></div>
+          <p>
+          	<?php echo __("Likes"); ?>
+          	<a href="#" class="helptip">
+          		<img src="/img/qus_icon.png" alt="<?php echo __("Likes"); ?>" class="tooltip-icon" />
+          	</a>
+          </p>
+          <div class="tooltip">like tooltip</div>
+	        <strong><?php echo $pHost->getLikes(); ?></strong>
+      </div>
       </div>
       <ul>
         <li>
@@ -21,7 +28,13 @@
     <div class="stepBox shares_box alignleft">
       <div class="box_container alignleft">
         <div class="box">
-          <p><?php echo __("Spreads"); ?><a href="#"><img src="/img/qus_icon.png" title="<?php echo __("Spreads"); ?>" class="share_ques"  alt="<?php echo __("Spreads"); ?>"/></a></p>
+          <p>
+          	<?php echo __("Spreads"); ?>
+          	<a href="#" class="helptip">
+          		<img src="/img/qus_icon.png" class="tooltip-icon" alt="<?php echo __("Spreads"); ?>"/>
+          	</a>
+          </p>
+          <div class="tooltip">spread tooltip</div>
           <strong class="shares"><?php echo $pHost->getShares(); ?></strong></div>
       </div>
       <ul>
@@ -33,7 +46,13 @@
     <div class="stepBox mediaPartner alignleft">
       <div class="box_container alignleft">
         <div class="box">
-          <p class="media_text_space"><?php echo __("Media Penetration"); ?><a href="#"><img src="/img/qus_icon.png" title="<?php echo __("Media Penetration"); ?>" alt="<?php echo __("Media Penetration"); ?>" class="media_ques" /></a></p>
+          <p class="media_text_space">
+          	<?php echo __("Media Penetration"); ?>
+          	<a href="#" class="helptip">
+          		<img src="/img/qus_icon.png" title="<?php echo __("Media Penetration"); ?>" alt="<?php echo __("Media Penetration"); ?>"  class="tooltip-icon" />
+          	</a>
+          </p>
+          <div class="tooltip">media penetration tooltip</div>
           <strong class="media"><?php echo $pHost->getMediaPenetration(); ?></strong></div>
       </div>
       <ul>
