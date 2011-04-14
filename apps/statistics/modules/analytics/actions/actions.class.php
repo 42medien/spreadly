@@ -141,7 +141,7 @@ class analyticsActions extends sfActions
 
     $lDm = MongoManager::getStatsDM();
 
-    $lUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(array("host" => $lDomainProfile->getUrl(), "day" => new MongoDate(strtotime(date("Y-m-d", strtotime("7 days ago"))))));
+    $lUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(array("host" => $lDomainProfile->getUrl(), "day" => new MongoDate(strtotime(date("Y-m-d", strtotime($request->getParameter("date-to")))))));
     $lDeals = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC")->execute();
 
     $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_day', array('pUrls' => $lUrls, 'pDeals'=>$lDeals));
