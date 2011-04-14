@@ -25,6 +25,10 @@ abstract class StatsRepository extends DocumentRepository
   }
   
   public function findByRange($hosts, $fromDay, $toDay) {
+    // Cut off the time, in case it is coming as full datetime
+    $fromDay = date('Y-m-d', strtotime($fromDay));
+    $toDay = date('Y-m-d', strtotime($toDay));
+    
     $query = $this->createQueryBuilder()
                   ->field('host')->in($hosts)
                   ->field("day")->range(new MongoDate(strtotime($fromDay)), new MongoDate(strtotime($toDay)))

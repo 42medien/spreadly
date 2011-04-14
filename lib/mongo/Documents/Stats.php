@@ -25,7 +25,11 @@ abstract class Stats extends BaseDocument {
         $res[$key] = ($includePath ? " ".$initial."['$key']" : $initial);
       }
       
-      $res['h'] =  $includePath ? $initial."['h']" : array();
+      $initialArray = array();
+      for ($i=0; $i < 24; $i++) { 
+        $initialArray[$i]=0;
+      }
+      $res['h'] =  $includePath ? $initial."['h']" : $initialArray;
       return $res;
   }
   
@@ -68,14 +72,14 @@ abstract class Stats extends BaseDocument {
     $res = "\n";
     foreach (self::toBaseMap() as $key => $value) {
       $res .= "if(".$valueVar."['$key']) {\n";
-      if(is_array($value)) {
-        foreach ($value as $index => $childValue) {
-          $res .= "  ".$sumVar."['$key']['$index'] += ".$valueVar."['$key']['$index'];\n";
+      if($key=='h' && is_array($value)) {
+        for ($i=0; $i < 24; $i++) { 
+          $res .= "  ".$sumVar."['$key'][$i] += (!".$valueVar."['$key'] || ".$valueVar."['$key']['$i'] || isNaN(".$valueVar."['$key'][$i])) ? 0 : ".$valueVar."['$key']['$i'];\n";
         }
       } else {
         $res .= "  ".$sumVar."['$key'] += ".$valueVar."['$key'];\n";        
       }
-      $res .= "}\n";      
+      $res .= "}\n";
     }
     return $res;
   }

@@ -269,8 +269,10 @@ class StatsFeeder {
   private static function createUpsertForDayAndHost($pAnalyticsActivity, $pDocumentString) {
     $dm = MongoManager::getStatsDM();
     $lQuery = self::createUpsertForHost($pAnalyticsActivity, $pDocumentString);
-
+    
+    $likesByHour = $pAnalyticsActivity->getLikesByHour();
     $lQuery->field('day')->equals($pAnalyticsActivity->getDay())
+           ->field('h.'.$pAnalyticsActivity->getHourOfDay())->inc(intval($likesByHour[$pAnalyticsActivity->getHourOfDay()]))
            ->field('l')->inc(intval($pAnalyticsActivity->getLikes()))
            ->field('sh')->inc(intval($pAnalyticsActivity->getShares()))
            ->field('mp')->inc(intval($pAnalyticsActivity->getMediaPenetration()))
