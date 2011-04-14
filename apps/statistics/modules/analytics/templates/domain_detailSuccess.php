@@ -23,5 +23,5 @@
 <?php include_partial('global/graybox'); ?>
 
 <div id="domain-detail-content">
-<?php include_partial('analytics/domain_detail_content', array('pHost' => $pHost, "pDeals" => $pDeals)); ?>
+<?php include_partial('analytics/domain_detail_content', array('pHost' => $pHost, "pDeals" => $pDeals, 'pPeriod' => 'Yesterday')); ?>
 </div>

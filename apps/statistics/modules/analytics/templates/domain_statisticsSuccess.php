@@ -15,7 +15,7 @@
           		<img src="/img/qus_icon.png" alt="<?php echo __("Likes"); ?>" class="tooltip-icon" />
           	</a>
           </p>
-          <div class="tooltip">like tooltip</div>
+          <div class="tooltip"><h3><?php echo __('Likes'); ?></h3><?php echo __('Number of likes received for your content on your url.'); ?></div>
 	        <strong><?php echo $pHost->getLikes(); ?></strong>
       </div>
       </div>
@@ -34,7 +34,7 @@
           		<img src="/img/qus_icon.png" class="tooltip-icon" alt="<?php echo __("Spreads"); ?>"/>
           	</a>
           </p>
-          <div class="tooltip">spread tooltip</div>
+          <div class="tooltip"><h3><?php echo __('Spreads'); ?></h3><?php echo __("Total number of likes published in the social networks listed."); ?></div>
           <strong class="shares"><?php echo $pHost->getShares(); ?></strong></div>
       </div>
       <ul>
@@ -52,7 +52,7 @@
           		<img src="/img/qus_icon.png" title="<?php echo __("Media Penetration"); ?>" alt="<?php echo __("Media Penetration"); ?>"  class="tooltip-icon" />
           	</a>
           </p>
-          <div class="tooltip">media penetration tooltip</div>
+          <div class="tooltip"><h3><?php echo __('Media Penetration'); ?></h3><?php echo __("Total number of contacts that are able to view the like referring to your content."); ?></div>
           <strong class="media"><?php echo $pHost->getMediaPenetration(); ?></strong></div>
       </div>
       <ul>

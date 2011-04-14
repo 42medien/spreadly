@@ -25,6 +25,6 @@
 
 
 <script type="text/javascript">
-	AnalyticsFilter.initDatepicker();
-	AnalyticsFilter.closeLayer();
+	AnalyticsDateFilter.initDatepicker();
+	AnalyticsDateFilter.closeLayer();
 </script>

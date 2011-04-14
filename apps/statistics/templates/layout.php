@@ -113,5 +113,6 @@
       })();
     </script>
 		<img id="general-ajax-loader" style="display:none;" src="/img/global/ajax-loader-bar-circle.gif" />
+		</div>
 	</body>
 </html>

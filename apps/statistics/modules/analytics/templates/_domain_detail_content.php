@@ -1,4 +1,5 @@
 <?php slot('content') ?>
+<h2><?php echo __('Statistics from %period%', array('%period%' => $pPeriod)); ?></h2>
 <div id="line-chart-example">
 <?php include_partial('analytics/chart_line_example'); ?>
 </div>
