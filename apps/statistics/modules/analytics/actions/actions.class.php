@@ -127,26 +127,34 @@ class analyticsActions extends sfActions
   }
 
   public function executeGet_domain_detail(sfWebRequest $request) {
-    if ($request->getParameter("date-to")) {
-      $this->forward('analytics', 'get_domain_detail_by_range');
-    } else {
+    //if ($request->getParameter("date-to") && $request->getParameter("date-to") != date("Y-m-d", strtotime("yesterday"))) {
+    //  $this->forward('analytics', 'get_domain_detail_by_range');
+    //} else {
       $this->forward('analytics', 'get_domain_detail_by_day');
-    }
+    //}
   }
 
   public function executeGet_domain_detail_by_day(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
+
     $lDomainProfile = DomainProfileTable::getInstance()->find($request->getParameter('domainid'));
+
     $lDm = MongoManager::getStatsDM();
-    $lHost = $lDm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $lDomainProfile->getUrl()));
-    $lQuery = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC");
-    $lDeals = $lQuery->execute();
-    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content', array('pHost' => $lHost, 'pDeals'=>$lDeals));
+
+    $lUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(array("host" => $lDomainProfile->getUrl(), "day" => new MongoDate(strtotime(date("Y-m-d", strtotime("7 days ago"))))));
+    $lDeals = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC")->execute();
+
+    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_day', array('pUrls' => $lUrls, 'pDeals'=>$lDeals));
+
     return $this->renderText(json_encode($lReturn));
   }
 
   public function executeGet_domain_detail_by_range(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
+
+    $from = $request->getParameter("date-from", date("Y-m-d", strtotime("yesterday")));
+    $to = $request->getParameter("date-to");
+
     $lDomainProfile = DomainProfileTable::getInstance()->find($request->getParameter('domainid'));
     $lDm = MongoManager::getStatsDM();
     $lHost = $lDm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $lDomainProfile->getUrl()));
