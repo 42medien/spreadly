@@ -80,7 +80,7 @@ staging:
       db_name:                 yiid_staging
       collection_name:         session
       session_name:            spreadly_staging
-      session_cookie_domain:   .ec2-46-137-38-183.eu-west-1.compute.amazonaws.com
+      session_cookie_domain:   .ispread.it
       session_cookie_lifetime: 17776000
 
 ##
