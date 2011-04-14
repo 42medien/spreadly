@@ -119,8 +119,8 @@ class analyticsActions extends sfActions
 
   public function executeDomain_detail(sfWebRequest $request){
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
-  	$lQuery = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC");
-  	$this->pDeals = $lQuery->execute();
+  	$this->pDeals = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC")->execute();
+
   	$lDm = MongoManager::getStatsDM();
   	$this->pHost = $lDm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $this->pDomainProfile->getUrl()));
     $this->pTopActivitiesData = MongoUtils::getYesterdaysTopActivitiesData(array());
@@ -142,9 +142,9 @@ class analyticsActions extends sfActions
     $lDm = MongoManager::getStatsDM();
 
     $lUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(array("host" => $lDomainProfile->getUrl(), "day" => new MongoDate(strtotime(date("Y-m-d", strtotime($request->getParameter("date-to")))))));
-    $lDeals = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC")->execute();
+    $lHostSummary = $lDm->getRepository("Documents\ActivityStats")->findOneBy(array("host" => $lDomainProfile->getUrl(), "day" => new MongoDate(strtotime(date("Y-m-d", strtotime($request->getParameter("date-to")))))));
 
-    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_day', array('pUrls' => $lUrls, 'pDeals'=>$lDeals));
+    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_day', array('pUrls' => $lUrls, 'pHostSummary' => $lHostSummary));
 
     return $this->renderText(json_encode($lReturn));
   }
