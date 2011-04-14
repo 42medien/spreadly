@@ -127,14 +127,33 @@ class analyticsActions extends sfActions
   }
 
   public function executeGet_domain_detail(sfWebRequest $request) {
-  	$this->getResponse()->setContentType('application/json');
+    if ($request->getParameter("date-to")) {
+      $this->forward('analytics', 'get_domain_detail_by_range');
+    } else {
+      $this->forward('analytics', 'get_domain_detail_by_day');
+    }
+  }
+
+  public function executeGet_domain_detail_by_day(sfWebRequest $request) {
+    $this->getResponse()->setContentType('application/json');
     $lDomainProfile = DomainProfileTable::getInstance()->find($request->getParameter('domainid'));
-  	$lDm = MongoManager::getStatsDM();
-  	$lHost = $lDm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $lDomainProfile->getUrl()));
-  	$lQuery = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC");
-  	$lDeals = $lQuery->execute();
-  	$lReturn['content'] = $this->getPartial('analytics/domain_detail_content', array('pHost' => $lHost, 'pDeals'=>$lDeals));
-		return $this->renderText(json_encode($lReturn));
+    $lDm = MongoManager::getStatsDM();
+    $lHost = $lDm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $lDomainProfile->getUrl()));
+    $lQuery = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC");
+    $lDeals = $lQuery->execute();
+    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content', array('pHost' => $lHost, 'pDeals'=>$lDeals));
+    return $this->renderText(json_encode($lReturn));
+  }
+
+  public function executeGet_domain_detail_by_range(sfWebRequest $request) {
+    $this->getResponse()->setContentType('application/json');
+    $lDomainProfile = DomainProfileTable::getInstance()->find($request->getParameter('domainid'));
+    $lDm = MongoManager::getStatsDM();
+    $lHost = $lDm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $lDomainProfile->getUrl()));
+    $lQuery = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC");
+    $lDeals = $lQuery->execute();
+    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content', array('pHost' => $lHost, 'pDeals'=>$lDeals));
+    return $this->renderText(json_encode($lReturn));
   }
 
   public function executeUrl_statistics(sfWebRequest $request){
