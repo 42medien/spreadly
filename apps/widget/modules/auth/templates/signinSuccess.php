@@ -14,4 +14,3 @@
   </div>
 </div>
 <div class="whtboxbot"><span></span></div>
-<iframe src="http://widgets.<?php echo sfConfig::get("app_settings_host"); ?>/w/like/like.php?visible=false&url=dummy" border="none" width="0px" height="0px" style="border:none;width:0px;height:0px;"></iframe>
