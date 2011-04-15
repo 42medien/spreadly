@@ -148,7 +148,7 @@ class analyticsActions extends sfActions
         $request->setParameter("date-to", date("Y-m-d", strtotime($selector." days ago")));
         break;
     }
-
+        
     if ($request->getParameter("date-to")) {
       $this->forward('analytics', 'get_domain_detail_by_range');
     } else {
@@ -176,7 +176,7 @@ class analyticsActions extends sfActions
 
     $from = $request->getParameter("date-from", date("Y-m-d", strtotime("yesterday")));
     $to = $request->getParameter("date-to");
-
+    
     $lDomainProfile = DomainProfileTable::getInstance()->find($request->getParameter('domainid'));
     
     $lDm = MongoManager::getStatsDM();
@@ -185,6 +185,9 @@ class analyticsActions extends sfActions
     $lHost = $lDm->getRepository("Documents\ActivityStats")->findByRange(array($lDomainProfile->getUrl()), $from, $to);
     if($lHost) {
       $lHost = $lHost->toArray();
+      if(count($lHost) > 1) {
+        $lHost = $lHost[0];
+      }
     }
 
     $lQuery = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC");
