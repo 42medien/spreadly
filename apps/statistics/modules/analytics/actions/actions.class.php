@@ -118,6 +118,7 @@ class analyticsActions extends sfActions
   }
 
   public function executeDomain_detail(sfWebRequest $request){
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
     $lDm = MongoManager::getStatsDM();
 
     $this->pUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(array("host" => $this->pDomainProfile->getUrl(), "day" => new MongoDate(strtotime(date("Y-m-d", strtotime($request->getParameter("date-to")))))));
