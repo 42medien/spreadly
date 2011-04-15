@@ -7,7 +7,8 @@
 							<div class="alignright help_content step2_content">
 								<h3 class="title"><?php echo __("Help"); ?></h3>
 								<p><?php echo __("Please provide the exact web address. This URL should point to the location wanted for your Spread.ly button. Then chose your style and decide whether you like the button with pictures or not."); ?></p><br />
-                <p><?php echo __('Your individual code will now appear in the box. Click "Copy code" to insert your Spread.ly button.'); ?></p>
+                <p><?php echo __('Your individual code will now appear in the box. Click "Copy code" to insert your Spread.ly button.'); ?></p><br/>
+                <p><?php echo __("For more information read our %doku%", array('%doku%' => link_to('developer documentation', 'http://code.google.com/p/spreadly/wiki/developerdocumentation'))); ?></p>
 							</div>
 							<div class="alignleft stylestatus_box">
 								<h3 class="sub_title"><?php echo __('Step 2: Choose Site & Style'); ?></h3>
@@ -20,9 +21,10 @@
 										<fieldset class="group">
 										<?php if (!$pService || $pService->getSlug() == 'static') {?>
 											<div class="clearfix">
-												<label class="textfield"><span>
+												<label class="textfield">
+												<span>
 													<input type="text" class="wd183" name="likebutton[url]" id="likebutton_url" value="<?php echo __('Url of your site e.g. http://www.domain.com"'); ?>" />
-													</span>
+												</span>
 												</label>
 											</div>
 										<?php } else { ?>
