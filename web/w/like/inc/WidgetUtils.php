@@ -15,6 +15,7 @@ class WidgetUtils {
   private $aUserId = null;
   private $aSocialObject = null;
   private $aDeal = null;
+  private $aYiidActivity = null;
   private $aShowFriends = false;
 
   public function __construct() {
@@ -41,6 +42,7 @@ class WidgetUtils {
     $this->aUserId = $this->extractUserIdFromSession();
     $this->aSocialObject = $this->getSocialObjectByUrl();
     $this->aDeal = $this->getActiveDeal();
+    $this->aYiidActivity = $this->getYiidActivityBySocialObject();
   }
 
   public function getPopupUrl() {
@@ -61,6 +63,10 @@ class WidgetUtils {
 
   public function getSocialObject() {
     return $this->aSocialObject;
+  }
+
+  public function getYiidActivity() {
+    return $this->aYiidActivity;
   }
 
   public function getSocialObjectId() {
@@ -141,7 +147,7 @@ class WidgetUtils {
       $lSocialObjectArray = array();
     }
 
-    if($pUrl && !$this->isUrlValid($pUrl)) {
+    if ($pUrl && !$this->isUrlValid($pUrl)) {
       $lSocialObjectArray = array_merge(array(
         'urlerror'   => true,
       ), $lSocialObjectArray);
@@ -149,8 +155,7 @@ class WidgetUtils {
 
     // set counts for like on 0 if they're not set yet
     $lSocialObjectArray = array_merge(array(
-      'l_cnt' => 0,
-      'd_cnt' => 0,
+      'l_cnt' => 0
     ), $lSocialObjectArray);
 
     return $lSocialObjectArray;
@@ -165,7 +170,7 @@ class WidgetUtils {
    * @param int $pUserId
    * @return false or score of action taken (-1/1)
    */
-  public function getYiidActivity() {
+  public function getYiidActivityBySocialObject() {
     // check if mongo is active
     if (!$this->aMongoConn) {
       return false;
@@ -184,15 +189,15 @@ class WidgetUtils {
 
     // get yiid-activity and factor a deal
     if ($lActiveDeal) {
-      $lObject = $pCollectionObject->findOne(array("so_id" => $lSocialObject['_id'],
-                                                   "u_id" => intval($lUserId),
-                                                   "d_id" => intval($lActiveDeal['id'])
+      $lObject = $pCollectionObject->findOne(array('social_object.$id' => $lSocialObject['_id'],
+                                                   'u_id' => intval($lUserId),
+                                                   'd_id' => intval($lActiveDeal['id'])
                                                   ));
 
     } else {
-      $lObject = $pCollectionObject->findOne(array("so_id" => $lSocialObject['_id'],
-                                                   "u_id" => intval($lUserId),
-                                                   "d_id" => array('$exists' => false)
+      $lObject = $pCollectionObject->findOne(array('social_object.$id' => $lSocialObject['_id'],
+                                                   'u_id' => intval($lUserId),
+                                                   'd_id' => array('$exists' => false)
                                                   ));
     }
 
