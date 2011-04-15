@@ -8,11 +8,11 @@
 	<input type="hidden" name="domainid" value="<?php echo $pDomainProfile->getId(); ?>" />
 <div class="clearfix">
 	<label for="host_id" id="filter-period-label" class="alignleft">
-		<select class="custom-select" id="filter_period" name="date-to">
-			<option value="<?php echo date("Y-m-d", strtotime("now")); ?>"><?php echo __('Today'); ?></option>
-			<option value="<?php echo date("Y-m-d", strtotime("yesterday")); ?>" selected="selected"><?php echo __('Yesterday'); ?></option>
-			<option value="<?php echo date("Y-m-d", strtotime("7 days ago")); ?>"><?php echo __('Last week'); ?></option>
-			<option value="<?php echo date("Y-m-d", strtotime("30 days ago")); ?>"><?php echo __('Last month'); ?></option>
+		<select class="custom-select" id="filter_period" name="date-selector">
+			<option value="now"><?php echo __('Today'); ?></option>
+			<option value="yesterday" selected="selected"><?php echo __('Yesterday'); ?></option>
+			<option value="7"><?php echo __('Last week'); ?></option>
+			<option value="30"><?php echo __('Last month'); ?></option>
 	  </select>
 	</label>
 		<span class="alignleft" id="filter-period-or"><?php echo __('or'); ?></span>

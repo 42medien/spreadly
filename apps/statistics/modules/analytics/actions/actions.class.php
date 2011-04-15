@@ -127,11 +127,24 @@ class analyticsActions extends sfActions
   }
 
   public function executeGet_domain_detail(sfWebRequest $request) {
-    //if ($request->getParameter("date-to") && $request->getParameter("date-to") != date("Y-m-d", strtotime("yesterday"))) {
-    //  $this->forward('analytics', 'get_domain_detail_by_range');
-    //} else {
+    $selector = $request->getParameter("date-selector");
+    switch ($selector) {
+      case "now":
+      case "yesterday":
+        $request->setParameter("date-from", date("Y-m-d", strtotime($selector)));
+        break;
+      case "7":
+      case "30":
+        $request->setParameter("date-from", date("Y-m-d", strtotime("yesterday")));
+        $request->setParameter("date-to", date("Y-m-d", strtotime($selector." days ago")));
+        break;
+    }
+
+    if ($request->getParameter("date-to")) {
+      $this->forward('analytics', 'get_domain_detail_by_range');
+    } else {
       $this->forward('analytics', 'get_domain_detail_by_day');
-    //}
+    }
   }
 
   public function executeGet_domain_detail_by_day(sfWebRequest $request) {
