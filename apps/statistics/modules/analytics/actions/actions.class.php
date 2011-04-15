@@ -54,10 +54,16 @@ class analyticsActions extends sfActions
     }
 
   	$hostRepo = MongoManager::getStatsDM()->getRepository('Documents\ActivityStats');
-    $this->last30ByHost = $hostRepo->findLast30($domainUrls)->toArray();
+    $this->last30ByHost = $hostRepo->findLast30($domainUrls);
+    if($this->last30ByHost) {
+      $this->last30ByHost = $this->last30ByHost->toArray();
+    }
 
   	$urlRepo = MongoManager::getStatsDM()->getRepository('Documents\ActivityUrlStats');
-    $this->last30ByUrl = $urlRepo->findLast30($domainUrls)->toArray();
+    $this->last30ByUrl = $urlRepo->findLast30($domainUrls);
+    if($this->last30ByUrl) {
+      $this->last30ByUrl = $this->last30ByUrl->toArray();
+    }
 
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
 
@@ -78,7 +84,11 @@ class analyticsActions extends sfActions
     }
 
     $urlRepo = MongoManager::getStatsDM()->getRepository('Documents\DealStats');
-    $this->last30ByDeal = $urlRepo->findByDealIds($dealIds)->toArray();
+    $this->last30ByDeal = $urlRepo->findByDealIds($dealIds);
+    if($this->last30ByDeal) {
+      $this->last30ByDeal = $this->last30ByDeal->toArray();
+    }
+
   }
 
 
