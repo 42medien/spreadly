@@ -9,7 +9,7 @@ class DealStatsRepository extends StatsRepository
 {
   protected $GROUP_BY = "d_id";
   
-  public function findByDealIds($dealIds) {    
+  public function findByDealIds($dealIds) {
     $query = $this->createQueryBuilder()
                   ->field('d_id')->in($dealIds)
                   ->map(
@@ -31,9 +31,15 @@ class DealStatsRepository extends StatsRepository
                       ."}
                     return sum;
                   }");
-                  
-      $cursor = $query->getQuery(array("out" => "last30days.".$this->GROUP_BY))
-                      ->execute();
+      
+      $cursor = null;
+      try {
+        $cursor = $query->getQuery(array("out" => "last30days.".$this->GROUP_BY))
+                        ->execute();        
+      } catch (\Exception $e) {
+        \sfContext::getInstance()->getLogger()->err("{DealStatsRepository} findByDealIds failed.\n".$e->getMessage());
+
+      }
       return $cursor;
   }
 

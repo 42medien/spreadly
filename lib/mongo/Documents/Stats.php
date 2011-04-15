@@ -27,9 +27,12 @@ abstract class Stats extends BaseDocument {
       
       $initialArray = array();
       for ($i=0; $i < 24; $i++) { 
-        $initialArray[$i]=0;
+        $initialArray[strval($i)] = 0;
       }
-      $res['h'] =  $includePath ? $initial."['h']" : $initialArray;
+      // ensure that this array is a hash
+      $initialArray["php_ckuf"] = true;
+      
+      $res['h'] =  $includePath ? "(".$initial."['h'] ? ".$initial."['h'] : {})" : $initialArray;
       return $res;
   }
   
@@ -74,7 +77,7 @@ abstract class Stats extends BaseDocument {
       $res .= "if(".$valueVar."['$key']) {\n";
       if($key=='h' && is_array($value)) {
         for ($i=0; $i < 24; $i++) { 
-          $res .= "  ".$sumVar."['$key'][$i] += (!".$valueVar."['$key'] || ".$valueVar."['$key']['$i'] || isNaN(".$valueVar."['$key'][$i])) ? 0 : ".$valueVar."['$key']['$i'];\n";
+          $res .= "  ".$sumVar."['$key']['$i'] += (!".$valueVar."['$key'] || !".$valueVar."['$key']['$i'] || isNaN(".$valueVar."['$key']['$i'])) ? 0 : ".$valueVar."['$key']['$i'];\n";
         }
       } else {
         $res .= "  ".$sumVar."['$key'] += ".$valueVar."['$key'];\n";        

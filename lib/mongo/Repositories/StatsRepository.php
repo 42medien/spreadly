@@ -51,9 +51,13 @@ abstract class StatsRepository extends DocumentRepository
                       ."}
                     return sum;
                   }");
-                  
-    $cursor = $query->getQuery(array("out" => "last30days.".$this->GROUP_BY))
-                    ->execute();
+    $cursor = null;
+    try {
+      $cursor = $query->getQuery(array("out" => "last30days.".$this->GROUP_BY))
+                      ->execute();      
+    } catch (\Exception $e) {
+      \sfContext::getInstance()->getLogger()->err("{StatsRepository} findByRange failed.\n".$e->getMessage());
+    }
     return $cursor;    
   }
   
