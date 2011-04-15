@@ -170,7 +170,7 @@ class analyticsActions extends sfActions
     $lHost = $lDm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $lDomainProfile->getUrl()));
     $lQuery = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC");
     $lDeals = $lQuery->execute();
-    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content', array('pHost' => $lHost, 'pDeals'=>$lDeals));
+    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_range', array('pHost' => $lHost, 'pDeals'=>$lDeals));
     return $this->renderText(json_encode($lReturn));
   }
 
