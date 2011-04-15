@@ -357,7 +357,6 @@ a.button.header { float:right; }
 td.editinplaceclick {
     cursor: pointer;
     margin-right: 0;
-    padding-right: 4px;
 }
 
 #editinplace-box{
