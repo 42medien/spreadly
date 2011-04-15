@@ -19,7 +19,10 @@
     </tr>
     </thead>
     <tbody>
-    <?php foreach($pUrls as $url){ ?>
+    <?php
+    if ($pUrls->hasNext()) {
+      foreach($pUrls as $url){
+    ?>
       <tr>
         <td height="44" align="left" class="first" style="line-height: 21px;">
           <div class="martext">
@@ -38,6 +41,11 @@
         <td align="center" valign="middle"><div><?php echo $url->getClickbacks() ?></div></td>
         <td align="center" class="last"><div><?php echo $url->getClickbackLikes() ?></div></td>
       </tr>
+    <?php
+      }
+    } else {
+    ?>
+      <tr><td align="center" colspan="6"><?php echo __("No likes yet"); ?></td></tr>
     <?php } ?>
     </tbody>
   </table>
@@ -93,7 +101,7 @@ if ($pHostSummary) {
 }
 
 slot('content');
-  include_component('analytics', 'active_deal_table', array("host" => $pHostSummary->getHost()));
+  include_component('analytics', 'active_deal_table', array("host" => $pDomainProfile->getUrl()));
 end_slot();
 include_partial('global/graybox');
 ?>

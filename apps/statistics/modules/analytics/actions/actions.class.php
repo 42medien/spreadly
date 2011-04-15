@@ -118,12 +118,10 @@ class analyticsActions extends sfActions
   }
 
   public function executeDomain_detail(sfWebRequest $request){
-    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
-  	$this->pDeals = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC")->execute();
+    $lDm = MongoManager::getStatsDM();
 
-  	$lDm = MongoManager::getStatsDM();
-  	$this->pHost = $lDm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $this->pDomainProfile->getUrl()));
-    $this->pTopActivitiesData = MongoUtils::getYesterdaysTopActivitiesData(array());
+    $this->pUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(array("host" => $this->pDomainProfile->getUrl(), "day" => new MongoDate(strtotime(date("Y-m-d", strtotime($request->getParameter("date-to")))))));
+    $this->pHostSummary = $lDm->getRepository("Documents\ActivityStats")->findOneBy(array("host" => $this->pDomainProfile->getUrl(), "day" => new MongoDate(strtotime(date("Y-m-d", strtotime($request->getParameter("date-to")))))));
   }
 
   public function executeGet_domain_detail(sfWebRequest $request) {
@@ -149,15 +147,14 @@ class analyticsActions extends sfActions
 
   public function executeGet_domain_detail_by_day(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
-
-    $lDomainProfile = DomainProfileTable::getInstance()->find($request->getParameter('domainid'));
-
     $lDm = MongoManager::getStatsDM();
 
-    $lUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(array("host" => $lDomainProfile->getUrl(), "day" => new MongoDate(strtotime(date("Y-m-d", strtotime($request->getParameter("date-to")))))));
-    $lHostSummary = $lDm->getRepository("Documents\ActivityStats")->findOneBy(array("host" => $lDomainProfile->getUrl(), "day" => new MongoDate(strtotime(date("Y-m-d", strtotime($request->getParameter("date-to")))))));
+    $yesterday = new MongoDate(strtotime(date("Y-m-d", strtotime("yesterday"))));
 
-    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_day', array('pUrls' => $lUrls, 'pHostSummary' => $lHostSummary));
+    $lUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(array("host" => $this->pDomainProfile->getUrl(), "day" => $yesterday));
+    $lHostSummary = $lDm->getRepository("Documents\ActivityStats")->findOneBy(array("host" => $this->pDomainProfile->getUrl(), "day" => $yesterday));
+
+    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_day', array('pUrls' => $lUrls, 'pHostSummary' => $lHostSummary, 'pDomainProfile' => $this->pDomainProfile));
 
     return $this->renderText(json_encode($lReturn));
   }
