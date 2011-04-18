@@ -145,23 +145,31 @@ class analyticsActions extends sfActions
 
     $from = $request->getParameter("date-from", date("Y-m-d", strtotime("yesterday")));
     $to = $request->getParameter("date-to");
-
-    $lDomainProfile = DomainProfileTable::getInstance()->find($request->getParameter('domainid'));
-
+    
     $lDm = MongoManager::getStatsDM();
 
     //$lHost = $lDm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $lDomainProfile->getUrl()));
-    $lHost = $lDm->getRepository("Documents\ActivityStats")->findByRange(array($lDomainProfile->getUrl()), $from, $to);
+    $lHost = $lDm->getRepository("Documents\ActivityStats")->findByRange(array($this->pDomainProfile->getUrl()), $from, $to);
     if($lHost) {
       $lHost = $lHost->toArray();
       if(count($lHost) > 1) {
         $lHost = $lHost[0];
       }
     }
-
+    
+    $lUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(
+      array("host" => $this->pDomainProfile->getUrl(), 
+            //"day" => array('$gte' => new MongoDate(strtotime($from)), '$lte' => new MongoDate(strtotime($to)))
+            )
+      );
+    //var_dump($lUrls->hasNext());exit;
+    
+    
     $lQuery = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC");
     $lDeals = $lQuery->execute();
-    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_range', array('pHost' => $lHost, 'pDeals'=>$lDeals));
+    
+    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_day', array('pUrls' => $lUrls, 'pHostSummary' => $lHost, 'pDomainProfile' => $this->pDomainProfile));
+        
     return $this->renderText(json_encode($lReturn));
   }
 
