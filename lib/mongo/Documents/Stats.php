@@ -10,10 +10,10 @@ namespace Documents;
 abstract class Stats extends BaseDocument {
   private static $SERVICE_BASE      = 's';
   private static $DEMOGRAPHIC_BASE  = 'd';
-  
+
   private static $SERVICE_KEYS      = array("facebook", "twitter", "linkedin", "google");
   private static $DEMOGRAPHIC_KEYS  = array("sex", "age", "rel");
-  
+
   private static $SERVICE_DATA_KEYS = array("l", "sh", "mp", "cb", "cbl");
   private static $GENDER_KEYS       = array("m", "f", "u");
   private static $AGE_KEYS          = array("u_18", "b_18_24", "b_25_34", "b_35_54", "o_55");
@@ -24,9 +24,9 @@ abstract class Stats extends BaseDocument {
       foreach (self::$SERVICE_DATA_KEYS as $key) {
         $res[$key] = ($includePath ? " ".$initial."['$key']" : $initial);
       }
-      
+
       $initialArray = array();
-      for ($i=0; $i < 24; $i++) { 
+      for ($i=0; $i < 24; $i++) {
         $initialArray[strval($i)] = 0;
       }
       // ensure that this array is a hash
@@ -35,7 +35,7 @@ abstract class Stats extends BaseDocument {
       $res['h'] =  $includePath ? "(".$initial."['h'] ? ".$initial."['h'] : {})" : $initialArray;
       return $res;
   }
-  
+
   public static function toServiceMap($initial=0, $includePath=false) {
     $res = array();
     foreach (self::$SERVICE_KEYS as $baseKey) {
@@ -49,38 +49,38 @@ abstract class Stats extends BaseDocument {
   public static function toDemographicsMap($initial=0, $includePath=false) {
     $res = array();
     foreach (self::$GENDER_KEYS as $key) {
-      $res[self::$DEMOGRAPHIC_BASE][self::$DEMOGRAPHIC_KEYS[0]][$key] = 
+      $res[self::$DEMOGRAPHIC_BASE][self::$DEMOGRAPHIC_KEYS[0]][$key] =
         ($includePath ? " ".$initial.".".self::$DEMOGRAPHIC_BASE.".".self::$DEMOGRAPHIC_KEYS[0].".$key" : $initial);
     }
     foreach (self::$AGE_KEYS as $key) {
-      $res[self::$DEMOGRAPHIC_BASE][self::$DEMOGRAPHIC_KEYS[1]][$key] = 
+      $res[self::$DEMOGRAPHIC_BASE][self::$DEMOGRAPHIC_KEYS[1]][$key] =
         ($includePath ? " ".$initial.".".self::$DEMOGRAPHIC_BASE.".".self::$DEMOGRAPHIC_KEYS[1].".$key" : $initial);
     }
     foreach (self::$RELATIONSHIP_KEYS as $key) {
-      $res[self::$DEMOGRAPHIC_BASE][self::$DEMOGRAPHIC_KEYS[2]][$key] = 
+      $res[self::$DEMOGRAPHIC_BASE][self::$DEMOGRAPHIC_KEYS[2]][$key] =
         ($includePath ? " ".$initial.".".self::$DEMOGRAPHIC_BASE.".".self::$DEMOGRAPHIC_KEYS[2].".$key" : $initial);
-    }    
+    }
     return $res;
   }
-  
+
   public static function toMap($initial=0, $includePath=false) {
     return array_merge(self::toBaseMap($initial, $includePath), self::toServiceMap($initial, $includePath), self::toDemographicsMap($initial, $includePath));
   }
-  
+
   public static function toJsonMap($initial=0, $includePath=false) {
     return json_encode(self::toMap($initial, $includePath));
   }
-  
+
   public static function toBaseSumString($sumVar='sum', $valueVar='values[i]') {
     $res = "\n";
     foreach (self::toBaseMap() as $key => $value) {
       $res .= "if(".$valueVar."['$key']) {\n";
       if($key=='h' && is_array($value)) {
-        for ($i=0; $i < 24; $i++) { 
+        for ($i=0; $i < 24; $i++) {
           $res .= "  ".$sumVar."['$key']['$i'] += (!".$valueVar."['$key'] || !".$valueVar."['$key']['$i'] || isNaN(".$valueVar."['$key']['$i'])) ? 0 : ".$valueVar."['$key']['$i'];\n";
         }
       } else {
-        $res .= "  ".$sumVar."['$key'] += ".$valueVar."['$key'];\n";        
+        $res .= "  ".$sumVar."['$key'] += ".$valueVar."['$key'];\n";
       }
       $res .= "}\n";
     }
@@ -94,7 +94,7 @@ abstract class Stats extends BaseDocument {
   public static function toServicesSumString($sumVar='sum', $valueVar='values[i]') {
     return self::to3rdLevelSumString(self::toServiceMap(), $sumVar, $valueVar);
   }
-  
+
   private static function to3rdLevelSumString($map, $sumVar='sum', $valueVar='values[i]') {
     $res = "\n";
     foreach ($map as $baseKey => $base) {
@@ -109,8 +109,18 @@ abstract class Stats extends BaseDocument {
     }
     return $res;
   }
-  
-  
+
+  /**
+   * returnes a prefilled array
+   *
+   * @author Matthias Pfefferle
+   */
+  public function getPrefilledLikesByHour() {
+    $array = array_fill(0, 24, 0);
+
+    return array_merge($array, $this->getLikesByHour());
+  }
+
   /** @Id */
   protected $id;
 
