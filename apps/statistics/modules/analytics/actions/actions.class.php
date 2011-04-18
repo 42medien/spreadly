@@ -174,8 +174,8 @@ class analyticsActions extends sfActions
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
     $lDm = MongoManager::getStatsDM();
 
-    $this->pUrls = $lDm->getRepository("Documents\AnalyticsActivity")->findBy(array("url" => $this->pUrl, "day" => new MongoDate(strtotime(date("Y-m-d", strtotime($request->getParameter("date-to")))))));
-    $this->pUrlSummary = $lDm->getRepository("Documents\ActivityUrlStats")->findOneBy(array("url" => $this->pUrl, "day" => new MongoDate(strtotime(date("Y-m-d", strtotime($request->getParameter("date-to")))))));
+    $this->pUrls = $lDm->getRepository("Documents\AnalyticsActivity")->findBy(array("url" => $this->pUrl, "day" => new MongoDate(strtotime($request->getParameter("date-to", date("Y-m-d", strtotime("yesterday")))))));
+    $this->pUrlSummary = $lDm->getRepository("Documents\ActivityUrlStats")->findOneBy(array("url" => $this->pUrl, "day" => new MongoDate(strtotime($request->getParameter("date-to", date("Y-m-d", strtotime("yesterday")))))));
   }
 
   public function executeGet_url_detail(sfWebRequest $request){
