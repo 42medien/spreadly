@@ -103,8 +103,8 @@ class analyticsActions extends sfActions
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
     $lDm = MongoManager::getStatsDM();
 
-    $this->pUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(array("host" => $this->pDomainProfile->getUrl(), "day" => new MongoDate(strtotime(date("Y-m-d", strtotime($request->getParameter("date-to")))))));
-    $this->pHostSummary = $lDm->getRepository("Documents\ActivityStats")->findOneBy(array("host" => $this->pDomainProfile->getUrl(), "day" => new MongoDate(strtotime(date("Y-m-d", strtotime($request->getParameter("date-to")))))));
+    $this->pUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(array("host" => $this->pDomainProfile->getUrl(), "day" => new MongoDate(strtotime($request->getParameter("date-to", date("Y-m-d", strtotime("yesterday")))))));
+    $this->pHostSummary = $lDm->getRepository("Documents\ActivityStats")->findOneBy(array("host" => $this->pDomainProfile->getUrl(), "day" => new MongoDate(strtotime($request->getParameter("date-to", date("Y-m-d", strtotime("yesterday")))))));
   }
 
   public function executeGet_domain_detail(sfWebRequest $request) {
@@ -132,7 +132,7 @@ class analyticsActions extends sfActions
     $this->getResponse()->setContentType('application/json');
     $lDm = MongoManager::getStatsDM();
 
-    $day = new MongoDate(strtotime(date("Y-m-d", strtotime($request->getParameter("date-from")))));
+    $day = new MongoDate(strtotime($request->getParameter("date-from")));
     $lUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(array("host" => $this->pDomainProfile->getUrl(), "day" => $day));
     $lHostSummary = $lDm->getRepository("Documents\ActivityStats")->findOneBy(array("host" => $this->pDomainProfile->getUrl(), "day" => $day));
     $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_day', array('pUrls' => $lUrls, 'pHostSummary' => $lHostSummary, 'pDomainProfile' => $this->pDomainProfile));
@@ -143,7 +143,7 @@ class analyticsActions extends sfActions
   public function executeGet_domain_detail_by_range(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
 
-    $from = $request->getParameter("date-from", date("Y-m-d", strtotime("now")));
+    $from = $request->getParameter("date-from");
     $to = $request->getParameter("date-to");
 
     $lDm = MongoManager::getStatsDM();
