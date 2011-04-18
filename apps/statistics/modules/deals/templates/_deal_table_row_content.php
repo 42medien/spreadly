@@ -31,10 +31,10 @@
       	<?php } ?>><div><?php echo __($pDeal->getHumanCouponQuantity()); ?></div>
       </td>
 			<td align="center">
-				<div><?php echo link_to(image_tag('/img/global/24x24/tools.png', array('title' => __('Edit Deal'), 'width' => '29', 'height' => '28')), '/deals/get_create_form?deal_id='.$pDeal->getId(), array('class' => 'link-deal-content')); ?></div>
+				<div><?php echo link_to(image_tag('/img/global/24x24/tools.png', array('title' => __('Edit Deal'))), '/deals/get_create_form?deal_id='.$pDeal->getId(), array('class' => 'link-deal-content')); ?></div>
 			</td>
 		  <td align="center" class="last">
-				<div><?php echo link_to(image_tag('/img/global/24x24/delete.png', array('title' => __('Stop Deal'), 'width' => '29', 'height' => '28')), '/deals/set_state?deal_id='.$pDeal->getId().'&state=paused', array('class' => 'edit-state')); ?></div>
+				<div><?php echo link_to(image_tag('/img/global/24x24/delete.png', array('title' => __('Stop Deal'))), '/deals/set_state?deal_id='.$pDeal->getId().'&state=paused', array('class' => 'edit-state')); ?></div>
 		  </td>
 <?php } ?>
 

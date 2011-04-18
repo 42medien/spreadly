@@ -354,6 +354,14 @@ a.button.header { float:right; }
   font-size: 12px;
 }
 
+#deal-table td div{
+  height: 34px;
+}
+
+#deal-table td div img{
+  padding-top: 4px;
+}
+
 td.editinplaceclick {
     cursor: pointer;
     margin-right: 0;
