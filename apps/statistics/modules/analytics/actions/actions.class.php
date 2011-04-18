@@ -165,38 +165,49 @@ class analyticsActions extends sfActions
     return $this->renderText(json_encode($lReturn));
   }
 
-  public function executeUrl_statistics(sfWebRequest $request){
-		$lUrl = $request->getParameter('url');
-		$this->pUrl = $lUrl;
+  public function executeUrl_detail(sfWebRequest $request){
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
+    $lDm = MongoManager::getStatsDM();
 
-		$lDomainId = $request->getParameter('domainid');
-		$this->pDomain = DomainProfileTable::getInstance()->find($lDomainId);
-
-    $this->pActivityCount = MongoUtils::getYesterdaysActivityCountForDomainProfiles($this->pVerifiedDomains);
-    $this->pVerifiedDomains = $this->sortDomainProfilesByCount($this->pVerifiedDomains, $this->pActivityCount);
-    $domainUrls = array();
-    foreach ($this->pVerifiedDomains as $domain) {
-      $domainUrls[] = $domain->getUrl();
-    }
-    $this->pTopActivitiesData = MongoUtils::getYesterdaysTopActivitiesData($domainUrls);
-
-  	$lQuery = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC");
-  	$this->pDeals = $lQuery->execute();
-
-		//pUrl
+    $this->pUrls = $lDm->getRepository("Documents\AnalyticsActivity")->findBy(array("url" => $this->pUrl, "day" => new MongoDate(strtotime(date("Y-m-d", strtotime($request->getParameter("date-to")))))));
+    $this->pUrlSummary = $lDm->getRepository("Documents\ActivityUrlStats")->findOneBy(array("url" => $this->pUrl, "day" => new MongoDate(strtotime(date("Y-m-d", strtotime($request->getParameter("date-to")))))));
   }
 
-  private function sortDomainProfilesByCount($pDomainProfiles, $pCount) {
-    $lUnsorted = array();
-    foreach ($pDomainProfiles as $domain) {
-      $lUnsorted[$domain->getId()] = $domain;
+  public function executeGet_url_detail(sfWebRequest $request){
+    $selector = $request->getParameter("date-selector");
+    switch ($selector) {
+      case "now":
+      case "yesterday":
+        $request->setParameter("date-from", date("Y-m-d", strtotime($selector)));
+        break;
+      case "7":
+      case "30":
+        $request->setParameter("date-from", date("Y-m-d", strtotime("yesterday")));
+        $request->setParameter("date-to", date("Y-m-d", strtotime($selector." days ago")));
+        break;
     }
 
-    $lSorted = array();
-    foreach ($pCount as $id => $count) {
-      $lSorted[] = $lUnsorted[$id];
+    if ($request->getParameter("date-to")) {
+      $this->forward('analytics', 'get_url_detail_by_range');
+    } else {
+      $this->forward('analytics', 'get_url_detail_by_day');
     }
-    return $lSorted;
+  }
+
+  public function executeGet_url_detail_by_day(sfWebRequest $request) {
+    $this->getResponse()->setContentType('application/json');
+    $lDm = MongoManager::getStatsDM();
+
+    $day = new MongoDate(strtotime(date("Y-m-d", strtotime($request->getParameter("date-from")))));
+    $lUrls = $lDm->getRepository("Documents\AnalyticsActivity")->findBy(array("url" => $this->pUrl, "day" => $day));
+    $lUrlSummary = $lDm->getRepository("Documents\ActivityUrlStats")->findOneBy(array("url" => $this->pUrl, "day" => $day));
+    $lReturn['content'] = $this->getPartial('analytics/url_detail_content_by_day', array('pUrls' => $lUrls, 'pUrlSummary' => $lUrlSummary, 'pDomainProfile' => $this->pDomainProfile));
+
+    return $this->renderText(json_encode($lReturn));
+  }
+
+  public function executeGet_url_detail_by_range(sfWebRequest $request) {
+    // todo
   }
 
   public function executeSelect_period(sfWebRequest $request) {

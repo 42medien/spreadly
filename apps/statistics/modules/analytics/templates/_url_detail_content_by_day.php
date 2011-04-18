@@ -1,9 +1,10 @@
+<?php use_helper('Text'); ?>
 <?php
-if ($pHostSummary) {
+if ($pUrlSummary) {
   slot('content')
 ?>
 <div id="line-chart-example">
-<?php include_partial('analytics/chart_line_activities_by_hours', array("pData" => $pHostSummary)); ?>
+<?php include_partial('analytics/chart_line_activities_by_hours', array("pData" => $pUrlSummary)); ?>
 </div>
 <?php
   end_slot();
@@ -60,7 +61,7 @@ if ($pHostSummary) {
 <?php include_partial('global/graybox'); ?>
 
 <?php
-if ($pHostSummary) {
+if ($pUrlSummary) {
   slot('content');
 ?>
 <div id="pie-charts" class="clearfix">
@@ -73,7 +74,7 @@ if ($pHostSummary) {
                 "plotsize": "50%",
                 "bgcolor" : "#e1e1e1",
                 "renderto":"gender-chart"
-            }', 'pData' => $pHostSummary->getDemographics()
+            }', 'pData' => $pUrlSummary->getDemographics()
     )); ?>
   </div>
   <div class="alignleft" id="age-chart">
@@ -85,7 +86,7 @@ if ($pHostSummary) {
                 "plotsize": "50%",
                 "bgcolor" : "#e1e1e1",
                 "renderto":"age-chart"
-            }', 'pData' => $pHostSummary->getDemographics()
+            }', 'pData' => $pUrlSummary->getDemographics()
     )); ?>
   </div>
   <div class="alignleft" id="relation-chart">
@@ -97,7 +98,7 @@ if ($pHostSummary) {
                 "plotsize": "50%",
                 "bgcolor" : "#e1e1e1",
                 "renderto":"relation-chart"
-            }', 'pData' => $pHostSummary->getDemographics()
+            }', 'pData' => $pUrlSummary->getDemographics()
     )); ?>
   </div>
 </div>
@@ -105,9 +106,4 @@ if ($pHostSummary) {
   end_slot();
   include_partial('global/graybox');
 }
-
-slot('content');
-  include_component('analytics', 'active_deal_table', array("host" => $pDomainProfile->getUrl()));
-end_slot();
-include_partial('global/graybox');
 ?>
