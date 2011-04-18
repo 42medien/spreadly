@@ -48,7 +48,9 @@
       <td style="text-align: center;"><div>&nbsp;</div>
       </td>
       <td align="center" class="last">
-      	<?php echo link_to(image_tag('/img/global/24x24/trash.png', array('title' => __('Delete Deal'))), '/deals/set_state?deal_id='.$pDeal->getId().'&state=trashed', array('class' => 'edit-state')); ?>
+      	<div>
+      		<?php echo link_to(image_tag('/img/global/24x24/trash.png', array('title' => __('Delete Deal'))), '/deals/set_state?deal_id='.$pDeal->getId().'&state=trashed', array('class' => 'edit-state')); ?>
+      	</div>
       </td>
 <?php } ?>
 
