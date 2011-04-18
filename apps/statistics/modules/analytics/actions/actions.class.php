@@ -143,7 +143,7 @@ class analyticsActions extends sfActions
   public function executeGet_domain_detail_by_range(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
 
-    $from = $request->getParameter("date-from", date("Y-m-d", strtotime("yesterday")));
+    $from = $request->getParameter("date-from", date("Y-m-d", strtotime("now")));
     $to = $request->getParameter("date-to");
 
     $lDm = MongoManager::getStatsDM();
@@ -159,11 +159,9 @@ class analyticsActions extends sfActions
 
     $lUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(
       array("host" => $this->pDomainProfile->getUrl(),
-            //"day" => array('$gte' => new MongoDate(strtotime($from)), '$lte' => new MongoDate(strtotime($to)))
+            "day" => array('$lte' => new MongoDate(strtotime($from)), '$gte' => new MongoDate(strtotime($to)))
             )
       );
-    //var_dump($lUrls->hasNext());exit;
-
 
     $lQuery = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC");
     $lDeals = $lQuery->execute();
