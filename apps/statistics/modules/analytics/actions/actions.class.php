@@ -74,9 +74,6 @@ class analyticsActions extends sfActions
 
   	$this->pDeals = $lQuery->execute();
 
-  	#var_dump(count($this->pDeals));exit;
-    #var_dump($lQuery->getSqlQuery());exit;
-
   	$dealIds = array();
     foreach ($this->pDeals as $deal) {
       $dealIds[] = intval($deal->getId());
@@ -90,33 +87,10 @@ class analyticsActions extends sfActions
 
   }
 
-
   public function executeStatistics(sfWebRequest $request) {
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
     $this->pUrl = MongoUtils::getTopActivityUrl($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
     $this->pData = MongoUtils::getDataForRange($this->pType, $this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pUrl);
-  }
-
-  public function executeGet_analytics_content(sfWebRequest $request){
-  	$this->getResponse()->setContentType('application/json');
-
-  	if($this->pType == 'url_activities') {
-  		if(!$this->pUrl) {
-  	  	$this->pUrl = MongoUtils::getTopActivityUrl($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pDealId);
-  		}
-			$lReturn['nav'] = $this->getPartial('analytics/filter_nav', array('pHostId' => $this->pHostId, 'pDateFrom' => $this->pDateFrom, 'pDateTo' => $this->pDateTo, 'pUrl' => $this->pUrl, 'pDealId' => $this->pDealId, 'pIsDeal' => $this->pIsDeal));
-  	}
-
-
-  	$lData = MongoUtils::getDataForRange($this->pType, $this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pUrl, $this->pDealId);
-
-  	if($this->pIsDeal) {
-  		$lReturn['content'] =  $this->getPartial('analytics/domain_activities_content', array('pUrl'=> $this->pUrl ,'pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pData' => $lData));
-  	} else {
-  		$lReturn['content'] =  $this->getPartial('analytics/'.$this->pType.'_content', array('pUrl'=> $this->pUrl ,'pCom' => $this->pCommunity, 'pHostId' => $this->pHostId, 'pFrom' => $this->pDateFrom, 'pTo' => $this->pDateTo, 'pData' => $lData));
-  	}
-
-		return $this->renderText(json_encode($lReturn));
   }
 
   public function executeDomain_statistics(sfWebRequest $request) {
@@ -223,11 +197,6 @@ class analyticsActions extends sfActions
       $lSorted[] = $lUnsorted[$id];
     }
     return $lSorted;
-  }
-
-  public function executeTesty(sfWebRequest $request) {
-    $repo = MongoManager::getStatsDM()->getRepository('Documents\ActivityStats');
-    $repo->findLast30();
   }
 
   public function executeSelect_period(sfWebRequest $request) {
