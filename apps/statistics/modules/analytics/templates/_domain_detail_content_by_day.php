@@ -1,9 +1,15 @@
-<?php slot('content') ?>
+<?php
+if ($pHostSummary) {
+  slot('content')
+?>
 <div id="line-chart-example">
-<?php //include_partial('analytics/chart_line_example'); ?>
+<?php include_partial('analytics/chart_line_activities_by_hours', array("pData" => $pHostSummary)); ?>
 </div>
-<?php end_slot(); ?>
-<?php include_partial('global/graybox'); ?>
+<?php
+  end_slot();
+  include_partial('global/graybox');
+}
+?>
 
 <?php slot('content') ?>
 <div class="data-tablebox two-line-table">

@@ -45,8 +45,7 @@ class analyticsActions extends sfActions
   *
   * @param sfRequest $request A request object
   */
-  public function executeIndex(sfWebRequest $request)
-  {
+  public function executeIndex(sfWebRequest $request) {
     $this->pVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
     $domainUrls = array();
     foreach ($this->pVerifiedDomains as $domain) {
@@ -92,8 +91,7 @@ class analyticsActions extends sfActions
   }
 
 
-  public function executeStatistics(sfWebRequest $request)
-  {
+  public function executeStatistics(sfWebRequest $request) {
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
     $this->pUrl = MongoUtils::getTopActivityUrl($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
     $this->pData = MongoUtils::getDataForRange($this->pType, $this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pUrl);
@@ -148,7 +146,7 @@ class analyticsActions extends sfActions
         $request->setParameter("date-to", date("Y-m-d", strtotime($selector." days ago")));
         break;
     }
-        
+
     if ($request->getParameter("date-to")) {
       $this->forward('analytics', 'get_domain_detail_by_range');
     } else {
@@ -160,12 +158,9 @@ class analyticsActions extends sfActions
     $this->getResponse()->setContentType('application/json');
     $lDm = MongoManager::getStatsDM();
 
-    $yesterday = new MongoDate(strtotime(date("Y-m-d", strtotime("yesterday"))));
-
-    $lUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(array("host" => $this->pDomainProfile->getUrl(), "day" => $yesterday));
-
-    $lHostSummary = $lDm->getRepository("Documents\ActivityStats")->findOneBy(array("host" => $this->pDomainProfile->getUrl(), "day" => $yesterday));
-
+    $day = new MongoDate(strtotime(date("Y-m-d", strtotime($request->getParameter("date-from")))));
+    $lUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(array("host" => $this->pDomainProfile->getUrl(), "day" => $day));
+    $lHostSummary = $lDm->getRepository("Documents\ActivityStats")->findOneBy(array("host" => $this->pDomainProfile->getUrl(), "day" => $day));
     $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_day', array('pUrls' => $lUrls, 'pHostSummary' => $lHostSummary, 'pDomainProfile' => $this->pDomainProfile));
 
     return $this->renderText(json_encode($lReturn));
@@ -176,11 +171,11 @@ class analyticsActions extends sfActions
 
     $from = $request->getParameter("date-from", date("Y-m-d", strtotime("yesterday")));
     $to = $request->getParameter("date-to");
-    
+
     $lDomainProfile = DomainProfileTable::getInstance()->find($request->getParameter('domainid'));
-    
+
     $lDm = MongoManager::getStatsDM();
-    
+
     //$lHost = $lDm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $lDomainProfile->getUrl()));
     $lHost = $lDm->getRepository("Documents\ActivityStats")->findByRange(array($lDomainProfile->getUrl()), $from, $to);
     if($lHost) {
@@ -233,11 +228,9 @@ class analyticsActions extends sfActions
   public function executeTesty(sfWebRequest $request) {
     $repo = MongoManager::getStatsDM()->getRepository('Documents\ActivityStats');
     $repo->findLast30();
-
   }
 
   public function executeSelect_period(sfWebRequest $request) {
 		$this->pDomainId = $request->getParameter('domainid');
   }
-
 }
