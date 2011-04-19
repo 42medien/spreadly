@@ -131,11 +131,10 @@ class analyticsActions extends sfActions
   public function executeGet_domain_detail_by_day(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
     $lDm = MongoManager::getStatsDM();
-
     $day = new MongoDate(strtotime($request->getParameter("date-from")));
     $lUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(array("host" => $this->pDomainProfile->getUrl(), "day" => $day));
     $lHostSummary = $lDm->getRepository("Documents\ActivityStats")->findOneBy(array("host" => $this->pDomainProfile->getUrl(), "day" => $day));
-    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_day', array('pUrls' => $lUrls, 'pHostSummary' => $lHostSummary, 'pDomainProfile' => $this->pDomainProfile));
+    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_day', array('pUrls' => $lUrls, 'pHostSummary' => $lHostSummary, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $request->getParameter('date-from')));
 
     return $this->renderText(json_encode($lReturn));
   }
@@ -166,7 +165,7 @@ class analyticsActions extends sfActions
     $lQuery = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC");
     $lDeals = $lQuery->execute();
 
-    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_range', array('pUrls' => $lUrls, 'pHostSummary' => $lHost, 'pDomainProfile' => $this->pDomainProfile));
+    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_range', array('pUrls' => $lUrls, 'pHostSummary' => $lHost, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to));
     return $this->renderText(json_encode($lReturn));
   }
 

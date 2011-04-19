@@ -1,6 +1,8 @@
 <h2><?php echo __('Select period'); ?></h2>
 <form action="/analytics/get_domain_detail" name="analytics-datefilter-form" id="analytics-datefilter-form">
 <input type="hidden" name="domainid" value="<?php echo $pDomainId; ?>" />
+<input type="hidden" name="date-selector" value="<?php echo $pDomainId; ?>" />
+
 
 <div class="alignleft clearfix">
 	<div class="clearfix">

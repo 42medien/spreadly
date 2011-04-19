@@ -16,6 +16,8 @@ var AnalyticsTables = {
       jQuery('#dash-website-table').tableScroll({height: 200, flush: true});
       jQuery('#dash-url-table').tableScroll({height: 200, flush: true}); 
       jQuery('#analytics-url-table').tableScroll({height: 200, flush: true});
+      jQuery('#top-url-table').tableScroll({height: 200, flush: true});
+      
     },
     
     initTablesorter: function(pTableId) {
@@ -51,6 +53,7 @@ var AnalyticsFilter = {
     },
     
     initDropdown: function() {
+      debug.log('[AnalyticsFilter][initDropdown]');         
       jQuery("select#filter_period").jgdDropdown({callback: function(obj, val) {
         AnalyticsFilter.getContent(val);
       }});      

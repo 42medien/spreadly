@@ -6,24 +6,21 @@ var ActivityChart = {
 	init: function() {
 	  Highcharts.theme = { colors: [] };// prevent errors in default theme
 	  var lData = <?php echo json_encode($pData->getPrefilledLikesByHour()); ?>;
+	  debug.log(lData);
 		var lOptions = {
 		    chart: {
 		      renderTo: 'chart_line_activities_by_hour',
-		      zoomType: 'x',
+		      zoomType: '',
 		      spacingRight: 20,
 		      backgroundColor: "#f6f6f6"
 		   },
 		    title: {
 		      text: false
 		   },
-		    subtitle: {
-		      text: document.ontouchstart === undefined ?
-		         "<?php echo __('Click and drag in the plot area to zoom in'); ?>" :
-		         "<?php echo __('Drag your finger over the plot to zoom in'); ?>"
-		   },
+		    subtitle: false,
 		   xAxis: {
 		      type: 'datetime',
-		      maxZoom: 7 * 24 * 3600000,
+		      showLastLabel: false,
 		      title: {
 		         text: null
 		      }
@@ -31,16 +28,14 @@ var ActivityChart = {
 		   yAxis: {
 		      title: {
 		         text: false
-		      },
-		      min: 0,
-		      maxZoom: 10, // fourteen days
-		      startOnTick: false,
-		      showFirstLabel: false,
-		      allowDecimals:false
+		      }
 		   },
 		   tooltip: {
-		      shared: true
-		   },
+         formatter: function() {
+                   return ''+
+               Highcharts.dateFormat('%b %e, %Y %H:00', this.x) +' / Likes: '+ this.y;
+         }
+      },
 		   legend: {
 		      enabled: false
 		   },
@@ -68,8 +63,8 @@ var ActivityChart = {
 		   series: [{
 		      type: 'area',
 		      name: 'Likes',
-		      pointInterval: 24,
-		      pointStart: 0,
+		      pointInterval: 3600000,
+		      pointStart: 1300579200000,
 		      data: lData,
 		      color: '#1231e3',
 	        fillOpacity: 0.1,

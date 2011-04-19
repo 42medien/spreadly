@@ -2,6 +2,9 @@
 if ($pHostSummary) {
   slot('content')
 ?>
+<?php if (isset($showdate)) {?>
+	<h2><?php echo __('Statistics from %date%', array('%date%' => $showdate)); ?></h2>
+<?php } ?>
 <div id="line-chart-example">
 <?php include_partial('analytics/chart_line_activities_by_hours', array("pData" => $pHostSummary)); ?>
 </div>
@@ -10,7 +13,6 @@ if ($pHostSummary) {
   include_partial('global/graybox');
 }
 ?>
-
 <?php slot('content') ?>
 <div class="data-tablebox two-line-table">
   <table width="100%" border="0" cellspacing="0" cellpadding="0" id="top-url-table" class="tablesorter">
