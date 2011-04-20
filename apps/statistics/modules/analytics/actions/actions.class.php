@@ -169,12 +169,12 @@ class analyticsActions extends sfActions
       );
     $lHostsRange = $lHostsRange->toArray();
 
-    $lLikesRange = array_values(
+    $lLikesRange = 
       array_map(function($stats) {
         return $stats->getLikes();
-        }, $lHostsRange)
-      );
-
+        }, $lHostsRange);
+      
+      var_dump($lLikesRange);exit;
 
     $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_range', array('pUrls' => $lUrls, 'pHostSummary' => $lHost, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to, 'pLikes' => $lLikesRange, 'pStartDay' => $from));
     return $this->renderText(json_encode($lReturn));
@@ -188,7 +188,7 @@ class analyticsActions extends sfActions
     $this->pUrlSummary = $lDm->getRepository("Documents\ActivityUrlStats")->findOneBy(array("url" => $this->pUrl, "day" => new MongoDate(strtotime($request->getParameter("date-to", date("Y-m-d", strtotime("yesterday")))))));
   }
 
-  public function executeGet_url_detail(sfWebRequest $request){
+  public function executeGet_url_detail(sfWebRequest $request) {
     $selector = $request->getParameter("date-selector");
     switch ($selector) {
       case "now":
@@ -229,11 +229,11 @@ class analyticsActions extends sfActions
 
     $lDm = MongoManager::getStatsDM();
 
-    $lHost = $lDm->getRepository("Documents\ActivityUrlStats")->findByRange(array($this->pDomainProfile->getUrl()), $from, $to);
+    $lHost = $lDm->getRepository("Documents\ActivityUrlStats")->findByUrlsAndRange(array($this->pUrl), $from, $to);
     if($lHost) {
       $lHost = $lHost->toArray();
       if(count($lHost) > 1) {
-        //$lHost = $lHost[0];
+        $lHost = $lHost[0];
       }
     }
 
@@ -244,7 +244,7 @@ class analyticsActions extends sfActions
       );
 
     $lHostsRange = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(
-      array("host" => $this->pDomainProfile->getUrl(),
+      array("url" => $this->pUrl,
             "day" => array('$gte' => new MongoDate(strtotime($from)), '$lte' => new MongoDate(strtotime($to)))
             )
       );

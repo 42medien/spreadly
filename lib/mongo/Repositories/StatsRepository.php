@@ -25,32 +25,16 @@ abstract class StatsRepository extends DocumentRepository
   }
   
   public function findByRange($hosts, $fromDay, $toDay) {
+    return $this->findByHostsAndRange($hosts, $fromDay, $toDay);
+  }  
+  
+  public function findByHostsAndRange($hosts, $fromDay, $toDay) {
     // Cut off the time, in case it is coming as full datetime
     $fromDay = date('Y-m-d', strtotime($fromDay));
     $toDay = date('Y-m-d', strtotime($toDay));
     
-    $query = $this->createQueryBuilder()
-                  ->field('host')->in($hosts)
-                  ->field("day")->range(new MongoDate(strtotime($fromDay)), new MongoDate(strtotime($toDay)))
-                  ->map(
-                  'function() { 
-                     emit(
-                       this.'.$this->GROUP_BY.', '.
-                       str_replace('"', '', Stats::toJsonMap("this", true))
-                       .');
-                    }')               
-                 ->reduce(
-                   "function(key, values) {
-                      var sum = ".Stats::toJsonMap().";
-                      for(var i in values) {".
-                        Stats::toBaseSumString()
-                        .
-                        Stats::toDemographicsSumString()
-                        .
-                        Stats::toServicesSumString()
-                      ."}
-                    return sum;
-                  }");
+    $query = $this->rangeMapReduce($fromDay, $toDay)->field('host')->in($hosts);
+    
     $cursor = null;
     try {
       $cursor = $query->getQuery(array("out" => "last30days.".$this->GROUP_BY))
@@ -59,6 +43,47 @@ abstract class StatsRepository extends DocumentRepository
       \sfContext::getInstance()->getLogger()->err("{StatsRepository} findByRange failed.\n".$e->getMessage());
     }
     return $cursor;    
+  }
+
+  public function findByUrlsAndRange($urls, $fromDay, $toDay) {
+    // Cut off the time, in case it is coming as full datetime
+    $fromDay = date('Y-m-d', strtotime($fromDay));
+    $toDay = date('Y-m-d', strtotime($toDay));
+    
+    $query = $this->rangeMapReduce($fromDay, $toDay)->field('url')->in($urls);
+    
+    $cursor = null;
+    try {
+      $cursor = $query->getQuery(array("out" => "last30days.".$this->GROUP_BY))
+                      ->execute();      
+    } catch (\Exception $e) {
+      \sfContext::getInstance()->getLogger()->err("{StatsRepository} findByRange failed.\n".$e->getMessage());
+    }
+    return $cursor;    
+  }
+  
+  private function rangeMapReduce($fromDay, $toDay) {
+    return $this->createQueryBuilder()
+              ->field("day")->range(new MongoDate(strtotime($fromDay)), new MongoDate(strtotime($toDay)))
+              ->map(
+              'function() { 
+                 emit(
+                   this.'.$this->GROUP_BY.', '.
+                   str_replace('"', '', Stats::toJsonMap("this", true))
+                   .');
+                }')               
+             ->reduce(
+               "function(key, values) {
+                  var sum = ".Stats::toJsonMap().";
+                  for(var i in values) {".
+                    Stats::toBaseSumString()
+                    .
+                    Stats::toDemographicsSumString()
+                    .
+                    Stats::toServicesSumString()
+                  ."}
+                return sum;
+              }");
   }
   
   public function findLast30($hosts) {
