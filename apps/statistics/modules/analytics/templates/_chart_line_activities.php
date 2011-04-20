@@ -5,7 +5,7 @@
 var ActivityChart = {
 	init: function() {
 	  Highcharts.theme = { colors: [] };// prevent errors in default theme
-	  var lData = <?php echo getChartLineActivitiesData($pData, $pCommunity); ?>;
+	  var lData = <?php echo json_encode($pData); ?>;
 		var lOptions = {
 		    chart: {
 		      renderTo: 'chart_line_activities',

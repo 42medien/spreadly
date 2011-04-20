@@ -148,7 +148,7 @@ class analyticsActions extends sfActions
     $lDm = MongoManager::getStatsDM();
 
     //$lHost = $lDm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $lDomainProfile->getUrl()));
-    $lHost = $lDm->getRepository("Documents\ActivityStats")->findByRange(array($this->pDomainProfile->getUrl()), $from, $to);
+    $lHost = $lDm->getRepository("Documents\ActivityStats")->findByRange(array($this->pDomainProfile->getUrl()), $to, $from);
     if($lHost) {
       $lHost = $lHost->toArray();
       if(count($lHost) > 1) {
@@ -164,7 +164,8 @@ class analyticsActions extends sfActions
 
     $lQuery = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC");
     $lDeals = $lQuery->execute();
-
+    //var_dump($lHost);exit;
+    
     $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_range', array('pUrls' => $lUrls, 'pHostSummary' => $lHost, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to));
     return $this->renderText(json_encode($lReturn));
   }
