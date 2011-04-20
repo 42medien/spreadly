@@ -17,12 +17,14 @@ if ($pUrlSummary) {
   <table width="100%" border="0" cellspacing="0" cellpadding="0" id="top-url-table" class="tablesorter">
   <thead>
     <tr>
-      <th width="280" height="32" align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('Top-URLs Overall'); ?></div></th>
-      <th width="48" align="center" valign="middle"><div class="sortlink"><?php echo __('Likes');?></div></th>
-      <th width="73" align="center" valign="middle"><div class="sortlink"><?php echo __('Spreads');?></div></th>
-      <th width="78" align="center" valign="middle"><div class="sortlink"><?php echo __('Reach');?></div></th>
-      <th width="79" align="center" valign="middle"><div class="sortlink"><?php echo __('Clickbacks');?></div></th>
-      <th width="79" align="center" valign="middle" class="last"><div class="sortlink"><?php echo __('Clickback-Likes');?></div></th>
+      <th width="280" height="32" align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('URLs'); ?></div></th>
+      <th width="60" align="center" valign="middle"><div class="sortlink"><?php echo __('Age');?></div></th>
+      <th align="center" valign="middle"><div class="sortlink"><?php echo __('Gender');?></div></th>
+      <th align="center" valign="middle"><div class="sortlink"><?php echo __('Relationship');?></div></th>
+      <th align="center" valign="middle"><div class="sortlink"><?php echo __('Spreads');?></div></th>
+      <th align="center" valign="middle"><div class="sortlink"><?php echo __('Reach');?></div></th>
+      <th align="center" valign="middle"><div class="sortlink"><?php echo __('Clickbacks');?></div></th>
+      <th align="center" valign="middle" class="last"><div class="sortlink"><?php echo __('Clickback-Likes');?></div></th>
     </tr>
     </thead>
     <tbody>
@@ -39,14 +41,16 @@ if ($pUrlSummary) {
               <strong><?php echo __('No title'); ?></strong>
             <?php } ?>
               <br />
-              <?php echo link_to($url->getUrl(), 'analytics/url_detail', array('query_string' => 'domainid='.$pDomainProfile->getId().'&url='.urlencode($url->getUrl()))); ?>
+              <?php echo $url->getUrl(); ?>
           </div>
         </td>
-        <td align="center"><div><?php echo $url->getLikes() ?></div></td>
+        <td align="center" valign="middle"><div><?php echo $url->getAge() ?></div></td>
+        <td align="center" valign="middle"><div><?php echo __($url->getGender()) ?></div></td>
+        <td align="center" valign="middle"><div><?php echo __($url->getRelationship()) ?></div></td>
         <td align="center" valign="middle"><div><?php echo $url->getShares() ?></div></td>
         <td align="center" valign="middle"><div><?php echo $url->getMediaPenetration() ?></div></td>
-        <td align="center" valign="middle"><div><?php echo $url->getClickbacks() ?></div></td>
-        <td align="center" class="last"><div><?php echo $url->getClickbackLikes() ?></div></td>
+        <td align="center" valign="middle"><div><?php echo $url->getClickbacks() ? $url->getClickbacks() : 0 ?></div></td>
+        <td align="center" valign="middle" class="last"><div><?php echo $url->getClickbackLikes() ? $url->getClickbackLikes() : 0 ?></div></td>
       </tr>
     <?php
       }
