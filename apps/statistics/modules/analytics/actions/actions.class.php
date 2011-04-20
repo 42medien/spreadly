@@ -263,14 +263,10 @@ class analyticsActions extends sfActions
             )
       );
     $lUrlsRange = $lUrlsRange->toArray();
+    
+    $lLikesRange = array_values($this->padLikes($lUrlsRange, $from, $to));
 
-    $lLikesRange = array_values(
-      array_map(function($stats) {
-        return $stats->getLikes();
-        }, $lUrlsRange)
-      );
-
-    $lReturn['content'] = $this->getPartial('analytics/url_detail_content_by_range', array('pUrl' => $this->pUrl, 'pUrls' => $lUrls, 'pUrlSummary' => $lUrlSummary, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to, 'pLikes' => $lLikesRange, 'pStartDay' => $from, 'showdate' => $from.' '._('to').' '.$to));
+    $lReturn['content'] = $this->getPartial('analytics/url_detail_content_by_range', array('pUrl' => $this->pUrl, 'pUrls' => $lUrls, 'pUrlSummary' => $lUrlSummary, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to, 'pLikes' => $lLikesRange, 'pStartDay' => $from, 'showdate' => $from.' to '.$to));
     return $this->renderText(json_encode($lReturn));
   }
 
