@@ -121,7 +121,7 @@ class analyticsActions extends sfActions
         break;
     }
 
-    if ($request->getParameter("date-to")) {
+    if ($request->getParameter("date-from")) {
       $this->forward('analytics', 'get_domain_detail_by_range');
     } else {
       $this->forward('analytics', 'get_domain_detail_by_day');
@@ -188,7 +188,7 @@ class analyticsActions extends sfActions
         break;
     }
 
-    if ($request->getParameter("date-to")) {
+    if ($request->getParameter("date-from")) {
       $this->forward('analytics', 'get_url_detail_by_range');
     } else {
       $this->forward('analytics', 'get_url_detail_by_day');
