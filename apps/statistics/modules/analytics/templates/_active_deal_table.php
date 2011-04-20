@@ -19,7 +19,7 @@
   			<tr>
   				<td align="left" class="first"><div class="padleft"><?php echo $deal->getSummary(); ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $deal->getRemainingCouponQuantity(); ?></div></td>
-  				<td align="center" valign="middle"><div><?php echo $deal->getRemainingDays(); ?></div></td>
+  				<td align="center" valign="middle"><div><?php echo $deal->getRemainingDays() > 0 ? $deal->getRemainingDays() : __('expired'); ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $deal->getDealSummary() ? $deal->getDealSummary()->getMediaPenetration() : 0; ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $deal->getDealSummary() ? $deal->getDealSummary()->getClickbacks() : 0; ?></div></td>
   				<td align="center" valign="middle" class="last"><div><?php echo $deal->getDealSummary() ? $deal->getDealSummary()->getClickbackLikes() : 0; ?></div></td>

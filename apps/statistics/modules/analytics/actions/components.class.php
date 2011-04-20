@@ -31,7 +31,7 @@ class analyticsComponents extends sfComponents
     $domain_profile = DomainProfileTable::getInstance()->findOneBy("url", $this->host);
     $this->deals = array();
 
-    if ($this->pDateTo) {
+    if ($this->pDateFrom) {
       $lQuery = Doctrine_Query::create()
                 ->from('Deal d')
                 ->where(
