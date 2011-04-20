@@ -16,6 +16,11 @@ var ActivityChart = {
 		    title: {
 		      text: ''
 		   },
+
+		    exporting: {
+	        enabled: false
+	    	},
+
 		    subtitle: false,
 		   xAxis: {
 		      type: 'datetime',

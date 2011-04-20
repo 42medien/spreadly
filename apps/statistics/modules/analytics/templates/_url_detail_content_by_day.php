@@ -4,7 +4,7 @@ if ($pUrlSummary) {
   slot('content')
 ?>
 <?php if (isset($showdate)) {?>
-	<h2><?php echo __('Statistics from %date%', array('%date%' => $showdate)); ?></h2>
+	<h2><?php echo __('Likes from %date%', array('%date%' => $showdate)); ?></h2>
 <?php } ?>
 <div id="line-chart-example">
 <?php include_partial('analytics/chart_line_activities_by_hours', array("pData" => $pUrlSummary)); ?>
@@ -16,7 +16,7 @@ if ($pUrlSummary) {
 ?>
 
 <?php slot('content') ?>
-<h2><?php echo __('Likes for %url%', array('%url%' => $pUrl)); ?></h2>
+<h2><?php echo __('Like details for %url%', array('%url%' => $pUrlSummary->getUrl())); ?></h2>
 <div class="data-tablebox two-line-table">
   <table width="930px;" border="0" cellspacing="0" cellpadding="0" id="top-like-table" class="tablesorter">
   <thead>
