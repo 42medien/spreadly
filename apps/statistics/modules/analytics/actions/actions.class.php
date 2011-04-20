@@ -168,7 +168,6 @@ class analyticsActions extends sfActions
             )
       );
     $lHostsRange = $lHostsRange->toArray();
-    var_dump($to);exit;
 
     $lLikesRange = array_values(
       array_map(function($stats) {
