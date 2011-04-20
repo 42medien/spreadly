@@ -19,7 +19,7 @@
 		<div class="list-box">
 			<ul class="footer-list">
 				<li><?php echo link_to(__('GetSatisfaction'), 'http://getsatisfaction.com/spreadly'); ?></li>
-				<li><?php echo link_to(__('Help via Twitter'), 'http://twitter.com/spreadly'); ?></li>
+				<li><?php echo link_to(__('Help via Twitter'), 'http://twitter.com/spreadly_helps'); ?></li>
 				<li><a href="mailto:info@spreadly.com"><?php echo __('Help via Email'); ?></a></li>
 			</ul>
 		</div>
