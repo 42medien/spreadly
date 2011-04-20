@@ -45,7 +45,7 @@ class analyticsActions extends sfActions
   *
   * @param sfRequest $request A request object
   */
-  public function executeIndex(sfWebRequest $request) {
+  public function executeIndex(sfWebRequest $request) {        
     $this->pVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
     $domainUrls = array();
     foreach ($this->pVerifiedDomains as $domain) {
@@ -167,18 +167,33 @@ class analyticsActions extends sfActions
             "day" => array('$gte' => new MongoDate(strtotime($from)), '$lte' => new MongoDate(strtotime($to)))
             )
       );
+    
     $lHostsRange = $lHostsRange->toArray();
 
-    $lLikesRange = array_values(array_map(function($stats) {
-        return $stats->getLikes();
-        }, $lHostsRange));
-
-
+    $lLikesRange = array_values($this->padLikes($lHostsRange, $from, $to));
 
     $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_range', array('pUrls' => $lUrls, 'pHostSummary' => $lHost, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to, 'pLikes' => $lLikesRange, 'pStartDay' => $from, 'showdate' => $from.' '._('to').' '.$to));
     return $this->renderText(json_encode($lReturn));
   }
-
+  
+  private function padLikes($activityStats, $from, $to) {
+    $from = new DateTime($from);
+    $from->setTime(0,0);
+    $to = new DateTime($to);
+    $to->setTime(0,0);
+    
+    $lDayPeriod = new DatePeriod($from, new DateInterval('P1D'), $to);
+    
+    $res = array();
+    foreach ($lDayPeriod as $day) {
+      $res[$day->format('Y-m-d')] = 0;
+    }
+    foreach ($activityStats as $stat) {
+      $res[$stat->getDay()->format('Y-m-d')] = $stat->getLikes();
+    }
+    return $res;
+  }
+  
   public function executeUrl_detail(sfWebRequest $request){
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
     $lDm = MongoManager::getStatsDM();
