@@ -76,7 +76,7 @@ if ($pLikes) {
 <?php include_partial('global/graybox'); ?>
 
 <?php
-if (array_key_exists($pDomainProfile->getUrl(), $pHostSummary)) {
+if (array_key_exists($pUrl, $pUrlSummary)) {
   slot('content');
 ?>
 <h2 class="sub_title"><?php echo __('Demographics for %url%', array('%url%' => $pDomainProfile->getUrl())); ?></h2>
@@ -90,7 +90,7 @@ if (array_key_exists($pDomainProfile->getUrl(), $pHostSummary)) {
                 "plotsize": "50%",
                 "bgcolor" : "#e1e1e1",
                 "renderto":"gender-chart"
-            }', 'pData' => $pHostSummary[$pDomainProfile->getUrl()]['value']['d']
+            }', 'pData' => $pUrlSummary[$pUrl]['value']['d']
     )); ?>
   </div>
   <div class="alignleft" id="age-chart">
@@ -102,7 +102,7 @@ if (array_key_exists($pDomainProfile->getUrl(), $pHostSummary)) {
                 "plotsize": "50%",
                 "bgcolor" : "#e1e1e1",
                 "renderto":"age-chart"
-            }', 'pData' => $pHostSummary[$pDomainProfile->getUrl()]['value']['d']
+            }', 'pData' => $pUrlSummary[$pUrl]['value']['d']
     )); ?>
   </div>
   <div class="alignleft" id="relation-chart">
@@ -114,7 +114,7 @@ if (array_key_exists($pDomainProfile->getUrl(), $pHostSummary)) {
                 "plotsize": "50%",
                 "bgcolor" : "#e1e1e1",
                 "renderto":"relation-chart"
-            }', 'pData' => $pHostSummary[$pDomainProfile->getUrl()]['value']['d']
+            }', 'pData' => $pUrlSummary[$pUrl]['value']['d']
     )); ?>
   </div>
 </div>

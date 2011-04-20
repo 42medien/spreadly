@@ -228,11 +228,11 @@ class analyticsActions extends sfActions
 
     $lDm = MongoManager::getStatsDM();
 
-    $lHost = $lDm->getRepository("Documents\ActivityUrlStats")->findByUrlsAndRange(array($this->pUrl), $from, $to);
-    if($lHost) {
-      $lHost = $lHost->toArray();
-      if(count($lHost) > 1) {
-        $lHost = $lHost[0];
+    $lUrlSummary = $lDm->getRepository("Documents\ActivityUrlStats")->findByUrlsAndRange(array($this->pUrl), $from, $to);
+    if($lUrlSummary) {
+      $lUrlSummary = $lUrlSummary->toArray();
+      if(count($lUrlSummary) > 1) {
+        $lUrlSummary = $lUrlSummary[0];
       }
     }
 
@@ -242,20 +242,20 @@ class analyticsActions extends sfActions
             )
       );
 
-    $lHostsRange = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(
+    $lUrlsRange = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(
       array("url" => $this->pUrl,
             "day" => array('$gte' => new MongoDate(strtotime($from)), '$lte' => new MongoDate(strtotime($to)))
             )
       );
-    $lHostsRange = $lHostsRange->toArray();
+    $lUrlsRange = $lUrlsRange->toArray();
 
     $lLikesRange = array_values(
       array_map(function($stats) {
         return $stats->getLikes();
-        }, $lHostsRange)
+        }, $lUrlsRange)
       );
 
-    $lReturn['content'] = $this->getPartial('analytics/url_detail_content_by_range', array('pUrl' => $this->pUrl, 'pUrls' => $lUrls, 'pHostSummary' => $lHost, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to, 'pLikes' => $lLikesRange, 'pStartDay' => $from, 'showdate' => $from.' '._('to').' '.$to));
+    $lReturn['content'] = $this->getPartial('analytics/url_detail_content_by_range', array('pUrl' => $this->pUrl, 'pUrls' => $lUrls, 'pUrlSummary' => $lUrlSummary, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to, 'pLikes' => $lLikesRange, 'pStartDay' => $from, 'showdate' => $from.' '._('to').' '.$to));
     return $this->renderText(json_encode($lReturn));
   }
 
