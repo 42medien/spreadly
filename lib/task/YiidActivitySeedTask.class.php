@@ -84,12 +84,13 @@ EOF;
     $services = array('facebook', 'twitter', 'linkedin', 'google');
     $dm = MongoManager::getDM();
 
-    for ($i=0; $i < 100; $i++) { 
+    for ($i=0; $i < 1000; $i++) { 
       $url = $this->oneOfThese($urls);
       $tag = $this->oneOfThese($tags);
       $user = $this->oneOfThese($users);
       $cb_ref = $this->oneOfThese(array('', '', '', '', '', '', 'http://tierscheisse.de'));
-      $ra = $this->random(1000);
+      $ra = $this->random(100);
+      $theC =  mt_rand(strtotime("3 days ago"),strtotime("today"));
       
       $array = array(
         'url' => "http://$url/$ra",
@@ -100,7 +101,7 @@ EOF;
         'title' => "$url title",
         'descr' => "$url description",
         'comment' => "$url comment",
-        'c' => strtotime($this->random(3)." day ago"),
+        'c' => $theC,
         'cb' => $this->randBoolean() ? $this->random(30) : 0,
         'cb_referer' => $cb_ref!='' ? $cb_ref : null,
         'cb_service' => $cb_ref!='' ? $this->oneOfThese($services) : null

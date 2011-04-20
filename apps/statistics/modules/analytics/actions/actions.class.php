@@ -172,7 +172,7 @@ class analyticsActions extends sfActions
 
     $lLikesRange = array_values($this->padLikes($lHostsRange, $from, $to));
 
-    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_range', array('pUrls' => $lUrls, 'pHostSummary' => $lHost, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to, 'pLikes' => $lLikesRange, 'pStartDay' => $from, 'showdate' => $from.' '._('to').' '.$to));
+    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_range', array('pUrls' => $lUrls, 'pHostSummary' => $lHost, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to, 'pLikes' => $lLikesRange, 'pStartDay' => $from, 'showdate' => $from.' to '.$to));
     return $this->renderText(json_encode($lReturn));
   }
   

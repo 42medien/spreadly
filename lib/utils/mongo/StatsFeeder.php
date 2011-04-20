@@ -73,8 +73,8 @@ class StatsFeeder {
     $url = strtolower($pYiidActivity->getUrl());
     $host = parse_url($url, PHP_URL_HOST);
     $day = new MongoDate(strtotime(date("Y-m-d", $pYiidActivity->getC())));
-    $hourOfDay = date("G", strtotime($pYiidActivity->getC()));
-
+    $hourOfDay = date("G", $pYiidActivity->getC());
+    
     $lParams = array(
       'host' => $host,
       'url'  => $url,
