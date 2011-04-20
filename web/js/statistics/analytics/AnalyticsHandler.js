@@ -12,11 +12,14 @@ var AnalyticsTables = {
       AnalyticsTables.initTablesorter("dash-url-table");
       AnalyticsTables.initTablesorter("analytics-url-table");
       AnalyticsTables.initTablesorter("top-url-table");
+      AnalyticsTables.initTablesorter("top-like-table");
+      
       jQuery('#dash-deal-table').tableScroll({height: 200, flush: true});
       jQuery('#dash-website-table').tableScroll({height: 200, flush: true});
       jQuery('#dash-url-table').tableScroll({height: 200, flush: true}); 
       jQuery('#analytics-url-table').tableScroll({height: 200, flush: true});
       jQuery('#top-url-table').tableScroll({height: 150, flush: true});
+      jQuery('#top-like-table').tableScroll({height: 150, flush: true});
       
     },
     
@@ -123,7 +126,7 @@ var AnalyticsDateFilter = {
           data : {
             ei_kcuf : new Date().getTime()
           },
-          action: pAction,
+          url: pAction,
           type : 'POST',
           dataType : 'json',
           success : function(pResponse) {
