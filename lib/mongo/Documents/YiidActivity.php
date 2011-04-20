@@ -203,18 +203,6 @@ class YiidActivity extends BaseDocument {
   }
 
   /**
-   * pre-update hook
-   *
-   * @PreUpdate
-   *
-   * @author Matthias Pfefferle
-   * @author Hannes Schippmann
-   */
-  public function preUpdate() {
-    $this->prePersist();
-  }
-
-  /**
    * post-save hook
    *
    * @PostPersist
@@ -223,15 +211,6 @@ class YiidActivity extends BaseDocument {
     UserTable::updateLatestActivityForUser($this->getUId(), time());
     $this->postIt();
     StatsFeeder::feed($this);
-  }
-
-  /**
-   * post-update hook
-   *
-   * @PostUpdate
-   */
-  public function postUpdate() {
-    $this->postPersist();
   }
 
   /**
