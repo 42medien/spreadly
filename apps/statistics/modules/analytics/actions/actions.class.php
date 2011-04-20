@@ -174,8 +174,8 @@ class analyticsActions extends sfActions
         return $stats->getLikes();
         }, $lHostsRange)
       );
-   
-    
+
+
     $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_range', array('pUrls' => $lUrls, 'pHostSummary' => $lHost, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to, 'pLikes' => $lLikesRange, 'pStartDay' => $from));
     return $this->renderText(json_encode($lReturn));
   }
@@ -222,7 +222,42 @@ class analyticsActions extends sfActions
   }
 
   public function executeGet_url_detail_by_range(sfWebRequest $request) {
-    // todo
+    $this->getResponse()->setContentType('application/json');
+
+    $from = $request->getParameter("date-from");
+    $to = $request->getParameter("date-to");
+
+    $lDm = MongoManager::getStatsDM();
+
+    $lHost = $lDm->getRepository("Documents\ActivityUrlStats")->findByRange(array($this->pDomainProfile->getUrl()), $from, $to);
+    if($lHost) {
+      $lHost = $lHost->toArray();
+      if(count($lHost) > 1) {
+        //$lHost = $lHost[0];
+      }
+    }
+
+    $lUrls = $lDm->getRepository("Documents\AnalyticsActivity")->findBy(
+      array("host" => $this->pDomainProfile->getUrl(),
+            "day" => array('$gte' => new MongoDate(strtotime($from)), '$lte' => new MongoDate(strtotime($to)))
+            )
+      );
+
+    $lHostsRange = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(
+      array("host" => $this->pDomainProfile->getUrl(),
+            "day" => array('$gte' => new MongoDate(strtotime($from)), '$lte' => new MongoDate(strtotime($to)))
+            )
+      );
+    $lHostsRange = $lHostsRange->toArray();
+
+    $lLikesRange = array_values(
+      array_map(function($stats) {
+        return $stats->getLikes();
+        }, $lHostsRange)
+      );
+
+    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_range', array('pUrls' => $lUrls, 'pHostSummary' => $lHost, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to, 'pLikes' => $lLikesRange, 'pStartDay' => $from));
+    return $this->renderText(json_encode($lReturn));
   }
 
   public function executeSelect_period(sfWebRequest $request) {

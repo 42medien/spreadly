@@ -57,5 +57,10 @@ class analyticsComponents extends sfComponents
 		$this->pDeal = DealTable::getInstance()->find($lDealId);
   }
 
+  public function executeTop_url_overall_table(sfWebRequest $request) {
+    $dm = MongoManager::getStatsDM();
+    $this->urls = $dm->getRepository("Documents\UrlSummary")->findBy(array("host" => $this->host))->limit(10)->sort(array("l" => "DESC", "c" => "DESC"));
+  }
+
   public function executeUrl_filter(sfWebRequest $request){}
 }
