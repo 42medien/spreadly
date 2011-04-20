@@ -133,6 +133,7 @@ var AnalyticsDateFilter = {
           success : function(pResponse) {
             debug.log(pResponse);
             AnalyticsFilter.showContent(pResponse.content);
+            AnalyticsTables.init();            
             OnLoadGrafic.hideGrafic();
             jQuery(document).unbind('cbox_cleanup');
           }
