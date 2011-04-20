@@ -72,6 +72,7 @@ var AnalyticsFilter = {
         dataType : 'json',
         success : function(pResponse) {
           AnalyticsFilter.showContent(pResponse.content);
+          AnalyticsTables.init();
           OnLoadGrafic.hideGrafic();
         }
       };
