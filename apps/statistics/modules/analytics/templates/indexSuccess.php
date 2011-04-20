@@ -4,7 +4,7 @@
   	<table border="0" cellspacing="0" cellpadding="0" id="dash-website-table" class="tablesorter scrolltable" style="width: 930px;">
 	  	<thead>
 	    	<tr>
-	  			<th align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('Websites Yesterday'); ?></div></th>
+	  			<th align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('Websites last 30 days'); ?></div></th>
 	  	    <th align="center" valign="middle"><div class="sortlink no-sort"><?php echo __('Likes');?></div></th>
 	  	    <th align="center" valign="middle"><div class="sortlink no-sort"><?php echo __('Shares');?></div></th>
 	  			<th align="center" valign="middle" class="last" style="white-space: nowrap;"><div class="sortlink no-sort"><?php echo __('Media Penetration'); ?></div></th>
@@ -33,7 +33,7 @@
   	<table border="0" cellspacing="0" cellpadding="0" id="dash-deal-table" class="tablesorter scrolltable" style="width: 930px;">
   	<thead>
     	<tr>
-  			<th align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('Deals Yesterday'); ?></div></th>
+  			<th align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('Deals last 30 days'); ?></div></th>
   			<th align="center" valign="middle"><div class="sortlink no-sort"><?php echo __('Deals left');?></div></th>
   			<th align="center" valign="middle"><div class="sortlink no-sort"><?php echo __('Days left');?></div></th>
   	    <th align="center" valign="middle"><div class="sortlink no-sort"><?php echo __('Likes');?></div></th>
@@ -66,7 +66,7 @@
   	<table border="0" cellspacing="0" cellpadding="0" id="dash-url-table" class="tablesorter scrolltable" style="width: 930px;">
 	  	<thead>
 	    	<tr>
-	  			<th align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('Top-Pages Yesterday'); ?></div></th>
+	  			<th align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('Top-Pages last 30 days'); ?></div></th>
 	  	    <th align="center" valign="middle"><div class="sortlink no-sort"><?php echo __('Likes');?></div></th>
 	  	    <th align="center" valign="middle"><div class="sortlink no-sort"><?php echo __('Shares');?></div></th>
 	  			<th align="center" valign="middle" class="last" style="white-space: nowrap;"><div class="sortlink no-sort"><?php echo __('Media Penetration'); ?></div></th>
