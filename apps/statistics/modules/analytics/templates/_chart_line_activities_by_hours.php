@@ -14,7 +14,7 @@ var ActivityChart = {
 		      backgroundColor: "#f6f6f6"
 		   },
 		    title: {
-		      text: false
+		      text: ''
 		   },
 		    subtitle: false,
 		   xAxis: {
@@ -27,7 +27,8 @@ var ActivityChart = {
 		   yAxis: {
 		      title: {
 		         text: false
-		      }
+		      },
+	      	allowDecimals:false
 		   },
 		   tooltip: {
          formatter: function() {
