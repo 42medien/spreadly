@@ -16,7 +16,7 @@ if ($pUrlSummary) {
 ?>
 
 <?php slot('content') ?>
-<h2><?php echo __('Likes for %url%', array('%url%' => $pUrlSummary->getUrl())); ?></h2>
+<h2><?php echo __('Likes for %url%', array('%url%' => $pUrl)); ?></h2>
 <div class="data-tablebox two-line-table">
   <table width="930px;" border="0" cellspacing="0" cellpadding="0" id="top-like-table" class="tablesorter">
   <thead>
