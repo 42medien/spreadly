@@ -1,11 +1,11 @@
 <?php
-if ($pHostSummary) {
+if ($pLikes) {
   slot('content')
 ?>
 <div id="line-chart-example">
-<?php include_partial('analytics/chart_line_activities', 
+<?php include_partial('analytics/chart_line_activities',
         array(
-          "pData" => $pLikes, 
+          "pData" => $pLikes,
           'pFromYear' => date('Y', strtotime($pStartDay)),
           'pFromMonth' => date('m', strtotime($pStartDay)),
           'pFromDay' => date('d', strtotime($pStartDay))

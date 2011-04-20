@@ -1,10 +1,17 @@
 <?php use_helper('Text'); ?>
 <?php
-if (array_key_exists($pDomainProfile->getUrl(), $pHostSummary)) {
+if ($pLikes) {
   slot('content')
 ?>
 <div id="line-chart-example">
-<?php //include_partial('analytics/chart_line_activities_by_hours', array("pData" => $pUrlSummary)); ?>
+<?php include_partial('analytics/chart_line_activities',
+        array(
+          "pData" => $pLikes,
+          'pFromYear' => date('Y', strtotime($pStartDay)),
+          'pFromMonth' => date('m', strtotime($pStartDay)),
+          'pFromDay' => date('d', strtotime($pStartDay))
+        )
+      ); ?>
 </div>
 <?php
   end_slot();
