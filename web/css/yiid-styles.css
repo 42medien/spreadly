@@ -688,11 +688,11 @@ th.headerSortUp.last {
 .box .shares{padding:8px 5px 0 0px; }
 .box .media{ padding:8px 15px 0 0px; }
 
-.twitter span{ background:url(/img/twitter_icon.png) left 0px no-repeat; min-width:17px; height:17px;}
+.twitter span{ background:url(/img/twitter_icon.png) no-repeat scroll center top transparent; min-width:17px; height:17px;}
 .twitter_width span{ min-width:30px; text-align:center; background:url(/img/twitter_icon.png) center 0px no-repeat;}
-.facebook span{ background: url(/img/facebook_icon.png) left 0px no-repeat; min-width:20px; height:17px;}
-.linkedin span{ background: url(/img/in_icon.png) left 0px no-repeat; min-width:17px; height:17px;}
-.gtalk span, .google span{ background: url(/img/gtalk_icon.png) left 0px no-repeat; min-width:19px; height:17px;}
+.facebook span{  background: url("/img/facebook_icon.png") no-repeat scroll center top transparent; min-width:20px; height:17px;}
+.linkedin span{ background: url(/img/in_icon.png) no-repeat scroll center top transparent; min-width:17px; height:17px;}
+.gtalk span, .google span{ background: url(/img/gtalk_icon.png) no-repeat scroll center top transparent; min-width:19px; height:17px;}
 
 .mediaPartner .box{width:auto; padding-right:0px;}
 
