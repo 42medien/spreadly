@@ -169,12 +169,11 @@ class analyticsActions extends sfActions
       );
     $lHostsRange = $lHostsRange->toArray();
 
-    $lLikesRange = 
-      array_map(function($stats) {
+    $lLikesRange = array_values(array_map(function($stats) {
         return $stats->getLikes();
-        }, $lHostsRange);
+        }, $lHostsRange));
       
-      var_dump($lLikesRange);exit;
+      
 
     $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_range', array('pUrls' => $lUrls, 'pHostSummary' => $lHost, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to, 'pLikes' => $lLikesRange, 'pStartDay' => $from));
     return $this->renderText(json_encode($lReturn));
