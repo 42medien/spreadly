@@ -162,7 +162,22 @@ class analyticsActions extends sfActions
             )
       );
 
-    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_range', array('pUrls' => $lUrls, 'pHostSummary' => $lHost, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to));
+    $lHostsRange = $lDm->getRepository("Documents\ActivityStats")->findBy(
+      array("host" => $this->pDomainProfile->getUrl(),
+            "day" => array('$gte' => new MongoDate(strtotime($from)), '$lte' => new MongoDate(strtotime($to)))
+            )
+      );
+    $lHostsRange = $lHostsRange->toArray();
+    var_dump($to);exit;
+
+    $lLikesRange = array_values(
+      array_map(function($stats) {
+        return $stats->getLikes();
+        }, $lHostsRange)
+      );
+   
+    
+    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_range', array('pUrls' => $lUrls, 'pHostSummary' => $lHost, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to, 'pLikes' => $lLikesRange, 'pStartDay' => $from));
     return $this->renderText(json_encode($lReturn));
   }
 

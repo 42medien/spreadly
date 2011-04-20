@@ -3,7 +3,14 @@ if ($pHostSummary) {
   slot('content')
 ?>
 <div id="line-chart-example">
-<?php include_partial('analytics/chart_line_activities', array("pData" => $pHostSummary[$pDomainProfile->getUrl()]['value']['h'])); ?>
+<?php include_partial('analytics/chart_line_activities', 
+        array(
+          "pData" => $pLikes, 
+          'pFromYear' => date('Y', strtotime($pStartDay)),
+          'pFromMonth' => date('m', strtotime($pStartDay)),
+          'pFromDay' => date('d', strtotime($pStartDay))
+        )
+      ); ?>
 </div>
 <?php
   end_slot();
