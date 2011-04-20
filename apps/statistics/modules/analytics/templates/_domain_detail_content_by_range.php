@@ -2,6 +2,9 @@
 if ($pLikes) {
   slot('content')
 ?>
+<?php if (isset($showdate)) {?>
+	<h2><?php echo __('Statistics from %date%', array('%date%' => $showdate)); ?></h2>
+<?php } ?>
 <div id="line-chart-example">
 <?php include_partial('analytics/chart_line_activities',
         array(
