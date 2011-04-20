@@ -734,13 +734,15 @@ th.headerSortUp.last {
 
 /**********Footer*************/
 
-.footer-outer-box{
-
-}
 
 .footer-box{
   float: left;
   padding-left: 40px;
+}
+
+.list-box{
+    border-right: 1px solid #CACACA;
+    height: 105px;
 }
 
 .footer-box h3{
@@ -751,7 +753,6 @@ th.headerSortUp.last {
 }
 
 .footer-box .footer-list{
-  border-right: 1px solid #cacaca;
   padding-right: 45px;
 }
 
