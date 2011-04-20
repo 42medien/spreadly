@@ -1,6 +1,6 @@
 <?php use_helper('Text'); ?>
 <?php
-if ($pUrlSummary) {
+if (array_key_exists($pDomainProfile->getUrl(), $pHostSummary)) {
   slot('content')
 ?>
 <div id="line-chart-example">
@@ -65,7 +65,7 @@ if ($pUrlSummary) {
 <?php include_partial('global/graybox'); ?>
 
 <?php
-if ($pUrlSummary) {
+if (array_key_exists($pDomainProfile->getUrl(), $pHostSummary)) {
   slot('content');
 ?>
 <div id="pie-charts" class="clearfix">

@@ -33,7 +33,7 @@ class analyticsActions extends sfActions
     $this->pDateFrom = $request->getParameter('date-from', date('Y-m-d', strtotime("6 days ago")));
     $this->pDateTo = $request->getParameter('date-to', date('Y-m-d'));
     $this->pCommunity = $request->getParameter('com', 'all');
-    $this->pUrl = $request->getParameter('url', null);
+    $this->pUrl = urldecode($request->getParameter('url', null));
     $this->pDealId = $request->getParameter('dealid', null);
     $this->pType = $request->getParameter('type', 'url_activities');
     //first for first click on a deal
@@ -238,7 +238,7 @@ class analyticsActions extends sfActions
     }
 
     $lUrls = $lDm->getRepository("Documents\AnalyticsActivity")->findBy(
-      array("host" => $this->pDomainProfile->getUrl(),
+      array("url" => $this->pUrl,
             "day" => array('$gte' => new MongoDate(strtotime($from)), '$lte' => new MongoDate(strtotime($to)))
             )
       );
@@ -256,7 +256,7 @@ class analyticsActions extends sfActions
         }, $lHostsRange)
       );
 
-    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_range', array('pUrls' => $lUrls, 'pHostSummary' => $lHost, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to, 'pLikes' => $lLikesRange, 'pStartDay' => $from));
+    $lReturn['content'] = $this->getPartial('analytics/url_detail_content_by_range', array('pUrls' => $lUrls, 'pHostSummary' => $lHost, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to, 'pLikes' => $lLikesRange, 'pStartDay' => $from));
     return $this->renderText(json_encode($lReturn));
   }
 
