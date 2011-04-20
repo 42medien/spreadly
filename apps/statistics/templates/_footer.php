@@ -1,10 +1,69 @@
-<div id="nav_supp" class="clearfix">
-  <?php echo link_to(__('Imprint'), "http://www.yiid.com/imprint"); ?>
-  <?php echo link_to(__('Terms of Services'), "http://www.yiid.com/tos"); ?>
-  <?php echo link_to(__('Privacy Policy'), "http://www.yiid.com/privacy"); ?>
+<?php slot('content'); ?>
 
-  <?php echo mail_to('info@spreadly.com'); ?>
+<div class="footer-outer-box clearfix">
+
+	<div class="footer-box">
+		<h3><?php echo __('Home'); ?></h3>
+		<div class="list-box">
+			<ul class="footer-list">
+				<li><?php echo link_to(__('Buttons'), 'configurator/index'); ?></li>
+				<li><?php echo link_to(__('Domains'), 'domain_profiles/index'); ?></li>
+				<li><?php echo link_to(__('Analytics'), 'analytics/index'); ?></li>
+				<li><?php echo link_to(__('Deals'), 'deals/index'); ?></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="footer-box">
+		<h3><?php echo __('Support'); ?></h3>
+		<div class="list-box">
+			<ul class="footer-list">
+				<li><?php echo link_to(__('GetSatisfaction'), 'http://getsatisfaction.com/spreadly'); ?></li>
+				<li><?php echo link_to(__('Help via Twitter'), 'http://twitter.com/spreadly'); ?></li>
+				<li><a href="mailto:info@spreadly.com"><?php echo __('Help via Email'); ?></a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="footer-box">
+		<h3><?php echo __('Services'); ?></h3>
+		<div class="list-box">
+			<ul class="footer-list">
+				<li><?php echo link_to(__('Chrome Extension'), 'https://chrome.google.com/extensions/detail/leclmjclggfnkhdpkgnagcdnhnomapda'); ?></li>
+				<li><?php echo link_to(__('Other Extensions'), 'http://code.google.com/p/spreadly/downloads/list'); ?></li>
+				<li><?php echo link_to(__('Wordpress Plugin'), 'http://wordpress.org/extend/plugins/yiidit/'); ?></li>
+				<li><?php echo link_to(__('Developers'), 'http://code.google.com/p/spreadly/'); ?></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="footer-box">
+		<h3><?php echo __('Company'); ?></h3>
+		<div class="list-box">
+			<ul class="footer-list">
+				<li><?php echo link_to(__('Our Blog'), 'http://blog.spreadly.com/'); ?></li>
+				<li><?php echo link_to(__('About ekaabo'), 'http://ekaabo.de/'); ?></li>
+				<li><?php echo link_to(__('TOS'), 'system/tos'); ?></li>
+				<li><?php echo link_to(__('Privacy'), 'system/privacy'); ?></li>
+				<li><?php echo link_to(__('Imprint'), '@imprint'); ?></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="footer-box">
+		<h3><?php echo __('Contact'); ?></h3>
+		<div class="list-box">
+			<ul class="footer-list last">
+				<li><a href="mailto:info@spreadly.com"><?php echo __('Send email'); ?></a></li>
+				<li><?php echo link_to(__('Spread.ly @ Facebook'), 'http://www.facebook.com/spreadly'); ?></li>
+				<li><?php echo link_to(__('Spread.ly @ Twitter'), 'http://twitter.com/spreadly'); ?></li>
+			</ul>
+		</div>
+	</div>
 </div>
+<?php end_slot(); ?>
+<?php include_partial('global/graybox'); ?>
+
 
 <script type="text/javascript" charset="utf-8">
   var is_ssl = ("https:" == document.location.protocol);

@@ -730,3 +730,40 @@ th.headerSortUp.last {
 
 /* End Main Nav
 --------------------------------------------------------------------------------------------------------*/
+
+
+/**********Footer*************/
+
+.footer-outer-box{
+
+}
+
+.footer-box{
+  float: left;
+  padding-left: 40px;
+}
+
+.footer-box h3{
+   color: #345C82;
+   font-size: 14px;
+   font-weight: bold;
+   line-height: 28px;
+}
+
+.footer-box .footer-list{
+  border-right: 1px solid #cacaca;
+  padding-right: 45px;
+}
+
+.footer-box .footer-list.last{
+	border: none;
+}	
+
+.footer-box .footer-list li{
+  background: url("/img/plus.png") no-repeat scroll left center transparent;
+  padding-left: 15px;
+  line-height: 20px;
+}
+
+
+/*********End Footer*********/
