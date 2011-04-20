@@ -2,7 +2,8 @@
 <div id="analytics-bread">
 	<?php echo link_to(__('Dashboard'), 'analytics/index'); ?>&nbsp;&raquo;&nbsp;
 	<?php echo link_to($pDomainProfile->getUrl(), 'analytics/domain_statistics?domainid='.$pDomainProfile->getId()); ?>&nbsp;&raquo;&nbsp;
-	<?php echo link_to($pUrl, 'analytics/url_detail', array('query_string' => 'url='.$pUrl.'&domainid='.$pDomainProfile->getId())); ?>
+	<?php echo link_to('Details for '.$pDomainProfile->getUrl(), 'analytics/domain_detail?domainid='.$pDomainProfile->getId());?>&nbsp;&raquo;&nbsp;
+	<?php echo link_to('Details for '.$pUrl, 'analytics/url_detail', array('query_string' => 'url='.$pUrl.'&domainid='.$pDomainProfile->getId())); ?>
 </div>
 
 <form action="/analytics/get_url_detail" name="analytics-filter-form" id="analytics-filter-form">
