@@ -3,7 +3,7 @@ if ($pLikes) {
   slot('content')
 ?>
 <?php if (isset($showdate)) {?>
-	<h2><?php echo __('Statistics from %date%', array('%date%' => $showdate)); ?></h2>
+	<h2 class="sub_title"><?php echo __('Statistics from %date%', array('%date%' => $showdate)); ?></h2>
 <?php } ?>
 <div id="line-chart-example">
 <?php include_partial('analytics/chart_line_activities',
@@ -22,6 +22,7 @@ if ($pLikes) {
 ?>
 
 <?php slot('content') ?>
+<h2 class="sub_title"><?php echo __('URL overview'); ?></h2>
 <div class="data-tablebox two-line-table">
   <table width="100%" border="0" cellspacing="0" cellpadding="0" id="top-url-table" class="tablesorter">
   <thead>
@@ -73,6 +74,7 @@ if ($pLikes) {
 if ($pHostSummary) {
   slot('content');
 ?>
+<h2 class="sub_title"><?php echo __('Demographic overview'); ?></h2>
 <div id="pie-charts" class="clearfix">
   <div class="alignleft" id="gender-chart">
     <?php include_partial('analytics/chart_pie_gender', array('pChartsettings' =>
@@ -115,8 +117,10 @@ if ($pHostSummary) {
   end_slot();
   include_partial('global/graybox');
 }
-
 slot('content');
+?>
+<h2 class="sub_title"><?php echo __('Deal overview'); ?></h2>
+<?php
   include_component('analytics', 'active_deal_table', array("host" => $pDomainProfile->getUrl()));
 end_slot();
 include_partial('global/graybox');

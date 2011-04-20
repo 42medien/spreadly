@@ -4,7 +4,7 @@
 	<?php echo link_to(__('Dashboard'), 'analytics/index'); ?>&nbsp;&nbsp;&gt;&nbsp;
 	<?php echo link_to($pHost->getHost(), 'analytics/domain_statistics?domainid='.$pDomainProfileId); ?>
 </div>
-<h2><?php echo __('All time overview for domain %domain%', array('%domain%' => $pHost->getHost()));?></h2>
+<h2 class="sub_title"><?php echo __('All time overview for domain %domain%', array('%domain%' => $pHost->getHost()));?></h2>
   <div id="navi" class="clearfix">
     <div class="stepBox alignleft">
       <div class="box_container alignleft">

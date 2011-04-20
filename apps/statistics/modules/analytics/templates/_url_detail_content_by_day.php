@@ -4,7 +4,7 @@ if ($pUrlSummary) {
   slot('content')
 ?>
 <?php if (isset($showdate)) {?>
-	<h2><?php echo __('Likes from %date%', array('%date%' => $showdate)); ?></h2>
+	<h2 class="sub_title"><?php echo __('Likes from %date%', array('%date%' => $showdate)); ?></h2>
 <?php } ?>
 <div id="line-chart-example">
 <?php include_partial('analytics/chart_line_activities_by_hours', array("pData" => $pUrlSummary)); ?>
@@ -16,7 +16,7 @@ if ($pUrlSummary) {
 ?>
 
 <?php slot('content') ?>
-<h2><?php echo __('Like details for %url%', array('%url%' => $pUrlSummary->getUrl())); ?></h2>
+<h2 class="sub_title"><?php echo __('Like details for %url%', array('%url%' => $pUrlSummary->getUrl())); ?></h2>
 <div class="data-tablebox two-line-table">
   <table width="930px;" border="0" cellspacing="0" cellpadding="0" id="top-like-table" class="tablesorter">
   <thead>
@@ -72,7 +72,7 @@ if ($pUrlSummary) {
 if ($pUrlSummary) {
   slot('content');
 ?>
-<h2><?php echo __('Demographics for %url%', array('%url%' => $pUrlSummary->getUrl())); ?></h2>
+<h2 class="sub_title"><?php echo __('Demographics for %url%', array('%url%' => $pUrlSummary->getUrl())); ?></h2>
 <div id="pie-charts" class="clearfix">
   <div class="alignleft" id="gender-chart">
     <?php include_partial('analytics/chart_pie_gender', array('pChartsettings' =>
