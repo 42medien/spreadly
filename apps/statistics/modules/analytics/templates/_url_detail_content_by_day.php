@@ -14,11 +14,11 @@ if ($pUrlSummary) {
 
 <?php slot('content') ?>
 <div class="data-tablebox two-line-table">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="top-url-table" class="tablesorter">
+  <table width="930px;" border="0" cellspacing="0" cellpadding="0" id="top-like-table" class="tablesorter">
   <thead>
     <tr>
-      <th width="280" height="32" align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('URLs'); ?></div></th>
-      <th width="60" align="center" valign="middle"><div class="sortlink"><?php echo __('Age');?></div></th>
+      <th align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('URLs'); ?></div></th>
+      <th align="center" valign="middle"><div class="sortlink"><?php echo __('Age');?></div></th>
       <th align="center" valign="middle"><div class="sortlink"><?php echo __('Gender');?></div></th>
       <th align="center" valign="middle"><div class="sortlink"><?php echo __('Relationship');?></div></th>
       <th align="center" valign="middle"><div class="sortlink"><?php echo __('Spreads');?></div></th>
@@ -56,7 +56,7 @@ if ($pUrlSummary) {
       }
     } else {
     ?>
-      <tr><td align="center" colspan="6"><?php echo __("No likes yet"); ?></td></tr>
+      <tr><td align="center" colspan="8"><?php echo __("No likes yet"); ?></td></tr>
     <?php } ?>
     </tbody>
   </table>

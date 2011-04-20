@@ -15,7 +15,7 @@ if ($pHostSummary) {
 ?>
 <?php slot('content') ?>
 <div class="data-tablebox two-line-table">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="top-url-table" class="tablesorter">
+  <table cellspacing="0" cellpadding="0" id="top-url-table" class="tablesorter" width="930px;">
   <thead>
     <tr>
       <th width="280" height="32" align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('Top-URLs'); ?></div></th>
@@ -53,7 +53,7 @@ if ($pHostSummary) {
       }
     } else {
     ?>
-      <tr><td align="center" colspan="6"><?php echo __("No likes yet"); ?></td></tr>
+      <tr><td align="center" colspan="8"><?php echo __("No likes yet"); ?></td></tr>
     <?php } ?>
     </tbody>
   </table>

@@ -6,7 +6,6 @@ var ActivityChart = {
 	init: function() {
 	  Highcharts.theme = { colors: [] };// prevent errors in default theme
 	  var lData = <?php echo json_encode($pData->getPrefilledLikesByHour()); ?>;
-	  debug.log(lData);
 		var lOptions = {
 		    chart: {
 		      renderTo: 'chart_line_activities_by_hour',
