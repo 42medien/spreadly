@@ -112,12 +112,12 @@ class analyticsActions extends sfActions
     switch ($selector) {
       case "now":
       case "yesterday":
-        $request->setParameter("date-from", date("Y-m-d", strtotime($selector)));
+        $request->setParameter("date-to", date("Y-m-d", strtotime($selector)));
         break;
       case "7":
       case "30":
-        $request->setParameter("date-from", date("Y-m-d", strtotime("yesterday")));
-        $request->setParameter("date-to", date("Y-m-d", strtotime($selector." days ago")));
+        $request->setParameter("date-to", date("Y-m-d", strtotime("yesterday")));
+        $request->setParameter("date-from", date("Y-m-d", strtotime($selector." days ago")));
         break;
     }
 
@@ -131,7 +131,7 @@ class analyticsActions extends sfActions
   public function executeGet_domain_detail_by_day(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
     $lDm = MongoManager::getStatsDM();
-    $day = new MongoDate(strtotime($request->getParameter("date-from")));
+    $day = new MongoDate(strtotime($request->getParameter("date-to")));
     $lUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(array("host" => $this->pDomainProfile->getUrl(), "day" => $day));
     $lHostSummary = $lDm->getRepository("Documents\ActivityStats")->findOneBy(array("host" => $this->pDomainProfile->getUrl(), "day" => $day));
     $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_day', array('pUrls' => $lUrls, 'pHostSummary' => $lHostSummary, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $request->getParameter('date-from')));
@@ -148,7 +148,7 @@ class analyticsActions extends sfActions
     $lDm = MongoManager::getStatsDM();
 
     //$lHost = $lDm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $lDomainProfile->getUrl()));
-    $lHost = $lDm->getRepository("Documents\ActivityStats")->findByRange(array($this->pDomainProfile->getUrl()), $to, $from);
+    $lHost = $lDm->getRepository("Documents\ActivityStats")->findByRange(array($this->pDomainProfile->getUrl()), $from, $to);
     if($lHost) {
       $lHost = $lHost->toArray();
       if(count($lHost) > 1) {
@@ -158,14 +158,10 @@ class analyticsActions extends sfActions
 
     $lUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(
       array("host" => $this->pDomainProfile->getUrl(),
-            "day" => array('$lte' => new MongoDate(strtotime($from)), '$gte' => new MongoDate(strtotime($to)))
+            "day" => array('$gte' => new MongoDate(strtotime($from)), '$lte' => new MongoDate(strtotime($to)))
             )
       );
 
-    $lQuery = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC");
-    $lDeals = $lQuery->execute();
-    //var_dump($lHost);exit;
-    
     $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_range', array('pUrls' => $lUrls, 'pHostSummary' => $lHost, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to));
     return $this->renderText(json_encode($lReturn));
   }
@@ -183,12 +179,12 @@ class analyticsActions extends sfActions
     switch ($selector) {
       case "now":
       case "yesterday":
-        $request->setParameter("date-from", date("Y-m-d", strtotime($selector)));
+        $request->setParameter("date-to", date("Y-m-d", strtotime($selector)));
         break;
       case "7":
       case "30":
-        $request->setParameter("date-from", date("Y-m-d", strtotime("yesterday")));
-        $request->setParameter("date-to", date("Y-m-d", strtotime($selector." days ago")));
+        $request->setParameter("date-to", date("Y-m-d", strtotime("yesterday")));
+        $request->setParameter("date-from", date("Y-m-d", strtotime($selector." days ago")));
         break;
     }
 
@@ -203,7 +199,7 @@ class analyticsActions extends sfActions
     $this->getResponse()->setContentType('application/json');
     $lDm = MongoManager::getStatsDM();
 
-    $day = new MongoDate(strtotime(date("Y-m-d", strtotime($request->getParameter("date-from")))));
+    $day = new MongoDate(strtotime(date("Y-m-d", strtotime($request->getParameter("date-to")))));
     $lUrls = $lDm->getRepository("Documents\AnalyticsActivity")->findBy(array("url" => $this->pUrl, "day" => $day));
     $lUrlSummary = $lDm->getRepository("Documents\ActivityUrlStats")->findOneBy(array("url" => $this->pUrl, "day" => $day));
     $lReturn['content'] = $this->getPartial('analytics/url_detail_content_by_day', array('pUrls' => $lUrls, 'pUrlSummary' => $lUrlSummary, 'pDomainProfile' => $this->pDomainProfile));

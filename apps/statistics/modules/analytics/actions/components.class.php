@@ -19,33 +19,37 @@ class analyticsComponents extends sfComponents
     $this->pVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
     $this->pHostId = $request->getParameter('host_id', $this->pVerifiedDomains[0]->getId());
     $this->pAggregation = $request->getParameter('aggregation', 'daily');
-    $this->pDateFrom = $request->getParameter('date-from', date('Y-m-d', strtotime("6 days ago")));
-    $this->pDateTo = $request->getParameter('date-to', date('Y-m-d'));
+    $this->pDateFrom = $request->getParameter('date-from');
+    $this->pDateTo = $request->getParameter('date-to');
     $this->pUrl = $request->getParameter('url', null);
     $this->pDealId = $request->getParameter('dealid', null);
     $this->pIsDeal = $request->getParameter('isdeal', false);
     return $parentRet;
 	}
 
-  public function executeTop_url_overall_table(sfWebRequest $request) {
-    $dm = MongoManager::getStatsDM();
-    $this->urls = $dm->getRepository("Documents\UrlSummary")->findBy(array("host" => $this->host))->limit(10)->sort(array("l" => "DESC", "c" => "DESC"));
-  }
-
   public function executeActive_deal_table(sfWebRequest $request) {
     $domain_profile = DomainProfileTable::getInstance()->findOneBy("url", $this->host);
-    $this->deal = DealTable::getApprovedAndRunning($domain_profile->getDomain());
-  }
+    $this->deals = array();
 
-	public function executeFilter_nav(sfWebRequest $request){
-    if(count($this->pVerifiedDomains) > 0 && !$this->pHostId) {
-	    $this->pHostId = $this->pVerifiedDomains[0]->getId();
+    if ($this->pDateTo) {
+      $lQuery = Doctrine_Query::create()
+                ->from('Deal d')
+                ->where(
+                  'd.domain_profile_id = ? AND '.
+                  'd.deal_state = "approved" AND ('.
+                  '((d.start_date BETWEEN ? AND ?) OR (d.end_date BETWEEN ? AND ?)) OR '.
+                  '(d.start_date >= ? AND d.end_date <= ?))',
+
+                  array($this->pDomainProfileId,
+                        $this->pDateFrom, $this->pDateTo, $this->pDateFrom, $this->pDateTo,
+                        $this->pDateFrom, $this->pDateTo));
+      $this->deals = $lQuery->execute();
+    } else {
+      if ($deal = DealTable::getApprovedAndRunning($domain_profile->getDomain())) {
+        $this->deals[] = $deal;
+      }
     }
-	}
 
-  public function executeUrl_table(sfWebRequest $request) {
-    $lDomainProfile = DomainProfileTable::getInstance()->find($this->pHostId);
-    $this->pData = MongoUtils::getTopActivitiesData($lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
   }
 
   public function executeDeal_filter(sfWebRequest $request){
@@ -54,8 +58,4 @@ class analyticsComponents extends sfComponents
   }
 
   public function executeUrl_filter(sfWebRequest $request){}
-
-  public function executeDeal_content(sfWebRequest $request){
-		$lDealId = $request->getParameter('dealid');
-  }
 }

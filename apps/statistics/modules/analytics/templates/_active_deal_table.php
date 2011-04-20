@@ -12,7 +12,10 @@
     	</tr>
     </thead>
     <tbody>
-  		<?php if ($deal) { ?>
+  		<?php
+  		if ($deals) {
+  		  foreach ($deals as $deal) {
+  		?>
   			<tr>
   				<td align="left" class="first"><div class="padleft"><?php echo $deal->getSummary(); ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $deal->getRemainingCouponQuantity(); ?></div></td>
@@ -21,7 +24,10 @@
   				<td align="center" valign="middle"><div><?php echo $deal->getDealSummary() ? $deal->getDealSummary()->getClickbacks() : 0; ?></div></td>
   				<td align="center" valign="middle" class="last"><div><?php echo $deal->getDealSummary() ? $deal->getDealSummary()->getClickbackLikes() : 0; ?></div></td>
   			</tr>
-      <?php } else { ?>
+      <?php
+  		  }
+  		} else {
+  	  ?>
         <tr>
           <td height="44" align="center" class="first" colspan="6"><div><?php echo __("No Deals"); ?></div></td>
         </tr>
