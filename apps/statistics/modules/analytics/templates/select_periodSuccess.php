@@ -1,9 +1,9 @@
 <h2><?php echo __('Select period'); ?></h2>
-<form action="/analytics/get_domain_detail" name="analytics-datefilter-form" id="analytics-datefilter-form">
+<form action="" name="analytics-datefilter-form" id="analytics-datefilter-form">
 <input type="hidden" name="domainid" value="<?php echo $pDomainId; ?>" />
-<input type="hidden" name="date-selector" value="<?php echo $pDomainId; ?>" />
-
-
+<?php if (isset($pUrl) && $pUrl != null) { ?>
+	<input type="hidden" name="url" value="<?php echo $pUrl; ?>" />
+<?php } ?>
 <div class="alignleft clearfix">
 	<div class="clearfix">
 		<span class="alignleft textfield-label"><?php echo __('Date from'); ?></span>
@@ -28,5 +28,10 @@
 
 <script type="text/javascript">
 	AnalyticsDateFilter.initDatepicker();
-	AnalyticsDateFilter.closeLayer();
+<?php if (isset($pUrl) && $pUrl != null) { ?>
+	AnalyticsDateFilter.closeLayer("/analytics/get_url_detail");
+<?php } else { ?>
+	AnalyticsDateFilter.closeLayer("/analytics/get_domain_detail");
+<?php } ?>
+
 </script>

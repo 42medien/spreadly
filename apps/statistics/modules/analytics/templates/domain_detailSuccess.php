@@ -1,8 +1,7 @@
 <?php slot('content') ?>
 <div id="analytics-bread">
-	<?php echo link_to(__('Dashboard'), 'analytics/index'); ?>&nbsp;
-	<?php echo link_to($pDomainProfile->getUrl(), 'analytics/domain_statistics?domainid='.$pDomainProfile->getId()); ?>&nbsp;
-	<?php echo __('Overview'); ?>
+	<?php echo link_to(__('Dashboard'), 'analytics/index'); ?>&nbsp;&raquo;&nbsp;
+	<?php echo link_to($pDomainProfile->getUrl(), 'analytics/domain_statistics?domainid='.$pDomainProfile->getId()); ?>
 </div>
 <form action="/analytics/get_domain_detail" name="analytics-filter-form" id="analytics-filter-form">
 	<input type="hidden" name="domainid" value="<?php echo $pDomainProfile->getId(); ?>" />

@@ -217,5 +217,6 @@ class analyticsActions extends sfActions
 
   public function executeSelect_period(sfWebRequest $request) {
 		$this->pDomainId = $request->getParameter('domainid');
+		$this->pUrl = $request->getParameter('url');
   }
 }

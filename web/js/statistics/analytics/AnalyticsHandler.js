@@ -16,7 +16,7 @@ var AnalyticsTables = {
       jQuery('#dash-website-table').tableScroll({height: 200, flush: true});
       jQuery('#dash-url-table').tableScroll({height: 200, flush: true}); 
       jQuery('#analytics-url-table').tableScroll({height: 200, flush: true});
-      jQuery('#top-url-table').tableScroll({height: 200, flush: true});
+      jQuery('#top-url-table').tableScroll({height: 150, flush: true});
       
     },
     
@@ -109,26 +109,28 @@ var AnalyticsDateFilter = {
       
     },  
     
-    closeLayer: function() {
+    closeLayer: function(pAction) {
       debug.log('[AnalyticsFilter][closeLayer]');         
       jQuery(document).bind('cbox_cleanup', function(){
-        AnalyticsDateFilter.sendForm();
-      });      
+        AnalyticsDateFilter.sendForm(pAction);
+      }); 
     },
     
-    sendForm: function() {
+    sendForm: function(pAction) {
       debug.log('[AnalyticsFilter][sendDateForm]');
       OnLoadGrafic.showGrafic();      
       var options = {
           data : {
             ei_kcuf : new Date().getTime()
           },
+          action: pAction,
           type : 'POST',
           dataType : 'json',
           success : function(pResponse) {
             debug.log(pResponse);
             AnalyticsFilter.showContent(pResponse.content);
             OnLoadGrafic.hideGrafic();
+            jQuery(document).unbind('cbox_cleanup');
           }
         };
          jQuery('#analytics-datefilter-form').ajaxSubmit(options); 

@@ -1,9 +1,8 @@
 <?php slot('content') ?>
 <div id="analytics-bread">
-	<?php echo link_to(__('Dashboard'), 'analytics/index'); ?>&nbsp;
-	<?php echo link_to($pDomainProfile->getUrl(), 'analytics/domain_statistics?domainid='.$pDomainProfile->getId()); ?>&nbsp;
-	<?php echo link_to($pUrl, 'analytics/url_statistics', array('query_string' => 'url='.$pUrl.'&domainid='.$pDomainProfile->getId(), 'class' => '')); ?>
-	<?php echo __('Overview'); ?>
+	<?php echo link_to(__('Dashboard'), 'analytics/index'); ?>&nbsp;&raquo;&nbsp;
+	<?php echo link_to($pDomainProfile->getUrl(), 'analytics/domain_statistics?domainid='.$pDomainProfile->getId()); ?>&nbsp;&raquo;&nbsp;
+	<?php echo link_to($pUrl, 'analytics/url_detail', array('query_string' => 'url='.$pUrl.'&domainid='.$pDomainProfile->getId())); ?>
 </div>
 
 <form action="/analytics/get_url_detail" name="analytics-filter-form" id="analytics-filter-form">
@@ -19,7 +18,7 @@
     </select>
   </label>
     <span class="alignleft" id="filter-period-or"><?php echo __('or'); ?></span>
-    <?php echo link_to('<span>'.__('Other period').'</span>', 'analytics/select_period?domainid='.$pDomainProfile->getId(), array('id' => 'select-period-link', 'class' => 'colorbox button')); ?>
+    <?php echo link_to('<span>'.__('Other period').'</span>', 'analytics/select_period?url='.$pUrl.'&domainid='.$pDomainProfile->getId(), array('id' => 'select-period-link', 'class' => 'colorbox button')); ?>
 </div>
 </form>
 <?php end_slot(); ?>
