@@ -25,7 +25,10 @@ var ActivityChart = {
 		      title: {
 		         text: false
 		      },
-		      tickInterval: 24 * 3600 * 1000
+		      tickInterval: 24 * 3600 * 1000,
+		      labels: {
+			      step: 2
+		      }
 		   },
 		   yAxis: {
 		      title: {
