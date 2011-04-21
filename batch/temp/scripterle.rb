@@ -5,5 +5,5 @@ while true
  result = `php migrateActivityObjects.php`
  puts result
  puts "\n"
- break if result.match(/PFEFFI_SAYS_ITS_DONE/) || i>200
+ break if result.match(/PFEFFI_SAYS_ITS_DONE/) || i>1000
 end

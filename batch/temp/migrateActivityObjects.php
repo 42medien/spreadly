@@ -10,12 +10,12 @@ $dm = MongoManager::getDM();
 for ($i = 0; $i < 5; $i++) {
   $yas = $dm->getRepository('Documents\YiidActivity')->findBy(array("social_object" => array('$exists' => false)))->limit(10);
 
-  if (!$yas) {
+  if (!$yas->hasNext()) {
     print_r("PFEFFI_SAYS_ITS_DONE");
     return;
   }
 
-  print_r("yiid-activity migration\n============================================================\n\n");
+  print_r("\n\n");
 
   foreach ($yas as $ya) {
     try {
@@ -25,11 +25,19 @@ for ($i = 0; $i < 5; $i++) {
         @$ya->setSocialObject($so);
         @$ya->save();
         unset($so);
+      } else {
+        $ya->upsertSocialObject();
+        $ya->save();
       }
 
       print_r("yiid-activity: ".$ya->getId()."\n");
       unset($ya);
     } catch (Exception $e) {
+      if (@$so = MongoManager::getDM()->getRepository("Documents\SocialObject")->find($ya->getSoId())) {
+        @$ya->setSocialObject($so);
+        @$ya->save();
+        unset($so);
+      }
       print_r($e->getMessage());
     }
   }
