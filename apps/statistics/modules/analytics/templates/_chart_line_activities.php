@@ -9,31 +9,26 @@ var ActivityChart = {
 		var lOptions = {
 		    chart: {
 		      renderTo: 'chart_line_activities',
-		      zoomType: 'x',
 		      spacingRight: 20,
 		      backgroundColor: "#f6f6f6"
 		   },
 		    title: {
 		      text: false
 		   },
-		    subtitle: {
-		      text: document.ontouchstart === undefined ?
-		         "<?php echo __('Click and drag in the plot area to zoom in'); ?>" :
-		         "<?php echo __('Drag your finger over the plot to zoom in'); ?>"
-		   },
+		    exporting: {
+	        enabled: false
+	    	},
 		   xAxis: {
 		      type: 'datetime',
-		      maxZoom: 7 * 24 * 3600000,
 		      title: {
-		         text: null
+		         text: false
 		      }
 		   },
 		   yAxis: {
 		      title: {
-		         text: false
+		         text: "<?php echo __('Likes'); ?>"
 		      },
 		      min: 0,
-		      maxZoom: 10, // fourteen days
 		      startOnTick: false,
 		      showFirstLabel: false,
 		      allowDecimals:false
