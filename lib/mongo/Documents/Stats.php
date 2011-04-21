@@ -31,7 +31,7 @@ abstract class Stats extends BaseDocument {
       }
       // ensure that this array is a hash
       $initialArray["php_ckuf"] = true;
-      
+
       $res['h'] =  $includePath ? "(".$initial."['h'] ? ".$initial."['h'] : {})" : $initialArray;
       return $res;
   }
@@ -118,7 +118,11 @@ abstract class Stats extends BaseDocument {
   public function getPrefilledLikesByHour() {
     $array = array_fill(0, 24, 0);
 
-    return array_merge($array, $this->getLikesByHour());
+    foreach ($this->getLikesByHour() as $key => $value) {
+      $array[$key] = $value;
+    }
+
+    return $array;
   }
 
   /** @Id */
