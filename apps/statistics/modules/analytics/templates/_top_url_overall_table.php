@@ -1,14 +1,14 @@
 <?php use_helper('Date', 'DomainProfiles', 'Text') ?>
 <div class="data-tablebox two-line-table">
-	<table width="100%" border="0" cellspacing="0" cellpadding="0" id="top-url-table" class="tablesorter">
+	<table width="930px;" border="0" cellspacing="0" cellpadding="0" id="top-url-table" class="tablesorter">
 	<thead>
   	<tr>
-			<th width="280" height="32" align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('Top-URLs Overall'); ?></div></th>
-			<th width="48" align="center" valign="middle"><div class="sortlink"><?php echo __('Likes');?></div></th>
-	    <th width="73" align="center" valign="middle"><div class="sortlink"><?php echo __('Spreads');?></div></th>
-	    <th width="78" align="center" valign="middle"><div class="sortlink"><?php echo __('Reach');?></div></th>
-	    <th width="79" align="center" valign="middle"><div class="sortlink"><?php echo __('Clickbacks');?></div></th>
-	    <th width="79" align="center" valign="middle" class="last"><div class="sortlink"><?php echo __('Clickback-Likes');?></div></th>
+			<th align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('Top-URLs Overall'); ?></div></th>
+			<th align="center" valign="middle"><div class="sortlink"><?php echo __('Likes');?></div></th>
+	    <th align="center" valign="middle"><div class="sortlink"><?php echo __('Spreads');?></div></th>
+	    <th align="center" valign="middle"><div class="sortlink"><?php echo __('Reach');?></div></th>
+	    <th align="center" valign="middle"><div class="sortlink"><?php echo __('Clickbacks');?></div></th>
+	    <th align="center" valign="middle" class="last"><div class="sortlink"><?php echo __('Clickback-Likes');?></div></th>
   	</tr>
   	</thead>
   	<tbody>
