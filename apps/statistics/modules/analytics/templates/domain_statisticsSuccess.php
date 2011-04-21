@@ -6,7 +6,7 @@ slot('content');
 <?php echo link_to('Show Details', 'analytics/domain_detail?domainid='.$pDomainProfileId, array('class' => 'alignright'));?>
 <div id="analytics-bread">
 	<?php echo link_to(__('Dashboard'), 'analytics/index'); ?>&nbsp;&nbsp;&gt;&nbsp;
-	<?php echo link_to('Overview for '.$pHost->getHost(), 'analytics/domain_statistics?domainid='.$pDomainProfileId); ?>
+	<strong><?php echo link_to('Overview for '.$pHost->getHost(), 'analytics/domain_statistics?domainid='.$pDomainProfileId); ?></strong>
 </div>
 <h2 class="sub_title"><?php echo __('All time overview for domain %domain%', array('%domain%' => $pHost->getHost()));?></h2>
   <div id="navi" class="clearfix">
