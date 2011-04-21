@@ -38,7 +38,7 @@ class analyticsComponents extends sfComponents
                   'd.domain_profile_id = ? AND '.
                   'd.deal_state = "approved" AND ('.
                   '((d.start_date BETWEEN ? AND ?) OR (d.end_date BETWEEN ? AND ?)) OR '.
-                  '(d.start_date >= ? AND d.end_date <= ?))',
+                  '(d.start_date <= ? AND d.end_date >= ?))',
 
                   array($this->pDomainProfileId,
                         $this->pDateFrom, $this->pDateTo, $this->pDateFrom, $this->pDateTo,
