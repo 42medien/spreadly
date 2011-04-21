@@ -1,4 +1,8 @@
-<?php slot('content') ?>
+<?php
+use_helper('YiidNumber');
+
+slot('content');
+?>
 <?php echo link_to('Show Details', 'analytics/domain_detail?domainid='.$pDomainProfileId, array('class' => 'alignright'));?>
 <div id="analytics-bread">
 	<?php echo link_to(__('Dashboard'), 'analytics/index'); ?>&nbsp;&nbsp;&gt;&nbsp;
@@ -39,7 +43,7 @@
       </div>
       <ul>
       <?php foreach ($pHost->getServices() as $key => $value) { ?>
-        <li class="<?php echo $key ?>"><span><?php echo $value['l']; ?></span></li>
+        <li class="<?php echo strtolower($key) ?>"><span><?php echo truncate_number($value['l']); ?></span></li>
       <?php } ?>
       </ul>
     </div>
@@ -57,7 +61,7 @@
       </div>
       <ul>
       <?php foreach ($pHost->getServices() as $key => $value) { ?>
-        <li class="<?php echo $key ?>"><span><?php echo $value['mp']; ?></span></li>
+        <li class="<?php echo strtolower($key) ?>"><span><?php echo truncate_number($value['mp']); ?></span></li>
       <?php } ?>
       </ul>
     </div>

@@ -64,7 +64,7 @@ var ActivityChart = {
 		      type: 'area',
 		      name: 'Likes',
 		      pointInterval: 1*24*60*60*1000,
-		      pointStart: Date.UTC(<?php echo $pFromYear ?>, <?php echo $pFromMonth-1 ?>, <?php echo $pFromDay-1 ?>),
+		      pointStart: Date.UTC(<?php echo $pFromYear ?>, <?php echo $pFromMonth-1 ?>, <?php echo $pFromDay ?>),
 		      data: lData,
 		      color: '#1231e3',
 	        fillOpacity: 0.1,
