@@ -22,7 +22,7 @@
 				    	<strong><?php echo __('No title'); ?></strong>
 				    <?php } ?>
 				    	<br />
-				    	<?php echo $url->getUrl(); ?>
+				    	<?php echo truncate_text($url->getUrl(), 60); ?>
 				    	<?php //echo link_to($url->getUrl(), 'analytics/url_statistics', array('query_string' => 'url='.urlencode($url->getUrl()).'&amp;domainid='.$pDomainProfileId, 'class' => 'analytix-filter-link table-filter-link'));  ?>
   			  </div>
   			</td>

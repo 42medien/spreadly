@@ -47,12 +47,12 @@ if ($pLikes) {
         <td height="44" align="left" class="first" style="line-height: 21px;">
           <div class="martext">
             <?php if($url->getTitle() && $url->getTitle()!='') { ?>
-              <strong><?php echo truncate_text($url->getTitle(), 60); ?></strong>
+              <strong><?php echo truncate_text($url->getTitle(), 40); ?></strong>
             <?php } else {?>
               <strong><?php echo __('No title'); ?></strong>
             <?php } ?>
               <br />
-              <?php echo $url->getUrl(); ?>
+              <span title="<?php echo $url->getUrl(); ?>"><?php echo truncate_text($url->getUrl(), 40); ?></span>
           </div>
         </td>
         <td align="center" valign="middle"><div><?php echo $url->getAge() ?></div></td>

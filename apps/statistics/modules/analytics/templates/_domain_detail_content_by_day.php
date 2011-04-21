@@ -1,4 +1,5 @@
 <?php
+use_helper('Text');
 if ($pHostSummary) {
   slot('content')
 ?>
@@ -41,7 +42,7 @@ if ($pHostSummary) {
               <strong><?php echo __('No title'); ?></strong>
             <?php } ?>
               <br />
-              <?php echo link_to($url->getUrl(), 'analytics/url_detail', array('query_string' => 'domainid='.$pDomainProfile->getId().'&url='.urlencode($url->getUrl()))); ?>
+              <?php echo link_to(truncate_text($url->getUrl(), 60), 'analytics/url_detail', array('query_string' => 'domainid='.$pDomainProfile->getId().'&url='.urlencode($url->getUrl()))); ?>
           </div>
         </td>
         <td align="center"><div><?php echo $url->getLikes() ?></div></td>

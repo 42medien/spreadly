@@ -16,7 +16,7 @@ if ($pUrlSummary) {
 ?>
 
 <?php slot('content') ?>
-<h2 class="sub_title"><?php echo __('Like details for %url%', array('%url%' => $pUrlSummary->getUrl())); ?></h2>
+<h2 class="sub_title"><?php echo __('Like details for %url%', array('%url%' => $pUrl)); ?></h2>
 <div class="data-tablebox two-line-table">
   <table width="930px;" border="0" cellspacing="0" cellpadding="0" id="top-like-table" class="tablesorter">
   <thead>
@@ -40,12 +40,12 @@ if ($pUrlSummary) {
         <td height="44" align="left" class="first" style="line-height: 21px;">
           <div class="martext">
             <?php if($url->getTitle() && $url->getTitle()!='') { ?>
-              <strong><?php echo truncate_text($url->getTitle(), 60); ?></strong>
+              <strong><?php echo truncate_text($url->getTitle(), 40); ?></strong>
             <?php } else {?>
               <strong><?php echo __('No title'); ?></strong>
             <?php } ?>
               <br />
-              <?php echo $url->getUrl(); ?>
+              <span title="<?php echo $url->getUrl(); ?>"><?php echo truncate_text($url->getUrl(), 40); ?></span>
           </div>
         </td>
         <td align="center" valign="middle"><div><?php echo $url->getAge() ?></div></td>
