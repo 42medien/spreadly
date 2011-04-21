@@ -21,7 +21,7 @@ function truncate_number($number)
   if ($number >= 1000) {
     return '<abbr title="'.$number.'">'.intval($number/1000) . 'k</abbr>';
   } elseif ($number >= 1000000) {
-    return '<abbr title="'.$number.'">'.intval($number/1000000) . 'm</abbr>';
+    return '<abbr title="'.$number.'">'.intval($number/1000000) . 'M</abbr>';
   } else {
     return $number;
   }
