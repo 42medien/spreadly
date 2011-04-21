@@ -20,7 +20,7 @@ class ProjectConfiguration extends sfProjectConfiguration {
       'sfForkedDoctrineApplyPlugin'
     ));
 
-    if (phpversion() > 5.3) {
+    if (phpversion() >= 5.3) {
       // load common doctrine 2 files
       $classLoader = new Doctrine\Common\ClassLoader('Doctrine\Common', dirname(__FILE__).'/../lib/vendor');
       $classLoader->register();
