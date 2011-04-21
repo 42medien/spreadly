@@ -7,8 +7,13 @@ sfContext::createInstance($configuration);
 $logger = sfContext::getInstance()->getLogger();
 $dm = MongoManager::getDM();
 
-for ($i = 0; $i < 15; $i++) {
+for ($i = 0; $i < 5; $i++) {
   $yas = $dm->getRepository('Documents\YiidActivity')->findBy(array("social_object" => array('$exists' => false)))->limit(10);
+
+  if (!$yas) {
+    print_r("PFEFFI_SAYS_ITS_DONE");
+    return;
+  }
 
   print_r("yiid-activity migration\n============================================================\n\n");
 
