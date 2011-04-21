@@ -74,7 +74,7 @@ class StatsFeeder {
     $host = parse_url($url, PHP_URL_HOST);
     $day = new MongoDate(strtotime(date("Y-m-d", $pYiidActivity->getC())));
     $hourOfDay = date("G", $pYiidActivity->getC());
-    
+
     $lParams = array(
       'host' => $host,
       'url'  => $url,
@@ -88,10 +88,10 @@ class StatsFeeder {
       #'clickbacks' => intval($pYiidActivity->getCb()),
 
       'demographics' => self::fillDemographics($pYiidActivity),
-      'user_id' => intval($pUser->getId()),
-      'age' => $pUser->getAge()==false ? "u" : intval($pUser->getAge()),
-      'gender' => $pUser->getGender()==false ? 'u' : $pUser->getGender(),
-      'relationship' => IdentityHelper::toMongoKey($pUser->getRelationshipState()),
+      'user_id' => intval($pYiidActivity->getUserId()),
+      'age' => (!$pUser || $pUser->getAge()==false) ? "u" : intval($pUser->getAge()),
+      'gender' => (!$pUser || $pUser->getGender()==false) ? 'u' : $pUser->getGender(),
+      'relationship' => (!$pUser || !$pUser->getRelationshipState()) ? 'u' : IdentityHelper::toMongoKey($pUser->getRelationshipState()),
 
       'services' => self::fillServices($pYiidActivity),
       'likes_by_hour' => array($hourOfDay => 1),
@@ -102,7 +102,7 @@ class StatsFeeder {
     if(!empty($lParams['services'])) {
       $lParams['shares'] = count($lParams['services']);
     }
-    
+
     // add clickbacks
     if ($pYiidActivity->isClickback()) {
       $lParams['clickback_likes'] =  1;
@@ -168,22 +168,29 @@ class StatsFeeder {
 
   private static function fillDemographics($pYiidActivity) {
     $pUser = $pYiidActivity->getUser();
-    $demografics = array();
-    $demografics['rel'][IdentityHelper::toMongoKey($pUser->getRelationshipState())] = 1;
-    $demografics['sex'][$pUser->getGender()==false ? 'u' : $pUser->getGender()] = 1;
-    // set age
-    $a = $pUser->getAge();
-    if ($a < 18) {
-      $demografics['age']["u_18"] = 1;
-    } elseif ($a >= 18 && $a <= 24) {
-      $demografics['age']["b_18_24"] = 1;
-    } elseif ($a >= 25 && $a <= 34) {
-      $demografics['age']["b_25_34"] = 1;
-    } elseif ($a >= 35 && $a <= 54) {
-      $demografics['age']["b_35_54"] = 1;
-    } elseif ($a >= 55) {
-      $demografics['age']["o_55"] = 1;
+
+    if ($pUser) {
+      $demografics = array();
+      $demografics['rel'][IdentityHelper::toMongoKey($pUser->getRelationshipState())] = 1;
+      $demografics['sex'][$pUser->getGender()==false ? 'u' : $pUser->getGender()] = 1;
+      // set age
+      $a = $pUser->getAge();
+      if ($a < 18) {
+        $demografics['age']["u_18"] = 1;
+      } elseif ($a >= 18 && $a <= 24) {
+        $demografics['age']["b_18_24"] = 1;
+      } elseif ($a >= 25 && $a <= 34) {
+        $demografics['age']["b_25_34"] = 1;
+      } elseif ($a >= 35 && $a <= 54) {
+        $demografics['age']["b_35_54"] = 1;
+      } elseif ($a >= 55) {
+        $demografics['age']["o_55"] = 1;
+      } else {
+        $demografics['age']["u"] = 1;
+      }
     } else {
+      $demografics['rel']["u"] = 1;
+      $demografics['sex']["u"] = 1;
       $demografics['age']["u"] = 1;
     }
     return $demografics;
@@ -269,7 +276,7 @@ class StatsFeeder {
   private static function createUpsertForDayAndHost($pAnalyticsActivity, $pDocumentString) {
     $dm = MongoManager::getStatsDM();
     $lQuery = self::createUpsertForHost($pAnalyticsActivity, $pDocumentString);
-    
+
     $likesByHour = $pAnalyticsActivity->getLikesByHour();
     $lQuery->field('day')->equals($pAnalyticsActivity->getDay())
            ->field('h.'.$pAnalyticsActivity->getHourOfDay())->inc(intval($likesByHour[$pAnalyticsActivity->getHourOfDay()]))
