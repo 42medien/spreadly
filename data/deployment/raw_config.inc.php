@@ -11,7 +11,7 @@ class LikeSettings {
   const MONGO_DATABASENAME = '##MONGO_DB##';
   const MONGO_STATS_DATABASENAME = '##MONGO_STATS_DB##';
 
-  const COOKIE_DOMAIN  = '.##YIID_HOST##';
+  const COOKIE_DOMAIN  = '.##YIID_WIDGET_HOST##';
   const SF_SESSION_COOKIE  = '##COOKIE_NAME##';
   const JS_POPUP_PATH = '##YIID_WIDGET_URL##/';
 
