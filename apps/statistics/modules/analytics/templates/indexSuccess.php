@@ -15,9 +15,9 @@
 	  		<?php foreach($pVerifiedDomains as $lDomain) { ?>
 	  			<tr class="scrollrow">
 	  				<td align="left" class="first"><div class="padleft"><?php echo link_to($lDomain->getUrl(), 'analytics/domain_statistics?domainid='.$lDomain->getId()); ?></div></td>
-	  		    <td align="center" valign="middle"><div><?php echo $last30ByHost[$lDomain->getUrl()]['value']['l']; ?></div></td>
-	  		    <td align="center" valign="middle" ><div><?php echo $last30ByHost[$lDomain->getUrl()]['value']['sh']; ?></div></td>
-	  				<td align="center" class="last"><div><?php echo $last30ByHost[$lDomain->getUrl()]['value']['mp']; ?></div></td>
+	  		    <td align="center" valign="middle"><div><?php echo array_key_exists($lDomain->getUrl(), $last30ByHost) ? $last30ByHost[$lDomain->getUrl()]['value']['l'] : 0; ?></div></td>
+	  		    <td align="center" valign="middle" ><div><?php echo array_key_exists($lDomain->getUrl(), $last30ByHost) ? $last30ByHost[$lDomain->getUrl()]['value']['sh'] : 0; ?></div></td>
+	  				<td align="center" class="last"><div><?php echo array_key_exists($lDomain->getUrl(), $last30ByHost) ? $last30ByHost[$lDomain->getUrl()]['value']['mp'] : 0; ?></div></td>
 	  			</tr>
 	      <?php $i++; } ?>
 	    </tbody>
@@ -47,10 +47,10 @@
   			<tr>
   				<td align="left" class="first"><div class="padleft"><?php echo $lDeal->getSummary(); ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $lDeal->getRemainingCouponQuantity(); ?></div></td>
-  				<td align="center" valign="middle"><div><?php echo $lDeal->getRemainingDays(); ?></div></td>
-  				<td align="center" valign="middle"><div><?php echo $last30ByDeal[$lDeal->getId()]['value']['l']; ?></div></td>
-  				<td align="center" valign="middle"><div><?php echo $last30ByDeal[$lDeal->getId()]['value']['sh']; ?></div></td>
-  				<td align="center" class="last"><div><?php echo $last30ByDeal[$lDeal->getId()]['value']['mp']; ?></div></td>
+  				<td align="center" valign="middle"><div><?php echo $lDeal->getRemainingDays() > 0 ? $lDeal->getRemainingDays() : __('expired'); ?></div></td>
+  				<td align="center" valign="middle"><div><?php echo array_key_exists($lDeal->getId(), $last30ByDeal) ? $last30ByDeal[$lDeal->getId()]['value']['l'] : 0; ?></div></td>
+  				<td align="center" valign="middle"><div><?php echo array_key_exists($lDeal->getId(), $last30ByDeal) ? $last30ByDeal[$lDeal->getId()]['value']['sh'] : 0; ?></div></td>
+  				<td align="center" class="last"><div><?php echo array_key_exists($lDeal->getId(), $last30ByDeal) ? $last30ByDeal[$lDeal->getId()]['value']['mp'] : 0; ?></div></td>
   			</tr>
       <?php $i++; } ?>
     	</tbody>
@@ -86,9 +86,7 @@
 	      <?php $i++; } ?>
 	      <?php } else { ?>
 	  			<tr class="scrollrow">
-	  				<td align="center" class="first">&nbsp;</td>
-	  				<td align="center"><?php echo __('No websites claimed');?></td>
-	  				<td align="center" class="first">&nbsp;</td>
+	  				<td align="center" colspan="4"><?php echo __('No websites claimed');?></td>
 	  			</tr>
 	      <?php } ?>
 	    </tbody>
