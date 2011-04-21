@@ -36,6 +36,7 @@ EOF;
       'MONGO_STATS_DB'    => sfConfig::get('app_mongodb_database_name_stats'),
       'YIID_HOST' => sfConfig::get('app_settings_host'),
       'YIID_URL' => sfConfig::get('app_settings_url'),
+      'YIID_WIDGET_HOST' => sfConfig::get('app_settings_widgets_host'),
       'YIID_WIDGET_URL' => sfConfig::get('app_settings_widgets_url'),
       'IS_DEV' => sfConfig::get('app_settings_dev'),
       'COOKIE_NAME' => $options['env'] == 'prod' ? 'spread' : 'spread_'.$options['env'],
