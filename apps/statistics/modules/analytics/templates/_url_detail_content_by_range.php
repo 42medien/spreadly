@@ -25,11 +25,11 @@ if ($pLikes) {
 <?php slot('content') ?>
 <h2 class="sub_title"><?php echo __('Like details for %url%', array('%url%' => $pUrl)); ?></h2>
 <div class="data-tablebox two-line-table">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="top-url-table" class="tablesorter">
+  <table width="930px;" border="0" cellspacing="0" cellpadding="0" id="top-url-table" class="tablesorter">
   <thead>
     <tr>
-      <th width="280" height="32" align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('URLs'); ?></div></th>
-      <th width="60" align="center" valign="middle"><div class="sortlink"><?php echo __('Age');?></div></th>
+      <th align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('URLs'); ?></div></th>
+      <th align="center" valign="middle"><div class="sortlink"><?php echo __('Age');?></div></th>
       <th align="center" valign="middle"><div class="sortlink"><?php echo __('Gender');?></div></th>
       <th align="center" valign="middle"><div class="sortlink"><?php echo __('Relationship');?></div></th>
       <th align="center" valign="middle"><div class="sortlink"><?php echo __('Spreads');?></div></th>
