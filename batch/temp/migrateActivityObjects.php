@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__FILE__).'/../../config/ProjectConfiguration.class.php');
 
-$configuration = ProjectConfiguration::getApplicationConfiguration('statistics', 'dev', false);
+$configuration = ProjectConfiguration::getApplicationConfiguration('statistics', 'prod', false);
 sfContext::createInstance($configuration);
 
 $logger = sfContext::getInstance()->getLogger();
