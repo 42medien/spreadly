@@ -15,7 +15,7 @@ var AnalyticsTables = {
       AnalyticsTables.initTablesorter("top-like-table");
       
       jQuery('#dash-deal-table').tableScroll({height: 200, flush: true});
-      jQuery('#dash-website-table').tableScroll({height: 200, flush: true});
+      jQuery('#dash-website-table').tableScroll({height: 150, flush: true});
       jQuery('#dash-url-table').tableScroll({height: 200, flush: true}); 
       jQuery('#analytics-url-table').tableScroll({height: 200, flush: true});
       jQuery('#top-url-table').tableScroll({height: 150, flush: true});
