@@ -25,7 +25,7 @@ if ($pLikes) {
 <?php slot('content') ?>
 <h2 class="sub_title"><?php echo __('URL overview'); ?></h2>
 <div class="data-tablebox two-line-table">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="top-url-table" class="tablesorter">
+  <table border="0" width="930px;" cellspacing="0" cellpadding="0" id="top-url-table" class="tablesorter">
   <thead>
     <tr>
       <th width="280" height="32" align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('Top-URLs'); ?></div></th>
