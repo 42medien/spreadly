@@ -1,6 +1,6 @@
 /**
  * @nocombine statistics
- * @nocombine widget
+ * @combine widget
  */
 
 /**
