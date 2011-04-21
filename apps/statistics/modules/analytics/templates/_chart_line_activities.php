@@ -6,11 +6,13 @@ var ActivityChart = {
 	init: function() {
 	  Highcharts.theme = { colors: [] };// prevent errors in default theme
 	  var lData = <?php echo json_encode($pData); ?>;
+	  debug.log(lData);
 		var lOptions = {
 		    chart: {
 		      renderTo: 'chart_line_activities',
 		      spacingRight: 20,
-		      backgroundColor: "#f6f6f6"
+		      backgroundColor: "#f6f6f6",
+		      zoomType: ''
 		   },
 		    title: {
 		      text: false
@@ -22,7 +24,8 @@ var ActivityChart = {
 		      type: 'datetime',
 		      title: {
 		         text: false
-		      }
+		      },
+		      tickInterval: 24 * 3600 * 1000
 		   },
 		   yAxis: {
 		      title: {
@@ -63,7 +66,7 @@ var ActivityChart = {
 		   series: [{
 		      type: 'area',
 		      name: 'Likes',
-		      pointInterval: 1*24*60*60*1000,
+		      pointInterval: 86400000,
 		      pointStart: Date.UTC(<?php echo $pFromYear ?>, <?php echo $pFromMonth-1 ?>, <?php echo $pFromDay ?>),
 		      data: lData,
 		      color: '#1231e3',
