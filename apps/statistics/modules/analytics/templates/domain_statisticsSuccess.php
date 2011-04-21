@@ -57,7 +57,7 @@ slot('content');
           	</a>
           </p>
           <div class="tooltip"><h3><?php echo __('Media Penetration'); ?></h3><?php echo __("Total number of contacts that are able to view the like referring to your content."); ?></div>
-          <strong class="media"><?php echo $pHost->getMediaPenetration(); ?></strong></div>
+          <strong class="media"><?php echo truncate_number($pHost->getMediaPenetration()); ?></strong></div>
       </div>
       <ul>
       <?php foreach ($pHost->getServices() as $key => $value) { ?>

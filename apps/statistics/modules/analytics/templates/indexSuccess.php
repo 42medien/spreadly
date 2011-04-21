@@ -1,3 +1,5 @@
+<?php use_helper("Text"); ?>
+
 <?php if(count($pVerifiedDomains) > 0) { ?>
 <?php slot('content') ?>
   <div class="data-tablebox">
@@ -78,7 +80,7 @@
 	  		<?php foreach($last30ByUrl as $lUrl) { ?>
 	  		  <?php $lUrlValue = $lUrl['value'] ?>
 	  			<tr class="scrollrow">
-	  				<td align="left" class="first"><div class="padleft"><?php echo $lUrl['_id']; ?></div></td>
+	  				<td align="left" class="first"><div class="padleft"><?php echo truncate_text($lUrl['_id'], 60); ?></div></td>
 	  		    <td align="center" valign="middle"><div><?php echo $lUrlValue['l'] ?></div></td>
 	  		    <td align="center" valign="middle" ><div><?php echo $lUrlValue['sh'] ?></div></td>
 	  				<td align="center" class="last"><div><?php echo $lUrlValue['mp'] ?></div></td>
