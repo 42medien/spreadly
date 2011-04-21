@@ -19,6 +19,30 @@ class ProjectConfiguration extends sfProjectConfiguration {
       'sfDoctrineGuardPlugin',
       'sfForkedDoctrineApplyPlugin'
     ));
+
+    // load common doctrine 2 files
+    $classLoader = new Doctrine\Common\ClassLoader('Doctrine\Common', dirname(__FILE__).'/../lib/vendor');
+    $classLoader->register();
+
+    // load mongo odm mapper
+    $classLoader = new Doctrine\Common\ClassLoader('Doctrine\ODM\MongoDB', dirname(__FILE__).'/../lib/vendor');
+    $classLoader->register();
+
+    // load mongodb libs
+    $classLoader = new Doctrine\Common\ClassLoader('Doctrine\MongoDB', dirname(__FILE__).'/../lib/vendor');
+    $classLoader->register();
+
+    // load some symfony 2 files
+    $classLoader = new Doctrine\Common\ClassLoader('Symfony', dirname(__FILE__).'/../lib/vendor');
+    $classLoader->register();
+
+    // load mongo-documents
+    $classLoader = new Doctrine\Common\ClassLoader('Documents', dirname(__FILE__).'/../lib/mongo');
+    $classLoader->register();
+
+    // load mongo-documents
+    $classLoader = new Doctrine\Common\ClassLoader('Repositories', dirname(__FILE__).'/../lib/mongo');
+    $classLoader->register();
   }
 
   public function configureDoctrine(Doctrine_Manager $manager) {
