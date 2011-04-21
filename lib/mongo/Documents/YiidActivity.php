@@ -91,6 +91,9 @@ class YiidActivity extends BaseDocument {
   /** @NotSaved */
   protected $new_checksum;
 
+  /** @NotSaved */
+  protected $so_id;
+
   /**
    * save this shit!
    */
