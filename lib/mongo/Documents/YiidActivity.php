@@ -300,9 +300,9 @@ class YiidActivity extends BaseDocument {
     $criteria = array("social_object.id" => $this->getSocialObject()->getId(), "u_id" => intval($this->getUId()));
 
     if ($this->getDId()) {
-      $criteria["deal_id"] = intval($this->getDId());
+      $criteria["d_id"] = intval($this->getDId());
     } else {
-      $criteria["deal_id"] = array('$exists' => false);
+      $criteria["d_id"] = array('$exists' => false);
     }
 
     $activity = $dm->getRepository('Documents\YiidActivity')->findOneBy($criteria);
