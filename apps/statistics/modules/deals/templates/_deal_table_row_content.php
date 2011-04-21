@@ -11,8 +11,8 @@
       	</div>
 			</td>
 			<td align="left">
-				<div class="padleft">
-					<?php echo link_to(truncate_text($pDeal->getSummary(), 20), '@get_analytics_content', array('query_string' => 'isdeal=1&com=all&host_id='.$pDeal->getDomainProfileId().'&date-from='.$pDeal->getStartDate().'&date-to='.$pDeal->getEndDate().'&url=&dealid='.$pDeal->getId(), 'class' => 'deal-stats-link', 'title' => __('Show analytics'))); ?>
+				<div class="padleft" title="<?php echo $pDeal->getSummary(); ?>">
+					<?php echo truncate_text($pDeal->getSummary(), 20); ?>
 				</div>
 			</td>
 			<td align="left" valign="middle">
