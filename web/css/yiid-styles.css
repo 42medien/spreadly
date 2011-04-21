@@ -746,6 +746,10 @@ th.headerSortUp.last {
     height: 105px;
 }
 
+.list-box.last{
+  border: none;
+}
+
 .footer-box h3{
    color: #345C82;
    font-size: 14px;
@@ -758,8 +762,8 @@ th.headerSortUp.last {
 }
 
 .footer-box .footer-list.last{
-	border: none;
-}	
+  padding-right: 0;
+}
 
 .footer-box .footer-list li{
   background: url("/img/plus.png") no-repeat scroll left center transparent;

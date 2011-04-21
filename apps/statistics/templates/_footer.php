@@ -52,7 +52,7 @@
 
 	<div class="footer-box">
 		<h3><?php echo __('Contact'); ?></h3>
-		<div class="list-box">
+		<div class="list-box last">
 			<ul class="footer-list last">
 				<li><a href="mailto:info@spreadly.com"><?php echo __('Send email'); ?></a></li>
 				<li><?php echo link_to(__('Spread.ly @ Facebook'), 'http://www.facebook.com/spreadly', array('target' => '_blank')); ?></li>
