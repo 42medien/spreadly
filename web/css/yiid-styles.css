@@ -128,7 +128,7 @@ ul#logos_big {  margin: 30px 0 40px 30px; }
 #add-url-error{
   margin-left: 90px;
 }
-
+Prev
 .textfield-wht span  {
     padding-right: 5px;
 }
@@ -294,7 +294,7 @@ a.button.header { float:right; }
 #quantitiy-unlimited{
   margin-right: 93px;
 }
-
+Prev
 #deal-quantity-label{
   line-height: 28px;
 }
@@ -309,7 +309,7 @@ a.button.header { float:right; }
   padding-top: 8px;
 }
 
-.wd120{
+.wd120{Prev
   width: 120px;
 }
 
@@ -410,7 +410,7 @@ td.editinplaceclick {
 #d_clip_button {
   cursor: default;
 }
-
+Prev
 .languagebox {width: 250px;}
 .languagebox .welcome_user { color:#588199; background:url(../img/top-nav-devider.gif) right 3px no-repeat; padding-right:10px; margin-right:10px; margin-left:0px; line-height:15px; font-size: 15px; }
 .languagebox a.logout{ background:none; padding-right:10px; margin-right:4px; font-size:15px; color:#252525; display:inline-block; line-height:17px; margin-top: 0px;}
@@ -536,7 +536,7 @@ td.editinplaceclick {
 .success{
   color: green;
 }
-
+Prev
 .comment_box .success{
   padding-left: 105px;
 }
@@ -677,7 +677,7 @@ th.headerSortUp.last {
 
 /*********stat-infos with arrows********/
 #navi{  width:916px; height:89px;}
-.stepBox{ background:url(/img/arrow_icon.png) right 0px no-repeat; height:71px; width:282px; margin-top:10px; margin-right:14px;}
+.stepBox{ background:url(/img/arrow_icon.png) right 0px no-repeat; height:71px; width:auto; margin-top:10px; margin-right:14px;}
 
 .mediaPartner{ background:none;}
 .box_container{ background:url(/img/bg_image.png) left -68px no-repeat; height:68px; padding-left:11px; margin-top:1px;}
@@ -701,7 +701,7 @@ th.headerSortUp.last {
 
 #navi ul { padding-left:10px; float:left}
 #navi ul li{ padding-right:7px; list-style:none;  text-align:center; padding-top:19px;  float:left; font-size:12px;  }
-#navi ul p{ font-size:14px; color:#252525; margin-top:-2px; width: 100px;}
+#navi ul p{ font-size:14px; color:#252525; margin-top:-2px; width: 110px;}
 #navi ul span{ color:#252525; text-decoration:none;  font-size:12px; padding-top:18px; text-align:center; display:block;}
 #navi ul span.stepBox-text{text-align:left;}
 
