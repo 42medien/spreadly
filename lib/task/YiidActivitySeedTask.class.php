@@ -84,12 +84,12 @@ EOF;
     $services = array('facebook', 'twitter', 'linkedin', 'google');
     $dm = MongoManager::getDM();
 
-    for ($i=0; $i < 1000; $i++) { 
+    for ($i=0; $i < 100; $i++) { 
       $url = $this->oneOfThese($urls);
       $tag = $this->oneOfThese($tags);
       $user = $this->oneOfThese($users);
       $cb_ref = $this->oneOfThese(array('', '', '', '', '', '', 'http://tierscheisse.de'));
-      $ra = $this->random(100);
+      $ra = $this->random(1000);
       $theC =  mt_rand(strtotime("3 days ago"),strtotime("today"));
       
       $array = array(

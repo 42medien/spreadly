@@ -74,7 +74,7 @@ class StatsFeeder {
     $host = parse_url($url, PHP_URL_HOST);
     $day = new MongoDate(strtotime(date("Y-m-d", $pYiidActivity->getC())));
     $hourOfDay = date("G", $pYiidActivity->getC());
-
+        
     $lParams = array(
       'host' => $host,
       'url'  => $url,
@@ -82,13 +82,13 @@ class StatsFeeder {
       'day' => new MongoDate(strtotime(date("Y-m-d", $pYiidActivity->getC()))),
       'date' => new MongoDate($pYiidActivity->getC()),
 
-      'yiid_activity_id' => intval($pYiidActivity->getId()),
+      'yiid_activity_id' => $pYiidActivity->getId(),
       'likes' => 1,
       "media_penetration" => self::calcMediaPenetration($pYiidActivity),
-      #'clickbacks' => intval($pYiidActivity->getCb()),
+      'clickbacks' => intval($pYiidActivity->getCb()),
 
       'demographics' => self::fillDemographics($pYiidActivity),
-      'user_id' => intval($pYiidActivity->getUserId()),
+      'user_id' => intval($pYiidActivity->getUId()),
       'age' => (!$pUser || $pUser->getAge()==false) ? "u" : intval($pUser->getAge()),
       'gender' => (!$pUser || $pUser->getGender()==false) ? 'u' : $pUser->getGender(),
       'relationship' => (!$pUser || !$pUser->getRelationshipState()) ? 'u' : IdentityHelper::toMongoKey($pUser->getRelationshipState()),
@@ -114,8 +114,7 @@ class StatsFeeder {
       foreach($pYiidActivity->getTags() as $tag) {
         $lParams['tags'][$tag] = array(
           "l" => 1,
-          "mp" => self::calcMediaPenetration($pYiidActivity),
-          "cb" => 0);
+          "mp" => self::calcMediaPenetration($pYiidActivity));
         if ($pYiidActivity->isClickback()) {
           $lParams['tags'][$tag]["cbl"] = 1;
         }
