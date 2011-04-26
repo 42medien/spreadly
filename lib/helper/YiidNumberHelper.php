@@ -26,3 +26,14 @@ function point_format($number, $culture = null)
 
   return number_format($number, 0, '', '.');
 }
+
+function truncate_number($number)
+{
+  if ($number >= 1000) {
+    return '<abbr title="'.$number.'">'.intval($number/1000) . 'k</abbr>';
+  } elseif ($number >= 1000000) {
+    return '<abbr title="'.$number.'">'.intval($number/1000000) . 'M</abbr>';
+  } else {
+    return $number;
+  }
+}
