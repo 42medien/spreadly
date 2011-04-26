@@ -24,6 +24,7 @@
       window.resizeTo(580,600);
     </script>
     <?php } ?>
+    <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
     <script type="text/javascript" src="/js/100_main/include/widget-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
     <link rel="shortcut icon" href="/favicon.ico" />
   </head>
@@ -87,6 +88,23 @@
 	        }
 	      ?>
 	    });
+
+      var _sf_async_config={uid:23222,domain:"spread.ly"};
+      (function(){
+        function loadChartbeat() {
+          window._sf_endpt=(new Date()).getTime();
+          var e = document.createElement('script');
+          e.setAttribute('language', 'javascript');
+          e.setAttribute('type', 'text/javascript');
+          e.setAttribute('src',
+             (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+             "js/chartbeat.js");
+          document.body.appendChild(e);
+        }
+        var oldonload = window.onload;
+        window.onload = (typeof window.onload != 'function') ?
+           loadChartbeat : function() { oldonload(); loadChartbeat(); };
+      })();
 	  </script>
   </body>
 </html>
