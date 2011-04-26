@@ -21,7 +21,7 @@ if ($pUrlSummary) {
   <table width="930px;" border="0" cellspacing="0" cellpadding="0" id="top-like-table" class="tablesorter">
   <thead>
     <tr>
-      <th align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('URLs'); ?></div></th>
+      <th align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('Hour'); ?></div></th>
       <th align="center" valign="middle">
       	<div class="sortlink">
       		<?php echo __('Age');?>
@@ -111,17 +111,7 @@ if ($pUrlSummary) {
       foreach($pUrls as $url){
     ?>
       <tr>
-        <td height="44" align="left" class="first" style="line-height: 21px;">
-          <div class="martext">
-            <?php if($url->getTitle() && $url->getTitle()!='') { ?>
-              <strong><?php echo truncate_text($url->getTitle(), 40); ?></strong>
-            <?php } else {?>
-              <strong><?php echo __('No title'); ?></strong>
-            <?php } ?>
-              <br />
-              <span title="<?php echo $url->getUrl(); ?>"><?php echo truncate_text($url->getUrl(), 40); ?></span>
-          </div>
-        </td>
+        <td align="center" valign="middle" class="first"><div><?php echo __("%1:00", array("%1" => $url->getHourOfDay())); ?></div></td>
         <td align="center" valign="middle"><div><?php echo $url->getAge() ?></div></td>
         <td align="center" valign="middle"><div><?php echo __($url->getGender()) ?></div></td>
         <td align="center" valign="middle"><div><?php echo __($url->getRelationship()) ?></div></td>
