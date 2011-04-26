@@ -2,13 +2,75 @@
   	<table border="0" cellspacing="0" cellpadding="0" id="active-deal-table" style="width: 940px;">
   	<thead>
     	<tr>
-  			<th height="32" align="center" valign="middle" class="first"><div><?php echo __('Active Deals'); ?></div></th>
-  			<th align="center" valign="middle"><div><?php echo __('Deals left');?></div></th>
-  			<th align="center" valign="middle"><div><?php echo __('Days left');?></div></th>
-  			<th align="center" valign="middle"><div><?php echo __('Reach'); ?></div></th>
-  	    <th align="center" valign="middle"><div><?php echo __('Clickbacks');?></div></th>
-  	    <th align="center" valign="middle" class="last"><div><?php echo __('Clickback-Likes');?></div></th>
-
+  			<th height="32" align="center" valign="middle" class="first">
+  				<div>
+  					<?php echo __('Active Deals'); ?>
+			  	  <a href="#" class="helptip">
+		        	<img src="/img/qus_icon.png" alt="<?php echo __("Active Deals"); ?>" class="tooltip-icon" />
+		        </a>
+		  	  </div>
+		      <div class="tooltip">
+		      	<h3><?php echo __('Active Deals'); ?></h3>
+		      	<?php echo __('Total number of likes published in the social networks listed.'); ?>
+		      </div>
+  			</th>
+  			<th align="center" valign="middle">
+  				<div>
+  					<?php echo __('Deals left');?>
+  					<a href="#" class="helptip">
+	          	<img src="/img/qus_icon.png" alt="<?php echo __("Deals left"); ?>" class="tooltip-icon" />
+	          </a>
+  				</div>
+          <div class="tooltip">
+          	<h3><?php echo __('Deals left'); ?></h3>
+          	<?php echo __("Deals left help-text"); ?>
+          </div>
+  			</th>
+  			<th align="center" valign="middle">
+  				<div>
+  					<?php echo __('Days left');?>
+  					<a href="#" class="helptip">
+	          	<img src="/img/qus_icon.png" alt="<?php echo __("Days left"); ?>" class="tooltip-icon" />
+	          </a>
+  				</div>
+          <div class="tooltip">
+          	<h3><?php echo __('Days left'); ?></h3>
+          	<?php echo __("Days left help-text"); ?>
+          </div>
+  			</th>
+  			<th align="center" valign="middle">
+  				<div>
+  					<?php echo __('Reach'); ?>
+			  	  <a href="#" class="helptip">
+		        	<img src="/img/qus_icon.png" alt="<?php echo __("Reach"); ?>" class="tooltip-icon" />
+		        </a>
+	  	  	</div>
+	      	<div class="tooltip"><h3><?php echo __('Reach'); ?></h3><?php echo __('Total number of likes published in the social networks listed.'); ?></div>
+  			</th>
+  	    <th align="center" valign="middle">
+  	    	<div>
+  	    		<?php echo __('Clickbacks');?>
+			  	  <a href="#" class="helptip">
+		        	<img src="/img/qus_icon.png" alt="<?php echo __("Clickbacks"); ?>" class="tooltip-icon" />
+		        </a>
+		  	  </div>
+		      <div class="tooltip">
+		      	<h3><?php echo __('Clickbacks'); ?></h3>
+		      	<?php echo __('Total number of likes published in the social networks listed.'); ?>
+		      </div>
+  	    </th>
+  	    <th align="center" valign="middle" class="last">
+  	    	<div>
+  	    		<?php echo __('Clickback-Likes');?>
+			  	  <a href="#" class="helptip">
+		        	<img src="/img/qus_icon.png" alt="<?php echo __("Clickback-Likes"); ?>" class="tooltip-icon" />
+		        </a>
+		  	  </div>
+		      <div class="tooltip">
+		      	<h3><?php echo __('Clickback-Likes'); ?></h3>
+		      	<?php echo __('Total number of likes published in the social networks listed.'); ?>
+		      </div>
+  	    </th>
     	</tr>
     </thead>
     <tbody>
@@ -29,7 +91,8 @@
   		} else {
   	  ?>
         <tr>
-          <td height="44" align="center" class="first" colspan="6"><div><?php echo __("No Deals"); ?></div></td>
+          <td height="44" align="center" class="first" colspan="6">
+          	<div><?php echo __("No Deals"); ?> <?php echo link_to(__("Click here to create one!"), 'deals/index'); ?></div></td>
         </tr>
       <?php } ?>
     	</tbody>

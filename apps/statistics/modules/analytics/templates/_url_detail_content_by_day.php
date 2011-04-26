@@ -22,13 +22,87 @@ if ($pUrlSummary) {
   <thead>
     <tr>
       <th align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('URLs'); ?></div></th>
-      <th align="center" valign="middle"><div class="sortlink"><?php echo __('Age');?></div></th>
-      <th align="center" valign="middle"><div class="sortlink"><?php echo __('Gender');?></div></th>
-      <th align="center" valign="middle"><div class="sortlink"><?php echo __('Relationship');?></div></th>
-      <th align="center" valign="middle"><div class="sortlink"><?php echo __('Spreads');?></div></th>
-      <th align="center" valign="middle"><div class="sortlink"><?php echo __('Reach');?></div></th>
-      <th align="center" valign="middle"><div class="sortlink"><?php echo __('Clickbacks');?></div></th>
-      <th align="center" valign="middle" class="last"><div class="sortlink"><?php echo __('Clickback-Likes');?></div></th>
+      <th align="center" valign="middle">
+      	<div class="sortlink">
+      		<?php echo __('Age');?>
+	  	    <a href="#" class="helptip">
+          	<img src="/img/qus_icon.png" alt="<?php echo __("Age"); ?>" class="tooltip-icon" />
+          </a>
+	  	  </div>
+	      <div class="tooltip">
+	      	<h3><?php echo __('Age'); ?></h3>
+         	<?php echo __('Age Tooltip.'); ?>
+        </div>
+      </th>
+      <th align="center" valign="middle">
+      	<div class="sortlink">
+      		<?php echo __('Gender');?>
+	  	    <a href="#" class="helptip">
+          	<img src="/img/qus_icon.png" alt="<?php echo __("Gender"); ?>" class="tooltip-icon" />
+          </a>
+	  	  </div>
+	      <div class="tooltip">
+	      	<h3><?php echo __('Gender'); ?></h3>
+         	<?php echo __('Gender tooltip.'); ?>
+        </div>
+      </th>
+      <th align="center" valign="middle">
+      	<div class="sortlink">
+      		<?php echo __('Relationship');?>
+	  	    <a href="#" class="helptip">
+          	<img src="/img/qus_icon.png" alt="<?php echo __("Relationship"); ?>" class="tooltip-icon" />
+          </a>
+	  	  </div>
+	      <div class="tooltip">
+	      	<h3><?php echo __('Relationship'); ?></h3>
+         	<?php echo __('Relationship tooltip.'); ?>
+        </div>
+      </th>
+      <th align="center" valign="middle">
+      	<div class="sortlink">
+      		<?php echo __('Spreads');?>
+		  	  <a href="#" class="helptip">
+	        	<img src="/img/qus_icon.png" alt="<?php echo __("Spreads"); ?>" class="tooltip-icon" />
+	      	</a>
+	  	  </div>
+	      <div class="tooltip"><h3><?php echo __('Spreads'); ?></h3><?php echo __('Total number of likes published in the social networks listed.'); ?></div>
+      </th>
+      <th align="center" valign="middle">
+      	<div class="sortlink">
+      		<?php echo __('Reach');?>
+	  	    <a href="#" class="helptip">
+          	<img src="/img/qus_icon.png" alt="<?php echo __("Reach"); ?>" class="tooltip-icon" />
+          </a>
+	  	  </div>
+	      <div class="tooltip">
+	      	<h3><?php echo __('Reach'); ?></h3>
+         	<?php echo __('Reach tooltip.'); ?>
+        </div>
+      </th>
+      <th align="center" valign="middle">
+      	<div class="sortlink">
+      		<?php echo __('Clickbacks');?>
+	  	    <a href="#" class="helptip">
+          	<img src="/img/qus_icon.png" alt="<?php echo __("Clickbacks"); ?>" class="tooltip-icon" />
+          </a>
+	  	  </div>
+	      <div class="tooltip">
+	      	<h3><?php echo __('Clickbacks'); ?></h3>
+         	<?php echo __('Clickbacks tooltip.'); ?>
+        </div>
+      </th>
+      <th align="center" valign="middle" class="last">
+      	<div class="sortlink">
+      		<?php echo __('Clickback-Likes');?>
+	  	    <a href="#" class="helptip">
+          	<img src="/img/qus_icon.png" alt="<?php echo __("Clickback-Likes"); ?>" class="tooltip-icon" />
+          </a>
+	  	  </div>
+	      <div class="tooltip">
+	      	<h3><?php echo __('Clickback-Likes'); ?></h3>
+         	<?php echo __('Clickback-Likes tooltip.'); ?>
+        </div>
+      </th>
     </tr>
     </thead>
     <tbody>

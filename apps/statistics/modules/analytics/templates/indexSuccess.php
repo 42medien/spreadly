@@ -6,14 +6,25 @@
   	<table border="0" cellspacing="0" cellpadding="0" id="dash-website-table" class="tablesorter scrolltable" style="width: 930px;">
 	  	<thead>
 	    	<tr>
-	  			<th align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('Websites last 30 days'); ?></div></th>
+	  			<th align="center" valign="middle" class="first">
+	  				<div class="sortlink no-sort">
+	  					<?php echo __('Websites last 30 days'); ?>
+	  	    	<a href="#" class="helptip">
+          		<img src="/img/qus_icon.png" alt="<?php echo __("Websites last 30 days"); ?>" class="tooltip-icon" />
+          	</a>
+	  	    	</div>
+	         	<div class="tooltip"><h3><?php echo __('Websites last 30 days'); ?></h3><?php echo __('Number of likes received for your content on your url.'); ?></div>
+	  			</th>
 	  	    <th align="center" valign="middle">
 	  	    	<div class="sortlink no-sort"><?php echo __('Likes');?>
 	  	    	<a href="#" class="helptip">
           		<img src="/img/qus_icon.png" alt="<?php echo __("Likes"); ?>" class="tooltip-icon" />
           	</a>
 	  	    	</div>
-	         	<div class="tooltip"><h3><?php echo __('Likes'); ?></h3><?php echo __('Number of likes received for your content on your url.'); ?></div>
+	         	<div class="tooltip">
+	         		<h3><?php echo __('Likes'); ?></h3>
+	         		<?php echo __('Number of likes received for your content on your url.'); ?>
+	         	</div>
 	  	    </th>
 	  	    <th align="center" valign="middle">
 	  	    	<div class="sortlink no-sort">
@@ -61,7 +72,18 @@
   	<table border="0" cellspacing="0" cellpadding="0" id="dash-deal-table" class="tablesorter scrolltable" style="width: 930px;">
   	<thead>
     	<tr>
-  			<th align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('Deals last 30 days'); ?></div></th>
+  			<th align="center" valign="middle" class="first">
+  				<div class="sortlink no-sort">
+  					<?php echo __('Deals last 30 days'); ?>
+	          	<a href="#" class="helptip">
+	          		<img src="/img/qus_icon.png" title="<?php echo __("Deals last 30 days"); ?>" alt="<?php echo __("Deals last 30 days"); ?>"  class="tooltip-icon" />
+	          	</a>
+	  				</div>
+          	<div class="tooltip">
+          		<h3><?php echo __('Deals last 30 days'); ?></h3>
+          		<?php echo __("Total number of contacts that are able to view the like referring to your content."); ?>
+          	</div>
+  			</th>
   			<th align="center" valign="middle">
   				<div class="sortlink no-sort">
   					<?php echo __('Deals left');?>
@@ -93,7 +115,10 @@
           		<img src="/img/qus_icon.png" alt="<?php echo __("Likes"); ?>" class="tooltip-icon" />
           	</a>
 	  	    	</div>
-	         	<div class="tooltip"><h3><?php echo __('Likes'); ?></h3><?php echo __('Number of likes received for your content on your url.'); ?></div>
+	         	<div class="tooltip">
+	         		<h3><?php echo __('Likes'); ?></h3>
+	         		<?php echo __('Number of likes received for your content on your url.'); ?>
+	         	</div>
   	    </th>
   	    <th align="center" valign="middle">
   	    	<div class="sortlink no-sort">
@@ -143,7 +168,18 @@
   	<table border="0" cellspacing="0" cellpadding="0" id="dash-url-table" class="tablesorter scrolltable" style="width: 930px;">
 	  	<thead>
 	    	<tr>
-	  			<th align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('Top-Pages last 30 days'); ?></div></th>
+	  			<th align="center" valign="middle" class="first">
+	  				<div class="sortlink no-sort">
+	  					<?php echo __('Top-Pages last 30 days'); ?>
+	          	<a href="#" class="helptip">
+	          		<img src="/img/qus_icon.png" title="<?php echo __("Top-Pages last 30 days"); ?>" alt="<?php echo __("Top-Pages last 30 days"); ?>"  class="tooltip-icon" />
+	          	</a>
+	  				</div>
+          	<div class="tooltip">
+          		<h3><?php echo __('Top-Pages last 30 days'); ?></h3>
+          		<?php echo __("Total number of contacts that are able to view the like referring to your content."); ?>
+          	</div>
+	  			</th>
 	  	    <th align="center" valign="middle">
 	  	    	<div class="sortlink no-sort">
 	  	    		<?php echo __('Likes');?>

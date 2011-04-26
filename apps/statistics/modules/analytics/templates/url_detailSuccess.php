@@ -19,7 +19,7 @@
     </select>
   </label>
     <span class="alignleft" id="filter-period-or"><?php echo __('or'); ?></span>
-    <?php echo link_to('<span>'.__('Other period').'</span>', 'analytics/select_period?url='.$pUrl.'&domainid='.$pDomainProfile->getId(), array('id' => 'select-period-link', 'class' => 'colorbox button')); ?>
+    <?php echo link_to('<span>'.__('Other period').'</span>', 'analytics/select_period?url='.$pUrl.'&domainid='.$pDomainProfile->getId(), array('id' => 'select-period-link', 'class' => 'colorbox alignleft button')); ?>
 </div>
 </form>
 <?php end_slot(); ?>

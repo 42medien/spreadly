@@ -273,6 +273,7 @@ a.button.header { float:right; }
 
 .data-tablebox th div {
   font-weight: bold;
+  padding: 0 8px 0 4px;
 }
 
 .data-tablebox th div .tooltip-icon{
