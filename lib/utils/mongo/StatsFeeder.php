@@ -74,7 +74,7 @@ class StatsFeeder {
     $host = parse_url($url, PHP_URL_HOST);
     $day = new MongoDate(strtotime(date("Y-m-d", $pYiidActivity->getC())));
     $hourOfDay = date("G", $pYiidActivity->getC());
-        
+
     $lParams = array(
       'host' => $host,
       'url'  => $url,
@@ -149,7 +149,7 @@ class StatsFeeder {
 
       if($lOi) {
         $service = self::fillService($pYiidActivity, $lOi);
-        $services[$lOi->getCommunity()->getName()] = $service;
+        $services[strtolower($lOi->getCommunity()->getName())] = $service;
       }
     }
 
