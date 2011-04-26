@@ -203,7 +203,6 @@ input.graybtnwide {
 
 a.button,
 button.button {
-  float:left;
   background:url(/img/savel.png) 0px 0px no-repeat;
   padding-left:13px;
   cursor:pointer;

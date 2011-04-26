@@ -3,7 +3,7 @@ use_helper('YiidNumber');
 
 slot('content');
 ?>
-<?php echo link_to('Show Details', 'analytics/domain_detail?domainid='.$pDomainProfileId, array('class' => 'alignright'));?>
+<?php echo link_to("<span>".__('Show Details')."</span>", 'analytics/domain_detail?domainid='.$pDomainProfileId, array('class' => 'button alignright'));?>
 <div id="analytics-bread">
 	<?php echo link_to(__('Dashboard'), 'analytics/index'); ?>&nbsp;&nbsp;&gt;&nbsp;
 	<strong><?php echo link_to('Overview for '.$pHost->getHost(), 'analytics/domain_statistics?domainid='.$pDomainProfileId); ?></strong>
@@ -66,13 +66,11 @@ slot('content');
       </ul>
     </div>
   </div>
-<?php echo link_to('Show Details', 'analytics/domain_detail?domainid='.$pDomainProfileId, array('class' => 'alignright'));?>
 
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
 
 <?php slot('content') ?>
-<?php echo link_to('Show Details', 'analytics/domain_detail?domainid='.$pDomainProfileId, array('class' => 'alignright clearfix'));?>
 
 <div id="pie-charts" class="clearfix">
 	<div class="alignleft" id="gender-chart">
@@ -113,8 +111,7 @@ slot('content');
 	</div>
 </div>
 
-<?php echo link_to('Show Details', 'analytics/domain_detail?domainid='.$pDomainProfileId, array('class' => 'alignright'));?>
-
+<?php echo link_to("<span>".__('Show Details')."</span>", 'analytics/domain_detail?domainid='.$pDomainProfileId, array('class' => 'button alignright'));?>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
 
