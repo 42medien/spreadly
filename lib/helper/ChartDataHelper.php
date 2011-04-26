@@ -244,3 +244,21 @@ function getChartLineRangeViewsData($rawData, $community='all') {
   return json_encode($res);
 }
 
+/**
+ * Creates a rounded percentage value by summing up all array values and using the value of $key as numerator
+ *
+ * @author Hannes Schippmann
+ * @param $array
+ * @param $key
+ * @return int
+ */
+function getArrayValuePercentage($array, $key) {
+  $numerator = array_key_exists($key, $array) ? intval($array[$key]) : 0;
+  $denominator = intval(array_sum(array_values($array)));
+  if ($denominator == 0) {
+    return 0;
+  } else {
+    $percent = round(($numerator/$denominator)*100);
+    return $percent;
+  }
+}

@@ -61,15 +61,15 @@ var ChartPieGenderActivities = {
 		      name: 'Gender',
 		      data: [
 		             {
-		               name: '<?php echo __("Female"); ?>',
+		               name: '<?php echo getArrayValuePercentage($pData['sex'], 'f') . '% ' . __("Female"); ?>',
 		               color: '#3300cc',
 		               y: (lData.sex.f == undefined)?0:lData.sex.f
 		             },{
-		               name: '<?php echo __("Unknown"); ?>',
+		               name: '<?php echo getArrayValuePercentage($pData['sex'], 'u') . '% ' . __("Unknown"); ?>',
 		               color: '#ff0000',
 		               y: (lData.sex.u == undefined)?0:lData.sex.u
 		             },{
-		               name: '<?php echo __("Male"); ?>',
+		               name: '<?php echo getArrayValuePercentage($pData['sex'], 'm') . '% ' . __("Male"); ?>',
 		               color: '#ffcc00',
 		               y: (lData.sex.m == undefined)?0:lData.sex.m
 		             }

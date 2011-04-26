@@ -62,23 +62,23 @@ var ChartPieGenderActivities = {
 		      name: 'Gender',
 		      data: [
 		             {
-		               name: '<?php echo __("under 18 years"); ?>',
+		               name: '<?php echo getArrayValuePercentage($pData['age'], 'u_18') . '% ' . __("under 18 years"); ?>',
 		               color: '#3300cc',
 		               y: (lData.age.u_18 == undefined)?0:lData.age.u_18
 		             },{
-		               name: '<?php echo __("18 to 24 years"); ?>',
+		               name: '<?php echo getArrayValuePercentage($pData['age'], 'b_18_24') . '% ' . __("18 to 24 years"); ?>',
 		               color: '#ff0000',
 		               y: (lData.age.b_18_24 == undefined)?0:lData.age.b_18_24
 		             },{
-		               name: '<?php echo __("25 to 34 years"); ?>',
+		               name: '<?php echo getArrayValuePercentage($pData['age'], 'b_25_34') . '% ' . __("25 to 34 years"); ?>',
 		               color: '#ffcc00',
 		               y: (lData.age.b_25_34 == undefined)?0:lData.age.b_25_34
 		             },{
-		               name: '<?php echo __("35 to 54 years"); ?>',
+		               name: '<?php echo getArrayValuePercentage($pData['age'], 'b_35_54') . '% ' . __("35 to 54 years"); ?>',
 		               color: '#ffcc66',
 		               y: (lData.age.b_35_54 == undefined)?0:lData.age.b_35_54
 		             },{
-		               name: '<?php echo __("over 55 years"); ?>',
+		               name: '<?php echo getArrayValuePercentage($pData['age'], 'o_55') . '% ' . __("over 55 years"); ?>',
 		               color: '#66ff66',
 		               y: (lData.age.o_55 == undefined)?0:lData.age.o_55
 		             }
