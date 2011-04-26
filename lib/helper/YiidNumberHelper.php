@@ -11,18 +11,18 @@
 /**
  * YiidNumberHelper.
  *
- * @package    spreadly
+ * @package    symfony
  * @subpackage helper
- * @author     Matthias Pfefferle
+ * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
+ * @version    SVN: $Id: NumberHelper.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
 
-function truncate_number($number)
+function point_format($number, $culture = null)
 {
-  if ($number >= 1000) {
-    return '<abbr title="'.$number.'">'.intval($number/1000) . 'k</abbr>';
-  } elseif ($number >= 1000000) {
-    return '<abbr title="'.$number.'">'.intval($number/1000000) . 'M</abbr>';
-  } else {
-    return $number;
+  if (null === $number)
+  {
+    return null;
   }
+
+  return number_format($number, 0, '', '.');
 }

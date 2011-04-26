@@ -1,4 +1,4 @@
-<?php use_helper("Text"); ?>
+<?php use_helper("Text", "YiidNumber"); ?>
 
 <?php if(count($pVerifiedDomains) > 0) { ?>
 <?php slot('content') ?>
@@ -7,9 +7,35 @@
 	  	<thead>
 	    	<tr>
 	  			<th align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('Websites last 30 days'); ?></div></th>
-	  	    <th align="center" valign="middle"><div class="sortlink no-sort"><?php echo __('Likes');?></div></th>
-	  	    <th align="center" valign="middle"><div class="sortlink no-sort"><?php echo __('Shares');?></div></th>
-	  			<th align="center" valign="middle" class="last" style="white-space: nowrap;"><div class="sortlink no-sort"><?php echo __('Media Penetration'); ?></div></th>
+	  	    <th align="center" valign="middle">
+	  	    	<div class="sortlink no-sort"><?php echo __('Likes');?>
+	  	    	<a href="#" class="helptip">
+          		<img src="/img/qus_icon.png" alt="<?php echo __("Likes"); ?>" class="tooltip-icon" />
+          	</a>
+	  	    	</div>
+	         	<div class="tooltip"><h3><?php echo __('Likes'); ?></h3><?php echo __('Number of likes received for your content on your url.'); ?></div>
+	  	    </th>
+	  	    <th align="center" valign="middle">
+	  	    	<div class="sortlink no-sort">
+	  	    		<?php echo __('Spreads');?>
+		  	    	<a href="#" class="helptip">
+	          		<img src="/img/qus_icon.png" alt="<?php echo __("Spreads"); ?>" class="tooltip-icon" />
+	          	</a>
+	  	    	</div>
+	         	<div class="tooltip"><h3><?php echo __('Spreads'); ?></h3><?php echo __('Total number of likes published in the social networks listed.'); ?></div>
+	 	    	</th>
+	  			<th align="center" valign="middle" class="last">
+	  				<div class="sortlink no-sort" style="white-space: nowrap;">
+	  					<?php echo __('Media Penetration'); ?>
+	          	<a href="#" class="helptip">
+	          		<img src="/img/qus_icon.png" title="<?php echo __("Media Penetration"); ?>" alt="<?php echo __("Media Penetration"); ?>"  class="tooltip-icon" />
+	          	</a>
+	  				</div>
+          	<div class="tooltip">
+          		<h3><?php echo __('Media Penetration'); ?></h3>
+          		<?php echo __("Total number of contacts that are able to view the like referring to your content."); ?>
+          	</div>
+	  			</th>
 	    	</tr>
 	    </thead>
 	    <tbody class="scrollbody">
@@ -17,9 +43,9 @@
 	  		<?php foreach($pVerifiedDomains as $lDomain) { ?>
 	  			<tr class="scrollrow">
 	  				<td align="left" class="first"><div class="padleft"><?php echo link_to($lDomain->getUrl(), 'analytics/domain_statistics?domainid='.$lDomain->getId()); ?></div></td>
-	  		    <td align="center" valign="middle"><div><?php echo array_key_exists($lDomain->getUrl(), $last30ByHost) ? $last30ByHost[$lDomain->getUrl()]['value']['l'] : 0; ?></div></td>
-	  		    <td align="center" valign="middle" ><div><?php echo array_key_exists($lDomain->getUrl(), $last30ByHost) ? $last30ByHost[$lDomain->getUrl()]['value']['sh'] : 0; ?></div></td>
-	  				<td align="center" class="last"><div><?php echo array_key_exists($lDomain->getUrl(), $last30ByHost) ? $last30ByHost[$lDomain->getUrl()]['value']['mp'] : 0; ?></div></td>
+	  		    <td align="center" valign="middle"><div><?php echo array_key_exists($lDomain->getUrl(), $last30ByHost) ? point_format($last30ByHost[$lDomain->getUrl()]['value']['l']) : 0; ?></div></td>
+	  		    <td align="center" valign="middle" ><div><?php echo array_key_exists($lDomain->getUrl(), $last30ByHost) ? point_format($last30ByHost[$lDomain->getUrl()]['value']['sh']) : 0; ?></div></td>
+	  				<td align="center" class="last"><div><?php echo array_key_exists($lDomain->getUrl(), $last30ByHost) ? point_format($last30ByHost[$lDomain->getUrl()]['value']['mp']) : 0; ?></div></td>
 	  			</tr>
 	      <?php $i++; } ?>
 	    </tbody>
@@ -36,11 +62,60 @@
   	<thead>
     	<tr>
   			<th align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('Deals last 30 days'); ?></div></th>
-  			<th align="center" valign="middle"><div class="sortlink no-sort"><?php echo __('Deals left');?></div></th>
-  			<th align="center" valign="middle"><div class="sortlink no-sort"><?php echo __('Days left');?></div></th>
-  	    <th align="center" valign="middle"><div class="sortlink no-sort"><?php echo __('Likes');?></div></th>
-  	    <th align="center" valign="middle"><div class="sortlink no-sort"><?php echo __('Shares');?></div></th>
-  			<th align="center" valign="middle" class="last" style="white-space: nowrap;"><div class="sortlink no-sort"><?php echo __('Media Penetration'); ?></div></th>
+  			<th align="center" valign="middle">
+  				<div class="sortlink no-sort">
+  					<?php echo __('Deals left');?>
+  					<a href="#" class="helptip">
+	          	<img src="/img/qus_icon.png" alt="<?php echo __("Deals left"); ?>" class="tooltip-icon" />
+	          </a>
+  				</div>
+          <div class="tooltip">
+          	<h3><?php echo __('Deals left'); ?></h3>
+          	<?php echo __("Deals left help-text"); ?>
+          </div>
+  			</th>
+  			<th align="center" valign="middle">
+  				<div class="sortlink no-sort">
+  					<?php echo __('Days left');?>
+  					<a href="#" class="helptip">
+	          	<img src="/img/qus_icon.png" alt="<?php echo __("Days left"); ?>" class="tooltip-icon" />
+	          </a>
+  				</div>
+          <div class="tooltip">
+          	<h3><?php echo __('Days left'); ?></h3>
+          	<?php echo __("Days left help-text"); ?>
+          </div>
+  			</th>
+  	    <th align="center" valign="middle">
+  	    	<div class="sortlink no-sort">
+  	    		<?php echo __('Likes');?>
+	  	    	<a href="#" class="helptip">
+          		<img src="/img/qus_icon.png" alt="<?php echo __("Likes"); ?>" class="tooltip-icon" />
+          	</a>
+	  	    	</div>
+	         	<div class="tooltip"><h3><?php echo __('Likes'); ?></h3><?php echo __('Number of likes received for your content on your url.'); ?></div>
+  	    </th>
+  	    <th align="center" valign="middle">
+  	    	<div class="sortlink no-sort">
+  	    		<?php echo __('Shares');?>
+		  	    	<a href="#" class="helptip">
+	          		<img src="/img/qus_icon.png" alt="<?php echo __("Spreads"); ?>" class="tooltip-icon" />
+	          	</a>
+	  	    	</div>
+	         	<div class="tooltip"><h3><?php echo __('Spreads'); ?></h3><?php echo __('Total number of likes published in the social networks listed.'); ?></div>
+  	    </th>
+  			<th align="center" valign="middle" class="last">
+  				<div class="sortlink no-sort" style="white-space: nowrap;">
+  					<?php echo __('Media Penetration'); ?>
+	          	<a href="#" class="helptip">
+	          		<img src="/img/qus_icon.png" title="<?php echo __("Media Penetration"); ?>" alt="<?php echo __("Media Penetration"); ?>"  class="tooltip-icon" />
+	          	</a>
+	  				</div>
+          	<div class="tooltip">
+          		<h3><?php echo __('Media Penetration'); ?></h3>
+          		<?php echo __("Total number of contacts that are able to view the like referring to your content."); ?>
+          	</div>
+  			</th>
     	</tr>
     </thead>
     <tbody>
@@ -50,9 +125,9 @@
   				<td align="left" class="first"><div class="padleft"><?php echo $lDeal->getSummary(); ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $lDeal->getRemainingCouponQuantity(); ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $lDeal->getRemainingDays() > 0 ? $lDeal->getRemainingDays() : __('expired'); ?></div></td>
-  				<td align="center" valign="middle"><div><?php echo array_key_exists($lDeal->getId(), $last30ByDeal) ? $last30ByDeal[$lDeal->getId()]['value']['l'] : 0; ?></div></td>
-  				<td align="center" valign="middle"><div><?php echo array_key_exists($lDeal->getId(), $last30ByDeal) ? $last30ByDeal[$lDeal->getId()]['value']['sh'] : 0; ?></div></td>
-  				<td align="center" class="last"><div><?php echo array_key_exists($lDeal->getId(), $last30ByDeal) ? $last30ByDeal[$lDeal->getId()]['value']['mp'] : 0; ?></div></td>
+  				<td align="center" valign="middle"><div><?php echo array_key_exists($lDeal->getId(), $last30ByDeal) ? point_format($last30ByDeal[$lDeal->getId()]['value']['l']) : 0; ?></div></td>
+  				<td align="center" valign="middle"><div><?php echo array_key_exists($lDeal->getId(), $last30ByDeal) ? point_format($last30ByDeal[$lDeal->getId()]['value']['sh']) : 0; ?></div></td>
+  				<td align="center" class="last"><div><?php echo array_key_exists($lDeal->getId(), $last30ByDeal) ? point_format($last30ByDeal[$lDeal->getId()]['value']['mp']) : 0; ?></div></td>
   			</tr>
       <?php $i++; } ?>
     	</tbody>
@@ -69,9 +144,36 @@
 	  	<thead>
 	    	<tr>
 	  			<th align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('Top-Pages last 30 days'); ?></div></th>
-	  	    <th align="center" valign="middle"><div class="sortlink no-sort"><?php echo __('Likes');?></div></th>
-	  	    <th align="center" valign="middle"><div class="sortlink no-sort"><?php echo __('Shares');?></div></th>
-	  			<th align="center" valign="middle" class="last" style="white-space: nowrap;"><div class="sortlink no-sort"><?php echo __('Media Penetration'); ?></div></th>
+	  	    <th align="center" valign="middle">
+	  	    	<div class="sortlink no-sort">
+	  	    		<?php echo __('Likes');?>
+	  	    	<a href="#" class="helptip">
+          		<img src="/img/qus_icon.png" alt="<?php echo __("Likes"); ?>" class="tooltip-icon" />
+          	</a>
+	  	    	</div>
+	         	<div class="tooltip"><h3><?php echo __('Likes'); ?></h3><?php echo __('Number of likes received for your content on your url.'); ?></div>
+	  	    </th>
+	  	    <th align="center" valign="middle">
+	  	    	<div class="sortlink no-sort">
+	  	    		<?php echo __('Shares');?>
+		  	    	<a href="#" class="helptip">
+	          		<img src="/img/qus_icon.png" alt="<?php echo __("Spreads"); ?>" class="tooltip-icon" />
+	          	</a>
+	  	    	</div>
+	         	<div class="tooltip"><h3><?php echo __('Spreads'); ?></h3><?php echo __('Total number of likes published in the social networks listed.'); ?></div>
+	  	    </th>
+	  			<th align="center" valign="middle" class="last">
+	  				<div class="sortlink no-sort" style="white-space: nowrap;">
+	  					<?php echo __('Media Penetration'); ?>
+	          	<a href="#" class="helptip">
+	          		<img src="/img/qus_icon.png" title="<?php echo __("Media Penetration"); ?>" alt="<?php echo __("Media Penetration"); ?>"  class="tooltip-icon" />
+	          	</a>
+	  				</div>
+          	<div class="tooltip">
+          		<h3><?php echo __('Media Penetration'); ?></h3>
+          		<?php echo __("Total number of contacts that are able to view the like referring to your content."); ?>
+          	</div>
+	  			</th>
 	    	</tr>
 	    </thead>
 	    <tbody class="scrollbody">
@@ -81,9 +183,9 @@
 	  		  <?php $lUrlValue = $lUrl['value'] ?>
 	  			<tr class="scrollrow">
 	  				<td align="left" class="first"><div class="padleft"><?php echo truncate_text($lUrl['_id'], 60); ?></div></td>
-	  		    <td align="center" valign="middle"><div><?php echo $lUrlValue['l'] ?></div></td>
-	  		    <td align="center" valign="middle" ><div><?php echo $lUrlValue['sh'] ?></div></td>
-	  				<td align="center" class="last"><div><?php echo $lUrlValue['mp'] ?></div></td>
+	  		    <td align="center" valign="middle"><div><?php echo point_format($lUrlValue['l']) ?></div></td>
+	  		    <td align="center" valign="middle" ><div><?php echo point_format($lUrlValue['sh']) ?></div></td>
+	  				<td align="center" class="last"><div><?php echo point_format($lUrlValue['mp']) ?></div></td>
 	  			</tr>
 	      <?php $i++; } ?>
 	      <?php } else { ?>

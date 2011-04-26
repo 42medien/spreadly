@@ -276,6 +276,11 @@ a.button.header { float:right; }
   font-weight: bold;
 }
 
+.data-tablebox th div .tooltip-icon{
+    padding-left: 3px;
+    padding-top: 7px;
+}
+
 .content-error-box{clear:both; padding-left: 110px;}
 
 .error_list li {
@@ -720,9 +725,18 @@ th.headerSortUp.last {
     display: none;
     font-size: 12px;
     height: 70px;
-    padding: 25px;
+    padding: 25px !important;
     width: 160px;
+    border-left: none !important;
+    border-right: none !important;
+    line-height: 14px !important;
+    font-weight: normal !important;   
 }
+
+.tooltip h3{
+  line-height: 18px;
+}
+
 #dyna img {
     border: 0 none;
     cursor: pointer;
