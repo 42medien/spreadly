@@ -46,7 +46,8 @@ class analyticsActions extends sfActions
   * @param sfRequest $request A request object
   */
   public function executeIndex(sfWebRequest $request) {
-    $this->pVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
+  	$this->pVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
     $domainUrls = array();
     foreach ($this->pVerifiedDomains as $domain) {
       $domainUrls[] = $domain->getUrl();
@@ -63,9 +64,6 @@ class analyticsActions extends sfActions
     if($this->last30ByUrl) {
       $this->last30ByUrl = $this->last30ByUrl->toArray();
     }
-
-    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
-
 
     $lQuery = Doctrine_Query::create()
                         ->select('*')
@@ -100,7 +98,7 @@ class analyticsActions extends sfActions
   }
 
   public function executeDomain_detail(sfWebRequest $request){
-    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics_details.js'));
   }
 
   public function executeGet_domain_detail(sfWebRequest $request) {
@@ -191,7 +189,7 @@ class analyticsActions extends sfActions
   }
 
   public function executeUrl_detail(sfWebRequest $request){
-    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics_details.js'));
   }
 
   public function executeGet_url_detail(sfWebRequest $request) {
