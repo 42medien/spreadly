@@ -185,7 +185,7 @@ class analyticsActions extends sfActions
 
   public function executeUrl_detail(sfWebRequest $request){
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics_details.js'));
-    $this->selector = $request->getParameter("date-selector", '7');
+    $this->selector = $request->getParameter("date-selector", null);
     $this->datefrom = $request->getParameter('date-from', null);
     $this->dateto = $request->getParameter('date-to', null);
     $this->pUrl = $request->getParameter('url');

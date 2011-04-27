@@ -10,8 +10,8 @@
 <form action="/analytics/get_url_detail" name="analytics-filter-form" id="analytics-filter-form">
   <input type="hidden" name="domainid" value="<?php echo $pDomainProfile->getId(); ?>" />
   <input type="hidden" name="url" value="<?php echo $pUrl; ?>" />
-  <input type="hidden" name="date-from" value="<?php echo $datefrom; ?>" />
-  <input type="hidden" name="date-to" value="<?php echo $dateto; ?>" />
+  <input type="hidden" id="datefromfield" name="date-from" value="<?php echo $datefrom; ?>" />
+  <input type="hidden" id="datetofield" name="date-to" value="<?php echo $dateto; ?>" />
 <div class="clearfix">
   <label for="host_id" id="filter-period-label" class="alignleft">
     <select class="custom-select" id="filter_period" name="date-selector">
