@@ -149,7 +149,7 @@ class StatsFeeder {
 
       if($lOi) {
         $service = self::fillService($pYiidActivity, $lOi);
-        $services[strtolower($lOi->getCommunity()->getName())] = $service;
+        $services[strtolower($lOi->getCommunity()->getCommunity())] = $service;
       }
     }
 
