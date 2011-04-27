@@ -11,7 +11,7 @@
 		  	  </div>
 		      <div class="tooltip">
 		      	<h3><?php echo __('Active Deals'); ?></h3>
-		      	<?php echo __('Total number of likes published in the social networks listed.'); ?>
+		      	<?php echo __('Aktuell laufende Deals'); ?>
 		      </div>
   			</th>
   			<th align="center" valign="middle">
@@ -23,7 +23,7 @@
   				</div>
           <div class="tooltip">
           	<h3><?php echo __('Deals left'); ?></h3>
-          	<?php echo __("Deals left help-text"); ?>
+          	<?php echo __("Anzahl der noch verfügbaren Deals"); ?>
           </div>
   			</th>
   			<th align="center" valign="middle">
@@ -35,7 +35,7 @@
   				</div>
           <div class="tooltip">
           	<h3><?php echo __('Days left'); ?></h3>
-          	<?php echo __("Days left help-text"); ?>
+          	<?php echo __("Restlaufzeit des Deals"); ?>
           </div>
   			</th>
   			<th align="center" valign="middle">
@@ -45,7 +45,7 @@
 		        	<img src="/img/qus_icon.png" alt="<?php echo __("Reach"); ?>" class="tooltip-icon" />
 		        </a>
 	  	  	</div>
-	      	<div class="tooltip"><h3><?php echo __('Reach'); ?></h3><?php echo __('Total number of likes published in the social networks listed.'); ?></div>
+	      	<div class="tooltip"><h3><?php echo __('Reach'); ?></h3><?php echo __('Maximale Reichweite der Empfehlung'); ?></div>
   			</th>
   	    <th align="center" valign="middle">
   	    	<div>
@@ -56,7 +56,7 @@
 		  	  </div>
 		      <div class="tooltip">
 		      	<h3><?php echo __('Clickbacks'); ?></h3>
-		      	<?php echo __('Total number of likes published in the social networks listed.'); ?>
+		      	<?php echo __('Anzahl der Besucher die auf eine Empfehlung gekommen sind'); ?>
 		      </div>
   	    </th>
   	    <th align="center" valign="middle" class="last">
@@ -68,7 +68,7 @@
 		  	  </div>
 		      <div class="tooltip">
 		      	<h3><?php echo __('Clickback-Likes'); ?></h3>
-		      	<?php echo __('Total number of likes published in the social networks listed.'); ?>
+		      	<?php echo __('Anzahl der Besucher die auf eine Empfehlung gekommen sind und dann weiterempfohlen haben'); ?>
 		      </div>
   	    </th>
     	</tr>

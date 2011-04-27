@@ -12,7 +12,7 @@
 	  	  </div>
 	      <div class="tooltip">
 	      	<h3><?php echo __('Top-URLs Overall'); ?></h3>
-	      	<?php echo __('Total number of likes published in the social networks listed.'); ?>
+	      	<?php echo __('URLs mit den meisten Empfehlungen seit Einbau des Buttons'); ?>
 	      </div>
 			</th>
 			<th align="center" valign="middle">
@@ -40,7 +40,7 @@
 	        	<img src="/img/qus_icon.png" alt="<?php echo __("Reach"); ?>" class="tooltip-icon" />
 	        </a>
 	  	  </div>
-	      <div class="tooltip"><h3><?php echo __('Reach'); ?></h3><?php echo __('Total number of likes published in the social networks listed.'); ?></div>
+	      <div class="tooltip"><h3><?php echo __('Reach'); ?></h3><?php echo __('Maximale Reichweite der Empfehlung'); ?></div>
 	    </th>
 	    <th align="center" valign="middle">
 	    	<div class="sortlink">
@@ -51,7 +51,7 @@
 	  	  </div>
 	      <div class="tooltip">
 	      	<h3><?php echo __('Clickbacks'); ?></h3>
-	      	<?php echo __('Total number of likes published in the social networks listed.'); ?>
+	      	<?php echo __('Anzahl der Besucher die auf eine Empfehlung gekommen sind'); ?>
 	      </div>
 	    </th>
 	    <th align="center" valign="middle" class="last">
@@ -63,7 +63,7 @@
 	  	  </div>
 	      <div class="tooltip">
 	      	<h3><?php echo __('Clickback-Likes'); ?></h3>
-	      	<?php echo __('Total number of likes published in the social networks listed.'); ?>
+	      	<?php echo __('Anzahl der Besucher die auf eine Empfehlung gekommen sind und dann weiterempfohlen haben'); ?>
 	      </div>
 	    </th>
   	</tr>

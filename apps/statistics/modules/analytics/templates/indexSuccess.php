@@ -13,7 +13,7 @@
           		<img src="/img/qus_icon.png" alt="<?php echo __("Websites last 30 days"); ?>" class="tooltip-icon" />
           	</a>
 	  	    	</div>
-	         	<div class="tooltip"><h3><?php echo __('Websites last 30 days'); ?></h3><?php echo __('Number of likes received for your content on your url.'); ?></div>
+	         	<div class="tooltip"><h3><?php echo __('Websites last 30 days'); ?></h3><?php echo __('Aktivitäten auf Domains in den letzten 30 Tagen'); ?></div>
 	  			</th>
 	  	    <th align="center" valign="middle">
 	  	    	<div class="sortlink no-sort"><?php echo __('Likes');?>
@@ -81,7 +81,7 @@
 	  				</div>
           	<div class="tooltip">
           		<h3><?php echo __('Deals last 30 days'); ?></h3>
-          		<?php echo __("Total number of contacts that are able to view the like referring to your content."); ?>
+          		<?php echo __("Aktivitäten auf Deals in den letzten 30 Tagen"); ?>
           	</div>
   			</th>
   			<th align="center" valign="middle">
@@ -93,7 +93,7 @@
   				</div>
           <div class="tooltip">
           	<h3><?php echo __('Deals left'); ?></h3>
-          	<?php echo __("Deals left help-text"); ?>
+          	<?php echo __("Anzahl der noch verfügbaren Deals"); ?>
           </div>
   			</th>
   			<th align="center" valign="middle">
@@ -105,7 +105,7 @@
   				</div>
           <div class="tooltip">
           	<h3><?php echo __('Days left'); ?></h3>
-          	<?php echo __("Days left help-text"); ?>
+          	<?php echo __("Restlaufzeit des Deals"); ?>
           </div>
   			</th>
   	    <th align="center" valign="middle">
@@ -177,7 +177,7 @@
 	  				</div>
           	<div class="tooltip">
           		<h3><?php echo __('Top-Pages last 30 days'); ?></h3>
-          		<?php echo __("Total number of contacts that are able to view the like referring to your content."); ?>
+          		<?php echo __("Aktivste Seiten in den letzten 30 Tagen"); ?>
           	</div>
 	  			</th>
 	  	    <th align="center" valign="middle">

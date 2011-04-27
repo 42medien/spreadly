@@ -31,7 +31,7 @@ if ($pUrlSummary) {
 	  	  </div>
 	      <div class="tooltip">
 	      	<h3><?php echo __('Age'); ?></h3>
-         	<?php echo __('Age Tooltip.'); ?>
+         	<?php echo __('Überblick Altersgruppen der Empfehler'); ?>
         </div>
       </th>
       <th align="center" valign="middle">
@@ -43,7 +43,7 @@ if ($pUrlSummary) {
 	  	  </div>
 	      <div class="tooltip">
 	      	<h3><?php echo __('Gender'); ?></h3>
-         	<?php echo __('Gender tooltip.'); ?>
+         	<?php echo __('Überblick Geschlecht der Empfehler'); ?>
         </div>
       </th>
       <th align="center" valign="middle">
@@ -55,7 +55,7 @@ if ($pUrlSummary) {
 	  	  </div>
 	      <div class="tooltip">
 	      	<h3><?php echo __('Relationship'); ?></h3>
-         	<?php echo __('Relationship tooltip.'); ?>
+         	<?php echo __('Überblick Beziehungsstatus der Empfehler'); ?>
         </div>
       </th>
       <th align="center" valign="middle">
@@ -76,7 +76,7 @@ if ($pUrlSummary) {
 	  	  </div>
 	      <div class="tooltip">
 	      	<h3><?php echo __('Reach'); ?></h3>
-         	<?php echo __('Reach tooltip.'); ?>
+         	<?php echo __('Maximale Reichweite der Empfehlung'); ?>
         </div>
       </th>
       <th align="center" valign="middle">
@@ -88,7 +88,7 @@ if ($pUrlSummary) {
 	  	  </div>
 	      <div class="tooltip">
 	      	<h3><?php echo __('Clickbacks'); ?></h3>
-         	<?php echo __('Clickbacks tooltip.'); ?>
+         	<?php echo __('Anzahl der Besucher die auf eine Empfehlung gekommen sind'); ?>
         </div>
       </th>
       <th align="center" valign="middle" class="last">
@@ -100,7 +100,7 @@ if ($pUrlSummary) {
 	  	  </div>
 	      <div class="tooltip">
 	      	<h3><?php echo __('Clickback-Likes'); ?></h3>
-         	<?php echo __('Clickback-Likes tooltip.'); ?>
+         	<?php echo __('Anzahl der Besucher die auf eine Empfehlung gekommen sind und dann weiterempfohlen haben'); ?>
         </div>
       </th>
     </tr>
