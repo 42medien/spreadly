@@ -724,13 +724,14 @@ th.headerSortUp.last {
     color: #FFFFFF;
     display: none;
     font-size: 12px;
-    height: 70px;
-    padding: 25px !important;
+    height: auto;
+    padding: 20px !important;
     width: 160px;
     border-left: none !important;
     border-right: none !important;
     line-height: 14px !important;
-    font-weight: normal !important;   
+    font-weight: normal !important;
+    min-height: 70px;   
 }
 
 .tooltip h3{
