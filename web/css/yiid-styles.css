@@ -569,13 +569,13 @@ div.sortlink{
   background: url("/img/sortarrows.gif") no-repeat scroll right transparent;
 }
 
-.headerSortDown div{
+.headerSortDown div.sortlink{
   background: url("/img/asc-arrow.gif") no-repeat scroll right transparent;
   color: #58819A;
   font-weight: bold;
 }
 
-.headerSortUp div{
+.headerSortUp div.sortlink{
   background: url("/img/desc-arrow.gif") no-repeat scroll right transparent;
   color: #58819A;
   font-weight: bold;
