@@ -98,7 +98,6 @@ class analyticsActions extends sfActions
   public function executeGet_domain_detail(sfWebRequest $request) {
     $selector = $request->getParameter("date-selector");
 
-    if (!$request->getParameter("date-from") && !$request->getParameter("date-to")) {
       switch ($selector) {
         case "now":
         case "yesterday":
@@ -109,7 +108,6 @@ class analyticsActions extends sfActions
           $request->setParameter("date-to", date("Y-m-d", strtotime("yesterday")));
           $request->setParameter("date-from", date("Y-m-d", strtotime($selector." days ago")));
           break;
-      }
     }
 
     if ($request->getParameter("date-from")) {
@@ -196,7 +194,6 @@ class analyticsActions extends sfActions
   public function executeGet_url_detail(sfWebRequest $request) {
     $selector = $request->getParameter("date-selector");
 
-    if (!$request->getParameter("date-from") && !$request->getParameter("date-to")) {
       switch ($selector) {
         case "now":
         case "yesterday":
@@ -208,7 +205,6 @@ class analyticsActions extends sfActions
           $request->setParameter("date-from", date("Y-m-d", strtotime($selector." days ago")));
           break;
       }
-    }
 
     if ($request->getParameter("date-from")) {
       $this->forward('analytics', 'get_url_detail_by_range');
