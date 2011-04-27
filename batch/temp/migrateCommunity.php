@@ -9,30 +9,33 @@ $dm = MongoManager::getStatsDM();
 
 $repos = array('Documents\AnalyticsActivity', 'Documents\ActivityStats', 'Documents\ActivityUrlStats', 'Documents\DealStats', 'Documents\DealUrlStats', 'Documents\DealSummary', 'Documents\DealUrlSummary', 'Documents\HostSummary', 'Documents\UrlSummary');
 
-foreach ($repos as $repo) {
+$repo = $repos[1];
+
   $services = array('Facebook', 'Twitter', 'Google', 'LinkedIn', 'Linkedin');
   echo "Fixing Repository: $repo …\n";
-  $psid_count = 0;
-  foreach ($services as $service) {
+
     $muh = $dm->createQueryBuilder($repo)
-              ->where("function() { return this.s.$service != undefined; }")->limit(10)
+              ->where("function() { return this.s.Facebook != undefined || this.s.Twitter != undefined || this.s.Google != undefined || this.s.LinkedIn != undefined || this.s.Linkedin != undefined; }")->limit(100)
               ->getQuery()->execute();
 
-    if(!$muh->hasNext()) {
-      $psid_count++;
-      break;
+    if (!$muh->hasNext()) {
+      echo "PFEFFI_SAYS_ITS_DONE";
     }
 
-    echo "=============================== Query done for: $service\n";
+    echo "===============================\n";
     $i = 0;
     foreach ($muh as $el) {
       $s = $el->getServices();
-      foreach ($s[$service] as $key => $value) {
-        $low = strtolower($service);
-        $s[$low][$key] = (array_key_exists($low, $s) && array_key_exists($key, $s[$low])) ? $s[$low][$key]+$value : $value;
-      }
-      unset($s[$service]);
 
+      foreach ($services as $service) {
+        if (array_key_exists($service, $s)) {
+          foreach ($s[$service] as $key => $value) {
+            $low = strtolower($service);
+            $s[$low][$key] = (array_key_exists($low, $s) && array_key_exists($key, $s[$low])) ? $s[$low][$key]+$value : $value;
+          }
+          unset($s[$service]);
+        }
+      }
       $el->setServices($s);
       $dm->persist($el);
       $dm->flush();
@@ -40,13 +43,4 @@ foreach ($repos as $repo) {
 
       echo "Element $i done\n";
     }
-    echo "Fixed $i entries for service: $service\n";
-  }
-
-  if ($psid_count>=count($services)) {
-    echo "PFEFFI_SAYS_ITS_DONE";
-  }
-
-}
-
 ?>
