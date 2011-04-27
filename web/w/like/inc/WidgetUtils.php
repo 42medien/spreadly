@@ -370,50 +370,50 @@ class WidgetUtils {
     $lOriginYiidActivity = $this->findYiidActivityById($lClickback[1]);
 
     if($lOriginYiidActivity) {
-      $url = $this->skipTrailingSlash($this->aUrl);
+      $url = str_replace(" ", "+", $this->aUrl);
       $host = parse_url($url, PHP_URL_HOST);
       $upsert = array('$inc' => array('cb' => 1, 's.'.$lClickback[0].'.cb' => 1));
       $options = array("upsert" => true);
-      
+
       $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, "yiid_activity")
-           ->update($lOriginYiidActivity, 
+           ->update($lOriginYiidActivity,
                     $upsert, $options);
 
       $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "analytics_activity")
-           ->update(array('ya_id' => strval($lOriginYiidActivity['_id'])), 
+           ->update(array('ya_id' => strval($lOriginYiidActivity['_id'])),
                     $upsert, $options);
-      
+
       if(array_key_exists('d_id', $lOriginYiidActivity)) {
         $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "deal_stats.host")
-             ->update(array('d_id' => $lOriginYiidActivity['d_id'], 
-                            'day' => new MongoDate(strtotime(date('Y-m-d', $lOriginYiidActivity['c'])))), 
+             ->update(array('d_id' => $lOriginYiidActivity['d_id'],
+                            'day' => new MongoDate(strtotime(date('Y-m-d', $lOriginYiidActivity['c'])))),
                       $upsert, $options);
         $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "deal_stats.url")
              ->update(array('d_id' => $lOriginYiidActivity['d_id'],
                             'url' => $url,
-                            'day' => new MongoDate(strtotime(date('Y-m-d', $lOriginYiidActivity['c'])))), 
+                            'day' => new MongoDate(strtotime(date('Y-m-d', $lOriginYiidActivity['c'])))),
                       $upsert, $options);
         $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "deal_summary.host")
-             ->update(array('d_id' => $lOriginYiidActivity['d_id']), 
+             ->update(array('d_id' => $lOriginYiidActivity['d_id']),
                       $upsert, $options);
         $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "deal_summary.url")
-             ->update(array('d_id' => $lOriginYiidActivity['d_id'], 
-                            'url' => $url), 
+             ->update(array('d_id' => $lOriginYiidActivity['d_id'],
+                            'url' => $url),
                       $upsert, $options);
       } else {
         $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "activity_stats.host")
              ->update(array('host' => $host,
-                            'day' => new MongoDate(strtotime(date('Y-m-d', $lOriginYiidActivity['c'])))), 
+                            'day' => new MongoDate(strtotime(date('Y-m-d', $lOriginYiidActivity['c'])))),
                       $upsert, $options);
         $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "activity_stats.url")
              ->update(array('url' => $url,
-                            'day' => new MongoDate(strtotime(date('Y-m-d', $lOriginYiidActivity['c'])))), 
+                            'day' => new MongoDate(strtotime(date('Y-m-d', $lOriginYiidActivity['c'])))),
                       $upsert, $options);
         $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "summary.host")
-             ->update(array('host' => $host), 
+             ->update(array('host' => $host),
                       $upsert, $options);
         $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "summary.url")
-             ->update(array('url' => $url), 
+             ->update(array('url' => $url),
                       $upsert, $options);
       }
     }
