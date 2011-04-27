@@ -45,7 +45,7 @@ class analyticsActions extends sfActions
   *
   * @param sfRequest $request A request object
   */
-  public function executeIndex(sfWebRequest $request) {        
+  public function executeIndex(sfWebRequest $request) {
     $this->pVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
     $domainUrls = array();
     foreach ($this->pVerifiedDomains as $domain) {
@@ -105,6 +105,39 @@ class analyticsActions extends sfActions
 
     $this->pUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(array("host" => $this->pDomainProfile->getUrl(), "day" => new MongoDate(strtotime($request->getParameter("date-to", date("Y-m-d", strtotime("yesterday")))))));
     $this->pHostSummary = $lDm->getRepository("Documents\ActivityStats")->findOneBy(array("host" => $this->pDomainProfile->getUrl(), "day" => new MongoDate(strtotime($request->getParameter("date-to", date("Y-m-d", strtotime("yesterday")))))));
+
+    $from = date("Y-m-d", strtotime("yesterday"));
+    $to = date("Y-m-d", strtotime("7 days ago"));
+
+    $lDm = MongoManager::getStatsDM();
+
+    //$lHost = $lDm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $lDomainProfile->getUrl()));
+    $lHost = $lDm->getRepository("Documents\ActivityStats")->findByRange(array($this->pDomainProfile->getUrl()), $from, $to);
+    if($lHost) {
+      $lHost = $lHost->toArray();
+      if(count($lHost) > 1) {
+        $lHost = $lHost[0];
+      }
+    }
+
+    $lUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(
+      array("host" => $this->pDomainProfile->getUrl(),
+            "day" => array('$gte' => new MongoDate(strtotime($from)), '$lte' => new MongoDate(strtotime($to)))
+            )
+      );
+
+    $lHostsRange = $lDm->getRepository("Documents\ActivityStats")->findBy(
+      array("host" => $this->pDomainProfile->getUrl(),
+            "day" => array('$gte' => new MongoDate(strtotime($from)), '$lte' => new MongoDate(strtotime($to)))
+            )
+      );
+
+    $lHostsRange = $lHostsRange->toArray();
+    $this->pLikes = array_values($this->padLikes($lHostsRange, $from, $to));
+    $this->pFrom = $from;
+    $this->pTo = $to;
+
+
   }
 
   public function executeGet_domain_detail(sfWebRequest $request) {
@@ -167,7 +200,7 @@ class analyticsActions extends sfActions
             "day" => array('$gte' => new MongoDate(strtotime($from)), '$lte' => new MongoDate(strtotime($to)))
             )
       );
-    
+
     $lHostsRange = $lHostsRange->toArray();
 
     $lLikesRange = array_values($this->padLikes($lHostsRange, $from, $to));
@@ -175,15 +208,15 @@ class analyticsActions extends sfActions
     $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_range', array('pUrls' => $lUrls, 'pHostSummary' => $lHost, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to, 'pLikes' => $lLikesRange, 'pStartDay' => $from, 'showdate' => $from.' to '.$to));
     return $this->renderText(json_encode($lReturn));
   }
-  
+
   private function padLikes($activityStats, $from, $to) {
     $from = new DateTime($from);
     $from->setTime(0,0);
     $to = new DateTime($to);
     $to->setTime(0,0);
-    
+
     $lDayPeriod = new DatePeriod($from, new DateInterval('P1D'), $to);
-    
+
     $res = array();
     foreach ($lDayPeriod as $day) {
       $res[$day->format('Y-m-d')] = 0;
@@ -193,7 +226,7 @@ class analyticsActions extends sfActions
     }
     return $res;
   }
-  
+
   public function executeUrl_detail(sfWebRequest $request){
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
     $lDm = MongoManager::getStatsDM();
@@ -263,7 +296,7 @@ class analyticsActions extends sfActions
             )
       );
     $lUrlsRange = $lUrlsRange->toArray();
-    
+
     $lLikesRange = array_values($this->padLikes($lUrlsRange, $from, $to));
 
     $lReturn['content'] = $this->getPartial('analytics/url_detail_content_by_range', array('pUrl' => $this->pUrl, 'pUrls' => $lUrls, 'pUrlSummary' => $lUrlSummary, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to, 'pLikes' => $lLikesRange, 'pStartDay' => $from, 'showdate' => $from.' to '.$to));

@@ -1,5 +1,6 @@
 <?php
 use_helper('Text');
+
 if ($pLikes) {
   slot('content')
 ?>
