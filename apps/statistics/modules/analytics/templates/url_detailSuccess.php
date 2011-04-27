@@ -1,9 +1,10 @@
+<?php use_helper('YiidUrl'); ?>
 <?php slot('content') ?>
 <div id="analytics-bread">
 	<?php echo link_to(__('Dashboard'), 'analytics/index'); ?>&nbsp;&raquo;&nbsp;
 	<?php echo link_to('Overview for '.$pDomainProfile->getUrl(), 'analytics/domain_statistics?domainid='.$pDomainProfile->getId()); ?>&nbsp;&raquo;&nbsp;
-	<?php echo link_to('Details for '.$pDomainProfile->getUrl(), 'analytics/domain_detail?domainid='.$pDomainProfile->getId());?>&nbsp;&raquo;&nbsp;
-	<strong><?php echo link_to('Details for '.$pUrl, 'analytics/url_detail', array('query_string' => 'url='.$pUrl.'&domainid='.$pDomainProfile->getId())); ?></strong>
+	<?php echo range_sensitive_link_to('Details for '.$pDomainProfile->getUrl(), 'analytics/domain_detail?domainid='.$pDomainProfile->getId());?>&nbsp;&raquo;&nbsp;
+	<strong><?php echo range_sensitive_link_to('Details for '.$pUrl, 'analytics/url_detail', array('query_string' => 'url='.$pUrl.'&domainid='.$pDomainProfile->getId())); ?></strong>
 </div>
 
 <form action="/analytics/get_url_detail" name="analytics-filter-form" id="analytics-filter-form">
@@ -26,5 +27,5 @@
 <?php include_partial('global/graybox'); ?>
 
 <div id="domain-detail-content">
-<?php include_partial('analytics/url_detail_content_by_day', array('pUrl' => $pUrl, 'pUrls' => $pUrls, 'pUrlSummary' => $pUrlSummary, 'pDomainProfile' => $pDomainProfile, 'date-selector' => 'yesterday', 'showdate' => date("Y-m-d", strtotime("yesterday")))); ?>
+<?php include_partial('analytics/url_detail_content_by_range', array('pUrl' => $pUrl, 'pUrls' => $pUrls, 'pUrlSummary' => $pUrlSummary, 'pDomainProfile' => $pDomainProfile, 'date-selector' => '30', 'showdate' => date("Y-m-d", strtotime("yesterday")))); ?>
 </div>

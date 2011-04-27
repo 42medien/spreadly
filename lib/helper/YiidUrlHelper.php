@@ -6,6 +6,31 @@ sfProjectConfiguration::getActive()->loadHelpers('Url');
  * @author Matthias Pfefferle
  */
 
+function range_sensitive_link_to($name, $uri, $options = array()) {
+  $request = sfContext::getInstance()->getRequest();
+  $query_string = array();
+
+  if ($param = $request->getParameter("date-selector")) {
+    $query_string[] = "date-selector=".$param;
+  }
+
+  if ($param = $request->getParameter("date-to")) {
+    $query_string[] = "date-to=".$param;
+  }
+
+  if ($param = $request->getParameter("date-from")) {
+    $query_string[] = "date-from=".$param;
+  }
+
+  if ($query_string && array_key_exists('query_string', $options)) {
+    $options['query_string'] .= "&".implode("&", $query_string);
+  } else {
+    $options['query_string'] = implode("&", $query_string);
+  }
+
+  return link_to($name, $uri, $options);
+}
+
 /**
  * helper to set links for the yiid app
  *
