@@ -27,5 +27,5 @@
 <?php include_partial('global/graybox'); ?>
 
 <div id="domain-detail-content">
-<?php //include_partial('analytics/url_detail_content_by_range', array('pUrl' => $pUrl, 'pUrls' => $pUrls, 'pUrlSummary' => $pUrlSummary, 'pDomainProfile' => $pDomainProfile, 'date-selector' => '30', 'showdate' => date("Y-m-d", strtotime("yesterday")))); ?>
+
 </div>

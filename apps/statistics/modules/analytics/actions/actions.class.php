@@ -101,10 +101,6 @@ class analyticsActions extends sfActions
 
   public function executeDomain_detail(sfWebRequest $request){
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
-    $lDm = MongoManager::getStatsDM();
-
-    $this->pUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(array("host" => $this->pDomainProfile->getUrl(), "day" => new MongoDate(strtotime($request->getParameter("date-to", date("Y-m-d", strtotime("yesterday")))))));
-    $this->pHostSummary = $lDm->getRepository("Documents\ActivityStats")->findOneBy(array("host" => $this->pDomainProfile->getUrl(), "day" => new MongoDate(strtotime($request->getParameter("date-to", date("Y-m-d", strtotime("yesterday")))))));
   }
 
   public function executeGet_domain_detail(sfWebRequest $request) {
@@ -196,10 +192,6 @@ class analyticsActions extends sfActions
 
   public function executeUrl_detail(sfWebRequest $request){
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
-    $lDm = MongoManager::getStatsDM();
-
-    $this->pUrls = $lDm->getRepository("Documents\AnalyticsActivity")->findBy(array("url" => $this->pUrl, "day" => new MongoDate(strtotime($request->getParameter("date-to", date("Y-m-d", strtotime("yesterday")))))));
-    $this->pUrlSummary = $lDm->getRepository("Documents\ActivityUrlStats")->findOneBy(array("url" => $this->pUrl, "day" => new MongoDate(strtotime($request->getParameter("date-to", date("Y-m-d", strtotime("yesterday")))))));
   }
 
   public function executeGet_url_detail(sfWebRequest $request) {
