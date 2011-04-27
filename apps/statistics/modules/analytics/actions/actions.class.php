@@ -98,7 +98,7 @@ class analyticsActions extends sfActions
   public function executeGet_domain_detail(sfWebRequest $request) {
     $selector = $request->getParameter("date-selector");
 
-    if (!$request->setParameter("date-from") && !$request->setParameter("date-to")) {
+    if (!$request->getParameter("date-from") && !$request->getParameter("date-to")) {
       switch ($selector) {
         case "now":
         case "yesterday":
@@ -193,7 +193,7 @@ class analyticsActions extends sfActions
   public function executeGet_url_detail(sfWebRequest $request) {
     $selector = $request->getParameter("date-selector");
 
-    if (!$request->setParameter("date-from") && !$request->setParameter("date-to")) {
+    if (!$request->getParameter("date-from") && !$request->getParameter("date-to")) {
       switch ($selector) {
         case "now":
         case "yesterday":
