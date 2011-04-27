@@ -17,8 +17,8 @@
     <select class="custom-select" id="filter_period" name="date-selector">
       <option value="now" <?php echo ($selector == 'now') ? 'selected="selected"':""; ?>><?php echo __('Today'); ?></option>
       <option value="yesterday" <?php echo ($selector == 'yesterday') ? 'selected="selected"':""; ?>><?php echo __('Yesterday'); ?></option>
-      <option value="7" <?php echo ($selector == '7') ? 'selected="selected"':""; ?>><?php echo __('Last week'); ?></option>
-      <option value="30" <?php echo ($selector == '30') ? 'selected="selected"':""; ?>><?php echo __('Last month'); ?></option>
+      <option value="7" <?php echo ($selector == '7') ? 'selected="selected"':""; ?>><?php echo __('Last 7 days'); ?></option>
+      <option value="30" <?php echo ($selector == '30') ? 'selected="selected"':""; ?>><?php echo __('Last 30 days'); ?></option>
     </select>
   </label>
     <span class="alignleft" id="filter-period-or"><?php echo __('or'); ?></span>
