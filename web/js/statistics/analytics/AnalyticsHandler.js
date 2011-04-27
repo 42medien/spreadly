@@ -21,6 +21,8 @@ var AnalyticsTables = {
       jQuery('#top-url-table').tableScroll({height: 150, flush: true});
       jQuery('#top-like-table').tableScroll({height: 150, flush: true});
       
+      jQuery(".helptip").tooltip({ opacity: 1 });
+      
     },
     
     initTablesorter: function(pTableId) {
