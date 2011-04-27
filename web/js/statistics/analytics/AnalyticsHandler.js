@@ -72,9 +72,10 @@ var AnalyticsFilter = {
     initDropdown: function() {
       debug.log('[AnalyticsFilter][initDropdown]');         
       jQuery("select#filter_period").jgdDropdown({callback: function(obj, val) {
-        //after selection, get the right content
+        //prefer the dd-fields an delete from-to-values
         jQuery('#datefromfield').val('');
         jQuery('#datetofield').val('');
+        //after selection, get the right content
         AnalyticsFilter.getContent(val);
       }});      
     },
