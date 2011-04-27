@@ -167,7 +167,7 @@ class analyticsActions extends sfActions
     $day = new MongoDate(strtotime($request->getParameter("date-to")));
     $lUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(array("host" => $this->pDomainProfile->getUrl(), "day" => $day));
     $lHostSummary = $lDm->getRepository("Documents\ActivityStats")->findOneBy(array("host" => $this->pDomainProfile->getUrl(), "day" => $day));
-    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_day', array('pUrls' => $lUrls, 'pHostSummary' => $lHostSummary, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $request->getParameter('date-to')));
+    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_day', array('pUrls' => $lUrls, 'pHostSummary' => $lHostSummary, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => date('d-m-Y', strtotime($request->getParameter('date-to')))));
 
     return $this->renderText(json_encode($lReturn));
   }
@@ -205,7 +205,7 @@ class analyticsActions extends sfActions
 
     $lLikesRange = array_values($this->padLikes($lHostsRange, $from, $to));
 
-    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_range', array('pUrls' => $lUrls, 'pHostSummary' => $lHost, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to, 'pLikes' => $lLikesRange, 'pStartDay' => $from, 'showdate' => $from.' to '.$to));
+    $lReturn['content'] = $this->getPartial('analytics/domain_detail_content_by_range', array('pUrls' => $lUrls, 'pHostSummary' => $lHost, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to, 'pLikes' => $lLikesRange, 'pStartDay' => $from, 'showdate' => date('d-m-Y', strtotime($from)).' to '.date('d-m-Y', strtotime($to))));
     return $this->renderText(json_encode($lReturn));
   }
 
@@ -263,7 +263,7 @@ class analyticsActions extends sfActions
     $day = new MongoDate(strtotime(date("Y-m-d", strtotime($request->getParameter("date-to")))));
     $lUrls = $lDm->getRepository("Documents\AnalyticsActivity")->findBy(array("url" => $this->pUrl, "day" => $day));
     $lUrlSummary = $lDm->getRepository("Documents\ActivityUrlStats")->findOneBy(array("url" => $this->pUrl, "day" => $day));
-    $lReturn['content'] = $this->getPartial('analytics/url_detail_content_by_day', array('pUrl' => $this->pUrl, 'pUrls' => $lUrls, 'pUrlSummary' => $lUrlSummary, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $request->getParameter('date-to')));
+    $lReturn['content'] = $this->getPartial('analytics/url_detail_content_by_day', array('pUrl' => $this->pUrl, 'pUrls' => $lUrls, 'pUrlSummary' => $lUrlSummary, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => date('d-m-Y', strtotime($request->getParameter('date-to')))));
 
     return $this->renderText(json_encode($lReturn));
   }
@@ -299,7 +299,7 @@ class analyticsActions extends sfActions
 
     $lLikesRange = array_values($this->padLikes($lUrlsRange, $from, $to));
 
-    $lReturn['content'] = $this->getPartial('analytics/url_detail_content_by_range', array('pUrl' => $this->pUrl, 'pUrls' => $lUrls, 'pUrlSummary' => $lUrlSummary, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to, 'pLikes' => $lLikesRange, 'pStartDay' => $from, 'showdate' => $from.' to '.$to));
+    $lReturn['content'] = $this->getPartial('analytics/url_detail_content_by_range', array('pUrl' => $this->pUrl, 'pUrls' => $lUrls, 'pUrlSummary' => $lUrlSummary, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => $from.'-'.$to, 'pLikes' => $lLikesRange, 'pStartDay' => $from, 'showdate' => date('d-m-Y', strtotime($from)).' to '.date('d-m-Y', strtotime($to))));
     return $this->renderText(json_encode($lReturn));
   }
 
