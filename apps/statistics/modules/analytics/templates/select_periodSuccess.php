@@ -25,13 +25,12 @@
 </div>
 </form>
 
-
-<script type="text/javascript">
-	AnalyticsDateFilter.initDatepicker();
 <?php if (isset($pUrl) && $pUrl != null) { ?>
-	AnalyticsDateFilter.closeLayer("/analytics/get_url_detail");
+	<a href="/analytics/get_url_detail" id="close-layer-link" class="button alignright"><span><?php echo __('Save and close'); ?></span></a>
 <?php } else { ?>
-	AnalyticsDateFilter.closeLayer("/analytics/get_domain_detail");
+	<a href="get_domain_detail" id="close-layer-link" class="button alignright"><span><?php echo __('Save and close'); ?></span></a>
 <?php } ?>
 
+<script type="text/javascript">
+	AnalyticsDateFilter.init();
 </script>

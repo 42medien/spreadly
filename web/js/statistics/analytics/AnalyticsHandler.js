@@ -5,6 +5,10 @@
 
 var AnalyticsTables = {
   
+    /**
+     * inits the js-functions of the analytics tables, like scroll and sort
+     * @author KM
+     */
     init: function() {
       debug.log('[AnalyticsTables][init]');
       AnalyticsTables.initTablesorter("dash-website-table");
@@ -25,6 +29,11 @@ var AnalyticsTables = {
       
     },
     
+    /**
+     * inits the table-sorter-plugin
+     * @author KM
+     * @param pTableId
+     */
     initTablesorter: function(pTableId) {
       debug.log('[AnalyticsTables][initTablesorter]');
       var lTableId = pTableId;
@@ -53,18 +62,27 @@ var AnalyticsFilter = {
      */
     init: function() {
       debug.log('[AnalyticsFilter][init]');      
-      //AnalyticsFilter.sendForm();
       AnalyticsFilter.initDropdown();
     },
     
+    /**
+     * inits the request on the date-range-dropdown
+     * @author KM
+     */
     initDropdown: function() {
       debug.log('[AnalyticsFilter][initDropdown]');         
       jQuery("select#filter_period").jgdDropdown({callback: function(obj, val) {
+        //after selection, get the right content
         AnalyticsFilter.getContent(val);
       }});      
     },
     
+    /**
+     * sends a request and gets the selected content
+     * @author KM
+     */
     getContent: function() {
+      debug.log('[AnalyticsFilter][getContent]');        
       OnLoadGrafic.showGrafic();
       var options = {
         data : {
@@ -81,24 +99,47 @@ var AnalyticsFilter = {
       jQuery('#analytics-filter-form').ajaxSubmit(options);       
     },
     
+    /**
+     * shows the content
+     * @author KM
+     * @param pHtml
+     */
     showContent: function(pHtml) {
+      debug.log('[AnalyticsFilter][showContent]');          
       jQuery('#domain-detail-content').empty();
       jQuery('#domain-detail-content').append(pHtml);
     }
 };
 
+
+/**
+ * class to handle the date-selection in layer
+ */
 var AnalyticsDateFilter = {
     
+    init: function() {
+      debug.log('[AnalyticsDateFilter][init]');        
+      AnalyticsDateFilter.initDatepicker();
+      AnalyticsDateFilter.closeLayer();      
+    },
+    
+    
+    /**
+     * inits the datepicker-plugin (jquery-ui) on layer
+     */
     initDatepicker: function(){
+      debug.log('[AnalyticsDateFilter][initDatepicker]');          
       jQuery('#datetobox').datepicker({
         dateFormat: 'yy-mm-dd',
         defaultDate: jQuery('input#date-filter-to').val(), 
         minDate: jQuery('input#date-filter-from').val(),
         onSelect: function(dateText, inst) {
+          //updates the input-fields
           jQuery('input#date-filter-to').val(dateText);
         }
       });
       
+      //get the dateto-instance of the datepicker to manipulate it after select an datefrom-date
       var lToInstance = jQuery("#datetobox").data('datepicker');
 
       jQuery('#datefrombox').datepicker({
@@ -106,8 +147,7 @@ var AnalyticsDateFilter = {
         defaultDate: jQuery('input#date-filter-from').val(),
         onSelect: function(dateText, inst) {
           jQuery('input#date-filter-from').val(dateText);
-          //dates.not( this ).datepicker( "option", "minDate", dateText );
-          var instance = jQuery(this).data('datepicker');
+          //set the mindate of the dateto-datepicker to the selected datefrom
           lToInstance.settings.minDate = new Date(dateText);
           jQuery("#datetobox").datepicker("refresh");
         }
@@ -115,15 +155,29 @@ var AnalyticsDateFilter = {
       
     },  
     
-    closeLayer: function(pAction) {
-      debug.log('[AnalyticsFilter][closeLayer]');         
-      jQuery(document).bind('cbox_cleanup', function(){
-        AnalyticsDateFilter.sendForm(pAction);
-      }); 
+    /**
+     * send request after closing the layer
+     * @author KM
+     * @param pAction
+     */
+    closeLayer: function() {
+      debug.log('[AnalyticsDateFilter][closeLayer]');      
+      
+      jQuery('#close-layer-link').live('click', function() {
+        var lAction = jQuery(this).attr('href');
+        AnalyticsDateFilter.sendForm(lAction);
+        return false;
+      });
     },
     
+    /**
+     * send the form with the selected dates and get the content
+     * @author KM
+     * @param pAction
+     * @returns {Boolean}
+     */
     sendForm: function(pAction) {
-      debug.log('[AnalyticsFilter][sendDateForm]');
+      debug.log('[AnalyticsDateFilter][sendForm]');
       OnLoadGrafic.showGrafic();      
       var options = {
           data : {
@@ -137,24 +191,11 @@ var AnalyticsDateFilter = {
             AnalyticsFilter.showContent(pResponse.content);
             AnalyticsTables.init();            
             OnLoadGrafic.hideGrafic();
-            jQuery(document).unbind('cbox_cleanup');
+            jQuery.colorbox.close();
           }
         };
          jQuery('#analytics-datefilter-form').ajaxSubmit(options); 
          return false;      
     }
     
-};
-
-
-/**
- * handles the behaviour of the content (charts...)
- * @author KM
- */
-var AnalyticsFilterContent = {
-  show: function(pContent){
-    debug.log('[AnalyticsFilterContent][show]');      
-    jQuery('#analytix-content-box').empty();
-    jQuery('#analytix-content-box').append(pContent);    
-  }
 };
