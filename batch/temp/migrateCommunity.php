@@ -9,7 +9,7 @@ $dm = MongoManager::getStatsDM();
 
 $repos = array('Documents\AnalyticsActivity', 'Documents\ActivityStats', 'Documents\ActivityUrlStats', 'Documents\DealStats', 'Documents\DealUrlStats', 'Documents\DealSummary', 'Documents\DealUrlSummary', 'Documents\HostSummary', 'Documents\UrlSummary');
 
-$repo = $repos[1];
+$repo = $repos[2];
 
   $services = array('Facebook', 'Twitter', 'Google', 'LinkedIn', 'Linkedin');
   echo "Fixing Repository: $repo …\n";
