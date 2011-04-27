@@ -85,12 +85,6 @@ class analyticsActions extends sfActions
 
   }
 
-  public function executeStatistics(sfWebRequest $request) {
-    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
-    $this->pUrl = MongoUtils::getTopActivityUrl($this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation);
-    $this->pData = MongoUtils::getDataForRange($this->pType, $this->lDomainProfile->getUrl(), $this->pDateFrom, $this->pDateTo, $this->pAggregation, $this->pUrl);
-  }
-
   public function executeDomain_statistics(sfWebRequest $request) {
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
     $dm = MongoManager::getStatsDM();
