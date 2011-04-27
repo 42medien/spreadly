@@ -105,39 +105,6 @@ class analyticsActions extends sfActions
 
     $this->pUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(array("host" => $this->pDomainProfile->getUrl(), "day" => new MongoDate(strtotime($request->getParameter("date-to", date("Y-m-d", strtotime("yesterday")))))));
     $this->pHostSummary = $lDm->getRepository("Documents\ActivityStats")->findOneBy(array("host" => $this->pDomainProfile->getUrl(), "day" => new MongoDate(strtotime($request->getParameter("date-to", date("Y-m-d", strtotime("yesterday")))))));
-
-    $from = date("Y-m-d", strtotime("yesterday"));
-    $to = date("Y-m-d", strtotime("7 days ago"));
-
-    $lDm = MongoManager::getStatsDM();
-
-    //$lHost = $lDm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $lDomainProfile->getUrl()));
-    $lHost = $lDm->getRepository("Documents\ActivityStats")->findByRange(array($this->pDomainProfile->getUrl()), $from, $to);
-    if($lHost) {
-      $lHost = $lHost->toArray();
-      if(count($lHost) > 1) {
-        $lHost = $lHost[0];
-      }
-    }
-
-    $lUrls = $lDm->getRepository("Documents\ActivityUrlStats")->findBy(
-      array("host" => $this->pDomainProfile->getUrl(),
-            "day" => array('$gte' => new MongoDate(strtotime($from)), '$lte' => new MongoDate(strtotime($to)))
-            )
-      );
-
-    $lHostsRange = $lDm->getRepository("Documents\ActivityStats")->findBy(
-      array("host" => $this->pDomainProfile->getUrl(),
-            "day" => array('$gte' => new MongoDate(strtotime($from)), '$lte' => new MongoDate(strtotime($to)))
-            )
-      );
-
-    $lHostsRange = $lHostsRange->toArray();
-    $this->pLikes = array_values($this->padLikes($lHostsRange, $from, $to));
-    $this->pFrom = $from;
-    $this->pTo = $to;
-
-
   }
 
   public function executeGet_domain_detail(sfWebRequest $request) {

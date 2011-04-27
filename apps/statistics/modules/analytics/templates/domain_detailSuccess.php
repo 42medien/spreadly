@@ -22,5 +22,5 @@
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
 <div id="domain-detail-content">
-<?php include_partial('analytics/domain_detail_content_by_range', array('pUrls' => $pUrls, 'pHostSummary' => $pHostSummary, 'pDomainProfile' => $pDomainProfile, 'showdate' => $pFrom.'-'.$pTo, 'pLikes' => $pLikes, 'pStartDay' => $pFrom, 'showdate' => $pFrom.' to '.$pTo)); ?>
+<?php //include_partial('analytics/domain_detail_content_by_range', array('pUrls' => $pUrls, 'pHostSummary' => $pHostSummary, 'pDomainProfile' => $pDomainProfile, 'showdate' => $pFrom.'-'.$pTo, 'pLikes' => $pLikes, 'pStartDay' => $pFrom, 'showdate' => $pFrom.' to '.$pTo)); ?>
 </div>

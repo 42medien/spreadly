@@ -14,8 +14,8 @@
   <label for="host_id" id="filter-period-label" class="alignleft">
     <select class="custom-select" id="filter_period" name="date-selector">
       <option value="now"><?php echo __('Today'); ?></option>
-      <option value="yesterday" selected="selected"><?php echo __('Yesterday'); ?></option>
-      <option value="7"><?php echo __('Last week'); ?></option>
+      <option value="yesterday"><?php echo __('Yesterday'); ?></option>
+      <option value="7" selected="selected"><?php echo __('Last week'); ?></option>
       <option value="30"><?php echo __('Last month'); ?></option>
     </select>
   </label>
