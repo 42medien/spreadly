@@ -87,14 +87,8 @@ if ($pHostSummary) {
       foreach($pUrls as $url){
     ?>
       <tr>
-        <td height="44" align="left" class="first" style="line-height: 21px;">
-          <div class="martext">
-            <?php if($url->getTitle() && $url->getTitle()!='') { ?>
-              <strong><?php echo truncate_text($url->getTitle(), 60); ?></strong>
-            <?php } else {?>
-              <strong><?php echo __('No title'); ?></strong>
-            <?php } ?>
-              <br />
+        <td height="44" align="left" class="first">
+          <div class="padleft">
               <?php echo range_sensitive_link_to(truncate_text($url->getUrl(), 60), 'analytics/url_detail', array('query_string' => 'domainid='.$pDomainProfile->getId().'&url='.urlencode($url->getUrl()))); ?>
           </div>
         </td>
