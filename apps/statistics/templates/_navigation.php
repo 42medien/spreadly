@@ -40,7 +40,7 @@
     	</a>
     </li>
     <li>
-    	<a href="<?php echo url_for('@analytics_overview'); ?>" title="Analytics" class="<?php if($module=='analytics' && ($action=='index' || $action=='statistics')) { echo "active";} echo $lColorbox; ?>">
+    	<a href="<?php echo url_for('@analytics_overview'); ?>" title="Analytics" class="<?php if($module=='analytics') { echo "active";} echo $lColorbox; ?>">
     		<span><?php echo __('Analytics'); ?></span>
     	</a>
     </li>
