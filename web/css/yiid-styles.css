@@ -638,7 +638,8 @@ th.headerSortUp.last {
 #filter-period-label{
     position: relative;
     z-index: 50;
-    padding-top: 5px;    
+    padding-top: 5px;  
+    width: 135px;  
 }
 
 #filter-period-or{
