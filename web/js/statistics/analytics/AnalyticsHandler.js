@@ -41,7 +41,7 @@ var AnalyticsTables = {
           padding: 10, 
           textAlign: 'center',
           tip: true,
-          name: 'cream' // Style it according to the preset 'cream' style
+          name: 'blue' // Style it according to the preset 'cream' style
        }
       });      
       
