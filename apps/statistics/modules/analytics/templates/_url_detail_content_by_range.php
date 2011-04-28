@@ -1,4 +1,4 @@
-<?php use_helper('Text'); ?>
+<?php use_helper('Text', 'YiidUrl'); ?>
 <?php
 if ($pLikes) {
   slot('content');
