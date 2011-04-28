@@ -27,6 +27,7 @@
 												</span>
 												</label>
 											</div>
+											<div class="meta-text"><?php echo __('URL example: <strong>http://</strong>www.example.com'); ?></div>
 										<?php } else { ?>
 											<div class="clearfix">
 												<label class="textfield"><span>

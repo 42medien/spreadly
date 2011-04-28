@@ -787,3 +787,8 @@ th.headerSortUp.last {
 
 
 /*********End Footer*********/
+
+.meta-text{
+  font-size: 11px;
+  padding-top: 3px;
+}
