@@ -1,3 +1,4 @@
+<?php use_helper('YiidUrl'); ?>
   <div class="data-tablebox">
   	<table border="0" cellspacing="0" cellpadding="0" id="active-deal-table" style="width: 940px;">
   	<thead>
