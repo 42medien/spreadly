@@ -1,4 +1,4 @@
-<?php use_helper('Date', 'DomainProfiles', 'Text') ?>
+<?php use_helper('Date', 'DomainProfiles', 'Text', "YiidNumber") ?>
 <div class="data-tablebox two-line-table">
 	<table width="930px;" border="0" cellspacing="0" cellpadding="0" id="top-url-table" class="tablesorter">
 	<thead>
@@ -55,11 +55,11 @@
 				    	<?php echo truncate_text($url->getUrl(), 60); ?>
 				  </div>
   			</td>
-		    <td align="center"><div><?php echo $url->getLikes() ?></div></td>
-		    <td align="center" valign="middle"><div><?php echo $url->getShares() ?></div></td>
-		    <td align="center" valign="middle"><div><?php echo $url->getMediaPenetration() ?></div></td>
-		    <td align="center" class="last"><div><?php echo $url->getClickbacks() ?></div></td>
-		    <td align="center" valign="middle"><div><?php echo $url->getClickbackLikes() ?></div></td>
+		    <td align="center"><div><?php echo point_format($url->getLikes()); ?></div></td>
+		    <td align="center" valign="middle"><div><?php echo point_format($url->getShares()); ?></div></td>
+		    <td align="center" valign="middle"><div><?php echo point_format($url->getMediaPenetration()); ?></div></td>
+		    <td align="center" class="last"><div><?php echo point_format($url->getClickbacks()); ?></div></td>
+		    <td align="center" valign="middle"><div><?php echo point_format($url->getClickbackLikes()); ?></div></td>
 			</tr>
     <?php } ?>
     </tbody>
