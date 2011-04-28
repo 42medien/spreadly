@@ -1,4 +1,4 @@
-<?php use_helper('Text', 'YiidUrl'); ?>
+<?php use_helper('Text', 'YiidUrl', 'YiidNumber'); ?>
 <?php
 if ($pUrlSummary) {
   slot('content')
