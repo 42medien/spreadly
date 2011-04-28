@@ -31,7 +31,10 @@ var AnalyticsTables = {
            corner: {
               target: 'rightTop',
               tooltip: 'leftBottom'
-            }
+            },
+            adjust:{
+              x: 10
+            }            
         },
         style: {
           border: {
