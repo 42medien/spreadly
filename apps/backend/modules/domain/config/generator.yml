@@ -14,8 +14,12 @@ generator:
     config:
       actions: ~
       fields:  ~
-      list:    ~
+      list:
+        actions:
+          exportCsv:
+            label: "Export to CSV"
       filter:  ~
       form:    ~
       edit:    ~
       new:     ~
+      

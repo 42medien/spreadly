@@ -1,5 +1,4 @@
 <?php
-
 require_once dirname(__FILE__).'/../lib/domainGeneratorConfiguration.class.php';
 require_once dirname(__FILE__).'/../lib/domainGeneratorHelper.class.php';
 
@@ -13,4 +12,13 @@ require_once dirname(__FILE__).'/../lib/domainGeneratorHelper.class.php';
  */
 class domainActions extends autoDomainActions
 {
+  public function executeListExportCsv(sfWebRequest $request) {
+    $this->pDomainProfiles = DomainProfileTable::getInstance()->createQuery()
+                              ->orderBy('created_at DESC')
+                              ->execute();
+    $this->setLayout('csv');
+	  $this->getResponse()->clearHttpHeaders();
+    $this->getResponse()->setHttpHeader("Content-Type", 'text/csv');
+    $this->getResponse()->setHttpHeader('Content-Disposition', 'attachment; filename=DomainProfiles-'.date("Y-m-d").'.csv;');
+  }
 }
