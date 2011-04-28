@@ -200,7 +200,6 @@ input.graybtnwide {
   height: 260px;
 }
 
-
 a.button,
 button.button {
   background:url(/img/savel.png) 0px 0px no-repeat;
@@ -638,7 +637,6 @@ th.headerSortUp.last {
 
 #filter-period-label{
     position: relative;
-    width: 100px;
     z-index: 50;
     padding-top: 5px;    
 }

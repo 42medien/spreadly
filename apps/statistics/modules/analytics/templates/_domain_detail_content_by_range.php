@@ -36,57 +36,38 @@ if ($pLikes) {
       </th>
       <th align="center" valign="middle">
       	<div class="sortlink">
-      		<?php echo __('Likes');?>
-	  	    <a href="#" class="helptip">
-          	<img src="/img/qus_icon.png" alt="<?php echo __("Likes"); ?>" class="tooltip-icon" />
-          </a>
+					<span class="myqtip" title="<?php echo __('Number of likes received for your content on your url.'); ?>">
+      			<?php echo __('Likes');?>
+      		</span>
 	  	  </div>
-	      <div class="tooltip">
-	      	<h3><?php echo __('Likes'); ?></h3>
-         	<?php echo __('Number of likes received for your content on your url.'); ?>
-        </div>
       </th>
       <th align="center" valign="middle">
       	<div class="sortlink">
-      		<?php echo __('Spreads');?>
-		  	  <a href="#" class="helptip">
-	        	<img src="/img/qus_icon.png" alt="<?php echo __("Spreads"); ?>" class="tooltip-icon" />
-	      	</a>
+					<span class="myqtip" title="<?php echo __('Total number of likes published in the social networks listed.'); ?>">
+      			<?php echo __('Spreads');?>
+      		</span>
 	  	  </div>
-	      <div class="tooltip"><h3><?php echo __('Spreads'); ?></h3><?php echo __('Total number of likes published in the social networks listed.'); ?></div>
       </th>
       <th align="center" valign="middle">
       	<div class="sortlink">
-      		<?php echo __('Reach');?>
-		  	  <a href="#" class="helptip">
-	        	<img src="/img/qus_icon.png" alt="<?php echo __("Reach"); ?>" class="tooltip-icon" />
-	        </a>
+					<span class="myqtip" title="<?php echo __('Maximale Reichweite der Empfehlung'); ?>">
+      			<?php echo __('Reach');?>
+      		</span>
 	  	  </div>
-	      <div class="tooltip"><h3><?php echo __('Reach'); ?></h3><?php echo __('Maximale Reichweite der Empfehlung'); ?></div>
       </th>
       <th align="center" valign="middle">
       	<div class="sortlink">
-      		<?php echo __('Clickbacks');?>
-		  	  <a href="#" class="helptip">
-	        	<img src="/img/qus_icon.png" alt="<?php echo __("Clickbacks"); ?>" class="tooltip-icon" />
-	        </a>
+					<span class="myqtip" title="<?php echo __('Anzahl der Besucher die auf eine Empfehlung gekommen sind'); ?>">
+      			<?php echo __('Clickbacks');?>
+      		</span>
 	  	  </div>
-	      <div class="tooltip">
-	      	<h3><?php echo __('Clickbacks'); ?></h3>
-	      	<?php echo __('Anzahl der Besucher die auf eine Empfehlung gekommen sind'); ?>
-	      </div>
       </th>
       <th align="center" valign="middle" class="last">
       	<div class="sortlink">
-      		<?php echo __('Clickback-Likes');?>
-		  	  <a href="#" class="helptip">
-	        	<img src="/img/qus_icon.png" alt="<?php echo __("Clickback-Likes"); ?>" class="tooltip-icon" />
-	        </a>
+					<span class="myqtip" title="<?php echo __('Anzahl der Besucher die auf eine Empfehlung gekommen sind und dann weiterempfohlen haben'); ?>">
+      			<?php echo __('Clickback-Likes');?>
+      		</span>
 	  	  </div>
-	      <div class="tooltip">
-	      	<h3><?php echo __('Clickback-Likes'); ?></h3>
-	      	<?php echo __('Anzahl der Besucher die auf eine Empfehlung gekommen sind und dann weiterempfohlen haben'); ?>
-	      </div>
       </th>
     </tr>
     </thead>

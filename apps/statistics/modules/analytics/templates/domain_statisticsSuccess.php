@@ -15,11 +15,10 @@ slot('content');
         <div class="box">
           <p>
           	<?php echo __("Likes"); ?>
-          	<a href="#" class="helptip">
+          	<a href="#" class="myqtip" title="<?php echo __('Number of likes received for your content on your url.'); ?>">
           		<img src="/img/qus_icon.png" alt="<?php echo __("Likes"); ?>" class="tooltip-icon" />
           	</a>
           </p>
-          <div class="tooltip"><h3><?php echo __('Likes'); ?></h3><?php echo __('Number of likes received for your content on your url.'); ?></div>
 	        <strong><?php echo $pHost->getLikes(); ?></strong>
       </div>
       </div>
@@ -34,11 +33,10 @@ slot('content');
         <div class="box">
           <p>
           	<?php echo __("Spreads"); ?>
-          	<a href="#" class="helptip">
+          	<a href="#" class="myqtip" title="<?php echo __("Total number of likes published in the social networks listed."); ?>">
           		<img src="/img/qus_icon.png" class="tooltip-icon" alt="<?php echo __("Spreads"); ?>"/>
           	</a>
           </p>
-          <div class="tooltip"><h3><?php echo __('Spreads'); ?></h3><?php echo __("Total number of likes published in the social networks listed."); ?></div>
           <strong class="shares"><?php echo $pHost->getShares(); ?></strong></div>
       </div>
       <ul>
@@ -52,11 +50,10 @@ slot('content');
         <div class="box">
           <p class="media_text_space">
           	<?php echo __("Media Penetration"); ?>
-          	<a href="#" class="helptip">
-          		<img src="/img/qus_icon.png" title="<?php echo __("Media Penetration"); ?>" alt="<?php echo __("Media Penetration"); ?>"  class="tooltip-icon" />
+          	<a href="#" class="myqtip" title="<?php echo __("Total number of contacts that are able to view the like referring to your content."); ?>">
+          		<img src="/img/qus_icon.png" class="tooltip-icon" />
           	</a>
           </p>
-          <div class="tooltip"><h3><?php echo __('Media Penetration'); ?></h3><?php echo __("Total number of contacts that are able to view the like referring to your content."); ?></div>
           <strong class="media"><?php echo truncate_number($pHost->getMediaPenetration()); ?></strong></div>
       </div>
       <ul>

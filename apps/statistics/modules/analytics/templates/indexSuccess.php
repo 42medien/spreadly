@@ -8,44 +8,31 @@
 	    	<tr>
 	  			<th align="center" valign="middle" class="first">
 	  				<div class="sortlink no-sort">
-	  					<?php echo __('Websites last 30 days'); ?>
-	  	    	<a href="#" class="helptip">
-          		<img src="/img/qus_icon.png" alt="<?php echo __("Websites last 30 days"); ?>" class="tooltip-icon" />
-          	</a>
+	  	    		<span class="myqtip" title="<?php echo __('Aktivitäten auf Domains in den letzten 30 Tagen'); ?>">
+	  						<?php echo __('Websites last 30 days'); ?>
+          		</span>
 	  	    	</div>
-	         	<div class="tooltip"><h3><?php echo __('Websites last 30 days'); ?></h3><?php echo __('Aktivitäten auf Domains in den letzten 30 Tagen'); ?></div>
 	  			</th>
 	  	    <th align="center" valign="middle">
-	  	    	<div class="sortlink no-sort"><?php echo __('Likes');?>
-	  	    	<a href="#" class="helptip">
-          		<img src="/img/qus_icon.png" alt="<?php echo __("Likes"); ?>" class="tooltip-icon" />
-          	</a>
+	  	    	<div class="sortlink no-sort">
+							<span class="myqtip" title="<?php echo __('Number of likes received for your content on your url.'); ?>">
+		  	    		<?php echo __('Likes');?>
+	          	</span>
 	  	    	</div>
-	         	<div class="tooltip">
-	         		<h3><?php echo __('Likes'); ?></h3>
-	         		<?php echo __('Number of likes received for your content on your url.'); ?>
-	         	</div>
 	  	    </th>
 	  	    <th align="center" valign="middle">
 	  	    	<div class="sortlink no-sort">
-	  	    		<?php echo __('Spreads');?>
-		  	    	<a href="#" class="helptip">
-	          		<img src="/img/qus_icon.png" alt="<?php echo __("Spreads"); ?>" class="tooltip-icon" />
-	          	</a>
+							<span class="myqtip" title="<?php echo __('Total number of likes published in the social networks listed.'); ?>">
+	  	    			<?php echo __('Spreads');?>
+	  	    		</span>
 	  	    	</div>
-	         	<div class="tooltip"><h3><?php echo __('Spreads'); ?></h3><?php echo __('Total number of likes published in the social networks listed.'); ?></div>
 	 	    	</th>
 	  			<th align="center" valign="middle" class="last">
 	  				<div class="sortlink no-sort" style="white-space: nowrap;">
-	  					<?php echo __('Media Penetration'); ?>
-	          	<a href="#" class="helptip">
-	          		<img src="/img/qus_icon.png" title="<?php echo __("Media Penetration"); ?>" alt="<?php echo __("Media Penetration"); ?>"  class="tooltip-icon" />
-	          	</a>
+							<span class="myqtip" title="<?php echo __("Total number of contacts that are able to view the like referring to your content."); ?>">
+	  						<?php echo __('Media Penetration'); ?>
+	  					</span>
 	  				</div>
-          	<div class="tooltip">
-          		<h3><?php echo __('Media Penetration'); ?></h3>
-          		<?php echo __("Total number of contacts that are able to view the like referring to your content."); ?>
-          	</div>
 	  			</th>
 	    	</tr>
 	    </thead>
@@ -74,72 +61,45 @@
     	<tr>
   			<th align="center" valign="middle" class="first">
   				<div class="sortlink no-sort">
-  					<?php echo __('Deals last 30 days'); ?>
-	          	<a href="#" class="helptip">
-	          		<img src="/img/qus_icon.png" title="<?php echo __("Deals last 30 days"); ?>" alt="<?php echo __("Deals last 30 days"); ?>"  class="tooltip-icon" />
-	          	</a>
-	  				</div>
-          	<div class="tooltip">
-          		<h3><?php echo __('Deals last 30 days'); ?></h3>
-          		<?php echo __("Aktivitäten auf Deals in den letzten 30 Tagen"); ?>
-          	</div>
+						<span class="myqtip" title="<?php echo __("Aktivitäten auf Deals in den letzten 30 Tagen"); ?>">
+	  					<?php echo __('Deals last 30 days'); ?>
+	  				</span>
+  				</div>
   			</th>
   			<th align="center" valign="middle">
   				<div class="sortlink no-sort">
-  					<?php echo __('Deals left');?>
-  					<a href="#" class="helptip">
-	          	<img src="/img/qus_icon.png" alt="<?php echo __("Deals left"); ?>" class="tooltip-icon" />
-	          </a>
+						<span class="myqtip" title="<?php echo __("Anzahl der noch verfügbaren Deals"); ?>">
+  						<?php echo __('Deals left');?>
+  					</span>
   				</div>
-          <div class="tooltip">
-          	<h3><?php echo __('Deals left'); ?></h3>
-          	<?php echo __("Anzahl der noch verfügbaren Deals"); ?>
-          </div>
   			</th>
   			<th align="center" valign="middle">
   				<div class="sortlink no-sort">
-  					<?php echo __('Days left');?>
-  					<a href="#" class="helptip">
-	          	<img src="/img/qus_icon.png" alt="<?php echo __("Days left"); ?>" class="tooltip-icon" />
-	          </a>
+						<span class="myqtip" title="<?php echo __("Restlaufzeit des Deals"); ?>">
+  						<?php echo __('Days left');?>
+  					</span>
   				</div>
-          <div class="tooltip">
-          	<h3><?php echo __('Days left'); ?></h3>
-          	<?php echo __("Restlaufzeit des Deals"); ?>
-          </div>
   			</th>
   	    <th align="center" valign="middle">
   	    	<div class="sortlink no-sort">
-  	    		<?php echo __('Likes');?>
-	  	    	<a href="#" class="helptip">
-          		<img src="/img/qus_icon.png" alt="<?php echo __("Likes"); ?>" class="tooltip-icon" />
-          	</a>
-	  	    	</div>
-	         	<div class="tooltip">
-	         		<h3><?php echo __('Likes'); ?></h3>
-	         		<?php echo __('Number of likes received for your content on your url.'); ?>
-	         	</div>
+  	    		<span class="myqtip" title="<?php echo __('Number of likes received for your content on your url.'); ?>">
+  	    			<?php echo __('Likes');?>
+  	    		</span>
+  	    	</div>
   	    </th>
   	    <th align="center" valign="middle">
   	    	<div class="sortlink no-sort">
-  	    		<?php echo __('Shares');?>
-		  	    	<a href="#" class="helptip">
-	          		<img src="/img/qus_icon.png" alt="<?php echo __("Spreads"); ?>" class="tooltip-icon" />
-	          	</a>
-	  	    	</div>
-	         	<div class="tooltip"><h3><?php echo __('Spreads'); ?></h3><?php echo __('Total number of likes published in the social networks listed.'); ?></div>
+  	    		<span class="myqtip" title="<?php echo __('Total number of likes published in the social networks listed.'); ?>">
+  	    			<?php echo __('Shares');?>
+  	    		</span>
+	  	    </div>
   	    </th>
   			<th align="center" valign="middle" class="last">
   				<div class="sortlink no-sort" style="white-space: nowrap;">
-  					<?php echo __('Media Penetration'); ?>
-	          	<a href="#" class="helptip">
-	          		<img src="/img/qus_icon.png" title="<?php echo __("Media Penetration"); ?>" alt="<?php echo __("Media Penetration"); ?>"  class="tooltip-icon" />
-	          	</a>
-	  				</div>
-          	<div class="tooltip">
-          		<h3><?php echo __('Media Penetration'); ?></h3>
-          		<?php echo __("Total number of contacts that are able to view the like referring to your content."); ?>
-          	</div>
+  					<span class="myqtip" title="<?php echo __("Total number of contacts that are able to view the like referring to your content."); ?>">
+	  					<?php echo __('Media Penetration'); ?>
+	  				</span>
+  				</div>
   			</th>
     	</tr>
     </thead>
@@ -170,45 +130,31 @@
 	    	<tr>
 	  			<th align="center" valign="middle" class="first">
 	  				<div class="sortlink no-sort">
-	  					<?php echo __('Top-Pages last 30 days'); ?>
-	          	<a href="#" class="helptip">
-	          		<img src="/img/qus_icon.png" title="<?php echo __("Top-Pages last 30 days"); ?>" alt="<?php echo __("Top-Pages last 30 days"); ?>"  class="tooltip-icon" />
-	          	</a>
+	  					<span class="myqtip" title="<?php echo __("Aktivste Seiten in den letzten 30 Tagen"); ?>">
+		  					<?php echo __('Top-Pages last 30 days'); ?>
+		  				</span>
 	  				</div>
-          	<div class="tooltip">
-          		<h3><?php echo __('Top-Pages last 30 days'); ?></h3>
-          		<?php echo __("Aktivste Seiten in den letzten 30 Tagen"); ?>
-          	</div>
 	  			</th>
 	  	    <th align="center" valign="middle">
 	  	    	<div class="sortlink no-sort">
-	  	    		<?php echo __('Likes');?>
-	  	    	<a href="#" class="helptip">
-          		<img src="/img/qus_icon.png" alt="<?php echo __("Likes"); ?>" class="tooltip-icon" />
-          	</a>
+	  	    		<span class="myqtip" title="<?php echo __('Number of likes received for your content on your url.'); ?>">
+	  	    			<?php echo __('Likes');?>
+	  	    		</span>
 	  	    	</div>
-	         	<div class="tooltip"><h3><?php echo __('Likes'); ?></h3><?php echo __('Number of likes received for your content on your url.'); ?></div>
 	  	    </th>
 	  	    <th align="center" valign="middle">
 	  	    	<div class="sortlink no-sort">
-	  	    		<?php echo __('Shares');?>
-		  	    	<a href="#" class="helptip">
-	          		<img src="/img/qus_icon.png" alt="<?php echo __("Spreads"); ?>" class="tooltip-icon" />
-	          	</a>
+	  	    		<span class="myqtip" title="<?php echo __('Total number of likes published in the social networks listed.'); ?>">
+	  	    			<?php echo __('Shares');?>
+	  	    		</span>
 	  	    	</div>
-	         	<div class="tooltip"><h3><?php echo __('Spreads'); ?></h3><?php echo __('Total number of likes published in the social networks listed.'); ?></div>
 	  	    </th>
 	  			<th align="center" valign="middle" class="last">
 	  				<div class="sortlink no-sort" style="white-space: nowrap;">
-	  					<?php echo __('Media Penetration'); ?>
-	          	<a href="#" class="helptip">
-	          		<img src="/img/qus_icon.png" title="<?php echo __("Media Penetration"); ?>" alt="<?php echo __("Media Penetration"); ?>"  class="tooltip-icon" />
-	          	</a>
+	  	    		<span class="myqtip" title="<?php echo __("Total number of contacts that are able to view the like referring to your content."); ?>">
+	  						<?php echo __('Media Penetration'); ?>
+	  					</span>
 	  				</div>
-          	<div class="tooltip">
-          		<h3><?php echo __('Media Penetration'); ?></h3>
-          		<?php echo __("Total number of contacts that are able to view the like referring to your content."); ?>
-          	</div>
 	  			</th>
 	    	</tr>
 	    </thead>

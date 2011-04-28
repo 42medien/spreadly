@@ -25,7 +25,25 @@ var AnalyticsTables = {
       jQuery('#top-url-table').tableScroll({height: 150, flush: true});
       jQuery('#top-like-table').tableScroll({height: 150, flush: true});
       
-      jQuery(".helptip").tooltip({ opacity: 1 });
+      jQuery('.myqtip').qtip({
+//        style: { name: 'cream' },
+        position: {
+           corner: {
+              target: 'rightTop',
+              tooltip: 'leftBottom'
+            }
+        },
+        style: {
+          border: {
+             width: 5,
+             radius: 10
+          },
+          padding: 10, 
+          textAlign: 'center',
+          tip: true,
+          name: 'cream' // Style it according to the preset 'cream' style
+       }
+      });      
       
     },
     
