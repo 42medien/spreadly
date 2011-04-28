@@ -94,10 +94,10 @@ if ($pLikes) {
         <td align="center" valign="middle"><div><?php echo $url->getAge() ?></div></td>
         <td align="center" valign="middle"><div><?php echo __($url->getGender()) ?></div></td>
         <td align="center" valign="middle"><div><?php echo __($url->getRelationship()) ?></div></td>
-        <td align="center" valign="middle"><div><?php echo $url->getShares() ?></div></td>
-        <td align="center" valign="middle"><div><?php echo $url->getMediaPenetration() ?></div></td>
-        <td align="center" valign="middle"><div><?php echo $url->getClickbacks() ? $url->getClickbacks() : 0 ?></div></td>
-        <td align="center" valign="middle" class="last"><div><?php echo $url->getClickbackLikes() ? $url->getClickbackLikes() : 0 ?></div></td>
+        <td align="center" valign="middle"><div><?php echo point_format($url->getShares()) ?></div></td>
+        <td align="center" valign="middle"><div><?php echo point_format($url->getMediaPenetration()) ?></div></td>
+        <td align="center" valign="middle"><div><?php echo $url->getClickbacks() ? point_format($url->getClickbacks()) : 0 ?></div></td>
+        <td align="center" valign="middle" class="last"><div><?php echo $url->getClickbackLikes() ? point_format($url->getClickbackLikes()) : 0 ?></div></td>
       </tr>
     <?php
       }
