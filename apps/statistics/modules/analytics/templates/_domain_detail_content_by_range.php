@@ -1,5 +1,5 @@
 <?php
-use_helper('Text', 'YiidUrl');
+use_helper('Text', 'YiidUrl', "YiidNumber");
 
 if ($pLikes) {
   slot('content')
@@ -31,7 +31,7 @@ if ($pLikes) {
     <tr>
       <th align="center" valign="middle" class="first">
       	<div class="sortlink no-sort">
-      		<?php echo __('Top-URLs'); ?>
+      		<?php echo __('URLs'); ?>
       	</div>
       </th>
       <th align="center" valign="middle">
@@ -82,11 +82,11 @@ if ($pLikes) {
               <?php echo range_sensitive_link_to(truncate_text($url->getUrl(), 60), 'analytics/url_detail', array('query_string' => 'domainid='.$pDomainProfile->getId().'&url='.urlencode($url->getUrl()))); ?>
           </div>
         </td>
-        <td align="center"><div><?php echo $url->getLikes() ?></div></td>
-        <td align="center" valign="middle"><div><?php echo $url->getShares() ?></div></td>
-        <td align="center" valign="middle"><div><?php echo $url->getMediaPenetration() ?></div></td>
-        <td align="center" valign="middle"><div><?php echo $url->getClickbacks() ?></div></td>
-        <td align="center" class="last"><div><?php echo $url->getClickbackLikes() ?></div></td>
+        <td align="center"><div><?php echo point_format($url->getLikes()); ?></div></td>
+        <td align="center" valign="middle"><div><?php echo point_format($url->getShares()); ?></div></td>
+        <td align="center" valign="middle"><div><?php echo point_format($url->getMediaPenetration()); ?></div></td>
+        <td align="center" valign="middle"><div><?php echo point_format($url->getClickbacks()); ?></div></td>
+        <td align="center" class="last"><div><?php echo point_format($url->getClickbackLikes()); ?></div></td>
       </tr>
     <?php
       }
