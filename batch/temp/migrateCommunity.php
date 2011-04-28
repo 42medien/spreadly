@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__FILE__).'/../../config/ProjectConfiguration.class.php');
 
-$configuration = ProjectConfiguration::getApplicationConfiguration('statistics', 'dev', false);
+$configuration = ProjectConfiguration::getApplicationConfiguration('statistics', 'prod', false);
 sfContext::createInstance($configuration);
 
 $logger = sfContext::getInstance()->getLogger();
@@ -9,7 +9,7 @@ $dm = MongoManager::getStatsDM();
 
 $repos = array('Documents\AnalyticsActivity', 'Documents\ActivityStats', 'Documents\ActivityUrlStats', 'Documents\DealStats', 'Documents\DealUrlStats', 'Documents\DealSummary', 'Documents\DealUrlSummary', 'Documents\HostSummary', 'Documents\UrlSummary');
 
-$repo = $repos[2];
+$repo = $repos[0];
 
   $services = array('Facebook', 'Twitter', 'Google', 'LinkedIn', 'Linkedin');
   echo "Fixing Repository: $repo …\n";
