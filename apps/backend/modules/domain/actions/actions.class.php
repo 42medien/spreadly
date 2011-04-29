@@ -16,6 +16,13 @@ class domainActions extends autoDomainActions
     $this->pDomainProfiles = DomainProfileTable::getInstance()->createQuery()
                               ->orderBy('created_at DESC')
                               ->execute();
+
+    $this->pOtherUsers = sfGuardUserTable::getInstance()->createQuery()
+                              ->from('SfGuardUser s')
+                              ->leftJoin('s.DomainProfiles d')
+                              ->where('d.id IS NULL')
+                              ->execute();
+          
     $this->setLayout('csv');
 	  $this->getResponse()->clearHttpHeaders();
     $this->getResponse()->setHttpHeader("Content-Type", 'text/csv');
