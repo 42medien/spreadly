@@ -22,8 +22,7 @@
 				    <?php } ?>
 				    	<br />
 				    	<?php echo link_to($data['url'], 'analytics/url_statistics', array('query_string' => 'url='.$data['url'].'&domainid='.$pHostId, 'class' => 'analytix-filter-link table-filter-link'));  ?>
-      				<?php //echo link_to($data['url'], 'analytics/url_statistics', array('query_string' => 'com=all&url='.$data['url'].'&host_id='.$pHostId.'&date-from='.$pFrom.'&date-to='.$pTo.'&type=url_activities', 'class' => 'analytix-filter-link table-filter-link'));  ?>
-  			  </div>
+      	  </div>
   			</td>
 		    <td align="center"><div><?php echo $data['distribution'] ?>%</div></td>
 		    <td align="center" valign="middle"><div><?php echo $data['pos'] ?></div></td>
