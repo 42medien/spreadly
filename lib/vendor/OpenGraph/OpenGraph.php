@@ -75,12 +75,9 @@ class OpenGraph implements Iterator
                            ',$HTML);
     }
 
-    $old_libxml_error = libxml_use_internal_errors(true);
-
+    libxml_use_internal_errors(true);
     $doc = new DOMDocument();
     $doc->loadHTML($HTML);
-
-    libxml_use_internal_errors($old_libxml_error);
 
     $tags = $doc->getElementsByTagName('meta');
     if (!$tags || $tags->length === 0) {
