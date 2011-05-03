@@ -1,28 +1,22 @@
 <?php
+namespace Spreadly\Queue;
+
 /**
  * ContactImportJob
  *
  * @author Hannes Schippmann
  */
-abstract class ContactImportJob {
+class ContactImportJob extends Job {
   private $onlineIdentityId;
   
   public function __construct($onlineIdentityId) {
    parent::__construct(); 
    $this->onlineIdentityId = $onlineIdentityId;
   }
-  
-  public function fromArray($array) {
-    $this->onlineIdentityId = $array['onlineIdentiyId'];
-  }
-
-  public function toArray() {
-    return array('onlineIdentityId' => $this->onlineIdentityId, 'type' => $this->type);
-  }
-  
+    
   public function execute() {
     $lOnlineIdentity = OnlineIdentityTable::getInstance()->find($this->onlineIdentityId);
-    sfContext::getInstance()->getLogger()->debug("{Daemon} ImportContacts: ". $this->onlineIdentityId);
+    sfContext::getInstance()->getLogger()->notice("{ContactImportJob} importing for oi_id: ". $this->onlineIdentityId);
     if ($lOnlineIdentity) {
       $lOnlineIdentity->setLastFriendRefresh(time());
       $lOnlineIdentity->save();
@@ -32,7 +26,7 @@ abstract class ContactImportJob {
           $lObject->importContacts($lOnlineIdentity);
         }
       } catch (Exception $e) {
-        sfContext::getInstance()->getLogger()->err("{Daemon} ImportContacts: " . $e->getMessage());
+        sfContext::getInstance()->getLogger()->err("{ContactImportJob} importing failed: " . $e->getMessage());
       }
     }
   }
