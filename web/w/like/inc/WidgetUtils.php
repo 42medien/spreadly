@@ -26,9 +26,9 @@ class WidgetUtils {
     }
 
     if (isset($_GET['url']) && !empty($_GET['url'])) {
-      $this->aUrl = urldecode($_GET['url']);
+      $this->aUrl = trim(urldecode($_GET['url']));
     } else {
-      $this->aUrl = urldecode($_SERVER['HTTP_REFERER']);
+      $this->aUrl = trim(urldecode($_SERVER['HTTP_REFERER']));
     }
 
     if (isset($_GET['social']) && !empty($_GET['social'])) {
