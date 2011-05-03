@@ -793,3 +793,32 @@ th.headerSortUp.last {
   font-size: 11px;
   padding-top: 3px;
 }
+
+#subscribe-api-box{
+  width: 550px;
+  padding: 20px;
+  height: 300px;
+}
+
+#subscribe-api-box .btnwording{
+  width: 110px;
+  margin-right: 10px;
+}
+
+#jgd_dd_domain_profile_protocol{
+  z-index: 0;
+}
+
+#subscribe-api{
+  clear:both;
+}
+
+.form-response{
+  margin-top: 20px;
+}
+
+.hide{
+  display:none;
+}
+
+

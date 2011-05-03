@@ -133,6 +133,10 @@ nodomain:
 imprint:
   url:  /imprint
   param: { module: system, action: imprint}
+  
+subscribe_api: 
+  url: /subscribe
+  param: { module: domain_profiles, action: subscribe_api}  
 
 
 # You can find more information about this file on the symfony website:

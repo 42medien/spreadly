@@ -3,14 +3,14 @@
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	  <thead>
 	  <tr class="table-title">
-	    <th width="40" height="34"><img src="/img/table-thl.jpg" width="5" height="34" alt="" class="alignleft" /></th>
-	    <th width="520" align="center" valign="middle"><?php echo __('Website');?></th>
-	    <th width="46" align="center" valign="middle">&nbsp;</th>
-	    <th width="488" align="center" valign="middle"><?php echo __('Status');?></th>
-	    <th width="65" align="center" valign="middle"><?php echo __('Get Code');?></th>
-	    <th width="84" align="center" valign="middle"><?php echo __('Verify');?></th>
-	    <th width="48" align="center" valign="middle"><?php echo __('Delete');?></th>
-	    <th width="9" align="center" valign="middle"><img src="/img/table-thr.jpg" width="5" height="34" alt="" class="alignright" /></th>
+	    <th><img src="/img/table-thl.jpg" width="5" height="34" alt="" class="alignleft" /></th>
+	    <th align="center" valign="middle"><?php echo __('Website');?></th>
+	    <th align="center" valign="middle">&nbsp;</th>
+	    <th align="center" valign="middle"><?php echo __('Status');?></th>
+	    <th align="center" valign="middle"><?php echo __('Get Code');?></th>
+	    <th align="center" valign="middle"><?php echo __('Verify');?></th>
+	    <th align="center" valign="middle"><?php echo __('Delete');?></th>
+	    <th align="center" valign="middle"><img src="/img/table-thr.jpg" width="5" height="34" alt="" class="alignright" /></th>
 	  </tr>
 	  </thead>
 	  <tbody>

@@ -18,7 +18,8 @@
         <?php }?>
 
       <?php } elseif($domain_profile->getState() == DomainProfileTable::STATE_VERIFIED) { ?>
-      	<?php echo __('Verified!'); ?>
+      	<?php echo __('Verified!'); ?>&nbsp;
+      	<?php echo link_to('Setup advanced notifications now!', 'domain_profiles/subscribe_api?host_id='.$domain_profile->getId() , array('class' => 'colorbox')); ?>
       <?php } ?>
     </td>
     <td align="center" valign="middle">

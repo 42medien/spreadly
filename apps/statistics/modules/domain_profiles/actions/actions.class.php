@@ -135,4 +135,42 @@ class domain_profilesActions extends sfActions
     $url = strtolower($url);
     return parse_url($url, PHP_URL_HOST);
   }
+
+  public function executeSubscribe_api(sfWebRequest $request) {
+  	$this->pHostId = $request->getParameter('host_id');
+    $this->pDomainProfile = Doctrine::getTable('DomainProfile')->find($this->pHostId);
+    $this->pEndpoint = "http://www.example.com/endpoint";
+  }
+
+  public function executeCheck_endpoint(sfWebRequest $request) {
+  	$this->getResponse()->setContentType('application/json');
+  	$lUrl = $request->getParameter('ep-url');
+
+  	/*
+  	return $this->renderText(
+    	json_encode(array(
+    		'success' => true
+    	))
+    );*/
+
+
+  	return $this->renderText(
+    	json_encode(array(
+    		'success' => false,
+    		'msg' => _('Something went wrong')
+    	))
+    );
+
+  }
+
+  public function executeUnsubscribe_api(sfWebRequest $request) {
+  	$this->getResponse()->setContentType('application/json');
+
+  	return $this->renderText(
+    	json_encode(array(
+    		'success' => true,
+    		'msg' => _('Subscription stopped')
+    	))
+    );
+  }
 }
