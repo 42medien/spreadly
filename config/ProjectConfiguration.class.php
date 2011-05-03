@@ -43,6 +43,10 @@ class ProjectConfiguration extends sfProjectConfiguration {
     // load mongo-documents
     $classLoader = new Doctrine\Common\ClassLoader('Repositories', dirname(__FILE__).'/../lib/mongo');
     $classLoader->register();
+
+    // load queue stuff
+    $classLoader = new Doctrine\Common\ClassLoader('Queue', dirname(__FILE__).'/../lib');
+    $classLoader->register();
   }
 
   public function configureDoctrine(Doctrine_Manager $manager) {

@@ -12,10 +12,10 @@ use \MongoDate;
  * @HasLifecycleCallbacks
  * @InheritanceType("SINGLE_COLLECTION")
  * @DiscriminatorField(fieldName="type")
- * @DiscriminatorMap({"contact_import"="ContactImportJob"})
+ * @DiscriminatorMap({"contact_import"="ContactImportJob", "pointless"="PointlessJob"})
  */
 abstract class Job extends BaseDocument {
-  private const DEFAULT_PRIORITY = 1;
+  const DEFAULT_PRIORITY = 1;
   
   /** @Id */
   protected $id;
@@ -62,7 +62,8 @@ abstract class Job extends BaseDocument {
     $this->setError($error);
     $this->setFinishedAt(null);
     $this->setScheduled(true);
-    $this->setScheduleCount($this->getScheduleCount()++);
+    $cnt = $this->getScheduleCount();
+    $this->setScheduleCount($cnt++);
     $this->setScheduledAt(new MongoDate()); 
   }
   

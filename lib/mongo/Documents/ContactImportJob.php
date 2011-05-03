@@ -1,5 +1,5 @@
 <?php
-namespace Spreadly\Queue;
+namespace Documents;
 
 /**
  * ContactImportJob
