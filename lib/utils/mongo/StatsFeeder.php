@@ -48,7 +48,7 @@ class StatsFeeder {
    */
   public static function createAnalyticsActivity($pYiidActivity) {
     $dm = MongoManager::getStatsDM();
-    $url = strtolower($pYiidActivity->getUrl());
+    $url = $pYiidActivity->getUrl();
 
     $activity = new AnalyticsActivity();
 
@@ -70,7 +70,7 @@ class StatsFeeder {
 
   private static function fillParams($pYiidActivity) {
     $pUser = $pYiidActivity->getUser();
-    $url = strtolower($pYiidActivity->getUrl());
+    $url = $pYiidActivity->getUrl();
     $host = parse_url($url, PHP_URL_HOST);
     $day = new MongoDate(strtotime(date("Y-m-d", $pYiidActivity->getC())));
     $hourOfDay = date("G", $pYiidActivity->getC());
