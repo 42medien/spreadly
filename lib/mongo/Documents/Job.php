@@ -43,6 +43,7 @@ abstract class Job extends BaseDocument {
 
   /**
    * The execute function, that gets called by the workers
+   * @throws an Exception in case of an error
    */
   abstract public function execute();
   
@@ -66,11 +67,9 @@ abstract class Job extends BaseDocument {
   }
   
   /**
-   * pre-save hook
+   * Sets some things before the job is persisted
    *
    * @PrePersist
-   *
-   * @author Hannes Schippmann
    */
   public function prePersist() {
     $this->setScheduled(true);

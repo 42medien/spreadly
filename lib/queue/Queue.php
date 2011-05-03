@@ -5,7 +5,7 @@ use \MongoDate,
     \MongoManager;
 
 /**
- * Queue for scheduled jobs
+ * Queue for scheduled jobs. It functions as an adapter for the underlying infrastructure (mongo, amazon sqs, etc.)
  *
  * @author Hannes Schippmann
  */

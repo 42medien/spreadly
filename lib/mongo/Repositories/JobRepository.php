@@ -7,7 +7,7 @@ use Doctrine\ODM\MongoDB\DocumentRepository,
 
 class JobRepository extends DocumentRepository {
   public function next() {
-    return $this->createQueryBuilder('Job')
+    return $this->createQueryBuilder()
                 // Find the job
                 ->findAndModify()
                 ->returnNew()
