@@ -20,8 +20,14 @@ abstract class Job extends BaseDocument {
   /** @Id */
   protected $id;
 
+  /** @Int */
+  protected $priority;
+
   /** @Boolean */
   protected $scheduled;
+
+  /** @Int */
+  protected $schedule_count;
 
   /** @Date */
   protected $scheduled_at;
@@ -31,14 +37,33 @@ abstract class Job extends BaseDocument {
 
   /** @Date */
   protected $finished_at;
-  
-  /** @Int */
-  protected $priority;
+
+  /** @String */
+  protected $error;
 
   /**
    * The execute function, that gets called by the workers
    */
   abstract public function execute();
+  
+  /**
+   * The finished function should be called by the worker process after execute is successfully finished
+   */
+  public function finished() {
+    $this->setFinishedAt(new MongoDate());
+  }
+
+  /**
+   * The reschedule function should be called by the worker process if the job has to reenter the queue, i.e. in case of an error
+   * @param The reason why this job has to be rescheduled. Probably because of some kind of error.
+   */
+  public function reschedule($error) {
+    $this->setError($error);
+    $this->setFinishedAt(null);
+    $this->setScheduled(true);
+    $this->setScheduleCount($this->getScheduleCount()++);
+    $this->setScheduledAt(new MongoDate()); 
+  }
   
   /**
    * pre-save hook
@@ -49,6 +74,7 @@ abstract class Job extends BaseDocument {
    */
   public function prePersist() {
     $this->setScheduled(true);
+    $this->setScheduleCount(1);
     $this->setScheduledAt(new MongoDate());
     if(!$this->getPriority()) {
       $this->setPriority(self::DEFAULT_PRIORITY);
