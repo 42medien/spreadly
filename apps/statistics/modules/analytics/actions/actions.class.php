@@ -8,9 +8,7 @@
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class analyticsActions extends sfActions
-{
-
+class analyticsActions extends sfActions {
 
   /**
    * initialize variables and check authentication
@@ -98,16 +96,16 @@ class analyticsActions extends sfActions
   public function executeGet_domain_detail(sfWebRequest $request) {
     $selector = $request->getParameter("date-selector");
 
-      switch ($selector) {
-        case "now":
-        case "yesterday":
-          $request->setParameter("date-to", date("Y-m-d", strtotime($selector)));
-          break;
-        case "7":
-        case "30":
-          $request->setParameter("date-to", date("Y-m-d", strtotime("yesterday")));
-          $request->setParameter("date-from", date("Y-m-d", strtotime($selector." days ago")));
-          break;
+    switch ($selector) {
+      case "now":
+      case "yesterday":
+        $request->setParameter("date-to", date("Y-m-d", strtotime($selector)));
+        break;
+      case "7":
+      case "30":
+        $request->setParameter("date-to", date("Y-m-d", strtotime("yesterday")));
+        $request->setParameter("date-from", date("Y-m-d", strtotime($selector." days ago")));
+        break;
     }
 
     if ($request->getParameter("date-from")) {
@@ -194,17 +192,17 @@ class analyticsActions extends sfActions
   public function executeGet_url_detail(sfWebRequest $request) {
     $selector = $request->getParameter("date-selector");
 
-      switch ($selector) {
-        case "now":
-        case "yesterday":
-          $request->setParameter("date-to", date("Y-m-d", strtotime($selector)));
-          break;
-        case "7":
-        case "30":
-          $request->setParameter("date-to", date("Y-m-d", strtotime("yesterday")));
-          $request->setParameter("date-from", date("Y-m-d", strtotime($selector." days ago")));
-          break;
-      }
+    switch ($selector) {
+      case "now":
+      case "yesterday":
+        $request->setParameter("date-to", date("Y-m-d", strtotime($selector)));
+        break;
+      case "7":
+      case "30":
+        $request->setParameter("date-to", date("Y-m-d", strtotime("yesterday")));
+        $request->setParameter("date-from", date("Y-m-d", strtotime($selector." days ago")));
+        break;
+    }
 
     if ($request->getParameter("date-from")) {
       $this->forward('analytics', 'get_url_detail_by_range');
