@@ -9,7 +9,7 @@ class PubSubHubbub {
   /**
    * verify a callback url
    *
-   * @param string $topic
+   * @param string $topic the domain a user want to subscribe to, for example: $DomainProfile->getDomain()
    * @param string $callback
    */
   public static function verifyCallback($topic, $callback) {
@@ -37,6 +37,6 @@ class PubSubHubbub {
       return true;
     }
 
-    return false;
+    return $info['http_code'];
   }
 }
