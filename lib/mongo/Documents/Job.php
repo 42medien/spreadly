@@ -3,7 +3,7 @@ namespace Documents;
 
 use \MongoDate,
     \MongoManager;
-    
+
 /**
  * Base Class for scheduled Jobs in the Queue
  * @author Hannes Schippmann
@@ -13,11 +13,11 @@ use \MongoDate,
  * @HasLifecycleCallbacks
  * @InheritanceType("SINGLE_COLLECTION")
  * @DiscriminatorField(fieldName="type")
- * @DiscriminatorMap({"contact_import"="ContactImportJob", "pointless"="PointlessJob"})
+ * @DiscriminatorMap({"contact_import"="ContactImportJob", "pointless"="PointlessJob", "push"="PushJob"})
  */
 abstract class Job extends BaseDocument {
   const DEFAULT_PRIORITY = 1;
-  
+
   /** @Id */
   protected $id;
 
@@ -32,7 +32,7 @@ abstract class Job extends BaseDocument {
 
   /** @Date */
   protected $scheduled_at;
-  
+
   /** @Date */
   protected $started_at;
 
@@ -47,7 +47,7 @@ abstract class Job extends BaseDocument {
    * @throws an Exception in case of an error
    */
   abstract public function execute();
-  
+
   /**
    * The finished function should be called by the worker process after execute is successfully finished
    */
@@ -69,12 +69,12 @@ abstract class Job extends BaseDocument {
     $cnt = $this->getScheduleCount();
     $this->setScheduleCount(++$cnt);
     $this->setScheduledAt(new MongoDate());
-    
+
     $dm = MongoManager::getDM();
     $dm->persist($this);
     $dm->flush();
   }
-  
+
   /**
    * Sets some things before the job is persisted
    *

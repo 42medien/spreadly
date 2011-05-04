@@ -14,7 +14,10 @@ use \sfException,
     \Doctrine,
     \MongoId,
     \MongoManager,
-    \sfProjectConfiguration;
+    \DomainSubscriptionsTable,
+    \DomainProfileTable,
+    \sfProjectConfiguration,
+    Queue\Queue;
 
 /**
  * @Document(collection="yiid_activity", repositoryClass="Repositories\YiidActivityRepository")
@@ -209,6 +212,27 @@ class YiidActivity extends BaseDocument {
     $this->updateDealInfo();
   }
 
+  private function createJob() {
+    if ($this->hasDomainSubscriber()) {
+      $job = new PushJob($this->getId());
+      Queue::getInstance()->put($job);
+    }
+  }
+
+  public function getDomainProfile() {
+    return DomainProfileTable::getInstance()->findOneBy("url", parse_url($this->getUrl(), PHP_URL_HOST));
+  }
+
+  public function hasDomainSubscriber() {
+    if ($dp = $this->getDomainProfile()) {
+      if (DomainSubscriptionsTable::getInstance()->findOneBy("domain_profile_id", $dp->getId())) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   /**
    * post-save hook
    *
@@ -218,6 +242,7 @@ class YiidActivity extends BaseDocument {
     UserTable::updateLatestActivityForUser($this->getUId(), time());
     $this->postIt();
     StatsFeeder::feed($this);
+    $this->createJob();
   }
 
   /**
