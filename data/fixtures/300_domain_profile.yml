@@ -32,3 +32,8 @@ DomainProfile:
     tos_url: null
     created_at: '2010-11-26 10:03:00'
     updated_at: '2010-11-26 10:11:34'
+
+DomainSubscriptions:
+  DomainSubscription_1:
+    callback: "http://spreadly.local/test/index"
+    DomainProfile: DomainProfile_1

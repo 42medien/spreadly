@@ -26,7 +26,6 @@ DomainProfile:
       type: string(512)
     tos_url:
       type: string(512)
-    
   relations:
     sfGuardUser:
       foreignAlias: DomainProfiles
@@ -36,6 +35,25 @@ DomainProfile:
       type: many
       local: id
       foreign: domain_profile_id
+    DomainSubscriptions:
+      class: DomainSubscriptions
+      type: many
+      local: id
+      foreign: domain_profile_id
+
+DomainSubscriptions:
+  columns:
+    domain_profile_id:
+      type:    integer
+      notnull: true
+    callback:  string(255)
+  relations:
+    DomainProfile:
+      type: one
+      local: domain_profile_id
+      foreign: id
+      foreignAlias: DomainSubscriptions
+      onDelete: CASCADE
 
 SupportedServices:
   actAs: [Timestampable]
@@ -51,7 +69,7 @@ SupportedServices:
     download_url:
       type: string(255)
 
-      
+
 Visit:
   columns:
     host:     { type: string(255) }
@@ -60,4 +78,3 @@ Visit:
     is_like:     { type: boolean, default: false }
     is_dislike:  { type: boolean, default: false }
     c:        { type: integer }
-    
