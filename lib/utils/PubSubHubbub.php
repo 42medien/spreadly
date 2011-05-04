@@ -13,17 +13,17 @@ class PubSubHubbub {
    * @param string $callback
    */
   public static function verifyCallback($topic, $callback) {
-    $challange = mt_rand();
+    $challenge = mt_rand();
 
     $separator = "?";
     if (strpos($callback,"?")!=false)
       $separator = "&";
 
-    $url = $callback.$separator."hub.mode=subscribe&hub.topic=$topic&hub.challenge=$challange";
+    $url = $callback.$separator."hub.mode=subscribe&hub.topic=$topic&hub.challenge=$challenge";
 
     // add any additional curl options here
     $options = array(CURLOPT_URL => $url,
-                     CURLOPT_USERAGENT => "Spread.ly-Push-API/1.0",
+                     CURLOPT_USERAGENT => "Spread.ly-Push-API-Verifier/1.0",
                      CURLOPT_RETURNTRANSFER => true);
 
     $ch = curl_init();
@@ -33,7 +33,7 @@ class PubSubHubbub {
     $info = curl_getinfo($ch);
 
     // all good -- anything in the 200 range
-    if (substr($info['http_code'],0,1) == "2" && $response == $challange) {
+    if (substr($info['http_code'],0,1) == "2" && $response == $challenge) {
       return true;
     }
 
