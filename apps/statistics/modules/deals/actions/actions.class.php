@@ -125,7 +125,7 @@ class dealsActions extends sfActions
     if($this->pForm->isValid()) {
 	    $lObject = $this->pForm->save();
 	    $lDealFromForm = $this->pForm->getEmbeddedForm('deal')->getObject();
-            
+
 	    if($lDeal) {
   	    $lDealFromForm->addMoreCoupons($lParams['deal']['coupon']);
 	      $lIsNew = false;
@@ -133,9 +133,9 @@ class dealsActions extends sfActions
   	    $lDealFromForm->saveInitialCoupons($lParams['deal']['coupon']);
   	    $lIsNew = true;
 	    }
-      
+
       $lDealFromForm->submit();
-      
+
 	    $lReturn['html'] = $this->getPartial('deals/deal_in_process', array('pIsNew' => $lIsNew));
     } else {
     	$lCouponType = $lParams['deal']['coupon_type'];

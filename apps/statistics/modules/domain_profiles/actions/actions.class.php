@@ -139,37 +139,50 @@ class domain_profilesActions extends sfActions
   public function executeSubscribe_api(sfWebRequest $request) {
   	$this->pHostId = $request->getParameter('host_id');
     $this->pDomainProfile = Doctrine::getTable('DomainProfile')->find($this->pHostId);
-    $this->pEndpoint = "http://www.example.com/endpoint";
+    $this->pEndpoint = false;
   }
 
   public function executeCheck_endpoint(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
   	$lUrl = $request->getParameter('ep-url');
+  	$lHostId = $request->getParameter('host_id');
+    $lDomainProfile = Doctrine::getTable('DomainProfile')->find($lHostId);
+    $lHasError = false;
+    $lHasEndpoint = true;
 
-  	/*
   	return $this->renderText(
     	json_encode(array(
-    		'success' => true
+    		'success' => true,
+        'row' => $this->getPartial('domain_profiles/domain_profiles_row_content', array('domain_profile' => $lDomainProfile, 'pHasError' => $lHasError, 'pHasEndpoint' => $lHasEndpoint)),
+    		'host_id' => $lDomainProfile->getId()
     	))
-    );*/
+    );
 
-
+		/*
   	return $this->renderText(
     	json_encode(array(
     		'success' => false,
     		'msg' => _('Something went wrong')
     	))
-    );
+    );*/
 
   }
 
   public function executeUnsubscribe_api(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
+  	$this->getResponse()->setContentType('application/json');
+  	//$lUrl = $request->getParameter('ep-url');
+  	$lHostId = $request->getParameter('host_id');
+    $lDomainProfile = Doctrine::getTable('DomainProfile')->find($lHostId);
+    $lHasError = false;
+    $lHasEndpoint = true;
 
   	return $this->renderText(
     	json_encode(array(
     		'success' => true,
-    		'msg' => _('Subscription stopped')
+    		'msg' => _('Subscription stopped'),
+        'row' => $this->getPartial('domain_profiles/domain_profiles_row_content', array('domain_profile' => $lDomainProfile, 'pHasError' => $lHasError, 'pHasEndpoint' => $lHasEndpoint)),
+    		'host_id' => $lDomainProfile->getId()
     	))
     );
   }

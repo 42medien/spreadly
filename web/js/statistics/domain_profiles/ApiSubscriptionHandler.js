@@ -28,6 +28,8 @@ var ApiVerifier = {
             jQuery('#verify-form-success').show('slow');
             jQuery('#unsubscribe-api').show('slow');
             jQuery('#subscribe-api-button').hide();
+            jQuery('#unsubscribe-api-button').show();
+            DomainProfilesHandler.updateRow(pResponse);            
           } else {
             jQuery('#verify-form-error .error').empty();
             jQuery('#verify-form-error .error').text(pResponse.msg);
@@ -64,6 +66,8 @@ var ApiVerifier = {
             jQuery('#subscribe-api-button').removeClass('hide');
             jQuery('#subscribe-api-button').show();
             jQuery('#endpoint-stats').hide();
+            DomainProfilesHandler.updateRow(pResponse);
+        
             /*
             setTimeout(function() {
               jQuery.colorbox.close();

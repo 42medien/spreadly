@@ -150,12 +150,17 @@ var DomainProfilesHandler = {
         dataType: "json",
         data: { ei_kcuf: new Date().getTime() },        
         success: function (pResponse) {
-          jQuery('#domain-profile-row-'+pResponse.host_id).empty();
-          jQuery('#domain-profile-row-'+pResponse.host_id).append(pResponse.row);
+          DomainProfilesHandler.updateRow(pResponse);
           OnLoadGrafic.hideGrafic();
         }
       });   
       return false;
     });      
+  },
+  
+  updateRow: function(pResponse) {
+    debug.log('[DomainProfilesHandler][updateRow]');        
+    jQuery('#domain-profile-row-'+pResponse.host_id).empty();
+    jQuery('#domain-profile-row-'+pResponse.host_id).append(pResponse.row);    
   }
 };

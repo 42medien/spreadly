@@ -14,12 +14,16 @@
       	<?php if(isset($pHasError) && $pHasError != false) { ?>
         	<span class="error"><?php echo __($pHasError); ?></span>
         <?php } else {?>
-       		<?php echo __('please copy & paste the verification code to your site and verify!'); ?>
+       			<?php echo __('please copy & paste the verification code to your site and verify!'); ?>
         <?php }?>
 
       <?php } elseif($domain_profile->getState() == DomainProfileTable::STATE_VERIFIED) { ?>
       	<?php echo __('Verified!'); ?>&nbsp;
-      	<?php echo link_to('Setup advanced notifications now!', 'domain_profiles/subscribe_api?host_id='.$domain_profile->getId() , array('class' => 'colorbox')); ?>
+        <?php if (isset($pHasEndpoint) && $pHasEndpoint == true) { ?>
+      		<?php echo link_to('Advanced notifications ok!', 'domain_profiles/subscribe_api?host_id='.$domain_profile->getId() , array('class' => 'colorbox')); ?>
+      	<?php } else { ?>
+      		<?php echo link_to('Setup advanced notifications now!', 'domain_profiles/subscribe_api?host_id='.$domain_profile->getId() , array('class' => 'colorbox')); ?>
+      	<?php } ?>
       <?php } ?>
     </td>
     <td align="center" valign="middle">
