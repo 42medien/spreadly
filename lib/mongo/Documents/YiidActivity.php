@@ -130,6 +130,10 @@ class YiidActivity extends BaseDocument {
     }
   }
 
+  public function getUniqueId() {
+    return "tag:spreadly.com,".date("Y", $this->getC()).":/activity/".$this->getId();
+  }
+
   public function generateHashtag() {
     return $this->isDeal() ? '#deal' : '#like';
   }
@@ -408,5 +412,22 @@ class YiidActivity extends BaseDocument {
     } else {
       return null;
     }
+  }
+
+  public function toSimpleActivityArray() {
+    $as = array();
+
+    $as['generator'] = array("url" => "http://spreadly.com/");
+    $as['published'] = date("c", $this->getC());
+    $as['verb'] = "like";
+    $as['object'] = array("objectType" => "website",
+                          "url" => $this->getUrl(),
+                          "id" => $this->getUniqueId());
+    $as['target'] = array("objectType" => "service",
+                          "url" => parse_url($this->getUrl(), PHP_URL_SCHEME)."://".parse_url($this->getUrl(), PHP_URL_HOST),
+                          "host" => parse_url($this->getUrl(), PHP_URL_HOST),
+                          "id" => "todo");
+
+    return $as;
   }
 }
