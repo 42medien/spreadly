@@ -31,7 +31,7 @@ class analyticsActions extends sfActions {
     $this->pDateFrom = $request->getParameter('date-from', date('Y-m-d', strtotime("6 days ago")));
     $this->pDateTo = $request->getParameter('date-to', date('Y-m-d'));
     $this->pCommunity = $request->getParameter('com', 'all');
-    $this->pUrl = urldecode($request->getParameter('url', null));
+    $this->pUrl = str_replace(" ", "+", urldecode($request->getParameter('url', null)));
     $this->pDealId = $request->getParameter('dealid', null);
     $this->pType = $request->getParameter('type', 'url_activities');
     //first for first click on a deal
