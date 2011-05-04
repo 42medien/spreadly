@@ -1,9 +1,9 @@
 ErrorHandler.catchGlobalError();
-//jQuery('a[rel*=facebox]').facebox();
-jQuery('.colorbox').colorbox({
-		opacity: '0.8',
-		title: true
+jQuery('.colorbox' ).live('click',function(e){
+	e.preventDefault();
+  jQuery(this).colorbox({open:true});
 });
+
 
 jQuery('#mycarousel').jcarousel({
   wrap: 'circular',

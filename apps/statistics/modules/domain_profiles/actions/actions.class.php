@@ -136,9 +136,13 @@ class domain_profilesActions extends sfActions
     return parse_url($url, PHP_URL_HOST);
   }
 
+
+
+
   public function executeSubscribe_api(sfWebRequest $request) {
   	$this->pHostId = $request->getParameter('host_id');
     $this->pDomainProfile = Doctrine::getTable('DomainProfile')->find($this->pHostId);
+    //gibt es nen endpoint? sollte mit in domain-profile-object und muss auch in index für die tabelle gesetzt sein pro domain-profile
     $this->pEndpoint = false;
   }
 

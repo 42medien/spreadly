@@ -15,9 +15,7 @@
 	  </label>
 	  <div>
 				<a href="#" title="Verify Endpoint" id="subscribe-api-button" class="graybtnwide alignleft" <?php echo ($pEndpoint)?'style="display:none;"':'';?> ><span><?php echo __('Validate the setup of your endpoint'); ?></span></a>
-			<?php if ($pEndpoint) {?>
-				<a href="/domain_profiles/unsubscribe_api?host_id=<?php echo $pHostId; ?>" title="Unsubscribe Endpoint" id="unsubscribe-api-button" class="graybtnwide"><span><?php echo __('Stop subscription'); ?></span></a>
-			<?php } ?>
+				<a href="/domain_profiles/unsubscribe_api?host_id=<?php echo $pHostId; ?>" title="Unsubscribe Endpoint" id="unsubscribe-api-button" class="graybtnwide" <?php echo (!$pEndpoint)?'style="display:none;"':'';?>><span><?php echo __('Stop subscription'); ?></span></a>
 		</div>
 	</div>
 
