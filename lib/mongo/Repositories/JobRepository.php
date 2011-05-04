@@ -10,7 +10,7 @@ class JobRepository extends DocumentRepository {
     return $this->createQueryBuilder()
                 // Find the job
                 ->findAndUpdate()
-                ->returnNew()
+                ->returnNew(true)
                 ->field('scheduled')->equals(true)
                 ->sort('priority', 'desc')
                 ->sort('scheduled_at', 'asc')
@@ -22,6 +22,7 @@ class JobRepository extends DocumentRepository {
                 ->getQuery()
                 ->execute();
   }
+
   public function findOrdered() {
     return $this->createQueryBuilder()
                 // Find the job

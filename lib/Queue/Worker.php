@@ -99,6 +99,8 @@ class Worker {
       // get job
       $job = Queue::getInstance()->get();
 
+      var_dump($job);
+
       if ($job) {
         try {
           // try to execute job
