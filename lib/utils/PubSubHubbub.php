@@ -32,8 +32,6 @@ class PubSubHubbub {
     $response = curl_exec($ch);
     $info = curl_getinfo($ch);
 
-    sfContext::getInstance()->getLogger()->err(print_r($response, true));
-
     // all good -- anything in the 200 range
     if (substr($info['http_code'],0,1) == "2" && $response == $challange) {
       return true;
