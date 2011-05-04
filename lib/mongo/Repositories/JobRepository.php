@@ -6,17 +6,16 @@ use Doctrine\ODM\MongoDB\DocumentRepository,
 
 
 class JobRepository extends DocumentRepository {
-  public function next() {
+  public function nextJob() {
     return $this->createQueryBuilder()
                 // Find the job
                 ->findAndUpdate()
-                ->returnNew(true)
+                ->returnNew()
                 ->field('scheduled')->equals(true)
                 ->sort('priority', 'desc')
                 ->sort('scheduled_at', 'asc')
 
                 // Update found job
-                ->update()
                 ->field('started_at')->set(new MongoDate())
                 ->field('scheduled')->set(false)
                 ->getQuery()

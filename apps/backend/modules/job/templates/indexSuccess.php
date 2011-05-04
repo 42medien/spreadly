@@ -46,7 +46,13 @@
 
   <ul class="sf_admin_actions">
     <li>
-      <a href="/backend.php/domain/AddPointlessJobs/action">Add some pointless jobs</a>
+      <a href="/backend.php/job/AddPointlessJobs/action">Add some pointless jobs</a>
+    </li>
+    <li>
+      <a href="/backend.php/job/RemovePointlessJobs/action">Remove all pointless jobs</a>
+    </li>
+    <li>
+      <a href="/backend.php/job/Work/action">Work queue</a>
     </li>
     </ul>
   </div>

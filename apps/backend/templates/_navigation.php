@@ -21,6 +21,9 @@
       <span class="navigation_text <?php if($module=='oldstats') { echo 'active'; } ?>">
         <?php echo link_to('OldStats', url_for('@oldstats')) ?> |
       </span>
+      <span class="navigation_text <?php if($module=='job') { echo 'active'; } ?>">
+        <?php echo link_to('Jobs', url_for('job/index')) ?> |
+      </span>
       <span class="navigation_text">
         <?php echo link_to(__('Logout'), '@sf_guard_signout'); ?>
       </span>

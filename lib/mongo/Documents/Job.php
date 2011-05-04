@@ -1,7 +1,8 @@
 <?php
 namespace Documents;
 
-use \MongoDate;
+use \MongoDate,
+    \MongoManager;
     
 /**
  * Base Class for scheduled Jobs in the Queue
@@ -52,6 +53,9 @@ abstract class Job extends BaseDocument {
    */
   public function finished() {
     $this->setFinishedAt(new MongoDate());
+    $dm = MongoManager::getDM();
+    $dm->persist($this);
+    $dm->flush();
   }
 
   /**
@@ -63,8 +67,12 @@ abstract class Job extends BaseDocument {
     $this->setFinishedAt(null);
     $this->setScheduled(true);
     $cnt = $this->getScheduleCount();
-    $this->setScheduleCount($cnt++);
-    $this->setScheduledAt(new MongoDate()); 
+    $this->setScheduleCount(++$cnt);
+    $this->setScheduledAt(new MongoDate());
+    
+    $dm = MongoManager::getDM();
+    $dm->persist($this);
+    $dm->flush();
   }
   
   /**

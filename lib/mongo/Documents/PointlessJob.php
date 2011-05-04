@@ -1,7 +1,9 @@
 <?php
 namespace Documents;
 
-use Documents\Job;
+use Documents\Job,
+    sfContext,
+    Exception;
 
 /**
  * PointlessJob
@@ -9,6 +11,8 @@ use Documents\Job;
  * @Document
  */
 class PointlessJob extends Job {
+  
+  /** @String */
   protected $the_job;
   
   public function __construct($the_job) {
@@ -16,7 +20,7 @@ class PointlessJob extends Job {
   }
     
   public function execute() {
-    if(mt_rand(10)==10) {
+    if(mt_rand(0, 10)==10) {
       throw new Exception("Something baaaad happened, bitch!");
     } else {
       sfContext::getInstance()->getLogger()->notice("{PointlessJob} pointlessly doing this: ". $this->the_job);      

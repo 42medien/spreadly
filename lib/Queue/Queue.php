@@ -30,6 +30,6 @@ class Queue {
   }
   
   public function get() {
-    return $this->dm->getRepository('Documents\Job')->next();
+    return $this->dm->getRepository('Documents\Job')->nextJob();
   }
 }

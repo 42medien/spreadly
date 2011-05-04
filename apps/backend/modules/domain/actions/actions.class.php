@@ -29,21 +29,4 @@ class domainActions extends autoDomainActions
     $this->getResponse()->setHttpHeader("Content-Type", 'text/csv');
     $this->getResponse()->setHttpHeader('Content-Disposition', 'attachment; filename=DomainProfiles-'.date("Y-m-d").'.csv;');
   }
-  
-  public function executeJobs(sfWebRequest $request) {
-    $this->jobs = MongoManager::getDm()->getRepository('Documents\Job')->findOrdered();
-  }
-
-  public function executeAddPointlessJobs(sfWebRequest $request) {
-    $stuff = array("blahaha", "bluehuhu", "gnarf", "hulli", "penner", "power horse");
-    foreach ($stuff as $s) {
-      $pointlessJob = new Documents\PointlessJob($s);
-      $dm = MongoManager::getDm();
-      $dm->persist($pointlessJob);
-      $dm->flush();
-    }
-    
-    var_dump(Queue\Queue::getInstance()->get());
-    return $this->redirect('domain/Jobs');
-  }
 }
