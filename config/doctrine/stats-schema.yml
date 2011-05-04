@@ -69,7 +69,6 @@ SupportedServices:
     download_url:
       type: string(255)
 
-
 Visit:
   columns:
     host:     { type: string(255) }
