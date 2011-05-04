@@ -21,14 +21,18 @@ class PushJob extends Job {
    * send notification
    */
   public function execute() {
-    /*$dm = MongoManager::getDM();
+    $dm = \MongoManager::getDM();
+    $ya = $dm->getRepository("Documents\YiidActivity")->find(new \MongoId($this->getYiidActivityId()));
+    $dp = $ya->getDomainProfile();
 
-    $ya = $dm->getRepository("Documents\YiidActivity")->find(new MongoId($this->getYiidActivityId()));
+    if (!$dp) {
+      return false;
+    }
 
-    if ($ya) {
-      json_encode($ya->toSimpleActivityArray());
-    } else {
-      // some error management
-    }*/
+    $ds = $dp->getDomainSubscriptions();
+
+    foreach ($ds as $s) {
+      \PubSubHubbub::push($s->getCallback(), json_encode($ya->toSimpleActivityArray()), array("Content-Type: application/json"));
+    }
   }
 }

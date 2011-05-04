@@ -39,4 +39,8 @@ class PubSubHubbub {
 
     return $info['http_code'];
   }
+
+  public static function push($callback, $post_body, $post_header) {
+    UrlUtils::sendPostRequest($callback, $post_body, $post_header);
+  }
 }
