@@ -31,12 +31,10 @@ class PubSubHubbub {
 
     $response = curl_exec($ch);
     $info = curl_getinfo($ch);
-
     // all good -- anything in the 200 range
     if (substr($info['http_code'],0,1) == "2" && $response == $challenge) {
       return true;
     }
-
     return $info['http_code'];
   }
 

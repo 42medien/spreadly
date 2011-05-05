@@ -109,6 +109,7 @@ var ApiVerifier = {
       debug.log('error');         
       ApiVerifier.showError(pResponse.msg);      
     }
+    OnLoadGrafic.hideGrafic();    
   },
   
   showError: function(pMsg) {

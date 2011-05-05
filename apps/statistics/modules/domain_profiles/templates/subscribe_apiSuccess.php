@@ -10,7 +10,7 @@
 		</div>
 		<label class="textfield-wht">
 			<span>
-	  		<input type="text" id="ep-url" class="mirror-value wd390" value="<?php echo ($pEndpoint)?$pEndpoint:"http://" ?>" name="ep-url">
+	  		<input type="text" id="ep-url" class="mirror-value wd390" value="<?php echo ($pEndpoint)?$pEndpoint->getCallback():"http://" ?>" name="ep-url">
 	  	</span>
 	  </label>
 	  <div>

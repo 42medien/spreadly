@@ -1,5 +1,4 @@
-<?php use_helper('Date', 'DomainProfiles');
-?>
+<?php use_helper('Date', 'DomainProfiles');?>
     <td height="43" align="right"><img src="/img/site-icon.gif" width="24" height="24" alt="Site" title="Site" /></td>
     <td class="webname">
     <?php if($domain_profile->getState() == DomainProfileTable::STATE_PENDING || (isset($pHasError) && $pHasError != false)) { ?>
@@ -19,7 +18,7 @@
 
       <?php } elseif($domain_profile->getState() == DomainProfileTable::STATE_VERIFIED) { ?>
       	<?php echo __('Verified!'); ?>&nbsp;
-        <?php if (isset($pHasEndpoint) && $pHasEndpoint == true) { ?>
+        <?php if ($domain_profile->hasSubscriber() == true) { ?>
       		<?php echo link_to('Advanced notifications ok!', 'domain_profiles/subscribe_api?host_id='.$domain_profile->getId() , array('class' => 'colorbox')); ?>
       	<?php } else { ?>
       		<?php echo link_to('Setup advanced notifications now!', 'domain_profiles/subscribe_api?host_id='.$domain_profile->getId() , array('class' => 'colorbox')); ?>

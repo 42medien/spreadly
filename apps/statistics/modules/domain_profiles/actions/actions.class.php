@@ -143,7 +143,7 @@ class domain_profilesActions extends sfActions
   	$this->pHostId = $request->getParameter('host_id');
     $this->pDomainProfile = Doctrine::getTable('DomainProfile')->find($this->pHostId);
     //gibt es nen endpoint? sollte mit in domain-profile-object und muss auch in index für die tabelle gesetzt sein pro domain-profile
-    $this->pEndpoint = false;
+    $this->pEndpoint = DomainSubscriptionsTable::getInstance()->findOneBy("domain_profile_id", $this->pDomainProfile->getId());
   }
 
   public function executeCheck_endpoint(sfWebRequest $request) {
@@ -151,25 +151,26 @@ class domain_profilesActions extends sfActions
   	$lUrl = $request->getParameter('ep-url');
   	$lHostId = $request->getParameter('host_id');
     $lDomainProfile = Doctrine::getTable('DomainProfile')->find($lHostId);
-    $lHasError = false;
-    $lHasEndpoint = true;
+		$lVerified = PubSubHubbub::verifyCallback($lDomainProfile->getDomain(), $lUrl);
+
+	  $lReturn = array();
+		if($lVerified === true) {
+			$lEndpoint = new DomainSubscriptions();
+			$lEndpoint->setDomainProfileId($lDomainProfile->getId());
+			$lEndpoint->setCallback($lUrl);
+			$lEndpoint->save();
+
+			$lReturn['success'] = true;
+      $lReturn['row'] = $this->getPartial('domain_profiles/domain_profiles_row_content', array('domain_profile' => $lDomainProfile, 'pHasError' => false));
+    	$lReturn['host_id'] = $lDomainProfile->getId();
+		} else {
+			$lReturn['success'] = false;
+    	$lReturn['msg'] = _('The Endpoint is not correct. Please check the url or your implementation. For more info read our <a href="http://code.google.com/p/spreadly/">api documentation</a>');
+		}
 
   	return $this->renderText(
-    	json_encode(array(
-    		'success' => true,
-        'row' => $this->getPartial('domain_profiles/domain_profiles_row_content', array('domain_profile' => $lDomainProfile, 'pHasError' => $lHasError, 'pHasEndpoint' => $lHasEndpoint)),
-    		'host_id' => $lDomainProfile->getId()
-    	))
+    	json_encode($lReturn)
     );
-
-		/*
-  	return $this->renderText(
-    	json_encode(array(
-    		'success' => false,
-    		'msg' => _('Something went wrong')
-    	))
-    );*/
-
   }
 
   public function executeUnsubscribe_api(sfWebRequest $request) {
@@ -178,14 +179,14 @@ class domain_profilesActions extends sfActions
   	//$lUrl = $request->getParameter('ep-url');
   	$lHostId = $request->getParameter('host_id');
     $lDomainProfile = Doctrine::getTable('DomainProfile')->find($lHostId);
-    $lHasError = false;
-    $lHasEndpoint = true;
+		$lEndpoint = DomainSubscriptionsTable::getInstance()->findOneBy("domain_profile_id", $lDomainProfile->getId());
+		$lEndpoint->delete();
 
   	return $this->renderText(
     	json_encode(array(
     		'success' => true,
     		'msg' => _('Subscription stopped'),
-        'row' => $this->getPartial('domain_profiles/domain_profiles_row_content', array('domain_profile' => $lDomainProfile, 'pHasError' => $lHasError, 'pHasEndpoint' => $lHasEndpoint)),
+        'row' => $this->getPartial('domain_profiles/domain_profiles_row_content', array('domain_profile' => $lDomainProfile, 'pHasError' => false)),
     		'host_id' => $lDomainProfile->getId()
     	))
     );

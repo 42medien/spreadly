@@ -76,4 +76,11 @@ class DomainProfile extends BaseDomainProfile
       return null;
     }
   }
+
+  public function hasSubscriber() {
+      if (DomainSubscriptionsTable::getInstance()->findOneBy("domain_profile_id", $this->getId())) {
+        return true;
+      }
+    return false;
+  }
 }
