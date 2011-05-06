@@ -8,3 +8,6 @@ autoload:
   aws:
     path:      %SF_LIB_DIR%/utils/aws
     recursive: true
+  oauth:
+    path:      %SF_LIB_DIR%/vendor/OAuth
+    recursive: true
