@@ -821,4 +821,13 @@ th.headerSortUp.last {
   display:none;
 }
 
+/***breadcrumb***/
+.bc-list li{float:left; height: 24px; line-height: 24px;}
+.bc-first{ background: url("/img/breadcrumb_left.png") no-repeat scroll left center transparent; width: 12px;}
+.bc-gradient{  background: url("/img/breadcrumb_gradient.png") repeat-x scroll left center transparent; width: auto; padding: 0 5px;}
+.bc-gradient a {color: #588199;}
+.bc-gradient a:hover, .bc-gradient strong {color: #252525;}
+.bc-seperator{  background: url("/img/breadcrumb_center.png") no-repeat scroll left center transparent; width: 17px;}
+.bc-last{  background: url("/img/breadcrumb_right.png") no-repeat scroll left center transparent; width: 12px;}
+
 

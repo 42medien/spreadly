@@ -1,10 +1,17 @@
 <?php use_helper('YiidUrl'); ?>
 <?php slot('content') ?>
 <div id="analytics-bread">
-	<?php echo link_to(__('Dashboard'), 'analytics/index'); ?>&nbsp;&raquo;&nbsp;
-	<?php echo link_to('Overview for '.$pDomainProfile->getUrl(), 'analytics/domain_statistics', array('query_string' => 'domainid='.$pDomainProfile->getId())); ?>&nbsp;&raquo;&nbsp;
-	<?php echo link_to('Details for '.$pDomainProfile->getUrl(), 'analytics/domain_detail', array('query_string' => 'domainid='.$pDomainProfile->getId()));?>&nbsp;&raquo;&nbsp;
-	<strong><?php echo link_to('Details for '.$pUrl, 'analytics/url_detail', array('query_string' => 'url='.$pUrl.'&domainid='.$pDomainProfile->getId())); ?></strong>
+	<ul class="bc-list clearfix">
+		<li class="bc-first"></li>
+		<li class="bc-gradient"><?php echo link_to(__('Dashboard'), 'analytics/index'); ?></li>
+		<li class="bc-seperator"></li>
+		<li class="bc-gradient"><?php echo link_to('Overview for '.$pDomainProfile->getUrl(), 'analytics/domain_statistics?domainid='.$pDomainProfile->getId()); ?></li>
+		<li class="bc-seperator"></li>
+		<li class="bc-gradient"><?php echo link_to('Details for '.$pDomainProfile->getUrl(), 'analytics/domain_detail?domainid='.$pDomainProfile->getId());?></li>
+		<li class="bc-seperator"></li>
+		<li class="bc-gradient"><strong><?php echo __('Details for '.$pUrl); ?></strong></li>
+		<li class="bc-last"></li>
+	</ul>
 </div>
 
 <form action="/analytics/get_url_detail" name="analytics-filter-form" id="analytics-filter-form">

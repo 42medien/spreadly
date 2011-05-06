@@ -5,8 +5,13 @@ slot('content');
 ?>
 <?php echo link_to("<span>".__('Details')."</span>", 'analytics/domain_detail?domainid='.$pDomainProfileId, array('class' => 'button alignright'));?>
 <div id="analytics-bread">
-	<?php echo link_to(__('Dashboard'), 'analytics/index'); ?>&nbsp;&nbsp;&gt;&nbsp;
-	<strong><?php echo link_to('Overview for '.$pHost->getHost(), 'analytics/domain_statistics?domainid='.$pDomainProfileId); ?></strong>
+	<ul class="bc-list clearfix">
+		<li class="bc-first"></li>
+		<li class="bc-gradient"><?php echo link_to(__('Dashboard'), 'analytics/index'); ?></li>
+		<li class="bc-seperator"></li>
+		<li class="bc-gradient"><strong><?php echo __('Overview for '.$pHost->getHost()); ?></strong></li>
+		<li class="bc-last"></li>
+	</ul>
 </div>
 <h2 class="sub_title"><?php echo __('All time overview for domain %domain%', array('%domain%' => $pHost->getHost()));?></h2>
   <div id="navi" class="clearfix">
