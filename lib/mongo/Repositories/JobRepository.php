@@ -18,8 +18,7 @@ class JobRepository extends DocumentRepository {
     if($job) {
       $job->setStartedAt(new MongoDate());
       $job->setScheduled(false);
-      $this->getDocumentManager()->persist($job);
-      $this->getDocumentManager()->flush();
+      $job->save();
     }
 
     return $job;    

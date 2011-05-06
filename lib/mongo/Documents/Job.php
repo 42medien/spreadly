@@ -39,7 +39,7 @@ abstract class Job extends BaseDocument {
   /** @Date */
   protected $finished_at;
 
-  /** @String */
+  /** @Hash */
   protected $error;
 
   /**
@@ -53,9 +53,7 @@ abstract class Job extends BaseDocument {
    */
   public function finished() {
     $this->setFinishedAt(new MongoDate());
-    $dm = MongoManager::getDM();
-    $dm->persist($this);
-    $dm->flush();
+    $this->save();
   }
 
   /**
@@ -70,11 +68,24 @@ abstract class Job extends BaseDocument {
     $this->setScheduleCount(++$cnt);
     $this->setScheduledAt(new MongoDate());
 
-    $dm = MongoManager::getDM();
-    $dm->persist($this);
-    $dm->flush();
+    $this->save();
   }
 
+  /**
+   * Should
+   * @param The reason why this job has to be rescheduled. Probably because of some kind of error.
+   */
+  public function failed($error) {
+    $this->setError($error);
+    $this->setFinishedAt(null);
+    $this->setScheduled(false);
+    $this->save();
+  }
+  
+  public function setError($error) {
+    $this->error = is_string($error) ? array("message" => $error) : $error;
+  }
+  
   /**
    * Sets some things before the job is persisted
    *
@@ -87,5 +98,11 @@ abstract class Job extends BaseDocument {
     if(!$this->getPriority()) {
       $this->setPriority(self::DEFAULT_PRIORITY);
     }
+  }
+  
+  public function save() {
+    $dm = MongoManager::getDM();
+    $dm->persist($this);
+    $dm->flush();
   }
 }

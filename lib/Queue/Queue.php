@@ -26,8 +26,7 @@ class Queue {
   }
 
   public function put($job) {
-    $this->dm->persist($job);
-    $this->dm->flush();
+    $job->save();
   }
 
   public function get() {
