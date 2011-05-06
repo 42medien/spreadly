@@ -32,7 +32,7 @@ class PushJob extends Job {
     $ds = $dp->getDomainSubscriptions();
 
     foreach ($ds as $s) {
-      $info = \PubSubHubbub::push($s->getCallback(), json_encode($ya->toSimpleActivityArray()), array("Content-Type: application/json"));
+      $info = \PubSubHubbub::push($s->getCallback(), $this->toJson($ya), array("Content-Type: application/json"));
 
       // all good -- anything in the 200 range
       if (substr($info['http_code'],0,1) == "2") {
@@ -43,5 +43,24 @@ class PushJob extends Job {
         $this->failed(array("code" => $info['http_code'], "message" => "PuSH failed"));
       }
     }
+  }
+
+  private function toJson($ya) {
+    $dp = $ya->getDomainProfile();
+
+    $as = array();
+
+    $as['generator'] = array("url" => "http://spreadly.com/");
+    $as['published'] = date("c", $ya->getC());
+    $as['verb'] = "like";
+    $as['object'] = array("objectType" => "website",
+                          "url" => $ya->getUrl(),
+                          "id" => $ya->getUniqueId());
+    $as['target'] = array("objectType" => "service",
+                          "url" => $dp->getDomain(),
+                          "host" => $dp->getUrl(),
+                          "id" => $dp->getUniqueId());
+
+    return json_encode($as);
   }
 }

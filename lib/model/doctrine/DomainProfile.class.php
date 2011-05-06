@@ -72,7 +72,6 @@ class DomainProfile extends BaseDomainProfile
     if(UrlUtils::checkUrlWithCurl($url, true)) {
       return MicroID::parseString(UrlUtils::getUrlContent($url));
     } else {
-      Log::info("Url is not available. checkUrlAvailability() was false", true);
       return null;
     }
   }
@@ -82,5 +81,9 @@ class DomainProfile extends BaseDomainProfile
       return true;
     }
     return false;
+  }
+
+  public function getUniqueId() {
+    return "tag:spreadly.com,".date('Y', strtotime($this->getCreatedAt())).":/domain/".$this->getId();
   }
 }
