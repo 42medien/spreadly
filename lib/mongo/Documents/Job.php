@@ -72,8 +72,8 @@ abstract class Job extends BaseDocument {
   }
 
   /**
-   * Should
-   * @param The reason why this job has to be rescheduled. Probably because of some kind of error.
+   * Should be called if an uncurable error occurred and  the job should not be rescheduled
+   * @param The error why this job has failed.
    */
   public function failed($error) {
     $this->setError($error);
