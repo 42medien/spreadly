@@ -1,6 +1,9 @@
 <?php
 namespace Documents;
-
+use \OnlineIdentityTable,
+    \ImportApiFactory,
+    \sfContext,
+    \Exception;
 /**
  * ContactImportJob
  * @Document

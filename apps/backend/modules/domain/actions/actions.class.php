@@ -26,7 +26,7 @@ class domainActions extends autoDomainActions
           
     $this->setLayout('csv');
 	  $this->getResponse()->clearHttpHeaders();
-    $this->getResponse()->setHttpHeader("Content-Type", 'text/csv');
-    $this->getResponse()->setHttpHeader('Content-Disposition', 'attachment; filename=DomainProfiles-'.date("Y-m-d").'.csv;');
+    $this->getResponse()->setHttpHeader("Content-Type", 'text/plain');
+    $this->getResponse()->setHttpHeader('Content-Disposition', 'attachment; filename=DomainProfiles-'.date("Y-m-d").'.txt;');
   }
 }
