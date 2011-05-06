@@ -28,7 +28,7 @@ if ($pLikes) {
   <table width="930px;" border="0" cellspacing="0" cellpadding="0" id="top-url-table" class="tablesorter">
   <thead>
     <tr>
-      <th align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('URLs'); ?></div></th>
+      <th align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('Hour'); ?></div></th>
       <th align="center" valign="middle">
       	<div class="sortlink">
 					<span class="myqtip" title="<?php echo __('Überblick Altersgruppen der Empfehler'); ?>">
@@ -86,11 +86,7 @@ if ($pLikes) {
       foreach($pUrls as $url){
     ?>
       <tr>
-        <td height="44" align="left" class="first">
-          <div class="padleft">
-              <span title="<?php echo $url->getUrl(); ?>"><?php echo truncate_text($url->getUrl(), 40); ?></span>
-          </div>
-        </td>
+        <td align="center" valign="middle" class="first"><div><?php echo __("%1:00", array("%1" => $url->getHourOfDay())); ?></div></td>
         <td align="center" valign="middle"><div><?php echo $url->getAge() ?></div></td>
         <td align="center" valign="middle"><div><?php echo __($url->getGender()) ?></div></td>
         <td align="center" valign="middle"><div><?php echo __($url->getRelationship()) ?></div></td>

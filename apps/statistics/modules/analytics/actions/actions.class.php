@@ -80,7 +80,6 @@ class analyticsActions extends sfActions {
     if($this->last30ByDeal) {
       $this->last30ByDeal = $this->last30ByDeal->toArray();
     }
-
   }
 
   public function executeDomain_statistics(sfWebRequest $request) {
