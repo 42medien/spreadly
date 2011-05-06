@@ -455,4 +455,11 @@ class YiidActivity extends BaseDocument {
 
     return $as;
   }
+
+  public function countClickbackLikes() {
+    $dm = MongoManager::getDM();
+    $count = $dm->getRepository("Documents\YiidActivity")->findBy(array("cb_referer" => $this->getId()));
+
+    return count($count);
+  }
 }
