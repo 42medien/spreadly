@@ -187,11 +187,5 @@ class GoogleAuthApiClient extends AuthApi {
     $pOnlineIdentity->setUserId($pUser->getId());                  /* signup,add new */
     $pOnlineIdentity->setAuthIdentifier($pAuthIdentifier);
     $pOnlineIdentity->save();
-
-    $this->importContacts($pOnlineIdentity->getId());
-
-    $lImgPath = $pObject->thumbnailUrl;
-    $lPayload = serialize(array('path' => $lImgPath, 'user_id' => $pUser->getId(), 'oi_id' => $pOnlineIdentity->getId()));
-    AmazonSQSUtils::pushToQuque('ImageImport', $lPayload);
   }
 }

@@ -195,7 +195,5 @@ class LinkedinAuthApiClient extends AuthApi {
       $pUser->setBirthdate($pOnlineIdentity->getBirthdate());
       $pUser->save();
     }
-
-    $this->importContacts($pOnlineIdentity->getId());
   }
 }

@@ -41,15 +41,6 @@ abstract class AuthApi {
   }
 
   /**
-   * Push OnlineIdentityId to Amazon Quque for asynchronous process
-   *
-   * @param int $pOnlineIdentityId
-   */
-  public function importContacts($pOnlineIdentityId) {
-    AmazonSQSUtils::pushToQuque("ImportContacts", $pOnlineIdentityId);
-  }
-
-  /**
    * generates a OAuthConsumer
    *
    * @author Matthias Pfefferle

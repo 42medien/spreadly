@@ -136,6 +136,7 @@ class OnlineIdentityTable extends Doctrine_Table {
       $lOIdentity->setAuthIdentifier($pAuthIdentifier);
     }
     $lOIdentity->save();
+    $lOIdentity->scheduleImportJob();
 
     return $lOIdentity;
   }

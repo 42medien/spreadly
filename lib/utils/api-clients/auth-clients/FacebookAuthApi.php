@@ -172,11 +172,5 @@ class FacebookAuthApiClient extends AuthApi {
     $pUser->setRelationshipState($pOnlineIdentity->getRelationshipState());
     $pUser->setBirthdate($pOnlineIdentity->getBirthDate());
     $pUser->save();
-
-    $this->importContacts($pOnlineIdentity->getId());
-
-    $lImgPath = "https://graph.facebook.com/".$pObject->id."/picture&type=large";
-    $lPayload = serialize(array('path' => $lImgPath, 'user_id' => $pUser->getId(), 'oi_id' => $pOnlineIdentity->getId()));
-    AmazonSQSUtils::pushToQuque('ImageImport', $lPayload);
   }
 }

@@ -188,11 +188,5 @@ class TwitterAuthApiClient extends AuthApi {
 
     $pOnlineIdentity->setLocationRaw($pObject->location);
     $pOnlineIdentity->save();
-
-    $this->importContacts($pOnlineIdentity->getId());
-
-    $lImgPath = "http://api.twitter.com/1/users/profile_image/".$pObject->screen_name."?size=bigger";
-    $pPayload = serialize(array('path' => $lImgPath, 'user_id' => $pUser->getId(), 'oi_id' => $pOnlineIdentity->getId()));
-    AmazonSQSUtils::pushToQuque('ImageImport', $pPayload);
   }
 }
