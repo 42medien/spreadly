@@ -32,7 +32,16 @@ class PushJob extends Job {
     $ds = $dp->getDomainSubscriptions();
 
     foreach ($ds as $s) {
-      \PubSubHubbub::push($s->getCallback(), json_encode($ya->toSimpleActivityArray()), array("Content-Type: application/json"));
+      $info = \PubSubHubbub::push($s->getCallback(), json_encode($ya->toSimpleActivityArray()), array("Content-Type: application/json"));
+
+      // all good -- anything in the 200 range
+      if (substr($info['http_code'],0,1) == "2") {
+        $this->finished();
+      } elseif ($info['http_code'] == 408) {
+        $this->reschedule(array("code" => 408, "message" => "Server Timeout"));
+      } else {
+        $this->failed(array("code" => $info['http_code'], "message" => "PuSH failed"));
+      }
     }
   }
 }
