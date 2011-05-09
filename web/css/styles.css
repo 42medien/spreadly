@@ -484,7 +484,7 @@ div.veryficationbox p{ padding-bottom:8px;}
 #paging-sel .jgd-dropdown dd ul a{line-height:20px; color:#000; display:block;}
 #paging-sel .jgd-dropdown dd ul a:hover{ color:#fff;}
 
-#http-sel{ width:86px; position:relative; z-index:999999;} 
+#http-sel{ width:86px; position:relative; z-index:0;} 
 #http-sel .jgd-dropdown dt{width:56px; margin-top:1px;  background:url(../img/select-bgl.png) left 0px no-repeat;  padding-left:8px; }
 #http-sel .jgd-dropdown dt a{ width:38px; background:url(../img/select-bgr.png) right 0px no-repeat; padding-right:30px; height:30px; display:block; line-height:30px; color:#000;  }
 #http-sel .jgd-dropdown dd ul {width: 68px; left: 3px;  z-index:99999999;}
