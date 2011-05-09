@@ -2,7 +2,7 @@
 <input type="hidden" name="host_id" value="<?php echo $pHostId; ?>" />
 <div id="subscribe-api-box" class="clearfix">
 	<h2><?php echo __('Advanced Notifications Setup'); ?></h2>
-	<p><?php echo __('With Advanced Notifications you are able to track every "Like" or "Deal" on your website in realtime yourself: the Spreadly API lets you write your own code to react in every imaginable way to the activities of users on your site. More details, documentation and example code for developers can be found %devdoku%.', array('%devdoku%' => link_to('here', 'http://code.google.com/p/spreadly/wiki/developerdocumentation')) ); ?></p>
+	<p><?php echo __('With Advanced Notifications you are able to track every "Like" or "Deal" on your website in realtime yourself: the Spreadly API lets you write your own code to react in every imaginable way to the activities of users on your site. More details, documentation and example code for developers can be found %devdoku%.', array('%devdoku%' => link_to('here', 'http://code.google.com/p/spreadly/wiki/PuSH_API', array('target' => '_blank'))) ); ?></p>
 	<div class="clearfix">
 		<div class="btnwording alignleft">
 			<strong><?php echo __('Your Endpoint'); ?></strong>
