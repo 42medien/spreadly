@@ -6,7 +6,7 @@ use Documents\Job;
 /**
  * Push API Job
  *
- * @Document
+ * @Document(collection="jobs", repositoryClass="Repositories\PushJobRepository")
  * @author Matthias Pfefferle
  */
 class PushJob extends Job {
