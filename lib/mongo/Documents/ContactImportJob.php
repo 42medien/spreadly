@@ -12,15 +12,15 @@ use \OnlineIdentityTable,
 class ContactImportJob extends Job {
   
   /** @String */
-  private $onlineIdentityId;
+  private $online_identity_id;
 
-  public function __construct($onlineIdentityId) {
-   $this->onlineIdentityId = $onlineIdentityId;
+  public function __construct($online_identity_id) {
+   $this->online_identity_id = $online_identity_id;
   }
 
   public function execute() {
-    $lOnlineIdentity = OnlineIdentityTable::getInstance()->find($this->onlineIdentityId);
-    sfContext::getInstance()->getLogger()->notice("{ContactImportJob} importing for oi_id: ". $this->onlineIdentityId);
+    $lOnlineIdentity = OnlineIdentityTable::getInstance()->find($this->online_identity_id);
+    sfContext::getInstance()->getLogger()->notice("{ContactImportJob} importing for oi_id: ". $this->online_identity_id);
     
     if ($lOnlineIdentity){
       $lOnlineIdentity->setLastFriendRefresh(time());
