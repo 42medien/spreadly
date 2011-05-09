@@ -13,8 +13,12 @@ class PushJob extends Job {
   /** @String */
   protected $yiid_activity_id;
 
-  public function __construct($yiid_activity_id) {
+  /** @String */
+  protected $domain_profile_id;
+
+  public function __construct($yiid_activity_id, $domain_profile_id) {
     $this->yiid_activity_id = $yiid_activity_id;
+    $this->domain_profile_id = $domain_profile_id;
   }
 
   /**
