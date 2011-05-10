@@ -3,6 +3,7 @@ require_once dirname(__file__).'/../../lib/BaseTestCase.php';
 
 use Documents\PointlessJob,
     Documents\Job,
+    Documents\PushJob,
     Queue\Queue,
     \MongoManager;
 
@@ -16,7 +17,14 @@ class QueueTest extends BaseTestCase {
     $this->queue = Queue::getInstance();
     $this->dm = MongoManager::getDM();
     $this->jobRepo = $this->dm->getRepository('Documents\Job');
+    $this->pushJobRepo = $this->dm->getRepository('Documents\PushJob');
+
     $this->jobRepo->createQueryBuilder()
+                  ->remove()
+                  ->getQuery()
+                  ->execute();
+
+    $this->pushJobRepo->createQueryBuilder()
                   ->remove()
                   ->getQuery()
                   ->execute();
@@ -78,4 +86,26 @@ class QueueTest extends BaseTestCase {
     $this->assertEquals(null, $this->queue->get());    
   }
   
+  public function testPushJobRepositoryErrorCounts() {
+    $job1 = new PushJob("YA1", 1);
+    $this->queue->put($job1);
+    $job2 = new PushJob("YA2", 2);
+    $this->queue->put($job2);
+    $job3 = new PushJob("YA3", 3);
+    $this->queue->put($job3);
+    
+    $job = $this->queue->get();
+    $job->failed(array("http_code" => 408, "message" => "Timeout"));
+
+    $job = $this->queue->get();
+    $job->failed(array("http_code" => 500, "message" => "File not Found"));
+
+    $job = $this->queue->get();
+    $job->finished();
+    
+    // Should get the jobs fifo from the queue
+    $this->assertEquals(1, $this->pushJobRepo->countTimeoutPuSHsLast24h(1));
+    $this->assertEquals(1, $this->pushJobRepo->countFailedPuSHsLast24h(2));
+    $this->assertEquals(1, $this->pushJobRepo->countValidPuSHsLast24h(3));
+  }
 }
