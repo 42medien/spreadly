@@ -31,8 +31,8 @@ class Worker {
                      'sysMaxExecutionTime' => '0',
                      'sysMaxInputTime' => '0',
                      'sysMemoryLimit' => '64M',
-                     'appRunAsGID' => 1001,
-                     'appRunAsUID' => 1001);
+                     'appRunAsGID' => 501,
+                     'appRunAsUID' => 501);
 
     // Allowed arguments & their defaults
     $runmode = array(
@@ -98,8 +98,6 @@ class Worker {
 
       // get job
       $job = Queue::getInstance()->get();
-
-      var_dump($job);
 
       if ($job) {
         try {
