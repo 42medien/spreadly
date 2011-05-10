@@ -21,7 +21,10 @@
 
 	<?php if ($pEndpoint) {?>
 		<div id="endpoint-stats">
-			hier sind dann die api-statistiken
+			<h3><?php echo __('24h Status:'); ?></h3>
+			<span class="ep-stat-count"><?php echo __('%ok% OK', array('%ok%' => $pOk)); ?></span>
+			<span class="ep-stat-count"><?php echo __('%to% connection timeout', array('%to%' => $pTimeout)); ?></span>
+			<span class="ep-stat-count"><?php echo __('%wr% wrong response', array('%wr%' => $pResponseFail)); ?></span>
 		</div>
 	<?php } ?>
 

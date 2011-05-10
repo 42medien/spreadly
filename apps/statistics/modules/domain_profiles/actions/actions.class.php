@@ -140,10 +140,14 @@ class domain_profilesActions extends sfActions
 
 
   public function executeSubscribe_api(sfWebRequest $request) {
+  	$dm = MongoManager::getDM();
   	$this->pHostId = $request->getParameter('host_id');
     $this->pDomainProfile = Doctrine::getTable('DomainProfile')->find($this->pHostId);
     //gibt es nen endpoint? sollte mit in domain-profile-object und muss auch in index für die tabelle gesetzt sein pro domain-profile
     $this->pEndpoint = DomainSubscriptionsTable::getInstance()->findOneBy("domain_profile_id", $this->pDomainProfile->getId());
+    $this->pOk = $dm->getRepository("Documents\PushJob")->countValidPuSHsLast24h($this->pHostId);
+    $this->pTimeout = $dm->getRepository("Documents\PushJob")->countTimeoutPuSHsLast24h($this->pHostId);
+    $this->pResponseFail = $dm->getRepository("Documents\PushJob")->countFailedPuSHsLast24h($this->pHostId);
   }
 
   public function executeCheck_endpoint(sfWebRequest $request) {

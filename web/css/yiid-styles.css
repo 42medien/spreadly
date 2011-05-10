@@ -813,6 +813,12 @@ th.headerSortUp.last {
   clear:both;
 }
 
+#endpoint-stats{
+  margin-top: 10px;
+}
+
+.ep-stat-count{ margin-right: 10px; line-height: 18px;}
+
 .form-response{
   margin-top: 20px;
 }
