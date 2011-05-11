@@ -71,7 +71,9 @@ class Worker {
       System_Daemon::start();
     }
 
-    System_Daemon::info('============================\ndaemon started\n============================');
+    System_Daemon::info('============================');
+    System_Daemon::info('daemon started');
+    System_Daemon::info('============================');
 
     // With the runmode --write-initd, this program can automatically write a
     // system startup file called: 'init.d'
