@@ -47,7 +47,7 @@ class PubSubHubbub {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);  // RETURN THE CONTENTS OF THE CALL
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-    curl_setopt($ch, CURLOPT_VERBOSE,        1);
+    curl_setopt($ch, CURLOPT_VERBOSE,        0);
     curl_setopt($ch, CURLOPT_HTTPHEADER,     $post_header);
 
     $response = curl_exec($ch);
