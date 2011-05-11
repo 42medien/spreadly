@@ -71,6 +71,8 @@ class Worker {
       System_Daemon::start();
     }
 
+    System_Daemon::info('============================\ndaemon started\n============================');
+
     // With the runmode --write-initd, this program can automatically write a
     // system startup file called: 'init.d'
     // This will make sure your daemon will be started on reboot
