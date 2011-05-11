@@ -24,8 +24,8 @@ sfContext::createInstance($configuration);
 class Worker {
   public static function work($argv = array()) {
     $appName = 'Worker';
-    if (sfConfig::get("sf_environment") != "prod") {
-      $appName = 'Worker-'.sfConfig::get("sf_environment");
+    if (BatchConfiguration::ENV != "prod") {
+      $appName = 'Worker-'.BatchConfiguration::ENV;
     }
 
     $options = array('appName' => $appName,
