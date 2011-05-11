@@ -33,6 +33,7 @@
 				<li><?php echo link_to(__('Other Extensions'), 'http://code.google.com/p/spreadly/downloads/list', array('target' => '_blank')); ?></li>
 				<li><?php echo link_to(__('Wordpress Plugin'), 'http://wordpress.org/extend/plugins/yiidit/', array('target' => '_blank')); ?></li>
 				<li><?php echo link_to(__('Developers'), 'http://code.google.com/p/spreadly/', array('target' => '_blank')); ?></li>
+				<li><?php echo link_to(__('Api'), 'http://code.google.com/p/spreadly/wiki/PuSH_API', array('target' => '_blank')); ?></li>
 			</ul>
 		</div>
 	</div>
