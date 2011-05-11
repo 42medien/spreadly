@@ -69,6 +69,15 @@ end
 
 # Symfony stuff
 
+before "deploy:symlink" do
+  #surun "/etc/init.d/Worker-#{sf_env} stop"
+end
+
+after "deploy:symlink" do
+  run "chmod 744 #{latest_release}/lib/Queue/Boss.php"
+  #surun "/etc/init.d/Worker-#{sf_env} start"
+end
+
 # Dirs that need to remain the same between deploys (shared dirs)
 set :shared_children,   %w(log web/uploads)
 
@@ -211,5 +220,19 @@ def ask_for_repository
   end
 
   puts "Using repository: " + repository
+end
+
+# Runs +command+ as root invoking the command with su -c
+# and handling the root password prompt.
+#
+#   surun "/etc/init.d/apache reload"
+#   # Executes
+#   # su - -c '/etc/init.d/apache reload'
+#
+def surun(command)
+  password = fetch(:root_password, Capistrano::CLI.password_prompt("root password: "))
+  run("su - -c '#{command}'") do |channel, stream, output|
+    channel.send_data("#{password}n") if output
+  end
 end
 
