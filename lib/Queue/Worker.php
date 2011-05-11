@@ -31,14 +31,14 @@ class Worker {
                      'sysMaxExecutionTime' => '0',
                      'sysMaxInputTime' => '0',
                      'sysMemoryLimit' => '64M',
-                     'appRunAsGID' => 501,
-                     'appRunAsUID' => 501);
+                     'appRunAsGID' => 1001,
+                     'appRunAsUID' => 1001);
 
     // Allowed arguments & their defaults
     $runmode = array(
       'no-daemon' => false,
       'help' => false,
-      'write-initd' => false,
+      'write-initd' => false
     );
 
     // Scan command line attributes for allowed arguments
@@ -90,12 +90,6 @@ class Worker {
       // What mode are we in?
       $mode = '"'.(System_Daemon::isInBackground() ? '' : 'non-' ).'daemon" mode';
 
-      // Log something using the Daemon class's logging facility
-      // Depending on runmode it will either end up:
-      //  - In the /var/log/logparser.log
-      //  - On screen (in case we're not a daemon yet)
-      System_Daemon::info('{appName} running in %s %s', $mode, $cnt);
-
       // get job
       $job = Queue::getInstance()->get();
 
@@ -104,8 +98,12 @@ class Worker {
           // try to execute job
           $job->execute();
           $job->finished();
+
+          System_Daemon::info('{appName} finished job %s', $cnt);
         } catch (Exception $e) {
           $job->reschedule($e->getMessage());
+
+          System_Daemon::info('{appName} resceduled job %s', $cnt);
         }
 
         // get next job immediately
