@@ -99,11 +99,11 @@ class Worker {
           $job->execute();
           $job->finished();
 
-          System_Daemon::info('{appName} finished job %s', $cnt);
+          System_Daemon::info('{appName} finished job %s of type %s', $cnt, get_class($job));
         } catch (Exception $e) {
           $job->reschedule($e->getMessage());
 
-          System_Daemon::info('{appName} resceduled job %s', $cnt);
+          System_Daemon::err('{appName} resceduled job %s of type %s because of "%s"', $cnt, get_class($job), $e->getMessage());
         }
 
         // get next job immediately
