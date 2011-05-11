@@ -23,9 +23,14 @@ sfContext::createInstance($configuration);
  */
 class Worker {
   public static function work($argv = array()) {
-    $options = array('appName' => 'Worker',
+    $appName = 'Worker';
+    if (sfConfig::get("sf_environment" != "prod")) {
+      $appName = 'Worker-'.sfConfig::get("sf_environment");
+    }
+
+    $options = array('appName' => $appName,
                      'appDir' => dirname(__FILE__),
-                     'appDescription' => 'the default daemon',
+                     'appDescription' => 'spreadlys brave worker',
                      'authorName' => 'ekaabo',
                      'authorEmail' => 'info@ekaabo.de',
                      'sysMaxExecutionTime' => '0',
