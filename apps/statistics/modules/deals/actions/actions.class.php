@@ -36,34 +36,6 @@ class dealsActions extends sfActions
 
   }
 
-  public function executeTesterle_save(sfWebRequest $request) {
-    //var_dump($request->getPostParameters());exit;
-
-  	$lParams = $request->getPostParameters();
-
-    $lParams['new']['domain_profile_id'] = $lParams['id'];
-
-    //$lDealForm = new DealForm();
-    $lDomainObject = DomainProfileTable::getInstance()->find($lParams['id']);
-    $lDomainForm = new DomainProfileDealForm($lDomainObject);
-
-    //$lDomainForm->embedForm('deal', $lDealForm);
-
-  	$lDomainForm->bind($lParams);
-    if($lDomainForm->isValid()) {
-	    $lObject = $lDomainForm->save();
-	    var_dump($lObject);die();
-    } else {
-    	$lErrorString='';
-      foreach ($lDomainForm->getErrorSchema()->getErrors() as $lError) {
-        $lErrorString = $lError->getMessage().'<br/>';
-      }
-        var_dump($lErrorString);die();
-
-    }
-
-  }
-
   public function executeGet_tags(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
   	$lArray =  array("Affe", "Pferd", "Pinguin");
