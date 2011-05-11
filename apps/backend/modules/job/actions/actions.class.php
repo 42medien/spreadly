@@ -36,6 +36,16 @@ class jobActions extends sfActions
         
     return $this->redirect('job/index');
   }
+
+  public function executeRemoveJobs(sfWebRequest $request) {
+    $dm = MongoManager::getDm();
+    $dm ->createQueryBuilder('Documents\Job')
+        ->remove()
+        ->getQuery()
+        ->execute();
+        
+    return $this->redirect('job/index');
+  }
   
   public function executeWork(sfWebRequest $request) {
         

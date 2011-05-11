@@ -52,6 +52,9 @@
       <a href="/backend.php/job/RemovePointlessJobs/action">Remove all pointless jobs</a>
     </li>
     <li>
+      <a href="/backend.php/job/RemoveJobs/action">Remove ALL jobs</a>
+    </li>
+    <li>
       <a href="/backend.php/job/Work/action">Work queue</a>
     </li>
     </ul>
