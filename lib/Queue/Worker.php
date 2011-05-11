@@ -24,7 +24,7 @@ sfContext::createInstance($configuration);
 class Worker {
   public static function work($argv = array()) {
     $appName = 'Worker';
-    if (sfConfig::get("sf_environment" != "prod")) {
+    if (sfConfig::get("sf_environment") != "prod") {
       $appName = 'Worker-'.sfConfig::get("sf_environment");
     }
 
