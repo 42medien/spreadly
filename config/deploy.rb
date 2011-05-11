@@ -69,14 +69,9 @@ end
 
 # Symfony stuff
 
-before "deploy:symlink" do
-  #surun "/etc/init.d/Worker-#{sf_env} stop"
-end
+before "deploy:symlink", "deploy:stop_worker"
+after "deploy:symlink", "deploy:start_worker"
 
-after "deploy:symlink" do
-  run "chmod 744 #{latest_release}/lib/Queue/Boss.php"
-  #surun "/etc/init.d/Worker-#{sf_env} start"
-end
 
 # Dirs that need to remain the same between deploys (shared dirs)
 set :shared_children,   %w(log web/uploads)
@@ -153,6 +148,16 @@ namespace :deploy do
 
   desc "Need to overwrite the deploy:cold task so it doesn't try to run the migrations."
   task :cold do ; end
+  
+  task :stop_worker do
+    #surun "/etc/init.d/Worker-#{sf_env} stop"
+  end
+
+  task :start_worker do
+    run "chmod 744 #{latest_release}/lib/Queue/Boss.php"
+    #surun "/etc/init.d/Worker-#{sf_env} start"
+  end
+
 end
 
 namespace :symfony do
@@ -231,7 +236,7 @@ end
 #
 def surun(command)
   password = fetch(:root_password, Capistrano::CLI.password_prompt("root password: "))
-  run("su - -c '#{command}'") do |channel, stream, output|
+  run("su - -c '#{command}'", :options => {:pty => true}) do |channel, stream, output|
     channel.send_data("#{password}n") if output
   end
 end
