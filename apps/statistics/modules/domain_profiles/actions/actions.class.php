@@ -169,7 +169,7 @@ class domain_profilesActions extends sfActions
     	$lReturn['host_id'] = $lDomainProfile->getId();
 		} else {
 			$lReturn['success'] = false;
-    	$lReturn['msg'] = _('The Endpoint is not correct. Please check the url or your implementation. For more info read our <a href="http://code.google.com/p/spreadly/wiki/PuSH_API">api documentation</a>');
+    	$lReturn['msg'] = _('The Endpoint is not correct. Please check the url or your implementation. For more info read our <a href="http://code.google.com/p/spreadly/wiki/PuSH_API" target="_blank">api documentation</a>');
 		}
 
   	return $this->renderText(
