@@ -6,7 +6,7 @@
 	<div class="clearfix">
 		<div class="btnwording alignleft">
 			<strong><?php echo __('Your Endpoint'); ?></strong>
-			<span><?php echo __('(the url Spreadly should notifyin case of new likes or deals'); ?></span>
+			<span><?php echo __('(The url Spreadly should notifyin case of new likes or deals)'); ?></span>
 		</div>
 		<label class="textfield-wht">
 			<span>

@@ -158,7 +158,7 @@ class domain_profilesActions extends sfActions
 		$lVerified = PubSubHubbub::verifyCallback($lDomainProfile->getDomain(), $lUrl);
 
 	  $lReturn = array();
-		if($lVerified == true) {
+		if($lVerified === true) {
 			$lEndpoint = new DomainSubscriptions();
 			$lEndpoint->setDomainProfileId($lDomainProfile->getId());
 			$lEndpoint->setCallback($lUrl);

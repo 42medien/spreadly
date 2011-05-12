@@ -1,7 +1,7 @@
 /**
  * class to handle the verification process for the api
  * 
- * @nocombine statistics
+ * @combine statistics
  */
 
 var ApiVerifier = {

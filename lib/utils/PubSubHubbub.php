@@ -20,7 +20,6 @@ class PubSubHubbub {
       $separator = "&";
 
     $url = $callback.$separator."hub.mode=subscribe&hub.topic=$topic&hub.challenge=$challenge";
-
     // add any additional curl options here
     $options = array(CURLOPT_URL => $url,
                      CURLOPT_USERAGENT => "Spread.ly-Push-API-Verifier/1.0",
