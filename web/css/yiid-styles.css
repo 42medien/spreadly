@@ -409,6 +409,9 @@ td.editinplaceclick {
   color: #bbbbbb;
 }
 
+#man-url-label{ margin: 25px 0px 25px 25px; }
+#man-url-label input{ width: 435px;}
+
 #d_clip_button.active { color: #000; }
 
 #d_clip_button {
@@ -836,4 +839,4 @@ th.headerSortUp.last {
 .bc-seperator{  background: url("/img/breadcrumb_center.png") no-repeat scroll left center transparent; width: 17px;}
 .bc-last{  background: url("/img/breadcrumb_right.png") no-repeat scroll left center transparent; width: 12px;}
 
-
+#like-content-box .error{margin: 25px;}

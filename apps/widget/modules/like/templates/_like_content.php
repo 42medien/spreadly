@@ -1,4 +1,14 @@
-    <div class="wht-contentbox clearfix">
+<?php use_helper('Avatar', 'Text'); ?>
+<?php
+$lImages = $pYiidMeta->getImages();
+if ($lImages && count($lImages) > 0) {
+  $lImage = $lImages[0];
+} else {
+  $lImage = "";
+}
+?>
+
+
       <div class="commentlist spreadbox">
         <div class="clearfix profilebox">
           <div class="alignleft proimg">
@@ -48,4 +58,10 @@
           </label> <span class="alignleft btn"><input type="submit" id="popup-send-like-button" class="alignleft" value="" /></span>
         </div>
       </div>
-    </div>
+
+    <input type="hidden" name="like[thumb]" id="like-img-value" value="<?php echo $lImage; ?>" />
+    <input type="hidden" name="like[title]" value="<?php echo htmlspecialchars($pYiidMeta->getTitle()); ?>" />
+    <input type="hidden" name="like[descr]" value="<?php echo htmlspecialchars($pYiidMeta->getDescription()); ?>" />
+    <input type="hidden" name="like[url]" value="<?php echo $pYiidMeta->getUrl(); ?>" />
+    <input type="hidden" name="like[tags]" value="<?php echo $sf_request->getParameter('tags'); ?>" />
+    <input type="hidden" name="like[clickback]" value="<?php echo $sf_request->getParameter('clickback'); ?>" />

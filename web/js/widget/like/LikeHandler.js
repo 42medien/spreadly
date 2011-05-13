@@ -1,5 +1,5 @@
 /**
- * @combine widget
+ * @nocombine widget
  */
 
 /**
@@ -98,7 +98,7 @@ var WidgetLikeForm = {
     doSend: function() {
       debug.log('[WidgetLikeForm][doSend]');      
       
-      jQuery('#popup-send-like-button').live('click', function() {
+      jQuery('#popup-send-like-button').bind('click', function() {
         var lAction = jQuery('#popup-like-form').attr('action');         
         OnLoadGrafic.showGrafic();
         WidgetLikeForm.hideButton();
@@ -204,8 +204,19 @@ var WidgetLikeForm = {
  */
 var LikeImage = {
     
-    init: function() {
-      //LikeImage.get();
+    init: function(pImgCount, pUrl) {
+     debug.log("[LikeImage][init]");
+     if(pImgCount == 0) {
+        LikeImage.get(pUrl);
+     } else if (pImgCount == 1) { 
+       WidgetLikeForm.setImageValue(LikeImage.getImgPath(0));
+       LikeImageCounter.hide();
+     } else {
+       LikeImageScroller.init(true);
+       LikeImageCounter.init(pImgCount);
+       LikeImageCounter.show();
+       LikeImageScroller.onScroll();
+     }
     },
       
     /**
@@ -214,6 +225,7 @@ var LikeImage = {
      * @param string pUrl
      */
     get: function(pUrl) {
+      debug.log("[LikeImage][get]");      
       OnLoadGrafic.insertGraficToElem(jQuery('#myscroll'));
       var lAction = '/like/get_images';
       var lData = {
@@ -376,5 +388,42 @@ var LikeImageCounter = {
    */
   hide: function() {
     jQuery('#scroll-button-area').hide();        
+  }
+};
+
+var WidgetLikeContent = {
+  
+  get: function(){
+    OnLoadGrafic.showGrafic();
+    jQuery.ajax({
+      //beforeSubmit : OnLoadGrafic.showGrafic,
+      type :     "GET",
+      url:       '/like/get_like_content',
+      dataType : "json",
+      data: { 
+        ei_kcuf: new Date().getTime(),
+        url: jQuery('#man-url-input').val()
+      },
+      success : function(pResponse) {
+        if(pResponse.success == true) {
+          WidgetLikeContent.show(pResponse.html);
+          LikeImage.init(pResponse.imgcount, pResponse.url);
+          WidgetLikeForm.init();          
+        } else {
+          WidgetLikeContent.showError(pResponse.msg);
+        }
+      }
+    });      
+  },
+    
+  show: function(pHtml) {
+    jQuery('#like-content-box').empty();
+    jQuery('#like-content-box').append(pHtml);
+    OnLoadGrafic.hideGrafic();
+  },
+  
+  showError: function(pMsg){
+    jQuery('#like-content-box').empty();
+    jQuery('#like-content-box').prepend("<div class='error'>"+pMsg+"</div>");      
   }
 };

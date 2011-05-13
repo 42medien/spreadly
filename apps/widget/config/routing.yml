@@ -34,6 +34,10 @@ widget_profile:
 nourl:
   url:    /nourl
   param:  { module: like, action: nourl }
+  
+get_like_content:
+  url:    /like/get_like_content
+  param:  { module: like, action: get_like_content } 
 
 get_coupon_used:
   url:    /deals/get_coupon_used

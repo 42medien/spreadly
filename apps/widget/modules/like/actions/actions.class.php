@@ -118,6 +118,35 @@ class likeActions extends sfActions {
   }
 
   public function executeNourl(sfWebRequest $request){
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('like/js_init_nourl.js'));
   	$this->pIdentities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
+  }
+
+  public function executeGet_like_content(sfWebRequest $request) {
+  	$this->getResponse()->setContentType('application/json');
+    $lUrl = $request->getParameter("url", null);
+    $lReturn = array();
+    $dm = MongoManager::getDM();
+
+    $lActivity = $dm->getRepository("Documents\YiidActivity")->findOneBy(array("url" => $lUrl, "u_id" => intval($this->getUser()->getId()), "d_id" => array('$exists' => false)));
+
+		if($lActivity) {
+	      $lReturn['success'] = false;
+	      $lReturn['msg'] = _('Already liked');
+		} else {
+	    $lYiidMeta = new YiidMeta();
+	    $this->pYiidMeta = SocialObjectParser::fetch($lUrl, $lYiidMeta);
+	    if ($this->pYiidMeta === false) {
+	      $lReturn['success'] = false;
+	      $lReturn['msg'] = _('Wrong Url');
+	    } else {
+	      $lReturn['success'] = true;
+	    	$lReturn['html'] = $this->getPartial('like/like_content', array('pYiidMeta' => $lYiidMeta));
+	    	$lReturn['imgcount'] = count($this->pYiidMeta->getImages());
+	    	$lReturn['url'] = $lUrl;
+	    }
+		}
+
+    return $this->renderText(json_encode($lReturn));
   }
 }
