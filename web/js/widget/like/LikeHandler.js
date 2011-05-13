@@ -425,5 +425,6 @@ var WidgetLikeContent = {
   showError: function(pMsg){
     jQuery('#like-content-box').empty();
     jQuery('#like-content-box').prepend("<div class='error'>"+pMsg+"</div>");      
+    OnLoadGrafic.hideGrafic();
   }
 };
