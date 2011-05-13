@@ -30,6 +30,10 @@ widget_deals_example:
 widget_profile:
   url:    /profile
   param:  { module: profile, action: index }
+  
+nourl:
+  url:    /nourl
+  param:  { module: like, action: nourl }
 
 get_coupon_used:
   url:    /deals/get_coupon_used

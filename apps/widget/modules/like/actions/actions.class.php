@@ -116,4 +116,8 @@ class likeActions extends sfActions {
     $lReturn['html'] = $this->getPartial('like/meta_images_list', array('pImages' => $lImages));
     return $this->renderText(json_encode($lReturn));
   }
+
+  public function executeNourl(sfWebRequest $request){
+  	$this->pIdentities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
+  }
 }
