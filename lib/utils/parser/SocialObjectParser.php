@@ -18,11 +18,15 @@ class SocialObjectParser {
    * @return array $pArray
    */
   public static function fetch($pUrl, $pYiidMeta = null) {
-    $pUrl = urldecode($pUrl);
+    $pUrl = trim(urldecode($pUrl));
 
     try {
       //get the html as string
       $lHtml = UrlUtils::getUrlContent($pUrl, 'GET');
+
+      if (!$lHtml) {
+        return false;
+      }
 
       // boost performance and use alreade the header
       $lHeader = substr( $lHtml, 0, stripos( $lHtml, '</head>' ) );
