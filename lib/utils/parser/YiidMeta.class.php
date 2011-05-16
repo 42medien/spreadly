@@ -14,13 +14,13 @@ class YiidMeta {
 
   public function setTitle($title) {
     if (!$this->title && $title) {
-      $this->title = urldecode($title);
+      $this->title = strip_tags(urldecode($title));
     }
   }
 
   public function setDescription($description) {
     if (!$this->description && $description) {
-      $this->description = urldecode($description);
+      $this->description = strip_tags(urldecode($description));
     }
   }
 
