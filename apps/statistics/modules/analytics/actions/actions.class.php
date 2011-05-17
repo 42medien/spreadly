@@ -85,7 +85,13 @@ class analyticsActions extends sfActions {
   public function executeDomain_statistics(sfWebRequest $request) {
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
     $dm = MongoManager::getStatsDM();
-  	$this->pHost = $dm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $this->pDomainProfile->getUrl()));
+  	$pHost = $dm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $this->pDomainProfile->getUrl()));
+
+  	if ($pHost) {
+  	  $this->pHost = $pHost;
+  	} else {
+      $this->setTemplate("no_stats");
+  	}
   }
 
   public function executeDomain_detail(sfWebRequest $request){
