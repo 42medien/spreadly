@@ -37,8 +37,8 @@ all:
     enabled_modules: [default, sfGuardAuth, sfApply]
     login_module:           sfGuardAuth
     login_action:           signin
-    secure_module:          sfGuardAuth
-    secure_action:          secure
+    secure_module:          system
+    secure_action:          credentials
     error_404_module:       system
     error_404_action:       404
 

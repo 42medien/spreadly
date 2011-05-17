@@ -8,23 +8,8 @@
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class systemActions extends sfActions
-{
- /**
-  * Executes index action
-  *
-  * @param sfRequest $request A request object
-  */
-  public function executeIndex(sfWebRequest $request) {
-
-  }
-
-  public function execute404(sfWebRequest $request) {
-
-  }
-
+class systemActions extends sfActions {
   public function executeChange_language(sfWebRequest $request) {
-
   	$form = new sfFormLanguage(
       $this->getUser(),
       array('languages' => array('en', 'de'))
@@ -55,19 +40,12 @@ class systemActions extends sfActions
     }
   }
 
-  public function executeNodomain(sfWebRequest $request) {
+  public function executeCredentials(sfWebRequest $request) {}
 
-  }
-
-  public function executeImprint(sfWebRequest $request) {
-
-  }
-
-  public function executeTos(sfWebRequest $request) {
-
-  }
-
-  public function executePrivacy(sfWebRequest $request) {
-
-  }
+  public function executeIndex(sfWebRequest $request) {}
+  public function execute404(sfWebRequest $request) {}
+  public function executeNodomain(sfWebRequest $request) {}
+  public function executeImprint(sfWebRequest $request) {}
+  public function executeTos(sfWebRequest $request) {}
+  public function executePrivacy(sfWebRequest $request) {}
 }
