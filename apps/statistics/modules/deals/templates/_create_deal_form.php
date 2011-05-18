@@ -275,7 +275,8 @@
 											</ul>
 											</li>
 
-											<li id="multiple-code-row" class="clearfix" <?php echo ($pCouponType=='single')? 'style="display:none;"': ''; ?>>
+
+											<li id="multiple-code-row" class="clearfix" <?php echo ($pCouponType=='single' || $pCouponType=='url')? 'style="display:none;"': ''; ?>>
 											<ul class="clearfix">
 												<!-- ********** Configure multiple codes ********** -->
 												<li class="clearfix">

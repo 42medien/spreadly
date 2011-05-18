@@ -50,13 +50,13 @@ class dealsActions extends sfActions
 		unset($lParams['single-quantity']);
 
     // Cleaning up the single code/multi code dilemma
-    $lParams['deal']['coupon_type']=='single' ? $lParams['deal']['coupon']['multiple_codes']="" : $lParams['deal']['coupon']['single_code']="";
+    ($lParams['deal']['coupon_type']=='single' || $lParams['deal']['coupon_type']=='url') ? $lParams['deal']['coupon']['multiple_codes']="" : $lParams['deal']['coupon']['single_code']="";
     $lParams['deal']['tags'] = ($lParams['deal']['addtags'] == 'addnotags')? $lParams['deal']['tags'] = NULL: $lParams['deal']['tags'];
 
     return $lParams;
   }
 
-  private function getFormWithEmbeddedForms($pDomainProfileId, $pDealForm, $pDeal) {
+  private function getFormWithEmbeddedForms($pDomainProfileId, $pDealForm, $pDeal, $pParams) {
     $lDomainObject = DomainProfileTable::getInstance()->find($pDomainProfileId);
     $lForm = new DomainProfileDealForm($lDomainObject);
     $lCouponForm = new CouponCodesForm();
@@ -68,6 +68,12 @@ class dealsActions extends sfActions
           new sfValidatorSchemaFilter('single_code', new sfValidatorString(array('required' => true), array('required' => $lI18n->__('Required')))),
           new sfValidatorSchemaFilter('multiple_codes', new sfValidatorString(array('required' => true), array('required' => $lI18n->__('Required'))))
         ))
+      );
+    }
+
+    if($pParams['deal']['coupon_type']=='url'){
+      $lCouponForm->getValidatorSchema()->setPostValidator(
+          new sfValidatorSchemaFilter('single_code', new sfValidatorUrl(array('required' => true), array('required' => $lI18n->__('no url'))))
       );
     }
 
@@ -91,9 +97,10 @@ class dealsActions extends sfActions
       $lDealForm->setDefault('domain_profile_id', $lParams['id']);
     }
 
-    $this->pForm = $this->getFormWithEmbeddedForms($lParams['id'], $lDealForm, $lDeal);
+    $this->pForm = $this->getFormWithEmbeddedForms($lParams['id'], $lDealForm, $lDeal, $lParams);
 
     $this->pForm->bind($lParams);
+
     if($this->pForm->isValid()) {
 	    $lObject = $this->pForm->save();
 	    $lDealFromForm = $this->pForm->getEmbeddedForm('deal')->getObject();

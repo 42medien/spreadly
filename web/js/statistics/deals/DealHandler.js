@@ -1,5 +1,5 @@
 /**
- * @combine statistics
+ * @nocombine statistics
  */
 
 /**
@@ -156,6 +156,8 @@ var DealForm = {
     jQuery('#deal_description').toggleValue();
     jQuery('#deal_terms_of_deal').toggleValue();    
     jQuery('#deal_redeem_url').toggleValue();
+    jQuery('#deal_coupon_single_code').toggleValue();
+    
 
     jQuery('.mirror-value').mirrorValue();    
     // limits the text-values
@@ -295,7 +297,7 @@ var DealForm = {
         function() {
           var lId = jQuery(this).attr('id');
           debug.log(lId);
-          if (lId == 'deal_coupon_type_single') {
+          if (lId == 'deal_coupon_type_single' || lId == 'deal_coupon_type_url') {
             jQuery('#multiple-code-row').hide();
             jQuery('#single-code-row').show();
           } else {
