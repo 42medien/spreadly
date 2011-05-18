@@ -72,7 +72,7 @@ class Deal extends BaseDeal {
   }
 
   public function isUnlimited() {
-    return $this->getCouponType()==DealTable::COUPON_TYPE_SINGLE &&
+    return $this->getCouponType()!=DealTable::COUPON_TYPE_MULTIPLE &&
            $this->getCouponQuantity()==DealTable::COUPON_QUANTITY_UNLIMITED;
   }
 
@@ -123,7 +123,7 @@ class Deal extends BaseDeal {
     $lCouponQuantity = $this->getCouponQuantity();
     $lNewEntries = 0;
 
-    if($pIsAdding && $this->getCouponType()==DealTable::COUPON_TYPE_SINGLE) {
+    if($pIsAdding && $this->getCouponType()!=DealTable::COUPON_TYPE_MULTIPLE) {
       if(!$this->isUnlimited()) {
         $lNewEntries += $pParamQuantity;
       }
