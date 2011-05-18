@@ -3,7 +3,7 @@
 class DealTable extends Doctrine_Table
 {
   const COUPON_TYPE_SINGLE = 'single';
-  const COUPON_TYPE_SINGLE = 'url';
+  const COUPON_TYPE_URL = 'url';
   const COUPON_TYPE_MULTIPLE = 'multiple';
   const COUPON_QUANTITY_UNLIMITED = 0;
 
