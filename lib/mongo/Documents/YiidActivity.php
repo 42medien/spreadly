@@ -97,6 +97,9 @@ class YiidActivity extends BaseDocument {
   /** @NotSaved */
   protected $so_id;
 
+  /** @NotSaved */
+  protected $ignore_deal;
+
   /**
    * save this shit!
    */
@@ -209,7 +212,9 @@ class YiidActivity extends BaseDocument {
     }
     $this->doValidate();
 
-    $this->updateDealInfo();
+    if ($this->ignore_deal === true) {
+      $this->updateDealInfo();
+    }
   }
 
   private function createJob() {
