@@ -10,4 +10,5 @@
 		<div id="like-content-box">
 		</div>
 	</div>
+	<input type="hidden" name="like[ignore_deal]" id="like-ignore-deal" value="1" />
 </form>

@@ -98,7 +98,7 @@ class YiidActivity extends BaseDocument {
   protected $so_id;
 
   /** @NotSaved */
-  protected $ignore_deal;
+  protected $ignore_deal = 0;
 
   /**
    * save this shit!
@@ -212,7 +212,7 @@ class YiidActivity extends BaseDocument {
     }
     $this->doValidate();
 
-    if ($this->ignore_deal === true) {
+    if ($this->ignore_deal == 1) {
       $this->updateDealInfo();
     }
   }
