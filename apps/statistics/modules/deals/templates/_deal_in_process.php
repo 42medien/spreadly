@@ -20,8 +20,8 @@
 		    </p>
 	    <?php } ?>
 	    <p>
-	    	<?php echo link_to('<span>'.__('Close').'</span>', 'deals/get_create_index', array('class' => 'button link-deal-content')); ?>
-				<?php echo link_to('<span>'.__('Create another deal').'</span>', 'deals/get_create_form', array('class' => 'button link-deal-content')); ?>
+	    	<?php echo link_to('<span>'.__('Close').'</span>', 'deals/get_create_index', array('class' => 'alignleft button link-deal-content')); ?>
+				<?php echo link_to('<span>'.__('Create another deal').'</span>', 'deals/get_create_form', array('class' => 'alignleft button link-deal-content')); ?>
 	    </p>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
