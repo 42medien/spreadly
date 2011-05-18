@@ -59,7 +59,7 @@ class likeActions extends sfActions {
     } elseif ($lUrl = $this->getUser()->getAttribute("redirect_after_login", null, "widget")) {
       $this->redirect($lUrl);
     } else {
-      $this->redirect("@widget_likes");
+      $this->forward("like", "nourl");
     }
 
     $lYiidMeta = new YiidMeta();
@@ -99,6 +99,8 @@ class likeActions extends sfActions {
       if($lActivity->isDeal()){
       	$lReturn['html'] = $this->getPartial('like/coupon_used', array('pActivity' => $lActivity));
       }
+
+      $this->getUser()->setAttribute("redirect_after_login", null, "widget");
 		} catch (Exception $e) { // send error on exception
 		  $this->getLogger()->err($e->getMessage());
       $lSuccess = false;
