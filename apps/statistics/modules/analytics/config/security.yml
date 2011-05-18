@@ -4,3 +4,15 @@
 domain_detail:
   is_secure: true
   credentials: statistics
+
+get_domain_detail:
+  is_secure: true
+  credentials: statistics
+
+url_detail:
+  is_secure: true
+  credentials: statistics
+
+get_url_detail:
+  is_secure: true
+  credentials: statistics
