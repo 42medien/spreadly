@@ -3,16 +3,16 @@
 
 domain_detail:
   is_secure: true
-  credentials: statistics
+  credentials: domain_detail_view_permission
 
 get_domain_detail:
   is_secure: true
-  credentials: statistics
+  credentials: domain_detail_view_permission
 
 url_detail:
   is_secure: true
-  credentials: statistics
+  credentials: url_detail_view_permission
 
 get_url_detail:
   is_secure: true
-  credentials: statistics
+  credentials: url_detail_view_permission
