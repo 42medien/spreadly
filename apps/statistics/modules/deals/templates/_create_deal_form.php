@@ -250,8 +250,8 @@
 													</li>
 											<?php } else { ?>
 	                      <li class="clearfix">
-	                      	<div class="btnwording alignleft">
-	                      		<strong><?php echo $pForm['deal']['coupon']['single_code']->renderLabel();?></strong>
+	                      	<div class="btnwording alignleft" id="single-type-label">
+	                      		<strong><?php echo __('COUPON_TYPE_'.strtoupper($pCouponType).'_LABEL'); ; ?></strong>
 	                      	</div>
 	                      	<label class="textfield-wht">
 	                      		<span>

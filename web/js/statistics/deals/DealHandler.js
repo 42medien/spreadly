@@ -113,6 +113,8 @@ var Deal = {
  * @author KM
  */
 var DealForm = {
+    
+   aCouponType: null,
   
   /**
    * inits the effects for the form
@@ -233,6 +235,7 @@ var DealForm = {
           debug.log('response');
           Deal.showContent(pResponse.html);
           DealTable.update();
+          DealForm.aCouponType = pResponse.coupontype;
           DealForm.init();
           //jQuery("input[type='checkbox']").custCheckBox();
           OnLoadGrafic.hideGrafic();
@@ -293,13 +296,27 @@ var DealForm = {
    */
   toggleCouponType : function() {
     debug.log('[DealForm][toggleCouponType]');
+    var lSingleValue, lUrlValue;
+    lSingleValue = i18n.get('COUPON_TYPE_SINGLE_VALUE'); 
+    lUrlValue = i18n.get('COUPON_TYPE_URL_VALUE');
+    if(DealForm.aCouponType == 'url'){
+      lUrlValue = jQuery('#deal_coupon_single_code').val();      
+    } else if(DealForm.aCouponType == 'single') {
+      lSingleValue = jQuery('#deal_coupon_single_code').val();            
+    }
     jQuery('ul.radio_list li.coupon-type-select input:radio').live('click',
         function() {
           var lId = jQuery(this).attr('id');
-          debug.log(lId);
           if (lId == 'deal_coupon_type_single' || lId == 'deal_coupon_type_url') {
             jQuery('#multiple-code-row').hide();
             jQuery('#single-code-row').show();
+            if(lId == 'deal_coupon_type_url') {
+              jQuery('#deal_coupon_single_code').val(lUrlValue);
+              jQuery('#single-type-label strong').empty().append(i18n.get('COUPON_TYPE_URL_LABEL'));
+            } else {
+              jQuery('#deal_coupon_single_code').val(lSingleValue);
+              jQuery('#single-type-label strong').empty().append(i18n.get('COUPON_TYPE_SINGLE_LABEL'));              
+            }
           } else {
             jQuery('#single-code-row').hide();
             jQuery('#multiple-code-row').show();

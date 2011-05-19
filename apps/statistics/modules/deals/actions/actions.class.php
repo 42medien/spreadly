@@ -125,7 +125,7 @@ class dealsActions extends sfActions
     	if($lParams['deal']['coupon_type'] == 'single'){
     		$lDefaultCode = $lTaintedValues['deal']['coupon']['single_code'];
     	}
-
+    	$lReturn['coupontype'] = $lParams['deal']['coupon_type'];
     	$lReturn['html'] = $this->getPartial('deals/create_deal_form', array('pForm' => $this->pForm, 'pCouponType' => $lCouponType, 'pCouponQuantity' => $lCouponQuantity, 'pDefaultCode' => $lDefaultCode, 'pAddtags' => $lAddTags));
     }
 
