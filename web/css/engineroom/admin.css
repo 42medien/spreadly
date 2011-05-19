@@ -101,8 +101,35 @@ th
 {
   width: auto;
 }
-.sf_admin_filter {
-  display: none;
+
+#sf_admin_bar {
+  float:none;
+}
+
+/* Users */
+.sf_admin_filter_field_first_name,
+.sf_admin_filter_field_last_name,
+.sf_admin_filter_field_algorithm,
+.sf_admin_filter_field_salt,
+.sf_admin_filter_field_password,
+.sf_admin_filter_field_is_active,
+.sf_admin_filter_field_is_super_admin,
+.sf_admin_filter_field_last_login,
+.sf_admin_filter_field_created_at,
+.sf_admin_filter_field_updated_at,
+.sf_admin_filter_field_permissions_list,
+.sf_admin_filter_field_groups_list,
+/* Domains */
+.sf_admin_filter_field_protocol,
+.sf_admin_filter_field_verification_token,
+.sf_admin_filter_field_verification_count,
+.sf_admin_filter_field_imprint_url,
+.sf_admin_filter_field_tos_url,
+/* Permissions */
+.sf_admin_filter_field_description,
+.sf_admin_filter_field_users_list
+{
+  display:none;
 }
 /* Der Kern von Clearfix */
 .clearfix:after {

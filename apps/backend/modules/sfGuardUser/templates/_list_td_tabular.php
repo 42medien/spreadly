@@ -7,9 +7,9 @@
 <td class="sf_admin_date sf_admin_list_td_created_at">
   <?php echo false !== strtotime($sf_guard_user->getCreatedAt()) ? format_date($sf_guard_user->getCreatedAt(), "f") : '&nbsp;' ?>
 </td>
-<td class="sf_admin_date sf_admin_list_td_updated_at">
-  <?php echo false !== strtotime($sf_guard_user->getUpdatedAt()) ? format_date($sf_guard_user->getUpdatedAt(), "f") : '&nbsp;' ?>
-</td>
 <td class="sf_admin_date sf_admin_list_td_last_login">
   <?php echo false !== strtotime($sf_guard_user->getLastLogin()) ? format_date($sf_guard_user->getLastLogin(), "f") : '&nbsp;' ?>
+</td>
+<td class="sf_admin_text sf_admin_list_th_groups">
+<?php echo implode(", ", $sf_guard_user->getGroupNames()) ?>
 </td>

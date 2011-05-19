@@ -18,6 +18,14 @@
       <span class="navigation_text <?php if($module=='domain') { echo 'active'; } ?>">
         <?php echo link_to('Domains', url_for('domain/index')) ?> |
       </span>
+
+      <span class="navigation_text <?php if($module=='sfGuardPermission') { echo 'active'; } ?>">
+        <?php echo link_to('Permissions', url_for('sf_guard_permission')) ?> |
+      </span>
+      <span class="navigation_text <?php if($module=='sfGuardGroup') { echo 'active'; } ?>">
+        <?php echo link_to('Groups', url_for('sf_guard_group')) ?> |
+      </span>
+
       <span class="navigation_text <?php if($module=='oldstats') { echo 'active'; } ?>">
         <?php echo link_to('OldStats', url_for('@oldstats')) ?> |
       </span>
