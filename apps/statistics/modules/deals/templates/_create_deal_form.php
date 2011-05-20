@@ -206,7 +206,7 @@
 	    								<?php if($lIsEdit) { ?>
 	                    	<li class="clearfix">
 	                      	<div class="btnwording alignleft">
-	                      		<strong><?php echo __('Coupon-Codes');?></strong>
+	                      		<strong><?php echo __('Deal Type');?></strong>
 	                      	</div>
 	                      	<label>
 	                      		<span>

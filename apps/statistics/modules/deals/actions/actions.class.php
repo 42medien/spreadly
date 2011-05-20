@@ -122,7 +122,7 @@ class dealsActions extends sfActions
 
     	$lTaintedValues = $this->pForm->getTaintedValues();
     	$lDefaultCode = 'Coupon Code';
-    	if($lParams['deal']['coupon_type'] == 'single'){
+    	if($lParams['deal']['coupon_type'] == 'single' || $lParams['deal']['coupon_type'] == 'url'){
     		$lDefaultCode = $lTaintedValues['deal']['coupon']['single_code'];
     	}
     	$lReturn['coupontype'] = $lParams['deal']['coupon_type'];
