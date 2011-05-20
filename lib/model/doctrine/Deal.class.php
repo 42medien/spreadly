@@ -92,7 +92,7 @@ class Deal extends BaseDeal {
 
   private function saveMultipleCoupons($params, $pIsAdding=false) {
     $codes = array();
-    if($this->getCouponType()==DealTable::COUPON_TYPE_SINGLE) {
+    if($this->getCouponType()!=DealTable::COUPON_TYPE_MULTIPLE) {
       if(!empty($params['single_code'])) {
         $codes[] = $params['single_code'];
       }
