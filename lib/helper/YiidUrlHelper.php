@@ -124,9 +124,9 @@ function url_for_widgets($internal_uri, $absolute = true) {
  */
 function auto_link_to($text_or_link, $truncate_after = null, $options = array()) {
   if (UrlUtils::isUrlValid($text_or_link)) {
-    echo link_to($text_or_link, truncate_text($text_or_link, $truncate_after), $options);
+    return link_to($text_or_link, truncate_text($text_or_link, $truncate_after), $options);
   } else {
-    echo $text_or_link;
+    return $text_or_link;
   }
 }
 ?>
