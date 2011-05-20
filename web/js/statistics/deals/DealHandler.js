@@ -453,7 +453,7 @@ var DealTable = {
     debug.log('[DealTable][udateRow]');
     jQuery('.edit-state').live('click', function() {
       var lAction = jQuery(this).attr('href');
-      var lCssId = jQuery(this).parent('td').parent('tr').attr('id');
+      var lCssId = jQuery(this).closest('td').parent('tr').attr('id');
       jQuery.ajax({
         type : "GET",
         url : lAction,
