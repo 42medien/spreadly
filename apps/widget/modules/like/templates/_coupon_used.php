@@ -1,4 +1,4 @@
-<?php use_helper("Date"); ?>
+<?php use_helper("Date", "YiidUrl"); ?>
 <?php $lDeal = $pActivity->getDeal(); ?>
 <div class="grboxtop"><span></span></div>
 <div class="grboxmid">
@@ -11,7 +11,7 @@
     	<h2 class="graytitle txtcenter"><?php echo $lDeal->getDescription(); ?></h2>
       <div class="whtrow codebox">
     		<div class="rcor">
-        	<span class="fs13"><?php echo __('Your Coupon Code:'); ?></span><br /><span class="code"><?php echo $pActivity->getCCode();?></span>
+        	<span class="fs13"><?php echo __('Your Coupon Code:'); ?></span><br /><span class="code"><?php echo auto_link_to($pActivity->getCCode());?></span>
         </div>
       </div>
     </div>
