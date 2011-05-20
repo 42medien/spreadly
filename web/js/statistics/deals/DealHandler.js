@@ -134,7 +134,7 @@ var DealForm = {
     DealForm.setRadioButtons();
     DealForm.countCodes(); 
         
-    /* init datetime-picker for start and enddate
+    /* init datetime-picker for start and enddate*/
     jQuery('#deal_start_date').datetimepicker({
       showSecond: true,
       timeFormat: 'hh:mm:ss',
@@ -145,7 +145,7 @@ var DealForm = {
       showSecond: true,
       timeFormat: 'hh:mm:ss',
       dateFormat: 'yy-mm-dd'            
-    }); */   
+    });    
     
     // reset the form after side-reload (fix for ff)
     if (typeof (document.deal_form) != "undefined") {
