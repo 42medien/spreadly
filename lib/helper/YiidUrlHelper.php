@@ -1,5 +1,5 @@
 <?php
-sfProjectConfiguration::getActive()->loadHelpers('Url', 'Text');
+sfProjectConfiguration::getActive()->loadHelpers(array('Url', 'Text'));
 /**
  * a helper to link between different apps
  *
@@ -124,7 +124,7 @@ function url_for_widgets($internal_uri, $absolute = true) {
  */
 function auto_link_to($text_or_link, $truncate_after = 30, $options = array()) {
   if (UrlUtils::isUrlValid($text_or_link)) {
-    return link_to($text_or_link, truncate_text($text_or_link, $truncate_after), $options);
+    return link_to(truncate_text($text_or_link, $truncate_after), $text_or_link, $options);
   } else {
     return $text_or_link;
   }

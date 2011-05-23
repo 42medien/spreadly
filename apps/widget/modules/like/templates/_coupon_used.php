@@ -11,7 +11,15 @@
     	<h2 class="graytitle txtcenter"><?php echo $lDeal->getDescription(); ?></h2>
       <div class="whtrow codebox">
     		<div class="rcor">
-        	<span class="fs13"><?php echo __('Your Coupon Code:'); ?></span><br /><span class="code"><?php echo auto_link_to($pActivity->getCCode());?></span>
+        	<span class="fs13">
+        	  <?php
+        	  if (UrlUtils::isUrlValid($pActivity->getCCode())) {
+        	    echo __('Get your download here:');
+        	  } else {
+              echo __('Your Coupon Code:');
+        	  }
+        	  ?>
+        	</span><br /><span class="code"><?php echo auto_link_to($pActivity->getCCode());?></span>
         </div>
       </div>
     </div>
