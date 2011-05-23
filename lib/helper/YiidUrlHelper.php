@@ -122,7 +122,7 @@ function url_for_widgets($internal_uri, $absolute = true) {
  * @param int $truncate_after
  * @param array $options
  */
-function auto_link_to($text_or_link, $truncate_after = null, $options = array()) {
+function auto_link_to($text_or_link, $truncate_after = 30, $options = array()) {
   if (UrlUtils::isUrlValid($text_or_link)) {
     return link_to($text_or_link, truncate_text($text_or_link, $truncate_after), $options);
   } else {
