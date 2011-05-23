@@ -34,7 +34,6 @@
     </script>
     <?php } ?>
     <script type="text/javascript" src="/js/100_main/include/statistics-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
-    <script type="text/javascript" src="/js/statistics/deals/DealHandler.js"></script>
 
     <?php include_javascripts();?>
     <link rel="shortcut icon" href="/favicon.ico" />
