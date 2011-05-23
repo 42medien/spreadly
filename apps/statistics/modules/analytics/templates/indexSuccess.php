@@ -110,9 +110,9 @@
   				<td align="left" class="first"><div class="padleft"><?php echo $lDeal->getSummary(); ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $lDeal->getRemainingCouponQuantity(); ?></div></td>
   				<td align="center" valign="middle"><div><?php echo $lDeal->getRemainingDays() > 0 ? $lDeal->getRemainingDays() : __('expired'); ?></div></td>
-  				<td align="center" valign="middle"><div><?php echo array_key_exists($lDeal->getId(), $last30ByDeal) ? point_format($last30ByDeal[$lDeal->getId()]['value']['l']) : 0; ?></div></td>
-  				<td align="center" valign="middle"><div><?php echo array_key_exists($lDeal->getId(), $last30ByDeal) ? point_format($last30ByDeal[$lDeal->getId()]['value']['sh']) : 0; ?></div></td>
-  				<td align="center" class="last"><div><?php echo array_key_exists($lDeal->getId(), $last30ByDeal) ? point_format($last30ByDeal[$lDeal->getId()]['value']['mp']) : 0; ?></div></td>
+  				<td align="center" valign="middle"><div><?php echo $last30ByDeal && array_key_exists($lDeal->getId(), $last30ByDeal) ? point_format($last30ByDeal[$lDeal->getId()]['value']['l']) : 0; ?></div></td>
+  				<td align="center" valign="middle"><div><?php echo $last30ByDeal && array_key_exists($lDeal->getId(), $last30ByDeal) ? point_format($last30ByDeal[$lDeal->getId()]['value']['sh']) : 0; ?></div></td>
+  				<td align="center" class="last"><div><?php echo $last30ByDeal && array_key_exists($lDeal->getId(), $last30ByDeal) ? point_format($last30ByDeal[$lDeal->getId()]['value']['mp']) : 0; ?></div></td>
   			</tr>
       <?php $i++; } ?>
     	</tbody>
