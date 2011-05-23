@@ -323,7 +323,7 @@ div.dotborboxmore{ margin-top:11px;}
 .picmultiline{  line-height:30px;}
 .spactsbox{ margin-left:52px; margin-top:-1px;}
 .txtcenter{ text-align:center;}
-.codebox{ width:156px; margin:1px auto 0 auto;}
+.codebox{ width:auto; margin:1px auto 0 auto;}
 .code{ font-size:15px; }
 .htplinks{ text-align:center; font-size:11px; padding:7px 0 1px 0; }
 .htplinks a{ color:#375d81; text-decoration:none;}
