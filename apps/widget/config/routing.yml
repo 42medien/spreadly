@@ -2,6 +2,9 @@ widget_like:
   url:    /
   param:  { module: like, action: index }
 
+share:
+  url:    /share
+  param:  { module: like, action: nourl }
 
 widget_like_full:
   url:    /like
@@ -30,14 +33,14 @@ widget_deals_example:
 widget_profile:
   url:    /profile
   param:  { module: profile, action: index }
-  
+
 nourl:
   url:    /nourl
   param:  { module: like, action: nourl }
-  
+
 get_like_content:
   url:    /like/get_like_content
-  param:  { module: like, action: get_like_content } 
+  param:  { module: like, action: get_like_content }
 
 get_coupon_used:
   url:    /deals/get_coupon_used

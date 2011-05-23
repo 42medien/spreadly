@@ -641,8 +641,8 @@ th.headerSortUp.last {
 #filter-period-label{
     position: relative;
     z-index: 50;
-    padding-top: 5px;  
-    width: 135px;  
+    padding-top: 5px;
+    width: 135px;
 }
 
 #filter-period-or{
@@ -733,7 +733,7 @@ th.headerSortUp.last {
     border-right: none !important;
     line-height: 14px !important;
     font-weight: normal !important;
-    min-height: 70px;   
+    min-height: 70px;
     z-index: 99;
 }
 
@@ -840,3 +840,4 @@ th.headerSortUp.last {
 .bc-last{  background: url("/img/breadcrumb_right.png") no-repeat scroll left center transparent; width: 12px;}
 
 #like-content-box .error{margin: 25px;}
+.like-content-information { margin: 25px 0 25px 25px; };

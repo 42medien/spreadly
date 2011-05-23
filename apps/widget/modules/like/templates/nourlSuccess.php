@@ -8,6 +8,7 @@
 			</span>
 		</label>
 		<div id="like-content-box">
+		  <p class="like-content-information"><?php echo __("Please paste the URL you like to spread to your friends."); ?></p>
 		</div>
 	</div>
 	<input type="hidden" name="like[ignore_deal]" id="like-ignore-deal" value="1" />
