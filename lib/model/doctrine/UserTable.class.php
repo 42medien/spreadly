@@ -328,6 +328,8 @@ class UserTable extends Doctrine_Table {
     $lUser = UserTable::getInstance()->find($pUserId);
     $lConnectedUsers = $lUser->getIdsOfFriends();
 
+    array_unshift($lConnectedUsers, $lUser->getId());
+
     $lFriendsActive = array();
     if ($lSocialObject && $lConnectedUsers) {
       $lFriendsActive = array_intersect($lSocialObject->getUids(), $lConnectedUsers);
