@@ -19,7 +19,7 @@ class TwitterPostApiClient extends PostApi {
 
     $lMaxChars = 135;
 
-    $lText = $lUrl . " ". $pActivity->generateHashtag();
+    $lText = $lUrl;
     $lLengthOfText = strlen($lText);
 
     if ($pActivity->getComment()) {
