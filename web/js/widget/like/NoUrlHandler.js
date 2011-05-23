@@ -19,7 +19,7 @@ var NoUrlForm = {
         clearTimeout(lTimeout);
         lTimeout = setTimeout(function() {
           WidgetLikeContent.get();
-        }, 300);
+        }, 1000);
       });    
     }
 };
