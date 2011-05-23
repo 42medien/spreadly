@@ -1,5 +1,5 @@
 /**
- * @nocombine statistics
+ * @combine statistics
  */
 
 /**
@@ -158,7 +158,7 @@ var DealForm = {
     jQuery('#deal_description').toggleValue();
     jQuery('#deal_terms_of_deal').toggleValue();    
     jQuery('#deal_redeem_url').toggleValue();
-    jQuery('#deal_coupon_single_code').toggleValue();
+    //jQuery('#deal_coupon_single_code').toggleValue();
     
 
     jQuery('.mirror-value').mirrorValue();    
