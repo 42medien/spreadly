@@ -1,7 +1,7 @@
   <div id="create-deal-content">
-		<?php //include_partial('deals/create_index');?>
+		<?php include_partial('deals/create_index');?>
 		<?php //include_partial('deals/deal_in_process', array('pIsNew' => false));?>
-		<?php include_component('deals', 'create_deal_form');?>
+		<?php //include_component('deals', 'create_deal_form');?>
   </div>
 	<div id="deal-table-box">
 		<?php if($pDeals) { ?>
