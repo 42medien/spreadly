@@ -392,6 +392,8 @@ var LikeImageCounter = {
 };
 
 var WidgetLikeContent = {
+    
+  aIsContent: false,
   
   get: function(){
     OnLoadGrafic.showGrafic();
@@ -407,10 +409,14 @@ var WidgetLikeContent = {
       success : function(pResponse) {
         if(pResponse.success == true) {
           WidgetLikeContent.show(pResponse.html);
+          WidgetLikeContent.aIsContent = true;
           LikeImage.init(pResponse.imgcount, pResponse.url);
           WidgetLikeForm.init();          
         } else {
-          WidgetLikeContent.showError(pResponse.msg);
+          if(WidgetLikeContent.aIsContent === false) {
+            WidgetLikeContent.showError(pResponse.msg);
+          }
+          OnLoadGrafic.hideGrafic();          
         }
       }
     });      
