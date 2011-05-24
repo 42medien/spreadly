@@ -11,7 +11,7 @@
     	<h2 class="graytitle txtcenter"><?php echo $lDeal->getDescription(); ?></h2>
       <div class="whtrow codebox">
     		<div class="rcor">
-        	<span class="fs13"><?php echo __('Your coupon code:'); ?></span><br /><span class="code"><?php echo auto_link_to($pActivity->getCCode());?></span>
+        	<span class="fs13"><?php echo __('Your coupon code:'); ?></span><br /><span class="code"><?php echo auto_link_to($pActivity->getCCode(), 30, array('target' => '_blank'));?></span>
         </div>
       </div>
     </div>

@@ -212,8 +212,10 @@ class YiidActivity extends BaseDocument {
     }
     $this->doValidate();
 
-    if ($this->ignore_deal == 1) {
+    if ($this->ignore_deal == 0) {
       $this->updateDealInfo();
+    } else {
+      $this->setDId(null);
     }
   }
 

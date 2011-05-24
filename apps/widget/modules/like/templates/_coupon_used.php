@@ -19,7 +19,7 @@
               echo __('Your Coupon Code:');
         	  }
         	  ?>
-        	</span><br /><span class="code"><?php echo auto_link_to($pActivity->getCCode());?></span>
+        	</span><br /><span class="code"><?php echo auto_link_to($pActivity->getCCode(), 30, array('target' => '_blank'));?></span>
         </div>
       </div>
     </div>
