@@ -80,7 +80,7 @@ class likeActions extends sfActions {
 		$lParams['u_id'] = $this->getUser()->getUserId();
 		$lActiveDeal = DealTable::getActiveDealByHostAndTagsAndUserId($lParams['url'], $lParams['tags'], $lParams['u_id']);
 		// Check if user accepted TOS if he is attempting to participate in deal
-		if($lActiveDeal) {
+		if($lActiveDeal && $lParams['ignore_deal'] == 0) {
   		$lParams['d_id'] = $lActiveDeal->getId();
   		if($lParams['tos']!='on') {
   		  $lReturn['success'] = false;
