@@ -104,7 +104,7 @@ class User extends BaseUser {
    * @author weyandch
    */
   public function getOnlineIdentities() {
-    return OnlineIdentityTable::retrieveByUserId($this->getId());
+    return OnlineIdentityTable::getPublishingEnabledByUserId($this->getId());
   }
 
   public function getTokensForPublishing() {
