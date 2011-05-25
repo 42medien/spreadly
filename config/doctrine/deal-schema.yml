@@ -41,7 +41,7 @@ Deal:
       type: enum
       length: 10
       default: single
-      values: ['single', 'multiple']
+      values: ['single', 'multiple', 'url']
     coupon_quantity:
       type: integer
       default: 0
