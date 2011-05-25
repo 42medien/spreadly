@@ -38,11 +38,11 @@ class OnlineIdentity extends BaseOnlineIdentity
       return $this->getUrl();
     }
   }
-  
+
   public function scheduleImportJob() {
-    if(!$this->getLastFriendRefresh() || 
-        $this->getLastFriendRefresh() <  
-        strtotime(sfConfig::get("app_jobs_contact_import_job_last_friend_refresh_threshold"))) {
+    if(!$this->getLastFriendRefresh() ||
+        $this->getLastFriendRefresh() <
+        strtotime(sfConfig::get("app_jobs_last_friend_refresh_threshold"))) {
       Queue\Queue::getInstance()->put(new Documents\ContactImportJob($this->getId()));
     }
   }

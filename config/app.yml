@@ -53,8 +53,7 @@ all:
     post_type:   'Content-Type: application/json'
 
   jobs:
-    contact_import_job:
-      last_friend_refresh_threshold: "1 day ago"
+    last_friend_refresh_threshold: "1 day ago"
 
 ##
 # Prod settings
