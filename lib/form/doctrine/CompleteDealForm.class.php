@@ -12,7 +12,12 @@ class CompleteDealForm extends BaseDealForm
 {
   public function configure()
   {
+    unset($this['created_at']);
+    unset($this['updated_at']);
     $couponForm = new CouponForm();
+    unset($couponForm['created_at']);
+    unset($couponForm['updated_at']);
+    
     $this->embedForm('Coupon', $couponForm);
   }
 }
