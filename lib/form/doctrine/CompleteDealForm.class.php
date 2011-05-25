@@ -14,10 +14,12 @@ class CompleteDealForm extends BaseDealForm
   {
     unset($this['created_at']);
     unset($this['updated_at']);
-    $couponForm = new CouponForm();
-    unset($couponForm['created_at']);
-    unset($couponForm['updated_at']);
     
-    $this->embedForm('Coupon', $couponForm);
+    if($this->getObject()->isNew()) {
+      $couponForm = new CouponForm();
+      unset($couponForm['created_at']);
+      unset($couponForm['updated_at']);
+      $this->embedForm('Coupon', $couponForm);
+    }
   }
 }
