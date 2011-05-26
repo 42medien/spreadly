@@ -126,7 +126,7 @@ class UrlUtils {
       }
 
       $lContent = curl_exec( $lCh );
-      $lStatus  = curl_getinfo( $lCh );
+      $lStatus  = curl_getinfo( $lCh, CURLINFO_HTTP_CODE );
       curl_close( $lCh );
 
       if ($lStatus < 400) {
