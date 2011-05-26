@@ -1,4 +1,6 @@
 <?php
+require_once(dirname(__FILE__).'./../vendor/idna_convert_080/idna_convert.class.php');
+
 /**
  * class to handel url functions
  *
@@ -27,6 +29,10 @@ class UrlUtils {
    * @return boolean
    */
   public static function checkUrlAvailability($pUrl) {
+    // add idn support
+    $IDN = new idna_convert(array('idn_version' => 2008));
+    $pUrl = $IDN->encode($pUrl);
+
     try {
       $lHeaders = @get_headers($pUrl);
 
@@ -59,6 +65,10 @@ class UrlUtils {
    * @return boolean
    */
   public static function checkUrlWithCurl($pUrl, $pFollowLocation = false) {
+    // add idn support
+    $IDN = new idna_convert(array('idn_version' => 2008));
+    $pUrl = $IDN->encode($pUrl);
+
     $ch = curl_init( $pUrl );
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
     curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -93,6 +103,10 @@ class UrlUtils {
     try {
       $lCh = curl_init();
 
+      // add idn support
+      $IDN = new idna_convert(array('idn_version' => 2008));
+      $pUrl = $IDN->encode($pUrl);
+
       $lOpts = self::$CURL_OPTS;
       $lOpts[CURLOPT_URL] = $pUrl;
       curl_setopt_array($lCh, $lOpts);
@@ -112,7 +126,7 @@ class UrlUtils {
       }
 
       $lContent = curl_exec( $lCh );
-      $lStatus  = curl_getinfo( $lCh, CURLINFO_HTTP_CODE );
+      $lStatus  = curl_getinfo( $lCh );
       curl_close( $lCh );
 
       if ($lStatus < 400) {
@@ -144,6 +158,9 @@ class UrlUtils {
    * @return string
    */
   public static function getDomainAsArray($pUrl) {
+    // add idn support
+    $IDN = new idna_convert(array('idn_version' => 2008));
+    $pUrl = $IDN->encode($pUrl);
 
     $lUrl =  strtolower($pUrl);
     $arrUrl = parse_url($lUrl);
@@ -181,7 +198,7 @@ class UrlUtils {
     $lPattern = '~^
         (https?|ftps?)://                       # http or ftp (+SSL)
         (
-          ([a-z0-9-]+\.)+[a-z]{2,6}             # a domain name
+          ([a-z0-9äöüß-]+\.)+[a-z]{2,6}             # a domain name
             |                                   #  or
           \d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}    # a IP address
         )
@@ -576,6 +593,10 @@ class UrlUtils {
    * @return string
    */
   public static function sendGetRequest($pUrl, $pHeader = null) {
+    // add idn support
+    $IDN = new idna_convert(array('idn_version' => 2008));
+    $pUrl = $IDN->encode($pUrl);
+
     $lCh = curl_init();
     $lOpts = self::$CURL_OPTS;
     $lOpts[CURLOPT_URL] = $pUrl;
@@ -599,6 +620,10 @@ class UrlUtils {
    * @param string $pBody
    */
   public static function sendPostRequest($pUrl, $pBody, $pHeader = null) {
+    // add idn support
+    $IDN = new idna_convert(array('idn_version' => 2008));
+    $pUrl = $IDN->encode($pUrl);
+
     $lCh = curl_init($pUrl);
     curl_setopt($lCh, CURLOPT_POST,           1);
     curl_setopt($lCh, CURLOPT_POSTFIELDS,     $pBody);
