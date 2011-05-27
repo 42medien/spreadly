@@ -841,3 +841,24 @@ th.headerSortUp.last {
 
 #like-content-box .error{margin: 25px;}
 .like-content-information { margin: 25px 0 25px 25px; };
+
+
+.likenbox{ 
+	width: 420px;
+    padding-left: 0;
+    }
+
+.gefelink a{
+    float: left;
+    margin-right: 3px;
+
+}
+
+.deal_button_wording-mirror{
+   display: block;
+   float: left;
+   font-size: 11px;
+   line-height: 11px;
+   width: 280px;
+}
+

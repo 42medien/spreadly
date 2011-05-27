@@ -70,12 +70,12 @@ $wu->trackUser();
     position: absolute;
     top: 0;
     font-family: Tahoma, Verdana, Arial, sans-serif;
-    line-height: 22px;
-    color: #444;
+	  line-height: 11px;
+	  color: #444;
     font-size: 10px;
     left: 110px;
-    white-space: nowrap;
   }
+
   ul.icons {
     list-style-type: none;
     margin-top: 3px;
