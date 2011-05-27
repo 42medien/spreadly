@@ -34,14 +34,14 @@ Deal:
       notnull: true
     type:
       type: enum
-      length: 10
+      length: 255
       default: commercial
       values: ['commercial', 'charity']
     coupon_type:
       type: enum
-      length: 10
+      length: 255
       default: single
-      values: ['single', 'multiple', 'url']
+      values: ['single', 'multiple', 'url', 'html']
     coupon_quantity:
       type: integer
       default: 0
@@ -57,11 +57,11 @@ Deal:
       type: datetime
 
     summary:
-      type: string(40)
+      type: string(255)
     description:
-      type: string(80)
+      type: string(255)
     button_wording:
-      type: string(35)
+      type: string(255)
 
     terms_of_deal:
       type: string(512)
@@ -70,6 +70,13 @@ Deal:
     tos_accepted:
       type: boolean
       default: false
+    read_only:
+      type: boolean
+      default: false
+    image_url:
+      type: string(255)
+    additional_tos:
+      type: string(255)
 
   relations:
     sfGuardUser:
