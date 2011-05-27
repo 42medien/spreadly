@@ -86,4 +86,8 @@ class DomainProfile extends BaseDomainProfile
   public function getUniqueId() {
     return "tag:spreadly.com,".date('Y', strtotime($this->getCreatedAt())).":/domain/".$this->getId();
   }
+  
+  public function __toString() {
+    return $this->getId().': '. $this->getUrl();
+  }
 }
