@@ -52,9 +52,9 @@ Deal:
       type: string(512)
       default: null
     start_date:
-      type: datetime
+      type: timestamp
     end_date:
-      type: datetime
+      type: timestamp
 
     summary:
       type: string(255)
