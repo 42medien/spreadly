@@ -15,7 +15,8 @@ class authActions extends sfActions {
    * @param sfRequest $request A request object
    */
   public function executeSignin(sfWebRequest $request) {
-    if ($this->getUser()->isAuthenticated()) {
+    $this->has_credentials = $this->getUser()->checkDealCredentials();
+    if ($this->getUser()->isAuthenticated() && $this->has_credentials) {
       $lUrl = $this->getUser()->getAttribute("redirect_after_login", "@widget_like", "widget");
       $this->redirect($lUrl);
     }

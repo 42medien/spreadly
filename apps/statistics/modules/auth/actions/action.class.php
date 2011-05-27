@@ -1,8 +1,6 @@
 <?php
-class configuratorActions extends sfActions
-{
+class configuratorActions extends sfActions {
 	public function executeLoginbox(sfWebRequest $request){
 
 	}
-
 }

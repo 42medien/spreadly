@@ -82,7 +82,7 @@ class DealTable extends Doctrine_Table
   }
 
   /**
-   * returns arunning deal-object if available
+   * returns a running deal-object if available
    *
    * @author Matthias Pfefferle
    * @param string $pUrl
@@ -152,11 +152,11 @@ class DealTable extends Doctrine_Table
    * @param int $pUserId
    * @return Deal|boolean
    */
-  public static function getActiveDealByHostAndUserId($pUrl, $pUserId) {
+  public static function getActiveDealByHostAndUserId($pUrl, $pUserId, $pTags = null) {
     $dm = MongoManager::getDM();
 
     $pUrl = UrlUtils::cleanupHostAndUri($pUrl);
-    $lDeal = self::getActiveByHost($pUrl);
+    $lDeal = self::getActiveByHost($pUrl, $pTags);
 
     if ($lDeal && !$dm->getRepository("Documents\YiidActivity")->findOneBy(array("d_id" => intval($lDeal->getId()), "u_id" => intval($pUserId)))) {
       return $lDeal;

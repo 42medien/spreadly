@@ -122,4 +122,35 @@ class myUser extends sfBasicSecurityUser {
 
     return substr($culture, 0, 2);
   }
+
+  public function checkDealCredentials() {
+    $user = $this->getUser();
+
+    // check url param
+    $url = sfContext::getInstance()->getRequest()->getParameter("url", null);
+    $tags = sfContext::getInstance()->getRequest()->getParameter("tags", null);
+
+    // check user session
+    if ((!$url || !$tags) && $redirect_url = $this->getAttribute("redirect_after_login", null, "widget")) {
+      $params = explode("?", $redirect_url);
+      parse_str($params[1]);
+    }
+
+    if ($user) {
+      // if there is an url and a user
+      if ($url && $deal = DealTable::getActiveDealByHostAndUserId($url, $user->getId(), $tags)) {
+        if (!$deal->hasUserTheRequiredCredentials($user)) {
+          return false;
+        }
+      }
+    }
+
+    $deal = DealTable::getActiveByHost($url, $tags);
+
+    if ($deal && $deal->getCouponType() == "html") {
+      return false;
+    }
+
+    return true;
+  }
 }

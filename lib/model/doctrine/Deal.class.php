@@ -221,4 +221,28 @@ class Deal extends BaseDeal {
   public function getRemainingDays() {
     return (strtotime(date('Y-m-d', strtotime($this->getEndDate()))) - strtotime(date('Y-m-d', strtotime('now')))) / 60 / 60 / 24;
   }
+
+  /**
+   * checks if a user is allowed to participate the deal
+   *
+   * @param sfUser $user
+   * @return boolean
+   */
+  public function hasUserTheRequiredCredentials($user) {
+    if ($this->getCouponType() == "single") {
+      $community = CommunityTable::getInstance()->findOneBy("community", "facebook");
+      $oi = OnlineIdentityTable::getInstance()->createQuery()
+        ->where("user_id = ? AND community_id = ?", array($user->getId(), $community->getId()))
+        ->limit(1)
+        ->orderBy("id")
+        ->fetchOne();
+      if ($oi) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    return true;
+  }
 }
