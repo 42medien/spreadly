@@ -72,7 +72,7 @@ Deal:
     sfGuardUser: sfGuardUser_1
     state: submitted
     type: commercial
-    coupon_type: single
+    coupon_type: html
     coupon_quantity: '0'
     start_date: '<?php echo date("Y-m-d H:i:s", strtotime("3 days ago")) ?>'
     end_date: '<?php echo date("Y-m-d H:i:s", strtotime("now + 3 days")) ?>'

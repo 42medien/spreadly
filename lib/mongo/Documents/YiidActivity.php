@@ -126,8 +126,14 @@ class YiidActivity extends BaseDocument {
 
   public function getComment() {
     if($this->isDeal()) {
-      $i18n = sfContext::getInstance()->getI18N();
-      $lDealComment = $i18n->__('grabbed the sponsored deal "%title%" on %url% for recommending...', array('%title%' => $this->getDeal()->getSummary(), '%url%' => $this->getUrl()));
+      $deal = $this->getDeal();
+
+      if ($deal->getComment()) {
+        $lDealComment = $deal->getComment();
+      } else {
+        $i18n = sfContext::getInstance()->getI18N();
+        $lDealComment = $i18n->__('grabbed the sponsored deal "%title%" on %url% for recommending...', array('%title%' => $deal->getSummary(), '%url%' => $this->getUrl()));
+      }
 
       return $lDealComment;
     } else {

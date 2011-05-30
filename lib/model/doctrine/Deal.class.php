@@ -229,7 +229,7 @@ class Deal extends BaseDeal {
    * @return boolean
    */
   public function hasUserTheRequiredCredentials($user) {
-    if ($this->getCouponType() == "single") {
+    if ($this->getCouponType() == "html") {
       $community = CommunityTable::getInstance()->findOneBy("community", "facebook");
       $oi = OnlineIdentityTable::getInstance()->createQuery()
         ->where("user_id = ? AND community_id = ?", array($user->getId(), $community->getId()))
@@ -244,5 +244,17 @@ class Deal extends BaseDeal {
     }
 
     return true;
+  }
+
+  public function getDescr() {
+    return $this->getDescription();
+  }
+
+  public function getTitle() {
+    return $this->getSummary();
+  }
+
+  public function getThumb() {
+    return $this->getImageUrl();
   }
 }

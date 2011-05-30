@@ -56,10 +56,16 @@ Deal:
     end_date:
       type: timestamp
 
+    # a short summary
     summary:
       type: string(255)
+    # the deal description
     description:
       type: string(255)
+    # a comment for the facebook stream
+    commment:
+      type: string(255)
+    # the text behind the button
     button_wording:
       type: string(255)
 
@@ -101,7 +107,7 @@ Coupon:
       type: integer
       notnull: true
     code:
-      type: string(255)
+      type: text
 
   relations:
     Deal:

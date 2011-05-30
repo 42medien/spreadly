@@ -23,27 +23,34 @@ class FacebookPostApiClient extends PostApi {
    * @return string
    */
   protected function generateMessage($pActivity) {
+    // load activity or deal to fill the dummy object
+    if ($pActivity->isDeal()) {
+      $i18n = sfContext::getInstance()->getI18N();
+      $lActionText = $i18n->__("Get the Deal");
+      $lObject = $pActivity->getDeal();
+    } else {
+      $lActionText = "Spread";
+      $lObject = $pActivity;
+    }
+
     $lPostBody .= "message=".$pActivity->getComment();
 
-    if ($pActivity->getDescr() && $pActivity->getDescr() != '') {
-      $lPostBody .= "&description=".$pActivity->getDescr();
+    if ($lObject->getDescr() && $lObject->getDescr() != '') {
+      $lPostBody .= "&description=".$lObject->getDescr();
     }
 
-    if ($pActivity->getTitle() && $pActivity->getTitle() != '') {
-      $lPostBody .= "&name=".$pActivity->getTitle();
+    if ($lObject->getTitle() && $lObject->getTitle() != '') {
+      $lPostBody .= "&name=".$lObject->getTitle();
     }
 
-    if ($pActivity->getThumb() && $pActivity->getThumb() != '') {
-      $lPostBody .= "&picture=".$pActivity->getThumb();
+    if ($lObject->getThumb() && $lObject->getThumb() != '') {
+      $lPostBody .= "&picture=".$lObject->getThumb();
     }
 
     $lPostBody .= "&link=".urlencode($pActivity->generateUrlWithClickbackParam($this->onlineIdentity));
     $lPostBody .= '&privacy={"value": "EVERYONE"}';
 
-    if ($lDeal = $pActivity->getDeal()) {
-      $i18n = sfContext::getInstance()->getI18N();
-      $lPostBody .= '&actions={"name": "'.$i18n->__("Get the Deal").'", "link": "'.$lDeal->getDomainProfile()->getDomain().'"}';
-    }
+    $lPostBody .= '&actions={"name": "'.$lActionText.'", "link": "'.sfConfig::get("app_settings_widgets_url").'/?url='.urlencode($pActivity->getUrl()).'"}';
 
     return $lPostBody;
   }

@@ -143,12 +143,12 @@ class myUser extends sfBasicSecurityUser {
           return false;
         }
       }
-    }
+    } else {
+      $deal = DealTable::getActiveByHost($url, $tags);
 
-    $deal = DealTable::getActiveByHost($url, $tags);
-
-    if ($deal && $deal->getCouponType() == "html") {
-      return false;
+      if ($deal && $deal->getCouponType() == "html") {
+        return false;
+      }
     }
 
     return true;
