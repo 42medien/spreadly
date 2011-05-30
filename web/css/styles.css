@@ -311,6 +311,10 @@ fieldset { border: 0px solid transparent;  }
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;	
 }
+ 
+#dotboxtextdeal{
+  background-color: #fff;
+} 
 
  div.dotborboxmore{ margin-top:11px;}
 
