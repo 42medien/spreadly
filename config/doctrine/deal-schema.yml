@@ -63,7 +63,7 @@ Deal:
     description:
       type: string(255)
     # a comment for the facebook stream
-    commment:
+    comment:
       type: string(255)
     # the text behind the button
     button_wording:
