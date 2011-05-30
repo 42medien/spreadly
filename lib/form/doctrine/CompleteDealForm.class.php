@@ -14,7 +14,7 @@ class CompleteDealForm extends BaseDealForm
   {
     unset($this['created_at']);
     unset($this['updated_at']);
-    
+
     if($this->getObject()->isNew()) {
       $coupon = new Coupon();
       $coupon->Deal = $this->getObject();
