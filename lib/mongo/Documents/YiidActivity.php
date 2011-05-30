@@ -332,6 +332,8 @@ class YiidActivity extends BaseDocument {
 
   /**
    * checks if user is allowed to like this entry
+   *
+   * @throws sfException
    */
   private function doValidate() {
     $dm = MongoManager::getDM();
