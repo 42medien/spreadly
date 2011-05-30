@@ -78,13 +78,16 @@ Deal:
     end_date: '<?php echo date("Y-m-d H:i:s", strtotime("now + 3 days")) ?>'
     summary: 'notizblog approved summary'
     description: 'notizblog approved description'
+    comment: 'Tolles Gewinnspiel auf Spiegel.de: Mit etwas Glück gewinne ich eine brandneue Spitzen-Heimkinoanlage!'
     button_wording: 'notizblog approved buttonwording'
     terms_of_deal: 'http://www.notizblog.de/tod'
     redeem_url: 'http://www.notizblog.de'
     tos_accepted: true
+    additional_tos: 'Ich wünsche zukünftig per Email über News aus dem Hause Teufel informiert zu werden.'
     tags: "geekstuff, otherthings"
     created_at: '2010-11-26 10:12:23'
     updated_at: '2010-11-26 10:12:23'
+    image_url: 'http://spreadly.com/img/button-banner-en.png'
   Deal_6:
     DomainProfile: DomainProfile_3
     sfGuardUser: sfGuardUser_1
@@ -103,4 +106,3 @@ Deal:
     tags: "schuhe"
     created_at: '2010-11-26 10:12:23'
     updated_at: '2010-11-26 10:12:23'
-
