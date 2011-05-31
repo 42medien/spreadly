@@ -48,7 +48,8 @@ var WidgetDealForm = {
               jQuery('#coupon-unused-container').append(pResponse.html);
               
             } else {
-              WidgetDealForm.showButton(); 
+              WidgetDealForm.showButton();
+              WidgetDealForm.showErrorMsg();
             }
             OnLoadGrafic.hideGrafic();
           }
@@ -65,7 +66,16 @@ var WidgetDealForm = {
     
     showButton: function(){
       jQuery('#popup-send-deal-box').show();      
-    }
+    },
+    
+    showErrorMsg: function() {
+      debug.log('[showErrorMsg]');
+      jQuery('.error').show();
+      var lTimeout;
+        lTimeout = setTimeout(function() {
+          jQuery('.error').hide();
+        }, 5000);
+    }    
 };
 
 

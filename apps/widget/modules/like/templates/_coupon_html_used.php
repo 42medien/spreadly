@@ -7,9 +7,7 @@
 				      	<h2><?php echo __('Gratulation'); ?></h2>
 				     	</div>
 					    <div class="dotborboxsmall dotborboxmore txtcenter" id="dotboxtextdeal">
-								<p>Du nimmst ab sofort teil an dem großen Teufel Gewinnspiel.</p>
-								<p><strong>Die Gewinner werden am 30.11.2011 ausgelost und per Email benachrichtig.</strong></p>
-								<p><strong>Wir wünschen viel Glück</strong></p>
+								<?php echo $pActivity->getCCode(); ?>
 					    </div>
 						</div>
 					</div>

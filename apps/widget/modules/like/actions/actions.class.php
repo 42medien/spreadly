@@ -97,7 +97,11 @@ class likeActions extends sfActions {
       $lActivity->save();
       $lSuccess = true;
       if($lActivity->isDeal()){
-      	$lReturn['html'] = $this->getPartial('like/coupon_used', array('pActivity' => $lActivity));
+      	if($lActiveDeal->getCouponType() == 'html'){
+      		$lReturn['html'] = $this->getPartial('like/coupon_html_used', array('pActivity' => $lActivity));
+      	} else {
+					$lReturn['html'] = $this->getPartial('like/coupon_used', array('pActivity' => $lActivity));
+      	}
       }
 
       $this->getUser()->setAttribute("redirect_after_login", null, "widget");
