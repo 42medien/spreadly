@@ -3,6 +3,8 @@
 <div class="grboxtop"><span></span></div>
 <div class="grboxmid">
 	<div class="grboxmid-content">
+
+		<?php if($lDeal->getCouponType() != 'html') { ?>
 		<div class="graybox clearfix">
     	<div class="clearfix spactsbox" id="coupon-head-summary">
       	<span><?php echo __('Empfehlen Sie "%link%" und erhalten Sie ...', array('%link%' => link_to($lDeal->getSummary(), '/'))); ?></span>
@@ -25,6 +27,16 @@
     </div>
     <div class="htplinks"><a target="_blank" href="<?php echo url_for($lDeal->getRedeemUrl()); ?>"><?php echo $lDeal->getRedeemUrl(); ?></a></div>
 		</div>
+		<?php } else { ?>
+			<div class="graybox clearfix">
+	    	<div class="clearfix spactsbox" id="coupon-head-summary">
+	      	<h2><?php echo __('Gratulation'); ?></h2>
+	     	</div>
+		    <div class="dotborboxsmall dotborboxmore txtcenter" id="dotboxtextdeal">
+					<?php echo $pActivity->getCCode(); ?>
+		    </div>
+			</div>
+		<?php } ?>
 	</div>
 </div>
 <div class="grboxbot"><span></span></div>
