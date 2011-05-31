@@ -5,10 +5,5 @@ class dealsComponents extends sfComponents {
 	  $dm = MongoManager::getDM();
 		$this->pActivity = $dm->getRepository("Documents\YiidActivity")->find($this->pActivityId);
   }
-
-	public function executeCoupon_unused(sfWebRequest $request) {
-	  $dm = MongoManager::getDM();
-		$this->pActivity = $dm->getRepository("Documents\YiidActivity")->find($this->pActivityId);
-  }
 }
 ?>
