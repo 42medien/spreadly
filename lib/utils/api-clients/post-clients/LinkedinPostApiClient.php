@@ -15,10 +15,9 @@ class LinkedinPostApiClient extends PostApi {
   public function generateMessage($pActivity) {
     $lUrl = $pActivity->generateUrlWithClickbackParam($this->onlineIdentity);
     $lComment =  $pActivity->getComment();
-    $lHashtag =  $pActivity->generateHashtag();
 
     $lStatusMessage = '<?xml version="1.0" encoding="UTF-8"?><share>';
-    $lStatusMessage .= "<comment><![CDATA[$lComment $lHashtag]]></comment>";
+    $lStatusMessage .= "<comment><![CDATA[$lComment]]></comment>";
     $lStatusMessage .= '<content>';
     $lStatusMessage .= "<submitted-url><![CDATA[$lUrl]]></submitted-url>";
 
