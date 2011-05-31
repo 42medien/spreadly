@@ -41,7 +41,7 @@ Coupon:
     updated_at: '2010-11-26 10:10:03'
   Coupon_9:
     Deal: Deal_5
-    code: doppel_d
+    code: '<p>Du nimmst ab sofort teil an dem großen Teufel Gewinnspiel.</p><p><strong>Die Gewinner werden am 30.11.2011 ausgelost und per Email benachrichtig.</strong></p><p><strong>Wir wünschen viel Glück</strong></p>'
     created_at: '2010-11-26 10:10:03'
     updated_at: '2010-11-26 10:10:03'
   Coupon_10:
