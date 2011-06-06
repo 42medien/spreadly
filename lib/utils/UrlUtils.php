@@ -628,7 +628,7 @@ class UrlUtils {
     curl_setopt($lCh, CURLOPT_POST,           1);
     curl_setopt($lCh, CURLOPT_POSTFIELDS,     $pBody);
     curl_setopt($lCh, CURLOPT_FOLLOWLOCATION, 1);
-    curl_setopt($lCh, CURLOPT_HEADER,         1);  // DO NOT RETURN HTTP HEADERS
+    curl_setopt($lCh, CURLOPT_HEADER,         0);  // DO NOT RETURN HTTP HEADERS
     curl_setopt($lCh, CURLOPT_RETURNTRANSFER, 1);  // RETURN THE CONTENTS OF THE CALL
     curl_setopt($lCh, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($lCh, CURLOPT_SSL_VERIFYHOST, 2);
