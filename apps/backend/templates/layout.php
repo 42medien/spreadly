@@ -10,6 +10,9 @@
                 <link rel="stylesheet" type="text/css" media="screen" href="/sfDoctrinePlugin/css/global.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="/sfDoctrinePlugin/css/default.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="/css/engineroom/admin.css" />
+		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/js/100_main/include/backend-<?php echo sfConfig::get('app_release_name') ?>.min.js"></script>
+<script type="text/javascript" src="/js/backend/BackendDeal.js"></script>
 
     <?php use_stylesheet('engineroom/admin.css') ?>
     <?php include_javascripts() ?>
@@ -29,5 +32,11 @@
     <div id="content" class="clearfix">
         <?php echo $sf_content; ?>
     </div>
+		<script type="text/javascript">
+			// Custom Checkbox Function
+	    jQuery(document).ready( function() {
+	      BackendDeal.init();
+	    });
+	  </script>
   </body>
 </html>

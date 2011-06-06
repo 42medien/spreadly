@@ -1,7 +1,7 @@
 /**
- * @nocombine platform
  * @combine statistics
  * @combine widget
+ * @combine backend
  */
 
 /**

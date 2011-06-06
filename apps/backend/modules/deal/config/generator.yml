@@ -13,7 +13,20 @@ generator:
 
     config:
       actions: ~
-      fields:  ~
+      fields:
+        coupon_quantity: {help: "0 for unlimited"}
+        summary: {help: "Headline of the coupon. Max. 40 chars"}
+        description: { help: "Description inside of the coupon. Max. 80 chars"}
+        start_date: { label: "Deal start date" }   
+        comment: {help: "Comment that will be shared to facebook"} 
+        button_wording: {help: "Text left of the button. Max. 110 chars "} 
+        terms_of_deal: {help: "URL to the terms of deal"}         
+        redeem_url: {help: "URL"}
+        tos_accepted: {help: "Has to be checked for database issues"}  
+        read_only:  {help: "Has to be checked if deal type is html. This deal isn't shown in the frontend."}  
+        image_url: {help: "URL to the image that will be send to facebook (also shown in the coupon before sending)"}
+        additional_tos: {help: "Additional text besides the checkbox and the link to the terms of deal"} 
+        deal_state: {help: "Attention: If you create a new deal, the state has to be submitted and you MUST approve the deal into the list of deals. It's important for generating coupons in the database"}
       list:    ~
       filter:  ~
       form:    ~
