@@ -15,11 +15,11 @@ generator:
       actions: ~
       fields:
         coupon_quantity: {help: "0 for unlimited"}
-        summary: {help: "Headline of the coupon. Max. 40 chars"}
-        description: { help: "Description inside of the coupon. Max. 80 chars"}
+        summary: {help: "Headline of the coupon. Max. <span id='summary_counter'>40</span> chars"}
+        description: { help: "Description inside of the coupon. Max. <span id='description_counter'>80</span> chars"}
         start_date: { label: "Deal start date" }   
         comment: {help: "Comment that will be shared to facebook"} 
-        button_wording: {help: "Text left of the button. Max. 110 chars "} 
+        button_wording: {help: "Text left of the button. Max. <span id='button_wording_counter'>110</span> chars "} 
         terms_of_deal: {help: "URL to the terms of deal"}         
         redeem_url: {help: "URL"}
         tos_accepted: {help: "Has to be checked for database issues"}  

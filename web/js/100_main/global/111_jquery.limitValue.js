@@ -1,5 +1,6 @@
 /**
  * @combine statistics
+ * @combine backend
  */
 jQuery.fn.limitValue = function(pLimit, pElement){
   pLimit = parseInt(pLimit, 10);
