@@ -25,8 +25,25 @@ ul#logos_big {  margin: 30px 0 40px 30px; }
 #coupon-head-summary{text-align: center; margin-left: 0; margin-top: 0;}
 
 #coupon-unused-container{ margin: 0 auto; }
-.dotborbox{text-align: center;}
-.deal-coupon-img{ width: 60px; height: 60px; margin-right: 5px; margin-top: 5px;}
+
+#unused-coupon-content .whtrow .rcor {
+  font-size: 11px;
+  line-height: 12px;
+  text-align: left;
+}
+
+#unused-coupon-content .whtrow .rcor h2.graytitle{
+  font-size: 11px;
+}
+
+#unused-coupon-content .dotborbox{padding: 0;  width: 317px;}
+
+.deal-coupon-img{   
+	height: 65px;
+    margin-right: 5px;
+    margin-top: 5px;
+    width: 65px;
+}
 
 
 /*

@@ -15,7 +15,7 @@ generator:
       actions: ~
       fields:
         coupon_quantity: {help: "0 for unlimited"}
-        summary: {help: "Headline of the coupon. Max. <span id='summary_counter'>40</span> chars"}
+        summary: {help: "Headline of the coupon. Max. <span id='summary_counter'>100</span> chars"}
         description: { help: "Description inside of the coupon. Max. <span id='description_counter'>255</span> chars"}
         start_date: { label: "Deal start date" }   
         comment: {help: "Comment that will be shared to facebook"} 

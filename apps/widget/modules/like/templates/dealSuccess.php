@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <div class="wht-contentbox clearfix">
+    <div class="wht-contentbox clearfix" id="unused-coupon-content">
 			<div class="popwidecol" id="coupon-unused-container">
 		  	<div class="grboxtop"><span></span></div>
 		    <div class="grboxmid">
@@ -31,19 +31,21 @@
 		      			<span><?php echo __('Click "Like" and get ...'); ?></span>
 		      		</div>
 		          <div class="dotborbox">
-		          	<h2 class="graytitle"><?php echo $pActiveDeal->getSummary(); ?></h2>
 		            <div class="whtrow">
 		            	<div class="rcor clearfix">
             				<?php echo image_tag($pActiveDeal->getImageUrl(), array('class' => 'alignleft deal-coupon-img')); ?>
+            				<h2 class="graytitle"><?php echo $pActiveDeal->getSummary(); ?></h2>
 		            		<?php echo $pActiveDeal->getDescription(); ?>
 		            	</div>
 		            </div>
+		          </div>
+		          <?php if($pActiveDeal->getCouponType() != 'html') { ?>
 		            <p class="exprebox"><?php if ($pActiveDeal->isUnlimited()) {
                     echo __("%1 Claimed Deals", array("%1" => $pActiveDeal->getCouponClaimedQuantity()));
                   } else {
                     echo __("%1/%2 Deals left", array("%1" => $pActiveDeal->getCouponQuantity() - $pActiveDeal->getCouponClaimedQuantity(), "%2" => $pActiveDeal->getCouponQuantity()));
                   } ?></p>
-		          </div>
+              <?php } ?>
 		          <div class="dieblock">
 		          	<span class="alignleft ekrenne"><input type="checkbox" id="liketos" class="checkbox dealcheckbox" name="like[tos]" /><?php echo __("I accept the %1.", array("%1" => link_to(__("Terms of Services"), $pActiveDeal->getTermsOfDeal(), array("target" => "_blank")))); ?>&nbsp;<?php echo $pActiveDeal->getAdditionalTos(); ?></span>
           			<span class="error ekrenne" style="display: none;"><?php echo __('Please check your selected services to share and accept the TOS'); ?></span>
