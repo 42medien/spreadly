@@ -27,6 +27,7 @@ generator:
         image_url: {help: "URL to the image that will be send to facebook (also shown in the coupon before sending)"}
         additional_tos: {help: "Additional text besides the checkbox and the link to the terms of deal"} 
         deal_state: {help: "Attention: If you create a new deal, the state has to be submitted and you MUST approve the deal into the list of deals. It's important for generating coupons in the database"}
+        tags: {help: comma separated list}
       list:    ~
       filter:  ~
       form:    ~
