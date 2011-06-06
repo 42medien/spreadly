@@ -17,9 +17,9 @@ AuthToken:
     community_id:
       type:    integer
     token_key:
-      type:    string(255)
+      type:    string
     token_secret:
-      type:    string(255)
+      type:    string
     token_type:
       type:    string(40)
     additional_params:
@@ -41,14 +41,14 @@ OauthRequestToken:
     Timestampable:  ~
   columns:
     token_key:
-      type:    string(255)
+      type:    string
     token_secret:
-      type:    string(255)
+      type:    string
     community_id:
       type:    integer
   relations:
     Community:       { onDelete: CASCADE, local: community_id, foreign: id, foreignAlias: OauthRequestTokens }
-  indexes:
-    token_key:
-      fields: [token_key]
-      type: unique
+  #indexes:
+    #token_key:
+      #fields: [token_key]
+      #type: unique
