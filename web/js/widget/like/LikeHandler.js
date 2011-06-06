@@ -16,7 +16,6 @@ var WidgetDealForm = {
       debug.log('[WidgetDealForm][init]');
       // reset the form after side-reload (fix for ff)
       if (typeof (document.popupdealform) != "undefined") {
-        debug.log('reset');
         document.popupdealform.reset();
       }         
       
@@ -74,7 +73,7 @@ var WidgetDealForm = {
       var lTimeout;
         lTimeout = setTimeout(function() {
           jQuery('.error').hide();
-        }, 5000);
+        }, 3000);
     }    
 };
 
