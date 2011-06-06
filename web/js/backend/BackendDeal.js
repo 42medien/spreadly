@@ -19,7 +19,7 @@ var BackendDeal = {
       
       jQuery('#deal_button_wording').limitValue('110', '#button_wording_counter');
       jQuery('#deal_summary').limitValue(40, '#summary_counter');
-      jQuery('#deal_description').limitValue(80, '#description_counter');      
+      jQuery('#deal_description').limitValue(255, '#description_counter');      
       
     }
 };

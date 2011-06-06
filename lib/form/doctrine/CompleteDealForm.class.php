@@ -15,24 +15,23 @@ class CompleteDealForm extends BaseDealForm
     unset($this['created_at']);
     unset($this['updated_at']);
 
+    $this->setWidget('additional_tos', new sfWidgetFormTextarea());
+    $this->setWidget('start_date', new sfWidgetFormInputText());
+    $this->setWidget('end_date', new sfWidgetFormInputText());
+    $this->setWidget('terms_of_deal', new sfWidgetFormInputText());
+    $this->setWidget('redeem_url', new sfWidgetFormInputText());
+
     if($this->getObject()->isNew()) {
       $coupon = new Coupon();
       $coupon->Deal = $this->getObject();
-
-      $this->setWidget('additional_tos', new sfWidgetFormTextarea());
-      $this->setWidget('start_date', new sfWidgetFormInputText());
-      $this->setWidget('end_date', new sfWidgetFormInputText());
-      $this->setWidget('terms_of_deal', new sfWidgetFormInputText());
-      $this->setWidget('redeem_url', new sfWidgetFormInputText());
-
       $form = new CouponForm($coupon);
+    	$form->setWidget('code', new sfWidgetFormTextarea());
+
       unset($form['deal_id']);
       unset($form['created_at']);
       unset($form['updated_at']);
       unset($this['coupon_claimed_quantity']);
       unset($this['type']);
-
-      $form->setWidget('code', new sfWidgetFormTextarea());
 
 
       $this->setDefaults(array(
@@ -44,27 +43,19 @@ class CompleteDealForm extends BaseDealForm
       	'read_only' => true
       ));
 
-    /*
-    $this->widgetSchema->setLabels(
-    	array(
-    		'start_date' => _('Start date')
-    	)
-    );*/
-      //'redeem_url'        => new sfValidatorUrl(array('max_length' => 512, 'required' => true, 'trim' => true)),
-      $this->validatorSchema['redeem_url'] = new sfValidatorUrl(array('max_length' => 512, 'required' => true, 'trim' => true));
-      $this->validatorSchema['terms_of_deal'] = new sfValidatorUrl(array('max_length' => 512, 'required' => true, 'trim' => true));
-      $this->validatorSchema['image_url'] = new sfValidatorUrl(array('max_length' => 512, 'required' => true, 'trim' => true));
+      $this->embedForm('Coupon', $form);
+    }
 
-	    $this->validatorSchema->setPostValidator(new sfValidatorAnd(
-	      array(
+    $this->validatorSchema['redeem_url'] = new sfValidatorUrl(array('max_length' => 512, 'required' => true, 'trim' => true));
+    $this->validatorSchema['terms_of_deal'] = new sfValidatorUrl(array('max_length' => 512, 'required' => true, 'trim' => true));
+    $this->validatorSchema['image_url'] = new sfValidatorUrl(array('max_length' => 512, 'required' => true, 'trim' => true));
+
+	  $this->validatorSchema->setPostValidator(new sfValidatorAnd(
+	  	array(
 	        new EndDateValidator(),
 	        new OverlappingDealValidator()
 	      ))
 	    );
 
-
-      $this->embedForm('Coupon', $form);
-
-    }
   }
 }
