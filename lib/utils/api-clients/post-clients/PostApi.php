@@ -23,7 +23,19 @@ abstract class PostApi {
    * @return int status code
    */
   public function doPost($pActivity) {
-    return $this->send($this->generateMessage($pActivity));
+    $lResponse = $this->send($this->generateMessage($pActivity));
+    $this->handleResponse($lResponse);
+
+    return $lResponse;
+  }
+
+  /**
+   * default response handler. feel free to overwrite it!
+   *
+   * @param string $pResponse
+   */
+  protected function handleResponse($pResponse) {
+    sfContext::getInstance()->getLogger()->notice("{PostApi Response} ".print_r($pResponse, true));
   }
 
   public function setOnlineIdentity($oi) {
@@ -56,6 +68,8 @@ abstract class PostApi {
    * @return mixed
    */
   protected function send($pPostBody) {
+    return $pPostBody;
+
     $this->onlineIdentity->scheduleImportJob();
     $lToken = $this->getAuthToken();
     $lKey = sfConfig::get("app_".$this->classToIdentifier()."_oauth_token");
@@ -65,6 +79,7 @@ abstract class PostApi {
     $lPostType = ($pt = sfConfig::get("app_".$this->classToIdentifier()."_post_type")) ? array($pt) : null;
 
     $lConsumer = new OAuthConsumer($lKey, $lSecret);
+
     return OAuthClient::post($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), $lPostApi, $pPostBody, null, $lPostType, $lPostRealm);
   }
 }

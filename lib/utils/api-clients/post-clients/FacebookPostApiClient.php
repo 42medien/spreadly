@@ -50,9 +50,34 @@ class FacebookPostApiClient extends PostApi {
     $lPostBody .= "&link=".urlencode($pActivity->generateUrlWithClickbackParam($this->onlineIdentity));
     $lPostBody .= '&privacy={"value": "EVERYONE"}';
 
-    $lPostBody .= '&actions={"name": "'.$lActionText.'", "link": "'.sfConfig::get("app_settings_widgets_url").'/?url='.urlencode($pActivity->getUrl()).'"}';
+    $lLink = sfConfig::get("app_settings_widgets_url").'/?url='.urlencode($pActivity->getUrl());
+    if ($pActivity->getTags()) {
+      $lLink .= '&tags='.implode(",", $pActivity->getTags());
+    }
+
+    $lActions = array("name" => $lActionText, "link" => urlencode($lLink));
+
+    $lPostBody .= '&actions='.json_encode($lActions);
 
     return $lPostBody;
   }
 
+  protected function handleResponse($pResponse) {
+    $lResponse = json_decode($pResponse, true);
+
+    if (!array_key_exists("error", $lResponse)) {
+      return;
+    }
+
+    $lError = new Documents\ApiErrorLog();
+
+    $lError->setCode($lResponse['error']['type']);
+    $lError->setMessage($lResponse['error']['message']);
+    $lError->setOiId($this->onlineIdentity->getId());
+    $lError->setUId($this->onlineIdentity->getUserId());
+
+    $dm = MongoManager::getDM();
+    $dm->persist($lError);
+    $dm->flush();
+  }
 }
