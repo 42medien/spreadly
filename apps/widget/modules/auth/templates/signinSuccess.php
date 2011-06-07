@@ -1,6 +1,10 @@
 <div class="whtboxtopwide" id="signin-head">
 	<div class="rcor">
-		<h1 class="signin-title"><?php echo __('Please choose your favorite service for sharing'); ?><br/><em><?php echo __('You can add additional services anytime later'); ?></em></h1>
+	  <?php if ($has_credentials == true) { ?>
+		  <h1 class="signin-title"><?php echo __('Please choose your favorite service for sharing'); ?><br/><em><?php echo __('You can add additional services anytime later'); ?></em></h1>
+		<?php } else { ?>
+		  <h1 class="signin-title"><?php echo __('Please connect with your facebook-profile'); ?><br/><em><?php echo __('You can add additional services anytime later'); ?></em></h1>
+    <?php } ?>
   </div>
 </div>
 <div class="wht-contentbox clearfix">
