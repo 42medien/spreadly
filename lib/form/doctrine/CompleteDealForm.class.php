@@ -35,8 +35,8 @@ class CompleteDealForm extends BaseDealForm
 
 
       $this->setDefaults(array(
-	    	'start_date' => date('Y-m-d G:i'),
-	    	'end_date' => date('Y-m-d G:i'),
+	    	'start_date' => date('Y-m-d G:i:s'),
+	    	'end_date' => date('Y-m-d G:i:s'),
         'tos_accepted' => true,
         'deal_state' => 'submitted',
         'coupon_type' => 'html',
@@ -48,7 +48,7 @@ class CompleteDealForm extends BaseDealForm
 
     $this->validatorSchema['redeem_url'] = new sfValidatorUrl(array('max_length' => 512, 'required' => true, 'trim' => true));
     $this->validatorSchema['terms_of_deal'] = new sfValidatorUrl(array('max_length' => 512, 'required' => true, 'trim' => true));
-    $this->validatorSchema['image_url'] = new sfValidatorUrl(array('max_length' => 512, 'required' => true, 'trim' => true));
+    $this->validatorSchema['image_url'] = new sfValidatorUrl(array('max_length' => 512, 'required' => false, 'trim' => true));
 
 	  $this->validatorSchema->setPostValidator(new sfValidatorAnd(
 	  	array(
