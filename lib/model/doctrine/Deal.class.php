@@ -246,6 +246,14 @@ class Deal extends BaseDeal {
     return true;
   }
 
+  public function getImageUrl() {
+    if ($this->_get("image_url")) {
+      return $this->_get("image_url");
+    } else {
+      return sfConfig::get("app_settings_url")."/img/default-deal.jpg";
+    }
+  }
+
   public function getDescr() {
     return $this->getDescription();
   }
