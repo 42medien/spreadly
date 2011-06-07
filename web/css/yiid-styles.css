@@ -4,10 +4,10 @@
 #general-ajax-loader{z-index: 1000000; position: absolute; display:none;}
 
 ul#logos_big {margin: 95px 0 40px; text-align: center;}
-#logos_big li{text-align:center; display: inline;  margin-right: 20px;}
+#logos_big li{text-align:center; display: inline;  margin-right: 30px;}
 
-#logos_big li#twitter_area{margin-right: 15px;}
-#logos_big li#linkedin_area{margin-right: 15px;}
+#logos_big li#twitter_area{margin-right: 20px;}
+#logos_big li#linkedin_area{margin-right: 20px;}
 
 
 #logos_big li a{padding-top: 60px;}
@@ -43,7 +43,7 @@ ul#logos_big {margin: 95px 0 40px; text-align: center;}
 
 #unused-coupon-content .dotborbox{padding: 0;  width: 317px;}
 
-.deal-coupon-img{   
+.deal-coupon-img{
 	height: 65px;
     margin-right: 5px;
     margin-top: 5px;
@@ -867,7 +867,7 @@ th.headerSortUp.last {
 .like-content-information { margin: 25px 0 25px 25px; };
 
 
-.likenbox{ 
+.likenbox{
 	width: 420px;
     padding-left: 0;
     }
