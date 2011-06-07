@@ -15,14 +15,18 @@ class authActions extends sfActions {
    * @param sfRequest $request A request object
    */
   public function executeSignin(sfWebRequest $request) {
+    // cache get params
+    if ($request->getParameter('url') != null) {
+      $this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "widget");
+    }
+
+    // check credentials
     $this->has_credentials = $this->getUser()->checkDealCredentials();
+
+    // redirect if user is already logged in
     if ($this->getUser()->isAuthenticated() && $this->has_credentials) {
       $lUrl = $this->getUser()->getAttribute("redirect_after_login", "@widget_like", "widget");
       $this->redirect($lUrl);
-    }
-
-    if ($request->getParameter('url') != null) {
-      $this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "widget");
     }
 
     sfProjectConfiguration::getActive()->loadHelpers('I18N');
