@@ -19,7 +19,9 @@
 			  <tbody>
 			    <?php if(count($pDeals) > 0) { ?>
 				    <?php foreach ($pDeals as $i => $lDeal): ?>
+				    	<?php if($lDeal->getReadOnly() == false) {?>
 				        <?php include_partial('deals/deal_table_row', array('pDeal' => $lDeal)); ?>
+				      <?php } ?>
 				    <?php endforeach; ?>
 			    <?php } else { ?>
 			      <tr id="no-claim">
