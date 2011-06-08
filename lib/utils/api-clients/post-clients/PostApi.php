@@ -68,8 +68,6 @@ abstract class PostApi {
    * @return mixed
    */
   protected function send($pPostBody) {
-    return $pPostBody;
-
     $this->onlineIdentity->scheduleImportJob();
     $lToken = $this->getAuthToken();
     $lKey = sfConfig::get("app_".$this->classToIdentifier()."_oauth_token");
