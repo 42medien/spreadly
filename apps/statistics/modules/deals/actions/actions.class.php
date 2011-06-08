@@ -87,7 +87,7 @@ class dealsActions extends sfActions
   	$lParams = $this->getCleanedParams($request);
 
     $lAddTags = $lParams['deal']['addtags'];
-
+    $lFirstDomain = DomainProfileTable::getInstance()->find($lParams['id']);
     $lDeal=null;
     if($lDealId = $lParams['deal']['id']){
       $lDeal = DealTable::getInstance()->find($lDealId);
@@ -126,7 +126,7 @@ class dealsActions extends sfActions
     		$lDefaultCode = $lTaintedValues['deal']['coupon']['single_code'];
     	}
     	$lReturn['coupontype'] = $lParams['deal']['coupon_type'];
-    	$lReturn['html'] = $this->getPartial('deals/create_deal_form', array('pForm' => $this->pForm, 'pCouponType' => $lCouponType, 'pCouponQuantity' => $lCouponQuantity, 'pDefaultCode' => $lDefaultCode, 'pAddtags' => $lAddTags));
+    	$lReturn['html'] = $this->getPartial('deals/create_deal_form', array('pFirstDomain'=> $lFirstDomain, 'pForm' => $this->pForm, 'pCouponType' => $lCouponType, 'pCouponQuantity' => $lCouponQuantity, 'pDefaultCode' => $lDefaultCode, 'pAddtags' => $lAddTags));
     }
 
     return $this->renderText(json_encode($lReturn));
