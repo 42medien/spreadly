@@ -131,7 +131,7 @@ class myUser extends sfBasicSecurityUser {
     $tags = null;
 
     // check user session
-    if ((!$url || !$tags) && $redirect_url = $this->getAttribute("redirect_after_login", null, "widget")) {
+    if ($redirect_url = $this->getAttribute("redirect_after_login", null, "widget")) {
       $params = explode("?", $redirect_url);
       parse_str($params[1]);
     }
