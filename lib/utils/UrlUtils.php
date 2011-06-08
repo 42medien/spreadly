@@ -100,6 +100,10 @@ class UrlUtils {
    * @throws HttpException
    */
   public static function getUrlContent($pUrl, $pHttpMethod = self::HTTP_GET, $pData = null, $pHeader = null) {
+    if ($url_fragment = parse_url($pUrl, PHP_URL_FRAGMENT)) {
+      $pUrl = str_replace("#".$url_fragment, "", $pUrl);
+    }
+
     try {
       $lCh = curl_init();
 
@@ -664,7 +668,13 @@ class UrlUtils {
   public static function cleanupHostAndUri($pUrl) {
     $pUrl = urldecode($pUrl);
     $pUrl = str_replace(" ", "+", $pUrl);
-    //$pUrl = self::skipTrailingSlash($pUrl);
+
+    // @todo better tracking param handling
+    // @see add this
+    if ($url_fragment = parse_url($pUrl, PHP_URL_FRAGMENT)) {
+      $pUrl = str_replace("#".$url_fragment, "", $pUrl);
+    }
+
     $parameterList = parse_url($pUrl);
     $pQueryString = '';
     $lKeysToRemove = sfConfig::get('app_settings_filtered_parameters');
