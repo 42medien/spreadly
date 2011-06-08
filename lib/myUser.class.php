@@ -126,15 +126,19 @@ class myUser extends sfBasicSecurityUser {
   public function checkDealCredentials() {
     $user = $this->getUser();
 
-    // check url param
-    $url = sfContext::getInstance()->getRequest()->getParameter("url", null);
-    $tags = sfContext::getInstance()->getRequest()->getParameter("tags", null);
+    // initialize
+    $url = nul;
+    $tags = null;
 
     // check user session
     if ((!$url || !$tags) && $redirect_url = $this->getAttribute("redirect_after_login", null, "widget")) {
       $params = explode("?", $redirect_url);
       parse_str($params[1]);
     }
+
+    // check url param
+    $url = sfContext::getInstance()->getRequest()->getParameter("url", $url);
+    $tags = sfContext::getInstance()->getRequest()->getParameter("tags", $tags);
 
     if ($user) {
       // if there is an url and a user
