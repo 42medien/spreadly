@@ -37,6 +37,11 @@ ul#logos_big {margin: 95px 0 40px; text-align: center;}
   text-align: left;
 }
 
+#unused-coupon-content .whtrow .rcor#no-html-code{
+  text-align: center;
+  font-size: 12px;
+}
+
 #unused-coupon-content .whtrow .rcor h2.graytitle{
   font-size: 11px;
 }
