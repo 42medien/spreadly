@@ -891,3 +891,9 @@ th.headerSortUp.last {
    width: 280px;
 }
 
+#show-deal-list{
+  height: 185px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
