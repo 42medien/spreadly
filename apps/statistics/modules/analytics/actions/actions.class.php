@@ -66,7 +66,8 @@ class analyticsActions extends sfActions {
     $lQuery = Doctrine_Query::create()
                         ->select('*')
                         ->from('Deal d')
-                        ->where('d.sf_guard_user_id = ? AND (d.start_date = ? OR d.end_date >= ?)', array($this->getUser()->getUserId(), date("c", strtotime("30 days ago")), date("c", strtotime("30 days ago"))));
+                        ->leftJoin('d.DomainProfile dp')
+                        ->where('dp.sf_guard_user_id = ? AND (d.start_date = ? OR d.end_date >= ?)', array($this->getUser()->getUserId(), date("c", strtotime("30 days ago")), date("c", strtotime("30 days ago"))));
 
   	$this->pDeals = $lQuery->execute();
 
