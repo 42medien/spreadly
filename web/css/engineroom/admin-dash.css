@@ -1,0 +1,236 @@
+/*  Less Framework 4
+  http://lessframework.com
+  by Joni Korpi
+  License: http://opensource.org/licenses/mit-license.php */
+
+
+/*  Resets
+  ------  */
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, 
+p, blockquote, pre, a, abbr, address, cite, code, del, dfn, em, 
+img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, hr, 
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend, 
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figure, figcaption, hgroup, 
+menu, footer, header, nav, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+article, aside, canvas, figure, figure img, figcaption, hgroup,
+footer, header, nav, section, audio, video {
+  display: block;
+}
+
+a img {border: 0;}
+
+
+
+/*  Typography presets
+  ------------------  */
+
+.gigantic {
+  font-size: 110px;
+  line-height: 120px;
+  letter-spacing: -2px;
+}
+
+.huge, h1 {
+  font-size: 68px;
+  line-height: 72px;
+  letter-spacing: -1px;
+}
+
+.large, h2 {
+  font-size: 42px;
+  line-height: 48px;
+}
+
+.bigger, h3 {
+  font-size: 26px;
+  line-height: 36px;
+}
+
+.big, h4 {
+  font-size: 22px;
+  line-height: 30px;
+}
+
+body {
+  font: 12px/1.4 Arial,Helvetica,sans-serif;
+}
+
+.small, small {
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.left{
+  float: left;
+}
+
+/* Selection colours (easy to forget) */
+
+::selection     {background: rgb(255,255,158);}
+::-moz-selection  {background: rgb(255,255,158);}
+img::selection    {background: transparent;}
+img::-moz-selection {background: transparent;}
+body {-webkit-tap-highlight-color: rgb(255,255,158);}
+
+
+
+/*    Default Layout: 992px. 
+    Gutters: 24px.
+    Outer margins: 48px.
+    Leftover space for scrollbars @1024px: 32px.
+-------------------------------------------------------------------------------
+cols    1     2      3      4      5      6      7      8      9      10
+px      68    160    252    344    436    528    620    712    804    896    */
+
+body {
+  width: 896px;
+  padding: 72px 48px 84px;
+  background: #000;
+  color: #fff;
+  -webkit-text-size-adjust: 100%; /* Stops Mobile Safari from auto-adjusting font-sizes */
+}
+
+section.main-section :nth-last-child(1){margin-right: 0px;}
+
+.widget {
+  margin-right: 24px;
+  margin-bottom: 24px;
+  box-shadow: 2px 0 3px #0D0D0D, -2px 0 3px #0D0D0D, 0 3px 3px #0D0D0D, 0 -2px 3px #0D0D0D;
+  background: url("/img/widget_grad.png") no-repeat scroll 100% 0 #232526;
+  font-family: Arial,Tahoma,Geneva,sans-serif;
+  float: left;
+  z-index: 100;
+}
+.widget-single{ width: 160px; height: 230px;}
+.widget-double{ width: 344px; height: 230px;}
+
+
+
+.widget > section {
+   border-bottom: 1px solid #151617;
+   border-top: 1px solid #303334;
+   color: #707275;
+   font-size: 12px;
+   padding: 10px 15px;
+}
+
+
+
+.widget > header{
+   border-bottom: 1px solid #151617;
+   border-top: 1px solid #323434;
+   height: 17px;
+   line-height: 100%;
+   overflow: hidden;
+   padding: 10px 15px 11px;
+}
+
+.widget > header > section {
+    color: #707275;
+    font-size: 11px;
+    padding-top: 3px;
+    text-shadow: 0 -1px 1px #000000;
+    text-transform: uppercase;
+}
+
+
+
+.widget-data-section{
+   background: url("/img/bg_time_head.gif") repeat scroll 0 0 transparent;
+   border: 0 none;
+   height: 50px;
+}
+.widget-data-section div{ color: #D3D4D4; text-shadow: 1px 1px 1px #3F3F3F, -1px -1px 1px #3F3F3F;}
+
+.positive{color: #77AB13 !important;}
+.widget-data-section .positive .positive-arrow-big{padding-top: 8px; margin-right: 5px;}
+.positive-arrow-big{
+   width: 0;
+   height: 0;
+   border-left: 15px solid transparent;
+   border-right: 15px solid transparent;
+   border-bottom: 28px solid #77AB13;
+}
+
+.widget-data-body{
+  height: 68px;
+  padding: 10px;
+}
+
+footer{
+  height: 22px;
+  padding: 3px 10px 4px 15px;
+  background: none repeat scroll 0 0 #1E2021;
+  border-top: 1px solid #303334;
+  color: #444749;
+  font: 11px/100% Arial,Tahoma,Geneva,sans-serif;
+  line-height: 22px;  
+}
+
+
+/*    Tablet Layout: 768px.
+    Gutters: 24px.
+    Outer margins: 28px.
+    Inherits styles from: Default Layout.
+-----------------------------------------------------------------
+cols    1     2      3      4      5      6      7      8
+px      68    160    252    344    436    528    620    712    */
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  
+  body {
+    width: 712px;
+    padding: 48px 28px 60px;
+    background: #fff;    
+  }
+}
+
+
+
+/*    Mobile Layout: 320px.
+    Gutters: 24px.
+    Outer margins: 34px.
+    Inherits styles from: Default Layout.
+---------------------------------------------
+cols    1     2      3
+px      68    160    252    */
+
+@media only screen and (max-width: 767px) {
+  
+  body {
+    width: 252px;
+    padding: 48px 34px 60px;
+  }
+  
+}
+
+
+
+/*    Wide Mobile Layout: 480px.
+    Gutters: 24px.
+    Outer margins: 22px.
+    Inherits styles from: Default Layout, Mobile Layout.
+------------------------------------------------------------
+cols    1     2      3      4      5
+px      68    160    252    344    436    */
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  
+  body {
+    width: 436px;
+    padding: 36px 22px 48px;
+  }
+  
+}
+
+.clearfix:after {  content: "."; display:block; height:0; clear:both; visibility:hidden; }/* ----- clear fix for floats ----- */
+.clearfix { display:inline-block; }   
+* html .clearfix { height:1%; }/* hides clearfix from IE-mac */
+.clearfix { display:block; }/* end hide from IE-mac */
