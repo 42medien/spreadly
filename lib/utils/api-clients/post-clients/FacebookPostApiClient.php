@@ -54,6 +54,8 @@ class FacebookPostApiClient extends PostApi {
     if ($pActivity->getTags()) {
       $lLink .= '&tags='.implode(",", $pActivity->getTags());
     }
+    // add clickback param
+    $lLink .= '&clickback=facebook.'.$pActivity->getId();
 
     $lActions = array("name" => $lActionText, "link" => urlencode($lLink));
 
