@@ -240,7 +240,6 @@ class WidgetUtils {
    * @return string|null
    */
   public function extractClickback() {
-    $pUrl = $this->aUrl;
     $pReferrerUri = @$_SERVER['HTTP_REFERER'];
 
     if (!$pReferrerUri) {
