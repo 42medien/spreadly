@@ -123,6 +123,11 @@ class myUser extends sfBasicSecurityUser {
     return substr($culture, 0, 2);
   }
 
+  /**
+   * checks a users deal credentials
+   *
+   * @return boolean
+   */
   public function checkDealCredentials() {
     $user = $this->getUser();
 
