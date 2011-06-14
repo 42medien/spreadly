@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Provides methods needed to generate and verify MicroIDs. 
+ * Provides methods needed to generate and verify MicroIDs.
  * All MicroID formats are supported.
  *
  * This package is based on original code written by Will Norris (will@willnorris.com).
@@ -12,20 +12,20 @@
  *
  * PHP version 5.1.0+
  *
- * LICENSE: This source file is subject to the New BSD license that is 
+ * LICENSE: This source file is subject to the New BSD license that is
  * available through the world-wide-web at the following URI:
- * http://www.opensource.org/licenses/bsd-license.php. If you did not receive  
- * a copy of the New BSD License and are unable to obtain it through the web, 
+ * http://www.opensource.org/licenses/bsd-license.php. If you did not receive
+ * a copy of the New BSD License and are unable to obtain it through the web,
  * please send a note to license@php.net so we can mail you a copy immediately.
  *
  * @category Crypt
  * @package  Crypt_MicroID
- * @author   Kurt Wilms <wilms@cs.umn.edu> 
+ * @author   Kurt Wilms <wilms@cs.umn.edu>
  * @license  http://www.opensource.org/licenses/bsd-license.php BSD
  * @version  CVS: $Id:$
  * @link     http://pear.php.net/package/Crypt_MicroID
  * @link     http://microid.org/
- */ 
+ */
 
 /**
  * Crypt_MicroID
@@ -37,13 +37,13 @@
  *     $microID = Crypt_MicroID::generate('xmpp:stpeter@jabber.org', 'https://www.xmpp.net/');
  *     echo $microID;
  * } catch (Crypt_MicroID_AlgorithmNotFoundException $e) {
- *     echo $e->getMessage(); 
+ *     echo $e->getMessage();
  * }
  * ?>
  * </code>
  *
  * @category Crypt
- * @package  Crypt_MicroID  
+ * @package  Crypt_MicroID
  * @author   Kurt Wilms <wilms@cs.umn.edu>
  * @license  http://www.opensource.org/licenses/bsd-license.php BSD
  * @link     http://pear.php.net/package/Crypt_MicroID
@@ -51,8 +51,8 @@
 class MicroId
 {
   const META_REGEXP = '/<[\s]*meta[\s]*.*[\s]*[\s]*name[\s]*=[\s]*[\"\']?microid[\"\']?.*[\s]*[\/]*?>/i';
-  const MICROID_REGEXP = '/content[\s]*=[\s]*[\"\']?(.*[a-zA-Z0-9+:])[\"\']?[\s]*/i';
-  
+  const MICROID_REGEXP = '/content[\s]*=[\s]*[\"\']?([a-zA-Z0-9+:]*)[\"\']?[\s]*/i';
+
   /**
    * The MicroID "algo"
    *
@@ -73,8 +73,8 @@ class MicroId
    * @throws Crypt_MicroID_AlgorithmNotFoundException
    * @link http://microid.org/draft-miller-microid-01.html#generation
    */
-  public static function generate($identity, $service, 
-      $algorithm = self::ALGORITHM, $legacy = false) 
+  public static function generate($identity, $service,
+      $algorithm = self::ALGORITHM, $legacy = false)
   {
 
       $microID = '';
@@ -89,7 +89,7 @@ class MicroId
       // Try message digest engine
       if (function_exists('hash')) {
           if (in_array(strtolower($algorithm), hash_algos())) {
-              return $microID .= hash($algorithm, hash($algorithm, $identity) . 
+              return $microID .= hash($algorithm, hash($algorithm, $identity) .
                   hash($algorithm, $service));
           }
       }
@@ -97,17 +97,17 @@ class MicroId
       // Try mhash engine
       if (function_exists('mhash')) {
           $hash_method_constant = 'MHASH_' . strtoupper($algorithm);
-          if (defined($hash_method_constant)) { 
+          if (defined($hash_method_constant)) {
               $hash_method = constant($hash_method_constant);
               $identity_hash = bin2hex(mhash($hash_method, $identity));
               $service_hash = bin2hex(mhash($hash_method, $service));
-              return $microID .= bin2hex(mhash($hash_method, $identity_hash . 
+              return $microID .= bin2hex(mhash($hash_method, $identity_hash .
                   $service_hash));
           }
       }
 
       // Direct string function
-      if (function_exists($algorithm)) { 
+      if (function_exists($algorithm)) {
           return $microID .= $algorithm($algorithm($identity) .
               $algorithm($service));
       }
@@ -121,11 +121,11 @@ class MicroId
 
 
   /**
-   * Compute a MicroID for the given identity and service 
-   * URIs and verify that it matches the provided MicroID.  
+   * Compute a MicroID for the given identity and service
+   * URIs and verify that it matches the provided MicroID.
    *
-   * The provided ID can be in the legacy format (without URI 
-   * types or algorithm), in which case the SHA1 algorithm will 
+   * The provided ID can be in the legacy format (without URI
+   * types or algorithm), in which case the SHA1 algorithm will
    * be assumed.
    *
    * @param string $identity identity URI
@@ -136,11 +136,11 @@ class MicroId
    * @throws Crypt_MicroID_AlgorithmNotFoundException
    * @link http://microid.org/draft-miller-microid-01.html#processing
    */
-  public static function verify($identity, $service, $microID) 
+  public static function verify($identity, $service, $microID)
   {
 
       $algorithm = self::ALGORITHM;
-      $legacy    = true;        
+      $legacy    = true;
       $id_parts  = explode(':', $microID);
 
       // Not legacy mode
@@ -155,7 +155,7 @@ class MicroId
                               $legacy) == $microID
               );
   }
-  
+
   /**
 	 * parse a string to get all microids
 	 *
@@ -174,6 +174,6 @@ class MicroId
 
 	  return $lMicroIds;
 	}
-	
+
 }
 
