@@ -25,4 +25,13 @@ class YiidActivityRepository extends DocumentRepository
 
     return $results;
   }
+
+  public function count($from, $to) {
+    $results = $this->createQueryBuilder()
+                    ->field("c")->gte($from)
+                    ->field("c")->lte($to)
+                    ->getQuery()->execute();
+
+    return $results->count();
+  }
 }

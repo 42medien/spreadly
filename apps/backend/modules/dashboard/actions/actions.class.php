@@ -17,6 +17,35 @@ class dashboardActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
+    
+    $range = array(strtotime("today"), strtotime("tomorrow"));
+    $lastRange = array(strtotime("yesterday"), strtotime("today"));
+        
+    $this->data = $this->calc($range, $lastRange);
+    
     $this->setLayout('dash_layout');
   }
+  
+  private function calc($range, $lastRange) {
+    $data = array();
+    
+    $data['current_user_count'] = UserTable::getInstance()->countUsers($range[0], $range[1]);
+    $data['last_user_count']    = UserTable::getInstance()->countUsers($lastRange[0], $lastRange[1]);
+    $data['user_count_delta']   = $this->delta($data['current_user_count'], $data['last_user_count']);
+
+    $data['current_stats_user_count'] = SfGuardUserTable::getInstance()->countUsers($range[0], $range[1]);
+    $data['last_stats_user_count']    = SfGuardUserTable::getInstance()->countUsers($lastRange[0], $lastRange[1]);
+    $data['stats_user_count_delta']   =  $this->delta($data['current_stats_user_count'], $data['last_stats_user_count']);
+    
+    $data['current_likes_count']    = MongoManager::getDm()->getRepository('Documents\YiidActivity')->count($range[0], $range[1]);
+    $data['last_likes_count']    = MongoManager::getDm()->getRepository('Documents\YiidActivity')->count($lastRange[0], $lastRange[1]);
+    $data['likes_count_delta']   =  $this->delta($data['current_likes_count'], $data['last_likes_count']);
+    
+    return $data;
+  }
+  
+  private function delta($x, $y) {
+    return $y>0 ? round((($x-$y)/$y)*100) : '∞';
+  }
 }
+ 
