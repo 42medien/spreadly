@@ -29,17 +29,21 @@ class dashboardActions extends sfActions
   private function calc($range, $lastRange) {
     $data = array();
     
-    $data['current_user_count'] = UserTable::getInstance()->countUsers($range[0], $range[1]);
-    $data['last_user_count']    = UserTable::getInstance()->countUsers($lastRange[0], $lastRange[1]);
+    $data['current_user_count'] = UserTable::getInstance()->countByRange($range[0], $range[1]);
+    $data['last_user_count']    = UserTable::getInstance()->countByRange($lastRange[0], $lastRange[1]);
     $data['user_count_delta']   = $this->delta($data['current_user_count'], $data['last_user_count']);
 
-    $data['current_stats_user_count'] = SfGuardUserTable::getInstance()->countUsers($range[0], $range[1]);
-    $data['last_stats_user_count']    = SfGuardUserTable::getInstance()->countUsers($lastRange[0], $lastRange[1]);
+    $data['current_stats_user_count'] = SfGuardUserTable::getInstance()->countByRange($range[0], $range[1]);
+    $data['last_stats_user_count']    = SfGuardUserTable::getInstance()->countByRange($lastRange[0], $lastRange[1]);
     $data['stats_user_count_delta']   =  $this->delta($data['current_stats_user_count'], $data['last_stats_user_count']);
     
-    $data['current_likes_count']    = MongoManager::getDm()->getRepository('Documents\YiidActivity')->count($range[0], $range[1]);
-    $data['last_likes_count']    = MongoManager::getDm()->getRepository('Documents\YiidActivity')->count($lastRange[0], $lastRange[1]);
+    $data['current_likes_count']    = MongoManager::getDm()->getRepository('Documents\YiidActivity')->countByRange($range[0], $range[1]);
+    $data['last_likes_count']    = MongoManager::getDm()->getRepository('Documents\YiidActivity')->countByRange($lastRange[0], $lastRange[1]);
     $data['likes_count_delta']   =  $this->delta($data['current_likes_count'], $data['last_likes_count']);
+
+    $data['current_domain_count'] = DomainProfileTable::getInstance()->countByRange($range[0], $range[1]);
+    $data['last_domain_count']    = DomainProfileTable::getInstance()->countByRange($lastRange[0], $lastRange[1]);
+    $data['domain_count_delta']   = $this->delta($data['current_domain_count'], $data['last_domain_count']);
     
     return $data;
   }

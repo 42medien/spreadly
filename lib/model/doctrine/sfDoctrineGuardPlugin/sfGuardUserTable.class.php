@@ -9,7 +9,7 @@ class sfGuardUserTable extends PluginsfGuardUserTable
         return Doctrine_Core::getTable('sfGuardUser');
   }
     
-  public function countUsers($from, $to) {
+  public function countByRange($from, $to) {
     $fromDate = date('Y-m-d', $from);
     $toDate = date('Y-m-d', $to);
     

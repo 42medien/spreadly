@@ -25,4 +25,15 @@ class DomainProfileTable extends Doctrine_Table
     ->orderBy('created_at DESC');
     return $lQ->execute();
   }
+  
+  public function countByRange($from, $to) {
+    $fromDate = date('Y-m-d', $from);
+    $toDate = date('Y-m-d', $to);
+    
+    $lQuery = $this->createQuery()
+                   ->where('created_at BETWEEN ? AND ?', array($fromDate, $toDate))
+                   ->execute();
+
+    return $lQuery->count();
+  }
 }
