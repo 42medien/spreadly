@@ -115,7 +115,7 @@ class User extends BaseUser {
     if ($lOi = $lQuery->fetchOne()) {
       return $lOi->getPhoto();
     }
-    return null;
+    return "/img/default-avatars/mr_spread_80x80_transparent.png";
   }
 
   /**

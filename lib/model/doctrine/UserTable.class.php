@@ -323,7 +323,7 @@ class UserTable extends Doctrine_Table {
    */
   public static function getFriendIdsBySocialObjectId($pSocialObjectId, $pUserId) {
     $dm = MongoManager::getDM();
-    $lSocialObject = $dm->getRepository('Documents\SocialObject')->findOne($pSocialObjectId);
+    $lSocialObject = $dm->getRepository('Documents\SocialObject')->find($pSocialObjectId);
 
     $lUser = UserTable::getInstance()->find($pUserId);
     $lConnectedUsers = $lUser->getIdsOfFriends();
@@ -336,11 +336,11 @@ class UserTable extends Doctrine_Table {
     }
     return $lFriendsActive;
   }
-  
+
   public function countByRange($from, $to) {
     $fromDate = date('Y-m-d', $from);
     $toDate = date('Y-m-d', $to);
-    
+
     $lQuery = $this->createQuery()
                    ->where('created_at BETWEEN ? AND ?', array($fromDate, $toDate))
                    ->execute();

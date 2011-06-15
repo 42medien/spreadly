@@ -26,5 +26,8 @@ function avatar_path($pSource, $pSize, $pAbsolute = false) {
  * @return string
  */
 function avatar_tag($pSource, $pSize, $pOptions = array()) {
+  $pOptions['height'] = $pSize;
+  $pOptions['width'] = $pSize;
+
   return image_tag(avatar_path($pSource, $pSize), $pOptions);
 }
