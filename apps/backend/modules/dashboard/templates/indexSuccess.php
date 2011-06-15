@@ -49,6 +49,17 @@
 		</footer>
 	</div>
 
+	<div class="widget widget-single widget-one-section">
+		<header><section>spread.ly Trend</section></header>
+		<section class="widget-data-section">
+			<div class="large">45</div>
+			<div class="bigger neutral"><div class="neutral-arrow-small left">&nbsp;</div>10.54%</div>
+		</section>
+		<footer>
+			Powered by @Spreadly
+		</footer>
+	</div>
+
 	<div class="widget widget-single">4</div>
 	<div class="widget widget-double">5</div>
 	<div class="widget widget-single">6</div>

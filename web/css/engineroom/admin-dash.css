@@ -162,6 +162,7 @@ section.main-section :nth-last-child(1){margin-right: 0px;}
 }
 
 .negative{color: #AE432E !important; text-shadow: none !important;}
+.widget-data-section .negative .negative-arrow-small{margin-top: 8px; margin-right: 5px;}
 .negative-arrow-small{
    width: 0;
    height: 0;
@@ -169,7 +170,17 @@ section.main-section :nth-last-child(1){margin-right: 0px;}
    border-right: 10px solid transparent;
    border-top: 18px solid #AE432E;
 }
-.widget-data-section .negative .negative-arrow-small{margin-top: 8px; margin-right: 5px;}
+
+.neutral{color: #fff !important; text-shadow: none !important;}
+.widget-data-section .neutral .neutral-arrow-small{margin-top: 8px; margin-right: 5px;}
+.neutral-arrow-small{
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-left: 20px solid #fff;
+  border-bottom: 10px solid transparent;
+}
+
 
 .positive-arrow-small{
    width: 0;
