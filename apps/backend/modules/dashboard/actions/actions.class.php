@@ -24,25 +24,34 @@ class dashboardActions extends sfActions
       case 'today':
         $range = array(strtotime("today"), strtotime("tomorrow"));
         $lastRange = array(strtotime("yesterday"), strtotime("today"));
+        $this->fromDate = date('l', $range[0]);
+        $this->toDate = date('d.m.Y', $range[0]);
         break;
       case 'yesterday':
         $range = array(strtotime("yesterday"), strtotime("today"));
         $lastRange = array(strtotime("2 days ago"), strtotime("yesterday"));
+        $this->fromDate = date('l', $range[0]);
+        $this->toDate = date('d.m.Y', $range[0]);
         break;
       case 'last7d':
         $range = array(strtotime("6 days ago"), strtotime("tomorrow"));
         $lastRange = array(strtotime("14 days ago"), strtotime("7 days ago"));
+        $this->fromDate = date('d.m.Y', $range[0]);
+        $this->toDate = date('d.m.Y', $range[1]-24*60*60);
         break;
       case 'last30d':
         $range = array(strtotime("29 days ago"), strtotime("tomorrow"));
         $lastRange = array(strtotime("60 days ago"), strtotime("30 days ago"));
+        $this->fromDate = date('d.m.Y', $range[0]);
+        $this->toDate = date('d.m.Y', $range[1]-24*60*60);
         break;
       
       default:
         throw new Exception("No range key specified.");
         break;
     }
-        
+    
+    
     $this->data = $this->calc($range, $lastRange);
     
     $this->setLayout('dash_layout');

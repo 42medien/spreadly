@@ -2,13 +2,16 @@
 
 <section class="main-section number-section clearfix">
 	<div class="widget widget-single">
-		<header><section>This is now</section></header>
+		<header><section><?php echo $range ?></section></header>
 		<section class="widget-data-section">
 			<div class="large"><?php echo date('H:i') ?>h</div>
 		</section>
 		<section class="widget-data-body">
-			<div class="big"><?php echo date('l') ?></div>
-			<div class="big"><?php echo date('d.m.Y') ?></div>
+			<div class="big"><?php echo $fromDate ?></div>
+			<?php if($range == 'last7d' || $range == 'last30d'): ?>
+			  <center style="line-height: 0.5em">&mdash;</center>
+			<?php endif; ?>
+			<div class="big"><?php echo $toDate ?></div>
 		</section>
 		<footer>
 			Powered by @Spreadly
