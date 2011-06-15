@@ -91,10 +91,43 @@ px      68    160    252    344    436    528    620    712    804    896    */
 
 body {
   width: 896px;
-  padding: 72px 48px 84px;
+  padding: 0px 48px 84px;
   background: #000;
   color: #fff;
   -webkit-text-size-adjust: 100%; /* Stops Mobile Safari from auto-adjusting font-sizes */
+}
+
+#header {
+  padding: 25px 0;
+}
+#header img {
+  float: left;
+  margin-right: 2em;
+}
+#header ul {
+  list-style: none;
+  float:right;
+  margin-top: 20px;
+}
+#header ul li {
+  float: left;
+  padding: 2px 4px 0;
+  margin-right: 2em;
+}
+#header ul li:hover,
+#header ul li.active {
+  background: white;
+}
+  
+#header ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#header ul li:hover a,
+#header ul li.active a {
+  color: black;
 }
 
 section.main-section :nth-last-child(1){margin-right: 0px;}

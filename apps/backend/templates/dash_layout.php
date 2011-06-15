@@ -11,7 +11,7 @@
 		<!--[if lt IE 9]>
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<link rel="stylesheet" media="all" href=""/>
+		<link rel="stylesheet" media="all" href="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<!-- Adding "maximum-scale=1" fixes the Mobile Safari auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
 
@@ -20,6 +20,15 @@
     <?php include_javascripts() ?>
   </head>
   <body>
+      <div id="header" class="clearfix">
+        <?php echo image_tag('/img/dashboard_logo') ?>
+        <ul class="clearfix">
+          <li class="<?php echo ($sf_request->getParameter('range')=='today' || !$sf_request->getParameter('range')) ? 'active' : '' ?>"><?php echo link_to('Today', 'dashboard/index?range=today') ?></li>
+          <li class="<?php echo $sf_params->get('range')=='yesterday' ? 'active' : '' ?>"><?php echo link_to('Yesterday', 'dashboard/index?range=yesterday') ?></li>
+          <li class="<?php echo $sf_params->get('range')=='last7d' ? 'active' : '' ?>"><?php echo link_to('Last 7d', 'dashboard/index?range=last7d') ?></li>
+          <li class="<?php echo $sf_params->get('range')=='last30d' ? 'active' : '' ?>"><?php echo link_to('Last 30d', 'dashboard/index?range=last30d') ?></li>
+        </ul>
+      </div>
     	<?php echo $sf_content; ?>
 		<script type="text/javascript">
 			// Custom Checkbox Function

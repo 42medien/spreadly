@@ -18,9 +18,9 @@ class dashboardActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     
-    $key = 'yesterday';
+    $this->range = $request->getParameter('range', 'today');
     
-    switch ($key) {
+    switch ($this->range) {
       case 'today':
         $range = array(strtotime("today"), strtotime("tomorrow"));
         $lastRange = array(strtotime("yesterday"), strtotime("today"));
