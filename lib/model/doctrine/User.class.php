@@ -59,17 +59,6 @@ class User extends BaseUser {
   }
 
   /**
-   * runs before User->save()
-   *
-   * @author Matthias Pfefferle
-   * @param Doctrine_Event $pEvent
-   */
-  public function preSave($pEvent) {
-    $this->setSortname($this->generateSortname());
-  }
-
-
-  /**
    * constructs the sortname of the current user-object
    *
    * @author Matthias Pfefferle
@@ -115,7 +104,7 @@ class User extends BaseUser {
    *
    * retrieves main Avatar for User
    * @author weyandch
-   * @return UserAvatar
+   * @return string
    */
   public function getAvatar() {
     $lQuery = Doctrine_Query::create()
