@@ -16,14 +16,14 @@ OnlineIdentity:
       notnull:  false
     original_id:
       type:     string(255)
-    title:
-      type:     string(120)
+    #title:
+    #  type:     string(120)
     name:
       type:     string(255)
     photo:
       type:     string(255)
-    identifier:
-      type:     string(255)
+    #identifier:
+    #  type:     string(255)
     profile_uri:
       type:     string(255)
     gender:
@@ -37,8 +37,8 @@ OnlineIdentity:
       type:     string(255)
     auth_identifier:
       type:     string(255)
-    auth_identity_type:
-      type:     integer(4)
+    #auth_identity_type:
+    #  type:     integer(4)
     social_publishing_enabled:
       type:     integer(4)
       default:  0

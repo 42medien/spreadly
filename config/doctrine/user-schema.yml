@@ -19,18 +19,18 @@ User:
       type:       string(1)
     description:
       type:       string
-    salutation:
-      type:       string(32)
+    #salutation:
+    #  type:       string(32)
     title:
       type:       string(64)
     firstname:
       type:       string(64)
     lastname:
       type:       string(64)
-    sortname:
-      type:       string(128)
-      default:    ''
-      notnull:    true
+    #sortname:
+    #  type:       string(128)
+    #  default:    ''
+    #  notnull:    true
     birthdate:
       type:       date
     relationship_state:
@@ -50,20 +50,8 @@ User:
       type:       boolean
       notnull:    true
       default:    false
-    default_avatar:
-      type:       string(50)
     credentials:
       type:       string(30)
-    credcommunities:
-      type:       string(100)
-    done:
-      type:       integer
-      default:    0
-      notnull:    true
     last_activity:
       type:       integer
       default:    0
-    # temp fields
-    is_first_login:
-      type:       boolean
-      default:    true

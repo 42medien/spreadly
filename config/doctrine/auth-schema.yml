@@ -24,9 +24,9 @@ AuthToken:
       type:    string(40)
     additional_params:
       type:    string
-    is_publishing_enabled:
-      type:    boolean
-      default: false
+    #is_publishing_enabled:
+    #  type:    boolean
+    #  default: false
   relations:
     User:            { onDelete: CASCADE, local: user_id, foreign: id, foreignAlias: AuthTokens }
     OnlineIdentity:  { onDelete: CASCADE, local: online_identity_id, foreign: id, foreignAlias: AuthTokens }

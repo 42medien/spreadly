@@ -6,18 +6,16 @@ options:
 PersistentVariable:
   actAs:
     Timestampable:  ~
-    
   columns:
     name:
       type: string
     value:
       type: string
-      
-      
+
+
 PersistentObject:
   actAs:
     Timestampable:  ~
-    
   columns:
     user_id:
       type: integer
@@ -27,4 +25,3 @@ PersistentObject:
       type: string
   relations:
     User:        { onDelete: CASCADE, local: user_id, foreign: id, foreignAlias: PersistentObject }
-        
