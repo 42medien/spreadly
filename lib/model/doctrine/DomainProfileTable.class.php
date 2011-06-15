@@ -36,4 +36,16 @@ class DomainProfileTable extends Doctrine_Table
 
     return $lQuery->count();
   }
+
+  public function countVerifiedByRange($from, $to) {
+    $fromDate = date('Y-m-d', $from);
+    $toDate = date('Y-m-d', $to);
+    
+    $lQuery = $this->createQuery()
+                   ->where('created_at BETWEEN ? AND ?', array($fromDate, $toDate))
+                   ->andWhere('state = ?', 'verified')
+                   ->execute();
+
+    return $lQuery->count();
+  }
 }

@@ -18,8 +18,30 @@ class dashboardActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     
-    $range = array(strtotime("today"), strtotime("tomorrow"));
-    $lastRange = array(strtotime("yesterday"), strtotime("today"));
+    $key = 'yesterday';
+    
+    switch ($key) {
+      case 'today':
+        $range = array(strtotime("today"), strtotime("tomorrow"));
+        $lastRange = array(strtotime("yesterday"), strtotime("today"));
+        break;
+      case 'yesterday':
+        $range = array(strtotime("yesterday"), strtotime("today"));
+        $lastRange = array(strtotime("2 days ago"), strtotime("yesterday"));
+        break;
+      case 'last7d':
+        $range = array(strtotime("6 days ago"), strtotime("tomorrow"));
+        $lastRange = array(strtotime("14 days ago"), strtotime("7 days ago"));
+        break;
+      case 'last30d':
+        $range = array(strtotime("29 days ago"), strtotime("tomorrow"));
+        $lastRange = array(strtotime("60 days ago"), strtotime("30 days ago"));
+        break;
+      
+      default:
+        throw new Exception("No range key specified.");
+        break;
+    }
         
     $this->data = $this->calc($range, $lastRange);
     
@@ -44,6 +66,12 @@ class dashboardActions extends sfActions
     $data['current_domain_count'] = DomainProfileTable::getInstance()->countByRange($range[0], $range[1]);
     $data['last_domain_count']    = DomainProfileTable::getInstance()->countByRange($lastRange[0], $lastRange[1]);
     $data['domain_count_delta']   = $this->delta($data['current_domain_count'], $data['last_domain_count']);
+
+    $data['current_verified_domain_count'] = DomainProfileTable::getInstance()->countVerifiedByRange($range[0], $range[1]);
+    $data['last_verified_domain_count']    = DomainProfileTable::getInstance()->countVerifiedByRange($lastRange[0], $lastRange[1]);
+    $data['verified_domain_count_delta']   = $this->delta($data['current_verified_domain_count'], $data['last_verified_domain_count']);
+    
+    
     
     return $data;
   }
