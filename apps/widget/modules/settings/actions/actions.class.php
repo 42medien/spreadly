@@ -33,7 +33,6 @@ class settingsActions extends sfActions
     $this->pUser = $this->getUser()->getUser();
     $this->pIdentities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
 
-    CookieUtils::generateWidgetIdentityCookie($this->pIdentities);
     sfProjectConfiguration::getActive()->loadHelpers('I18N');
     $this->setLayout('layout');
   }
