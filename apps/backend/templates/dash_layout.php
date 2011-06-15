@@ -27,6 +27,7 @@
           <li class="<?php echo $sf_params->get('range')=='yesterday' ? 'active' : '' ?>"><?php echo link_to('Yesterday', 'dashboard/index?range=yesterday') ?></li>
           <li class="<?php echo $sf_params->get('range')=='last7d' ? 'active' : '' ?>"><?php echo link_to('Last 7d', 'dashboard/index?range=last7d') ?></li>
           <li class="<?php echo $sf_params->get('range')=='last30d' ? 'active' : '' ?>"><?php echo link_to('Last 30d', 'dashboard/index?range=last30d') ?></li>
+          <li><?php echo link_to('<span style="font-size: 18px;float:left; line-height: 11px; padding-right: 5px;font-weight: normal;">&#8634;</span>Back', '/backend.php') ?></li>
         </ul>
       </div>
     	<?php echo $sf_content; ?>
