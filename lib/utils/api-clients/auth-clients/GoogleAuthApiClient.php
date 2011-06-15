@@ -186,6 +186,11 @@ class GoogleAuthApiClient extends AuthApi {
 
     $pOnlineIdentity->setUserId($pUser->getId());                  /* signup,add new */
     $pOnlineIdentity->setAuthIdentifier($pAuthIdentifier);
+
+    //if ($lPhotos = $pObject->photos) {
+    //  $pOnlineIdentity->setPhoto($lPhotos[0]->value);
+    //}
+
     $pOnlineIdentity->save();
   }
 }
