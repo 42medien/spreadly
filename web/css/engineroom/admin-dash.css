@@ -184,6 +184,12 @@ section.main-section :nth-last-child(1){margin-right: 0px;}
    border: 0 none;
    height: 50px;
 }
+
+.widget-data-section.chart-section{
+  background: none;
+  background-color: #1e2021;
+}
+
 .widget-data-section div{ color: #D3D4D4; text-shadow: 1px 1px 1px #3F3F3F, -1px -1px 1px #3F3F3F;}
 
 .positive{color: #77AB13 !important; text-shadow: none !important;}
