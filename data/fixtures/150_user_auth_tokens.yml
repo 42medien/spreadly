@@ -3,7 +3,6 @@ AuthToken:
     User:    user_1
     Community:  community_2
     OnlineIdentity: oi_1
-    is_publishing_enabled:  0
     token_type: 2
     token_key: 21092406-NNNhz6AXV2qzW8Kfbel8WZcGVzSZExQczPJ34PtZ9
     token_secret: A9523PQu2bGIPMapahHKgN7H9mV1oiImUjmQpnqkq4
@@ -11,17 +10,14 @@ AuthToken:
     User:    user_2
     Community:  community_3
     OnlineIdentity: oi_4
-    is_publishing_enabled:  1
     token_type:   access
   at_3:
     User:    user_2
     Community:  community_2
     OnlineIdentity: oi_3
-    is_publishing_enabled:  1
     token_type:   access
   at_4:
     User:    user_1
     Community:  community_5
     OnlineIdentity: oi_14
-    is_publishing_enabled:  1
-    token_type:   access    
+    token_type:   access

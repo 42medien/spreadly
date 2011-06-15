@@ -1,6 +1,5 @@
 OnlineIdentity:
   oi_1:
-    title:      'hugo_twitter'
     name:       'hugo affenkopf'
     auth_identifier: 'hugo_twitter'
     User:       user_1
@@ -12,7 +11,6 @@ OnlineIdentity:
     friend_ids: "456789,555555,444444,457810,9898"
     friend_count: 5
   oi_2:
-    title:      'hugo_fb'
     name:       'hugo_fb'
     auth_identifier: 'hugo_fb'
     User:       user_1
@@ -21,56 +19,48 @@ OnlineIdentity:
     friend_count: 130
     Community:  community_3
   oi_3:
-    title:      'hans_twitter'
     name:       'hans_twitter'
     auth_identifier: 'hans_twitter'
     User:       user_2
     original_id: 456789
     Community:  community_2
   oi_4:
-    title:      'hans_fb'
     name:       'hans_fb'
     auth_identifier: 'hans_fb'
     User:       user_2
     original_id: 458789
     Community:  community_3
   oi_5:
-    title:      'karl_twitter'
     name:       'karl_twitter'
     auth_identifier: 'karl_twitter'
     User:        user_3
     original_id: 555555
     Community:  community_2
   oi_6:
-    title:      'james_fb'
     name:       'james_fb'
     auth_identifier: 'james_fb'
     User:       user_4
     original_id: 444444
     Community:  community_3
   oi_7:
-    title:      'snirgelchen_fb'
     name:       'snirgelchen_fb'
     auth_identifier: 'snirgelchen_fb'
     User:       user_5
     original_id: 987654
     Community:  community_3
   oi_8:
-    title:      'manni_fb'
     name:       'manni_fb'
     auth_identifier: 'manni_fb'
     User:       user_6
     original_id: 66666
     Community:  community_3
   oi_9:
-    title:      'affe_fb'
     name:       'affe_fb'
     auth_identifier: 'affe_fb'
     User:       user_7
     original_id: 7777
     Community:  community_3
   oi_10:
-    title:      'james_twitter'
     name:       'james_twitter'
     auth_identifier: 'james_twitter'
     User:       user_4
@@ -78,30 +68,26 @@ OnlineIdentity:
     friend_count: 56
     Community:  community_2
   oi_11:
-    title:      'snirgelchen_twitter'
     name:       'snirgelchen_twitter'
     User:       user_5
     original_id: 557788
     auth_identifier: 'snirgelchen_twitter'
     Community:  community_2
   oi_12:
-    title:      'manni_twitter'
     name:       'manni_twitter'
     auth_identifier: 'manni_twitter'
     Community:  community_2
     User:       user_6
     original_id: 8787
   oi_13:
-    title:      'affe_twitter'
     name:       'affe_twitter'
     auth_identifier: 'affe_twitter'
     Community:  community_2
     User:       user_7
     original_id: 9898
   oi_14:
-    title:      'hugo_linkedin'
     name:       'hugo_linkedin'
     auth_identifier: 'hugo_linkedin'
     Community:  community_5
     User:       user_1
-    original_id: 112211    
+    original_id: 112211

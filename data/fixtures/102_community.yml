@@ -33,9 +33,3 @@ Community:
     community: 'google'
     url:       'http://www.google.com'
     social_publishing_possible:   1
-
-  community_7:
-    name:      'delicious'
-    community: 'delicious'
-    url:       'http://www.delicious.com'
-    social_publishing_possible:   1
