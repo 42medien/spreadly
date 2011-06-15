@@ -155,17 +155,17 @@ class FacebookAuthApiClient extends AuthApi {
     /* signup,add new */
     $pOnlineIdentity->setUserId($pUser->getId());
     $pOnlineIdentity->setAuthIdentifier($pAuthIdentifier);
-    $pOnlineIdentity->setName($lJsonUserObject->name);
-    $pOnlineIdentity->setGender($lJsonUserObject->gender);
+    $pOnlineIdentity->setName($pObject->name);
+    $pOnlineIdentity->setGender($pObject->gender);
 
     // transform facebook format into
-    $lBirthday = explode('/', $lJsonUserObject->birthday);
+    $lBirthday = explode('/', $pObject->birthday);
     if (count($lBirthday == 3 && $lBirthday[2] > 0 && $lBirthday[0] != '0000')) { // 3 parts and year is set
       $pOnlineIdentity->setBirthdate($lBirthday[2].'-'.$lBirthday[0].'-'.$lBirthday[1]);
     }
-    $pOnlineIdentity->setRelationshipState(IdentityHelper::tranformRelationshipStringToClasskey($lJsonUserObject->relationship_status));
+    $pOnlineIdentity->setRelationshipState(IdentityHelper::tranformRelationshipStringToClasskey($pObject->relationship_status));
     $pOnlineIdentity->setSocialPublishingEnabled(true);
-    $pOnlineIdentity->setLocationRaw($lJsonUserObject->location->name);
+    $pOnlineIdentity->setLocationRaw($pObject->location->name);
     $pOnlineIdentity->setPhoto("https://graph.facebook.com/".$pOnlineIdentity->getOriginalId()."/picture");
 
     $pOnlineIdentity->save();
