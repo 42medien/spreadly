@@ -84,7 +84,6 @@ class AuthTokenTable extends Doctrine_Table {
 
     if ($pActive && $pOnlineIdentityId) {
       $lIdentity = OnlineIdentityTable::getInstance()->retrieveByPK($pOnlineIdentityId);
-      $lIdentity->setSocialPublishingEnabled($pActive);
       $lIdentity->save();
     }
 
