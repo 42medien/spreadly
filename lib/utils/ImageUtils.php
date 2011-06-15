@@ -1,8 +1,6 @@
 <?php
 /**
- * image utils
- *
- * @author Matthias Pfefferle
+ * @deprecated
  */
 class ImageUtils {
   public static function createAvatar($pAvatar) {
