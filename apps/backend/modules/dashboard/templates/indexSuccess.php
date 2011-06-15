@@ -23,7 +23,10 @@
   <?php include_partial('widget_single', array('title' => 'All Likes', 'data' => $data, 'type' => 'likes')) ?>
   <?php include_partial('widget_single', array('title' => 'Domains claimed', 'data' => $data, 'type' => 'domain')) ?>
   <?php include_partial('widget_single', array('title' => 'Domains verified', 'data' => $data, 'type' => 'verified_domain')) ?>
-  <?php include_partial('widget_piechart', array('title' => 'Domains verified', 'data' => $data, 'type' => 'verified_domain')) ?>
+	<?php include_partial('widget_single', array('title' => 'Media penetration', 'data' => $data, 'type' => 'media_penetration')) ?>
+	<?php include_partial('widget_single', array('title' => 'Clickbacks', 'data' => $data, 'type' => 'clickback')) ?>
+
+  <?php include_partial('widget_piechart', array('title' => 'Services', 'data' => $data, 'type' => 'services')) ?>
 	<?php include_partial('widget_linechart', array('title' => 'Domains verified', 'data' => $data, 'type' => 'verified_domain')) ?>
 
 </section>

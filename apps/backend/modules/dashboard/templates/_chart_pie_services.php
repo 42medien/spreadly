@@ -1,5 +1,5 @@
 <?php //use_helper('ChartData') ?>
-<?php //var_dump($pChartsettings);die();?>
+<?php //var_dump($data["share_distribution"][0]);exit();?>
 <script type="text/javascript">
 
 var ChartPieGenderActivities = {
@@ -66,21 +66,21 @@ var ChartPieGenderActivities = {
 		      name: 'Gender',
 		      data: [
 		             {
-		               name: '<?php echo __("FB"); ?>',
+		               name: '<?php echo $data["share_distribution_labels"][0]; ?>',
 		               color: '#3300cc',
-		               y: 15
+		               y: parseInt('<?php echo $data["share_distribution"][0]; ?>')
 		             },{
-		               name: '<?php echo __("Tw"); ?>',
+		               name: '<?php echo $data["share_distribution_labels"][1]; ?>',
 		               color: '#ff0000',
-		               y: 17
+		               y: parseInt('<?php echo $data["share_distribution"][1]; ?>')
 		             },{
-		               name: '<?php echo __("Ln"); ?>',
+		               name: '<?php echo $data["share_distribution_labels"][2]; ?>',
 		               color: '#ffcc00',
-		               y: 22
+		               y: parseInt('<?php echo $data["share_distribution"][2]; ?>')
 		             },{
-		               name: '<?php echo __("Go"); ?>',
+		               name: '<?php echo $data["share_distribution_labels"][3]; ?>',
 		               color: '#ffcc66',
-		               y: 13
+		               y: parseInt('<?php echo $data["share_distribution"][3]; ?>')
 		             }
 		         ]
           }]

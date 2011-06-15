@@ -9,5 +9,5 @@ function upDownArrow($value) {
 }
 
 function absOrInfinity($value) {
-  return $value == '∞' ? $value : abs($value);
+  return is_string($value) ? $value : abs($value);
 }

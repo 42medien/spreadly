@@ -80,12 +80,36 @@ class dashboardActions extends sfActions
     $data['last_verified_domain_count']    = DomainProfileTable::getInstance()->countVerifiedByRange($lastRange[0], $lastRange[1]);
     $data['verified_domain_count_delta']   = $this->delta($data['current_verified_domain_count'], $data['last_verified_domain_count']);
     
+    $data['current_stats']    = MongoManager::getStatsDm()->getRepository('Documents\AnalyticsActivity')->findOnlyByRange($range[0], $range[1]);
 
+    $data['last_stats']    = MongoManager::getStatsDm()->getRepository('Documents\AnalyticsActivity')->findOnlyByRange($lastRange[0], $lastRange[1]);
+
+    $data['current_stats'] = $data['current_stats']->getNext();
+    $data['last_stats'] = $data['last_stats']->getNext();
+
+    $data['current_clickback_count'] = $data['current_stats'] ? $data['current_stats']['value']['cb'] : 0;
+    $data['last_clickback_count'] = $data['last_stats'] ? $data['last_stats']['value']['cb'] : 0;
+    $data['clickback_count_delta'] = $this->delta($data['current_clickback_count'], $data['last_clickback_count']);
+    
+    $data['current_media_penetration_count'] = $data['current_stats'] ? $data['current_stats']['value']['mp'] : 0;
+    $data['last_media_penetration_count'] = $data['last_stats'] ? $data['last_stats']['value']['mp'] : 0;
+    $data['media_penetration_count_delta'] = $this->delta($data['current_media_penetration_count'], $data['last_media_penetration_count']);
+    
+    $data['share_distribution'] = $data['current_stats'] ? 
+      array(
+        $data['current_stats']['value']['s']['facebook']['l'],
+        $data['current_stats']['value']['s']['twitter']['l'],
+        $data['current_stats']['value']['s']['linkedin']['l'],
+        $data['current_stats']['value']['s']['google']['l']
+        ) : array();
+        
+    $data['share_distribution_labels'] = array('Fb', 'Tw', 'Li', 'Go');
     
     return $data;
   }
   
   private function delta($x, $y) {
+    if($x==$y) return 0;
     return $y>0 ? round((($x-$y)/$y)*100) : '∞';
   }
 }

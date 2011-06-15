@@ -29,15 +29,33 @@ abstract class StatsRepository extends DocumentRepository
   }
 
   public function findOnlyByRange($fromDay, $toDay) {
-    // Cut off the time, in case it is coming as full datetime
-    $fromDay = date('Y-m-d', strtotime($fromDay));
-    $toDay = date('Y-m-d', strtotime($toDay));
-
-    $query = $this->rangeMapReduce($fromDay, $toDay, 'day');
+    $query = $this->createQueryBuilder()
+              ->field("day")->gte(new MongoDate($fromDay))
+              ->field("day")->lte(new MongoDate($toDay))
+              ->map(
+              'function() {
+                 emit(
+                   1, '.
+                   str_replace('"', '', Stats::toJsonMap("this", true))
+                   .');
+                }')
+             ->reduce(
+               "function(key, values) {
+                  var sum = ".Stats::toJsonMap().";
+                  for(var i in values) {".
+                    Stats::toBaseSumString()
+                    .
+                    Stats::toDemographicsSumString()
+                    .
+                    Stats::toServicesSumString()
+                  ."}
+                return sum;
+              }");
+    
 
     $cursor = null;
     try {
-      $cursor = $query->getQuery(array("out" => "last30days.".$this->GROUP_BY))
+      $cursor = $query->getQuery()
                       ->execute();
     } catch (\Exception $e) {
       \sfContext::getInstance()->getLogger()->err("{StatsRepository} findByRange failed.\n".$e->getMessage());
@@ -85,6 +103,7 @@ abstract class StatsRepository extends DocumentRepository
     return $this->createQueryBuilder()
               ->field("day")->gte(new MongoDate(strtotime($fromDay)))
               ->field("day")->lte(new MongoDate(strtotime($toDay)))
+
               ->map(
               'function() {
                  emit(
