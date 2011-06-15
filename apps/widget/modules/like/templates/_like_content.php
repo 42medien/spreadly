@@ -12,7 +12,7 @@ if ($lImages && count($lImages) > 0) {
       <div class="commentlist spreadbox">
         <div class="clearfix profilebox">
           <div class="alignleft proimg">
-            <img src="<?php echo avatar_path($sf_user->getUser()->getDefaultAvatar(), '48x48'); ?>" alt="<?php echo $sf_user->getUser()->getFullname() ?>" title="<?php echo $sf_user->getUser()->getFullname() ?>">
+            <img src="<?php echo avatar_path($sf_user->getUser()->getAvatar(), '48'); ?>" alt="<?php echo $sf_user->getUser()->getFullname() ?>" title="<?php echo $sf_user->getUser()->getFullname() ?>" width="48" height="48">
           </div>
           <div class="alignright prodetail">
             <h3>

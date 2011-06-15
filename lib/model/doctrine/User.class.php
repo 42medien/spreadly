@@ -117,12 +117,16 @@ class User extends BaseUser {
    * @author weyandch
    * @return UserAvatar
    */
-  public function getMainAvatar() {
-    $lAvatar = UserAvatarTable::getMainAvatarForUserId($this->getId());
-    if (!$lAvatar) {
-      return 'affe';
+  public function getAvatar() {
+    $lQuery = Doctrine_Query::create()
+      ->from('OnlineIdentity oi')
+      ->where('oi.user_id = ?', $this->getId())
+      ->andWhere('oi.photo IS NOT NULL');
+
+    if ($lOi = $lQuery->fetchOne()) {
+      return $lOi->getPhoto();
     }
-    return $lAvatar->getAvatar();
+    return null;
   }
 
   /**

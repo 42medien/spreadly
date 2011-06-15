@@ -40,8 +40,8 @@ OnlineIdentity:
     auth_identity_type:
       type:     integer(4)
     social_publishing_enabled:
-      type:       integer(4)
-      default:    0
+      type:     integer(4)
+      default:  0
     friend_ids:
       type:     text
     friend_count:

@@ -14,9 +14,7 @@
  * @return string
  */
 function avatar_path($pSource, $pSize, $pAbsolute = false) {
-  $lSource = ImageUtils::generateAvatarUrl($pSource, $pSize);
-
-  return image_path($lSource, $pAbsolute);
+  return image_path($pSource, $pAbsolute);
 }
 
 /**

@@ -3,7 +3,7 @@
 	<div class="rcor">
   	<ul class="clearfix profileinfo">
     	<li class="prothumb">
-      	<img src="<?php echo avatar_path($sf_user->getUser()->getDefaultAvatar(), '48x48'); ?>" width="48" height="48" alt="<?php echo $pUser->getUsername(); ?>" title="<?php echo $pUser->getUsername(); ?>" />
+      	<img src="<?php echo avatar_path($sf_user->getUser()->getAvatar(), '48'); ?>" width="48" height="48" alt="<?php echo $pUser->getUsername(); ?>" title="<?php echo $pUser->getUsername(); ?>" />
       </li>
       <li class="pronameblock">
       	<h1><?php echo $pUser->getUsername(); ?></h1>

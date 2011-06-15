@@ -34,8 +34,8 @@ User:
     birthdate:
       type:       date
     relationship_state:
-      type:      integer(4)
-      default:   0
+      type:       integer(4)
+      default:    0
     culture:
       type:       string(7)
     email:
@@ -67,30 +67,3 @@ User:
     is_first_login:
       type:       boolean
       default:    true
-
-
-UserAvatar:
-  actAs:
-    Timestampable:  ~
-  columns:
-    user_id:
-      type:       integer
-    online_identity_id:
-      type:       integer
-    avatar:
-      type:   string(50)
-    imported_identifier:
-      type:    string(255)  #gravatar email or url to service
-    imported_community:
-      type:       integer
-    imported_type:
-      type: integer
-      size: 4
-      default: 0
-    is_main:
-      type: boolean
-      notnull: true
-      default: false
-  relations:
-    User:    { onDelete: CASCADE, local: user_id, foreign: id, foreignAlias: UserAvatars }
-    OnlineIdentity: { onDelete: CASCADE, local: online_identity_id, foreign: id, foreignAlias: UserAvatars }
