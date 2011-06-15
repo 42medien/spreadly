@@ -28,6 +28,23 @@ abstract class StatsRepository extends DocumentRepository
     return $this->findByHostsAndRange($hosts, $fromDay, $toDay);
   }
 
+  public function findOnlyByRange($fromDay, $toDay) {
+    // Cut off the time, in case it is coming as full datetime
+    $fromDay = date('Y-m-d', strtotime($fromDay));
+    $toDay = date('Y-m-d', strtotime($toDay));
+
+    $query = $this->rangeMapReduce($fromDay, $toDay, 'day');
+
+    $cursor = null;
+    try {
+      $cursor = $query->getQuery(array("out" => "last30days.".$this->GROUP_BY))
+                      ->execute();
+    } catch (\Exception $e) {
+      \sfContext::getInstance()->getLogger()->err("{StatsRepository} findByRange failed.\n".$e->getMessage());
+    }
+    return $cursor;
+  }
+  
   public function findByHostsAndRange($hosts, $fromDay, $toDay) {
     // Cut off the time, in case it is coming as full datetime
     $fromDay = date('Y-m-d', strtotime($fromDay));
@@ -64,14 +81,14 @@ abstract class StatsRepository extends DocumentRepository
     return $cursor;
   }
 
-  private function rangeMapReduce($fromDay, $toDay) {
+  private function rangeMapReduce($fromDay, $toDay, $groupBy=null) {
     return $this->createQueryBuilder()
               ->field("day")->gte(new MongoDate(strtotime($fromDay)))
               ->field("day")->lte(new MongoDate(strtotime($toDay)))
               ->map(
               'function() {
                  emit(
-                   this.'.$this->GROUP_BY.', '.
+                   this.'. ($groupBy ? $groupBy : $this->GROUP_BY) .', '.
                    str_replace('"', '', Stats::toJsonMap("this", true))
                    .');
                 }')

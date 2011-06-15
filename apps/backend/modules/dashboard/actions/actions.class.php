@@ -80,7 +80,7 @@ class dashboardActions extends sfActions
     $data['last_verified_domain_count']    = DomainProfileTable::getInstance()->countVerifiedByRange($lastRange[0], $lastRange[1]);
     $data['verified_domain_count_delta']   = $this->delta($data['current_verified_domain_count'], $data['last_verified_domain_count']);
     
-    
+
     
     return $data;
   }
