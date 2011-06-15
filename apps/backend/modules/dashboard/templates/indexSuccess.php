@@ -17,61 +17,13 @@
 			Powered by @Spreadly
 		</footer>
 	</div>
+  
+  <?php include_partial('widget_single', array('title' => 'spread.ly User', 'data' => $data, 'type' => 'user')) ?>
+  <?php include_partial('widget_single', array('title' => 'spreadly.com User', 'data' => $data, 'type' => 'stats_user')) ?>
+  <?php include_partial('widget_single', array('title' => 'Likes', 'data' => $data, 'type' => 'likes')) ?>
+  <?php include_partial('widget_single', array('title' => 'Domains claimed', 'data' => $data, 'type' => 'domain')) ?>
+  <?php include_partial('widget_single', array('title' => 'Domains verified', 'data' => $data, 'type' => 'verified_domain')) ?>
 
-	<div class="widget widget-single widget-one-section">
-		<header><section>spread.ly User</section></header>
-		<section class="widget-data-section">
-			<div class="large"><?php echo $data['current_user_count'] ?></div>
-			<div class="bigger <?php echo upDownClass($data['user_count_delta']) ?>"><div class="<?php echo upDownClass($data['user_count_delta']) ?>-arrow-small left">&nbsp;</div><?php echo absOrInfinity($data['user_count_delta']) ?><small>&nbsp;%</small></div>
-		</section>
-		<footer>
-			Powered by @Spreadly
-		</footer>
-	</div>
-
-	<div class="widget widget-single widget-one-section">
-		<header><section>spreadly.com User</section></header>
-		<section class="widget-data-section">
-			<div class="large"><?php echo $data['current_stats_user_count'] ?></div>
-			<div class="bigger <?php echo upDownClass($data['stats_user_count_delta']) ?>"><div class="<?php echo upDownClass($data['stats_user_count_delta']) ?>-arrow-small left">&nbsp;</div><?php echo absOrInfinity($data['stats_user_count_delta']) ?><small>&nbsp;%</small></div>
-		</section>
-		<footer>
-			Powered by @Spreadly
-		</footer>
-	</div>
-
-	<div class="widget widget-single widget-one-section">
-		<header><section>Likes</section></header>
-		<section class="widget-data-section">
-			<div class="large"><?php echo $data['current_likes_count'] ?></div>
-			<div class="bigger <?php echo upDownClass($data['likes_count_delta']) ?>"><div class="<?php echo upDownClass($data['likes_count_delta']) ?>-arrow-small left">&nbsp;</div><?php echo absOrInfinity($data['likes_count_delta']) ?><small>&nbsp;%</small></div>
-		</section>
-		<footer>
-			Powered by @Spreadly
-		</footer>
-	</div>
-	
-	<div class="widget widget-single widget-one-section">
-		<header><section>Domains claimed</section></header>
-		<section class="widget-data-section">
-			<div class="large"><?php echo $data['current_domain_count'] ?></div>
-			<div class="bigger <?php echo upDownClass($data['domain_count_delta']) ?>"><div class="<?php echo upDownClass($data['domain_count_delta']) ?>-arrow-small left">&nbsp;</div><?php echo absOrInfinity($data['domain_count_delta']) ?><small>&nbsp;%</small></div>
-		</section>
-		<footer>
-			Powered by @Spreadly
-		</footer>
-	</div>
-
-	<div class="widget widget-single widget-one-section">
-		<header><section>Domains verified</section></header>
-		<section class="widget-data-section">
-			<div class="large"><?php echo $data['current_verified_domain_count'] ?></div>
-			<div class="bigger <?php echo upDownClass($data['verified_domain_count_delta']) ?>"><div class="<?php echo upDownClass($data['verified_domain_count_delta']) ?>-arrow-small left">&nbsp;</div><?php echo absOrInfinity($data['verified_domain_count_delta']) ?><small>&nbsp;%</small></div>
-		</section>
-		<footer>
-			Powered by @Spreadly
-		</footer>
-	</div>
 </section>
 
 <section class="main-section chart-section clearfix">
