@@ -33,6 +33,9 @@
         <?php echo link_to('Jobs', url_for('job/index')) ?> |
       </span>
       <span class="navigation_text">
+        <?php echo link_to('Dashboard', 'dashboard/index'); ?>
+      </span>
+      <span class="navigation_text">
         <?php echo link_to(__('Logout'), '@sf_guard_signout'); ?>
       </span>
     <?php endif; ?>

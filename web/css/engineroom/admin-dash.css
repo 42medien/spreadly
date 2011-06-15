@@ -113,6 +113,7 @@ body {
   float: left;
   padding: 2px 4px 0;
   margin-right: 2em;
+  margin-bottom: 10px;
 }
 #header ul li:hover,
 #header ul li.active {
