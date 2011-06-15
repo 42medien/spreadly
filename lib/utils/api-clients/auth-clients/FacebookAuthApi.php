@@ -166,6 +166,7 @@ class FacebookAuthApiClient extends AuthApi {
     $pOnlineIdentity->setRelationshipState(IdentityHelper::tranformRelationshipStringToClasskey($lJsonUserObject->relationship_status));
     $pOnlineIdentity->setSocialPublishingEnabled(true);
     $pOnlineIdentity->setLocationRaw($lJsonUserObject->location->name);
+    $pOnlineIdentity->setPhoto("https://graph.facebook.com/".$pOnlineIdentity->getOriginalId()."/picture");
 
     $pOnlineIdentity->save();
 
