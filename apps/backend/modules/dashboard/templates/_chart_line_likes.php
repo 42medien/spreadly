@@ -27,7 +27,9 @@ var chart = new Highcharts.Chart({
     yAxis: {
       title: {
         text: false
-     }
+     },
+     min: 0,
+     allowDecimals:false
 
     },
 	  legend: {

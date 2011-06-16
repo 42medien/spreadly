@@ -32,8 +32,7 @@ var ChartPieGenderActivities = {
               enabled: false
             },
             printButton: {
-              enabled: false,
-              x: -15
+              enabled: false
             }
 
           }
@@ -45,7 +44,7 @@ var ChartPieGenderActivities = {
           },
           pie:{
 						dataLabels:{
-							distance: 4,
+							distance: 5,
 							color: "#ffffff",
 							rotation: 0
 						}
