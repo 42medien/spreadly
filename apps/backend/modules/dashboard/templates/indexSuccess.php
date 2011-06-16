@@ -31,5 +31,21 @@
 <section class="main-section chart-section clearfix">
 	<?php include_partial('widget_linechart', array('title' => 'Likes', 'data' => $data, 'type' => 'likes', 'range' => $range)) ?>
 </section>
+<section class="main-section list-section clearfix">
+	<div class="widget widget-single widget-one-section">
+		<header><section><?php //echo $title ?> Title</section></header>
+		<section class="widget-data-section">
+			<ol class="widget-ordered-list">
+				<li class="small">erstens</li>
+				<li class="small">zwotens</li>
+				<li class="small">drittens</li>
+			</ol>
+		</section>
+		<footer>
+			Powered by @Spreadly
+		</footer>
+	</div>
+</section>
+
 
 

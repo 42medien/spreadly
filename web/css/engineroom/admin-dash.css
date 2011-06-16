@@ -192,6 +192,10 @@ section.main-section > div:nth-child(1){margin-left: 0px;}
 
 .widget-data-section div{ color: #D3D4D4; text-shadow: 1px 1px 1px #3F3F3F, -1px -1px 1px #3F3F3F;}
 
+.list-section .widget-data-section {text-align: left;}
+
+.list-section .widget-data-section ol li{margin-left: 20px;}
+
 .positive{color: #77AB13 !important; text-shadow: none !important;}
 .widget-data-section .positive .positive-arrow-big{padding-top: 8px; margin-right: 5px;}
 .positive-arrow-big{
