@@ -115,7 +115,9 @@ class User extends BaseUser {
     if ($lOi = $lQuery->fetchOne()) {
       return $lOi->getPhoto();
     }
-    return "/img/default-avatars/mr_spread_80x80_transparent.png";
+
+    $hash = md5($this->getUsername()."@spreadly.com");
+    return "http://www.gravatar.com/avatar/$hash?d=wavatar";
   }
 
   /**
