@@ -6,8 +6,8 @@
 								'{
 									"width": 130,
 									"height": 130,
-									"margin": [0, 0, 10, 0],
-									"plotsize": "75%",
+									"margin": [-10, 0, 30, 0],
+									"plotsize": "80%",
 									"bgcolor" : "#1e2021",
 									"renderto" : "pie-chart-content"
 									}',

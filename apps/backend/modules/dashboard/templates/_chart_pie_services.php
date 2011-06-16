@@ -13,7 +13,7 @@ var ChartPieGenderActivities = {
 	        height: parseInt(pChartsettings.height),
 		      width: parseInt(pChartsettings.width),
           backgroundColor: pChartsettings.bgcolor,
-          zoomType: 'xy'
+          zoomType: ''
 		    },
 		    credits: {
 		      enabled: false
@@ -37,6 +37,7 @@ var ChartPieGenderActivities = {
 
           }
         },
+
 		    plotOptions: {
            series: {
              allowPointSelect: true,
@@ -44,22 +45,23 @@ var ChartPieGenderActivities = {
           },
           pie:{
 						dataLabels:{
-							distance: 5,
-							color: "#ffffff",
-							rotation: 0
+							enabled: false
 						}
           }
-
 		  },
 		  legend: {
-        enabled: false,
+        enabled: true,
         style: {
             left: 'auto',
-            bottom: '0px',
+            bottom: '5px',
             right: 'auto',
             top: 'auto'
         },
-        symbolPadding: 2
+        //symbolPadding: 2,
+        width: 150,
+        borderWidth : 0,
+        symbolWidth : 10,
+        x: 0
 		  },
 		  series: [{
 		      name: 'Gender',
