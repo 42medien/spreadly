@@ -39,6 +39,7 @@ class YiidActivityRepository extends DocumentRepository
     $results = $this->createQueryBuilder()
                     ->field("c")->gte($from)
                     ->field("c")->lte($to)
+                    ->field("cb_referer")->exists(true)
                     ->getQuery()->execute();
 
     return $results->count();

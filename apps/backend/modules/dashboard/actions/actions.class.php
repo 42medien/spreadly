@@ -72,6 +72,11 @@ class dashboardActions extends sfActions
     $data['last_likes_count']    = MongoManager::getDm()->getRepository('Documents\YiidActivity')->countByRange($lastRange[0], $lastRange[1]);
     $data['likes_count_delta']   =  $this->delta($data['current_likes_count'], $data['last_likes_count']);
 
+    $data['current_cbl_count']    = MongoManager::getDm()->getRepository('Documents\YiidActivity')->countCBLByRange($range[0], $range[1]);
+    $data['last_cbl_count']    = MongoManager::getDm()->getRepository('Documents\YiidActivity')->countCBLByRange($lastRange[0], $lastRange[1]);
+    $data['cbl_count_delta']   =  $this->delta($data['current_cbl_count'], $data['last_cbl_count']);
+
+
     $data['current_domain_count'] = DomainProfileTable::getInstance()->countByRange($range[0], $range[1]);
     $data['last_domain_count']    = DomainProfileTable::getInstance()->countByRange($lastRange[0], $lastRange[1]);
     $data['domain_count_delta']   = $this->delta($data['current_domain_count'], $data['last_domain_count']);
