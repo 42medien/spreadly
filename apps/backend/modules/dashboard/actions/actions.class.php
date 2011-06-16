@@ -89,8 +89,8 @@ class dashboardActions extends sfActions
 
     $data['last_stats']    = MongoManager::getStatsDm()->getRepository('Documents\AnalyticsActivity')->findOnlyByRange($lastRange[0], $lastRange[1]);
 
-    $data['current_stats'] = $data['current_stats']->getNext();
-    $data['last_stats'] = $data['last_stats']->getNext();
+    $data['current_stats'] = $data['current_stats']->hasNext() ? $data['current_stats']->getNext() : null;
+    $data['last_stats'] = $data['last_stats']->hasNext() ? $data['last_stats']->getNext() : null;
 
     $data['current_clickback_count'] = $data['current_stats'] ? $data['current_stats']['value']['cb'] : 0;
     $data['last_clickback_count'] = $data['last_stats'] ? $data['last_stats']['value']['cb'] : 0;
