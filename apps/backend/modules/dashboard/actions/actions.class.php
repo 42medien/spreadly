@@ -108,7 +108,7 @@ class dashboardActions extends sfActions
         $data['current_stats']['value']['s']['google'] ? $data['current_stats']['value']['s']['google']['l'] : 0
         ) : array();
         
-    $data['share_distribution_labels'] = array('Fb', 'Tw', 'Li', 'Go');
+    $data['share_distribution_labels'] = array('Fb:'.$data['share_distribution'][0] , 'Tw:'.$data['share_distribution'][1], 'Li:'.$data['share_distribution'][2], 'Go:'.$data['share_distribution'][3]);
     
     if($this->range == 'today' || $this->range == 'yesterday') {
       $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\ActivityStats")->findOneBy(
