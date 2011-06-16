@@ -7283,7 +7283,8 @@ function Chart (options, callback) {
 		
 		// beta mark
 		credits.enabled = true;
-		credits.text = '@powered by spread.ly';
+		//credits.text = '@powered by spread.ly';
+		credits.text = '';
 		if (credits.enabled && !chart.credits) {
 			renderer.text(
 				credits.text,
