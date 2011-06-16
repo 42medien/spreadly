@@ -34,4 +34,13 @@ class YiidActivityRepository extends DocumentRepository
 
     return $results->count();
   }
+
+  public function countCBLByRange($from, $to) {
+    $results = $this->createQueryBuilder()
+                    ->field("c")->gte($from)
+                    ->field("c")->lte($to)
+                    ->getQuery()->execute();
+
+    return $results->count();
+  }
 }

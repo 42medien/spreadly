@@ -67,19 +67,19 @@ var ChartPieGenderActivities = {
 		      data: [
 		             {
 		               name: '<?php echo $data["share_distribution_labels"][0]; ?>',
-		               color: '#3300cc',
+		               //color: '#3300cc',
 		               y: parseInt('<?php echo $data["share_distribution"][0]; ?>')
 		             },{
 		               name: '<?php echo $data["share_distribution_labels"][1]; ?>',
-		               color: '#ff0000',
+		               //color: '#ff0000',
 		               y: parseInt('<?php echo $data["share_distribution"][1]; ?>')
 		             },{
 		               name: '<?php echo $data["share_distribution_labels"][2]; ?>',
-		               color: '#ffcc00',
+		               //color: '#ffcc00',
 		               y: parseInt('<?php echo $data["share_distribution"][2]; ?>')
 		             },{
 		               name: '<?php echo $data["share_distribution_labels"][3]; ?>',
-		               color: '#ffcc66',
+		               //color: '#ffcc66',
 		               y: parseInt('<?php echo $data["share_distribution"][3]; ?>')
 		             }
 		         ]

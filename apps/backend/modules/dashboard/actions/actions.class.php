@@ -97,13 +97,29 @@ class dashboardActions extends sfActions
     
     $data['share_distribution'] = $data['current_stats'] ? 
       array(
-        $data['current_stats']['value']['s']['facebook']['l'],
-        $data['current_stats']['value']['s']['twitter']['l'],
-        $data['current_stats']['value']['s']['linkedin']['l'],
-        $data['current_stats']['value']['s']['google']['l']
+        $data['current_stats']['value']['s']['facebook'] ? $data['current_stats']['value']['s']['facebook']['l'] : 0,
+        $data['current_stats']['value']['s']['twitter'] ? $data['current_stats']['value']['s']['twitter']['l'] : 0,
+        $data['current_stats']['value']['s']['linkedin'] ? $data['current_stats']['value']['s']['linkedin']['l'] : 0,
+        $data['current_stats']['value']['s']['google'] ? $data['current_stats']['value']['s']['google']['l'] : 0
         ) : array();
         
     $data['share_distribution_labels'] = array('Fb', 'Tw', 'Li', 'Go');
+    
+    if($this->range == 'today' || $this->range == 'yesterday') {
+      $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\ActivityStats")->findOneBy(
+        array("day" => new MongoDate($range[0]) )
+      );
+      
+      $data['current_likes_range'] = $lActivityStats ? $lActivityStats->getPrefilledLikesByHour() : array_fill(0, 24, 0);
+    } else {
+      $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\ActivityStats")->findBy(
+        array("day" => array('$gte' => new MongoDate($range[0]), '$lte' => new MongoDate($range[1])))
+        );
+
+      $lActivityStats = $lActivityStats->toArray();
+
+      $data['current_likes_range'] = array_values($this->padLikes($lActivityStats, date('c', $range[0]), date('c', $range[1])));      
+    }
     
     return $data;
   }
@@ -111,6 +127,25 @@ class dashboardActions extends sfActions
   private function delta($x, $y) {
     if($x==$y) return 0;
     return $y>0 ? round((($x-$y)/$y)*100) : '∞';
+  }
+  
+  // undry copy of analytics/actions
+  private function padLikes($activityStats, $from, $to) {
+    $from = new DateTime($from);
+    $from->setTime(0,0);
+    $to = new DateTime($to);
+    $to->setTime(0,0);
+
+    $lDayPeriod = new DatePeriod($from, new DateInterval('P1D'), $to);
+
+    $res = array();
+    foreach ($lDayPeriod as $day) {
+      $res[$day->format('Y-m-d')] = 0;
+    }
+    foreach ($activityStats as $stat) {
+      $res[$stat->getDay()->format('Y-m-d')] = $stat->getLikes();
+    }
+    return $res;
   }
 }
  
