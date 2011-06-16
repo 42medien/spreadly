@@ -131,10 +131,10 @@ body {
   color: black;
 }
 
-section.main-section :nth-last-child(1){margin-right: 0px;}
+
 
 .widget {
-  margin-right: 24px;
+  margin-left: 24px;
   margin-bottom: 24px;
   box-shadow: 2px 0 3px #0D0D0D, -2px 0 3px #0D0D0D, 0 3px 3px #0D0D0D, 0 -2px 3px #0D0D0D;
   background: url("/img/widget_grad.png") no-repeat scroll 100% 0 #232526;
@@ -145,7 +145,7 @@ section.main-section :nth-last-child(1){margin-right: 0px;}
 .widget-single{ width: 160px; height: 230px;}
 .widget-double{ width: 344px; height: 230px;}
 
-
+section.main-section > div:nth-child(1){margin-left: 0px;}
 
 .widget > section {
    border-bottom: 1px solid #151617;
@@ -203,34 +203,9 @@ section.main-section :nth-last-child(1){margin-right: 0px;}
 }
 
 .negative{color: #AE432E !important; text-shadow: none !important;}
-.widget-data-section .negative .negative-arrow-small{margin-top: 8px; margin-right: 5px;}
-.negative-arrow-small{
-   width: 0;
-   height: 0;
-   border-left: 10px solid transparent;
-   border-right: 10px solid transparent;
-   border-top: 18px solid #AE432E;
-}
+
 
 .neutral{color: #fff !important; text-shadow: none !important;}
-.widget-data-section .neutral .neutral-arrow-small{margin-top: 8px; margin-right: 5px;}
-.neutral-arrow-small{
-  width: 0;
-  height: 0;
-  border-top: 10px solid transparent;
-  border-left: 20px solid #fff;
-  border-bottom: 10px solid transparent;
-}
-
-
-.positive-arrow-small{
-   width: 0;
-   height: 0;
-   border-left: 10px solid transparent;
-   border-right: 10px solid transparent;
-   border-bottom: 18px solid #77AB13;
-}
-.widget-data-section .positive .positive-arrow-small{margin-top: 8px; margin-right: 5px;}
 
 .widget-one-section .widget-data-section .large{margin-bottom: 21px;}
 
@@ -250,6 +225,11 @@ footer{
 }
 
 
+
+@media only screen and (min-width: 991px) {
+  section.main-section > div:nth-child(5n+1){margin-left: 0px;}   
+} 
+
 /*    Tablet Layout: 768px.
     Gutters: 24px.
     Outer margins: 28px.
@@ -262,9 +242,9 @@ px      68    160    252    344    436    528    620    712    */
   
   body {
     width: 712px;
-    padding: 48px 28px 60px;
-    background: #fff;    
+    padding: 48px 28px 60px; 
   }
+  section.main-section > div:nth-child(4n+1){margin-left: 0px;}    
 }
 
 
@@ -277,12 +257,13 @@ px      68    160    252    344    436    528    620    712    */
 cols    1     2      3
 px      68    160    252    */
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 480px) {
   
   body {
     width: 252px;
     padding: 48px 34px 60px;
   }
+  section.main-section > div:nth-child(n){margin-left: 0px;}  
   
 }
 
@@ -302,6 +283,7 @@ px      68    160    252    344    436    */
     width: 436px;
     padding: 36px 22px 48px;
   }
+  section.main-section > div:nth-child(2n+1){margin-left: 0px;}  
   
 }
 
