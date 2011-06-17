@@ -9,14 +9,19 @@ use \MongoDate,
 class AnalyticsActivityRepository extends StatsRepository
 {
   public function groupByUsers($fromDay, $toDay) {
-    
-    $result = $this->dm->createQueryBuilder('Documents\User')
-      ->group(array('u_id'), array('count' => 0))
+    $res = $this->createQueryBuilder()
+      ->group(array('u_id' => true), array('count' => 0))
       ->reduce('function (obj, prev) { prev.count++; }')
-      ->field("day")->gte(new MongoDate($fromDay))
-      ->field("day")->lte(new MongoDate($toDay))
-      ->sort('count', 'desc')
+
+      ->field("date")->gte(new MongoDate($fromDay))
+      ->field("date")->lte(new MongoDate($toDay))
       ->getQuery()
       ->execute();
+    $arr = $res['retval'];
+    usort($arr, function($a, $b) {
+      return $b['count'] - $a['count'];
+      }
+    );
+    return $arr;
   }
-}
+} 

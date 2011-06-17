@@ -32,19 +32,20 @@
 	<?php include_partial('widget_linechart', array('title' => 'Likes', 'data' => $data, 'type' => 'likes', 'range' => $range)) ?>
 </section>
 <section class="main-section list-section clearfix">
-	<div class="widget widget-single widget-one-section">
-		<header><section><?php //echo $title ?> Title</section></header>
-		<section class="widget-data-section">
-			<ol class="widget-ordered-list">
-				<li class="small">erstens</li>
-				<li class="small">zwotens</li>
-				<li class="small">drittens</li>
-			</ol>
-		</section>
-		<footer>
-			Powered by @Spreadly
-		</footer>
-	</div>
+  <div class="widget widget-single widget-one-section">
+  	<header><section>Powerliker</section></header>
+  	<section class="widget-data-section">
+  		<ol class="widget-ordered-list" style="list-style-type: none;">
+  		  <?php foreach ($data['top_users'] as $item): ?>
+  			<li class="small" style="margin: 0 0 5px 0;"><img style="vertical-align: middle; margin-right: 5px; max-height: 24px; max-width: 24px;"; src="<?php echo UserTable::getInstance()->find($item['u_id'])->getAvatar() ?>" /> <?php echo UserTable::getInstance()->find($item['u_id'])->getFullname() ?> (<?php echo $item['count'] ?>)</li>
+        <?php endforeach; ?>
+  		</ol>
+  	</section>
+  	<footer>
+  		Powered by @Spreadly
+  	</footer>
+  </div>
+
 </section>
 
 
