@@ -126,7 +126,7 @@ class dashboardActions extends sfActions
       $data['current_likes_range'] = array_values($this->padLikes($lActivityStats, date('c', $range[0]), date('c', $range[1])));      
     }
     
-    $data['top_users'] = MongoManager::getStatsDm()->getRepository("Documents\AnalyticsActivity")->groupByUsers($range[0], $range[1]);
+    $data['top_users'] = array_slice(MongoManager::getStatsDm()->getRepository("Documents\AnalyticsActivity")->groupByUsers($range[0], $range[1]), 0, 5);
         
     return $data;
   }
