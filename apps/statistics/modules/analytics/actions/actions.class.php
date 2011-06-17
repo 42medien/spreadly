@@ -222,7 +222,7 @@ class analyticsActions extends sfActions {
     $lDm = MongoManager::getStatsDM();
 
     $day = new MongoDate(strtotime(date("Y-m-d", strtotime($request->getParameter("date-to")))));
-    $lUrls = $lDm->getRepository("Documents\AnalyticsActivity")->findBy(array("url" => $this->pUrl, "day" => $day));
+    $lUrls = $lDm->getRepository("Documents\AnalyticsActivity")->findBy(array("url" => $this->pUrl, "day" => $day, "d_id" => array('$exists' => 'false')));
     $lUrlSummary = $lDm->getRepository("Documents\ActivityUrlStats")->findOneBy(array("url" => $this->pUrl, "day" => $day));
     $lReturn['content'] = $this->getPartial('analytics/url_detail_content_by_day', array('pUrl' => $this->pUrl, 'pUrls' => $lUrls, 'pUrlSummary' => $lUrlSummary, 'pDomainProfile' => $this->pDomainProfile, 'showdate' => date('d-m-Y', strtotime($request->getParameter('date-to')))));
 
