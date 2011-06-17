@@ -17,6 +17,7 @@ class WidgetUtils {
   private $aDeal = null;
   private $aYiidActivity = null;
   private $aShowFriends = false;
+  private $aCounter = true;
 
   public function __construct() {
     try {
@@ -33,6 +34,10 @@ class WidgetUtils {
 
     if (isset($_GET['social']) && !empty($_GET['social'])) {
       $this->aShowFriends = true;
+    }
+
+    if (isset($_GET['counter'])) {
+      $this->aCounter = (bool)urldecode(@$_GET['counter']);
     }
 
     $this->aTitle = urldecode(@$_GET['title']);
@@ -63,6 +68,10 @@ class WidgetUtils {
 
   public function getSocialObject() {
     return $this->aSocialObject;
+  }
+
+  public function showCounter() {
+    return $this->aCounter;
   }
 
   public function getYiidActivity() {
