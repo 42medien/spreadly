@@ -106,7 +106,7 @@ class dashboardActions extends sfActions
         $data['current_stats']['value']['s']['twitter'] ? $data['current_stats']['value']['s']['twitter']['l'] : 0,
         $data['current_stats']['value']['s']['linkedin'] ? $data['current_stats']['value']['s']['linkedin']['l'] : 0,
         $data['current_stats']['value']['s']['google'] ? $data['current_stats']['value']['s']['google']['l'] : 0
-        ) : array();
+        ) : array(0,0,0,0);
         
     $data['share_distribution_labels'] = array('Fb:'.$data['share_distribution'][0] , 'Tw:'.$data['share_distribution'][1], 'Li:'.$data['share_distribution'][2], 'Go:'.$data['share_distribution'][3]);
     
