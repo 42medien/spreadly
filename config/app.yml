@@ -55,6 +55,9 @@ all:
   jobs:
     last_friend_refresh_threshold: "1 day ago"
 
+  chartbeat:
+    apikey:       'c6d8afdeac90a7d811154ca36a82bee2'
+
 ##
 # Prod settings
 #
