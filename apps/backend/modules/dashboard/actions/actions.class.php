@@ -110,22 +110,48 @@ class dashboardActions extends sfActions
     $data['share_distribution_labels'] = array('Fb:'.$data['share_distribution'][0] , 'Tw:'.$data['share_distribution'][1], 'Li:'.$data['share_distribution'][2], 'Go:'.$data['share_distribution'][3]);
 
     if($this->range == 'today' || $this->range == 'yesterday') {
-      $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\ActivityStats")->findOneBy(
-        array("day" => new MongoDate($range[0]) )
-      );
+      $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\ActivityStats")->findByRangeGroupByDay($range[0], $range[1]);
+      
+      $h = null;
+      if($lActivityStats->hasNext()) {
+        $temp = $lActivityStats->getNext();
+        $h = $temp['value']['h'];
+        unset($h['php_ckuf']);
+      }
+      
+      $data['current_likes_range'] = $h ? $h : array();
 
-      $data['current_likes_range'] = $lActivityStats ? $lActivityStats->getPrefilledLikesByHour() : array_fill(0, 24, 0);
+
+      $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\DealStats")->findByRangeGroupByDay($range[0], $range[1]);
+      
+      $h = null;
+      if($lActivityStats->hasNext()) {
+        $temp = $lActivityStats->getNext();
+        $h = $temp['value']['h'];
+        unset($h['php_ckuf']);
+      }
+      
+      $data['current_deals_range'] = $h ? $h : array();
     } else {
-      $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\ActivityStats")->findBy(
-        array("day" => array('$gte' => new MongoDate($range[0]), '$lte' => new MongoDate($range[1])))
-        );
+      $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\ActivityStats")->findByRangeGroupByDay($range[0], $range[1]);
 
       $lActivityStats = $lActivityStats->toArray();
 
       $data['current_likes_range'] = array_values($this->padLikes($lActivityStats, date('c', $range[0]), date('c', $range[1])));
+      
+      
+      $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\DealStats")->findByRangeGroupByDay($range[0], $range[1]);
+
+      $lActivityStats = $lActivityStats->toArray();
+
+      $data['current_deals_range'] = array_values($this->padLikes($lActivityStats, date('c', $range[0]), date('c', $range[1])));
     }
 
     $data['top_users'] = array_slice(MongoManager::getStatsDm()->getRepository("Documents\AnalyticsActivity")->groupByUsers($range[0], $range[1]), 0, 5);
+    
+    $data['top_hosts'] = array_slice(MongoManager::getStatsDm()->getRepository("Documents\AnalyticsActivity")->groupByHosts($range[0], $range[1]), 0, 5);
+
+    $data['top_urls'] = array_slice(MongoManager::getStatsDm()->getRepository("Documents\AnalyticsActivity")->groupByUrls($range[0], $range[1]), 0, 5);
 
     return $data;
   }
@@ -149,7 +175,7 @@ class dashboardActions extends sfActions
       $res[$day->format('Y-m-d')] = 0;
     }
     foreach ($activityStats as $stat) {
-      $res[$stat->getDay()->format('Y-m-d')] = $stat->getLikes();
+      $res[date('Y-m-d', $stat['_id']->sec)] = $stat['value']['l'];
     }
     return $res;
   }

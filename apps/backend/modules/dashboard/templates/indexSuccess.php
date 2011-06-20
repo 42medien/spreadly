@@ -30,6 +30,9 @@
 </section>
 <section class="main-section chart-section clearfix">
 	<?php include_partial('widget_linechart', array('title' => 'Likes', 'data' => $data, 'type' => 'likes', 'range' => $range)) ?>
+
+
+	<?php include_partial('widget_linechart', array('title' => 'Deals', 'data' => $data, 'type' => 'deals', 'range' => $range)) ?>
 </section>
 <section class="main-section list-section clearfix">
   <div class="widget widget-single widget-one-section">
@@ -46,6 +49,34 @@
   	</footer>
   </div>
 
+
+  <div class="widget widget-single widget-one-section widget-double">
+  	<header><section>Top Hosts</section></header>
+  	<section class="widget-data-section">
+  		<ol class="widget-ordered-list">
+  		  <?php foreach ($data['top_hosts'] as $item): ?>
+  			<li class="small" title="<?php echo $item['host'] ?> (<?php echo $item['count'] ?>)"><?php echo $item['host'] ?> (<?php echo $item['count'] ?>)</li>
+        <?php endforeach; ?>
+  		</ol>
+  	</section>
+  	<footer>
+  		Powered by @Spreadly
+  	</footer>
+  </div>
+  
+  <div class="widget widget-single widget-one-section widget-double">
+  	<header><section>Top URLs</section></header>
+  	<section class="widget-data-section">
+  		<ol class="widget-ordered-list">
+  		  <?php foreach ($data['top_urls'] as $item): ?>
+  			<li class="small" title="<?php echo $item['url'] ?> (<?php echo $item['count'] ?>)"><?php echo $item['url'] ?> (<?php echo $item['count'] ?>)</li>
+        <?php endforeach; ?>
+  		</ol>
+  	</section>
+  	<footer>
+  		Powered by @Spreadly
+  	</footer>
+  </div>
 </section>
 
 

@@ -9,8 +9,20 @@ use \MongoDate,
 class AnalyticsActivityRepository extends StatsRepository
 {
   public function groupByUsers($fromDay, $toDay) {
+    return $this->groupBy(array('u_id' => true), $fromDay, $toDay);
+  }
+
+  public function groupByHosts($fromDay, $toDay) {
+    return $this->groupBy(array('host' => true), $fromDay, $toDay);
+  }
+  
+  public function groupByUrls($fromDay, $toDay) {
+    return $this->groupBy(array('url' => true), $fromDay, $toDay);
+  }
+  
+  private function groupBy($groupBy, $fromDay, $toDay) {
     $res = $this->createQueryBuilder()
-      ->group(array('u_id' => true), array('count' => 0))
+      ->group($groupBy, array('count' => 0))
       ->reduce('function (obj, prev) { prev.count++; }')
 
       ->field("date")->gte(new MongoDate($fromDay))
@@ -22,6 +34,6 @@ class AnalyticsActivityRepository extends StatsRepository
       return $b['count'] - $a['count'];
       }
     );
-    return $arr;
+    return $arr;    
   }
 } 
