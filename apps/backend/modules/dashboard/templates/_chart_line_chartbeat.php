@@ -1,7 +1,7 @@
 <script type="text/javascript">
 var chart = new Highcharts.Chart({
     chart: {
-        renderTo: 'line-chart-likes',
+        renderTo: 'line-chart-chartbeat',
         backgroundColor: "#1e2021",
         height: 140,
         width: 310
@@ -44,7 +44,7 @@ var chart = new Highcharts.Chart({
     plotOptions: {
     },
     series: [{
-        data: <?php echo json_encode($data["current_likes_range"]); ?>,
+        data: <?php echo json_encode($data["current_chartbeat_range"]); ?>,
     		//pointStart: 0
     }]
 });

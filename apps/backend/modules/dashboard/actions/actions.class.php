@@ -17,9 +17,9 @@ class dashboardActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    
+
     $this->range = $request->getParameter('range', 'today');
-    
+
     switch ($this->range) {
       case 'today':
         $range = array(strtotime("today"), strtotime("tomorrow"));
@@ -45,21 +45,20 @@ class dashboardActions extends sfActions
         $this->fromDate = date('d.m.Y', $range[0]);
         $this->toDate = date('d.m.Y', $range[1]-24*60*60);
         break;
-      
+
       default:
         throw new Exception("No range key specified.");
         break;
     }
-    
-    
+
     $this->data = $this->calc($range, $lastRange);
-    
+
     $this->setLayout('dash_layout');
   }
-  
+
   private function calc($range, $lastRange) {
     $data = array();
-    
+
     $data['current_user_count'] = UserTable::getInstance()->countByRange($range[0], $range[1]);
     $data['last_user_count']    = UserTable::getInstance()->countByRange($lastRange[0], $lastRange[1]);
     $data['user_count_delta']   = $this->delta($data['current_user_count'], $data['last_user_count']);
@@ -67,7 +66,7 @@ class dashboardActions extends sfActions
     $data['current_stats_user_count'] = SfGuardUserTable::getInstance()->countByRange($range[0], $range[1]);
     $data['last_stats_user_count']    = SfGuardUserTable::getInstance()->countByRange($lastRange[0], $lastRange[1]);
     $data['stats_user_count_delta']   =  $this->delta($data['current_stats_user_count'], $data['last_stats_user_count']);
-    
+
     $data['current_likes_count']    = MongoManager::getDm()->getRepository('Documents\YiidActivity')->countByRange($range[0], $range[1]);
     $data['last_likes_count']    = MongoManager::getDm()->getRepository('Documents\YiidActivity')->countByRange($lastRange[0], $lastRange[1]);
     $data['likes_count_delta']   =  $this->delta($data['current_likes_count'], $data['last_likes_count']);
@@ -84,7 +83,7 @@ class dashboardActions extends sfActions
     $data['current_verified_domain_count'] = DomainProfileTable::getInstance()->countVerifiedByRange($range[0], $range[1]);
     $data['last_verified_domain_count']    = DomainProfileTable::getInstance()->countVerifiedByRange($lastRange[0], $lastRange[1]);
     $data['verified_domain_count_delta']   = $this->delta($data['current_verified_domain_count'], $data['last_verified_domain_count']);
-    
+
     $data['current_stats']    = MongoManager::getStatsDm()->getRepository('Documents\AnalyticsActivity')->findOnlyByRange($range[0], $range[1]);
 
     $data['last_stats']    = MongoManager::getStatsDm()->getRepository('Documents\AnalyticsActivity')->findOnlyByRange($lastRange[0], $lastRange[1]);
@@ -95,26 +94,26 @@ class dashboardActions extends sfActions
     $data['current_clickback_count'] = $data['current_stats'] ? $data['current_stats']['value']['cb'] : 0;
     $data['last_clickback_count'] = $data['last_stats'] ? $data['last_stats']['value']['cb'] : 0;
     $data['clickback_count_delta'] = $this->delta($data['current_clickback_count'], $data['last_clickback_count']);
-    
+
     $data['current_media_penetration_count'] = $data['current_stats'] ? $data['current_stats']['value']['mp'] : 0;
     $data['last_media_penetration_count'] = $data['last_stats'] ? $data['last_stats']['value']['mp'] : 0;
     $data['media_penetration_count_delta'] = $this->delta($data['current_media_penetration_count'], $data['last_media_penetration_count']);
-    
-    $data['share_distribution'] = $data['current_stats'] ? 
+
+    $data['share_distribution'] = $data['current_stats'] ?
       array(
         $data['current_stats']['value']['s']['facebook'] ? $data['current_stats']['value']['s']['facebook']['l'] : 0,
         $data['current_stats']['value']['s']['twitter'] ? $data['current_stats']['value']['s']['twitter']['l'] : 0,
         $data['current_stats']['value']['s']['linkedin'] ? $data['current_stats']['value']['s']['linkedin']['l'] : 0,
         $data['current_stats']['value']['s']['google'] ? $data['current_stats']['value']['s']['google']['l'] : 0
         ) : array(0,0,0,0);
-        
+
     $data['share_distribution_labels'] = array('Fb:'.$data['share_distribution'][0] , 'Tw:'.$data['share_distribution'][1], 'Li:'.$data['share_distribution'][2], 'Go:'.$data['share_distribution'][3]);
-    
+
     if($this->range == 'today' || $this->range == 'yesterday') {
       $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\ActivityStats")->findOneBy(
         array("day" => new MongoDate($range[0]) )
       );
-      
+
       $data['current_likes_range'] = $lActivityStats ? $lActivityStats->getPrefilledLikesByHour() : array_fill(0, 24, 0);
     } else {
       $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\ActivityStats")->findBy(
@@ -123,19 +122,19 @@ class dashboardActions extends sfActions
 
       $lActivityStats = $lActivityStats->toArray();
 
-      $data['current_likes_range'] = array_values($this->padLikes($lActivityStats, date('c', $range[0]), date('c', $range[1])));      
+      $data['current_likes_range'] = array_values($this->padLikes($lActivityStats, date('c', $range[0]), date('c', $range[1])));
     }
-    
+
     $data['top_users'] = array_slice(MongoManager::getStatsDm()->getRepository("Documents\AnalyticsActivity")->groupByUsers($range[0], $range[1]), 0, 5);
-        
+
     return $data;
   }
-  
+
   private function delta($x, $y) {
     if($x==$y) return 0;
     return $y>0 ? round((($x-$y)/$y)*100) : '∞';
   }
-  
+
   // undry copy of analytics/actions
   private function padLikes($activityStats, $from, $to) {
     $from = new DateTime($from);
@@ -155,4 +154,3 @@ class dashboardActions extends sfActions
     return $res;
   }
 }
- 
