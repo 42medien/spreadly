@@ -23,13 +23,13 @@ class dashboardActions extends sfActions
     switch ($this->range) {
       case 'today':
         $range = array(strtotime("today"), strtotime("tomorrow"));
-        $lastRange = array(strtotime("yesterday"), strtotime("today"));
+        $lastRange = array(strtotime("yesterday"), strtotime("today")-1);
         $this->fromDate = date('l', $range[0]);
         $this->toDate = date('d.m.Y', $range[0]);
         break;
       case 'yesterday':
-        $range = array(strtotime("yesterday"), strtotime("today"));
-        $lastRange = array(strtotime("2 days ago"), strtotime("yesterday"));
+        $range = array(strtotime("yesterday"), strtotime("today")-1);
+        $lastRange = array(strtotime("2 days ago"), strtotime("yesterday")-1);
         $this->fromDate = date('l', $range[0]);
         $this->toDate = date('d.m.Y', $range[0]);
         break;
@@ -111,26 +111,26 @@ class dashboardActions extends sfActions
 
     if($this->range == 'today' || $this->range == 'yesterday') {
       $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\ActivityStats")->findByRangeGroupByDay($range[0], $range[1]);
-      
+
       $h = null;
       if($lActivityStats->hasNext()) {
         $temp = $lActivityStats->getNext();
         $h = $temp['value']['h'];
         unset($h['php_ckuf']);
       }
-      
+
       $data['current_likes_range'] = $h ? $h : array();
 
 
       $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\DealStats")->findByRangeGroupByDay($range[0], $range[1]);
-      
+
       $h = null;
       if($lActivityStats->hasNext()) {
         $temp = $lActivityStats->getNext();
         $h = $temp['value']['h'];
         unset($h['php_ckuf']);
       }
-      
+
       $data['current_deals_range'] = $h ? $h : array();
     } else {
       $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\ActivityStats")->findByRangeGroupByDay($range[0], $range[1]);
@@ -138,8 +138,8 @@ class dashboardActions extends sfActions
       $lActivityStats = $lActivityStats->toArray();
 
       $data['current_likes_range'] = array_values($this->padLikes($lActivityStats, date('c', $range[0]), date('c', $range[1])));
-      
-      
+
+
       $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\DealStats")->findByRangeGroupByDay($range[0], $range[1]);
 
       $lActivityStats = $lActivityStats->toArray();
@@ -148,7 +148,7 @@ class dashboardActions extends sfActions
     }
 
     $data['top_users'] = array_slice(MongoManager::getStatsDm()->getRepository("Documents\AnalyticsActivity")->groupByUsers($range[0], $range[1]), 0, 5);
-    
+
     $data['top_hosts'] = array_slice(MongoManager::getStatsDm()->getRepository("Documents\AnalyticsActivity")->groupByHosts($range[0], $range[1]), 0, 5);
 
     $data['top_urls'] = array_slice(MongoManager::getStatsDm()->getRepository("Documents\AnalyticsActivity")->groupByUrls($range[0], $range[1]), 0, 5);

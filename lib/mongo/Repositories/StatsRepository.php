@@ -51,7 +51,7 @@ abstract class StatsRepository extends DocumentRepository
                   ."}
                 return sum;
               }");
-    
+
 
     $cursor = null;
     try {
@@ -70,9 +70,7 @@ abstract class StatsRepository extends DocumentRepository
               ->map(
               'function() {
                  emit(
-                   this.day, '.
-                   str_replace('"', '', Stats::toJsonMap("this", true))
-                   .');
+                   this.day, '. str_replace('"', '', Stats::toJsonMap("this", true)) .');
                 }')
              ->reduce(
                "function(key, values) {
@@ -86,7 +84,7 @@ abstract class StatsRepository extends DocumentRepository
                   ."}
                 return sum;
               }");
-    
+
 
     $cursor = null;
     try {
@@ -97,7 +95,7 @@ abstract class StatsRepository extends DocumentRepository
     }
     return $cursor;
   }
-  
+
   public function findByHostsAndRange($hosts, $fromDay, $toDay) {
     // Cut off the time, in case it is coming as full datetime
     $fromDay = date('Y-m-d', strtotime($fromDay));

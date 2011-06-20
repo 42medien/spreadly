@@ -25,11 +25,11 @@ class DomainProfileTable extends Doctrine_Table
     ->orderBy('created_at DESC');
     return $lQ->execute();
   }
-  
+
   public function countByRange($from, $to) {
-    $fromDate = date('Y-m-d', $from);
-    $toDate = date('Y-m-d', $to);
-    
+    $fromDate = date('c', $from);
+    $toDate = date('c', $to);
+
     $lQuery = $this->createQuery()
                    ->where('created_at BETWEEN ? AND ?', array($fromDate, $toDate))
                    ->execute();
@@ -38,9 +38,9 @@ class DomainProfileTable extends Doctrine_Table
   }
 
   public function countVerifiedByRange($from, $to) {
-    $fromDate = date('Y-m-d', $from);
-    $toDate = date('Y-m-d', $to);
-    
+    $fromDate = date('c', $from);
+    $toDate = date('c', $to);
+
     $lQuery = $this->createQuery()
                    ->where('created_at BETWEEN ? AND ?', array($fromDate, $toDate))
                    ->andWhere('state = ?', 'verified')
