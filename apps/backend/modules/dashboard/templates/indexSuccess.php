@@ -37,7 +37,7 @@
   	<section class="widget-data-section">
   		<ol class="widget-ordered-list" style="list-style-type: none;">
   		  <?php foreach ($data['top_users'] as $item): ?>
-  			<li class="small" style="margin: 0 0 5px 0;"><img style="vertical-align: middle; margin-right: 5px; max-height: 24px; max-width: 24px;"; src="<?php echo UserTable::getInstance()->find($item['u_id'])->getAvatar() ?>" /> <?php echo UserTable::getInstance()->find($item['u_id'])->getFullname() ?> (<?php echo $item['count'] ?>)</li>
+  			<li class="small" style="margin: 0 0 5px 0;"><img style="vertical-align: middle; margin-right: 5px; max-height: 16px; max-width: 16px;" src="<?php echo UserTable::getInstance()->find($item['u_id'])->getAvatar() ?>" /> <?php echo UserTable::getInstance()->find($item['u_id'])->getFullname() ?> (<?php echo $item['count'] ?>)</li>
         <?php endforeach; ?>
   		</ol>
   	</section>
