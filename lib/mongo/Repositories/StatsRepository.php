@@ -58,7 +58,7 @@ abstract class StatsRepository extends DocumentRepository
       $cursor = $query->getQuery()
                       ->execute();
     } catch (\Exception $e) {
-      \sfContext::getInstance()->getLogger()->err("{StatsRepository} findByRange failed.\n".$e->getMessage());
+      \sfContext::getInstance()->getLogger()->err("{StatsRepository} findOnlyByRange failed.\n".$e->getMessage());
     }
     return $cursor;
   }
@@ -91,7 +91,7 @@ abstract class StatsRepository extends DocumentRepository
       $cursor = $query->getQuery()
                       ->execute();
     } catch (\Exception $e) {
-      \sfContext::getInstance()->getLogger()->err("{StatsRepository} findByRange failed.\n".$e->getMessage());
+      \sfContext::getInstance()->getLogger()->err("{StatsRepository} findByRangeGroupByDay failed.\n".$e->getMessage());
     }
     return $cursor;
   }
@@ -109,7 +109,7 @@ abstract class StatsRepository extends DocumentRepository
       $cursor = $query->getQuery(array("out" => "last30days.".$this->GROUP_BY))
                       ->execute();
     } catch (\Exception $e) {
-      \sfContext::getInstance()->getLogger()->err("{StatsRepository} findByRange failed.\n".$e->getMessage());
+      \sfContext::getInstance()->getLogger()->err("{StatsRepository} findByHostsAndRange failed.\n".$e->getMessage());
     }
     return $cursor;
   }
@@ -127,7 +127,7 @@ abstract class StatsRepository extends DocumentRepository
       $cursor = $query->getQuery(array("out" => "last30days.".$this->GROUP_BY))
                       ->execute();
     } catch (\Exception $e) {
-      \sfContext::getInstance()->getLogger()->err("{StatsRepository} findByRange failed.\n".$e->getMessage());
+      \sfContext::getInstance()->getLogger()->err("{StatsRepository} findByUrlsAndRange failed.\n".$e->getMessage());
     }
     return $cursor;
   }
