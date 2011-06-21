@@ -133,14 +133,14 @@ class dashboardActions extends sfActions
 
       $data['current_deals_range'] = $h ? $h : array();
     } else {
-      $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\ActivityStats")->findByRangeGroupByDay($range[0], $range[1]);
+      $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\ActivityStats")->findLikesByRangeGroupByDay($range[0], $range[1]);
 
       $lActivityStats = $lActivityStats->toArray();
 
       $data['current_likes_range'] = array_values($this->padLikes($lActivityStats, date('c', $range[0]), date('c', $range[1])));
 
 
-      $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\DealStats")->findByRangeGroupByDay($range[0], $range[1]);
+      $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\DealStats")->findLikesByRangeGroupByDay($range[0], $range[1]);
 
       $lActivityStats = $lActivityStats->toArray();
 

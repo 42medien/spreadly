@@ -62,7 +62,7 @@ abstract class StatsRepository extends DocumentRepository
     }
     return $cursor;
   }
-
+  
   public function findByRangeGroupByDay($fromDay, $toDay) {
     $query = $this->createQueryBuilder()
               ->field("day")->gte(new MongoDate($fromDay))
@@ -95,7 +95,38 @@ abstract class StatsRepository extends DocumentRepository
     }
     return $cursor;
   }
+  
 
+  public function findLikesByRangeGroupByDay($fromDay, $toDay) {
+    $query = $this->createQueryBuilder()
+              ->field("day")->gte(new MongoDate($fromDay))
+              ->field("day")->lte(new MongoDate($toDay))
+              ->map(
+              'function() {
+                 emit(this.day, {l: this["l"]});
+                }')
+             ->reduce(
+               "function(key, values) {
+                  var sum = {'l': 0};
+                  for(var i in values) {".
+                    "if(values[i]['l']) {".
+                      "sum['l'] += values[i]['l'];".
+                    "}".
+                  "}
+                return sum;
+              }");
+
+
+    $cursor = null;
+    try {
+      $cursor = $query->getQuery()
+                      ->execute();
+    } catch (\Exception $e) {
+      \sfContext::getInstance()->getLogger()->err("{StatsRepository} findByRangeGroupByDay failed.\n".$e->getMessage());
+    }
+    return $cursor;
+  }
+  
   public function findByHostsAndRange($hosts, $fromDay, $toDay) {
     // Cut off the time, in case it is coming as full datetime
     $fromDay = date('Y-m-d', strtotime($fromDay));
