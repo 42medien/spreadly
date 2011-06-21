@@ -65,6 +65,7 @@
               <div class="graybox gallery_list">
                 <h3 class="sub_title"><?php echo __("References"); ?></h3>
                 <ul id="mycarousel" class="jcarousel-skin-tango">
+                  <li><a href="http://www.price-look.de/" title="price-look.de" target="_blank"><img src="/img/refrance-img14.jpg" alt="Image"/></a></li>
                   <li><a href="http://lustich.de/" title="lustich.de" target="_blank"><img src="/img/refrance-img13.jpg" alt="Image"/></a></li>
                   <li><a href="http://www.deutsche-startups.de/" title="deutsche-startups.de" target="_blank"><img src="/img/refrance-img12.jpg" alt="Image"/></a></li>
                   <li><a href="http://www.frankentipps.de/" title="Frankentipps" target="_blank"><img src="/img/refrance-img11.jpg" alt="Image"/></a></li>
