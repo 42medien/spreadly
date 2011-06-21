@@ -29,10 +29,10 @@ function point_format($number, $culture = null)
 
 function truncate_number($number)
 {
-  if ($number >= 1000) {
-    return '<abbr title="'.$number.'">'.intval($number/1000) . 'k</abbr>';
-  } elseif ($number >= 1000000) {
+  if ($number >= 1000000) {
     return '<abbr title="'.$number.'">'.intval($number/1000000) . 'M</abbr>';
+  } elseif ($number >= 10000) {
+    return '<abbr title="'.$number.'">'.intval($number/1000) . 'k</abbr>';
   } else {
     return $number;
   }
