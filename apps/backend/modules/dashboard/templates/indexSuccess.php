@@ -18,6 +18,7 @@
 		</footer>
 	</div>
   <?php include_partial('widget_single', array('title' => 'spread.ly User', 'data' => $data, 'type' => 'user')) ?>
+  <?php include_partial('widget_single_without_delta', array('title' => 'Spread.ly Visitors', 'data' => $data, 'type' => 'popup_visitors', 'powered_by' => 'Chartbeat')) ?>
   <?php include_partial('widget_single', array('title' => 'spreadly.com User', 'data' => $data, 'type' => 'stats_user')) ?>
   <?php include_partial('widget_single', array('title' => 'Likes & Deals', 'data' => $data, 'type' => 'likes')) ?>
   <?php include_partial('widget_single', array('title' => 'Domains claimed', 'data' => $data, 'type' => 'domain')) ?>
@@ -26,13 +27,13 @@
 	<?php include_partial('widget_single', array('title' => 'Media penetration', 'data' => $data, 'type' => 'media_penetration')) ?>
 	<?php include_partial('widget_single', array('title' => 'Clickbacks', 'data' => $data, 'type' => 'clickback')) ?>
 	<?php include_partial('widget_single', array('title' => 'Clickback-Likes', 'data' => $data, 'type' => 'cbl')) ?>
-  <?php include_partial('widget_piechart', array('title' => 'Services', 'data' => $data, 'type' => 'services')) ?>
 </section>
 <section class="main-section chart-section clearfix">
 	<?php include_partial('widget_linechart', array('title' => 'Likes', 'data' => $data, 'type' => 'likes', 'range' => $range)) ?>
 
-
 	<?php include_partial('widget_linechart', array('title' => 'Deals', 'data' => $data, 'type' => 'deals', 'range' => $range)) ?>
+
+	<?php include_partial('widget_piechart', array('title' => 'Services', 'data' => $data, 'type' => 'services')) ?>
 </section>
 <section class="main-section list-section clearfix">
   <div class="widget widget-single widget-one-section">
@@ -63,7 +64,7 @@
   		Powered by @Spreadly
   	</footer>
   </div>
-  
+
   <div class="widget widget-single widget-one-section widget-double">
   	<header><section>Top URLs</section></header>
   	<section class="widget-data-section">

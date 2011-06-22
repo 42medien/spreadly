@@ -113,7 +113,7 @@ class dashboardActions extends sfActions
       $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\ActivityStats")->findByRangeGroupByDay($range[0], $range[1]);
 
       $h = null;
-      if($lActivityStats->hasNext()) {
+      if($lActivityStats && $lActivityStats->hasNext()) {
         $temp = $lActivityStats->getNext();
         $h = $temp['value']['h'];
         unset($h['php_ckuf']);
@@ -125,7 +125,7 @@ class dashboardActions extends sfActions
       $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\DealStats")->findByRangeGroupByDay($range[0], $range[1]);
 
       $h = null;
-      if($lActivityStats->hasNext()) {
+      if($lActivityStats && $lActivityStats->hasNext()) {
         $temp = $lActivityStats->getNext();
         $h = $temp['value']['h'];
         unset($h['php_ckuf']);
@@ -135,16 +135,18 @@ class dashboardActions extends sfActions
     } else {
       $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\ActivityStats")->findLikesByRangeGroupByDay($range[0], $range[1]);
 
-      $lActivityStats = $lActivityStats->toArray();
+      if ($lActivityStats) {
+        $lActivityStats = $lActivityStats->toArray();
 
-      $data['current_likes_range'] = array_values($this->padLikes($lActivityStats, date('c', $range[0]), date('c', $range[1])));
+        $data['current_likes_range'] = array_values($this->padLikes($lActivityStats, date('c', $range[0]), date('c', $range[1])));
 
 
-      $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\DealStats")->findLikesByRangeGroupByDay($range[0], $range[1]);
+        $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\DealStats")->findLikesByRangeGroupByDay($range[0], $range[1]);
 
-      $lActivityStats = $lActivityStats->toArray();
+        $lActivityStats = $lActivityStats->toArray();
 
-      $data['current_deals_range'] = array_values($this->padLikes($lActivityStats, date('c', $range[0]), date('c', $range[1])));
+        $data['current_deals_range'] = array_values($this->padLikes($lActivityStats, date('c', $range[0]), date('c', $range[1])));
+      }
     }
 
     $data['top_users'] = array_slice(MongoManager::getStatsDm()->getRepository("Documents\AnalyticsActivity")->groupByUsers($range[0], $range[1]), 0, 5);
@@ -152,6 +154,9 @@ class dashboardActions extends sfActions
     $data['top_hosts'] = array_slice(MongoManager::getStatsDm()->getRepository("Documents\AnalyticsActivity")->groupByHosts($range[0], $range[1]), 0, 5);
 
     $data['top_urls'] = array_slice(MongoManager::getStatsDm()->getRepository("Documents\AnalyticsActivity")->groupByUrls($range[0], $range[1]), 0, 5);
+
+    $cb = new Chartbeat();
+    $data['current_popup_visitors_count'] = $cb->getVisitorsByDate($this->range);
 
     return $data;
   }

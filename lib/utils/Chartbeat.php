@@ -19,25 +19,25 @@ class Chartbeat {
    * @param string $selecor
    * @return array
    */
-  public function getDataSeriesByDate($selector) {
+  public function getVisitorsByDate($selector) {
     switch ($selector) {
       case "today":
         $timestamp = strtotime("today");
         $days = 1;
-        $minutes = 60;
+        $minutes = 1;
         break;
       case "yesterday":
         $timestamp = strtotime("yesterday");
         $days = 2;
-        $minutes = 60;
+        $minutes = 1;
         break;
       case "last7d":
         $days = 7;
-        $minutes = 1440;
+        $minutes = 1;
         break;
       case "last30d":
         $days = 30;
-        $minutes = 1440;
+        $minutes = 1;
         break;
     }
 
@@ -56,6 +56,10 @@ class Chartbeat {
         }
       });
 
-    return $data;
+    if ($selector == "yesterday") {
+      $data['people'] = array_slice($data['people'], 0, 1440);
+    }
+
+    return array_sum($data['people']);
   }
 }
