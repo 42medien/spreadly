@@ -33,6 +33,8 @@ EOF;
       $content = preg_replace("/release_name:\s+'.+'/i", "release_name: '".$options['release-name']."'", $content);
       $this->logSection('set:release-name', $file);
       file_put_contents($file, $content);
+
+      $this->runTask('cc');
     } else {
       throw new sfException(sprintf('You do not need to change the release-name on your %s-system', $options['env']));
     }
