@@ -20,6 +20,7 @@ task :prod do
   set :domain,      "yiid.com"
   set :deploy_to,   "#{deploy_directory}/#{domain}"
   set :deploy_via, :export
+  puts "Deploying #{application} to #{domain} for env=#{sf_env} …"
   ask_for_repository
 end
 
