@@ -13,7 +13,6 @@
 		<![endif]-->
 		<link rel="stylesheet" media="all" href="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<meta HTTP-EQUIV="REFRESH" CONTENT="20">
 		<!-- Adding "maximum-scale=1" fixes the Mobile Safari auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
 
 		<link rel="stylesheet" type="text/css" media="screen" href="/css/engineroom/admin-dash.css" />
