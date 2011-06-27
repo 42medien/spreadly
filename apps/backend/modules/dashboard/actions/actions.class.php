@@ -22,26 +22,26 @@ class dashboardActions extends sfActions
 
     switch ($this->range) {
       case 'today':
-        $range = array(strtotime("today"), strtotime("tomorrow"));
-        $lastRange = array(strtotime("yesterday"), strtotime("today")-1);
+        $range = array(strtotime("today"), strtotime("tomorrow - 1 second"));
+        $lastRange = array(strtotime("yesterday"), strtotime("today - 1 second"));
         $this->fromDate = date('l', $range[0]);
         $this->toDate = date('d.m.Y', $range[0]);
         break;
       case 'yesterday':
-        $range = array(strtotime("yesterday"), strtotime("today")-1);
-        $lastRange = array(strtotime("2 days ago"), strtotime("yesterday")-1);
+        $range = array(strtotime("yesterday"), strtotime("today - 1 second"));
+        $lastRange = array(strtotime("today - 2 days"), strtotime("yesterday - 1 second"));
         $this->fromDate = date('l', $range[0]);
         $this->toDate = date('d.m.Y', $range[0]);
         break;
       case 'last7d':
-        $range = array(strtotime("6 days ago"), strtotime("tomorrow"));
-        $lastRange = array(strtotime("14 days ago"), strtotime("7 days ago"));
+        $range = array(strtotime("today - 7 days"), strtotime("today - 1 second"));
+        $lastRange = array(strtotime("today - 14 days"), strtotime("today - 7 days - 1 second"));
         $this->fromDate = date('d.m.Y', $range[0]);
         $this->toDate = date('d.m.Y', $range[1]-24*60*60);
         break;
       case 'last30d':
-        $range = array(strtotime("29 days ago"), strtotime("tomorrow"));
-        $lastRange = array(strtotime("60 days ago"), strtotime("30 days ago"));
+        $range = array(strtotime("today - 30 days"), strtotime("today - 1 second"));
+        $lastRange = array(strtotime("today - 60 days"), strtotime("today - 30 days - 1 second"));
         $this->fromDate = date('d.m.Y', $range[0]);
         $this->toDate = date('d.m.Y', $range[1]-24*60*60);
         break;
