@@ -16,8 +16,8 @@
 <td class="sf_admin_text sf_admin_list_td_imprint_url">
   <a href="<?php echo $domain_profile->getImprintUrl() ?>"><?php echo $domain_profile->getImprintUrl() ?></a>
 </td>
-<td class="sf_admin_text sf_admin_list_td_tos_url">
-  <a href="<?php echo $domain_profile->getTosUrl() ?>"><?php echo $domain_profile->getTosUrl() ?></a>
+<td class="sf_admin_boolean sf_admin_list_td_detailed_analytics">
+  <?php echo get_partial('domain/list_field_boolean', array('value' => $domain_profile->getDetailedAnalytics())) ?>
 </td>
 <td class="sf_admin_date sf_admin_list_td_created_at">
   <?php echo false !== strtotime($domain_profile->getCreatedAt()) ? format_date($domain_profile->getCreatedAt(), "d.M.y") : '&nbsp;' ?>

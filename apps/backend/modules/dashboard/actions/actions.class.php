@@ -157,6 +157,15 @@ class dashboardActions extends sfActions
 
     $cb = new Chartbeat();
     $data['current_popup_visitors_count'] = $cb->getVisitorsByDate($this->range);
+    
+    
+    $data['current_pi_count'] = intval(VisitTable::countPisForDay($range[0]));
+    $data['last_pi_count']    = intval(VisitTable::countPisForDay($lastRange[0]));
+    $data['pi_count_delta']   = $this->delta($data['current_pi_count'], $data['last_pi_count']);
+
+    $data['current_conversion'] =  $this->conversion($data['current_likes_count'], $data['current_pi_count']);
+    $data['last_conversion']    =  $this->conversion($data['last_likes_count'], $data['last_pi_count']);
+    $data['conversion_delta']   = $this->delta($data['current_conversion'], $data['last_conversion']);
 
     return $data;
   }
@@ -166,6 +175,11 @@ class dashboardActions extends sfActions
     return $y>0 ? round((($x-$y)/$y)*100) : '∞';
   }
 
+  private function conversion($x, $y) {
+    if($y==0) return 0;
+    return round(($x/$y)*100);
+  }
+  
   // undry copy of analytics/actions
   private function padLikes($activityStats, $from, $to) {
     $from = new DateTime($from);

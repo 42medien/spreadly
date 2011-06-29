@@ -20,7 +20,7 @@
   <?php include_partial('widget_single', array('title' => 'spread.ly User', 'data' => $data, 'type' => 'user')) ?>
   <?php include_partial('widget_single_without_delta', array('title' => 'Spread.ly Visitors', 'data' => $data, 'type' => 'popup_visitors', 'powered_by' => 'Chartbeat')) ?>
   <?php include_partial('widget_single', array('title' => 'spreadly.com User', 'data' => $data, 'type' => 'stats_user')) ?>
-  <?php include_partial('widget_single', array('title' => 'Likes & Deals', 'data' => $data, 'type' => 'likes')) ?>
+  <?php include_partial('widget_single_with_conversion', array('title' => 'Likes & Deals', 'data' => $data, 'type' => 'likes', 'range' => $range)) ?>
   <?php include_partial('widget_single', array('title' => 'Domains claimed', 'data' => $data, 'type' => 'domain')) ?>
 
   <?php include_partial('widget_single', array('title' => 'Domains verified', 'data' => $data, 'type' => 'verified_domain')) ?>

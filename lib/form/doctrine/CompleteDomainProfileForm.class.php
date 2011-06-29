@@ -22,6 +22,7 @@ class CompleteDomainProfileForm extends BaseFormDoctrine
       'sf_guard_user_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'order_by' => array('id', 'DESC'), 'add_empty' => false)),
       'imprint_url'        => new sfWidgetFormTextarea(),
       'tos_url'            => new sfWidgetFormTextarea(),
+      'detailed_analytics' => new sfWidgetFormInputCheckbox(),
       'created_at'         => new sfWidgetFormDateTime(array('default' => 'now')),
       'updated_at'         => new sfWidgetFormDateTime(array('default' => 'now'))
     ));
@@ -36,6 +37,7 @@ class CompleteDomainProfileForm extends BaseFormDoctrine
       'sf_guard_user_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'))),
       'imprint_url'        => new sfValidatorString(array('max_length' => 512, 'required' => false)),
       'tos_url'            => new sfValidatorString(array('max_length' => 512, 'required' => false)),
+      'detailed_analytics' => new sfValidatorBoolean(array('required' => false)),
       'created_at'         => new sfValidatorDateTime(),
       'updated_at'         => new sfValidatorDateTime(),
     ));

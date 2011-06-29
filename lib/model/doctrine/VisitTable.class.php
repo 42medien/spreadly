@@ -289,4 +289,32 @@ class VisitTable extends Doctrine_Table
      */
     exit();
   }
+
+  public static function countPisForDay($day) {
+    $monthGroup = self::groupByMonth($day);
+    return array_key_exists(0, $monthGroup) ? $monthGroup[0]['pis_by_day'][strval(date('d', $day))] : 0;
+  }
+
+  public static function groupByMonth($date) {
+    $lCollection = self::getMongoCollection();
+
+    $keys = array('month' => 1);
+    $conds = array('month' => date("Y-m", $date));
+    $initial = array("pis_by_day" => array());
+    for ($i=0; $i < 31; ++$i) { 
+      $initial['pis_by_day'][$i] = 0;
+    }
+
+    $reduce = "function (obj, output) {
+        if (obj.stats != undefined) {
+          for(var el in obj.stats) {
+            var index = parseInt(el.match(/\d\d/));
+            output.pis_by_day[index] = obj.stats[el]['pis'];
+        }
+     }}";
+     
+     $lResult = $lCollection->group($keys, $initial, $reduce, $conds);
+     
+     return $lResult['retval'];
+  }
 }

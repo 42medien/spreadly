@@ -59,12 +59,12 @@
 </th>
 <?php end_slot(); ?>
 <?php include_slot('sf_admin.current_header') ?><?php slot('sf_admin.current_header') ?>
-<th class="sf_admin_text sf_admin_list_th_tos_url">
-  <?php if ('tos_url' == $sort[0]): ?>
-    <?php echo link_to(__('Tos url', array(), 'messages'), '@domain_profile', array('query_string' => 'sort=tos_url&sort_type='.($sort[1] == 'asc' ? 'desc' : 'asc'))) ?>
+<th class="sf_admin_boolean sf_admin_list_th_detailed_analytics">
+  <?php if ('detailed_analytics' == $sort[0]): ?>
+    <?php echo link_to(__('Detailed analytics', array(), 'messages'), '@domain_profile', array('query_string' => 'sort=detailed_analytics&sort_type='.($sort[1] == 'asc' ? 'desc' : 'asc'))) ?>
     <?php echo image_tag(sfConfig::get('sf_admin_module_web_dir').'/images/'.$sort[1].'.png', array('alt' => __($sort[1], array(), 'sf_admin'), 'title' => __($sort[1], array(), 'sf_admin'))) ?>
   <?php else: ?>
-    <?php echo link_to(__('Tos url', array(), 'messages'), '@domain_profile', array('query_string' => 'sort=tos_url&sort_type=asc')) ?>
+    <?php echo link_to(__('Detailed analytics', array(), 'messages'), '@domain_profile', array('query_string' => 'sort=detailed_analytics&sort_type=asc')) ?>
   <?php endif; ?>
 </th>
 <?php end_slot(); ?>
