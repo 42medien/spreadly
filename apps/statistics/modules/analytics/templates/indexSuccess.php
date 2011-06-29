@@ -124,6 +124,9 @@
 
 
 <?php slot('content') ?>
+
+
+
   <div class="data-tablebox">
   	<table border="0" cellspacing="0" cellpadding="0" id="dash-url-table" class="tablesorter scrolltable" style="width: 930px;">
 	  	<thead>
