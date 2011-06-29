@@ -93,6 +93,10 @@ class analyticsActions extends sfActions {
   	} else {
       $this->setTemplate("no_stats");
   	}
+
+    $dm = MongoManager::getStatsDM();
+    $this->urls = $dm->getRepository("Documents\UrlSummary")->findBy(array("host" => $this->pDomainProfile->getUrl()))->limit(10)->sort(array("l" => "DESC", "c" => "DESC"));
+
   }
 
   public function executeDomain_detail(sfWebRequest $request){
