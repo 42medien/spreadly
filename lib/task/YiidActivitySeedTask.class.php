@@ -60,38 +60,38 @@ EOF;
     $allDeals = DealTable::getInstance()->findAll();
     foreach ($allDeals as $deal) {
       if($deal->canSubmit()) {
-        $deal->submit();        
+        $deal->submit();
       }
     }
 
     $this->dispatcher->connect('deal.changed', array('DealListener', 'updateMongoDeal'));
     $deal = DealTable::getInstance()->findByDescription('snirgel approved description');
     if($deal[0]->canApprove()) {
-      $deal[0]->approve();      
+      $deal[0]->approve();
     }
     $deal = DealTable::getInstance()->findByDescription('notizblog approved description');
     if($deal[0]->canApprove()) {
-      $deal[0]->approve();      
+      $deal[0]->approve();
     }
     $deal = DealTable::getInstance()->findByDescription('missmotz approved description');
     if($deal[0]->canApprove()) {
-      $deal[0]->approve();      
+      $deal[0]->approve();
     }
-    
+
     $urls = array('www.snirgel.de', 'notizblog.org', 'www.missmotz.de');
     $tags = array('geekstuff', 'otherthings', 'schuhe');
     $users = array($lUserHugo, $lUserJames);
     $services = array('facebook', 'twitter', 'linkedin', 'google');
     $dm = MongoManager::getDM();
 
-    for ($i=0; $i < 100; $i++) { 
+    for ($i=0; $i < 100; $i++) {
       $url = $this->oneOfThese($urls);
       $tag = $this->oneOfThese($tags);
       $user = $this->oneOfThese($users);
       $cb_ref = $this->oneOfThese(array('', '', '', '', '', '', 'http://tierscheisse.de'));
       $ra = $this->random(1000);
       $theC =  mt_rand(strtotime("3 days ago"),strtotime("today"));
-      
+
       $array = array(
         'url' => "http://$url/$ra",
         'url_hash' => "hash.$ra",
@@ -106,17 +106,16 @@ EOF;
         'cb_referer' => $cb_ref!='' ? $cb_ref : null,
         'cb_service' => $cb_ref!='' ? $this->oneOfThese($services) : null
       );
-      
+
       $lActivity = new Documents\YiidActivity();
       $lActivity->fromArray($array);
-            
+
       try {
         $lActivity->skipUrlCheck=true;
         $lActivity->save();
       } catch(Exception $e) {
         $this->log($e->getMessage());
       }
-      
     }
 
 
@@ -145,7 +144,7 @@ EOF;
     $this->dispatcher->connect('deal.changed', array('DealListener', 'updateMongoDeal'));
     $deal = DealTable::getInstance()->findByDescription('notizblog approved description');
     if($deal[0]->canApprove()) {
-      $deal[0]->approve();      
+      $deal[0]->approve();
     }
 
 
@@ -169,7 +168,7 @@ EOF;
     $this->dispatcher->connect('deal.changed', array('DealListener', 'updateMongoDeal'));
     $deal = DealTable::getInstance()->findByDescription('missmotz approved description');
     if($deal[0]->canApprove()) {
-      $deal[0]->approve();      
+      $deal[0]->approve();
     }
 
     $url = 'www.missmotz.de';
@@ -189,8 +188,10 @@ EOF;
     $lActivity->fromArray($array);
     $lActivity->save();
     */
-    
+
     sfConfig::set('app_settings_post_to_services', $originalPostToServicesValue);
+
+    $this->generateErrorLog();
   }
   private function random($range) {
     return mt_rand(0,$range);
@@ -200,5 +201,25 @@ EOF;
   }
   private function oneOfThese($these) {
     return $these[mt_rand(0, count($these)-1)];
+  }
+
+  public function generateErrorLog() {
+    $lUserHugo = UserTable::retrieveByUsername('hugo');
+    $lHugoOis = $lUserHugo->getOnlineIdentities();
+
+    $lHugoOi = $lHugoOis[0];
+
+    for ($i = 0; $i <= 100; $i++) {
+      $lError = new Documents\ApiErrorLog();
+
+      $lError->setCode($i);
+      $lError->setMessage("I Pity the Fool");
+      $lError->setOiId($lHugoOi->getId());
+      $lError->setUId($lUserHugo->getId());
+
+      $dm = MongoManager::getDM();
+      $dm->persist($lError);
+      $dm->flush();
+    }
   }
 }
