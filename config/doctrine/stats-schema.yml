@@ -26,6 +26,9 @@ DomainProfile:
       type: string(512)
     tos_url:
       type: string(512)
+    detailed_analytics:
+      type: boolean
+      default: false
   relations:
     sfGuardUser:
       foreignAlias: DomainProfiles
