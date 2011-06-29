@@ -4,7 +4,8 @@
 rendering: ~
 remember_me:
   class: sfGuardRememberMeFilter
-security:  ~
+security:
+  class: StatisticsSecurityFilter
 
 # insert your own filters here
 
