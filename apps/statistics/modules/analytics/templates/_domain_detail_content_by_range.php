@@ -26,7 +26,7 @@ if ($pLikes) {
 <?php slot('content') ?>
 <h2 class="sub_title"><?php echo __('URL overview'); ?></h2>
 <div class="data-tablebox two-line-table">
-	<?php include_partial('analytics/domain_detail_url_table', array('pUrls' => $pUrls, 'pDomainProfile' => $pDomainProfile, 'pShowUrl' => true)); ?>
+	<?php include_partial('analytics/url_table', array('pUrls' => $pUrls, 'pDomainProfile' => $pDomainProfile, 'pShowUrl' => true)); ?>
 </div>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
