@@ -37,7 +37,7 @@ all:
     secret_key:  'bs1YgS4c1zJN/HmwaVA8CkhNfyvcS+EEm1hcEOa0'
 
   twitter:
-    post_api:    'http://api.twitter.com/1/statuses/update.xml'
+    post_api:    'http://api.twitter.com/1/statuses/update.json'
     post_realm:  'http://twitter.com/'
 
   facebook:

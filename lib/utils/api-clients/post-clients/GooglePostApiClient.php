@@ -41,4 +41,23 @@ class GooglePostApiClient extends PostApi {
 
     return json_encode($lPostBody);
   }
+
+  protected function handleResponse($pResponse) {
+    $lResponse = json_decode($pResponse, true);
+
+    if (!array_key_exists("error", $lResponse)) {
+      return;
+    }
+
+    $lError = new Documents\ApiErrorLog();
+
+    $lError->setCode($lResponse['error']['code']);
+    $lError->setMessage($lResponse['error']['message']);
+    $lError->setOiId($this->onlineIdentity->getId());
+    $lError->setUId($this->onlineIdentity->getUserId());
+
+    $dm = MongoManager::getDM();
+    $dm->persist($lError);
+    $dm->flush();
+  }
 }

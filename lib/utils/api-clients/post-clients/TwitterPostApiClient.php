@@ -32,4 +32,22 @@ class TwitterPostApiClient extends PostApi {
 
     return array("status" => $lText);
   }
+
+  protected function handleResponse($pResponse) {
+    $lResponse = json_decode($pResponse, true);
+
+    if (!array_key_exists("hash", $lResponse) || !array_key_exists("error", $lResponse['hash'])) {
+      return;
+    }
+
+    $lError = new Documents\ApiErrorLog();
+
+    $lError->setMessage($lResponse['hash']['error']);
+    $lError->setOiId($this->onlineIdentity->getId());
+    $lError->setUId($this->onlineIdentity->getUserId());
+
+    $dm = MongoManager::getDM();
+    $dm->persist($lError);
+    $dm->flush();
+  }
 }
