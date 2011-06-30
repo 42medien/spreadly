@@ -1,6 +1,8 @@
 <?php
 namespace Documents;
 
+use \MongoManager;
+
 /**
  * @author Matthias Pfefferle
  *
