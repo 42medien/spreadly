@@ -1,0 +1,18 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/08-Security
+
+domain_detail:
+  is_secure: true
+  credentials: detailed_analytics
+
+get_domain_detail:
+  is_secure: true
+  credentials: detailed_analytics
+
+url_detail:
+  is_secure: true
+  credentials: detailed_analytics
+
+get_url_detail:
+  is_secure: true
+  credentials: detailed_analytics
