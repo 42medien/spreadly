@@ -1,5 +1,38 @@
  h2{}
  h2.sub_title{line-height: 42px;}
+ 
+/*  Typography presets
+  ------------------  */
+
+.gigantic-font {
+  font-size: 110px;
+  line-height: 120px;
+  letter-spacing: -2px;
+}
+
+.huge-font{
+  font-size: 68px;
+  line-height: 72px;
+  letter-spacing: -1px;
+}
+
+.large-font{
+  font-size: 38px;
+  line-height: 48px;
+}
+
+.bigger-font{
+  font-size: 26px;
+  line-height: 36px;
+}
+
+.big-font{
+  font-size: 18px;
+}
+
+.blue{
+  color: #588199;
+}
 
 #general-ajax-loader{z-index: 1000000; position: absolute; display:none;}
 

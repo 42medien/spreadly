@@ -1,4 +1,4 @@
-<?php use_helper('Dashboard'); ?>
+<?php use_helper('Dashboard', 'Text'); ?>
 
 <section class="main-section number-section clearfix">
 	<div class="widget widget-single">
@@ -56,7 +56,7 @@
   	<section class="widget-data-section">
   		<ol class="widget-ordered-list">
   		  <?php foreach ($data['top_hosts'] as $item): ?>
-  			<li class="small" title="<?php echo $item['host'] ?> (<?php echo $item['count'] ?>)"><?php echo $item['host'] ?> (<?php echo $item['count'] ?>)</li>
+  			<li class="small" title="<?php echo $item['host'] ?> (<?php echo $item['count'] ?>)"><a href="http://<?php echo $item['host'] ?>" title="<?php echo $item['host'] ?>" target="_blank"><?php echo $item['host'] ?></a> (<?php echo $item['count'] ?>)</li>
         <?php endforeach; ?>
   		</ol>
   	</section>
@@ -70,7 +70,7 @@
   	<section class="widget-data-section">
   		<ol class="widget-ordered-list">
   		  <?php foreach ($data['top_urls'] as $item): ?>
-  			<li class="small" title="<?php echo $item['url'] ?> (<?php echo $item['count'] ?>)"><?php echo $item['url'] ?> (<?php echo $item['count'] ?>)</li>
+  			<li class="small" title="<?php echo $item['url'] ?> (<?php echo $item['count'] ?>)"><a href="<?php echo $item['url'] ?>" title="<?php echo $item['url'] ?>" target="_blank"><?php echo truncate_text($item['url'], 40); ?></a> (<?php echo $item['count'] ?>)</li>
         <?php endforeach; ?>
   		</ol>
   	</section>
@@ -79,6 +79,5 @@
   	</footer>
   </div>
 </section>
-
 
 
