@@ -33,7 +33,7 @@ class FacebookPostApiClient extends PostApi {
       $lObject = $pActivity;
     }
 
-    $lPostBody .= "message=".$pActivity->getComment();
+    $lPostBody = "message=".$pActivity->getComment();
 
     if ($lObject->getDescr() && $lObject->getDescr() != '') {
       $lPostBody .= "&description=".$lObject->getDescr();
@@ -65,6 +65,7 @@ class FacebookPostApiClient extends PostApi {
   }
 
   protected function handleResponse($pResponse) {
+    parent::handleResponse($pResponse);
     $lResponse = json_decode($pResponse, true);
 
     if (!array_key_exists("error", $lResponse)) {

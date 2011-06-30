@@ -34,15 +34,17 @@ class TwitterPostApiClient extends PostApi {
   }
 
   protected function handleResponse($pResponse) {
+    parent::handleResponse($pResponse);
     $lResponse = json_decode($pResponse, true);
 
-    if (!array_key_exists("hash", $lResponse) || !array_key_exists("error", $lResponse['hash'])) {
+    if (!array_key_exists("error", $lResponse)) {
       return;
     }
 
     $lError = new Documents\ApiErrorLog();
 
-    $lError->setMessage($lResponse['hash']['error']);
+    $lError->setCode("NaN");
+    $lError->setMessage($lResponse['error']);
     $lError->setOiId($this->onlineIdentity->getId());
     $lError->setUId($this->onlineIdentity->getUserId());
 

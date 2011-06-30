@@ -8,7 +8,7 @@ abstract class PostApi {
 
   protected $onlineIdentity = null;
 
-   /**
+  /**
    * This method generates the message, that is suitable for posting to the actual network.
    *
    * @param YiidActivity $pActivity

@@ -40,6 +40,7 @@ class LinkedinPostApiClient extends PostApi {
   }
 
   protected function handleResponse($pResponse) {
+    parent::handleResponse($pResponse);
     if (!preg_match('~<error>~i', $pResponse)) {
       return;
     }

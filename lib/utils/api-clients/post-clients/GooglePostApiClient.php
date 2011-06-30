@@ -43,6 +43,7 @@ class GooglePostApiClient extends PostApi {
   }
 
   protected function handleResponse($pResponse) {
+    parent::handleResponse($pResponse);
     $lResponse = json_decode($pResponse, true);
 
     if (!array_key_exists("error", $lResponse)) {
