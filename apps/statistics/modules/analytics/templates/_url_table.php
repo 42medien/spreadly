@@ -60,11 +60,11 @@
             <?php } ?>
           </div>
         </td>
-        <td align="center"><div><?php echo point_format($url->getLikes()); ?></div></td>
-        <td align="center" valign="middle"><div><?php echo point_format($url->getShares()); ?></div></td>
-        <td align="center" valign="middle"><div><?php echo point_format($url->getMediaPenetration()); ?></div></td>
-        <td align="center" valign="middle"><div><?php echo point_format($url->getClickbacks()); ?></div></td>
-        <td align="center" class="last"><div><?php echo point_format($url->getClickbackLikes()); ?></div></td>
+        <td align="center"><div><strong class="big-font blue"><?php echo point_format($url->getLikes()); ?></strong></div></td>
+        <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo point_format($url->getShares()); ?></strong></div></td>
+        <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo point_format($url->getMediaPenetration()); ?></strong></div></td>
+        <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo point_format($url->getClickbacks()); ?></strong></div></td>
+        <td align="center" class="last"><div><strong class="big-font blue"><?php echo point_format($url->getClickbackLikes()); ?></strong></div></td>
       </tr>
     <?php
       }

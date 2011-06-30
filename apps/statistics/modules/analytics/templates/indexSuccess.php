@@ -41,9 +41,9 @@
 	  		<?php foreach($pVerifiedDomains as $lDomain) { ?>
 	  			<tr class="scrollrow">
 	  				<td align="left" class="first"><div class="padleft"><?php echo link_to($lDomain->getUrl(), 'analytics/domain_statistics?domainid='.$lDomain->getId()); ?></div></td>
-	  		    <td align="center" valign="middle"><div><?php echo array_key_exists($lDomain->getUrl(), $last30ByHost) ? point_format($last30ByHost[$lDomain->getUrl()]['value']['l']) : 0; ?></div></td>
-	  		    <td align="center" valign="middle" ><div><?php echo array_key_exists($lDomain->getUrl(), $last30ByHost) ? point_format($last30ByHost[$lDomain->getUrl()]['value']['sh']) : 0; ?></div></td>
-	  				<td align="center" class="last"><div><?php echo array_key_exists($lDomain->getUrl(), $last30ByHost) ? point_format($last30ByHost[$lDomain->getUrl()]['value']['mp']) : 0; ?></div></td>
+	  		    <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo array_key_exists($lDomain->getUrl(), $last30ByHost) ? point_format($last30ByHost[$lDomain->getUrl()]['value']['l']) : 0; ?></strong></div></td>
+	  		    <td align="center" valign="middle" ><div><strong class="big-font blue"><?php echo array_key_exists($lDomain->getUrl(), $last30ByHost) ? point_format($last30ByHost[$lDomain->getUrl()]['value']['sh']) : 0; ?></strong></div></td>
+	  				<td align="center" class="last"><div><strong class="big-font blue"><?php echo array_key_exists($lDomain->getUrl(), $last30ByHost) ? point_format($last30ByHost[$lDomain->getUrl()]['value']['mp']) : 0; ?></strong></div></td>
 	  			</tr>
 	      <?php $i++; } ?>
 	    </tbody>
@@ -104,17 +104,16 @@
     	</tr>
     </thead>
     <tbody>
-  		<?php $i = 1;?>
   		<?php foreach($pDeals as $lDeal) { ?>
   			<tr>
   				<td align="left" class="first"><div class="padleft"><?php echo $lDeal->getSummary(); ?></div></td>
-  				<td align="center" valign="middle"><div><?php echo $lDeal->getRemainingCouponQuantity(); ?></div></td>
-  				<td align="center" valign="middle"><div><?php echo $lDeal->getRemainingDays() > 0 ? $lDeal->getRemainingDays() : __('expired'); ?></div></td>
-  				<td align="center" valign="middle"><div><?php echo $last30ByDeal && array_key_exists($lDeal->getId(), $last30ByDeal) ? point_format($last30ByDeal[$lDeal->getId()]['value']['l']) : 0; ?></div></td>
-  				<td align="center" valign="middle"><div><?php echo $last30ByDeal && array_key_exists($lDeal->getId(), $last30ByDeal) ? point_format($last30ByDeal[$lDeal->getId()]['value']['sh']) : 0; ?></div></td>
-  				<td align="center" class="last"><div><?php echo $last30ByDeal && array_key_exists($lDeal->getId(), $last30ByDeal) ? point_format($last30ByDeal[$lDeal->getId()]['value']['mp']) : 0; ?></div></td>
+  				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $lDeal->getRemainingCouponQuantity(); ?></strong></div></td>
+  				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $lDeal->getRemainingDays() > 0 ? $lDeal->getRemainingDays() : __('expired'); ?></strong></div></td>
+  				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $last30ByDeal && array_key_exists($lDeal->getId(), $last30ByDeal) ? point_format($last30ByDeal[$lDeal->getId()]['value']['l']) : 0; ?></strong></div></td>
+  				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $last30ByDeal && array_key_exists($lDeal->getId(), $last30ByDeal) ? point_format($last30ByDeal[$lDeal->getId()]['value']['sh']) : 0; ?></strong></div></td>
+  				<td align="center" class="last"><div><strong class="big-font blue"><?php echo $last30ByDeal && array_key_exists($lDeal->getId(), $last30ByDeal) ? point_format($last30ByDeal[$lDeal->getId()]['value']['mp']) : 0; ?></strong></div></td>
   			</tr>
-      <?php $i++; } ?>
+      <?php } ?>
     	</tbody>
   	</table>
 </div>
@@ -172,9 +171,9 @@
 	  						<?php echo link_to(truncate_text($lUrl['_id'], 60), $lUrl['_id'], array('target' => '_blank') ); ?>
 	  					</div>
 	  				</td>
-	  		    <td align="center" valign="middle"><div><?php echo point_format($lUrlValue['l']) ?></div></td>
-	  		    <td align="center" valign="middle" ><div><?php echo point_format($lUrlValue['sh']) ?></div></td>
-	  				<td align="center" class="last"><div><?php echo point_format($lUrlValue['mp']) ?></div></td>
+	  		    <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo point_format($lUrlValue['l']) ?></strong></div></td>
+	  		    <td align="center" valign="middle" ><div><strong class="big-font blue"><?php echo point_format($lUrlValue['sh']) ?></strong></div></td>
+	  				<td align="center" class="last"><div><strong class="big-font blue"><?php echo point_format($lUrlValue['mp']) ?></strong></div></td>
 	  			</tr>
 	      <?php $i++; } ?>
 	      <?php } else { ?>
