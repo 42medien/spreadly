@@ -3,3 +3,27 @@
 body {
   background: #900;
 }
+
+ul.errors {
+  margin: 0 auto;
+  width: 700px;
+  list-style-position: outside;
+  list-style-image: none;
+  list-style-type: none;
+}
+
+ul.errors li {
+  border-bottom: 1px solid white;
+  padding: 10px 0;
+  margin: 10px 0;
+  font-size: 12px;
+}
+
+ul.errors li small {
+  float: right;
+  font-size: 10px;
+}
+
+ul.errors li h3 {
+  font-size: 14px;
+}
