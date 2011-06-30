@@ -9,7 +9,7 @@
 		<li class="bc-last"></li>
 	</ul>
 </div>
-<h2 class="sub_title"><?php echo __('Overview for domain %deal%', array('%deal%' => '"'.$pDeal->getSummary().'" from '.$pDeal->getStartDate().' to '.$pEndDate));?></h2>
+<h2 class="sub_title"><?php echo __('Overview for deal %deal%', array('%deal%' => '"'.$pDeal->getSummary().'" from '.$pDeal->getStartDate().' to '.$pEndDate));?></h2>
 <div id="navi" class="clearfix">
   <div class="stepBox alignleft">
     <div class="box_container alignleft">
