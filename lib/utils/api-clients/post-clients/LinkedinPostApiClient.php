@@ -38,4 +38,31 @@ class LinkedinPostApiClient extends PostApi {
 
     return $lStatusMessage;
   }
+
+  protected function handleResponse($pResponse) {
+    if (!preg_match('~<error>~i', $pResponse)) {
+      return;
+    }
+
+    libxml_use_internal_errors(true);
+    $lDoc = new DOMDocument();
+    $lDoc->loadXML($pResponse);
+
+    $lError = new Documents\ApiErrorLog();
+
+    foreach ($lDoc->getElementsByTagName('error-code') as $code) {
+      $lError->setCode($code->nodeValue);
+    }
+
+    foreach ($lDoc->getElementsByTagName('message') as $message) {
+      $lError->setMessage($message->nodeValue);
+    }
+
+    $lError->setOiId($this->onlineIdentity->getId());
+    $lError->setUId($this->onlineIdentity->getUserId());
+
+    $dm = MongoManager::getDM();
+    $dm->persist($lError);
+    $dm->flush();
+  }
 }
