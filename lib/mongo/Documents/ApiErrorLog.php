@@ -2,9 +2,8 @@
 namespace Documents;
 
 /**
+ * @Document(collection="error_log", repositoryClass="Repositories\ApiErrorLogRepository")
  * @author Matthias Pfefferle
- *
- * @Document(collection="error_log")
  */
 class ApiErrorLog extends ErrorLog {
 

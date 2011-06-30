@@ -5,7 +5,7 @@ namespace Documents;
  * @author Matthias Pfefferle
  *
  * @MappedSuperclass
- * @Document(collection="error_log")
+ * @Document(collection="error_log", repositoryClass="Repositories\ErrorLogRepository")
  * @HasLifecycleCallbacks
  * @InheritanceType("SINGLE_COLLECTION")
  * @DiscriminatorField(fieldName="type")
