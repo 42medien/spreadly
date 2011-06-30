@@ -37,4 +37,13 @@ class ErrorLog extends BaseDocument {
       $this->setC(time());
     }
   }
+
+  /**
+   * save this shit!
+   */
+  public function save() {
+    $dm = MongoManager::getDM();
+    $dm->persist($this);
+    $dm->flush();
+  }
 }

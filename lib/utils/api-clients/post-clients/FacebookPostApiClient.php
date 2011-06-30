@@ -78,9 +78,6 @@ class FacebookPostApiClient extends PostApi {
     $lError->setMessage($lResponse['error']['message']);
     $lError->setOiId($this->onlineIdentity->getId());
     $lError->setUId($this->onlineIdentity->getUserId());
-
-    $dm = MongoManager::getDM();
-    $dm->persist($lError);
-    $dm->flush();
+    $lError->save();
   }
 }
