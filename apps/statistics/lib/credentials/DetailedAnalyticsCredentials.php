@@ -6,6 +6,12 @@ class DetailedAnalyticsCredentials {
 
     $domainid = $context->getRequest()->getParameter("domainid");
 
+    if (!$domainid) {
+      $dealid = $context->getRequest()->getParameter("deal_id");
+      $deal = DealTable::getInstance()->find($dealid);
+      $domainid = $deal->getDomainProfileId();
+    }
+
     $domainProfile = DomainProfileTable::getInstance()->find($domainid);
 
     if ($domainProfile && $domainProfile->getSfGuardUserId() == $context->getUser()->getUserId() && $domainProfile->getDetailedAnalytics()) {
