@@ -266,7 +266,7 @@ class Deal extends BaseDeal {
     return $this->getImageUrl();
   }
 
-  public function countLikes() {
+  public function getLikes() {
     $dealSummary = $this->getDealSummary();
 
     if ($dealSummary) {
@@ -276,7 +276,7 @@ class Deal extends BaseDeal {
     }
   }
 
-  public function countClickbackLikes() {
+  public function getClickbackLikes() {
     $dealSummary = $this->getDealSummary();
 
     if ($dealSummary) {
@@ -286,7 +286,7 @@ class Deal extends BaseDeal {
     }
   }
 
-  public function countShares() {
+  public function getShares() {
     $dealSummary = $this->getDealSummary();
 
     if ($dealSummary) {
@@ -306,13 +306,23 @@ class Deal extends BaseDeal {
     }
   }
 
-  public function countMediaPenetration() {
+  public function getMediaPenetration() {
     $dealSummary = $this->getDealSummary();
 
     if ($dealSummary) {
       return $dealSummary->getMediaPenetration();
     } else {
       return 0;
+    }
+  }
+
+  public function getDemographics() {
+    $dealSummary = $this->getDealSummary();
+
+    if ($dealSummary) {
+      return $dealSummary->getDemographics();
+    } else {
+      return array();
     }
   }
 }

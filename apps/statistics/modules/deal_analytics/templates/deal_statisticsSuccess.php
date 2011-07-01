@@ -1,4 +1,7 @@
-<?php slot('content'); ?>
+<?php
+slot('content');
+use_helper('YiidNumber');
+?>
 <?php echo link_to("<span>".__('Details')."</span>", 'analytics/deal_details?deal_id='.$pDeal->getId(), array('class' => 'button alignright'));?>
 <div id="analytics-bread">
 	<ul class="bc-list clearfix">
@@ -20,7 +23,7 @@
          		<img src="/img/qus_icon.png" alt="<?php echo __("Deals"); ?>" class="tooltip-icon" />
          	</a>
         </p>
-	      <strong><?php //echo $pDeal->getLikes(); ?>2842</strong>
+	      <strong><?php echo $pDeal->getLikes(); ?></strong>
 			</div>
     </div>
     <ul>
@@ -38,12 +41,12 @@
     	   		<img src="/img/qus_icon.png" class="tooltip-icon" alt="<?php echo __("Spreads"); ?>"/>
          	</a>
         </p>
-        <strong class="shares"><?php //echo $pHost->getShares(); ?>4855</strong>
+        <strong class="shares"><?php echo $pDeal->getShares(); ?></strong>
       </div>
     </div>
     <ul>
-    	<?php foreach ($pHost->getServices() as $key => $value) { ?>
-      	<li class="<?php echo strtolower($key) ?>"><span><?php //echo truncate_number($value['l']); ?>10k</span></li>
+    	<?php foreach ($pDeal->getServices() as $key => $value) { ?>
+      	<li class="<?php echo strtolower($key) ?>"><span><?php echo truncate_number($value['l']); ?></span></li>
       <?php } ?>
     </ul>
   </div>
@@ -56,11 +59,11 @@
          		<img src="/img/qus_icon.png" class="tooltip-icon" />
          	</a>
         </p>
-        <strong class="media"><?php //echo truncate_number($pHost->getMediaPenetration()); ?>3822k</strong></div>
+        <strong class="media"><?php echo truncate_number($pDeal->getMediaPenetration()); ?></strong></div>
     </div>
    	<ul>
-    	<?php foreach ($pHost->getServices() as $key => $value) { ?>
-      	<li class="<?php echo strtolower($key) ?>"><span><?php //echo truncate_number($value['mp']); ?>752k</span></li>
+    	<?php foreach ($pDeal->getServices() as $key => $value) { ?>
+      	<li class="<?php echo strtolower($key) ?>"><span><?php echo truncate_number($value['mp']); ?></span></li>
       <?php } ?>
     </ul>
   </div>
@@ -80,7 +83,7 @@
 								"plotsize": "50%",
 								"bgcolor" : "#e1e1e1",
 								"renderto":"gender-chart"
-						}', 'pData' => $pHost->getDemographics()
+						}', 'pData' => $pDeal->getDemographics()
 		)); ?>
 	</div>
 	<div class="alignleft" id="age-chart">
@@ -92,7 +95,7 @@
 								"plotsize": "50%",
 								"bgcolor" : "#e1e1e1",
 								"renderto":"age-chart"
-						}', 'pData' => $pHost->getDemographics()
+						}', 'pData' => $pDeal->getDemographics()
 		)); ?>
 	</div>
 	<div class="alignleft" id="relation-chart">
@@ -104,7 +107,7 @@
 								"plotsize": "50%",
 								"bgcolor" : "#e1e1e1",
 								"renderto":"relation-chart"
-						}', 'pData' => $pHost->getDemographics()
+						}', 'pData' => $pDeal->getDemographics()
 		)); ?>
 	</div>
 </div>
