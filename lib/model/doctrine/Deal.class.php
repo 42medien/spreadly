@@ -267,11 +267,20 @@ class Deal extends BaseDeal {
   }
 
   public function countLikes() {
-    $dm = \MongoManager::getStatsDM();
-    $dealStats = $dm->getRepository("Documents\HostSummary")->findOneBy(array("d_id" => $this->getId()));
+    $dealSummary = $this->getDealSummary();
 
-    if ($dealStats) {
-      return $dealStats->getLikes();
+    if ($dealSummary) {
+      return $dealSummary->getLikes();
+    } else {
+      return 0;
+    }
+  }
+
+  public function countClickbackLikes() {
+    $dealSummary = $this->getDealSummary();
+
+    if ($dealSummary) {
+      return $dealSummary->getClickbackLikes();
     } else {
       return 0;
     }
