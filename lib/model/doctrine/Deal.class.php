@@ -305,4 +305,14 @@ class Deal extends BaseDeal {
       return array();
     }
   }
+
+  public function countMediaPenetration() {
+    $dealSummary = $this->getDealSummary();
+
+    if ($dealSummary) {
+      return $dealSummary->getMediaPenetration();
+    } else {
+      return 0;
+    }
+  }
 }
