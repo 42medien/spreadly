@@ -10,20 +10,31 @@ ul.errors {
   list-style-position: outside;
   list-style-image: none;
   list-style-type: none;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.7);
 }
 
 ul.errors li {
-  border-bottom: 1px solid white;
-  padding: 10px 0;
-  margin: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  padding: 20px 10px;
+  margin-bottom: 20px 0;
   font-size: 12px;
 }
 
 ul.errors li small {
-  float: right;
   font-size: 10px;
+  font-weight: small;
+  line-height: 14px;
+}
+
+.meta {
+  float: right;
+  text-align: right;
+  color: #b74d4d;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.5);
 }
 
 ul.errors li h3 {
   font-size: 14px;
+  line-height: 14px;
+  margin-bottom:  5px;
 }
