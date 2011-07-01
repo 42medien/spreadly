@@ -295,4 +295,14 @@ class Deal extends BaseDeal {
       return 0;
     }
   }
+
+  public function getServices() {
+    $dealSummary = $this->getDealSummary();
+
+    if ($dealSummary) {
+      return $dealSummary->getServices();
+    } else {
+      return array();
+    }
+  }
 }
