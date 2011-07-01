@@ -115,18 +115,3 @@ use_helper('YiidNumber');
 <?php echo link_to("<span>".__('Details')."</span>", 'analytics/deal_details?deal_id='.$pDeal->getId(), array('class' => 'button alignright'));?>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
-
-<?php slot('content'); ?>
-	<div class="data-tablebox two-line-table">
-		<?php //include_partial('analytics/url_table', array('pUrls' => $urls, 'pDomainProfile' => $pDomainProfile)); ?>
-	</div>
-  <?php //include_component('analytics', 'top_url_overall_table', array("host" => $pHost->getHost())); ?>
-<?php end_slot(); ?>
-<?php include_partial('global/graybox'); ?>
-
-<?php
-  slot('content');
-   include_component('analytics', 'active_deal_table', array("host" => $pHost->getHost()));
-  end_slot();
-  include_partial('global/graybox');
-?>

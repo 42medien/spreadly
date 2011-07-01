@@ -27,12 +27,17 @@ class deal_analyticsActions extends sfActions
     $dm = MongoManager::getStatsDM();
   	$this->pHost = $dm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $this->pDomainProfile->getUrl()));
   	$lEndDate = strtotime($this->pDeal->getEndDate());
-  	$this->pEndDate = ($lEndDate > time())?$this->pDeal->getEndDate():date("Y-m-d", strtotime("today"));
+  	$this->pEndDate = ($lEndDate < time())?$this->pDeal->getEndDate():date("Y-m-d", strtotime("today"));
 
   }
 
   public function executeDeal_details(sfWebRequest $request) {
 		$lDealId = $request->getParameter('deal_id');
 		$this->pDeal = DealTable::getInstance()->find($lDealId);
+		$this->pDomainProfile = $this->pDeal->getDomainProfile();
+    $dm = MongoManager::getStatsDM();
+  	$this->pHost = $dm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $this->pDomainProfile->getUrl()));
+  	$lEndDate = strtotime($this->pDeal->getEndDate());
+  	$this->pEndDate = ($lEndDate < time())?$this->pDeal->getEndDate():date("Y-m-d", strtotime("today"));
   }
 }
