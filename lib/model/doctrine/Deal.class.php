@@ -285,4 +285,14 @@ class Deal extends BaseDeal {
       return 0;
     }
   }
+
+  public function countShares() {
+    $dealSummary = $this->getDealSummary();
+
+    if ($dealSummary) {
+      return $dealSummary->getShares();
+    } else {
+      return 0;
+    }
+  }
 }
