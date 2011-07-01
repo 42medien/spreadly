@@ -265,4 +265,15 @@ class Deal extends BaseDeal {
   public function getThumb() {
     return $this->getImageUrl();
   }
+
+  public function countLikes() {
+    $dm = \MongoManager::getStatsDM();
+    $dealStats = $dm->getRepository("Documents\HostSummary")->findOneBy(array("d_id" => $this->getId()));
+
+    if ($dealStats) {
+      return $dealStats->getLikes();
+    } else {
+      return 0;
+    }
+  }
 }
