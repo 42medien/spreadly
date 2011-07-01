@@ -24,7 +24,6 @@ class AnalyticsActivityRepository extends StatsRepository
     $res = $this->createQueryBuilder()
       ->group($groupBy, array('count' => 0))
       ->reduce('function (obj, prev) { prev.count++; }')
-
       ->field("date")->gte(new MongoDate($fromDay))
       ->field("date")->lte(new MongoDate($toDay))
       ->getQuery()

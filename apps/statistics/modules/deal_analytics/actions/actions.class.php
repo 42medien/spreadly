@@ -39,5 +39,32 @@ class deal_analyticsActions extends sfActions
   	$this->pHost = $dm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $this->pDomainProfile->getUrl()));
   	$lEndDate = strtotime($this->pDeal->getEndDate());
   	$this->pEndDate = ($lEndDate < time())?$this->pDeal->getEndDate():date("Y-m-d", strtotime("today"));
+  	$this->pLikes = $this->getDealLikes($this->pDeal);
+
+  }
+  
+  private function getDealLikes($deal) {
+    $lDm = MongoManager::getStatsDM();
+    $lHostsRange = $lDm->getRepository("Documents\DealStats")->findBy(array("d_id" => $deal->getId()));
+    $lHostsRange = $lHostsRange->toArray();
+    return array_values($this->padLikes($lHostsRange, $deal->getStartDate(), $deal->getEndDate()));
+  }
+  
+  private function padLikes($activityStats, $from, $to) {
+    $from = new DateTime($from);
+    $from->setTime(0,0);
+    $to = new DateTime($to);
+    $to->setTime(0,0);
+
+    $lDayPeriod = new DatePeriod($from, new DateInterval('P1D'), $to);
+
+    $res = array();
+    foreach ($lDayPeriod as $day) {
+      $res[$day->format('Y-m-d')] = 0;
+    }
+    foreach ($activityStats as $stat) {
+      $res[$stat->getDay()->format('Y-m-d')] = $stat->getLikes();
+    }
+    return $res;
   }
 }

@@ -23,7 +23,7 @@ if (count($pDeal->getLikes())) {
 <div id="line-chart-example">
 <?php include_partial('analytics/chart_line_activities',
         array(
-          "pData" => $pDeal->getLikes(),
+          "pData" => $pLikes,
           'pFromYear' => date('Y', strtotime($pDeal->getStartDate())),
           'pFromMonth' => date('m', strtotime($pDeal->getStartDate())),
           'pFromDay' => date('d', strtotime($pDeal->getStartDate()))
