@@ -26,6 +26,15 @@ footer, header, nav, section, audio, video {
 
 a img {border: 0;}
 
+a{
+	color: #fff;
+	text-decoration: underline; 
+}
+
+a:hover{
+  text-decoration: none;
+}
+
 
 
 /*  Typography presets
@@ -97,6 +106,8 @@ body {
   -webkit-text-size-adjust: 100%; /* Stops Mobile Safari from auto-adjusting font-sizes */
 }
 
+
+/**nav and header**/
 #header {
   padding: 25px 0;
 }
@@ -155,8 +166,6 @@ section.main-section > div:nth-child(1){margin-left: 0px;}
    padding: 10px 15px;
    text-align: center;
 }
-
-
 
 .widget > header{
    border-bottom: 1px solid #151617;

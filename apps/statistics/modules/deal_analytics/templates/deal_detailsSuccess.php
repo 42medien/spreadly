@@ -19,7 +19,7 @@ use_helper('Text', 'YiidUrl', "YiidNumber");
 if (count($pDeal->getLikes())) {
   slot('content')
 ?>
-<h2 class="sub_title"><?php echo __('Details for deal %deal%', array('%deal%' => '"'.$pDeal->getSummary().'" from '.$pDeal->getStartDate().' to '.$pEndDate));?></h2>
+<h2 class="sub_title"><?php echo __('Details for deal %deal%', array('%deal%' => '"'.$pDeal->getSummary().'" from '.date("Y-m-d",strtotime($pDeal->getStartDate())).' to '.$pEndDate));?></h2>
 <div id="line-chart-example">
 <?php include_partial('analytics/chart_line_activities',
         array(
@@ -92,6 +92,14 @@ if (count($pDeal->getLikes())) {
 <h2 class="sub_title"><?php echo __('URL overview'); ?></h2>
 <div class="data-tablebox two-line-table">
 	<?php include_partial('deal_analytics/top_pages_table', array('pUrls' => $pUrls)); ?>
+</div>
+<?php end_slot(); ?>
+<?php include_partial('global/graybox'); ?>
+
+<?php slot('content') ?>
+<h2 class="sub_title"><?php echo __('Top Influencer'); ?></h2>
+<div class="data-tablebox two-line-table">
+	<?php include_partial('deal_analytics/top_influencer_table', array('pUrls' => $pUrls)); ?>
 </div>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>

@@ -5,8 +5,8 @@
     	<tr>
   			<th height="32" align="center" valign="middle" class="first">
   				<div>
-	  	    		<span class="myqtip" title="<?php echo __('Aktuell laufende Deals'); ?>">
-  							<?php echo __('Active Deals'); ?>
+	  	    		<span class="myqtip" title="<?php echo __('Redeemed Deals'); ?>">
+  							<?php echo __('Deals done'); ?>
   						</span>
 		  	  </div>
   			</th>

@@ -1,0 +1,1 @@
+DealAnalytics.init();

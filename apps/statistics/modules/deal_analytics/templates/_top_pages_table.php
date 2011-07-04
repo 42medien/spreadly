@@ -1,38 +1,38 @@
 <?php use_helper('Text', 'YiidUrl', "YiidNumber"); ?>
 <div class="data-tablebox">
-  <table border="0" width="930px;" cellspacing="0" cellpadding="0" id="top-pages-table" class="tablesorter">
+  <table border="0" width="930px;" cellspacing="0" cellpadding="0" id="top-pages-table" class="tablesorter scrolltable">
   	<thead>
     	<tr>
   			<th height="32" align="center" valign="middle" class="first">
-  				<div>
+	  			<div class="sortlink no-sort">
 	  	    		<span class="myqtip" title="<?php echo __('Top pages for this deal'); ?>">
   							<?php echo __('Pages'); ?>
   						</span>
 		  	  </div>
   			</th>
   			<th align="center" valign="middle">
-  				<div>
+  				<div class="sortlink no-sort">
 	  	    	<span class="myqtip" title="<?php echo __("Redeemed deals on the page"); ?>">
   						<?php echo __('Deals');?>
   					</span>
   				</div>
   			</th>
   			<th align="center" valign="middle">
-  				<div>
+  				<div class="sortlink no-sort">
 	  	    	<span class="myqtip" title="<?php echo __("Maximale Reichweite der Empfehlung"); ?>">
   						<?php echo __('Reach');?>
   					</span>
   				</div>
   			</th>
   	    <th align="center" valign="middle">
-  	    	<div>
+  	    	<div class="sortlink no-sort">
 	  	    	<span class="myqtip" title="<?php echo __('Anzahl der Besucher die auf eine Empfehlung gekommen sind'); ?>">
   	    			<?php echo __('Clickbacks');?>
   	    		</span>
 		  	  </div>
   	    </th>
   	    <th align="center" valign="middle" class="last">
-  	    	<div>
+  	    	<div class="sortlink no-sort">
   	    		<span class="myqtip" title="<?php echo __('Anzahl der Besucher die auf eine Empfehlung gekommen sind und dann weiterempfohlen haben'); ?>">
   	    			<?php echo __('Clickback-Likes');?>
 						</span>
