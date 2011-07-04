@@ -1,6 +1,6 @@
 <?php use_helper('Text', 'YiidUrl', "YiidNumber"); ?>
 <div class="data-tablebox">
-  <table border="0" width="930px;" cellspacing="0" cellpadding="0" id="top-url-table" class="tablesorter">
+  <table border="0" width="930px;" cellspacing="0" cellpadding="0" id="top-pages-table" class="tablesorter">
   	<thead>
     	<tr>
   			<th height="32" align="center" valign="middle" class="first">
@@ -57,7 +57,6 @@
         </td>
         <td align="center"><div><strong class="big-font blue"><?php echo point_format($url->getLikes()); ?></strong></div></td>
         <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo point_format($url->getShares()); ?></strong></div></td>
-        <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo point_format($url->getMediaPenetration()); ?></strong></div></td>
         <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo point_format($url->getClickbacks()); ?></strong></div></td>
         <td align="center" class="last"><div><strong class="big-font blue"><?php echo point_format($url->getClickbackLikes()); ?></strong></div></td>
       </tr>
