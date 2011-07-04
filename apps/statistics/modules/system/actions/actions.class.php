@@ -40,7 +40,18 @@ class systemActions extends sfActions {
     }
   }
 
-  public function executeCredentials(sfWebRequest $request) {}
+  public function executeCredentials(sfWebRequest $request) {
+    $domainId = $request->getParameter("domainid");
+
+    if (!$domainId) {
+      $dealId = $request->getParameter("deal_id");
+      $deal = DealTable::getInstance()->find($dealId);
+
+      $domainId = $deal->getDomainProfileId();
+    }
+
+    $this->domainProfile = DomainProfileTable::getInstance()->find($domainId);
+  }
 
   public function executeIndex(sfWebRequest $request) {}
   public function execute404(sfWebRequest $request) {}
