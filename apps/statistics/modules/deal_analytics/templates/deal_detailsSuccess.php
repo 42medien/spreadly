@@ -91,7 +91,7 @@ if (count($pDeal->getLikes())) {
 <?php slot('content') ?>
 <h2 class="sub_title"><?php echo __('URL overview'); ?></h2>
 <div class="data-tablebox two-line-table">
-	<?php include_partial('deal_analytics/top_pages_table', array('pUrls' => $pUrls)); ?>
+	<?php include_partial('deal_analytics/top_pages_table', array('pUrls' => $pUrlSummaries)); ?>
 </div>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>

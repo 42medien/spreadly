@@ -56,12 +56,11 @@
     <tbody>
     <?php
     if ($pUrls->hasNext()) {
-      foreach($pUrls as $url){
-      	var_dump($url);die();
+      foreach($pUrls as $url) {
+        $user = UserTable::getInstance()->find($url->getUserId());
     ?>
       <tr>
-        <td align="center" valign="middle" class="first"><div><strong class="big-font blue"></strong></div></td>
-        <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo __("%1:00", array("%1" => $url->getHourOfDay())); ?></strong></div></td>
+        <td align="center" valign="middle" class="first"><div><?php echo image_tag($user->getAvatar(), array("alt" => $user->getFullname(), "width" => 16, "height" => 16)); ?><strong class="big-font blue"><?php echo $user->getFullname(); ?></strong></div></td>
         <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $url->getAge() ?></strong></div></td>
         <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo __($url->getGender()) ?></strong></div></td>
         <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo __($url->getRelationship()) ?></strong></div></td>
