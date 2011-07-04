@@ -52,7 +52,7 @@ class deal_analyticsActions extends sfActions
 
   private function getUrlAnalytics($deal) {
     $lDm = MongoManager::getStatsDM();
-    return $lDm->getRepository("Documents\DealUrlStats")->findBy(array("d_id" => intval($deal->getId())));
+    return $lDm->getRepository("Documents\DealUrlSummary")->findBy(array("d_id" => intval($deal->getId())));
   }
 
   private function padLikes($activityStats, $from, $to) {
