@@ -18,6 +18,8 @@ class DetailedAnalyticsCredentials {
       return;
     } else {
       $context->getController()->forward(sfConfig::get('sf_secure_module'), sfConfig::get('sf_secure_action'));
+
+      throw new sfStopException();
     }
   }
 }
