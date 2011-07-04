@@ -82,7 +82,7 @@ ul#logos_big {margin: 95px 0 40px; text-align: center;}
 #unused-coupon-content .dotborbox{padding: 0;  width: 317px;}
 
 .deal-coupon-img{
-	height: 65px;
+  height: 65px;
     margin-right: 5px;
     margin-top: 5px;
     width: 65px;
@@ -568,7 +568,7 @@ Prev
 }
 
 .popup-tagline {
-	color: #fff;
+  color: #fff;
   font-size: 18px;
   line-height: 20px;
   text-shadow: #b3b3b3 1px 1px 1px;
@@ -686,6 +686,22 @@ th.headerSortUp.last {
   padding-left: 10px;
 }
 
+div.data-tablebox table#top-influencer-table td.first div.infname{
+  min-height: 42px;
+  vertical-align: middle;
+}
+
+div.data-tablebox table#top-influencer-table td.first div.infname span{ 
+    display: inline-block;
+    line-height: 16px;
+    margin-top: 13px;
+}
+
+div.data-tablebox table#top-influencer-table td.first div.infname img {
+  margin-right: 5px;
+}
+
+
 #analytics-bread {
   padding: 5px 0px 5px 0px;
 }
@@ -736,7 +752,7 @@ th.headerSortUp.last {
 }
 
 #analytics-datefilter-form input {
-	color: #000;
+  color: #000;
 }
 
 .textfield-label{
@@ -904,9 +920,8 @@ th.headerSortUp.last {
 #like-content-box .error{margin: 25px;}
 .like-content-information { margin: 25px 0 25px 25px; };
 
-
 .likenbox{
-	width: 420px;
+  width: 420px;
     padding-left: 0;
     }
 
