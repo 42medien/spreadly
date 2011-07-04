@@ -43,14 +43,6 @@ if (count($pDeal->getLikes())) {
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
 
-<?php slot('content') ?>
-<h2 class="sub_title"><?php echo __('URL overview'); ?></h2>
-<div class="data-tablebox two-line-table">
-	<?php //include_partial('analytics/url_table', array('pUrls' => $pUrls, 'pDomainProfile' => $pDomainProfile, 'pShowUrl' => true)); ?>
-</div>
-<?php end_slot(); ?>
-<?php include_partial('global/graybox'); ?>
-
 <?php slot('content'); ?>
 <h2 class="sub_title"><?php echo __('Demographic overview'); ?></h2>
 <div id="pie-charts" class="clearfix">
@@ -95,3 +87,11 @@ if (count($pDeal->getLikes())) {
 	end_slot();
 	include_partial('global/graybox');
 ?>
+
+<?php slot('content') ?>
+<h2 class="sub_title"><?php echo __('URL overview'); ?></h2>
+<div class="data-tablebox two-line-table">
+	<?php include_partial('deal_analytics/top_pages_table', array('pUrls' => $pUrls)); ?>
+</div>
+<?php end_slot(); ?>
+<?php include_partial('global/graybox'); ?>
