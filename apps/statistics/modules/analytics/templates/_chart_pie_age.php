@@ -8,7 +8,6 @@ var ChartPieGenderActivities = {
 
   init: function(pChartsettings) {
     var lData = <?php echo json_encode($pData); ?>;
-    debug.log(lData);
 		var lOptions = {
 		    chart: {
 		      renderTo: 'chart_pie_age_activities',

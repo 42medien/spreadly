@@ -26,7 +26,10 @@ if (count($pDeal->getLikes())) {
           "pData" => $pLikes,
           'pFromYear' => date('Y', strtotime($pDeal->getStartDate())),
           'pFromMonth' => date('m', strtotime($pDeal->getStartDate())),
-          'pFromDay' => date('d', strtotime($pDeal->getStartDate()))
+          'pFromDay' => date('d', strtotime($pDeal->getStartDate())),
+        	'pChartsettings' => '{
+						"zoomtype": "x"
+					}'
         )
       ); ?>
 </div>

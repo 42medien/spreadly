@@ -1,7 +1,13 @@
   <table width="930px;" border="0" cellspacing="0" cellpadding="0" id="top-influencer-table" class="tablesorter">
   <thead>
     <tr>
-      <th align="center" valign="middle" class="first"><div class="sortlink no-sort"><?php echo __('Influencer'); ?></div></th>
+      <th align="center" valign="middle" class="first">
+      	<div class="sortlink no-sort">
+      		<span class="myqtip" title="<?php echo __('Name of the influencer'); ?>">
+      			<?php echo __('Influencer'); ?>
+      		</span>
+      	</div>
+      </th>
       <th align="center" valign="middle">
       	<div class="sortlink">
 					<span class="myqtip" title="<?php echo __('Überblick Altersgruppen der Empfehler'); ?>">

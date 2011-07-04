@@ -3,16 +3,18 @@
 <?php //var_dump(getChartLineActivitiesData($pData, $pCommunity));die();?>
 <script type="text/javascript">
 var ActivityChart = {
-	init: function() {
+	init: function(pChartsettings) {
 	  Highcharts.theme = { colors: [] };// prevent errors in default theme
 	  var lData = <?php echo json_encode($pData); ?>;
-	  debug.log(lData);
+	  var lZoomType = (pChartsettings.zoomtype === undefined)?'':pChartsettings.zoomtype;
+	  debug.log(pChartsettings);
+
 		var lOptions = {
 		    chart: {
 		      renderTo: 'chart_line_activities',
 		      spacingRight: 20,
 		      backgroundColor: "#f6f6f6",
-		      zoomType: ''
+		      zoomType: lZoomType
 		   },
 		    title: {
 		      text: false
@@ -86,5 +88,5 @@ var ActivityChart = {
 		var lChart = new Highcharts.Chart(lOptions);
 	}//end init
 };//end object
-ActivityChart.init();
+ActivityChart.init(<?php echo $pChartsettings; ?>);
 </script>

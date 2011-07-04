@@ -13,7 +13,10 @@ if ($pLikes) {
           "pData" => $pLikes,
           'pFromYear' => date('Y', strtotime($pStartDay)),
           'pFromMonth' => date('m', strtotime($pStartDay)),
-          'pFromDay' => date('d', strtotime($pStartDay))
+          'pFromDay' => date('d', strtotime($pStartDay)),
+        	'pChartsettings' => '{
+						"zoomtype": ""
+					}'
         )
       ); ?>
 </div>
