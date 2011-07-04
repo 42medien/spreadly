@@ -49,14 +49,14 @@
         <td height="44" align="left" class="first">
           <div class="padleft">
           	<?php if(isset($pShowUrl) && $pShowUrl) {?>
-              <?php //echo range_sensitive_link_to(truncate_text($url->getUrl(), 60), 'analytics/url_detail', array('query_string' => 'domainid='.$pDomainProfile->getId().'&url='.urlencode($url->getUrl()))); ?>
+              <?php echo range_sensitive_link_to(truncate_text($url->getUrl(), 60), 'analytics/url_detail', array('query_string' => 'domainid='.$pDomainProfile->getId().'&url='.urlencode($url->getUrl()))); ?>
             <?php } else { ?>
             		<?php echo truncate_text($url->getUrl(), 60); ?>
             <?php } ?>
           </div>
         </td>
         <td align="center"><div><strong class="big-font blue"><?php echo point_format($url->getLikes()); ?></strong></div></td>
-        <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo point_format($url->getShares()); ?></strong></div></td>
+        <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo point_format($url->getMediaPenetration()); ?></strong></div></td>
         <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo point_format($url->getClickbacks()); ?></strong></div></td>
         <td align="center" class="last"><div><strong class="big-font blue"><?php echo point_format($url->getClickbackLikes()); ?></strong></div></td>
       </tr>
