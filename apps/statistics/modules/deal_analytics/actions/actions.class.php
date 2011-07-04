@@ -39,15 +39,15 @@ class deal_analyticsActions extends sfActions
   	$this->pHost = $dm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $this->pDomainProfile->getUrl()));
   	$lEndDate = strtotime($this->pDeal->getEndDate());
   	$this->pEndDate = ($lEndDate < time())?$this->pDeal->getEndDate():date("Y-m-d", strtotime("today"));
-  	$this->pLikes = $this->getDealLikes($this->pDeal);
+  	$this->pLikes = $this->getDealLikes($this->pDeal, $this->pEndDate);
     $this->pUrls = $this->getUrlAnalytics($this->pDeal);
   }
 
-  private function getDealLikes($deal) {
+  private function getDealLikes($deal, $endDate) {
     $lDm = MongoManager::getStatsDM();
     $lHostsRange = $lDm->getRepository("Documents\DealStats")->findBy(array("d_id" => intval($deal->getId())));
     $lHostsRange = $lHostsRange->toArray();
-    return array_values($this->padLikes($lHostsRange, $deal->getStartDate(), $deal->getEndDate()));
+    return array_values($this->padLikes($lHostsRange, $deal->getStartDate(), $endDate));
   }
 
   private function getUrlAnalytics($deal) {
@@ -59,7 +59,7 @@ class deal_analyticsActions extends sfActions
     $from = new DateTime($from);
     $from->setTime(0,0);
     $to = new DateTime($to);
-    $to->setTime(0,0);
+    $to->setTime(24,0);
 
     $lDayPeriod = new DatePeriod($from, new DateInterval('P1D'), $to);
 
