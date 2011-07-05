@@ -185,7 +185,7 @@ class dashboardActions extends sfActions
     $from = new DateTime($from);
     $from->setTime(0,0);
     $to = new DateTime($to);
-    $to->setTime(0,0);
+    $to->setTime(24,0);
 
     $lDayPeriod = new DatePeriod($from, new DateInterval('P1D'), $to);
 
