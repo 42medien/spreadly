@@ -70,9 +70,9 @@ class analyticsActions extends sfActions {
                         ->where('dp.sf_guard_user_id = ? AND ('.
                                 '((d.start_date BETWEEN ? AND ?) OR (d.end_date BETWEEN ? AND ?)) OR '.
                                 '(d.start_date <= ? AND d.end_date >= ?)) AND d.deal_state = "approved"',
-                          array($this->getUser()->getUserId(), date("c", strtotime("today")), date("c", strtotime("30 days ago")),
-                                date("c", strtotime("today")), date("c", strtotime("30 days ago")), date("c", strtotime("today")),
-                                date("c", strtotime("30 days ago"))));
+                          array($this->getUser()->getUserId(), date("c", strtotime("30 days ago")), date("c", strtotime("tomorrow - 1 second")),
+                                date("c", strtotime("30 days ago")), date("c", strtotime("tomorrow - 1 second")), date("c", strtotime("30 days ago")),
+                                date("c", strtotime("tomorrow - 1 second"))));
 
   	$this->pDeals = $lQuery->execute();
 
