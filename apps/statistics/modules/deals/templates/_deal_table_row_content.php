@@ -11,8 +11,8 @@
       	</div>
 			</td>
 			<td align="left">
-				<div class="padleft" title="<?php echo $pDeal->getSummary(); ?>">
-					<?php echo truncate_text($pDeal->getSummary(), 20); ?>
+				<div class="padleft" title="<?php echo __('Go to analytics for %deal%', array('%deal%' => $pDeal->getSummary())); ?>">
+					<?php echo link_to(truncate_text($pDeal->getSummary(), 20), 'analytics/deal_details?deal_id='.$pDeal->getId(), array('class' => 'approved-link')); ?>
 				</div>
 			</td>
 			<td align="left" valign="middle">
@@ -80,7 +80,7 @@
 
 <?php if($pDeal->getState() == 'paused') { ?>
 			<td align="center" class="first"><?php echo image_tag('/img/global/24x24/clock.png', array('title' => __('Deal stopped')))?></td>
-		  <td align="left"><div class="marketbox"><?php echo $pDeal->getSummary(); ?></div></td>
+		  <td align="left"><div class="marketbox" title="<?php echo __('Go to analytics for %deal%', array('%deal%' => $pDeal->getSummary())); ?>"><?php echo link_to(truncate_text($pDeal->getSummary(), 20), 'analytics/deal_details?deal_id='.$pDeal->getId(), array('class' => 'paused-link')); ?></div></td>
 		  <td align="left" valign="middle"><div class="marketbox"><?php echo $pDeal->getDomainProfile()->getUrl(); ?></div></td>
 		  <td align="left" valign="middle"><div class="marketbox"><?php echo $pDeal->getStartDate(); ?></div></td>
 		  <td align="left" valign="middle" title="<?php echo __('Edit end date of deal'); ?>" class="editinplaceclick edit-col" id="deal-date-<?php echo $pDeal->getId(); ?>" data-obj='{"action":"/deals/edit_enddate", "type":"text", "callback":"DealTable.editDate",  "params": "{\"id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-date-<?php echo $pDeal->getId(); ?>\"}"}'><div  class="marketbox"><?php echo $pDeal->getEndDate(); ?></div></td>

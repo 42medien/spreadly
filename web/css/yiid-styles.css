@@ -444,6 +444,15 @@ td.editinplaceclick {
   text-decoration: none;
 }
 
+
+a.approved-link{
+  color: #000 !important;
+}
+
+a.paused-link{
+  color: #777575!important;
+}
+
 .datatablewide .data-tablebox #deal-table tr.submitted td,.datatablewide .data-tablebox #deal-table tr.submitted td.submitted a{
   color: #eb9f07;
   text-decoration: none;
