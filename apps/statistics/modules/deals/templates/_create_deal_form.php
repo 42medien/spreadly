@@ -265,10 +265,10 @@
 	                      	<div class="btnwording alignleft" id="deal-quantity-label">
 	                      		<strong><?php echo $pForm['deal']['coupon_quantity']->renderLabel();?></strong><span><?php echo $pForm['deal']['coupon_quantity']->renderError();?></span>
 	                      	</div>
-													<span class="onlyone alignleft"><input type="radio" name="single-quantity" id="radio-single-quantity" <?php echo ($pCouponQuantity > 0)? 'checked="checked"':''; ?> /><label id="radio-single-quantity-label"><?php echo __('Will end after');?></label></span><label class="textfield-wht"><span><?php echo $pForm['deal']['coupon_quantity']->render(array('class' => "wd15"));?></span></label> <span class="requirrow alignleft"><?php echo __('likes'); ?></span>
+													<span class="onlyone alignleft"><input type="radio" value="limited" name="single-quantity" id="radio-single-quantity" <?php echo ($pCouponQuantity > 0)? 'checked="checked"':''; ?> /><label id="radio-single-quantity-label"><?php echo __('Will end after');?></label></span><label class="textfield-wht"><span><?php echo $pForm['deal']['coupon_quantity']->render(array('class' => "wd15"));?></span></label> <span class="requirrow alignleft"><?php echo __('likes'); ?></span>
 
 													<span class="onlyone alignright" id="quantitiy-unlimited">
-														<input type="radio" name="single-quantity" id="radio-single-quantity-unltd" <?php echo ($pCouponQuantity == 0)? 'checked="checked"':''; ?> /> <span id="radio-single-quantity-unltd-label"><?php echo __('unlimited'); ?></span>
+														<input type="radio" name="single-quantity" value="unlimited" id="radio-single-quantity-unltd" <?php echo ($pCouponQuantity == 0)? 'checked="checked"':''; ?> /> <span id="radio-single-quantity-unltd-label"><?php echo __('unlimited'); ?></span>
 													</span>
 	                      </li>
 											<?php } ?>

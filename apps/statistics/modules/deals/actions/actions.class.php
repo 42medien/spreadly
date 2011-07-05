@@ -47,6 +47,10 @@ class dealsActions extends sfActions
     $lParams['deal']['domain_profile_id'] = $lParams['id'];
     $lParams['deal']['sf_guard_user_id'] = $this->getUser()->getUserId();
 		unset($lParams['ei_kcuf']);
+
+    if($lParams['single-quantity'] == 'unlimited'){
+    	unset($lParams['deal']['coupon_quantity']);
+    }
 		unset($lParams['single-quantity']);
 
     // Cleaning up the single code/multi code dilemma

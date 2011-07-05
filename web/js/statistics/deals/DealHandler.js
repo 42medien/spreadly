@@ -350,12 +350,14 @@ var DealForm = {
    */
   setRadioButtons : function() {
     debug.log('[DealForm][setRadioButtons]');
-    jQuery('#edit-quantity').bind('click', function() {
+    jQuery('#radio-single-quantity-label, #deal_coupon_quantity').bind('click', function() {
       jQuery('#radio-single-quantity').attr('checked', true);
+      jQuery('#radio-single-quantity-unltd').attr('checked', false);      
       return true;
     });
     
-    jQuery('#single-quantity-unlimited').bind('click', function() {
+    jQuery('#radio-single-quantity-unltd-label').bind('click', function() {
+      jQuery('#radio-single-quantity').attr('checked', false);      
       jQuery('#radio-single-quantity-unltd').attr('checked', true);
       return true;
     });
