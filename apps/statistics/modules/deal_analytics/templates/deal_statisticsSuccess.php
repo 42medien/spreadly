@@ -29,7 +29,7 @@ use_helper('YiidNumber');
     </div>
     <ul>
       <li>
-        <p><span class="stepBox-text"><?php echo __('%count% coming from ClickBacks', array('%count%' => 10)); ?></span></p>
+        <p><span class="stepBox-text"><?php echo __('%count% coming from ClickBacks', array('%count%' => $pDeal->getClickbackLikes())); ?></span></p>
       </li>
     </ul>
   </div>
