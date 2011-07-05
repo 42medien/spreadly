@@ -53,7 +53,7 @@
   		  foreach ($deals as $deal) {
   		?>
   			<tr>
-  				<td align="left" class="first"><div class="padleft"><?php echo $deal->getSummary(); ?></div></td>
+  				<td align="left" class="first"><div class="padleft"><?php echo link_to($deal->getSummary(), 'analytics/deals?deal_id='.$deal->getId(), array('title' => __('Go to analytics for %deal%', array('%deal%' => $deal->getSummary())))); ?></div></td>
   				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $deal->getRemainingCouponQuantity(); ?></strong></div></td>
   				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $deal->getRemainingDays() > 0 ? point_format($deal->getRemainingDays()) : __('expired'); ?></strong></div></td>
   				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $deal->getDealSummary() ? point_format($deal->getDealSummary()->getMediaPenetration()) : 0; ?></strong></div></td>
