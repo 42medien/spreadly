@@ -55,7 +55,7 @@ var Deal = {
           OnLoadGrafic.hideGrafic();
         }
       });
-      Deal.hideStats();      
+      //Deal.hideStats();      
       return false;
     });
   },
@@ -190,6 +190,7 @@ var DealForm = {
     debug.log('[DealForm][save]');
     
     jQuery('#proceed-deal-button').bind('click', function() {
+      OnLoadGrafic.showGrafic();
       var options = {
         //beforeSubmit : OnLoadGrafic.showGrafic,
         url : '/deals/save',
