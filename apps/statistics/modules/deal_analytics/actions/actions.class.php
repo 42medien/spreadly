@@ -24,8 +24,13 @@ class deal_analyticsActions extends sfActions
 		$lDealId = $request->getParameter('deal_id');
 		$this->pDeal = DealTable::getInstance()->find($lDealId);
 		$this->pDomainProfile = $this->pDeal->getDomainProfile();
-    $dm = MongoManager::getStatsDM();
-  	$this->pHost = $dm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $this->pDomainProfile->getUrl()));
+
+  	$lDealSummary = MongoManager::getStatsDM()->getRepository("Documents\DealSummary")->findOneBy(array("d_id" => intval($lDealId)));
+
+    if (!$lDealSummary) {
+      $this->setTemplate("no_stats", "analytics");
+    }
+
   	$lEndDate = strtotime($this->pDeal->getEndDate());
   	$this->pEndDate = ($lEndDate < time())?$this->pDeal->getEndDate():date("d-m-Y", strtotime("today"));
 
@@ -35,9 +40,7 @@ class deal_analyticsActions extends sfActions
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('deal_analytics/init_deal_analytics.js'));
 		$lDealId = $request->getParameter('deal_id');
 		$this->pDeal = DealTable::getInstance()->find($lDealId);
-		$this->pDomainProfile = $this->pDeal->getDomainProfile();
-    $dm = MongoManager::getStatsDM();
-  	$this->pHost = $dm->getRepository("Documents\HostSummary")->findOneBy(array("host" => $this->pDomainProfile->getUrl()));
+
   	$lEndDate = strtotime($this->pDeal->getEndDate());
   	$this->pEndDate = ($lEndDate < time())?$this->pDeal->getEndDate():date("Y-m-d", strtotime("today"));
   	$this->pLikes = $this->getDealLikes($this->pDeal, $this->pEndDate);
