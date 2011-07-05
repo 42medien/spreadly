@@ -11,8 +11,12 @@
       	</div>
 			</td>
 			<td align="left">
-				<div class="padleft" title="<?php echo __('Go to analytics for %deal%', array('%deal%' => $pDeal->getSummary())); ?>">
-					<?php echo link_to(truncate_text($pDeal->getSummary(), 20), 'deal_analytics/deal_statistics?deal_id='.$pDeal->getId(), array('class' => 'approved-link')); ?>
+				<div class="padleft" title="<?php echo $pDeal->getSummary(); ?>">
+					<?php if(strtotime($pDeal->getStartDate()) > time()) {?>
+						<?php echo $pDeal->getSummary(); ?>
+					<?php } else { ?>
+						<?php echo link_to(truncate_text($pDeal->getSummary(), 20), 'deal_analytics/deal_statistics?deal_id='.$pDeal->getId(), array('class' => 'approved-link', "title" => __('Go to analytics for %deal%', array('%deal%' => $pDeal->getSummary())))); ?>
+					<?php } ?>
 				</div>
 			</td>
 			<td align="left" valign="middle">
