@@ -50,6 +50,7 @@ if (count($pDeal->getLikes())) {
 
 <?php slot('content'); ?>
 <h2 class="sub_title"><?php echo __('Demographic overview'); ?></h2>
+<?php if($pDeal->getDemographics() && count($pDeal->getDemographics()) > 0) {?>
 <div id="pie-charts" class="clearfix">
 	<div class="alignleft" id="gender-chart">
 		<?php include_partial('analytics/chart_pie_gender', array('pChartsettings' =>
@@ -88,6 +89,9 @@ if (count($pDeal->getLikes())) {
 		)); ?>
 	</div>
 </div>
+<?php } else { ?>
+	<?php echo __('Sorry, we have no demografical statistics for that deal yet'); ?>
+<?php } ?>
 <?php
 	end_slot();
 	include_partial('global/graybox');

@@ -74,6 +74,8 @@ use_helper('YiidNumber');
 
 <?php slot('content') ?>
 
+<?php if($pDeal->getDemographics() && count($pDeal->getDemographics()) > 0) {?>
+
 <div id="pie-charts" class="clearfix">
 	<div class="alignleft" id="gender-chart">
 		<?php include_partial('analytics/chart_pie_gender', array('pChartsettings' =>
@@ -112,6 +114,9 @@ use_helper('YiidNumber');
 		)); ?>
 	</div>
 </div>
+<?php } else { ?>
+	<?php echo __('Sorry, we have no demografical statistics for that deal yet'); ?>
+<?php } ?>
 
 <?php echo link_to("<span>".__('Details')."</span>", 'analytics/deal_details?deal_id='.$pDeal->getId(), array('class' => 'button alignright'));?>
 <?php end_slot(); ?>
