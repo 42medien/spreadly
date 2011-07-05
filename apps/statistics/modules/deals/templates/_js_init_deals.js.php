@@ -13,7 +13,6 @@ jQuery("input[type='checkbox']").custCheckBox();
 Deal.init();
 DealTable.init();
 DealForm.init();
-//Deal.showStats();
 AnalyticsFilter.init();
 
 
