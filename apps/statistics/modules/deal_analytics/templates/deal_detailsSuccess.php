@@ -19,7 +19,7 @@ use_helper('Text', 'YiidUrl', "YiidNumber");
 if (count($pDeal->getLikes())) {
   slot('content')
 ?>
-<h2 class="sub_title"><?php echo __('Details for deal %deal%', array('%deal%' => '"'.$pDeal->getSummary().'" from '.date("Y-m-d",strtotime($pDeal->getStartDate())).' to '.$pEndDate));?></h2>
+<h2 class="sub_title"><?php echo __('Details for deal %deal%', array('%deal%' => '"'.$pDeal->getSummary().'" from '.date("d.m.Y", strtotime($pDeal->getStartDate())).' to '.date("d.m.Y", strtotime($pEndDate))));?></h2>
 <div id="line-chart-example">
 <?php include_partial('analytics/chart_line_activities',
         array(
