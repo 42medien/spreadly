@@ -72,38 +72,6 @@ var Deal = {
     jQuery('#create-deal-content').append(pHtml);
     Deal.initDropdown();    
     jQuery("input[type='checkbox']").custCheckBox();
-  },
-  
-  showStats: function(){
-    jQuery('.deal-stats-link').live('click', function() {
-      OnLoadGrafic.showGrafic();
-      var lAction = jQuery(this).attr('href');
-      var lThis = this;
-      var lData = {
-        ei_kcuf : new Date().getTime()
-      };
-      
-      jQuery.ajax({
-        //beforeSubmit : OnLoadGrafic.showGrafic,
-        type : "GET",
-        url : lAction,
-        dataType : "json",
-        data : lData,
-        success : function(pResponse) {
-          jQuery('#analytix-filter-nav-box, #analytix-content-box').show();
-          AnalyticsFilterNav.show(pResponse.nav);
-          AnalyticsFilterContent.show(pResponse.content);
-          jQuery('.deal-stats-link').removeClass('active');
-          jQuery(lThis).addClass('active');
-          OnLoadGrafic.hideGrafic();
-        }
-      });
-      return false;      
-    });
-  },
-  
-  hideStats: function() {
-    jQuery('#analytix-filter-nav-box, #analytix-content-box').hide();    
   }
 };
 
@@ -256,7 +224,6 @@ var DealForm = {
   selectDomainProfile : function() {
     debug.log('[DealForm][selectDomainProfile]');
     jQuery('#websellist #id').change(function() {
-      debug.log(this);
       var lDpId = jQuery(this).val();
       DealForm.changeDomainProfile(lDpId);
     });
