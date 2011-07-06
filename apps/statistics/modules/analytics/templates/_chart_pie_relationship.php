@@ -45,7 +45,12 @@ var ChartPieRelationship = {
            series: {
              allowPointSelect: true,
              size: pChartsettings.plotsize
-          }
+          },
+          pie: {
+            dataLabels: {
+                distance: 20,
+            }
+        	}
 		  },
 		  legend: {
         enabled: false,
