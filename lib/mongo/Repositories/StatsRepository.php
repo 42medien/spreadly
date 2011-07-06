@@ -64,10 +64,6 @@ abstract class StatsRepository extends DocumentRepository
   }
 
   public function findByRangeGroupByDay($fromDay, $toDay) {
-    if ($toDay > strtotime('now')) {
-      $toDay = strtotime('now');
-    }
-
     $query = $this->createQueryBuilder()
               ->field("day")->gte(new MongoDate($fromDay))
               ->field("day")->lte(new MongoDate($toDay))
@@ -103,10 +99,6 @@ abstract class StatsRepository extends DocumentRepository
 
 
   public function findLikesByRangeGroupByDay($fromDay, $toDay) {
-    if ($toDay > strtotime('now')) {
-      $toDay = strtotime('now');
-    }
-
     $query = $this->createQueryBuilder()
               ->field("day")->gte(new MongoDate($fromDay))
               ->field("day")->lte(new MongoDate($toDay))
