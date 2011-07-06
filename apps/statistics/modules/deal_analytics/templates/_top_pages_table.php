@@ -47,11 +47,11 @@
     ?>
       <tr>
         <td height="44" align="left" class="first">
-          <div class="padleft">
+          <div class="padleft" title="<?php echo $url->getUrl(); ?>">
           	<?php if(isset($pShowUrl) && $pShowUrl) {?>
-              <?php echo range_sensitive_link_to(truncate_text($url->getUrl(), 60), 'analytics/url_detail', array('query_string' => 'domainid='.$pDomainProfile->getId().'&url='.urlencode($url->getUrl()))); ?>
+              <?php echo range_sensitive_link_to(truncate_text($url->getUrl(), 80), 'analytics/url_detail', array('query_string' => 'domainid='.$pDomainProfile->getId().'&url='.urlencode($url->getUrl()))); ?>
             <?php } else { ?>
-            		<?php echo truncate_text($url->getUrl(), 60); ?>
+            		<?php echo truncate_text($url->getUrl(), 80); ?>
             <?php } ?>
           </div>
         </td>
