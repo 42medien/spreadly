@@ -120,7 +120,7 @@ class dashboardActions extends sfActions
       }
 
       $data['current_likes_range'] = $h ? $h : array();
-      
+      sfContext::getInstance()->getLogger()->err(print_r($h, true));
       sfContext::getInstance()->getLogger()->err(print_r($data['current_likes_range'], true));
 
       $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\DealStats")->findByRangeGroupByDay($range[0], $range[1]);
@@ -158,8 +158,8 @@ class dashboardActions extends sfActions
 
     $cb = new Chartbeat();
     $data['current_popup_visitors_count'] = $cb->getVisitorsByDate($this->range);
-    
-    
+
+
     $data['current_pi_count'] = intval(VisitTable::countPisForDay($range[0]));
     $data['last_pi_count']    = intval(VisitTable::countPisForDay($lastRange[0]));
     $data['pi_count_delta']   = $this->delta($data['current_pi_count'], $data['last_pi_count']);
@@ -180,7 +180,7 @@ class dashboardActions extends sfActions
     if($y==0) return 0;
     return round(($x/$y)*100);
   }
-  
+
   // undry copy of analytics/actions
   private function padLikes($activityStats, $from, $to) {
     $from = new DateTime($from);
