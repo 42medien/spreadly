@@ -120,8 +120,6 @@ class dashboardActions extends sfActions
       }
 
       $data['current_likes_range'] = $h ? $h : array();
-      sfContext::getInstance()->getLogger()->err(print_r($h, true));
-      sfContext::getInstance()->getLogger()->err(print_r($data['current_likes_range'], true));
 
       $lActivityStats = MongoManager::getStatsDm()->getRepository("Documents\DealStats")->findByRangeGroupByDay($range[0], $range[1]);
 
