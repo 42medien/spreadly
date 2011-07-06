@@ -291,7 +291,13 @@ class VisitTable extends Doctrine_Table
   }
 
   public static function countPisForDay($day) {
+    sfContext::getInstance()->getLogger()->err(print_r("countPisForDay", true));
     $monthGroup = self::groupByMonth($day);
+    sfContext::getInstance()->getLogger()->err(print_r("day:", true));
+    sfContext::getInstance()->getLogger()->err(print_r($day, true));
+    sfContext::getInstance()->getLogger()->err(print_r("monthGroup:", true));
+    sfContext::getInstance()->getLogger()->err(print_r($monthGroup, true));
+    
     if(array_key_exists(0, $monthGroup) && array_key_exists(intval(date('d', $day)), $monthGroup[0]['pis_by_day'])) {
       return $monthGroup[0]['pis_by_day'][intval(date('d', $day))];
     } else {
