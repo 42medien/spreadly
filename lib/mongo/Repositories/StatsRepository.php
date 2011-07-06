@@ -64,8 +64,8 @@ abstract class StatsRepository extends DocumentRepository
   }
 
   public function findByRangeGroupByDay($fromDay, $toDay) {
-    sfContext::getInstance()->getLogger()->err(print_r($fromDay, true));
-    sfContext::getInstance()->getLogger()->err(print_r($toDay, true));
+    \sfContext::getInstance()->getLogger()->err(print_r($fromDay, true));
+    \sfContext::getInstance()->getLogger()->err(print_r($toDay, true));
     $query = $this->createQueryBuilder()
               ->field("day")->gte(new MongoDate($fromDay))
               ->field("day")->lte(new MongoDate($toDay))
