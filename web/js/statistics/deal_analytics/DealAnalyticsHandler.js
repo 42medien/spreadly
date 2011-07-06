@@ -9,7 +9,7 @@ var DealAnalytics = {
       AnalyticsTables.initTablesorter("top-pages-table");  
       AnalyticsTables.initTablesorter("top-influencer-table");          
       jQuery('#top-pages-table').tableScroll({height: 200, flush: true});
-      jQuery('#top-influencer-table').tableScroll({height: 200, flush: true});  
+      jQuery('#top-influencer-table').tableScroll({height: 160, flush: true});  
       
       jQuery('.myqtip').qtip({
 //      style: { name: 'cream' },
