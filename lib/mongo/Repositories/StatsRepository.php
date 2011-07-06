@@ -90,6 +90,7 @@ abstract class StatsRepository extends DocumentRepository
     try {
       $cursor = $query->getQuery()
                       ->execute();
+    
     } catch (\Exception $e) {
       \sfContext::getInstance()->getLogger()->err("{StatsRepository} findByRangeGroupByDay failed.\n".$e->getMessage());
     }
@@ -122,7 +123,7 @@ abstract class StatsRepository extends DocumentRepository
       $cursor = $query->getQuery()
                       ->execute();
     } catch (\Exception $e) {
-      \sfContext::getInstance()->getLogger()->err("{StatsRepository} findByRangeGroupByDay failed.\n".$e->getMessage());
+      \sfContext::getInstance()->getLogger()->err("{StatsRepository} findLikesByRangeGroupByDay failed.\n".$e->getMessage());
     }
     return $cursor;
   }
