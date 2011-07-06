@@ -7,8 +7,6 @@ var ActivityChart = {
 	  Highcharts.theme = { colors: [] };// prevent errors in default theme
 	  var lData = <?php echo json_encode($pData); ?>;
 	  var lZoomType = (pChartsettings.zoomtype === undefined)?'':pChartsettings.zoomtype;
-	  debug.log(pChartsettings);
-
 		var lOptions = {
 		    chart: {
 		      renderTo: 'chart_line_activities',
