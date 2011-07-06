@@ -44,7 +44,7 @@
 
 <?php if($pDeal->getState() == 'submitted') { ?>
       <td align="center" class="first"><div><?php echo image_tag('/img/global/24x24/process.png', array('title' => __('Deal submitted')))?></div></td>
-      <td align="left"><div class="padleft"><?php echo $pDeal->getSummary(); ?></div></td>
+      <td align="left"><div class="padleft" title="<?php echo $pDeal->getSummary(); ?>"><?php echo truncate_text($pDeal->getSummary(),20); ?></div></td>
       <td align="left" valign="middle"><div class="padleft"><?php echo $pDeal->getDomainProfile()->getUrl(); ?></div></td>
       <td align="left" valign="middle" colspan="2"><div class="padleft"><?php echo __('Not yet approved by spreadly ...'); ?></div></td>
       <td align="center" valign="middle"><div><?php echo $pDeal->getCouponClaimedQuantity(); ?></div></td>
@@ -60,7 +60,7 @@
 
 <?php if($pDeal->getState() == 'denied') { ?>
       <td align="center" class="first"><?php echo image_tag('/img/global/24x24/warning.png', array('title' => __('Deal denied')))?></td>
-      <td align="left"><div  class="marketbox"><?php echo $pDeal->getSummary(); ?></div></td>
+      <td align="left"><div class="marketbox" title="<?php echo $pDeal->getSummary(); ?>"><?php echo truncate_text($pDeal->getSummary(), 20); ?></div></td>
       <td align="left" valign="middle"><div class="marketbox"><?php echo $pDeal->getDomainProfile()->getUrl(); ?></div></td>
       <td align="left" valign="middle"><div class="marketbox"><?php echo $pDeal->getStartDate(); ?></div></td>
 			<td align="left" valign="middle" title="<?php echo __('Edit end date of deal'); ?>" class="editinplaceclickc" id="deal-date-<?php echo $pDeal->getId(); ?>" data-obj='{"action":"/deals/edit_enddate", "type":"text", "callback":"DealTable.editDate",  "params": "{\"id\":\"<?php echo $pDeal->getId(); ?>\", \"cssid\":\"deal-date-<?php echo $pDeal->getId(); ?>\"}"}'>

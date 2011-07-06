@@ -21,6 +21,7 @@ class deal_analyticsActions extends sfActions
   }
 
   public function executeDeal_statistics(sfWebRequest $request) {
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('deal_analytics/init_deal_analytics.js'));
 		$lDealId = $request->getParameter('deal_id');
 		$this->pDeal = DealTable::getInstance()->find($lDealId);
 		$this->pDomainProfile = $this->pDeal->getDomainProfile();

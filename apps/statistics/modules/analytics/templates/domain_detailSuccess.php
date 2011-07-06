@@ -4,9 +4,9 @@
 		<li class="bc-first"></li>
 		<li class="bc-gradient"><?php echo link_to(__('Dashboard'), 'analytics/index'); ?></li>
 		<li class="bc-seperator"></li>
-		<li class="bc-gradient"><?php echo link_to('Overview for '.$pDomainProfile->getUrl(), 'analytics/domain_statistics?domainid='.$pDomainProfile->getId()); ?></li>
+		<li class="bc-gradient"><?php echo link_to('Overview for'.' '.$pDomainProfile->getUrl(), 'analytics/domain_statistics?domainid='.$pDomainProfile->getId()); ?></li>
 		<li class="bc-seperator"></li>
-		<li class="bc-gradient"><strong><?php echo __('Details for '.$pDomainProfile->getUrl());?></strong></li>
+		<li class="bc-gradient"><strong><?php echo __('Details for'.' '.$pDomainProfile->getUrl());?></strong></li>
 		<li class="bc-last"></li>
 	</ul>
 </div>
