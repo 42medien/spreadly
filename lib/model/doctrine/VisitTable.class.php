@@ -292,8 +292,8 @@ class VisitTable extends Doctrine_Table
 
   public static function countPisForDay($day) {
     $monthGroup = self::groupByMonth($day);
-    if(array_key_exists(0, $monthGroup) && array_key_exists(strval(date('d', $day)), $monthGroup[0]['pis_by_day'])) {
-      return $monthGroup[0]['pis_by_day'][strval(date('d', $day))];
+    if(array_key_exists(0, $monthGroup) && array_key_exists(strval(intval(date('d', $day))), $monthGroup[0]['pis_by_day'])) {
+      return $monthGroup[0]['pis_by_day'][strval(intval(date('d', $day)))];
     } else {
       return 0;
     }
@@ -314,11 +314,12 @@ class VisitTable extends Doctrine_Table
           for(var el in obj.stats) {
             var index = parseInt(el.match(/\d\d/));
             output.pis_by_day[index] = obj.stats[el]['pis'];
+          }
         }
-     }}";
-     
+     }";
+
      $lResult = $lCollection->group($keys, $initial, $reduce, $conds);
-     
+
      return $lResult['retval'];
   }
 }

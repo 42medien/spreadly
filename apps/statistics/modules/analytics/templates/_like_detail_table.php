@@ -59,7 +59,7 @@
       foreach($pUrls as $url){
     ?>
       <tr>
-        <td align="center" valign="middle" class="first"><div><strong class="big-font blue"><?php echo __("%1:00", array("%1" => $url->getHourOfDay())); ?></strong></div></td>
+        <td align="center" valign="middle" class="first"><div><strong class="big-font blue"><?php echo $url->getDate()->format('H:i'); ?></strong></div></td>
         <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $url->getAge() ?></strong></div></td>
         <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo __($url->getGender()) ?></strong></div></td>
         <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo __($url->getRelationship()) ?></strong></div></td>
