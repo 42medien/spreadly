@@ -9,7 +9,7 @@ use_helper('YiidNumber');
 		<li class="bc-first"></li>
 		<li class="bc-gradient"><?php echo link_to(__('Dashboard'), 'analytics/index'); ?></li>
 		<li class="bc-seperator"></li>
-		<li class="bc-gradient"><strong><?php echo __('Overview for "%deal%"', array('%deal%' => truncate_text($pDeal->getSummary(), 60))); ?></strong></li>
+		<li class="bc-gradient"><strong><?php echo __('Overview for "%deal%"', array('%deal%' => truncate_text($pDeal->getSummary(), 50))); ?></strong></li>
 		<li class="bc-last"></li>
 	</ul>
 </div>

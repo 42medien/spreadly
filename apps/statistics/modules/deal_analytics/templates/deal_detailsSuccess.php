@@ -6,9 +6,9 @@
 		<li class="bc-first"></li>
 		<li class="bc-gradient"><?php echo link_to(__('Dashboard'), 'analytics/index'); ?></li>
 		<li class="bc-seperator"></li>
-		<li class="bc-gradient"><strong><?php echo link_to(__('Overview for "%deal%"', array("%deal%" => truncate_text($pDeal->getSummary(), 60))), 'analytics/deals?deal_id='.$pDeal->getId(), array('title' => 'Overview for '.$pDeal->getSummary())); ?></strong></li>
+		<li class="bc-gradient"><strong><?php echo link_to(__('Overview for "%deal%"', array("%deal%" => truncate_text($pDeal->getSummary(), 50))), 'analytics/deals?deal_id='.$pDeal->getId(), array('title' => 'Overview for '.$pDeal->getSummary())); ?></strong></li>
 		<li class="bc-seperator"></li>
-		<li class="bc-gradient"><strong><?php echo __('Details for "%deal%"', array("%deal%" => truncate_text($pDeal->getSummary(), 60), 'title' => 'Overview for '.$pDeal->getSummary()));?></strong></li>
+		<li class="bc-gradient"><strong><?php echo __('Details for "%deal%"', array("%deal%" => truncate_text($pDeal->getSummary(), 50), 'title' => 'Overview for '.$pDeal->getSummary()));?></strong></li>
 		<li class="bc-last"></li>
 	</ul>
 </div>
