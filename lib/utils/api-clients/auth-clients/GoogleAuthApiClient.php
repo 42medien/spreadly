@@ -33,7 +33,7 @@ class GoogleAuthApiClient extends AuthApi {
     $lAuthIdentifier = $lProfileUri;
 
     // ask for online identity
-    $lOnlineIdentity = OnlineIdentityTable::retrieveByAuthIdentifier($lAuthIdentifier);
+    $lOnlineIdentity = OnlineIdentityTable::retrieveByOriginalId($lObject->id);
 
     // check if user already exists
     if ($lOnlineIdentity) {
@@ -86,7 +86,7 @@ class GoogleAuthApiClient extends AuthApi {
     $lAuthIdentifier = $lProfileUri;
 
     // ask for online identity
-    $lOnlineIdentity = OnlineIdentityTable::retrieveByAuthIdentifier($lAuthIdentifier);
+    $lOnlineIdentity = OnlineIdentityTable::retrieveByOriginalId($lObject->id);
 
     // check if user already exists
     if ($lOnlineIdentity) {
