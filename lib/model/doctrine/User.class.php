@@ -110,7 +110,8 @@ class User extends BaseUser {
     $lQuery = Doctrine_Query::create()
       ->from('OnlineIdentity oi')
       ->where('oi.user_id = ?', $this->getId())
-      ->andWhere('oi.photo IS NOT NULL');
+      ->andWhere('oi.photo IS NOT NULL')
+      ->orderBy('oi.updated_at DESC');
 
     if ($lOi = $lQuery->fetchOne()) {
       return $lOi->getPhoto();
