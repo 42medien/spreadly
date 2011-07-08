@@ -4,7 +4,7 @@
           <ul class="clearfix">
             <?php foreach($pIdentities as $lIdentity) {?>
             <li>
-              <input type="checkbox" name="like[oiids][]" class="likecheckbox" value="<?php echo $lIdentity->getId(); ?>" <?php if ($lIdentity->getSocialPublishingEnabled()) { echo 'checked="checked"'; }  ?> /><?php echo image_tag("/img/".$lIdentity->getCommunity()->getCommunity()."-favicon.gif", array("alt" => $lIdentity->getCommunity()->getName(), "title" => $lIdentity->getCommunity()->getName())); ?>
+              <input type="checkbox" name="like[oiids][]" class="likecheckbox" value="<?php echo $lIdentity->getId(); ?>" <?php if ($lIdentity->getSocialPublishingEnabled()) { echo 'checked="checked"'; }  ?> /><?php echo image_tag("/img/".$lIdentity->getCommunity()->getCommunity()."-favicon.gif", array("alt" => $lIdentity->getName(), "title" => $lIdentity->getName())); ?>
             </li>
             <?php } ?>
           </ul>
