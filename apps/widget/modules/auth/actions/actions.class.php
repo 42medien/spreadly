@@ -59,6 +59,8 @@ class authActions extends sfActions {
       $lToken->verifier = $request->getParameter('oauth_verifier');
     } elseif ($lToken = $request->getParameter('code')) {
       // do nothing
+    } elseif ($request->getParameter('error') == "access_denied") {
+      $this->redirect('@signin');
     }
 
     $lObject = AuthApiFactory::factory($request->getParameter('service'));
