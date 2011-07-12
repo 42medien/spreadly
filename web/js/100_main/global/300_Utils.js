@@ -294,7 +294,7 @@ var OnLoadGrafic = {
   },
 
   showGraficByWidth: function(pElement) {
-    debug.log("[OnLoadGrafic][showGraficByElement]");
+    debug.log("[OnLoadGrafic][showGraficByWidth]");
     var lPosition = jQuery(pElement).position();
     var pTop = (pTop)?pTop:0;
     var pLeft = (pLeft)?pLeft:0;
@@ -306,6 +306,7 @@ var OnLoadGrafic = {
   },
 
   showGrafic: function() {
+    debug.log("[OnLoadGrafic][showGrafic]");        
     var lTimeout;
     jQuery('#general-ajax-loader').css({
         top:  OnLoadGrafic.getPageScroll()[1] + (OnLoadGrafic.getPageHeight() / 4),
@@ -318,6 +319,7 @@ var OnLoadGrafic = {
   },
 
   hideGrafic: function() {
+    debug.log("[OnLoadGrafic][hideGrafic]");         
     jQuery('#general-ajax-loader').hide();
   },
 

@@ -598,11 +598,6 @@ Prev
   text-decoration: none;
 }
 
-.popupblock {
-    background: url("../img/pop-upbg.jpg") no-repeat scroll center top transparent;
-    height: 450px;
-}
-
 .service_content h3 span {
     font-weight: bold;
 }
@@ -954,3 +949,55 @@ div.data-tablebox table#top-influencer-table td.first div.infname img {
   overflow-x: hidden;
 }
 
+
+
+/**************************popup***********************/
+
+.popupblock{ 
+  width:541px; 
+  height:435px; 
+  background:url(/img/pop-upbg.jpg) center top no-repeat; 
+  margin:0 auto; 
+  position:relative; 
+  padding: 10px 20px 0 20px;
+}
+
+
+/********************popup-header***********************/
+
+nav{
+  border: 1px solid;
+  border-color: rgb(23,28,26);
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px; 
+  background-color: rgb(23,28,26);  
+  background-color: rgba(23,28,26,0.5);
+}
+
+nav .nav-list{
+}
+
+nav .nav-list li{
+  float: left;
+  line-height: 30px;
+  padding: 0 0 0 5px;
+  position: relative;
+  color: #fff;
+  font-size: 13px;
+}
+
+nav .nav-list li a {
+ color: rgb(255,255,255);
+ color: rgba(255,255,255,1);
+ border-right: 1px solid #fff;
+ padding-right: 5px;
+}
+
+nav .nav-list li.active a{
+  text-decoration: underline;
+}
+
+nav .nav-list li:last-child a {
+  border-right: 0;
+}

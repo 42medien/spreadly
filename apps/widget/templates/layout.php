@@ -7,9 +7,8 @@
     <?php include_metas() ?>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-		<link rel="stylesheet" type="text/css" href="/css/styles.css" media="screen" />
-		<link rel="stylesheet" type="text/css" href="/css/yiid-styles.css" media="screen" />
-		<link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />
+
+		<link rel="stylesheet" type="text/css" href="/css/popup.css" media="screen" />
 		<!--[if IE]>
 		<link rel="stylesheet" type="text/css" href="/css/ie.css" />
 		<![endif]-->
@@ -26,59 +25,47 @@
     <?php } ?>
     <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
     <script type="text/javascript" src="/js/100_main/include/widget-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
+    <script type="text/javascript" src="/js/widget/like/LikeHandler.js"></script>
+
 
     <link rel="shortcut icon" href="/favicon.ico" />
   </head>
   <body class="nobg">
-		<div class="popupblock">
-			<div class="sharepic">
-        <?php echo image_tag("/img/share-pic.png", array("alt"=>"Share", "title"=>"Share", "width"=>"118", "height"=>"135")); ?>
+  	<div class="popupblock">
+  		<header>
+				<nav class="clearfix">
+		      <!--Pop Navigation start -->
+		      <?php if ($sf_user->isAuthenticated() ) { ?>
+		          <ul class="nav-list alignright" role="navigation">
+		            <li><span><?php echo __('Hi'); ?> <?php echo truncate_text($sf_user->getUser()->getUsername(), 10); ?></span></li>
+		            <li><?php echo link_to(__('Logout'), '@signout'); ?></li>
+		          </ul>
+		          <ul class="nav-list" role="navigation">
+		            <li <?php if ($sf_context->getModuleName()=='likes') { echo 'class="active"'; } ?>><?php echo link_to(__('Likes'), '@widget_likes'); ?></li>
+		            <li <?php if ($sf_context->getModuleName()=='deals') { echo 'class="active"'; } ?>><?php echo link_to(__('Deals'), '@widget_deals'); ?></li>
+		            <li id="nav-next-to-last" class="<?php if ($sf_context->getModuleName()=='settings') { echo 'active'; } ?>"><?php echo link_to(__('Settings'), '@widget_settings'); ?></li>
+								<li id="nav-spread" class="<?php if ($sf_context->getModuleName()=='like') { echo ''; } ?>"><?php echo link_to(__('Like it!'), '@widget_like'); ?></li>
+		          </ul>
+		      <?php } ?>
+		      <!-- Pop Navigation end -->
+				</nav>
+			</header>
+			<div id="content-outer" role="main">
+				<header>
+					<h2>Überschrift <span>Explain the stuff</span></h2>
+				</header>
+				<div id="content-inner">
+					<?php echo $sf_content; ?>
+				</div>
 			</div>
-    	<div class="pop-header clearfix">
-    		<a href="#" class="alignleft spreadlogo">
-    		  <?php echo image_tag("/img/spread-logo.png", array("alt"=>"Spread.ly", "title"=>"Spread.ly", "width"=>"211", "height"=>"88")); ?>
-    		</a>
-    		<div class="popup-tagline"><?php echo __("first choice for social sharing"); ?></div>
-  		</div>
 
-      <!--Pop Navigation start -->
-      <?php if ($sf_user->isAuthenticated() ) { ?>
-      <div class="popnav">
-      	<div class="popnavbg clearfix">
-          <ul class="popnavigation alignleft">
-          	<!-- li <?php if($sf_context->getModuleName()=='profile') { echo 'class="active"';} ?>><?php echo link_to(__('Profile'), '@widget_profile'); ?> <span></span></li -->
-            <li <?php if ($sf_context->getModuleName()=='likes') { echo 'class="active"'; } ?>><?php echo link_to(__('Likes'), '@widget_likes'); ?><span></span></li>
-            <li <?php if ($sf_context->getModuleName()=='deals') { echo 'class="active"'; } ?>><?php echo link_to(__('Deals'), '@widget_deals'); ?><span></span></li>
-            <li class="last <?php if ($sf_context->getModuleName()=='settings') { echo 'active'; } ?>"><?php echo link_to(__('Settings'), '@widget_settings'); ?><span></span></li>
-          </ul>
-          <div class="profile-info spread_profile alignright" >
-            <div class="alignleft spread <?php if ($sf_context->getModuleName()=='like') { echo 'active'; } ?>"><?php echo link_to(image_tag("/img/spread-it-label.png"), '@widget_like'); ?><?php if ($sf_context->getModuleName()=='like') { echo '<span></span>'; } ?></div>
-            <span class="alignleft"><img src="<?php echo avatar_path($sf_user->getUser()->getAvatar(), '25'); ?>" width="25" height="25" alt="<?php echo $sf_user->getUser()->getUsername(); ?>" title="<?php echo $sf_user->getUser()->getUsername(); ?>" class="mic-pic" />Hi <?php echo truncate_text($sf_user->getUser()->getUsername(), 10); ?>,</span>
-            <span class="alignleft likebtn"><?php echo image_tag("/img/like-icon.png", array("alt"=>"Like", "title"=>"Like")) ?></span>
-            <span class="comment_label alignleft"><?php echo $sf_user->getUser()->getLikeCount(); ?></span><?php echo link_to(__('Logout'), '@signout');?>
-          </div>
-        </div>
-      </div>
-      <?php } ?>
-      <!-- Pop Navigation end -->
-      <div>
-      	<div class="grboxtop">
-      		<span></span>
-      	</div>
-        <div class="grboxmid">
-        	<div class="grboxmid-content">
-						<!-- start content -->
-								<div class="graybox clearfix">
-	          <?php echo $sf_content; ?>
-                <!-- footer -->
-                <div class="poweredrow">
-                	<?php echo link_to(__("Imprint"), "http://spreadly.com/imprint", array("target" => "_blank")); ?> | <?php echo link_to("Powered by ".image_tag("/img/spread-logosmall.png", array("alt" => "spread.ly icon")), sfConfig::get("app_settings_url"), array("title" => "spread.ly", "target" => "_blank")) ?></div>
-                </div>
-              </div>
-            </div>
-          <div class="grboxbot"><span></span></div>
-        </div>
-    	</div>
+			<footer class="clearfix">
+				<ul>
+					<li><?php echo link_to(__("Imprint"), "http://spreadly.com/imprint", array("target" => "_blank")); ?></li>
+					<li><?php echo link_to("Powered by Spreadly", sfConfig::get("app_settings_url"), array("title" => "spread.ly", "target" => "_blank")) ?></li>
+				</ul>
+			</footer>
+		</div>
     <!--popup block end -->
 		<img id="general-ajax-loader" style="display:none;" src="/img/global/ajax-loader-bar-circle.gif" />
 	  <script  type="text/javascript">

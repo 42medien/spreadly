@@ -1,5 +1,5 @@
 /**
- * @combine widget
+ * @nocombine widget
  */
 
 /**
@@ -111,7 +111,7 @@ var WidgetLikeForm = {
         var lAction = jQuery('#popup-like-form').attr('action');         
         OnLoadGrafic.showGrafic();
         WidgetLikeForm.hideButton();
-        WidgetLikeForm.hideTextarea();
+        //WidgetLikeForm.hideTextarea();
         
         var options = {
           beforeSerialize : WidgetLikeForm.checkComment,
@@ -124,11 +124,12 @@ var WidgetLikeForm = {
           success : function(pResponse) {
             if(pResponse.success == true) {
               WidgetLikeForm.removeButton(); 
-              WidgetLikeForm.removeTextarea(); 
+              //WidgetLikeForm.removeTextarea(); 
+              WidgetLikeForm.removeShares();
               WidgetLikeForm.showSuccessMsg();
             } else {
               WidgetLikeForm.showButton(); 
-              WidgetLikeForm.showTextarea();
+              //WidgetLikeForm.showTextarea();
               WidgetLikeForm.showErrorMsg();
             }
             
@@ -173,20 +174,28 @@ var WidgetLikeForm = {
       jQuery('#popup-send-like-button').show();      
     },
     
+    removeShares: function(){
+      jQuery('#like-oi-list').remove();   
+    },
+    
+    /*
     hideTextarea: function() {
-      jQuery('#area-like-comment').hide();
+      jQuery('#comment-area').hide();
     },
     
     removeTextarea: function() {
-      jQuery('#area-like-comment').remove();      
+      jQuery('#comment-area').remove();      
     },
     
     showTextarea: function() {
-      jQuery('#area-like-comment').show();            
-    },
+      jQuery('#comment-area').show();            
+    },*/
     
     showErrorMsg: function() {
-      jQuery('.comment_box').prepend("<div class='error'>"+i18n.get('like_error_message')+"</div>");      
+      debug.log('[showErrorMsg]');
+      jQuery('#like-response').empty();      
+      jQuery('#like-response').append('<span class="error">'+i18n.get('like_error_message')+"</span>");      
+      
       var lTimeout;
         lTimeout = setTimeout(function() {
           jQuery('.error').hide('slow');
@@ -197,12 +206,21 @@ var WidgetLikeForm = {
     showSuccessMsg: function() {
       debug.log('[showSuccessMsg]');
       
-      jQuery('.comment_box').empty();
-      jQuery('.comment_box').append("<div class='success'>"+i18n.get('like_success_message')+"</div>");      
+      jQuery('#comment-area').empty();
+      jQuery('#comment-area').append('<span class="success">'+i18n.get('like_success_message')+"</span><a href='/' id='close-popup-link'>"+i18n.get('close_popup')+"</a>");
+      WidgetLikeForm.closePopup();
+      /*
       var lTimeout;
         lTimeout = setTimeout(function() {
-          jQuery('.comment_box').hide('slow');
-        }, 5000);
+          jQuery('#comment-area').hide('slow');
+          jQuery('#comment-area').remove();
+        }, 5000);*/
+    },
+    
+    closePopup: function(){
+      jQuery('#close-popup-link').live('click', function() {
+        window.close();
+      });
     }
 };
 

@@ -254,8 +254,9 @@ fieldset { border: 0px solid transparent;  }
 
 
 
-/*New popup css start on 01FEB2010*/
+/*New popup css start on 01FEB2010
 .popupblock{ width:541px; height:435px; background:url(../img/pop-upbg.gif) center top no-repeat; margin:0 auto; position:relative; padding: 0 20px 0 19px;}
+*/
 .pop-header { padding-bottom:6px;}
 .rempvepad{ padding-bottom:0px !important;}
 .spreadlogo{ margin-left:5px; margin-top:9px;}

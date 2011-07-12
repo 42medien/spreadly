@@ -1,0 +1,367 @@
+@charset "utf-8";
+/*--------------------------------------------------------------------------------------------------------
+CSS Styles for <Yiid>.
+
+version:   1.0
+author:    Codingpeople GmbH
+email:     support@codingpeople.com
+website:   http://www.codingpeople.com/
+--------------------------------------------------------------------------------------------------------*/
+/*ebeaea*/
+/* =General
+--------------------------------------------------------------------------------------------------------*/
+
+/* Removing margin/padding */
+*{margin: 0;  padding: 0;}
+ul, li{ list-style:none;}
+
+.clearfix:after {  content: "."; display:block; height:0; clear:both; visibility:hidden; }/* ----- clear fix for floats ----- */
+.clearfix { display:inline-block; }   
+* html .clearfix { height:1%; }/* hides clearfix from IE-mac */
+.clearfix { display:block; }/* end hide from IE-mac */
+
+
+/* class for float  */
+.alignleft { float:left; }
+.alignright { float:right; }
+.alignnone { clear:both; font-size:0px; line-height:0px; height:0px;  }
+
+/* Removing border on linked images */
+a img {border: 0;}
+:focus{ outline:0px;}
+
+.error{color:red;}
+.success{color:green;}
+
+#general-ajax-loader{z-index: 1000000; position: absolute; display:none;}
+
+/* End General
+--------------------------------------------------------------------------------------------------------*/
+ 
+
+/* =Headings
+--------------------------------------------------------------------------------------------------------*/
+h1 { font-weight:normal;} 
+
+/* End Headings
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Links
+--------------------------------------------------------------------------------------------------------*/
+a { text-decoration:none; color: #393D3B; }
+a:hover { text-decoration:underline;  }
+
+ 
+ 
+/* End Links
+--------------------------------------------------------------------------------------------------------*/
+body{ 
+	font-size:12px; 
+	font-family:Arial, Helvetica, sans-serif; 
+	color: #393D3B;
+	margin: 0;
+	padding: 0;
+  background:url(/img/pop-upbg.jpg) center top no-repeat; 
+} 
+ 
+
+
+/**************************popup***********************/
+
+.popupblock{ 
+  width:500px; 
+  height:435px; 
+  margin:0 auto; 
+  position:relative; 
+  padding: 20px 20px 0 20px;
+}
+
+
+/********************popup-header***********************/
+
+nav{
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px; 
+  background-color: rgb(23,28,26);  
+  background-color: rgba(23,28,26,0.6);
+}
+
+nav .nav-list li{
+  float: left;
+  line-height: 30px;
+  padding: 0 0 0 5px;
+  position: relative;
+  font-size: 13px;
+}
+
+nav .nav-list li a,
+nav .nav-list li span{
+ color: rgb(255,255,255);
+ color: rgba(255,255,255,1);
+ border-right: 1px solid #fff;
+ padding-right: 5px;
+}
+
+nav .nav-list li.active a{
+  text-decoration: underline;
+}
+
+nav .nav-list li:last-child a,
+nav .nav-list li#nav-next-to-last a{
+  border-right: 0;
+}
+
+nav .nav-list li#nav-spread{
+  padding-left: 70px;
+}
+
+nav .nav-list li#nav-spread a{
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px; 
+  background-color: rgb(255,255,255);
+  background-color: rgba(255,255,255,1); 
+  color: rgba(23,28,26,0.8); 
+  padding: 3px;
+  font-size: 12px;
+  font-weight: bold;  
+}
+
+nav .nav-list li#nav-spread a:hover{
+  text-decoration:none;
+}
+ 
+/********************popup-content***********************/
+ 
+#content-outer{
+  margin-top: 5px;
+  padding: 5px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px; 
+  background-color: rgb(23,28,26);  
+  background-color: rgba(23,28,26,0.6);  
+  color: #393D3B;
+}
+ 
+#content-outer header{
+ color: rgb(255,255,255);
+ color: rgba(255,255,255,1);
+ padding-bottom: 5px;
+}
+
+#content-outer header h2{
+} 
+ 
+#content-outer header h2 span{
+  font-size: 11px;
+} 
+ 
+#content-inner{
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 1);  
+  -moz-background-clip: padding; 
+  -webkit-background-clip: padding; 
+  background-clip: padding-box;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;   
+}
+ 
+/********************popup-content:form-fields***********************/ 
+ 
+textarea{
+  border: 1px solid #ccc;
+  font-size: 11px;
+  color: #393D3B;
+  font-family:Arial, Helvetica, sans-serif;  
+}
+
+label{
+  font-size: 11px;
+}
+
+ 
+/********************footer***********************/
+footer{
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 6px; 
+  background-color: rgb(23,28,26);  
+  background-color: rgba(23,28,26,0.6);
+  text-align: center;
+  margin-top: 5px;
+}
+ 
+footer ul{
+	width: 200px;
+  margin: 0 auto;
+} 
+ 
+footer ul li{
+  color: #FFFFFF;
+  float: left;
+  font-size: 11px;
+  line-height: 30px;
+  padding: 0 0 0 5px;
+  position: relative;
+}
+
+footer ul li a {
+ color: rgb(255,255,255);
+ color: rgba(255,255,255,1);
+ border-right: 1px solid #fff;
+ padding-right: 5px;
+}
+
+footer ul li.active a{
+  text-decoration: underline;
+}
+
+footer ul li:last-child a {
+  border-right: 0;
+}
+
+ 
+/********************like-content: form-fields***********************/  
+textarea#area-like-comment{
+  width: 100%;
+   height: 45px;
+}  
+
+#popup-like-form section{
+  padding-top: 10px;
+}
+
+#popup-like-form section#comment-area{
+  padding-top:0;
+}
+
+#popup-like-form section#comment-area .success{
+  font-size: 13px;
+  font-weight: bold;
+}
+
+#popup-like-form section#comment-area a#close-popup-link {
+  padding-left: 10px;
+}
+ 
+/********************like-content: scroll images***********************/
+ 
+.area-like-comment-mirror{
+   font-size: 11px;
+    line-height: 12px;
+    min-height: 10px;
+    overflow: hidden;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+#like-select-img{
+  position: relative;
+}
+
+.scrollable {
+    overflow: hidden;
+    position: relative;
+    width: 80px;
+    height: 60px;    
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 1px 2px #BBBBBB;
+    padding: 3px;
+}
+ 
+.scrollable .items {
+    position: absolute;
+    width: 20000em;
+} 
+ 
+.scrollable .items div {
+    float: left;
+}
+ 
+
+.gallery-control {
+    left: 2px;
+    position: absolute;
+    top: 26px;
+    width: 82px;
+} 
+ 
+.slide-back-link {
+    background: url("/img/round_arrow_left.png") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    height: 16px;
+    width: 16px;
+}
+ 
+.slide-next-link {
+    background: url("/img/round_arrow_right.png") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    height: 16px;
+    width: 16px;
+}
+ 
+#like-content{
+  width: 78%;
+  margin-left: 10px;
+}
+ 
+#like-content h4 {
+  color: #393D3B;
+  font-size: 12px;
+  font-weight: bold;
+}
+ 
+#like-content p{
+	color: #393D3B;
+  font-size: 11px; 
+  line-height: 12px;
+  padding-bottom: 5px;
+}
+
+
+/**********************************************/
+section#like-submit{
+  padding-top: 5px;
+}
+ 
+section#like-submit #like-response{
+  height:15px;
+}
+ 
+section#like-submit #like-oi-list{
+  padding-top: 8px;
+}
+ 	 
+section#like-submit #like-oi-list li{
+  padding-right: 10px;
+  float: left;
+}
+ 
+section#like-submit #like-oi-list li img{
+  margin-left: 5px;
+}
+
+section#like-submit #like-oi-list li a{
+  line-height: 20px;
+  font-size: 10px;
+}
+ 
+#popup-send-like-button, #popup-send-deal-button{
+  width: 74px;
+  height: 26px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent url(/img/like-button.jpg) no-repeat center top;
+  text-indent: -1000em;
+  cursor: pointer; /* hand-shaped cursor */
+  cursor: hand; /* for IE 5.x */
+} 
+ 
+ 
