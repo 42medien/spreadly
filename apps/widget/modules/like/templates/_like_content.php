@@ -45,7 +45,7 @@ if ($lImages && count($lImages) > 0) {
 
 <section id="like-submit">
 		<div id="like-response"></div>
-		<span class="alignright btn"><input type="submit" id="popup-send-like-button" class="alignleft" value="" /></span>
+		<span class="alignright btn"><input type="submit" id="popup-send-like-button" class="alignleft <?php if (!$sf_user->isAuthenticated()) { echo "disabled"; } ?>" value="" <?php if (!$sf_user->isAuthenticated()) { echo "disabled='disabled'"; } ?> /></span>
 		<ul class="clearfix" id="like-oi-list">
 	  	<?php foreach($pIdentities as $lIdentity) {?>
 	    	<li>
