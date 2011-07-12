@@ -461,3 +461,23 @@ var WidgetLikeContent = {
     OnLoadGrafic.hideGrafic();
   }
 };
+
+var WidgetAddService = {
+  init:function(){
+    WidgetAddService.bindClick();
+    
+  },
+  
+  bindClick: function() {
+    jQuery('#like-oi-list .add-service-checkbox').live('click', function() {
+      OnLoadGrafic.showGrafic();
+      var lService = jQuery(this).val();
+      WidgetAddService.redirect(lService);
+    });
+  },
+  
+  redirect: function(pService){
+    window.location = '/auth/signinto?service='+pService+'&r=s';
+  }
+    
+};

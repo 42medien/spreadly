@@ -7,3 +7,7 @@ i18n.init({
 });
 WidgetLikeForm.init();
 jQuery(".likecheckbox").custCheckBox();
+
+<?php if(!$sf_user->isAuthenticated()) { ?>
+	WidgetAddService.init();
+<?php } ?>
