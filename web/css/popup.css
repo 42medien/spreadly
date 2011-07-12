@@ -155,9 +155,11 @@ nav .nav-list li#nav-spread a:hover{
 #content-outer header h2{
 }
 
-#content-outer header h2 span{
+#content-outer header h2 span,
+#content-outer header .additional-info{
   font-size: 11px;
 }
+
 
 #content-inner{
   padding: 10px;
@@ -227,10 +229,6 @@ footer ul li:last-child a {
 
 
 /********************like-content: form-fields***********************/
-textarea#area-like-comment{
-  width: 100%;
-   height: 45px;
-}
 
 #popup-like-form section{
   padding-top: 10px;
@@ -238,6 +236,19 @@ textarea#area-like-comment{
 
 #popup-like-form section#comment-area{
   padding-top:0;
+}
+
+#popup-like-form section#comment-area textarea#area-like-comment{
+  width: 100%;
+  height: 45px;
+  background: none repeat scroll 0 0 #FFFFFF;
+  border-radius: 2px 2px 2px 2px;
+  box-shadow: 0 1px 2px #BBBBBB;  
+}
+
+#popup-like-form section#comment-area label{
+  float:right;
+  padding-top: 3px;
 }
 
 #popup-like-form section#comment-area .success{
@@ -254,7 +265,7 @@ textarea#area-like-comment{
 .area-like-comment-mirror{
    font-size: 11px;
     line-height: 12px;
-    min-height: 10px;
+    min-height: 12px;
     overflow: hidden;
     padding-bottom: 5px;
     width: 100%;
@@ -367,3 +378,37 @@ section#like-submit #like-oi-list li a{
 #popup-send-like-button.disabled, #popup-send-deal-button.disabled {
   background: transparent url(/img/like-button-disabled.jpg) no-repeat center top;
 }
+
+/********************old stuff**********************/
+
+#signin-head .signin-title {
+    color: #000000;
+    font-size: 21px;
+    font-weight: normal;
+    padding-left: 4px;
+    padding-top: 20px;
+}
+
+#signin-head .signin-title em {
+    font-size: 12px;
+    font-style: normal;
+}
+
+ul#logos_big {margin: 95px 0 40px; text-align: center;}
+#logos_big li{text-align:center; display: inline;  margin-right: 30px;}
+
+#logos_big li#twitter_area{margin-right: 20px;}
+#logos_big li#linkedin_area{margin-right: 20px;}
+
+
+#logos_big li a{padding-top: 60px;}
+#buzz_logo{padding-left:14px;padding-right:14px;}
+#facebook_logo{padding-left:1px;padding-right:1px;}
+#twitter_logo{padding-left:8px;padding-right:9px;}
+#linkedin_logo{padding-left:8px;padding-right:8px;}
+
+#google_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 9px -571px;}
+#facebook_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 5px -782px;}
+#twitter_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -1001px;}
+#further_logos{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -1269px;}
+#linkedin_logo{background: url("/img/sprites/sprite_popup.png") no-repeat -450px -1194px;}

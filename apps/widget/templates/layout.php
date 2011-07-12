@@ -62,7 +62,9 @@
 			</header>
 			<div id="content-outer" role="main">
 				<header>
-					<h2>Überschrift <span>Explain the stuff</span></h2>
+					<?php if (has_slot('headline')) { ?>
+						<?php include_slot('headline'); ?>
+					<?php } ?>
 				</header>
 				<div id="content-inner">
 					<?php echo $sf_content; ?>
