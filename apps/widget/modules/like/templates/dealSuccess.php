@@ -31,9 +31,15 @@
 	</section>
 	<section id="like-submit" class="clearfix">
   <?php //echo __('Please check your selected services to share and accept the TOS'); ?>
-		<span class="alignright btn" id="popup-send-deal-box"><input type="submit" id="popup-send-deal-button" value="" /></span>
+  <?php
+    $disabled = false;
+    if (!$sf_user->checkDealCredentials() || !$sf_user->isAuthenticated()) {
+      $disabled = true;
+    }
+  ?>
+		<span class="alignright btn <?php if ($disabled) { echo "disabled"; } ?>" id="popup-send-deal-button"><input type="submit" id="popup-send-deal-button" value="" <?php if ($disabled) { echo "disabled='disabled'"; } ?> /></span>
 		<ul class="clearfix" id="like-oi-list">
-		<?php if ($sf_user->isAuthenticated() ) { ?>
+		<?php if ($sf_user->checkDealCredentials() && count($pIdentities) > 0) { ?>
 	  	<?php foreach($pIdentities as $lIdentity) {?>
 	    	<li>
 					<input type="checkbox" name="like[oiids][]" value="<?php echo $lIdentity->getId(); ?>" <?php if ($lIdentity->getSocialPublishingEnabled()) { echo 'checked="checked"'; }  ?> /><?php echo image_tag("/img/".$lIdentity->getCommunity()->getCommunity()."-favicon.gif", array("alt" => $lIdentity->getName(), "title" => $lIdentity->getName())); ?>
@@ -41,11 +47,13 @@
 	  	<?php } ?>
 	  		<li><?php echo link_to(__('(add accounts)'), 'settings/index'); ?></li>
 	  <?php } else { ?>
-	  	<li><input class="add-service-checkbox" type="checkbox" name="twitter" value="twitter" /><?php echo link_to(image_tag("/img/twitter-favicon.gif", array("alt" => 'Twitter', "title" => 'Twitter')), "@signinto?service=twitter&r=s"); ?></li>
-	  	<li><input class="add-service-checkbox" type="checkbox" name="facebook" value="facebook" /><?php echo link_to(image_tag("/img/facebook-favicon.gif", array("alt" => 'facebook', "title" => 'facebook')), "@signinto?service=facebook&r=s"); ?></li>
-	  	<li><input class="add-service-checkbox" type="checkbox" name="linkedin" value="linkedin" /><?php echo link_to(image_tag("/img/linkedin-favicon.gif", array("alt" => 'Linkedin', "title" => 'Linkedin')), "@signinto?service=linkedin&r=s"); ?></li>
-	  	<li><input class="add-service-checkbox" type="checkbox" name="google" value="google" /><?php echo link_to(image_tag("/img/google-favicon.gif", array("alt" => 'google', "title" => 'google')), "@signinto?service=google&r=s"); ?></li>
-	  <?php } ?>
+      <li><input class="add-service-checkbox" type="checkbox" name="facebook" value="facebook" /><?php echo link_to(image_tag("/img/facebook-favicon.gif", array("alt" => 'facebook', "title" => 'facebook')), "@signinto?service=facebook&r=s"); ?></li>
+      <?php if ($sf_user->checkDealCredentials() == true) { ?>
+      <li><input class="add-service-checkbox" type="checkbox" name="twitter" value="twitter" /><?php echo link_to(image_tag("/img/twitter-favicon.gif", array("alt" => 'Twitter', "title" => 'Twitter')), "@signinto?service=twitter&r=s"); ?></li>
+      <li><input class="add-service-checkbox" type="checkbox" name="linkedin" value="linkedin" /><?php echo link_to(image_tag("/img/linkedin-favicon.gif", array("alt" => 'Linkedin', "title" => 'Linkedin')), "@signinto?service=linkedin&r=s"); ?></li>
+      <li><input class="add-service-checkbox" type="checkbox" name="google" value="google" /><?php echo link_to(image_tag("/img/google-favicon.gif", array("alt" => 'google', "title" => 'google')), "@signinto?service=google&r=s"); ?></li>
+      <?php } ?>
+    <?php } ?>
 		</ul>
 </section>
 
