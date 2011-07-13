@@ -42,13 +42,12 @@ var WidgetDealForm = {
           dataType : 'json',
           success : function(pResponse) {
             if(pResponse.success == true) {
-              debug.log(pResponse.html);
               jQuery('#coupon-unused-container').empty();
               jQuery('#coupon-unused-container').append(pResponse.html);
-
+              jQuery('#content-outer header h2').empty().append(i18n.get('deal_success_headline'));
             } else {
               WidgetDealForm.showButton();
-              WidgetDealForm.showErrorMsg();
+              WidgetDealForm.showErrorMsg(pResponse.message);
             }
             OnLoadGrafic.hideGrafic();
           }
@@ -67,12 +66,19 @@ var WidgetDealForm = {
       jQuery('#popup-send-deal-box').show();
     },
 
-    showErrorMsg: function() {
+    showErrorMsg: function(pMsg) {
       debug.log('[showErrorMsg]');
-      jQuery('.error').show();
+      jQuery('#like-response').empty();
+      if(pMsg == undefined){
+        pMsg = i18n.get('deal_error_message');
+      }
+      
+      jQuery('#like-response').append('<span class="error">'+pMsg+"</span>");
+
       var lTimeout;
         lTimeout = setTimeout(function() {
-          jQuery('.error').hide();
+          jQuery('.error').hide('slow');
+          jQuery('.error').remove();
         }, 3000);
     }
 };

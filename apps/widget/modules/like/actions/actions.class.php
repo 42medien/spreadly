@@ -155,4 +155,9 @@ class likeActions extends sfActions {
 
     return $this->renderText(json_encode($lReturn));
   }
+
+  public function executeTest(sfWebRequest $request){
+    $dm = MongoManager::getDM();
+		$this->pActivity = $dm->getRepository("Documents\YiidActivity")->findOneBy(array("d_id" => intval(8), "u_id" => intval($this->getUser()->getId())));
+  }
 }

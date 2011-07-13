@@ -408,13 +408,30 @@ section#like-submit #like-oi-list li a{
 
 #tos-area{
   margin-top: 5px;
-  padding-bottom: 15px;
+  padding-bottom: 10px;
 }
 #tos-area label{
   display: block;
-  margin-left: 5px;
+  width: 96%;
+  text-align: right;
 }
 
+#tos-area input{
+  margin-left: 3px;
+}
+
+#tos-area a{
+  text-decoration: underline;
+}
+
+#coupon-text{
+  width: 83%;
+}
+
+.coupon-code{
+  font-size: 14px;
+  font-weight: bold;
+}
 
 
 /*****************like-list************************/

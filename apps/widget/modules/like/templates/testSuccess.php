@@ -1,10 +1,13 @@
 <?php use_helper("Date", "YiidUrl"); ?>
 <?php $lDeal = $pActivity->getDeal();?>
+<?php slot('headline') ?>
+	<h2><?php echo __('Congratulation'); ?></h2>
+<?php end_slot(); ?>
 
 		<?php if($lDeal->getCouponType() != 'html') { ?>
 			<div class="coupon clearfix">
 				<?php echo image_tag($lDeal->getImageUrl(), array('class' => 'alignleft deal-coupon-img')); ?>
-				<div class="alignleft" id="coupon-text">
+				<div class="alignleft">
 					<h4><?php echo $lDeal->getSummary(); ?><?php //echo __('Empfehlen Sie "%link%" und erhalten Sie ...', array('%link%' => link_to($lDeal->getSummary(), '/'))); ?></h4>
 	    		<p><?php echo $lDeal->getDescription(); ?></p>
 	    		<p>
@@ -26,12 +29,24 @@
 					<?php echo __('You can redeem it on'); ?> <a target="_blank" href="<?php echo url_for($lDeal->getRedeemUrl()); ?>"><?php echo $lDeal->getRedeemUrl(); ?></a>
     		</span>
 			</div>
+
+
+
+
+
+
+
+
+
+
 		<?php } else { ?>
-			<div class="coupon clearfix">
-				<?php echo image_tag($lDeal->getImageUrl(), array('class' => 'alignleft deal-coupon-img')); ?>
-				<div class="alignleft" id="coupon-text">
+			<div class="graybox clearfix">
+	    	<div class="clearfix spactsbox" id="coupon-head-summary">
+	      	<h2><?php echo __('Gratulation'); ?></h2>
+	     	</div>
+		    <div class="dotborboxsmall dotborboxmore txtcenter" id="dotboxtextdeal">
 					<?php echo $pActivity->getCCode(); ?>
-				</div>
+		    </div>
 			</div>
 		<?php } ?>
 	</div>

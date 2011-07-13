@@ -1,35 +1,36 @@
-<?php use_helper("Date"); ?>
+<?php use_helper("Date", 'Text', 'YiidUrl', 'YiidNumber'); ?>
 
 <?php //include_partial('like/coupon_unused', array('pDeal' => $pActiveDeal, 'pUrl' => $pUrl, 'pTags' => $pTags)); ?>
-
-<?php use_helper('Text', 'YiidUrl', 'YiidNumber'); ?>
 <?php slot('headline') ?>
 	<h2><?php echo __('Click "Like" and get ...'); ?></h2>
 <?php end_slot(); ?>
-
+<div id="coupon-unused-container">
 <form action="<?php echo url_for('@save_like'); ?> " name="popupdealform" id="popupdealform" method="post">
 	<input type="hidden" name="like[url]" value="<?php echo $pUrl; ?>" />
   <input type="hidden" name="like[tags]" value="<?php echo $pTags; ?>" />
 
 	<div class="coupon clearfix">
 	  <?php echo image_tag($pActiveDeal->getImageUrl(), array('class' => 'alignleft deal-coupon-img')); ?>
-	  <h3><?php echo $pActiveDeal->getSummary(); ?></h3>
-		<p><?php echo $pActiveDeal->getDescription(); ?></p>
-		<p class="add-info">
-			<?php if($pActiveDeal->getCouponType() != 'html') { ?>
-				<?php if ($pActiveDeal->isUnlimited()) {
-		    	echo __("%1 Claimed Deals", array("%1" => $pActiveDeal->getCouponClaimedQuantity()));
-				} else {
-		    	echo __("%1/%2 Deals left", array("%1" => $pActiveDeal->getCouponQuantity() - $pActiveDeal->getCouponClaimedQuantity(), "%2" => $pActiveDeal->getCouponQuantity()));
-		    } ?>
-		  <?php } ?>
-		</p>
+		<div class="alignleft" id="coupon-text">
+		  <h3><?php echo $pActiveDeal->getSummary(); ?></h3>
+			<p><?php echo $pActiveDeal->getDescription(); ?></p>
+			<p class="add-info">
+				<?php if($pActiveDeal->getCouponType() != 'html') { ?>
+					<?php if ($pActiveDeal->isUnlimited()) {
+			    	echo __("%1 Claimed Deals", array("%1" => $pActiveDeal->getCouponClaimedQuantity()));
+					} else {
+			    	echo __("%1/%2 Deals left", array("%1" => $pActiveDeal->getCouponQuantity() - $pActiveDeal->getCouponClaimedQuantity(), "%2" => $pActiveDeal->getCouponQuantity()));
+			    } ?>
+			  <?php } ?>
+			</p>
+		</div>
 	</div>
 	<section id="tos-area" class="clearfix">
-		<label for="like[tos]" class="alignright"><?php echo __("I accept the %1.", array("%1" => link_to(__("Terms of Services"), $pActiveDeal->getTermsOfDeal(), array("target" => "_blank")))); ?>&nbsp;<?php echo $pActiveDeal->getAdditionalTos(); ?></label>
 		<input type="checkbox" name="like[tos]" class="alignright" />
+		<label for="like[tos]"><?php echo __("I accept the %1.", array("%1" => link_to(__("Terms of Services"), $pActiveDeal->getTermsOfDeal(), array("target" => "_blank")))); ?>&nbsp;<?php echo $pActiveDeal->getAdditionalTos(); ?></label>
 	</section>
 	<section id="like-submit" class="clearfix">
+	<div id="like-response"></div>
   <?php //echo __('Please check your selected services to share and accept the TOS'); ?>
   <?php
     $disabled = false;
@@ -37,7 +38,7 @@
       $disabled = true;
     }
   ?>
-		<span class="alignright btn <?php if ($disabled) { echo "disabled"; } ?>" id="popup-send-deal-button"><input type="submit" id="popup-send-deal-button" value="" <?php if ($disabled) { echo "disabled='disabled'"; } ?> /></span>
+		<span class="alignright btn <?php if ($disabled) { echo "disabled"; } ?>" id="popup-send-deal-box"><input type="submit" id="popup-send-deal-button" value="" <?php if ($disabled) { echo "disabled='disabled'"; } ?> /></span>
 		<ul class="clearfix" id="like-oi-list">
 		<?php if ($sf_user->checkDealCredentials() && count($pIdentities) > 0) { ?>
 	  	<?php foreach($pIdentities as $lIdentity) {?>
@@ -58,3 +59,4 @@
 </section>
 
 </form>
+</div>
