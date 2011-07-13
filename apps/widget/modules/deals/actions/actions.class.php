@@ -19,7 +19,7 @@ class dealsActions extends sfActions
     $dm = MongoManager::getDM();
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('deals/js_init_deals.js'));
     //$this->forward('default', 'module');
-    $this->pActiveFormerlyKnownAsYiidActivitiesOfActiveDealForUser = $dm->getRepository('Documents\YiidActivity')->findBy(array("u_id" => intval($this->getUser()->getId()), 'd_id' => array('$exists' => true)));
+    $this->pActivity = $dm->getRepository('Documents\YiidActivity')->findBy(array("u_id" => intval($this->getUser()->getId()), 'd_id' => array('$exists' => true)));
 
     $this->setLayout('layout');
   }

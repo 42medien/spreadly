@@ -433,6 +433,10 @@ section#like-submit #like-oi-list li a{
   font-weight: bold;
 }
 
+.coupon-code a{
+  font-size: 12px;
+}
+
 
 /*****************like-list************************/
 
@@ -449,7 +453,26 @@ section#like-submit #like-oi-list li a{
 .commentbox p a{ color:#375d81; font-size: 11px;}
 .commentlist dl { overflow: scroll; overflow-y: auto; overflow-x: hidden; height: 200px; }
 
+/****************deal-list**************************/
+#deallist { overflow: scroll; overflow-y: auto; overflow-x: hidden; height: 200px;  width: 472px;}
 
+#deallist .coupon{
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #F1F1F1;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0 1px 2px #BBBBBB;
+    margin-bottom: 12px;
+    width: 425px;
+    position: relative;
+}
+
+#deallist .coupon #coupon-text{
+  width: 81%;
+}
+
+#deallist .coupon #coupon-text a{
+  text-decoration: underline;	
+}
 
 /********************old stuff**********************/
 
