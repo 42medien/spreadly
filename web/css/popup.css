@@ -243,7 +243,7 @@ footer ul li:last-child a {
   height: 45px;
   background: none repeat scroll 0 0 #FFFFFF;
   border-radius: 2px 2px 2px 2px;
-  box-shadow: 0 1px 2px #BBBBBB;  
+  box-shadow: 0 1px 2px #BBBBBB;
 }
 
 #popup-like-form section#comment-area label{
@@ -384,7 +384,7 @@ section#like-submit #like-oi-list li a{
 
 .coupon{
   border-radius: 2px 2px 2px 2px;
-  box-shadow: 0 1px 2px #BBBBBB;  
+  box-shadow: 0 1px 2px #BBBBBB;
   padding: 10px;
 }
 
@@ -403,7 +403,7 @@ section#like-submit #like-oi-list li a{
     width: 65px;
     border-radius: 3px 3px 3px 3px;
     box-shadow: 0 1px 2px #BBBBBB;
-    padding: 0;    
+    padding: 0;
 }
 
 #tos-area{
@@ -419,13 +419,13 @@ section#like-submit #like-oi-list li a{
 
 /*****************like-list************************/
 
-.commentlist dd{ 
-  width:443px; 
-  margin-bottom:12px; 
+.commentlist dd{
+  width:443px;
+  margin-bottom:12px;
   background: none repeat scroll 0 0 #FFFFFF;
   border: 1px solid #f1f1f1;
-  box-shadow: 0 1px 2px #BBBBBB;  
-  border-radius: 2px 2px 2px 2px;  
+  box-shadow: 0 1px 2px #BBBBBB;
+  border-radius: 2px 2px 2px 2px;
 }
 .commentbox{ padding: 10px 10px 10px 10px; font-size:11px;}
 .commentbox p {font-size: 12px;}
