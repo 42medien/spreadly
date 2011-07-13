@@ -142,7 +142,7 @@ class myUser extends sfBasicSecurityUser {
     }
 
     // check url param
-    $url = sfContext::getInstance()->getRequest()->getParameter("url", $url);
+    $url = trim(urldecode(sfContext::getInstance()->getRequest()->getParameter("url", $url)));
     $tags = sfContext::getInstance()->getRequest()->getParameter("tags", $tags);
 
     if (!$url) {
