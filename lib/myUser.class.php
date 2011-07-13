@@ -145,6 +145,10 @@ class myUser extends sfBasicSecurityUser {
     $url = sfContext::getInstance()->getRequest()->getParameter("url", $url);
     $tags = sfContext::getInstance()->getRequest()->getParameter("tags", $tags);
 
+    if (!$url) {
+      return true;
+    }
+
     if ($user) {
       // if there is an url and a user
       if ($url && $deal = DealTable::getActiveDealByHostAndUserId($url, $user->getId(), $tags)) {
