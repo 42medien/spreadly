@@ -129,10 +129,6 @@ class myUser extends sfBasicSecurityUser {
    * @return boolean
    */
   public function checkDealCredentials() {
-    if (!$this->isAuthenticated()) {
-      return false;
-    }
-
     $user = $this->getUser();
 
     // initialize
