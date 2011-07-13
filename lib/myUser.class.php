@@ -145,8 +145,6 @@ class myUser extends sfBasicSecurityUser {
     $url = trim(urldecode(sfContext::getInstance()->getRequest()->getParameter("url", $url)));
     $tags = sfContext::getInstance()->getRequest()->getParameter("tags", $tags);
 
-    sfContext::getInstance()->getLogger()->err(print_r($url, true));
-
     if (!$url) {
       return true;
     }
