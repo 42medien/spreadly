@@ -1,6 +1,8 @@
-<?php include_component('profile', 'profile_info'); ?>
+<?php use_helper('Text', 'YiidUrl', 'YiidNumber'); ?>
+<?php slot('headline') ?>
+	<h2><?php echo __('Your likes'); ?> <span><?php echo __('List of your likes till yet'); ?></span></h2>
+<?php end_slot(); ?>
 
-<div class="wht-contentbox clearfix">
   <div class="commentlist">
     <?php if ($pActivities) { ?>
     <dl class="clearfix">
@@ -14,4 +16,3 @@
       <p><?php echo __("no likes yet"); ?>
     <?php } ?>
   </div>
-</div>
