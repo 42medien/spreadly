@@ -175,11 +175,23 @@ nav .nav-list li#nav-spread a:hover{
 
 /********************popup-content:form-fields***********************/
 
-textarea{
-  border: 1px solid #ccc;
-  font-size: 11px;
+input, textarea {
+  padding: 10px;
+  border: solid 1px #E5E5E5;
+  outline: 0;
   color: #393D3B;
-  font-family:Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
+  background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
+  box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+  -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+  -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+}
+
+input:hover, textarea:hover,
+input:focus, textarea:focus {
+  border-color: #C9C9C9;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
 }
 
 label{
@@ -239,11 +251,8 @@ footer ul li:last-child a {
 }
 
 #popup-like-form section#comment-area textarea#area-like-comment{
-  width: 100%;
+  width: 95%;
   height: 45px;
-  background: none repeat scroll 0 0 #FFFFFF;
-  border-radius: 2px 2px 2px 2px;
-  box-shadow: 0 1px 2px #BBBBBB;
 }
 
 #popup-like-form section#comment-area label{
@@ -471,7 +480,7 @@ section#like-submit #like-oi-list li a{
 }
 
 #deallist .coupon #coupon-text a{
-  text-decoration: underline;	
+  text-decoration: underline;
 }
 
 /********************old stuff**********************/
@@ -508,3 +517,8 @@ ul#logos_big {margin: 95px 0 40px; text-align: center;}
 #further_logos{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -1269px;}
 #linkedin_logo{background: url("/img/sprites/sprite_popup.png") no-repeat -450px -1194px;}
 
+/********************no-url**********************/
+#man-url-input {
+	width: 95%;
+
+}
