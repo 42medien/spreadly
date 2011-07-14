@@ -9,7 +9,7 @@ if ($lImages && count($lImages) > 0) {
 ?>
 
 <section id="comment-area" class="clearfix">
-	<textarea id="area-like-comment" class="mirror-value" name="like[comment]"><?php echo __("add your comment (optional) ..."); ?></textarea>
+	<textarea id="area-like-comment" class="mirror-value gradient shadow" name="like[comment]"><?php echo __("add your comment (optional) ..."); ?></textarea>
 	<label class="clearfix" for="like[comment]"><?php echo __('Feel free to add some hashtags, for example: #like'); ?></label>
 </section>
 
