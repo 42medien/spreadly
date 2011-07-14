@@ -10,16 +10,18 @@ var ShareDefaultSettings = {
         document.like_settings_form.reset();
       }  
     },
-
-    toggleService: function() {
+    
+    updateSettings: function() {
       debug.log('[ShareDefaultSettings][addService]'); 
-      OnLoadGrafic.showGrafic();
+        jQuery('#update-settings-list .update-settings-cb').live('click', function() {
+        OnLoadGrafic.showGrafic();      
         var lState = 'on', lOiId;
-        lOiId = jQuery(this).siblings('.checkbox').attr('value');
+        lOiId = jQuery(this).attr('value');  
         
-        if(jQuery(this).hasClass('cust_checkbox_off')) {
+        if(jQuery(this).attr('checked') == false) {
           lState = 'off';
-        }
+        }        
+          
         var lAction = '/settings/update';
         var lData = {
           ei_kcuf : new Date().getTime(),
@@ -36,6 +38,7 @@ var ShareDefaultSettings = {
           success : function(pResponse) {
             OnLoadGrafic.hideGrafic();
           }
-        });        
-    }
+        });  
+      });        
+    }    
 };

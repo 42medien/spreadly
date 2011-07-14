@@ -6,7 +6,6 @@ i18n.init({
 	"close_popup": "<?php echo __("(Close window)");?>",
 });
 WidgetLikeForm.init();
-jQuery(".likecheckbox").custCheckBox();
 
 <?php if(!$sf_user->isAuthenticated()) { ?>
 	WidgetAddService.init();

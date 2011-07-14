@@ -65,7 +65,7 @@
 						<?php include_slot('headline'); ?>
 					<?php } ?>
 				</header>
-				<div id="content-inner">
+				<div id="content-inner" class="clearfix">
 					<?php echo $sf_content; ?>
 				</div>
 			</div>

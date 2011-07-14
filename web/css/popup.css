@@ -77,6 +77,25 @@ body{
   padding: 20px 20px 0 20px;
 }
 
+.shadow-box{
+  border-radius: 2px 2px 2px 2px;
+  box-shadow: 0 1px 2px #BBBBBB;
+  padding: 10px;
+}
+
+.padding-box{
+  padding: 10px;
+}
+
+.shadow{
+  border-radius: 2px 2px 2px 2px;
+  box-shadow: 0 1px 2px #BBBBBB;
+}
+
+.small-text, label{
+  font-size: 10px;
+}
+
 
 /********************popup-header***********************/
 
@@ -309,7 +328,7 @@ footer ul li:last-child a {
     left: 2px;
     position: absolute;
     top: 26px;
-    width: 82px;
+    width: 77px;
 }
 
 .slide-back-link {
@@ -390,12 +409,6 @@ section#like-submit #like-oi-list li a{
 
 
 /*******************coupon unused*******************/
-
-.coupon{
-  border-radius: 2px 2px 2px 2px;
-  box-shadow: 0 1px 2px #BBBBBB;
-  padding: 10px;
-}
 
 .coupon h3{
   line-height: 24px;
@@ -483,7 +496,46 @@ section#like-submit #like-oi-list li a{
   text-decoration: underline;
 }
 
-/********************old stuff**********************/
+/***********************settings**************************/
+
+#profile-info #profile-img{
+  margin-right: 10px;
+}
+
+.totalfriend{ background:url(../img/friends-bg.png) left top no-repeat; width:57px; height:43px; color:#555555; padding-top:7px; margin-top:-1px; }
+.totalfriend span{ font-size:14px; font-weight:bold; text-shadow:#ffffff 1px 1px 0px;}
+.friends-box{ width:57px; font-size:11px; text-align:center; padding-left:3px; margin-top:-1px;}
+
+#update-networks-box{
+  margin-top: 10px;
+}
+
+.network-name{
+  margin-left: 5px;
+}
+
+#update-settings-list{
+  margin-top: 10px;
+}
+
+#update-settings-list li{
+  padding-bottom: 5px;
+}
+
+.update-settings-cb{
+  margin: 1px 5px 0px 0px;
+}
+
+.show-profile-link{
+  line-height:18px;
+}
+
+
+#add-accounts-box{
+  height: 20px;
+}
+
+/********************sign-up**********************/
 
 #signin-head .signin-title {
     color: #000000;
