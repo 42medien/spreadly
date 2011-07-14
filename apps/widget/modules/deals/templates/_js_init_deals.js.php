@@ -1,2 +1,2 @@
-DealsFilterList.init();
-jQuery("input[type='radio'],input[type='checkbox']").custCheckBox();
+//DealsFilterList.init();
+//jQuery("input[type='radio'],input[type='checkbox']").custCheckBox();
