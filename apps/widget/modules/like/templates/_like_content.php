@@ -8,16 +8,16 @@ if ($lImages && count($lImages) > 0) {
 }
 ?>
 
-<section id="comment-area" class="clearfix">
-	<textarea id="area-like-comment" class="mirror-value gradient shadow" name="like[comment]"><?php echo __("add your comment (optional) ..."); ?></textarea>
-	<label class="clearfix" for="like[comment]"><?php echo __('Feel free to add some hashtags, for example: #like'); ?></label>
-</section>
+<div id="comment-area" class="clearfix">
+	<textarea id="area-like-comment" class="mirror-value bordered gradient shadow-wide" name="like[comment]"><?php echo __("add your comment (optional) ..."); ?></textarea>
+	<label for="like[comment]" class="alignright"><?php echo __('Feel free to add some hashtags, for example: #like'); ?></label>
+</div>
 
 
-<section class="clearfix">
+<div class="clearfix">
 	<p class="area-like-comment-mirror"></p>
 	<div id="like-select-img" class="alignleft">
-		<div class="scrollable" id="myscroll">
+		<div class="scrollable bordered-light shadow-light" id="myscroll">
 	  	<!-- root element for the items -->
 	    <div class="items alignleft" id="scroll-meta-images">
 	    	<?php include_partial('like/meta_images_list', array('pImages' => $lImages)); ?>
@@ -41,9 +41,9 @@ if ($lImages && count($lImages) > 0) {
 	  	<?php echo truncate_text($pYiidMeta->getUrl(), 50); ?>
 	  </p>
 	</div>
-</section>
+</div>
 
-<section id="like-submit">
+<div id="like-submit">
 		<div id="like-response"></div>
 		<span class="alignright btn"><input type="submit" id="popup-send-like-button" class="alignleft <?php if (!$sf_user->isAuthenticated()) { echo "disabled"; } ?>" value="" <?php if (!$sf_user->isAuthenticated()) { echo "disabled='disabled'"; } ?> /></span>
 		<ul class="clearfix" id="like-oi-list">
@@ -61,7 +61,7 @@ if ($lImages && count($lImages) > 0) {
 	  	<li><input class="add-service-checkbox" type="checkbox" name="google" value="google" /><?php echo link_to(image_tag("/img/google-favicon.gif", array("alt" => 'google', "title" => 'google')), "@signinto?service=google&r=s"); ?></li>
 	  <?php } ?>
 		</ul>
-</section>
+</div>
 
 <input type="hidden" name="like[thumb]" id="like-img-value" value="<?php echo $lImage; ?>" />
 <input type="hidden" name="like[title]" value="<?php echo htmlspecialchars($pYiidMeta->getTitle()); ?>" />

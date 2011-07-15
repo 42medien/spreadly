@@ -1,5 +1,5 @@
 <?php use_helper("Date"); ?>
-<dd class="shadow-middle">
+<dd class="shadow-light bordered-light">
   <div class="commentbox clearfix">
     <?php echo __("%1 ago", array("%1" => time_ago_in_words($pActivity->getC()))); ?>
     <p>
