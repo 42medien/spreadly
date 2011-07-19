@@ -145,7 +145,7 @@ class likeActions extends sfActions {
 	      $lReturn['success'] = false;
 	      $lReturn['msg'] = _('Wrong Url');
 	    } else {
-	      $this->getUser()->setAttribute("redirect_after_login", sfConfig::get("app_settings_widgets_url")."/?url=".urlencode($lUrl), "widget");
+	      //$this->getUser()->setAttribute("redirect_after_login", sfConfig::get("app_settings_widgets_url")."/?url=".urlencode($lUrl), "widget");
 	      $lReturn['success'] = true;
 	    	$lReturn['html'] = $this->getPartial('like/like_content', array('pYiidMeta' => $lYiidMeta, "pIdentities" => OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId())));
 	    	$lReturn['imgcount'] = count($this->pYiidMeta->getImages());

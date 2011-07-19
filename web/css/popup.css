@@ -70,10 +70,10 @@ input, textarea {
   font-size: 11px;
 }
 
-input:hover, textarea:hover,
-input:focus, textarea:focus {
+textarea:hover, textarea:focus {
   border-color: #C9C9C9;
   -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;  
 }
 
 /**************************popup***********************/
@@ -288,6 +288,11 @@ footer ul li:last-child a {
 
 #popup-like-form div#comment-area a#close-popup-link {
   padding-left: 10px;
+}
+
+/********************like-content: no-url***********************/
+#nourl-label{
+  margin-bottom: 20px;
 }
 
 /********************like-content: scroll images***********************/

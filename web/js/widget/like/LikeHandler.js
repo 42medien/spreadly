@@ -1,5 +1,5 @@
 /**
- * @nocombine widget
+ * @combine widget
  */
 
 /**
@@ -259,6 +259,7 @@ var LikeImage = {
      */
     get: function(pUrl) {
       debug.log("[LikeImage][get]");
+      debug.log(jQuery("#myscroll"));
       OnLoadGrafic.insertGraficToElem(jQuery('#myscroll'));
       var lAction = '/like/get_images';
       var lData = {
@@ -429,7 +430,9 @@ var WidgetLikeContent = {
   aIsContent: false,
 
   get: function(){
+    debug.log('[WidgetLikeContent][get]');
     OnLoadGrafic.showGrafic();
+    jQuery('#man-url-content').empty();    
     jQuery.ajax({
       //beforeSubmit : OnLoadGrafic.showGrafic,
       type :     "GET",
@@ -442,28 +445,31 @@ var WidgetLikeContent = {
       success : function(pResponse) {
         if(pResponse.success == true) {
           WidgetLikeContent.show(pResponse.html);
-          WidgetLikeContent.aIsContent = true;
+          //WidgetLikeContent.aIsContent = true;
           LikeImage.init(pResponse.imgcount, pResponse.url);
           WidgetLikeForm.init();
         } else {
-          if(WidgetLikeContent.aIsContent === false) {
+          //if(WidgetLikeContent.aIsContent === false) {
             WidgetLikeContent.showError(pResponse.msg);
-          }
-          OnLoadGrafic.hideGrafic();
+          //}
+          //OnLoadGrafic.hideGrafic();
         }
       }
     });
   },
 
   show: function(pHtml) {
-    jQuery('#like-content-box').empty();
-    jQuery('#like-content-box').append(pHtml);
+    debug.log('[WidgetLikeContent][show]');
+    //WidgetLikeContent.aIsContent = false;    
+    jQuery('#man-url-content').empty();
+    jQuery('#man-url-content').append(pHtml);
     OnLoadGrafic.hideGrafic();
   },
 
   showError: function(pMsg){
-    jQuery('#like-content-box').empty();
-    jQuery('#like-content-box').prepend("<div class='error'>"+pMsg+"</div>");
+    debug.log('[WidgetLikeContent][showError]');    
+    jQuery('#man-url-content').empty();
+    jQuery('#man-url-content').prepend("<div class='error'>"+pMsg+"</div>");
     OnLoadGrafic.hideGrafic();
   }
 };
