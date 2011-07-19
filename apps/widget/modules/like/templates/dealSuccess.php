@@ -9,7 +9,7 @@
 	<input type="hidden" name="like[url]" value="<?php echo $pUrl; ?>" />
   <input type="hidden" name="like[tags]" value="<?php echo $pTags; ?>" />
 
-	<div class="coupon clearfix">
+	<div class="coupon shadow-light bordered-light clearfix">
 	  <?php echo image_tag($pActiveDeal->getImageUrl(), array('class' => 'alignleft deal-coupon-img')); ?>
 		<div class="alignleft" id="coupon-text">
 		  <h3><?php echo $pActiveDeal->getSummary(); ?></h3>
@@ -25,11 +25,11 @@
 			</p>
 		</div>
 	</div>
-	<section id="tos-area" class="clearfix">
+	<div id="tos-area" class="clearfix">
 		<input type="checkbox" name="like[tos]" class="alignright" />
 		<label for="like[tos]"><?php echo __("I accept the %1.", array("%1" => link_to(__("Terms of Services"), $pActiveDeal->getTermsOfDeal(), array("target" => "_blank")))); ?>&nbsp;<?php echo $pActiveDeal->getAdditionalTos(); ?></label>
-	</section>
-	<section id="like-submit" class="clearfix">
+	</div>
+	<div id="like-submit" class="clearfix">
 	<div id="like-response"></div>
   <?php //echo __('Please check your selected services to share and accept the TOS'); ?>
   <?php
@@ -56,7 +56,7 @@
       <?php } ?>
     <?php } ?>
 		</ul>
-</section>
+</div>
 
 </form>
 </div>

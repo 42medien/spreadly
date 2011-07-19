@@ -1,17 +1,5 @@
 @charset "utf-8";
-/*--------------------------------------------------------------------------------------------------------
-CSS Styles for <Yiid>.
 
-version:   1.0
-author:    Codingpeople GmbH
-email:     support@codingpeople.com
-website:   http://www.codingpeople.com/
---------------------------------------------------------------------------------------------------------*/
-/*ebeaea*/
-/* =General
---------------------------------------------------------------------------------------------------------*/
-
-/* Removing margin/padding */
 *{margin: 0;  padding: 0; font-family:Arial, Helvetica, sans-serif;}
 
 body{
@@ -419,12 +407,16 @@ div#like-submit #like-oi-list li a{
 
 /*******************coupon unused*******************/
 
+.coupon{
+  padding: 10px;
+}
+
 .coupon h3{
   line-height: 24px;
 }
 
 .coupon p{
-  margin-bottom:10px;;
+  margin-bottom:10px;
 }
 
 
