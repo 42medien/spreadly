@@ -100,6 +100,10 @@ class UrlUtils {
    * @throws HttpException
    */
   public static function getUrlContent($pUrl, $pHttpMethod = self::HTTP_GET, $pData = null, $pHeader = null) {
+    if (!self::isUrlValid($pUrl)) {
+      throw new HttpException("Url not valid", 400);
+    }
+
     if ($url_fragment = parse_url($pUrl, PHP_URL_FRAGMENT)) {
       $pUrl = str_replace("#".$url_fragment, "", $pUrl);
     }
