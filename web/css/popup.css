@@ -394,19 +394,24 @@ div#like-submit #like-oi-list li a{
 }
 
 #popup-send-like-button, #popup-send-deal-button{
-  width: 74px;
-  height: 26px;
+  width: 60px;
   margin: 0;
   padding: 0;
   border: 0;
-  background: transparent url(/img/like-button.jpg) no-repeat center top;
+  height: 22px;
+  background: transparent url('/img/sprites/spreadly_button_sprite.png') no-repeat scroll 0 0;
   text-indent: -1000em;
   cursor: pointer; /* hand-shaped cursor */
   cursor: hand; /* for IE 5.x */
 }
 
+#popup-send-like-button:hover, #popup-send-deal-button:hover {
+  background-position: 0 -100px;
+}
+
 #popup-send-like-button.disabled, #popup-send-deal-button.disabled {
-  background: transparent url(/img/like-button-disabled.jpg) no-repeat center top;
+  cursor: help;
+  background-position: 0 -200px;
 }
 
 
