@@ -259,7 +259,6 @@ var LikeImage = {
      */
     get: function(pUrl) {
       debug.log("[LikeImage][get]");
-      debug.log(jQuery("#myscroll"));
       OnLoadGrafic.insertGraficToElem(jQuery('#myscroll'));
       var lAction = '/like/get_images';
       var lData = {

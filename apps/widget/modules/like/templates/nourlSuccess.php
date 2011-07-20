@@ -4,6 +4,5 @@
 	<label class="alignright" id="nourl-label"><?php echo __("Please paste the URL you like to spread to your friends."); ?></label>
 	<input type="hidden" name="like[ignore_deal]" id="like-ignore-deal" value="1" />
 	<div id="man-url-content">
-
 	</div>
 </form>
