@@ -482,6 +482,7 @@ var WidgetAddService = {
   bindClick: function() {
     jQuery('#like-oi-list .add-service-checkbox').live('click', function() {
       OnLoadGrafic.showGrafic();
+      jQuery("body").css("cursor", "progress");
       var lService = jQuery(this).val();
       WidgetAddService.redirect(lService);
     });
