@@ -8,16 +8,14 @@
     <?php include_metas() ?>
 
 		<link rel="stylesheet" type="text/css" href="/css/popup.css" media="screen" />
-		<!--[if IE]>
-		<link rel="stylesheet" type="text/css" href="/css/ie.css" />
-		<![endif]-->
+
 		<!--[if IE 6]>
-		<script src="/js/DD_belatedPNG.js"> </script>
 		<script>
 		  DD_belatedPNG.fix('*');
 		</script>
 		<![endif]-->
 		<!--[if lt IE 9]>
+			<link rel="stylesheet" type="text/css" href="/css/popup-ie.css" />
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 		<?php if ($sf_params->get('resize') == true) { ?>
@@ -25,7 +23,7 @@
       window.resizeTo(580,600);
     </script>
     <?php } ?>
-    <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+    <script type="text/javascript">var _sf_startpt=(new Date()).getTime();</script>
     <script type="text/javascript" src="/js/100_main/include/widget-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
 
 
@@ -34,7 +32,7 @@
   <body class="nobg">
   	<div class="popupblock">
   		<header>
-				<nav class="clearfix">
+				<nav class="clearfix" id="main-nav">
 		      <!--Pop Navigation start -->
 		      <?php if ($sf_user->isAuthenticated() ) { ?>
 		          <ul class="nav-list alignright" role="navigation">

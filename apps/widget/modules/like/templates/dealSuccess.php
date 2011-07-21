@@ -38,7 +38,7 @@
       $disabled = true;
     }
   ?>
-		<span class="alignright btn" id="popup-send-deal-box"><input type="submit" class="<?php if ($disabled) { echo "disabled"; } ?>" id="popup-send-deal-button" value="" <?php if ($disabled) { echo "disabled='disabled'"; } ?> /></span>
+		<input type="submit" class="alignright btn <?php if ($disabled) { echo "disabled"; } ?>" id="popup-send-deal-button" value="" <?php if ($disabled) { echo "disabled='disabled'"; } ?> />
 		<ul class="clearfix" id="like-oi-list">
 		<?php if ($sf_user->checkDealCredentials() && count($pIdentities) > 0) { ?>
 	  	<?php foreach($pIdentities as $lIdentity) {?>

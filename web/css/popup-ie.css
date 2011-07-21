@@ -1,0 +1,72 @@
+@charset "utf-8";
+textarea:hover, textarea:focus {
+  border-color: #C9C9C9;
+}
+
+/**************************popup***********************/
+
+
+.gradient{
+  background-color: #EEEEEE;
+}
+
+/********************popup-header***********************/
+
+nav{
+  background-color: #616c66;
+}
+
+nav .nav-list li a,
+nav .nav-list li span{
+ color: #fff;
+}
+
+nav .nav-list li#nav-spread a{
+  background-color: #fff;
+  color: #171C1A;
+}
+
+/********************popup-content***********************/
+
+#content-outer{
+  background-color: #616c66;
+}
+
+#content-outer header{
+ color: #fff;
+}
+
+#content-outer header{
+  line-height: 28px;	
+}
+
+#content-inner{
+  background-color: #ffffff;
+}
+
+
+
+/********************footer***********************/
+footer{
+  background-color: #616c66;
+
+}
+
+
+footer ul li a {
+ color: #fff;
+}
+
+footer ul li.active a{
+  text-decoration: underline;
+}
+
+footer ul li:last-child a {
+  border-right: 0;
+}
+
+/************content*********************/
+
+#tos-area label{
+  width: 93%;
+}

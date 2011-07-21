@@ -3,7 +3,7 @@
 	<h2><?php echo __('Your settings');?></h2>
 <?php end_slot(); ?>
 
-<div class="shadow-box clearfix" id="profile-info">
+<div class="shadow-light bordered-light clearfix" id="profile-info">
 	<img src="<?php echo avatar_path($sf_user->getUser()->getAvatar(), '48'); ?>" class="shadow alignleft" id="profile-img" width="48" height="48" alt="<?php echo $pUser->getUsername(); ?>" title="<?php echo $pUser->getUsername(); ?>" />
 	<div class="alignleft">
   	<p><strong><?php echo $pUser->getUsername(); ?></strong></p>

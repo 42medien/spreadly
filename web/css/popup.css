@@ -90,12 +90,6 @@ textarea:hover, textarea:focus {
   padding: 10px;
 }
 
-.shadow-box{
-  border-radius: 2px 2px 2px 2px;
-  box-shadow: 0 1px 2px #BBBBBB;
-  padding: 10px;
-}
-
 .shadow-wide{
   box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
   -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
@@ -176,6 +170,7 @@ nav .nav-list li#nav-spread a{
 
 nav .nav-list li#nav-spread a:hover{
   text-decoration:none;
+  background-color: #e4e4e4;
 }
 
 /********************popup-content***********************/
@@ -269,6 +264,7 @@ footer ul li:last-child a {
 
 #popup-like-form div#comment-area{
   padding-top:0;
+  width: 100%;
 }
 
 #popup-like-form div#comment-area textarea#area-like-comment{
@@ -396,7 +392,7 @@ div#like-submit #like-oi-list li a{
 
 #popup-send-like-button, #popup-send-deal-button{
   width: 60px;
-  margin: 0;
+  margin: 6px 0px 0px 0px;
   padding: 0;
   border: 0;
   height: 22px;
@@ -507,6 +503,10 @@ div#like-submit #like-oi-list li a{
 }
 
 /***********************settings**************************/
+
+#profile-info{
+  padding: 10px;
+}
 
 #profile-info #profile-img{
   margin-right: 10px;
