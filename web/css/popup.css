@@ -262,7 +262,8 @@ footer ul li:last-child a {
   padding:0px;
 }
 
-#popup-like-form div#comment-area{
+#popup-like-form div#comment-area,
+#man-url-input-area	{
   padding-top:0;
   width: 100%;
 }
