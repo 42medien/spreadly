@@ -41,9 +41,9 @@ class authActions extends sfActions {
   public function executeSigninto(sfWebRequest $request) {
     // if the user is already loged in, redirect to the stream
     if ($lService = $request->getParameter("service")) {
-      if ($request->hasParameter('r') && $request->getParameter('r') == "s") {
+      /*if ($request->hasParameter('r') && $request->getParameter('r') == "s") {
         $this->getUser()->setAttribute("redirect_after_login", "@widget_settings", "widget");
-      }
+      }*/
 
       $lObject = AuthApiFactory::factory($lService);
       $lObject->doAuthentication();
