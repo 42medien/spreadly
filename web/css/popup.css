@@ -73,7 +73,7 @@ input, textarea {
 textarea:hover, textarea:focus {
   border-color: #C9C9C9;
   -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;  
+  -moz-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
 }
 
 /**************************popup***********************/
@@ -99,13 +99,13 @@ textarea:hover, textarea:focus {
 .shadow-wide{
   box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
   -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
-  -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;  
+  -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
 }
 
 .shadow-light{
   box-shadow: rgba(187,187,187, 0.5) 0 1px 2px;
   -moz-box-shadow: rgba(187,187,187, 0.5) 0 1px 2px;
-  -webkit-box-shadow: rgba(187,187,187, 0.5) 0 1px 2px;    
+  -webkit-box-shadow: rgba(187,187,187, 0.5) 0 1px 2px;
 }
 
 .bordered{
@@ -115,7 +115,7 @@ textarea:hover, textarea:focus {
 
 .bordered-light{
   border: 1px solid #f1f1f1;
-  border-radius: 2px 2px 2px 2px;  
+  border-radius: 2px 2px 2px 2px;
 }
 
 .gradient{
@@ -379,17 +379,18 @@ div#like-submit #like-oi-list{
   padding-top: 8px;
 }
 
-div#like-submit #like-oi-list li{
+div#like-submit #like-oi-list li {
   padding-right: 10px;
-  float: left;
+  float:left;
+  line-height: 15px;
 }
 
 div#like-submit #like-oi-list li img{
   margin-left: 5px;
+  vertical-align: middle;
 }
 
 div#like-submit #like-oi-list li a{
-  line-height: 20px;
   font-size: 10px;
 }
 
@@ -410,10 +411,13 @@ div#like-submit #like-oi-list li a{
 }
 
 #popup-send-like-button.disabled, #popup-send-deal-button.disabled {
-  cursor: help;
+  cursor: default;
   background-position: 0 -200px;
 }
 
+.btn {
+	padding-top: 6px;
+}
 
 /*******************coupon unused*******************/
 
