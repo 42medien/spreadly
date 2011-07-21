@@ -264,14 +264,14 @@ footer ul li:last-child a {
 
 #popup-like-form div#comment-area,
 #man-url-input-area	{
-  padding-top:0;
+  padding: 0 0 10px 0;
   width: 100%;
 }
 
 #popup-like-form div#comment-area textarea#area-like-comment{
   width: 95%;
   height: 45px;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 #popup-like-form div#comment-area label{
