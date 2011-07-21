@@ -72,7 +72,7 @@ var WidgetDealForm = {
       if(pMsg == undefined){
         pMsg = i18n.get('deal_error_message');
       }
-      
+
       jQuery('#like-response').append('<span class="error">'+pMsg+"</span>");
 
       var lTimeout;
@@ -431,7 +431,7 @@ var WidgetLikeContent = {
   get: function(){
     debug.log('[WidgetLikeContent][get]');
     OnLoadGrafic.showGrafic();
-    jQuery('#man-url-content').empty();    
+    jQuery('#man-url-content').empty();
     jQuery.ajax({
       //beforeSubmit : OnLoadGrafic.showGrafic,
       type :     "GET",
@@ -459,14 +459,14 @@ var WidgetLikeContent = {
 
   show: function(pHtml) {
     debug.log('[WidgetLikeContent][show]');
-    //WidgetLikeContent.aIsContent = false;    
+    //WidgetLikeContent.aIsContent = false;
     jQuery('#man-url-content').empty();
     jQuery('#man-url-content').append(pHtml);
     OnLoadGrafic.hideGrafic();
   },
 
   showError: function(pMsg){
-    debug.log('[WidgetLikeContent][showError]');    
+    debug.log('[WidgetLikeContent][showError]');
     jQuery('#man-url-content').empty();
     jQuery('#man-url-content').prepend("<div class='error'>"+pMsg+"</div>");
     OnLoadGrafic.hideGrafic();
@@ -475,8 +475,8 @@ var WidgetLikeContent = {
 
 var WidgetAddService = {
   init:function(){
+  	debug.log('[WidgetAddService][init]');
     WidgetAddService.bindClick();
-
   },
 
   bindClick: function() {
