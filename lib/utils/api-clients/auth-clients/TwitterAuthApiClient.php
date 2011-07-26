@@ -40,7 +40,7 @@ class TwitterAuthApiClient extends AuthApi {
       $lUser = new User();
     }
 
-    if (!$lUser || !$lUser->getId()) {
+    if (!$lUser || !$lUser->getId() || !$lOnlineIdentity->getPhoto()) {
       // get api informations
       $lJson = OAuthClient::get($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "http://api.twitter.com/1/users/show.json?user_id=".$lParamsArray['user_id']);
       $lJsonObject = json_decode($lJson);

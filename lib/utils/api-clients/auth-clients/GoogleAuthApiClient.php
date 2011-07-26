@@ -48,7 +48,7 @@ class GoogleAuthApiClient extends AuthApi {
       $lUser = new User();
     }
 
-    if (!$lUser || !$lUser->getId()) {
+    if (!$lUser || !$lUser->getId() || !$lOnlineIdentity->getPhoto()) {
       $this->completeUser($lUser, $lObject);
     	$this->completeOnlineIdentity($lOnlineIdentity, $lObject, $lUser, $lAuthIdentifier);
     } else {

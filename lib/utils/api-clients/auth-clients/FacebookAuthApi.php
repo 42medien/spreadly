@@ -42,10 +42,10 @@ class FacebookAuthApiClient extends AuthApi {
     }
 
     // if there is no user create one
-    if (!$lUser || !$lUser->getId()) {
+    if (!$lUser || !$lUser->getId() || !$lOnlineIdentity->getPhoto()) {
       $this->completeUser($lUser, $lJsonObject);                     // signup
       // use api complete informations
-      $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject, $lUser, $lIdentifier); // signup,add new
+      $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject, $lUser, $lIdentifier);
     }
 
     // save new token

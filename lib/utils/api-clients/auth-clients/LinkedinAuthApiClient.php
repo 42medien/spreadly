@@ -50,7 +50,7 @@ class LinkedinAuthApiClient extends AuthApi {
       $lUser = new User();
     }
 
-    if (!$lUser || !$lUser->getId()) {
+    if (!$lUser || !$lUser->getId() || !$lOnlineIdentity->getPhoto()) {
       $this->completeUser($lUser, $lProfileArray);
     	$this->completeOnlineIdentity($lOnlineIdentity, $lProfileArray, $lUser);
     }
