@@ -44,22 +44,27 @@ if ($lImages && count($lImages) > 0) {
 
 <div id="like-submit">
 		<div id="like-response"></div>
+		<?php if (!$sf_user->isAuthenticated() ) { ?>
+			<h4><?php echo __('Please choose your favorite service for sharing.'); ?> <?php echo __('You can add additional services anytime later.'); ?></h4>
+		<?php } ?>
 		<input type="submit" id="popup-send-like-button" class="alignright btn <?php if (!$sf_user->isAuthenticated()) { echo "disabled"; } ?>" value="" <?php if (!$sf_user->isAuthenticated()) { echo "disabled='disabled'"; } ?> />
-		<ul class="clearfix" id="like-oi-list">
 		<?php if ($sf_user->isAuthenticated() ) { ?>
+		<ul class="clearfix" id="like-oi-list">
 	  	<?php foreach($pIdentities as $lIdentity) {?>
 	    	<li>
 					<input type="checkbox" name="like[oiids][]" value="<?php echo $lIdentity->getId(); ?>" <?php if ($lIdentity->getSocialPublishingEnabled()) { echo 'checked="checked"'; }  ?> /><?php echo image_tag("/img/".$lIdentity->getCommunity()->getCommunity()."-favicon.gif", array("alt" => $lIdentity->getName(), "title" => $lIdentity->getName())); ?>
 	      </li>
 	  	<?php } ?>
 	  		<li><?php echo link_to(__('(add accounts)'), 'settings/index'); ?></li>
+	  </ul>
 	  <?php } else { ?>
+	  <ul class="clearfix" id="like-oi-list">
 	  	<li><input class="add-service-checkbox" type="checkbox" name="twitter" value="twitter" /><?php echo link_to(image_tag("/img/twitter-favicon.gif", array("alt" => 'Twitter', "title" => 'Twitter')), "@signinto?service=twitter"); ?></li>
 	  	<li><input class="add-service-checkbox" type="checkbox" name="facebook" value="facebook" /><?php echo link_to(image_tag("/img/facebook-favicon.gif", array("alt" => 'facebook', "title" => 'facebook')), "@signinto?service=facebook"); ?></li>
 	  	<li><input class="add-service-checkbox" type="checkbox" name="linkedin" value="linkedin" /><?php echo link_to(image_tag("/img/linkedin-favicon.gif", array("alt" => 'Linkedin', "title" => 'Linkedin')), "@signinto?service=linkedin"); ?></li>
 	  	<li><input class="add-service-checkbox" type="checkbox" name="google" value="google" /><?php echo link_to(image_tag("/img/google-favicon.gif", array("alt" => 'google', "title" => 'google')), "@signinto?service=google&r=s"); ?></li>
-	  <?php } ?>
 		</ul>
+	  <?php } ?>
 </div>
 
 <input type="hidden" name="like[thumb]" id="like-img-value" value="<?php echo $lImage; ?>" />
