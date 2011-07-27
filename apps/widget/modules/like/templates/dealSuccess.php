@@ -38,6 +38,9 @@
       $disabled = true;
     }
   ?>
+		<?php if (!$sf_user->isAuthenticated() ) { ?>
+			<h4><?php echo __('Please choose your favorite service for sharing.'); ?> <?php echo __('You can add additional services anytime later.'); ?></h4>
+		<?php } ?>
 		<input type="submit" class="alignright btn <?php if ($disabled) { echo "disabled"; } ?>" id="popup-send-deal-button" value="" <?php if ($disabled) { echo "disabled='disabled'"; } ?> />
 		<ul class="clearfix" id="like-oi-list">
 		<?php if ($sf_user->checkDealCredentials() && count($pIdentities) > 0) { ?>
