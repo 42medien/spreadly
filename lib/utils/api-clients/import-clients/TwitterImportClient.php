@@ -21,7 +21,7 @@ class TwitterImportClient {
       throw new Exception('damn theres no token!', '666');
     }
     $lConsumer = new OAuthConsumer(sfConfig::get("app_twitter_oauth_token"), sfConfig::get("app_twitter_oauth_secret"));
-    $lJson = OAuthClient::get($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "http://api.twitter.com/1/friends/ids/".$pOnlineIdentity->getOriginalId().".json");
+    $lJson = OAuthClient::get($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "http://api.twitter.com/1/followers/ids.json?id=".$pOnlineIdentity->getOriginalId());
     $lJsonFriendsObject = json_decode($lJson);
 
     // get api informations
