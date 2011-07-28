@@ -105,8 +105,9 @@
 	    });
 
       var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-21966328-1']);
-      _gaq.push(['_setDomainName', '.spreadly.com']);
+      _gaq.push(['_setAccount', 'UA-24814204-1']);
+      _gaq.push(['_setDomainName', 'spreadly.com']);
+      _gaq.push(['_setAllowHash', 'false']);
       _gaq.push(['_trackPageview']);
 
       (function() {
