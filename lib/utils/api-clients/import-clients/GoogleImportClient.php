@@ -14,7 +14,7 @@ class GoogleImportClient {
       throw new Exception('damn theres no token!', '666');
     }
     $lConsumer = new OAuthConsumer(sfConfig::get("app_google_oauth_token"), sfConfig::get("app_google_oauth_secret"));
-    $lJson = OAuthClient::get($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "https://www.googleapis.com/buzz/v1/people/@me/@groups/@following?max-results=100&alt=json");
+    $lJson = OAuthClient::get($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "https://www.googleapis.com/buzz/v1/people/@me/@groups/@followers?max-results=100&alt=json");
 
     $lJsonObject = json_decode($lJson);
 
