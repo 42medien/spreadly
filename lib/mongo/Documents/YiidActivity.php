@@ -97,9 +97,6 @@ class YiidActivity extends BaseDocument {
   /** @NotSaved */
   protected $so_id;
 
-  /** @NotSaved */
-  protected $ignore_deal = 0;
-
   /**
    * save this shit!
    */
@@ -124,30 +121,8 @@ class YiidActivity extends BaseDocument {
     $this->comment = $comment;
   }
 
-  public function getComment() {
-    if($this->isDeal()) {
-      $deal = $this->getDeal();
-
-      if ($deal->getComment()) {
-        $lDealComment = $deal->getComment();
-      } else {
-        $i18n = sfContext::getInstance()->getI18N();
-        $lDealComment = $i18n->__('grabbed the sponsored deal "%title%" on %url% for recommending...', array('%title%' => $deal->getSummary(), '%url%' => $this->getUrl()));
-      }
-
-      return $lDealComment;
-    } else {
-      // TODO: default 'likes' ???
-      return $this->comment;
-    }
-  }
-
   public function getUniqueId() {
     return "tag:spreadly.com,".date("Y", $this->getC()).":/activity/".$this->getId();
-  }
-
-  public function generateHashtag() {
-    return $this->isDeal() ? '#deal' : '#like';
   }
 
   public function setUrl($url)       {
@@ -217,12 +192,6 @@ class YiidActivity extends BaseDocument {
       $this->setC(time());
     }
     $this->doValidate();
-
-    if ($this->ignore_deal == 0) {
-      $this->updateDealInfo();
-    } else {
-      $this->setDId(null);
-    }
   }
 
   private function createJob() {
@@ -303,21 +272,6 @@ class YiidActivity extends BaseDocument {
 
     $this->setOiids(array_unique($lOIIds));
     $this->setCids(array_unique($lCIds));
-  }
-
-  /**
-   * updates the deal informations of the yiid activity
-   */
-  private function updateDealInfo() {
-    $deal = DealTable::getActiveDealByHostAndTagsAndUserId($this->getUrl(), $this->getTags(), $this->getUId());
-    $dm = MongoManager::getDM();
-    // sets the deal-id if it's not empty
-    if ($deal && $deal->isActive() && !$dm->getRepository('Documents\YiidActivity')->findOneBy(array("d_id" => intval($deal->getId()), "u_id" => intval($this->getUId())))) {
-      if ($coupon = $deal->popCoupon()) {
-        $this->setDId(intval($deal->getId()));
-        $this->setCCode($coupon);
-      }
-    }
   }
 
   /**
