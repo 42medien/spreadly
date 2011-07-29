@@ -65,15 +65,15 @@ EOF;
     }
 
     $this->dispatcher->connect('deal.changed', array('DealListener', 'updateMongoDeal'));
-    $deal = DealTable::getInstance()->findByDescription('snirgel approved description');
+    $deal = DealTable::getInstance()->findByName('Campaign No. 1');
     if($deal[0]->canApprove()) {
       $deal[0]->approve();
     }
-    $deal = DealTable::getInstance()->findByDescription('notizblog approved description');
+    $deal = DealTable::getInstance()->findByName('Campaign No. 2');
     if($deal[0]->canApprove()) {
       $deal[0]->approve();
     }
-    $deal = DealTable::getInstance()->findByDescription('missmotz approved description');
+    $deal = DealTable::getInstance()->findByName('Campaign No. 3');
     if($deal[0]->canApprove()) {
       $deal[0]->approve();
     }

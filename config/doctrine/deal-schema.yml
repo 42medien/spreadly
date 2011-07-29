@@ -1,3 +1,5 @@
+detect_relations: true
+
 Deal:
   actAs:
     Timestampable: ~
@@ -26,90 +28,63 @@ Deal:
           to: trashed
 
   columns:
-    domain_profile_id:
-      type: integer
-      notnull: true
-    sf_guard_user_id:
-      type: integer
-      notnull: true
+    # Type of deal and internal name and stuff
     type:
       type: enum
       length: 255
-      default: commercial
-      values: ['commercial', 'charity']
-    coupon_type:
-      type: enum
-      length: 255
-      default: single
-      values: ['single', 'multiple', 'url', 'html']
-    coupon_quantity:
-      type: integer
-      default: 0
-    coupon_claimed_quantity:
-      type: integer
-      default: 0
-    tags:
-      type: string(512)
-      default: null
-    start_date:
-      type: timestamp
-    end_date:
-      type: timestamp
-
-    # a short summary
-    summary:
-      type: string(255)
-    # the deal description
-    description:
-      type: string(255)
-    # a comment for the facebook stream
-    comment:
-      type: string(255)
-    # the text behind the button
-    button_wording:
-      type: string(255)
-
-    terms_of_deal:
-      type: string(512)
-    redeem_url:
-      type: string(512)
+      default: pool
+      values: ['pool']
+    name: string(255)
     tos_accepted:
       type: boolean
       default: false
-    read_only:
-      type: boolean
-      default: false
-    image_url:
-      type: string(255)
-    additional_tos:
-      type: string(255)
 
+    # Motivation stuff
+    motivation_title: string(255)
+    motivation_text: string
+    
+    # Share stuff
+    spread_title: string(255)
+    spread_text: string
+    spread_url: string(255)
+    spread_img: string(255)
+    spread_tos: string(255)
+    
+    # Coupon stuff
+    coupon_type:
+      type: enum
+      length: 255
+      default: code
+      values: ['code', 'url', 'download']
+    coupon_title: string(255)
+    coupon_text: string
+    coupon_code: string(255)
+    coupon_url: string(255)
+    coupon_redeem_url: string(255)
+    
+    # Billing information
+    billing_type:
+      type: enum
+      length: 255
+      default: like
+      values: ['like', 'media_penetration']
+    target_quantity: 
+      type: integer(4)
+      default: 0
+    actual_quantity: 
+      type: integer(4)
+      default: 0
+  
+  # Relations
+    sf_guard_user_id: integer
+    payment_method_id: integer
+    domain_profile_id: integer
   relations:
     sfGuardUser:
       foreignAlias: Deals
       onDelete: CASCADE
-    DomainProfile:
-      type: one
-      local: domain_profile_id
-      foreign: id
+    PaymentMethod:
       foreignAlias: Deals
-      onDelete: CASCADE
-    Coupons:
-      type: many
-      local: id
-      foreign: deal_id
-
-Coupon:
-  actAs:
-    [Timestampable]
-  columns:
-    deal_id:
-      type: integer
-      notnull: true
-    code:
-      type: text
-
-  relations:
-    Deal:
-      foreignAlias: Coupons
+    DomainProfile:
+      foreignAlias: Deals
       onDelete: CASCADE

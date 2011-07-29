@@ -2,12 +2,18 @@
 
 class DealTable extends Doctrine_Table
 {
-  const COUPON_TYPE_SINGLE = 'single';
-  const COUPON_TYPE_URL = 'url';
-  const COUPON_TYPE_MULTIPLE = 'multiple';
-  const COUPON_TYPE_HTML = 'html';
-  const COUPON_QUANTITY_UNLIMITED = 0;
+  // Type
+  const TYPE_POOL = 'pool';
+  
+  // Billing type
+  const BILLING_TYPE_INVOICE = 'invoice';
 
+  // Coupon type
+  const COUPON_TYPE_CODE = 'code';
+  const COUPON_TYPE_URL = 'url';
+  const COUPON_TYPE_DOWNLOAD = 'download';
+
+  const STATE_INITIAL = 'initial';
   const STATE_SUBMITTED = 'submitted';
   const STATE_APPROVED = 'approved';
   const STATE_DENIED = 'denied';

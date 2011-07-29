@@ -1,0 +1,25 @@
+detect_relations: true
+
+PaymentMethod:
+  actAs:
+    Timestampable: ~
+
+  columns:
+    type:
+      type: enum
+      length: 255
+      default: invoice
+      values: ['invoice']
+
+    company: string(255)
+    contact_name: string(255)
+    address: string(255)
+    city: string(255)
+    zip: string(255) 
+    
+  # Relations
+    sf_guard_user_id: integer
+  relations:
+    sfGuardUser:
+      foreignAlias: PaymentMethods
+      onDelete: CASCADE

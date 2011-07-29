@@ -1,109 +1,109 @@
 Deal:
   Deal_1:
-    DomainProfile: DomainProfile_2
-    sfGuardUser: sfGuardUser_1
     state: submitted
-    type: commercial
-    coupon_type: single
-    coupon_quantity: '123456789'
-    start_date: '2010-11-26 10:07:33'
-    end_date: '2010-12-30 10:07:33'
-    summary: 'test summary'
-    description: 'test description'
-    button_wording: 'test button wording'
-    terms_of_deal: 'http://notizblog.org/tod'
-    redeem_url: 'http://notizblog.org/deal'
+    type: pool
+    name: 'Campaign No. 1'
     tos_accepted: true
-    created_at: '2010-11-26 10:10:03'
-    updated_at: '2010-11-26 10:10:03'
+    
+    # Motivation stuff
+    motivation_title: 'Get a free air guitar'
+    motivation_text: 'Just click the like button below!'
+    
+    # Share stuff
+    spread_title: 'I got this free air guitar'
+    spread_text: 'Is this awesome, or what?!?'
+    spread_url: 'http://www.snirgel.de/spread_url'
+    spread_img: 'http://www.snirgel.de/spread_img'
+    spread_tos: 'I have read the tos'
+    
+    # Coupon stuff
+    coupon_type: code
+    coupon_title: 'Here you go …'
+    coupon_text: '… your coupon code!'
+    coupon_code: 'NSAFBICIA'
+    coupon_redeem_url: 'http://www.snirgel.de/coupon_redeem_url'
+    
+    # Billing information
+    billing_type: like
+    target_quantity: 100
+    actual_quantity: 17
+  
+    # Relations
+    DomainProfile: DomainProfile_1
+    sfGuardUser: sfGuardUser_1
+    PaymentMethod: PaymentMethod_1
+
+    created_at: '<?php echo date("c"); ?>'
+    updated_at: '<?php echo date("c"); ?>'
+
   Deal_2:
-    DomainProfile: DomainProfile_3
-    sfGuardUser: sfGuardUser_1
     state: submitted
-    type: commercial
-    coupon_type: multiple
-    coupon_quantity: 5
-    start_date: '2010-11-26 10:10:41'
-    end_date: '2010-12-31 10:10:41'
-    summary: 'missmotz summary'
-    description: 'missmotz description'
-    button_wording: 'missmotz button wording'
-    terms_of_deal: 'http://www.missmotz.de/tod'
-    redeem_url: 'http://www.missmotz.de/deal'
+    type: pool
+    name: 'Campaign No. 2'
     tos_accepted: true
-    created_at: '2010-11-26 10:11:34'
-    updated_at: '2010-11-26 10:11:34'
-  Deal_3:
-    DomainProfile: DomainProfile_1
-    sfGuardUser: sfGuardUser_1
-    state: submitted
-    type: commercial
-    coupon_type: single
-    coupon_quantity: '0'
-    start_date: '2010-11-26 10:11:36'
-    end_date: '2010-12-26 10:11:36'
-    summary: 'snirgel summary'
-    description: 'snirgel description'
-    button_wording: 'snirgel buttonwording'
-    terms_of_deal: 'http://www.snirgel.de/tod'
-    redeem_url: 'http://www.snirgel.de'
-    tos_accepted: true
-    created_at: '2010-11-26 10:12:23'
-    updated_at: '2010-11-26 10:12:23'
-  Deal_4:
-    DomainProfile: DomainProfile_1
-    sfGuardUser: sfGuardUser_1
-    state: submitted
-    type: commercial
-    coupon_type: single
-    coupon_quantity: '0'
-    start_date: '<?php echo date("Y-m-d H:i:s", strtotime("3 days ago")) ?>'
-    end_date: '<?php echo date("Y-m-d H:i:s", strtotime("now + 3 days")) ?>'
-    summary: 'snirgel approved summary'
-    description: 'snirgel approved description'
-    button_wording: 'snirgel approved buttonwording'
-    terms_of_deal: 'http://www.snirgel.de/tod'
-    redeem_url: 'http://www.snirgel.de'
-    tos_accepted: true
-    created_at: '2010-11-26 10:12:23'
-    updated_at: '2010-11-26 10:12:23'
-  Deal_5:
+    
+    # Motivation stuff
+    motivation_title: 'Get a free air guitar'
+    motivation_text: 'Just click the like button below!'
+    
+    # Share stuff
+    spread_title: 'I got this free air guitar'
+    spread_text: 'Is this awesome, or what?!?'
+    spread_url: 'http://notizblog.org/spread_url'
+    spread_img: 'http://notizblog.org/spread_img'
+    spread_tos: 'I have read the tos'
+    
+    # Coupon stuff
+    coupon_type: url
+    coupon_title: 'Here you go …'
+    coupon_text: '… your URL!'
+    coupon_url: 'http://notizblog.org/coupon_url'
+    
+    # Billing information
+    billing_type: like
+    target_quantity: 200
+    actual_quantity: 72
+  
+    # Relations
     DomainProfile: DomainProfile_2
     sfGuardUser: sfGuardUser_1
+    PaymentMethod: PaymentMethod_1
+
+    created_at: '<?php echo date("c"); ?>'
+    updated_at: '<?php echo date("c"); ?>'
+
+  Deal_3:
     state: submitted
-    type: commercial
-    coupon_type: html
-    coupon_quantity: '0'
-    start_date: '<?php echo date("Y-m-d H:i:s", strtotime("3 days ago")) ?>'
-    end_date: '<?php echo date("Y-m-d H:i:s", strtotime("now + 3 days")) ?>'
-    summary: 'notizblog approved summary'
-    description: 'notizblog approved description'
-    comment: 'Tolles Gewinnspiel auf Spiegel.de: Mit etwas Glück gewinne ich eine brandneue Spitzen-Heimkinoanlage!'
-    button_wording: 'notizblog approved buttonwording'
-    terms_of_deal: 'http://www.notizblog.de/tod'
-    redeem_url: 'http://www.notizblog.de'
+    type: pool
+    name: 'Campaign No. 3'
     tos_accepted: true
-    additional_tos: 'Ich wünsche zukünftig per Email über News aus dem Hause Teufel informiert zu werden.'
-    tags: "geekstuff, otherthings"
-    created_at: '2010-11-26 10:12:23'
-    updated_at: '2010-11-26 10:12:23'
-    image_url: 'http://spreadly.com/img/button-banner-en.png'
-    read_only: true
-  Deal_6:
+    
+    # Motivation stuff
+    motivation_title: 'Get a free air guitar'
+    motivation_text: 'Just click the like button below!'
+    
+    # Share stuff
+    spread_title: 'I got this free air guitar'
+    spread_text: 'Is this awesome, or what?!?'
+    spread_url: 'http://www.missmotz.de/spread_url'
+    spread_img: 'http://www.missmotz.de/spread_img'
+    spread_tos: 'I have read the tos'
+    
+    # Coupon stuff
+    coupon_type: download
+    coupon_title: 'Here you go …'
+    coupon_text: '… your download!'
+    coupon_url: 'http://www.missmotz.de/download'
+    
+    # Billing information
+    billing_type: like
+    target_quantity: 500
+    actual_quantity: 132
+  
+    # Relations
     DomainProfile: DomainProfile_3
     sfGuardUser: sfGuardUser_1
-    state: submitted
-    type: commercial
-    coupon_type: single
-    coupon_quantity: '0'
-    start_date: '<?php echo date("Y-m-d H:i:s", strtotime("3 days ago")) ?>'
-    end_date: '<?php echo date("Y-m-d H:i:s", strtotime("now + 3 days")) ?>'
-    summary: 'missmotz approved summary'
-    description: 'missmotz approved description'
-    button_wording: 'missmotz approved buttonwording'
-    terms_of_deal: 'http://www.missmotz.de/tod'
-    redeem_url: 'http://www.missmotz.de'
-    tos_accepted: true
-    tags: "schuhe"
-    created_at: '2010-11-26 10:12:23'
-    updated_at: '2010-11-26 10:12:23'
+    PaymentMethod: PaymentMethod_1
+
+    created_at: '<?php echo date("c"); ?>'
+    updated_at: '<?php echo date("c"); ?>'

@@ -19,11 +19,11 @@ class Deal extends BaseDeal {
   }
 
   public function getRemainingCouponQuantity() {
-    return $this->isUnlimited() ? 'unlimited' : $this->getCouponQuantity()-$this->getCouponClaimedQuantity();
+    return $this->getTargetQuantity()-$this->getActualQuantity();
   }
 
   public function getHumanCouponQuantity() {
-    return $this->isUnlimited() ? 'unlimited' : $this->getCouponQuantity();
+    return $this->getTargetQuantity();
   }
 
   public function getActiveCssClass() {
@@ -31,37 +31,20 @@ class Deal extends BaseDeal {
   }
 
   public function getCssClasses() {
-    return $this->getState().' '.($this->getState()=='approved' ? $this->getActiveCssClass() : '');
+    return $this->getState().' '.($this->getState()==DealTable::STATE_APPROVED ? $this->getActiveCssClass() : '');
   }
 
   public function isActive() {
-    $lNow = time();
-    return $this->getState()=='approved' &&
-           strtotime($this->getStartDate()) <= $lNow &&
-           strtotime($this->getEndDate()) >= $lNow &&
-           ($this->isUnlimited() || $this->getRemainingCouponQuantity()>0);
+    return $this->getState()==DealTable::STATE_APPROVED && $this->getRemainingCouponQuantity()>0;
   }
 
   public function popCoupon() {
     sfContext::getInstance()->getLogger()->notice("{Deal} popCoupon for Deal: ".$this->getId());
 
-    $code = null;
-    $coupon = CouponTable::getInstance()->createQuery()
-      ->where("deal_id = ?", $this->getId())
-      ->limit(1)
-      ->orderBy("id")
-      ->fetchOne();
+    $this->setActualQuantity($this->getActualQuantity()+1);
+    $this->save();
 
-    if($coupon) {
-      $code = $coupon->getCode();
-      if($this->getCouponType()==DealTable::COUPON_TYPE_MULTIPLE) {
-        $coupon->delete();
-      }
-      $this->setCouponClaimedQuantity($this->getCouponClaimedQuantity()+1);
-      $this->save();
-    }
-
-    return $code;
+    return $this->getCouponType()==DealTable::COUPON_TYPE_CODE ? $this->getCouponCode() : $this->getCouponUrl();
   }
 
   public function getDealSummary() {
@@ -72,8 +55,7 @@ class Deal extends BaseDeal {
   }
 
   public function isUnlimited() {
-    return $this->getCouponType()!=DealTable::COUPON_TYPE_MULTIPLE &&
-           $this->getCouponQuantity()==DealTable::COUPON_QUANTITY_UNLIMITED;
+    return false;
   }
 
   private function allElementsEmpty($array) {
@@ -91,107 +73,48 @@ class Deal extends BaseDeal {
   }
 
   private function saveMultipleCoupons($params, $pIsAdding=false) {
-    $codes = array();
-    if($this->getCouponType()!=DealTable::COUPON_TYPE_MULTIPLE) {
-      if(!empty($params['single_code'])) {
-        $codes[] = $params['single_code'];
-      }
-    } elseif($this->getCouponType()==DealTable::COUPON_TYPE_MULTIPLE) {
-      // Convert line breaks to commas
-      $couponString = preg_replace('/[\r\n]+/', ',', $params['multiple_codes']);
-      // Remove all remaining white space
-      $couponString = preg_replace('/\s/', '', $couponString);
-      $codes = explode(',', $couponString);
-    }
-
-    $codes = array_filter($codes, array('Deal', 'compactArray'));
-
-    foreach ($codes as $code) {
-      if(!empty($code)) {
-        $c = new Coupon();
-        $c->setCode($code);
-        $c->setDealId($this->getId());
-        $c->save();
-      }
-    }
-    $this->saveQuantities(count($codes), (empty($params['quantity']) ? 0 : intval($params['quantity'])), $pIsAdding);
-
-    return $this->getCouponQuantity();
+    throw new Exception("Multiple Coupons have been removed!");
   }
 
   private function saveQuantities($pNumberOfCodes, $pParamQuantity, $pIsAdding) {
-    $lCouponQuantity = $this->getCouponQuantity();
-    $lNewEntries = 0;
-
-    if($pIsAdding && $this->getCouponType()!=DealTable::COUPON_TYPE_MULTIPLE) {
-      if(!$this->isUnlimited()) {
-        $lNewEntries += $pParamQuantity;
-      }
-    } elseif($this->getCouponType()==DealTable::COUPON_TYPE_MULTIPLE) {
-      $lNewEntries += $pNumberOfCodes;
-    }
-
-    $this->setCouponQuantity($lCouponQuantity+$lNewEntries);
-
+    $lCouponQuantity = $this->getTargetQuantity();
+    $this->setTargetQuantity($lCouponQuantity+$pParamQuantity);
     $this->save();
   }
 
   public function toMongoArray() {
     $array = $this->toArray();
     $array['id'] = intval($this->getId());
-    $array['start_date'] = new MongoDate(intval(strtotime($array['start_date'])));
-    $array['end_date'] = new MongoDate(intval(strtotime($array['end_date'])));
+    $array['name'] = $this->getName();
     $array['created_at'] = new MongoDate(intval(strtotime($array['created_at'])));
     $array['updated_at'] = new MongoDate(intval(strtotime($array['updated_at'])));
-    $array['remaining_coupon_quantity'] = $this->getRemainingCouponQuantity();
+    $array['target_quantity'] = $this->getTargetQuantity();
+    $array['actual_quantity'] = $this->getActualQuantity();
     $array['human_coupon_quantity'] = $this->getHumanCouponQuantity();
     $array['is_unlimited'] = $this->isUnlimited();
     $array['host'] = $this->getDomainProfile()->getUrl();
-    if (trim($this->getTags())) {
-      $array['tags'] = $this->getTagsAsArray();
-    } else {
-      unset($array['tags']);
-    }
     return $array;
   }
 
   public function validateNewQuantity($newQuantity) {
     $lError = "";
-    if(!$this->isUnlimited()) {
-      $lNumeric = is_numeric($newQuantity);
-    	$lHigher = $newQuantity > $this->getCouponQuantity();
-    	if(($lNumeric && $lHigher) || ($lNumeric && $newQuantity == $this->getCouponQuantity())) {
-    	  // The new quantity is either numeric and higher or nothing was changed, so nothing should be done
-    	} else {
-    	  $lError = "";
-    	  $lError = $lError. ($lNumeric ? '' : 'not a number');
-    	  $lError = $lError.((!$lNumeric&&!$lHigher) ? ' and ' : '');
-    	  $lError = $lError.($lHigher ? '' : 'not more than before');
-    	}
-    } else {
-      $lError = "You can not change the quantity of unlimited coupons.";
-    }
+
+    $lNumeric = is_numeric($newQuantity);
+  	$lHigher = $newQuantity > $this->getTargetQuantity();
+  	if(($lNumeric && $lHigher) || ($lNumeric && $newQuantity == $this->getTargetQuantity())) {
+  	  // The new quantity is either numeric and higher or nothing was changed, so nothing should be done
+  	} else {
+  	  $lError = "";
+  	  $lError = $lError. ($lNumeric ? '' : 'not a number');
+  	  $lError = $lError.((!$lNumeric&&!$lHigher) ? ' and ' : '');
+  	  $lError = $lError.($lHigher ? '' : 'not more than before');
+  	}
 
     return empty($lError) ? true : $lError;
   }
 
   public function validateNewEndDate($pDateString) {
-    $lError = '';
-    $lNewDate = strtotime($pDateString);
-    $lCurrentDate = strtotime($this->getEndDate());
-    $lNow = time();
-
-    if($lNewDate <= $lNow) {
-      $lError = "The new end date must be in the future";
-    } else {
-      $this->setEndDate(date("Y-m-d H:i:s", $lNewDate));
-
-      if(DealTable::isOverlapping($this)) {
-        $lError = "The new end date is overlapping another deal";
-        $this->setEndDate(date("Y-m-d H:i:s", $lCurrentDate));
-      }
-    }
-    return empty($lError) ? true : $lError;
+    throw new Exception("End dates have been removed!");
   }
 
   public function postSave($event) {
@@ -205,21 +128,11 @@ class Deal extends BaseDeal {
    * @return array|null
    */
   public function getTagsAsArray() {
-    $lTags = $this->getTags();
-
-    if (!$lTags) {
-      return null;
-    }
-
-    $lResult = array();
-    foreach (explode(",",$lTags) as $lTag) {
-      $lResult[] = trim($lTag);
-    }
-    return $lResult;
+    throw new Exception("Tags have been removed!"); 
   }
 
   public function getRemainingDays() {
-    return (strtotime(date('Y-m-d', strtotime($this->getEndDate()))) - strtotime(date('Y-m-d', strtotime('now')))) / 60 / 60 / 24;
+    throw new Exception("Deals don't have runtimes anymore!");
   }
 
   /**
@@ -229,6 +142,8 @@ class Deal extends BaseDeal {
    * @return boolean
    */
   public function hasUserTheRequiredCredentials($user) {
+    throw new Exception("Deal type html has been removed! Think of something else …");
+    /*
     if ($this->getCouponType() == "html") {
       $community = CommunityTable::getInstance()->findOneBy("community", "facebook");
       $oi = OnlineIdentityTable::getInstance()->createQuery()
@@ -242,13 +157,12 @@ class Deal extends BaseDeal {
         return false;
       }
     }
-
-    return true;
+    */
   }
 
   public function getImageUrl() {
-    if ($this->_get("image_url")) {
-      return $this->_get("image_url");
+    if ($this->_get("spread_img")) {
+      return $this->_get("spread_img");
     } else {
       return sfConfig::get("app_settings_url")."/img/default-deal.jpg";
     }
