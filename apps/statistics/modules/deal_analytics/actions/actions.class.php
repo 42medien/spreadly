@@ -17,7 +17,46 @@ class deal_analyticsActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    //$this->forward('default', 'module');
+
+    	$this->pVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
+    $domainUrls = array();
+    foreach ($this->pVerifiedDomains as $domain) {
+      $domainUrls[] = $domain->getUrl();
+    }
+
+  	$hostRepo = MongoManager::getStatsDM()->getRepository('Documents\ActivityStats');
+    $this->last30ByHost = $hostRepo->findLast30($domainUrls);
+    if($this->last30ByHost) {
+      $this->last30ByHost = $this->last30ByHost->toArray();
+    }
+
+  	$urlRepo = MongoManager::getStatsDM()->getRepository('Documents\ActivityUrlStats');
+    $this->last30ByUrl = $urlRepo->findLast30($domainUrls);
+    if($this->last30ByUrl) {
+      $this->last30ByUrl = $this->last30ByUrl->toArray();
+    }
+    $lQuery = Doctrine_Query::create()
+                        ->select('*')
+                        ->from('Deal d')
+                        ->leftJoin('d.DomainProfile dp')
+                        ->where('dp.sf_guard_user_id = ? AND ('.
+                                '((d.start_date BETWEEN ? AND ?) OR (d.end_date BETWEEN ? AND ?)) OR '.
+                                '(d.start_date <= ? AND d.end_date >= ?)) AND d.deal_state = "approved"',
+                          array($this->getUser()->getUserId(), date("c", strtotime("30 days ago")), date("c", strtotime("tomorrow - 1 second")),
+                                date("c", strtotime("30 days ago")), date("c", strtotime("tomorrow - 1 second")), date("c", strtotime("30 days ago")),
+                                date("c", strtotime("tomorrow - 1 second"))));
+
+  	$this->pDeals = $lQuery->execute();
+    	$dealIds = array();
+    foreach ($this->pDeals as $deal) {
+      $dealIds[] = intval($deal->getId());
+    }
+
+    $urlRepo = MongoManager::getStatsDM()->getRepository('Documents\DealStats');
+    $this->last30ByDeal = $urlRepo->findByDealIds($dealIds);
+    if($this->last30ByDeal) {
+      $this->last30ByDeal = $this->last30ByDeal->toArray();
+    }
   }
 
   public function executeDeal_statistics(sfWebRequest $request) {

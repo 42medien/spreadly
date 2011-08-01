@@ -3,8 +3,8 @@
 
 deal_details:
   is_secure: true
-  credentials: detailed_analytics
+  #credentials: detailed_analytics
 
 get_details_detail:
   is_secure: true
-  credentials: detailed_analytics
+  #credentials: detailed_analytics

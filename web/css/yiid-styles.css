@@ -1001,3 +1001,20 @@ nav .nav-list li.active a{
 nav .nav-list li:last-child a {
   border-right: 0;
 }
+
+
+/*******navigation********/
+
+ul#subnavigation li{
+  float: left;
+  padding: 0px 10px 0px 10px;
+  border-right: 1px solid #252525;
+}
+
+ul#subnavigation li:last-child{
+	border-right: 0;
+}
+
+ul#subnavigation li a.active{
+  text-decoration: underline;
+}
