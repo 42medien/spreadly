@@ -16,9 +16,3 @@
 </div>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
-
-<?php slot('content') ?>
-
-<?php end_slot(); ?>
-<?php include_partial('global/graybox'); ?>
-

@@ -21,6 +21,120 @@ class dealsActions extends sfActions
   	$this->pDeals = $lQuery->execute();
   }
 
+  /**
+   * check, if the user is allowed to edit the deals or call the step...
+   * inits the deal-form
+   * @see sfAction::preExecute()
+   */
+  public function preExecute() {
+    $request = $this->getRequest();
+    $this->pDealId = $request->getParameter('did', null);
+		$this->pForm = new CreateDealForm();
+
+		//@todo wenn keine deal-id da ist, dann muss überprüft werden, ob step_campaign ist, wenn nicht -> fehlermeldung: lass die url in ruhe du affe
+    //check, if there is a deal
+		if($this->pDealId) {
+			$this->pDeal = DealTable::getInstance()->find($this->pDealId);
+			//is user allowed to edit the deal?
+			if($this->getUser()->getUserId() != $this->pDeal->getSfGuardUserId()){
+				$this->redirect404();
+			}
+			//if he is allowed, create a deal-form with the deal-object
+			$this->pForm = new CreateDealForm($this->pDeal);
+		}
+  }
+
+
+  /**
+   * Create deal - step 1: Give the deal a name and select the target quantity
+   * @param sfWebRequest $request
+   */
+  public function executeStep_campaign(sfWebRequest $request){
+  	$this->pForm->validate_campaign();
+  	if($request->getMethod() == 'POST'){
+  		$lParams = $request->getPostParameters();
+  		$lParams['sf_guard_user_id'] = $this->getUser()->getUserId();
+  		$this->pForm->bind($lParams);
+  		if($this->pForm->isValid()){
+  			$lDeal = $this->pForm->save();
+  			//$lDeal->changeStateToStepShare();
+	 			$this->redirect('deals/step_share?did='.$lDeal->getId());
+  		}
+  	}
+  }
+
+  /**
+   * Create deal - step 2: design the motivation and the share, that will be send to the networks
+   * @param sfWebRequest $request
+   */
+  public function executeStep_share(sfWebRequest $request) {
+  	$this->pForm->validate_share();
+   	if($request->getMethod() == 'POST'){
+  		$lParams = $request->getPostParameters();
+  		$this->pForm->bind($lParams);
+  		if($this->pForm->isValid()){
+  			$lDeal = $this->pForm->save();
+  			//$lDeal->changeStateToStepCoupon();
+	 			$this->redirect('deals/step_coupon?did='.$lDeal->getId());
+  		}
+  	}
+  }
+
+  /**
+   * Create deal - step 3: design the coupon, that the user will see after the deal like
+   * @param sfWebRequest $request
+   */
+  public function executeStep_coupon(sfWebRequest $request) {
+  	$this->pForm->validate_coupon();
+   	if($request->getMethod() == 'POST'){
+  		$lParams = $request->getPostParameters();
+  		$this->pForm->bind($lParams);
+  		if($this->pForm->isValid()){
+  			$lDeal = $this->pForm->save();
+  			//$lDeal->changeStateToStepBilling();
+	 			$this->redirect('deals/step_billing?did='.$lDeal->getId());
+  		}
+  	}
+  }
+
+  /**
+   * Create deal - step 4: select the payment method and insert address
+   * @param sfWebRequest $request
+   */
+  public function executeStep_billing(sfWebRequest $request){
+  	$this->pForm->validate_billing();
+
+		////$this->pForm->gete
+    $lPaymentMethodForm = new PaymentMethodForm();
+    if($this->pDeal->getPaymentMethodId()){
+    	$lPaymentMethod =	PaymentMethodTable::getInstance()->find($this->pDeal->getPaymentMethodId());
+    	$lPaymentMethodForm = new PaymentMethodForm($lPaymentMethod);
+    }
+
+  	$this->pForm->embedForm('payment_method', $lPaymentMethodForm);
+  	if($request->getMethod() == 'POST'){
+  		$lParams = $request->getPostParameters();
+  		$lParams['payment_method']['sf_guard_user_id'] = $this->getUser()->getUserId();
+  		$this->pForm->bind($lParams);
+  		if($this->pForm->isValid()){
+  			$lDeal = $this->pForm->save();
+  			$lPm = $this->pForm->getEmbeddedForm('payment_method')->getObject();
+  			$lDeal->setPaymentMethodId($lPm->getId());
+  			$lDeal->save();
+  		}
+  	}
+  }
+
+  /**
+   * Create deal - step 5: have a last look at your inserts and send deal to approvement
+   * @param sfWebRequest $request
+   */
+  public function executeStep_verify(sfWebRequest $request){
+
+  }
+
+
+
  /**
   * Executes index action
   *
