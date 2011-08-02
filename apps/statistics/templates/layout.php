@@ -65,6 +65,12 @@
               <div class="graybox gallery_list">
                 <h3 class="sub_title"><?php echo __("References"); ?></h3>
                 <ul id="mycarousel" class="jcarousel-skin-tango">
+                  <li><a href="http://www.mailingwork.de/" title="mailingwork" target="_blank"><img src="/img/refrance-img20.jpg" alt="Image"/></a></li>
+                  <li><a href="http://www.kerstin-hoffmann.de/pr-doktor/" title="PR-Doktor" target="_blank"><img src="/img/refrance-img19.jpg" alt="Image"/></a></li>
+                  <li><a href="http://www.pr-blogger.de/" title="PR-Blogger" target="_blank"><img src="/img/refrance-img18.jpg" alt="Image"/></a></li>
+                  <li><a href="http://erdfisch.de/" title="erdfisch" target="_blank"><img src="/img/refrance-img17.jpg" alt="Image"/></a></li>
+                  <li><a href="http://learning-factory.de" title="learning-factory" target="_blank"><img src="/img/refrance-img16.jpg" alt="Image"/></a></li>
+                  <li><a href="http://www.ibusiness.de/" title="iBusiness" target="_blank"><img src="/img/refrance-img15.jpg" alt="Image"/></a></li>
                   <li><a href="http://www.price-look.de/" title="price-look.de" target="_blank"><img src="/img/refrance-img14.jpg" alt="Image"/></a></li>
                   <li><a href="http://lustich.de/" title="lustich.de" target="_blank"><img src="/img/refrance-img13.jpg" alt="Image"/></a></li>
                   <li><a href="http://www.deutsche-startups.de/" title="deutsche-startups.de" target="_blank"><img src="/img/refrance-img12.jpg" alt="Image"/></a></li>
