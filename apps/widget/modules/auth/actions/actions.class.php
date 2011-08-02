@@ -20,11 +20,8 @@ class authActions extends sfActions {
       $this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "widget");
     }
 
-    // check credentials
-    $this->has_credentials = $this->getUser()->checkDealCredentials();
-
     // redirect if user is already logged in
-    if ($this->getUser()->isAuthenticated() && $this->has_credentials) {
+    if ($this->getUser()->isAuthenticated()) {
       $lUrl = $this->getUser()->getAttribute("redirect_after_login", "@widget_like", "widget");
       $this->redirect($lUrl);
     }
