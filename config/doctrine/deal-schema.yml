@@ -6,26 +6,32 @@ Deal:
     StateMachine:
       column: deal_state
       initial: initial
-      states: ['initial', 'submitted', 'approved', 'denied', 'trashed', 'paused']
+      states: ['initial', 'step_campaign', 'step_share', 'step_coupon', 'step_billing', 'step_verify', 'submitted', 'active', 'expired']
       events:
+        edit_campaign:
+          from: ['initial', 'step_share', 'step_coupon', 'step_billing', 'step_verify']
+          to: step_campaign
+        edit_share:
+          from: ['step_campaign', 'step_coupon', 'step_billing', 'step_verify']
+          to: step_share
+        edit_coupon:
+          from: ['step_share', 'step_billing', 'step_verify']
+          to: step_coupon
+        edit_billing:
+          from: ['step_coupon', 'step_verify']
+          to: step_billing
+        complete_edit:
+          from: step_billing
+          to: step_verify
         submit:
-          from: ['initial', 'denied', 'approved', 'paused']
+          from: step_verify
           to: submitted
         approve:
-          from: ['initial', 'submitted']
-          to: approved
-        deny:
           from: submitted
-          to: denied
-        pause:
-          from: approved
-          to: paused
-        resume:
-          from: paused
-          to: approved
-        trash:
-          from: ['submitted', 'paused', 'denied']
-          to: trashed
+          to: active
+        expire:
+          from: active
+          to: expired
 
   columns:
     # Type of deal and internal name and stuff
@@ -38,6 +44,9 @@ Deal:
     tos_accepted:
       type: boolean
       default: false
+      
+    # Conditions
+    email_required: boolean
 
     # Motivation stuff
     motivation_title: string(255)

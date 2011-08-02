@@ -14,11 +14,15 @@ class DealTable extends Doctrine_Table
   const COUPON_TYPE_DOWNLOAD = 'download';
 
   const STATE_INITIAL = 'initial';
+  const STATE_STEP_CAMPAIGN = 'step_campaign';
+  const STATE_STEP_MOTIVATION = 'step_motivation';
+  const STATE_STEP_SHARE = 'step_share';
+  const STATE_STEP_COUPON = 'step_coupon';
+  const STATE_STEP_BILLING = 'step_billing';
+  const STATE_STEP_VERIFY = 'step_verify';
   const STATE_SUBMITTED = 'submitted';
-  const STATE_APPROVED = 'approved';
-  const STATE_DENIED = 'denied';
-  const STATE_TRASHED = 'trashed';
-  const STATE_PAUSED = 'paused';
+  const STATE_ACTIVE = 'active';
+  const STATE_EXPIRED = 'expired';
 
   public static function getInstance()
   {
