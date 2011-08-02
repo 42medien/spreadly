@@ -27,11 +27,11 @@ $wu->trackUser();
       -webkit-user-select:none;
     }
     /* default skin*/
-    .A {
+    .container {
       display: inline-block;
       margin: 5px;
     }
-    .B {
+    .button {
       display: inline-block;
       position: relative;
       color: hsl(333,42%,50%);  /* #B44A7A */
@@ -53,7 +53,7 @@ $wu->trackUser();
       -webkit-transition: box-shadow .3s ease-out, text-shadow .3s ease-out, background-position .6s ease-out;
       -moz-transition: box-shadow .3s ease-out, text-shadow .3s ease-out, background-position .6s ease-out;
     }
-    .B:before{
+    .button:before{
       background: hsla(333,42%,50%,1) url('./img/button/l.png') no-repeat 0px 0px;
       box-shadow: 0 1px 1px 0px hsla(333,42%,0%,.8) inset;
       content:'';
@@ -67,7 +67,7 @@ $wu->trackUser();
       opacity:1;
 
     }
-    .B:focus, .B:hover{
+    .button:focus, .button:hover{
       outline: none;
       background-position: -30% 20px;
       border: 1px solid hsl(333,42%,65%);
@@ -78,7 +78,7 @@ $wu->trackUser();
       -moz-transition: box-shadow .3s ease-in, text-shadow .3s ease-in, background-position .6s ease-out;
     }
 
-    .B:active {
+    .button:active {
       background-position: -30% 20px;
       background-color: hsla(333,42%,70%,1);
       color: #fff;
@@ -88,7 +88,7 @@ $wu->trackUser();
       text-shadow: 0 0px 0px hsla(333,42%,50%,0), 0 0px 0px #fff;
     }
 
-    .B:focus:before, .B:hover:before{
+    .button:focus:before, .button:hover:before{
       opacity:.85;
       width: 14px;
       height: 14px;
@@ -96,128 +96,11 @@ $wu->trackUser();
       left:2px;
       background-position: -1px -1px;*/
     }
-
-
-    /* skin .ca*/
-
-    .ca .B {
-      color: hsl(199,81%,50%);
-      border-color: hsl(199,81%,73%);
-      border-bottom-color: hsl(199,81%,50%);
-      border-top-color: hsl(199,81%,81%);
-      box-shadow: 0 -1px 1px 1px hsla(199,81%,100%,.7) inset, 0 -4px 8px 0 hsla(199,81%,50%,.5) inset, 0 0 2px 8px hsla(199,81%,0%,0);
-      text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(199,81%,50%,.25);
-    }
-    .ca .B:before{
-      background-color: hsla(199,81%,50%,1);
-      box-shadow: 0 1px 1px 0px hsla(199,81%,0%,.5) inset;
-    }
-    .ca .B:focus, .ca .B:hover{
-      border-color: hsl(199,81%,65%);
-      border-top-color: hsl(199,81%,46%);
-      box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(199,81%,50%,.3) inset, 0 0 4px 0 hsla(199,81%,30%,.5);
-      text-shadow: 0 1px 1px hsla(199,81%,50%,.25), 0 -1px 1px #fff;
-    }
-    /* skin .cb*/
-    .cb .B {
-      color: hsl(111,24%,50%);
-      border-color: hsl(111,24%,73%);
-      border-bottom-color: hsl(111,24%,50%);
-      border-top-color: hsl(111,24%,81%);
-      box-shadow: 0 -1px 1px 1px hsla(111,24%,100%,.7) inset, 0 -4px 8px 0 hsla(111,24%,50%,.5) inset, 0 0 2px 8px hsla(111,24%,0%,0);
-      text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(111,24%,50%,.25);
-    }
-    .cb .B:before{
-      background-color: hsla(111,24%,50%,1);
-      box-shadow: 0 1px 1px 0px hsla(111,24%,0%,.5) inset;
-    }
-    .cb .B:focus, .cb .B:hover{
-      border-color: hsl(111,24%,65%);
-      border-top-color: hsl(111,24%,46%);
-      box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(111,24%,50%,.3) inset, 0 0 4px 0 hsla(111,24%,30%,.5);
-      text-shadow: 0 1px 1px hsla(111,24%,50%,.25), 0 -1px 1px #fff;
-    }
-    /* skin .cc*/
-    .cc .B {
-      color: hsl(302,54%,50%);
-      border-color: hsl(302,54%,73%);
-      border-bottom-color: hsl(302,54%,50%);
-      border-top-color: hsl(302,54%,81%);
-      box-shadow: 0 -1px 1px 1px hsla(302,54%,100%,.7) inset, 0 -4px 8px 0 hsla(302,54%,50%,.5) inset, 0 0 2px 8px hsla(302,54%,0%,0);
-      text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(302,54%,50%,.25);
-    }
-    .cc .B:before{
-      background-color: hsla(302,54%,50%,1);
-      box-shadow: 0 1px 1px 0px hsla(302,54%,0%,.5) inset;
-    }
-    .cc .B:focus, .cc .B:hover{
-      border-color: hsl(302,54%,65%);
-      border-top-color: hsl(302,54%,46%);
-      box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(302,54%,50%,.3) inset, 0 0 4px 0 hsla(302,54%,30%,.5);
-      text-shadow: 0 1px 1px hsla(302,54%,50%,.25), 0 -1px 1px #fff;
-    }
-    /* skin .cd*/
-    .cd .B {
-      color: hsl(22,90%,50%);
-      border-color: hsl(22,90%,73%);
-      border-bottom-color: hsl(22,90%,50%);
-      border-top-color: hsl(22,90%,81%);
-      box-shadow: 0 -1px 1px 1px hsla(22,90%,100%,.7) inset, 0 -4px 8px 0 hsla(22,90%,50%,.5) inset, 0 0 2px 8px hsla(22,90%,0%,0);
-      text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(22,90%,50%,.25);
-    }
-    .cd .B:before{
-      background-color: hsla(22,90%,50%,1);
-      box-shadow: 0 1px 1px 0px hsla(22,90%,0%,.5) inset;
-    }
-    .cd .B:focus, .cd .B:hover{
-      border-color: hsl(22,90%,65%);
-      border-top-color: hsl(22,90%,46%);
-      box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(22,90%,50%,.3) inset, 0 0 4px 0 hsla(22,90%,30%,.5);
-      text-shadow: 0 1px 1px hsla(22,90%,50%,.25), 0 -1px 1px #fff;
-    }
-    /* skin .ce*/
-    .ce .B {
-      color: hsl(349,79%,50%);
-      border-color: hsl(349,79%,73%);
-      border-bottom-color: hsl(349,79%,50%);
-      border-top-color: hsl(349,79%,81%);
-      box-shadow: 0 -1px 1px 1px hsla(349,79%,100%,.7) inset, 0 -4px 8px 0 hsla(349,79%,50%,.5) inset, 0 0 2px 8px hsla(349,79%,0%,0);
-      text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(349,79%,50%,.25);
-    }
-    .ce .B:before{
-      background-color: hsla(349,79%,50%,1);
-      box-shadow: 0 1px 1px 0px hsla(349,79%,0%,.5) inset;
-    }
-    .ce .B:focus, .ce .B:hover{
-      border-color: hsl(349,79%,65%);
-      border-top-color: hsl(349,79%,46%);
-      box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(349,79%,50%,.3) inset, 0 0 4px 0 hsla(349,79%,30%,.5);
-      text-shadow: 0 1px 1px hsla(349,79%,50%,.25), 0 -1px 1px #fff;
-    }
-    /* skin .cf*/
-    .cf .B {
-      color: hsl(0,0%,50%);
-      border-color: hsl(0,0%,73%);
-      border-bottom-color: hsl(0,0%,50%);
-      border-top-color: hsl(0,0%,81%);
-      box-shadow: 0 -1px 1px 1px hsla(0,0%,100%,.7) inset, 0 -4px 8px 0 hsla(0,0%,50%,.5) inset, 0 0 2px 8px hsla(0,0%,0%,0);
-      text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(0,0%,50%,.25);
-    }
-    .cf .B:before{
-      background-color: hsla(0,0%,50%,1);
-      box-shadow: 0 1px 1px 0px hsla(0,0%,0%,.5) inset;
-    }
-    .cf .B:focus, .cf .B:hover{
-      border-color: hsl(0,0%,65%);
-      border-top-color: hsl(0,0%,46%);
-      box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(0,0%,50%,.3) inset, 0 0 4px 0 hsla(0,0%,30%,.5);
-      text-shadow: 0 1px 1px hsla(0,0%,50%,.25), 0 -1px 1px #fff;
-    }
   </style>
 </head>
 <body>
-  <div class="A">
-    <a class="B" href="<?php echo $wu->getPopupUrl() ?>" onclick="window.open(this.href, 'popup', 'width=580,height=450,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" target="_blank">Like</a>
+  <div class="container">
+    <a class="button" href="<?php echo $wu->getPopupUrl() ?>" onclick="window.open(this.href, 'popup', 'width=580,height=450,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" target="_blank">Like</a>
   </div>
   <?php if ($wu->showFriends()): ?>
  	<script type="text/javascript" src="/js/100_main/include/button-<?php echo LikeSettings::RELEASE_NAME; ?>.js"></script>
