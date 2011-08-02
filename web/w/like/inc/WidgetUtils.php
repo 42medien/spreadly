@@ -14,7 +14,6 @@ class WidgetUtils {
   private $aTags = null;
   private $aUserId = null;
   private $aSocialObject = null;
-  private $aDeal = null;
   private $aYiidActivity = null;
   private $aShowFriends = false;
   private $aCounter = true;
@@ -46,7 +45,6 @@ class WidgetUtils {
     $this->aTags = trim(urldecode(@$_GET['tags']));
     $this->aUserId = $this->extractUserIdFromSession();
     $this->aSocialObject = $this->getSocialObjectByUrl();
-    $this->aDeal = $this->getActiveDeal();
     $this->aYiidActivity = $this->getYiidActivityBySocialObject();
   }
 
@@ -82,10 +80,6 @@ class WidgetUtils {
     return strval($this->aSocialObject['_id']);
   }
 
-  public function getDeal() {
-    return $this->aDeal;
-  }
-
   public function getActivityCount() {
     if (!$this->aMongoConn) {
       return "?";
@@ -97,8 +91,6 @@ class WidgetUtils {
   public function getButtonClass() {
     if ($this->getYiidActivity()) {
       return "disabled";
-    } elseif ($this->getDeal()) {
-      return "deal";
     } else {
       return "";
     }
@@ -194,19 +186,10 @@ class WidgetUtils {
 
     $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
 
-    // get yiid-activity and factor a deal
-    if ($lActiveDeal) {
-      $lObject = $pCollectionObject->findOne(array('social_object.$id' => $lSocialObject['_id'],
-                                                   'u_id' => intval($lUserId),
-                                                   'd_id' => intval($lActiveDeal['id'])
-                                                  ));
-
-    } else {
-      $lObject = $pCollectionObject->findOne(array('social_object.$id' => $lSocialObject['_id'],
+    $lObject = $pCollectionObject->findOne(array('social_object.$id' => $lSocialObject['_id'],
                                                    'u_id' => intval($lUserId),
                                                    'd_id' => array('$exists' => false)
                                                   ));
-    }
 
     return $lObject;
   }
@@ -215,30 +198,6 @@ class WidgetUtils {
     $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
 
     return $pCollectionObject->findOne(array("_id" => new MongoId($pId)));
-  }
-
-  /**
-   * check if a given user already performed an action on a social object
-   * returns false if not, or it's score (1/-1)
-   *
-   * @author Christian Weyand
-   * @param int $pSocialObjectId
-   * @param int $pUserId
-   * @return false or score of action taken (-1/1)
-   */
-  public function actionOnHostByUser($pUserId, $pActiveDeal) {
-    // check if mongo is active
-    if (!$this->aMongoConn) {
-      return false;
-    }
-
-    $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
-
-    // get yiid-activity and factor a deal
-    $lObject = $pCollectionObject->findOne(array("u_id" => intval($pUserId),
-                                                 "d_id" => intval($pActiveDeal['id'])
-                                                  ));
-    return $lObject;
   }
 
   /**
@@ -270,63 +229,6 @@ class WidgetUtils {
     } else {
       return null;
     }
-  }
-
-  /**
-   * searches the mongo for an active deal
-   *
-   * @author Matthias Pfefferle
-   * @param string $pUrl
-   * @param string $pTags comma separated
-   * @return array|boolean
-   */
-  private function getActiveDeal() {
-    // check if mongo is active
-    if (!$this->aMongoConn) {
-      return false;
-    }
-
-    $pTags = $this->aTags;
-    $pUrl = $this->skipTrailingSlash($this->aUrl);
-
-    $host = parse_url($pUrl, PHP_URL_HOST);
-    $col = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, 'deals');
-
-    $today = new MongoDate(time());
-    $cond = array(
-      "host" => $host,
-      "start_date" => array('$lte' => $today),
-      "end_date" => array('$gte' => $today)
-    );
-
-    // added tags to the conditions
-    if ($pTags) {
-      // trim tags
-      $pTags = explode(",", $pTags);
-      $lTags = array();
-      foreach ($pTags as $lTag) {
-        $lTags[] = trim($lTag);
-      }
-      $cond['$or'] = array(array('tags' => array('$exists' => false)), array('tags' => array('$in' => $lTags)));
-    } else {
-      $cond["tags"] = array('$exists' => false);
-    }
-
-    $result = $col->find($cond)->limit(1)->sort(array("start_date" => -1));
-    $deal = null;
-
-    if($result->hasNext()) {
-      $deal = $result->getNext();
-    }
-
-    if ($deal && ($deal["is_unlimited"] == true || $deal['remaining_coupon_quantity'] > 0)) {
-      if (!$deal || $this->actionOnHostByUser($this->aUserId, $deal)) {
-        return null;
-      }
-      return $deal;
-    }
-
-    return null;
   }
 
   /**
@@ -391,39 +293,20 @@ class WidgetUtils {
            ->update(array('ya_id' => strval($lOriginYiidActivity['_id'])),
                     $upsert, $options);
 
-      if(array_key_exists('d_id', $lOriginYiidActivity)) {
-        $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "deal_stats.host")
-             ->update(array('d_id' => $lOriginYiidActivity['d_id'],
+      $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "activity_stats.host")
+           ->update(array('host' => $host,
                             'day' => new MongoDate(strtotime(date('Y-m-d', $lOriginYiidActivity['c'])))),
                       $upsert, $options);
-        $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "deal_stats.url")
-             ->update(array('d_id' => $lOriginYiidActivity['d_id'],
-                            'url' => $url,
+      $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "activity_stats.url")
+           ->update(array('url' => $url,
                             'day' => new MongoDate(strtotime(date('Y-m-d', $lOriginYiidActivity['c'])))),
                       $upsert, $options);
-        $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "deal_summary.host")
-             ->update(array('d_id' => $lOriginYiidActivity['d_id']),
+      $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "summary.host")
+           ->update(array('host' => $host),
                       $upsert, $options);
-        $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "deal_summary.url")
-             ->update(array('d_id' => $lOriginYiidActivity['d_id'],
-                            'url' => $url),
+      $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "summary.url")
+           ->update(array('url' => $url),
                       $upsert, $options);
-      } else {
-        $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "activity_stats.host")
-             ->update(array('host' => $host,
-                            'day' => new MongoDate(strtotime(date('Y-m-d', $lOriginYiidActivity['c'])))),
-                      $upsert, $options);
-        $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "activity_stats.url")
-             ->update(array('url' => $url,
-                            'day' => new MongoDate(strtotime(date('Y-m-d', $lOriginYiidActivity['c'])))),
-                      $upsert, $options);
-        $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "summary.host")
-             ->update(array('host' => $host),
-                      $upsert, $options);
-        $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "summary.url")
-             ->update(array('url' => $url),
-                      $upsert, $options);
-      }
     }
   }
 
