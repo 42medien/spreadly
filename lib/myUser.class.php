@@ -122,48 +122,4 @@ class myUser extends sfBasicSecurityUser {
 
     return substr($culture, 0, 2);
   }
-
-  /**
-   * checks a users deal credentials
-   *
-   * @return boolean
-   */
-  public function checkDealCredentials() {
-    $user = $this->getUser();
-
-    // initialize
-    $url = null;
-    $tags = null;
-
-    // check user session
-    if ($redirect_url = $this->getAttribute("redirect_after_login", null, "widget")) {
-      $params = explode("?", $redirect_url);
-      parse_str($params[1]);
-    }
-
-    // check url param
-    $url = trim(urldecode(sfContext::getInstance()->getRequest()->getParameter("url", $url)));
-    $tags = sfContext::getInstance()->getRequest()->getParameter("tags", $tags);
-
-    if (!$url) {
-      return true;
-    }
-
-    if ($user) {
-      // if there is an url and a user
-      if ($url && $deal = DealTable::getActiveDealByHostAndUserId($url, $user->getId(), $tags)) {
-        if (!$deal->hasUserTheRequiredCredentials($user)) {
-          return false;
-        }
-      }
-    } else {
-      $deal = DealTable::getActiveByHost($url, $tags);
-
-      if ($deal && $deal->getCouponType() == "html") {
-        return false;
-      }
-    }
-
-    return true;
-  }
 }
