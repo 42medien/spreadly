@@ -9,19 +9,19 @@ Deal:
       states: ['initial', 'step_campaign', 'step_share', 'step_coupon', 'step_billing', 'step_verify', 'submitted', 'active', 'expired']
       events:
         edit_campaign:
-          from: ['initial', 'step_share', 'step_coupon', 'step_billing', 'step_verify']
+          from: ['initial', 'step_campaign', 'step_share', 'step_coupon', 'step_billing', 'step_verify']
           to: step_campaign
         edit_share:
-          from: ['step_campaign', 'step_coupon', 'step_billing', 'step_verify']
+          from: ['step_campaign', 'step_share', 'step_coupon', 'step_billing', 'step_verify']
           to: step_share
         edit_coupon:
-          from: ['step_share', 'step_billing', 'step_verify']
+          from: ['step_share', 'step_coupon', 'step_billing', 'step_verify']
           to: step_coupon
         edit_billing:
-          from: ['step_coupon', 'step_verify']
+          from: ['step_coupon', 'step_billing', 'step_verify']
           to: step_billing
         complete_edit:
-          from: step_billing
+          from: ['step_billing', 'step_verify']
           to: step_verify
         submit:
           from: step_verify
@@ -46,7 +46,9 @@ Deal:
       default: false
       
     # Conditions
-    email_required: boolean
+    email_required:
+      type: boolean
+      default: false
 
     # Motivation stuff
     motivation_title: string(255)

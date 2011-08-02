@@ -1,0 +1,11 @@
+PaymentMethod:
+  PaymentMethod_1:
+    type: invoice
+
+    company: 'Ekaabo GmbH'
+    contact_name: 'Marco Ripanti'
+    address: 'Grundelbachstr. 84'
+    city: 'Weinheim'
+    zip: '66666'
+    
+    sfGuardUser: sfGuardUser_1

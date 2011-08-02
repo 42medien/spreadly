@@ -6,7 +6,8 @@ class DealTable extends Doctrine_Table
   const TYPE_POOL = 'pool';
   
   // Billing type
-  const BILLING_TYPE_INVOICE = 'invoice';
+  const BILLING_TYPE_LIKE = 'like';
+  const BILLING_TYPE_MEDIA_PENETRATION = 'media_penetration';
 
   // Coupon type
   const COUPON_TYPE_CODE = 'code';

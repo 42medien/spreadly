@@ -1,4 +1,9 @@
 <?php
+/*
+ * Call like this:
+ * phpunit ./test/unit/Deal/DealTest.php
+ * phpunit --filter testTruth ./test/unit/Deal/DealTest.php
+ */
 require_once dirname(__file__).'/../../lib/BaseTestCase.php';
 
 class DealTest extends BaseTestCase {
@@ -13,8 +18,15 @@ class DealTest extends BaseTestCase {
     Doctrine::loadData(dirname(__file__).'/fixtures');
     sfConfig::set('sf_environment', 'dev');
     
+    $this->table = Doctrine::getTable('Deal');
+    
+    $this->deal1 = $this->table->findOneBy('name', 'Campaign No. 1');
+    $this->deal2 = $this->table->findOneBy('name', 'Campaign No. 2');
+    $this->deal3 = $this->table->findOneBy('name', 'Campaign No. 3');
+    
     //$this->col = MongoDbConnector::getInstance()->getCollection(sfConfig::get('app_mongodb_database_name'), "deals");
-
+    
+    /*
     $this->domainProfile = Doctrine_Query::create()
           ->from('DomainProfile d')
           ->fetchOne();
@@ -51,9 +63,201 @@ class DealTest extends BaseTestCase {
     $this->singleUnlimited = Doctrine::getTable('Deal')->findOneBy("summary", "single_unlimited");
     $this->single100 = Doctrine::getTable('Deal')->findOneBy("summary", "single_100");
     $this->multiple = Doctrine::getTable('Deal')->findOneBy("summary", "multiple");
-
+    */
   }
+  
+    
+  public function testInitialDefaults() {
+    $this->new = new Deal();
+    $this->new->setName("Hansis Spezial");
+    $this->new->save();
+    
+    $this->deal = $this->table->findOneBy("name", "Hansis Spezial");
+    
+    $this->assertEquals($this->deal->getState(), DealTable::STATE_INITIAL);
+    $this->assertEquals($this->deal->getType(), DealTable::TYPE_POOL);
+    $this->assertEquals($this->deal->getCouponType(), DealTable::COUPON_TYPE_CODE);
+    $this->assertEquals($this->deal->getBillingType(), DealTable::BILLING_TYPE_LIKE);
+    
+    $this->assertFalse($this->deal->getEmailRequired());
+    $this->assertFalse($this->deal->getTosAccepted());
 
+    $this->assertEquals($this->deal->getTargetQuantity(), 0);
+    $this->assertEquals($this->deal->getActualQuantity(), 0);
+  }
+  
+  
+
+  public function testStates() {
+    $this->new = new Deal();
+    $this->new->setName("Hansis Spezial");
+    $this->new->save();
+
+    $this->deal = $this->table->findOneBy("name", "Hansis Spezial");
+        
+    $this->assertTrue($this->deal->canEdit_campaign());
+    $this->assertFalse($this->deal->canEdit_share());
+    $this->assertFalse($this->deal->canEdit_coupon());
+    $this->assertFalse($this->deal->canEdit_billing());
+    $this->assertFalse($this->deal->canComplete_edit());
+    $this->assertFalse($this->deal->canSubmit());
+    $this->assertFalse($this->deal->canApprove());
+    $this->assertFalse($this->deal->canExpire());
+    
+    $this->deal->edit_campaign();
+    
+    $this->assertTrue($this->deal->canEdit_campaign());
+    $this->assertTrue($this->deal->canEdit_share());
+    $this->assertFalse($this->deal->canEdit_coupon());
+    $this->assertFalse($this->deal->canEdit_billing());
+    $this->assertFalse($this->deal->canComplete_edit());
+    $this->assertFalse($this->deal->canSubmit());
+    $this->assertFalse($this->deal->canApprove());
+    $this->assertFalse($this->deal->canExpire());
+    
+    $this->deal->edit_share();
+    
+    $this->assertTrue($this->deal->canEdit_campaign());
+    $this->assertTrue($this->deal->canEdit_share());
+    $this->assertTrue($this->deal->canEdit_coupon());
+    $this->assertFalse($this->deal->canEdit_billing());
+    $this->assertFalse($this->deal->canComplete_edit());
+    $this->assertFalse($this->deal->canSubmit());
+    $this->assertFalse($this->deal->canApprove());
+    $this->assertFalse($this->deal->canExpire());
+    
+    $this->deal->edit_coupon();
+    
+    $this->assertTrue($this->deal->canEdit_campaign());
+    $this->assertTrue($this->deal->canEdit_share());
+    $this->assertTrue($this->deal->canEdit_coupon());
+    $this->assertTrue($this->deal->canEdit_billing());
+    $this->assertFalse($this->deal->canComplete_edit());
+    $this->assertFalse($this->deal->canSubmit());
+    $this->assertFalse($this->deal->canApprove());
+    $this->assertFalse($this->deal->canExpire());
+
+    $this->deal->edit_billing();
+    
+    $this->assertTrue($this->deal->canEdit_campaign());
+    $this->assertTrue($this->deal->canEdit_share());
+    $this->assertTrue($this->deal->canEdit_coupon());
+    $this->assertTrue($this->deal->canEdit_billing());
+    $this->assertTrue($this->deal->canComplete_edit());
+    $this->assertFalse($this->deal->canSubmit());
+    $this->assertFalse($this->deal->canApprove());
+    $this->assertFalse($this->deal->canExpire());
+
+    $this->deal->complete_edit();
+    
+    $this->assertTrue($this->deal->canEdit_campaign());
+    $this->assertTrue($this->deal->canEdit_share());
+    $this->assertTrue($this->deal->canEdit_coupon());
+    $this->assertTrue($this->deal->canEdit_billing());
+    $this->assertTrue($this->deal->canComplete_edit());
+    $this->assertTrue($this->deal->canSubmit());
+    $this->assertFalse($this->deal->canApprove());
+    $this->assertFalse($this->deal->canExpire());
+
+    $this->deal->submit();
+    
+    $this->assertFalse($this->deal->canEdit_campaign());
+    $this->assertFalse($this->deal->canEdit_share());
+    $this->assertFalse($this->deal->canEdit_coupon());
+    $this->assertFalse($this->deal->canEdit_billing());
+    $this->assertFalse($this->deal->canComplete_edit());
+    $this->assertFalse($this->deal->canSubmit());
+    $this->assertTrue($this->deal->canApprove());
+    $this->assertFalse($this->deal->canExpire());
+
+    $this->deal->approve();
+    
+    $this->assertFalse($this->deal->canEdit_campaign());
+    $this->assertFalse($this->deal->canEdit_share());
+    $this->assertFalse($this->deal->canEdit_coupon());
+    $this->assertFalse($this->deal->canEdit_billing());
+    $this->assertFalse($this->deal->canComplete_edit());
+    $this->assertFalse($this->deal->canSubmit());
+    $this->assertFalse($this->deal->canApprove());
+    $this->assertTrue($this->deal->canExpire());
+
+    $this->deal->expire();
+    
+    $this->assertFalse($this->deal->canEdit_campaign());
+    $this->assertFalse($this->deal->canEdit_share());
+    $this->assertFalse($this->deal->canEdit_coupon());
+    $this->assertFalse($this->deal->canEdit_billing());
+    $this->assertFalse($this->deal->canComplete_edit());
+    $this->assertFalse($this->deal->canSubmit());
+    $this->assertFalse($this->deal->canApprove());
+    $this->assertFalse($this->deal->canExpire());
+  } 
+  
+  public function testQuantities() {
+    $this->deal1->approve();
+    $this->deal2->approve();
+    $this->deal3->approve();
+    
+    $this->assertEquals($this->deal1->getTargetQuantity(), 100);
+    $this->assertEquals($this->deal1->getActualQuantity(), 98);
+    $this->assertEquals($this->deal1->getRemainingQuantity(), 100-98);
+    $this->deal1->popCoupon();
+    $this->assertEquals($this->deal1->getTargetQuantity(), 100);
+    $this->assertEquals($this->deal1->getActualQuantity(), 99);
+    $this->assertEquals($this->deal1->getRemainingQuantity(), 100-99);
+    $this->deal1->popCoupon();
+    $this->assertEquals($this->deal1->getTargetQuantity(), 100);
+    $this->assertEquals($this->deal1->getActualQuantity(), 100);
+    $this->assertEquals($this->deal1->getRemainingQuantity(), 0);
+    $this->assertEquals($this->deal1->getState(), DealTable::STATE_EXPIRED);
+    
+    $this->assertEquals($this->deal2->getTargetQuantity(), 200);
+    $this->assertEquals($this->deal2->getActualQuantity(), 72);
+    $this->assertEquals($this->deal2->getRemainingQuantity(), 200-72);
+    $this->deal2->popCoupon();
+    $this->assertEquals($this->deal2->getTargetQuantity(), 200);
+    $this->assertEquals($this->deal2->getActualQuantity(), 73);
+    $this->assertEquals($this->deal2->getRemainingQuantity(), 200-73);
+    $this->deal2->popCoupon();
+    $this->assertEquals($this->deal2->getTargetQuantity(), 200);
+    $this->assertEquals($this->deal2->getActualQuantity(), 74);
+    $this->assertEquals($this->deal2->getRemainingQuantity(), 200-74);
+    $this->assertEquals($this->deal2->getState(), DealTable::STATE_ACTIVE);
+
+    $this->assertEquals($this->deal3->getTargetQuantity(), 500);
+    $this->assertEquals($this->deal3->getActualQuantity(), 132);
+    $this->assertEquals($this->deal3->getRemainingQuantity(), 500-132);
+    $this->deal3->popCoupon();
+    $this->assertEquals($this->deal3->getTargetQuantity(), 500);
+    $this->assertEquals($this->deal3->getActualQuantity(), 133);
+    $this->assertEquals($this->deal3->getRemainingQuantity(), 500-133);
+    $this->deal3->popCoupon();
+    $this->assertEquals($this->deal3->getTargetQuantity(), 500);
+    $this->assertEquals($this->deal3->getActualQuantity(), 134);
+    $this->assertEquals($this->deal3->getRemainingQuantity(), 500-134);
+    $this->assertEquals($this->deal3->getState(), DealTable::STATE_ACTIVE);
+  }
+  
+    public function testIsActive() {
+      $this->assertFalse($this->deal1->isActive());
+      $this->assertFalse($this->deal2->isActive());
+      $this->assertFalse($this->deal3->isActive());
+      
+      $this->deal1->approve();
+      $this->deal2->approve();
+      $this->deal3->approve();
+
+      $this->assertTrue($this->deal1->isActive());
+      $this->assertTrue($this->deal2->isActive());
+      $this->assertTrue($this->deal3->isActive());
+      
+      $this->deal1->popCoupon();
+      $this->deal1->popCoupon();
+      $this->assertFalse($this->deal1->isActive());
+    }
+  
+  
+  
   /*
     NOT WORKING CAUSE OF STRANGE EVENT LISTENER IN PHP UNIT TEST PROBLEMS
   
@@ -118,7 +322,6 @@ class DealTest extends BaseTestCase {
     
     $this->assertEquals($dealData, $mongoData);
   }
-  */
   
   public function testInitialStates() {
     $this->assertEquals('submitted', $this->new->getState());
@@ -187,7 +390,7 @@ class DealTest extends BaseTestCase {
     $this->denied->refresh();
     $this->assertEquals('denied', $this->denied->getState());
   }
-  */
+
 
   public function testDeny() {
     $this->assertTrue($this->submitted->canDeny());
@@ -404,7 +607,7 @@ class DealTest extends BaseTestCase {
     $this->assertFalse(DealTable::isOverlapping($this->future));
   }
 
-  /*
+
   public function testGetActiveDealByHost() {
     sfContext::getInstance()->getEventDispatcher()->connect("deal.event.pause", array('DealListener', 'updateMongoDeal'));
     $this->active->pause();

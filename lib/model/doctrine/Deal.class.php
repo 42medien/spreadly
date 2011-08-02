@@ -18,7 +18,7 @@ class Deal extends BaseDeal {
     return $this->saveMultipleCoupons($params);
   }
 
-  public function getRemainingCouponQuantity() {
+  public function getRemainingQuantity() {
     return $this->getTargetQuantity()-$this->getActualQuantity();
   }
 
@@ -31,19 +31,27 @@ class Deal extends BaseDeal {
   }
 
   public function getCssClasses() {
-    return $this->getState().' '.($this->getState()==DealTable::STATE_APPROVED ? $this->getActiveCssClass() : '');
+    return $this->getState().' '.($this->getState()==DealTable::STATE_ACTIVE ? $this->getActiveCssClass() : '');
   }
 
   public function isActive() {
-    return $this->getState()==DealTable::STATE_APPROVED && $this->getRemainingCouponQuantity()>0;
+    return $this->getState()==DealTable::STATE_ACTIVE && $this->getRemainingQuantity()>0;
   }
 
   public function popCoupon() {
     sfContext::getInstance()->getLogger()->notice("{Deal} popCoupon for Deal: ".$this->getId());
 
+    if(!$this->isActive()) {
+      throw new Exception("This Deal is not active!");
+    }
+    
     $this->setActualQuantity($this->getActualQuantity()+1);
     $this->save();
-
+    
+    if($this->getRemainingQuantity() <= 0) {
+      $this->expire();
+    }
+    
     return $this->getCouponType()==DealTable::COUPON_TYPE_CODE ? $this->getCouponCode() : $this->getCouponUrl();
   }
 

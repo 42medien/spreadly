@@ -1,0 +1,23 @@
+sfGuardUser:
+  sfGuardUser_1:
+    first_name: John
+    last_name: Doe
+    email_address: johndoe@ekaabo.com
+    username: admin
+    password: admin
+    is_active: true
+    is_super_admin: true
+    last_login: null
+    created_at: '<?php echo date("c"); ?>'
+    updated_at: '<?php echo date("c"); ?>'
+
+sfGuardGroup:
+  Group_admin:
+    name:           admin
+    description:    Administrator group
+    Permissions:    [Permission_admin]
+
+sfGuardPermission:
+  Permission_admin:
+    name:           admin
+    description:    Administrator permission
