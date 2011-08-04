@@ -213,7 +213,24 @@ Prev
     margin-left: 0px;
 }
 
+.wd-form-box{
+  margin-top: 5px;
+  padding: 13px 14px 6px 16px;
+}
+
+#create_deal_button{
+  margin-right: 22px;
+}
+
+#create-deal-helptext{
+  width: 385px;
+  padding: 0 10px 0 10px;
+  
+}
+
 .nobg{ min-width: 0; }
+
+
 
 #deal_form ul.radio_list {
     padding-top: 0;

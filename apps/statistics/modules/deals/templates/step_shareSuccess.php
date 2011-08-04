@@ -3,38 +3,110 @@
 <?php slot('content') ?>
 <form action="<?php echo url_for('deals/step_share?did='.$pDealId); ?>" name="create_deal_form" method="POST">
 	<?php //echo $pForm['_csrf_token']->render(); ?>
-	<?php echo $pForm['motivation_title']->renderLabel(); ?>
-	<?php echo $pForm['motivation_title']->render(); ?>
-	<?php echo $pForm['motivation_title']->renderError(); ?>
-
-	<?php echo $pForm['motivation_text']->renderLabel(); ?>
-	<?php echo $pForm['motivation_text']->render(); ?>
-	<?php echo $pForm['motivation_text']->renderError(); ?>
-
-	<?php echo $pForm['spread_title']->renderLabel(); ?>
-	<?php echo $pForm['spread_title']->render(); ?>
-	<?php echo $pForm['spread_title']->renderError(); ?>
-
-	<?php echo $pForm['spread_text']->renderLabel(); ?>
-	<?php echo $pForm['spread_text']->render(); ?>
-	<?php echo $pForm['spread_text']->renderError(); ?>
-
-	<?php echo $pForm['spread_url']->renderLabel(); ?>
-	<?php echo $pForm['spread_url']->render(); ?>
-	<?php echo $pForm['spread_url']->renderError(); ?>
-
-	<?php echo $pForm['spread_img']->renderLabel(); ?>
-	<?php echo $pForm['spread_img']->render(); ?>
-	<?php echo $pForm['spread_img']->renderError(); ?>
-
-	<?php echo $pForm['spread_tos']->renderLabel(); ?>
-	<?php echo $pForm['spread_tos']->render(); ?>
-	<?php echo $pForm['spread_tos']->renderError(); ?>
-
-<input type="submit" id="create_deal_button" />
-
+	<div class="dealwidebox alignright">
+		<!-- screen von deal-like -->
+	</div>
+	<div class="createbtnbox alignleft">
+		<h2 class="btntitle"><?php echo __('Step 2: Configure your Coupon')?></h2>
+		<ul class="btnformlist">
+	  	<li class="clearfix">
+	    	<div class="btnwording alignleft">
+	      	<strong><?php echo $pForm['motivation_title']->renderLabel(); ?></strong><span><?php echo __('<span id="summary_counter">255</span> characters left'); ?></span>
+	      </div>
+	      <label class="textfield-wht">
+		      <span>
+		      	<?php echo $pForm['motivation_title']->render(array('class' => 'wd390')); ?>
+					</span>
+				</label>
+				<div class="content-error-box clearfix"><?php echo $pForm['motivation_title']->renderError(); ?></div>
+			</li>
+			<li class="clearfix">
+				<div class="btnwording alignleft">
+					<strong><?php echo $pForm['motivation_text']->renderLabel(); ?></strong> <span><?php echo __('<span id="description_counter">255</span> characters left'); ?></span>
+				</div>
+				<div class="alignleft">
+					<div class="textaria_top"><span>&nbsp;</span></div>
+						<div class="textaria_middle">
+							<div class="textaria_right">
+								<label class="textareablock">
+									<?php echo $pForm['motivation_text']->render(array('class' => 'wd390')); ?>
+								</label>
+							</div>
+						</div>
+						<div class="textaria_bot"><span>&nbsp;</span></div>
+				</div>
+				<div class="content-error-box clearfix"><?php echo $pForm['motivation_text']->renderError(); ?>	</div>
+			</li>
+			<li class="clearfix">
+				<div class="btnwording alignleft">
+					<strong><?php echo $pForm['spread_title']->renderLabel(); ?></strong> <span><?php echo __('<span id="description_counter">255</span> characters left'); ?></span>
+				</div>
+				<label class="textfield-wht">
+					<span>
+						<?php echo $pForm['spread_title']->render(array('class' => 'wd390')); ?>
+					</span>
+				</label>
+				<div class="content-error-box clearfix"><?php echo $pForm['spread_title']->renderError(); ?></div>
+			</li>
+			<li class="clearfix">
+				<div class="btnwording alignleft">
+					<strong><?php echo $pForm['spread_text']->renderLabel(); ?></strong> <span><?php echo __('<span id="description_counter">255</span> characters left'); ?></span>
+				</div>
+				<div class="alignleft">
+					<div class="textaria_top"><span>&nbsp;</span></div>
+						<div class="textaria_middle">
+							<div class="textaria_right">
+								<label class="textareablock">
+									<?php echo $pForm['spread_text']->render(array('class' => 'wd390')); ?>
+								</label>
+							</div>
+						</div>
+						<div class="textaria_bot"><span>&nbsp;</span></div>
+				</div>
+				<div class="content-error-box clearfix"><?php echo $pForm['spread_text']->renderError(); ?>	</div>
+			</li>
+			<li class="clearfix">
+				<div class="btnwording alignleft">
+					<strong><?php echo $pForm['spread_url']->renderLabel(); ?></strong>
+				</div>
+				<label class="textfield-wht">
+					<span>
+						<?php echo $pForm['spread_url']->render(array('class' => 'wd390')); ?>
+					</span>
+				</label>
+				<div class="content-error-box clearfix"><?php echo $pForm['spread_url']->renderError(); ?></div>
+			</li>
+			<li class="clearfix">
+				<div class="btnwording alignleft">
+					<strong><?php echo $pForm['spread_img']->renderLabel(); ?></strong>
+				</div>
+				<label class="textfield-wht">
+					<span>
+						<?php echo $pForm['spread_img']->render(array('class' => 'wd390')); ?>
+					</span>
+				</label>
+				<div class="content-error-box clearfix"><?php echo $pForm['spread_img']->renderError(); ?></div>
+			</li>
+			<li class="clearfix">
+				<div class="btnwording alignleft">
+					<strong><?php echo $pForm['spread_tos']->renderLabel(); ?></strong>
+				</div>
+				<label class="textfield-wht">
+					<span>
+						<?php echo $pForm['spread_tos']->render(array('class' => 'wd390')); ?>
+					</span>
+				</label>
+				<div class="content-error-box clearfix"><?php echo $pForm['spread_tos']->renderError(); ?></div>
+			</li>
+		</ul>
+		<input type="submit" id="create_deal_button" class="alignright" />
+	</div>
 </form>
 
 
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
+
+
+
+

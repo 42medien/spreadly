@@ -31,8 +31,10 @@ class dealsActions extends sfActions
     $this->pDealId = $request->getParameter('did', null);
 		$this->pForm = new CreateDealForm();
 
+		//@todo statemachine-moped einbauen....
 		//@todo wenn keine deal-id da ist, dann muss überprüft werden, ob step_campaign ist, wenn nicht -> fehlermeldung: lass die url in ruhe du affe
-    //check, if there is a deal
+
+		//check, if there is a deal
 		if($this->pDealId) {
 			$this->pDeal = DealTable::getInstance()->find($this->pDealId);
 			//is user allowed to edit the deal?
@@ -48,6 +50,7 @@ class dealsActions extends sfActions
   /**
    * Create deal - step 1: Give the deal a name and select the target quantity
    * @param sfWebRequest $request
+   * @todo statemachine-moped einbauen
    */
   public function executeStep_campaign(sfWebRequest $request){
   	$this->pForm->validate_campaign();
