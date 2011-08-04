@@ -44,6 +44,9 @@ Deal:
     tos_accepted:
       type: boolean
       default: false
+    pool_hits:
+      type: integer(4)
+      default: 0
       
     # Conditions
     email_required:

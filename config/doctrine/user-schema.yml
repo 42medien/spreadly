@@ -55,3 +55,5 @@ User:
     last_activity:
       type:       integer
       default:    0
+    participated_deals: array(10000)
+    

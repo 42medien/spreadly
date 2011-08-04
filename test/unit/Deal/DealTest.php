@@ -13,57 +13,21 @@ class DealTest extends BaseTestCase {
   }
 
   public function setUp() {
-    parent::resetMongo();
+    //parent::resetMongo();
     sfConfig::set('sf_environment', 'test');
     Doctrine::loadData(dirname(__file__).'/fixtures');
     sfConfig::set('sf_environment', 'dev');
     
     $this->table = Doctrine::getTable('Deal');
-    
+
     $this->deal1 = $this->table->findOneBy('name', 'Campaign No. 1');
     $this->deal2 = $this->table->findOneBy('name', 'Campaign No. 2');
     $this->deal3 = $this->table->findOneBy('name', 'Campaign No. 3');
+    $this->deal4 = $this->table->findOneBy('name', 'Campaign No. 4');
+    $this->deal5 = $this->table->findOneBy('name', 'Campaign No. 5');
+    $this->deal6 = $this->table->findOneBy('name', 'Campaign No. 6');
     
-    //$this->col = MongoDbConnector::getInstance()->getCollection(sfConfig::get('app_mongodb_database_name'), "deals");
-    
-    /*
-    $this->domainProfile = Doctrine_Query::create()
-          ->from('DomainProfile d')
-          ->fetchOne();
-    $this->user = Doctrine_Query::create()
-          ->from('sfGuardUser u')
-          ->fetchOne();
-    $this->new = new Deal();
-    $this->new->setDomainProfile($this->domainProfile);
-    $this->new->setSfGuardUser($this->user);
-    $this->submitted = Doctrine::getTable('Deal')->findOneBy("deal_state", "submitted");
-    $this->approved = Doctrine::getTable('Deal')->findOneBy("deal_state", "approved");
-    $this->denied = Doctrine::getTable('Deal')->findOneBy("deal_state", "denied");
-    $this->trashed = Doctrine::getTable('Deal')->findOneBy("deal_state", "trashed");
-    $this->paused = Doctrine::getTable('Deal')->findOneBy("deal_state", "paused");
-
-    $this->past = Doctrine::getTable('Deal')->findOneBy("summary", "snirgel_past");
-    $this->past->setStartDate(date("c", strtotime("-2 days")));
-    $this->past->setEndDate(date("c", strtotime("-1 day")));
-    $this->past->save();
-    $this->past->saveInitialCoupons(array("single_code" => "xxyyzz"));
-
-    $this->active = Doctrine::getTable('Deal')->findOneBy("summary", "snirgel_active");
-    $this->active->setStartDate(date("c", strtotime("-23 hours")));
-    $this->active->setEndDate(date("c", strtotime("23 hours")));
-    $this->active->save();
-    $this->active->saveInitialCoupons(array("single_code" => "aabbcc"));
-
-    $this->future = Doctrine::getTable('Deal')->findOneBy("summary", "snirgel_future");
-    $this->future->setStartDate(date("c", strtotime("1 day")));
-    $this->future->setEndDate(date("c", strtotime("2 days")));
-    $this->future->save();
-    $this->future->saveInitialCoupons(array("single_code" => "ddeeff"));
-    
-    $this->singleUnlimited = Doctrine::getTable('Deal')->findOneBy("summary", "single_unlimited");
-    $this->single100 = Doctrine::getTable('Deal')->findOneBy("summary", "single_100");
-    $this->multiple = Doctrine::getTable('Deal')->findOneBy("summary", "multiple");
-    */
+    $this->hugo = UserTable::getInstance()->findOneByUsername('hugo');
   }
   
     
@@ -238,25 +202,55 @@ class DealTest extends BaseTestCase {
     $this->assertEquals($this->deal3->getState(), DealTable::STATE_ACTIVE);
   }
   
-    public function testIsActive() {
-      $this->assertFalse($this->deal1->isActive());
-      $this->assertFalse($this->deal2->isActive());
-      $this->assertFalse($this->deal3->isActive());
-      
-      $this->deal1->approve();
-      $this->deal2->approve();
-      $this->deal3->approve();
+  public function testIsActive() {
+    $this->assertFalse($this->deal1->isActive());
+    $this->assertFalse($this->deal2->isActive());
+    $this->assertFalse($this->deal3->isActive());
+    
+    $this->deal1->approve();
+    $this->deal2->approve();
+    $this->deal3->approve();
 
-      $this->assertTrue($this->deal1->isActive());
-      $this->assertTrue($this->deal2->isActive());
-      $this->assertTrue($this->deal3->isActive());
-      
-      $this->deal1->popCoupon();
-      $this->deal1->popCoupon();
-      $this->assertFalse($this->deal1->isActive());
+    $this->assertTrue($this->deal1->isActive());
+    $this->assertTrue($this->deal2->isActive());
+    $this->assertTrue($this->deal3->isActive());
+    
+    $this->deal1->popCoupon();
+    $this->deal1->popCoupon();
+    $this->assertFalse($this->deal1->isActive());
+  }
+  
+  public function testGetNextFromPool() {
+    $this->assertEquals($this->table->getNextFromPool($this->hugo)->getId(), $this->deal6->getId());
+    $this->assertEquals($this->table->getNextFromPool($this->hugo)->getId(), $this->deal5->getId());
+    $this->assertEquals($this->table->getNextFromPool($this->hugo)->getId(), $this->deal4->getId());
+    $this->assertEquals($this->table->getNextFromPool($this->hugo)->getId(), $this->deal6->getId());
+    $this->assertEquals($this->table->getNextFromPool($this->hugo)->getId(), $this->deal5->getId());
+    $this->assertEquals($this->table->getNextFromPool($this->hugo)->getId(), $this->deal4->getId());
+    $this->assertEquals($this->table->getNextFromPool($this->hugo)->getId(), $this->deal6->getId());
+    $this->assertEquals($this->table->getNextFromPool($this->hugo)->getId(), $this->deal5->getId());
+    $this->assertEquals($this->table->getNextFromPool($this->hugo)->getId(), $this->deal4->getId());
+    
+    $this->deal1->approve();
+
+    $this->assertEquals($this->table->getNextFromPool($this->hugo)->getId(), $this->deal1->getId());
+  }
+
+  public function testExpire() {
+    $this->assertTrue($this->deal4->isActive());
+    for ($i=0; $i < 2; $i++) { 
+      $this->deal4->popCoupon();
     }
-  
-  
+    $this->assertFalse($this->deal4->isActive());
+    $this->assertEquals(DealTable::STATE_EXPIRED, $this->deal4->getState());
+
+    $this->assertTrue($this->deal5->isActive());
+    for ($i=0; $i < 128; $i++) { 
+      $this->deal5->popCoupon();
+    }
+    $this->assertFalse($this->deal5->isActive());
+    $this->assertEquals(DealTable::STATE_EXPIRED, $this->deal5->getState());
+  }
   
   /*
     NOT WORKING CAUSE OF STRANGE EVENT LISTENER IN PHP UNIT TEST PROBLEMS

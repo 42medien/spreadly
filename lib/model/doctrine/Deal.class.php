@@ -10,22 +10,10 @@
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 class Deal extends BaseDeal {
-  public function addMoreCoupons($params) {
-    return $this->saveMultipleCoupons($params, true);
-  }
-
-  public function saveInitialCoupons($params) {
-    return $this->saveMultipleCoupons($params);
-  }
-
+  
   public function getRemainingQuantity() {
     return $this->getTargetQuantity()-$this->getActualQuantity();
   }
-
-  public function getHumanCouponQuantity() {
-    return $this->getTargetQuantity();
-  }
-
   public function getActiveCssClass() {
     return ($this->isActive() ? 'deal_active' : 'deal_inactive');
   }
@@ -62,111 +50,6 @@ class Deal extends BaseDeal {
     return $stats;
   }
 
-  public function isUnlimited() {
-    return false;
-  }
-
-  private function allElementsEmpty($array) {
-    $lAllEmpty = true;
-    foreach ($array as $element) {
-      if(!empty($element)) {
-        $lAllEmpty = false;
-      }
-    }
-    return $lAllEmpty;
-  }
-
-  private static function compactArray($element) {
-    return !empty($element);
-  }
-
-  private function saveMultipleCoupons($params, $pIsAdding=false) {
-    throw new Exception("Multiple Coupons have been removed!");
-  }
-
-  private function saveQuantities($pNumberOfCodes, $pParamQuantity, $pIsAdding) {
-    $lCouponQuantity = $this->getTargetQuantity();
-    $this->setTargetQuantity($lCouponQuantity+$pParamQuantity);
-    $this->save();
-  }
-
-  public function toMongoArray() {
-    $array = $this->toArray();
-    $array['id'] = intval($this->getId());
-    $array['name'] = $this->getName();
-    $array['created_at'] = new MongoDate(intval(strtotime($array['created_at'])));
-    $array['updated_at'] = new MongoDate(intval(strtotime($array['updated_at'])));
-    $array['target_quantity'] = $this->getTargetQuantity();
-    $array['actual_quantity'] = $this->getActualQuantity();
-    $array['human_coupon_quantity'] = $this->getHumanCouponQuantity();
-    $array['is_unlimited'] = $this->isUnlimited();
-    $array['host'] = $this->getDomainProfile()->getUrl();
-    return $array;
-  }
-
-  public function validateNewQuantity($newQuantity) {
-    $lError = "";
-
-    $lNumeric = is_numeric($newQuantity);
-  	$lHigher = $newQuantity > $this->getTargetQuantity();
-  	if(($lNumeric && $lHigher) || ($lNumeric && $newQuantity == $this->getTargetQuantity())) {
-  	  // The new quantity is either numeric and higher or nothing was changed, so nothing should be done
-  	} else {
-  	  $lError = "";
-  	  $lError = $lError. ($lNumeric ? '' : 'not a number');
-  	  $lError = $lError.((!$lNumeric&&!$lHigher) ? ' and ' : '');
-  	  $lError = $lError.($lHigher ? '' : 'not more than before');
-  	}
-
-    return empty($lError) ? true : $lError;
-  }
-
-  public function validateNewEndDate($pDateString) {
-    throw new Exception("End dates have been removed!");
-  }
-
-  public function postSave($event) {
-    $eventName = $this->getTable()->getTableName().".changed";
-    sfProjectConfiguration::getActive()->getEventDispatcher()->notify(new sfEvent($this, $eventName));
-  }
-
-  /**
-   * Enter description here...
-   *
-   * @return array|null
-   */
-  public function getTagsAsArray() {
-    throw new Exception("Tags have been removed!"); 
-  }
-
-  public function getRemainingDays() {
-    throw new Exception("Deals don't have runtimes anymore!");
-  }
-
-  /**
-   * checks if a user is allowed to participate the deal
-   *
-   * @param sfUser $user
-   * @return boolean
-   */
-  public function hasUserTheRequiredCredentials($user) {
-    throw new Exception("Deal type html has been removed! Think of something else …");
-    /*
-    if ($this->getCouponType() == "html") {
-      $community = CommunityTable::getInstance()->findOneBy("community", "facebook");
-      $oi = OnlineIdentityTable::getInstance()->createQuery()
-        ->where("user_id = ? AND community_id = ?", array($user->getId(), $community->getId()))
-        ->limit(1)
-        ->orderBy("id")
-        ->fetchOne();
-      if ($oi) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-    */
-  }
 
   public function getImageUrl() {
     if ($this->_get("spread_img")) {

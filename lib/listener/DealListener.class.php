@@ -39,30 +39,4 @@ class DealListener {
     sfContext::getInstance()->getLogger()->notice("{DealListener} eventDeny");
   }
 
-  public static function eventPause($event) {
-    sfContext::getInstance()->getLogger()->notice("{DealListener} eventPause");
-  }
-
-  public static function eventResume($event) {
-    sfContext::getInstance()->getLogger()->notice("{DealListener} eventResume");
-  }
-
-  public static function eventTrash($event) {
-    sfContext::getInstance()->getLogger()->notice("{DealListener} eventTrash");
-  }
-
-  public static function updateMongoDeal($event) {
-    sfContext::getInstance()->getLogger()->notice("{DealListener} updateMongoDeal");
-    $deal = $event->getSubject();
-    $params = $event->getParameters();
-
-    $db = new Mongo(sfConfig::get('app_mongodb_host'));
-    $col = $db->selectCollection(sfConfig::get('app_mongodb_database_name'), "deals");
-
-    if($deal->getState()=='approved') {
-      $col->update(array("id" => intval($deal->getId())), $deal->toMongoArray(), array("upsert" => true));
-    } else {
-      $col->remove(array("id" => intval($deal->getId())));
-    }
-  }
 }

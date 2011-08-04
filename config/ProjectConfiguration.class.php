@@ -61,15 +61,6 @@ class ProjectConfiguration extends sfProjectConfiguration {
     // Register listeners for Deal events
     $prefix = "deal.event.";
 
-    $this->dispatcher->connect('deal.changed', array('DealListener', 'updateMongoDeal'));
-
-    $this->dispatcher->connect($prefix.'submit', array('DealListener', 'updateMongoDeal'));
-    $this->dispatcher->connect($prefix.'approve', array('DealListener', 'updateMongoDeal'));
-    $this->dispatcher->connect($prefix.'deny', array('DealListener', 'updateMongoDeal'));
-    $this->dispatcher->connect($prefix.'pause', array('DealListener', 'updateMongoDeal'));
-    $this->dispatcher->connect($prefix.'resume', array('DealListener', 'updateMongoDeal'));
-    $this->dispatcher->connect($prefix.'trash', array('DealListener', 'updateMongoDeal'));
-
     $this->dispatcher->connect($prefix.'submit', array('DealListener', 'eventSubmit'));
     $this->dispatcher->connect($prefix.'approve', array('DealListener', 'eventApprove'));
     $this->dispatcher->connect($prefix.'deny', array('DealListener', 'eventDeny'));

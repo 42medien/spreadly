@@ -64,7 +64,6 @@ EOF;
       }
     }
 
-    $this->dispatcher->connect('deal.changed', array('DealListener', 'updateMongoDeal'));
     $deal = DealTable::getInstance()->findByName('Campaign No. 1');
     if($deal[0]->canApprove()) {
       $deal[0]->approve();
@@ -141,8 +140,6 @@ EOF;
     $lActivity->fromArray($array);
     $lActivity->save();
 
-    $this->dispatcher->connect('deal.changed', array('DealListener', 'updateMongoDeal'));
-    $deal = DealTable::getInstance()->findByDescription('notizblog approved description');
     if($deal[0]->canApprove()) {
       $deal[0]->approve();
     }
@@ -165,7 +162,6 @@ EOF;
     $lActivity->fromArray($array);
     $lActivity->save();
 
-    $this->dispatcher->connect('deal.changed', array('DealListener', 'updateMongoDeal'));
     $deal = DealTable::getInstance()->findByDescription('missmotz approved description');
     if($deal[0]->canApprove()) {
       $deal[0]->approve();
