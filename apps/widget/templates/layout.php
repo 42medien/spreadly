@@ -41,9 +41,7 @@
 		          </ul>
 		          <ul class="nav-list" role="navigation">
 		            <li <?php if ($sf_context->getModuleName()=='likes') { echo 'class="active"'; } ?>><?php echo link_to(__('Likes'), '@widget_likes'); ?></li>
-		            <li <?php if ($sf_context->getModuleName()=='deals') { echo 'class="active"'; } ?>><?php echo link_to(__('Deals'), '@widget_deals'); ?></li>
-		            <li id="nav-next-to-last" class="<?php if ($sf_context->getModuleName()=='settings') { echo 'active'; } ?>"><?php echo link_to(__('Settings'), '@widget_settings'); ?></li>
-								<li id="nav-spread" class="<?php if ($sf_context->getModuleName()=='like') { echo ''; } ?>"><?php echo link_to(__('Like it!'), '@widget_like'); ?></li>
+		            <li id="nav-next-to-last" <?php if ($sf_context->getModuleName()=='deals') { echo 'class="active"'; } ?>><?php echo link_to(__('Deals'), '@widget_deals'); ?></li>
 		          </ul>
 		      <?php } else { ?>
 			       	<ul class="nav-list alignright" role="navigation">
@@ -51,9 +49,8 @@
 		          </ul>
 		          <ul class="nav-list" role="navigation">
 		            <li <?php if ($sf_context->getModuleName()=='likes') { echo 'class="active"'; } ?>><?php echo link_to(__('Likes'), '@widget_likes'); ?></li>
-		            <li <?php if ($sf_context->getModuleName()=='deals') { echo 'class="active"'; } ?>><?php echo link_to(__('Deals'), '@widget_deals'); ?></li>
-		            <li id="nav-next-to-last" class="<?php if ($sf_context->getModuleName()=='settings') { echo 'active'; } ?>"><?php echo link_to(__('Settings'), '@widget_settings'); ?></li>
-								<li id="nav-spread" class="<?php if ($sf_context->getModuleName()=='like') { echo ''; } ?>"><?php echo link_to(__('Like it!'), '@widget_like'); ?></li>
+		            <li id="nav-next-to-last" <?php if ($sf_context->getModuleName()=='deals') { echo 'class="active"'; } ?>><?php echo link_to(__('Deals'), '@widget_deals'); ?></li>
+		            <li id="nav-spread" class="<?php if ($sf_context->getModuleName()=='like') { echo ''; } ?>"><?php echo link_to(__('Like it!'), '@widget_like'); ?></li>
 		          </ul>
 		      <?php } ?>
 		      <!-- Pop Navigation end -->
