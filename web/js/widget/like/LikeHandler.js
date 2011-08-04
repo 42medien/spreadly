@@ -94,7 +94,7 @@ var WidgetLikeForm = {
     init: function() {
       debug.log('[WidgetLikeForm][init]');
       WidgetLikeForm.doSend();
-      jQuery('#area-like-comment').toggleValue();
+      //jQuery('#area-like-comment').toggleValue();
       jQuery('.mirror-value').mirrorValue();
       WidgetLikeForm.aComment = jQuery('#area-like-comment').val();
 
