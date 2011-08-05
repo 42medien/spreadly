@@ -14,13 +14,6 @@ class Deal extends BaseDeal {
   public function getRemainingQuantity() {
     return $this->getTargetQuantity()-$this->getActualQuantity();
   }
-  public function getActiveCssClass() {
-    return ($this->isActive() ? 'deal_active' : 'deal_inactive');
-  }
-
-  public function getCssClasses() {
-    return $this->getState().' '.($this->getState()==DealTable::STATE_ACTIVE ? $this->getActiveCssClass() : '');
-  }
 
   public function isActive() {
     return $this->getState()==DealTable::STATE_ACTIVE && $this->getRemainingQuantity()>0;
