@@ -21,45 +21,14 @@ class likeActions extends sfActions {
 
     // ckeck url
     if ($lUrl) {
-      // set redirect url
-      $this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "widget");
-
       $this->pIdentities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
-      // check active deals
-      $this->pActiveDeal = DealTable::getActiveByHost($lUrl, $request->getParameter("tags", null));
-      $this->pActivity = null;
-
-      // if there is an active deal
-      if($this->pActiveDeal) {
-        $this->pActivity = $dm->getRepository("Documents\YiidActivity")->findOneBy(array("d_id" => intval($this->pActiveDeal->getId()), "u_id" => intval($this->getUser()->getId())));
-
-        // check if user has already dealt
-        if(!$this->pActivity) {
-    			$this->getResponse()->setSlot('js_document_ready', $this->getPartial('like/js_init_deal.js'));
-    			$this->pUrl = $request->getParameter('url');
-    			$this->pTags = $request->getParameter('tags');
-    			$this->pClickback = $request->getParameter('clickback');
-          $this->setTemplate('deal');
-          return sfView::SUCCESS;
-        } else {
-          $this->pActivity = $dm->getRepository("Documents\YiidActivity")->findOneBy(array("url" => $lUrl, "u_id" => intval($this->getUser()->getId()), "d_id" => array('$exists' => false)));
-
-          // if user has already liked
-          if($this->pActivity) {
-            $this->redirect('@widget_deals');
-          }
-        }
-      }
 
       $this->pActivity = $dm->getRepository("Documents\YiidActivity")->findOneBy(array("url" => $lUrl, "u_id" => intval($this->getUser()->getId()), "d_id" => array('$exists' => false)));
 
+      // if user has already liked
       if($this->pActivity) {
-        $this->redirect('@widget_likes');
+        $this->redirect('@widget_deal');
       }
-    } elseif ($lUrl = $this->getUser()->getAttribute("redirect_after_login", null, "widget")) {
-      $this->redirect($lUrl);
-    } else {
-      $this->forward("like", "nourl");
     }
 
     $lYiidMeta = new YiidMeta();
@@ -103,8 +72,6 @@ class likeActions extends sfActions {
 					$lReturn['html'] = $this->getPartial('like/coupon_used', array('pActivity' => $lActivity));
       	}
       }
-
-      $this->getUser()->setAttribute("redirect_after_login", null, "widget");
 		} catch (Exception $e) { // send error on exception
 		  $this->getLogger()->err($e->getMessage());
       $lSuccess = false;

@@ -34,7 +34,7 @@
   <?php //echo __('Please check your selected services to share and accept the TOS'); ?>
   <?php
     $disabled = false;
-    if (!$sf_user->checkDealCredentials() || !$sf_user->isAuthenticated()) {
+    if (!$sf_user->isAuthenticated()) {
       $disabled = true;
     }
   ?>

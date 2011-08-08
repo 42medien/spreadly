@@ -8,5 +8,5 @@ i18n.init({
 WidgetLikeForm.init();
 
 <?php if(!$sf_user->isAuthenticated()) { ?>
-	WidgetAddService.init();
+	//WidgetAddService.init();
 <?php } ?>
