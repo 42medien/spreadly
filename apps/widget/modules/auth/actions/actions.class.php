@@ -15,15 +15,9 @@ class authActions extends sfActions {
    * @param sfRequest $request A request object
    */
   public function executeSignin(sfWebRequest $request) {
-    // cache get params
-    if ($request->getParameter('url') != null) {
-      $this->getUser()->setAttribute("redirect_after_login", $request->getUri(), "widget");
-    }
-
     // redirect if user is already logged in
     if ($this->getUser()->isAuthenticated()) {
-      $lUrl = $this->getUser()->getAttribute("redirect_after_login", "@widget_like", "widget");
-      $this->redirect($lUrl);
+      $this->redirect("@widget_like");
     }
 
     sfProjectConfiguration::getActive()->loadHelpers('I18N');
@@ -32,20 +26,16 @@ class authActions extends sfActions {
 
   public function executeSignout(sfWebRequest $request) {
     $this->getUser()->signOut();
-    $this->redirect('@signin');
+    $this->redirect('@widget_like');
   }
 
   public function executeSigninto(sfWebRequest $request) {
     // if the user is already loged in, redirect to the stream
     if ($lService = $request->getParameter("service")) {
-      /*if ($request->hasParameter('r') && $request->getParameter('r') == "s") {
-        $this->getUser()->setAttribute("redirect_after_login", "@widget_settings", "widget");
-      }*/
-
       $lObject = AuthApiFactory::factory($lService);
       $lObject->doAuthentication();
     } else {
-      $this->redirect('@signin');
+      $this->redirect('@widget_like');
     }
   }
 
@@ -57,7 +47,7 @@ class authActions extends sfActions {
     } elseif ($lToken = $request->getParameter('code')) {
       // do nothing
     } elseif ($request->getParameter('error') == "access_denied") {
-      $this->redirect('@signin');
+      $this->redirect('@auth_error');
     }
 
     $lObject = AuthApiFactory::factory($request->getParameter('service'));
@@ -75,9 +65,7 @@ class authActions extends sfActions {
       $this->getUser()->signIn($lUser);
     }
 
-    $lUrl = $this->getUser()->getAttribute("redirect_after_login", "@widget_like", "widget");
-
-    $this->redirect($lUrl);
+    $this->setLayout(false);
   }
 
   public function executeCreate_account(sfWebRequest $request) {
