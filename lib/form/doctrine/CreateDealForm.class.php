@@ -34,7 +34,7 @@ class CreateDealForm extends BaseDealForm
       'coupon_url'        => new sfWidgetFormInputText(),
       'coupon_redeem_url' => new sfWidgetFormInputText(),
       //'billing_type'      => new sfWidgetFormChoice(array('choices' => array('like' => 'like', 'media_penetration' => 'media_penetration'))),
-      'target_quantity'   => new sfWidgetFormChoice(array('choices' => array('10' => _('10'), '100' => _('100'), '200' => _('200'), '500' => _('500')), 'expanded' => true )),
+      'target_quantity'   => new sfWidgetFormChoice(array('choices' => array('10' => '10', '100' => '100', '200' => '200', '500' => '500'), 'expanded' => true )),
       //'actual_quantity'   => new sfWidgetFormInputText(),
       'sf_guard_user_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => true)),
       //'payment_method_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('PaymentMethod'), 'add_empty' => false)),
