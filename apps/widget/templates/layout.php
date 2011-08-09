@@ -19,6 +19,12 @@
 
 
     <link rel="shortcut icon" href="/favicon.ico" />
+
+    <script type="text/javascript">
+      function reload_services() {
+        debug.log("DISCH");
+      }
+    </script>
   </head>
   <body>
     <div class="popupblock">
