@@ -6,7 +6,7 @@ use_helper('Avatar', 'Text');
 </header>
 
 <!-- weisser Content -->
-<div id="content-inner" class="clearfix deal">
+<div id="content-inner" class="clearfix deal-content-inner">
   <h3><?php echo $deal->getMotivationTitle(); ?></h3>
   <h4><?php echo $deal->getMotivationText(); ?></h4>
 
@@ -17,7 +17,7 @@ use_helper('Avatar', 'Text');
         <div class="scrollable bordered-light shadow-light" id="myscroll">
           <!-- root element for the items -->
           <div class="items alignleft" id="scroll-meta-images">
-            <img id="meta-img" src="<?php echo $deal->getSpreadImage(); ?>" width="80" />
+            <img id="meta-img" src="<?php echo $deal->getSpreadImg(); ?>" width="80" />
           </div>
         </div>
       </div>
