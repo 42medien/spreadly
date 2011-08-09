@@ -203,8 +203,19 @@ footer ul li:last-child a {
   padding-top:0;
 }
 
-#popup-like-form div#comment-area textarea#area-like-comment{
+div#comment-area textarea#area-like-comment{
   width: 95%;
+  height: 45px;
+  font-size: 16px;
+}
+
+#popup-like-form div.deal-comment textarea#area-like-comment{
+	margin-top: 15px;
+  height: 18px;
+  font-size: 12px;
+}
+
+#popup-like-form div.deal-comment textarea#area-like-comment:focus {
   height: 45px;
   font-size: 16px;
 }
