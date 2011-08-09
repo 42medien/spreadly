@@ -15,6 +15,8 @@ class likeActions extends sfActions {
    * @param sfRequest $request A request object
    */
   public function executeIndex(sfWebRequest $request) {
+    $lUrl = $request->getParameter("url", null);
+
     if ($request->getMethod() == "POST") {
       $lParams = $request->getParameter('like');
 
@@ -26,15 +28,13 @@ class likeActions extends sfActions {
       // try to save activity
       try {
         $lActivity->save();
-        $this->redirect("@deal");
+        $this->redirect("@deal?url=".urlencode($lUrl));
       } catch (Exception $e) { // send error on exception
         $this->getLogger()->err($e->getMessage());
       }
     }
 
     $dm = MongoManager::getDM();
-    // check if already liked and redirect
-    $lUrl = $request->getParameter("url", null);
 
     // ckeck url
     if ($lUrl) {
@@ -44,7 +44,7 @@ class likeActions extends sfActions {
 
       // if user has already liked
       if($this->pActivity) {
-        $this->redirect('@deal');
+        $this->redirect("@deal?url=".urlencode($lUrl));
       }
     }
 
