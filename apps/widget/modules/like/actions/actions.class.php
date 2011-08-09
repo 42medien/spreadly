@@ -38,8 +38,6 @@ class likeActions extends sfActions {
 
     // ckeck url
     if ($lUrl) {
-      $this->pIdentities = OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId());
-
       $this->pActivity = $dm->getRepository("Documents\YiidActivity")->findOneBy(array("url" => $lUrl, "u_id" => intval($this->getUser()->getId()), "d_id" => array('$exists' => false)));
 
       // if user has already liked
