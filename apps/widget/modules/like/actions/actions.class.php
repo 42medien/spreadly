@@ -15,6 +15,23 @@ class likeActions extends sfActions {
    * @param sfRequest $request A request object
    */
   public function executeIndex(sfWebRequest $request) {
+    if ($request->getMethod() == "POST") {
+      $lParams = $request->getParameter('like');
+
+      $lParams['u_id'] = $this->getUser()->getUserId();
+
+      $lActivity = new Documents\YiidActivity();
+      $lActivity->fromArray($lParams);
+
+      // try to save activity
+      try {
+        $lActivity->save();
+        $this->redirect("@deal");
+      } catch (Exception $e) { // send error on exception
+        $this->getLogger()->err($e->getMessage());
+      }
+    }
+
     $dm = MongoManager::getDM();
     // check if already liked and redirect
     $lUrl = $request->getParameter("url", null);
@@ -27,7 +44,7 @@ class likeActions extends sfActions {
 
       // if user has already liked
       if($this->pActivity) {
-        $this->redirect('@widget_deal');
+        $this->redirect('@deal');
       }
     }
 
@@ -42,45 +59,6 @@ class likeActions extends sfActions {
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('like/js_init_like.js', array('pImgCount' => count($this->pYiidMeta->getImages()), 'pUrl' => $request->getParameter("url"))));
   }
 
-  public function executeSave(sfWebRequest $request) {
-  	$this->getResponse()->setContentType('application/json');
-  	$lParams = $request->getParameter('like');
-
-		$lParams['u_id'] = $this->getUser()->getUserId();
-		$lActiveDeal = DealTable::getActiveDealByHostAndTagsAndUserId($lParams['url'], $lParams['tags'], $lParams['u_id']);
-		// Check if user accepted TOS if he is attempting to participate in deal
-		if($lActiveDeal && $lParams['ignore_deal'] == 0) {
-  		$lParams['d_id'] = $lActiveDeal->getId();
-  		if($lParams['tos']!='on') {
-  		  $lReturn['success'] = false;
-  		  $lReturn['message'] = "Terms of Service not checked.";
-  		  return $this->renderText(json_encode($lReturn));
-  		}
-		}
-
-  	$lActivity = new Documents\YiidActivity();
-    $lActivity->fromArray($lParams);
-
-    // try to save activity
-    try {
-      $lActivity->save();
-      $lSuccess = true;
-      if($lActivity->isDeal()){
-      	if($lActiveDeal->getCouponType() == 'html'){
-      		$lReturn['html'] = $this->getPartial('like/coupon_html_used', array('pActivity' => $lActivity));
-      	} else {
-					$lReturn['html'] = $this->getPartial('like/coupon_used', array('pActivity' => $lActivity));
-      	}
-      }
-		} catch (Exception $e) { // send error on exception
-		  $this->getLogger()->err($e->getMessage());
-      $lSuccess = false;
-		}
-
-  	$lReturn['success'] = $lSuccess;
-    return $this->renderText(json_encode($lReturn));
-  }
-
   public function executeGet_images(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
     $lUrl = $request->getParameter("url");
@@ -92,39 +70,5 @@ class likeActions extends sfActions {
 
   public function executeNourl(sfWebRequest $request){
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('like/js_init_nourl.js'));
-  }
-
-  public function executeGet_like_content(sfWebRequest $request) {
-  	$this->getResponse()->setContentType('application/json');
-    $lUrl = $request->getParameter("url", null);
-    $lReturn = array();
-    $dm = MongoManager::getDM();
-
-    $lActivity = $dm->getRepository("Documents\YiidActivity")->findOneBy(array("url" => $lUrl, "u_id" => intval($this->getUser()->getId()), "d_id" => array('$exists' => false)));
-
-		if($lActivity) {
-	      $lReturn['success'] = false;
-	      $lReturn['msg'] = _('Already liked');
-		} else {
-	    $lYiidMeta = new YiidMeta();
-	    $this->pYiidMeta = SocialObjectParser::fetch($lUrl, $lYiidMeta);
-	    if ($this->pYiidMeta === false) {
-	      $lReturn['success'] = false;
-	      $lReturn['msg'] = _('Wrong Url');
-	    } else {
-	      //$this->getUser()->setAttribute("redirect_after_login", sfConfig::get("app_settings_widgets_url")."/?url=".urlencode($lUrl), "widget");
-	      $lReturn['success'] = true;
-	    	$lReturn['html'] = $this->getPartial('like/like_content', array('pYiidMeta' => $lYiidMeta, "pIdentities" => OnlineIdentityTable::getPublishingEnabledByUserId($this->getUser()->getUserId())));
-	    	$lReturn['imgcount'] = count($this->pYiidMeta->getImages());
-	    	$lReturn['url'] = $lUrl;
-	    }
-		}
-
-    return $this->renderText(json_encode($lReturn));
-  }
-
-  public function executeTest(sfWebRequest $request){
-    $dm = MongoManager::getDM();
-		$this->pActivity = $dm->getRepository("Documents\YiidActivity")->findOneBy(array("d_id" => intval(8), "u_id" => intval($this->getUser()->getId())));
   }
 }
