@@ -69,19 +69,30 @@ class CreateDealForm extends BaseDealForm
   }
 
   public function validate_coupon(){
+  	$lI18n = sfContext::getInstance()->getI18N();
     $this->setValidators(array(
       'coupon_type'       => new sfValidatorChoice(array('choices' => array(0 => 'code', 1 => 'url', 2 => 'download'), 'required' => true)),
       'coupon_title'      => new sfValidatorString(array('max_length' => 255, 'required' => true)),
       'coupon_text'       => new sfValidatorString(array('required' => true)),
-      'coupon_code'       => new sfValidatorString(array('max_length' => 255, 'required' => true)),
-      'coupon_url'        => new sfValidatorString(array('max_length' => 255, 'required' => true)),
-      'coupon_redeem_url' => new sfValidatorString(array('max_length' => 255, 'required' => true))
+      'coupon_code'       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'coupon_url'        => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'coupon_redeem_url' => new sfValidatorString(array('max_length' => 255, 'required' => false))
     ));
+
 
     $this->validatorSchema->setPostValidator(new sfValidatorAnd(
       array(
         new CouponTypeValidator()
     )));
+
+    /*
+      $this->validatorSchema->setPostValidator(
+        new sfValidatorOr(array(
+          new sfValidatorSchemaFilter('coupon_url', new sfValidatorString(array('max_length' => 255, 'required' => true), array('required' => $lI18n->__('Required url')))),
+					new sfValidatorSchemaFilter('coupon_code', new sfValidatorString(array('max_length' => 255, 'required' => true), array('required' => $lI18n->__('Required coupon code')))),
+        ))
+        //new CouponTypeValidator()
+      );*/
   }
 
   public function validate_billing(){

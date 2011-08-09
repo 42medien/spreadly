@@ -12,31 +12,31 @@ class CouponTypeValidator extends sfValidatorBase {
     $this->addOption('coupon_url', 'coupon_url');
     $this->addOption('coupon_redeem_url', 'coupon_redeem_url');
 
-    $this->setMessage('required', 'The new coupon quantity must be higher than the current one.');
+    $this->setMessage('required', 'Required fields');
   }
 
   protected function doClean($values) {
-  	//var_dump($values);die();
   	$lType = $values['coupon_type'];
 
+  	//if coupon type is code, check first if is empty. if, throw error. if not, set fields for coupon type: url/download to null
+  	//if coupon type is url/download, check if fields are empty. if not, set fields for coupon type: code to null
   	if($lType == 'code') {
+  		if($this->isEmpty($values['coupon_code']) || $this->isEmpty($values['coupon_redeem_url'])){
+  			throw new sfValidatorErrorSchema($this, array(
+  					$this->getOption('coupon_code') => new sfValidatorError($this, 'required'),
+  					$this->getOption('coupon_redeem_url') => new sfValidatorError($this, 'required')
+  				));
+  		}
   		$values['coupon_url'] = null;
   	} else {
+  		if($this->isEmpty($values['coupon_url'])){
+  			throw new sfValidatorErrorSchema($this, array(
+  					$this->getOption('coupon_url') => new sfValidatorError($this, 'required'),
+  				));
+  		}
   		$values['coupon_code'] = null;
   		$values['coupon_redeem_url'] = null;
   	}
-
-  	/*
-    $lDealId = isset($values[$this->getOption('id')]) ? $values[$this->getOption('id')] : '';
-    $lDeal = DealTable::getInstance()->find($lDealId);
-    if($lDeal && !$lDeal->isUnlimited() &&
-       $lDeal->getCouponType()!=DealTable::COUPON_TYPE_MULTIPLE) {
-
-      $lCouponQuantity = isset($values[$this->getOption('coupon_quantity')]) ? $values[$this->getOption('coupon_quantity')] : '';
-      if($lDeal->getCouponQuantity() > $lCouponQuantity) {
-        throw new sfValidatorErrorSchema($this, array($this->getOption('coupon_quantity') => new sfValidatorError($this, 'invalid')));
-      }
-    }*/
     return $values;
   }
 
