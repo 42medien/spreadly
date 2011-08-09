@@ -66,5 +66,9 @@ save_like:
   url:    /like/save
   param:  { module: like, action: save }
 
+deal:
+  url:    /deal
+  param:  { module: deal, action: index }
+
 default:
   url:   /:module/:action/*
