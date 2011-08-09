@@ -218,11 +218,6 @@ div#comment-area textarea#area-like-comment{
   font-size: 12px;
 }
 
-#popup-like-form div.deal-comment textarea#area-like-comment:focus {
-  height: 45px;
-  font-size: 16px;
-}
-
 #popup-like-form div#comment-area label{
   padding: 3px 0 0 0;
 }
