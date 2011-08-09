@@ -7,11 +7,11 @@
 		<!-- screen von deal-like -->
 	</div>
 	<div class="createbtnbox alignleft">
-		<h2 class="btntitle"><?php echo __('Step 2: Configure your Coupon')?></h2>
+		<h2 class="btntitle"><?php echo __('Step 2: Configure share')?></h2>
 		<ul class="btnformlist">
 	  	<li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo $pForm['motivation_title']->renderLabel(); ?></strong><span><?php echo __('<span id="summary_counter">255</span> characters left'); ?></span>
+	      	<strong><?php echo $pForm['motivation_title']->renderLabel(); ?></strong><span><?php echo __('<span id="motivation_title_counter">255</span> characters left'); ?></span>
 	      </div>
 	      <label class="textfield-wht">
 		      <span>
@@ -22,7 +22,7 @@
 			</li>
 			<li class="clearfix">
 				<div class="btnwording alignleft">
-					<strong><?php echo $pForm['motivation_text']->renderLabel(); ?></strong> <span><?php echo __('<span id="description_counter">255</span> characters left'); ?></span>
+					<strong><?php echo $pForm['motivation_text']->renderLabel(); ?></strong> <span><?php echo __('<span id="motivation_text_counter">500</span> characters left'); ?></span>
 				</div>
 				<div class="alignleft">
 					<div class="textaria_top"><span>&nbsp;</span></div>
@@ -39,7 +39,7 @@
 			</li>
 			<li class="clearfix">
 				<div class="btnwording alignleft">
-					<strong><?php echo $pForm['spread_title']->renderLabel(); ?></strong> <span><?php echo __('<span id="description_counter">255</span> characters left'); ?></span>
+					<strong><?php echo $pForm['spread_title']->renderLabel(); ?></strong> <span><?php echo __('<span id="spread_title_counter">255</span> characters left'); ?></span>
 				</div>
 				<label class="textfield-wht">
 					<span>
@@ -50,7 +50,7 @@
 			</li>
 			<li class="clearfix">
 				<div class="btnwording alignleft">
-					<strong><?php echo $pForm['spread_text']->renderLabel(); ?></strong> <span><?php echo __('<span id="description_counter">255</span> characters left'); ?></span>
+					<strong><?php echo $pForm['spread_text']->renderLabel(); ?></strong> <span><?php echo __('<span id="spread_text_counter">500</span> characters left'); ?></span>
 				</div>
 				<div class="alignleft">
 					<div class="textaria_top"><span>&nbsp;</span></div>

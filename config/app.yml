@@ -72,7 +72,7 @@ prod:
     old_platform_host: 'yiid.com'
     old_stats_host:    'yiid.it'
     document_root:     '/home/httpd/vhosts/yiid.com/httpdocs/web'
-    post_to_services:  1
+    post_to_services:  0
     environment:       'prod'
     dev:               0
     pager:             20

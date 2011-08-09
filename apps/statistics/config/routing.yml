@@ -83,8 +83,8 @@ get_analytics_content:
   param: { module: analytics, action: get_analytics_content }
 
 deals:
-  url:   /deals/index
-  param: { module: deals, action: index }
+  url:   /deals/campaign
+  param: { module: deals, action: step_campaign }
 
 get_create_index:
   url:   /deals/get_create_index

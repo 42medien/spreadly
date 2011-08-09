@@ -27,7 +27,7 @@ class CreateDealForm extends BaseDealForm
       'spread_url'        => new sfWidgetFormInputText(),
       'spread_img'        => new sfWidgetFormInputText(),
       'spread_tos'        => new sfWidgetFormInputText(),
-      'coupon_type'       => new sfWidgetFormChoice(array('choices' => array('code' => 'code', 'url' => 'url', 'download' => 'download'))),
+      'coupon_type'       => new sfWidgetFormChoice(array('choices' => array('code' => 'code', 'url' => 'url', 'download' => 'download'), 'expanded' => true)),
       'coupon_title'      => new sfWidgetFormInputText(),
       'coupon_text'       => new sfWidgetFormTextarea(),
       'coupon_code'       => new sfWidgetFormInputText(),
@@ -77,6 +77,11 @@ class CreateDealForm extends BaseDealForm
       'coupon_url'        => new sfValidatorString(array('max_length' => 255, 'required' => true)),
       'coupon_redeem_url' => new sfValidatorString(array('max_length' => 255, 'required' => true))
     ));
+
+    $this->validatorSchema->setPostValidator(new sfValidatorAnd(
+      array(
+        new CouponTypeValidator()
+    )));
   }
 
   public function validate_billing(){

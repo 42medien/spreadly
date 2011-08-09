@@ -244,7 +244,7 @@ Prev
 #deal_form ul.radio_list li label {
     float: left;
     font-weight: normal;
-    width: 110px;
+    width: auto;
     padding-left: 3px;
 }
 
