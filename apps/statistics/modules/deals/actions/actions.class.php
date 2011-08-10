@@ -173,6 +173,7 @@ class dealsActions extends sfActions
    */
   public function executeStep_submitted(sfWebRequest $request){
   	$lDealId = $request->getParameter('did');
+  	$this->pDeal->submit();
   }
 
  /**

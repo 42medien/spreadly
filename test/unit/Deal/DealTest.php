@@ -69,7 +69,6 @@ class DealTest extends BaseTestCase {
     $this->assertFalse($this->deal->canComplete_share());
     $this->assertFalse($this->deal->canComplete_coupon());
     $this->assertFalse($this->deal->canComplete_billing());
-    $this->assertFalse($this->deal->canComplete_edit());
     $this->assertFalse($this->deal->canSubmit());
     $this->assertFalse($this->deal->canApprove());
     $this->assertFalse($this->deal->canExpire());
@@ -85,7 +84,6 @@ class DealTest extends BaseTestCase {
     $this->assertTrue($this->deal->canComplete_share());
     $this->assertFalse($this->deal->canComplete_coupon());
     $this->assertFalse($this->deal->canComplete_billing());
-    $this->assertFalse($this->deal->canComplete_edit());
     $this->assertFalse($this->deal->canSubmit());
     $this->assertFalse($this->deal->canApprove());
     $this->assertFalse($this->deal->canExpire());
@@ -101,7 +99,6 @@ class DealTest extends BaseTestCase {
     $this->assertFalse($this->deal->canComplete_share());
     $this->assertTrue($this->deal->canComplete_coupon());
     $this->assertFalse($this->deal->canComplete_billing());
-    $this->assertFalse($this->deal->canComplete_edit());
     $this->assertFalse($this->deal->canSubmit());
     $this->assertFalse($this->deal->canApprove());
     $this->assertFalse($this->deal->canExpire());
@@ -117,7 +114,6 @@ class DealTest extends BaseTestCase {
     $this->assertFalse($this->deal->canComplete_share());
     $this->assertFalse($this->deal->canComplete_coupon());
     $this->assertTrue($this->deal->canComplete_billing());
-    $this->assertFalse($this->deal->canComplete_edit());
     $this->assertFalse($this->deal->canSubmit());
     $this->assertFalse($this->deal->canApprove());
     $this->assertFalse($this->deal->canExpire());
@@ -133,23 +129,6 @@ class DealTest extends BaseTestCase {
     $this->assertFalse($this->deal->canComplete_share());
     $this->assertFalse($this->deal->canComplete_coupon());
     $this->assertFalse($this->deal->canComplete_billing());
-    $this->assertTrue($this->deal->canComplete_edit());
-    $this->assertFalse($this->deal->canSubmit());
-    $this->assertFalse($this->deal->canApprove());
-    $this->assertFalse($this->deal->canExpire());
-    
-    $this->deal->complete_edit();
-    
-    $this->assertTrue($this->deal->canReset_to_campaign());
-    $this->assertTrue($this->deal->canReset_to_share());
-    $this->assertTrue($this->deal->canReset_to_coupon());
-    $this->assertTrue($this->deal->canReset_to_billing());
-
-    $this->assertFalse($this->deal->canComplete_campaign());
-    $this->assertFalse($this->deal->canComplete_share());
-    $this->assertFalse($this->deal->canComplete_coupon());
-    $this->assertFalse($this->deal->canComplete_billing());
-    $this->assertFalse($this->deal->canComplete_edit());
     $this->assertTrue($this->deal->canSubmit());
     $this->assertFalse($this->deal->canApprove());
     $this->assertFalse($this->deal->canExpire());
@@ -165,7 +144,6 @@ class DealTest extends BaseTestCase {
     $this->assertFalse($this->deal->canComplete_share());
     $this->assertFalse($this->deal->canComplete_coupon());
     $this->assertFalse($this->deal->canComplete_billing());
-    $this->assertFalse($this->deal->canComplete_edit());
     $this->assertFalse($this->deal->canSubmit());
     $this->assertTrue($this->deal->canApprove());
     $this->assertFalse($this->deal->canExpire());
@@ -181,7 +159,6 @@ class DealTest extends BaseTestCase {
     $this->assertFalse($this->deal->canComplete_share());
     $this->assertFalse($this->deal->canComplete_coupon());
     $this->assertFalse($this->deal->canComplete_billing());
-    $this->assertFalse($this->deal->canComplete_edit());
     $this->assertFalse($this->deal->canSubmit());
     $this->assertFalse($this->deal->canApprove());
     $this->assertTrue($this->deal->canExpire());
@@ -197,7 +174,6 @@ class DealTest extends BaseTestCase {
     $this->assertFalse($this->deal->canComplete_share());
     $this->assertFalse($this->deal->canComplete_coupon());
     $this->assertFalse($this->deal->canComplete_billing());
-    $this->assertFalse($this->deal->canComplete_edit());
     $this->assertFalse($this->deal->canSubmit());
     $this->assertFalse($this->deal->canApprove());
     $this->assertFalse($this->deal->canExpire());

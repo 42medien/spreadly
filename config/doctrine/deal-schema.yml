@@ -6,19 +6,19 @@ Deal:
     StateMachine:
       column: deal_state
       initial: initial
-      states: ['initial', 'campaign_completed', 'share_completed', 'coupon_completed', 'billing_completed', 'to_verify', 'submitted', 'active', 'expired']
+      states: ['initial', 'campaign_completed', 'share_completed', 'coupon_completed', 'billing_completed', 'submitted', 'active', 'expired']
       events: 
         reset_to_campaign:
-          from: ['campaign_completed', 'share_completed', 'coupon_completed', 'billing_completed', 'to_verify']
+          from: ['campaign_completed', 'share_completed', 'coupon_completed', 'billing_completed']
           to: initial
         reset_to_share:
-          from: ['share_completed', 'coupon_completed', 'billing_completed', 'to_verify']
+          from: ['share_completed', 'coupon_completed', 'billing_completed']
           to: campaign_completed
         reset_to_coupon:
-          from: ['coupon_completed', 'billing_completed', 'to_verify']
+          from: ['coupon_completed', 'billing_completed']
           to: share_completed
         reset_to_billing:
-          from: ['billing_completed', 'to_verify']
+          from: ['billing_completed']
           to: coupon_completed
 
         complete_campaign:
@@ -33,12 +33,9 @@ Deal:
         complete_billing:
           from: coupon_completed
           to: billing_completed
-        complete_edit:
-          from: billing_completed
-          to: to_verify
         submit:
-          from: to_verify
-          to: submitted 
+          from: billing_completed
+          to: submitted
         approve:
           from: submitted
           to: active
