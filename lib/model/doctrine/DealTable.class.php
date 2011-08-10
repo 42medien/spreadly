@@ -30,15 +30,25 @@ class DealTable extends Doctrine_Table
   }
   
   public function getNextFromPool($pUser) {
-    $nextDeal = $this->createQuery()
-                  ->where('id NOT IN ?', $pUser->getParticipatedDeals())
+    $q = $this->createQuery()
                   ->where('deal_state = ?', self::STATE_ACTIVE)
-                  ->andWhere('target_quantity > actual_quantity')
-                  ->orderBy('updated_at ASC, pool_hits ASC, created_at ASC')
+                  ->andWhere('target_quantity > actual_quantity');
+
+    if($pUser->getParticipatedDeals() && count($pUser->getParticipatedDeals())>0) {
+                $q->andWhere('id NOT IN ?', $pUser->getParticipatedDeals());
+    }
+                
+    if($pUser->getEmail()==null) {
+                $q->andWhere('email_required = ?', false);
+    }              
+                  
+    $nextDeal = $q->orderBy('updated_at ASC, pool_hits ASC, created_at ASC')
                   ->fetchOne();
     
-    $nextDeal->setPoolHits($nextDeal->getPoolHits()+1);
-    $nextDeal->save();
+    if($nextDeal) {
+      $nextDeal->setPoolHits($nextDeal->getPoolHits()+1);
+      $nextDeal->save();      
+    }
     
     return $nextDeal;
   }

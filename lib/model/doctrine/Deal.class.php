@@ -19,13 +19,22 @@ class Deal extends BaseDeal {
     return $this->getState()==DealTable::STATE_ACTIVE && $this->getRemainingQuantity()>0;
   }
 
-  public function popCoupon() {
-    sfContext::getInstance()->getLogger()->notice("{Deal} popCoupon for Deal: ".$this->getId());
+  public function participate($user) {
+    sfContext::getInstance()->getLogger()->notice("{Deal} participate for Deal: ".$this->getId());
 
     if(!$this->isActive()) {
-      throw new Exception("This Deal is not active!");
+      throw new sfException("This Deal is not active!");
     }
 
+    if($user->getParticipatedDeals() && in_array($this->getId(), $user->getParticipatedDeals())) {
+      throw new sfException("User has already participated in this deal!");
+    }
+    
+    $array = $user->getParticipatedDeals() ? $user->getParticipatedDeals() : array();
+    $array[] = $this->getId();
+    $user->setParticipatedDeals($array);
+    $user->save();
+    
     $this->setActualQuantity($this->getActualQuantity()+1);
     $this->save();
 

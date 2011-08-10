@@ -5,6 +5,7 @@ Deal:
     type: pool
     name: 'Campaign No. 1'
     tos_accepted: true
+    email_required: true
     
     # Motivation stuff
     motivation_title: 'Get a free air guitar'

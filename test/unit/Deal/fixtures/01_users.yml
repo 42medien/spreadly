@@ -31,5 +31,17 @@ User:
     agb: true
     ip: 127.0.0.1
     active: true
+    email: hugo@ekaabo.com
+    birthdate: "1991-12-15"
+    last_activity:    <?php echo time(); ?>
+    
+  user_2:
+    username: affe
+    passwordhash: b0d736d71ce30c87629a984c814d7f72
+    salt: 7znUOjog
+    culture: en
+    agb: true
+    ip: 127.0.0.1
+    active: true
     birthdate: "1991-12-15"
     last_activity:    <?php echo time(); ?>

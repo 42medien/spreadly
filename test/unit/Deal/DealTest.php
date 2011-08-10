@@ -28,6 +28,7 @@ class DealTest extends BaseTestCase {
     $this->deal6 = $this->table->findOneBy('name', 'Campaign No. 6');
     
     $this->hugo = UserTable::getInstance()->findOneByUsername('hugo');
+    $this->affe = UserTable::getInstance()->findOneByUsername('affe');
   }
   
     
@@ -210,11 +211,11 @@ class DealTest extends BaseTestCase {
     $this->assertEquals($this->deal1->getTargetQuantity(), 100);
     $this->assertEquals($this->deal1->getActualQuantity(), 98);
     $this->assertEquals($this->deal1->getRemainingQuantity(), 100-98);
-    $this->deal1->popCoupon();
+    $this->deal1->participate($this->hugo);
     $this->assertEquals($this->deal1->getTargetQuantity(), 100);
     $this->assertEquals($this->deal1->getActualQuantity(), 99);
     $this->assertEquals($this->deal1->getRemainingQuantity(), 100-99);
-    $this->deal1->popCoupon();
+    $this->deal1->participate($this->affe);
     $this->assertEquals($this->deal1->getTargetQuantity(), 100);
     $this->assertEquals($this->deal1->getActualQuantity(), 100);
     $this->assertEquals($this->deal1->getRemainingQuantity(), 0);
@@ -223,11 +224,11 @@ class DealTest extends BaseTestCase {
     $this->assertEquals($this->deal2->getTargetQuantity(), 200);
     $this->assertEquals($this->deal2->getActualQuantity(), 72);
     $this->assertEquals($this->deal2->getRemainingQuantity(), 200-72);
-    $this->deal2->popCoupon();
+    $this->deal2->participate($this->hugo);
     $this->assertEquals($this->deal2->getTargetQuantity(), 200);
     $this->assertEquals($this->deal2->getActualQuantity(), 73);
     $this->assertEquals($this->deal2->getRemainingQuantity(), 200-73);
-    $this->deal2->popCoupon();
+    $this->deal2->participate($this->affe);
     $this->assertEquals($this->deal2->getTargetQuantity(), 200);
     $this->assertEquals($this->deal2->getActualQuantity(), 74);
     $this->assertEquals($this->deal2->getRemainingQuantity(), 200-74);
@@ -236,11 +237,11 @@ class DealTest extends BaseTestCase {
     $this->assertEquals($this->deal3->getTargetQuantity(), 500);
     $this->assertEquals($this->deal3->getActualQuantity(), 132);
     $this->assertEquals($this->deal3->getRemainingQuantity(), 500-132);
-    $this->deal3->popCoupon();
+    $this->deal3->participate($this->hugo);
     $this->assertEquals($this->deal3->getTargetQuantity(), 500);
     $this->assertEquals($this->deal3->getActualQuantity(), 133);
     $this->assertEquals($this->deal3->getRemainingQuantity(), 500-133);
-    $this->deal3->popCoupon();
+    $this->deal3->participate($this->affe);
     $this->assertEquals($this->deal3->getTargetQuantity(), 500);
     $this->assertEquals($this->deal3->getActualQuantity(), 134);
     $this->assertEquals($this->deal3->getRemainingQuantity(), 500-134);
@@ -260,8 +261,8 @@ class DealTest extends BaseTestCase {
     $this->assertTrue($this->deal2->isActive());
     $this->assertTrue($this->deal3->isActive());
     
-    $this->deal1->popCoupon();
-    $this->deal1->popCoupon();
+    $this->deal1->participate($this->hugo);
+    $this->deal1->participate($this->affe);
     $this->assertFalse($this->deal1->isActive());
   }
   
@@ -280,21 +281,54 @@ class DealTest extends BaseTestCase {
 
     $this->assertEquals($this->table->getNextFromPool($this->hugo)->getId(), $this->deal1->getId());
   }
+  
+  public function testEmailRequired() {
+    $this->deal4->expire();
+    $this->deal5->expire();
+    $this->deal6->expire();
+    
+    $this->assertTrue($this->table->getNextFromPool($this->hugo)==null);
+    $this->assertTrue($this->table->getNextFromPool($this->affe)==null);
+
+    $this->deal1->approve();
+    
+    $this->assertEquals($this->table->getNextFromPool($this->hugo)->getId(), $this->deal1->getId());
+    $this->assertTrue($this->table->getNextFromPool($this->affe)==null);
+  }
+  
+  public function testParticipate() {
+    $this->assertTrue($this->hugo->getParticipatedDeals()==null);
+    
+    $this->deal4->participate($this->hugo);
+    $this->assertEquals(1, count($this->hugo->getParticipatedDeals()));
+    $this->assertTrue(in_array($this->deal4->getId(), $this->hugo->getParticipatedDeals()));
+
+    $this->deal5->participate($this->hugo);
+    $this->assertEquals(2, count($this->hugo->getParticipatedDeals()));
+    $this->assertTrue(in_array($this->deal5->getId(), $this->hugo->getParticipatedDeals()));
+
+    $this->deal6->participate($this->hugo);
+    $this->assertEquals(3, count($this->hugo->getParticipatedDeals()));
+    $this->assertTrue(in_array($this->deal6->getId(), $this->hugo->getParticipatedDeals()));
+    
+    $exception = false;
+    $actual = $this->deal4->getActualQuantity();
+    try {
+      $this->deal4->participate($this->hugo);
+    } catch(sfException $e) {
+      $exception = true;
+      $this->assertEquals($this->deal4->getActualQuantity(), $actual);
+    }
+    $this->assertTrue($exception);
+  }
 
   public function testExpire() {
     $this->assertTrue($this->deal4->isActive());
-    for ($i=0; $i < 2; $i++) { 
-      $this->deal4->popCoupon();
-    }
+    $this->deal4->participate($this->hugo);
+    $this->deal4->participate($this->affe);
+
     $this->assertFalse($this->deal4->isActive());
     $this->assertEquals(DealTable::STATE_EXPIRED, $this->deal4->getState());
-
-    $this->assertTrue($this->deal5->isActive());
-    for ($i=0; $i < 128; $i++) { 
-      $this->deal5->popCoupon();
-    }
-    $this->assertFalse($this->deal5->isActive());
-    $this->assertEquals(DealTable::STATE_EXPIRED, $this->deal5->getState());
   }
   
   public function testNotApprovable() {
