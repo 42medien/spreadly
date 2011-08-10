@@ -116,24 +116,41 @@ class dealsActions extends sfActions
    */
   public function executeStep_billing(sfWebRequest $request){
   	$this->pForm->validate_billing();
-
-		////$this->pForm->gete
+  	$this->pPaymentMethods = $this->getUser()->getGuardUser()->getPaymentMethods();
     $lPaymentMethodForm = new PaymentMethodForm();
-    if($this->pDeal->getPaymentMethodId()){
-    	$lPaymentMethod =	PaymentMethodTable::getInstance()->find($this->pDeal->getPaymentMethodId());
-    	$lPaymentMethodForm = new PaymentMethodForm($lPaymentMethod);
-    }
-
-  	$this->pForm->embedForm('payment_method', $lPaymentMethodForm);
+    $this->pForm->embedForm('payment_method', $lPaymentMethodForm);
   	if($request->getMethod() == 'POST'){
   		$lParams = $request->getPostParameters();
+  		$lIsNew = true;
   		$lParams['payment_method']['sf_guard_user_id'] = $this->getUser()->getUserId();
+
+  		//check if the user selected an old address or if he inserted a new
+  		//if he selected an old, overwrite the form-values with the database-data -> needet for validation
+  		if(isset($lParams['existing_pm_id']) && $lParams['existing_pm_id'] != 'false'){
+  			//find the selected pm object
+				$lSelectedPM = PaymentMethodTable::getInstance()->find($lParams['existing_pm_id']);
+				//fill the values for validation
+				$lParams['payment_method']['company'] = $lSelectedPM->getCompany();
+				$lParams['payment_method']['contact_name'] = $lSelectedPM->getContactName();
+				$lParams['payment_method']['address'] = $lSelectedPM->getAddress();
+				$lParams['payment_method']['zip'] = $lSelectedPM->getZip();
+				$lParams['payment_method']['city'] = $lSelectedPM->getCity();
+				$lParams['payment_method_id'] = $lParams['existing_pm_id'];
+				//bind the object to the form -> needed for update (if you don't do this, symfony always inserts a new db entry)
+    		$lPaymentMethodForm = new PaymentMethodForm($lSelectedPM);
+    		$this->pForm->embedForm('payment_method', $lPaymentMethodForm);
+  		}
+  		//unset the param, that check, if user selected an existent payment method
+  		unset($lParams['existing_pm_id']);
+
+  		//bind and validatevalidate
   		$this->pForm->bind($lParams);
   		if($this->pForm->isValid()){
+  			//aus irgendnem beschissenen grund setzt doctrine oder symfony oder was auch immer die pm-id nicht im deal beim speichern des formulars, deswegen alles nochmal schön brav per hand...doh...wenn jemand da schlauer ist, soll ers gerne alles ändern....vallah
   			$lDeal = $this->pForm->save();
-  			$lPm = $this->pForm->getEmbeddedForm('payment_method')->getObject();
-  			$lDeal->setPaymentMethodId($lPm->getId());
-  			$lDeal->save();
+				$lPm = $this->pForm->getEmbeddedForm('payment_method')->getObject();
+ 				$lDeal->setPaymentMethodId($lPm->getId());
+ 				$lDeal->save();
   			$lDeal->complete_billing();
 	 			$this->redirect('deals/step_verify?did='.$lDeal->getId());
   		}

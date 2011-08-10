@@ -26,7 +26,7 @@ class PaymentMethodForm extends BasePaymentMethodForm
     ));
 
     $this->setValidators(array(
-      //'id'               => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      //'id'               => new sfValidatorInteger(array('required' => true)),
       //'type'             => new sfValidatorChoice(array('choices' => array(0 => 'invoice'), 'required' => false)),
       'company'          => new sfValidatorString(array('max_length' => 255, 'required' => true)),
       'contact_name'     => new sfValidatorString(array('max_length' => 255, 'required' => true)),

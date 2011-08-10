@@ -37,7 +37,14 @@ class CreateDealForm extends BaseDealForm
       'target_quantity'   => new sfWidgetFormChoice(array('choices' => array('10' => '10', '100' => '100', '200' => '200', '500' => '500'), 'expanded' => true )),
       //'actual_quantity'   => new sfWidgetFormInputText(),
       'sf_guard_user_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => true)),
-      //'payment_method_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('PaymentMethod'), 'add_empty' => false)),
+      'payment_method_id' => new sfWidgetFormInputHidden(),
+    	/*
+      'payment_method_id' => new sfWidgetFormDoctrineChoice(array(
+      														'model' => $this->getRelatedModelName('PaymentMethod'),
+      														'add_empty' => false,
+      														'expanded' => true
+    															//'renderer_class' => 'WidgetPmSelect'
+    														)),*/
       //'domain_profile_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('DomainProfile'), 'add_empty' => true)),
       'created_at'        => new sfWidgetFormDateTime(),
       //'updated_at'        => new sfWidgetFormDateTime(),
@@ -79,26 +86,51 @@ class CreateDealForm extends BaseDealForm
       'coupon_redeem_url' => new sfValidatorString(array('max_length' => 255, 'required' => false))
     ));
 
-
     $this->validatorSchema->setPostValidator(new sfValidatorAnd(
       array(
         new CouponTypeValidator()
     )));
-
-    /*
-      $this->validatorSchema->setPostValidator(
-        new sfValidatorOr(array(
-          new sfValidatorSchemaFilter('coupon_url', new sfValidatorString(array('max_length' => 255, 'required' => true), array('required' => $lI18n->__('Required url')))),
-					new sfValidatorSchemaFilter('coupon_code', new sfValidatorString(array('max_length' => 255, 'required' => true), array('required' => $lI18n->__('Required coupon code')))),
-        ))
-        //new CouponTypeValidator()
-      );*/
   }
 
   public function validate_billing(){
     $this->setValidators(array(
+    	'payment_method_id' => new sfValidatorString(array('required' => false)),
     	'tos_accepted'      => new sfValidatorBoolean(array('required' => true))
     ));
     //$this->se
+  }
+}
+
+class WidgetPmSelect extends sfWidgetFormSelectRadio {
+
+  public function formatter($widget, $inputs) {
+  	var_dump($widget);
+  	var_dump($inputs);
+  	die();
+
+  	foreach ($inputs as $input) {
+
+  	}
+
+  	/*
+    $rows = array();
+    $itemsPerRow = sfConfig::get('app_itemsperrow_typus');
+    $i=0;
+    $rows[] = "<table>";
+    foreach ($inputs as $input) {
+      if ($i % $itemsPerRow == 0) {
+        $rows[] = "<tr>";
+      }
+      $rows[] = $this->renderContentTag('td', $input['input'].$this->getOption('label_separator').$input['label']) ;
+
+      $i++;
+      if ($i % $itemsPerRow == 0) {
+        $rows[] = "</tr>";
+      }
+    }
+    $rows[] = "</table>";
+
+    return !$rows ? '' : $this->renderContentTag('ul', implode($this->getOption('separator'), $rows), array('class' => $this->getOption('class')));
+  	*/
   }
 }
