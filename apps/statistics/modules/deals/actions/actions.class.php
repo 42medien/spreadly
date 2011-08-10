@@ -55,7 +55,7 @@ class dealsActions extends sfActions
    */
   public function executeStep_campaign(sfWebRequest $request){
   	$this->pForm->validate_campaign();
-  	
+
   	if($request->getMethod() == 'POST'){
   		$lParams = $request->getPostParameters();
   		$lParams['sf_guard_user_id'] = $this->getUser()->getUserId();
@@ -163,11 +163,17 @@ class dealsActions extends sfActions
    * Create deal - step 5: have a last look at your inserts and send deal to approvement
    * @param sfWebRequest $request
    */
-  public function executeStep_verify(sfWebRequest $request){
-    
-    
-  }
+  public function executeStep_verify(sfWebRequest $request){}
 
+
+  /**
+   *
+   * success side after submitting deal
+   * @param sfWebRequest $request
+   */
+  public function executeStep_submitted(sfWebRequest $request){
+  	$lDealId = $request->getParameter('did');
+  }
 
  /**
   * Executes index action

@@ -222,10 +222,15 @@ Prev
   margin-right: 22px;
 }
 
-#create-deal-helptext{
+.create-deal-helptext{
   width: 385px;
   padding: 0 10px 0 10px;
   
+}
+
+.create-deal-helptext a{
+  text-decoration: underline;
+  font-weight: bold;
 }
 
 .nobg{ min-width: 0; }
