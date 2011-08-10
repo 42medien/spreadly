@@ -232,6 +232,11 @@ class YiidActivity extends BaseDocument {
   public function postPersist() {
     UserTable::updateLatestActivityForUser($this->getUId(), time());
     $this->postIt();
+
+    if ($deal = $this->getDeal()) {
+      $deal->participate($this->getUser());
+    }
+
     StatsFeeder::feed($this);
     $this->createJob();
   }
@@ -448,5 +453,7 @@ class YiidActivity extends BaseDocument {
         $this->setIId($dp->getId());
       }
     }
+
+    return true;
   }
 }
