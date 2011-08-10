@@ -6,26 +6,39 @@ Deal:
     StateMachine:
       column: deal_state
       initial: initial
-      states: ['initial', 'step_campaign', 'step_share', 'step_coupon', 'step_billing', 'step_verify', 'submitted', 'active', 'expired']
-      events:
-        edit_campaign:
-          from: ['initial', 'step_campaign', 'step_share', 'step_coupon', 'step_billing', 'step_verify']
-          to: step_campaign
-        edit_share:
-          from: ['step_campaign', 'step_share', 'step_coupon', 'step_billing', 'step_verify']
-          to: step_share
-        edit_coupon:
-          from: ['step_share', 'step_coupon', 'step_billing', 'step_verify']
-          to: step_coupon
-        edit_billing:
-          from: ['step_coupon', 'step_billing', 'step_verify']
-          to: step_billing
+      states: ['initial', 'campaign_completed', 'share_completed', 'coupon_completed', 'billing_completed', 'to_verify', 'submitted', 'active', 'expired']
+      events: 
+        reset_to_campaign:
+          from: ['campaign_completed', 'share_completed', 'coupon_completed', 'billing_completed', 'to_verify']
+          to: initial
+        reset_to_share:
+          from: ['share_completed', 'coupon_completed', 'billing_completed', 'to_verify']
+          to: campaign_completed
+        reset_to_coupon:
+          from: ['coupon_completed', 'billing_completed', 'to_verify']
+          to: share_completed
+        reset_to_billing:
+          from: ['billing_completed', 'to_verify']
+          to: coupon_completed
+
+        complete_campaign:
+          from: initial
+          to: campaign_completed
+        complete_share:
+          from: campaign_completed
+          to: share_completed
+        complete_coupon:
+          from: share_completed
+          to: coupon_completed
+        complete_billing:
+          from: coupon_completed
+          to: billing_completed
         complete_edit:
-          from: ['step_billing', 'step_verify']
-          to: step_verify
+          from: billing_completed
+          to: to_verify
         submit:
-          from: step_verify
-          to: submitted
+          from: to_verify
+          to: submitted 
         approve:
           from: submitted
           to: active

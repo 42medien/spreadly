@@ -58,99 +58,144 @@ class DealTest extends BaseTestCase {
     $this->new->save();
 
     $this->deal = $this->table->findOneBy("name", "Hansis Spezial");
-        
-    $this->assertTrue($this->deal->canEdit_campaign());
-    $this->assertFalse($this->deal->canEdit_share());
-    $this->assertFalse($this->deal->canEdit_coupon());
-    $this->assertFalse($this->deal->canEdit_billing());
-    $this->assertFalse($this->deal->canComplete_edit());
-    $this->assertFalse($this->deal->canSubmit());
-    $this->assertFalse($this->deal->canApprove());
-    $this->assertFalse($this->deal->canExpire());
-    
-    $this->deal->edit_campaign();
-    
-    $this->assertTrue($this->deal->canEdit_campaign());
-    $this->assertTrue($this->deal->canEdit_share());
-    $this->assertFalse($this->deal->canEdit_coupon());
-    $this->assertFalse($this->deal->canEdit_billing());
-    $this->assertFalse($this->deal->canComplete_edit());
-    $this->assertFalse($this->deal->canSubmit());
-    $this->assertFalse($this->deal->canApprove());
-    $this->assertFalse($this->deal->canExpire());
-    
-    $this->deal->edit_share();
-    
-    $this->assertTrue($this->deal->canEdit_campaign());
-    $this->assertTrue($this->deal->canEdit_share());
-    $this->assertTrue($this->deal->canEdit_coupon());
-    $this->assertFalse($this->deal->canEdit_billing());
-    $this->assertFalse($this->deal->canComplete_edit());
-    $this->assertFalse($this->deal->canSubmit());
-    $this->assertFalse($this->deal->canApprove());
-    $this->assertFalse($this->deal->canExpire());
-    
-    $this->deal->edit_coupon();
-    
-    $this->assertTrue($this->deal->canEdit_campaign());
-    $this->assertTrue($this->deal->canEdit_share());
-    $this->assertTrue($this->deal->canEdit_coupon());
-    $this->assertTrue($this->deal->canEdit_billing());
-    $this->assertFalse($this->deal->canComplete_edit());
-    $this->assertFalse($this->deal->canSubmit());
-    $this->assertFalse($this->deal->canApprove());
-    $this->assertFalse($this->deal->canExpire());
 
-    $this->deal->edit_billing();
+    $this->assertFalse($this->deal->canReset_to_campaign());
+    $this->assertFalse($this->deal->canReset_to_share());
+    $this->assertFalse($this->deal->canReset_to_coupon());
+    $this->assertFalse($this->deal->canReset_to_billing());
+
+    $this->assertTrue($this->deal->canComplete_campaign());
+    $this->assertFalse($this->deal->canComplete_share());
+    $this->assertFalse($this->deal->canComplete_coupon());
+    $this->assertFalse($this->deal->canComplete_billing());
+    $this->assertFalse($this->deal->canComplete_edit());
+    $this->assertFalse($this->deal->canSubmit());
+    $this->assertFalse($this->deal->canApprove());
+    $this->assertFalse($this->deal->canExpire());
     
-    $this->assertTrue($this->deal->canEdit_campaign());
-    $this->assertTrue($this->deal->canEdit_share());
-    $this->assertTrue($this->deal->canEdit_coupon());
-    $this->assertTrue($this->deal->canEdit_billing());
+    $this->deal->complete_campaign();
+    
+    $this->assertTrue($this->deal->canReset_to_campaign());
+    $this->assertFalse($this->deal->canReset_to_share());
+    $this->assertFalse($this->deal->canReset_to_coupon());
+    $this->assertFalse($this->deal->canReset_to_billing());
+
+    $this->assertFalse($this->deal->canComplete_campaign());
+    $this->assertTrue($this->deal->canComplete_share());
+    $this->assertFalse($this->deal->canComplete_coupon());
+    $this->assertFalse($this->deal->canComplete_billing());
+    $this->assertFalse($this->deal->canComplete_edit());
+    $this->assertFalse($this->deal->canSubmit());
+    $this->assertFalse($this->deal->canApprove());
+    $this->assertFalse($this->deal->canExpire());
+    
+    $this->deal->complete_share();
+
+    $this->assertTrue($this->deal->canReset_to_campaign());
+    $this->assertTrue($this->deal->canReset_to_share());
+    $this->assertFalse($this->deal->canReset_to_coupon());
+    $this->assertFalse($this->deal->canReset_to_billing());
+
+    $this->assertFalse($this->deal->canComplete_campaign());
+    $this->assertFalse($this->deal->canComplete_share());
+    $this->assertTrue($this->deal->canComplete_coupon());
+    $this->assertFalse($this->deal->canComplete_billing());
+    $this->assertFalse($this->deal->canComplete_edit());
+    $this->assertFalse($this->deal->canSubmit());
+    $this->assertFalse($this->deal->canApprove());
+    $this->assertFalse($this->deal->canExpire());
+    
+    $this->deal->complete_coupon();
+
+    $this->assertTrue($this->deal->canReset_to_campaign());
+    $this->assertTrue($this->deal->canReset_to_share());
+    $this->assertTrue($this->deal->canReset_to_coupon());
+    $this->assertFalse($this->deal->canReset_to_billing());
+
+    $this->assertFalse($this->deal->canComplete_campaign());
+    $this->assertFalse($this->deal->canComplete_share());
+    $this->assertFalse($this->deal->canComplete_coupon());
+    $this->assertTrue($this->deal->canComplete_billing());
+    $this->assertFalse($this->deal->canComplete_edit());
+    $this->assertFalse($this->deal->canSubmit());
+    $this->assertFalse($this->deal->canApprove());
+    $this->assertFalse($this->deal->canExpire());
+    
+    $this->deal->complete_billing();
+
+    $this->assertTrue($this->deal->canReset_to_campaign());
+    $this->assertTrue($this->deal->canReset_to_share());
+    $this->assertTrue($this->deal->canReset_to_coupon());
+    $this->assertTrue($this->deal->canReset_to_billing());
+
+    $this->assertFalse($this->deal->canComplete_campaign());
+    $this->assertFalse($this->deal->canComplete_share());
+    $this->assertFalse($this->deal->canComplete_coupon());
+    $this->assertFalse($this->deal->canComplete_billing());
     $this->assertTrue($this->deal->canComplete_edit());
     $this->assertFalse($this->deal->canSubmit());
     $this->assertFalse($this->deal->canApprove());
     $this->assertFalse($this->deal->canExpire());
-
+    
     $this->deal->complete_edit();
     
-    $this->assertTrue($this->deal->canEdit_campaign());
-    $this->assertTrue($this->deal->canEdit_share());
-    $this->assertTrue($this->deal->canEdit_coupon());
-    $this->assertTrue($this->deal->canEdit_billing());
-    $this->assertTrue($this->deal->canComplete_edit());
+    $this->assertTrue($this->deal->canReset_to_campaign());
+    $this->assertTrue($this->deal->canReset_to_share());
+    $this->assertTrue($this->deal->canReset_to_coupon());
+    $this->assertTrue($this->deal->canReset_to_billing());
+
+    $this->assertFalse($this->deal->canComplete_campaign());
+    $this->assertFalse($this->deal->canComplete_share());
+    $this->assertFalse($this->deal->canComplete_coupon());
+    $this->assertFalse($this->deal->canComplete_billing());
+    $this->assertFalse($this->deal->canComplete_edit());
     $this->assertTrue($this->deal->canSubmit());
     $this->assertFalse($this->deal->canApprove());
     $this->assertFalse($this->deal->canExpire());
-
-    $this->deal->submit();
     
-    $this->assertFalse($this->deal->canEdit_campaign());
-    $this->assertFalse($this->deal->canEdit_share());
-    $this->assertFalse($this->deal->canEdit_coupon());
-    $this->assertFalse($this->deal->canEdit_billing());
+    $this->deal->submit();
+
+    $this->assertFalse($this->deal->canReset_to_campaign());
+    $this->assertFalse($this->deal->canReset_to_share());
+    $this->assertFalse($this->deal->canReset_to_coupon());
+    $this->assertFalse($this->deal->canReset_to_billing());
+
+    $this->assertFalse($this->deal->canComplete_campaign());
+    $this->assertFalse($this->deal->canComplete_share());
+    $this->assertFalse($this->deal->canComplete_coupon());
+    $this->assertFalse($this->deal->canComplete_billing());
     $this->assertFalse($this->deal->canComplete_edit());
     $this->assertFalse($this->deal->canSubmit());
     $this->assertTrue($this->deal->canApprove());
     $this->assertFalse($this->deal->canExpire());
-
+    
     $this->deal->approve();
     
-    $this->assertFalse($this->deal->canEdit_campaign());
-    $this->assertFalse($this->deal->canEdit_share());
-    $this->assertFalse($this->deal->canEdit_coupon());
-    $this->assertFalse($this->deal->canEdit_billing());
+    $this->assertFalse($this->deal->canReset_to_campaign());
+    $this->assertFalse($this->deal->canReset_to_share());
+    $this->assertFalse($this->deal->canReset_to_coupon());
+    $this->assertFalse($this->deal->canReset_to_billing());
+
+    $this->assertFalse($this->deal->canComplete_campaign());
+    $this->assertFalse($this->deal->canComplete_share());
+    $this->assertFalse($this->deal->canComplete_coupon());
+    $this->assertFalse($this->deal->canComplete_billing());
     $this->assertFalse($this->deal->canComplete_edit());
     $this->assertFalse($this->deal->canSubmit());
     $this->assertFalse($this->deal->canApprove());
     $this->assertTrue($this->deal->canExpire());
-
+    
     $this->deal->expire();
     
-    $this->assertFalse($this->deal->canEdit_campaign());
-    $this->assertFalse($this->deal->canEdit_share());
-    $this->assertFalse($this->deal->canEdit_coupon());
-    $this->assertFalse($this->deal->canEdit_billing());
+    $this->assertFalse($this->deal->canReset_to_campaign());
+    $this->assertFalse($this->deal->canReset_to_share());
+    $this->assertFalse($this->deal->canReset_to_coupon());
+    $this->assertFalse($this->deal->canReset_to_billing());
+
+    $this->assertFalse($this->deal->canComplete_campaign());
+    $this->assertFalse($this->deal->canComplete_share());
+    $this->assertFalse($this->deal->canComplete_coupon());
+    $this->assertFalse($this->deal->canComplete_billing());
     $this->assertFalse($this->deal->canComplete_edit());
     $this->assertFalse($this->deal->canSubmit());
     $this->assertFalse($this->deal->canApprove());

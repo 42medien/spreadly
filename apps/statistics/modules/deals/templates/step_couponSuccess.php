@@ -1,4 +1,4 @@
-<?php include_partial('deals/breadcrumb'); ?>
+<?php include_partial('deals/breadcrumb', array('pDeal' => $pDeal)); ?>
 
 <?php slot('content') ?>
 <form action="<?php echo url_for('deals/step_coupon?did='.$pDealId); ?>" name="deal_form" id="deal_form" method="POST">

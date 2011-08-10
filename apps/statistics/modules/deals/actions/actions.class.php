@@ -29,7 +29,8 @@ class dealsActions extends sfActions
   public function preExecute() {
     $request = $this->getRequest();
     $this->pDealId = $request->getParameter('did', null);
-		$this->pForm = new CreateDealForm();
+    $this->pDeal = new Deal();
+		$this->pForm = new CreateDealForm($this->pDeal);
 
 		//@todo statemachine-moped einbauen....
 		//@todo wenn keine deal-id da ist, dann muss überprüft werden, ob step_campaign ist, wenn nicht -> fehlermeldung: lass die url in ruhe du affe
@@ -54,15 +55,18 @@ class dealsActions extends sfActions
    */
   public function executeStep_campaign(sfWebRequest $request){
   	$this->pForm->validate_campaign();
+  	
   	if($request->getMethod() == 'POST'){
   		$lParams = $request->getPostParameters();
   		$lParams['sf_guard_user_id'] = $this->getUser()->getUserId();
   		$this->pForm->bind($lParams);
   		if($this->pForm->isValid()){
   			$lDeal = $this->pForm->save();
-  			//$lDeal->changeStateToStepShare();
+  			$lDeal->complete_campaign();
 	 			$this->redirect('deals/step_share?did='.$lDeal->getId());
   		}
+  	} else if($this->pDeal->canReset_to_campaign()) {
+  	  $this->pDeal->reset_to_campaign();
   	}
   }
 
@@ -78,9 +82,11 @@ class dealsActions extends sfActions
   		$this->pForm->bind($lParams);
   		if($this->pForm->isValid()){
   			$lDeal = $this->pForm->save();
-  			//$lDeal->changeStateToStepCoupon();
+  			$lDeal->complete_share();
 	 			$this->redirect('deals/step_coupon?did='.$lDeal->getId());
   		}
+  	} else if($this->pDeal->canReset_to_share()) {
+  	  $this->pDeal->reset_to_share();
   	}
   }
 
@@ -96,9 +102,11 @@ class dealsActions extends sfActions
   		$this->pForm->bind($lParams);
   		if($this->pForm->isValid()){
   			$lDeal = $this->pForm->save();
-  			//$lDeal->changeStateToStepBilling();
+  			$lDeal->complete_coupon();
 	 			$this->redirect('deals/step_billing?did='.$lDeal->getId());
   		}
+  	} else if($this->pDeal->canReset_to_coupon()) {
+  	  $this->pDeal->reset_to_coupon();
   	}
   }
 
@@ -126,8 +134,11 @@ class dealsActions extends sfActions
   			$lPm = $this->pForm->getEmbeddedForm('payment_method')->getObject();
   			$lDeal->setPaymentMethodId($lPm->getId());
   			$lDeal->save();
+  			$lDeal->complete_billing();
 	 			$this->redirect('deals/step_verify?did='.$lDeal->getId());
   		}
+  	} else if($this->pDeal->canReset_to_billing()) {
+  	  $this->pDeal->reset_to_billing();
   	}
   }
 
@@ -136,9 +147,9 @@ class dealsActions extends sfActions
    * @param sfWebRequest $request
    */
   public function executeStep_verify(sfWebRequest $request){
-
+    
+    
   }
-
 
 
  /**

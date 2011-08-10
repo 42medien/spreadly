@@ -1,4 +1,4 @@
-<?php include_partial('deals/breadcrumb'); ?>
+<?php include_partial('deals/breadcrumb', array('pDeal' => $pDeal)); ?>
 
 
 <?php slot('content') ?>
