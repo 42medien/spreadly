@@ -88,6 +88,12 @@ class YiidActivity extends BaseDocument {
   /** @Int */
   protected $cb;
 
+  /** @String */
+  protected $i_url;
+
+  /** @Int */
+  protected $i_id;
+
   /** @NotSaved */
   protected $clickback;
 
@@ -191,6 +197,9 @@ class YiidActivity extends BaseDocument {
     if(!$this->getC()) {
       $this->setC(time());
     }
+
+    $this->completeDealInfos();
+
     $this->doValidate();
   }
 
@@ -253,6 +262,8 @@ class YiidActivity extends BaseDocument {
 
   /**
    * verifys all online-identity-ids
+   *
+   * @throws sfException
    */
   private function verifyAndSaveOnlineIdentities() {
     $lVerifiedOIs = OnlineIdentityTable::retrieveVerified($this->getUId(), $this->getOiids());
@@ -312,6 +323,7 @@ class YiidActivity extends BaseDocument {
 
   /**
    * wrapper for checkeing on clickback
+   *
    * @return boolean
    */
   public function isClickback() {
@@ -320,6 +332,7 @@ class YiidActivity extends BaseDocument {
 
   /**
    * wrapper for checkeing on deal-activity
+   *
    * @return boolean
    */
   public function isDealActivity() {
@@ -339,6 +352,7 @@ class YiidActivity extends BaseDocument {
    * This method returns the minuts/hours/day since publishing of this activity
    *
    * @author Christian Schätzle
+   * @return string
    */
   public function getPublishingTime() {
     $lSocialObjectDate = $this->getC();
@@ -408,10 +422,31 @@ class YiidActivity extends BaseDocument {
     }
   }
 
+  /**
+   * return the number of clickback likes
+   *
+   * @return int
+   */
   public function countClickbackLikes() {
     $dm = MongoManager::getDM();
     $count = $dm->getRepository("Documents\YiidActivity")->findBy(array("cb_referer" => $this->getId()));
 
     return count($count);
+  }
+
+  public function completeDealInfos() {
+    $deal = $this->getDeal();
+
+    if (!$deal) {
+      return false;
+    }
+
+    $this->fromArray($deal->toYiidActivityArray());
+
+    if ($this->i_url) {
+      if ($dp = DomainProfileTable::getInstance()->retrieveByUrl($this->i_url)) {
+        $this->setIId($dp->getId());
+      }
+    }
   }
 }

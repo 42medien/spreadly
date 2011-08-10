@@ -1,6 +1,4 @@
 <?php
-
-
 class DomainProfileTable extends Doctrine_Table
 {
   const STATE_PENDING = 'pending';
@@ -35,6 +33,14 @@ class DomainProfileTable extends Doctrine_Table
                    ->execute();
 
     return $lQuery->count();
+  }
+
+  public function retrieveByUrl($url) {
+    $host = parse_url($url, PHP_URL_HOST);
+
+    return $this->createQuery()
+                ->where('url = ?', array($host))
+                ->fetchOne();
   }
 
   public function countVerifiedByRange($from, $to) {

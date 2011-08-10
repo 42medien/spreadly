@@ -10,7 +10,7 @@
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
 class Deal extends BaseDeal {
-  
+
   public function getRemainingQuantity() {
     return $this->getTargetQuantity()-$this->getActualQuantity();
   }
@@ -25,14 +25,14 @@ class Deal extends BaseDeal {
     if(!$this->isActive()) {
       throw new Exception("This Deal is not active!");
     }
-    
+
     $this->setActualQuantity($this->getActualQuantity()+1);
     $this->save();
-    
+
     if($this->getRemainingQuantity() <= 0) {
       $this->expire();
     }
-    
+
     return $this->getCouponType()==DealTable::COUPON_TYPE_CODE ? $this->getCouponCode() : $this->getCouponUrl();
   }
 
@@ -122,5 +122,16 @@ class Deal extends BaseDeal {
     } else {
       return array();
     }
+  }
+
+  public function toYiidActivityArray() {
+    $array = array();
+
+    $array['title'] = $this->getSpreadTitle();
+    $array['descr'] = $this->getSpreadText();
+    $array['thumb'] = $this->getSpreadImg();
+    $array['url'] = $this->getSpreadUrl();
+
+    return $array;
   }
 }

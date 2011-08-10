@@ -16,8 +16,33 @@ class dealActions extends sfActions
   * @param sfRequest $request A request object
   */
   public function executeIndex(sfWebRequest $request) {
+    $url = $request->getParameter("url", null);
+
+    // handle form submit
+    if ($request->getMethod() == "POST") {
+      $params = $request->getParameter('like');
+
+      $params['u_id'] = $this->getUser()->getUserId();
+      $params['i_url'] = $url;
+
+      $activity = new Documents\YiidActivity();
+      $activity->fromArray($params);
+
+      // try to save activity
+      try {
+        $activity->save();
+        $this->redirect("@coupon?id=".$activity->getId());
+      } catch (Exception $e) { // send error on exception
+        $this->getLogger()->err($e->getMessage());
+      }
+    }
+
     $deal = DealTable::getInstance()->getNextFromPool($this->getUser()->getUser());
 
     $this->deal = $deal;
+  }
+
+  public function executeCoupon(sfWebRequest $request) {
+
   }
 }
