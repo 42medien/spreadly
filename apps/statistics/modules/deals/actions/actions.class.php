@@ -33,8 +33,6 @@ class dealsActions extends sfActions
 		$this->pForm = new CreateDealForm($this->pDeal);
 
 		//@todo statemachine-moped einbauen....
-		//@todo wenn keine deal-id da ist, dann muss überprüft werden, ob step_campaign ist, wenn nicht -> fehlermeldung: lass die url in ruhe du affe
-
 		//check, if there is a deal
 		if($this->pDealId) {
 			$this->pDeal = DealTable::getInstance()->find($this->pDealId);
@@ -44,6 +42,11 @@ class dealsActions extends sfActions
 			}
 			//if he is allowed, create a deal-form with the deal-object
 			$this->pForm = new CreateDealForm($this->pDeal);
+		} else {
+			//every create deal action needs the deal-id as get param except step_campaign
+			if($this->actionName != 'step_campaign') {
+				$this->redirect404();
+			}
 		}
   }
 
