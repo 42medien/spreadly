@@ -285,7 +285,7 @@ input.graybtnwide {
 }
 
 a.button,
-button.button {
+button.button{
   background:url(/img/savel.png) 0px 0px no-repeat;
   padding-left:13px;
   cursor:pointer;
@@ -294,7 +294,7 @@ button.button {
   text-decoration: none;
 }
 a.button span,
-button.button span {
+button.button span{
   float:left;
   background:url(/img/saver.png) right 0px no-repeat;
   padding: 4px 18px 6px 5px;
@@ -332,6 +332,64 @@ button.button span {
   padding: 0 18px 0 6px;
 }
 
+input#create_deal_button{
+  font-size: 14px;
+  color: #4e5e4d;
+  padding: 5px 10px;
+  background: -moz-linear-gradient(
+    top,
+    #ffffff 0%,
+    #ffffff 28%,
+    #b5b5b5);
+  background: -webkit-gradient(
+    linear, left top, left bottom, 
+    from(#ffffff),
+    color-stop(0.28, #ffffff),
+    to(#b5b5b5));
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border: 1px solid #b5bdb2;
+  -moz-box-shadow:
+    0px 0px 0px rgba(000,000,000,0.5),
+    inset 0px 0px 0px rgba(255,255,255,1);
+  -webkit-box-shadow:
+    0px 0px 0px rgba(000,000,000,0.5),
+    inset 0px 0px 0px rgba(255,255,255,1);
+  text-shadow:
+    0px -1px 0px rgba(000,000,000,0.2),
+    0px 1px 0px rgba(255,255,255,1);
+  cursor: pointer;
+}
+
+input#create_deal_button:hover,
+input#create_deal_button:active{
+	color: #fff;
+  background: -moz-linear-gradient(
+    top,
+    #ffffff 0%,
+    #b5b5b5 60%,
+    #b5b5b5);
+  background: -webkit-gradient(
+    linear, left top, left bottom, 
+    from(#b5b5b5),
+    color-stop(0.28, #ffffff),
+    to(#ffffff));
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border: 1px solid #b5bdb2;
+  -moz-box-shadow:
+    0px 0px 0px rgba(000,000,000,0.5),
+    inset 0px 0px 0px rgba(255,255,255,1);
+  -webkit-box-shadow:
+    0px 0px 0px rgba(000,000,000,0.5),
+    inset 0px 0px 0px rgba(255,255,255,1);
+  text-shadow:
+      1px 1px 0px rgba(000,000,000,0.4),
+    0px 0px 0px rgba(255,255,255,0);
+}
+
 #signin_form label {
   margin-top: 5px;
 }
@@ -364,7 +422,8 @@ a.button.header { float:right; }
     padding-top: 7px;
 }
 
-.content-error-box{clear:both; padding-left: 110px;}
+.content-error-box{clear:both; padding-left: 170px;}
+.counter-box{clear:both; padding-left: 175px; font-size: 10px;}
 
 .error_list li {
     color: #D60000;

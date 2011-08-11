@@ -10,25 +10,26 @@
     <ul class="btnformlist">
     	<li class="clearfix">
       	<div class="btnwording alignleft">
-        	<strong><?php echo $pForm['name']->renderLabel(); ?></strong><span><?php echo __('Name of the new deal'); ?></span>
+        	<strong><?php echo $pForm['name']->renderLabel(); ?></strong><span><?php echo __('Name of the new deal Name of the new deal Name of the new deal'); ?></span>
         </div>
         <label class="textfield-wht">
         	<span>
-          	<?php echo $pForm['name']->render(array('class' => 'wd390')); ?>
+          	<?php echo $pForm['name']->render(array('class' => 'wd320')); ?>
           </span>
         </label>
         <div class="content-error-box clearfix"><?php echo $pForm['name']->renderError(); ?></div>
       </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo $pForm['target_quantity']->renderLabel(); ?></strong><span><?php echo $pForm['target_quantity']->renderError(); ?></span>
+	      	<strong><?php echo $pForm['target_quantity']->renderLabel(); ?></strong><span><?php echo __('Explain the target quantity. Explain the target quantity. Explain the target quantity. '); ?></span>
+	      	<span><?php echo $pForm['target_quantity']->renderError(); ?></span>
 	      </div>
 	      <span>
 	      	<?php echo $pForm['target_quantity']->render(); ?>
 	      </span>
 	    </li>
     </ul>
-		<input type="submit" id="create_deal_button" class="alignright" />
+		<input type="submit" id="create_deal_button" value="<?php echo __('Go to next step'); ?>" class="alignright button" />
   </div>
 	<div class="alignleft create-deal-helptext">
 		<h2 class="btntitle"><?php echo __('Willkommen bei den Spreadly-Deals'); ?></h2>

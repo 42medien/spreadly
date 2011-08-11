@@ -665,8 +665,17 @@ div.nopadlr{ padding-left:0px !important; padding-right:0px !important; }
 .btntitle{ font-size:14px; color:#345c82; line-height:28px; padding-bottom:5px;}
 .btntitle span{ background:url(../img/number-bg.png) left top no-repeat; display:inline-block; width:27px; height:27px; color:#fff; text-align:center; margin-right:4px;  font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; color:#eeeeee; font-size:16px;}
 .wd390{ width:386px;}
+.wd320{ width: 320px;}
+.wd350 { width: 350px;} 
 .btnwording{ width:104px; padding-right:4px; line-height:14px; }
 .btnwording span{ font-size:10px; display:block;}
+ .btnwording span > span {display: inline;}
+#deal_form .btnwording {width: 170px;}
+#deal_form li{margin-bottom: 15px;}
+#deal_billing_form ul{padding-left: 5px;}
+#deal_billing_form .btnwording{width: 100px;}
+#deal_billing_form .btnformlist{padding-bottom: 20px; width: 510px;}
+#deal_billing_form .select-address-list {margin-right: 20px;}
 
 .likenbox { width:354px; padding-left:16px;}
 .gefelink{ display:block; padding:34px 0 0 0; line-height:28px; }
