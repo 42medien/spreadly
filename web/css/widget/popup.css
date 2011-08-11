@@ -341,8 +341,28 @@ div#like-submit #like-oi-list li{
   display: inline-block;
 }
 
+#like-oi-list li ul {
+  display:none;
+  position: absolute;
+  z-index: 100;
+  width: 250px;
+  background-color: #fff;
+  padding: 5px;
+}
 
-div#like-submit #like-oi-list li a{
+#like-oi-list li:hover ul {
+  display:block;
+}
+
+#like-oi-list li ul li {
+  display:block;
+}
+
+div#like-submit #like-oi-list li ul li {
+  display:block;
+}
+
+div#like-submit #like-oi-list li a {
   padding: 1px 5px 3px;
   color: hsla(333,42%,50%,1);
 }

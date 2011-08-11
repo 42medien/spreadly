@@ -14,6 +14,12 @@
           <?php } ?>
             <li class="B">
               <a href="#">+add</a>
+              <ul class="services">
+                <li><a href="#" onclick="window.open('<?php echo url_for("@signinto?service=twitter"); ?>', 'auth_popup', 'width=580,height=450,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;">another twitter-account</a></li>
+                <li><a href="#" onclick="window.open('<?php echo url_for("@signinto?service=facebook"); ?>', 'auth_popup', 'width=580,height=450,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;">another facebook-account</a></li>
+                <li><a href="#" onclick="window.open('<?php echo url_for("@signinto?service=linkedin"); ?>', 'auth_popup', 'width=580,height=450,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;">another linkedin-account</a></li>
+                <li><a href="#" onclick="window.open('<?php echo url_for("@signinto?service=google"); ?>', 'auth_popup', 'width=580,height=450,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;">another google-account</a></li>
+              </ul>
             </li>
         </ul>
         <?php } else { ?>
