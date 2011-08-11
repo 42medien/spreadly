@@ -40,6 +40,11 @@ class dealActions extends sfActions
     $deal = DealTable::getInstance()->getNextFromPool($this->getUser()->getUser());
 
     $this->deal = $deal;
+
+    if (!$deal) {
+      $this->setTemplate('default_deal');
+    }
+
   }
 
   public function executeCoupon(sfWebRequest $request) {
