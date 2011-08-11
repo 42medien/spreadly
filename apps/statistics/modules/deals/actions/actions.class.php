@@ -75,6 +75,8 @@ class dealsActions extends sfActions
   		}
   	} else if($this->pDeal->canReset_to_campaign()) {
   	  $this->pDeal->reset_to_campaign();
+  	} else if($this->pDeal->getState() != DealTable::STATE_INITIAL) {
+  	  $this->redirect404();
   	}
   }
 
@@ -95,6 +97,8 @@ class dealsActions extends sfActions
   		}
   	} else if($this->pDeal->canReset_to_share()) {
   	  $this->pDeal->reset_to_share();
+  	} else if($this->pDeal->getState() != DealTable::STATE_CAMPAIGN_COMPLETED) {
+  	  $this->redirect404();
   	}
   }
 
@@ -115,6 +119,8 @@ class dealsActions extends sfActions
   		}
   	} else if($this->pDeal->canReset_to_coupon()) {
   	  $this->pDeal->reset_to_coupon();
+  	} else if($this->pDeal->getState() != DealTable::STATE_SHARE_COMPLETED) {
+  	  $this->redirect404();
   	}
   }
 
@@ -164,6 +170,8 @@ class dealsActions extends sfActions
   		}
   	} else if($this->pDeal->canReset_to_billing()) {
   	  $this->pDeal->reset_to_billing();
+  	} else if($this->pDeal->getState() != DealTable::STATE_COUPON_COMPLETED) {
+  	  $this->redirect404();
   	}
   }
 
@@ -171,7 +179,14 @@ class dealsActions extends sfActions
    * Create deal - step 5: have a last look at your inserts and send deal to approvement
    * @param sfWebRequest $request
    */
-  public function executeStep_verify(sfWebRequest $request){}
+  public function executeStep_verify(sfWebRequest $request){
+    if($request->getMethod() == 'POST'){
+  	  $this->pDeal->submit();
+  	  $this->redirect('deals/step_submitted?did='.$this->pDeal->getId());
+  	} else if($this->pDeal->getState() != DealTable::STATE_BILLING_COMPLETED) {
+  	  $this->redirect404();
+  	}
+  }
 
 
   /**
@@ -179,10 +194,7 @@ class dealsActions extends sfActions
    * success side after submitting deal
    * @param sfWebRequest $request
    */
-  public function executeStep_submitted(sfWebRequest $request){
-  	$lDealId = $request->getParameter('did');
-  	$this->pDeal->submit();
-  }
+  public function executeStep_submitted(sfWebRequest $request){}
 
  /**
   * Executes index action

@@ -1,6 +1,6 @@
 <?php include_partial('deals/breadcrumb', array('pDeal' => $pDeal)); ?>
 
-<form action="<?php echo url_for('deals/step_submitted?did='.$pDealId); ?>" name="create_deal_form" method="POST">
+<form action="<?php echo url_for('deals/step_verify?did='.$pDealId); ?>" name="create_deal_form" method="POST">
 <?php slot('content') ?>
 	<div class="createbtnbox alignleft ">
 		<h2 class="btntitle"><?php echo __('Step 1: Your campaign')?></h2>
