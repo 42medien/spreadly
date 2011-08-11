@@ -36,6 +36,11 @@ class dealsActions extends sfActions
 		//check, if there is a deal
 		if($this->pDealId) {
 			$this->pDeal = DealTable::getInstance()->find($this->pDealId);
+
+			if(!$this->pDeal){
+				$this->redirect404();
+			}
+
 			//is user allowed to edit the deal?
 			if($this->getUser()->getUserId() != $this->pDeal->getSfGuardUserId()){
 				$this->redirect404();
