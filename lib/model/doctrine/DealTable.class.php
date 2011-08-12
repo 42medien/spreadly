@@ -4,7 +4,7 @@ class DealTable extends Doctrine_Table
 {
   // Type
   const TYPE_POOL = 'pool';
-  
+
   // Billing type
   const BILLING_TYPE_LIKE = 'like';
   const BILLING_TYPE_MEDIA_PENETRATION = 'media_penetration';
@@ -28,28 +28,27 @@ class DealTable extends Doctrine_Table
   {
     return Doctrine_Core::getTable('Deal');
   }
-  
+
   public function getNextFromPool($pUser) {
     $q = $this->createQuery()
                   ->where('deal_state = ?', self::STATE_ACTIVE)
                   ->andWhere('target_quantity > actual_quantity');
 
     if($pUser->getParticipatedDeals() && count($pUser->getParticipatedDeals())>0) {
-                $q->andWhere('id NOT IN ?', $pUser->getParticipatedDeals());
+                $q->andWhere("id NOT IN (".implode(",", $pUser->getParticipatedDeals()).")");
     }
-                
-    if($pUser->getEmail()==null) {
+
+    if(!$pUser->getEmail()) {
                 $q->andWhere('email_required = ?', false);
-    }              
-                  
-    $nextDeal = $q->orderBy('updated_at ASC, pool_hits ASC, created_at ASC')
-                  ->fetchOne();
-    
+    }
+
+    $nextDeal = $q->orderBy('updated_at ASC, pool_hits ASC, created_at ASC')->fetchOne();
+
     if($nextDeal) {
       $nextDeal->setPoolHits($nextDeal->getPoolHits()+1);
-      $nextDeal->save();      
+      $nextDeal->save();
     }
-    
+
     return $nextDeal;
   }
 }
