@@ -9,11 +9,6 @@ if ($lImages && count($lImages) > 0) {
 }
 ?>
 
-<header>
-  <h2>Share this page<span>$documenttitle ipsumy nibh euismod tincidunttincidunttincidunt ut laoreet dolore magna aliquam erat volutpat.</span></h2>
-</header>
-
-<!-- weisser Content -->
 <div id="content-inner" class="clearfix">
   <form action="" name="popup-like-form" id="popup-like-form" method="post">
     <div id="comment-area" class="clearfix">

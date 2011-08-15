@@ -31,6 +31,11 @@
 
       <!-- transparent-grauer Hintergrund mit Überschrift -->
       <div id="content-outer" role="main">
+        <header>
+          <h2><?php echo __("Spread.ly - first choice for social sharing"); ?><span><?php echo __("LIKE - SHARE - DEAL"); ?></span>
+          </h2>
+        </header>
+
         <?php echo $sf_content; ?>
 
         <!-- popup footer -->

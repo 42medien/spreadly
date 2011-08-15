@@ -1,10 +1,6 @@
 <?php
 use_helper('Avatar', 'Text');
 ?>
-<header>
-  <h2>Share this page<span>$documenttitle ipsumy nibh euismod tincidunttincidunttincidunt ut laoreet dolore magna aliquam erat volutpat.</span></h2>
-</header>
-
 <!-- weisser Content -->
 <div id="content-inner" class="clearfix deal-content-inner">
   <h3><?php echo $deal->getMotivationTitle(); ?></h3>
@@ -42,4 +38,8 @@ use_helper('Avatar', 'Text');
 
     <input type="hidden" name="like[d_id]" id="deal-img-value" value="<?php echo $deal->getId(); ?>" />
   </form>
+
+  <div id="deal-badge">
+    <span>DEAL!</span>
+  </div>
 </div>
