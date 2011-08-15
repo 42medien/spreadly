@@ -38,8 +38,4 @@ use_helper('Avatar', 'Text');
 
     <input type="hidden" name="like[d_id]" id="deal-img-value" value="<?php echo $deal->getId(); ?>" />
   </form>
-
-  <div id="deal-badge">
-    <span>DEAL!</span>
-  </div>
 </div>
