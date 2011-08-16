@@ -15,6 +15,7 @@ class PaymentMethodForm extends BasePaymentMethodForm
     $this->setWidgets(array(
       //'id'               => new sfWidgetFormInputHidden(),
       //'type'             => new sfWidgetFormChoice(array('choices' => array('invoice' => 'invoice'))),
+      '_csrf_token'			=> new sfWidgetFormInputHidden(),
       'company'          => new sfWidgetFormInputText(),
       'contact_name'     => new sfWidgetFormInputText(),
       'address'          => new sfWidgetFormInputText(),

@@ -129,14 +129,16 @@ class dealsActions extends sfActions
    * @param sfWebRequest $request
    */
   public function executeStep_billing(sfWebRequest $request){
-  	$this->pForm->validate_billing();
+  	//$this->pForm->validate_billing();
   	$this->pPaymentMethods = $this->getUser()->getGuardUser()->getPaymentMethods();
-    $lPaymentMethodForm = new PaymentMethodForm();
-    $this->pForm->embedForm('payment_method', $lPaymentMethodForm);
+  	$this->pPaymentMethodForm = new PaymentMethodForm();
+
+    //$lPaymentMethodForm = new PaymentMethodForm();
+    //$this->pForm->embedForm('payment_method', $lPaymentMethodForm);
   	if($request->getMethod() == 'POST'){
   		$lParams = $request->getPostParameters();
   		$lIsNew = true;
-  		$lParams['payment_method']['sf_guard_user_id'] = $this->getUser()->getUserId();
+  		$lParams['sf_guard_user_id'] = $this->getUser()->getUserId();
 
   		//check if the user selected an old address or if he inserted a new
   		//if he selected an old, overwrite the form-values with the database-data -> needet for validation
@@ -144,29 +146,34 @@ class dealsActions extends sfActions
   			//find the selected pm object
 				$lSelectedPM = PaymentMethodTable::getInstance()->find($lParams['existing_pm_id']);
 				//fill the values for validation
-				$lParams['payment_method']['company'] = $lSelectedPM->getCompany();
-				$lParams['payment_method']['contact_name'] = $lSelectedPM->getContactName();
-				$lParams['payment_method']['address'] = $lSelectedPM->getAddress();
-				$lParams['payment_method']['zip'] = $lSelectedPM->getZip();
-				$lParams['payment_method']['city'] = $lSelectedPM->getCity();
-				$lParams['payment_method_id'] = $lParams['existing_pm_id'];
+				$lParams['company'] = $lSelectedPM->getCompany();
+				$lParams['contact_name'] = $lSelectedPM->getContactName();
+				$lParams['address'] = $lSelectedPM->getAddress();
+				$lParams['zip'] = $lSelectedPM->getZip();
+				$lParams['city'] = $lSelectedPM->getCity();
+				//$lParams['payment_method_id'] = $lParams['existing_pm_id'];
 				//bind the object to the form -> needed for update (if you don't do this, symfony always inserts a new db entry)
-    		$lPaymentMethodForm = new PaymentMethodForm($lSelectedPM);
-    		$this->pForm->embedForm('payment_method', $lPaymentMethodForm);
+    		$this->pPaymentMethodForm = new PaymentMethodForm($lSelectedPM);
+    		//$this->pForm->embedForm('payment_method', $lPaymentMethodForm);
   		}
+
   		//unset the param, that check, if user selected an existent payment method
   		unset($lParams['existing_pm_id']);
-
+			//var_dump($lParams);die();
+			//var_dump($lParams);die();
   		//bind and validatevalidate
-  		$this->pForm->bind($lParams);
-  		if($this->pForm->isValid()){
+  		//unset($lParams['payment_method_id']);
+
+  		$this->pPaymentMethodForm->bind($lParams);
+  		//var_dump($this->pPaymentMethodForm->isValid());die();
+  		if($this->pPaymentMethodForm->isValid()){
   			//aus irgendnem beschissenen grund setzt doctrine oder symfony oder was auch immer die pm-id nicht im deal beim speichern des formulars, deswegen alles nochmal schön brav per hand...doh...wenn jemand da schlauer ist, soll ers gerne alles ändern....vallah
-  			$lDeal = $this->pForm->save();
-				$lPm = $this->pForm->getEmbeddedForm('payment_method')->getObject();
- 				$lDeal->setPaymentMethodId($lPm->getId());
- 				$lDeal->save();
-  			$lDeal->complete_billing();
-	 			$this->redirect('deals/step_verify?did='.$lDeal->getId());
+  			$lPm = $this->pPaymentMethodForm->save();
+				//$lPm = $this->pForm->getEmbeddedForm('payment_method')->getObject();
+				$this->pDeal->setPaymentMethodId($lPm->getId());
+ 				$this->pDeal->save();
+  			$this->pDeal->complete_billing();
+	 			$this->redirect('deals/step_verify?did='.$this->pDeal->getId());
   		}
   	} else if($this->pDeal->canReset_to_billing()) {
   	  $this->pDeal->reset_to_billing();
@@ -180,12 +187,18 @@ class dealsActions extends sfActions
    * @param sfWebRequest $request
    */
   public function executeStep_verify(sfWebRequest $request){
+  	$this->pForm->validate_verify();
     if($request->getMethod() == 'POST'){
-  	  $this->pDeal->submit();
-  	  $this->redirect('deals/step_submitted?did='.$this->pDeal->getId());
-  	} else if($this->pDeal->getState() != DealTable::STATE_BILLING_COMPLETED) {
+  		$lParams = $request->getPostParameters();
+  		$this->pForm->bind($lParams);
+  		if($this->pForm->isValid()){
+  			$lDeal = $this->pForm->save();
+	  	  $lDeal->submit();
+	  	  $this->redirect('deals/step_submitted?did='.$this->pDeal->getId());
+  		}
+  	}/* elseif($this->pDeal->getState() != DealTable::STATE_BILLING_COMPLETED) {
   	  $this->redirect404();
-  	}
+  	}*/
   }
 
 

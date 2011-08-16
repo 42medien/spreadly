@@ -4,67 +4,58 @@
 <form action="<?php echo url_for('deals/step_billing?did='.$pDealId); ?>" id="deal_billing_form" name="create_deal_form" method="POST">
 	<div class="createbtnbox alignleft">
 		<h2 class="btntitle"><?php echo __('Step 3: Enter your payment method')?></h2>
-		<?php //var_dump($pForm['payment_method_id']);die();?>
-		<?php echo $pForm['payment_method_id']->render(); ?>
+	<?php echo $pPaymentMethodForm['_csrf_token']->render(); ?>
 		<input type="radio" class="alignleft" name="existing_pm_id" value="false" checked/>
 		<ul class="btnformlist alignleft">
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo $pForm['payment_method']['company']->renderLabel(); ?></strong><span><?php echo $pForm['payment_method']['company']->renderError(); ?></span>
+	      	<strong><?php echo $pPaymentMethodForm['company']->renderLabel(); ?></strong><span><?php echo $pPaymentMethodForm['company']->renderError(); ?></span>
 	      </div>
 	      <label class="textfield-wht">
 		      <span>
-	      		<?php echo $pForm['payment_method']['company']->render(array('class' => 'wd350')); ?>
+	      		<?php echo $pPaymentMethodForm['company']->render(array('class' => 'wd350')); ?>
 	      	</span>
 	      </label>
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo $pForm['payment_method']['contact_name']->renderLabel(); ?></strong><span><?php echo $pForm['payment_method']['contact_name']->renderError(); ?></span>
+	      	<strong><?php echo $pPaymentMethodForm['contact_name']->renderLabel(); ?></strong><span><?php echo $pPaymentMethodForm['contact_name']->renderError(); ?></span>
 	      </div>
 	      <label class="textfield-wht">
 		      <span>
-	      		<?php echo $pForm['payment_method']['contact_name']->render(array('class' => 'wd350')); ?>
+	      		<?php echo $pPaymentMethodForm['contact_name']->render(array('class' => 'wd350')); ?>
 	      	</span>
 	      </label>
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo $pForm['payment_method']['address']->renderLabel(); ?></strong><span><?php echo $pForm['payment_method']['address']->renderError(); ?></span>
+	      	<strong><?php echo $pPaymentMethodForm['address']->renderLabel(); ?></strong><span><?php echo $pPaymentMethodForm['address']->renderError(); ?></span>
 	      </div>
 	      <label class="textfield-wht">
 		      <span>
-	      		<?php echo $pForm['payment_method']['address']->render(array('class' => 'wd350')); ?>
+	      		<?php echo $pPaymentMethodForm['address']->render(array('class' => 'wd350')); ?>
 	      	</span>
 	      </label>
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo $pForm['payment_method']['zip']->renderLabel(); ?></strong><span><?php echo $pForm['payment_method']['zip']->renderError(); ?></span>
+	      	<strong><?php echo $pPaymentMethodForm['zip']->renderLabel(); ?></strong><span><?php echo $pPaymentMethodForm['zip']->renderError(); ?></span>
 	      </div>
 	      <label class="textfield-wht">
 		      <span>
-	      		<?php echo $pForm['payment_method']['zip']->render(array('class' => 'wd350')); ?>
+	      		<?php echo $pPaymentMethodForm['zip']->render(array('class' => 'wd350')); ?>
 	      	</span>
 	      </label>
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo $pForm['payment_method']['city']->renderLabel(); ?></strong><span><?php echo $pForm['payment_method']['city']->renderError(); ?></span>
+	      	<strong><?php echo $pPaymentMethodForm['city']->renderLabel(); ?></strong><span><?php echo $pPaymentMethodForm['city']->renderError(); ?></span>
 	      </div>
 	      <label class="textfield-wht">
 		      <span>
-	      		<?php echo $pForm['payment_method']['city']->render(array('class' => 'wd350')); ?>
+	      		<?php echo $pPaymentMethodForm['city']->render(array('class' => 'wd350')); ?>
 	      	</span>
 	      </label>
-	    </li>
-	    <li class="clearfix">
-	    	<div class="btnwording alignleft">
-	      	<strong><?php echo $pForm['tos_accepted']->renderLabel(); ?></strong><span><?php echo $pForm['tos_accepted']->renderError(); ?></span>
-	      </div>
-	      <span>
-	      	<?php echo $pForm['tos_accepted']->render(); ?>
-	      </span>
 	    </li>
 		</ul>
 		<?php foreach($pPaymentMethods as $lPayMethod) { ?>

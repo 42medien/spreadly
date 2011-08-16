@@ -94,10 +94,15 @@ class CreateDealForm extends BaseDealForm
 
   public function validate_billing(){
     $this->setValidators(array(
-    	'payment_method_id' => new sfValidatorString(array('required' => false)),
-    	'tos_accepted'      => new sfValidatorBoolean(array('required' => true))
+    	'payment_method_id' => new sfValidatorString(array('required' => false))
     ));
     //$this->se
+  }
+
+  public function validate_verify(){
+    $this->setValidators(array(
+    	'tos_accepted'      => new sfValidatorBoolean(array('required' => true))
+    ));
   }
 }
 

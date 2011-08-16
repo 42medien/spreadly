@@ -1,8 +1,8 @@
 <?php include_partial('deals/breadcrumb', array('pDeal' => $pDeal)); ?>
 
-<form action="<?php echo url_for('deals/step_verify?did='.$pDealId); ?>" name="create_deal_form" method="POST">
+<form action="<?php echo url_for('deals/step_verify?did='.$pDealId); ?>" name="create_deal_form" id="deal_verify_form" method="POST">
 <?php slot('content') ?>
-	<div class="createbtnbox alignleft ">
+	<div class="createbtnbox alignleft" id="verify-campaign">
 		<h2 class="btntitle"><?php echo __('Step 1: Your campaign')?></h2>
 		<ul class="btnformlist">
 	    <li class="clearfix">
@@ -39,33 +39,33 @@
 	    	<div class="btnwording alignleft">
 	      	<strong><?php echo __('Motivation title'); ?>:</strong>
 	      </div>
-	      <span>
+	      <div class="alignleft wd415">
 	      	<?php echo $pDeal->getMotivationTitle(); ?>
-	      </span>
+	      </div>
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
 	      	<strong><?php echo __('Motivation text'); ?>:</strong>
 	      </div>
-	      <span>
+	      <div class="alignleft wd415">
 	      	<?php echo $pDeal->getMotivationText(); ?>
-	      </span>
+	      </div>
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
 	      	<strong><?php echo __('Spread title'); ?>:</strong>
 	      </div>
-	      <span>
+	      <div class="alignleft wd415">
 	      	<?php echo $pDeal->getSpreadTitle(); ?>
-	      </span>
+	      </div>
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
 	      	<strong><?php echo __('Spread text'); ?>:</strong>
 	      </div>
-	      <span>
+	      <div class="alignleft wd415">
 	      	<?php echo $pDeal->getSpreadText(); ?>
-	      </span>
+	      </div>
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
@@ -80,7 +80,6 @@
 	      	<strong><?php echo __('Spread image'); ?>:</strong>
 	      </div>
 	      <span>
-	      	<img src="<?php echo $pDeal->getSpreadImg(); ?>" width="100" height="80"/>
 	      	<?php echo $pDeal->getSpreadImg(); ?>
 	      </span>
 	    </li>
@@ -222,7 +221,7 @@
 		</ul>
 	</div>
 	<div class="alignleft create-deal-helptext">
-		<h2 class="btntitle"><?php echo __('Your payment method'); ?></h2>
+		<h2 class="btntitle"><?php echo __('Spreadly payment'); ?></h2>
 		<p><?php echo __('Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte. Abgeschieden wohnen Sie in Buchstabhausen an der Küste des Semantik, eines großen Sprachozeans. Ein kleines Bächlein namens Duden fließt durch ihren Ort und versorgt sie mit den nötigen Regelialien. Es ist ein paradiesmatisches Land, in dem einem gebratene Satzteile in den Mund fliegen.'); ?></p>
 		<p><?php echo link_to('Edit your payment settings', 'deals/step_billing?did='.$pDeal->getId()); ?>
 	</div>
@@ -232,6 +231,8 @@
 <?php slot('content') ?>
 <div class="clearfix">
 	<p><?php echo __('Are you sure for your settings? If so, click "send deal" and your deal will be submitted. We will send you an email if we approve the deal.'); ?></p>
+ 	<div class="clearfix"><?php echo $pForm['tos_accepted']->render(array('class'=>'alignleft')); ?><strong class="alignleft"><?php echo $pForm['tos_accepted']->renderLabel(); ?></strong></div>
+ 	<div class="clearfix"><?php echo $pForm['tos_accepted']->renderError(); ?></div>
 	<input type="submit" class="alignright" id="create_deal_button" value="<?php echo __('Send deal'); ?>" />
 </div>
 <?php end_slot(); ?>

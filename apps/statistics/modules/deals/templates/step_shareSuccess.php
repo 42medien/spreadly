@@ -3,7 +3,8 @@
 <?php slot('content') ?>
 <form action="<?php echo url_for('deals/step_share?did='.$pDealId); ?>" id="deal_form" name="create_deal_form" method="POST">
 	<?php //echo $pForm['_csrf_token']->render(); ?>
-	<div class="dealwidebox alignright">
+	<div class="alignright">
+		<img src="/img/popup-screen.png" width="400px" />
 		<!-- screen von deal-like -->
 	</div>
 	<div class="createbtnbox alignleft">
