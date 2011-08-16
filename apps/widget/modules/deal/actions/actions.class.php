@@ -48,6 +48,11 @@ class dealActions extends sfActions
   }
 
   public function executeCoupon(sfWebRequest $request) {
+    $dm = MongoManager::getDM();
+    $activity = $dm->getRepository('Documents\YiidActivity')->find($request->getParameter('id'));
 
+    if ($activity) {
+      $this->deal = $activity->getDeal();
+    }
   }
 }
