@@ -94,7 +94,7 @@
 		</ul>
 	</div>
 	<div class="alignleft create-deal-helptext">
-		<!-- screen von deal-like -->
+		<img src="/img/popup-deal.png" width="400px" />
 		<?php echo link_to('Edit your sharing settings', 'deals/step_share?did='.$pDeal->getId()); ?>
 	</div>
 <?php end_slot(); ?>
@@ -160,7 +160,7 @@
 		</ul>
 	</div>
 	<div class="alignleft create-deal-helptext">
-		<!-- screen von deal-like -->
+		<img src="/img/popup-coupon.png" width="400px" />
 		<?php echo link_to('Edit your coupon settings', 'deals/step_coupon?did='.$pDeal->getId()); ?>
 	</div>
 <?php end_slot(); ?>
