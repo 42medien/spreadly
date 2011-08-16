@@ -178,8 +178,8 @@ dev:
 #
 staging:
   settings:
-    url:              'http://ispread.it'
-    host:             'ispread.it'
+    url:              'http://id.cx'
+    host:             'id.cx'
     widgets_url:      'http://yiiddev.com'
     widgets_host:     'yiiddev.com'
     button_url:        'http://button.yiiddev.com'
@@ -192,7 +192,7 @@ staging:
     dev:              1
     pager:            20
     gzip:             1              ## set 1 to force local gz support
-    short_url: 'http://sprd.ispread.it'
+    short_url: 'http://sprd.id.cx'
 
   twitter:
     oauth_token:   "7tHsjwbsp6pE3EnMB8MtAg"
