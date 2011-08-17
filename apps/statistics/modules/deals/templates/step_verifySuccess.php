@@ -109,17 +109,17 @@
 	    	<div class="btnwording alignleft">
 	      	<strong><?php echo __('Coupon title'); ?>:</strong>
 	      </div>
-	      <span>
+	      <div class="alignleft wd415">
 	      	<?php echo $pDeal->getCouponTitle(); ?>
-	      </span>
+	      </div>
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
 	      	<strong><?php echo __('Coupon text'); ?>:</strong>
 	      </div>
-	      <span>
+	      <div class="alignleft wd415">
 	      	<?php echo $pDeal->getCouponText(); ?>
-	      </span>
+	      </div>
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
