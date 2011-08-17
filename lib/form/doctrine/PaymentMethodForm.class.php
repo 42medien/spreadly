@@ -12,6 +12,8 @@ class PaymentMethodForm extends BasePaymentMethodForm
 {
   public function configure()
   {
+
+    $lI18n = sfContext::getInstance()->getI18N();
     $this->setWidgets(array(
       //'id'               => new sfWidgetFormInputHidden(),
       //'type'             => new sfWidgetFormChoice(array('choices' => array('invoice' => 'invoice'))),
@@ -37,6 +39,14 @@ class PaymentMethodForm extends BasePaymentMethodForm
       'sf_guard_user_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'required' => true)),
       //'created_at'       => new sfValidatorDateTime(),
       //'updated_at'       => new sfValidatorDateTime(),
+    ));
+
+    $this->widgetSchema->setLabels(array(
+    	'company' => $lI18n->__('Unternehmen'),
+    	'contact_name' => $lI18n->__('Ansprechpartner'),
+    	'address' => $lI18n->__('Straße / Postfach'),
+      'zip' => $lI18n->__('PLZ'),
+      'city' => $lI18n->__('Ort')
     ));
 
   }

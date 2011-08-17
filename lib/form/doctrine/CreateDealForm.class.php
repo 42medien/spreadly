@@ -13,7 +13,7 @@ class CreateDealForm extends BaseDealForm
   public function configure()
   {
 
-    //$lI18n = sfContext::getInstance()->getI18N();
+    $lI18n = sfContext::getInstance()->getI18N();
 
     $this->setWidgets(array(
       //'id'                => new sfWidgetFormInputHidden(),
@@ -27,14 +27,14 @@ class CreateDealForm extends BaseDealForm
       'spread_url'        => new sfWidgetFormInputText(),
       'spread_img'        => new sfWidgetFormInputText(),
       'spread_tos'        => new sfWidgetFormInputText(),
-      'coupon_type'       => new sfWidgetFormChoice(array('choices' => array('code' => 'code', 'url' => 'url', 'download' => 'download'), 'expanded' => true)),
+      'coupon_type'       => new sfWidgetFormChoice(array('choices' => array('code' => $lI18n->__('Code'), 'url' => $lI18n->__('Url'), 'download' => $lI18n->__('Download')), 'expanded' => true)),
       'coupon_title'      => new sfWidgetFormInputText(),
       'coupon_text'       => new sfWidgetFormTextarea(),
       'coupon_code'       => new sfWidgetFormInputText(),
       'coupon_url'        => new sfWidgetFormInputText(),
       'coupon_redeem_url' => new sfWidgetFormInputText(),
       //'billing_type'      => new sfWidgetFormChoice(array('choices' => array('like' => 'like', 'media_penetration' => 'media_penetration'))),
-      'target_quantity'   => new sfWidgetFormChoice(array('choices' => array('10' => '10', '100' => '100', '200' => '200', '500' => '500'), 'expanded' => true )),
+      'target_quantity'   => new sfWidgetFormChoice(array('choices' => array('10' => '10 für 5€', '100' => '100 für 50€', '200' => '200 für 70€', '500' => '500 für 140€'), 'expanded' => true )),
       //'actual_quantity'   => new sfWidgetFormInputText(),
       'sf_guard_user_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => true)),
       'payment_method_id' => new sfWidgetFormInputHidden(),
@@ -52,6 +52,25 @@ class CreateDealForm extends BaseDealForm
     ));
 
     $this->setDefault('target_quantity', '10');
+
+    $this->widgetSchema->setLabels(array(
+    	'name' => $lI18n->__('Name'),
+    	'target_quantity' => $lI18n->__('Streuung nach Likes'),
+    	'motivation_title' => $lI18n->__('Motivator'),
+    	'motivation_text' => $lI18n->__('Motivationstext'),
+    	'spread_title' => $lI18n->__('Spread Werbung'),
+    	'spread_url' => $lI18n->__('Spread URL'),
+    	'spread_text' => $lI18n->__('Spread Teaser'),
+    	'spread_img' => $lI18n->__('Spread Bild'),
+    	'spread_tos' => $lI18n->__('Spread AGB'),
+    	'coupon_title' => $lI18n->__('Name des Gutscheins'),
+    	'coupon_text' => $lI18n->__('Gutscheintext'),
+    	'coupon_type' => $lI18n->__('Gutscheinquelle'),
+    	'coupon_code' => $lI18n->__('Gutschein Code'),
+    	'coupon_redeem_url' => $lI18n->__('Gutschein einlösen'),
+    	'coupon_url' => $lI18n->__('Gutschein/Download URL'),
+    	'tos_accepted' => $lI18n->__('Ich aktzeptiere <a href="http://spreadly.local/system/tos" target="_blank">die Allgemeinen Geschäftsbedingungen</a> von Spreadly.'),
+    ));
 
   }
 

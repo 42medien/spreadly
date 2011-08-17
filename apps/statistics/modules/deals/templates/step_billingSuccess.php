@@ -3,7 +3,7 @@
 <?php slot('content') ?>
 <form action="<?php echo url_for('deals/step_billing?did='.$pDealId); ?>" id="deal_billing_form" name="create_deal_form" method="POST">
 	<div class="createbtnbox alignleft">
-		<h2 class="btntitle"><?php echo __('Step 3: Enter your payment method')?></h2>
+		<h2 class="btntitle"><?php echo __('Schritt 4: Rechnungsadresse')?></h2>
 	<?php echo $pPaymentMethodForm['_csrf_token']->render(); ?>
 		<input type="radio" class="alignleft" name="existing_pm_id" value="false" checked/>
 		<ul class="btnformlist alignleft">
@@ -67,11 +67,11 @@
 				<li><?php echo $lPayMethod->getZip(); ?> <?php echo $lPayMethod->getCity(); ?></li>
 			</ul>
 		<?php } ?>
-		<input type="submit" id="create_deal_button" class="alignright" />
+		<input type="submit" id="create_deal_button" value="<?php echo __('Weiter'); ?>" class="alignright" />
 	</div>
 	<div class="alignleft create-deal-helptext">
-		<h2 class="btntitle"><?php echo __('Payment and address'); ?></h2>
-		<p><?php echo __('Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte. Abgeschieden wohnen Sie in Buchstabhausen an der Küste des Semantik, eines großen Sprachozeans. Ein kleines Bächlein namens Duden fließt durch ihren Ort und versorgt sie mit den nötigen Regelialien. Es ist ein paradiesmatisches Land, in dem einem gebratene Satzteile in den Mund fliegen.'); ?></p>
+		<h2 class="btntitle"><?php echo __('Rechnungsadresse'); ?></h2>
+		<p><?php echo __('Bitte geben Sie hier Ihre Rechnungsadresse ein falls Sie von der uns vorliegenden Adresse abweicht.'); ?></p>
 	</div>
 </form>
 

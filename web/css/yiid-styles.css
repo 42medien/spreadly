@@ -427,7 +427,8 @@ a.button.header { float:right; }
 }
 
 .content-error-box{clear:both; padding-left: 170px;}
-.counter-box{clear:both; padding-left: 175px; font-size: 10px;}
+.counter-box{clear:both; padding-left: 185px; font-size: 10px;}
+.left-counter-box{clear:none; }
 
 .error_list li {
     color: #D60000;

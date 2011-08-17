@@ -6,11 +6,11 @@
 	<?php //echo $pForm['_csrf_token']->render(); ?>
 
 	<div class="createbtnbox alignleft">
-  	<h2 class="btntitle"><?php echo __('Step 1: Create your Campaign')?></h2>
+  	<h2 class="btntitle"><?php echo __('Schritt 1: Kampagne anlegen')?></h2>
     <ul class="btnformlist">
     	<li class="clearfix">
       	<div class="btnwording alignleft">
-        	<strong><?php echo $pForm['name']->renderLabel(); ?></strong><span><?php echo __('Name of the new deal Name of the new deal Name of the new deal'); ?></span>
+        	<strong><?php echo $pForm['name']->renderLabel(); ?></strong><span><?php echo __('Geben Sie Ihrer Kampagne einen Namen, damit Sie sie von eventuellen weiteren unterscheiden können. Dieser Name erscheint nicht öffentlich.'); ?></span>
         </div>
         <label class="textfield-wht">
         	<span>
@@ -21,7 +21,7 @@
       </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo $pForm['target_quantity']->renderLabel(); ?></strong><span><?php echo __('Explain the target quantity. Explain the target quantity. Explain the target quantity. '); ?></span>
+	      	<strong><?php echo $pForm['target_quantity']->renderLabel(); ?></strong><span><?php echo __('Sie buchen für Ihre Kampagne eine bestimmte Anzahl von Likes. Bitte wählen Sie:'); ?></span>
 	      	<span><?php echo $pForm['target_quantity']->renderError(); ?></span>
 	      </div>
 	      <span>
@@ -29,11 +29,11 @@
 	      </span>
 	    </li>
     </ul>
-		<input type="submit" id="create_deal_button" value="<?php echo __('Go to next step'); ?>" class="alignright button" />
+		<input type="submit" id="create_deal_button" value="<?php echo __('Weiter'); ?>" class="alignright button" />
   </div>
 	<div class="alignleft create-deal-helptext">
-		<h2 class="btntitle"><?php echo __('Willkommen bei den Spreadly-Deals'); ?></h2>
-		<p><?php echo __('Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte. Abgeschieden wohnen Sie in Buchstabhausen an der Küste des Semantik, eines großen Sprachozeans. Ein kleines Bächlein namens Duden fließt durch ihren Ort und versorgt sie mit den nötigen Regelialien. Es ist ein paradiesmatisches Land, in dem einem gebratene Satzteile in den Mund fliegen. Nicht einmal von der allmächtigen Interpunktion werden die Blindtexte beherrscht – ein geradezu unorthographisches Leben. Eines Tages aber beschloß eine kleine Zeile Blindtext, ihr Name war Lorem Ipsum, hinaus zu gehen in die weite Grammatik. Der große Oxmox riet ihr davon ab, da es dort wimmele von bösen Kommata, wilden Fragezeichen und hinterhältigen Semikoli, doch das Blindtextchen ließ sich nicht beirren. Es packte seine sieben Versalien, schob sich sein Initial in den Gürtel und machte sich auf den Weg.'); ?></p>
+		<h2 class="btntitle"><?php echo __('Deal Kampagnen von Spreadly'); ?></h2>
+		<p><?php echo __('Sie haben eine gute Entscheidung getroffen, denn Sie zahlen nur für die tatsächlich erzielte Reichweite Ihrer Kampagne.<br/> Ihr Deal erscheint für den Teilnehmer als Angebot im Like-Popup von Spreadly.<br/> Sie erreichen so eine internetaffine Zielgruppe, die gern Inhalte über verschiedene Social Media Kanäle verbreitet.<br/> Gestalten Sie Ihr Angebot so reizvoll wie möglich, damit sich schnell der von Ihnen gewünschte Erfolg einstellt. In den Statistiken können Sie jederzeit die Resonanz Ihrer Kampagne prüfen.'); ?></p>
 	</div>
 </form>
 

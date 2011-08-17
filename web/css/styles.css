@@ -668,7 +668,7 @@ div.nopadlr{ padding-left:0px !important; padding-right:0px !important; }
 .wd320{ width: 320px;}
 .wd350 { width: 350px;}
 .wd415 { width: 415px;}
-.btnwording{ width:104px; padding-right:4px; line-height:14px; }
+.btnwording{ width:104px; padding-right:10px; line-height:14px; }
 .btnwording span{ font-size:10px; display:block;}
  .btnwording span > span {display: inline;}
 #deal_form .btnwording {width: 170px;}
@@ -686,7 +686,6 @@ div.nopadlr{ padding-left:0px !important; padding-right:0px !important; }
 .popoboxpad{ padding-bottom:5px;}
 
 .wd60{ width:60px;}
-.wd320{ width:318px;}
 .requirrow{ line-height:30px; padding:0 2px 0 6px;}
 .singleline{ line-height:28px !important; }
 .dealwidebox{ background:url(../img/copenbgwide.png) left top no-repeat; width:329px; height:184px; padding:13px 14px 6px 16px; margin-top:5px;}

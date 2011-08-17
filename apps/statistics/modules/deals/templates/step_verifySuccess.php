@@ -3,11 +3,12 @@
 <form action="<?php echo url_for('deals/step_verify?did='.$pDealId); ?>" name="create_deal_form" id="deal_verify_form" method="POST">
 <?php slot('content') ?>
 	<div class="createbtnbox alignleft" id="verify-campaign">
-		<h2 class="btntitle"><?php echo __('Step 1: Your campaign')?></h2>
+		<h2 class="btntitle"><?php echo __('Schritt 5: Prüfen')?></h2>
+		<h2 class="btntitle"><?php echo __('Kampagne anlegen')?></h2>
 		<ul class="btnformlist">
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo __('Campaign name'); ?>:</strong>
+	      	<strong><?php echo __('Name'); ?>:</strong>
 	      </div>
 	      <span>
 	      	<?php echo $pDeal->getName(); ?>
@@ -15,7 +16,7 @@
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo __('Target quantity'); ?>:</strong>
+	      	<strong><?php echo __('Streuung nach Likes'); ?>:</strong>
 	      </div>
 	      <span>
 	      	<?php echo $pDeal->getTargetQuantity(); ?>
@@ -24,20 +25,20 @@
 		</ul>
 	</div>
 	<div class="alignleft create-deal-helptext">
-		<h2 class="btntitle"><?php echo __('Ihre Spreadly Kampagne'); ?></h2>
-		<p><?php echo __('Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte. Abgeschieden wohnen Sie in Buchstabhausen an der Küste des Semantik, eines großen Sprachozeans. Ein kleines Bächlein namens Duden fließt durch ihren Ort und versorgt sie mit den nötigen Regelialien. Es ist ein paradiesmatisches Land, in dem einem gebratene Satzteile in den Mund fliegen.'); ?></p>
-		<p><?php echo link_to('Edit your campaign settings', 'deals/step_campaign?did='.$pDeal->getId()); ?></p>
+		<h2 class="btntitle"><?php echo __('Deal Kampagnen von Spreadly'); ?></h2>
+		<p><?php echo __('Sie haben eine gute Entscheidung getroffen, denn Sie zahlen nur für die tatsächlich erzielte Reichweite Ihrer Kampagne.<br/> Ihr Deal erscheint für den Teilnehmer als Angebot im Like-Popup von Spreadly.<br/> Sie erreichen so eine internetaffine Zielgruppe, die gern Inhalte über verschiedene Social Media Kanäle verbreitet.<br/> Gestalten Sie Ihr Angebot so reizvoll wie möglich, damit sich schnell der von Ihnen gewünschte Erfolg einstellt. In den Statistiken können Sie jederzeit die Resonanz Ihrer Kampagne prüfen.'); ?></p>
+		<p><?php echo link_to('Bearbeiten der Kampagne', 'deals/step_campaign?did='.$pDeal->getId()); ?></p>
 	</div>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
 
 <?php slot('content') ?>
 	<div class="createbtnbox alignleft">
-		<h2 class="btntitle"><?php echo __('Step 2: Your share settings')?></h2>
+		<h2 class="btntitle"><?php echo __('Deal definieren')?></h2>
 		<ul class="btnformlist">
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo __('Motivation title'); ?>:</strong>
+	      	<strong><?php echo __('Motivator'); ?>:</strong>
 	      </div>
 	      <div class="alignleft wd415">
 	      	<?php echo $pDeal->getMotivationTitle(); ?>
@@ -45,7 +46,7 @@
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo __('Motivation text'); ?>:</strong>
+	      	<strong><?php echo __('Motivationstext'); ?>:</strong>
 	      </div>
 	      <div class="alignleft wd415">
 	      	<?php echo $pDeal->getMotivationText(); ?>
@@ -53,7 +54,7 @@
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo __('Spread title'); ?>:</strong>
+	      	<strong><?php echo __('Spread Werbung'); ?>:</strong>
 	      </div>
 	      <div class="alignleft wd415">
 	      	<?php echo $pDeal->getSpreadTitle(); ?>
@@ -61,7 +62,7 @@
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo __('Spread text'); ?>:</strong>
+	      	<strong><?php echo __('Spread Teaser'); ?>:</strong>
 	      </div>
 	      <div class="alignleft wd415">
 	      	<?php echo $pDeal->getSpreadText(); ?>
@@ -69,7 +70,7 @@
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo __('Spread url'); ?>:</strong>
+	      	<strong><?php echo __('Spread URL'); ?>:</strong>
 	      </div>
 	      <span>
 	      	<?php echo $pDeal->getSpreadUrl(); ?>
@@ -77,7 +78,7 @@
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo __('Spread image'); ?>:</strong>
+	      	<strong><?php echo __('Spread Bild'); ?>:</strong>
 	      </div>
 	      <span>
 	      	<?php echo $pDeal->getSpreadImg(); ?>
@@ -85,7 +86,7 @@
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo __('Spread TOS'); ?>:</strong>
+	      	<strong><?php echo __('Spread AGB'); ?>:</strong>
 	      </div>
 	      <span>
 	      	<?php echo $pDeal->getSpreadTos(); ?>
@@ -95,7 +96,7 @@
 	</div>
 	<div class="alignleft create-deal-helptext">
 		<img src="/img/popup-deal.png" width="400px" />
-		<?php echo link_to('Edit your sharing settings', 'deals/step_share?did='.$pDeal->getId()); ?>
+		<?php echo link_to('Bearbeiten des Deals', 'deals/step_share?did='.$pDeal->getId()); ?>
 	</div>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
@@ -103,11 +104,11 @@
 
 <?php slot('content') ?>
 	<div class="createbtnbox alignleft">
-		<h2 class="btntitle"><?php echo __('Step 3: Your coupon settings')?></h2>
+		<h2 class="btntitle"><?php echo __('Bearbeiten des Gutscheins')?></h2>
 		<ul class="btnformlist">
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo __('Coupon title'); ?>:</strong>
+	      	<strong><?php echo __('Name des Gutscheins'); ?>:</strong>
 	      </div>
 	      <div class="alignleft wd415">
 	      	<?php echo $pDeal->getCouponTitle(); ?>
@@ -115,7 +116,7 @@
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo __('Coupon text'); ?>:</strong>
+	      	<strong><?php echo __('Gutscheintext'); ?>:</strong>
 	      </div>
 	      <div class="alignleft wd415">
 	      	<?php echo $pDeal->getCouponText(); ?>
@@ -123,7 +124,7 @@
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo __('The Coupon type'); ?>:</strong>
+	      	<strong><?php echo __('Gutscheinquelle'); ?>:</strong>
 	      </div>
 	      <span>
 	      	<?php echo $pDeal->getCouponType(); ?>
@@ -133,7 +134,7 @@
 	    <?php if ($pDeal->getCouponType() == "code") {?>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo __('Coupon code'); ?>:</strong>
+	      	<strong><?php echo __('Gutschein Code'); ?>:</strong>
 	      </div>
 	      <span>
 	      	<?php echo $pDeal->getCouponCode(); ?>
@@ -141,7 +142,7 @@
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo __('Redeem url'); ?>:</strong>
+	      	<strong><?php echo __('Gutschein einlösen'); ?>:</strong>
 	      </div>
 	      <span>
 	      	<?php echo $pDeal->getCouponRedeemUrl(); ?>
@@ -150,7 +151,7 @@
 	    <?php } else { ?>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo __('Url'); ?>:</strong>
+	      	<strong><?php echo __('Gutschein/Download URL'); ?>:</strong>
 	      </div>
 	      <span>
 	      	<?php echo $pDeal->getCouponUrl(); ?>
@@ -161,26 +162,26 @@
 	</div>
 	<div class="alignleft create-deal-helptext">
 		<img src="/img/popup-coupon.png" width="400px" />
-		<?php echo link_to('Edit your coupon settings', 'deals/step_coupon?did='.$pDeal->getId()); ?>
+		<?php echo link_to('Bearbeiten des Gutscheins', 'deals/step_coupon?did='.$pDeal->getId()); ?>
 	</div>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
 
 <?php slot('content') ?>
 	<div class="createbtnbox alignleft">
-		<h2 class="btntitle"><?php echo __('Step 4: Your payment settings')?></h2>
+		<h2 class="btntitle"><?php echo __('Rechnungsadresse')?></h2>
 		<ul class="btnformlist">
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo __('Payment method'); ?>:</strong>
+	      	<strong><?php echo __('Zahlungsart'); ?>:</strong>
 	      </div>
-	      <span>
-	      	<?php echo $pDeal->getPaymentMethod()->getType(); ?>
+	      <span><?php echo __('Rechnung'); ?>
+	      	<?php //echo $pDeal->getPaymentMethod()->getType(); ?>
 	      </span>
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo __('Company'); ?>:</strong>
+	      	<strong><?php echo __('Unternehmen'); ?>:</strong>
 	      </div>
 	      <span>
 	      	<?php echo $pDeal->getPaymentMethod()->getCompany(); ?>
@@ -188,7 +189,7 @@
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo __('Contact name'); ?>:</strong>
+	      	<strong><?php echo __('Ansprechpartner'); ?>:</strong>
 	      </div>
 	      <span>
 	      	<?php echo $pDeal->getPaymentMethod()->getContactName(); ?>
@@ -196,7 +197,7 @@
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo __('Address'); ?>:</strong>
+	      	<strong><?php echo __('Straße / Postfach'); ?>:</strong>
 	      </div>
 	      <span>
 	      	<?php echo $pDeal->getPaymentMethod()->getAddress(); ?>
@@ -204,7 +205,7 @@
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo __('Zip'); ?>:</strong>
+	      	<strong><?php echo __('PLZ'); ?>:</strong>
 	      </div>
 	      <span>
 	      	<?php echo $pDeal->getPaymentMethod()->getZip(); ?>
@@ -212,7 +213,7 @@
 	    </li>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo __('City'); ?>:</strong>
+	      	<strong><?php echo __('Ort'); ?>:</strong>
 	      </div>
 	      <span>
 	      	<?php echo $pDeal->getPaymentMethod()->getCity(); ?>
@@ -221,19 +222,19 @@
 		</ul>
 	</div>
 	<div class="alignleft create-deal-helptext">
-		<h2 class="btntitle"><?php echo __('Spreadly payment'); ?></h2>
-		<p><?php echo __('Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte. Abgeschieden wohnen Sie in Buchstabhausen an der Küste des Semantik, eines großen Sprachozeans. Ein kleines Bächlein namens Duden fließt durch ihren Ort und versorgt sie mit den nötigen Regelialien. Es ist ein paradiesmatisches Land, in dem einem gebratene Satzteile in den Mund fliegen.'); ?></p>
-		<p><?php echo link_to('Edit your payment settings', 'deals/step_billing?did='.$pDeal->getId()); ?>
+		<h2 class="btntitle"><?php echo __('Rechnungsadresse'); ?></h2>
+		<p><?php echo __('Bitte überprüften Sie, ob die Rechnungsdaten richtig sind.'); ?></p>
+		<p><?php echo link_to('Bearbeiten der Rechnungsadresse', 'deals/step_billing?did='.$pDeal->getId()); ?>
 	</div>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
 
 <?php slot('content') ?>
 <div class="clearfix">
-	<p><?php echo __('Are you sure for your settings? If so, click "send deal" and your deal will be submitted. We will send you an email if we approve the deal.'); ?></p>
- 	<div class="clearfix"><?php echo $pForm['tos_accepted']->render(array('class'=>'alignleft')); ?><strong class="alignleft"><?php echo $pForm['tos_accepted']->renderLabel(); ?></strong></div>
+	<p><?php echo __('Sind Sie sicher, dass alle Eingaben korrekt sind? Sie lassen sich nach dem Absenden nicht mehr ändern. Wenn ja, klicken Sie bitte auf „Deal senden“. Sie erhalten nach der Freigabe durch das Spreadly-Team eine Mail und Ihr Like Angebot wird umgehend in unserem Pool geschaltet.'); ?></p>
+ 	<div class="clearfix"><?php echo $pForm['tos_accepted']->render(array('class'=>'alignleft')); ?>&nbsp;<strong class="alignleft"><?php echo $pForm['tos_accepted']->renderLabel(); ?></strong></div>
  	<div class="clearfix"><?php echo $pForm['tos_accepted']->renderError(); ?></div>
-	<input type="submit" class="alignright" id="create_deal_button" value="<?php echo __('Send deal'); ?>" />
+	<input type="submit" class="alignright" id="create_deal_button" value="<?php echo __('Deal senden'); ?>" />
 </div>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
