@@ -253,6 +253,11 @@ Prev
     padding-left: 3px;
 }
 
+#deal_form ul.btnformlist li#select-target-quantity span ul.radio_list li{
+  padding-bottom: 5px;
+  margin-bottom: 0;
+}
+
 #deal-form-cat-list{
   height: 60px;
 }
@@ -1006,6 +1011,8 @@ div.data-tablebox table#top-influencer-table td.first div.infname img {
 .bc-gradient a:hover, .bc-gradient strong {color: #252525;}
 .bc-seperator{  background: url("/img/breadcrumb_center.png") no-repeat scroll left center transparent; width: 17px;}
 .bc-last{  background: url("/img/breadcrumb_right.png") no-repeat scroll left center transparent; width: 12px;}
+
+.bc-highlight {color: #646869; }
 
 #like-content-box .error{margin: 25px;}
 .like-content-information { margin: 25px 0 25px 25px; };

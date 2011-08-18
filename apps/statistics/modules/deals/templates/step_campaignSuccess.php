@@ -19,7 +19,7 @@
         </label>
         <div class="content-error-box clearfix"><?php echo $pForm['name']->renderError(); ?></div>
       </li>
-	    <li class="clearfix">
+	    <li class="clearfix" id="select-target-quantity">
 	    	<div class="btnwording alignleft">
 	      	<strong><?php echo $pForm['target_quantity']->renderLabel(); ?></strong><span><?php echo __('Sie buchen für Ihre Kampagne eine bestimmte Anzahl von Likes. Bitte wählen Sie:'); ?></span>
 	      	<span><?php echo $pForm['target_quantity']->renderError(); ?></span>

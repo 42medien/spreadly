@@ -34,7 +34,7 @@ class CreateDealForm extends BaseDealForm
       'coupon_url'        => new sfWidgetFormInputText(),
       'coupon_redeem_url' => new sfWidgetFormInputText(),
       //'billing_type'      => new sfWidgetFormChoice(array('choices' => array('like' => 'like', 'media_penetration' => 'media_penetration'))),
-      'target_quantity'   => new sfWidgetFormChoice(array('choices' => array('10' => '10 für 5€', '100' => '100 für 50€', '200' => '200 für 70€', '500' => '500 für 140€'), 'expanded' => true )),
+      'target_quantity'   => new sfWidgetFormChoice(array('choices' => array('10' => '10 Likes für 5 Euro', '100' => '100 Likes für 50 Euro', '200' => '200 Likes für 70 Euro', '500' => '500 Likes für 140 Euro'), 'expanded' => true )),
       //'actual_quantity'   => new sfWidgetFormInputText(),
       'sf_guard_user_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => true)),
       'payment_method_id' => new sfWidgetFormInputHidden(),
