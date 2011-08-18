@@ -19,7 +19,7 @@
 	      	<strong><?php echo __('Streuung nach Likes'); ?>:</strong>
 	      </div>
 	      <span>
-	      	<?php echo $pDeal->getTargetQuantity(); ?>
+	      	<?php echo __($pDeal->getTargetQuantity().' Likes für x Euro'); ?>
 	      </span>
 	    </li>
 		</ul>
