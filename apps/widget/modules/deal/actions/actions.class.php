@@ -44,7 +44,6 @@ class dealActions extends sfActions
     if (!$deal) {
       $this->setTemplate('default_deal');
     }
-
   }
 
   public function executeCoupon(sfWebRequest $request) {

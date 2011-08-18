@@ -1,5 +1,20 @@
-<h1>Danke für deinen "Like" du Spacken</h1>
+<!-- weisser Content -->
+<div id="content-inner" class="clearfix deal-content-inner">
+  <h3><?php echo __("Thanks for your like"); ?></h3>
+  <h4><?php echo __("Here is a little goodie for you"); ?></h4>
 
-<iframe width="425" height="349" src="http://www.youtube.com/embed/nqRiigt_OyQ" frameborder="0" allowfullscreen></iframe>
+  <br /><br /><br />
 
-<p>Hier könnte deine Mutter stehen oder auch nicht... man weiß es nicht...</p>
+  <script type="text/javascript">
+    <!--
+    google_ad_client = "ca-pub-1809163553409046";
+    /* Spreadly_Default_Box */
+    google_ad_slot = "5458217299";
+    google_ad_width = 468;
+    google_ad_height = 60;
+    //-->
+  </script>
+  <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+
+  <br /><br /><br />
+</div>
