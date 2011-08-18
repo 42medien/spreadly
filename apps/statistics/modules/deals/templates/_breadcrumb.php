@@ -21,7 +21,7 @@
 		</li>
 		<li class="bc-seperator"></li>
 		<li class="bc-gradient <?php echo ($lAction == 'step_verify')? 'bc-highlight': ""; ?>">
-		  <?php echo __('Schritt 5: Überprüfen') ?>
+		  <?php echo __('Schritt 5: Prüfen') ?>
 		</li>
 		<li class="bc-last"></li>
 	</ul>
