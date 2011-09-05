@@ -1,13 +1,13 @@
 body, *{
-	margin: 0;
-	padding: 0;
- 	font-family: Corbel, 'Helvetica Neue', Arial, sans-serif;
-	font-size: 12px;
-	 color: #000;
+  margin: 0;
+  padding: 0;
+  font-family: Corbel, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 12px;
+   color: #000;
 
 }
 body {
-	background:url(/img/popup/pop-upbg.jpg) center top no-repeat;
+  background:url(/img/popup/pop-upbg.jpg) center top no-repeat;
 }
 
 ul, li{ list-style:none;}
@@ -35,6 +35,7 @@ input, textarea {
   padding: 10px;
   outline: 0;
   font-size: 11px;
+  -webkit-user-select:auto;
 }
 
 input:hover, textarea:hover,
@@ -61,7 +62,7 @@ nav{
 }
 
 nav .nav-list li{
-	display: inline-block;
+  display: inline-block;
   line-height: 30px;
   padding: 0 0 0 5px;
   position: relative;
@@ -118,22 +119,22 @@ nav .nav-list li#nav-spread a:hover{
 
 #content-outer h2,
 #content-outer .additional-info{
-	color: #fff;
-	font-weight: normal;
-	text-shadow: 0px 1px 1px hsla(333,42%,0%,.8);
-	text-transform: uppercase;
-	font-size: 1.3em;
-	padding: 0 5px 5px;
+  color: #fff;
+  font-weight: normal;
+  text-shadow: 0px 1px 1px hsla(333,42%,0%,.8);
+  text-transform: uppercase;
+  font-size: 1.3em;
+  padding: 0 5px 5px;
 }
 #content-outer h2 span{
-	color: #fff;
-	text-transform: none;
-	font-size: .8em;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	max-width: 100%;
-	display: inline-block;
+  color: #fff;
+  text-transform: none;
+  font-size: .8em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  display: block;
 }
 
 
@@ -149,9 +150,6 @@ nav .nav-list li#nav-spread a:hover{
   text-align: left;
 }
 
-.deal-content-inner {
-  background: url("/img/popup/deal.png") top right no-repeat;
-}
 
 /********************footer***********************/
 footer{
@@ -188,6 +186,9 @@ footer ul li:last-child a {
   border-right: 0;
 }
 
+
+
+
 /********************subsites/contents*******************************/
 
 /********************like-content: form-fields***********************/
@@ -203,16 +204,10 @@ footer ul li:last-child a {
   padding-top:0;
 }
 
-div#comment-area textarea#area-like-comment{
+#popup-like-form div#comment-area textarea#area-like-comment{
   width: 95%;
   height: 45px;
   font-size: 16px;
-}
-
-#popup-like-form div.deal-comment textarea#area-like-comment{
-	margin-top: 15px;
-  height: 18px;
-  font-size: 12px;
 }
 
 #popup-like-form div#comment-area label{
@@ -226,6 +221,87 @@ div#comment-area textarea#area-like-comment{
 
 #popup-like-form div#comment-area a#close-popup-link {
   padding-left: 10px;
+}
+
+#popup-like-form.deal-form {
+  margin-top: 10px;
+}
+
+#motivation {
+  margin: 10px 0;
+  padding: 15px 10px 0;
+  color: #fff;
+  position: relative;
+}
+
+#deal-marker {
+  position: absolute;
+  top: -15px;
+  padding: 5px;
+  border-radius: 3px;
+  background-color: hsla(333,42%,90%,.8);
+  color: hsla(333,42%,50%,1);
+  text-transform: uppercase;
+  -webkit-transform: rotate(-12deg);
+  box-shadow: 1px 1px 1px 1px hsla(0,0%,0%,.2);
+  text-shadow: -1px -1px 0px hsla(0,0%,0%,.2), 1px 1px 0px hsla(0,0%,100%,.4);
+}
+
+#deal_coupon, #deal_url {
+  text-align: center;
+  line-height: 1.5;
+  position: relative;
+}
+
+#deal_url h3{
+  font-size: 2em;
+}
+
+#deal_coupon {
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px dashed #000;
+  box-shadow: 0px 0px 10px 0px hsla(0,0%,0%,.2), 0px 0px 40px 40px hsla(0,0%,100%,.6) inset;
+}
+
+#deal_coupon:before {
+  content: '\2701';
+  position: absolute;
+  top: -1.05em;
+  right: 45%;
+  font-size: 4em;
+}
+
+#redeemcode {
+  display: block;
+  background: #fff;
+  color: hsla(333,42%,50%,1);
+  font-weight: bold;
+  font-size: 2em;
+  margin: .4em 0 0 0;
+  -webkit-user-select:auto;
+  border: 1px solid hsla(0,0%,0%,.2);
+  box-shadow: 2px 2px 5px 0px hsla(0,0%,0%,.15) inset;
+  -webkit-transition: color .5s ease-in-out, border-color .5s ease-in-out;
+}
+
+#redeemcode:hover {
+  color: hsla(333,42%,0%,1);
+  border-color: hsla(0,0%,0%,.8);
+}
+
+#redeemcode::selection {
+  background: hsla(333,42%,50%,1);
+  color: hsla(333,42%,90%,1);
+  text-shadow: 0px 1px 0px hsla(0,0%,0%,1)
+}
+
+.link.B {
+  padding-left: 4px;
+  margin: 5px 0;
+}
+.link.B:before{
+  content: none;
 }
 
 
@@ -272,14 +348,14 @@ div#comment-area textarea#area-like-comment{
 }
 
 .slide-back-link {
-    background: url("/img/popup/round_arrow_left.png") no-repeat scroll 0 0 transparent;
+    background: url("../img/round_arrow_left.png") no-repeat scroll 0 0 transparent;
     cursor: pointer;
     height: 16px;
     width: 16px;
 }
 
 .slide-next-link {
-    background: url("/img/popup/round_arrow_right.png") no-repeat scroll 0 0 transparent;
+    background: url("../img/round_arrow_right.png") no-repeat scroll 0 0 transparent;
     cursor: pointer;
     height: 16px;
     width: 16px;
@@ -308,7 +384,7 @@ div#like-submit{
   -webkit-transition: background-color .5s ease-in-out;
 }
 div#like-submit:hover{
-	  background-color: hsla(333,42%,50%,.2);
+    background-color: hsla(333,42%,50%,.2);
 }
 
 div#like-submit #like-response{
@@ -325,12 +401,40 @@ div#like-submit #like-oi-list{
 }
 
 div#like-submit li.B:before {
-	display:none;
+  display:none;
 }
 
 div#like-submit li input{
-	position: relative;
-	top: -3px;
+  position: relative;
+  top: -3px;
+}
+
+div#like-submit #like-oi-list li{
+  height:15px;
+  vertical-align: top;
+  padding: 1px 3px 2px 3px;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+
+div#like-submit #like-oi-list li a{
+  padding: 1px 5px 3px;
+  color: hsla(333,42%,50%,1);
+}
+
+div#like-submit #like-oi-list li a:active{
+  color:#fff;
+}
+
+
+div#like-submit #like-oi-list li img{
+  margin-left: 2px;
+  opacity: .6;
+}
+
+div#like-submit #like-oi-list:hover li img{
+  opacity: 1;
 }
 
 div#like-submit #like-oi-list li {
@@ -370,107 +474,4 @@ div#like-submit #like-oi-list li {
 
 div#like-submit #like-oi-list li ul li a:hover {
   color: #111;
-}
-
-div#like-submit #like-oi-list li ul li {
-  display:block;
-  margin-bottom: 5px;
-}
-
-div#like-submit #like-oi-list li a {
-  padding: 1px 5px 3px;
-  color: hsla(333,42%,50%,1);
-}
-
-div#like-submit #like-oi-list li a:active{
-	color:#fff;
-}
-
-
-div#like-submit #like-oi-list li img{
-  margin-left: 2px;
-  opacity: .6;
-}
-
-div#like-submit #like-oi-list:hover li img{
-  opacity: 1;
-}
-
-.coupon-download, .coupon-url {
-  text-align: center;
-  margin: 30px 0;
-}
-
-.coupon-download h4, .coupon-url h4 {
-	font-size: 33px;
-	margin: 15px 0;
-}
-
-.coupon-download .text, .coupon-url .text {
-  font-size: 22px;
-  margin: 15px 0;
-}
-
-.download-button a {
-  color: #D9EEF7;
-  border: solid 1px #0076A3;
-  background: #f78d1d;
-  background: -webkit-gradient(linear, left top, left bottom, from(#00ADEE), to(#0078A5));
-  background: -moz-linear-gradient(top,  #00ADEE,  #0078A5);
-  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ADEE', endColorstr='#0078A5');
-  display: inline-block;
-  outline: none;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  font: 14px/100% Arial, Helvetica, sans-serif;
-  padding: .5em 2em .55em;
-  text-shadow: 0 1px 1px rgba(0,0,0,.3);
-  -webkit-border-radius: .5em;
-  -moz-border-radius: .5em;
-  border-radius: .5em;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-  box-shadow: 0 1px 2px rgba(0,0,0,.2);
-}
-.download-button a:hover {
-	text-decoration: none;
-  background: #f47c20;
-  background: -webkit-gradient(linear, left top, left bottom, from(#0095CC), to(#0078A5));
-  background: -moz-linear-gradient(top,  #0095CC,  #0078A5);
-  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#0095CC', endColorstr='#0078A5');
-}
-.download-button a:active {
-	position: relative;
-  top: 1px;
-  color: #80BED6;
-  background: -webkit-gradient(linear, left top, left bottom, from(#0078A5), to(#00ADEE));
-  background: -moz-linear-gradient(top,  #0078A5,  #00ADEE);
-  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#0078A5', endColorstr='#00ADEE');
-}
-
-.coupon-code {
-	border: 3px dashed #000;
-  background-color: #fff;
-  margin: 30px;
-  padding: 20px;
-  text-align: center;
-}
-
-.coupon-code h4, .coupon-code .text {
-  font-size: 18px;
-  color: #222;
-}
-
-.coupon-code .coupon {
-  font-size: 33px;
-  margin: 15px 0;
-  font-family: Georgia, "Times New Roman", Times, serif;
-  color: #00ADEE;
-}
-
-.coupon-url .url a {
-  color: #00ADEE;
-  text-decoration: underline;
-  font-size: 22px;
 }
