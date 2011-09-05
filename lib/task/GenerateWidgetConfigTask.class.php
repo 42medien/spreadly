@@ -41,7 +41,8 @@ EOF;
       'IS_DEV' => sfConfig::get('app_settings_dev'),
       'COOKIE_NAME' => $options['env'] == 'prod' ? 'spread' : 'spread_'.$options['env'],
       'ENVIRONMENT' => $options['env'],
-      'RELEASE_NAME' => sfConfig::get('app_release_name')
+      'RELEASE_NAME' => sfConfig::get('app_release_name'),
+      'TRACKING_PARAMS' => '"'.implode('","',sfConfig::get('app_settings_filtered_parameters')).'"'
     ));
   }
 }
