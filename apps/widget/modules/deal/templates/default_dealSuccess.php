@@ -1,8 +1,12 @@
+<header>
+  <h2><?php echo __("Thanks for sharing!"); ?></h2>
+  <p id="motivation">
+    <span id="deal-marker">Your deal</span>
+  </p>
+</header>
+
 <!-- weisser Content -->
 <div id="content-inner" class="clearfix deal-content-inner">
-  <h3><?php echo __("Thanks for your like"); ?></h3>
-  <h4><?php echo __("Here is a little goodie for you"); ?></h4>
-
   <br /><br /><br />
 
   <script type="text/javascript">

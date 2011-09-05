@@ -9,6 +9,10 @@ if ($lImages && count($lImages) > 0) {
 }
 ?>
 
+<header>
+  <h2><?php echo __("Share this page"); ?><span><?php echo $pYiidMeta->getTitle(); ?></span></h2>
+</header>
+
 <div id="content-inner" class="clearfix">
   <form action="" name="popup-like-form" id="popup-like-form" method="post">
     <div id="comment-area" class="clearfix">

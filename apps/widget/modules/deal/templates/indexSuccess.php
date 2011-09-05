@@ -1,12 +1,18 @@
 <?php
 use_helper('Avatar', 'Text');
 ?>
+
+<header>
+  <h2><?php echo $deal->getMotivationTitle(); ?></h2>
+  <p id="motivation">
+    <span id="deal-marker">Your deal</span>
+    <?php echo $deal->getMotivationText(); ?>
+  </p>
+</header>
+
 <!-- weisser Content -->
 <div id="content-inner" class="clearfix deal-content-inner">
-  <h3><?php echo $deal->getMotivationTitle(); ?></h3>
-  <h4><?php echo $deal->getMotivationText(); ?></h4>
 
-  <form action="" name="popup-like-form" id="popup-like-form" method="post">
     <div class="clearfix">
       <p class="area-like-comment-mirror"></p>
       <div id="like-select-img" class="alignleft">
@@ -30,6 +36,7 @@ use_helper('Avatar', 'Text');
       </div>
     </div>
 
+  <form action="" name="popup-like-form" id="popup-like-form" class="deal-form" method="post">
     <div id="comment-area" class="clearfix deal-comment">
       <textarea id="area-like-comment" class="mirror-value bordered gradient shadow-wide" name="like[comment]" placeholder="<?php echo __("add your comment (optional) ..."); ?> <?php echo __('Feel free to add some hashtags, for example:'); ?> #deal"></textarea>
     </div>
