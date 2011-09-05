@@ -35,16 +35,8 @@ class deal_analyticsActions extends sfActions
     if($this->last30ByUrl) {
       $this->last30ByUrl = $this->last30ByUrl->toArray();
     }
-    $lQuery = Doctrine_Query::create()
-                        ->select('*')
-                        ->from('Deal d')
-                        ->leftJoin('d.DomainProfile dp')
-                        ->where('dp.sf_guard_user_id = ? AND ('.
-                                '((d.start_date BETWEEN ? AND ?) OR (d.end_date BETWEEN ? AND ?)) OR '.
-                                '(d.start_date <= ? AND d.end_date >= ?)) AND d.deal_state = "approved"',
-                          array($this->getUser()->getUserId(), date("c", strtotime("30 days ago")), date("c", strtotime("tomorrow - 1 second")),
-                                date("c", strtotime("30 days ago")), date("c", strtotime("tomorrow - 1 second")), date("c", strtotime("30 days ago")),
-                                date("c", strtotime("tomorrow - 1 second"))));
+    $lQuery = DealTable::getInstance()->createQuery()
+                        ->where('sf_guard_user_id = ?', array($this->getUser()->getUserId()));
 
   	$this->pDeals = $lQuery->execute();
     	$dealIds = array();
