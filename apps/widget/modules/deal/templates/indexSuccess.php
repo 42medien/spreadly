@@ -42,7 +42,7 @@ use_helper('Avatar', 'Text');
     </div>
     <div id="like-submit">
     	<?php include_component("like", "share_section"); ?>
-    <div id="like-submit">
+    </div>
     <input type="hidden" name="like[d_id]" id="deal-img-value" value="<?php echo $deal->getId(); ?>" />
   </form>
 </div>
