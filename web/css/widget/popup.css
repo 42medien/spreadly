@@ -238,12 +238,15 @@ footer ul li:last-child a {
 #deal-marker {
   position: absolute;
   top: -15px;
+  left: 0px;
   padding: 5px;
   border-radius: 3px;
   background-color: hsla(333,42%,90%,.8);
   color: hsla(333,42%,50%,1);
   text-transform: uppercase;
   -webkit-transform: rotate(-12deg);
+  -moz-transform: rotate(-12deg);
+  transform: rotate(-12deg);
   box-shadow: 1px 1px 1px 1px hsla(0,0%,0%,.2);
   text-shadow: -1px -1px 0px hsla(0,0%,0%,.2), 1px 1px 0px hsla(0,0%,100%,.4);
 }
