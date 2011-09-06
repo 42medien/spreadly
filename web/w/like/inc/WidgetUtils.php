@@ -31,6 +31,9 @@ class WidgetUtils {
       $this->aUrl = trim(urldecode($_SERVER['HTTP_REFERER']));
     }
 
+    // clean up the url
+    $this->aUrl = self::cleanupHostAndUri($this->aUrl);
+
     if (isset($_GET['social']) && !empty($_GET['social'])) {
       $this->aShowFriends = true;
     }
@@ -350,5 +353,36 @@ class WidgetUtils {
       $pUrl = substr_replace($pUrl, '', strlen($pUrl)-1);  // strip trailing slash
     }
     return $pUrl;
+  }
+
+  /**
+   * removes unwanted GET-Parameters and strips #anchors
+   *
+   * @author Christian Weyand
+   * @param $pUrl
+   * @return unknown_type
+   */
+  public static function cleanupHostAndUri($pUrl) {
+    $pUrl = urldecode($pUrl);
+    $pUrl = str_replace(" ", "+", $pUrl);
+
+    // @see add this
+    if ($url_fragment = parse_url($pUrl, PHP_URL_FRAGMENT)) {
+      $pUrl = str_replace("#".$url_fragment, "", $pUrl);
+    }
+
+    $parameterList = parse_url($pUrl);
+    $pQueryString = '';
+    $lKeysToRemove = LikeSettings::$TRACKING_PARAMS;
+    if (isset($parameterList['path'])) {
+      $pQueryString .= $parameterList['path'];
+    }
+    if (isset($parameterList['query'])) {
+      $lGetParams = array();
+      parse_str($parameterList['query'], $lGetParams);
+      $parameterList['params'] = array_diff_key($lGetParams, array_fill_keys($lKeysToRemove, 0));
+      $pQueryString .= (!empty($parameterList['params']))?'?'.http_build_query($parameterList['params']):'';
+    }
+    return $parameterList['scheme'].'://'.$parameterList['host'].$pQueryString;
   }
 }

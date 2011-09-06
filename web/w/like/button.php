@@ -96,11 +96,50 @@ $wu->trackUser();
       left:2px;
       background-position: -1px -1px;*/
     }
+
+    .container b{
+      color: #aaa;
+      text-shadow: 0 1px 0 hsla(0,0%,100%,1), 0 -1px 0 hsla(0,0%,0%,.4);
+      box-shadow: 0 1px 0 0 hsla(0,0%,100%,1) inset;
+      border: 1px solid #ccc;
+      padding: 2px 4px 2px 6px;
+      margin-left: 9px;
+      background: #efefef;
+      cursor: default;
+      position: relative;
+      border-radius: 3px;
+      font-weight: normal;
+      -webkit-transition: color 2s ease-out;
+      -moz-transition: color 2s ease-out;
+    }
+
+    .container b:before {
+      position: absolute;
+      top: 4px;
+      left: -6px;
+      content: '';
+      height: 8px;
+      width: 8px;
+      background: #efefef;
+      border: 1px solid transparent;
+      border-top-color: #ccc;
+      border-left-color: #ccc;
+      box-shadow: 0 1px 0 0 hsla(0,0%,100%,1) inset;
+      transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+    }
+
+    .button:hover+b, .button:hover+b:before {
+      background: #fff;
+      color: #666;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <a class="button" href="<?php echo $wu->getPopupUrl() ?>" onclick="window.open(this.href, 'popup', 'width=580,height=450,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" target="_blank">Like</a>
+    <?php if ($wu->showCounter()) { ?><b><?php echo $wu->getActivityCount() ?></b><?php } ?>
   </div>
   <?php if ($wu->showFriends()): ?>
  	<script type="text/javascript" src="/js/100_main/include/button-<?php echo LikeSettings::RELEASE_NAME; ?>.js"></script>
