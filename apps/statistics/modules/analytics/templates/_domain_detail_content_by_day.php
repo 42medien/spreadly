@@ -70,11 +70,5 @@ if ($pHostSummary) {
   include_partial('global/graybox');
 }
 
-slot('content');
-?>
-<h2 class="sub_title"><?php echo __('Deal overview'); ?></h2>
-<?php
-  include_component('analytics', 'active_deal_table', array("host" => $pDomainProfile->getUrl()));
-end_slot();
 include_partial('global/graybox');
 ?>

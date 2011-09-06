@@ -32,10 +32,7 @@ class analyticsActions extends sfActions {
     $this->pDateTo = $request->getParameter('date-to', date('Y-m-d'));
     $this->pCommunity = $request->getParameter('com', 'all');
     $this->pUrl = str_replace(" ", "+", urldecode($request->getParameter('url', null)));
-    $this->pDealId = $request->getParameter('dealid', null);
-    $this->pType = $request->getParameter('type', 'url_activities');
-    //first for first click on a deal
-    $this->pIsDeal = $request->getParameter('isdeal', false);
+     $this->pType = $request->getParameter('type', 'url_activities');
   }
 
  /**
@@ -61,26 +58,6 @@ class analyticsActions extends sfActions {
     $this->last30ByUrl = $urlRepo->findLast30($domainUrls);
     if($this->last30ByUrl) {
       $this->last30ByUrl = $this->last30ByUrl->toArray();
-    }
-
-    $lQuery = Doctrine_Query::create()
-                        ->select('*')
-                        ->from('Deal d')
-                        ->leftJoin('d.DomainProfile dp')
-                        ->where('dp.sf_guard_user_id = ? AND d.deal_state = "approved"',
-                          array($this->getUser()->getUserId()));
-
-  	$this->pDeals = $lQuery->execute();
-
-  	$dealIds = array();
-    foreach ($this->pDeals as $deal) {
-      $dealIds[] = intval($deal->getId());
-    }
-
-    $urlRepo = MongoManager::getStatsDM()->getRepository('Documents\DealStats');
-    $this->last30ByDeal = $urlRepo->findByDealIds($dealIds);
-    if($this->last30ByDeal) {
-      $this->last30ByDeal = $this->last30ByDeal->toArray();
     }
   }
 

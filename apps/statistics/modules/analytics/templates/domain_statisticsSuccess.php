@@ -127,8 +127,5 @@ slot('content');
 <?php include_partial('global/graybox'); ?>
 
 <?php
-  slot('content');
-   include_component('analytics', 'active_deal_table', array("host" => $pHost->getHost()));
-  end_slot();
   include_partial('global/graybox');
 ?>
