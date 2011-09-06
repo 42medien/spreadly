@@ -8,7 +8,7 @@
   			<th align="center" valign="middle" class="first">
   				<div class="sortlink no-sort">
 						<span class="myqtip" title="<?php echo __("Aktivitäten auf Deals in den letzten 30 Tagen"); ?>">
-	  					<?php echo __('Deals last 30 days'); ?>
+	  					<?php echo __('Campains'); ?>
 	  				</span>
   				</div>
   			</th>

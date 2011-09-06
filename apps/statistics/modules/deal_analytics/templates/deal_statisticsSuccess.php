@@ -3,7 +3,7 @@
 slot('content');
 use_helper('YiidNumber');
 ?>
-<?php echo link_to("<span>".__('Details')."</span>", 'analytics/deal_details?deal_id='.$pDeal->getId(), array('class' => 'button alignright'));?>
+<?php echo link_to("<span>".__('Details')."</span>", 'deal_analytics/deal_details?deal_id='.$pDeal->getId(), array('class' => 'button alignright'));?>
 <div id="analytics-bread">
 	<ul class="bc-list clearfix">
 		<li class="bc-first"></li>
