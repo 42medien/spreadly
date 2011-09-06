@@ -49,7 +49,7 @@ if ($lImages && count($lImages) > 0) {
     </div>
 
     <div id="like-submit">
-    	<?php include_component("like", "share_section"); ?>
+    	<?php include_component("like", "share_section", array('pError' => $pError)); ?>
     </div>
 
     <input type="hidden" name="like[thumb]" id="like-img-value" value="<?php echo $lImage; ?>" />

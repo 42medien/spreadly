@@ -1,8 +1,12 @@
-        <div id="like-response"></div>
+	      <div id="like-response" class="error">
+				<?php if($pError) {?>
+	        	<?php echo __($pError); ?>
+        <?php } ?>
+        </div>
         <?php if (!$sf_user->isAuthenticated() ) { ?>
           <h4><?php echo __('Please choose your favorite service for sharing.'); ?> <?php echo __('You can add additional services anytime later.'); ?></h4>
         <?php } ?>
-        <a class="send B" href="#" onclick="document.forms['popup-like-form'].submit();return false;">Continue and Share</a>
+        <a class="send B" href="#" onclick="document.forms['popup-like-form'].submit();return false;"><?php echo __('Continue and Share'); ?></a>
         <?php if ($sf_user->isAuthenticated() ) { ?>
         <ul class="clearfix" id="like-oi-list">
           <?php foreach($pIdentities as $lIdentity) {?>

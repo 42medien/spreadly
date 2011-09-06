@@ -24,13 +24,14 @@ class likeActions extends sfActions {
 
       $lActivity = new Documents\YiidActivity();
       $lActivity->fromArray($lParams);
-
+			$pError = null;
       // try to save activity
       try {
         $lActivity->save();
         $this->redirect("@deal?url=".urlencode($lUrl));
       } catch (Exception $e) { // send error on exception
         $this->getLogger()->err($e->getMessage());
+        $this->pError = $e->getMessage();
       }
     }
 
