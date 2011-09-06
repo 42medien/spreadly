@@ -17,14 +17,10 @@ class deal_analyticsActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-
     $this->pVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
-
-    $lQuery = DealTable::getInstance()->createQuery()
-                        ->where('sf_guard_user_id = ?', array($this->getUser()->getUserId()));
-
-  	$this->pDeals = $lQuery->execute();
-
+    $this->pDeals = DealTable::getInstance()->createQuery()
+                                            ->where('sf_guard_user_id = ?', array($this->getUser()->getUserId()))
+                                            ->execute();
   }
 
   public function executeDeal_statistics(sfWebRequest $request) {
