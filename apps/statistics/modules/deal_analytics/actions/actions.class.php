@@ -18,7 +18,7 @@ class deal_analyticsActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
 
-    	$this->pVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
+    $this->pVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
     $domainUrls = array();
     foreach ($this->pVerifiedDomains as $domain) {
       $domainUrls[] = $domain->getUrl();

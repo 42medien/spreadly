@@ -1,4 +1,3 @@
-    <div id="like-submit">
         <div id="like-response"></div>
         <?php if (!$sf_user->isAuthenticated() ) { ?>
           <h4><?php echo __('Please choose your favorite service for sharing.'); ?> <?php echo __('You can add additional services anytime later.'); ?></h4>
@@ -42,4 +41,3 @@
           </li>
         </ul>
         <?php } ?>
-    </div>

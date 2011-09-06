@@ -69,4 +69,11 @@ class likeActions extends sfActions {
   public function executeNourl(sfWebRequest $request){
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('like/js_init_nourl.js'));
   }
+
+  public function executeGet_services(){
+  	$this->getResponse()->setContentType('application/json');
+    $lReturn['services'] = $this->getComponent('like','share_section');
+    $lReturn['footer'] = $this->getPartial('global/footer');
+    return $this->renderText(json_encode($lReturn));
+  }
 }

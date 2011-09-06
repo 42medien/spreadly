@@ -48,7 +48,9 @@ if ($lImages && count($lImages) > 0) {
       </div>
     </div>
 
-    <?php include_component("like", "share_section"); ?>
+    <div id="like-submit">
+    	<?php include_component("like", "share_section"); ?>
+    </div>
 
     <input type="hidden" name="like[thumb]" id="like-img-value" value="<?php echo $lImage; ?>" />
     <input type="hidden" name="like[title]" value="<?php echo htmlspecialchars($pYiidMeta->getTitle()); ?>" />

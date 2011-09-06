@@ -1,5 +1,5 @@
 /**
- * @combine widget
+ * @nocombine widget
  */
 
 /**
@@ -239,6 +239,7 @@ var LikeImage = {
 
     init: function(pImgCount, pUrl) {
      debug.log("[LikeImage][init]");
+     debug.log(pImgCount);
      if(pImgCount == 0) {
         LikeImage.get(pUrl);
      } else if (pImgCount == 1) {
@@ -284,20 +285,22 @@ var LikeImage = {
      * @param object pResponse
      */
     handleResponse: function(pResponse) {
+      debug.log("[LikeImage][handleResponse]");      
       //insert the image into slider-container
       LikeImage.insert(pResponse.html);
       //if there is no or 1 image, hide the slide-arrows and the counter
+      debug.log(pResponse.count);
       if(pResponse.count === 0 || pResponse.count === 1){
-        LikeImageCounter.hide();
+        //LikeImageCounter.hide();
         LikeImageScroller.hideContainer();
       } else {
         // if there are more than 1 images:
         // init the scroller
         LikeImageScroller.init(true);
         //init the counter
-        LikeImageCounter.init(pResponse.count);
+        //LikeImageCounter.init(pResponse.count);
         //show the slide-arrows and the counter
-        LikeImageCounter.show();
+        //LikeImageCounter.show();
         //and init the onscroll-functionalities (e.g. update counter & update hidden-img-value onscroll)
         LikeImageScroller.onScroll();
       }
@@ -343,6 +346,9 @@ var LikeImageScroller = {
    * @param boolean pCircular (should the slider slide "endless"?)
    */
   init: function(pCircular){
+    
+    LikeImageScroller.showContainer();
+    
     //check, if we would an endless slide-show
     var lCircular = false;
     if(pCircular !== undefined) {
@@ -351,7 +357,7 @@ var LikeImageScroller = {
 
     //init the plugin
     jQuery("#myscroll").scrollable({
-      //circular: lCircular
+      //circular: true
     });
 
     //init the global apiobject with the plugins-api-object
@@ -372,9 +378,14 @@ var LikeImageScroller = {
       WidgetLikeForm.setImageValue(LikeImage.getImgPath(this.getIndex()));
     });
   },
+  
+  showContainer: function() {
+    jQuery('#scroll-button-area').show();    
+    
+  },
 
   hideContainer: function() {
-    jQuery('.subdetail_img').hide();
+    jQuery('#scroll-button-area').hide();
   }
 
 

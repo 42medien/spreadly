@@ -16,15 +16,37 @@
 
     <script type="text/javascript">var _sf_startpt=(new Date()).getTime();</script>
     <script type="text/javascript" src="/js/100_main/include/widget-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
+    <script type="text/javascript" src="/js/widget/like/LikeHandler.js"></script>
+		<script>
+		function reload_services() {
+		  OnLoadGrafic.hideGrafic();
+			jQuery('#like-submit').empty();
+		  var lAction = '/like/get_services';
+		  var lData = {
+		    	ei_kcuf : new Date().getTime(),
+		  	};
 
+		  jQuery.ajax({
+				type : "GET",
+				url : lAction,
+				dataType : "json",
+				data : lData,
+		    success : function(pResponse) {
+		    	jQuery('#like-submit').append(pResponse.services);
+		    	if(!jQuery('#nav-username').length){
+						jQuery('footer').empty();
+						jQuery('footer').append(pResponse.footer);
+			    }
+		      OnLoadGrafic.hideGrafic();
+		    }
+		  });
+		}
+
+
+		</script>
 
     <link rel="shortcut icon" href="/favicon.ico" />
 
-    <script type="text/javascript">
-      function reload_services() {
-        debug.log("DISCH");
-      }
-    </script>
   </head>
   <body>
     <div class="popupblock">
@@ -37,19 +59,7 @@
 
         <footer>
           <!-- Hauptnavigation -->
-          <nav>
-            <!-- Navi rechte Seite -->
-            <ul class="nav-list" role="navigation">
-              <?php if ($sf_user->isAuthenticated()) { ?>
-              <li><span title="<?php echo $sf_user->getUser()->getUsername(); ?>"><?php echo __('Hi'); ?> <?php echo truncate_text($sf_user->getUser()->getUsername(), 10); ?></span></li>
-              <!-- li><?php echo link_to(__('Likes'), '@widget_likes'); ?></li>
-              <li><?php echo link_to(__('Deals'), '@widget_deals'); ?></li-->
-              <li><?php echo link_to(__('Logout'), '@signout'); ?></li>
-              <?php } ?>
-              <li><?php echo link_to(__("Imprint"), "http://spreadly.com/imprint", array("target" => "_blank")); ?></li>
-              <li><?php echo link_to("Powered by Spreadly", sfConfig::get("app_settings_url"), array("title" => "spread.ly", "target" => "_blank")) ?></li>
-            </ul>
-          </nav>
+					<?php include_partial('global/footer'); ?>
         </footer>
       </div>
     </div>
@@ -63,6 +73,7 @@
 	        }
 	      ?>
 	    });
+
 
       var _sf_async_config={uid:23222,domain:"spread.ly"};
       (function(){
