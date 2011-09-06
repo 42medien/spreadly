@@ -10,7 +10,7 @@ i18n.init({
 
 jQuery("input[type='checkbox']").custCheckBox();
 //jQuery('.mirror-change-value').mirrorChangeValue();
-Deal.init();
+//Deal.init();
 //DealTable.init();
 DealForm.init();
 //AnalyticsFilter.init();

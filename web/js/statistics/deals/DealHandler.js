@@ -1,5 +1,5 @@
 /**
- * @nocombine statistics
+ * @combine statistics
  */
 
 /**
@@ -11,6 +11,7 @@ var Deal = {
   
   /**
    * inits the deal-effects
+   * @deprecated not in use anymore
    */
   init : function() {
     debug.log('[Deal][init]');
@@ -118,9 +119,12 @@ var DealForm = {
               jQuery('#coupon-code-row').show();
               jQuery('#coupon-redeem-row').show();
             }
+            
+            jQuery('#coupon-preview-img').attr('src', '/img/'+lId+".png");
+            
             return true;
      });      
     }
+};
 
 
-}

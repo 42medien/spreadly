@@ -5,6 +5,7 @@
 /**
  * Handles the sending of the like
  * @author KM
+ * @deprecated not in use anymore
  */
 
 
@@ -84,6 +85,9 @@ var WidgetDealForm = {
 };
 
 
+/**
+ * @deprecated not in use anymore 
+ */
 var WidgetLikeForm = {
 
     aComment: " ",
@@ -118,7 +122,7 @@ var WidgetLikeForm = {
         OnLoadGrafic.showGrafic();
         WidgetLikeForm.hideButton();
         //WidgetLikeForm.hideTextarea();
-
+        
         var options = {
           beforeSerialize : WidgetLikeForm.checkComment,
           url : lAction,
@@ -395,6 +399,7 @@ var LikeImageScroller = {
 /**
  * Handles the behaviour of the image counter
  * @author KM
+ * @depricated not in use anymore
  */
 var LikeImageCounter = {
 

@@ -4,7 +4,7 @@
 <form action="<?php echo url_for('deals/step_coupon?did='.$pDealId); ?>" name="deal_form" id="deal_form" method="POST">
 	<?php //echo $pForm['_csrf_token']->render(); ?>
 	<div class="alignright">
-		<img src="/img/popup-coupon.png" width="400px" />
+		<img id="coupon-preview-img" src="/img/coupon_type_code.png" width="400px" />
 		<!-- screen von deal-like -->
 	</div>
 	<div class="createbtnbox alignleft">

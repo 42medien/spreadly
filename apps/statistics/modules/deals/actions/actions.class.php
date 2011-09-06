@@ -16,7 +16,7 @@ class dealsActions extends sfActions
   * @param sfRequest $request A request object
   */
   public function executeIndex(sfWebRequest $request) {
-  	$this->getResponse()->setSlot('js_document_ready', $this->getPartial('deals/js_init_deals.js'));
+  	//$this->getResponse()->setSlot('js_document_ready', $this->getPartial('deals/js_init_deals.js'));
   	$lQuery = DealTable::getInstance()->createQuery()->where('sf_guard_user_id = ?', $this->getUser()->getUserId())->orderBy("created_at DESC");
   	$this->pDeals = $lQuery->execute();
   }
@@ -85,7 +85,7 @@ class dealsActions extends sfActions
    * @param sfWebRequest $request
    */
   public function executeStep_share(sfWebRequest $request) {
-  	$this->getResponse()->setSlot('js_document_ready', $this->getPartial('deals/js_init_deals.js'));
+  	//$this->getResponse()->setSlot('js_document_ready', $this->getPartial('deals/js_init_deals.js'));
   	$this->pForm->validate_share();
    	if($request->getMethod() == 'POST'){
   		$lParams = $request->getPostParameters();
