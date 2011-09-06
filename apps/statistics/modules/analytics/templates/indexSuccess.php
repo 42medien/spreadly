@@ -41,9 +41,9 @@
 	  		<?php foreach($pVerifiedDomains as $lDomain) { ?>
 	  			<tr class="scrollrow">
 	  				<td align="left" class="first"><div class="padleft"><?php echo link_to($lDomain->getUrl(), 'analytics/domain_statistics?domainid='.$lDomain->getId()); ?></div></td>
-	  		    <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo array_key_exists($lDomain->getUrl(), $last30ByHost) ? point_format($last30ByHost[$lDomain->getUrl()]['value']['l']) : 0; ?></strong></div></td>
-	  		    <td align="center" valign="middle" ><div><strong class="big-font blue"><?php echo array_key_exists($lDomain->getUrl(), $last30ByHost) ? point_format($last30ByHost[$lDomain->getUrl()]['value']['sh']) : 0; ?></strong></div></td>
-	  				<td align="center" class="last"><div><strong class="big-font blue"><?php echo array_key_exists($lDomain->getUrl(), $last30ByHost) ? point_format($last30ByHost[$lDomain->getUrl()]['value']['mp']) : 0; ?></strong></div></td>
+	  		    <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $last30ByHost && array_key_exists($lDomain->getUrl(), $last30ByHost) ? point_format($last30ByHost[$lDomain->getUrl()]['value']['l']) : 0; ?></strong></div></td>
+	  		    <td align="center" valign="middle" ><div><strong class="big-font blue"><?php echo $last30ByHost && array_key_exists($lDomain->getUrl(), $last30ByHost) ? point_format($last30ByHost[$lDomain->getUrl()]['value']['sh']) : 0; ?></strong></div></td>
+	  				<td align="center" class="last"><div><strong class="big-font blue"><?php echo $last30ByHost && array_key_exists($lDomain->getUrl(), $last30ByHost) ? point_format($last30ByHost[$lDomain->getUrl()]['value']['mp']) : 0; ?></strong></div></td>
 	  			</tr>
 	      <?php $i++; } ?>
 	    </tbody>
