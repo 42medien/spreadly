@@ -6,9 +6,9 @@
 		<li class="bc-first"></li>
 		<li class="bc-gradient"><?php echo link_to(__('Dashboard'), 'deal_analytics/index'); ?></li>
 		<li class="bc-seperator"></li>
-		<li class="bc-gradient"><strong><?php echo link_to(__('Overview for "%deal%"', array("%deal%" => truncate_text($pDeal->getSummary(), 50))), 'analytics/deals?deal_id='.$pDeal->getId(), array('title' => 'Overview for '.$pDeal->getSummary())); ?></strong></li>
+		<li class="bc-gradient"><strong><?php echo link_to(__('Overview for "%deal%"', array("%deal%" => truncate_text($pDeal->getName(), 50))), 'deal_analytics/deal_statistics?deal_id='.$pDeal->getId(), array('title' => 'Overview for '.$pDeal->getSummary())); ?></strong></li>
 		<li class="bc-seperator"></li>
-		<li class="bc-gradient"><strong><?php echo __('Details for "%deal%"', array("%deal%" => truncate_text($pDeal->getSummary(), 50), 'title' => 'Overview for '.$pDeal->getSummary()));?></strong></li>
+		<li class="bc-gradient"><strong><?php echo __('Details for "%deal%"', array("%deal%" => truncate_text($pDeal->getName(), 50), 'title' => 'Overview for '.$pDeal->getSummary()));?></strong></li>
 		<li class="bc-last"></li>
 	</ul>
 </div>
@@ -23,7 +23,7 @@ if (count($pDeal->getLikes())) {
 ?>
 <h2 class="sub_title">
 	<?php //echo __('Details for deal "%deal%', array('%deal%' => $pDeal->getSummary().'"'.'&nbsp;from&nbsp;'.date("d.m.Y", strtotime($pDeal->getStartDate())).'&nbsp;to&nbsp;'.date("d.m.Y", strtotime($pEndDate))));?>
-	<?php echo __('Details for deal "%deal%"', array('%deal%' => $pDeal->getSummary())); ?>
+	<?php echo __('Details for deal "%deal%"', array('%deal%' => $pDeal->getName())); ?>
 </h2>
 <div id="line-chart-example">
 <?php include_partial('analytics/chart_line_activities',

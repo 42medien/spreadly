@@ -19,13 +19,6 @@
   			</th>
   			<th align="center" valign="middle">
   				<div>
-	  	    	<span class="myqtip" title="<?php echo __("Restlaufzeit des Deals"); ?>">
-  						<?php echo __('Days left');?>
-  					</span>
-  				</div>
-  			</th>
-  			<th align="center" valign="middle">
-  				<div>
 	  	    	<span class="myqtip" title="<?php echo __('Maximale Reichweite der Empfehlung'); ?>">
   						<?php echo __('Reach'); ?>
   					</span>
@@ -50,11 +43,10 @@
     <tbody>
       <tr>
   				<td align="center" class="first"><div><strong class="big-font blue"><?php echo $pDeal->getLikes(); ?></strong></div></td>
-  				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $pDeal->getRemainingCouponQuantity(); ?></strong></div></td>
-  				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $pDeal->getRemainingDays() > 0 ? point_format($pDeal->getRemainingDays()) : __('expired'); ?></strong></div></td>
-  				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $pDeal->getDealSummary() ? point_format($pDeal->getDealSummary()->getMediaPenetration()) : 0; ?></strong></div></td>
-  				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $pDeal->getDealSummary() ? point_format($pDeal->getDealSummary()->getClickbacks()) : 0; ?></strong></div></td>
-  				<td align="center" valign="middle" class="last"><div><strong class="big-font blue"><?php echo $pDeal->getDealSummary() ? point_format($pDeal->getDealSummary()->getClickbackLikes()) : 0; ?></strong></div></td>
+  				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $pDeal->getRemainingQuantity(); ?></strong></div></td>
+  				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $pDeal->getMediaPenetration(); ?></strong></div></td>
+  				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $pDeal->getClickbacks(); ?></strong></div></td>
+  				<td align="center" valign="middle" class="last"><div><strong class="big-font blue"><?php echo $pDeal->getClickbackLikes(); ?></strong></div></td>
       </tr>
     </tbody>
   </table>

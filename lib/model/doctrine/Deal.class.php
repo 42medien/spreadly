@@ -29,12 +29,12 @@ class Deal extends BaseDeal {
     if($user->getParticipatedDeals() && in_array($this->getId(), $user->getParticipatedDeals())) {
       throw new sfException("User has already participated in this deal!");
     }
-    
+
     $array = $user->getParticipatedDeals() ? $user->getParticipatedDeals() : array();
     $array[] = $this->getId();
     $user->setParticipatedDeals($array);
     $user->save();
-    
+
     $this->setActualQuantity($this->getActualQuantity()+1);
     $this->save();
 
@@ -88,6 +88,16 @@ class Deal extends BaseDeal {
 
     if ($dealSummary) {
       return $dealSummary->getClickbackLikes();
+    } else {
+      return 0;
+    }
+  }
+
+  public function getClickbacks() {
+    $dealSummary = $this->getDealSummary();
+
+    if ($dealSummary) {
+      return $dealSummary->getClickbacks();
     } else {
       return 0;
     }
