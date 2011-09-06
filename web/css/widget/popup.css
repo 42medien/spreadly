@@ -7,7 +7,7 @@ body, *{
 
 }
 body {
-  background:url(/img/popup/pop-upbg.jpg) center top no-repeat;
+  background: url("/img/popup/pop-upbg.jpg") center top no-repeat;
 }
 
 ul, li{ list-style:none;}
@@ -23,7 +23,6 @@ a img {border: 0;}
 * html .clearfix { height:1%; }/* hides clearfix from IE-mac */
 .clearfix { display:block; }/* end hide from IE-mac */
 .alignleft { float:left; }
-.alignright { float: right;}
 
 .error{color:red;}
 .success{color:green;}
@@ -246,7 +245,6 @@ footer ul li:last-child a {
   text-transform: uppercase;
   -webkit-transform: rotate(-12deg);
   -moz-transform: rotate(-12deg);
-  transform: rotate(-12deg);
   box-shadow: 1px 1px 1px 1px hsla(0,0%,0%,.2);
   text-shadow: -1px -1px 0px hsla(0,0%,0%,.2), 1px 1px 0px hsla(0,0%,100%,.4);
 }
@@ -274,6 +272,7 @@ footer ul li:last-child a {
   top: -1.05em;
   right: 45%;
   font-size: 4em;
+  text-shadow: -1px 1px 1px #fff;
 }
 
 #redeemcode {
@@ -352,14 +351,14 @@ footer ul li:last-child a {
 }
 
 .slide-back-link {
-    background: url("/img/popup/round_arrow_left.png") no-repeat scroll 0 0 transparent;
+    background: url("../img/round_arrow_left.png") no-repeat scroll 0 0 transparent;
     cursor: pointer;
     height: 16px;
     width: 16px;
 }
 
 .slide-next-link {
-    background: url("/img/popup/round_arrow_right.png") no-repeat scroll 0 0 transparent;
+    background: url("../img/round_arrow_right.png") no-repeat scroll 0 0 transparent;
     cursor: pointer;
     height: 16px;
     width: 16px;

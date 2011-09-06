@@ -8,7 +8,48 @@
 .A {
   display: inline-block;
   margin: 10px 2px;
+  -moz-user-select:none;
+  -webkit-user-select:none;
 }
+
+.A b{
+  color: #aaa;
+  text-shadow: 0 1px 0 hsla(0,0%,100%,1), 0 -1px 0 hsla(0,0%,0%,.4);
+  box-shadow: 0 1px 0 0 hsla(0,0%,100%,1) inset;
+  border: 1px solid #ccc;
+  padding: 2px 4px 2px 6px;
+  margin-left: 9px;
+  background: #efefef;
+  cursor: default;
+  position: relative;
+  border-radius: 3px;
+  font-weight: normal;
+  -webkit-transition: color 2s ease-out;
+  -moz-transition: color 2s ease-out;
+}
+
+.A b:before {
+  position: absolute;
+  top: 4px;
+  left: -6px;
+  content: '';
+  height: 8px;
+  width: 8px;
+  background: #efefef;
+  border: 1px solid transparent;
+  border-top-color: #ccc;
+  border-left-color: #ccc;
+  box-shadow: 0 1px 0 0 hsla(0,0%,100%,1) inset;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+}
+
+.B:hover+b, .B:hover+b:before {
+  background: #fff;
+  color: #666;
+}
+
 .B {
   display: inline-block;
   position: relative;
@@ -43,7 +84,6 @@
   left: 1px;
   border-radius: 2px;
   opacity:1;
-
 }
 .B:focus, .B:hover{
   outline: none;
@@ -60,7 +100,7 @@
   background-position: -30% 20px;
   background-color: hsla(333,42%,70%,1);
   color: #fff;
-  border: 1px solid hsl(333,42%,30%);
+  border-color: hsl(333,42%,30%);
   border-top-color: hsl(333,42%,30%);
   box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(333,42%,50%,.3) inset, 0 0 4px 0 hsla(333,42%,30%,.5);
   text-shadow: 0 0px 0px hsla(333,42%,50%,0), 0 0px 0px #fff;
@@ -96,6 +136,15 @@
   box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(199,81%,50%,.3) inset, 0 0 4px 0 hsla(199,81%,30%,.5);
   text-shadow: 0 1px 1px hsla(199,81%,50%,.25), 0 -1px 1px #fff;
 }
+
+.ca .B:active {
+  background-color: hsla(199,81%,70%,1);
+  color: #fff;
+  border-color: hsl(199,81%,30%);
+  border-top-color: hsl(199,81%,30%);
+  box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(199,81%,50%,.3) inset, 0 0 4px 0 hsla(199,81%,30%,.5);
+  text-shadow: 0 0px 0px hsla(199,81%,50%,0), 0 0px 0px #fff;
+}
 /* skin .cb*/
 .cb .B {
   color: hsl(111,24%,50%);
@@ -115,6 +164,15 @@
   box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(111,24%,50%,.3) inset, 0 0 4px 0 hsla(111,24%,30%,.5);
   text-shadow: 0 1px 1px hsla(111,24%,50%,.25), 0 -1px 1px #fff;
 }
+
+.cb .B:active {
+  background-color: hsla(111,24%,70%,1);
+  color: #fff;
+  border-color: hsl(111,24%,30%);
+  border-top-color: hsl(111,24%,30%);
+  box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(111,24%,50%,.3) inset, 0 0 4px 0 hsla(111,24%,30%,.5);
+  text-shadow: 0 0px 0px hsla(111,24%,50%,0), 0 0px 0px #fff;
+}
 /* skin .cc*/
 .cc .B {
   color: hsl(302,54%,50%);
@@ -133,6 +191,14 @@
   border-top-color: hsl(302,54%,46%);
   box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(302,54%,50%,.3) inset, 0 0 4px 0 hsla(302,54%,30%,.5);
   text-shadow: 0 1px 1px hsla(302,54%,50%,.25), 0 -1px 1px #fff;
+}
+.cc .B:active {
+  background-color: hsla(302,54%,70%,1);
+  color: #fff;
+  border-color: hsl(302,54%,30%);
+  border-top-color: hsl(302,54%,30%);
+  box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(302,54%,50%,.3) inset, 0 0 4px 0 hsla(302,54%,30%,.5);
+  text-shadow: 0 0px 0px hsla(302,54%,50%,0), 0 0px 0px #fff;
 }
 /* skin .cd*/
 .cd .B {
@@ -191,10 +257,3 @@
   box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(0,0%,50%,.3) inset, 0 0 4px 0 hsla(0,0%,30%,.5);
   text-shadow: 0 1px 1px hsla(0,0%,50%,.25), 0 -1px 1px #fff;
 }
-
-
-
-
-
-
-
