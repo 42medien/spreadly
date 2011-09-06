@@ -214,7 +214,7 @@ class StatsFeeder {
   private static function feedDealStats($pAnalyticsActivity) {
     if($pAnalyticsActivity->getDeal_id()) {
       $lQuery = self::createUpsertForDayAndHost($pAnalyticsActivity, 'Documents\DealStats');
-      $lQuery->field('d_id')->equals($pAnalyticsActivity->getDeal_id());
+      $lQuery->field('d_id')->equals(intval($pAnalyticsActivity->getDeal_id()));
       $lQuery->getQuery()->execute();
     }
   }
@@ -223,7 +223,7 @@ class StatsFeeder {
     if($pAnalyticsActivity->getDeal_id()) {
       $lQuery = self::createUpsertForDayAndHost($pAnalyticsActivity, 'Documents\DealUrlStats');
       $lQuery->field('url')->equals($pAnalyticsActivity->getUrl())
-             ->field('d_id')->equals($pAnalyticsActivity->getDeal_id());
+             ->field('d_id')->equals(intval($pAnalyticsActivity->getDeal_id()));
       $lQuery->getQuery()->execute();
     }
   }
@@ -252,7 +252,7 @@ class StatsFeeder {
   private static function feedDealSummary($pAnalyticsActivity) {
     if($pAnalyticsActivity->getDeal_id()) {
       $lQuery = self::createUpsertForHost($pAnalyticsActivity, 'Documents\DealSummary');
-      $lQuery->field('d_id')->equals($pAnalyticsActivity->getDeal_id());
+      $lQuery->field('d_id')->equals(intval($pAnalyticsActivity->getDeal_id()));
       self::addSummaryIncToQuery($lQuery, $pAnalyticsActivity);
       self::addDemographicsIncToQuery($lQuery, $pAnalyticsActivity);
       self::addServicesIncToQuery($lQuery, $pAnalyticsActivity);
@@ -264,7 +264,7 @@ class StatsFeeder {
     if($pAnalyticsActivity->getDeal_id()) {
       $lQuery = self::createUpsertForHost($pAnalyticsActivity, 'Documents\DealUrlSummary');
       $lQuery->field('url')->equals($pAnalyticsActivity->getUrl())
-             ->field('d_id')->equals($pAnalyticsActivity->getDeal_id());
+             ->field('d_id')->equals(intval($pAnalyticsActivity->getDeal_id()));
       self::addSummaryIncToQuery($lQuery, $pAnalyticsActivity);
       self::addDemographicsIncToQuery($lQuery, $pAnalyticsActivity);
       self::addServicesIncToQuery($lQuery, $pAnalyticsActivity);
