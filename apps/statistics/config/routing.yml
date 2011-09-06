@@ -67,11 +67,11 @@ domain_detail:
   param:  { module: analytics, action: domain_detail}   
   
 deal_analytics:
-  url:  /analytics/deals/*
+  url:  /deal_analytics/deal_statistics/*
   param:  { module: deal_analytics, action: deal_statistics}  
   
 deal_details:
-  url:  /analytics/deal_details/*
+  url:  /deal_analytics/deal_details/*
   param:  { module: deal_analytics, action: deal_details}   
   
 select_period:

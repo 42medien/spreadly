@@ -7,14 +7,14 @@ use_helper('YiidNumber');
 <div id="analytics-bread">
 	<ul class="bc-list clearfix">
 		<li class="bc-first"></li>
-		<li class="bc-gradient"><?php echo link_to(__('Dashboard'), 'analytics/index'); ?></li>
+		<li class="bc-gradient"><?php echo link_to(__('Deal Dashboard'), 'deal_analytics/index'); ?></li>
 		<li class="bc-seperator"></li>
-		<li class="bc-gradient"><strong><?php echo __('Overview for "%deal%"', array('%deal%' => truncate_text($pDeal->getSummary(), 50))); ?></strong></li>
+		<li class="bc-gradient"><strong><?php echo __('Overview for "%deal%"', array('%deal%' => truncate_text($pDeal->getName(), 50))); ?></strong></li>
 		<li class="bc-last"></li>
 	</ul>
 </div>
 <h2 class="sub_title">
-	<?php echo __('Overview for deal "%deal%"', array('%deal%' => $pDeal->getSummary())); ?>&nbsp;<?php echo __('from %start% to %end%', array('%start%' => format_date(strtotime($pDeal->getStartDate())), '%end%' => format_date(strtotime($pEndDate)))); ?>
+	<?php echo __('Overview for deal "%deal%"', array('%deal%' => $pDeal->getName())); ?>
 </h2>
 <div id="navi" class="clearfix">
   <div class="stepBox alignleft">

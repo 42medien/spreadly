@@ -60,7 +60,7 @@ class deal_analyticsActions extends sfActions
   	$lDealSummary = MongoManager::getStatsDM()->getRepository("Documents\DealSummary")->findOneBy(array("d_id" => intval($lDealId)));
 
     if (!$lDealSummary) {
-      $this->setTemplate("no_stats", "analytics");
+      $this->setTemplate("no_stats", "deal_analytics");
     }
 
   	$lEndDate = strtotime($this->pDeal->getEndDate());

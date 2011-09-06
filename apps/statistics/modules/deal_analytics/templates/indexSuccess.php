@@ -7,7 +7,7 @@
     	<tr>
   			<th align="center" valign="middle" class="first">
   				<div class="sortlink no-sort">
-						<span class="myqtip" title="<?php echo __("Aktivitäten auf Deals in den letzten 30 Tagen"); ?>">
+						<span class="myqtip" title="<?php echo __("Name der Kampagne"); ?>">
 	  					<?php echo __('Campains'); ?>
 	  				</span>
   				</div>
@@ -45,7 +45,7 @@
     <tbody>
   		<?php foreach($pDeals as $lDeal) { ?>
   			<tr>
-  				<td align="left" class="first"><div class="padleft"><?php echo link_to($lDeal->getName(), 'analytics/deals?deal_id='.$lDeal->getId()); ?></div></td>
+  				<td align="left" class="first"><div class="padleft"><?php echo link_to($lDeal->getName(), 'deal_analytics/deal_statistics?deal_id='.$lDeal->getId()); ?></div></td>
   				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $lDeal->getRemainingQuantity(); ?></strong></div></td>
   				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $last30ByDeal && array_key_exists($lDeal->getId(), $last30ByDeal) ? point_format($last30ByDeal[$lDeal->getId()]['value']['l']) : 0; ?></strong></div></td>
   				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $last30ByDeal && array_key_exists($lDeal->getId(), $last30ByDeal) ? point_format($last30ByDeal[$lDeal->getId()]['value']['sh']) : 0; ?></strong></div></td>
