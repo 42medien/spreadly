@@ -19,36 +19,12 @@ class deal_analyticsActions extends sfActions
   {
 
     $this->pVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
-    $domainUrls = array();
-    foreach ($this->pVerifiedDomains as $domain) {
-      $domainUrls[] = $domain->getUrl();
-    }
 
-  	$hostRepo = MongoManager::getStatsDM()->getRepository('Documents\ActivityStats');
-    $this->last30ByHost = $hostRepo->findLast30($domainUrls);
-    if($this->last30ByHost) {
-      $this->last30ByHost = $this->last30ByHost->toArray();
-    }
-
-  	$urlRepo = MongoManager::getStatsDM()->getRepository('Documents\ActivityUrlStats');
-    $this->last30ByUrl = $urlRepo->findLast30($domainUrls);
-    if($this->last30ByUrl) {
-      $this->last30ByUrl = $this->last30ByUrl->toArray();
-    }
     $lQuery = DealTable::getInstance()->createQuery()
                         ->where('sf_guard_user_id = ?', array($this->getUser()->getUserId()));
 
   	$this->pDeals = $lQuery->execute();
-    	$dealIds = array();
-    foreach ($this->pDeals as $deal) {
-      $dealIds[] = intval($deal->getId());
-    }
 
-    $urlRepo = MongoManager::getStatsDM()->getRepository('Documents\DealStats');
-    $this->last30ByDeal = $urlRepo->findByDealIds($dealIds);
-    if($this->last30ByDeal) {
-      $this->last30ByDeal = $this->last30ByDeal->toArray();
-    }
   }
 
   public function executeDeal_statistics(sfWebRequest $request) {

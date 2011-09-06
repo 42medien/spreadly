@@ -47,9 +47,9 @@
   			<tr>
   				<td align="left" class="first"><div class="padleft"><?php echo link_to($lDeal->getName(), 'deal_analytics/deal_statistics?deal_id='.$lDeal->getId()); ?></div></td>
   				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $lDeal->getRemainingQuantity(); ?></strong></div></td>
-  				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $last30ByDeal && array_key_exists($lDeal->getId(), $last30ByDeal) ? point_format($last30ByDeal[$lDeal->getId()]['value']['l']) : 0; ?></strong></div></td>
-  				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $last30ByDeal && array_key_exists($lDeal->getId(), $last30ByDeal) ? point_format($last30ByDeal[$lDeal->getId()]['value']['sh']) : 0; ?></strong></div></td>
-  				<td align="center" class="last"><div><strong class="big-font blue"><?php echo $last30ByDeal && array_key_exists($lDeal->getId(), $last30ByDeal) ? point_format($last30ByDeal[$lDeal->getId()]['value']['mp']) : 0; ?></strong></div></td>
+  				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $lDeal->getLikes(); ?></strong></div></td>
+  				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $lDeal->getShares(); ?></strong></div></td>
+  				<td align="center" class="last"><div><strong class="big-font blue"><?php echo $lDeal->getMediaPenetration(); ?></strong></div></td>
   			</tr>
       <?php } ?>
     	</tbody>
