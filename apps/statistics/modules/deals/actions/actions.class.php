@@ -191,6 +191,10 @@ class dealsActions extends sfActions
     if($request->getMethod() == 'POST'){
   		$lParams = $request->getPostParameters();
   		unset($lParams['area-like-comment']);
+  		unset($lParams['twitter']);
+  		unset($lParams['facebook']);
+  		unset($lParams['linkedin']);
+  		unset($lParams['google']);
   		$this->pForm->bind($lParams);
   		if($this->pForm->isValid()){
   			$lDeal = $this->pForm->save();
