@@ -16,6 +16,7 @@ class dealActions extends sfActions
   * @param sfRequest $request A request object
   */
   public function executeIndex(sfWebRequest $request) {
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('deal/js_init_deal.js'));
     $url = $request->getParameter("url", null);
 
     // handle form submit
@@ -47,6 +48,7 @@ class dealActions extends sfActions
   }
 
   public function executeCoupon(sfWebRequest $request) {
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('deal/js_init_deal.js'));
     $dm = MongoManager::getDM();
     $activity = $dm->getRepository('Documents\YiidActivity')->find($request->getParameter('id'));
 
