@@ -4,4 +4,5 @@ all:
     - 100_main/vendor/201_exporting-2.1_alpha.js
     
   components:
-    no_domain_user: [system, no_domain_user]     
+    no_domain_user: [system, no_domain_user]  
+     

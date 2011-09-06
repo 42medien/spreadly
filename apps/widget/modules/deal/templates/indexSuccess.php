@@ -40,9 +40,9 @@ use_helper('Avatar', 'Text');
     <div id="comment-area" class="clearfix deal-comment">
       <textarea id="area-like-comment" class="mirror-value bordered gradient shadow-wide" name="like[comment]" placeholder="<?php echo __("add your comment (optional) ..."); ?> <?php echo __('Feel free to add some hashtags, for example:'); ?> #deal"></textarea>
     </div>
-
-    <?php include_component("like", "share_section"); ?>
-
+    <div id="like-submit">
+    	<?php include_component("like", "share_section"); ?>
+    <div id="like-submit">
     <input type="hidden" name="like[d_id]" id="deal-img-value" value="<?php echo $deal->getId(); ?>" />
   </form>
 </div>

@@ -190,6 +190,7 @@ class dealsActions extends sfActions
   	$this->pForm->validate_verify();
     if($request->getMethod() == 'POST'){
   		$lParams = $request->getPostParameters();
+  		unset($lParams['area-like-comment']);
   		$this->pForm->bind($lParams);
   		if($this->pForm->isValid()){
   			$lDeal = $this->pForm->save();

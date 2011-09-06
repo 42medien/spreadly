@@ -95,7 +95,7 @@
 		</ul>
 	</div>
 	<div class="alignleft create-deal-helptext">
-		<img src="/img/popup-deal.png" width="400px" />
+		<?php include_partial('deals/popup_share', array('pDeal' => $pDeal))?>
 		<?php echo link_to('Bearbeiten des Deals', 'deals/step_share?did='.$pDeal->getId()); ?>
 	</div>
 <?php end_slot(); ?>
@@ -161,7 +161,13 @@
 		</ul>
 	</div>
 	<div class="alignleft create-deal-helptext">
-		<img src="/img/popup-coupon.png" width="400px" />
+		<?php if ($pDeal->getCouponType() == "code") {?>
+			<?php include_partial('deals/coupon_code', array('pDeal' => $pDeal)); ?>
+		<?php } else if($pDeal->getCouponType() == "url") { ?>
+			<?php include_partial('deals/coupon_url', array('pDeal' => $pDeal)); ?>
+		<?php } else {?>
+			<?php include_partial('deals/coupon_download', array('pDeal' => $pDeal)); ?>
+		<?php }?>
 		<?php echo link_to('Bearbeiten des Gutscheins', 'deals/step_coupon?did='.$pDeal->getId()); ?>
 	</div>
 <?php end_slot(); ?>

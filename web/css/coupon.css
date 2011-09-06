@@ -1,0 +1,452 @@
+#content-outer {
+    background-color: rgba(181, 73, 122, 0.5);
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 0 5px 1px #000000, 0 0 50px 0 rgba(255, 255, 255, 0.5) inset;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    padding: 4px;
+    text-align: center;
+}
+#content-outer h2, #content-outer .additional-info {
+    color: #FFFFFF;
+    font-size: 1.3em;
+    font-weight: normal;
+    padding: 0 5px 5px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.8);
+    text-transform: uppercase;
+}
+#content-outer h2 span {
+    color: #FFFFFF;
+    display: block;
+    font-size: 0.8em;
+    max-width: 100%;
+    overflow: hidden;
+    text-transform: none;
+    white-space: nowrap;
+}
+#content-inner {
+    background-clip: padding-box;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 2px 2px 2px 2px;
+    padding: 10px;
+    text-align: left;
+}
+
+#popup-like-form div {
+    padding-top: 10px;
+}
+#popup-like-form div > div {
+    padding: 0;
+}
+#popup-like-form div#comment-area {
+    padding-top: 0;
+}
+#popup-like-form div#comment-area textarea#area-like-comment {
+    font-size: 14px;
+    height: 45px;
+    width: 95%;
+    color: #000;
+}
+#popup-like-form div#comment-area label {
+    padding: 3px 0 0;
+}
+#popup-like-form div#comment-area .success {
+    font-size: 13px;
+    font-weight: bold;
+}
+#popup-like-form div#comment-area a#close-popup-link {
+    padding-left: 10px;
+}
+#popup-like-form {
+    margin-top: 10px;
+}
+#motivation {
+    color: #FFFFFF;
+    margin: 10px 0;
+    padding: 15px 10px 0;
+    position: relative;
+}
+#deal-marker {
+    -moz-transform: rotate(-12deg);
+    background-color: rgba(240, 218, 228, 0.8);
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+    color: #B5497A;
+    left: 0;
+    padding: 5px;
+    position: absolute;
+    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.2), 1px 1px 0 rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    top: -15px;
+}
+#deal_coupon, #deal_url {
+    line-height: 1.5;
+    position: relative;
+    text-align: center;
+}
+#deal_url h3 {
+    font-size: 2em;
+}
+#deal_coupon {
+    border: 2px dashed #000000;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2), 0 0 40px 40px rgba(255, 255, 255, 0.6) inset;
+    padding: 10px;
+}
+#deal_coupon:before {
+    content: "✁";
+    font-size: 4em;
+    position: absolute;
+    right: 45%;
+    top: -1.05em;
+}
+#redeemcode {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.15) inset;
+    color: #B5497A;
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0.4em 0 0;
+}
+#redeemcode:hover {
+    border-color: rgba(0, 0, 0, 0.8);
+    color: #000000;
+}
+.link.B {
+    margin: 5px 0;
+    padding-left: 4px;
+}
+.link.B:before {
+    content: none;
+}
+.area-like-comment-mirror {
+    font-size: 11px;
+    line-height: 12px;
+    min-height: 12px;
+    overflow: hidden;
+    padding-bottom: 5px;
+    width: 100%;
+}
+#like-select-img {
+    position: relative;
+}
+.scrollable {
+    background: none repeat scroll 0 0 #FFFFFF;
+    height: 60px;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    width: 80px;
+}
+.scrollable .items {
+    position: absolute;
+    width: 20000em;
+}
+.scrollable .items div {
+    float: left;
+}
+.gallery-control {
+    left: 2px;
+    position: absolute;
+    top: 26px;
+    width: 77px;
+}
+.slide-back-link {
+    background: url("/img/popup/round_arrow_left.png") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    height: 16px;
+    width: 16px;
+}
+.slide-next-link {
+    background: url("/img/popup/round_arrow_right.png") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    height: 16px;
+    width: 16px;
+}
+#like-content {
+    margin-left: 10px;
+    width: 74%;
+}
+#like-content p {
+    font-size: 11px;
+    line-height: 12px;
+    padding-bottom: 5px;
+}
+div#like-submit {
+    background-color: rgba(181, 73, 122, 0.05);
+    border: 1px solid rgba(181, 73, 122, 0.1);
+    border-radius: 5px 5px 5px 5px;
+    margin-top: 15px;
+    padding: 0 5px 15px;
+    position: relative;
+}
+div#like-submit:hover {
+    background-color: rgba(181, 73, 122, 0.2);
+}
+div#like-submit #like-response {
+    height: 15px;
+}
+div#like-submit .send.B {
+    bottom: 15px;
+    position: absolute;
+    right: 10px;
+}
+div#like-submit #like-oi-list {
+}
+div#like-submit li.B:before {
+    display: none;
+}
+div#like-submit li input {
+    position: relative;
+    top: -3px;
+}
+div#like-submit #like-oi-list li {
+    display: inline-block;
+    height: 15px;
+    margin-right: 5px;
+    padding: 1px 3px 2px;
+    vertical-align: top;
+}
+div#like-submit #like-oi-list li a {
+    color: #B5497A;
+    padding: 1px 5px 3px;
+}
+div#like-submit #like-oi-list li a:active {
+    color: #FFFFFF;
+}
+div#like-submit #like-oi-list li img {
+    margin-left: 2px;
+    opacity: 0.6;
+}
+div#like-submit #like-oi-list:hover li img {
+    opacity: 1;
+}
+div#like-submit #like-oi-list li {
+    display: inline-block;
+    height: 15px;
+    margin-right: 5px;
+    padding: 1px 3px 2px;
+    vertical-align: top;
+}
+#like-oi-list li ul {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    -moz-transition: box-shadow 0.3s ease-out 0s, text-shadow 0.3s ease-out 0s, background-position 0.6s ease-out 0s;
+    background: url("/img/button/s.png") no-repeat scroll 130% -20px #FFFFFF;
+    border-color: #E2BACC #D79DB7 #B5497A;
+    border-left: 1px solid #D79DB7;
+    border-radius: 3px 3px 3px 3px;
+    border-right: 1px solid #D79DB7;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 -1px 1px 1px rgba(255, 255, 255, 0.698) inset, 0 -4px 8px 0 rgba(181, 73, 122, 0.5) inset, 0 0 2px 8px transparent;
+    color: #B5497A;
+    display: none;
+    padding: 5px;
+    position: absolute;
+    text-decoration: none;
+    text-rendering: optimizelegibility;
+    text-shadow: 0 1px 1px #FFFFFF, 0 -1px 1px rgba(181, 73, 122, 0.25);
+    text-transform: none;
+    width: 200px;
+    z-index: 100;
+}
+#like-oi-list li:hover ul {
+    display: block;
+}
+div#like-submit #like-oi-list li ul li a:hover {
+    color: #111111;
+}
+
+/* default skin*/
+.A {
+  display: inline-block;
+  margin: 10px 2px;
+}
+.B {
+  display: inline-block;
+  position: relative;
+  color: hsl(333,42%,50%);  /* #B44A7A */
+  line-height: 18px;
+  font-weight: bold;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  padding: 0 4px 0 21px;
+  height: 18px;
+  border: 1px solid hsl(333,42%,73%);
+  border-bottom-color: hsl(333,42%,50%);
+  border-top-color: hsl(333,42%,81%);
+  border-radius: 3px;
+  background: #fff url('/img/button/s.png') no-repeat 130% -20px;
+  text-decoration: none;
+  text-transform: uppercase;
+  box-shadow: 0 -1px 1px 1px hsla(333,42%,100%,.7) inset, 0 -4px 8px 0 hsla(333,42%,50%,.5) inset, 0 0 2px 8px hsla(333,42%,0%,0);
+  text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(333,42%,50%,.25);
+  -webkit-transition: box-shadow .3s ease-out, text-shadow .3s ease-out, background-position .6s ease-out;
+  -moz-transition: box-shadow .3s ease-out, text-shadow .3s ease-out, background-position .6s ease-out;
+}
+.B:before{
+  background: hsla(333,42%,50%,1) url('/img/button/l.png') no-repeat 0px 0px;
+  box-shadow: 0 1px 1px 0px hsla(333,42%,0%,.8) inset;
+  content:'';
+  width: 16px;
+  height: 16px;
+  display: block;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  border-radius: 2px;
+  opacity:1;
+
+}
+.B:focus, .B:hover{
+  outline: none;
+  background-position: -30% 20px;
+  border: 1px solid hsl(333,42%,65%);
+  border-top-color: hsl(333,42%,46%);
+  box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(333,42%,50%,.3) inset, 0 0 4px 0 hsla(333,42%,30%,.5);
+  text-shadow: 0 1px 1px hsla(333,42%,50%,.25), 0 -1px 1px #fff;
+  -webkit-transition: box-shadow .3s ease-in, text-shadow .3s ease-in, background-position .6s ease-out;
+  -moz-transition: box-shadow .3s ease-in, text-shadow .3s ease-in, background-position .6s ease-out;
+}
+
+.B:active {
+  background-position: -30% 20px;
+  background-color: hsla(333,42%,70%,1);
+  color: #fff;
+  border: 1px solid hsl(333,42%,30%);
+  border-top-color: hsl(333,42%,30%);
+  box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(333,42%,50%,.3) inset, 0 0 4px 0 hsla(333,42%,30%,.5);
+  text-shadow: 0 0px 0px hsla(333,42%,50%,0), 0 0px 0px #fff;
+}
+
+.B:focus:before, .B:hover:before{
+  opacity:.85;
+  width: 14px;
+  height: 14px;
+  top:2px;
+  left:2px;
+  background-position: -1px -1px;*/
+}
+
+
+/* skin .ca*/
+
+.ca .B {
+  color: hsl(199,81%,50%);
+  border-color: hsl(199,81%,73%);
+  border-bottom-color: hsl(199,81%,50%);
+  border-top-color: hsl(199,81%,81%);
+  box-shadow: 0 -1px 1px 1px hsla(199,81%,100%,.7) inset, 0 -4px 8px 0 hsla(199,81%,50%,.5) inset, 0 0 2px 8px hsla(199,81%,0%,0);
+  text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(199,81%,50%,.25);
+}
+.ca .B:before{
+  background-color: hsla(199,81%,50%,1);
+  box-shadow: 0 1px 1px 0px hsla(199,81%,0%,.5) inset;
+}
+.ca .B:focus, .ca .B:hover{
+  border-color: hsl(199,81%,65%);
+  border-top-color: hsl(199,81%,46%);
+  box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(199,81%,50%,.3) inset, 0 0 4px 0 hsla(199,81%,30%,.5);
+  text-shadow: 0 1px 1px hsla(199,81%,50%,.25), 0 -1px 1px #fff;
+}
+/* skin .cb*/
+.cb .B {
+  color: hsl(111,24%,50%);
+  border-color: hsl(111,24%,73%);
+  border-bottom-color: hsl(111,24%,50%);
+  border-top-color: hsl(111,24%,81%);
+  box-shadow: 0 -1px 1px 1px hsla(111,24%,100%,.7) inset, 0 -4px 8px 0 hsla(111,24%,50%,.5) inset, 0 0 2px 8px hsla(111,24%,0%,0);
+  text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(111,24%,50%,.25);
+}
+.cb .B:before{
+  background-color: hsla(111,24%,50%,1);
+  box-shadow: 0 1px 1px 0px hsla(111,24%,0%,.5) inset;
+}
+.cb .B:focus, .cb .B:hover{
+  border-color: hsl(111,24%,65%);
+  border-top-color: hsl(111,24%,46%);
+  box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(111,24%,50%,.3) inset, 0 0 4px 0 hsla(111,24%,30%,.5);
+  text-shadow: 0 1px 1px hsla(111,24%,50%,.25), 0 -1px 1px #fff;
+}
+/* skin .cc*/
+.cc .B {
+  color: hsl(302,54%,50%);
+  border-color: hsl(302,54%,73%);
+  border-bottom-color: hsl(302,54%,50%);
+  border-top-color: hsl(302,54%,81%);
+  box-shadow: 0 -1px 1px 1px hsla(302,54%,100%,.7) inset, 0 -4px 8px 0 hsla(302,54%,50%,.5) inset, 0 0 2px 8px hsla(302,54%,0%,0);
+  text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(302,54%,50%,.25);
+}
+.cc .B:before{
+  background-color: hsla(302,54%,50%,1);
+  box-shadow: 0 1px 1px 0px hsla(302,54%,0%,.5) inset;
+}
+.cc .B:focus, .cc .B:hover{
+  border-color: hsl(302,54%,65%);
+  border-top-color: hsl(302,54%,46%);
+  box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(302,54%,50%,.3) inset, 0 0 4px 0 hsla(302,54%,30%,.5);
+  text-shadow: 0 1px 1px hsla(302,54%,50%,.25), 0 -1px 1px #fff;
+}
+/* skin .cd*/
+.cd .B {
+  color: hsl(22,90%,50%);
+  border-color: hsl(22,90%,73%);
+  border-bottom-color: hsl(22,90%,50%);
+  border-top-color: hsl(22,90%,81%);
+  box-shadow: 0 -1px 1px 1px hsla(22,90%,100%,.7) inset, 0 -4px 8px 0 hsla(22,90%,50%,.5) inset, 0 0 2px 8px hsla(22,90%,0%,0);
+  text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(22,90%,50%,.25);
+}
+.cd .B:before{
+  background-color: hsla(22,90%,50%,1);
+  box-shadow: 0 1px 1px 0px hsla(22,90%,0%,.5) inset;
+}
+.cd .B:focus, .cd .B:hover{
+  border-color: hsl(22,90%,65%);
+  border-top-color: hsl(22,90%,46%);
+  box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(22,90%,50%,.3) inset, 0 0 4px 0 hsla(22,90%,30%,.5);
+  text-shadow: 0 1px 1px hsla(22,90%,50%,.25), 0 -1px 1px #fff;
+}
+/* skin .ce*/
+.ce .B {
+  color: hsl(349,79%,50%);
+  border-color: hsl(349,79%,73%);
+  border-bottom-color: hsl(349,79%,50%);
+  border-top-color: hsl(349,79%,81%);
+  box-shadow: 0 -1px 1px 1px hsla(349,79%,100%,.7) inset, 0 -4px 8px 0 hsla(349,79%,50%,.5) inset, 0 0 2px 8px hsla(349,79%,0%,0);
+  text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(349,79%,50%,.25);
+}
+.ce .B:before{
+  background-color: hsla(349,79%,50%,1);
+  box-shadow: 0 1px 1px 0px hsla(349,79%,0%,.5) inset;
+}
+.ce .B:focus, .ce .B:hover{
+  border-color: hsl(349,79%,65%);
+  border-top-color: hsl(349,79%,46%);
+  box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(349,79%,50%,.3) inset, 0 0 4px 0 hsla(349,79%,30%,.5);
+  text-shadow: 0 1px 1px hsla(349,79%,50%,.25), 0 -1px 1px #fff;
+}
+/* skin .cf*/
+.cf .B {
+  color: hsl(0,0%,50%);
+  border-color: hsl(0,0%,73%);
+  border-bottom-color: hsl(0,0%,50%);
+  border-top-color: hsl(0,0%,81%);
+  box-shadow: 0 -1px 1px 1px hsla(0,0%,100%,.7) inset, 0 -4px 8px 0 hsla(0,0%,50%,.5) inset, 0 0 2px 8px hsla(0,0%,0%,0);
+  text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(0,0%,50%,.25);
+}
+.cf .B:before{
+  background-color: hsla(0,0%,50%,1);
+  box-shadow: 0 1px 1px 0px hsla(0,0%,0%,.5) inset;
+}
+.cf .B:focus, .cf .B:hover{
+  border-color: hsl(0,0%,65%);
+  border-top-color: hsl(0,0%,46%);
+  box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(0,0%,50%,.3) inset, 0 0 4px 0 hsla(0,0%,30%,.5);
+  text-shadow: 0 1px 1px hsla(0,0%,50%,.25), 0 -1px 1px #fff;
+}
