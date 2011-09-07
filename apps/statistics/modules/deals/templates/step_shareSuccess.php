@@ -12,6 +12,7 @@
 		<ul class="btnformlist">
 	  	<li class="clearfix">
 	    	<div class="btnwording alignleft">
+	    		<img src="/img/1.png" class="alignleft deal-info-number" />
 	      	<strong><?php echo $pForm['motivation_title']->renderLabel(); ?></strong><span><?php echo __('Fordern Sie explizit zur Teilnahme an Ihrem Deal auf. Diese Aufforderung erscheint im Like-Popup und soll Ihre Zielgruppe zum Teilnehmen motivieren.'); ?></span>
 	      </div>
 	      <label class="textfield-wht alignleft">
@@ -24,6 +25,7 @@
 			</li>
 			<li class="clearfix">
 				<div class="btnwording alignleft">
+	    		<img src="/img/2.png" class="alignleft deal-info-number" />
 					<strong><?php echo $pForm['motivation_text']->renderLabel(); ?></strong><span><?php echo __('Adressieren Sie Ihre Zielgruppe und erklären Sie, wieso Ihr Angebot attraktiv ist und welchen Vorteil Teilnehmer konkret erwarten.'); ?></span>
 				</div>
 				<div class="alignleft">
@@ -42,6 +44,7 @@
 			</li>
 			<li class="clearfix">
 				<div class="btnwording alignleft">
+	    		<img src="/img/3.png" class="alignleft deal-info-number" />
 					<strong><?php echo $pForm['spread_title']->renderLabel(); ?></strong><span><?php echo __('Legen Sie die Überschrift fest für das Angebot oder Produkt, das Sie mit Ihrer Kampagne bewerben möchten. Dieser Spread erscheint in den vom Teilnehmer gewählten Zielnetzwerken (z.B. Facebook).'); ?></span>
 				</div>
 				<label class="textfield-wht">
@@ -54,6 +57,7 @@
 			</li>
 			<li class="clearfix">
 				<div class="btnwording alignleft">
+	    		<img src="/img/4.png" class="alignleft deal-info-number" />
 					<strong><?php echo $pForm['spread_text']->renderLabel(); ?></strong> <span><?php echo __('Hier ist Platz für Ihre Werbebotschaft.'); ?></span>
 				</div>
 				<div class="alignleft">
@@ -72,6 +76,7 @@
 			</li>
 			<li class="clearfix">
 				<div class="btnwording alignleft">
+	    		<img src="/img/5.png" class="alignleft deal-info-number" />
 					<strong><?php echo $pForm['spread_url']->renderLabel(); ?></strong><span><?php echo __('Hier erscheint die URL, die Sie bewerben möchten.'); ?></span>
 				</div>
 				<label class="textfield-wht">
@@ -83,6 +88,7 @@
 			</li>
 			<li class="clearfix">
 				<div class="btnwording alignleft">
+	    		<img src="/img/6.png" class="alignleft deal-info-number" />
 					<strong><?php echo $pForm['spread_img']->renderLabel(); ?></strong><span><?php echo __('Geben Sie hier die URL zu einem Bild ein, das mit Ihrem Angebot / Produkt erscheinen soll. Mit Bild ist Ihre Werbung ein Blickfang.'); ?></span>
 				</div>
 				<label class="textfield-wht">

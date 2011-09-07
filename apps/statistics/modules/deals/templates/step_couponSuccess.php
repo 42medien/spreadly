@@ -12,6 +12,7 @@
 		<ul class="btnformlist">
 	  	<li class="clearfix">
 	    	<div class="btnwording alignleft">
+	    		<img src="/img/1.png" class="alignleft deal-info-number" />
 	      	<strong><?php echo $pForm['coupon_title']->renderLabel(); ?></strong><span><?php echo __('Geben Sie Ihrem Gutschein einen Namen, der sich auf Ihr Angebot bezieht.'); ?></span>
 	      </div>
 	      <label class="textfield-wht">
@@ -24,6 +25,7 @@
 			</li>
 			<li class="clearfix">
 				<div class="btnwording alignleft">
+	    		<img src="/img/2.png" class="alignleft deal-info-number" />
 					<strong><?php echo $pForm['coupon_text']->renderLabel(); ?></strong><span><?php echo __('Erklären Sie hier genau, wie der Teilnehmer an Ihr Angebot / den Gewinn kommt.'); ?></span>
 				</div>
 				<div class="alignleft">
@@ -54,6 +56,7 @@
 
 	  	<li class="clearfix" <?php echo ($pForm['coupon_type']->getValue() == 'code')? 'style="display:none;"':""; ?> id="coupon-url-row">
 	    	<div class="btnwording alignleft">
+	    		<img src="/img/3.png" class="alignleft deal-info-number" />
 	      	<strong><?php echo $pForm['coupon_url']->renderLabel(); ?></strong><span><?php echo __('Bitte geben Sie hier die URL ein, die zu Ihrem Angebot führt'); ?></span>
 	      </div>
 	      <label class="textfield-wht">
@@ -67,6 +70,7 @@
 
 	  	<li class="clearfix" <?php echo ($pForm['coupon_type']->getValue() != 'code')? 'style="display:none;"':""; ?> id="coupon-code-row">
 	    	<div class="btnwording alignleft">
+	    		<img src="/img/3.png" class="alignleft deal-info-number" />
 	      	<strong><?php echo $pForm['coupon_code']->renderLabel(); ?></strong><span><?php echo __('Bitte geben Sie hier Ihren Gutschein Code ein'); ?></span>
 	      </div>
 	      <label class="textfield-wht">
@@ -79,6 +83,7 @@
 			</li>
 	  	<li class="clearfix" <?php echo ($pForm['coupon_type']->getValue() != 'code')? 'style="display:none;"':""; ?> id="coupon-redeem-row">
 	    	<div class="btnwording alignleft">
+	    		<img src="/img/4.png" class="alignleft deal-info-number" />
 	      	<strong><?php echo $pForm['coupon_redeem_url']->renderLabel(); ?></strong><span><?php echo __('Bitte geben Sie hier die URL ein, die zu Ihrem Angebot führt'); ?></span>
 	      </div>
 	      <label class="textfield-wht">

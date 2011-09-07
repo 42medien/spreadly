@@ -271,6 +271,7 @@ Prev
   min-height: 155px;
 }
 
+.deal-info-number{ margin-right: 5px;}
 
 input.graybtnwide {
     background: url("/img/copycode-bg-wide.png") no-repeat scroll 0 -38px transparent;
