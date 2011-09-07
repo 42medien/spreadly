@@ -122,10 +122,5 @@ slot('content');
 	<div class="data-tablebox two-line-table">
 		<?php include_partial('analytics/url_table', array('pUrls' => $urls, 'pDomainProfile' => $pDomainProfile)); ?>
 	</div>
-  <?php //include_component('analytics', 'top_url_overall_table', array("host" => $pHost->getHost())); ?>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
-
-<?php
-  include_partial('global/graybox');
-?>
