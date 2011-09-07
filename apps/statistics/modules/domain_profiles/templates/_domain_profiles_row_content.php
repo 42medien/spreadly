@@ -26,7 +26,7 @@
 
       	<?php
           if ($sf_user->hasCredential("beta_tester")) {
-            echo " | " . link_to(__("Add tracking code"), "domain_profiles/tracking_url?host_id=".$domain_profile->getId());
+            echo " | " . link_to(__("Add tracking url"), "domain_profiles/tracking_url?host_id=".$domain_profile->getId());
           }
       	?>
       <?php } ?>

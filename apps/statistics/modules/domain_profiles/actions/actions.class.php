@@ -197,14 +197,34 @@ class domain_profilesActions extends sfActions
   }
 
   public function executeTracking_url(sfWebRequest $request) {
+    $this->info = $this->error = null;
     $host_id = $request->getParameter("host_id", null);
 
     if (!$host_id) {
       $this->redirect('domain_profiles/index');
     }
 
-    if (true) {
+    $domainProfile = DomainProfileTable::getInstance()->find($host_id);
 
+    if ($request->getMethod() == "POST") {
+      $trackingUrl = $request->getParameter("tracking_url", null);
+      if (trim($trackingUrl)) {
+        if (UrlUtils::isUrlValid($trackingUrl)) {
+          $domainProfile->setTrackingUrl($trackingUrl);
+          $domainProfile->save();
+
+          $this->info = "URL successfully saved.";
+        } else {
+          $this->error = "URL is not valid.";
+        }
+      } else {
+        $domainProfile->setTrackingUrl(null);
+        $domainProfile->save();
+
+        $this->info = "URL successfully deleted.";
+      }
     }
+
+    $this->domainProfile = $domainProfile;
   }
 }
