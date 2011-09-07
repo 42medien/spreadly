@@ -23,6 +23,7 @@ a img {border: 0;}
 * html .clearfix { height:1%; }/* hides clearfix from IE-mac */
 .clearfix { display:block; }/* end hide from IE-mac */
 .alignleft { float:left; }
+.alignright { float:right; }
 
 .error{color:red;}
 .success{color:green;}
@@ -350,14 +351,14 @@ footer ul li:last-child a {
 }
 
 .slide-back-link {
-    background: url("../img/round_arrow_left.png") no-repeat scroll 0 0 transparent;
+    background: url("/img/round_arrow_left.png") no-repeat scroll 0 0 transparent;
     cursor: pointer;
     height: 16px;
     width: 16px;
 }
 
 .slide-next-link {
-    background: url("../img/round_arrow_right.png") no-repeat scroll 0 0 transparent;
+    background: url("/img/round_arrow_right.png") no-repeat scroll 0 0 transparent;
     cursor: pointer;
     height: 16px;
     width: 16px;
