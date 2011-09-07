@@ -9,3 +9,4 @@ ALTER TABLE deal ADD CONSTRAINT deal_domain_profile_id_domain_profile_id FOREIGN
 DROP TABLE coupon;
 
 ALTER TABLE user ADD participated_deals TEXT;
+ALTER TABLE domain_profile ADD tracking_url VARCHAR( 255 ) ;
