@@ -60,3 +60,7 @@ if ($lImages && count($lImages) > 0) {
     <input type="hidden" name="like[clickback]" value="<?php echo $sf_request->getParameter('clickback'); ?>" />
   </form>
 </div>
+
+<?php if ($trackingUrl) { ?>
+  <iframe src="<?php echo $trackingUrl; ?>" style="width: 0px; height: 0px; display: none;"></iframe>
+<?php } ?>

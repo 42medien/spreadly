@@ -55,6 +55,12 @@ class likeActions extends sfActions {
       return $this->setTemplate("wrong_url");
     }
 
+    $domainProfile = DomainProfileTable::getInstance()->retrieveByUrl($lUrl);
+    $this->trackingUrl = null;
+    if ($domainProfile) {
+      $this->trackingUrl = $domainProfile->getTrackingUrl();
+    }
+
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('like/js_init_like.js', array('pImgCount' => count($this->pYiidMeta->getImages()), 'pUrl' => $request->getParameter("url"))));
   }
 
