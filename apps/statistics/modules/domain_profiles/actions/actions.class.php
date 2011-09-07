@@ -195,4 +195,16 @@ class domain_profilesActions extends sfActions
     	))
     );
   }
+
+  public function executeTracking_url(sfWebRequest $request) {
+    $host_id = $request->getParameter("host_id", null);
+
+    if (!$host_id) {
+      $this->redirect('domain_profiles/index');
+    }
+
+    if (true) {
+
+    }
+  }
 }

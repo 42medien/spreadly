@@ -23,6 +23,12 @@
       	<?php } else { ?>
       		<?php echo link_to('Setup advanced notifications now!', 'domain_profiles/subscribe_api?host_id='.$domain_profile->getId() , array('class' => 'colorbox')); ?>
       	<?php } ?>
+
+      	<?php
+          if ($sf_user->hasCredential("beta_tester")) {
+            echo " | " . link_to(__("Add tracking code"), "domain_profiles/tracking_url?host_id=".$domain_profile->getId());
+          }
+      	?>
       <?php } ?>
     </td>
     <td align="center" valign="middle">
