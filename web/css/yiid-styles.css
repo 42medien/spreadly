@@ -1,6 +1,6 @@
  h2{}
  h2.sub_title{line-height: 42px;}
- 
+
 /*  Typography presets
   ------------------  */
 
@@ -187,6 +187,10 @@ ul#logos_big {margin: 95px 0 40px; text-align: center;}
   color: red;
 }
 
+.info{
+  color: green;
+}
+
 #add-url-error{
   margin-left: 90px;
 }
@@ -225,7 +229,7 @@ Prev
 .create-deal-helptext{
   width: 385px;
   padding: 0 10px 0 10px;
-  
+
 }
 
 .create-deal-helptext a{
@@ -352,7 +356,7 @@ input#create_deal_button{
     #ffffff 28%,
     #b5b5b5);
   background: -webkit-gradient(
-    linear, left top, left bottom, 
+    linear, left top, left bottom,
     from(#ffffff),
     color-stop(0.28, #ffffff),
     to(#b5b5b5));
@@ -381,7 +385,7 @@ input#create_deal_button:active{
     #b5b5b5 60%,
     #b5b5b5);
   background: -webkit-gradient(
-    linear, left top, left bottom, 
+    linear, left top, left bottom,
     from(#b5b5b5),
     color-stop(0.28, #ffffff),
     to(#ffffff));
@@ -787,7 +791,7 @@ div.data-tablebox table#top-influencer-table td.first div.infname{
   vertical-align: middle;
 }
 
-div.data-tablebox table#top-influencer-table td.first div.infname span{ 
+div.data-tablebox table#top-influencer-table td.first div.infname span{
     display: inline-block;
     line-height: 16px;
     margin-top: 13px;
@@ -1047,12 +1051,12 @@ div.data-tablebox table#top-influencer-table td.first div.infname img {
 
 /**************************popup***********************/
 
-.popupblock{ 
-  width:541px; 
-  height:435px; 
-  background:url(/img/pop-upbg.jpg) center top no-repeat; 
-  margin:0 auto; 
-  position:relative; 
+.popupblock{
+  width:541px;
+  height:435px;
+  background:url(/img/pop-upbg.jpg) center top no-repeat;
+  margin:0 auto;
+  position:relative;
   padding: 10px 20px 0 20px;
 }
 
@@ -1064,8 +1068,8 @@ nav{
   border-color: rgb(23,28,26);
   border-radius: 6px;
   -moz-border-radius: 6px;
-  -webkit-border-radius: 6px; 
-  background-color: rgb(23,28,26);  
+  -webkit-border-radius: 6px;
+  background-color: rgb(23,28,26);
   background-color: rgba(23,28,26,0.5);
 }
 
