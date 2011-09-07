@@ -68,6 +68,7 @@
 }
 #deal-marker {
     -moz-transform: rotate(-12deg);
+    -webkit-transform:rotate(-12deg);
     background-color: rgba(240, 218, 228, 0.8);
     border-radius: 3px 3px 3px 3px;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
