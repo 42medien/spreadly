@@ -75,6 +75,7 @@ class CreateDealForm extends BaseDealForm
   }
 
   public function validate_campaign(){
+    $lI18n = sfContext::getInstance()->getI18N();
     $this->setValidators(array(
       'name'              => new sfValidatorString(array('max_length' => 255, 'required' => true)),
       'sf_guard_user_id'  => new sfValidatorInteger(array('required' => true)),
@@ -83,14 +84,15 @@ class CreateDealForm extends BaseDealForm
   }
 
   public function validate_share(){
+    $lI18n = sfContext::getInstance()->getI18N();
     $this->setValidators(array(
-      'motivation_title'  => new sfValidatorString(array('max_length' => 255, 'required' => true)),
-      'motivation_text'   => new sfValidatorString(array('required' => true)),
-      'spread_title'      => new sfValidatorString(array('max_length' => 255, 'required' => true)),
-      'spread_text'       => new sfValidatorString(array('required' => true)),
-      'spread_url'        => new sfValidatorUrl(array('max_length' => 255, 'required' => true, 'trim' => true)),
-      'spread_img'        => new sfValidatorUrl(array('max_length' => 255, 'required' => true, 'trim' => true)),
-      'spread_tos'        => new sfValidatorUrl(array('max_length' => 255, 'required' => true, 'trim' => true))
+      'motivation_title'  => new sfValidatorString(array('max_length' => 255, 'required' => true), array('required' => $lI18n->__('Required'), 'max_length' => $lI18n->__('To long'))),
+      'motivation_text'   => new sfValidatorString(array('required' => true), array('required' => $lI18n->__('Required'))),
+      'spread_title'      => new sfValidatorString(array('max_length' => 255, 'required' => true), array('required' => $lI18n->__('Required'), 'max_length' => $lI18n->__('To long'))),
+      'spread_text'       => new sfValidatorString(array('required' => true), array('required' => $lI18n->__('Required'))),
+      'spread_url'        => new sfValidatorUrl(array('max_length' => 255, 'required' => true, 'trim' => true), array('required' => $lI18n->__('URL required'))),
+      'spread_img'        => new sfValidatorUrl(array('max_length' => 255, 'required' => true, 'trim' => true), array('required' => $lI18n->__('URL required'))),
+      'spread_tos'        => new sfValidatorUrl(array('max_length' => 255, 'required' => true, 'trim' => true), array('required' => $lI18n->__('URL required')))
     ));
   }
 
@@ -98,11 +100,11 @@ class CreateDealForm extends BaseDealForm
   	$lI18n = sfContext::getInstance()->getI18N();
     $this->setValidators(array(
       'coupon_type'       => new sfValidatorChoice(array('choices' => array(0 => 'code', 1 => 'url', 2 => 'download'), 'required' => true)),
-      'coupon_title'      => new sfValidatorString(array('max_length' => 255, 'required' => true)),
-      'coupon_text'       => new sfValidatorString(array('required' => true)),
-      'coupon_code'       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
-      'coupon_url'        => new sfValidatorString(array('max_length' => 255, 'required' => false)),
-      'coupon_redeem_url' => new sfValidatorString(array('max_length' => 255, 'required' => false))
+      'coupon_title'      => new sfValidatorString(array('max_length' => 255, 'required' => true), array('required' => $lI18n->__('Required'), 'max_length' => $lI18n->__('To long'))),
+      'coupon_text'       => new sfValidatorString(array('required' => true), array('required' => $lI18n->__('Required'))),
+      'coupon_code'       => new sfValidatorString(array('max_length' => 255, 'required' => false), array('required' => $lI18n->__('Required'))),
+      'coupon_url'        => new sfValidatorUrl(array('max_length' => 255, 'required' => false), array('required' => $lI18n->__('Required'))),
+      'coupon_redeem_url' => new sfValidatorUrl(array('max_length' => 255, 'required' => false), array('required' => $lI18n->__('Required')))
     ));
 
     $this->validatorSchema->setPostValidator(new sfValidatorAnd(
@@ -122,39 +124,5 @@ class CreateDealForm extends BaseDealForm
     $this->setValidators(array(
     	'tos_accepted'      => new sfValidatorBoolean(array('required' => true))
     ));
-  }
-}
-
-class WidgetPmSelect extends sfWidgetFormSelectRadio {
-
-  public function formatter($widget, $inputs) {
-  	var_dump($widget);
-  	var_dump($inputs);
-  	die();
-
-  	foreach ($inputs as $input) {
-
-  	}
-
-  	/*
-    $rows = array();
-    $itemsPerRow = sfConfig::get('app_itemsperrow_typus');
-    $i=0;
-    $rows[] = "<table>";
-    foreach ($inputs as $input) {
-      if ($i % $itemsPerRow == 0) {
-        $rows[] = "<tr>";
-      }
-      $rows[] = $this->renderContentTag('td', $input['input'].$this->getOption('label_separator').$input['label']) ;
-
-      $i++;
-      if ($i % $itemsPerRow == 0) {
-        $rows[] = "</tr>";
-      }
-    }
-    $rows[] = "</table>";
-
-    return !$rows ? '' : $this->renderContentTag('ul', implode($this->getOption('separator'), $rows), array('class' => $this->getOption('class')));
-  	*/
   }
 }
