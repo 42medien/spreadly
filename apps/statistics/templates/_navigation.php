@@ -35,7 +35,12 @@
     	</a>
     </li>
     <li>
-    	<a href="<?php echo url_for('@configurator'); ?>" title="Buttons" <?php if(($module=='configurator' && $action=='index') || $module=='domain_profiles' || $module=='analytics') { echo 'class="active"';} ?>>
+      <a href="<?php echo url_for('@configurator'); ?>" title="Buttons" <?php if(($module=='configurator' && $action=='index') || $module=='domain_profiles' || $module=='analytics') { echo 'class="active"';} ?>>
+        <span><?php echo __('Button'); ?></span>
+      </a>
+    </li>
+    <li>
+    	<a href="<?php echo url_for('@configurator'); ?>" title="Buttons">
     		<span><?php echo __('Publisher'); ?></span>
     	</a>
     </li>
