@@ -81,6 +81,4 @@ if ($pHostSummary) {
   end_slot();
   include_partial('global/graybox');
 }
-
-include_partial('global/graybox');
 ?>
