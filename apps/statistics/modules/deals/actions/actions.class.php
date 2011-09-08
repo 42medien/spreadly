@@ -85,7 +85,7 @@ class dealsActions extends sfActions
    * @param sfWebRequest $request
    */
   public function executeStep_share(sfWebRequest $request) {
-  	//$this->getResponse()->setSlot('js_document_ready', $this->getPartial('deals/js_init_deals.js'));
+  	$this->getResponse()->setSlot('js_document_ready', $this->getPartial('deals/js_init_deals.js'));
   	$this->pForm->validate_share();
    	if($request->getMethod() == 'POST'){
   		$lParams = $request->getPostParameters();
@@ -129,6 +129,7 @@ class dealsActions extends sfActions
    * @param sfWebRequest $request
    */
   public function executeStep_billing(sfWebRequest $request){
+  	$this->getResponse()->setSlot('js_document_ready', $this->getPartial('deals/js_init_deals.js'));
   	//$this->pForm->validate_billing();
   	$this->pPaymentMethods = $this->getUser()->getGuardUser()->getPaymentMethods();
   	$this->pPaymentMethodForm = new PaymentMethodForm();
