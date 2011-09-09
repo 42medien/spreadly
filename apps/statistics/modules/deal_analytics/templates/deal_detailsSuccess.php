@@ -29,9 +29,9 @@ if (count($pDeal->getLikes())) {
 <?php include_partial('analytics/chart_line_activities',
         array(
           "pData" => $pLikes,
-          'pFromYear' => date('Y', strtotime($pDeal->getStartDate())),
-          'pFromMonth' => date('m', strtotime($pDeal->getStartDate())),
-          'pFromDay' => date('d', strtotime($pDeal->getStartDate())),
+          'pFromYear' => date('Y', strtotime($pDeal->getCreatedAt())),
+          'pFromMonth' => date('m', strtotime($pDeal->getCreatedAt())),
+          'pFromDay' => date('d', strtotime($pDeal->getCreatedAt())),
         	'pChartsettings' => '{
 						"zoomtype": "x"
 					}'

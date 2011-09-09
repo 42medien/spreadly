@@ -45,8 +45,7 @@ class deal_analyticsActions extends sfActions
 		$lDealId = $request->getParameter('deal_id');
 		$this->pDeal = DealTable::getInstance()->find($lDealId);
 
-  	$lEndDate = strtotime($this->pDeal->getEndDate());
-  	$this->pEndDate = ($lEndDate < time())?$this->pDeal->getEndDate():date("Y-m-d", strtotime("today"));
+  	$this->pEndDate = date("Y-m-d", strtotime("today"));
   	$this->pLikes = $this->getDealLikes($this->pDeal, $this->pEndDate);
     $this->pUrlSummaries = $this->getUrlSummaryAnalytics($this->pDeal);
     $this->pUrls = $this->getUrlAnalytics($this->pDeal);
