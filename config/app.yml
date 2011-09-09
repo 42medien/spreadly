@@ -72,7 +72,7 @@ prod:
     old_platform_host: 'yiid.com'
     old_stats_host:    'yiid.it'
     document_root:     '/home/httpd/vhosts/yiid.com/httpdocs/web'
-    post_to_services:  0
+    post_to_services:  1
     environment:       'prod'
     dev:               0
     pager:             20
@@ -130,7 +130,7 @@ dev:
     old_platform_host: 'yiid.local'
     old_stats_host:    'yiidstats.local'
     document_root:    '/Users/hschippmann/Work/symfony/yiid/web'
-    post_to_services:  1
+    post_to_services:  0
     environment:      'dev'
     dev:              1
     pager:            20
