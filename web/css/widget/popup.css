@@ -478,3 +478,12 @@ div#like-submit #like-oi-list li {
 div#like-submit #like-oi-list li ul li a:hover {
   color: #111;
 }
+
+.share-teaser {
+  margin-bottom: 20px;
+}
+
+.share-url {
+	width: 95%;
+	margin-bottom: 20px;
+}
