@@ -120,6 +120,6 @@ use_helper('YiidNumber');
 	<?php echo __('Sorry, we have no demografical statistics for that deal yet'); ?>
 <?php } ?>
 
-<?php echo link_to("<span>".__('Details')."</span>", 'analytics/deal_details?deal_id='.$pDeal->getId(), array('class' => 'button alignright'));?>
+<?php echo link_to("<span>".__('Details')."</span>", 'deal_analytics/deal_details?deal_id='.$pDeal->getId(), array('class' => 'button alignright'));?>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
