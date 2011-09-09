@@ -285,7 +285,3 @@ margin-top:10px;
 /* End: hide for IE5/Mac with commented backslash Hack */ /* basics */
 
 #general-ajax-loader{z-index: 1000000; position: absolute; display:none;}
-
-.share-teaser {
-  font-size: 100px;
-}

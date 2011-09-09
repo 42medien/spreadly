@@ -16,9 +16,11 @@ class likeActions extends sfActions {
    */
   public function executeIndex(sfWebRequest $request) {
     $lUrl = $request->getParameter("url", null);
+    $this->url = $lUrl;
+    $this->error = null;
 
     if (!$lUrl) {
-      $this->forward("like", "share");
+      return $this->setTemplate("share");
     }
 
     if ($request->getMethod() == "POST") {
@@ -53,7 +55,8 @@ class likeActions extends sfActions {
     $this->pYiidMeta = SocialObjectParser::fetch($request->getParameter("url"), $lYiidMeta);
 
     if ($this->pYiidMeta === false) {
-      return $this->setTemplate("wrong_url");
+      $this->error = "the url '$lUrl' is not well formed!";
+      return $this->setTemplate("share");
     }
 
     $domainProfile = DomainProfileTable::getInstance()->retrieveByUrl($lUrl);

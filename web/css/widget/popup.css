@@ -485,5 +485,8 @@ div#like-submit #like-oi-list li ul li a:hover {
 
 .share-url {
 	width: 95%;
-	margin-bottom: 20px;
+}
+
+.share-button {
+  margin-top: 20px;
 }
