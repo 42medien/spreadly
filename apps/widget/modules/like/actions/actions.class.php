@@ -17,6 +17,10 @@ class likeActions extends sfActions {
   public function executeIndex(sfWebRequest $request) {
     $lUrl = $request->getParameter("url", null);
 
+    if (!$lUrl) {
+      $this->forward("like", "share");
+    }
+
     if ($request->getMethod() == "POST") {
       $lParams = $request->getParameter('like');
 
@@ -37,14 +41,11 @@ class likeActions extends sfActions {
 
     $dm = MongoManager::getDM();
 
-    // ckeck url
-    if ($lUrl) {
-      $this->pActivity = $dm->getRepository("Documents\YiidActivity")->findOneBy(array("url" => $lUrl, "u_id" => intval($this->getUser()->getId()), "d_id" => array('$exists' => false)));
+    $this->pActivity = $dm->getRepository("Documents\YiidActivity")->findOneBy(array("url" => $lUrl, "u_id" => intval($this->getUser()->getId()), "d_id" => array('$exists' => false)));
 
-      // if user has already liked
-      if($this->pActivity) {
-        $this->redirect("@deal?url=".urlencode($lUrl));
-      }
+    // if user has already liked
+    if($this->pActivity) {
+      $this->redirect("@deal?url=".urlencode($lUrl));
     }
 
     $lYiidMeta = new YiidMeta();
@@ -73,8 +74,10 @@ class likeActions extends sfActions {
     return $this->renderText(json_encode($lReturn));
   }
 
-  public function executeNourl(sfWebRequest $request){
+  public function executeShare(sfWebRequest $request){
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('like/js_init_nourl.js'));
+
+    $this->url = $request->getParameter("url", null);
   }
 
   public function executeGet_services(){
