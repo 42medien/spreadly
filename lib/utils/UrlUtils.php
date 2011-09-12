@@ -30,8 +30,7 @@ class UrlUtils {
    */
   public static function checkUrlAvailability($pUrl) {
     // add idn support
-    $IDN = new idna_convert(array('idn_version' => 2008));
-    $pUrl = $IDN->encode($pUrl);
+    $pUrl = self::fixUmlauts($pUrl);
 
     try {
       $lHeaders = @get_headers($pUrl);
@@ -66,8 +65,7 @@ class UrlUtils {
    */
   public static function checkUrlWithCurl($pUrl, $pFollowLocation = false) {
     // add idn support
-    $IDN = new idna_convert(array('idn_version' => 2008));
-    $pUrl = $IDN->encode($pUrl);
+    $pUrl = self::fixUmlauts($pUrl);
 
     $ch = curl_init( $pUrl );
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
@@ -112,11 +110,11 @@ class UrlUtils {
       $lCh = curl_init();
 
       // add idn support
-      $IDN = new idna_convert(array('idn_version' => 2008));
-      $pUrl = $IDN->encode($pUrl);
+      $pUrl = self::fixUmlauts($pUrl);
 
       $lOpts = self::$CURL_OPTS;
       $lOpts[CURLOPT_URL] = $pUrl;
+
       curl_setopt_array($lCh, $lOpts);
       curl_setopt($lCh, CURLOPT_SSL_VERIFYPEER, false);
       curl_setopt($lCh, CURLOPT_SSL_VERIFYHOST, 2);
@@ -167,8 +165,7 @@ class UrlUtils {
    */
   public static function getDomainAsArray($pUrl) {
     // add idn support
-    $IDN = new idna_convert(array('idn_version' => 2008));
-    $pUrl = $IDN->encode($pUrl);
+    $pUrl = self::fixUmlauts($pUrl);
 
     $lUrl =  strtolower($pUrl);
     $arrUrl = parse_url($lUrl);
@@ -602,8 +599,7 @@ class UrlUtils {
    */
   public static function sendGetRequest($pUrl, $pHeader = null) {
     // add idn support
-    $IDN = new idna_convert(array('idn_version' => 2008));
-    $pUrl = $IDN->encode($pUrl);
+    $pUrl = self::fixUmlauts($pUrl);
 
     $lCh = curl_init();
     $lOpts = self::$CURL_OPTS;
@@ -629,8 +625,7 @@ class UrlUtils {
    */
   public static function sendPostRequest($pUrl, $pBody, $pHeader = null) {
     // add idn support
-    $IDN = new idna_convert(array('idn_version' => 2008));
-    $pUrl = $IDN->encode($pUrl);
+    $pUrl = self::fixUmlauts($pUrl);
 
     $lCh = curl_init($pUrl);
     curl_setopt($lCh, CURLOPT_POST,           1);
@@ -721,5 +716,14 @@ class UrlUtils {
     $file_path = substr($file_path,0,1) == '/' ? $file_path : '/' . $file_path;
 
     return $url . $file_path;
+  }
+
+  public static function fixUmlauts($pUrl) {
+    // add idn support
+    $IDN = new idna_convert(array('idn_version' => 2008));
+    $host = parse_url($pUrl, PHP_URL_HOST);
+    $normalized_host = $IDN->encode($host);
+
+    return str_replace($host, $normalized_host, $pUrl);
   }
 }
