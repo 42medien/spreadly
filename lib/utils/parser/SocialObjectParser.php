@@ -38,7 +38,7 @@ class SocialObjectParser {
 
       $pYiidMeta->setUrl($pUrl);
 
-      if ((preg_match('~http://opengraphprotocol.org/schema/~i', $lHeader) || preg_match('~http://ogp.me/ns#~i', $lHeader) || preg_match('~property=\"|\'og:~i', $lHeader)) && !$pYiidMeta->isComplete()) {
+      if ((preg_match('~http://opengraphprotocol.org/schema/~i', $lHeader) || preg_match('~http://ogp.me/ns#~i', $lHeader) || preg_match('~property=[\",\']og:~i', $lHeader)) && !$pYiidMeta->isComplete()) {
         //get the opengraph-tags
         $lOpenGraph = OpenGraph::parse($lHeader);
         $pYiidMeta->fromOpenGraph($lOpenGraph);
