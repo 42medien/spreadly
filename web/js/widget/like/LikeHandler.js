@@ -5,164 +5,29 @@
 /**
  * Handles the sending of the like
  * @author KM
- * @deprecated not in use anymore
  */
 
 
-var WidgetDealForm = {
-    /**
-     * inits the form-functions
-     */
-    init: function() {
-      debug.log('[WidgetDealForm][init]');
-      // reset the form after side-reload (fix for ff)
-      if (typeof (document.popupdealform) != "undefined") {
-        document.popupdealform.reset();
-      }
-
-      WidgetDealForm.doSend();
-    },
-
-    /**
-     * sends the like to the backend
-     * @author KM
-     */
-    doSend: function() {
-      debug.log('[WidgetDealForm][doSend]');
-
-      jQuery('#popup-send-deal-button').bind('click', function() {
-        var lAction = jQuery('#popupdealform').attr('action');
-        OnLoadGrafic.showGrafic();
-        WidgetDealForm.hideButton();
-        var options = {
-          url : lAction,
-          data : {
-            ei_kcuf : new Date().getTime()
-          },
-          type : 'POST',
-          dataType : 'json',
-          success : function(pResponse) {
-            if(pResponse.success == true) {
-              jQuery('#coupon-unused-container').empty();
-              jQuery('#coupon-unused-container').append(pResponse.html);
-              jQuery('#content-outer header h2').empty().append(i18n.get('deal_success_headline'));
-            } else {
-              WidgetDealForm.showButton();
-              WidgetDealForm.showErrorMsg(pResponse.message);
-            }
-            OnLoadGrafic.hideGrafic();
-          }
-        };
-
-         jQuery('#popupdealform').ajaxSubmit(options);
-         return false;
-      });
-    },
-
-    hideButton: function() {
-      jQuery('#popup-send-deal-box').hide();
-    },
-
-    showButton: function(){
-      jQuery('#popup-send-deal-box').show();
-    },
-
-    showErrorMsg: function(pMsg) {
-      debug.log('[showErrorMsg]');
-      jQuery('#like-response').empty();
-      if(pMsg == undefined){
-        pMsg = i18n.get('deal_error_message');
-      }
-
-      jQuery('#like-response').append('<span class="error">'+pMsg+"</span>");
-
-      var lTimeout;
-        lTimeout = setTimeout(function() {
-          jQuery('.error').hide('slow');
-          jQuery('.error').remove();
-        }, 3000);
-    }
-};
-
-
-/**
- * @deprecated not in use anymore 
- */
 var WidgetLikeForm = {
-
-    aComment: " ",
-
-    /**
-     * inits the form-functions
-     */
-    init: function() {
-      debug.log('[WidgetLikeForm][init]');
-      WidgetLikeForm.doSend();
-      //jQuery('#area-like-comment').toggleValue();
-      jQuery('.mirror-value').mirrorValue();
-      WidgetLikeForm.aComment = jQuery('#area-like-comment').val();
-
-      /* reset the form after side-reload (fix for ff)
-      if (typeof (document.popup-like-form) != "undefined") {
-        document.popup-like-form.reset();
-      } */
-
-    },
-
-
-    /**
-     * sends the like to the backend
-     * @author KM
-     */
-    doSend: function() {
-      debug.log('[WidgetLikeForm][doSend]');
-
-      jQuery('#popup-send-like-button').bind('click', function() {
-        var lAction = jQuery('#popup-like-form').attr('action');
-        OnLoadGrafic.showGrafic();
-        WidgetLikeForm.hideButton();
-        //WidgetLikeForm.hideTextarea();
+   
+    send: function() {
+      debug.log("[WidgetLikeForm][send]");      
+      jQuery('#popup-like-button').live('click', function() {
+        WidgetLikeForm.beforeSend();
+        document.forms['popup-like-form'].submit();
         
-        var options = {
-          beforeSerialize : WidgetLikeForm.checkComment,
-          url : lAction,
-          data : {
-            ei_kcuf : new Date().getTime()
-          },
-          type : 'POST',
-          dataType : 'json',
-          success : function(pResponse) {
-            if(pResponse.success == true) {
-              WidgetLikeForm.removeButton();
-              //WidgetLikeForm.removeTextarea();
-              WidgetLikeForm.removeShares();
-              WidgetLikeForm.showSuccessMsg();
-            } else {
-              WidgetLikeForm.showButton();
-              //WidgetLikeForm.showTextarea();
-              WidgetLikeForm.showErrorMsg();
-            }
-
-            OnLoadGrafic.hideGrafic();
-          }
-        };
-
-         jQuery('#popup-like-form').ajaxSubmit(options);
-         return false;
+        return false;
       });
+      
     },
-
-    checkComment: function(form, options) {
-      var lComment = jQuery(form[0]["like[comment]"]).val();
-      if(Utils.trim(lComment) == Utils.trim(WidgetLikeForm.aComment)){
-        jQuery(form[0]["like[comment]"]).val(" ");
-        //debug.log(form[0]["like[comment]"]);
-        //form[0]["like[comment]"] = " ";
-        form[0]["like[comment]"].defaultValue = " ";
-      }
-      return true;
+    
+    beforeSend: function(){
+      debug.log("[WidgetLikeForm][beforeSend]");        
+      OnLoadGrafic.showGrafic();
+      jQuery('#like-oi-list').hide();   
+      jQuery('#popup-like-button').hide();
     },
-
+    
     /**
      * sets the hidden img-value
      * @author KM
@@ -170,67 +35,6 @@ var WidgetLikeForm = {
      */
     setImageValue: function(pPath){
       jQuery('#like-img-value').val(pPath);
-    },
-
-    hideButton: function() {
-      jQuery('#popup-send-like-button').hide();
-    },
-
-    removeButton: function() {
-      jQuery('#popup-send-like-button').remove();
-    },
-
-    showButton: function(){
-      jQuery('#popup-send-like-button').show();
-    },
-
-    removeShares: function(){
-      jQuery('#like-oi-list').remove();
-    },
-
-    /*
-    hideTextarea: function() {
-      jQuery('#comment-area').hide();
-    },
-
-    removeTextarea: function() {
-      jQuery('#comment-area').remove();
-    },
-
-    showTextarea: function() {
-      jQuery('#comment-area').show();
-    },*/
-
-    showErrorMsg: function() {
-      debug.log('[showErrorMsg]');
-      jQuery('#like-response').empty();
-      jQuery('#like-response').append('<span class="error">'+i18n.get('like_error_message')+"</span>");
-
-      var lTimeout;
-        lTimeout = setTimeout(function() {
-          jQuery('.error').hide('slow');
-          jQuery('.error').remove();
-        }, 5000);
-    },
-
-    showSuccessMsg: function() {
-      debug.log('[showSuccessMsg]');
-
-      jQuery('#comment-area').empty();
-      jQuery('#comment-area').append('<span class="success">'+i18n.get('like_success_message')+"</span><a href='/' id='close-popup-link'>"+i18n.get('close_popup')+"</a>");
-      WidgetLikeForm.closePopup();
-      /*
-      var lTimeout;
-        lTimeout = setTimeout(function() {
-          jQuery('#comment-area').hide('slow');
-          jQuery('#comment-area').remove();
-        }, 5000);*/
-    },
-
-    closePopup: function(){
-      jQuery('#close-popup-link').live('click', function() {
-        window.close();
-      });
     }
 };
 

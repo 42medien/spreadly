@@ -1,9 +1,10 @@
 <?php use_helper('ChartData') ?>
 <div id="chart_line_activities" class="area-chart"></div>
-<?php //var_dump(getChartLineActivitiesData($pData, $pCommunity));die();?>
+<?php //var_dump($pData);die();?>
 <script type="text/javascript">
 var ActivityChart = {
 	init: function(pChartsettings) {
+
 	  Highcharts.theme = { colors: [] };// prevent errors in default theme
 	  var lData = <?php echo json_encode($pData); ?>;
 	  var lZoomType = (pChartsettings.zoomtype === undefined)?'':pChartsettings.zoomtype;

@@ -1,3 +1,5 @@
+WidgetLikeForm.send();
+
 LikeImage.init(<?php echo $pImgCount; ?>, "<?php echo $pUrl; ?>");
 
 i18n.init({
