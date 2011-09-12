@@ -19,6 +19,7 @@ class SocialObjectParser {
    */
   public static function fetch($pUrl, $pYiidMeta = null) {
     $pUrl = trim(urldecode($pUrl));
+    $pUrl = str_replace(" ", "+", $pUrl);
 
     try {
       //get the html as string
@@ -37,15 +38,19 @@ class SocialObjectParser {
 
       $pYiidMeta->setUrl($pUrl);
 
-      if ((preg_match('~http://opengraphprotocol.org/schema/~i', $lHeader) || preg_match('~http://ogp.me/ns#~i', $lHeader)) && !$pYiidMeta->isComplete()) {
+      if ((preg_match('~http://opengraphprotocol.org/schema/~i', $lHeader) || preg_match('~http://ogp.me/ns#~i', $lHeader) || preg_match('~property=\"|\'og:~i', $lHeader)) && !$pYiidMeta->isComplete()) {
         //get the opengraph-tags
         $lOpenGraph = OpenGraph::parse($lHeader);
         $pYiidMeta->fromOpenGraph($lOpenGraph);
       }
 
       if ((preg_match('~application/(xml|json)\+oembed"~i', $lHeader)) && !$pYiidMeta->isComplete()) {
-        $lOEmbed = OEmbedParser::fetchByCode($lHeader);
-        $pYiidMeta->fromOembed($lOEmbed);
+        try {
+          $lOEmbed = OEmbedParser::fetchByCode($lHeader);
+          $pYiidMeta->fromOembed($lOEmbed);
+        } catch (Exception $e) {
+          // catch exception and try to go on
+        }
       }
 
       if (!$pYiidMeta->isComplete()) {
