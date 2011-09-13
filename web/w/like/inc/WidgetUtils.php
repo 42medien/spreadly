@@ -279,6 +279,13 @@ class WidgetUtils {
    */
   private function trackClickback() {
     $lClickback = $this->extractClickback();
+
+    // exit if there is no clickback
+    if (!$lClickback) {
+      return false;
+      exit;
+    }
+
     $lClickback = explode('.', urldecode($lClickback));
     $lOriginYiidActivity = $this->findYiidActivityById($lClickback[1]);
 

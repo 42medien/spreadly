@@ -29,7 +29,7 @@ $wu->trackUser();
     /* default skin*/
     .container {
       display: inline-block;
-      margin: 5px;
+      margin: 2px 5px;
     }
     .button {
       display: inline-block;
