@@ -1,6 +1,7 @@
 prod:
   .settings:
     logging_enabled:        false
+    etag:                   true
 
 dev:
   .settings:
