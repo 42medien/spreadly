@@ -154,6 +154,8 @@ $wu->trackUser();
       width: 30px;
     }
   </style>
+
+  <link rel="shortcut icon" href="https://s3.amazonaws.com/spread.ly/img/favicon.ico" type="image/x-icon">
 </head>
 <body>
   <div class="container">
