@@ -45,7 +45,7 @@ $wu->trackUser();
       border-bottom-color: hsl(333,42%,50%);
       border-top-color: hsl(333,42%,81%);
       border-radius: 3px;
-      background: #fff url('./img/button/s.png') no-repeat 130% -20px;
+      background: #fff url('https://s3.amazonaws.com/spread.ly/img/button/s.png') no-repeat 130% -20px;
       text-decoration: none;
       text-transform: uppercase;
       box-shadow: 0 -1px 1px 1px hsla(333,42%,100%,.7) inset, 0 -4px 8px 0 hsla(333,42%,50%,.5) inset, 0 0 2px 8px hsla(333,42%,0%,0);
@@ -54,7 +54,7 @@ $wu->trackUser();
       -moz-transition: box-shadow .3s ease-out, text-shadow .3s ease-out, background-position .6s ease-out;
     }
     .button:before{
-      background: hsla(333,42%,50%,1) url('./img/button/l.png') no-repeat 0px 0px;
+      background: hsla(333,42%,50%,1) url('https://s3.amazonaws.com/spread.ly/img/button/l.png') no-repeat 0px 0px;
       box-shadow: 0 1px 1px 0px hsla(333,42%,0%,.8) inset;
       content:'';
       width: 16px;
