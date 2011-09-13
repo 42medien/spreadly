@@ -65,7 +65,6 @@ $wu->trackUser();
       left: 1px;
       border-radius: 2px;
       opacity:1;
-
     }
     .button:focus, .button:hover{
       outline: none;
@@ -97,7 +96,7 @@ $wu->trackUser();
       background-position: -1px -1px;*/
     }
 
-    .container b{
+    .container b {
       color: #aaa;
       text-shadow: 0 1px 0 hsla(0,0%,100%,1), 0 -1px 0 hsla(0,0%,0%,.4);
       box-shadow: 0 1px 0 0 hsla(0,0%,100%,1) inset;
@@ -135,6 +134,7 @@ $wu->trackUser();
       color: #666;
     }
 
+    <?php if ($wu->showFriends()): ?>
     ul.icons {
       list-style-type: none;
       margin-top: 3px;
@@ -153,6 +153,7 @@ $wu->trackUser();
       height: 30px;
       width: 30px;
     }
+    <?php endif; ?>
   </style>
 
   <link rel="shortcut icon" href="https://s3.amazonaws.com/spread.ly/img/favicon.ico" type="image/x-icon">
