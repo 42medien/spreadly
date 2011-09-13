@@ -59,17 +59,11 @@ var YiidFriends = {
    * @param pXhttp
    */
   handleRequest: function(pXhttp) {
-    //get the json-response as string
-    var lResponse = pXhttp.responseText;
-    //parse the string to to object
-    var lJson = json_parse(lResponse);
-    if(lJson.success === true) {
-      YiidFriends.showFriends(lJson.html);
-    }
+    YiidFriends.showFriends(pXhttp.responseText);
   },
   
   /**
-   * rekursiv method, to check, if the friends-elem is loade. if so it inserts the html from response
+   * recursiv method, to check, if the friends-elem is loade. if so it inserts the html from response
    * @param pHtml
    * @returns boolean
    */
