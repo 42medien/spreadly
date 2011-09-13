@@ -334,6 +334,7 @@ class UserTable extends Doctrine_Table {
     if ($lSocialObject && $lConnectedUsers) {
       $lFriendsActive = array_intersect($lSocialObject->getUids(), $lConnectedUsers);
     }
+
     return $lFriendsActive;
   }
 
