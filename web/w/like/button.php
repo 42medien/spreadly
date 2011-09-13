@@ -141,6 +141,7 @@ $wu->trackUser();
       height: 30px;
       width: 100px;
       overflow: hidden;
+      margin-left: 6px;
     }
     ul.icons li {
       float: left;
