@@ -491,3 +491,10 @@ div#like-submit #like-oi-list li ul li a:hover {
 	float: right;
   margin-top: 20px;
 }
+
+#app-widget #general-ajax-loader {
+  position: absolute;
+  right: 45% !important;
+  top: 45% !important;
+  z-index: 50;
+}
