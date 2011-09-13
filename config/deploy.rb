@@ -55,14 +55,14 @@ end
 task :staging_button do
   set :button_deployment, true
   
-  set :user, 'www-data'
-  role :button, "ec2-46-51-137-77.eu-west-1.compute.amazonaws.com" # Staging
+  set :user, 'root'
+  role :button, "ec2-79-125-32-228.eu-west-1.compute.amazonaws.com" # Staging
   
-  set :deploy_directory, "/var/www"
-  set :current_dir, "yiid"
+  set :deploy_directory, "/var/www/button.yiiddev.com"
+  set :current_dir, "current"
   
   set :sf_env, "staging"
-  set :domain,      "widgets.yiiddev.com"
+  set :domain,      "button.yiiddev.com"
   set :deploy_to,   "#{deploy_directory}"
   set :deploy_via, :checkout
   ask_for_repository
@@ -141,8 +141,10 @@ namespace :deploy do
   desc "Customize the finalize_update task to work with symfony."
   task :finalize_update, :except => { :no_release => true } do
     run "mkdir -p #{latest_release}/cache"
-    #run "chown -R httpd:httpd #{latest_release}"
-
+    if button_deployment
+      run "chown -R www-data:www-data #{latest_release}"
+    end
+    
     # Share common files & folders
     share_childs
   end
