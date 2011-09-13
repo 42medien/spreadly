@@ -134,6 +134,25 @@ $wu->trackUser();
       background: #fff;
       color: #666;
     }
+
+    ul.icons {
+      list-style-type: none;
+      margin-top: 3px;
+      height: 30px;
+      width: 100px;
+      overflow: hidden;
+    }
+    ul.icons li {
+      float: left;
+      margin-right: 3px;
+    }
+    ul.icons li.last {
+      margin-right: 0px;
+    }
+    ul.icons a img {
+      height: 30px;
+      width: 30px;
+    }
   </style>
 </head>
 <body>
