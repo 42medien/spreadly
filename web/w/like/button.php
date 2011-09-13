@@ -165,7 +165,6 @@ $wu->trackUser();
     <?php if ($wu->showCounter()) { ?><b><?php echo $wu->getActivityCount() ?></b><?php } ?>
   </div>
   <?php if ($wu->showFriends()): ?>
- 	<!--  script type="text/javascript" src="/js/100_main/include/button-<?php echo LikeSettings::RELEASE_NAME; ?>.min.js"></script-->
   <script type="text/javascript">
 	  var YiidUtils={createXMLHttpRequest:function(){var lXhttp=null;if(window.ActiveXObject){try{lXhttp=new ActiveXObject("MSXML2.XMLHTTP");}catch(e){try{lXhttp=new ActiveXObject("Microsoft.XMLHTTP");}catch(e){lXhttp=false;}}}else if(window.XMLHttpRequest){try{lXhttp=new XMLHttpRequest();}catch(e){lXhttp=false;}}
 	  return lXhttp;}};var YiidFriends={aGetAction:"",init:function(pObjectId){YiidFriends.getFriends(pObjectId);},getFriends:function(pObjectId){var lXhttp=YiidUtils.createXMLHttpRequest();try{var lQuery=encodeURI('so_id='+pObjectId);lXhttp.open("POST",YiidFriends.aGetAction,true);lXhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");lXhttp.setRequestHeader("Content-length",lQuery.length);lXhttp.setRequestHeader("Connection","close");lXhttp.onreadystatechange=function(){if(lXhttp.readyState==4){if(lXhttp.status!=200){}else{YiidFriends.handleRequest(lXhttp);}}};lXhttp.send(lQuery);}catch(lError){}},handleRequest:function(pXhttp){YiidFriends.showFriends(pXhttp.responseText);},showFriends:function(pHtml){var lContainer=document.getElementById("friends");if(lContainer!==undefined){lContainer.innerHTML=pHtml;}else{YiidFriends.showFriends(pHtml);}
