@@ -12,8 +12,8 @@ var YiidFriends = {
    * @param pUserId
    * @param pLimit
    */
-  init: function(pObjectId) {
-    YiidFriends.getFriends(pObjectId);
+  init: function(pObjectId, pUserId) {
+    YiidFriends.getFriends(pObjectId, pUserId);
   },
   
   /**
@@ -22,10 +22,10 @@ var YiidFriends = {
    * @param pUserId
    * @param pLimit
    */
-  getFriends: function(pObjectId) {
+  getFriends: function(pObjectId, pUserId) {
     var lXhttp = YiidUtils.createXMLHttpRequest();
     try{
-      var lQuery = encodeURI('so_id='+pObjectId);        
+      var lQuery = encodeURI('so_id='+pObjectId+'&u_id='+pUserId);        
       lXhttp.open("POST", YiidFriends.aGetAction, true); 
       //Send the proper header information along with the request
       lXhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
