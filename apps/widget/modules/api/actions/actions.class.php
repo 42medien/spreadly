@@ -10,11 +10,11 @@
 class apiActions extends sfActions {
 
 	public function executeLoad_friends(sfWebRequest $request) {
-    $this->getResponse()->setHttpHeader('Access-Control-Allow-Origin', sfConfig::get("app_settings_button_url"));
+	  $this->getResponse()->setHttpHeader('Access-Control-Allow-Origin', sfConfig::get("app_settings_button_url"));
 
     $this->getResponse()->setContentType('text/html');
     $this->setLayout(false);
-    $lUserId = $this->getUser()->getUserId();
+    $lUserId = $request->getParameter('u_id');
     $lSocialObjectId = $request->getParameter('so_id');
 
     $lReturn['success'] = false;
@@ -22,13 +22,8 @@ class apiActions extends sfActions {
 		$this->pFriends = array();
     if($lUserId && $lSocialObjectId) {
     	$this->pFriends = array_slice(UserTable::getFriendIdsBySocialObjectId($lSocialObjectId, $lUserId), 0, 3);
-
-    	/*if($lFriends) {
-    		$lReturn['success'] = true;
-    		$lReturn['html'] =  $this->getPartial('profile/social_object_friends', array('pFriends' => array_slice($lFriends, 0, 3)));
-    	}*/
-
     }
+
    	return $lReturn['html'];
   }
 }
