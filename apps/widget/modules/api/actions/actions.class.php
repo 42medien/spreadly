@@ -10,6 +10,8 @@
 class apiActions extends sfActions {
 
 	public function executeLoad_friends(sfWebRequest $request) {
+    $this->getResponse()->setHttpHeader('Access-Control-Allow-Origin', sfConfig::get("app_settings_button_url"));
+
     $this->getResponse()->setContentType('text/html');
     $this->setLayout(false);
     $lUserId = $this->getUser()->getUserId();
