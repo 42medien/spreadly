@@ -27,7 +27,6 @@ var YiidFriends = {
     try{
       var lQuery = encodeURI('so_id='+pObjectId);        
       lXhttp.open("POST", YiidFriends.aGetAction, true); 
-      //console.log(lQuery);
       //Send the proper header information along with the request
       lXhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       lXhttp.setRequestHeader("Content-length", lQuery.length);
