@@ -174,7 +174,6 @@ $wu->trackUser();
 		YiidFriends.aGetAction = "/api/load_friends";
 		YiidFriends.init("<?php echo $wu->getSocialObjectId(); ?>", "<?php echo $wu->getUserId(); ?>");
 	</script>
-
   <div id="friends">
 
 	</div>
