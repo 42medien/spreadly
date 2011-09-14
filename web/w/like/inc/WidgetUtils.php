@@ -64,6 +64,7 @@ class WidgetUtils {
   }
 
   public function getUserId() {
+    var_dump($this->aUserId);
     return $this->aUserId;
   }
 
