@@ -233,11 +233,12 @@ class YiidActivity extends BaseDocument {
     UserTable::updateLatestActivityForUser($this->getUId(), time());
     $this->postIt();
 
+    StatsFeeder::feed($this);
+
     if ($deal = $this->getDeal()) {
       $deal->participate($this->getUser());
     }
 
-    StatsFeeder::feed($this);
     $this->createJob();
   }
 
