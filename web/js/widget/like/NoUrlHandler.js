@@ -1,5 +1,5 @@
 /**
- * @combine widget
+ * @nocombine widget
  */
 
 var NoUrlForm = {

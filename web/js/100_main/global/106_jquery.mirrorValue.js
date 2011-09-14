@@ -1,6 +1,5 @@
 /**
  * @combine statistics
- * @combine widget
  */
 jQuery.fn.mirrorValue = function(){
   return this.each(function(){

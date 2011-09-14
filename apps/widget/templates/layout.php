@@ -2,12 +2,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Spread.ly - first choice for social sharing</title>
+    <title><?php echo __('Spread.ly - first choice for social sharing'); ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="Spread.ly consists of sharing button widgets that enable users to share content into a wide range of social networks simultanously. Besides that, Spread.ly offers a sophisticated functionality to reward users for their likes." />
     <meta name="keywords" content="sharing,sharebutton,like,likebutton,deal,dealbutton,facebook,linkedin,twitter,buzz" />
     <link rel="stylesheet" type="text/css" href="/css/widget/popup.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="/css/widget/Button.css" media="screen" />
+    <!-- link rel="stylesheet" type="text/css" href="/css/widget/Button.css" media="screen" / -->
+  	<link rel="shortcut icon" href="https://s3.amazonaws.com/spread.ly/img/favicon.ico" type="image/x-icon">
 
     <!--[if lt IE 9]>
       <link rel="stylesheet" type="text/css" href="/css/popup-ie.css" />
@@ -15,50 +16,14 @@
     <![endif]-->
 
     <script type="text/javascript">var _sf_startpt=(new Date()).getTime();</script>
-    <script type="text/javascript" src="/js/100_main/include/widget-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
-
-		<script>
-		function reload_services() {
-		  OnLoadGrafic.hideGrafic();
-			jQuery('#like-submit').empty();
-		  var lAction = '/like/get_services';
-		  var lData = {
-		    	ei_kcuf : new Date().getTime(),
-		  	};
-
-		  jQuery.ajax({
-				type : "GET",
-				url : lAction,
-				dataType : "json",
-				data : lData,
-		    success : function(pResponse) {
-		    	jQuery('#like-submit').append(pResponse.services);
-		    	if(!jQuery('#nav-username').length){
-						jQuery('footer').empty();
-						jQuery('footer').append(pResponse.footer);
-			    }
-		      OnLoadGrafic.hideGrafic();
-		    }
-		  });
-		}
-
-
-		</script>
-
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <script type="text/javascript" src="/js/100_main/include/widget-<?php echo sfConfig::get('app_release_name') ?>.min.js"></script>
 
   </head>
   <body id="app-widget">
     <div class="popupblock">
-
-      <!-- transparent-grauer Hintergrund mit Überschrift -->
       <div id="content-outer" role="main">
         <?php echo $sf_content; ?>
-
-        <!-- popup footer -->
-
         <footer>
-          <!-- Hauptnavigation -->
 					<?php include_partial('global/footer'); ?>
         </footer>
       </div>
@@ -73,7 +38,6 @@
 	        }
 	      ?>
 	    });
-
 
       var _sf_async_config={uid:23222,domain:"spread.ly"};
       (function(){

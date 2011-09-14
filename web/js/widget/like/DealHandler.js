@@ -5,11 +5,6 @@
 var CouponCode = {
     
     /**
-     * var to save the path for the copy to clipboard-swf
-     */
-    //aClipFlashPath: "",    
-      
-    /**
      * inits the copy to clipboard functionality
      * @author KM
      */

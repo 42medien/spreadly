@@ -78,7 +78,7 @@ class likeActions extends sfActions {
   }
 
   public function executeShare(sfWebRequest $request){
-    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('like/js_init_nourl.js'));
+    //$this->getResponse()->setSlot('js_document_ready', $this->getPartial('like/js_init_nourl.js'));
 
     $this->url = $request->getParameter("url", null);
   }

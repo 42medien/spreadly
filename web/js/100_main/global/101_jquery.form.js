@@ -1,6 +1,5 @@
 /**
  * @combine statistics
- * @combine widget
  * @combine backend
  */
 

@@ -10,17 +10,23 @@
 
 var WidgetLikeForm = {
    
+    /**
+     * sends the form to the action defined in form
+     * @author KM
+     */
     send: function() {
       debug.log("[WidgetLikeForm][send]");      
       jQuery('#popup-like-button').live('click', function() {
         WidgetLikeForm.beforeSend();
         document.forms['popup-like-form'].submit();
-        
         return false;
       });
-      
     },
     
+    /**
+     * Hides the button-area after clicking the like-button (so that the user can't click twice) and shows the loading-icon
+     * @author KM
+     */
     beforeSend: function(){
       debug.log("[WidgetLikeForm][beforeSend]");        
       OnLoadGrafic.showGrafic();
@@ -29,7 +35,7 @@ var WidgetLikeForm = {
     },
     
     /**
-     * sets the hidden img-value
+     * sets the hidden img-value by selecting an image with the image scroller
      * @author KM
      * @param string pPath
      */
@@ -47,7 +53,6 @@ var LikeImage = {
 
     init: function(pImgCount, pUrl) {
      debug.log("[LikeImage][init]");
-     debug.log(pImgCount);
      if(pImgCount == 0) {
         LikeImage.get(pUrl);
      } else if (pImgCount == 1) {
@@ -55,8 +60,8 @@ var LikeImage = {
        LikeImageCounter.hide();
      } else {
        LikeImageScroller.init(true);
-       LikeImageCounter.init(pImgCount);
-       LikeImageCounter.show();
+       //LikeImageCounter.init(pImgCount);
+       //LikeImageCounter.show();
        LikeImageScroller.onScroll();
      }
     },
@@ -97,18 +102,12 @@ var LikeImage = {
       //insert the image into slider-container
       LikeImage.insert(pResponse.html);
       //if there is no or 1 image, hide the slide-arrows and the counter
-      debug.log(pResponse.count);
       if(pResponse.count === 0 || pResponse.count === 1){
         //LikeImageCounter.hide();
         LikeImageScroller.hideContainer();
       } else {
-        // if there are more than 1 images:
-        // init the scroller
+        // if there are more than 1 images: init the scroller
         LikeImageScroller.init(true);
-        //init the counter
-        //LikeImageCounter.init(pResponse.count);
-        //show the slide-arrows and the counter
-        //LikeImageCounter.show();
         //and init the onscroll-functionalities (e.g. update counter & update hidden-img-value onscroll)
         LikeImageScroller.onScroll();
       }
@@ -195,104 +194,12 @@ var LikeImageScroller = {
   hideContainer: function() {
     jQuery('#scroll-button-area').hide();
   }
-
-
 };
 
 
 /**
- * Handles the behaviour of the image counter
- * @author KM
- * @depricated not in use anymore
+ * inline-add for the services the user want to share
  */
-var LikeImageCounter = {
-
-  /**
-   * sets the total number
-   * @author KM
-   * @param number pCount
-   */
-  init: function(pCount) {
-    jQuery('#img-number').empty();
-    jQuery('#img-number').append(pCount);
-  },
-
-  /**
-   * updates the counter, e.g. after scrolling
-   * @author KM
-   * @param number pCount
-   */
-  update: function(pCount) {
-    jQuery('#img-counter').empty();
-    jQuery('#img-counter').append(pCount+1);
-  },
-
-  /**
-   * shows the counter-area (including the slide-arrows)
-   * @author KM
-   */
-  show: function() {
-    jQuery('#scroll-button-area').show();
-  },
-
-  /**
-   * hides the counter-area (including the slide-arrows)
-   * @author KM
-   */
-  hide: function() {
-    jQuery('#scroll-button-area').hide();
-  }
-};
-
-var WidgetLikeContent = {
-
-  aIsContent: false,
-
-  get: function(){
-    debug.log('[WidgetLikeContent][get]');
-    OnLoadGrafic.showGrafic();
-    jQuery('#man-url-content').empty();
-    jQuery.ajax({
-      //beforeSubmit : OnLoadGrafic.showGrafic,
-      type :     "GET",
-      url:       '/like/get_like_content',
-      dataType : "json",
-      data: {
-        ei_kcuf: new Date().getTime(),
-        url: jQuery('#man-url-input').val()
-      },
-      success : function(pResponse) {
-        if(pResponse.success == true) {
-          WidgetLikeContent.show(pResponse.html);
-          //WidgetLikeContent.aIsContent = true;
-          LikeImage.init(pResponse.imgcount, pResponse.url);
-          WidgetLikeForm.init();
-        } else {
-          //if(WidgetLikeContent.aIsContent === false) {
-            WidgetLikeContent.showError(pResponse.msg);
-          //}
-          //OnLoadGrafic.hideGrafic();
-        }
-      }
-    });
-  },
-
-  show: function(pHtml) {
-    debug.log('[WidgetLikeContent][show]');
-    //WidgetLikeContent.aIsContent = false;
-    jQuery('#man-url-content').empty();
-    jQuery('#man-url-content').append(pHtml);
-    OnLoadGrafic.hideGrafic();
-  },
-
-  showError: function(pMsg){
-    debug.log('[WidgetLikeContent][showError]');
-    jQuery('#man-url-content').empty();
-    jQuery('#man-url-content').prepend("<div class='error'>"+pMsg+"</div>");
-    OnLoadGrafic.hideGrafic();
-  }
-};
-
 var WidgetAddService = {
   init:function(){
   	debug.log('[WidgetAddService][init]');
@@ -310,6 +217,30 @@ var WidgetAddService = {
 
   redirect: function(pService){
     window.location = '/auth/signinto?service='+pService;
+  },
+  
+  reloadServices: function() {
+    OnLoadGrafic.hideGrafic();
+    jQuery('#like-submit').empty();
+    var lAction = '/like/get_services';
+    var lData = {
+        ei_kcuf : new Date().getTime(),
+      };
+
+    jQuery.ajax({
+      type : "GET",
+      url : lAction,
+      dataType : "json",
+      data : lData,
+      success : function(pResponse) {
+        jQuery('#like-submit').append(pResponse.services);
+        if(!jQuery('#nav-username').length){
+          jQuery('footer').empty();
+          jQuery('footer').append(pResponse.footer);
+        }
+        OnLoadGrafic.hideGrafic();
+      }
+    });    
   }
 
 };

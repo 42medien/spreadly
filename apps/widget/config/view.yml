@@ -8,8 +8,6 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    [widget/widget.css]
-
   javascripts:    []
 
   has_layout:     on

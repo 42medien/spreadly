@@ -1,7 +1,6 @@
 /**
  * @nocombine platform
  * @combine statistics
- * @combine widget
  */
 jQuery.fn.toggleValue = function(){
   var lText = jQuery(this).val();

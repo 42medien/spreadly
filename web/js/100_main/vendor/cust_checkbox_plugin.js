@@ -1,5 +1,4 @@
 /**
- * @combine widget
  * @combine statistics
  */
 

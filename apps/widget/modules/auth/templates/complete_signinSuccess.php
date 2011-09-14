@@ -3,7 +3,7 @@
   <head>
     <script type="text/javascript">
       function close_window() {
-        window.opener.reload_services();
+        window.opener.WidgetAddService.reloadServices();
         window.close();
       }
     </script>
