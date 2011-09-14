@@ -170,7 +170,7 @@ $wu->trackUser();
 	  return lXhttp;}};var YiidFriends={aGetAction:"",init:function(pObjectId){YiidFriends.getFriends(pObjectId);},getFriends:function(pObjectId){var lXhttp=YiidUtils.createXMLHttpRequest();try{var lQuery=encodeURI('so_id='+pObjectId);lXhttp.open("POST",YiidFriends.aGetAction,true);lXhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");lXhttp.setRequestHeader("Content-length",lQuery.length);lXhttp.setRequestHeader("Connection","close");lXhttp.onreadystatechange=function(){if(lXhttp.readyState==4){if(lXhttp.status!=200){}else{YiidFriends.handleRequest(lXhttp);}}};lXhttp.send(lQuery);}catch(lError){}},handleRequest:function(pXhttp){YiidFriends.showFriends(pXhttp.responseText);},showFriends:function(pHtml){var lContainer=document.getElementById("friends");if(lContainer!==undefined){lContainer.innerHTML=pHtml;}else{YiidFriends.showFriends(pHtml);}
 	  return true;}};
 
-		YiidFriends.aGetAction = "<?php echo LikeSettings::JS_POPUP_PATH ?>api/load_friends";
+		YiidFriends.aGetAction = "http://yiid:affen2010@yiiddev.com/api/load_friends";
 		YiidFriends.init("<?php echo $wu->getSocialObjectId(); ?>");
 	</script>
 
