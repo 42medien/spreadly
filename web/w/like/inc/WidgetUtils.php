@@ -22,7 +22,7 @@ class WidgetUtils {
     try {
       $this->aMongoConn = new Mongo(LikeSettings::MONGO_HOSTNAME, array("timeout" => 5000));
     } catch (Exception $e) {
-      // do nothing
+      error_log($e->getMessage());
     }
 
     if (isset($_GET['url']) && !empty($_GET['url'])) {
@@ -347,7 +347,9 @@ class WidgetUtils {
    * destructor to close mongo-connection
    */
   public function __destruct() {
-    $this->aMongoConn->close();
+    if ($this->aMongoConn) {
+      $this->aMongoConn->close();
+    }
   }
 
   /**
