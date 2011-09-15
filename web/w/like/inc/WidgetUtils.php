@@ -123,6 +123,10 @@ class WidgetUtils {
     $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, "session");
     $lSession = $pCollectionObject->findOne(array("sess_id" => $_COOKIE[LikeSettings::SF_SESSION_COOKIE]) );
 
+    if (!$lSession) {
+      return false;
+    }
+
     if (array_key_exists('sess_data', $lSession)) {
       $lEncodedData = $lSession['sess_data'];
       session_decode($lEncodedData);
