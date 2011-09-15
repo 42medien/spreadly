@@ -149,7 +149,7 @@ class WidgetUtils {
       $lSocialObjectArray = array();
     }
 
-    if ($pUrl && !$this->isUrlValid($pUrl)) {
+    if ($this->aUrl && !$this->isUrlValid($this->aUrl)) {
       $lSocialObjectArray = array_merge(array(
         'urlerror'   => true,
       ), $lSocialObjectArray);
@@ -214,9 +214,6 @@ class WidgetUtils {
     $pReferrerUri = @$_SERVER['HTTP_REFERER'];
 
     if (!$pReferrerUri) {
-      return null;
-    }
-    if ($pButtonUri == $pReferrerUri) {
       return null;
     }
 
