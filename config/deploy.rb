@@ -15,7 +15,7 @@ set  :keep_releases,  5
 task :prod do
   role :web,    "mario.obaake.com"                        # Your HTTP server, Apache/etc
   set :button_deployment, false
-  
+
   set :sf_env, "prod"
   set :domain,      "yiid.com"
   set :deploy_to,   "#{deploy_directory}/#{domain}"
@@ -27,7 +27,7 @@ end
 task :staging do
   role :web,    "mario.obaake.com"                        # Your HTTP server, Apache/etc
   set :button_deployment, false
-  
+
   set :sf_env, "staging"
   set :domain,      "yiiddev.com"
   set :deploy_to,   "#{deploy_directory}/#{domain}"
@@ -38,15 +38,15 @@ end
 
 task :button do
   set :button_deployment, true
-  
-  set :user, 'www-data'
-  role :button, "ec2-46-51-163-202.eu-west-1.compute.amazonaws.com" # Prod
-  
-  set :deploy_directory, "/var/www"
-  set :current_dir, "yiid"
-  
+
+  set :user, 'root'
+  role :button, "ec2-79-125-32-228.eu-west-1.compute.amazonaws.com" # Prod
+
+  set :deploy_directory, "/var/www/button.spread.ly"
+  set :current_dir, "current"
+
   set :sf_env, "prod"
-  set :domain,      "widgets.yiid.com"
+  set :domain,      "button.spread.ly"
   set :deploy_to,   "#{deploy_directory}"
   set :deploy_via, :export
   ask_for_repository
@@ -54,13 +54,13 @@ end
 
 task :staging_button do
   set :button_deployment, true
-  
+
   set :user, 'root'
   role :button, "ec2-79-125-32-228.eu-west-1.compute.amazonaws.com" # Staging
-  
+
   set :deploy_directory, "/var/www/button.yiiddev.com"
   set :current_dir, "current"
-  
+
   set :sf_env, "staging"
   set :domain,      "button.yiiddev.com"
   set :deploy_to,   "#{deploy_directory}"
@@ -98,7 +98,7 @@ namespace :deploy do
       update
     end
   end
-  
+
   desc "This task is the main task of a deployment."
   task :update do
     transaction do
@@ -144,14 +144,14 @@ namespace :deploy do
     if button_deployment
       run "chown -R www-data:www-data #{latest_release}"
     end
-    
+
     # Share common files & folders
     share_childs
   end
 
   desc "Need to overwrite the deploy:cold task so it doesn't try to run the migrations."
   task :cold do ; end
-  
+
   task :stop_worker do
     #surun "/etc/init.d/Worker-#{sf_env} stop"
   end
@@ -195,7 +195,7 @@ namespace :symfony do
     task :i18n_sync do
       run "php #{current_release}/symfony yiid:i18n-sync --env=#{sf_env} --no-confirmation"
     end
-    
+
     desc "Build it."
     task :build, :roles => :web do
       command = "php #{latest_release}/symfony yiid:build --all --env=#{sf_env} --no-confirmation"
