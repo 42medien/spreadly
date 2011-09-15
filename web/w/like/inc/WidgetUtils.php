@@ -27,7 +27,7 @@ class WidgetUtils {
 
     if (isset($_GET['url']) && !empty($_GET['url'])) {
       $this->aUrl = trim(urldecode($_GET['url']));
-    } else {
+    } elseif(isset($_SERVER['HTTP_REFERER']) && !$_SERVER($_GET['HTTP_REFERER'])) {
       $this->aUrl = trim(urldecode($_SERVER['HTTP_REFERER']));
     }
 
@@ -119,11 +119,17 @@ class WidgetUtils {
     $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, "session");
     $lSession = $pCollectionObject->findOne(array("sess_id" => $_COOKIE[LikeSettings::SF_SESSION_COOKIE]) );
 
-    $lEncodedData = $lSession['sess_data'];
-    session_decode($lEncodedData);
-    $pUserId = $_SESSION['symfony/user/sfUser/attributes']['user_session']['id'];
+    if (array_key_exists('sess_data', $lSession)) {
+      $lEncodedData = $lSession['sess_data'];
+      session_decode($lEncodedData);
+      $pUserId = $_SESSION['symfony/user/sfUser/attributes']['user_session']['id'];
 
-    return $pUserId?$pUserId:false;
+      return $pUserId?$pUserId:false;
+    } else {
+      return false;
+    }
+
+
   }
 
   /**
@@ -384,7 +390,7 @@ class WidgetUtils {
     if (isset($parameterList['path'])) {
       $pQueryString .= $parameterList['path'];
     }
-    if (isset($parameterList['query'])) {
+    if (array_key_exists("query", $parameterList)) {
       $lGetParams = array();
       parse_str($parameterList['query'], $lGetParams);
       $parameterList['params'] = array_diff_key($lGetParams, array_fill_keys($lKeysToRemove, 0));
