@@ -20,7 +20,7 @@ class WidgetUtils {
 
   public function __construct() {
     try {
-      $this->aMongoConn = new Mongo(LikeSettings::MONGO_HOSTNAME, array("timeout" => 5000));
+      //$this->aMongoConn = new Mongo(LikeSettings::MONGO_HOSTNAME, array("timeout" => 5000));
     } catch (Exception $e) {
       // do nothing
     }
@@ -56,9 +56,9 @@ class WidgetUtils {
   }
 
   public function showFriends() {
-    if (!$this->aMongoConn) {
-      return false;
-    }
+    //if (!$this->aMongoConn) {
+    //  return false;
+    //}
 
     return $this->getUserId() && $this->aShowFriends && $this->aSocialObject;
   }
@@ -84,9 +84,9 @@ class WidgetUtils {
   }
 
   public function getActivityCount() {
-    if (!$this->aMongoConn) {
-      return "?";
-    }
+    //if (!$this->aMongoConn) {
+    //  return "?";
+    //}
 
     return intval($this->aSocialObject['l_cnt']);
   }
@@ -111,17 +111,21 @@ class WidgetUtils {
       return false;
     }
 
+    $lMongoCon = new Mongo(LikeSettings::MONGO_HOSTNAME, array("timeout" => 5000));
+
     // check if mongo is active
-    if (!$this->aMongoConn) {
+    if (!$lMongoCon) {
       return false;
     }
 
-    $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, "session");
+    $pCollectionObject = $lMongoCon->selectCollection(LikeSettings::MONGO_DATABASENAME, "session");
     $lSession = $pCollectionObject->findOne(array("sess_id" => $_COOKIE[LikeSettings::SF_SESSION_COOKIE]) );
 
     $lEncodedData = $lSession['sess_data'];
     session_decode($lEncodedData);
     $pUserId = $_SESSION['symfony/user/sfUser/attributes']['user_session']['id'];
+
+    $lMongoCon->close();
 
     return $pUserId?$pUserId:false;
   }
@@ -132,12 +136,13 @@ class WidgetUtils {
    * @return array()
    */
   public function getSocialObjectByUrl() {
+    $lMongoCon = new Mongo(LikeSettings::MONGO_HOSTNAME, array("timeout" => 5000));
     // check if mongo is active
-    if (!$this->aMongoConn) {
+    if (!$lMongoCon) {
       return false;
     }
 
-    $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, 'social_object');
+    $pCollectionObject = $lMongoCon->selectCollection(LikeSettings::MONGO_DATABASENAME, 'social_object');
     $pUrlHash = md5($this->skipTrailingSlash($this->aUrl));
 
     // check if we know the URL already
@@ -160,6 +165,8 @@ class WidgetUtils {
       'l_cnt' => 0
     ), $lSocialObjectArray);
 
+    $lMongoCon->close();
+
     return $lSocialObjectArray;
   }
 
@@ -173,8 +180,9 @@ class WidgetUtils {
    * @return false or score of action taken (-1/1)
    */
   public function getYiidActivityBySocialObject() {
+    $lMongoCon = new Mongo(LikeSettings::MONGO_HOSTNAME, array("timeout" => 5000));
     // check if mongo is active
-    if (!$this->aMongoConn) {
+    if (!$lMongoCon) {
       return false;
     }
 
@@ -186,18 +194,19 @@ class WidgetUtils {
 
     $lUserId = $this->aUserId;
 
-    $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
+    $pCollectionObject = $lMongoCon->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
 
     $lObject = $pCollectionObject->findOne(array('social_object.$id' => $lSocialObject['_id'],
                                                    'u_id' => intval($lUserId),
                                                    'd_id' => array('$exists' => false)
                                                   ));
-
+    $lMongoCon->close();
     return $lObject;
   }
 
   private function findYiidActivityById($pId) {
-    $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
+    $lMongoCon = new Mongo(LikeSettings::MONGO_HOSTNAME, array("timeout" => 5000));
+    $pCollectionObject = $lMongoCon->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
 
     return $pCollectionObject->findOne(array("_id" => new MongoId($pId)));
   }
@@ -239,9 +248,9 @@ class WidgetUtils {
    */
   public function trackUser() {
     // check if mongo is active
-    if (!$this->aMongoConn) {
-      return false;
-    }
+    //if (!$this->aMongoConn) {
+    //  return false;
+    //}
 
     $this->trackClickback();
     $this->trackVisit();
@@ -255,7 +264,8 @@ class WidgetUtils {
    */
   private function trackVisit() {
     $lUrl = $this->aUrl;
-    $lCollection = $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, 'visit');
+    $lMongoCon = new Mongo(LikeSettings::MONGO_HOSTNAME, array("timeout" => 5000));
+    $lCollection = $lMongoCon->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, 'visit');
 
     $lUrl = urldecode($lUrl);
 
@@ -268,6 +278,8 @@ class WidgetUtils {
       $lUpdateArray = array( '$inc' => array('stats.day_'.date('d').'.pis' => 1, 'pis_total' => 1));
       $lCollection->update($lQueryArray, $lUpdateArray, array('upsert' => true));
     }
+
+    $lMongoCon->close();
   }
 
   /**
@@ -295,28 +307,31 @@ class WidgetUtils {
       $upsert = array('$inc' => array('cb' => 1, 's.'.$lClickback[0].'.cb' => 1));
       $options = array("upsert" => true);
 
-      $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, "yiid_activity")
+      $lMongoCon = new Mongo(LikeSettings::MONGO_HOSTNAME, array("timeout" => 5000));
+
+      $lMongoCon->selectCollection(LikeSettings::MONGO_DATABASENAME, "yiid_activity")
            ->update($lOriginYiidActivity,
                     $upsert, $options);
 
-      $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "analytics_activity")
+      $lMongoCon->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "analytics_activity")
            ->update(array('ya_id' => strval($lOriginYiidActivity['_id'])),
                     $upsert, $options);
 
-      $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "activity_stats.host")
+      $lMongoCon->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "activity_stats.host")
            ->update(array('host' => $host,
                             'day' => new MongoDate(strtotime(date('Y-m-d', $lOriginYiidActivity['c'])))),
                       $upsert, $options);
-      $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "activity_stats.url")
+      $lMongoCon->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "activity_stats.url")
            ->update(array('url' => $url,
                             'day' => new MongoDate(strtotime(date('Y-m-d', $lOriginYiidActivity['c'])))),
                       $upsert, $options);
-      $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "summary.host")
+      $lMongoCon->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "summary.host")
            ->update(array('host' => $host),
                       $upsert, $options);
-      $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "summary.url")
+      $lMongoCon->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "summary.url")
            ->update(array('url' => $url),
                       $upsert, $options);
+      $lMongoCon->close();
     }
   }
 
@@ -324,7 +339,7 @@ class WidgetUtils {
    * destructor to close mongo-connection
    */
   public function __destruct() {
-    $this->aMongoConn->close();
+    //$this->aMongoConn->close();
   }
 
   /**
