@@ -82,7 +82,11 @@ class WidgetUtils {
   }
 
   public function getSocialObjectId() {
-    return strval($this->aSocialObject['_id']);
+    if (array_key_exists("_id", $this->aSocialObject)) {
+      return strval($this->aSocialObject['_id']);
+    }
+
+    return null;
   }
 
   public function getActivityCount() {
@@ -402,6 +406,11 @@ class WidgetUtils {
     }
 
     $parameterList = parse_url($pUrl);
+
+    if (!array_key_exists("scheme", $parameterList)) {
+      return false;
+    }
+
     $pQueryString = '';
     $lKeysToRemove = LikeSettings::$TRACKING_PARAMS;
     if (isset($parameterList['path'])) {
