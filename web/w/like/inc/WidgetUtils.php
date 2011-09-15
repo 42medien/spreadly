@@ -185,7 +185,6 @@ class WidgetUtils {
     }
 
     $lUserId = $this->aUserId;
-    $lActiveDeal = $this->aDeal;
 
     $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
 
@@ -224,7 +223,6 @@ class WidgetUtils {
     if (!array_key_exists("query", $lParameterList)) {
       return null;
     }
-
     parse_str($lParameterList['query'], $lGetParams);
 
     if (isset($lGetParams['spreadly'])) {
