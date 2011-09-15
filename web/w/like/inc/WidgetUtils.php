@@ -25,6 +25,8 @@ class WidgetUtils {
       error_log($e->getMessage());
     }
 
+    error_log(MongoPool::info());
+
     if (isset($_GET['url']) && !empty($_GET['url'])) {
       $this->aUrl = trim(urldecode($_GET['url']));
     } elseif(isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
