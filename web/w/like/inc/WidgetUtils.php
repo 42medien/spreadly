@@ -27,8 +27,10 @@ class WidgetUtils {
 
     if (isset($_GET['url']) && !empty($_GET['url'])) {
       $this->aUrl = trim(urldecode($_GET['url']));
-    } elseif(isset($_SERVER['HTTP_REFERER']) && !$_SERVER($_GET['HTTP_REFERER'])) {
+    } elseif(isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
       $this->aUrl = trim(urldecode($_SERVER['HTTP_REFERER']));
+    } else {
+      $this->aUrl = null;
     }
 
     // clean up the url
@@ -60,7 +62,7 @@ class WidgetUtils {
       return false;
     }
 
-    return $this->getUserId() && $this->aShowFriends && $this->aSocialObject;
+    return $this->aUrl && $this->getUserId() && $this->aShowFriends && $this->aSocialObject;
   }
 
   public function getUserId() {
@@ -107,6 +109,8 @@ class WidgetUtils {
    * @return int|boolean
    */
   public function extractUserIdFromSession() {
+    $pUserId = false;
+
     if (!array_key_exists(LikeSettings::SF_SESSION_COOKIE, $_COOKIE)) {
       return false;
     }
@@ -122,9 +126,14 @@ class WidgetUtils {
     if (array_key_exists('sess_data', $lSession)) {
       $lEncodedData = $lSession['sess_data'];
       session_decode($lEncodedData);
-      $pUserId = $_SESSION['symfony/user/sfUser/attributes']['user_session']['id'];
 
-      return $pUserId?$pUserId:false;
+      if (array_key_exists('symfony/user/sfUser/attributes', $_SESSION) &&
+          array_key_exists('user_session', $_SESSION['symfony/user/sfUser/attributes']) &&
+          array_key_exists('id', $_SESSION['symfony/user/sfUser/attributes']['user_session'])) {
+        $pUserId = $_SESSION['symfony/user/sfUser/attributes']['user_session']['id'];
+      }
+
+      return $pUserId;
     } else {
       return false;
     }
@@ -376,6 +385,10 @@ class WidgetUtils {
    * @return unknown_type
    */
   public static function cleanupHostAndUri($pUrl) {
+    if (!$pUrl) {
+      return null;
+    }
+
     $pUrl = urldecode($pUrl);
     $pUrl = str_replace(" ", "+", $pUrl);
 
