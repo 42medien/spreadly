@@ -220,6 +220,11 @@ class WidgetUtils {
     $lParameterList = parse_url($pReferrerUri);
 
     $lGetParams = array();
+
+    if (!array_key_exists("query", $lParameterList)) {
+      return null;
+    }
+
     parse_str($lParameterList['query'], $lGetParams);
 
     if (isset($lGetParams['spreadly'])) {
