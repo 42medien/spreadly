@@ -25,7 +25,7 @@ class WidgetUtils {
       error_log($e->getMessage());
     }
 
-    error_log(print_r(MongoPool::info(), true));
+    //error_log(print_r(MongoPool::info(), true));
 
     if (isset($_GET['url']) && !empty($_GET['url'])) {
       $this->aUrl = trim(urldecode($_GET['url']));
