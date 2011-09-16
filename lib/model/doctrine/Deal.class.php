@@ -35,7 +35,16 @@ class Deal extends BaseDeal {
     $user->setParticipatedDeals($array);
     $user->save();
 
-    $this->setActualQuantity($this->getActualQuantity()+1);
+    // check participation type
+    if ($this->getBillingType() == "like") { // count likes
+      $this->setActualQuantity($this->getActualQuantity()+1);
+    } else { // count media penetration
+      $dm = MongoManager::getStatsDM();
+      $analyticsActivity = $dm->getRepository("Documents\AnalyticsActivity")->findOneBy(array("d_id" => intval($this->getId()), "u_id" => intval($user->getId())));
+
+      $this->setActualQuantity($this->getActualQuantity()+$analyticsActivity->getMediaPenetration());
+    }
+
     $this->save();
 
     if($this->getRemainingQuantity() <= 0) {
