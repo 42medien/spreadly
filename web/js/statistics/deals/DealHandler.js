@@ -93,6 +93,7 @@ var DealForm = {
       
       DealForm.initCharCounter();
       DealForm.toggleCouponType();
+      DealForm.toggleCampaignType();
     },
     
     initCharCounter: function() {
@@ -125,6 +126,26 @@ var DealForm = {
             
             return true;
      });      
+    },
+    
+    
+    /**
+     * toggles the hidden field billing_type on step_campaing
+     * @author KM
+     */
+    toggleCampaignType: function() {
+      debug.log('[DealForm][toggleCampaignType]');         
+      jQuery('li.select-target-quantity ul.radio_list li').live('click', function() {
+        var lType;
+        lType = jQuery(this).parent('ul').parent('span').parent('li.select-target-quantity').attr('id');
+        if(lType == 'select-target-quantity'){
+          jQuery('#billing_type').val('like');
+          jQuery('.target_quantity_mp').attr('checked', false);
+        } else {
+          jQuery('#billing_type').val('media_penetration');
+          jQuery('.target_quantity_like').attr('checked', false);          
+        }      
+      });
     }
 };
 

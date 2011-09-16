@@ -257,7 +257,8 @@ Prev
     padding-left: 3px;
 }
 
-#deal_form ul.btnformlist li#select-target-quantity span ul.radio_list li{
+#deal_form ul.btnformlist li#select-target-quantity span ul.radio_list li,
+#deal_form ul.btnformlist li#select-target-quantity-mp span ul.radio_list li{
   padding-bottom: 5px;
   margin-bottom: 0;
 }

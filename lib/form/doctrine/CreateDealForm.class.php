@@ -33,8 +33,10 @@ class CreateDealForm extends BaseDealForm
       'coupon_code'       => new sfWidgetFormInputText(),
       'coupon_url'        => new sfWidgetFormInputText(),
       'coupon_redeem_url' => new sfWidgetFormInputText(),
-      //'billing_type'      => new sfWidgetFormChoice(array('choices' => array('like' => 'like', 'media_penetration' => 'media_penetration'))),
+    	'billing_type'			=> new sfWidgetFormInputHidden(),
+      'billing_type'      => new sfWidgetFormInputHidden(),
       'target_quantity'   => new sfWidgetFormChoice(array('choices' => array('10' => '10 Likes für 5 Euro', '100' => '100 Likes für 50 Euro', '200' => '200 Likes für 70 Euro', '500' => '500 Likes für 140 Euro'), 'expanded' => true )),
+      'target_quantity_mp'   => new sfWidgetFormChoice(array('choices' => array('10000' => '10000 für 5 Euro', '100000' => '100000 für 50 Euro', '200000' => '200000 für 70 Euro', '500000' => '500000 für 140 Euro'), 'expanded' => true )),
       //'actual_quantity'   => new sfWidgetFormInputText(),
       'sf_guard_user_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => true)),
       'payment_method_id' => new sfWidgetFormInputHidden(),
@@ -79,7 +81,9 @@ class CreateDealForm extends BaseDealForm
     $this->setValidators(array(
       'name'              => new sfValidatorString(array('max_length' => 255, 'required' => true)),
       'sf_guard_user_id'  => new sfValidatorInteger(array('required' => true)),
-      'target_quantity'   => new sfValidatorInteger(array('required' => true))
+      'target_quantity'   => new sfValidatorInteger(array('required' => false)),
+    	'target_quantity_mp'   => new sfValidatorInteger(array('required' => false)),
+    	'billing_type'   => new sfValidatorString(array('required' => true))
     ));
   }
 

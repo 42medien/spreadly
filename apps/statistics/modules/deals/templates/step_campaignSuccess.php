@@ -1,10 +1,15 @@
 <?php include_partial('deals/breadcrumb', array('pDeal' => $pDeal)); ?>
-
+<?php
+//prefill for edit step_campaing
+	if($pForm['billing_type']->getValue() == 'media_penetration'){
+		$pForm->setDefault('target_quantity_mp', $pForm['target_quantity']->getValue());
+	}
+?>
 
 <?php slot('content') ?>
 <form action="<?php echo url_for('deals/step_campaign?did='.$pDealId); ?>" name="create_deal_form" id="deal_form" method="POST">
 	<?php //echo $pForm['_csrf_token']->render(); ?>
-
+	<?php echo $pForm['billing_type']->render(); ?>
 	<div class="createbtnbox alignleft">
   	<h2 class="btntitle"><?php echo __('Schritt 1: Kampagne anlegen')?></h2>
     <ul class="btnformlist">
@@ -19,13 +24,22 @@
         </label>
         <div class="content-error-box clearfix"><?php echo $pForm['name']->renderError(); ?></div>
       </li>
-	    <li class="clearfix" id="select-target-quantity">
+	    <li class="clearfix select-target-quantity" id="select-target-quantity">
 	    	<div class="btnwording alignleft">
 	      	<strong><?php echo $pForm['target_quantity']->renderLabel(); ?></strong><span><?php echo __('Sie buchen für Ihre Kampagne eine bestimmte Anzahl von Likes. Bitte wählen Sie:'); ?></span>
 	      	<span><?php echo $pForm['target_quantity']->renderError(); ?></span>
 	      </div>
 	      <span>
-	      	<?php echo $pForm['target_quantity']->render(); ?>
+	      	<?php echo $pForm['target_quantity']->render(array('class'=> "target_quantity_like")); ?>
+	      </span>
+	    </li>
+	    <li class="clearfix select-target-quantity" id="select-target-quantity-mp">
+	    	<div class="btnwording alignleft">
+	      	<strong><?php echo $pForm['target_quantity_mp']->renderLabel(); ?></strong><span><?php echo __('Sie buchen für Ihre Kampagne eine bestimmte Anzahl von Likes. Bitte wählen Sie:'); ?></span>
+	      	<span><?php echo $pForm['target_quantity_mp']->renderError(); ?></span>
+	      </div>
+	      <span>
+	      	<?php echo $pForm['target_quantity_mp']->render(array('class'=> "target_quantity_mp")); ?>
 	      </span>
 	    </li>
     </ul>

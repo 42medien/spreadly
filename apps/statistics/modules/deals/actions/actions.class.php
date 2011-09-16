@@ -62,13 +62,20 @@ class dealsActions extends sfActions
    * @todo statemachine-moped einbauen
    */
   public function executeStep_campaign(sfWebRequest $request){
+  	$this->getResponse()->setSlot('js_document_ready', $this->getPartial('deals/js_init_deals.js'));
   	$this->pForm->validate_campaign();
 
   	if($request->getMethod() == 'POST'){
   		$lParams = $request->getPostParameters();
   		$lParams['sf_guard_user_id'] = $this->getUser()->getUserId();
+
   		$this->pForm->bind($lParams);
   		if($this->pForm->isValid()){
+	  		if($lParams['billing_type'] == 'media_penetration') {
+	  			$lParams['target_quantity'] = $lParams['target_quantity_mp'];
+	  		}
+	  		unset($lParams['target-quantity-type']);
+	  		$this->pForm->bind($lParams);
   			$lDeal = $this->pForm->save();
   			$lDeal->complete_campaign();
 	 			$this->redirect('deals/step_share?did='.$lDeal->getId());
