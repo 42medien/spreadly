@@ -6,7 +6,6 @@
  * @author Hannes Schippmann
  */
 class WidgetUtils {
-  private $aMongoConn = null;
   private $aUrl = null;
   private $aTitle = null;
   private $aDescription = null;
@@ -19,14 +18,6 @@ class WidgetUtils {
   private $aCounter = true;
 
   public function __construct() {
-    try {
-      $this->aMongoConn = new Mongo(LikeSettings::MONGO_HOSTNAME, array("timeout" => 5000));
-    } catch (Exception $e) {
-      error_log($e->getMessage());
-    }
-
-    //error_log(print_r(MongoPool::info(), true));
-
     if (isset($_GET['url']) && !empty($_GET['url'])) {
       $this->aUrl = trim(urldecode($_GET['url']));
     } elseif(isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
@@ -60,7 +51,7 @@ class WidgetUtils {
   }
 
   public function showFriends() {
-    if (!$this->aMongoConn) {
+    if (!$this->getMongoCon()) {
       return false;
     }
 
@@ -92,7 +83,7 @@ class WidgetUtils {
   }
 
   public function getActivityCount() {
-    if (!$this->aMongoConn) {
+    if (!$this->getMongoCon()) {
       return "?";
     }
 
@@ -121,12 +112,14 @@ class WidgetUtils {
       return false;
     }
 
+    $lMongo = $this->getMongoCon();
+
     // check if mongo is active
-    if (!$this->aMongoConn) {
+    if (!$lMongo) {
       return false;
     }
 
-    $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, "session");
+    $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, "session");
     $lSession = $pCollectionObject->findOne(array("sess_id" => $_COOKIE[LikeSettings::SF_SESSION_COOKIE]) );
 
     if (!$lSession) {
@@ -157,12 +150,13 @@ class WidgetUtils {
    * @return array()
    */
   public function getSocialObjectByUrl() {
+    $lMongo = $this->getMongoCon();
     // check if mongo is active
-    if (!$this->aMongoConn) {
+    if (!$lMongo) {
       return false;
     }
 
-    $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, 'social_object');
+    $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, 'social_object');
     $pUrlHash = md5($this->skipTrailingSlash($this->aUrl));
 
     // check if we know the URL already
@@ -198,8 +192,9 @@ class WidgetUtils {
    * @return false or score of action taken (-1/1)
    */
   public function getYiidActivityBySocialObject() {
+    $lMongo = $this->getMongoCon();
     // check if mongo is active
-    if (!$this->aMongoConn) {
+    if (!$lMongo) {
       return false;
     }
 
@@ -211,7 +206,7 @@ class WidgetUtils {
 
     $lUserId = $this->aUserId;
 
-    $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
+    $pCollectionObject = $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
 
     $lObject = $pCollectionObject->findOne(array('social_object.$id' => $lSocialObject['_id'],
                                                    'u_id' => intval($lUserId),
@@ -222,7 +217,7 @@ class WidgetUtils {
   }
 
   private function findYiidActivityById($pId) {
-    $pCollectionObject = $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
+    $pCollectionObject = $this->getMongoCon()->selectCollection(LikeSettings::MONGO_DATABASENAME, 'yiid_activity');
 
     return $pCollectionObject->findOne(array("_id" => new MongoId($pId)));
   }
@@ -264,7 +259,7 @@ class WidgetUtils {
    */
   public function trackUser() {
     // check if mongo is active
-    if (!$this->aMongoConn) {
+    if (!$this->getMongoCon()) {
       return false;
     }
 
@@ -280,7 +275,7 @@ class WidgetUtils {
    */
   private function trackVisit() {
     $lUrl = $this->aUrl;
-    $lCollection = $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, 'visit');
+    $lCollection = $this->getMongoCon()->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, 'visit');
 
     $lUrl = urldecode($lUrl);
 
@@ -320,37 +315,30 @@ class WidgetUtils {
       $upsert = array('$inc' => array('cb' => 1, 's.'.$lClickback[0].'.cb' => 1));
       $options = array("upsert" => true);
 
-      $this->aMongoConn->selectCollection(LikeSettings::MONGO_DATABASENAME, "yiid_activity")
+      $lMongo = $this->getMongoCon();
+
+      $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, "yiid_activity")
            ->update($lOriginYiidActivity,
                     $upsert, $options);
 
-      $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "analytics_activity")
+      $lMongo->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "analytics_activity")
            ->update(array('ya_id' => strval($lOriginYiidActivity['_id'])),
                     $upsert, $options);
 
-      $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "activity_stats.host")
+      $lMongo->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "activity_stats.host")
            ->update(array('host' => $host,
                             'day' => new MongoDate(strtotime(date('Y-m-d', $lOriginYiidActivity['c'])))),
                       $upsert, $options);
-      $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "activity_stats.url")
+      $lMongo->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "activity_stats.url")
            ->update(array('url' => $url,
                             'day' => new MongoDate(strtotime(date('Y-m-d', $lOriginYiidActivity['c'])))),
                       $upsert, $options);
-      $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "summary.host")
+      $lMongo->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "summary.host")
            ->update(array('host' => $host),
                       $upsert, $options);
-      $this->aMongoConn->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "summary.url")
+      $lMongo->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "summary.url")
            ->update(array('url' => $url),
                       $upsert, $options);
-    }
-  }
-
-  /**
-   * destructor to close mongo-connection
-   */
-  public function __destruct() {
-    if ($this->aMongoConn) {
-      $this->aMongoConn->close();
     }
   }
 
@@ -427,5 +415,21 @@ class WidgetUtils {
       $pQueryString .= (!empty($parameterList['params']))?'?'.http_build_query($parameterList['params']):'';
     }
     return $parameterList['scheme'].'://'.$parameterList['host'].$pQueryString;
+  }
+
+  /**
+   * returns a mongo instance
+   *
+   * @return Mongo|null
+   */
+  private function getMongoCon() {
+    // checks if mongo is running
+    try {
+      $mongo = new Mongo(LikeSettings::MONGO_HOSTNAME, array("timeout" => 5000));
+      return $mongo;
+    } catch (Exception $e) {
+      error_log($e->getMessage());
+      return null;
+    }
   }
 }
