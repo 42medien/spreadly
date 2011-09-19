@@ -35,7 +35,7 @@
 	    </li>
 	    <li class="clearfix select-target-quantity" id="select-target-quantity-mp">
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo $pForm['target_quantity_mp']->renderLabel(); ?></strong><span><?php echo __('Sie buchen für Ihre Kampagne eine bestimmte Anzahl von Likes. Bitte wählen Sie:'); ?></span>
+	      	<strong><?php echo $pForm['target_quantity_mp']->renderLabel(); ?></strong><span><?php echo __('Sie möchten, dass Ihre Kampagne von möglichst vielen Leuten gesehen wird.'); ?></span>
 	      	<span><?php echo $pForm['target_quantity_mp']->renderError(); ?></span>
 	      </div>
 	      <span>

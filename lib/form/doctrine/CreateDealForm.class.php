@@ -36,7 +36,7 @@ class CreateDealForm extends BaseDealForm
     	'billing_type'			=> new sfWidgetFormInputHidden(),
       'billing_type'      => new sfWidgetFormInputHidden(),
       'target_quantity'   => new sfWidgetFormChoice(array('choices' => array('10' => '10 Likes für 5 Euro', '100' => '100 Likes für 50 Euro', '200' => '200 Likes für 70 Euro', '500' => '500 Likes für 140 Euro'), 'expanded' => true )),
-      'target_quantity_mp'   => new sfWidgetFormChoice(array('choices' => array('10000' => '10000 für 5 Euro', '100000' => '100000 für 50 Euro', '200000' => '200000 für 70 Euro', '500000' => '500000 für 140 Euro'), 'expanded' => true )),
+      'target_quantity_mp'   => new sfWidgetFormChoice(array('choices' => array('10000' => '10.000 für 5 Euro', '100000' => '100.000 für 50 Euro', '200000' => '200.000 für 70 Euro', '500000' => '500.000 für 140 Euro'), 'expanded' => true )),
       //'actual_quantity'   => new sfWidgetFormInputText(),
       'sf_guard_user_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => true)),
       'payment_method_id' => new sfWidgetFormInputHidden(),
@@ -58,6 +58,7 @@ class CreateDealForm extends BaseDealForm
     $this->widgetSchema->setLabels(array(
     	'name' => $lI18n->__('Name'),
     	'target_quantity' => $lI18n->__('Streuung nach Likes'),
+    	'target_quantity_mp' => $lI18n->__('Streuung nach Reichweite'),
     	'motivation_title' => $lI18n->__('Motivator'),
     	'motivation_text' => $lI18n->__('Motivationstext'),
     	'spread_title' => $lI18n->__('Spread Werbung'),
