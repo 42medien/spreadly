@@ -57,7 +57,7 @@ var LikeImage = {
         LikeImage.get(pUrl);
      } else if (pImgCount == 1) {
        WidgetLikeForm.setImageValue(LikeImage.getImgPath(0));
-       LikeImageCounter.hide();
+       //LikeImageCounter.hide();
      } else {
        LikeImageScroller.init(true);
        //LikeImageCounter.init(pImgCount);
@@ -180,7 +180,7 @@ var LikeImageScroller = {
     //on seek means on changing the showed image (like onscroll)
     LikeImageScroller.aApiObj.onSeek(function() {
       //update the counter
-      LikeImageCounter.update(this.getIndex());
+     // LikeImageCounter.update(this.getIndex());
       //update the hidden image value into the form with the path of the current selected image
       WidgetLikeForm.setImageValue(LikeImage.getImgPath(this.getIndex()));
     });
