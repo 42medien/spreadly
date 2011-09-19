@@ -76,7 +76,6 @@ $wu->trackUser();
       -webkit-transition: box-shadow .3s ease-in, text-shadow .3s ease-in, background-position .6s ease-out;
       -moz-transition: box-shadow .3s ease-in, text-shadow .3s ease-in, background-position .6s ease-out;
     }
-
     .button:active {
       background-position: -30% 20px;
       background-color: hsla(333,42%,70%,1);
@@ -86,7 +85,6 @@ $wu->trackUser();
       box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(333,42%,50%,.3) inset, 0 0 4px 0 hsla(333,42%,30%,.5);
       text-shadow: 0 0px 0px hsla(333,42%,50%,0), 0 0px 0px #fff;
     }
-
     .button:focus:before, .button:hover:before{
       opacity:.85;
       width: 14px;
@@ -95,7 +93,6 @@ $wu->trackUser();
       left:2px;
       background-position: -1px -1px;*/
     }
-
     .container b {
       color: #aaa;
       text-shadow: 0 1px 0 hsla(0,0%,100%,1), 0 -1px 0 hsla(0,0%,0%,.4);
@@ -111,7 +108,6 @@ $wu->trackUser();
       -webkit-transition: color 2s ease-out;
       -moz-transition: color 2s ease-out;
     }
-
     .container b:before {
       position: absolute;
       top: 4px;
@@ -128,12 +124,10 @@ $wu->trackUser();
       -webkit-transform: rotate(-45deg);
       -moz-transform: rotate(-45deg);
     }
-
     .button:hover+b, .button:hover+b:before {
       background: #fff;
       color: #666;
     }
-
     <?php if ($wu->showFriends()): ?>
     ul.icons {
       list-style-type: none;
