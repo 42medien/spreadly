@@ -261,6 +261,7 @@ Prev
 #deal_form ul.btnformlist li#select-target-quantity-mp span ul.radio_list li{
   padding-bottom: 5px;
   margin-bottom: 0;
+  width: 150px;
 }
 
 #deal-form-cat-list{
