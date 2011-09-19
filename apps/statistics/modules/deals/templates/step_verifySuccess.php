@@ -14,14 +14,27 @@
 	      	<?php echo $pDeal->getName(); ?>
 	      </span>
 	    </li>
+
+	    <?php if ($pDeal->getBillingType() == 'like' ){ ?>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
 	      	<strong><?php echo __('Streuung nach Likes'); ?>:</strong>
 	      </div>
 	      <span>
-	      	<?php echo __($pDeal->getTargetQuantity().' Likes für x Euro'); ?>
+	      	<?php echo __($pDeal->getTargetQuantity().' Likes'); ?>
 	      </span>
 	    </li>
+	    <?php } else {?>
+		    <li class="clearfix">
+		    	<div class="btnwording alignleft">
+		      	<strong><?php echo __('Streuung nach Reichweite'); ?>:</strong>
+		      </div>
+		      <span>
+		      	<?php echo __($pDeal->getTargetQuantity().' erreichte User'); ?>
+		      </span>
+		    </li>
+		  <?php } ?>
+
 		</ul>
 	</div>
 	<div class="alignleft create-deal-helptext">
