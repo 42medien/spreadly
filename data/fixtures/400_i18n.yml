@@ -1,0 +1,12 @@
+Language:
+  Language_1:
+    is_active: 1
+    lang: 'en'
+    default_lang: 1
+
+  Language_2:
+    is_active: 1
+    lang: 'de'
+
+  Language_3:
+    lang: 'fr'
