@@ -49,6 +49,8 @@ class Deal extends BaseDeal {
 
     if($this->getRemainingQuantity() <= 0) {
       $this->expire();
+      // send deal expire event
+      sfContext::getInstance()->getEventDispatcher()->notify(new sfEvent($this, 'deal.expire', array()));
     }
 
     return $this->getCouponType()==DealTable::COUPON_TYPE_CODE ? $this->getCouponCode() : $this->getCouponUrl();
