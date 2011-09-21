@@ -9,9 +9,9 @@ class LanguageTable extends Doctrine_Table
   }
 
   public static function getAllLanguages($pActive = null) {
-    $lQuery =  self::getInstance()->createQuery();
-    if ($pActive == true) {
-      $lQuery->where('is_active = ?', true);
+    $lQuery =  Doctrine_Query::create()->from('Language l');
+    if ($pActive) {
+      $lQuery->where('l.is_active = ?', 1);
     }
     return $lQuery->execute();
   }
@@ -19,9 +19,11 @@ class LanguageTable extends Doctrine_Table
   public static function getAllLanguageCodesAsArray($pActive = null) {
     $lLangArray = array();
     $lOriginalLanguages = self::getAllLanguages($pActive);
-     foreach ($lOriginalLanguages as $lLang) {
+
+    foreach ($lOriginalLanguages as $lLang) {
       $lLangArray[] = $lLang->getLang();
     }
+
     return $lLangArray;
   }
 
