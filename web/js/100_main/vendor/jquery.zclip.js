@@ -1,5 +1,6 @@
 /**
  * @combine widget
+ * @combine statistics
  * http://www.steamdev.com/zclip/js/jquery.zclip.js
  */
 

@@ -77,8 +77,7 @@ var DynStyleCode = {
   init: function() {
     debug.log("[DynStyleCode][init]");     
     DynStyleCode.aClipFlashPath = Configurator.aClipFlashPath;
-    ZeroClipboard.setMoviePath(DynStyleCode.aClipFlashPath);
-    DynStyleCode.initClipboard();  
+    //ZeroClipboard.setMoviePath(DynStyleCode.aClipFlashPath);
   },    
     
   /**
@@ -107,6 +106,7 @@ var DynStyleCode = {
     debug.log("[DynStyleCode][show]");
     jQuery('#your_code').empty();
     jQuery('#your_code').val(pResponse.iframe);    
+    DynStyleCode.initClipboard();  
   },
   
   /**
@@ -114,28 +114,11 @@ var DynStyleCode = {
    * @author KM
    */
   initClipboard: function() {
-    debug.log("[DynStyleCode][initClipboard]");   
-    
-    //get the users flash-version
-    var lPlayerVersion = swfobject.getFlashPlayerVersion();
-    debug.log('playerversion: '+lPlayerVersion.major);
-    //jQuery.fx.off = true;
-    //if the version is greater than 10, show the button and add the ctc-functionality
-    if(lPlayerVersion.major >= 10) {
-      var lClip = new ZeroClipboard.Client();
-      lClip.addEventListener('mouseOver', function(client){
-        lClip.setText(jQuery('#your_code').val());      
-      });
-      lClip.setHandCursor( true );
-      lClip.setCSSEffects( true );
-      lClip.glue( 'd_clip_button', 'd_clip_container');
-    } else {
-      //if not right flash version: hide the button
-      jQuery('#d_clip_container').hide();
-    }
-    jQuery('#d_clip_container').live('click', function() {
-      return false;
-    });    
+    debug.log("[DynStyleCode][initClipboard]"); 
+    jQuery('a#d_clip_container').zclip({
+      path: DynStyleCode.aClipFlashPath,
+      copy: jQuery('#your_code').val()
+    });
   }  
 };
 
