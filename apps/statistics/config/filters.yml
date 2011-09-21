@@ -6,6 +6,8 @@ remember_me:
   class: sfGuardRememberMeFilter
 security:
   class: StatisticsSecurityFilter
+culture:                 # Filters need a unique name
+  class: LanguageFilter
 
 # insert your own filters here
 
