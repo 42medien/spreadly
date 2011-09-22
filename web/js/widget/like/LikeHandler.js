@@ -1,5 +1,5 @@
 /**
- * @combine widget
+ * @nocombine widget
  */
 
 /**
@@ -29,9 +29,9 @@ var WidgetLikeForm = {
      */
     beforeSend: function(){
       debug.log("[WidgetLikeForm][beforeSend]");        
-      OnLoadGrafic.showGrafic();
       jQuery('#like-oi-list').hide();   
       jQuery('#popup-like-button').hide();
+      jQuery('<img id="like-ajax-loader" src="/img/popup/like-ajax-loader.gif" />').appendTo('#like-submit');
     },
     
     /**

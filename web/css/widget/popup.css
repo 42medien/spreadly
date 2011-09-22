@@ -571,3 +571,9 @@ div#like-submit #like-oi-list li ul li a:hover {
   left:2px;
   background-position: -1px -1px;*/
 }
+
+#like-ajax-loader{
+  width: 284px;
+  height: 30px;
+  margin: 5px 0 0 85px;
+}
