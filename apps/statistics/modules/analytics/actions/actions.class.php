@@ -35,11 +35,11 @@ class analyticsActions extends sfActions {
      $this->pType = $request->getParameter('type', 'url_activities');
   }
 
- /**
-  * Executes index action
-  *
-  * @param sfRequest $request A request object
-  */
+  /**
+   * Executes index action
+   *
+   * @param sfRequest $request A request object
+   */
   public function executeIndex(sfWebRequest $request) {
     $this->getResponse()->setSlot('js_document_ready', $this->getPartial('analytics/init_analytics.js'));
   	$this->pVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
