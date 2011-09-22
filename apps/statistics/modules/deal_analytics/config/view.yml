@@ -2,6 +2,3 @@ all:
   javascripts:  
     - 100_main/vendor/200_highcharts-2.1_alpha.src.js
     - 100_main/vendor/201_exporting-2.1_alpha.js
-    
-  components:
-    no_domain_user: [system, no_domain_user] 
