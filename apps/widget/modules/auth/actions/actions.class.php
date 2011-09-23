@@ -40,6 +40,7 @@ class authActions extends sfActions {
   }
 
   public function executeComplete_signin(sfWebRequest $request) {
+    $delay = 0;
     if ($lToken = $request->getParameter('oauth_token')) {
       $lToken = OauthRequestTokenTable::retrieveByTokenKey($lToken);
       $lToken = $lToken->toOAuthToken();
@@ -59,11 +60,15 @@ class authActions extends sfActions {
         $lObject->addIdentifier($this->getUser()->getUser(), $lToken);
       } catch (Exception $e) {
         $this->getUser()->setFlash("error", $e->getMessage(), true);
+        $delay = 5000;
+        $this->errorMsg = $e->getMessage();
       }
     } else {
       $lUser = $lObject->doSignin($this->getUser(), $lToken);
       $this->getUser()->signIn($lUser);
     }
+
+    $this->delay = $delay;
 
     $this->setLayout(false);
   }
