@@ -12,4 +12,10 @@
  */
 class PaymentMethod extends BasePaymentMethod
 {
+  public function __toString() {
+    return $this->getCompany()."<br/>".
+           $this->getContactName()."<br/>".
+           $this->getAddress()."<br/>".
+           $this->getZip()." ".$this->getCity();
+  }
 }

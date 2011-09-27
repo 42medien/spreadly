@@ -9,16 +9,6 @@
 </th>
 <?php end_slot(); ?>
 <?php include_slot('sf_admin.current_header') ?><?php slot('sf_admin.current_header') ?>
-<th class="sf_admin_foreignkey sf_admin_list_th_domain_profile_id">
-  <?php if ('domain_profile_id' == $sort[0]): ?>
-    <?php echo link_to('Domain', '@deal', array('query_string' => 'sort=domain_profile_id&sort_type='.($sort[1] == 'asc' ? 'desc' : 'asc'))) ?>
-    <?php echo image_tag(sfConfig::get('sf_admin_module_web_dir').'/images/'.$sort[1].'.png', array('alt' => __($sort[1], array(), 'sf_admin'), 'title' => __($sort[1], array(), 'sf_admin'))) ?>
-  <?php else: ?>
-    <?php echo link_to('Domain', '@deal', array('query_string' => 'sort=domain_profile_id&sort_type=asc')) ?>
-  <?php endif; ?>
-</th>
-<?php end_slot(); ?>
-<?php include_slot('sf_admin.current_header') ?><?php slot('sf_admin.current_header') ?>
 <th class="sf_admin_foreignkey sf_admin_list_th_sf_guard_user_id">
   <?php if ('sf_guard_user_id' == $sort[0]): ?>
     <?php echo link_to('User', '@deal', array('query_string' => 'sort=sf_guard_user_id&sort_type='.($sort[1] == 'asc' ? 'desc' : 'asc'))) ?>
@@ -76,6 +66,11 @@
   <?php else: ?>
     <?php echo link_to(__('Deal state', array(), 'messages'), '@deal', array('query_string' => 'sort=deal_state&sort_type=asc')) ?>
   <?php endif; ?>
+</th>
+<?php end_slot(); ?>
+<?php include_slot('sf_admin.current_header') ?><?php slot('sf_admin.current_header') ?>
+<th class="sf_admin_enum sf_admin_list_th_payment_method">
+  Payment Method
 </th>
 <?php end_slot(); ?>
 <?php include_slot('sf_admin.current_header') ?>

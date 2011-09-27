@@ -1,9 +1,6 @@
 <td class="sf_admin_text sf_admin_list_td_id">
   <?php echo link_to($deal->getId(), 'deal_edit', $deal) ?>
 </td>
-<td class="sf_admin_foreignkey sf_admin_list_td_domain_profile_id">
-  <?php echo $deal->getDomainProfile()->state()==Doctrine_Record::STATE_TDIRTY ? 'Pool' : link_to($deal->getDomainProfile()->getUrl(), $deal->getDomainProfile()->getDomain()) ?>
-</td>
 <td class="sf_admin_foreignkey sf_admin_list_td_sf_guard_user_id">
   <?php echo mail_to($deal->getSfGuardUser()->getEmailAddress()."?subject=".$deal->getSummary(), 'Id: '.$deal->getSfGuardUserId().' - '. $deal->getSfGuardUser()->getEmailAddress()) ?>
 </td>
@@ -21,4 +18,7 @@
 </td>
 <td class="sf_admin_enum sf_admin_list_td_state">
   <?php echo $deal->getState() ?>
+</td>
+<td class="sf_admin_foreignkey sf_admin_list_td_domain_profile_id">
+  <?php echo $deal->getPaymentMethod() ?>
 </td>
