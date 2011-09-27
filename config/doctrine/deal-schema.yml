@@ -7,7 +7,7 @@ Deal:
       column: deal_state
       initial: initial
       states: ['initial', 'campaign_completed', 'share_completed', 'coupon_completed', 'billing_completed', 'submitted', 'active', 'expired']
-      events: 
+      events:
         reset_to_campaign:
           from: ['campaign_completed', 'share_completed', 'coupon_completed', 'billing_completed']
           to: initial
@@ -57,7 +57,7 @@ Deal:
     pool_hits:
       type: integer(4)
       default: 0
-      
+
     # Conditions
     email_required:
       type: boolean
@@ -66,39 +66,40 @@ Deal:
     # Motivation stuff
     motivation_title: string(255)
     motivation_text: string
-    
+
     # Share stuff
     spread_title: string(255)
     spread_text: string
     spread_url: string(255)
     spread_img: string(255)
     spread_tos: string(255)
-    
+
     # Coupon stuff
     coupon_type:
       type: enum
       length: 255
       default: code
-      values: ['code', 'url', 'download']
+      values: ['code', 'unique_code', 'url', 'download']
     coupon_title: string(255)
     coupon_text: string
     coupon_code: string(255)
     coupon_url: string(255)
+    coupon_webhook_url: string(255)
     coupon_redeem_url: string(255)
-    
+
     # Billing information
     billing_type:
       type: enum
       length: 255
       default: like
       values: ['like', 'media_penetration']
-    target_quantity: 
+    target_quantity:
       type: integer(4)
       default: 0
-    actual_quantity: 
+    actual_quantity:
       type: integer(4)
       default: 0
-  
+
   # Relations
     sf_guard_user_id: integer
     payment_method_id: integer
