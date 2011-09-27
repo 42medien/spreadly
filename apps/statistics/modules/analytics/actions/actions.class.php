@@ -32,7 +32,7 @@ class analyticsActions extends sfActions {
     $this->pDateTo = $request->getParameter('date-to', date('Y-m-d'));
     $this->pCommunity = $request->getParameter('com', 'all');
     $this->pUrl = str_replace(" ", "+", urldecode($request->getParameter('url', null)));
-     $this->pType = $request->getParameter('type', 'url_activities');
+    $this->pType = $request->getParameter('type', 'url_activities');
   }
 
   /**
