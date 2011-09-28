@@ -16,5 +16,11 @@ class dealsActions extends sfActions
   * @param sfRequest $request A request object
   */
   public function executeIndex(sfWebRequest $request) {
+    $this->getResponse()->setContentType('application/json');
+    // first api only accepts posts
+    if ($request->getMethod() != "POST") {
+      $this->getResponse()->setStatusCode(405);
+      return $this->renderPartial("wrong_method");
+    }
   }
 }
