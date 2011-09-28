@@ -42,6 +42,8 @@ class dealsActions extends sfActions
       return $this->renderPartial("authentication_error");
     }
 
+    // @todo testen ob die preise in der user-tabelle hinterlegt sind
 
+    // @todo deal anlegen und verifizieren
   }
 }
