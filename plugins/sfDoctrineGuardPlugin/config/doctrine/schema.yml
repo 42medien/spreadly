@@ -77,6 +77,8 @@ sfGuardUser:
       default: false
     last_login:
       type: timestamp
+    access_token:
+      type: string(255)
   indexes:
     is_active_idx:
       fields: [is_active]
