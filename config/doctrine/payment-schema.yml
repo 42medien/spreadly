@@ -15,8 +15,9 @@ PaymentMethod:
     contact_name: string(255)
     address: string(255)
     city: string(255)
-    zip: string(255) 
-    
+    zip: string(255)
+    primary: boolean
+
   # Relations
     sf_guard_user_id: integer
   relations:
