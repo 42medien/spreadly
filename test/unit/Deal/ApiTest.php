@@ -47,19 +47,28 @@ class DealTest extends BaseTestCase {
     UrlUtils::getUrlContent("http://api.spreadly.local/deals");
   }
 
-  public function testValidRequest() {
+  /**
+   * @expectedException HttpException
+   */
+  public function testMissingAccessToken() {
     $data = UrlUtils::getUrlContent("http://api.spreadly.local/deals", UrlUtils::HTTP_POST, self::$VALID_TEST_JSON);
+  }
+
+  public function testValidRequest() {
+    $user = Doctrine_Core::getTable('sfGuardUser')->createQuery('u')->where('u.is_active = ?', true)->fetchOne();
+
+    $data = UrlUtils::getUrlContent("http://api.spreadly.local/deals?access_token=".$user->getAccessToken(), UrlUtils::HTTP_POST, self::$VALID_TEST_JSON);
 
     $data = json_decode($data, true);
 
     $this->assertEquals("200", $data['success']['code']);
   }
-  
+
   public function testDealFromJson() {
     $d = new Deal();
     $d->fromJson(self::$VALID_TEST_JSON);
     $data = json_decode(self::$VALID_TEST_JSON, true);
-    
+
     $this->assertEquals($data['name'], $d->getName());
     $this->assertEquals($data['motivation']['title'], $d->getMotivationTitle());
     $this->assertEquals($data['motivation']['text'], $d->getMotivationText());

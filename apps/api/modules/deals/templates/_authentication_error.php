@@ -1,0 +1,1 @@
+<?php echo json_encode(array("error" => array("code" => 401, "message" => "Access denied"))); ?>

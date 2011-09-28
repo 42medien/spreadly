@@ -23,5 +23,25 @@ class dealsActions extends sfActions
       $this->getResponse()->setStatusCode(405);
       return $this->renderPartial("wrong_method");
     }
+
+    $access_token = $request->getParameter("access_token");
+
+    // check access token
+    if (!$access_token) {
+      $this->getResponse()->setStatusCode(401);
+      return $this->renderPartial("authentication_error");
+    }
+
+    $user = Doctrine_Core::getTable('sfGuardUser')->createQuery('u')
+      ->where('u.access_token = ?', $access_token)
+      ->addWhere('u.is_active = ?', true)->fetchOne();
+
+    // check access token
+    if (!$user) {
+      $this->getResponse()->setStatusCode(401);
+      return $this->renderPartial("authentication_error");
+    }
+
+
   }
 }
