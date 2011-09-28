@@ -164,4 +164,30 @@ class Deal extends BaseDeal {
 
     return $array;
   }
+  
+  public function fromJson($json) {
+    $data = json_decode($json, true);
+    
+    if(array_key_exists('name', $data)) $this->setName($data['name']);
+    
+    if(array_key_exists('motivation', $data) && array_key_exists('title', $data['motivation'])) $this->setMotivationTitle($data['motivation']['title']);
+    if(array_key_exists('motivation', $data) && array_key_exists('text', $data['motivation'])) $this->setMotivationText($data['motivation']['text']);
+
+    if(array_key_exists('spread', $data) && array_key_exists('title', $data['spread'])) $this->setSpreadTitle($data['spread']['title']);
+    if(array_key_exists('spread', $data) && array_key_exists('text', $data['spread'])) $this->setSpreadText($data['spread']['text']);
+    if(array_key_exists('spread', $data) && array_key_exists('url', $data['spread'])) $this->setSpreadUrl($data['spread']['url']);
+    if(array_key_exists('spread', $data) && array_key_exists('img', $data['spread'])) $this->setSpreadImg($data['spread']['img']);
+    if(array_key_exists('spread', $data) && array_key_exists('tos', $data['spread'])) $this->setSpreadTos($data['spread']['tos']);
+
+    if(array_key_exists('coupon', $data) && array_key_exists('type', $data['coupon'])) $this->setCouponType($data['coupon']['type']);
+    if(array_key_exists('coupon', $data) && array_key_exists('title', $data['coupon'])) $this->setCouponTitle($data['coupon']['title']);
+    if(array_key_exists('coupon', $data) && array_key_exists('text', $data['coupon'])) $this->setCouponText($data['coupon']['text']);
+    if(array_key_exists('coupon', $data) && array_key_exists('code', $data['coupon'])) $this->setCouponCode($data['coupon']['code']);
+    if(array_key_exists('coupon', $data) && array_key_exists('url', $data['coupon'])) $this->setCouponUrl($data['coupon']['url']);
+    if(array_key_exists('coupon', $data) && array_key_exists('webhook_url', $data['coupon'])) $this->setCouponWebhookUrl($data['coupon']['webhook_url']);
+    if(array_key_exists('coupon', $data) && array_key_exists('redeem_url', $data['coupon'])) $this->setCouponRedeemUrl($data['coupon']['redeem_url']);
+
+    if(array_key_exists('billing', $data) && array_key_exists('type', $data['billing'])) $this->setBillingType($data['billing']['type']);
+    if(array_key_exists('billing', $data) && array_key_exists('target_quantity', $data['billing'])) $this->setTargetQuantity($data['billing']['target_quantity']);
+  }
 }

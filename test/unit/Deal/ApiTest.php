@@ -8,37 +8,37 @@ require_once dirname(__file__).'/../../lib/BaseTestCase.php';
 
 class DealTest extends BaseTestCase {
 
-  private static $VALID_TEST_JSON = "{
-      name: 'Kampagne XY',
+  private static $VALID_TEST_JSON = '{
+     "name": "Kampagne XY",
 
-      motivation: {
-        title: 'Toll alles für umme',
-        text: 'Blablabla'
-      },
+     "motivation": {
+      "title": "Toll alles für umme",
+      "text": "Blablabla"
+     },
 
-      spread: {
-        title: 'Guckt mal Leute, supidupi.',
-        text: 'Blablabla',
-        url: 'http://share.this.com',
-        img: 'http://share.this.com/spread.jpg',
-        tos: 'http://share.this.com/tos'
-      },
+     "spread": {
+      "title": "Guckt mal Leute, supidupi.",
+      "text": "Blablabla",
+      "url": "http://share.this.com",
+      "img": "http://share.this.com/spread.jpg",
+      "tos": "http://share.this.com/tos"
+     },
 
-      coupon: {
-        type: 'code|unique_code|url|download',
-        title: 'Hier ist dein Deal',
-        text: 'Blablabla',
-        code: 'XYZABC',
-        url: '',
-        webhook_url: '',
-        redeem_url: 'http://share.this.com/redeem'
-      },
+     "coupon": {
+      "type": "code|unique_code|url|download",
+      "title": "Hier ist dein Deal",
+      "text": "Blablabla",
+      "code": "XYZABC",
+      "url": "",
+      "webhook_url": "",
+      "redeem_url": "http://share.this.com/redeem"
+     },
 
-      billing: {
-        type: 'like|media_penetration',
-        target_quantity: 10
-      }
-    }";
+     "billing": {
+      "type": "like|media_penetration",
+      "target_quantity": 10
+     }
+    }';
 
   /**
    * @expectedException HttpException
@@ -53,6 +53,29 @@ class DealTest extends BaseTestCase {
     $data = json_decode($data, true);
 
     $this->assertEquals("200", $data['success']['code']);
+  }
+  
+  public function testDealFromJson() {
+    $d = new Deal();
+    $d->fromJson(self::$VALID_TEST_JSON);
+    $data = json_decode(self::$VALID_TEST_JSON, true);
+    
+    $this->assertEquals($data['name'], $d->getName());
+    $this->assertEquals($data['motivation']['title'], $d->getMotivationTitle());
+    $this->assertEquals($data['motivation']['text'], $d->getMotivationText());
+    $this->assertEquals($data['spread']['title'], $d->getSpreadTitle());
+    $this->assertEquals($data['spread']['text'], $d->getSpreadText());
+    $this->assertEquals($data['spread']['url'], $d->getSpreadUrl());
+    $this->assertEquals($data['spread']['img'], $d->getSpreadImg());
+    $this->assertEquals($data['spread']['tos'], $d->getSpreadTos());
+    $this->assertEquals($data['coupon']['type'], $d->getCouponType());
+    $this->assertEquals($data['coupon']['title'], $d->getCouponTitle());
+    $this->assertEquals($data['coupon']['text'], $d->getCouponText());
+    $this->assertEquals($data['coupon']['code'], $d->getCouponCode());
+    $this->assertEquals($data['coupon']['url'], $d->getCouponUrl());
+    $this->assertEquals($data['coupon']['redeem_url'], $d->getCouponRedeemUrl());
+    $this->assertEquals($data['billing']['type'], $d->getBillingType());
+    $this->assertEquals($data['billing']['target_quantity'], $d->getTargetQuantity());
   }
 }
 ?>
