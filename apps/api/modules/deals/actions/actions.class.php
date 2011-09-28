@@ -17,6 +17,7 @@ class dealsActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
+    $this->setLayout(false);
     // first api only accepts posts
     if ($request->getMethod() != "POST") {
       $this->getResponse()->setStatusCode(405);
