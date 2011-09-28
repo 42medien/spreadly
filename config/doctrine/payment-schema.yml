@@ -16,7 +16,7 @@ PaymentMethod:
     address: string(255)
     city: string(255)
     zip: string(255)
-    primary: boolean
+    primary_method: boolean
 
   # Relations
     sf_guard_user_id: integer
