@@ -79,6 +79,10 @@ sfGuardUser:
       type: timestamp
     access_token:
       type: string(255)
+    api_price_like:
+      type: float
+    api_price_media_penetration:
+      type: float
   indexes:
     is_active_idx:
       fields: [is_active]
