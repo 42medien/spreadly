@@ -230,21 +230,9 @@ class Doctrine_DataDict_Mysql extends Doctrine_DataDict
             case 'timestamp':
                 return 'DATETIME';
             case 'float':
-                if( ! empty($field['length']) )
-                {
-                  return 'FLOAT';
-                } else {
-                  $scale = !empty($field['scale']) ? $field['scale'] : $this->conn->getAttribute(Doctrine_Core::ATTR_DECIMAL_PLACES);
-                  return 'FLOAT('.$length.', '.$scale.')';
-                }
+                return 'FLOAT';
             case 'double':
-                if( ! empty($field['length']) )
-                {
-                  return 'DOUBLE';
-                } else {
-                  $scale = !empty($field['scale']) ? $field['scale'] : $this->conn->getAttribute(Doctrine_Core::ATTR_DECIMAL_PLACES);
-                  return 'DOUBLE('.$length.', '.$scale.')';
-                }
+              return 'DOUBLE';
             case 'decimal':
                 $length = !empty($field['length']) ? $field['length'] : 18;
                 $scale = !empty($field['scale']) ? $field['scale'] : $this->conn->getAttribute(Doctrine_Core::ATTR_DECIMAL_PLACES);
