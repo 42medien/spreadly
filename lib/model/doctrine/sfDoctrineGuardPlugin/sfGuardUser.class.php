@@ -18,8 +18,9 @@ class sfGuardUser extends PluginsfGuardUser
 
   public function getApiPaymentMethod() {
     $lQuery = Doctrine_Query::create()
-      ->from('sfGuardUser u')
-      ->where('u.primary_method = ?', 1);
+      ->from('PaymentMethod pm')
+      ->where('pm.primary_method = ?', 1)
+      ->andWhere('pm.user_id = ?', $this->getId());
 
     return $query->fetchOne();
   }
