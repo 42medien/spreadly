@@ -42,7 +42,10 @@ class dealsActions extends sfActions
       return $this->renderPartial("authentication_error");
     }
 
-    // @todo testen ob die preise in der user-tabelle hinterlegt sind
+    if (!$user->getApiPriceLike() || !$user->getApiPriceMediaPenetration()) {
+      $this->getResponse()->setStatusCode(403);
+      return $this->renderPartial("setup_failure");
+    }
 
     // @todo deal anlegen und verifizieren
   }
