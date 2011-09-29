@@ -51,5 +51,7 @@ class dealsActions extends sfActions
     // @todo deal anlegen und verifizieren
 
     $json_content = file_get_contents("php://input");
+
+    sfContext::getInstance()->getLogger()->notice($json_content);
   }
 }
