@@ -10,7 +10,9 @@ sfGuardUser:
     last_login: null
     created_at: '2010-11-26 10:29:26'
     updated_at: '2010-11-26 10:29:26'
-    access_token: <?php echo uniqid("access_", true) ?>
+    access_token: <?php echo uniqid("access_", true)."\n"; ?>
+    api_price_like: 0.5
+    api_price_media_penetration: 0.0005
 
 sfGuardGroup:
   Group_admin:
