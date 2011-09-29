@@ -19,7 +19,7 @@ class sfGuardUser extends PluginsfGuardUser
   public function getApiPaymentMethod() {
     $query = Doctrine_Query::create()
       ->from('PaymentMethod pm')
-      ->where('pm.primary_method = ?', 1)
+      ->where('pm.api_method = ?', 1)
       ->andWhere('pm.sf_guard_user_id = ?', $this->getId());
 
     return $query->fetchOne();
