@@ -230,13 +230,23 @@ class Doctrine_DataDict_Mysql extends Doctrine_DataDict
             case 'timestamp':
                 return 'DATETIME';
             case 'float':
-                $length = !empty($field['length']) ? $field['length'] : 18;
-                $scale = !empty($field['scale']) ? $field['scale'] : $this->conn->getAttribute(Doctrine_Core::ATTR_DECIMAL_PLACES);
-                return 'FLOAT('.$length.', '.$scale.')';
+                if($this->conn->getAttribute(Doctrine_Core::ATTR_USE_NATIVE_FLOAT))
+                {
+                  return 'FLOAT';
+                } else {
+                  $length = !empty($field['length']) ? $field['length'] : 18;
+                  $scale = !empty($field['scale']) ? $field['scale'] : $this->conn->getAttribute(Doctrine_Core::ATTR_DECIMAL_PLACES);
+                  return 'FLOAT('.$length.', '.$scale.')';
+                }
             case 'double':
-                $length = !empty($field['length']) ? $field['length'] : 18;
-                $scale = !empty($field['scale']) ? $field['scale'] : $this->conn->getAttribute(Doctrine_Core::ATTR_DECIMAL_PLACES);
-                return 'DOUBLE('.$length.', '.$scale.')';
+                if($this->conn->getAttribute(Doctrine_Core::ATTR_USE_NATIVE_DOUBLE))
+                {
+                  return 'DOUBLE';
+                } else {
+                  $length = !empty($field['length']) ? $field['length'] : 18;
+                  $scale = !empty($field['scale']) ? $field['scale'] : $this->conn->getAttribute(Doctrine_Core::ATTR_DECIMAL_PLACES);
+                  return 'DOUBLE('.$length.', '.$scale.')';
+                }
             case 'decimal':
                 $length = !empty($field['length']) ? $field['length'] : 18;
                 $scale = !empty($field['scale']) ? $field['scale'] : $this->conn->getAttribute(Doctrine_Core::ATTR_DECIMAL_PLACES);
@@ -503,12 +513,12 @@ class Doctrine_DataDict_Mysql extends Doctrine_DataDict
 
         $notnull  = (isset($field['notnull'])  && $field['notnull'])  ? ' NOT NULL' : '';
         $unsigned = (isset($field['unsigned']) && $field['unsigned']) ? ' UNSIGNED' : '';
-        $comment  = (isset($field['comment']) && $field['comment']) 
+        $comment  = (isset($field['comment']) && $field['comment'])
             ? " COMMENT '" . $field['comment'] . "'" : '';
 
         $name = $this->conn->quoteIdentifier($name, true);
 
-        return $name . ' ' . $this->getNativeDeclaration($field) . $unsigned 
+        return $name . ' ' . $this->getNativeDeclaration($field) . $unsigned
             . $default . $unique . $notnull . $autoinc . $comment;
     }
 }

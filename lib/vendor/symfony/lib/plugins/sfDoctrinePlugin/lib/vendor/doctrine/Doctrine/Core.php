@@ -180,7 +180,7 @@ class Doctrine_Core
     const ATTR_NAME_PREFIX                  = 121;
     const ATTR_CREATE_TABLES                = 122;
     const ATTR_COLL_LIMIT                   = 123;
-                                        
+
     const ATTR_CACHE                        = 150;
     const ATTR_RESULT_CACHE                 = 150;
     const ATTR_CACHE_LIFESPAN               = 151;
@@ -210,6 +210,8 @@ class Doctrine_Core
     const ATTR_MODEL_CLASS_PREFIX           = 178;
     const ATTR_TABLE_CLASS_FORMAT           = 179;
     const ATTR_MAX_IDENTIFIER_LENGTH        = 180;
+    const ATTR_USE_NATIVE_FLOAT             = 181;
+    const ATTR_USE_NATIVE_DOUBLE            = 182;
 
     /**
      * LIMIT CONSTANTS
@@ -347,12 +349,12 @@ class Doctrine_Core
      * HYDRATE_NONE
      */
     const HYDRATE_NONE              = 4;
-    
+
     /**
      * HYDRATE_SCALAR
      */
     const HYDRATE_SCALAR            = 5;
-    
+
     /**
      * HYDRATE_SINGLE_SCALAR
      */
@@ -362,14 +364,14 @@ class Doctrine_Core
      * HYDRATE_ON_DEMAND
      */
     const HYDRATE_ON_DEMAND         = 7;
-    
+
     /**
-     * HYDRATE_ARRAY_HIERARCHY     
+     * HYDRATE_ARRAY_HIERARCHY
      */
     const HYDRATE_ARRAY_HIERARCHY   = 8;
-    
+
     /**
-     * HYDRATE_RECORD_HIERARCHY     
+     * HYDRATE_RECORD_HIERARCHY
      */
     const HYDRATE_RECORD_HIERARCHY  = 9;
 
@@ -398,9 +400,9 @@ class Doctrine_Core
      */
     const VALIDATE_ALL              = 7;
 
-    /** 
+    /**
      * VALIDATE_USER
-     */ 
+     */
     const VALIDATE_USER             = 8;
 
     /**
@@ -452,7 +454,7 @@ class Doctrine_Core
      * MODEL_LOADING_PEAR
      *
      * Constant for pear model loading
-     * Will simply store the path passed to Doctrine_Core::loadModels() 
+     * Will simply store the path passed to Doctrine_Core::loadModels()
      * and Doctrine_Core::autoload() will check there
      */
     const MODEL_LOADING_PEAR = 3;
@@ -563,7 +565,7 @@ class Doctrine_Core
     /**
      * Set the path to autoload extension classes from
      *
-     * @param string $extensionsPath 
+     * @param string $extensionsPath
      * @return void
      */
     public static function setExtensionsPath($extensionsPath)
@@ -582,7 +584,7 @@ class Doctrine_Core
     }
 
     /**
-     * Get all the loaded extension classes 
+     * Get all the loaded extension classes
      *
      * @return array $extensionClasses
      */
@@ -605,7 +607,7 @@ class Doctrine_Core
      * Set the directory where your models are located for PEAR style
      * naming convention autoloading.
      *
-     * @param string $directory 
+     * @param string $directory
      * @return void
      */
     public static function setModelsDirectory($directory)
@@ -651,10 +653,10 @@ class Doctrine_Core
 
                 $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir),
                                                         RecursiveIteratorIterator::LEAVES_ONLY);
-                                                        
+
                 foreach ($it as $file) {
                     $e = explode('.', $file->getFileName());
-                    
+
                     if (end($e) === 'php' && strpos($file->getFileName(), '.inc') === false) {
                         if ($modelLoading == Doctrine_Core::MODEL_LOADING_PEAR) {
                             $className = str_replace($dir . DIRECTORY_SEPARATOR, null, $file->getPathName());
@@ -677,10 +679,10 @@ class Doctrine_Core
                                 $declaredBefore = get_declared_classes();
                                 require_once($file->getPathName());
                                 $declaredAfter = get_declared_classes();
-                                
+
                                 // Using array_slice because array_diff is broken is some PHP versions
                                 $foundClasses = array_slice($declaredAfter, count($declaredBefore));
-                                
+
                                 if ($foundClasses) {
                                     foreach ($foundClasses as $className) {
                                         if (self::isValidModelClass($className)) {
@@ -690,7 +692,7 @@ class Doctrine_Core
                                         }
                                     }
                                 }
-                                
+
                                 $previouslyLoaded = array_keys(self::$_loadedModelFiles, $file->getPathName());
 
                                 if ( ! empty($previouslyLoaded)) {
@@ -705,9 +707,9 @@ class Doctrine_Core
                 }
             }
         }
-        
+
         asort($loadedModels);
-        
+
         return $loadedModels;
     }
 
