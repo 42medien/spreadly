@@ -165,9 +165,7 @@ class Deal extends BaseDeal {
     return $array;
   }
   
-  public function fromJson($json) {
-    $data = json_decode($json, true);
-    
+  public function fromApiArray($data) {
     if(array_key_exists('name', $data)) $this->setName($data['name']);
     
     if(array_key_exists('motivation', $data) && array_key_exists('title', $data['motivation'])) $this->setMotivationTitle($data['motivation']['title']);

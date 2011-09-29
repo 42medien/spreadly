@@ -29,8 +29,8 @@ class DealTest extends BaseTestCase {
       "title": "Hier ist dein Deal",
       "text": "Blablabla",
       "code": "XYZABC",
-      "url": "",
-      "webhook_url": "",
+      "url": "http://share.this.com/url",
+      "webhook_url": "http://share.this.com/webhook",
       "redeem_url": "http://share.this.com/redeem"
      },
 
@@ -66,8 +66,8 @@ class DealTest extends BaseTestCase {
 
   public function testDealFromJson() {
     $d = new Deal();
-    $d->fromJson(self::$VALID_TEST_JSON);
     $data = json_decode(self::$VALID_TEST_JSON, true);
+    $d->fromApiArray($data);
 
     $this->assertEquals($data['name'], $d->getName());
     $this->assertEquals($data['motivation']['title'], $d->getMotivationTitle());
@@ -82,6 +82,7 @@ class DealTest extends BaseTestCase {
     $this->assertEquals($data['coupon']['text'], $d->getCouponText());
     $this->assertEquals($data['coupon']['code'], $d->getCouponCode());
     $this->assertEquals($data['coupon']['url'], $d->getCouponUrl());
+    $this->assertEquals($data['coupon']['webhook_url'], $d->getCouponWebhookUrl());
     $this->assertEquals($data['coupon']['redeem_url'], $d->getCouponRedeemUrl());
     $this->assertEquals($data['billing']['type'], $d->getBillingType());
     $this->assertEquals($data['billing']['target_quantity'], $d->getTargetQuantity());
