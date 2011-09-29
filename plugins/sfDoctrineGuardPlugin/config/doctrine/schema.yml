@@ -80,11 +80,9 @@ sfGuardUser:
     access_token:
       type: string(255)
     api_price_like:
-      type: decimal(18)
-      scale: 5
+      type: float
     api_price_media_penetration:
-      type: decimal(18)
-      scale: 5
+      type: float
   indexes:
     is_active_idx:
       fields: [is_active]
