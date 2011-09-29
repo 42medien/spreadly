@@ -43,7 +43,7 @@ class dealsActions extends sfActions
     }
 
     // @todo check if user has a deal address
-    if (!$user->getApiPriceLike() || !$user->getApiPriceMediaPenetration()) {
+    if (!$user->getApiPriceLike() || !$user->getApiPriceMediaPenetration() || !$user->getApiPaymentMethod()) {
       $this->getResponse()->setStatusCode(403);
       return $this->renderPartial("setup_failure");
     }
