@@ -42,7 +42,7 @@ class dealsActions extends sfActions
       return $this->renderPartial("authentication_error");
     }
 
-    // @todo check if user has a deal address
+    // check if account was setup properly
     if (!$user->getApiPriceLike() || !$user->getApiPriceMediaPenetration() || !$user->getApiPaymentMethod()) {
       $this->getResponse()->setStatusCode(403);
       return $this->renderPartial("setup_failure");
