@@ -1119,3 +1119,12 @@ ul#subnavigation li a.active{
   text-decoration: underline;
 }
 
+/***************advertiser**********************/
+.service_content.advertiser_content{
+  height: 165px;
+}
+
+.service_content.advertiser_content a{
+  font-weight: bold;
+  color: #588199;
+}

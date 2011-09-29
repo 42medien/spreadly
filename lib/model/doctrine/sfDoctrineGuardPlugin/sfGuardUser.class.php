@@ -30,4 +30,19 @@ class sfGuardUser extends PluginsfGuardUser
       $this->setAccessToken(uniqid($this->getUsername()."_", true));
     }
   }
+
+
+  public function hasApiMethod() {
+    $lCount = Doctrine_Query::create()
+      ->from('PaymentMethod pm')
+      ->where('pm.sf_guard_user_id = ?', $this->getId())
+      ->andWhere('pm.api_method = ?', true)
+      ->count();
+
+    if ($lCount > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

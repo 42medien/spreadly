@@ -7,7 +7,7 @@
     <meta name="description" content="Spread.ly consists of sharing button widgets that enable users to share content into a wide range of social networks simultanously. Besides that, Spread.ly offers a sophisticated functionality to reward users for their likes." />
     <meta name="keywords" content="sharing,sharebutton,like,likebutton,deal,dealbutton,facebook,linkedin,twitter,buzz" />
     <link rel="stylesheet" type="text/css" href="/css/widget/popup.css" media="screen" />
-    <!-- link rel="stylesheet" type="text/css" href="/css/widget/Button.css" media="screen" / -->
+    <link rel="stylesheet" type="text/css" href="/css/widget/popup-grey.css" media="screen" />
   	<link rel="shortcut icon" href="https://s3.amazonaws.com/spread.ly/img/favicon.ico" type="image/x-icon">
 
     <!--[if lt IE 9]>

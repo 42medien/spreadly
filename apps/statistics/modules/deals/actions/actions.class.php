@@ -32,7 +32,6 @@ class dealsActions extends sfActions
     $this->pDeal = new Deal();
 		$this->pForm = new CreateDealForm($this->pDeal);
 
-		//@todo statemachine-moped einbauen....
 		//check, if there is a deal
 		if($this->pDealId) {
 			$this->pDeal = DealTable::getInstance()->find($this->pDealId);

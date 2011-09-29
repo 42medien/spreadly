@@ -45,7 +45,7 @@
     	</a>
     </li>
     <li>
-    	<a href="<?php echo url_for('@deals'); ?>" title="Analytics" class="<?php if($module=='deals' || $module=='deal_analytics') { echo "active";} ?>">
+    	<a href="<?php echo url_for('@advertiser'); ?>" title="Advertiser Overview" class="<?php if($module=='deals' || $module=='deal_analytics' || $module=='advertiser') { echo "active";} ?>">
     		<span><?php echo __('Advertiser'); ?></span>
     	</a>
     </li>
@@ -78,7 +78,7 @@
 	  </ul>
 	 <?php } ?>
 
-  <?php if($module=='deals' || $module=='deal_analytics') { ?>
+  <?php if($module=='deals' || $module=='deal_analytics' || $module=='advertiser') { ?>
 	  <ul id="subnavigation">
 	    <li>
 	    	<a href="<?php echo url_for('@deals'); ?>" title="Deals" class="<?php if($module=='deals') { echo "active";} echo $lColorbox; ?>">

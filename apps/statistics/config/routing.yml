@@ -85,6 +85,14 @@ get_analytics_content:
 deals:
   url:   /deals/campaign
   param: { module: deals, action: step_campaign }
+  
+dealapi:  
+  url:   /advertiser/dealapi
+  param: { module: advertiser, action: apply_api }
+    
+advertiser:
+  url:   /advertiser/index
+  param: { module: advertiser, action: index }
 
 get_create_index:
   url:   /deals/get_create_index
