@@ -24,4 +24,10 @@ class sfGuardUser extends PluginsfGuardUser
 
     return $query->fetchOne();
   }
+
+  public function preSave($event) {
+    if (!$this->getAccessToken()) {
+      $this->setAccessToken(uniqid($this->getUsername()."_", true));
+    }
+  }
 }
