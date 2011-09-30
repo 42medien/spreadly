@@ -35,9 +35,9 @@
 		<div class="grboxmid">
 			<div class="grboxmid-content">
 				<div class="graybox service_content advertiser_content">
-					<h3 class="header"><a href="<?php echo url_for('@deal_analytics')?>" class="bluetxt"><?php echo __("Get Analytics"); ?></a><span><?php echo __("Benefits for advertisers"); ?></span></h3>
+					<h3 class="header"><a href="<?php echo url_for('@deal_analytics_index')?>" class="bluetxt"><?php echo __("Get Analytics"); ?></a><span><?php echo __("Benefits for advertisers"); ?></span></h3>
 					<p><?php echo __("Spreadly offers a new advertising format. Advertisers pay and book an exact range. The linking of commercial message and voucher as thanks for the recommendation makes the ad attractive to the user. They are well aware of the ad message because it appears right after the focused like."); ?></p>
-					<p><?php echo link_to(__('Watch your detailled campaign analytics'), '@deal_analytics'); ?></p>
+					<p><?php echo link_to(__('Watch your detailled campaign analytics'), '@deal_analytics_index'); ?></p>
 				</div>
 			</div>
 		</div>

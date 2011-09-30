@@ -72,7 +72,11 @@ deal_analytics:
   
 deal_details:
   url:  /deal_analytics/deal_details/*
-  param:  { module: deal_analytics, action: deal_details}   
+  param:  { module: deal_analytics, action: deal_details} 
+  
+deal_analytics_index:    
+  url:  /deal_analytics/index
+  param:  { module: deal_analytics, action: index}   
   
 select_period:
   url:  /analytics/select_period
