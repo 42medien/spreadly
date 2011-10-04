@@ -10,6 +10,8 @@ sfGuardUser:
     last_login: null
     created_at: '<?php echo date("c"); ?>'
     updated_at: '<?php echo date("c"); ?>'
+    api_price_like: 0.5
+    api_price_media_penetration: 0.0005
 
 sfGuardGroup:
   Group_admin:
@@ -34,7 +36,7 @@ User:
     email: hugo@ekaabo.com
     birthdate: "1991-12-15"
     last_activity:    <?php echo time(); ?>
-    
+
   user_2:
     username: affe
     passwordhash: b0d736d71ce30c87629a984c814d7f72

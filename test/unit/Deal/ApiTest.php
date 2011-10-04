@@ -84,8 +84,7 @@ class DealTest extends BaseTestCase {
   public function testValidRequest() {
     $user = Doctrine_Core::getTable('sfGuardUser')->createQuery('u')->where('u.is_active = ?', true)->fetchOne();
 
-    $data = UrlUtils::getUrlContent("http://api.spreadly.local/deals?access_token=".$user->getAccessToken(), UrlUtils::HTTP_POST, self::$VALID_TEST_JSON);
-
+    $data = UrlUtils::sendPostRequest("http://api.spreadly.local/deals?access_token=".$user->getAccessToken(), self::$VALID_TEST_JSON);
     $data = json_decode($data, true);
 
     $this->assertEquals("200", $data['success']['code']);

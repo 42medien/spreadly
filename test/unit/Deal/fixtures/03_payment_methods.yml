@@ -7,5 +7,5 @@ PaymentMethod:
     address: 'Grundelbachstr. 84'
     city: 'Weinheim'
     zip: '66666'
-    
+    api_method: 1
     sfGuardUser: sfGuardUser_1
