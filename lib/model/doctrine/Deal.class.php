@@ -164,10 +164,10 @@ class Deal extends BaseDeal {
 
     return $array;
   }
-  
+
   public function fromApiArray($data) {
     if(array_key_exists('name', $data)) $this->setName($data['name']);
-    
+
     if(array_key_exists('motivation', $data) && array_key_exists('title', $data['motivation'])) $this->setMotivationTitle($data['motivation']['title']);
     if(array_key_exists('motivation', $data) && array_key_exists('text', $data['motivation'])) $this->setMotivationText($data['motivation']['text']);
 
@@ -187,5 +187,31 @@ class Deal extends BaseDeal {
 
     if(array_key_exists('billing', $data) && array_key_exists('type', $data['billing'])) $this->setBillingType($data['billing']['type']);
     if(array_key_exists('billing', $data) && array_key_exists('target_quantity', $data['billing'])) $this->setTargetQuantity($data['billing']['target_quantity']);
+  }
+
+  /**
+   * a simple validator
+   *
+   *
+   */
+  public function validate() {
+    $errors = array();
+    $required = array('name', 'motivation_title', 'motivation_text', 'spread_title', 'spread_text', 'spread_url', 'spread_img', 'spread_tos',
+                      'coupon_type', 'coupon_title', 'coupon_text', 'coupon_redeem_url', 'billing_type', 'target_quantity');
+
+    $url_fields = array('spread_url', 'coupon_url', 'coupon_webhook_url', 'coupon_redeen_url');
+    $int_fields = array('target_quantity');
+
+    foreach ($required as $field) {
+      if (empty($this->$field)) {
+        $errors[] = "'".$field ."' is required";
+      }
+    }
+
+    if (count($errors) > 0) {
+      return $errors;
+    } else {
+      return true;
+    }
   }
 }
