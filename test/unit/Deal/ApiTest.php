@@ -67,6 +67,13 @@ class DealTest extends BaseTestCase {
      }
     }';
 
+  public function setUp() {
+    //parent::resetMongo();
+    sfConfig::set('sf_environment', 'test');
+    Doctrine::loadData(dirname(__file__).'/fixtures');
+    sfConfig::set('sf_environment', 'dev');
+  }
+
   /**
    * @expectedException HttpException
    */
