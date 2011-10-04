@@ -99,6 +99,8 @@ Deal:
     actual_quantity:
       type: integer(4)
       default: 0
+    price:
+      type: float
 
   # Relations
     sf_guard_user_id: integer
