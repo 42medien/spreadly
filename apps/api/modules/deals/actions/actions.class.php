@@ -54,15 +54,15 @@ class dealsActions extends sfActions
 
     $deal = new Deal();
 
-    $json_data = json_decode($json_content, true);
+    $data = json_decode($json_content, true);
 
     // check if data is valid json
-    if (!$json_data) {
+    if (!$data) {
       $this->getResponse()->setStatusCode(406);
       return $this->renderPartial("wrong_mimetype");
     }
 
-    $deal->fromApiArray($json_data);
+    $deal->fromApiArray($data);
 
     // validate request
     $validate = $deal->validate();
