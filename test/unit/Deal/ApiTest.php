@@ -122,7 +122,7 @@ class DealTest extends BaseTestCase {
 
     $data = json_decode($data, true);
 
-    print_r($data["error"]);
+    $this->assertEquals("406", $data['error']['code']);
   }
 }
 ?>

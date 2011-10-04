@@ -635,7 +635,7 @@ class UrlUtils {
     curl_setopt($lCh, CURLOPT_RETURNTRANSFER, 1);  // RETURN THE CONTENTS OF THE CALL
     curl_setopt($lCh, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($lCh, CURLOPT_SSL_VERIFYHOST, 2);
-    curl_setopt($lCh, CURLOPT_VERBOSE,        1);
+    curl_setopt($lCh, CURLOPT_VERBOSE,        0);
 
     if ($pHeader) {
       curl_setopt($lCh, CURLOPT_HTTPHEADER,   $pHeader);
