@@ -40,6 +40,33 @@ class DealTest extends BaseTestCase {
      }
     }';
 
+   private static $INVALID_TEST_JSON = '{
+     "name": "Kampagne XY",
+
+     "spread": {
+      "title": "Guckt mal Leute, supidupi.",
+      "text": "Blablabla",
+      "url": "share.this.com",
+      "img": "http://share.this.com/spread.jpg",
+      "tos": "http://share.this.com/tos"
+     },
+
+     "coupon": {
+      "type": "code|unique_code|url|download",
+      "title": "Hier ist dein Deal",
+      "text": "Blablabla",
+      "code": "XYZABC",
+      "url": "http://share.this.com/url",
+      "webhook_url": "http://share.this.com/webhook",
+      "redeem_url": "http://share.this.com/redeem"
+     },
+
+     "billing": {
+      "type": "like|media_penetration",
+      "target_quantity": 10
+     }
+    }';
+
   /**
    * @expectedException HttpException
    */
@@ -86,6 +113,16 @@ class DealTest extends BaseTestCase {
     $this->assertEquals($data['coupon']['redeem_url'], $d->getCouponRedeemUrl());
     $this->assertEquals($data['billing']['type'], $d->getBillingType());
     $this->assertEquals($data['billing']['target_quantity'], $d->getTargetQuantity());
+  }
+
+  public function testInvalidRequest() {
+    $user = Doctrine_Core::getTable('sfGuardUser')->createQuery('u')->where('u.is_active = ?', true)->fetchOne();
+
+    $data = UrlUtils::sendPostRequest("http://api.spreadly.local/deals?access_token=".$user->getAccessToken(), self::$INVALID_TEST_JSON);
+
+    $data = json_decode($data, true);
+
+    print_r($data["error"]);
   }
 }
 ?>
