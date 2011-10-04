@@ -1,0 +1,1 @@
+<?php echo json_encode(array("error" => array("code" => 406, "message" => "The json-request was not well formed"))); ?>

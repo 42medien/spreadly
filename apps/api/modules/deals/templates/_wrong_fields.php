@@ -1,0 +1,1 @@
+<?php echo json_encode(array("error" => array("code" => 406, "message" => "Some fields are missing or have the wrong values", "error_messages" => $sf_data->getRaw("errors")))); ?>

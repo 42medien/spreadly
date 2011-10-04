@@ -48,10 +48,30 @@ class dealsActions extends sfActions
       return $this->renderPartial("setup_failure");
     }
 
-    // @todo deal anlegen und verifizieren
-
+    // get json post
     $json_content = file_get_contents("php://input");
-
     sfContext::getInstance()->getLogger()->notice($json_content);
+
+    $deal = new Deal();
+
+    $json_data = json_decode($json_content, true);
+
+    // check if data is valid json
+    if (!$json_data) {
+      $this->getResponse()->setStatusCode(406);
+      return $this->renderPartial("wrong_mimetype");
+    }
+
+    $deal->fromApiArray($json_data);
+
+    // validate request
+    $validate = $deal->validate();
+
+    if ($validate !== true) {
+      $this->getResponse()->setStatusCode(406);
+      return $this->renderPartial("deals/wrong_fields", array("errors" => $validate));
+    } else {
+      $deal->save();
+    }
   }
 }
