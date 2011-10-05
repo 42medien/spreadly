@@ -218,7 +218,7 @@ class Deal extends BaseDeal {
       }
     }
 
-    $url_fields = array('spread_url', 'coupon_url', 'coupon_webhook_url', 'coupon_redeen_url');
+    $url_fields = array('spread_url', 'coupon_url', 'coupon_webhook_url', 'coupon_redeen_url', 'spread_tos');
 
     // validate url fields
     foreach ($url_fields as $field) {
