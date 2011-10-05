@@ -21,7 +21,7 @@
 	      	<strong><?php echo __('Streuung nach Likes'); ?>:</strong>
 	      </div>
 	      <span>
-	      	<?php echo __($pDeal->getTargetQuantity().' Likes'); ?>
+	      	<?php echo __($pDeal->getTargetQuantity().' Likes für '.$pDeal->getPrice()." Euro"); ?>
 	      </span>
 	    </li>
 	    <?php } else {?>
@@ -30,7 +30,7 @@
 		      	<strong><?php echo __('Streuung nach Reichweite'); ?>:</strong>
 		      </div>
 		      <span>
-		      	<?php echo __($pDeal->getTargetQuantity().' erreichte User'); ?>
+		      	<?php echo __($pDeal->getTargetQuantity().' erreichte User für '.$pDeal->getPrice()." Euro"); ?>
 		      </span>
 		    </li>
 		  <?php } ?>
