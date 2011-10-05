@@ -36,7 +36,7 @@ class DealTest extends BaseTestCase {
 
      "billing": {
       "type": "like|media_penetration",
-      "target_quantity": 10
+      "target_quantity": 10.0
      }
     }';
 
@@ -63,7 +63,7 @@ class DealTest extends BaseTestCase {
 
      "billing": {
       "type": "like|media_penetration",
-      "target_quantity": 10
+      "target_quantity": "10as"
      }
     }';
 

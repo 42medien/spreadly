@@ -197,14 +197,42 @@ class Deal extends BaseDeal {
   public function validate() {
     $errors = array();
     $required = array('name', 'motivation_title', 'motivation_text', 'spread_title', 'spread_text', 'spread_url', 'spread_img', 'spread_tos',
-                      'coupon_type', 'coupon_title', 'coupon_text', 'coupon_redeem_url', 'billing_type', 'target_quantity');
+                      'coupon_type', 'coupon_title', 'coupon_text', 'billing_type', 'target_quantity');
 
-    $url_fields = array('spread_url', 'coupon_url', 'coupon_webhook_url', 'coupon_redeen_url');
-    $int_fields = array('target_quantity');
+    if ($this->getCouponType() == "url") {
+      $required[] = "coupon_url";
+    } elseif ($this->getCouponType() == "code") {
+      $required[] = "coupon_code";
+      $required[] = "coupon_redeem_url";
+    } elseif ($this->getCouponType() == "download") {
+      $required[] = "coupon_url";
+    } elseif ($this->getCouponType() == "unique_code") {
+      $required[] = "webhook_url";
+      $required[] = "coupon_redeem_url";
+    }
 
+    // check required fields
     foreach ($required as $field) {
       if (empty($this->$field)) {
         $errors[] = "'".$field ."' is required";
+      }
+    }
+
+    $url_fields = array('spread_url', 'coupon_url', 'coupon_webhook_url', 'coupon_redeen_url');
+
+    // validate url fields
+    foreach ($url_fields as $field) {
+      if (!empty($this->$field) && !UrlUtils::isUrlValid($this->$field)) {
+        $errors[] = "'".$field ."' must be a valid url";
+      }
+    }
+
+    $int_fields = array('target_quantity');
+
+    // validate int fields
+    foreach ($int_fields as $field) {
+      if (!empty($this->$field) && !is_numeric($this->$field)) {
+        $errors[] = "'".$field ."' must be of type float";
       }
     }
 
