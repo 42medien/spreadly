@@ -58,6 +58,17 @@ all:
   chartbeat:
     apikey:       'c6d8afdeac90a7d811154ca36a82bee2'
 
+  deal_pricing:
+    likes:
+      "10": 5
+      "100": 50
+      "200": 70
+      "500": 140
+    media_penetration:
+      "10000": 5
+      "100000": 50
+      "200000": 70
+      "500000": 140
 ##
 # Prod settings
 #
