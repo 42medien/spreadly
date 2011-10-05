@@ -47,7 +47,6 @@ class CreateDealForm extends BaseDealForm
       'coupon_url'        => new sfWidgetFormInputText(),
       'coupon_redeem_url' => new sfWidgetFormInputText(),
     	'billing_type'			=> new sfWidgetFormInputHidden(),
-      'billing_type'      => new sfWidgetFormInputHidden(),
       'target_quantity'   => new sfWidgetFormChoice(array('choices' => $like_fields, 'expanded' => true )),
       'target_quantity_mp'   => new sfWidgetFormChoice(array('choices' => $mp_fields, 'expanded' => true )),
       //'actual_quantity'   => new sfWidgetFormInputText(),
