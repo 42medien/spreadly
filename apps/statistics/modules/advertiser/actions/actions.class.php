@@ -53,8 +53,9 @@ class advertiserActions extends sfActions
   		if($this->pPaymentMethodForm->isValid()){
   			$lPm = $this->pPaymentMethodForm->save();
   			$lText = "Der User ".$this->pUser->getFirstName()." ".$this->pUser->getLastName()." (".$this->pUser->getUsername().") ";
-  			$lText .= "mit der Email-Adresse ".$this->pUser->getEmailAddress()." hat einen API Key beantragt. Um ihn zu bearbeiten bitte folgenden Link klicken: ";
-  			$lText .= "http://www.spreadly.com/backend/...";
+  			$lText .= "mit der Email-Adresse ".$this->pUser->getEmailAddress()." hat einen API Key beantragt. Um ihn zu bearbeiten bitte folgenden Link klicken: \n\n";
+  			$lText .= sfConfig::get("app_settings_url")."/backend.php/guard/users/".$this->pUser->getId()."/edit";
+  			//backend/guard/users/2/edit
   			//app_settings_support_email
   			sfContext::getInstance()->getMailer()->composeAndSend( array(sfConfig::get("app_email_address") => sfConfig::get("app_email_sender")),  'karina@ekaabo.com', 'Neue Api Anfrage', $lText);
   			$this->redirect('advertiser/apply_api_thanks');

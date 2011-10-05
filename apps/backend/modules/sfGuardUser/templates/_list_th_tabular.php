@@ -18,6 +18,14 @@
   <?php endif; ?>
 </th>
 <?php end_slot(); ?>
+
+<?php include_slot('sf_admin.current_header') ?><?php slot('sf_admin.current_header') ?>
+<th class="sf_admin_text sf_admin_list_th_email_address">
+ <?php echo __('API User'); ?>
+</th>
+<?php end_slot(); ?>
+
+
 <?php include_slot('sf_admin.current_header') ?><?php slot('sf_admin.current_header') ?>
 <th class="sf_admin_date sf_admin_list_th_created_at">
   <?php if ('created_at' == $sort[0]): ?>

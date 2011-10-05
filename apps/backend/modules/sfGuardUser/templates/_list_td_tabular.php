@@ -4,6 +4,9 @@
 <td class="sf_admin_text sf_admin_list_td_email_address">
   <?php echo mail_to($sf_guard_user->getEmailAddress(), $sf_guard_user->getEmailAddress()) ?>
 </td>
+<td class="sf_admin_date sf_admin_list_td_last_login">
+  <?php echo $sf_guard_user->hasApiMethod(); ?>
+</td>
 <td class="sf_admin_date sf_admin_list_td_created_at">
   <?php echo false !== strtotime($sf_guard_user->getCreatedAt()) ? format_date($sf_guard_user->getCreatedAt(), "f") : '&nbsp;' ?>
 </td>
