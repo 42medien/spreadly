@@ -166,7 +166,7 @@ class Deal extends BaseDeal {
   }
 
   public function fromApiArray($data) {
-    if(array_key_exists('name', $data)) $this->setName($data['name']);
+    if(array_key_exists('name', $data)) $this->setName($data['name']);    
 
     if(array_key_exists('motivation', $data) && array_key_exists('title', $data['motivation'])) $this->setMotivationTitle($data['motivation']['title']);
     if(array_key_exists('motivation', $data) && array_key_exists('text', $data['motivation'])) $this->setMotivationText($data['motivation']['text']);
@@ -187,6 +187,15 @@ class Deal extends BaseDeal {
 
     if(array_key_exists('billing', $data) && array_key_exists('type', $data['billing'])) $this->setBillingType($data['billing']['type']);
     if(array_key_exists('billing', $data) && array_key_exists('target_quantity', $data['billing'])) $this->setTargetQuantity($data['billing']['target_quantity']);
+    $this->fillPriceFromUserApiPrice();
+  }
+  
+  private function fillPriceFromUserApiPrice() {
+    if($this->getBillingType() == 'media_penetration') {
+      $this->setPrice($this->getTargetQuantity()*$this->getSfGuardUser()->getApiPriceMediaPenetration());
+    } else {
+      $this->setPrice($this->getTargetQuantity()*$this->getSfGuardUser()->getApiPriceLike());
+    }
   }
 
   /**

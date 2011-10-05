@@ -53,7 +53,9 @@ class dealsActions extends sfActions
     sfContext::getInstance()->getLogger()->notice($json_content);
 
     $deal = new Deal();
-
+    $deal->setSfGuardUser($user);
+    $deal->setPaymentMethod($user->getApiPaymentMethod());
+    
     $data = json_decode($json_content, true);
 
     // check if data is valid json
@@ -61,7 +63,7 @@ class dealsActions extends sfActions
       $this->getResponse()->setStatusCode(406);
       return $this->renderPartial("wrong_mimetype");
     }
-
+    
     $deal->fromApiArray($data);
 
     // validate request

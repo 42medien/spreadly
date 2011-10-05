@@ -1,15 +1,15 @@
 <?php
 /*
  * Call like this:
- * phpunit ./test/unit/Deal/DealTest.php
- * phpunit --filter testTruth ./test/unit/Deal/DealTest.php
+ * phpunit ./test/unit/Deal/ApiTest.php
+ * phpunit --filter testTruth ./test/unit/Deal/ApiTest.php
  */
 require_once dirname(__file__).'/../../lib/BaseTestCase.php';
 
-class DealTest extends BaseTestCase {
+class ApiTest extends BaseTestCase {
 
   private static $VALID_TEST_JSON = '{
-     "name": "Kampagne XY",
+     "name": "Kampagne Like",
 
      "motivation": {
       "title": "Toll alles für umme",
@@ -35,13 +35,45 @@ class DealTest extends BaseTestCase {
      },
 
      "billing": {
-      "type": "like|media_penetration",
+      "type": "like",
       "target_quantity": 10.0
+     }
+    }';
+  
+  private static $VALID_MP_TEST_JSON = '{
+     "name": "Kampagne MP",
+
+     "motivation": {
+      "title": "Toll alles für umme",
+      "text": "Blablabla"
+     },
+
+     "spread": {
+      "title": "Guckt mal Leute, supidupi.",
+      "text": "Blablabla",
+      "url": "http://share.this.com",
+      "img": "http://share.this.com/spread.jpg",
+      "tos": "http://share.this.com/tos"
+     },
+
+     "coupon": {
+      "type": "code|unique_code|url|download",
+      "title": "Hier ist dein Deal",
+      "text": "Blablabla",
+      "code": "XYZABC",
+      "url": "http://share.this.com/url",
+      "webhook_url": "http://share.this.com/webhook",
+      "redeem_url": "http://share.this.com/redeem"
+     },
+
+     "billing": {
+      "type": "media_penetration",
+      "target_quantity": 10000
      }
     }';
 
    private static $INVALID_TEST_JSON = '{
-     "name": "Kampagne XY",
+     "name": "Kampagne MP",
 
      "spread": {
       "title": "Guckt mal Leute, supidupi.",
@@ -97,7 +129,7 @@ class DealTest extends BaseTestCase {
     $this->assertEquals("200", $data['success']['code']);
   }
 
-  public function testDealFromJson() {
+  public function testDealFromApiArray() {
     $d = new Deal();
     $data = json_decode(self::$VALID_TEST_JSON, true);
     $d->fromApiArray($data);
@@ -123,12 +155,25 @@ class DealTest extends BaseTestCase {
 
   public function testInvalidRequest() {
     $user = Doctrine_Core::getTable('sfGuardUser')->createQuery('u')->where('u.is_active = ?', true)->fetchOne();
-
     $data = UrlUtils::sendPostRequest("http://api.spreadly.local/deals?access_token=".$user->getAccessToken(), self::$INVALID_TEST_JSON);
 
     $data = json_decode($data, true);
 
     $this->assertEquals("406", $data['error']['code']);
+  }
+  
+  public function testPriceToDealCopyAction() {
+    $user = Doctrine_Core::getTable('sfGuardUser')->createQuery('u')->where('u.is_active = ?', true)->fetchOne();
+    $this->assertEquals(6, DealTable::getInstance()->count());
+    $data = UrlUtils::getUrlContent("http://api.spreadly.local/deals?access_token=".$user->getAccessToken(), UrlUtils::HTTP_POST, self::$VALID_TEST_JSON);
+    $this->assertEquals(7, DealTable::getInstance()->count());
+    $deal = DealTable::getInstance()->findOneByName('Kampagne Like');
+    $this->assertEquals(floatval($user->getApiPriceLike())*floatval($deal->getTargetQuantity()), $deal->getPrice());
+
+    $data = UrlUtils::getUrlContent("http://api.spreadly.local/deals?access_token=".$user->getAccessToken(), UrlUtils::HTTP_POST, self::$VALID_MP_TEST_JSON);
+    $this->assertEquals(8, DealTable::getInstance()->count());
+    $deal = DealTable::getInstance()->findOneByName('Kampagne MP');
+    $this->assertEquals(floatval($user->getApiPriceMediaPenetration())*floatval($deal->getTargetQuantity()), $deal->getPrice());
   }
 }
 ?>
