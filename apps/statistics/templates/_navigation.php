@@ -86,8 +86,13 @@
 	    	</a>
 	    </li>
 	    <li>
-	    	<a href="<?php echo url_for('deal_analytics/index'); ?>" title="Domains" class="<?php if($module=='deal_analytics') { echo "active";} echo $lColorbox; ?>">
+	    	<a href="<?php echo url_for('deal_analytics/index'); ?>" title="Deal analytics" class="<?php if($module=='deal_analytics') { echo "active";} echo $lColorbox; ?>">
 	    		<?php echo __('Get analytics'); ?>
+	    	</a>
+	    </li>
+	    <li>
+	    	<a href="<?php echo url_for('advertiser/apply_api'); ?>" title="Deal API" class="<?php if($module=='advertiser' && $action != "index") { echo "active";} echo $lColorbox; ?>">
+	    		<?php echo __('Deal API'); ?>
 	    	</a>
 	    </li>
 	  </ul>

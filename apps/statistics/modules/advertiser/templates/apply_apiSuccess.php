@@ -1,11 +1,7 @@
 <?php slot('content') ?>
 <?php if ($pUser->hasApiMethod()) {?>
-
-	<?php echo __('Sie haben bereits einen API-Key beantragt. Sollten Sie dazu noch Fragen oder irgendwelche Probleme haben, schreiben sie uns doch bitte eine email an api@spreadly.com'); ?>
-
+	<?php echo __('Sie haben bereits einen API-Key beantragt.<br/><br/>Die Dokumentation zur API finden Sie unter %apilink%.<br/><br/>Sollten Sie dazu noch Fragen oder irgendwelche Probleme haben, senden Sie uns eine E-mail an <a href="mailto:'.sfConfig::get("app_settings_support_email").'">'.sfConfig::get("app_settings_support_email").'</a>', array('%apilink%' => link_to('http://code.google.com/p/spreadly/wiki/Deal_API', 'http://code.google.com/p/spreadly/wiki/Deal_API'))); ?>
 <?php } else { ?>
-
-
 <form action="<?php echo url_for('advertiser/apply_api'); ?>" id="apply_deal_form" name="apply_deal_form" method="POST">
 	<div class="createbtnbox alignleft">
 		<h2 class="btntitle"><?php echo __('Rechnungsadresse auswählen')?></h2>

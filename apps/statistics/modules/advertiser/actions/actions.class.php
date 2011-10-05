@@ -57,7 +57,7 @@ class advertiserActions extends sfActions
   			$lText .= sfConfig::get("app_settings_url")."/backend.php/guard/users/".$this->pUser->getId()."/edit";
   			//backend/guard/users/2/edit
   			//app_settings_support_email
-  			sfContext::getInstance()->getMailer()->composeAndSend( array(sfConfig::get("app_email_address") => sfConfig::get("app_email_sender")),  'karina@ekaabo.com', 'Neue Api Anfrage', $lText);
+  			sfContext::getInstance()->getMailer()->composeAndSend( array(sfConfig::get("app_email_address") => sfConfig::get("app_email_sender")),  sfConfig::get("app_settings_support_email"), 'Neue Api Anfrage', $lText);
   			$this->redirect('advertiser/apply_api_thanks');
   		}
   	}
