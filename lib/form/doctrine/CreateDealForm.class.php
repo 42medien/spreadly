@@ -12,8 +12,21 @@ class CreateDealForm extends BaseDealForm
 {
   public function configure()
   {
-
+    sfContext::getInstance()->getConfiguration()->loadHelpers(array('YiidNumber'));
     $lI18n = sfContext::getInstance()->getI18N();
+
+    // generate prices
+    $likes = sfConfig::get("app_deal_pricing_likes");
+    $like_fields = array();
+    foreach ($likes as $key => $value) {
+      $like_fields[$key] = $lI18n->__(point_format($key)." likes for $value €");
+    }
+
+    $mp = sfConfig::get("app_deal_pricing_media_penetration");
+    $mp_fields = array();
+    foreach ($mp as $key => $value) {
+      $mp_fields[$key] = $lI18n->__(point_format($key)." for $value €");
+    }
 
     $this->setWidgets(array(
       //'id'                => new sfWidgetFormInputHidden(),
@@ -35,8 +48,8 @@ class CreateDealForm extends BaseDealForm
       'coupon_redeem_url' => new sfWidgetFormInputText(),
     	'billing_type'			=> new sfWidgetFormInputHidden(),
       'billing_type'      => new sfWidgetFormInputHidden(),
-      'target_quantity'   => new sfWidgetFormChoice(array('choices' => array('10' => '10 Likes für 5 Euro', '100' => '100 Likes für 50 Euro', '200' => '200 Likes für 70 Euro', '500' => '500 Likes für 140 Euro'), 'expanded' => true )),
-      'target_quantity_mp'   => new sfWidgetFormChoice(array('choices' => array('10000' => '10.000 für 5 Euro', '100000' => '100.000 für 50 Euro', '200000' => '200.000 für 70 Euro', '500000' => '500.000 für 140 Euro'), 'expanded' => true )),
+      'target_quantity'   => new sfWidgetFormChoice(array('choices' => $like_fields, 'expanded' => true )),
+      'target_quantity_mp'   => new sfWidgetFormChoice(array('choices' => $mp_fields, 'expanded' => true )),
       //'actual_quantity'   => new sfWidgetFormInputText(),
       'sf_guard_user_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => true)),
       'payment_method_id' => new sfWidgetFormInputHidden(),
