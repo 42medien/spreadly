@@ -16,7 +16,7 @@ class CreateDealForm extends BaseDealForm
     $lI18n = sfContext::getInstance()->getI18N();
 
     // generate prices
-    $likes = sfConfig::get("app_deal_pricing_likes");
+    $likes = sfConfig::get("app_deal_pricing_like");
     $like_fields = array();
     foreach ($likes as $key => $value) {
       $like_fields[$key] = $lI18n->__(point_format($key)." likes for $value €");

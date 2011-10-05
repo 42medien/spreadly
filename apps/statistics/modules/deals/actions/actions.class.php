@@ -76,6 +76,11 @@ class dealsActions extends sfActions
 	  		unset($lParams['target-quantity-type']);
 	  		$this->pForm->bind($lParams);
   			$lDeal = $this->pForm->save();
+
+  			$prices = sfConfig::get("app_deal_pricing_".$lDeal->getBillingType());
+  			$lDeal->setPrice($prices[$lDeal->getTargetQuantity()]);
+  			$lDeal->save();
+
   			$lDeal->complete_campaign();
 	 			$this->redirect('deals/step_share?did='.$lDeal->getId());
   		}

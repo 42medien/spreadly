@@ -59,7 +59,7 @@ all:
     apikey:       'c6d8afdeac90a7d811154ca36a82bee2'
 
   deal_pricing:
-    likes:
+    like:
       10: 5
       100: 50
       200: 70
