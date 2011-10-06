@@ -155,10 +155,10 @@ class ApiTest extends BaseTestCase {
   public function testValidRequest() {
     $user = Doctrine_Core::getTable('sfGuardUser')->createQuery('u')->where('u.is_active = ?', true)->fetchOne();
 
-    $data = UrlUtils::sendPostRequest("http://api.spreadly.local/deals?access_token=".$user->getAccessToken(), self::$VALID_TEST_JSON);
+    $data = UrlUtils::sendPostRequest("http://api.spreadly.local/deals?access_token=".$user->getAccessToken(), self::$VALID_AUTOACTIVATE_TEST_JSON);    
     $data = json_decode($data, true);
-
     $this->assertEquals("200", $data['success']['code']);
+
   }
 
   public function testDealFromApiArray() {
@@ -210,7 +210,9 @@ class ApiTest extends BaseTestCase {
 
   public function testNewApiDealIsActiveImmediately() {
     $user = Doctrine_Core::getTable('sfGuardUser')->createQuery('u')->where('u.is_active = ?', true)->fetchOne();
+    $this->assertEquals(6, DealTable::getInstance()->count());
     $data = UrlUtils::getUrlContent("http://api.spreadly.local/deals?access_token=".$user->getAccessToken(), UrlUtils::HTTP_POST, self::$VALID_TEST_JSON);
+    $this->assertEquals(7, DealTable::getInstance()->count());
     $deal = DealTable::getInstance()->findOneByName('Kampagne Like');
     $this->assertFalse($deal->isActive());
     $this->assertEquals(DealTable::STATE_SUBMITTED, $deal->getState());

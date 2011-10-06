@@ -79,7 +79,7 @@ class dealsActions extends sfActions
       $deal->complete_coupon();
       $deal->complete_billing();
       $deal->submit();
-      if($data['activate']===true) $deal->approve();
+      if(array_key_exists('activate', $data) && $data['activate']===true) $deal->approve();
     }
   }
 }
