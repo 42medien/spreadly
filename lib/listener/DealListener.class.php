@@ -47,7 +47,11 @@ class DealListener {
     $sender = array(sfConfig::get("app_email_address") => sfConfig::get("app_email_sender"));
 
     try {
-      $message = "Your Deal expired";
+      $message = "Dear Advertiser,\n\n
+                  we are happy to inform you, that your campaign was successfully delivered.\n
+                  If you like to know more about the people who taken part in your campaign, please take a look into you backend on http://www.spreadly.com/\n\n
+                  Thanks a lot and many regards\n
+                  Your Spreadly-Team.";
 
       sfContext::getInstance()->getMailer()->composeAndSend($sender, $deal->getSfGuardUser()->getEmailAddress(), '[Deal expired]: '.preg_replace('/\n/', '', $deal->getName()), $message);
     } catch (Exception $e) {
