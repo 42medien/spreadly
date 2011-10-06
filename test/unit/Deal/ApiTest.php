@@ -40,6 +40,38 @@ class ApiTest extends BaseTestCase {
      }
     }';
   
+  private static $VALID_AUTOACTIVATE_TEST_JSON = '{
+     "name": "Kampagne Activate",
+     "activate": true,
+
+     "motivation": {
+      "title": "Toll alles für umme",
+      "text": "Blablabla"
+     },
+
+     "spread": {
+      "title": "Guckt mal Leute, supidupi.",
+      "text": "Blablabla",
+      "url": "http://share.this.com",
+      "img": "http://share.this.com/spread.jpg",
+      "tos": "http://share.this.com/tos"
+     },
+
+     "coupon": {
+      "type": "code|unique_code|url|download",
+      "title": "Hier ist dein Deal",
+      "text": "Blablabla",
+      "code": "XYZABC",
+      "url": "http://share.this.com/url",
+      "webhook_url": "http://share.this.com/webhook",
+      "redeem_url": "http://share.this.com/redeem"
+     },
+
+     "billing": {
+      "type": "like",
+      "target_quantity": 10.0
+     }
+    }';
   private static $VALID_MP_TEST_JSON = '{
      "name": "Kampagne MP",
 
@@ -180,7 +212,13 @@ class ApiTest extends BaseTestCase {
     $user = Doctrine_Core::getTable('sfGuardUser')->createQuery('u')->where('u.is_active = ?', true)->fetchOne();
     $data = UrlUtils::getUrlContent("http://api.spreadly.local/deals?access_token=".$user->getAccessToken(), UrlUtils::HTTP_POST, self::$VALID_TEST_JSON);
     $deal = DealTable::getInstance()->findOneByName('Kampagne Like');
+    $this->assertFalse($deal->isActive());
+    $this->assertEquals(DealTable::STATE_SUBMITTED, $deal->getState());
+
+    $data = UrlUtils::getUrlContent("http://api.spreadly.local/deals?access_token=".$user->getAccessToken(), UrlUtils::HTTP_POST, self::$VALID_AUTOACTIVATE_TEST_JSON);
+    $deal = DealTable::getInstance()->findOneByName('Kampagne Activate');
     $this->assertTrue($deal->isActive());
+    $this->assertEquals(DealTable::STATE_ACTIVE, $deal->getState());
   }
 }
 ?>
