@@ -30,7 +30,7 @@
 		<div class="list-box">
 			<ul class="footer-list">
 				<li><?php echo link_to(__('Chrome Extension'), 'https://chrome.google.com/extensions/detail/leclmjclggfnkhdpkgnagcdnhnomapda', array('target' => '_blank')); ?></li>
-				<li><?php echo link_to(__('Other Extensions'), 'http://code.google.com/p/spreadly/downloads/list', array('target' => '_blank')); ?></li>
+				<li><?php echo link_to(__('Other Extensions'), 'http://code.google.com/p/spreadly/wiki/Plugins', array('target' => '_blank')); ?></li>
 				<li><?php echo link_to(__('Wordpress Plugin'), 'http://wordpress.org/extend/plugins/yiidit/', array('target' => '_blank')); ?></li>
 				<li><?php echo link_to(__('Developer-Wiki'), 'http://code.google.com/p/spreadly/', array('target' => '_blank')); ?></li>
 				<li><?php echo link_to(__('Developer-Documentation'), 'http://code.google.com/p/spreadly/wiki/developerdocumentation', array('target' => '_blank')); ?></li>
