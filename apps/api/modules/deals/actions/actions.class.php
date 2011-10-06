@@ -74,6 +74,12 @@ class dealsActions extends sfActions
       return $this->renderPartial("deals/wrong_fields", array("errors" => $validate));
     } else {
       $deal->save();
+      $deal->complete_campaign();
+      $deal->complete_share();
+      $deal->complete_coupon();
+      $deal->complete_billing();
+      $deal->submit();
+      $deal->approve();
     }
   }
 }

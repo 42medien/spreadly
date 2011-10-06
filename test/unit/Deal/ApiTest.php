@@ -175,5 +175,12 @@ class ApiTest extends BaseTestCase {
     $deal = DealTable::getInstance()->findOneByName('Kampagne MP');
     $this->assertEquals(floatval($user->getApiPriceMediaPenetration())*floatval($deal->getTargetQuantity()), $deal->getPrice());
   }
+
+  public function testNewApiDealIsActiveImmediately() {
+    $user = Doctrine_Core::getTable('sfGuardUser')->createQuery('u')->where('u.is_active = ?', true)->fetchOne();
+    $data = UrlUtils::getUrlContent("http://api.spreadly.local/deals?access_token=".$user->getAccessToken(), UrlUtils::HTTP_POST, self::$VALID_TEST_JSON);
+    $deal = DealTable::getInstance()->findOneByName('Kampagne Like');
+    $this->assertTrue($deal->isActive());
+  }
 }
 ?>
