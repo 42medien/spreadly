@@ -1,0 +1,1 @@
+<?php echo json_encode(array("error" => array("code" => 404, "message" => "not implemented yet"))); ?>
