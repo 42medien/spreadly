@@ -161,6 +161,14 @@ class ApiTest extends BaseTestCase {
 
   }
 
+  // public function testLivePost() {
+  //   $user = Doctrine_Core::getTable('sfGuardUser')->createQuery('u')->where('u.is_active = ?', true)->fetchOne();
+  // 
+  //   $data = UrlUtils::sendPostRequest("http://api.spreadly.com/deals?access_token=hannes_4e92c2814e7f17.20492852", self::$VALID_TEST_JSON);    
+  //   $data = json_decode($data, true);
+  //   $this->assertEquals("200", $data['success']['code']);
+  // }
+  
   public function testDealFromApiArray() {
     $d = new Deal();
     $data = json_decode(self::$VALID_TEST_JSON, true);
