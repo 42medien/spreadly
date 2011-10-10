@@ -33,3 +33,6 @@ all:
 
     # Enable the database manager
     use_database:           true
+
+    error_404_module:       general
+    error_404_action:       lee
