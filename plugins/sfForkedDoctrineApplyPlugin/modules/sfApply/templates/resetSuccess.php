@@ -5,7 +5,9 @@
 <div class="sf_apply sf_apply_reset">
 <form method="post" action="<?php echo url_for("sfApply/reset") ?>" name="sf_apply_reset_form" id="sf_apply_reset_form">
 <p>
-<?php echo __('Thanks for confirming your email address. You may now change your password using the form below.', array(), 'sfForkedApply') ?>
+Vielen Dank für die Bestätigung Ihrer eMail-Adresse. Sie können jetzt Ihr Passwort ändern. Klicken Sie dazu den Button “Passwort neu setzen”.</p>
+<p>
+Thanks for confirming your email address. You may now change your password using the button “Reset my password” below.
 </p>
 	<table>
 		<?php echo $form ?>

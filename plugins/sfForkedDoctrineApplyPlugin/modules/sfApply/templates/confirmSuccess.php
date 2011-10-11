@@ -3,7 +3,8 @@
 <?php slot('content') ?>
   <div class="sf_apply_notice">
     <p>
-    <?php echo __("Thank you for confirming your account! You are now logged into the site.", array(), 'sfForkedApply') ?>
+Sie haben Ihren Zugang erfolgreich bestätigt und sind jetzt eingeloggt.<br>
+Thank you for confirming your account! You are now logged into the site.
     </p>
     <?php include_partial('sfApply/continue') ?>
   </div>

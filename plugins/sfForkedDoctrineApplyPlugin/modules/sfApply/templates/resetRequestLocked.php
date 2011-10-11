@@ -3,9 +3,11 @@
 <?php end_slot() ?>
 <?php slot('content') ?>
 <div class="sf_apply_notice">
-<?php echo __('<p>
-This account is inactive. Please contact the administrator.
-</p>', array(), 'sfForkedApply') ?>
+<p>
+  Ihr Zugang ist nicht aktiv. Bitte kontaktieren Sie den Administator. 
+This account is inactive. Please contact the administrator. 
+info@spreadly.com
+</p>
 <?php include_partial('sfApply/continue') ?>
 </div>
 <?php end_slot(); ?>

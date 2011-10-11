@@ -302,9 +302,7 @@ class BasesfApplyActions extends sfActions
           $date = new DateTime();
           $profile->setValidateAt( $date->format( 'Y-m-d H:i:s' ) );
           $profile->save();
-          $this->mail(array('subject' => sfConfig::get('app_sfApplyPlugin_apply_subject',
-            sfContext::getInstance()->getI18N()->__("Please verify your email on %1%",
-                                                    array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply')),
+          $this->mail(array('subject' => 'Spread.ly-E-Mail-Adresse',
             'fullname' => $profile->getFullname(),
             'email' => $profile->getEmail(),
             'parameters' => array('username' => $profile->getUser()->getUsername(),
@@ -356,15 +354,12 @@ class BasesfApplyActions extends sfActions
    */
   protected function sendVerificationMail( $profile )
   {
-    $this->mail(array('subject' => sfConfig::get('app_sfApplyPlugin_apply_subject',
-        sfContext::getInstance()->getI18N()->__("Please verify your account on %1%",
-                                                array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply')),
+    $this->mail(array('subject' => 'Spread.ly -Zugang zu bestätigen / account to be confirmed',
         'fullname' => $profile->getFullname(),
         'email' => $profile->getEmail(),
         'parameters' => array('fullname' => $profile->getFullname(),
-                                'validate' => $profile->getValidate()),
-        'text' => 'sfApply/sendValidateNewText',
-        'html' => 'sfApply/sendValidateNew'));
+                              'validate' => $profile->getValidate()),
+        'text' => 'sfApply/sendValidateNewText'));
   }
 
   /**
@@ -375,7 +370,7 @@ class BasesfApplyActions extends sfActions
   protected function mail( $options )
   {
     //Checking for all required options
-    $required = array('subject', 'parameters', 'email', 'fullname', 'html', 'text');
+    $required = array('subject', 'parameters', 'email', 'fullname', 'text');
     foreach ($required as $option)
     {
       if (!isset($options[$option]))
@@ -387,8 +382,9 @@ class BasesfApplyActions extends sfActions
     $message->setSubject($options['subject']);
 
     // Render message parts
-    $message->setBody($this->getPartial($options['html'], $options['parameters']), 'text/html');
-    $message->addPart($this->getPartial($options['text'], $options['parameters']), 'text/plain');
+    // $message->setBody($this->getPartial($options['html'], $options['parameters']), 'text/html');
+    $message->setBody($this->getPartial($options['text'], $options['parameters']), 'text/plain');
+    // $message->addPart($this->getPartial($options['text'], $options['parameters']), 'text/plain');
 
     //getting information on sender (that's us). May be source of exception.
     $address = $this->getFromAddress();
@@ -513,16 +509,12 @@ class BasesfApplyActions extends sfActions
     $profile->save();
     try
     {
-      $this->mail(array('subject' => sfConfig::get('app_sfApplyPlugin_reset_subject',
-              sfContext::getInstance()->getI18N()
-              ->__("Please verify your password reset request on %1%",
-              array('%1%' => $this->getRequest()->getHost()), 'sfForkedApply')),
+      $this->mail(array('subject' =>'Spread.ly- Zugangsdaten / access data',
           'fullname' => $profile->getFullname(),
           'email' => $profile->getEmail(),
           'parameters' => array('fullname' => $profile->getFullname(),
                                   'validate' => $profile->getValidate(), 'username' => $user->getUsername()),
-          'text' => 'sfApply/sendValidateResetText',
-          'html' => 'sfApply/sendValidateReset'));
+          'text' => 'sfApply/sendValidateResetText'));
     }
     catch (Exception $e)
     {

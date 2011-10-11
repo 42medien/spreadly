@@ -1,18 +1,26 @@
 <?php use_helper('I18N', 'Url') ?>
-<?php echo __('We have received your request to recover your username and possibly your password on:
+Hallo <?php echo $fullname ?>,
 
-%1%
+Ihr <?php echo $sf_request->getHost() ?> - Benutzername/ user name:  <?php echo $username ?>,
 
-Your username is: %USERNAME%
+Sie benötigen ein neues Passwort? Klicken Sie folgenden Link und geben Sie das gewünschte, neue Passwort ein (Wenn Sie nicht klicken, bleibt Ihr altes Passwort erhalten.):
 
-If you have lost your password or wish to reset it, click on the link that follows:
+<?php echo url_for("sfApply/confirm?validate=$validate", true) ?>
 
-%2%
+If you have lost your password or wish to reset it, click on the link above.You will then be prompted for the new password you wish to use. (Your password will NOT be changed unless you click on the link above and complete the form.)
 
-You will then be prompted for the new password you wish to use.
 
-Your password will NOT be changed unless you click on the link above and complete the form.'
-, array("%1%" => url_for($sf_request->getUriPrefix()),
-  "%2%" => url_for("sfApply/confirm?validate=$validate", true),
-  "%USERNAME%" => $username), 'sfForkedApply') ?>
+Mit freundlichen Grüßen und Regards
+Spread.ly-Team
 
+info@spreadly.com
+ekaabo GmbH
+Grundelbachstr. 84
+D-69469 Weinheim
+tel: +49 6201 845200
+fax: +49 6201 84520-29
+www.ekaabo.de
+Amtsgericht Mannheim / HRB 701542
+Geschäftsführer: Marco Ripanti
+Get your button & Spread your likes –www.Spreadly.com
+Weblog – Blog.spreadly.com

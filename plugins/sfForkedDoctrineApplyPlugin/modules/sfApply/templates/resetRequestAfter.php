@@ -3,16 +3,13 @@
 <?php end_slot() ?>
 <?php slot('content') ?>
 <div class="sf_apply_notice">
-<?php echo __('<p>
-For security reasons, a confirmation message has been sent to
-the email address associated with this account. Please check your
-email for that message. You will need to click on a link provided
-in that email in order to change your password. If you do not see
-the message, be sure to check your "spam" and "bulk" email folders.
+<p>Aus Sicherheitsgründen haben wir Ihnen eine Bestätigungsmail an die hinterlegte Adresse gesendet. Bitte klicken Sie darin den Link, um Ihr Passwort zu ändern. Sollten Sie die Bestätigungsmail “Spread.ly-E-Mail-Adresse” nicht gleich finden, suchen Sie bitte auch in den Ordnern “Spam” und “Bulk”.
 </p>
 <p>
-We apologize for the inconvenience.
-</p>', array(), 'sfForkedApply') ?>
+For security reasons, a confirmation message “Spread.ly-E-Mail-Adresse”  
+has been sent to the email address associated with this account. Please check your
+email for that message. You will need to click on a link provided in that email in order to change your password. If you do not see the message, be sure to check your "spam" and "bulk" email folders.
+</p>
 <?php include_partial('sfApply/continue') ?>
 </div>
 <?php end_slot(); ?>
