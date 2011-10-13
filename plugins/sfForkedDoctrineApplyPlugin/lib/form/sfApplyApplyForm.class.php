@@ -69,6 +69,7 @@ class sfApplyApplyForm extends sfGuardUserProfileForm
 
         $this->widgetSchema->setNameFormat('sfApplyApply[%s]');
 
+
         // We have the right to an opinion on these fields because we
         // implement at least part of their behavior. Validators for the
         // rest of the user profile come from the schema and from the
@@ -120,6 +121,7 @@ class sfApplyApplyForm extends sfGuardUserProfileForm
         if ($this->isCaptchaEnabled() )
         {
             $this->addCaptcha();
+            $this->widgetSchema['captcha']->setLabel('&nbsp;');
         }
 
         $this->validatorSchema->setPostValidator( new sfValidatorAnd($postValidators) );

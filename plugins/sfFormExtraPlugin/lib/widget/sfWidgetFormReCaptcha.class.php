@@ -63,7 +63,6 @@ class sfWidgetFormReCaptcha extends sfWidgetForm
   {
     $server = $this->getServerUrl();
     $key = $this->getOption('public_key');
-
     return sprintf('
     <script type="text/javascript" src="%s/challenge?k=%s"></script>
     <noscript>

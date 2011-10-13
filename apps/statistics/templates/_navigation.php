@@ -14,7 +14,7 @@
   	<?php if(!$sf_user->isAuthenticated()) {?>
   		<div class="login-links alignright">
 	  	  <?php echo link_to(__('Login'), '@sf_guard_signin', array("class" => "colorbox")); ?>
-	      <?php echo __('or'); ?> <?php echo link_to(__('Register'), '@sf_guard_register', array("class" => "colorbox")); ?>
+	      <?php echo __('or'); ?> <?php echo link_to(__('Register'), '@sf_guard_register'); ?>
 	   </div>
   	<?php } ?>
   </div>

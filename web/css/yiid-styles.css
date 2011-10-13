@@ -308,7 +308,9 @@ button.button{
   font-weight:bold;
   margin:0 1px;
   text-decoration: none;
+  float:left;
 }
+
 a.button span,
 button.button span{
   float:left;
@@ -649,7 +651,6 @@ Prev
 }
 
 #sf_apply_apply_form table tr{
-  height: 27px;
 }
 
 .right{
@@ -722,7 +723,7 @@ Prev
 
 .register-box{
   margin: auto;
-  width: 400px;
+  width: 450px;
 }
 
 div.sortlink{

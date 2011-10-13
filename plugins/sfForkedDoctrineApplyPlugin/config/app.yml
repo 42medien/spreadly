@@ -1,7 +1,9 @@
 ## YAML Template.
 all:
   recaptcha:
-    enabled: false
+    enabled: true
+    public_key:     6LcZ4MgSAAAAAEiEHvT0gSHL9Abe3pGXeX0a-tFJ 
+    private_key:    6LcZ4MgSAAAAAH__wZwvVv4ZVZJEAfyiJPEdPjab    
   sfForkedApply:
     applyForm: sfApplyApplyForm
     resetForm: sfApplyResetForm

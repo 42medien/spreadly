@@ -2,7 +2,7 @@
 
   <?php echo $form->renderFormTag(url_for('@sf_guard_signin'), array('id'=>'signin_form')); ?>
     <?php echo $form[$form->getCSRFFieldName()]->render(); ?>
-    
+
     <label class="textfield-whtmid">
       <span>
         <input type="text" class="wd172" id="signin_username" value="<?php echo __('Username or email'); ?>" name="signin[username]">
@@ -13,7 +13,7 @@
         <input type="password" class="wd172" id="signin_password" value="<?php echo __('Password'); ?>" name="signin[password]">
       </span>
     </label>
-    
+
     <button type="submit" id="signin_submit" class="button"><span><?php echo __('Login'); ?></span></button>
     <?php $routes = $sf_context->getRouting()->getRoutes() ?>
     <?php if (isset($routes['sf_guard_register'])): ?>

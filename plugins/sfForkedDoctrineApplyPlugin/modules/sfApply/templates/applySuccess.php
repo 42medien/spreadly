@@ -6,7 +6,6 @@
 ?>
 <?php slot('sf_apply_login') ?>
 <?php end_slot() ?>
-
 <?php slot('content') ?>
 <div class="sf_apply sf_apply_apply">
   <h3 class="verifytitle"><?php echo __("&raquo; Apply for an Account", array(), 'sfForkedApply') ?></h3>
