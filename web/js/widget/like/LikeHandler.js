@@ -1,5 +1,5 @@
 /**
- * @nocombine widget
+ * @combine widget
  */
 
 /**
@@ -17,8 +17,13 @@ var WidgetLikeForm = {
     send: function() {
       debug.log("[WidgetLikeForm][send]");      
       jQuery('#popup-like-button').live('click', function() {
-        WidgetLikeForm.beforeSend();
-        document.forms['popup-like-form'].submit();
+        var lTimeout;
+        WidgetLikeForm.beforeSend();        
+        clearTimeout(lTimeout);
+        lTimeout = setTimeout(function() {
+          document.forms['popup-like-form'].submit();
+        }, 2000);        
+
         return false;
       });
     },
@@ -31,7 +36,9 @@ var WidgetLikeForm = {
       debug.log("[WidgetLikeForm][beforeSend]");        
       jQuery('#like-oi-list').hide();   
       jQuery('#popup-like-button').hide();
-      jQuery('<img id="like-ajax-loader" src="/img/popup/like-ajax-loader.gif" />').appendTo('#like-submit');
+      //jQuery('#like-submit').empty();
+      jQuery('#like-submit').append('<img id="like-ajax-loader" src="img/popup/like-ajax-loader.gif" />');
+      //jQuery('<img id="like-ajax-loader" src="img/popup/like-ajax-loader.gif" />').appendTo('#like-submit');
     },
     
     /**
