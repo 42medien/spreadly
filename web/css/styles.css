@@ -675,7 +675,7 @@ div.nopadlr{ padding-left:0px !important; padding-right:0px !important; }
 #deal_form li{margin-bottom: 15px;}
 #deal_billing_form ul{padding-left: 5px;}
 #deal_billing_form .btnwording, #apply_deal_form .btnwording{width: 100px;}
-#deal_billing_form .btnformlist, #apply_deal_form .btnformlist	{padding-bottom: 20px; width: 510px;}
+#deal_billing_form .btnformlist, #apply_deal_form .btnformlist	{padding-bottom: 20px; width: 520px;}
 #deal_verify_form  .btnformlist li{margin-bottom: 10px;}
 #deal_billing_form .select-address-list, #apply_deal_form .select-address-list {margin-right: 20px;}
 
