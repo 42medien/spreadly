@@ -40,12 +40,13 @@ class CreateDealForm extends BaseDealForm
       'spread_url'        => new sfWidgetFormInputText(),
       'spread_img'        => new sfWidgetFormInputText(),
       'spread_tos'        => new sfWidgetFormInputText(),
-      'coupon_type'       => new sfWidgetFormChoice(array('choices' => array('code' => $lI18n->__('Code'), 'url' => $lI18n->__('Url'), 'download' => $lI18n->__('Download')), 'expanded' => true)),
+      'coupon_type'       => new sfWidgetFormChoice(array('choices' => array('code' => $lI18n->__('Code'), 'url' => $lI18n->__('Url'), 'download' => $lI18n->__('Download'), 'unique_code' => $lI18n->__('Unique')), 'expanded' => true)),
       'coupon_title'      => new sfWidgetFormInputText(),
       'coupon_text'       => new sfWidgetFormTextarea(),
       'coupon_code'       => new sfWidgetFormInputText(),
       'coupon_url'        => new sfWidgetFormInputText(),
       'coupon_redeem_url' => new sfWidgetFormInputText(),
+      'coupon_webhook_url'=> new sfWidgetFormInputText(),
     	'billing_type'			=> new sfWidgetFormInputHidden(),
       'target_quantity'   => new sfWidgetFormChoice(array('choices' => $like_fields, 'expanded' => true )),
       'target_quantity_mp'   => new sfWidgetFormChoice(array('choices' => $mp_fields, 'expanded' => true )),
@@ -83,8 +84,9 @@ class CreateDealForm extends BaseDealForm
     	'coupon_type' => $lI18n->__('Gutscheinquelle'),
     	'coupon_code' => $lI18n->__('Gutschein Code'),
     	'coupon_redeem_url' => $lI18n->__('Gutschein einlösen'),
+    	'coupon_webhook_url' => $lI18n->__('Webhook URL'),
     	'coupon_url' => $lI18n->__('Gutschein/Download URL'),
-    	'tos_accepted' => $lI18n->__('Ich aktzeptiere <a href="http://spreadly.local/system/tos" target="_blank">die Allgemeinen Geschäftsbedingungen</a> von Spreadly.'),
+    	'tos_accepted' => $lI18n->__('Ich aktzeptiere <a href="http://www.spreadly.com/system/tos" target="_blank">die Allgemeinen Geschäftsbedingungen</a> von Spreadly.'),
     ));
 
   }
@@ -116,11 +118,12 @@ class CreateDealForm extends BaseDealForm
   public function validate_coupon(){
   	$lI18n = sfContext::getInstance()->getI18N();
     $this->setValidators(array(
-      'coupon_type'       => new sfValidatorChoice(array('choices' => array(0 => 'code', 1 => 'url', 2 => 'download'), 'required' => true)),
+      'coupon_type'       => new sfValidatorChoice(array('choices' => array(0 => 'code', 1 => 'url', 2 => 'download', 3 => 'unique_code'), 'required' => true)),
       'coupon_title'      => new sfValidatorString(array('max_length' => 255, 'required' => true), array('required' => $lI18n->__('Required'), 'max_length' => $lI18n->__('To long'))),
       'coupon_text'       => new sfValidatorString(array('required' => true), array('required' => $lI18n->__('Required'))),
       'coupon_code'       => new sfValidatorString(array('max_length' => 255, 'required' => false), array('required' => $lI18n->__('Required'))),
       'coupon_url'        => new sfValidatorUrl(array('max_length' => 255, 'required' => false), array('required' => $lI18n->__('Required'))),
+      'coupon_webhook_url' => new sfValidatorUrl(array('max_length' => 255, 'required' => false), array('required' => $lI18n->__('Required'))),
       'coupon_redeem_url' => new sfValidatorUrl(array('max_length' => 255, 'required' => false), array('required' => $lI18n->__('Required')))
     ));
 

@@ -28,6 +28,13 @@ class CouponTypeValidator extends sfValidatorBase {
   				));
   		}
   		$values['coupon_url'] = null;
+  	} elseif ($lType == 'unique_code') {
+  	 	if($this->isEmpty($values['coupon_webhook_url']) || $this->isEmpty($values['coupon_redeem_url'])){
+  			throw new sfValidatorErrorSchema($this, array(
+  					$this->getOption('coupon_webhook_url') => new sfValidatorError($this, 'required'),
+  					$this->getOption('coupon_redeem_url') => new sfValidatorError($this, 'required')
+  				));
+  		}
   	} else {
   		if($this->isEmpty($values['coupon_url'])){
   			throw new sfValidatorErrorSchema($this, array(

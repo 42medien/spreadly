@@ -54,7 +54,7 @@
 	    </li>
 
 
-	  	<li class="clearfix" <?php echo ($pForm['coupon_type']->getValue() == 'code')? 'style="display:none;"':""; ?> id="coupon-url-row">
+	  	<li class="clearfix" <?php echo ($pForm['coupon_type']->getValue() == 'code' || $pForm['coupon_type']->getValue() == 'unique_code')? 'style="display:none;"':""; ?> id="coupon-url-row">
 	    	<div class="btnwording alignleft">
 	    		<img src="/img/3.png" class="alignleft deal-info-number" />
 	      	<strong><?php echo $pForm['coupon_url']->renderLabel(); ?></strong><span><?php echo __('Bitte geben Sie hier die URL ein, die zu Ihrem Angebot führt'); ?></span>
@@ -65,6 +65,19 @@
 					</span>
 				</label>
 				<div class="content-error-box clearfix"><?php echo $pForm['coupon_url']->renderError(); ?></div>
+			</li>
+
+	  	<li class="clearfix" <?php echo ($pForm['coupon_type']->getValue() != 'unique_code')? 'style="display:none;"':""; ?> id="coupon-webhook-row">
+	    	<div class="btnwording alignleft">
+	    		<img src="/img/3.png" class="alignleft deal-info-number" />
+	      	<strong><?php echo $pForm['coupon_webhook_url']->renderLabel(); ?></strong><span><?php echo __('Bitte geben Sie hier die URL ein, die zu Ihrer Code-API führt'); ?></span>
+	      </div>
+	      <label class="textfield-wht">
+		      <span>
+		      	<?php echo $pForm['coupon_webhook_url']->render(array('class' => 'wd320')); ?>
+					</span>
+				</label>
+				<div class="content-error-box clearfix"><?php echo $pForm['coupon_webhook_url']->renderError(); ?></div>
 			</li>
 
 
@@ -81,7 +94,10 @@
 				<div class="counter-box left-counter-box clearfix"><?php echo __('<span id="coupon_code_counter">255</span> characters left'); ?></div>
 				<div class="content-error-box clearfix"><?php echo $pForm['coupon_code']->renderError(); ?></div>
 			</li>
-	  	<li class="clearfix" <?php echo ($pForm['coupon_type']->getValue() != 'code')? 'style="display:none;"':""; ?> id="coupon-redeem-row">
+
+
+
+	  	<li class="clearfix" <?php echo ($pForm['coupon_type']->getValue() == 'code' || $pForm['coupon_type']->getValue() == 'unique_code')? '':'style="display:none;"'; ?> id="coupon-redeem-row">
 	    	<div class="btnwording alignleft">
 	    		<img src="/img/4.png" class="alignleft deal-info-number" />
 	      	<strong><?php echo $pForm['coupon_redeem_url']->renderLabel(); ?></strong><span><?php echo __('Bitte geben Sie hier die URL ein, die zu Ihrem Angebot führt'); ?></span>

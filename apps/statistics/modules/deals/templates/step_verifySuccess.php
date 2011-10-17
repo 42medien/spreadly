@@ -161,6 +161,23 @@
 	      	<?php echo $pDeal->getCouponRedeemUrl(); ?>
 	      </span>
 	    </li>
+	    <?php } elseif ($pDeal->getCouponType() == "unique_code") { ?>
+	    <li class="clearfix">
+	    	<div class="btnwording alignleft">
+	      	<strong><?php echo __('Webhook Url'); ?>:</strong>
+	      </div>
+	      <span>
+	      	<?php echo $pDeal->getCouponWebhookUrl(); ?>
+	      </span>
+	    </li>
+	    <li class="clearfix">
+	    	<div class="btnwording alignleft">
+	      	<strong><?php echo __('Gutschein einlösen'); ?>:</strong>
+	      </div>
+	      <span>
+	      	<?php echo $pDeal->getCouponRedeemUrl(); ?>
+	      </span>
+	    </li>
 	    <?php } else { ?>
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">

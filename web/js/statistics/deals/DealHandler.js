@@ -115,9 +115,16 @@ var DealForm = {
             if (lId == 'coupon_type_download' || lId == 'coupon_type_url') {
               jQuery('#coupon-code-row').hide();
               jQuery('#coupon-redeem-row').hide();
+              jQuery('#coupon-webhook-row').hide();                
               jQuery('#coupon-url-row').show();
+            } else if(lId == 'coupon_type_unique_code') { 
+              jQuery('#coupon-code-row').hide();            
+              jQuery('#coupon-url-row').hide();              
+              jQuery('#coupon-redeem-row').show();              
+              jQuery('#coupon-webhook-row').show();              
             } else {
               jQuery('#coupon-url-row').hide();
+              jQuery('#coupon-webhook-row').hide();                 
               jQuery('#coupon-code-row').show();
               jQuery('#coupon-redeem-row').show();
             }
