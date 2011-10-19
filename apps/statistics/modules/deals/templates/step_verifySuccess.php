@@ -191,7 +191,7 @@
 		</ul>
 	</div>
 	<div class="alignleft create-deal-helptext">
-		<?php if ($pDeal->getCouponType() == "code") {?>
+		<?php if ($pDeal->getCouponType() == "code"  || $pDeal->getCouponType() == "unique_code") {?>
 			<?php include_partial('deals/coupon_code', array('pDeal' => $pDeal)); ?>
 		<?php } else if($pDeal->getCouponType() == "url") { ?>
 			<?php include_partial('deals/coupon_url', array('pDeal' => $pDeal)); ?>
