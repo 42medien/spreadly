@@ -35,6 +35,8 @@ class CouponTypeValidator extends sfValidatorBase {
   					$this->getOption('coupon_redeem_url') => new sfValidatorError($this, 'required')
   				));
   		}
+  		$values['coupon_code'] = null;
+  		$values['coupon_url'] = null;
   	} else {
   		if($this->isEmpty($values['coupon_url'])){
   			throw new sfValidatorErrorSchema($this, array(
