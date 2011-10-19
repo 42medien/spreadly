@@ -54,6 +54,8 @@ class dealActions extends sfActions
 
     if ($activity) {
       $this->deal = $activity->getDeal();
+    } else {
+      $this->setTemplate('default_deal');
     }
   }
 }
