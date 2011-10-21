@@ -32,9 +32,12 @@ class dealActions extends sfActions
       // try to save activity
       try {
         $activity->save();
-        $this->redirect("@coupon?id=".$activity->getId());
+        $this->redirect("@coupon?id=".$activity->getId()."&u_code=".$activity->getCCode());
       } catch (Exception $e) { // send error on exception
         $this->getLogger()->err($e->getMessage());
+        $this->redirect('@default_deal');
+
+        return sfView::SUCCESS;
       }
     }
 
@@ -57,5 +60,9 @@ class dealActions extends sfActions
     } else {
       $this->setTemplate('default_deal');
     }
+  }
+
+  public function executeDefault_deal(sfWebRequest $request) {
+
   }
 }

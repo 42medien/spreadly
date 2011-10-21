@@ -70,6 +70,10 @@ deal:
   url:    /deal
   param:  { module: deal, action: index }
 
+default_deal:
+  url:    /deal/default
+  param:  { module: deal, action: default_deal }
+
 coupon:
   url:    /coupon
   param:  { module: deal, action: coupon }
