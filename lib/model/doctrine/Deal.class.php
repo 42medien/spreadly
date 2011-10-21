@@ -19,10 +19,6 @@ class Deal extends BaseDeal {
     return $this->getState()==DealTable::STATE_ACTIVE && $this->getRemainingQuantity()>0;
   }
 
-  public function getUniqueCouponCode() {
-    return CouponWebhookClient::requestCoupon($this->getCouponWebhookUrl());
-  }
-
   public function participate($user) {
     sfContext::getInstance()->getLogger()->notice("{Deal} participate for Deal: ".$this->getId());
 

@@ -13,6 +13,7 @@ class DealTable extends Doctrine_Table
   const COUPON_TYPE_CODE = 'code';
   const COUPON_TYPE_URL = 'url';
   const COUPON_TYPE_DOWNLOAD = 'download';
+  const COUPON_TYPE_UNIQUE_CODE = 'unique_code';
 
   const STATE_INITIAL = 'initial';
   const STATE_CAMPAIGN_COMPLETED = 'campaign_completed';

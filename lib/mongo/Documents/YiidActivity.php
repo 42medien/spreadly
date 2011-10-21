@@ -17,6 +17,7 @@ use \sfException,
     \DomainSubscriptionsTable,
     \DomainProfileTable,
     \sfProjectConfiguration,
+    \CouponWebhookClient,
     Queue\Queue;
 
 /**
@@ -453,6 +454,10 @@ class YiidActivity extends BaseDocument {
       if ($dp = DomainProfileTable::getInstance()->retrieveByUrl($this->i_url)) {
         $this->setIId($dp->getId());
       }
+    }
+
+    if ($deal->getCouponType() == DealTable::COUPON_TYPE_UNIQUE_CODE) {
+      $this->setCCode(CouponWebhookClient::requestCoupon($deal->getCouponWebhookUrl()));
     }
 
     return true;
