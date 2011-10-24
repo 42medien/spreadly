@@ -6,7 +6,7 @@ Deal:
     StateMachine:
       column: deal_state
       initial: initial
-      states: ['initial', 'campaign_completed', 'share_completed', 'coupon_completed', 'billing_completed', 'submitted', 'active', 'expired']
+      states: ['initial', 'campaign_completed', 'share_completed', 'coupon_completed', 'billing_completed', 'submitted', 'active', 'inactive', 'expired']
       events:
         reset_to_campaign:
           from: ['campaign_completed', 'share_completed', 'coupon_completed', 'billing_completed']
@@ -38,6 +38,12 @@ Deal:
           to: submitted
         approve:
           from: submitted
+          to: active
+        deactivate:
+          from: active
+          to: inactive
+        activate:
+          from: inactive
           to: active
         expire:
           from: active
