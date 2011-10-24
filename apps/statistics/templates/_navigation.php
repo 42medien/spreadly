@@ -13,7 +13,7 @@
   	<?php } ?>
   	<?php if(!$sf_user->isAuthenticated()) {?>
   		<div class="login-links alignright">
-	  	  <?php echo link_to(__('Login'), '@sf_guard_signin', array("class" => "colorbox")); ?>
+	  	  <?php echo link_to(__('Login'), '@sf_guard_signin'); ?>
 	      <?php echo __('or'); ?> <?php echo link_to(__('Register'), '@sf_guard_register'); ?>
 	   </div>
   	<?php } ?>
@@ -22,11 +22,11 @@
   <ul id="topnavigation" class="clearfix">
     <?php $module = $sf_context->getModuleName(); ?>
     <?php $action = $sf_context->getActionName(); ?>
-  	<?php
+  	<?php /*
   		$lColorbox = '';
   		if(!$sf_user->isAuthenticated()) {
   			$lColorbox = "colorbox";
-  		}
+  		}*/
   	?>
 
     <li>
@@ -66,12 +66,12 @@
 	    	</a>
 	    </li>
 	    <li>
-	    	<a href="<?php echo url_for('domain_profiles/index'); ?>" title="Domains" class="<?php if($module=='domain_profiles') { echo "active";} echo $lColorbox; ?>">
+	    	<a href="<?php echo url_for('domain_profiles/index'); ?>" title="Domains" class="<?php if($module=='domain_profiles') { echo "active";} ?>">
 	    		<?php echo __('Register domain'); ?>
 	    	</a>
 	    </li>
 	    <li>
-	    	<a href="<?php echo url_for('@analytics_overview'); ?>" title="Analytics" class="<?php if($module=='analytics' || $module=='deal_analytics') { echo "active";} echo $lColorbox; ?>">
+	    	<a href="<?php echo url_for('@analytics_overview'); ?>" title="Analytics" class="<?php if($module=='analytics' || $module=='deal_analytics') { echo "active";} ?>">
 	    		<?php echo __('Get analytics'); ?>
 	    	</a>
 	    </li>
@@ -81,17 +81,17 @@
   <?php if($module=='deals' || $module=='deal_analytics' || $module=='advertiser') { ?>
 	  <ul id="subnavigation">
 	    <li>
-	    	<a href="<?php echo url_for('@deals'); ?>" title="Deals" class="<?php if($module=='deals') { echo "active";} echo $lColorbox; ?>">
+	    	<a href="<?php echo url_for('@deals'); ?>" title="Deals" class="<?php if($module=='deals') { echo "active";} ?>">
 	    		<?php echo __('Create deal'); ?>
 	    	</a>
 	    </li>
 	    <li>
-	    	<a href="<?php echo url_for('deal_analytics/index'); ?>" title="Deal analytics" class="<?php if($module=='deal_analytics') { echo "active";} echo $lColorbox; ?>">
+	    	<a href="<?php echo url_for('deal_analytics/index'); ?>" title="Deal analytics" class="<?php if($module=='deal_analytics') { echo "active";} ?>">
 	    		<?php echo __('Get analytics'); ?>
 	    	</a>
 	    </li>
 	    <li>
-	    	<a href="<?php echo url_for('advertiser/apply_api'); ?>" title="Deal API" class="<?php if($module=='advertiser' && $action != "index") { echo "active";} echo $lColorbox; ?>">
+	    	<a href="<?php echo url_for('advertiser/apply_api'); ?>" title="Deal API" class="<?php if($module=='advertiser' && $action != "index") { echo "active";} ?>">
 	    		<?php echo __('Deal API'); ?>
 	    	</a>
 	    </li>
