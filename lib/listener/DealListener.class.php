@@ -27,7 +27,7 @@ Ihr Deal ist bei Spread.ly eingegangen und wird in Kürze von einem Mitarbeiter 
 
 Your Deal has been submitted to Spread.ly. It will be reviewed by an employee shortly. You will receive an email with our approval as soon as possible.
 
-Viele Grüße & many regards 
+Viele Grüße & many regards
 Spread.ly-Team
 
 info@spreadly.com
@@ -65,7 +65,7 @@ Weblog – Blog.spreadly.com
 
 Ihr Deal wurde soeben frei geschaltet. Sobald die Laufzeit begonnen hat, kann der Deal von Besuchern eingelöst werden.
 
-Your deal is available now. Provided that runtime has become due your deal can be redeemed. 
+Your deal is available now. Provided that runtime has become due your deal can be redeemed.
 
 Viel Erfolg beim Handel mit den Likes & Good luck and success with your deals in likes! Spread.ly-Team
 
@@ -93,6 +93,11 @@ Weblog – Blog.spreadly.com
     sfContext::getInstance()->getLogger()->notice("{DealListener} eventDeny");
   }
 
+  /**
+   * Enter description here...
+   *
+   * @param sfEvent $event
+   */
   public static function eventExpire($event) {
     sfContext::getInstance()->getLogger()->notice("{DealListener} eventExpire");
 
@@ -111,5 +116,14 @@ Weblog – Blog.spreadly.com
     } catch (Exception $e) {
       sfContext::getInstance()->getLogger()->err("{DealListener} Failed to send email.\n".$e->getMessage());
     }
+  }
+
+  /**
+   * Enter description here...
+   *
+   * @param sfEvent $event
+   */
+  public static function eventInvalidWebhook($event) {
+
   }
 }

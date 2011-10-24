@@ -457,7 +457,7 @@ class YiidActivity extends BaseDocument {
     }
 
     if ($deal->getCouponType() == DealTable::COUPON_TYPE_UNIQUE_CODE) {
-      $this->setCCode(CouponWebhookClient::requestCoupon($deal->getCouponWebhookUrl()));
+      $this->setCCode($deal->getUniqueCode());
     }
 
     return true;

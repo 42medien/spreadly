@@ -20,8 +20,7 @@ class CouponWebhookClient {
       }
     }
 
-    sfContext::getInstance()->getEventDispatcher()->notify(new sfEvent($url, 'deal.event.invalid_webhook'));
-    throw new sfException("invalid webhook");
+    return null;
   }
 }
 ?>

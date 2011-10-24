@@ -65,5 +65,7 @@ class ProjectConfiguration extends sfProjectConfiguration {
     $this->dispatcher->connect($prefix.'approve', array('DealListener', 'eventApprove'));
     $this->dispatcher->connect($prefix.'deny', array('DealListener', 'eventDeny'));
     $this->dispatcher->connect($prefix.'expire', array('DealListener', 'eventExpire'));
+
+    $this->dispatcher->connect($prefix.'deactivate', array('DealListener', 'eventInvalidWebhook'));
   }
 }
