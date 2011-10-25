@@ -124,6 +124,18 @@ Weblog – Blog.spreadly.com
    * @param sfEvent $event
    */
   public static function eventInvalidWebhook($event) {
+    sfContext::getInstance()->getLogger()->notice("{DealListener} eventInvalidWebhook");
 
+    $deal = $event->getSubject();
+
+    $sender = array(sfConfig::get("app_email_address") => sfConfig::get("app_email_sender"));
+
+    try {
+      $message = "Deal was deactivated: ";
+
+      sfContext::getInstance()->getMailer()->composeAndSend($sender, sfConfig::get("app_settings_support_email"), '[Invalid Webhook]: '.preg_replace('/\n/', '', $deal->getName()), $message);
+    } catch (Exception $e) {
+      sfContext::getInstance()->getLogger()->err("{DealListener} Invalid Webhook.\n".$e->getMessage());
+    }
   }
 }

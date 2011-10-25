@@ -28,8 +28,8 @@ class Deal extends BaseDeal {
     $code = CouponWebhookClient::requestCoupon($this->getWebhookUrl());
 
     if (!$code) {
-      throw new sfException("webhook-url isn't implemented properly");
       $this->deactivate();
+      throw new sfException("webhook-url isn't implemented properly");
     } else {
       return $code;
     }
