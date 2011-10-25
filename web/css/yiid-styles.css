@@ -652,6 +652,12 @@ Prev
 #sf_apply_apply_form table tr{
 }
 
+#sf_apply_apply_form input,
+#sf_apply_reset_request input{
+  margin-left: 15px;
+  width: 297px;
+}
+
 .right{
   float: right;
 }

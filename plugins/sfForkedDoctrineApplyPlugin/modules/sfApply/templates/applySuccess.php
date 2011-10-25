@@ -19,8 +19,8 @@
       <tr>
         <td colspan="2">
           <div class="clearfix">
-            <button type="submit" class="button"><span><?php echo __("Create My Account", array(), 'sfForkedApply') ?></span></button>
-            <?php echo link_to('<span>'.__("Cancel", array(), 'sfForkedApply').'</span>', sfConfig::get('app_sfApplyPlugin_after', '@homepage'), array('class' => 'button')) ?>
+            <button type="submit" class="button alignleft"><span><?php echo __("Create My Account", array(), 'sfForkedApply') ?></span></button>
+            <?php echo link_to('<span>'.__("Cancel", array(), 'sfForkedApply').'</span>', sfConfig::get('app_sfApplyPlugin_after', '@homepage'), array('class' => 'button alignleft')) ?>
           </div>
         </td>
       </tr>

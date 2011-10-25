@@ -28,6 +28,7 @@ class CouponTypeValidator extends sfValidatorBase {
   				));
   		}
   		$values['coupon_url'] = null;
+  		$values['coupon_webhook_url'] = null;
   	} elseif ($lType == 'unique_code') {
   	 	if($this->isEmpty($values['coupon_webhook_url']) || $this->isEmpty($values['coupon_redeem_url'])){
   			throw new sfValidatorErrorSchema($this, array(
@@ -45,6 +46,7 @@ class CouponTypeValidator extends sfValidatorBase {
   		}
   		$values['coupon_code'] = null;
   		$values['coupon_redeem_url'] = null;
+  		$values['coupon_webhook_url'] = null;
   	}
     return $values;
   }

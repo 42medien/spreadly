@@ -19,8 +19,8 @@
   <tfoot>
     <tr>
       <td colspan="2">
-        <button class="button" type="submit"><span><?php echo __("Reset My Password", array(), 'sfForkedApply') ?></span></button>
-        <?php echo link_to('<span>'.__("Cancel", array(), 'sfForkedApply').'</span>', sfConfig::get('app_sfApplyPlugin_after', '@homepage'), array('class' => 'button')) ?>
+        <button class="alignleft button" type="submit"><span><?php echo __("Reset My Password", array(), 'sfForkedApply') ?></span></button>
+        <?php echo link_to('<span>'.__("Cancel", array(), 'sfForkedApply').'</span>', sfConfig::get('app_sfApplyPlugin_after', '@homepage'), array('class' => 'alignleft button')) ?>
       </td>
     </tr>
   </tfoot>
