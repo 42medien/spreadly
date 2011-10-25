@@ -131,7 +131,7 @@ Weblog – Blog.spreadly.com
     $sender = array(sfConfig::get("app_email_address") => sfConfig::get("app_email_sender"));
 
     try {
-      $message = "Deal was deactivated: ";
+      $message = "Deal was deactivated because of an invalid webhook: " . sfConfig::get("app_settings_url") . "/backend.php/deal/" . $deal->getId() . "/edit";
 
       sfContext::getInstance()->getMailer()->composeAndSend($sender, sfConfig::get("app_settings_support_email"), '[Invalid Webhook]: '.preg_replace('/\n/', '', $deal->getName()), $message);
     } catch (Exception $e) {
