@@ -11,3 +11,6 @@ autoload:
   oauth:
     path:      %SF_LIB_DIR%/vendor/OAuth
     recursive: true
+  aws:
+    path:      %SF_LIB_DIR%/vendor/aws_sdk
+    recursive: true
