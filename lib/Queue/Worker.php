@@ -5,7 +5,8 @@ use \sfException,
     \sfContext,
     \System_Daemon,
     \BatchConfiguration,
-    \ProjectConfiguration;
+    \ProjectConfiguration,
+    \AmazonCloudWatch;
 
 require_once 'System/Daemon.php';
 require_once(dirname(__FILE__).'/../../config/BatchConfiguration.class.php');
