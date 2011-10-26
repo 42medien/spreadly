@@ -122,6 +122,11 @@ class Worker {
         System_Daemon::iterate(1);
       }
 
+      $cw = new AmazonCloudWatch();
+      $cw->set_region(AmazonCloudWatch::REGION_EU_W1);
+
+      $cw->put_metric_data("Spreadly/".BatchConfiguration::ENV, array(array("MetricName" => "WorkerAliveCheck", "Unit" => "Bits", "Value" => 1)));
+
       // In the actuall logparser program, You could replace 'true'
       // With e.g. a  parseLog('vsftpd') function, and have it return
       // either true on success, or false on failure.
