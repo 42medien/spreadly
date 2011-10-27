@@ -310,6 +310,7 @@ button.button{
   text-decoration: none;
 }
 
+
 a.button span,
 button.button span{
   float:left;
@@ -327,6 +328,7 @@ button.button:hover, button.button.active {
   color:#fff;
   text-decoration:none;
 }
+
 a.button:hover span, a.button.active span,
 button.button:hover span, button.button.active span {
   background:url(/img/saver-hov.png) right 0px no-repeat;
@@ -645,7 +647,7 @@ Prev
 #service-img-email.active{ background: url("/img/social_button_sprite.png") no-repeat -1100px -200px; }
 
 #sf_apply_apply_form table th{
-  width: 160px;
+  width: 150px;
   text-align: left;
 }
 
@@ -654,8 +656,12 @@ Prev
 
 #sf_apply_apply_form input,
 #sf_apply_reset_request input{
-  margin-left: 15px;
-  width: 297px;
+  width: 310px;
+}
+
+#sf_apply_apply_form input[type="checkbox"],
+#sf_apply_reset_request input[type="checkbox"]{
+  width: auto;
 }
 
 .right{
@@ -728,7 +734,7 @@ Prev
 
 .register-box{
   margin: auto;
-  width: 450px;
+  width: 510px;
 }
 
 div.sortlink{
