@@ -25,7 +25,7 @@ class Deal extends BaseDeal {
    * @return string
    */
   public function getUniqueCode() {
-    $code = CouponWebhookClient::requestCoupon($this->getWebhookUrl());
+    $code = CouponWebhookClient::requestCoupon($this->getCouponWebhookUrl());
 
     if (!$code) {
       $this->deactivate();
