@@ -97,6 +97,10 @@ dealapi:
 advertiser:
   url:   /advertiser/index
   param: { module: advertiser, action: index }
+  
+publisher:
+  url:   /publisher/index
+  param: { module: publisher, action: index }   
 
 get_create_index:
   url:   /deals/get_create_index
