@@ -87,7 +87,7 @@ class WidgetUtils {
       return "?";
     }
 
-    return intval($this->aSocialObject['l_cnt']);
+    return intval($this->aSocialObject['l_cnt']) + $this->getFacebookCount() + $this->getTwitterCount();
   }
 
   public function getButtonClass() {
@@ -430,6 +430,44 @@ class WidgetUtils {
     } catch (Exception $e) {
       error_log($e->getMessage());
       return null;
+    }
+  }
+
+  public function getTwitterCount() {
+    $ch = curl_init();
+    curl_setopt_array($ch, array(
+      CURLOPT_URL => 'http://urls.api.twitter.com/1/urls/count.json?url=' . $this->aUrl,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_TIMEOUT => 1,
+      CURLOPT_CONNECTTIMEOUT => 1,
+    ));
+    $rawData = curl_exec($ch);
+    curl_close($ch);
+
+
+
+    if($twitterData = json_decode($rawData, true)) {
+      return intval($twitterData['count']);
+    } else {
+      return intval(0);
+    }
+  }
+
+  public function getFacebookCount() {
+    $ch = curl_init();
+    curl_setopt_array($ch, array(
+      CURLOPT_URL => 'http://graph.facebook.com/?ids=' . $this->aUrl,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_TIMEOUT => 1,
+      CURLOPT_CONNECTTIMEOUT => 1,
+    ));
+    $rawData = curl_exec($ch);
+    curl_close($ch);
+
+    if($facebookData = json_decode($rawData, true)) {
+      return intval($facebookData[$this->aUrl]['shares']);
+    } else {
+      return intval(0);
     }
   }
 }
