@@ -117,6 +117,24 @@ slot('content');
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
 
+<?php slot('content'); ?>
+<h2 class="sub_title"><?php echo __('You earned %sum% via Spreadly deals. See the monthly overview: ');?></h2>
+	<div>
+		<?php include_partial('analytics/chart_bar_publisher', array('pChartsettings' =>
+					'{
+								"width": 305,
+								"height": 180,
+								"margin": [ 40, 0, 10, 10],
+								"plotsize": "50%",
+								"bgcolor" : "#e1e1e1",
+								"renderto":"relation-chart"
+						}', 'pData' => $pHost->getDemographics()
+		)); ?>
+	</div>
+
+<?php end_slot(); ?>
+<?php include_partial('global/graybox'); ?>
+
 
 <?php slot('content'); ?>
 	<div class="data-tablebox two-line-table">
