@@ -24,7 +24,11 @@ class dealActions extends sfActions
       $params = $request->getParameter('like');
 
       $params['u_id'] = $this->getUser()->getUserId();
-      $params['i_url'] = $url;
+
+      if ($url) {
+        $params['i_url'] = $url;
+        $params['i_host'] = parse_url($url, PHP_URL_HOST);
+      }
 
       $activity = new Documents\YiidActivity();
       $activity->fromArray($params);

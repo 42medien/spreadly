@@ -92,6 +92,9 @@ class YiidActivity extends BaseDocument {
   /** @String */
   protected $i_url;
 
+  /** @String */
+  protected $i_host;
+
   /** @Int */
   protected $i_id;
 
