@@ -27,7 +27,6 @@ class dealActions extends sfActions
 
       if ($url) {
         $params['i_url'] = $url;
-        $params['i_host'] = parse_url($url, PHP_URL_HOST);
       }
 
       $activity = new Documents\YiidActivity();

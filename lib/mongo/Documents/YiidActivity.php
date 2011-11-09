@@ -454,6 +454,7 @@ class YiidActivity extends BaseDocument {
     $this->fromArray($deal->toYiidActivityArray());
 
     if ($this->i_url) {
+      $this->setIHost(parse_url($this->i_url, PHP_URL_HOST));
       if ($dp = DomainProfileTable::getInstance()->retrieveByUrl($this->i_url)) {
         $this->setIId($dp->getId());
       }
