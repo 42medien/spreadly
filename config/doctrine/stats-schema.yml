@@ -80,4 +80,4 @@ Visit:
     cult:     { type: string(5) }
     is_like:     { type: boolean, default: false }
     is_dislike:  { type: boolean, default: false }
-    c:        { type: integer }
+    c:        { type: integer }                                 

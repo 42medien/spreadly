@@ -1,0 +1,13 @@
+detect_relations: true
+
+Commission:
+  actAs:
+    Timestampable: ~
+
+  columns:
+    price: float
+
+  # Relations
+    deal_id: integer(4)
+    domain_profile_id: integer(4)
+    ya_id: string(255)

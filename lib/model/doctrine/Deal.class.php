@@ -38,6 +38,23 @@ class Deal extends BaseDeal {
   public function participate($user) {
     sfContext::getInstance()->getLogger()->notice("{Deal} participate for Deal: ".$this->getId());
 
+    $this->checkParticipationAllowed($user);
+    $this->addDealToParticipatedDeals($user);
+
+    $analyticsActivity = MongoManager::getStatsDM()->getRepository("Documents\AnalyticsActivity")->findOneBy(array("d_id" => intval($this->getId()), "u_id" => intval($user->getId())));
+    
+    $this->createCommission($analyticsActivity);
+    
+    $this->increaseActualQuantity($analyticsActivity);
+
+    $this->save();
+
+    $this->checkForExpiration();
+
+    return $this->getCouponType()==DealTable::COUPON_TYPE_CODE ? $this->getCouponCode() : $this->getCouponUrl();
+  }
+  
+  private function checkParticipationAllowed($user) {
     if(!$this->isActive()) {
       throw new sfException("This Deal is not active!");
     }
@@ -45,33 +62,55 @@ class Deal extends BaseDeal {
     if($user->getParticipatedDeals() && in_array($this->getId(), $user->getParticipatedDeals())) {
       throw new sfException("User has already participated in this deal!");
     }
-
+    
+    return true;
+  }
+  
+  private function addDealToParticipatedDeals($user) {
     $array = $user->getParticipatedDeals() ? $user->getParticipatedDeals() : array();
     $array[] = $this->getId();
     $user->setParticipatedDeals($array);
     $user->save();
-
-    // check participation type
-    if ($this->getBillingType() == "like") { // count likes
-      $this->setActualQuantity($this->getActualQuantity()+1);
-    } else { // count media penetration
-      $dm = MongoManager::getStatsDM();
-      $analyticsActivity = $dm->getRepository("Documents\AnalyticsActivity")->findOneBy(array("d_id" => intval($this->getId()), "u_id" => intval($user->getId())));
-
-      $this->setActualQuantity($this->getActualQuantity()+$analyticsActivity->getMediaPenetration());
-    }
-
-    $this->save();
-
+  }
+  
+  private function checkForExpiration() {
     if($this->getRemainingQuantity() <= 0) {
       $this->expire();
       // send deal expire event
       sfContext::getInstance()->getEventDispatcher()->notify(new sfEvent($this, 'deal.event.expire', array()));
     }
-
-    return $this->getCouponType()==DealTable::COUPON_TYPE_CODE ? $this->getCouponCode() : $this->getCouponUrl();
   }
+  
+  private function createCommission($analyticsActivity) {
+    if($analyticsActivity) {
+      $yiidActivity = MongoManager::getDM()->getRepository("Documents\YiidActivity")->find($analyticsActivity->getYiidActivityId());
+      
+      $commissionValue = $this->getBillingType()==DealTable::BILLING_TYPE_LIKE ? $this->commission_per_unit : ($this->commission_per_unit*$analyticsActivity->getMediaPenetration());
+      
+      if($this->commission_pot<$commissionValue) {
+        $commissionValue = $this->commission_pot;
+      }
 
+      $commission = new Commission();
+      $commission->setPrice($commissionValue);
+      $commission->setDomainProfileId($yiidActivity->getIId());
+      $commission->setDealId($this->getId());
+      $commission->setYaId($yiidActivity->getId());
+      $commission->save();
+      
+      $this->commission_pot -= $commissionValue;
+    }
+  }
+  
+  private function increaseActualQuantity($analyticsActivity) {
+    // check participation type
+    if ($this->getBillingType() == "like") { // count likes
+      $this->setActualQuantity($this->getActualQuantity()+1);
+    } else { // count media penetration
+      $this->setActualQuantity($this->getActualQuantity()+$analyticsActivity->getMediaPenetration());
+    }
+  }
+  
   public function getDealSummary() {
     $dm = MongoManager::getStatsDM();
     $stats = $dm->getRepository("Documents\DealSummary")->findOneBy(array("d_id" => intval($this->getId())));

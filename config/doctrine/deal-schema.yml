@@ -107,6 +107,9 @@ Deal:
       default: 0
     price:
       type: float
+    commission_pot: float
+    commission_percentage: integer(4)
+    commission_per_unit: float
 
   # Relations
     sf_guard_user_id: integer

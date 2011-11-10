@@ -47,3 +47,30 @@ User:
     active: true
     birthdate: "1991-12-15"
     last_activity:    <?php echo time(); ?>
+
+Community:
+  community_1:
+    User:       user_1
+    community:   testcommunity
+    name:        testcommunity
+    slug:        testcommunity
+    oi_url:      http://www.google.com/profiles/%s
+    url:         http://www.google.com/
+    
+  community_2:
+    User:        user_1
+    community:   anothercommunity
+    name:        anothercommunity
+    slug:        anothercommunity
+    oi_url:      http://www.facebook.com/%s
+    url:         http://www.facebook.com
+    
+OnlineIdentity:
+  oi_1:
+    User:      user_1
+    Community:       community_1
+    friend_count: 120
+  oi_2:
+    User:      user_1
+    Community:       community_2
+    friend_count: 78

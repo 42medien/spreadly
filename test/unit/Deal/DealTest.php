@@ -26,6 +26,9 @@ class DealTest extends BaseTestCase {
     $this->deal4 = $this->table->findOneBy('name', 'Campaign No. 4');
     $this->deal5 = $this->table->findOneBy('name', 'Campaign No. 5');
     $this->deal6 = $this->table->findOneBy('name', 'Campaign No. 6');
+
+    $this->dealCommission1 = $this->table->findOneBy('name', 'Campaign No. Commission 1');
+    $this->dealCommission2 = $this->table->findOneBy('name', 'Campaign No. Commission 2');
     
     $this->hugo = UserTable::getInstance()->findOneByUsername('hugo');
     $this->affe = UserTable::getInstance()->findOneByUsername('affe');
@@ -319,4 +322,15 @@ class DealTest extends BaseTestCase {
     }
     $this->assertTrue($exception);
   }  
+  
+  public function testCommission() {
+    $lActivity = new Documents\YiidActivity();
+    $lActivity->setUId($this->hugo->getId());
+    $lActivity->setDId($this->dealCommission1->getId());
+    $lActivity->setOiids($this->hugo->getOnlineIdentitesAsArray());
+    $lActivity->setIUrl('http://notizblog.org/');
+    $lActivity->save();
+    
+    
+  }
 }
