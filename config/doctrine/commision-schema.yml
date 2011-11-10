@@ -8,6 +8,9 @@ Commission:
     price: float
 
   # Relations
-    deal_id: integer(4)
-    domain_profile_id: integer(4)
+    deal_id: integer 
+    domain_profile_id: integer
     ya_id: string(255)
+  relations:
+    Deal:
+      onDelete: SET NULL
