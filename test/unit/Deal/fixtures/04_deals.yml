@@ -1,3 +1,6 @@
+# This is a fucking bullshit solution to the problem, that the db is not dropped before loading fixtures
+Commission: []
+     
 Deal:
   # Submitted Deals
   Deal_1:
@@ -246,9 +249,9 @@ Deal:
     # Billing information
     billing_type: like
     target_quantity: 10
-    actual_quantity: 0
+    actual_quantity: 9
     price: 17
-    commission_pot: 1.7
+    commission_pot: 0.17
     commission_percentage: 10
     commission_per_unit: 0.17
   
@@ -286,9 +289,9 @@ Deal:
     # Billing information
     billing_type: media_penetration
     target_quantity: 5000
-    actual_quantity: 0
+    actual_quantity: 4500
     price: 15
-    commission_pot: 1.5
+    commission_pot: 0.15
     commission_percentage: 10
     commission_per_unit: 0.0003
   

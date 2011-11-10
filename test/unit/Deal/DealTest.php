@@ -323,7 +323,7 @@ class DealTest extends BaseTestCase {
     $this->assertTrue($exception);
   }  
   
-  public function testCommission() {
+  public function testLikeCommission() {
     $lActivity = new Documents\YiidActivity();
     $lActivity->setUId($this->hugo->getId());
     $lActivity->setDId($this->dealCommission1->getId());
@@ -331,6 +331,47 @@ class DealTest extends BaseTestCase {
     $lActivity->setIUrl('http://notizblog.org/');
     $lActivity->save();
     
+    $this->assertEquals(0, $this->dealCommission1->getCommissionPot());
+    $com = CommissionTable::getInstance()->findOneByYaId($lActivity->getId());
+    $this->assertNotNull($com);
+    $this->assertEquals($this->dealCommission1->getId(), $com->getDealId());
+    $this->assertEquals($this->dealCommission1->getCommissionPerUnit(), $com->getPrice());
+    $this->assertEquals($lActivity->getIId(), $com->getDomainProfileId());
     
+  }
+
+  public function testMPCommission() {
+    $lActivity = new Documents\YiidActivity();
+    $lActivity->setUId($this->hugo->getId());
+    $lActivity->setDId($this->dealCommission2->getId());
+    $lActivity->setOiids($this->hugo->getOnlineIdentitesAsArray());
+    $lActivity->setIUrl('http://notizblog.org/');
+    $lActivity->save();
+    
+    $this->assertEquals(0.0906, $this->dealCommission2->getCommissionPot());
+    $com1 = CommissionTable::getInstance()->findOneByYaId($lActivity->getId());
+    $this->assertNotNull($com1);
+    $this->assertEquals($this->dealCommission2->getId(), $com1->getDealId());
+    $this->assertEquals(strval($this->dealCommission2->getCommissionPerUnit()*198), strval($com1->getPrice()));
+    $this->assertEquals($lActivity->getIId(), $com1->getDomainProfileId());
+    
+    $potBefore = $this->dealCommission2->getCommissionPot();
+    
+    $lActivity = new Documents\YiidActivity();
+    $lActivity->setUId($this->affe->getId());
+    $lActivity->setDId($this->dealCommission2->getId());
+    $lActivity->setOiids($this->affe->getOnlineIdentitesAsArray());
+    $lActivity->setIUrl('http://notizblog.org/');
+    $lActivity->save();
+    
+    $this->assertEquals(0, $this->dealCommission2->getCommissionPot());
+    $com2 = CommissionTable::getInstance()->findOneByYaId($lActivity->getId());
+    $this->assertNotNull($com2);
+    $this->assertEquals($this->dealCommission2->getId(), $com2->getDealId());
+    $this->assertEquals($potBefore, $com2->getPrice());
+    $this->assertEquals($lActivity->getIId(), $com2->getDomainProfileId());
+
+    
+
   }
 }

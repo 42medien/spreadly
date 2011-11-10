@@ -74,3 +74,12 @@ OnlineIdentity:
     User:      user_1
     Community:       community_2
     friend_count: 78
+
+  oi_3:
+    User:      user_2
+    Community:       community_1
+    friend_count: 2937
+  oi_4:
+    User:      user_2
+    Community:       community_2
+    friend_count: 1293

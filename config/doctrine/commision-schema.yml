@@ -14,3 +14,6 @@ Commission:
   relations:
     Deal:
       onDelete: SET NULL
+    DomainProfile:
+      onDelete: SET NULL
+
