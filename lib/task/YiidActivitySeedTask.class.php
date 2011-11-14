@@ -57,26 +57,6 @@ EOF;
     $lOiHugoTwitter = OnlineIdentityTable::retrieveByAuthIdentifier('http://twitter.com/account/profile?user_id=21092406', $lCommunityTwitter->getId());
     $lOiJamesFacebook = OnlineIdentityTable::retrieveByAuthIdentifier('james_fb', $lCommunityFb->getId());
 
-    $allDeals = DealTable::getInstance()->findAll();
-    foreach ($allDeals as $deal) {
-      if($deal->canSubmit()) {
-        $deal->submit();
-      }
-    }
-
-    $deal = DealTable::getInstance()->findByName('Campaign No. 1');
-    if($deal[0]->canApprove()) {
-      $deal[0]->approve();
-    }
-    $deal = DealTable::getInstance()->findByName('Campaign No. 2');
-    if($deal[0]->canApprove()) {
-      $deal[0]->approve();
-    }
-    $deal = DealTable::getInstance()->findByName('Campaign No. 3');
-    if($deal[0]->canApprove()) {
-      $deal[0]->approve();
-    }
-
     $urls = array('www.snirgel.de', 'notizblog.org', 'www.missmotz.de');
     $tags = array('geekstuff', 'otherthings', 'schuhe');
     $users = array($lUserHugo, $lUserJames);
