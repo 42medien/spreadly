@@ -324,6 +324,7 @@ class DealTest extends BaseTestCase {
   }  
   
   public function testLikeCommission() {
+    $this->dealCommission1->approve();
     $lActivity = new Documents\YiidActivity();
     $lActivity->setUId($this->hugo->getId());
     $lActivity->setDId($this->dealCommission1->getId());
@@ -341,6 +342,7 @@ class DealTest extends BaseTestCase {
   }
 
   public function testMPCommission() {
+    $this->dealCommission2->approve();
     $lActivity = new Documents\YiidActivity();
     $lActivity->setUId($this->hugo->getId());
     $lActivity->setDId($this->dealCommission2->getId());
@@ -370,8 +372,8 @@ class DealTest extends BaseTestCase {
     $this->assertEquals($this->dealCommission2->getId(), $com2->getDealId());
     $this->assertEquals($potBefore, $com2->getPrice());
     $this->assertEquals($lActivity->getIId(), $com2->getDomainProfileId());
-
-    
-
   }
+
+
+  
 }

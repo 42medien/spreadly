@@ -224,7 +224,7 @@ Deal:
     updated_at: '<?php echo date("c", strtotime("3 days ago")); ?>'
 
   Deal_C1:
-    state: active
+    state: submitted
     type: pool
     name: 'Campaign No. Commission 1'
     tos_accepted: true
@@ -264,7 +264,7 @@ Deal:
     updated_at: '<?php echo date("c", strtotime("3 days ago")); ?>'
 
   Deal_C2:
-    state: active
+    state: submitted
     type: pool
     name: 'Campaign No. Commission 2'
     tos_accepted: true
