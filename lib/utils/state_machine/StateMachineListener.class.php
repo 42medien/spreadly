@@ -11,7 +11,7 @@ class StateMachineListener extends Doctrine_Record_Listener
     // Set initial state
     $lInvoker = $pEvent->getInvoker();
     $lState = $this->getOption('column');
-    if(sfConfig::get('sf_environment')!='test') {
+    if(!$lInvoker->$lState) {
       $lInvoker->$lState = $this->getOption('initial');      
     }
   }
