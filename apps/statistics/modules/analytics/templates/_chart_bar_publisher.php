@@ -31,7 +31,7 @@ var ActivityChart = {
 		   },
 		   yAxis: {
 		      title: {
-		         text: "<?php echo __('Money/Euro'); ?>"
+		         text: "<?php echo __('Revenue/€'); ?>"
 		      },
 		      min: 0,
 		      startOnTick: false,
@@ -67,7 +67,7 @@ var ActivityChart = {
 
 		   series: [{
 		      type: 'column',
-		      name: 'Money/Euro',
+		      name: 'Revenue/€',
 		      /*pointInterval: 86400000,*/
 		      pointStart: 0,
 		      data: [5, 7, 9, 12.50],
