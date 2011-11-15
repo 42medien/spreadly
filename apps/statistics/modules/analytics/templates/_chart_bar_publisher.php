@@ -1,12 +1,21 @@
 <?php use_helper('ChartData') ?>
 <div id="chart_bar_publisher" class="area-chart"></div>
-<?php //var_dump($pData);die();?>
+<?php
+$labels = array();
+$values = array();
+foreach ($pData as $d) {
+  $labels[] = date("M o", strtotime($d['created_at']));
+  $values[] = round($d['sum'], 2, PHP_ROUND_HALF_UP);
+}
+
+$labels = "'".implode("','", $labels)."'";
+$values = implode(",", $values);
+?>
 <script type="text/javascript">
 var ActivityChart = {
 	init: function(pChartsettings) {
 
 	  Highcharts.theme = { colors: [] };// prevent errors in default theme
-	  var lData = <?php echo json_encode($pData); ?>;
 	  var lZoomType = (pChartsettings.zoomtype === undefined)?'':pChartsettings.zoomtype;
 		var lOptions = {
 		    chart: {
@@ -26,7 +35,7 @@ var ActivityChart = {
 		      title: {
 		         text: "<?php echo __('Month'); ?>"
 		      },
-					categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+					categories: [<?php echo $labels; ?>]
 		      /*tickInterval: 24 * 3600 * 1000,*/
 		   },
 		   yAxis: {
@@ -36,7 +45,7 @@ var ActivityChart = {
 		      min: 0,
 		      startOnTick: false,
 		      showFirstLabel: false,
-		      allowDecimals:false
+		      allowDecimals: true
 		   },
 		   tooltip: {
 		      shared: true
@@ -70,7 +79,7 @@ var ActivityChart = {
 		      name: 'Revenue/€',
 		      /*pointInterval: 86400000,*/
 		      pointStart: 0,
-		      data: [5, 7, 9, 12.50],
+		      data: [<?php echo $values; ?>],
 		      color: '#1231e3',
 	        fillOpacity: 0.1,
 	        fillColor: {

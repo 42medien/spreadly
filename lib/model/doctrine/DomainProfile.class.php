@@ -91,6 +91,11 @@ class DomainProfile extends BaseDomainProfile
     return $this->getId().': '. $this->getUrl();
   }
 
+  /**
+   * get the full price a domain profile earned
+   *
+   * @return array
+   */
   public function getCommissionSum() {
     $sum = Doctrine_Query::create()
         ->limit(0)
@@ -100,5 +105,22 @@ class DomainProfile extends BaseDomainProfile
         ->fetchArray();
 
     return floatval(round($sum[0]['sum'], 2, PHP_ROUND_HALF_UP));
+  }
+
+  /**
+   * get a monthly stats of the money a domain profile earned
+   *
+   * @return array
+   */
+  public function getCommissionStats() {
+    $stats = Doctrine_Query::create()
+        ->select('sum(price), month( created_at ) as month,  year( created_at ) as year, created_at')
+        ->from('commission')
+        ->where('domain_profile_id = ?', $this->getId())
+        ->groupBy('month, year')
+        ->orderBy('created_at ASC')
+        ->fetchArray();
+
+    return $stats;
   }
 }

@@ -128,7 +128,7 @@ slot('content');
 								"plotsize": "50%",
 								"bgcolor" : "#e1e1e1",
 								"renderto":"relation-chart"
-						}', 'pData' => $pHost->getDemographics()
+						}', 'pData' => $pDomainProfile->getCommissionStats()
 		)); ?>
 	</div>
 
