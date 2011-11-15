@@ -107,3 +107,49 @@ Deal:
 
     created_at: '<?php echo date("c"); ?>'
     updated_at: '<?php echo date("c"); ?>'
+
+Commission:
+  c_1:
+    DomainProfile: DomainProfile_2
+    price: 0.25
+    Deal: Deal_1
+  c_2:
+    DomainProfile: DomainProfile_2
+    price: 0.35
+    Deal: Deal_1
+  c_3:
+    DomainProfile: DomainProfile_2
+    price: 0.025
+    Deal: Deal_1
+  c_4:
+    DomainProfile: DomainProfile_1
+    price: 0.25
+    Deal: Deal_1
+  c_5:
+    DomainProfile: DomainProfile_2
+    price: 0.0025
+    Deal: Deal_1
+  c_6:
+    DomainProfile: DomainProfile_2
+    price: 0.1
+    Deal: Deal_1
+  c_7:
+    DomainProfile: DomainProfile_2
+    price: 0.12
+    Deal: Deal_1
+  c_8:
+    DomainProfile: DomainProfile_1
+    price: 0.25
+    Deal: Deal_1
+  c_9:
+    DomainProfile: DomainProfile_1
+    price: 0.25
+    Deal: Deal_1
+  c_10:
+    DomainProfile: DomainProfile_1
+    price: 0.25
+    Deal: Deal_1
+  c_11:
+    DomainProfile: DomainProfile_2
+    price: 0.25
+    Deal: Deal_1

@@ -86,8 +86,19 @@ class DomainProfile extends BaseDomainProfile
   public function getUniqueId() {
     return "tag:spreadly.com,".date('Y', strtotime($this->getCreatedAt())).":/domain/".$this->getId();
   }
-  
+
   public function __toString() {
     return $this->getId().': '. $this->getUrl();
+  }
+
+  public function getCommissionSum() {
+    $sum = Doctrine_Query::create()
+        ->limit(0)
+        ->select('sum(price)')
+        ->from('commission')
+        ->where('domain_profile_id = ?', $this->getId())
+        ->fetchArray();
+
+    return floatval(round($sum[0]['sum'], 2, PHP_ROUND_HALF_UP));
   }
 }

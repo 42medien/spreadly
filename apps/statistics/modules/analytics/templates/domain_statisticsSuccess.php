@@ -118,7 +118,7 @@ slot('content');
 <?php include_partial('global/graybox'); ?>
 
 <?php slot('content'); ?>
-<h2 class="sub_title"><?php echo __('You earned %sum% via Spreadly deals. See the monthly overview: ');?></h2>
+<h2 class="sub_title"><?php echo __('You earned %sum% € via Spreadly deals. See the monthly overview: ', array('%sum%' => $pDomainProfile->getCommissionSum())); ?></h2>
 	<div>
 		<?php include_partial('analytics/chart_bar_publisher', array('pChartsettings' =>
 					'{
