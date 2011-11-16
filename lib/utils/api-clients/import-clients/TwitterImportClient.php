@@ -33,8 +33,8 @@ class TwitterImportClient {
   }
 
   public static function importFriends(&$pOnlineIdentity, $lJsonObject) {
-    $pOnlineIdentity->setFriendIds(implode(",", $lJsonObject));
-    $pOnlineIdentity->setFriendCount(count($lJsonObject));
+    $pOnlineIdentity->setFriendIds(implode(",", $lJsonObject->ids));
+    $pOnlineIdentity->setFriendCount(count($lJsonObject->ids));
     $pOnlineIdentity->save();
   }
 
