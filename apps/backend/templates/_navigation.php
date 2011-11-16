@@ -36,12 +36,14 @@
         <?php echo link_to('Dashboard', 'dashboard/index'); ?> |
       </span>
       <span class="navigation_text">
+        <?php echo link_to('Publisher', 'publisher/index'); ?> |
+      </span>
+      <span class="navigation_text">
         <?php echo link_to('Error-Log', 'error_log/index'); ?> |
       </span>
       <span class="navigation_text">
         <?php echo link_to(__('Logout'), '@sf_guard_signout'); ?>
       </span>
     <?php endif; ?>
-
   </div>
 </div>
