@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><?php echo __('Spread.ly - We monetize Social Sharing'); ?></title>
+    <title><?php echo __('Spreadly - We monetize Social Sharing'); ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="Spread.ly consists of sharing button widgets that enable users to share content into a wide range of social networks simultanously. Besides that, Spread.ly offers a sophisticated functionality to reward users for their likes." />
     <meta name="keywords" content="sharing,sharebutton,like,likebutton,deal,dealbutton,facebook,linkedin,twitter,buzz" />
