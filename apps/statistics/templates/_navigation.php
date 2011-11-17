@@ -40,7 +40,7 @@
       </a>
     </li>
     <li>
-    	<a href="<?php echo url_for('@publisher'); ?>" title="Buttons" <?php if($module=='domain_profiles' || $module=='analytics') { echo 'class="active"';} ?>>
+    	<a href="<?php echo url_for('@publisher'); ?>" title="Buttons" <?php if($module=='domain_profiles' || $module=='analytics' || $module=='publisher') { echo 'class="active"';} ?>>
     		<span><?php echo __('Publisher'); ?></span>
     	</a>
     </li>
