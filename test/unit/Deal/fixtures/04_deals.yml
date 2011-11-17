@@ -302,3 +302,43 @@ Deal:
 
     created_at: '<?php echo date("c", strtotime("3 days ago")); ?>'
     updated_at: '<?php echo date("c", strtotime("3 days ago")); ?>'
+    
+  Deal_C3:
+    state: submitted
+    type: pool
+    name: 'Campaign No. Commission 3'
+    tos_accepted: true
+    
+    # Motivation stuff
+    motivation_title: 'Get a free air guitar'
+    motivation_text: 'Just click the like button below!'
+    
+    # Share stuff
+    spread_title: 'I got this free air guitar'
+    spread_text: 'Is this awesome, or what?!?'
+    spread_url: 'http://www.missmotz.de/spread_url'
+    spread_img: 'http://www.missmotz.de/spread_img'
+    spread_tos: 'I have read the tos'
+    
+    # Coupon stuff
+    coupon_type: download
+    coupon_title: 'Here you go …'
+    coupon_text: '… your download!'
+    coupon_url: 'http://www.missmotz.de/download'
+    
+    # Billing information
+    billing_type: like
+    target_quantity: 13
+    actual_quantity: 9
+    price: 17
+    commission_pot: 0.17
+    commission_percentage: 10
+    commission_per_unit: 0.17
+  
+    # Relations
+    DomainProfile: DomainProfile_1
+    sfGuardUser: sfGuardUser_1
+    PaymentMethod: PaymentMethod_1
+
+    created_at: '<?php echo date("c", strtotime("3 days ago")); ?>'
+    updated_at: '<?php echo date("c", strtotime("3 days ago")); ?>'

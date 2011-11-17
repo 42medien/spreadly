@@ -90,15 +90,17 @@ class Deal extends BaseDeal {
       if($this->commission_pot<$commissionValue) {
         $commissionValue = $this->commission_pot;
       }
-
-      $commission = new Commission();
-      $commission->setPrice($commissionValue);
-      $commission->setDomainProfileId($yiidActivity->getIId());
-      $commission->setDealId($this->getId());
-      $commission->setYaId($yiidActivity->getId());
-      $commission->save();
       
-      $this->commission_pot -= $commissionValue;
+      if($commissionValue>0) {
+        $commission = new Commission();
+        $commission->setPrice($commissionValue);
+        $commission->setDomainProfileId($yiidActivity->getIId());
+        $commission->setDealId($this->getId());
+        $commission->setYaId($yiidActivity->getId());
+        $commission->save();
+      
+        $this->commission_pot -= $commissionValue;        
+      }
     }
   }
   

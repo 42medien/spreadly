@@ -29,6 +29,7 @@ class DealTest extends BaseTestCase {
 
     $this->dealCommission1 = $this->table->findOneBy('name', 'Campaign No. Commission 1');
     $this->dealCommission2 = $this->table->findOneBy('name', 'Campaign No. Commission 2');
+    $this->dealCommission3 = $this->table->findOneBy('name', 'Campaign No. Commission 3');
     
     $this->hugo = UserTable::getInstance()->findOneByUsername('hugo');
     $this->affe = UserTable::getInstance()->findOneByUsername('affe');
@@ -372,6 +373,27 @@ class DealTest extends BaseTestCase {
     $this->assertEquals($this->dealCommission2->getId(), $com2->getDealId());
     $this->assertEquals($potBefore, $com2->getPrice());
     $this->assertEquals($lActivity->getIId(), $com2->getDomainProfileId());
+  }
+
+  public function testEmptyPot() {
+    $this->dealCommission3->approve();
+    $lActivity = new Documents\YiidActivity();
+    $lActivity->setUId($this->hugo->getId());
+    $lActivity->setDId($this->dealCommission3->getId());
+    $lActivity->setOiids($this->hugo->getOnlineIdentitesAsArray());
+    $lActivity->setIUrl('http://notizblog.org/');
+    $lActivity->save();
+    
+    $lActivity = new Documents\YiidActivity();
+    $lActivity->setUId($this->affe->getId());
+    $lActivity->setDId($this->dealCommission3->getId());
+    $lActivity->setOiids($this->affe->getOnlineIdentitesAsArray());
+    $lActivity->setIUrl('http://notizblog.org/');
+    $lActivity->save();
+    
+    $this->assertEquals(0, $this->dealCommission3->getCommissionPot());
+    $com = CommissionTable::getInstance()->findOneByYaId($lActivity->getId());
+    $this->assertTrue($com==null);
   }
 
 
