@@ -54,33 +54,37 @@ analytics_overview:
   url:   /analytics
   param: { module: analytics, action: index }
 
+publisher_overview:
+  url:   /publisher
+  param: { module: publisher, action: index }
+
 analytics:
   url:   /analytics/statistics
   param: { module: analytics, action: statistics }
-  
+
 domain_statistics:
   url:  /analytics/domain_statistics
-  param:  { module: analytics, action: domain_statistics}  
-  
+  param:  { module: analytics, action: domain_statistics}
+
 domain_detail:
   url:  /analytics/domain_detail
-  param:  { module: analytics, action: domain_detail}   
-  
+  param:  { module: analytics, action: domain_detail}
+
 deal_analytics:
   url:  /deal_analytics/deal_statistics/*
-  param:  { module: deal_analytics, action: deal_statistics}  
-  
+  param:  { module: deal_analytics, action: deal_statistics}
+
 deal_details:
   url:  /deal_analytics/deal_details/*
-  param:  { module: deal_analytics, action: deal_details} 
-  
-deal_analytics_index:    
+  param:  { module: deal_analytics, action: deal_details}
+
+deal_analytics_index:
   url:  /deal_analytics/index
-  param:  { module: deal_analytics, action: index}   
-  
+  param:  { module: deal_analytics, action: index}
+
 select_period:
   url:  /analytics/select_period
-  param:  { module: analytics, action: select_period}  
+  param:  { module: analytics, action: select_period}
 
 get_analytics_content:
   url: /analytics/get_analytics_content
@@ -89,18 +93,18 @@ get_analytics_content:
 deals:
   url:   /deals/campaign
   param: { module: deals, action: step_campaign }
-  
-dealapi:  
+
+dealapi:
   url:   /advertiser/dealapi
   param: { module: advertiser, action: apply_api }
-    
+
 advertiser:
   url:   /advertiser/index
   param: { module: advertiser, action: index }
-  
+
 publisher:
   url:   /publisher/index
-  param: { module: publisher, action: index }   
+  param: { module: publisher, action: index }
 
 get_create_index:
   url:   /deals/get_create_index
@@ -157,10 +161,10 @@ nodomain:
 imprint:
   url:  /imprint
   param: { module: system, action: imprint}
-  
-subscribe_api: 
+
+subscribe_api:
   url: /subscribe
-  param: { module: domain_profiles, action: subscribe_api}  
+  param: { module: domain_profiles, action: subscribe_api}
 
 
 # You can find more information about this file on the symfony website:
