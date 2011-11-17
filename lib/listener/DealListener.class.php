@@ -10,7 +10,7 @@ class DealListener {
     foreach ($admins as $admin) {
       sfContext::getInstance()->getLogger()->notice("{DealListener} Sending email to admin: ".$admin->getEmailAddress());
       try {
-        sfContext::getInstance()->getMailer()->composeAndSend($sender, $admin->getEmailAddress(), '[Deal submitted]: '.preg_replace('/\n/', '', $deal->getName()), sfConfig::get("app_settings_url").'/backend.php/deal/'.$deal->getId().'/edit' );
+        sfContext::getInstance()->getMailer()->composeAndSend($sender, $admin->getEmailAddress(), '[Deal submitted]: '.preg_replace('/\n/', '', $deal->getName()), sfConfig::get("app_settings_url").'/backend.php/approve_deal/approve/deal_id/'.$deal->getId());
       } catch (Exception $e) {
         sfContext::getInstance()->getLogger()->err("{DealListener} Failed to send email.\n".$e->getMessage());
       }
