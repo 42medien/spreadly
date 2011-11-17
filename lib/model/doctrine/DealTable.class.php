@@ -52,4 +52,12 @@ class DealTable extends Doctrine_Table
 
     return $nextDeal;
   }
+  
+  public function findSubmitted() {
+    $q = $this->createQuery()
+                  ->where('deal_state = ?', self::STATE_SUBMITTED)
+                  ->orderBy('created_at DESC');
+
+    return $q->execute();
+  }
 }

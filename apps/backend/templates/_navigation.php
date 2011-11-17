@@ -12,20 +12,24 @@
       <span class="navigation_text <?php if($module=='deal') { echo 'active'; } ?>">
         <?php echo link_to('Deals', url_for('deal', array("sort" => "updated_at", "sort_type" => "desc"))) ?> |
       </span>
+      <span class="navigation_text <?php if($module=='approve_deal') { echo 'active'; } ?>">
+        <?php echo link_to('Approve Deals', url_for('approve_deal/index')) ?> |
+      </span>      
       <span class="navigation_text <?php if($module=='sfGuardUser') { echo 'active'; } ?>">
         <?php echo link_to('Users', url_for('sf_guard_user')) ?> |
       </span>
       <span class="navigation_text <?php if($module=='domain') { echo 'active'; } ?>">
         <?php echo link_to('Domains', url_for('domain/index')) ?> |
       </span>
-
+      
+      <!--
       <span class="navigation_text <?php if($module=='sfGuardPermission') { echo 'active'; } ?>">
         <?php echo link_to('Permissions', url_for('sf_guard_permission')) ?> |
       </span>
       <span class="navigation_text <?php if($module=='sfGuardGroup') { echo 'active'; } ?>">
         <?php echo link_to('Groups', url_for('sf_guard_group')) ?> |
       </span>
-
+      -->
       <span class="navigation_text <?php if($module=='oldstats') { echo 'active'; } ?>">
         <?php echo link_to('OldStats', url_for('@oldstats')) ?> |
       </span>
