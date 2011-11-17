@@ -142,7 +142,7 @@
       </fieldset>
       
       <fieldset>
-        <input type="submit" class="btn primary" value="Submit"/>
+        <input type="submit" class="btn primary" value="Approve"/>
         <?php echo link_to('Cancel', 'approve_deal/index', 'class=btn') ?>
       </fieldset>
 
