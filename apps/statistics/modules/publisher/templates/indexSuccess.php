@@ -1,6 +1,6 @@
 <?php slot('content') ?>
 <h2><?php echo __('Herzlich Willkommen im Publisher-Bereich'); ?></h2>
-<div><?php echo __("Fo shizzle rizzle pot dope amizzle, brizzle adipiscing elizzle. Stuff crackalackin velizzle, yo , suscipizzle fo, dope vizzle, that's the shizzle. Pellentesque eget tortizzle. Bow wow wow sheezy. Black izzle its fo rizzle doggy dang tempus the bizzle. Maurizzle pellentesque nibh dizzle turpis. Vestibulum izzle tortor. Pellentesque shut the shizzle up dang nisi. In hac habitasse platea dictumst. Fo shizzle dapibizzle. I'm in the shizzle tellizzle fo shizzle, pretium fo, daahng dawg izzle, eleifend vitae, nunc. Funky fresh suscipizzle. Integizzle sempizzle shiznit yo mamma purus."); ?></div>
+<div><?php echo __("Holen Sie sich jetzt den Spreadly Button für ihre Seite. <br/><br/>Registrieren Sie ihre Webseite bei Spreadly und erhalten sie damit Analyse-Daten über Shares, Likes und Media Penetration ihrer User.<br/><br/>Verdienen Sie nach der Registrierung über unser Adnetwork bares Geld, indem Sie an jedem geklickten Deal beteiligt werden."); ?></div>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
 <div class="clearfix services_list">
