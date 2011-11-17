@@ -123,4 +123,20 @@ class DomainProfile extends BaseDomainProfile
 
     return $stats;
   }
+
+  /**
+   * get the full price a domain profile earned
+   *
+   * @return array
+   */
+  public function getCommissionSumOfLast30Days() {
+    $sum = Doctrine_Query::create()
+        ->limit(0)
+        ->select('sum(price)')
+        ->from('commission')
+        ->where('domain_profile_id = ? AND created_at >= ? AND created_at <= ?', array($this->getId(), date("c", strtotime("now - 30 days")), date("c", strtotime("now"))))
+        ->fetchArray();
+
+    return floatval(round($sum[0]['sum'], 2, PHP_ROUND_HALF_UP));
+  }
 }
