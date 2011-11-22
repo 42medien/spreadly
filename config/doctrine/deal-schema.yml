@@ -55,7 +55,7 @@ Deal:
       type: enum
       length: 255
       default: pool
-      values: ['pool']
+      values: ['pool', 'publisher']
     name: string(255)
     tos_accepted:
       type: boolean

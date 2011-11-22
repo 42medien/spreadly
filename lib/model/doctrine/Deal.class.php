@@ -42,9 +42,12 @@ class Deal extends BaseDeal {
     $this->addDealToParticipatedDeals($user);
 
     $analyticsActivity = MongoManager::getStatsDM()->getRepository("Documents\AnalyticsActivity")->findOneBy(array("d_id" => intval($this->getId()), "u_id" => intval($user->getId())));
-    
-    $this->createCommission($analyticsActivity);
-    
+
+    // create commission for pool deals
+    if ($this->getType() != DealTable::TYPE_PUBLISHER) {
+      $this->createCommission($analyticsActivity);
+    }
+
     $this->increaseActualQuantity($analyticsActivity);
 
     $this->save();
@@ -53,7 +56,7 @@ class Deal extends BaseDeal {
 
     return $this->getCouponType()==DealTable::COUPON_TYPE_CODE ? $this->getCouponCode() : $this->getCouponUrl();
   }
-  
+
   private function checkParticipationAllowed($user) {
     if(!$this->isActive()) {
       throw new sfException("This Deal is not active!");
@@ -62,17 +65,17 @@ class Deal extends BaseDeal {
     if($user->getParticipatedDeals() && in_array($this->getId(), $user->getParticipatedDeals())) {
       throw new sfException("User has already participated in this deal!");
     }
-    
+
     return true;
   }
-  
+
   private function addDealToParticipatedDeals($user) {
     $array = $user->getParticipatedDeals() ? $user->getParticipatedDeals() : array();
     $array[] = $this->getId();
     $user->setParticipatedDeals($array);
     $user->save();
   }
-  
+
   private function checkForExpiration() {
     if($this->getRemainingQuantity() <= 0) {
       $this->expire();
@@ -80,17 +83,17 @@ class Deal extends BaseDeal {
       sfContext::getInstance()->getEventDispatcher()->notify(new sfEvent($this, 'deal.event.expire', array()));
     }
   }
-  
+
   private function createCommission($analyticsActivity) {
     if($analyticsActivity) {
       $yiidActivity = MongoManager::getDM()->getRepository("Documents\YiidActivity")->find($analyticsActivity->getYiidActivityId());
-      
+
       $commissionValue = $this->getBillingType()==DealTable::BILLING_TYPE_LIKE ? $this->commission_per_unit : ($this->commission_per_unit*$analyticsActivity->getMediaPenetration());
-      
+
       if($this->commission_pot<$commissionValue) {
         $commissionValue = $this->commission_pot;
       }
-      
+
       if($commissionValue>0) {
         $commission = new Commission();
         $commission->setPrice($commissionValue);
@@ -98,12 +101,12 @@ class Deal extends BaseDeal {
         $commission->setDealId($this->getId());
         $commission->setYaId($yiidActivity->getId());
         $commission->save();
-      
-        $this->commission_pot -= $commissionValue;        
+
+        $this->commission_pot -= $commissionValue;
       }
     }
   }
-  
+
   private function increaseActualQuantity($analyticsActivity) {
     // check participation type
     if ($this->getBillingType() == "like") { // count likes
@@ -112,7 +115,7 @@ class Deal extends BaseDeal {
       $this->setActualQuantity($this->getActualQuantity()+$analyticsActivity->getMediaPenetration());
     }
   }
-  
+
   public function getDealSummary() {
     $dm = MongoManager::getStatsDM();
     $stats = $dm->getRepository("Documents\DealSummary")->findOneBy(array("d_id" => intval($this->getId())));

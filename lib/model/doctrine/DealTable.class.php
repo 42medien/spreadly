@@ -4,6 +4,7 @@ class DealTable extends Doctrine_Table
 {
   // Type
   const TYPE_POOL = 'pool';
+  const TYPE_PUBLISHER = 'publisher';
 
   // Billing type
   const BILLING_TYPE_LIKE = 'like';
@@ -25,8 +26,7 @@ class DealTable extends Doctrine_Table
   const STATE_ACTIVE = 'active';
   const STATE_EXPIRED = 'expired';
 
-  public static function getInstance()
-  {
+  public static function getInstance() {
     return Doctrine_Core::getTable('Deal');
   }
 
@@ -52,7 +52,7 @@ class DealTable extends Doctrine_Table
 
     return $nextDeal;
   }
-  
+
   public function findSubmitted() {
     $q = $this->createQuery()
                   ->where('deal_state = ?', self::STATE_SUBMITTED)
