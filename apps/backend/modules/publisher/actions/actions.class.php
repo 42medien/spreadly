@@ -32,7 +32,7 @@ class publisherActions extends sfActions
     $commissions = Doctrine_Query::create()
         ->select('domain_profile_id, sum( price ), month( created_at ) as month,  year( created_at ) as year, count(id)')
         ->from('commission')
-        ->where('month( created_at ) = ? AND year( created_at ) = ?', array($date[0], $date[1]))
+        ->where('month( created_at ) = ? AND year( created_at ) = ? AND domain_profile_id IS NOT NULL', array($date[0], $date[1]))
         ->groupBy('month, year, domain_profile_id')
         ->orderBy('created_at DESC')
         ->fetchArray();
