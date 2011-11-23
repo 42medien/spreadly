@@ -17,16 +17,16 @@ class LinkedinPostApiClient extends PostApi {
     $lComment =  $pActivity->getComment();
 
     $lStatusMessage = '<?xml version="1.0" encoding="UTF-8"?><share>';
-    $lStatusMessage .= "<comment><![CDATA[$lComment]]></comment>";
+    $lStatusMessage .= "<comment><![CDATA[".substr($lComment, 0, 700)."]]></comment>";
     $lStatusMessage .= '<content>';
     $lStatusMessage .= "<submitted-url><![CDATA[$lUrl]]></submitted-url>";
 
     if ($pActivity->getTitle()) {
-      $lStatusMessage .= "<title><![CDATA[".$pActivity->getTitle()."]]></title>";
+      $lStatusMessage .= "<title><![CDATA[".substr($pActivity->getTitle(), 0, 200)."]]></title>";
     }
 
     if ($pActivity->getDescr()) {
-      $lStatusMessage .= "<description><![CDATA[".$pActivity->getDescr()."]]></description>";
+      $lStatusMessage .= "<description><![CDATA[".substr($pActivity->getDescr(), 0, 256)."]]></description>";
     }
 
     if ($pActivity->getThumb()) {
