@@ -30,22 +30,18 @@ class DealTable extends Doctrine_Table
     return Doctrine_Core::getTable('Deal');
   }
 
-  public function getNextFromPool($pUser) {
-    $q = $this->createQuery()
-                  ->where('deal_state = ?', self::STATE_ACTIVE)
-                  ->andWhere('target_quantity > actual_quantity');
+  public function getNextFromPool($pUser, $pDomain = null) {
+    $nextDeal = $domainProfile = null;
 
-    if($pUser->getParticipatedDeals() && count($pUser->getParticipatedDeals())>0) {
-                $q->andWhere("id NOT IN (".implode(",", $pUser->getParticipatedDeals()).")");
+    if ($pDomain && ($domainProfile = DomainProfileTable::getInstance()->retrieveByUrl($pDomain))) {
+      $nextDeal = $this->findNextFromPool($pUser, $domainProfile);
     }
 
-    if(!$pUser->getEmail()) {
-                $q->andWhere('email_required = ?', false);
+    if(!$nextDeal) {
+      $nextDeal = $this->findNextFromPool($pUser);
     }
 
-    $nextDeal = $q->orderBy('updated_at ASC, pool_hits ASC, created_at ASC')->fetchOne();
-
-    if($nextDeal) {
+    if ($nextDeal) {
       $nextDeal->setPoolHits($nextDeal->getPoolHits()+1);
       $nextDeal->save();
     }
@@ -53,10 +49,32 @@ class DealTable extends Doctrine_Table
     return $nextDeal;
   }
 
+  public function findNextFromPool($pUser, $pDomainProfile = null) {
+    $q = $this->createQuery()
+              ->where('deal_state = ?', self::STATE_ACTIVE)
+              ->andWhere('target_quantity > actual_quantity');
+
+    if ($pUser->getParticipatedDeals() && count($pUser->getParticipatedDeals())>0) {
+            $q->andWhere("id NOT IN (".implode(",", $pUser->getParticipatedDeals()).")");
+    }
+
+    if (!$pUser->getEmail()) {
+             $q->andWhere('email_required = ?', false);
+    }
+
+    if ($pDomainProfile) {
+      $q->andWhere('type = ? AND domain_profile_id = ?', array('publisher', $pDomainProfile->getId()));
+    } else {
+      $q->andWhere('type = ?', 'pool');
+    }
+
+    return $q->orderBy('updated_at ASC, pool_hits ASC, created_at ASC')->fetchOne();
+  }
+
   public function findSubmitted() {
     $q = $this->createQuery()
-                  ->where('deal_state = ?', self::STATE_SUBMITTED)
-                  ->orderBy('created_at DESC');
+              ->where('deal_state = ?', self::STATE_SUBMITTED)
+              ->orderBy('created_at DESC');
 
     return $q->execute();
   }

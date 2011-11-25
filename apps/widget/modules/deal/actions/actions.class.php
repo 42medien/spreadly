@@ -44,7 +44,7 @@ class dealActions extends sfActions
       }
     }
 
-    $deal = DealTable::getInstance()->getNextFromPool($this->getUser()->getUser());
+    $deal = DealTable::getInstance()->getNextFromPool($this->getUser()->getUser(), $url);
 
     $this->deal = $deal;
 
