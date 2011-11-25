@@ -48,9 +48,9 @@ all:
     post_type:   'Content-Type: application/xml'
     post_realm:  'http://api.linkedin.com'
 
-  google:
-    post_api:    'https://www.googleapis.com/buzz/v1/activities/@me/@self'
-    post_type:   'Content-Type: application/json'
+  #google:
+  #  post_api:    'https://www.googleapis.com/buzz/v1/activities/@me/@self'
+  #  post_type:   'Content-Type: application/json'
 
   jobs:
     last_friend_refresh_threshold: "1 day ago"
