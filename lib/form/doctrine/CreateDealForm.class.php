@@ -28,11 +28,14 @@ class CreateDealForm extends BaseDealForm
       $mp_fields[$key] = $lI18n->__(point_format($key)." for $value €");
     }
 
+
     $this->setWidgets(array(
       //'id'                => new sfWidgetFormInputHidden(),
       //'type'              => new sfWidgetFormChoice(array('choices' => array('pool' => 'pool'))),
       'name'              => new sfWidgetFormInputText(),
-      'tos_accepted'      => new sfWidgetFormInputCheckbox(),
+      'domain_profile_id' => new sfWidgetFormChoice(array('choices' => array(), 'expanded' => true)),
+      'type'              => new sfWidgetFormChoice(array('choices' => array('pool' => $lI18n->__('Überall'), 'publisher' => $lI18n->__('Domain')), 'expanded' => true)),
+    	'tos_accepted'      => new sfWidgetFormInputCheckbox(),
       'motivation_title'  => new sfWidgetFormInputText(),
       'motivation_text'   => new sfWidgetFormTextarea(),
       'spread_title'      => new sfWidgetFormInputText(),
@@ -98,8 +101,16 @@ class CreateDealForm extends BaseDealForm
       'sf_guard_user_id'  => new sfValidatorInteger(array('required' => true)),
       'target_quantity'   => new sfValidatorInteger(array('required' => false)),
     	'target_quantity_mp'   => new sfValidatorInteger(array('required' => false)),
-    	'billing_type'   => new sfValidatorString(array('required' => true))
+    	'billing_type'   => new sfValidatorString(array('required' => true)),
+    	'domain_profile_id'   => new sfValidatorInteger(array('required' => false)),
+			'type'   => new sfValidatorString(array('required' => true)),
     ));
+
+    $this->validatorSchema->setPostValidator(new sfValidatorAnd(
+      array(
+        new DealTypeValidator()
+    )));
+
   }
 
   public function validate_share(){

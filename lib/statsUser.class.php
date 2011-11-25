@@ -16,18 +16,32 @@ class statsUser extends sfGuardSecurityUser
     return $this->getGuardUser()->getId();
   }
   public function getVerifiedDomains() {
+    foreach ($this->getVerifiedDomainObjects() as $lDomain) {
+      $lDomains[] = $lDomain->getUrl();
+    }
+
+    return $lDomains;
+  }
+
+  public function getVerifiedDomainsWidthId() {
+
+    foreach ($this->getVerifiedDomainObjects() as $lDomain) {
+      $lDomains[$lDomain->getId()] = $lDomain->getUrl();
+    }
+
+    return $lDomains;
+  }
+
+  public function getVerifiedDomainObjects(){
     $verifiedDomains = array();
     $verifiedDomainProfiles = DomainProfileTable::retrieveVerifiedForUser($this->getGuardUser());
     if($verifiedDomainProfiles != null && count($verifiedDomainProfiles)>0) {
       $verifiedDomains = $verifiedDomainProfiles->getData();
     }
 
-    foreach ($verifiedDomains as $lDomain) {
-      $lDomains[] = $lDomain->getUrl();
-    }
-
-    return $lDomains;
+    return $verifiedDomains;
   }
+
   public function getDomainProfiles() {
     return DomainProfileTable::retrieveAllForUser($this->getGuardUser());
   }

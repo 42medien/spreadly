@@ -26,6 +26,26 @@
       </li>
 	    <li class="clearfix select-target-quantity" id="select-target-quantity">
 	    	<div class="btnwording alignleft">
+	      	<strong><?php echo $pForm['type']->renderLabel(); ?></strong><span><?php echo __('Wo soll ihr Deal überall angezeigt werden?'); ?></span>
+	      	<span><?php echo $pForm['type']->renderError(); ?></span>
+	      </div>
+	      <span>
+	      	<?php echo $pForm['type']->render(array('class'=> "")); ?>
+	      </span>
+	    </li>
+	    <li class="clearfix select-target-quantity" id="select-target-quantity">
+	    	<div class="btnwording alignleft">
+	      	<strong><?php echo $pForm['domain_profile_id']->renderLabel(); ?></strong><span><?php echo __('Wo soll ihr Deal überall angezeigt werden?'); ?></span>
+	      	<span><?php echo $pForm['domain_profile_id']->renderError(); ?></span>
+	      </div>
+	      <span>
+	      	<?php //var_dump($pForm['target_quantity']);die();?>
+	      	<?php echo $pForm['domain_profile_id']->render(array('class'=> "target_quantity_like")); ?>
+	      </span>
+	    </li>
+
+	    <li class="clearfix select-target-quantity" id="select-target-quantity">
+	    	<div class="btnwording alignleft">
 	      	<strong><?php echo $pForm['target_quantity']->renderLabel(); ?></strong><span><?php echo __('Sie buchen für Ihre Kampagne eine bestimmte Anzahl von Likes. Bitte wählen Sie:'); ?></span>
 	      	<span><?php echo $pForm['target_quantity']->renderError(); ?></span>
 	      </div>

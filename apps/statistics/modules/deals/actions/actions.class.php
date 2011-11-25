@@ -31,6 +31,8 @@ class dealsActions extends sfActions
     $this->pDealId = $request->getParameter('did', null);
     $this->pDeal = new Deal();
 		$this->pForm = new CreateDealForm($this->pDeal);
+  	$lDomainProfiles = $this->getUser()->getVerifiedDomainsWidthId();
+		$this->pForm->getWidget('domain_profile_id')->setOption('choices', $lDomainProfiles);
 
 		//check, if there is a deal
 		if($this->pDealId) {
@@ -46,6 +48,8 @@ class dealsActions extends sfActions
 			}
 			//if he is allowed, create a deal-form with the deal-object
 			$this->pForm = new CreateDealForm($this->pDeal);
+			$this->pForm->getWidget('domain_profile_id')->setOption('choices', $lDomainProfiles);
+  		$this->pForm->setDefault('domain_profile_id', $this->pDeal->getDomainProfileId());
 		} else {
 			//every create deal action needs the deal-id as get param except step_campaign
 			if($this->actionName != 'step_campaign') {
@@ -62,6 +66,7 @@ class dealsActions extends sfActions
    */
   public function executeStep_campaign(sfWebRequest $request){
   	$this->getResponse()->setSlot('js_document_ready', $this->getPartial('deals/js_init_deals.js'));
+
   	$this->pForm->validate_campaign();
 
   	if($request->getMethod() == 'POST'){
