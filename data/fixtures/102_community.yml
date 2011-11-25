@@ -27,9 +27,3 @@ Community:
     community: 'linkedin'
     url:       'http://www.linkedin.com'
     social_publishing_possible:   1
-
-  community_6:
-    name:      'google'
-    community: 'google'
-    url:       'http://www.google.com'
-    social_publishing_possible:   1
