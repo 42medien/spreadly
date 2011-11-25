@@ -21,7 +21,6 @@
                 <li><a href="#" onclick="window.open('<?php echo url_for("@signinto?service=twitter"); ?>', 'auth_popup', 'width=580,height=450,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;"><?php echo __("another twitter-account"); ?></a></li>
                 <li><a href="#" onclick="window.open('<?php echo url_for("@signinto?service=facebook"); ?>', 'auth_popup', 'width=580,height=450,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;"><?php echo __("another facebook-account"); ?></a></li>
                 <li><a href="#" onclick="window.open('<?php echo url_for("@signinto?service=linkedin"); ?>', 'auth_popup', 'width=580,height=450,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;"><?php echo __("another linkedin-account"); ?></a></li>
-                <li><a href="#" onclick="window.open('<?php echo url_for("@signinto?service=google"); ?>', 'auth_popup', 'width=580,height=450,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;"><?php echo __("another google-account"); ?></a></li>
               </ul>
             </li>
         </ul>
@@ -38,10 +37,6 @@
           <li class="B" id="o3" onclick="WidgetLikeForm.beforeSend();window.open('<?php echo url_for("@signinto?service=linkedin"); ?>', 'auth_popup', 'width=580,height=450,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;">
             <input class="add-service-checkbox" type="checkbox" name="linkedin" value="linkedin" />
             <label for="o3"><?php echo link_to(image_tag("/img/linkedin-favicon.gif", array("alt" => 'Linkedin', "title" => 'Linkedin')), "@signinto?service=linkedin"); ?></label>
-          </li>
-          <li class="B" id="o4" onclick="WidgetLikeForm.beforeSend();window.open('<?php echo url_for("@signinto?service=google"); ?>', 'auth_popup', 'width=580,height=450,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;">
-            <input class="add-service-checkbox" type="checkbox" name="google" value="google" />
-            <label for="o4"><?php echo link_to(image_tag("/img/google-favicon.gif", array("alt" => 'google', "title" => 'google')), "@signinto?service=google&r=s"); ?></label>
           </li>
         </ul>
         <?php } ?>
