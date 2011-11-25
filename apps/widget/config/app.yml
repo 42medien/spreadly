@@ -12,8 +12,8 @@ all:
   linkedin:
     oauth_callback_uri: "/auth/complete_signin/service/linkedin"
 
-  google:
-    oauth_callback_uri: "/auth/complete_signin/service/google"
+  #google:
+  #  oauth_callback_uri: "/auth/complete_signin/service/google"
 
 #  delicious:
 #    oauth_callback_uri: "/platform_dev.php/auth/complete_signin/service/delicious"
