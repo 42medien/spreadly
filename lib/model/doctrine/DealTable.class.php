@@ -49,6 +49,13 @@ class DealTable extends Doctrine_Table
     return $nextDeal;
   }
 
+  /**
+   * gets the next possible deal from the pool
+   *
+   * @param User $pUser
+   * @param DomainProfile $pDomainProfile
+   * @return Deal
+   */
   public function findNextFromPool($pUser, $pDomainProfile = null) {
     $q = $this->createQuery()
               ->where('deal_state = ?', self::STATE_ACTIVE)
@@ -71,6 +78,11 @@ class DealTable extends Doctrine_Table
     return $q->orderBy('updated_at ASC, pool_hits ASC, created_at ASC')->fetchOne();
   }
 
+  /**
+   * find all submitted deals
+   *
+   * @return array
+   */
   public function findSubmitted() {
     $q = $this->createQuery()
               ->where('deal_state = ?', self::STATE_SUBMITTED)
