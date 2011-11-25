@@ -40,6 +40,7 @@ class DomainProfileTable extends Doctrine_Table
 
     return $this->createQuery()
                 ->where('url = ?', array($host))
+                ->andWhere('state = ?', array('verified'))
                 ->fetchOne();
   }
 
