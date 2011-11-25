@@ -256,7 +256,7 @@ class YiidActivity extends BaseDocument {
         $client->doPost($this);
       }
     }
-  }                                                                                                              
+  }
 
   /**
    * returns the tracking link
