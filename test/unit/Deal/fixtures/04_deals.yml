@@ -1,6 +1,6 @@
 # This is a fucking bullshit solution to the problem, that the db is not dropped before loading fixtures
 Commission: []
-     
+
 Deal:
   # Submitted Deals
   Deal_1:
@@ -9,32 +9,31 @@ Deal:
     name: 'Campaign No. 1'
     tos_accepted: true
     email_required: true
-    
+
     # Motivation stuff
     motivation_title: 'Get a free air guitar'
     motivation_text: 'Just click the like button below!'
-    
+
     # Share stuff
     spread_title: 'I got this free air guitar'
     spread_text: 'Is this awesome, or what?!?'
     spread_url: 'http://www.snirgel.de/spread_url'
     spread_img: 'http://www.snirgel.de/spread_img'
     spread_tos: 'I have read the tos'
-    
+
     # Coupon stuff
     coupon_type: code
     coupon_title: 'Here you go …'
     coupon_text: '… your coupon code!'
     coupon_code: 'NSAFBICIA'
     coupon_redeem_url: 'http://www.snirgel.de/coupon_redeem_url'
-    
+
     # Billing information
     billing_type: like
     target_quantity: 100
     actual_quantity: 98
-  
+
     # Relations
-    DomainProfile: DomainProfile_1
     sfGuardUser: sfGuardUser_1
     PaymentMethod: PaymentMethod_1
 
@@ -46,31 +45,30 @@ Deal:
     type: pool
     name: 'Campaign No. 2'
     tos_accepted: true
-    
+
     # Motivation stuff
     motivation_title: 'Get a free air guitar'
     motivation_text: 'Just click the like button below!'
-    
+
     # Share stuff
     spread_title: 'I got this free air guitar'
     spread_text: 'Is this awesome, or what?!?'
     spread_url: 'http://notizblog.org/spread_url'
     spread_img: 'http://notizblog.org/spread_img'
     spread_tos: 'I have read the tos'
-    
+
     # Coupon stuff
     coupon_type: url
     coupon_title: 'Here you go …'
     coupon_text: '… your URL!'
     coupon_url: 'http://notizblog.org/coupon_url'
-    
+
     # Billing information
     billing_type: like
     target_quantity: 200
     actual_quantity: 72
-  
+
     # Relations
-    DomainProfile: DomainProfile_2
     sfGuardUser: sfGuardUser_1
     PaymentMethod: PaymentMethod_1
 
@@ -82,31 +80,30 @@ Deal:
     type: pool
     name: 'Campaign No. 3'
     tos_accepted: true
-    
+
     # Motivation stuff
     motivation_title: 'Get a free air guitar'
     motivation_text: 'Just click the like button below!'
-    
+
     # Share stuff
     spread_title: 'I got this free air guitar'
     spread_text: 'Is this awesome, or what?!?'
     spread_url: 'http://www.missmotz.de/spread_url'
     spread_img: 'http://www.missmotz.de/spread_img'
     spread_tos: 'I have read the tos'
-    
+
     # Coupon stuff
     coupon_type: download
     coupon_title: 'Here you go …'
     coupon_text: '… your download!'
     coupon_url: 'http://www.missmotz.de/download'
-    
+
     # Billing information
     billing_type: like
     target_quantity: 500
     actual_quantity: 132
-  
+
     # Relations
-    DomainProfile: DomainProfile_3
     sfGuardUser: sfGuardUser_1
     PaymentMethod: PaymentMethod_1
 
@@ -119,32 +116,31 @@ Deal:
     type: pool
     name: 'Campaign No. 4'
     tos_accepted: true
-    
+
     # Motivation stuff
     motivation_title: 'Get a free air guitar'
     motivation_text: 'Just click the like button below!'
-    
+
     # Share stuff
     spread_title: 'I got this free air guitar'
     spread_text: 'Is this awesome, or what?!?'
     spread_url: 'http://www.snirgel.de/spread_url'
     spread_img: 'http://www.snirgel.de/spread_img'
     spread_tos: 'I have read the tos'
-    
+
     # Coupon stuff
     coupon_type: code
     coupon_title: 'Here you go …'
     coupon_text: '… your coupon code!'
     coupon_code: 'NSAFBICIA'
     coupon_redeem_url: 'http://www.snirgel.de/coupon_redeem_url'
-    
+
     # Billing information
     billing_type: like
     target_quantity: 100
     actual_quantity: 98
-  
+
     # Relations
-    DomainProfile: DomainProfile_1
     sfGuardUser: sfGuardUser_1
     PaymentMethod: PaymentMethod_1
 
@@ -156,31 +152,30 @@ Deal:
     type: pool
     name: 'Campaign No. 5'
     tos_accepted: true
-    
+
     # Motivation stuff
     motivation_title: 'Get a free air guitar'
     motivation_text: 'Just click the like button below!'
-    
+
     # Share stuff
     spread_title: 'I got this free air guitar'
     spread_text: 'Is this awesome, or what?!?'
     spread_url: 'http://notizblog.org/spread_url'
     spread_img: 'http://notizblog.org/spread_img'
     spread_tos: 'I have read the tos'
-    
+
     # Coupon stuff
     coupon_type: url
     coupon_title: 'Here you go …'
     coupon_text: '… your URL!'
     coupon_url: 'http://notizblog.org/coupon_url'
-    
+
     # Billing information
     billing_type: like
     target_quantity: 200
     actual_quantity: 72
-  
+
     # Relations
-    DomainProfile: DomainProfile_2
     sfGuardUser: sfGuardUser_1
     PaymentMethod: PaymentMethod_1
 
@@ -192,29 +187,64 @@ Deal:
     type: pool
     name: 'Campaign No. 6'
     tos_accepted: true
-    
+
     # Motivation stuff
     motivation_title: 'Get a free air guitar'
     motivation_text: 'Just click the like button below!'
-    
+
     # Share stuff
     spread_title: 'I got this free air guitar'
     spread_text: 'Is this awesome, or what?!?'
     spread_url: 'http://www.missmotz.de/spread_url'
     spread_img: 'http://www.missmotz.de/spread_img'
     spread_tos: 'I have read the tos'
-    
+
     # Coupon stuff
     coupon_type: download
     coupon_title: 'Here you go …'
     coupon_text: '… your download!'
     coupon_url: 'http://www.missmotz.de/download'
-    
+
     # Billing information
     billing_type: like
     target_quantity: 500
     actual_quantity: 132
-  
+
+    # Relations
+    sfGuardUser: sfGuardUser_1
+    PaymentMethod: PaymentMethod_1
+
+    created_at: '<?php echo date("c", strtotime("3 days ago")); ?>'
+    updated_at: '<?php echo date("c", strtotime("3 days ago")); ?>'
+
+  Deal_7:
+    state: active
+    type: publisher
+    name: 'Campaign No. 7'
+    tos_accepted: true
+
+    # Motivation stuff
+    motivation_title: 'Get a free air guitar'
+    motivation_text: 'Just click the like button below!'
+
+    # Share stuff
+    spread_title: 'I got this free air guitar'
+    spread_text: 'Is this awesome, or what?!?'
+    spread_url: 'http://www.missmotz.de/spread_url'
+    spread_img: 'http://www.missmotz.de/spread_img'
+    spread_tos: 'I have read the tos'
+
+    # Coupon stuff
+    coupon_type: download
+    coupon_title: 'Here you go …'
+    coupon_text: '… your download!'
+    coupon_url: 'http://www.missmotz.de/download'
+
+    # Billing information
+    billing_type: like
+    target_quantity: 500
+    actual_quantity: 132
+
     # Relations
     DomainProfile: DomainProfile_3
     sfGuardUser: sfGuardUser_1
@@ -228,24 +258,24 @@ Deal:
     type: pool
     name: 'Campaign No. Commission 1'
     tos_accepted: true
-    
+
     # Motivation stuff
     motivation_title: 'Get a free air guitar'
     motivation_text: 'Just click the like button below!'
-    
+
     # Share stuff
     spread_title: 'I got this free air guitar'
     spread_text: 'Is this awesome, or what?!?'
     spread_url: 'http://www.missmotz.de/spread_url'
     spread_img: 'http://www.missmotz.de/spread_img'
     spread_tos: 'I have read the tos'
-    
+
     # Coupon stuff
     coupon_type: download
     coupon_title: 'Here you go …'
     coupon_text: '… your download!'
     coupon_url: 'http://www.missmotz.de/download'
-    
+
     # Billing information
     billing_type: like
     target_quantity: 10
@@ -254,9 +284,8 @@ Deal:
     commission_pot: 0.17
     commission_percentage: 10
     commission_per_unit: 0.17
-  
+
     # Relations
-    DomainProfile: DomainProfile_1
     sfGuardUser: sfGuardUser_1
     PaymentMethod: PaymentMethod_1
 
@@ -268,24 +297,24 @@ Deal:
     type: pool
     name: 'Campaign No. Commission 2'
     tos_accepted: true
-    
+
     # Motivation stuff
     motivation_title: 'Get a free air guitar'
     motivation_text: 'Just click the like button below!'
-    
+
     # Share stuff
     spread_title: 'I got this free air guitar'
     spread_text: 'Is this awesome, or what?!?'
     spread_url: 'http://www.missmotz.de/spread_url'
     spread_img: 'http://www.missmotz.de/spread_img'
     spread_tos: 'I have read the tos'
-    
+
     # Coupon stuff
     coupon_type: download
     coupon_title: 'Here you go …'
     coupon_text: '… your download!'
     coupon_url: 'http://www.missmotz.de/download'
-    
+
     # Billing information
     billing_type: media_penetration
     target_quantity: 5000
@@ -294,38 +323,37 @@ Deal:
     commission_pot: 0.15
     commission_percentage: 10
     commission_per_unit: 0.0003
-  
+
     # Relations
-    DomainProfile: DomainProfile_1
     sfGuardUser: sfGuardUser_1
     PaymentMethod: PaymentMethod_1
 
     created_at: '<?php echo date("c", strtotime("3 days ago")); ?>'
     updated_at: '<?php echo date("c", strtotime("3 days ago")); ?>'
-    
+
   Deal_C3:
     state: submitted
     type: pool
     name: 'Campaign No. Commission 3'
     tos_accepted: true
-    
+
     # Motivation stuff
     motivation_title: 'Get a free air guitar'
     motivation_text: 'Just click the like button below!'
-    
+
     # Share stuff
     spread_title: 'I got this free air guitar'
     spread_text: 'Is this awesome, or what?!?'
     spread_url: 'http://www.missmotz.de/spread_url'
     spread_img: 'http://www.missmotz.de/spread_img'
     spread_tos: 'I have read the tos'
-    
+
     # Coupon stuff
     coupon_type: download
     coupon_title: 'Here you go …'
     coupon_text: '… your download!'
     coupon_url: 'http://www.missmotz.de/download'
-    
+
     # Billing information
     billing_type: like
     target_quantity: 13
@@ -334,9 +362,8 @@ Deal:
     commission_pot: 0.17
     commission_percentage: 10
     commission_per_unit: 0.17
-  
+
     # Relations
-    DomainProfile: DomainProfile_1
     sfGuardUser: sfGuardUser_1
     PaymentMethod: PaymentMethod_1
 
