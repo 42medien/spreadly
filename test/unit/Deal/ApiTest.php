@@ -39,7 +39,7 @@ class ApiTest extends BaseTestCase {
       "target_quantity": 10.0
      }
     }';
-  
+
   private static $VALID_AUTOACTIVATE_TEST_JSON = '{
      "name": "Kampagne Activate",
      "activate": true,
@@ -155,7 +155,7 @@ class ApiTest extends BaseTestCase {
   public function testValidRequest() {
     $user = Doctrine_Core::getTable('sfGuardUser')->createQuery('u')->where('u.is_active = ?', true)->fetchOne();
 
-    $data = UrlUtils::sendPostRequest("http://api.spreadly.local/deals?access_token=".$user->getAccessToken(), self::$VALID_AUTOACTIVATE_TEST_JSON);    
+    $data = UrlUtils::sendPostRequest("http://api.spreadly.local/deals?access_token=".$user->getAccessToken(), self::$VALID_AUTOACTIVATE_TEST_JSON);
     $data = json_decode($data, true);
     $this->assertEquals("200", $data['success']['code']);
 
@@ -163,12 +163,12 @@ class ApiTest extends BaseTestCase {
 
   // public function testLivePost() {
   //   $user = Doctrine_Core::getTable('sfGuardUser')->createQuery('u')->where('u.is_active = ?', true)->fetchOne();
-  // 
-  //   $data = UrlUtils::sendPostRequest("http://api.spreadly.com/deals?access_token=hannes_4e92c2814e7f17.20492852", self::$VALID_TEST_JSON);    
+  //
+  //   $data = UrlUtils::sendPostRequest("http://api.spreadly.com/deals?access_token=hannes_4e92c2814e7f17.20492852", self::$VALID_TEST_JSON);
   //   $data = json_decode($data, true);
   //   $this->assertEquals("200", $data['success']['code']);
   // }
-  
+
   public function testDealFromApiArray() {
     $d = new Deal();
     $data = json_decode(self::$VALID_TEST_JSON, true);
@@ -201,26 +201,26 @@ class ApiTest extends BaseTestCase {
 
     $this->assertEquals("406", $data['error']['code']);
   }
-  
+
   public function testPriceToDealCopyAction() {
     $user = Doctrine_Core::getTable('sfGuardUser')->createQuery('u')->where('u.is_active = ?', true)->fetchOne();
-    $this->assertEquals(6, DealTable::getInstance()->count());
+    $this->assertEquals(10, DealTable::getInstance()->count());
     $data = UrlUtils::getUrlContent("http://api.spreadly.local/deals?access_token=".$user->getAccessToken(), UrlUtils::HTTP_POST, self::$VALID_TEST_JSON);
-    $this->assertEquals(7, DealTable::getInstance()->count());
+    $this->assertEquals(11, DealTable::getInstance()->count());
     $deal = DealTable::getInstance()->findOneByName('Kampagne Like');
     $this->assertEquals(floatval($user->getApiPriceLike())*floatval($deal->getTargetQuantity()), $deal->getPrice());
 
     $data = UrlUtils::getUrlContent("http://api.spreadly.local/deals?access_token=".$user->getAccessToken(), UrlUtils::HTTP_POST, self::$VALID_MP_TEST_JSON);
-    $this->assertEquals(8, DealTable::getInstance()->count());
+    $this->assertEquals(12, DealTable::getInstance()->count());
     $deal = DealTable::getInstance()->findOneByName('Kampagne MP');
     $this->assertEquals(floatval($user->getApiPriceMediaPenetration())*floatval($deal->getTargetQuantity()), $deal->getPrice());
   }
 
   public function testNewApiDealIsActiveImmediately() {
     $user = Doctrine_Core::getTable('sfGuardUser')->createQuery('u')->where('u.is_active = ?', true)->fetchOne();
-    $this->assertEquals(6, DealTable::getInstance()->count());
+    $this->assertEquals(10, DealTable::getInstance()->count());
     $data = UrlUtils::getUrlContent("http://api.spreadly.local/deals?access_token=".$user->getAccessToken(), UrlUtils::HTTP_POST, self::$VALID_TEST_JSON);
-    $this->assertEquals(7, DealTable::getInstance()->count());
+    $this->assertEquals(11, DealTable::getInstance()->count());
     $deal = DealTable::getInstance()->findOneByName('Kampagne Like');
     $this->assertFalse($deal->isActive());
     $this->assertEquals(DealTable::STATE_SUBMITTED, $deal->getState());

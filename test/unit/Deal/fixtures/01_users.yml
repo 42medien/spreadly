@@ -12,6 +12,7 @@ sfGuardUser:
     updated_at: '<?php echo date("c"); ?>'
     api_price_like: 0.5
     api_price_media_penetration: 0.0005
+    api_commission_percentage: 10
 
 sfGuardGroup:
   Group_admin:
@@ -56,7 +57,7 @@ Community:
     slug:        testcommunity
     oi_url:      http://www.google.com/profiles/%s
     url:         http://www.google.com/
-    
+
   community_2:
     User:        user_1
     community:   anothercommunity
@@ -64,7 +65,7 @@ Community:
     slug:        anothercommunity
     oi_url:      http://www.facebook.com/%s
     url:         http://www.facebook.com
-    
+
 OnlineIdentity:
   oi_1:
     User:      user_1
