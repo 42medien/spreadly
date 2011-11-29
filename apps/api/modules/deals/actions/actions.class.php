@@ -43,7 +43,11 @@ class dealsActions extends sfActions
     }
 
     // check if account was setup properly
-    if (!$user->getApiPriceLike() || !$user->getApiPriceMediaPenetration() || !$user->getApiPaymentMethod()) {
+    // @todo add publisher commission
+    if (!$user->getApiPriceLike() ||
+        !$user->getApiPriceMediaPenetration() ||
+        !$user->getApiPaymentMethod() ||
+        !$user->getApiCommissionPercentage()) {
       $this->getResponse()->setStatusCode(403);
       return $this->renderPartial("setup_failure");
     }
@@ -55,7 +59,7 @@ class dealsActions extends sfActions
     $deal = new Deal();
     $deal->setSfGuardUser($user);
     $deal->setPaymentMethod($user->getApiPaymentMethod());
-    
+
     $data = json_decode($json_content, true);
 
     // check if data is valid json
@@ -63,8 +67,15 @@ class dealsActions extends sfActions
       $this->getResponse()->setStatusCode(406);
       return $this->renderPartial("wrong_mimetype");
     }
-    
+
     $deal->fromApiArray($data);
+
+    // set commission values
+    $deal->setCommissionPercentage($user->getApiCommissionPercentage());
+    $pot = round($deal->getPrice() * $user->getApiCommissionPercentage() / 100, 2, PHP_ROUND_HALF_UP);
+    $deal->setCommissionPot($pot);
+    $unit = round($pot / $deal->getTargetQuantity(), 2, PHP_ROUND_HALF_UP);
+    $deal->setCommissionPerUnit($unit);
 
     // validate request
     $validate = $deal->validate();
