@@ -83,6 +83,8 @@ sfGuardUser:
       type: float
     api_price_media_penetration:
       type: float
+    api_commission_percentage:
+      type: integer(4)
   indexes:
     is_active_idx:
       fields: [is_active]
