@@ -92,6 +92,7 @@ var DealForm = {
       }      
       
       DealForm.initCharCounter();
+      DealForm.toggleDealType();   
       DealForm.toggleCouponType();
       DealForm.toggleCampaignType();
     },
@@ -153,7 +154,26 @@ var DealForm = {
           jQuery('.target_quantity_like').attr('checked', false);          
         }      
       });
+    },
+    
+    toggleDealType: function() {
+      debug.log('[DealForm][toggleDealType]');
+      jQuery('li#select-deal-type ul.radio_list input:radio').live('click', function() {
+        var lId = jQuery(this).attr('id');
+        if (lId == 'type_publisher') {
+          jQuery('#select-domain-profile-id').show();
+        } else {
+          jQuery('#select-domain-profile-id').hide();
+        }
+        
+        //jQuery('#coupon-preview-img').attr('src', '/img/'+lId+".png");
+        
+        return true;
+      });     
+      
     }
+    
+    
 };
 
 

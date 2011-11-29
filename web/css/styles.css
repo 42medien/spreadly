@@ -17,7 +17,7 @@ website:   http://www.codingpeople.com/
 ul, li{ list-style:none;}
 
 .clearfix:after {  content: "."; display:block; height:0; clear:both; visibility:hidden; }/* ----- clear fix for floats ----- */
-.clearfix { display:inline-block; }		
+.clearfix { display:inline-block; }   
 * html .clearfix { height:1%; }/* hides clearfix from IE-mac */
 .clearfix { display:block; }/* end hide from IE-mac */
 
@@ -237,7 +237,7 @@ a.graybtn:hover { text-decoration:none; color:#EB2374;}
 /* =Footer
 --------------------------------------------------------------------------------------------------------*/
 
-#footer { background:url(../img/footer-shed.png) center top no-repeat; padding:40px 0 20px 0; text-align:center; margin-top:-8px;	}
+#footer { background:url(../img/footer-shed.png) center top no-repeat; padding:40px 0 20px 0; text-align:center; margin-top:-8px; }
 #footer a, #footer span{ margin:0 4px;}
 #footer a:hover{ text-decoration:none; color:#EB2374; }
 /* End Footer
@@ -303,14 +303,14 @@ fieldset { border: 0px solid transparent;  }
 .spacatspic{ margin:0 10px 0px 12px; float:left;}
 .txt-blue{color:#375d81;}
 .dotborbox, .dotborboxsmall{ 
-	height:auto; 
-	width:288px; 
-	margin-top:7px; 
-	padding:10px 14px 10px 16px;
-	border: 1px dashed #000;
-	border-radius: 4px;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;	
+  height:auto; 
+  width:288px; 
+  margin-top:7px; 
+  padding:10px 14px 10px 16px;
+  border: 1px dashed #000;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px; 
 }
  
 #dotboxtextdeal{
@@ -322,8 +322,8 @@ fieldset { border: 0px solid transparent;  }
 .whtrow{ 
   display: block;
   height: auto;
-	padding-left:8px; 
-	background-color: #fff;
+  padding-left:8px; 
+  background-color: #fff;
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;  
@@ -400,7 +400,7 @@ fieldset { border: 0px solid transparent;  }
 .azchecklist{ width:185px; margin-bottom:-2px;}
 .azchecklist li { padding-bottom:5px;}
 .azchecklist li a{ color:#375d81; text-decoration:none; line-height:18px;}
-.azchecklist li a span{ width:24px; display:inline-block; margin-left:2px; position:relative; bottom:-3px; height:18px;	 }
+.azchecklist li a span{ width:24px; display:inline-block; margin-left:2px; position:relative; bottom:-3px; height:18px;  }
 
 .azchecklist li a span img{ vertical-align:inherit; }
 .azchecklist li a:hover{ text-decoration:none; }
@@ -474,7 +474,7 @@ div.nobg{ background:none !important;}
 div.veryficationbox{   padding: 8px 7px 6px 13px;} 
 div.veryficationbox .textfield-wht{ margin-left:1px; margin-right:6px;}
 div.veryficationbox p{ padding-bottom:8px;}
-.verifytitle{ font-size: 14px; font-weight:bold; color:#345c82; padding-bottom:8px;	}
+.verifytitle{ font-size: 14px; font-weight:bold; color:#345c82; padding-bottom:8px; }
 .closemeta{ line-height:28px; color:#597a99; text-decoration:underline; margin-left:12px;}  
 .closemeta:hover{text-decoration:none; }
 
@@ -675,7 +675,7 @@ div.nopadlr{ padding-left:0px !important; padding-right:0px !important; }
 #deal_form li{margin-bottom: 15px;}
 #deal_billing_form ul{padding-left: 5px;}
 #deal_billing_form .btnwording, #apply_deal_form .btnwording{width: 100px;}
-#deal_billing_form .btnformlist, #apply_deal_form .btnformlist	{padding-bottom: 20px; width: 520px;}
+#deal_billing_form .btnformlist, #apply_deal_form .btnformlist  {padding-bottom: 20px; width: 520px;}
 #deal_verify_form  .btnformlist li{margin-bottom: 10px;}
 #deal_billing_form .select-address-list, #apply_deal_form .select-address-list {margin-right: 20px;}
 
@@ -905,9 +905,9 @@ dealwidebox .graytitle { padding-bottom: 8px;}
 .gallery_list h3 {margin-bottom:17px;}
 .gallery_list li  img {border:solid 2px #5d5d5d;}
 
-.panel_width {width:100%;}	
+.panel_width {width:100%;}  
 
-.jcarousel-skin-tango {padding-left:39px; height:47px; overflow:hidden;}						
+.jcarousel-skin-tango {padding-left:39px; height:47px; overflow:hidden;}            
 .jcarousel-container { position: relative; z-index:2; }
 .jcarousel-clip { z-index: 2; padding: 0; margin: 0; overflow: hidden; position: relative; }
 .jcarousel-list { z-index: 1; overflow: hidden; position: relative; top: 0; left: 0; margin: 0; padding: 0; }

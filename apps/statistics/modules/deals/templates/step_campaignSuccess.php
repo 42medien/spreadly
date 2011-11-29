@@ -24,7 +24,7 @@
         </label>
         <div class="content-error-box clearfix"><?php echo $pForm['name']->renderError(); ?></div>
       </li>
-	    <li class="clearfix select-target-quantity" id="select-target-quantity">
+	    <li class="clearfix" id="select-deal-type">
 	    	<div class="btnwording alignleft">
 	      	<strong><?php echo $pForm['type']->renderLabel(); ?></strong><span><?php echo __('Wo soll ihr Deal überall angezeigt werden?'); ?></span>
 	      	<span><?php echo $pForm['type']->renderError(); ?></span>
@@ -33,9 +33,9 @@
 	      	<?php echo $pForm['type']->render(array('class'=> "")); ?>
 	      </span>
 	    </li>
-	    <li class="clearfix select-target-quantity" id="select-target-quantity">
+	    <li class="clearfix" id="select-domain-profile-id" <?php echo ($pForm['type']->getValue() != 'publisher')? 'style="display:none;"':""; ?>>
 	    	<div class="btnwording alignleft">
-	      	<strong><?php echo $pForm['domain_profile_id']->renderLabel(); ?></strong><span><?php echo __('Wo soll ihr Deal überall angezeigt werden?'); ?></span>
+	      	<strong><?php echo $pForm['domain_profile_id']->renderLabel(); ?></strong><span><?php echo __('Auf welcher Domain soll der Deal laufen?'); ?></span>
 	      	<span><?php echo $pForm['domain_profile_id']->renderError(); ?></span>
 	      </div>
 	      <span>

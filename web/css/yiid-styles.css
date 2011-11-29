@@ -258,7 +258,9 @@ Prev
 }
 
 #deal_form ul.btnformlist li#select-target-quantity span ul.radio_list li,
-#deal_form ul.btnformlist li#select-target-quantity-mp span ul.radio_list li{
+#deal_form ul.btnformlist li#select-target-quantity-mp span ul.radio_list li,
+#deal_form ul.btnformlist li#select-deal-type span ul.radio_list li,
+#deal_form ul.btnformlist li#select-domain-profile-id span ul.radio_list li{
   padding-bottom: 5px;
   margin-bottom: 0;
   width: 150px;
