@@ -12,6 +12,7 @@ sfGuardUser:
     updated_at: '2010-11-26 10:29:26'
     api_price_like: 0.5
     api_price_media_penetration: 0.0005
+    api_commission_percentage: 10
 
 sfGuardGroup:
   Group_admin:
