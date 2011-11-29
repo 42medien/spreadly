@@ -73,6 +73,8 @@ class CreateDealForm extends BaseDealForm
 
     $this->widgetSchema->setLabels(array(
     	'name' => $lI18n->__('Name'),
+    	'type' => $lI18n->__('Art des Deals'),
+    	'domain_profile_id' => $lI18n->__('Domain'),
     	'target_quantity' => $lI18n->__('Streuung nach Likes'),
     	'target_quantity_mp' => $lI18n->__('Streuung nach Reichweite'),
     	'motivation_title' => $lI18n->__('Motivator'),
