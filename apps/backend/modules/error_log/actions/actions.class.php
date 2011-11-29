@@ -17,6 +17,6 @@ class error_logActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request) {
     $lDm = MongoManager::getDM();
-    $this->pErrors = $lDm->createQueryBuilder("Documents\ApiErrorLog")->find()->sort(array("c" => -1))->getQuery()->execute();
+    $this->pErrors = $lDm->createQueryBuilder("Documents\ApiErrorLog")->find()->sort(array("c" => -1))->limit(30)->getQuery()->execute();
   }
 }
