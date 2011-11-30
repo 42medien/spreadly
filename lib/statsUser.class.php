@@ -24,10 +24,13 @@ class statsUser extends sfGuardSecurityUser
   }
 
   public function getVerifiedDomainsWidthId() {
+		$lDomains = array();
+		if(count($this->getVerifiedDomainObjects())>0) {
 
-    foreach ($this->getVerifiedDomainObjects() as $lDomain) {
-      $lDomains[$lDomain->getId()] = $lDomain->getUrl();
-    }
+	    foreach ($this->getVerifiedDomainObjects() as $lDomain) {
+	      $lDomains[$lDomain->getId()] = $lDomain->getUrl();
+	    }
+		}
 
     return $lDomains;
   }

@@ -105,7 +105,7 @@ class CreateDealForm extends BaseDealForm
     	'target_quantity_mp'   => new sfValidatorInteger(array('required' => false)),
     	'billing_type'   => new sfValidatorString(array('required' => true)),
     	'domain_profile_id'   => new sfValidatorInteger(array('required' => false)),
-			'type'   => new sfValidatorString(array('required' => true)),
+			'type'   => new sfValidatorString(array('required' => true), array('invalid' => $lI18n->__('Nicht möglich'))),
     ));
 
     $this->validatorSchema->setPostValidator(new sfValidatorAnd(

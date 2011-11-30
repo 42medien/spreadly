@@ -16,13 +16,14 @@
     	<li class="clearfix">
       	<div class="btnwording alignleft">
         	<strong><?php echo $pForm['name']->renderLabel(); ?></strong><span><?php echo __('Geben Sie Ihrer Kampagne einen Namen, damit Sie sie von eventuellen weiteren unterscheiden können. Dieser Name erscheint nicht öffentlich.'); ?></span>
+        	<span><?php echo $pForm['name']->renderError(); ?></span>
         </div>
         <label class="textfield-wht">
         	<span>
           	<?php echo $pForm['name']->render(array('class' => 'wd320')); ?>
           </span>
         </label>
-        <div class="content-error-box clearfix"><?php echo $pForm['name']->renderError(); ?></div>
+
       </li>
 	    <li class="clearfix" id="select-deal-type">
 	    	<div class="btnwording alignleft">
@@ -38,10 +39,15 @@
 	      	<strong><?php echo $pForm['domain_profile_id']->renderLabel(); ?></strong><span><?php echo __('Auf welcher Domain soll der Deal laufen?'); ?></span>
 	      	<span><?php echo $pForm['domain_profile_id']->renderError(); ?></span>
 	      </div>
-	      <span>
-	      	<?php //var_dump($pForm['target_quantity']);die();?>
-	      	<?php echo $pForm['domain_profile_id']->render(array('class'=> "target_quantity_like")); ?>
-	      </span>
+	      <?php if(count($pDomainProfiles) > 0) { ?>
+		      <span>
+		      	<?php //var_dump($pForm['target_quantity']);die();?>
+		      	<?php echo $pForm['domain_profile_id']->render(array('class'=> "target_quantity_like")); ?>
+		      </span>
+		    <?php } else { ?>
+		    		<span><?php echo __('Um einen Deal speziell auf einer ihrer Webseiten schalten zu können müssen sie zunächst die gewünschte Domain bei Spreadly registrieren.'); ?>
+		    		<?php echo link_to(__('Zur Domain-Registrierung'), 'domain_profiles/index'); ?></span>
+		    <?php } ?>
 	    </li>
 
 	    <li class="clearfix select-target-quantity" id="select-target-quantity">
