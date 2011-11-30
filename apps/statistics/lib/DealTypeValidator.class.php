@@ -23,6 +23,7 @@ class DealTypeValidator extends sfValidatorBase {
   	 	if($this->isEmpty($values['domain_profile_id'])){
   			throw new sfValidatorErrorSchema($this, array(
   					$this->getOption('domain_profile_id') => new sfValidatorError($this, 'required'),
+						$this->getOption('type') => new sfValidatorError($this, 'invalid')
   				));
   		}
   	}

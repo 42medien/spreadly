@@ -266,6 +266,11 @@ Prev
   width: 150px;
 }
 
+#deal_form a{
+ color: #588199;
+ font-weight: bold;
+}
+
 #deal-form-cat-list{
   height: 60px;
 }
