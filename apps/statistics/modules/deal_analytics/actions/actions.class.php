@@ -17,6 +17,7 @@ class deal_analyticsActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
+    $this->getResponse()->setSlot('js_document_ready', $this->getPartial('deal_analytics/init_deal_analytics.js'));
     $this->pVerifiedDomains = DomainProfileTable::retrieveVerifiedForUser($this->getUser()->getGuardUser());
     $this->pDeals = DealTable::getInstance()->createQuery()
                                             ->where('sf_guard_user_id = ?', array($this->getUser()->getUserId()))
