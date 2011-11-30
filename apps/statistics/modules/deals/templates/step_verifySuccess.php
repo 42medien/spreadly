@@ -34,6 +34,34 @@
 		      </span>
 		    </li>
 		  <?php } ?>
+		  <?php if($pDeal->getType() == 'publisher') { ?>
+		    <li class="clearfix">
+		    	<div class="btnwording alignleft">
+		      	<strong><?php echo __('Art des Deals'); ?>:</strong>
+		      </div>
+		      <span>
+		      	<?php echo __("Domain-Deal"); ?>
+		      </span>
+		    </li>
+		    <li class="clearfix">
+		    	<div class="btnwording alignleft">
+		      	<strong><?php echo __('Domain'); ?>:</strong>
+		      </div>
+		      <span>
+		      	<?php $lDp = DomainProfileTable::getInstance()->find($pDeal->getDomainProfileId()); ?>
+		      	<?php echo $lDp->getUrl(); ?>
+		      </span>
+		    </li>
+		  <?php } else { ?>
+		    <li class="clearfix">
+		    	<div class="btnwording alignleft">
+		      	<strong><?php echo __('Art des Deals'); ?>:</strong>
+		      </div>
+		      <span>
+		      	<?php echo __("Pool-Deal"); ?>
+		      </span>
+		    </li>
+		  <?php } ?>
 
 		</ul>
 	</div>
