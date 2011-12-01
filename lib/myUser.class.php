@@ -92,7 +92,6 @@ class myUser extends sfBasicSecurityUser {
     $this->setAuthenticated(true);
     $lCredentials = explode( ',', $user->getCredentials() );
     if( count($lCredentials) != 0 ) $this->addCredentials( $lCredentials );
-    //$this->switchLanguage($user->getCulture());
   }
 
   /**
