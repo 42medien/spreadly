@@ -24,20 +24,6 @@
   					</span>
 	  	  	</div>
   			</th>
-  	    <th align="center" valign="middle">
-  	    	<div>
-	  	    	<span class="myqtip" title="<?php echo __('Anzahl der Besucher die auf eine Empfehlung gekommen sind'); ?>">
-  	    			<?php echo __('Clickbacks');?>
-  	    		</span>
-		  	  </div>
-  	    </th>
-  	    <th align="center" valign="middle" class="last">
-  	    	<div>
-  	    		<span class="myqtip" title="<?php echo __('Anzahl der Besucher die auf eine Empfehlung gekommen sind und dann weiterempfohlen haben'); ?>">
-  	    			<?php echo __('Clickback-Likes');?>
-						</span>
-		  	  </div>
-  	    </th>
     	</tr>
     </thead>
     <tbody>
@@ -45,8 +31,6 @@
   				<td align="center" class="first"><div><strong class="big-font blue"><?php echo $pDeal->getLikes(); ?></strong></div></td>
   				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $pDeal->getRemainingQuantity(); ?></strong></div></td>
   				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $pDeal->getMediaPenetration(); ?></strong></div></td>
-  				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $pDeal->getClickbacks(); ?></strong></div></td>
-  				<td align="center" valign="middle" class="last"><div><strong class="big-font blue"><?php echo $pDeal->getClickbackLikes(); ?></strong></div></td>
       </tr>
     </tbody>
   </table>

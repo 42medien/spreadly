@@ -22,8 +22,7 @@ if (count($pDeal->getLikes())) {
   slot('content')
 ?>
 <h2 class="sub_title">
-	<?php //echo __('Details for deal "%deal%', array('%deal%' => $pDeal->getSummary().'"'.'&nbsp;from&nbsp;'.date("d.m.Y", strtotime($pDeal->getStartDate())).'&nbsp;to&nbsp;'.date("d.m.Y", strtotime($pEndDate))));?>
-	<?php echo __('Details for deal "%deal%"', array('%deal%' => $pDeal->getName())); ?>
+  <?php echo __('Details for deal "%deal%"', array('%deal%' => $pDeal->getName())); ?>
 </h2>
 <div id="line-chart-example">
 <?php include_partial('analytics/chart_line_activities',
