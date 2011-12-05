@@ -16,6 +16,7 @@ class pseudoActions extends sfActions
   * @param sfRequest $request A request object
   */
   public function executeCustom_code(sfWebRequest $request) {
+    $this->getResponse()->setHttpHeader('Access-Control-Allow-Origin', '*');
     $this->getResponse()->setContentType('application/json');
     $this->setLayout(false);
 
