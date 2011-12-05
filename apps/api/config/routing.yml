@@ -6,6 +6,14 @@ homepage:
   url:   /
   param: { module: general, action: lee }
 
+deals:
+  url:   /deals
+  param: { module: deals, action: index }
+
+custom_code:
+  url:   /thankgodwebuiltanapi
+  param: { module: pseudo, action: custom_code }
+
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
@@ -14,7 +22,3 @@ default_index:
 
 default:
   url:   /:module/:action/*
-
-deals:
-  url:   /deals
-  param: { module: deals, action: index }
