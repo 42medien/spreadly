@@ -7,7 +7,7 @@ class ImageParser {
    * @return array
    */
   public static function detect($html) {
-    if (!preg_match("~^<meta.*http-equiv\s*=\s*(\"|\')\s*Content-Type\s*(\"|\').*\/?>$~i", $pHtml)) {
+    if (!preg_match("~^<meta.*http-equiv\s*=\s*(\"|\')\s*Content-Type\s*(\"|\').*\/?>$~", $pHtml)) {
       $pHtml = preg_replace('/<head[^>]*>/i','<head>
                              <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
                             ',$pHtml);
