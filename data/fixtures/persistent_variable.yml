@@ -1,0 +1,22 @@
+PersistentVariable:
+  P_1:
+    name: custom_code_lieferando
+    value: lieferando_1
+  P_2:
+    name: custom_code_lieferando
+    value: lieferando_2
+  P_3:
+    name: custom_code_lieferando
+    value: lieferando_3
+  P_4:
+    name: custom_code_lieferando
+    value: lieferando_4
+  P_5:
+    name: custom_code_lieferando
+    value: lieferando_5
+  P_6:
+    name: custom_code_lieferando
+    value: lieferando_6
+  P_7:
+    name: custom_code_lieferando
+    value: lieferando_7
