@@ -2,38 +2,38 @@
   <h1><?php echo $deal->getName(); ?></h1>
   <h2>A <b><?php echo $deal->getBillingType()==DealTable::BILLING_TYPE_LIKE ? 'Like' : 'Media Penetration'; ?></b> Deal on <?php echo link_to($deal->getSpreadUrl(), $deal->getSpreadUrl()); ?></h2>
   <h2>Submitted on <?php echo date("d. F Y", strtotime($deal->getUpdatedAt())); ?> by <?php echo link_to('#'.$deal->getSfGuardUserId().' - '. $deal->getSfGuardUser()->getEmailAddress(), 'sf_guard_user_edit', $deal->getSfGuardUser()) ?></h2>
-  
+
   <div class="clearfix">
     <div class="column">
       <h3>Details for Deal <?php echo link_to('#'.$deal->getId(), 'deal_edit', $deal) ?></h3>
       <dl>
         <dt>Name</dt>
         <dd><?php echo $deal->getName() ?></dd>
-    
+
         <dt>Type</dt>
         <dd><?php echo $deal->getType() ?></dd>
 
         <dt>Pool Hits</dt>
         <dd><?php echo $deal->getPoolHits() ?></dd>
-    
+
       </dl>
 
       <h3>Motivation</h3>
       <dl>
         <dt>Title</dt>
         <dd><?php echo $deal->getMotivationTitle() ?></dd>
-    
+
         <dt>Text</dt>
         <dd><?php echo $deal->getMotivationText() ?></dd>
       </dl>
     </div>
-  
+
     <div class="column">
       <h3>Spread</h3>
       <dl>
         <dt>Title</dt>
         <dd><?php echo $deal->getSpreadTitle() ?></dd>
-    
+
         <dt>Text</dt>
         <dd><?php echo $deal->getSpreadText() ?></dd>
 
@@ -41,20 +41,20 @@
         <dd><?php echo link_to($deal->getSpreadUrl(), $deal->getSpreadUrl()) ?></dd>
 
         <dt>Image</dt>
-        <dd><img src="$deal->getSpreadImg()" style="max-width: 50px; max-height:50px;" /><?php echo $deal->getSpreadImg() ?></dd>
+        <dd><img src="<?php echo $deal->getSpreadImg() ?>" style="max-width: 50px; max-height:50px;" /><?php echo $deal->getSpreadImg() ?></dd>
 
         <dt>TOS</dt>
         <dd><?php echo $deal->getSpreadTos() ?></dd>
 
       </dl>
     </div>
-  
+
     <div class="column">
       <h3>Coupon</h3>
       <dl>
         <dt>Type</dt>
         <dd><?php echo $deal->getCouponType() ?></dd>
-    
+
         <dt>Title</dt>
         <dd><?php echo $deal->getCouponTitle() ?></dd>
 
@@ -75,7 +75,7 @@
 
       </dl>
     </div>
-  
+
     <div class="column">
       <h3>Billing</h3>
       <dl>
@@ -102,14 +102,14 @@
       </dl>
     </div>
   </div>
-  
+
   <div class="column">
     <h3>Enter commission percentage</h3>
     <form action="/backend.php/approve_deal/approve" method="post" class="geil">
       <input type="hidden" value="put" name="sf_method">
       <?php echo $form['id'] ?>
       <?php echo $form['target_quantity'] ?>
-      
+
       <fieldset class="control-group">
         <?php echo $form['price']->renderLabel() ?>
         <div class="controls">
@@ -140,7 +140,7 @@
           <?php echo $form['commission_per_unit'] ?>
         </div>
       </fieldset>
-      
+
       <fieldset>
         <input type="submit" class="btn primary" value="Approve"/>
         <?php echo link_to('Cancel', 'approve_deal/index', 'class=btn') ?>
