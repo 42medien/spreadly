@@ -7,17 +7,18 @@ set :scm,         :subversion
 set :scm_username, "yiid"
 set :scm_password, "yiidyiidyiid"
 
-set :deploy_directory, "/home/httpd/vhosts"
-set :current_dir, "httpdocs"
-
+role :web,    "spreadly.com"                        # Your HTTP server, Apache/etc
+set :user, 'root'
+set :deploy_directory, "/var/www"
+set :current_dir, "current"
+  
 set  :keep_releases,  5
 
 task :prod do
-  role :web,    "mario.obaake.com"                        # Your HTTP server, Apache/etc
   set :button_deployment, false
-
+  
   set :sf_env, "prod"
-  set :domain,      "yiid.com"
+  set :domain,      "spreadly.com"
   set :deploy_to,   "#{deploy_directory}/#{domain}"
   set :deploy_via, :export
   puts "Deploying #{application} to #{domain} for env=#{sf_env} …"
@@ -25,11 +26,10 @@ task :prod do
 end
 
 task :staging do
-  role :web,    "mario.obaake.com"                        # Your HTTP server, Apache/etc
   set :button_deployment, false
 
   set :sf_env, "staging"
-  set :domain,      "yiiddev.com"
+  set :domain,      "id.cx"
   set :deploy_to,   "#{deploy_directory}/#{domain}"
   set :deploy_via, :checkout
   puts "Deploying #{application} to #{domain} for env=#{sf_env} …"
@@ -37,10 +37,10 @@ task :staging do
 end
 
 task :button do
-  set :button_deployment, true
-
-  set :user, 'root'
   role :button, "ec2-79-125-32-228.eu-west-1.compute.amazonaws.com" # Prod
+  set :user, 'root'
+
+  set :button_deployment, true
 
   set :deploy_directory, "/var/www/button.spread.ly"
   set :current_dir, "current"
@@ -53,10 +53,10 @@ task :button do
 end
 
 task :staging_button do
-  set :button_deployment, true
-
-  set :user, 'root'
   role :button, "ec2-79-125-32-228.eu-west-1.compute.amazonaws.com" # Staging
+  set :user, 'root'
+
+  set :button_deployment, true
 
   set :deploy_directory, "/var/www/button.yiiddev.com"
   set :current_dir, "current"
@@ -105,7 +105,7 @@ namespace :deploy do
       update_code
       symfony.yiid.set
       symfony.yiid.build
-      symfony.yiid.i18n_sync
+      # symfony.yiid.i18n_sync
       symlink
     end
   end
@@ -141,9 +141,7 @@ namespace :deploy do
   desc "Customize the finalize_update task to work with symfony."
   task :finalize_update, :except => { :no_release => true } do
     run "mkdir -p #{latest_release}/cache"
-    if button_deployment
-      run "chown -R www-data:www-data #{latest_release}"
-    end
+    run "chown -R www-data:www-data #{latest_release}"
 
     # Share common files & folders
     share_childs
