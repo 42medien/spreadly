@@ -1,6 +1,6 @@
 <?php use_helper('Text', 'YiidUrl', "YiidNumber"); ?>
 <div class="data-tablebox">
-  <table border="0" width="930px;" cellspacing="0" cellpadding="0" id="top-pages-table" class="tablesorter scrolltable">
+  <table border="0" width="920px;" cellspacing="0" cellpadding="0" id="top-pages-table" class="tablesorter scrolltable">
   	<thead>
     	<tr>
   			<th height="32" align="center" valign="middle" class="first">

@@ -1,4 +1,4 @@
-  <table width="930px;" border="0" cellspacing="0" cellpadding="0" id="top-influencer-table" class="tablesorter">
+  <table width="920px;" border="0" cellspacing="0" cellpadding="0" id="top-influencer-table" class="tablesorter">
   <thead>
     <tr>
       <th align="center" valign="middle" class="first">
