@@ -1,3 +1,5 @@
+<?php /*@depricated*/?>
+
 <?php if(!$sf_user->isAuthenticated()): ?>
 
   <?php echo $form->renderFormTag(url_for('@sf_guard_signin'), array('id'=>'signin_form')); ?>

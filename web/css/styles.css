@@ -318,7 +318,7 @@ fieldset { border: 0px solid transparent;  }
 } 
 
  div.dotborboxmore{ margin-top:11px;}
-
+array('class' => 'custom-select')
 .whtrow{ 
   display: block;
   height: auto;

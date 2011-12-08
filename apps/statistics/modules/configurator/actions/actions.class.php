@@ -21,6 +21,10 @@ class configuratorActions extends sfActions
     //$this->forward('default', 'module');
   }
 
+  public function executeConfig(sfWebRequest $request){
+  	$this->getResponse()->setSlot('js_document_ready', $this->getPartial('configurator/js_init_configurator.js'));
+  }
+
   public function executeGet_choose_style(sfWebRequest $request){
     $this->getResponse()->setContentType('application/json');
     $lServiceId = $request->getParameter('service', null);

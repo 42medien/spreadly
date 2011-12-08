@@ -7,6 +7,7 @@
 var DomainProfilesHandler = {
 
   aClaimHtml: '',
+  aClipboardPath: '',
   /**
    * inits the DomainProfiles functionalities
    * @author hannes
@@ -36,8 +37,8 @@ var DomainProfilesHandler = {
       success: function(pResponse) {
         //if the domain-profile is successfully created
         if(pResponse.success == true) {
-          if(jQuery('#domain_profiles_table table tbody tr:first').attr('id') == 'no-claim') {
-            jQuery('#domain_profiles_table table tbody tr:first').remove();
+          if(jQuery('#domain_profiles_table tbody tr:first').attr('id') == 'no-claim') {
+            jQuery('#domain_profiles_table tbody tr:first').remove();
           }
           jQuery('#domain_profiles_table tbody').prepend(pResponse.domain_profiles_table);
           lCssId = jQuery(pResponse.domain_profiles_table).attr('id');
@@ -90,6 +91,7 @@ var DomainProfilesHandler = {
         jQuery('#add-domain-profiles').empty();
         jQuery('#add-domain-profiles').append(pResponse.code);
         DomainProfilesHandler.closeCode(); 
+        DomainProfilesHandler.initClipboard();
         OnLoadGrafic.hideGrafic();
       }
     });       
@@ -109,6 +111,15 @@ var DomainProfilesHandler = {
       return false;
     });
   },
+  
+  initClipboard: function(pPath) {
+    debug.log("[CouponCode][initClipboard]");   
+    jQuery('a#btn-cp-microid').zclip({
+      path: DomainProfilesHandler.aClipboardPath,
+      copy: jQuery('#input-verify-code').val()
+    });
+
+  },  
   
   /**
    * 

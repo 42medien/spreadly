@@ -1,19 +1,19 @@
 <?php use_helper('Date', 'DomainProfiles') ?>
-<div class="data-table" id="domain_profiles_table">
-	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	  <thead>
-	  <tr class="table-title">
-	    <th><img src="/img/table-thl.jpg" width="5" height="34" alt="" class="alignleft" /></th>
-	    <th align="center" valign="middle"><?php echo __('Website');?></th>
-	    <th align="center" valign="middle">&nbsp;</th>
-	    <th align="center" valign="middle"><?php echo __('Status');?></th>
-	    <th align="center" valign="middle"><?php echo __('Get Code');?></th>
-	    <th align="center" valign="middle"><?php echo __('Verify');?></th>
-	    <th align="center" valign="middle"><?php echo __('Delete');?></th>
-	    <th align="center" valign="middle"><img src="/img/table-thr.jpg" width="5" height="34" alt="" class="alignright" /></th>
-	  </tr>
-	  </thead>
-	  <tbody>
+
+
+<div class="claimtable-head">
+	<span class="leftco">&nbsp;</span><span class="rightco">&nbsp;</span>
+	<table title="Recurring Billing Features">
+		<tr>
+			<td class="first"><?php echo __('Website');?></td>
+			<td class="status"><?php echo __('Status');?></td>
+			<td class="generate"><?php echo __('Get Code');?></td>
+			<td><?php echo __('Verify');?></td>
+			<td><?php echo __('Delete');?></td>
+		</tr>
+	</table>
+</div>
+<table class="custofeature-table" id="domain_profiles_table" title="table">
 	  <?php if(count($domain_profiles) > 0) { ?>
 	    <?php foreach ($domain_profiles as $i => $domain_profile){ ?>
 				<?php include_partial('domain_profiles/domain_profiles_row', array('domain_profile' => $domain_profile)); ?>
@@ -26,6 +26,5 @@
         </td>
       </tr>
 	  <?php } ?>
-	  </tbody>
-	</table>
-</div>
+
+</table>

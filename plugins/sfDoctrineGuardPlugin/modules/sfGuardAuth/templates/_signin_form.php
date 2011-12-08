@@ -8,14 +8,11 @@
     <tfoot>
       <tr>
         <td colspan="2">
-          <div class="clearfix right">
-			      <button type="submit" class="button right"><span><?php echo __("Signin") ?></span></button>
-				  </div>
-
+			      <button type="submit" id="signin-button" class="blue-btn alignright"><span><?php echo __("Signin") ?></span></button>
       </tr>
       <tr>
       	<td colspan="2">
-          <div class="clearfix right">
+          <div class="clearfix alignright">
 	          <?php $routes = $sf_context->getRouting()->getRoutes() ?>
 	          <?php if (isset($routes['sf_guard_forgot_password'])): ?>
 			        <?php echo link_to(__('Forgot your password?'), url_for('@sf_guard_forgot_password')); ?>

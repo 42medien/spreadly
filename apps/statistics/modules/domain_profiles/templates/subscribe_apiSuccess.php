@@ -8,14 +8,12 @@
 			<strong><?php echo __('Your Endpoint'); ?></strong>
 			<span><?php echo __('(The url Spreadly should notifyin case of new likes or deals)'); ?></span>
 		</div>
-		<label class="textfield-wht">
-			<span>
-	  		<input type="text" id="ep-url" class="mirror-value wd390" value="<?php echo ($pEndpoint)?$pEndpoint->getCallback():"http://" ?>" name="ep-url">
-	  	</span>
+		<label class="inputlabel" id="endpointlabel">
+	  		<input type="text" id="ep-url" class="mirror-value inputfield" value="<?php echo ($pEndpoint)?$pEndpoint->getCallback():"http://" ?>" name="ep-url">
 	  </label>
 	  <div>
-				<a href="#" title="Verify Endpoint" id="subscribe-api-button" class="graybtnwide alignleft" <?php echo ($pEndpoint)?'style="display:none;"':'';?> ><span><?php echo __('Validate the setup of your endpoint'); ?></span></a>
-				<a href="/domain_profiles/unsubscribe_api?host_id=<?php echo $pHostId; ?>" title="Unsubscribe Endpoint" id="unsubscribe-api-button" class="graybtnwide" <?php echo (!$pEndpoint)?'style="display:none;"':'';?>><span><?php echo __('Stop subscription'); ?></span></a>
+				<a href="#" title="Verify Endpoint" id="subscribe-api-button" class="blue-btn alignleft" <?php echo ($pEndpoint)?'style="display:none;"':'';?> ><span><?php echo __('Validate the setup of your endpoint'); ?></span></a>
+				<a href="/domain_profiles/unsubscribe_api?host_id=<?php echo $pHostId; ?>" title="Unsubscribe Endpoint" id="unsubscribe-api-button" class="blue-btn" <?php echo (!$pEndpoint)?'style="display:none;"':'';?>><span><?php echo __('Stop subscription'); ?></span></a>
 		</div>
 	</div>
 
@@ -34,9 +32,9 @@
 	<div id="verify-form-error" class="form-response hide">
 		<span class="error"></span>
 	</div>
-	<div id="unsubscribe-api" class="form-response <?php echo (!$pEndpoint)?'hide':'';?>">
+	<div id="unsubscribe-api" class="clearfix form-response <?php echo (!$pEndpoint)?'hide':'';?>">
 		<?php echo __('If you want to stop your subscription, click here:'); ?>
-		<a href="/domain_profiles/unsubscribe_api?host_id=<?php echo $pHostId; ?>" title="Unsubscribe Endpoint" id="unsubscribe-api-button" class="graybtnwide"><span><?php echo __('Stop subscription'); ?></span></a>
+		<a href="/domain_profiles/unsubscribe_api?host_id=<?php echo $pHostId; ?>" title="Unsubscribe Endpoint" id="unsubscribe-api-button" class="blue-btn"><span><?php echo __('Stop subscription'); ?></span></a>
 	</div>
 
 </div>

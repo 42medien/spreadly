@@ -179,7 +179,6 @@ class domain_profilesActions extends sfActions
 
   public function executeUnsubscribe_api(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
-  	$this->getResponse()->setContentType('application/json');
   	//$lUrl = $request->getParameter('ep-url');
   	$lHostId = $request->getParameter('host_id');
     $lDomainProfile = Doctrine::getTable('DomainProfile')->find($lHostId);

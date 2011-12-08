@@ -1147,3 +1147,263 @@ ul#subnavigation li a.active{
   font-weight: bold;
   color: #588199;
 }
+
+
+
+
+#scheme-picker{
+  height: 20px;
+}
+
+#selected-color{
+  float:left;
+  width: 18px;
+  height: 18px;	
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+#color-picker{
+  height: 20px;
+  display: none;
+}
+
+#color-picker li{
+	float:left;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #ccc;  
+}
+
+#scheme-picker .blue{background-color: hsla(199,81%,50%,1);}
+#scheme-picker .green{background-color: hsla(111,24%,50%,1);}
+#scheme-picker .grey{background-color: hsla(0,0%,50%,1);}
+#scheme-picker .orange{background-color: hsla(22,90%,50%,1);}
+#scheme-picker .purple{background-color: hsla(302,54%,50%,1);}
+#scheme-picker .red{  background-color: hsla(349,79%,50%,1);}
+
+
+    /* default skin*/
+    .container {
+      display: inline-block;
+      margin: 2px 5px;
+    }
+    .button {
+      display: inline-block;
+      position: relative;
+      color: hsl(333,42%,50%);  /* #B44A7A */
+      line-height: 18px;
+      font-weight: bold;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      padding: 0 4px 0 21px;
+      height: 18px;
+      border: 1px solid hsl(333,42%,73%);
+      border-bottom-color: hsl(333,42%,50%);
+      border-top-color: hsl(333,42%,81%);
+      border-radius: 3px;
+      background: #fff url('//s3.amazonaws.com/spread.ly/img/button/s.png') no-repeat 130% -20px;
+      text-decoration: none;
+      text-transform: uppercase;
+      box-shadow: 0 -1px 1px 1px hsla(333,42%,100%,.7) inset, 0 -4px 8px 0 hsla(333,42%,50%,.5) inset, 0 0 2px 8px hsla(333,42%,0%,0);
+      text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(333,42%,50%,.25);
+      -webkit-transition: box-shadow .3s ease-out, text-shadow .3s ease-out, background-position .6s ease-out;
+      -moz-transition: box-shadow .3s ease-out, text-shadow .3s ease-out, background-position .6s ease-out;
+    }
+    .button:before{
+      background: hsla(333,42%,50%,1) url('//s3.amazonaws.com/spread.ly/img/button/l.png') no-repeat 0px 0px;
+      box-shadow: 0 1px 1px 0px hsla(333,42%,0%,.8) inset;
+      content:'';
+      width: 16px;
+      height: 16px;
+      display: block;
+      position: absolute;
+      top: 1px;
+      left: 1px;
+      border-radius: 2px;
+      opacity:1;
+    }
+    .button:focus, .button:hover{
+      outline: none;
+      background-position: -30% 20px;
+      border: 1px solid hsl(333,42%,65%);
+      border-top-color: hsl(333,42%,46%);
+      box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(333,42%,50%,.3) inset, 0 0 4px 0 hsla(333,42%,30%,.5);
+      text-shadow: 0 1px 1px hsla(333,42%,50%,.25), 0 -1px 1px #fff;
+      -webkit-transition: box-shadow .3s ease-in, text-shadow .3s ease-in, background-position .6s ease-out;
+      -moz-transition: box-shadow .3s ease-in, text-shadow .3s ease-in, background-position .6s ease-out;
+    }
+    .button:active {
+      background-position: -30% 20px;
+      background-color: hsla(333,42%,70%,1);
+      color: #fff;
+      border: 1px solid hsl(333,42%,30%);
+      border-top-color: hsl(333,42%,30%);
+      box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(333,42%,50%,.3) inset, 0 0 4px 0 hsla(333,42%,30%,.5);
+      text-shadow: 0 0px 0px hsla(333,42%,50%,0), 0 0px 0px #fff;
+    }
+    .button:focus:before, .button:hover:before{
+      opacity:.85;
+      width: 14px;
+      height: 14px;
+      top:2px;
+      left:2px;
+      background-position: -1px -1px;*/
+    }
+
+
+
+/* skin .ca*/
+.blue {
+  color: hsl(199,81%,50%);
+  border-color: hsl(199,81%,73%);
+  border-bottom-color: hsl(199,81%,50%);
+  border-top-color: hsl(199,81%,81%);
+  box-shadow: 0 -1px 1px 1px hsla(199,81%,100%,.7) inset, 0 -4px 8px 0 hsla(199,81%,50%,.5) inset, 0 0 2px 8px hsla(199,81%,0%,0);
+  text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(199,81%,50%,.25);
+}
+.blue:before{
+  background-color: hsla(199,81%,50%,1);
+  box-shadow: 0 1px 1px 0px hsla(199,81%,0%,.5) inset;
+}
+.blue:focus, .blue:hover{
+  border-color: hsl(199,81%,65%);
+  border-top-color: hsl(199,81%,46%);
+  box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(199,81%,50%,.3) inset, 0 0 4px 0 hsla(199,81%,30%,.5);
+  text-shadow: 0 1px 1px hsla(199,81%,50%,.25), 0 -1px 1px #fff;
+}
+
+.blue:active {
+  background-color: hsla(199,81%,70%,1);
+  color: #fff;
+  border-color: hsl(199,81%,30%);
+  border-top-color: hsl(199,81%,30%);
+  box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(199,81%,50%,.3) inset, 0 0 4px 0 hsla(199,81%,30%,.5);
+  text-shadow: 0 0px 0px hsla(199,81%,50%,0), 0 0px 0px #fff;
+}
+
+
+
+/* skin .cb*/
+.green {
+  color: hsl(111,24%,50%);
+  border-color: hsl(111,24%,73%);
+  border-bottom-color: hsl(111,24%,50%);
+  border-top-color: hsl(111,24%,81%);
+  box-shadow: 0 -1px 1px 1px hsla(111,24%,100%,.7) inset, 0 -4px 8px 0 hsla(111,24%,50%,.5) inset, 0 0 2px 8px hsla(111,24%,0%,0);
+  text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(111,24%,50%,.25);
+}
+.green:before{
+  background-color: hsla(111,24%,50%,1);
+  box-shadow: 0 1px 1px 0px hsla(111,24%,0%,.5) inset;
+}
+.green:focus, .green:hover{
+  border-color: hsl(111,24%,65%);
+  border-top-color: hsl(111,24%,46%);
+  box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(111,24%,50%,.3) inset, 0 0 4px 0 hsla(111,24%,30%,.5);
+  text-shadow: 0 1px 1px hsla(111,24%,50%,.25), 0 -1px 1px #fff;
+}
+
+.green:active {
+  background-color: hsla(111,24%,70%,1);
+  color: #fff;
+  border-color: hsl(111,24%,30%);
+  border-top-color: hsl(111,24%,30%);
+  box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(111,24%,50%,.3) inset, 0 0 4px 0 hsla(111,24%,30%,.5);
+  text-shadow: 0 0px 0px hsla(111,24%,50%,0), 0 0px 0px #fff;
+}
+
+
+.purple {
+  color: hsl(302,54%,50%);
+  border-color: hsl(302,54%,73%);
+  border-bottom-color: hsl(302,54%,50%);
+  border-top-color: hsl(302,54%,81%);
+  box-shadow: 0 -1px 1px 1px hsla(302,54%,100%,.7) inset, 0 -4px 8px 0 hsla(302,54%,50%,.5) inset, 0 0 2px 8px hsla(302,54%,0%,0);
+  text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(302,54%,50%,.25);
+}
+.purple:before{
+  background-color: hsla(302,54%,50%,1);
+  box-shadow: 0 1px 1px 0px hsla(302,54%,0%,.5) inset;
+}
+.purple:focus, .purple:hover{
+  border-color: hsl(302,54%,65%);
+  border-top-color: hsl(302,54%,46%);
+  box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(302,54%,50%,.3) inset, 0 0 4px 0 hsla(302,54%,30%,.5);
+  text-shadow: 0 1px 1px hsla(302,54%,50%,.25), 0 -1px 1px #fff;
+}
+.purple:active {
+  background-color: hsla(302,54%,70%,1);
+  color: #fff;
+  border-color: hsl(302,54%,30%);
+  border-top-color: hsl(302,54%,30%);
+  box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(302,54%,50%,.3) inset, 0 0 4px 0 hsla(302,54%,30%,.5);
+  text-shadow: 0 0px 0px hsla(302,54%,50%,0), 0 0px 0px #fff;
+}
+
+.orange {
+  color: hsl(22,90%,50%);
+  border-color: hsl(22,90%,73%);
+  border-bottom-color: hsl(22,90%,50%);
+  border-top-color: hsl(22,90%,81%);
+  box-shadow: 0 -1px 1px 1px hsla(22,90%,100%,.7) inset, 0 -4px 8px 0 hsla(22,90%,50%,.5) inset, 0 0 2px 8px hsla(22,90%,0%,0);
+  text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(22,90%,50%,.25);
+}
+.orange:before{
+  background-color: hsla(22,90%,50%,1);
+  box-shadow: 0 1px 1px 0px hsla(22,90%,0%,.5) inset;
+}
+.orange:focus, .orange:hover{
+  border-color: hsl(22,90%,65%);
+  border-top-color: hsl(22,90%,46%);
+  box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(22,90%,50%,.3) inset, 0 0 4px 0 hsla(22,90%,30%,.5);
+  text-shadow: 0 1px 1px hsla(22,90%,50%,.25), 0 -1px 1px #fff;
+}
+
+.red {
+  color: hsl(349,79%,50%);
+  border-color: hsl(349,79%,73%);
+  border-bottom-color: hsl(349,79%,50%);
+  border-top-color: hsl(349,79%,81%);
+  box-shadow: 0 -1px 1px 1px hsla(349,79%,100%,.7) inset, 0 -4px 8px 0 hsla(349,79%,50%,.5) inset, 0 0 2px 8px hsla(349,79%,0%,0);
+  text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(349,79%,50%,.25);
+}
+.red:before{
+  background-color: hsla(349,79%,50%,1);
+  box-shadow: 0 1px 1px 0px hsla(349,79%,0%,.5) inset;
+}
+.red:focus, .red:hover{
+  border-color: hsl(349,79%,65%);
+  border-top-color: hsl(349,79%,46%);
+  box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(349,79%,50%,.3) inset, 0 0 4px 0 hsla(349,79%,30%,.5);
+  text-shadow: 0 1px 1px hsla(349,79%,50%,.25), 0 -1px 1px #fff;
+}
+
+
+
+.grey {
+  color: hsl(0,0%,50%);
+  border-color: hsl(0,0%,73%);
+  border-bottom-color: hsl(0,0%,50%);
+  border-top-color: hsl(0,0%,81%);
+  box-shadow: 0 -1px 1px 1px hsla(0,0%,100%,.7) inset, 0 -4px 8px 0 hsla(0,0%,50%,.5) inset, 0 0 2px 8px hsla(0,0%,0%,0);
+  text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(0,0%,50%,.25);
+}
+.grey:before{
+  background-color: hsla(0,0%,50%,1);
+  box-shadow: 0 1px 1px 0px hsla(0,0%,0%,.5) inset;
+}
+.grey:focus, .grey:hover{
+  border-color: hsl(0,0%,65%);
+  border-top-color: hsl(0,0%,46%);
+  box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(0,0%,50%,.3) inset, 0 0 4px 0 hsla(0,0%,30%,.5);
+  text-shadow: 0 1px 1px hsla(0,0%,50%,.25), 0 -1px 1px #fff;
+}
+
+
+
+
+
+
+
+
