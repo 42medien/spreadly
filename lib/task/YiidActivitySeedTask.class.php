@@ -61,6 +61,7 @@ EOF;
     $tags = array('geekstuff', 'otherthings', 'schuhe');
     $users = array($lUserHugo, $lUserJames);
     $services = array('facebook', 'twitter', 'linkedin', 'google');
+    $deals = array('Campaign No. 1', 'Campaign No. 2', 'Campaign No. 3');
     $dm = MongoManager::getDM();
 
     for ($i=0; $i < 100; $i++) {
@@ -83,6 +84,45 @@ EOF;
         'c' => $theC,
         'cb' => $this->randBoolean() ? $this->random(30) : 0,
         'cb_referer' => $cb_ref!='' ? $cb_ref : null,
+        'cb_service' => $cb_ref!='' ? $this->oneOfThese($services) : null
+      );
+
+      $lActivity = new Documents\YiidActivity();
+      $lActivity->fromArray($array);
+
+      try {
+        $lActivity->skipUrlCheck=true;
+        $lActivity->save();
+      } catch(Exception $e) {
+        $this->log($e->getMessage());
+      }
+    }
+
+    // same for deals
+    for ($i=0; $i < 100; $i++) {
+      $url = $this->oneOfThese($urls);
+      $tag = $this->oneOfThese($tags);
+      $user = $this->oneOfThese($users);
+      $cb_ref = $this->oneOfThese(array('', '', '', '', '', '', 'http://tierscheisse.de'));
+      $i_url = $this->oneOfThese(array('http://ard.de', 'http://bild.de', 'http://spiegel.de', 'http://tierscheisse.de'));
+      $ra = $this->random(1000);
+      $theC =  mt_rand(strtotime("3 days ago"),strtotime("today"));
+      $deal = DealTable::getInstance()->findOneByName($this->oneOfThese($deals));
+
+      $array = array(
+        'url' => "http://$url/$ra",
+        'url_hash' => "hash.$ra",
+        'u_id' => $user->getId(),
+        'oiids' => $user->getOnlineIdentitesAsArray(),
+        'tags' => $tag,
+        'title' => "$url title",
+        'descr' => "$url description",
+        'comment' => "$url comment",
+        'c' => $theC,
+        'd_id' => $deal->getId(),
+        'cb' => $this->randBoolean() ? $this->random(30) : 0,
+        'cb_referer' => $cb_ref!='' ? $cb_ref : null,
+        'i_url' => $i_url,
         'cb_service' => $cb_ref!='' ? $this->oneOfThese($services) : null
       );
 
