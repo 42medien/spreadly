@@ -26,7 +26,7 @@ Verdienen Sie nach der Registrierung &uuml;ber unser Adnetwork bares Geld, indem
 							<h3>Get Analytics</h3>
 							<h4>Watch your spread analytics</h4>
 							<p>Spreadly offers a new advertising format. Advertisers pay and book an exact range. The linking of commercial message and voucher as thanks for the recommendation makes the ad attractive to the user. They are well aware of the ad message because it appears right after the focused like.</p>
-							<span class="link"><a href="#">Watch your detailled site analytics &raquo;</a></span>
+							<span class="link"><a href="<?php echo url_for('analytics/index'); ?>">Watch your detailled site analytics &raquo;</a></span>
 						</li>
 					</ul>
 				</section>

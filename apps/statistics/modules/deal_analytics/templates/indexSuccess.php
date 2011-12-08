@@ -2,7 +2,7 @@
 <?php if(count($pDeals) > 0) { ?>
 <?php slot('content') ?>
   <div class="data-tablebox">
-  	<table border="0" cellspacing="0" cellpadding="0" id="dash-deal-table" class="tablesorter scrolltable" style="width: 930px;">
+  	<table border="0" cellspacing="0" cellpadding="0" id="dash-deal-table" class="tablesorter scrolltable" style="width: 925px;">
   	<thead>
     	<tr>
   			<th align="center" valign="middle" class="first">
@@ -58,3 +58,4 @@
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
 <?php } ?>
+<?php include_partial('global/spreadly_references');?>
