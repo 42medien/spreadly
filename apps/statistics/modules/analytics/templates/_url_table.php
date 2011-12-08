@@ -1,6 +1,6 @@
 <?php use_helper('Text', 'YiidUrl', "YiidNumber"); ?>
 
-  <table border="0" width="930px;" cellspacing="0" cellpadding="0" id="top-url-table" class="tablesorter">
+  <table border="0" width="910px;" cellspacing="0" cellpadding="0" id="top-url-table" class="tablesorter">
   <thead>
     <tr>
       <th align="center" valign="middle" class="first">

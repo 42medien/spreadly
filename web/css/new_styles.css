@@ -782,3 +782,256 @@ html, body { min-height:100%; height:100%;}
 
 .blue-btn{cursor: pointer;}
 
+/********old graybox*************/
+.grboxmid{ padding-left:9px; background:url(../img/grayboxl.png) left top repeat-y;}
+.grboxmid-content{  background:url(../img/grayboxr.png) right top repeat-y; padding-right:7px;}
+.graybox{ background:#ebeaea url(../img/graybox-bg.gif) left top repeat-x; padding:4px 7px 5px 8px;}
+.grboxtop{ background:url(../img/topcorl.png) left 0px no-repeat; padding-left:15px; }
+.grboxtop span{ font-size:0px; line-height:0px;  background:url(../img/topcorr.png) right 0px no-repeat; height:11px; display:block; }
+.grboxbot{ background:url(../img/botcorlb.png) left 0px no-repeat; padding-left:15px; }
+.grboxbot span{ font-size:0px; line-height:0px;  background:url(../img/botcorrb.png) right 0px no-repeat; height:13px; display:block; }
+
+/***********old table***********/
+.data-tablebox{  color:#363636;}
+.data-tablebox th{ background:#d2d2d2 url(../img/tbltopx.gif) left top repeat-x;  color:#000; font-weight:normal; padding-top:1px;  border-bottom:1px solid #777575;}
+.data-tablebox th div{ border-right:1px solid #777575;  border-left:1px solid #fff; line-height:32px; padding:0 4px;}
+.data-tablebox th.first{ background:url(../img/tbtop.png) left top no-repeat; }
+.data-tablebox th.first div{border-left:0px solid #fff; }
+.data-tablebox th.last{ background:url(../img/tbtop.png) right top no-repeat; }
+.data-tablebox th.last div{border-right:0px solid #fff; }
+.data-tablebox th.active{background:#f6f6f6 url(../img/tbltopx-hov.gif) left top repeat-x;}
+.data-tablebox th.current div{ color:#58819a; font-size:14px; font-weight:bold; padding-left:12px;} 
+
+.data-tablebox td{ background:#ededed; border-bottom:1px solid #777575;  border-top:1px solid #fff;  border-right:1px solid #777575; border-left:1px solid #fff; }
+.data-tablebox td.first{ background:#e1e1e1 url(../img/tblfirst.gif) left top repeat-y; border-left:0px solid #fff; }
+.data-tablebox td.second{ background:#e1e1e1; border-left:0px solid #fff; }
+.data-tablebox td.last{ border-right:1px solid #d5d5d5; }
+.data-tablebox td.whitebg{ background:#fff;}
+.data-tablebox tr.unverifiedrow{ color:#345c82;}
+.data-tablebox td.webname{ padding:0 2px 0 14px;}
+.data-tablebox a{color:#345c82; text-decoration:underline;}
+.data-tablebox a:hover{ text-decoration:none;}
+
+.data-tablebox th div {
+  font-weight: bold;
+  padding: 0 8px 0 4px;
+}
+
+.data-tablebox th div .tooltip-icon{
+    padding-left: 3px;
+    padding-top: 7px;
+}
+
+.data-tablebox td.first{
+    border-left: 1px solid transparent;
+}
+
+.data-tablebox td{
+  border-left: 0 solid transparent;
+  border-right: 0 solid #FFFFFF;
+  line-height: 34px;
+}
+
+.two-line-table td{
+  line-height: 42px;
+}
+
+#analytics-url-table td{
+  line-height: 42px;
+}
+
+.data-tablebox td div{
+  border-right: 1px solid #777575;
+}
+
+.data-tablebox td div.padleft{
+  padding-left: 10px;
+}
+
+div.data-tablebox table#top-influencer-table td.first div.infname{
+  min-height: 42px;
+  vertical-align: middle;
+}
+
+div.data-tablebox table#top-influencer-table td.first div.infname span{
+    display: inline-block;
+    line-height: 16px;
+    margin-top: 13px;
+}
+
+div.data-tablebox table#top-influencer-table td.first div.infname img {
+  margin-right: 5px;
+}
+
+
+#analytics-bread {
+  padding: 5px 0px 5px 0px;
+}
+
+#pie-charts{
+  clear:both;
+  margin: 20px 0px 10px 0px;
+}
+
+#pie-charts div#age-chart{
+  margin: 0px 10px;
+}
+
+
+/***breadcrumb***/
+.bc-list li{float:left; height: 24px; line-height: 24px;}
+.bc-first{ background: url("/img/breadcrumb_left.png") no-repeat scroll left center transparent; width: 12px;}
+.bc-gradient{  background: url("/img/breadcrumb_gradient.png") repeat-x scroll left center transparent; width: auto; padding: 0 5px;}
+.bc-gradient a {color: #588199;}
+.bc-gradient a:hover, .bc-gradient strong {color: #252525;}
+.bc-seperator{  background: url("/img/breadcrumb_center.png") no-repeat scroll left center transparent; width: 17px;}
+.bc-last{  background: url("/img/breadcrumb_right.png") no-repeat scroll left center transparent; width: 12px;}
+
+.bc-highlight {color: #646869; }
+
+/*********stat-infos with arrows********/
+#navi{  width:916px; height:89px;}
+.stepBox{ background:url(/img/arrow_icon.png) right 0px no-repeat; height:71px; width:auto; margin-top:10px; margin-right:14px;}
+
+.mediaPartner{ background:none;}
+.box_container{ background:url(/img/bg_image.png) left -68px no-repeat; height:68px; padding-left:11px; margin-top:1px;}
+.box{ background:url(/img/bg_image.png) right top no-repeat; height:68px; display:block; width:122px; padding-right:10px; }
+.box_container .box p{ font-size:14px; font-weight:bold; color:#588199; text-align:center; line-height:15px; margin:0px; padding:7px 0px 0 0px;}
+.box strong{ font-size:38px; line-height:28px; color:#588199; text-align:center; display:block; padding:5px 5px 0 0px;}
+.box_container{ margin-top:2px;}
+.box .media_text_space{ margin-left:-7px!important;}
+.box .shares{padding:8px 5px 0 0px; }
+.box .media{ padding:8px 15px 0 0px; }
+
+.twitter span{ background:url(/img/twitter_icon.png) no-repeat scroll center top transparent; min-width:17px; height:17px;}
+.twitter_width span{ min-width:30px; text-align:center; background:url(/img/twitter_icon.png) center 0px no-repeat;}
+.facebook span{  background: url("/img/facebook_icon.png") no-repeat scroll center top transparent; min-width:20px; height:17px;}
+.linkedin span{ background: url(/img/in_icon.png) no-repeat scroll center top transparent; min-width:17px; height:17px;}
+.gtalk span, .google span{ background: url(/img/gtalk_icon.png) no-repeat scroll center top transparent; min-width:19px; height:17px;}
+
+.mediaPartner .box{width:auto; padding-right:0px;}
+
+.box .tooltip-icon{padding: 0px 5px 0px 5px;}
+
+#navi ul { padding-left:10px; float:left}
+#navi ul li{ padding-right:7px; list-style:none;  text-align:center; padding-top:19px;  float:left; font-size:12px;  }
+#navi ul p{ font-size:14px; color:#252525; margin-top:-2px; width: 110px;}
+#navi ul span{ color:#252525; text-decoration:none;  font-size:12px; padding-top:18px; text-align:center; display:block;}
+#navi ul span.stepBox-text{text-align:left;}
+
+#navi ul p span{ padding:0}
+
+#navi .shares_box ul{ padding-left:12px;}
+#navi .shares_box ul li { padding-right:6px }
+#navi .shares_box ul li.facebook span { width:auto; min-width:18px}
+
+.shares_box{ width:292px;}
+
+
+.tooltip {
+    background: url("/img/tooltip/black_arrow.png") repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    display: none;
+    font-size: 12px;
+    height: auto;
+    padding: 20px !important;
+    width: 160px;
+    border-left: none !important;
+    border-right: none !important;
+    line-height: 14px !important;
+    font-weight: normal !important;
+    min-height: 70px;
+    z-index: 99;
+}
+
+.tooltip h3{
+  line-height: 18px;
+}
+
+#dyna img {
+    border: 0 none;
+    cursor: pointer;
+    margin: 0 8px;
+}
+
+#filter-period-label {
+    padding-top: 5px;
+    position: relative;
+    width: 135px;
+    z-index: 50;
+}
+
+#select-period-link.button, #select-period-link.button span {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+#filter-period-or {
+    line-height: 31px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/****datepicker*********/
+#analytics-datefilter-form {
+    height: 300px;
+    padding: 10px;
+    width: 550px;
+}
+
+#analytics-datefilter-form .textfield {
+    background: url("../img/gray-textbg.png") no-repeat scroll -2px -30px transparent;
+    padding-left: 10px;
+    float: left;
+}
+
+#analytics-datefilter-form .textfield span {
+    background: url("../img/gray-textbg.png") no-repeat scroll right 0 transparent;
+    padding-right: 11px;
+    float: left;
+    height: 22px;
+    padding: 5px 14px 4px 0;    
+}
+
+#analytics-datefilter-form input {
+    color: #000000;
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    font-size: 11px;
+    height: 20px;
+    line-height: 19px;
+    padding-bottom: 2px;    
+}
+
+.textfield-label {
+    padding-right: 5px;
+    padding-top: 7px;
+}
+
+
+/* End Main Nav
+--------------------------------------------------------------------------------------------------------*/
+
+a.button, button.button {
+    background: url("/img/savel.png") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 0 1px;
+    padding-left: 13px;
+    text-decoration: none;
+}
+
+a.button span, button.button span {
+    background: url("/img/saver.png") no-repeat scroll right 0 transparent;
+    color: #000000;
+    cursor: pointer;
+    float: left;
+    font-size: 16px;
+    line-height: 26px;
+    padding: 4px 18px 6px 5px;
+    text-decoration: none;
+}
+
+
+
+

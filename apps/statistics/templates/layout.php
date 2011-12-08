@@ -16,6 +16,7 @@
 
 	<link href="/css/new_styles.css" rel="stylesheet" type="text/css">
 	<link href="/css/grid.css" rel="stylesheet" type="text/css">
+	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 	<link rel="stylesheet" type="text/css" href="/css/colorbox/colorbox.css" media="screen" />
 	<!--[if IE]>
 	<link href="/css/new_ie.css" rel="stylesheet" type="text/css">
@@ -75,7 +76,13 @@
 			</div>
 		</header>
 
-				<?php echo $sf_content; ?>
+		<?php if($module !='landing'){ ?>
+		<section class="content-publish">
+			<section class="container_12">
+						<?php echo $sf_content; ?>
+			</section>
+		</section>
+		<?php }?>
 
 
 

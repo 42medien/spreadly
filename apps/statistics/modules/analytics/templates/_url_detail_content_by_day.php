@@ -32,7 +32,7 @@ if ($pUrlSummary) {
   <div class="alignleft" id="gender-chart">
     <?php include_partial('analytics/chart_pie_gender', array('pChartsettings' =>
           '{
-                "width": 305,
+                "width": 300,
                 "height": 180,
                 "margin": [ 40, 0, 10, 10],
                 "plotsize": "50%",
@@ -44,7 +44,7 @@ if ($pUrlSummary) {
   <div class="alignleft" id="age-chart">
     <?php include_partial('analytics/chart_pie_age', array('pChartsettings' =>
           '{
-                "width": 305,
+                "width": 300,
                 "height": 180,
                 "margin": [ 40, 20, 10, 20],
                 "plotsize": "50%",
@@ -56,7 +56,7 @@ if ($pUrlSummary) {
   <div class="alignleft" id="relation-chart">
     <?php include_partial('analytics/chart_pie_relationship', array('pChartsettings' =>
           '{
-                "width": 305,
+                "width": 300,
                 "height": 180,
                 "margin": [ 40, 0, 10, 10],
                 "plotsize": "50%",
