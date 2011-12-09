@@ -30,7 +30,7 @@ class FacebookPostApiClient extends PostApi {
       $lActionText = $i18n->__("Get the Deal");
       $lObject = $pActivity->getDeal();
     } else {
-      $lActionText = "Spread";
+      $lActionText = "Teilen";
       $lObject = $pActivity;
     }
 
