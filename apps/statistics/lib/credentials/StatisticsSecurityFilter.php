@@ -12,6 +12,11 @@ class StatisticsSecurityFilter extends sfBasicSecurityFilter {
         $this->context->getEventDispatcher()->notify(new sfEvent($this, 'application.log', array(sprintf('Action "%s/%s" requires authentication, forwarding to "%s/%s"', $this->context->getModuleName(), $this->context->getActionName(), sfConfig::get('sf_login_module'), sfConfig::get('sf_login_action')))));
       }
 
+      /*if ($this->context->getRequest()->getReferer()) {
+        // load special login page
+      } elseif ($this->context->getRequest()->getReferer()) {
+        // load special login page
+      }*/
       // the user is not authenticated
       $this->forwardToLoginAction();
     }
