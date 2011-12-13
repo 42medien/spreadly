@@ -1,57 +1,57 @@
 		<section class="container-top">
 			<section class="container_12">
-				<h2>Get your button NOW, in three easy steps ...</h2>
-				<h3>Spread.ly easy lorem ipsun contre innu loremity. Lorem Ipsum.</h3>
+				<h2><?php echo __('Preise und Lösungen'); ?></h2>
+				<h3><?php echo __('Wählen Sie das für Sie passende Paket'); ?></h3>
 				<div class="yiidtable-content">
 					<div class="clearfix customergrowth-chart">
 						<div class="alignleft labelcusomer">
-							<span class="label">More than<br>10,000 <br>customers?</span>
-							<a href="#" class="blue-button"><span>Learn More</span></a>
+							<span class="label"><?php echo __('Sie haben<br>besondere<br>Wünsche?'); ?></span>
+							<a href="#" class="blue-button"><span><?php echo __('Sprechen Sie mit uns!'); ?></span></a>
 						</div>
 						<ul class="alignright custogrowth-list">
 							<li>
 								<div class="value-content max">
-									<h4>Max</h4>
-									UP TO
-									<span class="value">10,000</span>
-									CUSTOMERS
+									<h4><?php echo __('Platin'); ?></h4>
+									<?php echo __('ab'); ?>
+									<span class="value"><?php echo __('5.001'); ?></span>
+									<?php echo __('Empfehlungen / Monat');?>
 								</div>
-								<span class="price">$999/mo</span>
+								<span class="price"><?php echo __('auf Anfrage');?></span>
 							</li>
 							<li>
 								<div class="value-content grow">
-									<h4>Grow</h4>
-									UP TO
-									<span class="value">2,000</span>
-									CUSTOMERS
+									<h4><?php echo __('Gold');?></h4>
+									<?php echo __('ab'); ?>
+									<span class="value"><?php echo __('501'); ?></span>
+									<?php echo __('Empfehlungen / Monat');?>
 								</div>
-								<span class="price">$349/mo</span>
+								<span class="price"><?php echo __('59,99 € / Monat'); ?></span>
 							</li>
 							<li>
 								<div class="value-content start">
-									<h4>Start</h4>
-									UP TO
-									<span class="value">500</span>
-									CUSTOMERS
+									<h4><?php echo __('Silber'); ?></h4>
+									<?php echo __('ab'); ?>
+									<span class="value"><?php echo __('201'); ?></span>
+									<?php echo __('Empfehlungen / Monat');?>
 								</div>
-								<span class="price">$99/mo</span>
+								<span class="price"><?php echo __('39,99 € / Monat'); ?></span>
 							</li>
 							<li>
 								<div class="value-content launch">
-									<h4>Launch</h4>
-									UP TO
-									<span class="value">10</span>
-									CUSTOMERS
+									<h4><?php echo __('Bronze'); ?></h4>
+									<?php echo __('ab'); ?>
+									<span class="value"><?php echo __('51'); ?></span>
+									<?php echo __('Empfehlungen / Monat');?>
 								</div>
-								<span class="price">$39/mo</span>
+								<span class="price"><?php echo __('29,99 € / Monat'); ?></span>
 							</li>
 							<li class="developer">
 								<div class="value-content developer">
-									<h4>Developer</h4>
-									<span class="value">0</span>
-									CUSTOMERS
+									<h4><?php echo __('Starter'); ?></h4>
+									<span class="value"><?php echo __('51'); ?></span>
+									<?php echo __('Empfehlungen / Monat');?>
 								</div>
-								<span class="price">FREE</span>
+								<span class="price"><?php echo __('KOSTENLOS'); ?></span>
 							</li>
 						</ul>
 					</div>
@@ -59,42 +59,18 @@
 						<span class="leftco">&nbsp;</span><span class="rightco">&nbsp;</span>
 						<table title="Recurring Billing Features">
 							<tr>
-								<td class="first">Recurring Billing Features:</td>
-								<td><a href="#" title="Sign up" class="pink-btn"><span>Sign up</span></a></td>
-								<td><a href="#" title="Sign up" class="pink-btn"><span>Sign up</span></a></td>
-								<td><a href="#" title="Sign up" class="pink-btn"><span>Sign up</span></a></td>
-								<td><a href="#" title="Sign up" class="pink-btn"><span>Sign up</span></a></td>
-								<td><a href="#" title="Sign up" class="blue-btn"><span>Sign up</span></a></td>
+								<td class="first"><?php echo __('Recurring Billing Features:'); ?></td>
+								<td><a href="#" title="Sign up" class="pink-btn"><span><?php echo __('Registrieren'); ?></span></a></td>
+								<td><a href="#" title="Sign up" class="pink-btn"><span><?php echo __('Registrieren'); ?></span></a></td>
+								<td><a href="#" title="Sign up" class="pink-btn"><span><?php echo __('Registrieren'); ?></span></a></td>
+								<td><a href="#" title="Sign up" class="pink-btn"><span><?php echo __('Registrieren'); ?></span></a></td>
+								<td><a href="#" title="Sign up" class="blue-btn"><span><?php echo __('Registrieren'); ?></span></a></td>
 							</tr>
 						</table>
 					</div>
 					<table class="custofeature-table" title="table">
 						<tr>
-							<td class="first">Setup Fee</td>
-							<td class="grey">$0</td>
-							<td>$0</td>
-							<td class="grey">$0</td>
-							<td>$0</td>
-							<td class="grey last">$0</td>
-						</tr>
-						<tr>
-							<td class="first">Transaction Fees</td>
-							<td class="grey">None</td>
-							<td>None</td>
-							<td class="grey">None</td>
-							<td>None</td>
-							<td class="grey last">None</td>
-						</tr>
-						<tr>
-							<td class="first">Max Paying Customers</td>
-							<td class="grey">10,000</td>
-							<td>2,000</td>
-							<td class="grey">500</td>
-							<td>10</td>
-							<td class="grey last">Unlimited Test<br>Customers</td>
-						</tr>
-						<tr>
-							<td class="first">Community Support</td>
+							<td class="first"><?php echo __('Basic Analytics'); ?></td>
 							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
 							<td><img src="/img/statistics/true-icon.png" alt="" title=""></td>
 							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
@@ -102,7 +78,39 @@
 							<td class="grey last"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
 						</tr>
 						<tr>
-							<td class="first">Best Practices & How To's</td>
+							<td class="first"><?php echo __('Advanced Analytics'); ?></td>
+							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
+							<td><img src="/img/statistics/true-icon.png" alt="" title=""></td>
+							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
+							<td><img src="/img/statistics/true-icon.png" alt="" title=""></td>
+							<td class="grey last">---</td>
+						</tr>
+						<tr>
+							<td class="first"><?php echo __('Werbekampagne inkl. / Monat'); ?></td>
+							<td class="grey"><?php echo __('auf Anfrage'); ?></td>
+							<td>2</td>
+							<td class="grey">1</td>
+							<td>---</td>
+							<td class="grey last">---</td>
+						</tr>
+						<tr>
+							<td class="first"><?php echo __('Auszahlung der Erlöse'); ?></td>
+							<td class="grey"><?php echo __('wöchentlich'); ?></td>
+							<td><?php echo __('monatlich'); ?></td>
+							<td class="grey"><?php echo __('monatlich'); ?></td>
+							<td><?php echo __('ab 20 € Guthaben'); ?></td>
+							<td class="grey last"><?php echo __('ab 50 € Guthaben'); ?></td>
+						</tr>
+						<tr>
+							<td class="first"><?php echo __('Nutzung der Spreadly Push-Api'); ?></td>
+							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
+							<td><img src="/img/statistics/true-icon.png" alt="" title=""></td>
+							<td class="grey">---</td>
+							<td>---</td>
+							<td class="grey last">---</td>
+						</tr>
+						<tr>
+							<td class="first"><?php echo __('Kampagnen im Spreadly Ad-Network schalten*'); ?></td>
 							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
 							<td><img src="/img/statistics/true-icon.png" alt="" title=""></td>
 							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
@@ -110,68 +118,28 @@
 							<td class="grey last"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
 						</tr>
 						<tr>
-							<td class="first">Level 1 PCI Compliance</td>
+							<td class="first"><?php echo __('Support & Beratung'); ?></td>
 							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
 							<td><img src="/img/statistics/true-icon.png" alt="" title=""></td>
 							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td class="grey last"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
+							<td>---</td>
+							<td class="grey last">---</td>
 						</tr>
 						<tr>
-							<td class="first">Secure Hosted Singup Pages</td>
-							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td class="grey last"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-						</tr>
-						<tr>
-							<td class="first">API Access</td>
-							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td class="grey last"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-						</tr>
-						<tr>
-							<td class="first">iPhone App</td>
-							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td class="grey last"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-						</tr>
-						<tr>
-							<td class="first">Dunning Management</td>
-							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td class="grey last"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-						</tr>
-						<tr>
-							<td class="first">Connect real Gatway</td>
-							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td class="grey last">&nbsp;</td>
-						</tr>
-						<tr>
-							<td class="first">23x7 Tech Support</td>
-							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
-							<td>&nbsp;</td>
-							<td class="grey last">&nbsp;</td>
+							<td class="first"><?php echo __('Anzahl unterschiedlicher Domains'); ?></td>
+							<td class="grey"><?php echo __('auf Anfrage'); ?></td>
+							<td>3</td>
+							<td class="grey">2</td>
+							<td>1</td>
+							<td class="grey last">1</td>
 						</tr>
 						<tr class="btnbar">
 							<td>&nbsp;</td>
-							<td><a href="#" title="Sign up" class="pink-btn"><span>Sign up</span></a></td>
-							<td><a href="#" title="Sign up" class="pink-btn"><span>Sign up</span></a></td>
-							<td><a href="#" title="Sign up" class="pink-btn"><span>Sign up</span></a></td>
-							<td><a href="#" title="Sign up" class="pink-btn"><span>Sign up</span></a></td>
-							<td><a href="#" title="Sign up" class="blue-btn"><span>Sign up</span></a></td>
+							<td><a href="#" title="Sign up" class="pink-btn"><span><?php echo __('Registrieren'); ?></span></a></td>
+							<td><a href="#" title="Sign up" class="pink-btn"><span><?php echo __('Registrieren'); ?></span></a></td>
+							<td><a href="#" title="Sign up" class="pink-btn"><span><?php echo __('Registrieren'); ?></span></a></td>
+							<td><a href="#" title="Sign up" class="pink-btn"><span><?php echo __('Registrieren'); ?></span></a></td>
+							<td><a href="#" title="Sign up" class="blue-btn"><span><?php echo __('Registrieren'); ?></span></a></td>
 						</tr>
 					</table>
 				</div>
@@ -179,9 +147,9 @@
 				<?php include_partial('global/spreadly_references'); ?>
 
 				<section class="dont-spreadaccount">
-					<h3>Don't Have a Sperad.ly Account?<span class="leftco">&nbsp;</span><span class="rightco">&nbsp;</span></h3>
-					<p>In order to use Chargify, you'll need to set up an <a href="#" title="internet merchant account">internet merchant account</a> as well as a <a href="#" title="payment gateway">payment gateway</a> with one of the providers we support. We know it would be nice if transaction fees could be completely abandoned, but unfortunately, both merchant account providers and payment gateways still charge these fees on all sides of transactions. We understand this is a drag for growing companies, which is why Chargify never charges transaction fees or setup fees.</p>
-					<a href="#" title="Get your own Button now" class="pink-btn pinkmax"><span>Get your own Button now</span></a>
+					<h3><?php echo __('Sie nutzen Spreadly noch nicht auf Ihrer Seite?'); ?></h3>
+					<p><?php echo __('Bieten Sie Ihren Besuchern die Möglichkeit mit nur einem Klick in unterschiedliche Netzwerke zu teilen und dabei noch attraktive Angebote für ihre Empfehlung zu bekommen. Mit nur wenigen Klicks haben Sie den Button bei sich eingebaut und können auch mit einer eigenen Kampagne sofort starten.'); ?></p>
+					<a href="#" title="Get your own Button now" class="pink-btn pinkmax"><span><?php echo __('Holen Sie sich jetzt Ihren Button'); ?></span></a>
 				</section>
 			</section>
 		</section>
