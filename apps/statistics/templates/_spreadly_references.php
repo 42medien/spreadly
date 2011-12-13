@@ -8,5 +8,5 @@
 		<li><a href="#" title="PR blogger"><img src="/img/statistics/ref-img5.jpg" alt="PR blogger" title="PR blogger"></a></li>
 		<li><a href="#" title="ED Netz"><img src="/img/statistics/ref-img6.jpg" alt="ED Netz" title="ED Netz"></a></li>
 	</ul>
-	<span class="more"><a href="#" title="See More Spread.ly costumers &raquo;">See More Spread.ly costumers &raquo;</a></span>
+	<span class="more"><a href="<?php echo url_for('@customer');?>" title="See More Spread.ly costumers &raquo;">See More Spread.ly costumers &raquo;</a></span>
 </section>

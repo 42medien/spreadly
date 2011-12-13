@@ -23,7 +23,7 @@ class sfApplyResetRequestForm extends sfForm
                           array( "invalid" => "There is no such user.")))),
               new sfValidatorEmail(array('required' => true) ) )
         ));
-        
+
         $this->widgetSchema->setNameFormat('sfApplyResetRequest[%s]');
 
         //Include captcha if enabled
@@ -31,6 +31,7 @@ class sfApplyResetRequestForm extends sfForm
         {
             $this->addCaptcha();
         }
+
     }
 
     public function isCaptchaEnabled()
@@ -52,8 +53,12 @@ class sfApplyResetRequestForm extends sfForm
                 __('The captcha is not valid (%error%).', array(), 'sfForkedApply'))
             ->setMessage('server_problem', sfContext::getInstance()->getI18N()->
                 __('Unable to check the captcha from the server (%error%).', array(), 'sfForkedApply'));
+
+		    $this->widgetSchema->setLabels(array(
+		    	'captcha' => '&nbsp;',
+		    ));
     }
-    
+
     public function getStylesheets()
     {
         return array( '/sfForkedDoctrineApplyPlugin/css/forked' => 'all' );

@@ -166,6 +166,13 @@ subscribe_api:
   url: /subscribe
   param: { module: domain_profiles, action: subscribe_api}
 
+pricing:
+  url: /pricing
+  param: { module: landing, action: pricing} 
+  
+customer:
+  url: /customer
+  param: { module: landing, action: customer}  
 
 # You can find more information about this file on the symfony website:
 # http://www.symfony-project.org/reference/1_4/en/10-Routing

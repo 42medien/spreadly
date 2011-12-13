@@ -422,7 +422,7 @@ background: linear-gradient(#313131, #020202); /*future CSS3 browsers*/
 -pie-background: linear-gradient(#313131, #020202); /*PIE*/
 behavior: url(css/PIE.htc);}
 .btnbarhead table td {width:134px;}
-.btnbarhead .first {width:222px; font-size:16px; font-weight:bold; padding-left:10px;}
+.btnbarhead .first {width:222px; font-size:16px; font-weight:bold; padding-left:10px; color: #FFFFFF;}
 .btnbarhead table {width:100%;}
 .btnbarhead .pink-btn , .btnbarhead .blue-btn {line-height:30px; border:none; font-weight:bold; height:30px; display:block; text-align:center; padding:0px; margin:0px 5px;  -webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px;} 
 
@@ -713,26 +713,31 @@ html, body { min-height:100%; height:100%;}
 
 
 
-#sf_apply_apply_form{
+#sf_apply_apply_form,
+#sf_apply_reset_request{
   margin-bottom: 70px;
 }
 
-#sf_apply_apply_form table tr{
+#sf_apply_apply_form table tr,
+#sf_apply_reset_request table tr{
   height: 40px;
 }
 
-#sf_apply_apply_form table td{
+#sf_apply_apply_form table td,
+#sf_apply_reset_request table td{
   vertical-align: middle;  
 }
 
-#sf_apply_apply_form table th{
+#sf_apply_apply_form table th,
+#sf_apply_reset_request table th{
   text-align: left;
   width: 150px;
   vertical-align: middle;  
 }
 
 #sf_apply_apply_form input[type="text"],
-#sf_apply_apply_form input[type="password"]{
+#sf_apply_apply_form input[type="password"],
+#sf_apply_reset_request input[type="text"]{
   border:solid 1px #ababab; 
   behavior: url(css/PIE.htc); 
   color:#252525; 
@@ -748,7 +753,8 @@ html, body { min-height:100%; height:100%;}
 }
 
 #sf_apply_apply_form input[type="text"],
-#sf_apply_apply_form input[type="password"]{ 
+#sf_apply_apply_form input[type="password"],
+#sf_apply_reset_request input[type="text"]{ 
   position:relative; z-index:1; /*fallback for non-CSS3 browsers*/
   background: #ebebeb;
   background: -webkit-gradient(linear, 0 0, 0 bottom, from(#ebebeb), to(#ffffff));
@@ -761,7 +767,7 @@ html, body { min-height:100%; height:100%;}
   behavior: url(css/PIE.htc);
 }
 
-#guard_signin_area, .sf_apply_apply{
+#guard_signin_area, .sf_apply_apply, .sf_apply_reset_request{
    margin: 0 auto;
    width: 563px;
 }
@@ -770,10 +776,15 @@ html, body { min-height:100%; height:100%;}
  height: auto !important;
 }
 
-#signup-button-row button.blue-btn{
+#signup-button-row button.blue-btn,
+#forgot-pw-button-row button.blue-btn{
     height: 32px;
     margin-left: 10px;
     width: 262px;
+}
+
+#forgot-pw-button-row button.blue-btn{
+    width: 251px;
 }
 
 #signin-button{

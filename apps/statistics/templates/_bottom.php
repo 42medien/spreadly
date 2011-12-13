@@ -3,36 +3,36 @@
 				<div class="clearfix">
 					<div class="grid_8 alignleft icon-grid">
 						<div class="clearfix">
-							<div class="icon1 grid_4 alignleft"><span>Spreadly lorem</span>
-								<p>Iter modicus opto coepto, maligo spes Resono Curvo escendo adsum per Frutex, ubi ait animadverto poei per Scelestus, res Tellus <a href="#" title="pharetra augue.">pharetra augue.</a></p>
+							<div class="icon1 grid_4 alignleft"><span><?php echo __('1 Klick - Große Reichweite'); ?></span>
+								<p><?php echo __('Dank Spreadly hast Du keine Buttonwüste mehr, sondern nur einen Share-Button und musst trotzdem auf kein Netzwerk verzichten. Nutze die Reichweite von Facebook, Twitter, LinkedIn und Google+ (in Arbeit) für Deine Artikel, Produkte und anderen Inhalten. Deine Besucher brauchen nur einen Button zu klicken um alle ihre Freunde in den Netzwerken zu erreichen'); ?> <a href="#" title="<?php echo __('Mehr lesen'); ?>"><?php echo __('Mehr lesen'); ?></a></p>
 							</div>
-							<div class="icon2 grid_4 alignleft"><span>Ipsum spread</span>
-								<p>Iter modicus opto coepto, maligo spes Resono Curvo escendo adsum per Frutex, ubi ait animadverto poei per Scelestus, res Tellus <a href="#" title="pharetra augue.">pharetra augue.</a></p>
-							</div>
-						</div>
-						<div class="clearfix">
-							<div class="icon3 grid_4 alignleft"><span>Another section</span>
-								<p>Donec sed odio dui. Maecenas faucibus mollis interdum.  Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a <a href="#">pharetra augue.</a> Vestibulum id ligula porta felis euismod semper.</p>
-							</div>
-							<div class="icon4 grid_4 alignleft"><span>Spread.ly Deals</span>
-								<p>Donec sed odio dui. Maecenas faucibus mollis interdum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+							<div class="icon2 grid_4 alignleft"><span><?php echo __('Einfache Implementierung'); ?></span>
+								<p><?php echo __('Ein paar Zeilen Code reichen aus um alle Möglichkeiten von Spreadly nutzen zu können. Für Wordpress, Magento, TYPO3, Drupal und Joomla haben wir auch komplett fertige Erweiterungen die den Einbau zum Kinderspiel machen.'); ?> <a href="#" title="<?php echo __('Mehr lesen'); ?>"><?php echo __('Mehr lesen'); ?></a></p>
 							</div>
 						</div>
 						<div class="clearfix">
-							<div class="icon5 grid_4 alignleft"><span>Spread top lorem</span>
-								<p>Donec sed odio dui. Maecenas faucibus mollis interdum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a <a href="#">pharetra augue</a>. </p>
+							<div class="icon3 grid_4 alignleft"><span><?php echo __('Das Spreadly Ad-Network'); ?></span>
+								<p><?php echo __('Mit nur wenigen Klicken kannst Du Deine Werbekampagne in unserem Ad-Network schalten. Auf allen Seiten mit Spreadly Button wird dann z.B. Dein Gutscheincode zu finden sein.'); ?> <a href="#" title="<?php echo __('Mehr lesen'); ?>"><?php echo __('Mehr lesen'); ?></a></p>
 							</div>
-							<div class="icon6 grid_4 alignleft"><span>Last lorem ipsum</span>
-								<p>Donec sed odio dui. Maecenas faucibus mollis interdum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Praesent commodo.</p>
+							<div class="icon4 grid_4 alignleft"><span><?php echo __('Social Media Analytics'); ?></span>
+								<p><?php echo __('Mit Spreadly erfährst Du alles was in Sachen Empfehlungsmarketing wichtig ist. Wir zeigen Die wie, ob und dank wem Dein Empfehlungsmarketing funktioniert.'); ?></p>
+							</div>
+						</div>
+						<div class="clearfix">
+							<div class="icon5 grid_4 alignleft"><span><?php echo __('Spreadly API'); ?></span>
+								<p><?php echo __('Wie bieten zahlreiche APIs für Deinen speziellen Fall. Ob der Import vieler Kampagnen oder das Auslösen bestimmter Aktionen bei jedem Klick, für alle Bedürfnisse haben die passende Lösung. '); ?></p>
+							</div>
+							<div class="icon6 grid_4 alignleft"><span><?php echo __('Spreadly als neue Erlösquelle'); ?></span>
+								<p><?php echo __('Mit dem Einbau des Spreadly-Button eröffnest Du Dir sofort eine neue Einnahmequelle. Wir vergüten alle Empfehlungen die über den Spreadly-Button in die Netzwerke geteilt werden. In den Analytics von Spreadly hast Du jederzeit Einblick auf Deinen aktuellen Kontostand.'); ?></p>
 							</div>
 						</div>
 					</div>
 					<div class="alignright grid_4 spread-section">
-						<div class="spread-tab"><span class="tab-txt">Lorem-Ipsum Spreadly tab</span>
+						<div class="spread-tab"><span class="tab-txt"><?php echo __('Spreadly Premium Partner'); ?></span>
 							<div class="spread-logo"><a href="#"><img src="/img/statistics/mailingwork-logo.jpg" width="148" height="47" alt="mailingwork" title="mailingwork"></a><a href="#"><img src="/img/statistics/business-logo.jpg" width="159" height="47" alt="business" title="business"></a><a href="#" class="last"><img src="/img/statistics/ednetz-logo.jpg" width="135" height="47" title="ednetz" alt="ednetz"></a></div>
-							<p>Learn more about how Spread.ly works with multiple <a href="#" title="merchant accounts &amp; gateways.">merchant accounts &amp; gateways.</a></p>
+							<p><?php echo __('Erfahre mehr über die Möglichkeiten für Premiumpartner'); ?> <a href="<?php echo url_for('@customer'); ?>" title="<?php echo __('Über Spreadly'); ?>"><?php echo __('Über Spreadly'); ?></a></p>
 						</div>
-						<span class="spred-txt">How Is Spreadly Different from Paypal or Google Checkout?</span><a class="learn-more" href="#" title="Learn More &raquo;">Learn More &raquo;</a>
+						<span class="spred-txt"><?php echo __('Warum ist Spreadly anders als addthis oder shareths?'); ?></span><a class="learn-more" href="<?php echo url_for('@customer'); ?>" title="Learn More &raquo;"><?php echo __('Erfahre mehr &raquo;'); ?></a>
 					</div>
 				</div>
 			</section>
