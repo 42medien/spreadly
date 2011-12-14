@@ -367,7 +367,7 @@ behavior: url(css/PIE.htc);
 -webkit-border-top-right-radius: 5px; -moz-border-radius:5px 5px 0px 0px; border-radius:5px 5px 0px 0px;
 }
 
-.custogrowth-list li .price {position:absolute; bottom:14px; font-size:22px; color:#fff; text-align:center; line-height:28px; left:10px; width:108px; background:#6e2549; }
+.custogrowth-list li .price {position:absolute; bottom:14px; font-size:14px; color:#fff; text-align:center; line-height:32px; left:10px; width:108px; background:#6e2549; }
 .custogrowth-list li .grow {height:157px;}
 .custogrowth-list li .start {height:140px;}
 .custogrowth-list li .launch {height:130px;}
