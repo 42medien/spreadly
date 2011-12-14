@@ -1,76 +1,56 @@
 			<section class="container-top">
 			<section class="container_12">
-				<h2>500+ businesses are running on Spread.ly …</h2>
+				<h2><?php echo __('Was sagen andere über Spreadly?'); ?></h2>
 				<section class="grid_11 customer-display"><img src="/img/statistics/customer-demo-display.gif" alt="customer display" title="customer display" ></section>
-				<h3 class="customer-title">Spread.ly Customers</h3>
+				<h3 class="customer-title"><?php echo __('Beispiele für Werbekampagnen via Spreadly');?></h3>
 				<section class="clearfix">
 					<article class="customer-listing alignleft">
 						<div class="clearfix">
-							<span class="cust-logo"><img src="/img/statistics/mailingwork-logo-thumb.jpg" alt="mailingwork" title="mailingwork"></span>
-							<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nulla vitae elit libero, a pharetra augue.</p>
-							<strong class="visit"><a href="#" title="Visit &raquo;">Visit &raquo;</a></strong>
+							<span class="cust-logo"><img src="/img/refrance-img5.jpg" alt="brille24" title="brille24"></span>
+							<p><?php echo __('Brille24 verteilt Gutscheine über das Spreadly Ad-Network. Mit jeder Empfehlung über den Spreadly Button können Brillenträger 10 Euro beim Kauf der nächsten Britte sparen'); ?></p>
+							<strong class="visit"><a href="http://www.brille24.de" target="_blank" title="Visit brille24"><?php echo __('Visit &raquo;'); ?></a></strong>
 						</div>
 						<div class="clearfix">
-							<span class="cust-logo"><img src="/img/statistics/abacho-logo-thumb.jpg" alt="abacho" title="abacho"></span>
-							<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nulla vitae elit libero, a pharetra augue.</p>
-							<strong class="visit"><a href="#" title="Visit &raquo;">Visit &raquo;</a></strong>
+							<span class="cust-logo"><img src="/img/t3n.png" alt="t3n" title="t3n"></span>
+							<p><?php echo __('Das Magazin t3n verteilte über den Spreadly Button bereits eine Woche vor dem Erscheinen der Printausgabe einen Artikel zum Thema Influencer-Marketing');?></p>
+							<strong class="visit"><a href="http://www.t3n.de" target="_blank" title="Visit t3n"><?php echo __('Visit &raquo;'); ?></a></strong>
 						</div>
 						<div class="clearfix">
-							<span class="cust-logo"><img src="/img/statistics/pressehof-thumb.jpg" alt="pressehof" title="pressehof"></span>
-							<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nulla vitae elit libero, a pharetra augue.</p>
-							<strong class="visit"><a href="#" title="Visit &raquo;">Visit &raquo;</a></strong>
+							<span class="cust-logo"><img src="/img/dz-media.jpg" alt="DZ-Media" title="DZ-Media"></span>
+							<p><?php echo __('DZ-Media generierte für ihren Kunden Teufel Boxen in Berlin zahlreiche Teilnehmer für ein Gewinnspiel'); ?></p>
+							<strong class="visit"><a href="http://www.dz-media.de/" target="_blank" title="Visit DZ-Media"><?php echo __('Visit &raquo;'); ?></a></strong>
 						</div>
 						<div class="clearfix">
-							<span class="cust-logo"><img src="/img/statistics/ibusiness-thumb.jpg" alt="ibusiness" title="ibusiness"></span>
-							<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nulla vitae elit libero, a pharetra augue.</p>
-							<strong class="visit"><a href="#" title="Visit &raquo;">Visit &raquo;</a></strong>
+							<span class="cust-logo"><img src="/img/yourvideocard.png" alt="YourVideoCard" title="YourVideoCard"></span>
+							<p><?php echo __('Das Startup YourVideoCard aus Berlin verteilte über das Spreadly Ad-Network passend zur Vorweihnachtszeit 10 Euro-Gutscheincodes für den Kauf einer VideoCard.'); ?></p>
+							<strong class="visit"><a href="http://www.yourvideocard.de/" target="_blank" title="Visit YourVideoCard"><?php echo __('Visit &raquo;'); ?></a></strong>
 						</div>
 						<div class="clearfix">
-							<span class="cust-logo"><img src="/img/statistics/pr-blogger-thumb.jpg" alt="ibusiness" title="ibusiness"></span>
-							<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nulla vitae elit libero, a pharetra augue.</p>
-							<strong class="visit"><a href="#" title="Visit &raquo;">Visit &raquo;</a></strong>
+							<span class="cust-logo"><img src="/img/pauldirekt.jpg" alt="PaulDirekt" title="PaulDirekt"></span>
+							<p><?php echo __('PaulDirekt machte über das Spreadly Ad-Network eine Aktion auf der eigenen Seite viral bekannt.'); ?></p>
+							<strong class="visit"><a href="http://www.pauldirekt.de" target="_blank" title="Visit PaulDirekt"><?php echo __('Visit &raquo;'); ?></a></strong>
 						</div>
 						<div class="clearfix">
-							<span class="cust-logo"><img src="/img/statistics/business-thumb.jpg" alt="business" title="business"></span>
-							<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nulla vitae elit libero, a pharetra augue.</p>
-							<strong class="visit"><a href="#" title="Visit &raquo;">Visit &raquo;</a></strong>
+							<span class="cust-logo"><img src="/img/speapme.png" alt="SpeapMe" title="SpeapMe"></span>
+							<p><?php echo __("Der Webtelefonie Anbieter SpeapMe verteilte über Spreadly Freiminuten zum abtelefonieren."); ?></p>
+							<strong class="visit"><a href="http://www.speap.net" target="_blank" title="Visit SpeapMe"><?php echo __('Visit &raquo;'); ?></a></strong>
 						</div>
 						<div class="clearfix">
-							<span class="cust-logo"><img src="/img/statistics/ednetz-thumb.jpg" alt="ednetz" title="ednetz"></span>
-							<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nulla vitae elit libero, a pharetra augue.</p>
-							<strong class="visit"><a href="#" title="Visit &raquo;">Visit &raquo;</a></strong>
-						</div>
-						<div class="clearfix">
-							<span class="cust-logo"><img src="/img/statistics/ednetz-thumb.jpg" alt="ednetz" title="ednetz"></span>
-							<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nulla vitae elit libero, a pharetra augue.</p>
-							<strong class="visit"><a href="#" title="Visit &raquo;">Visit &raquo;</a></strong>
-						</div>
-						<div class="clearfix">
-							<span class="cust-logo"><img src="/img/statistics/ednetz-thumb.jpg" alt="ednetz" title="ednetz"></span>
-							<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nulla vitae elit libero, a pharetra augue.</p>
-							<strong class="visit"><a href="#" title="Visit &raquo;">Visit &raquo;</a></strong>
-						</div>
-						<div class="clearfix last">
-							<span class="cust-logo"><img src="/img/statistics/ednetz-thumb.jpg" alt="ednetz" title="ednetz"></span>
-							<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nulla vitae elit libero, a pharetra augue.</p>
-							<strong class="visit"><a href="#" title="Visit &raquo;">Visit &raquo;</a></strong>
+							<span class="cust-logo"><img src="/img/hooolp.png" alt="Hooolp" title="Hooolp"></span>
+							<p><?php echo __('Die Ticketsuchmaschine Hooolp verloste über das Spreadly Ad-Network Konzerttickets im Wert von über 500 Euro'); ?></p>
+							<strong class="visit"><a href="http://www.hooolp.com" target="_blank" title="Visit Hooolp"><?php echo __('Visit &raquo;'); ?></a></strong>
 						</div>
 					</article>
 					<aside class="feedback-list alignright">
-						<h4 class="feedback-title">Feedback</h4>
+						<h4 class="feedback-title">Meinungen!</h4>
 						<ul>
-							<li>@vidluther absolutely in love with the new metrics shown in @chargify 's home page. Showing us we doubled revenue over last month already.</li>
-							<li>@TimKrajcar: Continuing to sing praises of @chargify, not just because I want a t-shirt. Their webhook implementation is sweet</li>
-							<li>@TimKrajcar Continuing to sing the praises of @chargify, and not just because I want a t-shirt/other swag. Their webhook implementation is sweet.</li>
-							<li>@mediafeedia @Chargify -- the simple iPhone app is perfect! Nice work guys!!!</li>
-							<li>@TimKrajcar @chargify I wrote 90% of a new user signup, with ecomm, using you in about 2 hours last night. Butter smooth. chargify_api_ares rocks hard.</li>
-							<li>@TimKrajcar Have I told you lately how cool @Chargify is? No? They're really cool. Really really cool.</li>
-							<li>@chargify loot! Thanks to the team there for a great product, our Rumble prize, and now the swag!</li>
-							<li>@olliegardener @Chargify Fabulous people! thanks heaps for your help</li>
-							<li>@rbazinet Happy my @chargify shirt arrived today but blown away to find Buzzmarketing by Mark Hughes and Charify stickers. Very awesome, thanks!</li>
-							<li>@Chargify: chargify.com - Such an easy way to handle billing.</li>
-							<li>@scott_woodall @Chargify your proof! twitpic.com/677blw</li>
-							<li class="last">@BenPaster @Chargify shirt is in! + they sent me Buzzmarketing by Mark Hughes and stickers!! #yourule twitpic.com/674rcj</li>
+							<li><?php echo __('Der (Spreadly-)Button ist Facebook-unabhängig, wird von einem regionalen Startup angeboten und macht das Webdesign sauberer, da er viele Bookmarking-Buttons ersetzt'); ?><br/><strong><?php echo __('(Harald Ille vom Presseamt FFM)'); ?></strong></li>
+							<li><?php echo __('Ich finde die Lösung smart und möchte sie ausprobieren.'); ?><br/><strong><?php echo __('(Mirko Lange Talkabout / München)'); ?></strong></li>
+							<li><?php echo __('Spreadly ist die ideale Erweiterung zu leistungsstarkem E-Mail Marketing'); ?><br/><strong><?php echo __('(Thorsten Gneuß mailingwork / Leipzig)'); ?></strong></li>
+							<li><?php echo __("Ich finde die Möglichkeiten der Auswertung einfach fantastisch. Endlich die richtigen und wichtigen Informationen über dieses oft so 'ungreifbare' Social Media. Davon abgesehen ist die Konzentration auf einen einzigen Social Sharing Button für den Nutzer von Vorteil"); ?><br/><strong><?php echo __('(Frank Holldorf erdfisch / Heidelberg)'); ?></strong></li>
+							<li><?php echo __('Den „Mund-zu-Mund-Propaganda-Button“ wie ich den Spreadly Button nenne, bietet uns in zweierlei Hinsicht Möglichkeiten, die wir in der bisherigen Form so nicht hatten...'); ?><br/><strong><?php echo __('(Ralf Volkmer Learning Factory)'); ?></strong></li>
+							<li><?php echo __('Die Deal-Funktion bietet insbesondere für uns als Shopping-Portal ein riesen Potenzial das wir mit dem neuen Feature „Price-Look.de MyBargain“ das es ermöglicht eine persönliche Schnäppchen-Liste zu erstellen und diese in z.B. Facebook zu importieren um auch dort über Produkte die noch auf der Wunschliste stehen und deren Preisentwicklung informiert zu werden.'); ?><br/><strong><?php echo __('(Benjamin Bromberg pricelook)'); ?></strong></li>
+							<li class="last"><?php echo __('Spreadly ist eine gute Multiple-Sharing-Möglichkeit für Magento'); ?><br/><strong><?php echo __('(Thomas Wetzel handelskraft.de)'); ?></strong></li>
 						</ul>
 					</aside>
 				</section>
