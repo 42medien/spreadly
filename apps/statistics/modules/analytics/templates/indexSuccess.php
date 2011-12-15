@@ -1,4 +1,8 @@
 <?php use_helper("Text", "YiidNumber"); ?>
+<div class="page-titlecontent">
+	<h2><?php echo __('Share-Analytics'); ?></h2>
+	<p><?php echo __('Hier sehen Sie eine Übersicht über die von Ihnen verifizierten URLs und die entsprechenden Gesamtzahlen. Klicken Sie auf eine URL um zu den Details zu gelangen.'); ?></p>
+</div>
 
 <?php if(count($pVerifiedDomains) > 0) { ?>
 <?php slot('content') ?>

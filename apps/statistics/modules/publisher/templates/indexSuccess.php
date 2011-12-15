@@ -1,5 +1,4 @@
-			<section class="content-publish">
-			<section class="container_12 submenue">
+
 				<div class="page-titlecontent">
 					<h2><?php echo __('Herzlich Willkommen'); ?></h2>
 					<p><?php echo __('Holen Sie sich jetzt den Spreadly Button für ihre Seite.Registrieren Sie ihre Webseite bei Spreadly und erhalten sie damit Analyse-Daten über Shares, Likes und Media Penetration ihrer User. Verdienen Sie nach der Registrierung über unser Adnetwork bares Geld, indem Sie an jedem geklickten Deal beteiligt werden.'); ?></p>
@@ -30,5 +29,3 @@
 					</ul>
 				</section>
 				<?php include_partial('global/spreadly_references');?>
-			</section>
-		</section>

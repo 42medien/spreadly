@@ -1,5 +1,3 @@
-			<section class="content-publish">
-			<section class="container_12 submenue">
 				<div class="page-titlecontent">
 					<h2><?php echo __('Herzlich Willkommen'); ?></h2>
 					<p><?php echo __('Schalten Sie Ihre Kampagne im Spreadly Ad-Network. Nach nur 5 einfachen Schritten erscheint Ihre Kampagne auf über 1.000 Seiten im Spreadly Ad-Network. Sie werden mit Ihrem speziellen Angebot das "kleine Dankeschön" für TOP-Empfehlungsgeber und Influencer. Entscheiden Sie selbst ob Ihnen eine feste Anzahl von LIKES wichtiger ist, oder Sie eine große Reichweite und Sichtbarkeit für Ihre Kampagne vorziehen.Das Spreadly Ad-Network macht den Einstieg in die Werbewelt zum Kinderspiel.Unser faires und transparentes Abrechnungsmodell wird auch Sie überzeugen.Legen Sie einfach los'); ?></p>
@@ -30,5 +28,3 @@
 					</ul>
 				</section>
 				<?php include_partial('global/spreadly_references');?>
-			</section>
-		</section>

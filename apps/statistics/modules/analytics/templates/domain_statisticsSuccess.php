@@ -1,3 +1,7 @@
+<div class="page-titlecontent">
+	<h2><?php echo __('Überblick für '.' '.$pHost->getHost()); ?></h2>
+	<p><?php echo __('Hier sehen Sie die Gesamtstatistiken über Ihre Domain %domain%, allgemeine Informationen zu Ihren Usern und Ihre Einnahmen.', array('%domain%' => $pHost->getHost())); ?></p>
+</div>
 <?php
 use_helper('YiidNumber');
 
@@ -13,7 +17,6 @@ slot('content');
 		<li class="bc-last"></li>
 	</ul>
 </div>
-<h2 class="sub_title"><?php echo __('All time overview for domain %domain%', array('%domain%' => $pHost->getHost()));?></h2>
   <div id="navi" class="clearfix">
     <div class="stepBox alignleft">
       <div class="box_container alignleft">

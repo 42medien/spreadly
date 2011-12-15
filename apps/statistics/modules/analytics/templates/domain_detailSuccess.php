@@ -1,3 +1,8 @@
+<div class="page-titlecontent">
+	<h2><?php echo __('Details für '.' '.$pDomainProfile->getUrl()); ?></h2>
+	<p><?php echo __('Hier können Sie konkrete Zeiträume auswählen und bekommen einen Überblick über die Verteilung auf die einzelnen Urls.'); ?></p>
+</div>
+
 <?php slot('content') ?>
 <div id="analytics-bread">
 	<ul class="bc-list clearfix">

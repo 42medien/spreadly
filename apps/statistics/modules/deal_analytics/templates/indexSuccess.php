@@ -1,3 +1,8 @@
+<div class="page-titlecontent">
+	<h2><?php echo __('Kampagnen-Analytics'); ?></h2>
+	<p><?php echo __('Hier sehen Sie eine Übersicht der von Ihnen gestarteten Kampagnen im Spreadly Ad-Network. Klicken Sie auf einen Kampagnennamen um die entsprechenden Details einsehen zu können.'); ?></p>
+</div>
+
 <?php use_helper("Text", "YiidNumber"); ?>
 <?php if(count($pDeals) > 0) { ?>
 <?php slot('content') ?>

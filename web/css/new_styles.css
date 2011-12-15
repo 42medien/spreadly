@@ -471,8 +471,8 @@ behavior: url(css/PIE.htc); -webkit-border-radius:14px; -moz-border-radius:14px;
 /* Publish Content Css
 --------------------------------------------------------------------------------------------------------*/
 
-.content-publish {padding:20px 0px 15px;}
-.content-publish h2 {font-size:20px; line-height:20px; color:#608094; text-align:left; margin-bottom:8px;}
+.content-publish {padding:50px 0px 15px;}
+.content-publish h2 {font-size:20px; line-height:20px; color:#608094; text-align:left; margin-bottom:8px; width: 100%; overflow: hidden;}
 
 .content-publish  .spread-refrance h3 {text-align:center; color:#000; font-size:34px; line-height:40px; margin-bottom:23px;}
 .page-titlecontent {margin:0px 10px 8px;}
