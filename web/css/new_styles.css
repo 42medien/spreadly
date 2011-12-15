@@ -1289,5 +1289,52 @@ a.graybtn:hover { text-decoration:none; color:#EB2374;}
 #service-img-email:hover{ background: url("/img/social_button_sprite.png") no-repeat -1100px -100px; }
 #service-img-email.active{ background: url("/img/social_button_sprite.png") no-repeat -1100px -200px; }
 
+/***********second-level-navigation*****************/
+.second-level-nav{
+  background-color: #aa3d71;
+  list-style: disc;
+}
+
+.second-level-nav li{
+  clear:both;
+  color: #fff;
+  width: 86%;
+  list-style: disc inside;
+ 
+}
+
+.second-level-nav li.first{
+  border: 0;
+  background: none repeat scroll 0 0 #4C4C4C;
+  height: 7px;
+  width: 100%
+
+}
+
+ul#mainNavigation ul.second-level-nav li a{
+    background: none repeat scroll 0 0 #aa3d71;
+    border: 0 none;
+    color: #FFFFFF;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: normal;
+    margin: 0 0px 0 13px;
+    padding: 0;
+    word-wrap: normal !important; 
+    border-bottom: 1px solid #fff;
+    width: 100%; 
+    height: 24px;
+    line-height: 20px;
+}
+
+ul#mainNavigation ul.second-level-nav li a:hover{
+  text-decoration: underline;
+}
+
+ul#mainNavigation ul.second-level-nav  li.last a{
+    border-bottom: none;    
+}
+
+
 
 

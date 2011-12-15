@@ -39,42 +39,7 @@
 	<div class="wrapperspace">
 		<div class="main-container">
 			<header>
-			<div id="header">
-				<div class="container_12">
-					<h1 id="logo" class="alignleft"><a href="<?php echo url_for('landing/index');?>" title="Spread.ly">Spread.ly</a></h1>
-					<nav class="clearfix alignright grid_6">
-						<ul class="header-link clearfix alignright">
-							<li class="blog"><a href="http://blog.spreadly.com/" target="_blank" title="<?php echo __('Blog'); ?>"><?php echo __('Blog'); ?></a></li>
-							<li class="about"><a href="<?php echo url_for('@customer'); ?>" title="<?php echo __('About Us'); ?>"><?php echo __('About Us'); ?></a></li>
-  						<?php if(!$sf_user->isAuthenticated()) {?>
-								<li class="sign"><a href="<?php echo url_for('@sf_guard_signin'); ?>" title="<?php echo __('Sign In'); ?>"><?php echo __('Sign In'); ?></a></li>
-  						<?php } else { ?>
-								<li class="sign"><a href="<?php echo url_for('@sf_guard_signout'); ?>" title="<?php echo __('Logout'); ?>"><?php echo __('Logout'); ?></a></li>
-							<?php } ?>
-							<li class="call"><?php echo __('Call Us: +49 6201 845 200'); ?></li>
-						</ul>
-					</nav>
-					<nav class="clearfix  grid_9 alignright">
-						<ul id="mainNavigation" class="clearfix alignright">
-							<li><a href="<?php echo url_for('landing/index'); ?>" <?php if($module=='landing' && $action=='index') { echo 'class="active"';} ?> title="<?php echo __('Home'); ?>"><?php echo __('Home'); ?></a></li>
-							<li><a href="<?php echo url_for('@configurator'); ?>" <?php if(($module=='configurator' && $action=='index')) { echo 'class="active"';} ?> title="<?php echo __('Button');?>"><?php echo __('Buttons');?></a></li>
-							<li><a href="<?php echo url_for('@publisher'); ?>" <?php if($module=='domain_profiles' || $module=='analytics' || $module=='publisher') { echo 'class="active"';} ?> title="<?php echo __('Publisher'); ?>"><?php echo __('Webseitenbetreiber'); ?></a></li>
-							<li <?php echo ($sf_user->isAuthenticated() && !$sf_user->isSuperAdmin())?'class="last"':''?>><a href="<?php echo url_for('@advertiser'); ?>" <?php if($module=='deals' || $module=='deal_analytics' || $module=='advertiser') { echo 'class="active"';} ?> title="<?php echo __('Advertiser'); ?>"><?php echo __('Werbetreibende'); ?></a></li>
-							<li><a href="<?php echo url_for('@pricing'); ?>" <?php if(($module=='landing' && $action=='pricing')) { echo 'class="active"';} ?> title="<?php echo __('Pricing');?>"><?php echo __('Preise');?></a></li>
-					    <?php if($sf_user->isSuperAdmin()) { ?>
-					      <li class="last">
-					      	<a href="/backend.php" title="Backend">
-										<?php echo __('Backend'); ?>
-					      	</a>
-					      </li>
-					    <?php } ?>
-  						<?php if(!$sf_user->isAuthenticated()) {?>
-  							<li class="last"><a href="<?php echo url_for('@sf_guard_register'); ?>" title="Sign Up"><?php echo __('Sign Up'); ?></a></li>
-  						<?php } ?>
-						</ul>
-					</nav>
-				</div>
-			</div>
+				<?php include_partial('global/navigation'); ?>
 		</header>
 
 		<?php if($module !='landing'){ ?>
