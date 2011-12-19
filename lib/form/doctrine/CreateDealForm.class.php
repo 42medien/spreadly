@@ -99,7 +99,7 @@ class CreateDealForm extends BaseDealForm
   public function validate_campaign(){
     $lI18n = sfContext::getInstance()->getI18N();
     $this->setValidators(array(
-      'name'              => new sfValidatorString(array('max_length' => 255, 'required' => true)),
+      'name'              => new sfValidatorString(array('max_length' => 255, 'required' => true), array('required' => $lI18n->__('Bitte tragen sie einen Kampagnen-Namen ein')) ),
       'sf_guard_user_id'  => new sfValidatorInteger(array('required' => true)),
       'target_quantity'   => new sfValidatorInteger(array('required' => false)),
     	'target_quantity_mp'   => new sfValidatorInteger(array('required' => false)),

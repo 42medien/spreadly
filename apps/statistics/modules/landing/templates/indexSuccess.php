@@ -37,5 +37,3 @@
 				</div>
 			</section>
 		</section>
-
-<?php include_partial('global/bottom'); ?>

@@ -1,4 +1,3 @@
-<?php include_partial('deals/breadcrumb', array('pDeal' => $pDeal)); ?>
 <?php
 //prefill for edit step_campaing
 	if($pForm['billing_type']->getValue() == 'media_penetration'){
@@ -6,78 +5,73 @@
 	}
 ?>
 
-<?php slot('content') ?>
-<form action="<?php echo url_for('deals/step_campaign?did='.$pDealId); ?>" name="create_deal_form" id="deal_form" method="POST">
-	<?php //echo $pForm['_csrf_token']->render(); ?>
-	<?php echo $pForm['billing_type']->render(); ?>
-	<div class="createbtnbox alignleft">
-  	<h2 class="btntitle"><?php echo __('Schritt 1: Kampagne anlegen')?></h2>
-    <ul class="btnformlist">
-    	<li class="clearfix">
-      	<div class="btnwording alignleft">
-        	<strong><?php echo $pForm['name']->renderLabel(); ?></strong><span><?php echo __('Geben Sie Ihrer Kampagne einen Namen, damit Sie sie von eventuellen weiteren unterscheiden können. Dieser Name erscheint nicht öffentlich.'); ?></span>
-        	<span><?php echo $pForm['name']->renderError(); ?></span>
-        </div>
-        <label class="textfield-wht">
-        	<span>
-          	<?php echo $pForm['name']->render(array('class' => 'wd320')); ?>
-          </span>
-        </label>
 
-      </li>
-	    <li class="clearfix" id="select-deal-type">
-	    	<div class="btnwording alignleft">
-	      	<strong><?php echo $pForm['type']->renderLabel(); ?></strong><span><?php echo __('Wo soll ihr Deal überall angezeigt werden?'); ?></span>
-	      	<span><?php echo $pForm['type']->renderError(); ?></span>
-	      </div>
-	      <span>
-	      	<?php echo $pForm['type']->render(array('class'=> "")); ?>
-	      </span>
-	    </li>
-	    <li class="clearfix" id="select-domain-profile-id" <?php echo ($pForm['type']->getValue() != 'publisher')? 'style="display:none;"':""; ?>>
-	    	<div class="btnwording alignleft">
-	      	<strong><?php echo $pForm['domain_profile_id']->renderLabel(); ?></strong><span><?php echo __('Auf welcher Domain soll der Deal laufen?'); ?></span>
-	      	<span><?php echo $pForm['domain_profile_id']->renderError(); ?></span>
-	      </div>
-	      <?php if(count($pDomainProfiles) > 0) { ?>
-		      <span>
-		      	<?php //var_dump($pForm['target_quantity']);die();?>
-		      	<?php echo $pForm['domain_profile_id']->render(array('class'=> "target_quantity_like")); ?>
-		      </span>
-		    <?php } else { ?>
-		    		<span><?php echo __('Um einen Deal speziell auf einer ihrer Webseiten schalten zu können müssen sie zunächst die gewünschte Domain bei Spreadly registrieren.'); ?>
-		    		<?php echo link_to(__('Zur Domain-Registrierung'), 'domain_profiles/index'); ?></span>
-		    <?php } ?>
-	    </li>
-
-	    <li class="clearfix select-target-quantity" id="select-target-quantity">
-	    	<div class="btnwording alignleft">
-	      	<strong><?php echo $pForm['target_quantity']->renderLabel(); ?></strong><span><?php echo __('Sie buchen für Ihre Kampagne eine bestimmte Anzahl von Likes. Bitte wählen Sie:'); ?></span>
-	      	<span><?php echo $pForm['target_quantity']->renderError(); ?></span>
-	      </div>
-	      <span>
-	      	<?php echo $pForm['target_quantity']->render(array('class'=> "target_quantity_like")); ?>
-	      </span>
-	    </li>
-	    <li class="clearfix select-target-quantity" id="select-target-quantity-mp">
-	    	<div class="btnwording alignleft">
-	      	<strong><?php echo $pForm['target_quantity_mp']->renderLabel(); ?></strong><span><?php echo __('Sie möchten, dass Ihre Kampagne von möglichst vielen Leuten gesehen wird.'); ?></span>
-	      	<span><?php echo $pForm['target_quantity_mp']->renderError(); ?></span>
-	      </div>
-	      <span>
-	      	<?php echo $pForm['target_quantity_mp']->render(array('class'=> "target_quantity_mp")); ?>
-	      </span>
-	    </li>
-    </ul>
-		<input type="submit" id="create_deal_button" value="<?php echo __('Weiter'); ?>" class="alignright button" />
-  </div>
-	<div class="alignleft create-deal-helptext">
-		<h2 class="btntitle"><?php echo __('Deal Kampagnen von Spreadly'); ?></h2>
-		<p><?php echo __('Sie haben eine gute Entscheidung getroffen, denn Sie zahlen nur für die tatsächlich erzielte Reichweite Ihrer Kampagne.<br/> Ihr Deal erscheint für den Teilnehmer als Angebot im Like-Popup von Spreadly.<br/> Sie erreichen so eine internetaffine Zielgruppe, die gern Inhalte über verschiedene Social Media Kanäle verbreitet.<br/> Gestalten Sie Ihr Angebot so reizvoll wie möglich, damit sich schnell der von Ihnen gewünschte Erfolg einstellt. In den Statistiken können Sie jederzeit die Resonanz Ihrer Kampagne prüfen.'); ?></p>
-	</div>
+<form action="<?php echo url_for('deals/step_campaign?did='.$pDealId); ?>" class="clearfix" name="create_deal_form" id="deal_form" method="POST">
+				<?php echo $pForm['billing_type']->render(); ?>
+				<h2><?php echo __('Get your button now!'); ?></h2>
+				<section class="buttontabsection clearfix">
+					<?php include_partial('deals/breadcrumb', array('pDeal' => $pDeal)); ?>
+					<div class="alignright tabcontainer">
+						<div id="tab1" class="tabcontent">
+							<div class="stepitem kampagnecontent clearfix" >
+								<div class="alignleft leftpart first">
+									<h3 class="toptitle"><?php echo __('Schritt 1: Kampagne anlegen'); ?></h3>
+									<div class="contentbox">
+										<p class="description"><?php echo __('Geben Sie Ihrer Kampagne einen Namen, damit Sie sie von eventuellen weiteren unterscheiden können. Dieser Name erscheint nicht öffentlich.'); ?></p>
+										<?php echo $pForm['name']->renderError(); ?>
+										<label class="btnform-input">
+											<?php echo $pForm['name']->render(array('class' => 'name', 'placeholder' => __('Name'))); ?>
+										</label>
+										<ul class="kampagne-checklist clearfix">
+											<li id="select-deal-type">
+												<div class="alignleft title">
+													<h4><?php echo __('Art des Deals'); ?></h4>
+													<p><?php echo __('Wo soll ihr Deal überall <br>angezeigt werden?'); ?></p>
+												</div>
+												<?php echo $pForm['type']->render(); ?>
+												<span><?php echo $pForm['type']->renderError(); ?></span>
+											</li>
+								    <!-- select-domain-profile -->
+								    <li id="select-domain-profile-id" <?php echo ($pForm['type']->getValue() != 'publisher')? 'style="display:none;"':""; ?>>
+								    	<div class="alignleft title">
+								      	<h4><?php echo $pForm['domain_profile_id']->renderLabel(); ?></h4>
+								      	<p><?php echo __('Auf welcher Domain soll der Deal laufen?'); ?></p>
+								      	<span><?php echo $pForm['domain_profile_id']->renderError(); ?></span>
+								      </div>
+								      <?php if(count($pDomainProfiles) > 0) { ?>
+								      	<?php echo $pForm['domain_profile_id']->render(array('class'=> "target_quantity_like")); ?>
+									    <?php } else { ?>
+									    		<span><?php echo __('Um einen Deal speziell auf einer ihrer Webseiten schalten zu können müssen sie zunächst die gewünschte Domain bei Spreadly registrieren.'); ?>
+									    		<?php echo link_to(__('Zur Domain-Registrierung'), 'domain_profiles/index'); ?></span>
+									    <?php } ?>
+								    </li>
+											<li>
+												<div class="alignleft title">
+													<h4><?php echo __('Streuung nach Likes'); ?></h4>
+													<p><?php echo __('Sie buchen für Ihre Kampagne eine bestimmte Anzahl von Likes. Bitte wählen Sie.'); ?></p>
+												</div>
+												<?php echo $pForm['target_quantity']->render(); ?>
+												<span><?php echo $pForm['target_quantity']->renderError(); ?></span>
+											</li>
+											<li class="last">
+												<div class="alignleft title">
+													<h4><?php echo __('Streuung nach <br>Reichweite'); ?></h4>
+													<p><?php echo __('Sie möchten, dass Ihre Kampagne von möglichst vielen Leuten gesehen wird.'); ?></p>
+												</div>
+												<?php echo $pForm['target_quantity_mp']->render(array('class'=> "target_quantity_mp")); ?>
+												<span><?php echo $pForm['target_quantity_mp']->renderError(); ?></span>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="alignright rightpart">
+									<h3>Deal Kampagnen von Spreadly</h3>
+									<p>Sie haben eine gute Entscheidung getroffen, denn Sie zahlen nur f&uuml;r die tats&auml;chlich erzielte Reichweite Ihrer Kampagne. Ihr Deal erscheint f&uuml;r den Teilnehmer als Angebot im Like-Popup von Spreadly. Sie erreichen so eine internetaffine Zielgruppe, die gern Inhalte &uuml;ber verschiedene Social Media Kan&auml;le verbreitet.<br>
+	Gestalten Sie Ihr Angebot so reizvoll wie m&ouml;glich, damit sich schnell der von Ihnen gew&uuml;nschte Erfolg einstellt. In den Statistiken k&ouml;nnen Sie jederzeit die Resonanz Ihrer Kampagne pr&uuml;fen.</p>
+								</div>
+							</div>
+							<span class="btnbarlist"><label class="pink-btn"><input type="submit"  id="create_deal_button" value="Next"></label></span>
+						</div>
+					</div>
+		</section>
 </form>
-
-
-<?php end_slot(); ?>
-<?php include_partial('global/graybox'); ?>
-

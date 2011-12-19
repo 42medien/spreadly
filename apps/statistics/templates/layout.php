@@ -18,6 +18,7 @@
 	<link href="/css/grid.css" rel="stylesheet" type="text/css">
 	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 	<link rel="stylesheet" type="text/css" href="/css/colorbox/colorbox.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="/css/coupon.css" media="screen" />
 	<!--[if IE]>
 	<link href="/css/new_ie.css" rel="stylesheet" type="text/css">
 	<![endif]-->
@@ -43,23 +44,25 @@
 		</header>
 
 		<?php if($module !='landing'){ ?>
-		<section class="content-publish">
-			<section class="container_12">
-		<?php }?>
+			<?php if($module == 'deals') { ?>
+				<section class="content-btnpage">
+					<section class="container_12">
+			<?php } else {  ?>
+				<section class="content-publish">
+					<section class="container_12">
+			<?php } ?>
+		<?php } ?>
 						<?php echo $sf_content; ?>
 		<?php if($module !='landing'){ ?>
 			</section>
 		</section>
 		<?php }?>
 
-
-
-
-	  <?php /*if(has_component_slot('site_bottom')) {?>
+	  <?php if(has_component_slot('site_bottom')) {?>
     	<?php include_component_slot('site_bottom'); ?>
     <?php } else { ?>
     	<?php include_partial('global/bottom'); ?>
-    <?php }*/ ?>
+    <?php } ?>
 
 
 
