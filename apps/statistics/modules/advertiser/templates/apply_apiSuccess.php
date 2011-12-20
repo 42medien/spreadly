@@ -3,11 +3,11 @@
 	<?php echo __('Sie haben bereits einen API-Key beantragt.<br/><br/>Die Dokumentation zur API finden Sie unter %apilink%.<br/><br/>Sollten Sie dazu noch Fragen oder irgendwelche Probleme haben, senden Sie uns eine E-mail an <a href="mailto:'.sfConfig::get("app_settings_support_email").'">'.sfConfig::get("app_settings_support_email").'</a>', array('%apilink%' => link_to('http://code.google.com/p/spreadly/wiki/Deal_API', 'http://code.google.com/p/spreadly/wiki/Deal_API'))); ?>
 <?php } else { ?>
 <form action="<?php echo url_for('advertiser/apply_api'); ?>" id="apply_deal_form" name="apply_deal_form" method="POST">
-	<div class="createbtnbox alignleft">
+	<div class="createbtnbox alignleft clearfix">
 		<h2 class="btntitle"><?php echo __('Rechnungsadresse auswählen')?></h2>
 	<?php echo $pPaymentMethodForm['_csrf_token']->render(); ?>
 		<input type="radio" class="alignleft" name="existing_pm_id" value="false" checked/>
-		<ul class="btnformlist alignleft">
+		<ul class="btnformlist alignleft clearfix">
 	    <li class="clearfix">
 	    	<div class="btnwording alignleft">
 	      	<strong><?php echo $pPaymentMethodForm['company']->renderLabel(); ?></strong><span><?php echo $pPaymentMethodForm['company']->renderError(); ?></span>
@@ -60,7 +60,7 @@
 	    </li>
 		</ul>
 		<?php foreach($pPaymentMethods as $lPayMethod) { ?>
-		<input type="radio" class="alignleft" name="existing_pm_id" value="<?php echo $lPayMethod->getId(); ?>" />
+		<input type="radio" class="alignleft clearfix" name="existing_pm_id" value="<?php echo $lPayMethod->getId(); ?>" />
 			<ul class="select-address-list alignleft clearfix">
 				<li><?php echo $lPayMethod->getCompany(); ?></li>
 				<li><?php echo $lPayMethod->getContactName(); ?></li>
@@ -68,7 +68,7 @@
 				<li><?php echo $lPayMethod->getZip(); ?> <?php echo $lPayMethod->getCity(); ?></li>
 			</ul>
 		<?php } ?>
-		<input type="submit" id="create_deal_button" value="<?php echo __('Api-Key beantragen'); ?>" class="alignright" />
+		<input type="submit" id="create_deal_button" class="blue-btn alignright" value="<?php echo __('Api-Key beantragen'); ?>" />
 	</div>
 	<div class="alignleft create-deal-helptext">
 		<h2 class="btntitle"><?php echo __('Api-Key beantragen'); ?></h2>

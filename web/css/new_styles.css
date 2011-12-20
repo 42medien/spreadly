@@ -1581,6 +1581,42 @@ a.graybtn:hover { text-decoration:none; color:#EB2374;}
 #service-img-email:hover{ background: url("/img/social_button_sprite.png") no-repeat -1100px -100px; }
 #service-img-email.active{ background: url("/img/social_button_sprite.png") no-repeat -1100px -200px; }
 
+
+#deal_billing_form .btnformlist, #apply_deal_form .btnformlist {
+    padding-bottom: 20px;
+    width: 520px;
+}
+
+#deal_billing_form .btnwording, #apply_deal_form .btnwording {
+    width: 100px;
+}
+
+.btnwording {
+    line-height: 14px;
+    padding-right: 10px;
+    width: 104px;
+}
+
+.wd350 {
+    width: 350px;
+}
+
+.createbtnbox {
+    background: url("../img/bxdevider.gif") repeat-y scroll right top transparent;
+    padding-bottom: 4px;
+    width: 536px;
+}
+
+.create-deal-helptext {
+    padding: 0 10px;
+    width: 370px;
+}
+
+#create_deal_button{
+  margin-right: 55px;
+}
+
+
 /***********second-level-navigation*****************/
 .second-level-nav{
   background-color: #aa3d71;
