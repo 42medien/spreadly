@@ -64,42 +64,70 @@
 
 		<div class="clearfix stepitem gutscheins">
 			<div class="alignleft leftpart">
-				<h3>Bearbeiten des Gutscheins</h3>
+				<h3><?php echo __('Bearbeiten des Gutscheins')?></h3>
 				<ul class="profiledetail-list clearfix">
-					<li><span class="title">Name des Gutscheins:</span>Markovski</li>
-					<li><span class="title">Gutscheintext:</span>Text</li>
-					<li><span class="title">Gutscheinquelle:</span>url</li>
-					<li class="last"><span class="title">Gutschein/Download URL:</span>https://plus.google.com/</li>
+					<li><span class="title"><?php echo __('Name des Gutscheins'); ?>:</span><?php echo $pDeal->getCouponTitle(); ?></li>
+					<li><span class="title"><?php echo __('Gutscheintext'); ?>:</span><?php echo $pDeal->getCouponText(); ?></li>
+					<li><span class="title"><?php echo __('Gutscheinquelle'); ?>:</span><?php echo $pDeal->getCouponType(); ?></li>
+
+	    		<?php if ($pDeal->getCouponType() == "code") {?>
+	    			<li><span class="title"><?php echo __('Gutschein Code'); ?>:</span><?php echo $pDeal->getCouponCode(); ?></li>
+						<li class="last"><span class="title"><?php echo __('Gutschein einlösen'); ?>:</span><?php echo $pDeal->getCouponRedeemUrl(); ?></li>
+	    		<?php } elseif ($pDeal->getCouponType() == "unique_code") { ?>
+	    			<li><span class="title"><?php echo __('Webhook Url'); ?>:</span><?php echo $pDeal->getCouponWebhookUrl(); ?></li>
+						<li class="last"><span class="title"><?php echo __('Gutschein einlösen'); ?>:</span><?php echo $pDeal->getCouponRedeemUrl(); ?></li>
+					<?php } else { ?>
+	    			<li><span class="title"><?php echo __('Gutschein/Download URL'); ?>:</span><?php echo $pDeal->getCouponUrl(); ?></li>
+	    		<?php } ?>
+
 				</ul>
 			</div>
 			<div class="alignright rightpart">
-				<span class="image"><img src="img/voucher-img.jpg" alt="" title=""></span>
-				<a href="#" class="link" title="Bearbeiten des Deals">Bearbeiten des Deals</a>
+			<?php if ($pDeal->getCouponType() == "code"  || $pDeal->getCouponType() == "unique_code") {?>
+				<?php include_partial('deals/coupon_code', array('pDeal' => $pDeal)); ?>
+			<?php } else if($pDeal->getCouponType() == "url") { ?>
+				<?php include_partial('deals/coupon_url', array('pDeal' => $pDeal)); ?>
+			<?php } else {?>
+				<?php include_partial('deals/coupon_download', array('pDeal' => $pDeal)); ?>
+			<?php }?>
+				<?php echo link_to('Bearbeiten des Gutscheins', 'deals/step_coupon?did='.$pDeal->getId(), array('class' => 'link')); ?>
 			</div>
 		</div>
+
+
+
+
+
+
+
 		<div class="clearfix stepitem rechnungsadresse">
 			<div class="alignleft leftpart">
-				<h3>Rechnungsadresse</h3>
+				<h3><?php echo __('Rechnungsadresse')?></h3>
 				<ul class="profiledetail-list clearfix">
-					<li><span class="title">Zahlungsart:</span>Rechung</li>
-					<li><span class="title">Unternehmen:</span>Markovski</li>
-					<li><span class="title">Ansprechpartner:</span>Marks</li>
-					<li><span class="title">Stra&szlig;e / Postfach:</span>Markach</li>
-					<li><span class="title">PLZ:</span>Plz tebi</li>
-					<li class="last"><span class="title">Ort:</span>Tro</li>
+					<li><span class="title"><?php echo __('Zahlungsart'); ?>:</span><?php echo __('Rechnung'); ?></li>
+					<li><span class="title"><?php echo __('Unternehmen'); ?>:</span><?php echo $pDeal->getPaymentMethod()->getCompany(); ?></li>
+					<li><span class="title"><?php echo __('Ansprechpartner'); ?>:</span><?php echo $pDeal->getPaymentMethod()->getContactName(); ?></li>
+					<li><span class="title"><?php echo __('Straße / Postfach'); ?>:</span><?php echo $pDeal->getPaymentMethod()->getAddress(); ?></li>
+					<li><span class="title"><?php echo __('PLZ'); ?>:</span><?php echo $pDeal->getPaymentMethod()->getZip(); ?></li>
+					<li class="last"><span class="title"><?php echo __('Ort'); ?>:</span><?php echo $pDeal->getPaymentMethod()->getCity(); ?></li>
 				</ul>
 			</div>
 			<div class="alignright rightpart">
-				<h3>Rechnungsadresse</h3>
-				<p>Bitte &uuml;berpr&uuml;ften Sie, ob die Rechnungsdaten richtig sind.</p>
-				<a href="#" class="link" title="Bearbeiten der Rechnungsadresse">Bearbeiten der Rechnungsadresse</a>
+				<h3><?php echo __('Rechnungsadresse'); ?></h3>
+				<p><?php echo __('Bitte überprüften Sie, ob die Rechnungsdaten richtig sind.'); ?></p>
+				<?php echo link_to('Bearbeiten der Rechnungsadresse', 'deals/step_billing?did='.$pDeal->getId(), array('class' => 'link')); ?>
 			</div>
 		</div>
 		<div class="stepitem signagree">
-			<p>Sind Sie sicher, dass alle Eingaben korrekt sind? Sie lassen sich nach dem Absenden nicht mehr &auml;ndern. Wenn ja, klicken Sie bitte auf Deal senden". Sie erhalten nach der Freigabe durch das Spreadly-Team eine Mail und Ihr Like Angebot wird umgehend in unserem Pool geschaltet.</p>
-			<div class="agreecheck clearfix"><label class="checkbox-label"><input type="checkbox">Ich aktzeptiere die Allgemeinen Gesch&auml;ftsbedingungen von Spreadly.</label></div>
+			<p><?php echo __('Sind Sie sicher, dass alle Eingaben korrekt sind? Sie lassen sich nach dem Absenden nicht mehr ändern. Wenn ja, klicken Sie bitte auf „Deal senden“. Sie erhalten nach der Freigabe durch das Spreadly-Team eine Mail und Ihr Like Angebot wird umgehend in unserem Pool geschaltet.'); ?></p>
+			<div class="agreecheck clearfix">
+				<label class="checkbox-label">
+					<?php echo $pForm['tos_accepted']->render(array('class'=>'alignleft')); ?>&nbsp;<?php echo $pForm['tos_accepted']->renderLabel(); ?>
+				</label>
+				<?php echo $pForm['tos_accepted']->renderError(); ?>
+			</div>
 		</div>
-		<span class="btnbarlist"><label class="pink-btn"><input type="button"  value="Next"></label></span>
+		<span class="btnbarlist"><label class="pink-btn"><input type="submit"  value="<?php echo __('Deal senden'); ?>"></label></span>
 	</div>
 </div>
 </form>

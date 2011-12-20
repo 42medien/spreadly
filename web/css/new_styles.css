@@ -775,8 +775,8 @@ h3.steptitle .nu {background:#a04a74; behavior: url(css/PIE.htc); margin-right:6
 .radio-label input {display:none;}
 
 
-.checkbox-label {float:left; background:url(/img/statistics/checkbox-bg.jpg) no-repeat 0px 0px; height:16px; line-height:16px; vertical-align:top; padding-left:21px;  left:-1px; top:1px; margin-right:4px;}
-.checkbox-label input {display:none;}
+.checkbox-label {/*float:left; background:url(/img/statistics/checkbox-bg.jpg) no-repeat 0px 0px; height:16px; line-height:16px; vertical-align:top; padding-left:21px;  left:-1px; top:1px; margin-right:4px;*/}
+.checkbox-label input {}
 
 
 .btnform-input { border:solid 1px #bababa; color:#252525; vertical-align:top; behavior: url(css/PIE.htc); display:inline-block; margin-bottom:10px; webkit-border-radius:6px; -moz-border-radius:6px; border-radius:6px;}
