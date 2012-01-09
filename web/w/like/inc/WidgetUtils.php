@@ -491,10 +491,12 @@ class WidgetUtils {
     curl_close($ch);
 
     if($facebookData = json_decode($rawData, true)) {
-      return intval($facebookData[$this->aUrl]['shares']);
-    } else {
-      return intval(0);
+      if (array_key_exists($this->aUrl, $facebookData)) {
+        return intval($facebookData[$this->aUrl]['shares']);
+      }
     }
+
+    return intval(0);
   }
 
   public function getH() {
