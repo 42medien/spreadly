@@ -147,4 +147,3 @@
 				<?php include_partial('global/spreadly_references'); ?>
 			</section>
 		</section>
-<?php include_partial('global/bottom'); ?>
