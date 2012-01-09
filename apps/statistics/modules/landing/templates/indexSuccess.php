@@ -23,16 +23,17 @@
 					<div class="alignright brand-logo">
 						<h4><?php echo __('Partner'); ?></h4>
 						<div class="logo-top">
-							<a href="#"><img src="/img/statistics/mailingwork-logo.jpg" width="148" height="47" alt="mailingwork" title="mailingwork"></a>
-							<a href="#"><img src="/img/statistics/business-logo.jpg" width="159" height="47" alt="business" title="business"></a>
-							<a href="#"><img src="/img/statistics/ednetz-logo.jpg" width="135" height="47" alt="ednetz" title="ednetz"></a>
+							<a href="http://www.mailingwork.de/" target="_blank"><img src="/img/statistics/mailingwork-logo.jpg" width="148" height="47" alt="mailingwork" title="mailingwork"></a>
+							<a href="http://www.business-on.de/" target="_blank"><img src="/img/statistics/business-logo.jpg" width="159" height="47" alt="business" title="business"></a>
+							<a href="http://www.ednetz.de/" target="_blank"><img src="/img/statistics/ednetz-logo.jpg" width="135" height="47" alt="ednetz" title="ednetz"></a>
 						</div>
 						<div class="logo-bot">
-							<a href="#"><img src="/img/statistics/abacho-logo.jpg" width="143" height="43" alt="abacho" title="abacho"></a>
-							<a href="#"><img src="/img/statistics/pressehof-logo.jpg" width="143" height="43" alt="pressehof" title="pressehof"></a>
-							<a href="#"><img src="/img/statistics/ibusiness-logo.jpg" width="170" height="43" alt="ibusiness" title="ibusiness"></a>
-							<a href="#"><img src="/img/statistics/pr-blogger-logo.jpg" width="143" height="43" alt="pr-blogger" title="pr-blogger"></a></div>
-						<p class="see-more"><a href="#" title="See More Spread.ly costumers  &raquo;"><?php echo __('weitere Partner von Spreadly anzeigen &raquo;'); ?></a></p>
+							<a href="http://www.abacho.de/" target="_blank"><img src="/img/statistics/abacho-logo.jpg" width="143" height="43" alt="abacho" title="abacho"></a>
+							<a href="http://www.pressehof.de/" target="_blank"><img src="/img/statistics/pressehof-logo.jpg" width="143" height="43" alt="pressehof" title="pressehof"></a>
+							<a href="http://www.ibusiness.de/" target="_blank"><img src="/img/statistics/ibusiness-logo.jpg" width="170" height="43" alt="ibusiness" title="ibusiness"></a>
+							<a href="http://www.pr-blogger.de/" target="_blank"><img src="/img/statistics/pr-blogger-logo.jpg" width="143" height="43" alt="pr-blogger" title="pr-blogger"></a>
+						</div>
+						<p class="see-more"><a href="<?php echo url_for('@customer');?>" title="See More Spread.ly costumers"><?php echo __('weitere Partner von Spreadly anzeigen &raquo;'); ?></a></p>
 					</div>
 				</div>
 			</section>
