@@ -850,6 +850,7 @@ dealwidebox .graytitle { padding-bottom: 8px;}
 .textaria_middle .textaria_right {background:url(../img/mitextbg.gif) repeat-y 100% 0px;}
 .textaria_middle .textareablock {background:none; padding:0px;}
 
+
 .cust_checkbox {  cursor: default; width:13px; height:13px !important; background:url(../img/checkbox.gif) no-repeat 0 0px; display:inline-block; margin-right:5px; margin-top:3px;}
 .cust_checkbox_on { background:url(../img/checkbox.gif) no-repeat 0 -24px;  }
 .cust_checkbox_off { background:url(../img/checkbox.gif) no-repeat 0 0; }
