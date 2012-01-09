@@ -19,11 +19,19 @@ class dealActions extends autoDealActions
   	$lDeal = DealTable::getInstance()->find($lParams['deal_id']);
   	$lError = "";
   	if($lDeal->canTransitionFor($lParams['event'])) {
-    	$lDeal->transitionFor($lParams['event']);  	  
+    	$lDeal->transitionFor($lParams['event']);
   	} else {
   	  $lError = "Cannot transition for: ".$lParams['event'];
   	}
   	return $this->redirect('deal/index');
   }
 
+  public function executeInitiator_stats(sfWebRequest $request) {
+    $lDeal = DealTable::getInstance()->find($request->getParameter('deal_id'));
+
+    //var_dump($lDeal->getId());
+
+    $dm = MongoManager::getStatsDM();
+    $this->aas = $dm->getRepository('Documents\AnalyticsActivity')->findBy(array("d_id" => intval($lDeal->getId())));
+  }
 }
