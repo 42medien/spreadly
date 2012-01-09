@@ -491,7 +491,7 @@ class WidgetUtils {
     curl_close($ch);
 
     if($facebookData = json_decode($rawData, true)) {
-      if (array_key_exists($this->aUrl, $facebookData)) {
+      if (array_key_exists($this->aUrl, $facebookData) && array_key_exists('shares', $facebookData[$this->aUrl])) {
         return intval($facebookData[$this->aUrl]['shares']);
       }
     }
