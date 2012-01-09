@@ -474,9 +474,9 @@ class WidgetUtils {
 
     if($twitterData = json_decode($rawData, true)) {
       return intval($twitterData['count']);
-    } else {
-      return intval(0);
     }
+
+    return intval(0);
   }
 
   public function getFacebookCount() {
