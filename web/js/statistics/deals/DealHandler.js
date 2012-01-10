@@ -1,5 +1,5 @@
 /**
- * @nocombine statistics
+ * @combine statistics
  */
 
 /**
