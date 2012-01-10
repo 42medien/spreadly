@@ -3,7 +3,7 @@
 				<h2><?php echo __('Wir machen mehr aus den Empfehlungen Deiner Besucher'); ?></h2>
 				<h3><?php echo __('Analysiere die Empfehlungen und monetarisiere sie!'); ?></h3>
 				<div class="clearfix container_12">
-					<div class="alignleft banner-map"><a href="#"><img src="/img/statistics/map.jpg" width="488" height="247" alt="map" title="map"></a></div>
+					<div class="alignleft banner-map"><a href="<?php echo url_for('@customer'); ?>"><img src="/img/statistics/map.jpg" width="488" height="247" alt="map" title="map"></a></div>
 					<div class="narrowColRight alignright">
 						<ul class="clearfix spread-list">
 							<li><?php echo __('Spreadly für Blogger'); ?></li>

@@ -4,15 +4,15 @@
 					<div class="grid_8 alignleft icon-grid">
 						<div class="clearfix">
 							<div class="icon1 grid_4 alignleft"><span><?php echo __('1 Klick - Große Reichweite'); ?></span>
-								<p><?php echo __('Dank Spreadly hast Du keine Buttonwüste mehr, sondern nur einen Share-Button und musst trotzdem auf kein Netzwerk verzichten. Nutze die Reichweite von Facebook, Twitter, LinkedIn und Google+ (in Arbeit) für Deine Artikel, Produkte und anderen Inhalten. Deine Besucher brauchen nur einen Button zu klicken um alle ihre Freunde in den Netzwerken zu erreichen'); ?> <a href="#" title="<?php echo __('Mehr lesen'); ?>"><?php echo __('Mehr lesen'); ?></a></p>
+								<p><?php echo __('Dank Spreadly hast Du keine Buttonwüste mehr, sondern nur einen Share-Button und musst trotzdem auf kein Netzwerk verzichten. Nutze die Reichweite von Facebook, Twitter, LinkedIn und Google+ (in Arbeit) für Deine Artikel, Produkte und anderen Inhalten. Deine Besucher brauchen nur einen Button zu klicken um alle ihre Freunde in den Netzwerken zu erreichen'); ?> <a href="<?php echo url_for('@configurator'); ?>" title="<?php echo __('Mehr lesen'); ?>"><?php echo __('Mehr lesen'); ?></a></p>
 							</div>
 							<div class="icon2 grid_4 alignleft"><span><?php echo __('Einfache Implementierung'); ?></span>
-								<p><?php echo __('Ein paar Zeilen Code reichen aus um alle Möglichkeiten von Spreadly nutzen zu können. Für Wordpress, Magento, TYPO3, Drupal und Joomla haben wir auch komplett fertige Erweiterungen die den Einbau zum Kinderspiel machen.'); ?> <a href="#" title="<?php echo __('Mehr lesen'); ?>"><?php echo __('Mehr lesen'); ?></a></p>
+								<p><?php echo __('Ein paar Zeilen Code reichen aus um alle Möglichkeiten von Spreadly nutzen zu können. Für Wordpress, Magento, TYPO3, Drupal und Joomla haben wir auch komplett fertige Erweiterungen die den Einbau zum Kinderspiel machen.'); ?> <a href="<?php echo url_for('http://code.google.com/p/spreadly/wiki/Plugins'); ?>" title="<?php echo __('Mehr lesen'); ?>" target="_blank"><?php echo __('Mehr lesen'); ?></a></p>
 							</div>
 						</div>
 						<div class="clearfix">
 							<div class="icon3 grid_4 alignleft"><span><?php echo __('Das Spreadly Ad-Network'); ?></span>
-								<p><?php echo __('Mit nur wenigen Klicken kannst Du Deine Werbekampagne in unserem Ad-Network schalten. Auf allen Seiten mit Spreadly Button wird dann z.B. Dein Gutscheincode zu finden sein.'); ?> <a href="#" title="<?php echo __('Mehr lesen'); ?>"><?php echo __('Mehr lesen'); ?></a></p>
+								<p><?php echo __('Mit nur wenigen Klicken kannst Du Deine Werbekampagne in unserem Ad-Network schalten. Auf allen Seiten mit Spreadly Button wird dann z.B. Dein Gutscheincode zu finden sein.'); ?> <a href="<?php echo url_for('@advertiser'); ?>" title="<?php echo __('Mehr lesen'); ?>"><?php echo __('Mehr lesen'); ?></a></p>
 							</div>
 							<div class="icon4 grid_4 alignleft"><span><?php echo __('Social Media Analytics'); ?></span>
 								<p><?php echo __('Mit Spreadly erfährst Du alles was in Sachen Empfehlungsmarketing wichtig ist. Wir zeigen Die wie, ob und dank wem Dein Empfehlungsmarketing funktioniert.'); ?></p>
