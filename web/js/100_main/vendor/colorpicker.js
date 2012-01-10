@@ -1,6 +1,6 @@
 
 /**
- * @nocombine statistics
+ * @combine statistics
  * Color picker
  * Author: Stefan Petre www.eyecon.ro
  * 

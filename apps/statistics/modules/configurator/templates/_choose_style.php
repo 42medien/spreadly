@@ -23,15 +23,34 @@
 											<div class="clearfix">
 												<label class="textfield">
 												<span>
-													<input type="text" class="wd183" name="likebutton[url]" id="likebutton_url" value="<?php echo __('Url of your site e.g. http://www.domain.com"'); ?>" />
+													<input type="text" class="wd260" name="likebutton[url]" id="likebutton_url" value="<?php echo __('Url of your site e.g. http://www.domain.com"'); ?>" />
 												</span>
 												</label>
 											</div>
 											<div class="meta-text"><?php echo __('URL example: <strong>http://</strong>www.example.com'); ?></div>
+											<?php if (!$pService) {?>
+												<div class="clearfix">
+													<label class="textfield">
+													<span>
+														<input type="text" class="wd260" name="likebutton[text]" id="likebutton_text" value="<?php echo __('Like'); ?>" />
+													</span>
+													</label>
+												</div>
+												<div class="meta-text"><?php echo __('Choose the text of your button'); ?></div>
+
+												<div class="clearfix">
+													<label class="textfield">
+													<span>
+														<input type="text" class="wd260" name="likebutton[color]" id="likebutton_color" value="973765" />
+													</span>
+													</label>
+												</div>
+												<div class="meta-text"><?php echo __('Choose the color of your button. Click into the textfield and select.'); ?></div>
+											<?php } ?>
 										<?php } else { ?>
 											<div class="clearfix">
 												<label class="textfield"><span>
-													<input type="text" class="wd183" name="service_no_url" id="service_no_url" value="<?php echo __('Your '.$pService->getName().' Permalink'); ?>" readonly/>
+													<input type="text" class="wd260" name="service_no_url" id="service_no_url" value="<?php echo __('Your '.$pService->getName().' Permalink'); ?>" readonly/>
 													</span>
 												</label>
 											</div>

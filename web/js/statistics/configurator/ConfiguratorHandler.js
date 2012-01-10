@@ -1,5 +1,5 @@
 /**
- * @combine statistics
+ * @nocombine statistics
  */
 
 var Configurator = {
@@ -47,7 +47,10 @@ var Configurator = {
             jQuery(lThis).addClass('active');
           }
           
-          jQuery('#likebutton_url').toggleValue();  
+          jQuery('#likebutton_url').toggleValue();
+          jQuery('#likebutton_text').toggleValue(); 
+
+          
           if (typeof(document.likebuttonform) !=  "undefined"){
             document.likebuttonform.reset();
           }          
@@ -55,7 +58,7 @@ var Configurator = {
       });
       return false;
     });     
-  }
+  } 
 };
 
 
@@ -134,9 +137,10 @@ var DynStyleWidgets = {
    */
   init: function() {
     debug.log('[DynStyleWidgets][init]');    
-    DynStyleWidgets.postload();  
+    DynStyleWidgets.postload();
   },    
-    
+  
+
   /**
    * show the widget after request
    * @author KM
@@ -192,6 +196,7 @@ var DynStyleForm = {
   init: function() {
     debug.log("[DynStyleForm][init]");       
     DynStyleForm.bindKeyNav();
+    DynStyleForm.selectColor();
     
   },
   
@@ -202,12 +207,39 @@ var DynStyleForm = {
   bindKeyNav: function() {
     debug.log("[DynStyleForm][bindKeyNav]");       
     var lTimeout;
-    jQuery('#likebutton_url').keyup(function(e) {
+    jQuery('#likebutton_url, #likebutton_text, #likebutton_color').keyup(function(e) {
       clearTimeout(lTimeout);
       lTimeout = setTimeout(function() {
         DynStyleCode.get();
         DynStyleWidgets.update();
       }, 300);
     });    
-  } 
+  },
+  
+  selectColor: function() {
+    debug.log("[DynStyleForm][selectColor]");      
+    jQuery('#likebutton_color').ColorPicker({
+      color: '973765',
+      onBeforeShow: function () {
+        jQuery(this).ColorPickerSetColor(this.value);
+      },
+      
+      onSubmit: function(hsb, hex, rgb, el) {
+        jQuery(el).val(hex);
+        jQuery(el).ColorPickerHide();
+        DynStyleCode.get();
+        DynStyleWidgets.update();              
+      },
+      
+      onChange: function(hsb, hex, rgb) {
+        jQuery('#likebutton_color').val(hex);
+      },
+      
+      onHide: function(){
+        DynStyleCode.get();
+        DynStyleWidgets.update();                      
+      }
+    });    
+    
+  }   
 };

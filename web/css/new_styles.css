@@ -1355,7 +1355,7 @@ a.button span, button.button span {
 .allweb-btn li span a:hover, .otherweb-box ul li span a:hover{color:#EB2374; text-decoration:none;}
 
 .textfield{ float:left; background:url(../img/ipblack-bg.png) 0px 0px no-repeat; padding-left:14px;}
-.textfield span{ float:left; background:url(../img/submit-bg.png) right -60px no-repeat;  padding:5px 14px 4px 0; height:22px; }
+.textfield span{ float:left; background:url(../img/submit-bg.png) right -60px no-repeat;  padding:5px 14px 4px 0; height:20px; }
 .textfield span input{ border:0px; background:none; line-height:19px; color:#ececec; height:20px; font-size:11px; padding-bottom:2px; }
 
 .meta-text {
@@ -1407,11 +1407,12 @@ a.button span, button.button span {
 .buttoncode_list .allweb-btn li.removerpad {padding-right:0px;}
 .buttoncode_list .otherweb-box {width:152px; float:right; background:none;}
 
-.stylestatus_box {padding:8px 0px 0px 8px; width:230px;/* margin-right:22px;*/ background: url("../img/divider.gif") no-repeat scroll right 40px transparent;}
+.stylestatus_box {padding:8px 0px 0px 8px; width:310px;/* margin-right:22px;*/ background: url("../img/divider.gif") repeat-y scroll right 40px transparent;}
 .stylestatus_box .innerloginbox {padding-bottom:0px;}
 .stylestatus_box .sub_title {margin-bottom:15px;}
 .stylestatus_box .ch-size li {width:80%;}
 .stylestatus_box .wd183 {width:183px;}
+.stylestatus_box .wd260 {width:260px;}
 
 .stylestatus_box .like_btn {background:url(../img/like-btnleft.png) no-repeat 0px 0px; display:block; padding-left:5px;}
 .stylestatus_box .like_btn span {background:url(../img/likebtn-right.png) no-repeat 100% 0px; float:left; display:block; height:22px; cursor:pointer;  line-height:22px; color:#782a4f; width:50px; padding-left:6px;}
@@ -1423,6 +1424,12 @@ a.button span, button.button span {
 .stylestatus_box .ch-size li.last {padding-bottom:5px;}
 .stylestatus_box .ch-size li .radio-btn {top:4px;}
 
+.stylestatus_box #social_avatars {
+    margin-left: 6px;
+    margin-top: -4px;  
+}
+
+.stylestatus_box .meta-text{padding-bottom: 10px; padding-top: 0px;}
 
 .spread_profile {padding-left:4px;}
 .spread_profile .spread {padding-top:3px; position:relative; padding-right:22px;}
@@ -1432,10 +1439,10 @@ a.button span, button.button span {
 
 .comment_label {background:url(../img/comment-label.png) no-repeat 0px 0px; text-align:center; color:#782a4f; width:37px; height:22px; line-height:22px; display:block; float:left; padding-left:3px; font-size:10px;}
 
-.grabcode_box {width:335px; padding:8px 0px 0px 23px;}
+.grabcode_box {width:250px; padding:8px 0px 0px 23px;}
 .grabcode_box .sub_title {padding:0px 0px 0px 0px; margin-bottom:15px;}
 .grabcode_box .codebox {padding-left:0px; width:auto; }
-.grabcode_box .textareablock {background:url(../img/code-bg.png) no-repeat 0px 0px; width:326px; padding:8px 12px 8px;}
+.grabcode_box .textareablock {background:url(../img/code-bg.png) no-repeat 0px 0px; width:240px; padding:8px 12px 8px;}
 .grabcode_box .textareablock  textarea {height:152px;}
 
 .step2_content {padding-top:10px; background:url(../img/pera-bgcurvebg.png) no-repeat 5px 43px;}
@@ -1519,7 +1526,7 @@ a.graybtn:hover { text-decoration:none; color:#EB2374;}
 
 .stylechoose_box {padding-top:32px;}
 .stylechoose_box .radiobtn_list {width:20px;}
-.stylechoose_box .radiobtn_list span {margin-bottom:18px;}
+.stylechoose_box .radiobtn_list span {margin-bottom:30px;}
 .stylechoose_box .radiobtn_list label {display:none;}
 
 .stylechoose_box .status_list {width:120px; padding-bottom:12px;}
@@ -1665,4 +1672,73 @@ ul#mainNavigation ul.second-level-nav  li.last a{
 
 #general-ajax-loader{z-index: 1000000; position: absolute; display:none;}
 
+
+
+    /* default skin*/
+    .container {
+      display: inline-block;
+      margin: 2px 5px;
+    }
+    .container .button {
+      display: inline-block;
+      position: relative;
+      color: hsl(333,42%,50%);  /* #B44A7A */
+      line-height: 18px;
+      font-weight: bold;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      padding: 0 4px 0 21px;
+      height: 18px;
+      border: 1px solid hsl(333,42%,73%);
+      border-bottom-color: hsl(333,42%,50%);
+      border-top-color: hsl(333,42%,81%);
+      border-radius: 3px;
+      background: #fff url('//s3.amazonaws.com/spread.ly/img/button/s.png') no-repeat 130% -20px;
+      text-decoration: none;
+      text-transform: uppercase;
+      box-shadow: 0 -1px 1px 1px hsla(333,42%,100%,.7) inset, 0 -4px 8px 0 hsla(333,42%,50%,.5) inset, 0 0 2px 8px hsla(333,42%,0%,0);
+      text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(333,42%,50%,.25);
+      -webkit-transition: box-shadow .3s ease-out, text-shadow .3s ease-out, background-position .6s ease-out;
+      -moz-transition: box-shadow .3s ease-out, text-shadow .3s ease-out, background-position .6s ease-out;
+    }
+    .container .button:before{
+      background: hsla(333,42%,50%,1) url('//s3.amazonaws.com/spread.ly/img/button/l.png') no-repeat 0px 0px;
+      box-shadow: 0 1px 1px 0px hsla(333,42%,0%,.8) inset;
+      content:'';
+      width: 16px;
+      height: 16px;
+      display: block;
+      position: absolute;
+      top: 1px;
+      left: 1px;
+      border-radius: 2px;
+      opacity:1;
+    }
+    .container .button:focus, .button:hover{
+      outline: none;
+      background-position: -30% 20px;
+      border: 1px solid hsl(333,42%,65%);
+      border-top-color: hsl(333,42%,46%);
+      box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(333,42%,50%,.3) inset, 0 0 4px 0 hsla(333,42%,30%,.5);
+      text-shadow: 0 1px 1px hsla(333,42%,50%,.25), 0 -1px 1px #fff;
+      -webkit-transition: box-shadow .3s ease-in, text-shadow .3s ease-in, background-position .6s ease-out;
+      -moz-transition: box-shadow .3s ease-in, text-shadow .3s ease-in, background-position .6s ease-out;
+    }
+    .container .button:active {
+      background-position: -30% 20px;
+      background-color: hsla(333,42%,70%,1);
+      color: #fff;
+      border: 1px solid hsl(333,42%,30%);
+      border-top-color: hsl(333,42%,30%);
+      box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(333,42%,50%,.3) inset, 0 0 4px 0 hsla(333,42%,30%,.5);
+      text-shadow: 0 0px 0px hsla(333,42%,50%,0), 0 0px 0px #fff;
+    }
+    .container .button:focus:before, .button:hover:before{
+      opacity:.85;
+      width: 14px;
+      height: 14px;
+      top:2px;
+      left:2px;
+      background-position: -1px -1px;*/
+    }
 
