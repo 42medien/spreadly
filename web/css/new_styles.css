@@ -1524,7 +1524,7 @@ a.graybtn:hover { text-decoration:none; color:#EB2374;}
 .cust_radio_disabled_on { background:url(../img/radio-bg.png) no-repeat 0px 100%;}
 .cust_radio_disabled_off { background:url(../img/radio-bg.png) no-repeat 0px 100%; }
 
-.stylechoose_box {padding-top:32px;}
+.stylechoose_box {padding-top:26px;}
 .stylechoose_box .radiobtn_list {width:20px;}
 .stylechoose_box .radiobtn_list span {margin-bottom:30px;}
 .stylechoose_box .radiobtn_list label {display:none;}
