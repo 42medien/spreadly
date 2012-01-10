@@ -29,7 +29,7 @@
 					</div>
 					<div class="alignright grid_4 spread-section">
 						<div class="spread-tab"><span class="tab-txt"><?php echo __('Spreadly Premium Partner'); ?></span>
-							<div class="spread-logo"><a href="#"><img src="/img/statistics/mailingwork-logo.jpg" width="148" height="47" alt="mailingwork" title="mailingwork"></a><a href="#"><img src="/img/statistics/business-logo.jpg" width="159" height="47" alt="business" title="business"></a><a href="#" class="last"><img src="/img/statistics/ednetz-logo.jpg" width="135" height="47" title="ednetz" alt="ednetz"></a></div>
+							<div class="spread-logo"><a href="http://www.mailingwork.de/" target="_blank"><img src="/img/statistics/mailingwork-logo.jpg" width="148" height="47" alt="mailingwork" title="mailingwork"></a><a href="http://www.business-on.de/" target="_blank"><img src="/img/statistics/business-logo.jpg" width="159" height="47" alt="business" title="business"></a><a href="http://www.ednetz.de/" class="last" target="_blank"><img src="/img/statistics/ednetz-logo.jpg" width="135" height="47" title="ednetz" alt="ednetz"></a></div>
 							<p><?php echo __('Erfahre mehr über die Möglichkeiten für Premiumpartner'); ?> <a href="<?php echo url_for('@customer'); ?>" title="<?php echo __('Über Spreadly'); ?>"><?php echo __('Über Spreadly'); ?></a></p>
 						</div>
 						<span class="spred-txt"><?php echo __('Warum ist Spreadly anders als addthis oder shareths?'); ?></span><a class="learn-more" href="<?php echo url_for('@customer'); ?>" title="Learn More &raquo;"><?php echo __('Erfahre mehr &raquo;'); ?></a>
