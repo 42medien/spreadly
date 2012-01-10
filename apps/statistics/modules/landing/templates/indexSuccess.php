@@ -12,7 +12,7 @@
 							<li><?php echo __('Spreadly für Werbetreibende'); ?></li>
 							<li><?php echo __('Spreadly für Entwickler'); ?></li>
 						</ul>
-						<a href="#" class="get-btn" title="Get your own Button now"><?php echo __('Get your own Button now'); ?></a>
+						<a href="<?php echo url_for('@configurator'); ?>" class="get-btn" title="Get your own Button now"><?php echo __('Get your own Button now'); ?></a>
 						<p class="contact-txt"><?php echo __('Schnell - Transparent - Fair'); ?></p>
 					</div>
 				</div>
