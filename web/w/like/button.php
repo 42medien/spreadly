@@ -43,7 +43,7 @@ $wu->trackUser();
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
       padding: 0 4px 0 21px;
-<?php if ($wu->getType() != "default") { ?>
+<?php if ($wu->getType() == "default") { ?>
       padding-left: 1px;
 <?php } ?>
       height: 18px;
@@ -60,7 +60,7 @@ $wu->trackUser();
       -moz-transition: box-shadow .3s ease-out, text-shadow .3s ease-out, background-position .6s ease-out;
     }
     .button:before {
-<?php if ($wu->getType() == "default") { ?>
+<?php if ($wu->getType() != "default") { ?>
       background: hsla(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,50%,1) url('//s3.amazonaws.com/spread.ly/img/button/l.png') no-repeat 0px 0px;
       box-shadow: 0 1px 1px 0px hsla(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,0%,.8) inset;
       content:'';
@@ -179,7 +179,7 @@ $wu->trackUser();
 <body>
   <div class="container">
     <a class="button" href="<?php echo $wu->getPopupUrl() ?>" onclick="window.open(this.href, 'popup', 'width=580,height=450,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" target="_blank">
-<?php if ($wu->getType() == "social") { ?>
+<?php if ($wu->getType() == "default") { ?>
       <img src="//s-static.ak.facebook.com/rsrc.php/yi/r/q9U99v3_saj.ico">
       <img src="//twitter.com/phoenix/favicon.ico">
       <img src="//ssl.gstatic.com/s2/oz/images/faviconr.ico">
