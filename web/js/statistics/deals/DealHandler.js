@@ -1,5 +1,5 @@
 /**
- * @combine statistics
+ * @nocombine statistics
  */
 
 /**
@@ -145,7 +145,8 @@ var DealForm = {
       debug.log('[DealForm][toggleCampaignType]');         
       jQuery('li.select-target-quantity ul.radio_list li').live('click', function() {
         var lType;
-        lType = jQuery(this).parent('ul').parent('span').parent('li.select-target-quantity').attr('id');
+        lType = jQuery(this).parent('ul').parent('li.select-target-quantity').attr('id');
+        debug.log(lType);
         if(lType == 'select-target-quantity'){
           jQuery('#billing_type').val('like');
           jQuery('.target_quantity_mp').attr('checked', false);

@@ -39,21 +39,21 @@
 								      	<span><?php echo $pForm['domain_profile_id']->renderError(); ?></span>
 								      </div>
 								      <?php if(count($pDomainProfiles) > 0) { ?>
-								      	<?php echo $pForm['domain_profile_id']->render(array('class'=> "target_quantity_like")); ?>
+								      	<?php echo $pForm['domain_profile_id']->render(); ?>
 									    <?php } else { ?>
 									    		<span><?php echo __('Um einen Deal speziell auf einer ihrer Webseiten schalten zu können müssen sie zunächst die gewünschte Domain bei Spreadly registrieren.'); ?>
 									    		<?php echo link_to(__('Zur Domain-Registrierung'), 'domain_profiles/index'); ?></span>
 									    <?php } ?>
 								    </li>
-											<li>
+											<li class="select-target-quantity" id="select-target-quantity">
 												<div class="alignleft title">
 													<h4><?php echo __('Streuung nach Likes'); ?></h4>
 													<p><?php echo __('Sie buchen für Ihre Kampagne eine bestimmte Anzahl von Likes. Bitte wählen Sie.'); ?></p>
 												</div>
-												<?php echo $pForm['target_quantity']->render(); ?>
+												<?php echo $pForm['target_quantity']->render(array('class'=> "target_quantity_like")); ?>
 												<span><?php echo $pForm['target_quantity']->renderError(); ?></span>
 											</li>
-											<li class="last">
+											<li class="last select-target-quantity" id="select-target-quantity-mp">
 												<div class="alignleft title">
 													<h4><?php echo __('Streuung nach <br>Reichweite'); ?></h4>
 													<p><?php echo __('Sie möchten, dass Ihre Kampagne von möglichst vielen Leuten gesehen wird.'); ?></p>
