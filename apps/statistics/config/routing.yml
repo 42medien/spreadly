@@ -168,11 +168,19 @@ subscribe_api:
 
 pricing:
   url: /pricing
-  param: { module: landing, action: pricing} 
-  
+  param: { module: landing, action: pricing}
+
 customer:
   url: /customer
-  param: { module: landing, action: customer}  
+  param: { module: landing, action: customer}
+
+advertiser:
+  url: /advertiser
+  param: { module: advertiser, action: index}
+
+publisher:
+  url: /publisher
+  param: { module: publisher, action: index}
 
 # You can find more information about this file on the symfony website:
 # http://www.symfony-project.org/reference/1_4/en/10-Routing
