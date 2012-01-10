@@ -72,7 +72,7 @@ class configuratorActions extends sfActions
   	if($lService) {
   		$lHeight = ($lSocial == 1)?"60": "24";
 
-	  	$lReturn['iframe'] = $this->getPartial('configurator/widget_'.$lService, array('pUrl' => $lUrl, 'pSocial' => $lSocial, 'pHeight' => $lHeight));
+	  	$lReturn['iframe'] = $this->getPartial('configurator/widget_'.$lService, array('pUrl' => $lUrl, 'pSocial' => $lSocial, 'pHeight' => $lHeight, 'pColor' => $lColor, 'pLabel' => $lLabel));
   	} else {
 
   		if($lSocial == 0) {
