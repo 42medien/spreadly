@@ -66,7 +66,7 @@ class WidgetUtils {
   }
 
   public function getPopupUrl() {
-    return LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time()."&title=".urlencode($this->aTitle)."&description=".urlencode($this->aDescription)."&photo=".urlencode($this->aPhoto)."&tags=".urlencode($this->aTags)."&url=".urlencode($this->aUrl)."&clickback=".urlencode($this->extractClickback()."&color=".urlencode($this->aHexColor));
+    return LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time()."&title=".urlencode($this->aTitle)."&description=".urlencode($this->aDescription)."&photo=".urlencode($this->aPhoto)."&tags=".urlencode($this->aTags)."&url=".urlencode($this->aUrl)."&clickback=".urlencode($this->extractClickback())."&color=".urlencode($this->aHexColor);
   }
 
   public function showFriends() {
