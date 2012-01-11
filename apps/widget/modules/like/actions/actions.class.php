@@ -14,7 +14,7 @@ class likeActions extends sfActions {
 
     $request = $context->getRequest();
     if ($color = $request->getParameter("color")) {
-      $context->getUser()->setAttribute("popup_color", $color, "user_session");
+      $context->getUser()->setAttribute("popup_color", $color, "persistent");
     }
   }
 

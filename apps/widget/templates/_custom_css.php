@@ -1,6 +1,6 @@
 <?php
 use_helper('Color');
-$hls = rgb2hsl($sf_user->getAttribute("popup_color", "973765", "user_session"));
+$hls = rgb2hsl($sf_user->getAttribute("popup_color", "973765", "persistent"));
 ?>
 
 <style type="text/css">
