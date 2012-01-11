@@ -494,3 +494,33 @@ a.send.B:before{
   background: #000;
 }
 
+#like-oi-list li ul.services {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  width: 200px;
+  background-color: #fff;
+  padding: 5px 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  text-decoration: none;
+  text-transform: none;
+  height: 70px;
+
+  clear: both;
+  text-align: left;
+}
+
+#like-oi-list li:hover ul.services {
+  display:block;
+  clear: both;
+}
+
+#like-oi-list li:hover ul.services li {
+  display: block;
+  clear: both;
+  width: 200px;
+  padding: 3px 0;
+}
