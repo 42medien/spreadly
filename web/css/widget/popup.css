@@ -178,15 +178,10 @@ textarea::-webkit-scrollbar-thumb:hover {
 /********************like-content: form-fields***********************/
 #popup-like-form div#comment-area textarea#area-like-comment{
   width: 98%;
-  padding: 1%;
+  padding: 3px;
   height: 70px;
   line-height: 1.4;
   margin: 0 0 1ex;
-
-}
-
-#popup-like-form div#comment-area textarea#area-like-comment:focus{
-
 
 }
 
