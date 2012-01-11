@@ -498,19 +498,15 @@ a.send.B:before{
   display: none;
   position: absolute;
   z-index: 100;
-  width: 200px;
+  width: auto;
   background-color: #fff;
   padding: 5px 15px;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  border-radius: 3px;
   border: 1px solid #ccc;
   text-decoration: none;
   text-transform: none;
-  height: 70px;
-
-  clear: both;
+  height: auto;
   text-align: left;
+  white-space: nowrap;
 }
 
 #like-oi-list li:hover ul.services {
@@ -521,6 +517,6 @@ a.send.B:before{
 #like-oi-list li:hover ul.services li {
   display: block;
   clear: both;
-  width: 200px;
+  width: auto;
   padding: 3px 0;
 }
