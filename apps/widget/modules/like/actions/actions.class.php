@@ -9,6 +9,15 @@
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
 class likeActions extends sfActions {
+  public function initialize($context, $moduleName, $actionName) {
+    parent::initialize($context, $moduleName, $actionName);
+
+    $request = $context->getRequest();
+    if ($color = $request->getParameter("color")) {
+      $context->getUser()->setAttribute("popup_color", $color, "user_session");
+    }
+  }
+
   /**
    * Executes index action
    *
