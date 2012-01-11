@@ -3,11 +3,9 @@ use_helper('Avatar', 'Text');
 ?>
 
 <header>
-  <h2><?php echo $deal->getMotivationTitle(); ?></h2>
-  <p id="motivation">
-    <span id="deal-marker">Your deal</span>
-    <?php echo $deal->getMotivationText(); ?>
-  </p>
+	<h1 class="success"><?php echo __('Vielen Dank!'); ?></h1>
+	<span id="deal-marker"><?php echo __('Hol dir hier deinen Deal!'); ?></span>
+	<h2><?php echo $deal->getMotivationTitle(); ?><span id="motivation"><?php echo $deal->getMotivationText(); ?></span></h2>
 </header>
 
 <!-- weisser Content -->
