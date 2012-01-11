@@ -23,13 +23,11 @@
   </head>
   <body id="app-widget">
     <div class="popupblock">
-    	<div id="modalblock">
       <div id="content-outer" role="main">
         <?php echo $sf_content; ?>
         <footer>
 					<?php include_partial('global/footer'); ?>
         </footer>
-      </div>
       </div>
     </div>
 
