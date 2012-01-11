@@ -16,6 +16,7 @@ class WidgetUtils {
   private $aYiidActivity = null;
   private $aShowFriends = false;
   private $aCounter = true;
+  private $aHexColor = "973765";
   private $aColor = null;
   private $aLabel = "Like";
   private $aType = "default";
@@ -49,9 +50,9 @@ class WidgetUtils {
     }
 
     if (isset($_GET['color']) && !empty($_GET['color'])) {
-      $color = $_GET['color'];
+      $color = $this->aHexColor = $_GET['color'];
     } else {
-      $color = "973765";
+      $color = $this->aHexColor = $this->aHexColor;
     }
 
     $this->aTitle = urldecode(@$_GET['title']);
@@ -65,7 +66,7 @@ class WidgetUtils {
   }
 
   public function getPopupUrl() {
-    return LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time()."&title=".urlencode($this->aTitle)."&description=".urlencode($this->aDescription)."&photo=".urlencode($this->aPhoto)."&tags=".urlencode($this->aTags)."&url=".urlencode($this->aUrl)."&clickback=".urlencode($this->extractClickback());
+    return LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time()."&title=".urlencode($this->aTitle)."&description=".urlencode($this->aDescription)."&photo=".urlencode($this->aPhoto)."&tags=".urlencode($this->aTags)."&url=".urlencode($this->aUrl)."&clickback=".urlencode($this->extractClickback()."&color=".urlencode($this->aHexColor));
   }
 
   public function showFriends() {
