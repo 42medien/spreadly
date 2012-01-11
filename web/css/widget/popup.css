@@ -61,6 +61,7 @@ input:focus, textarea:focus {
 /********************popup-content***********************/
 
 #content-outer{
+	width: 480px;
   position: absolute;
   border-radius: 7px;
   -moz-border-radius: 7px;
