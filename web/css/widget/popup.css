@@ -51,7 +51,10 @@ input:focus, textarea:focus {
 /**************************popup***********************/
 
 .popupblock{
+	margin: 0 auto;
   position: relative;
+  text-align: center;
+  width: 480px;
 }
 
 
@@ -59,7 +62,6 @@ input:focus, textarea:focus {
 
 #content-outer{
   position: absolute;
-  width: 480px;
   border-radius: 7px;
   -moz-border-radius: 7px;
   -webkit-border-radius: 7px;
