@@ -179,25 +179,15 @@ textarea::-webkit-scrollbar-thumb:hover {
 #popup-like-form div#comment-area textarea#area-like-comment{
   width: 98%;
   padding: 1%;
-  max-height: 2.5em;
-  overflow-y: scroll;
+  height: 70px;
   line-height: 1.4;
   margin: 0 0 1ex;
-  -webkit-transition: max-height .6s ease-out;
-  -moz-transition: max-height .6s ease-out;
-  -ms-transition: max-height .6s ease-out;
-  -o-transition: max-height .6s ease-out;
-  transition: max-height .6s ease-out;
+
 }
 
 #popup-like-form div#comment-area textarea#area-like-comment:focus{
-  max-height: 6.9em;
-  overflow-y: scroll;
-  -webkit-transition: max-height .6s ease-in;
-  -moz-transition: max-height .6s ease-in;
-  -ms-transition: max-height .6s ease-in;
-  -o-transition: max-height .6s ease-in;
-  transition: max-height .6s ease-in;
+
+
 }
 
 #popup-like-form div#comment-area label{
