@@ -12,6 +12,6 @@
     <input type="url" name="url" placeholder="http://example.com/" required="required" class="share-url" value="<?php echo $url ?>" />
     <div class="error"><?php echo $error ?></div>
 
-    <a class="send B share-button" onclick="document.forms['share-form'].submit();return false;" href="#"><?php echo __("Share this page"); ?></a>
+    <a class="send B share-button" id="logoutbutton" onclick="document.forms['share-form'].submit();return false;" href="#"><?php echo __("Share this page"); ?></a>
   </form>
 </div>

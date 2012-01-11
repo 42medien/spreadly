@@ -42,7 +42,7 @@ if ($lImages && count($lImages) > 0) {
         <p>
           <?php echo truncate_text($pYiidMeta->getDescription(), 150); ?>
         </p>
-        <p title="<?php echo $pYiidMeta->getUrl(); ?>">
+        <p id="meta-like-url" title="<?php echo $pYiidMeta->getUrl(); ?>">
           <?php echo truncate_text($pYiidMeta->getUrl(), 50); ?>
         </p>
       </div>

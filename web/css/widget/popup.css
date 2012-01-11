@@ -9,10 +9,6 @@ body{ /*debugging*/
   font-family: Corbel, 'Trebuchet MS', Arial, sans-serif;
   font-size: 12px;
 }
-body {
-  -moz-user-select:none;
-  -webkit-user-select:none;
-}
 
 ul, li{ list-style:none;}
 
@@ -100,7 +96,7 @@ input:focus, textarea:focus {
   border-radius: 7px 7px 0 0;
   -moz-border-radius: 7px 7px 0 0;
   -webkit-border-radius: 7px 7px 0 0;
-  border-bottom: 1px dotted hsla(195,42%,50%,1);
+    border-bottom: 1px dotted hsla(195,42%,50%,1);
 }
 
 #content-inner{
@@ -351,14 +347,14 @@ p.sharedurl a {
 }
 
 .slide-back-link {
-    background: url("../img/round_arrow_left.png") no-repeat scroll 0 0 transparent;
+    background: url("/img/round_arrow_left.png") no-repeat scroll 0 0 transparent;
     cursor: pointer;
     height: 16px;
     width: 16px;
 }
 
 .slide-next-link {
-    background: url("../img/round_arrow_right.png") no-repeat scroll 0 0 transparent;
+    background: url("/img/round_arrow_right.png") no-repeat scroll 0 0 transparent;
     cursor: pointer;
     height: 16px;
     width: 16px;
@@ -493,6 +489,16 @@ a.send.B:before{
   color: #fff;
   background: #000;
 }
+
+.share-url{
+    height: 23px;
+    padding: 3px;
+    width: 447px; 
+    margin-top: 10px;
+}
+
+#like-content h4{font-weight: bold;}
+#meta-like-url{font-size: 11px; margin-top: 5px;}
 
 #like-oi-list li ul.services {
   display: none;
