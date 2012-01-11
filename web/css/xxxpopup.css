@@ -1,0 +1,587 @@
+@charset "utf-8";
+
+*{margin: 0;  padding: 0; font-family:Arial, Helvetica, sans-serif;}
+
+body{
+	font-size: 12px;
+	color: #393D3B;
+  margin: 0;
+  padding: 0;
+  background:url(/img/pop-upbg.jpg) center top no-repeat;
+}
+
+ul, li{ list-style:none;}
+
+.clearfix:after {  content: "."; display:block; height:0; clear:both; visibility:hidden; }/* ----- clear fix for floats ----- */
+.clearfix { display:inline-block; }
+* html .clearfix { height:1%; }/* hides clearfix from IE-mac */
+.clearfix { display:block; }/* end hide from IE-mac */
+
+
+/* Removing border on linked images */
+a img {border: 0;}
+:focus{ outline:0px;}
+
+#general-ajax-loader{z-index: 1000000; position: absolute; display:none;}
+
+/* class for float  */
+.alignleft { float:left; }
+.alignright { float:right; }
+
+.textright{text-align: right;}
+.textcenter{text-align: center;}
+
+/*
+h1 { font-weight:normal;}
+h2 { font-size: 18px; }
+h3 { font-size: 14px;}
+h4 { font-size: 12px; }
+*/
+
+h2 { font-size: 1.5em; }
+h3 { font-size: 1.2em; }
+h4 { font-size: 1.0em; }
+
+
+.middle-text{ font-size: 13px; }
+.small-text, label{ font-size: 10px; }
+.error{color:red;}
+.success{color:green;}
+.add-info{font-size: 10px; color: #666;}
+
+/* End General
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Links
+--------------------------------------------------------------------------------------------------------*/
+a { text-decoration:none; color: #393D3B; }
+a:hover { text-decoration:underline;  }
+
+/* End Links
+--------------------------------------------------------------------------------------------------------*/
+
+/********************form-fields***********************/
+
+input, textarea {
+  padding: 10px;
+  outline: 0;
+  color: #393D3B;
+  font-size: 11px;
+}
+
+textarea:hover, textarea:focus {
+  border-color: #C9C9C9;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
+}
+
+/**************************popup***********************/
+
+.popupblock{
+  width:500px;
+  height:435px;
+  margin:0 auto;
+  position:relative;
+  padding: 20px 20px 0 20px;
+}
+
+.padding-box{
+  padding: 10px;
+}
+
+.shadow-wide{
+  box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+  -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+  -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+}
+
+.shadow-light{
+  box-shadow: rgba(187,187,187, 0.5) 0 1px 2px;
+  -moz-box-shadow: rgba(187,187,187, 0.5) 0 1px 2px;
+  -webkit-box-shadow: rgba(187,187,187, 0.5) 0 1px 2px;
+}
+
+.bordered{
+  border: 1px solid #E5E5E5;
+	border-radius: 2px 2px 2px 2px;
+}
+
+.bordered-light{
+  border: 1px solid #f1f1f1;
+  border-radius: 2px 2px 2px 2px;
+}
+
+.gradient{
+  background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
+  background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
+}
+
+/********************popup-header***********************/
+
+nav{
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  background-color: rgb(23,28,26);
+  background-color: rgba(23,28,26,0.6);
+}
+
+nav .nav-list li{
+  float: left;
+  line-height: 30px;
+  padding: 0 0 0 5px;
+  position: relative;
+  font-size: 13px;
+}
+
+nav .nav-list li a,
+nav .nav-list li span{
+ color: rgb(255,255,255);
+ color: rgba(255,255,255,1);
+ border-right: 1px solid #fff;
+ padding-right: 5px;
+}
+
+nav .nav-list li.active a{
+  text-decoration: underline;
+}
+
+nav .nav-list li:last-child a,
+nav .nav-list li#nav-next-to-last a{
+  border-right: 0;
+}
+
+nav .nav-list li#nav-spread{
+  padding-left: 70px;
+}
+
+nav .nav-list li#nav-spread a{
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  background-color: rgb(255,255,255);
+  background-color: rgba(255,255,255,1);
+  color: rgba(23,28,26,0.8);
+  padding: 3px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+nav .nav-list li#nav-spread a:hover{
+  text-decoration:none;
+  background-color: #e4e4e4;
+}
+
+/********************popup-content***********************/
+
+#content-outer{
+  margin-top: 5px;
+  padding: 5px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  background-color: rgb(23,28,26);
+  background-color: rgba(23,28,26,0.6);
+}
+
+#content-outer header{
+ color: rgb(255,255,255);
+ color: rgba(255,255,255,1);
+ padding-bottom: 5px;
+}
+
+#content-outer header h2 span,
+#content-outer header .additional-info{
+  font-size: 11px;
+}
+
+
+#content-inner{
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 1);
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  background-clip: padding-box;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+
+
+
+/********************footer***********************/
+footer{
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 6px;
+  background-color: rgb(23,28,26);
+  background-color: rgba(23,28,26,0.6);
+  text-align: center;
+  margin-top: 5px;
+}
+
+footer ul{
+	width: 200px;
+  margin: 0 auto;
+}
+
+footer ul li{
+  color: #FFFFFF;
+  float: left;
+  font-size: 11px;
+  line-height: 30px;
+  padding: 0 0 0 5px;
+  position: relative;
+}
+
+footer ul li a {
+ color: rgb(255,255,255);
+ color: rgba(255,255,255,1);
+ border-right: 1px solid #fff;
+ padding-right: 5px;
+}
+
+footer ul li.active a{
+  text-decoration: underline;
+}
+
+footer ul li:last-child a {
+  border-right: 0;
+}
+
+
+/********************like-content: form-fields***********************/
+
+#popup-like-form div{
+  padding-top: 10px;
+}
+
+#popup-like-form div > div{
+  padding:0px;
+}
+
+#popup-like-form div#comment-area,
+#man-url-input-area	{
+  padding: 0 0 10px 0;
+  width: 100%;
+}
+
+#popup-like-form div#comment-area textarea#area-like-comment{
+  width: 95%;
+  height: 45px;
+  font-size: 14px;
+}
+
+#popup-like-form div#comment-area label{
+  padding: 3px 0 0 0;
+}
+
+#popup-like-form div#comment-area .success{
+  font-size: 13px;
+  font-weight: bold;
+}
+
+#popup-like-form div#comment-area a#close-popup-link {
+  padding-left: 10px;
+}
+
+/********************like-content: no-url***********************/
+#nourl-label{
+  margin-bottom: 20px;
+}
+
+/********************like-content: scroll images***********************/
+
+.area-like-comment-mirror{
+   font-size: 11px;
+    line-height: 12px;
+    min-height: 12px;
+    overflow: hidden;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+#like-select-img{
+  position: relative;
+}
+
+.scrollable {
+    overflow: hidden;
+    position: relative;
+    width: 80px;
+    height: 60px;
+    background: none repeat scroll 0 0 #FFFFFF;
+    /*
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 1px 2px #BBBBBB;
+    */
+    padding: 0;
+}
+
+.scrollable .items {
+    position: absolute;
+    width: 20000em;
+}
+
+.scrollable .items div {
+    float: left;
+}
+
+
+.gallery-control {
+    left: 2px;
+    position: absolute;
+    top: 26px;
+    width: 77px;
+}
+
+.slide-back-link {
+    background: url("/img/popup/round_arrow_left.png") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    height: 16px;
+    width: 16px;
+}
+
+.slide-next-link {
+    background: url("/img/popup/round_arrow_right.png") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    height: 16px;
+    width: 16px;
+}
+
+#like-content{
+  width: 78%;
+  margin-left: 10px;
+}
+
+#like-content p{
+  font-size: 11px;
+  line-height: 12px;
+  padding-bottom: 5px;
+}
+
+
+/**********************************************/
+div#like-submit{
+  padding-top: 5px;
+}
+
+div#like-submit #like-response{
+  height:15px;
+}
+
+div#like-submit #like-oi-list{
+  padding-top: 8px;
+}
+
+div#like-submit #like-oi-list li {
+  padding-right: 10px;
+  float:left;
+  line-height: 15px;
+}
+
+div#like-submit #like-oi-list li img{
+  margin-left: 5px;
+  vertical-align: bottom;
+}
+
+div#like-submit #like-oi-list li a{
+  font-size: 10px;
+}
+
+#popup-send-like-button, #popup-send-deal-button{
+  width: 60px;
+  margin: 6px 0px 0px 0px;
+  padding: 0;
+  border: 0;
+  height: 22px;
+  background: transparent url('/img/sprites/spreadly_button_sprite.png') no-repeat scroll 0 0;
+  text-indent: -1000em;
+  cursor: pointer; /* hand-shaped cursor */
+  cursor: hand; /* for IE 5.x */
+}
+
+#popup-send-like-button:hover, #popup-send-deal-button:hover {
+  background-position: 0 -100px;
+}
+
+#popup-send-like-button.disabled, #popup-send-deal-button.disabled {
+  cursor: default;
+  background-position: 0 -200px;
+}
+
+.btn {
+	padding-top: 6px;
+}
+
+/*******************coupon unused*******************/
+
+.coupon{
+  padding: 10px;
+}
+
+.coupon h3{
+  line-height: 24px;
+}
+
+.coupon p{
+  margin-bottom:10px;
+}
+
+
+.coupon .deal-coupon-img {
+    height: 65px;
+    margin-right: 10px;
+    width: 65px;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 1px 2px #BBBBBB;
+    padding: 0;
+}
+
+#tos-area{
+  margin-top: 5px;
+  padding-bottom: 10px;
+}
+#tos-area label{
+  display: block;
+  width: 96%;
+  text-align: right;
+}
+
+#tos-area input{
+  margin-left: 3px;
+}
+
+#tos-area a{
+  text-decoration: underline;
+}
+
+#coupon-text{
+  width: 83%;
+}
+
+.coupon-code{
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.coupon-code a{
+  font-size: 12px;
+}
+
+
+/*****************like-list************************/
+
+.commentlist dd{
+  width:443px;
+  margin-bottom:12px;
+  background: none repeat scroll 0 0 #FFFFFF;
+}
+.commentbox{ padding: 10px 10px 10px 10px; font-size:11px;}
+.commentbox p {font-size: 12px;}
+.commentbox p a{ color:#375d81; font-size: 11px;}
+.commentlist dl { overflow: scroll; overflow-y: auto; overflow-x: hidden; height: 200px; }
+
+/****************deal-list**************************/
+#deallist { overflow: scroll; overflow-y: auto; overflow-x: hidden; height: 200px;  width: 472px;}
+
+#deallist .coupon{
+    background: none repeat scroll 0 0 #FFFFFF;
+    margin-bottom: 12px;
+    width: 425px;
+    position: relative;
+    padding: 10px;
+}
+
+#deallist .coupon #coupon-text{
+  width: 81%;
+}
+
+#deallist .coupon #coupon-text a{
+  text-decoration: underline;
+}
+
+/***********************settings**************************/
+
+#profile-info{
+  padding: 10px;
+}
+
+#profile-info #profile-img{
+  margin-right: 10px;
+}
+
+.totalfriend{ background:url(../img/friends-bg.png) left top no-repeat; width:57px; height:43px; color:#555555; padding-top:7px; margin-top:-1px; }
+.totalfriend span{ font-size:14px; font-weight:bold; text-shadow:#ffffff 1px 1px 0px;}
+.friends-box{ width:57px; font-size:11px; text-align:center; padding-left:3px; margin-top:-1px;}
+
+#update-networks-box{
+  margin-top: 10px;
+}
+
+.network-name{
+  margin-left: 5px;
+}
+
+#update-settings-list{
+  margin-top: 10px;
+}
+
+#update-settings-list li{
+  padding-bottom: 5px;
+}
+
+.update-settings-cb{
+  margin: 1px 5px 0px 0px;
+}
+
+.show-profile-link{
+  line-height:18px;
+}
+
+
+#add-accounts-box{
+  height: 20px;
+}
+
+/********************sign-up**********************/
+
+#signin-head .signin-title {
+    color: #000000;
+    font-size: 21px;
+    font-weight: normal;
+    padding-left: 4px;
+    padding-top: 20px;
+}
+
+#signin-head .signin-title em {
+    font-size: 12px;
+    font-style: normal;
+}
+
+ul#logos_big {margin: 95px 0 40px; text-align: center;}
+#logos_big li{text-align:center; display: inline;  margin-right: 30px;}
+
+#logos_big li#twitter_area{margin-right: 20px;}
+#logos_big li#linkedin_area{margin-right: 20px;}
+
+
+#logos_big li a{padding-top: 60px;}
+#buzz_logo{padding-left:14px;padding-right:14px;}
+#facebook_logo{padding-left:1px;padding-right:1px;}
+#twitter_logo{padding-left:8px;padding-right:9px;}
+#linkedin_logo{padding-left:8px;padding-right:8px;}
+
+#google_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 9px -571px;}
+#facebook_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 5px -782px;}
+#twitter_logo{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -1001px;}
+#further_logos{background: url("/img/sprites/sprite_popup.png") no-repeat 0 -1269px;}
+#linkedin_logo{background: url("/img/sprites/sprite_popup.png") no-repeat -450px -1194px;}
+
+/********************no-url**********************/
+#man-url-input {
+	width: 95%;
+
+}

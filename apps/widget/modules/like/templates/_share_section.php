@@ -6,7 +6,6 @@
         <?php if (!$sf_user->isAuthenticated() ) { ?>
           <h4><?php echo __('Please choose your favorite service for sharing.'); ?><br/><?php echo __('You can add additional services anytime later.'); ?></h4>
         <?php } ?>
-        <a class="send B" id="popup-like-button" href="#"><?php echo __('Continue and Share'); ?></a>
         <?php if ($sf_user->isAuthenticated() ) { ?>
         <ul class="clearfix" id="like-oi-list">
           <?php foreach($pIdentities as $lIdentity) {?>
@@ -40,3 +39,4 @@
           </li>
         </ul>
         <?php } ?>
+        <a class="send B" id="popup-like-button" href="#"><?php echo __('Continue and Share'); ?></a>

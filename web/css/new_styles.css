@@ -1529,7 +1529,7 @@ a.graybtn:hover { text-decoration:none; color:#EB2374;}
 .stylechoose_box .radiobtn_list span {margin-bottom:30px;}
 .stylechoose_box .radiobtn_list label {display:none;}
 
-.stylechoose_box .status_list {width:120px; padding-bottom:12px;}
+.stylechoose_box .status_list {width:260px; padding-bottom:12px;}
 .stylechoose_box .status_list li {padding-bottom:10px;}
 .stylechoose_box .status_list li.last {padding-bottom:0px;}
 .stylechoose_box .status_list .likeimg {padding:6px 0px 0px 3px;}
