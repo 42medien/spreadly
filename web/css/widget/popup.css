@@ -512,3 +512,7 @@ a.send.B:before{
   width: auto;
   padding: 3px 0;
 }
+
+#like-oi-list a {
+  color: hsl(331,42%,50%);
+}

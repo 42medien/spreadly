@@ -52,6 +52,10 @@ $hls = rgb2hsl($sf_user->getAttribute("popup_color", "973765", "user_session"));
     background: hsla(<?php echo $hls[0]; ?>,<?php echo $hls[2] ?>%,50%,.3);
   }
 
+  #like-oi-list a {
+    color: hsl(<?php echo $hls[0]; ?>,<?php echo $hls[2] ?>%,50%);
+  }
+
   .B {
     color: hsl(<?php echo $hls[0]; ?>,<?php echo $hls[2] ?>%,50%);  /* #B44A7A */
     border: 1px solid hsl(<?php echo $hls[0]; ?>,<?php echo $hls[2] ?>%,73%);
