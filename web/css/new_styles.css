@@ -629,7 +629,7 @@ html, body { min-height:100%; height:100%;}
 
 .content-btnpage {padding:50px 0px 16px;}
 .content-btnpage .container_12 {width:940px; overflow: hidden;}
-.content-btnpage h2 {font-size:20px; color:#7195ab; margin-bottom:18px;}
+.content-btnpage h2 {font-size:20px; color:#7195ab; margin-bottom:18p22x;}
 
 .tabcontainer {width:740px;}
 .tabcontainer h3 {font-size:15px; color:#252525;}
@@ -729,7 +729,7 @@ h3.steptitle .nu {background:#a04a74; behavior: url(css/PIE.htc); margin-right:6
 .stepprolist li .btnform-input {margin-bottom:3px; display:inline-block;}
 .stepprolist li .btnform-input input {width:360px;}
 .stepprolist li .commentbox {width:352px;}
-.stepprolist li .note {font-size:11px; color:#272727; display:block; padding-left:8px;}
+.stepprolist li .note {font-size:11px; color:#272727; display:block; 22padding-left:8px;}
 
 .steplistwide {padding-bottom:10px; font-size:12px;}
 .steplistwide p {width:216px; line-height:15px;}
@@ -770,7 +770,7 @@ h3.steptitle .nu {background:#a04a74; behavior: url(css/PIE.htc); margin-right:6
 --------------------------------------------------------------------------------------------------------*/
 
 .charleft {position:absolute; left:0px; bottom:-20px; width:300px;}
-
+22
 .radio-label {float:left; background:url(/img/statistics/checkbox-bg.jpg) no-repeat 0px 0px; height:16px; line-height:16px; vertical-align:top; padding-left:21px;  left:-1px; top:1px; margin-right:4px;}
 .radio-label input {display:none;}
 
@@ -820,7 +820,7 @@ background: -webkit-linear-gradient(#f4f4f4, #ffffff);
 background: -moz-linear-gradient(#f4f4f4, #ffffff);
 background: -ms-linear-gradient(#f4f4f4, #ffffff);
 background: -o-linear-gradient(#f4f4f4, #ffffff);
-background: linear-gradient(#f4f4f4, #ffffff);
+background: linear-gradient(#f4f4f4, #ffffff);22
 -pie-background: linear-gradient(#f4f4f4, #ffffff);
 behavior: url(css/PIE.htc);
 }
@@ -871,7 +871,7 @@ behavior: url(css/PIE.htc);
  border: none;
 }
 
-
+22
 #deal_form ul.radio_list li input {
     float: left;
     margin:0;
@@ -911,7 +911,7 @@ behavior: url(css/PIE.htc);
 
 
 
-
+22
 
 
 
@@ -1188,7 +1188,7 @@ div.data-tablebox table#top-influencer-table td.first div.infname img {
 }
 
 
-/***breadcrumb***/
+/***breadcrumb***/22
 .bc-list li{float:left; height: 24px; line-height: 24px;}
 .bc-first{ background: url("/img/breadcrumb_left.png") no-repeat scroll left center transparent; width: 12px;}
 .bc-gradient{  background: url("/img/breadcrumb_gradient.png") repeat-x scroll left center transparent; width: auto; padding: 0 5px;}
@@ -1439,7 +1439,7 @@ a.button span, button.button span {
 
 .comment_label {background:url(../img/comment-label.png) no-repeat 0px 0px; text-align:center; color:#782a4f; width:37px; height:22px; line-height:22px; display:block; float:left; padding-left:3px; font-size:10px;}
 
-.grabcode_box {width:250px; padding:8px 0px 0px 23px;}
+.grabcode_box {width:250px; min-height: 250px; padding:8px 0px 0px 23px;}
 .grabcode_box .sub_title {padding:0px 0px 0px 0px; margin-bottom:15px;}
 .grabcode_box .codebox {padding-left:0px; width:auto; }
 .grabcode_box .textareablock {background:url(../img/code-bg.png) no-repeat 0px 0px; width:240px; padding:8px 12px 8px;}
@@ -1510,7 +1510,7 @@ a.button span, button.button span {
 a.graybtn{background:url(../img/copycode-bg.png) 0px -36px no-repeat; display:inline-block; padding-left:15px; }
 a.graybtn span{  background:url(../img/copycode-bg.png) right 0px no-repeat;  padding:4px 15px 6px 0px; height:27px;  cursor:pointer; line-height:26px; display:inline-block;}
 a.graybtn:hover { text-decoration:none; color:#EB2374;}
-.optionltext{ display:inline-block; line-height:34px; padding-left:2px;}
+.optionltext{ display:inline-block; line-height:18px; padding-left:2px;}
 
 
 
