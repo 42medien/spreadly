@@ -2,10 +2,8 @@
 use_helper('Avatar', 'Text');
 ?>
 <header>
-  <h2><?php echo __("Thanks for sharing!"); ?></h2>
-  <p id="motivation">
-    <span id="deal-marker"><?php echo __("Your deal"); ?></span>
-  </p>
+  <h1 class="success"><?php echo __("Thanks for sharing!"); ?></h1>
+ <span id="deal-marker"><?php echo __("Your deal"); ?></span>
 </header>
 
 <!-- weisser Content -->
