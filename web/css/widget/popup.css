@@ -100,7 +100,7 @@ input:focus, textarea:focus {
   border-radius: 7px 7px 0 0;
   -moz-border-radius: 7px 7px 0 0;
   -webkit-border-radius: 7px 7px 0 0;
-    border-bottom: 1px dotted hsla(195,42%,50%,1);
+  border-bottom: 1px dotted hsla(195,42%,50%,1);
 }
 
 #content-inner{
