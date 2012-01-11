@@ -181,9 +181,9 @@ ul#mainNavigation li .submenu .listline dd.last a {border:none; padding-bottom:1
 
 .icon-grid{ padding-top:34px;}
 .icon-grid .icon1{ background:url(/img/statistics/icon1.gif) no-repeat 8px 0px; padding-bottom:57px;}
-.icon-grid .icon1 p{ line-height:22px;}
+.icon-grid .icon1 p{ line-height:18px;}
 .icon-grid .icon2{ background:url(/img/statistics/icon2.gif) no-repeat 9px 0px; margin-left:9px; display:inline; padding-bottom:57px;}
-.icon-grid .icon2 p{ line-height:22px;}
+.icon-grid .icon2 p{ line-height:18px;}
 .icon-grid .icon3{ background:url(/img/statistics/icon3.gif) no-repeat 8px 0px; padding-bottom:34px;}
 .icon-grid .icon3 span{ margin-bottom:4px;}
 .icon-grid .icon4{ background:url(/img/statistics/icon4.gif) no-repeat 9px 0px;margin-left:9px; display:inline; padding-bottom:34px;}
