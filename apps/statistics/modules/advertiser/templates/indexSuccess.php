@@ -7,23 +7,23 @@
 						<li>
 							<span class="icon"><img src="/img/statistics/get-btn-icon.png" alt="" title=""></span>
 							<h3><?php echo __('Das Spreadly Ad-Network'); ?></h3>
-							<h4><?php echo __('Vorteil vielfacher Reichweite'); ?></h4>
-							<p><?php echo __('Besucher teilen ihre Kommentare zu Inhalten und Produkten per Klick auf den Spreadly-Button in verschiedene Social Media-Netzwerke. Kontakte der Besucher können mit Kommentaren und Klicks reagieren. Werbende Empfehlungen haben ebenfalls die große Reichweite.'); ?></p>
+							<h4><?php echo __('Ein Klick große Reichweite'); ?></h4>
+							<p><?php echo __('Ihre Kampagne erreicht mit einem Klick Kontakte in den Netzwerken Facebook, Twitter, LinkedIn und Google+ Nach dem Empfehlen eines Inhalts erscheint Ihre Kampagne als "Dankeschön" und wird viral verbreitet.'); ?></p>
 							<span class="link"><a href="<?php echo url_for('deals/campaign'); ?>"><?php echo __('Neue Kampagne starten &raquo;'); ?></a></span>
 						</li>
 						<li>
-							<span class="icon"><img src="/img/statistics/domain-icon.png" alt="" title=""></span>
-							<h3><?php echo __('Spreadly Deal API'); ?></h3>
-							<h4><?php echo __('Vorteile für Seitenbetreiber'); ?></h4>
-							<p><?php echo __('Wie bieten zahlreiche APIs für Deinen speziellen Fall. Ob der Import vieler Kampagnen oder das Auslösen bestimmter Aktionen bei jedem Klick, für alle Bedürfnisse haben die passende Lösung'); ?></p>
-							<span class="link"><a href="<?php echo url_for('@dealapi'); ?>"><?php echo __('Für unsere API registrieren &raquo;'); ?></a></span>
+							<span class="icon"><img src="/img/statistics/get-analytics.png" alt="" title=""></span>
+							<h3><?php echo __('Kampagnen-Modelle'); ?></h3>
+							<h4><?php echo __('Schluss mit wirkungslosen TKP-Kampagnen'); ?></h4>
+							<p><?php echo __('Profitieren Sie von den transparenten und fairen Kampagnenmodellen. Buchen Sie Reichweiten- oder Sharepakete. In Echtzeit können Sie den Erfolg und die Verbreitung Ihrer Kampagne im Spreadly-Backend verfolgen.'); ?></p>
+							<span class="link"><a href="<?php echo url_for('@deal_analytics_index'); ?>"><?php echo __('Zu den Statistiken &raquo;'); ?></a></span>
 						</li>
 						<li class="last">
-							<span class="icon"><img src="/img/statistics/get-analytics.png" alt="" title=""></span>
-							<h3><?php echo __('Social Media Statistiken'); ?></h3>
-							<h4><?php echo __('Vorteile für Werbetreibende'); ?></h4>
-							<p><?php echo __('Mit Spreadly erfährst Du alles was in Sachen Empfehlungsmarketing wichtig ist. Wir zeigen Die wie, ob und dank wem Dein Empfehlungsmarketing funktioniert.'); ?></p>
-							<span class="link"><a href="<?php echo url_for('@deal_analytics_index'); ?>"><?php echo __('Zu den Statistiken &raquo;'); ?></a></span>
+							<span class="icon"><img src="/img/statistics/domain-icon.png" alt="" title=""></span>
+							<h3><?php echo __('Spreadly Deal API'); ?></h3>
+							<h4><?php echo __('Selbstbuchungstool oder automatisierter Prozess'); ?></h4>
+							<p><?php echo __('Wenn Sie nicht nur vereinzelte Kampagnen schalten möchten, sondern dauerhaft im Spreadly Ad-Network vertreten sein wollen, können Sie unsere DealAPI mit Ihren Kampagnen befüllen. Nehmen Sie hierzu einfach Kontakt mit uns auf.'); ?></p>
+							<span class="link"><a href="<?php echo url_for('@dealapi'); ?>"><?php echo __('Für unsere API registrieren &raquo;'); ?></a></span>
 						</li>
 					</ul>
 				</section>
