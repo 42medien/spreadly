@@ -100,11 +100,11 @@ var DealForm = {
     initCharCounter: function() {
       debug.log('[DealForm][initCharCounter]');      
       jQuery('#motivation_title').limitValue('255', '#motivation_title_counter');
-      jQuery('#motivation_text').limitValue('500', '#motivation_text_counter'); 
+      jQuery('#motivation_text').limitValue('255', '#motivation_text_counter'); 
       jQuery('#spread_title').limitValue('255', '#spread_title_counter');   
-      jQuery('#spread_text').limitValue('500', '#spread_text_counter');
+      jQuery('#spread_text').limitValue('255', '#spread_text_counter');
       jQuery('#coupon_title').limitValue('255', '#coupon_title_counter');
-      jQuery('#coupon_text').limitValue('500', '#coupon_text_counter');
+      jQuery('#coupon_text').limitValue('255', '#coupon_text_counter');
       jQuery('#coupon_code').limitValue('255', '#coupon_code_counter');      
       
     },
