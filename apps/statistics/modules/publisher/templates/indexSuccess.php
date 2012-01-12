@@ -14,9 +14,9 @@
 						</li>
 						<li>
 							<span class="icon"><img src="/img/statistics/domain-icon.png" alt="" title=""></span>
-							<h3><?php echo __('Domain registrieren'); ?></h3>
-							<h4><?php echo __('Earn money and use other exclusive'); ?></h4>
-							<p><?php echo __('Site operators receive analytic data to gain knowledge about the exact effect of their shared contents. They gain money because the advertisement appears in the Like-Popup window after sharing a content of the web site. Register your domain to get the analytics and earn money!'); ?></p>
+							<h3><?php echo __(' Claimen Sie Ihre Domain!'); ?></h3>
+							<h4><?php echo __('...um Erlöse zu erzielen.'); ?></h4>
+							<p><?php echo __('Wenn Sie Ihre Domain verifizieren, können Sie neben den umfangreichen Analysen auch noch eine Erlösquelle eröffnen. Weiterhin haben Sie die Möglichkeit, spezielle Kampagnen exklusiv für Ihre Domain zu schalten. Gerne helfen wir Ihnen beim claimen Ihrer Domain.'); ?></p>
 							<span class="link"><a href="<?php echo url_for('@domain_profiles'); ?>"><?php echo __('Zum Domain-Registrierungsprozess &raquo;'); ?></a></span>
 						</li>
 						<li class="last">
