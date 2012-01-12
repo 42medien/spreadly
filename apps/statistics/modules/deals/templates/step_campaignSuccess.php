@@ -70,7 +70,7 @@
 	Gestalten Sie Ihr Angebot so reizvoll wie m&ouml;glich, damit sich schnell der von Ihnen gew&uuml;nschte Erfolg einstellt. In den Statistiken k&ouml;nnen Sie jederzeit die Resonanz Ihrer Kampagne pr&uuml;fen.</p>
 								</div>
 							</div>
-							<span class="btnbarlist"><label class="pink-btn"><input type="submit"  id="create_deal_button" value="Next"></label></span>
+							<span class="btnbarlist"><label class="pink-btn"><input type="submit"  id="create_deal_button" value="<?php echo __('Weiter'); ?>"></label></span>
 						</div>
 					</div>
 		</section>

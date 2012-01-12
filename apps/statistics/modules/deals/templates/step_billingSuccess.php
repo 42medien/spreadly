@@ -59,7 +59,7 @@
 				<p><?php echo __('Bitte geben Sie hier Ihre Rechnungsadresse ein falls Sie von der uns vorliegenden Adresse abweicht.'); ?></p>
 			</div>
 		</div>
-		<span class="btnbarlist"><label class="pink-btn"><input type="submit" value="Next"></label></span>
+		<span class="btnbarlist"><label class="pink-btn"><input type="submit" value="<?php echo __('Weiter'); ?>"></label></span>
 	</div>
 </div>
 </form>
