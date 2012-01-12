@@ -7,16 +7,16 @@
 					<nav class="clearfix alignright grid_6">
 						<ul class="header-link clearfix alignright">
 							<li class="blog"><a href="http://blog.spreadly.com/" target="_blank" title="<?php echo __('Blog'); ?>"><?php echo __('Blog'); ?></a></li>
-							<li class="about"><a href="<?php echo url_for('@customer'); ?>" title="<?php echo __('About Us'); ?>"><?php echo __('About Us'); ?></a></li>
+							<li class="about"><a href="<?php echo url_for('@customer'); ?>" title="<?php echo __('Über uns'); ?>"><?php echo __('Über uns'); ?></a></li>
   						<?php if(!$sf_user->isAuthenticated()) {?>
-								<li class="sign"><a href="<?php echo url_for('@sf_guard_signin'); ?>" title="<?php echo __('Sign In'); ?>"><?php echo __('Sign In'); ?></a></li>
+								<li class="sign"><a href="<?php echo url_for('@sf_guard_signin'); ?>" title="<?php echo __('Login'); ?>"><?php echo __('Login'); ?></a></li>
   						<?php } else { ?>
 								<li class="sign"><a href="<?php echo url_for('@sf_guard_signout'); ?>" title="<?php echo __('Logout'); ?>"><?php echo __('Logout'); ?></a></li>
 							<?php } ?>
-							<li class="call"><?php echo __('Call Us: +49 6201 845 200'); ?></li>
+							<li class="call"><?php echo __('Telefon: +49 6201 845 200'); ?></li>
 						</ul>
 					</nav>
-					<nav class="clearfix  grid_9 alignright">
+					<nav class="clearfix  grid_10 alignright">
 						<ul id="mainNavigation" class="clearfix alignright">
 							<li><a href="<?php echo url_for('landing/index'); ?>" <?php if($module=='landing' && $action=='index') { echo 'class="active"';} ?> title="<?php echo __('Home'); ?>"><?php echo __('Home'); ?></a></li>
 							<li><a href="<?php echo url_for('@configurator'); ?>" <?php if(($module=='configurator' && $action=='index')) { echo 'class="active"';} ?> title="<?php echo __('Button');?>"><?php echo __('Buttons');?></a></li>
@@ -55,7 +55,7 @@
 					      </li>
 					    <?php } ?>
   						<?php if(!$sf_user->isAuthenticated()) {?>
-  							<li class="last"><a href="<?php echo url_for('@sf_guard_register'); ?>" title="Sign Up"><?php echo __('Sign Up'); ?></a></li>
+  							<li class="last"><a href="<?php echo url_for('@sf_guard_register'); ?>" title="Registrieren"><?php echo __('Registrieren'); ?></a></li>
   						<?php } ?>
 						</ul>
 					</nav>
