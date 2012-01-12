@@ -4,7 +4,7 @@
   <ul class="normal_list">
     <li>
       <h3>1. Allgemein</h3>
-      <p>Spread.ly ist ein Online-Dienst, der dir hilft, Inhalte aus dem Web an Deine Freunde in Deinen sozialen Netzwerke zu empfehlen. Der Spread.ly-Dienst und das Spread.ly-Netzwerk (zusammen „Spread.ly“ oder „der Dienst“) werden von der</p>
+      <p>Spreadly ist ein Online-Dienst, der dir hilft, Inhalte aus dem Web an Deine Freunde in Deinen sozialen Netzwerke zu empfehlen. Der Spreadly-Dienst und das Spreadly-Netzwerk (zusammen „Spreadly“ oder „der Dienst“) werden von der</p>
       <p>ekaabo GmbH<br/>
 		    Grundelbachstr. 84<br/>
 		    69469 Weinheim<br/>
@@ -15,8 +15,8 @@
 		    Eingetragen am Amtsgericht Mannheim unter HRB 701542
 		  </p>
 		  <p>
-		    und den zugehörigen Gesellschaften (zusammen „uns“, „wir“ oder „das Unternehmen“) betrieben. Durch den Zugriff auf oder die Nutzung unserer Webseite unter www.Spread.ly.com
-  		  oder durch das Posten einer Schaltfläche auf deiner Seite, erklärst du (der „Nutzer“), dass du unabhängig davon, ob du ein registriertes Mitglied von Spread.ly bist, diese
+		    und den zugehörigen Gesellschaften (zusammen „uns“, „wir“ oder „das Unternehmen“) betrieben. Durch den Zugriff auf oder die Nutzung unserer Webseite unter www.Spreadly.com
+  		  oder durch das Posten einer Schaltfläche auf deiner Seite, erklärst du (der „Nutzer“), dass du unabhängig davon, ob du ein registriertes Mitglied von Spreadly bist, diese
   		  Nutzungsbedingungen („Nutzungsbedingungen“ oder „Vereinbarung“) gelesen und verstanden hast und sie als verbindlich anerkennst. Wir behalten uns das Recht vor, nach eigenem
   		  Ermessen Teile dieser Nutzungsbedingungen jederzeit und ohne weitere Benachrichtigung zu ändern, zu ergänzen oder zu löschen. In einem solchen Fall werden wir die an diesen
   		  Nutzungsbedingungen vorgenommenen Änderungen auf dieser Seite veröffentlichen und oben auf der Seite das Datum der letzten Überarbeitung dieser Bedingungen vermerken. Wenn du
@@ -33,12 +33,12 @@
     <li>
       <h3>2. Registrierungsdaten; Kontosicherheit</h3>
       <p>
-        Mit der einmaligen Authentifizierung eines Diensts (Facebook, Twitter, LinkedIn oder GoogleBuzz), legst Du einen Account bei Spread.ly an der es Dir erlaubt künftig ohne
+        Mit der einmaligen Authentifizierung eines Diensts (Facebook, Twitter, LinkedIn oder GoogleBuzz), legst Du einen Account bei Spreadly an der es Dir erlaubt künftig ohne
         weitere Anmeldung Inhalte aus dem Netz in das entsprechende Netzwerk zu empfehlen. Diese Berechtigung kann auf der Seite des autorisierten Dienstes jederzeit entzogen werden.
       </p>
     </li>
     <li>
-      <h3>3. Über den Spread.ly Button empfohlene Inhalte</h3>
+      <h3>3. Über den Spreadly Button empfohlene Inhalte</h3>
       <p>
         Für alles, was du an Fotos, Profilen (einschließlich deinem Namen, deinem Image und deinem Aussehen), Nachrichten, Notizen, Text, Informationen, Musik, Videos, Anzeigen,
         Listen und sonstigen Inhalten an den Service oder auf die Site hochlädst oder dort veröffentlichst oder darstellst (im Folgenden als "Posten" bezeichnet) oder an andere Benutzer
@@ -58,7 +58,7 @@
         für kommerzielle, Werbe- oder sonstige Zwecke auf oder in Verbindung mit der Site oder mit dem Marketing für die Site, für das Erstellen abgeleiteter Werke oder die Einarbeitung
         solcher Benutzerinhalte in andere Werke und für das Vergeben und Autorisieren von Unterlizenzen zu Vorstehendem. Gleichzeitig sicherst du zu, dass du zur Erteilung dieser Lizenz
         berechtigt bist. Deinen eigenen Benutzerinhalt kannst du jederzeit von der Site entfernen. Wenn du deinen Benutzerinhalt entfernst, läuft die oben erteilte Lizenz zwar
-        automatisch ab; du bestätigst jedoch, dass das Unternehmen archivierte Kopien deines Benutzerinhalts zurückbehalten darf. Spread.ly macht kein Eigentumsrecht an deinem
+        automatisch ab; du bestätigst jedoch, dass das Unternehmen archivierte Kopien deines Benutzerinhalts zurückbehalten darf. Spreadly macht kein Eigentumsrecht an deinem
         Benutzerinhalt geltend; vielmehr bleibst du im Verhältnis zwischen uns und dir, unbeschadet der uns nach diesen Bedingungen eingeräumten Rechte, der alleinige Eigentümer
         deines gesamten Benutzerinhalts und jeglichen geistigen Eigentums und anderer Eigentumsrechte an deinem Benutzerinhalt.
       </p>
@@ -67,7 +67,7 @@
       <h3>4. Urheberrechtsbeschwerden</h3>
       <p>
         Wir respektieren die Rechte am geistigen Eigentum anderer und untersagen den Benutzern das Hochladen, Posten oder sonstige Übertragen von Material, das die Rechte am
-        geistigen Eigentum Dritter verletzt, an die Website oder den Service von Spread.ly. Wenn wir eine ordnungsgemäße Benachrichtigung über eine mutmaßliche Urheberrechtsverletzung
+        geistigen Eigentum Dritter verletzt, an die Website oder den Service von Spreadly. Wenn wir eine ordnungsgemäße Benachrichtigung über eine mutmaßliche Urheberrechtsverletzung
         erhalten, werden wir sofort das beanstandete Material entfernen oder den Zugang zu diesem Material sperren und die Konten von Wiederholungstätern laut Angabe in diesen
         Bestimmungen kündigen. Wenn du der Meinung bist, dass bestimmtes Material auf der Site ein Urheberrecht verletzt, das du besitzt oder kontrollierst, kannst du eine schriftliche
         Benachrichtigung über eine solche Urheberrechtsverletzung an unseren beauftragten Mitarbeiter schicken.
@@ -112,7 +112,7 @@
         Falls es sich beim Freigabelink um eine Schaltfläche handelt, die Symbole oder sonstige grafische Abbildungen, Marken oder sonstige Materialien enthält, die im Eigentum des
         Unternehmens liegen, erhält der Online-Content-Provider die Berechtigung zur Verwendung dieser Abbildungen, Marken oder sonstigen Materialien zum ausschließlichen Zwecke des
         Platzierens des Freigabelinks auf der Site des Online-Content-Providers und ausschließlich in der durch das Unternehmen bereitgestellten Form. Falls es sich beim Freigabelink
-        um einen Link in Textform handelt, muss der Link auf jeden Fall das Wort "Spread.ly" enthalten. Die in diesem Absatz gewährten Rechte können durch das Unternehmen jederzeit
+        um einen Link in Textform handelt, muss der Link auf jeden Fall das Wort "Spreadly" enthalten. Die in diesem Absatz gewährten Rechte können durch das Unternehmen jederzeit
         nach eigenem Ermessen auch ohne die Angabe von Gründen widerrufen werden, und der Online-Content-Provider erklärt sich bereit, bei einer solchen Beendigung unverzüglich alle
         Freigabelinks von seiner Site zu entfernen.
       </p>

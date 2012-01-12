@@ -13,7 +13,7 @@
 	  	</p>
 	  	<?php if($pIsNew) { ?>
 		    <p>
-		      <?php echo __("If you don't have any Spread.ly buttons on your site yet, you can use the %getbutton%", array('%getbutton%' => link_to(__('button wizard to create and put them on your site now'), '@configurator'))); ?><br />
+		      <?php echo __("If you don't have any Spreadly buttons on your site yet, you can use the %getbutton%", array('%getbutton%' => link_to(__('button wizard to create and put them on your site now'), '@configurator'))); ?><br />
 		      <span class="meta-text">
 		      	<?php echo __('Those buttons will transform automatically into deal buttons during the runtime of your deal campaign and will switch back to their default settings again after the end of your deal.'); ?>
 		      </span>

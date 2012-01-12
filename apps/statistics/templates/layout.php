@@ -1,10 +1,10 @@
 <html>
 <head>
-	<title><?php echo __('Spread.ly - We monetize Social Sharing'); ?></title>
+	<title><?php echo __('Spreadly - We monetize Social Sharing'); ?></title>
 	<?php include_metas() ?>
 	<?php include_http_metas() ?>
 
-	<meta property="og:site_name" content="Spread.ly" />
+	<meta property="og:site_name" content="Spreadly" />
 	<meta property="og:image" content="<?php echo image_path("/img/spreadlyicon.jpg", true); ?>" />
 	<meta property="og:url" content="http://spreadly.com" />
 	<meta property="og:type" content="website" />
@@ -110,8 +110,8 @@
 						<ul class="footer-links clearfix last">
 							<li class="first"><?php echo __('Contact'); ?></li>
 							<li><a href="mailto:info@spreadly.com"><?php echo __('Send email'); ?></a></li>
-							<li><?php echo link_to(__('Spread.ly @ Facebook'), 'http://www.facebook.com/spreadly', array('target' => '_blank')); ?></li>
-							<li><?php echo link_to(__('Spread.ly @ Twitter'), 'http://twitter.com/spreadly', array('target' => '_blank')); ?></li>
+							<li><?php echo link_to(__('Spreadly @ Facebook'), 'http://www.facebook.com/spreadly', array('target' => '_blank')); ?></li>
+							<li><?php echo link_to(__('Spreadly @ Twitter'), 'http://twitter.com/spreadly', array('target' => '_blank')); ?></li>
 						</ul>
 					</div>
 					<p class="copyright"><?php echo __('&copy; Copyright 2011 ekaabo GmbH. All rights reserved.'); ?></p>

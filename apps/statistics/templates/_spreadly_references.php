@@ -8,5 +8,5 @@
 		<li><a href="http://pr-blogger.de/" title="PR blogger" target="_blank"><img src="/img/statistics/ref-img5.jpg" alt="PR blogger" title="PR blogger"></a></li>
 		<li><a href="http://www.ednetz.de/" title="ED Netz" target="_blank"><img src="/img/statistics/ref-img6.jpg" alt="ED Netz" title="ED Netz"></a></li>
 	</ul>
-	<span class="more"><a href="<?php echo url_for('@customer');?>" title="See More Spread.ly costumers &raquo;">See More Spread.ly costumers &raquo;</a></span>
+	<span class="more"><a href="<?php echo url_for('@customer');?>" title="See More Spreadly costumers &raquo;">Mehr über die Spreadly-Kunden &raquo;</a></span>
 </section>

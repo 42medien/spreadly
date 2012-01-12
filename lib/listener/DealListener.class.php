@@ -23,12 +23,12 @@ class DealListener {
       $message = "".
       "Hallo $fullname,
 
-Ihr Deal ist bei Spread.ly eingegangen und wird in Kürze von einem Mitarbeiter bearbeitet. Sie erhalten so schnell wie möglich ein Mail mit der Freigabe.
+Ihr Deal ist bei Spreadly eingegangen und wird in Kürze von einem Mitarbeiter bearbeitet. Sie erhalten so schnell wie möglich ein Mail mit der Freigabe.
 
-Your Deal has been submitted to Spread.ly. It will be reviewed by an employee shortly. You will receive an email with our approval as soon as possible.
+Your Deal has been submitted to Spreadly. It will be reviewed by an employee shortly. You will receive an email with our approval as soon as possible.
 
 Viele Grüße & many regards
-Spread.ly-Team
+Spreadly-Team
 
 info@spreadly.com
 ekaabo GmbH
@@ -67,7 +67,7 @@ Ihr Deal wurde soeben frei geschaltet. Sobald die Laufzeit begonnen hat, kann de
 
 Your deal is available now. Provided that runtime has become due your deal can be redeemed.
 
-Viel Erfolg beim Handel mit den Likes & Good luck and success with your deals in likes! Spread.ly-Team
+Viel Erfolg beim Handel mit den Likes & Good luck and success with your deals in likes! Spreadly-Team
 
 
 info@spreadly.com

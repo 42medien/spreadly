@@ -3,7 +3,7 @@
 					<div class="page-titlecontent">
 						<h2>Claim your sites</h2>
 						<p>Please confirm that you are the owner oder admin of the website. The verifictaion of your domain ownership is required for activating the deal function of the
-	Spread.ly button as well as the statistics section. Please do not hesitate to contact us if any problems occur. <a href="mailto:info@spreadly.com" title="info@spreadly.com">info@spreadly.com</a></p>
+	Spreadly button as well as the statistics section. Please do not hesitate to contact us if any problems occur. <a href="mailto:info@spreadly.com" title="info@spreadly.com">info@spreadly.com</a></p>
 					</div>
 					<div class="yiidtable-publish">
 

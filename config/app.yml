@@ -16,9 +16,9 @@ all:
   sfApplyPlugin:
     from:
       email:            "noreply@spreadly.com"
-      fullname:         "the Spread.ly staff"
+      fullname:         "the Spreadly staff"
   email:
-    sender:             "the Spread.ly staff"
+    sender:             "the Spreadly staff"
     address:            "noreply@spreadly.com"
 
   settings:
@@ -141,7 +141,7 @@ dev:
     old_platform_host: 'yiid.local'
     old_stats_host:    'yiidstats.local'
     document_root:    '/Users/hschippmann/Work/symfony/yiid/web'
-    post_to_services:  0
+    post_to_services:  1
     environment:      'dev'
     dev:              1
     pager:            20

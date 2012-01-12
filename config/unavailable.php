@@ -1,14 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#">
   <head>
-    <title>Spread.ly - first choice for social sharing</title>
-    <meta name="description" content="Spread.ly consists of sharing button widgets that enable users to share content into a wide range of social networks simultanously. Besides that, Spread.ly offers a sophisticated functionality to reward users for their likes." />
+    <title>Spreadly - first choice for social sharing</title>
+    <meta name="description" content="Spreadly consists of sharing button widgets that enable users to share content into a wide range of social networks simultanously. Besides that, Spreadly offers a sophisticated functionality to reward users for their likes." />
 <meta name="keywords" content="sharing,sharebutton,like,likebutton,deal,dealbutton,facebook,linkedin,twitter,buzz" />
 <meta name="language" content="en" />
 <meta name="robots" content="index, follow" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <meta property="og:site_name" content="Spread.ly" />
+    <meta property="og:site_name" content="Spreadly" />
 
     <meta property="og:image" content="http://spreadly.com/img/spreadlyicon.jpg" />
     <meta property="og:url" content="http://spreadly.com" />
@@ -51,10 +51,10 @@
           <div class="grboxmid-content">
             <div class="panel_width">
               <div class="graybox buttonbox">
-                <h2>Spread.ly is down for maintenance</h2>
+                <h2>Spreadly is down for maintenance</h2>
                 <div style="padding: 30px 10px; font-size: 20px;">
-                  <p>Spread.ly is currently being revised. Do please take a moment of patience. Spread.ly is accessible again in a few minutes.</p>
-                  <p>Spread.ly wird gerade überarbeitet. Habt bitte einen Moment Geduld. Gleich ist Spread.ly wieder erreichbar.</p>
+                  <p>Spreadly is currently being revised. Do please take a moment of patience. Spreadly is accessible again in a few minutes.</p>
+                  <p>Spreadly wird gerade überarbeitet. Habt bitte einen Moment Geduld. Gleich ist Spreadly wieder erreichbar.</p>
                 </div>
               </div>
             </div>

@@ -923,7 +923,7 @@ defaultOptions = {
 	
 	credits: {
 		enabled: true,
-		text: 'spread.ly',
+		text: 'spreadly',
 		href: 'http://www.spread.ly',
 		position: {
 			align: 'right',
@@ -7283,7 +7283,7 @@ function Chart (options, callback) {
 		
 		// beta mark
 		credits.enabled = true;
-		//credits.text = '@powered by spread.ly';
+		//credits.text = '@powered by spreadly';
 		credits.text = '';
 		if (credits.enabled && !chart.credits) {
 			renderer.text(

@@ -57,8 +57,8 @@
 		<div class="list-box last">
 			<ul class="footer-list last">
 				<li><a href="mailto:info@spreadly.com"><?php echo __('Send email'); ?></a></li>
-				<li><?php echo link_to(__('Spread.ly @ Facebook'), 'http://www.facebook.com/spreadly', array('target' => '_blank')); ?></li>
-				<li><?php echo link_to(__('Spread.ly @ Twitter'), 'http://twitter.com/spreadly', array('target' => '_blank')); ?></li>
+				<li><?php echo link_to(__('Spreadly @ Facebook'), 'http://www.facebook.com/spreadly', array('target' => '_blank')); ?></li>
+				<li><?php echo link_to(__('Spreadly @ Twitter'), 'http://twitter.com/spreadly', array('target' => '_blank')); ?></li>
 			</ul>
 		</div>
 	</div>

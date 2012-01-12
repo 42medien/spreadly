@@ -33,7 +33,7 @@
 							<a href="http://www.ibusiness.de/" target="_blank"><img src="/img/statistics/ibusiness-logo.jpg" width="170" height="43" alt="ibusiness" title="ibusiness"></a>
 							<a href="http://www.pr-blogger.de/" target="_blank"><img src="/img/statistics/pr-blogger-logo.jpg" width="143" height="43" alt="pr-blogger" title="pr-blogger"></a>
 						</div>
-						<p class="see-more"><a href="<?php echo url_for('@customer');?>" title="See More Spread.ly costumers"><?php echo __('weitere Partner von Spreadly anzeigen &raquo;'); ?></a></p>
+						<p class="see-more"><a href="<?php echo url_for('@customer');?>" title="See More Spreadly costumers"><?php echo __('weitere Partner von Spreadly anzeigen &raquo;'); ?></a></p>
 					</div>
 				</div>
 			</section>

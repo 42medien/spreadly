@@ -6,8 +6,8 @@
 						<div>
 							<div class="alignright help_content step2_content">
 								<h3 class="title"><?php echo __("Help"); ?></h3>
-								<p><?php echo __("Please provide the exact web address. This URL should point to the location wanted for your Spread.ly button. Then chose your style and decide whether you like the button with pictures or not."); ?></p><br />
-                <p><?php echo __('Your individual code will now appear in the box. Click "Copy code" to insert your Spread.ly button.'); ?></p><br/>
+								<p><?php echo __("Please provide the exact web address. This URL should point to the location wanted for your Spreadly button. Then chose your style and decide whether you like the button with pictures or not."); ?></p><br />
+                <p><?php echo __('Your individual code will now appear in the box. Click "Copy code" to insert your Spreadly button.'); ?></p><br/>
                 <p><?php echo __("For more information read our %doku%", array('%doku%' => link_to('developer documentation', 'http://code.google.com/p/spreadly/wiki/developerdocumentation'))); ?></p>
 							</div>
 							<div class="alignleft stylestatus_box">

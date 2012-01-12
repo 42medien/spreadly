@@ -10,6 +10,6 @@
               <li><?php echo link_to(__('Logout'), '@signout'); ?></li>
               <?php } ?>
               <li><?php echo link_to(__("Imprint"), "http://spreadly.com/imprint", array("target" => "_blank")); ?></li>
-              <li><?php echo link_to("Powered by Spreadly", sfConfig::get("app_settings_url"), array("title" => "spread.ly", "target" => "_blank")) ?></li>
+              <li><?php echo link_to("Powered by Spreadly", sfConfig::get("app_settings_url"), array("title" => "spreadly", "target" => "_blank")) ?></li>
             </ul>
           </nav>

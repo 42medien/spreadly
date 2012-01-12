@@ -302,7 +302,7 @@ class BasesfApplyActions extends sfActions
           $date = new DateTime();
           $profile->setValidateAt( $date->format( 'Y-m-d H:i:s' ) );
           $profile->save();
-          $this->mail(array('subject' => 'Spread.ly-E-Mail-Adresse',
+          $this->mail(array('subject' => 'Spreadly-E-Mail-Adresse',
             'fullname' => $profile->getFullname(),
             'email' => $profile->getEmail(),
             'parameters' => array('username' => $profile->getUser()->getUsername(),
@@ -354,7 +354,7 @@ class BasesfApplyActions extends sfActions
    */
   protected function sendVerificationMail( $profile )
   {
-    $this->mail(array('subject' => 'Spread.ly -Zugang zu bestätigen / account to be confirmed',
+    $this->mail(array('subject' => 'Spreadly -Zugang zu bestätigen / account to be confirmed',
         'fullname' => $profile->getFullname(),
         'email' => $profile->getEmail(),
         'parameters' => array('fullname' => $profile->getFullname(),
@@ -423,7 +423,7 @@ class BasesfApplyActions extends sfActions
     $user->save();
     $this->getUser()->signIn($user);
   }
-    
+
   static public function createGuid()
   {
     $guid = "";
@@ -509,7 +509,7 @@ class BasesfApplyActions extends sfActions
     $profile->save();
     try
     {
-      $this->mail(array('subject' =>'Spread.ly- Zugangsdaten / access data',
+      $this->mail(array('subject' =>'Spreadly- Zugangsdaten / access data',
           'fullname' => $profile->getFullname(),
           'email' => $profile->getEmail(),
           'parameters' => array('fullname' => $profile->getFullname(),

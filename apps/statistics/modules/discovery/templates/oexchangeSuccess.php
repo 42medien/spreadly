@@ -4,7 +4,7 @@
 
   <Property type="http://www.oexchange.org/spec/0.8/prop/vendor">ekaabo GmbH</Property>
   <Property type="http://www.oexchange.org/spec/0.8/prop/title">first choice for social sharing</Property>
-  <Property type="http://www.oexchange.org/spec/0.8/prop/name">Spread.ly</Property>
+  <Property type="http://www.oexchange.org/spec/0.8/prop/name">Spreadly</Property>
   <Property type="http://www.oexchange.org/spec/0.8/prop/prompt">Like any kind of content</Property>
 
   <Link rel= "icon" href="http://spreadly.com/favicon.ico" type="image/vnd.microsoft.icon" />

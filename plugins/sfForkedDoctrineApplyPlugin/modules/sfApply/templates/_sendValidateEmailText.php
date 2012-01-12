@@ -10,7 +10,7 @@ You like to change your email address on <?php echo $sf_request->getHost() ?> fr
 To continue with your change, click on the link above. Your email will then be changed permanently.
 
 Mit freundlichen Grüßen und Regards
-Spread.ly-Team
+Spreadly-Team
 
 info@spreadly.com
 ekaabo GmbH

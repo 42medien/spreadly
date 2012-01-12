@@ -11,7 +11,7 @@ If you have lost your password or wish to reset it, click on the link above.You 
 
 
 Mit freundlichen Grüßen und Regards
-Spread.ly-Team
+Spreadly-Team
 
 info@spreadly.com
 ekaabo GmbH

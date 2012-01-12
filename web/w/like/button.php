@@ -18,7 +18,7 @@ $wu->trackUser();
 <html>
 <head>
   <meta charset="utf-8">
-  <title>spread.ly</title>
+  <title>spreadly</title>
 
   <style type="text/css">
     *{

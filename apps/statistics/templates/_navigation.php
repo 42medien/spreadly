@@ -3,7 +3,7 @@
 
 			<div id="header">
 				<div class="container_12">
-					<h1 id="logo" class="alignleft"><a href="<?php echo url_for('landing/index');?>" title="Spread.ly">Spread.ly</a></h1>
+					<h1 id="logo" class="alignleft"><a href="<?php echo url_for('landing/index');?>" title="Spreadly">Spreadly</a></h1>
 					<nav class="clearfix alignright grid_6">
 						<ul class="header-link clearfix alignright">
 							<li class="blog"><a href="http://blog.spreadly.com/" target="_blank" title="<?php echo __('Blog'); ?>"><?php echo __('Blog'); ?></a></li>

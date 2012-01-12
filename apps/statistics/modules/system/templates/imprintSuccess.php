@@ -1,7 +1,7 @@
 <?php slot('content') ?>
   <h1>Impressum</h1>
 
-  <p class="text_unimportant">Verantwortlich für den Internetauftritt Spread.ly sowie der damit verbundenen Angebote und Dienstleistungen ist</p>
+  <p class="text_unimportant">Verantwortlich für den Internetauftritt Spreadly sowie der damit verbundenen Angebote und Dienstleistungen ist</p>
 
   <p>ekaabo GmbH<br/>
     Grundelbachstr. 84<br/>
