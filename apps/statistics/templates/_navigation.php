@@ -33,7 +33,7 @@
 								<?php } ?>
 							</li>
 
-							<li <?php echo ($sf_user->isAuthenticated() && !$sf_user->isSuperAdmin())?'class="last"':''?>>
+							<li>
 								<a href="<?php echo url_for('@advertiser'); ?>" <?php if($module=='deals' || $module=='deal_analytics' || $module=='advertiser') { echo 'class="active"';} ?> title="<?php echo __('Advertiser'); ?>"><?php echo __('Werbetreibende'); ?></a>
 									<?php if($module=='deals' || $module=='deal_analytics' || $module=='advertiser') { ?>
 									<ul class="second-level-nav clearfix">
@@ -46,7 +46,7 @@
 							</li>
 
 
-							<li><a href="<?php echo url_for('@pricing'); ?>" <?php if(($module=='landing' && $action=='pricing')) { echo 'class="active"';} ?> title="<?php echo __('Pricing');?>"><?php echo __('Preise');?></a></li>
+							<li <?php echo ($sf_user->isAuthenticated() && !$sf_user->isSuperAdmin())?'class="last"':''?>><a href="<?php echo url_for('@pricing'); ?>" <?php if(($module=='landing' && $action=='pricing')) { echo 'class="active"';} ?> title="<?php echo __('Pricing');?>"><?php echo __('Preise');?></a></li>
 					    <?php if($sf_user->isSuperAdmin()) { ?>
 					      <li class="last">
 					      	<a href="/backend.php" title="Backend">
