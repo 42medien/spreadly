@@ -1066,6 +1066,11 @@ behavior: url(css/PIE.htc);
   behavior: url(css/PIE.htc);
 }
 
+#sf_apply_apply_form table tr th label a,
+#sf_apply_apply_form table tr th label a:hover{
+  text-decoration: underline;
+}
+
 #guard_signin_area, .sf_apply_apply, .sf_apply_reset_request{
    margin: 0 auto;
    width: 563px;
@@ -1398,6 +1403,10 @@ a.button span, button.button span {
 .help_content {width:281px; padding:6px 0px 20px 50px; background:url(../img/pera-bgcurvebg.png) no-repeat 5px 33px;}
 .help_content .title {font-size:14px; line-height:14px; color:#588199; margin-bottom:12px;} 
 .help_content p { padding-bottom:0px; margin-bottom:-2px;}
+.help_content p a,
+.help_content p a:hover, 
+.optionltext a,
+.optionltext a:hover{text-decoration: underline;}	
 
 
 .buttoncode_list { padding:4px 0px 0px 8px; width:580px;}
