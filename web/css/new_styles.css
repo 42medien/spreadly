@@ -917,7 +917,10 @@ behavior: url(css/PIE.htc);
 
 
 /************old spreadly-styles***********************************************/
-.error, .error_list{color: red;}
+.error_list,
+.error{color: #ff0000;}
+#deal_form a,
+#deal_form a:hover{text-decoration: underline;}
 .info{color: green;}
 .hide{display: none;}
 .alignright{float: right;}
