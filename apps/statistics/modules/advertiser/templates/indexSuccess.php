@@ -16,14 +16,14 @@
 							<h3><?php echo __('Spreadly Deal API'); ?></h3>
 							<h4><?php echo __('Vorteile für Seitenbetreiber'); ?></h4>
 							<p><?php echo __('Wie bieten zahlreiche APIs für Deinen speziellen Fall. Ob der Import vieler Kampagnen oder das Auslösen bestimmter Aktionen bei jedem Klick, für alle Bedürfnisse haben die passende Lösung'); ?></p>
-							<span class="link"><a href="<?php echo url_for('@dealapi'); ?>"><?php echo __('Start to use our API &raquo;'); ?></a></span>
+							<span class="link"><a href="<?php echo url_for('@dealapi'); ?>"><?php echo __('Für unsere API registrieren &raquo;'); ?></a></span>
 						</li>
 						<li class="last">
 							<span class="icon"><img src="/img/statistics/get-analytics.png" alt="" title=""></span>
-							<h3><?php echo __('Social Media Analytics'); ?></h3>
+							<h3><?php echo __('Social Media Statistiken'); ?></h3>
 							<h4><?php echo __('Vorteile für Werbetreibende'); ?></h4>
 							<p><?php echo __('Mit Spreadly erfährst Du alles was in Sachen Empfehlungsmarketing wichtig ist. Wir zeigen Die wie, ob und dank wem Dein Empfehlungsmarketing funktioniert.'); ?></p>
-							<span class="link"><a href="<?php echo url_for('@deal_analytics_index'); ?>"><?php echo __('Watch your detailled deal analytics &raquo;'); ?></a></span>
+							<span class="link"><a href="<?php echo url_for('@deal_analytics_index'); ?>"><?php echo __('Zu den Statistiken &raquo;'); ?></a></span>
 						</li>
 					</ul>
 				</section>

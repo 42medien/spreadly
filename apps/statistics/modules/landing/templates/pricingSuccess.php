@@ -70,7 +70,7 @@
 					</div>
 					<table class="custofeature-table" title="table">
 						<tr>
-							<td class="first"><?php echo __('Basic Analytics'); ?></td>
+							<td class="first"><?php echo __('Basis Statistiken'); ?></td>
 							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
 							<td><img src="/img/statistics/true-icon.png" alt="" title=""></td>
 							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
@@ -78,7 +78,7 @@
 							<td class="grey last"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
 						</tr>
 						<tr>
-							<td class="first"><?php echo __('Advanced Analytics'); ?></td>
+							<td class="first"><?php echo __('Erweiterte Statistiken'); ?></td>
 							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
 							<td><img src="/img/statistics/true-icon.png" alt="" title=""></td>
 							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
