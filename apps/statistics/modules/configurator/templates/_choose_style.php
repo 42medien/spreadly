@@ -5,9 +5,9 @@
 					<div class="graybox clearfix">
 						<div>
 							<div class="alignright help_content step2_content">
-								<h3 class="title"><?php echo __("Help"); ?></h3>
-								<p><?php echo __("Please provide the exact web address. This URL should point to the location wanted for your Spreadly button. Then chose your style and decide whether you like the button with pictures or not."); ?></p><br />
-                <p><?php echo __('Your individual code will now appear in the box. Click "Copy code" to insert your Spreadly button.'); ?></p><br/>
+								<h3 class="title"><?php echo __("Hilfe"); ?></h3>
+								<p><?php echo __("Bitte geben Sie die genaue Webadresse an, auf der der Button laufen soll und wählen Sie das gewünschte Erscheinungsbild des Buttons aus. Der Button erscheint dann je nach Wahl mit oder ohne Photo."); ?></p><br />
+                <p><?php echo __('Ihr individueller Code erscheint nun im linken grauen Feld. Klicken Sie auf "Code kopieren", um den Code für Ihren Spread.ly-Button direkt kopieren und an beliebiger Stelle einfügen zu können.'); ?></p><br/>
                 <p><?php echo __("For more information read our %doku%", array('%doku%' => link_to('developer documentation', 'http://code.google.com/p/spreadly/wiki/developerdocumentation'))); ?></p>
 							</div>
 							<div class="alignleft stylestatus_box">
@@ -27,7 +27,7 @@
 												</span>
 												</label>
 											</div>
-											<div class="meta-text"><?php echo __('URL example: <strong>http://</strong>www.example.com'); ?></div>
+											<div class="meta-text"><?php echo __('URL-Beispiel: <strong>http://</strong>www.example.com'); ?></div>
 											<?php if (!$pService) {?>
 												<div class="clearfix">
 													<label class="textfield">
@@ -36,7 +36,7 @@
 													</span>
 													</label>
 												</div>
-												<div class="meta-text"><?php echo __('Choose the text of your button'); ?></div>
+												<div class="meta-text"><?php echo __('Wählen Sie den Text für Ihren Button'); ?></div>
 
 												<div class="clearfix">
 													<label class="textfield">
@@ -45,7 +45,7 @@
 													</span>
 													</label>
 												</div>
-												<div class="meta-text"><?php echo __('Choose the color of your button. Click into the textfield and select.'); ?></div>
+												<div class="meta-text"><?php echo __('Wählen Sie die Farbe für Ihren Button'); ?></div>
 											<?php } ?>
 										<?php } else { ?>
 											<div class="clearfix">
@@ -103,7 +103,7 @@
 										</div>
 									</div>
 									<div class="textaria_bot"><span>&nbsp;</span></div>
-									<div class="copycodebox clearfix"> <a href="#" title="<?php echo __("Copy code"); ?>" class="graybtn alignleft" id="d_clip_container" style="position: relative;"><span id="d_clip_button"><?php echo __("Copy code"); ?></span></a><?php if(!$sf_user->isAuthenticated()){?><span class="optionltext"><?php echo link_to(__("Optional: register  to get your statistics, it's free!"), '@sf_guard_signin'); ?></span><?php } ?> </div>
+									<div class="copycodebox clearfix"> <a href="#" title="<?php echo __("Code kopieren"); ?>" class="graybtn alignleft" id="d_clip_container" style="position: relative;"><span id="d_clip_button"><?php echo __("Code kopieren"); ?></span></a><?php if(!$sf_user->isAuthenticated()){?><span class="optionltext"><?php echo link_to(__("Optional: register  to get your statistics, it's free!"), '@sf_guard_signin'); ?></span><?php } ?> </div>
 								</div>
 							</div>
 						</div>

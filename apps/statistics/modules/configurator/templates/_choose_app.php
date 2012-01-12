@@ -5,7 +5,7 @@
 				<div class="grboxmid-content">
 					<div class="graybox clearfix">
 						<div class="alignleft buttoncode_list">
-							<h3 class="sub_title"><?php echo __("Step 1: Choose Type of Site"); ?></h3>
+							<h3 class="sub_title"><?php echo __("1. Schritt: Art der Webseite wählen"); ?></h3>
 							<dl>
 								<dd class="allweb-btn alignleft">
 									<ul>
@@ -33,9 +33,9 @@
 							</dl>
 						</div>
 						<div class="alignright help_content">
-							<h3 class="title"><?php echo __("Help"); ?></h3>
-							<p><?php echo __('Please choose the type of website you run or click "other websites" if it is missing. Select "Email & Signatures" to put the button in your newsletter or mailing.'); ?></p><br />
-              <p><?php echo __("As extensions are offered for all common blog systems, implementing the button is made easy. Even when updates are made you do not have to bother as it adjusts automatically."); ?></p>
+							<h3 class="title"><?php echo __("Hilfe"); ?></h3>
+							<p><?php echo __('Wählen Sie bitte die Art der Webseite, die Sie betreiben oder falls nicht vorhanden "normale Webseite". Klicken Sie auf "E-Mail & Signaturen" wenn Sie den Button in Ihren Newsletter oder Ihr Mailing einbauen möchten.'); ?></p><br />
+              <p><?php echo __("Für alle gängigen Blogsysteme gibt es Erweiterungen, die den Einbau des Buttons auf Ihrer Seite erleichtern. Ihr Button wird automatisch aktualisiert."); ?></p>
 						</div>
 					</div>
 				</div>
