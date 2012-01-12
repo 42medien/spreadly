@@ -1,8 +1,6 @@
 			<section class="container-top">
 			<section class="container_12">
 				<h2><?php echo __('Was sagen andere über Spreadly?'); ?></h2>
-				<section class="grid_11 customer-display"><img src="/img/statistics/customer-demo-display.gif" alt="customer display" title="customer display" ></section>
-				<h3 class="customer-title"><?php echo __('Beispiele für Werbekampagnen via Spreadly');?></h3>
 				<section class="clearfix">
 					<article class="customer-listing alignleft">
 						<div class="clearfix">
