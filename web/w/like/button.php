@@ -178,7 +178,7 @@ $wu->trackUser();
 </head>
 <body>
   <div class="container">
-    <a class="button" href="<?php echo $wu->getPopupUrl() ?>" onclick="window.open(this.href, 'popup', 'width=580,height=550,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" target="_blank">
+    <a class="button" href="<?php echo $wu->getPopupUrl() ?>" onclick="window.open(this.href, 'popup', 'width=580,height=600,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" target="_blank">
 <?php if ($wu->getType() == "default") { ?>
       <img src="//s-static.ak.facebook.com/rsrc.php/yi/r/q9U99v3_saj.ico">
       <img src="//twitter.com/phoenix/favicon.ico">
