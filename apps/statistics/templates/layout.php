@@ -69,7 +69,7 @@
 
 
 		<section class="learn-moreTab">
-			<section class="container_12"><span><?php echo __('Profitiere von der großen Reichweite Deiner Besucher'); ?></span><a href="<?php echo url_for('@customer');?>" title="<?php echo __('Mehr Infos'); ?>"><?php echo __('Mehr Infos'); ?></a></section>
+			<section class="container_12"><span><?php echo __('Profitieren Sie von der großen Reichweite Ihrer Besucher'); ?></span><a href="<?php echo url_for('@customer');?>" title="<?php echo __('Mehr Infos'); ?>"><?php echo __('Mehr Infos'); ?></a></section>
 		</section>
 		</div>
 	</div>
