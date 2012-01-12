@@ -119,7 +119,7 @@ class CreateDealForm extends BaseDealForm
     $lI18n = sfContext::getInstance()->getI18N();
     $this->setValidators(array(
       'motivation_title'  => new sfValidatorString(array('max_length' => 255, 'required' => true), array('required' => $lI18n->__('Required'), 'max_length' => $lI18n->__('To long'))),
-      'motivation_text'   => new sfValidatorString(array('required' => true), array('required' => $lI18n->__('Required'))),
+      'motivation_text'   => new sfValidatorString(array('required' => true, 'max_length' => 255), array('required' => $lI18n->__('Required'))),
       'spread_title'      => new sfValidatorString(array('max_length' => 255, 'required' => true), array('required' => $lI18n->__('Required'), 'max_length' => $lI18n->__('To long'))),
       'spread_text'       => new sfValidatorString(array('required' => true), array('required' => $lI18n->__('Required'))),
       'spread_url'        => new sfValidatorUrl(array('max_length' => 255, 'required' => true, 'trim' => true), array('required' => $lI18n->__('URL required'))),
@@ -133,7 +133,7 @@ class CreateDealForm extends BaseDealForm
     $this->setValidators(array(
       'coupon_type'       => new sfValidatorChoice(array('choices' => array(0 => 'code', 1 => 'url', 2 => 'download', 3 => 'unique_code'), 'required' => true)),
       'coupon_title'      => new sfValidatorString(array('max_length' => 255, 'required' => true), array('required' => $lI18n->__('Required'), 'max_length' => $lI18n->__('To long'))),
-      'coupon_text'       => new sfValidatorString(array('required' => true), array('required' => $lI18n->__('Required'))),
+      'coupon_text'       => new sfValidatorString(array('required' => true, 'max_length' => 255), array('required' => $lI18n->__('Required'))),
       'coupon_code'       => new sfValidatorString(array('max_length' => 255, 'required' => false), array('required' => $lI18n->__('Required'))),
       'coupon_url'        => new sfValidatorUrl(array('max_length' => 255, 'required' => false), array('required' => $lI18n->__('Required'))),
       'coupon_webhook_url' => new sfValidatorUrl(array('max_length' => 255, 'required' => false), array('required' => $lI18n->__('Required'))),
