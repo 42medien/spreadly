@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<title><?php echo __('Spreadly - We monetize Social Sharing'); ?></title>
@@ -33,8 +34,8 @@
 	<script type="text/javascript" src="/js/100_main/include/statistics-<?php echo sfConfig::get('app_release_name') ?>.min.js"></script>
 
 	<?php include_javascripts();?>
-    <?php $module = $sf_context->getModuleName(); ?>
-    <?php $action = $sf_context->getActionName(); ?>
+  <?php $module = $sf_context->getModuleName(); ?>
+  <?php $action = $sf_context->getActionName(); ?>
 </head>
 <body>
 <div id="wrapper_outer">
