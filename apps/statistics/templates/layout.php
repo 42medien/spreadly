@@ -14,7 +14,6 @@
 	<meta name="google-site-verification" content="0nH-7N_-Vix-3dGyWtqvJUn9IESoCtdi9wLN_Wp5MQs" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-
 	<link href="/css/new_styles.css" rel="stylesheet" type="text/css">
 	<link href="/css/grid.css" rel="stylesheet" type="text/css">
 	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
