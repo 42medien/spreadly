@@ -63,6 +63,7 @@ Deal:
     pool_hits:
       type: integer(4)
       default: 0
+    expire_at: datetime
 
     # Conditions
     email_required:
