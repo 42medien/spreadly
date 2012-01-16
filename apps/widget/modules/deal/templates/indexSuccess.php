@@ -3,8 +3,8 @@ use_helper('Avatar', 'Text');
 ?>
 
 <header>
-	<h1 class="success"><?php echo __('Vielen Dank!'); ?></h1>
-	<span id="deal-marker"><?php echo __('Hol dir hier deinen Deal!'); ?></span>
+	<h1 class="success"><?php echo __('Thanks for sharing!'); ?></h1>
+	<span id="deal-marker"><?php echo __('Grab your deal!'); ?></span>
 	<h2><?php echo $deal->getMotivationTitle(); ?><span id="motivation"><?php echo $deal->getMotivationText(); ?></span></h2>
 </header>
 
