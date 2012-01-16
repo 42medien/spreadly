@@ -19,6 +19,6 @@ generator:
       form:    ~
       edit:
         fields:
-          deal_state:   { params: "disabled=true" help: "DO NOT CHANGE!!!!!!!!!!!!!!!!!!!!" }
+          deal_state:   { params: "disabled=true", help: "DO NOT CHANGE!!!!!!!!!!!!!!!!!!!!" }
           expire_at:    { help: "Format: YYYY-MM-DD wie z.B. 2012-12-30" }
       new:     ~
