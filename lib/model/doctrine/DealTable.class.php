@@ -30,6 +30,14 @@ class DealTable extends Doctrine_Table
     return Doctrine_Core::getTable('Deal');
   }
 
+  public function getExpiredDealsByExpirationDate() {
+    $q = $this->createQuery()
+              ->where('deal_state = ?', self::STATE_ACTIVE)
+              ->andWhere('expire_at < ?', date("Y-m-d", strtotime("now")));
+
+    return $q->execute();
+  }
+
   public function getNextFromPool($pUser, $pDomain = null) {
     $nextDeal = $domainProfile = null;
 
