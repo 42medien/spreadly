@@ -7,3 +7,8 @@ jQuery('.colorbox' ).live('click',function(e){
 
 	/*jQuery(".radio-label").dgStyle();
 	jQuery(".checkbox-label").dgStyle();*/
+
+jQuery('#mycarousel').jcarousel({
+  wrap: 'circular',
+  initCallback: mycarousel_initCallback
+});
