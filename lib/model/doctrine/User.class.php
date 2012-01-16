@@ -60,7 +60,11 @@ class User extends BaseUser {
 
   public function getFacebook() {
     if ($OnlineIdentity = OnlineIdentityTable::getInstance()->retrieveByUserIdAndCommunity($this->getId(), "facebook")) {
-      return $OnlineIdentity->getProfileUri();
+      if ($pu = $OnlineIdentity->getProfileUri()) {
+        return $pu;
+      } else {
+        return $OnlineIdentity->getName();
+      }
     } else {
       return "none";
     }
@@ -68,7 +72,11 @@ class User extends BaseUser {
 
   public function getTwitter() {
     if ($OnlineIdentity = OnlineIdentityTable::getInstance()->retrieveByUserIdAndCommunity($this->getId(), "twitter")) {
-      return $OnlineIdentity->getProfileUri();
+      if ($pu = $OnlineIdentity->getProfileUri()) {
+        return $pu;
+      } else {
+        return $OnlineIdentity->getName();
+      }
     } else {
       return "none";
     }
@@ -76,7 +84,11 @@ class User extends BaseUser {
 
   public function getLinkedin() {
     if ($OnlineIdentity = OnlineIdentityTable::getInstance()->retrieveByUserIdAndCommunity($this->getId(), "linkedin")) {
-      return $OnlineIdentity->getProfileUri();
+      if ($pu = $OnlineIdentity->getProfileUri()) {
+        return $pu;
+      } else {
+        return $OnlineIdentity->getName();
+      }
     } else {
       return "none";
     }
@@ -210,5 +222,21 @@ class User extends BaseUser {
 
   public function getFirstShare() {
     return (date("d.m.Y", strtotime($this->getCreatedAt())));
+  }
+
+  public function getShareCount() {
+    $dm = MongoManager::getStatsDM();
+    $res = $dm->getRepository("Documents\AnalyticsActivity")->createQueryBuilder()
+      ->group(array('sh' => true), array('count' => 0))
+      ->reduce('function (obj, prev) { prev.count += obj.sh; }')
+      ->field("u_id")->equals(intval($this->getId()))
+      ->getQuery()
+      ->execute();
+
+    if (count($res["retval"]) > 0) {
+      return $res["retval"][0]['count'];
+    }
+
+    return 0;
   }
 }
