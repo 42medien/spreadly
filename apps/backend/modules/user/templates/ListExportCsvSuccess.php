@@ -1,0 +1,5 @@
+ID<?php echo "\t"?>Username<?php echo "\t"?>E-Mail<?php echo "\t"?>Facebook<?php echo "\t"?>Twitter<?php echo "\t"?>Linkedin<?php echo "\t"?>Friens<?php echo "\t"?>Likes<?php echo "\t"?>Shares<?php echo "\t"?>1st_share<?php echo "\t"?>last_share
+<?php foreach($pUsers as $u): ?>
+<?php echo $u->getId() ?><?php echo "\t"?><?php echo $u->getUsername() ?><?php echo "\t"?><?php echo $u->getEmail() ?><?php echo "\t"?><?php echo $u->getFacebook() ?><?php echo "\t"?><?php echo $u->getTwitter() ?><?php echo "\t"?><?php $u->getLinkedin() ?><?php echo "\t"?><?php echo $u->getFriendCount() ?><?php echo "\t"?><?php echo $u->getLikeCount() ?><?php echo "\t"?><?php echo $u->getShareCount() ?><?php echo "\t"?><?php echo $u->getFirstShare() ?><?php echo "\t"?><?php echo $u->getLastShare() ?>
+
+<?php endforeach; ?>
