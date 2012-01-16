@@ -58,6 +58,30 @@ class User extends BaseUser {
     }
   }
 
+  public function getFacebook() {
+    if ($OnlineIdentity = OnlineIdentityTable::getInstance()->retrieveByUserIdAndCommunity($this->getId(), "facebook")) {
+      return $OnlineIdentity->getProfileUri();
+    } else {
+      return "none";
+    }
+  }
+
+  public function getTwitter() {
+    if ($OnlineIdentity = OnlineIdentityTable::getInstance()->retrieveByUserIdAndCommunity($this->getId(), "twitter")) {
+      return $OnlineIdentity->getProfileUri();
+    } else {
+      return "none";
+    }
+  }
+
+  public function getLinkedin() {
+    if ($OnlineIdentity = OnlineIdentityTable::getInstance()->retrieveByUserIdAndCommunity($this->getId(), "linkedin")) {
+      return $OnlineIdentity->getProfileUri();
+    } else {
+      return "none";
+    }
+  }
+
   /**
    * constructs the sortname of the current user-object
    *
@@ -180,5 +204,11 @@ class User extends BaseUser {
     return  __($rank);
   }
 
+  public function getLastShare() {
+    return (date("d.m.Y", $this->getLastActivity()));
+  }
 
+  public function getFirstShare() {
+    return (date("d.m.Y", strtotime($this->getCreatedAt())));
+  }
 }

@@ -43,6 +43,24 @@ class OnlineIdentityTable extends Doctrine_Table {
     return $lOnlineIdentity;
   }
 
+  /**
+   * gets an OnlineIdentity for a given User and a community
+   *
+   * @author weyandch
+   * @param string $pAuthIdentifier
+   * @return mixed OnlineIdentity|null
+   */
+  public function retrieveByUserIdAndCommunity($pUserId, $pCommunity) {
+    $lOnlineIdentity = Doctrine_Query::create()
+      ->from('OnlineIdentity oi')
+      ->leftJoin('oi.Community c')
+      ->where('oi.user_id = ?', $pUserId)
+      ->andWhere('c.name = ?', $pCommunity)
+      ->fetchOne();
+
+    return $lOnlineIdentity;
+  }
+
   public static function retrieveVerified($pUserId, $pOIs) {
     $lOnlineIdentities = Doctrine_Query::create()
       ->from('OnlineIdentity oi')
