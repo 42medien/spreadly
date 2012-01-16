@@ -14,14 +14,17 @@
       </span>
       <span class="navigation_text <?php if($module=='approve_deal') { echo 'active'; } ?>">
         <?php echo link_to('Approve Deals', url_for('approve_deal/index')) ?> |
-      </span>      
+      </span>
       <span class="navigation_text <?php if($module=='sfGuardUser') { echo 'active'; } ?>">
-        <?php echo link_to('Users', url_for('sf_guard_user')) ?> |
+        <?php echo link_to('Users (.com)', url_for('sf_guard_user')) ?> |
+      </span>
+      <span class="navigation_text <?php if($module=='users') { echo 'active'; } ?>">
+        <?php echo link_to('Users (.ly)', url_for('user/index')) ?> |
       </span>
       <span class="navigation_text <?php if($module=='domain') { echo 'active'; } ?>">
         <?php echo link_to('Domains', url_for('domain/index')) ?> |
       </span>
-      
+
       <!--
       <span class="navigation_text <?php if($module=='sfGuardPermission') { echo 'active'; } ?>">
         <?php echo link_to('Permissions', url_for('sf_guard_permission')) ?> |
