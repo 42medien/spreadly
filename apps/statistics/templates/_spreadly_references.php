@@ -2,7 +2,7 @@
 	<h3>Spreadly Referenzen</h3>
 	<ul id="mycarousel" class="jcarousel-skin-tango clearfix">
                   <li><a href="http://www.mailingwork.de/" title="mailingwork" target="_blank"><img src="/img/refrance-img20.jpg" alt="Image"/></a></li>
-                  <li><a href="http://www.kerstin-hoffmann.de/pr-doktor/" title="PR-Doktor" target="_blank"><img src="/img/refrance-img19.jpg" alt="Image"/></a></li>
+                  <li><a href="http://www.urlaubspartner.net" title="Urlaubspartner" target="_blank"><img src="/img/refrance-img21.jpg" alt="Image"/></a></li>
                   <li><a href="http://www.pr-blogger.de/" title="PR-Blogger" target="_blank"><img src="/img/refrance-img18.jpg" alt="Image"/></a></li>
                   <li><a href="http://erdfisch.de/" title="erdfisch" target="_blank"><img src="/img/refrance-img17.jpg" alt="Image"/></a></li>
                   <li><a href="http://learning-factory.de" title="learning-factory" target="_blank"><img src="/img/refrance-img16.jpg" alt="Image"/></a></li>
