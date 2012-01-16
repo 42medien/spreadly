@@ -1,3 +1,12 @@
+user:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                User
+    module:               user
+    prefix_path:          /user
+    column:               id
+    with_wildcard_routes: true
+
 domain_profile:
   class: sfDoctrineRouteCollection
   options:
