@@ -348,4 +348,32 @@ class UserTable extends Doctrine_Table {
 
     return $lQuery->count();
   }
+
+  /**
+   * Applies the alarming attribute to a given query retrieving products.
+   *
+   * @param Doctrine_Query $query - query to have alarming attribute applied.
+   * @param Integer $value - alarming?
+   */
+  public function applyDealIdFilter($query, $value) {
+    $rootAlias = $query->getRootAlias();
+
+    $dm = MongoManager::getDM();
+    $yas = $dm->getRepository('Documents\YiidActivity')->findBy(array('d_id' => intval($value)));
+
+    $user_ids = array();
+    foreach ($yas as $ya) {
+      $user_ids[] = $ya->getUId();
+    }
+
+    $user_ids = array_unique($user_ids);
+
+    if (count($user_ids) == 0) {
+      $user_ids[] = -1;
+    }
+
+    $query->whereIn($rootAlias.'.id', $user_ids);
+
+    return $query;
+  }
 }

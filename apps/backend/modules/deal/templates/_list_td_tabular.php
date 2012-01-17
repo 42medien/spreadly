@@ -14,7 +14,7 @@
   <?php echo $deal->getTargetQuantity() ?>
 </td>
 <td class="sf_admin_text sf_admin_list_td_actual_quantity">
-  <?php echo link_to($deal->getActualQuantity(), 'deal/initiator_stats?deal_id='.$deal->getId()) ?>
+  <?php echo link_to($deal->getActualQuantity(), '@user?deal_id='.$deal->getId()) ?>
 </td>
 <td class="sf_admin_enum sf_admin_list_td_state">
   <?php echo $deal->getState() ?>

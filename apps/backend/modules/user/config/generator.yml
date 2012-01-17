@@ -20,7 +20,10 @@ generator:
             label: "Export to CSV"
         display: [=id, =username, email, facebook, twitter, linkedin, friend_count, like_count, share_count, first_share, last_share, created_at, updated_at]
       filter:
-        display: [username, firstname, lastname, email]
+        display: [username, firstname, lastname, email, deal_id]
+        fields:
+          deal_id:
+            label: "Deal ID"
       form:    ~
       edit:    ~
       new:     ~
