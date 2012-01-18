@@ -36,6 +36,12 @@ class TwitterAuthApiClient extends AuthApi {
     } else {
       // check online identity
       $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity("http://twitter.com/".$lParamsArray['screen_name'], $lParamsArray['user_id'], $this->aCommunityId);
+
+      // if there is no online identity die!
+      if (!$lOnlineIdentity) {
+        throw new sfException("incorrect online identity", 3);
+      }
+
       // generate empty user
       $lUser = new User();
     }

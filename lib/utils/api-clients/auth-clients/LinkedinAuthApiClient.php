@@ -41,11 +41,13 @@ class LinkedinAuthApiClient extends AuthApi {
     if ($lOnlineIdentity) {
       $lUser = $lOnlineIdentity->getUser();
     } else {
+      $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lAuthIdentifier, $lLinkedInId, $this->aCommunityId, $lAuthIdentifier);
 
-      // check online identity
-      try {
-        $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lAuthIdentifier, $lLinkedInId, $this->aCommunityId, $lAuthIdentifier);
-      } catch (Exception $e) {}
+      // if there is no online identity die!
+      if (!$lOnlineIdentity) {
+        throw new sfException("incorrect online identity", 3);
+      }
+
       // generate empty user
       $lUser = new User();
     }

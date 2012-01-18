@@ -37,6 +37,12 @@ class FacebookAuthApiClient extends AuthApi {
     } else {
       // check online identity
       $lOnlineIdentity = OnlineIdentityTable::addOnlineIdentity($lJsonObject->link, $lJsonObject->id, $this->aCommunityId);
+
+      // if there is no online identity die!
+      if (!$lOnlineIdentity) {
+        throw new sfException("incorrect online identity", 3);
+      }
+
       // generate empty user
       $lUser = new User();
     }
