@@ -13,6 +13,13 @@ require_once dirname(__FILE__).'/../lib/userGeneratorHelper.class.php';
  */
 class userActions extends autoUserActions {
 
+  public function executeIndex(sfWebRequest $request) {
+    if ($request->getParameter('deal_id')) {
+      $this->setFilters(array('deal_id' => $request->getParameter('deal_id')));
+    }
+    parent::executeIndex($request);
+  }
+
   public function executeListExportCsv(sfWebRequest $request) {
     $this->pUsers = UserTable::getInstance()->findAll();
 
