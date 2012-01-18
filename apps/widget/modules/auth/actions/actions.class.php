@@ -64,8 +64,14 @@ class authActions extends sfActions {
         $this->errorMsg = $e->getMessage();
       }
     } else {
-      $lUser = $lObject->doSignin($this->getUser(), $lToken);
-      $this->getUser()->signIn($lUser);
+      try {
+        $lUser = $lObject->doSignin($this->getUser(), $lToken);
+        $this->getUser()->signIn($lUser);
+      } catch (Exception $e) {
+        $this->getUser()->setFlash("error", $e->getMessage(), true);
+        $delay = 5000;
+        $this->errorMsg = $e->getMessage();
+      }
     }
 
     $this->delay = $delay;
