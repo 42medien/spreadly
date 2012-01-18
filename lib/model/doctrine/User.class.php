@@ -217,11 +217,19 @@ class User extends BaseUser {
   }
 
   public function getLastShare() {
-    return (date("d.m.Y", $this->getLastActivity()));
+    if ($this->getLastActivity()) {
+      return (date("d.m.Y", $this->getLastActivity()));
+    } else {
+      return "none";
+    }
   }
 
   public function getFirstShare() {
-    return (date("d.m.Y", strtotime($this->getCreatedAt())));
+    if ($this->getLastActivity()) {
+      return (date("d.m.Y", strtotime($this->getCreatedAt())));
+    } else {
+      return "none";
+    }
   }
 
   public function getShareCount() {
