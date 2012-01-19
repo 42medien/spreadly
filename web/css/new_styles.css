@@ -687,7 +687,7 @@ html, body { min-height:100%; height:100%;}
 .rechnungsadresse li {margin-bottom:17px;}
 
 .prufen .leftpart {width:311px;}
-.prufen .rightpart {width:385px;}
+.prufen .rightpart {width:385px; height: auto; display: block;}
 .prufen .stepitem .rightpart h3 {margin-bottom:8px;}
 .prufen .stepitem .rightpart p {margin-bottom:3px;}
 
@@ -925,8 +925,6 @@ behavior: url(css/PIE.htc);
 #deal_form a:hover{text-decoration: underline;}
 .info{color: green;}
 .hide{display: none;}
-.alignright{float: right;}
-.alignleft{float: left;}
 .blue-btn{cursor: pointer;}
 
 

@@ -4,13 +4,19 @@
 
 (function( $ ){
   var SpreadlyButton = {
-    initCss: function(pObject) {
-      jQuery(pObject).css({
-        "background": "#fff url('/img/button/test-share-button.png') no-repeat 0 0",
-        "display": "inline-block",
-        "width":'54px',
-        "height":'17px'
-      });      
+    aParams: {},
+      
+    initCss: function() {
+      jQuery('head').append('<link rel="stylesheet" href="http://spreadly.local/css/widget/spreadlybutton.css" type="text/css" />');
+    },
+    
+  
+    initImages: function(pObject) {
+      jQuery(pObject).prepend('<img src="//s-static.ak.facebook.com/rsrc.php/yi/r/q9U99v3_saj.ico">');
+      jQuery(pObject).prepend('<img src="//twitter.com/phoenix/favicon.ico">');
+      jQuery(pObject).prepend('<img src="//ssl.gstatic.com/s2/oz/images/faviconr.ico">');
+      jQuery(pObject).prepend('<img src="//s3.licdn.com/scds/common/u/img/favicon_v3.ico">');
+      
     },
     
     initClick: function(pObject) {
@@ -19,38 +25,30 @@
         SpreadlyWindow.open(lUrl); 
         return false;
       });
+    },
+    
+    initText: function(pObject){
+      var lText = jQuery(pObject).text();
+      jQuery(pObject).text("");
+      if(lText == ""){
+        lText = SpreadlyButton.aParams.spreadtext;
+        if(lText == "" || lText == undefined){
+          lText = "like";
+        }
+      }
+      jQuery(pObject).append(lText);
+      
     }
   };
   
-
+  
+  
   var SpreadlyWindow = {
     init: function() {
       jQuery('<div id="spreadly_overlay"><div></div></div>').appendTo('body');
-      SpreadlyWindow.initCss();
+      //SpreadlyWindow.initCss();
       SpreadlyWindow.close();
       
-    },
-    
-    initCss: function() {
-      jQuery('#spreadly_overlay').css({
-        "visibility": "hidden",
-        "position": "absolute",
-        "left":'0px',
-        "top":'0px',
-        "width": "100%",
-        "height": "100%",
-        "text-align":'center',
-        "z-index":'99999',
-        "background-color": '#fff',
-        "opacity": '0.9'
-      });
-      
-      jQuery('#spreadly_overlay div').css({
-        "width": "540px",
-        "margin": "10% auto",
-        "background-color":'#fff',
-        "text-align":'center'
-      });      
     },
     
     open: function(pUrl) {
@@ -59,7 +57,7 @@
     },
     
     insertIframe: function(pUrl) {
-      jQuery('#spreadly_overlay div').append('<iframe src="http://spread.local/?url='+pUrl+'&iframe=1" style="width: 555px; height: 400px; border:0;"></iframe>');
+      jQuery('#spreadly_overlay div').append('<iframe src="http://spread.local/?url='+pUrl+'&iframe=1" style="width: 555px; height: 450px; border:0;"></iframe>');
       
     },
     
@@ -73,12 +71,19 @@
   };
   
   
-  jQuery.fn.spreadly = function( method ){
+  jQuery.fn.spreadly = function( pParams ){
+    SpreadlyButton.aParams = pParams;
     SpreadlyWindow.init();
+    SpreadlyButton.initCss();
     return this.each(function(){
-      SpreadlyButton.initCss(this);
       SpreadlyButton.initClick(this);
+      SpreadlyButton.initText(this);
+      SpreadlyButton.initImages(this);      
     });
   };
 })( jQuery );
 
+
+jQuery(document).ready( function() {
+  jQuery('.spreadly-button').spreadly({});
+});

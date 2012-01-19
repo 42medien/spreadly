@@ -38,7 +38,7 @@
 
 
 		<div class="clearfix stepitem definieren">
-			<div class="alignleft leftpart">
+			<div class="alignleft leftpart clearfix">
 				<h3><?php echo __('Deal definieren')?></h3>
 				<ul class="profiledetail-list clearfix">
 					<li><span class="title"><?php echo __('Motivator'); ?>:</span><?php echo $pDeal->getMotivationTitle(); ?></li>
@@ -50,9 +50,9 @@
 					<li class="last"><span class="title"><?php echo __('Spread AGB'); ?>:</span><?php echo $pDeal->getSpreadTos(); ?></li>
 				</ul>
 			</div>
-			<div class="alignright rightpart">
+			<div class="alignright rightpart clearfix">
 				<?php include_partial('deals/popup_share', array('pDeal' => $pDeal))?>
-				<?php echo link_to(__('Bearbeiten des Deals'), 'deals/step_share?did='.$pDeal->getId(), array('class' => 'link')); ?>
+				<?php echo link_to(__('Bearbeiten des Deals'), 'deals/step_share?did='.$pDeal->getId(), array('class' => 'link clearfix')); ?>
 			</div>
 		</div>
 
@@ -63,7 +63,7 @@
 
 
 		<div class="clearfix stepitem gutscheins">
-			<div class="alignleft leftpart">
+			<div class="alignleft leftpart clearfix">
 				<h3><?php echo __('Bearbeiten des Gutscheins')?></h3>
 				<ul class="profiledetail-list clearfix">
 					<li><span class="title"><?php echo __('Name des Gutscheins'); ?>:</span><?php echo $pDeal->getCouponTitle(); ?></li>
@@ -82,7 +82,7 @@
 
 				</ul>
 			</div>
-			<div class="alignright rightpart">
+			<div class="alignright rightpart clearfix">
 			<?php if ($pDeal->getCouponType() == "code"  || $pDeal->getCouponType() == "unique_code") {?>
 				<?php include_partial('deals/coupon_code', array('pDeal' => $pDeal)); ?>
 			<?php } else if($pDeal->getCouponType() == "url") { ?>

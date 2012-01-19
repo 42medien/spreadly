@@ -1,20 +1,18 @@
 <?php
 use_helper('Avatar', 'Text');
 ?>
-<div id="content-outer" role="main">
+<div id="content-outer" class="clearfix" role="main">
 <header>
-  <h2><?php echo $pDeal->getMotivationTitle(); ?></h2>
-  <p id="motivation">
-    <span id="deal-marker">Your deal</span>
-    <?php echo $pDeal->getMotivationText(); ?>
-  </p>
+	<h1 class="success"><?php echo __('Thanks for sharing!'); ?></h1>
+	<span id="deal-marker"><?php echo __('Grab your deal!'); ?></span>
+	<h2><?php echo $pDeal->getMotivationTitle(); ?><span id="motivation"><?php echo $pDeal->getMotivationText(); ?></span></h2>
 </header>
+
 
 <!-- weisser Content -->
 <div id="content-inner" class="clearfix deal-content-inner">
 
     <div class="clearfix">
-      <p class="area-like-comment-mirror"></p>
       <div id="like-select-img" class="alignleft">
         <div class="scrollable bordered-light shadow-light" id="myscroll">
           <!-- root element for the items -->
@@ -36,12 +34,13 @@ use_helper('Avatar', 'Text');
       </div>
     </div>
 
+
 		<div id="popup-like-form">
 	    <div id="comment-area" class="clearfix deal-comment">
 	      <textarea id="area-like-comment" class="mirror-value bordered gradient shadow-wide" name="area-like-comment" placeholder="<?php echo __("add your comment (optional) ..."); ?> <?php echo __('Feel free to add some hashtags, for example:'); ?> #deal"></textarea>
 	    </div>
 	        <div id="like-response"></div>
-	        <a class="send B alignright" href="#" onclick="document.forms['popup-like-form'].submit();return false;"><?php echo __('SHARE');?></a>
+	    <div id="like-submit" class="clearfix">
 	        <ul class="clearfix" id="like-oi-list">
 	          <li class="B" id="o1">
 	            <input class="add-service-checkbox" type="checkbox" name="twitter" value="twitter" checked="true"/>
@@ -60,6 +59,8 @@ use_helper('Avatar', 'Text');
 	            <label for="o4"><?php echo link_to(image_tag("/img/google-favicon.gif", array("alt" => 'google', "title" => 'google')), "/deals/step_verify?did=".$pDeal->getId()); ?></label>
 	          </li>
 	        </ul>
+	        <a id="popup-like-button" class="send B" href="#">Continue and Share</a>
+	       </div>
      	</div>
 </div>
 </div>

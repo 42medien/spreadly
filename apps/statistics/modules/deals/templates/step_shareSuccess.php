@@ -29,7 +29,7 @@
 				</div>
 			</div>
 			<div class="alignright">
-				<span class="preview-img"><img src="/img/statistics/dealview-img.jpg" alt="deal-preview" title="deal-preview"></span>
+				<span class="preview-img"><img src="/img/statistics/dealview-img-new.png" alt="deal-preview" title="deal-preview"></span>
 			</div>
 		</div>
 		<ul class="steplistwide clearfix">
