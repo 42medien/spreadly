@@ -167,8 +167,6 @@ class WidgetUtils {
     } else {
       return false;
     }
-
-
   }
 
   /**
