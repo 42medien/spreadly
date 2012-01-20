@@ -2,6 +2,7 @@
 namespace Queue;
 
 use \sfException,
+    \Exception,
     \sfContext,
     \System_Daemon,
     \BatchConfiguration,
