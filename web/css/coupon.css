@@ -210,7 +210,8 @@ h2 span#motivation {
   text-shadow: 0px 1px 0px hsla(0,0%,0%,1)
 }
 
-#deal_coupon .link{
+#deal_coupon .link, 
+#deal_url .link{
   color: #BA447D;
   text-decoration: none;
 }

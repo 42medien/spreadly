@@ -30,7 +30,13 @@
 				</div>
 			</div>
 			<div class="alignright">
-				<span class="preview-img"><img id="coupon-preview-img" src="/img/coupon_type_code.png" width="339px" /></span>
+				<span class="preview-img">
+					<?php if($pForm['coupon_type']->getValue()) {?>
+						<img id="coupon-preview-img" src="/img/coupon_type_<?php echo $pForm['coupon_type']->getValue(); ?>.png" width="339px" />
+					<?php } else { ?>
+						<img id="coupon-preview-img" src="/img/coupon_type_code.png" width="339px" />
+					<?php } ?>
+				</span>
 			</div>
 		</div>
 
