@@ -1,7 +1,7 @@
 
 				<div class="page-titlecontent">
 					<h2><?php echo __('Herzlich Willkommen'); ?></h2>
-					<p><?php echo __('Holen Sie sich jetzt den Spreadly Button für ihre Seite.Registrieren Sie ihre Webseite bei Spreadly und erhalten sie damit Analyse-Daten über Shares, Likes und Media Penetration ihrer User. Verdienen Sie nach der Registrierung über unser Adnetwork bares Geld, indem Sie an jedem geklickten Deal beteiligt werden.'); ?></p>
+					<p><?php echo __('Holen Sie sich jetzt den Spreadly Button für ihre Seite. Registrieren Sie ihre Webseite bei Spreadly und erhalten Sie damit Analyse-Daten über Shares, Likes und Media Penetration Ihrer User. Verdienen Sie nach der Registrierung über unser Adnetwork bares Geld, indem Sie an jedem geklickten Deal beteiligt werden.'); ?></p>
 				</div>
 				<section class="publisher-list">
 					<ul class="clearfix">
@@ -23,7 +23,7 @@
 							<span class="icon"><img src="/img/statistics/get-analytics.png" alt="" title=""></span>
 							<h3><?php echo __('Social Media Statistiken'); ?></h3>
 							<h4><?php echo __('Vorteile für Seitenbetreiber'); ?></h4>
-							<p><?php echo __('Mit Spreadly erfährst Du alles was in Sachen Empfehlungsmarketing wichtig ist. Wir zeigen Die wie, ob und dank wem Dein Empfehlungsmarketing funktioniert.'); ?></p>
+							<p><?php echo __('Mit Spreadly erfahren Sie alles, was in Sachen Empfehlungsmarketing wichtig ist. Wir zeigen Ihnen wie, ob und dank wem Ihr Empfehlungsmarketing funktioniert.'); ?></p>
 							<span class="link"><a href="<?php echo url_for('@analytics_overview'); ?>"><?php echo __('Zu den Statistiken &raquo;'); ?></a></span>
 						</li>
 					</ul>
