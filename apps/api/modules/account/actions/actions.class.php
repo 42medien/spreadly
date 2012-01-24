@@ -10,11 +10,11 @@
  */
 class accountActions extends sfActions
 {
- /**
-  * Executes index action
-  *
-  * @param sfRequest $request A request object
-  */
+  /**
+   * Executes index action
+   *
+   * @param sfRequest $request A request object
+   */
   public function executeCreate(sfWebRequest $request) {
     $this->getResponse()->setContentType('application/json');
     $this->setLayout(false);
@@ -24,7 +24,5 @@ class accountActions extends sfActions
       $this->getResponse()->setStatusCode(405);
       return $this->renderPartial("wrong_method");
     }
-
-
   }
 }
