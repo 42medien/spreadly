@@ -17,7 +17,8 @@ class ProjectConfiguration extends sfProjectConfiguration {
       'sfFormExtraPlugin',
       'sfImageTransformPlugin',
       'sfDoctrineGuardPlugin',
-      'sfForkedDoctrineApplyPlugin'
+      'sfForkedDoctrineApplyPlugin',
+      'sfDoctrineActAsTaggablePlugin'
     ));
 
     // load common doctrine 2 files
