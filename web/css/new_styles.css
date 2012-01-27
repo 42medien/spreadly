@@ -943,11 +943,16 @@ behavior: url(css/PIE.htc);
 .jgd-dropdown dd ul li a:hover { text-decoration: none; color: #fff; background:#3C3F45; }
 
 #http-sel{ width:86px; position:relative; z-index:9999; border: none; margin: 0;} 
-#http-sel .jgd-dropdown dt{width:56px; margin-top:1px;  background:url(/img/select-bgl.png) left 0px no-repeat;  padding-left:8px; }
+#http-sel .jgd-dropdown dt,
+#filter-period-label .jgd-dropdown dt{width:56px; margin-top:1px;  background:url(/img/select-bgl.png) left 0px no-repeat;  padding-left:8px; }
 #http-sel .jgd-dropdown dt a{ width:38px; background:url(/img/select-bgr.png) right 0px no-repeat; padding-right:30px; height:30px; display:block; line-height:30px; color:#000;  }
-#http-sel .jgd-dropdown dd ul {width: 68px; left: 3px;  z-index:99999999;}
-#http-sel .jgd-dropdown dd ul a{line-height:20px; color:#000; display:block; text-decoration:none !important;}
-#http-sel .jgd-dropdown dd ul a:hover{ color:#fff;}
+#filter-period-label .jgd-dropdown dt a{ width:95px; background:url(/img/select-bgr.png) right 0px no-repeat; padding-right:30px; height:30px; display:block; line-height:30px; color:#000;  }
+#http-sel .jgd-dropdown dd ul,
+#filter-period-label .jgd-dropdown dd ul{width: 68px; left: 3px;  z-index:99999999;}
+#http-sel .jgd-dropdown dd ul a,
+#filter-period-label .jgd-dropdown dd ul a{line-height:20px; color:#000; display:block; text-decoration:none !important;}
+#http-sel .jgd-dropdown dd ul a:hover,
+#filter-period-label .jgd-dropdown dd ul a:hover{ color:#fff;}
 #add-url-error { padding-left: 100px; }
 
 
