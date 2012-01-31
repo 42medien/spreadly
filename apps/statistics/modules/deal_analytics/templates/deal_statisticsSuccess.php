@@ -3,7 +3,7 @@
 slot('content');
 use_helper('YiidNumber');
 ?>
-<?php echo link_to("<span>".__('Details')."</span>", 'deal_analytics/deal_details?deal_id='.$pDeal->getId(), array('class' => 'button alignright'));?>
+<?php echo link_to("<span>".__('Details')."</span>", 'deal_analytics/deal_details?deal_id='.$pDeal->getId(), array('class' => 'more-button alignright'));?>
 <div id="analytics-bread">
 	<ul class="bc-list clearfix">
 		<li class="bc-first"></li>
@@ -120,6 +120,6 @@ use_helper('YiidNumber');
 	<?php echo __('Sorry, we have no demografical statistics for that deal yet'); ?>
 <?php } ?>
 
-<?php echo link_to("<span>".__('Details')."</span>", 'deal_analytics/deal_details?deal_id='.$pDeal->getId(), array('class' => 'button alignright'));?>
+<?php echo link_to("<span>".__('Details')."</span>", 'deal_analytics/deal_details?deal_id='.$pDeal->getId(), array('class' => 'more-button alignright'));?>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>

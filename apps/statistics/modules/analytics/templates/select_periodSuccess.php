@@ -26,9 +26,9 @@
 </form>
 
 <?php if (isset($pUrl) && $pUrl != null) { ?>
-	<a href="/analytics/get_url_detail" id="close-layer-link" class="button alignright"><span><?php echo __('Save and close'); ?></span></a>
+	<a href="/analytics/get_url_detail" id="close-layer-link" class="more-button alignright"><span><?php echo __('Save and close'); ?></span></a>
 <?php } else { ?>
-	<a href="get_domain_detail" id="close-layer-link" class="button alignright"><span><?php echo __('Save and close'); ?></span></a>
+	<a href="get_domain_detail" id="close-layer-link" class="more-button alignright"><span><?php echo __('Save and close'); ?></span></a>
 <?php } ?>
 
 <script type="text/javascript">

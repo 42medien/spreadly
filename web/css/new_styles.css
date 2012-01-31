@@ -1335,7 +1335,7 @@ div.data-tablebox table#top-influencer-table td.first div.infname img {
 /* End Main Nav
 --------------------------------------------------------------------------------------------------------*/
 
-a.button, button.button {
+a.more-button, button.button {
     background: url("/img/savel.png") no-repeat scroll 0 0 transparent;
     cursor: pointer;
     font-weight: bold;
@@ -1344,7 +1344,7 @@ a.button, button.button {
     text-decoration: none;
 }
 
-a.button span, button.button span {
+a.more-button span, button.button span {
     background: url("/img/saver.png") no-repeat scroll right 0 transparent;
     color: #000000;
     cursor: pointer;
@@ -1353,6 +1353,19 @@ a.button span, button.button span {
     line-height: 26px;
     padding: 4px 18px 6px 5px;
     text-decoration: none;
+}
+
+a.more-button:hover, a.more-button.active,
+button.button:hover, button.button.active {
+  background:url(/img/savel-hov.png) -0px 0px no-repeat;
+  color:#fff;
+  text-decoration:none;
+}
+
+a.more-button:hover span, a.more-button.active span,
+button.button:hover span, button.button.active span {
+  background:url(/img/saver-hov.png) right 0px no-repeat;
+  color:#fff;
 }
 
 /* Button Wizard Page Css

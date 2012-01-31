@@ -7,7 +7,7 @@ use_helper('YiidNumber');
 
 slot('content');
 ?>
-<?php echo link_to("<span>".__('Details')."</span>", 'analytics/domain_detail?domainid='.$pDomainProfileId, array('class' => 'button alignright'));?>
+<?php echo link_to("<span>".__('Details')."</span>", 'analytics/domain_detail?domainid='.$pDomainProfileId, array('class' => 'more-button alignright'));?>
 <div id="analytics-bread">
 	<ul class="bc-list clearfix">
 		<li class="bc-first"></li>
@@ -116,12 +116,12 @@ slot('content');
 	</div>
 </div>
 
-<?php echo link_to("<span>".__('Details')."</span>", 'analytics/domain_detail?domainid='.$pDomainProfileId, array('class' => 'button alignright'));?>
+<?php echo link_to("<span>".__('Details')."</span>", 'analytics/domain_detail?domainid='.$pDomainProfileId, array('class' => 'more-button alignright'));?>
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
 
 <?php slot('content'); ?>
-<h2 class="sub_title"><?php echo __('You earned %sum% € via Spreadly deals. See the monthly overview: ', array('%sum%' => $pDomainProfile->getCommissionSum())); ?></h2>
+<h2 class="sub_title"><?php echo __('You earned %sum% € via Spreadly deals. See the monthly overview:', array('%sum%' => $pDomainProfile->getCommissionSum())); ?></h2>
 	<div>
 		<?php include_partial('analytics/chart_bar_publisher', array('pChartsettings' =>
 					'{
