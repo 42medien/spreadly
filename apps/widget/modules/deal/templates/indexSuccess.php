@@ -37,6 +37,7 @@ use_helper('Avatar', 'Text');
   <form action="" name="popup-like-form" id="popup-like-form" class="deal-form" method="post">
     <div id="comment-area" class="clearfix deal-comment">
       <textarea id="area-like-comment" class="mirror-value bordered gradient shadow-wide" name="like[comment]" placeholder="<?php echo __("add your comment (optional) ..."); ?> <?php echo __('Feel free to add some hashtags, for example:'); ?> #deal"></textarea>
+      <span id="comment-area-counter-box"><span id="area-like-comment_counter">0</span> <?php echo __('Zeichen'); ?></span>
     </div>
     <div id="like-submit">
     	<?php include_component("like", "share_section"); ?>

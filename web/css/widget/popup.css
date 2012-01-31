@@ -184,8 +184,23 @@ textarea::-webkit-scrollbar-thumb:hover {
   padding: 3px;
   height: 70px;
   line-height: 1.4;
-  margin: 0 0 1ex;
+  margin: 0;
+  font-size: 16px;
 
+}
+
+#popup-like-form div#comment-area{
+  margin: 0 0 1ex;
+}
+
+#popup-like-form div#comment-area #comment-area-counter-box{
+  float: right;
+  font-size: 10px;
+  margin: 3px 5px 0 0;  
+}
+
+#popup-like-form div#comment-area #area-like-comment_counter{
+  font-size: 10px;
 }
 
 #popup-like-form div#comment-area label{
