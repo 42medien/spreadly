@@ -48,6 +48,9 @@ all:
     post_type:   'Content-Type: application/xml'
     post_realm:  'http://api.linkedin.com'
 
+  tumblr:
+    post_api:    'http://api.tumblr.com/v2/blog/{base-hostname}/post'
+
   #google:
   #  post_api:    'https://www.googleapis.com/buzz/v1/activities/@me/@self'
   #  post_type:   'Content-Type: application/json'
