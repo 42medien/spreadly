@@ -70,44 +70,6 @@
   text-align: left;
 }
 
-/********************footer***********************/
-footer{
-  text-align: center;
-}
-
-footer ul{
-  margin: 0 auto;
-  padding: 1ex 0;
-}
-
-footer ul li{
-  display: inline-block;
-}
-
-footer ul li a {
-  border-right: 1px solid #fff;
-  border-right: 1px solid hsla(0,0%,100%,.2);
-  padding: 1ex;
-  color: #fff;
-  color: hsla(0,0%,100%,.5);
-  -webkit-transition: all .6s ease-out;
-  -moz-transition: all .6s ease-out;
-  -ms-transition: all .6s ease-out;
-  -o-transition: all .6s ease-out;
-  transition: all .6s ease-out;
-}
-footer ul li a:hover {
-  color: hsla(0,0%,100%,1);
-  text-decoration: underline;
-}
-footer ul li.active a{
-  color: hsla(0,0%,100%,1);
-  text-decoration: underline;
-}
-
-footer ul li:last-child a {
-  border-right: 0;
-}
 
 /********************like-content: form-fields***********************/
 #popup-like-form div#comment-area textarea#area-like-comment{
