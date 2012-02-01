@@ -20,29 +20,26 @@
 						<ul id="mainNavigation" class="clearfix alignright">
 							<li><a href="<?php echo url_for('landing/index'); ?>" <?php if($module=='landing' && $action=='index') { echo 'class="active"';} ?> title="<?php echo __('Home'); ?>"><?php echo __('Home'); ?></a></li>
 							<li><a href="<?php echo url_for('@configurator'); ?>" <?php if(($module=='configurator' && $action=='index')) { echo 'class="active"';} ?> title="<?php echo __('Button');?>"><?php echo __('Buttons');?></a></li>
-							<li>
-								<a href="<?php echo url_for('@publisher'); ?>" <?php if($module=='domain_profiles' || $module=='analytics' || $module=='publisher') { echo 'class="active"';} ?> title="<?php echo __('Publisher'); ?>"><?php echo __('Webseitenbetreiber'); ?></a>
-
-								<?php if($module=='domain_profiles' || $module=='analytics' || $module=='publisher') { ?>
-									<ul class="second-level-nav clearfix">
+							<li id="nav-publisher">
+								<a id="nav-publisher-link" href="<?php echo url_for('@publisher'); ?>" <?php if($module=='domain_profiles' || $module=='analytics' || $module=='publisher') { echo 'class="active"';} ?> title="<?php echo __('Publisher'); ?>"><?php echo __('Webseitenbetreiber'); ?></a>
+									<ul class="second-level-nav clearfix" <?php if($module=='domain_profiles' || $module=='analytics' || $module=='publisher') { ?>style="display:block;"<?php } ?>>
 										<li class="first"></li>
 										<li><a href="<?php echo url_for('@configurator'); ?>"><?php echo __('Button'); ?></a></li>
 										<li><a href="<?php echo url_for('@domain_profiles'); ?>"><?php echo __('Domain registrieren'); ?></a></li>
 										<li class="last"><a href="<?php echo url_for('@analytics_overview'); ?>"><?php echo __('Statistiken'); ?></a></li>
 									</ul>
-								<?php } ?>
+
 							</li>
 
-							<li>
-								<a href="<?php echo url_for('@advertiser'); ?>" <?php if($module=='deals' || $module=='deal_analytics' || $module=='advertiser') { echo 'class="active"';} ?> title="<?php echo __('Advertiser'); ?>"><?php echo __('Werbetreibende'); ?></a>
-									<?php if($module=='deals' || $module=='deal_analytics' || $module=='advertiser') { ?>
-									<ul class="second-level-nav clearfix">
+							<li id="nav-advertiser">
+									<a id="nav-advertiser-link" href="<?php echo url_for('@advertiser'); ?>" <?php if($module=='deals' || $module=='deal_analytics' || $module=='advertiser') { echo 'class="active"';} ?> title="<?php echo __('Advertiser'); ?>"><?php echo __('Werbetreibende'); ?></a>
+									<ul class="second-level-nav clearfix" <?php if($module=='deals' || $module=='deal_analytics' || $module=='advertiser') { ?>style="display:block;"<?php } ?>>
 										<li class="first"></li>
 										<li><a href="<?php echo url_for('@deals'); ?>"><?php echo __('Kampagne starten'); ?></a></li>
 										<li><a href="<?php echo url_for('@deal_analytics_index'); ?>"><?php echo __('Statistiken'); ?></a></li>
 										<li class="last"><a href="<?php echo url_for('@dealapi'); ?>"><?php echo __('Deal API'); ?></a></li>
 									</ul>
-									<?php } ?>
+
 							</li>
 
 

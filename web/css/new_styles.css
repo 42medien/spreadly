@@ -1655,9 +1655,26 @@ a.graybtn:hover { text-decoration:none; color:#EB2374;}
 
 
 /***********second-level-navigation*****************/
+
+#nav-publisher:hover ul.second-level-nav,
+#nav-advertiser:hover ul.second-level-nav{
+  display:block;
+}
+
+#nav-publisher:hover #nav-publisher-link,
+#nav-advertiser:hover #nav-advertiser-link{
+  background-color: #aa3d71;
+	
+}
+
+
+
 .second-level-nav{
   background-color: #aa3d71;
   list-style: disc;
+  display: none;
+  position: absolute;
+  width: 100%;  
 }
 
 .second-level-nav li{
