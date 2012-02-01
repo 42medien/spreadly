@@ -27,3 +27,9 @@ Community:
     community: 'linkedin'
     url:       'http://www.linkedin.com'
     social_publishing_possible:   1
+
+  community_6:
+    name:      'tumblr'
+    community: 'tumblr'
+    url:       'http://www.tumblr.com'
+    social_publishing_possible:   1
