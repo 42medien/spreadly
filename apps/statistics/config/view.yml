@@ -6,7 +6,7 @@ default:
     content-type: text/html
 
   metas:
-    description:  Spread.ly consists of sharing button widgets that enable users to share content into a wide range of social networks simultanously. Besides that, Spread.ly offers a sophisticated functionality to reward users for their likes.
+    description:  Spreadly consists of sharing button widgets that enable users to share content into a wide range of social networks simultanously. Besides that, Spreadly offers a sophisticated functionality to reward users for their likes.
     keywords:     sharing,sharebutton,like,likebutton,deal,dealbutton,facebook,linkedin,twitter,buzz
     language:     en
     robots:       index, follow
