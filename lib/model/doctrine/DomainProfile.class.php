@@ -52,6 +52,7 @@ class DomainProfile extends BaseDomainProfile
         }
         if($verified===true) {
           $this->setState('verified');
+          DomainProfileTable::getInstance()->deleteUnverified();
         } else {
           $verified = DomainProfile::ERROR_INVALID_MICROID;
         }

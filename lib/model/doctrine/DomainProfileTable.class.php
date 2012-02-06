@@ -55,4 +55,11 @@ class DomainProfileTable extends Doctrine_Table
 
     return $lQuery->count();
   }
+
+  public function deleteUnverified() {
+    Doctrine_Query::create()
+          ->delete('DomainProfile dp')
+          ->where('dp.state = ?', self::STATE_PENDING)
+          ->execute();
+  }
 }
