@@ -52,7 +52,6 @@ class DomainProfile extends BaseDomainProfile
         }
         if($verified===true) {
           $this->setState('verified');
-          DomainProfileTable::getInstance()->deleteUnverified();
         } else {
           $verified = DomainProfile::ERROR_INVALID_MICROID;
         }
@@ -64,6 +63,11 @@ class DomainProfile extends BaseDomainProfile
     }
 
     $this->save();
+
+    if($this->getState() == DomainProfileTable::STATE_VERIFIED) {
+      DomainProfileTable::getInstance()->deleteUnverified();
+    }
+
     return $verified;
   }
 
