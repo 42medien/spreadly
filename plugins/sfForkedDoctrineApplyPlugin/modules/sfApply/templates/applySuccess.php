@@ -7,9 +7,6 @@
 <?php slot('sf_apply_login') ?>
 <?php end_slot() ?>
 
-<section class="content-publish">
-	<section class="container_12">
-
 		<div class="sf_apply sf_apply_apply">
 		  <h2 class="verifytitle"><?php echo __("Registrierung", array(), 'sfForkedApply') ?></h2>
 
@@ -32,5 +29,3 @@
 		</div>
 
 		<?php //include_partial('global/spreadly_references');?>
-	</section>
-</section>

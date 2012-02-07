@@ -2,8 +2,6 @@
 <?php use_stylesheets_for_form( $form ) ?>
 <?php slot('sf_apply_login') ?>
 <?php end_slot() ?>
-<section class="content-publish">
-	<section class="container_12">
 		<div class="sf_apply sf_apply_reset_request">
 
 		<h2 class="green_style"><?php echo __("Passwort zurücksetzen", array(), 'sfForkedApply') ?></h2>
@@ -29,5 +27,3 @@
 		</form>
 		</div>
 		<?php include_partial('global/spreadly_references');?>
-	</section>
-</section>

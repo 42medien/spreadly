@@ -215,7 +215,8 @@ ul#mainNavigation li .submenu .listline dd.last a {border:none; padding-bottom:1
 .learn-moreTab span{font-size:24px;  font-weight:bold; color:#fff; display:inline-block; margin:0px 30px; line-height:42px; vertical-align:middle;}
 .learn-moreTab a{ display:inline-block; width:129px; height:42px; background:url(/img/statistics/learn-more-btn1.gif) no-repeat 0px 0px; font-size:18px; line-height:42px; color:#222222; text-align:center; vertical-align:middle;}
 
-/* Customer Content start
+/* Customer Content startt, daß das Training nach Geschlecht getrennt ist. Ich vermute hier dasselbe.
+
 --------------------------------------------------------------------------------------------------------*/
 
 .customer-display{ margin:20px 0px 44px 51px;}
@@ -319,7 +320,8 @@ a {color:#272727;}
 .billing-system {width:225px; position:relative; top:-2px;}
 .billing-system  h4 {font-size:15px; color:#1a1a1a; padding-left:30px; margin-bottom:25px;}
 .billing-system  ul {padding-left:25px; margin-bottom:14px; min-height:237px; border-bottom:solid 1px #d5d5d5;}
-.billing-system  li {position:relative; padding-bottom:20px; width:188px!important; padding-left:12px; font-size:12px;}
+.billing-system  li {position:relative; padding-bottom:20px; width:188pt, daß das Training nach Geschlecht getrennt ist. Ich vermute hier dasselbe.
+                                                                   x!important; padding-left:12px; font-size:12px;}
 .billing-system  li .num { behavior: url(css/PIE.htc); position:absolute; left:-26px; top:2px; z-index:1; border:solid 3px #fff; color:#fff; text-align:center; font-weight:bold; line-height:24px; background:#9d3969; height:24px; width:24px; display:inline-block; -webkit-border-radius:20px; -moz-border-radius:20px; border-radius:20px; -moz-box-shadow: 0px 0px 6px #888; -webkit-box-shadow: 0px 0px 6px #888; box-shadow: 0px 0px 6px #888;}
 .billing-system  li.nxtbtn {padding:0px 0px 0px 12px;} 
 .billing-system .nxtbtn a {font-size:15px; font-weight:bold; float:right; color:#923562;}
@@ -1021,30 +1023,44 @@ behavior: url(css/PIE.htc);
 
 
 #sf_apply_apply_form,
-#sf_apply_reset_request{
+#sf_apply_reset_request,
+#sf_apply_settings_form,
+#sf_apply_settings_reset_form{
   margin-bottom: 70px;
 }
 
 #sf_apply_apply_form table tr,
-#sf_apply_reset_request table tr{
+#sf_apply_reset_request table tr,
+#sf_apply_settings_form table tr,
+#sf_apply_settings_reset_form table tr{
   height: 40px;
 }
 
 #sf_apply_apply_form table td,
-#sf_apply_reset_request table td{
+#sf_apply_reset_request table td,
+#sf_apply_settings_form table td,
+#sf_apply_settings_reset_form table td{
   vertical-align: middle;  
 }
 
 #sf_apply_apply_form table th,
-#sf_apply_reset_request table th{
+#sf_apply_reset_request table th,
+#sf_apply_settings_form table th,
+#sf_apply_settings_reset_form table th{
   text-align: left;
   width: 150px;
   vertical-align: middle;  
 }
 
+#sf_apply_settings_reset_form table th{
+  width: 160px;
+}
+
 #sf_apply_apply_form input[type="text"],
 #sf_apply_apply_form input[type="password"],
-#sf_apply_reset_request input[type="text"]{
+#sf_apply_reset_request input[type="text"],
+#sf_apply_settings_form input[type="text"],
+#sf_apply_settings_reset_form input[type="password"]{
   border:solid 1px #ababab; 
   behavior: url(css/PIE.htc); 
   color:#252525; 
@@ -1061,7 +1077,9 @@ behavior: url(css/PIE.htc);
 
 #sf_apply_apply_form input[type="text"],
 #sf_apply_apply_form input[type="password"],
-#sf_apply_reset_request input[type="text"]{ 
+#sf_apply_reset_request input[type="text"],
+#sf_apply_settings_form input[type="text"],
+#sf_apply_settings_reset_form input[type="password"]{ 
   position:relative; z-index:1; /*fallback for non-CSS3 browsers*/
   background: #ebebeb;
   background: -webkit-gradient(linear, 0 0, 0 bottom, from(#ebebeb), to(#ffffff));

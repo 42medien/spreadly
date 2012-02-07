@@ -10,15 +10,15 @@ class sfApplyResetForm extends sfForm
         array(), array('maxlength' => 128)));
 
     $this->widgetSchema->setLabels( array(
-      'password' => 'Choose NEW Password',
-      'password2' => 'Confirm NEW Password'));
-    
+      'password' => 'NEUES Passwort',
+      'password2' => 'Passwort wiederholen'));
+
     $this->widgetSchema->setNameFormat('sfApplyReset[%s]');
 
     $this->setValidator('password', new sfValidatorApplyPassword() );
     $this->setValidator('password2', new sfValidatorApplyPassword() );
 
-    $this->validatorSchema->setPostValidator( 
+    $this->validatorSchema->setPostValidator(
             new sfValidatorSchemaCompare( 'password', sfValidatorSchemaCompare::EQUAL,
                     'password2', array(), array('invalid' => 'The passwords did not match.')));
   }

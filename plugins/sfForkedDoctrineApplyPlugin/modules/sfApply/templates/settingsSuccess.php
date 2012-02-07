@@ -2,30 +2,48 @@
 <?php use_stylesheets_for_form( $form ) ?>
 <?php end_slot() ?>
 <?php use_helper("I18N") ?>
-<?php slot('content') ?>
+
+
 <div class="sf_apply sf_apply_settings">
-<h2><?php echo __("Account Settings", array(), 'sfForkedApply') ?></h2>
+<h2><?php echo __("Persönliche Informationen") ?></h2>
 <form method="post" action="<?php echo url_for("sfApply/settings") ?>" name="sf_apply_settings_form" id="sf_apply_settings_form">
-<ul>
-<?php echo $form ?>
-<li class="submit_row">
-<input type="submit" value="<?php echo __("Save", array(), 'sfForkedApply') ?>" /> <?php echo(__("or", array(), 'sfForkedApply')) ?>
- <?php echo link_to(__('Cancel', array(), 'sfForkedApply'), sfConfig::get('app_sfApplyPlugin_after', '@homepage')) ?>
-</li>
-</ul>
+<table>
+	<?php echo $form ?>
+  <tfoot>
+		<tr>
+			<td colspan="2" id="signup-button-row">
+				<button type="submit" class="blue-btn alignright"><?php echo __("Save") ?></button>
+				<?php echo link_to(__("Abbrechen"), sfConfig::get('app_sfApplyPlugin_after', '@homepage'), array('class' => 'blue-btn alignright')) ?>
+			</td>
+		</tr>
+	</tfoot>
+</table>
+
+
+
 </form>
-<form method="GET" action="<?php echo url_for("sfApply/resetRequest") ?>" name="sf_apply_reset_request" id="sf_apply_reset_request">
-<p>
-<?php echo __('Click the button below to change your password.', array(), 'sfForkedApply'); ?>
-<?php
-$confirmation = sfConfig::get( 'app_sfForkedApply_confirmation' );
-if( $confirmation['reset_logged'] ): ?>
-    <?php echo __('For security reasons, you
-will receive a confirmation email containing a link allowing you to complete the password change.', array(), 'sfForkedApply') ?>
-<?php endif; ?>
-</p>
-<button type="submit"><span><?php echo __("Reset Password", array(), 'sfForkedApply') ?></span></button>
+
+
+
+
+<h2><?php echo __("Passwort ändern") ?></h2>
+<form method="post" action="<?php echo url_for("sfApply/settings_reset") ?>" name="sf_apply_reset_form" id="sf_apply_settings_reset_form">
+<?php //echo __('Click the button below to change your password.'); ?>
+<?php	//$confirmation = sfConfig::get( 'app_sfForkedApply_confirmation' ); ?>
+<table>
+	<?php echo $resetform;?>
+	<?php //echo __('For security reasons, you will receive a confirmation email containing a link allowing you to complete the password change.') ?>
+  <tfoot>
+		<tr>
+			<td colspan="2" id="signup-button-row">
+				<button type="submit" class="blue-btn alignright"><?php echo __("Save") ?></button>
+				<?php echo link_to(__("Abbrechen"), sfConfig::get('app_sfApplyPlugin_after', '@homepage'), array('class' => 'blue-btn alignright')) ?>
+			</td>
+		</tr>
+	</tfoot>
+
+</table>
+
 </form>
+
 </div>
-<?php end_slot(); ?>
-<?php include_partial('global/graybox'); ?>

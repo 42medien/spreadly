@@ -252,9 +252,12 @@ class BasesfApplyActions extends sfActions
     // making further changes after calling parent::configure() from
     // your own configure() method.
 
-    $profile = $this->getUser()->getProfile();
+    $profile = $this->getUser()->getGuardUser();
+
+    //var_dump($profile->getGuardUser());die();
+
     // we're getting default or customized settingsForm for the task
-    if( !( ($this->form = $this->newForm( 'settingsForm', $profile) ) instanceof sfGuardUserProfileForm) )
+    if( !( ($this->form = $this->newForm( 'settingsForm', $profile) ) instanceof sfGuardUserForm) )
     {
       // if the form isn't instance of sfApplySettingsForm, we don't accept it
       throw new InvalidArgumentException( sfContext::getInstance()->
@@ -264,15 +267,35 @@ class BasesfApplyActions extends sfActions
                       '%form%' => 'sfApplySettingsForm' ), 'sfForkedApply' )
           );
     }
+
+      //won't present this page to users that are not authenticated or haven't got confirmation code
+    if( !$this->getUser()->isAuthenticated() && !$this->getUser()->getAttribute('sfApplyReset', false)  )
+    {
+      $this->redirect( '@sf_guard_signin' );
+    }
+    // we're getting default or customized resetForm for the task
+    if( !( ($this->resetform = $this->newForm( 'resetForm') ) instanceof sfApplyResetForm) )
+    {
+      // if the form isn't instance of sfApplyResetForm, we don't accept it
+      throw new InvalidArgumentException(
+          'The custom reset form should be instance of sfApplyResetForm'
+          );
+    }
+
+
     if ($request->isMethod('post'))
     {
       $this->form->bind($request->getParameter( $this->form->getName() ));
       if ($this->form->isValid())
       {
-        $this->form->save();
-        return $this->redirect('@homepage');
+        $test = $this->form->save();
+        //var_dump($test);die();
+        //return $this->redirect('@homepage');
       }
+      //var_dump($this->form);die();
     }
+
+
   }
 
   public function executeEditEmail(sfRequest $request)

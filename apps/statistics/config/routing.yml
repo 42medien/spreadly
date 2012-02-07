@@ -41,6 +41,10 @@ sf_guard_forgot_password:
 sf_guard_register:
   url:   /user/new
   param: { module: sfApply, action: apply }
+  
+sf_guard_settings:
+  url:   /user/settings
+  param: { module: sfApply, action: settings }
 
 get_buttoncode:
   url:  /configurator/get_buttoncode/*

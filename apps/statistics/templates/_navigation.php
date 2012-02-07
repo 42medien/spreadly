@@ -20,7 +20,7 @@
 						<ul id="mainNavigation" class="clearfix alignright">
 							<li><a href="<?php echo url_for('landing/index'); ?>" <?php if($module=='landing' && $action=='index') { echo 'class="active"';} ?> title="<?php echo __('Home'); ?>"><?php echo __('Home'); ?></a></li>
 							<li><a href="<?php echo url_for('@configurator'); ?>" <?php if(($module=='configurator' && $action=='index')) { echo 'class="active"';} ?> title="<?php echo __('Button');?>"><?php echo __('Buttons');?></a></li>
-							<li id="nav-publisher">
+							<li id="nav-publisher" class="clearfix">
 								<a id="nav-publisher-link" href="<?php echo url_for('@publisher'); ?>" <?php if($module=='domain_profiles' || $module=='analytics' || $module=='publisher') { echo 'class="active"';} ?> title="<?php echo __('Publisher'); ?>"><?php echo __('Webseitenbetreiber'); ?></a>
 									<ul class="second-level-nav clearfix" <?php if($module=='domain_profiles' || $module=='analytics' || $module=='publisher') { ?>style="display:block;"<?php } ?>>
 										<li class="first"></li>
@@ -41,9 +41,14 @@
 									</ul>
 
 							</li>
-
-
 							<li <?php echo ($sf_user->isAuthenticated() && !$sf_user->isSuperAdmin())?'class="last"':''?>><a href="<?php echo url_for('@pricing'); ?>" <?php if(($module=='landing' && $action=='pricing')) { echo 'class="active"';} ?> title="<?php echo __('Pricing');?>"><?php echo __('Preise');?></a></li>
+					    <?php if($sf_user->isSuperAdmin()) { ?>
+					      <li <?php echo ($sf_user->isAuthenticated() && !$sf_user->isSuperAdmin())?'class="last"':''?>>
+					      	<a href="/backend.php" title="Backend">
+										<?php echo __('Account'); ?>
+					      	</a>
+					      </li>
+					    <?php } ?>
 					    <?php if($sf_user->isSuperAdmin()) { ?>
 					      <li class="last">
 					      	<a href="/backend.php" title="Backend">
