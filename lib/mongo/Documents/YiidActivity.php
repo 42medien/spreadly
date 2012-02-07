@@ -215,7 +215,13 @@ class YiidActivity extends BaseDocument {
   }
 
   public function getDomainProfile() {
-    return DomainProfileTable::getInstance()->findOneBy("url", parse_url($this->getUrl(), PHP_URL_HOST));
+    $result = Doctrine_Query::create()
+        ->from('DomainProfile dp')
+        ->where('dp.url = ?', parse_url($this->getUrl(), PHP_URL_HOST))
+        ->andWhere('dp.state = ?', DomainProfileTable::STATE_VERIFIED)
+        ->fetchOne();
+
+    return $result;
   }
 
   public function hasDomainSubscriber() {
