@@ -18,6 +18,7 @@ use \sfException,
     \DomainProfileTable,
     \sfProjectConfiguration,
     \CouponWebhookClient,
+    \Doctrine_Query,
     Queue\Queue;
 
 /**
