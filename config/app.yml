@@ -139,7 +139,7 @@ dev:
     host:             'spreadly.local'
     widgets_url:      'http://spread.local'
     widgets_host:     'spread.local'
-    button_url:        'http://button.spread.local'
+    button_url:        '//button.spread.local'
     blog_host:         'blog.spreadly.local'
     old_platform_host: 'yiid.local'
     old_stats_host:    'yiidstats.local'
