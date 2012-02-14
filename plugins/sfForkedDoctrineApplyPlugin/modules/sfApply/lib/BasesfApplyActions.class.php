@@ -285,18 +285,73 @@ class BasesfApplyActions extends sfActions
 
     if ($request->isMethod('post'))
     {
-      $this->form->bind($request->getParameter( $this->form->getName() ));
-      if ($this->form->isValid())
-      {
+    	$lParams = $request->getParameter( $this->form->getName() );
+
+    	if($profile->getUsername() != $lParams['username']){
+
+    		$this->form->getValidatorSchema()->setPostValidator(
+					new sfValidatorDoctrineUnique(
+						array( 'model' => 'sfGuardUser', 'column' => 'username' ),
+						array('invalid' => 'There is already a user by that name. Choose another.')
+					)
+        );
+    	}
+
+    	$this->form->bind($lParams);
+      if ($this->form->isValid()) {
         $test = $this->form->save();
-        //var_dump($test);die();
-        //return $this->redirect('@homepage');
+        $this->pSettingssuccess = true;
       }
-      //var_dump($this->form);die();
     }
 
 
   }
+
+  public function executeSettings_reset(sfRequest $request)
+  {
+    //won't present this page to users that are not authenticated or haven't got confirmation code
+    if( !$this->getUser()->isAuthenticated() && !$this->getUser()->getAttribute('sfApplyReset', false)  )
+    {
+      $this->redirect( '@sf_guard_signin' );
+    }
+    // we're getting default or customized resetForm for the task
+    if( !( ($this->resetform = $this->newForm( 'resetForm') ) instanceof sfApplyResetForm) )
+    {
+      // if the form isn't instance of sfApplyResetForm, we don't accept it
+      throw new InvalidArgumentException(
+          'The custom reset form should be instance of sfApplyResetForm'
+          );
+    }
+    if ($request->isMethod('post'))
+    {
+      $this->resetform->bind($request->getParameter( $this->resetform->getName() ));
+      if ($this->resetform->isValid())
+      {
+        //This got fixed (0.9.1), so if user is authenticated, and requests password change, we're still getting his id.
+        $this->id = ( $this->getUser()->isAuthenticated() ) ? $this->getUser()->getGuardUser()->getId() : $this->getUser()->getAttribute('sfApplyReset', false);
+        $this->forward404Unless($this->id);
+        $this->sfGuardUser = Doctrine::getTable('sfGuardUser')->find($this->id);
+        $this->forward404Unless($this->sfGuardUser);
+        $sfGuardUser = $this->sfGuardUser;
+        $sfGuardUser->setPassword($this->resetform->getValue('password'));
+        $sfGuardUser->save();
+        $this->getUser()->signIn($sfGuardUser);
+        $this->getUser()->setAttribute('sfApplyReset', null);
+        $this->pPasswordsuccess = true;
+        //return 'After';
+      }
+      	$profile = $this->getUser()->getGuardUser();
+      	$this->form = $this->newForm( 'settingsForm', $profile);
+      	$this->setTemplate('settings');
+    }
+    if( $this->getUser()->isAuthenticated() )
+    {
+      //return 'Logged';
+    }
+  }
+
+
+
 
   public function executeEditEmail(sfRequest $request)
   {

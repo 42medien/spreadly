@@ -32,9 +32,18 @@ class sfApplySettingsForm extends sfGuardUserForm
             'lastname' => 'Last name'
         ) );
 
-    $this->setValidator( 'firstname' , new sfValidatorApplyFirstname() );
+
+    $this->setValidator( 'firstname' , new sfValidatorApplyFirstname(array('required' => false), array('message' => 'fdsaddfas')) );
     $this->setValidator( 'lastname', new sfValidatorApplyLastname() );
-    $this->setValidator( 'username', new sfValidatorApplyUsername() );*/
+		$this->setValidator( 'username', new sfValidatorSpreadlyUsername() );
+		*/
+    $this->setValidators(array(
+      'first_name'       => new sfValidatorApplyFirstname(array('required' => true), array('required' => 'firstname required')),
+      'last_name'        => new sfValidatorApplyLastname(array('required' => true), array('required' => 'firstname required')),
+      'username'       => new sfValidatorSpreadlyUsername(array('required' => true), array('required' => 'firstname required')),
+    ));
+
+
 
 
     $this->widgetSchema->setNameFormat('sfApplySettings[%s]');

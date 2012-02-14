@@ -44,7 +44,7 @@
 							<li <?php echo ($sf_user->isAuthenticated() && !$sf_user->isSuperAdmin())?'class="last"':''?>><a href="<?php echo url_for('@pricing'); ?>" <?php if(($module=='landing' && $action=='pricing')) { echo 'class="active"';} ?> title="<?php echo __('Pricing');?>"><?php echo __('Preise');?></a></li>
 					    <?php if($sf_user->isSuperAdmin()) { ?>
 					      <li <?php echo ($sf_user->isAuthenticated() && !$sf_user->isSuperAdmin())?'class="last"':''?>>
-					      	<a href="/backend.php" title="Backend">
+					      	<a href="<?php echo url_for('user/settings');?>" title="Backend">
 										<?php echo __('Account'); ?>
 					      	</a>
 					      </li>

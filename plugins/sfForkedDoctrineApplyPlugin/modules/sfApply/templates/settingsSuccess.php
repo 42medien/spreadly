@@ -6,6 +6,9 @@
 
 <div class="sf_apply sf_apply_settings">
 <h2><?php echo __("Persönliche Informationen") ?></h2>
+<?php if(isset($pSettingssuccess) && $pSettingssuccess == true) {?>
+	<h3><?php echo __('Ihre Daten wurden gespeichert!'); ?></h3>
+<?php } ?>
 <form method="post" action="<?php echo url_for("sfApply/settings") ?>" name="sf_apply_settings_form" id="sf_apply_settings_form">
 <table>
 	<?php echo $form ?>
@@ -27,6 +30,9 @@
 
 
 <h2><?php echo __("Passwort ändern") ?></h2>
+<?php if(isset($pPasswordsuccess) && $pPasswordsuccess == true) {?>
+	<h3><?php echo __('Ihr neues Passwort wurde gespeichert!'); ?></h3>
+<?php } ?>
 <form method="post" action="<?php echo url_for("sfApply/settings_reset") ?>" name="sf_apply_reset_form" id="sf_apply_settings_reset_form">
 <?php //echo __('Click the button below to change your password.'); ?>
 <?php	//$confirmation = sfConfig::get( 'app_sfForkedApply_confirmation' ); ?>
