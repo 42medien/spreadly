@@ -80,7 +80,7 @@ prod:
     host:              'spreadly.com'
     widgets_url:       'http://spread.ly'
     widgets_host:      'spread.ly'
-    button_url:        'http://button.spread.ly'
+    button_url:        '//button.spread.ly'
     blog_host:         'blog.spreadly.com'
     old_platform_host: 'yiid.com'
     old_stats_host:    'yiid.it'
