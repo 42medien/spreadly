@@ -19,6 +19,11 @@ class BasesfApplyActions extends sfActions
           'The custom apply form should be instance of sfApplyApplyForm' );
     }
 
+
+    $class = sfConfig::get('app_sf_guard_plugin_signin_form', 'sfGuardFormSignin');
+    $this->signinform = new $class();
+
+
     //Code below is used when user is sending his application!
     if( $request->isMethod('post') )
     {

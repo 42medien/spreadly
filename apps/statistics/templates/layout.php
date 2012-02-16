@@ -50,7 +50,7 @@
 					<section class="container_12">
 			<?php } else {  ?>
 				<section class="content-publish">
-					<section class="container_12">
+					<section class="container_12 clearfix">
 			<?php } ?>
 		<?php } ?>
 						<?php echo $sf_content; ?>
