@@ -9,7 +9,7 @@
 							<li class="blog"><a href="http://blog.spreadly.com/" target="_blank" title="<?php echo __('Blog'); ?>"><?php echo __('Blog'); ?></a></li>
 							<li class="about"><a href="<?php echo url_for('@customer'); ?>" title="<?php echo __('Über uns'); ?>"><?php echo __('Über uns'); ?></a></li>
   						<?php if(!$sf_user->isAuthenticated()) {?>
-								<li class="sign"><a href="<?php echo url_for('@sf_guard_signin'); ?>" title="<?php echo __('Login'); ?>"><?php echo __('Login'); ?></a></li>
+								<li class="sign"><a href="<?php echo url_for('@sf_guard_register'); ?>" title="<?php echo __('Login'); ?>"><?php echo __('Login'); ?></a></li>
   						<?php } else { ?>
 								<li class="sign"><a href="<?php echo url_for('@sf_guard_signout'); ?>" title="<?php echo __('Logout'); ?>"><?php echo __('Logout'); ?></a></li>
 							<?php } ?>
