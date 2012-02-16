@@ -1,0 +1,4 @@
+autoload:
+  forked_doctrine_apply_plugin:
+    path:      %SF_PLUGINS_DIR%/sfForkedDoctrineApplyPlugin/modules/sfApply/lib
+    recursive: true
