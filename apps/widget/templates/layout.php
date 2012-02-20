@@ -32,6 +32,18 @@
 					<?php include_partial('global/footer'); ?>
         </footer>
       </div>
+      <br /><br />
+      <script type="text/javascript"><!--
+      google_ad_client = "ca-pub-1809163553409046";
+      /* spreadly_pop */
+      google_ad_slot = "0319327840";
+      google_ad_width = 468;
+      google_ad_height = 60;
+      //-->
+      </script>
+      <script type="text/javascript"
+      src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+      </script>
     </div>
 
 		<img id="general-ajax-loader" style="display: none;" src="/img/global/ajax-loader-bar-circle.gif" />
