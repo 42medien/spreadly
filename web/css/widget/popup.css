@@ -23,7 +23,7 @@ a img {border: 0;}
 * html .clearfix { height:1%; }/* hides clearfix from IE-mac */
 .clearfix { display:block; }/* end hide from IE-mac */
 .alignleft { float:left; }
-
+.alignright { float:right; }
 .error{color:#911;}
 .success{color:#008000;}
 .add-info{font-size: 10px; color: #666;}
