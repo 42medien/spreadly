@@ -16,7 +16,7 @@ class WidgetUtils {
   private $aYiidActivity = null;
   private $aShowFriends = false;
   private $aCounter = true;
-  private $aHexColor = "973765";
+  private $aHexColor = "1C2666";
   private $aColor = null;
   private $aLabel = "Like";
   private $aType = "default";
@@ -158,8 +158,8 @@ class WidgetUtils {
       session_decode($lEncodedData);
 
       if (array_key_exists('symfony/user/sfUser/attributes', $_SESSION) &&
-          array_key_exists('user_session', $_SESSION['symfony/user/sfUser/attributes']) &&
-          array_key_exists('id', $_SESSION['symfony/user/sfUser/attributes']['user_session'])) {
+      array_key_exists('user_session', $_SESSION['symfony/user/sfUser/attributes']) &&
+      array_key_exists('id', $_SESSION['symfony/user/sfUser/attributes']['user_session'])) {
         $pUserId = $_SESSION['symfony/user/sfUser/attributes']['user_session']['id'];
       }
 
@@ -236,7 +236,7 @@ class WidgetUtils {
     $lObject = $pCollectionObject->findOne(array('social_object.$id' => $lSocialObject['_id'],
                                                    'u_id' => intval($lUserId),
                                                    'd_id' => array('$exists' => false)
-                                                  ));
+    ));
 
     return $lObject;
   }
@@ -343,27 +343,21 @@ class WidgetUtils {
       $lMongo = $this->getMongoCon();
 
       $lMongo->selectCollection(LikeSettings::MONGO_DATABASENAME, "yiid_activity")
-           ->update($lOriginYiidActivity,
-                    $upsert, $options);
+             ->update($lOriginYiidActivity, $upsert, $options);
 
       $lMongo->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "analytics_activity")
-           ->update(array('ya_id' => strval($lOriginYiidActivity['_id'])),
-                    $upsert, $options);
+             ->update(array('ya_id' => strval($lOriginYiidActivity['_id'])), $upsert, $options);
 
       $lMongo->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "activity_stats.host")
-           ->update(array('host' => $host,
-                            'day' => new MongoDate(strtotime(date('Y-m-d', $lOriginYiidActivity['c'])))),
-                      $upsert, $options);
+             ->update(array('host' => $host,
+                            'day' => new MongoDate(strtotime(date('Y-m-d', $lOriginYiidActivity['c'])))), $upsert, $options);
       $lMongo->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "activity_stats.url")
-           ->update(array('url' => $url,
-                            'day' => new MongoDate(strtotime(date('Y-m-d', $lOriginYiidActivity['c'])))),
-                      $upsert, $options);
+             ->update(array('url' => $url,
+                            'day' => new MongoDate(strtotime(date('Y-m-d', $lOriginYiidActivity['c'])))), $upsert, $options);
       $lMongo->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "summary.host")
-           ->update(array('host' => $host),
-                      $upsert, $options);
+             ->update(array('host' => $host), $upsert, $options);
       $lMongo->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, "summary.url")
-           ->update(array('url' => $url),
-                      $upsert, $options);
+             ->update(array('url' => $url), $upsert, $options);
     }
   }
 
@@ -469,8 +463,6 @@ class WidgetUtils {
     $rawData = curl_exec($ch);
     curl_close($ch);
 
-
-
     if($twitterData = json_decode($rawData, true)) {
       return intval($twitterData['count']);
     }
@@ -526,48 +518,35 @@ class WidgetUtils {
 
     $l = ($var_max + $var_min) / 2;
 
-    if ($del_max == 0)
-    {
-            $h = 0;
-            $s = 0;
-    }
-    else
-    {
-            if ($l < 0.5)
-            {
-                    $s = $del_max / ($var_max + $var_min);
-            }
-            else
-            {
-                    $s = $del_max / (2 - $var_max - $var_min);
-            };
+    if ($del_max == 0) {
+      $h = 0;
+      $s = 0;
+    } else {
+      if ($l < 0.5) {
+        $s = $del_max / ($var_max + $var_min);
+      } else {
+        $s = $del_max / (2 - $var_max - $var_min);
+      };
 
-            $del_r = ((($var_max - $var_r) / 6) + ($del_max / 2)) / $del_max;
-            $del_g = ((($var_max - $var_g) / 6) + ($del_max / 2)) / $del_max;
-            $del_b = ((($var_max - $var_b) / 6) + ($del_max / 2)) / $del_max;
+      $del_r = ((($var_max - $var_r) / 6) + ($del_max / 2)) / $del_max;
+      $del_g = ((($var_max - $var_g) / 6) + ($del_max / 2)) / $del_max;
+      $del_b = ((($var_max - $var_b) / 6) + ($del_max / 2)) / $del_max;
 
-            if ($var_r == $var_max)
-            {
-                    $h = $del_b - $del_g;
-            }
-            elseif ($var_g == $var_max)
-            {
-                    $h = (1 / 3) + $del_r - $del_b;
-            }
-            elseif ($var_b == $var_max)
-            {
-                    $h = (2 / 3) + $del_g - $del_r;
-            };
+      if ($var_r == $var_max) {
+        $h = $del_b - $del_g;
+      } elseif ($var_g == $var_max) {
+        $h = (1 / 3) + $del_r - $del_b;
+      } elseif ($var_b == $var_max) {
+        $h = (2 / 3) + $del_g - $del_r;
+      };
 
-            if ($h < 0)
-            {
-                    $h += 1;
-            };
+      if ($h < 0) {
+        $h += 1;
+      };
 
-            if ($h > 1)
-            {
-                    $h -= 1;
-            };
+      if ($h > 1) {
+        $h -= 1;
+      };
     };
 
     return array(round($h * 360), $s * 100, $l * 100);
