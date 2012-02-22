@@ -36,3 +36,5 @@ all:
 
     error_404_module:       general
     error_404_action:       lee
+
+    i18n:                   true
