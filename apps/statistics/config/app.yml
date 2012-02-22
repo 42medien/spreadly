@@ -1,7 +1,7 @@
 # default values
 all:
   sfForkedApply:
-      applyForm: YiidApplyForm
+    applyForm: YiidApplyForm
 
   sfGuardPlugin:
     signinForm: NavigationLoginForm
