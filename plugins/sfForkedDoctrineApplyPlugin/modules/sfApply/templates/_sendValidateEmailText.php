@@ -6,6 +6,8 @@ Um diese Änderung zu bestätigen, klicken Sie bitte den folgenden Link:
 
 <?php echo url_for("sfApply/confirm?validate=$validate", true) ?>
 
+
+
 You like to change your email address on <?php echo $sf_request->getHost() ?> from <?php echo $oldmail ?> to <?php echo $newmail ?>.
 To continue with your change, click on the link above. Your email will then be changed permanently.
 

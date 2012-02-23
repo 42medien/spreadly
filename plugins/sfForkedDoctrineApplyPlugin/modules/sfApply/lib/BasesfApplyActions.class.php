@@ -180,6 +180,20 @@ class BasesfApplyActions extends sfActions
     {
       $this->activateUser( $sfGuardUser );
     }
+    if ($type == 'API')
+    {
+      $password = $this->generateRandomKey(8);
+      $sfGuardUser->setPassword($password);
+
+      $this->mail(array('subject' => 'Spreadly-Account',
+            'fullname' => $profile->getFullname(),
+            'email' => $profile->getEmail(),
+            'parameters' => array('fullname' => $profile->getFullname(),
+                                  'password' => $password,
+                                  'email' => $profile->getEmail()),
+            'text' => 'sfApply/sendGeneratedPasswordText'));
+      $this->activateUser( $sfGuardUser );
+    }
     if ($type == 'Reset')
     {
       $this->getUser()->setAttribute('sfApplyReset', $sfGuardUser->getId());
@@ -532,6 +546,10 @@ class BasesfApplyActions extends sfActions
     {
       return 'New';
     }
+    elseif( $t == 'a' )
+    {
+      return 'API';
+    }
     elseif( $t == 'r' )
     {
       return 'Reset';
@@ -611,6 +629,17 @@ class BasesfApplyActions extends sfActions
       return 'MailerError';
     }
     return 'After';
+  }
+
+  public function generateRandomKey($len = 20) {
+    $string = '';
+    $pool = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+    for ($i = 1; $i <= $len; $i++) {
+      $string .= substr($pool, rand(0, 61), 1);
+    }
+
+    return md5($string);
   }
 }
 ?>

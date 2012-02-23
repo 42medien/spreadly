@@ -3,7 +3,9 @@ Hallo <?php echo $fullname ?>,
 
 Wir freuen uns über Ihre Anmeldung bei <?php echo $sf_request->getHost() ?>. Bitte bestätigen Sie Ihren Zugang. Um den Spreadly-Zugang zu aktivieren, klicken Sie bitte auf folgenden Link oder kopieren ihn in die Adresszeile Ihres Browsers:
 
-<?php echo url_for("sfApply/confirm?validate=$validate", true) ?>
+<?php echo url_for("sfApply/confirm?validate=$validate", true); ?>
+
+
 
 We appreciate your registration to <?php echo $sf_request->getHost() ?>. Please confirm your registration and activate your account by clicking on the link above or copy it to the address line of your browser
 
