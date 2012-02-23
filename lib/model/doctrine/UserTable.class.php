@@ -37,6 +37,22 @@ class UserTable extends Doctrine_Table {
     }
   }
 
+  /**
+   * generates a random key for...
+   *
+   * @param int $len
+   * @return string
+   */
+  public static function generateRandomKey($len = 20) {
+    $string = '';
+    $pool = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+    for ($i = 1; $i <= $len; $i++) {
+      $string .= substr($pool, rand(0, 61), 1);
+    }
+
+    return md5($string);
+  }
 
   /**
    * retrieve a User by its username
