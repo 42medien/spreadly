@@ -19,4 +19,21 @@ class sfGuardUserTable extends PluginsfGuardUserTable
 
     return $lQuery->count();
   }
+
+  /**
+   * generates an username, ensuring it's unique by appending a counter
+   *
+   * @author Christian Weyand
+   * @param string $pUsername
+   * @return string
+   */
+  public function getUniqueUsername($pUsername) {
+    $lUniqueName = $pUsername;
+    $lCounter = 1;
+    while ($lUser = $this->findOneBy("username", $lUniqueName)) {
+      $lUniqueName = $pUsername.$lCounter;
+      $lCounter++;
+    }
+    return $lUniqueName;
+  }
 }
