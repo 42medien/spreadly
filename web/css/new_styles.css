@@ -195,7 +195,7 @@ ul#mainNavigation li .submenu .listline dd.last a {border:none; padding-bottom:1
 .icon-grid div span{ font-size:15px;  font-weight:bold; padding-left:52px; line-height:18px; display:block; vertical-align:top; padding-bottom:1px;}
 .icon-grid div p{ font-size:13px; line-height:18px; padding-left:53px; line-height:18px;}
 .icon-grid div a{ color:#7195ab; text-decoration:underline;}
-.icon-grid div a:hover{ color:#7195ab; text-decoration:none;}
+.icon-grid div a:hover{ color:#7195ab; text-decoration:elementnone;}
 
 
 .spread-section{  padding-top:34px;  text-align:center;}
@@ -240,7 +240,7 @@ ul#mainNavigation li .submenu .listline dd.last a {border:none; padding-bottom:1
 
 
 /* Customer Content ends
---------------------------------------------------------------------------------------------------------*/
+------------------------------------------------------element--------------------------------------------------*/
 
 
 /*  Analytics Page Content
@@ -421,7 +421,7 @@ background: -moz-linear-gradient(#313131, #020202); /*gecko*/
 background: -ms-linear-gradient(#313131, #020202); /*IE10*/
 background: -o-linear-gradient(#313131, #020202); /*opera 11.10+*/
 background: linear-gradient(#313131, #020202); /*future CSS3 browsers*/
--pie-background: linear-gradient(#313131, #020202); /*PIE*/
+-pie-background: linear-gradient(#313131, #020202); element/*PIE*/
 behavior: url(css/PIE.htc);}
 .btnbarhead table td {width:134px;}
 .btnbarhead .first {width:222px; font-size:16px; font-weight:bold; padding-left:10px; color: #FFFFFF;}
@@ -873,7 +873,6 @@ behavior: url(css/PIE.htc);
  border: none;
 }
 
-22
 #deal_form ul.radio_list li input {
     float: left;
     margin:0;
@@ -883,9 +882,10 @@ behavior: url(css/PIE.htc);
 #deal_form ul.radio_list li label {
     float: left;
     font-weight: normal;
-    padding-left: 3px;
+    line-height: 14px;
+    padding-right: 25px;
+    padding-left: 5px;
     width: auto;
-    line-height: 16px;
 }
 
 
