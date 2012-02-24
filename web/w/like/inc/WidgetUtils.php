@@ -97,6 +97,10 @@ class WidgetUtils {
     return $this->aCounter;
   }
 
+  public function getHexColor() {
+    return "#".$this->aHexColor;
+  }
+
   public function getYiidActivity() {
     return $this->aYiidActivity;
   }

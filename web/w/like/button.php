@@ -41,7 +41,7 @@ $wu->trackUser();
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
       padding: 0 4px 0 21px;
-      border: 1px solid hsl(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,73%);
+      border: 1px solid <?php $wu->getHexColor(); ?>;
 <?php if ($wu->getType() == "default") { ?>
       padding-left: 1px;
 <?php } ?>
