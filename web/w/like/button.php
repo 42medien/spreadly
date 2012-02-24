@@ -51,7 +51,7 @@ $wu->trackUser();
       border-bottom-color: hsl(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,50%);
       border-top-color: hsl(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,81%);
       border-radius: 3px;
-      background: #fff url('//s3.amazonaws.com/spread.ly/img/button/s.png') no-repeat 130% -20px;
+      background: <?php echo $wu->alter_brightness($wu->getHexColor(), +10); ?> url('//s3.amazonaws.com/spread.ly/img/button/s.png') no-repeat 130% -20px;
       text-decoration: none;
       text-transform: uppercase;
       box-shadow: 0 -1px 1px 1px hsla(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,100%,.7) inset, 0 -4px 8px 0 hsla(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,50%,.5) inset, 0 0 2px 8px hsla(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,0%,0);
