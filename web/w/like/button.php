@@ -16,6 +16,7 @@ $wu->trackUser();
 <head>
   <meta charset="utf-8">
   <title>spreadly</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
   <style type="text/css">
     *{
@@ -167,6 +168,9 @@ $wu->trackUser();
     ul.icons a img {
       height: 30px;
       width: 30px;
+    }
+    a img {
+      border: none;
     }
     <?php endif; ?>
   </style>
