@@ -180,7 +180,7 @@ $wu->trackUser();
       	<!--[if IE]>
       	<style type="text/css">
       	.button{
-      		background-color: <?php echo $wu->alter_brightness($wu->getHexColor(), +10); ?>;
+      		background-color: <?php echo $wu->alter_brightness($wu->getHexColor(), +30); ?>;
 
       	}
 
