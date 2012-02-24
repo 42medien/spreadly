@@ -41,6 +41,7 @@ $wu->trackUser();
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
       padding: 0 4px 0 21px;
+      border: 1px solid hsl(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,73%);
 <?php if ($wu->getType() == "default") { ?>
       padding-left: 1px;
 <?php } ?>
@@ -85,6 +86,7 @@ $wu->trackUser();
       padding: 0;
       vertical-align: top;
       width: 16px;
+      border: none;
     }
 
     .button:focus, .button:hover{
@@ -169,9 +171,10 @@ $wu->trackUser();
       height: 30px;
       width: 30px;
     }
-    a img {
-      border: none;
-    }
+	 a, a img {
+	      border: 0px none;
+	      text-decoration: none;
+	    }
     <?php endif; ?>
   </style>
 
