@@ -495,15 +495,15 @@ class WidgetUtils {
   }
 
   public function getH() {
-    return $this->aColor[0];
+    return round($this->aColor[0] * 360);
   }
 
   public function getS() {
-    return $this->aColor[1];
+    return $this->aColor[1] * 100;
   }
 
   public function getL() {
-    return $this->aColor[2];
+    return $this->aColor[2] * 100;
   }
 
   public function rgb2hsl($rgb){
@@ -553,6 +553,30 @@ class WidgetUtils {
       };
     };
 
-    return array(round($h * 360), $s * 100, $l * 100);
+    return array($h, $s, $l);
+  }
+
+  public function alter_brightness($colourstr, $steps) {
+    $colourstr = str_replace('#','',$colourstr);
+
+    $rhex = substr($colourstr,0,2);
+    $ghex = substr($colourstr,2,2);
+    $bhex = substr($colourstr,4,2);
+
+    $r = hexdec($rhex);
+    $g = hexdec($ghex);
+    $b = hexdec($bhex);
+
+    $r = dechex(max(0,min(255,$r + $steps)));
+    $g = dechex(max(0,min(255,$g + $steps)));
+    $b = dechex(max(0,min(255,$b + $steps)));
+
+    $r = str_pad($r,2,"0");
+    $g = str_pad($g,2,"0");
+    $b = str_pad($b,2,"0");
+
+    $cor = '#'.$r.$g.$b;
+
+    return $cor;
   }
 }
