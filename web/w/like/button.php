@@ -35,6 +35,7 @@ $wu->trackUser();
     .button {
       display: inline-block;
       position: relative;
+			color: <?php echo $wu->getHexColor(); ?>;
       color: hsl(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,50%);  /* #B44A7A */
       line-height: 18px;
       font-weight: bold;
@@ -177,6 +178,19 @@ $wu->trackUser();
 	    }
     <?php endif; ?>
   </style>
+      	<!--[if IE]>
+      	<style type="text/css">
+      	.container b{
+      		margin-left: 4px;
+      		padding-left: 2px;
+      	}
+
+				.container b:before{
+					display: none;
+				}
+				</style>
+			<![endif]-->
+
 
   <link rel="shortcut icon" href="//s3.amazonaws.com/spread.ly/img/favicon.ico" type="image/x-icon">
 </head>
