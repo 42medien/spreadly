@@ -35,6 +35,7 @@ $wu->trackUser();
     .button {
       display: inline-block;
       position: relative;
+      color: <?php echo $wu->getHexColor(); ?>;
       color: hsl(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,50%);  /* #B44A7A */
       line-height: 18px;
       font-weight: bold;
@@ -180,7 +181,7 @@ $wu->trackUser();
       	<!--[if IE]>
       	<style type="text/css">
       	.button{
-      		background-color: <?php echo $wu->alter_brightness($wu->getHexColor(), +30); ?>;
+      		background-color: <?php echo $wu->alter_brightness($wu->getHexColor(), +50); ?>;
 
       	}
 
