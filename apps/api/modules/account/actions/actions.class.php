@@ -21,7 +21,7 @@ class accountActions extends BasesfApplyActions {
 
     // first api only accepts posts
     if ($request->getMethod() != "POST") {
-      $this->getResponse()->setStatusCode(405);
+      $this->getResponse()->setStatusCode(403);
       return $this->renderPartial("wrong_method");
     }
 
@@ -30,7 +30,17 @@ class accountActions extends BasesfApplyActions {
     sfContext::getInstance()->getLogger()->notice($json_content);
 
     $content = json_decode($json_content, true);
-    $user = sfGuardUserTable::getInstance()->findOneBy("email_address", $content['emails'][0]['value']);
+
+    $user = null;
+
+    if (is_array($content) && array_key_exists("emails", $content)
+                           && is_array($content['emails'])
+                           && array_key_exists('value', $content['emails'][0])) {
+      $user = sfGuardUserTable::getInstance()->findOneBy("email_address", $content['emails'][0]['value']);
+    } else {
+      $this->getResponse()->setStatusCode(405);
+      return $this->renderPartial("no_email");
+    }
 
     if (!$user) {
       $captcha = sfConfig::get('app_recaptcha_enabled');
@@ -65,8 +75,7 @@ class accountActions extends BasesfApplyActions {
 
       $this->form = $this->newForm( 'applyForm' );
 
-      $sfApplyApply['password'] = "testerle12345";
-      $sfApplyApply['password2'] = "testerle12345";
+      $sfApplyApply['password'] = $sfApplyApply['password2'] = $this->generateRandomKey(8);
       $sfApplyApply['tos_accepted'] = 1;
       $sfApplyApply['_csrf_token'] = $this->form->getCSRFToken();
 
@@ -79,7 +88,7 @@ class accountActions extends BasesfApplyActions {
       }
 
       if ($this->form->isValid()) {
-        $guid = "n" . self::createGuid();
+        $guid = "a" . self::createGuid();
         $this->form->getObject()->setValidate( $guid );
         $date = new DateTime();
         $this->form->getObject()->setValidateAt( $date->format( 'Y-m-d H:i:s' ) );
@@ -90,31 +99,46 @@ class accountActions extends BasesfApplyActions {
           $this->sendApiVerificationMail($profile);
         } catch (Exception $e) {
           sfContext::getInstance()->getLogger()->err("{ApiError} ".$e->getMessage());
+          return sfView::ERROR;
         }
+      } else {
+        return sfView::ERROR;
       }
 
-      sfContext::getInstance()->getLogger()->notice("disch");
-
       sfConfig::set('app_recaptcha_enabled', $captcha);
+
+      $user = sfGuardUserTable::getInstance()->findOneBy("email_address", $email['value']);
     }
 
-    sfContext::getInstance()->getLogger()->notice($content['emails'][0]['value']);
-    //sfContext::getInstance()->getLogger()->notice(print_r($user->getUsername(), true));
+    if (!$user) {
+      return sfView::ERROR;
+    }
 
-    //$domain_profile = new DomainProfile();
-    //$status = $domain_profile->fromApiArray($content);
+    if (array_key_exists("urls", $content) && is_array($content["urls"]) && count($content["urls"]) > 0) {
+      sfContext::getInstance()->getLogger()->notice(print_r($content["urls"], true));
+      foreach ($content["urls"] as $url) {
+        if (array_key_exists("value", $url)) {
+          sfContext::getInstance()->getLogger()->notice($url['value']);
+          $form = new DomainProfileForm();
+          $params = $request->getParameter($form->getName());
+          $params['protocol'] = parse_url($url['value'], PHP_URL_SCHEME);
+          $params['url'] = parse_url($url['value'], PHP_URL_HOST);
+          $params['sf_guard_user_id'] = $user->getId();
+          $params['_csrf_token'] = $form->getCSRFToken();
+          $form->bind($params);
 
-    sfContext::getInstance()->getLogger()->notice($content["urls"][0]["value"]);
-    //sfContext::getInstance()->getLogger()->notice($dp);
-    // @todo check url claim
+          foreach($form->getErrorSchema()->getErrors() as $key => $error) {
+            sfContext::getInstance()->getLogger()->notice(print_r($key, true));
+            sfContext::getInstance()->getLogger()->notice($error->getMessage());
+          }
 
-    // @todo add url
-
-    // @todo verify url
-
-    // @todo send mail-verication
-
-    // @todo send password
+          if ($form->isValid()) {
+            $domain_profile = $form->save();
+            $domain_profile->verify();
+          }
+        }
+      }
+    }
   }
 
   /**
@@ -123,7 +147,6 @@ class accountActions extends BasesfApplyActions {
    * @param array $options
    */
   protected function sendApiVerificationMail( $profile ) {
-    sfContext::getInstance()->getLogger()->notice("mailer");
     $options = array('subject' => 'Spreadly -Zugang zu bestätigen / account to be confirmed',
         'fullname' => $profile->getFullname(),
         'email' => $profile->getEmail(),

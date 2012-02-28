@@ -1,0 +1,1 @@
+<?php echo json_encode(array("error" => array("code" => 403, "message" => "E-Mail address required"))); ?>
