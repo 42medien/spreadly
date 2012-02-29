@@ -136,8 +136,10 @@ class accountActions extends BasesfApplyActions {
           }
 
           if ($form->isValid()) {
-            $domain_profile = $form->save();
-            $domain_profile->verify();
+            try {
+              $domain_profile = $form->save();
+              $domain_profile->verify();
+            } catch(Exception $e) { }
           }
         }
       }
