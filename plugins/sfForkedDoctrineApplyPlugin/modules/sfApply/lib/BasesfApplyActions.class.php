@@ -301,6 +301,9 @@ class BasesfApplyActions extends sfActions
           );
     }
 
+    $lUsername = $this->getUser()->getGuardUser()->getUsername();
+    $this->resetform->setDefault('username', $lUsername);
+
 
     if ($request->isMethod('post'))
     {
@@ -341,6 +344,7 @@ class BasesfApplyActions extends sfActions
           'The custom reset form should be instance of sfApplyResetForm'
           );
     }
+
     if ($request->isMethod('post'))
     {
       $this->resetform->bind($request->getParameter( $this->resetform->getName() ));
