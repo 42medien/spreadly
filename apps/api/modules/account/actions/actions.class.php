@@ -99,10 +99,12 @@ class accountActions extends BasesfApplyActions {
           $this->sendApiVerificationMail($profile);
         } catch (Exception $e) {
           sfContext::getInstance()->getLogger()->err("{ApiError} ".$e->getMessage());
-          return sfView::ERROR;
+          $this->getResponse()->setStatusCode(409);
+          return $this->renderPartial("conflict");
         }
       } else {
-        return sfView::ERROR;
+        $this->getResponse()->setStatusCode(406);
+        return $this->renderPartial("invalid");
       }
 
       sfConfig::set('app_recaptcha_enabled', $captcha);
@@ -111,7 +113,8 @@ class accountActions extends BasesfApplyActions {
     }
 
     if (!$user) {
-      return sfView::ERROR;
+      $this->getResponse()->setStatusCode(409);
+      return $this->renderPartial("conflict");
     }
 
     if (array_key_exists("urls", $content) && is_array($content["urls"]) && count($content["urls"]) > 0) {
