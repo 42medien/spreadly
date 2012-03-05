@@ -331,7 +331,8 @@ class BasesfApplyActions extends sfActions
 
   public function executeSettings_reset(sfRequest $request)
   {
-    //won't present this page to users that are not authenticated or haven't got confirmation code
+
+  	//won't present this page to users that are not authenticated or haven't got confirmation code
     if( !$this->getUser()->isAuthenticated() && !$this->getUser()->getAttribute('sfApplyReset', false)  )
     {
       $this->redirect( '@sf_guard_signin' );
@@ -363,14 +364,16 @@ class BasesfApplyActions extends sfActions
         $this->pPasswordsuccess = true;
         //return 'After';
       }
+
       	$profile = $this->getUser()->getGuardUser();
       	$this->form = $this->newForm( 'settingsForm', $profile);
       	$this->setTemplate('settings');
+    } else {
+
+    		$this->redirect('user/settings');
     }
-    if( $this->getUser()->isAuthenticated() )
-    {
-      //return 'Logged';
-    }
+
+
   }
 
 

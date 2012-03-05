@@ -73,6 +73,7 @@
   border-bottom-color: hsl(331,42%,50%);
   border-top-color: hsl(331,42%,81%);
   border-radius: 3px;
+  background-color: #ccc;
   background: #fff url('/img/popup/s.png') no-repeat 130% -20px;
   text-decoration: none;
   text-transform: uppercase;

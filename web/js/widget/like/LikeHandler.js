@@ -66,7 +66,7 @@ var LikeImage = {
        WidgetLikeForm.setImageValue(LikeImage.getImgPath(0));
        //LikeImageCounter.hide();
      } else {
-       LikeImageScroller.init(true);
+       //LikeImageScroller.init(true);
        //LikeImageCounter.init(pImgCount);
        //LikeImageCounter.show();
        LikeImageScroller.onScroll();
@@ -130,6 +130,7 @@ var LikeImage = {
      * @param pHtml
      */
     insert: function(pHtml) {
+      debug.log("[LikeImage][insert]");      
       jQuery('#scroll-meta-images').empty();
       jQuery('#scroll-meta-images').append(pHtml);
     },
@@ -142,6 +143,7 @@ var LikeImage = {
      * @returns string
      */
     getImgPath: function(pIndex) {
+      debug.log("[LikeImage][getImgPath]");   
       return jQuery('#meta-img-'+pIndex).attr('src');
     }
 };
@@ -160,7 +162,7 @@ var LikeImageScroller = {
    * @param boolean pCircular (should the slider slide "endless"?)
    */
   init: function(pCircular){
-    
+    debug.log("[LikeImageScroller][init]");       
     LikeImageScroller.showContainer();
     
     //check, if we would an endless slide-show
@@ -184,6 +186,7 @@ var LikeImageScroller = {
    * @author KM
    */
   onScroll: function(){
+    debug.log("[LikeImageScroller][init]");     
     //on seek means on changing the showed image (like onscroll)
     LikeImageScroller.aApiObj.onSeek(function() {
       //update the counter
@@ -194,11 +197,13 @@ var LikeImageScroller = {
   },
   
   showContainer: function() {
+    debug.log("[LikeImageScroller][showContainer]");     
     jQuery('#scroll-button-area').show();    
     
   },
 
   hideContainer: function() {
+    debug.log("[LikeImageScroller][hideContainer]");     
     jQuery('#scroll-button-area').hide();
   }
 };
