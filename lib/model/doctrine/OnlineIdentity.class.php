@@ -46,4 +46,16 @@ class OnlineIdentity extends BaseOnlineIdentity
       Queue\Queue::getInstance()->put(new Documents\ContactImportJob($this->getId()));
     }
   }
+
+  public function preDelete() {
+    $user_id = $this->getUserId();
+
+    $lQuery = Doctrine_Query::create()
+      ->from('OnlineIdentity oi')
+      ->andWhere('oi.user_id = ?', $user_id);
+
+    if ($lQuery->count() < 2) {
+      throw new sfException("you can't delete your last account");
+    }
+  }
 }
