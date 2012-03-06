@@ -41,6 +41,8 @@ class authActions extends sfActions {
 
   public function executeComplete_signin(sfWebRequest $request) {
     $delay = 0;
+    $this->errorMsg = null;
+
     if ($lToken = $request->getParameter('oauth_token')) {
       $lToken = OauthRequestTokenTable::retrieveByTokenKey($lToken);
       $lToken = $lToken->toOAuthToken();

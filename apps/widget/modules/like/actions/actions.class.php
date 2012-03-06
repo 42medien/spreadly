@@ -26,7 +26,7 @@ class likeActions extends sfActions {
   public function executeIndex(sfWebRequest $request) {
     $lUrl = $request->getParameter("url", null);
     $this->url = $lUrl;
-    $this->error = null;
+    $this->pError = null;
 
     if (!$lUrl) {
       return $this->setTemplate("share");
@@ -39,7 +39,7 @@ class likeActions extends sfActions {
 
       $lActivity = new Documents\YiidActivity();
       $lActivity->fromArray($lParams);
-			$pError = null;
+
       // try to save activity
       try {
         $lActivity->save();
