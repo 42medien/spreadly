@@ -19,4 +19,23 @@ class settingsActions extends sfActions
   {
     //$this->forward('default', 'module');
   }
+
+  public function executeDelete_oi(sfWebRequest $request){
+  	$this->getResponse()->setContentType('application/json');
+    $lUser = $this->getUser()->getUser();
+    $lOis = $lUser->getOnlineIdentitesAsArray();
+  	$lId = $request->getParameter("id");
+  	$lDeleted = false;
+
+  	$lOi = OnlineIdentityTable::getInstance()->find($lId);
+
+  	if(in_array($lId, $lOis)){
+			$lOi->delete();
+			$lDeleted = true;
+  	}
+
+    $lReturn['success'] = $lDeleted;
+    $lReturn['html'] =  $this->getComponent('like','share_section');
+    return $this->renderText(json_encode($lReturn));
+  }
 }

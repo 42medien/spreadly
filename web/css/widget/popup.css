@@ -415,13 +415,27 @@ div#like-submit li{
   letter-spacing: 0;
 }
 div#like-submit li img{
-  margin: 0 0 0 5px;
+  margin: 0 10px 0 0;
   height: 16px;
   width: 16px;
   background: #fff;
   border: 1px solid #fff;
   border-radius: 2px;
   box-shadow: 0 0 0px 1px hsla(0,0%,30%,.2) inset;
+}
+
+div#like-submit li img.delete-oi-icon{
+    height: 12px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    width: 12px;
+}
+
+div#like-submit li{
+  /*text-align: left;*/
 }
 
 div#like-submit li.B input[type="checkbox"]:checked + label, div#like-submit li:hover input + label {

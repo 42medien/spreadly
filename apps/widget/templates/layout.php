@@ -18,6 +18,8 @@
 
     <script type="text/javascript">var _sf_startpt=(new Date()).getTime();</script>
     <script type="text/javascript" src="/js/100_main/include/widget-<?php echo sfConfig::get('app_release_name') ?>.min.js"></script>
+    <script type="text/javascript" src="/js/widget/settings/OiHandler.js"></script>
+
 
 
     <!-- script type="text/javascript" src="/js/widget/like/LikeHandler.js"></script -->

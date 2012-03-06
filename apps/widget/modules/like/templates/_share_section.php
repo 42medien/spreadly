@@ -11,7 +11,8 @@
           <?php foreach($pIdentities as $lIdentity) {?>
             <li class="B">
               <input type="checkbox" id="o<?php echo $lIdentity->getId(); ?>" name="like[oiids][]" value="<?php echo $lIdentity->getId(); ?>" <?php if ($lIdentity->getSocialPublishingEnabled()) { echo 'checked="checked"'; }  ?> />
-              <label for="o<?php echo $lIdentity->getId(); ?>"><?php echo image_tag("/img/".$lIdentity->getCommunity()->getCommunity()."-favicon.gif", array("alt" => $lIdentity->getName(), "title" => $lIdentity->getName())); ?></label>
+              <label for="o<?php echo $lIdentity->getId(); ?>"><?php echo image_tag("/img/".$lIdentity->getCommunity()->getCommunity()."-favicon.gif", array("alt" => $lIdentity->getName(), "title" => $lIdentity->getName())); ?><?php echo link_to(image_tag('/img/popup/delete12x12.png', array('class'=> 'delete-oi-icon')), 'settings/delete_oi?id='.$lIdentity->getId() , array('class' => 'delete-oi-link', 'id' => 'delete-oi-'.$lIdentity->getId()))?></label>
+
             </li>
           <?php } ?>
             <li class="B">

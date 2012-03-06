@@ -8,3 +8,5 @@ i18n.init({
 	"like_error_message": "<?php echo __("Something went wrong! Check your selected services and try again!");?>",
 	"close_popup": "<?php echo __("(Close window)");?>"
 });
+
+LikeIdentity.init();
