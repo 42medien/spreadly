@@ -1,14 +1,17 @@
 /**
- * @nocombine widget
+ * @combine widget
  * @returns
  */
 
 var LikeIdentity = {
+
     init: function() {
       LikeIdentity.doDelete();
-      
     },
     
+    /**
+     * sends the delete-request to settings/delete_oi and handles teh request
+     */
     doDelete: function() {
       jQuery('.delete-oi-link').live('click', function() {
         OnLoadGrafic.showGrafic(); 
@@ -17,19 +20,21 @@ var LikeIdentity = {
           ei_kcuf : new Date().getTime(),
         };
         
-        
         jQuery.ajax({
-          //beforeSubmit : OnLoadGrafic.showGrafic,
           type : "POST",
           url : lAction,
           dataType : "json",
           data : lData,
           success : function(pResponse) {
-            console.log(pResponse.success);
-            if(pResponse.success == true) {
-              jQuery('#like-submit').empty();
-              jQuery('#like-submit').append(pResponse.html);
-            }
+            jQuery('#like-submit').empty();
+            jQuery('#like-submit').append(pResponse.html);
+            
+            var lTimeout;
+            clearTimeout(lTimeout);
+            lTimeout = setTimeout(function() {
+              jQuery('#like-response').fadeOut('slow');
+              jQuery('#like-response').empty();
+            }, 3000);             
             
             OnLoadGrafic.hideGrafic();
           }

@@ -28,14 +28,22 @@ class settingsActions extends sfActions
   	$lDeleted = false;
 
   	$lOi = OnlineIdentityTable::getInstance()->find($lId);
+		$lReturn['html'] =  $this->getComponent('like','share_section', array('pError' => _("Sorry, it's not possible to delete this profile")));
 
   	if(in_array($lId, $lOis)){
-			$lOi->delete();
-			$lDeleted = true;
+  		try {
+
+				$lOi->delete();
+				$lDeleted = true;
+				 $lReturn['html'] =  $this->getComponent('like','share_section');
+
+  		} catch (Exception $e) {
+  			$lDeleted = false;
+  		}
   	}
 
     $lReturn['success'] = $lDeleted;
-    $lReturn['html'] =  $this->getComponent('like','share_section');
+
     return $this->renderText(json_encode($lReturn));
   }
 }
