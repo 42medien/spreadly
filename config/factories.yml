@@ -57,7 +57,7 @@ staging:
       source:          pimpedMySQL
       debug:           false
       default_culture: de
-      database:        mysql://yiidit_i18n:fdsmolds32dfs@donkeykong/yiidit_i18n
+      database:        mysql://yiidit_i18n:fdsmolds32dfs@localhost/yiidit_i18n
       cache:
         class:         sfNoCache
         param:
@@ -75,7 +75,7 @@ staging:
       db_id_col:       sess_id
       db_time_col:     sess_time
       db_data_col:     sess_data
-      host:            donkeykong
+      host:            localhost
       port:            27017
       db_name:                 yiid_staging
       collection_name:         session
