@@ -47,7 +47,11 @@ class OnlineIdentity extends BaseOnlineIdentity
     }
   }
 
-  public function preDelete() {
+  /**
+   * Enter description here...
+   *
+   */
+  public function preDelete($event) {
     $user_id = $this->getUserId();
 
     $lQuery = Doctrine_Query::create()
@@ -55,7 +59,10 @@ class OnlineIdentity extends BaseOnlineIdentity
       ->andWhere('oi.user_id = ?', $user_id);
 
     if ($lQuery->count() < 2) {
+      sfContext::getInstance()->getLogger()->notice("you can't delete this online identity");
       throw new sfException("you can't delete your last account");
     }
+
+    sfContext::getInstance()->getLogger()->notice("you can delete this online identity");
   }
 }
