@@ -193,8 +193,8 @@ dev:
 #
 staging:
   settings:
-    url:              'http://id.cx'
-    host:             'id.cx'
+    url:              'http://spreadly.ekaabo.crcl.ws/'
+    host:             'crcl.ws'
     widgets_url:      'http://yiiddev.com'
     widgets_host:     'yiiddev.com'
     button_url:        'http://button.yiiddev.com'
@@ -234,7 +234,7 @@ staging:
     server_ip:      'mario'
 
   mongodb:
-    host:                 'donkeykong'
+    host:                 'localhost'
     database_name:        'yiid_staging'
     database_name_stats:  'yiid_stats_staging'
 

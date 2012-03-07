@@ -53,9 +53,9 @@ staging:
   translation:
     class: sfDoctrineDatabase
     param:
-      dsn:        mysql:dbname=yiid_i18n_staging;host=donkeykong
-      username:   yiid_staging
-      password:   fdsmolds32dfs
+      dsn:        mysql:dbname=yiid_i18n_staging;host=localhost
+      username:   ekaabo
+      password:   k9zhgt1u!
       attributes:
         default_table_collate: utf8_general_ci
         default_table_charset: utf8
@@ -63,9 +63,9 @@ staging:
   doctrine:
     class: sfDoctrineDatabase
     param:
-      dsn:        mysql:dbname=yiid_staging;host=donkeykong
-      username:   yiid_staging
-      password:   fdsmolds32dfs
+      dsn:        mysql:dbname=yiid_staging;host=localhost
+      username:   ekaabo
+      password:   k9zhgt1u!
       attributes:
         default_table_collate: utf8_general_ci
         default_table_charset: utf8
