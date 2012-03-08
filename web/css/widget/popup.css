@@ -117,6 +117,7 @@ input:focus, textarea:focus {
 /********************footer***********************/
 footer{
   text-align: center;
+  position: relative;
 }
 
 footer ul{
@@ -424,14 +425,19 @@ div#like-submit li img{
   box-shadow: 0 0 0px 1px hsla(0,0%,30%,.2) inset;
 }
 
-div#like-submit li img.delete-oi-icon{
+div#like-submit li .delete-oi-link{
     height: 12px;
     margin: 0;
     padding: 0;
     position: absolute;
-    right: 1px;
-    top: 1px;
-    width: 12px;
+    right: 4px;
+    top: 0px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+div#like-submit li .delete-oi-link:hover{
+  color: red;
 }
 
 div#like-submit li{
@@ -546,4 +552,27 @@ a.send.B:before{
 
 #like-oi-list a {
   color: hsl(331,42%,50%);
+}
+
+
+#edit-settings{
+	text-align: left;
+  height: auto;
+  width: 95.5%;
+  background-color: #fff;
+  display:none;
+  position: absolute;
+  bottom: 25px;
+  padding: 10px;
+  border-radius: 1px 7px 0 0;
+  -moz-border-radius: 7px 7px 0 0;
+  -webkit-border-radius: 7px 7px 0 0;
+  border: 1px solid #ccc;
+  border-bottom: none;
+}
+
+#close-settings-link{
+	position: absolute;
+  top: 5px;
+  right: 5px;
 }
