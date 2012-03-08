@@ -50,6 +50,9 @@ OnlineIdentity:
     last_friend_refresh:
       type:     integer
       default:  0
+    use_as_avatar:
+      type:     boolean
+      default:  false
   relations:
     Community: { onDelete: CASCADE, local: community_id, foreign: id, foreignAlias: OnlineIdentitys }
     User:      { onDelete: SET NULL, local: user_id, foreign: id, foreignAlias: OnlineIdentitys }
