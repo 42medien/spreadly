@@ -3,3 +3,6 @@ CouponCode.initClipboard("<?php echo sfConfig::get('app_settings_url'); ?>/flash
 
 jQuery('#area-like-comment').charcounter();
 
+LikeIdentity.init();
+
+ProfileSettings.init();

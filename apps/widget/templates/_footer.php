@@ -4,7 +4,7 @@
             <!-- Navi rechte Seite -->
             <ul class="nav-list" role="navigation">
               <?php if ($sf_user->isAuthenticated()) { ?>
-              <li><span title="<?php echo $sf_user->getUser()->getUsername(); ?>" id="nav-username"><?php echo __('Hi'); ?> <?php echo truncate_text($sf_user->getUser()->getUsername(), 10); ?></span></li>
+              <li><span title="<?php echo $sf_user->getUser()->getUsername(); ?>" id="nav-username"><?php echo __('Hi'); ?> <a id="edit-settings-link" href="<?php echo url_for('@widget_settings'); ?>"><?php echo truncate_text($sf_user->getUser()->getUsername(), 10); ?></a></span></li>
               <!-- li><?php echo link_to(__('Likes'), '@widget_likes'); ?></li>
               <li><?php echo link_to(__('Deals'), '@widget_deals'); ?></li-->
               <li><?php echo link_to(__('Logout'), '@signout'); ?></li>

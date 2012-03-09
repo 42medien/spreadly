@@ -13,7 +13,7 @@ var LikeIdentity = {
      * sends the delete-request to settings/delete_oi and handles teh request
      */
     doDelete: function() {
-      jQuery('.delete-oi-link').live('click', function() {
+      jQuery('.delete-oi-link').on('click', function() {
         OnLoadGrafic.showGrafic(); 
         var lAction = jQuery(this).attr('href');
         var lData = {

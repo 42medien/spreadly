@@ -18,9 +18,6 @@
 
     <script type="text/javascript">var _sf_startpt=(new Date()).getTime();</script>
     <script type="text/javascript" src="/js/100_main/include/widget-<?php echo sfConfig::get('app_release_name') ?>.min.js"></script>
-
-
-
     <!-- script type="text/javascript" src="/js/widget/like/LikeHandler.js"></script -->
 
     <?php include_partial('global/custom_css'); ?>
@@ -30,6 +27,7 @@
       <div id="content-outer" role="main">
         <?php echo $sf_content; ?>
         <footer>
+        	<div id="edit-settings"></div>
 					<?php include_partial('global/footer'); ?>
         </footer>
       </div>

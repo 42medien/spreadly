@@ -571,8 +571,27 @@ a.send.B:before{
   border-bottom: none;
 }
 
+#edit-settings h3{
+  
+}
+
 #close-settings-link{
 	position: absolute;
   top: 5px;
   right: 5px;
 }
+
+#select-img-list{
+  margin-top: 5px;
+}
+
+.select-profile-img-link{
+  margin-right: 3px;
+}
+
+.select-profile-img-link:hover img,
+.select-profile-img-link.selected img{
+ border-radius: 2px 2px 2px 2px;
+ box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5), 0 0 2px 0 rgba(0, 0, 0, 0.4), 0 0 2px 1px rgba(255, 255, 255, 0.3);  
+}
+

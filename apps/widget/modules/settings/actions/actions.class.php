@@ -17,20 +17,39 @@ class settingsActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    //$this->forward('default', 'module');
+  	$this->getResponse()->setContentType('application/json');
+  	$lUser = $this->getUser()->getUser();
+  	$lReturn['html'] =  $this->getComponent('settings','edit_settings', array('pUser' => $lUser));
+
+		return $this->renderText(json_encode($lReturn));
+  }
+
+  public function executeSelect_image(sfWebRequest $request){
+  	$this->getResponse()->setContentType('application/json');
+		$lOiId = $request->getParameter("oid");
+  	$lUser = $this->getUser()->getUser();
+  	$lOi = OnlineIdentityTable::getInstance()->find($lOiId);
+
+		if($lOi->getUserId() == $lUser->getId()){
+			$lOi->setUseAsAvatar(true);
+			$lOi->save();
+		}
+
+		return $this->renderText(json_encode($lReturn));
+
   }
 
   public function executeDelete_oi(sfWebRequest $request){
   	$this->getResponse()->setContentType('application/json');
     $lUser = $this->getUser()->getUser();
-    $lOis = $lUser->getOnlineIdentitesAsArray();
-  	$lId = $request->getParameter("id");
+    //$lOis = $lUser->getOnlineIdentitesAsArray();
+  	$lOiId = $request->getParameter("id");
   	$lDeleted = false;
+  	$lOi = OnlineIdentityTable::getInstance()->find($lOiId);
 
-  	$lOi = OnlineIdentityTable::getInstance()->find($lId);
 		$lReturn['html'] =  $this->getComponent('like','share_section', array('pError' => _("Sorry, it's not possible to delete this profile")));
 
-  	if(in_array($lId, $lOis)){
+  	if($lOi->getUserId() == $lUser->getId()){
   		try {
 
 				$lOi->delete();
