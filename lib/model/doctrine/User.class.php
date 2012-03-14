@@ -143,6 +143,17 @@ class User extends BaseUser {
    * @return string
    */
   public function getAvatar() {
+    // get chosen avatar
+    $lQuery = Doctrine_Query::create()
+      ->from('OnlineIdentity oi')
+      ->where('oi.user_id = ?', $this->getId())
+      ->andWhere('oi.use_as_avatar = ?', true);
+
+    if ($lOi = $lQuery->fetchOne()) {
+      return $lOi->getPhoto();
+    }
+
+    // use latest as fallback
     $lQuery = Doctrine_Query::create()
       ->from('OnlineIdentity oi')
       ->where('oi.user_id = ?', $this->getId())
@@ -153,6 +164,7 @@ class User extends BaseUser {
       return $lOi->getPhoto();
     }
 
+    // use gravatar if still no image
     $hash = md5($this->getUsername()."@spreadly.com");
     return "http://www.gravatar.com/avatar/$hash?d=wavatar";
   }
