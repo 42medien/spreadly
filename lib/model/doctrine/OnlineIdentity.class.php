@@ -85,7 +85,7 @@ class OnlineIdentity extends BaseOnlineIdentity
       ->count();
 
     sfContext::getInstance()->getLogger()->notice($user_id);
-    if ($count < 1) {
+    if (($count < 1) && $this->getPhoto()) {
       $this->setUseAsAvatar(true);
     }
   }
