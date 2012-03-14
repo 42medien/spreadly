@@ -65,4 +65,28 @@ class OnlineIdentity extends BaseOnlineIdentity
 
     sfContext::getInstance()->getLogger()->notice("you can delete this online identity");
   }
+
+  /**
+   * check if online identity is used as default avatar provider
+   *
+   * @param unknown_type $event
+   */
+  public function preSave($event) {
+    $user_id = $this->getUserId();
+
+    if (!$user_id) {
+      return;
+    }
+
+    $count = Doctrine_Query::create()
+      ->from('OnlineIdentity oi')
+      ->where('oi.user_id = ?', $user_id)
+      ->andWhere('oi.use_as_avatar = ?', true)
+      ->count();
+
+    sfContext::getInstance()->getLogger()->notice($user_id);
+    if ($count < 1) {
+      $this->setUseAsAvatar(true);
+    }
+  }
 }
