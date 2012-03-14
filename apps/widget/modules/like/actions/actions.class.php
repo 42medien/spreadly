@@ -26,7 +26,7 @@ class likeActions extends sfActions {
   public function executeIndex(sfWebRequest $request) {
     $lUrl = $request->getParameter("url", null);
     $this->url = $lUrl;
-    $this->pError = null;
+    $this->error = null;
 
     if (!$lUrl) {
       return $this->setTemplate("share");
@@ -88,7 +88,7 @@ class likeActions extends sfActions {
 
   public function executeShare(sfWebRequest $request){
     //$this->getResponse()->setSlot('js_document_ready', $this->getPartial('like/js_init_nourl.js'));
-
+    $this->error = "";
     $this->url = $request->getParameter("url", null);
   }
 
