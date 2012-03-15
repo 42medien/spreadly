@@ -75,10 +75,14 @@ class FacebookPostApiClient extends PostApi {
 
     $lError = new Documents\ApiErrorLog();
 
-    $lError->setCode($lResponse['error']['type']);
+    $lError->setCode($lResponse['error']['code']);
     $lError->setMessage($lResponse['error']['message']);
     $lError->setOiId($this->onlineIdentity->getId());
     $lError->setUId($this->onlineIdentity->getUserId());
     $lError->save();
+
+    if (in_array($lResponse['error']['code'], array(190, 200, 450, 451, 452, 453, 454, 455))) {
+      $this->onlineIdentity->deactivate();
+    }
   }
 }

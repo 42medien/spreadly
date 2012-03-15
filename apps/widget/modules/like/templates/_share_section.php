@@ -1,5 +1,5 @@
 	      <div id="like-response" class="error">
-				<?php if($pError) {?>
+				<?php if(isset($pError)) {?>
 	        	<?php echo __($pError); ?>
         <?php } ?>
         </div>
@@ -10,7 +10,7 @@
         <ul class="clearfix" id="like-oi-list">
           <?php foreach($pIdentities as $lIdentity) {?>
             <li class="B">
-              <input type="checkbox" id="o<?php echo $lIdentity->getId(); ?>" name="like[oiids][]" value="<?php echo $lIdentity->getId(); ?>" <?php if ($lIdentity->getSocialPublishingEnabled()) { echo 'checked="checked"'; }  ?> />
+              <input type="checkbox" id="o<?php echo $lIdentity->getId(); ?>" name="like[oiids][]" value="<?php echo $lIdentity->getId(); ?>" <?php if ($lIdentity->getSocialPublishingEnabled() && $lIdentity->getActive()) { echo 'checked="checked"'; }  ?> <?php if (!$lIdentity->getActive()) { echo 'disabled="disabled"'; }  ?> />
               <label for="o<?php echo $lIdentity->getId(); ?>"><?php echo image_tag("/img/".$lIdentity->getCommunity()->getCommunity()."-favicon.gif", array("alt" => $lIdentity->getName(), "title" => $lIdentity->getName())); ?><?php echo link_to('x', 'settings/delete_oi?id='.$lIdentity->getId() , array('title' => __('Delete profile'), 'class' => 'delete-oi-link', 'id' => 'delete-oi-'.$lIdentity->getId()))?></label>
 
             </li>

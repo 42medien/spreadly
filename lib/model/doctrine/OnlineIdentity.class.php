@@ -89,4 +89,9 @@ class OnlineIdentity extends BaseOnlineIdentity
       $this->setUseAsAvatar(true);
     }
   }
+
+  public function deactivate() {
+    $this->setActive(false);
+    $this->save();
+  }
 }

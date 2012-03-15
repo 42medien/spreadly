@@ -53,6 +53,9 @@ OnlineIdentity:
     use_as_avatar:
       type:     boolean
       default:  false
+    active:
+      type:     boolean
+      default:  true
   relations:
     Community: { onDelete: CASCADE, local: community_id, foreign: id, foreignAlias: OnlineIdentitys }
     User:      { onDelete: SET NULL, local: user_id, foreign: id, foreignAlias: OnlineIdentitys }

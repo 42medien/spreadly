@@ -46,6 +46,8 @@ class GooglePostApiClient extends PostApi {
     parent::handleResponse($pResponse);
     $lResponse = json_decode($pResponse, true);
 
+    sfContext::getInstance()->getLogger()->notice(print_r($lResponse, true));
+
     if (!array_key_exists("error", $lResponse)) {
       return;
     }

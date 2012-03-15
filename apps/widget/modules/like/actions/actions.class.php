@@ -26,7 +26,7 @@ class likeActions extends sfActions {
   public function executeIndex(sfWebRequest $request) {
     $lUrl = $request->getParameter("url", null);
     $this->url = $lUrl;
-    $this->error = null;
+    $this->error = $this->pError = null;
 
     if (!$lUrl) {
       return $this->setTemplate("share");
