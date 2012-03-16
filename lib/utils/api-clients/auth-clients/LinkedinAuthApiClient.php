@@ -95,7 +95,11 @@ class LinkedinAuthApiClient extends AuthApi {
     // check if user already exists
     if ($lOnlineIdentity) {
       if ($lOnlineIdentity->getUserId() && ($pUser->getId() == $lOnlineIdentity->getUserId())) {
-        throw new sfException("online identity already added by you", 1);
+        if (!$lOnlineIdentity->getActive()) {
+          $lOnlineIdentity->setActive(true);
+        } else {
+          throw new sfException("online identity already added", 1);
+        }
       } elseif ($lOnlineIdentity->getUserId() && ($pUser->getId() != $lOnlineIdentity->getUserId())) {
         throw new sfException("online identity already added by someone else", 2);
       }
