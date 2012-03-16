@@ -9,11 +9,18 @@
         <?php if ($sf_user->isAuthenticated() ) { ?>
         <ul class="clearfix" id="like-oi-list">
           <?php foreach($pIdentities as $lIdentity) {?>
+            <?php if ($lIdentity->getActive()) { ?>
             <li class="B">
-              <input type="checkbox" id="o<?php echo $lIdentity->getId(); ?>" name="like[oiids][]" value="<?php echo $lIdentity->getId(); ?>" <?php if ($lIdentity->getSocialPublishingEnabled() && $lIdentity->getActive()) { echo 'checked="checked"'; }  ?> <?php if (!$lIdentity->getActive()) { echo 'disabled="disabled"'; }  ?> />
+              <input type="checkbox" id="o<?php echo $lIdentity->getId(); ?>" name="like[oiids][]" value="<?php echo $lIdentity->getId(); ?>" <?php if ($lIdentity->getSocialPublishingEnabled()) { echo 'checked="checked"'; }  ?> />
               <label for="o<?php echo $lIdentity->getId(); ?>"><?php echo image_tag("/img/".$lIdentity->getCommunity()->getCommunity()."-favicon.gif", array("alt" => $lIdentity->getName(), "title" => $lIdentity->getName())); ?><?php echo link_to('x', 'settings/delete_oi?id='.$lIdentity->getId() , array('title' => __('Delete profile'), 'class' => 'delete-oi-link', 'id' => 'delete-oi-'.$lIdentity->getId()))?></label>
-
             </li>
+            <?php } else { ?>
+            <li class="B" onclick="window.open('<?php echo url_for("@signinto?service=".$lIdentity->getCommunity()->getCommunity()); ?>', 'auth_popup', 'width=580,height=450,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;">
+              <input type="checkbox" id="o<?php echo $lIdentity->getId(); ?>" name="like[oiids][]" value="" disabled="disabled" />
+              <label for="o<?php echo $lIdentity->getId(); ?>"><?php echo image_tag("/img/".$lIdentity->getCommunity()->getCommunity()."-favicon.gif", array("alt" => $lIdentity->getName(), "title" => $lIdentity->getName())); ?>
+              <?php echo link_to('x', 'settings/delete_oi?id='.$lIdentity->getId() , array('title' => __('Delete profile'), 'class' => 'delete-oi-link', 'id' => 'delete-oi-'.$lIdentity->getId()))?></label>
+            </li>
+            <?php } ?>
           <?php } ?>
             <li class="B">
               <a href="#">+add</a>
