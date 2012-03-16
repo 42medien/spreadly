@@ -57,12 +57,12 @@ staging:
       source:          pimpedMySQL
       debug:           false
       default_culture: de
-      database:        mysql://yiidit_i18n:fdsmolds32dfs@localhost/yiidit_i18n
+      database:        mysql://ekaabo:fdsmolds32dfs@localhost/yiid_i18n_staging
       cache:
         class:         sfNoCache
         param:
           lifetime:    86400
-          prefix:      yiidit_i18n
+          prefix:      yiid_i18n_staging
           servers:
             default:
               host: 127.0.0.1     #aws
