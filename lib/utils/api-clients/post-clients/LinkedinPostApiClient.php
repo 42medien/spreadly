@@ -51,7 +51,7 @@ class LinkedinPostApiClient extends PostApi {
 
     $lError = new Documents\ApiErrorLog();
 
-    foreach ($lDoc->getElementsByTagName('error-code') as $code) {
+    foreach ($lDoc->getElementsByTagName('status') as $code) {
       $lError->setCode($code->nodeValue);
     }
 
@@ -62,5 +62,9 @@ class LinkedinPostApiClient extends PostApi {
     $lError->setOiId($this->onlineIdentity->getId());
     $lError->setUId($this->onlineIdentity->getUserId());
     $lError->save();
+
+    if (($lError->getCode() ==  401) && (strstr($lError->getMessage(), "OAuth") !== false)) {
+      $this->onlineIdentity->deactivate();
+    }
   }
 }
