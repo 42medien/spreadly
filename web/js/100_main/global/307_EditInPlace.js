@@ -1,5 +1,6 @@
 /**
- * @combine statistics
+ * @nocombine statistics
+ * @deprecated Not in use anymore?!
  */
 
 var EditInPlace = {

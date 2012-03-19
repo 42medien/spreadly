@@ -1,6 +1,5 @@
 /**
- * @nocombine platform
- * @combine statistics
+ * @nocombine statistics
  */
 
 /**

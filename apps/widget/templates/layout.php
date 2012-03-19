@@ -27,7 +27,6 @@
       <div id="content-outer" role="main">
         <?php echo $sf_content; ?>
         <footer>
-        	<div id="edit-settings"></div>
 					<?php include_partial('global/footer'); ?>
         </footer>
       </div>

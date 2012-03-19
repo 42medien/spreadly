@@ -554,21 +554,30 @@ a.send.B:before{
   color: hsl(331,42%,50%);
 }
 
-
+/*******************settings***********************/
 #edit-settings{
 	text-align: left;
   height: auto;
-  width: 95.5%;
+  width: 93.4%;
   background-color: #fff;
   display:none;
   position: absolute;
+  left: 5px;
   bottom: 25px;
   padding: 10px;
   border-radius: 1px 7px 0 0;
   -moz-border-radius: 7px 7px 0 0;
   -webkit-border-radius: 7px 7px 0 0;
-  border: 1px solid #ccc;
+  border: 1px solid #666;
   border-bottom: none;
+  background: #ffffff; /* Old browsers */
+  background: -moz-linear-gradient(top,  #ffffff 0%, #f1f1f1 50%, #e1e1e1 71%, #f6f6f6 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f1f1f1), color-stop(71%,#e1e1e1), color-stop(100%,#f6f6f6)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 71%,#f6f6f6 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 71%,#f6f6f6 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 71%,#f6f6f6 100%); /* IE10+ */
+  background: linear-gradient(top,  #ffffff 0%,#f1f1f1 50%,#e1e1e1 71%,#f6f6f6 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */ 
 }
 
 #edit-settings h3{
@@ -579,6 +588,11 @@ a.send.B:before{
 	position: absolute;
   top: 5px;
   right: 5px;
+  color: #000;
+}
+
+#close-settings-link:hover{
+  color: red;
 }
 
 #select-img-list{
@@ -592,6 +606,9 @@ a.send.B:before{
 .select-profile-img-link:hover img,
 .select-profile-img-link.selected img{
  border-radius: 2px 2px 2px 2px;
- box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5), 0 0 2px 0 rgba(0, 0, 0, 0.4), 0 0 2px 1px rgba(255, 255, 255, 0.3);  
+ -moz-border-radius: 2px 2px 2px 2px;
+ -webkit-border-radius: 2px 2px 2px 2px;
+ border: 2px solid #ccc;
+ box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5), 0 0 2px 0 rgba(0, 0, 0, 0.4), 0 0 2px 1px rgba(255, 255, 255, 0.3);  
 }
 

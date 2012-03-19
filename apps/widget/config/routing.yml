@@ -77,6 +77,10 @@ default_deal:
 coupon:
   url:    /coupon
   param:  { module: deal, action: coupon }
-
+  
 default:
   url:   /:module/:action/*
+  
+linkwrapper:
+  url:   /urlwrapper
+  param:  { module: linkwrapper, action: index }    
