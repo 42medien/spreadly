@@ -32,15 +32,12 @@ class AuthApiFactory {
       case "twitter":
         return new TwitterAuthApiClient();
         break;
+      case "tumblr":
+        return new TumblrAuthApiClient();
+        break;
       case "linkedin":
         return new LinkedinAuthApiClient();
         break;
-      //case "google":
-      //  return new GoogleAuthApiClient();
-      //  break;
-      //case "delicious":
-      //  return new DeliciousAuthApiClient();
-      //  break;
       default:
         return null;
     }
