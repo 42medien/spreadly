@@ -31,8 +31,7 @@ class settingsActions extends sfActions
   	$lOi = OnlineIdentityTable::getInstance()->find($lOiId);
 
 		if($lOi->getUserId() == $lUser->getId()){
-			$lOi->setUseAsAvatar(true);
-			$lOi->save();
+			$lOi->useAsAvatar();
 		}
 
 		return $this->renderText(json_encode($lReturn));

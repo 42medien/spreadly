@@ -94,4 +94,15 @@ class OnlineIdentity extends BaseOnlineIdentity
     $this->setActive(false);
     $this->save();
   }
+
+  public function useAsAvatar() {
+    $user_id = $this->getUserId();
+    Doctrine_Query::create()
+      ->update('OnlineIdentity oi')
+      ->set('oi.use_as_avatar', 0)
+      ->where('oi.user_id = ?', $user_id)
+      ->execute();
+    $this->setUseAsAvatar(true);
+    $this->save();
+  }
 }
