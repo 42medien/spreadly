@@ -48,5 +48,9 @@ class TwitterPostApiClient extends PostApi {
     $lError->setOiId($this->onlineIdentity->getId());
     $lError->setUId($this->onlineIdentity->getUserId());
     $lError->save();
+
+    if (strstr($lResponse['error'], "OAuth") !== false) {
+      $this->onlineIdentity->deactivate();
+    }
   }
 }
