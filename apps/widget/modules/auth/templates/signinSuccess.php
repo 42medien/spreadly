@@ -12,4 +12,5 @@
     <li id="facebook_area"><a id="facebook_logo" class="service_icon" href="<?php echo url_for("@signinto?service=facebook", true); ?>">Facebook</a></li>
     <li id="twitter_area"><a id="twitter_logo" class="service_icon" href="<?php echo url_for("@signinto?service=twitter", true); ?>">Twitter</a></li>
     <li id="linkedin_area"><a id="linkedin_logo" class="service_icon" href="<?php echo url_for("@signinto?service=linkedin", true); ?>">Linkedin</a></li>
+    <li id="tumblr_area"><a id="tumblr_logo" class="service_icon" href="<?php echo url_for("@signinto?service=tumblr", true); ?>">tumblr</a></li>
   </ul>

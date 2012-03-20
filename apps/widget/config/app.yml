@@ -12,5 +12,8 @@ all:
   linkedin:
     oauth_callback_uri: "/auth/complete_signin/service/linkedin"
 
-#  tumblr:
-#    oauth_callback_uri: "/auth/complete_signin/service/tumblr"
+  tumblr:
+    oauth_callback_uri: "/auth/complete_signin/service/tumblr"
+
+  xing:
+    oauth_callback_uri: "/auth/complete_signin/service/xing"
