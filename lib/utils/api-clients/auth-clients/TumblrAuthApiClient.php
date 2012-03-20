@@ -16,6 +16,7 @@ class TumblrAuthApiClient extends AuthApi {
    * @param AuthToken $pAuthToken
    */
   public function doSignin($pSessionUser, $pOAuthToken) {
+    /*
     $lAccessToken = $this->getAccessToken($pOAuthToken);
     //var_dump($lAccessToken);die();
     // get params
@@ -61,6 +62,7 @@ class TumblrAuthApiClient extends AuthApi {
     AuthTokenTable::saveToken($user->getId(), $online_identity->getId(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], true);
 
     return $user;
+    */
   }
 
   /**
@@ -85,32 +87,36 @@ class TumblrAuthApiClient extends AuthApi {
     $json = OAuthClient::post($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "http://api.tumblr.com/v2/user/info");
     $json = json_decode($json, true);
 
-    $user_name = $json['response']['user']['name'];
-    $auth_identifier = "http://".$user_name.".tumblr.com";
+    foreach ($json['response']['user']['blogs'] as $blog) {
+      $user_name = $blog['name'];
+      $auth_identifier = "http://".$user_name.".tumblr.com";
 
-    // ask for online identity
-    $online_identity = OnlineIdentityTable::retrieveByAuthIdentifier($auth_identifier);
+      // ask for online identity
+      $online_identity = OnlineIdentityTable::retrieveByAuthIdentifier($auth_identifier);
 
-      // check if user already exists
-    if ($online_identity) {
-      if ($online_identity->getUserId() && ($user->getId() == $online_identity->getUserId())) {
-        if (!$online_identity->getActive()) {
-          $online_identity->setActive(true);
-        } else {
-          throw new sfException("online identity already added", 1);
+        // check if user already exists
+      if ($online_identity) {
+        if ($online_identity->getUserId() && ($user->getId() == $online_identity->getUserId())) {
+          if (!$online_identity->getActive()) {
+            $online_identity->setActive(true);
+          } else {
+            //throw new sfException("online identity already added", 1);
+            continue;
+          }
+        } elseif ($online_identity->getUserId() && ($user->getId() != $online_identity->getUserId())) {
+          //throw new sfException("online identity already added by someone else", 2);
+          continue;
         }
-      } elseif ($online_identity->getUserId() && ($user->getId() != $online_identity->getUserId())) {
-        throw new sfException("online identity already added by someone else", 2);
+      } else {
+        // check online identity
+        $online_identity = OnlineIdentityTable::addOnlineIdentity($auth_identifier, $user_name, $this->aCommunityId);
       }
-    } else {
-      // check online identity
-      $online_identity = OnlineIdentityTable::addOnlineIdentity($auth_identifier, $user_name, $this->aCommunityId);
+
+      $this->completeOnlineIdentity($online_identity, $blog, $user, $auth_identifier);
+
+      // save new token
+      AuthTokenTable::saveToken($user->getId(), $online_identity->getId(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], true);
     }
-
-    $this->completeOnlineIdentity($online_identity, $json['response'], $user, $auth_identifier);
-
-    // save new token
-    AuthTokenTable::saveToken($user->getId(), $online_identity->getId(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], true);
 
     return $user;
   }
@@ -158,39 +164,18 @@ class TumblrAuthApiClient extends AuthApi {
   }
 
   /**
-   * complete the user with the api json
-   *
-   * @param User $pUser
-   * @param Object $pObject
-   */
-  public function completeUser(&$pUser, $pObject) {
-    $pUser->setUsername(UserUtils::getUniqueUsername(StringUtils::normalizeUsername($pObject['user']['name'])));
-    $pUser->setActive(true);
-    $pUser->setAgb(true);
-
-    // try to split full-name
-    $lName = MicroformatsTools::splitFN($pObject['user']['name']);
-    if (array_key_exists("firstname", $lName)) {
-      $pUser->setFirstname($lName['firstname']);
-    }
-    if (array_key_exists("lastname", $lName)) {
-      $pUser->setFirstname($lName['lastname']);
-    }
-
-    $pUser->save();
-  }
-
-  /**
    * complete the online-identity with the api json
    *
    * @param OnlineIdentity $pOnlineIdentity
    * @param Object $pObject
    */
-  public function completeOnlineIdentity(&$pOnlineIdentity, $pObject, $pUser, $pAuthIdentifier) {
-    $pOnlineIdentity->setUserId($pUser->getId());
-    $pOnlineIdentity->setAuthIdentifier($pAuthIdentifier);
-    $pOnlineIdentity->setSocialPublishingEnabled(false);
-    $pOnlineIdentity->setName($pObject['user']['name']);
-    $pOnlineIdentity->save();
+  public function completeOnlineIdentity(&$online_identity, $blog, $user, $auth_identifier) {
+    $online_identity->setUserId($user->getId());
+    $online_identity->setAuthIdentifier($auth_identifier);
+    $online_identity->setSocialPublishingEnabled(true);
+    $online_identity->setName($blog['name']);
+    $online_identity->setProfileUri($blog['url']);
+    $online_identity->setFriendCount($blog['followers']);
+    $online_identity->save();
   }
 }
