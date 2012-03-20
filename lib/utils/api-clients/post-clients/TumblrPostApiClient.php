@@ -20,7 +20,7 @@ class TumblrPostApiClient extends PostApi {
     if ($activity->getComment() && $activity->getComment() != '') {
       $post_body["description"] = $activity->getComment();
     } else {
-      $post_body["description"] = $activity->getDescription();
+      $post_body["description"] = $activity->getDescr();
     }
 
     if ($activity->getTitle() && $activity->getTitle() != '') {
