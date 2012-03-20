@@ -38,6 +38,9 @@ class PostApiFactory {
       case "google":
         return new GooglePostApiClient();
         break;
+      case "tumblr":
+        return new TumblrPostApiClient();
+        break;
       default:
         return null;
     }
