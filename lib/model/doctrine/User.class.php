@@ -18,6 +18,10 @@ class User extends BaseUser {
     return $this->getFullName();
   }
 
+  public function getUniqueId() {
+    return "tag:spreadly.com,".date("Y", strtotime($this->getCreatedAt())).":/person/".$this->getId();
+  }
+
   /**
    * function to get the full name (first + last-name)
    *
