@@ -1,8 +1,12 @@
-<?php header('Content-Type: application/atom+xml'); ?>
+<?php header('Content-Type: application/atom+xml; charset=UTF-8'); ?>
 <?php echo '<?xml version="1.0" encoding="UTF-8"?>'."\n"; ?>
-<feed xmlns="http://www.w3.org/2005/Atom" xmlns:t="http://purl.org/syndication/thread/1.0" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:media="http//purl.org/syndication/atommedia">
+<feed xml:lang="en"
+      xml:base="<?php echo $sf_request->getUri(); ?>"
+      xmlns="http://www.w3.org/2005/Atom"
+      xmlns:activity="http://activitystrea.ms/spec/1.0/"
+      xmlns:media="http//purl.org/syndication/atommedia">
   <title>global share stream</title>
-  <link rel="self" type="application/atom+xml" href="http://api.spreadly.com/feeds/global" />
+  <link rel="self" type="application/atom+xml" href="<?php echo $sf_request->getUri(); ?>" />
   <link rel="hub" href="http://pubsubhubbub.appspot.com/" />
   <generator uri="http://spreadly.com/">Spreadly</generator>
   <activity:service>
