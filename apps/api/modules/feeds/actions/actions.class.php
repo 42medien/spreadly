@@ -11,7 +11,7 @@
 class feedsActions extends sfActions {
   public function executeGlobal() {
     $lDm = MongoManager::getDM();
-    $this->activities = $lDm->createQueryBuilder("Documents\YiidActivity")->find()->sort(array("c" => -1))->limit(30)->getQuery()->execute();
+    $this->activities = $lDm->createQueryBuilder("Documents\YiidActivity")->find()->sort(array("c" => -1))->limit(100)->getQuery()->execute();
 
     $this->setLayout("atom_layout");
   }
