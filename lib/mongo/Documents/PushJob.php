@@ -25,6 +25,11 @@ class PushJob extends Job {
    * send notification
    */
   public function execute() {
+    // normal google hub
+    \PubSubHubbub::push("http://pubsubhubbub.appspot.com/", "hub.mode=publish&hub.url=".urlencode("http://api.".sfConfig::get("app_settings_host")."/feeds/global"));
+    // @todo googles Social Data Hub
+    // \PubSubHubbub::push("http://pshbsubber.appspot.com/sub/spreadly", "", array("X-Hub-Signature" => "sha1=secret_checksum"));
+
     $dm = \MongoManager::getDM();
     $ya = $dm->getRepository("Documents\YiidActivity")->find(new \MongoId($this->getYiidActivityId()));
     $dp = $ya->getDomainProfile();

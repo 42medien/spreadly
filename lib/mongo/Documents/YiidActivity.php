@@ -209,10 +209,10 @@ class YiidActivity extends BaseDocument {
   }
 
   private function createJob() {
-    if ($this->hasDomainSubscriber()) {
+    //if ($this->hasDomainSubscriber()) {
       $job = new PushJob($this->getId(), $this->getDomainProfile()->getId());
       Queue::getInstance()->put($job);
-    }
+    //}
   }
 
   public function getDomainProfile() {

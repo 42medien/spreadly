@@ -38,6 +38,9 @@ class AuthApiFactory {
       case "linkedin":
         return new LinkedinAuthApiClient();
         break;
+      case "xing":
+        return new XingAuthApiClient();
+        break;
       default:
         return null;
     }
