@@ -16,8 +16,7 @@ class TwitterImportClient {
     $lToken = AuthTokenTable::getByUserAndOnlineIdentity($pOnlineIdentity->getUserId(), $pOnlineIdentity->getId());
     // get api informations
     if (!$lToken) {
-      $pOnlineIdentity->setSocialPublishingEnabled(false);
-      $pOnlineIdentity->save();
+      $pOnlineIdentity->deactivate();
       throw new Exception('damn theres no token!', '666');
     }
     $lConsumer = new OAuthConsumer(sfConfig::get("app_twitter_oauth_token"), sfConfig::get("app_twitter_oauth_secret"));

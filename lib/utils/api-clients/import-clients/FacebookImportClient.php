@@ -9,8 +9,7 @@ class FacebookImportClient {
   public static function importContacts($pOnlineIdentity) {
     $lToken = AuthTokenTable::getByUserAndOnlineIdentity($pOnlineIdentity->getUserId(), $pOnlineIdentity->getId());
     if (!$lToken) {
-      $pOnlineIdentity->setSocialPublishingEnabled(false);
-      $pOnlineIdentity->save();
+      $pOnlineIdentity->deactivate();
       throw new Exception('damn theres no token!', '666');
     }
 
