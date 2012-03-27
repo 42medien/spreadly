@@ -41,6 +41,9 @@ class PostApiFactory {
       case "tumblr":
         return new TumblrPostApiClient();
         break;
+      case "xing":
+        return new XingPostApiClient();
+        break;
       default:
         return null;
     }
