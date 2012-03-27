@@ -24,13 +24,11 @@ class XingAuthApiClient extends AuthApi {
     // extract params
     parse_str($lParams, $lParamsArray);
 
-    $json = OAuthClient::post($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "https://api.xing.com/v1/users/me.json");
-
-    sfContext::getInstance()->getLogger()->notice(print_r($json, true));
+    $json = OAuthClient::get($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "https://api.xing.com/v1/users/me.json");
 
     $json = json_decode($json, true);
 
-    $xing_user = $json['user'][0];
+    $xing_user = $json['users'][0];
     $auth_identifier = $xing_user["permalink"];
 
     // ask for online identity
@@ -41,7 +39,7 @@ class XingAuthApiClient extends AuthApi {
       $user = $online_identity->getUser();
     } else {
       // check online identity
-      $online_identity = OnlineIdentityTable::addOnlineIdentity($auth_identifier, $xing_user["page_name"], $this->aCommunityId);
+      $online_identity = OnlineIdentityTable::addOnlineIdentity($auth_identifier, $xing_user['id'], $this->aCommunityId);
 
       // if there is no online identity die!
       if (!$online_identity) {
@@ -72,18 +70,19 @@ class XingAuthApiClient extends AuthApi {
    * @param AuthToken $pAuthToken
    * @return OnlineIdentity
    */
-  public function addIdentifier($pUser, $pOAuthToken) {
+  public function addIdentifier($user, $pOAuthToken) {
     $lAccessToken = $this->getAccessToken($pOAuthToken);
+
     // get params
     $lParams = $lAccessToken->params;
     $lParamsArray = array();
     // extract params
     parse_str($lParams, $lParamsArray);
 
-    $json = OAuthClient::post($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "https://api.xing.com/v1/users/me");
+    $json = OAuthClient::get($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "https://api.xing.com/v1/users/me");
     $json = json_decode($json, true);
 
-    $xing_user = $json['user'][0];
+    $xing_user = $json['users'][0];
     $auth_identifier = $xing_user["permalink"];
 
     // ask for online identity
@@ -102,7 +101,7 @@ class XingAuthApiClient extends AuthApi {
       }
     } else {
       // check online identity
-      $online_identity = OnlineIdentityTable::addOnlineIdentity($auth_identifier, $xing_user["page_name"], $this->aCommunityId);
+      $online_identity = OnlineIdentityTable::addOnlineIdentity($auth_identifier, $xing_user['id'], $this->aCommunityId);
     }
 
     $this->completeOnlineIdentity($online_identity, $xing_user, $user, $auth_identifier);
@@ -183,7 +182,7 @@ class XingAuthApiClient extends AuthApi {
     /* signup,add new */
     $pOnlineIdentity->setUserId($pUser->getId());
     $pOnlineIdentity->setAuthIdentifier($pAuthIdentifier);
-    $pOnlineIdentity->setName($pObject['page_name']);
+    $pOnlineIdentity->setName($pObject['display_name']);
     $pOnlineIdentity->setGender($pObject['gender']);
 
     // transform facebook format into
