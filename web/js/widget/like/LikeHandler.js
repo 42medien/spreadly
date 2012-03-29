@@ -246,6 +246,7 @@ var WidgetAddService = {
       data : lData,
       success : function(pResponse) {
         jQuery('#like-submit').append(pResponse.services);
+        LikeIdentity.init();
         if(!jQuery('#nav-username').length){
           jQuery('footer').empty();
           jQuery('footer').append(pResponse.footer);
