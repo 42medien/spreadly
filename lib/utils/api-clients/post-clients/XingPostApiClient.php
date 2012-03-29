@@ -37,7 +37,7 @@ class XingPostApiClient extends PostApi {
     parent::handleResponse($pResponse);
     $lResponse = $pResponse;
 
-    if ($lResponse != "ACCESS_DENIED" && $lResponse != "USER_NOT_FOUND") {
+    if ($lResponse != "ACCESS_DENIED" && $lResponse != "USER_NOT_FOUND" && strstr($lResponse, "OAUTH") === false) {
       return;
     }
 
