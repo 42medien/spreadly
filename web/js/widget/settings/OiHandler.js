@@ -35,7 +35,7 @@ var LikeIdentity = {
               jQuery('#like-response').fadeOut('slow');
               jQuery('#like-response').empty();
             }, 3000);             
-            
+            LikeIdentity.init();
             OnLoadGrafic.hideGrafic();
           }
         });          
