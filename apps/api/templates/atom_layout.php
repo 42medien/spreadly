@@ -5,7 +5,6 @@
       xmlns="http://www.w3.org/2005/Atom"
       xmlns:activity="http://activitystrea.ms/spec/1.0/"
       xmlns:media="http//purl.org/syndication/atommedia">
-  <title>global share stream</title>
   <link rel="self" type="application/atom+xml" href="<?php echo $sf_request->getUri(); ?>" />
   <link rel="hub" href="http://pubsubhubbub.appspot.com/" />
   <generator uri="http://spreadly.com/">Spreadly</generator>
@@ -14,7 +13,6 @@
 	  <link rel="icon" href="http://spreadly.com/favicon.ico" />
 	  <link rel="alternate" href="http://spreadly.com/" />
   </activity:service>
-  <id>tag:spreadly.com,<?php echo date("Y"); ?>:api.spreadly.com/feeds/global</id>
 
   <?php echo $sf_content ?>
 </feed>
