@@ -33,7 +33,8 @@ Community:
     community: 'tumblr'
     url:       'http://www.tumblr.com'
     social_publishing_possible:   1
-  community_6:
+
+  community_7:
     name:      'xing'
     community: 'xing'
     url:       'http://www.xing.com'
