@@ -15,4 +15,15 @@ class feedsActions extends sfActions {
 
     $this->setLayout("atom_layout");
   }
+
+  public function executeUser($request) {
+    $id = $request->getParameter("id");
+
+    UserTable::retrieveByUsername();
+
+    $lDm = MongoManager::getDM();
+    $this->activities = $lDm->createQueryBuilder("Documents\YiidActivity")->find()->sort(array("c" => -1))->limit(100)->getQuery()->execute();
+
+    $this->setLayout("atom_layout");
+  }
 }
