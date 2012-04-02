@@ -9,13 +9,13 @@ Community:
     community: 'twitter'
     url:       'http://www.twitter.com'
     oi_url:    'http://twitter.com/%s'
-    social_publishing_possible:  1
+    social_publishing_possible: 1
 
   community_3:
     name:      'facebook'
     community: 'facebook'
     url:       'http://www.facebook.com'
-    social_publishing_possible:   1
+    social_publishing_possible: 1
 
   community_4:
     name:      'website'
@@ -26,16 +26,16 @@ Community:
     name:      'linkedin'
     community: 'linkedin'
     url:       'http://www.linkedin.com'
-    social_publishing_possible:   1
+    social_publishing_possible: 1
 
   community_6:
     name:      'tumblr'
     community: 'tumblr'
     url:       'http://www.tumblr.com'
-    social_publishing_possible:   1
+    social_publishing_possible: 1
 
   community_7:
     name:      'xing'
     community: 'xing'
     url:       'http://www.xing.com'
-    social_publishing_possible:   1
+    social_publishing_possible: 1
