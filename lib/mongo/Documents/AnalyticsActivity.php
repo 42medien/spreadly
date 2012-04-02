@@ -27,7 +27,7 @@ class AnalyticsActivity extends Stats {
 
   /** @Field(type="int", name="d_id") */
   protected $deal_id;
-  
+
   /** @Date */
   protected $date;
 
@@ -42,10 +42,15 @@ class AnalyticsActivity extends Stats {
 
   /** @String */
   protected $url;
-  
+
   /** @String */
   protected $age;
 
   /** @Int */
   protected $hour_of_day;
+
+  public function getYiidActivity() {
+    $dm = \MongoManager::getDM();
+    return $dm->getRepository("Documents\YiidActivity")->find(new \MongoId($this->getYiidActivityId()));
+  }
 }

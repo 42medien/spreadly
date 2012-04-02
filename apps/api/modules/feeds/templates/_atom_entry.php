@@ -7,9 +7,15 @@
   <author>
     <name><?php echo $author->getFullName(); ?></name>
     <id><?php echo $author->getUniqueId(); ?></id>
-    <?php foreach ($author->getOnlineIdentities() as $oi) { ?>
+    <?php
+      foreach ($author->getOnlineIdentities() as $oi) {
+        if ($oi->getProfileUri()) {
+    ?>
     <link rel="alternate" type="text/html" href="<?php echo $oi->getProfileUri(); ?>"  />
-    <?php } ?>
+    <?php
+        }
+      }
+    ?>
     <activity:object-type>http://activitystrea.ms/schema/1.0/person</activity:object-type>
   </author>
   <activity:object>
