@@ -51,10 +51,11 @@ all:
   tumblr:
     post_api:    'http://api.tumblr.com/v2/blog/{base-hostname}/post'
     post_realm:  'http://tumblr.com/'
+    oauth_token:   'b3zZRkeZuOn5hbeytJDVNPfRkBcm2BU6rQRgZSBoV97Z2CiWJr'
+    oauth_secret:  '55KkSmdhlN1fRneuWK9wnXh7TAg5gI3Kswae6d5mFG6CJJNEeP'
 
-  #google:
-  #  post_api:    'https://www.googleapis.com/buzz/v1/activities/@me/@self'
-  #  post_type:   'Content-Type: application/json'
+  xing:
+    post_api:    'https://api.xing.com/v1/users/me/status_message'
 
   jobs:
     last_friend_refresh_threshold: "1 day ago"
@@ -160,14 +161,15 @@ dev:
   facebook:
     oauth_token:   "4e786c7f089e38a83933c9821990030a"
     oauth_secret:  "2366aa47d946b7650fe21cf488db5694"
+    post_api:      'https://graph.facebook.com/me/spread_local:share'
 
   linkedin:
     oauth_token:   "tLGEinyEJmEVEzPruN8Q-MH_gLVrzTWJbc1xqbxyvTApbIxetpe89LVMyAc4nBRZ"
     oauth_secret:  "KzbTzvLkM4Yfb7Jf9_8D7QV6Vy-1IBj-XItzkmHzWFJMXNT2ZyD_KmxqM5eJ8Wnr"
 
-  tumblr:
-    oauth_token:   "b3zZRkeZuOn5hbeytJDVNPfRkBcm2BU6rQRgZSBoV97Z2CiWJr"
-    oauth_secret:  "55KkSmdhlN1fRneuWK9wnXh7TAg5gI3Kswae6d5mFG6CJJNEeP"
+  xing:
+    oauth_token:   "937652d826aac1b29889"
+    oauth_secret:  "29c546cccd50dedc3d9484f471c148bcdfabb989"
 
   check_url:     # der mac kann die checkdnsrr() methode nicht ausführen, so wird der test lokal umgangen
     pass:       1
@@ -191,20 +193,18 @@ dev:
 staging:
   settings:
     url:              'http://spreadly.ekaabo.crcl.ws/'
-    host:             'crcl.ws'
-    widgets_url:      'http://yiiddev.com'
-    widgets_host:     'yiiddev.com'
-    button_url:        'http://button.yiiddev.com'
+    host:             'spreadly.ekaabo.crcl.ws'
+    widgets_url:      'http://spread.ekaabo.crcl.ws'
+    widgets_host:     'spread.ekaabo.crcl.ws'
+    button_url:        'http://button.spread.ekaabo.crcl.ws'
     blog_host:         'blog.yiiddev.com'
-    old_platform_host: 'yiiddev.com'
-    old_stats_host:    'stats.yiiddev.com'
     document_root:     '/home/httpd/vhosts/yiiddev.com/httpdocs/web'
     post_to_services:  1
     environment:      'staging'
     dev:              1
     pager:            20
     gzip:             1              ## set 1 to force local gz support
-    short_url: 'http://sprd.id.cx'
+    short_url: 'http://sprd.ekaabo.crcl.ws'
     support_email:     'johndoe@ekaabo.com'
 
   twitter:
