@@ -5,6 +5,19 @@ sfCoreAutoload::register();
 // doctrine 2 class loader
 require_once dirname(__FILE__).'/../lib/vendor/Doctrine/Common/ClassLoader.php';
 
+function handleError($errno, $errstr, $errfile, $errline, array $errcontext) {
+  // error was suppressed with the @-operator
+  if (0 === error_reporting()) {
+    return false;
+  }
+
+  throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+}
+
+if (sfConfig::get("app_settings_dev") == 1) {
+  set_error_handler('handleError');
+}
+
 class ProjectConfiguration extends sfProjectConfiguration {
   public function setup() {
     $this->connectEventListeners();
