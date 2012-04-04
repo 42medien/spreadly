@@ -205,7 +205,7 @@ $wu->trackUser();
 <?php if ($wu->getType() == "default") { ?>
       <img src="//s-static.ak.facebook.com/rsrc.php/yi/r/q9U99v3_saj.ico">
       <img src="//twitter.com/phoenix/favicon.ico">
-      <img src="//ssl.gstatic.com/s2/oz/images/faviconr.ico">
+      <img src="//ssl.gstatic.com/s2/oz/images/faviconr2.ico">
       <img src="//s3.licdn.com/scds/common/u/img/favicon_v3.ico">
 <?php } elseif ($wu->getType() == "animated") { ?>
       <img src="//s3.amazonaws.com/spread.ly/img/button/as.gif" />
