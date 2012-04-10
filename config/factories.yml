@@ -80,7 +80,7 @@ staging:
       db_name:                 yiid_staging
       collection_name:         session
       session_name:            spreadly_staging
-      session_cookie_domain:   .id.cx
+      session_cookie_domain:   .spreadly.ekaabo.crcl.ws/
       session_cookie_lifetime: 17776000
 
 ##
