@@ -14,7 +14,7 @@ staging:
   storage:
     param:
       session_name:            spread_staging
-      session_cookie_domain:   .yiiddev.com
+      session_cookie_domain:   .spread.ekaabo.crcl.ws
       session_cookie_lifetime: 17776000
 
 # Development Environment
