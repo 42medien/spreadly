@@ -402,4 +402,15 @@ class OnlineIdentityTable extends Doctrine_Table {
 
     return $pOiArray;
   }
+
+  public function getTwitterOisByArray($online_identities) {
+    $q = Doctrine_Query::create()
+      ->from('OnlineIdentity oi')
+      ->leftJoin('oi.Community c')
+      ->whereIn('oi.id', $online_identities)
+      ->andWhere('c.name = ?', array("twitter"))
+      ->distinct();
+
+    return $q->execute();
+  }
 }

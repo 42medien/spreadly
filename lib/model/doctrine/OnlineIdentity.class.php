@@ -48,6 +48,26 @@ class OnlineIdentity extends BaseOnlineIdentity
   }
 
   /**
+   * returns the klout rank of a user
+   *
+   * @return string
+   */
+  public function getKloutRank() {
+    if ($this->getCommunity()->getName() == "twitter") {
+      $profile = str_replace("http://twitter.com/", "", $this->getProfileUri());
+      $result = UrlUtils::sendGetRequest("http://api.klout.com/1/klout.json?key=n7mb4vu5ka7um88remypp2bw&users=".$profile);
+
+      if ($kloutobj = json_decode($result, true)) {
+        if (array_key_exists("status", $kloutobj) && $kloutobj["status"] == 200 && array_key_exists("users", $kloutobj)) {
+          return $kloutobj["users"][0]["kscore"];
+        }
+      }
+    }
+
+    return "NaN";
+  }
+
+  /**
    * Enter description here...
    *
    */

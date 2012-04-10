@@ -51,6 +51,13 @@
       		</span>
 	  	  </div>
       </th>
+      <th align="center" valign="middle" class="last">
+        <div class="sortlink">
+          <span class="myqtip" title="<?php echo __('Klout measures your influence on your social networks.'); ?>">
+            <?php echo __('Klout Rank');?>
+          </span>
+        </div>
+      </th>
     </tr>
     </thead>
     <tbody>
@@ -66,7 +73,12 @@
         <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo point_format($url->getShares()) ?></strong></div></td>
         <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo point_format($url->getMediaPenetration()) ?></strong></div></td>
         <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $url->getClickbacks() ? point_format($url->getClickbacks()) : 0 ?></strong></div></td>
-        <td align="center" valign="middle" class="last"><div><strong class="big-font blue"><?php echo ($url->countClickbackLikes())?$url->countClickbackLikes():0; ?></strong></div></td>
+        <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo ($url->countClickbackLikes())?$url->countClickbackLikes():0; ?></strong></div></td>
+        <td align="center" valign="middle" class="last"><div><strong class="big-font blue">
+        <?php foreach (OnlineIdentityTable::getInstance()->getTwitterOisByArray($url->getYiidActivity()->getOiids()) as $oiid) { ?>
+          <span title="<?php echo $oiid->getProfileUri(); ?>"><?php echo $oiid->getKloutRank()." / "; ?></span>
+        <?php } ?>
+        </strong></div></td>
       </tr>
     <?php
       }
