@@ -57,7 +57,7 @@ staging:
       source:          pimpedMySQL
       debug:           false
       default_culture: de
-      database:        mysql://ekaabo:fdsmolds32dfs@localhost/yiid_i18n_staging
+      database:        mysql://ekaabo:k9zhgt1u!@localhost/yiid_i18n_staging
       cache:
         class:         sfNoCache
         param:
