@@ -13,9 +13,6 @@ class PushJob extends Job {
   /** @String */
   protected $yiid_activity_id;
 
-  /** @String */
-  protected $domain_profile_id;
-
   public function __construct($yiid_activity_id) {
     $this->yiid_activity_id = $yiid_activity_id;
   }
@@ -26,6 +23,7 @@ class PushJob extends Job {
   public function execute() {
     // normal google hub
     \PubSubHubbub::push("http://pubsubhubbub.appspot.com/", "hub.mode=publish&hub.url=".urlencode("http://api.".sfConfig::get("app_settings_host")."/feeds/global"));
+    \PubSubHubbub::push("http://superfeedr.com/hubbub", "hub.mode=publish&hub.url=".urlencode("http://api.".sfConfig::get("app_settings_host")."/feeds/global"));
     // @todo googles Social Data Hub
     // \PubSubHubbub::push("http://pshbsubber.appspot.com/sub/spreadly", "", array("X-Hub-Signature" => "sha1=secret_checksum"));
 
