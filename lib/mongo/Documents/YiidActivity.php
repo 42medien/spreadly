@@ -246,11 +246,28 @@ class YiidActivity extends BaseDocument {
 
     StatsFeeder::feed($this);
 
+    $this->distributeTags();
+
     if ($deal = $this->getDeal()) {
       $deal->participate($this->getUser());
     }
 
     $this->createJob();
+  }
+
+  /**
+   * adds the tags to the user and domain_profile
+   * model
+   */
+  private function distributeTags() {
+    if ($dp = $this->getDomainProfile()) {
+      $dp->addTag($this->getTags());
+      $dp->save();
+    }
+
+    $user = $this->getUser();
+    $user->addTag($this->getTags());
+    $user->save();
   }
 
   /**

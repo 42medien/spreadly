@@ -7,6 +7,7 @@ User:
   actAs:
     NoMemcacheBehavior: ~
     Timestampable:  ~
+    Taggable: ~
   columns:
     username:
       type:       string(63)
@@ -56,4 +57,3 @@ User:
       type:       integer
       default:    0
     participated_deals: array(10000)
-    
