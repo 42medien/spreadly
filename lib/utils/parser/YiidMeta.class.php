@@ -5,10 +5,17 @@ class YiidMeta {
   private $description = null;
   private $images = null;
   private $url = null;
+  private $tags = null;
 
   public function setUrl($url) {
     if (!$this->url && $url) {
       $this->url = urldecode($url);
+    }
+  }
+
+  public function setTags($tags) {
+    if (!$this->tags && $tags) {
+      $this->tags = urldecode($tags);
     }
   }
 
@@ -38,6 +45,10 @@ class YiidMeta {
     return $this->url;
   }
 
+  public function getTags() {
+    return $this->tags;
+  }
+
   public function getTitle() {
     return $this->title;
   }
@@ -51,7 +62,7 @@ class YiidMeta {
   }
 
   public function isComplete() {
-    if ($this->title && $this->description && $this->images) {
+    if ($this->title && $this->description && $this->images && $this->tags) {
       return true;
     } else {
       return false;
@@ -92,6 +103,10 @@ class YiidMeta {
       if (array_key_exists('description', $m)) {
         $this->setDescription($m['description']);
       }
+
+      if (array_key_exists('keywords', $m)) {
+        $this->setTags($m['keywords']);
+      }
     }
 
     if (is_array($meta) && array_key_exists('links', $meta)) {
@@ -108,6 +123,7 @@ class YiidMeta {
     $this->setTitle($params->get("title"));
     $this->setDescription($params->get("description"));
     $this->setImages($params->get("photo"));
+    $this->setTags($params->get("tags"));
   }
 }
 ?>
