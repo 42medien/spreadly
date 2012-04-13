@@ -61,7 +61,7 @@ function simple_tag_cloud($tags, $options = array())
   return $result;
 }
 
-function simple_tag_list($tags, $route, $options = array())
+function simple_tag_list($tags, $options = array())
 {
   $result = '';
 
@@ -82,12 +82,8 @@ function simple_tag_list($tags, $route, $options = array())
 
     foreach ($tags as $tag)
     {
-      $link = link_to($tag,
-                      $route.$tag,
-                      array('rel' => 'tag'));
-
       $result .= '
-                  <li>'.$link;
+                  <li>'.$tag;
       if (isset($options['separator']) && ($i != count($tags)))
       {
         $result .= $options['separator'];

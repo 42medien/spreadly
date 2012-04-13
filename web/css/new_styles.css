@@ -7,7 +7,7 @@
 
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent; }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
  display: block;
 }
@@ -107,7 +107,7 @@ h1#logo a { display:block; width:116px; height:46px; text-indent:-9999px; text-d
 /* =Main Nav
 --------------------------------------------------------------------------------------------------------*/
 ul#mainNavigation { margin-top:19px; padding-left:0px; margin-right:9px; display:inline;}
-ul#mainNavigation li { float:left; display:inline-block; margin-right:3px; position:relative;} 
+ul#mainNavigation li { float:left; display:inline-block; margin-right:3px; position:relative;}
 ul#mainNavigation li a { -webkit-border-top-left-radius: 6px;
 -webkit-border-top-right-radius: 6px; -moz-border-radius: 6px 6px 0 0; border-radius: 6px 6px 0 0; word-wrap:normal !important; display:inline-block; background:#4c4c4c; font-size:16px; line-height:30px; height:30px; border:0px; font-weight:bold; color:#fff; padding:0px 12px 0px 13px; font-weight:bold; margin:0px; }
 ul#mainNavigation li a:hover{ background:#aa3d71; }
@@ -159,7 +159,7 @@ ul#mainNavigation li .submenu .listline dd.last a {border:none; padding-bottom:1
 
 .brand-logo{ width:660px; text-align:left; display:inline; padding-top:41px;}
 .brand-logo h4{ color:#1f1f1f; font-size:16px; font-weight:normal; line-height:19px; text-align:left; padding-left:80px; padding-bottom:12px;}
-.brand-logo .logo-top{ text-align:left; padding-left:61px; margin-bottom:16px; }  
+.brand-logo .logo-top{ text-align:left; padding-left:61px; margin-bottom:16px; }
 .brand-logo .logo-top a{ display:inline-block; margin:0px 18px 0px 10px; vertical-align:top;}
 
 .brand-logo .logo-bot{ text-align:left; padding-left:2px; padding-bottom:12px;}
@@ -175,7 +175,7 @@ ul#mainNavigation li .submenu .listline dd.last a {border:none; padding-bottom:1
 .left-brand .companys{ font-size:36px; line-height:44px; font-weight:bold; text-transform:uppercase; padding-left:25px; position:absolute; left:0; top:137px;}
 .left-brand .depends{ height:46px; position:absolute; left:26px; top:185px; font-size:16px; vertical-align:top;}
 .left-brand .depends span{ display:inline-block; font-size:16px; line-height:19px; padding-top:18px; padding-right:12px;}
-.left-brand .depends img{  vertical-align:top;} 
+.left-brand .depends img{  vertical-align:top;}
 
 .learn-more{ background:#973765;}
 
@@ -323,14 +323,14 @@ a {color:#272727;}
 .billing-system  li {position:relative; padding-bottom:20px; width:188pt, daß das Training nach Geschlecht getrennt ist. Ich vermute hier dasselbe.
                                                                    x!important; padding-left:12px; font-size:12px;}
 .billing-system  li .num { behavior: url(css/PIE.htc); position:absolute; left:-26px; top:2px; z-index:1; border:solid 3px #fff; color:#fff; text-align:center; font-weight:bold; line-height:24px; background:#9d3969; height:24px; width:24px; display:inline-block; -webkit-border-radius:20px; -moz-border-radius:20px; border-radius:20px; -moz-box-shadow: 0px 0px 6px #888; -webkit-box-shadow: 0px 0px 6px #888; box-shadow: 0px 0px 6px #888;}
-.billing-system  li.nxtbtn {padding:0px 0px 0px 12px;} 
+.billing-system  li.nxtbtn {padding:0px 0px 0px 12px;}
 .billing-system .nxtbtn a {font-size:15px; font-weight:bold; float:right; color:#923562;}
 .billing-system .nxtbtn a:hover {text-decoration:underline;}
 
 .recurring-content {padding-bottom:30px;}
 
 .analytics-grid {padding:0px 10px 0px 52px;}
-.container_12 .analytics-grid .grid_8 {width:554px;} 
+.container_12 .analytics-grid .grid_8 {width:554px;}
 .container_12 .analytics-grid .grid_4 { width:280px;}
 .analytics-grid .icon-grid {padding-top:19px;}
 .analytics-grid .icon-grid .grid_4 { width:244px;}
@@ -397,7 +397,7 @@ background: linear-gradient(#80a0b4, #537284); /*future CSS3 browsers*/
 .custofeature-table .first { width:240px; text-align:left; padding-left:10px; border-left:solid 1px #dcdcdc;}
 .custofeature-table .last {border-right:solid 1px #dcdcdc;}
 .custofeature-table .grey {background:#f1f1f1;}
-.custofeature-table .pink-btn , .custofeature-table .blue-btn {line-height:30px; border:none; font-weight:bold; height:30px; display:block;  padding:0px; margin:0px 10px; -webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px;} 
+.custofeature-table .pink-btn , .custofeature-table .blue-btn {line-height:30px; border:none; font-weight:bold; height:30px; display:block;  padding:0px; margin:0px 10px; -webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px;}
 .custofeature-table .btnbar td {border:none; padding:12px 0px;}
 
 .custofeature-table .blue-btn span , .custofeature-table .pink-btn span {background:url(/img/statistics/signup-btnbg.png) 100% 10px no-repeat; padding-right:14px; display:inline-block; height:30px;}
@@ -426,7 +426,7 @@ behavior: url(css/PIE.htc);}
 .btnbarhead table td {width:134px;}
 .btnbarhead .first {width:222px; font-size:16px; font-weight:bold; padding-left:10px; color: #FFFFFF;}
 .btnbarhead table {width:100%;}
-.btnbarhead .pink-btn , .btnbarhead .blue-btn {line-height:30px; border:none; font-weight:bold; height:30px; display:block; text-align:center; padding:0px; margin:0px 5px;  -webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px;} 
+.btnbarhead .pink-btn , .btnbarhead .blue-btn {line-height:30px; border:none; font-weight:bold; height:30px; display:block; text-align:center; padding:0px; margin:0px 5px;  -webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px;}
 
 .btnbarhead .blue-btn span , .btnbarhead .pink-btn span {background:url(/img/statistics/signup-btnbg.png) 100% 10px no-repeat; padding-right:14px; display:inline-block; height:30px;}
 
@@ -660,7 +660,7 @@ html, body { min-height:100%; height:100%;}
 
 .tabcontainer {overflow:hidden;}
 
-/* Prufen page Css 
+/* Prufen page Css
 --------------------------------------------------------------------------------------------------------*/
 
 .prufen {padding-bottom:4px;}
@@ -700,7 +700,7 @@ html, body { min-height:100%; height:100%;}
 .agreecheck {font-size:14px;}
 
 
-/* Kampagne page Css 
+/* Kampagne page Css
 --------------------------------------------------------------------------------------------------------*/
 
 
@@ -716,12 +716,12 @@ html, body { min-height:100%; height:100%;}
 .stepitem .leftpartguts {width:380px;}
 .stepitem .preview-img {display:block; padding-top:29px; padding-right:2px;}
 
-/* Deal page Css 
+/* Deal page Css
 --------------------------------------------------------------------------------------------------------*/
 
 h3.steptitle {font-size:15px; line-height:20px; padding-left:0px;  margin-bottom:4px;}
 h3.steptitle .nu {background:#a04a74; behavior: url(css/PIE.htc); margin-right:6px; width:20px; height:20px; float:left; text-align:center; color:#fff; webkit-border-radius:10px; -moz-border-radius:10px; border-radius:10px;}
- 
+
 
 .stepprolist {padding:1px;}
 .stepprolist li {margin-bottom:13px; border-bottom:solid 1px #dcdcdc; padding-bottom:7px;}
@@ -768,7 +768,7 @@ h3.steptitle .nu {background:#a04a74; behavior: url(css/PIE.htc); margin-right:6
 #tab3 .btnbarlist {padding:6px 0px 2px 0px;}
 
 
-/* Form Css 
+/* Form Css
 --------------------------------------------------------------------------------------------------------*/
 
 .charleft {position:absolute; left:0px; bottom:-20px; width:300px;}
@@ -944,7 +944,7 @@ behavior: url(css/PIE.htc);
 .jgd-dropdown dd ul li a { padding: 0px 5px; display: block; font-weight:normal; line-height:16px; margin:0px; }
 .jgd-dropdown dd ul li a:hover { text-decoration: none; color: #fff; background:#3C3F45; }
 
-#http-sel{ width:86px; position:relative; z-index:9999; border: none; margin: 0;} 
+#http-sel{ width:86px; position:relative; z-index:9999; border: none; margin: 0;}
 #http-sel .jgd-dropdown dt,
 #filter-period-label .jgd-dropdown dt{width:56px; margin-top:1px;  background:url(/img/select-bgl.png) left 0px no-repeat;  padding-left:8px; }
 #http-sel .jgd-dropdown dt a{ width:38px; background:url(/img/select-bgr.png) right 0px no-repeat; padding-right:30px; height:30px; display:block; line-height:30px; color:#000;  }
@@ -1006,7 +1006,7 @@ behavior: url(css/PIE.htc);
 .inputlabel {border:solid 1px #ababab; behavior: url(css/PIE.htc); vertical-align:top; display:inline-block; webkit-border-radius:6px; -moz-border-radius:6px; border-radius:6px;}
 #endpointlabel{margin: 5px 0 5px 0; }
 .inputfield { border:solid 0px; color:#252525; vertical-align:top; behavior: url(css/PIE.htc); padding:4px 10px; webkit-border-radius:6px; -moz-border-radius:6px; border-radius:6px;}
-.inputfield { 
+.inputfield {
 	position:relative; z-index:1; /*fallback for non-CSS3 browsers*/
 	background: #ebebeb;
 	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#ebebeb), to(#ffffff));
@@ -1042,7 +1042,7 @@ h2.verifytitle{line-height: 22px;}
 #sf_apply_reset_request table td,
 #sf_apply_settings_form table td,
 #sf_apply_settings_reset_form table td{
-  vertical-align: middle;  
+  vertical-align: middle;
 }
 
 #sf_apply_apply_form table th,
@@ -1051,7 +1051,7 @@ h2.verifytitle{line-height: 22px;}
 #sf_apply_settings_reset_form table th{
   text-align: left;
   width: 150px;
-  vertical-align: middle;  
+  vertical-align: middle;
 }
 
 #sf_apply_apply_form table th,
@@ -1069,18 +1069,18 @@ h2.verifytitle{line-height: 22px;}
 #sf_apply_reset_request input[type="text"],
 #sf_apply_settings_form input[type="text"],
 #sf_apply_settings_reset_form input[type="password"]{
-  border:solid 1px #ababab; 
-  behavior: url(css/PIE.htc); 
-  color:#252525; 
-  vertical-align:top; 
-  behavior: url(css/PIE.htc); 
-  padding:4px 10px; 
-  webkit-border-radius:6px; 
-  -moz-border-radius:6px; 
+  border:solid 1px #ababab;
+  behavior: url(css/PIE.htc);
+  color:#252525;
+  vertical-align:top;
+  behavior: url(css/PIE.htc);
+  padding:4px 10px;
+  webkit-border-radius:6px;
+  -moz-border-radius:6px;
   border-radius:6px;
-  vertical-align:top; 
-  display:inline-block; 
-  width: 350px; 
+  vertical-align:top;
+  display:inline-block;
+  width: 350px;
 }
 
 #sf_apply_apply_form input[type="text"],
@@ -1093,7 +1093,7 @@ h2.verifytitle{line-height: 22px;}
 #sf_apply_apply_form input[type="password"],
 #sf_apply_reset_request input[type="text"],
 #sf_apply_settings_form input[type="text"],
-#sf_apply_settings_reset_form input[type="password"]{ 
+#sf_apply_settings_reset_form input[type="password"]{
   position:relative; z-index:1; /*fallback for non-CSS3 browsers*/
   background: #ebebeb;
   background: -webkit-gradient(linear, 0 0, 0 bottom, from(#ebebeb), to(#ffffff));
@@ -1155,7 +1155,7 @@ h2.verifytitle{line-height: 22px;}
 .data-tablebox th.last{ background:url(../img/tbtop.png) right top no-repeat; }
 .data-tablebox th.last div{border-right:0px solid #fff; }
 .data-tablebox th.active{background:#f6f6f6 url(../img/tbltopx-hov.gif) left top repeat-x;}
-.data-tablebox th.current div{ color:#58819a; font-size:14px; font-weight:bold; padding-left:12px;} 
+.data-tablebox th.current div{ color:#58819a; font-size:14px; font-weight:bold; padding-left:12px;}
 
 .data-tablebox td{ background:#ededed; border-bottom:1px solid #777575;  border-top:1px solid #fff;  border-right:1px solid #777575; border-left:1px solid #fff; }
 .data-tablebox td.first{ background:#e1e1e1 url(../img/tblfirst.gif) left top repeat-y; border-left:0px solid #fff; }
@@ -1345,7 +1345,7 @@ div.data-tablebox table#top-influencer-table td.first div.infname img {
     padding-right: 11px;
     float: left;
     height: 22px;
-    padding: 5px 14px 4px 0;    
+    padding: 5px 14px 4px 0;
 }
 
 #analytics-datefilter-form input {
@@ -1355,7 +1355,7 @@ div.data-tablebox table#top-influencer-table td.first div.infname img {
     font-size: 11px;
     height: 20px;
     line-height: 19px;
-    padding-bottom: 2px;    
+    padding-bottom: 2px;
 }
 
 .textfield-label {
@@ -1405,7 +1405,7 @@ button.button:hover span, button.button.active span {
 
 .choosebtn-object dd{ float:left;}
 
-.allweb-btn{ width:565px; background:url(../img/gr-borline.gif) right 1px no-repeat; padding-left:10px; } 
+.allweb-btn{ width:565px; background:url(../img/gr-borline.gif) right 1px no-repeat; padding-left:10px; }
 .allweb-btn li{ float:left; padding:0 29px 0px 0; text-align:center; width:51px;}
 .allweb-btn li.removerpad{ padding-right:0px;}
 .allweb-btn li span{ display:block; padding:7px 0;}
@@ -1442,7 +1442,7 @@ button.button:hover span, button.button.active span {
 
 
 .choose-title{ font-size:18px; font-weight:normal; padding:3px 0 13px 10px;}
-.otherweb-box{ width:180px; text-align:center; background:url(../img/gr-borline.gif) right 1px no-repeat;} 
+.otherweb-box{ width:180px; text-align:center; background:url(../img/gr-borline.gif) right 1px no-repeat;}
 .otherweb-box ul li{ width:100%;}
 .otherweb-box ul li span{display:block; padding:7px 0;}
 .siteof-typecol{ width:174px;}
@@ -1454,12 +1454,12 @@ button.button:hover span, button.button.active span {
 .sub_title {font-size:16px; color:#588199; line-height:16px;}
 
 .help_content {width:281px; padding:6px 0px 20px 50px; background:url(../img/pera-bgcurvebg.png) no-repeat 5px 33px;}
-.help_content .title {font-size:14px; line-height:14px; color:#588199; margin-bottom:12px;} 
+.help_content .title {font-size:14px; line-height:14px; color:#588199; margin-bottom:12px;}
 .help_content p { padding-bottom:0px; margin-bottom:-2px;}
 .help_content p a,
-.help_content p a:hover, 
+.help_content p a:hover,
 .optionltext a,
-.optionltext a:hover{text-decoration: underline;}	
+.optionltext a:hover{text-decoration: underline;}
 
 
 .buttoncode_list { padding:4px 0px 0px 8px; width:580px;}
@@ -1488,7 +1488,7 @@ button.button:hover span, button.button.active span {
 
 .stylestatus_box #social_avatars {
     margin-left: 6px;
-    margin-top: -4px;  
+    margin-top: -4px;
 }
 
 .stylestatus_box .meta-text{padding-bottom: 10px; padding-top: 0px;}
@@ -1696,7 +1696,7 @@ a.graybtn:hover { text-decoration:none; color:#EB2374;}
 #nav-publisher:hover #nav-publisher-link,
 #nav-advertiser:hover #nav-advertiser-link{
   background-color: #aa3d71;
-	
+
 }
 
 
@@ -1706,7 +1706,7 @@ a.graybtn:hover { text-decoration:none; color:#EB2374;}
   list-style: disc;
   display: none;
   position: absolute;
-  width: 100%;  
+  width: 100%;
 }
 
 .second-level-nav li{
@@ -1714,7 +1714,7 @@ a.graybtn:hover { text-decoration:none; color:#EB2374;}
   color: #fff;
   width: 86%;
   list-style: disc inside;
- 
+
 }
 
 .second-level-nav li.first{
@@ -1734,9 +1734,9 @@ ul#mainNavigation ul.second-level-nav li a{
     font-weight: normal;
     margin: 0 0px 0 13px;
     padding: 0;
-    word-wrap: normal !important; 
+    word-wrap: normal !important;
     border-bottom: 1px solid #fff;
-    width: 100%; 
+    width: 100%;
     height: 24px;
     line-height: 23px;
 }
@@ -1746,7 +1746,7 @@ ul#mainNavigation ul.second-level-nav li a:hover{
 }
 
 ul#mainNavigation ul.second-level-nav  li.last a{
-    border-bottom: none;    
+    border-bottom: none;
 }
 
 #general-ajax-loader{z-index: 1000000; position: absolute; display:none;}
@@ -1822,7 +1822,7 @@ ul#mainNavigation ul.second-level-nav  li.last a{
     }
 
 
-.jcarousel-skin-tango {padding-left:39px; height:80px; overflow:hidden;}            
+.jcarousel-skin-tango {padding-left:39px; height:80px; overflow:hidden;}
 .jcarousel-container { position: relative; z-index:2; }
 .jcarousel-clip { z-index: 2; padding: 0; margin: 0; overflow: hidden; position: relative; }
 .jcarousel-list { z-index: 1; overflow: hidden; position: relative; top: 0; left: 0; margin: 0; padding: 0; }
@@ -1855,4 +1855,14 @@ ul#mainNavigation ul.second-level-nav  li.last a{
 --------------------------------------------------------------------------------------------------------*/
 
 .selectionnone::selection { background-color:transparent}
-.selectionnone *::selection { background-color:transparent} 
+.selectionnone *::selection { background-color:transparent}
+
+.tag-cloud {
+
+}
+
+.tag-cloud li {
+  float: left;
+  margin: 0 5px;
+  color: #588199;
+}

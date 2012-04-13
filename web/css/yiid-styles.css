@@ -1158,7 +1158,7 @@ ul#subnavigation li a.active{
 #selected-color{
   float:left;
   width: 18px;
-  height: 18px;	
+  height: 18px;
   border: 1px solid #ccc;
   cursor: pointer;
 }
@@ -1172,7 +1172,7 @@ ul#subnavigation li a.active{
 	float:left;
   width: 18px;
   height: 18px;
-  border: 1px solid #ccc;  
+  border: 1px solid #ccc;
 }
 
 #scheme-picker .blue{background-color: hsla(199,81%,50%,1);}
@@ -1399,11 +1399,3 @@ ul#subnavigation li a.active{
   box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(0,0%,50%,.3) inset, 0 0 4px 0 hsla(0,0%,30%,.5);
   text-shadow: 0 1px 1px hsla(0,0%,50%,.25), 0 -1px 1px #fff;
 }
-
-
-
-
-
-
-
-

@@ -3,7 +3,7 @@
 	<p><?php echo __('Hier sehen Sie die Gesamtstatistiken über Ihre Domain %domain%, allgemeine Informationen zu Ihren Usern und Ihre Einnahmen.', array('%domain%' => $pHost->getHost())); ?></p>
 </div>
 <?php
-use_helper('YiidNumber');
+use_helper('YiidNumber', 'CustomTags');
 
 slot('content');
 ?>
@@ -74,6 +74,16 @@ slot('content');
 
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
+
+
+<?php slot('content'); ?>
+<h2 class="sub_title"><?php echo __("Dominant Tags"); ?></h2>
+<p><?php echo __("Subline"); ?>:</p>
+<?php
+  echo @simple_tag_cloud($pDomainProfile->getTags());
+end_slot();
+include_partial('global/graybox');
+?>
 
 <?php slot('content') ?>
 
