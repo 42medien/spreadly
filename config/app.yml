@@ -56,6 +56,8 @@ all:
 
   xing:
     post_api:    'https://api.xing.com/v1/users/me/status_message'
+    oauth_token:   'b5a3a13e511d77aa71ec'
+    oauth_secret:  'bbbbef345e84f527c2d6863dccc4feacda71e691'
 
   jobs:
     last_friend_refresh_threshold: "1 day ago"
