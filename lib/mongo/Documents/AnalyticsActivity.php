@@ -53,4 +53,17 @@ class AnalyticsActivity extends Stats {
     $dm = \MongoManager::getDM();
     return $dm->getRepository("Documents\YiidActivity")->find(new \MongoId($this->getYiidActivityId()));
   }
+
+  public function getNetworkWithMostClickbacks() {
+    $service = "-";
+    $count = 0;
+    foreach ($this->getServices() as $key => $value) {
+      if ($value["cb"] > $count) {
+        $service = $key;
+        $count = $value["cb"];
+      }
+    }
+
+    return $service;
+  }
 }
