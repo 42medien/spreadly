@@ -2,9 +2,11 @@
 <html>
   <head>
     <script type="text/javascript">
-      function close_window_initiator() {
+      try {
         window.opener.WidgetAddService.reloadServices();
         var t=setTimeout("close_window()", <?php echo $delay; ?>);
+      } catch (err) {
+        window.location = "<?php echo sfConfig::get("app_settings_my_url"); ?>/auth/complete_signin";
       }
 
       function close_window() {
