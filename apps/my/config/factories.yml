@@ -1,0 +1,38 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/05-Factories
+
+# Production Environment
+prod:
+  storage:
+    param:
+      session_name:            spread
+      session_cookie_domain:   .spread.ly
+      session_cookie_lifetime: 17776000
+
+# Staging Environment
+staging:
+  storage:
+    param:
+      session_name:            spread_staging
+      session_cookie_domain:   .spread.ekaabo.crcl.ws
+      session_cookie_lifetime: 17776000
+
+# Development Environment
+dev:
+  storage:
+    param:
+      session_name:    spread_dev
+      session_cookie_domain: .spread.local
+      session_cookie_lifetime: 170200
+
+# Default values
+all:
+  user:
+    class: myUser
+
+  logger:
+    param:
+      loggers:
+        sf_file_debug:
+          param:
+            file:            %SF_LOG_DIR%/widget_%SF_ENVIRONMENT%.log
