@@ -1,0 +1,24 @@
+ .spreadly-box:after{
+ content: "."; display:block; height:0; clear:both; visibility:hidden; 
+ } 
+ 
+ .spreadly-share{
+  float: left;
+  display:block;
+ }  
+ 
+ .spreadly-share span{
+  padding: 0px !important;
+ } 
+ 
+ .spreadly-twitter-button{ 
+  width: 95px;
+ }
+ 
+ .spreadly-google-button{
+  width: 70px !important;
+ } 
+ 
+ iframe{
+  padding-top: 2px;
+ }

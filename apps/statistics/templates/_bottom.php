@@ -4,7 +4,15 @@
 					<div class="grid_8 alignleft icon-grid">
 						<div class="clearfix">
 							<div class="icon1 grid_4 alignleft"><span><?php echo __('1 Klick - Große Reichweite'); ?></span>
-								<p><?php echo __('Dank Spreadly haben Sie keine Buttonwüste mehr, sondern nur einen Share-Button und müssen trotzdem auf kein Netzwerk verzichten. Nutzen Sie die Reichweite von Facebook, Twitter, LinkedIn und Google+ (in Arbeit) für Ihre Artikel, Produkte und anderen Inhalte. Ihre Besucher brauchen nur einen Button zu klicken um alle ihre Freunde in den Netzwerken zu erreichen'); ?> <a href="<?php echo url_for('@configurator'); ?>" title="<?php echo __('Mehr lesen'); ?>"><?php echo __('Mehr lesen'); ?></a></p>
+								<p>
+									<?php echo __('Dank Spreadly haben Sie keine Buttonwüste mehr, sondern nur einen Share-Button und müssen trotzdem auf kein Netzwerk verzichten. Nutzen Sie die Reichweite von Facebook, Twitter, LinkedIn und Google+ (in Arbeit) für Ihre Artikel, Produkte und anderen Inhalte. Ihre Besucher brauchen nur einen Button zu klicken um alle ihre Freunde in den Netzwerken zu erreichen'); ?> <a href="<?php echo url_for('@configurator'); ?>" title="<?php echo __('Mehr lesen'); ?>"><?php echo __('Mehr lesen'); ?></a>
+								</p>
+								<div class="spreadly-box">
+									<a class="spreadly-fb-button spreadly-share"></a>
+									<a class="spreadly-twitter-button spreadly-share"></a>
+									<a class="spreadly-google-button spreadly-share"></a>
+									<a class="spreadly-button spreadly-share"></a>
+								</div>
 							</div>
 							<div class="icon2 grid_4 alignleft"><span><?php echo __('Einfache Implementierung'); ?></span>
 								<p><?php echo __('Ein paar Zeilen Code reichen aus um alle Möglichkeiten von Spreadly nutzen zu können. Für Wordpress, Magento, TYPO3, Drupal und Joomla haben wir auch komplett fertige Erweiterungen die den Einbau zum Kinderspiel machen.'); ?> <a href="<?php echo url_for('http://code.google.com/p/spreadly/wiki/Plugins'); ?>" title="<?php echo __('Mehr lesen'); ?>" target="_blank"><?php echo __('Mehr lesen'); ?></a></p>
