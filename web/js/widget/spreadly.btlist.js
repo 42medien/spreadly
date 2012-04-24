@@ -19,11 +19,10 @@
     },
     
     initCss: function() {
-      //console.log('[SpreadlyButton][initCss]');      
       var lHead = document.getElementsByTagName("head")[0];
       var lLink = document.createElement('link');
       lLink.rel = 'stylesheet';
-      lLink.href = 'http://www.spreadly.com/css/widget/spreadlywidget.css';
+      lLink.href = 'http://spreadly.com/css/widget/spreadlywidget.css';
       lLink.type = 'text/css';
       lLink.media = 'screen';
       lHead.appendChild(lLink);
@@ -39,7 +38,6 @@
     },
     
     initFB: function (){
-      //console.log('[SpreadlyBox][initFB]');
       
       document.getElementsByTagName("body")[0].insertAdjacentHTML('beforeend', '<div id="fb-root"></div>');
       
@@ -61,12 +59,10 @@
          ref.parentNode.insertBefore(js, ref);
        }(document));  
       
-      //SpreadlyFbButton.insert();
     },
     
     initTwitter: function() {
       !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-      //SpreadlyTwButton.insert();
     },
     
     initGoogle: function() {
@@ -75,8 +71,6 @@
         po.src = 'https://apis.google.com/js/plusone.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
       })();
-     // SpreadlyGoogleButton.insert();
-      
     }    
     
       
@@ -92,23 +86,18 @@
       for(var i = 0; i < lButtons.length; i++){
         if(SpreadlyUtils.hasClass(lButtons[i], 'spreadly-fb-button')) {
           SpreadlyFbButton.insert(lButtons[i]);
-          console.log('fb');
-          console.log(SpreadlyBox.aUrl);
         }
 
         
         if(SpreadlyUtils.hasClass(lButtons[i], 'spreadly-google-button')) {
-          console.log('google');          
           SpreadlyGoogleButton.insert(lButtons[i]);          
         }        
         
         if(SpreadlyUtils.hasClass(lButtons[i], 'spreadly-twitter-button')) {
-          console.log('twitter');          
           SpreadlyTwButton.insert(lButtons[i]);          
         }  
         
         if(SpreadlyUtils.hasClass(lButtons[i], 'spreadly-button')) {
-          console.log('spreadly');          
           SpreadlyButton.insert(lButtons[i]);          
         }         
       }
@@ -159,7 +148,6 @@
       },       
       
       insert: function(pButton) {
-        //console.log('[SpreadlyGoogleButton][insert]');
         pButton.insertAdjacentHTML('afterbegin', SpreadlyGoogleButton.getButton());
       }       
       

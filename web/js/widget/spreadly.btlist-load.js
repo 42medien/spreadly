@@ -3,7 +3,7 @@ var Spreadly = {
       var lHead = document.getElementsByTagName("head")[0];
       var lScript = document.createElement('script');
       lScript.type = 'text/javascript';
-      lScript.src = 'http://www.spreadly.com/js/widget/buttonlist-dev.min.js';
+      lScript.src = 'http://spreadly.com/js/widget/buttonlist-dev.min.js';
       lScript.onload = Spreadly.initButton;
       lHead.appendChild(lScript);
     },
