@@ -45,8 +45,8 @@
  * @author   Xavier Lacot <xavier@lacot.org>
  * @see      http://www.symfony-project.com/trac/wiki/sfDoctrineActAsTaggablePlugin
  */
- 
- 
+
+
 class TaggableListener extends Doctrine_Record_Listener
 {
     /**
@@ -58,10 +58,12 @@ class TaggableListener extends Doctrine_Record_Listener
     {
 
         $object = $event->getInvoker();
-        
+
         $added_tags = Taggable::get_tags($object);
         $removed_tags = array_keys(Taggable::get_removed_tags($object));
-        
+
+        sfContext::getInstance()->getLogger()->notice(print_r($added_tags, true).print_r($removed_tags, true));
+
         // save new tags
         foreach ($added_tags as $tagname)
         {
@@ -73,15 +75,15 @@ class TaggableListener extends Doctrine_Record_Listener
             $tagging->taggable_model = get_class($object);
             $tagging->save();
         }
-        
+
         if($removed_tags)
         {
             $q = Doctrine_Query::create()->select('t.id')
                 ->from('Tag t INDEXBY t.id')
                 ->whereIn('t.name', $removed_tags);
-								
+
             $removed_tag_ids = array_keys($q->execute(array(), Doctrine::HYDRATE_ARRAY));
-            
+
             Doctrine::getTable('Tagging')->createQuery()
 	            ->delete()
 	            ->whereIn('tag_id', $removed_tag_ids)
@@ -91,7 +93,7 @@ class TaggableListener extends Doctrine_Record_Listener
         }
 
         $tags = array_merge(Taggable::get_tags($object) , $object->getSavedTags());
-        
+
         Taggable::set_saved_tags($object, $tags);
         Taggable::clear_tags($object);
         Taggable::clear_removed_tags($object);
@@ -104,9 +106,9 @@ class TaggableListener extends Doctrine_Record_Listener
     */
     public function preDelete(Doctrine_Event $event)
     {
-      
+
         $object = $event->getInvoker();
-        
+
         Doctrine::getTable('Tagging')->createQuery()
           ->delete()
           ->addWhere('taggable_id = ?', $object->id)
@@ -116,12 +118,12 @@ class TaggableListener extends Doctrine_Record_Listener
 }
 
 class Taggable extends Doctrine_Template
-{    
+{
     public function setTableDefinition()
     {
         $this->addListener(new TaggableListener());
     }
-    
+
     /**
     * parameterHolder access methods
     */
@@ -213,7 +215,7 @@ class Taggable extends Doctrine_Template
         self::clear_removed_tags($object);
         self::getTagsHolder($object)->add($tags, 'removed_tags');
     }
-    
+
     /**
     * Adds a tag to the object. The "tagname" param can be a string or an array
     * of strings. These 3 code sequences produce an equivalent result :
@@ -234,7 +236,7 @@ class Taggable extends Doctrine_Template
         {
             foreach ($tagname as $tag)
             {
-                $this->addTag($tag, $options);
+                $this->add_tag($this->getInvoker(), $tag, $options);
             }
         }
         else
@@ -255,15 +257,15 @@ class Taggable extends Doctrine_Template
                 {
                     // the binome namespace:key must be unique
                     $triple = TaggableToolkit::extractTriple($tagname);
-                    
+
                     if (!is_null($triple[1]) && !is_null($triple[2]))
-                    {                       
+                    {
                         $tags = $this->getTags(array('triple' => true, 'return' => 'tag'));
-                        
+
                         $pattern = '/^'.$triple[1].':'.$triple[2].'=(.*)$/';
-                        
+
                         $removed = array();
-                    
+
                         foreach ($tags as $tag)
                         {
                             if (preg_match($pattern, $tag))
@@ -271,11 +273,11 @@ class Taggable extends Doctrine_Template
                               $removed[] = $tag;
                             }
                         }
-                    
+
                         $this->removeTag($removed);
                     }
                 }
-                
+
                 if (!isset($saved_tags[$tagname]))
                 {
                     $this->add_tag($this->getInvoker(), $tagname, $options);
@@ -291,7 +293,7 @@ class Taggable extends Doctrine_Template
     public function getSavedTags()
     {
         $option = $this->getTagsHolder($this->getInvoker());
-        
+
         if (!isset($option) || !$option->hasNamespace('saved_tags'))
         {
             // if record is new
@@ -311,14 +313,14 @@ class Taggable extends Doctrine_Template
 
                 $saved_tags = $q->execute(array(), Doctrine::HYDRATE_ARRAY);
                 $tags = array();
-                
+
                 foreach ($saved_tags as $key => $infos)
                 {
                     $tags[$key] = $key;
                 }
-                
+
                 $this->set_saved_tags($this->getInvoker(), $tags);
-                
+
                 return $tags;
             }
         }
@@ -337,18 +339,18 @@ class Taggable extends Doctrine_Template
     public function getTags($options = array())
     {
         $tags = array_merge($this->get_tags($this->getInvoker()) , $this->getSavedTags());
-        
+
         if (isset($options['is_triple']) && (true === $options['is_triple']))
         {
             $tags = array_map(array('TaggableToolkit', 'extractTriple'), $tags);
             $pattern = array('tag', 'namespace', 'key', 'value');
-            
+
             foreach ($pattern as $key => $value)
             {
                 if (isset($options[$value]))
                 {
                     $tags_array = array();
-                    
+
                     foreach ($tags as $tag)
                     {
                         if ($tag[$key] == $options[$value])
@@ -356,18 +358,18 @@ class Taggable extends Doctrine_Template
                             $tags_array[] = $tag;
                         }
                     }
-                    
+
                     $tags = $tags_array;
                 }
             }
-            
+
             $return = (isset($options['return']) && in_array($options['return'], $pattern)) ? $options['return'] : 'all';
-            
+
             if ('all' != $return)
             {
                 $keys = array_flip($pattern);
                 $tags_array = array();
-                
+
                 foreach ($tags as $tag)
                 {
                     if (null != $tag[$keys[$return]])
@@ -375,7 +377,7 @@ class Taggable extends Doctrine_Template
                         $tags_array[] = $tag[$keys[$return]];
                     }
                 }
-                
+
                 $tags = array_unique($tags_array);
             }
         }
@@ -383,7 +385,7 @@ class Taggable extends Doctrine_Template
         if (!isset($return) || ('all' != $return))
         {
             ksort($tags);
-            
+
             if (isset($options['serialized']) && (true === $options['serialized']))
             {
                 $tags = implode(', ', $tags);
@@ -413,12 +415,12 @@ class Taggable extends Doctrine_Template
         if (is_array($tag))
         {
             $result = true;
-        
+
             foreach ($tag as $tagname)
             {
                 $result = $result && $this->hasTag($tagname);
             }
-        
+
             return $result;
         }
         else
@@ -432,7 +434,7 @@ class Taggable extends Doctrine_Template
             elseif (is_string($tag))
             {
                 $tag = TaggableToolkit::cleanTagName($tag);
-                
+
                 if (isset($tags[$tag]))
                 {
                     return true;
@@ -460,27 +462,27 @@ class Taggable extends Doctrine_Template
     * @param      array       $objects
     */
     public static function preloadTags(&$objects)
-    {   
+    {
         // FIXME: usage of group_concat... mysql specific
         return array();
         // $searched = array();
-        // 
+        //
         //         foreach ($objects as $object)
         //         {
         //             $class = get_class($object);
-        //             
+        //
         //             if (!isset($searched[$class]))
         //             {
         //                 $searched[$class] = array();
         //             }
-        //             
+        //
         //             $searched[$class][$object->getPrimaryKey()] = $object;
         //         }
-        // 
+        //
         //         if (count($searched) > 0)
         //         {
         //             $con = Propel::getConnection();
-        //             
+        //
         //             foreach ($searched as $model => $instances)
         //             {
         //                 Doctrine_Query::create()
@@ -490,7 +492,7 @@ class Taggable extends Doctrine_Template
         //                           $instances,
         //                           array_fill(0, count($instances), array()));
         //                 $keys = array_keys($instances);
-        //                 
+        //
         //                 $query = 'SELECT %s as id,
         //                                  GROUP_CONCAT(%s) as tags
         //                           FROM %s, %s
@@ -498,7 +500,7 @@ class Taggable extends Doctrine_Template
         //                           AND %s=?
         //                           AND %s=%s
         //                           GROUP BY %s';
-        //                 
+        //
         //                 $query = sprintf($query,
         //                                  TaggingPeer::TAGGABLE_ID,
         //                                  TagPeer::NAME,
@@ -513,18 +515,18 @@ class Taggable extends Doctrine_Template
         //                 $stmt = $con->prepareStatement($query);
         //                 $stmt->setString(1, $model);
         //                 $rs = $stmt->executeQuery();
-        //                 
+        //
         //                 while ($rs->next())
         //                 {
         //                     $object = $instances[$rs->getInt('id')];
         //                     $object_tags = explode(',', $rs->getString('tags'));
         //                     $tags = array();
-        //                     
+        //
         //                     foreach ($object_tags as $tag)
         //                     {
         //                         $tags[$tag] = $tag;
         //                     }
-        //                     
+        //
         //                     self::set_saved_tags($this->getInvoker(), $object, $tags);
         //                 }
         //             }
@@ -539,9 +541,9 @@ class Taggable extends Doctrine_Template
     public function removeAllTags()
     {
         $saved_tags = $this->getSavedTags();
-        
+
         $this->set_saved_tags($this->getInvoker(), array());
-        $this->set_tags($this->getInvoker(), array());        
+        $this->set_tags($this->getInvoker(), array());
         $this->set_removed_tags($this->getInvoker(), array_merge($this->get_removed_tags($this->getInvoker()) , $saved_tags));
     }
 
@@ -554,7 +556,7 @@ class Taggable extends Doctrine_Template
     public function removeTag($tagname)
     {
         $tagname = TaggableToolkit::explodeTagString($tagname);
-        
+
         if (is_array($tagname))
         {
             foreach ($tagname as $tag)
@@ -565,16 +567,16 @@ class Taggable extends Doctrine_Template
         else
         {
             $tagname = TaggableToolkit::cleanTagName($tagname);
-            
+
             $tags = $this->get_tags($this->getInvoker()) ;
             $saved_tags = $this->getSavedTags();
-        
+
             if (isset($tags[$tagname]))
             {
               unset($tags[$tagname]);
               $this->set_tags($this->getInvoker(), $tags);
             }
-        
+
             if (isset($saved_tags[$tagname]))
             {
                 unset($saved_tags[$tagname]);
@@ -597,7 +599,7 @@ class Taggable extends Doctrine_Template
         if (($replacement != $tagname) && ($tagname != null))
         {
             $this->removeTag($tagname);
-            
+
             if ($replacement != null)
             {
                 $this->addTag($replacement);
