@@ -22,6 +22,9 @@ class statisticsActions extends sfActions
 
     $this->shares_complete = $analytics_activity->findBy(array("user_id" => intval($this->getUser()->getUserId())))->count();
     $this->clickbacks_complete = $analytics_activity->getOverallClickbacks($this->getUser()->getUserId());
-    $this->tags = "";
+
+    $q = Doctrine_Query::create();
+    $q->addWhere("tg.taggable_id = ?", array($this->getUser()->getUserId()));
+    $this->tags = PluginTagTable::getAllTagNameWithCount($q, array("model" => "User", "limit" => 100));
   }
 }
