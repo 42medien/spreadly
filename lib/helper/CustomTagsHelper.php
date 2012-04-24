@@ -30,32 +30,35 @@ function simple_tag_cloud($tags, $options = array())
 
   if(count($tags) > 0)
   {
-    $emphasizers_begin = array(-2 => '<small><small>',
-                               -1 => '<small>',
-                                0 => '',
-                                1 => '<big>',
-                                2 => '<big><big>');
-    $emphasizers_end = array(-2 => '</small></small>',
-                             -1 => '</small>',
-                              0 => '',
-                              1 => '</big>',
-                              2 => '</big></big>');
+    $emphasizers_begin = "";
+    $emphasizers_end = "";
 
     $class = isset($options['class']) ? $options['class'] : 'tag-cloud';
-    $result = '<ul class="'.$class.'">';
+    $result = '<div class="'.$class.'">';
+    $overall = count($tags);
+    $actual = 0;
 
     foreach ($tags as $name => $count)
     {
-      if ($custom_route)
-      {
-        $route_link = sprintf($route, $name);
+      $actual++;
+      $emphasizers_begin = "";
+      $emphasizers_end = "";
+
+      for($i = 1; $i <= $count; $i++) {
+        $emphasizers_begin .= "<big>";
+        $emphasizers_end .= "</big>";
       }
 
-      $result .= '
-                  <li>'.$emphasizers_begin[$count].$name.$emphasizers_end[$count].'</li>';
+      $result .= $emphasizers_begin.$name.$emphasizers_end;
+
+      if ($overall > $actual) {
+        $result .= ",";
+      }
+
+      $result .= " ";
     }
 
-    $result .= '</ul>';
+    $result .= '</div>';
   }
 
   return $result;
