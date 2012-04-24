@@ -43,14 +43,13 @@
       
       window.fbAsyncInit = function() {
         FB.init({
-          appId      : '321448358939', // App ID
-          status     : true, // check login status
-          cookie     : false, // enable cookies to allow the server to access the session
-          xfbml      : true  // parse XFBML
+          appId      : '139206476740', // App ID
+          status     : true,
+          cookie     : false,
+          xfbml      : true  
         });
       };
 
-      // Load the SDK Asynchronously
       (function(d){
          var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
          if (d.getElementById(id)) {return;}
@@ -101,12 +100,11 @@
           SpreadlyButton.insert(lButtons[i]);          
         }         
       }
-      //SpreadlyFbButton.insert(pBox);
-      //SpreadlyButton.insert();
     },
     
     setUrl: function(pBox) {
       SpreadlyBox.aUrl = pBox.getAttribute('data-href');
+      SpreadlyBox.aUrl = SpreadlyBox.aUrl.replace(/\s/g, "");      
       if(SpreadlyBox.aUrl == null) {
         SpreadlyBox.aUrl = location.href;
       } else if(SpreadlyBox.aUrl == '') {
@@ -157,7 +155,7 @@
   var SpreadlyButton = {
     
     getButton: function() {
-      return '<iframe src="http://button.spread.ly/?url='+SpreadlyBox.aUrl+'&color=000000&label=Like&social=0" style="overflow:hidden; width: 180px; height: 23px; padding: 0px 0;" frameborder="0" scrolling="no" marginheight="0" allowTransparency="true"></iframe>';
+      return '<iframe src="http://button.spread.ly/?url='+SpreadlyBox.aUrl+'&color=000000&label=Like&social=0" style="overflow:hidden; width: 170px; height: 23px; padding: 0px 0;" frameborder="0" scrolling="no" marginheight="0" allowTransparency="true"></iframe>';
     },           
     
     insert: function(pButton) {
