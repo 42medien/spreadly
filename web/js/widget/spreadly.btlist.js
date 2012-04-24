@@ -23,7 +23,7 @@
       var lHead = document.getElementsByTagName("head")[0];
       var lLink = document.createElement('link');
       lLink.rel = 'stylesheet';
-      lLink.href = 'http://spreadly.local/css/widget/spreadlywidget.css';
+      lLink.href = 'http://www.spreadly.com/css/widget/spreadlywidget.css';
       lLink.type = 'text/css';
       lLink.media = 'screen';
       lHead.appendChild(lLink);
