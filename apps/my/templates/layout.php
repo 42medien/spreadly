@@ -11,8 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Le styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/my.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -47,8 +45,9 @@
             <ul class="nav">
               <li<?php if ($sf_context->getModuleName() == "landing") { ?> class="active"<?php } ?>><a href="/"><?php echo __("Home"); ?></a></li>
               <li<?php if ($sf_context->getModuleName() == "statistics") { ?> class="active"<?php } ?>><?php echo link_to(__("Statistics"), "statistics/index"); ?></li>
+              <li<?php if ($sf_context->getModuleName() == "spreads") { ?> class="active"<?php } ?>><?php echo link_to(__("Latest Spreads"), "spreads/index"); ?></li>
             </ul>
-          <?php if ($sf_user->getUser()) { ?><p class="navbar-text pull-right"><?php echo __("Logged in as: "); ?><a href="#"><?php echo $sf_user->getUser()->getFullname(); ?></a></p><?php } ?>
+          <?php if ($sf_user->getUser()) { ?><p class="navbar-text pull-right"><?php echo __("Logged in as: "); ?><a href="#"><?php echo $sf_user->getUser()->getFullname(); ?></a> | <?php echo link_to(" ", "auth/signout", array("title" => __("Signout"), "class" => "icon-signout")); ?></p><?php } ?>
           </div><!--/.nav-collapse -->
         </div>
       </div>

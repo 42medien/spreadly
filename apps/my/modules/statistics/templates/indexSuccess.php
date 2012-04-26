@@ -1,21 +1,27 @@
 <?php use_helper("CustomTags"); ?>
-<h1><?php echo __("How big is your penis?"); ?></h1>
-
-<hr />
+<div class="page-header">
+  <h1><?php echo __("How big is your penis?"); ?></h1>
+</div>
 
 <div class="hero-unit">
   <div class="row">
     <div class="span3">
-      <h2><?php echo __("Shares"); ?></h2>
+      <h2><i class="icon-share"></i> <?php echo __("Shares"); ?></h2>
       <p><?php echo $shares_complete; ?></p>
     </div>
     <div class="span3">
-      <h2><?php echo __("Clickbacks"); ?></h2>
+      <h2><i class="icon-share-alt"></i> <?php echo __("Clickbacks"); ?></h2>
       <p><?php echo $clickbacks_complete; ?></p>
     </div>
     <div class="span3">
-      <h2><?php echo __("Spread Rank"); ?></h2>
-      <p>???</p>
+      <h2><i class="icon-bar-chart"></i> <?php echo __("Spread Rank"); ?></h2>
+      <p>
+        <div class="progress">
+          <div class="bar" style="width: 60%;"></div>
+        </div>
+
+        60/100
+      </p>
     </div>
   </div>
 </div>
