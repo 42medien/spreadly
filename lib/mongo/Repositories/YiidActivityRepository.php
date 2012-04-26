@@ -44,4 +44,12 @@ class YiidActivityRepository extends DocumentRepository
 
     return $results->count();
   }
+
+  public function countByOnlineIdentityIds($array) {
+    $results = $this->createQueryBuilder()
+                    ->field("oiids")->in($array)
+                    ->getQuery()->execute();
+
+    return $results->count();
+  }
 }
