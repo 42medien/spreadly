@@ -22,7 +22,7 @@
 
 <div class="row">
   <div class="span4">
-    <h2><?php echo __("Tags"); ?> <small>(<?php echo __("the overall Top-20 shares"); ?>)</small></h2>
+    <h2><?php echo __("Tags"); ?> <small>(<?php echo __("the overall Top-100 tags"); ?>)</small></h2>
     <?php echo simple_tag_cloud($tags); ?>
   </div>
   <div class="span8">
