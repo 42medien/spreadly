@@ -110,6 +110,12 @@ class OnlineIdentity extends BaseOnlineIdentity
     }
   }
 
+  public function getSpreadCount() {
+    $yiid_activity_repo = MongoManager::getDM()->getRepository('Documents\YiidActivity');
+
+    return $yiid_activity_repo->countByOnlineIdentityIds(array($this->getId()));
+  }
+
   public function deactivate() {
     $this->setActive(false);
     $this->save();
