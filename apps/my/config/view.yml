@@ -12,9 +12,9 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    []
+  stylesheets:    [bootstrap.min.css, my.css, font-awesome.css]
 
-  javascripts:    []
+  javascripts:    [https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js, bootstrap.js, bootstrap-tooltip.js]
 
   has_layout:     true
   layout:         layout
