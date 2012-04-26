@@ -4,3 +4,13 @@ div.tag-cloud {
   vertical-align: middle;
   line-height: 1.1;
 }
+
+div.thumb {
+  width: 150px;
+  height: 100px;
+  overflow: hidden;
+}
+
+div.thumb img {
+  width: 150px;
+}
