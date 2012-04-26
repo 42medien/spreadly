@@ -47,7 +47,7 @@
               <li<?php if ($sf_context->getModuleName() == "statistics") { ?> class="active"<?php } ?>><?php echo link_to(__("Statistics"), "statistics/index"); ?></li>
               <li<?php if ($sf_context->getModuleName() == "spreads") { ?> class="active"<?php } ?>><?php echo link_to(__("Latest Spreads"), "spreads/index"); ?></li>
             </ul>
-          <?php if ($sf_user->getUser()) { ?><p class="navbar-text pull-right"><?php echo __("Logged in as: "); ?><a href="#"><?php echo $sf_user->getUser()->getFullname(); ?></a> | <?php echo link_to(" ", "auth/signout", array("title" => __("Signout"), "class" => "icon-signout")); ?></p><?php } ?>
+          <?php if ($sf_user->getUser()) { ?><p class="navbar-text pull-right"><?php echo __("Logged in as:"); ?> <?php echo link_to($sf_user->getUser()->getFullname(), "@profile"); ?> | <?php echo link_to(" ", "auth/signout", array("title" => __("Signout"), "class" => "icon-signout")); ?></p><?php } ?>
           </div><!--/.nav-collapse -->
         </div>
       </div>

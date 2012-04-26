@@ -6,6 +6,10 @@ homepage:
   url:   /
   param: { module: landing, action: index }
 
+profile:
+  url:  /profile
+  param: { module: profile, action: index }
+
 # generic rules
 # please, remove them by adding more specific rules
 default_index:

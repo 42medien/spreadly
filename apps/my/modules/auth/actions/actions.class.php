@@ -26,6 +26,6 @@ class authActions extends sfActions
 
   public function executeSignout(sfWebRequest $request) {
     $this->getUser()->signOut();
-    $this->redirect('landing/index');
+    $this->redirect('@homepage');
   }
 }
