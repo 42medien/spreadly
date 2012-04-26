@@ -490,4 +490,9 @@ class YiidActivity extends BaseDocument {
 
     return true;
   }
+
+  public function getAnalyticsActivity() {
+    $dm = \MongoManager::getStatsDM();
+    return $dm->getRepository("Documents\AnalyticsActivity")->findOneBy(array("ya_id" => $this->getId()));
+  }
 }
