@@ -7,16 +7,16 @@ set :scm,         :subversion
 set :scm_username, "yiid"
 set :scm_password, "yiidyiidyiid"
 
-role :web,    "spreadly.com"                        # Your HTTP server, Apache/etc
-set :user, 'root'
-set :deploy_directory, "/var/www"
+role :web,    "ekaabo.crcl.ws"                        # Your HTTP server, Apache/etc
+set :user, 'ekaabo'
+set :deploy_directory, "spreadly/www/httpdocs/"
 set :current_dir, "current"
-  
+
 set  :keep_releases,  5
 
 task :prod do
   set :button_deployment, false
-  
+
   set :sf_env, "prod"
   set :domain,      "spreadly.com"
   set :deploy_to,   "#{deploy_directory}/#{domain}"
@@ -29,8 +29,8 @@ task :staging do
   set :button_deployment, false
 
   set :sf_env, "staging"
-  set :domain,      "id.cx"
-  set :deploy_to,   "#{deploy_directory}/#{domain}"
+  set :domain,      "spreadly.ekaabo.crcl.ws"
+  set :deploy_to,   "/mnt/data/spreadly/www/httpdocs"
   set :deploy_via, :checkout
   puts "Deploying #{application} to #{domain} for env=#{sf_env} …"
   ask_for_repository
@@ -141,7 +141,8 @@ namespace :deploy do
   desc "Customize the finalize_update task to work with symfony."
   task :finalize_update, :except => { :no_release => true } do
     run "mkdir -p #{latest_release}/cache"
-    run "chown -R www-data:www-data #{latest_release}"
+    run "chmod -R 755 #{latest_release}/cache"
+    run "chmod -R 777 #{latest_release}/lib/mongo/Hydrators"
 
     # Share common files & folders
     share_childs
