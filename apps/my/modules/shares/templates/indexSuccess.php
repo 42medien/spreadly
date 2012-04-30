@@ -3,14 +3,18 @@
   <h1><?php echo __("Your latest Likes"); ?></h1>
 </div>
 
-<?php include_component("shares", "breadcrumbs"); ?>
+<?php include_component("shares", "breadcrumbs", array("results" => $activities->getNbResults())); ?>
 
 <hr />
 
 <?php foreach ($activities->getResults() as $activity) { ?>
   <div class="row">
     <div class="span2">
+      <?php if ($activity->getThumb()) { ?>
       <div class="thumbnail"><img src="<?php echo $activity->getThumb(); ?>" /></div>
+      <?php } else { ?>
+      &nbsp;
+      <?php } ?>
     </div>
     <div class="span7">
       <h2><?php echo $activity->getTitle(); ?></h2>

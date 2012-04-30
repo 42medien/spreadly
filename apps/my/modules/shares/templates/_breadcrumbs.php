@@ -17,4 +17,10 @@
     <span class="divider">/</span> <a href="#"><?php echo __("Page"); ?>: <?php echo $sf_request->getParameter("p"); ?></a>
     <?php } ?>
   </li>
+
+  <li>
+    <?php if (isset($results)) { ?>
+    <span class="divider">/</span> <?php echo __("Results") . ": " . $results; ?>
+    <?php } ?>
+  </li>
 </ul>
