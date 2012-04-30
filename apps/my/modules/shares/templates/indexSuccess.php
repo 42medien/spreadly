@@ -1,6 +1,10 @@
 <div class="page-header">
-  <h1><?php echo __("Your latest Spreads"); ?></h1>
+  <h1><?php echo __("Your latest Shares"); ?></h1>
 </div>
+
+<input type="text" class="typeahead" id="typeahead" data-provide="typeahead" />
+
+
 
 <?php foreach ($activities as $activity) { ?>
   <div class="row">
@@ -45,3 +49,16 @@
   </div>
   <hr />
 <?php } ?>
+
+<div class="pagination">
+  <ul>
+    <li><a href="#">Prev</a></li>
+    <li class="active">
+      <a href="#">1</a>
+    </li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">Next</a></li>
+  </ul>
+</div>

@@ -14,7 +14,7 @@ default:
 
   stylesheets:    [bootstrap.min.css, my.css, font-awesome.css]
 
-  javascripts:    [https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js, bootstrap.js, bootstrap-tooltip.js]
+  javascripts:    [https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js, bootstrap.js, bootstrap-tooltip.js, bootstrap-typeahead.js, my-app.js]
 
   has_layout:     true
   layout:         layout

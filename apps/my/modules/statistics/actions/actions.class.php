@@ -18,7 +18,7 @@ class statisticsActions extends sfActions
   public function executeIndex(sfWebRequest $request) {
     $analytics_activity = MongoManager::getStatsDM()->getRepository('Documents\AnalyticsActivity');
 
-    $this->activities = $analytics_activity->findBy(array("user_id" => intval($this->getUser()->getUserId())))->limit(20)->sort(array("cb" => "DESC"));
+    $this->activities = $analytics_activity->findBy(array("user_id" => intval($this->getUser()->getUserId())))->limit(30)->sort(array("cb" => "DESC"));
 
     $this->shares_complete = $analytics_activity->findBy(array("user_id" => intval($this->getUser()->getUserId())))->count();
     $this->clickbacks_complete = $analytics_activity->getOverallClickbacks($this->getUser()->getUserId());

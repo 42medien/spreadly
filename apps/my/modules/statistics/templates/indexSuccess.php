@@ -7,21 +7,15 @@
   <div class="row">
     <div class="span3">
       <h2><i class="icon-share"></i> <?php echo __("Shares"); ?></h2>
-      <p><?php echo $shares_complete; ?></p>
+      <p class="score"><?php echo $shares_complete; ?></p>
     </div>
     <div class="span3">
       <h2><i class="icon-share-alt"></i> <?php echo __("Clickbacks"); ?></h2>
-      <p><?php echo $clickbacks_complete; ?></p>
+      <p class="score"><?php echo $clickbacks_complete; ?></p>
     </div>
     <div class="span3">
       <h2><i class="icon-bar-chart"></i> <?php echo __("Spread Rank"); ?></h2>
-      <p>
-        <div class="progress">
-          <div class="bar" style="width: 60%;"></div>
-        </div>
-
-        60/100
-      </p>
+      <p class="score">soon...</p>
     </div>
   </div>
 </div>

@@ -6,7 +6,6 @@
     <?php include_title() ?>
     <link rel="shortcut icon" href="/favicon.ico" />
     <?php include_stylesheets() ?>
-    <?php include_javascripts() ?>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,8 +44,11 @@
             <ul class="nav">
               <li<?php if ($sf_context->getModuleName() == "landing") { ?> class="active"<?php } ?>><a href="/"><?php echo __("Home"); ?></a></li>
               <li<?php if ($sf_context->getModuleName() == "statistics") { ?> class="active"<?php } ?>><?php echo link_to(__("Statistics"), "statistics/index"); ?></li>
-              <li<?php if ($sf_context->getModuleName() == "spreads") { ?> class="active"<?php } ?>><?php echo link_to(__("Latest Spreads"), "spreads/index"); ?></li>
+              <li<?php if ($sf_context->getModuleName() == "shares") { ?> class="active"<?php } ?>><?php echo link_to(__("Latest Shares"), "shares/index"); ?></li>
             </ul>
+            <form class="navbar-search pull-left" action="<?php echo url_for("shares/index"); ?>" method="GET">
+              <input type="text" class="search-query" placeholder="<?php echo __("Search through your Shares"); ?>">
+            </form>
           <?php if ($sf_user->getUser()) { ?><p class="navbar-text pull-right"><?php echo __("Logged in as:"); ?> <?php echo link_to($sf_user->getUser()->getFullname(), "@profile"); ?> | <?php echo link_to(" ", "auth/signout", array("title" => __("Signout"), "class" => "icon-signout")); ?></p><?php } ?>
           </div><!--/.nav-collapse -->
         </div>
@@ -60,5 +62,8 @@
         <p>&copy; ekaabo GmbH 2012</p>
       </footer>
     </div>
+
+    <?php include_javascripts() ?>
+
   </body>
 </html>
