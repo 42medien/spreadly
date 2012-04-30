@@ -52,4 +52,52 @@ class YiidActivityRepository extends DocumentRepository
 
     return $results->count();
   }
+
+  public function generateQueryByHttpQuery($params = array()) {
+    $q = $this->createQueryBuilder();
+    $q->limit(10);
+    $q->sort(array("c" => "DESC"));
+
+    if ($params['u_id']) {
+      $q->field("u_id")->equals(intval($query['u_id']));
+    }
+
+    if ($params['s']) {
+      $regexp = new \MongoRegex('/'.$params['s'].'/i');
+      $q->addOr($q->expr()->field('title')->equals($regexp));
+      $q->addOr($q->expr()->field('desc')->equals($regexp));
+    }
+
+    if ($params['o']) {
+      $q->sort(array("c" => $params['o']));
+    }
+
+    if ($params['l']) {
+      $q->limit($params['l']);
+    }
+
+    if ($params['t']) {
+      $q->field("tags")->in(array($params['t']));
+    }
+
+    if ($params['p']) {
+      if ($params['l']) {
+        $limit = $params['l'];
+      } else {
+        $limit = 10;
+      }
+
+      $q->skip(($params['p'] - 1) * $limit);
+    }
+
+    return $q->getQuery();
+  }
+
+  public function findByQuery($params = array()) {
+    return $this->generateQueryByHttpQuery($params)->execute();
+  }
+
+  public function countByQuery($params = array()) {
+    return $this->generateQueryByHttpQuery($params)->count();
+  }
 }

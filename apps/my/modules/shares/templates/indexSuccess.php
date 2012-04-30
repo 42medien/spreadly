@@ -1,8 +1,7 @@
+<?php use_helper("CustomTags"); ?>
 <div class="page-header">
   <h1><?php echo __("Your latest Likes"); ?></h1>
 </div>
-
-<input type="text" class="typeahead" id="typeahead" data-provide="typeahead" />
 
 <?php include_component("shares", "breadcrumbs"); ?>
 
@@ -22,7 +21,7 @@
       <p><i class="icon-time"></i> <?php echo date("d.m.Y / H:i", $activity->getC()); ?></p>
       <p><i class="icon-external-link"></i> <?php echo link_to($activity->getUrl(), $activity->getUrl(), array("target" => "_blank")); ?></p>
       <?php if ($activity->getTags()) { ?>
-        <p><i class="icon-tags"></i> <?php echo implode(", ", $activity->getTags()->getRawValue()); ?></p>
+        <i class="icon-tags"></i> <?php echo simple_tag_list($activity->getTags(), array("separator" => ","), "shares/index?t="); ?>
       <?php } ?>
     </div>
     <div class="span3">

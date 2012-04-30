@@ -6,13 +6,13 @@ if ($pager->haveToPaginate()) {
 ?>
 <div class="pagination">
   <ul>
-    <li><?php echo link_to('&laquo;', 'shares/index?p='.$pager->getFirstPage().$query, array('title' => __('first page'))) ?></li>
+    <li><?php echo link_to('&laquo;', 'shares/index', array('title' => __('first page'), "query_string" => "p=".$pager->getFirstPage().$query)) ?></li>
     <?php $links = $pager->getLinks(); foreach ($links as $page) { ?>
     <li <?php echo ($page == $pager->getPage())?'class="active"':''; ?>>
-      <?php echo link_to($page, 'shares/index?p='.$page.$query  , array('title' => __('to page') . ' ' . $page)) ?>
+      <?php echo link_to($page, 'shares/index'  , array('title' => __('to page') . ' ' . $page, "query_string" => "p=".$page.$query)) ?>
     </li>
     <?php } ?>
-    <li><?php echo link_to('&raquo;', 'shares/index?p='.$pager->getLastPage().$query, array('title' => __('last page'))) ?></li>
+    <li><?php echo link_to('&raquo;', 'shares/index', array('title' => __('last page'), "query_string" => "p=".$pager->getLastPage().$query)) ?></li>
   </ul>
 </div>
 <?php } ?>

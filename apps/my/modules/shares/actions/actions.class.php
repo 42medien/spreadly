@@ -18,8 +18,10 @@ class sharesActions extends sfActions
   public function executeIndex(sfWebRequest $request) {
     $yiid_activity = MongoManager::getDM()->getRepository('Documents\YiidActivity');
 
-    $activities = $yiid_activity->findBy(array("u_id" => intval($this->getUser()->getUserId())))->limit(10)->sort(array("c" => "DESC"));
-    $max_activities = $yiid_activity->findBy(array("u_id" => intval($this->getUser()->getUserId())))->count();
+    $params = $request->getParameterHolder()->getAll();
+
+    $activities = $yiid_activity->findByQuery($request);
+    $max_activities = $yiid_activity->countByQuery($request);
 
     $pager = new ArrayPager();
     $pager->setMax($max_activities);

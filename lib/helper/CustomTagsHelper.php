@@ -24,7 +24,7 @@
  *  * link_function: custom function to be used for generating each tag link
  *  * link_options: html options to be applied to the generated link
  */
-function simple_tag_cloud($tags, $options = array())
+function simple_tag_cloud($tags, $options = array(), $route = null)
 {
   $result = '';
 
@@ -38,6 +38,18 @@ function simple_tag_cloud($tags, $options = array())
     $overall = count($tags);
     $actual = 0;
 
+    $custom_route = is_string($route) && false !== strpos($route, '%s');
+
+    if (!$custom_route)
+    {
+      $route_link = $route;
+    }
+
+    $class = isset($options['class']) ? $options['class'] : 'tag-cloud';
+    $link_function = isset($options['link_function']) ? $options['link_function'] : 'link_to';
+    $link_options = isset($options['link_options']) ? $options['link_options'] : array();
+    $link_options['rel'] = 'tag';
+
     foreach ($tags as $name => $count)
     {
       $actual++;
@@ -47,6 +59,11 @@ function simple_tag_cloud($tags, $options = array())
       for($i = 1; $i <= $count; $i++) {
         $emphasizers_begin .= "<big>";
         $emphasizers_end .= "</big>";
+      }
+
+      if ($custom_route) {
+        $route_link = sprintf($route, $name);
+        $name = $link_function($name, $route_link, $link_options);
       }
 
       $result .= $emphasizers_begin.$name.$emphasizers_end;
@@ -64,7 +81,7 @@ function simple_tag_cloud($tags, $options = array())
   return $result;
 }
 
-function simple_tag_list($tags, $options = array())
+function simple_tag_list($tags, $options = array(), $route = null)
 {
   $result = '';
 
@@ -85,6 +102,12 @@ function simple_tag_list($tags, $options = array())
 
     foreach ($tags as $tag)
     {
+      if ($route) {
+        $tag = link_to($tag,
+                      $route.$tag,
+                      array('rel' => 'tag'));
+      }
+
       $result .= '
                   <li>'.$tag;
       if (isset($options['separator']) && ($i != count($tags)))

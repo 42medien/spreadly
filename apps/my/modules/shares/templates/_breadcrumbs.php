@@ -12,4 +12,9 @@
     <span class="divider">/</span> <a href="#"><?php echo __("Search"); ?>: <?php echo $sf_request->getParameter("s"); ?></a>
     <?php } ?>
   </li>
+  <li>
+    <?php if ($sf_request->getParameter("p")) { ?>
+    <span class="divider">/</span> <a href="#"><?php echo __("Page"); ?>: <?php echo $sf_request->getParameter("p"); ?></a>
+    <?php } ?>
+  </li>
 </ul>

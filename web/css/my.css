@@ -11,3 +11,13 @@ div.tag-cloud {
   font-weight: lighter !important;
   line-height: 1.5;
 }
+
+ul.tags-list {
+  display: inline;
+  padding: 0;
+  margin: 0;
+}
+
+ul.tags-list li {
+  display: inline;
+}

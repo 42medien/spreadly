@@ -40,17 +40,22 @@
       <div class="navbar-inner">
         <div class="container">
           <a class="brand" href="/">my.spread.ly</a>
-          <div class="nav-collapse">
-            <ul class="nav">
-              <li<?php if ($sf_context->getModuleName() == "landing") { ?> class="active"<?php } ?>><a href="/"><?php echo __("Home"); ?></a></li>
-              <li<?php if ($sf_context->getModuleName() == "statistics") { ?> class="active"<?php } ?>><?php echo link_to(__("Statistics"), "statistics/index"); ?></li>
-              <li<?php if ($sf_context->getModuleName() == "shares") { ?> class="active"<?php } ?>><?php echo link_to(__("Latest 'Likes'"), "shares/index"); ?></li>
-            </ul>
-            <form class="navbar-search pull-left" action="<?php echo url_for("shares/index"); ?>" method="GET">
-              <input type="text" class="search-query" name="s" placeholder="<?php echo __("Search through your Shares"); ?>">
-            </form>
-          <?php if ($sf_user->getUser()) { ?><p class="navbar-text pull-right"><?php echo __("Logged in as:"); ?> <?php echo link_to($sf_user->getUser()->getFullname(), "@profile"); ?> | <?php echo link_to(" ", "auth/signout", array("title" => __("Signout"), "class" => "icon-signout")); ?></p><?php } ?>
-          </div><!--/.nav-collapse -->
+          <ul class="nav">
+            <li<?php if ($sf_context->getModuleName() == "landing") { ?> class="active"<?php } ?>><a href="/"><?php echo __("Home"); ?></a></li>
+            <li<?php if ($sf_context->getModuleName() == "statistics") { ?> class="active"<?php } ?>><?php echo link_to(__("Statistics"), "statistics/index"); ?></li>
+            <li<?php if ($sf_context->getModuleName() == "shares") { ?> class="active"<?php } ?>><?php echo link_to(__("Latest 'Likes'"), "shares/index"); ?></li>
+            <li class="divider-vertical"></li>
+          </ul>
+          <form class="navbar-search pull-left" action="<?php echo url_for("shares/index"); ?>" method="GET">
+            <input type="text" class="search-query" name="s" placeholder="<?php echo __("Search through your Shares"); ?>" value="<?php echo $sf_request->getParameter("s", ""); ?>">
+          </form>
+          <?php if ($sf_user->getUser()) { ?>
+          <ul class="nav pull-right">
+            <li><?php echo link_to(__("Logged in as").": <strong>".$sf_user->getUser()->getFullname()."</strong>", "@profile"); ?></li>
+            <li class="divider-vertical"></li>
+            <li><?php echo link_to(" ", "auth/signout", array("title" => __("Signout"), "class" => "icon-signout")); ?></li>
+          </ul>
+          <?php } ?>
         </div>
       </div>
     </div>
