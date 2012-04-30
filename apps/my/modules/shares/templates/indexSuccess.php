@@ -48,4 +48,4 @@
   <hr />
 <?php } ?>
 
-<?php include_partial("shares/pager", array("pager" => $activities)); ?>
+<?php include_component("shares", "pager", array("pager" => $activities)); ?>

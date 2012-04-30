@@ -1,19 +1,13 @@
-<?php
-if ($pager->haveToPaginate()) {
-  $lSearchValue = "";
-  if (isset($search)) {
-    $lSearchValue = "&search=".$search;
-  }
-?>
+<?php if ($pager->haveToPaginate()) { ?>
 <div class="pagination">
   <ul>
-    <li><?php echo link_to('&laquo;', 'shares/index?page='.$pager->getFirstPage().$lSearchValue, array('title' => __('first page'))) ?></li>
+    <li><?php echo link_to('&laquo;', 'shares/index?page='.$pager->getFirstPage().'&'.$query, array('title' => __('first page'))) ?></li>
     <?php $links = $pager->getLinks(); foreach ($links as $page) { ?>
     <li <?php echo ($page == $pager->getPage())?'class="active"':''; ?>>
-      <?php echo link_to($page, 'shares/index?page='.$page.$lSearchValue, array('title' => __('to page') . ' ' . $page)) ?>
+      <?php echo link_to($page, 'shares/index?page='.$page.'&'.$query  , array('title' => __('to page') . ' ' . $page)) ?>
     </li>
     <?php } ?>
-    <li><?php echo link_to('&raquo;', 'shares/index?page='.$pager->getLastPage().$lSearchValue, array('title' => __('last page'))) ?></li>
+    <li><?php echo link_to('&raquo;', 'shares/index?page='.$pager->getLastPage().'&'.$query, array('title' => __('last page'))) ?></li>
   </ul>
 </div>
 <?php } ?>
