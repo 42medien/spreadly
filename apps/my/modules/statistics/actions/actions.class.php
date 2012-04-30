@@ -20,7 +20,7 @@ class statisticsActions extends sfActions
 
     $this->activities = $analytics_activity->findBy(array("user_id" => intval($this->getUser()->getUserId())))->limit(30)->sort(array("cb" => "DESC"));
 
-    $this->shares_complete = $analytics_activity->findBy(array("user_id" => intval($this->getUser()->getUserId())))->count();
+    $this->likes_complete = $analytics_activity->findBy(array("user_id" => intval($this->getUser()->getUserId())))->count();
     $this->clickbacks_complete = $analytics_activity->getOverallClickbacks($this->getUser()->getUserId());
 
     $q = Doctrine_Query::create();

@@ -6,8 +6,8 @@
 <div class="hero-unit">
   <div class="row">
     <div class="span3">
-      <h2><i class="icon-share"></i> <?php echo __("Shares"); ?></h2>
-      <p class="score"><?php echo $shares_complete; ?></p>
+      <h2><i class="icon-heart"></i> <?php echo __("Likes"); ?></h2>
+      <p class="score"><?php echo $likes_complete; ?></p>
     </div>
     <div class="span3">
       <h2><i class="icon-share-alt"></i> <?php echo __("Clickbacks"); ?></h2>

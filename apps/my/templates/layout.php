@@ -44,7 +44,7 @@
             <ul class="nav">
               <li<?php if ($sf_context->getModuleName() == "landing") { ?> class="active"<?php } ?>><a href="/"><?php echo __("Home"); ?></a></li>
               <li<?php if ($sf_context->getModuleName() == "statistics") { ?> class="active"<?php } ?>><?php echo link_to(__("Statistics"), "statistics/index"); ?></li>
-              <li<?php if ($sf_context->getModuleName() == "shares") { ?> class="active"<?php } ?>><?php echo link_to(__("Latest Shares"), "shares/index"); ?></li>
+              <li<?php if ($sf_context->getModuleName() == "shares") { ?> class="active"<?php } ?>><?php echo link_to(__("Latest 'Likes'"), "shares/index"); ?></li>
             </ul>
             <form class="navbar-search pull-left" action="<?php echo url_for("shares/index"); ?>" method="GET">
               <input type="text" class="search-query" name="s" placeholder="<?php echo __("Search through your Shares"); ?>">

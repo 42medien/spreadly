@@ -1,8 +1,12 @@
 <div class="page-header">
-  <h1><?php echo __("Your latest Shares"); ?></h1>
+  <h1><?php echo __("Your latest Likes"); ?></h1>
 </div>
 
 <input type="text" class="typeahead" id="typeahead" data-provide="typeahead" />
+
+<?php include_component("shares", "breadcrumbs"); ?>
+
+<hr />
 
 <?php foreach ($activities->getResults() as $activity) { ?>
   <div class="row">
@@ -38,7 +42,7 @@
             <td><?php echo $activity->getCb()?$activity->getCb():0; ?></td>
           </tr>
           <tr>
-            <td><?php echo __("Shares"); ?> <small><?php echo __("(different networks)"); ?></small></td>
+            <td><?php echo __("Spreads"); ?> <small><?php echo __("(different networks)"); ?></small></td>
             <td><?php echo $activity->getAnalyticsActivity()->getShares(); ?></td>
           </tr>
         </tbody>

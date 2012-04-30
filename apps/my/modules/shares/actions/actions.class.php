@@ -24,7 +24,7 @@ class sharesActions extends sfActions
     $pager = new ArrayPager();
     $pager->setMax($max_activities);
     $pager->setResultArray($activities);
-    $pager->setPage($request->getParameter("page", 1));
+    $pager->setPage($request->getParameter("p", 1));
     $pager->init();
 
     $this->activities = $pager;

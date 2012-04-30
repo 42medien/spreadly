@@ -8,8 +8,12 @@ class sharesComponents extends sfComponents {
 
     unset($params['module']);
     unset($params['action']);
-    unset($params['page']);
+    unset($params['p']);
 
     $this->query = http_build_query($params);
+  }
+
+  function executeBreadcrumbs(sfWebRequest $request) {
+
   }
 }
