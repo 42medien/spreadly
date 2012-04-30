@@ -47,7 +47,7 @@
               <li<?php if ($sf_context->getModuleName() == "shares") { ?> class="active"<?php } ?>><?php echo link_to(__("Latest Shares"), "shares/index"); ?></li>
             </ul>
             <form class="navbar-search pull-left" action="<?php echo url_for("shares/index"); ?>" method="GET">
-              <input type="text" class="search-query" placeholder="<?php echo __("Search through your Shares"); ?>">
+              <input type="text" class="search-query" name="s" placeholder="<?php echo __("Search through your Shares"); ?>">
             </form>
           <?php if ($sf_user->getUser()) { ?><p class="navbar-text pull-right"><?php echo __("Logged in as:"); ?> <?php echo link_to($sf_user->getUser()->getFullname(), "@profile"); ?> | <?php echo link_to(" ", "auth/signout", array("title" => __("Signout"), "class" => "icon-signout")); ?></p><?php } ?>
           </div><!--/.nav-collapse -->

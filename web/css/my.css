@@ -4,3 +4,10 @@ div.tag-cloud {
   vertical-align: middle;
   line-height: 1.1;
 }
+
+.hero-unit p.score {
+  font-family: Georgia, serif;
+  font-size: 80px;
+  font-weight: lighter !important;
+  line-height: 1.5;
+}
