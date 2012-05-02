@@ -65,7 +65,8 @@ class YiidActivityRepository extends DocumentRepository
     if ($params['s']) {
       $regexp = new \MongoRegex('/'.$params['s'].'/i');
       $q->addOr($q->expr()->field('title')->equals($regexp));
-      $q->addOr($q->expr()->field('desc')->equals($regexp));
+      $q->addOr($q->expr()->field('descr')->equals($regexp));
+      $q->addOr($q->expr()->field('comment')->equals($regexp));
     }
 
     if ($params['o']) {
