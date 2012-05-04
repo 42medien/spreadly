@@ -47,7 +47,7 @@
             <li class="divider-vertical"></li>
           </ul>
           <form class="navbar-search pull-left" action="<?php echo url_for("shares/index"); ?>" method="GET">
-            <input type="text" class="search-query" name="s" placeholder="<?php echo __("Search through your Shares"); ?>" value="<?php echo $sf_request->getParameter("s", ""); ?>">
+            <input type="text" class="search-query" name="s" placeholder="<?php echo __("Search your Likes"); ?>" value="<?php echo $sf_request->getParameter("s", ""); ?>">
           </form>
           <?php if ($sf_user->getUser()) { ?>
           <ul class="nav pull-right">
