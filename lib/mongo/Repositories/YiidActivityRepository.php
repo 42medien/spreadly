@@ -67,6 +67,7 @@ class YiidActivityRepository extends DocumentRepository
       $q->addOr($q->expr()->field('title')->equals($regexp));
       $q->addOr($q->expr()->field('descr')->equals($regexp));
       $q->addOr($q->expr()->field('comment')->equals($regexp));
+      $q->addOr($q->expr()->field('tags')->in(array($regexp)));
     }
 
     if ($params['o']) {
