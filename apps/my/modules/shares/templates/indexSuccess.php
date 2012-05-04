@@ -1,9 +1,12 @@
 <?php use_helper("CustomTags"); ?>
 <div class="page-header">
-  <h1><?php echo __("Your latest Likes"); ?></h1>
+  <?php include_component("shares", "order_by"); ?>
+  <h1><?php echo __("Your latest Likes"); ?> <small><?php echo $activities->getNbResults()." ".__("Results"); ?></small></h1>
 </div>
 
-<?php include_component("shares", "breadcrumbs", array("results" => $activities->getNbResults())); ?>
+<div class="row">
+  <?php include_component("shares", "pager", array("pager" => $activities)); ?>
+</div>
 
 <hr />
 
@@ -55,4 +58,6 @@
   <hr />
 <?php } ?>
 
-<?php include_component("shares", "pager", array("pager" => $activities)); ?>
+<div class="row">
+  <?php include_component("shares", "pager", array("pager" => $activities)); ?>
+</div>

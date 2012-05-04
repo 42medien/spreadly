@@ -4,7 +4,7 @@ if ($pager->haveToPaginate()) {
     $query = "&".$query;
   }
 ?>
-<div class="pagination">
+<div class="pagination pull-right">
   <ul>
     <li><?php echo link_to('&laquo;', 'shares/index', array('title' => __('first page'), "query_string" => "p=".$pager->getFirstPage().$query)) ?></li>
     <?php $links = $pager->getLinks(); foreach ($links as $page) { ?>
