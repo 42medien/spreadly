@@ -22,7 +22,8 @@ class CatalogueTable extends Doctrine_Table
   public static function retrieveByCulture($pCulture, $pCatalogue = 'messages') {
     $lLang = strtolower(substr($pCulture, 0, 2));
     $lCatalogueName = $pCatalogue.'.'.$lLang;
-
+		var_dump($lCatalogueName);
+		var_dump($lLang);
 
 
       $lQuery = Doctrine_Query::create()
@@ -30,6 +31,8 @@ class CatalogueTable extends Doctrine_Table
       ->where('c.name= ?', $lCatalogueName)
       ->andWhere('c.target_lang = ?', $lLang);
 
-      return $lQuery->fetchOne();  }
+      //var_dump($lQuery->fetchOne());
+      return $lQuery->fetchOne();
+  }
 
 }

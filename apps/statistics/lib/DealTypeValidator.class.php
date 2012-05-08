@@ -19,13 +19,25 @@ class DealTypeValidator extends sfValidatorBase {
   	//if coupon type is url/download, check if fields are empty. if not, set fields for coupon type: code to null
   	if($lType == 'pool') {
   		$values['domain_profile_id'] = null;
-  	} else{
+  		$values['tags'] = null;
+  	} elseif ($lType == 'publisher'){
   	 	if($this->isEmpty($values['domain_profile_id'])){
   			throw new sfValidatorErrorSchema($this, array(
   					$this->getOption('domain_profile_id') => new sfValidatorError($this, 'required'),
 						$this->getOption('type') => new sfValidatorError($this, 'invalid')
   				));
   		}
+  		$values['tags'] = null;
+  	} else {
+  		$values['domain_profile_id'] = null;
+  		if(trim($values['tags']) == '' || $values['tags'] == null) {
+  			throw new sfValidatorErrorSchema($this, array(
+  					$this->getOption('tags') => new sfValidatorError($this, 'required'),
+						$this->getOption('type') => new sfValidatorError($this, 'invalid')
+  				));
+
+  		}
+
   	}
 
     return $values;

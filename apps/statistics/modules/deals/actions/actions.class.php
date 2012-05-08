@@ -86,6 +86,12 @@ class dealsActions extends sfActions
   			$lDeal->setPrice($prices[$lDeal->getTargetQuantity()]);
   			$lDeal->save();
 
+  			if($lParams['type'] == 'tags') {
+  				$lTags = explode(',',$lParams['tags']);
+  				$lDeal->addTag($lTags);
+  				$lDeal->save();
+  			}
+
   			$lDeal->complete_campaign();
 	 			$this->redirect('deals/step_share?did='.$lDeal->getId());
   		}

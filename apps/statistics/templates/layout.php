@@ -20,6 +20,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/colorbox/colorbox.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="/css/vendor/colorpicker.css" media="screen" />
 
+
 	<link rel="stylesheet" type="text/css" href="/css/coupon.css" media="screen" />
 	<!--[if IE]>
 	<link href="/css/new_ie.css" rel="stylesheet" type="text/css">
@@ -31,6 +32,7 @@
 	</script>
 	<![endif]-->
 	<script type="text/javascript" src="/js/100_main/include/statistics-<?php echo sfConfig::get('app_release_name') ?>.min.js"></script>
+	<script type="text/javascript" src="/js/widget/spreadly.btlist.js"></script>
 
 	<?php include_javascripts();?>
   <?php $module = $sf_context->getModuleName(); ?>

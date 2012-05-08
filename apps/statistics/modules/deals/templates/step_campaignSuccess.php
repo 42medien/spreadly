@@ -45,6 +45,20 @@
 									    		<?php echo link_to(__('Zur Domain-Registrierung'), 'domain_profiles/index'); ?></span>
 									    <?php } ?>
 								    </li>
+
+
+								    <li id="select-tags">
+								    	<div class="alignleft title">
+								      	<h4><?php echo $pForm['tags']->renderLabel(); ?></h4>
+								      	<p><?php echo __('Geben Sie hier die Tags an'); ?></p>
+								      	<span><?php echo $pForm['tags']->renderError(); ?></span>
+								      </div>
+								      <label class="btnform-input">
+								      	<?php echo $pForm['tags']->render(array('class' => 'name', 'placeholder' => __('Tags'))); ?>
+								      </label>
+								    </li>
+
+
 											<li class="select-target-quantity" id="select-target-quantity">
 												<div class="alignleft title">
 													<h4><?php echo __('Streuung nach Likes'); ?></h4>

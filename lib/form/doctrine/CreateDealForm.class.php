@@ -34,12 +34,13 @@ class CreateDealForm extends BaseDealForm
       //'type'              => new sfWidgetFormChoice(array('choices' => array('pool' => 'pool'))),
       'name'              => new sfWidgetFormInputText(),
       'domain_profile_id' => new sfWidgetFormChoice(array('choices' => array(), 'expanded' => true)),
-      'type'              => new sfWidgetFormChoice(array('choices' => array('pool' => $lI18n->__('Überall'), 'publisher' => $lI18n->__('Domain')), 'expanded' => true)),
+      'type'              => new sfWidgetFormChoice(array('choices' => array('pool' => $lI18n->__('Überall'), 'publisher' => $lI18n->__('Domain'), 'tags' => $lI18n->__('Tags')), 'expanded' => true)),
     	'tos_accepted'      => new sfWidgetFormInputCheckbox(),
       'motivation_title'  => new sfWidgetFormInputText(),
       'motivation_text'   => new sfWidgetFormTextarea(),
       'spread_title'      => new sfWidgetFormInputText(),
       'spread_text'       => new sfWidgetFormTextarea(),
+    	'tags'       				=> new sfWidgetFormInputText(),
       'spread_url'        => new sfWidgetFormInputText(),
       'spread_img'        => new sfWidgetFormInputText(),
       'spread_tos'        => new sfWidgetFormInputText(),
@@ -106,6 +107,7 @@ class CreateDealForm extends BaseDealForm
     	'billing_type'   => new sfValidatorString(array('required' => true)),
     	'domain_profile_id'   => new sfValidatorInteger(array('required' => false)),
 			'type'   => new sfValidatorString(array('required' => true), array('invalid' => $lI18n->__('Nicht möglich'))),
+    	'tags'   => new sfValidatorString(array('required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(new sfValidatorAnd(

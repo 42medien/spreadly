@@ -50,6 +50,7 @@ class TransUnitTable extends Doctrine_Table
   public static function retrieveWildcardObject($pCulture, $pCatalogue = 'messages', $pWildcard) {
     // culture catalogue
     $lCatalogueObject = CatalogueTable::retrieveByCulture($pCulture, $pCatalogue);
+    var_dump($pWildcard);die();
 
     if($lCatalogueObject) {
       return self::retrieveByCatId($lCatalogueObject->getCatId(), $pWildcard);
