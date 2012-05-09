@@ -18,4 +18,17 @@ class profileActions extends sfActions
   public function executeIndex(sfWebRequest $request) {
     $this->user = $this->getUser()->getUser();
   }
+
+  public function executeFeed($request) {
+    $id = $request->getParameter("id");
+
+    $user = UserTable::retrieveByUsername($id);
+
+    $this->forward404Unless($user);
+
+    $this->activities = MongoManager::getDM()->getRepository('Documents\YiidActivity')->findLatestByUserId($user->getId());
+
+    $this->user = $user;
+    $this->setLayout("atom_layout");
+  }
 }
