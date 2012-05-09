@@ -11,20 +11,6 @@ class UserTable extends Doctrine_Table {
    * Enter description here...
    *
    * @param unknown_type $pIdentifier
-   * @return unknown
-   */
-  public static function getByIdentifier($pIdentifier) {
-    if (preg_match("#(http://)?(.+)\.yiid\.com/?#i", $pIdentifier, $lMatches)) {
-      $pIdentifier = $lMatches[2];
-    }
-
-    return self::retrieveByUsername($pIdentifier);
-  }
-
-  /**
-   * Enter description here...
-   *
-   * @param unknown_type $pIdentifier
    * @param unknown_type $pPassword
    * @return unknown
    */

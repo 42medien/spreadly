@@ -58,11 +58,11 @@ class YiidActivityRepository extends DocumentRepository
     $q->limit(10);
     $q->sort(array("c" => "DESC"));
 
-    if ($params['u_id']) {
-      $q->field("u_id")->equals(intval($query['u_id']));
+    if (array_key_exists('u_id', $params)) {
+      $q->field("u_id")->equals(intval($params['u_id']));
     }
 
-    if ($params['s']) {
+    if (array_key_exists('s', $params)) {
       $regexp = new \MongoRegex('/'.$params['s'].'/i');
       $q->addOr($q->expr()->field('title')->equals($regexp));
       $q->addOr($q->expr()->field('descr')->equals($regexp));
@@ -70,26 +70,30 @@ class YiidActivityRepository extends DocumentRepository
       $q->addOr($q->expr()->field('tags')->in(array($regexp)));
     }
 
-    if ($params['o']) {
-      $q->sort(array("c" => $params['o']));
-    }
-
-    if ($params['l']) {
+    if (array_key_exists('l', $params)) {
       $q->limit($params['l']);
     }
 
-    if ($params['t']) {
+    if (array_key_exists('t', $params)) {
       $q->field("tags")->in(array($params['t']));
     }
 
-    if ($params['p']) {
-      if ($params['l']) {
+    if (array_key_exists('p', $params)) {
+      if (array_key_exists('l', $params)) {
         $limit = $params['l'];
       } else {
         $limit = 10;
       }
 
       $q->skip(($params['p'] - 1) * $limit);
+    }
+
+    if (array_key_exists('od', $params)) {
+      $q->sort("c", $params['od']);
+    }
+
+    if (array_key_exists('oc', $params)) {
+      $q->sort("cb", $params['oc']);
     }
 
     return $q->getQuery();

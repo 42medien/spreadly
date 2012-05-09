@@ -14,7 +14,7 @@ class sharesComponents extends sfComponents {
   }
 
   function executeOrder_by(sfWebRequest $request) {
-    $this->order_by_date = "ASC";
+    $this->order_by_date = "asc";
     $this->order_by_clickback = "";
 
     if ($od = $request->getParameter("od", null)) {
@@ -34,18 +34,18 @@ class sharesComponents extends sfComponents {
 
     $oc_params = $params;
 
-    if ($this->order_by_clickback == "" || $this->order_by_clickback == "ASC") {
-      $oc_params['oc'] = "DESC";
+    if ($this->order_by_clickback == "" || $this->order_by_clickback == "asc") {
+      $oc_params['oc'] = "desc";
     } else {
-      $oc_params['oc'] = "ASC";
+      $oc_params['oc'] = "asc";
     }
 
     $od_params = $params;
 
-    if ($this->order_by_date == "" || $this->order_by_date == "ASC") {
-      $od_params['od'] = "DESC";
+    if ($this->order_by_date == "" || $this->order_by_date == "asc") {
+      $od_params['od'] = "desc";
     } else {
-      $od_params['od'] = "ASC";
+      $od_params['od'] = "asc";
     }
 
     $this->oc_query = http_build_query($oc_params);

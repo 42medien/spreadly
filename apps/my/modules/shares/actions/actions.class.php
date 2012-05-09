@@ -19,9 +19,10 @@ class sharesActions extends sfActions
     $yiid_activity = MongoManager::getDM()->getRepository('Documents\YiidActivity');
 
     $params = $request->getParameterHolder()->getAll();
+    $params['u_id'] = $this->getUser()->getUserId();
 
-    $activities = $yiid_activity->findByQuery($request);
-    $max_activities = $yiid_activity->countByQuery($request);
+    $activities = $yiid_activity->findByQuery($params);
+    $max_activities = $yiid_activity->countByQuery($params);
 
     $pager = new ArrayPager();
     $pager->setMax($max_activities);
