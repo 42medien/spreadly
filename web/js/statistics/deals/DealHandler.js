@@ -143,9 +143,20 @@ var DealForm = {
             availableTags, extractLast( request.term ) ) );
         },*/
         
-        source: "/deals/get_tags",
         minLength: 2,        
         
+        source: function( request, response ) {
+          $.getJSON( "/deals/get_tags", {
+            term: extractLast( request.term )
+          }, response );
+        },
+        search: function() {
+          // custom minLength
+          var term = extractLast( this.value );
+          if ( term.length < 2 ) {
+            return false;
+          }
+        },
         focus: function() {
           // prevent value inserted on focus
           return false;

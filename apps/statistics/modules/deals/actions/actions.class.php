@@ -260,6 +260,13 @@ class dealsActions extends sfActions
   public function executeGet_tags(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
   	$lArray =  array("Affe", "Pferd", "Pinguin");
+
+  	$lTags = TagTable::getAllTagsByString(trim($request->getParameter('term')));
+  	$lArray = array();
+  	foreach($lTags as $lTag){
+  		array_push($lArray, $lTag['name']);
+  	}
+
     return $this->renderText(json_encode($lArray));
   }
 
