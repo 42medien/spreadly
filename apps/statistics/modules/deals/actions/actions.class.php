@@ -56,7 +56,7 @@ class dealsActions extends sfActions
   		$this->pForm->setDefault('tags', $lTags);
 		} else {
 			//every create deal action needs the deal-id as get param except step_campaign
-			if($this->actionName != 'step_campaign') {
+			if($this->actionName != 'step_campaign' && $this->actionName != 'get_tags') {
 				$this->redirect404();
 			}
 		}
@@ -76,7 +76,6 @@ class dealsActions extends sfActions
   	if($request->getMethod() == 'POST'){
   		$lParams = $request->getPostParameters();
   		$lParams['sf_guard_user_id'] = $this->getUser()->getUserId();
-
   		$this->pForm->bind($lParams);
   		if($this->pForm->isValid()){
 	  		if($lParams['billing_type'] == 'media_penetration') {
@@ -106,6 +105,7 @@ class dealsActions extends sfActions
   	  $this->redirect404();
   	}
   }
+
 
   /**
    * Create deal - step 2: design the motivation and the share, that will be send to the networks

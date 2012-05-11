@@ -109,6 +109,10 @@ advertiser:
 publisher:
   url:   /publisher/index
   param: { module: publisher, action: index }
+  
+get_tags:
+  url:   /deals/get_tags
+  param: { module: deals, action: get_tags }  
 
 get_create_index:
   url:   /deals/get_create_index
