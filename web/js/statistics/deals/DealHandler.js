@@ -163,8 +163,13 @@ var DealForm = {
         var lId = jQuery(this).attr('id');
         if (lId == 'type_publisher') {
           jQuery('#select-domain-profile-id').show();
-        } else {
+          jQuery('#select-tags').hide();
+        } else if(lId == 'type_pool') {
           jQuery('#select-domain-profile-id').hide();
+          jQuery('#select-tags').hide();
+        } else {
+          jQuery('#select-domain-profile-id').hide();          
+          jQuery('#select-tags').show();
         }
         
         //jQuery('#coupon-preview-img').attr('src', '/img/'+lId+".png");

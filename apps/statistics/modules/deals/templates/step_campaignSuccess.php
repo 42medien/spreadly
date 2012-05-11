@@ -46,11 +46,11 @@
 									    <?php } ?>
 								    </li>
 
-
-								    <li id="select-tags">
-								    	<div class="alignleft title">
+										<!-- select-domain-profile -->
+								    <li id="select-tags" <?php echo ($pForm['type']->getValue() != 'tags')? 'style="display:none;"':""; ?>>
+								    	<div class="alignleft title wide-title">
 								      	<h4><?php echo $pForm['tags']->renderLabel(); ?></h4>
-								      	<p><?php echo __('Geben Sie hier die Tags an'); ?></p>
+								      	<p><?php echo __('Geben Sie hier, mit Komma getrennt, die Kategorien, wie zum Beispiel "Sport", an, bei denen ihre Deals angezeigt werden sollen.'); ?></p>
 								      	<span><?php echo $pForm['tags']->renderError(); ?></span>
 								      </div>
 								      <label class="btnform-input">

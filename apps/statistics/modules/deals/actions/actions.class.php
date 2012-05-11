@@ -33,6 +33,7 @@ class dealsActions extends sfActions
 		$this->pForm = new CreateDealForm($this->pDeal);
   	$this->pDomainProfiles = $this->getUser()->getVerifiedDomainsWidthId();
 		$this->pForm->getWidget('domain_profile_id')->setOption('choices', $this->pDomainProfiles);
+		//$this->pForm->setDefault('target_quantity', '')
 
 		//check, if there is a deal
 		if($this->pDealId) {
@@ -46,10 +47,13 @@ class dealsActions extends sfActions
 			if($this->getUser()->getUserId() != $this->pDeal->getSfGuardUserId()){
 				$this->redirect404();
 			}
+			$lTags = implode(',', $this->pDeal->getTags());
+			//var_dump($lTags);die();
 			//if he is allowed, create a deal-form with the deal-object
 			$this->pForm = new CreateDealForm($this->pDeal);
 			$this->pForm->getWidget('domain_profile_id')->setOption('choices', $this->pDomainProfiles);
   		$this->pForm->setDefault('domain_profile_id', $this->pDeal->getDomainProfileId());
+  		$this->pForm->setDefault('tags', $lTags);
 		} else {
 			//every create deal action needs the deal-id as get param except step_campaign
 			if($this->actionName != 'step_campaign') {
@@ -84,14 +88,15 @@ class dealsActions extends sfActions
 
   			$prices = sfConfig::get("app_deal_pricing_".$lDeal->getBillingType());
   			$lDeal->setPrice($prices[$lDeal->getTargetQuantity()]);
-  			$lDeal->save();
+  			//$lDeal->save();
 
   			if($lParams['type'] == 'tags') {
+  				//$lDeal->removeAllTags();
   				$lTags = explode(',',$lParams['tags']);
+  				//var_dump($lTags);die();
   				$lDeal->addTag($lTags);
-  				$lDeal->save();
   			}
-
+  			$lDeal->save();
   			$lDeal->complete_campaign();
 	 			$this->redirect('deals/step_share?did='.$lDeal->getId());
   		}
