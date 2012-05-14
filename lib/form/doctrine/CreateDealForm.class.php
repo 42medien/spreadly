@@ -41,6 +41,7 @@ class CreateDealForm extends BaseDealForm
       'spread_title'      => new sfWidgetFormInputText(),
       'spread_text'       => new sfWidgetFormTextarea(),
     	'tags'       				=> new sfWidgetFormInputText(),
+    	'tag_model'         => new sfWidgetFormChoice(array('choices' => array('user' => 'User', 'dp' => 'Webseite'), 'expanded' => true,  "multiple" => true)),
       'spread_url'        => new sfWidgetFormInputText(),
       'spread_img'        => new sfWidgetFormInputText(),
       'spread_tos'        => new sfWidgetFormInputText(),
@@ -108,6 +109,7 @@ class CreateDealForm extends BaseDealForm
     	'domain_profile_id'   => new sfValidatorInteger(array('required' => false)),
 			'type'   => new sfValidatorString(array('required' => true), array('invalid' => $lI18n->__('Nicht möglich'))),
     	'tags'   => new sfValidatorString(array('required' => false)),
+      'tag_model' =>  new sfValidatorString(array('required' => false))
     ));
 
     $this->validatorSchema->setPostValidator(new sfValidatorAnd(

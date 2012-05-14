@@ -28,6 +28,7 @@ class dealsActions extends sfActions
    */
   public function preExecute() {
     $request = $this->getRequest();
+
     $this->pDealId = $request->getParameter('did', null);
     $this->pDeal = new Deal();
 		$this->pForm = new CreateDealForm($this->pDeal);
@@ -56,7 +57,7 @@ class dealsActions extends sfActions
   		$this->pForm->setDefault('tags', $lTags);
 		} else {
 			//every create deal action needs the deal-id as get param except step_campaign
-			if($this->actionName != 'step_campaign' && $this->actionName != 'get_tags') {
+			if($this->actionName != 'step_campaign' && $this->actionName != 'get_tags' && $this->actionName != 'get_tag_choice') {
 				$this->redirect404();
 			}
 		}
@@ -259,15 +260,48 @@ class dealsActions extends sfActions
 
   public function executeGet_tags(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
-  	$lArray =  array("Affe", "Pferd", "Pinguin");
+  	//$lArray =  array("Affe", "Pferd", "Pinguin");
 
-  	$lTags = TagTable::getAllTagsByString(trim($request->getParameter('term')));
+  	//var_dump($request->getParameter('model'));die();
+  	$lModel = $request->getParameter('model');
+  	if($lModel == 'user') {
+  		$lTags = TagTable::getAllUserByString(trim($request->getParameter('term')));
+  	} elseif ($lModel == 'dp') {
+  		$lTags = TagTable::getAllDpByString(trim($request->getParameter('term')));
+  	} else {
+  		$lTags = TagTable::getAllTagsByString(trim($request->getParameter('term')));
+  	}
+
   	$lArray = array();
   	foreach($lTags as $lTag){
   		array_push($lArray, $lTag['name']);
   	}
 
     return $this->renderText(json_encode($lArray));
+  }
+
+  public function executeGet_tag_choice(sfWebRequest $request) {
+  	$this->getResponse()->setContentType('application/json');
+  	//$lArray =  array("Affe", "Pferd", "Pinguin");
+
+  	//var_dump($request->getParameter('model'));die();
+
+  	$lModel = $request->getParameter('model');
+  	$lTerms = $request->getParameter('terms');
+  	if($lModel == 'user') {
+  		$lUser = TagTable::getTaggedUserByString(trim($request->getParameter('term')));
+  		$lReturn['html'] = $this->getPartial('deals/tag_choice_user', array('pUser' => $lUser));
+
+  	} elseif ($lModel == 'dp') {
+  		$lDp = TagTable::getTaggedDpByString(trim($request->getParameter('term')));
+  		$lReturn['html'] = $this->getPartial('deals/tag_choice_dp', array('pDp' => $lDp));
+  	} else {
+  		$lUser = TagTable::getTaggedUserByString(trim($request->getParameter('term')));
+  		$lReturn['html'] = $this->getPartial('deals/tag_choice_user', array('pUser' => $lUser));
+  	}
+
+
+  	return $this->renderText(json_encode($lReturn));
   }
 
   private function getCleanedParams($pRequest) {

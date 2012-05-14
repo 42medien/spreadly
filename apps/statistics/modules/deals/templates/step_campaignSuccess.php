@@ -33,9 +33,9 @@
 											</li>
 								    <!-- select-domain-profile -->
 								    <li id="select-domain-profile-id" <?php echo ($pForm['type']->getValue() != 'publisher')? 'style="display:none;"':""; ?>>
-								    	<div class="alignleft title">
+								    	<div class="alignleft title wide-title">
 								      	<h4><?php echo $pForm['domain_profile_id']->renderLabel(); ?></h4>
-								      	<p><?php echo __('Auf welcher Domain soll der Deal laufen?'); ?></p>
+								      	<p class="description"><?php echo __('Auf welcher Domain soll der Deal laufen?'); ?></p>
 								      	<span><?php echo $pForm['domain_profile_id']->renderError(); ?></span>
 								      </div>
 								      <?php if(count($pDomainProfiles) > 0) { ?>
@@ -46,16 +46,27 @@
 									    <?php } ?>
 								    </li>
 
-										<!-- select-domain-profile -->
+										<!-- select-tags -->
 								    <li id="select-tags" <?php echo ($pForm['type']->getValue() != 'tags')? 'style="display:none;"':""; ?>>
+
+								    	<div class="alignleft title wide-title">
+								      	<h4><?php echo $pForm['tag_model']->renderLabel(); ?></h4>
+								      	<p><?php echo __('Soll Ihr Deal nur für User oder Webseiten mit einem bestimmter Kategorie angezeigt werden?'); ?></p>
+								      	<span><?php echo $pForm['tag_model']->renderError(); ?></span>
+								      </div>
+								      	<?php echo $pForm['tag_model']->render()?>
+
 								    	<div class="alignleft title wide-title">
 								      	<h4><?php echo $pForm['tags']->renderLabel(); ?></h4>
-								      	<p><?php echo __('Geben Sie hier, mit Komma getrennt, die Kategorien, wie zum Beispiel "Sport", an, bei denen ihre Deals angezeigt werden sollen.'); ?></p>
+								      	<p class="description"><?php echo __('Geben Sie hier, mit Komma getrennt, die Kategorien, wie zum Beispiel "Sport", an, bei denen ihre Deals angezeigt werden sollen.'); ?></p>
 								      	<span><?php echo $pForm['tags']->renderError(); ?></span>
 								      </div>
 								      <label class="btnform-input">
 								      	<?php echo $pForm['tags']->render(array('class' => 'name', 'placeholder' => __('Tags'))); ?>
 								      </label>
+								      <div class="alignleft title wide-title" id="tag-choice-container">
+
+								      </div>
 								    </li>
 
 

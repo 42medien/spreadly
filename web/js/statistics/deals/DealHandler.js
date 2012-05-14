@@ -82,6 +82,8 @@ var Deal = {
  * @author KM
  */
 var DealForm = {
+    
+    aTagModel: 'all',
 
     init: function() {
       debug.log('[DealForm][init]');
@@ -97,39 +99,35 @@ var DealForm = {
       DealForm.toggleCampaignType();
       DealForm.initAutocomplete();
     },
+
+    getTagChoice: function() {
+      
+      var lTerms = jQuery('#tags').val();
+      jQuery.ajax({
+        type: "GET",
+        url: '/deals/get_tag_choice?model='+DealForm.aTagModel+'&term='+lTerms,
+        dataType: "json",
+        success: function (response) {
+            jQuery('#tag-choice-container').empty();
+            jQuery('#tag-choice-container').append(response.html);
+          
+          }      
+        });
+      
+    },
     
     initAutocomplete: function() {
       debug.log('[DealForm][initAutocomplete]');
       
-      var availableTags = [
-                           "ActionScript",
-                           "AppleScript",
-                           "Asp",
-                           "BASIC",
-                           "C",
-                           "C++",
-                           "Clojure",
-                           "COBOL",
-                           "ColdFusion",
-                           "Erlang",
-                           "Fortran",
-                           "Groovy",
-                           "Haskell",
-                           "Java",
-                           "JavaScript",
-                           "Lisp",
-                           "Perl",
-                           "PHP",
-                           "Python",
-                           "Ruby",
-                           "Scala",
-                           "Scheme"
-                         ];      
-      
-      
       jQuery( "#tags" )
       // don't navigate away from the field on tab when selecting an item
       .bind( "keydown", function( event ) {
+        DealForm.aTagModel = 'all';
+        if(jQuery("#tag_model_dp").is(':checked') && !jQuery("#tag_model_user").is(':checked')){
+          DealForm.aTagModel = 'dp';
+        } else if (jQuery("#tag_model_user").is(':checked') && !jQuery("#tag_model_dp").is(':checked')) {
+          DealForm.aTagModel = 'user';
+        }
         if ( event.keyCode === $.ui.keyCode.TAB &&
             $( this ).data( "autocomplete" ).menu.active ) {
           event.preventDefault();
@@ -146,7 +144,7 @@ var DealForm = {
         minLength: 2,        
         
         source: function( request, response ) {
-          $.getJSON( "/deals/get_tags", {
+          $.getJSON( "/deals/get_tags?model="+DealForm.aTagModel, {
             term: extractLast( request.term )
           }, response );
         },
@@ -156,6 +154,7 @@ var DealForm = {
           if ( term.length < 2 ) {
             return false;
           }
+          DealForm.getTagChoice();
         },
         focus: function() {
           // prevent value inserted on focus
