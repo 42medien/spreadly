@@ -59,6 +59,11 @@ all:
     oauth_token:   'b5a3a13e511d77aa71ec'
     oauth_secret:  'bbbbef345e84f527c2d6863dccc4feacda71e691'
 
+  flattr:
+    post_api:    'https://api.flattr.com/rest/v2/flattr'
+    oauth_token:   'T6hReypr9HgD3saU8X2MGj7ep76wA8Gk5O29chqcOxFIPFtOslqZvo3Kl07MYDXT'
+    oauth_secret:  'iPSlW9nBwS9cnsQGE7wZmqAygxa41YO9DxkqxxRUgRWuaD0FAnuNDUbJhbE90j8t'
+
   jobs:
     last_friend_refresh_threshold: "1 day ago"
 
