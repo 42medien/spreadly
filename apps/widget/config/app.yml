@@ -17,3 +17,6 @@ all:
 
   xing:
     oauth_callback_uri: "/auth/complete_signin/service/xing"
+
+  flattr:
+    oauth_callback_uri: "/auth/complete_signin/service/flattr"
