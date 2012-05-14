@@ -22,6 +22,12 @@
 					    	<?php $lDp = DomainProfileTable::getInstance()->find($pDeal->getDomainProfileId()); ?>
 					    	<?php echo $lDp->getUrl(); ?>
 					    </li>
+						<?php } elseif($pDeal->getType() == 'tags') { ?>
+							<li><span class="title"><?php echo __('Art des Deals'); ?>:</span><?php echo __("Tag-Deal"); ?></li>
+					    <li class="last"><span class="title">
+					    	<?php echo __('Tags'); ?>:</span>
+					    	<?php echo implode(',', $pDeal->getTags()); ?>
+					    </li>
 					  <?php } else { ?>
 							<li class="last"><span class="title"><?php echo __('Art des Deals'); ?></span>Pool-Deal</li>
 					  <?php } ?>
