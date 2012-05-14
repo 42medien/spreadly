@@ -180,6 +180,11 @@ dev:
     oauth_token:   "937652d826aac1b29889"
     oauth_secret:  "29c546cccd50dedc3d9484f471c148bcdfabb989"
 
+  flattr:
+    post_api:    'https://api.flattr.com/rest/v2/flattr'
+    oauth_token:   'ylyXSfqosZODOQGdwpVdQkuYECPzHn76zwThB9wUYboDRVHeashRCBG74lwCzuyZ'
+    oauth_secret:  'Qi7iit26vhAc27h3qoLTQhQLtceTxCIdLFmTZfQkmgneeu7vJIeqQU29W6Skzroa'
+
   check_url:     # der mac kann die checkdnsrr() methode nicht ausführen, so wird der test lokal umgangen
     pass:       1
 

@@ -41,6 +41,9 @@ class AuthApiFactory {
       case "xing":
         return new XingAuthApiClient();
         break;
+      case "flattr":
+        return new FlattrAuthApiClient();
+        break;
       default:
         return null;
     }
