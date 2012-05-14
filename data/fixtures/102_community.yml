@@ -39,3 +39,9 @@ Community:
     community: 'xing'
     url:       'http://www.xing.com'
     social_publishing_possible: 1
+
+  community_8:
+    name:      'flattr'
+    community: 'flattr'
+    url:       'http://www.flattr.com'
+    social_publishing_possible: 1
