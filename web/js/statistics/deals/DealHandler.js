@@ -108,11 +108,46 @@ var DealForm = {
         url: '/deals/get_tag_choice?model='+DealForm.aTagModel+'&term='+lTerms,
         dataType: "json",
         success: function (response) {
-            jQuery('#tag-choice-container').empty();
-            jQuery('#tag-choice-container').append(response.html);
+          jQuery('#tag-choice-user-container').empty();
+          jQuery('#tag-choice-user-container').append(response.htmluser);
+          jQuery('#tag-choice-dp-container').empty();
+          jQuery('#tag-choice-dp-container').append(response.htmldp);
           
           }      
         });
+      
+    },
+    
+    
+    preloadTagChoice: function() {
+      DealForm.aTagModel = 'all';
+      if(jQuery("#tag_model_dp").is(':checked') && !jQuery("#tag_model_user").is(':checked')){
+        DealForm.aTagModel = 'dp';
+      } else if (jQuery("#tag_model_user").is(':checked') && !jQuery("#tag_model_dp").is(':checked')) {
+        DealForm.aTagModel = 'user';
+      }      
+      
+      var lTerms = jQuery('#tags').val();
+      jQuery.ajax({
+        type: "GET",
+        url: '/deals/get_tag_choice?model='+DealForm.aTagModel+'&term='+lTerms,
+        dataType: "json",
+        success: function (response) {
+            jQuery('#tag-choice-user-container').empty();          
+            jQuery('#tag-choice-user-container').append(response.htmluser);
+            jQuery('#tag-choice-dp-container').empty();            
+            jQuery('#tag-choice-dp-container').append(response.htmldp);
+          }      
+        });      
+      
+    },
+    
+    toogleTagChoice: function() {
+      jQuery('#tag_model_dp, #tag_model_user').bind('click', function() {
+        DealForm.preloadTagChoice();
+        return true;
+        
+      });
       
     },
     

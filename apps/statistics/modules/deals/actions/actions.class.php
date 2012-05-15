@@ -70,9 +70,9 @@ class dealsActions extends sfActions
    * @todo statemachine-moped einbauen
    */
   public function executeStep_campaign(sfWebRequest $request){
-  	$this->getResponse()->setSlot('js_document_ready', $this->getPartial('deals/js_init_deals.js'));
+  	$this->getResponse()->setSlot('js_document_ready', $this->getPartial('deals/js_init_campaign.js'));
 
-  	$this->pForm->validate_campaign();
+		$this->pForm->validate_campaign();
 
   	if($request->getMethod() == 'POST'){
   		$lParams = $request->getPostParameters();
@@ -288,16 +288,22 @@ class dealsActions extends sfActions
 
   	$lModel = $request->getParameter('model');
   	$lTerms = $request->getParameter('terms');
+
+  	$lReturn['htmluser'] = $this->getPartial('deals/tag_choice_user', array('pUser' => array()));
+  	$lReturn['htmldp'] = $this->getPartial('deals/tag_choice_dp', array('pDp' => array()));
+
   	if($lModel == 'user') {
   		$lUser = TagTable::getTaggedUserByString(trim($request->getParameter('term')));
-  		$lReturn['html'] = $this->getPartial('deals/tag_choice_user', array('pUser' => $lUser));
+  		$lReturn['htmluser'] = $this->getPartial('deals/tag_choice_user', array('pUser' => $lUser));
 
   	} elseif ($lModel == 'dp') {
   		$lDp = TagTable::getTaggedDpByString(trim($request->getParameter('term')));
-  		$lReturn['html'] = $this->getPartial('deals/tag_choice_dp', array('pDp' => $lDp));
+  		$lReturn['htmldp'] = $this->getPartial('deals/tag_choice_dp', array('pDp' => $lDp));
   	} else {
   		$lUser = TagTable::getTaggedUserByString(trim($request->getParameter('term')));
-  		$lReturn['html'] = $this->getPartial('deals/tag_choice_user', array('pUser' => $lUser));
+  		$lReturn['htmluser'] = $this->getPartial('deals/tag_choice_user', array('pUser' => $lUser));
+  		$lDp = TagTable::getTaggedDpByString(trim($request->getParameter('term')));
+  		$lReturn['htmldp'] = $this->getPartial('deals/tag_choice_dp', array('pDp' => $lDp));
   	}
 
 

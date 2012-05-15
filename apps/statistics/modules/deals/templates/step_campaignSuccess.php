@@ -65,7 +65,12 @@
 								      	<?php echo $pForm['tags']->render(array('class' => 'name', 'placeholder' => __('Tags'))); ?>
 								      </label>
 								      <div class="alignleft title wide-title" id="tag-choice-container">
+												<div id="tag-choice-user-container">
 
+												</div>
+												<div id="tag-choice-dp-container">
+
+												</div>
 								      </div>
 								    </li>
 

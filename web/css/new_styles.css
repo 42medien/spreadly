@@ -849,18 +849,39 @@ behavior: url(css/PIE.htc);
   width: 435px;
 }
 
-.kampagne-checklist #select-tags ul#tag-choice-user-list{
-    border-right: 1px solid grey;
-    width: 215px;
+#tag-choice-user-container,
+#tag-choice-dp-container{
+  float: left;
+    width: 200px;
 }
 
-#tag-choice-user-list li {
-  float: left;
+#tag-choice-dp-container{
+  margin-left: 10px;
+  width: 215px;
+}
+
+.kampagne-checklist #select-tags ul#tag-choice-user-list{
+    border-right: 1px solid grey;
+    width: 190px;
+}
+
+.kampagne-checklist #select-tags ul#tag-choice-dp-list{
+    width: 190px;	
+	}
+	
+#tag-choice-user-list li,
+#tag-choice-dp-list li{
   margin-right: 5px;
   margin-bottom: 5px;
   overflow: hidden;
   
 }
+
+.kampagne-checklist #select-tags ul#tag-choice-dp-list li{
+    clear: both;
+    margin-right: 0px;
+    width: 200px;
+  }
 
 
 
