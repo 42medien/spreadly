@@ -3,10 +3,10 @@
 </div>
 
 <div class="row">
-  <div class="span1">
+  <div class="span2">
     <div class="thumbnail"><img src="<?php echo $user->getAvatar(); ?>" /></div>
   </div>
-  <div class="span11">
+  <div class="span10">
     <h2><i class="icon-comments"></i> <?php echo __("Your Networks"); ?></h2>
 
     <table class="table table-bordered table-striped">
@@ -27,6 +27,27 @@
           <td><?php echo $online_identity->getFriendCount(); ?></td>
           <td><?php echo $online_identity->getSpreadCount(); ?></td>
           <td><?php echo $online_identity->getKloutRank(); ?></td>
+        </tr>
+        <?php } ?>
+      </tbody>
+    </table>
+
+    <h2><i class="icon-gift"></i> <?php echo __("Your Deals"); ?></h2>
+
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th><?php echo __("Title"); ?></th>
+          <th><?php echo __("Description"); ?></th>
+          <th><?php echo __("Coupon/URL"); ?></th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($activities as $activity) { ?>
+        <tr>
+          <td><?php echo $activity->getDeal()->getMotivationTitle(); ?></td>
+          <td><?php echo $activity->getDeal()->getMotivationText(); ?></td>
+          <td><?php include_partial("profile/coupon_".$activity->getDeal()->getCouponType(), array("activity" => $activity)); ?></td>
         </tr>
         <?php } ?>
       </tbody>

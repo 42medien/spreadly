@@ -17,6 +17,8 @@ class profileActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request) {
     $this->user = $this->getUser()->getUser();
+
+    $this->activities = MongoManager::getDM()->getRepository('Documents\YiidActivity')->findLatestDealsByUserId($this->user->getId());
   }
 
   public function executeFeed($request) {
