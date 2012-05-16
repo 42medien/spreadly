@@ -21,7 +21,7 @@ class profileActions extends sfActions
     $this->activities = MongoManager::getDM()->getRepository('Documents\YiidActivity')->findLatestDealsByUserId($this->user->getId());
   }
 
-  public function executeFeed($request) {
+  public function executeAtom_feed($request) {
     $id = $request->getParameter("id");
 
     $user = UserTable::retrieveByUsername($id);

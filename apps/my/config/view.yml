@@ -12,7 +12,7 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    [bootstrap.min.css, my.css, font-awesome.css]
+  stylesheets:    [bootstrap.min.css, my.css, font-awesome.css, openwebicons-bootstrap.css]
 
   javascripts:    [https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js, bootstrap.js, bootstrap-tooltip.js, bootstrap-typeahead.js, my-app.js]
 

@@ -3,10 +3,22 @@
 </div>
 
 <div class="row">
-  <div class="span2">
-    <div class="thumbnail"><img src="<?php echo $user->getAvatar(); ?>" /></div>
+  <div class="span3">
+    <div class="well">
+      <h3>Subscribe</h3>
+
+      <ul>
+        <li class="icon-feed"><?php echo link_to("Atom-Feed", "profile/atom_feed", array("query_string" => "id=".$user->getUsername())); ?></li>
+      </ul>
+
+      <h3>Export</h3>
+
+      <ul>
+        <li>coming soon...</li>
+      </ul>
+    </div>
   </div>
-  <div class="span10">
+  <div class="span9">
     <h2><i class="icon-comments"></i> <?php echo __("Your Networks"); ?></h2>
 
     <table class="table table-bordered table-striped">
