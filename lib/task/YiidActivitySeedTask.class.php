@@ -77,7 +77,7 @@ EOF;
         'url_hash' => "hash.$ra",
         'u_id' => $user->getId(),
         'oiids' => $user->getOnlineIdentitesAsArray(),
-        'tags' => $tag,
+        'tags' => $tag.$ra,
         'title' => "$url title",
         'descr' => "$url description",
         'comment' => "$url comment",
