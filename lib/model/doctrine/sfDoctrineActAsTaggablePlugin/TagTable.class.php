@@ -33,6 +33,7 @@ class TagTable extends PluginTagTable
       return $lQuery->fetchArray();
     }
 
+
     public static function getAllUserByString($pString) {
 
       /*$lQuery = Doctrine_Query::create()

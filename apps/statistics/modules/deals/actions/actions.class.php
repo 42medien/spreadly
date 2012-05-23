@@ -57,7 +57,7 @@ class dealsActions extends sfActions
   		$this->pForm->setDefault('tags', $lTags);
 		} else {
 			//every create deal action needs the deal-id as get param except step_campaign
-			if($this->actionName != 'step_campaign' && $this->actionName != 'get_tags' && $this->actionName != 'get_tag_choice') {
+			if($this->actionName != 'step_campaign' && $this->actionName != 'get_tags' && $this->actionName != 'get_tag_counts') {
 				$this->redirect404();
 			}
 		}
@@ -280,7 +280,7 @@ class dealsActions extends sfActions
     return $this->renderText(json_encode($lArray));
   }
 
-  public function executeGet_tag_choice(sfWebRequest $request) {
+  public function executeGet_tag_counts(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
   	//$lArray =  array("Affe", "Pferd", "Pinguin");
 
@@ -289,9 +289,31 @@ class dealsActions extends sfActions
   	$lModel = $request->getParameter('model');
   	$lTerms = $request->getParameter('terms');
 
-  	$lReturn['htmluser'] = $this->getPartial('deals/tag_choice_user', array('pUser' => array()));
-  	$lReturn['htmldp'] = $this->getPartial('deals/tag_choice_dp', array('pDp' => array()));
+  	$lCounts = array(
+  							'user' =>
+  								array(
+  									'likes' => 555,
+  									'shares' => 1254,
+  									'mp' => 25444
+  								),
+  							'services' =>
+  								array(
+  									'fb' => 2584,
+  									'tw' => 3896,
+  								  'ln' => 4863,
+  									'other' => 5896
+  								),
+  							'websites' =>
+  								array(
+  									'allsites' => 5869
+  								)
+  						);
 
+
+  	//$lReturn['htmluser'] = $this->getPartial('deals/tag_choice_user', array('pUser' => array()));
+  	//$lReturn['htmldp'] = $this->getPartial('deals/tag_choice_dp', array('pDp' => array()));
+
+		/*
   	if($lModel == 'user') {
   		$lUser = TagTable::getTaggedUserByString(trim($request->getParameter('term')));
   		$lReturn['htmluser'] = $this->getPartial('deals/tag_choice_user', array('pUser' => $lUser));
@@ -304,10 +326,10 @@ class dealsActions extends sfActions
   		$lReturn['htmluser'] = $this->getPartial('deals/tag_choice_user', array('pUser' => $lUser));
   		$lDp = TagTable::getTaggedDpByString(trim($request->getParameter('term')));
   		$lReturn['htmldp'] = $this->getPartial('deals/tag_choice_dp', array('pDp' => $lDp));
-  	}
+  	}*/
 
 
-  	return $this->renderText(json_encode($lReturn));
+  	return $this->renderText(json_encode($lCounts));
   }
 
   private function getCleanedParams($pRequest) {

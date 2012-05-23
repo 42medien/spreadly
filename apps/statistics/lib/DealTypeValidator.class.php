@@ -8,8 +8,10 @@ class DealTypeValidator extends sfValidatorBase {
   public function configure($options = array(), $messages = array()) {
 
   	$this->addOption('type', 'type');
+  	$this->addOption('tags', 'tags');
     $this->addOption('domain_profile_id', 'domain_profile_id');
-    $this->setMessage('required', 'Required fields');
+    $this->setMessage('required', 'Please select');
+    $this->setMessage('invalid', 'Some problems with the deal type');
   }
 
   protected function doClean($values) {

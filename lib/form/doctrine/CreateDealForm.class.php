@@ -18,6 +18,7 @@ class CreateDealForm extends BaseDealForm
     // generate prices
     $likes = sfConfig::get("app_deal_pricing_like");
     $like_fields = array();
+
     foreach ($likes as $key => $value) {
       $like_fields[$key] = $lI18n->__(point_format($key)." likes for $value €");
     }
@@ -30,8 +31,6 @@ class CreateDealForm extends BaseDealForm
 
 
     $this->setWidgets(array(
-      //'id'                => new sfWidgetFormInputHidden(),
-      //'type'              => new sfWidgetFormChoice(array('choices' => array('pool' => 'pool'))),
       'name'              => new sfWidgetFormInputText(),
       'domain_profile_id' => new sfWidgetFormChoice(array('choices' => array(), 'expanded' => true)),
       'type'              => new sfWidgetFormChoice(array('choices' => array('pool' => $lI18n->__('Überall'), 'publisher' => $lI18n->__('Domain'), 'tags' => $lI18n->__('Tags')), 'expanded' => true)),
@@ -55,23 +54,13 @@ class CreateDealForm extends BaseDealForm
     	'billing_type'			=> new sfWidgetFormInputHidden(),
       'target_quantity'   => new sfWidgetFormChoice(array('choices' => $like_fields, 'expanded' => true )),
       'target_quantity_mp'   => new sfWidgetFormChoice(array('choices' => $mp_fields, 'expanded' => true )),
-      //'actual_quantity'   => new sfWidgetFormInputText(),
       'sf_guard_user_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => true)),
       'payment_method_id' => new sfWidgetFormInputHidden(),
-    	/*
-      'payment_method_id' => new sfWidgetFormDoctrineChoice(array(
-      														'model' => $this->getRelatedModelName('PaymentMethod'),
-      														'add_empty' => false,
-      														'expanded' => true
-    															//'renderer_class' => 'WidgetPmSelect'
-    														)),*/
-      //'domain_profile_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('DomainProfile'), 'add_empty' => true)),
       'created_at'        => new sfWidgetFormDateTime(),
-      //'updated_at'        => new sfWidgetFormDateTime(),
-      //'deal_state'        => new sfWidgetFormChoice(array('choices' => array('initial' => 'initial', 'submitted' => 'submitted', 'approved' => 'approved', 'denied' => 'denied', 'trashed' => 'trashed', 'paused' => 'paused'))),
     ));
 
-    $this->setDefault('target_quantity', '10');
+    //$this->setDefault('target_quantity', '50');
+    //$this->setDefaults(array('target_quantity' => '50', "tag_model" => array('user', 'dp')));
 
     $this->widgetSchema->setLabels(array(
     	'name' => $lI18n->__('Name'),
@@ -95,7 +84,6 @@ class CreateDealForm extends BaseDealForm
     	'coupon_url' => $lI18n->__('Gutschein/Download URL'),
     	'tos_accepted' => $lI18n->__('Ich aktzeptiere <a href="http://www.spreadly.com/system/tos" target="_blank">die Allgemeinen Geschäftsbedingungen</a> von Spreadly.'),
     ));
-
   }
 
   public function validate_campaign(){
@@ -114,9 +102,10 @@ class CreateDealForm extends BaseDealForm
 
     $this->validatorSchema->setPostValidator(new sfValidatorAnd(
       array(
-        new DealTypeValidator()
-    )));
+        new DealTypeValidator(),
+        new TargetQuantityValidator()
 
+    )));
   }
 
   public function validate_share(){
@@ -154,7 +143,6 @@ class CreateDealForm extends BaseDealForm
     $this->setValidators(array(
     	'payment_method_id' => new sfValidatorString(array('required' => false))
     ));
-    //$this->se
   }
 
   public function validate_verify(){

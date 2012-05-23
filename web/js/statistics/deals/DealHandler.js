@@ -98,8 +98,10 @@ var DealForm = {
       DealForm.toggleCouponType();
       DealForm.toggleCampaignType();
       DealForm.initAutocomplete();
+      DealForm.toogleTagChoice();
     },
 
+    /*
     getTagChoice: function() {
       
       var lTerms = jQuery('#tags').val();
@@ -141,10 +143,12 @@ var DealForm = {
         });      
       
     },
+    */
+    
     
     toogleTagChoice: function() {
       jQuery('#tag_model_dp, #tag_model_user').bind('click', function() {
-        DealForm.preloadTagChoice();
+        Reach.getCounts();
         return true;
         
       });
@@ -179,6 +183,7 @@ var DealForm = {
         minLength: 2,        
         
         source: function( request, response ) {
+          //$.getJSON( "/deals/get_tags?model="+DealForm.aTagModel, {
           $.getJSON( "/deals/get_tags?model="+DealForm.aTagModel, {
             term: extractLast( request.term )
           }, response );
@@ -189,7 +194,7 @@ var DealForm = {
           if ( term.length < 2 ) {
             return false;
           }
-          DealForm.getTagChoice();
+          Reach.getCounts();
         },
         focus: function() {
           // prevent value inserted on focus

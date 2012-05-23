@@ -19,6 +19,7 @@
 	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 	<link rel="stylesheet" type="text/css" href="/css/colorbox/colorbox.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="/css/vendor/colorpicker.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.css" media="screen" />
 
 
 	<link rel="stylesheet" type="text/css" href="/css/coupon.css" media="screen" />
@@ -33,6 +34,7 @@
 	<![endif]-->
 	<script type="text/javascript" src="/js/100_main/include/statistics-<?php echo sfConfig::get('app_release_name') ?>.min.js"></script>
 	<script type="text/javascript" src="/js/statistics/deals/DealHandler.js"></script>
+	<script type="text/javascript" src="/js/statistics/deals/ReachHandler.js"></script>
 
 	<?php include_javascripts();?>
   <?php $module = $sf_context->getModuleName(); ?>

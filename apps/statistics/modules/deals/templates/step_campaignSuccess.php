@@ -33,10 +33,10 @@
 											</li>
 								    <!-- select-domain-profile -->
 								    <li id="select-domain-profile-id" <?php echo ($pForm['type']->getValue() != 'publisher')? 'style="display:none;"':""; ?>>
-								    	<div class="alignleft title wide-title">
+								    	<div class="title wide-title clearfix">
 								      	<h4><?php echo $pForm['domain_profile_id']->renderLabel(); ?></h4>
 								      	<p class="description"><?php echo __('Auf welcher Domain soll der Deal laufen?'); ?></p>
-								      	<span><?php echo $pForm['domain_profile_id']->renderError(); ?></span>
+								      	<?php echo $pForm['domain_profile_id']->renderError(); ?>
 								      </div>
 								      <?php if(count($pDomainProfiles) > 0) { ?>
 								      	<?php echo $pForm['domain_profile_id']->render(); ?>
@@ -50,8 +50,8 @@
 								    <li id="select-tags" <?php echo ($pForm['type']->getValue() != 'tags')? 'style="display:none;"':""; ?>>
 
 								    	<div class="alignleft title wide-title">
-								      	<h4><?php echo $pForm['tag_model']->renderLabel(); ?></h4>
-								      	<p><?php echo __('Soll Ihr Deal nur für User oder Webseiten mit einem bestimmter Kategorie angezeigt werden?'); ?></p>
+								      	<h4><?php echo __('Sichtbarkeit');?></h4>
+								      	<p><?php echo __('Soll Ihr Deal nur für User oder nur auf Webseiten mit einem bestimmter Kategorie angezeigt werden?'); ?></p>
 								      	<span><?php echo $pForm['tag_model']->renderError(); ?></span>
 								      </div>
 								      	<?php echo $pForm['tag_model']->render()?>
@@ -65,12 +65,30 @@
 								      	<?php echo $pForm['tags']->render(array('class' => 'name', 'placeholder' => __('Tags'))); ?>
 								      </label>
 								      <div class="alignleft title wide-title" id="tag-choice-container">
-												<div id="tag-choice-user-container">
-
-												</div>
-												<div id="tag-choice-dp-container">
-
-												</div>
+								      	<div id="tag-choice-stats-container">
+													<h4><?php echo __('Mögliche Erreichbarkeit'); ?></h4>
+													<div>
+														<span class="tag-choice-label">User:</span>
+														<span class="icon-thumbs-up icon-medium"></span><span id="count-likes">254</span>
+														<span class="icon-chevron-right icon-normal"></span>
+														<span class="icon-share icon-medium"></span><span id="count-shares">36 500</span>
+														<span class="icon-chevron-right icon-normal"></span> <span id="count-mp">156 559</span> Media Penetration
+													</div>
+													<div>
+														<span class="tag-choice-label">Services:</span>
+														<span class="icon-facebook-sign icon-medium"></span><span id="count-fb">30 485</span>
+														<span class="icon-plus icon-normal"></span>
+														<span class="icon-twitter-sign icon-medium"></span><span id="count-tw">32 586</span>
+														<span class="icon-plus icon-normal"></span>
+														<span class="icon-linkedin-sign icon-medium"></span><span id="count-ln">10 825</span>
+														<span class="icon-plus icon-normal"></span>
+														<span class="icon-question-sign icon-medium"></span><span id="count-other">20 312</span>
+													</div>
+													<div>
+														<span class="tag-choice-label">Webseiten:</span>
+														<span class="icon-home icon-medium"></span><span id="count-allsites">10 093</span>
+													</div>
+								      	</div>
 								      </div>
 								    </li>
 

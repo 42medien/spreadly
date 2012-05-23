@@ -712,6 +712,7 @@ html, body { min-height:100%; height:100%;}
 .kampagne-checklist li .title h4 {font-size:14px; color:#252525; margin-bottom:3px;}
 .kampagne-checklist li p {line-height:15px; padding-bottom:0px;}
 .kampagne-checklist dl, .kampagne-checklist ul {float:right; width:282px; padding-top:0px;}
+ .kampagne-checklist #select-domain-profile-id ul {float:none; width:282px; padding-top:0px;}
 .kampagne-checklist #select-tags ul {float:left; width:282px; padding-top:0px;}
 .kampagne-checklist dl dd, .kampagne-checklist ul li {float:left; width:137px; /*margin-bottom:15px;*/}
 .kampagne-checklist #select-tags ul li{width:80px;}
@@ -882,7 +883,39 @@ behavior: url(css/PIE.htc);
     margin-right: 0px;
     width: 200px;
   }
+  
+#tag-choice-stats-container div{
+  margin-bottom: 10px;
+}
 
+#tag-choice-stats-container span{
+
+}
+
+.tag-choice-label{
+   display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    width: 80px;
+}
+
+#tag-choice-stats-container .icon-large{
+  font-size: 16px;
+  color: #272727;
+}
+
+#tag-choice-stats-container .icon-normal{
+  font-size: 13px;
+  color: #272727;  
+}
+
+#tag-choice-stats-container .icon-medium{
+  font-size: 16px;
+  color: #272727;  
+}
+#tag-choice-stats-container .icon-chevron-right,#tag-choice-stats-container .icon-plus{
+  color: #bbb;
+}
 
 
 /* Steplist page Content Css

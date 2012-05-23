@@ -62,8 +62,9 @@ var Utils = {
    * @return string
    */
   trim: function (pString) {
-    var cleanedString = pString.replace(/^\s+/,'').replace(/\s+$/,'');
+    var cleanedString = pString.replace("/\\s*/g",'');
     return cleanedString;
+    
   },
 
   ltrim: function(pString) {

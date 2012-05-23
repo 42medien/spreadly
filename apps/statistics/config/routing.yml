@@ -114,9 +114,9 @@ get_tags:
   url:   /deals/get_tags
   param: { module: deals, action: get_tags }  
   
-get_tag_choice:
-  url:   /deals/get_tag_choice
-  param: { module: deals, action: get_tag_choice }  
+get_tag_counts:
+  url:   /deals/get_tag_counts
+  param: { module: deals, action: get_tag_counts }  
 
 get_create_index:
   url:   /deals/get_create_index
