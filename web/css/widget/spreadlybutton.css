@@ -42,7 +42,8 @@
 .spreadly-button {
   font-family: Corbel, 'Trebuchet MS', Arial, sans-serif;
   font-size: 12px;  
-  display: inline-block;
+  display: block;
+  float: left;
   position: relative;
   color: hsl(195,42%,50%);  /* #B44A7A */
   line-height: 18px;
@@ -55,7 +56,6 @@
   border-bottom-color: hsl(195,42%,50%);
   border-top-color: hsl(195,42%,81%);
   border-radius: 3px;
-  background: #fff url('../img/s.png') no-repeat 130% -20px;
   text-decoration: none;
   text-transform: uppercase;
   box-shadow: 0 -1px 1px 1px hsla(195,42%,100%,.7) inset, 0 -4px 8px 0 hsla(195,42%,50%,.5) inset, 0 0 2px 4px hsla(195,42%,0%,0);
@@ -63,19 +63,7 @@
   -webkit-transition: box-shadow .3s ease-out, text-shadow .3s ease-out, background-position .6s ease-out;
   -moz-transition: box-shadow .3s ease-out, text-shadow .3s ease-out, background-position .6s ease-out;
 }
-.spreadly-button:before{
-  background: hsla(195,42%,50%,1) url('../img/l.png') no-repeat 0px 0px;
-  box-shadow: 0 1px 1px 0px hsla(195,42%,0%,.8) inset;
-  content:'';
-  width: 16px;
-  height: 16px;
-  display: block;
-  position: absolute;
-  top: 1px;
-  left: 1px;
-  border-radius: 2px;
-  opacity:1;
-}
+
 .spreadly-button:focus, .spreadly-button:hover{
   outline: none;
   background-position: -30% 20px;
@@ -167,4 +155,35 @@
    margin: 10% auto;
    background-color: #fff;
    text-align: center;
- }         
+ }    
+ 
+ .spreadly-box{
+
+ }   
+ .spreadly-box:after{
+ content: "."; display:block; height:0; clear:both; visibility:hidden; 
+ } 
+ 
+ .spreadly-share{
+  float: left;
+  display:block;
+ }  
+ 
+ .spreadly-share span{
+  padding: 0px !important;
+ } 
+ 
+ .spreadly-fb-button{
+ }  
+ 
+ .spreadly-twitter-button{ 
+  width: 90px;
+ }
+ 
+ .spreadly-google-button{
+  width: 70px !important;
+ } 
+ 
+ iframe{
+  padding-top: 2px;
+ }
