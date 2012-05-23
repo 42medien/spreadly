@@ -5,7 +5,7 @@ prod:
   translation:
     class: sfDoctrineDatabase
     param:
-      dsn:        mysql:dbname=yiidit_i18n;host=donkeykong
+      dsn:        mysql:dbname=yiidit_i18n;host=db1.cikaf9ikcmcc.eu-west-1.rds.amazonaws.com
       username:   yiidit_i18n
       password:   fdsmolds32dfs
       attributes:
@@ -15,7 +15,7 @@ prod:
   doctrine:
     class: sfDoctrineDatabase
     param:
-      dsn:        mysql:dbname=yiidit;host=donkeykong
+      dsn:        mysql:dbname=yiidit;host=db1.cikaf9ikcmcc.eu-west-1.rds.amazonaws.com
       username:   yiidit
       password:   fdsmolds32dfs
       attributes:

@@ -97,7 +97,7 @@ prod:
       source:          pimpedMySQL
       debug:           false
       default_culture: de
-      database:        mysql://yiidit_i18n:fdsmolds32dfs@donkeykong/yiidit_i18n
+      database:        mysql://yiidit_i18n:fdsmolds32dfs@db1.cikaf9ikcmcc.eu-west-1.rds.amazonaws.com/yiidit_i18n
       cache:
         class: sfFileCache
         param:
