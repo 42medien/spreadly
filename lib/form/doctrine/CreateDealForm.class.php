@@ -59,8 +59,7 @@ class CreateDealForm extends BaseDealForm
       'created_at'        => new sfWidgetFormDateTime(),
     ));
 
-    //$this->setDefault('target_quantity', '50');
-    //$this->setDefaults(array('target_quantity' => '50', "tag_model" => array('user', 'dp')));
+    $this->setDefaults(array('target_quantity' => '50', "tag_model" => array('user', 'dp')));
 
     $this->widgetSchema->setLabels(array(
     	'name' => $lI18n->__('Name'),
