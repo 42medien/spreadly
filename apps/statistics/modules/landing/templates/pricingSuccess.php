@@ -5,7 +5,7 @@
 				<div class="yiidtable-content">
 					<div class="clearfix customergrowth-chart">
 						<div class="alignleft labelcusomer">
-							<span class="label"><?php echo __('Sie haben<br>besondere<br>Wünsche?'); ?></span>
+							<span class="label"><?php echo __('Sie haben<br/>besondere<br/>Wünsche?'); ?></span>
 							<a href="mailto:info@spreadly.com" class="blue-button"><span><?php echo __('Sprechen Sie mit uns!'); ?></span></a>
 						</div>
 						<ul class="alignright custogrowth-list">
@@ -60,11 +60,11 @@
 						<table title="Recurring Billing Features">
 							<tr>
 								<td class="first"></td>
-								<td><a href="<?php echo url_for('@sf_guard_register'); ?>" title="Sign up" class="pink-btn"><span><?php echo __('Registrieren'); ?></span></a></td>
-								<td><a href="<?php echo url_for('@sf_guard_register'); ?>" title="Sign up" class="pink-btn"><span><?php echo __('Registrieren'); ?></span></a></td>
-								<td><a href="<?php echo url_for('@sf_guard_register'); ?>" title="Sign up" class="pink-btn"><span><?php echo __('Registrieren'); ?></span></a></td>
-								<td><a href="<?php echo url_for('@sf_guard_register'); ?>" title="Sign up" class="pink-btn"><span><?php echo __('Registrieren'); ?></span></a></td>
-								<td><a href="<?php echo url_for('@sf_guard_register'); ?>" title="Sign up" class="blue-btn"><span><?php echo __('Registrieren'); ?></span></a></td>
+								<td><a href="<?php echo url_for('@sf_guard_register'); ?>" title="<?php echo __('Registrieren'); ?>" class="pink-btn"><span><?php echo __('Registrieren'); ?></span></a></td>
+								<td><a href="<?php echo url_for('@sf_guard_register'); ?>" title="<?php echo __('Registrieren'); ?>" class="pink-btn"><span><?php echo __('Registrieren'); ?></span></a></td>
+								<td><a href="<?php echo url_for('@sf_guard_register'); ?>" title="<?php echo __('Registrieren'); ?>" class="pink-btn"><span><?php echo __('Registrieren'); ?></span></a></td>
+								<td><a href="<?php echo url_for('@sf_guard_register'); ?>" title="<?php echo __('Registrieren'); ?>" class="pink-btn"><span><?php echo __('Registrieren'); ?></span></a></td>
+								<td><a href="<?php echo url_for('@sf_guard_register'); ?>" title="<?php echo __('Registrieren'); ?>" class="blue-btn"><span><?php echo __('Registrieren'); ?></span></a></td>
 							</tr>
 						</table>
 					</div>
@@ -110,7 +110,7 @@
 							<td class="grey last">---</td>
 						</tr>
 						<tr>
-							<td class="first"><?php echo __('Kampagnen im Spreadly Ad-Network schalten*'); ?></td>
+							<td class="first"><?php echo __('Mount campaings on the ad network of Spreadly'); ?></td>
 							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
 							<td><img src="/img/statistics/true-icon.png" alt="" title=""></td>
 							<td class="grey"><img src="/img/statistics/true-icon.png" alt="" title=""></td>
