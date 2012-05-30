@@ -1,5 +1,5 @@
 <section class="spread-refrance">
-	<h3>Spreadly Referenzen</h3>
+	<h3><?php echo __('Spreadly Referenzen'); ?></h3>
 	<ul id="mycarousel" class="jcarousel-skin-tango clearfix">
                   <li><a href="http://www.mailingwork.de/" title="mailingwork" target="_blank"><img src="/img/refrance-img20.jpg" alt="Image"/></a></li>
                   <li><a href="http://www.urlaubspartner.net" title="Urlaubspartner" target="_blank"><img src="/img/refrance-img21.jpg" alt="Image"/></a></li>
