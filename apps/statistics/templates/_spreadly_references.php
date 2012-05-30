@@ -22,6 +22,6 @@
                   <li><a href="http://www.daf.fm/" title="Deutsches Anleger Fernsehen" target="_blank"><img src="/img/refrance-img4.jpg" alt="Image"/></a></li>
                   <li><a href="http://www.brille24.de/" title="Brille24" target="_blank"><img src="/img/refrance-img5.jpg" alt="Image"/></a></li>
 	</ul>
-	<span class="more"><a href="<?php echo url_for('@customer');?>" title="See More Spreadly costumers &raquo;">Mehr über die Spreadly-Kunden &raquo;</a></span>
+	<span class="more"><a href="<?php echo url_for('@customer');?>" title="<?php echo __('Mehr über die Spreadly-Kunden &raquo;'); ?>"><?php echo __('Mehr über die Spreadly-Kunden &raquo;'); ?></a></span>
 </section>
 
