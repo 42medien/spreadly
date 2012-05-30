@@ -82,17 +82,17 @@
 				<div class="container_12">
 					<div class="clearfix">
 						<ul class="footer-links clearfix">
-							<li class="first"><?php echo __('Site Map'); ?></li>
-							<li><a href="<?php echo url_for('landing/index'); ?>" title="Home"><?php echo __('Home');?></a></li>
-							<li><a href="<?php echo url_for('@configurator'); ?>" title="Buttons"><?php echo __('Button');?></a></li>
-							<li><a href="<?php echo url_for('@publisher'); ?>" title="Publisher"><?php echo __('Publisher'); ?></a></li>
-							<li><a href="<?php echo url_for('@advertiser'); ?>" title="Advertiser"><?php echo __('Advertiser'); ?></a></li>
+							<li class="first"><?php echo __('Sitemap'); ?></li>
+							<li><a href="<?php echo url_for('landing/index'); ?>" title="<?php echo __('Home');?>"><?php echo __('Home');?></a></li>
+							<li><a href="<?php echo url_for('@configurator'); ?>" title="<?php echo __('Button');?>"><?php echo __('Button');?></a></li>
+							<li><a href="<?php echo url_for('@publisher'); ?>" title="<?php echo __('Webseitenbetreiber'); ?>"><?php echo __('Webseitenbetreiber'); ?></a></li>
+							<li><a href="<?php echo url_for('@advertiser'); ?>" title="<?php echo __('Werbetreibende'); ?>"><?php echo __('Werbetreibende'); ?></a></li>
 						</ul>
 						<ul class="footer-links clearfix">
 							<li class="first"><?php echo __('Support'); ?></li>
 							<li><?php echo link_to(__('GetSatisfaction'), 'http://getsatisfaction.com/spreadly', array('target' => '_blank')); ?></li>
 							<li><?php echo link_to(__('Help via Twitter'), 'http://twitter.com/spreadly_helps', array('target' => '_blank')); ?></li>
-							<li><a href="mailto:info@spreadly.com"><?php echo __('Help via Email'); ?></a></li>
+							<li><a href="mailto:info@spreadly.com"><?php echo __('Hilfe per Email'); ?></a></li>
 						</ul>
 						<ul class="footer-links clearfix services-link">
 							<li class="first"><?php echo __('Services'); ?></li>

@@ -5,7 +5,7 @@
 					<article class="customer-listing alignleft">
 						<div class="clearfix">
 							<span class="cust-logo"><img src="/img/refrance-img5.jpg" alt="brille24" title="brille24"></span>
-							<p><?php echo __('Brille24 verteilt Gutscheine über das Spreadly Ad-Network. Mit jeder Empfehlung über den Spreadly Button können Brillenträger 10 Euro beim Kauf der nächsten Britte sparen'); ?></p>
+							<p><?php echo __('Brille24 verteilt Gutscheine über das Spreadly Ad-Network. Mit jeder Empfehlung über den Spreadly Button können Brillenträger 10 Euro beim Kauf der nächsten Brille sparen'); ?></p>
 							<strong class="visit"><a href="http://www.brille24.de" target="_blank" title="Visit brille24"><?php echo __('Visit &raquo;'); ?></a></strong>
 						</div>
 						<div class="clearfix">
@@ -40,7 +40,7 @@
 						</div>
 					</article>
 					<aside class="feedback-list alignright">
-						<h4 class="feedback-title">Meinungen!</h4>
+						<h4 class="feedback-title"><?php echo __('Meinungen!'); ?></h4>
 						<ul>
 							<li><?php echo __('Der (Spreadly-)Button ist Facebook-unabhängig, wird von einem regionalen Startup angeboten und macht das Webdesign sauberer, da er viele Bookmarking-Buttons ersetzt'); ?><br/><strong><?php echo __('(Harald Ille vom Presseamt FFM)'); ?></strong></li>
 							<li><?php echo __('Ich finde die Lösung smart und möchte sie ausprobieren.'); ?><br/><strong><?php echo __('(Mirko Lange Talkabout / München)'); ?></strong></li>

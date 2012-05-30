@@ -12,19 +12,19 @@
 							<li><?php echo __('Spreadly für Werbetreibende'); ?></li>
 							<li><?php echo __('Spreadly für Entwickler'); ?></li>
 						</ul>
-						<a href="<?php echo url_for('@configurator'); ?>" class="get-btn" title="Get your own Button now"><?php echo __('Zum Button für Ihre Seite!'); ?></a>
+						<a href="<?php echo url_for('@configurator'); ?>" class="get-btn" title="<?php echo __('Zum Button für Ihre Seite!'); ?>"><?php echo __('Zum Button für Ihre Seite!'); ?></a>
 						<p class="contact-txt"><?php echo __('Schnell - Transparent - Fair'); ?></p>
 					</div>
 				</div>
 				<div class="clearfix container_12">
 					<div class="grid_4 alignleft left-brand"><span class="more"><?php echo __('Mehr als'); ?></span><span class="txt-500"><?php echo __('600'); ?></span><span class="companys"><?php echo __('WEBSEITEN'); ?></span>
-						<p class="depends"><span><?php echo __('setzen bereits auf'); ?></span><img src="/img/statistics/spread.gif" width="116" height="46" title="spread" alt="spread"></p>
+						<p class="depends"><span><?php echo __('setzen bereits auf'); ?></span><img src="/img/statistics/spread.gif" width="116" height="46" title="<?php echo __('spreadly'); ?>" alt="<?php echo __('spreadly'); ?>"></p>
 					</div>
 					<div class="alignright brand-logo">
 						<h4><?php echo __('Partner'); ?></h4>
 						<div class="logo-top">
-							<a href="http://www.mailingwork.de/" target="_blank"><img src="/img/statistics/mailingwork-logo.jpg" width="148" height="47" alt="mailingwork" title="mailingwork"></a>
-							<a href="http://www.business-on.de/" target="_blank"><img src="/img/statistics/business-logo.jpg" width="159" height="47" alt="business" title="business"></a>
+							<a href="http://www.mailingwork.de/" target="_blank"><img src="/img/statistics/mailingwork-logo.jpg" width="148" height="47" alt="Mailingwork" title="Mailingwork"></a>
+							<a href="http://www.business-on.de/" target="_blank"><img src="/img/statistics/business-logo.jpg" width="159" height="47" alt="business on" title="business on"></a>
 							<a href="http://www.ednetz.de/" target="_blank"><img src="/img/statistics/ednetz-logo.jpg" width="135" height="47" alt="ednetz" title="ednetz"></a>
 						</div>
 						<div class="logo-bot">
@@ -33,7 +33,7 @@
 							<a href="http://www.ibusiness.de/" target="_blank"><img src="/img/statistics/ibusiness-logo.jpg" width="170" height="43" alt="ibusiness" title="ibusiness"></a>
 							<a href="http://www.pr-blogger.de/" target="_blank"><img src="/img/statistics/pr-blogger-logo.jpg" width="143" height="43" alt="pr-blogger" title="pr-blogger"></a>
 						</div>
-						<p class="see-more"><a href="<?php echo url_for('@customer');?>" title="See More Spreadly costumers"><?php echo __('weitere Partner von Spreadly anzeigen &raquo;'); ?></a></p>
+						<p class="see-more"><a href="<?php echo url_for('@customer');?>" title="<?php echo __('Weitere Partner von Spreadly anzeigen'); ?>"><?php echo __('Weitere Partner von Spreadly anzeigen &raquo;'); ?></a></p>
 					</div>
 				</div>
 			</section>
