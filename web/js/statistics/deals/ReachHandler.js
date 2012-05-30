@@ -17,6 +17,7 @@ var Reach = {
   },
   
   getCounts: function() {
+    debug.log("[Reach][getCounts]");
     var lTerms = Utils.trim(jQuery('#tags').val());
     jQuery.ajax({
       type: "GET",
