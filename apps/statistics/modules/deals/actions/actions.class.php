@@ -57,7 +57,7 @@ class dealsActions extends sfActions
   		$this->pForm->setDefault('tags', $lTags);
 		} else {
 			//every create deal action needs the deal-id as get param except step_campaign
-			if($this->actionName != 'step_campaign' && $this->actionName != 'get_tags' && $this->actionName != 'get_tag_counts') {
+			if($this->actionName != 'step_campaign') {
 				$this->redirect404();
 			}
 		}
@@ -258,6 +258,11 @@ class dealsActions extends sfActions
 
   }
 
+  /**
+   * @deprecated feature unvollendet entfernt (KM)
+   * Enter description here ...
+   * @param sfWebRequest $request
+   */
   public function executeGet_tags(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
   	//$lArray =  array("Affe", "Pferd", "Pinguin");
@@ -280,6 +285,12 @@ class dealsActions extends sfActions
     return $this->renderText(json_encode($lArray));
   }
 
+
+  /**
+   * @deprecated feature unvollendet entfernt (KM)
+   * Enter description here ...
+   * @param sfWebRequest $request
+   */
   public function executeGet_tag_counts(sfWebRequest $request) {
   	$this->getResponse()->setContentType('application/json');
   	//$lArray =  array("Affe", "Pferd", "Pinguin");

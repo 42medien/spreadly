@@ -2,7 +2,7 @@
 
 /**
  *
- * @author  karina
+ * @author  KM
  */
 class DealTypeValidator extends sfValidatorBase {
   public function configure($options = array(), $messages = array()) {

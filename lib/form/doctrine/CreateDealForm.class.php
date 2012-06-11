@@ -33,14 +33,14 @@ class CreateDealForm extends BaseDealForm
     $this->setWidgets(array(
       'name'              => new sfWidgetFormInputText(),
       'domain_profile_id' => new sfWidgetFormChoice(array('choices' => array(), 'expanded' => true)),
-      'type'              => new sfWidgetFormChoice(array('choices' => array('pool' => $lI18n->__('Überall'), 'publisher' => $lI18n->__('Domain'), 'tags' => $lI18n->__('Tags')), 'expanded' => true)),
+      'type'              => new sfWidgetFormChoice(array('choices' => array('pool' => $lI18n->__('Überall'), 'publisher' => $lI18n->__('Domain')), 'expanded' => true)),
     	'tos_accepted'      => new sfWidgetFormInputCheckbox(),
       'motivation_title'  => new sfWidgetFormInputText(),
       'motivation_text'   => new sfWidgetFormTextarea(),
       'spread_title'      => new sfWidgetFormInputText(),
       'spread_text'       => new sfWidgetFormTextarea(),
-    	'tags'       				=> new sfWidgetFormInputText(),
-    	'tag_model'         => new sfWidgetFormChoice(array('choices' => array('user' => 'User', 'dp' => 'Webseite'), 'expanded' => true,  "multiple" => true)),
+    	//'tags'       				=> new sfWidgetFormInputText(),
+    	//'tag_model'         => new sfWidgetFormChoice(array('choices' => array('user' => 'User', 'dp' => 'Webseite'), 'expanded' => true,  "multiple" => true)),
       'spread_url'        => new sfWidgetFormInputText(),
       'spread_img'        => new sfWidgetFormInputText(),
       'spread_tos'        => new sfWidgetFormInputText(),
@@ -59,7 +59,7 @@ class CreateDealForm extends BaseDealForm
       'created_at'        => new sfWidgetFormDateTime(),
     ));
 
-    $this->setDefaults(array('target_quantity' => '50', "tag_model" => array('user', 'dp')));
+    $this->setDefaults(array('target_quantity' => '50'));
 
     $this->widgetSchema->setLabels(array(
     	'name' => $lI18n->__('Name'),
@@ -94,9 +94,7 @@ class CreateDealForm extends BaseDealForm
     	'target_quantity_mp'   => new sfValidatorInteger(array('required' => false)),
     	'billing_type'   => new sfValidatorString(array('required' => true)),
     	'domain_profile_id'   => new sfValidatorInteger(array('required' => false)),
-			'type'   => new sfValidatorString(array('required' => true), array('invalid' => $lI18n->__('Nicht möglich'))),
-    	'tags'   => new sfValidatorString(array('required' => false)),
-      'tag_model' =>  new sfValidatorString(array('required' => false))
+			'type'   => new sfValidatorString(array('required' => true), array('invalid' => $lI18n->__('Nicht möglich')))
     ));
 
     $this->validatorSchema->setPostValidator(new sfValidatorAnd(

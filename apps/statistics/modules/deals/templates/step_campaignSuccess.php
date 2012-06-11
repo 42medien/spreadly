@@ -46,27 +46,28 @@
 									    <?php } ?>
 								    </li>
 
-										<!-- select-tags -->
+										<!-- select-tags
 								    <li id="select-tags" <?php echo ($pForm['type']->getValue() != 'tags')? 'style="display:none;"':""; ?>>
 
 								    	<div class="alignleft title wide-title">
-								      	<h4><?php echo __('Sichtbarkeit');?></h4>
-								      	<p><?php echo __('Soll Ihr Deal nur für User oder nur auf Webseiten mit einem bestimmter Kategorie angezeigt werden?'); ?></p>
-								      	<span><?php echo $pForm['tag_model']->renderError(); ?></span>
+								      	<h4><?php //echo __('Sichtbarkeit');?></h4>
+								      	<p><?php //echo __('Soll Ihr Deal nur für User oder nur auf Webseiten mit einem bestimmter Kategorie angezeigt werden?'); ?></p>
+								      	<span><?php //echo $pForm['tag_model']->renderError(); ?></span>
 								      </div>
-								      	<?php echo $pForm['tag_model']->render()?>
+								      	<?php //echo $pForm['tag_model']->render()?>
 
 								    	<div class="alignleft title wide-title">
-								      	<h4><?php echo $pForm['tags']->renderLabel(); ?></h4>
-								      	<p class="description"><?php echo __('Geben Sie hier, mit Komma getrennt, die Kategorien, wie zum Beispiel "Sport", an, bei denen ihre Deals angezeigt werden sollen.'); ?></p>
-								      	<span><?php echo $pForm['tags']->renderError(); ?></span>
+								      	<h4><?php //echo $pForm['tags']->renderLabel(); ?></h4>
+								      	<p class="description"><?php //echo __('Geben Sie hier, mit Komma getrennt, die Kategorien, wie zum Beispiel "Sport", an, bei denen ihre Deals angezeigt werden sollen.'); ?></p>
+								      	<span><?php //echo $pForm['tags']->renderError(); ?></span>
 								      </div>
+
 								      <label class="btnform-input">
-								      	<?php echo $pForm['tags']->render(array('class' => 'name', 'placeholder' => __('Tags'))); ?>
+								      	<?php //echo $pForm['tags']->render(array('class' => 'name', 'placeholder' => __('Tags'))); ?>
 								      </label>
 								      <div class="alignleft title wide-title" id="tag-choice-container">
 								      	<div id="tag-choice-stats-container">
-													<h4><?php echo __('Mögliche Erreichbarkeit'); ?></h4>
+													<h4><?php //echo __('Mögliche Erreichbarkeit'); ?></h4>
 													<div>
 														<span class="tag-choice-label">User:</span>
 														<span class="icon-thumbs-up icon-medium"></span><span id="count-likes">254</span>
@@ -91,7 +92,7 @@
 								      	</div>
 								      </div>
 								    </li>
-
+										-->
 
 											<li class="select-target-quantity" id="select-target-quantity">
 												<div class="alignleft title">

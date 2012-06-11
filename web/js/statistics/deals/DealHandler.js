@@ -1,5 +1,5 @@
 /**
- * @nocombine statistics
+ * @combine statistics
  */
 
 /**
@@ -82,8 +82,6 @@ var Deal = {
  * @author KM
  */
 var DealForm = {
-    
-    aTagModel: 'all',
 
     init: function() {
       debug.log('[DealForm][init]');
@@ -97,122 +95,6 @@ var DealForm = {
       DealForm.toggleDealType();   
       DealForm.toggleCouponType();
       DealForm.toggleCampaignType();
-      DealForm.initAutocomplete();
-      DealForm.toogleTagChoice();
-    },
-
-    /*
-    getTagChoice: function() {
-      
-      var lTerms = jQuery('#tags').val();
-      jQuery.ajax({
-        type: "GET",
-        url: '/deals/get_tag_choice?model='+DealForm.aTagModel+'&term='+lTerms,
-        dataType: "json",
-        success: function (response) {
-          jQuery('#tag-choice-user-container').empty();
-          jQuery('#tag-choice-user-container').append(response.htmluser);
-          jQuery('#tag-choice-dp-container').empty();
-          jQuery('#tag-choice-dp-container').append(response.htmldp);
-          
-          }      
-        });
-      
-    },
-    
-    
-    preloadTagChoice: function() {
-      DealForm.aTagModel = 'all';
-      if(jQuery("#tag_model_dp").is(':checked') && !jQuery("#tag_model_user").is(':checked')){
-        DealForm.aTagModel = 'dp';
-      } else if (jQuery("#tag_model_user").is(':checked') && !jQuery("#tag_model_dp").is(':checked')) {
-        DealForm.aTagModel = 'user';
-      }      
-      
-      var lTerms = jQuery('#tags').val();
-      jQuery.ajax({
-        type: "GET",
-        url: '/deals/get_tag_choice?model='+DealForm.aTagModel+'&term='+lTerms,
-        dataType: "json",
-        success: function (response) {
-            jQuery('#tag-choice-user-container').empty();          
-            jQuery('#tag-choice-user-container').append(response.htmluser);
-            jQuery('#tag-choice-dp-container').empty();            
-            jQuery('#tag-choice-dp-container').append(response.htmldp);
-          }      
-        });      
-      
-    },
-    */
-    
-    
-    toogleTagChoice: function() {
-      jQuery('#tag_model_dp, #tag_model_user').bind('click', function() {
-        Reach.getCounts();
-        return true;
-        
-      });
-      
-    },
-    
-    initAutocomplete: function() {
-      debug.log('[DealForm][initAutocomplete]');
-      
-      jQuery( "#tags" )
-      // don't navigate away from the field on tab when selecting an item
-      .bind( "keydown", function( event ) {
-        DealForm.aTagModel = 'all';
-        if(jQuery("#tag_model_dp").is(':checked') && !jQuery("#tag_model_user").is(':checked')){
-          DealForm.aTagModel = 'dp';
-        } else if (jQuery("#tag_model_user").is(':checked') && !jQuery("#tag_model_dp").is(':checked')) {
-          DealForm.aTagModel = 'user';
-        }
-        if ( event.keyCode === $.ui.keyCode.TAB &&
-            $( this ).data( "autocomplete" ).menu.active ) {
-          event.preventDefault();
-        }
-      })
-      .autocomplete({
-        minLength: 0,
-        /*source: function( request, response ) {
-          // delegate back to autocomplete, but extract the last term
-          response( $.ui.autocomplete.filter(
-            availableTags, extractLast( request.term ) ) );
-        },*/
-        
-        minLength: 2,        
-        
-        source: function( request, response ) {
-          //$.getJSON( "/deals/get_tags?model="+DealForm.aTagModel, {
-          $.getJSON( "/deals/get_tags?model="+DealForm.aTagModel, {
-            term: extractLast( request.term )
-          }, response );
-        },
-        search: function() {
-          // custom minLength
-          var term = extractLast( this.value );
-          if ( term.length < 2 ) {
-            return false;
-          }
-          Reach.getCounts();
-        },
-        focus: function() {
-          // prevent value inserted on focus
-          return false;
-        },
-        select: function( event, ui ) {
-          var terms = split( this.value );
-          // remove the current input
-          terms.pop();
-          // add the selected item
-          terms.push( ui.item.value );
-          // add placeholder to get the comma-and-space at the end
-          terms.push( "" );
-          this.value = terms.join( ", " );
-          return false;
-        }
-      });
-      
     },
     
     initCharCounter: function() {
@@ -281,13 +163,8 @@ var DealForm = {
         var lId = jQuery(this).attr('id');
         if (lId == 'type_publisher') {
           jQuery('#select-domain-profile-id').show();
-          jQuery('#select-tags').hide();
-        } else if(lId == 'type_pool') {
-          jQuery('#select-domain-profile-id').hide();
-          jQuery('#select-tags').hide();
         } else {
-          jQuery('#select-domain-profile-id').hide();          
-          jQuery('#select-tags').show();
+          jQuery('#select-domain-profile-id').hide();
         }
         
         //jQuery('#coupon-preview-img').attr('src', '/img/'+lId+".png");
@@ -298,13 +175,6 @@ var DealForm = {
     }
     
     
-};
-
-function split( val ) {
-  return val.split( /,\s*/ );
-};
-function extractLast( term ) {
-  return split( term ).pop();
 };
 
 

@@ -6,8 +6,8 @@ i18n.init({
 });
 
 DealForm.init();
-Reach.init();
-/*DealForm.preloadTagChoice();
+/*Reach.init();
+DealForm.preloadTagChoice();
 DealForm.toogleTagChoice();*/
 
 
