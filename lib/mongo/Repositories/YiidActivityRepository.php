@@ -26,6 +26,26 @@ class YiidActivityRepository extends DocumentRepository
     return $results;
   }
 
+  /**
+   * returns the latest activities of a user (desc order by date)
+   *
+   * @author Matthias Pfefferle
+   * @param int $pUserId
+   * @param int $pLimit default = 10
+   * @return array
+   */
+  public function findLatestDealsByUserId($u_id, $limit = 10) {
+    $results = $this->createQueryBuilder()
+                    ->hydrate(true)
+                    ->limit($limit)
+                    ->field("u_id")->equals(intval($u_id))
+                    ->field("d_id")->exists(true)
+                    ->sort("c", "desc")
+                    ->getQuery()->execute();
+
+    return $results;
+  }
+
   public function countByRange($from, $to) {
     $results = $this->createQueryBuilder()
                     ->field("c")->gte($from)
