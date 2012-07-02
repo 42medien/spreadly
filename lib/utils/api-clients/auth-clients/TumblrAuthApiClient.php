@@ -16,53 +16,7 @@ class TumblrAuthApiClient extends AuthApi {
    * @param AuthToken $pAuthToken
    */
   public function doSignin($pSessionUser, $pOAuthToken) {
-    /*
-    $lAccessToken = $this->getAccessToken($pOAuthToken);
-    //var_dump($lAccessToken);die();
-    // get params
-    $lParams = $lAccessToken->params;
-    $lParamsArray = array();
-    // extract params
-    parse_str($lParams, $lParamsArray);
-    //$lConsumer = new OAuthConsumer(sfConfig::get("app_linkedin_oauth_token"), sfConfig::get("app_linkedin_oauth_secret"));
-
-
-    $json = OAuthClient::post($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "http://api.tumblr.com/v2/user/info");
-    $json = json_decode($json, true);
-
-    $user_name = $json['response']['user']['name'];
-    $auth_identifier = "http://".$user_name.".tumblr.com";
-
-    // ask for online identity
-    $online_identity = OnlineIdentityTable::retrieveByAuthIdentifier($auth_identifier);
-
-    // check if user already exists
-    if ($online_identity) {
-      $user = $online_identity->getUser();
-    } else {
-      // check online identity
-      $online_identity = OnlineIdentityTable::addOnlineIdentity($auth_identifier, $user_name, $this->aCommunityId);
-
-      // if there is no online identity die!
-      if (!$online_identity) {
-        throw new sfException("incorrect online identity", 3);
-      }
-
-      // generate empty user
-      $user = new User();
-    }
-
-    if (!$user || !$user->getId() || !$online_identity->getPhoto()) {
-      // use api complete informations
-      $this->completeUser($user, $json['response']);
-      $this->completeOnlineIdentity($online_identity, $json['response'], $user, $auth_identifier);
-    }
-
-    // save new token
-    AuthTokenTable::saveToken($user->getId(), $online_identity->getId(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], true);
-
-    return $user;
-    */
+    // doesn't work
   }
 
   /**
