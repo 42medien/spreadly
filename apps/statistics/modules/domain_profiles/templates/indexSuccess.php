@@ -15,4 +15,4 @@
   <?php include_partial('domain_profiles/domain_profiles_table', array('domain_profiles' => $domain_profiles)); ?>
 </div>
 
-<?php include_partial('global/spreadly_references');?>
+<?php include_partial('global/spreadly_references'); ?>
