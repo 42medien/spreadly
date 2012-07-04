@@ -30,6 +30,7 @@ DomainProfile:
       type: boolean
       default: false
     tracking_url: string(255)
+    flattr_account: string(255)
   relations:
     sfGuardUser:
       foreignAlias: DomainProfiles
