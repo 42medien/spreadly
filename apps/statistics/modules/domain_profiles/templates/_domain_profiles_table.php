@@ -5,11 +5,10 @@
 	<span class="leftco">&nbsp;</span><span class="rightco">&nbsp;</span>
 	<table title="Recurring Billing Features">
 		<tr>
-			<td class="first"><?php echo __('Website');?></td>
+			<td class="first website"><?php echo __('Website');?></td>
 			<td class="status"><?php echo __('Status');?></td>
-			<td class="generate"><?php echo __('Get Code');?></td>
-			<td><?php echo __('Verify');?></td>
-			<td><?php echo __('Delete');?></td>
+			<td class="flattr"><?php echo __('Flattr');?></td>
+			<td class="last actions"><?php echo __('Actions');?></td>
 		</tr>
 	</table>
 </div>
@@ -21,7 +20,7 @@
 	  <?php } else { ?>
       <tr id="no-claim">
         <td>&nbsp;</td>
-        <td colspan="7">
+        <td colspan="3">
           <h3><?php echo __("No websites claimed");?></h3>
         </td>
       </tr>

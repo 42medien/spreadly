@@ -1,5 +1,5 @@
 <?php use_helper('Date', 'DomainProfiles');?>
-		<td class="first">
+		<td class="first website">
 	    <?php if($domain_profile->getState() == DomainProfileTable::STATE_PENDING || (isset($pHasError) && $pHasError != false)) { ?>
 				<?php echo $domain_profile->getDomain(); ?>
 			<?php } elseif($domain_profile->getState() == DomainProfileTable::STATE_VERIFIED) { ?>
@@ -17,24 +17,28 @@
 
       <?php } elseif($domain_profile->getState() == DomainProfileTable::STATE_VERIFIED) { ?>
       	<?php echo __('Verified!'); ?>&nbsp;
-        <?php if ($domain_profile->hasSubscriber() == true) { ?>
-      		<?php echo link_to('Advanced notifications ok!', 'domain_profiles/subscribe_api?host_id='.$domain_profile->getId() , array('class' => 'colorbox')); ?>
-      	<?php } else { ?>
-      		<?php echo link_to('Setup advanced notifications now!', 'domain_profiles/subscribe_api?host_id='.$domain_profile->getId() , array('class' => 'colorbox')); ?>
-      	<?php } ?>
-
-      	<?php
-          if ($sf_user->hasCredential("beta_tester")) {
-            echo " | " . link_to(__("Add tracking url"), "domain_profiles/tracking_url?host_id=".$domain_profile->getId());
-          }
-      	?>
+      	<?php if ($domain_profile->hasSubscriber() == true) { ?>
+          <?php echo link_to('Notifications enabled!', 'domain_profiles/subscribe_api?host_id='.$domain_profile->getId() , array('class' => 'colorbox')); ?>
+        <?php } ?>
       <?php } ?>
 
     </td>
-    <td><a href="<?php echo url_for('domain_profiles/get_verify_code?host_id='.$domain_profile->getId()) ?>" class="get-verify-code"><img src="/img/getcode-icon.gif" width="24" height="24" alt="Get Code" title="Get Code" /></a></td>
-		<td class="grey">
-	    <?php if($domain_profile->isPending()){ ?>
-	    		<a class="verify-verify-code" href="<?php echo url_for('domain_profiles/verify?host_id='.$domain_profile->getId()) ?>"><img src="/img/verify-icon.gif" width="24" height="24" alt="Verify" title="Verify" /></a>
-	   	<?php } ?>
+    <td class="flattr">flattr</td>
+		<td class="last grey">
+		  <?php
+		  if ($domain_profile->getState() == DomainProfileTable::STATE_VERIFIED) {
+        if ($domain_profile->hasSubscriber() != true) {
+          echo link_to('<i class="icon-bullhorn icon-large"></i>', 'domain_profiles/subscribe_api?host_id='.$domain_profile->getId() , array('class' => 'colorbox', 'title' => 'Setup advanced notifications now!'));
+        }
+        echo " ";
+        if ($sf_user->hasCredential("beta_tester")) {
+          echo link_to('<i class="icon-bar-chart icon-large"></i>', "domain_profiles/tracking_url?host_id=".$domain_profile->getId(), array('title' => __("Add tracking url")));
+        }
+		  }
+      ?>
+		  <a href="<?php echo url_for('domain_profiles/get_verify_code?host_id='.$domain_profile->getId()) ?>" class="get-verify-code" title="<?php echo __("Get verification-code"); ?>"><i class="icon-download-alt icon-large"></i></a>
+		  <?php if($domain_profile->isPending()){ ?>
+          <a class="verify-verify-code" href="<?php echo url_for('domain_profiles/verify?host_id='.$domain_profile->getId()) ?>"><i class="icon-check icon-large"></i></a>
+      <?php } ?>
+		  <a class="delete-verify-code" href="<?php echo url_for('domain_profiles/delete?host_id='.$domain_profile->getId()) ?>" title="<?php echo __("Delete Domain"); ?>"><i class="icon-trash icon-large"></i></a>
 		</td>
-		<td class="last"><a class="delete-verify-code" href="<?php echo url_for('domain_profiles/delete?host_id='.$domain_profile->getId()) ?>"><img src="/img/delete-icon.gif" width="24" height="24" alt="Delete" /></a></td>
