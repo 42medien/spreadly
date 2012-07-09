@@ -584,15 +584,15 @@ background: linear-gradient(#313131, #020202); /*future CSS3 browsers*/
 behavior: url(css/PIE.htc);}
 .claimtable-head table td {width:135px; color:#fff; text-align:center; line-height:56px; height:56px; font-size:16px; font-weight:bold;}
 .claimtable-head table {width:auto;}
-.claimtable-head .first {width:185px;  padding-left:10px;}
-.claimtable-head .status {width:277px; padding-right:3px;}
+.claimtable-head .first {width:200px;  padding-left:10px;}
+.claimtable-head .status {width:330px; padding-right:3px;}
+.claimtable-head .flattr {width:170px; padding-right:3px;}
 .claimtable-head .generate {width:132px; padding-right:3px;}
 
-.yiidtable-publish .custofeature-table td {width:125px; height:44px; padding:0px;}
-.yiidtable-publish .custofeature-table td.verify-statecol{ width: 260px;}
+.yiidtable-publish .custofeature-table td {height:44px; padding:0px;}
+.yiidtable-publish .custofeature-table td.verify-statecol{ width: 270px;}
 .yiidtable-publish .custofeature-table .firstrow td {height:47px;}
-.yiidtable-publish .custofeature-table .first {width:175px; text-align:center; padding:0px;}
-.yiidtable-publish .custofeature-table .status {width:342px; font-weight:normal;}
+.yiidtable-publish .custofeature-table .first {width:180px; text-align:center; padding:0px;}
 .custofeature-table .status img {vertical-align:middle;}
 
 
@@ -834,15 +834,15 @@ behavior: url(css/PIE.htc);
 *:first-child+html .address-input input {padding:5px 10px; margin:-1px 0px;}
 
 #select-tags, #select-domain-profile-id{
-  border:solid 1px #bababa; 
-  color:#252525; 
-  vertical-align:top; 
-  behavior: url(css/PIE.htc); 
-  display:inline-block; 
-  webkit-border-radius:6px; 
-  -moz-border-radius:6px; 
+  border:solid 1px #bababa;
+  color:#252525;
+  vertical-align:top;
+  behavior: url(css/PIE.htc);
+  display:inline-block;
+  webkit-border-radius:6px;
+  -moz-border-radius:6px;
   border-radius:6px;
-  padding: 10px; 
+  padding: 10px;
   width: 93%;
 }
 
@@ -867,15 +867,15 @@ behavior: url(css/PIE.htc);
 }
 
 .kampagne-checklist #select-tags ul#tag-choice-dp-list{
-    width: 190px;	
+    width: 190px;
 	}
-	
+
 #tag-choice-user-list li,
 #tag-choice-dp-list li{
   margin-right: 5px;
   margin-bottom: 5px;
   overflow: hidden;
-  
+
 }
 
 .kampagne-checklist #select-tags ul#tag-choice-dp-list li{
@@ -883,7 +883,7 @@ behavior: url(css/PIE.htc);
     margin-right: 0px;
     width: 200px;
   }
-  
+
 #tag-choice-stats-container div{
   margin-bottom: 10px;
 }
@@ -906,12 +906,12 @@ behavior: url(css/PIE.htc);
 
 #tag-choice-stats-container .icon-normal{
   font-size: 13px;
-  color: #272727;  
+  color: #272727;
 }
 
 #tag-choice-stats-container .icon-medium{
   font-size: 16px;
-  color: #272727;  
+  color: #272727;
 }
 #tag-choice-stats-container .icon-chevron-right,#tag-choice-stats-container .icon-plus{
   color: #bbb;
