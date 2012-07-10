@@ -226,4 +226,37 @@ class domain_profilesActions extends sfActions
 
     $this->domainProfile = $domainProfile;
   }
+
+  public function executeAdd_flattr(sfWebRequest $request) {
+    $this->info = $this->error = null;
+
+    $host_id = $request->getParameter("host_id", null);
+
+    if (!$host_id) {
+      $this->redirect('domain_profiles/index');
+    }
+
+    $domainProfile = DomainProfileTable::getInstance()->find($host_id);
+
+    if ($request->getMethod() == "POST") {
+      $flattr_account = $request->getParameter("flattr_account", null);
+      if (trim($flattr_account)) {
+        if (UrlUtils::checkUrlAvailability("http://flattr.com/submit/auto?url=".urlencode($domainProfile->getDomain())."&flattr_id=".$flattr_account)) {
+          $domainProfile->setFlattrAccount($flattr_account);
+          $domainProfile->save();
+
+          $this->info = "flattr-account successfully added.";
+        } else {
+          $this->error = "URL is not valid.";
+        }
+      } else {
+        $domainProfile->setFlattrAccount(null);
+        $domainProfile->save();
+
+        $this->info = "flattr-account deleted.";
+      }
+    }
+
+    $this->domainProfile = $domainProfile;
+  }
 }

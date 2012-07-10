@@ -6,7 +6,6 @@
 	    	<a href="<?php echo url_for('analytics/domain_statistics?domainid='.$domain_profile->getId()) ?>"><?php echo $domain_profile->getDomain() ?></a>
 	    <?php } ?>
 		</td>
-		<!-- td class="grey"><?php //echo image_tag(get_state_image_src($domain_profile), array('width' => '24', 'height' => '24')); ?></td -->
 		<td class="grey verify-statecol">
 			<?php if($domain_profile->getState() == DomainProfileTable::STATE_PENDING) { ?>
       	<?php if(isset($pHasError) && $pHasError != false) { ?>
@@ -16,14 +15,20 @@
         <?php }?>
 
       <?php } elseif($domain_profile->getState() == DomainProfileTable::STATE_VERIFIED) { ?>
-      	<?php echo __('Verified!'); ?>&nbsp;
+      	<i class="icon-ok icon-large"></i> <?php echo __('Verified!'); ?>&nbsp;
       	<?php if ($domain_profile->hasSubscriber() == true) { ?>
-          <?php echo link_to('Notifications enabled!', 'domain_profiles/subscribe_api?host_id='.$domain_profile->getId() , array('class' => 'colorbox')); ?>
+          <i class="icon-ok icon-large"></i> <?php echo link_to('Notifications enabled!', 'domain_profiles/subscribe_api?host_id='.$domain_profile->getId() , array('class' => 'colorbox')); ?>
         <?php } ?>
       <?php } ?>
 
     </td>
-    <td class="flattr">flattr</td>
+    <td class="flattr">
+    <?php if ($domain_profile->getFlattrAccount()) { ?>
+      <i class="icon-ok icon-large"></i> <?php echo link_to(__("Account") . ": " . $domain_profile->getFlattrAccount(), "domain_profiles/add_flattr", array("title" => __("edit flattr-account"), "query_string" => "host_id=".$domain_profile->getId())); ?>
+    <?php } else { ?>
+      <i class="icon-plus-sign"></i> <?php echo link_to(__("add flattr-account"), "domain_profiles/add_flattr", array("title" => __("add flattr-account"), "query_string" => "host_id=".$domain_profile->getId())); ?>
+		<?php } ?>
+	  </td>
 		<td class="last grey">
 		  <?php
 		  if ($domain_profile->getState() == DomainProfileTable::STATE_VERIFIED) {
@@ -38,7 +43,7 @@
       ?>
 		  <a href="<?php echo url_for('domain_profiles/get_verify_code?host_id='.$domain_profile->getId()) ?>" class="get-verify-code" title="<?php echo __("Get verification-code"); ?>"><i class="icon-download-alt icon-large"></i></a>
 		  <?php if($domain_profile->isPending()){ ?>
-          <a class="verify-verify-code" href="<?php echo url_for('domain_profiles/verify?host_id='.$domain_profile->getId()) ?>"><i class="icon-check icon-large"></i></a>
+          <a class="verify-verify-code" href="<?php echo url_for('domain_profiles/verify?host_id='.$domain_profile->getId()) ?>" title="<?php echo __("Verify domain"); ?>"><i class="icon-check icon-large"></i></a>
       <?php } ?>
 		  <a class="delete-verify-code" href="<?php echo url_for('domain_profiles/delete?host_id='.$domain_profile->getId()) ?>" title="<?php echo __("Delete Domain"); ?>"><i class="icon-trash icon-large"></i></a>
 		</td>
