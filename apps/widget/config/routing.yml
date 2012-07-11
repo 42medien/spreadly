@@ -10,6 +10,10 @@ widget_like_full:
   url:    /like
   param:  { module: like, action: index }
 
+like_get_images:
+  url:    /like/get_images
+  param:  { module: like, action: get_images }
+
 widget_likes:
   url:    /likes
   param:  { module: likes, action: index }
@@ -77,10 +81,10 @@ default_deal:
 coupon:
   url:    /coupon
   param:  { module: deal, action: coupon }
-  
+
 default:
   url:   /:module/:action/*
-  
+
 linkwrapper:
   url:   /urlwrapper
-  param:  { module: linkwrapper, action: index }    
+  param:  { module: linkwrapper, action: index }
