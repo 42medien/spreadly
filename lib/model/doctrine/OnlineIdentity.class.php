@@ -131,4 +131,12 @@ class OnlineIdentity extends BaseOnlineIdentity
     $this->setUseAsAvatar(true);
     $this->save();
   }
+
+  public function isFlattr() {
+    if ($this->getCommunity()->getName() == "flattr") {
+      return true;
+    }
+
+    return false;
+  }
 }
