@@ -113,7 +113,7 @@ prod:
       db_id_col:       sess_id
       db_time_col:     sess_time
       db_data_col:     sess_data
-      host:            donkeykong
+      host:            mongodb
       port:            27017
       db_name:         yiid
       collection_name:   session
