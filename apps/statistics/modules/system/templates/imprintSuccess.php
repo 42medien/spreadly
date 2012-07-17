@@ -4,7 +4,7 @@
   <p class="text_unimportant">Verantwortlich für den Internetauftritt Spreadly sowie der damit verbundenen Angebote und Dienstleistungen ist</p>
 
   <p>ekaabo GmbH<br/>
-    Grundelbachstr. 84<br/>
+    Schulstrasse 8<br/>
     69469 Weinheim<br/>
     Telefon: +49 - 6201 - 845 20 0<br/>
     Telefax: +49 - 6201 - 845 20 29<br/>
