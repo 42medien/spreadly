@@ -10,7 +10,6 @@ class FlattrImportClient {
    * import twitter contacts
    *
    * @author Matthias Pfefferle
-   * @author Karina Mies
    */
   public static function importContacts($pOnlineIdentity) {
     // so long...

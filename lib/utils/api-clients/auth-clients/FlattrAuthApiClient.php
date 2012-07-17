@@ -55,7 +55,7 @@ class FlattrAuthApiClient extends AuthApi {
     }
 
     // save new token
-    AuthTokenTable::saveToken($lUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['access_token'], null, true);  // signup,add new
+    AuthTokenTable::saveToken($lUser->getId(), $lOnlineIdentity->getId(), $lAccessToken["access_token"], null, true);  // signup,add new
 
     return $lUser;
   }
@@ -103,7 +103,7 @@ class FlattrAuthApiClient extends AuthApi {
     // use api complete informations
     $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject, $pUser, $lIdentifier); // signup,add new
 
-    AuthTokenTable::saveToken($pUser->getId(), $lOnlineIdentity->getId(), $lParamsArray['access_token'], null, true);  // signup,add new
+    AuthTokenTable::saveToken($pUser->getId(), $lOnlineIdentity->getId(), $lAccessToken["access_token"], null, true);  // signup,add new
 
     return $lOnlineIdentity;
   }

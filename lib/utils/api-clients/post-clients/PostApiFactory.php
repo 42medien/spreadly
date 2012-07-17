@@ -44,6 +44,9 @@ class PostApiFactory {
       case "xing":
         return new XingPostApiClient();
         break;
+      case "flattr":
+        return new FlattrPostApiClient();
+        break;
       default:
         return null;
     }
