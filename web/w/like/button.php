@@ -27,96 +27,6 @@ $wu->trackUser();
       -moz-user-select:none;
       -webkit-user-select:none;
     }
-    /* default skin*/
-    .container {
-      display: inline-block;
-      margin: 2px 5px;
-    }
-    .button {
-      display: inline-block;
-      position: relative;
-      color: <?php echo $wu->getHexColor(); ?>;
-      color: hsl(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,50%);  /* #B44A7A */
-      line-height: 18px;
-      font-weight: bold;
-      text-rendering: optimizeLegibility;
-      -webkit-font-smoothing: antialiased;
-      padding: 0 4px 0 21px;
-      border: 1px solid <?php echo $wu->getHexColor(); ?>;
-<?php if ($wu->getType() == "default") { ?>
-      padding-left: 1px;
-<?php } ?>
-      height: 18px;
-      border: 1px solid hsl(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,73%);
-      border-bottom-color: hsl(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,50%);
-      border-top-color: hsl(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,81%);
-      border-radius: 3px;
-      background: #ffffff url('//s3.amazonaws.com/spread.ly/img/button/s.png') no-repeat 130% -20px;
-      text-decoration: none;
-      text-transform: uppercase;
-      box-shadow: 0 -1px 1px 1px hsla(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,100%,.7) inset, 0 -4px 8px 0 hsla(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,50%,.5) inset, 0 0 2px 8px hsla(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,0%,0);
-      text-shadow: 0 1px 1px #fff, 0 -1px 1px hsla(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,50%,.25);
-      -webkit-transition: box-shadow .3s ease-out, text-shadow .3s ease-out, background-position .6s ease-out;
-      -moz-transition: box-shadow .3s ease-out, text-shadow .3s ease-out, background-position .6s ease-out;
-    }
-    .button:before {
-<?php if ($wu->getType() != "default") { ?>
-      background: hsla(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,50%,1) url('//s3.amazonaws.com/spread.ly/img/button/l.png') no-repeat 0px 0px;
-      box-shadow: 0 1px 1px 0px hsla(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,0%,.8) inset;
-      content:'';
-      width: 16px;
-      height: 16px;
-      display: block;
-      position: absolute;
-      top: 1px;
-      left: 1px;
-      border-radius: 2px;
-      opacity:1;
-<?php } else { ?>
-      background: none repeat scroll 0 0 transparent !important;
-      box-shadow: none !important;
-<?php } ?>
-    }
-
-    .button img {
-      background: none repeat scroll 0 0 #FFFFFF;
-      border-radius: 2px 2px 2px 2px;
-      box-shadow: 0 0 0 1px rgba(76, 76, 76, 0.2) inset;
-      height: 16px;
-      margin: 1px 2px 0 0;
-      padding: 0;
-      vertical-align: top;
-      width: 16px;
-      border: none;
-    }
-
-    .button:focus, .button:hover{
-      outline: none;
-      background-position: -30% 20px;
-      border: 1px solid hsl(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,65%);
-      border-top-color: hsl(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,46%);
-      box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,50%,.3) inset, 0 0 4px 0 hsla(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,30%,.5);
-      text-shadow: 0 1px 1px hsla(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,50%,.25), 0 -1px 1px #fff;
-      -webkit-transition: box-shadow .3s ease-in, text-shadow .3s ease-in, background-position .6s ease-out;
-      -moz-transition: box-shadow .3s ease-in, text-shadow .3s ease-in, background-position .6s ease-out;
-    }
-    .button:active {
-      background-position: -30% 20px;
-      background-color: hsla(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,70%,1);
-      color: #fff;
-      border: 1px solid hsl(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,30%);
-      border-top-color: hsl(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,30%);
-      box-shadow: 0 0 0 1px #fff inset, 0 6px 12px 0 hsla(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,50%,.3) inset, 0 0 4px 0 hsla(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,30%,.5);
-      text-shadow: 0 0px 0px hsla(<?php echo $wu->getH(); ?>,<?php echo $wu->getS(); ?>%,50%,0), 0 0px 0px #fff;
-    }
-    .button:focus:before, .button:hover:before{
-      opacity:.85;
-      width: 14px;
-      height: 14px;
-      top:2px;
-      left:2px;
-      background-position: -1px -1px;*/
-    }
     .container b {
       color: #aaa;
       text-shadow: 0 1px 0 hsla(0,0%,100%,1), 0 -1px 0 hsla(0,0%,0%,.4);
@@ -126,6 +36,7 @@ $wu->trackUser();
       margin-left: 9px;
       background: #efefef;
       cursor: default;
+      top: -6px;
       position: relative;
       border-radius: 3px;
       font-weight: normal;
@@ -152,6 +63,10 @@ $wu->trackUser();
       background: #fff;
       color: #666;
     }
+    a, a:hover, a:visited, a img {
+	  border: 0px none;
+	  text-decoration: none;
+	}
     <?php if ($wu->showFriends()): ?>
     ul.icons {
       list-style-type: none;
@@ -172,45 +87,19 @@ $wu->trackUser();
       height: 30px;
       width: 30px;
     }
-	 a, a img {
-	      border: 0px none;
-	      text-decoration: none;
-	    }
     <?php endif; ?>
   </style>
-      	<!--[if IE]>
-      	<style type="text/css">
-      	.button{
-      		background-color: <?php echo $wu->alter_brightness($wu->getHexColor(), +50); ?>;
-
-      	}
-
-      	.container b{
-      		margin-left: 4px;
-      		padding-left: 2px;
-      	}
-
-				.container b:before{
-					display: none;
-				}
-				</style>
-			<![endif]-->
-
 
   <link rel="shortcut icon" href="//s3.amazonaws.com/spread.ly/img/favicon.ico" type="image/x-icon">
 </head>
 <body>
   <div class="container">
-    <a class="button" href="<?php echo $wu->getPopupUrl() ?>" onclick="window.open(this.href, 'popup', 'width=580,height=600,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" target="_blank">
-<?php if ($wu->getType() == "default") { ?>
-      <img src="//s-static.ak.facebook.com/rsrc.php/yi/r/q9U99v3_saj.ico">
-      <img src="//twitter.com/phoenix/favicon.ico">
-      <img src="//ssl.gstatic.com/s2/oz/images/faviconr2.ico">
-      <img src="//s3.licdn.com/scds/common/u/img/favicon_v3.ico">
-<?php } elseif ($wu->getType() == "animated") { ?>
-      <img src="//s3.amazonaws.com/spread.ly/img/button/as.gif" />
-<?php } ?>
-      <?php echo $wu->getLabel(); ?>
+    <a class="button" href="<?php echo $wu->getPopupUrl() ?>" title="share it with your friends and get incentives" onclick="window.open(this.href, 'popup', 'width=580,height=600,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" target="_blank">
+      <img src="/img/button/28/fb.png" alt="share it with your facebook friends">
+      <img src="/img/button/28/tw.png" alt="share it with your twitter friends">
+      <img src="/img/button/28/li.png" alt="share it with your linkedin friends">
+      <img src="/img/button/28/sl.png" alt="...and get a deal">
+      <?php //echo $wu->getLabel(); ?>
     </a>
     <?php if ($wu->showCounter()) { ?><b><?php echo $wu->getActivityCount() ?></b><?php } ?>
   </div>
