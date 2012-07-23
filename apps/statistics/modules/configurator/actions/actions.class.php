@@ -49,8 +49,6 @@ class configuratorActions extends sfActions
 		$lParams = $request->getParameter('likebutton');
     $lUrl = "http://www.spreadly.com";
     $lSocial = 0;
-    $lLabel = "like";
-    $lColor = '973765';
 
 		if(isset($lParams['url']) && UrlUtils::isUrlValid($lParams['url'])){
       $lUrl = $lParams['url'];
@@ -60,25 +58,17 @@ class configuratorActions extends sfActions
     	$lSocial = 1;
     }
 
-    if(isset($lParams['text'])){
-    	$lLabel = $lParams['text'];
-    }
-
-   	if(isset($lParams['color'])){
-    	$lColor = $lParams['color'];
-    }
-
   	$lService = (isset($lParams['service']))?$lParams['service']:null;
   	if($lService) {
-  		$lHeight = ($lSocial == 1)?"60": "24";
+  		$lHeight = ($lSocial == 1)?"60": "30";
 
-	  	$lReturn['iframe'] = $this->getPartial('configurator/widget_'.$lService, array('pUrl' => $lUrl, 'pSocial' => $lSocial, 'pHeight' => $lHeight, 'pColor' => $lColor, 'pLabel' => $lLabel));
+	  	$lReturn['iframe'] = $this->getPartial('configurator/widget_'.$lService, array('pUrl' => $lUrl, 'pSocial' => $lSocial, 'pHeight' => $lHeight));
   	} else {
 
   		if($lSocial == 0) {
-	  		$lReturn['iframe'] = $this->getPartial('configurator/widget_like_code', array('pUrl' => $lUrl, 'pColor' => $lColor, 'pLabel' => $lLabel));
+	  		$lReturn['iframe'] = $this->getPartial('configurator/widget_like_code', array('pUrl' => $lUrl));
   		} else {
-	  		$lReturn['iframe'] = $this->getPartial('configurator/widget_full_code', array('pUrl' => $lUrl, 'pColor' => $lColor, 'pLabel' => $lLabel));
+	  		$lReturn['iframe'] = $this->getPartial('configurator/widget_full_code', array('pUrl' => $lUrl));
   		}
   	}
 
@@ -91,8 +81,6 @@ class configuratorActions extends sfActions
     $this->getResponse()->setContentType('application/json');
     $lParams = $request->getParameter('likebutton');
     $lUrl = "http://www.spreadly.com";
-    $lLabel = "like";
-    $lColor = '973765';
 
     $lSocial = 0;
 		if(isset($lParams['url']) && UrlUtils::isUrlValid($lParams['url'])){
@@ -112,7 +100,7 @@ class configuratorActions extends sfActions
 
   	$lService = (isset($lParams['service']))?$lParams['service']:null;
 
-   	$lReturn['iframe'] = $this->getPartial('configurator/preview_widgets', array('pUrl' => $lUrl, 'pSocial' => $lSocial, 'pService' => $lService, 'pLabel' => $lLabel, 'pColor' => $lColor));
+   	$lReturn['iframe'] = $this->getPartial('configurator/preview_widgets', array('pUrl' => $lUrl, 'pSocial' => $lSocial, 'pService' => $lService));
     return $this->renderText(json_encode($lReturn));
   }
 }

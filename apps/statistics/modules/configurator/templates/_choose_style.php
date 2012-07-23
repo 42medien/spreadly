@@ -28,25 +28,6 @@
 												</label>
 											</div>
 											<div class="meta-text"><?php echo __('URL-Beispiel: <strong>http://</strong>www.example.com'); ?></div>
-											<?php if (!$pService) {?>
-												<div class="clearfix">
-													<label class="textfield">
-													<span>
-														<input type="text" class="wd260" name="likebutton[text]" id="likebutton_text" value="<?php echo __('Like'); ?>" />
-													</span>
-													</label>
-												</div>
-												<div class="meta-text"><?php echo __('Wählen Sie den Text für Ihren Button'); ?></div>
-
-												<div class="clearfix">
-													<label class="textfield">
-													<span>
-														<input type="text" class="wd260" name="likebutton[color]" id="likebutton_color" value="973765" />
-													</span>
-													</label>
-												</div>
-												<div class="meta-text"><?php echo __('Wählen Sie die Farbe für Ihren Button'); ?></div>
-											<?php } ?>
 										<?php } else { ?>
 											<div class="clearfix">
 												<label class="textfield"><span>
@@ -54,25 +35,6 @@
 													</span>
 												</label>
 											</div>
-												<div class="meta-text">&nbsp;</div>
-												<div class="clearfix">
-													<label class="textfield">
-													<span>
-														<input type="text" class="wd260" name="likebutton[text]" id="likebutton_text" value="<?php echo __('Like'); ?>" />
-													</span>
-													</label>
-												</div>
-												<div class="meta-text"><?php echo __('Choose the text of your button'); ?></div>
-
-												<div class="clearfix">
-													<label class="textfield">
-													<span>
-														<input type="text" class="wd260" name="likebutton[color]" id="likebutton_color" value="973765" />
-													</span>
-													</label>
-												</div>
-												<div class="meta-text"><?php echo __('Choose the color of your button. Click into the textfield and select.'); ?></div>
-
 										<?php } ?>
 										<div class="stylechoose_box clearfix">
 											<div class="group radiobtn_list alignleft">
