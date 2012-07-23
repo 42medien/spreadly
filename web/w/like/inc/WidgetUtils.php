@@ -16,10 +16,7 @@ class WidgetUtils {
   private $aYiidActivity = null;
   private $aShowFriends = false;
   private $aCounter = true;
-  private $aHexColor = "1C2666";
-  private $aColor = null;
   private $aLabel = "Like";
-  private $aType = "default";
 
   public function __construct() {
     if (isset($_GET['url']) && !empty($_GET['url'])) {
@@ -37,22 +34,12 @@ class WidgetUtils {
       $this->aShowFriends = true;
     }
 
-    if (isset($_GET['type']) && !empty($_GET['type'])) {
-      $this->aType = $_GET['type'];
-    }
-
     if (isset($_GET['label']) && !empty($_GET['label'])) {
       $this->aLabel = $_GET['label'];
     }
 
     if (isset($_GET['counter'])) {
       $this->aCounter = (bool)urldecode(@$_GET['counter']);
-    }
-
-    if (isset($_GET['color']) && !empty($_GET['color'])) {
-      $color = $this->aHexColor = $_GET['color'];
-    } else {
-      $color = $this->aHexColor = $this->aHexColor;
     }
 
     $this->aTitle = urldecode(@$_GET['title']);
@@ -62,11 +49,10 @@ class WidgetUtils {
     $this->aUserId = $this->extractUserIdFromSession();
     $this->aSocialObject = $this->getSocialObjectByUrl();
     $this->aYiidActivity = $this->getYiidActivityBySocialObject();
-    $this->aColor = $this->rgb2hsl($color);
   }
 
   public function getPopupUrl() {
-    return LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time()."&title=".urlencode($this->aTitle)."&description=".urlencode($this->aDescription)."&photo=".urlencode($this->aPhoto)."&tags=".urlencode($this->aTags)."&url=".urlencode($this->aUrl)."&clickback=".urlencode($this->extractClickback())."&color=".urlencode($this->aHexColor);
+    return LikeSettings::JS_POPUP_PATH."?ei_kcuf=".time()."&title=".urlencode($this->aTitle)."&description=".urlencode($this->aDescription)."&photo=".urlencode($this->aPhoto)."&tags=".urlencode($this->aTags)."&url=".urlencode($this->aUrl)."&clickback=".urlencode($this->extractClickback());
   }
 
   public function showFriends() {
@@ -81,10 +67,6 @@ class WidgetUtils {
     return $this->aUserId;
   }
 
-  public function getType() {
-    return $this->aType;
-  }
-
   public function getSocialObject() {
     return $this->aSocialObject;
   }
@@ -95,10 +77,6 @@ class WidgetUtils {
 
   public function showCounter() {
     return $this->aCounter;
-  }
-
-  public function getHexColor() {
-    return "#".$this->aHexColor;
   }
 
   public function getYiidActivity() {
@@ -492,91 +470,5 @@ class WidgetUtils {
     }
 
     return intval(0);
-  }
-
-  public function getH() {
-    return round($this->aColor[0] * 360);
-  }
-
-  public function getS() {
-    return $this->aColor[1] * 100;
-  }
-
-  public function getL() {
-    return $this->aColor[2] * 100;
-  }
-
-  public function rgb2hsl($rgb){
-    $rgb = str_replace("#", "", $rgb);
-
-    $redhex  = substr($rgb,0,2);
-    $greenhex = substr($rgb,2,2);
-    $bluehex = substr($rgb,4,2);
-
-    $var_r = (hexdec($redhex)) / 255;
-    $var_g = (hexdec($greenhex)) / 255;
-    $var_b = (hexdec($bluehex)) / 255;
-    $var_min = min($var_r,$var_g,$var_b);
-    $var_max = max($var_r,$var_g,$var_b);
-    $del_max = $var_max - $var_min;
-
-    $l = ($var_max + $var_min) / 2;
-
-    if ($del_max == 0) {
-      $h = 0;
-      $s = 0;
-    } else {
-      if ($l < 0.5) {
-        $s = $del_max / ($var_max + $var_min);
-      } else {
-        $s = $del_max / (2 - $var_max - $var_min);
-      };
-
-      $del_r = ((($var_max - $var_r) / 6) + ($del_max / 2)) / $del_max;
-      $del_g = ((($var_max - $var_g) / 6) + ($del_max / 2)) / $del_max;
-      $del_b = ((($var_max - $var_b) / 6) + ($del_max / 2)) / $del_max;
-
-      if ($var_r == $var_max) {
-        $h = $del_b - $del_g;
-      } elseif ($var_g == $var_max) {
-        $h = (1 / 3) + $del_r - $del_b;
-      } elseif ($var_b == $var_max) {
-        $h = (2 / 3) + $del_g - $del_r;
-      };
-
-      if ($h < 0) {
-        $h += 1;
-      };
-
-      if ($h > 1) {
-        $h -= 1;
-      };
-    };
-
-    return array($h, $s, $l);
-  }
-
-  public function alter_brightness($colourstr, $steps) {
-    $colourstr = str_replace('#','',$colourstr);
-
-    $rhex = substr($colourstr,0,2);
-    $ghex = substr($colourstr,2,2);
-    $bhex = substr($colourstr,4,2);
-
-    $r = hexdec($rhex);
-    $g = hexdec($ghex);
-    $b = hexdec($bhex);
-
-    $r = dechex(max(0,min(255,$r + $steps)));
-    $g = dechex(max(0,min(255,$g + $steps)));
-    $b = dechex(max(0,min(255,$b + $steps)));
-
-    $r = str_pad($r,2,"0");
-    $g = str_pad($g,2,"0");
-    $b = str_pad($b,2,"0");
-
-    $cor = '#'.$r.$g.$b;
-
-    return $cor;
   }
 }
