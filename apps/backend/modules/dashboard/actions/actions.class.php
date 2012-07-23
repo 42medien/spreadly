@@ -154,8 +154,8 @@ class dashboardActions extends sfActions
 
     $data['top_urls'] = array_slice(MongoManager::getStatsDm()->getRepository("Documents\AnalyticsActivity")->groupByUrls($range[0], $range[1]), 0, 5);
 
-    $cb = new Chartbeat();
-    $data['current_popup_visitors_count'] = $cb->getVisitorsByDate($this->range);
+    //$cb = new Chartbeat();
+    //$data['current_popup_visitors_count'] = $cb->getVisitorsByDate($this->range);
 
 
     $data['current_pi_count'] = intval(VisitTable::countPisForDay($range[0]));
