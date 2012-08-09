@@ -21,3 +21,14 @@ ul.tags-list {
 ul.tags-list li {
   display: inline;
 }
+
+[class^="icon-"], [class*=" icon-"] {
+  background-image: none;
+  background-position: none;
+  background-repeat: no-repeat;
+  display: inline;
+  height: inherit;
+  line-height: inherit;
+  vertical-align: inherit;
+  width: inherit;
+}

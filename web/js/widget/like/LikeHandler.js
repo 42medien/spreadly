@@ -173,7 +173,7 @@ var LikeImageScroller = {
 
     //init the plugin
     jQuery("#myscroll").scrollable({
-      //circular: true
+      circular: true
     });
 
     //init the global apiobject with the plugins-api-object
@@ -189,9 +189,9 @@ var LikeImageScroller = {
     debug.log("[LikeImageScroller][init]");     
     //on seek means on changing the showed image (like onscroll)
     LikeImageScroller.aApiObj.onSeek(function() {
-      //update the counter
-     // LikeImageCounter.update(this.getIndex());
-      //update the hidden image value into the form with the path of the current selected image
+      // update the counter
+      // LikeImageCounter.update(this.getIndex());
+      // update the hidden image value into the form with the path of the current selected image
       WidgetLikeForm.setImageValue(LikeImage.getImgPath(this.getIndex()));
     });
   },

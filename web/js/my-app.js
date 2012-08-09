@@ -1,5 +1,3 @@
-$('.typeahead').typeahead({
-  source: function (typeahead, query) {
-
-  }
-});
+$('body').tooltip({
+  selector: "a[rel=tooltip]"
+})

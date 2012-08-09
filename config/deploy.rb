@@ -7,9 +7,9 @@ set :scm,         :subversion
 set :scm_username, "yiid"
 set :scm_password, "yiidyiidyiid"
 
-role :web,    "ekaabo.crcl.ws"                        # Your HTTP server, Apache/etc
-set :user, 'ekaabo'
-set :deploy_directory, "spreadly/www/httpdocs/"
+role :web,    "spreadly.com"                        # Your HTTP server, Apache/etc
+set :user, 'root'
+set :deploy_directory, "/var/www"
 set :current_dir, "current"
 
 set  :keep_releases,  5
@@ -141,7 +141,9 @@ namespace :deploy do
   desc "Customize the finalize_update task to work with symfony."
   task :finalize_update, :except => { :no_release => true } do
     run "mkdir -p #{latest_release}/cache"
+    run "mkdir -p #{latest_release}/log"
     run "chmod -R 755 #{latest_release}/cache"
+    run "chmod -R 755 #{latest_release}/log"
     run "chmod -R 777 #{latest_release}/lib/mongo/Hydrators"
 
     # Share common files & folders

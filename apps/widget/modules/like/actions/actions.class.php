@@ -81,6 +81,7 @@ class likeActions extends sfActions {
   	$this->getResponse()->setContentType('application/json');
     $lUrl = $request->getParameter("url");
     $lImages = ImageParser::fetch($lUrl);
+
     $lReturn['count'] = count($lImages);
     $lReturn['html'] = $this->getPartial('like/meta_images_list', array('pImages' => $lImages));
     return $this->renderText(json_encode($lReturn));

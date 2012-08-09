@@ -1,37 +1,41 @@
 <?php use_helper('Text'); ?>
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title><?php echo __('Spreadly - We monetize Social Sharing'); ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="Spreadly consists of sharing button widgets that enable users to share content into a wide range of social networks simultanously. Besides that, Spreadly offers a sophisticated functionality to reward users for their likes." />
     <meta name="keywords" content="sharing,sharebutton,like,likebutton,deal,dealbutton,facebook,linkedin,twitter,buzz" />
-    <link rel="stylesheet" type="text/css" href="/css/widget/popup.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="/css/widget/button.css" media="screen" />
-    <!-- link rel="stylesheet" type="text/css" href="/css/widget/popup-grey.css" media="screen" / -->
   	<link rel="shortcut icon" href="https://s3.amazonaws.com/spread.ly/img/favicon.ico" type="image/x-icon">
 
-    <!--[if lt IE 9]>
-      <link rel="stylesheet" type="text/css" href="/css/popup-ie.css" />
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
+    <script type="text/javascript" src="/js/100_main/include/widget-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
     <script type="text/javascript">var _sf_startpt=(new Date()).getTime();</script>
-    <script type="text/javascript" src="/js/100_main/include/widget-<?php echo sfConfig::get('app_release_name') ?>.min.js"></script>
-    <!-- script type="text/javascript" src="/js/widget/like/LikeHandler.js"></script -->
-
-    <?php include_partial('global/custom_css'); ?>
+    
+    <script type="text/javascript" src="/js/main.js"></script>
+    
+    <!--[if !IE]><!-->
+        <link rel="stylesheet" type="text/css" href="/css/popup.css" />
+    <!--<![endif]-->
+    <!--[if IE 9]>
+        <link rel="stylesheet" type="text/css" href="/css/popup.css" />
+    <![endif]-->
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" type="text/css" href="/css/popup_ie.css" />
+    <![endif]-->
+    <!--[if lte IE 9]>
+      <script type="text/javascript" src="js/labelify.ie.js"></script>
+      <script type="text/javascript" src="js/custom.ie.js"></script>
+    <![endif]-->
   </head>
-  <body id="app-widget">
-    <div class="popupblock">
-      <div id="content-outer" role="main">
-        <?php echo $sf_content; ?>
-        <footer>
-					<?php include_partial('global/footer'); ?>
-        </footer>
+  <body>
+    <div class="sharebg">
+      <div class="closebtn">
+        <div class="closeico"></div>
       </div>
+      <?php echo $sf_content; ?>
+      <?php include_partial('global/footer'); ?>
     </div>
-
+    
 		<img id="general-ajax-loader" style="display: none;" src="/img/global/ajax-loader-bar-circle.gif" />
 	  <script  type="text/javascript">
 	    jQuery(document).ready( function() {
