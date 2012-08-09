@@ -1,6 +1,6 @@
 <?php use_helper("CustomTags"); ?>
 <div class="page-header">
-  <h1><?php echo __("How big is your penis?"); ?></h1>
+  <h1><?php echo __("All about you likes!"); ?></h1>
 </div>
 
 <div class="hero-unit">
@@ -39,7 +39,7 @@
       <tbody>
       <?php foreach($activities as $activity) { ?>
         <tr>
-          <td><?php echo $activity->getUrl(); ?></td>
+          <td><?php echo link_to($activity->getUrl(), $activity->getUrl(), array("target" => "_blank")); ?></td>
           <td><?php echo $activity->getDate()->format( 'd.m.Y' ); ?></td>
           <td><?php echo $activity->getClickbacks(); ?></td>
           <td><?php echo $activity->getNetworkWithMostClickbacks(); ?></td>

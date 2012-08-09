@@ -64,7 +64,12 @@
 
       <hr />
       <footer>
-        <p>&copy; ekaabo GmbH 2012</p>
+        <p>
+          &copy; ekaabo GmbH 2012 |
+          <?php echo link_to(__("Impressum"), "http://spreadly.com/imprint", array("target" => "_blank")); ?> |
+          <?php echo link_to(__("Privacy Policy"), "http://spreadly.com/system/privacy", array("target" => "_blank")); ?> |
+          <?php echo link_to(__("Terms of Services"), "http://spreadly.com/system/tos", array("target" => "_blank")); ?>
+        </p>
       </footer>
     </div>
 

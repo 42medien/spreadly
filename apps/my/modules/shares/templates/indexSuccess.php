@@ -40,15 +40,15 @@
         </thead>
         <tbody>
           <tr>
-            <td><?php echo __("Reach") ?></td>
+            <td><a rel="tooltip" title="<?php echo __("How many people have potentially seen this share."); ?>" href="#"><?php echo __("Reach") ?></a></td>
             <td><span class="badge badge-success"><?php echo $activity->getAnalyticsActivity()->getMediaPenetration(); ?></span></td>
           </tr>
           <tr>
-            <td><?php echo __("Clickbacks"); ?></td>
+            <td><a rel="tooltip" title="<?php echo __("How many people clicked on one of your shares."); ?>" href="#"><?php echo __("Clickbacks"); ?></a></td>
             <td><?php echo $activity->getCb()?$activity->getCb():0; ?></td>
           </tr>
           <tr>
-            <td><?php echo __("Spreads"); ?> <small><?php echo __("(different networks)"); ?></small></td>
+            <td><a rel="tooltip" title="<?php echo __("To how many networks you have shared this link."); ?>" href="#"><?php echo __("Spreads"); ?></a></td>
             <td><?php echo $activity->getAnalyticsActivity()->getShares(); ?></td>
           </tr>
         </tbody>
