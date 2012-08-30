@@ -32,7 +32,7 @@
 </div>
 <div class="<?php if ($sf_user->isAuthenticated()) { echo 'sharebtn-active'; } else { echo 'sharebtn'; } ?>">
   <div class="sharebtn_graphic">
-    <input type="<?php if ($sf_user->isAuthenticated()) { echo 'submit'; } else { echo 'button'; } ?>" name="shared" id="popup-like-button" value="share &amp; bookmark" />
+    <input type="<?php if ($sf_user->isAuthenticated()) { echo 'button'; } else { echo 'button'; } ?>" name="shared" id="popup-like-button" value="share &amp; bookmark" />
     <span></span>
   </div>
 </div>
