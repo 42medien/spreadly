@@ -29,3 +29,4 @@ data/sql/
 config/BatchConfiguration.class.php
 cache/
 log/
+web/api.php
