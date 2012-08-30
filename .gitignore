@@ -1,13 +1,21 @@
 .DS_Store
 *.log
+
+cache/
+log/
+data/sql/
+
 web/widget.php
 web/my.php
 web/shorturl.php
 web/index.php
 web/engineroom.php
 web/backend.php
+web/api.php
 web/css/include/
 web/js/100_main/include/
+
+config/BatchConfiguration.class.php
 
 lib/form/doctrine/base/
 lib/form/doctrine/sfDoctrineGuardPlugin/base/
@@ -24,9 +32,3 @@ lib/filter/doctrine/sfDoctrineActAsTaggablePlugin/base/
 lib/filter/doctrine/sfForkedDoctrineApplyPlugin/base/
 
 lib/mongo/Hydrators/
-
-data/sql/
-config/BatchConfiguration.class.php
-cache/
-log/
-web/api.php
