@@ -85,35 +85,7 @@ if ($lImages && count($lImages) > 0) {
 <div class="sh_networks">
   <div class="gradient">
     <h1>Choose the networks you want to post to</h1>
-    <div class="sh_networks_content">
-      <div class="add_networks">
-        <div class="networks_icon">
-          <?php include_component("like", "share_section", array('pError' => $pError)); ?>
-        </div>
-        <div class="addnet">
-          <ul>
-            <li class="plusbtn">
-              <ul>
-                <li><a href="#" class="fb" onclick="window.open('<?php echo url_for("@signinto?service=facebook"); ?>', 'auth_popup', 'width=580,height=450,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;"></a></li>
-                <li><a href="#" class="tw" onclick="window.open('<?php echo url_for("@signinto?service=twitter"); ?>', 'auth_popup', 'width=580,height=450,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;"></a></li>
-                <li><a href="#" class="xg" onclick="window.open('<?php echo url_for("@signinto?service=xing"); ?>', 'auth_popup', 'width=580,height=450,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;"></a></li>
-                <li><a href="#" class="lkd" onclick="window.open('<?php echo url_for("@signinto?service=linkedin"); ?>', 'auth_popup', 'width=580,height=450,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;"></a></li>
-                <!--li><a href="#" class="mrwong"></a></li>
-                <li><a href="#" class="yig"></a></li-->
-                <li><a href="#" class="tmbl" onclick="window.open('<?php echo url_for("@signinto?service=tumblr"); ?>', 'auth_popup', 'width=580,height=450,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;"></a></li>
-                <li><a href="#" class="fltr" onclick="window.open('<?php echo url_for("@signinto?service=flattr"); ?>', 'auth_popup', 'width=800,height=700,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;"></a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="<?php if ($sf_user->isAuthenticated()) { echo 'sharebtn-active'; } else { 'sharebtn'; } ?>">
-        <div class="sharebtn_graphic">
-          <input type="submit" name="shared" value="share &amp; bookmark" <?php if (!$sf_user->isAuthenticated()) { echo 'disabled="disabled"'; } ?>/>
-          <span></span>
-        </div>
-      </div>
-    </div>
+    <?php include_component("like", "share_section", array('pError' => $pError)); ?>
     <div class="clear"></div>
   </div>
 </div>
