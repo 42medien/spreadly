@@ -1,5 +1,8 @@
 <div class="voucher_text">
-  <p><?php echo __("THANK YOU FOR SPREADING THE WORD! here's YOUR PROMISED VOUCHER ASCENTIVE:"); ?></p>
+  <p>
+    <?php echo __("Thank you for spreading the word!"); ?><br />
+    <?php echo __("here's your promised incentive:"); ?>
+  </p>
 </div>
 <div class="voucher">
     <div class="voucher_brd">

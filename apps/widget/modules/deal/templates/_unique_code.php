@@ -1,9 +1,12 @@
 <div class="voucher_text">
-  <p><?php echo __("THANK YOU FOR SPREADING THE WORD! here's YOUR PROMISED VOUCHER CODE:"); ?></p>
+  <p>
+    <?php echo __("Thank you for spreading the word!"); ?><br />
+    <?php echo __("here's your promised voucher code:"); ?>
+  </p>
 </div>
 <div class="voucher">
-    <div class="voucher_brd">
-        <div class="voucher_data">
+  <div class="voucher_brd">
+    <div class="voucher_data">
             <p class="offer"><?php echo $deal->getCouponTitle(); ?></p>
             <a href="<?php echo $deal->getCouponRedeemUrl(); ?>" target="_blank"><?php echo __("Visit the shop"); ?></a>
             <div class="v_code">

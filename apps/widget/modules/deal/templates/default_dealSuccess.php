@@ -4,7 +4,10 @@
 <div class="red_bg_sh">
   <div class="red_bg no_deals">
     <div class="mid_text">
-      <p><?php echo __("WE ARE SORRY, BUT YOU HAVE UNLOCKED ALL DEALS. BE SURE TO CHECK BACK FOR NEW DEALS SOON..."); ?></p>
+      <p>
+        <?php echo __("We are sorry, but you have unlocked all deals."); ?><br />
+        <?php echo __("Be sure to check back for new deals soon..."); ?>
+      </p>
     </div>
   </div>
 </div>
