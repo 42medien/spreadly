@@ -1,18 +1,10 @@
-<header>
-  <h2><?php echo __("Thanks for sharing!"); ?></h2>
-  <p id="motivation">
-    <span id="deal-marker">Your deal</span>
-  </p>
-</header>
+<h1 class="title"><?php echo __("Your share &amp; bookmark was successful!"); ?></h1>
+<div class="clear"></div>
 
-<!-- weisser Content -->
-<div id="content-inner" class="clearfix deal-content-inner">
-  <br /><br /><br />
-
-  <script type="text/javascript">
-    adscale_slot_id="M2JkMDQw";
-  </script>
-  <script type="text/javascript" src="http://js.adscale.de/getads.js"></script>
-
-  <br /><br /><br />
+<div class="red_bg_sh">
+  <div class="red_bg no_deals">
+    <div class="mid_text">
+      <p><?php echo __("WE ARE SORRY, BUT YOU HAVE UNLOCKED ALL DEALS. BE SURE TO CHECK BACK FOR NEW DEALS SOON..."); ?></p>
+    </div>
+  </div>
 </div>
