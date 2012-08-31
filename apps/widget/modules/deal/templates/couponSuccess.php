@@ -1,12 +1,15 @@
 <?php
 use_helper('Avatar', 'Text');
 ?>
-<header>
-  <h1 class="success"><?php echo __("Thanks for sharing!"); ?></h1>
- <span id="deal-marker"><?php echo __("Your deal"); ?></span>
-</header>
-
-<!-- weisser Content -->
-<div id="content-inner" class="clearfix deal-content-inner">
-  <?php include_partial($deal->getCouponType(), array('deal' => $deal)); ?>
+<h1 class="title"><?php echo __("Your share was successful!"); ?></h1>
+<div class="clear"></div>
+<div class="red_bg_sh">
+  <div class="red_bg">
+    <div class="red_cont">
+      <?php include_partial($deal->getCouponType(), array('deal' => $deal)); ?>
+      <div class="blue_btn">
+        <?php echo link_to(__("get another deal"),  "deal/index", array("query_string" => "url=")); ?>
+      </div>
+    </div>
+  </div>
 </div>
