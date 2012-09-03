@@ -393,3 +393,16 @@ this element is the one that *you* will style the most.
 #scroll-button-area {
   display: none;
 }
+
+.red_bg_custom {
+  padding: 20px;
+}
+
+.red_bg_custom,
+.red_bg_custom h2,
+.red_bg_custom .chars_counter,
+.red_bg_custom .pers_comments span,
+.red_bg_custom .sh_info p,
+.red_bg_custom a {
+  color: #fff;
+}
