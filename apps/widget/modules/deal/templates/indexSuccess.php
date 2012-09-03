@@ -8,26 +8,28 @@ use_helper('Avatar', 'Text');
 <div class="clear"></div>
 
 <div class="red_bg_sh">
-  <div class="red_bg sh_content">
-  <div class="sh_img_block scrollable" id="myscroll">
-    <div id="meta-images" class="imgbg items">
-      <img id="meta-img" src="<?php echo $deal->getSpreadImg(); ?>" width="80" />
+  <div class="red_bg">
+    <div class="red_bg_custom">
+      <div class="sh_img_block scrollable" id="myscroll">
+        <div id="meta-images" class="imgbg items">
+          <img id="meta-img" src="<?php echo $deal->getSpreadImg(); ?>" width="80" />
+        </div>
+      </div>
+      <div class="sh_info">
+        <h2 title="<?php echo $deal->getSpreadTitle(); ?>"><?php echo truncate_text($deal->getSpreadTitle(), 50); ?></h2>
+        <p>
+          <?php echo truncate_text($deal->getSpreadText(), 150); ?>
+        </p>
+        <p><a href="<?php echo $deal->getSpreadUrl(); ?>" target="_blank" title="<?php echo $deal->getSpreadUrl(); ?>">
+        <?php echo truncate_text($deal->getSpreadUrl(), 50); ?></a></p>
+      </div>
+      <div class="clear"></div>
+      <div class="pers_comments">
+        <textarea id="texarea_count" rows="2" cols="20" placeholder="<?php echo __("add your comment (optional) ..."); ?> <?php echo __('Feel free to add some hashtags, for example:'); ?> #like"></textarea>
+        <div class="clear"></div>
+        <span id="chars_counter">0</span>
+      </div>
     </div>
-  </div>
-  <div class="sh_info">
-    <h2 title="<?php echo $deal->getSpreadTitle(); ?>"><?php echo truncate_text($deal->getSpreadTitle(), 50); ?></h2>
-    <p>
-      <?php echo truncate_text($deal->getSpreadText(), 150); ?>
-    </p>
-    <p><a href="<?php echo $deal->getSpreadUrl(); ?>" target="_blank" title="<?php echo $deal->getSpreadUrl(); ?>">
-      <?php echo truncate_text($deal->getSpreadUrl(), 50); ?></a></p>
-  </div>
-  <div class="clear"></div>
-  <div class="pers_comments">
-    <textarea id="texarea_count" rows="2" cols="20" placeholder="<?php echo __("add your comment (optional) ..."); ?> <?php echo __('Feel free to add some hashtags, for example:'); ?> #like"></textarea>
-    <div class="clear"></div>
-    <span id="chars_counter">0</span>
-  </div>
   </div>
 </div>
 
