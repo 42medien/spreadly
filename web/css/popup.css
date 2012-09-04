@@ -188,7 +188,7 @@ bottom:-8px;
 /*share button inactive*/
 .sharebtn {float: right; display: block; min-width: 120px; margin: 10px 0 0;}
 .sharebtn input {float: left; display: block; cursor: pointer; min-width: 91px; height: 31px; border:none; background:transparent; margin-left: 15px; overflow:visible;
-			font-size: 14px; font-family: Arial; color: #6580bb;}
+			font-size: 14px; font-family: Arial; color: #6580bb; cursor: default;}
 .sharebtn span {background: url("../img/popup/sharevline_inactive.png") 0 0 no-repeat; width: 19px; height:41px; float: right; margin: -10px 0 0;}
 
 .sharebtn_graphic {background: #4066bb; float:left; min-width: 120px; height:31px;

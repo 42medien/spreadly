@@ -30,7 +30,7 @@
     </ul>
   </div>
 </div>
-<div id="popup-like-button" class="<?php if ($sf_user->isAuthenticated()) { echo 'sharebtn-active'; } else { echo 'sharebtn'; } ?>">
+<div <?php if ($sf_user->isAuthenticated()) { echo 'id="popup-like-button" class="sharebtn-active"'; } else { echo 'class="sharebtn"'; } ?>>
   <div class="sharebtn_graphic">
     <input type="<?php if ($sf_user->isAuthenticated()) { echo 'button'; } else { echo 'button'; } ?>" name="shared" value="share &amp; bookmark" />
     <span></span>
