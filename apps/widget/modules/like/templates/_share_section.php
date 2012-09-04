@@ -1,5 +1,5 @@
 <div class="sh_networks_content" id="like-submit">
-<div class="add_networks">
+<div class="add_networks" id="like-oi-list">
   <div class="networks_icon">
     <ul>
       <?php
@@ -30,9 +30,9 @@
     </ul>
   </div>
 </div>
-<div class="<?php if ($sf_user->isAuthenticated()) { echo 'sharebtn-active'; } else { echo 'sharebtn'; } ?>">
+<div id="popup-like-button" class="<?php if ($sf_user->isAuthenticated()) { echo 'sharebtn-active'; } else { echo 'sharebtn'; } ?>">
   <div class="sharebtn_graphic">
-    <input type="<?php if ($sf_user->isAuthenticated()) { echo 'button'; } else { echo 'button'; } ?>" name="shared" id="popup-like-button" value="share &amp; bookmark" />
+    <input type="<?php if ($sf_user->isAuthenticated()) { echo 'button'; } else { echo 'button'; } ?>" name="shared" value="share &amp; bookmark" />
     <span></span>
   </div>
 </div>
