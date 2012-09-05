@@ -166,7 +166,6 @@ dev:
   facebook:
     oauth_token:   "4e786c7f089e38a83933c9821990030a"
     oauth_secret:  "2366aa47d946b7650fe21cf488db5694"
-    post_api:      'https://graph.facebook.com/me/spread_local:share'
 
   linkedin:
     oauth_token:   "tLGEinyEJmEVEzPruN8Q-MH_gLVrzTWJbc1xqbxyvTApbIxetpe89LVMyAc4nBRZ"
