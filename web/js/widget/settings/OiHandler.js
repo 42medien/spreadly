@@ -6,7 +6,8 @@
 var LikeIdentity = {
 
     init: function() {
-      LikeIdentity.doDelete();
+      //LikeIdentity.doDelete();
+      LikeIdentity.makeClickable();
     },
     
     /**
@@ -42,6 +43,15 @@ var LikeIdentity = {
        
         return false;
       });
-    }
+    },
     
+    makeClickable: function() {
+      jQuery('.likecheckbox').live("change", function() {  
+        if (jQuery(this).is(":checked")) {  
+          jQuery(this).next("label").addClass("checked");  
+        } else {  
+          jQuery(this).next("label").removeClass("checked");  
+        }
+      });
+    }
 };

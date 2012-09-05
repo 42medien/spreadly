@@ -8,5 +8,3 @@ i18n.init({
 });
 
 LikeIdentity.init();
-
-ProfileSettings.init();
