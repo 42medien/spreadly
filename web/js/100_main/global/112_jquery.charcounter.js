@@ -1,6 +1,3 @@
-/**
- * @combine widget
- */
 jQuery.fn.charcounter = function(){
   //pLimit = parseInt(pLimit, 10);
   var lText = jQuery(this).val();
