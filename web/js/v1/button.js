@@ -6,7 +6,7 @@ function spreadly_init_buttons() {
   var buttons = document.getElementsByClassName('spreadly-button');
   for(var i = 0; i < buttons.length; i++) {
     spreadly_init_images(buttons[i]);
-    spreadly_init_clickhandler(buttons[i]);
+    spreadly_init_click_handler(buttons[i]);
   }
 }
   
@@ -18,7 +18,7 @@ function spreadly_init_images(link) {
   link.insertAdjacentHTML('afterbegin', '<img src="//spread.local/img/button/28/fb.png" alt="" class="spreadly-service-icon" />');
 }
   
-function spreadly_init_clickhandler(link) {
+function spreadly_init_click_handler(link) {
   link.onclick = function () { spreadly_open_layer(link.href); return false; };
 }
   
