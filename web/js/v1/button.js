@@ -12,7 +12,6 @@
       jQuery(pObject).prepend('<img src="//spread.local/img/button/28/li.png" alt="" class="spreadly-service-icon" />');
       jQuery(pObject).prepend('<img src="//spread.local/img/button/28/tw.png" alt="" class="spreadly-service-icon" />');
       jQuery(pObject).prepend('<img src="//spread.local/img/button/28/fb.png" alt="" class="spreadly-service-icon" />');
-      jQuery(pObject).prepend('<iframe src="//button.spread.local/w/like/counter.php?url='+lUrl+'" style="width: 40px; height: 40px;" width="40px" height="40px"></iframe>');
     },
     
     initClick: function(pObject) {
