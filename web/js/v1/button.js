@@ -6,15 +6,13 @@
   var SpreadlyButton = {
     aParams: {},
       
-    initCss: function() {
-      jQuery('head').append('<link rel="stylesheet" href="http://spreadly.local/css/v1/button.css" type="text/css" />');
-    },
-
     initImages: function(pObject) {
-      jQuery(pObject).prepend('<img src="//s-static.ak.facebook.com/rsrc.php/yi/r/q9U99v3_saj.ico">');
-      jQuery(pObject).prepend('<img src="//twitter.com/phoenix/favicon.ico">');
-      jQuery(pObject).prepend('<img src="//ssl.gstatic.com/s2/oz/images/faviconr.ico">');
-      jQuery(pObject).prepend('<img src="//s3.licdn.com/scds/common/u/img/favicon_v3.ico">');
+      jQuery(pObject).text("");
+      jQuery(pObject).prepend('<img src="//spread.local/img/button/28/sl.png" alt="" class="spreadly-service-icon" />');
+      jQuery(pObject).prepend('<img src="//spread.local/img/button/28/li.png" alt="" class="spreadly-service-icon" />');
+      jQuery(pObject).prepend('<img src="//spread.local/img/button/28/tw.png" alt="" class="spreadly-service-icon" />');
+      jQuery(pObject).prepend('<img src="//spread.local/img/button/28/fb.png" alt="" class="spreadly-service-icon" />');
+      jQuery(pObject).prepend('<iframe src="//button.spread.local/w/like/counter.php?url='+lUrl+'" style="width: 40px; height: 40px;" width="40px" height="40px"></iframe>');
     },
     
     initClick: function(pObject) {
@@ -50,7 +48,7 @@
     },
     
     insertIframe: function(pUrl) {
-      jQuery('#spreadly-overlay #spreadly-iframe').append('<div class="spreadly-close-button"><div class="spreadly-close-icon" onclick="closeLayer()"></div></div><iframe src="http://spread.local/?url='+pUrl+'&iframe=1" style="width: 600px; height: 450px; border:0;" frameborder="0" scrolling="no" marginheight="0" allowTransparency="true"></iframe>');
+      jQuery('#spreadly-overlay #spreadly-iframe').append('<div class="spreadly-close-button"><div class="spreadly-close-icon" onclick="closeLayer()"></div></div><iframe src="//spread.local/?url='+pUrl+'&iframe=1" style="width: 600px; height: 450px; border:0;" frameborder="0" scrolling="no" marginheight="0" allowTransparency="true"></iframe>');
     },
 
     close: function() {
@@ -65,7 +63,6 @@
   jQuery.fn.spreadly = function( pParams ){
     SpreadlyButton.aParams = pParams;
     SpreadlyWindow.init();
-    SpreadlyButton.initCss();
     return this.each(function(){
       SpreadlyButton.initClick(this);
       SpreadlyButton.initText(this);
