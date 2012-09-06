@@ -29,9 +29,6 @@
   </head>
   <body>
     <div class="sharebg">
-      <div class="closebtn">
-        <div class="closeico"></div>
-      </div>
       <?php echo $sf_content; ?>
       <?php include_partial('global/footer'); ?>
     </div>
