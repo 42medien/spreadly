@@ -12,14 +12,16 @@
 }
  
 #spreadly-overlay #spreadly-iframe {
-  width: 560px;
+  width: 600px;
   margin: 100px auto;
   background: transparent;
   text-align: center;
 }    
  
-iframe{
-  padding-top: 2px;
+#spreadly-overlay #spreadly-iframe iframe {
+  border: 0;
+  width: 600px;
+  height: 600px;
 }
 
 img.spreadly-service-icon {
