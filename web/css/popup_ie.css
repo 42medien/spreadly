@@ -1,6 +1,6 @@
 /*general*/
 *{margin:0; padding:0;}
-body {background: #fff; font-family: 'Arial'; padding: 100px 0 0;}
+body {font-family: 'Arial'; padding: 100px 0 0;}
 a:link{color:#333333; text-decoration:none;}  /* unvisited link */
 a:visited {color:#333333; text-decoration:underline;}  /* visited link */
 a:hover {color:#333333; text-decoration:underline;}  /* mouse over link */
@@ -15,7 +15,7 @@ a:active {color:#333333; text-decoration:underline;}  /* selected link */
 .index_menu ul li a{font-size: 14px; line-height: 40px; font-weight: bold; font-family: 'Arial'; margin: 0 0 0 20px; color:#000;}
 
 /*background*/
-.sharebg {width: 500px; background: #ffffff; margin: 0 auto; border-radius:13px; box-shadow: 7px 7px 3px 1px #cacaca, 3px 3px 3px 7px #cacaca;
+.sharebg {width: 500px; margin: 0 auto; border-radius:13px; box-shadow: 7px 7px 3px 1px #cacaca, 3px 3px 3px 7px #cacaca;
 margin: 80px auto 0; behavior: url(js/PIE.htc);}
 .closebtn {float: right; cursor: pointer; width:35px; height:35px; border-radius:20px; background:#bebebe; margin: -20px -20px 0; box-shadow: 2px 4px 6px 2px #cacaca;
 	behavior: url(js/PIE.htc);}
