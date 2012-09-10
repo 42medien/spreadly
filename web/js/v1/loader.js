@@ -11,4 +11,9 @@ window.onload = function () {
   s.type = 'text/javascript';
   s.src = '//spreadly.local/js/v1/button.js';
   head.appendChild(s);
+  
+  var a = document.createElement('script');
+  a.type = 'text/javascript';
+  a.src = '//spreadly.local/js/v1/advertisement.js';
+  head.appendChild(a);
 };

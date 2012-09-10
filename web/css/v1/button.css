@@ -1,3 +1,50 @@
+#spreadly-advertisement-container {
+  position: relative;
+
+}
+
+.spreadly-advertisement {
+  position: absolute;
+  display: block;
+  bottom: 0;
+  left: 0;
+  z-index: 9999;
+  border: 5px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  background-color: #fff;
+  clear: both;
+}
+
+.spreadly-advertisement iframe {
+  padding: 0;
+  margin: 0;
+  clear: both;
+  display: block;
+}
+
+.spreadly-advertisement div {
+  padding: 5px;
+  
+}
+
+.spreadly-advertisement-disclaimer {
+  font-size: 10px;
+  display: block;
+  float: left;
+}
+
+.spreadly-advertisement-close {
+  font-size: 10px;
+  display: block;
+  float: right;
+}
+
+.spreadly-advertisement a,
+.spreadly-advertisement a:hover,
+.spreadly-advertisement a:visited {
+  font-color: #000;
+}
+
 #spreadly-overlay {
   visibility: hidden;
   position: fixed;
@@ -31,10 +78,14 @@ img.spreadly-service-icon {
   margin-right: 3px;
 }
 
+.spreadly-button {
+  display: block;
+}
+
 .spreadly-close-button {
   z-index: 999999;
   position: relative;
-  right: 30px;
+  right: 50px;
   top: 30px;
   text-align: center;
   float: right;

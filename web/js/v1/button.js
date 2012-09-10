@@ -4,7 +4,7 @@
 
 function spreadly_init_buttons() {
   var buttons = document.getElementsByClassName('spreadly-button');
-  for(var i = 0; i < buttons.length; i++) {
+  for (var i = 0; i < buttons.length; i++) {
     spreadly_init_images(buttons[i]);
     spreadly_init_click_handler(buttons[i]);
   }
@@ -12,10 +12,11 @@ function spreadly_init_buttons() {
   
 function spreadly_init_images(link) {
   link.text = "";
-  link.insertAdjacentHTML('afterbegin', '<img src="//spread.local/img/button/28/sl.png" alt="" class="spreadly-service-icon" />');
-  link.insertAdjacentHTML('afterbegin', '<img src="//spread.local/img/button/28/li.png" alt="" class="spreadly-service-icon" />');
-  link.insertAdjacentHTML('afterbegin', '<img src="//spread.local/img/button/28/tw.png" alt="" class="spreadly-service-icon" />');
-  link.insertAdjacentHTML('afterbegin', '<img src="//spread.local/img/button/28/fb.png" alt="" class="spreadly-service-icon" />');
+  link.innerHTML = "";
+  link.insertAdjacentHTML('afterBegin', '<img src="//spread.local/img/button/28/sl.png" alt="" class="spreadly-service-icon" />');
+  link.insertAdjacentHTML('afterBegin', '<img src="//spread.local/img/button/28/li.png" alt="" class="spreadly-service-icon" />');
+  link.insertAdjacentHTML('afterBegin', '<img src="//spread.local/img/button/28/tw.png" alt="" class="spreadly-service-icon" />');
+  link.insertAdjacentHTML('afterBegin', '<img src="//spread.local/img/button/28/fb.png" alt="" class="spreadly-service-icon" />');
 }
   
 function spreadly_init_click_handler(link) {
@@ -43,7 +44,7 @@ function spreadly_close_layer() {
 }
 
 function spreadly_init() {
-  document.getElementsByTagName("body")[0].insertAdjacentHTML('beforeend', '<div id="spreadly-overlay" style="visibility: hidden;"><div id="spreadly-iframe"></div></div>');
+  document.getElementsByTagName("body")[0].insertAdjacentHTML('beforeEnd', '<div id="spreadly-overlay" style="visibility: hidden;"><div id="spreadly-iframe"></div></div>');
   spreadly_init_buttons();
 }
 
