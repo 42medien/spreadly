@@ -37,6 +37,8 @@ EOF;
     $lFileMinName = sfConfig::get('app_release_name').'.min.css';
     //initialize the combine and minify-process
     $this->writeWholeFile($lDir,$lFileName,$lFileMinName);
+    
+    $this->buildApiCss();
   }
 
   /**
@@ -86,5 +88,21 @@ EOF;
     }
     // at least, close the new combine-file
     fclose($lWholeFile);
+  }
+  
+  private function buildApiCss() {
+    // copy file
+    $this->getFilesystem()->copy(sfConfig::get('sf_web_dir').'/css/api_sources/button.css', sfConfig::get('sf_web_dir').'/css/v1/button.css', array('override' => true));
+
+    // replace wildcards
+    $this->getFilesystem()->replaceTokens(sfConfig::get('sf_web_dir').'/css/v1/button.css', '##', '##', array(
+      'YIID_WIDGET_HOST' => sfConfig::get('app_settings_widgets_host'),
+      'YIID_BUTTON_HOST' => sfConfig::get('app_settings_button_url')
+    ));
+    
+    $lCssMin = Minify_CSS_Compressor::process(file_get_contents(sfConfig::get('sf_web_dir').'/css/v1/button.css'));
+    $lCssMinFile = fopen(sfConfig::get('sf_web_dir').'/css/v1/button.css', 'w+');
+    $lDone = fwrite($lCssMinFile, $lCssMin);
+    fclose($lCssMinFile);
   }
 }

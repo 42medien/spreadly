@@ -37,6 +37,8 @@ EOF;
     $lFileMinName = sfConfig::get('app_release_name').'.min.js';
     //initialize the combine and minify-process
     $this->writeWholeFile($lDir,$lFileName,$lFileMinName);
+    
+    $this->buildApiJs();
   }
 
   /**
@@ -116,16 +118,16 @@ EOF;
    * @param string $pFile
    * @param string $pFileMinName
    */
-  private function minifyFiles($pDirname) {
+  private function minifyFiles($pDirname, $pWriteMode = "a+", $pFileExtension = "min.js") {
   	//take all combined files from the include-folder
     $lFiles = FilesystemHelper::retrieveFilesInDir($pDirname, array('.svn'), array(), '.js');
     foreach($lFiles as $lFile) {
     	//minify each single combined file
       $lJsMin = JSMin::minify(file_get_contents($lFile));
       //build the filename with path
-      $lFileName = $pDirname.str_replace('.js', '', basename($lFile)).'.min.js';
+      $lFileName = $pDirname.str_replace('.js', '', basename($lFile)).'.'.$pFileExtension;
   	  //build a new minify-file named by given fileminname and open it
-  	  $lMinFile = fopen($lFileName, 'a+');
+  	  $lMinFile = fopen($lFileName, $pWriteMode);
   	  //write the minified content to the new minify-file
   	  $lDone = fwrite($lMinFile, $lJsMin);
   	  //and close the new minify-file
@@ -133,5 +135,36 @@ EOF;
       echo "Minified: ".$lFileName;
       echo "\n\r";
     }
+  }
+  
+  private function buildApiJs() {
+    // copy file
+    $this->getFilesystem()->copy(sfConfig::get('sf_web_dir').'/js/api_sources/advertisement.js', sfConfig::get('sf_web_dir').'/js/v1/advertisement.js', array('override' => true));
+
+    // replace wildcards
+    $this->getFilesystem()->replaceTokens(sfConfig::get('sf_web_dir').'/js/v1/advertisement.js', '##', '##', array(
+      'YIID_WIDGET_HOST' => sfConfig::get('app_settings_widgets_host'),
+      'YIID_BUTTON_HOST' => sfConfig::get('app_settings_button_url')
+    ));
+    
+    // copy file
+    $this->getFilesystem()->copy(sfConfig::get('sf_web_dir').'/js/api_sources/button.js', sfConfig::get('sf_web_dir').'/js/v1/button.js', array('override' => true));
+
+    // replace wildcards
+    $this->getFilesystem()->replaceTokens(sfConfig::get('sf_web_dir').'/js/v1/button.js', '##', '##', array(
+      'YIID_WIDGET_HOST' => sfConfig::get('app_settings_widgets_host'),
+      'YIID_BUTTON_HOST' => sfConfig::get('app_settings_button_url')
+    ));
+    
+    // copy file
+    $this->getFilesystem()->copy(sfConfig::get('sf_web_dir').'/js/api_sources/loader.js', sfConfig::get('sf_web_dir').'/js/v1/loader.js', array('override' => true));
+
+    // replace wildcards
+    $this->getFilesystem()->replaceTokens(sfConfig::get('sf_web_dir').'/js/v1/loader.js', '##', '##', array(
+      'YIID_WIDGET_HOST' => sfConfig::get('app_settings_widgets_host'),
+      'YIID_BUTTON_HOST' => sfConfig::get('app_settings_button_url')
+    ));
+  
+      $this->minifyFiles(sfConfig::get('sf_web_dir').'/js/v1/', "w+", "js");
   }
 }

@@ -24,7 +24,6 @@
 
 .spreadly-advertisement div {
   padding: 5px;
-  
 }
 
 .spreadly-advertisement-disclaimer {
@@ -102,5 +101,5 @@ img.spreadly-service-icon {
   -moz-box-shadow: 5px 10px 3px 1px rgba(0,0,0,0.25);
   -webkit-box-shadow: 5px 10px 3px 1px rgba(0,0,0,0.25);
 }
-.spreadly-close-icon { background: url("//spreadly.local/img/popup/close.png") no-repeat; width:13px; height: 14px; margin: 11px auto 0; }
-.spreadly-close-button:hover { background: url("//spreadly.local/img/popup/hover.png"); }
+.spreadly-close-icon { background: url("##YIID_BUTTON_HOST##/img/popup/close.png") no-repeat; width:13px; height: 14px; margin: 11px auto 0; }
+.spreadly-close-button:hover { background: url("##YIID_BUTTON_HOST##/img/popup/hover.png"); }
