@@ -2,10 +2,11 @@ set :application, "yiid"
 set :user, 'httpd'
 set :use_sudo, false
 
-set :repository,  "https://svn.ekaabo.com/yiid/"
-set :scm,         :subversion
-set :scm_username, "yiid"
-set :scm_password, "yiidyiidyiid"
+set :repository,  "https://github.com/ekaabo/spreadly.git"
+set :scm,         :git
+set :scm_username, "spreadly"
+set :scm_password, "affen2010"
+set :branch, "master"
 
 role :web,    "spreadly.com"                        # Your HTTP server, Apache/etc
 set :user, 'root'
