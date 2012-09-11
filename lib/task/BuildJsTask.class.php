@@ -165,6 +165,6 @@ EOF;
       'YIID_BUTTON_HOST' => sfConfig::get('app_settings_button_url')
     ));
   
-      $this->minifyFiles(sfConfig::get('sf_web_dir').'/js/v1/', "w+", "js");
+    $this->minifyFiles(sfConfig::get('sf_web_dir').'/js/v1/', "w+", "js");
   }
 }

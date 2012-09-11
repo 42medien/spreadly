@@ -13,7 +13,7 @@ function spreadly_show_ad() {
   if (document.getElementById('spreadly-advertisement-container') == null) {
     var elm = document.getElementsByClassName('spreadly-button')[0];
     
-    elm.insertAdjacentHTML('beforeBegin', '<div id="spreadly-advertisement-container"><div class="spreadly-advertisement"><div><iframe src="http://notizblog.org/" style="width:250px; height:250px;"></iframe><small class="spreadly-advertisement-disclaimer"><a href="http://spreadly.com" target="blank">Spreadly Advertisement</a>&nbsp;</small><small class="spreadly-advertisement-close"><a href="#" onclick="spreadly_close_advertisement(); return false;">close</a></small></div></div></div>');
+    elm.insertAdjacentHTML('beforeBegin', '<div id="spreadly-advertisement-container"><div class="spreadly-advertisement"><div><iframe src="//##YIID_WIDGET_HOST##/api/demo_ad" style="width:250px; height:255px;"></iframe><small class="spreadly-advertisement-disclaimer"><a href="http://spreadly.com" target="blank">Spreadly Advertisement</a>&nbsp;</small><small class="spreadly-advertisement-close"><a href="#" onclick="spreadly_close_advertisement(); return false;">close</a></small></div></div></div>');
   }  
 }
 
