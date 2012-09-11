@@ -144,6 +144,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4fadadad', e
 .xg.checked, .networks_icon .xing.checked {background: url("../img/popup/xgactive.png") 0 0 no-repeat;}
 .lkd, .networks_icon .linkedin {background: url("../img/popup/lkdinactive.png") 0 0 no-repeat;}
 .lkd.checked, .networks_icon .linkedin.checked {background: url("../img/popup/lkdactive.png") 0 0 no-repeat;}
+.fltr, .networks_icon .flattr {background: url("../img/popup/flattrinactive.png") 0 0 no-repeat;}
+.fltr.checked, .networks_icon .flattr.checked {background: url("../img/popup/flattractive.png") 0 0 no-repeat;}
 .mrwong {background: url("../img/popup/mwonginactive.png") 0 0 no-repeat;}
 .mrwong.checked {background: url("../img/popup/mwongactive.png") 0 0 no-repeat;}
 .yig {background: url("../img/popup/yiginactive.png") 0 0 no-repeat;}
