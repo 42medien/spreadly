@@ -138,8 +138,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4fadadad', e
 .networks_icon ul li label{display:block; width: 34px; height:36px;}
 .fb, .networks_icon .facebook {background: url("../img/popup/fbinactive.png") 0 0 no-repeat;}
 .fb.checked, .networks_icon .facebook.checked {background: url("../img/popup/fbactive.png") 0 0 no-repeat;}
-.tw, .networks_icon .twitter {background: url("../img/popup/twitter-bird-white-on-White.png") no-repeat 50% 40%;}
-.tw.checked, .networks_icon .twitter.checked {background: url("../img/popup/twitter-bird-white-on-blue.png") no-repeat 50% 40%;}
+.tw, .networks_icon .twitter {background: url("../img/popup/twinactive.png") no-repeat 50% 40%;}
+.tw.checked, .networks_icon .twitter.checked {background: url("../img/popup/twactive.png") no-repeat 50% 40%;}
 .xg, .networks_icon .xing {background: url("../img/popup/xginactive.png") 0 0 no-repeat;}
 .xg.checked, .networks_icon .xing.checked {background: url("../img/popup/xgactive.png") 0 0 no-repeat;}
 .lkd, .networks_icon .linkedin {background: url("../img/popup/lkdinactive.png") 0 0 no-repeat;}
