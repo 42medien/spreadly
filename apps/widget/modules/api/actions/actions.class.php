@@ -26,4 +26,8 @@ class apiActions extends sfActions {
 
    	return $lReturn['html'];
   }
+  
+  public function executeDemo_ad(sfWebRequest $request) {
+    $this->setLayout(false);
+  }
 }
