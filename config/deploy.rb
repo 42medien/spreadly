@@ -1,14 +1,16 @@
+default_run_options[:pty] = true
 set :application, "yiid"
 set :use_sudo, false
 
-set :repository,  "https://github.com/ekaabo/spreadly.git"
-set :scm,         :git
-set :scm_username, "spreadly"
-set :scm_password, "affen2010"
+set :repository,  "git@github.com:ekaabo/spreadly.git"
+set :scm,         "git"
+set :user, "spreadly"
+set :scm_passphrase, "affen2010"
 set :branch, "master"
 
 role :web,    "spreadly.com"                        # Your HTTP server, Apache/etc
 set :current_dir, "current"
+ssh_options[:forward_agent] = true
 
 set  :keep_releases,  5
 
@@ -17,10 +19,9 @@ task :prod do
   set :user, 'root'
   set :sf_env, "prod"
   set :domain,      "spreadly.com"
-  set :deploy_to,   "#{deploy_directory}/#{domain}"
+  set :deploy_to,   "/var/www/spreadly.com"
   set :deploy_via, :export
   puts "Deploying #{application} to #{domain} for env=#{sf_env} …"
-  ask_for_repository
 end
 
 task :staging do
@@ -31,7 +32,6 @@ task :staging do
   set :deploy_to,   "/mnt/data/spreadly/www/httpdocs"
   set :deploy_via, :checkout
   puts "Deploying #{application} to #{domain} for env=#{sf_env} …"
-  ask_for_repository
 end
 
 task :button do
@@ -47,7 +47,6 @@ task :button do
   set :domain,      "button.spread.ly"
   set :deploy_to,   "#{deploy_directory}"
   set :deploy_via, :export
-  ask_for_repository
 end
 
 task :staging_button do
@@ -63,7 +62,6 @@ task :staging_button do
   set :domain,      "button.yiiddev.com"
   set :deploy_to,   "#{deploy_directory}"
   set :deploy_via, :checkout
-  ask_for_repository
 end
 
 # Symfony stuff
@@ -140,9 +138,12 @@ namespace :deploy do
   task :finalize_update, :except => { :no_release => true } do
     run "mkdir -p #{latest_release}/cache"
     run "mkdir -p #{latest_release}/log"
-    run "chmod -R 755 #{latest_release}/cache"
+    run "mkdir -p #{latest_release}/lib/mongo/Hydrators"
+    run "mkdir -p #{latest_release}/lib/mongo/Proxies"
+    run "chmod -R 777 #{latest_release}/cache"
     run "chmod -R 755 #{latest_release}/log"
     run "chmod -R 777 #{latest_release}/lib/mongo/Hydrators"
+    run "chmod -R 777 #{latest_release}/lib/mongo/Proxies"
 
     # Share common files & folders
     share_childs
@@ -208,25 +209,6 @@ namespace :symfony do
       end
     end
   end
-end
-
-def ask_for_repository
-  type = Capistrano::CLI.ui.ask("Checkout Trunk, Branch or Tag (trunk|branch|tag)[trunk]: ")
-
-  if type == 'branch'
-    set :repository, repository + 'branches/releases/'
-  elsif type == 'tag'
-    set :repository, repository + 'tags/'
-  else
-    set :repository, repository + 'trunk'
-  end
-
-  if ['branch', 'tag'].include? type
-    name = Capistrano::CLI.ui.ask("Which name for #{repository}: ")
-    set :repository, "#{repository}" + (name.strip.empty? ? default : name)
-  end
-
-  puts "Using repository: " + repository
 end
 
 # Runs +command+ as root invoking the command with su -c
