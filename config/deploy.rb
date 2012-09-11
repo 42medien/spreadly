@@ -1,5 +1,4 @@
 set :application, "yiid"
-set :user, 'httpd'
 set :use_sudo, false
 
 set :repository,  "https://github.com/ekaabo/spreadly.git"
@@ -9,15 +8,13 @@ set :scm_password, "affen2010"
 set :branch, "master"
 
 role :web,    "spreadly.com"                        # Your HTTP server, Apache/etc
-set :user, 'root'
-set :deploy_directory, "/var/www"
 set :current_dir, "current"
 
 set  :keep_releases,  5
 
 task :prod do
   set :button_deployment, false
-
+  set :user, 'root'
   set :sf_env, "prod"
   set :domain,      "spreadly.com"
   set :deploy_to,   "#{deploy_directory}/#{domain}"
