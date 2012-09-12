@@ -40,7 +40,7 @@ if ($lImages && count($lImages) > 0) {
   </div>
   <div class="clear"></div>
   <div class="pers_comments">
-    <textarea id="texarea_count" rows="2" cols="20" placeholder="<?php echo __("add your comment (optional) ..."); ?> <?php echo __('Feel free to add some hashtags, for example:'); ?> #like"></textarea>
+    <textarea id="texarea_count" rows="2" cols="20" name="like[comment]" placeholder="<?php echo __("add your comment (optional) ..."); ?> <?php echo __('Feel free to add some hashtags, for example:'); ?> #like"></textarea>
     <div class="clear"></div>
     <span id="chars_counter">0</span>
   </div>
