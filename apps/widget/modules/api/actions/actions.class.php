@@ -28,6 +28,23 @@ class apiActions extends sfActions {
   }
   
   public function executeDemo_ad(sfWebRequest $request) {
+    $url = $request->getParameter("url");
+    $domain = parse_url($url, PHP_URL_HOST);
+    
+    switch($domain) {
+      case ("deraktionaer.de"):
+      case ("www.deraktionaer.de"):
+        $this->setTemplate("deraktionaer_ad");
+        break;
+ 
+      case ("yigg.de"):
+      case ("www.yigg.de"):
+        $this->setTemplate("yigg_ad");
+        break;
+        
+      default:
+    }
+    
     $this->setLayout(false);
   }
 }
