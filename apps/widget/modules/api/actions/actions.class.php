@@ -41,8 +41,90 @@ class apiActions extends sfActions {
       case ("www.yigg.de"):
         $this->setTemplate("yigg_ad");
         break;
-        
-      default:
+      
+      case: ("urlaubspartner.net"):
+      case: ("www.urlaubspartner.net"):
+        $this->setTemplate("urlaubspartner_ad");
+        break;
+      
+      case: ("istlokal.de"):
+      case: ("www.istlokal.de"):
+      case: ("16vor.de"):
+      case: ("www.16vor.de"):
+      case: ("dippolds.info"):
+      case: ("www.dippolds.info"):
+      case: ("dahogn.de"):
+      case: ("www.dahogn.de"):
+      case: ("dossenheimblog.de"):
+      case: ("www.dossenheimblog.de"):
+      case: ("ebersberger-nachrichten.de"):
+      case: ("www.ebersberger-nachrichten.de"):
+      case: ("edingenneckarhausenblog.de"):
+      case: ("www.edingenneckarhausenblog.de"):
+      case: ("eichwalder-nachrichten.de"):
+      case: ("www.eichwalder-nachrichten.de"):
+      case: ("ferienstimme.de"):
+      case: ("www.ferienstimme.de"):
+      case: ("fuerther-freiheit.info"):
+      case: ("www.fuerther-freiheit.info"):
+      case: ("heddesheimblog.de"):
+      case: ("www.heddesheimblog.de"):
+      case: ("hemsbachblog.de"):
+      case: ("www.hemsbachblog.de"):
+      case: ("hirschbergblog.de"):
+      case: ("www.hirschbergblog.de"):
+      case: ("homberger-hingucker.de"):
+      case: ("www.homberger-hingucker.de"):
+      case: ("ilvesheimblog.de"):
+      case: ("www.ilvesheimblog.de"):
+      case: ("klaerwerk-blog.de"):
+      case: ("www.klaerwerk-blog.de"):
+      case: ("ladenburgblog.de"):
+      case: ("www.ladenburgblog.de"):
+      case: ("laudenbachblog.de"):
+      case: ("www.laudenbachblog.de"):
+      case: ("leer-meinung.de"):
+      case: ("www.leer-meinung.de"):
+      case: ("mecklenburgerstimme.de"):
+      case: ("www.mecklenburgerstimme.de"):
+      case: ("mittelhessenblog.de"):
+      case: ("www.mittelhessenblog.de"):
+      case: ("nadr.de"):
+      case: ("www.nadr.de"):
+      case: ("nrwz.de"):
+      case: ("www.nrwz.de"):
+      case: ("pottblog.de"):
+      case: ("www.pottblog.de"):
+      case: ("prenzlauerberg-nachrichten.de"):
+      case: ("www.prenzlauerberg-nachrichten.de"):
+      case: ("regensburg-digital.de"):
+      case: ("www.regensburg-digital.de"):
+      case: ("rheinneckarblog.de"):
+      case: ("www.rheinneckarblog.de"):
+      case: ("rhein-onliner.de"):
+      case: ("www.rhein-onliner.de"):
+      case: ("freiehonnefer.de"):
+      case: ("www.freiehonnefer.de"):
+      case: ("rostockerjournal.de"):
+      case: ("www.rostockerjournal.de"):
+      case: ("rothenburg.info"):
+      case: ("www.rothenburg.info"):
+      case: ("ruhrbarone.de"):
+      case: ("www.ruhrbarone.de"):
+      case: ("schriesheimblog.de"):
+      case: ("www.schriesheimblog.de"):
+      case: ("schweinfurter-echo.de"):
+      case: ("www.schweinfurter-echo.de"):
+      case: ("singold-bote.de"):
+      case: ("www.singold-bote.de"):
+      case: ("solinger-bote.de"):
+      case: ("www.solinger-bote.de"):
+      case: ("tegernseerstimme.de"):
+      case: ("www.tegernseerstimme.de"):
+      case: ("viernheimblog.de"):
+      case: ("www.viernheimblog.de"):
+        $this->setTemplate("istlokal_ad");
+        break;
     }
     
     $this->setLayout(false);
