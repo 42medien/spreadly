@@ -13,10 +13,8 @@ function spreadly_init_buttons() {
 function spreadly_init_images(link) {
   link.text = "";
   link.innerHTML = "";
-  link.insertAdjacentHTML('afterBegin', '<img src="##YIID_BUTTON_HOST##/img/button/28/sl.png" alt="" class="spreadly-service-icon" />');
-  link.insertAdjacentHTML('afterBegin', '<img src="##YIID_BUTTON_HOST##/img/button/28/li.png" alt="" class="spreadly-service-icon" />');
-  link.insertAdjacentHTML('afterBegin', '<img src="##YIID_BUTTON_HOST##/img/button/28/tw.png" alt="" class="spreadly-service-icon" />');
-  link.insertAdjacentHTML('afterBegin', '<img src="##YIID_BUTTON_HOST##/img/button/28/fb.png" alt="" class="spreadly-service-icon" />');
+  link.insertAdjacentHTML('afterBegin', '<img src="##YIID_BUTTON_HOST##/img/button/28/std.png" alt="" class="spreadly-service-icon" />');
+  link.insertAdjacentHTML('beforeEnd', '<img src="##YIID_BUTTON_HOST##/img/button/28/sl.png" alt="" class="spreadly-service-icon" />');
 }
   
 function spreadly_init_click_handler(link) {
