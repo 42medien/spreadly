@@ -52,6 +52,26 @@ class apiActions extends sfActions {
         $this->setTemplate("docinsider_ad");
         break;
       
+      case ("peketec.de"):
+      case ("www.peketec.de"):
+        $this->setTemplate("peketec_ad");
+        break;
+      
+      case ("planet-liebe.de"):
+      case ("www.planet-liebe.de"):
+        $this->setTemplate("planet_liebe_ad");
+        break;
+      
+      case ("klatsch-tratsch.de"):
+      case ("www.klatsch-tratsch.de"):
+        $this->setTemplate("klatsch_tratsch_ad");
+        break;
+
+      case ("basicthinking.de"):
+      case ("www.basicthinking.de"):
+        $this->setTemplate("basicthinking_ad");
+        break;
+
       case ("istlokal.de"):
       case ("www.istlokal.de"):
       case ("16vor.de"):
