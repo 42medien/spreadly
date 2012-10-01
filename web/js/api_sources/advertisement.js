@@ -13,8 +13,18 @@ function spreadly_show_ad() {
   if (document.getElementById('spreadly-advertisement-container') == null) {
     var elm = document.getElementsByClassName('spreadly-button')[0];
     var url = elm.href;
+    var position = elm.getAttribute("data-adlayer-position");
+    var html_positon = "";
     
-    elm.insertAdjacentHTML('beforeBegin', '<div id="spreadly-advertisement-container"><div class="spreadly-advertisement"><div><iframe src="http://##YIID_WIDGET_HOST##/api/demo_ad?url='+encodeURIComponent(url)+'" style="width:250px; height:255px;"></iframe><small class="spreadly-advertisement-disclaimer"><a href="http://spreadly.com" target="blank">Spreadly Advertisement</a>&nbsp;</small><small class="spreadly-advertisement-close"><a href="#" onclick="spreadly_close_advertisement(); return false;">close</a></small></div></div></div>');
+    if (position == "bottom") {
+      position = "bottom";
+      html_positon = "afterEnd";
+    } else {
+      position = "top";
+      html_positon = "beforeBegin";
+    }
+    
+    elm.insertAdjacentHTML(html_positon, '<div id="spreadly-advertisement-container"><div class="spreadly-advertisement spreadly-advertisement-'+position+'"><div><iframe src="http://##YIID_WIDGET_HOST##/api/demo_ad?url='+encodeURIComponent(url)+'" style="width:250px; height:255px;"></iframe><small class="spreadly-advertisement-disclaimer"><a href="http://spreadly.com" target="blank">Spreadly Advertisement</a>&nbsp;</small><small class="spreadly-advertisement-close"><a href="#" onclick="spreadly_close_advertisement(); return false;">close</a></small></div></div></div>');
   }  
 }
 
