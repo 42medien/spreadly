@@ -29,7 +29,7 @@ class JobRepository extends DocumentRepository {
                 ->find()
                 ->sort('scheduled', 'desc')
                 ->sort('priority', 'desc')
-                ->sort('scheduled_at', 'asc')
+                ->sort('scheduled_at', 'desc')
                 ->getQuery()
                 ->execute();
   }
