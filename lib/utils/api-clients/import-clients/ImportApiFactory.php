@@ -34,8 +34,14 @@ class ImportApiFactory {
       case "linkedin":
         return new LinkedinImportClient();
         break;
-      case "google":
-        return new GoogleImportClient();
+      case "xing":
+        return new XingImportClient();
+        break;
+      case "tumblr":
+        return new TumblrImportClient();
+        break;
+      case "flattr":
+        return new FlattrImportClient();
         break;
       default:
         return null;
