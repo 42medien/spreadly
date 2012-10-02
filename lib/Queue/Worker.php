@@ -9,6 +9,8 @@ use \sfException,
     \ProjectConfiguration,
     \AmazonCloudWatch;
 
+error_reporting(0);
+
 require_once 'System/Daemon.php';
 require_once(dirname(__FILE__).'/../../config/BatchConfiguration.class.php');
 require_once(dirname(__FILE__).'/../../config/ProjectConfiguration.class.php');
