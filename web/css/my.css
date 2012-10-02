@@ -5,6 +5,11 @@ div.tag-cloud {
   line-height: 1.1;
 }
 
+div.tag-cloud big {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
 .hero-unit p.score {
   font-family: Georgia, serif;
   font-size: 80px;
