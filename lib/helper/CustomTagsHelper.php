@@ -65,7 +65,7 @@ function simple_tag_cloud($tags, $options = array(), $route = null)
       $emphasizers_end = "";
       
       $count = $count * 100 / $max_count;
-      $count = intval($count * 10 / 100);
+      $count = intval($count * 5 / 100);
       
       for($i = 1; $i <= $count; $i++) {
         $emphasizers_begin .= "<big>";

@@ -20,6 +20,8 @@ ul.tags-list {
 
 ul.tags-list li {
   display: inline;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 [class^="icon-"], [class*=" icon-"] {
