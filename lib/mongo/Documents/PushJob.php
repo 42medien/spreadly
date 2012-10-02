@@ -29,6 +29,11 @@ class PushJob extends Job {
 
     $dm = \MongoManager::getDM();
     $ya = $dm->getRepository("Documents\YiidActivity")->find(new \MongoId($this->getYiidActivityId()));
+    
+    if (!$ya) {
+      return false;
+    }
+    
     $dp = $ya->getDomainProfile();
 
     if (!$dp) {
@@ -36,7 +41,11 @@ class PushJob extends Job {
     }
 
     $ds = $dp->getDomainSubscriptions();
-
+    
+    if (!$ds) {
+      return false;
+    }
+    
     foreach ($ds as $s) {
       $info = \PubSubHubbub::push($s->getCallback(), $this->toJson($ya), array("Content-Type: application/json"));
 
