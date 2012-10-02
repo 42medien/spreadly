@@ -49,13 +49,24 @@ function simple_tag_cloud($tags, $options = array(), $route = null)
     $link_function = isset($options['link_function']) ? $options['link_function'] : 'link_to';
     $link_options = isset($options['link_options']) ? $options['link_options'] : array();
     $link_options['rel'] = 'tag';
-
+    
+    $max_count = 0;
+    
+    foreach ($tags as $name => $count) {
+      if ($count > $max_count) {
+        $max_count = $count;
+      }
+    }
+    
     foreach ($tags as $name => $count)
     {
       $actual++;
       $emphasizers_begin = "";
       $emphasizers_end = "";
-
+      
+      $count = $count * 100 / $max_count;
+      $count = intval($count * 10 / 100);
+      
       for($i = 1; $i <= $count; $i++) {
         $emphasizers_begin .= "<big>";
         $emphasizers_end .= "</big>";
