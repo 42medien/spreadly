@@ -11,7 +11,7 @@
 class jobActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request) {
-    $this->jobs = MongoManager::getDm()->getRepository('Documents\Job')->findOrdered()->limit(500);
+    $this->jobs = MongoManager::getDm()->getRepository('Documents\Job')->find()->sort(array("scheduled" => 1, "scheduled_at" => -1))->limit(500);
   }
 
   public function executeAddPointlessJobs(sfWebRequest $request) {
