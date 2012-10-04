@@ -76,7 +76,17 @@ class apiActions extends sfActions {
       case ("www.ibusiness.de"):
         $this->setTemplate("ibusiness_ad");
         break;
-
+      
+      case ("briefmarkenspiegel.de"):
+      case ("www.briefmarkenspiegel.de"):
+        $this->setTemplate("briefmarkenspiegel_ad");
+        break;
+      
+      case ("d-b-z.de"):
+      case ("www.d-b-z.de "):
+        $this->setTemplate("dbz_ad");
+        break;
+      
       case ("istlokal.de"):
       case ("www.istlokal.de"):
       case ("16vor.de"):
