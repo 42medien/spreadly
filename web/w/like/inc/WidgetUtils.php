@@ -264,14 +264,14 @@ class WidgetUtils {
   /**
    * encapsulates all trackings
    */
-  public function trackUser() {
+  public function trackUser($button_type = null) {
     // check if mongo is active
     if (!$this->getMongoCon()) {
       return false;
     }
 
     $this->trackClickback();
-    $this->trackVisit();
+    $this->trackVisit($button_type);
   }
 
   /**
@@ -280,7 +280,7 @@ class WidgetUtils {
    * @param string $pUrl
    * @author weyandch
    */
-  private function trackVisit() {
+  private function trackVisit($button_type = null) {
     $lUrl = $this->aUrl;
     $lCollection = $this->getMongoCon()->selectCollection(LikeSettings::MONGO_STATS_DATABASENAME, 'visit');
 
@@ -293,6 +293,10 @@ class WidgetUtils {
 
     if ($lQueryArray['host'] != '') {
       $lUpdateArray = array( '$inc' => array('stats.day_'.date('d').'.pis' => 1, 'pis_total' => 1));
+      // track button type
+      if ($button_type) {
+        $lUpdateArray['$inc']['stats.button_type.'.$button_type.'.pis'] = 1;
+      }
       $lCollection->update($lQueryArray, $lUpdateArray, array('upsert' => true));
     }
   }

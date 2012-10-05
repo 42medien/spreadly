@@ -15,6 +15,7 @@ function spreadly_init_images(link) {
   link.innerHTML = "";
   link.insertAdjacentHTML('afterBegin', '<img src="##YIID_BUTTON_HOST##/img/button/28/std.png" alt="" class="spreadly-service-icon" />');
   link.insertAdjacentHTML('beforeEnd', '<img src="##YIID_BUTTON_HOST##/img/button/28/sl.png" alt="" class="spreadly-service-icon" />');
+  link.insertAdjacentHTML('beforeEnd', '<iframe src="##YIID_BUTTON_HOST##/w/like/statistics.php" style="width: 0px; height: 0px; border:0;" frameborder="0" scrolling="no" marginheight="0" allowTransparency="true"></iframe>');
 }
   
 function spreadly_init_click_handler(link) {

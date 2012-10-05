@@ -35,9 +35,7 @@
           <th>Rank</th>
           <th class="tooltip" title="Inspected Domain">Domain</th>
           <th class="tooltip" <?php echo $pSortCat=='pis_total'?'class="active"':''; ?> title="Page Impressions"><?php echo link_to('PIs', 'oldstats/monthly?sort=pis_total&order='.$lOrder.'&month='.$pMonth.'&host='.$pHost); ?></th>
-          <th class="tooltip" <?php echo $pSortCat=='act_total'?'class="active"':''; ?> title="Sum of Positive and Negative Activities"><?php echo link_to('Activities', 'oldstats/monthly?sort=act_total&order='.$lOrder.'&month='.$pMonth.'&host='.$pHost); ?></th>
-          <th class="tooltip" <?php echo $pSortCat=='likes_total'?'class="active"':''; ?> title="Positive Activities"><?php echo link_to('Positive', 'oldstats/monthly?sort=likes_total&order='.$lOrder.'&month='.$pMonth.'&host='.$pHost); ?></th>
-          <th class="tooltip" <?php echo $pSortCat=='dislikes_total'?'class="active"':''; ?> title="Negative Activities"><?php echo link_to('Negative', 'oldstats/monthly?sort=dislikes_total&order='.$lOrder.'&month='.$pMonth.'&host='.$pHost); ?></th>
+          <th>JavaScript Button v1</th>
         </tr>
       </thead>
 
@@ -48,9 +46,16 @@
               <td><?php echo (($pPage*20)-20)+$i++."."; ?></td>
               <td class="domain"><?php echo $lVisit['host']; ?></td>
               <td class="pis"><?php echo $lVisit['pis_total']; ?></td>
-              <td class="activities"><?php echo $lVisit['act_total'];?></td>
-              <td class="likes"><?php echo $lVisit['likes_total']; ?></td>
-              <td class="dislikes"><?php echo $lVisit['dislikes_total']; ?></td>
+              <td class="pis">
+                <?php
+                  if (array_key_exists("button_type", $lVisit['stats']) &&
+                      array_key_exists("javascript_v1", $lVisit['stats']['button_type'])) {
+                    echo $lVisit['stats']['button_type']['javascript_v1']['pis'];
+                  } else {
+                    echo 0;
+                  }
+                ?>
+              </td>
             </tr>
           <?php } ?>
       </tbody>
