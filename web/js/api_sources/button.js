@@ -20,6 +20,7 @@ function spreadly_init_images(link) {
   
 function spreadly_init_click_handler(link) {
   link.onclick = function () { spreadly_open_layer(link.href); return false; };
+  return false;
 }
   
 function spreadly_open_layer(url) {
@@ -53,7 +54,7 @@ function spreadly_get_elements_by_class_name(node,classname) {
 	else {
     var a = [],
     re = new RegExp('\\b' + classname + '\\b'),
-    els = node.getElementsByTagName("*"),
+    els = node.getElementsByTagName("a"),
     l = els.length,
     i;
 
