@@ -43,6 +43,11 @@ class apiActions extends sfActions {
       case ("www.ednetz.de"):
         $this->setTemplate("yigg_ad");
         break;
+        
+      case ("ka-news.de"):
+      case ("www.ka-news.de"):
+        $this->setTemplate("kanews_ad");
+        break;
 
       case ("urlaubspartner.net"):
       case ("www.urlaubspartner.net"):
