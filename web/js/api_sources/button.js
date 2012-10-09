@@ -3,7 +3,7 @@
  */
 
 function spreadly_init_buttons() {
-  var buttons = document.getElementsByClassName('spreadly-button');
+  var buttons = spreadly_get_elements_by_class_name(document,'spreadly-button');
   for (var i = 0; i < buttons.length; i++) {
     spreadly_init_images(buttons[i]);
     spreadly_init_click_handler(buttons[i]);
@@ -45,6 +45,25 @@ function spreadly_close_layer() {
 function spreadly_init() {
   document.getElementsByTagName("body")[0].insertAdjacentHTML('beforeEnd', '<div id="spreadly-overlay" style="visibility: hidden;"><div id="spreadly-iframe"></div></div>');
   spreadly_init_buttons();
+}
+
+function spreadly_get_elements_by_class_name(node,classname) {
+	if (node.getElementsByClassName)
+		return node.getElementsByClassName(classname);
+	else {
+    var a = [],
+    re = new RegExp('\\b' + classname + '\\b'),
+    els = node.getElementsByTagName("*"),
+    l = els.length,
+    i;
+
+    for (i = 0; i < l; i += 1) {
+      if (re.test(els[i].className)) {
+        a.push(els[i]);
+      }
+    }
+    return a;
+  }
 }
 
 spreadly_init();

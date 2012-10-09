@@ -1,4 +1,4 @@
-window.onload = function () { 
+(function() {
   var head = document.getElementsByTagName("head")[0];
   // adds css
   var css = document.createElement('link');
@@ -16,4 +16,4 @@ window.onload = function () {
   a.type = 'text/javascript';
   a.src = '##YIID_BUTTON_HOST##/js/v1/advertisement.js';
   head.appendChild(a);
-};
+})();

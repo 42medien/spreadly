@@ -1,9 +1,9 @@
 function spreadly_check_button_visibility() {
-  if (spreadly_checkvisible(document.getElementsByClassName('spreadly-button')[0])) {
+  if (spreadly_checkvisible(spreadly_get_elements_by_class_name(document,'spreadly-button')[0])) {
     setTimeout(spreadly_show_ad, 1000);
   }
   window.onscroll = function() {
-    if (spreadly_checkvisible(document.getElementsByClassName('spreadly-button')[0])) {
+    if (spreadly_checkvisible(spreadly_get_elements_by_class_name(document,'spreadly-button')[0])) {
       setTimeout(spreadly_show_ad, 1000);
     }
   };
@@ -11,7 +11,7 @@ function spreadly_check_button_visibility() {
 
 function spreadly_show_ad() {
   if (document.getElementById('spreadly-advertisement-container') == null) {
-    var elm = document.getElementsByClassName('spreadly-button')[0];
+    var elm = spreadly_get_elements_by_class_name(document,'spreadly-button')[0];
     var url = elm.href;
     var position = elm.getAttribute("data-adlayer-position");
     var html_positon = "";
