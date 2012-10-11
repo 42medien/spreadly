@@ -14,7 +14,6 @@
 	  };
     load('##YIID_BUTTON_HOST##/js/v1/button.js', 'spreadly_button');
     load('##YIID_BUTTON_HOST##/js/v1/advertisement.js', 'spreadly_ads');
-    load('##YIID_BUTTON_HOST##/css/v1/button.css', 'spreadly_css');
   }
   if (w.addEventListener) { w.addEventListener("load", go, false); }
   else if (w.attachEvent) { w.attachEvent("onload",go); }
