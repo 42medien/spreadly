@@ -101,6 +101,8 @@ class apiActions extends sfActions {
       
       case ("d-b-z.de"):
       case ("www.d-b-z.de"):
+      case ("briefmarkenspiegel.com"):
+      case ("www.briefmarkenspiegel.com"):
         $this->setTemplate("dbz_ad");
         break;
       
