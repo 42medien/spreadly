@@ -18,10 +18,6 @@ function spreadly_show_ad() {
     var width = 250;
     var height = 255;
     
-    if (url.match(/klatsch-tratsch\.de/i)) {
-      var width = 300;
-    }
-    
     if (position == "bottom") {
       position = "bottom";
       html_positon = "afterEnd";
