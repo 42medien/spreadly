@@ -13,7 +13,29 @@ function spreadly_init_buttons() {
 function spreadly_init_images(link) {
   link.text = "";
   link.innerHTML = "";
-  link.insertAdjacentHTML('afterBegin', '<img src="##YIID_BUTTON_HOST##/img/button/28/std.png" alt="" class="spreadly-service-icon" />');
+  var services = ["fb", "tw", "li"];
+  var data_services = link.getAttribute("data-services");
+  var available_services = {"facebook":"fb","twitter":"tw","linkedin":"li","tumblr":"tm","xing":"xg","flattr":"ft"};
+  
+  if (data_services == "none") {
+    services = [];
+  } else if (data_services) {
+    var data_services = data_services.split(",");
+    
+    if (typeof(data_services)=='object' && (data_services instanceof Array)) {
+      services = [];
+      for( var i=0; i<data_services.length; i++ ) {
+        if (available_services.hasOwnProperty(data_services[i])) {
+          services[services.length] = available_services[data_services[i]];
+        }
+      }
+    }
+  }
+  
+  for (var i=0; i<services.length; i++) {
+    link.insertAdjacentHTML('beforeEnd', '<img src="##YIID_BUTTON_HOST##/img/button/28/'+services[i]+'.png" alt="" class="spreadly-service-icon" />');
+  }
+
   link.insertAdjacentHTML('beforeEnd', '<img src="##YIID_BUTTON_HOST##/img/button/28/sl.png" alt="" class="spreadly-service-icon" />');
   link.insertAdjacentHTML('beforeEnd', '<iframe src="##YIID_BUTTON_HOST##/w/like/statistics.php" style="width: 0px; height: 0px; border:0;" frameborder="0" scrolling="no" marginheight="0" allowTransparency="true"></iframe>');
 }
