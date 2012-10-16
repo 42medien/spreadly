@@ -162,7 +162,8 @@ EOF;
     // replace wildcards
     $this->getFilesystem()->replaceTokens(sfConfig::get('sf_web_dir').'/js/v1/loader.js', '##', '##', array(
       'YIID_WIDGET_HOST' => sfConfig::get('app_settings_widgets_host'),
-      'YIID_BUTTON_HOST' => sfConfig::get('app_settings_button_url')
+      'YIID_BUTTON_HOST' => sfConfig::get('app_settings_button_url'),
+      'RELEASE_NAME' => sfConfig::get('app_release_name')
     ));
   
     $this->minifyFiles(sfConfig::get('sf_web_dir').'/js/v1/', "w+", "js");
