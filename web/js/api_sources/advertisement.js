@@ -1,9 +1,9 @@
 function spreadly_check_button_visibility() {
-  if (spreadly_checkvisible(spreadly_get_elements_by_class_name(document,'spreadly-button')[0])) {
+  if (spreadly_checkvisible(spreadlyads_get_elements_by_class_name(document,'spreadly-button')[0])) {
     setTimeout(spreadly_show_ad, 1000);
   }
   window.onscroll = function() {
-    if (spreadly_checkvisible(spreadly_get_elements_by_class_name(document,'spreadly-button')[0])) {
+    if (spreadly_checkvisible(spreadlyads_get_elements_by_class_name(document,'spreadly-button')[0])) {
       setTimeout(spreadly_show_ad, 1000);
     }
   };
@@ -11,7 +11,7 @@ function spreadly_check_button_visibility() {
 
 function spreadly_show_ad() {
   if (document.getElementById('spreadly-advertisement-container') == null) {
-    var elm = spreadly_get_elements_by_class_name(document,'spreadly-button')[0];
+    var elm = spreadlyads_get_elements_by_class_name(document,'spreadly-button')[0];
     var url = elm.href;
     var position = elm.getAttribute("data-adlayer-position");
     var html_positon = "";
@@ -72,6 +72,25 @@ function spreadly_close_advertisement() {
   	holder.removeChild(holder.lastChild);
   }
   return false;
+}
+
+function spreadlyads_get_elements_by_class_name(node,classname) {
+	if (node.getElementsByClassName)
+		return node.getElementsByClassName(classname);
+	else {
+    var a = [],
+    re = new RegExp('\\b' + classname + '\\b'),
+    els = node.getElementsByTagName("a"),
+    l = els.length,
+    i;
+
+    for (i = 0; i < l; i += 1) {
+      if (re.test(els[i].className)) {
+        a.push(els[i]);
+      }
+    }
+    return a;
+  }
 }
 
 spreadly_check_button_visibility();
