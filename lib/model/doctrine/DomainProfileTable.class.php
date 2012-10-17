@@ -36,7 +36,12 @@ class DomainProfileTable extends Doctrine_Table
   }
 
   public function retrieveByUrl($url) {
-    $host = parse_url($url, PHP_URL_HOST);
+    if (preg_match("/https?:\/\//i", $url)) {
+      $host = parse_url($url, PHP_URL_HOST);
+    } else {
+      $host = $url;
+    }
+    
 
     return $this->createQuery()
                 ->where('url = ?', array($host))
