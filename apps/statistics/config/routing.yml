@@ -186,6 +186,10 @@ customer:
   url: /customer
   param: { module: landing, action: customer}
 
+advertisements:
+  url: /advertisements
+  param: { module: advertisements, action: index}
+
 advertiser:
   url: /advertiser
   param: { module: advertiser, action: index}
