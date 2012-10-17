@@ -25,7 +25,7 @@
 									<ul class="second-level-nav clearfix" <?php if($module=='domain_profiles' || $module=='analytics' || $module=='publisher') { ?>style="display:block;"<?php } ?>>
 										<li class="first"></li>
 										<li><a href="<?php echo url_for('@configurator'); ?>"><?php echo __('Button'); ?></a></li>
-										<li><a href="<?php echo url_for('@domain_profiles'); ?>"><?php echo __('Domain registrieren'); ?></a></li>
+										<li><a href="<?php echo url_for('@domain_profiles'); ?>"><?php echo __('Webseiten verwalten'); ?></a></li>
 										<li class="last"><a href="<?php echo url_for('@analytics_overview'); ?>"><?php echo __('Statistiken'); ?></a></li>
 									</ul>
 
@@ -35,13 +35,14 @@
 									<a id="nav-advertiser-link" href="<?php echo url_for('@advertiser'); ?>" <?php if($module=='deals' || $module=='deal_analytics' || $module=='advertiser') { echo 'class="active"';} ?> title="<?php echo __('Advertiser'); ?>"><?php echo __('Werbetreibende'); ?></a>
 									<ul class="second-level-nav clearfix" <?php if($module=='deals' || $module=='deal_analytics' || $module=='advertiser') { ?>style="display:block;"<?php } ?>>
 										<li class="first"></li>
-										<li><a href="<?php echo url_for('@deals'); ?>"><?php echo __('Kampagne starten'); ?></a></li>
+										<li><a href="<?php echo url_for('@deals'); ?>"><?php echo __('Dealkampagne starten'); ?></a></li>
+                    <li><a href="<?php echo url_for('@advertisements'); ?>"><?php echo __('Werbung schalten'); ?></a></li>
 										<li><a href="<?php echo url_for('@deal_analytics_index'); ?>"><?php echo __('Statistiken'); ?></a></li>
 										<li class="last"><a href="<?php echo url_for('@dealapi'); ?>"><?php echo __('Deal API'); ?></a></li>
 									</ul>
 
 							</li>
-							<li <?php echo ($sf_user->isAuthenticated() && !$sf_user->isSuperAdmin())?'class="last"':''?>><a href="<?php echo url_for('@pricing'); ?>" <?php if(($module=='landing' && $action=='pricing')) { echo 'class="active"';} ?> title="<?php echo __('Pricing');?>"><?php echo __('Preise');?></a></li>
+							<!-- li <?php echo ($sf_user->isAuthenticated() && !$sf_user->isSuperAdmin())?'class="last"':''?>><a href="<?php echo url_for('@pricing'); ?>" <?php if(($module=='landing' && $action=='pricing')) { echo 'class="active"';} ?> title="<?php echo __('Pricing');?>"><?php echo __('Preise');?></a></li-->
 					    <?php if($sf_user->isSuperAdmin()) { ?>
 					      <li <?php echo ($sf_user->isAuthenticated() && !$sf_user->isSuperAdmin())?'class="last"':''?>>
 					      	<a href="<?php echo url_for('user/settings');?>" title="Backend">
