@@ -192,6 +192,21 @@ class UrlUtils {
 
     return $lDomain;
   }
+  
+  /**
+   * removes custom scheme or adds missing "http://" 
+   *
+   * @param string $url
+   * @return string
+   */
+  public static function narmalizeUrlScheme($url) {
+    $url = preg_replace("/^(web\+share:)/i", "", $url);
+    if (!preg_match("/^https?:\/\//i", $url)) {
+      $url = "http://".$url;
+    }
+    
+    return $url;
+  }
 
   /**
    * url validator

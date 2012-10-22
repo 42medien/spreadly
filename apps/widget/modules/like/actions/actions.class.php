@@ -25,6 +25,9 @@ class likeActions extends sfActions {
    */
   public function executeIndex(sfWebRequest $request) {
     $lUrl = $request->getParameter("url", null);
+    $lUrl = UrlUtils::narmalizeUrlScheme($lUrl);
+    $request->setParameter("url", $lUrl);
+        
     $this->url = $lUrl;
     $this->error = $this->pError = null;
 
