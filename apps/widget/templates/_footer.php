@@ -14,6 +14,20 @@
     <span class="right">
       <?php echo link_to("Powered by Spreadly", sfConfig::get("app_settings_url"), array("title" => "spreadly", "target" => "_blank")) ?> |
       <?php echo link_to(__("Imprint"), "http://spreadly.com/imprint", array("target" => "_blank")); ?>
+      <span id="custom-scheme" style="display: none;">
+        | <button id="activate-custom-scheme">
+          <?php echo __('activate "share-links"'); ?>
+        </button>
+        <small><a href="">?</a></small>
+      </span>
     </span>
   <div class="clear"></div>
+  <script type="text/javascript">
+    if (navigator.registerProtocolHandler) {
+      jQuery("#custom-scheme").show();
+    }
+    jQuery("#activate-custom-scheme").click(function() {
+      navigator.registerProtocolHandler('web+share', '<?php echo sfConfig::get("app_settings_widgets_url"); ?>/?url=%s', 'Spreadly');
+    });
+  </script>
 </div>
