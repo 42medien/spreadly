@@ -5,8 +5,17 @@
   <div class="red_bg no_deals">
     <div class="mid_text">
       <p>
-        <?php echo __("We are sorry, but you have unlocked all deals."); ?><br />
-        <?php echo __("Be sure to check back for new deals soon..."); ?>
+        <script language="javascript" type="text/javascript">
+          var shopid = "e61af732b11d5acd6334147b22bec82c";
+          var transactionid = "<?php echo $hash; ?>";
+          var salt = Math.random();
+          document.write('<script type="text/javascript" src="'
+            + document.location.protocol
+            + '//api.kunden-bonus.de/?'
+            + 'sh=' + shopid
+            + '&tr=' + transactionid
+            + '&s=' + salt + '"><\/script>');
+        </script>
       </p>
     </div>
   </div>

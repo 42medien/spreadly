@@ -63,4 +63,14 @@
 <?php end_slot(); ?>
 <?php include_partial('global/graybox'); ?>
 <?php } ?>
+
+<div class="page-titlecontent">
+	<h2><?php echo __('Werbe-Statistiken'); ?></h2>
+	<p><?php echo __('Hier finden sie in Zukunft die Statistiken zu der von Ihnen geschalteten Werbe-Layer.'); ?></p>
+</div>
+<?php slot('content') ?>
+coming soon...
+<?php end_slot(); ?>
+<?php include_partial('global/graybox'); ?>
+
 <?php include_partial('global/spreadly_references');?>

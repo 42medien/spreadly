@@ -49,6 +49,7 @@ class dealActions extends sfActions
     $this->deal = $deal;
 
     if (!$deal) {
+      $this->hash = md5($this->getUser()->getId().$url);
       $this->setTemplate('default_deal');
     }
   }
