@@ -200,6 +200,9 @@ class UrlUtils {
    * @return string
    */
   public static function narmalizeUrlScheme($url) {
+    if (!trim($url)) {
+      return;
+    }
     $url = preg_replace("/^(web\+share:)/i", "", $url);
     if (!preg_match("/^https?:\/\//i", $url)) {
       $url = "http://".$url;
