@@ -13,6 +13,8 @@ DomainProfile:
       length: 10
       default: pending
       values: ['pending', 'verified']
+    description:
+      type: string(255)
     verification_token:
       type: string(255)
       unique: true
@@ -82,28 +84,3 @@ Visit:
     is_like:     { type: boolean, default: false }
     is_dislike:  { type: boolean, default: false }
     c:        { type: integer }
-
-Advertisement:
-  actAs:
-    Timestampable:  ~
-  columns:
-    code:
-      type:    string
-    user_id:
-      type:    integer
-      notnull: true
-    domain_profile_id:
-      type:    integer
-      notnull: true
-  relations:
-    sfGuardUser:
-      type: one
-      local: user_id
-      foreignAlias: Advertisement
-      onDelete: CASCADE
-    DomainProfile:
-      type: one
-      local: domain_profile_id
-      foreign: id
-      foreignAlias: Advertisement
-      onDelete: CASCADE
