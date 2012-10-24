@@ -219,7 +219,7 @@ border-radius: 3px; -moz-border-radius: 3px;
 }
 .red_bg.no_deals {height: 280px; padding: 0;}
 .title {font-size: 14px; line-height: 40px; font-weight: normal; font-family: 'Arial'; margin: 0 0 0 20px; float: left;}
-.mid_text {padding: 25% 0 0; position: relative;}
+.mid_text { padding: 0; position: relative; text-align: center;}
 .mid_text p, .voucher_text p {color: #fff; text-align: center; text-transform: uppercase; font-family: 'Arial'; font-weight: bold;}
 /* End No More Deals */
 
@@ -434,4 +434,15 @@ input.share-url {
   -webkit-box-shadow: inset 1.5px 1.5px 1px 0 #cacaca, inset -0.5px -0.5px 0.5px 0 #cacaca;
   position: relative;
   float: left;
+}
+div#vaas_title {
+  color: #fff;
+  text-align: center;
+}
+
+div.vaas_box {
+  margin: 0 auto;
+  padding: 0 auto;
+  text-align: center;
+  float: none;
 }
