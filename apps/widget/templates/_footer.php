@@ -18,7 +18,7 @@
         | <button id="activate-custom-scheme">
           <?php echo __('activate "share-links"'); ?>
         </button>
-        <small><a href="">?</a></small>
+        <small><a href="" title='<?php echo __('tell me more about "share-links"'); ?>'>?</a></small>
       </span>
     </span>
   <div class="clear"></div>
