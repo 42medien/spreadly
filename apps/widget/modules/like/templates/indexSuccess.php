@@ -35,7 +35,7 @@ if ($lImages && count($lImages) > 0) {
     <p title="<?php echo $pYiidMeta->getDescription(); ?>">
       <?php echo truncate_text($pYiidMeta->getDescription(), 150); ?>
     </p>
-    <p><a href="<?php echo truncate_text($pYiidMeta->getUrl(), 50); ?>" target="_blank" title="<?php echo $pYiidMeta->getUrl(); ?>">
+    <p><a href="<?php echo $pYiidMeta->getUrl(); ?>" target="_blank" title="<?php echo $pYiidMeta->getUrl(); ?>">
       <?php echo truncate_text($pYiidMeta->getUrl(), 50); ?></a></p>
   </div>
   <div class="clear"></div>
