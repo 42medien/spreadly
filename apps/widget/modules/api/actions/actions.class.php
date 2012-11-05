@@ -46,6 +46,12 @@ class apiActions extends sfActions {
       case ("www.spiele-videos-bilder-news-und-mehr.de"):
         $this->setTemplate("spielevideosbilder_ad");
         break;
+        
+      case ("moz.de"):
+      case ("www.moz.de"):
+        $this->setTemplate("moz_ad");
+        break;
+      
  
       case ("yigg.de"):
       case ("www.yigg.de"):
