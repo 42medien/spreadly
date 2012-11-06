@@ -1,9 +1,9 @@
 function spreadly_check_button_visibility() {
-  if (spreadly_checkvisible(spreadlyads_get_elements_by_class_name(document,'spreadly-button')[0])) {
+  if (spreadly_checkvisible(spreadly_get_elements_by_class_name(document,'spreadly-button')[0])) {
     setTimeout(spreadly_show_ad, 1000);
   }
   window.onscroll = function() {
-    if (spreadly_checkvisible(spreadlyads_get_elements_by_class_name(document,'spreadly-button')[0])) {
+    if (spreadly_checkvisible(spreadly_get_elements_by_class_name(document,'spreadly-button')[0])) {
       setTimeout(spreadly_show_ad, 1000);
     }
   };
@@ -11,12 +11,12 @@ function spreadly_check_button_visibility() {
 
 function spreadly_show_ad() {
   if (document.getElementById('spreadly-advertisement-container') == null) {
-    var elm = spreadlyads_get_elements_by_class_name(document,'spreadly-button')[0];
+    var elm = spreadly_get_elements_by_class_name(document,'spreadly-button')[0];
     var url = elm.href;
     var position = elm.getAttribute("data-adlayer-position");
     var html_positon = "";
-    var width = 250;
-    var height = 255;
+    var width = spreadly_ad_height;
+    var height = spreadly_ad_width;
     
     if (position == "bottom") {
       position = "bottom";
@@ -29,6 +29,12 @@ function spreadly_show_ad() {
     elm.insertAdjacentHTML(html_positon, '<div id="spreadly-advertisement-container"><div class="spreadly-advertisement spreadly-advertisement-'+position+'"><div><iframe src="http://##YIID_WIDGET_HOST##/api/demo_ad?url='+encodeURIComponent(url)+'" style="width:'+width+'px; height:'+height+'px;"></iframe><small class="spreadly-advertisement-disclaimer"><a href="http://spreadly.com" target="blank">Spreadly Advertisement</a>&nbsp;</small><small class="spreadly-advertisement-close"><a href="#" onclick="spreadly_close_advertisement(); return false;">close</a></small></div></div></div>');
   }  
 }
+
+var date = new Date();
+date.setTime(date.getTime()+(3*24*60*60*1000));
+document.cookie = 'meincookie=bla; path=/; expires='+ date.toGMTString()+';';
+
+console.log(document.cookie);
 
 function spreadly_pos_y(elm) {
   var test = elm, top = 0;
@@ -72,25 +78,6 @@ function spreadly_close_advertisement() {
   	holder.removeChild(holder.lastChild);
   }
   return false;
-}
-
-function spreadlyads_get_elements_by_class_name(node,classname) {
-	if (node.getElementsByClassName)
-		return node.getElementsByClassName(classname);
-	else {
-    var a = [],
-    re = new RegExp('\\b' + classname + '\\b'),
-    els = node.getElementsByTagName("a"),
-    l = els.length,
-    i;
-
-    for (i = 0; i < l; i += 1) {
-      if (re.test(els[i].className)) {
-        a.push(els[i]);
-      }
-    }
-    return a;
-  }
 }
 
 spreadly_check_button_visibility();
