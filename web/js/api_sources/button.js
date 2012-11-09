@@ -89,4 +89,41 @@ function spreadly_get_elements_by_class_name(node,classname) {
   }
 }
 
+function spreadly_set_cookie(name, value, lifetime) {
+  var date = new Date();
+  date.setTime(date.getTime() + (lifetime*24*60*60*1000));
+  document.cookie = name + '=' + encodeURIComponent(value) + '; path=/; expires=' + date.toGMTString() + ';';
+}
+
+function spreadly_get_cookie(name) {
+  var all = document.cookie;
+  if (all === "") {
+    return null;
+  }
+  var list = all.split("; ");
+  for (var i = 0; i < list.length; i++) {
+    var cookie = list[i];
+    var p = cookie.indexOf("=");
+    var n = cookie.substring(0,p);
+    var v = cookie.substring(p+1);
+    
+    if (n == name) {
+      return decodeURIComponent(v);
+    }
+  }
+  return null;
+}
+
+function spreadly_check_cookie(name) {
+  if (spreadly_get_cookie(name)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function spreadly_delete_cookie(name) {
+  spreadly_set_cookie(name, "", -1);
+}
+
 spreadly_init();

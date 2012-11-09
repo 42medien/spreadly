@@ -30,12 +30,6 @@ function spreadly_show_ad() {
   }  
 }
 
-var date = new Date();
-date.setTime(date.getTime()+(3*24*60*60*1000));
-document.cookie = 'meincookie=bla; path=/; expires='+ date.toGMTString()+';';
-
-console.log(document.cookie);
-
 function spreadly_pos_y(elm) {
   var test = elm, top = 0;
 
@@ -73,6 +67,7 @@ function spreadly_checkvisible( elm ) {
 }
 
 function spreadly_close_advertisement() {
+  spreadly_set_cookie('spreadly_ad_layer', 'hide', 1);
   holder = document.getElementById('spreadly-advertisement-container');
   while(holder.hasChildNodes()){
   	holder.removeChild(holder.lastChild);
@@ -80,4 +75,6 @@ function spreadly_close_advertisement() {
   return false;
 }
 
-spreadly_check_button_visibility();
+if (!spreadly_check_cookie('spreadly_ad_layer')) {
+  spreadly_check_button_visibility();
+}
