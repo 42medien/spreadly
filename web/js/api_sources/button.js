@@ -91,7 +91,7 @@ function spreadly_get_elements_by_class_name(node,classname) {
 
 function spreadly_set_cookie(name, value, lifetime) {
   var date = new Date();
-  date.setTime(date.getTime() + (lifetime*24*60*60*1000));
+  date.setTime(date.getTime() + (lifetime*60*1000));
   document.cookie = name + '=' + encodeURIComponent(value) + '; path=/; expires=' + date.toGMTString() + ';';
 }
 
