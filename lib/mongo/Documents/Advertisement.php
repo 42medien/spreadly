@@ -27,6 +27,14 @@ abstract class Advertisement extends BaseDocument {
   protected $domain_profile_id;
   
   /**
+   * A list of domains where the ad should be displayed
+   * at
+   *
+   * @Array
+   */
+   protected $domains;
+  
+  /**
    * The url to an advertisement image
    *
    * @String
@@ -48,6 +56,20 @@ abstract class Advertisement extends BaseDocument {
   protected $ad_code;
   
   /**
+   * The width of the ad layer
+   *
+   * @Int
+   */
+  protected $ad_width;
+  
+  /**
+   * The height of the ad layer
+   *
+   * @Int
+   */
+  protected $ad_height;
+  
+  /**
    * Last changes to the object
    *
    * @Date
@@ -55,7 +77,8 @@ abstract class Advertisement extends BaseDocument {
   protected $updated_at;
   
   /**
-   * The date where the advertisement should show up 
+   * The date where the advertisement
+   * should show up 
    *
    * @Date
    */
