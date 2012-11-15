@@ -67,7 +67,7 @@ function spreadly_checkvisible( elm ) {
 }
 
 function spreadly_close_advertisement() {
-  spreadly_set_cookie('spreadly_ad_layer', 'hide', 1440);
+  spreadly_set_cookie('spreadly_ad_layer', 'hide', 60);
   holder = document.getElementById('spreadly-advertisement-container');
   while(holder.hasChildNodes()){
   	holder.removeChild(holder.lastChild);
