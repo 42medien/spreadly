@@ -13,8 +13,8 @@ DomainProfile:
       length: 10
       default: pending
       values: ['pending', 'verified']
-    description:
-      type: string(255)
+    #description:
+    #  type: string(255)
     verification_token:
       type: string(255)
       unique: true
