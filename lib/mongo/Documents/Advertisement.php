@@ -32,7 +32,15 @@ abstract class Advertisement extends BaseDocument {
    *
    * @Array
    */
-   protected $domains;
+  protected $domains;
+  
+  /**
+   * The user_id of the ad-"owner"
+   * (needed for the stats)
+   *
+   * @Int
+   */
+  protected $ad_owner_id;
   
   /**
    * The url to an advertisement image
