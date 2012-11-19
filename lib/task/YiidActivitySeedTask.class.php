@@ -136,7 +136,16 @@ EOF;
         $this->log($e->getMessage());
       }
     }
-
+    
+    $ds = new Documents\DomainSettings();
+    $ds->setDomain("blog.local");
+    $ds->setMute(0);
+    $ds->save();
+		
+    $ds = new Documents\DomainSettings();
+    $ds->setDomain("pfefferle.org");
+    $ds->setDisableAds(true);
+    $ds->save();
 
     /*
 

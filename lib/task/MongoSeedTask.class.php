@@ -39,6 +39,7 @@ EOF;
     $this->createPiData($db);
     $this->createChartData($db);
     $this->createDealData($db);
+    $this->createDomainSettings($db);
   }
 
   private function sometimesRand($from, $to) {
@@ -47,6 +48,16 @@ EOF;
     } else {
       return $to;
     }
+  }
+  
+  /**
+   * adds some DomainSettings for testing purposes
+   */
+  private function createDomainSettings($db) {
+    $ds = new Documents\DomainSettings();
+    $ds->setDomain("blog.local");
+    $ds->setMute(0);
+    $ds->save();
   }
 
   private function sometimesRandBoolean() {
