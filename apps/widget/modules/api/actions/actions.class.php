@@ -51,7 +51,11 @@ class apiActions extends sfActions {
       case ("www.moz.de"):
         $this->setTemplate("moz_ad");
         break;
-      
+
+	    case ("reviersport.de"):
+	    case ("www.reviersport.de"):
+	      $this->setTemplate("reviersport_ad");
+	      break;      
  
       case ("yigg.de"):
       case ("www.yigg.de"):

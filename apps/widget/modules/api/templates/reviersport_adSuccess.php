@@ -5,6 +5,6 @@ body { margin:0; padding:0; }
 </style>
 </head>
 <body>
-<script type="text/javascript" src="http://a.ligatus.com/?ids=34536&t=js"></script>
+<script type="text/javascript" src="http://a.ligatus.com/?ids=34792&t=js"></script>
 </body>
 </html>
