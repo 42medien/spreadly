@@ -24,6 +24,9 @@
       <span class="navigation_text <?php if($module=='domain') { echo 'active'; } ?>">
         <?php echo link_to('Domains', url_for('domain/index')) ?> |
       </span>
+      <span class="navigation_text <?php if($module=='domain_settings') { echo 'active'; } ?>">
+        <?php echo link_to('Domain Settings', url_for('domain_settings/index')) ?> |
+      </span>
 
       <!--
       <span class="navigation_text <?php if($module=='sfGuardPermission') { echo 'active'; } ?>">
