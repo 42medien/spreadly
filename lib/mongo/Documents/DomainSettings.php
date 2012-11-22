@@ -9,7 +9,7 @@ use \MongoDate,
  *
  * @author Matthias Pfefferle
  *
- * @Document(collection="domain_settings")
+ * @Document(collection="domain_settings", repositoryClass="Repositories\DomainSettingsRepository")
  * @HasLifecycleCallbacks
  * @InheritanceType("SINGLE_COLLECTION")
  */
@@ -51,11 +51,10 @@ class DomainSettings extends BaseDocument {
   /**
    * Last changes to the object
    *
-   * @Date
+   * @Field(type="date", name="u")
    */
   protected $updated_at;
-
-  
+	
   /**
    * A nicer way to save the object
    */

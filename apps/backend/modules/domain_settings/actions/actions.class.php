@@ -16,6 +16,6 @@ class domain_settingsActions extends sfActions
    * @param sfRequest $request A request object
    */
   public function executeIndex(sfWebRequest $request) {
-
+		$this->domain_settings = MongoManager::getDm()->getRepository('Documents\DomainSettings')->findOrdered(100);
   }
 }
