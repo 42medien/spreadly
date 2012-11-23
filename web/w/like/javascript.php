@@ -2,7 +2,7 @@
 include('inc/JavaScriptUtils.php');
 
 $jsu = new JavaScriptUtils();
-
+echo "// javascript for '". $jsu->getHost()."'";
 header("Content-type: text/javascript");
 include("./../../js/v1/button.js");
 ?>

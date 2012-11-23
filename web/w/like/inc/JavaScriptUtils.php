@@ -19,6 +19,10 @@ class JavaScriptUtils {
     $this->detectUrl();
     $this->normalizeHost();
   }
+	
+	public function getHost() {
+		return $this->host;
+	}
   
   /**
    * muting the layer depending on the DomainSettings
