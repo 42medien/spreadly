@@ -59,6 +59,7 @@ class DomainSettings extends BaseDocument {
    * A nicer way to save the object
    */
   public function save() {
+		$this->setUpdatedAt(strtotime("now"));
     $dm = MongoManager::getDM();
     $dm->persist($this);
     $dm->flush();
