@@ -28,6 +28,7 @@
   display: block;
   overflow: hidden;
   overflow-y: hidden;
+  overflow-x: hidden;
   border: none;
 }
 

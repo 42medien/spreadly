@@ -63,31 +63,31 @@ class User extends BaseUser {
   }
 
   public function getFacebook() {
-    if ($OnlineIdentity = OnlineIdentityTable::getInstance()->retrieveByUserIdAndCommunity($this->getId(), "facebook")) {
-      if ($pu = $OnlineIdentity->getProfileUri()) {
-        return $pu;
-      } else {
-        return $OnlineIdentity->getName();
-      }
-    } else {
-      return "none";
-    }
+		return $this->getOnlineIdentityProfileUri("facebook");
   }
 
   public function getTwitter() {
-    if ($OnlineIdentity = OnlineIdentityTable::getInstance()->retrieveByUserIdAndCommunity($this->getId(), "twitter")) {
-      if ($pu = $OnlineIdentity->getProfileUri()) {
-        return $pu;
-      } else {
-        return $OnlineIdentity->getName();
-      }
-    } else {
-      return "none";
-    }
+		return $this->getOnlineIdentityProfileUri("twitter");
   }
 
   public function getLinkedin() {
-    if ($OnlineIdentity = OnlineIdentityTable::getInstance()->retrieveByUserIdAndCommunity($this->getId(), "linkedin")) {
+		return $this->getOnlineIdentityProfileUri("linkedin");
+  }
+	
+  public function getXing() {
+		return $this->getOnlineIdentityProfileUri("xing");
+  }
+	
+  public function getTumblr() {
+		return $this->getOnlineIdentityProfileUri("tumblr");
+  }
+	
+  public function getFlattr() {
+		return $this->getOnlineIdentityProfileUri("flattr");
+  }
+	
+	public function getOnlineIdentityProfileUri($community) {
+    if ($OnlineIdentity = OnlineIdentityTable::getInstance()->retrieveByUserIdAndCommunity($this->getId(), $community)) {
       if ($pu = $OnlineIdentity->getProfileUri()) {
         return $pu;
       } else {
@@ -96,8 +96,8 @@ class User extends BaseUser {
     } else {
       return "none";
     }
-  }
-
+	}
+	
   /**
    * constructs the sortname of the current user-object
    *
