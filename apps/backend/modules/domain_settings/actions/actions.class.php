@@ -82,7 +82,7 @@ class domain_settingsActions extends sfActions {
 				$domain_settings->setDisableAds(false);
 			}
 			
-			if ($domain_settings_array["mute"] && is_numeric($domain_settings_array["mute"])) {
+			if (isset($domain_settings_array["mute"]) && is_numeric($domain_settings_array["mute"])) {
 				$domain_settings->setMute($domain_settings_array["mute"]);
 			}
 			
