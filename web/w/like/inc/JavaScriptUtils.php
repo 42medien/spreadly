@@ -58,6 +58,22 @@ class JavaScriptUtils {
     }
     return null;
   }
+	
+	public function getHeight() {
+		if ($this->host == "www.rhein-zeitung.de") {
+			return 200;
+		}
+		
+		return 250;
+	}
+	
+	public function getWidth() {
+		if ($this->host == "www.rhein-zeitung.de") {
+			return 411;
+		}
+		
+		return 255;
+	}
   
   /**
    * returns a mongo instance

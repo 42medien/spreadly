@@ -73,7 +73,12 @@ class apiActions extends sfActions {
       case ("www.urlaubspartner.net"):
         $this->setTemplate("urlaubspartner_ad");
         break;
-
+			
+	    case ("rhein-zeitung.de"):
+	    case ("www.rhein-zeitung.de"):
+	      $this->setTemplate("rhein_zeitung_ad");
+	      break;
+			
       case ("docinsider.de"):
       case ("www.docinsider.de"):
         $this->setTemplate("docinsider_ad");
