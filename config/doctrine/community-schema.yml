@@ -7,10 +7,6 @@ Community:
   actAs:
     NoMemcacheBehavior: ~
     Timestampable:  ~
-    Sluggable:
-      unique: true
-      fields: [slug]
-      canUpdate: true
   columns:
     #user_id:
     #  type:       integer
