@@ -72,4 +72,15 @@ class FacebookImportClient {
     $lUser->setBirthdate($pOnlineIdentity->getBirthDate());
     $lUser->save();
   }
+	
+	public static function importLikes($online_identity) {
+		$token = AuthTokenTable::getByUserAndOnlineIdentity($online_identity->getUserId(), $online_identity->getId());
+		
+    if (!$token) {
+      $online_identity->deactivate();
+      throw new Exception('damn theres no token!', '666');
+    }
+		
+		
+	}
 }
