@@ -12,8 +12,8 @@ Community:
       fields: [slug]
       canUpdate: true
   columns:
-    user_id:
-      type:       integer
+    #user_id:
+    #  type:       integer
     community:
       type:       string(255)
       unique:     true
@@ -28,8 +28,8 @@ Community:
     #  default:    ''
     #im_url:
     #  type:       string(255)
-    slug:
-      type:       string(255)
+    #slug:
+    #  type:       string(255)
     #costs:
     #  type:       boolean
     #  default:    false
