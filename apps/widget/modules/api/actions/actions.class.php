@@ -55,7 +55,12 @@ class apiActions extends sfActions {
 	    case ("reviersport.de"):
 	    case ("www.reviersport.de"):
 	      $this->setTemplate("reviersport_ad");
-	      break;      
+	      break;
+				
+		  case ("hallo-veranstaltungen.de"):
+		  case ("www.hallo-veranstaltungen.de"):
+		    $this->setTemplate("hallo_veranstaltungen_ad");
+		    break;
  
       case ("yigg.de"):
       case ("www.yigg.de"):
