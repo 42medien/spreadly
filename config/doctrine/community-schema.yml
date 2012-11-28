@@ -21,8 +21,8 @@ Community:
       type:       string(255)
     url:
       type:       string(255)
-    oi_url:
-      type:       string(255)
+    #oi_url:
+    #  type:       string(255)
     #auto_contact_url:
     #  type:       string(255)
     #  default:    ''
