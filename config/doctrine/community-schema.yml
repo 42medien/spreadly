@@ -7,9 +7,13 @@ Community:
   actAs:
     NoMemcacheBehavior: ~
     Timestampable:  ~
+    Sluggable:
+      unique: true
+      fields: [slug]
+      canUpdate: true
   columns:
-    #user_id:
-    #  type:       integer
+    user_id:
+      type:       integer
     community:
       type:       string(255)
       unique:     true
@@ -17,15 +21,15 @@ Community:
       type:       string(255)
     url:
       type:       string(255)
-    #oi_url:
-    #  type:       string(255)
+    oi_url:
+      type:       string(255)
     #auto_contact_url:
     #  type:       string(255)
     #  default:    ''
     #im_url:
     #  type:       string(255)
-    #slug:
-    #  type:       string(255)
+    slug:
+      type:       string(255)
     #costs:
     #  type:       boolean
     #  default:    false
