@@ -73,6 +73,11 @@ class FacebookImportClient {
     $lUser->save();
   }
 	
+	/**
+	 * Imports all likes from a facebook account to store it in the mongodb
+	 *
+	 * @param int $online_identity
+	 */
 	public static function importLikes($online_identity) {
 		$token = AuthTokenTable::getByUserAndOnlineIdentity($online_identity->getUserId(), $online_identity->getId());
 		
