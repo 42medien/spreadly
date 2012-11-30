@@ -15,8 +15,8 @@ function spreadly_show_ad() {
     var url = elm.href;
     var position = elm.getAttribute("data-adlayer-position");
     var html_positon = "";
-    var width = spreadly_ad_height;
-    var height = spreadly_ad_width;
+    var width = spreadly_ad_width;
+    var height = spreadly_ad_height;
     
     if (position == "bottom") {
       position = "bottom";

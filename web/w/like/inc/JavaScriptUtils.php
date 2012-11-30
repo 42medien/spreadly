@@ -61,7 +61,7 @@ class JavaScriptUtils {
 	
 	public function getHeight() {
 		if ($this->host == "www.rhein-zeitung.de") {
-			return 200;
+			return 205;
 		}
 		
 		return 250;
@@ -69,7 +69,7 @@ class JavaScriptUtils {
 	
 	public function getWidth() {
 		if ($this->host == "www.rhein-zeitung.de") {
-			return 411;
+			return 466;
 		}
 		
 		return 255;
