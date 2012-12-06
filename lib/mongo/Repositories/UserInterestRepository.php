@@ -22,6 +22,10 @@ class UserInterestRepository extends DocumentRepository {
                    ->field('c')->set(intval($interest->getCreatedAt()))
                    ->getQuery()->execute();
 		
+    if (!$result) {
+      $result = $this->findOneBy(array("o_id" => $interest->getOriginalId(), 'oi_id' => intval($online_identity->getId())));
+    }
+		
 		$result->setInterest($interest);
 		$result->save();
 

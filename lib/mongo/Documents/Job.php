@@ -13,7 +13,7 @@ use \MongoDate,
  * @HasLifecycleCallbacks
  * @InheritanceType("SINGLE_COLLECTION")
  * @DiscriminatorField(fieldName="type")
- * @DiscriminatorMap({"contact_import"="ContactImportJob", "pointless"="PointlessJob", "push"="PushJob"})
+ * @DiscriminatorMap({"contact_import"="ContactImportJob", "pointless"="PointlessJob", "push"="PushJob", "interest_import"="InterestImportJob"})
  */
 abstract class Job extends BaseDocument {
   const DEFAULT_PRIORITY = 1;

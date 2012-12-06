@@ -78,7 +78,7 @@ class FacebookImportClient {
 	 *
 	 * @param int $online_identity
 	 */
-	public static function importLikes($online_identity) {
+	public static function importInterests($online_identity) {
 		$token = AuthTokenTable::getByUserAndOnlineIdentity($online_identity->getUserId(), $online_identity->getId());
 		
     if (!$token) {
@@ -97,7 +97,11 @@ class FacebookImportClient {
 			// iterate and save in mongodb
 			foreach ($objects["data"] as $object) {
 		    $interest = $dm->getRepository('Documents\Interest')->upsert($object);
-				$user_interest = $dm->getRepository('Documents\UserInterest')->upsert($online_identity, $interest);
+
+				// check interest
+				if ($interest) {
+					$user_interest = $dm->getRepository('Documents\UserInterest')->upsert($online_identity, $interest);
+				}
 			}
 		}
 		

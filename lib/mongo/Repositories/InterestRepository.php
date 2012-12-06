@@ -22,6 +22,10 @@ class InterestRepository extends DocumentRepository {
                    ->field('c')->set(intval(strtotime($interest['created_time'])))
                    ->getQuery()->execute();
 
-    return $result;
+    if ($result) {
+      return $result;
+    } else {
+      return $this->findOneBy(array("o_id" => $interest['id']));
+    }
 	}
 }

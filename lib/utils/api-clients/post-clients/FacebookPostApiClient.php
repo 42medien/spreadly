@@ -12,6 +12,8 @@ class FacebookPostApiClient extends PostApi {
    */
   protected function send($pPostBody) {
     $this->onlineIdentity->scheduleImportJob();
+		Queue\Queue::getInstance()->put(new Documents\InterestImportJob($this->onlineIdentity->getId()));
+
     $lToken = $this->getAuthToken();
     $pPostBody .= "&access_token=".$lToken->getTokenKey();
     return UrlUtils::sendPostRequest(sfConfig::get("app_".$this->classToIdentifier()."_post_api"), $pPostBody);

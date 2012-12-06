@@ -2,15 +2,17 @@
 namespace Documents;
 
 use Documents\Job,
-    sfContext,
-    Exception;
+    \sfContext,
+    \Exception,
+		\OnlineIdentityTable,
+		\FacebookImportClient;
 
 /**
  * LikeImportJob imports a users likes from facebook
  * @author Matthias Pfefferle
  * @Document
  */
-class LikeImportJob extends Job {
+class InterestImportJob extends Job {
   
   /** @String */
   protected $online_identity_id;
@@ -20,7 +22,7 @@ class LikeImportJob extends Job {
   }
     
   public function execute() {
-    $online_identity = OnlineIdentityTable::getInstance()->find($this->online_identity_id);
+		$online_identity = OnlineIdentityTable::getInstance()->find($this->online_identity_id);
 		
 		// if there is no online identity or if the identitiy isn't a facebook identity,
 		// step out
@@ -30,7 +32,7 @@ class LikeImportJob extends Job {
 		
 		// trying to import likes
 		try {
-			FacebookImportClient::importLikes($online_identity);
+			FacebookImportClient::importInterests($online_identity);
 		} catch (Exception $e) {
 			// do nothing
 		}
