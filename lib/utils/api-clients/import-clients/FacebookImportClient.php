@@ -86,6 +86,21 @@ class FacebookImportClient {
       throw new Exception('damn theres no token!', '666');
     }
 		
+		// get likes
+		$response = UrlUtils::sendGetRequest("https://graph.facebook.com/me/likes?access_token=".$token->getTokenKey());
 		
+		// mongo manager
+		$dm = MongoManager::getDM();
+		
+		// check likes
+		if ($response && $objects = json_decode($response, true)) {
+			// iterate and save in mongodb
+			foreach ($objects["data"] as $object) {
+		    $interest = $dm->getRepository('Documents\Interest')->upsert($object);
+				$user_interest = $dm->getRepository('Documents\UserInterest')->upsert($online_identity, $interest);
+			}
+		}
+		
+		return;
 	}
 }
