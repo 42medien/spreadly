@@ -1,4 +1,4 @@
-<?php use_helper("Text", "YiidNumber"); ?>
+<?php use_helper("Text", "YiidNumber", "SocialMedia"); ?>
 <div class="page-titlecontent">
 	<h2><?php echo __('Share-Analytics'); ?></h2>
 	<p><?php echo __('Hier sehen Sie eine Übersicht über die von Ihnen verifizierten URLs und die entsprechenden Gesamtzahlen. Klicken Sie auf eine URL um zu den Details zu gelangen.'); ?></p>
@@ -92,10 +92,24 @@
 	  	    		</span>
 	  	    	</div>
 	  	    </th>
-	  			<th align="center" valign="middle" class="last">
+	  			<th align="center" valign="middle">
 	  				<div class="sortlink no-sort" style="white-space: nowrap;">
 	  	    		<span class="myqtip" title="<?php echo __("Total number of contacts that are able to view the like referring to your content."); ?>">
 	  						<?php echo __('Media Penetration'); ?>
+	  					</span>
+	  				</div>
+	  			</th>
+	  			<th align="center" valign="middle">
+	  				<div class="sortlink no-sort" style="white-space: nowrap;">
+	  	    		<span class="myqtip" title="<?php echo __(""); ?>">
+	  						<?php echo __('Facebook'); ?>
+	  					</span>
+	  				</div>
+	  			</th>
+	  			<th align="center" valign="middle" class="last">
+	  				<div class="sortlink no-sort" style="white-space: nowrap;">
+	  	    		<span class="myqtip" title="<?php echo __(""); ?>">
+	  						<?php echo __('Twitter'); ?>
 	  					</span>
 	  				</div>
 	  			</th>
@@ -115,6 +129,8 @@
 	  		    <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo point_format($lUrlValue['l']) ?></strong></div></td>
 	  		    <td align="center" valign="middle" ><div><strong class="big-font blue"><?php echo point_format($lUrlValue['sh']) ?></strong></div></td>
 	  				<td align="center" class="last"><div><strong class="big-font blue"><?php echo point_format($lUrlValue['mp']) ?></strong></div></td>
+						<td align="center" class="last"><div><strong class="big-font blue"><?php echo facebook_count($lUrl['_id']) ?></strong></div></td>
+						<td align="center" class="last"><div><strong class="big-font blue"><?php echo twitter_count($lUrl['_id']) ?></strong></div></td>
 	  			</tr>
 	      <?php $i++; } ?>
 	      <?php } else { ?>
