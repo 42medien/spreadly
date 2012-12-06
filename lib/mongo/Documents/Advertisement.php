@@ -5,7 +5,7 @@ use \MongoDate,
     \MongoManager;
 
 /**
- * Base Class for scheduled Jobs in the Queue
+ * Base Class to represent Advertisements
  *
  * @author Matthias Pfefferle
  *
