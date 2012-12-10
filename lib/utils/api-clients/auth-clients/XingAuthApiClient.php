@@ -135,9 +135,9 @@ class XingAuthApiClient extends AuthApi {
    */
   public function doAuthentication() {
     $lRequestToken = self::getRequestToken();
-    $lRequest = OAuthClient::prepareRequest($this->getConsumer(), $lRequestToken, "GET", "https://api.xing.com/v1/authorize");
+
     // redirect
-    header("Location: " . $lRequest->to_url());
+    header("Location: https://api.xing.com/v1/authorize?" . $lRequestToken);
     // do nothing more
     exit;
   }
