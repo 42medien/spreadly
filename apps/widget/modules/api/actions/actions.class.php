@@ -86,6 +86,7 @@ class apiActions extends sfActions {
 			
 	    case ("rhein-zeitung.de"):
 	    case ("www.rhein-zeitung.de"):
+      case ("web-red.rz.newsfactory.de"):
 	      $this->setTemplate("rhein_zeitung_ad");
 	      break;
 			
