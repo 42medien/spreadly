@@ -54,6 +54,8 @@ class apiActions extends sfActions {
 
 	    case ("reviersport.de"):
 	    case ("www.reviersport.de"):
+      case ("sportonline.de"):
+      case ("www.sportonline.de"):
 	      $this->setTemplate("reviersport_ad");
 	      break;
 				
