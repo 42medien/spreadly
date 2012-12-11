@@ -120,7 +120,7 @@ class XingAuthApiClient extends AuthApi {
    */
   public function getRequestToken() {
     $lRequestToken = OAuthClient::getRequestToken($this->getConsumer(), "https://api.xing.com/v1/request_token", 'POST', array("oauth_callback" => $this->getCallbackUri()));
-
+    
     // save the request token
     OauthRequestTokenTable::saveToken($lRequestToken, $this->getCommunity());
 
@@ -135,9 +135,9 @@ class XingAuthApiClient extends AuthApi {
    */
   public function doAuthentication() {
     $lRequestToken = self::getRequestToken();
-
+    $lRequest = OAuthClient::prepareRequest($this->getConsumer(), $lRequestToken, "GET", "https://api.xing.com/v1/authorize");
     // redirect
-    header("Location: https://api.xing.com/v1/authorize?" . $lRequestToken);
+    header("Location: " . $lRequest->to_url());
     // do nothing more
     exit;
   }
