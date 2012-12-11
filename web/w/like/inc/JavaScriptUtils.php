@@ -60,7 +60,8 @@ class JavaScriptUtils {
   }
 	
 	public function getHeight() {
-		if ($this->host == "www.rhein-zeitung.de") {
+		if ($this->host == "www.rhein-zeitung.de" ||
+        $this->host == "web-red.rz.newsfactory.de") {
 			return 205;
 		}
 		
@@ -68,7 +69,8 @@ class JavaScriptUtils {
 	}
 	
 	public function getWidth() {
-		if ($this->host == "www.rhein-zeitung.de") {
+		if ($this->host == "www.rhein-zeitung.de" ||
+        $this->host == "web-red.rz.newsfactory.de") {
 			return 466;
 		}
 		
