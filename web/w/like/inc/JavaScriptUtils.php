@@ -65,7 +65,7 @@ class JavaScriptUtils {
 			return 205;
 		}
 		
-		return 250;
+		return 255;
 	}
 	
 	public function getWidth() {
@@ -74,7 +74,7 @@ class JavaScriptUtils {
 			return 466;
 		}
 		
-		return 255;
+		return 260;
 	}
   
   /**

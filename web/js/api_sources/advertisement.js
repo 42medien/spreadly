@@ -26,7 +26,7 @@ function spreadly_show_ad() {
       html_positon = "beforeBegin";
     }
     
-    elm.insertAdjacentHTML(html_positon, '<div id="spreadly-advertisement-container"><div class="spreadly-advertisement spreadly-advertisement-'+position+'"><div><iframe src="http://##YIID_WIDGET_HOST##/api/demo_ad?url='+encodeURIComponent(url)+'" style="width:'+width+'px; height:'+height+'px;"></iframe><small class="spreadly-advertisement-disclaimer"><a href="http://spreadly.com" target="blank">Spreadly Advertisement</a>&nbsp;</small><small class="spreadly-advertisement-close"><a href="#" onclick="spreadly_close_advertisement(); return false;">close</a></small></div></div></div>');
+    elm.insertAdjacentHTML(html_positon, '<div id="spreadly-advertisement-container"><div class="spreadly-advertisement spreadly-advertisement-'+position+'"><div><iframe src="http://##YIID_WIDGET_HOST##/api/demo_ad?url='+encodeURIComponent(url)+'" style="width:'+width+'px; height:'+height+'px;" scrolling="no" scrollbar="no" frameborder="0"></iframe><small class="spreadly-advertisement-disclaimer"><a href="http://spreadly.com" target="blank">Spreadly Advertisement</a>&nbsp;</small><small class="spreadly-advertisement-close"><a href="#" onclick="spreadly_close_advertisement(); return false;">close</a></small></div></div></div>');
   }  
 }
 

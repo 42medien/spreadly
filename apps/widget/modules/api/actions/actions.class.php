@@ -68,7 +68,9 @@ class apiActions extends sfActions {
 			case ("www.mnnews.de"):
 			  $this->setTemplate("mnnews_ad");
 			  break;
- 
+      
+      case ("hallo-veranstaltungen.de"):
+      case ("www.hallo-veranstaltungen.de"):
       case ("yigg.de"):
       case ("www.yigg.de"):
       case ("ednetz.de"):
