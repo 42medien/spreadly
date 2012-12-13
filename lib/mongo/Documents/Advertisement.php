@@ -94,6 +94,15 @@ class Advertisement extends BaseDocument {
   protected $starting_at;
   
   /**
+   * returns all domains as a comma steperated string
+   *
+   * @return string
+   */
+  public function getDomainsAsString() {
+    return implode(", ", $this->getDomains());
+  }
+  
+  /**
    * A nicer way to save the object
    */
   public function save() {
