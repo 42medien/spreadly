@@ -9,10 +9,11 @@ use \MongoDate,
  *
  * @author Matthias Pfefferle
  *
+ * @Document(collection="advertisement", repositoryClass="Repositories\AdvertisementRepository")
  * @HasLifecycleCallbacks
  * @InheritanceType("SINGLE_COLLECTION")
  */
-abstract class Advertisement extends BaseDocument {
+class Advertisement extends BaseDocument {
 
   /** 
    * @Id
@@ -30,7 +31,7 @@ abstract class Advertisement extends BaseDocument {
    * A list of domains where the ad should be displayed
    * at
    *
-   * @Array
+   * @Hash
    */
   protected $domains;
   
@@ -80,7 +81,7 @@ abstract class Advertisement extends BaseDocument {
   /**
    * Last changes to the object
    *
-   * @Date
+   * @Int
    */
   protected $updated_at;
   
@@ -88,7 +89,7 @@ abstract class Advertisement extends BaseDocument {
    * The date where the advertisement
    * should show up 
    *
-   * @Date
+   * @Int
    */
   protected $starting_at;
   
