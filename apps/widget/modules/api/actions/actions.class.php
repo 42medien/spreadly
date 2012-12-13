@@ -36,39 +36,34 @@ class apiActions extends sfActions {
       case ("www.deraktionaer.de"):
         $this->setTemplate("deraktionaer_ad");
         break;
-      
+
       case ("daf.fm"):
       case ("www.daf.fm"):
         $this->setTemplate("daf_ad");
         break;
-        
+
       case ("spiele-videos-bilder-news-und-mehr.de"):
       case ("www.spiele-videos-bilder-news-und-mehr.de"):
         $this->setTemplate("spielevideosbilder_ad");
         break;
-        
+
       case ("moz.de"):
       case ("www.moz.de"):
         $this->setTemplate("moz_ad");
         break;
-
-	    case ("reviersport.de"):
-	    case ("www.reviersport.de"):
+        
+      case ("reviersport.de"):
+      case ("www.reviersport.de"):
       case ("sportonline.de"):
       case ("www.sportonline.de"):
-	      $this->setTemplate("reviersport_ad");
-	      break;
-				
-		  case ("hallo-veranstaltungen.de"):
-		  case ("www.hallo-veranstaltungen.de"):
-		    $this->setTemplate("hallo_veranstaltungen_ad");
-		    break;
-			
+        $this->setTemplate("reviersport_ad");
+        break;
+
 			case ("mnnews.de"):
 			case ("www.mnnews.de"):
 			  $this->setTemplate("mnnews_ad");
 			  break;
-      
+
       case ("hallo-veranstaltungen.de"):
       case ("www.hallo-veranstaltungen.de"):
       case ("yigg.de"):
@@ -77,7 +72,7 @@ class apiActions extends sfActions {
       case ("www.ednetz.de"):
         $this->setTemplate("yigg_ad");
         break;
-        
+
       case ("ka-news.de"):
       case ("www.ka-news.de"):
         $this->setTemplate("kanews_ad");
@@ -87,28 +82,28 @@ class apiActions extends sfActions {
       case ("www.urlaubspartner.net"):
         $this->setTemplate("urlaubspartner_ad");
         break;
-			
+
 	    case ("rhein-zeitung.de"):
 	    case ("www.rhein-zeitung.de"):
       case ("web-red.rz.newsfactory.de"):
 	      $this->setTemplate("rhein_zeitung_ad");
 	      break;
-			
+
       case ("docinsider.de"):
       case ("www.docinsider.de"):
         $this->setTemplate("docinsider_ad");
         break;
-      
+
       case ("peketec.de"):
       case ("www.peketec.de"):
         $this->setTemplate("peketec_ad");
         break;
-      
+
       case ("planet-liebe.de"):
       case ("www.planet-liebe.de"):
         $this->setTemplate("planet_liebe_ad");
         break;
-      
+
       case ("klatsch-tratsch.de"):
       case ("www.klatsch-tratsch.de"):
         $this->setTemplate("klatsch_tratsch_ad");
@@ -118,29 +113,29 @@ class apiActions extends sfActions {
       case ("www.basicthinking.de"):
         $this->setTemplate("basicthinking_ad");
         break;
-      
+
       case ("ibusiness.de"):
       case ("www.ibusiness.de"):
         $this->setTemplate("ibusiness_ad");
         break;
-      
+
       case ("briefmarkenspiegel.de"):
       case ("www.briefmarkenspiegel.de"):
         $this->setTemplate("briefmarkenspiegel_ad");
         break;
-      
+
       case ("d-b-z.de"):
       case ("www.d-b-z.de"):
       case ("briefmarkenspiegel.com"):
       case ("www.briefmarkenspiegel.com"):
         $this->setTemplate("dbz_ad");
         break;
-      
+
       case ("eins.de"):
       case ("www.eins.de"):
         $this->setTemplate("eins_ad");
         break;
-      
+
       case ("istlokal.de"):
       case ("www.istlokal.de"):
       case ("16vor.de"):
@@ -232,7 +227,7 @@ class apiActions extends sfActions {
         $this->setTemplate("istlokal_ad");
         break;
     }
-    
+
     $this->setLayout(false);
   }
 }
