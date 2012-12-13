@@ -146,6 +146,13 @@ EOF;
     $ds->setDomain("pfefferle.org");
     $ds->setDisableAds(true);
     $ds->save();
+    
+    $ad = new Documents\Advertisement();
+    $ad->setDomains(array("pfefferle.org", "notizblog.org", "www.spiegel.de", "blog.local"));
+    $ad->setAdCode('<script type="text/javascript" src="http://a.ligatus.com/?ids=34548&t=js"></script>');
+    $ad->setUpdatedAt(strtotime("now"));
+    $ad->setStartingAt(strtotime("now"));
+    $ad->save();
 
     /*
 
