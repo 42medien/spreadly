@@ -79,4 +79,13 @@ class BaseDocument {
     $func = create_function('$c', 'return "_" . strtolower($c[1]);');
     return preg_replace_callback('/([A-Z])/', $func, $str);
   }
+  
+  /**
+   * A nicer way to delete the object
+   */
+  public function delete() {
+    $dm = MongoManager::getDM();
+    $dm->remove($this);
+    $dm->flush();
+  }
 }
