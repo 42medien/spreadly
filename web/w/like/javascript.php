@@ -1,4 +1,7 @@
 <?php
+header('Pragma: no-cache');
+header('Cache-Control: private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+
 include('inc/JavaScriptUtils.php');
 
 $jsu = new JavaScriptUtils();
