@@ -152,6 +152,37 @@ EOF;
     $ad->setAdCode('<script type="text/javascript" src="http://a.ligatus.com/?ids=34548&t=js"></script>');
     $ad->setUpdatedAt(strtotime("now"));
     $ad->setStartingAt(strtotime("now"));
+    $ad->setAdHeight(500);
+    $ad->setAdWidth(50);
+    $ad->save();
+    
+    $ad = new Documents\Advertisement();
+    $ad->setDomains(array("blog.local"));
+    $ad->setAdCode("<script type='text/javascript' src='http://imagesrv.adition.com/js/adition.js'></script>
+<script type='text/javascript' src='http://ad4.adfarm1.adition.com/js?wp_id=744125'></script>");
+    $ad->setUpdatedAt(strtotime("now"));
+    $ad->setStartingAt(strtotime("now"));
+    $ad->setAdHeight(100);
+    $ad->setAdWidth(800);
+    $ad->save();
+    
+    $ad = new Documents\Advertisement();
+    $ad->setDomains(array("pfefferle.org", "notizblog.org", "www.spiegel.de", "blog.local"));
+    $ad->setAdCode('<script type="text/javascript"><!--
+  google_ad_client = "ca-pub-1406192967534280";
+  /* spreadly */
+  google_ad_slot = "7458728780";
+  google_ad_width = 250;
+  google_ad_height = 250;
+  //-->
+</script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>');
+    $ad->setUpdatedAt(strtotime("now"));
+    $ad->setStartingAt(strtotime("now"));
+    $ad->setAdHeight(250);
+    $ad->setAdWidth(250);
     $ad->save();
 
     /*
