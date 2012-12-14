@@ -39,7 +39,7 @@
     </table>
 		
 		<ul class="sf_admin_actions">
-			<li class="sf_admin_action_list"><a href="<?php echo url_for("domain_settings/create"); ?>">Create new Settings</a></li>
+			<li class="sf_admin_action_list"><a href="<?php echo url_for("advertisement/create"); ?>">Create new Settings</a></li>
 		</ul>
   </div>
 </div>
