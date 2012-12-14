@@ -27,6 +27,38 @@ class apiActions extends sfActions {
    	return $lReturn['html'];
   }
   
+  public function executeAds(sfWebRequest $request) {
+    $id = $request->getParameter("id");
+    
+    $this->ad_code = '<script type="text/javascript"><!--
+  google_ad_client = "ca-pub-1406192967534280";
+  /* spreadly */
+  google_ad_slot = "7458728780";
+  google_ad_width = 250;
+  google_ad_height = 250;
+  //-->
+</script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>';
+    $this->setLayout(false);
+    
+    if (!$id) {
+      return sfView::SUCCESS;
+    }
+    
+    $dm = MongoManager::getDM();
+    $ad = $dm->getRepository("Documents\Advertisement")->find(new MongoId($id));
+    
+    if (!$ad) {
+      return sfView::SUCCESS;
+    }
+    
+    $ad->save();
+    
+    $this->ad_code = $ad->getAdCode();
+  }
+  
   public function executeDemo_ad(sfWebRequest $request) {
     $url = $request->getParameter("url");
     $domain = parse_url($url, PHP_URL_HOST);
