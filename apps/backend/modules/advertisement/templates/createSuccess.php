@@ -10,20 +10,41 @@
 							<div>
 						  	<label for="ad_domains">Domains</label>
 						    <div class="content">
-									<textarea name="ad[domains]" id="ad_domains" rows="10" cols="100"></textarea>
+									<textarea name="ad[domains]" id="ad_domains" rows="10" cols="100" placeholder="a comma sepperated list of urls (without 'http://' and any slashes) for example like that: www.spreadly.com, spreadly.com, spread.ly"></textarea>
 								</div>
 							</div>
 						</div>
 						
-						<!-- disable ads -->
+						<!-- ad code -->
 						<div class="sf_admin_form_row sf_admin_text sf_admin_form_field_url">
 							<div>
 						  	<label for="ad_ad_code">The Ad-Code</label>
 						    <div class="content">
-									<textarea name="ad[ad_code]" id="ad_ad_code" rows="10" cols="100"></textarea>
+									<textarea name="ad[ad_code]" id="ad_ad_code" rows="10" cols="100" placeholder="the ad code from google-ads, ligatus or..."></textarea>
 								</div>
 							</div>
 						</div>
+            
+						<!-- width of the ad -->
+						<div class="sf_admin_form_row sf_admin_text sf_admin_form_field_url">
+							<div>
+						  	<label for="ad_ad_width">The width</label>
+						    <div class="content">
+									<input type="text" name="ad[ad_width]" id="ad_ad_width" placeholder="the width of the ad layer, for example: '250'"/>
+								</div>
+							</div>
+						</div>
+            
+						<!-- height of the app -->
+						<div class="sf_admin_form_row sf_admin_text sf_admin_form_field_url">
+							<div>
+						  	<label for="ad_ad_height">The height</label>
+						    <div class="content">
+									<input type="text" name="ad[ad_height]" id="ad_ad_height" placeholder="the height of the ad layer, for example: '250'"/>
+								</div>
+							</div>
+						</div>
+						
 
 					</fieldset>
 					

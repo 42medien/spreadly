@@ -22,6 +22,7 @@
       <thead>
         <tr>
           <th><?php echo __("Domains"); ?></th>
+          <th><?php echo __("Width/Height"); ?></th>
           <th><?php echo __("Ad Code"); ?></th>
           <th><?php echo __("Last Update"); ?></th>
         </tr>
@@ -31,6 +32,7 @@
 				<?php foreach($ads as $ad) { ?>
 				<tr>
         	<td><?php echo link_to($ad->getDomainsAsString(), "advertisement/edit", array('query_string' => 'id='.$ad->getId())); ?></td>
+          <td><?php echo $ad->getAdWidth(); ?>/<?php echo $ad->getAdHeight(); ?></td>
           <td><?php echo htmlentities($ad->getAdCode()); ?></td>
           <td><?php echo date("c", $ad->getUpdatedAt()); ?></td>
         </tr>

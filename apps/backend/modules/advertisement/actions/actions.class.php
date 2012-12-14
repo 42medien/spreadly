@@ -21,7 +21,7 @@ class advertisementActions extends sfActions
   }
   
   /**
-   * Executes index action
+   * Executes edit action
    *
    * @param sfRequest $request A request object
    */
@@ -39,6 +39,8 @@ class advertisementActions extends sfActions
       
       $ad->setDomains($ads_array["domains"]);
       $ad->setAdCode($ads_array["ad_code"]);
+      $ad->setAdWidth(intval($ads_array["ad_width"]));
+      $ad->setAdHeight(intval($ads_array["ad_height"]));
       $ad->save();
       
       $id = $ads_array["id"];
@@ -52,7 +54,7 @@ class advertisementActions extends sfActions
   }
   
   /**
-   * Executes index action
+   * Executes create action
    *
    * @param sfRequest $request A request object
    */
@@ -63,9 +65,26 @@ class advertisementActions extends sfActions
       $ad = new Documents\Advertisement();
       $ad->setDomains($ads_array["domains"]);
       $ad->setAdCode($ads_array["ad_code"]);
+      $ad->setAdWidth(intval($ads_array["ad_width"]));
+      $ad->setAdHeight(intval($ads_array["ad_height"]));
       $ad->save();
       
       $this->redirect("advertisement/index");
     }
+  }
+  
+  /**
+   * Executes delete action
+   *
+   * @param sfRequest $request A request object
+   */
+  public function executeDelete(sfWebRequest $request) {
+    $id = $request->getParameter("id");
+    
+    if ($ad = MongoManager::getDm()->getRepository('Documents\Advertisement')->findOneBy(array("id" => $id))) {
+      $ad->delete();
+    }
+
+    $this->redirect("advertisement/index");
   }
 }
