@@ -51,7 +51,7 @@ class DomainSettings extends BaseDocument {
   /**
    * Last changes to the object
    *
-   * @Field(type="date", name="u")
+   * @Field(type="int", name="u")
    */
   protected $updated_at;
 	
