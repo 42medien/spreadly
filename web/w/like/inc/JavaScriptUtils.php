@@ -11,6 +11,9 @@ class JavaScriptUtils {
   // constants
   private $url = null;
   private $host = null;
+  private $ad_id = 'default';
+  private $ad_width = 250;
+  private $ad_height = 250;
   
   /**
    * the construcor (as the name says)
@@ -18,6 +21,7 @@ class JavaScriptUtils {
   public function __construct() {
     $this->detectUrl();
     $this->normalizeHost();
+    $this->getAdvertisement();
   }
 	
 	public function getHost() {
@@ -50,6 +54,10 @@ class JavaScriptUtils {
     return true;
   }
   
+  public function getAdId() {
+    return $this->ad_id;
+  }
+  
   private function getDomainSettingsObject() {
     $collection_object = $this->getMongoCon()->selectCollection(LikeSettings::MONGO_DATABASENAME, 'domain_settings');
     
@@ -58,23 +66,31 @@ class JavaScriptUtils {
     }
     return null;
   }
+  
+  protected function getAdvertisement() {
+    $collection_object = $this->getMongoCon()->selectCollection(LikeSettings::MONGO_DATABASENAME, 'advertisement');
+    
+    if ($collection_object && $this->host) {
+      $ad = $collection_object->find(array("d" => array('$in' => array($this->host))))->sort(array("u" => 1))->limit(1);
+      
+      if ($ad && $ad->hasNext()) {
+        $ad = $ad->getNext();
+        //$ad["u"] = strtotime("now");
+        //$collection_object->update(array("_id" => $ad["_id"]), $ad);
+        
+        $this->ad_id = $ad["_id"];
+        $this->ad_height = $ad["ad_h"];
+        $this->ad_width = $ad["ad_w"];
+      }
+    }
+  }
 	
 	public function getHeight() {
-		if ($this->host == "www.rhein-zeitung.de" ||
-        $this->host == "web-red.rz.newsfactory.de") {
-			return 205;
-		}
-		
-		return 255;
+		return $this->ad_height + 10;
 	}
 	
 	public function getWidth() {
-		if ($this->host == "www.rhein-zeitung.de" ||
-        $this->host == "web-red.rz.newsfactory.de") {
-			return 466;
-		}
-		
-		return 260;
+		return $this->ad_width + 10;
 	}
   
   /**
