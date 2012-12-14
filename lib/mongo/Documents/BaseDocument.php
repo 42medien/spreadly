@@ -84,7 +84,7 @@ class BaseDocument {
    * A nicer way to delete the object
    */
   public function delete() {
-    $dm = MongoManager::getDM();
+    $dm = \MongoManager::getDM();
     $dm->remove($this);
     $dm->flush();
   }
