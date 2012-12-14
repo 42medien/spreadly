@@ -17,7 +17,12 @@ class advertisementActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request) {
 		$this->search = $request->getParameter("search", null);
-		$this->ads = MongoManager::getDm()->getRepository('Documents\Advertisement')->findAll();
+    
+    if ($this->search) {
+      $this->ads = MongoManager::getDm()->getRepository('Documents\Advertisement')->findBy(array("d" => array('$in' => array($this->search))));
+    } else {
+      $this->ads = MongoManager::getDm()->getRepository('Documents\Advertisement')->findAll();
+    }
   }
   
   /**

@@ -4,10 +4,10 @@
   <h1><?php echo __("Domain Settings"); ?></h1>
 
   <div class="clearfix content-header-box" id="filter">
-    <form name="search" class="left" id="search" action="<?php url_for("domain_settings/index"); ?>">
+    <form name="search" class="left" id="search" action="<?php url_for("advertisement/index"); ?>">
       <div class="form-area" style="float:left;">
-        <label for="search-field"><?php echo __("Add/Edit&nbsp;a&nbsp;Domain"); ?></label>
-        <input type="text" name="search" id="search-field" value="<?php echo $search; ?>" class="tooltip" title="Search for the domain you want to add/edit" placeholder="Search for the domain you want to add/edit" />
+        <label for="search-field"><?php echo __("Search&nbsp;for&nbsp;Domains"); ?></label>
+        <input type="text" name="search" id="search-field" value="<?php echo $search; ?>" class="tooltip" title="Search for a domain" />
       </div>
       <div class="form-area" style="float:left;margin-top:20px; margin-left:15px;">
         <input type="submit" value="<?php echo __("Search"); ?>" />
