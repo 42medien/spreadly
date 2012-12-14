@@ -26,8 +26,46 @@ class advertisementActions extends sfActions
    * @param sfRequest $request A request object
    */
   public function executeEdit(sfWebRequest $request) {
-		$id = $request->getParameter("id");
+		$id = null;
+      
+    if ($request->isMethod("POST")) {
+      $ads_array = $request->getParameter("ad");
+      
+      $ad = MongoManager::getDm()->getRepository('Documents\Advertisement')->findOneBy(array("id" => $ads_array["id"]));
+      
+			if (!$ad) {
+				$this->redirect("advertisement/index");
+			}
+      
+      $ad->setDomains($ads_array["domains"]);
+      $ad->setAdCode($ads_array["ad_code"]);
+      $ad->save();
+      
+      $id = $ads_array["id"];
+    }
+    
+    if (!$id) {
+      $id = $request->getParameter("id");
+    }
 
     $this->ad = MongoManager::getDm()->getRepository('Documents\Advertisement')->findOneBy(array("id" => $id));
+  }
+  
+  /**
+   * Executes index action
+   *
+   * @param sfRequest $request A request object
+   */
+  public function executeCreate(sfWebRequest $request) {
+    if ($request->isMethod("POST")) {
+      $ads_array = $request->getParameter("ad");
+      
+      $ad = new Documents\Advertisement();
+      $ad->setDomains($ads_array["domains"]);
+      $ad->setAdCode($ads_array["ad_code"]);
+      $ad->save();
+      
+      $this->redirect("advertisement/index");
+    }
   }
 }
