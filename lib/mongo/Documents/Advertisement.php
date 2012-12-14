@@ -23,7 +23,7 @@ class Advertisement extends BaseDocument {
   /**
    * The Domain Profile ID
    * 
-   * @Int
+   * @Field(type="int", name="dp_id")
    */
   protected $domain_profile_id;
   
@@ -31,7 +31,7 @@ class Advertisement extends BaseDocument {
    * A list of domains where the ad should be displayed
    * at
    *
-   * @Hash
+   * @Field(type="hash", name="d")
    */
   protected $domains;
   
@@ -39,49 +39,49 @@ class Advertisement extends BaseDocument {
    * The user_id of the ad-"owner"
    * (needed for the stats)
    *
-   * @Int
+   * @Field(type="int", name="owner")
    */
   protected $ad_owner_id;
   
   /**
    * The url to an advertisement image
    *
-   * @String
+   * @Field(type="string", name="img")
    */
   protected $ad_image;
   
   /**
    * A link to the advertisement page
    *
-   * @String
+   * @Field(type="string", name="link")
    */
   protected $ad_link;
   
   /**
    * Any HTML-snippet
    *
-   * @String
+   * @Field(type="string", name="code")
    */
   protected $ad_code;
   
   /**
    * The width of the ad layer
    *
-   * @Int
+   * @Field(type="int", name="ad_w")
    */
   protected $ad_width;
   
   /**
    * The height of the ad layer
    *
-   * @Int
+   * @Field(type="int", name="ad_h")
    */
   protected $ad_height;
   
   /**
    * Last changes to the object
    *
-   * @Int
+   * @Field(type="int", name="u")
    */
   protected $updated_at;
   
@@ -89,7 +89,7 @@ class Advertisement extends BaseDocument {
    * The date where the advertisement
    * should show up 
    *
-   * @Int
+   * @Field(type="int", name="s")
    */
   protected $starting_at;
   
@@ -102,12 +102,33 @@ class Advertisement extends BaseDocument {
     return implode(", ", $this->getDomains());
   }
   
+  public function setDomains($domains) {
+    if (!is_array($domains)) {
+      $domains = explode(",", $domains);
+      
+      $this->domains = $this->trimDomainArray($domains);
+    } else {
+      $this->domains = $domains;
+    }
+  }
+  
   /**
    * A nicer way to save the object
    */
   public function save() {
+    $this->setUpdatedAt(strtotime("now"));
+
     $dm = MongoManager::getDM();
     $dm->persist($this);
     $dm->flush();
+  }
+  
+  protected function trimDomainArray($domains) {
+    $temp = array();
+    foreach ($domains as $domain) {
+      $temp[] = trim($domain);
+    }
+    
+    return array_unique($temp);
   }
 }
