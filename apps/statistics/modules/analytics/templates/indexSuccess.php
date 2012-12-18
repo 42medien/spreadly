@@ -127,9 +127,9 @@
 	  					</div>
 	  				</td>
 	  		    <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo point_format($lUrlValue['l']) ?></strong></div></td>
-	  		    <td align="center" valign="middle" ><div><strong class="big-font blue"><?php echo point_format($lUrlValue['sh']) ?></strong></div></td>
-	  				<td align="center" class="last"><div><strong class="big-font blue"><?php echo point_format($lUrlValue['mp']) ?></strong></div></td>
-						<td align="center" class="last"><div><strong class="big-font blue"><?php echo facebook_count($lUrl['_id']) ?></strong></div></td>
+	  		    <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo point_format($lUrlValue['sh']) ?></strong></div></td>
+	  				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo point_format($lUrlValue['mp']) ?></strong></div></td>
+						<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo facebook_count($lUrl['_id']) ?></strong></div></td>
 						<td align="center" class="last"><div><strong class="big-font blue"><?php echo twitter_count($lUrl['_id']) ?></strong></div></td>
 	  			</tr>
 	      <?php $i++; } ?>
