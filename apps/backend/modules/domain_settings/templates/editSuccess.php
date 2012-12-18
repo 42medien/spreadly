@@ -26,6 +26,16 @@
 								</div>
 							</div>
 						</div>
+            
+						<!-- disable ads -->
+						<div class="sf_admin_form_row sf_admin_text sf_admin_form_field_url">
+							<div>
+						  	<label for="domain_settings_ad_displayer">Show Ads on "hover"</label>
+						    <div class="content">
+									<input type="checkbox" name="domain_settings[ad_displayer]" id="domain_settings_ad_displayer"<?php echo $domain_setting->getAdDisplayer() == "hover" ? " checked='checked'": "" ?>>
+								</div>
+							</div>
+						</div>
 						
 						<!-- muting -->
 						<div class="sf_admin_form_row sf_admin_text sf_admin_form_field_url">
@@ -40,6 +50,7 @@
 					
 					<ul class="sf_admin_actions">
 						<li class="sf_admin_action_list"><a href="<?php echo url_for("domain_settings/index"); ?>">Back to list</a></li>
+            <li class="sf_admin_action_list"><a href="<?php echo url_for("domain_settings/delete?id=".$domain_setting->getId()); ?>">Delete</a></li>
 						<li class="sf_admin_action_save"><input type="submit" value="Save"></li>
 					</ul>
 				</form>

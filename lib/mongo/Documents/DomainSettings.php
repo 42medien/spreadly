@@ -49,6 +49,13 @@ class DomainSettings extends BaseDocument {
   protected $disable_ads;
   
   /**
+   * Defines how to display the ad
+   *
+   * @String
+   */
+  protected $ad_displayer;
+  
+  /**
    * Last changes to the object
    *
    * @Field(type="int", name="u")

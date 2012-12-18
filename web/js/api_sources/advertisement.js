@@ -74,6 +74,22 @@ function spreadly_close_advertisement() {
   return false;
 }
 
+function spreadly_ad_add_hover_event() {
+  var buttons = spreadly_get_elements_by_class_name(document,'spreadly-button');
+  for (var i = 0; i < buttons.length; i++) {
+    spreadly_ad_init_hover_handler(buttons[i]);
+  }
+}
+
+function spreadly_ad_init_hover_handler(link) {
+  link.onmouseover = function () { spreadly_show_ad(); return false; };
+  return false;
+}
+
 if (!spreadly_check_cookie('spreadly_ad_layer')) {
-  spreadly_check_button_visibility();
+  if (spreadly_ad_displayer == 'hover') {
+    spreadly_ad_add_hover_event();
+  } else {
+    spreadly_check_button_visibility();
+  }
 }

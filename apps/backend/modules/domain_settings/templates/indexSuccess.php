@@ -24,6 +24,7 @@
           <th><?php echo __("Domain"); ?></th>
           <th><?php echo __("Disable Ads?"); ?></th>
           <th><?php echo __("Ad muting (time in minutes)"); ?></th>
+          <th><?php echo __("Display Type"); ?></th>
         </tr>
       </thead>
 
@@ -37,7 +38,7 @@
 					} else {
 						echo __("not set (default value)");
 					} ?></td>
-          
+          <td><?php echo $ds->getAdDisplayer(); ?></td>
         </tr>
 				<?php } ?>
       </tbody>

@@ -25,6 +25,16 @@
 								</div>
 							</div>
 						</div>
+            
+						<!-- disable ads -->
+						<div class="sf_admin_form_row sf_admin_text sf_admin_form_field_url">
+							<div>
+						  	<label for="domain_settings_ad_displayer">Show Ads on "hover"</label>
+						    <div class="content">
+									<input type="checkbox" name="domain_settings[ad_displayer]" id="domain_settings_ad_displayer">
+								</div>
+							</div>
+						</div>
 						
 						<!-- muting -->
 						<div class="sf_admin_form_row sf_admin_text sf_admin_form_field_url">

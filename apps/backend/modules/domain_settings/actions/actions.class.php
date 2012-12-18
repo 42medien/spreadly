@@ -42,6 +42,12 @@ class domain_settingsActions extends sfActions {
 			} else {
 				$domain_settings->setDisableAds(false);
 			}
+      
+			if (array_key_exists("ad_displayer", $domain_settings_array)) {
+				$domain_settings->setAdDisplayer("hover");
+			} else {
+				$domain_settings->setAdDisplayer("scroll");
+			}
 			
 			if (isset($domain_settings_array["mute"]) && is_numeric($domain_settings_array["mute"])) {
 				$domain_settings->setMute($domain_settings_array["mute"]);
@@ -81,6 +87,12 @@ class domain_settingsActions extends sfActions {
 			} else {
 				$domain_settings->setDisableAds(false);
 			}
+      
+			if (array_key_exists("ad_displayer", $domain_settings_array)) {
+				$domain_settings->setAdDisplayer("hover");
+			} else {
+				$domain_settings->setAdDisplayer("scroll");
+			}
 			
 			if (isset($domain_settings_array["mute"]) && is_numeric($domain_settings_array["mute"])) {
 				$domain_settings->setMute($domain_settings_array["mute"]);
@@ -91,4 +103,19 @@ class domain_settingsActions extends sfActions {
 			$this->redirect("domain_settings/index");
 		}
 	}
+  
+  /**
+   * Executes delete action
+   *
+   * @param sfRequest $request A request object
+   */
+  public function executeDelete(sfWebRequest $request) {
+    $id = $request->getParameter("id");
+    
+    if ($ds = MongoManager::getDm()->getRepository('Documents\DomainSettings')->findOneBy(array("id" => $id))) {
+      $ds->delete();
+    }
+
+    $this->redirect("domain_settings/index");
+  }
 }

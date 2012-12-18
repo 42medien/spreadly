@@ -67,6 +67,16 @@ class JavaScriptUtils {
     return null;
   }
   
+  public function getAdDisplayer() {
+    $domain_settings = $this->getDomainSettingsObject();
+      
+    if ($domain_settings && array_key_exists("ad_displayer", $domain_settings)) {
+      return $domain_settings["ad_displayer"];
+    }
+
+    return "scroll";
+  }
+  
   protected function getAdvertisement() {
     $collection_object = $this->getMongoCon()->selectCollection(LikeSettings::MONGO_DATABASENAME, 'advertisement');
     
