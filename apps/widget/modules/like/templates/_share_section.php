@@ -1,5 +1,5 @@
 <div class="sh_networks_content" id="like-submit">
-<div class="add_networks" id="like-oi-list">
+<div class="add_networks<?php if (count($pIdentities) == 0) { echo " no_identities"; } ?>" id="like-oi-list">
   <div class="networks_icon">
     <ul>
       <?php

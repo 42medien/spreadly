@@ -165,12 +165,13 @@ box-shadow: 1px 4px 2px 0 #000000;
 .plusbtn ul li {float: left; display:inline; margin: 5px 0 0 2px; outline:none;}
 .plusbtn img:hover {box-shadow: inset 3px 3px 2px 0 #000; -moz-box-shadow: inset 2px 2px 2px 0 #000; -webkit-box-shadow: inset 2px 2px 0 0 #000; border-radius:5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;}
 .plusbtn:hover ul {display:block; z-index:500;}
+.no_identities .plusbtn ul{display:block;}
 
 /*add dropdown*/
 .addnet {margin-top: 10px; float:left; display:block;  position:relative;}
 .addnet ul {list-style-type:none;}
 .addnet li.plusbtn {float:left; background: url("../img/popup/addbtn1.png") 0 0 no-repeat; width: 16px; height:16px;}
-.addnet li.plusbtn:hover {float:left; background: url("../img/popup/add_overlay.png") 0 0 no-repeat; cursor:pointer; width: 16px; height:16px;}
+.addnet li.plusbtn:hover, .no_identities .addnet li.plusbtn {float:left; background: url("../img/popup/add_overlay.png") 0 0 no-repeat; cursor:pointer; width: 16px; height:16px;}
 
 /*network icon tool tip*/
 .tooltip{position: relative; cursor: pointer; text-decoration: none; display:inline-block; outline:none;}
