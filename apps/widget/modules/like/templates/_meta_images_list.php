@@ -10,6 +10,3 @@ if (count($pImages) > 0) {
     $i++;
   }
 } ?>
-<div>
-	<img id="meta-img-1337" src="<?php echo image_path("/img/share/default.png", true); ?>" width="120px" />
-</div>

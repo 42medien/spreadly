@@ -81,9 +81,12 @@ class likeActions extends sfActions {
   }
 
   public function executeGet_images(sfWebRequest $request) {
+    sfContext::getInstance()->getConfiguration()->loadHelpers('Asset');
   	$this->getResponse()->setContentType('application/json');
     $lUrl = $request->getParameter("url");
     $lImages = ImageParser::fetch($lUrl);
+    
+    $lImages[] = image_path("/img/share/default.png", true);
 
     $lReturn['count'] = count($lImages);
     $lReturn['html'] = $this->getPartial('like/meta_images_list', array('pImages' => $lImages));
