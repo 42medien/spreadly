@@ -4,7 +4,7 @@
 
 .spreadly-advertisement {
   z-index: 9999;
-  border: 5px solid rgba(0, 0, 0, 0.5);
+  border: 5px solid #aaa;
   border-radius: 5px;
   clear: both;
   background-color: #fff;
