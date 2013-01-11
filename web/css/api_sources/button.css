@@ -4,10 +4,10 @@
 
 .spreadly-advertisement {
   z-index: 9999;
-  border: 5px solid #aaa;
+  border: 5px solid #aaaaaa;
   border-radius: 5px;
   clear: both;
-  background-color: #fff;
+  background-color: #ffffff;
   position: absolute;
   display: block;
   left: 0;
@@ -51,7 +51,7 @@
 .spreadly-advertisement a,
 .spreadly-advertisement a:hover,
 .spreadly-advertisement a:visited {
-  font-color: #000;
+  font-color: #000000;
 }
 
 #spreadly-overlay {

@@ -8,6 +8,22 @@ prod:
       session_name:            spread
       session_cookie_domain:   .spread.ly
       session_cookie_lifetime: 17776000
+      
+  
+  i18n:
+    class: sfI18N
+    param:
+      source:               XLIFF
+      debug:                false
+      untranslated_prefix:  "[T]"
+      untranslated_suffix:  "[/T]"
+      cache:
+        class: sfFileCache
+        param:
+          automatic_cleaning_factor: 0
+          cache_dir:                 %SF_I18N_CACHE_DIR%
+          lifetime:                  31556926
+          prefix:                    %SF_APP_DIR%/i18n
 
 # Staging Environment
 staging:
@@ -17,6 +33,21 @@ staging:
       session_cookie_domain:   .spread.ekaabo.crcl.ws
       session_cookie_lifetime: 17776000
 
+  i18n:
+    class: sfI18N
+    param:
+      source:               XLIFF
+      debug:                false
+      untranslated_prefix:  "[T]"
+      untranslated_suffix:  "[/T]"
+      cache:
+        class: sfFileCache
+        param:
+          automatic_cleaning_factor: 0
+          cache_dir:                 %SF_I18N_CACHE_DIR%
+          lifetime:                  31556926
+          prefix:                    %SF_APP_DIR%/i18n
+
 # Development Environment
 dev:
   storage:
@@ -24,6 +55,21 @@ dev:
       session_name:    spread_dev
       session_cookie_domain: .spread.local
       session_cookie_lifetime: 170200
+  
+  i18n:
+    class: sfI18N
+    param:
+      source:               XLIFF
+      debug:                true
+      untranslated_prefix:  "[T]"
+      untranslated_suffix:  "[/T]"
+      cache:
+        class: sfFileCache
+        param:
+          automatic_cleaning_factor: 0
+          cache_dir:                 %SF_I18N_CACHE_DIR%
+          lifetime:                  31556926
+          prefix:                    %SF_APP_DIR%/i18n
 
 # Default values
 all:
@@ -36,3 +82,18 @@ all:
         sf_file_debug:
           param:
             file:            %SF_LOG_DIR%/widget_%SF_ENVIRONMENT%.log
+  
+  i18n:
+    class: sfI18N
+    param:
+      source:               XLIFF
+      debug:                true
+      untranslated_prefix:  "[T]"
+      untranslated_suffix:  "[/T]"
+      cache:
+        class: sfFileCache
+        param:
+          automatic_cleaning_factor: 0
+          cache_dir:                 %SF_I18N_CACHE_DIR%
+          lifetime:                  31556926
+          prefix:                    %SF_APP_DIR%/i18n

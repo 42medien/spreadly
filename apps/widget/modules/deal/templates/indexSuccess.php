@@ -36,7 +36,7 @@ use_helper('Avatar', 'Text');
 <form action="" name="popup-like-form" id="popup-like-form" class="deal-form" method="post">
 <div class="sh_networks">
   <div class="gradient">
-    <h1>Choose the networks you want to post to</h1>
+    <h1><?php echo __("Choose the networks you want to post to"); ?></h1>
     <?php include_component("like", "share_section", array('pError' => $pError)); ?>
     <input type="hidden" name="like[d_id]" id="deal-img-value" value="<?php echo $deal->getId(); ?>" />
     <div class="clear"></div>

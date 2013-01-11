@@ -3,6 +3,9 @@
 
 # default values
 all:
+  accepted:
+    languages: [en, de]
+
   twitter:
     oauth_callback_uri: "/auth/complete_signin/service/twitter"
 

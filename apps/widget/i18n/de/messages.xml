@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file source-language="EN" target-language="de" datatype="plaintext" original="messages" date="2013-01-10T16:00:00Z" product-name="messages">
+    <header/>
+    <body>
+      <trans-unit id="1">
+        <source>Hi</source>
+        <target>Hallo</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>Likes</source>
+        <target>Likes</target>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>Deals</source>
+        <target>Deals</target>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>Logout</source>
+        <target>Ausloggen</target>
+      </trans-unit>
+      <trans-unit id="5">
+        <source>Imprint</source>
+        <target>Impressum</target>
+      </trans-unit>
+      <trans-unit id="6">
+        <source>activate "share-links"</source>
+        <target>aktiviere "share-links"</target>
+      </trans-unit>
+      <trans-unit id="7">
+        <source>tell me more about "share-links"</source>
+        <target>was sind "share-links"?</target>
+      </trans-unit>
+      <trans-unit id="8">
+        <source>Spreadly - We monetize Social Sharing</source>
+        <target>Spreadly - Wir monetarisieren "Social Sharing"</target>
+      </trans-unit>
+      <trans-unit id="10">
+        <source>Settings</source>
+        <target>Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="11">
+        <source>Authorisation</source>
+        <target>Autorisierung</target>
+      </trans-unit>
+      <trans-unit id="12">
+        <source>authentication is done.</source>
+        <target>Authentifizierung abgeschlossen.</target>
+      </trans-unit>
+      <trans-unit id="13">
+        <source>window is closing automatically. if not, click here</source>
+        <target>Fenster schließt sich automatisch. Falls nicht, bitte hier klicken</target>
+      </trans-unit>
+      <trans-unit id="14">
+        <source>Please choose your favorite service for sharing</source>
+        <target>Bitte wählen sie ihre favorisierten Sharing-Dienste</target>
+      </trans-unit>
+      <trans-unit id="15">
+        <source>You can add additional services anytime later</source>
+        <target>Du kannst jederzeit weitere Dienste hinzufügen</target>
+      </trans-unit>
+      <trans-unit id="16">
+        <source>Please connect with your facebook-profile</source>
+        <target>Bitte benutze Facebook zum teilen</target>
+      </trans-unit>
+      <trans-unit id="17">
+        <source>Thank you for spreading the word!</source>
+        <target>Vielen Dank für's teilen</target>
+      </trans-unit>
+      <trans-unit id="18">
+        <source>here's your promised voucher code:</source>
+        <target>Hier ist dein versprochener Gutschein:</target>
+      </trans-unit>
+      <trans-unit id="19">
+        <source>Visit the shop</source>
+        <target>Besuche den Shop</target>
+      </trans-unit>
+      <trans-unit id="20">
+        <source>here's your promised incentive:</source>
+        <target>Hier ist deine versprochene "Belohnung"</target>
+      </trans-unit>
+      <trans-unit id="21">
+        <source>Download</source>
+        <target>Download</target>
+      </trans-unit>
+      <trans-unit id="22">
+        <source>Visit</source>
+        <target>Besuche</target>
+      </trans-unit>
+      <trans-unit id="23">
+        <source>Your share was successful!</source>
+        <target>Link wurde erfolgreich geteilt.</target>
+      </trans-unit>
+      <trans-unit id="24">
+        <source>get another deal</source>
+        <target>Erhalte einen weiteren Deal</target>
+      </trans-unit>
+      <trans-unit id="25">
+        <source>Your share &amp;amp; bookmark was successful!</source>
+        <target>Dein Share bzw. Bookmark war erfolgreich.</target>
+      </trans-unit>
+      <trans-unit id="26">
+        <source>add your comment (optional) ...</source>
+        <target>Füge ein Kommentar hinzu (optional)...</target>
+      </trans-unit>
+      <trans-unit id="27">
+        <source>Feel free to add some hashtags, for example:</source>
+        <target>oder benutze Hash-Tags:</target>
+      </trans-unit>
+      <trans-unit id="28">
+        <source>Like successfully sent!</source>
+        <target>Link wurde erfolgreich geteilt.</target>
+      </trans-unit>
+      <trans-unit id="29">
+        <source>Something went wrong! Check your selected services and try again!</source>
+        <target>Es ist ein Fehler aufgetreten. Überprüfe deine ausgewählten Dienste und versuche es erneut.</target>
+      </trans-unit>
+      <trans-unit id="30">
+        <source>(Close window)</source>
+        <target>(Fenster schließen)</target>
+      </trans-unit>
+      <trans-unit id="31">
+        <source>Preview for Facebook</source>
+        <target>Vorschau für Facebook</target>
+      </trans-unit>
+      <trans-unit id="32">
+        <source>(Your entry may look different in other services)</source>
+        <target>(Der Eintrag kann sich von Dienst zu Dienst optisch unterscheiden)</target>
+      </trans-unit>
+      <trans-unit id="33">
+        <source>Share this page with your friends</source>
+        <target>Teile diese Seite mit deinen Freunden</target>
+      </trans-unit>
+      <trans-unit id="34">
+        <source>Share a page</source>
+        <target>Teile eine Webseite</target>
+      </trans-unit>
+      <trans-unit id="35">
+        <source>Copy the link you want to share into the input-box below and hit the share-button</source>
+        <target>Kopiere den Link, den du teilen möchtest in das Formularfeld und drücke den "Share-Button"</target>
+      </trans-unit>
+      <trans-unit id="36">
+        <source>share this link</source>
+        <target>Link teilen</target>
+      </trans-unit>
+      <trans-unit id="37">
+        <source>Choose the networks you want to post to</source>
+        <target>Über welche Netzwerke willst du teilen?</target>
+      </trans-unit>
+      <trans-unit id="38">
+        <source>share &amp;amp; bookmark</source>
+        <target>Link teilen</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

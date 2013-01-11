@@ -21,7 +21,7 @@ class authActions extends sfActions {
     }
 
     sfProjectConfiguration::getActive()->loadHelpers('I18N');
-    $this->getUser()->setFlash('headline', __('SETTINGS', null, 'widget'));
+    $this->getUser()->setFlash('headline', __('Settings', null, 'widget'));
   }
 
   public function executeSignout(sfWebRequest $request) {
