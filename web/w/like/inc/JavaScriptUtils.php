@@ -28,6 +28,10 @@ class JavaScriptUtils {
 		return $this->host;
 	}
   
+	public function getUrl() {
+		return $this->url;
+	}
+  
   /**
    * muting the layer depending on the DomainSettings
    */

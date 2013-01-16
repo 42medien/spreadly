@@ -187,8 +187,8 @@ customer:
   param: { module: landing, action: customer}
 
 advertisements:
-  url: /advertisements
-  param: { module: advertisements, action: index}
+  url: /advertisement
+  param: { module: advertisements, action: advertisement }
 
 advertiser:
   url: /advertiser

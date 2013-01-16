@@ -545,6 +545,8 @@ behavior: url(css/PIE.htc);
 .publisher-list p {min-height:134px; height:134px; line-height:16px; border-bottom:solid 1px #595959; margin-bottom:6px;}
 .publisher-list .link a {color:#608094; font-size:13px;}
 .publisher-list .link a:hover {text-decoration:underline;}
+.publisher-list .icon i { font-size: 25px; color:#608094; }
+.publisher-list .alternative { font-weight: bold; font-size: 1.1em;  }
 
 
 /* yiid claimtable  page Css

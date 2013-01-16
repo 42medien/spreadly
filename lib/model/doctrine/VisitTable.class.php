@@ -2,10 +2,7 @@
 
 
 /**
- *
  * > db.visit.update({ host: "kxkxkxkxkxkxkxkkxkx.de", month: "2010-10" }, { $inc : {  "day_1.visits": 1, "day_1.hits": 1}}, { upsert: 1});
-
- *
  *
  * Enter description here ...
  * @author christian
