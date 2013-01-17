@@ -1,3 +1,5 @@
+<?php use_helper("YiidNumber"); ?>
+
 <div class="page-titlecontent">
 	<h2><?php echo __('Willkommen im Spreadly Ad-Network'); ?></h2>
 	<p><?php echo __('Schalten Sie noch heute Ihre Kampagne live und werden Sie Teil eines innovativen Webeformats im Social-Media-Zeitalter'); ?></p>
@@ -10,7 +12,7 @@
 			<h3><?php echo __('Der Button'); ?></h3>
 			<p><?php echo __('Sie kommen gerade von der Seite %domain<br />
 Im letzten Monat wurden Werbemittel hier %counter Mal angezeigt. 
-Schon in wenigen Minuten können Sie hier werben.', array("%domain" => link_to($domain, $domain, array("class" => "alternative", "target" => "_blank")), "%counter" => "<span class='alternative'>".$counter."</span>")); ?></p>
+Schon in wenigen Minuten können Sie hier werben.', array("%domain" => link_to($domain, $domain, array("class" => "alternative", "target" => "_blank")), "%counter" => "<span class='alternative'>".point_format($counter)."</span>")); ?></p>
 			<span class="link"><a href="<?php echo $domain; ?>" target="_blank"><?php echo __('%domain besuchen &raquo;', array("%domain" => $domain)); ?></a></span>
 		</li>
 		<li>
