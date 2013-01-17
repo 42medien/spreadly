@@ -441,9 +441,7 @@ div#vaas_title {
   text-align: center;
 }
 
-div.vaas_box {
+div#vaas_wrapper {
+  width: 405px;
   margin: 0 auto;
-  padding: 0 auto;
-  text-align: center;
-  float: none;
 }
