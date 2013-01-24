@@ -51,11 +51,11 @@ class JavaScriptUtils {
   public function displayAd() {
     $domain_settings = $this->getDomainSettingsObject();
     
-    if ($domain_settings && array_key_exists("disable_ads", $domain_settings) && $domain_settings["disable_ads"]) {
-      return false;
+    if ($domain_settings && array_key_exists("enable_ads", $domain_settings) && $domain_settings["enable_ads"]) {
+      return true;
     }
     
-    return true;
+    return false;
   }
   
   public function getAdId() {

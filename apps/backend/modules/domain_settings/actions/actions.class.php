@@ -37,10 +37,10 @@ class domain_settingsActions extends sfActions {
 				$this->redirect("domain_settings/index");
 			}
 			
-			if (array_key_exists("disable_ads", $domain_settings_array)) {
-				$domain_settings->setDisableAds(true);
+			if (array_key_exists("enable_ads", $domain_settings_array)) {
+				$domain_settings->setEnableAds(true);
 			} else {
-				$domain_settings->setDisableAds(false);
+				$domain_settings->setEnableAds(false);
 			}
       
 			if (array_key_exists("ad_displayer", $domain_settings_array)) {
@@ -82,10 +82,10 @@ class domain_settingsActions extends sfActions {
 				$this->redirect("domain_settings/index");
 			}
 			
-			if (array_key_exists("disable_ads", $domain_settings_array)) {
-				$domain_settings->setDisableAds(true);
+			if (array_key_exists("enable_ads", $domain_settings_array)) {
+				$domain_settings->setEnableAds(true);
 			} else {
-				$domain_settings->setDisableAds(false);
+				$domain_settings->setEnableAds(false);
 			}
       
 			if (array_key_exists("ad_displayer", $domain_settings_array)) {

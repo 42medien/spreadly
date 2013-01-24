@@ -22,7 +22,7 @@
       <thead>
         <tr>
           <th><?php echo __("Domain"); ?></th>
-          <th><?php echo __("Disable Ads?"); ?></th>
+          <th><?php echo __("Enable Ads?"); ?></th>
           <th><?php echo __("Ad muting (time in minutes)"); ?></th>
           <th><?php echo __("Display Type"); ?></th>
         </tr>
@@ -32,7 +32,7 @@
 				<?php foreach($domain_settings as $ds) { ?>
 				<tr>
         	<td><?php echo link_to($ds->getDomain(), "domain_settings/edit", array('query_string' => 'id='.$ds->getId())); ?></td>
-          <td><?php echo $ds->getDisableAds() ? __("yes"): __("no"); ?></td>
+          <td><?php echo $ds->getEnableAds() ? __("yes"): __("no"); ?></td>
 					<td><?php if (is_numeric($ds->getMute())) {
 						echo $ds->getMute() . " " . __("Minutes");
 					} else {

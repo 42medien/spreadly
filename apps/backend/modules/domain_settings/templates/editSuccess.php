@@ -20,9 +20,9 @@
 						<!-- disable ads -->
 						<div class="sf_admin_form_row sf_admin_text sf_admin_form_field_url">
 							<div>
-						  	<label for="domain_settings_disable_ads">Disable Ads?</label>
+						  	<label for="domain_settings_enable_ads">Enable Ads?</label>
 						    <div class="content">
-									<input type="checkbox" name="domain_settings[disable_ads]" id="main_settings_disable_ads"<?php echo $domain_setting->getDisableAds() ? " checked='checked'": "" ?>>
+									<input type="checkbox" name="domain_settings[enable_ads]" id="main_settings_enable_ads"<?php echo $domain_setting->getEnableAds() ? " checked='checked'": "" ?>>
 								</div>
 							</div>
 						</div>

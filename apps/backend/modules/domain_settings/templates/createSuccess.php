@@ -19,9 +19,9 @@
 						<!-- disable ads -->
 						<div class="sf_admin_form_row sf_admin_text sf_admin_form_field_url">
 							<div>
-						  	<label for="domain_settings_disable_ads">Disable Ads?</label>
+						  	<label for="domain_settings_enable_ads">Enable Ads?</label>
 						    <div class="content">
-									<input type="checkbox" name="domain_settings[disable_ads]" id="main_settings_disable_ads">
+									<input type="checkbox" name="domain_settings[enable_ads]" id="main_settings_enable_ads">
 								</div>
 							</div>
 						</div>

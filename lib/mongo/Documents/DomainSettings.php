@@ -46,7 +46,7 @@ class DomainSettings extends BaseDocument {
    *
    * @Boolean
    */
-  protected $disable_ads;
+  protected $enable_ads;
   
   /**
    * Defines how to display the ad
