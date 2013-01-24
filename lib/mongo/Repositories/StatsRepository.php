@@ -195,5 +195,23 @@ abstract class StatsRepository extends DocumentRepository
     $toDay = date('Y-m-d', strtotime("today"));
     return $this->findByRange($hosts, $fromDay, $toDay);
   }
+  
+  public function findLast30OrderedAndLimited($hosts, $limit = 10) {
+    $fromDay = date('Y-m-d', strtotime("30 days ago"));
+    $toDay = date('Y-m-d', strtotime("today"));
+    
+    $query = $this->rangeMapReduce($fromDay, $toDay);
+    $query->field('host')->in($hosts);
+    $query->limit($limit);
+    $query->sort('value.l', 'desc');
 
+    $cursor = null;
+    try {
+      $cursor = $query->getQuery(array("out" => "last30daysOrdered.".$this->GROUP_BY))
+                      ->execute();
+    } catch (\Exception $e) {
+      \sfContext::getInstance()->getLogger()->err("{StatsRepository} findByHostsAndRange failed.\n".$e->getMessage());
+    }
+    return $cursor;
+  }
 }

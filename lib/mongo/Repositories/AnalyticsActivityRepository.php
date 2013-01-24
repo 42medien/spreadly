@@ -47,4 +47,23 @@ class AnalyticsActivityRepository extends StatsRepository
 
     return @$arr[0]['count'];
   }
+  
+  /**
+   * returns the latest activities on a specific host
+   *
+   * @author Matthias Pfefferle
+   * @param string $host
+   * @param int $limit default = 10
+   * @return array
+   */
+  public function findLatestByHost($host, $limit = 10) {
+    $results = $this->createQueryBuilder()
+                    ->hydrate(true)
+                    ->limit($limit)
+                    ->field("host")->equals($host)
+                    ->sort("c", "desc")
+                    ->getQuery()->execute();
+
+    return $results;
+  }
 }

@@ -85,6 +85,16 @@ class User extends BaseUser {
   public function getFlattr() {
 		return $this->getOnlineIdentityProfileUri("flattr");
   }
+  
+  public function getProfileUrl() {
+    if ($twitter = $this->getTwitter()) {
+      return $twitter;
+    } else if ($facebook = $this->getFacebook()) {
+      return $facebook;
+    }
+    
+    // @todo add fallback (find an online identity with profile url)
+  }
 	
 	public function getOnlineIdentityProfileUri($community) {
     if ($OnlineIdentity = OnlineIdentityTable::getInstance()->retrieveByUserIdAndCommunity($this->getId(), $community)) {

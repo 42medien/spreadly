@@ -66,4 +66,15 @@ class AnalyticsActivity extends Stats {
 
     return $service;
   }
+  
+  /**
+   * lazy loads the user connected to this activity
+   *
+   * @return User
+   */
+  public function getUser() {
+    $lUser = \UserTable::getInstance()->retrieveByPk($this->getUserId());
+
+    return $lUser;
+  }
 }

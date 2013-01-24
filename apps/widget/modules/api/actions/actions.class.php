@@ -58,4 +58,31 @@ class apiActions extends sfActions {
     
     $this->ad_code = $ad->getAdCode();
   }
+  
+  /**
+   * 
+   *
+   * 
+   */
+  public function executeWidget(sfWebRequest $request) {
+    // 
+    $url = $request->getParameter("url");
+    $this->url = $url;
+
+    // extract host
+    $host = parse_url($url, PHP_URL_HOST);
+    
+    // get most liked urls of the last 30 days
+  	$url_repo = MongoManager::getStatsDM()->getRepository('Documents\ActivityUrlStats');
+    $this->last30 = $url_repo->findLast30OrderedAndLimited(array($host), 5);
+    if($this->last30) {
+      $this->last30 = $this->last30->toArray();
+    }
+    
+    // get latest users that liked one of the urls
+    $this->activities = MongoManager::getStatsDM()->getRepository('Documents\AnalyticsActivity')->findLatestByHost($host, 9);
+    
+    // disable layout
+    $this->setLayout(false);
+  }
 }

@@ -165,7 +165,16 @@ EOF;
       'YIID_BUTTON_HOST' => sfConfig::get('app_settings_button_url'),
       'RELEASE_NAME' => sfConfig::get('app_release_name')
     ));
-  
+      
+    // copy file
+    $this->getFilesystem()->copy(sfConfig::get('sf_web_dir').'/js/api_sources/widget.js', sfConfig::get('sf_web_dir').'/js/v1/widget.js', array('override' => true));
+    
+    // replace wildcards
+    $this->getFilesystem()->replaceTokens(sfConfig::get('sf_web_dir').'/js/v1/widget.js', '##', '##', array(
+      'YIID_WIDGET_HOST' => sfConfig::get('app_settings_widgets_host'),
+      'YIID_BUTTON_HOST' => sfConfig::get('app_settings_button_url')
+    ));
+    
     $this->minifyFiles(sfConfig::get('sf_web_dir').'/js/v1/', "w+", "js");
   }
 }
