@@ -120,21 +120,15 @@
   <div id="container">
     <div id="top-urls">
       <div class="box left-box">
-        <h2>most shared content</h2>
+        <h2>latest shares</h2>
         <table>
           <tbody>
-            <?php foreach ($last30 as $url) { ?>
+            <?php foreach ($urls as $url) { ?>
             <tr class="even">
-              <td><?php echo link_to(truncate_text($url["_id"], 40, "..."), $url["_id"], array("target" => "_top", "title" => $url["_id"])); ?></td>
-              <td class="counter"><?php echo $url["value"]["l"]; ?></td>
+              <td><?php echo link_to(truncate_text($url->getTitle() . " - " . $url->getUrl(), 50, "..."), $url->getUrl(), array("target" => "_top", "title" => $url->getUrl())); ?></td>
             </tr>
             <?php } ?>
           </tbody>
-          <tfoot>
-            <tr>
-              <th colspan="2">(number of likes)</th>
-            <tr>
-          </tfoot>
         </table>
       </div>
     </div>

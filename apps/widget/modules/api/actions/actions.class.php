@@ -73,11 +73,13 @@ class apiActions extends sfActions {
     $host = parse_url($url, PHP_URL_HOST);
     
     // get most liked urls of the last 30 days
-  	$url_repo = MongoManager::getStatsDM()->getRepository('Documents\ActivityUrlStats');
+  	/*url_repo = MongoManager::getStatsDM()->getRepository('Documents\ActivityUrlStats');
     $this->last30 = $url_repo->findLast30OrderedAndLimited(array($host), 5);
     if($this->last30) {
       $this->last30 = $this->last30->toArray();
-    }
+    }*/
+    
+    $this->urls = MongoManager::getStatsDM()->getRepository('Documents\AnalyticsActivity')->findLatestByHost($host, 6);
     
     // get latest users that liked one of the urls
     $this->activities = MongoManager::getStatsDM()->getRepository('Documents\AnalyticsActivity')->findLatestByHost($host, 9);
