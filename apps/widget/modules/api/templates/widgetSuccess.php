@@ -141,7 +141,7 @@
               $user = $activity->getUser();
           ?>
           <li>
-            <a href="<?php echo $user->getProfileUrl(); ?>" title="<?php echo $user->getFullname(); ?>" >
+            <a href="<?php echo $user->getProfileUrl(); ?>" title="<?php echo $user->getFullname(); ?>" target="_blank">
               <img src="<?php echo $user->getAvatar(); ?>" alt="<?php echo $user->getFullname(); ?>" />
             </a>
           </li>
