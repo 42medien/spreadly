@@ -29,7 +29,7 @@ class feedsActions extends sfActions {
     }
 
     $lDm = MongoManager::getStatsDM();
-    $this->activities = $lDm->createQueryBuilder("Documents\AnalyticsActivity")->field("host")->in($hosts)->sort(array("c" => -1))->limit(10)->getQuery()->execute();
+    $this->activities = $lDm->createQueryBuilder("Documents\AnalyticsActivity")->field("host")->in($hosts)->sort(array("date" => -1))->limit(10)->getQuery()->execute();
 
     $this->user = $user;
     $this->setLayout("atom_layout");

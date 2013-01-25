@@ -61,7 +61,7 @@ class AnalyticsActivityRepository extends StatsRepository
                     ->hydrate(true)
                     ->limit($limit)
                     ->field("host")->equals($host)
-                    ->sort("c", "desc")
+                    ->sort("date", "DESC")
                     ->getQuery()->execute();
 
     return $results;
