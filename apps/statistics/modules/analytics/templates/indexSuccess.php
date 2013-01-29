@@ -31,17 +31,10 @@
 	  	    		</span>
 	  	    	</div>
 	 	    	</th>
-	  			<th align="center" valign="middle">
+	  			<th align="center" valign="middle" class="last">
 	  				<div class="sortlink no-sort">
 							<span class="myqtip" title="<?php echo __("Total number of contacts that are able to view the like referring to your content."); ?>">
 	  						<?php echo __('Media Penetration'); ?>
-	  					</span>
-	  				</div>
-	  			</th>
-	  			<th align="center" valign="middle" class="last">
-	  				<div class="sortlink no-sort" style="white-space: nowrap;">
-							<span class="myqtip" title="<?php echo __("Your revenue of the last 30 days"); ?>">
-	  						<?php echo __('Revenue'); ?>
 	  					</span>
 	  				</div>
 	  			</th>
@@ -55,7 +48,6 @@
 	  		    <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo $last30ByHost && array_key_exists($lDomain->getUrl(), $last30ByHost) ? point_format($last30ByHost[$lDomain->getUrl()]['value']['l']) : 0; ?></strong></div></td>
 	  		    <td align="center" valign="middle" ><div><strong class="big-font blue"><?php echo $last30ByHost && array_key_exists($lDomain->getUrl(), $last30ByHost) ? point_format($last30ByHost[$lDomain->getUrl()]['value']['sh']) : 0; ?></strong></div></td>
 	  				<td align="center" class="middle"><div><strong class="big-font blue"><?php echo $last30ByHost && array_key_exists($lDomain->getUrl(), $last30ByHost) ? point_format($last30ByHost[$lDomain->getUrl()]['value']['mp']) : 0; ?></strong></div></td>
-	  				<td align="center" class="last"><div><strong class="big-font blue"><?php echo $lDomain->getCommissionSumOfLast30Days() ? $lDomain->getCommissionSumOfLast30Days() : 0; ?> €</strong></div></td>
 	  			</tr>
 	      <?php $i++; } ?>
 	    </tbody>
@@ -92,24 +84,10 @@
 	  	    		</span>
 	  	    	</div>
 	  	    </th>
-	  			<th align="center" valign="middle">
+	  			<th align="center" valign="middle" class="last">
 	  				<div class="sortlink no-sort" style="white-space: nowrap;">
 	  	    		<span class="myqtip" title="<?php echo __("Total number of contacts that are able to view the like referring to your content."); ?>">
 	  						<?php echo __('Media Penetration'); ?>
-	  					</span>
-	  				</div>
-	  			</th>
-	  			<th align="center" valign="middle">
-	  				<div class="sortlink no-sort" style="white-space: nowrap;">
-	  	    		<span class="myqtip" title="<?php echo __(""); ?>">
-	  						<?php echo __('Facebook'); ?>
-	  					</span>
-	  				</div>
-	  			</th>
-	  			<th align="center" valign="middle" class="last">
-	  				<div class="sortlink no-sort" style="white-space: nowrap;">
-	  	    		<span class="myqtip" title="<?php echo __(""); ?>">
-	  						<?php echo __('Twitter'); ?>
 	  					</span>
 	  				</div>
 	  			</th>
@@ -129,8 +107,6 @@
 	  		    <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo point_format($lUrlValue['l']) ?></strong></div></td>
 	  		    <td align="center" valign="middle"><div><strong class="big-font blue"><?php echo point_format($lUrlValue['sh']) ?></strong></div></td>
 	  				<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo point_format($lUrlValue['mp']) ?></strong></div></td>
-						<td align="center" valign="middle"><div><strong class="big-font blue"><?php echo facebook_count($lUrl['_id']) ?></strong></div></td>
-						<td align="center" class="last"><div><strong class="big-font blue"><?php echo twitter_count($lUrl['_id']) ?></strong></div></td>
 	  			</tr>
 	      <?php $i++; } ?>
 	      <?php } else { ?>
