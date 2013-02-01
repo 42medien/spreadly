@@ -25,7 +25,7 @@
 								<dd class="otherweb-box alignright">
 									<ul>
 										<li>
-											<a href="/configurator/get_choose_style" class="config-app-link service-img-link" id="service-img-other"></a> <span><a href="/configurator/get_choose_style" title="Other websites" class="config-app-link"><?php echo __("Other websites"); ?></a></span>
+											<a href="https://github.com/ekaabo/spreadly-doku/blob/master/JavaScript_Button.md" class="service-img-link" id="service-img-other" target="_blank"></a> <span><a href="https://github.com/ekaabo/spreadly-doku/blob/master/JavaScript_Button.md" title="Other websites"  target="_blank"><?php echo __("Other websites"); ?></a></span>
 										</li>
 										<li><a href="/configurator/get_choose_style?service=static" class="config-app-link service-img-link" id="service-img-email"></a> <span><a href="/configurator/get_choose_style?service=static" class="config-app-link" title="Email &amp; Signatures"><?php echo __("Email & Signatures"); ?></a></span></li>
 									</ul>
