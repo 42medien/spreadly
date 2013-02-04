@@ -187,4 +187,19 @@ class SocialObject extends BaseDocument {
   public function setCreatedOn($pTimestamp) {
     $this->setC($pTimestamp);
   }
+  
+  public function getUsers() {
+    $user_ids = $this->uids;
+    
+    $query = \Doctrine_Query::create()
+                ->from('User u')
+                ->whereIn('u.id', $user_ids)
+                ->execute();
+    
+    return $query;
+  }
+  
+  public function getLatestYiidActivity() {
+    return \MongoManager::getDM()->getRepository("Documents\YiidActivity")->findOneBy(array('social_object.$id' => new \MongoId($this->getId())));
+  }
 }

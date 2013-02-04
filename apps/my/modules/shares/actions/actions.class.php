@@ -32,4 +32,26 @@ class sharesActions extends sfActions
 
     $this->activities = $pager;
   }
+  
+  /**
+   * Executes index action
+   *
+   * @param sfRequest $request A request object
+   */
+   public function executeSingle(sfWebRequest $request) {
+     $social_object = MongoManager::getDM()->getRepository('Documents\SocialObject');
+     
+     $this->forward404Unless($request->getParameter("id"));
+     $so = $social_object->find(new MongoId($request->getParameter("id")));
+     $this->forward404Unless($so);
+     $this->social_object = $so;
+     
+     $this->social_objects = $social_object->findBy(array("url" => array('$regex' => parse_url($so->getUrl(), PHP_URL_HOST))))->limit(10)->sort(array("u" => -1));
+     
+     $us = MongoManager::getStatsDM()->getRepository('Documents\UrlSummary');
+     $this->url_summarys = $us->findBy(array("host" => parse_url($so->getUrl(), PHP_URL_HOST)))->limit(10)->sort(array("mp" => -1));
+     
+     $hs = MongoManager::getStatsDM()->getRepository('Documents\HostSummary');
+     $this->host_summary = $hs->findOneBy(array("host" => parse_url($so->getUrl(), PHP_URL_HOST)));
+   }
 }

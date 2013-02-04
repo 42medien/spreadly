@@ -48,6 +48,12 @@
   float: left;
 }
 
+.spreadly-advertisement-note {
+  font-size: 10px;
+  display: block;
+  float: right;
+}
+
 .spreadly-advertisement-close {
   font-size: 10px;
   display: block;

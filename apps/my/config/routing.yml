@@ -9,6 +9,14 @@ homepage:
 profile:
   url:  /profile
   param: { module: profile, action: index }
+  
+shares:
+  url:  /shares
+  param: { module: shares, action: index }
+
+share:
+  url:  /share/:id
+  param: { module: shares, action: single }
 
 # generic rules
 # please, remove them by adding more specific rules

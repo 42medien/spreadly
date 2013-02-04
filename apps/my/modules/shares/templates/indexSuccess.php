@@ -20,7 +20,7 @@
       <?php } ?>
     </div>
     <div class="span7">
-      <h2><?php echo $activity->getTitle(); ?></h2>
+      <h2><?php echo link_to($activity->getTitle(), "@share?id=".$activity->getSocialObject()->getId()); ?></h2>
       <p><strong><?php echo $activity->getDescr(); ?></strong></p>
       <?php if ($activity->getComment()) { ?>
         <p><i class="icon-comment"></i> <?php echo $activity->getComment(); ?></p>
