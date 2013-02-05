@@ -1,4 +1,4 @@
-<?php use_helper("CustomTags"); ?>
+<?php use_helper("CustomTags", "YiidNumber"); ?>
 <div class="page-header">
   <h1><?php echo parse_url($social_object->getUrl(), PHP_URL_HOST); ?></h1>
 </div>
@@ -7,15 +7,15 @@
   <div class="row">
     <div class="span3">
       <h2><i class="icon-heart"></i> <?php echo __("Likes"); ?></h2>
-      <p class="score"><?php echo $host_summary->getLikes(); ?></p>
+      <p class="score"><?php echo point_format($host_summary->getLikes()); ?></p>
     </div>
     <div class="span3">
       <h2><i class="icon-share-alt"></i> <?php echo __("Clickbacks"); ?></h2>
-      <p class="score"><?php echo $host_summary->getClickbacks(); ?></p>
+      <p class="score"><?php echo point_format($host_summary->getClickbacks()); ?></p>
     </div>
     <div class="span4">
       <h2><i class="icon-group"></i> <?php echo __("Media Penetration"); ?></h2>
-      <p class="score"><?php echo $host_summary->getMediaPenetration(); ?></p>
+      <p class="score"><?php echo point_format($host_summary->getMediaPenetration()); ?></p>
     </div>
   </div>
 </div>
