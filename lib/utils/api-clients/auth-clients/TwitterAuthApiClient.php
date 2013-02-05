@@ -196,6 +196,8 @@ class TwitterAuthApiClient extends AuthApi {
     } else {
       $pOnlineIdentity->setName($pObject->screen_name);
     }
+    
+    $pOnlineIdentity->setProfileUri("http://twitter.com/".$pObject->screen_name);
 
     $pOnlineIdentity->setLocationRaw($pObject->location);
     $pOnlineIdentity->save();

@@ -60,6 +60,7 @@ class FacebookImportClient {
     $pOnlineIdentity->setRelationshipState(IdentityHelper::tranformRelationshipStringToClasskey($lJsonUserObject->relationship_status));
     $pOnlineIdentity->setSocialPublishingEnabled(true);
     $pOnlineIdentity->setLocationRaw($lJsonUserObject->location->name);
+    $pOnlineIdentity->setProfileUri($lJsonUserObject->link);
 
     $pOnlineIdentity->save();
 

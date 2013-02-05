@@ -177,6 +177,7 @@ class FacebookAuthApiClient extends AuthApi {
     $pOnlineIdentity->setSocialPublishingEnabled(true);
     $pOnlineIdentity->setLocationRaw($pObject->location->name);
     $pOnlineIdentity->setPhoto("https://graph.facebook.com/".$pOnlineIdentity->getOriginalId()."/picture");
+    $pOnlineIdentity->setProfileUri($pObject->link);
 
     $pOnlineIdentity->save();
 

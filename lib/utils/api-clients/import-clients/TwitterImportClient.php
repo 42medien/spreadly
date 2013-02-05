@@ -52,6 +52,8 @@ class TwitterImportClient {
     } else {
       $pOnlineIdentity->setName($lJsonUserObject->screen_name);
     }
+    
+    $pOnlineIdentity->setProfileUri("http://twitter.com/".$lJsonUserObject->screen_name);
 
     // check for aggregating data of gender, birthday etc to complete user record
     // @todo proper location handling
