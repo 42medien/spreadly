@@ -48,6 +48,9 @@ class sharesActions extends sfActions
      
      $this->social_objects = $social_object->findBy(array("url" => array('$regex' => parse_url($so->getUrl(), PHP_URL_HOST))))->limit(10)->sort(array("u" => -1));
      
+     $this->first_share = MongoManager::getStatsDM()->getRepository('Documents\AnalyticsActivity')->findBy(array("host" => parse_url($so->getUrl(), PHP_URL_HOST)))->sort(array("date" => 1))->limit(1)->getNext();
+     $this->last_share = MongoManager::getStatsDM()->getRepository('Documents\AnalyticsActivity')->findBy(array("host" => parse_url($so->getUrl(), PHP_URL_HOST)))->sort(array("date" => -1))->limit(1)->getNext();
+
      $us = MongoManager::getStatsDM()->getRepository('Documents\UrlSummary');
      $this->url_summarys = $us->findBy(array("host" => parse_url($so->getUrl(), PHP_URL_HOST)))->limit(10)->sort(array("mp" => -1));
      

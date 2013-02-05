@@ -1,6 +1,9 @@
 <?php use_helper("CustomTags", "YiidNumber"); ?>
 <div class="page-header">
-  <h1><?php echo parse_url($social_object->getUrl(), PHP_URL_HOST); ?></h1>
+  <h1>
+    <?php echo parse_url($social_object->getUrl(), PHP_URL_HOST); ?>
+    <small><?php echo __("First share"); ?>: <?php echo date("d.m.Y", $first_share["date"]->sec); ?> | <?php echo __("Last share"); ?>: <?php echo date("d.m.Y", $last_share["date"]->sec); ?></small>
+  </h1>
 </div>
 
 <div class="hero-unit">
