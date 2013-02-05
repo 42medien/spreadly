@@ -87,11 +87,17 @@ class User extends BaseUser {
   }
   
   public function getProfileUrl() {
-    if ($twitter = $this->getTwitter()) {
-      return $twitter;
-    } else if ($facebook = $this->getFacebook()) {
-      return $facebook;
+    $lQuery = Doctrine_Query::create()
+      ->from('OnlineIdentity oi')
+      ->where('oi.user_id = ?', $this->getId())
+      ->andWhere('oi.profile_uri IS NOT NULL')
+      ->andWhere('oi.profile_uri != ""');;
+
+    if ($lOi = $lQuery->fetchOne()) {
+      return $lOi->getProfileUri();
     }
+    
+    return null;
     
     // @todo add fallback (find an online identity with profile url)
   }

@@ -51,7 +51,11 @@
       <ul class="users">
       <?php foreach ($social_object->getUids() as $user_id) { ?>
         <?php if ($user = UserTable::getInstance()->find($user_id)) { ?>
-        <li><?php echo image_tag($user->getAvatar(), array("title" => $user->getFullname(), "alt" => "Image of ".$user->getFullname())); ?></li>
+        <li>
+          <?php if ($user->getProfileUrl()) { ?><a href="<?php echo $user->getProfileUrl(); ?>"><?php } ?>
+          <?php echo image_tag($user->getAvatar(), array("title" => $user->getFullname(), "alt" => "Image of ".$user->getFullname())); ?>
+          <?php if ($user->getProfileUrl()) { ?></a><?php } ?>
+        </li>
         <?php } ?>
       <?php } ?>
       </ul>
