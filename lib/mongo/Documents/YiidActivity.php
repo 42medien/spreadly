@@ -181,6 +181,19 @@ class YiidActivity extends BaseDocument {
       $this->tags = $tags;
     }
   }
+  
+  public function getThumb() {
+    if ($this->thumb) {
+      if (UrlUtils::checkUrlAvailability($this->thumb)) {
+        return $this->thumb;
+      } else {
+        $this->thumb = null;
+        $this->save();
+      }
+    }
+    
+    return null;
+  }
 
   /**
    * pre-save hook
