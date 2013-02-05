@@ -21,10 +21,10 @@ function point_format($number, $culture = null)
 {
   if (null === $number)
   {
-    return null;
+    return 0;
   }
 
-  return number_format($number, 0, '', '.');
+  return number_format(intval($number), 0, '', '.');
 }
 
 function truncate_number($number)

@@ -2,7 +2,9 @@
 <div class="page-header">
   <h1>
     <?php echo parse_url($social_object->getUrl(), PHP_URL_HOST); ?>
+    <?php if ($first_share && $last_share) { ?>
     <small><?php echo __("First share"); ?>: <?php echo date("d.m.Y", $first_share["date"]->sec); ?> | <?php echo __("Last share"); ?>: <?php echo date("d.m.Y", $last_share["date"]->sec); ?></small>
+    <?php } ?>
   </h1>
 </div>
 
@@ -10,15 +12,15 @@
   <div class="row">
     <div class="span3">
       <h2><i class="icon-heart"></i> <?php echo __("Likes"); ?></h2>
-      <p class="score"><?php echo point_format($host_summary->getLikes()); ?></p>
+      <p class="score"><?php echo $host_summary ? point_format($host_summary->getLikes()) : 0; ?></p>
     </div>
     <div class="span3">
       <h2><i class="icon-share-alt"></i> <?php echo __("Clickbacks"); ?></h2>
-      <p class="score"><?php echo point_format($host_summary->getClickbacks()); ?></p>
+      <p class="score"><?php echo $host_summary ? point_format($host_summary->getClickbacks()) : 0; ?></p>
     </div>
     <div class="span4">
       <h2><i class="icon-group"></i> <?php echo __("Media Penetration"); ?></h2>
-      <p class="score"><?php echo point_format($host_summary->getMediaPenetration()); ?></p>
+      <p class="score"><?php echo $host_summary ? point_format($host_summary->getMediaPenetration()) : 0; ?></p>
     </div>
   </div>
 </div>
