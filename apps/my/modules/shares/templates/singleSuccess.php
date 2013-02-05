@@ -44,10 +44,10 @@
     <div class="span3">
       <h3>Who shared this site?</h3>
       
-      <ul>
+      <ul class="users">
       <?php foreach ($social_object->getUids() as $user_id) { ?>
         <?php if ($user = UserTable::getInstance()->find($user_id)) { ?>
-        <li><?php echo image_tag($user->getAvatar()); ?></li>
+        <li><?php echo image_tag($user->getAvatar(), array("title" => $user->getFullname(), "alt" => "Image of ".$user->getFullname())); ?></li>
         <?php } ?>
       <?php } ?>
       </ul>

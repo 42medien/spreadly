@@ -39,3 +39,17 @@ ul.tags-list li {
   vertical-align: inherit;
   width: inherit;
 }
+
+ul.users {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+ul.users li {
+  display: inline;
+}
+
+ul.users img {
+  width: 48px;
+}
