@@ -27,6 +27,7 @@
 <hr />
 <?php foreach($social_objects as $social_object) { ?>
   <?php $activity = $social_object->getLatestYiidActivity(); ?>
+  <?php if (!$activity) { continue; } ?>
   <div class="row">
     <div class="span2">
       <?php if ($activity->getThumb()) { ?>
