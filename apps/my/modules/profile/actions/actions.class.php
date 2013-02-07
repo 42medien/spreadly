@@ -33,4 +33,24 @@ class profileActions extends sfActions
     $this->user = $user;
     $this->setLayout("atom_layout");
   }
+  
+  public function executeDelete_identity(sfWebRequest $request) {
+    $id = $request->getParameter("id");
+    
+    $online_identity = OnlineIdentityTable::retrieveVerifiedById($this->getUser()->getId(), $id);
+    
+    if (!$online_identity) {
+      $this->getUser()->setFlash("error", "you can't delete this online-identity, perhaps it is not yours");
+      $this->redirect("profile/index");
+    }
+    
+    try {
+      $online_identity->delete();
+    } catch (Exception $e) {
+      $this->getUser()->setFlash("error", $e->getMessage());
+      $this->redirect("profile/index");
+    }
+    
+    $this->redirect("profile/index");
+  }
 }

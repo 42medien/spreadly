@@ -1,1 +1,1 @@
-<i class="icon-download-alt"></i> <?php echo link_to($activity->getDeal()->getCouponUrl(), $activity->getDeal()->getCouponUrl(), array("target", "_blank"));
+<i class="icon-download-alt"></i> <?php echo link_to($activity->getDeal()->getCouponUrl(), $activity->getDeal()->getCouponUrl(), array("target" => "_blank"));
