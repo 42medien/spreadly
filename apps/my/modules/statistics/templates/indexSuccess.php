@@ -15,7 +15,7 @@
     </div>
     <div class="span3">
       <h2><i class="icon-bar-chart"></i> <?php echo __("Spread Rank"); ?></h2>
-      <p class="score">soon...</p>
+      <p class="score"><?php echo $sf_user->getUser()->getRank(); ?></p>
     </div>
   </div>
 </div>
