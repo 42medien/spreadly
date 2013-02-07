@@ -84,11 +84,10 @@ class OnlineIdentity extends BaseOnlineIdentity
     }
 
     sfContext::getInstance()->getLogger()->notice("you can delete this online identity");
-  }
-  
-  public function delete(Doctrine_Connection $conn = null) {
+    
     $this->setUserId(null);
     $this->save();
+    $event->skipOperation();
   }
 
   /**
