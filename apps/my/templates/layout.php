@@ -41,9 +41,14 @@
         <div class="container">
           <a class="brand" href="/">my.spread.ly</a>
           <ul class="nav">
-            <li<?php if ($sf_context->getModuleName() == "landing") { ?> class="active"<?php } ?>><a href="/"><?php echo __("Home"); ?></a></li>
             <li<?php if ($sf_context->getModuleName() == "statistics") { ?> class="active"<?php } ?>><?php echo link_to(__("Statistics"), "statistics/index"); ?></li>
-            <li<?php if ($sf_context->getModuleName() == "shares") { ?> class="active"<?php } ?>><?php echo link_to(__("Latest 'Likes'"), "shares/index"); ?></li>
+            <li class="dropdown<?php if ($sf_context->getModuleName() == "shares") { ?> active<?php } ?>">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo __("Likes/Shares"); ?></a>
+              <ul class="dropdown-menu">
+                <li><?php echo link_to(__("Your 'Likes'"), "shares/index"); ?></li>
+                <li><?php echo link_to(__("Global 'Likes'-Stream"), "shares/global"); ?></li>
+              </ul>
+            </li>
             <li class="divider-vertical"></li>
           </ul>
           <form class="navbar-search pull-left" action="<?php echo url_for("shares/index"); ?>" method="GET">
@@ -76,16 +81,39 @@
     <?php include_javascripts() ?>
     
     <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'myspreadly'; // required: replace example with your forum shortname
+      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+      var disqus_shortname = 'myspreadly'; // required: replace example with your forum shortname
+      var disqus_identifier; //made of post id and guid
+      var disqus_url; //post permalink
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
+      function loadDisqus(source, identifier, url) {
+
+        if (window.DISQUS) {
+
+          jQuery('#disqus_thread').insertAfter(source); //append the HTML after the link
+
+          //if Disqus exists, call it's reset method with new parameters
+          DISQUS.reset({
+            reload: true,
+            config: function () {
+              this.page.identifier = identifier;
+              this.page.url = url;
+            }
+          });
+
+        } else {
+
+          //insert a wrapper in HTML after the relevant "show comments" link
+          jQuery('<div id="disqus_thread"></div>').insertAfter(source);
+          disqus_identifier = identifier; //set the identifier argument
+          disqus_url = url; //set the permalink argument
+
+          //append the Disqus embed script to HTML
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          jQuery('head').append(dsq);
+        }
+      };
     </script>
   </body>
 </html>

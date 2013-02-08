@@ -53,3 +53,8 @@ ul.users li {
 ul.users img {
   width: 48px;
 }
+
+p.comment-link {
+  font-size: 15px;
+  padding-top: 15px;
+}

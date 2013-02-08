@@ -14,6 +14,10 @@ shares:
   url:  /shares
   param: { module: shares, action: index }
 
+share:
+  url:  /share/:id
+  param: { module: shares, action: single }
+
 host_stats:
   url:  /share/host/:id
   param: { module: shares, action: host }

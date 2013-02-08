@@ -5,7 +5,7 @@
 </div>
 
 <div class="row">
-  <?php include_component("shares", "pager", array("pager" => $activities)); ?>
+  <?php include_component("shares", "global_pager", array("pager" => $activities)); ?>
 </div>
 
 <hr />
@@ -29,25 +29,11 @@
       <p><i class="icon-user"></i> <?php echo $activity->getUser()->getFullname(); ?></p>
       <p><i class="icon-external-link"></i> <?php echo link_to($activity->getUrl(), $activity->getUrl(), array("target" => "_blank")); ?></p>
       <?php if ($activity->getTags()) { ?>
-        <i class="icon-tags"></i> <?php echo simple_tag_list($activity->getTags(), array("separator" => ","), "shares/index?t="); ?>
+      <i class="icon-tags"></i> <?php echo simple_tag_list($activity->getTags(), array("separator" => ","), "shares/index?t="); ?>
       <?php } ?>
-      
-      <div id="disqus_thread"></div>
-      <script type="text/javascript">
-          /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-          var disqus_shortname = 'myspreadly'; // required: replace example with your forum shortname
-          var disqus_identifier = '<?php echo $activity->getId(); ?>';
-          var disqus_developer = 1; // developer mode is on
-
-          /* * * DON'T EDIT BELOW THIS LINE * * */
-          (function() {
-              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-          })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-      <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      <p class="comment-link"><i class="icon-comment"></i> <a onclick="loadDisqus(jQuery(this), 'spreadly-<?php echo $activity->getId(); ?>', '<?php echo url_for("@share?id=".$activity->getId(), true); ?>'); return false;" href="#">
+        Show comments
+      </a></p>
     </div>
     <div class="span3">
       <table class="table table-bordered table-striped table-condensed">

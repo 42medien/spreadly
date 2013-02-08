@@ -50,6 +50,10 @@ class sharesActions extends sfActions
     $this->activities = $pager;
   }
   
+  public function executeSingle(sfWebRequest $request) {
+  
+  }
+  
   /**
    * Executes index action
    *
