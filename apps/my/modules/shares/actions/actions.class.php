@@ -33,12 +33,29 @@ class sharesActions extends sfActions
     $this->activities = $pager;
   }
   
+  public function executeGlobal(sfWebRequest $request) {
+    $yiid_activity = MongoManager::getDM()->getRepository('Documents\YiidActivity');
+    
+    $params = $request->getParameterHolder()->getAll();
+
+    $activities = $yiid_activity->findByQuery($params);
+    $max_activities = $yiid_activity->countByQuery($params);
+
+    $pager = new ArrayPager();
+    $pager->setMax($max_activities);
+    $pager->setResultArray($activities);
+    $pager->setPage($request->getParameter("p", 1));
+    $pager->init();
+
+    $this->activities = $pager;
+  }
+  
   /**
    * Executes index action
    *
    * @param sfRequest $request A request object
    */
-   public function executeSingle(sfWebRequest $request) {
+   public function executeHost(sfWebRequest $request) {
      $social_object = MongoManager::getDM()->getRepository('Documents\SocialObject');
      
      $this->forward404Unless($request->getParameter("id"));

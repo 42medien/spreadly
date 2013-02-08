@@ -385,6 +385,10 @@ class YiidActivity extends BaseDocument {
   public function isDealActivity() {
     return $this->getDId() ? true : false;
   }
+  
+  public function getHost() {
+    return parse_url($this->getUrl(), PHP_URL_HOST);
+  }
 
   /**
    * overrides the delete methode
