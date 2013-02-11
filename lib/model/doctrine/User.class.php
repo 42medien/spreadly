@@ -272,7 +272,7 @@ class User extends BaseUser {
       ->field("u_id")->equals(intval($this->getId()))
       ->getQuery()
       ->execute();
-
+    
     if (count($res["retval"]) > 0) {
       return $res["retval"][0]['count'];
     }
@@ -281,14 +281,14 @@ class User extends BaseUser {
   }
   
   public function getClickbackCount() {
-    $dm = MongoManager::getStatsDM();
-    $res = $dm->getRepository("Documents\AnalyticsActivity")->createQueryBuilder()
+    $dm = MongoManager::getDM();
+    $res = $dm->getRepository("Documents\YiidActivity")->createQueryBuilder()
       ->group(array('cb' => true), array('count' => 0))
       ->reduce('function (obj, prev) { prev.count += obj.cb; }')
       ->field("u_id")->equals(intval($this->getId()))
       ->getQuery()
       ->execute();
-
+    
     if (count($res["retval"]) > 0) {
       return $res["retval"][0]['count'];
     }
