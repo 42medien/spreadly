@@ -281,10 +281,10 @@ class User extends BaseUser {
   }
   
   public function getClickbackCount() {
-    $dm = MongoManager::getDM();
-    $res = $dm->getRepository("Documents\YiidActivity")->createQueryBuilder()
-      ->group(array('cb' => true), array('count' => 0))
-      ->reduce('function (obj, prev) { prev.count += obj.cb; }')
+    $dm = MongoManager::getStatsDM();
+    $res = $dm->getRepository("Documents\AnalyticsActivity")->createQueryBuilder()
+      ->group(array("cb"), array('count' => 0))
+      ->reduce('function (obj, prev) { prev.count+=obj.cb; }')
       ->field("u_id")->equals(intval($this->getId()))
       ->getQuery()
       ->execute();
