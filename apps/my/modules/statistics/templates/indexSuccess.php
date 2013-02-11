@@ -16,6 +16,9 @@
     <div class="span3">
       <h2><i class="icon-bar-chart"></i> <?php echo __("Spread Rank"); ?></h2>
       <p class="score"><?php echo $sf_user->getUser()->getRank(); ?></p>
+      <!-- Shares: <?php echo $sf_user->getUser()->getShareCount(); ?> -->
+      <!-- Clickbacks: <?php echo $sf_user->getUser()->getClickbackCount(); ?> -->
+      <!-- Friends: <?php echo $sf_user->getUser()->getFriendCount(); ?> -->
     </div>
   </div>
 </div>
