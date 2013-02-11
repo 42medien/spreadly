@@ -281,19 +281,7 @@ class User extends BaseUser {
   }
   
   public function getClickbackCount() {
-    $dm = MongoManager::getStatsDM();
-    $res = $dm->getRepository("Documents\AnalyticsActivity")->createQueryBuilder()
-      ->group(array("cb"), array('count' => 0))
-      ->reduce('function (obj, prev) { prev.count+=obj.cb; }')
-      ->field("u_id")->equals(intval($this->getId()))
-      ->getQuery()
-      ->execute();
-    
-    if (count($res["retval"]) > 0) {
-      return $res["retval"][0]['count'];
-    }
-
-    return 0;
+    return MongoManager::getStatsDM()->getRepository("Documents\AnalyticsActivity")->getOverallClickbacks($this->getId());
   }
   
   public function getRank() {

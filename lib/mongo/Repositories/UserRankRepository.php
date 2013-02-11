@@ -18,10 +18,10 @@ class UserRankRepository extends DocumentRepository {
     $rank = $this->getByDay($user_id, date("d"), date("m"), date("Y"));
     
     if ($rank) {
-      return $rank->getRank();
+      //return $rank->getRank();
     }
     
-    return $this->generateFor($user_id);
+    return intval($this->generateFor($user_id));
 	}
   
   public function generateFor($user_id) {
@@ -30,7 +30,7 @@ class UserRankRepository extends DocumentRepository {
     if ($user->getFriendCount() == 0 || $user->getShareCount() == 0) {
       $rank = 0;
     } else {
-      $rank = ($user->getClickbackCount() / $user->getShareCount()) / $user->getFriendCount() * 100;
+      $rank = (($user->getClickbackCount() / $user->getShareCount()) / $user->getFriendCount()) * 100;
     }
     
     $user_rank = new UserRank();
