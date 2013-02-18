@@ -15,6 +15,7 @@ function spreadly_init_images(link) {
   link.innerHTML = "";
   var services = ["fb", "tw", "li"];
   var data_services = link.getAttribute("data-services");
+  var data_counter = link.getAttribute("data-counter");
   var available_services = {"facebook":"fb","twitter":"tw","linkedin":"li","tumblr":"tm","xing":"xg","flattr":"ft"};
   
   if (data_services == "none") {
@@ -35,9 +36,14 @@ function spreadly_init_images(link) {
   for (var i=0; i<services.length; i++) {
     link.insertAdjacentHTML('beforeEnd', '<img src="##YIID_BUTTON_HOST##/img/button/28/'+services[i]+'.png" alt="" class="spreadly-service-icon" />');
   }
-
+  
   link.insertAdjacentHTML('beforeEnd', '<img src="##YIID_BUTTON_HOST##/img/button/28/sl.png" alt="" class="spreadly-service-icon" />');
-  link.insertAdjacentHTML('beforeEnd', '<iframe src="##YIID_BUTTON_HOST##/w/like/statistics.php" style="width: 0px; height: 0px; border:0;" frameborder="0" scrolling="no" marginheight="0" allowTransparency="true"></iframe>');
+
+  if (data_counter == "none" || data_counter == null) {
+    link.insertAdjacentHTML('beforeEnd', '<iframe src="##YIID_BUTTON_HOST##/w/like/statistics.php" style="width: 0px; height: 0px; border:0;" frameborder="0" scrolling="no" marginheight="0" allowTransparency="true"></iframe>');
+  } else {
+    link.insertAdjacentHTML('beforeEnd', '<iframe src="##YIID_BUTTON_HOST##/w/like/counter.php" style="width: 50px; height: 30px; border:0;" frameborder="0" scrolling="no" marginheight="0" allowTransparency="true"></iframe>');
+  }
 }
   
 function spreadly_init_click_handler(link) {
