@@ -43,6 +43,7 @@
           </tr>
         </thead>
         <tbody>
+          <?php if ($activity->getAnalyticsActivity()) { ?>
           <tr>
             <td><a rel="tooltip" title="<?php echo __("How many people have potentially seen this share."); ?>" href="#"><?php echo __("Reach") ?></a></td>
             <td><span class="badge badge-success"><?php echo $activity->getAnalyticsActivity()->getMediaPenetration(); ?></span></td>
@@ -55,6 +56,11 @@
             <td><a rel="tooltip" title="<?php echo __("To how many networks you have shared this link."); ?>" href="#"><?php echo __("Spreads"); ?></a></td>
             <td><?php echo $activity->getAnalyticsActivity()->getShares(); ?></td>
           </tr>
+          <?php } else { ?>
+          <tr>
+            <td><?php echo __("not available"); ?></td>
+          </tr>
+          <?php } ?>
         </tbody>
       </table>
       <?php echo __("More %s stats", array("%s" => link_to($activity->getHost(), "@host_stats?id=".$activity->getSocialObject()->getId()))); ?>
