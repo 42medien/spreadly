@@ -17,6 +17,7 @@
   position: absolute;
   display: block;
   left: 0;
+  color: #000000;
 }
 
 .spreadly-advertisement-top {
@@ -46,24 +47,27 @@
   font-size: 10px;
   display: block;
   float: left;
+  color: #000000;
 }
 
 .spreadly-advertisement-note {
   font-size: 10px;
   display: block;
   float: right;
+  color: #000000;
 }
 
 .spreadly-advertisement-close {
   font-size: 10px;
   display: block;
   float: left;
+  color: #000000;
 }
 
 .spreadly-advertisement a,
 .spreadly-advertisement a:hover,
 .spreadly-advertisement a:visited {
-  font-color: #000000;
+  color: #000000;
 }
 
 #spreadly-overlay {
