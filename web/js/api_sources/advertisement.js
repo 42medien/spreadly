@@ -86,10 +86,14 @@ function spreadly_ad_init_hover_handler(link) {
   return false;
 }
 
-if (!spreadly_check_cookie('spreadly_ad_layer')) {
-  if (spreadly_ad_displayer == 'hover') {
-    spreadly_ad_add_hover_event();
-  } else {
-    spreadly_check_button_visibility();
+function spreadly_init_ad() {
+  if (!spreadly_check_cookie('spreadly_ad_layer')) {
+    if (spreadly_ad_displayer == 'hover') {
+      spreadly_ad_add_hover_event();
+    } else {
+      spreadly_check_button_visibility();
+    }
   }
 }
+
+spreadly_init_ad();
