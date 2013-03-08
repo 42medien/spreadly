@@ -48,7 +48,7 @@ class TwitterAuthApiClient extends AuthApi {
 
     if (!$lUser || !$lUser->getId() || !$lOnlineIdentity->getPhoto()) {
       // get api informations
-      $lJson = OAuthClient::get($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "http://api.twitter.com/1/users/show.json?user_id=".$lParamsArray['user_id']);
+      $lJson = OAuthClient::get($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "http://api.twitter.com/1.1/users/show.json?user_id=".$lParamsArray['user_id']);
       $lJsonObject = json_decode($lJson);
 
       // use api complete informations
@@ -102,7 +102,7 @@ class TwitterAuthApiClient extends AuthApi {
     }
 
     // get api informations
-    $lJson = OAuthClient::get($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "http://api.twitter.com/1/users/show.json?user_id=".$lParamsArray['user_id']);
+    $lJson = OAuthClient::get($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "http://api.twitter.com/1.1/users/show.json?user_id=".$lParamsArray['user_id']);
     $lJsonObject = json_decode($lJson);
 
     $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject, $pUser, $lIdentifier);
@@ -189,7 +189,7 @@ class TwitterAuthApiClient extends AuthApi {
     $pOnlineIdentity->setUserId($pUser->getId());
     $pOnlineIdentity->setAuthIdentifier($pAuthIdentifier);
     $pOnlineIdentity->setSocialPublishingEnabled(true);
-    $pOnlineIdentity->setPhoto("http://api.twitter.com/1/users/profile_image/".$pOnlineIdentity->getOriginalId());
+    $pOnlineIdentity->setPhoto("http://api.twitter.com/1.1/users/profile_image/".$pOnlineIdentity->getOriginalId());
 
     if ($pObject->name) {
       $pOnlineIdentity->setName($pObject->name);
