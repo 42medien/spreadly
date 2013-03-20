@@ -26,7 +26,9 @@
         <p><i class="icon-comment"></i> <?php echo $activity->getComment(); ?></p>
       <?php } ?>
       <p><i class="icon-time"></i> <?php echo date("d.m.Y / H:i", $activity->getC()); ?></p>
-      <p><i class="icon-user"></i> <?php echo $activity->getUser()->getFullname(); ?></p>
+      <?php if ($activity->getUser()) { ?>
+        <p><i class="icon-user"></i> <?php echo $activity->getUser()->getFullname(); ?></p>
+      <?php } ?>
       <p><i class="icon-external-link"></i> <?php echo link_to($activity->getUrl(), $activity->getUrl(), array("target" => "_blank")); ?></p>
       <?php if ($activity->getTags()) { ?>
       <i class="icon-tags"></i> <?php echo simple_tag_list($activity->getTags(), array("separator" => ","), "shares/index?t="); ?>
