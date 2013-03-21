@@ -16,6 +16,8 @@
             + '&tr=' + transactionid
             + '&s=' + salt + '"><\/script>');
         </script>
+        
+        <div class="clear"></div>
       </p>
     </div>
   </div>

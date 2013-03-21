@@ -218,7 +218,7 @@ border-radius: 3px; -moz-border-radius: 3px;
         -moz-box-shadow: 0 0 150px #320A18 inset;
         -webkit-box-shadow: 0 0 150px #320A18 inset;
 }
-.red_bg.no_deals {height: 280px; padding: 0;}
+.red_bg.no_deals { padding: 0 0 15px 0;}
 .title {font-size: 14px; line-height: 40px; font-weight: normal; font-family: 'Arial'; margin: 0 0 0 20px; float: left;}
 .mid_text { padding: 0; position: relative; text-align: center;}
 .mid_text p, .voucher_text p {color: #fff; text-align: center; text-transform: uppercase; font-family: 'Arial'; font-weight: bold;}
@@ -447,12 +447,17 @@ div#vaas_wrapper {
 }
 
 @media only screen and (max-width: 579px) {
-  .sh_networks, .sharebg, .footer_line, .footer_shadow {
+  .sh_networks, .sharebg, .footer_line, .footer_shadow, .red_bg {
     width: 100%;
     margin: 0;
   }
   
-  .pers_comments textarea {
+  div#vaas_wrapper {
+    margin: 0 auto;
+    width: 200px;
+  }
+  
+  .pers_comments textarea, input.share-url {
     width: 95%;
   }
   
