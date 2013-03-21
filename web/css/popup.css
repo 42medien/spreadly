@@ -445,3 +445,25 @@ div#vaas_wrapper {
   width: 405px;
   margin: 0 auto;
 }
+
+@media only screen and (max-width: 579px) {
+  .sh_networks, .sharebg, .footer_line, .footer_shadow {
+    width: 100%;
+    margin: 0;
+  }
+  
+  .pers_comments textarea {
+    width: 95%;
+  }
+  
+  .sharebg {
+		box-shadow: none;
+		-moz-box-shadow: none;
+		-webkit-box-shadow: none;
+  }
+  
+  .sh_content, .sh_networks_content {
+    width: auto;
+    margin: 0 20px 0 20px;
+  }
+}
