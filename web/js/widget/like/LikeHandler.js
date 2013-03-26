@@ -236,7 +236,7 @@ var WidgetAddService = {
     jQuery('#like-submit').empty();
     var lAction = '/like/get_services';
     var lData = {
-        ei_kcuf : new Date().getTime(),
+        ei_kcuf : new Date().getTime()
       };
 
     jQuery.ajax({

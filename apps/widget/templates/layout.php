@@ -9,24 +9,20 @@
     <meta name="description" content="Spreadly consists of sharing button widgets that enable users to share content into a wide range of social networks simultanously. Besides that, Spreadly offers a sophisticated functionality to reward users for their likes." />
     <meta name="keywords" content="sharing,sharebutton,like,likebutton,deal,dealbutton,facebook,linkedin,twitter,buzz" />
   	<link rel="shortcut icon" href="https://s3.amazonaws.com/spread.ly/img/favicon.ico" type="image/x-icon">
-
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="/js/100_main/include/widget-<?php echo sfConfig::get('app_release_name') ?>.js"></script>
     <script type="text/javascript">var _sf_startpt=(new Date()).getTime();</script>
     
     <script type="text/javascript" src="/js/main.js"></script>
     
-    <!--[if !IE]><!-->
-        <link rel="stylesheet" type="text/css" href="/css/popup.css" />
-    <!--<![endif]-->
-    <!--[if IE 9]>
-        <link rel="stylesheet" type="text/css" href="/css/popup.css" />
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/css/popup.css" />
     <!--[if lte IE 8]>
         <link rel="stylesheet" type="text/css" href="/css/popup_ie.css" />
     <![endif]-->
     <!--[if lte IE 9]>
-      <script type="text/javascript" src="js/labelify.ie.js"></script>
-      <script type="text/javascript" src="js/custom.ie.js"></script>
+      <script type="text/javascript" src="/js/labelify.ie.js"></script>
+      <script type="text/javascript" src="/js/custom.ie.js"></script>
     <![endif]-->
   </head>
   <body>

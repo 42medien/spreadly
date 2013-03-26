@@ -91,7 +91,7 @@ var ImageSettings = {
         var lThis = this;
         var lAction = jQuery(this).attr('href');
         var lData = {
-          ei_kcuf : new Date().getTime(),
+          ei_kcuf : new Date().getTime()
         };
         
         jQuery.ajax({
