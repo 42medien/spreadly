@@ -42,7 +42,7 @@ function spreadly_init_images(link) {
   if (data_counter == "none" || data_counter == null) {
     link.insertAdjacentHTML('beforeEnd', '<iframe src="##YIID_BUTTON_HOST##/w/like/statistics.php" style="width: 0px; height: 0px; border:0;" frameborder="0" scrolling="no" marginheight="0" allowTransparency="true"></iframe>');
   } else {
-    link.insertAdjacentHTML('beforeEnd', '<iframe src="##YIID_BUTTON_HOST##/w/like/counter.php" style="width: 50px; height: 30px; border:0;" frameborder="0" scrolling="no" marginheight="0" allowTransparency="true"></iframe>');
+    link.insertAdjacentHTML('beforeEnd', '<iframe src="##YIID_BUTTON_HOST##/w/like/counter.php" style="width: 50px; height: 22px; border:0;" frameborder="0" scrolling="no" marginheight="0" allowTransparency="true"></iframe>');
   }
 }
   
