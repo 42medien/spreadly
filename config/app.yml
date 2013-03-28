@@ -108,7 +108,7 @@ prod:
     oauth_secret:  "pw4tGKNa8aG4AqidMBaMpsQyDp70WSgnNVSvv9tLU"
 
   facebook:
-    oauth_token:   "1de4ec6a73c75e7c00977bc6c9a203c4"
+    oauth_token:   "139206476740"
     oauth_secret:  "d789bd46751701a96ca3e80d8b5bff86"
 
   linkedin:
@@ -164,7 +164,7 @@ dev:
     oauth_secret:  "tYi4OhFRMNFbWnDZ2DEhLzOGgHidmWve9nz2qT5M3Q"
 
   facebook:
-    oauth_token:   "4e786c7f089e38a83933c9821990030a"
+    oauth_token:   "321448358939"
     oauth_secret:  "2366aa47d946b7650fe21cf488db5694"
 
   linkedin:
