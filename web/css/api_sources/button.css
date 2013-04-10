@@ -8,6 +8,13 @@
   border: 1px solid #cccccc;
 }
 
+.spreadly-link {
+  background-color: transparent;
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+
 .spreadly-advertisement {
   border-radius: 5px;
   border: 5px solid #aaaaaa;

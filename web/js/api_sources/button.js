@@ -9,6 +9,13 @@ function spreadly_init_buttons() {
     spreadly_init_click_handler(buttons[i]);
   }
 }
+
+function spreadly_init_simple_buttons() {
+  var buttons = spreadly_get_elements_by_class_name(document,'spreadly-link');
+  for (var i = 0; i < buttons.length; i++) {
+    spreadly_init_click_handler(buttons[i]);
+  }
+}
   
 function spreadly_init_images(link) {
   link.text = "";
@@ -47,7 +54,16 @@ function spreadly_init_images(link) {
 }
   
 function spreadly_init_click_handler(link) {
-  link.onclick = function () { spreadly_open_layer(link.href); return false; };
+  var url = document.location.href;
+
+  if (link.href) {
+    url = link.href;
+  } else if (link.getAttribute("data-spreadly-url")) {
+    url = link.getAttribute("data-spreadly-url");
+  }
+  
+  link.onclick = function () { spreadly_open_layer(url); return false; };
+  
   return false;
 }
   
@@ -74,6 +90,7 @@ function spreadly_close_layer() {
 function spreadly_init() {
   document.getElementsByTagName("body")[0].insertAdjacentHTML('beforeEnd', '<div id="spreadly-overlay" style="visibility: hidden;"><div id="spreadly-iframe"></div></div>');
   spreadly_init_buttons();
+  spreadly_init_simple_buttons();
 }
 
 function spreadly_get_elements_by_class_name(node,classname) {
