@@ -68,13 +68,18 @@ function spreadly_init_click_handler(link) {
 }
   
 function spreadly_open_layer(url) {
-  spreadly_insert_iframe(url);
-  document.getElementById('spreadly-overlay').style.visibility = 'visible';
+  if ( (window.screen && window.screen.width && window.screen.width < 600) || (window.innerWidth < 600) ) {
+    window.open('http://##YIID_WIDGET_HOST##/?url='+decodeURIComponent(url)+'&iframe=1','spreadly-popup');
+  } else {
+    spreadly_insert_iframe(url);
+    document.getElementById('spreadly-overlay').style.visibility = 'visible';
+  }
+
   return false;
 }
     
 function spreadly_insert_iframe(url) {
-  document.getElementById("spreadly-iframe").insertAdjacentHTML('afterbegin', '<div class="spreadly-close-button" onclick="spreadly_close_layer(); return false;"><div class="spreadly-close-icon"></div></div><iframe src="http://##YIID_WIDGET_HOST##/?url='+url+'&iframe=1" style="width: 600px; height: 600px; border:0;" frameborder="0" scrolling="no" marginheight="0" allowTransparency="true"></iframe>');
+  document.getElementById("spreadly-iframe").insertAdjacentHTML('afterbegin', '<div class="spreadly-close-button" onclick="spreadly_close_layer(); return false;"><div class="spreadly-close-icon"></div></div><iframe src="http://##YIID_WIDGET_HOST##/?url='+decodeURIComponent(url)+'&iframe=1" style="width: 600px; height: 600px; border:0;" frameborder="0" scrolling="no" marginheight="0" allowTransparency="true"></iframe>');
   return false;
 }
 
