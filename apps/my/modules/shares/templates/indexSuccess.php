@@ -1,7 +1,16 @@
 <?php use_helper("CustomTags"); ?>
 <div class="page-header">
   <?php include_component("shares", "order_by"); ?>
-  <h1><?php echo __("Your latest Likes"); ?> <small><?php echo $activities->getNbResults()." ".__("Results"); ?></small></h1>
+  <h1>
+    <?php
+    if ($search = $sf_request->getParameter("s", null)) {
+      echo __('Search results for "%s"', array("%s" => $search));
+    } else {
+      echo __("Your latest Likes");
+    }
+    ?>
+    <small><?php echo $activities->getNbResults()." ".__("Results"); ?></small>
+  </h1>
 </div>
 
 <div class="row">
