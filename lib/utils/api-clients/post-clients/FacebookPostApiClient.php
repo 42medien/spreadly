@@ -36,18 +36,18 @@ class FacebookPostApiClient extends PostApi {
       $lObject = $pActivity;
     }
 
-    $lPostBody = "message=".$pActivity->getComment();
+    $lPostBody = "message=".urlencode($pActivity->getComment());
 
     if ($lObject->getDescr() && $lObject->getDescr() != '') {
-      $lPostBody .= "&description=".$lObject->getDescr();
+      $lPostBody .= "&description=".urlencode($lObject->getDescr());
     }
 
     if ($lObject->getTitle() && $lObject->getTitle() != '') {
-      $lPostBody .= "&name=".$lObject->getTitle();
+      $lPostBody .= "&name=".urlencode($lObject->getTitle());
     }
 
     if ($lObject->getThumb() && $lObject->getThumb() != '') {
-      $lPostBody .= "&picture=".$lObject->getThumb();
+      $lPostBody .= "&picture=".urlencode($lObject->getThumb());
     }
 
     $lPostBody .= "&link=".urlencode($pActivity->generateUrlWithClickbackParam($this->onlineIdentity));
