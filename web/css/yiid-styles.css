@@ -900,6 +900,8 @@ div.data-tablebox table#top-influencer-table td.first div.infname img {
 .facebook span{  background: url("/img/facebook_icon.png") no-repeat scroll center top transparent; min-width:20px; height:17px;}
 .linkedin span{ background: url(/img/in_icon.png) no-repeat scroll center top transparent; min-width:17px; height:17px;}
 .gtalk span, .google span{ background: url(/img/gtalk_icon.png) no-repeat scroll center top transparent; min-width:19px; height:17px;}
+.xing span { background: url(/img/xing-favicon.gif) no-repeat scroll center top transparent; min-width:19px; height:17px;}
+.flattr span { background: url(/img/flattr-favicon.gif) no-repeat scroll center top transparent; min-width:19px; height:17px;}
 
 .mediaPartner .box{width:auto; padding-right:0px;}
 
