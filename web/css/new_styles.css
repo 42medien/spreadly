@@ -1328,15 +1328,16 @@ div.data-tablebox table#top-influencer-table td.first div.infname img {
 .gtalk span, .google span{ background: url(/img/gtalk_icon.png) no-repeat scroll center top transparent; min-width:19px; height:17px;}
 .xing span { background: url(/img/xing-favicon.gif) no-repeat scroll center top transparent; min-width:19px; height:17px;}
 .flattr span { background: url(/img/flattr-favicon.gif) no-repeat scroll center top transparent; min-width:19px; height:17px;}
+.tumblr span { background: url(/img/tumblr-favicon.gif) no-repeat scroll center top transparent; min-width:19px; height:17px;}
 
 .mediaPartner .box{width:auto; padding-right:0px;}
 
 .box .tooltip-icon{padding: 0px 5px 0px 5px;}
 
-#navi ul { padding-left:10px; float:left}
-#navi ul li{ padding-right:7px; list-style:none;  text-align:center; padding-top:19px;  float:left; font-size:12px;  }
+#navi ul { padding-left:10px; float:left; width: 120px;}
+#navi ul li{ padding-right:7px; list-style:none;  text-align:center; padding-top:13px;  float:left; font-size:12px;  }
 #navi ul p{ font-size:14px; color:#252525; margin-top:-2px; width: 110px;}
-#navi ul span{ color:#252525; text-decoration:none;  font-size:12px; padding-top:18px; text-align:center; display:block;}
+#navi ul span{ color:#252525; text-decoration:none;  font-size:12px; text-align:center; display:block;}
 #navi ul span.stepBox-text{text-align:left;}
 
 #navi ul p span{ padding:0}
