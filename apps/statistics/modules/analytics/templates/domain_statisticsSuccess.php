@@ -49,7 +49,7 @@ slot('content');
       </div>
       <ul>
       <?php foreach ($pHost->getServices() as $key => $value) { ?>
-        <li class="<?php echo strtolower($key) ?>"><span title="<?php echo truncate_number($value['l']); ?>"></span></li>
+        <li class="<?php echo strtolower($key) ?>"><span title="<?php echo point_format($value['l']); ?>"></span></li>
       <?php } ?>
       </ul>
     </div>
@@ -66,7 +66,7 @@ slot('content');
       </div>
       <ul>
       <?php foreach ($pHost->getServices() as $key => $value) { ?>
-        <li class="<?php echo strtolower($key) ?>"><span title="<?php echo truncate_number($value['mp']); ?>"></span></li>
+        <li class="<?php echo strtolower($key) ?>"><span title="<?php echo point_format($value['mp']); ?>"></span></li>
       <?php } ?>
       </ul>
     </div>
