@@ -23,15 +23,14 @@
 					<div class="alignright brand-logo">
 						<h4><?php echo __('Partner'); ?></h4>
 						<div class="logo-top">
-							<a href="http://www.mailingwork.de/" target="_blank"><img src="/img/statistics/mailingwork-logo.jpg" width="148" height="47" alt="Mailingwork" title="Mailingwork"></a>
-							<a href="http://www.business-on.de/" target="_blank"><img src="/img/statistics/business-logo.jpg" width="159" height="47" alt="business on" title="business on"></a>
-							<a href="http://www.ednetz.de/" target="_blank"><img src="/img/statistics/ednetz-logo.jpg" width="135" height="47" alt="ednetz" title="ednetz"></a>
+							<a href="http://www.daf.fm/" target="_blank"><img src="/img/statistics/daf-logo.jpg" width="142" height="47" alt="DAF" title="DAF logo"></a>
+							<a href="http://www.deraktionaer.de" target="_blank"><img src="/img/statistics/aktionaer-logo.jpg" width="148" height="47" alt="Der Aktionär logo" title="Der Aktionär"></a>
+              
 						</div>
 						<div class="logo-bot">
-							<a href="http://www.abacho.de/" target="_blank"><img src="/img/statistics/abacho-logo.jpg" width="143" height="43" alt="abacho" title="abacho"></a>
-							<a href="http://www.pressehof.de/" target="_blank"><img src="/img/statistics/pressehof-logo.jpg" width="143" height="43" alt="pressehof" title="pressehof"></a>
-							<a href="http://www.ibusiness.de/" target="_blank"><img src="/img/statistics/ibusiness-logo.jpg" width="170" height="43" alt="ibusiness" title="ibusiness"></a>
-							<a href="http://www.pr-blogger.de/" target="_blank"><img src="/img/statistics/pr-blogger-logo.jpg" width="143" height="43" alt="pr-blogger" title="pr-blogger"></a>
+							<a href="http://www.rhein-zeitung.de/" target="_blank"><img src="/img/statistics/rheinzeitung-logo.jpg" width="244" height="47" alt="Rheinzeitung logo" title="Rheinzeitung"></a>
+							<a href="http://www.sharewise.com" target="_blank"><img src="/img/statistics/sharewise-logo.jpg" width="108" height="47" alt="sharewise logo" title="sharewise"></a>
+							<a href="http://www.podcast.de/" target="_blank"><img src="/img/statistics/podcast-logo.jpg" width="104" height="43" alt="Podcast logo" title="Podcast"></a>
 						</div>
 						<p class="see-more"><a href="<?php echo url_for('@customer');?>" title="<?php echo __('Weitere Partner von Spreadly anzeigen'); ?>"><?php echo __('Weitere Partner von Spreadly anzeigen &raquo;'); ?></a></p>
 					</div>

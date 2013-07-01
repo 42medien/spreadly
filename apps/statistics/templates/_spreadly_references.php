@@ -1,6 +1,11 @@
 <section class="spread-refrance">
 	<h3><?php echo __('Spreadly Referenzen'); ?></h3>
 	<ul id="mycarousel" class="jcarousel-skin-tango clearfix">
+                  <li><a href="http://www.podcast.de/" title="Podcast.de" target="_blank"><img src="/img/statistics/podcast-logo.jpg" alt="Image"/></a></li>
+                  <li><a href="http://www.daf.fm/" title="Deutsches Anleger Fernsehen" target="_blank"><img src="/img/statistics/daf-logo.jpg" alt="Image"/></a></li>
+                  <li><a href="http://www.deraktionaer.de/" title="Der Aktionär" target="_blank"><img src="/img/statistics/aktionaer-logo.jpg" alt="Image"/></a></li>
+                  <li><a href="http://www.sharewise.com/" title="Sharewise" target="_blank"><img src="/img/statistics/sharewise-logo.jpg" alt="Image"/></a></li>
+                  <li><a href="http://www.rheinzeitung.de/" title="Rheinzeitung" target="_blank"><img src="/img/statistics/rheinzeitung-logo.jpg" alt="Image"/></a></li>
                   <li><a href="http://www.mailingwork.de/" title="mailingwork" target="_blank"><img src="/img/refrance-img20.jpg" alt="Image"/></a></li>
                   <li><a href="http://www.urlaubspartner.net" title="Urlaubspartner" target="_blank"><img src="/img/refrance-img21.jpg" alt="Image"/></a></li>
                   <li><a href="http://www.pr-blogger.de/" title="PR-Blogger" target="_blank"><img src="/img/refrance-img18.jpg" alt="Image"/></a></li>
@@ -17,9 +22,8 @@
                   <li><a href="http://www.yasni.de/" title="Yasni.de" target="_blank"><img src="/img/refrance-img7.jpg" alt="Image"/></a></li>
                   <li><a href="http://www.ednetz.de/" title="ednetz.de" target="_blank"><img src="/img/refrance-img8.jpg" alt="Image"/></a></li>
                   <li><a href="http://www.familienfreund.de/" title="familienfreund.de" target="_blank"><img src="/img/refrance-img1.jpg" alt="Image"/></a></li>
-                  <li><a href="http://www.deraktionaer.de/" title="Der Aktionär" target="_blank"><img src="/img/refrance-img2.jpg" alt="Image"/></a></li>
+                  <li><a href="http://www.deraktionaer.de/" title="Der Aktionär" target="_blank"><img src="/img/statistics/aktionaer-logo.jpg" alt="Image"/></a></li>
                   <li><a href="http://www.marketing-boerse.de/" title="Marketing Börse" target="_blank"><img src="/img/refrance-img3.jpg" alt="Image"/></a></li>
-                  <li><a href="http://www.daf.fm/" title="Deutsches Anleger Fernsehen" target="_blank"><img src="/img/refrance-img4.jpg" alt="Image"/></a></li>
                   <li><a href="http://www.brille24.de/" title="Brille24" target="_blank"><img src="/img/refrance-img5.jpg" alt="Image"/></a></li>
 	</ul>
 	<span class="more"><a href="<?php echo url_for('@customer');?>" title="<?php echo __('Mehr über die Spreadly-Kunden &raquo;'); ?>"><?php echo __('Mehr über die Spreadly-Kunden &raquo;'); ?></a></span>
