@@ -37,7 +37,7 @@ class PubSubHubbub {
     return $info['http_code'];
   }
 
-  public static function push($callback, $post_body, $post_header) {
+  public static function push($callback, $post_body, $post_header = array()) {
     $ch = curl_init($callback);
     curl_setopt($ch, CURLOPT_POST,           1);
     curl_setopt($ch, CURLOPT_POSTFIELDS,     $post_body);
