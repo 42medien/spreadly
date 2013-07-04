@@ -51,7 +51,11 @@ class sharesActions extends sfActions
   }
   
   public function executeSingle(sfWebRequest $request) {
-  
+    $id = $request->getParameter("id");
+    
+    $this->forward404Unless($id);
+    
+    $this->activity = MongoManager::getDM()->getRepository('Documents\YiidActivity')->find(new MongoId($id));
   }
   
   /**

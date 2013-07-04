@@ -34,6 +34,10 @@ class PushJob extends Job {
       return false;
     }
     
+    // send webmentions or pingbacks
+    $mc = new \MentionClient(sfConfig::get('app_settings_my_url')."/share/".$ya->getId(), "<nope />");
+    $mc->sendSupportedMentions($ya->getUrl());
+    
     $dp = $ya->getDomainProfile();
 
     if (!$dp) {

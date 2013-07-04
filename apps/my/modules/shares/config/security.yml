@@ -3,3 +3,5 @@
 
 global:
   is_secure: false
+single:
+  is_secure: false

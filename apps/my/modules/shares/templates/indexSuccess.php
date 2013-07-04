@@ -28,18 +28,7 @@
       &nbsp;
       <?php } ?>
     </div>
-    <div class="span7">
-      <h2><?php echo $activity->getTitle(); ?></h2>
-      <p><strong><?php echo $activity->getDescr(); ?></strong></p>
-      <?php if ($activity->getComment()) { ?>
-        <p><i class="icon-comment"></i> <?php echo $activity->getComment(); ?></p>
-      <?php } ?>
-      <p><i class="icon-time"></i> <?php echo date("d.m.Y / H:i", $activity->getC()); ?></p>
-      <p><i class="icon-external-link"></i> <?php echo link_to($activity->getUrl(), $activity->getUrl(), array("target" => "_blank")); ?></p>
-      <?php if ($activity->getTags()) { ?>
-        <i class="icon-tags"></i> <?php echo simple_tag_list($activity->getTags(), array("separator" => ","), "shares/index?t="); ?>
-      <?php } ?>
-    </div>
+    <?php include_partial("share", array("activity" => $activity)); ?>
     <div class="span3">
       <table class="table table-bordered table-striped table-condensed">
         <thead>

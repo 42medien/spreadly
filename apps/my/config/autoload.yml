@@ -1,0 +1,4 @@
+autoload:
+  vendor_indie_web:
+    path:      %SF_LIB_DIR%/vendor/IndieWeb
+    recursive: off
