@@ -4,8 +4,6 @@ class sfApplyResetForm extends sfForm
 {
   public function configure()
   {
-    $this->setWidget('old_password', new sfWidgetFormInputPassword(
-        array(), array('maxlength' => 128)));
   	$this->setWidget('password', new sfWidgetFormInputPassword(
         array(), array('maxlength' => 128)));
     $this->setWidget('password2', new sfWidgetFormInputPassword(
@@ -21,15 +19,13 @@ class sfApplyResetForm extends sfForm
 
     $this->setValidator('password', new sfValidatorApplyPassword() );
     $this->setValidator('password2', new sfValidatorApplyPassword() );
-    $this->setValidator('old_password', new sfValidatorString() );
 		$this->setValidator('username', new sfValidatorString(array('required' => false)) );
 
     $this->validatorSchema->setPostValidator(
 			new sfValidatorAnd(
 				array(
             new sfValidatorSchemaCompare( 'password', sfValidatorSchemaCompare::EQUAL,
-                    'password2', array(), array('invalid' => 'The passwords did not match.')),
-    				new sfValidatorResetPassword()
+                    'password2', array(), array('invalid' => 'The passwords did not match.'))
     				)
     		)
     );
