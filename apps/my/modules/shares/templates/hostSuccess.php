@@ -30,10 +30,10 @@
 <?php foreach($social_objects as $social_object) { ?>
   <?php $activity = $social_object->getLatestYiidActivity(); ?>
   <?php if (!$activity) { continue; } ?>
-  <div class="row">
+  <div class="row h-entry hentry">
     <div class="span2">
       <?php if ($activity->getThumb()) { ?>
-      <div class="thumbnail"><img src="<?php echo $activity->getThumb(); ?>" /></div>
+      <div class="thumbnail"><img src="<?php echo $activity->getThumb(); ?>" class="photo u-photo" /></div>
       <?php } else { ?>
       &nbsp;
       <?php } ?>

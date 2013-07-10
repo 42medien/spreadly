@@ -194,6 +194,7 @@ class LinkedinAuthApiClient extends AuthApi {
       $pOnlineIdentity->setBirthdate($pProfileArray['date-of-birth']['year'].'-'.$pProfileArray['date-of-birth']['month'].'-'.$pProfileArray['date-of-birth']['day']);
     }
     $pOnlineIdentity->setLocationRaw($pProfileArray['location']['name']);
+    $pOnlineIdentity->setPhoto($pProfileArray['pictureUrl']);
     $pOnlineIdentity->save();
 
     // update user's birthdate if it's not set yet and provided by this identity

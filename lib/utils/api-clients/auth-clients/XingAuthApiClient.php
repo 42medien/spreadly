@@ -189,7 +189,7 @@ class XingAuthApiClient extends AuthApi {
     $pOnlineIdentity->setBirthdate($pObject['birth_date']['year'].'-'.$pObject['birth_date']['month'].'-'.$pObject['birth_date']['day']);
     $pOnlineIdentity->setSocialPublishingEnabled(true);
     $pOnlineIdentity->setLocationRaw($pObject["business_address"]["city"]);
-    $pOnlineIdentity->setPhoto($pObject["photo_urls"]["thumb"]);
+    $pOnlineIdentity->setPhoto($pObject["photo_urls"]["large"]);
 
     $pOnlineIdentity->save();
 

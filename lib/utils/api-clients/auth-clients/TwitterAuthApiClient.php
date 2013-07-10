@@ -189,7 +189,7 @@ class TwitterAuthApiClient extends AuthApi {
     $pOnlineIdentity->setUserId($pUser->getId());
     $pOnlineIdentity->setAuthIdentifier($pAuthIdentifier);
     $pOnlineIdentity->setSocialPublishingEnabled(true);
-    $pOnlineIdentity->setPhoto("http://api.twitter.com/1.1/users/profile_image/".$pOnlineIdentity->getOriginalId());
+    $pOnlineIdentity->setPhoto($pObject->profile_image_url);
 
     if ($pObject->name) {
       $pOnlineIdentity->setName($pObject->name);

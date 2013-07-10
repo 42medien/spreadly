@@ -28,7 +28,9 @@
       &nbsp;
       <?php } ?>
     </div>
-    <?php include_partial("share", array("activity" => $activity)); ?>
+    <div class="span7">
+      <?php include_partial("share", array("activity" => $activity)); ?>
+    </div>
     <div class="span3">
       <table class="table table-bordered table-striped table-condensed">
         <thead>

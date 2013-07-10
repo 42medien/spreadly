@@ -65,6 +65,7 @@ class LinkedinImportClient {
       $pOnlineIdentity->setBirthdate($pProfileArray['date-of-birth']['year'].'-'.$pProfileArray['date-of-birth']['month'].'-'.$pProfileArray['date-of-birth']['day']);
     }
     $pOnlineIdentity->setLocationRaw($pProfileArray['location']['name']);
+    $pOnlineIdentity->setPhoto($pProfileArray['pictureUrl']);
     $pOnlineIdentity->save();
 
     $lUser = $pOnlineIdentity->getUser();
