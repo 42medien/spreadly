@@ -104,17 +104,17 @@ class Worker {
       $mode = '"'.(System_Daemon::isInBackground() ? '' : 'non-' ).'daemon" mode';
 
       // get job
-      @$job = Queue::getInstance()->get();
+      $job = Queue::getInstance()->get();
 
       if ($job) {
         try {
           // try to execute job
           @$job->execute();
-          @$job->finished();
+          $job->finished();
 
           System_Daemon::info('{appName} finished job %s of type %s', $cnt, get_class($job));
         } catch (Exception $e) {
-          @$job->reschedule($e->getMessage());
+          $job->reschedule($e->getMessage());
 
           System_Daemon::err('{appName} resceduled job %s of type %s because of "%s"', $cnt, get_class($job), $e->getMessage());
         }
