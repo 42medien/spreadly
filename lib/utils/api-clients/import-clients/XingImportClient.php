@@ -20,21 +20,20 @@ class XingImportClient {
       throw new Exception('damn theres no token!', '666');
     }
     $lConsumer = new OAuthConsumer(sfConfig::get("app_xing_oauth_token"), sfConfig::get("app_xing_oauth_secret"));
-    $lJson = OAuthClient::get($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "https://api.xing.com/v1/users/me/contacts.json?limit=100");
+    $lJson = OAuthClient::get($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "https://api.xing.com/v1/users/me/contact_ids.json");
     $lJsonFriendsObject = json_decode($lJson, true);
 
     sfContext::getInstance()->getLogger()->notice(print_r($lJsonFriendsObject, true));
 
-    self::importFriends($pOnlineIdentity, $lJsonFriendsObject['contacts']);
+    self::importFriends($pOnlineIdentity, $lJsonFriendsObject);
   }
 
   public static function importFriends(&$online_identity, $contacts) {
-    $temp = array();
-    foreach ($contacts["users"] as $user) {
-      $temp[] = $user["id"];
+    if (isset($contacts["contact_ids"]) && isset($contacts["contact_ids"]["items"])) {
+      $online_identity->setFriendIds(implode(",", $contacts["contact_ids"]["items"]));
+      $online_identity->setFriendCount(count($contacts["contact_ids"]["items"]));
     }
-    $online_identity->setFriendIds(implode(",", $temp));
-    $online_identity->setFriendCount($contacts['total']);
+
     $online_identity->save();
   }
 }

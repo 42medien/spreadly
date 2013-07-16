@@ -27,8 +27,8 @@ class LinkedinImportClient {
     $lXml = OAuthClient::get($lConsumer, $lToken->getTokenKey(), $lToken->getTokenSecret(), "http://api.linkedin.com/v1/people/~:(id,site-standard-profile-request,summary,picture-url,first-name,last-name,date-of-birth,location)");
     $lProfileArray = XmlUtils::XML2Array($lXml);
 
-    self::importFriends($pOnlineIdentity, $lFriendObject);
-    self::updateIdentity($pOnlineIdentity, $lProfileArray);
+    @self::importFriends($pOnlineIdentity, $lFriendObject);
+    @self::updateIdentity($pOnlineIdentity, $lProfileArray);
   }
 
 
@@ -61,11 +61,16 @@ class LinkedinImportClient {
    */
   public static function updateIdentity(&$pOnlineIdentity, $pProfileArray) {
 
-    if (isset($pProfileArray['date-of-birth']['year'])) {
+    if (isset($pProfileArray['date-of-birth']) && isset($pProfileArray['date-of-birth']['year'])) {
       $pOnlineIdentity->setBirthdate($pProfileArray['date-of-birth']['year'].'-'.$pProfileArray['date-of-birth']['month'].'-'.$pProfileArray['date-of-birth']['day']);
     }
-    $pOnlineIdentity->setLocationRaw($pProfileArray['location']['name']);
-    $pOnlineIdentity->setPhoto($pProfileArray['pictureUrl']);
+    if (isset($pProfileArray['location']) && isset($pProfileArray['location']['name'])) {
+      $pOnlineIdentity->setLocationRaw($pProfileArray['location']['name']);
+    }
+    if (isset($pProfileArray['pictureUrl'])) {
+      $pOnlineIdentity->setPhoto($pProfileArray['pictureUrl']);
+    }
+    
     $pOnlineIdentity->save();
 
     $lUser = $pOnlineIdentity->getUser();
