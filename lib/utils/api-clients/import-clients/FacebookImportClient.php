@@ -89,12 +89,16 @@ class FacebookImportClient {
 		
 		// get likes
 		$response = UrlUtils::sendGetRequest("https://graph.facebook.com/me/likes?access_token=".$token->getTokenKey());
-		
+    
 		// mongo manager
 		$dm = MongoManager::getDM();
 		
 		// check likes
 		if ($response && $objects = json_decode($response, true)) {
+      if (!isset($objects['data'])) {
+        return false;
+      }
+      
 			// iterate and save in mongodb
 			foreach ($objects["data"] as $object) {
 		    $interest = $dm->getRepository('Documents\Interest')->upsert($object);
