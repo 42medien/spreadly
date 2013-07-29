@@ -48,4 +48,14 @@ class SocialObjectRepository extends DocumentRepository
       return $this->findOneBy(array("url_hash" => md5($normalized_url)));
     }
   }
+  
+  public function findOneByUrl($url) {
+    if ($expanded_url = UrlUtils::shortUrlExpander($url)) {
+      $url = $expanded_url;
+    }
+    
+    $normalized_url = UrlUtils::skipTrailingSlash($url);
+    
+    return $this->findOneBy(array("url_hash" => md5($normalized_url)));
+  }
 }
