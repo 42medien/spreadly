@@ -33,7 +33,7 @@
 	</script>
 	<![endif]-->
 	<script type="text/javascript" src="/js/100_main/include/statistics-<?php echo sfConfig::get('app_release_name') ?>.min.js"></script>
-
+  
 	<?php include_javascripts();?>
   <?php $module = $sf_context->getModuleName(); ?>
   <?php $action = $sf_context->getActionName(); ?>
@@ -143,5 +143,20 @@
     })();
 	</script>
 	<img id="general-ajax-loader" style="display:none;" src="/img/global/ajax-loader-bar-circle.gif" />
+  
+  <script type="text/javascript">
+  var fb_param = {};
+  fb_param.pixel_id = '6007617555408';
+  fb_param.value = '0.00';
+  fb_param.currency = 'EUR';
+  (function(){
+    var fpw = document.createElement('script');
+    fpw.async = true;
+    fpw.src = '//connect.facebook.net/en_US/fp.js';
+    var ref = document.getElementsByTagName('script')[0];
+    ref.parentNode.insertBefore(fpw, ref);
+  })();
+  </script>
+  <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/offsite_event.php?id=6007617555408&amp;value=0&amp;currency=EUR" /></noscript>
 </body>
 </html>
