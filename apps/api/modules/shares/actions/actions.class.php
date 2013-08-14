@@ -25,28 +25,26 @@ class sharesActions extends sfActions
    *
    * @param sfRequest $request A request object
    */
-   public function executeCounter(sfWebRequest $request) {
-     $this->getResponse()->setContentType('application/json');
+  public function executeCounter(sfWebRequest $request) {
+    $this->getResponse()->setContentType('application/json');
+    $this->setLayout(false);
      
+    $url = $request->getParameter("url", null);
      
-     $url = $request->getParameter("url", null);
+    if (!$url) {
+      $this->getResponse()->setStatusCode(409);
+      return sfView::ERROR;
+    }
      
-     if (!$url) {
-       $this->getResponse()->setStatusCode(409);
-       return sfView::ERROR;
-     }
+    $dm = MongoManager::getDM();
+    $social_object = $dm->getRepository("Documents\SocialObject")->findOneByUrl($url);
      
-     $dm = MongoManager::getDM();
-     $social_object = $dm->getRepository("Documents\SocialObject")->findOneByUrl($url);
-     
-     if ($social_object) {
-       $this->getResponse()->setStatusCode(200);
-       $this->response_array = array("success" => array("code" => 200, "message" => "URL shared"), "counter" => $social_object->getLikeCount());
-     } else {
-       $this->getResponse()->setStatusCode(204);
-       $this->response_array = array("success" => array("code" => 204, "message" => "URL not yet shared"), "counter" => 0);
-     }
-
-     $this->setLayout(false);
-   }
+    if ($social_object) {
+      $this->getResponse()->setStatusCode(200);
+      $this->response_array = array("success" => array("code" => 200, "message" => "URL shared"), "counter" => $social_object->getLikeCount());
+    } else {
+      $this->getResponse()->setStatusCode(204);
+      $this->response_array = array("success" => array("code" => 204, "message" => "URL not yet shared"), "counter" => 0);
+    }
+  }
 }
