@@ -107,7 +107,9 @@ img.spreadly-service-icon {
   border: 0 none !important;
   border-radius: 0 none !important;
   box-shadow: none;
-  margin-right: 3px;
+  margin: 0 !important;
+  padding: 0 !important;
+  margin-right: 3px !important;
 }
 
 .spreadly-button {
