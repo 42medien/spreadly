@@ -95,11 +95,11 @@
 						<ul class="footer-links clearfix services-link">
 							<li class="first"><?php echo __('Services'); ?></li>
 							<li><?php echo link_to(__('Chrome Extension'), 'https://chrome.google.com/extensions/detail/leclmjclggfnkhdpkgnagcdnhnomapda', array('target' => '_blank')); ?></li>
-							<li><?php echo link_to(__('Other Extensions'), 'http://code.google.com/p/spreadly/wiki/Plugins', array('target' => '_blank')); ?></li>
+							<li><?php echo link_to(__('Other Extensions'), 'http://dev.spreadly.com/List_of_plugins/', array('target' => '_blank')); ?></li>
 							<li><?php echo link_to(__('Wordpress Plugin'), 'http://wordpress.org/extend/plugins/yiidit/', array('target' => '_blank')); ?></li>
-							<li><?php echo link_to(__('Developer-Wiki'), 'http://code.google.com/p/spreadly/', array('target' => '_blank')); ?></li>
-							<li><?php echo link_to(__('Developer-Documentation'), 'http://code.google.com/p/spreadly/wiki/developerdocumentation', array('target' => '_blank')); ?></li>
-							<li><?php echo link_to(__('PuSH-Api'), 'http://code.google.com/p/spreadly/wiki/PuSH_API', array('target' => '_blank')); ?></li>
+							<li><?php echo link_to(__('Developer-Wiki'), 'https://github.com/ekaabo/spreadly-doku/wiki', array('target' => '_blank')); ?></li>
+							<li><?php echo link_to(__('Developer-Documentation'), 'http://dev.spreadly.com/', array('target' => '_blank')); ?></li>
+							<li><?php echo link_to(__('PuSH-Api'), 'http://dev.spreadly.com/PuSH_API', array('target' => '_blank')); ?></li>
 						</ul>
 						<ul class="footer-links clearfix com-link">
 							<li class="first"><?php echo __('Company'); ?></li>
