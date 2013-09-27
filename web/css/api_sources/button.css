@@ -103,13 +103,19 @@
   height: 600px;
 }
 
-img.spreadly-service-icon {
+.spreadly-button img.spreadly-service-icon {
+  margin-right: 3px !important;
+}
+
+.spreadly-button img,
+.spreadly-button a,
+.spreadly-button iframe {
   border: 0 none !important;
   border-radius: 0 none !important;
   box-shadow: none;
+  display: inline;
   margin: 0 !important;
   padding: 0 !important;
-  margin-right: 3px !important;
 }
 
 .spreadly-button {
