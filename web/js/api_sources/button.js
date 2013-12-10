@@ -67,7 +67,9 @@ function spreadly_init_services(link) {
 
 function spreadly_generate_service_item(service, style) {
   if (style == "flat") {
-    return '<i class="si-'+service+'"></i>';
+    var services_codes = {"fb":"&#xf002;","tw":"&#xf001;","li":"&#xf004;","tm":"&#xf003;","xg":"&#xf005;","sl":"&#xf00e;","ft":"&#xf00b;"};
+
+    return '<i class="spreadly-icon-'+service+'">'+services_codes[service]+'</i>';
   }
 
   return '<img src="##YIID_BUTTON_HOST##/img/button/28/'+service+'.png" alt="" class="spreadly-service-icon" />';

@@ -9,63 +9,43 @@
   font-style: normal;
 }
 
-.si-fb, .si-tw, .si-li, .si-tm, .si-xg, .si-sl, .si-ft {
+.spreadly-icon-fb, .spreadly-icon-tw, .spreadly-icon-li, .spreadly-icon-tm, .spreadly-icon-xg, .spreadly-icon-sl, .spreadly-icon-ft {
   font-family: 'Spreadly Icons';
   font-style: normal;
   display: inline-block;
   text-decoration: none;
   vertical-align: center;
+  font-size: 30px;
   font-smoothing: antialiased;
   -webkit-font-smoothing: antialiased;
 }
 
-.si-fb:before {
-  content: "\f002";
+.spreadly-icon-fb {
   color: #3b5998;
-  font-size: 30px;
-  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf002;');
 }
 
-.si-tw:before {
-  content: "\f001";
+.spreadly-icon-tw {
   color: #55acee;
-  font-size: 30px;
-  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf001;');
 }
 
-.si-tm:before {
-  content: "\f003";
+.spreadly-icon-tm {
   color: #2b4964;
-  font-size: 30px;
-  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf003;');
 }
 
-.si-li:before {
-  content: "\f004";
+.spreadly-icon-li {
   color: #4875b4;
-  font-size: 30px;
-  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf004;');
 }
 
-.si-xg:before {
-  content: "\f005";
+.spreadly-icon-xg {
   color: #398682;
-  font-size: 30px;
-  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf005;');
 }
 
-.si-sl:before {
-  content: "\f00e";
+.spreadly-icon-sl {
   color: #a04973;
-  font-size: 30px;
-  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf00e;');
 }
 
-.si-ft:before {
-  content: "\f00b";
+.spreadly-icon-ft {
   color: #549625;
-  font-size: 30px;
-  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf00b;');
 }
 
 #spreadly-advertisement-container {
