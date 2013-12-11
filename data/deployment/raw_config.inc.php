@@ -14,6 +14,7 @@ class LikeSettings {
   const COOKIE_DOMAIN  = '.##YIID_WIDGET_HOST##';
   const SF_SESSION_COOKIE  = '##COOKIE_NAME##';
   const JS_POPUP_PATH = '##YIID_WIDGET_URL##/';
+  const BUTTON_URL = '##YIID_BUTTON_URL##';
 
   const DEV = ##IS_DEV##;
   const ENVIRONMENT = '##ENVIRONMENT##';

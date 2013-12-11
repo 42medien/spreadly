@@ -38,6 +38,7 @@ EOF;
       'YIID_URL' => sfConfig::get('app_settings_url'),
       'YIID_WIDGET_HOST' => sfConfig::get('app_settings_widgets_host'),
       'YIID_WIDGET_URL' => sfConfig::get('app_settings_widgets_url'),
+      'YIID_BUTTON_URL' => sfConfig::get('app_settings_button_url'),
       'IS_DEV' => sfConfig::get('app_settings_dev'),
       'COOKIE_NAME' => $options['env'] == 'prod' ? 'spread' : 'spread_'.$options['env'],
       'ENVIRONMENT' => $options['env'],

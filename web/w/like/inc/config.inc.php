@@ -14,6 +14,7 @@ class LikeSettings {
   const COOKIE_DOMAIN  = '.spread.local';
   const SF_SESSION_COOKIE  = 'spread_dev';
   const JS_POPUP_PATH = 'http://spread.local/';
+  const BUTTON_URL = '//button.spread.local';
 
   const DEV = 1;
   const ENVIRONMENT = 'dev';
