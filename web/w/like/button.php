@@ -95,10 +95,10 @@ $wu->trackUser();
 <body>
   <div class="container">
     <a class="button" href="<?php echo $wu->getPopupUrl() ?>" title="share it with your friends and get incentives" onclick="window.open(this.href, 'popup', 'width=580,height=600,scrollbars=no,toolbar=no,status=no,resizable=no,menubar=no,location=0,directories=no,top=150,left=150'); return false;" target="_blank">
-      <img src="./img/button/28/fb.png" alt="share it with your facebook friends">
-      <img src="./img/button/28/tw.png" alt="share it with your twitter friends">
-      <img src="./img/button/28/li.png" alt="share it with your linkedin friends">
-      <img src="./img/button/28/sl.png" alt="...and get a deal">
+      <img src="<?php echo LikeSettings::BUTTON_URL ?>/img/button/28/fb.png" alt="share it with your facebook friends">
+      <img src="<?php echo LikeSettings::BUTTON_URL ?>/img/button/28/tw.png" alt="share it with your twitter friends">
+      <img src="<?php echo LikeSettings::BUTTON_URL ?>/img/button/28/li.png" alt="share it with your linkedin friends">
+      <img src="<?php echo LikeSettings::BUTTON_URL ?>/img/button/28/sl.png" alt="...and get a deal">
       <?php //echo $wu->getLabel(); ?>
     </a>
     <?php if ($wu->showCounter()) { ?><b><?php echo $wu->getActivityCount() ?></b><?php } ?>
