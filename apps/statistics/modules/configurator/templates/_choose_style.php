@@ -8,7 +8,7 @@
 								<h3 class="title"><?php echo __("Hilfe"); ?></h3>
 								<p><?php echo __("Bitte geben Sie die genaue Webadresse an, auf der der Button laufen soll und wählen Sie das gewünschte Erscheinungsbild des Buttons aus. Der Button erscheint dann je nach Wahl mit oder ohne Photo."); ?></p><br />
                 <p><?php echo __('Ihr individueller Code erscheint nun im linken grauen Feld. Klicken Sie auf "Code kopieren", um den Code für Ihren Spread.ly-Button direkt kopieren und an beliebiger Stelle einfügen zu können.'); ?></p><br/>
-                <p><?php echo __("For more information read our %doku%", array('%doku%' => link_to('developer documentation', 'http://code.google.com/p/spreadly/wiki/developerdocumentation'))); ?></p>
+                <p><?php echo __("For more information read our %doku%", array('%doku%' => link_to('developer documentation', 'http://dev.spreadly.com'))); ?></p>
 							</div>
 							<div class="alignleft stylestatus_box">
 								<h3 class="sub_title"><?php echo __('Step 2: Choose Site & Style'); ?></h3>
