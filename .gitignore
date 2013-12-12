@@ -36,6 +36,6 @@ lib/filter/doctrine/sfDoctrineGuardPlugin/base/
 lib/filter/doctrine/sfDoctrineActAsTaggablePlugin/base/
 lib/filter/doctrine/sfForkedDoctrineApplyPlugin/base/
 
-lib/mongo/Hydrators/*
-lib/mongo/Proxies/*
+lib/mongo/Hydrators/
+lib/mongo/Proxies/
 web/w/like/inc/config.inc.php

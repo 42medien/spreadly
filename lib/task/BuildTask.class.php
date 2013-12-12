@@ -39,6 +39,8 @@ EOF;
 
     $this->getFilesystem()->mkdirs("cache/Hydrators");
     $this->getFilesystem()->mkdirs("cache/Proxies");
+    $this->getFilesystem()->mkdirs("lib/mongo/Hydrators");
+    $this->getFilesystem()->mkdirs("lib/mongo/Proxies");
 
     // build all?
     if ($options['all']) {
