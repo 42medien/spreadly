@@ -55,13 +55,13 @@ namespace :symfony do
     desc "Build it."
     task :build do
       on roles(:all) do
-        execute "php #{current_path}/symfony yigg:build --all --env=#{fetch(:stage)} --no-confirmation"
+        execute "php #{current_path}/symfony yiid:build --all --env=#{fetch(:stage)} --no-confirmation"
       end
     end
 
     task :build_button do
       on roles(:all) do
-        execute "php #{current_path}/symfony yigg:build-button --all --env=prod --no-confirmation"
+        execute "php #{current_path}/symfony yiid:build-button --all --env=prod --no-confirmation"
       end
     end
   end
