@@ -61,7 +61,7 @@ namespace :symfony do
 
     task :build_button do
       on roles(:all) do
-        execute "php #{current_path}/symfony yiid:build-button --all --env=prod --no-confirmation"
+        execute "php #{current_path}/symfony yiid:build-button --env=prod"
       end
     end
   end
