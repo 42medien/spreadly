@@ -44,6 +44,9 @@ class AuthApiFactory {
       case "flattr":
         return new FlattrAuthApiClient();
         break;
+      case "yigg":
+        return new YiggAuthApiClient();
+        break;
       default:
         return null;
     }

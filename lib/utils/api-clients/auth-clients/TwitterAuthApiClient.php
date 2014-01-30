@@ -48,7 +48,7 @@ class TwitterAuthApiClient extends AuthApi {
 
     if (!$lUser || !$lUser->getId() || !$lOnlineIdentity->getPhoto()) {
       // get api informations
-      $lJson = OAuthClient::get($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "http://api.twitter.com/1.1/users/show.json?user_id=".$lParamsArray['user_id']);
+      $lJson = OAuthClient::get($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "https://api.twitter.com/1.1/users/show.json?user_id=".$lParamsArray['user_id']);
       $lJsonObject = json_decode($lJson);
 
       // use api complete informations
@@ -102,7 +102,7 @@ class TwitterAuthApiClient extends AuthApi {
     }
 
     // get api informations
-    $lJson = OAuthClient::get($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "http://api.twitter.com/1.1/users/show.json?user_id=".$lParamsArray['user_id']);
+    $lJson = OAuthClient::get($this->getConsumer(), $lParamsArray['oauth_token'], $lParamsArray['oauth_token_secret'], "https://api.twitter.com/1.1/users/show.json?user_id=".$lParamsArray['user_id']);
     $lJsonObject = json_decode($lJson);
 
     $this->completeOnlineIdentity($lOnlineIdentity, $lJsonObject, $pUser, $lIdentifier);
@@ -135,7 +135,7 @@ class TwitterAuthApiClient extends AuthApi {
    */
   public function doAuthentication() {
     $lRequestToken = self::getRequestToken();
-    $lRequest = OAuthClient::prepareRequest($this->getConsumer(), $lRequestToken, "GET", "http://api.twitter.com/oauth/authenticate");
+    $lRequest = OAuthClient::prepareRequest($this->getConsumer(), $lRequestToken, "GET", "https://api.twitter.com/oauth/authenticate");
     // redirect
     header("Location: " . $lRequest->to_url());
     // do nothing more
@@ -149,7 +149,7 @@ class TwitterAuthApiClient extends AuthApi {
    * @param string $pTokenKey
    */
   public function getAccessToken($pOAuthToken) {
-    $lAccessToken = OAuthClient::getAccessToken($this->getConsumer(), "http://api.twitter.com/oauth/access_token", $pOAuthToken, "GET", array("oauth_verifier" => $pOAuthToken->verifier));
+    $lAccessToken = OAuthClient::getAccessToken($this->getConsumer(), "https://api.twitter.com/oauth/access_token", $pOAuthToken, "GET", array("oauth_verifier" => $pOAuthToken->verifier));
 
     return $lAccessToken;
   }
@@ -196,7 +196,7 @@ class TwitterAuthApiClient extends AuthApi {
     } else {
       $pOnlineIdentity->setName($pObject->screen_name);
     }
-    
+
     $pOnlineIdentity->setProfileUri("http://twitter.com/".$pObject->screen_name);
 
     $pOnlineIdentity->setLocationRaw($pObject->location);
