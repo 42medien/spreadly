@@ -154,7 +154,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4fadadad', e
 .tmbl.checked, .networks_icon .tumblr.checked {background: url("../img/popup/tmblactive.png") 0 0 no-repeat;}
 
 .plusbtn li a, .plusbtn li a:hover {display: block; width: 24px; height: 25px; background-size: cover;}
-.plusbtn ul{display:none; width: 185px; min-height: 35px; overflow: auto; background: #6c6c6c; margin-top: 16px;
+.plusbtn ul{display:none; width: 165px; min-height: 35px; overflow: auto; background: #6c6c6c; margin-top: 16px;
 border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; border-top-right-radius: 4px;
 -moz-border-bottom-left-radius: 4px; -moz-border-bottom-right-radius: 4px; -moz-border-top-right-radius: 4px;
 -webkit-border-bottom-left-radius: 4px; -webkit-border-bottom-right-radius: 4px; -webkit-border-top-right-radius: 4px;
@@ -363,7 +363,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1e1e1', end
   overflow:hidden;
   height:90px;
 }
- 
+
 /*
 root element for scrollable items. Must be absolutely positioned
 and it should have a extremely large width to accommodate scrollable
@@ -375,7 +375,7 @@ and not for this element.
   width:20000em;
   position:absolute;
 }
- 
+
 /*
 a single item. must be floated in horizontal scrolling.  typically,
 this element is the one that *you* will style the most.
@@ -451,22 +451,22 @@ div#vaas_wrapper {
     width: 100%;
     margin: 0;
   }
-  
+
   div#vaas_wrapper {
     margin: 0 auto;
     width: 200px;
   }
-  
+
   .pers_comments textarea, input.share-url {
     width: 95%;
   }
-  
+
   .sharebg {
 		box-shadow: none;
 		-moz-box-shadow: none;
 		-webkit-box-shadow: none;
   }
-  
+
   .sh_content, .sh_networks_content {
     width: auto;
     margin: 0 20px 0 20px;

@@ -47,6 +47,9 @@ class PostApiFactory {
       case "flattr":
         return new FlattrPostApiClient();
         break;
+      case "yigg":
+        return new YiggPostApiClient();
+        break;
       default:
         return null;
     }

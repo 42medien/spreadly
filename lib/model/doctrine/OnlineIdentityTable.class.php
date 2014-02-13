@@ -122,10 +122,11 @@ class OnlineIdentityTable extends Doctrine_Table {
    * @param string $pId
    * @return mixed OnlineIdentity|null
    */
-  public static function retrieveByOriginalId($pId) {
+  public static function retrieveByOriginalId($pId, $pCommunityId) {
     $lOnlineIdentity = Doctrine_Query::create()
       ->from('OnlineIdentity oi')
       ->where('oi.original_id = ?', $pId)
+      ->andWhere('oi.community_id = ?', $pCommunityId)
       ->fetchOne();
 
     return $lOnlineIdentity;

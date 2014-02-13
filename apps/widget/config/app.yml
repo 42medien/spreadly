@@ -23,3 +23,6 @@ all:
 
   flattr:
     oauth_callback_uri: "/auth/complete_signin/service/flattr"
+
+  yigg:
+    oauth_callback_uri: "/auth/complete_signin/service/yigg"

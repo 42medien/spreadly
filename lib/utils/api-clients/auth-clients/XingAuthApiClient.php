@@ -32,7 +32,7 @@ class XingAuthApiClient extends AuthApi {
     $auth_identifier = $xing_user["permalink"];
 
     // ask for online identity
-    $online_identity = OnlineIdentityTable::retrieveByOriginalId($xing_user['id']);
+    $online_identity = OnlineIdentityTable::retrieveByOriginalId($xing_user['id'], $this->getCommunity()->getid());
 
     // check if user already exists
     if ($online_identity) {
@@ -86,7 +86,7 @@ class XingAuthApiClient extends AuthApi {
     $auth_identifier = $xing_user["permalink"];
 
     // ask for online identity
-    $online_identity = OnlineIdentityTable::retrieveByOriginalId($xing_user['id']);
+    $online_identity = OnlineIdentityTable::retrieveByOriginalId($xing_user['id'], $this->getCommunity()->getid());
 
     // check if user already exists
     if ($online_identity) {
@@ -120,7 +120,7 @@ class XingAuthApiClient extends AuthApi {
    */
   public function getRequestToken() {
     $lRequestToken = OAuthClient::getRequestToken($this->getConsumer(), "https://api.xing.com/v1/request_token", 'POST', array("oauth_callback" => $this->getCallbackUri()));
-    
+
     // save the request token
     OauthRequestTokenTable::saveToken($lRequestToken, $this->getCommunity());
 

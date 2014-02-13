@@ -45,3 +45,9 @@ Community:
     community: 'flattr'
     url:       'http://www.flattr.com'
     social_publishing_possible: 1
+
+  community_9:
+    name:      'yigg'
+    community: 'yigg'
+    url:       'http://www.yigg.de'
+    social_publishing_possible: 1

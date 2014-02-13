@@ -64,6 +64,11 @@ all:
     oauth_token:   'T6hReypr9HgD3saU8X2MGj7ep76wA8Gk5O29chqcOxFIPFtOslqZvo3Kl07MYDXT'
     oauth_secret:  'iPSlW9nBwS9cnsQGE7wZmqAygxa41YO9DxkqxxRUgRWuaD0FAnuNDUbJhbE90j8t'
 
+  yigg:
+    post_api:    'http://api.yigg.local/stories/new'
+    oauth_token: 'kua324b1b3kj4hb123kjh4b12k3jh'
+    oauth_secret: 'sjdhlASDUhasiduhoISD7UHa7sdhpASUHDluqwheewje'
+
   jobs:
     last_friend_refresh_threshold: "1 day ago"
 
